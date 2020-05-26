@@ -11,7 +11,7 @@
 
 
 	<name>bodhi</name>
-substitute url based on requirement
+<description>Spring Boot backend for Eagle</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -215,7 +215,7 @@ substitute url based on requirement
 				<configuration>
 					<archive>
 						<manifest>
-substitute url based on requirement
+                                                      <mainClass>com.infosys.lex.LexCoreApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
