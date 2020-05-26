@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.attendence.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,11 +14,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.attendence.postgredb.repo.AttendanceRepo;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.BadRequestException;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -38,7 +38,7 @@ public class AttendanceServiceImpl implements AttendanceService {
 			"skills", "duration", "expiryDate", "creatorDetails", "uniqueUsersCount", "appIcon", "certificationList",
 			"collections", "children", "trackContacts", "hasAssessment", "averageRating", "msArtifactDetails",
 			"lastUpdatedOn", "viewCount", "contentType", "identifier", "isExternal", "totalRating", "publisherDetails",
-substitute url based on requirement
+			"uniqueLearners", "catalogPaths", "complexityLevel", "unit", "size", "isInIntranet", "name", "isStandAlone",
 			"learningObjective", "sourceName", "sourceShortName", "status", "artifactUrl", "displayContentType",
 			"downloadUrl", "introductoryVideo", "introductoryVideoIcon", "playgroundResources", "subTitles" }));
 

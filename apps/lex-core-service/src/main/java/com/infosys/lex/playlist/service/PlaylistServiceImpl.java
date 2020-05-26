@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-url-url-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.playlist.service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -21,29 +21,31 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http-url-url-url.HttpEntity;
-import org.springframework.http-url-url-url.HttpHeaders;
-import org.springframework.http-url-url-url.HttpMethod;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.datastax.driver.core.utils.UUIDs;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.playlist.bodhi.repo.PlaylistRecentRepo;
+import com.infosys.lex.playlist.bodhi.repo.SharedPlaylistRepo;
+import com.infosys.lex.playlist.bodhi.repo.UserPlaylistRepo;
+import com.infosys.lex.playlist.dto.PlaylistRequest;
+import com.infosys.lex.playlist.entities.PlaylistRecent;
+import com.infosys.lex.playlist.entities.PlaylistRecentKey;
+import com.infosys.lex.playlist.entities.PlaylistShared;
+import com.infosys.lex.playlist.entities.PlaylistSharedKey;
+import com.infosys.lex.playlist.entities.UserPlaylist;
+import com.infosys.lex.playlist.entities.UserPlaylistKey;
 
 /**
  * @author yogesh.bansal
@@ -193,7 +195,7 @@ substitute url based on requirement
 			requestMap.put("request", requestBody);
 			// Request API to check the access of user for content
 			Map<String, Object> accessResponseData = restTemplate.postForObject(
-					"http-url-url-url://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
+					"http://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
 					requestMap, Map.class);
 			Map<String, Object> result = (Map<String, Object>) accessResponseData.get("result");
 			Map<String, Object> userAccessReponse = (Map<String, Object>) result.get("response");
@@ -387,7 +389,7 @@ substitute url based on requirement
 		recipients.put("sharedBy", Arrays.asList(sharedBy));
 		requestBody.put("recipients", recipients);
 
-		String url = "http-url-url-url://" + this.notifSvcIp + ":" + this.notifSvcPort + "/v1/notification/event";
+		String url = "http://" + this.notifSvcIp + ":" + this.notifSvcPort + "/v1/notification/event";
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("rootOrg", rootOrg);
 		try {
@@ -569,7 +571,7 @@ substitute url based on requirement
 		resourceIds = resourceIds.stream().distinct().collect(Collectors.toList());
 
 		// check for the source fields and assign it to the required fields
-substitute url based on requirement
+		String[] requiredFields = new String[] { "appIcon", "artifactUrl", "children", "complexityLevel", "contentType",
 				"creatorContacts", "description", "downloadUrl", "duration", "identifier", "isExternal",
 				"lastUpdatedOn", "learningMode", "learningObjective", "me_totalSessionsCount", "mimeType", "name",
 				"resourceCategory", "resourceType", "sourceName", "status", "hasAccess", "averageRating",
@@ -1172,7 +1174,7 @@ substitute url based on requirement
 		requestMap.put("request", requestBody);
 		// check access of user making an API call
 		Map<String, Object> accessResponseData = restTemplate.postForObject(
-				"http-url-url-url://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
+				"http://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
 				requestMap, Map.class);
 		Map<String, Object> result = (Map<String, Object>) accessResponseData.get("result");
 		Map<String, Object> userAccessReponse = (Map<String, Object>) result.get("response");

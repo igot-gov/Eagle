@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,18 +29,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.datastax.driver.core.utils.UUIDs;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.exercise.bodhi.repo.ExerciseRepository;
+import com.infosys.lex.exercise.bodhi.repo.UserExerciseLastModel;
+import com.infosys.lex.exercise.bodhi.repo.UserExerciseLastPrimaryKeyModel;
+import com.infosys.lex.exercise.bodhi.repo.UserExerciseRepository;
+import com.infosys.lex.exercise.dto.NewCodeExerciseDTO;
+import com.infosys.lex.exercise.dto.NewExerciseFeedbackDTO;
+import com.infosys.lex.exercise.dto.NewLNDExerciseDTO;
+import com.infosys.lex.progress.service.ContentProgressService;
+
 
 @Service
 public class ExerciseServiceImpl implements ExerciseService {

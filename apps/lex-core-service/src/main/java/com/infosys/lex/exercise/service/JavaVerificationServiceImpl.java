@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-urls://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,17 +14,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.ExerciseCodeVerifcationException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.exercise.bodhi.repo.ExerciseRepository;
+import com.infosys.lex.exercise.dto.AssignmentSubmissionDTO;
+import com.infosys.lex.exercise.dto.SubmitDataDTO;
+import com.infosys.lex.exercise.util.JavaVerificationUtilService;
 
 @Service
 @Qualifier("javaVerification")
@@ -34,7 +34,7 @@ public class JavaVerificationServiceImpl implements VerificationService {
 
 	private final UserUtilityService userUtilService;
 
-substitute url based on requirement
+	private final LexServerProperties lexServerProperties;
 
 	private final JavaVerificationUtilService utilService;
 
@@ -44,11 +44,11 @@ substitute url based on requirement
 
 	@Autowired
 	public JavaVerificationServiceImpl(ExerciseRepository exerciseRepo, UserUtilityService userUtilService,
-substitute url based on requirement
+			LexServerProperties lexServerProperties, JavaVerificationUtilService exerciseUtilService,
 			ContentService contentServ, IAPVerificationService iapVerificationService) {
 		this.exerciseRepo = exerciseRepo;
 		this.userUtilService = userUtilService;
-substitute url based on requirement
+		this.lexServerProperties = lexServerProperties;
 		this.utilService = exerciseUtilService;
 		this.contentServ = contentServ;
 		this.iapVerificationService = iapVerificationService;
@@ -157,15 +157,15 @@ substitute url based on requirement
 	private Map<String, Object> javaEval(String verifyJson, AssignmentSubmissionDTO data) throws Exception {
 		String responseData;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+		String serviceIp = lexServerProperties.getJavaEvalServerHost();
+		String servicePort = lexServerProperties.getJavaEvalServerPort();
+		String serviceName = lexServerProperties.getJavaEvalEndpoint();
 
 		JSONObject testCaseObject = new JSONObject(verifyJson);
 		testCaseObject = testCaseObject.put("username", data.getUserId());
 		testCaseObject.put("traineeSolution", data.getUser_solution());
 		testCaseObject.put("type", "sub");
-substitute url based on requirement
+		testCaseObject.put("userAgent", "Lex");
 
 		verifyJson = testCaseObject.toString();
 		System.out.println(verifyJson);

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.assessment.bodhi.repo;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -29,9 +29,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.datastax.driver.core.utils.UUIDs;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.assessment.dto.AssessmentSubmissionDTO;
+import com.infosys.lex.common.constants.JsonKey;
+import com.infosys.lex.common.service.ContentService;
 
 @Repository
 public class AssessmentRepositoryImpl implements AssessmentRepository {

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.core.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,8 +30,8 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.util.DatabaseProperties;
+import com.infosys.lex.core.logger.LexLogger;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.sunbird")

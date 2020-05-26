@@ -15,15 +15,15 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.postgres.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.exercise.postgres.entity.EducatorGroupKey;
+import com.infosys.lex.exercise.postgres.entity.EducatorGroupModel;
 
 @Repository
 public interface EducatorGroupMappingRepo extends JpaRepository<EducatorGroupModel, EducatorGroupKey> {

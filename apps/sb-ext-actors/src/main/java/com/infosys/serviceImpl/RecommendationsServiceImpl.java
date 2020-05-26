@@ -226,7 +226,7 @@ public class RecommendationsServiceImpl implements RecommendationsService {
 		}
 		SearchResponse searchResult = elasticClient.search(
 				new SearchRequest().indices(indices.toArray(new String[0]))
-						.types(LexProjectUtil.EsType.new__search.getTypeName())
+						.types(LexProjectUtil.EsType.new_lex_search.getTypeName())
 						.searchType(SearchType.QUERY_THEN_FETCH)
 						.source(new SearchSourceBuilder().query(boolQuery).sort("lastUpdatedOn", SortOrder.DESC)
 								.size(pageSize).from(pageNumber).fetchSource(Arrays.copyOf(fieldsObjs,fieldsObjs.length,String[].class), null)),
@@ -474,8 +474,8 @@ public class RecommendationsServiceImpl implements RecommendationsService {
 		else
 			sourceBuilder.query(boolQuery).size(10).from(11).fetchSource(Arrays.copyOf(fieldsObjs,fieldsObjs.length,String[].class), null);
 		SearchResponse searchResult = elasticClient
-				.search(new SearchRequest().indices(LexProjectUtil.EsIndex.new_search.getIndexName())
-						.types(LexProjectUtil.EsType.new__search.getTypeName())
+				.search(new SearchRequest().indices(LexProjectUtil.EsIndex.new_lex_search.getIndexName())
+						.types(LexProjectUtil.EsType.new_lex_search.getTypeName())
 						.searchType(SearchType.QUERY_THEN_FETCH).source(sourceBuilder), RequestOptions.DEFAULT);
 		List<Map<String, Object>> responseData = new ArrayList<>();
 		searchResult.getHits().forEach(hit -> {

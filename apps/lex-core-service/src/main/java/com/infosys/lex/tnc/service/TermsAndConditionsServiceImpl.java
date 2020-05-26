@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.tnc.service;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -35,16 +35,16 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.tnc.bodhi.repo.UserTermsAndConditions;
+import com.infosys.lex.tnc.bodhi.repo.UserTermsAndConditionsPrimaryKey;
+import com.infosys.lex.tnc.bodhi.repo.UserTermsAndConditionsRepository;
+import com.infosys.lex.tnc.dto.AcceptTermsDTO;
+import com.infosys.lex.tnc.postgres.entities.TermsAndConditions;
+import com.infosys.lex.tnc.postgres.entities.TermsAndConditionsPrimaryKey;
+import com.infosys.lex.tnc.postgres.repo.TermsAndConditionsRepository;
+import com.infosys.lex.tnc.validator.TnCValidator;
 
 @Service
 public class TermsAndConditionsServiceImpl implements TermsAndConditionsService {

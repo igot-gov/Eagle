@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,17 +28,17 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.ExerciseCodeVerifcationException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.exercise.bodhi.repo.ExerciseRepository;
+import com.infosys.lex.exercise.dto.AssignmentSubmissionDTO;
+import com.infosys.lex.exercise.dto.SubmitDataDTO;
+import com.infosys.lex.exercise.util.PythonVerificationUtilService;
 
 @Service
 @Qualifier("pythonVerification")
@@ -46,7 +46,7 @@ public class PythonVerificationServiceImpl implements VerificationService {
 
 	private final UserUtilityService userUtilService;
 	private final ContentService contentService;
-substitute url based on requirement
+	private final LexServerProperties lexServerProperties;
 	private final IAPVerificationService iapVerificationService;
 	private final ExerciseRepository exerciseRepo;
 	private final PythonVerificationUtilService utilService;
@@ -57,11 +57,11 @@ substitute url based on requirement
 	
 	@Autowired
 	public PythonVerificationServiceImpl(UserUtilityService userUtilService, ContentService contentService,
-substitute url based on requirement
+			LexServerProperties lexServerProperties, IAPVerificationService iapVerificationService,
 			ExerciseRepository exerciseRepo, PythonVerificationUtilService utilService) {
 		this.userUtilService = userUtilService;
 		this.contentService = contentService;
-substitute url based on requirement
+		this.lexServerProperties = lexServerProperties;
 		this.iapVerificationService = iapVerificationService;
 		this.exerciseRepo = exerciseRepo;
 		this.utilService = utilService;
@@ -160,9 +160,9 @@ substitute url based on requirement
 	private Map<String, Object> pyevalVerify(String verifyJson, AssignmentSubmissionDTO data) throws Exception {
 		String responseData;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+		String serviceIp = lexServerProperties.getPyeValServiceIp();
+		String servicePort = lexServerProperties.getPyeValServicePort();
+		String serviceName = lexServerProperties.getPyeValServiceName();
 
 		JSONObject testCaseObject = new JSONObject(verifyJson);
 		testCaseObject = testCaseObject.put("unique_id", data.getUserId());

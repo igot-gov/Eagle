@@ -15,12 +15,12 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.assessment.bodhi.repo;
 
 import java.util.List;
 import java.util.Map;
 
-substitute url based on requirement
+import com.infosys.lex.assessment.dto.AssessmentSubmissionDTO;
 
 public interface AssessmentRepository {
 

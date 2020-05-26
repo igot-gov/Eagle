@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.core.exception;
 
 import java.io.IOException;
 import java.lang.reflect.MalformedParametersException;
@@ -53,8 +53,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.LoggerService;
+import com.infosys.lex.core.logger.LexLogger;
 
 @EnableWebMvc
 @ControllerAdvice

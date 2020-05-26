@@ -14,7 +14,7 @@
  * <p>
  * Highly Confidential
  */
-substitute url based on requirement
+package com.infosys.lex.tnc.validator;
 
 import java.util.List;
 import java.util.Map;
@@ -22,10 +22,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserServiceImpl;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Component
 public class TnCValidator {

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.badge.bodhi.repo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,15 +30,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.assessment.bodhi.repo.UserAssessmentSummaryRepository;
+import com.infosys.lex.assessment.bodhi.repo.UserQuizSummaryRepository;
+import com.infosys.lex.badge.postgredb.entity.Badge;
+import com.infosys.lex.badge.postgredb.projection.BadgeDetailsProjection;
+import com.infosys.lex.badge.postgredb.repository.BadgeRepo;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.sunbird.repo.UserMVRepository;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 
 @Repository
 public class BadgeRepositoryImpl implements BadgeRepository {

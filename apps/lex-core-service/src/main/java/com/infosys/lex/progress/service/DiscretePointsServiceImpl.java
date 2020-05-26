@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.progress.service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -25,9 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.progress.bodhi.repo.DiscretePointsModel;
+import com.infosys.lex.progress.bodhi.repo.DiscretePointsPrimaryKeyModel;
+import com.infosys.lex.progress.bodhi.repo.DiscretePointsRepository;
 
 @Service
 public class DiscretePointsServiceImpl implements DiscretePointsService {

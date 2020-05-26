@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.tnc.postgres.repo;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.tnc.postgres.entities.TermsAndConditions;
+import com.infosys.lex.tnc.postgres.entities.TermsAndConditionsPrimaryKey;
 
 @Repository
 public interface TermsAndConditionsRepository extends JpaRepository<TermsAndConditions, TermsAndConditionsPrimaryKey> {

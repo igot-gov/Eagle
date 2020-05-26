@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.cohort.constant;
 
 /**
  * Created by Krishnendu_C on 8/16/2018.
@@ -26,21 +26,21 @@ public class LexProjectUtil {
 
 	static {
 		if (System.getenv("bodhi_ui_index") == null)
-substitute url based on requirement
+			bodhi_ui_index = "lexcontentindex";
 		else
 			bodhi_ui_index = System.getenv("bodhi_ui_index");
 	}
 
 	public static enum EsIndex {
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+		sunbird("searchindex"), sunbirdDataAudit("sunbirddataaudit"), bodhi("lexcontentindex"), staging(
+				"lexcontentindex_14"), ekstep("ekstepcontentindex"), lexTopic("lex_topic"), lex_user_feedback(
+						"lex_feedback"), authoring_tool("lexcontentindex_authoring_tool"), skills(
+								"lexskillsindex_v1"), unit("lexunitindex"), authoring_tool_bkup(
+										"lexcontentindex_authoring_tool_backup_23_4"), client(
+												"clientindex_v1"), bodhi_ui(bodhi_ui_index), new_lex_search(
+														"lexsearchall"), access_control_groups(
 																"accesscontrolgroups"), topic_topic(
-substitute url based on requirement
+																		"arl_lex_topic"), topic_details("topicdetails");
 
 		private String indexName;
 
@@ -71,7 +71,7 @@ substitute url based on requirement
 		course("course"), content("content"), user("user"), organisation("org"), usercourses("usercourses"), usernotes(
 				"usernotes"), history("history"), userprofilevisibility("userprofilevisibility"), feedback(
 						"feedback"), resource("resource"), skills("skills"), unit("units"), client(
-substitute url based on requirement
+								"clienttype"), new_lex_search("searchresources"), access_control_group(
 										"group"), topic_topic("topic_pid"), topic_details("doc");
 
 		private String typeName;

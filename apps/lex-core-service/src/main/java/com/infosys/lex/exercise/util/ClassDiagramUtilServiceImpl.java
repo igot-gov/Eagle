@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.exercise.util;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,10 +17,11 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.exercise.bodhi.repo.ClassErrorsSpecification;
+import com.infosys.lex.exercise.bodhi.repo.Evaluatedmarks;
+import com.infosys.lex.exercise.bodhi.repo.RelationErrorsSpecification;
+
 
 @Service
 public class ClassDiagramUtilServiceImpl implements ClassDiagramUtilService{

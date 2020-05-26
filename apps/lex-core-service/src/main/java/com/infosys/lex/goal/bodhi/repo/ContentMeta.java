@@ -15,7 +15,8 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+package com.infosys.lex.goal.bodhi.repo;
+
 //
 //import java.io.IOException;
 //import java.util.List;
@@ -73,7 +74,7 @@ public class ContentMeta {
 //	private String learningObjective;
 //	private String preRequisites;
 //	private String interactivityLevel;
-substitute url based on requirement
+//	private String complexityLevel; // Enum: Beginner, Intermediate and Advanced
 //	private String[] audience;
 //	// Technical
 //	private Long duration;
@@ -587,13 +588,13 @@ substitute url based on requirement
 //		this.interactivityLevel = interactivityLevel;
 //	}
 //
-substitute url based on requirement
-substitute url based on requirement
-//	}
+//	public String getComplexityLevel() {
+//	return complexityLevel;
+//}
 //
-substitute url based on requirement
-substitute url based on requirement
-//	}
+//public void setComplexityLevel(String complexityLevel) {
+//	this.complexityLevel = complexityLevel;
+//}
 //
 //	public String[] getAudience() {
 //		return audience;

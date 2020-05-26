@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentMetaService;
 
 @RestController
 @CrossOrigin(origins = "*")

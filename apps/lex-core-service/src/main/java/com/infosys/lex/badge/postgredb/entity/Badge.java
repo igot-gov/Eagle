@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.badge.postgredb.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

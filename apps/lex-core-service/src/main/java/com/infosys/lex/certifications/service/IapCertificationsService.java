@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.certifications.service;
 
 import java.io.IOException;
 import java.util.Map;
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 public interface IapCertificationsService {
 
-substitute url based on requirement
+	Map<String, Object> getAttempts(String userEmail, String lexResourceId)
 			throws JsonParseException, JsonMappingException, IOException;
 
 }

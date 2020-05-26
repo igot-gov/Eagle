@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.bodhi.repo;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,14 +31,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.fasterxml.uuid.impl.UUIDUtil;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.exercise.postgres.entity.EducatorGroupModel;
+import com.infosys.lex.exercise.postgres.entity.GroupUserModel;
+import com.infosys.lex.exercise.postgres.repository.EducatorGroupMappingRepo;
+import com.infosys.lex.exercise.postgres.repository.GroupUserMappingRepo;
 
 @Repository
 public class ExerciseRepositoryImpl implements ExerciseRepository {

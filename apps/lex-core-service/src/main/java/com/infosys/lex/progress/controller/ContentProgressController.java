@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.progress.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,10 +36,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
+import com.infosys.lex.progress.dto.ContentProgressDTO;
+import com.infosys.lex.progress.dto.ExternalProgressDTO;
+import com.infosys.lex.progress.service.ContentProgressService;
 
 @RestController
 @CrossOrigin(origins = "*")

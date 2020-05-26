@@ -1,5 +1,5 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-url-url-url-url-url-url-url-url-url-url-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 ///**
 //© 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -15,7 +15,7 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+package com.infosys.lex.common.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,11 +25,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.infosys.lex.core.logger.LexLogger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http-url-url-url-url-url-url-url-url-url-url-url.HttpEntity;
-import org.springframework.http-url-url-url-url-url-url-url-url-url-url-url.HttpHeaders;
-import org.springframework.http-url-url-url-url-url-url-url-url-url-url-url.HttpMethod;
-import org.springframework.http-url-url-url-url-url-url-url-url-url-url-url.ResponseEntity;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
@@ -38,23 +39,23 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.AppConfig;
+import com.infosys.lex.common.bodhi.repo.AppConfigPrimaryKey;
+import com.infosys.lex.common.bodhi.repo.AppConfigRepository;
+import com.infosys.lex.common.constants.JsonKey;
+import com.infosys.lex.common.sunbird.repo.UserMVModel;
+import com.infosys.lex.common.sunbird.repo.UserMVRepository;
+import com.infosys.lex.common.sunbird.repo.UserModel;
+import com.infosys.lex.common.sunbird.repo.UserRepository;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.tnc.bodhi.repo.UserTermsAndConditionsRepository;
+import com.infosys.lex.userroles.bodhi.repo.UserRolesRepository;
+import com.infosys.lex.userroles.entities.UserRoles;
 
 /**
  * @author akhilesh.kumar05
@@ -130,8 +131,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 //				else
 //					usersForGraph.put(email.toLowerCase(), email);
 //			}
-//			HttpHeaders http-url-url-url-url-url-url-url-url-url-url-urlHeaders = new HttpHeaders();
-//			http-url-url-url-url-url-url-url-url-url-url-urlHeaders.set("Content-Type", "application/json");
+//			HttpHeaders httpHeaders = new HttpHeaders();
+//			httpHeaders.set("Content-Type", "application/json");
 //			try {
 //				String resp = "";
 //				Map<String, Object> json = new HashMap<>();
@@ -139,7 +140,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 //				emailMap.put("emails", usersForGraph.keySet());
 //				json.put("request", emailMap);
 ////				json.setRequest(emailMap);
-//				resp = restTemplate.postForObject("http-url-url-url-url-url-url-url-url-url-url-url://" + sbExtHost + ":" + sbExtPort + "/v1/users/Validate", json,
+//				resp = restTemplate.postForObject("http://" + sbExtHost + ":" + sbExtPort + "/v1/users/Validate", json,
 //						String.class);
 //				List<Map<String, Object>> data = new ArrayList<>();
 //				if (!(resp.isEmpty() || resp.equals(""))) {
@@ -260,8 +261,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		List<Map<String, Object>> ret = new ArrayList<>();
 		String sbExtHost = props.getSbextServiceHost();
 		String sbExtPort = props.getSbextPort();
-		HttpHeaders http-url-url-url-url-url-url-url-url-url-url-urlHeaders = new HttpHeaders();
-		http-url-url-url-url-url-url-url-url-url-url-urlHeaders.set("Content-Type", "application/json");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.set("Content-Type", "application/json");
 		try {
 			String resp = "";
 			Map<String, Object> json = new HashMap<>();
@@ -269,7 +270,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			emailMap.put("emails", emails);
 			json.put("request", emailMap);
 //			json.setRequest(emailMap);
-			resp = restTemplate.postForObject("http-url-url-url-url-url-url-url-url-url-url-url://" + sbExtHost + ":" + sbExtPort + "/v1/Users/Many", json,
+			resp = restTemplate.postForObject("http://" + sbExtHost + ":" + sbExtPort + "/v1/Users/Many", json,
 					String.class);
 			Map<String, Object> responseMap = new HashMap<>();
 			if (!(resp.isEmpty() || resp.equals(""))) {
@@ -308,7 +309,7 @@ substitute url based on requirement
 //	 * (non-Javadoc)
 //	 * 
 //	 * @see
-substitute url based on requirement
+//substitute url based on requirement
 //	 * util.List)
 //	 */
 //	@Override
@@ -417,7 +418,7 @@ substitute url based on requirement
 			try {
 
 				List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
+						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
 						pidRequestMap, List.class);
 
 				if (pidResponse.isEmpty() || pidResponse == null) {
@@ -464,7 +465,7 @@ substitute url based on requirement
 
 			try {
 
-				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp()
+				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
 						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
 						List.class);
 
@@ -523,7 +524,7 @@ substitute url based on requirement
 
 			{
 
-				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp()
+				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
 						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
 						List.class);
 
@@ -577,7 +578,7 @@ substitute url based on requirement
 
 			try {
 				List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
+						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
 						pidRequestMap, List.class);
 
 				if (!pidResponse.isEmpty()) {
@@ -620,7 +621,7 @@ substitute url based on requirement
 			pidRequestMap.put("conditions", conditions);
 			try {
 
-				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp()
+				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
 						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
 						List.class);
 
@@ -660,7 +661,7 @@ substitute url based on requirement
 
 			try {
 				List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
+						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
 						pidRequestMap, List.class);
 				if (pidResponse.isEmpty()) {
 					return null;
@@ -796,7 +797,7 @@ substitute url based on requirement
 	@Override
 	public Map<String, Object> getContentMeta(String contentId, String rootOrg, String org, String[] fields)
 			throws JsonParseException, JsonMappingException, IOException {
-		String getcontentIdMetaUrl = "http-url-url-url-url-url-url-url-url-url-url-url://" + props.getAuthServiceHost() + ":" + props.getAuthServicePort()
+		String getcontentIdMetaUrl = "http://" + props.getAuthServiceHost() + ":" + props.getAuthServicePort()
 				+ "/action/content/hierarchy/fields/" + contentId;
 
 		HttpHeaders headers = new HttpHeaders();
@@ -841,7 +842,7 @@ substitute url based on requirement
 				String contentHost = props.getContentServiceHost();
 				String contentPort = props.getBodhiContentPort();
 
-				String fetchUrl = "http-url-url-url-url-url-url-url-url-url-url-url://" + contentHost + ":" + contentPort + "/contentv3/download/"
+				String fetchUrl = "http://" + contentHost + ":" + contentPort + "/contentv3/download/"
 						+ urlEncodedLocation;
 				ResponseEntity<String> response = restTemplate.getForEntity(fetchUrl, String.class);
 
@@ -886,7 +887,7 @@ substitute url based on requirement
 
 			try {
 
-				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http-url-url-url-url-url-url-url-url-url-url-url://" + serverConfig.getPidIp()
+				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
 						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
 						List.class);
 

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.correction.bodhi.repo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,13 +27,13 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.assessment.bodhi.repo.UserAssessmentSummaryRepository;
+import com.infosys.lex.assessment.bodhi.repo.UserQuizSummaryRepository;
+import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesModel;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesPrimaryKeyModel;
+import com.infosys.lex.badge.postgredb.entity.Badge;
+import com.infosys.lex.badge.postgredb.repository.BadgeRepoPg;
 
 @Repository
 public class UserDataCorrectionRepositoryImpl implements UserDataCorrectionRepository {

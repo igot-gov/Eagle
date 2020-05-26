@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.badge.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -41,18 +41,23 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.badge.bodhi.repo.TotalPoints;
+import com.infosys.lex.badge.bodhi.repo.TotalPointsPrimaryKey;
+import com.infosys.lex.badge.bodhi.repo.TotalPointsRepository;
+import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesModel;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesPrimaryKeyModel;
+import com.infosys.lex.badge.postgredb.projection.BadgeDetailsProjection;
+import com.infosys.lex.badge.postgredb.repository.BadgeRepo;
+import com.infosys.lex.common.mongo.repo.BatchExecutionData;
+import com.infosys.lex.common.mongo.repo.BatchExecutionRepository;
+import com.infosys.lex.common.service.AppConfigService;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserServiceImpl;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Service
 public class BadgeServiceImpl implements BadgeService {

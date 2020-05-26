@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.goal.service;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -35,46 +35,47 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http-url-url-url.HttpEntity;
-import org.springframework.http-url-url-url.HttpHeaders;
-import org.springframework.http-url-url-url.HttpMethod;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.datastax.driver.core.utils.UUIDs;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.cohort.service.ParentService;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.LoggerService;
+import com.infosys.lex.common.service.UserService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.sunbird.repo.UserMVRepository;
+import com.infosys.lex.common.util.ContentMetaConstants;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.goal.bodhi.repo.CommonGoal;
+import com.infosys.lex.goal.bodhi.repo.CommonGoalKey;
+import com.infosys.lex.goal.bodhi.repo.CommonGoalLang;
+import com.infosys.lex.goal.bodhi.repo.CommonGoalLangRepository;
+import com.infosys.lex.goal.bodhi.repo.CommonGoalProjection;
+import com.infosys.lex.goal.bodhi.repo.CommonGoalRepository;
+import com.infosys.lex.goal.bodhi.repo.GroupProjection;
+import com.infosys.lex.goal.bodhi.repo.SharedGoal;
+import com.infosys.lex.goal.bodhi.repo.SharedGoalKey;
+import com.infosys.lex.goal.bodhi.repo.SharedGoalRepository;
+import com.infosys.lex.goal.bodhi.repo.SharedGoalTracker;
+import com.infosys.lex.goal.bodhi.repo.SharedGoalTrackerRepository;
+import com.infosys.lex.goal.bodhi.repo.UserGoal;
+import com.infosys.lex.goal.bodhi.repo.UserGoalKey;
+import com.infosys.lex.goal.bodhi.repo.UserGoalRepository;
+import com.infosys.lex.goal.bodhi.repo.UserGoalTrackerRepository;
+import com.infosys.lex.goal.dto.ActionDTO;
+import com.infosys.lex.goal.dto.GoalDTO;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 
 @Service
 public class GoalsServiceImpl implements GoalsService {
@@ -539,7 +540,7 @@ substitute url based on requirement
 		recipients.put("sharedBy", Arrays.asList(sharedBy));
 		requestBody.put("recipients", recipients);
 
-		String url = "http-url-url-url://" + props.getNotifIp() + ":" + props.getNotifPort() + "/v1/notification/event";
+		String url = "http://" + props.getNotifIp() + ":" + props.getNotifPort() + "/v1/notification/event";
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("rootOrg", rootOrg);
 		try {
@@ -3768,7 +3769,7 @@ substitute url based on requirement
 			requestMap.put("request", requestBody);
 
 			Map<String, Object> accessResponseData = restTemplate.postForObject(
-					"http-url-url-url://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
+					"http://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
 					requestMap, Map.class);
 
 			Map<String, Object> result = (Map<String, Object>) accessResponseData.get("result");
@@ -3853,7 +3854,7 @@ substitute url based on requirement
 		requestMap.put("request", requestBody);
 
 		Map<String, Object> accessResponseData = restTemplate.postForObject(
-				"http-url-url-url://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
+				"http://" + sbExtHost + ":" + sbExtPort + "/accesscontrol/users/contents?rootOrg=" + rootOrg,
 				requestMap, Map.class);
 		Map<String, Object> result = (Map<String, Object>) accessResponseData.get("result");
 		Map<String, Object> userAccessReponse = (Map<String, Object>) result.get("response");

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.certifications.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-substitute url based on requirement
+import com.infosys.lex.certifications.service.CertificationsService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -535,7 +535,7 @@ substitute url based on requirement
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-substitute url based on requirement
+	@PostMapping("lHub/map/lexid-certificationid")
 	public ResponseEntity<Map<String,Object>> mapLexIdToCertId(@RequestBody Map<String,Object> req) throws JsonParseException, JsonMappingException, IOException
 	{
 		return new ResponseEntity<>(certificationService.mapLexidToCertId(req),HttpStatus.OK);

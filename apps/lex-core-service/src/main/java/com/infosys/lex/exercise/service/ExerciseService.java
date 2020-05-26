@@ -15,14 +15,14 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.util.List;
 import java.util.Map;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.exercise.dto.NewCodeExerciseDTO;
+import com.infosys.lex.exercise.dto.NewExerciseFeedbackDTO;
+import com.infosys.lex.exercise.dto.NewLNDExerciseDTO;
 
 public interface ExerciseService {
 

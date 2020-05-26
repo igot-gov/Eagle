@@ -15,10 +15,10 @@
  * Highly Confidential
  */
 
-substitute url based on requirement
+package com.infosys.lex.usermanagement.controller;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.core.exception.NoContentException;
+import com.infosys.lex.usermanagement.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

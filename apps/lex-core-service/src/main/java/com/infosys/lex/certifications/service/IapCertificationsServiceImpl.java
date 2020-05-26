@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.certifications.service;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +33,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
+import com.infosys.lex.common.util.LexServerProperties;
 
 @Service
 public class IapCertificationsServiceImpl implements IapCertificationsService {
@@ -42,18 +42,16 @@ public class IapCertificationsServiceImpl implements IapCertificationsService {
 	RestTemplate restTemplate;
 
 	@Autowired
-substitute url based on requirement
+	LexServerProperties lexServerProps;
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	@SuppressWarnings("unchecked")
 	@Override
-substitute url based on requirement
-			throws JsonParseException, JsonMappingException, IOException {
+	public Map<String, Object> getAttempts(String userEmail, String lexResourceId)throws JsonParseException, JsonMappingException, IOException {
 
-substitute url based on requirement
-substitute url based on requirement
-
+		String url = lexServerProps.getIapSubmissonsUrl() + "?userEmail=" + userEmail + "&lexResourceId="
+				+ lexResourceId;
 		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
 				new HttpEntity<Object>(getRestCallHeader()), String.class);
 
@@ -73,8 +71,8 @@ substitute url based on requirement
 	private HttpHeaders getRestCallHeader() {
 
 		HttpHeaders headers = new HttpHeaders();
-substitute url based on requirement
-substitute url based on requirement
+		headers.set("clientId", lexServerProps.getIapSubmissonsClientId());
+		headers.set("clientSecret", lexServerProps.getIapSubmissonsClientSecret());
 		return headers;
 	}
 }

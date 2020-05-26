@@ -14,7 +14,7 @@
  * <p>
  * Highly Confidential
  */
-substitute url based on requirement
+package com.infosys.lex.usermanagement.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;

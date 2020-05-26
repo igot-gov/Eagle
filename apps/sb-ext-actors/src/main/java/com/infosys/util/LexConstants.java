@@ -3,7 +3,7 @@
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.util;
 
-public class Constants {
+public class LexConstants {
 	public static final String CONCEPTS_NAME = "concepts.name";
 	public static final String ENTITY = "entity";
 	public static final String RECOMMENDED_INTERESTS = "recommended_interests";
@@ -42,7 +42,7 @@ public class Constants {
 	public static final String NEO4J_IP = "com.infosys.neo4j-ip";
 	public static final String RESPONSE = "response";
 
-	public Constants() {
+	public LexConstants() {
 
 	}
 }

@@ -16,7 +16,7 @@
 
  */
 
-substitute url based on requirement
+package com.infosys.lex.usermanagement.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

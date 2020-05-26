@@ -26,14 +26,14 @@ import com.infosys.exception.ApplicationLogicError;
 import com.infosys.exception.BadRequestException;
 import com.infosys.helper.ServiceFactory;
 import com.infosys.service.EducatorService;
-import com.infosys.util.Constants;
-import com.infosys.util.JsonKey;
+import com.infosys.util.LexConstants;
+import com.infosys.util.LexJsonKey;
 import com.infosys.util.Util;
 
 @Service
 public class EducatorServiceImpl implements EducatorService {
 	private static CassandraOperation cassandraOperation = ServiceFactory.getInstance();
-	private Util.DbInfo educatorsDb = Util.dbInfoMap.get(JsonKey.Educators_Table);
+	private Util.DbInfo educatorsDb = Util.dbInfoMap.get(LexJsonKey.Educators_Table);
 	private static final Integer FETCH_BATCH_SIZE = 2;
 	// private static final Integer INSERT_BATCH_SIZE = 3;
 
@@ -63,10 +63,10 @@ public class EducatorServiceImpl implements EducatorService {
 
 		Map<String, Object> propertiesMap = new HashMap<>();
 		// fetch records for courseIds from input in bulk
-		propertiesMap.put(Constants.SOURCE_ID, new ArrayList<>(currentInputMap.keySet()));
+		propertiesMap.put(LexConstants.SOURCE_ID, new ArrayList<>(currentInputMap.keySet()));
 		Response batchFetchResponse = cassandraOperation.getRecordsByProperties(educatorsDb.getKeySpace(),
 				educatorsDb.getTableName(), propertiesMap,
-				Arrays.asList(Constants.SOURCE_ID,Constants.EDUCATOR_EMAIL));
+				Arrays.asList(LexConstants.SOURCE_ID,LexConstants.EDUCATOR_EMAIL));
 
 		List<Map<String, String>> batchResult = (List<Map<String, String>>) batchFetchResponse.getResult()
 				.get(JsonKey.RESPONSE);
@@ -80,8 +80,8 @@ public class EducatorServiceImpl implements EducatorService {
 
 		Map<String, List<String>> aggregatedMap = new HashMap<>();
 		for (Map<String, String> result : results) {
-			String sourceId = result.get(Constants.SOURCE_ID);
-			String educatorEmail = result.get(Constants.EDUCATOR_EMAIL);
+			String sourceId = result.get(LexConstants.SOURCE_ID);
+			String educatorEmail = result.get(LexConstants.EDUCATOR_EMAIL);
 			if (aggregatedMap.containsKey(sourceId)) {
 				aggregatedMap.get(sourceId).add(educatorEmail);
 			} else {

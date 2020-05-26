@@ -1,5 +1,5 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.training.service;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -32,11 +32,11 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http-url.HttpEntity;
-import org.springframework.http-url.HttpHeaders;
-import org.springframework.http-url.HttpMethod;
-import org.springframework.http-url.HttpStatus;
-import org.springframework.http-url.ResponseEntity;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -46,12 +46,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.ApiAuthenticationModel;
+import com.infosys.lex.common.bodhi.repo.AuthenticationRepository;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.logger.LexLogger;
 
 @Service
 public class TrainingsServiceImpl implements TrainingsService {
@@ -63,8 +63,8 @@ public class TrainingsServiceImpl implements TrainingsService {
 	RestTemplate restTemplate;
 
 	@Autowired
-substitute url based on requirement
-	
+	LexServerProperties lexServerProps;
+
 	@Autowired
 	AuthenticationRepository authRepo;
 
@@ -75,17 +75,17 @@ substitute url based on requirement
 	private static final SimpleDateFormat newFormat = new SimpleDateFormat("dd MMM yyyy");
 
 	// private static final String apiEndPointPrefix =
-substitute url based on requirement
+	// "https://itgatewaytst.infosys.com/extapilex/api/Learning";
 
 	// private static final String apiEndPointPrefix =
-	// "http-url://IPaddress:8740/api/Learning";
+	// "http://IPaddress:8740/api/Learning";
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> getTrainings(String contentId, String emailId, String startDate, String endDate,
 			String location) throws Exception {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingDetails?content_id=" + contentId + "&email=" + emailId;
 
 		if (startDate != null && endDate != null && !startDate.isEmpty() && !startDate.isEmpty()) {
@@ -123,9 +123,9 @@ substitute url based on requirement
 			});
 
 			return responseMaps;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);
@@ -145,9 +145,9 @@ substitute url based on requirement
 					new TypeReference<List<Map<String, Object>>>() {
 					});
 			return responseMaps;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -170,9 +170,9 @@ substitute url based on requirement
 				return responseMap;
 			}
 			throw new Exception("Error while calling post request");
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -195,9 +195,9 @@ substitute url based on requirement
 				return responseMap;
 			}
 			throw new Exception("Error while calling post request");
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -221,9 +221,9 @@ substitute url based on requirement
 			}
 			throw new Exception("Error while calling post request");
 
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -247,9 +247,9 @@ substitute url based on requirement
 				return responseMap;
 			}
 			throw new Exception("Error while calling post request");
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -273,9 +273,9 @@ substitute url based on requirement
 				return responseMap;
 			}
 			throw new Exception("Error while calling post request");
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -295,9 +295,9 @@ substitute url based on requirement
 					new TypeReference<List<String>>() {
 					});
 			return response;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -319,9 +319,9 @@ substitute url based on requirement
 					});
 
 			return responseMap;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);
@@ -348,9 +348,9 @@ substitute url based on requirement
 			}
 			throw new Exception("Error while calling post request");
 
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -376,9 +376,9 @@ substitute url based on requirement
 			}
 			throw new Exception("Error while calling post request");
 
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -404,9 +404,9 @@ substitute url based on requirement
 			}
 			throw new Exception("Error while calling post request");
 
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -431,9 +431,9 @@ substitute url based on requirement
 			}
 			throw new Exception("Error while calling post request");
 
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -467,9 +467,9 @@ substitute url based on requirement
 			});
 
 			return responseMaps;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);
@@ -492,9 +492,9 @@ substitute url based on requirement
 					});
 
 			return responseMaps;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);
@@ -519,9 +519,9 @@ substitute url based on requirement
 				return responseMap;
 			}
 			throw new Exception("Error while calling post request");
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -542,9 +542,9 @@ substitute url based on requirement
 					});
 
 			return responseMaps;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);
@@ -571,9 +571,9 @@ substitute url based on requirement
 				return responseMap;
 			}
 			throw new Exception("Error while calling post request");
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
 			throw new ApplicationLogicError(exception.getMessage(),exception);
@@ -595,9 +595,9 @@ substitute url based on requirement
 					});
 
 			return responseMaps;
-		} catch (HttpServerErrorException http-urlServerErrorException) {
-			logger.error(http-urlServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",http-urlServerErrorException);
+		} catch (HttpServerErrorException httpServerErrorException) {
+			logger.error(httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
 		} catch (Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);

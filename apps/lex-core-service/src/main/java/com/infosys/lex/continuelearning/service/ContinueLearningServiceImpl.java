@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.continuelearning.service;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -35,15 +35,15 @@ import org.springframework.stereotype.Service;
 import com.datastax.driver.core.PagingState;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.continuelearning.bodhi.repo.ContinueLearningPaginationRepository;
+import com.infosys.lex.continuelearning.bodhi.repo.ContinueLearningRepository;
+import com.infosys.lex.continuelearning.dto.ContinueLearningDTO;
+import com.infosys.lex.continuelearning.entities.ContinueLearning;
+import com.infosys.lex.continuelearning.entities.ContinueLearningKey;
+import com.infosys.lex.continuelearning.validator.ContinueLearningValidator;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 
 @Service
 public class ContinueLearningServiceImpl implements ContinueLearningService {
@@ -84,7 +84,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
 			String isStandAlone, String resourceType) throws Exception {
 		// Initial list of meta fields
-substitute url based on requirement
+		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
 				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",
 				"me_totalSessionsCount", "mediaType", "mimeType", "name", "resourceType", "size", "sourceShortName",
 				"status", "averageRating", "totalRating", "isInIntranet", "isStandAlone"));

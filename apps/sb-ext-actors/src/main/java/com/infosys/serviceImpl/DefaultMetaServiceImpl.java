@@ -5,7 +5,7 @@ package com.infosys.serviceImpl;
 
 import com.infosys.model.*;
 import com.infosys.service.DefaultMetaService;
-import com.infosys.util.ProjectUtil;
+import com.infosys.util.LexProjectUtil;
 import org.springframework.stereotype.Service;
 import org.sunbird.common.models.util.ProjectUtil;
 
@@ -84,7 +84,7 @@ public class DefaultMetaServiceImpl implements DefaultMetaService {
         contentMeta.setDescription("");
         contentMeta.setResourceType("");
         contentMeta.setIsIframeSupported("Yes");
-        contentMeta.setMediaType(ProjectUtil.MediaType.content.get());
+        contentMeta.setMediaType(LexProjectUtil.MediaType.content.get());
     }
 
 
@@ -118,14 +118,14 @@ public class DefaultMetaServiceImpl implements DefaultMetaService {
         defaultObj.setAppIcon("");
         defaultObj.setGrayScaleAppIcon("");
         defaultObj.setThumbnail("");
-        defaultObj.setMediaType(ProjectUtil.MediaType.content.get());
-        defaultObj.setContentType(ProjectUtil.ContentType.resource.get());
-        defaultObj.setVisibility(ProjectUtil.Visibility.defaultVisibility.get());
+        defaultObj.setMediaType(LexProjectUtil.MediaType.content.get());
+        defaultObj.setContentType(LexProjectUtil.ContentType.resource.get());
+        defaultObj.setVisibility(LexProjectUtil.Visibility.defaultVisibility.get());
         defaultObj.setPosterImage("");
         defaultObj.setLanguage(new String[]{"English"});
-        defaultObj.setResourceType(ProjectUtil.ResourceType.content.get());
+        defaultObj.setResourceType(LexProjectUtil.ResourceType.content.get());
         defaultObj.setMsArtifactDetails(null);
-        defaultObj.setIdealScreenSize(ProjectUtil.IdealScreenSize.seven.get());
+        defaultObj.setIdealScreenSize(LexProjectUtil.IdealScreenSize.seven.get());
         defaultObj.setSourceShortName("");
         defaultObj.setSourceName("");
         defaultObj.setSourceUrl("url");
@@ -150,7 +150,7 @@ public class DefaultMetaServiceImpl implements DefaultMetaService {
         defaultObj.setDuration(0L);
         defaultObj.setSize(0.0);
         defaultObj.setMimeType("");
-        defaultObj.setMinVersion("1.0");
+        defaultObj.setMinLexVersion("1.0");
         defaultObj.setMinOsVersion(4.4);
         defaultObj.setOs(new String[]{"All"});
         defaultObj.setChecksum("");
@@ -200,7 +200,7 @@ public class DefaultMetaServiceImpl implements DefaultMetaService {
         defaultObj.setVersionKey(new Date().getTime());
         defaultObj.setLastUpdatedOn(ProjectUtil.getFormattedDate().replace(' ', 'T'));
         defaultObj.setLastUpdatedBy("");
-        defaultObj.setStatus(ProjectUtil.Status.DRAFT.getValue());
+        defaultObj.setStatus(LexProjectUtil.Status.DRAFT.getValue());
         defaultObj.setReleaseNotes("");
         defaultObj.setConcepts(new ObjectMeta[]{});
         defaultObj.setCollections(new ObjectMeta[]{});

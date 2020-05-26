@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.learninghistory.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,15 +27,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.sunbird.repo.UserMVRepository;
+import com.infosys.lex.common.sunbird.repo.UserRepository;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressOrderByLastAccessRepository;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 
 //TODO change email verification
 @Service
