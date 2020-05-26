@@ -16,7 +16,7 @@
 
  */
 
-substitute url based on requirement
+package com.infosys.lex.core.config;
 
 import javax.sql.DataSource;
 
@@ -38,10 +38,10 @@ public class PostgresDataSourceConfig {
 
 //@Configuration
 //@EnableTransactionManagement
-substitute url based on requirement
+//substitute url based on requirement
 //@ConfigurationProperties(prefix = "spring.datasource")
-substitute url based on requirement
-substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
 //public class PostgresDataSourceConfig {
 //
 //	// Providing connection params
@@ -49,8 +49,8 @@ substitute url based on requirement
 ////	private String url;
 ////	@Value("${spring.datasource.username}")
 ////	private String username;
-substitute based on requirement
-substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
 //
 ////	@Bean("primaryDataSource")
 //	@Primary
@@ -58,7 +58,7 @@ substitute based on requirement
 ////		DriverManagerDataSource dataSourceBuilder = new DriverManagerDataSource();
 ////		dataSourceBuilder.setUrl(url);
 ////		dataSourceBuilder.setUsername(username);
-substitute based on requirement
+//substitute based on requirement
 ////		return dataSourceBuilder;
 //
 //		return DataSourceBuilder.create().build();
@@ -69,7 +69,7 @@ substitute based on requirement
 //	public LocalContainerEntityManagerFactoryBean EntityManagerPrimary() {
 //		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 //		em.setDataSource(primaryDataSource());
-substitute url based on requirement
+//substitute url based on requirement
 //		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 //		em.setJpaVendorAdapter(vendorAdapter);
 //		em.setJpaProperties(hibernateProperties());
@@ -89,7 +89,7 @@ substitute url based on requirement
 //	public LocalSessionFactoryBean SessionFactoryPrimary() {
 //		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 //		sessionFactoryBean.setDataSource(primaryDataSource());
-substitute url based on requirement
+//substitute url based on requirement
 //		sessionFactoryBean.setHibernateProperties(hibernateProperties());
 //		return sessionFactoryBean;
 //	}
@@ -101,7 +101,7 @@ substitute url based on requirement
 //		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 //		properties.put("hibernate.show_sql", true);
 //		properties.put("hibernate.format_sql", true);
-substitute url based on requirement
+//substitute url based on requirement
 //		properties.put("connection.release_mode", "auto");
 //		return properties;
 //	}

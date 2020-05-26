@@ -29,7 +29,7 @@ public class LexJsonKey {
 	public static final String TERMS_CONDITION_DB = "termsConditionDb";
 	public static final String BODHI_DB_KEYSPACE = "bodhi";
 	public static final String RESOURCES = "resources";
-	public static final String = "";
+	public static final String LEX= "lex";
 	public static final String VALUE = "value";
 	public static final String KEYWORD = "keyword";
 	public static final String INREVIEW = "InReview";

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.goal.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -37,9 +37,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.goal.dto.ActionDTO;
+import com.infosys.lex.goal.dto.GoalDTO;
+import com.infosys.lex.goal.service.GoalsService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -231,13 +231,13 @@ substitute url based on requirement
 	 * created by user and is not of type common or shared with him. This API is
 substitute url based on requirement
 	 */
-substitute url based on requirement
+	@DeleteMapping("/v3/users/{user_id}/goals/{goal_id}/contents/{lex_id}")
 	public ResponseEntity<Map<String, Object>> deleteSingleContentFromHomePage(@PathVariable("user_id") String userUUID,
-substitute url based on requirement
+			@PathVariable("goal_id") String goalId, @PathVariable("lex_id") String lexId,
 			@RequestParam(name = "goal_type") String goalType, @RequestHeader("rootOrg") String rootOrg)
 			throws Exception {
 
-substitute url based on requirement
+		return new ResponseEntity<>(goalsService.deleteResourceFromUserGoal(rootOrg, userUUID, goalId, lexId, goalType),
 				HttpStatus.OK);
 	}
 
@@ -247,15 +247,15 @@ substitute url based on requirement
 substitute url based on requirement
 	 * home page.
 	 */
-substitute url based on requirement
-	public ResponseEntity<Map<String, Object>> addSingleContentFromHomePage(@PathVariable("user_id") String userUUID,
-substitute url based on requirement
-			@RequestParam(name = "goal_type") String goalType, @RequestHeader("rootOrg") String rootOrg)
-			throws Exception {
+@PatchMapping("/v3/users/{user_id}/goals/{goal_id}/contents/{lex_id}")
+public ResponseEntity<Map<String, Object>> addSingleContentFromHomePage(@PathVariable("user_id") String userUUID,
+		@PathVariable("goal_id") String goalId, @PathVariable("lex_id") String lexId,
+		@RequestParam(name = "goal_type") String goalType, @RequestHeader("rootOrg") String rootOrg)
+		throws Exception {
 
-substitute url based on requirement
-				HttpStatus.OK);
-	}
+	return new ResponseEntity<>(goalsService.addContentToUserGoal(userUUID, goalId, lexId, goalType, rootOrg),
+			HttpStatus.OK);
+}
 
 	/*
 	 * This method is responsible for removal of users(targets) from a certain

@@ -15,10 +15,10 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.exercise.bodhi.repo.SubmitResult;
+import com.infosys.lex.exercise.dto.SubmitDataDTO;
 
 public interface SubmitService {
 

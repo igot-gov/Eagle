@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.userroles.service;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,13 +11,13 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.userroles.bodhi.repo.UserRolesRepository;
+import com.infosys.lex.userroles.entities.UserRoles;
+import com.infosys.lex.userroles.entities.UserRolesKey;
 
 @Service
 public class UserRolesServiceImpl implements UserRolesService {

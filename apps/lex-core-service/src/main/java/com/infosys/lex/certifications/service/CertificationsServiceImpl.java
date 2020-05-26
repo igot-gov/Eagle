@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.certifications.service;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -48,12 +48,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.ApiAuthenticationModel;
+import com.infosys.lex.common.bodhi.repo.AuthenticationRepository;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Service
 public class CertificationsServiceImpl implements CertificationsService {
@@ -65,7 +65,7 @@ public class CertificationsServiceImpl implements CertificationsService {
 	RestTemplate restTemplateForCertification;
 
 	@Autowired
-substitute url based on requirement
+	LexServerProperties lexServerProps;
 
 	@Autowired
 	ContentService contentService;
@@ -101,7 +101,7 @@ substitute url based on requirement
 			throws JsonParseException, JsonMappingException, IOException {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetOffshoreACCCenters?certification_id=" + certificationId;
 
@@ -119,7 +119,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getCountries() throws JsonParseException, JsonMappingException, IOException {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 		String url = apiEndPointPrefix + "/GetlistofCountriesforonsite";
 
 		ResponseEntity<String> responseEntity = restTemplateForCertification.exchange(url, HttpMethod.GET,
@@ -156,7 +156,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getSlots()
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/Getonsiteslots";
 
@@ -186,7 +186,7 @@ substitute url based on requirement
 	public Map<String, Object> bookAtDeskCertificationSlot(String userId, String certificationId,
 			Map<String, Object> requestMap) throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/Createslotbookingrequestforonsite?user_id=" + userId + "&certification_id="
 				+ certificationId;
@@ -214,7 +214,7 @@ substitute url based on requirement
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
 		List<Map<String, Object>> respList = null;
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetActionItems?user_id=" + userId;
 		if (type != null)
@@ -280,7 +280,7 @@ substitute url based on requirement
 			throws JsonParseException, JsonMappingException, IOException {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/ApproveorRejectonsitebooking?icfd_id=" + icfdId;
 
@@ -299,7 +299,7 @@ substitute url based on requirement
 			Map<String, Object> requestMap) throws JsonParseException, JsonMappingException, IOException {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/ApproveorRejectbudgetapprovalrequest?user_id=" + userId
 				+ "&certification_id=" + certificationId + "&sino=" + sino + "&ecdp_id=" + ecdpId;
@@ -318,7 +318,7 @@ substitute url based on requirement
 	public Map<String, Object> budgetApprovalRequest(String userId, String certificationId,
 			Map<String, Object> requestMap) throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/SubmitBudgetApprovalRequest?user_id=" + userId + "&certification_id="
 				+ certificationId;
@@ -338,7 +338,7 @@ substitute url based on requirement
 	public Map<String, Object> cancelBudgetRequest(String userId, String certificationId)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/CancelBudgetApprovalRequest?user_id=" + userId + "&certification_id="
 				+ certificationId;
@@ -356,7 +356,7 @@ substitute url based on requirement
 	@Override
 	public List<Map<String, Object>> getCurrencies() throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetlistofCurrencies";
 
@@ -383,7 +383,7 @@ substitute url based on requirement
 		startDate = istDateFormat.format(new Date(Long.valueOf(startDate)));
 		endDate = istDateFormat.format(new Date(Long.valueOf(endDate)));
 		List<Map<String, Object>> respList = null;
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 		String url = apiEndPointPrefix + "/GetUserRequests?user_id=" + userId + "&start_date=" + startDate
 				+ "&end_date=" + endDate;
 
@@ -428,7 +428,7 @@ substitute url based on requirement
 	public Map<String, Object> getDatesAndSlotsForTestEnters(String location, String testCenter, String certificationId)
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetDatesandAvailableSlotsForOffshore?dc=" + location + "&testcenter="
 				+ testCenter + "&certification_id=" + certificationId;
@@ -460,7 +460,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getCertificationCompleted(String userId, String status)
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetCompletedCertifications?user_id=" + userId + "&status=" + status;
 
@@ -487,7 +487,7 @@ substitute url based on requirement
 	public Map<String, Object> bookSlotForOffshore(String userId, String certificationId, String slotNo)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/BookSlotForOffshore?user_id=" + userId + "&certification_id="
 				+ certificationId + "&slot_no=" + slotNo;
@@ -506,7 +506,7 @@ substitute url based on requirement
 	public Map<String, Object> deleteCertificationDocForUserId(String userId, String certificationId,
 			String documentName) throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/DeleteExternalResultFile?user_id=" + userId + "&certification_id="
 				+ certificationId + "&document=" + documentName;
@@ -525,7 +525,7 @@ substitute url based on requirement
 	public Map<String, Object> cancelSlotBooking(String userId, String certificationId, String slotNo, String icfdId)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/CancelSlotBooking?user_id=" + userId + "&certification_id=" + certificationId
 				+ "&slot_no=" + slotNo;
@@ -549,7 +549,7 @@ substitute url based on requirement
 			String certificationId, String action)
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/SubmitRecallExternalCertResult?user_id=" + userId + "&certification_id="
 				+ certificationId + "&action=" + action;
@@ -572,7 +572,7 @@ substitute url based on requirement
 	public Map<String, Object> submitIAPUserCertficationDetails(Map<String, Object> requestMap)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/ResultSubmissions";
 
@@ -590,7 +590,7 @@ substitute url based on requirement
 	public Map<String, Object> resultVerificationApproval(String userId, String certificationId,
 			Map<String, Object> requestMap) throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 		String user = requestMap.get("user").toString();
 		String uploadId = requestMap.get("upload_id").toString();
 
@@ -611,7 +611,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getUserCertificationSubmissions(String userId, String certificationId)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetSubmittedCertificationStatus?user_id=" + userId + "&certification_id="
 				+ certificationId;
@@ -632,7 +632,7 @@ substitute url based on requirement
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
 		int noOfDaysGap = serverProp.getCertificationRetryGapInDays();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetBookingInformation?user_id=" + userId + "&certification_id="
 				+ certificationId;
@@ -758,7 +758,7 @@ substitute url based on requirement
 	public Map<String, Object> uploadExtCertificationResult(String userId, String certificationId,
 			Map<String, Object> requestMap) throws IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 		if (requestMap.containsKey("exam_date")) {
 			requestMap.put("exam_date",
 					istDateFormat.format(new Date(Long.valueOf(requestMap.get("exam_date").toString()))));
@@ -781,7 +781,7 @@ substitute url based on requirement
 	public Map<String, Object> submitExtCertificationResult(String userId, String certificationId,
 			Map<String, Object> requestMap) throws IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		if (requestMap.containsKey("exam_date")) {
 			requestMap.put("exam_date",
@@ -830,7 +830,7 @@ substitute url based on requirement
 	public Map<String, Object> getSubmittedDocument(String document)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/GetDocument?Document=" + document;
 
@@ -848,7 +848,7 @@ substitute url based on requirement
 	public Map<String, Object> submitCertificationDetails(String userId, String certificationId,
 			Map<String, Object> requestMap) throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/ResultSubmissions?user_id=" + userId + "&certification_id="
 				+ certificationId;
@@ -869,17 +869,17 @@ substitute url based on requirement
 	public Map<String, Object> mapLexidToCertId(Map<String, Object> req)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
-substitute url based on requirement
+		if (!req.containsKey("lex_id") || req.get("lex_id") == null)
 			throw new InvalidDataInputException("Invalid input");
 
 		if (!req.containsKey("certification_id") || req.get("certification_id") == null)
 			throw new InvalidDataInputException("Invalid input");
 
-substitute url based on requirement
+		String lexId = req.get("lex_id").toString();
 		String certificationId = req.get("certification_id").toString();
-substitute url based on requirement
+		String url = apiEndPointPrefix + "/MapLexIdToCertCode?lex_id=" + lexId + "&certification_id=" + certificationId;
 
 		ResponseEntity<String> responseEntity = restTemplateForCertification.exchange(url, HttpMethod.POST,
 				new HttpEntity<Object>(headers), String.class);
@@ -893,14 +893,14 @@ substitute url based on requirement
 
 	private HttpHeaders getRestCallHeader() {
 		String accessToken = (String) servletContext.getAttribute("lhub_access_token");
-substitute url based on requirement
-substitute based on requirement
+		String clientId = lexServerProps.getLhubAthClientId();
+		Optional<ApiAuthenticationModel> authDetailsRes = authRepo.findById(clientId);
 		if (!authDetailsRes.isPresent())
 			throw new ApplicationLogicError("Lhub auth details not found");
 		String clientKey = authDetailsRes.get().getValue();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", "Bearer " + accessToken);
-substitute based on requirement
+		headers.set("Client_Id", clientId);
 		headers.set("Api_Key", clientKey);
 		return headers;
 	}
@@ -1003,13 +1003,13 @@ substitute based on requirement
 			throws JsonParseException, JsonMappingException, IOException {
 		long lastOnlineCertificationSubmission = 0;
 		String url = serverProp.getIapCertificationUrl();
-substitute based on requirement
-substitute based on requirement
+		String clientId = serverProp.getIapCertificationClientId();
+		String clientSecret = serverProp.getIapCertificationClientSecret();
 
 		Map<String, Object> request = new HashMap<String, Object>();
 		request.put("userId", userEmail);
-substitute based on requirement
-substitute based on requirement
+		request.put("clientId", clientId);
+		request.put("clientSecret", clientSecret);
 		ResponseEntity<String> responseEntity = null;
 		try {
 			HttpHeaders headers = new HttpHeaders();

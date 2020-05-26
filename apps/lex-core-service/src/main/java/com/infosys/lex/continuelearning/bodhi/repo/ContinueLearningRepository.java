@@ -15,13 +15,13 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.continuelearning.bodhi.repo;
 
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.continuelearning.entities.ContinueLearning;
+import com.infosys.lex.continuelearning.entities.ContinueLearningKey;
 
 @Repository
 public interface ContinueLearningRepository extends CassandraRepository<ContinueLearning, ContinueLearningKey> {

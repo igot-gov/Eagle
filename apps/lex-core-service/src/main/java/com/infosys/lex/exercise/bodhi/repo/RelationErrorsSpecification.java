@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.bodhi.repo;
 
 public class RelationErrorsSpecification {
 	public String Relations;

@@ -15,11 +15,11 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.assessment.service;
 
 import java.util.Map;
 
-substitute url based on requirement
+import com.infosys.lex.assessment.dto.AssessmentSubmissionDTO;
 
 public interface AssessmentService {
 

@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.common.util;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.AppConfig;
+import com.infosys.lex.common.bodhi.repo.AppConfigPrimaryKey;
+import com.infosys.lex.common.bodhi.repo.AppConfigRepository;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
 
 @Component
 public class ValidLanguages {

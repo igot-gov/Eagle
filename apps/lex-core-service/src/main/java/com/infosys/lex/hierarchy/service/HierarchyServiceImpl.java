@@ -1,5 +1,5 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-url-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.hierarchy.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,19 +38,19 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http-url-url.HttpEntity;
-import org.springframework.http-url-url.HttpHeaders;
-import org.springframework.http-url-url.MediaType;
-import org.springframework.http-url-url.ResponseEntity;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.hierarchy.properties.HierarchyProperties;
+import com.infosys.lex.progress.service.ContentProgressService;
 
 @Service
 public class HierarchyServiceImpl implements HierarchyService {
@@ -127,7 +127,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 			if(skipAccessCheck==null||skipAccessCheck==false) {
 			// restCall for accessCheck
 			String urlPostFix = "/accesscontrol/users/contents?rootOrg=@rootOrg";
-			String sbExtUrl = "http-url-url://" + accessProps.getSbExtIp() + ":" + accessProps.getSbExtPort() + urlPostFix;
+			String sbExtUrl = "http://" + accessProps.getSbExtIp() + ":" + accessProps.getSbExtPort() + urlPostFix;
 
 			sbExtUrl = sbExtUrl.replace("@rootOrg", rootOrg);
 			HttpHeaders headers = new HttpHeaders();
@@ -479,7 +479,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 //			result = (Map<String, Object>) result.get("response");
 
 			String urlPostFix = "/accesscontrol/users/contents?rootOrg=@rootOrg";
-			String sbExtUrl = "http-url-url://" + accessProps.getSbExtIp() + ":" + accessProps.getSbExtPort() + urlPostFix;
+			String sbExtUrl = "http://" + accessProps.getSbExtIp() + ":" + accessProps.getSbExtPort() + urlPostFix;
 			List<Map<String, Object>> metaList = new ArrayList<>();
 
 			sbExtUrl = sbExtUrl.replace("@rootOrg", rootOrg);

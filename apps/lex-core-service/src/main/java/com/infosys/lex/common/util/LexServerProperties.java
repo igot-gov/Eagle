@@ -15,8 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
-
+package com.infosys.lex.common.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -75,10 +74,10 @@ public class LexServerProperties {
 	private String logAccessKey;
 
 	@Value("${client.id}")
-substitute based on requirement
+	private String clientId;
 
-substitute based on requirement
-substitute based on requirement
+	@Value("${client.secret}")
+	private String clientSecret;
 
 	@Value("${lhub.url}")
 	private String lhubUrl;
@@ -89,11 +88,11 @@ substitute based on requirement
 	@Value("${iap.submission.url}")
 	private String iapSubmissonsUrl;
 
-substitute based on requirement
-substitute based on requirement
+	@Value("${iap.submission.clientId}")
+	private String iapSubmissonsClientId;
 
-substitute based on requirement
-substitute based on requirement
+	@Value("${iap.submission.clientSecret}")
+	private String iapSubmissonsClientSecret;
 
 	@Value("${enable.realtime}")
 	private Boolean enableRealTime;
@@ -101,18 +100,19 @@ substitute based on requirement
 	@Value("${content.service.host}")
 	private String contentServiceHost;
 
-substitute based on requirement
-substitute based on requirement
+	@Value("${lhub.auth.clientid}")
+	private String lhubAthClientId;
 
-substitute based on requirement
-substitute based on requirement
+	@Value("${iap.certification.clientId}")
+	private String iapCertificationClientId;
 
 	@Value("${iap.certification.url}")
 	private String iapCertificationUrl;
 
-substitute based on requirement
-substitute based on requirement
 
+	@Value("${iap.certification.clientSecret}")
+	private String iapCertificationClientSecret;
+	
 	@Value("${com.infosys.root-org}")
 	private String defAccessPathRootOrg;
 
@@ -223,9 +223,9 @@ substitute based on requirement
 		this.selfReplyAllow = selfReplyAllow;
 	}
 
-substitute based on requirement
-substitute based on requirement
-	}
+//substitute based on requirement
+//substitute based on requirement
+//	}
 
 	public String getDefAccessPathRootOrg() {
 		return defAccessPathRootOrg;
@@ -243,9 +243,9 @@ substitute based on requirement
 		this.defAccessPathOrg = defAccessPathOrg;
 	}
 
-substitute based on requirement
-substitute based on requirement
-	}
+//substitute based on requirement
+//substitute based on requirement
+//	}
 
 	public String getIapCertificationUrl() {
 		return iapCertificationUrl;
@@ -255,12 +255,12 @@ substitute based on requirement
 		this.iapCertificationUrl = iapCertificationUrl;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getIapCertificationClientSecret() {
+		return iapCertificationClientSecret;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setIapCertificationClientSecret(String iapCertificationClientSecret) {
+		this.iapCertificationClientSecret = iapCertificationClientSecret;
 	}
 
 	@Value("${sbext.service.host}")
@@ -290,20 +290,20 @@ substitute based on requirement
 		this.enableRealTime = enableRealTime;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getClientId() {
+		return clientId;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getClientSecret() {
+		return clientSecret;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setClientSecret(String clientSecret) {
+		this.clientSecret = clientSecret;
 	}
 
 	public String getContentServicePort() {
@@ -474,20 +474,20 @@ substitute based on requirement
 		this.iapSubmissonsUrl = iapSubmissonsUrl;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getIapSubmissonsClientId() {
+		return iapSubmissonsClientId;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setIapSubmissonsClientId(String iapSubmissonsClientId) {
+		this.iapSubmissonsClientId = iapSubmissonsClientId;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getIapSubmissonsClientSecret() {
+		return iapSubmissonsClientSecret;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setIapSubmissonsClientSecret(String iapSubmissonsClientSecret) {
+		this.iapSubmissonsClientSecret = iapSubmissonsClientSecret;
 	}
 
 	public String getLhubCertificationUrl() {
@@ -498,12 +498,12 @@ substitute based on requirement
 		this.lhubCertificationUrl = lhubCertificationUrl;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getLhubAthClientId() {
+		return lhubAthClientId;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setLhubAthClientId(String lhubAthClientId) {
+		this.lhubAthClientId = lhubAthClientId;
 	}
 
 //	@Override

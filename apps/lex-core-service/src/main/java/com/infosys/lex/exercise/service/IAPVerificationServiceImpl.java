@@ -1,5 +1,5 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -16,21 +16,21 @@ Highly Confidential
  
 */
 
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http-url.HttpHeaders;
-import org.springframework.http-url.MediaType;
-import org.springframework.http-url.ResponseEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
 
 @Service
 public class IAPVerificationServiceImpl implements IAPVerificationService {
@@ -48,7 +48,7 @@ public class IAPVerificationServiceImpl implements IAPVerificationService {
 	public String postSolutionString(String url, String entityData) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		org.springframework.http-url.HttpEntity<String> entity = new org.springframework.http-url.HttpEntity<String>(entityData,
+		org.springframework.http.HttpEntity<String> entity = new org.springframework.http.HttpEntity<String>(entityData,
 				headers);
 		return restTemplate.postForObject(url, entity, String.class);
 	}
@@ -73,7 +73,7 @@ public class IAPVerificationServiceImpl implements IAPVerificationService {
 				String contentHost = props.getContentServiceHost();
 				String contentPort = props.getBodhiContentPort();
 
-				String fetchUrl = "http-url://" + contentHost + ":" + contentPort + "/contentv3/download/"
+				String fetchUrl = "http://" + contentHost + ":" + contentPort + "/contentv3/download/"
 						+ urlEncodedLocation;
 				ResponseEntity<String> response = restTemplate.getForEntity(fetchUrl, String.class);
 

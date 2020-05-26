@@ -16,7 +16,7 @@
 //
 // */
 //
-substitute url based on requirement
+//substitute url based on requirement
 //
 //import java.util.Properties;
 //
@@ -36,9 +36,9 @@ substitute url based on requirement
 //
 //@Configuration
 //@ConfigurationProperties(prefix = "data.datasource")
-substitute url based on requirement
-substitute url based on requirement
-//
+//substitute url based on requirement
+//substitute url based on requirement
+////
 //public class ConfigurationsDBPG {
 //
 //	// Providing connection params
@@ -46,15 +46,15 @@ substitute url based on requirement
 //	private String url;
 //	@Value("${data.datasource.username}")
 //	private String username;
-substitute based on requirement
-substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
 //
 //	@Bean("secondDataSource")
 //	public DataSource secondDataSource() {
 //		DriverManagerDataSource dataSourceBuilder = new DriverManagerDataSource();
 //		dataSourceBuilder.setUrl(url);
 //		dataSourceBuilder.setUsername(username);
-substitute based on requirement
+//substitute based on requirement
 //		return dataSourceBuilder;
 ////		return DataSourceBuilder.create().build();
 //	}
@@ -64,7 +64,7 @@ substitute based on requirement
 //		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 //		em.setDataSource(secondDataSource());
 //		em.setPackagesToScan(
-substitute url based on requirement
+//substitute url based on requirement
 //		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 //		em.setJpaVendorAdapter(vendorAdapter);
 //		em.setJpaProperties(hibernateProperties());
@@ -84,7 +84,7 @@ substitute url based on requirement
 //	public LocalSessionFactoryBean SessionFactorySecond() {
 //		LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
 //		sessionFactoryBean.setDataSource(secondDataSource());
-substitute url based on requirement
+//substitute url based on requirement
 //		sessionFactoryBean.setHibernateProperties(hibernateProperties());
 //		return sessionFactoryBean;
 //	}
@@ -96,7 +96,7 @@ substitute url based on requirement
 //		properties.put("hibernate.temp.use_jdbc_metadata_defaults", false);
 //		properties.put("hibernate.show_sql", true);
 //		properties.put("hibernate.format_sql", true);
-substitute url based on requirement
+//substitute url based on requirement
 //		properties.put("connection.release_mode", "auto");
 //		return properties;
 //	}

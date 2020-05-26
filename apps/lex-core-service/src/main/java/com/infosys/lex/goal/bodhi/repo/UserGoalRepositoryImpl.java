@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.goal.bodhi.repo;
 
 import static com.datastax.driver.core.querybuilder.QueryBuilder.eq;
 
@@ -36,7 +36,7 @@ import com.datastax.driver.core.Statement;
 import com.datastax.driver.core.querybuilder.Delete;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Update.Where;
-substitute url based on requirement
+import com.infosys.lex.goal.dto.CreateGoalDTO;
 
 @Repository
 public class UserGoalRepositoryImpl implements UserGoalCustomRepository {

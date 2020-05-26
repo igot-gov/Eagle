@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.core.logger;
 
 import java.util.HashMap;
 import java.util.Map;

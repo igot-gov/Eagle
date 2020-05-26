@@ -15,7 +15,8 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+//package com.infosys.lex.common.util;
+
 //
 //import java.lang.reflect.Field;
 //
@@ -26,8 +27,8 @@ substitute url based on requirement
 //import org.apache.logging.log4j.core.pattern.LogEventPatternConverter;
 //import org.springframework.context.ApplicationContext;
 //
-substitute url based on requirement
-substitute url based on requirement
+//import com.infosys.lex.common.util.DatabaseProperties;
+//import com.infosys.lex.core.config.SpringContext;
 //
 //@Plugin(name = "LogMask", category = "Converter")
 //@ConverterKeys({ "convMessage", "conMsg" })

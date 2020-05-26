@@ -1,14 +1,14 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.core.config;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
-substitute based on requirement
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.BasicCredentialsProvider;
@@ -19,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-substitute url based on requirement
+import com.infosys.lex.common.util.DatabaseProperties;
 
 @Configuration
 public class ElasticsearchConfig {
@@ -32,7 +32,7 @@ public class ElasticsearchConfig {
 
 		final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		credentialsProvider.setCredentials(AuthScope.ANY,
-substitute based on requirement
+				new UsernamePasswordCredentials(dbProperties.getElasticUser(), dbProperties.getElasticPassword()));
 
 		String[] elasticIps = dbProperties.getElasticIp().toString().split(",");
 		String[] elasticPorts=dbProperties.getElasticPort().toString().split(",");

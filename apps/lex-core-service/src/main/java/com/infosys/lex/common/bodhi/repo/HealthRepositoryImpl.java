@@ -1,5 +1,5 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-url-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.bodhi.repo;
 
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthRequest;
 import org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
@@ -23,7 +23,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.cluster.health.ClusterHealthStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http-url-url.ResponseEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -42,7 +42,7 @@ public class HealthRepositoryImpl implements HealthRepository {
 	@Override
 	public Boolean checkElasticSearch() {
 		try {
-substitute url based on requirement
+			ClusterHealthRequest request = new ClusterHealthRequest("lexcontentindex");
 			ClusterHealthResponse response = client.cluster().health(request, RequestOptions.DEFAULT);
 
 			ClusterHealthStatus status = response.getStatus();
@@ -62,7 +62,7 @@ substitute url based on requirement
 	@Override
 	public Boolean checkContentStore(String contentHost, String contentPort) {
 		try {
-			ResponseEntity<String> response = restTemplate.getForEntity("http-url-url://" + contentHost + ":" + contentPort
+			ResponseEntity<String> response = restTemplate.getForEntity("http://" + contentHost + ":" + contentPort
 					+ "/content/Images/AppImages/LexHeader.png?type=artifacts", String.class);
 			if (response.getStatusCodeValue() >= 300)
 				return false;
@@ -79,7 +79,7 @@ substitute url based on requirement
 	public Boolean checkSbExt(String contentHost, String contentPort) {
 		try {
 			ResponseEntity<String> response = restTemplate.getForEntity(
-					"http-url-url://" + contentHost + ":" + contentPort + "/v1/application/check-connection", String.class);
+					"http://" + contentHost + ":" + contentPort + "/v1/application/check-connection", String.class);
 			if (response.getStatusCodeValue() >= 300)
 				return false;
 			return true;

@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.faq.postgredb.repository;
 
 import java.util.List;
 import java.util.Map;
@@ -11,9 +11,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.faq.postgredb.entity.FaqQuestion;
+import com.infosys.lex.faq.postgredb.entity.FaqQuestionPrimaryKey;
+import com.infosys.lex.faq.postgredb.projection.FaqQuestionProjection;
 
 @Repository
 public interface FaqQuestionRepo extends JpaRepository<FaqQuestion, FaqQuestionPrimaryKey> {

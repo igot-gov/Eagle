@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.contentsource.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,21 +16,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.contentsource.bodhi.repo.ContentSourceUserRegistration;
+import com.infosys.lex.contentsource.bodhi.repo.ContentSourceUserRegistrationKey;
+import com.infosys.lex.contentsource.bodhi.repo.ContentSourceUserRegistrationProjection;
+import com.infosys.lex.contentsource.bodhi.repo.ContentSourceUserRegistrationRepo;
+import com.infosys.lex.contentsource.dto.ContentSourceNameListDto;
+import com.infosys.lex.contentsource.dto.ContentSourceUserDetailDto;
+import com.infosys.lex.contentsource.postgres.entity.ContentSource;
+import com.infosys.lex.contentsource.postgres.entity.ContentSourcePrimaryKey;
+import com.infosys.lex.contentsource.postgres.projection.ContentSourceProj;
+import com.infosys.lex.contentsource.postgres.projection.ContentSourceShortNameProj;
+import com.infosys.lex.contentsource.postgres.repo.ContentSourceRepository;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Service
 public class ContentSourceServiceImpl implements ContentSourceService {

@@ -15,9 +15,14 @@
  * Highly Confidential
  */
 
-substitute url based on requirement
+package com.infosys.lex.usermanagement.repository;
 
-substitute url based on requirement
+import com.infosys.lex.usermanagement.entity.LexUserEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

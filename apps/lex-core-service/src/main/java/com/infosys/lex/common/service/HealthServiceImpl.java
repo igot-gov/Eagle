@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,11 +25,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.badge.bodhi.repo.TotalPointsRepository;
+//import com.infosys.lex.badge.bodhi.repo.ConstantBadgeRepository;
+import com.infosys.lex.common.bodhi.repo.HealthRepository;
+import com.infosys.lex.common.mongo.repo.BatchExecutionRepository;
+
+import com.infosys.lex.common.util.LexServerProperties;
 
 @Service
 public class HealthServiceImpl implements HealthService {
@@ -44,7 +45,7 @@ public class HealthServiceImpl implements HealthService {
 	HealthRepository healthRepo;
 
 	@Autowired
-substitute url based on requirement
+	LexServerProperties lexServerProperties;
 
 	@Autowired
 	TotalPointsRepository pointsRepo;
@@ -57,10 +58,10 @@ substitute url based on requirement
 	@Override
 	public Map<String, Object> checkHealth() throws Exception {
 		Map<String, Object> healthMap = new HashMap<String, Object>();
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+		String sbExtHost = lexServerProperties.getSbextServiceHost();
+		String contentHost = lexServerProperties.getContentServiceHost();
+		String contentPort = lexServerProperties.getBodhiContentPort();
+		String sbExtPort = lexServerProperties.getSbextPort();
 
 		healthMap.put("cassandra", this.checkBodhiCassandra());
 		healthMap.put("mongo", this.checkMongo());

@@ -14,13 +14,13 @@
  * <p>
  * Highly Confidential
  */
-substitute url based on requirement
+package com.infosys.lex.usermanagement.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.usermanagement.entity.LexUserEntity;
+import com.infosys.lex.usermanagement.repository.LexUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,8 +35,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
-substitute url based on requirement
-
+    private LexUserRepository lexUserRepository;
+    
     @Autowired
     private UserUtilityService userUtilService;
 
@@ -57,8 +57,8 @@ substitute url based on requirement
         else
             throw new ResourceNotFoundException("Data not found for " + userId);
 
-substitute url based on requirement
-
+        Optional<LexUserEntity> data = lexUserRepository.findByEmail(userId);
+        
         if (data.isPresent()) {
             @SuppressWarnings("unchecked")
 			Map<String,Object> mappedValues = mapper.convertValue(data.get(), Map.class);

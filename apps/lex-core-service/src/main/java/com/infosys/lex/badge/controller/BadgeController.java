@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.badge.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.badge.postgredb.projection.BadgeDetailsProjection;
+import com.infosys.lex.badge.service.BadgeService;
 
 @RestController
 @CrossOrigin(origins = "*")

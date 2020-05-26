@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.certifications.controller;
 
 import java.io.IOException;
 import java.util.Map;
@@ -30,8 +30,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.certifications.service.IapCertificationsService;
+import com.infosys.lex.common.util.LexServerProperties;
 
 @RestController
 public class IapCertificationsController {
@@ -40,17 +40,17 @@ public class IapCertificationsController {
 	RestTemplate restTemplate;
 
 	@Autowired
-substitute url based on requirement
+	LexServerProperties lexServerProps;
 
 	@Autowired
 	IapCertificationsService certificationService;
 
 	@GetMapping("v1/InfyTQ/Attempts")
 	public ResponseEntity<Map<String, Object>> getAttempts(@RequestParam("userEmail") String userEmail,
-substitute url based on requirement
+			@RequestParam(name = "lexResourceId", required = true) String lexResourceId)
 			throws JsonParseException, JsonMappingException, IOException {
 
-substitute url based on requirement
+		Map<String, Object> responseMap = certificationService.getAttempts(userEmail, lexResourceId);
 		return new ResponseEntity<>(responseMap, HttpStatus.OK);
 	}
 }

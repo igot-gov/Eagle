@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.assessment.controller;
 
 import java.util.Map;
 
@@ -32,8 +32,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.assessment.dto.AssessmentSubmissionDTO;
+import com.infosys.lex.assessment.service.AssessmentService;
 
 @RestController
 @CrossOrigin(origins = "*")

@@ -15,15 +15,15 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.goal.service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.goal.dto.ActionDTO;
+import com.infosys.lex.goal.dto.GoalDTO;
 
 public interface GoalsService {
 
@@ -265,12 +265,12 @@ public interface GoalsService {
 	 * 
 	 * @param userUUID
 	 * @param goalId
-substitute url based on requirement
+	 * @param lexId
 	 * @param goalType
 	 * @return
 	 * @throws Exception
 	 */
-substitute url based on requirement
+	Map<String, Object> addContentToUserGoal(String userUUID, String goalId, String lexId, String goalType,
 			String rootOrg) throws Exception;
 
 	/**
@@ -302,7 +302,7 @@ substitute url based on requirement
 	 * @return
 	 * @throws Exception
 	 */
-substitute url based on requirement
+	Map<String, Object> deleteResourceFromUserGoal(String rootOrg, String userUUID, String goalId, String lexId,
 			String goalType) throws Exception;
 
 	List<Map<String, Object>> getGoalGroups(String rootOrg, String userUUID, String language)

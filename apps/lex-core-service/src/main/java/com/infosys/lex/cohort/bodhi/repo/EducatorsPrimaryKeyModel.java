@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.cohort.bodhi.repo;
 
 import java.io.Serializable;
 

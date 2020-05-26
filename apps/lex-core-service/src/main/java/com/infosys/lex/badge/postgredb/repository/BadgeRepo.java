@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.badge.postgredb.repository;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.badge.postgredb.entity.Badge;
+import com.infosys.lex.badge.postgredb.projection.BadgeDetailsProjection;
 
 @Repository
 public interface BadgeRepo extends JpaRepository<Badge, String> {

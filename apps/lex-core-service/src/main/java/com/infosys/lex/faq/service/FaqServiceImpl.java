@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.faq.service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -16,17 +16,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.datastax.driver.core.utils.UUIDs;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.util.ValidLanguages;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.faq.dto.FaqDto;
+import com.infosys.lex.faq.postgredb.entity.FaqGroup;
+import com.infosys.lex.faq.postgredb.entity.FaqGroupPrimaryKey;
+import com.infosys.lex.faq.postgredb.entity.FaqQuestion;
+import com.infosys.lex.faq.postgredb.entity.FaqQuestionPrimaryKey;
+import com.infosys.lex.faq.postgredb.projection.FaqGroupProjection;
+import com.infosys.lex.faq.postgredb.projection.FaqQuestionProjection;
+import com.infosys.lex.faq.postgredb.repository.FaqGroupRepo;
+import com.infosys.lex.faq.postgredb.repository.FaqQuestionRepo;
 
 @Service
 public class FaqServiceImpl implements FaqService {
@@ -225,7 +225,7 @@ substitute url based on requirement
 				&& !searchMap.get("query").toString().trim().isEmpty()) {
 			query = (String) searchMap.get("query");
 			// Explicitly defining english for langCode en so that postgres can convert it
-substitute url based on requirement
+//			to lexemes
 			String queryParam = new String();
 			if (langCode.equals("en")) {
 				queryParam = "english";

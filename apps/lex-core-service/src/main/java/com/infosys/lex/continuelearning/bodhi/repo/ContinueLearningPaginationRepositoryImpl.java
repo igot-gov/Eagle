@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.continuelearning.bodhi.repo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ import com.datastax.driver.core.exceptions.PagingStateException;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select;
 import com.datastax.driver.core.querybuilder.Select.Where;
-substitute url based on requirement
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Repository
 public class ContinueLearningPaginationRepositoryImpl implements ContinueLearningPaginationRepository {

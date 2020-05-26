@@ -15,15 +15,15 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.assessment.bodhi.repo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.cassandra.core.CassandraBatchOperations;
 import org.springframework.data.cassandra.core.CassandraOperations;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.assessment.bodhi.repo.UserAssessmentMasterModel;
+import com.infosys.lex.assessment.bodhi.repo.UserAssessmentSummaryModel;
 
 @Repository
 public class UserAssessmentMasterRepositoryImpl implements UserAssessmentMasterRepositoryCustom {

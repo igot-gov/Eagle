@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.progress.bodhi.repo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ import com.datastax.driver.core.ResultSet;
 import com.datastax.driver.core.Row;
 import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select.Where;
-substitute url based on requirement
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Repository
 public class ContentProgressOrderByLastAccessRepositoryImpl implements ContentProgressOrderByLastAccessRepositoryCustom {

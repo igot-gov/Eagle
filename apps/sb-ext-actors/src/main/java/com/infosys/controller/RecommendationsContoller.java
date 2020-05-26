@@ -9,6 +9,7 @@ import com.infosys.search.validations.model.ValidatedSearchData;
 import com.infosys.service.RecommendationsService;
 import com.infosys.service.TopicService;
 import com.infosys.util.ErrorGenerator;
+import com.infosys.util.LexConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.env.Environment;

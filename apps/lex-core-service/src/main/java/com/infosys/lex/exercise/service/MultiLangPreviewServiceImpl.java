@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-urls://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,22 +13,22 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.AccessForbidenError;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.exercise.bodhi.repo.ExerciseRepository;
+import com.infosys.lex.exercise.dto.AssignmentSubmissionDTO;
+import com.infosys.lex.exercise.dto.SubmitDataDTO;
+import com.infosys.lex.exercise.util.MultiLangVerificationUtilService;
 
 @Service
 @Qualifier("multiLangVerificationPreview")
 public class MultiLangPreviewServiceImpl implements VerificationPreviewService {
 
 	private final UserUtilityService userUtilService;
-substitute url based on requirement
+	private final LexServerProperties lexServerProperties;
 	private final IAPVerificationService iapVerificationService;
 	private final ExerciseRepository exerciseRepo;
 	private final MultiLangVerificationUtilService utilServ;
@@ -37,10 +37,10 @@ substitute url based on requirement
 	
 	@Autowired
 	public MultiLangPreviewServiceImpl(UserUtilityService userUtilService,
-substitute url based on requirement
+			LexServerProperties lexServerProperties, IAPVerificationService iapVerificationService,
 			ExerciseRepository exerciseRepo, MultiLangVerificationUtilService utilServ) {
 		this.userUtilService = userUtilService;
-substitute url based on requirement
+		this.lexServerProperties = lexServerProperties;
 		this.iapVerificationService = iapVerificationService;
 		this.exerciseRepo = exerciseRepo;
 		this.utilServ = utilServ;
@@ -146,9 +146,9 @@ substitute url based on requirement
 	private Map<String, Object> allLangVerify(JSONObject testcaseArray, String verifyJson, AssignmentSubmissionDTO data)
 			throws Exception {
 		String responseData = null;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+		String serviceIp = lexServerProperties.getIapServiceIp();
+		String servicePort = lexServerProperties.getIapServicePort();
+		String serviceName = lexServerProperties.getIapServiceName();
 
 		String url = "http-url://" + serviceIp + ":" + servicePort + serviceName;
 

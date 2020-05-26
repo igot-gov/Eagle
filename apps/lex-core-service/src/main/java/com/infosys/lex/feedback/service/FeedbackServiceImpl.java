@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.feedback.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,23 +23,24 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.AppConfig;
+import com.infosys.lex.common.bodhi.repo.AppConfigPrimaryKey;
+import com.infosys.lex.common.bodhi.repo.AppConfigRepository;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.AccessForbidenError;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.feedback.dto.Feedback;
+import com.infosys.lex.feedback.dto.FeedbackSearchDTO;
+import com.infosys.lex.feedback.dto.FeedbackSubmitDTO;
+import com.infosys.lex.feedback.repo.FeedbackCRUD;
+import com.infosys.lex.userroles.service.UserRolesService;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
@@ -52,7 +53,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 	RestTemplate restTemplate;
 
 	@Autowired
-substitute url based on requirement
+	LexServerProperties lexServerProps;
 
 	@Autowired
 	UserUtilityService userUtilityService;
@@ -265,7 +266,7 @@ substitute url based on requirement
 			notification.put("target-data", targetData);
 			HttpHeaders headers = new HttpHeaders();
 			headers.set("rootOrg", rootOrg);
-substitute url based on requirement
+			String url = "http://" + lexServerProps.getNotifIp() + ":" + lexServerProps.getNotifPort()
 					+ "/v1/notification/event";
 			headers.set("rootOrg", rootOrg);
 			try {

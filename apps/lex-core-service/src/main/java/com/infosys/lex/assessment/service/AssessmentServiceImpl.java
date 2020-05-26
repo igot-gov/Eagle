@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.assessment.service;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -29,17 +29,16 @@ import java.util.TreeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.assessment.bodhi.repo.AssessmentRepository;
+import com.infosys.lex.assessment.dto.AssessmentSubmissionDTO;
+import com.infosys.lex.assessment.util.AssessmentUtilService;
+import com.infosys.lex.badge.bodhi.repo.BadgeRepository;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.ContentMetaConstants;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.progress.service.ContentProgressService;
 
 @Service
 public class AssessmentServiceImpl implements AssessmentService {

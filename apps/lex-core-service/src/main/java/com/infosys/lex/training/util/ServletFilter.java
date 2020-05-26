@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.training.util;
 
 import java.io.IOException;
 
@@ -31,9 +31,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.AccessTokenService;
+import com.infosys.lex.common.service.LoggerService;
+import com.infosys.lex.core.logger.LexLogger;
 
 @WebFilter(urlPatterns = "/lHub/*")
 @Order(Ordered.LOWEST_PRECEDENCE)

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.cohort.service;
 
 import java.io.IOException;
 import java.util.List;

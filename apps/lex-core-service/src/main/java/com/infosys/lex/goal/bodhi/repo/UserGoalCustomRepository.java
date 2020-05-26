@@ -15,14 +15,14 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.goal.bodhi.repo;
 
 import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
 import com.datastax.driver.core.Statement;
-substitute url based on requirement
+import com.infosys.lex.goal.dto.CreateGoalDTO;
 
 public interface UserGoalCustomRepository {
 

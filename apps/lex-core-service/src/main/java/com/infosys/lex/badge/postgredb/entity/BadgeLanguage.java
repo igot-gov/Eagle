@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.badge.postgredb.entity;
 
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;

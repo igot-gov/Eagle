@@ -109,6 +109,7 @@
       true,
       "no-public"
     ],
+    "max-line-length": [false],
     "new-parens": true,
     "no-angle-bracket-type-assertion": true,
     "no-any": true,

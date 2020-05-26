@@ -773,7 +773,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 			postParameters.add(new BasicNameValuePair("client_id", "c6597d0b-c629-4885-a53c-44490643ddda"));
 			postParameters.add(new BasicNameValuePair("refresh_token", refresh_token));
-			postParameters.add(new BasicNameValuePair("redirect_uri", "url";
+			postParameters.add(new BasicNameValuePair("redirect_uri", "url"));
 			postParameters.add(new BasicNameValuePair("grant_type", "refresh_token"));
 			postParameters.add(new BasicNameValuePair("client_secret", "514sYsYWUtkP1ViUvrToJgIJOQfN7Ijnwo4I7pZbxWw="));
 			postRequest.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
@@ -1087,7 +1087,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	public List<Map<String, Object>> getUserSuggestionsForQuery(String searchString) throws Exception {
 		List<Map<String, Object>> userList = new ArrayList<>();
 		try {
-			SearchRequest req = new SearchRequest().indices(LexProjectUtil.EsIndex.UserAutoComplete.getIndexName())
+			SearchRequest req = new SearchRequest().indices(LexProjectUtil.EsIndex.lexUserAutoComplete.getIndexName())
 					.types(LexProjectUtil.EsType.autoCompleteType.getTypeName()).searchType(SearchType.QUERY_THEN_FETCH)
 					.source(new SearchSourceBuilder()
 							.query(QueryBuilders.boolQuery().should(QueryBuilders.matchQuery("email", searchString))
@@ -1127,7 +1127,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		source.put(JsonKey.EMAIL, email);
 		source.put(JsonKey.ID, id);
 		source.put(JsonKey.NAME, name);
-		ElasticSearchUtil.upsertData(LexProjectUtil.EsIndex.UserAutoComplete.getIndexName(),
+		ElasticSearchUtil.upsertData(LexProjectUtil.EsIndex.lexUserAutoComplete.getIndexName(),
 				LexProjectUtil.EsType.autoCompleteType.getTypeName(), email, source);
 //		Client client = ConnectionManager.getClient();
 //		client.prepareIndex(LexProjectUtil.EsIndex.UserAutoComplete.getIndexName(),

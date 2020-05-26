@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.leaderboard.service;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -24,15 +24,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.mongo.repo.BatchExecutionData;
+import com.infosys.lex.common.mongo.repo.BatchExecutionRepository;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.exception.NoContentException;
+import com.infosys.lex.leaderboard.bodhi.repo.LeaderBoardRankRepository;
+import com.infosys.lex.leaderboard.bodhi.repo.LeaderBoardRepository;
 
 @Service
 public class LeaderBoardServiceImpl implements LeaderBoardService {

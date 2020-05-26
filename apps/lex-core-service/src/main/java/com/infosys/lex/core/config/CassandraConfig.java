@@ -15,7 +15,7 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+//substitute url based on requirement
 //
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;

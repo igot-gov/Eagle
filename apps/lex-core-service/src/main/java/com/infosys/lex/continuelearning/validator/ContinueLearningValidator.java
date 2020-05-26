@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.continuelearning.validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,10 +26,10 @@ import org.springframework.stereotype.Component;
 
 import com.datastax.driver.core.PagingState;
 import com.datastax.driver.core.exceptions.PagingStateException;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
 
 @Component
 public class ContinueLearningValidator {

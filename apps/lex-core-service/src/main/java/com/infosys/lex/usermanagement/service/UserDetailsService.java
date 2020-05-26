@@ -14,7 +14,7 @@
  * <p>
  * Highly Confidential
  */
-substitute url based on requirement
+package com.infosys.lex.usermanagement.service;
 
 import java.util.ArrayList;
 import java.util.Map;

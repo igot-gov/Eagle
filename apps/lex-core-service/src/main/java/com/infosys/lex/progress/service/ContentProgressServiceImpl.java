@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.progress.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,23 +32,23 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.sunbird.repo.UserMVRepository;
+import com.infosys.lex.common.sunbird.repo.UserRepository;
+import com.infosys.lex.contentsource.postgres.projection.ContentSourceProj;
+import com.infosys.lex.contentsource.service.ContentSourceService;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.progress.bodhi.repo.ContentProgress;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressPrimaryKeyModel;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
+import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
+import com.infosys.lex.progress.dto.ContentProgressDTO;
+import com.infosys.lex.progress.dto.ExternalProgressDTO;
 
 @Service
 public class ContentProgressServiceImpl implements ContentProgressService {
@@ -75,7 +75,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	ContentSourceService contentSourceService;
 
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-substitute url based on requirement
+	private LexLogger logger = new LexLogger(getClass().getName());
 
 	/*
 	 * (non-Javadoc)
@@ -694,7 +694,7 @@ substitute url based on requirement
 		List<String> contentList = Arrays.asList("Course", "Collection", "Resource", "Learning Path");
 		
 //		System.out.println(contentSourceMap);
-substitute url based on requirement
+//		contentSourceMap.put("Lex",true);
 		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandSource(idsList,
 				new String[] { "identifier", "children.identifier", "mimeType", "contentType", "resourceType",
 						"sourceShortName", "learningMode", "isExternal" },
@@ -706,7 +706,7 @@ substitute url based on requirement
 		}
 		for (Map<String, Object> source : searchHits) {
 
-substitute url based on requirement
+			// this flag is to mark if for this lex id the progress is provided from
 			// external source in which case the markAsComplete reason would remain same
 			// whether its
 			// completed or not

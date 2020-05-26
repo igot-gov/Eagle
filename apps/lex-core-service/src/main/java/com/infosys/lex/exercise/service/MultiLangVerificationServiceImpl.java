@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.exercise.service;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,16 +29,16 @@ import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.core.exception.InvalidDataInputException;
+import com.infosys.lex.exercise.bodhi.repo.ExerciseRepository;
+import com.infosys.lex.exercise.dto.AssignmentSubmissionDTO;
+import com.infosys.lex.exercise.dto.SubmitDataDTO;
+import com.infosys.lex.exercise.util.MultiLangVerificationUtilService;
 
 @Service
 @Qualifier("multiLangVerification")
@@ -46,7 +46,7 @@ public class MultiLangVerificationServiceImpl implements VerificationService {
 
 	private final UserUtilityService userUtilService;
 	private final ContentService contentService;
-substitute url based on requirement
+	private final LexServerProperties lexServerProperties;
 	private final IAPVerificationService iapVerificationService;
 	private final ExerciseRepository exerciseRepo;
 	private final MultiLangVerificationUtilService utilServ;
@@ -54,11 +54,11 @@ substitute url based on requirement
 	
 	@Autowired
 	public MultiLangVerificationServiceImpl(UserUtilityService userUtilService, ContentService contentService,
-substitute url based on requirement
+			LexServerProperties lexServerProperties, IAPVerificationService iapVerificationService,
 			ExerciseRepository exerciseRepo, MultiLangVerificationUtilService exerciseUtilServ) {
 		this.userUtilService = userUtilService;
 		this.contentService = contentService;
-substitute url based on requirement
+		this.lexServerProperties = lexServerProperties;
 		this.iapVerificationService = iapVerificationService;
 		this.exerciseRepo = exerciseRepo;
 		this.utilServ = exerciseUtilServ;
@@ -178,9 +178,9 @@ substitute url based on requirement
 	private Map<String, Object> allLangVerify(JSONObject testcaseArray, String verifyJson, AssignmentSubmissionDTO data)
 			throws Exception {
 		String responseData = null;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+		String serviceIp = lexServerProperties.getIapServiceIp();
+		String servicePort = lexServerProperties.getIapServicePort();
+		String serviceName = lexServerProperties.getIapServiceName();
 
 		String url = "http-url://" + serviceIp + ":" + servicePort + serviceName;
 

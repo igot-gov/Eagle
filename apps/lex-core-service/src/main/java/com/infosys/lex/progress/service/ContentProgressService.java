@@ -15,16 +15,16 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.progress.service;
 
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
+import com.infosys.lex.progress.dto.ContentProgressDTO;
+import com.infosys.lex.progress.dto.ExternalProgressDTO;
 
 public interface ContentProgressService {
 

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.continuelearning.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -35,8 +35,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.continuelearning.dto.ContinueLearningDTO;
+import com.infosys.lex.continuelearning.service.ContinueLearningService;
 
 @RestController
 @CrossOrigin(origins = "*")

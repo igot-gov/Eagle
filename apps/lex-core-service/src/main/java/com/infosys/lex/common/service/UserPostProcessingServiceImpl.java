@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.service;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
@@ -29,19 +29,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.datastax.driver.core.utils.UUIDs;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesModel;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesPrimaryKeyModel;
+import com.infosys.lex.common.bodhi.repo.AppConfig;
+import com.infosys.lex.common.bodhi.repo.AppConfigPrimaryKey;
+import com.infosys.lex.common.bodhi.repo.AppConfigRepository;
+import com.infosys.lex.common.bodhi.repo.EmailToGroupRepository;
+import com.infosys.lex.common.bodhi.repo.UserAccessPathsModel;
+import com.infosys.lex.common.bodhi.repo.UserAccessPathsPrimaryKeyModel;
+import com.infosys.lex.common.bodhi.repo.UserAccessPathsRepository;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.exception.BadRequestException;
 
 @Service
 public class UserPostProcessingServiceImpl implements UserPostProcessingService {
@@ -52,13 +52,13 @@ public class UserPostProcessingServiceImpl implements UserPostProcessingService 
 	UserUtilityService userUtilitySvc;
 	UserBadgeRepository userBadge;
 	RestHighLevelClient esClient;
-substitute url based on requirement
+	LexServerProperties lexServerProps;
 	AppConfigRepository appConfigRepository;
 
 	@Autowired
 	public UserPostProcessingServiceImpl(UserUtilityService userSvc, UserAccessPathsRepository userAccessPathsRepo,
 			EmailToGroupRepository emailToGroupRepo, UserUtilityService userUtilitySvc, UserBadgeRepository userBadge,
-substitute url based on requirement
+			RestHighLevelClient esClient, LexServerProperties lexServerProps, AppConfigRepository appConfigRepository) {
 
 		this.userSvc = userSvc;
 		this.userAccessPathsRepo = userAccessPathsRepo;
@@ -66,7 +66,7 @@ substitute url based on requirement
 		this.userUtilitySvc = userUtilitySvc;
 		this.userBadge = userBadge;
 		this.esClient = esClient;
-substitute url based on requirement
+		this.lexServerProps = lexServerProps;
 		this.appConfigRepository = appConfigRepository;
 	}
 

@@ -15,11 +15,11 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+//substitute url based on requirement
 //
 //import java.util.List;
 //
-substitute url based on requirement
+//substitute url based on requirement
 //
 //public interface BadgeAssignmentPG {
 //

@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.correction.controller;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-substitute url based on requirement
+import com.infosys.lex.correction.service.UserDataCorrectionService;
 
 @RestController
 @CrossOrigin(origins = "*")

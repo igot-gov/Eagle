@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.common.constants;
 
 /**
  * This class will contains all the key related to request and response.
@@ -98,7 +98,7 @@ public final class JsonKey {
   public static final String CHILDREN = "children";
   public static final String CITY = "city";
   public static final String CLASS = "class";
-substitute based on requirement
+  public static final String CLIENT_ID = "clientId";
   public static final String CLIENT_INFO_DB = "clientInfo_db";
   public static final String CLIENT_NAME = "clientName";
   public static final String CLIENT_NAMES = "client.names";
@@ -162,7 +162,7 @@ substitute based on requirement
   public static final String DATE_TIME = "dateTime";
   public static final String DB_IP = "db.ip";
   public static final String DB_KEYSPACE = "db.keyspace";
-substitute based on requirement
+  public static final String DB_PASSWORD = "db.password";
   public static final String DB_PORT = "db.port";
   public static final String DB_USERNAME = "db.username";
   public static final String DEFAULT_ACTION_NAME = "Download Reports";
@@ -205,7 +205,7 @@ substitute based on requirement
   public static final String EMAIL_REQUEST = "emailReq";
   public static final String EMAIL_SERVER_FROM = "sunbird_mail_server_from_email";
   public static final String EMAIL_SERVER_HOST = "sunbird_mail_server_host";
-substitute based on requirement
+  public static final String EMAIL_SERVER_PASSWORD = "sunbird_mail_server_password";
   public static final String EMAIL_SERVER_PORT = "sunbird_mail_server_port";
   public static final String EMAIL_SERVER_USERNAME = "sunbird_mail_server_username";
   public static final String EMAIL_TEMPLATE_TYPE = "emailTemplateType";
@@ -339,7 +339,7 @@ substitute based on requirement
   public static final String MISSING_FIELDS = "missingFields";
   public static final String MOBILE = "mobile";
   public static final String NAME = "name";
-substitute based on requirement
+  public static final String NEW_PASSWORD = "newPassword";
   public static final String NO_OF_LECTURES = "noOfLectures";
   public static final String NO_OF_MEMBERS = "noOfMembers";
   public static final String NOT_AVAILABLE = "NA";
@@ -391,7 +391,7 @@ substitute based on requirement
   public static final String PARENT_OF = "parentOf";
   public static final String PARENT_ORG_ID = "parentOrgId";
   public static final String PARTICIPANT = "participant";
-substitute based on requirement
+  public static final String PASSWORD = "password";
   public static final String PDATA = "pdata";
 
   public static final String PERCENTAGE = "percentage";
@@ -481,9 +481,9 @@ substitute based on requirement
   public static final String SOURCE = "source";
   public static final String SOURCE_HEADER = "X-Source";
   public static final String SPLIT = "split";
-substitute based on requirement
-substitute based on requirement
-substitute based on requirement
+  public static final String SSO_CLIENT_ID = "sso.client.id";
+  public static final String SSO_CLIENT_SECRET = "sso.client.secret";
+  public static final String SSO_PASSWORD = "sso.password";
   public static final String SSO_POOL_SIZE = "sso.connection.pool.size";
   public static final String SSO_PUBLIC_KEY = "sunbird_sso_publickey";
   public static final String SSO_REALM = "sso.realm";
@@ -508,7 +508,7 @@ substitute based on requirement
   public static final String SUNBIRD_CASSANDRA_IP = "sunbird_cassandra_host";
   public static final String SUNBIRD_CASSANDRA_KEYSPACE = "sunbird_cassandra_keyspace";
   public static final String SUNBIRD_CASSANDRA_MODE = "sunbird_cassandra_mode";
-substitute based on requirement
+  public static final String SUNBIRD_CASSANDRA_PASSWORD = "sunbird_cassandra_password";
   public static final String SUNBIRD_CASSANDRA_PORT = "sunbird_cassandra_port";
   public static final String SUNBIRD_CASSANDRA_USER_NAME = "sunbird_cassandra_username";
   public static final String SUNBIRD_ENCRYPTION = "sunbird_encryption";
@@ -523,14 +523,14 @@ substitute based on requirement
   public static final String SUNBIRD_NETTY_PORT = "sunbird_netty_port";
   public static final String SUNBIRD_PG_DB = "sunbird_pg_db";
   public static final String SUNBIRD_PG_HOST = "sunbird_pg_host";
-substitute based on requirement
+  public static final String SUNBIRD_PG_PASSWORD = "sunbird_pg_password";
   public static final String SUNBIRD_PG_PORT = "sunbird_pg_port";
   public static final String SUNBIRD_PG_USER = "sunbird_pg_user";
   public static final String SUNBIRD_PLUGIN = "sunbirdplugin";
   public static final String SUNBIRD_QUARTZ_MODE = "sunbird_quartz_mode";
-substitute based on requirement
-substitute based on requirement
-substitute based on requirement
+  public static final String SUNBIRD_SSO_CLIENT_ID = "sunbird_sso_client_id";
+  public static final String SUNBIRD_SSO_CLIENT_SECRET = "sunbird_sso_client_secret";
+  public static final String SUNBIRD_SSO_PASSWORD = "sunbird_sso_password";
   public static final String SUNBIRD_SSO_RELAM = "sunbird_sso_realm";
   public static final String SUNBIRD_SSO_URL = "sunbird_sso_url";
   public static final String SUNBIRD_SSO_USERNAME = "sunbird_sso_username";
@@ -544,7 +544,7 @@ substitute based on requirement
   public static final String TELEMETRY_CONTEXT = "TELEMETRY_CONTEXT";
   public static final String TELEMETRY_EVENT_TYPE = "telemetryEventType";
   public static final String TELEMETRY_QUEUE_THRESHOLD_VALUE = "telemetry_queue_threshold_value";
-substitute based on requirement
+  public static final String TEMPORARY_PASSWORD = "tempPassword";
   public static final String TENANT_PREFERENCE = "tenantPreference";
   public static final String TENANT_PREFERENCE_DB = "tenantPreferenceDb";
   public static final String TERM_AND_CONDITION_STATUS = "tcStatus";

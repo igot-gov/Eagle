@@ -400,12 +400,12 @@ public class GoalsController {
 
 	@DeleteMapping("/v1/users/{userEmail}/goals/{goalId}/contents/{}")
 	public Response deleteSingleContentFromUserGoal(@PathVariable("userEmail") String userEmail,
-			@PathVariable("goalId") String goalId, @PathVariable("") String ) {
-		String url = "/v1/users/" + userEmail + "/goals/" + goalId + "/contents/" + ;
+			@PathVariable("goalId") String goalId, @PathVariable("lexId") String lexId ) {
+		String url = "/v1/users/" + userEmail + "/goals/" + goalId + "/contents/" + lexId;
 		Map<String, Object> deleteMap = new HashMap<String, Object>();
 		deleteMap.put("user_email", userEmail.toLowerCase().trim());
 		deleteMap.put("goal_id", goalId);
-		deleteMap.put("content_id", );
+		deleteMap.put("content_id", lexId);
 		// goal type is fixed for this api i.e. user as
 		// he can only delete resource from user goals.
 		deleteMap.put("goal_type", "user");
@@ -438,12 +438,12 @@ public class GoalsController {
 
 	@PatchMapping("/v1/users/{userEmail}/goals/{goalId}/contents/{}")
 	public Response addSingleContentFromUserGoal(@PathVariable("userEmail") String userEmail,
-			@PathVariable("goalId") String goalId, @PathVariable("") String ) {
-		String url = "/v1/users/" + userEmail + "/goals/" + goalId + "/contents/" + ;
+			@PathVariable("goalId") String goalId, @PathVariable("lexId") String lexId ) {
+		String url = "/v1/users/" + userEmail + "/goals/" + goalId + "/contents/" + lexId;
 		Map<String, Object> updateMap = new HashMap<String, Object>();
 		updateMap.put("user_email", userEmail.toLowerCase().trim());
 		updateMap.put("goal_id", goalId);
-		updateMap.put("content_id", );
+		updateMap.put("content_id", lexId);
 		// goal type is fixed for this api i.e. user as
 		// he can only add resource from user goals.
 		updateMap.put("goal_type", "user");

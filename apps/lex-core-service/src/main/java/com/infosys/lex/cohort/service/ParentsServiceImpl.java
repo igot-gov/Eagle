@@ -15,7 +15,7 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+//substitute url based on requirement
 //
 //import java.util.ArrayList;
 //import java.util.HashMap;
@@ -27,10 +27,10 @@ substitute url based on requirement
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Service;
 //import org.sunbird.common.models.util.JsonKey;
-//
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+////
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
 //
 //@Service
 //public class ParentsServiceImpl implements ParentService {
@@ -225,7 +225,7 @@ substitute url based on requirement
 //	
 //	  (non-Javadoc)
 //	  
-substitute url based on requirement
+//substitute url based on requirement
 //	  String) This method returns the first parent in the collections meta-data of
 //	  the resourceId
 //	 
@@ -312,7 +312,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.cohort.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -326,11 +326,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.cohort.constant.LexProjectUtil;
+import com.infosys.lex.common.service.ContentService;
+import com.infosys.lex.common.util.ContentMetaConstants;
+import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.core.logger.LexLogger;
 
 @Service
 public class ParentsServiceImpl implements ParentService {

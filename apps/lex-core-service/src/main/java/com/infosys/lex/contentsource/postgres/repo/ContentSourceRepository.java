@@ -15,17 +15,17 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.contentsource.postgres.repo;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.contentsource.postgres.entity.ContentSource;
+import com.infosys.lex.contentsource.postgres.entity.ContentSourcePrimaryKey;
+import com.infosys.lex.contentsource.postgres.projection.ContentSourceProj;
+import com.infosys.lex.contentsource.postgres.projection.ContentSourceShortNameProj;
 
 @Repository
 public interface ContentSourceRepository extends JpaRepository<ContentSource, ContentSourcePrimaryKey> {

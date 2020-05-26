@@ -1,5 +1,5 @@
 /*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-url-url-url-url-url-url-urls://opensource.org/licenses/GPL-3.0
+               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,13 +32,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.http-url-url-url-url-url-url-url.HttpEntity;
-import org.apache.http-url-url-url-url-url-url-url.HttpResponse;
-import org.apache.http-url-url-url-url-url-url-url.client.methods.HttpPost;
-import org.apache.http-url-url-url-url-url-url-url.entity.ContentType;
-import org.apache.http-url-url-url-url-url-url-url.entity.mime.MultipartEntityBuilder;
-import org.apache.http-url-url-url-url-url-url-url.impl.client.CloseableHttpClient;
-import org.apache.http-url-url-url-url-url-url-url.impl.client.HttpClients;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -50,21 +49,21 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 
-import org.springframework.http-url-url-url-url-url-url-url.HttpHeaders;
-import org.springframework.http-url-url-url-url-url-url-url.HttpMethod;
-import org.springframework.http-url-url-url-url-url-url-url.MediaType;
-import org.springframework.http-url-url-url-url-url-url-url.ResponseEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.AppConfigRepository;
+import com.infosys.lex.common.constants.JsonKey;
+import com.infosys.lex.common.util.ContentMetaConstants;
+import com.infosys.lex.common.util.DatabaseProperties;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
 
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -184,7 +183,7 @@ public class ContentServiceImpl implements ContentService {
 		String str = String.join("\",\"", source);
 		String idsStr = String.join("\",\"", ids);
 		String username = dbprops.getElasticUser();
-substitute based on requirement
+		String password = dbprops.getElasticPassword();
 		query = query.replace("@size", size);
 		query = query.replace("@source", str);
 		query = query.replace("@ids",idsStr);
@@ -195,14 +194,16 @@ substitute based on requirement
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        org.springframework.http-url-url-url-url-url-url-url.HttpEntity<?> entity = new org.springframework.http-url-url-url-url-url-url-url.HttpEntity<>(map, headers);
-//        Map<String,Object> response = (Map<String, Object>) restTemplate.exchange("http-url-url-url-url-url-url-url://elastic:Es$v2atc10@IPaddress:1201/mlsearch_*/_search", HttpMethod.POST,entity,Map.class);
-substitute based on requirement
+        org.springframework.http.HttpEntity<?> entity = new org.springframework.http.HttpEntity<>(map, headers);
+//        Map<String,Object> response = (Map<String, Object>) restTemplate.exchange("http://elastic:Es$v2atc10@IPaddress:1201/mlsearch_*/_search", HttpMethod.POST,entity,Map.class);
+        Map<String, Object> response = restTemplate.postForObject(
+				"http://" + username + ":" + password + "@" + contentHost + ":" + contentPort + "/mlsearch_*/_search",
+				entity, Map.class);
 		Map<String,Object> hits = (Map<String, Object>) response.get("hits");
 		List<Map<String,Object>> ret = (List<Map<String, Object>>) hits.get("hits");
 //        System.out.println(ret);
 //		System.out.println(query.toString());
-//		Map<String,Object>hMap = restTemplate.getForObject("http-url-url-url-url-url-url-url://elastic:Es$v2atc10@IPaddress:1201/mlsearch_*/_search", Map.class);
+//		Map<String,Object>hMap = restTemplate.getForObject("http://elastic:Es$v2atc10@IPaddress:1201/mlsearch_*/_search", Map.class);
 		List<Map<String,Object>> retMeta = new ArrayList<Map<String,Object>>();
 		for (Map<String, Object> hit : ret) {
 			retMeta.add((Map<String, Object>) hit.get("_source"));
@@ -259,7 +260,7 @@ substitute based on requirement
 			String contentHost = props.getContentServiceHost();
 			String contentPort = props.getBodhiContentPort();
 
-			String fetchUrl = "http-url-url-url-url-url-url-url://" + contentHost + ":" + contentPort + "/contentv3/download-assessment-key/"
+			String fetchUrl = "http://" + contentHost + ":" + contentPort + "/contentv3/download-assessment-key/"
 					+ urlEncodedLocation;
 			URI uri = URI.create(fetchUrl);
 
@@ -286,7 +287,7 @@ substitute based on requirement
 			String contentHost = props.getContentServiceHost();
 			String contentPort = props.getBodhiContentPort();
 
-			String fetchUrl = "http-url-url-url-url-url-url-url://" + contentHost + ":" + contentPort + "/contentv3/download-assessment-key/"
+			String fetchUrl = "http://" + contentHost + ":" + contentPort + "/contentv3/download-assessment-key/"
 					+ urlEncodedLocation;
 //			System.out.println(fetchUrl);
 			URI uri = URI.create(fetchUrl);
@@ -308,14 +309,14 @@ substitute based on requirement
 	@Override
 	public String insertFileInContentStore(File f, String insertionUrl, String type) throws Exception {
 		String url = "";
-		CloseableHttpClient http-url-url-url-url-url-url-urlClient = HttpClients.createDefault();
+		CloseableHttpClient httpClient = HttpClients.createDefault();
 		String contentHost = props.getContentServiceHost();
 		String contentPort = props.getBodhiContentPort();
-		// "http-url-url-url-url-url-url-url://" + contentHost + ":" + contentPort + "/content/Submissions/" +
+		// "http://" + contentHost + ":" + contentPort + "/content/Submissions/" +
 		// contentId
 		// creates folder or responds with 409(Conflict): Folder Exists
-		HttpPost postRequest = new HttpPost("http-url-url-url-url-url-url-url://" + contentHost + ":" + contentPort + insertionUrl);
-		HttpResponse resp = http-url-url-url-url-url-url-urlClient.execute(postRequest);
+		HttpPost postRequest = new HttpPost("http://" + contentHost + ":" + contentPort + insertionUrl);
+		HttpResponse resp = httpClient.execute(postRequest);
 		int statuscode = resp.getStatusLine().getStatusCode();
 		if (!(statuscode < 300 || statuscode == 409)) {
 			throw new ApplicationLogicError(
@@ -323,14 +324,14 @@ substitute based on requirement
 		}
 		postRequest.releaseConnection();
 		// adds the file
-		postRequest = new HttpPost("http-url-url-url-url-url-url-url://" + contentHost + ":" + contentPort + insertionUrl + "/" + type);
+		postRequest = new HttpPost("http://" + contentHost + ":" + contentPort + insertionUrl + "/" + type);
 		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 		builder.addBinaryBody("content", f, ContentType.APPLICATION_OCTET_STREAM, f.getName());
 		HttpEntity multipart = builder.build();
 
 		postRequest.setEntity(multipart);
 
-		resp = http-url-url-url-url-url-url-urlClient.execute(postRequest);
+		resp = httpClient.execute(postRequest);
 		BufferedReader br = new BufferedReader(new InputStreamReader((resp.getEntity().getContent())));
 		statuscode = resp.getStatusLine().getStatusCode();
 		if (statuscode >= 300) {
@@ -344,7 +345,7 @@ substitute based on requirement
 			url = new ObjectMapper().readValue(output, Map.class).get("contentUrl").toString();
 		}
 		postRequest.releaseConnection();
-		http-url-url-url-url-url-url-urlClient.close();
+		httpClient.close();
 		return url;
 	}
 

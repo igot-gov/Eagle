@@ -170,7 +170,7 @@ public class NPTELServiceImpl implements NPTELService {
 
             String courseImageUrl = "";
 
-            courseData.setIdentifier(LexJsonKey. + "_" + ProjectUtil.getUniqueIdFromTimestamp(envId));
+            courseData.setIdentifier(LexJsonKey.LEX + "_" + ProjectUtil.getUniqueIdFromTimestamp(envId));
             String desc = "This is " + courseData.getName() + " module";
             courseData.setDescription(desc);
             courseData.setMediaType(LexProjectUtil.MediaType.content.get());
@@ -243,7 +243,7 @@ public class NPTELServiceImpl implements NPTELService {
                     String downloadUrl = "";
 
                     ContentMeta resourceData = new ContentMeta();
-                    resourceData.setIdentifier(LexJsonKey. + "_" + ProjectUtil.getUniqueIdFromTimestamp(envId));
+                    resourceData.setIdentifier(LexJsonKey.LEX + "_" + ProjectUtil.getUniqueIdFromTimestamp(envId));
                     resourceData.setName(lectName);
                     resourceData.setDescription(resourceDesc);
                     resourceData.setCreator(courseData.getCreator());

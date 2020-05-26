@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.core.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -31,12 +31,13 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.util.DatabaseProperties;
+import com.infosys.lex.core.logger.LexLogger;
+
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.bodhi")
-substitute url based on requirement
+@EnableCassandraRepositories(basePackages = "com.infosys.lex.*.bodhi.repo", cassandraTemplateRef = "bodhiTemplate")
 public class BodhiConfig extends AbstractCassandraConfiguration {
 
 	@Autowired
@@ -104,7 +105,7 @@ public class BodhiConfig extends AbstractCassandraConfiguration {
 	public CassandraSessionFactoryBean session() {
 		CassandraSessionFactoryBean session = new CassandraSessionFactoryBean();
 		session.setCluster(Cluster.builder().addContactPoint(getContactPoints()).withPort(getPort()).withAuthProvider(
-substitute based on requirement
+				new PlainTextAuthProvider(dbProperties.getCassandraUserName(), dbProperties.getCassandraPassword()))
 				.build());
 		session.setConverter(cassandraConverter());
 		session.setKeyspaceName(getKeyspaceName());

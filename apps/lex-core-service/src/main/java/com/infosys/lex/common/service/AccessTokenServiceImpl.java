@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.service;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -33,7 +33,7 @@ import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
-substitute based on requirement
+import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -46,11 +46,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.bodhi.repo.AppConfig;
+import com.infosys.lex.common.bodhi.repo.AppConfigPrimaryKey;
+import com.infosys.lex.common.bodhi.repo.AppConfigRepository;
+import com.infosys.lex.common.constants.JsonKey;
+import com.infosys.lex.common.util.LexServerProperties;
+import com.infosys.lex.core.exception.ApplicationLogicError;
 
 @Service
 public class AccessTokenServiceImpl implements AccessTokenService {
@@ -123,11 +124,11 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 		HttpPost postRequest = new HttpPost("https://login.microsoftonline.com/common/oauth2/token");
 
 		List<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-substitute based on requirement
+		postParameters.add(new BasicNameValuePair("client_id", serverProps.getClientId()));
 		postParameters.add(new BasicNameValuePair("refresh_token", refresh_token));
-substitute url based on requirement
+		postParameters.add(new BasicNameValuePair("redirect_uri", "https://lex-dev.infosysapps.com/"));
 		postParameters.add(new BasicNameValuePair("grant_type", "refresh_token"));
-substitute based on requirement
+		postParameters.add(new BasicNameValuePair("client_secret", serverProps.getClientSecret()));
 		postRequest.setEntity(new UrlEncodedFormEntity(postParameters, "UTF-8"));
 		HttpResponse response = httpClient.execute(postRequest);
 
@@ -163,12 +164,12 @@ substitute based on requirement
 	@SuppressWarnings("unused")
 	private CloseableHttpClient getAuthorizedClient() throws Exception {
 		final String username = "";
-substitute based on requirement
+		final String password = "";
 		final String proxyUrl = "IPaddress";
 		final int port = 80;
 		CredentialsProvider credsProvider = new BasicCredentialsProvider();
 		credsProvider.setCredentials(new AuthScope(proxyUrl, port),
-substitute based on requirement
+				new UsernamePasswordCredentials(username, password));
 
 		HttpHost myProxy = new HttpHost(proxyUrl, port);
 		HttpClientBuilder clientBuilder = HttpClientBuilder.create();

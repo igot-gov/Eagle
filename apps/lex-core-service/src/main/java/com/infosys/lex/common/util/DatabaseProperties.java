@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.common.util;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -44,8 +44,8 @@ public class DatabaseProperties {
 	@Value("${spring.data.cassandra.username}")
 	private String cassandraUserName;
 
-substitute based on requirement
-substitute based on requirement
+	@Value("${spring.data.cassandra.password}")
+	private String cassandraPassword;
 
 	@Value("${spring.data.mongodb.uri}")
 	private String mongoURI;
@@ -65,8 +65,9 @@ substitute based on requirement
 	@Value("${spring.data.elasticsearch.username}")
 	private String elasticUser;
 
-substitute based on requirement
-substitute based on requirement
+
+	@Value("${spring.data.elasticsearch.password}")
+	private String elasticPassword;
 
 	@Value("${spring.datasource.jdbc-url}")
 	private String springDataPostgresUrl;
@@ -74,9 +75,10 @@ substitute based on requirement
 	@Value("${spring.datasource.username}")
 	private String springDataPostgresUserName;
 
-substitute based on requirement
-substitute based on requirement
 
+	@Value("${spring.datasource.password}")
+	private String springDataPostgresPassword;
+	
 	public String getSpringDataPostgresUrl() {
 		return springDataPostgresUrl;
 	}
@@ -93,13 +95,14 @@ substitute based on requirement
 		this.springDataPostgresUserName = springDataPostgresUserName;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getSpringDataPostgresPassword() {
+		return springDataPostgresPassword;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setSpringDataPostgresPassword(String springDataPostgresPassword) {
+		this.springDataPostgresPassword = springDataPostgresPassword;
 	}
+
 
 	public String getElasticIp() {
 		return elasticIp;
@@ -173,12 +176,12 @@ substitute based on requirement
 		this.cassandraUserName = cassandraUserName;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getCassandraPassword() {
+		return cassandraPassword;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setCassandraPassword(String cassandraPassword) {
+		this.cassandraPassword = cassandraPassword;
 	}
 
 	public String getMongoURI() {
@@ -213,12 +216,12 @@ substitute based on requirement
 		this.elasticUser = elasticUser;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public String getElasticPassword() {
+		return elasticPassword;
 	}
 
-substitute based on requirement
-substitute based on requirement
+	public void setElasticPassword(String elasticPassword) {
+		this.elasticPassword = elasticPassword;
 	}
 
 	@Override
@@ -226,12 +229,14 @@ substitute based on requirement
 		return "DatabaseProperties [bodhiContactPoint=" + bodhiContactPoint + ", bodhiContactPort=" + bodhiContactPort
 				+ ", bodhiKeyspace=" + bodhiKeyspace + ", sunbirdContactPoint=" + sunbirdContactPoint
 				+ ", sunbirdContactPort=" + sunbirdContactPort + ", sunbirdKeyspace=" + sunbirdKeyspace
-substitute based on requirement
+				+ ", cassandraUserName=" + cassandraUserName + ", cassandraPassword=" + cassandraPassword
 				+ ", mongoURI=" + mongoURI + ", mongoDatabase=" + mongoDatabase + ", elasticIp=" + elasticIp
 				+ ", elasticPort=" + elasticPort + ", elasticCluster=" + elasticCluster + ", elasticUser=" + elasticUser
-substitute based on requirement
-substitute based on requirement
-substitute based on requirement
+				+ ", elasticPassword=" + elasticPassword + ", springDataPostgresUrl=" + springDataPostgresUrl
+				+ ", springDataPostgresUserName=" + springDataPostgresUserName + ", springDataPostgresPassword="
+				+ springDataPostgresPassword + "]";
 	}
+
+	
 
 }

@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+package com.infosys.lex.externalcontent.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +10,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.BadRequestException;
+import com.infosys.lex.externalcontent.bodhi.repo.ExternalContentRepo;
+import com.infosys.lex.externalcontent.entities.ContentKey;
+import com.infosys.lex.externalcontent.entities.ExternalContent;
+
 
 @Service
 public class ExternalContentServiceImpl implements ExternalContentService {

@@ -15,7 +15,7 @@
 //Highly Confidential
 // 
 //*/
-substitute url based on requirement
+//substitute url based on requirement
 //
 //import java.text.SimpleDateFormat;
 //import java.util.ArrayList;
@@ -30,16 +30,16 @@ substitute url based on requirement
 //import org.springframework.scheduling.annotation.Async;
 //import org.springframework.stereotype.Repository;
 //
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
 //
 //@Repository
 //public class BadgeAssignmentPGImpl implements BadgeAssignmentPG {
@@ -79,7 +79,7 @@ substitute url based on requirement
 //	 * (non-Javadoc)
 //	 * 
 //	 * @see
-substitute url based on requirement
+//substitute url based on requirement
 //	 * java.lang.String, java.util.List, java.lang.String, boolean)
 //	 */
 //	@Async
@@ -177,7 +177,7 @@ substitute url based on requirement
 //	/*
 //	 * (non-Javadoc)
 //	 * 
-substitute url based on requirement
+//substitute url based on requirement
 //	 * insertCourseAndQuizBadge(java.lang.String, java.lang.String,
 //	 * java.lang.String)
 //	 */
@@ -278,7 +278,7 @@ substitute url based on requirement
 //	/*
 //	 * (non-Javadoc)
 //	 * 
-substitute url based on requirement
+//substitute url based on requirement
 //	 * insertEventBasedBadges(java.lang.String, java.lang.String, java.lang.String,
 //	 * java.util.List)
 //	 */
