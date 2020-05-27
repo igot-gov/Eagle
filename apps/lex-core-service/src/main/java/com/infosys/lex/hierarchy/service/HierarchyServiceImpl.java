@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -79,7 +76,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public Map<String, Object> getHierarchyOfContentNode(String identifier, Map<String, Object> reqMap)
-			throws BadRequestException, Exception {
+			throws BadRequestException, IOException, Exception {
 		String rootOrg = null;
 		String org = null;
 		String userId = null;
@@ -148,7 +145,6 @@ public class HierarchyServiceImpl implements HierarchyService {
 			}
 		} catch (Exception e) {
 			logger.info("Access Check called for : " +allIds.toString());
-			e.printStackTrace();
 			throw new Exception(e);
 		}
 		
@@ -169,14 +165,12 @@ public class HierarchyServiceImpl implements HierarchyService {
 			traverseAndInsertEmail(hMap, userEmailMap);
 		} catch (Exception e) {
 			logger.info("Failed to get Emails from PID for : " + identifier);
-			e.printStackTrace();
 		}
 		
 		try {
 			learningProgressMetrics(hMap, rootOrg, userId, allIds);
 		} catch (Exception e) {
 			logger.info("Failed to get progress data : " + identifier);
-			e.printStackTrace();
 		}
 
 		return hMap;
@@ -261,7 +255,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 
 
 	@SuppressWarnings("unchecked")
-	private void learningProgressMetrics(Map<String, Object> hMap, String rootOrg, String userId,List<String>allIds) throws Exception {
+	private void learningProgressMetrics(Map<String, Object> hMap, String rootOrg, String userId,List<String>allIds) throws IOException, Exception  {
 		Map<String,Object> progressMap = progressService.metaForProgress(rootOrg, userId, allIds);
 		Queue<Map<String,Object>> parentObjs = new LinkedList<>();
 		parentObjs.add(hMap);
@@ -400,7 +394,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public List<Map<String, Object>> getMetasHierarchy(Map<String, Object> reqMap)
-			throws BadRequestException, Exception {
+			throws BadRequestException, IOException {
 		String rootOrg = null;
 		String org = null;
 		String userId = null;
@@ -549,7 +543,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 	}
 
 	public List<Map<String, Object>> getMetaForLexIdsHierarchy(SearchRequest searchRequest, String[] fields,
-															   List<String> lexIds) throws IOException {
+			List<String> lexIds) throws IOException {
 
 		List<Map<String, Object>> allMetas = new ArrayList<>();
 		BoolQueryBuilder query = QueryBuilders.boolQuery()
@@ -682,7 +676,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 	
 	
 	@SuppressWarnings("null")
-	public Map<String,Object> HierarchyAPI(String identifier,String[] fields) throws Exception
+	public Map<String,Object> HierarchyAPI(String identifier,String[] fields) throws IOException 
 	{
 		SearchRequest searchRequest = new SearchRequest();
 		searchRequest.indices("mlsearch_*");
@@ -712,7 +706,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 	}
 
 	@SuppressWarnings({ "unused" })
-	public Map<String, Object> HierarchyApi(String resourceId, String[] fields) throws Exception {
+	public Map<String, Object> HierarchyApi(String resourceId, String[] fields) throws IOException {
 		SearchRequest searchRequest = new SearchRequest();
 		searchRequest.indices("mlsearch_*");
 		searchRequest.types("searchresources");
@@ -725,7 +719,6 @@ public class HierarchyServiceImpl implements HierarchyService {
 		
 		Map<String, Object> reasons = new HashMap<>();
 		Map<String,Object> childrenClassifiers = new HashMap<>();
-//		System.out.println("Polling db for Course " + resourceId);
 		Queue<String> metaQueue = new LinkedList<String>();
 		// returns all immediate children of passed Identifier
 		getChildrenReasons(parentMeta,reasons);
@@ -748,7 +741,6 @@ public class HierarchyServiceImpl implements HierarchyService {
 			for (Map<String, Object> childMeta : childrenMeta) {
 				getChildrenReasons(childMeta,reasons);
 			}
-//			System.out.println("Polling db for Children " + idsToFetch);
 
 			// should be enclosed in if for single level fetch
 			// adding all children of above immediate children

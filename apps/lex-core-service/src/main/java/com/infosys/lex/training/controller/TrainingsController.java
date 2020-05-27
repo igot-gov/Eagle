@@ -149,7 +149,7 @@ public class TrainingsController {
 	}
 
 	@PostMapping("lHub/v1/jit")
-	public ResponseEntity<?> createJitRequest(@RequestBody Map<String, Object> request) {
+	public ResponseEntity<?> createJitRequest(@RequestBody Map<String, Object> request) throws JsonParseException, JsonMappingException, IOException{
 
 		Map<String, Object> responseMap = trainingsService.createJitRequest(request);
 		return new ResponseEntity<>(responseMap, HttpStatus.OK);

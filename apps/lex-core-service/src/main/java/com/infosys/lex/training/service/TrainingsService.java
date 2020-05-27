@@ -138,7 +138,7 @@ public interface TrainingsService {
 	 * @param request
 	 * @return
 	 */
-	Map<String, Object> createJitRequest(Map<String, Object> request);
+	Map<String, Object> createJitRequest(Map<String, Object> request) throws JsonParseException, JsonMappingException, IOException ;
 
 	/**
 	 * Get list of all JIT requests created by me

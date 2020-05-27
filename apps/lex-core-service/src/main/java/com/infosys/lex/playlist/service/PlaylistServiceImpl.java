@@ -1,9 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.lex.playlist.service;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,9 +32,7 @@ import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.service.UserUtilityService;
 import com.infosys.lex.common.util.LexServerProperties;
 import com.infosys.lex.common.util.PIDConstants;
-import com.infosys.lex.core.exception.ApplicationLogicError;
 import com.infosys.lex.core.exception.InvalidDataInputException;
-import com.infosys.lex.core.logger.LexLogger;
 import com.infosys.lex.playlist.bodhi.repo.PlaylistRecentRepo;
 import com.infosys.lex.playlist.bodhi.repo.SharedPlaylistRepo;
 import com.infosys.lex.playlist.bodhi.repo.UserPlaylistRepo;
@@ -95,8 +92,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#createPlayList(java.lang.
+	 * String, java.lang.String, com.infosys.lex.playlist.entities.PlaylistRequest)
 	 */
 	@Override
 	public void createPlayList(String rootOrg, String userId, PlaylistRequest playlistBody) throws Exception {
@@ -160,12 +157,13 @@ substitute url based on requirement
 	 *                       status in meta while fetching
 	 * @param source         &nbsp;&nbsp;-&nbsp;&nbsp;Array to limit the fields
 	 *                       returned in meta
-	 * @throws Exception
+	 * @throws IOException 
+	 * @throws ParseException 
+	 * @
 	 */
 	@SuppressWarnings("unchecked")
 	private void checkForAccessAndRetiredStatus(List<String> uID, List<String> contentList,
-			Map<String, Object> statusData, boolean isDataRequired, String rootOrg, String status, String[] source)
-			throws Exception {
+			Map<String, Object> statusData, boolean isDataRequired, String rootOrg, String status, String[] source) throws IOException, ParseException{
 
 		// Get Meta of the content
 		List<Map<String, Object>> metaData = contentService.getMetaByIDListandSource(contentList, source, status);
@@ -272,7 +270,7 @@ substitute url based on requirement
 	 * (non-Javadoc) *
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#sharePlaylist(java.lang.
 	 * String, java.lang.String, java.lang.String, java.util.Map)
 	 */
 	@SuppressWarnings("unchecked")
@@ -406,11 +404,11 @@ substitute url based on requirement
 	 * @param usersList
 	 * @param contentList
 	 * @return
-	 * @throws Exception
+	 * @
 	 */
 	@SuppressWarnings("unchecked")
 	private Map<String, Object> processUsersToBeSharedWith(String rootOrg, List<String> usersList,
-			List<String> contentList) throws Exception {
+			List<String> contentList)  {
 
 		Map<String, Object> returnObject = new HashMap<>();
 
@@ -467,7 +465,7 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getUserPlaylists(java.lang.
 	 * String, java.lang.String)
 	 */
 	@Override
@@ -519,13 +517,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getDetailedUserPlaylists(
 	 * java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getDetailedUserPlaylists(String rootOrg, String userId, List<String> metaFields)
-			throws Exception {
+	public List<Map<String, Object>> getDetailedUserPlaylists(String rootOrg, String userId, List<String> metaFields) throws Exception{
 
 		// Validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -617,11 +614,11 @@ substitute url based on requirement
 	 * @param userPlaylists
 	 * @param userIds
 	 * @param contentMeta
-	 * @throws Exception
+	 * @
 	 */
 	@SuppressWarnings("unchecked")
 	private void addUserDataWhereRequired(String rootOrg, List<Map<String, Object>> userPlaylists, List<String> userIds,
-			Map<String, Object> contentMeta) throws Exception {
+			Map<String, Object> contentMeta)  {
 
 		// returns the names of all the users in userids
 		Map<String, Object> userData = this.getMultipleUserData(rootOrg, userIds);
@@ -689,7 +686,7 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getUserSharedPlaylist(java.
 	 * lang.String, java.lang.String)
 	 */
 	@Override
@@ -730,7 +727,7 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#deletePlaylist(java.lang.
 	 * String, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -774,7 +771,7 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#deleteContent(java.lang.
 	 * String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -797,7 +794,6 @@ substitute url based on requirement
 		if (!resourceId.contains(lexId)) {
 			throw new InvalidDataInputException("resource.notFound");
 		}
-
 
 		// lexid removed from user_playlist
 		resourceId.remove(lexId);
@@ -824,7 +820,7 @@ substitute url based on requirement
 	/*
 	 * (non-Javadoc)
 	 * 
-substitute url based on requirement
+	 * @see com.infosys.lex.playlist.service.PlaylistService#addContents(java.lang.
 	 * String, java.lang.String, java.lang.String, java.util.List)
 	 */
 	@Override
@@ -877,7 +873,7 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#addContent(java.lang.String,
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -924,14 +920,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#updatePlaylist(java.lang.
 	 * String, java.lang.String, java.lang.String,
-substitute url based on requirement
+	 * com.infosys.lex.playlist.dto.PlaylistRequest)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void updatePlaylist(String rootOrg, String userId, String playlistId, Map<String, Object> playlistBody)
-			throws Exception {
+	public void updatePlaylist(String rootOrg, String userId, String playlistId, Map<String, Object> playlistBody) throws Exception {
 
 		// check if request data is null or empty
 		if (playlistBody.containsKey("playlist_title")) {
@@ -1047,7 +1042,7 @@ substitute url based on requirement
 	}
 
 	@SuppressWarnings("unchecked")
-	private Map<String, Object> getMultipleUserData(String rootOrg, List<String> uuids) throws Exception {
+	private Map<String, Object> getMultipleUserData(String rootOrg, List<String> uuids)  {
 
 		Map<String, Object> result = userUtilService.getUsersDataFromUserIds(rootOrg, uuids,
 				new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME, PIDConstants.EMAIL)));
@@ -1098,11 +1093,11 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#acceptRejectPlaylist(java.
 	 * lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void acceptRejectPlaylist(String rootOrg, String userId, String playlistId, String status) throws Exception {
+	public void acceptRejectPlaylist(String rootOrg, String userId, String playlistId, String status) throws Exception{
 
 		if (!Arrays.asList("accept", "reject").contains(status)) {
 			throw new InvalidDataInputException("invalid.status");
@@ -1161,7 +1156,7 @@ substitute url based on requirement
 
 	@SuppressWarnings("unchecked")
 	private void checkForAccessStatus(List<String> uID, List<String> contentList, Map<String, Object> statusData,
-			String rootOrg) throws Exception {
+			String rootOrg)  {
 
 		final String sbExtHost = props.getSbextServiceHost();
 		final String sbExtPort = props.getSbextPort();
@@ -1209,13 +1204,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getDetailedSharedPlaylist(
 	 * java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getDetailedSharedPlaylist(String rootOrg, String userId, List<String> metaFields)
-			throws Exception {
+	public List<Map<String, Object>> getDetailedSharedPlaylist(String rootOrg, String userId, List<String> metaFields) throws Exception {
 
 		// validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -1290,13 +1284,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getPlaylistContent(java.lang
 	 * .String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> getPlaylistContent(String rootOrg, String userId, Integer size, String page)
-			throws Exception {
+	public Map<String, Object> getPlaylistContent(String rootOrg, String userId, Integer size, String page) throws Exception {
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1331,14 +1324,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getDetailedPlaylistContent(
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getDetailedPlaylistContent(String rootOrg, String userId, List<String> sourceFields,
-			String isInIntranet, String isStandAlone, List<String> contentTypes, Integer size, String page)
-			throws Exception {
+			String isInIntranet, String isStandAlone, List<String> contentTypes, Integer size, String page) throws Exception{
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1453,13 +1445,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getDetailedPlaylistSyncInfo(
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getDetailedPlaylistSyncInfo(String rootOrg, String userId, String playlistId,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws Exception  {
 
 		Map<String, Object> returnObject = new HashMap<String, Object>();
 		returnObject = this.getPlaylistSyncInfo(rootOrg, userId, playlistId);
@@ -1538,11 +1530,11 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getPlaylistSyncInfo(java.
 	 * lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Map<String, Object> getPlaylistSyncInfo(String rootOrg, String userId, String playlistId) throws Exception {
+	public Map<String, Object> getPlaylistSyncInfo(String rootOrg, String userId, String playlistId) throws Exception{
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1617,13 +1609,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#getUserPlaylist(java.lang.
 	 * String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getUserPlaylist(String rootOrg, String userId, String playlistId,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws Exception  {
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1683,13 +1675,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.playlist.service.PlaylistService#deleteMultiple(java.lang.
 	 * String, java.lang.String, java.lang.String, java.util.Map)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void deleteMultiple(String rootOrg, String userId, String playlistId, Map<String, Object> content)
-			throws Exception {
+	public void deleteMultiple(String rootOrg, String userId, String playlistId, Map<String, Object> content) throws Exception{
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");

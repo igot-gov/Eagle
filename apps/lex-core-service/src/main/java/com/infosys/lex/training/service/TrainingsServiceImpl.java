@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -18,8 +15,10 @@ Highly Confidential
 package com.infosys.lex.training.service;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +37,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -78,12 +78,12 @@ public class TrainingsServiceImpl implements TrainingsService {
 	// "https://itgatewaytst.infosys.com/extapilex/api/Learning";
 
 	// private static final String apiEndPointPrefix =
-	// "http://IPaddress:8740/api/Learning";
+	// "http://127.0.0.1:8740/api/Learning";
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> getTrainings(String contentId, String emailId, String startDate, String endDate,
-			String location) throws Exception {
+			String location)  {
 		HttpHeaders headers = getRestCallHeader();
 		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingDetails?content_id=" + contentId + "&email=" + emailId;
@@ -117,7 +117,6 @@ public class TrainingsServiceImpl implements TrainingsService {
 						session.put("start_dt", newFormat.format(oldFormatStartDate));
 						session.put("end_dt", newFormat.format(oldFormatEndDate));
 					} catch (ParseException e) {
-						System.out.println(e.getMessage());
 					}
 				});
 			});
@@ -125,11 +124,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -147,10 +145,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -172,10 +170,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -197,10 +195,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -223,10 +221,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -249,10 +247,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -275,10 +273,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -297,10 +295,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return response;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -321,11 +319,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMap;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 
 	}
@@ -350,10 +347,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -378,10 +375,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -406,38 +403,39 @@ public class TrainingsServiceImpl implements TrainingsService {
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
-	public Map<String, Object> createJitRequest(Map<String, Object> request) {
+	public Map<String, Object> createJitRequest(Map<String, Object> request) throws JsonParseException, JsonMappingException, IOException {
 
 		HttpHeaders headers = getRestCallHeader();
 		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/CreateJITRequest";
-		try {
-			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
-					new HttpEntity<Map<String, Object>>(request, headers), String.class);
+		List<String> successResCode = Arrays.asList("1", "2");
 
-			if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
-				Map<String, Object> responseMap = new ObjectMapper().readValue(responseEntity.getBody(),
-						new TypeReference<Map<String, Object>>() {
-						});
-				return responseMap;
-			}
-			throw new Exception("Error while calling post request");
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
+				new HttpEntity<Map<String, Object>>(request, headers), String.class);
 
-		} catch (HttpServerErrorException httpServerErrorException) {
-			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
-		} catch (Exception exception) {
-			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+		String responseBody = responseEntity.getBody();
+		Map<String, Object> responseMap = new ObjectMapper().readValue(responseBody,
+				new TypeReference<Map<String, Object>>() {
+				});
+
+		String responceCode = responseMap.get("res_code").toString().trim();
+		if (successResCode.contains(responceCode))
+			return responseMap;
+		else {
+			Charset  charset = Charset.forName("utf8");
+			String resMessage =  responseMap.toString();
+			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,resMessage,responseBody.getBytes(charset),charset);
+
 		}
+
 	}
 
 	@Override
@@ -462,18 +460,16 @@ public class TrainingsServiceImpl implements TrainingsService {
 					oldFormatDate = formatter.parse(receivedDate);
 					responseMap.put("start_date", newFormat.format(oldFormatDate));
 				} catch (ParseException e) {
-					System.out.println(e.getMessage());
 				}
 			});
 
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -494,11 +490,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -521,10 +516,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -544,11 +539,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 
 	}
@@ -573,10 +567,10 @@ public class TrainingsServiceImpl implements TrainingsService {
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -597,33 +591,31 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
-	
+
 	@Override
-	public Map<String,Object> mapLexidToCourseId(Map<String,Object> req) throws JsonParseException, JsonMappingException, IOException
-	{
+	public Map<String, Object> mapLexidToCourseId(Map<String, Object> req)
+			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
 		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 
 		if (!req.containsKey("lex_id") || req.get("lex_id") == null)
 			throw new InvalidDataInputException("Invalid input");
-		
-		if(!req.containsKey("course_id") || req.get("course_id")== null)
+
+		if (!req.containsKey("course_id") || req.get("course_id") == null)
 			throw new InvalidDataInputException("Invalid input");
 
 		String lexId = req.get("lex_id").toString();
 		String courseId = req.get("course_id").toString();
 		String url = apiEndPointPrefix + "/MapLexIdToCourseCode?lex_id=" + lexId + "&course_id=" + courseId;
 
-
 		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
-				new HttpEntity<Object>( headers), String.class);
+				new HttpEntity<Object>(headers), String.class);
 
 		Map<String, Object> responseMap = new ObjectMapper().readValue(responseEntity.getBody(),
 				new TypeReference<Map<String, Object>>() {
@@ -633,13 +625,12 @@ public class TrainingsServiceImpl implements TrainingsService {
 	}
 
 	@Override
-	public List<String> getEducatorDetails(List<String> contentIds) throws JsonParseException, JsonMappingException, IOException
-	{
+	public List<String> getEducatorDetails(List<String> contentIds)
+			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
 		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 
 		String url = apiEndPointPrefix + "/GetEducatorDetails";
-
 
 		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
 				new HttpEntity<List<String>>(contentIds, headers), String.class);
@@ -650,36 +641,35 @@ public class TrainingsServiceImpl implements TrainingsService {
 
 		return responseMap;
 	}
-	
+
 	@Override
-	public List<Map<String,Object>> getTrainingHistory(String userId,String status) throws JsonParseException, JsonMappingException, IOException
-	{
+	public List<Map<String, Object>> getTrainingHistory(String userId, String status)
+			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
 		String apiEndPointPrefix = lexServerProps.getLhubUrl();
-		
-		String url = apiEndPointPrefix + "GetTrainingDetailsHistory?user_id="+userId+"&status="+status;
-		
-		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
-				new HttpEntity<>( headers), String.class);
-		List<Map<String,Object>> responseList = new ObjectMapper().readValue(responseEntity.getBody(),
-				new TypeReference<List<Map<String,Object>>>() {
+
+		String url = apiEndPointPrefix + "GetTrainingDetailsHistory?user_id=" + userId + "&status=" + status;
+
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers),
+				String.class);
+		List<Map<String, Object>> responseList = new ObjectMapper().readValue(responseEntity.getBody(),
+				new TypeReference<List<Map<String, Object>>>() {
 				});
-		
+
 		String timeZone = "IST";
 
-		for(Map<String,Object> training:responseList)
-		{
+		for (Map<String, Object> training : responseList) {
 			if (training.containsKey("time_zone"))
 				timeZone = training.get("time_zone").toString();
 			if (training.containsKey("start_date")) {
-				training.put("start_date", this.createDateMapFromDateString(training.get("start_date").toString(), timeZone));
+				training.put("start_date",
+						this.createDateMapFromDateString(training.get("start_date").toString(), timeZone));
 			}
-			
+
 		}
 
 		return responseList;
 	}
-	
 
 	private HttpHeaders getRestCallHeader() {
 		String accessToken = (String) servletContext.getAttribute("lhub_access_token");
@@ -695,8 +685,7 @@ public class TrainingsServiceImpl implements TrainingsService {
 		headers.set("Api_Key", clientKey);
 		return headers;
 	}
-	
-	
+
 	private Map<String, Object> createDateMapFromDateString(String date, String timeZone) {
 		Map<String, Object> dateMap = new HashMap<String, Object>();
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
