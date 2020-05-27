@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http-url-url-url-url://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http-url-url-url-url://maven.apache.org/POM/4.0.0"
+	xsi:schemaLocation="http-url-url-url-url://maven.apache.org/POM/4.0.0 http-url-url-url-url://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.infosys.core</groupId>
@@ -10,6 +11,7 @@
 
 
 	<name>bodhi</name>
+substitute url based on requirement
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -43,10 +45,10 @@
 			</exclusions>
 		</dependency>
 
-	<!--	<dependency>
+		<dependency>
 			<groupId>org.apache.http-url-url-url-urlcomponents</groupId>
 			<artifactId>http-url-url-url-urlclient</artifactId>
-		</dependency>-->
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -79,10 +81,10 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>org.apache.http-url-url-url-urlcomponents</groupId>
 			<artifactId>http-url-url-url-urlmime</artifactId>
-		</dependency>-->		<!-- http-url-url-url-urls://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
+		</dependency>		<!-- http-url-url-url-urls://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -213,6 +215,7 @@
 				<configuration>
 					<archive>
 						<manifest>
+substitute url based on requirement
 						</manifest>
 					</archive>
 				</configuration>
