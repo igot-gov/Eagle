@@ -531,7 +531,7 @@ substitute url based on requirement
 
 		Map<String, Object> tagValuePair = new HashMap<>();
 		tagValuePair.put("#contentTitle", goalTitle);
-substitute url based on requirement
+//		tagValuePair.put("#targetUrl", "https://CLIENT-staging.onwingspan.com/app/goals/me/all");
 		tagValuePair.put("#message", message);
 		requestBody.put("tag-value-pair", tagValuePair);
 
@@ -1653,7 +1653,7 @@ substitute url based on requirement
 	 * lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-substitute url based on requirement
+	public Map<String, Object> deleteResourceFromUserGoal(String rootOrg, String userUUID, String goalId, String lexId,
 			String goalType) throws Exception {
 
 		// check if the user is valid
@@ -1668,7 +1668,7 @@ substitute url based on requirement
 
 		// check if the content which is being deleted exists in the goal or not
 		List<String> contentIds = ulg.getGoalContentId();
-substitute url based on requirement
+		if (!contentIds.contains(lexId)) {
 			throw new InvalidDataInputException("invalid.content");
 		}
 
@@ -1683,10 +1683,10 @@ substitute url based on requirement
 		Map<String, Object> deleteMap = new HashMap<>();
 		// delete the goal if all the contents from the goal have been removed after
 		// deleting this goal
-substitute url based on requirement
-substitute url based on requirement
+		if (this.checkIfResourceExistsInMeta(contentMeta, lexId)) {
+			Map<String, Object> durationData = this.calcNewGoalEndDate(contentMeta, lexId, ulg.getGoalStartDate(),
 					ulg.getGoalEndDate(), false);
-substitute url based on requirement
+			contentIds.remove(lexId);
 			if (contentIds.size() == 0) {
 				learningGoalsRepo.deleteById(ulg.getUserLearningGoalsPrimaryKey());
 				deleteMap.put("goal_deleted", true);
@@ -1721,7 +1721,7 @@ substitute url based on requirement
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-substitute url based on requirement
+	public Map<String, Object> addContentToUserGoal(String userUUID, String goalId, String lexId, String goalType,
 			String rootOrg) throws Exception {
 
 		// check if user exists
@@ -1734,23 +1734,23 @@ substitute url based on requirement
 		UserGoal ulg = learningGoalsRepo.findById(new UserGoalKey(rootOrg, userUUID, goalType, UUID.fromString(goalId)))
 				.orElseThrow(() -> new InvalidDataInputException("invalid.goal"));
 
-substitute url based on requirement
+		// check for access or deleted status for the lexId that is being tried to be
 		// added
-substitute url based on requirement
+		this.checkForAccessAndRetiredStatus(Arrays.asList(userUUID), Arrays.asList(lexId), new HashMap<>(), false,
 				rootOrg, null, null);
 
 		// the content to be added must not already be present in the goal
 		List<String> contentIds = ulg.getGoalContentId();
-substitute url based on requirement
+		if (contentIds.contains(lexId)) {
 			throw new InvalidDataInputException("content.alreadyexists");
 		}
 
 		// add the latest resource and fetch every content's meta including new resource
-substitute url based on requirement
+		contentIds.add(lexId);
 		List<Map<String, Object>> contentMeta = contentService.getMetaByIDListandSource(contentIds,
 				new String[] { "identifier", "duration" }, null);
 
-substitute url based on requirement
+		if (!this.checkIfResourceExistsInMeta(contentMeta, lexId)) {
 			throw new InvalidDataInputException("meta.notFound");
 		}
 
@@ -1760,7 +1760,7 @@ substitute url based on requirement
 		if (newResourceList == null || newResourceList.isEmpty()) {
 			throw new InvalidDataInputException("internal.error");
 		}
-substitute url based on requirement
+		if (!newResourceList.contains(lexId)) {
 			throw new InvalidDataInputException("content.parent.alreadyExists");
 		}
 
@@ -1782,7 +1782,7 @@ substitute url based on requirement
 		// the response data
 		Map<String, Object> output = new HashMap<>();
 		ulg.setGoalContentId(newResourceList);
-substitute url based on requirement
+		Map<String, Object> newEndDateData = this.calcNewGoalEndDate(newContentMeta, lexId, ulg.getGoalStartDate(),
 				ulg.getGoalEndDate(), true);
 		Date date = new Date();
 		Timestamp timestamp = new Timestamp(date.getTime());

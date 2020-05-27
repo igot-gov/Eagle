@@ -36,7 +36,7 @@ import com.infosys.lex.core.logger.LexLogger;
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.sunbird")
 @EnableCassandraRepositories(basePackages = {
-substitute url based on requirement
+		"com.infosys.lex.common.sunbird.repo" }, cassandraTemplateRef = "sunbirdTemplate")
 public class SunbirdConfig extends AbstractCassandraConfiguration {
 
 	@Autowired
@@ -102,7 +102,7 @@ public class SunbirdConfig extends AbstractCassandraConfiguration {
 	public CassandraSessionFactoryBean session() {
 		CassandraSessionFactoryBean session = new CassandraSessionFactoryBean();
 		session.setCluster(Cluster.builder().addContactPoint(getContactPoints()).withPort(getPort()).withAuthProvider(
-substitute based on requirement
+				new PlainTextAuthProvider(dbProperties.getCassandraUserName(), dbProperties.getCassandraPassword()))
 				.build());
 		session.setConverter(cassandraConverter());
 		session.setKeyspaceName(getKeyspaceName());

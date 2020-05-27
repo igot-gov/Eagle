@@ -549,18 +549,18 @@ public class HierarchyServiceImpl implements HierarchyService {
 	}
 
 	public List<Map<String, Object>> getMetaForLexIdsHierarchy(SearchRequest searchRequest, String[] fields,
-substitute url based on requirement
+															   List<String> lexIds) throws IOException {
 
 		List<Map<String, Object>> allMetas = new ArrayList<>();
 		BoolQueryBuilder query = QueryBuilders.boolQuery()
-substitute url based on requirement
+				.must(QueryBuilders.termsQuery("identifier", lexIds))
 				.must(QueryBuilders.termsQuery("status", masterAllowedStatus));
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		searchSourceBuilder.query(query);
 		if (fields != null && fields.length > 0) {
 			searchSourceBuilder.fetchSource(fields, new String[] {});
 		}
-substitute url based on requirement
+		searchSourceBuilder.size(lexIds.size());
 		searchRequest.source(searchSourceBuilder);
 		SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 		for (SearchHit searchHit : response.getHits()) {
@@ -571,17 +571,17 @@ substitute url based on requirement
 
 	}
 
-substitute url based on requirement
+	public List<Map<String, Object>> getMetaForLexIds(SearchRequest searchRequest, String[] fields, List<String> lexIds)
 			throws IOException {
 
 		List<Map<String, Object>> allMetas = new ArrayList<>();
-substitute url based on requirement
+		BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("identifier", lexIds));
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		searchSourceBuilder.query(query);
 		if (fields != null && fields.length > 0) {
 			searchSourceBuilder.fetchSource(fields, new String[] {});
 		}
-substitute url based on requirement
+		searchSourceBuilder.size(lexIds.size());
 		searchRequest.source(searchSourceBuilder);
 		SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 		for (SearchHit searchHit : response.getHits()) {
@@ -594,11 +594,11 @@ substitute url based on requirement
 
 	}
 
-substitute url based on requirement
+	public Map<String, Object> getMetaForLexId(SearchRequest searchRequest, String[] fields, String lexId)
 			throws IOException {
 
 		BoolQueryBuilder query = QueryBuilders.boolQuery()
-substitute url based on requirement
+				.must(QueryBuilders.termQuery("identifier", lexId))
 				.must(QueryBuilders.termsQuery("status", masterAllowedStatus));
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		searchSourceBuilder.query(query);
@@ -644,13 +644,13 @@ substitute url based on requirement
 		return childrenId;
 	}
 
-substitute url based on requirement
+	public List<Map<String, Object>> getMetaForLexIds(SearchRequest searchRequest, List<String> lexIds)
 			throws IOException {
-substitute url based on requirement
+		BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("identifier", lexIds));
 		SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 		searchSourceBuilder.query(query);
 
-substitute url based on requirement
+		searchSourceBuilder.size(lexIds.size());
 		searchRequest.source(searchSourceBuilder);
 		SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
 		if (response.getHits().totalHits == 0) {

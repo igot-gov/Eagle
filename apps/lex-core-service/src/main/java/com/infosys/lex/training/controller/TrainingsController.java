@@ -15,7 +15,7 @@ under the law.
 Highly Confidential
  
 */
-substitute url based on requirement
+package com.infosys.lex.training.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,7 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-substitute url based on requirement
+import com.infosys.lex.training.service.TrainingsService;
 
 @RestController
 public class TrainingsController {
@@ -94,19 +94,19 @@ public class TrainingsController {
 		return new ResponseEntity<>(responseMap, HttpStatus.OK);
 	}
 
-substitute url based on requirement
-substitute url based on requirement
+	@PostMapping("lHub/v1/content/{lex_id}/users/{user_id:.+}")
+	public ResponseEntity<?> addContentToWatchList(@PathVariable("lex_id") String lexId,
 			@PathVariable("user_id") String userId) {
 
-substitute url based on requirement
+		Map<String, Object> responseMap = trainingsService.addContentToWatchList(lexId, userId);
 		return new ResponseEntity<>(responseMap, HttpStatus.OK);
 	}
 
-substitute url based on requirement
-substitute url based on requirement
+	@DeleteMapping("lHub/v1/content/{lex_id}/users/{user_id:.+}")
+	public ResponseEntity<?> removeFromWatchList(@PathVariable("lex_id") String lexId,
 			@PathVariable("user_id") String userId) {
 
-substitute url based on requirement
+		Map<String, Object> responseMap = trainingsService.removeContentFromWatchList(lexId, userId);
 		return new ResponseEntity<>(responseMap, HttpStatus.OK);
 	}
 
@@ -198,7 +198,7 @@ substitute url based on requirement
 	}
 	
 	/**
-substitute url based on requirement
+	 * This api is used to map the lex id to course id which is used by the learning Hub services
 	 * 
 	 * @param req
 	 * @return
@@ -206,7 +206,7 @@ substitute url based on requirement
 	 * @throws JsonMappingException
 	 * @throws IOException
 	 */
-substitute url based on requirement
+	@PostMapping("lHub/map/lexid-courseid")
 	public ResponseEntity<Map<String,Object>> mapLexIdToCourseId(@RequestBody Map<String,Object> req) throws JsonParseException, JsonMappingException, IOException
 	{
 		return new ResponseEntity<>(trainingsService.mapLexidToCourseId(req),HttpStatus.OK);

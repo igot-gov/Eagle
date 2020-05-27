@@ -43,10 +43,10 @@
 			</exclusions>
 		</dependency>
 
-	<!--	<dependency>
-			<groupId>org.apache.http-url-url-url-urlcomponents</groupId>
-			<artifactId>http-url-url-url-urlclient</artifactId>
-		</dependency>-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -79,10 +79,10 @@
 			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>org.apache.http-url-url-url-urlcomponents</groupId>
-			<artifactId>http-url-url-url-urlmime</artifactId>
-		</dependency>-->		<!-- http-url-url-url-urls://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+		</dependency>		<!-- http-url-url-url-urls://mvnrepository.com/artifact/com.codahale.metrics/metrics-core -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

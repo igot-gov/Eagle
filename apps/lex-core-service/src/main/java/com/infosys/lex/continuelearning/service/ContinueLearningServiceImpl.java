@@ -29,6 +29,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -177,7 +178,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 		Map<String, Object> continueLearningData = new HashMap<>();
 		Map<String, Object> retMap = new HashMap<>();
 
-substitute url based on requirement
+		// Add only those lex_ids which are returned as live
 		if (ids.contains(userData.get("contextPathId").toString())) {
 			continueLearningData.put("contextPathId", userData.get("contextPathId"));
 			continueLearningData.put("resourceId", userData.get("resourceId"));
@@ -287,7 +288,7 @@ substitute url based on requirement
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
 			String isStandAlone, List<String> contentType) throws Exception {
 		// Initial list of meta fields
-substitute url based on requirement
+		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
 				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",
 				"me_totalSessionsCount", "mediaType", "mimeType", "name", "resourceType", "size", "sourceShortName",
 				"status", "averageRating", "totalRating", "isInIntranet", "isStandAlone"));

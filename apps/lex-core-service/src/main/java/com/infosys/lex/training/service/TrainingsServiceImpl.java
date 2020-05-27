@@ -136,7 +136,7 @@ public class TrainingsServiceImpl implements TrainingsService {
 	@Override
 	public List<Map<String, Object>> getOfferingsSessions(String offeringId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetSessionDetails?offering_id=" + offeringId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -157,7 +157,7 @@ substitute url based on requirement
 	@Override
 	public Map<String, Object> registerForOffering(String offeringId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/RegisterCourseOffering?offering_id=" + offeringId + "&user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -182,7 +182,7 @@ substitute url based on requirement
 	@Override
 	public Map<String, Object> deRegisterForOffering(String offeringId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/UnregisterCourseOffering?offering_id=" + offeringId + "&user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -207,7 +207,7 @@ substitute url based on requirement
 	@Override
 	public Map<String, Object> getOfferingsCount(List<String> identifiers) throws JsonProcessingException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingsCount";
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -231,10 +231,10 @@ substitute url based on requirement
 	}
 
 	@Override
-substitute url based on requirement
+	public Map<String, Object> addContentToWatchList(String lexId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
+		String url = apiEndPointPrefix + "/SaveEmployeeWatchListItems?lex_id=" + lexId + "&user_id=" + userId;
 
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -257,10 +257,10 @@ substitute url based on requirement
 	}
 
 	@Override
-substitute url based on requirement
+	public Map<String, Object> removeContentFromWatchList(String lexId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
+		String url = apiEndPointPrefix + "/DeleteEmployeeWatchListItems?lex_id=" + lexId + "&user_id=" + userId;
 
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -285,7 +285,7 @@ substitute url based on requirement
 	@Override
 	public List<String> getWatchListContent(String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetEmployeeWatchListDetails?user_id=" + userId;
 
 		try {
@@ -308,7 +308,7 @@ substitute url based on requirement
 	public Map<String, Object> isJL6AndAbove(String userId) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetUserInfo?user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -333,7 +333,7 @@ substitute url based on requirement
 	@Override
 	public List<Map<String, Object>> nominateForOfferings(String offeringId, Map<String, Object> request) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/Nominate?offering_id=" + offeringId;
 
 		try {
@@ -361,7 +361,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> denominateForOfferings(String offeringId, Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/Denominate?offering_id=" + offeringId;
 
 		try {
@@ -389,7 +389,7 @@ substitute url based on requirement
 	public Map<String, Object> shareOffering(String offeringId, Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/ShareOfferings?offering_id=" + offeringId;
 
 		try {
@@ -417,7 +417,7 @@ substitute url based on requirement
 	public Map<String, Object> createJitRequest(Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/CreateJITRequest";
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -444,7 +444,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getJitRequestsCreatedByUser(String userId) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetJITRequests?user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -481,7 +481,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getOfferingsManagerCanReject(String managerId) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingDetailsForManager?manager_id=" + managerId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -506,7 +506,7 @@ substitute url based on requirement
 	public Map<String, Object> rejectOffering(String offeringId, String userId, Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/RejectRegistration?offering_id=" + offeringId + "&user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -531,7 +531,7 @@ substitute url based on requirement
 	@Override
 	public List<Map<String, Object>> questionsForFeedback(String templateId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetFeedbackQuestions?template_id=" + templateId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -557,7 +557,7 @@ substitute url based on requirement
 	public Map<String, Object> submitFeedback(String offeringId, String userId, String templateId,
 			List<Map<String, Object>> request) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/InsertFeedback?offering_id=" + offeringId + "&user_id=" + userId
 				+ "&template=" + templateId;
 		try {
@@ -583,7 +583,7 @@ substitute url based on requirement
 	@Override
 	public List<Map<String, Object>> getOfferingsForFeedbackByUser(String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/ListOfferingsforfeedback?user_id=" + userId;
 
 		try {
@@ -609,17 +609,17 @@ substitute url based on requirement
 	public Map<String,Object> mapLexidToCourseId(Map<String,Object> req) throws JsonParseException, JsonMappingException, IOException
 	{
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 
-substitute url based on requirement
+		if (!req.containsKey("lex_id") || req.get("lex_id") == null)
 			throw new InvalidDataInputException("Invalid input");
 		
 		if(!req.containsKey("course_id") || req.get("course_id")== null)
 			throw new InvalidDataInputException("Invalid input");
 
-substitute url based on requirement
+		String lexId = req.get("lex_id").toString();
 		String courseId = req.get("course_id").toString();
-substitute url based on requirement
+		String url = apiEndPointPrefix + "/MapLexIdToCourseCode?lex_id=" + lexId + "&course_id=" + courseId;
 
 
 		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -636,7 +636,7 @@ substitute url based on requirement
 	public List<String> getEducatorDetails(List<String> contentIds) throws JsonParseException, JsonMappingException, IOException
 	{
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 
 		String url = apiEndPointPrefix + "/GetEducatorDetails";
 
@@ -655,7 +655,7 @@ substitute url based on requirement
 	public List<Map<String,Object>> getTrainingHistory(String userId,String status) throws JsonParseException, JsonMappingException, IOException
 	{
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		
 		String url = apiEndPointPrefix + "GetTrainingDetailsHistory?user_id="+userId+"&status="+status;
 		
@@ -683,15 +683,15 @@ substitute url based on requirement
 
 	private HttpHeaders getRestCallHeader() {
 		String accessToken = (String) servletContext.getAttribute("lhub_access_token");
-		
-substitute url based on requirement
-substitute based on requirement
+
+		String clientId = lexServerProps.getLhubAthClientId();
+		Optional<ApiAuthenticationModel> authDetailsRes = authRepo.findById(clientId);
 		if(!authDetailsRes.isPresent())
 			throw new ApplicationLogicError("Lhub auth details not found");
 		String clientKey = authDetailsRes.get().getValue();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", "Bearer " + accessToken);
-substitute based on requirement
+		headers.set("Client_Id", clientId);
 		headers.set("Api_Key", clientKey);
 		return headers;
 	}

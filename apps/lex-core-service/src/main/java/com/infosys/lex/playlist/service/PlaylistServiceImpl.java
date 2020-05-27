@@ -778,7 +778,7 @@ substitute url based on requirement
 	 * String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-substitute url based on requirement
+	public void deleteContent(String rootOrg, String userId, String playlistId, String lexId) throws Exception {
 
 		// Validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -794,12 +794,13 @@ substitute url based on requirement
 
 		// resource should be present in playlist
 		List<String> resourceId = playlist.get().getResourceIds();
-substitute url based on requirement
+		if (!resourceId.contains(lexId)) {
 			throw new InvalidDataInputException("resource.notFound");
 		}
 
-substitute url based on requirement
-substitute url based on requirement
+
+		// lexid removed from user_playlist
+		resourceId.remove(lexId);
 
 		UserPlaylist userPlaylist = playlist.get();
 		userPlaylist.setResourceIds(resourceId);
@@ -809,7 +810,7 @@ substitute url based on requirement
 
 		// remove from recent user table
 		PlaylistRecentKey recentPlaylistKey = new PlaylistRecentKey(rootOrg, userId, UUID.fromString(playlistId),
-substitute url based on requirement
+				lexId);
 		PlaylistRecent recentPlaylist = new PlaylistRecent();
 		recentPlaylist.setPlaylistRecentkey(recentPlaylistKey);
 		List<PlaylistRecent> listToBeDeleted = new ArrayList<>();
@@ -845,7 +846,7 @@ substitute url based on requirement
 			throw new InvalidDataInputException("invalid.playlist");
 		}
 
-substitute url based on requirement
+		// Check if lex id is already in playlist
 		UserPlaylist playlistToInsert = userPlaylist.get();
 		List<String> contentIds = playlistToInsert.getResourceIds();
 		for (String id : contents) {
@@ -880,7 +881,7 @@ substitute url based on requirement
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-substitute url based on requirement
+	public void addContent(String rootOrg, String userId, String playlistId, String lexId) throws Exception  {
 
 		// validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -897,16 +898,16 @@ substitute url based on requirement
 		// check if the given content is already present
 		UserPlaylist userPlaylist = dbPlaylist.get();
 		List<String> playlistContent = userPlaylist.getResourceIds();
-substitute url based on requirement
+		if (playlistContent.contains(lexId)) {
 			throw new InvalidDataInputException("content.alreadyPresent");
 		}
 
 		// Check for access and status
 
-substitute url based on requirement
+		this.checkForAccessAndRetiredStatus(Arrays.asList(userId), Arrays.asList(lexId), new HashMap<String, Object>(),
 				false, rootOrg, null, null);
 
-substitute url based on requirement
+		playlistContent.add(lexId);
 		// update user playlist
 		Date date = new Date();
 		Timestamp timestamp = new Timestamp(date.getTime());
@@ -915,7 +916,7 @@ substitute url based on requirement
 
 		// insert in userplaylist as well as recent playlist using batch operation
 		userPlayListRepo.insertUserAndRecentPlaylist(userPlaylist,
-substitute url based on requirement
+				this.getRecentObjects(rootOrg, userId, UUID.fromString(playlistId), Arrays.asList(lexId)));
 
 	}
 
@@ -1248,7 +1249,7 @@ substitute url based on requirement
 		resourceIds = resourceIds.stream().distinct().collect(Collectors.toList());
 
 		// check for the source fields and assign it to the required fields
-substitute url based on requirement
+		String[] requiredFields = new String[] { "appIcon", "artifactUrl", "children", "complexityLevel", "contentType",
 				"creatorContacts", "description", "downloadUrl", "duration", "identifier", "isExternal",
 				"lastUpdatedOn", "learningMode", "learningObjective", "me_totalSessionsCount", "mimeType", "name",
 				"resourceCategory", "resourceType", "sourceName", "status", "hasAccess", "averageRating",
@@ -1347,7 +1348,7 @@ substitute url based on requirement
 		Map<String, Object> filterMap = this.prepareFilterMap(isInIntranet, isStandAlone, contentTypes);
 
 		// meta list
-substitute url based on requirement
+		String[] requiredFields = new String[] { "appIcon", "artifactUrl", "children", "complexityLevel", "contentType",
 				"creatorContacts", "description", "downloadUrl", "duration", "identifier", "isExternal",
 				"lastUpdatedOn", "learningMode", "learningObjective", "me_totalSessionsCount", "mimeType", "name",
 				"resourceCategory", "resourceType", "sourceName", "status", "hasAccess", "averageRating", "totalRating",
@@ -1476,7 +1477,7 @@ substitute url based on requirement
 		resourceIds.addAll(onlySharedByPlaylistContent);
 
 		// check for the source fields and assign it to the required fields
-substitute url based on requirement
+		String[] requiredFields = new String[] { "appIcon", "artifactUrl", "children", "complexityLevel", "contentType",
 				"creatorContacts", "description", "downloadUrl", "duration", "identifier", "isExternal",
 				"lastUpdatedOn", "learningMode", "learningObjective", "me_totalSessionsCount", "mimeType", "name",
 				"resourceCategory", "resourceType", "sourceName", "status", "hasAccess", "averageRating",
@@ -1643,7 +1644,7 @@ substitute url based on requirement
 		resourceIds = userPlaylist.getResourceIds();
 
 		// check for the source fields and assign it to the required fields
-substitute url based on requirement
+		String[] requiredFields = new String[] { "appIcon", "artifactUrl", "children", "complexityLevel", "contentType",
 				"creatorContacts", "description", "downloadUrl", "duration", "identifier", "isExternal",
 				"lastUpdatedOn", "learningMode", "learningObjective", "me_totalSessionsCount", "mimeType", "name",
 				"resourceCategory", "resourceType", "sourceName", "status", "hasAccess", "averageRating",

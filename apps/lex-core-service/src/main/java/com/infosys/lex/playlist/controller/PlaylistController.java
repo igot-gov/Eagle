@@ -95,15 +95,15 @@ public class PlaylistController {
 	 * @param rootOrg
 	 * @param userId
 	 * @param playlistId
-substitute url based on requirement
+	 * @param lexId
 	 * @throws Exception
 	 */
-substitute url based on requirement
+	@PostMapping("/v1/users/{user_id}/playlists/{playlist_id}/contents/{lex_id}")
 	public ResponseEntity<?> addContent(@RequestHeader(value = "rootOrg") String rootOrg,
-			@PathVariable(value = "user_id") String userId, @PathVariable(value = "playlist_id") String playlistId,
-substitute url based on requirement
+										@PathVariable(value = "user_id") String userId, @PathVariable(value = "playlist_id") String playlistId,
+										@PathVariable(value = "lex_id") String lexId) throws Exception  {
 
-substitute url based on requirement
+		playListService.addContent(rootOrg, userId, playlistId, lexId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
@@ -168,15 +168,15 @@ substitute url based on requirement
 	 * @param rootOrg
 	 * @param userId
 	 * @param playlistId
-substitute url based on requirement
-	 * @throws Exception
-	 */
-substitute url based on requirement
-	public ResponseEntity<?> deleteContent(@RequestHeader(value = "rootOrg") String rootOrg,
-			@PathVariable(value = "user_id") String userId, @PathVariable(value = "playlist_id") String playlistId,
-substitute url based on requirement
+	 * @param lexId
 
-substitute url based on requirement
+	 */
+	@DeleteMapping("/v1/users/{user_id}/playlists/{playlist_id}/contents/{lex_id}")
+	public ResponseEntity<?> deleteContent(@RequestHeader(value = "rootOrg") String rootOrg,
+										   @PathVariable(value = "user_id") String userId, @PathVariable(value = "playlist_id") String playlistId,
+										   @PathVariable(value = "lex_id") String lexId)  throws Exception{
+
+		playListService.deleteContent(rootOrg, userId, playlistId, lexId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
