@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -18,8 +15,10 @@ Highly Confidential
 package com.infosys.lex.training.service;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +37,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -78,12 +78,12 @@ public class TrainingsServiceImpl implements TrainingsService {
 	// "https://itgatewaytst.infosys.com/extapilex/api/Learning";
 
 	// private static final String apiEndPointPrefix =
-	// "http://IPaddress:8740/api/Learning";
+	// "http://127.0.0.1:8740/api/Learning";
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> getTrainings(String contentId, String emailId, String startDate, String endDate,
-			String location) throws Exception {
+			String location)  {
 		HttpHeaders headers = getRestCallHeader();
 		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingDetails?content_id=" + contentId + "&email=" + emailId;
@@ -117,7 +117,6 @@ public class TrainingsServiceImpl implements TrainingsService {
 						session.put("start_dt", newFormat.format(oldFormatStartDate));
 						session.put("end_dt", newFormat.format(oldFormatEndDate));
 					} catch (ParseException e) {
-						System.out.println(e.getMessage());
 					}
 				});
 			});
@@ -125,18 +124,17 @@ public class TrainingsServiceImpl implements TrainingsService {
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public List<Map<String, Object>> getOfferingsSessions(String offeringId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetSessionDetails?offering_id=" + offeringId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -147,17 +145,17 @@ substitute url based on requirement
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public Map<String, Object> registerForOffering(String offeringId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/RegisterCourseOffering?offering_id=" + offeringId + "&user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -172,17 +170,17 @@ substitute url based on requirement
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public Map<String, Object> deRegisterForOffering(String offeringId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/UnregisterCourseOffering?offering_id=" + offeringId + "&user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -197,17 +195,17 @@ substitute url based on requirement
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public Map<String, Object> getOfferingsCount(List<String> identifiers) throws JsonProcessingException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingsCount";
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -223,18 +221,18 @@ substitute url based on requirement
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
-substitute url based on requirement
+	public Map<String, Object> addContentToWatchList(String lexId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
+		String url = apiEndPointPrefix + "/SaveEmployeeWatchListItems?lex_id=" + lexId + "&user_id=" + userId;
 
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -249,18 +247,18 @@ substitute url based on requirement
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
-substitute url based on requirement
+	public Map<String, Object> removeContentFromWatchList(String lexId, String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
+		String url = apiEndPointPrefix + "/DeleteEmployeeWatchListItems?lex_id=" + lexId + "&user_id=" + userId;
 
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -275,17 +273,17 @@ substitute url based on requirement
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public List<String> getWatchListContent(String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetEmployeeWatchListDetails?user_id=" + userId;
 
 		try {
@@ -297,10 +295,10 @@ substitute url based on requirement
 			return response;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -308,7 +306,7 @@ substitute url based on requirement
 	public Map<String, Object> isJL6AndAbove(String userId) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetUserInfo?user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -321,11 +319,10 @@ substitute url based on requirement
 			return responseMap;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 
 	}
@@ -333,7 +330,7 @@ substitute url based on requirement
 	@Override
 	public List<Map<String, Object>> nominateForOfferings(String offeringId, Map<String, Object> request) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/Nominate?offering_id=" + offeringId;
 
 		try {
@@ -350,10 +347,10 @@ substitute url based on requirement
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -361,7 +358,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> denominateForOfferings(String offeringId, Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/Denominate?offering_id=" + offeringId;
 
 		try {
@@ -378,10 +375,10 @@ substitute url based on requirement
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -389,7 +386,7 @@ substitute url based on requirement
 	public Map<String, Object> shareOffering(String offeringId, Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/ShareOfferings?offering_id=" + offeringId;
 
 		try {
@@ -406,45 +403,46 @@ substitute url based on requirement
 
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
-	public Map<String, Object> createJitRequest(Map<String, Object> request) {
+	public Map<String, Object> createJitRequest(Map<String, Object> request) throws JsonParseException, JsonMappingException, IOException {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/CreateJITRequest";
-		try {
-			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
-					new HttpEntity<Map<String, Object>>(request, headers), String.class);
+		List<String> successResCode = Arrays.asList("1", "2");
 
-			if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
-				Map<String, Object> responseMap = new ObjectMapper().readValue(responseEntity.getBody(),
-						new TypeReference<Map<String, Object>>() {
-						});
-				return responseMap;
-			}
-			throw new Exception("Error while calling post request");
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
+				new HttpEntity<Map<String, Object>>(request, headers), String.class);
 
-		} catch (HttpServerErrorException httpServerErrorException) {
-			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
-		} catch (Exception exception) {
-			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+		String responseBody = responseEntity.getBody();
+		Map<String, Object> responseMap = new ObjectMapper().readValue(responseBody,
+				new TypeReference<Map<String, Object>>() {
+				});
+
+		String responceCode = responseMap.get("res_code").toString().trim();
+		if (successResCode.contains(responceCode))
+			return responseMap;
+		else {
+			Charset  charset = Charset.forName("utf8");
+			String resMessage =  responseMap.toString();
+			throw new HttpClientErrorException(HttpStatus.BAD_REQUEST,resMessage,responseBody.getBytes(charset),charset);
+
 		}
+
 	}
 
 	@Override
 	public List<Map<String, Object>> getJitRequestsCreatedByUser(String userId) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetJITRequests?user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -462,18 +460,16 @@ substitute url based on requirement
 					oldFormatDate = formatter.parse(receivedDate);
 					responseMap.put("start_date", newFormat.format(oldFormatDate));
 				} catch (ParseException e) {
-					System.out.println(e.getMessage());
 				}
 			});
 
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -481,7 +477,7 @@ substitute url based on requirement
 	public List<Map<String, Object>> getOfferingsManagerCanReject(String managerId) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetOfferingDetailsForManager?manager_id=" + managerId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -494,11 +490,10 @@ substitute url based on requirement
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
@@ -506,7 +501,7 @@ substitute url based on requirement
 	public Map<String, Object> rejectOffering(String offeringId, String userId, Map<String, Object> request) {
 
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/RejectRegistration?offering_id=" + offeringId + "&user_id=" + userId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
@@ -521,17 +516,17 @@ substitute url based on requirement
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public List<Map<String, Object>> questionsForFeedback(String templateId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/GetFeedbackQuestions?template_id=" + templateId;
 		try {
 			ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
@@ -544,11 +539,10 @@ substitute url based on requirement
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 
 	}
@@ -557,7 +551,7 @@ substitute url based on requirement
 	public Map<String, Object> submitFeedback(String offeringId, String userId, String templateId,
 			List<Map<String, Object>> request) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/InsertFeedback?offering_id=" + offeringId + "&user_id=" + userId
 				+ "&template=" + templateId;
 		try {
@@ -573,17 +567,17 @@ substitute url based on requirement
 			throw new Exception("Error while calling post request");
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
 
 	@Override
 	public List<Map<String, Object>> getOfferingsForFeedbackByUser(String userId) {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 		String url = apiEndPointPrefix + "/ListOfferingsforfeedback?user_id=" + userId;
 
 		try {
@@ -597,33 +591,31 @@ substitute url based on requirement
 			return responseMaps;
 		} catch (HttpServerErrorException httpServerErrorException) {
 			logger.error(httpServerErrorException);
-			throw new ApplicationLogicError("Learning Hub Rest Call Exception",httpServerErrorException);
+			throw new ApplicationLogicError("Learning Hub Rest Call Exception", httpServerErrorException);
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			logger.error(exception);
-			throw new ApplicationLogicError(exception.getMessage(),exception);
+			throw new ApplicationLogicError(exception.getMessage(), exception);
 		}
 	}
-	
+
 	@Override
-	public Map<String,Object> mapLexidToCourseId(Map<String,Object> req) throws JsonParseException, JsonMappingException, IOException
-	{
+	public Map<String, Object> mapLexidToCourseId(Map<String, Object> req)
+			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 
-substitute url based on requirement
-			throw new InvalidDataInputException("Invalid input");
-		
-		if(!req.containsKey("course_id") || req.get("course_id")== null)
+		if (!req.containsKey("lex_id") || req.get("lex_id") == null)
 			throw new InvalidDataInputException("Invalid input");
 
-substitute url based on requirement
+		if (!req.containsKey("course_id") || req.get("course_id") == null)
+			throw new InvalidDataInputException("Invalid input");
+
+		String lexId = req.get("lex_id").toString();
 		String courseId = req.get("course_id").toString();
-substitute url based on requirement
-
+		String url = apiEndPointPrefix + "/MapLexIdToCourseCode?lex_id=" + lexId + "&course_id=" + courseId;
 
 		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
-				new HttpEntity<Object>( headers), String.class);
+				new HttpEntity<Object>(headers), String.class);
 
 		Map<String, Object> responseMap = new ObjectMapper().readValue(responseEntity.getBody(),
 				new TypeReference<Map<String, Object>>() {
@@ -633,13 +625,12 @@ substitute url based on requirement
 	}
 
 	@Override
-	public List<String> getEducatorDetails(List<String> contentIds) throws JsonParseException, JsonMappingException, IOException
-	{
+	public List<String> getEducatorDetails(List<String> contentIds)
+			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
 
 		String url = apiEndPointPrefix + "/GetEducatorDetails";
-
 
 		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.POST,
 				new HttpEntity<List<String>>(contentIds, headers), String.class);
@@ -650,53 +641,51 @@ substitute url based on requirement
 
 		return responseMap;
 	}
-	
+
 	@Override
-	public List<Map<String,Object>> getTrainingHistory(String userId,String status) throws JsonParseException, JsonMappingException, IOException
-	{
+	public List<Map<String, Object>> getTrainingHistory(String userId, String status)
+			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
-		
-		String url = apiEndPointPrefix + "GetTrainingDetailsHistory?user_id="+userId+"&status="+status;
-		
-		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
-				new HttpEntity<>( headers), String.class);
-		List<Map<String,Object>> responseList = new ObjectMapper().readValue(responseEntity.getBody(),
-				new TypeReference<List<Map<String,Object>>>() {
+		String apiEndPointPrefix = lexServerProps.getLhubUrl();
+
+		String url = apiEndPointPrefix + "GetTrainingDetailsHistory?user_id=" + userId + "&status=" + status;
+
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<>(headers),
+				String.class);
+		List<Map<String, Object>> responseList = new ObjectMapper().readValue(responseEntity.getBody(),
+				new TypeReference<List<Map<String, Object>>>() {
 				});
-		
+
 		String timeZone = "IST";
 
-		for(Map<String,Object> training:responseList)
-		{
+		for (Map<String, Object> training : responseList) {
 			if (training.containsKey("time_zone"))
 				timeZone = training.get("time_zone").toString();
 			if (training.containsKey("start_date")) {
-				training.put("start_date", this.createDateMapFromDateString(training.get("start_date").toString(), timeZone));
+				training.put("start_date",
+						this.createDateMapFromDateString(training.get("start_date").toString(), timeZone));
 			}
-			
+
 		}
 
 		return responseList;
 	}
-	
 
 	private HttpHeaders getRestCallHeader() {
 		String accessToken = (String) servletContext.getAttribute("lhub_access_token");
-		
-substitute url based on requirement
-substitute based on requirement
-		if(!authDetailsRes.isPresent())
+
+		String clientId = lexServerProps.getLhubAthClientId();
+		Optional<ApiAuthenticationModel> authDetailsRes = authRepo.findById(clientId);
+		if (!authDetailsRes.isPresent())
 			throw new ApplicationLogicError("Lhub auth details not found");
 		String clientKey = authDetailsRes.get().getValue();
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", "Bearer " + accessToken);
-substitute based on requirement
+		headers.set("Client_Id", clientId);
 		headers.set("Api_Key", clientKey);
 		return headers;
 	}
-	
-	
+
 	private Map<String, Object> createDateMapFromDateString(String date, String timeZone) {
 		Map<String, Object> dateMap = new HashMap<String, Object>();
 		DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");

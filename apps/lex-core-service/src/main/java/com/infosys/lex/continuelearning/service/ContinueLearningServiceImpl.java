@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -42,7 +39,7 @@ import com.infosys.lex.continuelearning.dto.ContinueLearningDTO;
 import com.infosys.lex.continuelearning.entities.ContinueLearning;
 import com.infosys.lex.continuelearning.entities.ContinueLearningKey;
 import com.infosys.lex.continuelearning.validator.ContinueLearningValidator;
-import com.infosys.lex.core.exception.ApplicationLogicError;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 
 @Service
@@ -66,8 +63,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 	}
 
 	@Override
-	public Map<String, Object> upsertLearningData(String rootOrg, String userId, @Valid ContinueLearningDTO data)
-			throws Exception {
+	public Map<String, Object> upsertLearningData(String rootOrg, String userId, @Valid ContinueLearningDTO data){
 		validator.validateUser(rootOrg, userId);
 
 		Map<String, Object> retMap = new HashMap<String, Object>();
@@ -82,7 +78,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 	@Override
 	public Map<String, Object> getLearningData(String rootOrg, String userId, Set<String> sourceFields,
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
-			String isStandAlone, String resourceType) throws Exception {
+			String isStandAlone, String resourceType) throws IOException, ParseException{
 		// Initial list of meta fields
 		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
 				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",
@@ -114,7 +110,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 			}
 
 			Set<String> ids = new HashSet<>();
-			Map<String, Map<String, Object>> metaData = this.fetchMetaData(result, count, ids, requiredFields);
+			Map<String, Map<String, Object>> metaData = this.fetchMetaData(rootOrg, result, count, ids, requiredFields);
 
 			this.addProgressForUser(rootOrg, userId, metaData, ids);
 
@@ -177,7 +173,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 		Map<String, Object> continueLearningData = new HashMap<>();
 		Map<String, Object> retMap = new HashMap<>();
 
-substitute url based on requirement
+		// Add only those lex_ids which are returned as live
 		if (ids.contains(userData.get("contextPathId").toString())) {
 			continueLearningData.put("contextPathId", userData.get("contextPathId"));
 			continueLearningData.put("resourceId", userData.get("resourceId"));
@@ -202,12 +198,13 @@ substitute url based on requirement
 					if (meta.containsKey(metaKey)) {
 
 						// Set the ratings for the content
-						if (metaKey.equalsIgnoreCase("averageRating") || metaKey.equalsIgnoreCase("totalRating")) {
-							metaValue = this.getRatings(rootOrg, metaKey, meta);
-						} else {
-							// If meta is null for a field, set it as blank.
-							metaValue = meta.get(metaKey) == null ? "" : meta.get(metaKey);
-						}
+						metaValue = meta.get(metaKey) == null ? "" : meta.get(metaKey);
+//						if (metaKey.equalsIgnoreCase("averageRating") || metaKey.equalsIgnoreCase("totalRating")) {
+//							metaValue = this.getRatings(rootOrg, metaKey, meta);
+//						} else {
+//							// If meta is null for a field, set it as blank.
+//							metaValue = meta.get(metaKey) == null ? "" : meta.get(metaKey);
+//						}
 					} else {
 						// If meta is not available for a field, set it as blank.
 						metaValue = "";
@@ -229,8 +226,8 @@ substitute url based on requirement
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	private Map<String, Map<String, Object>> fetchMetaData(List<Map<String, Object>> result, int count, Set<String> ids,
-			List<String> requiredFields) throws IOException, ParseException {
+	private Map<String, Map<String, Object>> fetchMetaData(String rootOrg, List<Map<String, Object>> result, int count,
+			Set<String> ids, List<String> requiredFields) throws IOException, ParseException {
 
 		for (Map<String, Object> map : result) {
 			ids.add(map.get("contextPathId").toString());
@@ -240,12 +237,14 @@ substitute url based on requirement
 			}
 		}
 
-		Map<String, Map<String, Object>> meta = contentService.filterAndFetchContentMetaToShow(new ArrayList<>(ids),
-				new HashSet<String>(requiredFields));
+		Map<String, Map<String, Object>> meta = contentService.filterAndFetchContentMetaToShow(rootOrg,
+				new ArrayList<>(ids), new HashSet<String>(requiredFields));
+		
+		// Clear out all previous ids
+		ids.clear();
 
 		if (meta != null && meta.size() > 0) {
-			// Clear out all ids and add only valid ones
-			ids.clear();
+			// Add only valid ones
 			meta.keySet().forEach(ids::add);
 		}
 		return meta;
@@ -258,26 +257,29 @@ substitute url based on requirement
 	 * @param metaKey
 	 * @param meta
 	 * @return
+	 * @throws IOException 
+	 * @throws ParseException 
 	 */
-	@SuppressWarnings("unchecked")
-	private Object getRatings(String rootOrg, String metaKey, Map<String, Object> meta) {
-		Object rating = 0;
-		Map<String, Object> ratingMap = (Map<String, Object>) meta.getOrDefault(metaKey, new HashMap<>());
-		if (!ratingMap.isEmpty()) {
-			if (ratingMap.containsKey(rootOrg)) {
-				if (metaKey.equalsIgnoreCase("totalRating")) {
-					rating = Integer.parseInt(ratingMap.get(rootOrg).toString());
-				} else
-					rating = Float.parseFloat(ratingMap.get(rootOrg).toString());
-			}
-		}
-		return rating;
-	}
+//	@SuppressWarnings("unchecked")
+//	private Object getRatings(String rootOrg, String metaKey, Map<String, Object> meta) {
+//		Object rating = 0;
+//		Map<String, Object> ratingMap = (Map<String, Object>) meta.getOrDefault(metaKey, new HashMap<>());
+//		if (!ratingMap.isEmpty()) {
+//			if (ratingMap.containsKey(rootOrg)) {
+//				if (metaKey.equalsIgnoreCase("totalRating")) {
+//					rating = Integer.parseInt(ratingMap.get(rootOrg).toString());
+//				} else {
+//					rating = Float.parseFloat(ratingMap.get(rootOrg).toString());
+//				}
+//			}
+//		}
+//		return rating;
+//	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-substitute url based on requirement
+	 * @see com.infosys.lex.continuelearning.service.ContinueLearningService#
 	 * getLearningDataWithFilters(java.lang.String, java.lang.String, java.util.Set,
 	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
 	 * java.lang.String, java.lang.String, java.util.List)
@@ -285,9 +287,9 @@ substitute url based on requirement
 	@Override
 	public Map<String, Object> getLearningDataWithFilters(String rootOrg, String userId, Set<String> sourceFields,
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
-			String isStandAlone, List<String> contentType) throws Exception {
+			String isStandAlone, List<String> contentType) throws IOException, ParseException {
 		// Initial list of meta fields
-substitute url based on requirement
+		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
 				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",
 				"me_totalSessionsCount", "mediaType", "mimeType", "name", "resourceType", "size", "sourceShortName",
 				"status", "averageRating", "totalRating", "isInIntranet", "isStandAlone"));
@@ -330,7 +332,7 @@ substitute url based on requirement
 			}
 
 			Set<String> ids = new HashSet<>();
-			Map<String, Map<String, Object>> metaData = this.fetchMetaData(result, currentlyFetched, ids,
+			Map<String, Map<String, Object>> metaData = this.fetchMetaData(rootOrg, result, currentlyFetched, ids,
 					requiredFields);
 
 			this.addProgressForUser(rootOrg, userId, metaData, ids);

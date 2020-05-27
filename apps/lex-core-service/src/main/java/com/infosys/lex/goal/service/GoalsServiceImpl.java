@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at http-url-url-urls://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -19,6 +16,7 @@ package com.infosys.lex.goal.service;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +53,6 @@ import com.infosys.lex.common.util.LexServerProperties;
 import com.infosys.lex.common.util.PIDConstants;
 import com.infosys.lex.core.exception.InvalidDataInputException;
 import com.infosys.lex.core.exception.ResourceNotFoundException;
-import com.infosys.lex.core.logger.LexLogger;
 import com.infosys.lex.goal.bodhi.repo.CommonGoal;
 import com.infosys.lex.goal.bodhi.repo.CommonGoalKey;
 import com.infosys.lex.goal.bodhi.repo.CommonGoalLang;
@@ -150,8 +147,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 * @return
 	 * @throws Exception
 	 */
-	private SharedGoal validateAndGetSharedByGoal(String rootOrg, String userUUID, String goalType, String goalId)
-			throws Exception {
+	private SharedGoal validateAndGetSharedByGoal(String rootOrg, String userUUID, String goalType, String goalId){
 
 		SharedGoalTracker result = sharedGoalTrackerRepo.getSharedGoalDataAndCount(rootOrg, userUUID, goalType,
 				UUID.fromString(goalId));
@@ -197,8 +193,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 * table.
 	 */
 	@Override
-	public void removeUserLearningGoal(String rootOrg, String goalType, String userUUID, String goalId)
-			throws Exception {
+	public void removeUserLearningGoal(String rootOrg, String goalType, String userUUID, String goalId) {
 
 		helper.validateULGoalType(goalType);
 		helper.validateUUID(goalId);
@@ -215,12 +210,12 @@ public class GoalsServiceImpl implements GoalsService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#insertLearningGoals(com.infosys.lex
 	 * .goal.dto.GoalDTO, java.lang.String)
 	 */
 
 	@Override
-	public void createLearningGoal(String rootOrg, GoalDTO goalsData, String userUUID) throws Exception {
+	public void createLearningGoal(String rootOrg, GoalDTO goalsData, String userUUID) throws IOException, ParseException {
 
 		helper.validateUUID(userUUID);
 		this.validateUser(rootOrg, userUUID);
@@ -242,9 +237,11 @@ substitute url based on requirement
 	 * @param goalsData
 	 * @param userUUID
 	 * @return
+	 * @throws IOException 
+	 * @throws ParseException 
 	 * @throws Exception
 	 */
-	private UserGoal getLearningGoalObject(GoalDTO goalsData, String userUUID, String rootOrg) throws Exception {
+	private UserGoal getLearningGoalObject(GoalDTO goalsData, String userUUID, String rootOrg) throws IOException, ParseException{
 		// validate the common goal and fetch its details
 		String goalType = goalsData.getGoalType();
 		Map<String, Object> validatedData = validateCommonGoalForInsertion(rootOrg, goalsData, userUUID, goalType);
@@ -359,10 +356,9 @@ substitute url based on requirement
 	 * @param userUUID
 	 * @param goalType
 	 * @return validated common goal
-	 * @throws Exception
 	 */
 	private Map<String, Object> validateCommonGoalForInsertion(String rootOrg, GoalDTO goalsData, String userUUID,
-			String goalType) throws Exception {
+			String goalType) {
 
 		// goal type must not be empty and must be among allowed values
 		helper.validateULGoalType(goalType);
@@ -419,13 +415,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#shareGoal(java.util.List,java.lang.
 	 * String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> shareGoal_v1(List<String> recipients, String userUUID, String goalId, String goalType,
-			String rootOrg, String message) throws Exception {
+			String rootOrg, String message) throws IOException, ParseException {
 
 		try {
 			UUID.fromString(userUUID);
@@ -531,7 +527,7 @@ substitute url based on requirement
 
 		Map<String, Object> tagValuePair = new HashMap<>();
 		tagValuePair.put("#contentTitle", goalTitle);
-substitute url based on requirement
+//		tagValuePair.put("#targetUrl", "https://CLIENT-staging.onwingspan.com/app/goals/me/all");
 		tagValuePair.put("#message", message);
 		requestBody.put("tag-value-pair", tagValuePair);
 
@@ -553,7 +549,7 @@ substitute url based on requirement
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> shareGoal(List<String> recipients, String userUUID, String goalId, String goalType,
-			String rootOrg, String message) throws Exception {
+			String rootOrg, String message) throws IOException, ParseException {
 
 		try {
 			UUID.fromString(userUUID);
@@ -763,11 +759,10 @@ substitute url based on requirement
 	 * The resultant list can only contain not more than 50 users at the maximum.
 	 * 
 	 * @return
-	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	private Map<String, Object> processUsersToBeSharedWith(List<String> recipients, String userUUID, String newGoalType,
-			String goalId, List<String> goalContentIds, String rootOrg) throws Exception {
+			String goalId, List<String> goalContentIds, String rootOrg){
 
 		Map<String, Object> processedData = new HashMap<>();
 
@@ -855,11 +850,10 @@ substitute url based on requirement
 	 * @param goalId
 	 * @param initialValidUsersList
 	 * @return
-	 * @throws Exception
 	 */
 	private void fetchAlreadySharedWithUsers(String userUUID, String newGoalType, String goalId,
 			List<String> initialValidUsersList, List<String> alreadySharedWithUsers,
-			List<SharedGoalTracker> goalRecordsSharedByUser, String rootOrg) throws Exception {
+			List<SharedGoalTracker> goalRecordsSharedByUser, String rootOrg) {
 
 		// fetches all the records of this goal shared by the user
 		goalRecordsSharedByUser.addAll(sharedGoalTrackerRepo.fetchRecordsForGoalSharedByUser(rootOrg, userUUID,
@@ -884,13 +878,13 @@ substitute url based on requirement
 	/*
 	 * (non-Javadoc)
 	 * 
-substitute url based on requirement
+	 * @see com.infosys.lex.goal.service.GoalsService#takeAction(java.lang.String,
 	 * java.lang.String, java.lang.String, java.lang.String, java.lang.String,
 	 * java.lang.String)
 	 */
 	@Override
 	public Map<String, Object> takeAction(String action, ActionDTO actionData, Boolean confirm, String userUUID,
-			String goalId, String rootOrg) throws Exception {
+			String goalId, String rootOrg) throws IOException, ParseException {
 
 		// check if the goal shared is of valid type
 		helper.validateUserSharedGoalType(actionData.getGoalType());
@@ -979,13 +973,13 @@ substitute url based on requirement
 	/*
 	 * (non-Javadoc)
 	 * 
-substitute url based on requirement
+	 * @see com.infosys.lex.goal.service.GoalsService#fetchGoalsForAction(java.lang.
 	 * String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsForAction_v1(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException, ParseException {
 
 		// check if the user is valid
 		this.validateUser(rootOrg, userUUID);
@@ -1132,13 +1126,13 @@ substitute url based on requirement
 	/*
 	 * (non-Javadoc)
 	 * 
-substitute url based on requirement
+	 * @see com.infosys.lex.goal.service.GoalsService#fetchGoalsForAction(java.lang.
 	 * String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsForAction(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException, ParseException {
 
 		// check if the user is valid
 		this.validateUser(rootOrg, userUUID);
@@ -1299,12 +1293,11 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#getSuggestedGoals(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getSuggestedGoals(String rootOrg, String userUUID, String language)
-			throws Exception {
+	public List<Map<String, Object>> getSuggestedGoals(String rootOrg, String userUUID, String language) throws JsonMappingException, IOException, ParseException{
 
 		// checks if the user exists or not
 		this.validateUser(rootOrg, userUUID);
@@ -1604,12 +1597,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#updateCommonGoalDuration(java.lang.
 	 * String, java.lang.String, java.lang.String, int)
 	 */
 	@Override
 	public Map<String, Object> updateCommonGoalDuration(String rootOrg, String userUUID, String goalType, String goalId,
-			int duration) throws Exception {
+			int duration) {
 
 		// user can only update the duration of a common goal created for self and
 		// created for others but not yet shared
@@ -1649,12 +1642,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#deleteResourceFromUserGoal(java.
 	 * lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-substitute url based on requirement
-			String goalType) throws Exception {
+	public Map<String, Object> deleteResourceFromUserGoal(String rootOrg, String userUUID, String goalId, String lexId,
+			String goalType) throws IOException {
 
 		// check if the user is valid
 		this.validateUser(rootOrg, userUUID);
@@ -1668,7 +1661,7 @@ substitute url based on requirement
 
 		// check if the content which is being deleted exists in the goal or not
 		List<String> contentIds = ulg.getGoalContentId();
-substitute url based on requirement
+		if (!contentIds.contains(lexId)) {
 			throw new InvalidDataInputException("invalid.content");
 		}
 
@@ -1683,10 +1676,10 @@ substitute url based on requirement
 		Map<String, Object> deleteMap = new HashMap<>();
 		// delete the goal if all the contents from the goal have been removed after
 		// deleting this goal
-substitute url based on requirement
-substitute url based on requirement
+		if (this.checkIfResourceExistsInMeta(contentMeta, lexId)) {
+			Map<String, Object> durationData = this.calcNewGoalEndDate(contentMeta, lexId, ulg.getGoalStartDate(),
 					ulg.getGoalEndDate(), false);
-substitute url based on requirement
+			contentIds.remove(lexId);
 			if (contentIds.size() == 0) {
 				learningGoalsRepo.deleteById(ulg.getUserLearningGoalsPrimaryKey());
 				deleteMap.put("goal_deleted", true);
@@ -1716,13 +1709,13 @@ substitute url based on requirement
 	/*
 	 * (non-Javadoc)
 	 * 
-substitute url based on requirement
+	 * @see com.infosys.lex.goal.service.GoalsService#addContentUserGoal(java.lang.
 	 * String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-substitute url based on requirement
-			String rootOrg) throws Exception {
+	public Map<String, Object> addContentToUserGoal(String userUUID, String goalId, String lexId, String goalType,
+			String rootOrg) throws IOException, ParseException {
 
 		// check if user exists
 		this.validateUser(rootOrg, userUUID);
@@ -1734,23 +1727,23 @@ substitute url based on requirement
 		UserGoal ulg = learningGoalsRepo.findById(new UserGoalKey(rootOrg, userUUID, goalType, UUID.fromString(goalId)))
 				.orElseThrow(() -> new InvalidDataInputException("invalid.goal"));
 
-substitute url based on requirement
+		// check for access or deleted status for the lexId that is being tried to be
 		// added
-substitute url based on requirement
+		this.checkForAccessAndRetiredStatus(Arrays.asList(userUUID), Arrays.asList(lexId), new HashMap<>(), false,
 				rootOrg, null, null);
 
 		// the content to be added must not already be present in the goal
 		List<String> contentIds = ulg.getGoalContentId();
-substitute url based on requirement
+		if (contentIds.contains(lexId)) {
 			throw new InvalidDataInputException("content.alreadyexists");
 		}
 
 		// add the latest resource and fetch every content's meta including new resource
-substitute url based on requirement
+		contentIds.add(lexId);
 		List<Map<String, Object>> contentMeta = contentService.getMetaByIDListandSource(contentIds,
 				new String[] { "identifier", "duration" }, null);
 
-substitute url based on requirement
+		if (!this.checkIfResourceExistsInMeta(contentMeta, lexId)) {
 			throw new InvalidDataInputException("meta.notFound");
 		}
 
@@ -1760,7 +1753,7 @@ substitute url based on requirement
 		if (newResourceList == null || newResourceList.isEmpty()) {
 			throw new InvalidDataInputException("internal.error");
 		}
-substitute url based on requirement
+		if (!newResourceList.contains(lexId)) {
 			throw new InvalidDataInputException("content.parent.alreadyExists");
 		}
 
@@ -1782,7 +1775,7 @@ substitute url based on requirement
 		// the response data
 		Map<String, Object> output = new HashMap<>();
 		ulg.setGoalContentId(newResourceList);
-substitute url based on requirement
+		Map<String, Object> newEndDateData = this.calcNewGoalEndDate(newContentMeta, lexId, ulg.getGoalStartDate(),
 				ulg.getGoalEndDate(), true);
 		Date date = new Date();
 		Timestamp timestamp = new Timestamp(date.getTime());
@@ -1903,11 +1896,11 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#updateGoalReosurces(java.util.List)
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public Map<String, Object> updateGoalReosurces(List<String> goalContentList) throws Exception {
+	public Map<String, Object> updateGoalReosurces(List<String> goalContentList) throws IOException {
 
 		if (goalContentList == null || goalContentList.isEmpty()) {
 			throw new InvalidDataInputException("contentlist.nullorEmpty");
@@ -2146,13 +2139,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#modifySharedGoal(java.util.Map,
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> removeGoalSharing_v1(Map<String, Object> targetIdsMap, String userUUID, String goalId,
-			String goalType, String rootOrg) throws Exception {
+			String goalType, String rootOrg) {
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
 
@@ -2208,7 +2201,7 @@ substitute url based on requirement
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> removeGoalSharing(Map<String, Object> targetIdsMap, String userUUID, String goalId,
-			String goalType, String rootOrg) throws Exception {
+			String goalType, String rootOrg) {
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
 
@@ -2329,11 +2322,11 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#fetchGoalsListDependingOnGoalType(
 	 * java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Map<String, Object> fetchGoalsByGoalType(String userUUID, String rootOrg, String goalType) throws Exception {
+	public Map<String, Object> fetchGoalsByGoalType(String userUUID, String rootOrg, String goalType) {
 
 		this.validateUser(rootOrg, userUUID);
 
@@ -2380,12 +2373,12 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#fetchMyGoalsAndGoalProgress(java.
 	 * lang.String)
 	 */
 	@Override
 	public Map<String, Object> fetchMyGoalsWithProgress_v1(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException, ParseException {
 
 		this.validateUser(rootOrg, userUUID);
 
@@ -2490,7 +2483,7 @@ substitute url based on requirement
 
 	@Override
 	public Map<String, Object> fetchMyGoalsWithProgress(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException, ParseException {
 
 		this.validateUser(rootOrg, userUUID);
 
@@ -2609,7 +2602,7 @@ substitute url based on requirement
 	}
 
 	@SuppressWarnings("unchecked")
-	private List<String> getGoalContentWithoutDeplicates(List<Map<String, Object>> myGoals) throws Exception {
+	private List<String> getGoalContentWithoutDeplicates(List<Map<String, Object>> myGoals) {
 
 		// New set for all the content ids for all the goals.
 		Set<String> goalsContentSet = new HashSet<>();
@@ -2628,12 +2621,13 @@ substitute url based on requirement
 	 * @param userUUID        The mailId of the user
 	 * 
 	 * @return Put all the required meta data into a map and return it.
+	 * @throws IOException 
+	 * @throws ParseException 
 	 * 
-	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	private Map<String, Object> getMetaAndProgress(String userUUID, List<String> goalsContents, String rootOrg,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException, ParseException {
 
 		// fetch meta from elastic search
 		Map<String, Object> contentData = new HashMap<>();
@@ -2794,13 +2788,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#fetchGoalsSharedByMe(java.lang.
 	 * String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsSharedByMe_v1(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws JsonMappingException, IOException, ParseException {
 
 		// fetch goals created for others but not yet shared
 		List<Map<String, Object>> notYetSharedGoals = learningGoalsRepo
@@ -2915,7 +2909,7 @@ substitute url based on requirement
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsSharedByMe(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException, ParseException {
 
 		// fetch goals created for others but not yet shared
 		List<Map<String, Object>> notYetSharedGoals = learningGoalsRepo
@@ -3109,10 +3103,13 @@ substitute url based on requirement
 	 * @param finalList &nbsp;The goal data for which metadata is required
 	 * 
 	 * @return Goal data along with content metadata.
+	 * @throws ParseException 
+	 * @throws IOException 
+	 * @throws Exception 
 	 */
 	@SuppressWarnings({ "unchecked" })
 	private List<Map<String, Object>> addContentDetails(String userUUID, List<Map<String, Object>> finalList,
-			String rootOrg, List<String> metaFields) throws Exception {
+			String rootOrg, List<String> metaFields) throws IOException, ParseException {
 
 		Map<String, Object> IdToMetaMap = new HashMap<String, Object>();
 
@@ -3197,13 +3194,13 @@ substitute url based on requirement
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.goal.service.GoalsService#trackSharedGoal(java.lang.String,
 	 * java.lang.String, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> trackSharedGoal_v1(String rootOrg, String userUUID, String goalId, String goalType,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException {
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
 
@@ -3310,7 +3307,7 @@ substitute url based on requirement
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> trackSharedGoal(String rootOrg, String userUUID, String goalId, String goalType,
-			List<String> metaFields) throws Exception {
+			List<String> metaFields) throws IOException {
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
 
@@ -3489,10 +3486,11 @@ substitute url based on requirement
 	 * @param acceptedGoals &nbsp; The goal data
 	 * 
 	 * @return Required data for accepted goals along with their progress
+	 * @throws IOException 
 	 */
 	@SuppressWarnings("unchecked")
 	private List<Map<String, Object>> processAcceptedDataAndCalculateProgress(String rootOrg,
-			List<SharedGoalTracker> acceptedGoals, List<String> metaFields) throws Exception {
+			List<SharedGoalTracker> acceptedGoals, List<String> metaFields) throws IOException {
 
 		List<String> goalSharedWithIds = new ArrayList<>();
 		List<String> goalContentIds = new ArrayList<>();
@@ -3557,12 +3555,10 @@ substitute url based on requirement
 	 * 
 	 * @return It returns the final processed data from
 	 *         "calculateProgressForEachRecipient"
-	 * @throws Exception
 	 */
 	@SuppressWarnings("unchecked")
 	private List<Map<String, Object>> getProgressForEachRecipient(String rootOrg, List<SharedGoalTracker> acceptedGoals,
-			List<String> goalSharedWithIds, List<String> goalContentIds, List<Map<String, Object>> goalsMetaData)
-			throws Exception {
+			List<String> goalSharedWithIds, List<String> goalContentIds, List<Map<String, Object>> goalsMetaData){
 
 		Map<String, Object> resourceIdToMeta = new HashMap<String, Object>();
 		Set<String> contentTypes = new HashSet<String>();
@@ -3736,12 +3732,12 @@ substitute url based on requirement
 	 *                        status in meta while fetching
 	 * @param source          &nbsp;&nbsp;-&nbsp;&nbsp;Array to limit the fields
 	 *                        returned in meta
-	 * @throws Exception
+	 * @throws IOException 
+	 * @throws ParseException 
 	 */
 	@SuppressWarnings("unchecked")
 	private void checkForAccessAndRetiredStatus(List<String> uID, List<String> goalContentList,
-			Map<String, Object> statusData, boolean isDataRequired, String rootOrg, String status, String[] source)
-			throws Exception {
+			Map<String, Object> statusData, boolean isDataRequired, String rootOrg, String status, String[] source) throws IOException, ParseException{
 
 		List<Map<String, Object>> metaData = contentService.getMetaByIDListandSource(goalContentList, source, status);
 
@@ -3840,7 +3836,7 @@ substitute url based on requirement
 
 	@SuppressWarnings("unchecked")
 	private void checkForAccessStatus(List<String> uID, List<String> goalContentList, Map<String, Object> statusData,
-			String rootOrg) throws Exception {
+			String rootOrg) {
 
 		final String sbExtHost = props.getSbextServiceHost();
 		final String sbExtPort = props.getSbextPort();
@@ -4015,7 +4011,7 @@ substitute url based on requirement
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getSuggestedGoalsByGoalGroup(String rootOrg, String userUUID, String goalGroup,
-			String language, List<String> metaFields) throws Exception {
+			String language, List<String> metaFields) throws JsonMappingException, IOException, ParseException {
 
 		this.validateUser(rootOrg, userUUID);
 		Map<String, Object> userCommonGoalsWithCount = this.processULGDataAndUSGData(userUUID, rootOrg);
@@ -4188,20 +4184,20 @@ substitute url based on requirement
 
 	}
 
-	private Map<String, Object> verifyUsers(String rootOrg, List<String> uuids) throws Exception {
+	private Map<String, Object> verifyUsers(String rootOrg, List<String> uuids) {
 		return userService.validateAndFetchNewUsers(rootOrg, uuids);
 	}
 
-	private Map<String, Object> getEmailsFromUUIDs(String rootOrg, List<String> uuids) throws Exception {
+	private Map<String, Object> getEmailsFromUUIDs(String rootOrg, List<String> uuids) {
 		return userService.getUserEmailsFromUserIds(rootOrg, uuids);
 	}
 
-	private String getEmailFromUUID(String rootOrg, String uuid) throws Exception {
+	private String getEmailFromUUID(String rootOrg, String uuid) {
 		return userService.getUserEmailFromUserId(rootOrg, uuid);
 	}
 
 	@SuppressWarnings("unchecked")
-	private Map<String, Object> getMultipleUserData(String rootOrg, List<String> uuids) throws Exception {
+	private Map<String, Object> getMultipleUserData(String rootOrg, List<String> uuids) {
 
 		Map<String, Object> result = new HashMap<>();
 
@@ -4253,7 +4249,7 @@ substitute url based on requirement
 	}
 
 	@SuppressWarnings({ "unchecked", "unused" })
-	private Map<String, Object> getUserData(String rootOrg, String uuid) throws Exception {
+	private Map<String, Object> getUserData(String rootOrg, String uuid) {
 		Map<String, Object> result = userService.getUserDataFromUserId(rootOrg, uuid,
 				new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME, PIDConstants.EMAIL)));
 
