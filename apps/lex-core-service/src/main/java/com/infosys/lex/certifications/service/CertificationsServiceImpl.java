@@ -137,7 +137,7 @@ public class CertificationsServiceImpl implements CertificationsService {
 	public List<Map<String, Object>> getLocationsForCountry(String countryCode)
 			throws JsonParseException, JsonMappingException, IOException {
 		HttpHeaders headers = getRestCallHeader();
-substitute url based on requirement
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/Getlocationsforcountry?country_code=" + countryCode;
 
@@ -549,7 +549,7 @@ String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 			String certificationId, String action)
 			throws JsonParseException, JsonMappingException, IOException, ParseException {
 		HttpHeaders headers = getRestCallHeader();
-String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
+		String apiEndPointPrefix = lexServerProps.getLhubCertificationUrl();
 
 		String url = apiEndPointPrefix + "/SubmitRecallExternalCertResult?user_id=" + userId + "&certification_id="
 				+ certificationId + "&action=" + action;

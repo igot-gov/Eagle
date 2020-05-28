@@ -1,7 +1,7 @@
 /*               "Copyright 2020 Infosys Ltd.
                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-substitute url based on requirement
+//substitute url based on requirement
 //
 //import static org.hamcrest.CoreMatchers.is;
 //import static org.junit.Assert.assertThat;
@@ -24,10 +24,10 @@ substitute url based on requirement
 //import com.datastax.driver.core.Cluster;
 //import com.datastax.driver.core.Session;
 //import com.datastax.driver.core.utils.UUIDs;
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
-substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
+//substitute url based on requirement
 //
 //@RunWith(SpringJUnit4ClassRunner.class)
 //@ActiveProfiles(profiles = "AssessmentProfile")

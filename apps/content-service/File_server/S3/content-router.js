@@ -951,6 +951,7 @@ router.get('/video_transcoding_status/:location', (req, res) => {
 
 // Getting the status for inhouse transcoding
 
+router.get('/video-transcoding/status/:lexId', (req, res) => {
   request({ json: true, url }, (err, response, body) => {
     if (err) {
       return res.status(500).send({
@@ -963,6 +964,8 @@ router.get('/video_transcoding_status/:location', (req, res) => {
 });
 
 // Start video transcoding
+router.post('/video-transcoding/start/:lexId', (req, res) => {
+  let lexId = req.params.lexId;
   let authArtifactURL = req.body.authArtifactURL;
   if (!authArtifactURL) {
     res.status(400).send({
@@ -974,7 +977,7 @@ router.get('/video_transcoding_status/:location', (req, res) => {
   let location = authArtifactURL.split(`${appConfig.getProperty('NETWORK_ALIAS')}/contentv3/download/`)[1]
     .replaceAll('%2F', '/');
   let retryMode = req.body.retryMode || false;
-
+  utility.startTranscoding(lexId, location, retryMode)
     .then(result => {
       log.info(result.message);
       res.status(result.response.statusCode).send(result.response.body);

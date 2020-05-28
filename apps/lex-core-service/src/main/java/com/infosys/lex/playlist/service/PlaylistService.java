@@ -3,6 +3,8 @@
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.lex.playlist.service;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 
@@ -49,10 +51,10 @@ public interface PlaylistService {
 	 * @param rootOrg
 	 * @param userId
 	 * @param playlistId
-substitute url based on requirement
+	 * @param lexId
 	 * @throws Exception
 	 */
-substitute url based on requirement
+	public void deleteContent(String rootOrg, String userId, String playlistId, String lexId) throws Exception;
 
 	/**
 	 * This function adds the content in the playlist
@@ -71,10 +73,10 @@ substitute url based on requirement
 	 * @param rootOrg
 	 * @param userId
 	 * @param playlistId
-substitute url based on requirement
+	 * @param lexId
 	 * @throws Exception
 	 */
-substitute url based on requirement
+	public void addContent(String rootOrg, String userId, String playlistId, String lexId) throws Exception;
 
 	/**
 	 * This function fetches all the playlists of a user

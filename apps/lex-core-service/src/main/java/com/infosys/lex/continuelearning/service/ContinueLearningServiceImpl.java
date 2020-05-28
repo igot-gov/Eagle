@@ -26,6 +26,7 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,7 +64,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 	}
 
 	@Override
-	public Map<String, Object> upsertLearningData(String rootOrg, String userId, @Valid ContinueLearningDTO data){
+	public Map<String, Object> upsertLearningData(String rootOrg, String userId, @Valid ContinueLearningDTO data) throws Exception{
 		validator.validateUser(rootOrg, userId);
 
 		Map<String, Object> retMap = new HashMap<String, Object>();
@@ -78,7 +79,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 	@Override
 	public Map<String, Object> getLearningData(String rootOrg, String userId, Set<String> sourceFields,
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
-			String isStandAlone, String resourceType) throws IOException, ParseException{
+			String isStandAlone, String resourceType) throws Exception{
 		// Initial list of meta fields
 		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
 				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",
@@ -237,7 +238,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 			}
 		}
 
-		Map<String, Map<String, Object>> meta = contentService.filterAndFetchContentMetaToShow(rootOrg,
+		Map<String, Map<String, Object>> meta = contentService.filterAndFetchContentMetaToShow(
 				new ArrayList<>(ids), new HashSet<String>(requiredFields));
 		
 		// Clear out all previous ids
@@ -287,7 +288,7 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 	@Override
 	public Map<String, Object> getLearningDataWithFilters(String rootOrg, String userId, Set<String> sourceFields,
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
-			String isStandAlone, List<String> contentType) throws IOException, ParseException {
+			String isStandAlone, List<String> contentType) throws Exception {
 		// Initial list of meta fields
 		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
 				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",

@@ -6,7 +6,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
-substitute url based on requirement
+            "mainClass": "com.infosys.lex.LexCoreApplication",
             "projectName": "bodhi",
             "args": ""
         }

@@ -96,7 +96,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * String, java.lang.String, com.infosys.lex.playlist.entities.PlaylistRequest)
 	 */
 	@Override
-	public void createPlayList(String rootOrg, String userId, PlaylistRequest playlistBody) throws IOException, ParseException  {
+	public void createPlayList(String rootOrg, String userId, PlaylistRequest playlistBody) throws Exception {
 
 		// Validating User
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -276,7 +276,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> sharePlaylist(String rootOrg, String userId, String playlistId,
-			Map<String, Object> recipientMap) throws IOException, ParseException  {
+			Map<String, Object> recipientMap) throws Exception {
 
 		Map<String, Object> returnObject = new HashMap<String, Object>();
 		if (recipientMap.get("users") == null || ((List<String>) recipientMap.get("users")).isEmpty()) {
@@ -469,7 +469,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * String, java.lang.String)
 	 */
 	@Override
-	public List<Map<String, Object>> getUserPlaylists(String rootOrg, String userId)  {
+	public List<Map<String, Object>> getUserPlaylists(String rootOrg, String userId) throws Exception {
 
 		// Validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -522,7 +522,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getDetailedUserPlaylists(String rootOrg, String userId, List<String> metaFields) throws IOException, ParseException{
+	public List<Map<String, Object>> getDetailedUserPlaylists(String rootOrg, String userId, List<String> metaFields) throws Exception{
 
 		// Validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -690,7 +690,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * lang.String, java.lang.String)
 	 */
 	@Override
-	public List<Map<String, Object>> getUserSharedPlaylist(String rootOrg, String userId)  {
+	public List<Map<String, Object>> getUserSharedPlaylist(String rootOrg, String userId) throws Exception {
 
 		// Validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -731,7 +731,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void deletePlaylist(String rootOrg, String userId, String playlistId)  {
+	public void deletePlaylist(String rootOrg, String userId, String playlistId) throws Exception {
 
 		// Validating User
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -775,7 +775,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void deleteContent(String rootOrg, String userId, String playlistId, String lexId)  {
+	public void deleteContent(String rootOrg, String userId, String playlistId, String lexId) throws Exception {
 
 		// Validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -824,7 +824,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * String, java.lang.String, java.lang.String, java.util.List)
 	 */
 	@Override
-	public void addContents(String rootOrg, String userId, String playlistId, List<String> contents) throws IOException, ParseException  {
+	public void addContents(String rootOrg, String userId, String playlistId, List<String> contents) throws Exception {
 
 		if (contents == null || contents.isEmpty()) {
 			throw new InvalidDataInputException("content.NullOrEmpty");
@@ -877,7 +877,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void addContent(String rootOrg, String userId, String playlistId, String lexId) throws IOException, ParseException  {
+	public void addContent(String rootOrg, String userId, String playlistId, String lexId) throws Exception  {
 
 		// validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -926,8 +926,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void updatePlaylist(String rootOrg, String userId, String playlistId, Map<String, Object> playlistBody) throws IOException, ParseException
-			 {
+	public void updatePlaylist(String rootOrg, String userId, String playlistId, Map<String, Object> playlistBody) throws Exception {
 
 		// check if request data is null or empty
 		if (playlistBody.containsKey("playlist_title")) {
@@ -1098,7 +1097,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void acceptRejectPlaylist(String rootOrg, String userId, String playlistId, String status) throws IOException, ParseException  {
+	public void acceptRejectPlaylist(String rootOrg, String userId, String playlistId, String status) throws Exception{
 
 		if (!Arrays.asList("accept", "reject").contains(status)) {
 			throw new InvalidDataInputException("invalid.status");
@@ -1210,8 +1209,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getDetailedSharedPlaylist(String rootOrg, String userId, List<String> metaFields) throws IOException, ParseException
-			 {
+	public List<Map<String, Object>> getDetailedSharedPlaylist(String rootOrg, String userId, List<String> metaFields) throws Exception {
 
 		// validate user
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -1291,8 +1289,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> getPlaylistContent(String rootOrg, String userId, Integer size, String page)
-			 {
+	public Map<String, Object> getPlaylistContent(String rootOrg, String userId, Integer size, String page) throws Exception {
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1333,7 +1330,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getDetailedPlaylistContent(String rootOrg, String userId, List<String> sourceFields,
-			String isInIntranet, String isStandAlone, List<String> contentTypes, Integer size, String page) throws IOException, ParseException{
+			String isInIntranet, String isStandAlone, List<String> contentTypes, Integer size, String page) throws Exception{
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1454,7 +1451,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getDetailedPlaylistSyncInfo(String rootOrg, String userId, String playlistId,
-			List<String> metaFields) throws IOException, ParseException  {
+			List<String> metaFields) throws Exception  {
 
 		Map<String, Object> returnObject = new HashMap<String, Object>();
 		returnObject = this.getPlaylistSyncInfo(rootOrg, userId, playlistId);
@@ -1537,7 +1534,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 * lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Map<String, Object> getPlaylistSyncInfo(String rootOrg, String userId, String playlistId) throws IOException, ParseException  {
+	public Map<String, Object> getPlaylistSyncInfo(String rootOrg, String userId, String playlistId) throws Exception{
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1618,7 +1615,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getUserPlaylist(String rootOrg, String userId, String playlistId,
-			List<String> metaFields) throws IOException, ParseException  {
+			List<String> metaFields) throws Exception  {
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -1683,8 +1680,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void deleteMultiple(String rootOrg, String userId, String playlistId, Map<String, Object> content)
-			 {
+	public void deleteMultiple(String rootOrg, String userId, String playlistId, Map<String, Object> content) throws Exception{
 
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");

@@ -79,20 +79,18 @@ public interface TrainingsService {
 	/**
 	 * Add to watchlist
 	 * 
-substitute url based on requirement
 	 * @param userId
 	 * @return
 	 */
-substitute url based on requirement
+	Map<String, Object> addContentToWatchList(String lexId, String userId);
 
 	/**
 	 * remove from watchlist
 	 * 
-substitute url based on requirement
 	 * @param userId
 	 * @return
 	 */
-substitute url based on requirement
+	Map<String, Object> removeContentFromWatchList(String lexId, String userId);
 
 	/**
 	 * GET watchlist
@@ -140,7 +138,7 @@ substitute url based on requirement
 	 * @param request
 	 * @return
 	 */
-	Map<String, Object> createJitRequest(Map<String, Object> request);
+	Map<String, Object> createJitRequest(Map<String, Object> request) throws JsonParseException, JsonMappingException, IOException ;
 
 	/**
 	 * Get list of all JIT requests created by me

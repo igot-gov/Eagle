@@ -676,7 +676,7 @@ public class TrainingsServiceImpl implements TrainingsService {
 
 		String clientId = lexServerProps.getLhubAthClientId();
 		Optional<ApiAuthenticationModel> authDetailsRes = authRepo.findById(clientId);
-		if (!authDetailsRes.isPresent())
+		if(!authDetailsRes.isPresent())
 			throw new ApplicationLogicError("Lhub auth details not found");
 		String clientKey = authDetailsRes.get().getValue();
 		HttpHeaders headers = new HttpHeaders();

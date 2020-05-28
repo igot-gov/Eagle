@@ -193,7 +193,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 * table.
 	 */
 	@Override
-	public void removeUserLearningGoal(String rootOrg, String goalType, String userUUID, String goalId) {
+	public void removeUserLearningGoal(String rootOrg, String goalType, String userUUID, String goalId) throws Exception{
 
 		helper.validateULGoalType(goalType);
 		helper.validateUUID(goalId);
@@ -215,7 +215,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 */
 
 	@Override
-	public void createLearningGoal(String rootOrg, GoalDTO goalsData, String userUUID) throws IOException, ParseException {
+	public void createLearningGoal(String rootOrg, GoalDTO goalsData, String userUUID) throws Exception {
 
 		helper.validateUUID(userUUID);
 		this.validateUser(rootOrg, userUUID);
@@ -421,7 +421,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> shareGoal_v1(List<String> recipients, String userUUID, String goalId, String goalType,
-			String rootOrg, String message) throws IOException, ParseException {
+			String rootOrg, String message) throws Exception {
 
 		try {
 			UUID.fromString(userUUID);
@@ -549,7 +549,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> shareGoal(List<String> recipients, String userUUID, String goalId, String goalType,
-			String rootOrg, String message) throws IOException, ParseException {
+			String rootOrg, String message) throws Exception {
 
 		try {
 			UUID.fromString(userUUID);
@@ -884,7 +884,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 */
 	@Override
 	public Map<String, Object> takeAction(String action, ActionDTO actionData, Boolean confirm, String userUUID,
-			String goalId, String rootOrg) throws IOException, ParseException {
+			String goalId, String rootOrg) throws Exception {
 
 		// check if the goal shared is of valid type
 		helper.validateUserSharedGoalType(actionData.getGoalType());
@@ -979,7 +979,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsForAction_v1(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws IOException, ParseException {
+			List<String> metaFields) throws Exception {
 
 		// check if the user is valid
 		this.validateUser(rootOrg, userUUID);
@@ -1132,7 +1132,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsForAction(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws IOException, ParseException {
+			List<String> metaFields) throws Exception {
 
 		// check if the user is valid
 		this.validateUser(rootOrg, userUUID);
@@ -1297,7 +1297,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getSuggestedGoals(String rootOrg, String userUUID, String language) throws JsonMappingException, IOException, ParseException{
+	public List<Map<String, Object>> getSuggestedGoals(String rootOrg, String userUUID, String language) throws Exception{
 
 		// checks if the user exists or not
 		this.validateUser(rootOrg, userUUID);
@@ -1602,7 +1602,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 */
 	@Override
 	public Map<String, Object> updateCommonGoalDuration(String rootOrg, String userUUID, String goalType, String goalId,
-			int duration) {
+			int duration) throws Exception {
 
 		// user can only update the duration of a common goal created for self and
 		// created for others but not yet shared
@@ -1647,7 +1647,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 */
 	@Override
 	public Map<String, Object> deleteResourceFromUserGoal(String rootOrg, String userUUID, String goalId, String lexId,
-			String goalType) throws IOException {
+			String goalType) throws Exception {
 
 		// check if the user is valid
 		this.validateUser(rootOrg, userUUID);
@@ -1715,7 +1715,8 @@ public class GoalsServiceImpl implements GoalsService {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> addContentToUserGoal(String userUUID, String goalId, String lexId, String goalType,
-			String rootOrg) throws IOException, ParseException {
+			String rootOrg) throws Exception {
+
 
 		// check if user exists
 		this.validateUser(rootOrg, userUUID);
@@ -2145,7 +2146,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> removeGoalSharing_v1(Map<String, Object> targetIdsMap, String userUUID, String goalId,
-			String goalType, String rootOrg) {
+			String goalType, String rootOrg) throws Exception{
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
 
@@ -2201,7 +2202,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> removeGoalSharing(Map<String, Object> targetIdsMap, String userUUID, String goalId,
-			String goalType, String rootOrg) {
+			String goalType, String rootOrg) throws Exception{
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
 
@@ -2326,7 +2327,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 * java.lang.String, java.lang.String)
 	 */
 	@Override
-	public Map<String, Object> fetchGoalsByGoalType(String userUUID, String rootOrg, String goalType) {
+	public Map<String, Object> fetchGoalsByGoalType(String userUUID, String rootOrg, String goalType) throws Exception {
 
 		this.validateUser(rootOrg, userUUID);
 
@@ -2378,7 +2379,7 @@ public class GoalsServiceImpl implements GoalsService {
 	 */
 	@Override
 	public Map<String, Object> fetchMyGoalsWithProgress_v1(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws IOException, ParseException {
+			List<String> metaFields) throws Exception {
 
 		this.validateUser(rootOrg, userUUID);
 
@@ -2483,7 +2484,7 @@ public class GoalsServiceImpl implements GoalsService {
 
 	@Override
 	public Map<String, Object> fetchMyGoalsWithProgress(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws IOException, ParseException {
+			List<String> metaFields) throws Exception {
 
 		this.validateUser(rootOrg, userUUID);
 
@@ -2794,7 +2795,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> fetchGoalsSharedByMe_v1(String userUUID, String rootOrg, String language,
-			List<String> metaFields) throws JsonMappingException, IOException, ParseException {
+			List<String> metaFields) throws Exception {
 
 		// fetch goals created for others but not yet shared
 		List<Map<String, Object>> notYetSharedGoals = learningGoalsRepo
@@ -4011,7 +4012,7 @@ public class GoalsServiceImpl implements GoalsService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> getSuggestedGoalsByGoalGroup(String rootOrg, String userUUID, String goalGroup,
-			String language, List<String> metaFields) throws JsonMappingException, IOException, ParseException {
+			String language, List<String> metaFields) throws Exception {
 
 		this.validateUser(rootOrg, userUUID);
 		Map<String, Object> userCommonGoalsWithCount = this.processULGDataAndUSGData(userUUID, rootOrg);
@@ -4192,7 +4193,7 @@ public class GoalsServiceImpl implements GoalsService {
 		return userService.getUserEmailsFromUserIds(rootOrg, uuids);
 	}
 
-	private String getEmailFromUUID(String rootOrg, String uuid) {
+	private String getEmailFromUUID(String rootOrg, String uuid) throws Exception{
 		return userService.getUserEmailFromUserId(rootOrg, uuid);
 	}
 

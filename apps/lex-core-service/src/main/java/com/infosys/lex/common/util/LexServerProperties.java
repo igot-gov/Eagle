@@ -223,9 +223,9 @@ public class LexServerProperties {
 		this.selfReplyAllow = selfReplyAllow;
 	}
 
-//substitute based on requirement
-//substitute based on requirement
-//	}
+	public String getIapCertificationClientId() {
+		return iapCertificationClientId;
+	}
 
 	public String getDefAccessPathRootOrg() {
 		return defAccessPathRootOrg;
@@ -514,14 +514,14 @@ public class LexServerProperties {
 //				+ ", contentServicePort=" + contentServicePort + ", pyeValServiceIp=" + pyeValServiceIp
 //				+ ", pyeValServicePort=" + pyeValServicePort + ", pyeValServiceName=" + pyeValServiceName
 //				+ ", iapServiceIp=" + iapServiceIp + ", iapServicePort=" + iapServicePort + ", iapVerificationService="
-substitute based on requirement
-substitute based on requirement
-substitute based on requirement
-substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
 //				+ ", enableRealTime=" + enableRealTime + ", contentServiceHost=" + contentServiceHost
-substitute based on requirement
-substitute based on requirement
-substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
+//substitute based on requirement
 //				+ ", defAccessPathOrg=" + defAccessPathOrg + ", selfReplyAllow=" + selfReplyAllow + ", pidIp=" + pidIp
 //				+ ", pidPort=" + pidPort + ", authServiceHost=" + authServiceHost + ", authServicePort="
 //				+ authServicePort + ", certificationRetryGapInDays=" + certificationRetryGapInDays + ", notifIp="
@@ -576,10 +576,10 @@ substitute based on requirement
 				+ pyeValServiceIp + ", pyeValServicePort=" + pyeValServicePort + ", pyeValServiceName="
 				+ pyeValServiceName + ", iapServiceIp=" + iapServiceIp + ", iapServicePort=" + iapServicePort
 				+ ", iapVerificationService=" + iapVerificationService + ", logAccessKey=" + logAccessKey
-substitute based on requirement
+				+ ", clientId=" + clientId + ", clientSecret=" + clientSecret + ", lhubUrl=" + lhubUrl
 				+ ", lhubCertificationUrl=" + lhubCertificationUrl + ", iapSubmissonsUrl=" + iapSubmissonsUrl
-substitute based on requirement
-substitute based on requirement
+				+ ", iapSubmissonsClientId=" + iapSubmissonsClientId + ", iapSubmissonsClientSecret="
+				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + "]";
 	}
 
 
