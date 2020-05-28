@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.dto;
 
 import java.util.List;
 
@@ -12,6 +10,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class EmailRequest {
 
 	private String rootOrg;
+	
+	private List<String> orgs ;
+
+
+
+	public Boolean getEmailsPassed() {
+		return emailsPassed;
+	}
 
 	@JsonProperty(value = "from")
 	private String from;
@@ -44,8 +50,6 @@ public class EmailRequest {
 	@JsonProperty(value = "emails-passed")
 	private Boolean emailsPassed;
 	
-	
-	
 
 	private Boolean isEventReceiverConfigured = false;
 	
@@ -63,7 +67,7 @@ public class EmailRequest {
 		super();
 	}
 
-	public EmailRequest(String rootOrg, String from, @NotNull @NotEmpty String body, @NotNull @NotEmpty String subject,
+	public EmailRequest(String rootOrg,List<String> orgs, String from, @NotNull @NotEmpty String body, @NotNull @NotEmpty String subject,
 			@NotNull @NotEmpty String eventId, List<String> to, List<String> cc, List<String> bcc,
 			Boolean emailsPassed) {
 
@@ -76,6 +80,7 @@ public class EmailRequest {
 		this.cc = cc;
 		this.bcc = bcc;
 		this.emailsPassed = emailsPassed;
+		this.orgs = orgs;
 	}
 	
 	public EmailRequest(String rootOrg, String from, @NotNull @NotEmpty String body, @NotNull @NotEmpty String subject,
@@ -94,15 +99,17 @@ public class EmailRequest {
 		this.isEventReceiverConfigured = isEventReceiverConfigured;
 	}
 
-	@Override
-	public String toString() {
-		return "EmailEvent [rootOrg=" + rootOrg + ", from=" + from + ", body=" + body + ", subject=" + subject
-				+ ", eventId=" + eventId + ", to=" + to + ", cc=" + cc + ", bcc=" + bcc + ", emailsPassed="
-				+ emailsPassed + "]";
-	}
+	
 
 	public String getRootOrg() {
 		return rootOrg;
+	}
+
+	@Override
+	public String toString() {
+		return "EmailRequest [rootOrg=" + rootOrg + ", orgs=" + orgs + ", from=" + from + ", body=" + body
+				+ ", subject=" + subject + ", eventId=" + eventId + ", to=" + to + ", cc=" + cc + ", bcc=" + bcc
+				+ ", emailsPassed=" + emailsPassed + ", isEventReceiverConfigured=" + isEventReceiverConfigured + "]";
 	}
 
 	public void setRootOrg(String rootOrg) {
@@ -171,5 +178,13 @@ public class EmailRequest {
 
 	public void setEmailsPassed(Boolean emailsPassed) {
 		this.emailsPassed = emailsPassed;
+	}
+	
+	public List<String> getOrgs() {
+		return orgs;
+	}
+
+	public void setOrgs(List<String> orgs) {
+		this.orgs = orgs;
 	}
 }

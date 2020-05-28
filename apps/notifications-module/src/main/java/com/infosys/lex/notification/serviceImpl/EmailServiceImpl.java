@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.serviceImpl;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -60,6 +58,21 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.notification.bodhi.repository.AppConfigRepository;
+import com.infosys.lex.notification.bodhi.repository.NotificationErrorsRepo;
+import com.infosys.lex.notification.dto.EmailRequest;
+import com.infosys.lex.notification.entity.SMTPConfig;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.model.cassandra.AppConfig;
+import com.infosys.lex.notification.model.cassandra.AppConfigPrimaryKey;
+import com.infosys.lex.notification.model.cassandra.NotificationErrors;
+import com.infosys.lex.notification.model.cassandra.NotificationErrorsPrimaryKey;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.service.EmailService;
+import com.infosys.lex.notification.service.SMTPConfigService;
+import com.infosys.lex.notification.service.UserInformationService;
+import com.infosys.lex.notification.util.LexNotificationLogger;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 import android.util.Base64;
 
@@ -80,6 +93,9 @@ public class EmailServiceImpl implements EmailService {
 
 	@Autowired
 	Environment env;
+	
+	@Autowired
+	ApplicationServerProperties appProp;
 
 	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
 
@@ -92,11 +108,12 @@ public class EmailServiceImpl implements EmailService {
 		// the given rootOrg.
 		removeInvalidMailIds(emailEvent);
 
-		SMTPConfig smtpConfig = smtpConfigService.getSMTPConfig(emailEvent.getRootOrg());
+		SMTPConfig smtpConfig = smtpConfigService.getSMTPConfig(emailEvent.getRootOrg(),emailEvent.getOrgs());
 		int chunkSize = smtpConfig.getChunkSize();
 		// smtp server properties.
 		Properties props = new Properties();
 		props.put("mail.smtp.host", smtpConfig.getHost());
+		props.put("mail.smtp.connectiontimeout", appProp.getSmtpConnectionTimeout());
 
 		// by default port is 25
 		if (smtpConfig.getPort() != null && !smtpConfig.getPort().isEmpty())

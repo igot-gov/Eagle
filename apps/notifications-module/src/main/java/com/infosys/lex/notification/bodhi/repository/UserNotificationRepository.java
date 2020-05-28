@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -16,6 +13,7 @@ under the law.
 Highly Confidential
 
 */
+package com.infosys.lex.notification.bodhi.repository;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -26,6 +24,8 @@ import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.infosys.lex.notification.model.cassandra.UserNotification;
+import com.infosys.lex.notification.model.cassandra.UserNotificationPrimaryKey;
 
 @Repository
 public interface UserNotificationRepository

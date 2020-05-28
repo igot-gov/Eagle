@@ -1,15 +1,21 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.kafka.common.network.InvalidReceiveException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.notification.dto.SMTPDTO;
+import com.infosys.lex.notification.entity.SMTPConfig;
+import com.infosys.lex.notification.entity.SMTPConfigKey;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.repository.SMTPConfigRepository;
+import com.infosys.lex.notification.service.EncryptionService;
+import com.infosys.lex.notification.service.SMTPConfigService;
 
 @Service
 public class SMTPConfigServiceImpl implements SMTPConfigService {
@@ -24,7 +30,7 @@ public class SMTPConfigServiceImpl implements SMTPConfigService {
 	EncryptionService encryptionService;
 
 	@Override
-	public void putSMTPConfig(String rootOrg, SMTPDTO data) {
+	public void putSMTPConfig(String rootOrg,String org, SMTPDTO data) {
 
 		if (rootOrg == null || rootOrg.isEmpty())
 			throw new InvalidReceiveException("rootOrg is mandatory");
@@ -32,32 +38,49 @@ public class SMTPConfigServiceImpl implements SMTPConfigService {
 		if (data == null)
 			throw new InvalidReceiveException("smpt config data is mandatory");
 
-		SMTPConfig config = new SMTPConfig(rootOrg, data.getUserName(),
+
+		SMTPConfig config = new SMTPConfig(new SMTPConfigKey(rootOrg,org), data.getUserName(),
 				data.getPassword().isEmpty() ? ""
 						: encryptionService.encrypt(data.getPassword(), env.getProperty(rootOrg + ".smtpKey")),
-				data.getHost(), data.getPort(), data.getSenderId(), new Timestamp(new Date().getTime()), "System");
+				data.getHost(), data.getSignEmail(),data.getPort(), data.getSenderId(), new Timestamp(new Date().getTime()), "",data.getChunkSize());
 
 		smtpRepo.save(config);
 	}
 
 	@Override
-	public SMTPConfig getSMTPConfig(String rootOrg) {
+	public SMTPConfig getSMTPConfig(String rootOrg, List<String> orgs) {
 
 		if (rootOrg == null || rootOrg.isEmpty())
 			throw new ApplicationLogicException("root org is not present");
+		List<SMTPConfig> smtpConfigs = null;
 
-		SMTPConfig config = smtpRepo.findById(rootOrg).orElse(null);
+		// if orgs is null or empty fetch all SMTP config for rootOrg and whichever
+		// first has a valid Host and sender id
+		if (orgs == null || orgs.isEmpty()) {
+			smtpConfigs = smtpRepo.findAllByKeyRootOrg(rootOrg);
 
-		if (config == null)
+		} else {
+			smtpConfigs = smtpRepo.findAllByKeyRootOrgAndKeyOrgIn(rootOrg, orgs);
+
+		}
+		SMTPConfig validConfig = null;
+		for (SMTPConfig config : smtpConfigs) {
+			if (config.getHost() == null || config.getHost().isEmpty())
+				continue;
+
+			if (config.getSenderId() == null || config.getSenderId().isEmpty())
+				continue;
+
+			validConfig = config;
+			break;
+		}
+
+		if (validConfig == null)
 			throw new ApplicationLogicException("smtp config not found for " + rootOrg);
-
-		if (config.getHost() == null || config.getHost().isEmpty())
-			throw new ApplicationLogicException("smtp host not found for " + rootOrg);
-
 		// de-crypt stored password in db
-		if (!config.getPassword().isEmpty())
-			config.setPassword(encryptionService.decrypt(config.getPassword(), env.getProperty(rootOrg + ".smtpKey")));
-
-		return config;
+		if (!validConfig.getPassword().isEmpty())
+			validConfig.setPassword(
+					encryptionService.decrypt(validConfig.getPassword(), env.getProperty(rootOrg + ".smtpKey")));
+		return validConfig;
 	}
 }

@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.consumerImpl;
 
 import java.io.IOException;
 
@@ -12,17 +10,22 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.notification.consumer.PushNotificationConsumer;
+import com.infosys.lex.notification.dto.PushNotificationRequest;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.service.NotificationConsumerUtilService;
+import com.infosys.lex.notification.service.PushService;
+import com.infosys.lex.notification.util.LexNotificationLogger;
 
 @Service
-public class PushNotificationConsumerImpl implements PushNotificationConsumer{
-	
+public class PushNotificationConsumerImpl implements PushNotificationConsumer {
+
 	@Autowired
 	NotificationConsumerUtilService consumerUtilService;
-	
+
 	@Autowired
 	PushService pushService;
 
-	
 	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
 
 	private static final ObjectMapper mapper = new ObjectMapper();
@@ -31,21 +34,26 @@ public class PushNotificationConsumerImpl implements PushNotificationConsumer{
 			@TopicPartition(topic = "push_notification_events", partitions = { "0", "1", "2", "3" }) })
 	public void consumePushNotificationEvent(ConsumerRecord<?, ?> consumerRecord) {
 
-		String message = String.valueOf(consumerRecord.value());
-		PushNotificationRequest pushNotificationEvent = null;
-		try {
-			pushNotificationEvent = mapper.readValue(message, new TypeReference<EmailRequest>() {
-			});
-			pushService.sendPush(pushNotificationEvent);
-		} catch (IOException e) {
-			logger.error(e);
-			consumerUtilService.saveError(pushNotificationEvent.getRootOrg(), pushNotificationEvent.getEventId(), e, pushNotificationEvent);
-		} catch (ApplicationLogicException e) {
-			logger.error(e);
-			consumerUtilService.saveError(pushNotificationEvent.getRootOrg(), pushNotificationEvent.getEventId(), e, pushNotificationEvent);
-		} catch (Exception e) {
-			logger.fatal(e);
-			consumerUtilService.saveError(pushNotificationEvent.getRootOrg(), pushNotificationEvent.getEventId(), e, pushNotificationEvent);
+		if (consumerUtilService.checkEventTimestamp(consumerRecord.timestamp())) {
+			String message = String.valueOf(consumerRecord.value());
+			PushNotificationRequest pushNotificationEvent = null;
+			try {
+				pushNotificationEvent = mapper.readValue(message, new TypeReference<PushNotificationRequest>() {
+				});
+				pushService.sendPush(pushNotificationEvent);
+			} catch (IOException e) {
+				logger.error(e);
+				consumerUtilService.saveError(pushNotificationEvent.getRootOrg(), pushNotificationEvent.getEventId(), e,
+						pushNotificationEvent);
+			} catch (ApplicationLogicException e) {
+				logger.error(e);
+				consumerUtilService.saveError(pushNotificationEvent.getRootOrg(), pushNotificationEvent.getEventId(), e,
+						pushNotificationEvent);
+			} catch (Exception e) {
+				logger.fatal(e);
+				consumerUtilService.saveError(pushNotificationEvent.getRootOrg(), pushNotificationEvent.getEventId(), e,
+						pushNotificationEvent);
+			}
 		}
 	}
 }

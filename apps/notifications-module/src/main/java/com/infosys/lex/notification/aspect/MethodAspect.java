@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.aspect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.infosys.lex.notification.util.LexNotificationLogger;
 
 @Aspect
 @Configuration
@@ -46,7 +45,7 @@ public class MethodAspect {
 	 * @return
 	 * @throws Throwable
 	 */
-	@Around("execution(* com.infosys..repository..*(..)) && !execution(..*(..))")
+	@Around("execution(* com.infosys.lex.repository..*(..)) && !execution(* com.infosys.lex.notification.filter..*(..))")
 	public Object aroundRepo(ProceedingJoinPoint point) throws Throwable {
 
 		long time = System.currentTimeMillis();
@@ -86,8 +85,8 @@ public class MethodAspect {
 	 * @return
 	 * @throws Throwable
 	 */
-	@Around("execution(* com.infosys..service..*(..)) && !execution(* .*(..)) "
-			+ "&& !execution(* ..*(..))")
+	@Around("execution(* com.infosys.lex.service..*(..)) && !execution(* com.infosys.lex.notification.service.LoggerService.*(..)) "
+			+ "&& !execution(* com.infosys.lex.notification.filter..*(..))")
 	public Object aroundServices(ProceedingJoinPoint point) throws Throwable {
 
 		long time = System.currentTimeMillis();
@@ -126,7 +125,7 @@ public class MethodAspect {
 	 * @return
 	 * @throws Throwable
 	 */
-	@Around("execution(* com.infosys..controller..*(..)) && !execution(* ..*(..))")
+	@Around("execution(* com.infosys.lex.controller..*(..)) && !execution(* com.infosys.lex.notification.filter..*(..))")
 	public Object aroundController(ProceedingJoinPoint point) throws Throwable {
 		long time = System.currentTimeMillis();
 		ObjectMapper ow = new ObjectMapper();
@@ -164,7 +163,7 @@ public class MethodAspect {
 	 * @return
 	 * @throws Throwable
 	 */
-	@Around("execution(* com.infosys..consumer..*(..)) && !execution(* ..*(..))")
+	@Around("execution(* com.infosys.lex.consumer..*(..)) && !execution(* com.infosys.lex.notification.filter..*(..))")
 	public Object aroundConsumer(ProceedingJoinPoint point) throws Throwable {
 		long time = System.currentTimeMillis();
 		ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();

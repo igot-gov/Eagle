@@ -1,21 +1,18 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.entity;
 
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "smtp_config", schema = "wingspan")
 public class SMTPConfig {
 
-	@Id
-	@Column(name = "root_org")
-	private String rootOrg;
+	@EmbeddedId
+	private SMTPConfigKey key;
 
 	@Column(name = "user_name")
 	private String userName;
@@ -64,9 +61,15 @@ public class SMTPConfig {
 
 	
 
-	public SMTPConfig(String rootOrg, String userName, String password, String host, boolean signEmail, String port,
+	
+
+
+
+	
+
+	public SMTPConfig(SMTPConfigKey key, String userName, String password, String host, boolean signEmail, String port,
 			String senderId, Timestamp lastUpdateOn, String lastUpdateBy, Integer chunkSize) {
-		this.rootOrg = rootOrg;
+		this.key = key;
 		this.userName = userName;
 		this.password = password;
 		this.host = host;
@@ -78,17 +81,19 @@ public class SMTPConfig {
 		this.chunkSize = chunkSize;
 	}
 
-	public SMTPConfig(String rootOrg2, String userName2, Object object, String host2, String port2, String senderId2,
-			Timestamp timestamp, String string) {
-		// TODO Auto-generated constructor stub
+	@Override
+	public String toString() {
+		return "SMTPConfig [key=" + key + ", userName=" + userName + ", password=" + password + ", host=" + host
+				+ ", signEmail=" + signEmail + ", port=" + port + ", senderId=" + senderId + ", lastUpdateOn="
+				+ lastUpdateOn + ", lastUpdateBy=" + lastUpdateBy + ", chunkSize=" + chunkSize + "]";
 	}
 
-	public String getRootOrg() {
-		return rootOrg;
+	public SMTPConfigKey getKey() {
+		return key;
 	}
 
-	public void setRootOrg(String rootOrg) {
-		this.rootOrg = rootOrg;
+	public void setKey(SMTPConfigKey key) {
+		this.key = key;
 	}
 
 	public String getUserName() {

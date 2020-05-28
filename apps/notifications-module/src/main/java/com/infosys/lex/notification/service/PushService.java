@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,9 +13,11 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.service;
 
 import java.util.Map;
 
+import com.infosys.lex.notification.dto.PushNotificationRequest;
 
 public interface PushService {
 
@@ -28,10 +27,14 @@ public interface PushService {
 	 * @param userID
 	 * @param token
 	 * @param userIdType
-	 * @param tokenType
+	 * @param platform
 	 * @throws Exception
 	 */
-	public Map<String, Object> generateARN(String userID, String token, String tokenType) throws Exception;
+
+	Map<String, Object> generateARN(String userID, String rootOrg, String deviceToken, String endpointPlatform,
+			String previousDeviceToken) throws Exception;
+
+
 
 	/**
 	 * this method sends push notification to all devices registered for the user.
@@ -40,5 +43,14 @@ public interface PushService {
 	 * @throws Exception
 	 */
 	void sendPush(PushNotificationRequest pushNotificationEvent) throws Exception;
+
+
+
+	void deleteUserDeviceArn(String rootOrg, String userId, String deviceToken);
+	
+
+
+
+	
 
 }

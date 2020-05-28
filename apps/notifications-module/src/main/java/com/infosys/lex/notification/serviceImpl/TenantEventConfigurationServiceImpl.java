@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 Â© 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -30,6 +28,19 @@ import javax.security.sasl.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.notification.dto.EventsDTO;
+import com.infosys.lex.notification.dto.ModesDTO;
+import com.infosys.lex.notification.dto.RecipientsDTO;
+import com.infosys.lex.notification.entity.TenantEvent;
+import com.infosys.lex.notification.entity.TenantEventPrimaryKey;
+import com.infosys.lex.notification.exception.InvalidDataInputException;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.repository.ModesRepository;
+import com.infosys.lex.notification.repository.TenantEventRepository;
+import com.infosys.lex.notification.repository.TenantTemplateRepository;
+import com.infosys.lex.notification.service.TenantEventConfigurationService;
+import com.infosys.lex.notification.service.TenantModeConfigurationService;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @Service
 public class TenantEventConfigurationServiceImpl implements TenantEventConfigurationService {
@@ -79,7 +90,6 @@ public class TenantEventConfigurationServiceImpl implements TenantEventConfigura
 			throws AuthenticationException {
 
 		List<TenantEvent> eventList = new ArrayList<TenantEvent>();
-		String receiverEmails;
 
 		// For each event, for each recipient, for each mode prepare data and
 		// insert a row indicating an event that is configured
@@ -89,10 +99,12 @@ public class TenantEventConfigurationServiceImpl implements TenantEventConfigura
 				for (ModesDTO mode : recipient.getModes()) {
 					Timestamp lastUpdated = new Timestamp((new Date()).getTime());
 					String templateId = null;
+					String receiverEmails = null;
 
 					TenantEventPrimaryKey tenantEventPrimaryKey = new TenantEventPrimaryKey(rootOrg, org,
 							event.getEventId(), recipient.getRecipient(), mode.getModeId());
-					receiverEmails = String.join(",", mode.getReceiverEmails());
+					if(mode.getReceiverEmails() != null && mode.getModeId().equals("email"))
+						receiverEmails = String.join(",", mode.getReceiverEmails());
 					eventList.add(new TenantEvent(tenantEventPrimaryKey, mode.getStatus(), templateId, lastUpdated,
 							userUUID, receiverEmails));
 				}
@@ -121,14 +133,20 @@ public class TenantEventConfigurationServiceImpl implements TenantEventConfigura
 		// considered default removed events as well
 		List<Map<String, Object>> tenantActivatedEvents = tenantEventRepo.getActivatedEventsByRootOrgAndOrgs(rootOrg,
 				orgs, languages);
-
+		
+		
+	
 		// considered default removed modes as well
 		List<Map<String, Object>> tenantActivatedModes = tenantModeRepository
 				.getActivatedTenantModesByRootOrgAndOrgs(rootOrg, orgs);
+		
+		
 
 		List<Map<String, Object>> filteredEventsByLanguagePref = this
 				.getTenantEventsFilteredByLanguage(tenantActivatedEvents, languages);
 
+
+		
 		removeInactiveModes(filteredEventsByLanguagePref, tenantActivatedModes);
 
 		return tenantActivatedEvents;

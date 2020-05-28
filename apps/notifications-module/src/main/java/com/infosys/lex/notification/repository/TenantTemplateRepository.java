@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.repository;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +22,9 @@ import java.util.Set;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import com.infosys.lex.notification.entity.TenantTemplate;
+import com.infosys.lex.notification.entity.TenantTemplatePrimaryKey;
+import com.infosys.lex.notification.projection.RecipientTemplateProjection;
 
 public interface TenantTemplateRepository extends CrudRepository<TenantTemplate, TenantTemplatePrimaryKey> {
 

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,24 +24,6 @@ public class ApplicationServerProperties {
 	@Value("${pid.service.url}")
 	private String pidServiceUrl;
 
-	@Value("${}")
-	private String siemensDomain;
-	
-	@Value("${Infosys.domain}")
-	private String infosysDomain;
-
-	public String getInfosysDomain() {
-		return infosysDomain;
-	}
-
-	public void setInfosysDomain(String infosysDomain) {
-		this.infosysDomain = infosysDomain;
-	}
-
-	public void setDomain(String siemensDomain) {
-		this.siemensDomain = siemensDomain;
-	}
-
 	@Value("${kafka.bootstrapAddress}")
 	private String kafkabootstrapAddress;
 
@@ -53,8 +33,16 @@ public class ApplicationServerProperties {
 	@Value("${notification.admin.org}")
 	private String notificationAdminOrg;
 
-	@Value("${}")
-	private Boolean adminStatus;
+	@Value("${kakfa.offset.reset.value}")
+	private String kafkaOffsetResetValue;
+
+	public String getKafkaOffsetResetValue() {
+		return kafkaOffsetResetValue;
+	}
+
+	public void setKafkaOffsetResetValue(String kafkaOffsetResetValue) {
+		this.kafkaOffsetResetValue = kafkaOffsetResetValue;
+	}
 
 	@Value("${server.port}")
 	private String serverPort;
@@ -86,47 +74,56 @@ public class ApplicationServerProperties {
 	@Value("${log.access.key}")
 	private String logAccessKey;
 
-	@Value("${aws.accesskey}")
+	@Value("${aws_access_key}")
 	private String awsAccessKey;
 
-	@Value("${aws.secretkey}")
+	@Value("${aws_access_secret}")
 	private String awsSecretKey;
 
-	@Value("${aws.apns.platform.arn}")
-	private String apnsPlatformArn;
-
-	@Value("${aws.gcm.platform.arn}")
-	private String gcmPlatformArn;
-
-	@Value("${aws.clientconfiguration.proxyhost}")
-	private String clientConfigurationProxyHost;
-
-	@Value("${aws.clientconfiguration.proxyport}")
-	private Integer clientConfigurationProxyPort;
-
-	@Value("${aws.local}")
-	private Boolean awsLocal;
-
-	@Value("${banner.image.path}")
-	private String bannerImagePath;
-
-	@Value("${notification.application.rootOrg}")
-	private String applicationRootOrg;
-
-	@Value("${notification.application.org}")
-	private String applicationOrg;
-
-	@Value("${sender}")
-	private String emailSender;
-
-	@Value("${spring.data.cassandra.bodhi.username}")
+	@Value("${spring.data.cassandra.username}")
 	private String cassandraUserName;
 
-	@Value("${spring.data.cassandra.bodhi.password}")
+	@Value("${spring.data.cassandra.password}")
 	private String cassandraPassword;
-	
+
 	@Value("${notification.markAsRead.count}")
 	private Integer markAllAsReadCount;
+
+	@Value("${kafka.consumer.filter.days}")
+	private Integer kafkaConsumerFilterDays;
+
+	@Value("${mail.smtp.connectiontimeout}")
+	private Integer smtpConnectionTimeout;
+
+	@Value("${kafka.max.poll.interval.ms}")
+	private Integer kafkaMaxPollInterval;
+
+	public Integer getKafkaMaxPollRecords() {
+		return kafkaMaxPollRecords;
+	}
+
+	public void setKafkaMaxPollRecords(Integer kafkaMaxPollRecords) {
+		this.kafkaMaxPollRecords = kafkaMaxPollRecords;
+	}
+
+	@Value("${kafka.max.poll.records}")
+	private Integer kafkaMaxPollRecords;
+
+	public Integer getKafkaMaxPollInterval() {
+		return kafkaMaxPollInterval;
+	}
+
+	public void setKafkaMaxPollInterval(Integer kafkaMaxPollInterval) {
+		this.kafkaMaxPollInterval = kafkaMaxPollInterval;
+	}
+
+	public Integer getSmtpConnectionTimeout() {
+		return smtpConnectionTimeout;
+	}
+
+	public void setSmtpConnectionTimeout(Integer smtpConnectionTimeout) {
+		this.smtpConnectionTimeout = smtpConnectionTimeout;
+	}
 
 	public Integer getMarkAllAsReadCount() {
 		return markAllAsReadCount;
@@ -134,11 +131,6 @@ public class ApplicationServerProperties {
 
 	public void setMarkAllAsReadCount(Integer markAllAsReadCount) {
 		this.markAllAsReadCount = markAllAsReadCount;
-	}
-	
-
-	public String getDomain() {
-		return siemensDomain;
 	}
 
 	public String getPidServiceUrl() {
@@ -157,80 +149,8 @@ public class ApplicationServerProperties {
 		this.kafkabootstrapAddress = kafkabootstrapAddress;
 	}
 
-	public String getEmailSender() {
-		return emailSender;
-	}
-
-	public void setEmailSender(String emailSender) {
-		this.emailSender = emailSender;
-	}
-
-	public String getApplicationRootOrg() {
-		return applicationRootOrg;
-	}
-
-	public void setApplicationRootOrg(String applicationRootOrg) {
-		this.applicationRootOrg = applicationRootOrg;
-	}
-
-	public String getApplicationOrg() {
-		return applicationOrg;
-	}
-
-	public void setApplicationOrg(String applicationOrg) {
-		this.applicationOrg = applicationOrg;
-	}
-
-	public String getBannerImagePath() {
-		return bannerImagePath;
-	}
-
-	public void setBannerImagePath(String bannerImagePath) {
-		this.bannerImagePath = bannerImagePath;
-	}
-
-	public String getApnsPlatformArn() {
-		return apnsPlatformArn;
-	}
-
-	public void setApnsPlatformArn(String apnsPlatformArn) {
-		this.apnsPlatformArn = apnsPlatformArn;
-	}
-
-	public String getGcmPlatformArn() {
-		return gcmPlatformArn;
-	}
-
-	public void setGcmPlatformArn(String gcmPlatformArn) {
-		this.gcmPlatformArn = gcmPlatformArn;
-	}
-
-	public Boolean getAwsLocal() {
-		return awsLocal;
-	}
-
-	public void setAwsLocal(Boolean awsLocal) {
-		this.awsLocal = awsLocal;
-	}
-
 	public void setNotificationAdminOrg(String notificationAdminOrg) {
 		this.notificationAdminOrg = notificationAdminOrg;
-	}
-
-	public String getClientConfigurationProxyHost() {
-		return clientConfigurationProxyHost;
-	}
-
-	public void setClientConfigurationProxyHost(String clientConfigurationProxyHost) {
-		this.clientConfigurationProxyHost = clientConfigurationProxyHost;
-	}
-
-	public Integer getClientConfigurationProxyPort() {
-		return clientConfigurationProxyPort;
-	}
-
-	public void setClientConfigurationProxyPort(Integer clientConfigurationProxyPort) {
-		this.clientConfigurationProxyPort = clientConfigurationProxyPort;
 	}
 
 	public String getNotificationAdminRootOrg() {
@@ -243,14 +163,6 @@ public class ApplicationServerProperties {
 
 	public String getNotificationAdminOrg() {
 		return notificationAdminOrg;
-	}
-
-	public Boolean getAdminStatus() {
-		return adminStatus;
-	}
-
-	public void setAdminStatus(Boolean adminStatus) {
-		this.adminStatus = adminStatus;
 	}
 
 	public String getServerPort() {
@@ -363,6 +275,14 @@ public class ApplicationServerProperties {
 
 	public void setCassandraPassword(String cassandraPassword) {
 		this.cassandraPassword = cassandraPassword;
+	}
+
+	public Integer getKafkaConsumerFilterDays() {
+		return kafkaConsumerFilterDays;
+	}
+
+	public void setKafkaConsumerFilterDays(Integer kafkaConsumerFilterDays) {
+		this.kafkaConsumerFilterDays = kafkaConsumerFilterDays;
 	}
 
 }

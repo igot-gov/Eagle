@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -15,6 +12,7 @@ under the law.
 Highly Confidential
  
 */
+package com.infosys.lex.notification.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,15 +28,6 @@ public class DatabaseProperties {
 
 	@Value("${spring.data.cassandra.bodhi.keyspace-name}")
 	private String bodhiKeyspace;
-
-	@Value("${spring.data.cassandra.sunbird.contact-points}")
-	private String sunbirdContactPoint;
-
-	@Value("${spring.data.cassandra.sunbird.port}")
-	private String sunbirdContactPort;
-
-	@Value("${spring.data.cassandra.sunbird.keyspace-name}")
-	private String sunbirdKeyspace;
 
 	@Value("${spring.data.cassandra.username}")
 	private String cassandraUserName;
@@ -95,30 +84,7 @@ public class DatabaseProperties {
 		this.bodhiKeyspace = bodhiKeyspace;
 	}
 
-	public String getSunbirdContactPoint() {
-		return sunbirdContactPoint;
-	}
-
-	public void setSunbirdContactPoint(String sunbirdContactPoint) {
-		this.sunbirdContactPoint = sunbirdContactPoint;
-	}
-
-	public String getSunbirdContactPort() {
-		return sunbirdContactPort;
-	}
-
-	public void setSunbirdContactPort(String sunbirdContactPort) {
-		this.sunbirdContactPort = sunbirdContactPort;
-	}
-
-	public String getSunbirdKeyspace() {
-		return sunbirdKeyspace;
-	}
-
-	public void setSunbirdKeyspace(String sunbirdKeyspace) {
-		this.sunbirdKeyspace = sunbirdKeyspace;
-	}
-
+	
 	public String getSpringDatasourceUrl() {
 		return springDatasourceUrl;
 	}
@@ -143,13 +109,4 @@ public class DatabaseProperties {
 		this.springDatasourcePassword = springDatasourcePassword;
 	}
 
-	@Override
-	public String toString() {
-		return "DatabaseProperties [bodhiContactPoint=" + bodhiContactPoint + ", bodhiContactPort=" + bodhiContactPort
-				+ ", bodhiKeyspace=" + bodhiKeyspace + ", sunbirdContactPoint=" + sunbirdContactPoint
-				+ ", sunbirdContactPort=" + sunbirdContactPort + ", sunbirdKeyspace=" + sunbirdKeyspace
-				+ ", cassandraUserName=" + cassandraUserName + ", cassandraPassword=" + cassandraPassword
-				+ ", springDatasourceUrl=" + springDatasourceUrl + ", springDatasourceUsername="
-				+ springDatasourceUsername + ", springDatasourcePassword=" + springDatasourcePassword + "]";
-	}
 }

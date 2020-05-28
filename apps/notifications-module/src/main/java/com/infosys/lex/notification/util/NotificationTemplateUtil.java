@@ -1,11 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.util;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.infosys.lex.notification.dto.UserInfo;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
 
 public class NotificationTemplateUtil {
 
@@ -35,15 +35,15 @@ public class NotificationTemplateUtil {
 
 		return text;
 	}
-	
+
 	/*
 	 * This method updates the list tags that matcheslist tags to tagvaluepairs or
 	 * the recipients and replaces with the list of the users. For this the
 	 * tagsvalues should be list
 	 */
 	@SuppressWarnings("unchecked")
-	private static String replaceListTags(Map<String, Object> tagValuePairs, String text, Map<String, UserInfo> usersInfo,
-			Map<String, List<String>> recipients) {
+	private static String replaceListTags(Map<String, Object> tagValuePairs, String text,
+			Map<String, UserInfo> usersInfo, Map<String, List<String>> recipients) {
 
 		String checkTag;
 		StringBuilder replaceText;
@@ -156,7 +156,7 @@ public class NotificationTemplateUtil {
 	}
 
 	@SuppressWarnings("unchecked")
-	private  static String replaceTabularTags(Map<String, Object> tagValuePairs, String text) {
+	private static String replaceTabularTags(Map<String, Object> tagValuePairs, String text) {
 
 		// check for tabular data
 		if (!text.contains("<tr") || tagValuePairs == null)
@@ -227,6 +227,8 @@ public class NotificationTemplateUtil {
 		// if tag found in the template matches with tagValuePairs entry, then replace
 		// the as is.
 		for (Map.Entry<String, Object> entry : tagValuePairs.entrySet()) {
+			if (!usersInfoMap.containsKey(entry.getValue()))
+				continue;
 			if (text.contains(entry.getKey() + "Name"))
 				text = text.replaceAll(entry.getKey() + "Name", usersInfoMap.get(entry.getValue()).getName());
 
@@ -241,37 +243,58 @@ public class NotificationTemplateUtil {
 		// then replace as comma seperated values.
 		for (Map.Entry<String, List<String>> recipientEntry : recipients.entrySet()) {
 			String replaceWith = "";
-			String replacedBy = "";
+			String replaceText = "";
+			
+			//replace count of the given recipient
+			if(text.contains("#" + recipientEntry.getKey() + "Count"))
+			{
+				replaceText = "#" + recipientEntry.getKey() + "Count";
+				replaceWith = String.valueOf(recipientEntry.getValue().size());
+				text = text.replaceAll(replaceText, replaceWith);
+			}
+				
+			
 			if (text.contains("#" + recipientEntry.getKey() + "Name")) {
-				replacedBy = "Name";
-				for (String userId : recipientEntry.getValue())
+				replaceText = "#" + recipientEntry.getKey() + "Name";
+				for (String userId : recipientEntry.getValue()) {
+					if (!usersInfoMap.containsKey(userId))
+						continue;
 					replaceWith = replaceWith + ", " + usersInfoMap.get(userId).getName();
+
+				}
 				if (!replaceWith.isEmpty()) {
 					replaceWith = replaceWith.trim();
 					replaceWith = replaceWith.substring(2);
-					text = text.replaceAll("#" + recipientEntry.getKey() + replacedBy, replaceWith);
+					text = text.replaceAll(replaceText, replaceWith);
 				}
 			}
 			if (text.contains("#" + recipientEntry.getKey() + "Email")) {
-				replacedBy = "Email";
+				replaceText = "#" + recipientEntry.getKey() + "Email";
 				replaceWith = "";
-				for (String userId : recipientEntry.getValue())
+				for (String userId : recipientEntry.getValue()) {
+					if (!usersInfoMap.containsKey(userId))
+						continue;
 					replaceWith = replaceWith + ", " + usersInfoMap.get(userId).getEmail();
+				}
 				if (!replaceWith.isEmpty()) {
 					replaceWith = replaceWith.trim();
+					//remove initial ", "
 					replaceWith = replaceWith.substring(2);
-					text = text.replaceAll("#" + recipientEntry.getKey() + replacedBy, replaceWith);
+					text = text.replaceAll(replaceText, replaceWith);
 				}
 			}
 			if (text.contains("#" + recipientEntry.getKey() + "FirstName")) {
-				replacedBy = "FirstName";
+				replaceText = "#" + recipientEntry.getKey() + "FirstName";
 				replaceWith = "";
-				for (String userId : recipientEntry.getValue())
+				for (String userId : recipientEntry.getValue()) {
+					if (!usersInfoMap.containsKey(userId))
+						continue;
 					replaceWith = replaceWith + ", " + usersInfoMap.get(userId).getFirstName();
+				}
 				if (!replaceWith.isEmpty()) {
 					replaceWith = replaceWith.trim();
 					replaceWith = replaceWith.substring(2);
-					text = text.replaceAll("#" + recipientEntry.getKey() + replacedBy, replaceWith);
+					text = text.replaceAll( replaceText, replaceWith);
 				}
 			}
 
@@ -291,16 +314,18 @@ public class NotificationTemplateUtil {
 			if (tagValuePairs.containsKey("#targetUrl"))
 				text = text.replaceAll("#targetUrl", tagValuePairs.get("#targetUrl").toString());
 			else {
-
-				if (targetUrlData.get(recipientRole).contains("{}")) {
-					if (tagValuePairs.containsKey("#") && tagValuePairs.get("#") != null
-							|| !tagValuePairs.get("#").toString().isEmpty()) {
+				if(!targetUrlData.containsKey(recipientRole))
+					throw new ApplicationLogicException("target Url not set for recipient role : "+recipientRole);
+				
+				if (targetUrlData.get(recipientRole).contains("{lexId}")) {
+					if (tagValuePairs.containsKey("#lexId") && tagValuePairs.get("#lexId") != null
+							|| !tagValuePairs.get("#lexId").toString().isEmpty()) {
 
 						String url = targetUrlData.get(recipientRole);
-						url = url.replace("{}", tagValuePairs.get("#").toString());
+						url = url.replace("{lexId}", tagValuePairs.get("#lexId").toString());
 						targetUrlData.put(recipientRole, url);
 					} else {
-						throw new ApplicationLogicException("Required  for processing the event not present!");
+						throw new ApplicationLogicException("Required lexId for processing the event not present!");
 					}
 				}
 
@@ -320,7 +345,7 @@ public class NotificationTemplateUtil {
 
 		return text;
 	}
-	
+
 	/*
 	 * This method gets domain name to be sent to user
 	 */
@@ -346,7 +371,5 @@ public class NotificationTemplateUtil {
 
 		return orgAppEmailMap.get(orgKey);
 	}
-
-	
 
 }
