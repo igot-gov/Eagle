@@ -16,6 +16,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.service;
 
 public interface UserValidation {
 

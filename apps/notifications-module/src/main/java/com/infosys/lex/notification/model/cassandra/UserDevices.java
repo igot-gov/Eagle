@@ -15,6 +15,7 @@ under the law.
 Highly Confidential
 
 */
+package com.infosys.lex.notification.model.cassandra;
 
 
 import java.util.List;

@@ -15,6 +15,7 @@ under the law.
 Highly Confidential
  
 */
+package com.infosys.lex.notification.sunbird.repository;
 
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.stereotype.Repository;
