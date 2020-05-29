@@ -1,12 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.repository;
+//package com.infosys.lex.notification.repository;
 //
 //import java.util.List;
 //
 //import org.springframework.data.jpa.repository.Query;
 //import org.springframework.data.repository.CrudRepository;
 //
+//import com.infosys.lex.notification.entity.Classification;
+//import com.infosys.lex.notification.entity.ClassificationKey;
 //
 //public interface NotificationClassificationRepository extends CrudRepository<Classification, ClassificationKey> {
 //

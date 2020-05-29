@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -32,6 +30,21 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.notification.bodhi.repository.UserEventRepository;
+import com.infosys.lex.notification.dto.EventsDTO;
+import com.infosys.lex.notification.dto.ModesDTO;
+import com.infosys.lex.notification.dto.RecipientsDTO;
+import com.infosys.lex.notification.dto.TenantEventConfigurationDTO;
+import com.infosys.lex.notification.dto.UserInfo;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.exception.InvalidDataInputException;
+import com.infosys.lex.notification.exception.ResourceNotFoundException;
+import com.infosys.lex.notification.model.cassandra.UserEvent;
+import com.infosys.lex.notification.model.cassandra.UserEventPrimaryKey;
+import com.infosys.lex.notification.service.TenantEventConfigurationService;
+import com.infosys.lex.notification.service.UserInformationService;
+import com.infosys.lex.notification.service.UserNotificationsConfigurationService;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @Service
 public class UserNotificationsConfigurationServiceImpl implements UserNotificationsConfigurationService {

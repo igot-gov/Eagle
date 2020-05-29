@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -29,6 +27,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.notification.dto.ModesDTO;
+import com.infosys.lex.notification.entity.TenantMode;
+import com.infosys.lex.notification.entity.TenantModePrimaryKey;
+import com.infosys.lex.notification.projection.ModesProjection;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.repository.ModesRepository;
+import com.infosys.lex.notification.service.TenantModeConfigurationService;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @Service
 public class TenantModeConfigurationServiceImpl implements TenantModeConfigurationService {
@@ -42,6 +48,8 @@ public class TenantModeConfigurationServiceImpl implements TenantModeConfigurati
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.infosys.lex.notification.service.TenantModeConfigurationService#
+	 * putTenantNotificationMode(com.infosys.lex.notification.model.ModesModel)
 	 */
 	@Override
 	public void putTenantNotificationModes(String rootOrg, String org, List<ModesDTO> modes, String userId)
@@ -60,6 +68,7 @@ public class TenantModeConfigurationServiceImpl implements TenantModeConfigurati
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.infosys.lex.notification.service.TenantModeConfigurationService#
 	 * getTenantNotificationMode(java.lang.String, java.lang.String)
 	 */
 	@Override

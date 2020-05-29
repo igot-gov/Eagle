@@ -1,10 +1,18 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.repository;
+
+import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+import com.infosys.lex.notification.entity.SMTPConfig;
+import com.infosys.lex.notification.entity.SMTPConfigKey;
 
-public interface SMTPConfigRepository extends CrudRepository<SMTPConfig, String> {
+@Repository
+public interface SMTPConfigRepository extends CrudRepository<SMTPConfig, SMTPConfigKey> {
+	
+	List<SMTPConfig> findAllByKeyRootOrgAndKeyOrgIn(String rootOrg,List<String> orgs);
+	
+	List<SMTPConfig> findAllByKeyRootOrg(String rootOrg);
 
 }

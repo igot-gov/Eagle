@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.serviceImpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -18,6 +16,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.uuid.Generators;
+import com.infosys.lex.notification.dto.EventTemplateDTO;
+import com.infosys.lex.notification.entity.RecipientTags;
+import com.infosys.lex.notification.entity.RecipientTagsPrimaryKey;
+import com.infosys.lex.notification.entity.TenantEvent;
+import com.infosys.lex.notification.entity.TenantEventPrimaryKey;
+import com.infosys.lex.notification.entity.TenantTemplate;
+import com.infosys.lex.notification.entity.TenantTemplatePrimaryKey;
+import com.infosys.lex.notification.exception.InvalidDataInputException;
+import com.infosys.lex.notification.projection.RecipientTemplateProjection;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.repository.RecipientTagsRepository;
+import com.infosys.lex.notification.repository.TenantEventRepository;
+import com.infosys.lex.notification.repository.TenantTemplateRepository;
+import com.infosys.lex.notification.service.TenantTemplateService;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @Service
 public class TenantTemplateServiceImpl implements TenantTemplateService {
@@ -37,7 +50,9 @@ public class TenantTemplateServiceImpl implements TenantTemplateService {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.infosys.lex.notification.service.TenantEventConfigurationService#
 	 * configureTemplates(java.lang.String, java.lang.String,
+	 * com.infosys.lex.notification.dto.EventTemplateDTO, java.lang.String,
 	 * java.lang.String)
 	 */
 	@Override
@@ -79,6 +94,7 @@ public class TenantTemplateServiceImpl implements TenantTemplateService {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see com.infosys.lex.notification.service.TenantEventConfigurationService#
 	 * fetchTenantTemplates(java.lang.String, java.lang.String, java.util.List)
 	 */
 
@@ -204,9 +220,11 @@ public class TenantTemplateServiceImpl implements TenantTemplateService {
 			String mode)
 	{
 		if(!templateIds.isEmpty())
+			//fetches tempates for given templateid and also the default templates for the given
 			return tenantTemplateRepo.fetchAllTemplatesByTemplateIdsWithDefaultTemplate(eventId, recipientRole, mode, templateIds);
 
 		else
+			//fetch default templates for the given event ids
 			return tenantTemplateRepo.fetchAllDefaultTemplatesForEventIdAndRecipientRoleAndMode(eventId, recipientRole, mode);
 
 	}

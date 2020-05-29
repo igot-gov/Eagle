@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 Â© 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +35,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.infosys.lex.notification.dto.TenantEventConfigurationDTO;
+import com.infosys.lex.notification.service.PushService;
+import com.infosys.lex.notification.service.UserNotificationsConfigurationService;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @RestController
 @RequestMapping("/v1/users/{userId}")
@@ -68,11 +71,39 @@ public class UserNotificationsConfigurationController {
 		return new ResponseEntity<>(validEvents, HttpStatus.OK);
 	}
 
+	/**
+	 * This api generates arn for the user device in sns and stores it.
+	 * @param userId
+	 * @param deviceToken
+	 * @param endpointPlatform
+	 * @param previousDeviceToken
+	 * @param rootOrg
+	 * @return
+	 * @throws Exception
+	 */
 	@PutMapping("/devices/{device_token}")
 	public ResponseEntity<Map<String, Object>> saveARN(@PathVariable("userId") String userId,
 			@PathVariable("device_token") String deviceToken,
-			@RequestParam(required = true, name = "token_type") String tokenType) throws Exception {
+			@RequestParam(required = true, name = "platform") String endpointPlatform,
+			@RequestParam(required = false,name = "previousDeviceToken")String previousDeviceToken,
+			@RequestHeader("rootOrg") String rootOrg) throws Exception {
 
-		return new ResponseEntity<>(pushService.generateARN(userId, deviceToken, tokenType), HttpStatus.OK);
+		return new ResponseEntity<>(pushService.generateARN(userId,rootOrg, deviceToken, endpointPlatform,previousDeviceToken), HttpStatus.OK);
+	}
+	
+	/**
+	 * This method deletes the user device arn record from db and  deletes the 
+	 *  endpoint of user device token from SNS.
+	 * @param userId
+	 * @param deviceToken
+	 * @param rootOrg
+	 * @return
+	 */
+	@DeleteMapping("/devices/{device_token}")
+	public ResponseEntity<Map<String,Object>> deleteARN(@PathVariable("userId") String userId,
+			@PathVariable("device_token") String deviceToken,
+			@RequestHeader("rootOrg") String rootOrg){
+		pushService.deleteUserDeviceArn(rootOrg, userId, deviceToken);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

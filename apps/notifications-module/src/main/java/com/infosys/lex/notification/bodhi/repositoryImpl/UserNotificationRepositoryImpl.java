@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -15,6 +12,7 @@ under the law.
 Highly Confidential
 
 */
+package com.infosys.lex.notification.bodhi.repositoryImpl;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -34,6 +32,10 @@ import com.datastax.driver.core.querybuilder.QueryBuilder;
 import com.datastax.driver.core.querybuilder.Select.Where;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.notification.bodhi.repository.UserNotificationRepositoryCustom;
+import com.infosys.lex.notification.dto.NotificationDigestDTO;
+import com.infosys.lex.notification.dto.NotificationSendDTO;
+import com.infosys.lex.notification.exception.InvalidDataInputException;
 
 @Repository
 public class UserNotificationRepositoryImpl implements UserNotificationRepositoryCustom {

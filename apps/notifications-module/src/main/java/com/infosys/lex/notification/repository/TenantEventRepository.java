@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.repository;
 
 import java.util.List;
 import java.util.Map;
@@ -24,6 +22,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.infosys.lex.notification.entity.TenantEvent;
+import com.infosys.lex.notification.entity.TenantEventPrimaryKey;
 
 @Repository
 public interface TenantEventRepository extends CrudRepository<TenantEvent, TenantEventPrimaryKey> {
@@ -49,7 +49,16 @@ public interface TenantEventRepository extends CrudRepository<TenantEvent, Tenan
 			+ "where res_desc.language in ?3")
 	public List<Map<String, Object>> getTenantConfiguredEvents(String rootOrg, String org, List<String> language);
 
-	@Query(nativeQuery = true, value = "select ten.root_org,ten.org,eg.group_id,eg.group_name,eg.event_id, eg.event_name,eg.language,eg.event_description,ten.recipient,rd.recipient_name,rd.recipient_description,rd.admin_description,ten.mode,tl.mode_name,ten.mode_activated,ten.receiver_emails from wingspan.tenant_event_notification ten inner join wingspan.tenant_event_notification def on def.event_id=ten.event_id and def.recipient=ten.recipient and def.mode=ten.mode inner join wingspan.event_group eg on ten.event_id=eg.event_id  inner join wingspan.tenant_mode_language tl on tl.mode=ten.mode inner join wingspan.recipient_description rd on eg.event_id=rd.event_id and ten.recipient=rd.recipient where def.root_org='default' and def.org='default' and def.mode_activated=true and ten.root_org=?1 and tl.language in ?3  and ten.org in ?2 and eg.language in ?3 and rd.language in ?3 and ten.mode_activated=true order by ten.root_org,ten.org,eg.group_id,eg.event_name,ten.recipient,ten.mode")
+	@Query(nativeQuery = true, value = "select ten.root_org,ten.org,eg.group_id,eg.group_name,eg.event_id, eg.event_name,eg.language,eg.event_description,"
+			+ "ten.recipient,rd.recipient_name,rd.recipient_description,rd.admin_description,ten.mode,tl.mode_name,ten.mode_activated,ten.receiver_emails "
+			+ "from wingspan.tenant_event_notification ten inner join wingspan.tenant_event_notification def on def.event_id=ten.event_id "
+			+ "and def.recipient=ten.recipient and def.mode=ten.mode inner join wingspan.event_group eg on ten.event_id=eg.event_id  "
+			+ "inner join wingspan.tenant_mode_language tl on tl.mode=ten.mode "
+			+ "inner join wingspan.recipient_description rd on eg.event_id=rd.event_id "
+			+ "and ten.recipient=rd.recipient where def.root_org='default' "
+			+ "and def.org='default' and def.mode_activated=true and ten.root_org=?1 and tl.language in ?3  "
+			+ "and ten.org in ?2 and eg.language in ?3 and rd.language in ?3 and ten.mode_activated=true "
+			+ "order by ten.root_org,ten.org,eg.group_id,eg.event_name,ten.recipient,ten.mode")
 	public List<Map<String, Object>> getActivatedEventsByRootOrgAndOrgs(String rootOrg, List<String> orgs,
 			List<String> languages);
 

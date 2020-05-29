@@ -1,14 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.bodhi.repository;
 
-import java.util.List;
-import java.util.Map;
-
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 
+import com.infosys.lex.notification.model.cassandra.AppConfig;
+import com.infosys.lex.notification.model.cassandra.AppConfigPrimaryKey;
 
 public interface AppConfigRepository extends CassandraRepository<AppConfig, AppConfigPrimaryKey> {
 
-	public List<Map<String, Object>> findAllByPrimaryKeyRootOrgAndPrimaryKeyKeyIn(String rootOrg, List<String> keys);
+	@Cacheable(value = "config_key_value", key = "#rootOrg.concat('-').concat(#key)", unless = "#result == null")
+	public AppConfig findAllByPrimaryKeyRootOrgAndPrimaryKeyKey(String rootOrg,String key);
 }

@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at 
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,7 +16,7 @@ class TableTagReplacement {
 			+ "<p>#time</p>\r\n" + "</td>\r\n" + "<td width=\"360\">\r\n" + "<p>#venue</p>\r\n" + "</td>\r\n"
 			+ "</tr>\r\n" + "</tbody>\r\n" + "</table>\r\n" + "<p>&nbsp;</p>\r\n"
 			+ "<p>Have a great day! <br /> <br /> Regards, <br /> Wingspan Team</p>\r\n"
-			+ "<p>Are you receiving too many notifications? Click <a href=\"/\">here</a> to unsubscribe.</p>";
+			+ "<p>Are you receiving too many notifications? Click <a href=\"http://lex.infosysapps.com/\">here</a> to unsubscribe.</p>";
 
 	private static List<String> hashTagDateData = Arrays.asList("2019-10-21", "2019-10-22", "2019-10-23");
 

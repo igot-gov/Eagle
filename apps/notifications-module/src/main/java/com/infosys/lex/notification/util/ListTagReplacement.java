@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at 
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +13,7 @@ class ListTagReplacement {
 			+ "<p>Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #location (City, Country)</p>\r\n"
 			+ "<p>&nbsp;</p>\r\n" + "<ul style=\"list-style-type:disc;\">\r\n" + "  <li>#item</li>\r\n" + "</ul>\r\n"
 			+ "\r\n" + "<p>&nbsp;</p>\r\n" + "<p>Have a great day! <br /> <br /> Regards, <br /> Wingspan Team</p>\r\n"
-			+ "<p>Are you receiving too many notifications? Click <a href=\"\"here</a> to unsubscribe.</p>";
+			+ "<p>Are you receiving too many notifications? Click <a href=\"\">here</a> to unsubscribe.</p>";
 
 	private static List<String> hashTagListData = Arrays.asList("2019-10-21", "2019-10-22", "2019-10-23");
 

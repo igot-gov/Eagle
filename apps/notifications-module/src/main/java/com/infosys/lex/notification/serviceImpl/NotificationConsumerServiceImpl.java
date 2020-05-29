@@ -1,8 +1,5 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
-© 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
+	© 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
 
 Except for any free or open source software components embedded in this Infosys proprietary software program (“Program”),
@@ -16,6 +13,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.serviceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,11 +25,28 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.notification.dto.InAppNotificationRequest;
+import com.infosys.lex.notification.dto.NotificationEvent;
+import com.infosys.lex.notification.dto.PushNotificationRequest;
+import com.infosys.lex.notification.dto.UserInfo;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.projection.EventRecipientsProjection;
+import com.infosys.lex.notification.repository.RecipientTagsRepository;
+import com.infosys.lex.notification.service.EmailNotificationProcessingService;
+import com.infosys.lex.notification.service.NotificationConsumerService;
+import com.infosys.lex.notification.service.NotificationConsumerUtilService;
+import com.infosys.lex.notification.service.ProducerService;
+import com.infosys.lex.notification.service.TenantEventConfigurationService;
+import com.infosys.lex.notification.service.TenantTemplateService;
+import com.infosys.lex.notification.service.UserInformationService;
+import com.infosys.lex.notification.service.UserNotificationsService;
+import com.infosys.lex.notification.util.LexConstants;
+import com.infosys.lex.notification.util.LexNotificationLogger;
+import com.infosys.lex.notification.util.NotificationTemplateUtil;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @Service
 public class NotificationConsumerServiceImpl implements NotificationConsumerService {
-
-
 
 	@Autowired
 	UserInformationService userInfoService;
@@ -42,31 +57,22 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 	@Autowired
 	TenantTemplateService tenantTemplateService;
 
-
-
 	@Autowired
 	TenantEventConfigurationService tenantEventService;
 
 	@Autowired
 	UserNotificationsService userNotificationService;
 
-	
 	@Autowired
 	ProducerService producerService;
 
-	
 	@Autowired
 	NotificationConsumerUtilService consumerUtilServ;
 
-
 	@Autowired
 	EmailNotificationProcessingService emailProcessingServ;
-	
-	
-	
 
 	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -75,12 +81,12 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		String rootOrg = notificationEvent.getRootOrg();
 		Map<String, String> orgDomainMap = consumerUtilServ.getOrgDomainMap(rootOrg);
 		String eventId = notificationEvent.getEventId();
-		Map<String, String> orgToTemplateIdMapForEmail = new HashMap<String, String>();
 
-		// templateid to org map used for configured receiver events
-		Map<String, String> templateIdToOrgMap = new HashMap<>();
 
 		Map<String, List<String>> recipients = notificationEvent.getRecipients();
+		
+		//update recipients map add manager if manager recipientRole exists for that event
+		this.addManagerRecipientUsersIfExists(rootOrg, recipients, eventId);
 
 		// getting target url for email if not found in the request body
 		Map<String, String> targetDataMapping = this.getTargetData(notificationEvent);
@@ -98,7 +104,8 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 				.flatMap(userInfo -> userInfo.getValue().getOrgs().stream()).collect(Collectors.toSet());
 
 		// get the app email to replaced in template for all the orgs
-		Map<String, String> orgAppEmailMap = consumerUtilServ.getOrgFooterEmailMap(rootOrg, new ArrayList<>(distinctOrgs));
+		Map<String, String> orgAppEmailMap = consumerUtilServ.getOrgFooterEmailMap(rootOrg,
+				new ArrayList<>(distinctOrgs));
 
 		// getting all the receiving roles and modes configured for the given eventId.
 		List<Map<String, Object>> tenantNotificationConfigMaps = tenantEventService
@@ -108,15 +115,17 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 
 		for (Map.Entry<String, List<String>> recipient : recipients.entrySet()) {
 
+			// templateid to org map used for configured receiver events
+			Map<String, String> templateIdToOrgMap = new HashMap<>();
 			// this is used for events where receiver email is configured
-			Map<String, String[]> userIdRecieverEmailMap = new HashMap<>();
+			Map<String, String[]> userIdConfiguredRecieverEmailMap = new HashMap<>();
 
 			String recipientRole = recipient.getKey();
 			List<String> recipientsUserIds = new ArrayList<>(recipient.getValue());
 			boolean emailToBeSentAnyUser = false;
-			List<String> emailRecipientUserIds = new ArrayList<String>();
+			List<String> eventRecipientUserIdsForEmail = new ArrayList<String>();
 			boolean isEventRecieverConfigured = false;
-			for  (String userId: recipientsUserIds) {
+			for (String userId : recipientsUserIds) {
 
 				// if userid data not available dont send any notification
 				if (!usersInfoMap.containsKey(userId))
@@ -136,15 +145,14 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 				for (Map<String, Object> userNotificationMode : userNotificationModes) {
 
 					if (userNotificationMode.get("mode").equals("email")) {
-						orgToTemplateIdMapForEmail.put(userNotificationMode.get("org").toString(),
-								(String) userNotificationMode.get("template_id"));
+
 						emailToBeSentAnyUser = true;
-						if(!emailRecipientUserIds.contains(userId))
-							emailRecipientUserIds.add(userId);
-						//this is for  receiver email configured events as for every user
+						if (!eventRecipientUserIdsForEmail.contains(userId))
+							eventRecipientUserIdsForEmail.add(userId);
+						// this is for receiver email configured events as for every user
 						// the receiver emails configured may be different based on their org
 						if (isEventRecieverConfigured)
-							userIdRecieverEmailMap.put(userId, receiverEmails);
+							userIdConfiguredRecieverEmailMap.put(userId, receiverEmails);
 						// for preset receiver list event
 						if (userNotificationMode.get("template_id") != null)
 							templateIdToOrgMap.put(userNotificationMode.get("template_id").toString(),
@@ -167,15 +175,32 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 					}
 				}
 			}
-			if (isEventRecieverConfigured && emailToBeSentAnyUser) {
+
+			if (!emailToBeSentAnyUser)
+				continue;
+
+			// If any email is required to be sent for the given recipient role
+
+			if (eventRecipientUserIdsForEmail.size() == 1) {
+				// when there is only one user for given recipient role of the event raised(No
+				// bucketing done based on org
+				// and language
+				emailProcessingServ.enqueueEmailNotificationForSingleUser(rootOrg, eventId, recipientRole,
+						eventRecipientUserIdsForEmail.get(0), recipients, usersInfoMap,
+						notificationEvent.getTagValues(), templateIdToOrgMap, orgDomainMap, targetDataMapping,
+						userIdConfiguredRecieverEmailMap, orgAppEmailMap, isEventRecieverConfigured);
+			}
+
+			else if (isEventRecieverConfigured) {
 				emailProcessingServ.enqueueEmailNotfificationForRecieverConfigedEvent(rootOrg, eventId, recipientRole,
-						emailRecipientUserIds, recipients, usersInfoMap, notificationEvent.getTagValues(),
-						templateIdToOrgMap, orgDomainMap, targetDataMapping, userIdRecieverEmailMap, orgAppEmailMap);
-			} else if (emailToBeSentAnyUser) {
+						eventRecipientUserIdsForEmail, recipients, usersInfoMap, notificationEvent.getTagValues(),
+						templateIdToOrgMap, orgDomainMap, targetDataMapping, userIdConfiguredRecieverEmailMap,
+						orgAppEmailMap);
+			} else {
 				// sending email to all the users in given recipient role
 				emailProcessingServ.enqueueEmailNotification(rootOrg, eventId, recipientRole,
-						emailRecipientUserIds, recipients, usersInfoMap, notificationEvent.getTagValues(),
-						templateIdToOrgMap, orgDomainMap, targetDataMapping,  orgAppEmailMap);
+						eventRecipientUserIdsForEmail, recipients, usersInfoMap, notificationEvent.getTagValues(),
+						templateIdToOrgMap, orgDomainMap, targetDataMapping, orgAppEmailMap);
 			}
 		}
 
@@ -183,13 +208,6 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 			userNotificationService.sendInAppNotifications(notificationEvent, inAppRequests);
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	private Map<String, String> getTargetData(NotificationEvent notificationEvent) {
 
 		Map<String, String> targetDataMapping = null;
@@ -213,10 +231,6 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		return targetDataMapping;
 	}
 
-	
-	
-	
-	
 	private Map<String, Object> createSmsRequest(NotificationEvent notificationEvent, String userId,
 			String recipientRole, Map<String, UserInfo> usersInfoMap, Map<String, Object> inAppConfig,
 			Map<String, String> targetDataMapping, String domainName) {
@@ -246,9 +260,6 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		return responseMap;
 	}
 
-	
-	
-	
 	private InAppNotificationRequest createInAppRequest(NotificationEvent notificationEvent, String userId,
 			String recipientRole, Map<String, UserInfo> usersInfoMap, Map<String, Object> inAppConfig,
 			Map<String, String> targetDataMapping, String domainName) {
@@ -278,8 +289,6 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		return inAppRequest;
 	}
 
-	
-	
 	private PushNotificationRequest createPushRequest(NotificationEvent notificationEvent, String userId,
 			String recipientRole, Map<String, UserInfo> usersInfoMap, Map<String, Object> inAppConfig,
 			Map<String, String> targetDataMapping, String domainName) {
@@ -287,21 +296,23 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		Map<String, Object> pushTemplate = fetchTemplate((String) inAppConfig.get("template_id"),
 				usersInfoMap.get(userId).getPreferedLanguages(), notificationEvent.getEventId(), recipientRole, "push");
 
+		String targetUrl = this.fetchTargetUrlForPushNotification(targetDataMapping, notificationEvent.getTagValues(),
+				domainName, recipientRole);
 		pushTemplate = ProjectCommonUtil.convertToHashMap(pushTemplate);
 
 		ProjectCommonUtil.templateValidations(notificationEvent.getRootOrg(), notificationEvent.getEventId(),
 				recipientRole, pushTemplate);
 
-		String subject = NotificationTemplateUtil.replaceTags(notificationEvent.getRootOrg(), notificationEvent.getTagValues(),
-				pushTemplate.get("template_subject").toString(), usersInfoMap, notificationEvent.getRecipients(),
-				recipientRole, targetDataMapping, domainName, null);
+		String subject = NotificationTemplateUtil.replaceTags(notificationEvent.getRootOrg(),
+				notificationEvent.getTagValues(), pushTemplate.get("template_subject").toString(), usersInfoMap,
+				notificationEvent.getRecipients(), recipientRole, targetDataMapping, domainName, null);
 
-		String body = NotificationTemplateUtil.replaceTags(notificationEvent.getRootOrg(), notificationEvent.getTagValues(),
-				pushTemplate.get("template_text").toString(), usersInfoMap, notificationEvent.getRecipients(),
-				recipientRole, targetDataMapping, domainName, null);
+		String body = NotificationTemplateUtil.replaceTags(notificationEvent.getRootOrg(),
+				notificationEvent.getTagValues(), pushTemplate.get("template_text").toString(), usersInfoMap,
+				notificationEvent.getRecipients(), recipientRole, targetDataMapping, domainName, null);
 
 		PushNotificationRequest pushRequest = new PushNotificationRequest(notificationEvent.getRootOrg(),
-				notificationEvent.getEventId(), userId, subject, body);
+				notificationEvent.getEventId(), userId, subject, body, targetUrl);
 
 		return pushRequest;
 
@@ -326,11 +337,6 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		return templatesFetched.get(0);
 	}
 
-	
-
-	
-
-	
 	@SuppressWarnings("unchecked")
 	private Map<String, Object> getTenantConfiguredModesForUser(String eventId,
 			List<Map<String, Object>> tenantNotificationConfigMaps, String recipientRole, UserInfo userInfo) {
@@ -396,10 +402,59 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		return resp;
 	}
 
-	
+	/**
+	 * This method fetches the tagert url for the push notification. This method
+	 * return domainName if no targetUrl could be generated(if email notification
+	 * doesn't have a target url)
+	 * 
+	 **/
+	private String fetchTargetUrlForPushNotification(Map<String, String> targetDataMapping,
+			Map<String, Object> tagValuePairs, String domainName, String recipientRole) {
+		if (targetDataMapping == null && tagValuePairs.containsKey("#targetUrl")) {
+			return tagValuePairs.get("#targetUrl").toString();
+		} else if (targetDataMapping != null) {
+			if (targetDataMapping.get(recipientRole).contains("{lexId}")) {
+				if (tagValuePairs.containsKey("#lexId") && tagValuePairs.get("#lexId") != null
+						|| !tagValuePairs.get("#lexId").toString().isEmpty()) {
 
-	
+					String url = targetDataMapping.get(recipientRole);
+					url = url.replace("{lexId}", tagValuePairs.get("#lexId").toString());
+					targetDataMapping.put(recipientRole, url);
+				} else {
+					throw new ApplicationLogicException("Required lexId for processing the event not present!");
+				}
+			}
 
-	
-	
+			return domainName + "/" + targetDataMapping.get(recipientRole);
+		}
+
+		return domainName;
+
+	}
+
+	private void addManagerRecipientUsersIfExists(String rootOrg,Map<String, List<String>> recipients, String eventId) {
+		// If manager list already exist in event raised then no need to fetch the
+		// manager for the user
+		if (recipients.get(LexConstants.MANAGER) != null && !recipients.get(LexConstants.MANAGER).isEmpty())
+			return;
+
+		// check if event has a manager recipientrole
+		List<EventRecipientsProjection> eventRecipients = recipientTagsRepo.findAllByTagsPrimaryKeyEventId(eventId);
+		boolean hasManagerRecipient = eventRecipients.stream()
+				.anyMatch(eventRecipient -> eventRecipient.getRecipient().equals(LexConstants.MANAGER));
+		if (!hasManagerRecipient)
+			return;
+
+		List<String> userIds = new ArrayList<>();
+		for (String recipientRole : recipients.keySet()) {
+			if (recipients.get(recipientRole) != null)
+				userIds.addAll(recipients.get(recipientRole));
+		}
+
+		Map<String, String> userManagerMap = userInfoService.fetchManager(rootOrg, userIds);
+		if(!userManagerMap.values().isEmpty())
+			recipients.put(LexConstants.MANAGER, new ArrayList<>(userManagerMap.values()));
+
+	}
+
 }

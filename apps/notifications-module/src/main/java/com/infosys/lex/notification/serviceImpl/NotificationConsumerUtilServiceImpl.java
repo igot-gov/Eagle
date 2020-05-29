@@ -1,8 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at 
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.serviceImpl;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,28 +17,35 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.notification.bodhi.repository.NotificationErrorsRepo;
+import com.infosys.lex.notification.entity.TemplateFooter;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.model.cassandra.NotificationErrors;
+import com.infosys.lex.notification.model.cassandra.NotificationErrorsPrimaryKey;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.repository.TenantTemplateFooterRepository;
+import com.infosys.lex.notification.service.NotificationConsumerUtilService;
+import com.infosys.lex.notification.util.LexNotificationLogger;
 
 @Service
-public class NotificationConsumerUtilServiceImpl implements NotificationConsumerUtilService{
-	
+public class NotificationConsumerUtilServiceImpl implements NotificationConsumerUtilService {
+
 	@Autowired
 	NotificationErrorsRepo notificationErrorsRepo;
-	
-	
+
 	@Autowired
 	TenantTemplateFooterRepository templateFooterRepo;
-	
-	
+
 	@Autowired
 	ApplicationServerProperties appServerProps;
-	
+
 	@Autowired
 	RestTemplate restTemplate;
-	
+
 	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
 
 	private static final ObjectMapper mapper = new ObjectMapper();
-	
+
 	@Override
 	public void saveError(String rootOrg, String eventId, Exception e, Object requestBody) {
 
@@ -100,4 +106,27 @@ public class NotificationConsumerUtilServiceImpl implements NotificationConsumer
 		}
 		return returnMap;
 	}
+
+	/**
+	 * This method checkes if the timestamp is less no of days configured
+	 * 
+	 * @param timestamp
+	 * @return
+	 */
+	@Override
+	public boolean checkEventTimestamp(long timestamp) {
+
+		Calendar eventDateTime = Calendar.getInstance();
+		eventDateTime.setTimeInMillis(timestamp);
+
+		Calendar filterDateTime = Calendar.getInstance();
+		filterDateTime.add(Calendar.DAY_OF_YEAR, -appServerProps.getKafkaConsumerFilterDays());
+
+		if (eventDateTime.after(filterDateTime))
+			return true;
+		else
+			return false;
+
+	}
+
 }

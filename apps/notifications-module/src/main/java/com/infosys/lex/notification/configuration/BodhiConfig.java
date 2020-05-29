@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
@@ -16,12 +13,14 @@ under the law.
 Highly Confidential
  
 */
+package com.infosys.lex.notification.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
 import org.springframework.data.cassandra.core.CassandraAdminOperations;
 import org.springframework.data.cassandra.core.CassandraAdminTemplate;
@@ -32,17 +31,66 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 import com.datastax.driver.core.AuthProvider;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.properties.DatabaseProperties;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.bodhi")
-@EnableCassandraRepositories(basePackages = "com...bodhi.repository", cassandraTemplateRef = "bodhiTemplate")
-public class BodhiConfig extends CassandraConfig {
+@EnableCassandraRepositories(basePackages = "com.infosys.lex.notification.bodhi.repository", cassandraTemplateRef = "bodhiTemplate")
+public class BodhiConfig extends AbstractCassandraConfiguration  {
 
 	@Autowired
 	DatabaseProperties dbProperties;
 	
 	@Autowired
 	ApplicationServerProperties appServerProp;
+	
+	protected String contactPoints;
+	protected Integer port;
+	protected String keyspaceName;
+
+	@Override
+	protected boolean getMetricsEnabled() { return false; }
+	
+	
+	@Override
+	public String getContactPoints() {
+		return contactPoints;
+	}
+
+	/**
+	 * @param contactPoints
+	 */
+	public void setContactPoints(String contactPoints) {
+		this.contactPoints = contactPoints;
+	}
+
+	/**
+	 * @param keyspaceName
+	 */
+	public void setKeyspaceName(String keyspaceName) {
+		this.keyspaceName = keyspaceName;
+	}
+
+	@Override
+	public String getKeyspaceName() {
+		return keyspaceName;
+	}
+
+	@Override
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param contactPoints
+	 */
+	public void setPort(Integer port) {
+		this.port = port;
+	}
+
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -94,4 +142,6 @@ public class BodhiConfig extends CassandraConfig {
 	public CassandraOperations cassandraOperationsB() throws ClassNotFoundException {
 		return new CassandraTemplate(session().getObject(), cassandraConverter());
 	}
+
+	
 }

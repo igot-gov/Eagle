@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at 
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+package com.infosys.lex.notification.serviceImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +6,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +14,17 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.notification.bodhi.repository.AppConfigRepository;
+import com.infosys.lex.notification.bodhi.repository.UserPreferencesRepository;
+import com.infosys.lex.notification.dto.UserInfo;
+import com.infosys.lex.notification.exception.ApplicationLogicException;
+import com.infosys.lex.notification.model.cassandra.UserPreferencesModel;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.service.UserInformationService;
+import com.infosys.lex.notification.service.UserNotificationsConfigurationService;
+import com.infosys.lex.notification.util.LexNotificationLogger;
+import com.infosys.lex.notification.util.PIDConstants;
+import com.infosys.lex.notification.util.ProjectCommonUtil;
 
 @Service
 public class UserInformationServiceImpl implements UserInformationService {
@@ -26,9 +34,6 @@ public class UserInformationServiceImpl implements UserInformationService {
 
 	@Autowired
 	AppConfigRepository appConfigRepo;
-
-	@Autowired
-	UserRepository userRepository;
 
 	@Autowired
 	ApplicationServerProperties appServerProps;
@@ -43,6 +48,7 @@ public class UserInformationServiceImpl implements UserInformationService {
 
 	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
 
+	@Override
 	public Map<String, UserInfo> getUserInfo(String rootOrg, List<String> userIds) {
 
 		Map<String, UserInfo> usersInfoMap = new HashMap<>();
@@ -56,7 +62,6 @@ public class UserInformationServiceImpl implements UserInformationService {
 	}
 
 	@Override
-
 	public Map<String, UserInfo> getUserInfoAndNotificationPreferences(String rootOrg, String eventId,
 			List<String> recipientRoles, List<String> userIds) {
 
@@ -89,15 +94,7 @@ public class UserInformationServiceImpl implements UserInformationService {
 
 	private void getUsersPidInfo(String rootOrg, List<String> userIds, Map<String, UserInfo> usersInfoMap) {
 
-		Optional<AppConfig> appConfig = appConfigRepo.findById(new AppConfigPrimaryKey(rootOrg, "user_data_source"));
-		if (!appConfig.isPresent())
-			throw new ApplicationLogicException("could not fetch user data source from app config table");
-
-		if (appConfig.get().getValue().equalsIgnoreCase("su"))
-			getUserInfoFromSunbird(rootOrg, userIds, usersInfoMap);
-		else
-			getUserInfoFromPid(rootOrg, userIds, usersInfoMap);
-		
+		getUserInfoFromPid(rootOrg, userIds, usersInfoMap);
 
 		if (usersInfoMap.isEmpty())
 			throw new ApplicationLogicException(
@@ -138,17 +135,6 @@ public class UserInformationServiceImpl implements UserInformationService {
 			logger.error("could not extract pid for all the user " + userIds.toString());
 	}
 
-	private void getUserInfoFromSunbird(String rootOrg, List<String> userIds, Map<String, UserInfo> usersInfoMap) {
-
-		List<UserModel> users = userRepository.findAllById(userIds);
-		for (UserModel user : users) {
-			usersInfoMap.put(user.getId(),
-					new UserInfo(rootOrg, user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),
-							user.getFirstName() + " " + user.getLastName(), Arrays.asList("Infosys Ltd"),
-							new HashMap<>(), Arrays.asList("en")));
-		}
-	}
-
 	private void getUsersLangaugePreferences(String rootOrg, List<String> userIds, Map<String, UserInfo> usersInfoMap) {
 
 		List<UserPreferencesModel> userPreferences = userPreferencesRepo.getPreferencesByRootOrgAndUserIds(rootOrg,
@@ -178,41 +164,67 @@ public class UserInformationServiceImpl implements UserInformationService {
 	@SuppressWarnings("unchecked")
 	public boolean validateUser(String rootOrg, String userId) throws Exception {
 
-		Optional<AppConfig> appConfig = appConfigRepo.findById(new AppConfigPrimaryKey(rootOrg, "user_data_source"));
-		if (!appConfig.isPresent())
-			throw new ApplicationLogicException("could not fetch user data source from app config table");
+		Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+		pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org"));
+		Map<String, String> conditions = new HashMap<String, String>();
+		conditions.put("root_org", rootOrg);
+		conditions.put("wid", userId);
+		pidRequestMap.put("conditions", conditions);
 
-		if ("su".equalsIgnoreCase(appConfig.get().getValue())) {
+		try {
 
-			UserModel user = userRepository.findById(userId).orElse(null);
-			if (user == null) {
+			String url = "http://" + appServerProps.getPidServiceUrl() + "/user";
+			List<Map<String, Object>> pidResponse = restTemplate.postForObject(url, pidRequestMap, List.class);
+
+			if (pidResponse.isEmpty() || pidResponse == null) {
 				return false;
 			} else {
-				return user.getId().equals(userId);
+				return (pidResponse.get(0).get("wid").equals(userId));
 			}
 
-		} else {
-			Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org"));
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
-			conditions.put("wid", userId);
-			pidRequestMap.put("conditions", conditions);
-
-			try {
-
-				String url = "http://" + appServerProps.getPidServiceUrl() + "/user";
-				List<Map<String, Object>> pidResponse = restTemplate.postForObject(url, pidRequestMap, List.class);
-
-				if (pidResponse.isEmpty() || pidResponse == null) {
-					return false;
-				} else {
-					return (pidResponse.get(0).get("wid").equals(userId));
-				}
-
-			} catch (Exception e) {
-				throw new ApplicationLogicException("PID ERROR: ", e);
-			}
+		} catch (Exception e) {
+			throw new ApplicationLogicException("PID ERROR: ", e);
 		}
+
 	}
+
+	/**
+	 * This method returns the manager_id mapped to the user_id(For whom the manager
+	 * id exists/not null)
+	 * 
+	 * @param rootOrg
+	 * @param userIds
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, String> fetchManager(String rootOrg, List<String> userIds) {
+		Map<String, String> respMap = new HashMap<>();
+		try {
+		
+		String url = "http://" + appServerProps.getPidServiceUrl() + "/user/multi-fetch/wid";
+		Map<String, Object> requestBody = new HashMap<>();
+		requestBody.put("source_fields", Arrays.asList(PIDConstants.WID, PIDConstants.MANAGER_ID));
+		Map<String, Object> conditions = new HashMap<>();
+		conditions.put("root_org", rootOrg);
+		requestBody.put("conditions", conditions);
+		requestBody.put("values", userIds);
+
+		
+			List<Map<String, Object>> responseMaps = restTemplate.postForObject(url, requestBody, List.class);
+			for (Map<String, Object> responseMap : responseMaps) {
+
+				if (responseMap.get(PIDConstants.MANAGER_ID) != null)
+					respMap.put(responseMap.get(PIDConstants.WID).toString(), responseMap.get(PIDConstants.MANAGER_ID).toString());
+			}
+		} catch (HttpStatusCodeException e) {
+			throw new ApplicationLogicException("user info service(pid) response status " + e.getStatusCode()
+					+ " message " + e.getResponseBodyAsString());
+		} catch (Exception e) {
+			throw new ApplicationLogicException("Could not Parse user pid data");
+		}
+
+		return respMap;
+	}
+
 }
