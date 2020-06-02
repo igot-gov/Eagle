@@ -1,15 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { NSLearningHistory } from '../../models/learning.models'
-import { ActivatedRoute } from '@angular/router'
-import { LearningHistoryService } from '../../services/learning-history.service'
-import { NsContent } from '@ws-widget/collection'
-import { AnalyticsService } from '../../../analytics/services/analytics.service'
-import { NSAnalyticsData } from '../../../analytics/models/analytics.model'
-import { TFetchStatus } from '@ws-widget/utils'
 import { PageEvent } from '@angular/material'
+import { ActivatedRoute } from '@angular/router'
+import { NsContent } from '@ws-widget/collection'
+import { ConfigurationsService, ValueService, TFetchStatus } from '@ws-widget/utils'
+import { NSAnalyticsData } from '../../../analytics/models/analytics.model'
+import { AnalyticsService } from '../../../analytics/services/analytics.service'
+import { NSLearningHistory } from '../../models/learning.models'
+import { LearningHistoryService } from '../../services/learning-history.service'
+import { FormControl } from '@angular/forms'
+
 interface ILearningHistoryContent {
   content: NSLearningHistory.ILearningHistory
   contentType: string
@@ -38,45 +37,95 @@ export class LearningHistoryComponent implements OnInit {
   passedCertifications: NSLearningHistory.ILearningHistoryItem[] = []
   enabledTab = this.route.snapshot.data.pageData.data.enabledTabs.learning.subTabs
   startDate = '2018-04-01'
-  endDate = '2020-03-31'
+  yesterday = new Date().getTime() - 86400000
+  // tslint:disable-next-line:max-line-length
+  endDate = `${new Date(this.yesterday).getFullYear()}-${`0${new Date(this.yesterday).getMonth() +
+    1}`.slice(-2)}-${`0${new Date(this.yesterday).getDate()}`.slice(-2)}`
   contentType = 'Course'
   isCompleted = 0
+  filterControl = new FormControl()
   userFetchStatus: TFetchStatus = 'fetching'
   historyFetchStatus: TFetchStatus = 'fetching'
+  courseFetchStatus: TFetchStatus = 'fetching'
+  modulesFetchStatus: TFetchStatus = 'fetching'
+  resourceFetchStatus: TFetchStatus = 'fetching'
   getUserLearning = true
+  coursesDescription = 'Number of courses accessed'
+  modulesDescription = 'Number of modules accessed'
+  resourcesDescription = 'Number of resources accessed'
+  filterList: string[] = ['All']
   error = false
   loader: any
   myProgress: any
   othersProgress: any
   progressData: any
+  courseData: any
+  resourceData: any
+  moduleData: any
+  showHistory = false
   page = {
     p1: 0,
     p2: 0,
   }
+  filterType = ''
+  selected = 'All'
   progressData1 = [
-    { status: false, data: [] }, { status: false, data: [] }, { status: false, data: [] },
+    { status: false, data: [] },
+    { status: false, data: [] },
+    { status: false, data: [] },
   ]
   userProgressData: NSAnalyticsData.IUserProgressResponse | null = null
   historyData: any
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  screenSizeIsLtMedium = false
   isClient = this.route.snapshot.data.pageData.data.enabledTabs.learning.subTabs.learningHistory.isClient
+  enabledTabs = this.route.snapshot.data.pageData.data.enabledTabs.learning.subTabs.learningHistory.tabs
+  history = this.route.snapshot.data.pageData.data.enabledTabs.learning.subTabs.learningHistory
   constructor(
     private route: ActivatedRoute,
     private learnHstSvc: LearningHistoryService,
     private analyticsSrv: AnalyticsService,
-  ) { }
+    private configSvc: ConfigurationsService,
+    private valueSvc: ValueService,
+  ) {}
 
   ngOnInit() {
+    this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.screenSizeIsLtMedium = isLtMedium
+    })
     if (this.isClient) {
-      this.analyticsSrv.userProgress(this.startDate, this.endDate, this.contentType, this.isCompleted).subscribe(
-      (userProgressResponse: any) => {
-        this.userProgressData = userProgressResponse
-        this.othersProgress = userProgressResponse.learning_history_progress_range
-        this.myProgress = userProgressResponse.learning_history
-        this.getFilteredCourse(0)
-      },
-      () => {
-        this.userFetchStatus = 'error'
-      })
+      if (
+        this.configSvc &&
+        this.configSvc.userRoles &&
+        this.configSvc.userRoles.has('my-analytics')
+      ) {
+        this.showHistory = true
+      } else {
+        this.showHistory = false
+      }
+      if (this.history.showCount) {
+        if (this.enabledTabs.courses) {
+          this.analyticsSrv.userProgress(this.filterType, 'Course').subscribe((history: any) => {
+            this.courseData = history
+          })
+        }
+        if (this.enabledTabs.modules) {
+          this.analyticsSrv.userProgress(this.filterType, 'Module').subscribe((history: any) => {
+            this.moduleData = history
+          })
+        }
+        if (this.enabledTabs.resources) {
+          this.analyticsSrv.userProgress(this.filterType, 'Resource').subscribe((history: any) => {
+            this.resourceData = history
+          })
+        }
+      }
+      if (this.history.isFilter) {
+        this.analyticsSrv.fetchFilterList().subscribe((data: any) => {
+          this.filterList = this.filterList.concat(data.progress_source)
+        })
+      }
+      this.getFilteredCourse(0)
     } else {
       this.contentTypes.forEach(contentType => {
         this.lhContent.push({
@@ -98,6 +147,7 @@ export class LearningHistoryComponent implements OnInit {
         this.lhContent[0].contentType = 'learning path'
         this.lhContent[0].fetchStatus = 'done'
         this.lhContent[0].loading = false
+        this.lhContent[0].isLoadingFirstTime = false
       })
     }
   }
@@ -115,18 +165,24 @@ export class LearningHistoryComponent implements OnInit {
   // }
   getUserProgress(content: ILearningHistoryContent) {
     this.toggleLoading(true, content)
-
     if (content.contentType !== 'certification') {
+      if (content.contentType === 'collection') {
+        this.pageSize = 20
+      } else if (content.contentType === 'resource') {
+        this.pageSize = 40
+      } else {
+        this.pageSize = 10
+      }
       this.learnHstSvc
         .fetchContentProgress(
-          content.pageState,
+          content.content.page_state,
           this.pageSize,
           this.selectedStatusType,
           content.contentType,
         )
         .subscribe((data: NSLearningHistory.ILearningHistory) => {
           content.content.count = data.count
-
+          content.content.page_state = data.page_state
           data.result.forEach((resultObj: any) => {
             content.content.result.push(resultObj)
           })
@@ -170,6 +226,7 @@ export class LearningHistoryComponent implements OnInit {
     this.lhContent.forEach(content => {
       content.content.count = 0
       content.content.result = []
+      content.content.page_state = ''
       content.pageState = 0
       content.loading = false
       content.isLoadingFirstTime = true
@@ -214,26 +271,33 @@ export class LearningHistoryComponent implements OnInit {
     this.getUserProgress(this.lhContent[this.selectedTabIndex])
   }
   onTabChangeClient(selectedIndex: number) {
-    if (!this.progressData1[selectedIndex].status) {
-      this.getFilteredCourse(selectedIndex)
-    } else {
-      this.progressData1[selectedIndex].status = false
-      this.loader = setInterval(() => {
-        this.progressData1[selectedIndex].status = true
-      },
-      // tslint:disable-next-line:align
-      500,
-    )
-      return
-    }
-
+    this.selectedTabIndex = selectedIndex
+    this.getFilteredCourse(selectedIndex)
+  }
+  applyFilter(filter: string) {
+    this.userFetchStatus = 'fetching'
+    this.filterType = filter === 'All' ? '' : filter
+    this.getFilteredCourse(this.selectedTabIndex)
   }
   getFilteredCourse(index: number) {
     this.getUserLearning = true
-    const contentType = (index === 0 ? 'Resource' : (index === 1) ? 'Module' : 'Course')
-
-    this.analyticsSrv.userProgress(this.startDate, this.endDate, contentType, this.isCompleted).subscribe(
+    let contentType = ''
+    if (index === 0) {
+      contentType = 'Course'
+      this.courseFetchStatus = 'fetching'
+    } else if (index === 1 && this.enabledTabs.modules) {
+      contentType = 'Module'
+      this.modulesFetchStatus = 'fetching'
+    } else if (index === 1 && !this.enabledTabs.modules && this.enabledTabs.resources) {
+      contentType = 'Resource'
+      this.resourceFetchStatus = 'fetching'
+    } else if (index === 2 && this.enabledTabs.modules && this.enabledTabs.resources) {
+      contentType = 'Resource'
+      this.resourceFetchStatus = 'fetching'
+    }
+    this.analyticsSrv.userProgress(this.filterType, contentType).subscribe(
       (history: any) => {
+        this.userProgressData = history
         this.progressData = []
         this.myProgress = history.learning_history
         this.othersProgress = history.learning_history_progress_range
@@ -241,12 +305,16 @@ export class LearningHistoryComponent implements OnInit {
           const others = this.othersProgress[cur.lex_id]
           if (others.length === 5) {
             const obj: any = {
+              screenSizeIsLtMedium: this.screenSizeIsLtMedium,
               name: cur.content_name,
               id: cur.lex_id,
               progress: cur.progress,
-              completed: others['0'].doc_count || 0,
+              isExternal: cur.is_external || false,
+              completed: cur.num_of_users || 0,
               source: cur.source,
-              legend: (i === 0) ? true : false,
+              completedUsers: others['4'].doc_count || 0,
+              contentUrl: cur.is_external ? cur.content_url : `/app/toc/${cur.lex_id}`,
+              legend: i === 0 ? true : false,
               data: [
                 {
                   y: others['0'].doc_count || 0,
@@ -263,19 +331,40 @@ export class LearningHistoryComponent implements OnInit {
               ],
             }
             this.progressData.push(obj)
-              // if(i)
+            // if(i)
           }
         })
-        this.progressData1[index].data = this.progressData
-        this.progressData1[index].status = true
-          // this.loader = setInterval( () => {
-          //   this.getUserlearning = false;
-          // }, 2000);
-          // console.log(this.myProgress)
+        setTimeout(
+          () => {
+            if (contentType === 'Course') {
+              this.courseFetchStatus = 'done'
+            } else if (contentType === 'Module') {
+              this.modulesFetchStatus = 'done'
+            } else if (contentType === 'Resource') {
+              this.resourceFetchStatus = 'done'
+            }
+          },
+          // tslint:disable-next-line:align
+          1000,
+        )
+        this.loader = setInterval(
+          () => {
+            this.userFetchStatus = 'done'
+          },
+          // tslint:disable-next-line:align
+          1000,
+        )
       },
       () => {
         this.error = true
         this.loader = true
+        if (contentType === 'Course') {
+          this.courseFetchStatus = 'error'
+        } else if (contentType === 'Module') {
+          this.modulesFetchStatus = 'error'
+        } else if (contentType === 'Resource') {
+          this.resourceFetchStatus = 'error'
+        }
         this.userFetchStatus = 'error'
       },
     )

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export interface IHistory {
   appIcon: string
   artifactUrl: string
@@ -23,28 +20,29 @@ export interface IHistory {
   size?: number
   sourceShortName: string
 }
-
 export interface IContent {
   appIcon: string
   artifactUrl: string
   averageRating?: number | string | null
   body?: string
-  certificationList: IContent[]
+  certificationList?: IContent[]
   certificationStatus?: TCertificationStatus
   certificationSubmissionDate?: string
-  certificationUrl: string
+  certificationUrl?: string
   children: IContent[]
   collections?: IContent[]
   complexityLevel: string
   contentType: TContentType
   contentUrlAtSource: string
   creatorContacts: ICreator[]
-  creatorDetails: ICreator[]
+  creatorDetails?: ICreator[]
+  categoryType: string
   description: string
   displayContentType?: string // For UI
   downloadUrl?: string
   duration: number
   exclusiveContent?: boolean
+  hasAssessment?: string
   hasAccess: boolean
   idealScreenSize?: string
   identifier: string
@@ -55,6 +53,7 @@ export interface IContent {
   lastUpdatedOn: string
   learningMode?: TLearningMode
   learningObjective: string
+  learningTrack?: string
   locale: string
   me_totalSessionsCount: number
   mimeType: EMimeTypes
@@ -81,11 +80,23 @@ export interface IContent {
   subtitle?: string
   subTitles?: ISubtitle[]
   status?: string
+  studyMaterials?: string[]
   systemRequirements?: string[]
   tags: ITag[]
   topics: IContentTopic[]
   totalRating?: number
   track: ITrack[]
+}
+
+export enum EContentTypes {
+  PROGRAM = 'Learning Path',
+  CHANNEL = 'Channel',
+  COURSE = 'Course',
+  KNOWLEDGE_ARTIFACT = 'Knowledge Artifact',
+  KNOWLEDGE_BOARD = 'Knowledge Board',
+  LEARNING_JOURNEY = 'Learning Journeys',
+  MODULE = 'Collection',
+  RESOURCE = 'Resource',
 }
 
 export type TLearningMode = 'Self-Paced' | 'Instructor-Led'
@@ -95,9 +106,9 @@ export type TContentType =
   | 'Collection'
   | 'Channel'
   | 'Resource'
-  | 'Knowledge Board'
-  | 'Knowledge Artifact'
-  | 'Learning Journeys'
+  | EContentTypes.KNOWLEDGE_BOARD
+  | EContentTypes.LEARNING_JOURNEY
+  | EContentTypes.KNOWLEDGE_ARTIFACT
   | 'Playlist'
   | 'Goal'
 
@@ -255,4 +266,15 @@ export interface IContentMinimal {
   name: string
   resourceType?: string
   status?: string
+}
+
+export interface IPageData {
+  title: string
+  URL: string
+  audio?: Array<{
+    title: string
+    URL: string
+    label: string
+    srclang: string
+  }>
 }

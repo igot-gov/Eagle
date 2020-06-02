@@ -1,30 +1,31 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit } from '@angular/core'
+import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/components/delete-dialog/delete-dialog.component'
+import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { MatDialog, MatSnackBar } from '@angular/material'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { CommentsDialogComponent } from '@ws/author/src/lib/modules/shared/components/comments-dialog/comments-dialog.component'
+import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
+import { ErrorParserComponent } from '@ws/author/src/lib/modules/shared/components/error-parser/error-parser.component'
 import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
 import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { of } from 'rxjs'
-import { mergeMap, tap } from 'rxjs/operators'
+import { mergeMap, tap, catchError } from 'rxjs/operators'
+import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 
 @Component({
   selector: 'ws-auth-knowledge-board',
   templateUrl: './knowledge-board.component.html',
   styleUrls: ['./knowledge-board.component.scss'],
 })
-
-export class KnowledgeBoardComponent implements OnInit {
-
+export class KnowledgeBoardComponent implements OnInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []
   currentContent = ''
   allLanguages!: any[]
@@ -33,28 +34,29 @@ export class KnowledgeBoardComponent implements OnInit {
   mimeTypeRoute: any
   isChanged = false
   constructor(
-    private activateRoute: ActivatedRoute,
+    private authInitService: AuthInitService,
     private contentService: EditorContentService,
     private snackBar: MatSnackBar,
     private editorService: EditorService,
     private dialog: MatDialog,
     private router: Router,
     private loaderService: LoaderService,
+    private accessService: AccessControlService,
+    private notificationSvc: NotificationService,
   ) { }
 
   ngOnInit() {
-    this.activateRoute.data.subscribe(
-      data => {
-        this.allLanguages = data.ordinals.subTitles
-      },
+    this.showSettingButtons = this.accessService.rootOrg === 'Siemens'
+    this.allLanguages = this.authInitService.ordinals.subTitles
+    Object.keys(this.contentService.originalContent).map(v =>
+      this.contents.push(this.contentService.originalContent[v]),
     )
-    Object.keys(this.contentService.originalContent).map(
-      v => this.contents.push(this.contentService.originalContent[v]),
-    )
-    this.contentService.changeActiveCont.subscribe(
-      data => this.currentContent = data,
-    )
+    this.contentService.changeActiveCont.subscribe(data => (this.currentContent = data))
     this.loaderService.changeLoadState(true)
+  }
+
+  ngOnDestroy() {
+    this.loaderService.changeLoad.next(false)
   }
 
   createInAnotherLanguage(language: string) {
@@ -80,7 +82,19 @@ export class KnowledgeBoardComponent implements OnInit {
           })
         }
       },
-      () => {
+      error => {
+        if (error.status === 409) {
+          const errorMap = new Map<string, NSContent.IContentMeta>()
+          errorMap.set(this.currentContent, this.contentService.getUpdatedMeta(this.currentContent))
+          this.dialog.open(ErrorParserComponent, {
+            width: '750px',
+            height: '450px',
+            data: {
+              errorFromBackendData: error.error,
+              dataMapping: errorMap,
+            },
+          })
+        }
         this.loaderService.changeLoad.next(false)
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
@@ -111,7 +125,22 @@ export class KnowledgeBoardComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
         },
-        () => {
+        error => {
+          if (error.status === 409) {
+            const errorMap = new Map<string, NSContent.IContentMeta>()
+            errorMap.set(
+              this.currentContent,
+              this.contentService.getUpdatedMeta(this.currentContent),
+            )
+            this.dialog.open(ErrorParserComponent, {
+              width: '80vw',
+              height: '90vh',
+              data: {
+                errorFromBackendData: error.error,
+                dataMapping: errorMap,
+              },
+            })
+          }
           this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -135,8 +164,11 @@ export class KnowledgeBoardComponent implements OnInit {
     let returnValue = true
     const currentData = this.contentService.getUpdatedMeta(this.currentContent)
     if (
-      !currentData.appIcon || !currentData.name || !currentData.description ||
-      !currentData.expiryDate || !currentData.creatorContacts
+      !currentData.appIcon ||
+      !currentData.name ||
+      !currentData.description ||
+      !currentData.expiryDate ||
+      !currentData.creatorContacts
     ) {
       this.snackBar.openFromComponent(NotificationComponent, {
         data: {
@@ -150,9 +182,12 @@ export class KnowledgeBoardComponent implements OnInit {
   }
 
   takeAction() {
-    const needSave = Object.keys((this.contentService.upDatedContent[this.currentContent] || {})).length
-    if (!needSave &&
-      (this.contentService.getUpdatedMeta(this.currentContent).status === 'Live' && !this.isChanged)
+    const needSave = Object.keys(this.contentService.upDatedContent[this.currentContent] || {})
+      .length
+    if (
+      !needSave &&
+      this.contentService.getUpdatedMeta(this.currentContent).status === 'Live' &&
+      !this.isChanged
     ) {
       this.snackBar.openFromComponent(NotificationComponent, {
         data: {
@@ -177,22 +212,49 @@ export class KnowledgeBoardComponent implements OnInit {
 
   finalCall(commentsForm: FormGroup) {
     if (commentsForm) {
-      const body: NSApiRequest.IForwadBackwardActionGeneral = {
+      const body: NSApiRequest.IForwardBackwardActionGeneral = {
         comment: commentsForm.controls.comments.value,
         operation:
-          (
-            commentsForm.controls.action.value === 'accept' ||
-            this.contentService.originalContent[this.currentContent].status === 'Draft'
-          )
+          commentsForm.controls.action.value === 'accept' ||
+            ['Draft', 'Live'].includes(
+              this.contentService.originalContent[this.currentContent].status,
+            )
             ? 1
             : -1,
       }
 
       const updatedContent = this.contentService.upDatedContent[this.currentContent] || {}
-      const needSave = Object.keys((this.contentService.upDatedContent[this.currentContent] || {})).length
-      const saveCall = (
-        needSave ? this.triggerSave(updatedContent, this.currentContent) : of({} as any)
-      ).pipe(mergeMap(() => this.editorService.forwardBackward(body, this.currentContent)))
+      const needSave = Object.keys(this.contentService.upDatedContent[this.currentContent] || {})
+        .length
+      const updatedMeta = this.contentService.getUpdatedMeta(this.currentContent)
+      const saveCall = (needSave
+        ? this.triggerSave(updatedContent, this.currentContent)
+        : of({} as any)
+      ).pipe(
+        mergeMap(() =>
+          this.editorService
+            .forwardBackward(
+              body,
+              this.currentContent,
+              this.contentService.originalContent[this.currentContent].status,
+            )
+            .pipe(
+              mergeMap(() =>
+                this.notificationSvc
+                  .triggerPushPullNotification(
+                    updatedMeta,
+                    body.comment,
+                    body.operation ? true : false,
+                  )
+                  .pipe(
+                    catchError(() => {
+                      return of({} as any)
+                    }),
+                  ),
+              ),
+            ),
+        ),
+      )
       this.loaderService.changeLoad.next(true)
       saveCall.subscribe(
         () => {
@@ -210,7 +272,22 @@ export class KnowledgeBoardComponent implements OnInit {
             this.router.navigateByUrl('/author/home')
           }
         },
-        () => {
+        error => {
+          if (error.status === 409) {
+            const errorMap = new Map<string, NSContent.IContentMeta>()
+            errorMap.set(
+              this.currentContent,
+              this.contentService.getUpdatedMeta(this.currentContent),
+            )
+            this.dialog.open(ErrorParserComponent, {
+              width: '80vw',
+              height: '90vh',
+              data: {
+                errorFromBackendData: error.error,
+                dataMapping: errorMap,
+              },
+            })
+          }
           this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -238,8 +315,9 @@ export class KnowledgeBoardComponent implements OnInit {
         },
       },
     }
-    return this.editorService.updateContent(requestBody).pipe(
-      tap(() => this.contentService.resetOriginalMeta(meta, id)))
+    return this.editorService
+      .updateContent(requestBody)
+      .pipe(tap(() => this.contentService.resetOriginalMeta(meta, id)))
   }
 
   getMessage(type: 'success' | 'failure') {
@@ -271,17 +349,42 @@ export class KnowledgeBoardComponent implements OnInit {
 
   action(type: string) {
     switch (type) {
-
       case 'save':
         this.save()
         break
 
       case 'push':
-        this.takeAction()
+        if (this.getAction() === 'publish') {
+          const dialogRefForPublish = this.dialog.open(ConfirmDialogComponent, {
+            width: '70%',
+            data: 'publishMessage',
+          })
+          dialogRefForPublish.afterClosed().subscribe(result => {
+            if (result) {
+              this.takeAction()
+            }
+          })
+        } else {
+          this.takeAction()
+        }
         break
 
       case 'delete':
-        this.delete()
+        const dialog = this.dialog.open(DeleteDialogComponent, {
+          width: '600px',
+          height: 'auto',
+          data: this.contentService.getUpdatedMeta(this.currentContent),
+        })
+        dialog.afterClosed().subscribe(confirm => {
+          if (confirm) {
+            this.contents = this.contents.filter(v => v.identifier !== this.currentContent)
+            if (this.contents.length) {
+              this.contentService.changeActiveCont.next(this.contents[0].identifier)
+            } else {
+              this.router.navigateByUrl('/author/home')
+            }
+          }
+        })
         break
 
       case 'close':
@@ -308,7 +411,19 @@ export class KnowledgeBoardComponent implements OnInit {
           this.router.navigateByUrl('/author/home')
         }
       },
-      () => {
+      error => {
+        if (error.status === 409) {
+          const errorMap = new Map<string, NSContent.IContentMeta>()
+          errorMap.set(this.currentContent, this.contentService.getUpdatedMeta(this.currentContent))
+          this.dialog.open(ErrorParserComponent, {
+            width: '750px',
+            height: '450px',
+            data: {
+              errorFromBackendData: error.error,
+              dataMapping: errorMap,
+            },
+          })
+        }
         this.loaderService.changeLoad.next(false)
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
@@ -324,13 +439,13 @@ export class KnowledgeBoardComponent implements OnInit {
     const doc: any = document
     const elm: any = doc.getElementById('kboard-container')
     if (elm.requestFullscreen) {
-      (!doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen())
+      !doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen()
     } else if (elm.mozRequestFullScreen) {
-      (!doc.mozFullScreen ? elm.mozRequestFullScreen() : doc.mozCancelFullScreen())
+      !doc.mozFullScreen ? elm.mozRequestFullScreen() : doc.mozCancelFullScreen()
     } else if (elm.msRequestFullscreen) {
-      (!doc.msFullscreenElement ? elm.msRequestFullscreen() : doc.msExitFullscreen())
+      !doc.msFullscreenElement ? elm.msRequestFullscreen() : doc.msExitFullscreen()
     } else if (elm.webkitRequestFullscreen) {
-      (!doc.webkitIsFullscreen ? elm.webkitRequestFullscreen() : doc.webkitCancelFullscreen())
+      !doc.webkitIsFullscreen ? elm.webkitRequestFullscreen() : doc.webkitCancelFullscreen()
     }
   }
 
@@ -346,5 +461,12 @@ export class KnowledgeBoardComponent implements OnInit {
       default:
         return 'sendForReview'
     }
+  }
+
+  canDelete() {
+    return this.accessService.hasRole(['editor', 'admin']) ||
+      (['Draft', 'Live'].includes(this.contentService.originalContent[this.currentContent].status) &&
+        this.contentService.originalContent[this.currentContent].creatorContacts.find(v => v.id === this.accessService.userId)
+      )
   }
 }

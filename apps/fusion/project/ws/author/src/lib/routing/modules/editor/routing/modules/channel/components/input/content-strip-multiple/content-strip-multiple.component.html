@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <form [formGroup]="form" class="column-wise">
   <div>
     <p i18n>Key</p>
@@ -31,7 +28,7 @@
       </mat-slide-toggle>
     </div>
     <div class="mat-form-field-wrapper">
-      <p class=" margin-remove-bottom" i18n>Content Card Type</p>
+      <p class="margin-remove-bottom" i18n>Content Card Type</p>
       <mat-form-field>
         <mat-select formControlName="cardSubType">
           <mat-option value="standard" i18n>Standard</mat-option>
@@ -60,16 +57,16 @@
       Content IDs
     </mat-radio-button>
     <mat-radio-button class="radio-button-design" value="api" i18n>
-      Provide URL for fetching content
+      URL for Fetching Content
     </mat-radio-button>
     <mat-radio-button class="radio-button-design" value="search" i18n>
-      Provide Search Request
+      Search V5 Request
     </mat-radio-button>
     <mat-radio-button class="radio-button-design" value="searchV6" i18n>
-      Provide Search Request
+      Search V6 Request
     </mat-radio-button>
-    <mat-radio-button class="radio-button-design" value="searchRecommendation" i18n>
-      Provide Search Request
+    <mat-radio-button class="radio-button-design" value="searchRegionRecommendation" i18n>
+      Search Region Recommendation
     </mat-radio-button>
   </mat-radio-group>
   <ng-container [ngSwitch]="requestType">
@@ -120,7 +117,7 @@
       </h3>
       <ws-auth-chips
         (data)="update('ids', $event)"
-        [type]="array"
+        [type]="'array'"
         [content]="form?.controls?.request?.get('ids')?.value || []"
       ></ws-auth-chips>
       <ws-widget-picker-content

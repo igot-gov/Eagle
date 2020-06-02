@@ -1,0 +1,44 @@
+ws-app-edit-learning-path input {
+  line-height: 1.5
+}
+
+ws-app-edit-learning-path input {
+  padding-left: .5rem !important;
+}
+
+ws-app-edit-learning-path .filter-button {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  align-items: center;
+  text-align: center;
+}
+
+ws-app-edit-learning-path .mat-form-field-wrapper {
+  padding-bottom: 0;
+
+  .mat-form-field-infix {
+    border-top-width: 5px !important;
+  }
+}
+
+img.flag {
+  width: 20px !important;
+  height: 14px !important;
+}
+
+ws-app-edit-learning-path .lang-btn {
+  margin-right: 0 !important;
+}
+
+ws-app-edit-learning-path .search-border {
+  width: 79%;
+}
+
+ws-app-edit-learning-path .border-right {
+  border-right: 1px solid #cecece;
+}
+
+mat-chip {
+  max-width: 100%;
+}

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import {
   IFeedbackFilterObj,
@@ -14,7 +11,7 @@ import { Observable } from 'rxjs'
 
 @Injectable()
 export class MyFeedbackService {
-  constructor(private feedbackApi: FeedbackService) {}
+  constructor(private feedbackApi: FeedbackService) { }
 
   initFilterObj(viewedBy: EFeedbackRole): IFeedbackFilterObj {
     switch (viewedBy) {

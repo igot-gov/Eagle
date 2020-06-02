@@ -1,31 +1,20 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import {
-  Component,
-  OnInit,
-  Input,
-  ElementRef,
-  ViewChild,
-  AfterViewInit,
-  OnDestroy,
-} from '@angular/core'
-
-import videoJs from 'video.js'
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { EventService } from '@ws-widget/utils'
+import videoJs from 'video.js'
+import { ViewerUtilService } from '../../../../../../project/ws/viewer/src/lib/viewer-util.service'
 import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IWidgetsPlayerMediaData } from '../_models/player-media.model'
-import { EventService } from '@ws-widget/utils'
 import {
-  videoJsInitializer,
-  telemetryEventDispatcherFunction,
-  saveContinueLearningFunction,
   fireRealTimeProgressFunction,
+  saveContinueLearningFunction,
+  telemetryEventDispatcherFunction,
   videoInitializer,
+  videoJsInitializer,
 } from '../_services/videojs-util'
-import { ViewerUtilService } from '../../../../../../project/ws/viewer/src/lib/viewer-util.service'
 import { WidgetContentService } from '../_services/widget-content.service'
+
 const videoJsOptions: videoJs.PlayerOptions = {
   controls: true,
   autoplay: false,
@@ -72,9 +61,12 @@ export class PlayerVideoComponent extends WidgetBaseComponent
 
   ngOnInit() { }
 
-  ngAfterViewInit() {
-    if (this.widgetData && this.widgetData.identifier) {
-      this.fetchContent()
+  async ngAfterViewInit() {
+    this.widgetData = {
+      ...this.widgetData,
+    }
+    if (this.widgetData && this.widgetData.identifier && !this.widgetData.url) {
+      await this.fetchContent()
     }
     if (this.widgetData.url) {
       if (this.widgetData.isVideojs) {
@@ -94,19 +86,46 @@ export class PlayerVideoComponent extends WidgetBaseComponent
   }
   private initializeVPlayer() {
     const dispatcher: telemetryEventDispatcherFunction = event => {
-      this.eventSvc.dispatchEvent(event)
+      if (this.widgetData.identifier) {
+        this.eventSvc.dispatchEvent(event)
+      }
     }
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
-        const continueLearningData = {
-          contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
-            this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
-          ...data,
+        if (this.activatedRoute.snapshot.queryParams.collectionType &&
+        this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+          const continueLearningData = {
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
+              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
+            resourceId: data.resourceId,
+            contextType: 'playlist',
+            dateAccessed: Date.now(),
+            data: JSON.stringify({
+              progress: data.progress,
+              timestamp: Date.now(),
+              contextFullPath: [this.activatedRoute.snapshot.queryParams.collectionId, data.resourceId],
+            }),
+          }
+          this.contentSvc
+            .saveContinueLearning(continueLearningData)
+            .toPromise()
+            .catch()
+        } else {
+          const continueLearningData = {
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
+              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
+            resourceId: data.resourceId,
+            dateAccessed: Date.now(),
+            data: JSON.stringify({
+              progress: data.progress,
+              timestamp: Date.now(),
+            }),
+          }
+          this.contentSvc
+            .saveContinueLearning(continueLearningData)
+            .toPromise()
+            .catch()
         }
-        this.contentSvc
-          .saveContinueLearning(continueLearningData)
-          .toPromise()
-          .catch()
       }
     }
     const fireRProgress: fireRealTimeProgressFunction = (identifier, data) => {
@@ -114,6 +133,13 @@ export class PlayerVideoComponent extends WidgetBaseComponent
         this.viewerSvc
           .realTimeProgressUpdate(identifier, data)
       }
+    }
+    if (this.widgetData.resumePoint && this.widgetData.resumePoint !== 0) {
+      this.realvideoTag.nativeElement.currentTime = this.widgetData.resumePoint
+    }
+    let enableTelemetry = false
+    if (!this.widgetData.disableTelemetry && typeof (this.widgetData.disableTelemetry) !== 'undefined') {
+      enableTelemetry = true
     }
     this.dispose = videoInitializer(
       this.realvideoTag.nativeElement,
@@ -122,7 +148,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       fireRProgress,
       this.widgetData.passThroughData,
       ROOT_WIDGET_CONFIG.player.video,
-      !(this.widgetData.disableTelemetry || false),
+      enableTelemetry,
       this.widgetData,
       this.widgetData.mimeType,
     ).dispose
@@ -130,19 +156,46 @@ export class PlayerVideoComponent extends WidgetBaseComponent
 
   private initializePlayer() {
     const dispatcher: telemetryEventDispatcherFunction = event => {
-      this.eventSvc.dispatchEvent(event)
+      if (this.widgetData.identifier) {
+        this.eventSvc.dispatchEvent(event)
+      }
     }
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
-        const continueLearningData = {
-          contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
-            this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
-          ...data,
+        if (this.activatedRoute.snapshot.queryParams.collectionType &&
+        this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+          const continueLearningData = {
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
+              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
+            resourceId: data.resourceId,
+            contextType: 'playlist',
+            dateAccessed: Date.now(),
+            data: JSON.stringify({
+              progress: data.progress,
+              timestamp: Date.now(),
+              contextFullPath: [this.activatedRoute.snapshot.queryParams.collectionId, data.resourceId],
+            }),
+          }
+          this.contentSvc
+            .saveContinueLearning(continueLearningData)
+            .toPromise()
+            .catch()
+        } else {
+          const continueLearningData = {
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
+              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
+            resourceId: data.resourceId,
+            dateAccessed: Date.now(),
+            data: JSON.stringify({
+              progress: data.progress,
+              timestamp: Date.now(),
+            }),
+          }
+          this.contentSvc
+            .saveContinueLearning(continueLearningData)
+            .toPromise()
+            .catch()
         }
-        this.contentSvc
-          .saveContinueLearning(continueLearningData)
-          .toPromise()
-          .catch()
       }
     }
     const fireRProgress: fireRealTimeProgressFunction = (identifier, data) => {
@@ -151,10 +204,15 @@ export class PlayerVideoComponent extends WidgetBaseComponent
           .realTimeProgressUpdate(identifier, data)
       }
     }
+    let enableTelemetry = false
+    if (!this.widgetData.disableTelemetry && typeof (this.widgetData.disableTelemetry) !== 'undefined') {
+      enableTelemetry = true
+    }
     const initObj = videoJsInitializer(
       this.videoTag.nativeElement,
       {
-        ...videoJsOptions, poster: this.widgetData.posterImage,
+        ...videoJsOptions,
+        poster: this.widgetData.posterImage,
         autoplay: this.widgetData.autoplay || false,
       },
       dispatcher,
@@ -162,8 +220,8 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       fireRProgress,
       this.widgetData.passThroughData,
       ROOT_WIDGET_CONFIG.player.video,
-      this.widgetData.resumePoint,
-      !(this.widgetData.disableTelemetry || false),
+      this.widgetData.resumePoint ? this.widgetData.resumePoint : 0,
+      enableTelemetry,
       this.widgetData,
       this.widgetData.mimeType,
     )
@@ -184,11 +242,15 @@ export class PlayerVideoComponent extends WidgetBaseComponent
           )
         })
       }
-      initObj.player.src(this.widgetData.url)
+      if (this.widgetData.url) {
+        initObj.player.src(this.widgetData.url)
+      }
     })
   }
   async fetchContent() {
-    const content = await this.contentSvc.fetchContent(this.widgetData.identifier || '', 'minimal').toPromise()
+    const content = await this.contentSvc
+      .fetchContent(this.widgetData.identifier || '', 'minimal')
+      .toPromise()
     if (content.artifactUrl && content.artifactUrl.indexOf('/content-store/') > -1) {
       this.widgetData.url = content.artifactUrl
       this.widgetData.posterImage = content.appIcon

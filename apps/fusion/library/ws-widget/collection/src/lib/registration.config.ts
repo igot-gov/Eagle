@@ -1,16 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver } from '@ws-widget/resolver'
 // Components
 import { BtnAppsComponent } from './btn-apps/btn-apps.component'
-import { BtnChannelAnalyticsComponent } from './btn-channel-analytics/btn-channel-analytics.component'
+import { LayoutEmbedComponent } from './layout-embed/layout-embed.component'
 // Modules
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
 import { BtnCallComponent } from './btn-call/btn-call.component'
 import { BtnCallModule } from './btn-call/btn-call.module'
 import { BtnCatalogComponent } from './btn-catalog/btn-catalog.component'
 import { BtnCatalogModule } from './btn-catalog/btn-catalog.module'
+import { BtnChannelAnalyticsComponent } from './btn-channel-analytics/btn-channel-analytics.component'
 import { BtnChannelAnalyticsModule } from './btn-channel-analytics/btn-channel-analytics.module'
 import { BtnContentDownloadComponent } from './btn-content-download/btn-content-download.component'
 import { BtnContentDownloadModule } from './btn-content-download/btn-content-download.module'
@@ -96,6 +94,8 @@ import { ReleaseNotesComponent } from './release-notes/release-notes.component'
 import { ReleaseNotesModule } from './release-notes/release-notes.module'
 import { SelectorResponsiveComponent } from './selector-responsive/selector-responsive.component'
 import { SelectorResponsiveModule } from './selector-responsive/selector-responsive.module'
+import { SlidersMobComponent } from './sliders-mob/sliders-mob.component'
+import { SlidersMobModule } from './sliders-mob/sliders-mob.module'
 import { SlidersComponent } from './sliders/sliders.component'
 import { SlidersModule } from './sliders/sliders.module'
 import { TreeCatalogComponent } from './tree-catalog/tree-catalog.component'
@@ -104,6 +104,7 @@ import { TreeComponent } from './tree/tree.component'
 import { TreeModule } from './tree/tree.module'
 import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
+import { LayoutEmbedModule } from './layout-embed/layout-embed.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   BtnAppsModule,
@@ -132,6 +133,7 @@ export const WIDGET_REGISTERED_MODULES = [
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
+  LayoutEmbedModule,
   PickerContentModule,
   PlayerAmpModule,
   PlayerAudioModule,
@@ -156,6 +158,7 @@ export const WIDGET_REGISTERED_MODULES = [
   ImageMapResponsiveModule,
   IntranetSelectorModule,
   VideoWrapperModule,
+  SlidersMobModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -281,6 +284,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.layout._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.layout.embed,
+    component: LayoutEmbedComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.layout._type,
     widgetSubType: ROOT_WIDGET_CONFIG.layout.linear,
     component: LayoutLinearComponent,
   },
@@ -333,6 +341,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.slider._type,
     widgetSubType: ROOT_WIDGET_CONFIG.slider.carousel,
     component: SlidersComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.slider._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.slider.mob,
+    component: SlidersMobComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.tree._type,

@@ -1,0 +1,86 @@
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav class="sidenav mat-drawer mat-sidenav" position="start" [mode]="isLtMedium ? 'over' : 'side'"
+    [opened]="!isLtMedium">
+    <ws-widget-filters (closeSideNav)="sidenav.toggle()" (appliedFiltersEmitter)="appliedFilters($event)"
+      [filters]="searchResults?.filters" [preAppliedFilters]="widgetData?.preAppliedFilters">
+    </ws-widget-filters>
+  </mat-sidenav>
+  <mat-sidenav-content [ngClass]="{'pl-10': sidenav.opened}">
+    <div class="flex flex-col md:flex-row justify-between margin-bottom-m">
+      <div class="searchBox md:order-2">
+        <ws-widget-search-input (searchRequest)="searchRequest($event)"></ws-widget-search-input>
+      </div>
+      <div class="flex mt-1 md:mt-0 md:order-1">
+        <div [ngClass]="{'hide': sidenav.opened}" class="flex items-center filterButton">
+          <button i18n-matTooltip matTooltip="Filter" (click)="sidenav.toggle()" mat-button>
+            <mat-icon>filter_list</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="objKey(widgetData?.sortableFields || {}).length" class="flex items-center filterButton ml-1">
+          <button i18n-matTooltip matTooltip="Sort" [matMenuTriggerFor]="sortMenu" mat-button>
+            <mat-icon>sort</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <h2 *ngIf="fetchStatus === 'done' && !searchResults?.result.length" class="mat-title" i18n>
+      No results
+    </h2>
+    <div class="flex flex-wrap">
+      <ng-container *ngIf="fetchStatus === 'fetching'">
+        <div class="w-full sm:w-1/2 mb-4 flex" *ngFor="let _ of ' '.repeat(10).split('')">
+          <div class="w-24 h-16 ws-mat-primary-lite-background"></div>
+          <div class="flex-1 min-w-0">
+            <div class="h-5 ml-2 mr-8 mb-2 bg-gray-400"></div>
+            <div class="h-4 ml-2 mr-32 bg-gray-400"></div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="fetchStatus && 'done'">
+        <div class="w-full sm:w-1/2 mb-4 flex" *ngFor="let content of searchResults.result">
+          <mat-checkbox (change)="changeSelectedContent($event.checked, content)"
+            [checked]="widgetData?.mode === 'query' || widgetData?.preselected?.has(content?.identifier)"
+            [disabled]="widgetData?.mode === 'query' || (widgetData?.preselected?.has(content?.identifier) && !widgetData?.enablePreselected)"
+            class="leading-none pr-4">
+          </mat-checkbox>
+          <img class="w-24 h-16 ws-mat-primary-lite-background" [src]="content?.appIcon"
+            [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
+          <div class="flex-1 min-w-0">
+            <div class="flex">
+              <h3
+                class="flex-1 min-w-0 mat-subheading-2 margin-remove-bottom margin-left-xs margin-right-xs truncate leading-none pb-1">
+                {{ content?.name }}
+              </h3>
+            </div>
+            <p class="margin-remove-bottom margin-left-xs margin-right-xs">
+              <span *ngIf="content.displayContentType">{{content.displayContentType}}</span>
+              <ng-container *ngIf="content.displayContentType">&nbsp; | &nbsp;</ng-container>
+              <ng-container *ngIf="content?.duration">{{ content.duration | pipeDurationTransform: 'hms' }}
+              </ng-container>
+            </p>
+            <p *ngIf="content?.uniqueLearners" class="margin-remove-bottom margin-left-xs margin-right-xs">
+              {{ content?.uniqueLearners }}
+              <ng-container *ngIf="(content?.uniqueLearners || 0) > 1" i18n>
+                people are studying this
+              </ng-container>
+              <ng-container *ngIf="content?.uniqueLearners === 1" i18n>
+                person is studying this
+              </ng-container>
+            </p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<mat-menu #sortMenu="matMenu">
+  <div *ngIf="objKey(widgetData?.sortableFields || {}).length" class="sortMenu">
+    <mat-radio-group (change)="sort($event.value)" aria-labelledby="Sort" class="flex flex-col">
+      <button *ngFor="let key of objKey(widgetData?.sortableFields)" mat-menu-item>
+        <mat-radio-button color="accent" [value]="key">
+          {{widgetData?.sortableFields[key]?.displayName}}
+        </mat-radio-button>
+      </button>
+    </mat-radio-group>
+  </div>
+</mat-menu>

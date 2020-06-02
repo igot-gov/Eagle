@@ -1,8 +1,5 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { TFetchStatus, LoggerService } from '@ws-widget/utils'
+import { TFetchStatus } from '@ws-widget/utils'
 import { NavigatorService } from '../../services/navigator.service'
 import { IOfferings, IRole } from '../../models/navigator.model'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
@@ -23,12 +20,10 @@ export class RolesComponent implements OnInit {
   isSmallScreen$ = this.breakpointObserver.observe(Breakpoints.XSmall)
   constructor(
     private navSvc: NavigatorService,
-    private logger: LoggerService,
     private breakpointObserver: BreakpointObserver,
   ) {
     this.navSvc.fetchNavigatorRoles().subscribe((data: IOfferings) => {
       this.rolesData = data
-      this.logger.log('roles data', this.rolesData, this.rolesData.Accelerate.roles)
       this.currentTrackData = this.rolesData.Accelerate.roles
       this.status = 'done'
     })
@@ -42,7 +37,7 @@ export class RolesComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   trackClicked(newTrack: string) {
     this.selectedTrack = newTrack

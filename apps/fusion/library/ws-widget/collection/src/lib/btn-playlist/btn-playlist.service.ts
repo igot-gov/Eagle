@@ -1,18 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { ReplaySubject, Observable, throwError } from 'rxjs'
-import { tap, mergeMap, first, map } from 'rxjs/operators'
+import { Observable, ReplaySubject, throwError } from 'rxjs'
+import { first, map, mergeMap, tap } from 'rxjs/operators'
+import { NsContent } from '../_services/widget-content.model'
 import { NsPlaylist } from './btn-playlist.model'
-import { HttpClient } from '@angular/common/http'
 
 const API_END_POINTS = {
   featureConfig: `/assets/configurations/feature/playlist.json`,
   getAllPlaylists: `/apis/protected/v8/user/playlist`,
   deletePlaylist: `/apis/protected/v8/user/playlist`,
   playlist: (type: NsPlaylist.EPlaylistTypes) => `/apis/protected/v8/user/playlist/${type}`,
-  upsertPlaylist: `/apis/protected/v8/user/playlist`,
+  createPlaylist: `/apis/protected/v8/user/playlist`,
+  upsertPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/${playlistId}`,
   acceptPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/accept/${playlistId}`,
   rejectPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/reject/${playlistId}`,
   sharePlaylist: '/apis/protected/v8/user/playlist/share',
@@ -29,8 +28,8 @@ export class BtnPlaylistService {
   constructor(private http: HttpClient) {
   }
 
-  upsertPlaylist(playlistUpsertRequest: NsPlaylist.IPlaylistUpsertRequest, updatePlaylists = true) {
-    return this.http.post<string>(API_END_POINTS.upsertPlaylist, playlistUpsertRequest).pipe(
+  upsertPlaylist(playlistCreateRequest: NsPlaylist.IPlaylistCreateRequest, updatePlaylists = true) {
+    return this.http.post<string>(`${API_END_POINTS.createPlaylist}/create`, playlistCreateRequest).pipe(
       tap(_ => {
         if (updatePlaylists) {
           this.updatePlaylists()
@@ -39,9 +38,40 @@ export class BtnPlaylistService {
     )
   }
 
-  getAllPlaylistsApi() {
+  addToPlaylist(playlistId: string, playlistAddRequest: NsPlaylist.IPlaylistUpsertRequest, updatePlaylists = true) {
+    return this.http.post<string>(`${API_END_POINTS.upsertPlaylist(playlistId)}/add`, playlistAddRequest).pipe(
+      tap(_ => {
+        if (updatePlaylists) {
+          this.updatePlaylists()
+        }
+      }),
+    )
+  }
+
+  syncPlaylist(playlistId: string, updatePlaylists = true) {
+    return this.http.get<NsContent.IContent[]>(`${API_END_POINTS.upsertPlaylist}/sync/${playlistId}`).pipe(
+      tap(_ => {
+        if (updatePlaylists) {
+          this.updatePlaylists()
+        }
+      }),
+    )
+  }
+
+  deleteContent(playlistId: string, deleteRequest: NsPlaylist.IPlaylistUpsertRequest, updatePlaylists = true) {
+    return this.http.post<string>(`${API_END_POINTS.upsertPlaylist(playlistId)}/delete`, deleteRequest).pipe(
+      tap(_ => {
+        if (updatePlaylists) {
+          this.updatePlaylists()
+        }
+      }),
+    )
+  }
+
+  getAllPlaylistsApi(detailsRequired: boolean) {
+    const params = new HttpParams().set('details-required', String(detailsRequired))
     return this.http
-      .get<NsPlaylist.IPlaylistResponse>(API_END_POINTS.getAllPlaylists)
+      .get<NsPlaylist.IPlaylistResponse>(API_END_POINTS.getAllPlaylists, { params })
   }
 
   getPlaylists(type: NsPlaylist.EPlaylistTypes) {
@@ -60,9 +90,10 @@ export class BtnPlaylistService {
     )
   }
 
-  getPlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes): Observable<NsPlaylist.IPlaylist | null> {
+  getPlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes, sourceFields: string): Observable<NsPlaylist.IPlaylist | null> {
+    const params = new HttpParams().set('sourceFields', sourceFields)
     return this.http
-      .get<NsPlaylist.IPlaylist>(`${API_END_POINTS.playlist(type)}/${playlistId}`)
+      .get<NsPlaylist.IPlaylist>(`${API_END_POINTS.playlist(type)}/${playlistId}`, { params })
   }
 
   deletePlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes) {
@@ -77,25 +108,21 @@ export class BtnPlaylistService {
     )
   }
 
-  editPlaylistName(playlist: NsPlaylist.IPlaylist) {
-
+  patchPlaylist(playlist: NsPlaylist.IPlaylist) {
     return this.http.patch(`${API_END_POINTS.updatePlaylists(playlist.id)}`, {
       playlist_title: playlist.name,
-      content_ids: playlist.contents,
+      content_ids: playlist.contents.map(content => {
+        const id = { identifier: content.identifier }
+        return id
+      }),
     })
-
   }
 
   addPlaylistContent(playlist: NsPlaylist.IPlaylist, contentIds: string[], updatePlaylists = true) {
-    return this.upsertPlaylist(
+    return this.addToPlaylist(
+      playlist.id,
       {
-        contentIds: playlist.contents.map(content => content.identifier).concat(contentIds),
-        id: playlist.id,
-        title: playlist.name,
-        changedContentIds: contentIds,
-        editType: playlist.editType,
-        userAction: NsPlaylist.EPlaylistUserAction.ADD,
-        visibility: playlist.visibility,
+        contentIds,
       },
       updatePlaylists,
     )
@@ -103,46 +130,22 @@ export class BtnPlaylistService {
 
   deletePlaylistContent(playlist: NsPlaylist.IPlaylist | undefined, contentIds: string[]) {
     if (playlist) {
-      return this.upsertPlaylist(
+      return this.deleteContent(
+        playlist.id,
         {
-          id: playlist.id,
-          title: playlist.name,
-          contentIds: playlist.contents
-            .map(item => item.identifier || '')
-            .filter(id => !contentIds.includes(id || '')),
-          changedContentIds: contentIds,
-          userAction: NsPlaylist.EPlaylistUserAction.DELETE,
-          editType: NsPlaylist.EPlaylistEditTypes.EDIT,
-          visibility: playlist.visibility,
+          contentIds,
         },
       )
     }
-
     return throwError({ error: 'ERROR_PLAYLIST_UNDEFINED' })
   }
 
   acceptPlaylist(playlistId: string) {
-    return this.http.get(API_END_POINTS.acceptPlaylist(playlistId)).pipe(
-      // tap(() => {
-      //   if (this.playlistSubject[NsPlaylist.EPlaylistTypes.PENDING]) {
-      //     this.playlistSubject[NsPlaylist.EPlaylistTypes.PENDING].pipe(first()).subscribe((playlists: NsPlaylist.IPlaylist[]) => {
-      //       const acceptedPlaylist = playlists.find(playlist => playlist.id === playlistId)
-      //       if (acceptedPlaylist && this.playlistSubject[NsPlaylist.EPlaylistTypes.SHARED]) {
-      //         this.playlistSubject[NsPlaylist.EPlaylistTypes.SHARED].pipe(first()).subscribe(sharedPlaylist => {
-      //           this.playlistSubject[NsPlaylist.EPlaylistTypes.SHARED].next([acceptedPlaylist, ...sharedPlaylist])
-      //         })
-      //       }
-      //       this.playlistSubject[NsPlaylist.EPlaylistTypes.PENDING].next(
-      //         playlists.filter(playlist => playlist.id !== playlistId),
-      //       )
-      //     })
-      //   }
-      // }),
-    )
+    return this.http.post(API_END_POINTS.acceptPlaylist(playlistId), null).pipe()
   }
 
   rejectPlaylist(playlistId: string) {
-    return this.http.delete(API_END_POINTS.rejectPlaylist(playlistId)).pipe(
+    return this.http.post(API_END_POINTS.rejectPlaylist(playlistId), null).pipe(
       tap(() => {
         if (this.playlistSubject[NsPlaylist.EPlaylistTypes.PENDING]) {
           this.playlistSubject[NsPlaylist.EPlaylistTypes.PENDING].pipe(first()).subscribe((playlists: NsPlaylist.IPlaylist[]) => {
@@ -155,8 +158,8 @@ export class BtnPlaylistService {
     )
   }
 
-  sharePlaylist(shareRequest: NsPlaylist.IPlaylistShareRequest) {
-    return this.http.post(API_END_POINTS.sharePlaylist, shareRequest)
+  sharePlaylist(shareRequest: NsPlaylist.IPlaylistShareRequest, playlistId: string) {
+    return this.http.post(`${API_END_POINTS.sharePlaylist}/${playlistId}`, shareRequest)
   }
 
   private updatePlaylists() {

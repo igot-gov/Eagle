@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input } from '@angular/core'
 import { NsDiscussionForum, DialogSocialDeletePostComponent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -15,7 +12,9 @@ export class QnaItemComponent implements OnInit {
 
   @Input() item!: NsDiscussionForum.ITimelineResult
   userId = ''
+  showSocialLike = false
   ePostStatus = NsDiscussionForum.EPostStatus
+  isSocialLike = false
   constructor(
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -27,6 +26,7 @@ export class QnaItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
   }
 
   deletePost(successMsg: string) {

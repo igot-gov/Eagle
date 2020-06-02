@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
-import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { NsGoal } from './btn-goals.model'
-import { NsContent } from '../_services/widget-content.model'
 import { MatDialog } from '@angular/material'
+import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { NsContent } from '../_services/widget-content.model'
 import { BtnGoalsDialogComponent } from './btn-goals-dialog/btn-goals-dialog.component'
+import { NsGoal } from './btn-goals.model'
+import { ConfigurationsService } from '../../../../utils/src/public-api'
 
 const VALID_CONTENT_TYPES: NsContent.EContentTypes[] = [
   NsContent.EContentTypes.MODULE,
@@ -24,14 +22,19 @@ const VALID_CONTENT_TYPES: NsContent.EContentTypes[] = [
 export class BtnGoalsComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<NsGoal.IBtnGoal> {
   @Input() widgetData!: NsGoal.IBtnGoal
-
+  @Input() forPreview = false
+  @Input() status?: string
   isValidContent = false
+  isGoalsEnabled = false
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) {
     super()
   }
 
   ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
+    }
     if (
       this.widgetData &&
       this.widgetData.contentType &&
@@ -42,12 +45,14 @@ export class BtnGoalsComponent extends WidgetBaseComponent
   }
 
   openDialog() {
-    this.dialog.open(BtnGoalsDialogComponent, {
-      width: '600px',
-      data: {
-        contentId: this.widgetData.contentId,
-        contentName: this.widgetData.contentName,
-      },
-    })
+    if (!this.forPreview) {
+      this.dialog.open(BtnGoalsDialogComponent, {
+        width: '600px',
+        data: {
+          contentId: this.widgetData.contentId,
+          contentName: this.widgetData.contentName,
+        },
+      })
+    }
   }
 }

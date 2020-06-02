@@ -1,11 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsContent, NsError, NSSearch, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { ConfigurationsService, ValueService } from '@ws-widget/utils/src/public-api'
+import { ConfigurationsService, ValueService, UtilityService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { IKhubFetchStatus } from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { TrainingService } from '../../../infy/routes/training/services/training.service'
@@ -23,6 +20,7 @@ export class LearningComponent implements OnInit, OnDestroy {
 
   removable = true
   defaultSideNavBarOpenedSubscription: Subscription | null = null
+  expandToPrefLang = true
   isLtMedium$ = this.valueSvc.isLtMedium$
   screenSizeIsLtMedium = false
   sideNavBarOpened = true
@@ -45,7 +43,9 @@ export class LearningComponent implements OnInit, OnDestroy {
   }
   searchResultsSubscription: Subscription | undefined
   filtersResetAble = false
+  // commercial_begin
   concepts: IFilterUnitItem[] = []
+  // commercial_end
   resultsDisplayType: 'basic' | 'advanced' = 'advanced'
   searchRequest: {
     query: string;
@@ -53,11 +53,11 @@ export class LearningComponent implements OnInit, OnDestroy {
     sort?: string;
     lang?: string | null;
   } = {
-    query: '',
-    filters: {},
-    sort: '',
-    lang: this.getActiveLocale() || '',
-  }
+      query: '',
+      filters: {},
+      sort: '',
+      lang: this.getActiveLocale() || '',
+    }
   selectedFilterSet: Set<string> = new Set()
   noContent = false
   exactResult = {
@@ -72,6 +72,8 @@ export class LearningComponent implements OnInit, OnDestroy {
   }
   routeComp = ''
   translatedFilters: any = {}
+  isIntranetAllowedSettings = false
+  prefChangeSubscription: Subscription | null = null
 
   filtersResponse: IFilterUnitResponse[] = []
   errorWidget: NsWidgetResolver.IRenderConfigWithTypedData<NsError.IWidgetErrorResolver> = {
@@ -88,6 +90,7 @@ export class LearningComponent implements OnInit, OnDestroy {
     private searchServ: SearchServService,
     private configSvc: ConfigurationsService,
     private trainingSvc: TrainingService,
+    private utilitySvc: UtilityService,
   ) { }
 
   getActiveLocale() {
@@ -180,6 +183,9 @@ export class LearningComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.searchServ.searchConfig = this.activated.snapshot.data.pageData.data
+    this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
+      this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
+    })
     const queryMap = this.activated.snapshot.queryParamMap
     let defaultFilters = {}
     const lang = this.configSvc.userPreference && this.configSvc.userPreference.selectedLocale
@@ -227,15 +233,23 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.routeComp = this.activated.snapshot.data.pageroute
         this.searchRequestObject.filters = {}
       }
+      if (this.utilitySvc.isMobile && !this.isIntranetAllowedSettings) {
+        this.searchRequestObject.filters['isInIntranet'] = ['false']
+      }
       // query
       if (queryParams.has('q')) {
+        if (this.searchRequestObject.query !== queryParams.get('q')) {
+          this.expandToPrefLang = true
+        }
         this.searchRequestObject.query = queryParams.get('q') || ''
       }
       // filters
       if (queryParams.has('f')) {
 
         const filters = JSON.parse(queryParams.get('f') || '{}')
-
+        if (this.searchRequest.filters !== filters) {
+          this.expandToPrefLang = true
+        }
         this.searchRequest.filters = filters
         for (const key of Object.keys(this.searchRequest.filters)) {
           if (key) {
@@ -248,6 +262,9 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.searchRequest.sort = queryParams.get('sort') || ''
         this.searchRequestObject.sort = this.getSortType(this.searchRequest.sort)
       }
+      if (this.searchRequest.lang !== queryParams.get('lang') || this.getActiveLocale() || 'en') {
+        this.expandToPrefLang = true
+      }
       this.searchRequest.lang = queryParams.get('lang') || this.getActiveLocale() || 'en'
       if (this.searchRequest.lang) {
         this.searchRequest.lang = this.searchRequest.lang.toLowerCase()
@@ -258,6 +275,7 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.searchRequestObject.query.toLowerCase() !== 'all' &&
         this.searchRequestObject.query !== '*' && this.searchRequestObject.query !== ''
       ) {
+        this.searchRequestObject.sort = []
         if (!this.searchRequest.filters.hasOwnProperty('contentType')) {
           this.searchRequestObject.isStandAlone = true
         } else if (this.searchRequest.filters.contentType.length === 0) {
@@ -266,9 +284,13 @@ export class LearningComponent implements OnInit, OnDestroy {
         if (!this.applyIsStandAlone && this.searchRequestObject.hasOwnProperty('isStandAlone')) {
           delete this.searchRequestObject.isStandAlone
         }
+      } else {
+        this.searchRequestObject.sort = [{ lastUpdatedOn: 'desc' }]
       }
       this.noContent = false
+      // commercial_begin
       this.concepts = []
+      // commercial_end
       if (
         this.searchRequestObject.filters &&
         !Object.keys(this.searchRequestObject.filters).length
@@ -290,7 +312,7 @@ export class LearningComponent implements OnInit, OnDestroy {
 
       this.filtersResetAble = updatedFilterSet.filterReset
       // Modify filters
-      this.getResults()
+      this.getResults(undefined)
     })
     // }
   }
@@ -301,9 +323,13 @@ export class LearningComponent implements OnInit, OnDestroy {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()
     }
+    if (this.prefChangeSubscription) {
+      this.prefChangeSubscription.unsubscribe()
+    }
   }
 
-  getResults(withQuotes?: boolean) {
+  getResults(withQuotes?: boolean, didYouMean = true) {
+    this.searchRequestObject.didYouMean = didYouMean
     if (this.searchResultsSubscription) {
       this.searchResultsSubscription.unsubscribe()
     }
@@ -330,7 +356,11 @@ export class LearningComponent implements OnInit, OnDestroy {
     this.searchServ.raiseSearchEvent(
       this.searchRequestObject.query,
       this.searchRequestObject.filters,
+      this.searchRequestObject.locale,
     )
+    if (this.searchRequestObject.locale && this.searchRequestObject.locale.length > 1) {
+      this.searchRequestObject.didYouMean = false
+    }
     this.searchResultsSubscription = this.searchServ
       .getLearning(this.searchRequestObject)
       .subscribe(
@@ -340,11 +370,14 @@ export class LearningComponent implements OnInit, OnDestroy {
             this.searchRequestObject.query,
             this.searchRequestObject.filters,
             this.searchResults.totalHits,
+            this.searchRequestObject.locale,
           )
           this.searchResults.filters = data.filters
-          this.searchResults.queryUsed = data.queryUsed || undefined
+          this.searchResults.queryUsed = data.queryUsed
           // this.searchResults.type = data.type
           this.searchResults.result = [...this.searchResults.result, ...data.result]
+          this.searchResults.doYouMean = data.doYouMean
+          this.searchResults.queryUsed = data.queryUsed
           // this.handleFilters(this.searchResults.filters)
           const filteR = this.searchServ.handleFilters(
             this.searchResults.filters,
@@ -353,16 +386,18 @@ export class LearningComponent implements OnInit, OnDestroy {
             this.activated.snapshot.data.pageroute !== 'learning' ? true : false,
           )
           this.filtersResponse = filteR.filtersRes
+          // commercial_begin
           this.concepts = filteR.concept
+          // commercial_end
           if (
             this.searchResults.totalHits === 0 && this.isDefaultFilterApplied
           ) {
             this.removeDefaultFiltersApplied()
-            this.getResults()
+            this.getResults(undefined, didYouMean)
             return
-          } if (this.searchResults.totalHits === 0 && this.searchAcrossPreferredLang) {
+          } if (this.searchResults.totalHits === 0 && this.searchAcrossPreferredLang && this.expandToPrefLang) {
             this.searchWithPreferredLanguage()
-            this.getResults()
+            this.getResults(undefined, didYouMean)
             return
           } if (
             this.searchResults.totalHits === 0 &&
@@ -386,7 +421,7 @@ export class LearningComponent implements OnInit, OnDestroy {
             this.searchRequestObject.query.indexOf(' ') > -1 && this.applyPhraseSearch
           ) {
             this.searchRequestObject.pageNo = 0
-            this.getResults(true)
+            this.getResults(true, didYouMean)
             return
           } else if (
             this.searchResults.totalHits === 0 &&
@@ -395,7 +430,7 @@ export class LearningComponent implements OnInit, OnDestroy {
           ) {
             this.searchRequestObject.pageNo = 0
             this.searchRequestObject.instanceCatalog = false
-            this.getResults(true)
+            this.getResults(true, didYouMean)
             return
           } else if (
             this.searchResults.totalHits > 0 &&
@@ -439,7 +474,7 @@ export class LearningComponent implements OnInit, OnDestroy {
       throw e
     }
   }
-  getSortType(sort: string) {
+  getSortType(sort: string): { [key: string]: 'asc' | 'desc' }[] {
     try {
       if (sort === 'lastUpdatedOn') {
         return [{ lastUpdatedOn: 'desc' }]
@@ -463,18 +498,27 @@ export class LearningComponent implements OnInit, OnDestroy {
         queryParams: { lang: type },
         queryParamsHandling: 'merge',
         relativeTo: this.activated.parent,
+      }).then(() => {
+        this.expandToPrefLang = false
       })
     } catch (e) {
       throw e
     }
   }
 
-  searchInsteadFor(q: string) {
+  didYouMeanSearch(query: string) {
+    let q = query.replace('<em>', '')
+    q = q.replace('</em>', '')
     this.router.navigate([], {
       queryParams: { q },
       queryParamsHandling: 'merge',
       relativeTo: this.activated.parent,
     })
+  }
+
+  searchInsteadFor() {
+    this.searchResults.result = []
+    this.getResults(undefined, false)
   }
 
   removeFilters() {

@@ -1,15 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-http://http-url
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, OnChanges, ViewChild, ElementRef } from '@angular/core'
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser'
-import { NsContent } from '@ws-widget/collection'
-import { TFetchStatus } from '@ws-widget/utils/src/public-api'
-import { Router } from '@angular/router'
-import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
-
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
+import { Router } from '@angular/router'
+import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { TFetchStatus } from '@ws-widget/utils/src/public-api'
+import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 
 @Component({
   selector: 'viewer-plugin-html',
@@ -25,7 +21,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   iframeUrl: SafeResourceUrl | null = null
 
   showIframeSupportWarning = false
-  showIsExternalMessage = false
+  showIsLoadingMessage = false
   showUnBlockMessage = false
   pageFetchStatus: TFetchStatus | 'artifactUrlMissing' = 'fetching'
   isUserInIntranet = false
@@ -35,7 +31,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
-http://http-url
+    // private http: HttpClient,
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
@@ -47,15 +43,18 @@ http://http-url
 
   ngOnChanges() {
     this.isIntranetUrl = false
+    this.progress = 100
+    this.pageFetchStatus = 'fetching'
+    this.showIframeSupportWarning = false
     this.intranetUrlPatterns = this.configSvc.instanceConfig
       ? this.configSvc.instanceConfig.intranetIframeUrls
       : []
 
-    // console.log(this.htmlContent)
+    // //console.log(this.htmlContent)
     let iframeSupport: boolean | string | null =
       this.htmlContent && this.htmlContent.isIframeSupported
     if (this.htmlContent && this.htmlContent.artifactUrl) {
-http://http-url
+      if (this.htmlContent.artifactUrl.startsWith('http://')) {
         this.htmlContent.isIframeSupported = 'No'
       }
       if (typeof iframeSupport !== 'boolean') {
@@ -76,6 +75,8 @@ http://http-url
           )
         } else if (iframeSupport === 'maybe') {
           this.showIframeSupportWarning = true
+        } else {
+          this.showIframeSupportWarning = false
         }
       }
       if (this.intranetUrlPatterns && this.intranetUrlPatterns.length) {
@@ -90,24 +91,25 @@ http://http-url
       // if (this.htmlContent.isInIntranet || this.isIntranetUrl) {
       //   this.checkIfIntranet().subscribe(
       //     data => {
-      //       console.log(data)
+      //       //console.log(data)
       //       this.isUserInIntranet = data ? true : false
-      //       console.log(this.isUserInIntranet)
+      //       //console.log(this.isUserInIntranet)
       //     },
       //     () => {
       //       this.isUserInIntranet = false
-      //       console.log(this.isUserInIntranet)
+      //       //console.log(this.isUserInIntranet)
       //     },
       //   )
       // }
-      const isExternal = this.htmlContent.isExternal
-      if (isExternal) {
-        this.showIsExternalMessage = true
+        this.showIsLoadingMessage = false
+      if (this.htmlContent.isIframeSupported !== 'No') {
         setTimeout(
           () => {
-            this.showIsExternalMessage = false
+            if (this.pageFetchStatus === 'fetching') {
+              this.showIsLoadingMessage = true
+            }
           },
-          5000,
+          3000,
         )
       }
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -167,29 +169,37 @@ http://http-url
     this.isIntranetUrl = false
   }
 
-  onIframeLoadOrError(evt: 'load' | 'error') {
-    setTimeout(
-      () => {
-        this.pageFetchStatus = evt === 'load' ? 'done' : 'error'
-      },
-      0,
-    )
+  onIframeLoadOrError(evt: 'load' | 'error', iframe?: HTMLIFrameElement, event?: any) {
+    if (evt === 'error') {
+      this.pageFetchStatus = evt
+    }
+    if (evt === 'load' && iframe && iframe.contentWindow) {
+      if (event && iframe.onload) {
+        iframe.onload(event)
+      }
+      iframe.onload = (data => {
+         if (data.target) {
+           this.pageFetchStatus = 'done'
+           this.showIsLoadingMessage = false
+         }
+      })
+    }
   }
 
   // checkIfIntranet(): Observable<boolean> {
-http://http-url
-http://http-url
-http://http-url
-http://http-url
-http://http-url
+  //   // const testUrl = 'http://10.177.157.45/wingspan-web/fusion/raw/dev/package.json'
+  //   // const testUrl = 'https://iscls2apps.ad.infosys.com/HMYPlus/inc/js/jquery-1.11.3.js'
+  //   const testUrl = 'http://jsfiddle.net/echo/jsonp/'
+  //   // const testUrl = 'https://iscls2apps.ad.infosys.com/HMYPlus/images/SearchIcon.png'
+  //   // const testUrl = 'http://Home.aspx'
   //   // tslint:disable-next-line: deprecation
-http://http-url
+  //   return this.http.jsonp(testUrl, 'callback').pipe(
   //     mapTo(true),
   //     catchError(err => {
-  //       console.log('error', err)
+  //       //console.log('error', err)
   //       return of(false)
   //     }),
   //   )
-http://http-url
+  //   // this.http.jsonp()
   // }
 }

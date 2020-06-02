@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core'
 import { NSQuiz } from '../../quiz.model'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { jsPlumb, OnConnectionBindInfo } from 'jsplumb'
+import { jsPlumb, jsPlumbInstance, OnConnectionBindInfo } from 'jsplumb'
 
 @Component({
   selector: 'viewer-question',
@@ -36,7 +33,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
   quizAnswerHash: { [questionId: string]: string[] } = {}
   title = 'match'
-  jsPlumbInstance: any
+  jsPlumbInstance!: jsPlumbInstance
   safeQuestion: SafeHtml = ''
   correctOption: boolean[] = []
   unTouchedBlank: boolean[] = []
@@ -50,13 +47,15 @@ export class QuestionComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     const res: string[] = this.question.question.match(/<img[^>]+src="([^">]+)"/g) || ['']
     for (const oldImg of res) {
-      let temp = oldImg.match(/src="([^">]+)"/g) || ['']
-      const toBeReplaced = temp[0]
-      temp = [temp[0].replace('src="/', '')]
-      temp = [temp[0].replace(/\"/g, '')]
-      const baseUrl = this.artifactUrl.split('/')
-      const newUrl = this.artifactUrl.replace(baseUrl[baseUrl.length - 1], temp[0])
-      this.question.question = this.question.question.replace(toBeReplaced, `src="${newUrl}"`)
+      if (oldImg) {
+        let temp = oldImg.match(/src="([^">]+)"/g) || ['']
+        const toBeReplaced = temp[0]
+        temp = [temp[0].replace('src="/', '')]
+        temp = [temp[0].replace(/\"/g, '')]
+        const baseUrl = this.artifactUrl.split('/')
+        const newUrl = this.artifactUrl.replace(baseUrl[baseUrl.length - 1], temp[0])
+        this.question.question = this.question.question.replace(toBeReplaced, `src="${newUrl}"`)
+      }
     }
     if (this.question.questionType === 'fitb') {
       const iterationNumber = (this.question.question.match(/<input/g) || []).length
@@ -111,7 +110,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
       })
       this.jsPlumbInstance.bind(
         'connectionMoved',
-        (i: { originalSourceId: string; newSourceId: string; originalTargetId: string; }, _c: any) => {
+        (i: { originalSourceId: string; newSourceId: string; originalTargetId: string }, _c: any) => {
           this.setBorderColorById(i.originalSourceId, '')
           this.setBorderColorById(i.newSourceId, '')
           this.setBorderColorById(i.originalTargetId, '')
@@ -198,7 +197,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
   setBorderColorById(id: string, color: string | null) {
     const elementById: HTMLElement | null = document.getElementById(id)
-    if (elementById != null) {
+    if (elementById && color) {
       elementById.style.borderColor = color
     }
   }
@@ -280,7 +279,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
   resetColor() {
     const a = this.jsPlumbInstance.getAllConnections() as any[]
-    a.forEach((element: { setPaintStyle: (arg0: { stroke: string; }) => void; }) => {
+    a.forEach((element: { setPaintStyle: (arg0: { stroke: string }) => void }) => {
       element.setPaintStyle({
         stroke: 'rgba(0,0,0,0.5)',
       })
@@ -326,12 +325,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
             const match = options.match
             const selectors: HTMLElement[] = this.jsPlumbInstance.getSelector(answerSelector) as unknown as HTMLElement[]
             if (match && match.trim() === selectors[0].innerText.trim()) {
-              const endpoint = `[
-                'Dot',
-                {
-                  radius: 5
-                }
-              ]`
+              const endpoint = 'Dot'
               this.jsPlumbInstance.connect({
                 endpoint,
                 source: this.jsPlumbInstance.getSelector(questionSelector) as unknown as Element,

@@ -1,14 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { MatTabChangeEvent } from '@angular/material'
-import { filter, switchMap, takeUntil } from 'rxjs/operators'
-
-import { IFeedbackSummary, EFeedbackType, EFeedbackRole, CustomTourService } from '@ws-widget/collection'
-import { IResolveResponse, ConfigurationsService } from '@ws-widget/utils'
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router'
+import { EFeedbackRole, EFeedbackType, IFeedbackSummary } from '@ws-widget/collection'
+import { IResolveResponse } from '@ws-widget/utils'
 import { Subject } from 'rxjs'
+import { filter, switchMap, takeUntil } from 'rxjs/operators'
 
 @Component({
   selector: 'ws-app-home',
@@ -16,7 +12,7 @@ import { Subject } from 'rxjs'
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+export class HomeComponent implements OnInit, OnDestroy {
   currentTabIndex!: number
   tabs: string[]
   newItemsCount: number
@@ -26,16 +22,9 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   rolesSet: Set<string>
   subscriptionSubject$: Subject<any>
 
-  @ViewChild('feedbackstartTitle', { static: true }) feedbackstartTitleRef!: ElementRef<any>
-  @ViewChild('feedbackstartSubtitle', { static: true }) feedbackstartSubtitleRef!: ElementRef<any>
-  @ViewChild('myFeedbackTitle', { static: true }) myFeedbackTitleRef!: ElementRef<any>
-  @ViewChild('myFeedbackSubtitle', { static: true }) myFeedbackSubtitleRef!: ElementRef<any>
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private configurationSvc: ConfigurationsService,
-    private tour: CustomTourService,
   ) {
     this.subscriptionSubject$ = new Subject<any>()
     this.feedbackTypes = EFeedbackType
@@ -102,35 +91,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
           this.currentTabIndex = 0
         },
     )
-  }
-
-  ngAfterViewInit() {
-    this.configurationSvc.tourGuideNotifier.next(true)
-    this.tour.data = [{
-      anchorId: 'feedback_start',
-      title: this.feedbackstartTitleRef.nativeElement.value,
-      content: this.feedbackstartSubtitleRef.nativeElement.value,
-      enableBackdrop: true,
-    }, {
-      anchorId: 'myFeedback',
-      title: this.myFeedbackTitleRef.nativeElement.value,
-      content: this.myFeedbackSubtitleRef.nativeElement.value,
-      enableBackdrop: true,
-    },
-      // , {
-      //   anchorId: 'another.myFeedback',
-      //   title: this.myFeedbackTitleRef.nativeElement.value,
-      //   content: this.myFeedbackSubtitleRef.nativeElement.value,
-      //   enableBackdrop: true,
-      //   route: '/app/feedback/my-feedback'
-      // }, {
-      //   anchorId: 'myFeedback',
-      //   title: this.myFeedbackTitleRef.nativeElement.value,
-      //   content: this.myFeedbackSubtitleRef.nativeElement.value,
-      //   enableBackdrop: true,
-      //   route: '/app/feedback/my-feedback'
-      // }
-    ]
   }
 
   ngOnDestroy() {

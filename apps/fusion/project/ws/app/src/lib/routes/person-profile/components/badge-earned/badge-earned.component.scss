@@ -1,0 +1,82 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.badgeimg {
+  width: 50px;
+  height: 50px;
+}
+
+.badge_icon {
+  color: #f4bc40 !important;
+}
+
+/* .divider {
+  margin: 8px 0;
+}
+ */
+.badge {
+  border-radius: 8px !important;
+  width: 90px !important;
+  margin: 0.5rem !important;
+
+  @include breakpoint-lt-m {
+    padding: 0rem !important;
+  }
+}
+
+.badgesearned {
+  @media (max-width: 1024px) {
+    flex-wrap: wrap !important;
+  }
+}
+
+.font-family {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+$title-line-count: 2;
+$title-line-height: 1.3em;
+
+.title-text {
+  position: relative !important;
+  overflow: hidden !important;
+  height: $title-line-count * $title-line-height !important;
+  line-height: $title-line-height !important;
+  color: #9baebd !important;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.fetching {
+  color: #9baebd !important;
+}
+
+.navigationbutton {
+  border-radius: 8px;
+  margin-right: 0.25rem !important;
+}
+
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e0e0e0;
+  border-radius: 50%;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}

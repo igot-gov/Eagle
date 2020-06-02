@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { TFetchStatus } from '@ws-widget/utils'
@@ -27,6 +24,9 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
   successDataCount = 0
   totalCount = 0
   results = []
+  searchArray = ['preview', 'channel', 'author']
+  isFromAuthoring = false
+
   constructor(
     private contentStripSvc: ContentStripSingleService,
     private contentSvc: WidgetContentService,
@@ -35,6 +35,10 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    const url = window.location.href
+    this.isFromAuthoring = this.searchArray.some((word: string) => {
+      return url.indexOf(word) > -1
+    })
     this.initData()
   }
 
@@ -57,12 +61,11 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
       Object.keys(this.widgetData.request.api).length
     ) {
       this.checkParentStatus('fetching', 0)
-      this.contentStripSvc.getContentStripResponseApi(this.widgetData.request.api).subscribe(
-        results => {
+      this.contentStripSvc.getContentStripResponseApi(this.widgetData.request.api).subscribe(results => {
           this.convertToStrip(results.contents || [])
           this.checkParentStatus('done', results.contents.length)
         },
-        () => {
+                                                                                             () => {
           this.checkParentStatus('error', 0)
         },
       )
@@ -75,12 +78,11 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
       Object.keys(this.widgetData.request.search).length
     ) {
       this.checkParentStatus('fetching', 0)
-      this.contentSvc.search(this.widgetData.request.search).subscribe(
-        results => {
+      this.contentSvc.search(this.widgetData.request.search).subscribe(results => {
           this.convertToStrip(results.result || [])
           this.checkParentStatus('done', results.result.length)
         },
-        () => {
+                                                                       () => {
           this.checkParentStatus('error', 0)
         },
       )
@@ -95,12 +97,11 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
       this.checkParentStatus('fetching', 0)
       this.contentSvc
         .searchRegionRecommendation(this.widgetData.request.searchRegionRecommendation)
-        .subscribe(
-          results => {
+        .subscribe(results => {
             this.convertToStrip(results.contents || [])
             this.checkParentStatus('done', results.contents.length)
           },
-          () => {
+                   () => {
             this.checkParentStatus('error', 0)
           },
         )
@@ -113,12 +114,11 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
       Object.keys(this.widgetData.request.searchV6).length
     ) {
       this.checkParentStatus('fetching', 0)
-      this.contentSvc.searchV6(this.widgetData.request.searchV6).subscribe(
-        results => {
+      this.contentSvc.searchV6(this.widgetData.request.searchV6).subscribe(results => {
           this.convertToStrip(results.result || [])
           this.checkParentStatus('done', results.result.length)
         },
-        () => {
+                                                                           () => {
           this.checkParentStatus('error', 0)
         },
       )
@@ -131,12 +131,11 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
       Object.keys(this.widgetData.request.ids).length
     ) {
       this.checkParentStatus('fetching', 0)
-      this.contentSvc.fetchMultipleContent(this.widgetData.request.ids).subscribe(
-        results => {
+      this.contentSvc.fetchMultipleContent(this.widgetData.request.ids).subscribe(results => {
           this.convertToStrip(results || [])
           this.checkParentStatus('done', results.length)
         },
-        () => {
+                                                                                  () => {
           this.checkParentStatus('error', 0)
         },
       )

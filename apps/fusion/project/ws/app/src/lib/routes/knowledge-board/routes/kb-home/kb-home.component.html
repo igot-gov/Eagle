@@ -1,11 +1,8 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="configSvc?.pageNavBar?.color" [ngStyle]="configSvc?.pageNavBar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-s" i18n>Knowledge Board</span>
   <span class="spacer"></span>
-  <a routerLink="/author/create" *ngIf="showCreate" mat-button>
+  <a name="create-link-kb-home" routerLink="/author/create" *ngIf="showCreate" mat-button>
     <section class="flex items-center">
       <mat-icon class="mr-2">create</mat-icon>
       <ng-container i18n>Create</ng-container>
@@ -23,7 +20,8 @@
       have any
       knowledge boards. Please add one.</p>
     <p class="mat-error" *ngIf="myBoardsFetchStatus === 'error'" i18n>Failed fetching your knowledge boards.</p>
-    <ws-utils-horizontal-scroller class="block" *ngIf="myBoards?.length" [loadStatus]="'done'">
+    <ws-utils-horizontal-scroller name="your-knowledge-boards-content-strip" class="block" *ngIf="myBoards?.length"
+      [loadStatus]="'done'">
       <ws-widget-card-knowledge (followed)="followed()" (unFollowed)="unfollowed($event)" *ngFor="let board of myBoards"
         [widgetData]="{
           content: board,
@@ -32,7 +30,7 @@
         }">
       </ws-widget-card-knowledge>
       <div class="mr-6 ml-2 view-more ws-mat-primary-text" *ngIf="myBoardsFetchStatus === 'hasMore'">
-        <a [routerLink]="myKBRedirectUrl.path" [queryParams]="myKBRedirectUrl.qParams">
+        <a name="view-all-yourkb-kb-home" [routerLink]="myKBRedirectUrl.path" [queryParams]="myKBRedirectUrl.qParams">
           <mat-icon class="icon">arrow_forward</mat-icon>
           <h3 i18n>View All</h3>
         </a>
@@ -48,7 +46,8 @@
       following any knowledge board. Please follow one.</p>
     <p class="mat-error" *ngIf="followingFetchStatus === 'error'" i18n>Failed fetching knowledge boards you follow.
     </p>
-    <ws-utils-horizontal-scroller *ngIf="following?.length" class="block" [loadStatus]="'done'">
+    <ws-utils-horizontal-scroller name="knowledge-boards-you-follow-content-strip" *ngIf="following?.length"
+      class="block" [loadStatus]="'done'">
       <ws-widget-card-knowledge (followed)="followed()" (unFollowed)="unfollowed($event)"
         *ngFor="let board of following" [widgetData]="{
           content: board,
@@ -67,7 +66,8 @@
       found.</p>
     <p class="mat-error" *ngIf="kbSFetchStatus === 'error'" i18n>Failed fetching knowledge boards.
     </p>
-    <ws-utils-horizontal-scroller *ngIf="knowledgeBoards?.length" class="block" [loadStatus]="'done'">
+    <ws-utils-horizontal-scroller name="latest-knowledge-boards-content-strip" *ngIf="knowledgeBoards?.length"
+      class="block" [loadStatus]="'done'">
       <ws-widget-card-knowledge (followed)="followed()" (unFollowed)="unfollowed($event)"
         *ngFor="let board of knowledgeBoards" [widgetData]="{
           content: board,
@@ -76,7 +76,7 @@
         }">
       </ws-widget-card-knowledge>
       <div class="mr-6 ml-2 view-more ws-mat-primary-text">
-        <a [routerLink]="redirectUrl.path" [queryParams]="redirectUrl.qParams">
+        <a name="view-all-latestkb-kb-home" [routerLink]="redirectUrl.path" [queryParams]="redirectUrl.qParams">
           <mat-icon class="icon">arrow_forward</mat-icon>
           <h3 i18n>View All</h3>
         </a>

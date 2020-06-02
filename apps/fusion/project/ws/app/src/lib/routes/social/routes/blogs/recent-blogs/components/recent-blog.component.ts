@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { TFetchStatus, ValueService, ConfigurationsService, NsPage } from '@ws-widget/utils'
@@ -26,13 +23,15 @@ export class RecentBlogComponent implements OnInit {
     userId: '',
   }
   timelineFetchStatus: TFetchStatus = 'none'
-
+  showSocialLike = false
   isXSmall$: Observable<boolean>
-
+  queryEntered = ''
+  placeHolder: String = 'Type the blog name you are looking for'
   constructor(
     private discussionSvc: WsDiscussionForumService,
     private configSvc: ConfigurationsService,
     private valueSvc: ValueService,
+
   ) {
     this.isXSmall$ = this.valueSvc.isXSmall$
     if (this.configSvc.userProfile) {
@@ -42,6 +41,8 @@ export class RecentBlogComponent implements OnInit {
 
   ngOnInit() {
     this.fetchTimelineData()
+    this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
+
   }
 
   fetchTimelineData() {

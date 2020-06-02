@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
-import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { NsDiscussionForum } from '../../ws-discussion-forum.model'
-import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
-import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
+import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
+import { EditorQuillComponent } from '../../editor-quill/editor-quill.component'
+import { NsDiscussionForum } from '../../ws-discussion-forum.model'
 import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 
 @Component({
@@ -19,8 +16,25 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   @Input() widgetData!: NsDiscussionForum.IDiscussionForumInput
 
   @ViewChild('editorQuill', { static: true }) editorQuill: EditorQuillComponent | null = null
-  @ViewChild('postEnabled', { static: true }) postEnabled: ElementRef<HTMLInputElement> | null = null
-  @ViewChild('postDisabled', { static: true }) postDisabled: ElementRef<HTMLInputElement> | null = null
+  @ViewChild('postEnabled', { static: true }) postEnabled: ElementRef<
+    HTMLInputElement
+  > | null = null
+  @ViewChild('postDisabled', { static: true }) postDisabled: ElementRef<
+    HTMLInputElement
+  > | null = null
+
+  conversationRequest: NsDiscussionForum.IPostRequestV2 = {
+    postId: [],
+    userId: '',
+    answerId: '',
+    postKind: [],
+    sessionId: Date.now(),
+    sortOrder: NsDiscussionForum.EConversationSortOrder.LATEST_DESC,
+    pgNo: 0,
+    pgSize: 10,
+  }
+  isRestricted = true
+  discussionConverstionResult: any
 
   discussionFetchStatus: TFetchStatus = 'none'
   discussionRequest: NsDiscussionForum.ITimelineRequest = {
@@ -55,21 +69,30 @@ export class DiscussionForumComponent extends WidgetBaseComponent
       this.userName = this.configSvc.userProfile.userName || ''
     }
     this.discussionRequest.userId = this.userId
+    this.conversationRequest.userId = this.userId
   }
 
   ngOnInit() {
-    if (this.widgetData.initialPostCount) {
-      this.discussionRequest.pgSize = this.widgetData.initialPostCount
+    if (this.configSvc.restrictedFeatures) {
+      this.isRestricted =
+        this.configSvc.restrictedFeatures.has('disscussionForum') ||
+        this.configSvc.restrictedFeatures.has('disscussionForumTRPU')
     }
-    this.discussionRequest.source = {
-      id: this.widgetData.id,
-      name: this.widgetData.name,
+    if (!this.isRestricted && !this.widgetData.isDisabled) {
+      if (this.widgetData.initialPostCount) {
+        this.discussionRequest.pgSize = this.widgetData.initialPostCount
+      }
+      this.discussionRequest.source = {
+        id: this.widgetData.id,
+        name: this.widgetData.name,
+      }
+      this.fetchDiscussion()
     }
-    this.fetchDiscussion()
   }
 
   fetchDiscussion(refresh = false) {
     this.discussionFetchStatus = 'fetching'
+    this.discussionRequest.postKind = [NsDiscussionForum.EPostKind.BLOG]
     if (refresh) {
       this.discussionRequest.sessionId = Date.now()
       this.discussionRequest.pgNo = 0
@@ -86,10 +109,12 @@ export class DiscussionForumComponent extends WidgetBaseComponent
           this.discussionResult.hits = data.hits
           this.discussionResult.result = [...this.discussionResult.result, ...data.result]
           if (data.hits > this.discussionResult.result.length) {
-            this.discussionFetchStatus = 'hasMore';
-            (this.discussionRequest.pgNo as number) += 1
+            this.discussionFetchStatus = 'hasMore'
+              // tslint:disable-next-line: whitespace
+              ; (this.discussionRequest.pgNo as number) += 1
           } else {
             this.discussionFetchStatus = 'done'
+            // this.fetchAllPosts()
           }
         } else if (!this.discussionResult.result.length) {
           this.discussionFetchStatus = 'none'
@@ -144,5 +169,17 @@ export class DiscussionForumComponent extends WidgetBaseComponent
   onTextChange(eventData: { isValid: boolean; htmlText: string }) {
     this.isValidPost = eventData.isValid
     this.editorText = eventData.htmlText
+  }
+
+  fetchAllPosts() {
+    const postIds: string[] = []
+    this.discussionResult.result.forEach((post: NsDiscussionForum.ITimelineResult) =>
+      postIds.push(post.id),
+    )
+    this.conversationRequest.sessionId = Date.now()
+    this.conversationRequest.postId = postIds
+    this.discussionSvc.fetchAllPosts(this.conversationRequest).subscribe(data => {
+      this.discussionConverstionResult = Object.keys(data)
+    })
   }
 }

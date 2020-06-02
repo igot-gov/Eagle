@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { map } from 'rxjs/operators'
 import { ValueService } from '@ws-widget/utils/src/public-api'
@@ -13,25 +10,33 @@ import { REVIEW_ROLE, PUBLISH_ROLE, CREATE_ROLE } from '@ws/author/src/lib/const
   styleUrls: ['./home.component.scss'],
 })
 export class AuthHomeComponent implements OnInit, OnDestroy {
-
   sideNavBarOpened = true
   panelOpenState = false
+  allowReview = false
+  allowAuthor = false
+  allowRedo = false
+  allowPublish = false
+  allowExpiry = false
+  allowRestore = false
+  isNewDesign = false
   isLtMedium$ = this.valueSvc.isLtMedium$
   private defaultSideNavBarOpenedSubscription: any
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   public screenSizeIsLtMedium = false
-  constructor(
-    private valueSvc: ValueService,
-    private accessService: AccessControlService,
-  ) { }
+  constructor(private valueSvc: ValueService, private accessService: AccessControlService) {}
 
   ngOnInit() {
-    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(
-      isLtMedium => {
-        this.sideNavBarOpened = !isLtMedium
-        this.screenSizeIsLtMedium = isLtMedium
-      },
-    )
+    this.allowAuthor = this.canShow('author')
+    this.allowRedo = this.accessService.authoringConfig.allowRedo
+    this.allowRestore = this.accessService.authoringConfig.allowRestore
+    this.allowExpiry = this.accessService.authoringConfig.allowExpiry
+    this.allowReview = this.canShow('review') && this.accessService.authoringConfig.allowReview
+    this.allowPublish = this.canShow('publish') && this.accessService.authoringConfig.allowPublish
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {
+      this.sideNavBarOpened = !isLtMedium
+      this.screenSizeIsLtMedium = isLtMedium
+    })
+    this.isNewDesign = this.accessService.authoringConfig.newDesign
   }
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
@@ -51,5 +56,4 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
         return false
     }
   }
-
 }

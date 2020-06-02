@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { NsGoal, NsContent, BtnGoalsService, NsAutoComplete } from '@ws-widget/collection'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { TFetchStatus, EventService } from '@ws-widget/utils'
+import { TFetchStatus, EventService, ConfigurationsService } from '@ws-widget/utils'
 import { MatSnackBar } from '@angular/material'
 import { Router, ActivatedRoute } from '@angular/router'
 
@@ -39,6 +36,7 @@ export class GoalCreateCustomComponent implements OnInit {
   mode: 'create' | 'edit' = 'create'
   editGoal: NsGoal.IGoal | null = null
   fetchEditGoalStatus: TFetchStatus = 'none'
+  isShareEnabled = false
   constructor(
     fb: FormBuilder,
     private events: EventService,
@@ -46,6 +44,7 @@ export class GoalCreateCustomComponent implements OnInit {
     private snackbar: MatSnackBar,
     private goalsSvc: BtnGoalsService,
     private router: Router,
+    private configSvc: ConfigurationsService,
   ) {
     // TODO: get min/max length for some json
     this.createGoalForm = fb.group({
@@ -57,6 +56,11 @@ export class GoalCreateCustomComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
+    }
+
     this.mode = this.route.snapshot.data.mode || this.mode
     const preselected = this.route.snapshot.queryParamMap.get('preselected')
     const preselectedName = this.route.snapshot.queryParamMap.get('preselectedName')
@@ -93,9 +97,9 @@ export class GoalCreateCustomComponent implements OnInit {
   populateCurrentGoalValues() {
     if (this.editGoal) {
       this.selectedContentIds = new Set<string>(this.editGoal.contentIds)
-      ; (this.editGoal.contentProgress || []).forEach(content => {
-        this.chipNamesHash[content.identifier] = content.name
-      })
+        ; (this.editGoal.contentProgress || this.editGoal.contents || []).forEach((content: any) => {
+          this.chipNamesHash[content.identifier] = content.name
+        })
       this.createGoalForm.setValue({
         name: this.editGoal.name,
         description: this.editGoal.description,

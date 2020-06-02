@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar?.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs text-truncate">
@@ -11,27 +8,41 @@
     </span>
   </span>
   <span class="spacer"></span>
-  <button *ngIf="rearrangeEnablerButtonEnabled && multipleStripWidget?.widgetData?.strips?.length" mat-button
-    (click)="reOrder(orderMsg.value, failedMsg.value)" matTooltip="Reorder" i18n-matTooltip
-    class="padding-width-remove">
-    <mat-icon>{{ reOrderEnabled ? 'save' : 'view_quilt' }}</mat-icon>
-    <span class="margin-left-xs hidden sm:inline text-truncate" i18n *ngIf="!reOrderEnabled">Reorder</span>
-    <span class="margin-left-xs hidden sm:inline text-truncate" i18n *ngIf="reOrderEnabled">Save</span>
-  </button>
-  <button *ngIf="createEnablerButtonEnabled && multipleStripWidget?.widgetData?.strips?.length" mat-button
-    (click)="startDelete()" matTooltip="Edit contents" i18n-matTooltip class="padding-width-remove"
-    [disabled]="editEnabled">
-    <mat-icon>edit</mat-icon>
-    <span class="margin-left-xs hidden sm:inline text-truncate" i18n>Edit</span>
-  </button>
-  <button *ngIf="createEnablerButtonEnabled" mat-button (click)="enableCreate()" matTooltip="Add contents"
-    i18n-matTooltip class="padding-width-remove">
-    <mat-icon>add_circle</mat-icon>
-    <span class="margin-left-xs hidden sm:inline text-truncate" i18n>Add</span>
-  </button>
+  <span *ngIf="content?.status==='Live'">
+    <button name="reorder-button-kb-detail" [disabled]="disableReorder"
+      *ngIf="rearrangeEnablerButtonEnabled && multipleStripWidget?.widgetData?.strips?.length" mat-button
+      (click)="reOrder(orderMsg.value, failedMsg.value)" matTooltip="Reorder" i18n-matTooltip
+      class="padding-width-remove">
+      <mat-icon *ngIf="!reOrderEnabled">save</mat-icon>
+      <span class="margin-left-xs hidden sm:inline text-truncate" i18n *ngIf="!reOrderEnabled">Reorder</span>
+      <!-- <span class="margin-left-xs hidden sm:inline text-truncate" i18n *ngIf="reOrderEnabled">Save</span> -->
+    </button>
+    <button name="edit-button-kb-detail"
+      *ngIf="createEnablerButtonEnabled && multipleStripWidget?.widgetData?.strips?.length" mat-button
+      (click)="startDelete()" matTooltip="Edit contents" i18n-matTooltip class="padding-width-remove"
+      [disabled]="editEnabled">
+      <mat-icon>edit</mat-icon>
+      <span class="margin-left-xs hidden sm:inline text-truncate" i18n>Edit</span>
+    </button>
+    <button name="add-button-kb-detail" *ngIf="createEnablerButtonEnabled" mat-button (click)="enableCreate()"
+      matTooltip="Add contents" i18n-matTooltip class="padding-width-remove">
+      <mat-icon>add_circle</mat-icon>
+      <span class="margin-left-xs hidden sm:inline text-truncate" i18n>Add</span>
+    </button>
+  </span>
+
 </mat-toolbar>
 
+<div id="spinner_load">
+  <div class="flex flex-middle mat-elevation-z3 ws-mat-primary-lite-background-on-day ws-mat-primary-border p-4"
+    [hidden]="!inProgress">
+    <mat-spinner></mat-spinner>
+    <div class="mx-3 ws-mat-primary-text">Saving your changes</div>
+  </div>
+
+</div>
 <ng-container *ngIf="content">
+
   <div class="ws-mat-primary-lite-background-on-day p-4 banner">
     <div class="mx-4 sm:mx-8">
       <h1 class="mat-display-2 hidden sm:block margin-bottom-s">
@@ -40,22 +51,23 @@
       <div *ngIf="content?.averageRating" class="flex items-center my-2 sm:my-6">
         <mat-icon color="accent" class="mr-2" *ngFor="let rating of [1, 2, 3, 4, 5]">
           {{ getRatingIcon(rating) }}</mat-icon>
-        <span class="ml-2 font-medium">{{ content?.averageRating | number: '1.1-1' }}&nbsp;</span>
+        <span class="ml-2 font-medium">{{ content?.averageRating[rootOrg] | number: '1.1-1' }}&nbsp;</span>
         <ng-container *ngIf="content?.totalRating">
-          <span>({{ content?.totalRating | pipeCountTransform }}&nbsp;</span>
+          <span>({{ content?.totalRating[rootOrg] | pipeCountTransform }}&nbsp;</span>
           <span i18n>votes)</span>
         </ng-container>
       </div>
+
       <div class="ws-mat-primary-text mat-h4 flex">
         <span i18n-matTooltip matTooltip="Followers" class="pr-4" *ngIf="followCount > 0 || followCount === 0">
           <span class="font-weight-bold" i18n>Followers:</span>
-          {{followCount}}
+          {{ followCount }}
         </span>
-        <span *ngIf="content?.lastUpdatedOn" i18n-matTooltip matTooltip="Last Updated">
+        <span *ngIf="content?.lastUpdatedOn" i18n-matTooltip matTooltip="Last Updated" class="pr-4">
           <span class="font-weight-bold" i18n>Updated:</span>
           {{ content?.lastUpdatedOn | date }}
         </span>
-        <span *ngIf="content?.viewCount" i18n-matTooltip matTooltip="Views" class="flex items-center text-right">
+        <span *ngIf="false" i18n-matTooltip matTooltip="Views" class="flex items-center pr-4 text-right">
           <mat-icon>remove_red_eye</mat-icon>&nbsp;
           <span>
             {{ content?.viewCount | pipeCountTransform }}
@@ -65,18 +77,21 @@
             </ng-container>
           </span>
         </span>
+
       </div>
       <div class="flex flex-between">
-        <div *ngIf="content?.creatorDetails?.length">
+        <div *ngIf="content?.creatorContacts?.length">
           <h3 class="mat-subheading-2 font-weight-500" i18n>CURATORS:</h3>
           <div class="flex flex-between flex-col md:flex-row">
-            <div class="flex flex-middle mr-4 my-2 md:my-0" *ngFor="let author of content?.creatorContacts">
-              <ws-widget-user-image class="user-icon-container" [userName]="author.name" [email]="author.email"
-                [imageType]="'rounded'">
-              </ws-widget-user-image>
-              <span class="ml-2">
-                {{ author.name }}
-              </span>
+            <div *ngFor="let author of content?.creatorContacts">
+              <div class="flex flex-middle mr-4 my-2 md:my-0">
+                <ws-widget-user-image class="user-icon-container" [userName]="author.name" [email]="author.email"
+                  [imageType]="'rounded'">
+                </ws-widget-user-image>
+                <div class="ml-2">
+                  {{ author.name }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -88,13 +103,21 @@
             [widgetData]="{ targetId: content?.identifier, type: 'Knowledge Board' }">
           </ws-widget-btn-follow>
         </div>
-
       </div>
-      <ng-container *ngIf="content?.status === 'Deleted' || content?.status === 'Expired'">
-        <h3 class="ws-mat-primary-text" i18n>
-          The content is expired or deleted. Please contact the authors for any query.
-        </h3>
-      </ng-container>
+      <h3 *ngIf="content?.status === 'Deleted' || content?.status === 'Expired'"
+        class="ws-mat-primary-text margin-remove-bottom pt-4" i18n>
+        The content is expired or deleted.
+      </h3>
+      <h3 class="ws-mat-primary-text margin-remove-bottom pt-4" i18n *ngIf="content?.status === 'Unpublished'">
+        The content has been unpublished.
+      </h3>
+      <h3 class="ws-mat-primary-text margin-remove-bottom pt-4" i18n *ngIf="content?.status === 'Draft'">
+        The content is in draft.
+      </h3>
+      <h3 class="ws-mat-primary-text margin-remove-bottom pt-4" i18n *ngIf="content?.status === 'InReview'">
+        The content is in review.
+      </h3>
+
     </div>
   </div>
 
@@ -132,19 +155,28 @@
 
   <!-- Add content -->
   <div id="id-for-create-kb">
-    <div class="px-10 py-10" *ngIf="createEnabled">
+    <div class="px-6 sm:px-8 md:px-10 py-3" *ngIf="createEnabled">
       <div class="flex">
         <h1 i18n>Add Content</h1>
+        <button type="button" mat-icon-button (click)="addInfo = !addInfo" i18n-matTooltip matTooltip="info"
+          class="margin-left-xs">
+          <mat-icon>info</mat-icon>
+        </button>
         <span class="spacer"></span>
-        <button mat-icon-button (click)="createEnabled = false">
+        <button name="close-add-content-kb-detail" mat-icon-button (click)="createEnabled = false">
           <mat-icon>close</mat-icon>
         </button>
       </div>
-      <div class="flex items-center">
+      <mat-divider></mat-divider>
+      <p *ngIf="addInfo" class="ws-mat-primary-text">
+        You can add content to a section.
+      </p>
+      <div class="flex items-center mt-5">
         <span class="pr-4">Sections</span>
         <mat-form-field>
           <mat-label i18n>Choose Section</mat-label>
-          <mat-select #matSelect [value]="contentClassifiers.indexOf(selectedClassifier) > -1 ? selectedClassifier : ''"
+          <mat-select name="choose-section-kb-detail" #matSelect
+            [value]="contentClassifiers.indexOf(selectedClassifier) > -1 ? selectedClassifier : ''"
             (selectionChange)="selectedClassifier = $event.value">
             <mat-option value="" selected i18n>New</mat-option>
             <mat-option *ngIf="contentClassifiers.indexOf('Default') < 0" value="Default" i18n>Default</mat-option>
@@ -154,17 +186,18 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field class="pl-4" *ngIf="!matSelect.value">
-          <input matInput i18n-placeholder placeholder="Create a new section" #inputSelectedClass
-            [value]="selectedClassifier" (blur)="selectedClassifier = inputSelectedClass.value" />
+          <input matInput name="new-section-kb-detail" i18n-placeholder placeholder="Create a new section"
+            #inputSelectedClass [value]="selectedClassifier" (blur)="selectedClassifier = inputSelectedClass.value" />
         </mat-form-field>
       </div>
-      <ws-widget-picker-content [widgetData]="pickerContentData"
-        [selectedContentTypes]="['Course', 'Collection', 'Learning Path', 'Resource','Channel']"
+      <ws-widget-picker-content [widgetData]="{ preselected: preSelectedContentIds, availableFilters: 'contentType' }"
+        [selectedContentTypes]="['Course', 'Collection', 'Learning Path', 'Resource', 'Channel']"
         (change)="onContentSelectionChanged($event?.content, $event?.checked)">
       </ws-widget-picker-content>
 
       <mat-form-field class="w-full">
-        <textarea matInput placeholder="Reason for adding" i18n-placeholder [(ngModel)]="reasonForAdd"></textarea>
+        <textarea name="reason-field-kb-detail" matInput placeholder="Reason for adding" i18n-placeholder
+          [(ngModel)]="reasonForAdd"></textarea>
       </mat-form-field>
 
       <div class="flex">
@@ -173,8 +206,9 @@
             content<br /></span>
         </span>
         <span class="spacer"></span>
-        <button mat-raised-button color="primary" [disabled]="selectedContentIds.size === 0 || isAddingContent"
-          (click)="addContent(addMsg.value, failedMsg.value)" i18n>
+        <button name="confirm-add-content-kb-detail" mat-raised-button color="primary"
+          [disabled]="selectedContentIds.size === 0 || isAddingContent"
+          (click)="addContent(addMsg.value, failedMsgAdd.value)" i18n>
           Add
         </button>
       </div>
@@ -186,47 +220,144 @@
 
   <!-- Edit contents -->
   <div class="px-6 sm:px-8 md:px-10 py-3" id="delete-kb-content" [hidden]="!editEnabled">
-    <h2 i18n>Delete contents</h2>
-    <mat-divider></mat-divider>
-    <div class="mt-5" *ngFor="let strip of multipleStripWidget?.widgetData?.strips">
-      <mat-form-field>
-        <input matInput [placeholder]="strip.title" [(ngModel)]="strip.title" />
-      </mat-form-field>
-      <div class="flex flex-wrap">
-        <div *ngFor="let widget of strip?.preWidgets"
-          class="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 p-2 box-sizing-box">
-          <mat-card class="box-sizing-box height-1-1">
-            <mat-checkbox (change)="onChangeDelete($event, widget?.widgetData?.content?.identifier)">
-              <h3 class="margin-remove">{{ widget?.widgetData?.content?.name }}</h3>
-            </mat-checkbox>
-            <ws-widget-display-content-type class="ml-6 block"
-              [displayContentType]="widget?.widgetData?.content?.displayContentType"></ws-widget-display-content-type>
-          </mat-card>
-        </div>
-      </div>
+    <div class="flex">
+      <h1 i18n>Edit Content</h1>
+      <button type="button" mat-icon-button (click)="editInfo = !editInfo" i18n-matTooltip matTooltip="info"
+        class="margin-left-xs">
+        <mat-icon>info</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button name="close-edit-content-kb-detail" mat-icon-button (click)="closeEdit()">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
-    <div class="text-right">
-      <button mat-flat-button color="primary" class="margin-right-s"
-        (click)="openDeleteDialog(selectedDeleteIds, deleteMsg.value, failedMsg.value, updateMsg.value)"
-        [disabled]="isDeleting">
-        <ng-container i18n *ngIf="isDeleting">Please Wait...</ng-container>
-        <ng-container i18n *ngIf="!isDeleting">Done</ng-container>
-      </button>
-      <button mat-stroked-button (click)="revertEdit()" [disabled]="isDeleting" i18n>
-        Cancel
-      </button>
+    <mat-divider></mat-divider>
+    <p *ngIf="editInfo" class="ws-mat-primary-text">
+      You can edit section labels or delete content in each section.
+    </p>
+    <div class="mt-5" *ngFor="let strip of multipleStripWidget?.widgetData?.strips">
+      <ng-container *ngIf="strip?.preWidgets.length>0">
+        <div class="flex items-center" *ngIf="!strip.edit && !strip.delete">
+          <h2 class="mat-h1 margin-remove-bottom">
+            {{ strip?.title }}
+          </h2>
+          <button mat-button color="primary"
+            name="edit-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-name-kb-detail"
+            class="margin-left-s" (click)="strip.edit=true" i18n-matTooltip matTooltip="Change section label"
+            matTooltipPosition="after" i18n>
+            Edit
+          </button>
+          <button name="delete-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-content-kb-detail"
+            class="margin-left-s" (click)="strip.delete=true" i18n-matTooltip matTooltip="Delete items"
+            matTooltipPosition="after" mat-button color="primary" i18n>
+            Delete
+          </button>
+          <button name="add-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-content-kb-detail"
+            class="margin-left-s" (click)="enableCreate(strip.title)" i18n-matTooltip matTooltip="Add items"
+            matTooltipPosition="after" mat-button color="primary" i18n>
+            Add
+          </button>
+        </div>
+      </ng-container>
+
+      <div class="flex form-items items-center margin-top-reduce fade-in" *ngIf="strip.edit===true">
+        <mat-form-field>
+          <input
+            [attr.name]="'rename-section-'+(multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1)+'-input-kb-detail'"
+            matInput [placeholder]="strip.title" [(ngModel)]="strip.newTitle" />
+        </mat-form-field>
+        <span>
+          <button name="done-rename-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-kb-detail"
+            class="margin-left-xs" mat-icon-button (click)="renameSection(true, false, strip.title, strip.newTitle)"
+            i18n-matTooltip matTooltip="Done" matTooltipPosition="below">
+            <mat-icon>done</mat-icon>
+          </button>
+          <button name="close-rename-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-kb-detail"
+            class="margin-left-xs" mat-icon-button (click)="renameSection(false, false, strip.title, strip.title)"
+            i18n-matTooltip matTooltip="Cancel" matTooltipPosition="below">
+            <mat-icon>close</mat-icon>
+          </button>
+        </span>
+      </div>
+      <div class="flex form-items items-center margin-top-reduce fade-in" *ngIf="strip.delete===true">
+        <h2 class="mat-h1 margin-remove-bottom">
+          {{ strip?.title }}
+        </h2>
+
+      </div>
+      <div *ngIf="strip.delete===true" class="flex flex-middle p-2">
+        <button name="delete-all-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-kb-detail"
+          mat-icon-button i18n-aria-label aria-label="Delete All Content" i18n-matTooltip
+          matTooltip="Delete All Content"
+          (click)="openDeleteStrip(deleteMsg.value, failedMsgAdd.value, updateMsg.value,strip)">
+          <mat-icon>delete</mat-icon>
+          <span i18n>Delete all</span>
+        </button>
+
+        <span class="spacer"></span>
+
+
+        <button name="close-delete-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-kb-detail"
+          class="margin-left-xs" mat-icon-button (click)="revertDelete(strip)" [disabled]="strip.isDeleting"
+          i18n-matTooltip matTooltip="Cancel" matTooltipPosition="below">
+          <mat-icon>close</mat-icon>
+        </button>
+
+      </div>
+
+      <div class="flex flex-wrap">
+        <ng-container *ngFor="let widget of strip?.preWidgets">
+          <div *ngIf="widget?.widgetData?.content"
+            class="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 p-2 box-sizing-box">
+            <mat-card class="box-sizing-box height-1-1">
+              <div class="flex flex-middle flex flex-between">
+
+                <div [ngClass]="{'pl-2': strip.delete ?true:false,'pl-6': !strip.delete?true:false}" class=" flex
+                  flex-col">
+                  <h3 class="margin-remove">
+                    {{ widget?.widgetData?.content?.name }}
+                  </h3>
+                  <ws-widget-display-content-type
+                    [displayContentType]="widget?.widgetData?.content?.displayContentType">
+                  </ws-widget-display-content-type>
+                </div>
+                <button mat-icon-button *ngIf="strip.delete===true"
+                  name="select-content-{{strip?.preWidgets.indexOf(widget) + 1}}-section-{{multipleStripWidget?.widgetData?.strips.indexOf(strip) + 1}}-edit-kb-detail"
+                  i18n-aria-label aria-label="Delete" i18n-matTooltip matTooltip="Delete"
+                  (click)="openDeleteDialog(widget?.widgetData?.content?.identifier,deleteMsg.value, failedMsgAdd.value, updateMsg.value, strip)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
     </div>
   </div>
 
-
-
   <!-- Rearrange contents -->
   <div class="px-6 sm:px-8 md:px-10 py-3" id="rearrange-kb-content" [hidden]="!reOrderEnabled">
-    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="flex">
+      <h1 i18n>Reorder Content</h1>
+      <button type="button" mat-icon-button (click)="reorderInfo = !reorderInfo" i18n-matTooltip matTooltip="info"
+        class="margin-left-xs">
+        <mat-icon>info</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <p *ngIf="reorderInfo" class="ws-mat-primary-text">
+      Drag and drop the items to change its order.
+    </p>
+    <div class="mt-5" cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let section of widgetData?.strips" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        <mat-accordion class="width-1-1">
-          <mat-expansion-panel>
+        <div class="width-1-1" *ngIf="!internalReorder">
+          <div [attr.name]="'reorder-section-'+ widgetData?.strips.indexOf(section)">
+            <div>{{ section?.title }}</div>
+          </div>
+        </div>
+        <mat-accordion class="width-1-1" *ngIf="internalReorder">
+          <mat-expansion-panel [attr.name]="'reorder-section-'+ widgetData?.strips.indexOf(section)">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 {{ section?.title }}
@@ -235,7 +366,9 @@
             <div cdkDropList class="example-list" (cdkDropListDropped)="drop2($event, section?.preWidgets)">
               <div class="example-box" *ngFor="let content of section?.preWidgets" cdkDrag>
                 <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-                <div class="width-expand flat-list-content margin-xs">
+                <div
+                  [attr.name]="'reorder-section-'+ widgetData?.strips.indexOf(section)+'-content-' + section?.preWidgets.indexOf(content)"
+                  class="width-expand flat-list-content margin-xs">
                   <span class="width-expand flex flex-middle">
                     <img i18n-alt alt="thumbnail"
                       class="viewer-toc-thumbnail align-self-start margin-auto mat-app-background"
@@ -250,8 +383,8 @@
                       </div>
                       <span class="mat-body-1">
                         <span>{{
-                          content?.widgetData?.content?.resourceType | pipeLimitTo: 100
-                        }}</span> </span><span class="mat-body-1 margin-left-xxs"
+                                    content?.widgetData?.content?.resourceType | pipeLimitTo: 100
+                                  }}</span> </span><span class="mat-body-1 margin-left-xxs"
                         *ngIf="content?.widgetData?.content?.reason"><span>|
                           {{ content?.widgetData?.content?.reason | pipeLimitTo: 300 }}</span>
                       </span>
@@ -270,16 +403,18 @@
       </div>
     </div>
     <div class="margin-top-m flex flex-wrapped">
-      <button mat-raised-button color="primary" (click)="saveReorder(orderMsg.value, failedMsg.value)" i18n>
+      <button name="save-reorder-kb-detail" mat-raised-button color="primary"
+        (click)="saveReorder(orderMsg.value, failedMsg.value)" i18n>
         Save
       </button>
-      <button mat-raised-button color="primary" class="margin-left-s" (click)="revertReorder()" i18n>
+      <button name="discard-reorder-kb-detail" mat-raised-button color="primary" class="margin-left-s"
+        (click)="revertReorder()" i18n>
         Discard
       </button>
     </div>
   </div>
 
-  <div class="flex px-6 sm:px-8 md:px-10 py-4 my-2">
+  <div class="flex px-6 sm:px-8 md:px-10 py-4 my-2" *ngIf="!editEnabled ">
     <section class="flex-1 min-w-0">
       <h2 class="mat-toolbar discussion-head shadow" i18n>Discussion Forum</h2>
       <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
@@ -297,17 +432,22 @@
       <ws-widget-user-image class="author-image" [email]="author.email"></ws-widget-user-image>
       <div class="width-expand flex flex-middle flex-between">
         <h3 class="margin-remove">{{ author.name }}</h3>
-        <ws-widget-btn-mail-user [widgetData]="{ content: content, emails: [author.email] }"></ws-widget-btn-mail-user>
+        <ws-widget-btn-mail-user [widgetData]="{ content: content, emails: [author.email] }">
+        </ws-widget-btn-mail-user>
       </div>
     </div>
   </mat-card>
 </ng-template>
 
-<input type="hidden" i18n-value value="Content added successfully. Your changes will reflect within a minute."
-  #addMsg />
-<input type="hidden" i18n-value value="Content deleted successfully. Your changes will reflect within a minute."
-  #deleteMsg />
-<input type="hidden" i18n-value value="Content updated successfully. Your changes will reflect within a minute."
-  #updateMsg />
-<input type="hidden" i18n-value value="Content order changed. Your changes will reflect within a minute." #orderMsg />
-<input type="hidden" i18n-value value="Failed to update." #failedMsg />
+<input name="add-success-toast-message" type="hidden" i18n-value
+  value="Addition successful. Your changes will reflect in a while." #addMsg />
+<input name="delete-success-toast-message" type="hidden" i18n-value
+  value="Deletion successful. Your changes will reflect in a while." #deleteMsg />
+<input name="update-success-toast-message" type="hidden" i18n-value
+  value="Updates successful. Your changes will reflect in a while." #updateMsg />
+<input name="reorder-success-toast-message" type="hidden" i18n-value
+  value="Reorder successful. Your changes will reflect in a while." #orderMsg />
+<input name="update-failure-toast-message" type="hidden" i18n-value value="Reorder failed. Please try after some time."
+  #failedMsg />
+<input name="add-failure-toast-message" type="hidden" i18n-value value="Updates failed. Please try after some time."
+  #failedMsgAdd />

@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, OnChanges } from '@angular/core'
 import { ConfigurationsService } from '@ws-widget/utils'
-import { UserMiniProfileService } from '../../mini-profile/user-mini-profile.service'
-import { NsMiniProfile } from '../../mini-profile/mini-profile.model'
+// import { UserMiniProfileService } from '../../mini-profile/user-mini-profile.service'
+// import { NsMiniProfile } from '../../mini-profile/mini-profile.model'
 
 @Component({
   selector: 'ws-widget-user-image',
@@ -12,7 +9,6 @@ import { NsMiniProfile } from '../../mini-profile/mini-profile.model'
   styleUrls: ['./user-image.component.scss'],
 })
 export class UserImageComponent implements OnInit, OnChanges {
-
   @Input() email = ''
   @Input() userId: string | null = null
   @Input() userName = ''
@@ -22,12 +18,9 @@ export class UserImageComponent implements OnInit, OnChanges {
   verifiedMicrosoftEmail = ''
   shortName = ''
   imageUrl: string | null = null
-  constructor(
-    private configSvc: ConfigurationsService,
-    private miniProfileSvc: UserMiniProfileService,
-  ) { }
+  constructor(private configSvc: ConfigurationsService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges() {
     if (
@@ -36,25 +29,32 @@ export class UserImageComponent implements OnInit, OnChanges {
       this.configSvc.instanceConfig.microsoft &&
       this.configSvc.instanceConfig.microsoft.validEmailExtensions
     ) {
-      if (this.configSvc.instanceConfig.microsoft.validEmailExtensions.some(extension => this.email.includes(extension))) {
+      if (
+        this.configSvc.instanceConfig.microsoft.validEmailExtensions.some(extension =>
+          this.email.includes(extension),
+        )
+      ) {
         this.verifiedMicrosoftEmail = this.email
       }
-    } else {
-path
-        this.imageUrl = null
-        this.miniProfileSvc.viewMiniProfile(this.userId).subscribe(
-          (response: NsMiniProfile.IMiniProfileData) => {
-            this.imageUrl = response.profile_image ? response.profile_image : null
-          },
-        )
-      }
     }
-    if (this.userName) {
+    //  else {
+    //   if (this.userId && this.configSvc.rootOrg === 'Pathfinders') {
+    //     this.imageUrl = null
+    //     this.miniProfileSvc.viewMiniProfile(this.userId).subscribe(
+    //       (response: NsMiniProfile.IMiniProfileData) => {
+    //         this.imageUrl = response.profile_image ? response.profile_image : null
+    //       },
+    //     )
+    //   }
+    // }
+    if (this.userName && this.userName !== '  ') {
       const userNameArr = this.userName.split(' ').slice(0, 2)
-      this.shortName = userNameArr.map(u => u[0]).join('').toUpperCase()
+      this.shortName = userNameArr
+        .map(u => u[0])
+        .join('')
+        .toUpperCase()
     } else {
-      this.shortName = ((this.email && this.email[0]) || '').toUpperCase()
+      this.imageType = 'initial'
     }
   }
-
 }

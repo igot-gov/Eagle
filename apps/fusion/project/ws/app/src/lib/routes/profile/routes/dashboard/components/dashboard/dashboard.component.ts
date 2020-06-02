@@ -1,23 +1,16 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { IBadgeResponse, IBadgeRecent } from '../../../badges/badges.model'
-import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
-// import { BadgesService } from '../../../badges/badges.service'
-import { InterestService } from '../../../interest/services/interest.service'
-import { NsWidgetResolver } from '@ws-widget/resolver'
-import {
-  ROOT_WIDGET_CONFIG,
-  NsContentStripMultiple,
-  BtnFollowService,
-  NsContent,
-} from '@ws-widget/collection'
 import { ActivatedRoute } from '@angular/router'
-import { NSLearningHistory } from '../../../learning/models/learning.models'
-import { LearningHistoryService } from '../../../learning/services/learning-history.service'
+import { BtnFollowService, NsContent, NsContentStripMultiple, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
+import { NsWidgetResolver } from '@ws-widget/resolver'
+import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { NSProfileData } from '../../../../models/profile.model'
 import { ProfileService } from '../../../../services/profile.service'
+import { IBadgeRecent, IBadgeResponse } from '../../../badges/badges.model'
+// import { BadgesService } from '../../../badges/badges.service'
+import { InterestService } from '../../../interest/services/interest.service'
+import { NSLearningHistory } from '../../../learning/models/learning.models'
+import { LearningHistoryService } from '../../../learning/services/learning-history.service'
+import { NsSkills } from '../../../skills/models/skills.model'
 
 interface ILearningHistoryContent {
   content: NSLearningHistory.ILearningHistory
@@ -72,7 +65,7 @@ export class DashboardComponent implements OnInit {
       strips: [
         {
           key: 'continueLearning',
-          title: 'Last learnt',
+          title: 'Last viewed',
 
           stripConfig: {
             cardSubType: 'standard',
@@ -106,6 +99,7 @@ export class DashboardComponent implements OnInit {
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
     widgetHostClass: 'block sm:-mx-10 -mx-6',
   }
+
   coursePending: NSLearningHistory.ILearningHistoryItem[] = []
   lhContent: ILearningHistoryContent[] = []
   selectedStatusType = 'inprogress'
@@ -113,7 +107,7 @@ export class DashboardComponent implements OnInit {
   contentTypes = ['learning path', 'course', 'collection', 'resource', 'certification']
   pageSize = 10
   loadingContent = true
-  pageNum = 0
+  pageNum = ''
   ongoingCertifications: NSLearningHistory.ILearningHistoryItem[] = []
   passedCertifications: NSLearningHistory.ILearningHistoryItem[] = []
   constructor(
@@ -133,6 +127,19 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.configSvc.rootOrg === 'Ford' && this.widgetResolverData.widgetData.strips[0].stripConfig) {
+      this.widgetResolverData = {
+        ...this.widgetResolverData,
+        widgetData: {
+          strips: (this.widgetResolverData.widgetData.strips || []).map(u => ({
+            ...u,
+            stripConfig: {
+              cardSubType: 'card-description-back',
+            },
+          })),
+        },
+      }
+    }
     this.badgeApiFetchStatus = 'fetching'
     this.userDataFetchStatus = 'fetching'
     this.nsoArtifactsFetchStatus = 'fetching'
@@ -162,6 +169,18 @@ export class DashboardComponent implements OnInit {
     //     this.badgeApiFetchStatus = 'error'
     //   },
     // )
+    if (this.enabledTabs.subFeatures.skill) {
+      this.profileSvc.getSkillDashBoard().subscribe(
+        data => {
+          this.skillData = data
+          this.skillData = (data || []).map(content => this.convertToCardData(content))
+          this.skillFetchStatus = this.skillData.length ? 'done' : 'none'
+        },
+        () => {
+          this.skillFetchStatus = 'error'
+        },
+      )
+    }
     if (this.enabledTabs.subFeatures.knowledgeBoard) {
       this.followSvc.getFollowing().subscribe(
         data => {
@@ -176,12 +195,13 @@ export class DashboardComponent implements OnInit {
           this.followFetchStatus = 'error'
         },
       )
-    } else {
+    }
+    if (this.enabledTabs.subFeatures.calendar) {
       this.profileSvc.timeSpent(this.startDate, this.endDate, this.contentType, this.isCompleted).subscribe(
         (timeSpentTrack: NSProfileData.ITimeSpentResponse) => {
           this.timeSpentData = timeSpentTrack
+          this.apiFetchStatus = 'done'
           if (this.timeSpentData) {
-            this.apiFetchStatus = 'done'
             this.userPointsEarned = this.timeSpentData.points_and_ranks.user_points_earned
             this.orgWideTimePercent = Math.round(
               this.timeSpentData.timespent_user_vs_org_wide.usage_percent,
@@ -215,6 +235,21 @@ export class DashboardComponent implements OnInit {
     if (this.timeSpentData) {
       const timeSpentDateWise = this.timeSpentData.date_wise.filter(data => data.value !== 0)
       this.specialDates = timeSpentDateWise.map(data => data.key)
+    }
+  }
+  private convertToCardData(content: NsSkills.IRecommendedSkill | NsSkills.ISkill): NSProfileData.ICardSkill {
+    return {
+      category: content.category,
+      certificationCount: content.certification_count || 0,
+      courseCount: content.course_count || 0,
+      horizon: content.horizon,
+      group: content.skill_group,
+      level: content.skill_level,
+      id: `${content.skill_id}`,
+      imageUrl: content.image_url,
+      navigationUrl: `/app/profile/skills/skill-details/${content.skill_id}`,
+      title: content.skill_name,
+      recommendedBy: content.recommended_by,
     }
   }
   calendarEvent(event: string) {

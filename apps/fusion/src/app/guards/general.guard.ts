@@ -1,15 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import {
-  CanActivate,
-  UrlTree,
-  RouterStateSnapshot,
   ActivatedRouteSnapshot,
+  CanActivate,
   Router,
+  RouterStateSnapshot,
+  UrlTree,
 } from '@angular/router'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService } from '../../../library/ws-widget/utils/src/public-api'
 
 @Injectable({
   providedIn: 'root',
@@ -54,19 +51,33 @@ export class GeneralGuard implements CanActivate {
      * Test IF User Tnc Is Accepted
      */
     if (!this.configSvc.hasAcceptedTnc) {
-      return this.router.parseUrl('/app/tnc')
+      if (
+        state.url &&
+        !state.url.includes('/app/setup/') &&
+        !state.url.includes('/app/tnc') &&
+        !state.url.includes('/page/home')
+      ) {
+        this.configSvc.userUrl = state.url
+      }
+      if (
+        this.configSvc.restrictedFeatures &&
+        !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')
+      ) {
+        return this.router.parseUrl(`/app/setup/home/lang`)
+      }
+      return this.router.parseUrl(`/app/tnc`)
     }
 
     /**
-    * Test IF User has requried role to access the page
-    */
+     * Test IF User has requried role to access the page
+     */
     if (requiredRoles && requiredRoles.length && this.configSvc.userRoles) {
       const requiredRolePreset = requiredRoles.some(item =>
         (this.configSvc.userRoles || new Set()).has(item),
       )
 
       if (!requiredRolePreset) {
-        return false
+        return this.router.parseUrl('/page/home')
       }
     }
 
@@ -77,7 +88,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (requiredFeaturesMissing) {
-        return false
+        return this.router.parseUrl('/page/home')
       }
     }
 

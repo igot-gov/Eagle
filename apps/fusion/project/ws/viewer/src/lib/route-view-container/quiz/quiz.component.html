@@ -1,9 +1,6 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="padding-dynamic" *ngIf="quizData">
   <div class="flex flex-around flex-wrapped">
-    <div [ngClass]="isTypeOfCollection ? 'w-full' : 'video-player-title'">
+    <div class="w-full">
       <div>
         <mat-card>
           <mat-card-content>
@@ -16,33 +13,39 @@
               </ng-container>
             </div>
             <div class="flex justify-end mt-3">
-              <ws-widget-btn-content-download [widgetData]="
-                    quizData
-                      | pipePartialContent
-                        : [
-                            'identifier',
-                            'contentType',
-                            'resourceType',
-                            'mimeType',
-                            'downloadUrl',
-                            'isExternal'
-                          ]
-                  "></ws-widget-btn-content-download>
-              <ws-widget-btn-content-like [widgetData]="quizData | pipePartialContent: ['identifier']">
+              <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+                  quizData
+                    | pipePartialContent
+                      : [
+                          'identifier',
+                          'contentType',
+                          'resourceType',
+                          'mimeType',
+                          'downloadUrl',
+                          'isExternal',
+                  'artifactUrl'
+                        ]
+                "></ws-widget-btn-content-download>
+              <ws-widget-btn-content-like [forPreview]="forPreview"
+                [widgetData]="quizData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share></ws-widget-btn-content-share>
-              <ws-widget-btn-goals></ws-widget-btn-goals>
-              <ws-widget-btn-playlist></ws-widget-btn-playlist>
-              <ws-widget-btn-content-feedback-v2 [widgetData]="quizData | pipePartialContent: ['identifier', 'name']">
+              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="quizData"></ws-widget-btn-content-share>
+              <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+                contentId: quizData?.identifier,
+                contentName: quizData?.name,
+                contentType: 'Resource',
+                mode: 'dialog',
+                isDisabled: forPreview
+              }">
+              </ws-widget-btn-playlist>
+              <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
+                [widgetData]="quizData | pipePartialContent: ['identifier', 'name']">
               </ws-widget-btn-content-feedback-v2>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
-    </div>
-
-    <div class="video-summary" *ngIf="!isTypeOfCollection">
-      <ws-widget-player-brief [content]="quizData" [isPreviewMode]="isPreviewMode"></ws-widget-player-brief>
     </div>
   </div>
 </div>

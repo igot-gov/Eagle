@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import request from 'request'
@@ -32,6 +29,15 @@ const MINIMAL_CONTENT_FIELDS = [
   'resourceCategory',
   'size',
   'status',
+  'totalLikes',
+  'averageRating',
+  'viewCount',
+  'totalRating',
+  'resourceCategory',
+  'resourceType',
+  'categoryType',
+  'category',
+  'courseType',
 ]
 const DETAIL_CONTENT_FIELDS = [
   ...MINIMAL_CONTENT_FIELDS,
@@ -41,6 +47,7 @@ const DETAIL_CONTENT_FIELDS = [
   'learningObjective',
   'preRequisites',
   'resourceCategory',
+  'registrationInstructions',
   'resourceType',
   'skills',
   'ssoEnabled',
@@ -49,32 +56,98 @@ const DETAIL_CONTENT_FIELDS = [
   'topics',
   'sourceName',
   'sourceShortName',
+  'studyMaterials',
   'labels',
-  'totalLikes',
   'subTitle',
   'references',
 ]
 
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
+
 const API_END_POINTS = {
   addHierarchy: (apiType: string) => `${CONSTANTS.AUTHORING_BACKEND}/action/content/kb/${apiType}`,
+  contentParent: (contentId: string) =>
+    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/contents/parents/${contentId}`,
   externalContentAccess: (contentId: string, userId: string) =>
     `${CONSTANTS.SB_EXT_API_BASE_2}/v1/sources/${contentId}/users/${userId}`,
-  hierarchy: (contentId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content/hierarchy/${contentId}`,
+  fetchApi: (rootOrg?: string) => `${CONSTANTS.CONTENT_META_FETCH_API_BASE}/fetch/${rootOrg}`,
+  hierarchy: (contentId: string) => `${CONSTANTS.CONTENT_HIERARCHY}/${contentId}?dt=UI_LITE`,
   likeCount: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/likes-count`,
+  modifyKB: (apiType: string) => `${CONSTANTS.AUTHORING_BACKEND}/action/content/v2/kb/${apiType}`,
   multiple: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content/metas`,
   next: `${CONSTANTS.NODE_API_BASE_3}/api/v1/moreLikeThis`,
   parent: `${CONSTANTS.SB_EXT_API_BASE}/v1`,
-  removeSubset: `${CONSTANTS.SB_EXT_API_BASE_2}/v4/users/goals/resources`,
+  removeSubset: `${CONSTANTS.GOALS_API_BASE}/v4/users/goals/resources`,
+  reorderV3: `${CONSTANTS.AUTHORING_BACKEND}/action/content/v3/kb/reorder`,
   searchAutoComplete: `${CONSTANTS.ES_BASE}`,
   searchV4: `${CONSTANTS.SB_EXT_API_BASE}/search4`,
-  searchV5: `${CONSTANTS.SB_EXT_API_BASE}/search5`,
-  searchV6: `${CONSTANTS.SB_EXT_API_BASE}/v6/search`,
+  searchV5: `${CONSTANTS.SEARCH_API_BASE}/search5`,
+  searchV6: `${CONSTANTS.SEARCH_API_BASE}/v6/search`,
   setS3Cookie: `${CONSTANTS.CONTENT_API_BASE}/contentv3/cookie`,
   updateHierarchy: `${CONSTANTS.AUTHORING_BACKEND}/action/content/hierarchy/update`,
 }
 
 export const contentApi = Router()
+
+contentApi.post('/kb/v3/reorder', async (req, res) => {
+  try {
+    const org = req.header('org')
+    const rootOrg = req.header('rootOrg')
+    if (!org || !rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const url = `${API_END_POINTS.reorderV3}?rootOrg=${rootOrg}&org=${org}`
+    const response = await axios.post(url, req.body,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          org,
+          rootOrg,
+        },
+        timeout: Number(CONSTANTS.KB_TIMEOUT),
+      }
+    )
+    res.send(response.data)
+  } catch (err) {
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
+
+contentApi.post('/kb/v2/:apiType', async (req, res) => {
+  try {
+    const org = req.header('org')
+    const rootOrg = req.header('rootOrg')
+    if (!org || !rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const apiType = req.params.apiType
+    const url = `${API_END_POINTS.modifyKB(apiType)}?rootOrg=${rootOrg}&org=${org}`
+    const response = await axios.post(url, req.body,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          org,
+          rootOrg,
+        },
+        timeout: Number(CONSTANTS.KB_TIMEOUT),
+      }
+    )
+    res.send(response.data)
+  } catch (err) {
+    logError('CONTENT PARENT ERR -> ', err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
 
 contentApi.get('/multiple/:ids', async (req, res) => {
   try {
@@ -91,7 +164,9 @@ contentApi.get('/multiple/:ids', async (req, res) => {
     logError('ERROR in MULTI GET CONTENT >', err)
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -129,7 +204,11 @@ contentApi.get('/parents/:contentId', async (req, res) => {
     const response = await getParentDetails(contentId)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 export async function getParentDetails(contentId: string) {
@@ -155,7 +234,6 @@ export async function getParentDetails(contentId: string) {
 }
 
 contentApi.get('/next/:contentId', async (req, res) => {
-  const contentType = req.query.contentType
   try {
     const org = req.header('org')
     const rootOrg = req.header('rootOrg')
@@ -164,23 +242,24 @@ contentApi.get('/next/:contentId', async (req, res) => {
       return
     }
     const contentId = req.params.contentId
-    const response = await axios({
+    const response = await axios.get(`${API_END_POINTS.next}/${contentId}`, {
       ...axiosRequestConfig,
       headers: {
         org,
         rootOrg,
       },
-      method: 'GET',
-      url: contentType
-        ? `${API_END_POINTS.next}/${contentId}?contentType=${contentType}`
-        : `${API_END_POINTS.next}/${contentId}`,
+      params: req.query,
     })
     res.json(
       response.data.result.response.map((content: IContent) => getMinimalContent(content)) || []
     )
   } catch (err) {
     logError('WHATS NEXT API ERROR>', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -196,7 +275,9 @@ contentApi.post('/likeCount', async (req, res) => {
     logError('ERROR FETCHING LIKE COUNT -> ', err)
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -206,7 +287,8 @@ contentApi.get('/searchAutoComplete', async (req, res) => {
     const org = req.header('org')
     const query = req.query.q
     const lang = req.query.l
-    const body = {
+    // tslint:disable-next-line: no-any
+    const body: any = {
       _source: ['searchTerm'],
       query: {
         bool: {
@@ -222,27 +304,37 @@ contentApi.get('/searchAutoComplete', async (req, res) => {
               },
             },
           ],
-          should: [
-            {
-              prefix: {
-                'searchTermAnalysed.keyword': {
-                  boost: 4,
-                  value: query,
+          should: !query.length
+            ? undefined
+            : [
+              {
+                prefix: {
+                  'searchTermAnalysed.keyword': {
+                    boost: 4,
+                    value: query,
+                  },
                 },
               },
-            },
-            {
-              prefix: {
-                searchTermAnalysed: {
-                  boost: 2,
-                  value: query,
+              {
+                prefix: {
+                  searchTermAnalysed: {
+                    boost: 2,
+                    value: query,
+                  },
                 },
               },
-            },
-          ],
+            ],
         },
       },
       size: 20,
+    }
+    const isSuggestedTerm = {
+      term: {
+        isSuggested: true,
+      },
+    }
+    if (!query.length) {
+      body.query.bool.filter.push(isSuggestedTerm)
     }
     const response = await axios.request({
       auth: {
@@ -262,7 +354,12 @@ contentApi.get('/searchAutoComplete', async (req, res) => {
     }
     res.json(data)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
+    logError('SEARCH AUTOCOMPLETE ERR -> ', err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -300,7 +397,11 @@ contentApi.post('/searchV5', async (req, res) => {
     res.json(response)
   } catch (err) {
     logError('SEARCH API ERROR >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -339,19 +440,21 @@ contentApi.post('/searchRegionRecommendation', async (req, res) => {
       contents: [],
       hasMore: false,
     }
+    let children = []
     if (response.result.length) {
-      const data = await getContentDetails(
-        response.result[0].identifier,
-        rootOrg,
-        org,
-        userId,
-        'minimal'
-      )
-      returnResponse.contents = data.children
+      children = response.result[0].children.map((content: IContent) => content.identifier)
+    }
+    if (children.length) {
+      const data = await getContentMeta(children, rootOrg)
+      returnResponse.contents = data
     }
     res.json(returnResponse)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -367,31 +470,39 @@ contentApi.post('/searchV6', async (req, res) => {
     if (Array.isArray(contents)) {
       response.data.result = contents.map((content) => processContent(content))
     }
-    res.json(response.data || {
-      filters: [],
-      filtersUsed: [],
-      notVisibleFilters: [],
-      result: [],
-      totalHits: 0,
-    })
+    res.json(
+      response.data || {
+        filters: [],
+        filtersUsed: [],
+        notVisibleFilters: [],
+        result: [],
+        totalHits: 0,
+      }
+    )
   } catch (err) {
     logError('SEARCH V6 API ERROR >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
 contentApi.post('/setCookie', async (req, res) => {
   try {
     const url = API_END_POINTS.setS3Cookie
+    const type = req.body.type
+    const rootOrg = req.header('rootOrg')
     const body = {
       json: {
         ...req.body,
         uuid: extractUserIdFromRequest(req),
       },
     }
-    const bodyWithConfigRequestOptions = { ...body, ...axiosRequestConfig }
+    const bodyWithConfigRequestOptions = { ...body, ...axiosRequestConfig, headers: { rootOrg } }
     request
-      .post(url, bodyWithConfigRequestOptions)
+      .post(`${url}?type=${type}`, bodyWithConfigRequestOptions)
       .on('response', (_response) => {
         // tslint:disable-next-line: no-console
         // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>\n SET COOKIE RESPONSE HEADERS >>\n', response.headers)
@@ -402,7 +513,11 @@ contentApi.post('/setCookie', async (req, res) => {
       })
       .pipe(res)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -416,7 +531,11 @@ contentApi.post('/setImageCookie', async (req, res) => {
     const bodyWithConfigRequestOptions = { ...bodyInJson, ...axiosRequestConfig }
     request.post(url, bodyWithConfigRequestOptions).pipe(res)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -429,7 +548,11 @@ contentApi.post('/getWebModuleManifest', async (req, res) => {
     const response = await axios.get(`${url}`, axiosRequestConfig)
     res.json(response.data)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -441,7 +564,9 @@ contentApi.get('/getWebModuleFiles', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -495,7 +620,9 @@ contentApi.get('/collection/:collectionType/:collectionId', async (req, res) => 
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -511,7 +638,9 @@ contentApi.post('/removeSubset', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -526,13 +655,18 @@ contentApi.post('/hierarchy/update', async (req, res) => {
     const response = await axios.post(
       `${API_END_POINTS.updateHierarchy}?rootOrg=${rootOrg}&org=${org}&wid=${req.header('wid')}`,
       req.body,
-      axiosRequestConfig
+      {
+        ...axiosRequestConfig,
+        timeout: Number(CONSTANTS.KB_TIMEOUT),
+      }
     )
     res.status(response.status).send(response.data)
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -550,13 +684,18 @@ contentApi.post('/kb/:updateType', async (req, res) => {
         'wid'
       )}`,
       req.body,
-      axiosRequestConfig
+      {
+        ...axiosRequestConfig,
+        timeout: Number(CONSTANTS.KB_TIMEOUT),
+      }
     )
     res.status(response.status).send(response.data)
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -570,6 +709,7 @@ contentApi.post('/:contentId', async (req, res) => {
     }
     const { contentId } = req.params
     const additionalFields = req.body.additionalFields
+    const fetchOneLevel = req.body.fetchOneLevel || false
     const hierarchyType = req.query.hierarchyType
     const response = await getContentDetails(
       contentId,
@@ -577,17 +717,17 @@ contentApi.post('/:contentId', async (req, res) => {
       org,
       extractUserIdFromRequest(req),
       hierarchyType,
-      additionalFields
+      additionalFields,
+      fetchOneLevel
     )
-    if (!response.hasAccess) {
-      res.status(401).send()
-      return
-    }
+
     res.json(response)
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -597,7 +737,8 @@ export async function getContentDetails(
   org: string,
   userId: string,
   hierarchyType: string,
-  additionalFields: string[] = []
+  additionalFields: string[] = [],
+  fetchOneLevel = false
 ) {
   const url = API_END_POINTS.hierarchy(contentId)
 
@@ -615,6 +756,7 @@ export async function getContentDetails(
     fields = []
   }
   const requestBody = {
+    fetchOneLevel,
     fields,
     fieldsPassed,
     org,
@@ -631,6 +773,35 @@ export async function getContentDetails(
     return processContent(response.data)
   } else {
     throw new Error('NO_CONTENT')
+  }
+}
+
+export async function getContentMeta(
+  identifier: string[],
+  rootOrg?: string,
+  sourceFields: string[] = []
+) {
+  const url = API_END_POINTS.fetchApi(rootOrg)
+
+  let fields: string[] = []
+
+  fields = [...sourceFields, ...MINIMAL_CONTENT_FIELDS]
+  const requestBody = {
+    filters: {
+      identifier,
+    },
+    sourceFields: fields,
+  }
+  const response = await axios({
+    ...axiosRequestConfig,
+    data: requestBody,
+    method: 'POST',
+    url,
+  })
+  if (Array.isArray(response.data) && response.data.length) {
+    return response.data.map((unitContent) => processContent(unitContent))
+  } else {
+    return []
   }
 }
 
@@ -657,6 +828,37 @@ contentApi.get('/external-access/:id', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      })
+  }
+})
+
+contentApi.post('/:contentId/parent', async (req, res) => {
+  try {
+    const org = req.header('org')
+    const rootOrg = req.header('rootOrg')
+    const uuid = extractUserIdFromRequest(req)
+    if (!org || !rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const contentId = req.params.contentId
+    const response = await axios.post(API_END_POINTS.contentParent(contentId), req.body, {
+      ...axiosRequestConfig,
+      headers: {
+        org,
+        rootOrg,
+        userId: uuid,
+      },
+    })
+    res.send(response.data)
+  } catch (err) {
+    logError('CONTENT PARENT ERR -> ', err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })

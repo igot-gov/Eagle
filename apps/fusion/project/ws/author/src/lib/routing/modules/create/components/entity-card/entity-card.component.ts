@@ -1,9 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { IEntity } from '../../interface/entity'
-import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Router } from '@angular/router'
+import { ICreateEntity } from '@ws/author/src/lib/interface/create-entity'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 
 @Component({
   selector: 'ws-auth-entity-card',
@@ -11,44 +9,32 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
   styleUrls: ['./entity-card.component.scss'],
 })
 export class EntityCardComponent implements OnInit {
-  @Input() entity!: IEntity
+  @Input() entity!: ICreateEntity
   @Input() expanded!: boolean
   @Output() step = new EventEmitter<any>()
+  childEntity: ICreateEntity[] = []
   resourceClicked = false
-  isResource = false
-  movableEntity = false
-  resourceOpened = false
-  notEnabled = false
-  optionsDisabled = true
+  notEnabled = true
 
-  constructor(
-    private accessControl: AccessControlService,
-  ) { }
+  constructor(private authInitService: AuthInitService, private router: Router) {}
 
   ngOnInit() {
-    this.movableEntity = false
+    this.authInitService.creationEntity.forEach(v => {
+      if (v.parent === this.entity.id) {
+        this.childEntity.push(v)
+      }
+    })
     this.resourceClicked = this.expanded
-    this.notEnabled = !this.accessControl.hasRole(this.entity.hasRole)
-    if (['Resource', 'Channel Page', 'Knowledge Board', 'Knowledge Artifact'].indexOf(this.entity.name) > -1) {
-      this.isResource = true
-    } else if (['Program', 'Course', 'Module'].indexOf(this.entity.name) > -1) {
-      this.notEnabled = true
-      this.movableEntity = true
-    }
-path
-      this.notEnabled = true
-      this.movableEntity = true
-      this.isResource = false
-    }
+    this.notEnabled = !this.entity.enabled
   }
 
-  entityClicked(content: IEntity, index: number) {
-    if (content.name === 'Resource') {
+  entityClicked(content: ICreateEntity) {
+    if (content.url) {
+      this.router.navigateByUrl(content.url)
+    } else if (content.name === 'Resource') {
       this.resourceClicked = !this.resourceClicked
     } else if (!this.notEnabled) {
-      if (index <= 1) {
-        this.step.emit(content)
-      }
+      this.step.emit(content)
     }
   }
 }

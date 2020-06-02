@@ -1,22 +1,22 @@
-/*               "Copyright 2020 Infosys Ltd.
-http://http-url
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 const path = require('path')
 var express = require('express')
 var expressStaticGzip = require('express-static-gzip')
 const helmet = require('helmet')
 const timeout = require('connect-timeout')
 const morgan = require('morgan')
-http://http-url
+const httpProxy = require('http-proxy')
 
 const CONSTANTS = {
   PORTAL_PORT: parseInt(process.env.PORTAL_PORT || '3002', 10),
-http://http-url
-http://http-url
+  LA_HOST_PROXY: process.env.LA_HOST_PROXY || 'http://10.177.157.29',
+  WEB_HOST_PROXY: process.env.WEB_HOST_PROXY || 'http://10.177.61.54:3007',
+  FRAME_ANCESTORS:
+    process.env.FRAME_ANCESTORS ||
+    "'self',https://*.infosysapps.com,https://*.infosys.com,https://*.onwingspan.com,https://lab42.idemo-ppc.com",
 }
 
 var app = express()
-http://http-url
+var proxy = httpProxy.createProxyServer({
   timeout: 10000,
 })
 app.use(timeout('100s'))
@@ -35,24 +35,18 @@ app.use(
     noSniff: true,
     contentSecurityPolicy: {
       directives: {
-        frameAncestors: [
-          "'self'",
-http://http-url
-http://http-url
-http://http-url
-        ],
+        frameAncestors: CONSTANTS.FRAME_ANCESTORS.split(','),
       },
     },
-  })
+  }),
 )
 app.use('/LA', proxyCreator(express.Router(), CONSTANTS.LA_HOST_PROXY))
 app.use(morgan('combined'))
 app.use(haltOnTimedOut)
 app.use(
   '/ScormCoursePlayer',
-http://http-url
-);
-
+  proxyCreator(express.Router(), 'http://10.177.61.57/ScormCoursePlayer'),
+)
 
 serveAssets('')
 serveAssets('/ar')
@@ -67,23 +61,23 @@ serveAssets('/ja')
 function serveAssets(hostPath) {
   app.use(
     `${hostPath}/assets`,
-    proxyCreator(express.Router(), CONSTANTS.WEB_HOST_PROXY + '/web-hosted/client-assets/dist')
+    proxyCreator(express.Router(), CONSTANTS.WEB_HOST_PROXY + '/web-hosted/client-assets/dist'),
   )
 }
 
-uiHostCreator('/ar', 'ar');
-uiHostCreator('/de', 'de');
-uiHostCreator('/es', 'es');
-uiHostCreator('/fr', 'fr');
-uiHostCreator('/fr-ca', 'fr-ca');
-uiHostCreator('/nl', 'nl');
-uiHostCreator('/zh-CN', 'zh-CN');
-uiHostCreator('/ja', 'ja');
-uiHostCreator('', 'en');
-app.use(haltOnTimedOut);
+uiHostCreator('/ar', 'ar')
+uiHostCreator('/de', 'de')
+uiHostCreator('/es', 'es')
+uiHostCreator('/fr', 'fr')
+uiHostCreator('/fr-ca', 'fr-ca')
+uiHostCreator('/nl', 'nl')
+uiHostCreator('/zh-CN', 'zh-CN')
+uiHostCreator('/ja', 'ja')
+uiHostCreator('', 'en')
+app.use(haltOnTimedOut)
 
 const port = CONSTANTS.PORTAL_PORT
-app.listen(port, '', err => {
+app.listen(port, '0.0.0.0', err => {
   console.error(err || 'No Error', `Server started at ${port}`)
 })
 
@@ -102,7 +96,7 @@ function uiHostCreator(hostPath, hostFolderName) {
     expressStaticGzip(path.join(__dirname, `www/${hostFolderName}`), {
       enableBrotli: true,
       orderPreference: ['br', 'gz'],
-    })
+    }),
   )
   app.get(`${hostPath}/*`, (req, res) => {
     if (req.url.startsWith('/assets/')) {
@@ -112,7 +106,6 @@ function uiHostCreator(hostPath, hostFolderName) {
     }
   })
 }
-
 
 function haltOnTimedOut(req, _res, next) {
   if (!req.timedout) next()

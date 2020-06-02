@@ -1,16 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { ETrainingType } from './training.model'
+// import { ETrainingType } from './training.model'
 
 export interface ITraining {
   content_feedback_form: string
-  content_feedback_required: string
+  content_feedback_required: boolean
   content_id: string
-  deliveryType: ETrainingType
+  deliveryType: string
   educator: {
-    email: string;
-    name: string;
+    email: string
+    name: string
   }
   eligible: boolean
   end_dt: Date
@@ -19,7 +16,7 @@ export interface ITraining {
   instructor_feedback_required: boolean
   isJIT: boolean
   isVisibility: boolean
-  location: string
+  location: string | null
   offering_id: number
   reason_not_eligible: string
   registered: boolean
@@ -35,8 +32,8 @@ export interface ITrainingSession {
   building: string
   classroom: string
   educator: {
-    email: string;
-    name: string;
+    email: string
+    name: string
   }[]
   end_dt: Date
   end_time: string
@@ -44,6 +41,9 @@ export interface ITrainingSession {
   session_id: number
   start_dt: Date
   start_time: string
+  location?: string | null
+  sublocation?: string | null
+  course_start_dt?: Date | null
 }
 
 export interface ITrainingApiResponse {
@@ -116,8 +116,8 @@ export interface IFeedbackTraining {
   end_dt: Date
   location: string
   educator: {
-    email: string;
-    name: string;
+    email: string
+    name: string
   }
   content_feedback_required: boolean
   instructor_feedback_required: boolean
@@ -162,14 +162,14 @@ export interface IContentWatchlistStatus {
 
 export interface ITrainingFilter {
   external: {
-    fromDate: Date;
-    toDate: Date;
-    location?: string;
+    fromDate: Date
+    toDate: Date
+    location?: string
   }
   internal: {
-    assessmentOnly: boolean;
-    seatsAvailableOnly: boolean;
-    eligibleOnly: boolean;
+    assessmentOnly: boolean
+    seatsAvailableOnly: boolean
+    eligibleOnly: boolean
   }
 }
 

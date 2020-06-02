@@ -1,10 +1,16 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export interface IWSPublicLoginConfig {
   bodyBackgroundImageUrl: string
   footer: ILoginFooterConfig
   topbar: ILoginTopbarConfig
+  isClient: boolean
+  loginButtons?: { [key: string]: string }
+}
+
+export interface IWSPublicLoginConfigSiemens {
+  bodyBackgroundImageUrl: string
+  footer: ILoginFooterConfig
+  displayName: { [key: string]: string }
+  loginButtons?: { [key: string]: string }
   isClient: boolean
 }
 
@@ -12,11 +18,16 @@ export interface ILoginFooterConfig {
   contactUs: boolean
   copyright: boolean
   faq: boolean
-  hasLogo: boolean
-  isVisible: boolean
-  logoUrl: string
+  aboutUs: boolean
+  hasLogo?: boolean
+  mobileApps?: boolean
+  isVisible?: boolean
+  logoUrl?: string
   tnc: boolean
-  descriptiveFooter: ILoginDescriptiveFooterConfig
+  descriptiveInfo?: { [key: string]: string }
+  descriptiveFooter?: ILoginDescriptiveFooterConfig
+  android?: string
+  ios?: string
 }
 
 export interface ILoginDescriptiveFooterConfig {

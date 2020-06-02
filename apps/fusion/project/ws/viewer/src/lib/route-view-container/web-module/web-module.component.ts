@@ -1,13 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
-import {
-  NsContent,
-  NsDiscussionForum,
-} from '@ws-widget/collection'
+import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
+import { ConfigurationsService } from '../../../../../../../library/ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'viewer-web-module-container',
@@ -17,6 +12,7 @@ import { ActivatedRoute } from '@angular/router'
 export class WebModuleComponent implements OnInit {
   @Input() isFetchingDataComplete = false
   @Input() isErrorOccured = false
+  @Input() forPreview = false
   @Input() webmoduleData: NsContent.IContent | null = null
   @Input() webmoduleManifest: any
   @Input() discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
@@ -24,16 +20,18 @@ export class WebModuleComponent implements OnInit {
   > | null = null
   @Input() isPreviewMode = false
   isTypeOfCollection = false
-  collectionId: string|null = null
-  constructor(
-    private activatedRoute: ActivatedRoute,
-  ) { }
+  collectionId: string | null = null
+  isRestricted = false
+  constructor(private activatedRoute: ActivatedRoute, private configSvc: ConfigurationsService) { }
 
   ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isRestricted =
+        !this.configSvc.restrictedFeatures.has('disscussionForum')
+    }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
     if (this.isTypeOfCollection) {
       this.collectionId = this.activatedRoute.snapshot.queryParams.collectionId
     }
   }
-
 }

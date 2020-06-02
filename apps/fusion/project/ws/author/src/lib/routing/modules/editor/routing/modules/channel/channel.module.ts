@@ -1,12 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { PickerContentModule } from '@ws-widget/collection/src/public-api'
+import { PickerContentModule, ContentPickerV2Module } from '@ws-widget/collection/src/public-api'
 import { WidgetResolverModule } from '@ws-widget/resolver'
-import { HorizontalScrollerModule } from '@ws-widget/utils'
+import {
+  HorizontalScrollerModule,
+  DefaultThumbnailModule,
+  PipeDurationTransformModule,
+} from '@ws-widget/utils'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { AuthViewerModule } from '@ws/author/src/lib/modules/viewer/viewer.module'
 import { EditorSharedModule } from '@ws/author/src/lib/routing/modules/editor/shared/shared.module'
@@ -46,7 +47,16 @@ import { TitleComponent } from './components/input/title/title.component'
 import { SelectorResponsiveV2Component } from './components/input/selector-responsive-v2/selector-responsive-v2.component'
 import { GalleryV2Component } from './components/input/gallery-v2/gallery-v2.component'
 import { SearchTemplateComponent } from './components/input/search-template/search-template.component'
+import { ChannelResolverService } from './services/resolver.service'
 import { MediaWrapperComponent } from './components/input/media-wrapper/media-wrapper.component'
+import { IntranetSelectorComponent } from './components/input/intranet-selector/intranet-selector.component'
+import { DraggableModule } from '../../../../../../modules/shared/directives/draggable/draggable.module'
+import { DragNSortComponent } from './components/v2/drag-n-sort/drag-n-sort.component'
+import { ChannelHubComponent } from './components/input/channel-hub/channel-hub.component'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MomentDateAdapter } from '@angular/material-moment-adapter'
+import { MatInputModule } from '@angular/material'
+
 @NgModule({
   declarations: [
     ChannelComponent,
@@ -85,6 +95,9 @@ import { MediaWrapperComponent } from './components/input/media-wrapper/media-wr
     GalleryV2Component,
     SearchTemplateComponent,
     MediaWrapperComponent,
+    IntranetSelectorComponent,
+    DragNSortComponent,
+    ChannelHubComponent,
   ],
   imports: [
     CommonModule,
@@ -96,7 +109,14 @@ import { MediaWrapperComponent } from './components/input/media-wrapper/media-wr
     HorizontalScrollerModule,
     DragDropModule,
     PickerContentModule,
+    DraggableModule,
+    DefaultThumbnailModule,
+    PipeDurationTransformModule,
+    ContentPickerV2Module,
+    MatDatepickerModule,
+    MatInputModule,
   ],
+  providers: [ChannelResolverService, MomentDateAdapter],
   entryComponents: [InputComponent, InputV2Component],
 })
-export class ChannelModule { }
+export class ChannelModule {}

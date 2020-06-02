@@ -1,8 +1,5 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="px-2">
-  <ws-widget-mark-as-complete [content]="content"></ws-widget-mark-as-complete>
+<div class="md:px-2">
+  <ws-widget-mark-as-complete [forPreview]="forPreview" [content]="content"></ws-widget-mark-as-complete>
   <ng-container *ngIf="content && isDownloadable">
     <mat-card class="mb-4">
       <button mat-button color="primary" (click)="download()">
@@ -13,8 +10,8 @@
   </ng-container>
   <mat-card class="ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
     <h2 i18n>At a glance</h2>
-    <div class="info-item" *ngIf="content?.displayContentType">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Format</h3>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.displayContentType?.enabled && content?.displayContentType">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.displayContentType?.displayName}}</h3>
       <ws-widget-display-content-type *ngIf="content?.contentType !== contentTypes.RESOURCE"
         class="ws-mat-accent-text width-expand mat-body-strong" [displayContentType]="content?.displayContentType">
       </ws-widget-display-content-type>
@@ -23,48 +20,50 @@
         {{ content?.resourceType }}
       </div>
     </div>
-    <mat-divider *ngIf="content?.displayContentType"></mat-divider>
-    <div class="info-item" *ngIf="content?.complexityLevel">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Level</h3>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.displayContentType?.enabled && content?.displayContentType"></mat-divider>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.complexityLevel?.enabled && content?.complexityLevel">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.complexityLevel?.displayName}}</h3>
       <h3 class="ws-mat-accent-text width-expand">
         {{ content?.complexityLevel }}
       </h3>
     </div>
-    <mat-divider *ngIf="content?.complexityLevel"></mat-divider>
-    <div class="info-item" *ngIf="content?.duration">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Duration</h3>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.complexityLevel?.enabled && content?.complexityLevel"></mat-divider>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.duration?.enabled && content?.duration">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.duration?.displayName}}</h3>
       <h3 class="ws-mat-accent-text width-expand">
         {{ content?.duration | pipeDurationTransform: 'hms' }}
       </h3>
     </div>
-    <mat-divider *ngIf="content?.duration"></mat-divider>
-    <div class="info-item">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Cost</h3>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.duration?.enabled && content?.duration"></mat-divider>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.cost?.enabled">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.cost?.displayName}}</h3>
       <h3 *ngIf="content?.exclusiveContent" class="ws-mat-accent-text width-expand">Paid Content</h3>
       <h3 *ngIf="!content?.exclusiveContent" class="ws-mat-accent-text width-expand">Free</h3>
     </div>
-    <mat-divider></mat-divider>
-    <div class="info-item" *ngIf="content?.viewCount">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Views</h3>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.cost?.enabled"></mat-divider>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.viewCount?.enabled && content?.viewCount && configSvc?.rootOrg">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.viewCount?.displayName}}</h3>
       <h3 class="ws-mat-accent-text width-expand">
-        {{ content?.viewCount | pipeCountTransform }}
+        {{ content?.viewCount[configSvc.rootOrg] | pipeCountTransform }}
         <ng-container *ngIf="content?.uniqueLearners">
           ({{ content?.uniqueLearners | pipeCountTransform }}
           <ng-container i18n>Unique)</ng-container>
         </ng-container>
       </h3>
     </div>
-    <mat-divider *ngIf="content?.viewCount"></mat-divider>
-    <div class="info-item" *ngIf="content?.sourceShortName">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Source</h3>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.viewCount?.enabled && content?.viewCount && configSvc?.rootOrg">
+    </mat-divider>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.sourceShortName?.enabled && content?.sourceShortName">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.sourceShortName?.displayName}}</h3>
       <h3 class="ws-mat-accent-text width-expand">
         {{ content?.sourceShortName }}
       </h3>
     </div>
-    <mat-divider *ngIf="content?.sourceShortName"></mat-divider>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.sourceShortName?.enabled && content?.sourceShortName"></mat-divider>
     <!-- Structure -->
-    <div class="info-item" *ngIf="hasTocStructure && content?.children?.length">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Structure</h3>
+    <div class="info-item"
+      *ngIf="tocConfig?.atAGlance?.structure?.enabled && hasTocStructure && content?.children?.length">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.structure?.displayName}}</h3>
       <div class="ws-mat-accent-text width-expand">
         <h3 *ngIf="tocStructure?.course > 0">
           <ng-container>{{ tocStructure?.course }}</ng-container>
@@ -130,67 +129,75 @@
         </h3>
       </div>
     </div>
-    <mat-divider *ngIf="hasTocStructure && content?.children?.length"></mat-divider>
-    <div class="info-item" *ngIf="content?.lastUpdatedOn">
-      <h3 class="item-heading ws-mat-primary-text" i18n>Updated</h3>
+    <mat-divider *ngIf="tocConfig?.atAGlance?.structure?.enabled && hasTocStructure && content?.children?.length">
+    </mat-divider>
+    <div class="info-item" *ngIf="tocConfig?.atAGlance?.lastUpdatedOn?.enabled && content?.lastUpdatedOn">
+      <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.lastUpdatedOn?.displayName}}</h3>
       <h3 class="ws-mat-accent-text width-expand">
         {{ content?.lastUpdatedOn | date }}
       </h3>
     </div>
     <ng-container *ngIf="showMoreGlance">
-      <mat-divider *ngIf="content?.lastUpdatedOn"></mat-divider>
-      <div class="info-item" *ngIf="content?.expiryDate">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Expires On</h3>
+      <mat-divider *ngIf="tocConfig?.atAGlance?.lastUpdatedOn?.enabled && content?.lastUpdatedOn"></mat-divider>
+      <div class="info-item"
+        *ngIf="tocConfig?.atAGlance?.expiryDate?.enabled && content?.expiryDate && content?.expiryDate?.startsWith('20')">
+        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.expiryDate?.displayName}}</h3>
         <h3 class="ws-mat-accent-text width-expand">
           {{ content?.expiryDate | date }}
         </h3>
       </div>
-      <mat-divider *ngIf="content?.expiryDate"></mat-divider>
-      <div class="info-item" *ngIf="content?.learningMode">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Mode</h3>
+      <mat-divider
+        *ngIf="tocConfig?.atAGlance?.expiryDate?.enabled && content?.expiryDate && content?.expiryDate?.startsWith('20')">
+      </mat-divider>
+      <div class="info-item" *ngIf="tocConfig?.atAGlance?.learningMode?.enabled && content?.learningMode">
+        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.learningMode?.displayName}}</h3>
         <h3 class="ws-mat-accent-text width-expand">
           {{ content?.learningMode }}
         </h3>
       </div>
-      <mat-divider *ngIf="content?.learningMode"></mat-divider>
-      <div class="info-item" *ngIf="content?.region?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Region</h3>
+      <mat-divider *ngIf="tocConfig?.atAGlance?.learningMode?.enabled && content?.learningMode"></mat-divider>
+      <div class="info-item" *ngIf="tocConfig?.atAGlance?.region?.enabled && content?.region?.length">
+        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.region?.displayName}}</h3>
         <h3 class="ws-mat-accent-text width-expand">
           {{ content?.region }}
         </h3>
       </div>
-      <mat-divider *ngIf="content?.region?.length"></mat-divider>
-      <div class="info-item" *ngIf="content?.locale">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Language</h3>
+      <mat-divider *ngIf="tocConfig?.atAGlance?.region?.enabled && content?.region?.length"></mat-divider>
+      <div class="info-item" *ngIf="tocConfig?.atAGlance?.locale?.enabled && content?.locale">
+        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.locale?.displayName}}</h3>
         <h3 class="ws-mat-accent-text width-expand">
           {{ content?.locale | uppercase }}
         </h3>
       </div>
-      <mat-divider *ngIf="content?.locale"></mat-divider>
-      <div class="info-item" *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Available in</h3>
+      <mat-divider *ngIf="tocConfig?.atAGlance?.locale?.enabled && content?.locale"></mat-divider>
+      <div class="info-item"
+        *ngIf="tocConfig?.atAGlance?.hasTranslations?.enabled && (content?.hasTranslations?.length || content?.isTranslationOf?.length)">
+        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.hasTranslations?.displayName}}</h3>
         <h3 class="ws-mat-accent-text width-expand">
           <span class="cursor-pointer" (click)="goToContent(trans?.identifier)"
-            *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{trans.locale | uppercase}}
+            *ngFor="let trans of content?.hasTranslations || content?.isTranslationOf">{{ trans.locale | uppercase }}
           </span>
         </h3>
       </div>
-      <mat-divider *ngIf="content?.hasTranslations?.length || content?.isTranslationOf?.length"></mat-divider>
-      <div class="info-item" *ngIf="content?.keywords?.length">
-        <h3 class="item-heading ws-mat-primary-text" i18n>Keywords</h3>
+      <mat-divider
+        *ngIf="tocConfig?.atAGlance?.hasTranslations?.enabled && (content?.hasTranslations?.length || content?.isTranslationOf?.length)">
+      </mat-divider>
+      <div class="info-item" *ngIf="tocConfig?.atAGlance?.keywords?.enabled && content?.keywords?.length">
+        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.keywords?.displayName}}</h3>
         <h3 class="ws-mat-accent-text width-expand">
           {{ content?.keywords?.join(', ') }}
         </h3>
       </div>
-      <mat-divider *ngIf="content?.keywords?.length"></mat-divider>
+      <mat-divider *ngIf="tocConfig?.atAGlance?.keywords?.enabled && content?.keywords?.length"></mat-divider>
       <ng-container *ngFor="let item of content?.collections">
-        <div class="info-item" *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
-          <h3 class="item-heading ws-mat-primary-text" i18n>Curated in KB</h3>
+        <div class="info-item"
+          *ngIf="tocConfig?.atAGlance?.curatedInKB?.enabled && item.contentType === 'Knowledge Board' && item.status === 'Live'">
+          <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.curatedInKB?.displayName}}</h3>
           <mat-chip-list>
             <mat-chip>
               <h3 class="ws-mat-accent-text width-expand">
                 <ng-container *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
-                  <a [href]="'/app/toc/'+item.identifier+'/overview'"> {{item.name}} </a>
+                  <a [href]="'/app/toc/' + item.identifier + '/overview'"> {{ item.name }} </a>
                 </ng-container>
               </h3>
             </mat-chip>
@@ -201,27 +208,27 @@
     </ng-container>
     <div class="text-right mt-2">
       <button mat-button (click)="showMoreGlance = !showMoreGlance">
-        <mat-icon>{{!showMoreGlance ? 'arrow_drop_down': 'arrow_drop_up'}}</mat-icon>
+        <mat-icon>{{ !showMoreGlance ? 'arrow_drop_down' : 'arrow_drop_up' }}</mat-icon>
         <ng-container i18n *ngIf="!showMoreGlance">Show More</ng-container>
         <ng-container i18n *ngIf="showMoreGlance">Show Less</ng-container>
       </button>
     </div>
   </mat-card>
   <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier" [contentId]="content?.identifier"
-    [isDisabled]="isPreviewMode">
+    [isDisabled]="isPreviewMode" [forPreview]="forPreview">
   </ws-widget-user-content-rating>
   <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorDetails?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
-          authors: content?.creatorDetails,
-          title: 'AUTHOR'
-        }">
+        authors: content?.creatorDetails,
+        title: 'AUTHOR'
+      }">
     </ng-container>
   </div>
   <div class="hidden sm:block margin-bottom-m" *ngIf="content?.creatorContacts?.length">
     <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
-          authors: content?.creatorContacts,
-          title: 'CONTACT'
-        }">
+        authors: content?.creatorContacts,
+        title: 'CONTACT'
+      }">
     </ng-container>
   </div>
 </div>

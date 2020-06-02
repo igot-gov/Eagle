@@ -1,0 +1,51 @@
+<p *ngIf="!isClient" class="text-right margin-right-xs mat-caption">* This feature is a limited release for select
+  skills and roles</p>
+<nav mat-align-tabs="center" mat-stretch-tabs mat-tab-nav-bar>
+  <a mat-tab-link *ngIf="enabledTabs?.projectEndorsements?.enabled" [routerLink]="'/app/profile/skills/my-skills'"
+    routerLinkActive #rlaApproveEndorsement="routerLinkActive" [active]="rlaApproveEndorsement.isActive">
+    <mat-icon>
+      school
+    </mat-icon>
+    <span class="margin-left-m mat-body-strong" i18n>
+      My Skills
+    </span>
+  </a>
+  <!-- <a mat-tab-link *ngIf="enabledTabs?.roles?.enabled && !isClient" [routerLink]="'/app/profile/skills/roles'"
+    routerLinkActive #rlaRole="routerLinkActive" [active]="rlaRole.isActive">
+    <mat-icon>
+      group_add
+    </mat-icon>
+    <span class="margin-left-m mat-body-strong" i18n>
+      My Roles
+    </span>
+  </a> -->
+  <a mat-tab-link *ngIf="enabledTabs?.approveEndorsements?.enabled && isClient"
+    [routerLink]="'/app/profile/skills/approve-endorsement'" routerLinkActive #rlaEndorsement="routerLinkActive"
+    [active]="rlaEndorsement.isActive">
+    <mat-icon>
+      assignment
+    </mat-icon>
+    <span class="margin-left-m mat-body-strong" i18n>
+      My Endorsements
+    </span>
+  </a>
+  <a mat-tab-link *ngIf="enabledTabs?.allSkills?.enabled" [routerLink]="'/app/profile/skills/all-skills'"
+    routerLinkActive #rlaAllSkills="routerLinkActive" [active]="rlaAllSkills.isActive">
+    <mat-icon>
+      school
+    </mat-icon>
+    <span class="margin-left-m mat-body-strong" i18n>
+      All Skills
+    </span>
+  </a>
+  <!-- <a mat-tab-link *ngIf="enabledTabs?.skills?.enabled" [routerLink]="'/app/profile/skills/skills'" routerLinkActive
+        #rlaSkill="routerLinkActive" [active]="rlaSkill.isActive">
+        <mat-icon>
+          school
+        </mat-icon>
+        <span class="margin-left-m mat-body-strong" i18n>
+          Pending with You
+        </span>
+      </a> -->
+</nav>
+<router-outlet></router-outlet>

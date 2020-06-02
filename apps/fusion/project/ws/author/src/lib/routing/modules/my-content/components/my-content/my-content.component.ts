@@ -1,27 +1,28 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { LoaderService } from '@ws/author/src/lib/services/loader.service'
-import { MyContentService } from '../../services/my-content.service'
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core'
+import { AuthExpiryDateConfirmComponent } from '@ws/author/src/lib/modules/shared/components/auth-expiry-date-confirm/auth-expiry-date-confirm.component'
 import { FlatTreeControl } from '@angular/cdk/tree'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { MatDialog, MatSnackBar, MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
+import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
+import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import {
   IAuthoringPagination,
-  IMenuFlatNode,
   IFilterMenuNode,
+  IMenuFlatNode,
 } from '@ws/author/src/lib/interface/authored'
-import { MatTreeFlattener, MatTreeFlatDataSource, MatSnackBar, MatDialog } from '@angular/material'
-import { Subscription } from 'rxjs'
-import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
-import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
-import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { CommentsDialogComponent } from '@ws/author/src/lib/modules/shared/components/comments-dialog/comments-dialog.component'
-import { FormGroup } from '@angular/forms'
-import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
+import { ErrorParserComponent } from '@ws/author/src/lib/modules/shared/components/error-parser/error-parser.component'
+import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
+import { LoaderService } from '@ws/author/src/lib/services/loader.service'
+import { Subscription } from 'rxjs'
+import { MyContentService } from '../../services/my-content.service'
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'ws-auth-my-content',
@@ -30,11 +31,12 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 })
 export class MyContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
+  newDesign = false
   filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
   filterMenuTreeFlattener: any
   public cardContent!: any[]
   public filters: any[] = []
-  public status = 'Draft'
+  public status = 'draft'
   public fetchError = false
   contentType: string[] = []
   complexityLevel: string[] = []
@@ -50,39 +52,12 @@ export class MyContentComponent implements OnInit, OnDestroy {
   queryFilter = ''
   ordinals: any
   isAdmin = false
+  currentAction: 'author' | 'reviewer' | 'expiry' | 'deleted' = 'author'
   @ViewChild('searchInput', { static: false }) searchInputElem: ElementRef<any> = {} as ElementRef<
     any
   >
 
-  public filterMenuItems: any = [
-    // {
-    //   name: 'Content category',
-    //   type: 'contentType',
-    //   children: [
-    //     { name: 'Learning path', type: 'contentType', checked: false },
-    //     { name: 'Course', type: 'contentType', checked: false },
-    //     { name: 'Module', type: 'contentType', checked: false },
-    //     { name: 'Resource', type: 'contentType', checked: false },
-    //   ],
-    // },
-    // {
-    //   name: 'Level',
-    //   type: 'complexityLevel',
-    //   children: [
-    //     { name: 'Beginner', type: 'complexityLevel', checked: false },
-    //     { name: 'Intermediate', type: 'complexityLevel', checked: false },
-    //     { name: 'Advanced', type: 'complexityLevel', checked: false },
-    //   ],
-    // },
-    // {
-    //   name: 'Source',
-    //   type: 'sourceName',
-    //   children: [
-path
-    //     { name: 'IAP', type: 'sourceName', checked: false },
-    //   ],
-    // },
-  ]
+  public filterMenuItems: any = []
 
   dataSource: any
   hasChild = (_: number, node: IMenuFlatNode) => node.expandable
@@ -106,6 +81,7 @@ path
     private accessService: AccessControlService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private authInitService: AuthInitService,
   ) {
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
@@ -122,9 +98,6 @@ path
       this.filterMenuTreeFlattener,
     )
     this.dataSource.data = this.filterMenuItems
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.status = params.status
-    })
     this.userId = this.accessService.userId
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
   }
@@ -133,6 +106,7 @@ path
     if (this.routerSubscription.unsubscribe) {
       this.routerSubscription.unsubscribe()
     }
+    this.loadService.changeLoad.next(false)
   }
 
   ngOnInit() {
@@ -140,23 +114,27 @@ path
       offset: 0,
       limit: 24,
     }
-    this.fetchContent(false)
-    this.routerSubscription = this.activatedRoute.data.subscribe(data => {
-      this.ordinals = data.ordinals
-      this.allLanguages = data.ordinals.subTitles || []
+    this.newDesign = this.accessService.authoringConfig.newDesign
+    this.ordinals = this.authInitService.ordinals
+    this.allLanguages = this.authInitService.ordinals.subTitles || []
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.status = params.status
+      this.setAction()
+      this.fetchContent(false)
     })
   }
 
-  fetchStatus(status: string) {
-    switch (status) {
+  fetchStatus() {
+    switch (this.status) {
       case 'draft':
       case 'rejected':
         return ['Draft']
       case 'inreview':
-        return ['InReview', 'Reviewed']
+        return ['InReview', 'Reviewed', 'QualityReview']
       case 'review':
         return ['InReview']
       case 'published':
+      case 'expiry':
         return ['Live']
       case 'publish':
         return ['Reviewed']
@@ -164,23 +142,45 @@ path
         return ['Processing']
       case 'unpublished':
         return ['Unpublished']
+      case 'deleted':
+        return ['Deleted']
     }
     return ['Draft']
   }
 
-  fetchContent(loadMoreFlag: boolean, changeFilter = true) {
-    const contentStatus = this.fetchStatus(this.status)
-    const searchLocale = []
-    if (this.searchLanguage) {
-      searchLocale.push(this.searchLanguage)
+  setAction() {
+    switch (this.status) {
+      case 'draft':
+      case 'rejected':
+      case 'inreview':
+      case 'review':
+      case 'published':
+      case 'publish':
+      case 'processing':
+      case 'unpublished':
+      case 'deleted':
+        this.currentAction = 'author'
+        break
+      case 'expiry':
+        this.currentAction = 'expiry'
+        break
     }
+  }
+
+  fetchContent(loadMoreFlag: boolean, changeFilter = true) {
+    const searchV6Data = this.myContSvc.getSearchBody(
+      this.status,
+      this.searchLanguage ? [this.searchLanguage] : [],
+      loadMoreFlag ? this.pagination.offset : 0,
+      this.queryFilter,
+      this.isAdmin,
+    )
     const requestData = {
       request: {
-        locale: searchLocale,
+        locale: this.searchLanguage ? [this.searchLanguage] : [],
         query: this.queryFilter,
         filters: {
-          status: contentStatus,
-          isRejected: <boolean[]>[],
+          status: this.fetchStatus(),
           creatorContacts: <string[]>[],
           trackContacts: <string[]>[],
           publisherDetails: <string[]>[],
@@ -196,17 +196,28 @@ path
     }
     if (this.finalFilters.length) {
       this.finalFilters.forEach((v: any) => {
+        searchV6Data.filters.forEach((filter: any) => {
+          filter.andFilters[0] = {
+            ...filter.andFilters[0],
+            [v.key]: v.value,
+          }
+        })
         requestData.request.filters = { ...requestData.request.filters, [v.key]: v.value }
       })
     }
     if (this.queryFilter) {
       delete requestData.request.sort
     }
-    if (this.status === 'rejected') {
-      requestData.request.filters.isRejected.push(true)
-    }
     if (
-      ['draft', 'rejected', 'inreview', 'published', 'processing'].indexOf(this.status) > -1 &&
+      [
+        'draft',
+        'rejected',
+        'inreview',
+        'published',
+        'unpublished',
+        'processing',
+        'deleted',
+      ].indexOf(this.status) > -1 &&
       !this.isAdmin
     ) {
       requestData.request.filters.creatorContacts.push(this.userId)
@@ -217,21 +228,40 @@ path
     if (this.status === 'publish' && !this.isAdmin) {
       requestData.request.filters.publisherDetails.push(this.userId)
     }
+
     this.loadService.changeLoad.next(true)
-    this.myContSvc.fetchContent(requestData).subscribe(
+    const observable =
+      this.status === 'expiry' || this.newDesign
+        ? this.myContSvc.fetchFromSearchV6(searchV6Data, this.isAdmin).pipe(
+            map((v: any) => {
+              return {
+                result: {
+                  response: v,
+                },
+              }
+            }),
+          )
+        : this.myContSvc.fetchContent(requestData)
+    this.loadService.changeLoad.next(true)
+    observable.subscribe(
       data => {
         this.loadService.changeLoad.next(false)
         if (changeFilter) {
-          this.filterMenuItems = data ? data.result.response.filters : this.filterMenuItems
+          this.filterMenuItems =
+            data && data.result && data.result.response && data.result.response.filters
+              ? data.result.response.filters
+              : this.filterMenuItems
           this.dataSource.data = this.filterMenuItems
         }
         this.cardContent =
-          (loadMoreFlag && !this.queryFilter
-            ? (this.cardContent || []).concat(data ? data.result.response.result : data)
-            : data
-              ? data.result.response.result
-              : data) || []
-        this.totalContent = data ? data.result.response.totalHits : 0
+          loadMoreFlag && !this.queryFilter
+            ? (this.cardContent || []).concat(
+                data && data.result && data.result.response ? data.result.response.result : [],
+              )
+            : data && data.result.response
+            ? data.result.response.result
+            : []
+        this.totalContent = data && data.result.response ? data.result.response.totalHits : 0
         this.showLoadMore =
           this.pagination.offset * this.pagination.limit + this.pagination.limit < this.totalContent
             ? true
@@ -289,7 +319,45 @@ path
 
   deleteContent(request: NSContent.IContentMeta) {
     this.loadService.changeLoad.next(true)
-    this.myContSvc.deleteContent(request.identifier, request.contentType === 'Knowledge Board').subscribe(
+    this.myContSvc
+      .deleteContent(request.identifier, request.contentType === 'Knowledge Board')
+      .subscribe(
+        () => {
+          this.loadService.changeLoad.next(false)
+          this.snackBar.openFromComponent(NotificationComponent, {
+            data: {
+              type: Notify.SUCCESS,
+            },
+            duration: NOTIFICATION_TIME * 1000,
+          })
+          this.cardContent = (this.cardContent || []).filter(
+            v => v.identifier !== request.identifier,
+          )
+        },
+        error => {
+          if (error.status === 409) {
+            this.dialog.open(ErrorParserComponent, {
+              width: '80vw',
+              height: '90vh',
+              data: {
+                errorFromBackendData: error.error,
+              },
+            })
+          }
+          this.loadService.changeLoad.next(false)
+          this.snackBar.openFromComponent(NotificationComponent, {
+            data: {
+              type: Notify.CONTENT_FAIL,
+            },
+            duration: NOTIFICATION_TIME * 1000,
+          })
+        },
+      )
+  }
+
+  restoreContent(request: NSContent.IContentMeta) {
+    this.loadService.changeLoad.next(true)
+    this.myContSvc.restoreContent(request.identifier).subscribe(
       () => {
         this.loadService.changeLoad.next(false)
         this.snackBar.openFromComponent(NotificationComponent, {
@@ -300,7 +368,16 @@ path
         })
         this.cardContent = (this.cardContent || []).filter(v => v.identifier !== request.identifier)
       },
-      () => {
+      error => {
+        if (error.status === 409) {
+          this.dialog.open(ErrorParserComponent, {
+            width: '80vw',
+            height: '90vh',
+            data: {
+              errorFromBackendData: error.error,
+            },
+          })
+        }
         this.loadService.changeLoad.next(false)
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
@@ -325,7 +402,16 @@ path
         })
         this.router.navigateByUrl(`/author/editor/${id}`)
       },
-      () => {
+      error => {
+        if (error.status === 409) {
+          this.dialog.open(ErrorParserComponent, {
+            width: '750px',
+            height: '450px',
+            data: {
+              errorFromBackendData: error.error,
+            },
+          })
+        }
         this.loadService.changeLoad.next(false)
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
@@ -356,6 +442,8 @@ path
     let message = ''
     if (content.type === 'delete') {
       message = 'delete'
+    } else if (content.type === 'restoreDeleted') {
+      message = 'restoreDeleted'
     } else if (content.type === 'unpublish') {
       message = 'unpublish'
     } else if (content.type === 'moveToDraft' || content.type === 'moveToInReview') {
@@ -369,8 +457,8 @@ path
       return
     }
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '500px',
-      height: '175px',
+      width: '600px',
+      height: '200px',
       data: message,
     })
 
@@ -378,8 +466,12 @@ path
       if (confirm) {
         if (content.type === 'delete') {
           this.deleteContent(content.data)
-        } else if (content.type === 'unpublish' ||
-          (content.type === 'moveToDraft' && content.data.status === 'Unpublished')) {
+        } else if (content.type === 'restoreDeleted') {
+          this.restoreContent(content.data)
+        } else if (
+          content.type === 'unpublish' ||
+          (content.type === 'moveToDraft' && content.data.status === 'Unpublished')
+        ) {
           this.unPublishOrDraft(content.data)
         } else {
           this.forwardBackward(content)
@@ -401,7 +493,16 @@ path
         })
         this.cardContent = (this.cardContent || []).filter(v => v.identifier !== request.identifier)
       },
-      (_ex: any) => {
+      error => {
+        if (error.status === 409) {
+          this.dialog.open(ErrorParserComponent, {
+            width: '750px',
+            height: '450px',
+            data: {
+              errorFromBackendData: error.error,
+            },
+          })
+        }
         this.loadService.changeLoad.next(false)
         this.snackBar.openFromComponent(NotificationComponent, {
           data: {
@@ -438,12 +539,12 @@ path
           operationValue = -1
           break
       }
-      const body: NSApiRequest.IForwadBackwardActionGeneral = {
+      const body: NSApiRequest.IForwardBackwardActionGeneral = {
         comment: commentsForm.controls.comments.value,
         operation: operationValue,
       }
       this.loadService.changeLoad.next(true)
-      this.myContSvc.forwardBackward(body, content.data.identifier).subscribe(
+      this.myContSvc.forwardBackward(body, content.data.identifier, content.data.status).subscribe(
         () => {
           this.loadService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
@@ -456,7 +557,16 @@ path
             v => v.identifier !== content.data.identifier,
           )
         },
-        () => {
+        error => {
+          if (error.status === 409) {
+            this.dialog.open(ErrorParserComponent, {
+              width: '80vw',
+              height: '90vh',
+              data: {
+                errorFromBackendData: error.error,
+              },
+            })
+          }
           this.loadService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -469,29 +579,46 @@ path
     }
   }
 
-  action(event: any) {
+  action(event: { data: NSContent.IContentMeta; type: string }) {
     switch (event.type) {
       case 'create':
         this.createContent(event.data)
         break
-
-      // case 'comments':
-      //   this.deleteContent(event.data)
-      //   break
 
       case 'review':
       case 'publish':
       case 'edit':
         this.router.navigateByUrl(`/author/editor/${event.data.identifier}`)
         break
-
+      case 'remove':
+        this.cardContent = (this.cardContent || []).filter(
+          v => v.identifier !== event.data.identifier,
+        )
+        break
       case 'moveToInReview':
       case 'moveToDraft':
       case 'delete':
       case 'unpublish':
+      case 'restoreDeleted':
         this.confirmAction(event)
         break
+      case 'expiryExtend':
+        this.actionOnExpiry(event.data)
     }
+  }
+
+  actionOnExpiry(content: NSContent.IContentMeta) {
+    const dialogRef = this.dialog.open(AuthExpiryDateConfirmComponent, {
+      width: '750px',
+      height: '300px',
+      data: content,
+    })
+
+    dialogRef.afterClosed().subscribe((userAction?: { isExtend: boolean; expiryDate?: string }) => {
+      if (userAction) {
+        this.cardContent = (this.cardContent || []).filter(v => v.identifier !== content.identifier)
+      }
+    })
   }
 
   setCurrentLanguage(lang: string) {

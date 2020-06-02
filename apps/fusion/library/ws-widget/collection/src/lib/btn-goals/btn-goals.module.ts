@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
@@ -19,9 +16,10 @@ import { BtnGoalsDialogComponent } from './btn-goals-dialog/btn-goals-dialog.com
 import { BtnGoalsSelectionComponent } from './btn-goals-selection/btn-goals-selection.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
+import { BtnGoalsErrorComponent } from './btn-goals-error/btn-goals-error.component'
 
 @NgModule({
-  declarations: [BtnGoalsComponent, BtnGoalsDialogComponent, BtnGoalsSelectionComponent],
+  declarations: [BtnGoalsComponent, BtnGoalsDialogComponent, BtnGoalsSelectionComponent, BtnGoalsErrorComponent],
   imports: [
     FormsModule,
     RouterModule,
@@ -37,6 +35,6 @@ import { RouterModule } from '@angular/router'
     MatDialogModule,
   ],
   exports: [BtnGoalsComponent],
-  entryComponents: [BtnGoalsComponent, BtnGoalsDialogComponent],
+  entryComponents: [BtnGoalsComponent, BtnGoalsDialogComponent, BtnGoalsErrorComponent],
 })
-export class BtnGoalsModule {}
+export class BtnGoalsModule { }

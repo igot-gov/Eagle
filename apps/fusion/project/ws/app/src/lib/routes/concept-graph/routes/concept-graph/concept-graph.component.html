@@ -1,21 +1,20 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<mat-toolbar role="navigation" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
+  <button i18n-aria-label aria-label="Toggle Concept Graph Info" type="button" mat-icon-button
+    (click)="sideNavBarOpened = !sideNavBarOpened">
     <mat-icon>menu</mat-icon>
   </button>
   <span i18n="page title: concept graph" class="margin-left-xs">Concept Graph</span>
 </mat-toolbar>
-<mat-sidenav-container *ngIf="!graphData.noId" autosize>
+<mat-sidenav-container role="main" *ngIf="!graphData.noId" autosize>
   <mat-sidenav class="sidenav mat-drawer mat-sidenav text-center" [mode]="isLtMedium ? 'over' : 'side'"
     [opened]="sideNavBarOpened">
-    <h2>{{ graphData.nodeDetails.fetchedFor }}</h2>
-      <ng-container *ngIf="graphData.nodeDetails.fetching; else loader">
-        <ng-container *ngIf="!noResultFound">
-          <p>Concept Graph is based on following content:</p>
-          <mat-divider></mat-divider>
+    <h1>{{ graphData.nodeDetails.fetchedFor }}</h1>
+    <ng-container *ngIf="graphData.nodeDetails.fetching; else loader">
+      <ng-container *ngIf="!noResultFound">
+        <p>Concept Graph is based on following content:</p>
+        <mat-divider></mat-divider>
+        <div role="menu">
           <button *ngIf="graphData.nodeDetails.program > 0" (click)="[backToSearch(searchTab.proName)]" mat-menu-item
             class="flex flex-between">
             <span i18n="programs in concept graph">Programs</span>
@@ -31,12 +30,13 @@
             <span i18n="Modules in concept graph">Modules</span>
             <span class="margin-left-s">{{ graphData.nodeDetails.module }}</span>
           </button>
-          <button *ngIf="graphData.nodeDetails.resource > 0" (click)="[backToSearch(searchTab.resourceName)]" mat-menu-item
-            class="flex flex-between">
+          <button *ngIf="graphData.nodeDetails.resource > 0" (click)="[backToSearch(searchTab.resourceName)]"
+            mat-menu-item class="flex flex-between">
             <span i18n="Resources in concept graph">Resources</span>
             <span class="margin-left-s">{{ graphData.nodeDetails.resource }}</span>
           </button>
-        </ng-container>
+        </div>
+      </ng-container>
     </ng-container>
     <mat-divider></mat-divider>
     <h2 class="no-margin ws-mat-primary-text">Instructions:</h2>
@@ -47,7 +47,7 @@
     </mat-list>
 
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content tabindex="0">
     <h2 class="margin-top-m h2-title flex flex-center" *ngIf="graphData.loader && !graphData.noId">
       <!-- Loading... -->
       <mat-spinner></mat-spinner>

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { ILeadersData } from '../../models/navigator.model'
@@ -24,7 +21,7 @@ export class LeadersComponent implements OnInit {
           preWidgets: [
             {
               widgetData: {
-                // tslint:disable-next-line: max-line-length
+                  // tslint:disable-next-line: max-line-length
                 html: `<img class="w-full h-full" src="/assets/images/marketing/Pentagon_Accelerate.svg"/>`,
                 containerStyle: {
                   width: '265px',
@@ -46,8 +43,8 @@ export class LeadersComponent implements OnInit {
       noDataWidget: {
         widgetData: {
           html:
-            // tslint:disable-next-line: max-line-length
-            '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
+              // tslint:disable-next-line: max-line-length
+              '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
           containerStyle: {},
         },
         widgetSubType: 'elementHtml',
@@ -76,7 +73,7 @@ export class LeadersComponent implements OnInit {
           preWidgets: [
             {
               widgetData: {
-                // tslint:disable-next-line: max-line-length
+                  // tslint:disable-next-line: max-line-length
                 html: `<img class="w-full h-full" src="/assets/images/marketing/Pentagon_Assure.svg"/>`,
                 containerStyle: { width: '265px' },
               },
@@ -97,8 +94,8 @@ export class LeadersComponent implements OnInit {
       noDataWidget: {
         widgetData: {
           html:
-            // tslint:disable-next-line: max-line-length
-            '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
+              // tslint:disable-next-line: max-line-length
+              '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
           containerStyle: {},
         },
         widgetSubType: 'elementHtml',
@@ -127,7 +124,7 @@ export class LeadersComponent implements OnInit {
           preWidgets: [
             {
               widgetData: {
-                // tslint:disable-next-line: max-line-length
+                  // tslint:disable-next-line: max-line-length
                 html: `<img class="w-full h-full" src="/assets/images/marketing/Pentagon_Experience.svg"/>`,
                 containerStyle: {
                   width: '265px',
@@ -150,8 +147,8 @@ export class LeadersComponent implements OnInit {
       noDataWidget: {
         widgetData: {
           html:
-            // tslint:disable-next-line: max-line-length
-            '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
+              // tslint:disable-next-line: max-line-length
+              '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
           containerStyle: {},
         },
         widgetSubType: 'elementHtml',
@@ -180,7 +177,7 @@ export class LeadersComponent implements OnInit {
           preWidgets: [
             {
               widgetData: {
-                // tslint:disable-next-line: max-line-length
+                  // tslint:disable-next-line: max-line-length
                 html: `<img class="w-full h-full" src="/assets/images/marketing/Pentagon_Insight.svg"/>`,
                 containerStyle: {
                   width: '265px',
@@ -203,8 +200,8 @@ export class LeadersComponent implements OnInit {
       noDataWidget: {
         widgetData: {
           html:
-            // tslint:disable-next-line: max-line-length
-            '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
+              // tslint:disable-next-line: max-line-length
+              '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
           containerStyle: {},
         },
         widgetSubType: 'elementHtml',
@@ -233,7 +230,7 @@ export class LeadersComponent implements OnInit {
           preWidgets: [
             {
               widgetData: {
-                // tslint:disable-next-line: max-line-length
+                  // tslint:disable-next-line: max-line-length
                 html: `<img class="w-full h-full" src="/assets/images/marketing/Pentagon_Innovate.svg"/>`,
                 containerStyle: {
                   width: '265px',
@@ -256,8 +253,8 @@ export class LeadersComponent implements OnInit {
       noDataWidget: {
         widgetData: {
           html:
-            // tslint:disable-next-line: max-line-length
-            '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
+              // tslint:disable-next-line: max-line-length
+              '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
           containerStyle: {},
         },
         widgetSubType: 'elementHtml',
@@ -287,7 +284,7 @@ export class LeadersComponent implements OnInit {
     this.initializeTrack('Accelerate')
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   initializeTrack(trackName: string) {
     for (let i = 0; i < this.leadersData.length; i += 1) {

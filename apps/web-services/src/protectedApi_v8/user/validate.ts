@@ -1,20 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Request, Response, Router } from 'express'
+import { Router } from 'express'
 import {
   extractUserEmailFromRequest,
   extractUserIdFromRequest,
-  extractUserNameFromRequest
+  extractUserNameFromRequest,
 } from '../../utils/requestExtract'
 
 export const validateApi = Router()
 
-validateApi.get('/', async (req: Request, res: Response) => {
+validateApi.get('/', async (req, res) => {
   const body = {
-    email: extractUserEmailFromRequest(req),
-    name: extractUserNameFromRequest(req),
-    userId: extractUserIdFromRequest(req),
+    email: extractUserEmailFromRequest(req) || 'user@demo.com',
+    name: extractUserNameFromRequest(req) || 'demo user',
+    userId: extractUserIdFromRequest(req) || 'user@demo.com',
   }
 
   res.send(body)

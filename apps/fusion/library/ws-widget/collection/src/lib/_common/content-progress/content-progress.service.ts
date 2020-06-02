@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Injectable } from '@angular/core'
-import { ReplaySubject, Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { Observable, ReplaySubject } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 // TODO: move this in some common place
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
@@ -48,5 +45,22 @@ export class ContentProgressService {
   }
   private get shouldFetchProgress(): boolean {
     return Boolean(this.progressHash === null && !this.isFetchingProgress)
+  }
+  fetchProgressHashContentsId(
+    contentIds: any,
+  ): Observable<any> {
+    const url = API_END_POINTS.PROGRESS_HASH
+    return this.http.post<any>(url, contentIds)
+  }
+
+  updateProgressHash(progressdata: any) {
+    if (this.progressHash) {
+      Object.keys(progressdata).forEach((id: string) => {
+        if (this.progressHash && progressdata[id].new_progress) {
+          this.progressHash[id] = progressdata[id].new_progress
+        }
+      })
+      this.progressHashSubject.next(this.progressHash)
+    }
   }
 }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
   OnInit,
@@ -14,6 +11,7 @@ import { TFetchStatus, EventService } from '../../../../../utils/src/public-api'
 import { NsGoal } from '../btn-goals.model'
 import { BtnGoalsService } from '../btn-goals.service'
 import { MatSnackBar, MatListOption } from '@angular/material'
+import { BtnGoalsErrorComponent } from '../btn-goals-error/btn-goals-error.component'
 
 @Component({
   selector: 'ws-widget-btn-goals-selection',
@@ -39,7 +37,7 @@ export class BtnGoalsSelectionComponent implements OnInit {
     private snackBar: MatSnackBar,
     private goalsSvc: BtnGoalsService,
     private eventSvc: EventService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.fetchGoalStatus = 'fetching'
@@ -65,9 +63,16 @@ export class BtnGoalsSelectionComponent implements OnInit {
       this.goalsSvc.addContentToGoal(goalId, this.contentId, NsGoal.EGoalTypes.USER).subscribe(
         () => {
           this.snackBar.open(this.contentAddMessage.nativeElement.value)
-        },
-        _ => {
-          this.snackBar.open(this.contentUpdateError.nativeElement.value)
+        }
+        ,
+        err => {
+          this.snackBar.openFromComponent(BtnGoalsErrorComponent, {
+            data: {
+              type: err.error.errors[0].code,
+            },
+            duration: 10000,
+          })
+
           this.selectedGoals.delete(goalId)
           option.toggle()
         },
@@ -77,9 +82,15 @@ export class BtnGoalsSelectionComponent implements OnInit {
       this.goalsSvc.removeContentFromGoal(goalId, this.contentId, NsGoal.EGoalTypes.USER).subscribe(
         () => {
           this.snackBar.open(this.contentRemoveMessage.nativeElement.value)
-        },
-        _ => {
-          this.snackBar.open(this.contentUpdateError.nativeElement.value)
+        }
+        ,
+        err => {
+          this.snackBar.openFromComponent(BtnGoalsErrorComponent, {
+            data: {
+              type: err.error.errors[0].code,
+            },
+            duration: 10000,
+          })
           this.selectedGoals.add(goalId)
           option.toggle()
         },

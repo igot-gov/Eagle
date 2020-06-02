@@ -1,0 +1,99 @@
+<div *ngIf="!isClient" class="card-container">
+  <mat-card *ngIf="fetchImage">
+    <a (click)="onCardClick(cardData?.role_id)">
+      <img mat-card-image class="card-img mat-lite-background cursor-pointer" role="link" aria-label="skill"
+        i18n-aria-label="skill | Click to view skill Details" [src]="cardData?.image_url"
+        [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="cardData?.role_name" i18n-alt />
+    </a>
+    <div class="truncate flex justify-between">
+      <div class="card-title-link role-card mat-subheading-2">
+        <a (click)="onCardClick(cardId)" class="cursor-pointer" matTooltip="{{ cardData?.role_name }}">
+          <h2 class="text-div margin-remove-bottom">{{ cardData?.role_name }}</h2>
+        </a>
+        <!-- <p *ngIf="cardData?.skill_group" class="font-bold">{{cardData?.skill_group}}</p> -->
+      </div>
+      <!-- <div *ngIf="skillManager || !isClient">
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button *ngIf="skillManager && owner" (click)="onClickRole('edit', cardData?.role_id)" mat-menu-item>
+            <mat-icon>edit</mat-icon>
+            <span>Edit</span>
+          </button>
+          <button (click)="openDialog(cardId)" mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>Delete</span>
+          </button>
+
+          <button *ngIf="skillManager || !isClient" (click)="onClickRole('share', cardData?.role_id)" mat-menu-item>
+            <mat-icon>share</mat-icon>
+            <span i18n>Assign</span>
+          </button>
+          <button *ngIf="skillManager && isClient" (click)=" onClickRole('copy', cardData?.role_id)" mat-menu-item>
+            <mat-icon>file_copy</mat-icon>
+            <span i18n>Copy</span>
+          </button>
+        </mat-menu>
+      </div> -->
+    </div>
+    <ng-container *ngIf="assign">
+      <span i18n>This role is assigned by</span>
+      <span class="margin-left-xs font-bold">{{cardData?.shared_by}}</span>
+    </ng-container>
+  </mat-card>
+</div>
+<div *ngIf="isClient">
+  <mat-card class="card-space-saving-container position-relative ws-mat-primary-border-top-bolder">
+    <mat-card-content>
+      <div class="flex flex-middle flex-wrapped">
+        <a class="cursor-pointer" (click)="onCardClick(cardData?.role_id)">
+          <div class="ws-mat-primary-text mat-title title-text">
+            {{ cardData?.role_name }} </div>
+        </a>
+      </div>
+      <div class="description-text font-bold" i18n-title title="Group">
+        {{cardData?.skill_group}}
+      </div>
+      <div class="flex flex-end flex-wrapped">
+        <div *ngIf="skillManager && owner" class="text-right margin-right-xs cursor-pointer">
+          <a color="primary" (click)="onClickRole('edit', cardData?.role_id)" mat-icon-button i18n-matTooltip
+            matTooltip="Edit Role" color="primary">
+            <mat-icon>edit</mat-icon>
+          </a>
+        </div>
+        <div *ngIf="skillManager" class="text-right margin-right-xs cursor-pointer">
+          <a color="primary" (click)=" onClickRole('copy', cardData?.role_id)" mat-icon-button i18n-matTooltip
+            matTooltip="Copy Role" color="primary">
+            <mat-icon>file_copy</mat-icon>
+          </a>
+        </div>
+        <div *ngIf="skillManager" class="text-right margin-right-xs cursor-pointer">
+          <a color="primary" (click)="onClickRole('share', cardData?.role_id)" mat-icon-button i18n-matTooltip
+            matTooltip="Assign Role" color="primary">
+            <mat-icon>share</mat-icon>
+          </a>
+        </div>
+      </div>
+      <div *ngIf="assign" class="margin-top-s flex flex-middle flex-wrapped">
+        <span i18n>Assigned by</span>
+        <span class="margin-left-xs font-bold">{{cardData?.shared_by_email_id}}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <!-- <mat-card class="feature-container position-relative  ws-mat-primary-border-top-bolder">
+    <div class="card-header ws-mat-primary-background"></div>
+    <div class="flex height-1-1">
+      <div class="width-1-1 text-left">
+        <div class="flex cursor-pointer" (click)="onCardClick(cardData?.role_id)">
+          <h2 class="mat-h2 card-title width-expand card-txt ws-mat-primary-text">
+            {{ cardData?.role_name }}
+          </h2>
+          <mat-icon class="ws-mat-primary-text">play_arrow</mat-icon>
+        </div>
+        <p *ngIf="cardData?.skill_group" class="margin-remove card-txt mat-subheading-1 text-bold">
+          {{cardData?.skill_group}}</p>
+      </div>
+    </div>
+  </mat-card> -->
+</div>

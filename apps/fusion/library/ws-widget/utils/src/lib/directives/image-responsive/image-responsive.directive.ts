@@ -1,9 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Directive, Input, HostBinding, OnDestroy, OnChanges } from '@angular/core'
-import { Subscription } from 'rxjs'
 import { BreakpointObserver } from '@angular/cdk/layout'
+import { Directive, HostBinding, Input, OnChanges, OnDestroy } from '@angular/core'
+import { Subscription } from 'rxjs'
 import { distinctUntilChanged } from 'rxjs/operators'
 
 export interface IImageResponsiveUnit {
@@ -43,7 +40,7 @@ export class ImageResponsiveDirective implements OnChanges, OnDestroy {
       ])
       .pipe(distinctUntilChanged())
       .subscribe(data => {
-        // console.log('data >',  data)
+        // //console.log('data >',  data)
         if (data.breakpoints[customBreakPoints.xxl]) {
           this.currentSize = 'xxl'
         } else if (data.breakpoints[customBreakPoints.xl]) {

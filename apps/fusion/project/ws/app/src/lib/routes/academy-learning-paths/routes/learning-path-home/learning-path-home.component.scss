@@ -1,0 +1,87 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.learning-path-container {
+  padding: $size-xl;
+
+  @include breakpoint-xs {
+    padding: $size-m;
+  }
+}
+
+.card-basic-infomartion-container {
+  $card-padding: $size-m;
+  $card-width: 265px;
+  position: relative;
+  width: $card-width;
+  height: 100%;
+  box-sizing: border-box;
+  min-height: 300px;
+
+  mat-card-content {
+    margin: 0 -0.25 * $card-padding;
+  }
+}
+
+.card-img {
+  width: 265px;
+  height: 150px;
+  display: block;
+  margin-bottom: 0px !important;
+  object-fit: contain;
+}
+
+$title-line-count: 2;
+$title-line-height: 1.3em;
+
+.title-text {
+  margin: $size-s 0 !important;
+  position: relative;
+  overflow: hidden;
+  height: $title-line-count * $title-line-height;
+  line-height: $title-line-height;
+}
+
+$description-line-count: 3;
+$description-line-height: 1.4em;
+
+.description-text {
+  position: relative;
+  overflow: hidden;
+  height: $description-line-count * $description-line-height;
+  line-height: $description-line-height;
+}
+
+$title-line-count: 2;
+.title-truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: $title-line-count;
+  -webkit-box-orient: vertical;
+}
+
+.card-section {
+  width: 45%;
+  margin: $size-m;
+
+  @include breakpoint-xs {
+    width: 95%;
+    margin: $size-s;
+  }
+}
+
+$card-height: 112px;
+
+.feature-container {
+  border-radius: 4px;
+  text-align: center;
+  height: $card-height;
+  max-height: $card-height;
+
+  @media only screen and (max-width: 730px) {
+    height: 150px;
+  }
+}
+
+.msg {
+  margin: $size-m $size-xl;
+}

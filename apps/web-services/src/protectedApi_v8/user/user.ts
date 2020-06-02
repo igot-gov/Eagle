@@ -1,15 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Router } from 'express'
 import { accessControlApi } from './accessControl'
 import { accountSettingsApi } from './account-settings'
+import { usersApi } from './admin-users'
 import { autocompleteApi } from './auto-complete'
 import { badgeApi } from './badge'
 import { changeEmailApi } from './changeEmail'
 import { classDiagramApi } from './classDiagram'
 import { codeApi } from './code'
 import { userContentApi } from './content'
+import { contentAssignApi } from './content-assign'
 import { dashboardApi } from './dashboard'
 import { detailsApi } from './details'
 import { emailApi } from './email'
@@ -34,7 +33,7 @@ import { progressApi } from './progress'
 import { ratingApi } from './rating'
 import { rdbmsApi } from './rdbms'
 import { realTimeProgressApi } from './realTimeProgress'
-import { protectedRoles } from './roles'
+import { rolesApi } from './roles'
 import { shareApi } from './share'
 import { skillsApi } from './skills'
 import { telemetryApi } from './telemetry'
@@ -48,6 +47,7 @@ import { viewProfileApi } from './viewprofile'
 export const user = Router()
 user.use('/group', userGroupApi)
 user.use('/accessControl', accessControlApi)
+user.use('/content-assign', contentAssignApi)
 user.use('/account-settings', accountSettingsApi)
 user.use('/mini-profile', userMiniProfile)
 user.use('/change-email', changeEmailApi)
@@ -76,7 +76,7 @@ user.use('/profile', profileApi)
 user.use('/progress', progressApi)
 user.use('/rating', ratingApi)
 user.use('/rdbms', rdbmsApi)
-user.use('/roles', protectedRoles)
+user.use('/roles', rolesApi)
 user.use('/share', shareApi)
 user.use('/skills', skillsApi)
 user.use('/telemetry', telemetryApi)
@@ -88,3 +88,4 @@ user.use('/viewprofile', viewProfileApi)
 user.use('/validate', validateApi)
 user.use('/realTimeProgress', realTimeProgressApi)
 user.use('/exercise', exerciseApi)
+user.use('/users', usersApi)

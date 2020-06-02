@@ -1,36 +1,18 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<button
-  *ngIf="isValidContent && widgetData?.mode === 'dialog'"
-  mat-icon-button
-  i18n-aria-label
-  aria-label="Playlist"
-  i18n-matTooltip
-  matTooltip="Add to Playlist"
-  (click)="openDialog()"
-  [disabled]="widgetData?.isDisabled"
->
+<button name="add-to-playlist-icon-button" *ngIf="isPlaylistEnabled && isValidContent && widgetData?.mode === 'dialog'"
+  mat-icon-button i18n-aria-label aria-label="Playlist" i18n-matTooltip matTooltip="Add to Playlist"
+  (click)="openDialog()" [disabled]="widgetData?.isDisabled">
   <mat-icon>playlist_add</mat-icon>
 </button>
-<button
-  *ngIf="isValidContent && widgetData?.mode !== 'dialog'"
-  mat-icon-button
-  i18n-aria-label
-  aria-label="Playlist"
-  i18n-matTooltip
-  matTooltip="Add to Playlist"
-  (click)="getPlaylists($event)"
-  [matMenuTriggerFor]="menu"
->
+<button name="add-to-playlist-icon-button" *ngIf="isPlaylistEnabled && isValidContent && widgetData?.mode !== 'dialog'"
+  mat-icon-button i18n-aria-label aria-label="Playlist" i18n-matTooltip matTooltip="Add to Playlist"
+  (click)="getPlaylists($event)" [matMenuTriggerFor]="menu">
   <mat-icon>playlist_add</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent>
     <div (click)="$event.stopPropagation()">
       <h2 class="mat-title margin-left-m margin-right-m margin-remove-bottom">
-        <ng-container i18n>Add </ng-container
-        ><span class="font-weight-500">{{ widgetData?.contentName }}</span>
+        <ng-container i18n>Add </ng-container><span class="font-weight-500">{{ widgetData?.contentName }}</span>
         <ng-container i18n> to Playlist</ng-container>
       </h2>
       <div class="mx-4" *ngIf="playlistsFetchStatus !== 'fetching'">

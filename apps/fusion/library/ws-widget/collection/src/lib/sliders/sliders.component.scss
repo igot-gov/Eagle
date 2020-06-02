@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-vars';
 @import 'ws-mixins';
 
@@ -21,13 +18,11 @@ $banner-min-height: 200px;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to left,
-    rgba(0, 0, 0, 0.25) 0%,
-    rgba(0, 0, 0, 0) 15%,
-    rgba(0, 0, 0, 0) 85%,
-    rgba(0, 0, 0, 0.25) 100%
-  );
+  background: linear-gradient(to left,
+      rgba(0, 0, 0, 0.25) 0%,
+      rgba(0, 0, 0, 0) 15%,
+      rgba(0, 0, 0, 0) 85%,
+      rgba(0, 0, 0, 0.25) 100%);
   // linear-gradient(
   //   to bottom,
   //   rgba(0, 0, 0, 0) 0%,
@@ -46,7 +41,7 @@ $banner-min-height: 200px;
     width: 100%;
     min-height: $banner-min-height;
     display: block;
-    height: 250px;
+    // height: 250px;
   }
 }
 
@@ -132,13 +127,15 @@ $banner-min-height: 200px;
   cursor: pointer;
   position: absolute;
   top: 50%;
+  background: transparent;
   transform: translateY(-50%);
-  padding: $size-m;
+  padding: 16px;
   color: white;
   font-weight: bold;
-  font-size: $size-l;
+  font-size: 24px;
   z-index: 2;
   border-radius: 0 3px 3px 0;
+  border: none;
 }
 
 .next {

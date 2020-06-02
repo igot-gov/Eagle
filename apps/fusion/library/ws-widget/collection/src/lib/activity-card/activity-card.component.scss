@@ -1,0 +1,53 @@
+.activity-card {
+  min-width: 210px !important;
+  max-width: 210px !important;
+  max-height: 232px !important;
+  min-height: 184px !important;
+  border-radius: 8px;
+  text-align: center;
+  align-items: center;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+  display: inline-block;
+
+}
+
+.description {
+  color: #9BAEBD !important;
+  position: relative;
+  overflow: hidden;
+  height: 3.8em;
+  line-height: 1.3em;
+  padding-bottom: 0px;
+}
+
+.icon {
+  color: #05a7c9 !important;
+}
+
+.visible {
+  visibility: hidden;
+}
+
+.title {
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
+}
+
+.footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0%;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  min-height: 34px;
+
+}
+
+.explore {
+  text-align: center;
+  display: grid;
+  color: white;
+}

@@ -1,15 +1,22 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 .right-align {
   text-align: right;
 }
 
-.mat-dialog-content{
+.mat-dialog-content {
   overflow: hidden !important;
   max-height: none !important;
 }
 
-.example-container{
+.example-container {
   margin: 4px 0px;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: row;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
 }

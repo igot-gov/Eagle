@@ -1,14 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject } from 'rxjs'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { NSCompetency } from '../models/competency.model'
 import { map } from 'rxjs/operators'
 import { ConfigurationsService } from '@ws-widget/utils'
+// import { map } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = `/LA1/api`
+// const PROTECTED_SLAG_V8 = `https://wingspan-staging.infosysapps.com/LA1/api`
 
 const LA_API_END_POINTS = {
   ASSESSMENTS: `${PROTECTED_SLAG_V8}/v1/assessment`,

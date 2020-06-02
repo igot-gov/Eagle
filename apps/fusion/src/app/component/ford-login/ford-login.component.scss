@@ -1,0 +1,59 @@
+@import 'ws-mixins';
+
+.backgound-white {
+  background-color: white !important;
+}
+.app-logo-navbar {
+  width: 125px;
+  height: auto;
+  margin-bottom: 3px;
+  @include breakpoint-xs {
+    width: 100px;
+  }
+}
+
+.logo {
+  @include breakpoint-xs {
+    padding-left: 0 !important;
+    padding-right: 0.25rem !important;
+  }
+}
+
+.app-logo-content {
+  width: calc(100% - 40px);
+  max-width: 400px;
+}
+
+.nav-sign-in {
+  color: white !important;
+  @include breakpoint-xs {
+    display: none;
+  }
+}
+
+.sign-in {
+  color: white !important;
+  margin-top: 90px;
+  font-size: 1.2rem;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.login-content {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+.text-color {
+  color: white !important;
+}
+
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

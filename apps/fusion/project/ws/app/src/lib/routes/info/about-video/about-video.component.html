@@ -1,15 +1,30 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="flex flex-column">
+  <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles" class="position-relative small-height-toolbar">
+    <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+
+  </mat-toolbar>
+  <span class="center-align margin-remove ws-mat-primary-text mat-title" *ngIf="isPartOfFirstTimeSetupV2">
+    <span> {{appName}} </span>
+    <span i18n> is built around you. Find out what´s in it for you:
+    </span>
+  </span>
   <mat-radio-group class="flex flex-center pb-4" (change)="onItemChange($event.value)"
-    *ngIf="introVideos && objectKeys(introVideos).length > 1">
+    *ngIf="introVideos && objectKeys(introVideos).length > 1 && !isPartOfFirstTimeSetupV2">
     <ng-container i18n>Choose video's language</ng-container>
     <mat-radio-button color="primary" class="px-2" *ngFor="let key of objectKeys(introVideos)" [checked]="key == 'en'"
       [value]="key">
       <ws-widget-locale-translator [langCode]="key"></ws-widget-locale-translator>
     </mat-radio-button>
-    <!-- <mat-radio-button color="primary" class="px-2" [value]="'de'" i18n>German</!-->
+
   </mat-radio-group>
-  <ng-container [wsResolverWidget]="widgetResolverData"></ng-container>
+  <div class="intro-video">
+    <ng-container [wsResolverWidget]="widgetResolverData"></ng-container>
+
+  </div>
+
+</div>
+<div class="tnc-bottom-navbar" *ngIf="showNextbutton">
+  <a type="button" color="primary" mat-flat-button routerLink="/app/setup/home/interest" (click)="raiseTelemetry()" i18n>
+    Next
+  </a>
 </div>

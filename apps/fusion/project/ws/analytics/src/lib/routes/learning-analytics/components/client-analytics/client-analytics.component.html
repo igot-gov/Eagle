@@ -1,0 +1,177 @@
+<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles" class="flex justify-between">
+  <div class="flex flex-middle">
+    <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+    <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="margin-left-xs">{{ analytics?.mainTitle }}</span>
+  </div>
+  <!-- <form *ngIf="!screenSizeIsLtMedium" [formGroup]="searchForm" class="search-form margin-s  flex flex-middle">
+    <div class="width-1-1 flex flex-middle justify-start flex-wrapped">
+      <mat-form-field class="filter">
+        <mat-select [(value)]="selected" i18n-placeholder placeholder="Select Type" aria-label="Type"
+          formControlName="filter" required>
+          <mat-option *ngFor="let filter of filterList" [value]="filter">
+            {{filter.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="search margin-left-xs">
+        <input type="text" i18n-placeholder placeholder="Search" aria-label="Search" matInput
+          formControlName="searchControl" (keydown)="onPress($event)" autocomplete="off" required />
+        <mat-icon class="cursor-pointer" (click)="submitFilterDetails()" matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </form> -->
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav class="sidenav" [mode]="mode$ | async" [(opened)]="sideNavBarOpened">
+    <mat-nav-list class="padding-remove-top">
+      <a *ngIf="analytics?.tabs?.home?.enabled" mat-list-item [routerLink]="'/analytics/home'"
+        routerLinkActive="faq-active-class mat-toolbar mat-stroked-button" (click)="sideNavOnClick('home')"
+        accesskey="1">
+        <mat-icon>home</mat-icon>
+        <span class="margin-left-xs">{{ analytics?.tabs?.home?.displayName }}</span>
+      </a>
+      <a *ngIf="analytics?.tabs?.content?.enabled" mat-list-item aria-label="Content"
+        [routerLink]="'/analytics/content'" routerLinkActive="faq-active-class mat-toolbar mat-stroked-button"
+        (click)="sideNavOnClick('content')" accesskey="2">
+        <mat-icon>library_books</mat-icon>
+        <span class="margin-left-xs">{{ analytics?.tabs?.content?.displayName }}</span>
+      </a>
+
+      <a *ngIf="showPathwayTab" mat-list-item aria-label="pathway" class="" [routerLink]="'/analytics/pathway'"
+        routerLinkActive="faq-active-class mat-toolbar mat-stroked-button" (click)="sideNavOnClick('pathway')"
+        accesskey="3">
+        <mat-icon>school</mat-icon>
+        <span class="margin-left-xs">{{ analytics?.tabs?.learningPathway?.displayName }}</span>
+      </a>
+      <a *ngIf="!screenSizeIsLtMedium && analytics?.tabs?.reports?.enabled" mat-list-item aria-label="Reports" class=""
+        [routerLink]="'/analytics/reports'" routerLinkActive="faq-active-class mat-toolbar mat-stroked-button"
+        (click)="sideNavOnClick('reports')" accesskey="4">
+        <mat-icon>get_app</mat-icon>
+        <span class="margin-left-xs">{{ analytics?.tabs?.reports?.displayName }}</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div *ngIf="screenSizeIsLtMedium" class="flex flex-middle">
+      <!-- <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
+        <mat-icon>menu</mat-icon>
+      </button> -->
+      <h2 class="mat-subheading-2 margin-remove padding-left-xs" [ngSwitch]="currentTab">
+        <span *ngSwitchCase="'home'" accesskey="1">
+          <mat-icon>home</mat-icon>
+          <span class="margin-left-xs" i18n>{{ analytics?.tabs?.home?.displayName }}</span>
+        </span>
+        <span *ngSwitchCase="'content'" accesskey="2">
+          <mat-icon>library_books</mat-icon>
+          <span class="margin-left-xs" i18n>{{ analytics?.tabs?.content?.displayName }}</span>
+        </span>
+        <span *ngSwitchCase="'pathway'" accesskey="3">
+          <mat-icon>school</mat-icon>
+          <span class="margin-left-xs" i18n>{{
+            analytics?.tabs?.learningPathway?.displayName
+          }}</span>
+        </span>
+        <span *ngSwitchCase="'reports'" accesskey="4">
+          <mat-icon>get_app</mat-icon>
+          <span class="margin-left-xs" i18n>{{ analytics?.tabs?.reports?.displayName }}</span>
+        </span>
+      </h2>
+    </div>
+    <div class="margin-top-xs flex justify-between flex-wrapped">
+      <div *ngIf="contentData?.last_updated_on" class="mat-body-1 flex flex-middle remove-margin-top margin-m">
+        <span i18n>Last Updated on :</span>
+        <span>{{ contentData?.last_updated_on | date: 'EEEE, MMMM d, y' }}</span>
+      </div>
+      <div *ngIf="fetchStatus === 'done' &&  !(currentTabName==='pathway')">
+        <div class="flex flex-middle font-bold ws-mat-primary-text margin-right-m cursor-pointer text-right"
+          (click)="applyFilters()">
+          <mat-icon>filter_list</mat-icon>
+          <span span="margin-remove-bottom" i18n>Filters</span>
+        </div>
+        <!-- <form *ngIf="
+            screenSizeIsLtMedium && !(currentTabName === 'pathway' || currentTabName === 'reports')
+          " [formGroup]="searchForm" class="search-form margin-s flex flex-around flex-wrapped">
+          <mat-form-field class="search">
+            <input type="text" placeholder="search" aria-label="Search" matInput [formControl]="searchControl"
+              (keydown)="onPress($event)" autocomplete="off" />
+            <mat-icon class="cursor-pointer" (click)="search(searchControl.value)" matSuffix>search</mat-icon>
+          </mat-form-field>
+        </form> -->
+      </div>
+      <!-- <ng-container *ngIf="!(currentTabName === 'pathway')">
+        <ws-analytics-quarter-filters (filterEvent)="callFilteredGet($event)"></ws-analytics-quarter-filters>
+      </ng-container> -->
+    </div>
+    <form *ngIf="showFilters" [formGroup]="searchForm" (ngSubmit)="submitFilterDetails()" class="margin-s">
+      <div class="text-right">
+        <mat-icon class="margin-right-xs cursor-pointer" (click)="closeFilters()" matTooltip="Close filter"
+          i18n-matTooltip>
+          close</mat-icon>
+      </div>
+      <p class="font-bold ws-mat-primary-text" i18n>Filter by Date</p>
+      <!-- <p i18n>Select a start date and end date for the date range which you want to see the data for</p> -->
+      <div class="flex flex-wrapped margin-left-xl">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" [max]="maxDate" placeholder="Start Date" formControlName="dateStart"
+            autocomplete="off" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="margin-left-xs">
+          <input matInput [matDatepicker]="picker1" [max]="maxDate" placeholder="End Date" formControlName="dateEnd"
+            autocomplete="off" />
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <p class=" margin-top-m font-bold ws-mat-primary-text" i18n>Filter by Dealer Code, Stars Id and Content Id</p>
+      <p i18n>Select 'All' as filter Type if you want to apply search filter otherwise select any one the type</p>
+      <div class="flex flex-wrapped margin-left-xl">
+        <mat-form-field class="filter">
+          <mat-select [(value)]="selected" i18n-placeholder placeholder="Filter Type" aria-label="Type"
+            formControlName="filter">
+            <mat-option *ngFor="let filter of filterList" [value]="filter">
+              {{filter.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="search margin-left-xs">
+          <input type="text" i18n-placeholder placeholder="Search" aria-label="Search" matInput
+            formControlName="searchControl" (keydown)="onPress($event)" autocomplete="off" />
+          <!-- <mat-icon class="cursor-pointer" (click)="submitFilterDetails()" matSuffix>search</mat-icon> -->
+        </mat-form-field>
+      </div>
+      <button mat-raised-button class="ws-mat-accent-background text-white margin-left-xl" type="submit">
+        <span class="text-white font-normal" i18n>Apply</span>
+      </button>
+    </form>
+    <div *ngIf="showDateFilter" class="flex flex-middle flex-wrapped margin-left-m">
+      <p class="margin-remove-bottom" i18n>Date filter applied from</p>
+      <p class="font-bold margin-left-xs margin-remove-bottom">{{startDate}}</p>
+      <p class="margin-left-xs margin-remove-bottom" i18n>to</p>
+      <p class="font-bold margin-left-xs margin-remove-bottom">{{endDate}}</p>
+      <mat-icon class="margin-left-xs cursor-pointer" (click)="toggleInput()" matTooltip="Remove the date filter"
+        i18n-matTooltip>
+        close</mat-icon>
+    </div>
+    <div class="m-4 flex flex-start flex-middle flex-wrapped" *ngIf="
+        filterData.length > 0 && !(currentTabName === 'pathway')">
+      <h4 class="filter" i18n>Showing data for :</h4>
+      <mat-chip-list class="ml-4" #chipList aria-label="filter">
+        <mat-chip *ngFor="let filter of filterData" [selectable]="selectable" [removable]="removable"
+          (removed)="remove(filter)">
+          {{ filter.filterName }}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<input #searchContent type="hidden" i18n-value value="Search field can not be empty" />
+<input #filterContent type="hidden" i18n-value value="Please select a Type" />
+<input #emptyContent type="hidden" i18n-value value="Some field is empty" />
+<input #errorContent type="hidden" i18n-value value="Please select a date range within 15 days" />
+<input #dateContent type="hidden" i18n-value value="End date should be greater than start date" />

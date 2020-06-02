@@ -1,15 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export interface ISearchRequest {
   filters: {
-    [key: string]: string[];
+    [key: string]: string[]
   }
   advancedFilters?: {
-    title: string;
+    title: string
     filters: {
-      [type: string]: string[];
-    };
+      [type: string]: string[]
+    }
   }[]
   query: string
   isStandAlone?: boolean
@@ -18,8 +15,9 @@ export interface ISearchRequest {
   pageSize?: number
   // sortBy?: 'lastUpdatedOn'
   // sortOrder?: 'ASC' | 'DESC'
-  sort?: { [sortType: string]: string }[]
+  sort?: { [sortType: string]: 'asc' | 'desc' }[]
   locale?: string[]
+  didYouMean?: boolean
 }
 
 export interface IFilterUnitResponse {
@@ -74,14 +72,14 @@ export interface ISearchSocialSearchPartialRequest {
   sessionId: number
   postKind: TSocialPostKind
   filters?: {
-    hashTags?: string[];
-    tags?: string[];
-    hasAcceptedAnswer?: boolean[];
-    sourceName?: string[];
-    sourceId?: string[];
-    threadContributors?: string[];
-    postCreator?: string[];
-    dtLastModified?: ISearchdateModified[];
+    hashTags?: string[]
+    tags?: string[]
+    hasAcceptedAnswer?: boolean[]
+    sourceName?: string[]
+    sourceId?: string[]
+    threadContributors?: string[]
+    postCreator?: string[]
+    dtLastModified?: ISearchdateModified[]
   }
   sort?: { [key: string]: string }[]
   locale?: string[]
@@ -103,16 +101,16 @@ export interface IThreadContributor {
 }
 export interface IPostActivity {
   activityData: {
-    like: number;
-    upVote: number;
-    downVote: number;
-    flag: number;
+    like: number
+    upVote: number
+    downVote: number
+    flag: number
   }
   userActivity: {
-    like: boolean;
-    upVote: boolean;
-    downVote: boolean;
-    flag: boolean;
+    like: boolean
+    upVote: boolean
+    downVote: boolean
+    flag: boolean
   }
 }
 
@@ -128,9 +126,9 @@ export interface IWsSocialSearchResultData {
   dtPublished: string
   hasAcceptedAnswer: boolean
   highlight: {
-    tags?: string[];
-    body?: string[];
-    title?: string[];
+    tags?: string[]
+    body?: string[]
+    title?: string[]
   }
   hashTags: string[]
   id: string
@@ -143,8 +141,8 @@ export interface IWsSocialSearchResultData {
   replyCount: number
   rootOrg: string
   source: {
-    id: string;
-    name: string;
+    id: string
+    name: string
   }
   status: string
   tags: string[]
@@ -178,23 +176,23 @@ export interface IFeatureSearchConfig {
   placeHolder: { [key: string]: string }
   social: {
     qanda?: {
-      latest: { dtLastModified: string };
-      trending: { upVoteCount: string };
-    };
+      latest: { dtLastModified: string }
+      trending: { upVoteCount: string }
+    }
     blogs?: {
       latest: {
-        dtLastModified: string;
-      };
+        dtLastModified: string
+      }
       trending: {
-        likeCount: string;
-      };
-    };
+        likeCount: string
+      }
+    }
   }
 }
 
 export interface INsSearchRedirection {
   f?: {
-    [index: string]: string[];
+    [index: string]: string[]
   }
   q?: string
   tab?: string
@@ -212,7 +210,7 @@ export interface ISearchConfigContentStrip {
 export interface IWsSearchAdvancedFilter {
   title: string
   filters: {
-    [key: string]: string[];
+    [key: string]: string[]
   }
 }
 export interface ISearchTab {
@@ -220,22 +218,22 @@ export interface ISearchTab {
   title: string
   searchQuery: {
     filters: {
-      [key: string]: string[];
-    };
+      [key: string]: string[]
+    }
     advancedFilters: {
-      title: string;
+      title: string
       filters: {
-        [type: string]: string[];
-      };
-    }[];
-    isStandAlone: boolean;
-    siemensCatalog: boolean;
+        [type: string]: string[]
+      }
+    }[]
+    isStandAlone: boolean
+    siemensCatalog: boolean
   }
 }
 
 export interface ISearchAutoComplete {
   _source: {
-    searchTerm: string,
+    searchTerm: string
   }
 }
 
@@ -247,5 +245,19 @@ export interface ISearchQuery {
 export interface ISuggestedFilters {
   title: string
   icon: string
-  contentType: string
+  url: string
+  queryParams?: any
 }
+
+export type TSortableFields =
+  'lastUpdatedOn' |
+  'duration' |
+  'me_totalSessionsCount' |
+  'me_totalDownloads' |
+  'size' |
+  'uniqueLearners' |
+  'viewCount' |
+  'averageRating' |
+  'uniqueUsersCount' |
+  'totalRating' |
+  'addedOn'

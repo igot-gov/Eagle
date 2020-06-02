@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export interface IBadge {
   badge_group: string
   badge_id: string
@@ -34,4 +31,35 @@ export interface IBadgeResponse {
       learning_points: number;
     }
   ]
+}
+
+export interface IGamificationBdageResponse {
+  'Comments': IGamificationBdage[],
+  'Forum Posts': IGamificationBdage[],
+  'Content': IGamificationBdage[],
+  'Certifications': IGamificationBdage[],
+  'Quizzes': IGamificationBdage[],
+  'Peer Sharing': IGamificationBdage[]
+}
+
+export interface IGamificationBdage {
+  FirstName?: string
+  BadgeImage?: string
+  BadgeCode: string
+  DateOfwinning: Date
+  BadgeName: string
+  BadgeCategory: string
+  Description: string
+  ApplicationName?: string
+  BadgeCount: number
+  appId?: number
+  TokenNo?: number
+  BadgeId: number
+  BasePath: string
+  AfterCompletionCriteria: string
+  CongratsMessage: string
+  currentCount: number
+  requiredCount: number
+  activityId: number
+  BadgeImagePath: string
 }

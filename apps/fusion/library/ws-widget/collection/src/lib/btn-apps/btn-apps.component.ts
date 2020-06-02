@@ -1,12 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { ConfigurationsService, NsPage } from '@ws-widget/utils'
-import { ROOT_WIDGET_CONFIG } from '../collection.config'
+import { ConfigurationsService, NsPage, LogoutComponent } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
+import { ROOT_WIDGET_CONFIG } from '../collection.config'
 import { IBtnAppsConfig } from './btn-apps.model'
+import { Router, NavigationStart, NavigationEnd } from '@angular/router'
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'ws-widget-btn-apps',
@@ -17,16 +16,37 @@ export class BtnAppsComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<IBtnAppsConfig> {
   @Input() widgetData!: IBtnAppsConfig
   isPinFeatureAvailable = true
-
+  instanceVal = ''
+  isUrlOpened = false
   pinnedApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
   featuredApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
 
   private pinnedAppsSubs?: Subscription
-  constructor(private configSvc: ConfigurationsService) {
+  constructor(
+    private dialog: MatDialog,
+    private configSvc: ConfigurationsService,
+    private router: Router,
+  ) {
     super()
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        if (this.router.url === '/app/features') {
+          this.isUrlOpened = true
+        } else {
+          this.isUrlOpened = false
+        }
+      } else if (event instanceof NavigationEnd) {
+        if (this.router.url === '/app/features') {
+          this.isUrlOpened = true
+        } else {
+          this.isUrlOpened = false
+        }
+      }
+    })
   }
 
   ngOnInit() {
+    this.instanceVal = this.configSvc.rootOrg || ''
     if (this.configSvc.restrictedFeatures) {
       this.isPinFeatureAvailable = !this.configSvc.restrictedFeatures.has('pinFeatures')
     }
@@ -38,6 +58,7 @@ export class BtnAppsComponent extends WidgetBaseComponent
       this.pinnedAppsSubs.unsubscribe()
     }
   }
+
   setPinnedApps() {
     this.pinnedAppsSubs = this.configSvc.pinnedApps.subscribe(pinnedApps => {
       const appsConfig = this.configSvc.appsConfig
@@ -84,5 +105,9 @@ export class BtnAppsComponent extends WidgetBaseComponent
           }),
         )
     }
+  }
+
+  logout() {
+    this.dialog.open<LogoutComponent>(LogoutComponent)
   }
 }

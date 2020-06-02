@@ -1,11 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<mat-toolbar role="navigation" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: search" class="margin-left-xs hidden-inline-s">Search</span>
   <span class="spacer"></span>
-  <ws-app-search-input class="search-box" [placeHolder]="searchTabs.placeHolder[route]" [ref]="'search'">
+  <ws-app-search-input *ngIf="searchTabs?.tabs[selectedIndex]?.titleKey!='people'" class="search-box"
+    [placeHolder]="searchTabs.placeHolder[route]" [ref]="'search'">
   </ws-app-search-input>
 </mat-toolbar>
 <mat-tab-group mat-align-tabs="center" *ngIf="searchTabs.tabs.length > 1"

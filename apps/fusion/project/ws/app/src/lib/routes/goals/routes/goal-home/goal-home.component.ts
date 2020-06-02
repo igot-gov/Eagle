@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils'
 import { Router } from '@angular/router'
@@ -15,6 +12,8 @@ export class GoalHomeComponent implements OnInit {
   navBackground: Partial<NsPage.INavBackground>
   userName: string | undefined
   numNotifications = 0
+  isShareEnabled = false
+  isCommonGoalEnabled = false
 
   goalFor = 'me'
 
@@ -30,6 +29,11 @@ export class GoalHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
+      this.isCommonGoalEnabled = !this.configSvc.restrictedFeatures.has('commonGoals')
+    }
+
     this.goalFor = this.router.url.includes('others') ? 'others' : 'me'
     this.goalsSvc.getActionRequiredGoals('isInIntranet').subscribe(actionRequired => {
       this.numNotifications = actionRequired.length

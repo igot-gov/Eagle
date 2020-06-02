@@ -1,27 +1,24 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnDestroy,
   ElementRef,
-  ViewChild,
+  EventEmitter,
+  Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core'
-import { Subscription, BehaviorSubject, timer, EMPTY } from 'rxjs'
+import { MatSnackBar } from '@angular/material'
+import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
+import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
+import { BehaviorSubject, EMPTY, Subscription, timer } from 'rxjs'
 import { debounce, mergeMap } from 'rxjs/operators'
 import { NsContent } from '../_services/widget-content.model'
-import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
-import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { IPickerContentData, ISearchConfig } from './picker-content.model'
 import { NSSearch } from '../_services/widget-search.model'
+import { IPickerContentData, ISearchConfig } from './picker-content.model'
 import { PickerContentService } from './picker-content.service'
-import { MatSnackBar } from '@angular/material'
-import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
 
 @Component({
   selector: 'ws-widget-picker-content[widgetData]',
@@ -40,7 +37,7 @@ export class PickerContentComponent extends WidgetBaseComponent
   @Output()
   change = new EventEmitter<{
     checked: boolean
-    content: Partial<NsContent.IContent>,
+    content: Partial<NsContent.IContent>
   }>()
 
   @Output()
@@ -64,7 +61,7 @@ export class PickerContentComponent extends WidgetBaseComponent
   debounceSubscription: Subscription | null = null
 
   defaultThumbnail = ''
-
+  @Input() searchableContentTypes = NsContent.PLAYLIST_SUPPORTED_CONTENT_TYPES
   @Input() appContentTypes = NsContent.EContentTypes
   preSelected = new Set()
   constructor(
@@ -105,6 +102,12 @@ export class PickerContentComponent extends WidgetBaseComponent
 
   async initializeSearchSubject(phraseSearch: boolean = true) {
     const phraseSearchConfig = await this.searchServSvc.getApplyPhraseSearch()
+    const searchConfig = await this.searchServSvc.getSearchConfig()
+    const isStandAlone = searchConfig.search.tabs[0].isStandAlone
+    let applyIsStandAlone = false
+    if (isStandAlone || isStandAlone === undefined) {
+      applyIsStandAlone = true
+    }
     this.debounceSubscription = this.debounceSubject
       .pipe(
         debounce(shouldDebounce => (shouldDebounce ? timer(500) : EMPTY)),
@@ -122,7 +125,8 @@ export class PickerContentComponent extends WidgetBaseComponent
               this.customSearchFilters ?
                 this.customSearchFilters :
                 { contentType: this.selectedContentTypes },
-            isStandAlone: true,
+            isStandAlone: applyIsStandAlone ? applyIsStandAlone : undefined,
+            didYouMean: false,
           })
         }),
       )
@@ -168,6 +172,10 @@ export class PickerContentComponent extends WidgetBaseComponent
             .removeSubset(Array.from(this.selectedContentIds))
             .subscribe(response => {
               if (response.goal_message && response.goal_message.length) {
+                this.change.emit({
+                  checked: false,
+                  content: contentMeta ? contentMeta : { identifier },
+                })
                 this.snackBar.open(response.goal_message[0])
               }
               this.suggestedDurationChange.emit(response.suggested_time)

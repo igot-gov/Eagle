@@ -1,38 +1,42 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
-  Component,
-  OnInit,
-  Input,
-  ElementRef,
-  ViewChild,
-  OnDestroy,
   AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
 } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Chart, ChartOptions } from 'chart.js'
 import { IWidgetGraphData, TChartJsGraphType, TChartJsColorPalette } from './graph-general.model'
-import { Validators, FormGroup, FormBuilder } from '@angular/forms'
 import { COLOR_PALETTE, GRAPH_TYPES, colorPalettes } from './graph-general-color-palette'
+import { GraphGeneralService } from './graph-general.service'
 @Component({
   selector: 'ws-widget-graph-general',
   templateUrl: './graph-general.component.html',
   styleUrls: ['./graph-general.component.scss'],
 })
 export class GraphGeneralComponent extends WidgetBaseComponent
-  implements OnInit, OnDestroy, AfterViewInit, OnChanges, NsWidgetResolver.IWidgetData<IWidgetGraphData> {
+  implements
+    OnInit,
+    OnDestroy,
+    AfterViewInit,
+    OnChanges,
+    NsWidgetResolver.IWidgetData<IWidgetGraphData> {
   @Input() widgetData!: IWidgetGraphData
   @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef<HTMLDivElement>
   generalChart: Chart | null = null
   customizeForm: FormGroup
   graphPalettes = COLOR_PALETTE
+  itemObj: any
   graphTypes = GRAPH_TYPES
   graphDataType: TChartJsGraphType = ''
   graphPalette: TChartJsColorPalette = 'default'
   graphOptions = {}
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private graphGeneralSvc: GraphGeneralService) {
     super()
     this.customizeForm = this._formBuilder.group({
       colorPalette: ['', Validators.required],
@@ -94,11 +98,21 @@ export class GraphGeneralComponent extends WidgetBaseComponent
                 fontSize: widgetData.graphTicksFontSize,
                 max: widgetData.graphXAxisMax,
                 stepSize: widgetData.graphXAxisStepSize,
+                beginAtZero: true,
+                callback: function (value: any) {
+                  if (Math.floor(value) === value) {
+                    return value
+                  }
+                }.bind(this),
               },
               gridLines: {
                 drawBorder: true,
                 display: widgetData.graphGridLinesDisplay,
               },
+              scaleLabel: {
+              display: widgetData.graphIsXAxisLabel,
+              labelString: widgetData.graphXAxisLabel,
+            },
               stacked: true,
             },
           ],
@@ -116,8 +130,15 @@ export class GraphGeneralComponent extends WidgetBaseComponent
                 stepSize: widgetData.graphYAxisStepSize,
                 beginAtZero: true,
                 callback: function (value: any) {
+                  if (value.length >= 12) {
+                    return `${value.substring(0, 12)}...`
+                  }
                   return value.substring(0, 12)
                 }.bind(this),
+              },
+              scaleLabel: {
+                display: widgetData.graphIsYAxisLabel,
+                labelString: widgetData.graphYAxisLabel,
               },
               stacked: true,
             },
@@ -165,8 +186,15 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               stepSize: widgetData.graphXAxisStepSize,
               maxRotation: 0,
               callback: function (value: any) {
+                if (value.length >= 12) {
+                  return `${value.substring(0, 12)}...`
+                }
                 return value.substring(0, 12)
               }.bind(this),
+            },
+            scaleLabel: {
+              display: widgetData.graphIsXAxisLabel,
+              labelString: widgetData.graphXAxisLabel,
             },
             gridLines: {
               drawBorder: true,
@@ -191,6 +219,15 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               max: widgetData.graphYAxisMax,
               stepSize: widgetData.graphYAxisStepSize,
               beginAtZero: true,
+              callback: function (value: any) {
+                if (Math.floor(value) === value) {
+                  return value
+                }
+              }.bind(this),
+            },
+            scaleLabel: {
+              display: widgetData.graphIsYAxisLabel,
+              labelString: widgetData.graphYAxisLabel,
             },
             stacked: true,
           },
@@ -205,6 +242,16 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               fontFamily: '\'Open Sans Bold\', sans-serif',
               fontSize: widgetData.graphTicksFontSize,
               fontcolor: 'gray',
+              beginAtZero: true,
+              callback: function (value: any) {
+                if (Math.floor(value) === value) {
+                  return value
+                }
+              }.bind(this),
+            },
+            scaleLabel: {
+              display: widgetData.graphIsXAxisLabel,
+              labelString: widgetData.graphXAxisLabel,
             },
             gridLines: {
               drawBorder: true,
@@ -221,6 +268,10 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               drawBorder: true,
               display: widgetData.graphGridLinesDisplay,
             },
+            scaleLabel: {
+              display: widgetData.graphIsYAxisLabel,
+              labelString: widgetData.graphYAxisLabel,
+            },
             ticks: {
               display: widgetData.graphTicksYAxisDisplay,
               fontFamily: '\'Open Sans Bold\', sans-serif',
@@ -228,6 +279,9 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               fontcolor: 'gray',
               beginAtZero: true,
               callback: function (value: any) {
+                if (value.length >= 12) {
+                  return `${value.substring(0, 12)}...`
+                }
                 return value.substring(0, 12)
               }.bind(this),
             },
@@ -235,7 +289,32 @@ export class GraphGeneralComponent extends WidgetBaseComponent
           },
         ],
       }
-      const optionsWithoutAxis = {
+      const optionsWithoutAxisClick = {
+        maintainAspectRatio: false,
+        legend: {
+          display: widgetData.graphLegend,
+          position: widgetData.graphLegendPosition,
+          labels: {
+            fontColor: 'gray',
+            fontSize: widgetData.graphLegendFontSize,
+          },
+        },
+        elements: {
+          rectangle: {
+            borderSkipped: 'left',
+          },
+        },
+        // events: ['mouseup'],
+        onHover: (event: any, chartElement: any) => {
+          event.target.style.cursor = chartElement[0] ? 'pointer' : 'default'
+        },
+        onClick: (item: any, evt: any) => {
+          this.itemObj = item
+          this.graphGeneralSvc.updateFilterEvent(
+            { filterName: evt[0]._chart.config.data.labels[evt[0]._index], filterType: widgetData.graphFilterType })
+        },
+      }
+      const optionsWithoutAxisWithoutClick = {
         maintainAspectRatio: false,
         legend: {
           display: widgetData.graphLegend,
@@ -251,6 +330,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
           },
         },
       }
+      const optionsWithoutAxis = widgetData.graphOnClick ? optionsWithoutAxisClick : optionsWithoutAxisWithoutClick
       const optionsForX = {
         ...optionsWithoutAxis,
         scales: scalesForX,

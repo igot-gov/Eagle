@@ -1,0 +1,38 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+
+
+.searchBorder {
+  border: 1px solid #cecece !important;
+  width:40%;
+  height:1rem;
+  @include breakpoint-xs {
+      width:96%;
+    }
+
+}
+:host ::ng-deep .searchBox {
+  .mat-form-field-infix {
+    width:100%;
+  }
+}
+
+.ws-mat-primary-bolder-hover {
+  border: 1px solid #cecece;
+}
+
+
+.warn-card {
+  padding: 1em;
+  margin: 1em;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.warn-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  margin: 16px;
+}

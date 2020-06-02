@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnChanges, OnDestroy, Input, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core'
 import {
   fromEvent,
@@ -19,6 +16,8 @@ export class HorizontalScrollerComponent implements OnInit, OnChanges, OnDestroy
 
   @Input()
   loadStatus: TFetchStatus = 'none'
+  @Input()
+  onHover = false
   @Output()
   loadNext = new EventEmitter()
   @ViewChild('horizontalScrollElem', { static: true })

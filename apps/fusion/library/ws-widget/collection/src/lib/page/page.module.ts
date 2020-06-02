@@ -1,20 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { PageComponent } from './page.component'
-import {
-  MatToolbarModule,
-  MatIconModule,
-  MatTooltipModule,
-  MatButtonModule,
-  MatMenuModule,
-} from '@angular/material'
+import { NgModule } from '@angular/core'
+import { MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, MatTooltipModule } from '@angular/material'
 import { RouterModule } from '@angular/router'
-
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { BtnPageBackModule } from '../btn-page-back/btn-page-back.module'
+import { TourModule } from '../_common/tour-guide/tour-guide.module'
+import { PageComponent } from './page.component'
+import { BtnFeatureModule } from '../btn-feature/btn-feature.module'
+
 @NgModule({
   declarations: [PageComponent],
   imports: [
@@ -27,6 +20,8 @@ import { BtnPageBackModule } from '../btn-page-back/btn-page-back.module'
     MatIconModule,
     MatTooltipModule,
     MatMenuModule,
+    TourModule,
+    BtnFeatureModule,
   ],
   exports: [PageComponent],
   entryComponents: [PageComponent],

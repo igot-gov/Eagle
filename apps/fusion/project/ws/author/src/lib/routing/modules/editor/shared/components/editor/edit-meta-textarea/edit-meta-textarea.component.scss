@@ -1,0 +1,16 @@
+.resize-none {
+  resize: none;
+}
+
+.disable {
+  opacity: 0.3;
+  pointer-events: none;
+  cursor: none;
+}
+
+.required {
+  &::after {
+    color: red;
+    content: ' *';
+  }
+}

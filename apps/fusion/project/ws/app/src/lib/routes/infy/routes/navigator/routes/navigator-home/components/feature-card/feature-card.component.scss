@@ -1,19 +1,22 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-  $card-height: 112px;
+$card-height: 112px;
 
 .feature-container {
   border-radius: 4px;
   text-align: center;
   height: $card-height;
   max-height: $card-height;
+
+  @media only screen and (max-width: 730px) {
+    height: 150px;
+  }
 }
+
 .card-header {
   height: 2px;
   position: absolute;
   top: 0px;
 }
+
 .card-title {
   line-height: 1.2;
 }
@@ -27,11 +30,15 @@
   cursor: auto;
 }
 
-
-.card-border{
-border-bottom: none;
+.card-border {
+  border-bottom: none;
 }
 
-.text-bold{
-  font-weight: 400
+.text-bold {
+  font-weight: 400;
+}
+
+.disable {
+  opacity: 0.4;
+  pointer-events: none;
 }

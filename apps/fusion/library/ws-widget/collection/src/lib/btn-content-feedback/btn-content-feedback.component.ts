@@ -1,10 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { MatDialog } from '@angular/material'
 import { BtnContentFeedbackDialogComponent } from './btn-content-feedback-dialog/btn-content-feedback-dialog.component'
+import { ConfigurationsService } from '../../../../utils/src/public-api'
 
 interface IWidgetBtnContentFeedback {
   identifier: string
@@ -19,18 +17,26 @@ interface IWidgetBtnContentFeedback {
 export class BtnContentFeedbackComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IWidgetBtnContentFeedback> {
   @Input() widgetData!: IWidgetBtnContentFeedback
-  constructor(private dialog: MatDialog) {
+  @Input() forPreview = false
+  isFeedbackEnabled = false
+  constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) {
     super()
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isFeedbackEnabled = !this.configSvc.restrictedFeatures.has('contentFeedback')
+    }
+  }
 
   openFeedbackDialog() {
-    this.dialog.open(BtnContentFeedbackDialogComponent, {
-      data: {
-        id: this.widgetData.identifier,
-        name: this.widgetData.name,
-      },
-    })
+    if (!this.forPreview) {
+      this.dialog.open(BtnContentFeedbackDialogComponent, {
+        data: {
+          id: this.widgetData.identifier,
+          name: this.widgetData.name,
+        },
+      })
+    }
   }
 }

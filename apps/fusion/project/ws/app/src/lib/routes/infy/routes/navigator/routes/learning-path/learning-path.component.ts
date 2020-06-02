@@ -1,9 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { NavigatorService } from '../../services/navigator.service'
 import { Router } from '@angular/router'
+import { NavigatorService } from '../../services/navigator.service'
 
 @Component({
   selector: 'ws-app-learning-path',
@@ -24,11 +21,11 @@ export class LearningPathComponent implements OnInit {
     })
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   navigateToSuggestions() {
     const selectionList: string[] = []
-    // console.log('this chips', this.selectedTechChips)
+    // //console.log('this chips', this.selectedTechChips)
     this.selectedTechChips.forEach((elem: string) => {
       if (elem) {
         selectionList.push(elem)

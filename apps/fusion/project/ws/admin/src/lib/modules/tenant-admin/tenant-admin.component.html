@@ -1,38 +1,33 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <button *ngIf="isLtMedium" type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="ml-2">{{ tabName }}</span>
+  <span class="ml-2" i18n>Manage</span>
 </mat-toolbar>
 
 <mat-sidenav-container autosize>
   <mat-sidenav class="sidenav mat-drawer mat-sidenav" [mode]="isLtMedium ? 'over' : 'side'" [opened]="sideNavBarOpened">
     <mat-nav-list class="margin-left-s margin-right-xs">
-      <!-- <a mat-list-item routerLinkActive="mat-toolbar" (click)="tabName = 'Home'" routerLink="/admin/tenant/page/home"
-        matTooltip="Home" i18n-matTooltip="Home">
-        <mat-icon>home</mat-icon>
-        <span class="padding-left-s" i18n> Home</span>
+      <a *ngIf="!restrictedFeatures?.has('adminFeatureUsers')" mat-list-item routerLinkActive="mat-toolbar"
+        [routerLink]="'/admin/tenant/users'" matTooltip="Users" i18n-matTooltip>
+        <span class="padding-left-s" i18n>Users</span>
       </a>
-
-      <a mat-list-item routerLinkActive="mat-toolbar" (click)="tabName = 'User Roles'"
-        routerLink="/admin/tenant/user-roles" matTooltip="User Roles" i18n-matTooltip="User Roles">
-        <mat-icon>people_alt</mat-icon>
-        <span class="padding-left-s" i18n> User Roles</span>
-      </a> -->
-
-      <a mat-list-item routerLinkActive="mat-toolbar" (click)="tabName = 'User Registration'"
-        routerLink="/admin/tenant/user-registration" matTooltip="User Registration" i18n-matTooltip="User Registration">
-        <mat-icon>supervised_user_circle</mat-icon>
-        <span class="padding-left-s" i18n> User Registration</span>
+      <a *ngIf="!restrictedFeatures?.has('adminFeatureUserRegistration')" mat-list-item routerLinkActive="mat-toolbar"
+        [routerLink]="'/admin/tenant/user-registration'" matTooltip="User Registration" i18n-matTooltip>
+        <span class="padding-left-s" i18n>User Registration</span>
       </a>
-      <a mat-list-item routerLinkActive="mat-toolbar" (click)="tabName = 'Registered Users'"
-        routerLink="/admin/tenant/registered-users" matTooltip="Registered Users" i18n-matTooltip="Registered Users">
-        <mat-icon>verified_user</mat-icon>
-        <span class="padding-left-s" i18n> Registered Users</span>
+      <a *ngIf="!restrictedFeatures?.has('adminFeatureRegisteredUsers')" mat-list-item routerLinkActive="mat-toolbar"
+        [routerLink]="'/admin/tenant/registered-users'" matTooltip="Registered Users" i18n-matTooltip>
+        <span class="padding-left-s" i18n>Registered Users</span>
+      </a>
+      <a *ngIf="!restrictedFeatures?.has('adminFeatureSystemRolesMgmt')" mat-list-item routerLinkActive="mat-toolbar"
+        [routerLink]="'/admin/tenant/system-roles-management'" matTooltip="System Roles" i18n-matTooltip>
+        <span class="padding-left-s" i18n>System Roles</span>
+      </a>
+      <a *ngIf="!restrictedFeatures?.has('adminFeatureContentAssignment')" mat-list-item routerLinkActive="mat-toolbar"
+        [routerLink]="'/admin/tenant/content-assignment'" matTooltip="Content Assignment" i18n-matTooltip>
+        <span class="padding-left-s" i18n>Content Assignment</span>
       </a>
     </mat-nav-list>
 
@@ -41,20 +36,3 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<!-- <mat-sidenav-container class="sidenav-content-min-height">
-  <mat-sidenav #sideNavBar [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
-    <mat-nav-list class="margin-left-s margin-right-xs">
-
-      <a mat-list-item routerLinkActive="mat-toolbar" (click)="tabName = 'User Registration'"
-        routerLink="/admin/tenant/user-registration" matTooltip="User Registration" i18n-matTooltip="User Registration">
-        <mat-icon>supervised_user_circle</mat-icon>
-        <span class="padding-left-s" i18n> User Registration</span>
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->

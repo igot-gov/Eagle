@@ -1,21 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { LoaderService } from '@ws/author/src/lib/services/loader.service'
-import { ActivatedRoute } from '@angular/router'
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ChangeDetectorRef, OnDestroy } from '@angular/core'
+import { MatSnackBar } from '@angular/material'
 import { IWidgetsPlayerMediaData, NsContent } from '@ws-widget/collection'
-import { IMAGE_MAX_SIZE, VIDEO_MAX_SIZE } from '@ws/author/src/lib/constants/upload'
 import {
-  CONTENT_BASE_WEBHOST_ASSETS,
   AUTHORING_CONTENT_BASE,
+  CONTENT_BASE_WEBHOST_ASSETS,
 } from '@ws/author/src/lib/constants/apiEndpoints'
+import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
+import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import { IMAGE_MAX_SIZE, VIDEO_MAX_SIZE } from '@ws/author/src/lib/constants/upload'
 import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
-import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
-import { Component, OnChanges, Input, Output, EventEmitter, OnInit } from '@angular/core'
-import { MatSnackBar } from '@angular/material'
-import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
-import { OrdinalsResolver } from '@ws/author/src/lib/modules/shared/services/ordianls.resolver.service'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
+import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 
 interface ISubtitle {
   srclang: string
@@ -27,7 +23,7 @@ interface ISubtitle {
   templateUrl: './audio-video.component.html',
   styleUrls: ['./audio-video.component.scss'],
 })
-export class AudioVideoComponent implements OnChanges, OnInit {
+export class AudioVideoComponent implements OnChanges, OnInit, OnDestroy {
   @Input() isSubmitPressed = false
   @Input() content!: IWidgetsPlayerMediaData
   @Output() data = new EventEmitter<{ content: IWidgetsPlayerMediaData; isValid: boolean }>()
@@ -36,6 +32,7 @@ export class AudioVideoComponent implements OnChanges, OnInit {
   @Input() isVideo = false
   @Input() identifier = ''
   @Input() inputType!: 'upload' | 'id'
+  @Input() isResponsive = false
   backUpType: 'upload' | 'id' = 'upload'
 
   pickerContentData = {
@@ -51,19 +48,27 @@ export class AudioVideoComponent implements OnChanges, OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private uploadService: UploadService,
-    private activateRoute: ActivatedRoute,
-    private ordianlsResSvc: OrdinalsResolver,
+    private authInitService: AuthInitService,
     private loader: LoaderService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   ngOnChanges() {
     this.initData()
   }
+  ngOnDestroy(): void {
+    this.changeDetector.detach()
+  }
+
   initData() {
+    this.pickerContentData = {
+      preselected: new Set(),
+      enablePreselected: true,
+      availableFilters: ['contentType'],
+    }
+    this.changeDetector.detectChanges()
     if (this.content.identifier && this.inputType === 'id') {
       this.contentId = [this.content.identifier]
       this.pickerContentData = {
@@ -83,14 +88,18 @@ export class AudioVideoComponent implements OnChanges, OnInit {
     if (!this.content.subtitles) {
       this.content.subtitles = []
     }
-    this.subTitles = this.ordianlsResSvc.ordinals
-      ? this.ordianlsResSvc.ordinals.subTitles
-      : ([] as any)
-
-    this.data.emit({
-      content: this.content,
-      isValid: this.content.url ? true : false,
-    })
+    this.subTitles = this.authInitService.ordinals.subTitles
+    if (!this.content.disableTelemetry) {
+      this.content.disableTelemetry = false
+    }
+    if (this.content && this.content.identifier !== '') {
+      delete this.content['url']
+      delete this.content['posterImage']
+    }
+    // this.data.emit({
+    //   content: this.content,
+    //   isValid: this.content.url ? true : false,
+    // })
     // if (this.content.url && !this.content.identifier) {
     //   this.inputType = 'upload'
     // } else if (this.content.identifier) {
@@ -104,6 +113,7 @@ export class AudioVideoComponent implements OnChanges, OnInit {
 
   update(key: string, value: any) {
     this.content[key as keyof IWidgetsPlayerMediaData] = value
+    this.content.disableTelemetry = false
     this.data.emit({
       content: this.content,
       isValid: this.content.url ? true : false,
@@ -111,7 +121,8 @@ export class AudioVideoComponent implements OnChanges, OnInit {
   }
 
   removeSubtitle(index: number) {
-    (this.content.subtitles || []).splice(index, 1)
+    // tslint:disable-next-line: semicolon
+    ; (this.content.subtitles || []).splice(index, 1)
     this.update('subtitles', this.content.subtitles)
   }
 
@@ -156,43 +167,41 @@ export class AudioVideoComponent implements OnChanges, OnInit {
         // tslint:disable-next-line:align
         { contentId: this.identifier, contentType: CONTENT_BASE_WEBHOST_ASSETS },
       )
-      .subscribe(
-        data => {
-          if (data.code) {
-            this.loader.changeLoad.next(false)
-            const url = `${AUTHORING_CONTENT_BASE}${encodeURIComponent(
-              `/${(data.artifactURL || data.authArtifactUrl || data.authArtifactURL || '')
-                .split('/')
-                .slice(3)
-                .join('/')}`,
-            )}`
-            if (type === 'image') {
-              this.update('posterImage', url)
-            } else if (type === 'video' || type === 'audio') {
-              this.update('url', url)
-            } else {
-              (this.content.subtitles || []).push({
-                url,
-                srclang: this.selectedSubtitle.srclang,
-                label: this.selectedSubtitle.label,
-              })
-              this.activateRoute.data.subscribe(content => {
-                this.subTitles = content.ordinals.subTitles.filter(
-                  (v: ISubtitle) =>
-                    !(this.content.subtitles || []).find((j: ISubtitle) => j.srclang === v.srclang),
-                )
-              })
-              this.subTitles = this.selectedSubtitle = undefined as any
-            }
-            this.snackBar.openFromComponent(NotificationComponent, {
-              data: {
-                type: Notify.UPLOAD_SUCCESS,
-              },
-              duration: NOTIFICATION_TIME * 1000,
+      .subscribe(data => {
+        if (data.code) {
+          this.loader.changeLoad.next(false)
+          const url = `${AUTHORING_CONTENT_BASE}${encodeURIComponent(
+            `/${(data.artifactURL || data.authArtifactUrl || data.authArtifactURL || '')
+              .split('/')
+              .slice(3)
+              .join('/')}`,
+          )}`
+          if (type === 'image') {
+            this.update('posterImage', url)
+          } else if (type === 'video' || type === 'audio') {
+            this.update('url', url)
+          } else {
+            // tslint:disable-next-line: semicolon
+            ; (this.content.subtitles || []).push({
+              url,
+              srclang: this.selectedSubtitle.srclang,
+              label: this.selectedSubtitle.label,
             })
+            this.subTitles = this.authInitService.ordinals.subTitles.filter(
+              (v: ISubtitle) =>
+                !(this.content.subtitles || []).find((j: ISubtitle) => j.srclang === v.srclang),
+            )
+            this.subTitles = this.selectedSubtitle = undefined as any
           }
-        },
-        () => {
+          this.snackBar.openFromComponent(NotificationComponent, {
+            data: {
+              type: Notify.UPLOAD_SUCCESS,
+            },
+            duration: NOTIFICATION_TIME * 1000,
+          })
+        }
+      },
+                 () => {
           this.loader.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -204,7 +213,10 @@ export class AudioVideoComponent implements OnChanges, OnInit {
       )
   }
 
-  onContentSelection(event?: { content: Partial<NsContent.IContent>; checked: boolean }, ids?: string[]) {
+  onContentSelection(
+    event?: { content: Partial<NsContent.IContent>; checked: boolean },
+    ids?: string[],
+  ) {
     if (event && event.checked) {
       this.pickerContentData = {
         preselected: new Set([event.content.identifier]),
@@ -214,12 +226,19 @@ export class AudioVideoComponent implements OnChanges, OnInit {
       this.content.identifier = event.content.identifier || ''
     } else {
       this.pickerContentData = {
-        preselected: new Set(ids && ids.length >= 1 ? [ids[0]] : []),
+        preselected: new Set(
+          ids && ids.length >= 1
+            ? [ids[0]] : this.content.identifier !== '' ? [this.content.identifier] : []
+        ),
         enablePreselected: true,
         availableFilters: ['contentType'],
       }
-      this.content.identifier = ids && ids.length >= 1 ? ids[0] : ''
+      this.content.identifier = ids && ids.length >= 1 ? ids[0] : this.content.identifier !== '' ? this.content.identifier : ''
     }
     this.contentId = this.content.identifier ? [this.content.identifier] : []
+    this.data.emit({
+      content: this.content,
+      isValid: this.content.identifier ? true : false,
+    })
   }
 }

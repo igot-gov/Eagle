@@ -1,0 +1,14 @@
+<div mat-dialog-content>
+  <p i18n>Are you sure you want to publish?</p>
+</div>
+<div mat-dialog-actions class="flex-row-reverse">
+  <button name="publish-post-yes-button" type="button" [disabled]="isPublishing" cdkFocusInitial (click)="publishPost()"
+    mat-button aria-label="Yes" i18n-aria-label>
+    <ng-container *ngIf="isPublishing" i18n>Please Wait...</ng-container>
+    <ng-container *ngIf="!isPublishing" i18n>Yes</ng-container>
+  </button>
+  <button name="publish-post-no-button" type="button" mat-dialog-close [disabled]="isPublishing"
+    (click)="dialogRef.close(false)" mat-button aria-label="No" i18n-aria-label i18n>
+    No
+  </button>
+</div>

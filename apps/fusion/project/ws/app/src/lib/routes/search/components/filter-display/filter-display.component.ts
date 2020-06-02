@@ -1,11 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
+import { ConfigurationsService } from '@ws-widget/utils'
 import { IFilterUnitItem, IFilterUnitResponse, ISearchConfigContentStrip, IWsSearchAdvancedFilter } from '../../models/search.model'
 import { SearchServService } from '../../services/search-serv.service'
-import { ConfigurationsService } from '@ws-widget/utils'
 @Component({
   selector: 'ws-app-filter-display',
   templateUrl: './filter-display.component.html',
@@ -20,10 +17,10 @@ export class FilterDisplayComponent implements OnInit {
   advancedFilters: IWsSearchAdvancedFilter[] = []
   translatedFilters: any = {}
   searchRequest: {
-    filters: { [type: string]: string[] };
+    filters: { [type: string]: string[] }
   } = {
-    filters: {},
-  }
+      filters: {},
+    }
   constructor(
     private activated: ActivatedRoute,
     private router: Router,
@@ -34,6 +31,7 @@ export class FilterDisplayComponent implements OnInit {
   ngOnInit() {
     const lang = this.configSvc.userPreference && this.configSvc.userPreference.selectedLocale
     this.searchServ.translateSearchFilters(lang || 'en').then(val => {
+      this.lowerCaseFilter(val, Object.keys(val))
       this.translatedFilters = val
     })
     if (
@@ -148,6 +146,15 @@ export class FilterDisplayComponent implements OnInit {
       queryParams: { f: null },
       queryParamsHandling: 'merge',
       relativeTo: this.activated.parent,
+    })
+  }
+
+  lowerCaseFilter(filterObj: any, filterKeys: string[]) {
+    filterKeys.forEach(data => {
+      Object.defineProperty(filterObj, data.toLowerCase(), Object.getOwnPropertyDescriptor(filterObj, data) || {})
+      if (filterObj[data].value && filterObj[data].value !== {}) {
+        this.lowerCaseFilter(filterObj[data].value, Object.keys(filterObj[data].value))
+      }
     })
   }
 }

@@ -1,15 +1,12 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="margin-m">
   <h3 class="mat-title" i18n>Write your SQL statement, stored procedure or anonymous block</h3>
-  <!-- <ace-editor class="code-container" [(text)]="userQuery" theme="eclipse" [mode]="'sql'" [options]="options" #editor></!-->
+  <ace-editor class="code-container" (textChanged)="raiseInputChange()" [(text)]="userQuery" theme="eclipse" [mode]="'sql'" [options]="options" #editor></ace-editor>
   <div class="margin-top-s">
     <button
       mat-raised-button
       color="primary"
       [disabled]="executed"
-      (click)="run()"
+      (click)="run() ;raiseClickEvent()"
       i18n="button run"
     >
       Run
@@ -19,21 +16,23 @@
 <div class="margin-m">
   <h4 class="mat-title">Query result</h4>
   <div class="result-container">
-    <div class="margin-top-s query-result" *ngIf="executedResult">
+    <ng-container *ngIf="executedResult?.length">
+    <div *ngFor="let result of executedResult" class="margin-top-s query-result">
       <span
-        *ngIf="errorMessage || executedResult?.status?.message"
+        *ngIf="errorMessage || result?.status?.message"
         [ngClass]="{
-          'query-success': executedResult?.validationStatus,
-          'query-failed': !executedResult?.validationStatus
+          'ws-mat-primary-text': result?.validationStatus,
+          'ws-mat-warn-text': !result?.validationStatus
         }"
       >
-        {{ errorMessage || executedResult?.status?.message }}
+        {{ errorMessage || result?.status?.message }}
       </span>
       <viewer-execution-result
-        *ngIf="executedResult?.data"
-        [executedResult]="executedResult"
+        *ngIf="result?.data"
+        [executedResult]="result"
       ></viewer-execution-result>
     </div>
+    </ng-container>
   </div>
 </div>
 

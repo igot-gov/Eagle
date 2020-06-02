@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Router } from 'express'
 import { createProxyServer } from 'http-proxy'
 
@@ -9,6 +6,14 @@ const proxyCreator = (timeout = 10000) => createProxyServer({
 })
 export function proxyCreatorRoute(route: Router, targetUrl: string, timeout = 10000): Router {
   route.all('/*', (req, res) => {
+    const downloadKeyword = '/download/'
+    if (req.url.startsWith(downloadKeyword)) {
+      req.url = downloadKeyword + req.url.split(downloadKeyword)[1].replace(/\//g, '%2F')
+    }
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL', req.originalUrl)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL', req.url)
     proxyCreator(timeout).web(req, res, {
       target: targetUrl,
     })

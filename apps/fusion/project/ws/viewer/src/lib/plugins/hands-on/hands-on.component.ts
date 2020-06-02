@@ -1,13 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit, OnChanges, OnDestroy } from '@angular/core'
 import { Subscription, interval, Observable } from 'rxjs'
 import { DomSanitizer } from '@angular/platform-browser'
 import { map } from 'rxjs/operators'
 import { NSHandsOnModels } from './hands-on.model'
 import { NSHandsOnConstants } from './hands-on.constants'
-import { LoggerService } from '@ws-widget/utils'
+import { LoggerService, EventService } from '@ws-widget/utils'
 import { HandsOnService } from './hands-on.service'
 import { MatDialog } from '@angular/material'
 import { HandsOnDialogComponent } from './components/hands-on-dialog/hands-on-dialog.component'
@@ -72,6 +69,14 @@ export class HandsOnComponent implements OnInit, OnChanges, OnDestroy {
   @Input() resourceType: 'Exercise' | 'Tryout' = 'Tryout'
   @Input() identifier = ''
   @Input() handsOn: NSHandsOnModels.IHandsOnJson | null = null
+  @Input() artifactUrl = ''
+  firstInput = true
+  isInput = false
+  inputInterval: any
+  firstClick = true
+  isClick = false
+  clickInterval: any
+  inputStarterCode!: string
   executionInProgress = false
   options: any = {
     enableBasicAutocompletion: true,
@@ -101,6 +106,7 @@ export class HandsOnComponent implements OnInit, OnChanges, OnDestroy {
     private sanitizer: DomSanitizer,
     private handsOnSvc: HandsOnService,
     public dialog: MatDialog,
+    private eventSvc: EventService,
   ) { }
 
   ngOnInit() {
@@ -109,6 +115,11 @@ export class HandsOnComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges() {
     this.ngOnDestroy()
+    this.firstInput = true
+    this.isInput = false
+    this.firstClick = true
+    this.isClick = false
+    this.isPostActionSectionShown = false
     this.initializeExercise()
     this.notifier('init')
   }
@@ -120,14 +131,24 @@ export class HandsOnComponent implements OnInit, OnChanges, OnDestroy {
     if (this.notifierTimerSubscription) {
       this.notifierTimerSubscription.unsubscribe()
     }
+    if (this.inputInterval) {
+      clearInterval(this.inputInterval)
+    }
+    if (this.clickInterval) {
+      clearInterval(this.clickInterval)
+    }
   }
 
   private initializeExercise() {
     this.exerciseData = JSON.parse(JSON.stringify(this.handsOn))
     if (this.exerciseData) {
+      const problemStatement = this.exerciseData.problemStatement
+      const artifactUrl = this.artifactUrl.substring(0, this.artifactUrl.lastIndexOf('/'))
+      const problemStatementdata = problemStatement.replace(/src="([^">]+)"/g, `src='${artifactUrl}$1'`)
       this.exerciseData.safeProblemStatement = this.sanitize(
-        this.exerciseData.problemStatement,
+        problemStatementdata,
       )
+      this.inputStarterCode = this.exerciseData.starterCodes[0]
       this.exerciseData.timeLimit *= 1000
       this.exerciseStartedAt = Date.now()
       this.exerciseTimeRemaining = this.exerciseData.timeLimit
@@ -142,7 +163,7 @@ export class HandsOnComponent implements OnInit, OnChanges, OnDestroy {
                 (this.exerciseData ? this.exerciseData.timeLimit : 0) -
                 Date.now(),
             ),
-        )
+          )
           .subscribe(exerciseTimeRemaining => {
             this.exerciseTimeRemaining = exerciseTimeRemaining
             if (this.exerciseTimeRemaining < 0) {
@@ -564,6 +585,60 @@ export class HandsOnComponent implements OnInit, OnChanges, OnDestroy {
     if (tooltip) {
       tooltip.innerHTML = 'Copy to clipboard'
     }
+  }
+
+  raiseInputChange() {
+    if (this.inputStarterCode
+      && this.exerciseData
+      && this.exerciseData.starterCodes[0]
+      && this.inputStarterCode !== this.exerciseData.starterCodes[0]) {
+      this.isInput = true
+      if (this.isInput && this.firstInput) {
+        this.raiseInteractTelemetry('editor', 'codeinput')
+        this.startInputTimer()
+      }
+      this.firstInput = false
+    }
+  }
+  raiseClickEvent() {
+    this.isClick = true
+    if (this.isClick && this.firstClick) {
+      this.raiseInteractTelemetry('editor', 'buttonclick')
+      this.startClickTimer()
+    }
+    this.firstClick = false
+  }
+
+  raiseInteractTelemetry(action: string, event: string) {
+    if (this.identifier) {
+      this.eventSvc.raiseInteractTelemetry(action, event, {
+        contentId: this.identifier,
+      })
+    }
+    if (event === 'codeinput') {
+      this.isInput = false
+    }
+    if (event === 'buttonclick') {
+      this.isClick = false
+    }
+  }
+  startInputTimer() {
+    this.inputInterval = setInterval(
+      () => {
+      if (this.isInput) {
+        this.raiseInteractTelemetry('editor', 'codeinput')
+      }
+    },
+      2 * 60000)
+  }
+  startClickTimer() {
+    this.clickInterval = setInterval(
+      () => {
+      if (this.isClick) {
+        this.raiseInteractTelemetry('editor', 'buttonclick')
+      }
+    },
+      2 * 60000)
   }
 
 }

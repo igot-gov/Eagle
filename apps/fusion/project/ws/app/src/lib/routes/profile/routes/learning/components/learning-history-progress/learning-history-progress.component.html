@@ -1,11 +1,8 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="progress">
   <div class="progress-container">
     <!-- The round progress bar -->
     <ws-app-progress-radial [contentId]="item.identifier" [mode]="loadingChildren ? 'indeterminate' : 'determinate'"
-      [progress]="item.progress"></ws-app-progress-radial>
+      [progress]="item.progress" [isClient]="false"></ws-app-progress-radial>
 
     <div class="progress-content">
       <div>

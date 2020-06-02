@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsContent } from './widget-content.model'
 
 export namespace NSSearch {
@@ -37,7 +34,7 @@ export namespace NSSearch {
     visibleFilters?: ISearchV6VisibleFilters
     excludeSourceFields?: string[]
     includeSourceFields?: string[]
-    sort?: any[]
+    sort?: ISearchSort[]
     query: string
     sourceFields?: string[]
     locale?: string[]
@@ -45,22 +42,42 @@ export namespace NSSearch {
     pageSize?: number
     filters?: ISearchV6Filters[]
     isStandAlone?: boolean
+    didYouMean?: boolean
   }
 
-  interface ISearchV6VisibleFilters {
+  export interface ISearchSort {
+    [key: string]: 'asc' | 'desc'
+  }
+
+  export interface ISearchV6VisibleFilters {
+    [key: string]: {
+      displayName: string,
+      order?: { [key: string]: 'asc' | 'desc' }[]
+    } | ISearchV6SemiGlobalFilter
+  }
+
+  export interface ISearchV6SemiGlobalFilter {
     [key: string]: {
       displayName: string,
       order?: { [key: string]: 'asc' | 'desc' }[],
+      scope: TFilterScope
+      filters: {
+        andFilters: {
+          [key: string]: string[]
+        }[]
+      }[]
     }
   }
 
-  interface ISearchV6Filters {
+  type TFilterScope = 'global' | 'semi_global'
+
+  export interface ISearchV6Filters {
     andFilters?: { [key: string]: string[] }[]
     notFilters?: { [key: string]: string[] }[]
   }
   export interface ISearchRedirection {
     f?: {
-      [index: string]: string[],
+      [index: string]: string[]
     }
     q?: string
     tab?: string
@@ -88,12 +105,14 @@ export namespace NSSearch {
     notVisibleFilters: string[]
     filters: IFilterUnitResponse[]
     queryUsed?: string
+    doYouMean?: string
   }
   export interface IFilterUnitResponse {
     id?: string
     type: string
     displayName: string
     content: IFilterUnitContent[]
+    scope: TFilterScope
   }
   export interface IFilterUnitContent {
     type?: string

@@ -1,26 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { NavigatorService } from '../../services/navigator.service'
-import { BtnGoalsService, NsGoal, NsContentStripMultiple, WidgetContentService, NsContent } from '@ws-widget/collection'
-import { MultilineSnackbarComponent } from '../../components/multiline-snackbar/multiline-snackbar.component'
 import { MatSnackBar } from '@angular/material'
+import { ActivatedRoute } from '@angular/router'
+import { BtnGoalsService, NsContent, NsContentStripMultiple, NsGoal, WidgetContentService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-
-import {
-  ILpData,
-  IOfferings,
-  IRole,
-  IVariant,
-  IGroup,
-  IGroupMember,
-  ILpCertification,
-  ICommonData,
-  IFsCardModel,
-} from '../../models/navigator.model'
-import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
+import { MultilineSnackbarComponent } from '../../components/multiline-snackbar/multiline-snackbar.component'
+// tslint:disable-next-line: max-line-length
+import { ICommonData, IFsCardModel, IGroup, IGroupMember, ILpCertification, ILpData, IOfferings, IRole, IVariant } from '../../models/navigator.model'
+import { NavigatorService } from '../../services/navigator.service'
 
 @Component({
   selector: 'ws-app-role',
@@ -53,33 +40,33 @@ export class RoleComponent implements OnInit {
   certificationsResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
     NsContentStripMultiple.IContentStripMultiple
   > = {
-    widgetType: 'contentStrip',
-    widgetSubType: 'contentStripMultiple',
-    widgetData: {
-      strips: [
-        {
-          key: 'certifications-strip',
-          preWidgets: [],
-          title: '',
-          filters: [],
-          request: {
-            ids: [],
+      widgetType: 'contentStrip',
+      widgetSubType: 'contentStripMultiple',
+      widgetData: {
+        strips: [
+          {
+            key: 'certifications-strip',
+            preWidgets: [],
+            title: '',
+            filters: [],
+            request: {
+              ids: [],
+            },
           },
-        },
-      ],
-    },
-  }
+        ],
+      },
+    }
 
   alternateCertificationsResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
     NsContentStripMultiple.IContentStripMultiple
   > = {
-    widgetType: 'contentStrip',
-    widgetSubType: 'contentStripMultiple',
-    widgetData: {
-      strips: [
-      ],
-    },
-  }
+      widgetType: 'contentStrip',
+      widgetSubType: 'contentStripMultiple',
+      widgetData: {
+        strips: [
+        ],
+      },
+    }
 
   constructor(
     private route: ActivatedRoute,
@@ -122,7 +109,7 @@ export class RoleComponent implements OnInit {
 
     this.navSvc.fetchRolesVariantData(this.roleId, this.variantId).subscribe((data: IVariant) => {
       this.selectedVariant = data
-      // console.log('var', this.selectedVariant)
+      // //console.log('var', this.selectedVariant)
 
       if (this.selectedVariant.group) {
         this.selectedVariant.group.forEach((group: IGroup) => {
@@ -134,14 +121,18 @@ export class RoleComponent implements OnInit {
               .subscribe((lpResult: ILpData) => {
                 matchedLp = lpResult
                 linkedLpData.push(matchedLp)
+                this.navSvc.fetchImageForContentID(matchedLp.linked_program).subscribe(
+                  res => {
+                    matchedLp.lp_image = res[0].appIcon
+                  },
+                  () => { })
                 this.allLpData.push(matchedLp)
               })
           })
-
           this.groupMemberData.push(linkedLpData)
         })
       }
-      // console.log('groupM', this.groupMemberData)
+      // //console.log('groupM', this.groupMemberData)
       this.getCertificationsData(this.selectedVariant)
       this.fetchStatus = 'done'
     })
@@ -179,17 +170,17 @@ export class RoleComponent implements OnInit {
     })
     if (role) {
       this.selectedRole = role
-      // console.log('selected role', role)
+      // //console.log('selected role', role)
     }
   }
 
   createGoalClicked(group: IGroup) {
     let linkedId: number
     if (group.group_member.length > 1) {
-      // console.log('Goal Attack', group.group_member[this.groupMemberIndex].lp_linked_id)
+      // //console.log('Goal Attack', group.group_member[this.groupMemberIndex].lp_linked_id)
       linkedId = group.group_member[this.groupMemberIndex].lp_linked_id
     } else {
-      // console.log('Selected Member', group.group_member[0].lp_linked_id)
+      // //console.log('Selected Member', group.group_member[0].lp_linked_id)
       linkedId = group.group_member[0].lp_linked_id
     }
     const resultLines: string[] = []
@@ -207,8 +198,8 @@ export class RoleComponent implements OnInit {
       }
       goalRequests.push(goals)
     }
-    // console.log('requ', goalRequests)
-    // console.log('all', this.allLpData)
+    // //console.log('requ', goalRequests)
+    // //console.log('all', this.allLpData)
 
     if (goalRequests.length) {
       this.btnGoalsSvc.createGoals(goalRequests).subscribe(response => {
@@ -231,7 +222,7 @@ export class RoleComponent implements OnInit {
             }
           }
         }
-        // console.log('results', resultLines)
+        // //console.log('results', resultLines)
         this.snackBar.openFromComponent(MultilineSnackbarComponent, {
           data: resultLines,
         })
@@ -244,7 +235,7 @@ export class RoleComponent implements OnInit {
   }
 
   groupMemberChanged(index: number) {
-    // console.log(index, 'select radio ')
+    // //console.log(index, 'select radio ')
     this.selectedMemberList = []
     this.groupMemberIndex = index
     if (this.selectedVariant) {
@@ -256,16 +247,16 @@ export class RoleComponent implements OnInit {
   }
 
   getCertificationsData(selectedVariant: IVariant) {
-    // console.log('variant under certification', selectedVariant)
+    // //console.log('variant under certification', selectedVariant)
     if (selectedVariant && selectedVariant.group) {
       selectedVariant.group.forEach(group => {
         if (group.group_member.length > 1) {
-          // console.log('Group check', group.group_member)
-          // console.log('Group linked id', group.group_member[this.groupMemberIndex].lp_linked_id)
+          // //console.log('Group check', group.group_member)
+          // //console.log('Group linked id', group.group_member[this.groupMemberIndex].lp_linked_id)
           this.navSvc
             .fetchLearningPathIdData(String(group.group_member[this.groupMemberIndex].lp_linked_id))
             .subscribe((data: ILpData) => {
-              // console.log('data fetch multiple ', data)
+              // //console.log('data fetch multiple ', data)
               this.selectedMemberList.push(data.lp_name)
               this.getCertificationsForGM(data)
               this.strips = []
@@ -275,7 +266,7 @@ export class RoleComponent implements OnInit {
           this.navSvc
             .fetchLearningPathIdData(String(group.group_member[0].lp_linked_id))
             .subscribe((data: ILpData) => {
-              // console.log('data fetch id ', data)
+              // //console.log('data fetch id ', data)
               this.selectedMemberList.push(data.lp_name)
               this.getCertificationsForGM(data)
               this.strips = []
@@ -323,30 +314,33 @@ export class RoleComponent implements OnInit {
 
       if (alternateIds.length > 0) {
 
-        this.contentSvc.fetchMultipleContent(certID).subscribe((result: NsContent.IContent[]) => {
-          const stripData = {
-            key: `alternate-strip${certID}`,
-            preWidgets: [],
-            title: `Alternate Certification for ${result[0].name}`,
-            filters: [],
-            request: {
-              ids: alternateIds,
-            },
-          }
-          this.strips.push(stripData)
+        this.contentSvc.fetchMultipleContent(certID).subscribe(
+          (result: NsContent.IContent[]) => {
+            const stripData = {
+              key: `alternate-strip${certID}`,
+              preWidgets: [],
+              title: `Alternate Certification for ${result[0].name}`,
+              filters: [],
+              request: {
+                ids: alternateIds,
+              },
+            }
+            this.strips.push(stripData)
 
-        },                                                     () => {
+          },
+          () => {
 
-        },                                                     () => {
-          this.alternateCertificationsResolverData.widgetData.strips = this.strips
+          },
+          () => {
+            this.alternateCertificationsResolverData.widgetData.strips = this.strips
 
-          this.alternateCertificationsResolverData = { ...this.alternateCertificationsResolverData }
-          if (this.alternateCertificationsResolverData.widgetData.strips.length > 0) {
-            this.hasAlternatives = true
-          } else {
-            this.hasAlternatives = false
-          }
-        })
+            this.alternateCertificationsResolverData = { ...this.alternateCertificationsResolverData }
+            if (this.alternateCertificationsResolverData.widgetData.strips.length > 0) {
+              this.hasAlternatives = true
+            } else {
+              this.hasAlternatives = false
+            }
+          })
       } else { }
     })
   }

@@ -1,0 +1,30 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+$card-padding: $size-m;
+$card-height: 170px;
+.card-container {
+  position: relative;
+  width: 100%;
+  height: $card-height;
+  @include breakpoint-lt-m {
+    width: 100%;
+  }
+}
+
+mat-card {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.card-title-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.card-header  {
+  height: 2px;
+  position: absolute;
+  top: 0px;
+}

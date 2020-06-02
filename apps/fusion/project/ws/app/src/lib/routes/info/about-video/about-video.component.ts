@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { NsWidgetResolver } from '@ws-widget/resolver'
 import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
-import { ConfigurationsService } from '../../../../../../../../library/ws-widget/utils/src/public-api'
+import { NsWidgetResolver } from '@ws-widget/resolver'
+import { ConfigurationsService, NsPage, EventService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-about-video',
@@ -13,37 +10,57 @@ import { ConfigurationsService } from '../../../../../../../../library/ws-widget
 })
 export class AboutVideoComponent implements OnInit {
   introVideos: any
+  isPartOfFirstTimeSetupV2 = false
+  locale = ''
+  appName = ''
+  showNextbutton = false
+  pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   objectKeys = Object.keys
   widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
     IWidgetsPlayerMediaData
   > = {
-    widgetData: {
-      url: '',
-      autoplay: true,
-      identifier: '',
-    },
-    widgetHostClass: 'video-full block',
-    widgetSubType: 'playerVideo',
-    widgetType: 'player',
-    widgetHostStyle: {
-      height: '350px',
-    },
-  }
+      widgetData: {
+        url: '',
+        autoplay: true,
+        identifier: '',
+      },
+      widgetHostClass: 'video-full block',
+      widgetSubType: 'playerVideo',
+      widgetType: 'player',
+      widgetHostStyle: {
+        height: '100%',
+        'max-width': '90%',
+        'margin-left': 'auto',
+        'margin-right': 'auto',
+      },
+    }
 
-  constructor(private configSvc: ConfigurationsService) { }
+  constructor(
+    private configSvc: ConfigurationsService,
+    private eventSvc: EventService,
+    ) { }
 
   ngOnInit() {
     if (this.configSvc.instanceConfig) {
-
       this.introVideos = this.configSvc.instanceConfig.introVideo
-      // console.log('TYPE: ', this.introVideos)
+      this.appName = this.configSvc.instanceConfig.details.appName
+
+    } if (this.configSvc.restrictedFeatures
+      && !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')) {
+      this.isPartOfFirstTimeSetupV2 = true
     }
+
+    this.locale = this.configSvc.userPreference && this.configSvc.userPreference.selectedLocale || ''
+    this.locale = Object.keys(this.introVideos).includes(this.locale) ? this.locale : 'en'
     this.widgetResolverData = {
       ...this.widgetResolverData,
       widgetData: {
         ...this.widgetResolverData.widgetData,
-        url: this.introVideos['en'],
+        url: this.introVideos[this.locale],
       },
+    }
+    if (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')) {
+      this.showNextbutton = true
     }
   }
 
@@ -56,7 +73,16 @@ export class AboutVideoComponent implements OnInit {
       },
     }
     // this.widgetResolverData.widgetData.url = this.introVideos[value]
-    // console.log('TYPE: ', this.widgetResolverData)
+    // //console.log('TYPE: ', this.widgetResolverData)
+  }
+
+  raiseTelemetry() {
+    this.eventSvc.raiseInteractTelemetry('click', 'next', {
+      contentType: 'button',
+      context: {
+        pageSection: 'about-video',
+      },
+    })
   }
 
 }

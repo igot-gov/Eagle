@@ -1,17 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div [ngClass]="{
     'banner-container': bannerUrl,
     'ws-mat-primary-lite-background-on-day': !bannerUrl
   }" [style.backgroundImage]="bannerUrl">
   <div class="header-synopsis" [ngClass]="{ 'header-synopsis-gradient': bannerUrl }" *ngIf="content">
     <div class="header-title margin-bottom-m">
-      <h1 class="mat-display-2 margin-remove-bottom padding-bottom-xs text-truncate-title" [title]="content?.name">
+      <h1 class="mat-display-2 margin-remove-bottom padding-bottom-xs hidden sm:block" [title]="content?.name">
+        {{ content?.name }}
+      </h1>
+      <h1 class="mat-display-1 margin-remove-bottom padding-bottom-xs block sm:hidden" [title]="content?.name">
         {{ content?.name }}
       </h1>
       <span *ngIf="contentProgress === 1" class="margin-left-s">
-        <mat-icon i18n-matTooltip matTooltip="Completed" class="ws-mat-green-text">check_circle</mat-icon>
+        <mat-icon i18n-matTooltip matTooltip="Completed" class="ws-mat-accent-text">check_circle</mat-icon>
       </span>
     </div>
     <div *ngIf="content?.averageRating" class="flex items-center my-1 mb-3">
@@ -21,7 +21,14 @@
       (
       <span i18n>from</span>
       <span *ngIf="content?.totalRating">&nbsp;{{ content?.totalRating | pipeCountTransform }}&nbsp;</span>
-      <span i18n>votes</span>)
+      <span>
+        <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
+          votes
+        </ng-container>
+        <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
+          vote
+        </ng-container>
+      </span>)
     </div>
     <div [ngSwitch]="routePath" class="header-meta" [ngClass]="{ 'header-meta-banner': bannerUrl }">
       <!-- Overview Section -->
@@ -44,59 +51,19 @@
         <!-- Contents Bannner -->
       </div>
       <!-- Analytics Section -->
-      <div *ngSwitchCase="'analytics'">
-        <ng-container *ngIf="analytics?.courseAnalytics && analyticsData">
-          <h3 class="analytics-meta" *ngIf="analyticsData?.uniqueParticipants?.length">
-            <ng-container i18n>Total unique learners : </ng-container>
-            {{ (analyticsData?.uniqueParticipants)[0]?.uniqueCount }}
-          </h3>
-          <h3 class="analytics-meta" *ngIf="
-              analyticsData?.participants?.country?.length > 1 &&
-              (analyticsData?.participants?.country)[0]?.count !==
-                (analyticsData?.participants?.country)[1]?.count
-            ">
-            <ng-container i18n>Country Wise: </ng-container>
-            {{ (analyticsData?.participants?.country)[0]?.key }}
-            <ng-container i18n>has maximum learners with a count of</ng-container>
-            {{ (analyticsData?.participants?.country)[0]?.count }}
-          </h3>
-          <h3 class="analytics-meta" *ngIf="
-              analyticsData?.participants?.location?.length > 1 &&
-              (analyticsData?.participants?.location)[0]?.count !==
-                (analyticsData?.participants?.location)[1]?.count
-            ">
-            <ng-container i18n>Location Wise: </ng-container>
-            {{ (analyticsData?.participants?.location)[0]?.key }}
-            <ng-container i18n>has maximum learners with a count of </ng-container>
-            {{ (analyticsData?.participants?.location)[0]?.count }}
-          </h3>
-        </ng-container>
-        <ng-container *ngIf="analytics?.courseAnalyticsClient && analyticsDataClient">
-          <h3 class="analytics-meta" *ngIf="analyticsDataClient?.userCount">
-            <ng-container i18n>Total unique learners : </ng-container>
-            {{ analyticsDataClient?.userCount }}
-          </h3>
-          <h3 class="analytics-meta" *ngIf="
-              analyticsDataClient?.city?.length > 1 &&
-              (analyticsDataClient?.city)[0]?.doc_count !==
-                (analyticsDataClient?.city)[1]?.doc_count
-            ">
-            <ng-container i18n>City Wise: </ng-container>
-            {{ (analyticsDataClient?.city)[0]?.key }}
-            <ng-container i18n>has maximum learners with a count of</ng-container>
-            {{ (analyticsDataClient?.city)[0]?.doc_count }}
-          </h3>
-          <h3 class="analytics-meta" *ngIf="
-              analyticsDataClient?.department?.length > 1 &&
-              (analyticsDataClient?.department)[0]?.doc_count !==
-                (analyticsDataClient?.department)[1]?.doc_count
-            ">
-            <ng-container i18n>Department Wise: </ng-container>
-            {{ (analyticsDataClient?.department)[0]?.key }}
-            <ng-container i18n>has maximum learners with a count of </ng-container>
-            {{ (analyticsDataClient?.department)[0]?.doc_count }}
-          </h3>
-        </ng-container>
+      <div class="banner-overview-container" [hidden]="!content?.subTitle && showSubtitleOnBanner"
+        *ngSwitchCase="'analytics'">
+        <h2 class="overview-description" *ngIf="showSubtitleOnBanner" i18n-title title="Subtitle">
+          {{ content?.subTitle | pipeLimitTo: 250 }}
+        </h2>
+        <h3 class="overview-description" *ngIf="!showSubtitleOnBanner" i18n-title title="Description">
+          {{ content?.description | pipeLimitTo: 450 }}
+        </h3>
+        <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
+          [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()"
+          i18n-matTooltip matTooltip="Play Intro Video">
+          <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
+        </div>
       </div>
     </div>
     <div class="header-actions">
@@ -106,15 +73,25 @@
           content?.status !== 'Expired'
         ">
         <div [hidden]="isResource && !content?.artifactUrl?.length">
-          <ng-container *ngIf="actionBtnStatus === 'grant' && !(isMobile && content?.isInIntranet)&& !(content?.contentType ===
-            'Course' && content?.children.length === 0 && !content?.artifactUrl?.length) && !(content?.contentType ===
-            'Resource' && !content?.artifactUrl)">
-
-            <a [color]="'primary'" *ngIf="showStart.show"
+          <ng-container *ngIf="
+              actionBtnStatus === 'grant' &&
+              !(isMobile && content?.isInIntranet) &&
+              !(
+                content?.contentType === 'Course' &&
+                content?.children.length === 0 &&
+                !content?.artifactUrl?.length
+              ) &&
+              !(content?.contentType === 'Resource' && !content?.artifactUrl)
+            ">
+            <a [color]="'primary'" *ngIf="showStart.show && !isPostAssessment"
               [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
               [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')" class="margin-right-m"
-              mat-flat-button i18n>
-              Start
+              mat-flat-button>
+              <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n>Start</ng-container>
+            </a>
+            <a [color]="'primary'" *ngIf="isPostAssessment && showTakeAssessment?.post_assessment"
+              [routerLink]="firstResourceLink?.url" class="margin-right-m" mat-flat-button>
+              <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n>Take Assessment</ng-container>
             </a>
             <!-- <a
                   [color]="'primary'"
@@ -140,11 +117,19 @@
           </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="content?.status === 'Deleted' || content?.status === 'Expired'">
-        <h3 class="ws-mat-primary-text" i18n>
-          The content is expired or deleted. Please contact the authors for any query.
-        </h3>
-      </ng-container>
+      <h3 *ngIf="content?.status === 'Deleted' || content?.status === 'Expired'"
+        class="ws-mat-primary-text margin-remove-bottom pt-4" i18n>
+        The content is expired or deleted.
+      </h3>
+      <h3 class="ws-mat-primary-text margin-remove-bottom pt-4" i18n *ngIf="content?.status === 'Unpublished'">
+        The content has been unpublished.
+      </h3>
+      <h3 class="ws-mat-primary-text margin-remove-bottom pt-4" i18n *ngIf="content?.status === 'Draft'">
+        The content is in draft.
+      </h3>
+      <h3 class="ws-mat-primary-text margin-remove-bottom pt-4" i18n *ngIf="content?.status === 'InReview'">
+        The content is in review.
+      </h3>
       <div class="action-btns">
         <div class="hidden-block-xs">
           <ng-container [ngTemplateOutlet]="actions"></ng-container>
@@ -158,13 +143,18 @@
       <mat-icon class="align-bottom">info</mat-icon>&nbsp;
       <ng-container i18n>This can be viewed only in the Intranet.</ng-container>
     </p>
+    <p class="margin-top-l margin-remove-bottom" *ngIf="showInstructorLedMsg">
+      <mat-icon class="align-bottom">info</mat-icon>&nbsp;
+      <ng-container i18n>This is instructor-led classroom course and is not available online.</ng-container>
+    </p>
+
     <p class="margin-top-l margin-remove-bottom" *ngIf="showStart.msg === 'youtubeForbidden'">
       <mat-icon class="align-bottom">info</mat-icon>&nbsp;
       <ng-container i18n>Access to this YouTube content is blocked.</ng-container>
     </p>
   </div>
 </div>
-<ws-widget-content-progress *ngIf="content?.identifier" [contentId]="content?.identifier">
+<ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview" [contentId]="content?.identifier">
 </ws-widget-content-progress>
 
 <mat-menu #actionMenu="matMenu">
@@ -175,21 +165,31 @@
 
 <ng-template #actions>
   <a i18n-aria-label aria-label="Edit" i18n-matTooltip matTooltip="Edit" mat-icon-button *ngIf="editButton"
-    [routerLink]="['/author/editor/'+content?.identifier]">
+    [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon>edit</mat-icon>
   </a>
-  <ws-widget-btn-content-download [widgetData]="
+  <a i18n-aria-label aria-label="Take Action" i18n-matTooltip matTooltip="Take Action" mat-icon-button
+    *ngIf="reviewButton" [routerLink]="['/author/editor/' + content?.identifier]">
+    <mat-icon>publish</mat-icon>
+  </a>
+  <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
       content
         | pipePartialContent
-          : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal']
+          : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal',
+                  'artifactUrl']
     "></ws-widget-btn-content-download>
-  <ws-widget-btn-content-like [widgetData]="content | pipePartialContent: ['identifier']">
+  <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="content | pipePartialContent: ['identifier']">
   </ws-widget-btn-content-like>
-  <ws-widget-btn-content-share [widgetData]="content"></ws-widget-btn-content-share>
-  <ws-widget-btn-kb [contentId]="content?.identifier" [contentType]="content?.contentType">
+  <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="content"></ws-widget-btn-content-share>
+  <ws-widget-btn-kb [forPreview]="forPreview" [contentId]="content?.identifier" [contentName]="content?.name"
+    [contentType]="content?.contentType" [status]="content?.status">
   </ws-widget-btn-kb>
-  <ws-widget-btn-goals *ngIf="isGoalsEnabled && btnGoalsConfig" [widgetData]="btnGoalsConfig"></ws-widget-btn-goals>
-  <ws-widget-btn-playlist *ngIf="btnPlaylistConfig" [widgetData]="btnPlaylistConfig"></ws-widget-btn-playlist>
-  <ws-widget-btn-content-feedback-v2 [widgetData]="content | pipePartialContent: ['identifier', 'name']">
+  <ws-widget-btn-goals [forPreview]="forPreview" *ngIf="isGoalsEnabled && btnGoalsConfig" [widgetData]="btnGoalsConfig">
+  </ws-widget-btn-goals>
+  <ws-widget-btn-playlist [forPreview]="forPreview" *ngIf="btnPlaylistConfig" [widgetData]="btnPlaylistConfig">
+  </ws-widget-btn-playlist>
+  <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
+    [widgetData]="content | pipePartialContent: ['identifier', 'name']">
   </ws-widget-btn-content-feedback-v2>
 </ng-template>
+<ng-template #authView i18n>View</ng-template>

@@ -1,34 +1,31 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-const cluster = require('cluster');
-const os = require('os');
+const cluster = require('cluster')
+const os = require('os')
 
-const numWorkers = process.env.NODE_ENV === 'development' ? 1 : os.cpus().length;
-console.log(process.env.NODE_ENV);
+const numWorkers = process.env.NODE_ENV === 'development' ? 1 : os.cpus().length
+//console.log(process.env.NODE_ENV);
 
 if (cluster.isMaster) {
-  console.log(`Master is running with process ID: ${process.pid}`);
+  //console.log(`Master is running with process ID: ${process.pid}`);
   // Fork Workers
   for (let i = 0; i < numWorkers; i += 1) {
-    cluster.fork();
+    cluster.fork()
   }
   cluster.on('exit', (/* worker, code, signal */) => {
-    console.log(`Worker is died with process ID: ${process.pid}`);
-    cluster.fork();
-  });
+    //console.log(`Worker is died with process ID: ${process.pid}`);
+    cluster.fork()
+  })
 } else {
-  const { Server } = require('./server');
-  console.info(`Worker started with process ID: ${process.pid}`);
+  const { Server } = require('./server')
+  console.info(`Worker started with process ID: ${process.pid}`)
 }
 
-process.stdin.resume();
+process.stdin.resume()
 
 function exitHandler(options, err) {
-  console.log('EXITING WITH WORKER ID: ', process.pid);
-  if (options.cleanup) console.log('clean');
-  if (err) console.error('EXIT HANDLER ERROR >', err);
-  if (options.exit) process.exit();
+  //console.log('EXITING WITH WORKER ID: ', process.pid);
+  if (options.cleanup) //console.log('clean');
+    if (err) console.error('EXIT HANDLER ERROR >', err)
+  if (options.exit) process.exit()
 }
 
 // Do something when app is closing
@@ -37,37 +34,37 @@ process.on(
   exitHandler.bind(null, {
     cleanup: true
   })
-);
+)
 //catches ctrl+c event
 process.on(
   'SIGINT',
   exitHandler.bind(null, {
     exit: true
   })
-);
+)
 // catches 'kill pid' (for example: nodemon restart)
 process.on(
   'SIGUSR1',
   exitHandler.bind(null, {
     exit: true
   })
-);
+)
 process.on(
   'SIGUSR2',
   exitHandler.bind(null, {
     exit: true
   })
-);
+)
 //catches uncaught exceptions
 process.on(
   'uncaughtException',
   exitHandler.bind(null, {
     exit: false
   })
-);
+)
 process.on(
   'unhandledRejection',
   exitHandler.bind(null, {
     exit: false
   })
-);
+)

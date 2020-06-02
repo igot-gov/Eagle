@@ -1,8 +1,5 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component } from '@angular/core'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, ValueService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-footer',
@@ -11,13 +8,33 @@ import { ConfigurationsService } from '@ws-widget/utils'
 })
 export class AppFooterComponent {
 
-path
-  constructor(private configSvc: ConfigurationsService) {
+  isSiemensContributionShown = false
+  isFordFooter = false
+  isXSmall = false
+  termsOfUser = true
+
+  constructor(
+    private configSvc: ConfigurationsService,
+    private valueSvc: ValueService
+  ) {
+    if (this.configSvc.restrictedFeatures) {
+      if (this.configSvc.restrictedFeatures.has('termsOfUser')) {
+        this.termsOfUser = false
+      }
+    }
+    this.valueSvc.isXSmall$.subscribe(isXSmall => {
+      this.isXSmall = isXSmall
+    })
     if (this.configSvc.instanceConfig) {
-path
-path
+      if (this.configSvc.instanceConfig.rootOrg === 'Siemens') {
+        this.isSiemensContributionShown = true
       } else {
-path
+        this.isSiemensContributionShown = false
+      }
+      if (this.configSvc.instanceConfig.rootOrg === 'Ford') {
+        this.isFordFooter = true
+      } else {
+        this.isFordFooter = false
       }
     }
   }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import {
   Component,
@@ -20,6 +17,7 @@ import { NotificationComponent } from '@ws/author/src/lib/modules/shared/compone
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { MatSnackBar } from '@angular/material'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import { ISortEvent } from '../../../../../../../../../modules/shared/directives/draggable/sortable-list.directive'
 
 @Component({
   selector: 'ws-auth-chips',
@@ -119,5 +117,12 @@ export class ChipsComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       duration: NOTIFICATION_TIME * 1000,
     })
+  }
+
+  sort(event: ISortEvent) {
+    const current = this.value[event.currentIndex]
+    const swapWith = this.value[event.newIndex]
+    this.value[event.newIndex] = current
+    this.value[event.currentIndex] = swapWith
   }
 }

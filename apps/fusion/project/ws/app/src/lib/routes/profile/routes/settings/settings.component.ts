@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
   OnInit,
@@ -11,7 +8,12 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core'
-import { NsInstanceConfig, ConfigurationsService, UserPreferenceService, UtilityService } from '@ws-widget/utils'
+import {
+  NsInstanceConfig,
+  ConfigurationsService,
+  UserPreferenceService,
+  UtilityService,
+} from '@ws-widget/utils'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { BtnSettingsService } from '@ws-widget/collection'
 import { FormControl } from '@angular/forms'
@@ -53,6 +55,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   isIntranetAllowed = true
   showIntranetSettings = false
   isLanguageEnabled = true
+  // showProfileSettings = false
 
   constructor(
     // todo mobile settings removed
@@ -67,11 +70,17 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const tab = this.route.snapshot.queryParamMap.get('tab')
-    this.showIntranetSettings = this.utilitySvc.isMobile
+    if (this.configSvc.restrictedFeatures) {
+      this.showIntranetSettings = this.utilitySvc.isMobile && !(this.configSvc.restrictedFeatures.has('showIntranetMobile'))
+      // this.showProfileSettings = !this.configSvc.restrictedFeatures.has('personProfile')
+    }
     switch (tab) {
       case 'notifications':
         this.selectedIndex = 1
         break
+      /*  case 'profile':
+         this.selectedIndex = 2
+         break */
       default:
         this.selectedIndex = 0
         break
@@ -111,18 +120,12 @@ export class SettingsComponent implements OnInit, OnDestroy {
       this.updateActiveStatus()
       // Events Subscription
       this.modeChangeSubs = this.darkModeForm.valueChanges
-        .pipe(
-          distinctUntilChanged(),
-          debounceTime(150),
-        )
+        .pipe(distinctUntilChanged(), debounceTime(150))
         .subscribe((isDark: boolean) => {
           this.btnSettingsSvc.applyThemeMode(isDark)
         })
       this.modeChangeSubs = this.intranetContentForm.valueChanges
-        .pipe(
-          distinctUntilChanged(),
-          debounceTime(150),
-        )
+        .pipe(distinctUntilChanged(), debounceTime(150))
         .subscribe((isIntranet: boolean) => {
           this.btnSettingsSvc.intranetContentMode(isIntranet)
         })
@@ -213,25 +216,31 @@ export class SettingsComponent implements OnInit, OnDestroy {
     this.langChangedEvent.emit(path.value)
   }
 
-  async applyChanges() {
-    await this.userPrefSvc.saveUserPreference({
-      selectedLocale: this.chosenLanguage,
-      selectedLangGroup: this.contentLanguage.join(','),
-    })
-    if (this.appLanguage !== this.chosenLanguage) {
-      if (this.chosenLanguage === 'en') {
-        this.chosenLanguage = ''
-      }
-      if (this.mode === 'settings') {
-        location.assign(`${location.origin}/${this.chosenLanguage}${this.router.url}`)
-      } else {
-        location.assign(`${location.origin}/${this.chosenLanguage}/page/home`)
-      }
-
-    } else if (this.mode !== 'settings') {
-      this.router.navigate(['page', 'home'])
-    }
-    this.snackBar.open(this.successToast.nativeElement.value)
+  applyChanges() {
+    this.userPrefSvc
+      .saveUserPreference({
+        selectedLocale: this.chosenLanguage,
+        selectedLangGroup: this.contentLanguage.join(','),
+      })
+      .then(() => {
+        if (this.appLanguage !== this.chosenLanguage) {
+          if (this.chosenLanguage === 'en') {
+            this.chosenLanguage = ''
+          }
+          if (this.mode === 'settings') {
+            location.assign(`${location.origin}/${this.chosenLanguage}${this.router.url}`)
+          } else {
+            location.assign(`${location.origin}/${this.chosenLanguage}/page/home`)
+          }
+        } else if (this.mode !== 'settings') {
+          if (this.configSvc.userUrl) {
+            this.router.navigateByUrl(this.configSvc.userUrl)
+          } else {
+            this.router.navigate(['page', 'home'])
+          }
+        }
+        this.snackBar.open(this.successToast.nativeElement.value)
+      })
   }
 
   updateCurrentTabIndex(changeEvent: MatTabChangeEvent) {
@@ -241,6 +250,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
       case 1:
         tab = 'notifications'
         break
+      /* case 2:
+        tab = 'profile'
+        break */
     }
     this.router.navigate([], { queryParams: { tab } })
   }

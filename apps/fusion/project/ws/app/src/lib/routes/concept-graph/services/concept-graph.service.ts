@@ -1,24 +1,22 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
-import { ConceptGraphApiService } from '../apis/concept-graph-api.service'
 import { Observable } from 'rxjs'
+import { ConceptGraphApiService } from '../apis/concept-graph-api.service'
+// tslint:disable-next-line: max-line-length
 import {
+  IConceptAutoComplete,
   IConceptResult,
-  IRelationLinks,
+  ILinkedIndex,
   IRelationChild,
   IRelationChildren,
   IRelationData,
+  IRelationLinks,
   IReturnChild,
-  IConceptAutoComplete,
-  ILinkedIndex,
 } from '../models/conceptGraph.model'
 @Injectable({
   providedIn: 'root',
 })
 export class ConceptGraphService {
-  constructor(private conceptApi: ConceptGraphApiService) { }
+  constructor(private conceptApi: ConceptGraphApiService) {}
   getConcepts(ids: string): Observable<IConceptResult[]> {
     try {
       return this.conceptApi.getConcepts(ids)
@@ -97,7 +95,7 @@ export class ConceptGraphService {
             if (firstLevelTopicIds.indexOf(innerCurrent.id) === -1) {
               newArray.push(innerCurrent)
             }
-            // console.log(innerCurrent)
+            // //console.log(innerCurrent)
           })
           // replace children with de duplicated children.
           current.children = newArray
@@ -134,7 +132,6 @@ export class ConceptGraphService {
       // return new array
       const temp1: IRelationData = topicsRelations
       temp1.children = tempArray
-      // debugger
       const idArr = []
       let finalarray: IReturnChild[] = []
       idArr.push(temp1.id)

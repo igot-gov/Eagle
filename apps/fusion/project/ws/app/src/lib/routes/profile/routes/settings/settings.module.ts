@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
@@ -28,9 +25,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SettingsComponent } from './settings.component'
 import { NotificationSettingsComponent } from './components/notification-settings/notification-settings.component'
 import { SettingsService } from './settings.service'
+import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component'
 
 @NgModule({
-  declarations: [SettingsComponent, NotificationSettingsComponent],
+  declarations: [SettingsComponent, NotificationSettingsComponent, ProfileSettingsComponent],
   imports: [
     CommonModule,
     MatListModule,

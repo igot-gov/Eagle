@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import {
@@ -9,9 +6,6 @@ import {
   WidgetContentService,
 } from '@ws-widget/collection'
 // import { NsWidgetResolver } from '@ws-widget/resolver'
-import {
-  LoggerService,
-} from '@ws-widget/utils'
 import { ActivatedRoute } from '@angular/router'
 
 @Component({
@@ -23,30 +17,26 @@ export class CertificationComponent implements OnInit, OnDestroy {
   private routeDataSubscription: Subscription | null = null
   isFetchingDataComplete = false
   certificationData: NsContent.IContent | null = null
+  forPreview = window.location.href.includes('/author/')
+
   // discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
   //   NsDiscussionForum.IDiscussionForumInput
   // > | null = null
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private logger: LoggerService,
-    private contentSvc: WidgetContentService,
-  ) { }
+  constructor(private activatedRoute: ActivatedRoute, private contentSvc: WidgetContentService) {}
 
   ngOnInit() {
     this.routeDataSubscription = this.activatedRoute.data.subscribe(
       async data => {
         this.certificationData = data.content.data
-        this.logger.log(this.certificationData)
-        if (this.certificationData) {
-          // this.formDiscussionForumWidget(this.certificationData)
-        }
-        if (this.certificationData && this.certificationData.artifactUrl.indexOf('content-store') >= 0) {
+        if (
+          this.certificationData &&
+          this.certificationData.artifactUrl.indexOf('content-store') >= 0
+        ) {
           await this.setS3Cookie(this.certificationData.identifier)
         }
         this.isFetchingDataComplete = true
       },
-      () => {
-      },
+      () => {},
     )
   }
 
@@ -64,6 +54,7 @@ export class CertificationComponent implements OnInit, OnDestroy {
   //       name: NsDiscussionForum.EDiscussionType.LEARNING,
   //       title: content.name,
   //       initialPostCount: 2,
+  //       isDisabled: this.forPreview,
   //     },
   //     widgetSubType: 'discussionForum',
   //     widgetType: 'discussionForum',
@@ -79,5 +70,4 @@ export class CertificationComponent implements OnInit, OnDestroy {
       })
     return
   }
-
 }

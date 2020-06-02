@@ -1,9 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input } from '@angular/core'
-import { IRole, IVariant } from '../../../../models/navigator.model'
+import { Component, Input, OnInit } from '@angular/core'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { IRole, IVariant } from '../../../../models/navigator.model'
 
 @Component({
   selector: 'ws-app-role-card',
@@ -30,7 +27,7 @@ export class RoleCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // console.log('test', this.roleOffering)
+    // //console.log('test', this.roleOffering)
     this.selectedVariant = {
       variant_id: this.roleOffering.variants[0].variant_id,
       variant_name: this.roleOffering.variants[0].variant_name,
@@ -58,7 +55,6 @@ export class RoleCardComponent implements OnInit {
   }
 
   changeVariants(mode: string) {
-
     if (mode === 'prev') {
       this.showMore = true
       this.variantStart -= 3
@@ -71,7 +67,7 @@ export class RoleCardComponent implements OnInit {
     } else {
       this.showLess = true
       // here we update the variants based on the selection
-      if ((this.allVariants.length - 3) > 3) {
+      if (this.allVariants.length - 3 > 3) {
         this.variantStart += 3
         const tempVariants = this.allVariants.concat()
         this.variants = tempVariants.splice(this.variantStart, 3)
@@ -87,6 +83,6 @@ export class RoleCardComponent implements OnInit {
       }
     }
 
-    // console.log('new variants', this.variants, this.otherVariants)
+    // //console.log('new variants', this.variants, this.otherVariants)
   }
 }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { IUserPreference } from './user-preference.model'
@@ -71,7 +68,16 @@ export class UserPreferenceService {
           (this.configurationSvc.userPreference &&
             this.configurationSvc.userPreference.defaultCardType) ||
           '',
+        completedActivity:
+          (this.configurationSvc.userPreference &&
+            this.configurationSvc.userPreference.completedActivity) ||
+          [],
         ...(changedUserPref || {}),
+        completedTour: this.configurationSvc.completedTour,
+        profileSettings:
+          (this.configurationSvc.userPreference &&
+            this.configurationSvc.userPreference.profileSettings) ||
+          this.configurationSvc.profileSettings, ...(changedUserPref || {}),
       }
       const oldUserPref: IUserPreference | null = this.configurationSvc.userPreference
       this.configurationSvc.userPreference = newUserPref

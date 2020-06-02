@@ -1,0 +1,135 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.card-container {
+  height: 100%;
+  width: 265px;
+  box-sizing: border-box;
+
+  .override-padding {
+    padding-top: 8px;
+  }
+}
+
+.title {
+  width: 100%;
+}
+
+.content {
+  height: 70px;
+}
+
+.text-div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate {
+  max-width: 100%;
+}
+
+.group-div {
+  height: 40px;
+}
+
+.content-div {
+  height: 68px;
+}
+
+.card-img {
+  height: 150PX;
+  max-height: 150px;
+  display: block;
+}
+
+$card-height: 130px;
+
+.feature-container {
+  border-radius: 4px;
+  text-align: center;
+  width: 300px;
+  height: $card-height;
+  max-height: $card-height;
+}
+
+.card-header {
+  height: 2px;
+  position: absolute;
+  top: 0px;
+}
+
+.card-title {
+  line-height: 1.2;
+}
+
+// .card-txt {
+//   color: $color-text-dark;
+// }
+
+.grey-filter {
+  filter: grayscale(0.9) contrast(0.7) opacity(0.9);
+  cursor: auto;
+}
+
+
+.card-border {
+  border-bottom: none;
+}
+
+.text-bold {
+  font-weight: 400
+}
+
+.card-space-saving-container {
+  $card-padding: $size-m;
+  $action-btn-size: 2.5 * $size-m;
+  $card-width: 345px;
+  margin: 6px;
+  position: relative;
+  width: $card-width;
+  height: 100%;
+  box-sizing: border-box;
+
+  mat-card-content {
+    margin: 0 -0.25 * $card-padding;
+    min-height: 50px;
+    position: relative;
+  }
+
+  @include breakpoint-lt-l {
+    margin-top: 8px;
+  }
+
+  .card-img {
+    height: 150PX;
+    max-height: 150px;
+    display: block;
+  }
+
+  .card-header-meta {
+    margin-top: 8px;
+  }
+
+  $title-line-count: 2;
+  $title-line-height: 1.2em;
+
+  $title-line-count: 2;
+  $title-line-height: 1.3em;
+
+  .title-text {
+    margin: $size-s 0;
+    position: relative;
+    overflow: hidden;
+    height: $title-line-count * $title-line-height;
+    line-height: $title-line-height;
+  }
+
+  $description-line-count: 3;
+  $description-line-height: 1.4em;
+
+  .description-text {
+    position: relative;
+    overflow: hidden;
+  }
+}

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Directive, OnInit, Output, EventEmitter, ElementRef, OnDestroy } from '@angular/core'
 import { fromEvent } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
@@ -19,16 +16,29 @@ export class InViewPortDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.check()
-
     this.scroll =
       fromEvent(window, 'scroll').pipe(debounceTime(100)).subscribe(() => {
         this.check()
       })
-
     this.resize =
       fromEvent(window, 'resize').pipe(debounceTime(100)).subscribe(() => {
         this.check()
       })
+
+    // let limit = 1
+    // this.scroll =
+    //   fromEvent(window, 'scroll').pipe(debounceTime(100)).subscribe(() => {
+    //     if (limit) {
+    //       this.check()
+    //       limit -= 1
+    //     }
+    //   })
+
+    // this.resize =
+    //   fromEvent(window, 'resize').toPromise().then(() => {
+    //     this.check()
+    //   })
+
   }
 
   ngOnDestroy() {
@@ -66,8 +76,6 @@ export class InViewPortDirective implements OnInit, OnDestroy {
     } else if (direction === 'horizontal') {
       event = (elSize && hVisible) ? true : false
     }
-
     this.inViewport.emit(event)
   }
-
 }

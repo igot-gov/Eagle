@@ -1,27 +1,41 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { InterestService } from './../../../../../../../../../../../../app/src/lib/routes/profile/routes/interest/services/interest.service'
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
-import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
-import { AbstractControl, FormBuilder, FormGroup, FormControl } from '@angular/forms'
-import { IPickerContentData, IWidgetElementHtml, NsContent, NsContentStripMultiple } from '@ws-widget/collection/src/public-api'
-import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators'
-import { NsWidgetResolver } from '@ws-widget/resolver/src/public-api'
-import { SEARCHV6 } from './content-strip-v2.constant'
-import { MatDialog, MatChipInputEvent } from '@angular/material'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectorRef,
+  OnDestroy,
+} from '@angular/core'
+import { AbstractControl, FormBuilder, FormControl, FormGroup } from '@angular/forms'
+import { MatChipInputEvent, MatDialog } from '@angular/material'
+import {
+  IPickerContentData,
+  IWidgetElementHtml,
+  NsContent,
+  NsContentStripMultiple,
+  WidgetContentService,
+  NSSearch,
+} from '@ws-widget/collection/src/public-api'
+import { NsWidgetResolver } from '@ws-widget/resolver/src/public-api'
+import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
 import { Observable, of } from 'rxjs'
+import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators'
+import { InterestService } from './../../../../../../../../../../../../app/src/lib/routes/profile/routes/interest/services/interest.service'
+import { SEARCHV6 } from './content-strip-v2.constant'
+import { ISortEvent } from '../../../../../../../../../modules/shared/directives/draggable/sortable-list.directive'
+import { ConfigurationsService } from '@ws-widget/utils/src/lib/services/configurations.service'
 
 @Component({
   selector: 'ws-auth-content-strip-v2',
   templateUrl: './content-strip-v2.component.html',
   styleUrls: ['./content-strip-v2.component.scss'],
 })
-export class ContentStripV2Component implements OnInit {
+export class ContentStripV2Component implements OnInit, OnDestroy {
   @Output() data = new EventEmitter<{
     content: NsContentStripMultiple.IContentStripMultiple
-    isValid: boolean,
+    isValid: boolean
   }>()
   @Input() content!: NsContentStripMultiple.IContentStripMultiple
   @Input() identifier = ''
@@ -29,7 +43,7 @@ export class ContentStripV2Component implements OnInit {
   @Input() size = 1
   form!: FormGroup
   pickerContentData!: IPickerContentData
-  requestType!: 'search' | 'ids' | 'api' | 'KB' | 'Collections'
+  requestType!: 'search' | 'ids' | 'api' | 'KB' | 'Collections' | 'searchQuery'
   subscription: any
   dataType = 'authoring'
   tabs: number[] = []
@@ -40,18 +54,42 @@ export class ContentStripV2Component implements OnInit {
   currentStrip!: NsContentStripMultiple.IContentStripUnit
   filterBy = 'viewCount'
   language: string[] = []
-  backUpRequestType!: 'search' | 'ids' | 'api' | 'KB' | 'Collections'
+  backUpRequestType!: 'search' | 'ids' | 'api' | 'KB' | 'Collections' | 'searchQuery'
   keywords: string[] = []
   keywordsCtrl = new FormControl('')
   collectionId: string[] = []
   id = 0
+  cardSubtype:
+    | 'standard'
+    | 'minimal'
+    | 'space-saving'
+    | 'card-user-details'
+    | 'basic-info'
+    | 'basic-details'
+    | 'card-description-back' = 'standard'
   filteredOptions$: Observable<string[]> = of([])
+  selectedData: Partial<NsContent.IContent>[] = []
+  selectedDataAvailable = true
+  enableSorting = false
+  defaultThumbnail = ''
+  searchQueryValue = ''
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
   constructor(
     private interestSvc: InterestService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-  ) { }
+    private changeDetector: ChangeDetectorRef,
+    private contentSvc: WidgetContentService,
+    private configSvc: ConfigurationsService,
+  ) {
+    const instanceConfig = this.configSvc.instanceConfig
+    if (instanceConfig) {
+      this.defaultThumbnail = instanceConfig.logos.defaultContent
+    }
+  }
+  ngOnDestroy(): void {
+    this.changeDetector.detach()
+  }
 
   getPath(...keys: string[]): AbstractControl {
     let path: AbstractControl | undefined
@@ -92,7 +130,10 @@ export class ContentStripV2Component implements OnInit {
     this.form = this.formBuilder.group({
       key: [''],
       title: [''],
-      stripConfig: [''],
+      stripConfig: this.formBuilder.group({
+        cardSubType: [''],
+        postCardForSearch: [''],
+      }),
       request: this.formBuilder.group({
         searchV6: [],
         ids: [],
@@ -101,7 +142,6 @@ export class ContentStripV2Component implements OnInit {
         searchRegionRecommendation: [],
       }),
     })
-
     this.filteredOptions$ = this.keywordsCtrl.valueChanges.pipe(
       startWith(this.keywordsCtrl.value),
       debounceTime(500),
@@ -125,8 +165,15 @@ export class ContentStripV2Component implements OnInit {
 
     this.form.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe({
       next: () => {
-        this.content.strips[this.index] = { ...this.content.strips[this.index], ...this.form.value, stripConfig: true }
-        if (this.requestType === 'KB' || this.requestType === 'Collections') {
+        this.content.strips[this.index] = {
+          ...this.content.strips[this.index],
+          ...this.form.value,
+        }
+        if (
+          this.requestType === 'KB' ||
+          this.requestType === 'Collections' ||
+          this.requestType === 'searchQuery'
+        ) {
           this.content.strips[this.index].searchV6Type = this.requestType
         } else {
           this.content.strips[this.index].searchV6Type = null
@@ -139,11 +186,12 @@ export class ContentStripV2Component implements OnInit {
     })
     if (this.content && (!this.content.strips || !this.content.strips.length)) {
       this.content.strips = [] as any
-      this.addStrip(false)
+      this.addEnd(false)
     } else {
       this.currentStrip = this.content.strips[this.index]
       this.initializeForm(this.currentStrip)
     }
+    this.fetchContentDetails()
   }
 
   onIndexChange(index: number) {
@@ -161,40 +209,47 @@ export class ContentStripV2Component implements OnInit {
   initializeForm(strip: NsContentStripMultiple.IContentStripUnit) {
     this.currPreWidget = 0
     this.currPostWidget = 0
-    this.pickerContentData = {
-      preselected: new Set(),
+    const pickerContent = {
+      preselected: new Set<string>(),
       enablePreselected: true,
       availableFilters: ['contentType'],
     }
-
     this.getPath('key').setValue(strip.key || this.getUniqueId())
     this.getPath('title').setValue(strip.title || '')
     if (strip.request) {
       if (strip.request.ids && strip.request.ids.length) {
-        strip.request.ids.map(v => (this.pickerContentData.preselected as Set<string>).add(v))
+        strip.request.ids.map(v => (pickerContent.preselected as Set<string>).add(v))
         this.requestType = 'ids'
       } else if (strip.request.searchV6) {
         this.language = strip.request.searchV6.locale || []
         try {
-          this.keywords = (strip.request.searchV6.filters as any)[0].andFilters[0]
-            .keywords || []
+          this.keywords = (strip.request.searchV6.filters as any)[0].andFilters[0].keywords || []
         } catch (_ex) {
           this.keywords = []
         }
         try {
-          this.filterBy =
-            Object.keys((strip.request.searchV6.sort as any)[0])[0] || 'viewCount'
+          this.filterBy = Object.keys((strip.request.searchV6.sort as any)[0])[0] || 'viewCount'
         } catch (_ex) {
           this.filterBy = 'viewCount'
         }
         try {
-          this.collectionId = (strip.request.searchV6.filters as any)[0].andFilters[0]
-            .collectionsId || []
+          this.collectionId =
+            (strip.request.searchV6.filters as any)[0].andFilters[0].collectionsId || []
         } catch (_ex) {
           this.collectionId = []
         }
-        this.collectionId.map(v => (this.pickerContentData.preselected as Set<string>).add(v))
-        this.requestType = strip.searchV6Type === 'Collections' ? 'Collections' : 'KB'
+        try {
+          this.searchQueryValue = strip.request.searchV6.query
+        } catch (_ex) {
+          this.searchQueryValue = ''
+        }
+        this.collectionId.map(v => (pickerContent.preselected as Set<string>).add(v))
+        this.requestType =
+          strip.searchV6Type === 'Collections'
+            ? 'Collections'
+            : strip.searchV6Type === 'KB'
+            ? 'KB'
+            : 'searchQuery'
       } else if (strip.request.search) {
         this.requestType = 'search'
       } else if (strip.request.api) {
@@ -210,6 +265,11 @@ export class ContentStripV2Component implements OnInit {
         strip.request.searchRegionRecommendation || null,
       )
     }
+    if (strip.stripConfig) {
+      this.cardSubtype = strip.stripConfig.cardSubType || 'standard'
+      this.getPath('stripConfig', 'postCardForSearch').setValue('true')
+    }
+    this.pickerContentData = pickerContent
     this.backUpRequestType = this.requestType
   }
 
@@ -220,6 +280,7 @@ export class ContentStripV2Component implements OnInit {
       enablePreselected: true,
       availableFilters: ['contentType'],
     }
+    this.selectedData = []
     let goThrough = !confirm
     if (confirm) {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -234,10 +295,12 @@ export class ContentStripV2Component implements OnInit {
           this.keywords = []
           this.language = []
           this.collectionId = []
+          this.searchQueryValue = ''
           this.getPath('request', 'searchV6').setValue(null)
           this.getPath('request', 'ids').setValue(null)
           this.getPath('request', 'search').setValue(null)
           this.getPath('request', 'searchRegionRecommendation').setValue(null)
+          this.getPath('stripConfig', 'cardSubType').setValue('standard')
           this.backUpRequestType = this.requestType
         } else {
           this.requestType = this.backUpRequestType
@@ -247,7 +310,8 @@ export class ContentStripV2Component implements OnInit {
           if (this.requestType === 'KB' || this.requestType === 'Collections') {
             try {
               this.filterBy =
-                Object.keys((this.getPath('request', 'searchV6').value.sort as any)[0])[0] || 'viewCount'
+                Object.keys((this.getPath('request', 'searchV6').value.sort as any)[0])[0] ||
+                'viewCount'
               const ids: string[] = (this.getPath('request', 'searchV6').value.filters as any)[0]
                 .andFilters[0].collectionsId
               ids.map(v => (this.pickerContentData.preselected as Set<string>).add(v))
@@ -258,6 +322,8 @@ export class ContentStripV2Component implements OnInit {
             this.getPath('request', 'ids').value.map((v: string) =>
               (this.pickerContentData.preselected as Set<string>).add(v),
             )
+          } else if (this.requestType === 'searchQuery') {
+            this.searchQueryValue = ''
           }
         }
       })
@@ -270,13 +336,21 @@ export class ContentStripV2Component implements OnInit {
   }
 
   onContentSelectionChanged(event: { content: Partial<NsContent.IContent>; checked: boolean }) {
-    const lexIDs = (this.form.controls.request as FormGroup).controls.ids.value || []
+    const lexIDs = JSON.parse(
+      JSON.stringify((this.form.controls.request as FormGroup).controls.ids.value || []),
+    )
+
     if (event.checked) {
+      this.selectedData.push(event.content)
+      this.changeDetector.detectChanges()
       lexIDs.push(event.content.identifier)
       if (this.pickerContentData.preselected) {
         this.pickerContentData.preselected.add(event.content.identifier as string)
       }
     } else {
+      this.selectedData = this.selectedData.filter((data: Partial<NsContent.IContent>) => {
+        return data.identifier !== event.content.identifier
+      })
       lexIDs.splice(lexIDs.indexOf(event.content.identifier), 1)
       if (this.pickerContentData.preselected) {
         this.pickerContentData.preselected.delete(event.content.identifier as string)
@@ -285,26 +359,8 @@ export class ContentStripV2Component implements OnInit {
     this.getPath('request', 'ids').setValue(lexIDs)
   }
 
-  addPrePostWidgets(type: 'pre' | 'post') {
-    const preWidget: NsWidgetResolver.IRenderConfigWithTypedData<IWidgetElementHtml> = {
-      widgetData: {
-        html: '',
-        template: '',
-        templateData: {
-          image: '',
-          title: '',
-        },
-        containerStyle: {
-          width: '265px',
-        },
-        containerClass: 'h-full',
-      },
-      widgetType: 'element',
-      widgetSubType: 'elementHtml',
-      widgetHostClass: 'mat-elevation-z4',
-      widgetHostStyle: {},
-      widgetInstanceId: '',
-    }
+  addPrePostWidgetEnd(type: 'pre' | 'post') {
+    const preWidget = this.addPrePostWidgets()
     if (type === 'pre') {
       if (this.currentStrip.preWidgets) {
         this.currentStrip.preWidgets.push(preWidget)
@@ -322,6 +378,48 @@ export class ContentStripV2Component implements OnInit {
       this.currPostWidget =
         this.currentStrip.postWidgets.length > 1 ? this.currentStrip.postWidgets.length - 1 : 0
     }
+  }
+
+  addPrePostWidgetFront(type: 'pre' | 'post') {
+    const preWidget = this.addPrePostWidgets()
+    if (type === 'pre') {
+      if (this.currentStrip.preWidgets) {
+        this.currentStrip.preWidgets.unshift(preWidget)
+      } else {
+        this.currentStrip.preWidgets = [preWidget]
+      }
+      this.currPreWidget = 0
+    } else if (type === 'post') {
+      if (this.currentStrip.postWidgets) {
+        this.currentStrip.postWidgets.unshift(preWidget)
+      } else {
+        this.currentStrip.postWidgets = [preWidget]
+      }
+      this.currPostWidget = 0
+    }
+  }
+
+  addPrePostWidgets(): NsWidgetResolver.IRenderConfigWithTypedData<IWidgetElementHtml> {
+    const preWidget: NsWidgetResolver.IRenderConfigWithTypedData<IWidgetElementHtml> = {
+      widgetData: {
+        html: '',
+        template: '',
+        templateData: {
+          image: '',
+          title: '',
+        },
+        containerStyle: {
+          width: '262px',
+        },
+        containerClass: 'h-full',
+      },
+      widgetType: 'element',
+      widgetSubType: 'elementHtml',
+      widgetHostClass: 'mat-elevation-z4',
+      widgetHostStyle: {},
+      widgetInstanceId: '',
+    }
+    return preWidget
   }
 
   updatePrePost(
@@ -347,7 +445,7 @@ export class ContentStripV2Component implements OnInit {
   removeStrip() {
     this.content.strips.splice(this.index, 1)
     if (this.index >= this.content.strips.length && this.index === 0) {
-      this.addStrip(false)
+      this.addEnd(false)
     } else if (this.index >= this.content.strips.length) {
       this.index = this.index - 1
       this.onIndexChange(this.index)
@@ -356,7 +454,23 @@ export class ContentStripV2Component implements OnInit {
     }
   }
 
-  addStrip(increaseIndex = true) {
+  addfront() {
+    const strip = this.addStrip()
+    this.content.strips.unshift(strip)
+    this.currentStrip = strip
+    this.index = 0
+    this.onIndexChange(this.index)
+  }
+
+  addEnd(increaseIndex = true) {
+    const strip = this.addStrip()
+    this.content.strips.push(strip)
+    this.currentStrip = strip
+    this.index = increaseIndex ? this.content.strips.length - 1 : this.index
+    this.onIndexChange(this.index)
+  }
+
+  addStrip(): NsContentStripMultiple.IContentStripUnit {
     const strip: NsContentStripMultiple.IContentStripUnit = {
       key: '',
       title: '',
@@ -371,9 +485,7 @@ export class ContentStripV2Component implements OnInit {
         api: undefined,
       },
     }
-    this.content.strips.push(strip)
-    this.currentStrip = strip
-    this.onIndexChange(increaseIndex ? this.index + 1 : this.index)
+    return strip
   }
 
   onIdChange(data: string[]) {
@@ -407,7 +519,7 @@ export class ContentStripV2Component implements OnInit {
       } else {
         this.collectionId = []
         this.getPath('request', 'searchV6').setValue(null, { events: false })
-        delete searchV6.filters[0].andFilters
+        // delete searchV6.filters[0].andFilters
         if (this.pickerContentData.preselected) {
           this.pickerContentData.preselected = new Set()
         }
@@ -415,21 +527,51 @@ export class ContentStripV2Component implements OnInit {
     }
     if (!this.collectionId.length) {
       const searchBody = this.getPath('request', 'searchV6').value
-      if (searchBody && searchBody.filters && searchBody.filters[0] && searchBody.filters[0].andFilters &&
-        searchBody.filters[0].andFilters[0] && searchBody.filters[0].andFilters[0].collectionsId &&
+      if (
+        searchBody &&
+        searchBody.filters &&
+        searchBody.filters[0] &&
+        searchBody.filters[0].andFilters &&
+        searchBody.filters[0].andFilters[0] &&
+        searchBody.filters[0].andFilters[0].collectionsId &&
         searchBody.filters[0].andFilters[0].collectionsId.length
       ) {
-        searchV6.filters[0].andFilters[0].collectionsId = [searchBody.filters[0].andFilters[0].collectionsId[0]]
+        searchV6.filters[0].andFilters[0].collectionsId = [
+          searchBody.filters[0].andFilters[0].collectionsId[0],
+        ]
       } else {
-        delete searchV6.filters[0].andFilters[0].collectionsId
+        if (
+          searchV6 &&
+          searchV6.filters &&
+          searchV6.filters[0].andFilters &&
+          searchV6.filters[0].andFilters[0] &&
+          searchV6.filters[0].andFilters[0].collectionsId
+        ) {
+          delete searchV6.filters[0].andFilters[0].collectionsId
+        }
       }
+    } else {
+      searchV6.filters[0].andFilters[0].collectionsId = this.collectionId
     }
     if (this.keywords && this.keywords.length) {
       searchV6.filters[0].andFilters[0].keywords = this.keywords || []
     } else {
-      delete searchV6.filters[0].andFilters[0].keywords
+      if (
+        searchV6 &&
+        searchV6.filters &&
+        searchV6.filters[0].andFilters &&
+        searchV6.filters[0].andFilters[0] &&
+        searchV6.filters[0].andFilters[0].keywords
+      ) {
+        delete searchV6.filters[0].andFilters[0].keywords
+      }
     }
-    if (!Object.keys(searchV6.filters[0].andFilters).length) {
+    if (
+      searchV6 &&
+      searchV6.filters &&
+      searchV6.filters[0].andFilters &&
+      !Object.keys(searchV6.filters[0].andFilters).length
+    ) {
       delete searchV6.filters[0].andFilters
     }
     this.pickerContentData = { ...this.pickerContentData }
@@ -440,15 +582,82 @@ export class ContentStripV2Component implements OnInit {
     if (this.currentStrip.preWidgets) {
       const preWidget = this.currentStrip.preWidgets[this.currPreWidget]
       const widgetArray = (preWidget.widgetHostClass || '').split(' ')
-      if (
-        preWidget.widgetHostClass &&
-        preWidget.widgetHostClass.indexOf('sticky-m') > -1
-      ) {
+      if (preWidget.widgetHostClass && preWidget.widgetHostClass.indexOf('sticky-m') > -1) {
         widgetArray.splice(widgetArray.indexOf('sticky-m'), 1)
       } else {
         widgetArray.push('sticky-m')
       }
       preWidget.widgetHostClass = widgetArray.join(' ')
     }
+  }
+
+  onCardChange() {
+    this.getPath('stripConfig', 'cardSubType').setValue(this.cardSubtype)
+  }
+
+  sort(event: ISortEvent) {
+    const current = this.selectedData[event.currentIndex]
+    const swapWith = this.selectedData[event.newIndex]
+    this.selectedData[event.newIndex] = current
+    this.selectedData[event.currentIndex] = swapWith
+    const idSet: string[] = []
+    this.selectedData.map((v: Partial<NsContent.IContent>) => {
+      if (v.identifier) {
+        idSet.push(v.identifier)
+      }
+    })
+    this.getPath('request', 'ids').setValue(idSet)
+  }
+
+  // drop(event: CdkDragDrop<string[]>) {
+  //   moveItemInArray(this.selectedData, event.previousIndex, event.currentIndex)
+  // }
+
+  onDeleteSelectedData(index: number) {
+    this.selectedData.splice(index, 1)
+    const idSet: string[] = []
+    const set = new Set<string>()
+    this.selectedData.map((v: Partial<NsContent.IContent>) => {
+      if (v.identifier) {
+        set.add(v.identifier)
+        idSet.push(v.identifier)
+      }
+    })
+    this.getPath('request', 'ids').setValue(idSet)
+    const pickerContent = {
+      preselected: set,
+      enablePreselected: true,
+      availableFilters: ['contentType'],
+    }
+    this.pickerContentData = {
+      ...pickerContent,
+    }
+    this.changeDetector.detectChanges()
+  }
+
+  fetchContentDetails() {
+    const lexIDs = JSON.parse(
+      JSON.stringify((this.form.controls.request as FormGroup).controls.ids.value || []),
+    )
+    this.selectedData = []
+    if (lexIDs && lexIDs.length > 0) {
+      this.contentSvc.fetchMultipleContent(lexIDs).subscribe(
+        results => {
+          if (results) {
+            results.map((v: Partial<NsContent.IContent>) => {
+              this.selectedData.push(v)
+            })
+          }
+          this.selectedDataAvailable = true
+        },
+        () => {
+          this.selectedDataAvailable = false
+        },
+      )
+    }
+  }
+
+  extractSearchQuery(event: NSSearch.ISearchV6Request) {
+    this.getPath('request', 'searchV6').setValue(event)
   }
 }

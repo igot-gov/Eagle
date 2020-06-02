@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
@@ -29,14 +26,14 @@ const API_END_POINTS = {
   providedIn: 'root',
 })
 export class LeadershipService {
-  constructor(private http: HttpClient) {}
-
-  shareTextMail(req: IWsEmailTextRequest): Observable<IWsEmailResponse> {
-    return this.http.post<any>(API_END_POINTS.EMAIL_TEXT, req).pipe(map(u => u.result))
-  }
+  constructor(private http: HttpClient) { }
 
   get randomId() {
     return RANDOM_ID_PER_USER + 1
+  }
+
+  shareTextMail(req: IWsEmailTextRequest): Observable<IWsEmailResponse> {
+    return this.http.post<any>(API_END_POINTS.EMAIL_TEXT, req).pipe(map(u => u.result))
   }
 
   emailToUserId(email: string): Observable<IWsEmailUserId> {
@@ -45,9 +42,11 @@ export class LeadershipService {
 
   //  Follow
   fetchUserFollow(userId: string): Observable<IWsUserFollow> {
-    return this.http.post<IWsUserFollow>(`${API_END_POINTS.USER_FOLLOW_DATA}`, userId)
+    const body = {
+      userid: userId,
+    }
+    return this.http.post<IWsUserFollow>(`${API_END_POINTS.USER_FOLLOW_DATA}`, body)
   }
-
   followUser(request: any): Observable<any> {
     return this.http.post<any>(API_END_POINTS.USER_FOLLOW, request)
   }

@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="deleteGoalStatus !== 'fetching'; else deleteProgress">
   <h2 class="mat-title margin-remove-bottom">
     <ng-container i18n>Are you sure you want to delete</ng-container>
@@ -13,9 +10,9 @@
     </mat-list-option>
   </mat-selection-list>
   <div class="flex flex-row-reverse">
-    <button mat-button i18n [disabled]="!users.selectedOptions.selected?.length"
+    <button name="done-button-goal-shared-delete-dialog"  mat-button i18n [disabled]="!users.selectedOptions.selected?.length"
       (click)="deleteGoalForUser(users.selectedOptions.selected)">
-      DONE
+      Done
     </button>
   </div>
 </ng-container>

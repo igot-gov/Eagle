@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export enum EFeatures {
   // Playlists
   PLAYLIST = 'playlist',
@@ -414,10 +411,12 @@ export enum EFeatures {
   KNOWLEDGE_HUB_VIEW_TOOLS_STRIP = 'knowledgeHubViewProjectReferencesStrip',
   KNOWLEDGE_HUB_VIEW_MARKETING_STRIP = 'knowledgeHubViewMarketingStrip',
 
+  // commercial_begin
   // Concept Graph
   CONCEPT_GRAPH = 'conceptGraph',
   CONCEPT_GRAPH_SEARCH_TOPICS = 'conceptGraphSearchTopics',
   CONCEPT_GRAPH_VIEW_CONCEPT_GRAPH_FOR_TOPIC = 'conceptGraphViewConceptGraphForTopic',
+  // commercial_end
 
   // Channels
   CHANNELS = 'channels',

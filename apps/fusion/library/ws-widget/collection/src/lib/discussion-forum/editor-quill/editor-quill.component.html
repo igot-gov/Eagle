@@ -1,14 +1,13 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="!reset">
   <quill-editor
+    name="discussion-forum-input-field"
     class="quill-editor"
     [ngModel]="htmlText"
     (onContentChanged)="onContentChanged($event)"
     [required]="true"
     [minLength]="minLength"
     #editor="ngModel"
+    placeholder="{{ placeholder }}"
   >
   </quill-editor>
   <p *ngIf="(editor.dirty || editor.touched) && editor.invalid" class="error-text mat-caption">

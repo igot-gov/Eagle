@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { IWidgetElementHtml } from '@ws-widget/collection'
 import { CONTENT_BASE_WEBHOST_ASSETS } from '@ws/author/src/lib/constants/apiEndpoints'
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
@@ -25,8 +22,30 @@ export class HtmlV2Component implements OnInit {
     if (dataType === 'editor') {
       this.content.html = value
     } else if (dataType === 'html') {
-      this.content.html = value.target.value
+      const htmlText = this.extractAnchorTag(value.target.value)
+      if (htmlText) {
+        this.content.html = htmlText
+      } else {
+        this.content.html = value.target.value
+      }
     }
+  }
+  extractAnchorTag(value: string): string | null {
+    const el = document.createElement('html')
+    el.innerHTML = value
+    if (el.getElementsByTagName('a')[0]) {
+      const href = el.getElementsByTagName('a')[0].getAttribute('href')
+      if (href && href.indexOf(this.identifier) > -1 && href.indexOf('#') > -1) {
+        if (href.indexOf('./page/') < 0) {
+          el.getElementsByTagName('a')[0].setAttribute(
+            'href',
+            `./page/${this.identifier}#${href.split('#')[1]}`,
+          )
+          return el.innerHTML
+        }
+      }
+    }
+    return null
   }
 
   ngOnInit() { }

@@ -1,0 +1,39 @@
+<div class="m-0 lg:py-2 card-height">
+  <div class="text-center" *ngIf="playlistFetchStatus === 'fetching'">
+    <p class="font-family fetching" i18n>Fetching playlists ...</p>
+  </div>
+  <div class="text-center" *ngIf="!playlists?.length && playlistFetchStatus === 'done'">
+    <div class="flex flex-center">
+      <span class="font-family fetching">{{name}}
+        <span class="font-family fetching" i18n> has not created any playlists.</span></span>
+    </div>
+  </div>
+  <div class="text-center" *ngIf="playlistFetchStatus === 'error'">
+    <p class="mat-error" i18n>Failed to fetch playlists.</p>
+  </div>
+  <ws-utils-horizontal-scroller *ngIf="playlists?.length" [loadStatus]="'done'">
+    <div class="px-3 py-1 playlist-card" *ngFor="let playlist of playlists">
+      <div class="card relative">
+        <img [src]="playlist?.icon" [wsUtilsDefaultThumbnail]="defaultThumbnail"
+          class="thumbnail ws-mat-primary-lite-background" alt="Playlist Icon" i18n-alt />
+        <div class="overlay flex flex-middle flex-center">
+          <div class="color-white playlist-font">
+            <h2 class="text-center playlist-count">
+              {{ playlist.contents.length | number }}
+            </h2>
+            <mat-icon inline="true" class="playlist-icon">playlist_play</mat-icon>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-middle margin-top-xxs margin-remove-bottom">
+        <h3 class="mat-subheading-2 font-weight-500 margin-remove-bottom text-truncate">{{ playlist.name }}</h3>
+        <span class="margin-left-xs margin-right-xs">|</span>
+        <span class="mat-caption">{{ playlist.visibility | uppercase }}</span>
+      </div>
+      <span *ngIf="playlists?.sharedBy" class="mat-body">
+        <ng-container i18n>shared by </ng-container>
+        <span class="mat-body-strong margin-remove-bottom">{{ playlist.sharedByDisplayName }}</span>
+      </span>
+    </div>
+  </ws-utils-horizontal-scroller>
+</div>

@@ -1,18 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
-import { CONSTANTS } from '../../utils/env'
+import { ISubmission } from '../../models/exercise.model'
+import { processUrl } from '../../utils/contentHelpers'
+import { CONSTANTS, RESTRICTED_PYTHON_STMT } from '../../utils/env'
 import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_ENDPOINTS = {
   execute: `${CONSTANTS.IAP_CODE_API_BASE}/backend/Code/Compile`,
-  verify_submit_base: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users`,
-  view_last_submission_base: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users`,
+  verify_submit_base: `${CONSTANTS.SUBMISSION_API_BASE}/v1/users`,
+  view_last_submission_base: `${CONSTANTS.SUBMISSION_API_BASE}/v1/users`,
 }
 
 const API_ENDPOINT_TAILS = {
@@ -24,6 +23,8 @@ const API_ENDPOINT_TAILS = {
   fpVerify: `python-submission?type=verify`,
   pfSubmit: `code-submissions`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export type actionType = 'Verify' | 'Submit'
 export type groupType = 'fp' | 'ce' | 'pf'
@@ -100,6 +101,9 @@ export async function viewLastSubmission(
       method: 'GET',
       url,
     })
+    response.data.response.forEach((element: ISubmission) => {
+      element.submission_url = processUrl(element.submission_url)
+    })
     return response.data || {}
   } catch (e) {
     logError(e)
@@ -107,14 +111,48 @@ export async function viewLastSubmission(
   }
 }
 
+// tslint:disable-next-line: no-any
+export function checkForBlockedStatement(req: any): null | any {
+  if (req.body && req.body.language === 16) {
+    let canReject = false
+    let i = 0
+    while (i < RESTRICTED_PYTHON_STMT.length && !canReject) {
+      const regex = new RegExp(RESTRICTED_PYTHON_STMT[i], 'gm')
+      if (regex.test(req.body.code)) {
+        canReject = true
+      }
+      i = i + 1
+    }
+    if (canReject) {
+      return {
+        code: req.body.code,
+        errors: 'Forbidden statements found in the code',
+        langid: 16,
+        output: '',
+        time: 0,
+      }
+    }
+  }
+  return null
+}
+
 export const codeApi = Router()
 
 codeApi.post('/execute', async (req, res) => {
+  const isForbiddenStmtPresent = checkForBlockedStatement(req)
+  if (isForbiddenStmtPresent) {
+    res.status(200).send(isForbiddenStmtPresent)
+    return
+  }
   try {
     const response = await execute(req.body)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -131,11 +169,20 @@ codeApi.get('/viewLastSubmission/:contentId', async (req, res) => {
     const response = await viewLastSubmission(lexId, uuid, rootOrg)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
 codeApi.post('/:group/:action/:contentId', async (req, res) => {
+  const isForbiddenStmtPresent = checkForBlockedStatement(req)
+  if (isForbiddenStmtPresent) {
+    res.status(200).send(isForbiddenStmtPresent)
+    return
+  }
   try {
     const org = req.header('org')
     const rootOrg = req.header('rootOrg')
@@ -144,14 +191,17 @@ codeApi.post('/:group/:action/:contentId', async (req, res) => {
       return
     }
     const group: string = req.params.group
-    const action: string =
-      req.params.action.charAt(0).toUpperCase() + req.params.action.slice(1)
+    const action: string = req.params.action.charAt(0).toUpperCase() + req.params.action.slice(1)
     const groupAction: verifySubmitType = (group + action) as verifySubmitType
     const lexId = req.params.contentId
     const uuid = extractUserIdFromRequest(req)
     const response = await verifySubmit(groupAction, lexId, uuid, req.body, rootOrg)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

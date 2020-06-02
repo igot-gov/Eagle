@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-card class="margin-m">
   <div class="flex">
     <h3 class="mat-title">{{ exerciseData?.title }}</h3>
@@ -9,8 +6,7 @@
       {{ exerciseTimeRemaining / 1000 | pipeDurationTransform: 'hms' }}
     </h3>
   </div>
-  <mat-progress-bar mode="determinate" [value]="(exerciseTimeRemaining / exerciseData?.timeLimit) * 100"
-    *ngIf="resourceType === 'Exercise'"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" [value]="(exerciseTimeRemaining / exerciseData?.timeLimit) * 100" *ngIf="resourceType === 'Exercise'"></mat-progress-bar>
 </mat-card>
 <!-- <mat-card class="margin-m">
   <h3 class="mat-h3" i18n="problem statement heading">Problem Statement</h3>
@@ -43,17 +39,16 @@
     [htmlText]="(exerciseData?.starterCodes)[0]"
   ></ws-quill-code-editor> -->
 
-  <ace-editor class="code-container" theme="eclipse" [mode]="(exerciseData?.supportedLanguages)[0].mode"
+  <ace-editor class="code-container" (textChanged)="raiseInputChange()" theme="eclipse" [mode]="(exerciseData?.supportedLanguages)[0].mode"
     [options]="options" [(text)]="(exerciseData?.starterCodes)[0]" #editor></ace-editor>
   <mat-card-actions>
     <div class="flex flex-between flex-wrapped">
       <div class="flex flex flex-between flex-wrapped">
         <div class="margin-top-m flex flex-wrapped">
-          <button mat-raised-button color="primary" class="margin-left-xs" (click)="reset()"
-            i18n="button reset code pane text">
+          <button mat-raised-button color="primary" class="margin-left-xs" (click)="reset() ; raiseClickEvent()" i18n="button reset code pane text">
             Reset
           </button>
-          <button mat-raised-button color="primary" class="margin-left-s" (click)="showPostActionSection('execute')"
+          <button mat-raised-button color="primary" class="margin-left-s" (click)="showPostActionSection('execute') ; raiseClickEvent()"
             i18n="button execute code pane text">
             Execute
           </button>
@@ -61,7 +56,7 @@
         <div class="margin-top-m flex flex-wrapped">
           <div class="tooltip">
             <span class="tooltiptext" id="myTooltip" i18n>Copy to clipboard</span>
-            <button mat-raised-button color="primary" (click)="copyToClipBoardFunction()" (mouseout)="outFunc()">
+            <button mat-raised-button color="primary" (click)="copyToClipBoardFunction() ; raiseClickEvent()" (mouseout)="outFunc()">
               Copy Code
             </button>
           </div>
@@ -69,18 +64,17 @@
       </div>
       <div class="flex flex-between flex-wrapped" *ngIf="resourceType === 'Exercise'">
         <div class="margin-top-m flex flex-wrapped">
-          <button mat-raised-button color="primary" (click)="showPostActionSection('verify')" class="margin-left-xs"
+          <button mat-raised-button color="primary" (click)="showPostActionSection('verify') ; raiseClickEvent()" class="margin-left-xs"
             i18n="button verify code pane text">
             Verify
           </button>
-          <button mat-raised-button color="primary" (click)="showPostActionSection('submit')" class="margin-left-s"
+          <button mat-raised-button color="primary" (click)="showPostActionSection('submit') ; raiseClickEvent()" class="margin-left-s"
             i18n="button submit code pane text">
             Submit
           </button>
         </div>
         <div class="margin-top-m flex flex-wrapped">
-          <button mat-raised-button color="primary" (click)="viewLastSubmission()" class="margin-left-xs"
-            i18n="button submit code pane text">
+          <button mat-raised-button color="primary" (click)="viewLastSubmission() ; raiseClickEvent()" class="margin-left-xs" i18n="button submit code pane text">
             Last Submission
           </button>
         </div>
@@ -172,8 +166,7 @@
                 <div class="flex flex-wrapped flex-center text-center">
                   <div class="card-section">
                     <div class="flex flex-middle flex-center width-1-1">
-                      <ws-widget-completion-spinner [completed]="verifyResult?.NumericalStatistics?.TotalCasesPassed"
-                        [outOf]="verifyResult?.NumericalStatistics?.TotalTestCases"></ws-widget-completion-spinner>
+                      <ws-widget-completion-spinner [completed]="verifyResult?.NumericalStatistics?.TotalCasesPassed" [outOf]="verifyResult?.NumericalStatistics?.TotalTestCases"></ws-widget-completion-spinner>
                     </div>
                     <h2 class="mat-title" i18n="label number of correct answers">
                       Total
@@ -181,9 +174,7 @@
                   </div>
                   <div class="card-section">
                     <div class="flex flex-middle flex-center width-1-1">
-                      <ws-widget-completion-spinner
-                        [completed]="verifyResult?.NumericalStatistics?.StructuralTestCasesPassed"
-                        [outOf]="verifyResult?.NumericalStatistics?.TotalStructuralTestCases">
+                      <ws-widget-completion-spinner [completed]="verifyResult?.NumericalStatistics?.StructuralTestCasesPassed" [outOf]="verifyResult?.NumericalStatistics?.TotalStructuralTestCases">
                       </ws-widget-completion-spinner>
                     </div>
                     <h2 class="mat-title" i18n="label number of incorrect answers">
@@ -192,9 +183,7 @@
                   </div>
                   <div class="card-section">
                     <div class="flex flex-middle flex-center width-1-1">
-                      <ws-widget-completion-spinner
-                        [completed]="verifyResult?.NumericalStatistics?.LogicalTestCasesPassed"
-                        [outOf]="verifyResult?.NumericalStatistics?.TotalLogicalTestCases">
+                      <ws-widget-completion-spinner [completed]="verifyResult?.NumericalStatistics?.LogicalTestCasesPassed" [outOf]="verifyResult?.NumericalStatistics?.TotalLogicalTestCases">
                       </ws-widget-completion-spinner>
                     </div>
                     <h2 class="mat-title" i18n="label of unanswered questions">
@@ -290,8 +279,7 @@
                   <td>
                     {{ obj.SNo }}
                   </td>
-                  <td [attr.rowspan]="verifyResult?.actual?.length"
-                    *ngIf="i === 0 && verifyResult?.sample?.length === 0">
+                  <td [attr.rowspan]="verifyResult?.actual?.length" *ngIf="i === 0 && verifyResult?.sample?.length === 0">
                     {{ obj.Type }}
                   </td>
                   <td [attr.rowspan]="verifyResult?.actual?.length" *ngIf="i === 0">
@@ -346,8 +334,7 @@
                   </div>
                   <div class="card-section" *ngIf="verifyResult?.Samples?.length > 0">
                     <div class="flex flex-middle flex-center width-1-1">
-                      <ws-widget-completion-spinner [completed]="1 * verifyResult?.verifySummary?.SampleTCPassed"
-                        [outOf]="
+                      <ws-widget-completion-spinner [completed]="1 * verifyResult?.verifySummary?.SampleTCPassed" [outOf]="
                           1 * verifyResult?.verifySummary?.SampleTCPassed +
                           1 * verifyResult?.verifySummary?.SampleTCFailed
                         "></ws-widget-completion-spinner>
@@ -358,8 +345,7 @@
                   </div>
                   <div class="card-section">
                     <div class="flex flex-middle flex-center width-1-1">
-                      <ws-widget-completion-spinner [completed]="1 * verifyResult?.verifySummary?.HiddenTCPassed"
-                        [outOf]="
+                      <ws-widget-completion-spinner [completed]="1 * verifyResult?.verifySummary?.HiddenTCPassed" [outOf]="
                           1 * verifyResult?.verifySummary?.HiddenTCPassed +
                           1 * verifyResult?.verifySummary?.HiddenTCFailed
                         "></ws-widget-completion-spinner>
@@ -435,8 +421,7 @@
                   <td>
                     {{ i + 1 + verifyResult?.Samples?.length + verifyResult?.Hiddens?.length }}
                   </td>
-                  <td [attr.rowspan]="verifyResult?.HiddensFailedHalved?.length"
-                    *ngIf="verifyResult?.Hiddens?.length < 1 && i === 0" i18n>
+                  <td [attr.rowspan]="verifyResult?.HiddensFailedHalved?.length" *ngIf="verifyResult?.Hiddens?.length < 1 && i === 0" i18n>
                     Actual
                   </td>
                   <td>
@@ -453,8 +438,7 @@
                 </tr>
               </table>
             </div>
-            <div *ngSwitchCase="'Not Done'" class="status error"
-              [innerText]="verifyResult?.message || 'Some Error Occured'"></div>
+            <div *ngSwitchCase="'Not Done'" class="status error" [innerText]="verifyResult?.message || 'Some Error Occured'"></div>
           </span>
         </div>
       </div>
@@ -560,8 +544,8 @@
                   </td>
                   <td>
                     <ng-container *ngIf="obj.tcclass">
-                    <ng-container i18n>Class </ng-container>{{ obj.tcclass }}
-                    <br>
+                      <ng-container i18n>Class </ng-container>{{ obj.tcclass }}
+                      <br>
                     </ng-container>
                     <ng-container *ngIf="obj.tcmethod">
                       <ng-container i18n>Method: </ng-container>{{ obj.tcmethod }}
@@ -626,12 +610,11 @@
                   <td>
                     {{ (verifyJavaResult?.structural?.length || 0) + (verifyJavaResult?.sample?.length || 0) + i + 1 }}
                   </td>
-                  <td [attr.rowspan]="verifyJavaResult?.sample?.length || 0 + verifyJavaResult?.actual?.length || 0"
-                   *ngIf="i === 0 && (!verifyJavaResult?.sample || !verifyJavaResult?.sample?.length)"
+                  <td [attr.rowspan]="verifyJavaResult?.sample?.length || 0 + verifyJavaResult?.actual?.length || 0" *ngIf="i === 0 && (!verifyJavaResult?.sample || !verifyJavaResult?.sample?.length)"
                     i18n>
                     Procedural
                   </td>
-                  <td i18n  *ngIf="i === 0" [attr.rowspan]="verifyJavaResult?.actual?.length">
+                  <td i18n *ngIf="i === 0" [attr.rowspan]="verifyJavaResult?.actual?.length">
                     Actual
                   </td>
                   <td>
@@ -668,9 +651,7 @@
                 <br>
                 <h3 *ngIf="verifyJavaResult.codeQuality.message" i18n>Code Analysis</h3>
                 {{verifyJavaResult.codeQuality.message}}
-                <table
-                  *ngIf="verifyJavaResult.codeQuality.data && verifyJavaResult.codeQuality.data.length"
-                  class="table-verify">
+                <table *ngIf="verifyJavaResult.codeQuality.data && verifyJavaResult.codeQuality.data.length" class="table-verify">
                   <tr>
                     <th>
                       Sl. No.
@@ -690,8 +671,10 @@
                       {{i + 1}}
                     </td>
                     <td>
-                      <span *ngIf="obj.className"><br>Class: {{obj.className}}</span>
-                      <span *ngIf="obj.methodName"><br>Method: {{obj.methodName}}</span>
+                      <span *ngIf="obj.className">
+                        <br>Class: {{obj.className}}</span>
+                      <span *ngIf="obj.methodName">
+                        <br>Method: {{obj.methodName}}</span>
                     </td>
                     <td>
                       {{obj.rule}}
@@ -701,7 +684,7 @@
                     </td>
                   </tr>
                 </table>
-                </ng-container>
+              </ng-container>
             </div>
             <div *ngSwitchDefault class="status error" [innerText]="verifyJavaResult?.resultSummary?.response || 'Some Error Occured'">
             </div>

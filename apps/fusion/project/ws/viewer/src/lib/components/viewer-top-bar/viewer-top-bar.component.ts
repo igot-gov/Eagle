@@ -1,21 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  Output,
-  OnDestroy,
-  Input,
-} from '@angular/core'
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
-import {
-  ConfigurationsService,
-  // LoggerService,
-  NsPage,
-} from '@ws-widget/utils'
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
+import { ConfigurationsService, EInstance, NsPage } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { ViewerDataService } from '../../viewer-data.service'
 
@@ -26,6 +12,7 @@ import { ViewerDataService } from '../../viewer-data.service'
 })
 export class ViewerTopBarComponent implements OnInit, OnDestroy {
   @Input() frameReference: any
+  @Input() forPreview = false
   @Output() toggle = new EventEmitter()
   private viewerDataServiceSubscription: Subscription | null = null
   private paramSubscription: Subscription | null = null
@@ -36,10 +23,11 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   prevResourceUrl: string | null = null
   nextResourceUrl: string | null = null
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
-  resourceId: string | null = this.viewerDataSvc.resourceId
+  resourceId: string = (this.viewerDataSvc.resourceId as string) || ''
   resourceName: string | null = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
-  collectionId: string | null = null
-  isPreview = false
+  collectionId = ''
+  logo = true
+  forChannel = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
@@ -49,30 +37,33 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    if (window.location.href.includes('/channel/')) {
+      this.forChannel = true
+    }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
     this.collectionType = this.activatedRoute.snapshot.queryParams.collectionType
+    if (this.configSvc.rootOrg === EInstance.FORD) {
+      this.logo = false
+    }
     if (this.configSvc.instanceConfig) {
       this.appIcon = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.app,
       )
     }
-    this.viewerDataServiceSubscription = this.viewerDataSvc.tocChangeSubject.subscribe(
-      data => {
-        this.prevResourceUrl = data.prevResource
-        this.nextResourceUrl = data.nextResource
-        if (this.resourceId !== this.viewerDataSvc.resourceId) {
-          this.resourceId = this.viewerDataSvc.resourceId
-          this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
-        }
-      },
-    )
+    this.viewerDataServiceSubscription = this.viewerDataSvc.tocChangeSubject.subscribe(data => {
+      this.prevResourceUrl = data.prevResource
+      this.nextResourceUrl = data.nextResource
+      if (this.resourceId !== this.viewerDataSvc.resourceId) {
+        this.resourceId = this.viewerDataSvc.resourceId as string
+        this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
+      }
+    })
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
-      this.collectionId = params.get('collectionId')
-      this.isPreview = params.get('preview') === 'true' ? true : false
+      this.collectionId = params.get('collectionId') as string
     })
     this.viewerDataServiceResourceSubscription = this.viewerDataSvc.changedSubject.subscribe(
       _data => {
-        this.resourceId = this.viewerDataSvc.resourceId
+        this.resourceId = this.viewerDataSvc.resourceId as string
         this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
       },
     )
@@ -94,4 +85,15 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     this.toggle.emit()
   }
 
+  back() {
+    try {
+      if (window.self !== window.top) {
+        return
+      }
+      window.history.back()
+    } catch (_ex) {
+      window.history.back()
+    }
+
+  }
 }

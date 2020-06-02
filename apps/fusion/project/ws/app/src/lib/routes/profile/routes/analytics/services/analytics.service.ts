@@ -1,12 +1,20 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { NSAnalyticsData } from '../models/analytics.model'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { NSCompetency } from '../../competency/models/competency.model'
+
+// const PROTECTED_SLAG_V8 = `/apis/protected/v8`
+
+// const LA_API_END_POINTS = {
+//   TIME_SPENT: `${PROTECTED_SLAG_V8}/user/myAnalytics/timespent`,
+//   NSO_PROGRESS: `${PROTECTED_SLAG_V8}/user/myAnalytics/nsoArtifactsAndCollaborators`,
+//   USER_PROGRESS: `${PROTECTED_SLAG_V8}/user/myAnalytics/userProgress`,
+//   ASSESSMENTS: `${PROTECTED_SLAG_V8}/user/myAnalytics/assessments`,
+// }
+// const LA_API = `https://ford-staging.onwingspan.com/LA1/api`
+// const LA_API = `http://kmserver11:6004/api`
 
 const LA_API = `/LA1/api`
 const LA_API_END_POINTS = {
@@ -16,6 +24,7 @@ const LA_API_END_POINTS = {
   ASSESSMENTS: `${LA_API}/assessment`,
   GET_ASSESSMENTS: `${LA_API}/v1/assessment`,
   CERTIFICATES: `${LA_API}/v1/certification`,
+  FILTER_LIST: `${LA_API}/progressSource`,
 }
 
 @Injectable({
@@ -52,13 +61,11 @@ export class AnalyticsService {
     )
   }
   userProgress(
-    startDate: string,
-    endDate: string,
+    filterType: string,
     contentType: string,
-    isCompleted: number,
   ): Observable<NSAnalyticsData.IUserProgressResponse> {
     return this.http.get<NSAnalyticsData.IUserProgressResponse>(
-      `${LA_API_END_POINTS.USER_PROGRESS}?startDate=${startDate}&endDate=${endDate}&isCompleted=${isCompleted}&contentType=${contentType}`,
+      `${LA_API_END_POINTS.USER_PROGRESS}?contentType=${contentType}&progressSource=${filterType}`,
       this.httpOptions,
     )
   }
@@ -84,6 +91,13 @@ export class AnalyticsService {
     return this.http
       .get<NSCompetency.IAchievementsRes>(
         `${LA_API_END_POINTS.CERTIFICATES}?startDate=${startDate}&endDate=${endDate}`,
+        this.httpOptions,
+      )
+  }
+  fetchFilterList(): Observable<null> {
+    return this.http
+      .get<null>(
+        `${LA_API_END_POINTS.FILTER_LIST}`,
         this.httpOptions,
       )
   }

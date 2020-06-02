@@ -1,20 +1,26 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: playlist detail" class="margin-left-xs">Playlist</span>
   <div class="spacer"></div>
   <div class="hidden-xs">
-    <button mat-button (click)="router.navigate([router.url, 'edit'])">
+    <button
+      name="add-more-button-playlist-detail"
+      mat-button
+      (click)="router.navigate([router.url, 'edit'])"
+    >
       <mat-icon>add</mat-icon>&nbsp;
       <span i18n>Add More</span>
     </button>
-    <button mat-button (click)="sharePlaylist()">
+    <button
+      name="share-button-playlist-detail"
+      *ngIf="isShareEnabled"
+      mat-button
+      (click)="sharePlaylist()"
+    >
       <mat-icon>share</mat-icon>&nbsp;
       <span i18n>Share</span>
     </button>
-    <button mat-button (click)="deletePlaylist()">
+    <button name="delete-button-playlist-detail" mat-button (click)="deletePlaylist()">
       <mat-icon>delete</mat-icon>&nbsp;
       <span i18n>Delete</span>
     </button>
@@ -29,15 +35,26 @@
       <div class="banner-overlay ws-primary-tinted-50">
         <div class="page-container margin-top-xl">
           <div class="flex items-center mb-4" *ngIf="!changeName">
-            <h1 class="mat-display-2 margin-bottom-s inline-block">
+            <h1
+              [ngClass]="{
+                'mat-display-2': !screenSizeIsLtMedium,
+                'mat-display-1': screenSizeIsLtMedium
+              }"
+              class="margin-bottom-s playlist-name inline-block"
+            >
               {{ playlist?.name }}
             </h1>
-
-            <button class="margin-left-s" mat-icon-button (click)="editName(true)" i18n-matTooltip
-              matTooltip="Edit playlist name" matTooltipPosition="after">
+            <button
+              name="edit-playlist-name-playlist-detail"
+              class="margin-left-s"
+              mat-icon-button
+              (click)="editName(true)"
+              i18n-matTooltip
+              matTooltip="Edit playlist name"
+              matTooltipPosition="after"
+            >
               <mat-icon>create</mat-icon>
             </button>
-
           </div>
 
           <form *ngIf="changeName" #playlistForm [(formGroup)]="editPlaylistForm">
@@ -45,15 +62,35 @@
               <mat-form-field class="width-3-4">
                 <mat-label i18n>Edit playlist name</mat-label>
                 <mat-error i18n>Playlist title should be 1-100 characters</mat-error>
-                <input matInput formControlName="title" autocomplete="off" required />
+                <input
+                  name="edit-playlist-name-input-playlist-detail"
+                  matInput
+                  formControlName="title"
+                  autocomplete="off"
+                  required
+                />
               </mat-form-field>
               <span>
-                <button class="margin-left-xs" mat-icon-button (click)="editName(false)" i18n-matTooltip
-                  matTooltip="Done" matTooltipPosition="below">
+                <button
+                  name="edit-playlist-name-done-playlist-detail"
+                  class="margin-left-xs"
+                  mat-icon-button
+                  (click)="editName(false)"
+                  i18n-matTooltip
+                  matTooltip="Done"
+                  matTooltipPosition="below"
+                >
                   <mat-icon>done</mat-icon>
                 </button>
-                <button class="margin-left-xs" mat-icon-button (click)="cancelChange()" i18n-matTooltip
-                  matTooltip="Cancel changes" matTooltipPosition="below">
+                <button
+                  name="edit-playlist-name-close-playlist-detail"
+                  class="margin-left-xs"
+                  mat-icon-button
+                  (click)="cancelChange()"
+                  i18n-matTooltip
+                  matTooltip="Cancel changes"
+                  matTooltipPosition="below"
+                >
                   <mat-icon>close</mat-icon>
                 </button>
               </span>
@@ -75,8 +112,11 @@
           </p>
           <h3 class="mat-subheading-2 font-weight-500 margin-remove-bottom" i18n>CURATORS</h3>
           <div class="flex flex-middle mt-2">
-            <ws-widget-user-image class="user-icon-container"
-              [email]="playlist?.sharedBy || configSvc?.userProfile?.email" [imageType]="'rounded'">
+            <ws-widget-user-image
+              class="user-icon-container"
+              [email]="playlist?.sharedBy || configSvc?.userProfile?.email"
+              [imageType]="'rounded'"
+            >
             </ws-widget-user-image>
             <span class="mat-body ml-4">
               {{ playlist?.sharedByDisplayName || configSvc?.userProfile?.userName }}
@@ -85,50 +125,85 @@
         </div>
         <div *ngIf="playlistPlayLink" class="playlist-fab width-1-1">
           <div class="page-container flex flex-row-reverse">
-            <a mat-fab [routerLink]="playlistPlayLink?.url" [queryParams]="playlistPlayLink?.queryParams">
+            <a
+              name="play-link-playlist-detail"
+              mat-fab
+              [routerLink]="playlistPlayLink?.url"
+              [queryParams]="playlistPlayLink?.queryParams"
+            >
               <mat-icon>play_arrow</mat-icon>
             </a>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div cdkDropList class="page-container mt-12 margin-bottom-xl drop-list" (cdkDropListDropped)="drop($event)">
-    <div class="resource-item" *ngFor="let content of playlist?.contents" cdkDrag>
-      <ng-container *ngTemplateOutlet="contentView; context: { $implicit: content }"></ng-container>
+    <div
+      cdkDropList
+      class="page-container padding-top-s padding-bottom-s mt-12 margin-bottom-xl drop-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div *ngFor="let content of playlist?.contents" cdkDrag>
+        <span
+          [attr.name]="'reorder-' + (playlist?.contents.indexOf(content) + 1) + '-playlist-detail'"
+          class="resource-item ping mx-2"
+          i18n-matTooltip
+          matTooltip="Drag to re-order playlist"
+          matTooltipPosition="above"
+        >
+          <mat-icon cdkDragHandle>unfold_more</mat-icon>
+        </span>
+        <ng-container *ngTemplateOutlet="contentView; context: { $implicit: content }">
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>
 
 <mat-menu #playlistMenu="matMenu" overlapTrigger="true">
-  <button mat-menu-item (click)="router.navigate([router.url, 'edit'])">
+  <button
+    name="add-more-button-playlist-detail"
+    mat-menu-item
+    (click)="router.navigate([router.url, 'edit'])"
+  >
     <mat-icon>add</mat-icon>
     <span i18n>Add More</span>
   </button>
-  <button mat-menu-item (click)="sharePlaylist()">
+  <button name="share-button-playlist-detail" mat-menu-item (click)="sharePlaylist()">
     <mat-icon>share</mat-icon>
     <span i18n>Share</span>
   </button>
-  <button mat-menu-item (click)="deletePlaylist()">
+  <button name="delete-button-playlist-detail" mat-menu-item (click)="deletePlaylist()">
     <mat-icon>delete</mat-icon>
     <span i18n>Delete</span>
   </button>
 </mat-menu>
 
 <ng-template #contentView let-content>
-  <div class="flex flex-middle padding-top-xs padding-bottom-xs" [ngClass]="{'greyOut': greyOut(content)}">
-    <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted" i18n-matTooltip
+  <div class="flex flex-middle padding-top-s padding-bottom-xs">
+    <div
+      class="status-danger"
+      role="note"
+      i18n-aria-label
+      aria-label="Content expired or deleted"
+      i18n-matTooltip
       matTooltip="Content may be expired or deleted"
-      *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
-    <div class="width-expand md:mx-4 flex">
+      *ngIf="content.status === 'Deleted' || content.status === 'Expired'"
+    ></div>
+    <div class="width-expand md:mx-4 flex" [ngClass]="{ greyOut: greyOut(content) }">
       <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
-        <img class="image-section" [src]="content?.appIcon" [wsUtilsDefaultThumbnail]="defaultThumbnail"
-          alt="Content Icon" i18n-alt />
+        <img
+          (load)="isDeletedOrExpired(content)"
+          class="image-section"
+          [src]="content?.appIcon"
+          [wsUtilsDefaultThumbnail]="defaultThumbnail"
+          alt="Content Icon"
+          i18n-alt
+        />
       </a>
       <div class="width-expand mx-2 md:mx-4">
         <div class="flex flex-middle text-truncate">
           <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
-            <h2 class="mat-h2 margin-left-xxs margin-remove-bottom">
+            <h2 class="mat-h2 playlist-name margin-left-xxs margin-remove-bottom">
               {{ content?.name }}
             </h2>
           </a>
@@ -139,14 +214,22 @@
         <p class="flex flex-middle margin-remove-top">
           <mat-icon>access_time</mat-icon>
           <span class="margin-left-xxs">
-            <ng-container>{{ content?.duration | pipeDurationTransform: 'hms' }}&nbsp; | &nbsp;</ng-container>
-            <ws-widget-display-content-type [displayContentType]="content?.displayContentType">
+            <ng-container
+              >{{ content?.duration | pipeDurationTransform: 'hms' }}&nbsp; | &nbsp;</ng-container
+            >
+            <ws-widget-display-content-type [displayContentType]="content?.contentType">
             </ws-widget-display-content-type>
           </span>
         </p>
       </div>
     </div>
-    <button mat-icon-button class="more-button" (click)="deleteContent(content?.identifier, content?.name)">
+    <button
+      name="delete-content-{{ playlist?.contents.indexOf(content) + 1 }}-playlist-detail"
+      *ngIf="playlist?.contents?.length > 1"
+      mat-icon-button
+      class="more-button"
+      (click)="deleteContent(content?.identifier, content?.name)"
+    >
       <mat-icon>delete</mat-icon>
     </button>
   </div>

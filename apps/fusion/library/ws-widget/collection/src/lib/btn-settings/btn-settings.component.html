@@ -1,11 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<button mat-icon-button [matMenuTriggerFor]="settingsMenu" i18n-matTooltip matTooltip="Settings">
+<button i18n-aria-label aria-label="Settings" mat-icon-button name="settingsIconHomePage"
+  [matMenuTriggerFor]="settingsMenu" i18n-matTooltip matTooltip="Settings">
   <mat-icon>settings</mat-icon>
 </button>
 
-<mat-menu #settingsMenu="matMenu" xPosition="before">
+<mat-menu #settingsMenu="matMenu" name="settingsOptionsListContainerHomePage" xPosition="before">
   <div mat-menu-item>
     <mat-slide-toggle color="primary" [formControl]="darkModeForm" labelPosition="before">
       <mat-icon>brightness_medium</mat-icon>
@@ -68,7 +66,7 @@
 </mat-menu>
 
 <mat-menu #languagesMenu="matMenu">
-  <mat-nav-list dense>
+  <mat-nav-list dense role="navigation">
     <a mat-list-item (click)="updateUserLang('')" [disableRipple]="!isLocaleEnabled('')" *ngIf="isLocaleAvailable('')">
       <mat-icon mat-list-icon>{{ localeIcon('') }}</mat-icon>
       <h4 mat-line>English</h4>

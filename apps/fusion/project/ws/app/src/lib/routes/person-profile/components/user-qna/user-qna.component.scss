@@ -1,0 +1,41 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.font-family {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.qnaCard {
+  min-height: 280px;
+}
+
+.inheritHeight {
+  min-height: inherit;
+}
+
+.socialRow {
+  margin: 10px 0;
+}
+
+.navigationbutton {
+  border-radius: 8px;
+  margin-right: 0.25rem !important;
+}
+
+.borderbottom {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.font-family {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+.font-weight-bold {
+  font-weight: 500 !important;
+}
+
+.fetching {
+  color: #9baebd !important;
+}

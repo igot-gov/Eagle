@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { IBadgeResponse, IUserNotifications } from './badges.model'
@@ -12,6 +9,7 @@ const API_END_POINTS = {
   USER_BADGE: `${PROTECTED_SLAG_V8}/user/badge`,
   USER_BADGE_RECENT: `${PROTECTED_SLAG_V8}/user/badge/notification`,
   USER_BADGES_UPDATE: `${PROTECTED_SLAG_V8}/user/badge/update`,
+
 }
 
 @Injectable({
@@ -32,5 +30,9 @@ export class BadgesService {
     return this.http
       .get<any>(API_END_POINTS.USER_BADGE_RECENT)
       .pipe(map(notifications => notifications))
+  }
+
+  newBadge(): Observable<any> {
+    return this.http.post<any>(`${API_END_POINTS.USER_BADGE}/newUser`, {})
   }
 }

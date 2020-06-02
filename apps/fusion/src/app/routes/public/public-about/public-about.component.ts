@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout'
 import { DomSanitizer, SafeResourceUrl, SafeStyle } from '@angular/platform-browser'
@@ -34,12 +31,12 @@ export class PublicAboutComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     private configSvc: ConfigurationsService,
     private activateRoute: ActivatedRoute,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.subscriptionAbout = this.activateRoute.data.subscribe(data => {
       this.aboutPage = data.pageData.data
-      if (this.aboutPage) {
+      if (this.aboutPage && this.aboutPage.banner && this.aboutPage.banner.videoLink) {
         this.videoLink = this.domSanitizer.bypassSecurityTrustResourceUrl(
           this.aboutPage.banner.videoLink,
         )

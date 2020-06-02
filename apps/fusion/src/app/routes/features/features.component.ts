@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { Subscription } from 'rxjs'
 import { Router, ActivatedRoute } from '@angular/router'
 import { startWith, debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { NsAppsConfig, ConfigurationsService, NsPage, LogoutComponent } from '@ws-widget/utils'
+import { NsAppsConfig, ConfigurationsService, NsPage, LogoutComponent, SubapplicationRespondService, ValueService } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
+import { ROOT_WIDGET_CONFIG, CustomTourService } from '@ws-widget/collection'
 import { MatDialog } from '@angular/material'
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[]
@@ -22,15 +19,27 @@ export class FeaturesComponent implements OnInit, OnDestroy {
   queryControl = new FormControl(this.activateRoute.snapshot.queryParamMap.get('q'))
   private readonly featuresConfig: IGroupWithFeatureWidgets[] = []
   featureGroups: IGroupWithFeatureWidgets[] | null = null
+  private responseSubscription: Subscription | null = null
+  isTourGuideAvailable = false
+  isXSmall = false
   pageNavbar: Partial<NsPage.INavBackground> = this.configurationSvc.pageNavBar
   private queryChangeSubs: Subscription | null = null
-
   constructor(
     private dialog: MatDialog,
     private router: Router,
     private activateRoute: ActivatedRoute,
     private configurationSvc: ConfigurationsService,
+    private tour: CustomTourService,
+    private respondSvc: SubapplicationRespondService,
+    private valueSvc: ValueService,
   ) {
+    this.valueSvc.isXSmall$.subscribe(isXSmall => {
+      this.isXSmall = isXSmall
+    })
+    if (this.configurationSvc.appsConfig && this.configurationSvc.appsConfig.tourGuide) {
+      this.configurationSvc.tourGuideNotifier.next(true)
+      this.tour.data = this.configurationSvc.appsConfig.tourGuide
+    }
     if (this.configurationSvc.appsConfig) {
       const appsConfig = this.configurationSvc.appsConfig
       this.featuresConfig = appsConfig.groups.map(
@@ -68,11 +77,21 @@ export class FeaturesComponent implements OnInit, OnDestroy {
         this.router.navigate([], { queryParams: { q: query || null } })
         this.featureGroups = this.filteredFeatures(query)
       })
+    this.configurationSvc.tourGuideNotifier.subscribe(canShow => {
+      if (
+        this.configurationSvc.restrictedFeatures &&
+        !this.configurationSvc.restrictedFeatures.has('tourGuide')
+      ) {
+        this.isTourGuideAvailable = canShow
+        // this.createTour()
+      }
+    })
   }
   ngOnDestroy() {
     if (this.queryChangeSubs) {
       this.queryChangeSubs.unsubscribe()
     }
+    this.configurationSvc.tourGuideNotifier.next(false)
   }
   clear() {
     this.queryControl.setValue('')
@@ -108,5 +127,12 @@ export class FeaturesComponent implements OnInit, OnDestroy {
 
   logout() {
     this.dialog.open<LogoutComponent>(LogoutComponent)
+  }
+  startTour() {
+    this.tour.startTour()
+    if (this.responseSubscription) {
+      this.respondSvc.unsubscribeResponse()
+      this.responseSubscription.unsubscribe()
+    }
   }
 }

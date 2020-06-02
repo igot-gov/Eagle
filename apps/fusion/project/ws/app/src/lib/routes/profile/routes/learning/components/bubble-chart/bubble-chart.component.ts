@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, AfterViewInit, ElementRef, ViewChild, OnDestroy } from '@angular/core'
 import { Chart } from 'chart.js'
 @Component({
@@ -118,7 +115,7 @@ export class BubbleChartComponent implements OnInit, AfterViewInit, OnDestroy {
         },
       ],
       // tslint:disable-next-line:max-line-length
-      value: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      value: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr'],
     }
   }
   ngAfterViewInit() {
@@ -204,7 +201,7 @@ export class BubbleChartComponent implements OnInit, AfterViewInit, OnDestroy {
                 callback(value) {
                   return (
                     `${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    [value > 12 ? value - 13 : value - 1]}${(value > 12 ? yearEnd : yearStart)}`
+                    [value > 12 ? +value - 13 : +value - 1]}${(value > 12 ? yearEnd : yearStart)}`
                   )
                 },
 

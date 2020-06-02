@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
 import { NsWidgetResolver } from '@ws-widget/resolver/src/public-api'
@@ -334,27 +331,27 @@ export class ChannelStoreService {
         }
       })
       switch (type) {
-        case 'moveRight':
-          if (childIndex < totalLength - 1) {
-            const temp = parent.children[rowIndex + 1]
-            parent.children[rowIndex + 1] = id
-            parent.children[rowIndex] = temp
-          } else {
-            parent.children.splice(startPosition, 0, id)
-            parent.children.splice(rowIndex + 1, 1)
-          }
-          break
+      case 'moveRight':
+        if (childIndex < totalLength - 1) {
+          const temp = parent.children[rowIndex + 1]
+          parent.children[rowIndex + 1] = id
+          parent.children[rowIndex] = temp
+        } else {
+          parent.children.splice(startPosition, 0, id)
+          parent.children.splice(rowIndex + 1, 1)
+        }
+        break
 
-        case 'moveLeft':
-          if (childIndex !== 0) {
-            const temp = parent.children[rowIndex - 1]
-            parent.children[rowIndex - 1] = id
-            parent.children[rowIndex] = temp
-          } else {
-            parent.children.splice(startPosition + totalLength, 0, id)
-            parent.children.splice(rowIndex, 1)
-          }
-          break
+      case 'moveLeft':
+        if (childIndex !== 0) {
+          const temp = parent.children[rowIndex - 1]
+          parent.children[rowIndex - 1] = id
+          parent.children[rowIndex] = temp
+        } else {
+          parent.children.splice(startPosition + totalLength, 0, id)
+          parent.children.splice(rowIndex, 1)
+        }
+        break
       }
     } else if (typeof id === 'number') {
       let maxIndex = 0
@@ -371,74 +368,74 @@ export class ChannelStoreService {
         }
       })
       switch (type) {
-        case 'moveTop':
-          if (id !== 0) {
-            for (let i = 0; i < parent.children.length; i = i + 1) {
-              const child = this.getUpdatedContent(parent.children[i])
-              if (child.rowNo === id) {
-                child.rowNo = id - 1
-                this.updateContent(child.id, child, false)
-              } else if (child.rowNo === id - 1) {
-                child.rowNo = id
-                this.updateContent(child.id, child, false)
-              }
-            }
-          } else {
-            for (let i = 0; i < parent.children.length; i = i + 1) {
-              const child = this.getUpdatedContent(parent.children[i])
-              if (child.rowNo === id) {
-                child.rowNo = maxIndex
-                this.updateContent(child.id, child, false)
-              } else {
-                child.rowNo = child.rowNo - 1
-                this.updateContent(child.id, child, false)
-              }
+      case 'moveTop':
+        if (id !== 0) {
+          for (let i = 0; i < parent.children.length; i = i + 1) {
+            const child = this.getUpdatedContent(parent.children[i])
+            if (child.rowNo === id) {
+              child.rowNo = id - 1
+              this.updateContent(child.id, child, false)
+            } else if (child.rowNo === id - 1) {
+              child.rowNo = id
+              this.updateContent(child.id, child, false)
             }
           }
-          if (id !== 0) {
-            const temp = childArray[id - 1]
-            childArray[id - 1] = childArray[id]
-            childArray[id] = temp
-          } else {
-            const temp = childArray[maxIndex]
-            childArray[maxIndex] = childArray[id]
-            childArray[id] = temp
-          }
-          break
-        case 'moveBottom':
-          if (id !== maxIndex) {
-            for (let i = 0; i < parent.children.length; i = i + 1) {
-              const child = this.getUpdatedContent(parent.children[i])
-              if (child.rowNo === id) {
-                child.rowNo = id + 1
-                this.updateContent(child.id, child, false)
-              } else if (child.rowNo === id + 1) {
-                child.rowNo = id
-                this.updateContent(child.id, child, false)
-              }
-            }
-          } else {
-            for (let i = 0; i < parent.children.length; i = i + 1) {
-              const child = this.getUpdatedContent(parent.children[i])
-              if (child.rowNo === id) {
-                child.rowNo = 0
-                this.updateContent(child.id, child, false)
-              } else {
-                child.rowNo = child.rowNo + 1
-                this.updateContent(child.id, child, false)
-              }
+        } else {
+          for (let i = 0; i < parent.children.length; i = i + 1) {
+            const child = this.getUpdatedContent(parent.children[i])
+            if (child.rowNo === id) {
+              child.rowNo = maxIndex
+              this.updateContent(child.id, child, false)
+            } else {
+              child.rowNo = child.rowNo - 1
+              this.updateContent(child.id, child, false)
             }
           }
-          if (id !== maxIndex) {
-            const temp = childArray[id + 1]
-            childArray[id + 1] = childArray[id]
-            childArray[id] = temp
-          } else {
-            const temp = childArray[0]
-            childArray[0] = childArray[id]
-            childArray[id] = temp
+        }
+        if (id !== 0) {
+          const temp = childArray[id - 1]
+          childArray[id - 1] = childArray[id]
+          childArray[id] = temp
+        } else {
+          const temp = childArray[maxIndex]
+          childArray[maxIndex] = childArray[id]
+          childArray[id] = temp
+        }
+        break
+      case 'moveBottom':
+        if (id !== maxIndex) {
+          for (let i = 0; i < parent.children.length; i = i + 1) {
+            const child = this.getUpdatedContent(parent.children[i])
+            if (child.rowNo === id) {
+              child.rowNo = id + 1
+              this.updateContent(child.id, child, false)
+            } else if (child.rowNo === id + 1) {
+              child.rowNo = id
+              this.updateContent(child.id, child, false)
+            }
           }
-          break
+        } else {
+          for (let i = 0; i < parent.children.length; i = i + 1) {
+            const child = this.getUpdatedContent(parent.children[i])
+            if (child.rowNo === id) {
+              child.rowNo = 0
+              this.updateContent(child.id, child, false)
+            } else {
+              child.rowNo = child.rowNo + 1
+              this.updateContent(child.id, child, false)
+            }
+          }
+        }
+        if (id !== maxIndex) {
+          const temp = childArray[id + 1]
+          childArray[id + 1] = childArray[id]
+          childArray[id] = temp
+        } else {
+          const temp = childArray[0]
+          childArray[0] = childArray[id]
+          childArray[id] = temp
+        }
+        break
       }
       parent.children = ([] as string[]).concat.apply([], childArray)
     }

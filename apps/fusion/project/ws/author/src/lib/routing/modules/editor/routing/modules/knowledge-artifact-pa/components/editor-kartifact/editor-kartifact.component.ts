@@ -1,28 +1,25 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { HttpEventType } from '@angular/common/http'
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges } from '@angular/core'
 import { MatDialog } from '@angular/material/dialog'
-import { UploadService } from './../../../../../shared/services/upload.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { ActivatedRoute } from '@angular/router'
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
-import { NSContent } from '../../../../../../../../interface/content'
+import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
-import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
-import { IMAGE_SUPPORT_TYPES, IMAGE_MAX_SIZE } from '../../../../../../../../constants/upload'
+import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
+import { map } from 'rxjs/operators'
 import { ImageCropComponent } from '../../../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { CONTENT_BASE_STATIC } from '../../../../../../../../constants/apiEndpoints'
-import { map } from 'rxjs/operators'
-import { HttpEventType } from '@angular/common/http'
+import { IMAGE_MAX_SIZE, IMAGE_SUPPORT_TYPES } from '../../../../../../../../constants/upload'
+import { NSContent } from '../../../../../../../../interface/content'
+import { UploadService } from './../../../../../shared/services/upload.service'
 
 @Component({
   selector: 'ws-auth-editor-kartifact',
   templateUrl: './editor-kartifact.component.html',
   styleUrls: ['./editor-kartifact.component.scss'],
 })
-export class EditorKartifactComponent implements OnInit {
-
+export class EditorKartifactComponent implements OnInit, OnChanges {
   @Input() content!: NSContent.IContentMeta
   @Input() currentContent!: string
   @Output() data = new EventEmitter<string>()
@@ -34,73 +31,75 @@ export class EditorKartifactComponent implements OnInit {
   maxSize = IMAGE_MAX_SIZE / (1024 * 1024)
   file!: File | null
   complexityLevelList: string[] = []
+  isPathFinders = false
+  isFord = false
+  fileName = ''
 
   constructor(
-    private activatedRoute: ActivatedRoute,
+    private authInitService: AuthInitService,
     private snackBar: MatSnackBar,
     private uploadService: UploadService,
     private dialog: MatDialog,
-  ) { }
+    private accessService: AccessControlService,
+  ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(
-      data => {
-        this.ordinals = data.ordinals
-        this.complexityLevelList = data.ordinals.complexityLevel
-        this.filterOrdinals()
-      },
-    )
+    this.isPathFinders = this.accessService.rootOrg === 'Pathfinders'
+    this.isFord = this.accessService.rootOrg === 'Ford'
+    this.ordinals = this.authInitService.ordinals
+    this.complexityLevelList = this.authInitService.ordinals.complexityLevel
+    this.filterOrdinals()
+  }
+
+  ngOnChanges() {
+    if (this.content.appIcon) {
+      this.percentage = 100
+      this.fileName = this.content.appIcon.split('/').pop() as string
+    }
   }
 
   filterOrdinals() {
     this.complexityLevelList = []
-    this.ordinals.complexityLevel.map(
-      (v: any) => {
-        if (v.condition) {
-          let canAdd = false;
-          (v.condition.showFor || []).map(
-            (con: any) => {
-              let innerCondition = false
-              Object.keys(con).map(
-                meta => {
-                  if (con[meta].indexOf(this.content[meta as keyof NSContent.IContentMeta]) > -1) {
-                    innerCondition = true
-                  }
-                },
-              )
-              if (innerCondition) {
-                canAdd = true
+    this.ordinals.complexityLevel.map((v: any) => {
+      if (v.condition) {
+        let canAdd = false
+        // tslint:disable-next-line: semicolon  tslint:disable-next-line: whitespace
+        ;(v.condition.showFor || []).map((con: any) => {
+          let innerCondition = false
+          Object.keys(con).map(meta => {
+            if (con[meta].indexOf(this.content[meta as keyof NSContent.IContentMeta]) > -1) {
+              innerCondition = true
+            }
+          })
+          if (innerCondition) {
+            canAdd = true
+          }
+        })
+        if (canAdd) {
+          // tslint:disable-next-line: whitespace tslint:disable-next-line: semicolon
+          ;(v.condition.nowShowFor || []).map((con: any) => {
+            let innerCondition = false
+            Object.keys(con).map(meta => {
+              if (con[meta].indexOf(this.content[meta as keyof NSContent.IContentMeta]) < 0) {
+                innerCondition = true
               }
-            },
-          )
-          if (canAdd) {
-            (v.condition.nowShowFor || []).map(
-              (con: any) => {
-                let innerCondition = false
-                Object.keys(con).map(
-                  meta => {
-                    if (con[meta].indexOf(this.content[meta as keyof NSContent.IContentMeta]) < 0) {
-                      innerCondition = true
-                    }
-                  },
-                )
-                if (innerCondition) {
-                  canAdd = false
-                }
-              },
-            )
-          }
-          if (canAdd) {
-            this.complexityLevelList.push(v.value)
-          }
-        } else {
-          if (typeof v === 'string') {
-            this.complexityLevelList.push(v)
-          } else {
-            this.complexityLevelList.push(v.value)
-          }
+            })
+            if (innerCondition) {
+              canAdd = false
+            }
+          })
         }
-      })
+        if (canAdd) {
+          this.complexityLevelList.push(v.value)
+        }
+      } else {
+        if (typeof v === 'string') {
+          this.complexityLevelList.push(v)
+        } else {
+          this.complexityLevelList.push(v.value)
+        }
+      }
+    })
   }
 
   submit() {
@@ -131,16 +130,7 @@ export class EditorKartifactComponent implements OnInit {
     this.file = file
     const formdata = new FormData()
     const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
-    if (
-      !(
-        IMAGE_SUPPORT_TYPES.indexOf(
-          `.${fileName
-            .toLowerCase()
-            .split('.')
-            .pop()}`,
-        ) > -1
-      )
-    ) {
+    if (!(IMAGE_SUPPORT_TYPES.indexOf(`.${fileName.toLowerCase().split('.').pop()}`) > -1)) {
       this.snackBar.openFromComponent(NotificationComponent, {
         data: {
           type: Notify.INVALID_FORMAT,
@@ -165,6 +155,10 @@ export class EditorKartifactComponent implements OnInit {
       data: {
         isRoundCrop: false,
         imageFile: file,
+        width: 265,
+        height: 150,
+        isThumbnail: true,
+        imageFileName: fileName,
       },
     })
 
@@ -177,21 +171,16 @@ export class EditorKartifactComponent implements OnInit {
             .upload(
               formdata,
               { contentId: this.currentContent, contentType: CONTENT_BASE_STATIC },
-              // tslint:disable-next-line: ter-indent
               {
-                // tslint:disable-next-line: ter-indent
                 reportProgress: true,
-                // tslint:disable-next-line: ter-indent
                 observe: 'events',
-                // tslint:disable-next-line: ter-indent
               },
-            ).pipe(
+            )
+            .pipe(
               map((event: any) => {
-
                 switch (event.type) {
-
                   case HttpEventType.UploadProgress:
-                    this.percentage = Math.round(100 * event.loaded / event.total)
+                    this.percentage = Math.round((100 * event.loaded) / event.total)
                     return { status: 'progress', message: this.percentage }
 
                   case HttpEventType.Response:
@@ -232,5 +221,4 @@ export class EditorKartifactComponent implements OnInit {
       },
     })
   }
-
 }

@@ -1,7 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { MatSnackBar, MatDialog } from '@angular/material'
 import { DialogSocialActivityUserComponent } from '../../dialog/dialog-social-activity-user/dialog-social-activity-user.component'
@@ -19,6 +16,9 @@ export class BtnSocialVoteComponent implements OnInit {
   @Input() postId = ''
   @Input() postCreatorId = ''
   @Input() activity: NsDiscussionForum.IPostActivity | null = null
+  @ViewChild('invalidUser', { static: true }) invalidUser!: ElementRef<
+    any
+  >
 
   userId = ''
   isUpdating = false
@@ -41,6 +41,7 @@ export class BtnSocialVoteComponent implements OnInit {
       return
     }
     if (this.activity && this.activity.userActivity.upVote) {
+      this.downVote(this.invalidUser.nativeElement.value)
       return
     }
     this.isUpdating = true
@@ -74,6 +75,7 @@ export class BtnSocialVoteComponent implements OnInit {
       return
     }
     if (this.activity && this.activity.userActivity.downVote) {
+      this.upVote(this.invalidUser.nativeElement.value)
       return
     }
     this.isUpdating = true

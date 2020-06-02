@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import {
@@ -18,6 +15,9 @@ import { UserAutocompleteModule } from '../_common/user-autocomplete/user-autoco
 
 import { BtnContentShareComponent } from './btn-content-share.component'
 import { BtnContentShareDialogComponent } from './btn-content-share-dialog/btn-content-share-dialog.component'
+import { BtnLinkedinShareModule } from '../btn-linkedin-share/btn-linkedin-share.module'
+import { BtnFacebookShareModule } from '../btn-facebook-share/btn-facebook-share.module'
+import { BtnTwitterShareModule } from '../btn-twitter-share/btn-twitter-share.module'
 
 @NgModule({
   declarations: [BtnContentShareComponent, BtnContentShareDialogComponent],
@@ -32,8 +32,11 @@ import { BtnContentShareDialogComponent } from './btn-content-share-dialog/btn-c
     MatDialogModule,
     MatProgressSpinnerModule,
     UserAutocompleteModule,
+    BtnLinkedinShareModule,
+    BtnFacebookShareModule,
+    BtnTwitterShareModule,
   ],
   exports: [BtnContentShareComponent],
   entryComponents: [BtnContentShareComponent, BtnContentShareDialogComponent],
 })
-export class BtnContentShareModule { }
+export class BtnContentShareModule {}

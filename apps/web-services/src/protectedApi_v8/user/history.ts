@@ -1,13 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import {
   IContinueLearningData,
   IContinueLearningResponse,
-  IHistory
+  IHistory,
 } from '../../models/content.model'
 import { IPaginatedApiResponse } from '../../models/paginatedApi.model'
 import { processDisplayContentType, processUrl } from '../../utils/contentHelpers'
@@ -20,10 +17,12 @@ import { getContentDetails } from '../content'
 
 const API_END_POINTS = {
   continueGet: (userId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/continue/user/${userId}/getdata`,
+    `${CONSTANTS.CONTINUE_LEARNING_API_BASE}/v1/continue/user/${userId}/getdata`,
   continuePut: (userId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/continue/user/${userId}/putdata`,
+    `${CONSTANTS.CONTINUE_LEARNING_API_BASE}/v1/continue/user/${userId}/putdata`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export const historyApi = Router()
 
@@ -32,6 +31,7 @@ historyApi.get('/', async (req, res) => {
     const pageState = req.query.pageState
     const pageSize = req.query.pageSize || 50
     const isCompleted = req.query.isCompleted || false
+    const sourceFields = req.query.sourceFields
     const org = req.header('org')
     const rootOrg = req.header('rootOrg')
     if (!org || !rootOrg) {
@@ -42,6 +42,7 @@ historyApi.get('/', async (req, res) => {
       isCompleted,
       pageSize,
       pageState,
+      sourceFields,
     })
     const url = `${API_END_POINTS.continueGet(extractUserIdFromRequest(req))}?${queryParams}`
     const response = await axios({
@@ -69,7 +70,11 @@ historyApi.get('/', async (req, res) => {
     res.json(result)
   } catch (err) {
     logError('CONTINUE LEARNING FETCH ERROR >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 historyApi.get('/:contentId', async (req, res) => {
@@ -115,7 +120,11 @@ historyApi.get('/:contentId', async (req, res) => {
     res.json(result)
   } catch (err) {
     logError('CONTINUE LEARNING FETCH FOR CONTENT ERROR >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 // send player continuity
@@ -143,6 +152,10 @@ historyApi.post('/continue', async (req, res) => {
     res.status(response.status).send(response.data)
   } catch (err) {
     logError('CONTINUE LEARNING SET FOR CONTENT ERROR >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

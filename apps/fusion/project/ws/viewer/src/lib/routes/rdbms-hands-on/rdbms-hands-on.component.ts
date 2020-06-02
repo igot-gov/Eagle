@@ -1,14 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
-import {
-  NsContent,
-  WidgetContentService,
-} from '@ws-widget/collection'
+import { EventService, WsEvents } from '@ws-widget/utils'
+import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { ActivatedRoute } from '@angular/router'
+import { ViewerUtilService } from '../../viewer-util.service'
 
 @Component({
   selector: 'viewer-rdbms-hands-on',
@@ -16,40 +12,69 @@ import { ActivatedRoute } from '@angular/router'
   styleUrls: ['./rdbms-hands-on.component.scss'],
 })
 export class RdbmsHandsOnComponent implements OnInit, OnDestroy {
-
   private dataSubscription: Subscription | null = null
+  forPreview = window.location.href.includes('/author/')
   isFetchingDataComplete = false
   isErrorOccured = false
   rDbmsHandsOnData: NsContent.IContent | null = null
+  oldData: NsContent.IContent | null = null
+  alreadyRaised = false
   rDbmsHandsOnManifest: any
   constructor(
+    private eventSvc: EventService,
     private activatedRoute: ActivatedRoute,
     private contentSvc: WidgetContentService,
     private http: HttpClient,
-  ) { }
+    private viewSvc: ViewerUtilService,
+  ) {}
 
   ngOnInit() {
     this.dataSubscription = this.activatedRoute.data.subscribe(
       async data => {
+        this.isFetchingDataComplete = false
         this.rDbmsHandsOnData = data.content.data
-        if (this.rDbmsHandsOnData && this.rDbmsHandsOnData.artifactUrl.indexOf('content-store') >= 0) {
+        if (this.alreadyRaised && this.oldData) {
+          this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
+        }
+        if (
+          this.rDbmsHandsOnData &&
+          this.rDbmsHandsOnData.artifactUrl.indexOf('content-store') >= 0
+        ) {
           await this.setS3Cookie(this.rDbmsHandsOnData.identifier)
         }
-        if (this.rDbmsHandsOnData && this.rDbmsHandsOnData.mimeType === NsContent.EMimeTypes.RDBMS_HANDS_ON) {
+        if (
+          this.rDbmsHandsOnData &&
+          this.rDbmsHandsOnData.mimeType === NsContent.EMimeTypes.RDBMS_HANDS_ON
+        ) {
           this.rDbmsHandsOnManifest = await this.transformRDbmsModule(this.rDbmsHandsOnData)
         }
         if (this.rDbmsHandsOnData && this.rDbmsHandsOnManifest) {
+          this.oldData = this.rDbmsHandsOnData
+          this.alreadyRaised = true
+          this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.rDbmsHandsOnData)
           this.isFetchingDataComplete = true
         } else {
           this.isErrorOccured = true
         }
       },
-      () => {
-      },
+      () => {},
     )
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
+    if (this.activatedRoute.snapshot.queryParams.collectionId &&
+      this.activatedRoute.snapshot.queryParams.collectionType
+      && this.rDbmsHandsOnData) {
+      await this.contentSvc.continueLearning(this.rDbmsHandsOnData.identifier,
+                                             this.activatedRoute.snapshot.queryParams.collectionId,
+                                             this.activatedRoute.snapshot.queryParams.collectionType,
+      )
+    } else if (this.rDbmsHandsOnData) {
+      await this.contentSvc.continueLearning(this.rDbmsHandsOnData.identifier)
+    }
+    if (this.rDbmsHandsOnData) {
+      this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.rDbmsHandsOnData)
+    }
     if (this.dataSubscription) {
       this.dataSubscription.unsubscribe()
     }
@@ -58,13 +83,13 @@ export class RdbmsHandsOnComponent implements OnInit, OnDestroy {
   private async transformRDbmsModule(_content: NsContent.IContent) {
     let manifestFile = ''
     if (this.rDbmsHandsOnData && this.rDbmsHandsOnData.artifactUrl) {
+      const artifactUrl = this.forPreview
+        ? this.viewSvc.getAuthoringUrl(this.rDbmsHandsOnData.artifactUrl)
+        : this.rDbmsHandsOnData.artifactUrl
       manifestFile = await this.http
-        .get<any>(
-          this.rDbmsHandsOnData.artifactUrl,
-        )
+        .get<any>(artifactUrl)
         .toPromise()
-        .catch((_err: any) => {
-        })
+        .catch((_err: any) => {})
     }
     return manifestFile
   }
@@ -79,4 +104,25 @@ export class RdbmsHandsOnComponent implements OnInit, OnDestroy {
     return
   }
 
+  raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
+    if (this.forPreview) {
+      return
+    }
+    const event = {
+      eventType: WsEvents.WsEventType.Telemetry,
+      eventLogLevel: WsEvents.WsEventLogLevel.Info,
+      from: 'rdbms-hands-on',
+      to: '',
+      data: {
+        state,
+        type: WsEvents.WsTimeSpentType.Player,
+        mode: WsEvents.WsTimeSpentMode.Play,
+        content: data,
+        identifier: data ? data.identifier : null,
+        mimeType: NsContent.EMimeTypes.RDBMS_HANDS_ON,
+        url: data ? data.artifactUrl : null,
+      },
+    }
+    this.eventSvc.dispatchEvent(event)
+  }
 }

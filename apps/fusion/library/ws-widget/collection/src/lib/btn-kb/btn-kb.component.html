@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <!-- added *ngIf="false" for disabling -->
 <!-- <button
   *ngIf="false && showBtn"
@@ -9,7 +6,7 @@
   i18n-matTooltip
   matTooltip="Pin To Knowledge Board"
 > -->
-<button *ngIf="showBtn" mat-icon-button (click)="openPinToKbDialog()" i18n-aria-label aria-label="Knowledge Board"
-  i18n-matTooltip matTooltip="Pin To Knowledge Board">
+<button name="pin-to-kb-icon-button" *ngIf="showBtn" mat-icon-button (click)="openPinToKbDialog()" i18n-aria-label
+  aria-label="Knowledge Board" i18n-matTooltip matTooltip="Pin To Knowledge Board" [disabled]="status==='Deleted'">
   <mat-icon svgIcon="pin"></mat-icon>
 </button>

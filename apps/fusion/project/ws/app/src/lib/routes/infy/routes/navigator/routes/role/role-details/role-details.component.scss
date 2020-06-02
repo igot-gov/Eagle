@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import '~src/styles/ws-vars';
 @import '~src/styles/ws-mixins';
 
@@ -11,9 +8,19 @@
   @include breakpoint-xs {
     height: 240px;
   }
+
+  @media only screen and (max-width: 706px) {
+    flex-wrap: wrap;
+    height: 280px;
+    margin-bottom: 24px;
+  }
 }
 
 .description {
-  margin: 0 $size-m;
-  padding: 0 $size-m;
+  font-size: 1.28em;
+
+  @media only screen and (max-width: 463px) {
+    font-size: 0.95em;
+  }
+
 }

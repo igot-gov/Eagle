@@ -1,0 +1,27 @@
+<mat-card class="plans-card-module goal-class">
+  <mat-grid-list cols="4" rowHeight="70px">
+    <mat-grid-tile>
+      <div class="text-inside-grid hidden sm:block">
+        <a [href]="historyData?.contentUrl"><span class="mat-body-1">{{ historyData?.name }}</span></a>
+      </div>
+      <div class="text-inside-grid block sm:hidden">
+        <a [href]="historyData?.contentUrl"><span class="text-xs">{{ historyData?.name }}</span></a>
+      </div>
+    </mat-grid-tile>
+    <!-- <mat-grid-tile>
+      <ws-analytics-progress-radial [mode]="'determinate'" [progress]="progress"></ws-analytics-progress-radial>
+    </mat-grid-tile> -->
+    <mat-grid-tile>
+      <p class="text-outside-grid">{{historyData?. completed }}</p>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <p class="text-outside-grid">
+        {{ historyData?.completedUsers }}
+      </p>
+    </mat-grid-tile>
+    <mat-grid-tile style="overflow: visible!important;">
+      <ng-container [wsResolverWidget]="widgetPieGraph"></ng-container>
+    </mat-grid-tile>
+    <!-- <mat-grid-tile>{{ source }}</mat-grid-tile> -->
+  </mat-grid-list>
+</mat-card>

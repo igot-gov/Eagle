@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { Observable, noop } from 'rxjs'
 import { map, catchError } from 'rxjs/operators'
@@ -27,30 +24,30 @@ export class TrainingService {
       return
     }
 
-    this.trainingApi
-      .getTrainingCountsMultiple(identifiers)
-      .subscribe((trainingCounts: { [type: string]: number }) => {
+    this.trainingApi.getTrainingCountsMultiple(identifiers).subscribe(
+      (trainingCounts: { [type: string]: number }) => {
         searchResults.result.forEach(content => {
           if (trainingCounts[content.identifier]) {
             content.trainingLHubCount = trainingCounts[content.identifier]
           }
         })
-      },         noop)
+      },
+      noop)
   }
 
   getJITEligibleContent(query: string): Observable<NsContent.IContent[]> {
     const locale = (this.configSvc.activeLocale && this.configSvc.activeLocale.locals[0]) || 'en'
-
     return this.contentSvc
-      .search({
+      .searchV6({
         query,
-        filters: {
-          contentType: [NsContent.EContentTypes.COURSE],
-        },
+        filters: [{
+          andFilters: [{ contentType: [NsContent.EContentTypes.COURSE] }]
+          ,
+        }],
         pageNo: 0,
         pageSize: 5,
-        instanceCatalog: true,
         locale: [locale],
+        includeSourceFields: ['learningTrack'],
       })
       .pipe(
         catchError(() => []),

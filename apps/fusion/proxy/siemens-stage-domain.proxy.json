@@ -1,42 +1,42 @@
 {
   "/apis/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/content-api/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/content-store/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/chat-bot/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/mobile-apps/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/LA/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/assets/*": {
-path
+    "target": "https://siemens-staging.onwingspan.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

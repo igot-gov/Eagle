@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -15,6 +12,7 @@ export class BlogReplyComponent implements OnInit {
   @Input() reply: NsDiscussionForum.ITimelineResult | null = null
   @Output() deleteSuccess = new EventEmitter<boolean>()
 
+  showSocialLike = false
   editMode = false
   replyPostEnabled = false
   updatedBody: string | undefined = ''
@@ -30,7 +28,10 @@ export class BlogReplyComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+    this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
+  }
 
   deleteReply(failMsg: string) {
     if (this.reply) {

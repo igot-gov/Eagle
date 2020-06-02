@@ -1,12 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-card class="margin-l pad" *ngIf="config">
   <h2 class="mat-h2 font-weight-500">{{ config?.title }}</h2>
   <h3 class="mat-h3 font-weight-500" *ngIf="!config.dashboardsList" i18n>
     Stats will appear here.
   </h3>
-path
+  <div class="flex flex-wrapped flex-middle">
     <div class="width-1-4">
       <mat-radio-group
         class="radioGroup"
@@ -27,9 +24,9 @@ path
     <div class="width-3-4">
       <div class="text-center">
         <div
-path
+          class="flex flex-center margin-l"
           *ngIf="
-path
+            (currentStat === 'lex' && lexStatFetchStatus === 'fetching') ||
             (currentStat === 'infyme' && infyMeStatFetchStatus === 'fetching')
           "
         >
@@ -38,7 +35,7 @@ path
         <h3
           class="mat-h3"
           *ngIf="
-path
+            (currentStat === 'lex' && lexStatFetchStatus === 'error') ||
             (currentStat === 'infyme' && infyMeStatFetchStatus === 'error')
           "
           i18n
@@ -46,14 +43,14 @@ path
           Error fetching Data
         </h3>
       </div>
-path
+      <div class="flex flex-around flex-wrapped">
         <ng-container *ngFor="let stat of stats">
           <ng-container *ngIf="stat?.titleKey === currentStat">
             <a
               [ngClass]="{ 'cursor-auto': !counterEnabled }"
               [routerLink]="
                 counterEnabled
-path
+                  ? currentStat === 'lex'
                     ? '/app/infy/counter'
                     : '/app/infy/counter/infy-me'
                   : null

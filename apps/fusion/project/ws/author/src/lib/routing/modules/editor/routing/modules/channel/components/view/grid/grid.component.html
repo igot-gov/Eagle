@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="flex flex-wrap parentClass" *ngFor="let row of processedWidgets; let i = index"
   (mouseenter)="hover[i] = true" (mouseleave)="hover[i] = false" [ngClass]="containerClass">
   <div class="box child childClass" *ngFor="let col of row" [ngClass]="col.className" [ngStyle]="col?.styles">

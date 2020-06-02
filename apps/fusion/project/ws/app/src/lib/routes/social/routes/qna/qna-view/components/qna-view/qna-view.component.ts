@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core'
 import { MatSnackBar, MatDialog } from '@angular/material'
 import { ActivatedRoute, Data, Router } from '@angular/router'
@@ -77,6 +74,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
   }
 
   userId = ''
+  showSocialLike = false
   isValidForUserAnswer = false
   @ViewChild('editor', { static: true }) editorQuill!: EditorQuillComponent
   isXSmall$ = this.valueSvc.isXSmall$
@@ -109,6 +107,8 @@ export class QnaViewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initData()
+    this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
+
   }
   ngOnDestroy() {
     if (this.routeSubscription) {
@@ -269,11 +269,6 @@ export class QnaViewComponent implements OnInit, OnDestroy {
 
   onAnswerAccept(itemId: string) {
     try {
-      const itemIndex = this.qnaConversation.replyPost.findIndex(
-        reply => reply.id === itemId,
-      )
-      const pullItem = this.qnaConversation.replyPost.splice(itemIndex, 1)
-      this.qnaConversation.acceptedAnswer = pullItem[0]
       let replyItem: NsDiscussionForum.ITimelineResult
       if (
         this.qnaConversation.acceptedAnswer &&
@@ -282,6 +277,11 @@ export class QnaViewComponent implements OnInit, OnDestroy {
         replyItem = { ...this.qnaConversation.acceptedAnswer }
         this.qnaConversation.replyPost.push(replyItem)
       }
+      const itemIndex = this.qnaConversation.replyPost.findIndex(
+        reply => reply.id === itemId,
+      )
+      const pullItem = this.qnaConversation.replyPost.splice(itemIndex, 1)
+      this.qnaConversation.acceptedAnswer = pullItem[0]
       const acceptedAnswerElement = document.getElementById('answers')
       if (acceptedAnswerElement) {
         acceptedAnswerElement.scrollIntoView({

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common'
@@ -25,12 +22,22 @@ import {
   MatSelectModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatTableModule,
+  MatCheckboxModule,
+  MatProgressSpinnerModule,
+  MatButtonToggleModule,
+  MatSlideToggleModule,
+  MatTabsModule,
+  MatDividerModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
 } from '@angular/material'
 import { HomeComponent } from './routes/page/home/home.component'
 import {
   BtnPageBackModule,
   UserAutocompleteModule,
   PickerContentModule,
+  UserImageModule,
 } from '@ws-widget/collection'
 import { RouterModule } from '@angular/router'
 import { BannerComponent } from './routes/page/home/components/banner/banner.component'
@@ -44,7 +51,15 @@ import { UserRolesComponent } from './routes/user-roles/user-roles.component'
 import { ModifyRolesDialogComponent } from './routes/user-roles/components/modify-roles-dialog/modify-roles-dialog.component'
 import { EditBannersDialogComponent } from './routes/page/home/components/edit-banners-dialog/edit-banners-dialog.component'
 import { UserRegistrationComponent } from './routes/user-registration/user-registration.component'
-
+import { RegisteredUsersComponent } from './routes/registered-users/registered-users.component'
+import { DialogDeregisterUserComponent } from './routes/registered-users/components/dialog-deregister-user/dialog-deregister-user.component'
+import { SystemRolesManagementComponent } from './routes/system-roles-management/system-roles-management.component'
+import { RolesManagementDetailComponent } from './routes/system-roles-management/roles-management-detail/roles-management-detail.component'
+import { ConfirmActionComponent } from './routes/system-roles-management/roles-management-detail/components/confirm-action/confirm-action.component'
+import { UsersComponent } from './routes/users/users.component'
+import { CreateUserComponent } from './routes/users/create-user/create-user.component'
+import { AddUsersDialogComponent } from './routes/system-roles-management/roles-management-detail/components/add-users-dialog/add-users-dialog.component'
+import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
 @NgModule({
   declarations: [
     TenantAdminComponent,
@@ -58,6 +73,15 @@ import { UserRegistrationComponent } from './routes/user-registration/user-regis
     ModifyRolesDialogComponent,
     EditBannersDialogComponent,
     UserRegistrationComponent,
+    RegisteredUsersComponent,
+    DialogDeregisterUserComponent,
+    SystemRolesManagementComponent,
+    RolesManagementDetailComponent,
+    ConfirmActionComponent,
+    UsersComponent,
+    CreateUserComponent,
+    AddUsersDialogComponent,
+    OpenRolesDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -90,8 +114,25 @@ import { UserRegistrationComponent } from './routes/user-registration/user-regis
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatButtonToggleModule,
+    MatTabsModule,
+    MatSlideToggleModule,
+    MatDividerModule,
+    UserImageModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
   ],
   providers: [TenantAdminService],
-  entryComponents: [ModifyRolesDialogComponent, EditBannersDialogComponent],
+  entryComponents: [
+    ModifyRolesDialogComponent,
+    EditBannersDialogComponent,
+    DialogDeregisterUserComponent,
+    ConfirmActionComponent,
+    AddUsersDialogComponent,
+    OpenRolesDialogComponent,
+    ],
 })
 export class TenantAdminModule { }

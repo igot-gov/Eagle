@@ -1,15 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div [ngClass]="{
     'banner-container': bannerUrl,
     'ws-mat-primary-lite-background-on-day': !bannerUrl
   }" [style.backgroundImage]="bannerUrl">
   <div class="header-synopsis" *ngIf="content">
     <div class="header-title margin-bottom-m flex flex-column">
-      <p class="mat-display-1 margin-remove-bottom content-name pb-4 text-truncate uppercase" [title]="content?.name">
-        {{ content?.name }}
-      </p>
+      <div class="flex items-center pb-4">
+        <p class="mat-display-1 margin-remove-bottom content-name text-truncate uppercase" [title]="content?.name">
+          {{ content?.name }}
+        </p>
+        <span *ngIf="contentProgress === 1" class="margin-left-s">
+          <mat-icon i18n-matTooltip matTooltip="Completed" class="ws-mat-green-text">check_circle</mat-icon>
+        </span>
+      </div>
       <p class="text-xl font-medium">
         {{ content?.complexityLevel }}
         <ng-container *ngIf="content?.subTitle">
@@ -18,8 +20,97 @@
         <span class="" [matTooltip]="content?.subTitle"></span>
         {{ content?.subTitle }}
       </p>
+      <div *ngIf="content?.lastUpdatedOn" class="mt-1">
+        <span i18n>Published on</span>
+        {{ content?.lastUpdatedOn | date }}
+      </div>
+      <div *ngIf="content?.averageRating" class="flex items-center mt-3">
+        <mat-icon color="accent" class="mr-2" *ngFor="let rating of [1, 2, 3, 4, 5]">
+          {{ getRatingIcon(rating) }}</mat-icon>
+        <span class="ml-2 font-medium text-xl">{{ content?.averageRating }}&nbsp;</span>
+        (
+        <span i18n>from</span>
+        <span *ngIf="content?.totalRating">&nbsp;{{ content?.totalRating | pipeCountTransform }}&nbsp;</span>
+        <span>
+          <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
+            votes
+          </ng-container>
+          <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
+            vote
+          </ng-container>
+        </span>)
+      </div>
+      <div class="header-actions mt-4">
+        <div class="">
+          <ng-container *ngIf="content?.labels?.length">
+            <a [disabled]="!isStartButtonAvailable" [href]="content?.artifactUrl" target="_blank"
+              class="margin-right-m ws-mat-accent-background extWebsite font-medium text-lg" mat-flat-button>
+              <span class="text-white" i18n>Access to Additional Resources & Tools</span>
+              <mat-icon class="ml-2 text-white mat-icon notranslate material-icons mat-icon-no-color">open_in_new
+              </mat-icon>
+            </a>
+          </ng-container>
+          <ng-container *ngIf="
+              (!content?.labels || !content?.labels?.length) &&
+              content?.status !== 'Deleted' &&
+              content?.status !== 'Expired'
+            ">
+            <div [hidden]="isResource && !content?.artifactUrl?.length">
+              <ng-container *ngIf="
+                  !(isMobile && content?.isInIntranet) &&
+                  !(
+                    content?.contentType === 'Course' &&
+                    content?.children.length === 0 &&
+                    !content?.artifactUrl?.length
+                  ) &&
+                  !(content?.contentType === 'Resource' && !content?.artifactUrl)
+                ">
+                <a [color]="'accent'" *ngIf="showStart.show"
+                  [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
+                  [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')" class="margin-right-m"
+                  mat-flat-button i18n>
+                  Start
+                </a>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+        <div class="action-btns">
+          <div class="hidden-block-xs">
+            <ng-container [ngTemplateOutlet]="actions"></ng-container>
+          </div>
+          <button mat-icon-button class="visible-block-xs" [matMenuTriggerFor]="actionMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 <ws-widget-content-progress *ngIf="content?.identifier" [contentId]="content?.identifier">
 </ws-widget-content-progress>
+
+<ng-template #rating>
+  <div class="flex items-center mr-2">
+    <mat-icon class="mr-1" *ngIf="content?.averageRating == 5" color="accent">star</mat-icon>
+    <mat-icon class="mr-1" *ngIf="content?.averageRating && content?.averageRating != 5" color="accent">star_half
+    </mat-icon>
+    <mat-icon class="mr-1" *ngIf="!content?.averageRating">star_border</mat-icon>
+    <span>{{ content?.averageRating | number: '1.1-1' }}</span>
+  </div>
+</ng-template>
+
+<mat-menu #actionMenu="matMenu">
+  <div mat-menu-item>
+    <ng-container *ngIf="content" [ngTemplateOutlet]="actions"></ng-container>
+  </div>
+</mat-menu>
+
+<ng-template #actions>
+  <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="content | pipePartialContent: ['identifier']">
+  </ws-widget-btn-content-like>
+  <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="content"></ws-widget-btn-content-share>
+  <ws-widget-btn-playlist [forPreview]="forPreview" *ngIf="btnPlaylistConfig" [widgetData]="btnPlaylistConfig">
+  </ws-widget-btn-playlist>
+</ng-template>

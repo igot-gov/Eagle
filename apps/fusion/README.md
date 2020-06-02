@@ -1,5 +1,6 @@
 # Fusion
 
+//Comment by Shyam
 Initialization Code:
 
 If Authenticated:

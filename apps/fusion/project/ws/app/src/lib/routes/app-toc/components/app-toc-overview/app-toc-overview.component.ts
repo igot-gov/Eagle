@@ -1,19 +1,15 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { AccessControlService } from '@ws/author'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { ActivatedRoute, Data } from '@angular/router'
-import { Subscription, Observable } from 'rxjs'
-
 import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
-
+import { Observable, Subscription } from 'rxjs'
+import { retry } from 'rxjs/operators'
+import { TrainingApiService } from '../../../infy/routes/training/apis/training-api.service'
+import { TrainingService } from '../../../infy/routes/training/services/training.service'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
-import { TrainingApiService } from '../../../infy/routes/training/apis/training-api.service'
-import { retry } from 'rxjs/operators'
-import { TrainingService } from '../../../infy/routes/training/services/training.service'
 
 @Component({
   selector: 'ws-app-app-toc-overview',
@@ -30,6 +26,10 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   trainingLHubEnabled = false
   trainingLHubCount$?: Observable<number>
   body: SafeHtml | null = null
+  @Input() forPreview = false
+  tocConfig: any = null
+  contentParents: { [key: string]: NsAppToc.IContentParentResponse[] } = {}
+  objKeys = Object.keys
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +38,7 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
     private trainingApi: TrainingApiService,
     private trainingSvc: TrainingService,
     private domSanitizer: DomSanitizer,
+    private authAccessControlSvc: AccessControlService,
   ) {
     if (this.configSvc.restrictedFeatures) {
       this.askAuthorEnabled = !this.configSvc.restrictedFeatures.has('askAuthor')
@@ -46,12 +47,17 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if (!this.forPreview) {
+      this.forPreview = window.location.href.includes('/author/')
+    }
     if (this.route && this.route.parent) {
       this.routeSubscription = this.route.parent.data.subscribe((data: Data) => {
         this.initData(data)
+        this.tocConfig = data.pageData.data
       })
     }
   }
+
   ngOnDestroy() {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe()
@@ -72,10 +78,44 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
     const initData = this.tocSharedSvc.initData(data)
     this.content = initData.content
     this.body = this.domSanitizer.bypassSecurityTrustHtml(
-      this.content ? this.content.body || '' : '',
+      this.content && this.content.body
+        ? this.forPreview
+          ? this.authAccessControlSvc.proxyToAuthoringUrl(this.content.body)
+          : this.content.body
+        : '',
     )
+    this.contentParents = {}
     this.resetAndFetchTocStructure()
     this.getTrainingCount()
+    this.getContentParent()
+  }
+
+  getContentParent() {
+    if (this.content) {
+      const contentParentReq: NsAppToc.IContentParentReq = {
+        fields: ['contentType', 'name'],
+      }
+      this.tocSharedSvc
+        .fetchContentParent(this.content.identifier, contentParentReq, this.forPreview)
+        .subscribe(
+          res => {
+            this.parseContentParent(res)
+          },
+          _err => {
+            this.contentParents = {}
+          },
+        )
+    }
+  }
+
+  parseContentParent(content: NsAppToc.IContentParentResponse) {
+    content.collections.forEach(collection => {
+      if (!this.contentParents.hasOwnProperty(collection.contentType)) {
+        this.contentParents[collection.contentType] = []
+      }
+      this.contentParents[collection.contentType].push(collection)
+      this.parseContentParent(collection)
+    })
   }
 
   resetAndFetchTocStructure() {
@@ -95,7 +135,7 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
       youtube: 0,
     }
     if (this.content) {
-      this.hasTocStructure = true
+      this.hasTocStructure = false
       this.tocStructure.learningModule = this.content.contentType === 'Collection' ? -1 : 0
       this.tocStructure.course = this.content.contentType === 'Course' ? -1 : 0
       this.tocStructure = this.tocSharedSvc.getTocStructure(this.content, this.tocStructure)
@@ -113,7 +153,8 @@ export class AppTocOverviewComponent implements OnInit, OnDestroy {
     if (
       this.trainingLHubEnabled &&
       this.content &&
-      this.trainingSvc.isValidTrainingContent(this.content)
+      this.trainingSvc.isValidTrainingContent(this.content) &&
+      !this.forPreview
     ) {
       this.trainingLHubCount$ = this.trainingApi
         .getTrainingCount(this.content.identifier)

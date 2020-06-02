@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar color="primary">
   <a mat-icon-button routerLink="/app/infy/navigator/">
     <mat-icon>arrow_back</mat-icon>
@@ -11,7 +8,7 @@
 </mat-toolbar>
 
 
-  <div class="margin-bottom-xl">
+<div class="margin-bottom-xl">
   <div class="banner ws-mat-primary-background-op50">
     <div class="content-strip margin-bottom-m ">
       <h1 class="mat-display-1 margin-bottom-l ws-mat-primary-text text-bold padding-top-l" i18n>
@@ -22,10 +19,11 @@
       </h2>
     </div>
   </div>
-        <div *ngIf="coursesFetched" class = "margin-top-l margin-bottom-l">
-      <ng-container [wsResolverWidget]="coursesResolverData"></ng-container>
-    </div>
-        <div *ngIf="!coursesFetched" class = "margin-top-l margin-bottom-l">
-          <h1 class = "mat-title flex text-center margin-left-l padding-left-m flex-middle flex-center" i18n>Coming Soon ...</h1>
-          </div>
+  <div *ngIf="coursesFetched" class="margin-top-l margin-bottom-l">
+    <ng-container [wsResolverWidget]="coursesResolverData"></ng-container>
   </div>
+  <div *ngIf="!coursesFetched" class="margin-top-l margin-bottom-l">
+    <h1 class="mat-title flex text-center margin-left-l padding-left-m flex-middle flex-center" i18n>Coming Soon ...
+    </h1>
+  </div>
+</div>

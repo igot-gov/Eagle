@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
 
 @Component({
@@ -10,18 +7,24 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
 })
 export class EditorQuillComponent implements OnInit {
   @Output() textData = new EventEmitter<{
-    isValid: boolean;
-    htmlText: string;
+    isValid: boolean
+    htmlText: string
   }>()
 
   @Input() htmlText = ''
   @Input() minLength = '1'
+  @Input() post ?= false
 
   reset = false
+  placeholder = 'Ask a question, or add something you found helpful'
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.post) {
+      this.placeholder = 'Add a post ...'
+    }
+  }
 
   onContentChanged(editorEvent: any) {
     this.textData.emit({

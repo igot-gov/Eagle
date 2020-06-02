@@ -1,42 +1,48 @@
 {
   "/apis/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/content-api/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/private-content-service/*": {
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/content-store/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/chat-bot/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/mobile-apps/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/LA/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/assets/*": {
-    "target": "https://",
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

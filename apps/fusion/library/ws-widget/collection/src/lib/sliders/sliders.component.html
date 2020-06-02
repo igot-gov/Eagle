@@ -1,15 +1,14 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="banner-container" (swipeleft)="slideTo(currentIndex + 1)" (swiperight)="slideTo(currentIndex - 1)"
   *ngIf="widgetData?.length">
   <a (click)="raiseTelemetry(widgetData[currentIndex].redirectUrl)"
-    [routerLink]=" !isOpenInNewTab ? widgetData[currentIndex].redirectUrl : './'" class="banner-overlay"></a>
-  <div class="banner" *ngFor="let slide of widgetData; let i = index" [hidden]="i !== currentIndex">
+    [queryParams]="widgetData[currentIndex].queryParams || {}"
+    [routerLink]="!isOpenInNewTab ? widgetData[currentIndex].redirectUrl : './'" class="banner-overlay"
+    [ngClass]="{ 'cursor-auto': !widgetData[currentIndex].redirectUrl }"></a>
+  <div class="banner WidgetInstanceId" *ngFor="let slide of widgetData; let i = index" [hidden]="i !== currentIndex">
     <img i18n-alt alt="Page Banner" [src]="slide.banners" wsUtilsImageResponsive class="banner-image" />
   </div>
   <div class="banner-meta">
-    <a [routerLink]=" !isOpenInNewTab ? widgetData[currentIndex].redirectUrl : './'" class="banner-title text-truncate"
+    <a [routerLink]="!isOpenInNewTab ? widgetData[currentIndex].redirectUrl : './'" class="banner-title text-truncate"
       *ngIf="widgetData[currentIndex].title" [title]="widgetData[currentIndex].title">
       {{ widgetData[currentIndex].title }}
     </a>
@@ -18,6 +17,11 @@
         (click)="slideTo(j)"></span>
     </div>
   </div>
-  <a *ngIf="widgetData?.length > 1" role="button" class="prev" (click)="slideTo(currentIndex - 1)">&#10094;</a>
-  <a *ngIf="widgetData?.length > 1" role="button" class="next" (click)="slideTo(currentIndex + 1)">&#10095;</a>
+  <button *ngIf="widgetData?.length > 1" class="prev" aria-label="Previous slide" (click)="slideTo(currentIndex - 1)">
+    <a *ngIf="widgetData?.length > 1" role="button">&#10094;</a>
+  </button>
+  <button *ngIf="widgetData?.length > 1" class="next" (click)="slideTo(currentIndex + 1)" aria-label="Next slide">
+    <a *ngIf="widgetData?.length > 1" role="button" class="next">&#10095;</a>
+  </button>
+
 </div>

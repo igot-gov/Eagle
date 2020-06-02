@@ -1,8 +1,8 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <h1 mat-dialog-title i18n>Logout Now</h1>
-<div mat-dialog-content i18n>
+<div class="ws-mat-primary-text text-base pb-2 title-text" *ngIf="isDownloadable" i18n>
+  Note: On logging out all the downloaded content will be deleted.
+</div>
+<div mat-dialog-content class="text-base hide-overflow" i18n>
   Are you sure?
 </div>
 <div mat-dialog-actions class="flex-row-reverse">

@@ -1,0 +1,25 @@
+.icon {
+  width: 64px;
+}
+
+mat-form-field {
+  padding-top: .3em;
+}
+
+:host ::ng-deep .mat-form-field-infix {
+  border-top-width: 0px;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0px;
+  padding-left: .3em;
+}
+
+.searchBox {
+  border: 1px solid #cecece;
+  border-radius: .75rem;
+}
+
+.border-right {
+  border-right: 1px solid #cecece;
+}

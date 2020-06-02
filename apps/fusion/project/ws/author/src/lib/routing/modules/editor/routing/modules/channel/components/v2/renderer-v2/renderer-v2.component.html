@@ -1,12 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div
   #parent
   class="relative"
   (mouseenter)="parent.hover = true"
   (mouseleave)="parent.hover = false"
-  class="flex flex-wrap parentClass"
+  class="flex flex-wrap parentClass px-6"
   *ngFor="let row of processedWidgets; let i = index"
   (mouseenter)="parent.hover = true"
   (mouseleave)="parent.hover = false"
@@ -52,8 +49,8 @@
         (click)="swapPosition('moveLeft', col.id)"
       >
         <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Move Left icon"
-          >keyboard_arrow_left</mat-icon
-        >
+          >keyboard_arrow_left
+        </mat-icon>
       </button>
       <button
         (click)="swapPosition('moveRight', col.id)"
@@ -63,8 +60,8 @@
         matTooltip="Move Right"
       >
         <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Move Right icon"
-          >keyboard_arrow_right</mat-icon
-        >
+          >keyboard_arrow_right
+        </mat-icon>
       </button>
     </div>
     <ws-auth-viewer-v2 [id]="col.id"></ws-auth-viewer-v2>
@@ -99,8 +96,8 @@
       matTooltip="Move Down"
     >
       <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Move Bottom icon"
-        >keyboard_arrow_down</mat-icon
-      >
+        >keyboard_arrow_down
+      </mat-icon>
     </button>
     <button
       *ngIf="processedWidgets.length > 1"
@@ -117,7 +114,7 @@
 </div>
 <button
   mat-icon-button
-  class=" mat-elevation-z5 ws-mat-accent-background small-button padding-remove  margin-top-m"
+  class="mat-elevation-z5 ws-mat-accent-background small-button padding-remove margin-top-m"
   i18n-matTooltip
   matTooltip="Add a new row"
   (click)="addRow()"

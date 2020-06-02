@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-form-field class="w-full">
   <mat-chip-list #chipList>
     <mat-chip *ngFor="let selectedUser of selectedUsers" [selectable]="true" [removable]="true"
@@ -24,9 +21,23 @@
           [userName]="autocompleteUser.first_name + ' ' + autocompleteUser.last_name" [imageType]="'name-initial'">
         </ws-widget-user-image>
         <div class="ml-3 width-expand">
+          <div class="flex flex-between">
           <div>{{ autocompleteUser.first_name }} {{ autocompleteUser.last_name }}</div>
+            <div>
+              <span class="pl-1 ws-mat-primary-text" *ngIf="rolesId && autocompleteUser.hasRole">
+                <mat-icon>check_circle</mat-icon>
+              </span>
+              <span class="pl-1 ws-mat-primary-text" *ngIf="rolesId && !autocompleteUser.hasRole">
+                <mat-icon>add_circle</mat-icon>
+              </span>
+            </div>
+          </div>
           <div class="mat-caption text-truncate">
-            {{ autocompleteUser.email }}, {{ autocompleteUser.department_name }}
+            {{ autocompleteUser.email }}
+            <ng-container *ngIf="autocompleteUser.department_name">
+              ,
+            </ng-container>
+            {{ autocompleteUser.department_name }}
           </div>
         </div>
       </div>

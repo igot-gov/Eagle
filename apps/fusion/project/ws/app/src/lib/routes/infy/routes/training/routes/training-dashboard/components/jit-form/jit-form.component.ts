@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { Observable, throwError, noop, Subscription, of } from 'rxjs'
@@ -27,6 +24,7 @@ import { IJITForm, ITrainingLocation, ITrainingTrack } from '../../../../models/
 export class JitFormComponent implements OnInit, AfterViewInit, OnDestroy {
   currentDate = new Date()
   locations$?: Observable<ITrainingLocation[]>
+  track = ''
   tracks$?: Observable<ITrainingTrack[]>
   searchResults!: NsContent.IContent[]
   queryParamsSub?: Subscription
@@ -109,7 +107,10 @@ export class JitFormComponent implements OnInit, AfterViewInit, OnDestroy {
   onClickSearchResult(searchResult: NsContent.IContent) {
     this.jitForm.patchValue({
       contentId: searchResult.identifier,
+      track: searchResult.learningTrack,
     })
+    this.track = searchResult.learningTrack || ''
+
   }
 
   onSearchUserInput() {
@@ -142,7 +143,7 @@ export class JitFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.locations$ = this.route.data.pipe(
       map(data => {
         const trainingConfigResolve = (data.trainingConfigResolve as IResolveResponse<{
-          trainingLocations: ITrainingLocation[];
+          trainingLocations: ITrainingLocation[]
         }>).data
 
         if (trainingConfigResolve) {
@@ -159,7 +160,7 @@ export class JitFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.tracks$ = this.route.data.pipe(
       map(data => {
         const trainingConfigResolve = (data.trainingConfigResolve as IResolveResponse<{
-          trainingTracks: ITrainingTrack[];
+          trainingTracks: ITrainingTrack[]
         }>).data
 
         if (trainingConfigResolve) {

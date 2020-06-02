@@ -1,21 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
-import { MatSnackBar } from '@angular/material'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { Observable, of } from 'rxjs'
+import { MatSnackBar } from '@angular/material'
+import { ActivatedRoute } from '@angular/router'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
 // import { startWith, map } from 'rxjs/operators'
 import { IResolveResponse } from 'library/ws-widget/utils/src/lib/resolvers/resolver.model'
+import { Observable, of } from 'rxjs'
+import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators'
 import { InterestService } from '../../services/interest.service'
-import {
-  startWith,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-} from 'rxjs/operators'
-import { EventService, ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-interest',
@@ -130,7 +122,7 @@ export class InterestComponent implements OnInit {
 
   private fetchSuggestedInterests() {
     this.interestSvc.fetchSuggestedInterestV2().subscribe(data => {
-      // console.log('Interest: ', data)
+      // //console.log('Interest: ', data)
       this.suggestedInterests = data
       this.removeAlreadyAddedFromRecommended()
     })

@@ -1,10 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
 import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
+import { ConfigurationsService } from '../../../../../../../library/ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'viewer-pdf-container',
@@ -14,6 +12,7 @@ import { ActivatedRoute } from '@angular/router'
 export class PdfComponent implements OnInit {
   @Input() isFetchingDataComplete = false
   @Input() pdfData: NsContent.IContent | null = null
+  @Input() forPreview = false
   @Input() widgetResolverPdfData: any = {
     widgetType: 'player',
     widgetSubType: 'playerPDF',
@@ -29,13 +28,14 @@ export class PdfComponent implements OnInit {
     NsDiscussionForum.IDiscussionForumInput
   > | null = null
   isTypeOfCollection = false
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-  ) { }
+  isRestricted = false
+  constructor(private activatedRoute: ActivatedRoute, private configSvc: ConfigurationsService) { }
 
   ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isRestricted =
+        !this.configSvc.restrictedFeatures.has('disscussionForum')
+    }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
   }
-
 }

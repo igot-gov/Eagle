@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { mergeMap } from 'rxjs/internal/operators/mergeMap'
@@ -48,10 +45,9 @@ export class HandsOnService {
   viewLastSubmission(lexId: string) {
     return this.http.get(apiEndpoints.HANDSON_VIEW_LAST_SUBMISSION + lexId).pipe(
       mergeMap((v: any) => {
-        if (v && v.result && v.result.response && v.result.response.length > 0) {
-          const viewUrl = v.result.response[0].submission_url
-          const url = `/${viewUrl.slice(viewUrl.indexOf('content/'))}`
-          return this.http.get(url, { responseType: 'text' })
+        if (v && v.response && v.response.length > 0) {
+          const viewUrl = v.response[0].submission_url
+          return this.http.get(viewUrl, { responseType: 'text' })
         }
         return ['---no submission found---']
 

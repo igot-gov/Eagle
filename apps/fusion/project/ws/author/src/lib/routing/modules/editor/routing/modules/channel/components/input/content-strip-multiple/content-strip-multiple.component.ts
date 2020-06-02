@@ -1,11 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 
-import { NsContentStripMultiple, IPickerContentData, NsContent } from '@ws-widget/collection/src/public-api'
+import {
+  NsContentStripMultiple,
+  IPickerContentData,
+  NsContent,
+} from '@ws-widget/collection/src/public-api'
 
 @Component({
   selector: 'ws-auth-content-strip-multiple',
@@ -13,11 +14,13 @@ import { NsContentStripMultiple, IPickerContentData, NsContent } from '@ws-widge
   styleUrls: ['./content-strip-multiple.component.scss'],
 })
 export class ContentStripMultipleComponent implements OnInit {
-
   @Input() isSubmitPressed = false
   @Input() identifier = ''
   @Input() content!: NsContentStripMultiple.IContentStripUnit
-  @Output() data = new EventEmitter<{ content: NsContentStripMultiple.IContentStripUnit, isValid: boolean }>()
+  @Output() data = new EventEmitter<{
+    content: NsContentStripMultiple.IContentStripUnit
+    isValid: boolean
+  }>()
   form!: FormGroup
   requestType!: 'search' | 'api' | 'ids' | 'searchRegionRecommendation' | 'searchV6'
   isAddingContent = false
@@ -27,20 +30,27 @@ export class ContentStripMultipleComponent implements OnInit {
   dataType = 'authoring'
   id = 0
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.pickerContentData = {
       preselected: new Set(),
       enablePreselected: true,
-      availableFilters: ['contentType', 'learningMode',
-        'region', 'resourceType',
-        'duration', 'sourceShortName', 'catalogPaths',
-        'complexityLevel', 'concepts', 'lastUpdatedOn'],
+      availableFilters: [
+        'contentType',
+        'learningMode',
+        'region',
+        'resourceType',
+        'duration',
+        'sourceShortName',
+        'catalogPaths',
+        'complexityLevel',
+        'concepts',
+        'lastUpdatedOn',
+      ],
     }
     if (this.content.request && this.content.request.ids && this.content.request.ids.length) {
-      this.content.request.ids.map(
-        v => (this.pickerContentData.preselected as Set<string>).add(v))
+      this.content.request.ids.map(v => (this.pickerContentData.preselected as Set<string>).add(v))
     }
     if (this.content.request) {
       if (this.content.request.searchV6) {
@@ -61,10 +71,17 @@ export class ContentStripMultipleComponent implements OnInit {
       loader: [this.content ? this.content.loader : false],
       filters: [this.content.filters || {}],
       stripConfig: this.formBuilder.group({
-        cardSubType: [this.content.stripConfig ? this.content.stripConfig.cardSubType || 'standard' : 'standard'],
+        cardSubType: [
+          this.content.stripConfig
+            ? this.content.stripConfig.cardSubType || 'standard'
+            : 'standard',
+        ],
         intranetMode: this.content.stripConfig && this.content.stripConfig.intranetMode,
         deletedMode: this.content.stripConfig && this.content.stripConfig.deletedMode,
-        postCardForSearch: [this.content.stripConfig ? this.content.stripConfig.postCardForSearch || false : false],
+        contentTags: this.content.stripConfig && this.content.stripConfig.contentTags,
+        postCardForSearch: [
+          this.content.stripConfig ? this.content.stripConfig.postCardForSearch || false : false,
+        ],
       }),
       request: this.formBuilder.group({
         search: [this.content.request ? this.content.request.search : ''],
@@ -73,7 +90,9 @@ export class ContentStripMultipleComponent implements OnInit {
       }),
     })
 
-    this.subscription = (this.form.controls.request.get('ids') as AbstractControl).valueChanges.subscribe({
+    this.subscription = (this.form.controls.request.get(
+      'ids',
+    ) as AbstractControl).valueChanges.subscribe({
       next: () => {
         const set = new Set<string>()
         const lexIDs = (this.form.controls.request as FormGroup).controls.ids.value || []
@@ -85,18 +104,14 @@ export class ContentStripMultipleComponent implements OnInit {
       },
     })
 
-    this.form.valueChanges
-      .pipe(
-        debounceTime(100),
-        distinctUntilChanged(),
-      ).subscribe({
-        next: () => {
-          this.data.emit({
-            content: this.form.value,
-            isValid: this.form.valid,
-          })
-        },
-      })
+    this.form.valueChanges.pipe(debounceTime(100), distinctUntilChanged()).subscribe({
+      next: () => {
+        this.data.emit({
+          content: this.form.value,
+          isValid: this.form.valid,
+        })
+      },
+    })
   }
 
   private getUniqueId(): string {
@@ -105,10 +120,10 @@ export class ContentStripMultipleComponent implements OnInit {
   }
 
   update(key: string, value: any) {
-    (this.form.controls.request.get(key) as AbstractControl).setValue(value)
+     (this.form.controls.request.get(key) as AbstractControl).setValue(value)
   }
 
-  onContentSelectionChanged(event: { content: Partial<NsContent.IContent>, checked: boolean }) {
+  onContentSelectionChanged(event: { content: Partial<NsContent.IContent>; checked: boolean }) {
     const lexIDs = (this.form.controls.request as FormGroup).controls.ids.value || []
     if (event.checked) {
       lexIDs.push(event.content.identifier)
@@ -121,6 +136,6 @@ export class ContentStripMultipleComponent implements OnInit {
         this.pickerContentData.preselected.delete(event.content.identifier as string)
       }
     }
-    (this.form.controls.request as FormGroup).controls.ids.setValue(lexIDs)
+     (this.form.controls.request as FormGroup).controls.ids.setValue(lexIDs)
   }
 }

@@ -1,9 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { NsWidgetResolver } from '@ws-widget/resolver'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ISelectorResponsiveUnit, NsGalleryView } from '@ws-widget/collection/src/public-api'
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
+import { NsWidgetResolver } from '@ws-widget/resolver'
 import { WIDGET_LIBRARY } from '../../../constants/widet'
 
 @Component({
@@ -14,7 +11,7 @@ import { WIDGET_LIBRARY } from '../../../constants/widet'
 export class ImageGalleryComponent implements OnInit {
   @Output() data = new EventEmitter<{
     content: NsGalleryView.IWidgetGalleryView
-    isValid: boolean,
+    isValid: boolean
   }>()
 
   @Input() content!: NsGalleryView.IWidgetGalleryView
@@ -69,7 +66,7 @@ export class ImageGalleryComponent implements OnInit {
     }
     this.content.cardMenu.push(strip)
     this.currentStrip = strip
-    this.onIndexChange(increaseIndex ? this.index + 1 : this.index)
+    this.onIndexChange(increaseIndex ? this.content.cardMenu.length - 1 : this.index)
   }
 
   generateWidget(): NsWidgetResolver.IRenderConfigWithAnyData {

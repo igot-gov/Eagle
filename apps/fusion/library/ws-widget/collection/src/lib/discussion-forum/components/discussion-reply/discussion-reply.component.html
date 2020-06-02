@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="reply-container margin-left-l">
   <div class="flex postSection">
     <div class="flex flex-middle">
@@ -21,7 +18,7 @@
         <ng-container>{{ reply.lastEdited?.dtLastEdited | date: 'shortTime' }}</ng-container>
       </div>
       <div>
-        <button type="button" mat-icon-button [matMenuTriggerFor]="editMenu"
+        <button name="discussion-reply-more-options-button" type="button" mat-icon-button [matMenuTriggerFor]="editMenu"
           *ngIf="userId === reply.postCreator.postCreatorId">
           <mat-icon>more_vertical</mat-icon>
         </button>
@@ -41,12 +38,12 @@
     <ws-widget-editor-quill [htmlText]="reply.postContent.body" (textData)="onReplyTextChange($event)">
     </ws-widget-editor-quill>
     <div class="text-right">
-      <button type="button" class="margin-top-s" [disabled]="!replyPostEnabled" mat-raised-button color="primary" i18n
-        (click)="editReply(editFailMsg.value)">
+      <button name="discussion-reply-update-button" type="button" class="margin-top-s" [disabled]="!replyPostEnabled"
+        mat-raised-button color="primary" i18n (click)="editReply(editFailMsg.value)">
         Update
       </button>
-      <button type="button" class="margin-top-s margin-left-s" mat-stroked-button color="primary" i18n
-        (click)="editMode = false">
+      <button name="discussion-reply-cancel-update-button" type="button" class="margin-top-s margin-left-s"
+        mat-stroked-button color="primary" i18n (click)="editMode = false">
         Cancel
       </button>
     </div>
@@ -65,8 +62,9 @@
 
 <mat-menu #editMenu="matMenu">
   <ng-template matMenuContent>
-    <button type="button" (click)="editMode = true" mat-menu-item i18n>Edit</button>
-    <button type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item i18n>
+    <button name="discussion-reply-edit-button" type="button" (click)="editMode = true" mat-menu-item i18n>Edit</button>
+    <button name="discussion-reply-delete-button" type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item
+      i18n>
       Delete
     </button>
   </ng-template>

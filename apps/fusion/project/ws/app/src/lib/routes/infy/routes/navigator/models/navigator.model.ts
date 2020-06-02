@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsContent } from '@ws-widget/collection'
 
 export interface IGroupMember {
@@ -219,8 +216,8 @@ export interface IFsCardModel {
 }
 
 export interface INavigatorFilter {
-  technologyName: string,
-  checked: boolean,
+  technologyName: string
+  checked: boolean
 }
 
 export interface IIndustriesData {
@@ -251,6 +248,27 @@ export interface IIndustriesIdentifiers {
 }
 
 export interface ICommonData {
-  lp_id: string,
+  lp_id: string
   goal_id: string
+}
+
+export interface IBpmData {
+  _comment: string
+  is_active: boolean
+  groupd_id: number
+  group_display_order: number
+  group_heading: string
+  group_description: string
+  member_type: string
+  member_list_internal: string[]
+  member_list_external: IBpmMemberData[]
+}
+
+export interface IBpmMemberData {
+  member_id: number
+  member_display_order: number
+  member_title: string
+  member_image_id: string
+  member_description: string
+  member_linked_url: string
 }

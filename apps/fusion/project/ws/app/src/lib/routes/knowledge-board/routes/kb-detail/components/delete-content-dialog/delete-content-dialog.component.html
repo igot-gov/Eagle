@@ -1,10 +1,10 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div mat-dialog-content>
-  <p i18n>Are you sure?</p>
+  <p *ngIf="data>0" i18n>The selected contents will be removed from the Knowledge board. Are you sure?</p>
+  <p *ngIf="data===0" i18n>Are you sure?</p>
 </div>
 <div mat-dialog-actions>
-  <button aria-label="Delete" i18n-aria-label i18n mat-button (click)="closeDialog('delete')">Yes</button>
-  <button aria-label="Cancel" i18n-aria-label i18n mat-button (click)="closeDialog()">Cancel</button>
+  <button name="yes-button-delete-content" aria-label="Delete" i18n-aria-label i18n mat-button
+    (click)="closeDialog('delete')">Yes</button>
+  <button name="no-button-delete-content" aria-label="Cancel" i18n-aria-label i18n mat-button
+    (click)="closeDialog()">Cancel</button>
 </div>

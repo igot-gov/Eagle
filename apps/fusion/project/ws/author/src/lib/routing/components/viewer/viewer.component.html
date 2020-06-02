@@ -1,34 +1,36 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div style="
-  height: 100vh;
-  z-index: 1000">
+<div style="height: 100vh; z-index: 1000;">
   <mat-toolbar style="display: flex; justify-content: center; height: auto;">
     <mat-label class="padding-s font-size-m" i18n>Device Type</mat-label>
     <mat-form-field class="font-size-m">
       <mat-select [(value)]="selected">
-        <mat-option style="z-index: 1002" *ngFor="let device of previewDevices" [value]="device">
+        <mat-option style="z-index: 1002;" *ngFor="let device of previewDevices" [value]="device">
           {{ device.viewValue }}
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button type="button" mat-icon-button *ngIf="isXSmall" [matMenuTriggerFor]="actionMenu">
+    <!-- <button type="button" mat-icon-button *ngIf="isXSmall" [matMenuTriggerFor]="actionMenu">
       <mat-icon>more_vertical</mat-icon>
     </button>
     <a *ngIf="!isXSmall" class="position-absolute font-size-m" (click)="takeAction()">
       {{actionType}}
-    </a>
+    </a> -->
   </mat-toolbar>
-  <div style="display: flex; justify-content: center; overflow: hidden; padding: 8px;" class="mat-toolbar">
-    <iframe style="overflow: auto;" [src]="iframeUrl | pipeSafeSanitizer: 'resourceUrl'" [width]="selected.width"
-      [height]="selected.height">
+  <div
+    style="display: flex; justify-content: center; overflow: hidden; padding: 8px;"
+    class="mat-toolbar"
+  >
+    <iframe
+      style="overflow: auto;"
+      [src]="iframeUrl | pipeSafeSanitizer: 'resourceUrl'"
+      [width]="selected.width"
+      [height]="selected.height"
+    >
     </iframe>
   </div>
 </div>
 <mat-menu #actionMenu="matMenu">
   <a mat-menu-item (click)="takeAction()">
-    {{actionType}}
+    {{ actionType }}
   </a>
 </mat-menu>
 

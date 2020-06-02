@@ -1,0 +1,30 @@
+<form [formGroup]="endorseForm">
+  <p class="mat-body-1">
+    <span i18n>Are you sure you want to endorse </span>
+    {{data.user_email_id}}'s
+    <span i18n>request?</span></p>
+  <!-- <p class="font-bold" i18n>Skill name *</p>
+  <mat-form-field class="des-field" color="primary">
+    <input type="text" matInput i18n-placeholder placeholder="Skill Title" formControlName="skillName" readonly />
+  </mat-form-field>
+  <p class="font-bold" i18n>Skill level *</p>
+  <mat-form-field>
+    <mat-select [(value)]="selected" i18n-placeholder placeholder="Skill Level" formControlName="skillLevel">
+      <mat-option *ngFor="let level of skillLevelList" [value]="skillLevel">
+        {{level}}</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  <div class="block text-center width-1-1">
+    <p class="font-bold" i18n>Please provide the Comments</p>
+    <mat-form-field class="block text-center text-width">
+      <textarea matInput type="text" formControlName="comments" required></textarea>
+    </mat-form-field>
+  </div>
+  <ng-container>
+    <div class="flex flex-center flex-wrapped">
+      <button mat-raised-button color="primary" type="button" (click)="approveEndorsement()" i18n>Endorse</button>
+      <button mat-raised-button color="accent" class="margin-left-xs" type="button" (click)="closeDialog()"
+        i18n>Cancel</button>
+    </div>
+  </ng-container>
+</form>

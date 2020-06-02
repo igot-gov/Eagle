@@ -1,0 +1,39 @@
+@import 'ws-vars';
+
+.card-container {
+  position: relative;
+  width: 265px;
+  height: 100%;
+}
+.detail-button {
+  position: absolute;
+  top: $size-s;
+  right: $size-s;
+  z-index: 1;
+}
+
+mat-card {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+mat-card-content {
+  margin-top: -$size-s;
+  margin-bottom: $size-s;
+}
+
+mat-card-actions {
+  position: absolute;
+  bottom: $size-s;
+  right: $size-s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grayscale-img {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}

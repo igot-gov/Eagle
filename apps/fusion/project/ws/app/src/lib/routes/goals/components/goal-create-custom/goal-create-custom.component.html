@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar *ngIf="mode === 'edit'">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: edit goal" class="margin-left-xs">Edit Goal</span>
@@ -21,14 +18,16 @@
         <h3 class="mat-subheading-2" i18n>Name your Goal</h3>
         <p>
           <mat-form-field appearance="fill" class="w-full" floatLabel="never">
-            <textarea rows="1" matInput placeholder="For eg: My Awesome goal (10-100 charchters)" i18n-placeholder
-              autocomplete="off" class="resize-none" formControlName="name"></textarea>
+            <textarea name="name-goal-input-goal-create-custom" rows="1" matInput
+              placeholder="For eg: My Awesome goal (10-100 charchters)" i18n-placeholder autocomplete="off"
+              class="resize-none" formControlName="name"></textarea>
             <mat-error i18n>Name should be of 10-100 characters</mat-error>
           </mat-form-field>
         </p>
         <h3 class="mat-subheading-2" i18n>Describe your Goal</h3>
         <mat-form-field appearance="fill" class="w-full">
-          <textarea matInput rows="3" placeholder="For eg: This goal would help me to..." i18n-placeholder
+          <textarea name="describe-goal-input-goal-create-custom" matInput rows="3"
+            placeholder="For eg: This goal would help me to..." i18n-placeholder
             formControlName="description"></textarea>
         </mat-form-field>
       </div>
@@ -41,11 +40,17 @@
         <span class="h-full border border-solid text-gray-500 my-1"></span>
       </div>
       <div class="flex-1 min-w-0 ml-4">
-        <h3 class="mat-subheading-2"> {{(mode === 'edit' ? 'Edit' : 'Add')  + ' Content to your Goal'}} </h3>
+        <h3 class="mat-subheading-2">
+          {{ (mode === 'edit' ? 'Edit' : 'Add') + ' Content to your Goal' }}
+        </h3>
         <div class="mb-8">
-          <ws-widget-picker-content [removeSubset]="true" [widgetData]=" { availableFilters: 'contentType' , preselected: selectedContentIds,
-              enablePreselected: true, showChips: true, chipNamesHash: chipNamesHash }"
-            (suggestedDurationChange)="suggestedDuration = $event"
+          <ws-widget-picker-content [removeSubset]="true" [widgetData]="{
+              availableFilters: 'contentType',
+              preselected: selectedContentIds,
+              enablePreselected: true,
+              showChips: true,
+              chipNamesHash: chipNamesHash
+            }" (suggestedDurationChange)="suggestedDuration = $event"
             (change)="contentChanged($event?.content, $event?.checked)">
           </ws-widget-picker-content>
         </div>
@@ -69,25 +74,28 @@
           <ng-container i18n>Set Duration</ng-container>
           <p class="w-16 margin-left-xs margin-right-xs">
             <mat-form-field class="w-full">
-              <input matInput type="number" formControlName="duration" autocomplete="off" min="1" max="365" />
+              <input name="name-duration-input-goal-create-custom" matInput type="number" formControlName="duration"
+                autocomplete="off" min="1" max="365" />
               <mat-error i18n>Should be less than 365 days.</mat-error>
             </mat-form-field>
           </p>
           <ng-container i18n>day(s)</ng-container>
         </div>
-        <ng-container *ngIf="mode !== 'edit'">
+        <ng-container *ngIf="mode !== 'edit' && isShareEnabled">
           <h3 class="mat-subheading-2 margin-bottom-xs" i18n>This Goal is for</h3>
           <p class="margin-bottom-xl">
             <mat-radio-group aria-label="Select an option" formControlName="type">
-              <mat-radio-button [value]="EGoalTypes.USER" i18n>Yourself</mat-radio-button>
-              <mat-radio-button class="ml-4" [value]="EGoalTypes.FOR_OTHERS_USER" i18n>Others</mat-radio-button>
+              <mat-radio-button name="yourself-radio-input-goal-create-custom" [value]="EGoalTypes.USER" i18n>Yourself
+              </mat-radio-button>
+              <mat-radio-button name="others-radio-input-goal-create-custom" class="ml-4"
+                [value]="EGoalTypes.FOR_OTHERS_USER" i18n>Others</mat-radio-button>
             </mat-radio-group>
           </p>
         </ng-container>
         <div class="flex flex-row-reverse">
           <button mat-raised-button color="primary" type="submit" i18n>
-            <ng-container *ngIf="mode === 'create'">CREATE</ng-container>
-            <ng-container *ngIf="mode === 'edit'">UPDATE</ng-container>
+            <ng-container name="create-button-goal-create-custom" *ngIf="mode === 'create'">Create</ng-container>
+            <ng-container name="update-button-goal-create-custom" *ngIf="mode === 'edit'">Update</ng-container>
           </button>
         </div>
       </div>

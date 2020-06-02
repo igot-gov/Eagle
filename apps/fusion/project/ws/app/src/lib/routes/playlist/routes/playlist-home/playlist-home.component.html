@@ -1,12 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar tourAnchor="playlist_start" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: playlist" class="margin-left-xs">Playlist</span>
 </mat-toolbar>
-<div *ngIf="!error; else errorPage" class="max-w-3xl mx-auto p-4 mt-6">
-  <a routerLink="/app/playlist/notification" *ngIf="numNotifications">
+<div *ngIf="!error; else errorPage" class="max-w-4xl mx-auto p-4 mt-6">
+  <a name="accept-reject-link-playlist-home" routerLink="/app/playlist/notification" *ngIf="numNotifications">
     <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-xl">
       <mat-icon color="accent" class="margin-left-s">notifications</mat-icon>
       <p class="margin-left-xs margin-remove-bottom" i18n>
@@ -18,7 +15,7 @@
       </div>
     </mat-card>
   </a>
-  <mat-form-field tourAnchor="playlist_search" class="width-1-1" appearance="fill" floatLabel="never">
+  <mat-form-field class="width-1-1" appearance="fill" floatLabel="never">
     <mat-icon matPrefix>search</mat-icon>
     <mat-label i18n *ngIf="type === EPlaylistTypes.ME">
       Search for your playlists
@@ -26,14 +23,16 @@
     <mat-label i18n *ngIf="type === EPlaylistTypes.SHARED">
       Search for playlists shared with you
     </mat-label>
-    <input matInput [(ngModel)]="searchPlaylistQuery" />
+    <input name="search-playlists-input-playlist-home" matInput [(ngModel)]="searchPlaylistQuery" />
   </mat-form-field>
   <nav mat-tab-nav-bar>
-    <a tourAnchor="playlist_tab1" mat-tab-link routerLink="/app/playlist/me" routerLinkActive #me="routerLinkActive" [active]="me.isActive"
+    <a name="my-playlists-link-playlist-home" mat-tab-link routerLink="/app/playlist/me" routerLinkActive
+      #me="routerLinkActive" [active]="me.isActive"
       [ngClass]="{ 'ws-mat-primary-text font-weight-500': me.isActive }">MY PLAYLISTS
     </a>
-    <a mat-tab-link routerLink="/app/playlist/shared" routerLinkActive #shared="routerLinkActive" [active]="shared.isActive"
-      [ngClass]="{ 'ws-mat-primary-text font-weight-500': shared.isActive }">SHARED PLAYLISTS
+    <a name="shared-with-me-link-playlist-home" mat-tab-link *ngIf="isShareEnabled" routerLink="/app/playlist/shared"
+      routerLinkActive #shared="routerLinkActive" [active]="shared.isActive"
+      [ngClass]="{ 'ws-mat-primary-text font-weight-500': shared.isActive }">SHARED WITH ME
     </a>
   </nav>
   <router-outlet></router-outlet>
@@ -52,15 +51,16 @@
 </div>
 
 <ng-template #create>
-  <div tourAnchor="playlist_createNew" class="w-1/2 sm:w-1/3">
-    <section class="px-2 mt-2 mb-3">
+  <div class="w-full sm:w-1/2 lg:w-1/3 mt-2 mb-3">
+    <section class="flex justify-center items-center align-center px-2 ">
       <a routerLink="/app/playlist/create">
         <div class="create-new-card flex flex-middle flex-center">
-          <div matRipple class="create-new-icon w-16 h-16 border-solid border-3 rounded-full flex flex-center flex-middle">
+          <div matRipple
+            class="create-new-icon w-16 h-16 border-solid border-3 rounded-full flex flex-center flex-middle">
             <span class="create-icon-text">+</span>
           </div>
         </div>
-        <h3 class="mat-subheading-2 font-weight-500 margin-top-xxs margin-bottom-m" i18n>
+        <h3 class="mat-subheading-2 font-weight-500 margin-top-xxs margin-remove-bottom" i18n>
           Create New
         </h3>
       </a>
@@ -70,7 +70,8 @@
 
 <ng-template #listing let-mode="mode">
   <ng-container *ngIf="playlists | filterPlaylist: searchPlaylistQuery as filteredPlaylists; else emptyPlaylist">
-    <ws-app-playlist-card [playlist]="playlist" class="w-1/2 sm:w-1/3 mt-2 mb-3" *ngFor="let playlist of filteredPlaylists; let l = count">
+    <ws-app-playlist-card [playlist]="playlist" class="w-full sm:w-1/2 lg:w-1/3 mt-2 mb-3"
+      *ngFor="let playlist of filteredPlaylists; let l = count">
     </ws-app-playlist-card>
   </ng-container>
   <ng-template #emptyPlaylist>
@@ -84,16 +85,16 @@
 <ng-template #errorPage>
   <ng-container [wsResolverWidget]="errorWidget"></ng-container>
 </ng-template>
-
+<!--
 <input #playliststart type="hidden" i18n-value value="Playlists facilitates users to add and organize their favorite content. A playlist contains a list of content (Resource,
 Module, Course, Program)" />
 <input #playlistwelcome type="hidden" i18n-value value="Welcome to Playlist" />
-<input #playlistserach type="hidden" i18n-value value="You find a relevant playlist form the search your playlists section"
-/>
+<input #playlistserach type="hidden" i18n-value
+  value="You find a relevant playlist form the search your playlists section" />
 <input #playlistsearchTitle type="hidden" i18n-value value="Search Playlist" />
-<input #playlisttab1 type="hidden" i18n-value value="You can also add content or delete content from an existing playlist created by you"
-/>
+<input #playlisttab1 type="hidden" i18n-value
+  value="You can also add content or delete content from an existing playlist created by you" />
 <input #playlisttab1Title type="hidden" i18n-value value="My Playlist" />
 <input #playlistcreateNew type="hidden" i18n-value value="A playlist is created by providing a name and a list of content and can be shared with someone. IF the playlist is not
 shared with anybody it is marked private." />
-<input #playlistcreateNewTitle type="hidden" i18n-value value="Create Playlist " />
+<input #playlistcreateNewTitle type="hidden" i18n-value value="Create Playlist " /> -->

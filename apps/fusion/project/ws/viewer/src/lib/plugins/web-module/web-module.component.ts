@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
   OnInit,
@@ -9,13 +6,15 @@ import {
   ElementRef,
   OnChanges,
   OnDestroy,
+  SimpleChanges,
 } from '@angular/core'
-import { Subscription } from 'rxjs'
+import { Subscription, fromEvent } from 'rxjs'
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { WidgetContentService, NsContent } from '@ws-widget/collection'
 import { ViewerUtilService } from '../../viewer-util.service'
 import { EventService } from '../../../../../../../library/ws-widget/utils/src/public-api'
+import { ActivatedRoute } from '@angular/router'
 @Component({
   selector: 'viewer-plugin-web-module',
   templateUrl: './web-module.component.html',
@@ -23,16 +22,16 @@ import { EventService } from '../../../../../../../library/ws-widget/utils/src/p
 })
 export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
   @Input() collectionId = ''
-  @Input() artifactUrl = ''
-  @Input() identifier = ''
+  @Input() widgetData: any
   @Input() webModuleManifest: any
   @Input() theme = { className: '' }
-  @Input() mimeType = ''
   private screenSizeSubscription: Subscription | null = null
   oldIdentifier = ''
   sideListOpened = false
   screenSizeIsXSmall = false
-  fontSizes = [12, 14, 16, 18, 20, 22]
+  currentFontSize!: string
+  defaultFontSize = 14
+  fontSizes = [10, 12, 14, 16, 18, 20, 22]
   currentSlideNumber = 0
   maxLastPageNumber = 0
   urlPrefix = ''
@@ -43,9 +42,9 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
       URL: string
       title: string
       label: string
-      srclang: string,
+      srclang: string
     }[]
-    safeUrl?: SafeResourceUrl,
+    safeUrl?: SafeResourceUrl
   }[] = []
   iframeUrl: SafeResourceUrl = ''
   iframeLoadingInProgress = true
@@ -54,6 +53,9 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('iframeElem', { static: false }) iframeElem: ElementRef<HTMLIFrameElement>
   current: string[] = []
   counter = false
+  isScrolled = false
+  firstScroll = true
+  scrollTimeInterval: any
 
   constructor(
     private events: EventService,
@@ -62,6 +64,7 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private configurationSvc: ConfigurationsService,
+    private activatedRoute: ActivatedRoute,
   ) {
     this.iframeElem = {} as ElementRef
   }
@@ -69,41 +72,62 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
       this.screenSizeIsXSmall = data
     })
+    if (this.configurationSvc.activeFontObject && this.configurationSvc.activeFontObject.baseFontSize) {
+      this.currentFontSize = this.configurationSvc.activeFontObject.baseFontSize
+      this.defaultFontSize = +this.currentFontSize.slice(0, - 2)
+
+    }
     this.loadWebModule()
     this.configurationSvc.prefChangeNotifier.subscribe(() => {
       this.setTheme()
     })
   }
 
-  ngOnChanges() {
-    if (this.identifier !== this.oldIdentifier) {
-      if (this.current.length > 0) {
-        this.saveContinueLearning(this.oldIdentifier)
-        this.fireRealTimeProgress(this.oldIdentifier)
+  ngOnChanges(change: SimpleChanges) {
+    for (const prop in change) {
+      if (prop === 'widgetData') {
+        if (this.widgetData.identifier !== this.oldIdentifier) {
+          if (this.current.length > 0) {
+            this.saveContinueLearning(this.oldIdentifier)
+            this.fireRealTimeProgress(this.oldIdentifier)
+          }
+        }
       }
     }
-    if (this.artifactUrl) {
-      this.current = []
-      this.currentSlideNumber = 0
-      this.maxLastPageNumber = 0
-      this.urlPrefix = this.artifactUrl.substring(0, this.artifactUrl.lastIndexOf('/'))
-      this.oldIdentifier = this.identifier
-      this.loadWebModule()
-    }
+    this.current = []
+    this.currentSlideNumber = 0
+    this.maxLastPageNumber = 0
+    this.urlPrefix = this.widgetData.artifactUrl.substring(0, this.widgetData.artifactUrl.lastIndexOf('/'))
+    this.oldIdentifier = this.widgetData.identifier
+    this.loadWebModule()
   }
 
   ngOnDestroy() {
     if (this.screenSizeSubscription) {
       this.screenSizeSubscription.unsubscribe()
     }
-    this.saveContinueLearning(this.identifier)
-    this.fireRealTimeProgress(this.identifier)
+    this.saveContinueLearning(this.widgetData.identifier)
+    this.fireRealTimeProgress(this.widgetData.identifier)
   }
 
   saveContinueLearning(id: string) {
-    if (this.mimeType === (NsContent.EMimeTypes.WEB_MODULE || NsContent.EMimeTypes.WEB_MODULE_EXERCISE)) {
-      this.contentSvc
-        .saveContinueLearning({
+    if (this.widgetData.mimeType === (NsContent.EMimeTypes.WEB_MODULE || NsContent.EMimeTypes.WEB_MODULE_EXERCISE)) {
+      if (this.activatedRoute.snapshot.queryParams.collectionType &&
+        this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+        const reqBody = {
+          contextPathId: this.collectionId ? this.collectionId : id,
+          resourceId: id,
+          dateAccessed: Date.now(),
+          contextType: 'playlist',
+          data: JSON.stringify({
+            progress: this.currentSlideNumber,
+            timestamp: Date.now(),
+            contextFullPath: [this.activatedRoute.snapshot.queryParams.collectionId, id],
+          }),
+        }
+        this.contentSvc.saveContinueLearning(reqBody).toPromise().catch()
+      } else {
+        const reqBody = {
           contextPathId: this.collectionId ? this.collectionId : id,
           resourceId: id,
           dateAccessed: Date.now(),
@@ -111,22 +135,23 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
             progress: this.currentSlideNumber,
             timestamp: Date.now(),
           }),
-        })
-        .toPromise()
-        .catch()
+        }
+        this.contentSvc.saveContinueLearning(reqBody).toPromise().catch()
+      }
     }
   }
   fireRealTimeProgress(id: string) {
-    if (this.mimeType === (NsContent.EMimeTypes.WEB_MODULE || NsContent.EMimeTypes.WEB_MODULE_EXERCISE)) {
-      const realTimeProgressRequest = {
-        content_type: 'Resource',
-        mime_type: this.mimeType,
-        user_id_type: 'uuid',
-        current: this.current,
-        max_size: this.slides.length,
+    if (this.widgetData.mimeType === (NsContent.EMimeTypes.WEB_MODULE || NsContent.EMimeTypes.WEB_MODULE_EXERCISE)) {
+      if (this.current.length > 0 && this.slides.length > 0) {
+        const realTimeProgressRequest = {
+          content_type: 'Resource',
+          mime_type: this.widgetData.mimeType,
+          user_id_type: 'uuid',
+          current: this.current,
+          max_size: this.slides.length,
+        }
+        this.viewerSvc.realTimeProgressUpdate(id, realTimeProgressRequest)
       }
-      this.viewerSvc.realTimeProgressUpdate(id, realTimeProgressRequest)
-      return
     }
   }
 
@@ -148,7 +173,7 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
     //     `/apis/protected/v8/content/getWebModuleFiles?url=${encodeURIComponent(this.urlPrefix + u.URL)}`
     //   )
     // }));
-    this.setPage(1)
+    this.setPage(this.widgetData.resumePage ? this.widgetData.resumePage : 1)
   }
 
   setPage(pageNumber: number) {
@@ -195,19 +220,33 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   pageChange(increment: number) {
-    this.raiseTelemetry('pageChange')
+    this.raiseTelemetry('pageChange', 'click')
     if (increment === 1 && this.currentSlideNumber < this.slides.length) {
       this.setPage(this.currentSlideNumber + 1)
     } else if (increment === -1 && this.currentSlideNumber > 1) {
       this.setPage(this.currentSlideNumber - 1)
     }
   }
-  raiseTelemetry(action: string) {
-    if (this.identifier) {
-      this.events.raiseInteractTelemetry(action, 'click', {
-        contentId: this.identifier,
+  raiseTelemetry(action: string, event: string) {
+    if (this.widgetData.identifier) {
+      this.events.raiseInteractTelemetry(action, event, {
+        contentId: this.widgetData.identifier,
       })
     }
+    if (event === 'scroll') {
+      this.isScrolled = false
+    }
+  }
+
+  raiseScrollTelemetry() {
+    this.scrollTimeInterval = setInterval(
+      () => {
+        if (this.isScrolled) {
+          this.raiseTelemetry('pageScroll', 'scroll')
+        }
+      },
+      2 * 60000,
+    )
   }
 
   async modifyIframeDom(iframe: HTMLIFrameElement) {
@@ -228,6 +267,15 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
     if (!iframeDocument) {
       return
     }
+    fromEvent(iframeDocument, 'scroll')
+      .subscribe(() => {
+        this.isScrolled = true
+        if (this.isScrolled && this.firstScroll) {
+          this.raiseTelemetry('pageScroll', 'scroll')
+          this.raiseScrollTelemetry()
+        }
+        this.firstScroll = false
+      })
 
     docFrag = iframeDocument.createDocumentFragment()
     fontRoboto = iframeDocument.createElement('link')
@@ -427,22 +475,24 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
     docFrag.appendChild(executeJS as any)
     docFrag.appendChild(stylePart as any)
     iframeDocument.head.appendChild(docFrag as any)
-    setTimeout(() => {
-      this.iframeLoadingInProgress = false
-      // logger.log('iframe Loading done');
-      const fontSize = localStorage.getItem('webmodule_fontsize')
-      if (fontSize) {
-        this.modifyIframeStyle('fontSize', `${fontSize}px`)
-      }
-      this.setTheme()
-    },         1000)
+    setTimeout(
+      () => {
+        this.iframeLoadingInProgress = false
+        this.setTheme()
+      },
+      1000,
+    )
   }
 
   setTheme() {
     const color = this.getColor('color')
     const backgroundColor = this.getColor('backgroundColor')
+    if (this.currentFontSize) {
+      this.modifyIframeStyle('fontSize', this.currentFontSize)
+    }
     this.modifyIframeStyle('backgroundColor', backgroundColor)
     this.modifyIframeStyle('color', color)
+
   }
 
   modifyIframeStyle(styleProp: string, styleValue: any) {
@@ -454,7 +504,9 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
     if (doc) {
       doc.body.style[styleProp as any] = styleValue
     }
-    localStorage.setItem(`webmodule_${styleProp}`, styleValue)
+    if (styleProp === 'fontSize') {
+      this.currentFontSize = styleValue
+    }
   }
 
   getColor(type: string): string {
@@ -472,4 +524,5 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
       ('0' + parseInt(color[2], 10).toString(16)).slice(-2)
     )
   }
+
 }

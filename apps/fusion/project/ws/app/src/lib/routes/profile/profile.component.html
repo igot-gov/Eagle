@@ -1,18 +1,15 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <button mat-icon-button (click)="
+  <button aria-label="showText? 'Hide side panel' : 'Show side panel'" mat-icon-button (click)="
       !screenSizeIsLtMedium ? (showText = !showText) : sideNavBar.toggle()
     ">
     <mat-icon>menu</mat-icon>
   </button>
-  <span tourAnchor="profile_start">
+  <span>
     <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
     <span class="ml-2">{{ tabName }}</span>
   </span>
   <span class="spacer"></span>
-  <button tourAnchor="profile_logout" (click)="logout()" mat-button>
+  <button (click)="logout()" mat-button>
     <mat-icon>power_settings_new</mat-icon>&nbsp;
     <span i18n>Logout</span>
   </button>
@@ -21,63 +18,72 @@
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
   <mat-sidenav #sideNavBar [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
     <mat-nav-list class="margin-left-s margin-right-xs">
-      <a tourAnchor="profile_dashboard" mat-list-item *ngIf="enabledTabs?.dashboard?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('My Dashboard'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/dashboard" matTooltip="Dashboard" i18n-matTooltip="Dashboard">
+      <a mat-list-item *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.dashboard?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/dashboard" matTooltip="{{enabledTabs?.dashboard?.displayName}}">
         <mat-icon>account_circle</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>My Dashboard</span>
+        <span *ngIf="showText || screenSizeIsLtMedium"
+          class="padding-left-s">{{enabledTabs?.dashboard?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_learning" mat-list-item *ngIf="enabledTabs?.learning?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('My Learning'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/learning/history" matTooltip="Learning" i18n-matTooltip="Learning">
+      <a mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.learning?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/learning/history" matTooltip="{{enabledTabs?.learning?.displayName}}">
         <mat-icon>history</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>My Learning</span>
+        <span *ngIf="showText || screenSizeIsLtMedium"
+          class="padding-left-s">{{enabledTabs?.learning?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_achievement" mat-list-item *ngIf="enabledTabs?.achievements?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('Achievements'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/competency/badges" matTooltip="Achievements" i18n-matTooltip="Achievements">
+      <a mat-list-item *ngIf="enabledTabs?.achievements?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.achievements?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/competency/badges" matTooltip="{{enabledTabs?.achievements?.displayName}}">
         <mat-icon>emoji_events</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>
-          Achievements</span>
+        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s">
+          {{enabledTabs?.achievements?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_interest" mat-list-item *ngIf="enabledTabs?.interests?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('Interests'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/interest" matTooltip="Interests" i18n-matTooltip="Interests">
+      <a mat-list-item *ngIf="enabledTabs?.skills?.enabled && isSkills" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.skills?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/skills" matTooltip="{{enabledTabs?.skills?.displayName}}">
+        <mat-icon>school</mat-icon>
+        <span *ngIf="showText || screenSizeIsLtMedium"
+          class="padding-left-s">{{enabledTabs?.skills?.displayName}}</span>
+      </a>
+      <a mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.interests?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/interest" matTooltip="{{enabledTabs?.interests?.displayName}}">
         <mat-icon>tag_faces</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>My Interests</span>
+        <span *ngIf="showText || screenSizeIsLtMedium"
+          class="padding-left-s">{{enabledTabs?.interests?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_calender" mat-list-item *ngIf="enabledTabs?.plans?.enabled" routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('Plans'); screenSizeIsLtMedium ? sideNavBar.toggle() : null" routerLink="/app/profile/plans"
-        matTooltip="Plans" i18n-matTooltip>
+      <!-- <a mat-list-item *ngIf="enabledTabs?.refactoring?.enabled" routerLinkActive="mat-toolbar" (click)="tabUpdate('Refactoring'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/refactoring" matTooltip="Refactoring" i18n-matTooltip>
+        <mat-icon>flag</mat-icon>
+        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>My Refactoring</span>
+      </a> -->
+      <a mat-list-item *ngIf="enabledTabs?.plans?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.plans?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/plans" matTooltip="{{enabledTabs?.plans?.displayName}}">
         <mat-icon>calendar_today</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>My Plans</span>
+        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s">{{enabledTabs?.plans?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_collaborators" mat-list-item *ngIf="enabledTabs?.collaborators?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('Collaborators'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/collaborators" matTooltip="Collaborators" i18n-matTooltip>
+      <a mat-list-item *ngIf="enabledTabs?.collaborators?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.collaborators?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/collaborators" matTooltip="{{enabledTabs?.collaborators?.displayName}}">
         <mat-icon>group</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>Collaborators</span>
+        <span *ngIf="showText || screenSizeIsLtMedium"
+          class="padding-left-s">{{enabledTabs?.collaborators?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_usage" mat-list-item *ngIf="enabledTabs?.featureUsage?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('Feature Usage'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/feature-usage" matTooltip="Feature Usage" i18n-matTooltip>
+      <a mat-list-item *ngIf="enabledTabs?.featureUsage?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.featureUsage?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/feature-usage" matTooltip="{{enabledTabs?.featureUsage?.displayName}}">
         <mat-icon>data_usage</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>
-          Feature Usage</span>
+        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s">
+          {{enabledTabs?.featureUsage?.displayName}}</span>
       </a>
-      <a tourAnchor="profile_settings" mat-list-item *ngIf="enabledTabs?.settings?.enabled"
-        routerLinkActive="mat-toolbar"
-        (click)="tabUpdate('Settings'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/settings" matTooltip="Settings" i18n-matTooltip>
+      <a mat-list-item *ngIf="enabledTabs?.settings?.enabled" routerLinkActive="mat-toolbar"
+        (click)="tabUpdate(enabledTabs?.settings?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
+        routerLink="/app/profile/settings" matTooltip="{{enabledTabs?.settings?.displayName}}">
         <mat-icon>settings</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>
-          Settings</span>
+        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s">
+          {{enabledTabs?.settings?.displayName}}</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -86,23 +92,3 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<input #profileTitle type="hidden" i18n-value value="Welcome to Profile" />
-<input #profileSubTitle type="hidden" i18n-value
-  value="Profile is a dashboard of user's own data on the usage of the platform." />
-<input #profileLogout type="hidden" i18n-value value="Logout" />
-<input #profileLogoutSubtitle type="hidden" i18n-value value="User can logout from its profile" />
-<input #profileDashboard type="hidden" i18n-value value="Dashboard" />
-<input #profileDashboardSubtitle type="hidden" i18n-value
-  value="To view and edit topics of interests, knowledge boards and total time spent in learning" />
-<input #profileLearning type="hidden" i18n-value value="Learning" />
-<input #profileLearningSubtitle type="hidden" i18n-value value="User can check their learning history">
-<input #profileAchievement type="hidden" i18n-value value="Achievements" />
-<input #profileAchievementSubtitle type="hidden" i18n-value value="User can check their Achievements">
-<input #profileInterest type="hidden" i18n-value value="Interest" />
-<input #profileInterestSubtitle type="hidden" i18n-value value="User can add/view their Interest">
-<input #profileCalender type="hidden" i18n-value value="Calender" />
-<input #profileCalenderSubtitle type="hidden" i18n-value value="User can check Calender">
-<input #profileUsage type="hidden" i18n-value value="Usage" />
-<input #profileUsageSubtitle type="hidden" i18n-value value="User can check Usage">
-<input #profileSettings type="hidden" i18n-value value="Settings" />
-<input #profileSettingsSubtitle type="hidden" i18n-value value="User can change Settings">

@@ -1,0 +1,153 @@
+<div *ngIf="apiFetchStatus === 'fetching'" class="my-3 text-center">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="container" *ngIf="apiFetchStatus === 'done' && skillDetails">
+  <mat-card class="skill-detail margin-s" *ngIf="fetchImage">
+    <mat-card-content>
+      <h1 class="flex-wrapped font-weight-bold skill-name text-left">
+        {{ skillName }}
+      </h1>
+      <div *ngIf="isClient" class="text-left">
+        <h4>{{skillClientData?.skill_description}}</h4>
+      </div>
+      <div *ngIf="skillDetails" class="flex justify-between flex-wrapped">
+        <div *ngIf="!isClient">
+          <img class="card-img" [src]="skillClientData?.image_url" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
+        </div>
+        <!-- <div *ngIf="skillDetails?.skill_quotient?.total_skill_quotient >= 0 && !isClient">
+          <h4 class="flex-wrapped skill-name text-center" i18n>
+            Skill Quotient
+          </h4>
+          <h2 class="flex-wrapped skill-name text-center">
+            {{ skillDetails?.skill_quotient?.total_skill_quotient }}
+          </h2>
+        </div> -->
+        <div *ngIf="!isClient && apiFetchStatus === 'done'">
+          <ng-container [wsResolverWidget]="trainedGraphData"></ng-container>
+          <div class="flex flex-center flex-wrapped">
+            <span class="mat-body-1" i18n>Trained</span>
+            <span class="mat-body-1"> : {{ assessmentQuotient }} %</span>
+          </div>
+        </div>
+        <div *ngIf="!isClient && apiFetchStatus === 'done'">
+          <ng-container [wsResolverWidget]="certifiedGraphData"></ng-container>
+          <div class="flex flex-center flex-wrapped">
+            <span class="mat-body-1" i18n>Certified</span>
+            <span class="mat-body-1"> : {{ certificationQuotient }} %</span>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="flex flex-end flex-wrapped">
+        <div *ngIf="isClient && isSkillManager" class="text-right margin-right-l cursor-pointer">
+          <a color="primary" (click)="onEditSkill('edit')" mat-icon-button i18n-matTooltip matTooltip="Edit Skill"
+            color="primary">
+            <mat-icon>edit</mat-icon>
+            Edit
+          </a>
+        </div>
+        <div *ngIf="isClient && isSkillManager" class="text-right margin-right-l cursor-pointer">
+          <a color="primary" (click)="onEditSkill('copy')" mat-icon-button i18n-matTooltip matTooltip="Copy Skill"
+            color="primary">
+            <mat-icon>file_copy</mat-icon>
+          </a>
+        </div>
+        <div *ngIf="isClient && enabledTabs?.projectEndorsements?.enabled"
+          class="text-right margin-right-l cursor-pointer">
+          <a color="primary" (click)="onEditSkill('endorse')" mat-icon-button i18n-matTooltip
+            matTooltip="request endorsement" color="primary">
+            <mat-icon>assignment</mat-icon>
+          </a>
+        </div>
+      </div> -->
+
+    </mat-card-content>
+  </mat-card>
+  <div class="margin-left-m margin-top-xl" *ngIf="!isClient">
+    <div class="flex flex-middle">
+      <h1 class="ws-mat-primary-text margin-remove-bottom" i18n>Learning Path -</h1>
+      <h1 class="ws-mat-primary-text ml-2 margin-remove-bottom">{{learningPath}}</h1>
+    </div>
+    <!-- <ng-container *ngIf="preRequisiteCourse" [wsResolverWidget]="preRequisiteCourses"></ng-container> -->
+    <ng-container *ngIf="mandatoryCourse" [wsResolverWidget]="mandatoryCourses"></ng-container>
+    <!-- <ng-container *ngIf="desirableCourse" [wsResolverWidget]="desirableCourses"></ng-container>
+    <ng-container *ngIf="preRequisiteCertificate" [wsResolverWidget]="preRequisiteCertificates"></ng-container> -->
+    <ng-container *ngIf="mandatoryCertificate" [wsResolverWidget]="mandatoryCertificates"></ng-container>
+    <!-- <ng-container *ngIf="desirableCertificate" [wsResolverWidget]="desirableCertificates"></ng-container> -->
+  </div>
+  <ng-container *ngIf="isClient">
+    <div class="flex mat-card margin-s justify-between flex-wrapped">
+      <!-- <div *ngIf="skillGroup" class="skill-card margin-m flex flex-start flex-wrapped"> -->
+      <!-- <mat-icon class="icon margin-right-xl">group</mat-icon> -->
+      <!-- <div *ngIf="skillGroup" class="skill-card margin-left-xl margin-top-s">
+        <p i18n class="font-bold margin-remove-bottom">Group</p>
+        <p class="mat-body-1"> {{skillGroup}}</p>
+      </div> -->
+      <!-- </div> -->
+      <!-- <div *ngIf="skillCategory" class="skill-card margin-m flex flex-start flex-wrapped"> -->
+      <!-- <mat-icon class="icon margin-right-xl">category</mat-icon> -->
+
+      <!-- </div> -->
+      <!-- <div *ngIf="skillManager" class="skill-card margin-m flex flex-start flex-wrapped"> -->
+      <!-- <mat-icon class="icon margin-right-xl">person</mat-icon> -->
+      <div *ngIf="skillManager" class="skill-card margin-left-xl margin-top-s">
+        <p i18n class="font-bold margin-remove-bottom">Manager</p>
+        <p class="mat-body-1"> {{skillManager}}</p>
+      </div>
+      <div *ngIf="skillCategory" class="skill-card margin-left-xl margin-top-s">
+        <p i18n class="font-bold margin-remove-bottom">Category</p>
+        <p class="mat-body-1"> {{skillCategory}}</p>
+      </div>
+      <!-- </div> -->
+      <!-- <div *ngIf="skillRelevance" class="skill-card margin-m flex flex-start flex-wrapped"> -->
+      <!-- <mat-icon class="icon margin-right-xl">sports_volleyball</mat-icon> -->
+      <div *ngIf="skillRelevance" class="skill-card margin-left-xl margin-top-s">
+        <p i18n class="font-bold margin-remove-bottom">Relevance</p>
+        <p class="mat-body-1"> {{skillRelevance}}</p>
+      </div>
+      <!-- </div> -->
+    </div>
+    <div class="margin-m">
+      <h2 i18n>Skill Level Details</h2>
+      <mat-tab-group [selectedIndex]="selectedTabIndex" (selectedTabChange)="tabChange($event)">
+        <mat-tab *ngFor="let skill of skillQuotientData" label="{{skill?.skill_level}}">
+          <div class="margin-xl justify-start">
+            <h1 *ngIf="skill?.skill_level" class="mat-h1 font-bold ws-mat-primary-text">{{skill?.skill_level}}</h1>
+            <h4 *ngIf="skill?.skill_level_description_english">{{skill?.skill_level_description_english}}</h4>
+          </div>
+          <!-- <div class="margin-left-m margin-top-xl">
+            <div class="flex flex-middle">
+              <h1 class="ws-mat-primary-text margin-remove-bottom" i18n>Learning Path</h1>
+              <h1 class="ws-mat-primary-text ml-2 margin-remove-bottom">- {{learningPath}}</h1>
+            </div>
+            <ng-container *ngIf="preRequisiteCourse" [wsResolverWidget]="preRequisiteCourses"></ng-container>
+            <ng-container *ngIf="mandatoryCourse" [wsResolverWidget]="mandatoryCourses"></ng-container>
+            <ng-container *ngIf="desirableCourse" [wsResolverWidget]="desirableCourses"></ng-container>
+            <ng-container *ngIf="preRequisiteCertificate" [wsResolverWidget]="preRequisiteCertificates"></ng-container>
+            <ng-container *ngIf="mandatoryCertificate" [wsResolverWidget]="mandatoryCertificates"></ng-container>
+            <ng-container *ngIf="desirableCertificate" [wsResolverWidget]="desirableCertificates"></ng-container>
+          </div> -->
+          <!-- <ng-container *ngIf="skill?.course_list">
+            <h2 class="ws-mat-primary-text margin-left-xl margin-remove-bottom" i18n>Learning Path</h2>
+            <ng-container *ngIf="preRequisite" [wsResolverWidget]="preRequisiteCourses"></ng-container>
+            <ng-container *ngIf="mandatory" [wsResolverWidget]="mandatoryCourses"></ng-container>
+            <ng-container *ngIf="desirable" [wsResolverWidget]="desirableCourses"></ng-container>
+            <div *ngIf="isClient && isSkillManager" class="text-right margin-right-m cursor-pointer">
+              <a color="primary"
+                routerLink="/app/profile/skills/edit-learning-path/{{skillId}}/{{skill?.skill_level_id}}"
+                mat-raised-button i18n-matTooltip matTooltip="Edit Learning Path" color="primary">
+                <span i18n>Edit Learning Path</span>
+              </a>
+            </div>
+          </ng-container>
+          <div *ngIf="isClient && isSkillManager && !skill?.course_list"
+            class="text-right margin-right-m cursor-pointer">
+            <a color="primary" routerLink="/app/profile/skills/add-learning-path/{{skillId}}/{{skill?.skill_level_id}}"
+              mat-raised-button i18n-matTooltip matTooltip="Add Learning Path" color="primary">
+              <span i18n>Add Learning Path</span>
+            </a>
+          </div> -->
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </ng-container>
+</div>

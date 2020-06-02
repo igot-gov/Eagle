@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div mat-dialog-container class="profile-container" relative>
   <div class="flex items-center justify-end">
     <button mat-dialog-close mat-icon-button>
@@ -22,20 +19,20 @@
         {{ alumni?.pid_name }}
       </div>
       <div *ngIf="!alumni?.emailprivacy" class="text-sm pb-2 px-2">
-        {{emailId}}
+        {{ emailId }}
       </div>
 
-      <mat-chip-list class="p-2 flex justify-center items-center">
+      <mat-chip-list class="p-1 flex justify-center items-center">
         <mat-chip class="ws-mat-primary-background" *ngIf="alumni?.role && !alumni?.role_privacy">
           <span class="text-xs font-light text-white italic">{{ alumni?.role }}</span>
         </mat-chip>
         <ng-container *ngIf="userGroupDetails?.length">
-          <mat-chip class="ws-mat-primary-background w-32" *ngFor="let group of userGroupDetails">
+          <mat-chip class="ws-mat-primary-background" [ngClass]="{'w-32': userGroupDetails?.length > 2}"
+            *ngFor="let group of userGroupDetails">
             <span class="text-xs text-white font-light italic text-truncate" matTooltipPosition="right"
               [matTooltip]="group.friendly_name">{{ group.friendly_name }}</span>
           </mat-chip>
         </ng-container>
-
       </mat-chip-list>
 
       <div class="p-2 flex justify-center items-center" *ngIf="location">
@@ -47,9 +44,9 @@
 
       <mat-divider></mat-divider>
 
-      <div class=" text-center text-base font-medium leading-normal px-2 pt-4 pb-4 ws-mat-primary-text"
+      <div class=" text-center text-base font-medium leading-normal px-2 pb-4 ws-mat-primary-text"
         *ngIf="searchRequest?.result?.length">
-        {{ alumni?.pid_name || '' + "'s" }}
+        <ng-container *ngIf="alumni?.pid_name">{{ (alumni?.pid_name || '') + "'s" }}</ng-container>
         <ng-container i18n> Uploads</ng-container>
         <ng-container i18n> (</ng-container>
         {{ searchRequest?.result?.length }}
@@ -66,8 +63,8 @@
           <div class="flex m-3 flex-middle">
             <a [href]="(result | pipeContentRoute).url">
               <div class="flex flex-row">
-                <img i18n-alt alt="thumbnail" class="width-auto content-img mat-lite-background"
-                  [src]="result.appIcon" />
+                <img i18n-alt alt="thumbnail" class="width-auto content-img mat-lite-background" [src]="result.appIcon"
+                  [wsUtilsDefaultThumbnail]="defaultThumbnail" />
                 <div class="width-expand px-3 leading-tight font-medium text-overflow text-sm">
                   {{ result.name }}
                 </div>

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export const template1Data = {
   widgetData: {
     gutter: 2,
@@ -445,7 +442,7 @@ export const template1Data = {
                         templateData: {
                           link:
                             // tslint:disable-next-line: quotemark tslint:disable-next-line: max-line-length
-path
+                            'https://www.yammer.com/siemens.com/#/threads/inGroup?type=in_group&feedId=17128474',
 
                           cardStyle:
                             // tslint:disable-next-line: quotemark tslint:disable-next-line: max-line-length
@@ -470,7 +467,7 @@ path
                         templateData: {
                           link:
                             // tslint:disable-next-line: quotemark tslint:disable-next-line: max-line-length
-path
+                            'https://www.yammer.com/siemens.com/#/threads/inGroup?type=in_group&feedId=17725148',
 
                           cardStyle:
                             // tslint:disable-next-line: quotemark tslint:disable-next-line: max-line-length
@@ -559,21 +556,21 @@ export const template2Data = {
                           coords: [44, 197, 178, 241],
                           alt: 'Hot Topics',
                           title: 'Hot Topics',
-path
+                          link: './page/siemens-digital-enterprise#hot_topics',
                           target: '',
                         },
                         {
                           coords: [86, 273, 351, 316],
                           alt: 'Learning activities @DF',
                           title: 'Learning activities @DF',
-path
+                          link: './page/siemens-digital-enterprise#learning_activities_df',
                           target: '',
                         },
                         {
                           coords: [128, 351, 662, 393],
                           alt: 'What you need to drive your digital transformation',
                           title: 'What you need to drive your digital transformation',
-path
+                          link: './page/siemens-digital-enterprise#digital_transformation_leader',
                           target: '',
                         },
                       ],
@@ -825,7 +822,7 @@ path
                           overlayText:
                             'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
                           overlayStyle: 'background:#005f87cc;color:white;opacity:0.9;',
-path
+                          link: './page/siemens-virtual-collaboration',
                         },
                         containerClass: 'h-full',
                       },

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { NSQuiz } from './quiz.model'
@@ -59,7 +56,7 @@ export class QuizService {
         for (let i = 0; i < question.options.length; i += 1) {
           if (questionAnswerHash[question.questionId] && questionAnswerHash[question.questionId][0][i]) {
             for (let j = 0; j < questionAnswerHash[question.questionId][0].length; j += 1) {
-              if (question.options[i].text === questionAnswerHash[question.questionId][0][j].source.innerText) {
+              if (question.options[i].text.trim() === questionAnswerHash[question.questionId][0][j].source.innerText.trim()) {
                 question.options[i].response = questionAnswerHash[question.questionId][0][j].target.innerText
               }
             }
@@ -78,7 +75,7 @@ export class QuizService {
       question.question = ''
       question.options.map(option => {
         option.hint = ''
-        option.text = question.questionType === 'fitb' ? option.text : ''
+        option.text = question.questionType === 'fitb' || question.questionType === 'mtf' ? option.text : ''
       })
     })
     return requestData

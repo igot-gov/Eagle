@@ -1,0 +1,265 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+$medium-badge-size: 90px;
+$small-badge-size: 50px;
+$badge-padding: 12px;
+
+.cursor-disable {
+  cursor: not-allowed !important;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 65%;
+}
+
+.margin-left {
+  margin-left: 120px;
+  @media only screen and(max-width: 930px) {
+    // margin-top: 24px;
+    margin-left: 80px;
+  }
+
+  @media only screen and(max-width: 824px) {
+    margin-left: 40px;
+  }
+
+  @media only screen and(max-width: 699px) {
+    padding-top: 24px;
+  }
+
+  @media only screen and(max-width: 585px) {
+    margin-left: 0px;
+  }
+}
+
+.margin-left-container{
+    margin-left: 20px;
+  @media only screen and(max-width: 930px) {
+    margin-left: 15px;
+  }
+
+  @media only screen and(max-width: 824px) {
+    margin-left: 13px;
+  }
+
+  @media only screen and(max-width: 699px) {
+    margin-left: 8px;
+  }
+
+  @media only screen and(max-width: 585px) {
+    margin-left: 5px;
+  }
+}
+
+.stepper-container {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.stepper-grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.2fr auto 1fr;
+}
+
+.text-white {
+  color: #fff;
+}
+
+
+.fullView {
+  height: 100vh;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+}
+
+.close-preview {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 110px;
+  right: 0px;
+  z-index: 50;
+}
+
+.small-button {
+  height: 32px;
+  width: 32px;
+  transition: 0.5s;
+  margin-right: 4px;
+}
+
+.normal-button {
+  border-radius: 50%;
+  height: 40px;
+  display: flex;
+  width: 40px;
+  z-index: 3;
+  justify-content: center;
+}
+
+.button-grid{
+  display: grid;
+  width: 160px;
+  grid-template-columns: 0.2fr 0.95fr;
+}
+
+.button-text{
+      align-self: center;
+    padding-top: 17px;
+    padding-left: 4px;
+}
+
+.margin-right-xxs{
+  margin-right: 4px;
+}
+
+.custombtn{
+  color: grey;
+}
+.custombtn:hover{
+  color: ws-mat-primary-text;
+}
+.height-fit{
+  height:auto;
+}
+
+.op60{
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+.margin-left-s{
+  margin-left: 12px !important;
+}
+
+.margin-right-xs{
+  margin-right: 8px !important;
+}
+
+
+.small-icon {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  transition: 0.5s;
+}
+
+
+.padding-remove{
+    padding: 0px !important;
+}
+
+.margin-remove{
+    margin: 0px !important;
+}
+
+.margin-remove-bottom {
+    margin-bottom: 0px !important;
+}
+
+.icon-container {
+    width: $medium-badge-size;
+    height: $medium-badge-size;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-icon {
+      width: 36px;
+      height: 36px;
+      font-size: 36px;
+      opacity: 1;
+    }
+}
+
+.option-card{
+    display: inline-block;
+    width: 370px;
+    margin: 0px;
+    padding: 0px;
+    @media only screen and (max-width: 1239px) {
+      width: 370px;
+    }
+    @media only screen and (max-width: 798px) {
+      width: 300px;
+    }
+    @media only screen and(max-width: 718px) {
+      width: 370px;
+    }
+    @media only screen and (max-width: 420px) {
+      width: 91%;
+    }
+  }
+
+
+:host ::ng-deep .my-field .mat-form-field-wrapper{
+    padding: 0px;
+}
+
+.border-bottom{
+    border-bottom: 1px solid;
+}
+
+.margin-left-s{
+    margin-left: 12px !important;
+}
+
+.badge-data {
+    margin-top: 5px;
+    margin-left: 25px;
+}
+
+.margin-left-l{
+    margin-left: 24px !important;
+}
+
+.bordered{
+  border: 1px solid #cecece;
+}
+
+.ws-mat-primary-background-op30-hover:hover{
+  .bordered{
+    border-color: black;
+  }
+}
+
+
+.toScale:hover{
+ 
+  font-weight: 600;
+ 
+}
+.forWidthC{
+@media only screen and (max-width: 420px) {
+  margin-right: 9%;
+  max-width: 91%;
+}
+}

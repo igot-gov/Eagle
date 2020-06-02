@@ -1,20 +1,15 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { ActivatedRoute, Data, Router } from '@angular/router'
-import { Subscription, Observable } from 'rxjs'
-
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils'
-
+import { Observable, Subscription } from 'rxjs'
+import { retry } from 'rxjs/operators'
+import { EditorService } from '../../../../../../../author/src/lib/routing/modules/editor/services/editor.service'
+import { TrainingApiService } from '../../../infy/routes/training/apis/training-api.service'
+import { TrainingService } from '../../../infy/routes/training/services/training.service'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
-import { TrainingApiService } from '../../../infy/routes/training/apis/training-api.service'
-import { retry } from 'rxjs/operators'
-import { TrainingService } from '../../../infy/routes/training/services/training.service'
-import { EditorService } from '../../../../../../../author/src/lib/routing/modules/editor/services/editor.service'
 
 @Component({
   selector: 'ws-app-knowledge-artifact-details',
@@ -38,6 +33,7 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
   fetchingRelatedResources = true
   isAuthor = false
   deletingContent = false
+  forPreview = window.location.href.includes('/author/')
 
   constructor(
     private route: ActivatedRoute,
@@ -62,8 +58,9 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
         this.initData(data)
         if (this.content) {
           this.fetchingRelatedResources = true
-          this.tocSharedSvc.
-            fetchContentWhatsNext(this.content.identifier, this.content.contentType).subscribe(
+          this.tocSharedSvc
+            .fetchContentWhatsNext(this.content.identifier, this.content.contentType)
+            .subscribe(
               (result: NsContent.IContentMinimal[]) => {
                 this.relatedResource = result
                 this.fetchingRelatedResources = false
@@ -79,7 +76,11 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
       this.isDownloadableMobile = this.configSvc.restrictedFeatures.has('mobileDownloadRequest')
       this.isDownloadableDesktop = this.configSvc.restrictedFeatures.has('downloadRequest')
     }
-    if (this.content && this.content.artifactUrl.indexOf('content-store') >= 0) {
+    if (
+      this.content &&
+      this.content.artifactUrl.indexOf('content-store') >= 0 &&
+      !this.forPreview
+    ) {
       this.setS3Cookie(this.content.identifier)
     }
   }
@@ -87,8 +88,12 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
     const userProfile = this.configSvc.userProfile
     const restrictedFeatures = this.configSvc.restrictedFeatures
     if (userProfile && this.content && restrictedFeatures) {
-      if (!restrictedFeatures.has('editContent') || !restrictedFeatures.has('editContentAuthor')
-        && this.content.creatorContacts.some(creator => creator.id === userProfile.userId)) {
+      if (
+        !restrictedFeatures.has('editContent') ||
+        (!restrictedFeatures.has('editContentAuthor') &&
+          this.content.creatorContacts &&
+          this.content.creatorContacts.some(creator => creator.id === userProfile.userId))
+      ) {
         this.isAuthor = true
       }
     }
@@ -132,7 +137,9 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
       this.content ? this.content.body || '' : '',
     )
     this.resetAndFetchTocStructure()
-    this.getTrainingCount()
+    if (!this.forPreview) {
+      this.getTrainingCount()
+    }
     if (this.content && this.content.identifier) {
       this.checkIfEditEnabled()
     }
@@ -182,16 +189,16 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
   }
 
   get isGreyedImage() {
-    if (this.content && (this.content.status === 'Deleted' ||
-      this.content.status === 'Expired')) {
+    if (this.content && (this.content.status === 'Deleted' || this.content.status === 'Expired')) {
       return true
     }
     return false
   }
   get isLiveOrMarkForDeletion() {
-    if (this.content &&
-      (this.content.status === 'Live' ||
-        this.content.status === 'MarkedForDeletion')) {
+    if (
+      this.content &&
+      (this.content.status === 'Live' || this.content.status === 'MarkedForDeletion')
+    ) {
       return true
     }
     return false
@@ -199,11 +206,12 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
   get isDownloadable() {
     if (this.content && this.content.downloadUrl) {
       return true
-    } return false
+    }
+    return false
   }
 
   download() {
-    if (this.content) {
+    if (this.content && !this.forPreview) {
       const link = document.createElement('a')
       link.download = this.content.name
       link.target = '_blank'
@@ -219,8 +227,7 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
     await this.contentSvc
       .setS3Cookie(identifier)
       .toPromise()
-      .catch(() => {
-      })
+      .catch(() => {})
     return
   }
 }

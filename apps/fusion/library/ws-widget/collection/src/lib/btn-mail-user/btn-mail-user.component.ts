@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsContent } from '../_services/widget-content.model'
 import { MatDialog } from '@angular/material'
 import { BtnMailUserDialogComponent } from './btn-mail-user-dialog/btn-mail-user-dialog.component'
-import { EventService } from '@ws-widget/utils'
+import { EventService, ConfigurationsService } from '@ws-widget/utils'
 
 export interface IBtnMailUser {
   content: NsContent.IContent
@@ -22,15 +19,21 @@ export interface IBtnMailUser {
 export class BtnMailUserComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IBtnMailUser> {
   @Input() widgetData!: IBtnMailUser
+  isShareEnabled = false
 
   constructor(
     private events: EventService,
     private dialog: MatDialog,
+    private configSvc: ConfigurationsService,
   ) {
     super()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('mailUsers')
+    }
+  }
 
   openQueryMailDialog(event: Event) {
     event.stopPropagation()

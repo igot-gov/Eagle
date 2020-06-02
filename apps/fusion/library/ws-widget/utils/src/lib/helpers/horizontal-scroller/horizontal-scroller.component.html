@@ -1,14 +1,13 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <section class="horizontal-scroll-container h-full">
-  <button mat-mini-fab color="primary" (click)="showPrev()" class="prevBtn hidden-touch" [hidden]="!enablePrev">
+  <button aria-label="Previous" i18n-aria-label name="content-backward-button" mat-mini-fab color="primary"
+    (click)="showPrev()" class="prevBtn hidden-touch" [hidden]="!enablePrev" [ngClass]="{'prevBtnHover': onHover}">
     <mat-icon>navigate_before</mat-icon>
   </button>
-  <div class="horizontal-scroll-content" #horizontalScrollElem>
+  <div name="horizontal-scroll-content-strip" class="horizontal-scroll-content" #horizontalScrollElem>
     <ng-content></ng-content>
   </div>
-  <button mat-mini-fab (click)="showNext()" color="primary" class="nextBtn hidden-touch"
+  <button aria-label="Next" i18n-aria-label name="content-forward-button" mat-mini-fab (click)="showNext()"
+    color="primary" class="nextBtn hidden-touch" [ngClass]="{'nextBtnHover': onHover}"
     [hidden]="!enableNext || loadStatus === 'fetching'">
     <mat-icon>navigate_next</mat-icon>
   </button>

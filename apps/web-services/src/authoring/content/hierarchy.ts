@@ -1,19 +1,66 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Request } from 'express'
-import { axiosRequestConfig } from '../../configs/request.config'
-import { extractOrgRootOrgAsQuery } from '../utils/org-rootOrg-query'
+import { DEFAULT_META } from '../constants/default-meta'
+import { getHeaders } from '../utils/header'
+import { setOrgRootOrgAsQuery } from '../utils/org-rootOrg-query'
 import { IContent } from './../../models/content.model'
 import { CONSTANTS } from './../../utils/env'
 
-const hierarchyApi = '/action/content/hierarchy/'
+const hierarchyApi = {
+  multiple: (org: string, rootOrg: string) =>
+    setOrgRootOrgAsQuery(
+      `${CONSTANTS.AUTHORING_BACKEND}/action/content/multiple/hierarchy`,
+      org,
+      rootOrg
+    ),
+  v1: (id: string, org: string, rootOrg: string) =>
+    setOrgRootOrgAsQuery(
+      `${CONSTANTS.AUTHORING_BACKEND}/action/content/hierarchy/${id}`,
+      org,
+      rootOrg
+    ),
+  v2: (id: string, org: string, rootOrg: string) =>
+    setOrgRootOrgAsQuery(
+      `${CONSTANTS.AUTHORING_BACKEND}/action/content/v2/hierarchy/${id}`,
+      org,
+      rootOrg
+    ),
+}
 
-export async function getHierarchy(id: string, req: Request): Promise<IContent> {
-  const data = await axios.get(
-    `${CONSTANTS.AUTHORING_BACKEND}${hierarchyApi}${id}${extractOrgRootOrgAsQuery(req)}`,
-    axiosRequestConfig
+export async function getHierarchy(
+  id: string,
+  org: string,
+  rootOrg: string,
+  req: Request
+): Promise<IContent> {
+  const data = await axios.get(hierarchyApi.v1(id, org, rootOrg), getHeaders(req))
+  return data.data as IContent
+}
+
+export async function getHierarchyV2(
+  id: string,
+  org: string,
+  rootOrg: string,
+  req: Request
+): Promise<IContent> {
+  const data = await axios.post(
+    hierarchyApi.v2(id, org, rootOrg),
+    { fields: DEFAULT_META },
+    getHeaders(req)
   )
   return data.data as IContent
+}
+
+export async function getMultipleHierarchyV2(
+  identifier: string[],
+  org: string,
+  rootOrg: string,
+  req: Request
+): Promise<IContent[]> {
+  const data = await axios.post(
+    hierarchyApi.multiple(org, rootOrg),
+    { identifier, fields: DEFAULT_META },
+    getHeaders(req)
+  )
+  return data.data as IContent[]
 }

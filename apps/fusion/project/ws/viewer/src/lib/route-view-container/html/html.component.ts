@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core'
 import { NsContent, NsDiscussionForum } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
 import { PipeLimitToPipe } from '@ws-widget/utils/src/lib/pipes/pipe-limit-to/pipe-limit-to.pipe'
+import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 @Component({
   selector: 'viewer-html-container',
   templateUrl: './html.component.html',
@@ -20,24 +18,44 @@ export class HtmlComponent implements OnInit, OnChanges {
     NsDiscussionForum.IDiscussionForumInput
   > | null = null
   @Input() isPreviewMode = false
+  @Input() forPreview = false
   isTypeOfCollection = false
   learningObjective: SafeHtml = ''
   description: SafeHtml = ''
+  isLtMedium = false
+  isScormContent = false
+  isRestricted = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
     private pipeLimitTo: PipeLimitToPipe,
+    private valueSvc: ValueService,
+    private configSvc: ConfigurationsService,
   ) { }
 
   ngOnInit() {
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
+    if (this.configSvc.restrictedFeatures) {
+      this.isRestricted =
+        !this.configSvc.restrictedFeatures.has('disscussionForum')
+    }
+    this.valueSvc.isLtMedium$.subscribe(isLtMd => {
+      this.isLtMedium = isLtMd
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
     for (const prop in changes) {
       if (prop === 'htmlData') {
+        if (this.htmlData && this.htmlData.artifactUrl.startsWith('https://scorm.')) {
+          this.isScormContent = true
+        } else {
+          this.isScormContent = false
+        }
         if (this.htmlData && this.htmlData.learningObjective) {
-          this.learningObjective = this.domSanitizer.bypassSecurityTrustHtml(this.htmlData.learningObjective)
+          this.learningObjective = this.domSanitizer.bypassSecurityTrustHtml(
+            this.htmlData.learningObjective,
+          )
         }
         if (this.htmlData && this.htmlData.description) {
           const description = this.pipeLimitTo.transform(this.htmlData.description, 450)

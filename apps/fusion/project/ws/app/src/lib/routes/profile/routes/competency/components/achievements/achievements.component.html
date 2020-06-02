@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div *ngIf="apiFetchStatus === 'fetching'" class="padding-top-l flex flex-center">
   <mat-spinner></mat-spinner>
 </div>
@@ -17,17 +14,22 @@
       </mat-card-content>
     </a>
   </mat-card> -->
+<div *ngIf="apiFetchStatus === 'error'" class="margin-xl mat-elevation-z2">
+  <h2 i18n class="flex flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
+    We are gathering the data to provide insights!
+  </h2>
+</div>
 <div *ngIf="apiFetchStatus === 'done'" class="p-4 assessment block">
   <ng-container *ngIf="assessmentsList?.length === 0">
     <div class="margin-xl">
-      <h2 i18n class="flex flex-canter flex-middle coming-soon-msg p-4 flex ws-mat-primary-text">
+      <h2 class="flex flex-center flex-middle coming-soon-msg p-4 flex ws-mat-primary-text">
         <span i18n>You have not completed any </span>
         <span class="margin-left-xs">{{ achievementType }}.</span>
-        <span class="margin-left-xs" i18n>Please completed one to view it here...</span>
+        <span class="margin-left-xs" i18n>Please complete one to view it here...</span>
       </h2>
     </div>
   </ng-container>
-  <div *ngIf="assessmentsList.length" class="flex flex-center flex-around flex-wrapped">
+  <div *ngIf="assessmentsList.length" class="flex justify-between flex-wrapped">
     <mat-card [ngClass]="{
         'border-bottom-success': assessment.isPassed,
         'border-bottom-fail': !assessment.isPassed

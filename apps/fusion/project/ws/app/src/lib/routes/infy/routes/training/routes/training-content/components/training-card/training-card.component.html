@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-card class="training-card flex flex-column flex-between h-full">
   <section class="training-details">
     <div class="flex flex-between">
@@ -41,7 +38,7 @@
         <div>
           <mat-icon>calendar_today</mat-icon>
         </div>
-        <div class="margin-left-xs width-9-10 flex flex-column flex-center">
+        <div class="margin-left-xs width-9-10 flex">
           <div class="mat-body-2 text-truncate">
             {{
               {
@@ -50,28 +47,38 @@
               } | pipeConciseDateRange
             }}
           </div>
+          <div class="margin-left-xs mat-body-2 text-truncate">
+            {{training.sessions[0].start_time}}-{{training.sessions[0].end_time}}
+
+          </div>
         </div>
+
       </div>
 
-      <!-- <div class="margin-bottom-xs margin-top-xs flex">
-      <mat-icon [inline]="true">access_time</mat-icon>
-      <div class="margin-left-xs">
-        <span class="mat-body-2" i18n="time zone">Time Zone: </span>
-        <span class="mat-body"> {{ training.time_zone }}</span>
+      <div class="margin-bottom-xs margin-top-xs flex">
+        <div>
+          <mat-icon>access_time</mat-icon>
+        </div>
+        <div class="margin-left-xs">
+          <span class="mat-body-2" i18n="time zone">Time Zone: </span>
+          <span class="mat-body"> {{ training.time_zone }}</span>
+        </div>
       </div>
-    </div> -->
 
       <div class="margin-bottom-xs margin-top-xs flex" *ngIf="training.deliveryType === 'Classroom'">
         <div>
           <mat-icon>location_on</mat-icon>
         </div>
-        <div class="margin-left-xs width-9-10 flex flex-column flex-center">
-          <div class="text-truncate">
-            <span class="mat-body-2" i18n>Location: </span>
-            <span class="mat-body">{{ training.location + ' ' }}</span>
-          </div>
+        <div class="margin-left-xs">
+
+          <span class="mat-body-2" i18n>Location: </span>
+          <span
+            class="mat-body">{{training.sessions[0].classroom + ' , ' +training.sessions[0].building + ' , ' + training.location}}</span>
+
+
         </div>
       </div>
+
 
       <div class="margin-bottom-xs margin-top-xs flex">
         <div>

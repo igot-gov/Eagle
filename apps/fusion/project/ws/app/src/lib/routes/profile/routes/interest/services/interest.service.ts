@@ -1,17 +1,15 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs'
 // import { WsApiCatalogService } from '@ws-shared/apis/src/lib/ws-api-catalog.service'
 // import { WsSharedUtilityService } from '@ws-shared/services'
 import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { NSSearch, TreeCatalogService } from '@ws-widget/collection'
+import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { ITopic, ITopicRecommended } from '../models/interest.model'
-import { NSSearch, TreeCatalogService } from '@ws-widget/collection'
 const PROTECTED_SLAG_V8 = `/apis/protected/v8`
 const API_END_POINTS = {
   userTopics: `${PROTECTED_SLAG_V8}/user/topics`,
+  addMultiple: `${PROTECTED_SLAG_V8}/user/topics/addMultiple`,
   recommendedTopics: `${PROTECTED_SLAG_V8}/user/topics/suggested`,
   autocompleteTopics: `${PROTECTED_SLAG_V8}/user/topics/autocomplete`,
 }
@@ -19,7 +17,8 @@ const API_END_POINTS = {
   providedIn: 'root',
 })
 export class InterestService {
-  constructor(private http: HttpClient, private treeCatalogSvc: TreeCatalogService) {}
+  constructor(private http: HttpClient, private treeCatalogSvc: TreeCatalogService) { }
+
   fetchUserInterests(): Observable<string[]> {
     return this.http
       .get<ITopic[]>(`${API_END_POINTS.userTopics}?ts=${new Date().getTime()}`)
@@ -65,12 +64,16 @@ export class InterestService {
     return this.http.get<string[]>(`${API_END_POINTS.userTopics}/v2?ts=${new Date().getTime()}`)
   }
 
-  addUserInterest(interest: string) {
-    return this.http.patch(`${API_END_POINTS.userTopics}?interest=${interest}`, {})
+  addUserInterest(interestVal: string) {
+    return this.http.patch(`${API_END_POINTS.userTopics}`, { interest: interestVal })
   }
 
-  removeUserInterest(interest: string) {
-    return this.http.delete(`${API_END_POINTS.userTopics}?interest=${interest}`)
+  addUserMultipleInterest(interestVal: string[]) {
+    return this.http.patch(`${API_END_POINTS.addMultiple}`, { interest: interestVal })
+  }
+
+  removeUserInterest(interestVal: string) {
+    return this.http.request('delete', `${API_END_POINTS.userTopics}`, { body: { interest: interestVal } })
   }
 
   fetchSuggestedInterestV2(): Observable<string[]> {

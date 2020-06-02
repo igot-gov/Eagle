@@ -1,31 +1,23 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles" class="mat-primary mat-elevation-z3">
-  <ws-widget-btn-page-back *ngIf="!isPreview" [widgetData]="{
+  <ws-widget-btn-page-back *ngIf="!forChannel" [widgetData]="{
       url: isTypeOfCollection
         ? collectionType === 'Playlist'
           ? '/app/playlist/me/' + collectionId
-          : '/app/toc/' + collectionId + '/overview'
-        : '/app/toc/' + resourceId + '/overview'
+          : (forPreview ? '/author' : '/app') + '/toc/' + collectionId + '/overview'
+        : (forPreview ? '/author' : '/app') + '/toc/' + resourceId + '/overview'
     }"></ws-widget-btn-page-back>
-  <!-- <ws-widget-btn-page-back
-    *ngIf="!isPreview"
-    [widgetData]="{
-      url: 'back'
-    }"
-  ></ws-widget-btn-page-back> -->
-  <a mat-button routerLink="/page/home" i18n-matTooltip matTooltip="Home">
-    <img [src]="appIcon" alt="Application Logo" class="app-logo" />
+  <mat-icon style="cursor: pointer;" (click)="back()" *ngIf="forChannel">arrow_back</mat-icon>
+  <a *ngIf="logo" mat-button routerLink="/page/home" i18n-matTooltip matTooltip="Home">
+    <img [src]="appIcon" i18n-alt alt="Application Logo" class="app-logo" />
   </a>
-  <a mat-icon-button class="width-auto" [routerLink]="prevResourceUrl" *ngIf="isTypeOfCollection"
+  <a mat-icon-button class="width-auto" aria-label="previous content" i18n-aria-label [routerLink]="prevResourceUrl" *ngIf="isTypeOfCollection"
     [disabled]="!prevResourceUrl" queryParamsHandling="preserve" accesskey="<">
     <mat-icon>skip_previous</mat-icon>
   </a>
-  <span class="width-expand text-center text-truncate">
+  <span class="width-expand text-center text-truncate" [matTooltip]="resourceName">
     {{ resourceName }}
   </span>
-  <a mat-icon-button class="width-auto" [routerLink]="nextResourceUrl" *ngIf="isTypeOfCollection"
+  <a mat-icon-button class="width-auto" aria-label="next content" i18n-aria-label [routerLink]="nextResourceUrl" *ngIf="isTypeOfCollection"
     [disabled]="!nextResourceUrl" queryParamsHandling="preserve" accesskey=">">
     <mat-icon>skip_next</mat-icon>
   </a>
@@ -33,7 +25,7 @@
     <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
       [widgetData]="{ fsContainer: frameReference }"></ws-widget-btn-fullscreen>
   </a>
-  <a mat-icon-button *ngIf="isTypeOfCollection" class="width-auto" (click)="toggleSideBar()" accesskey="M">
+  <a mat-icon-button class="width-auto" (click)="toggleSideBar()" accesskey="M">
     <mat-icon>menu</mat-icon>
   </a>
 </mat-toolbar>

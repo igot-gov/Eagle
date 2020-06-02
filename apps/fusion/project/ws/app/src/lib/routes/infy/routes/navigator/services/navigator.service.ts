@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { TFetchStatus } from '@ws-widget/utils'
 import { ReplaySubject, Observable, from } from 'rxjs'
 import { NsAnalytics } from '../../../../app-toc/models/app-toc-analytics.model'
 import { WidgetContentService } from '@ws-widget/collection'
+import { map } from 'rxjs/operators'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -23,6 +21,7 @@ const API_END_POINTS = {
   NAVIGATOR_COMMONS_DATA: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/commonsdata.json`,
   NAVIGATOR_LP_DATA: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/data.json`,
   NAVIGATOR_ROLES_DATA: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/nsodata.json`,
+  NAVIGATOR_BPM_DATA: `${PROTECTED_SLAG_V8}/navigator/bpm`,
 }
 
 @Injectable({
@@ -44,7 +43,19 @@ export class NavigatorService {
     return this.http.get(`${API_END_POINTS.NAVIGATOR_ROLES}`)
   }
   fetchNavigatorTopics(): Observable<any> {
-    return this.http.get(`${API_END_POINTS.NAVIGATOR_SUGGESTIONS}`)
+    return this.http.get(`${API_END_POINTS.NAVIGATOR_LP_DATA}`).pipe(
+      map((data: any) => {
+        const topics = new Set()
+        data.lp_data.forEach((lp: any) => {
+          lp.profiles.forEach((profile: any) => {
+            profile.technology.forEach((technology: string) => {
+              topics.add(technology.trim())
+            })
+          })
+        })
+        return Array.from(topics)
+      })
+    )
   }
 
   fetchCommonsData(): Observable<any> {
@@ -58,6 +69,11 @@ export class NavigatorService {
   fetchLearningPathIdData(lpId: string): Observable<any> {
     return this.http.get(`${API_END_POINTS.NAVIGATOR_LP}/${lpId}`)
   }
+
+  fetchBpmData(): Observable<any> {
+    return this.http.get(`${API_END_POINTS.NAVIGATOR_BPM_DATA}`)
+  }
+
   fetchContentAnalyticsData(tagName: string) {
     if (this.analyticsFetchStatus !== 'fetching' && this.analyticsFetchStatus !== 'done') {
       this.getContentAnalytics(tagName)
@@ -67,7 +83,7 @@ export class NavigatorService {
   getContentAnalytics(tagName: string): Observable<NsAnalytics.IAnalyticsResponse> {
     this.analyticsFetchStatus = 'fetching'
     // tslint:disable-next-line: max-line-length
-path
+    const url = `${PROXIES_SLAG_V8}/LA/LA/api/participants?aggsSize=1000&endDate=${this.endDate}&startDate=${this.startDate}&from=0&refinementfilter=${encodeURIComponent('"source":["LEX","Learning Hub"]')}$${encodeURIComponent(`"topics": ["${tagName}"]`)}`
     // this.http
     //   .get(url)
     //   .subscribe(
@@ -91,6 +107,10 @@ path
     }
     return from([''])
 
+  }
+
+  fetchImageForContentIDs(contentIds: string[]): Observable<any> {
+    return this.contentSvc.fetchMultipleContent(contentIds)
   }
 
   private get endDate() {

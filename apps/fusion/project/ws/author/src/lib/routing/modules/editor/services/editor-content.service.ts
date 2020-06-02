@@ -1,24 +1,24 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { AuthInitService } from './../../../../services/init.service'
-import { IFormMeta } from './../../../../interface/form'
-import { EditorService } from './editor.service'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, of } from 'rxjs'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { BehaviorSubject, Observable, of } from 'rxjs'
 import { tap } from 'rxjs/operators'
-
+import { IConditionsV2 } from './../../../../interface/conditions-v2'
+import { IFormMeta } from './../../../../interface/form'
+import { AuthInitService } from './../../../../services/init.service'
+import { EditorService } from './editor.service'
+import { IAssessmentDetails } from '../routing/modules/iap-assessment/interface/iap-assessment.interface'
 @Injectable()
 export class EditorContentService {
-
   originalContent: { [key: string]: NSContent.IContentMeta } = {}
   upDatedContent: { [key: string]: NSContent.IContentMeta } = {}
+  iapContent: { [key: string]: IAssessmentDetails } = {}
   public currentContent!: string
   public parentContent!: string
   public isSubmitted = false
   public changeActiveCont = new BehaviorSubject<string>('')
+  public onContentChange = new BehaviorSubject<string>('')
+  isEditEnabled = false
 
   constructor(
     private accessService: AccessControlService,
@@ -31,10 +31,12 @@ export class EditorContentService {
   }
 
   getUpdatedMeta(id: string): NSContent.IContentMeta {
-    return JSON.parse(JSON.stringify({
-      ...this.originalContent[id],
-      ...(this.upDatedContent[id] ? this.upDatedContent[id] : {}),
-    }))
+    return JSON.parse(
+      JSON.stringify({
+        ...this.originalContent[id],
+        ...(this.upDatedContent[id] ? this.upDatedContent[id] : {}),
+      }),
+    )
   }
 
   setOriginalMeta(meta: NSContent.IContentMeta) {
@@ -46,11 +48,24 @@ export class EditorContentService {
     delete this.upDatedContent[id]
   }
 
-  setUpdatedMeta(meta: NSContent.IContentMeta, id: string) {
+  setUpdatedMeta(meta: NSContent.IContentMeta, id: string, emit = true) {
     this.upDatedContent[id] = {
       ...(this.upDatedContent[id] ? this.upDatedContent[id] : {}),
       ...JSON.parse(JSON.stringify(meta)),
     }
+    if (emit) {
+      this.onContentChange.next(id)
+    }
+  }
+
+  setIapContent(meta: IAssessmentDetails, id: string) {
+    this.iapContent[id] = {
+      ...(this.iapContent[id] ? this.iapContent[id] : {}),
+      ...JSON.parse(JSON.stringify(meta)),
+    }
+  }
+  getIapContent(id: string): IAssessmentDetails {
+    return this.iapContent[id]
   }
 
   reset() {
@@ -59,39 +74,46 @@ export class EditorContentService {
     this.isSubmitted = false
   }
 
-  hasAccess(meta: NSContent.IContentMeta): boolean {
-    return this.accessService.hasAccess(meta)
+  hasAccess(
+    meta: NSContent.IContentMeta,
+    forPreview = false,
+    parentMeta?: NSContent.IContentMeta,
+  ): boolean {
+    return this.accessService.hasAccess(meta, forPreview, parentMeta)
   }
 
   isLangPresent(lang: string): boolean {
     let isPresent = false
-    Object.keys(this.originalContent).map(
-      v => {
-        isPresent = this.originalContent[v].locale === lang
-      },
-    )
+    Object.keys(this.originalContent).map(v => {
+      isPresent = this.originalContent[v].locale === lang
+    })
     return isPresent
   }
 
   private getParentUpdatedMeta(): NSContent.IContentMeta {
     const meta = {} as any
     const parentMeta = this.getUpdatedMeta(this.parentContent)
-    Object.keys(this.authInitService.authConfig).map(
-      v => {
-        // tslint:disable-next-line: no-console
+    Object.keys(this.authInitService.authConfig).map(v => {
+      // tslint:disable-next-line: no-console
 
-        meta[v as keyof NSContent.IContentMeta] =
-          parentMeta[v as keyof NSContent.IContentMeta] ?
-            parentMeta[v as keyof NSContent.IContentMeta] :
-            JSON.parse(
-              JSON.stringify(this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[parentMeta.contentType][0].value),
-            )
-      },
-    )
+      meta[v as keyof NSContent.IContentMeta] = parentMeta[v as keyof NSContent.IContentMeta]
+        ? parentMeta[v as keyof NSContent.IContentMeta]
+        : JSON.parse(
+          JSON.stringify(
+            this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+              parentMeta.contentType
+              // tslint:disable-next-line: ter-computed-property-spacing
+            ][0].value,
+          ),
+        )
+    })
     return meta
   }
 
-  createInAnotherLanguage(language: string, meta = {}): Observable<NSContent.IContentMeta | boolean> {
+  createInAnotherLanguage(
+    language: string,
+    meta = {},
+  ): Observable<NSContent.IContentMeta | boolean> {
     const parentContent = this.getParentUpdatedMeta()
     if (this.isLangPresent(language)) {
       return of(true)
@@ -113,9 +135,9 @@ export class EditorContentService {
     delete requestBody.status
     delete requestBody.categoryType
     delete requestBody.accessPaths
-    return this.editorService.createAndReadContent(requestBody).pipe(
-      tap(v => this.setOriginalMeta(v)),
-    )
+    return this.editorService
+      .createAndReadContent(requestBody)
+      .pipe(tap(v => this.setOriginalMeta(v)))
   }
 
   isValid(id: string): boolean {
@@ -155,7 +177,8 @@ export class EditorContentService {
         returnValue = false
       } else if (
         this.authInitService.authConfig[meta as keyof IFormMeta][directType][data.contentType] &&
-        this.authInitService.authConfig[meta as keyof IFormMeta][directType][data.contentType].length === 0
+        this.authInitService.authConfig[meta as keyof IFormMeta][directType][data.contentType]
+          .length === 0
       ) {
         returnValue = true
       } else {
@@ -169,7 +192,9 @@ export class EditorContentService {
               ) {
                 childReturnValue = true
               } else if (
-                condition[childMeta as keyof typeof condition].indexOf(data[childMeta as keyof NSContent.IContentMeta]) > -1
+                condition[childMeta as keyof typeof condition].indexOf(
+                  data[childMeta as keyof NSContent.IContentMeta],
+                ) > -1
               ) {
                 childReturnValue = true
               }
@@ -183,13 +208,15 @@ export class EditorContentService {
       if (
         this.authInitService.authConfig[meta as keyof IFormMeta] &&
         this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType] &&
-        this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType].length === 0
+        this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType]
+          .length === 0
       ) {
         returnValue = false
       } else if (
         this.authInitService.authConfig[meta as keyof IFormMeta] &&
         this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType] &&
-        this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType].length > 0
+        this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType]
+          .length > 0
       ) {
         this.authInitService.authConfig[meta as keyof IFormMeta][counterType][data.contentType].map(
           condition => {
@@ -201,7 +228,9 @@ export class EditorContentService {
               ) {
                 childReturnValue = true
               } else if (
-                condition[childMeta as keyof typeof condition].indexOf(data[childMeta as keyof NSContent.IContentMeta]) > -1
+                condition[childMeta as keyof typeof condition].indexOf(
+                  data[childMeta as keyof NSContent.IContentMeta],
+                ) > -1
               ) {
                 childReturnValue = true
               }
@@ -214,7 +243,7 @@ export class EditorContentService {
       }
     } catch (ex) {
       // tslint:disable-next-line: no-console
-      console.log(ex)
+      // console.log(ex)
       returnValue = false
     }
     return returnValue
@@ -230,7 +259,7 @@ export class EditorContentService {
         break
       case 'object':
       case 'boolean':
-        returnValue = data ? true : false
+        returnValue = data === true || data === false ? true : false
         break
       case 'number':
         returnValue = data > 0 ? true : false
@@ -239,4 +268,58 @@ export class EditorContentService {
     return returnValue
   }
 
+  /**
+   * @description Function which evaluates the given conditions decides whether the content is eligible or not
+   *
+   * @param {NSContent.IContentMeta} content Content for which condition needs to be checked
+   * @param {IAuthConditions} [conditions] Condition which needs to be evaluated against includes both fit and not not fit
+   * @returns {boolean}  True if passed the evaluation
+   * @memberof EditorContentService
+   */
+  checkConditionV2(content: NSContent.IContentMeta, conditions?: IConditionsV2): boolean {
+    if (conditions) {
+      let returnValue = true
+      if (conditions.notFit && conditions.notFit.length) {
+        returnValue = !this.checkUniqueCondition(content, conditions.notFit as any)
+      }
+      if (returnValue && conditions.fit && conditions.fit.length) {
+        returnValue = this.checkUniqueCondition(content, conditions.fit as any)
+      }
+      return returnValue
+    }
+    return true
+  }
+
+  /**
+   * @description Invisible function which actually does the work
+   *
+   * @param {NSContent.IContentMeta} content Content for which condition needs to be checked
+   * @param {{ [key in keyof NSContent.IContentMeta]: string[] }[]} conditions Condition which needs to be evaluated against
+   * @returns {boolean} True if passed the evaluation
+   * @memberof EditorContentService
+   */
+  checkUniqueCondition(
+    content: NSContent.IContentMeta,
+    conditions: { [key in keyof NSContent.IContentMeta]: any[] }[],
+  ): boolean {
+    try {
+      return conditions.some(condition => {
+        let isLocalPassed = true
+        Object.keys(condition).forEach(meta => {
+          if (
+            condition[meta as keyof NSContent.IContentMeta].indexOf(
+              content[meta as keyof NSContent.IContentMeta],
+            ) < 0
+          ) {
+            isLocalPassed = false
+          }
+        })
+        return isLocalPassed
+      })
+    } catch (ex) {
+      // tslint:disable-next-line: no-console
+      // console.log(ex)
+      return false
+    }
+  }
 }

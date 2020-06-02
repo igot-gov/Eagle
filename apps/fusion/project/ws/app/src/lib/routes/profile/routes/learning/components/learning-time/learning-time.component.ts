@@ -1,25 +1,24 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core'
-import { Subscription } from 'rxjs'
-import { Router, ActivatedRoute } from '@angular/router'
-import { NSProfileData } from '../../../../models/profile.model'
-import { TFetchStatus, ValueService, ConfigurationsService } from '@ws-widget/utils'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { Chart } from 'chart.js'
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { ActivatedRoute, Router } from '@angular/router'
+// tslint:disable-next-line: max-line-length
 import {
-  TChartJsGraphType,
-  ROOT_WIDGET_CONFIG,
-  IBubbleData,
-  TChartJsColorPalette,
+  colorPalettes,
   COLOR_PALETTE,
   GRAPH_TYPES,
-  colorPalettes,
+  IBubbleData,
   IBubbleGraphDataSets,
+  ROOT_WIDGET_CONFIG,
+  TChartJsColorPalette,
+  TChartJsGraphType,
 } from '@ws-widget/collection'
+import { ConfigurationsService, TFetchStatus, ValueService } from '@ws-widget/utils'
+import { Chart } from 'chart.js'
+import { Subscription } from 'rxjs'
+import { NSProfileData } from '../../../../models/profile.model'
 import { ProfileService } from '../../../../services/profile.service'
-import { NSLearningGraph, ITimeSpent } from '../../models/learning.models'
+import { ITimeSpent, NSLearningGraph } from '../../models/learning.models'
+// import { NSAnalyticsData } from '../../../analytics/models/analytics.model'
 
 @Component({
   selector: 'ws-app-learning-time',
@@ -70,10 +69,10 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('labelX', { static: true }) labelX: ElementRef<HTMLInputElement> | null = null
   @ViewChild('labelY', { static: true }) labelY: ElementRef<HTMLInputElement> | null = null
   legendPosition: 'left' | 'right' | 'top' | 'bottom' = 'bottom'
-  timeSpentData: ITimeSpent | null = null
+  timeSpentData: ITimeSpent | null = null //  = this.route.snapshot.data['timeSpentData'];
   pickerValue1: Date | null = null
   pickerValue2: Date | null = null
-  firstDate: Date = new Date(2018, 3, 1)
+  firstDate: Date = new Date()
   maxDate: Date = new Date()
   minDate: Date = new Date()
   today: Date = new Date()
@@ -85,11 +84,17 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
   isSmall = false
   showDateRange = false
   isNextDateValid = false
+  isPrevDateValid = true
+  // colors$: Observable<{ primary: string, accent: string, warn: string }> = this.valuesSvc.theme$.pipe(map(name => {
+  //   return themesConfig[name.split('-')[0]]
+  // }));
   orgAvg = 0
   userAvg = 0
   apiFetchStatus: TFetchStatus = 'none'
   startDate = '2018-04-01'
-  endDate = `${new Date().getFullYear()}-${`0${new Date().getMonth() + 1}`.slice(-2)}-${`0${new Date().getDate()}`.slice(-2)}`
+  endDate = `${new Date().getFullYear()}-${`0${new Date().getMonth() + 1}`.slice(
+    -2,
+  )}-${`0${new Date().getDate()}`.slice(-2)}`
   paramSubscription: Subscription | null = null
   learningTimeData: NSProfileData.ITimeSpentResponse | null = null
   userPointsEarned = 0
@@ -103,7 +108,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
   viewTime = false
   timeEvent = new Date()
   monthDict: {
-    [key: string]: string;
+    [key: string]: string
   } = {
     Jan: '01',
     Feb: '02',
@@ -162,7 +167,8 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
   bubbleData: NSProfileData.IBubbleChart[] = []
   prefChangeSubscription: Subscription | null = null
   enabledTab = this.route.snapshot.data.pageData.data.enabledTabs.learning
-  chartsList = this.route.snapshot.data.pageData.data.enabledTabs.learning.subTabs.learningTime.charts
+  chartsList = this.route.snapshot.data.pageData.data.enabledTabs.learning.subTabs.learningTime
+    .charts
   constructor(
     private router: Router,
     private _formBuilder: FormBuilder,
@@ -170,7 +176,6 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
     private valuesSvc: ValueService,
     private route: ActivatedRoute,
     private configSvc: ConfigurationsService,
-
   ) {
     this.monthForm = this._formBuilder.group({
       monthName: ['', Validators.required],
@@ -201,7 +206,10 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.apiFetchStatus = 'fetching'
-    this.monthArray = Object.keys(this.monthDict)
+    // const currentMonth = new Date()
+    // currentMonth.setMonth(currentMonth.getMonth() - 2)
+    // this.firstDate = this.datePipe.transform(currentMonth, 'yyyy-MM-dd')
+    this.firstDate.setTime(new Date().getTime() - 5443200000)
     this.errorOccurred = false
     this.route.data.subscribe(data => {
       if (!data) {
@@ -217,6 +225,8 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.maxDate.setTime(data.timeSpentData.end.getTime() - 86400000)
       this.minDate.setTime(data.timeSpentData.start.getTime() + 86400000)
       this.today.setTime(new Date().getTime() - 86400000)
+      // //console.log('this.pickerValue1 >', this.pickerValue1);
+      // //console.log('this.pickerValue2 >', this.pickerValue2);
       if (data.timeSpentData.data.org.length >= 15) {
         this.isBarChart = false
       } else {
@@ -226,25 +236,30 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.updateChart()
       }
     })
-    this.profileSvc.timeSpent(this.startDate, this.endDate, this.contentType, this.isCompleted).subscribe(
-      (timeSpentTrack: NSProfileData.ITimeSpentResponse) => {
-        this.learningTimeData = timeSpentTrack
-        if (this.learningTimeData) {
-          this.apiFetchStatus = 'done'
-          this.userPointsEarned = this.learningTimeData.points_and_ranks.user_points_earned
-          this.orgWidePointsPercent = Math.round(
-            this.learningTimeData.timespent_user_vs_org_wide.usage_percent,
-          )
-          this.totalLearningHours = Math.round(this.learningTimeData.time_spent_by_user)
-          this.getMonths(this.learningTimeData)
-          this.piChartDataFetch(this.learningTimeData)
-          this.specialDatesSet()
-        }
-      },
-      () => {
-        this.apiFetchStatus = 'error'
-      },
-    )
+    if (this.chartsList.calendarChart) {
+      this.profileSvc
+        .timeSpent(this.startDate, this.endDate, this.contentType, this.isCompleted)
+        .subscribe(
+          (timeSpentTrack: NSProfileData.ITimeSpentResponse) => {
+            this.learningTimeData = timeSpentTrack
+            if (this.learningTimeData) {
+              this.apiFetchStatus = 'done'
+              this.userPointsEarned = this.learningTimeData.points_and_ranks.user_points_earned
+              this.orgWidePointsPercent = Math.round(
+                this.learningTimeData.timespent_user_vs_org_wide.usage_percent,
+              )
+              this.totalLearningHours = Math.round(this.learningTimeData.time_spent_by_user)
+              // this.trackWiseDataFetch(this.learningTimeData.track_wise_user_timespent)
+              this.getMonths(this.learningTimeData)
+              this.piChartDataFetch(this.learningTimeData)
+              this.specialDatesSet()
+            }
+          },
+          () => {
+            this.apiFetchStatus = 'error'
+          },
+        )
+    }
   }
 
   specialDatesSet() {
@@ -266,7 +281,6 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
       this.categoryWiseLabels.push(category.key)
       this.categoryWiseChartData.push(category.value)
       this.orgWideChartData.push(Number((category.value / 60).toFixed(2)))
-
     })
     this.unitWiseData.forEach((unit: NSProfileData.IPieCharts) => {
       this.unitWiseLabels.push(unit.key)
@@ -279,6 +293,27 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.defaultBackgroundGraphColors = colorPalettes[this.selectedPalette]
     this.pieChartData(this.defaultBackgroundGraphColors, this.selectedType)
   }
+  // applyMonthFilter(month: string, year: string) {
+  //   this.selectedMonth =
+  //     month === undefined ? (this.selectedMonth = 'april') : (this.selectedMonth = month)
+  //   this.selectedYear =
+  //     year === undefined ? (this.selectedYear = '2018') : (this.selectedYear = year)
+  //   this.currentMonthGraph = `${this.selectedMonth.substring(0, 3)}_${this.selectedYear}`
+  //   const start = `${this.selectedYear}-${this.monthDict[this.selectedMonth]}-01`
+  //   const end = `${this.selectedYear}-${this.monthDict[this.selectedMonth]}-27`
+  //   this.graphFetchStatus = 'fetching'
+  //   this.trackWiseLabels = []
+  //   this.trackWiseGraphData = []
+  //   this.trackObj = []
+
+  //   this.profileSvc
+  //     .timeSpent(start, end, this.contentType, this.isCompleted)
+  //     .subscribe((timeSpentTrack: NSProfileData.ITimeSpentResponse) => {
+  //       this.trackWiseData = timeSpentTrack.track_wise_user_timespent
+  //       this.trackWiseDataFetch(Object.values(this.trackWiseData)[0])
+  //     })
+  // }
+
   showInfo(tab: string) {
     if (tab === 'monthWiseCourseTaken') {
       this.monthWiseCourseTaken = !this.monthWiseCourseTaken
@@ -292,14 +327,40 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.showTime = false
   }
   getMonths(learningTimeData: any) {
+    // const today = new Date()
+    // tslint:disable-next-line:max-line-length
+    // const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    // const currentMonth = today.getMonth()
+    // const currentYear = today.getFullYear()
+    // const firstHalf = month.slice(0, currentMonth + 1)
+    // const secondHalf = month.slice((currentMonth - 1), 12)
+    // const currentMonthArray: string[] = []
+    // const previousMonthArray: string[] = []
+
+    // firstHalf.map((mon: string) => {
+    //   // tslint:disable-next-line:no-parameter-reassignment
+    //   mon = `${mon}_${currentYear}`
+    //   currentMonthArray.push(mon)
+    // })
+    // secondHalf.map((mon: string) => {
+    //   // tslint:disable-next-line:no-parameter-reassignment
+    //   mon = `${mon}_${currentYear - 1}`
+    //   previousMonthArray.push(mon)
+    // })
+    // this.trackWiseLabels = previousMonthArray.concat(currentMonthArray)
     this.trackWiseData = learningTimeData.track_wise_user_timespent
     if (this.trackWiseData) {
       for (const key in this.trackWiseData) {
         if (this.trackWiseData.hasOwnProperty(key)) {
+          // //console.log(key, this.trackWiseData[key])
           this.trackWiseData[key].forEach((track: NSProfileData.IMonthWiseData) => {
             this.trackDataObj = []
             this.trackEachLabel.push(track.track)
-            this.trackDataObj.push({ x: track.month_year, y: track.number_of_content_accessed, r: track.timespent_in_mins })
+            this.trackDataObj.push({
+              x: track.month_year,
+              y: track.number_of_content_accessed,
+              r: track.timespent_in_mins,
+            })
             this.trackObj = {
               label: track.track,
               data: this.trackDataObj,
@@ -311,11 +372,24 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
       const keys = Object.keys(this.trackWiseData)
+      // keys.map((k: any) => {
+      //   const monthKey = k.split('_') [0]
+      // })
       const monthKv: {
-        [key: string]: any,
+        [key: string]: any
       } = {
-        Jan: 13, Feb: 14, Mar: 15, Apr: 4, May: 5, Jun: 6,
-        Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12,
+        Jan: 13,
+        Feb: 14,
+        Mar: 15,
+        Apr: 4,
+        May: 5,
+        Jun: 6,
+        Jul: 7,
+        Aug: 8,
+        Sep: 9,
+        Oct: 10,
+        Nov: 11,
+        Dec: 12,
       }
       keys.map((k: any) => {
         if (this.trackWiseData) {
@@ -324,16 +398,25 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
           })
           this.trackWiseData[k].map((r, i) => {
             if (i < 3) {
+              // this.bubbleChartData.push([
+              //   ' ',
+              //   month_kv[k.split('_')[0]] + (.2 * i),
+              //   r.number_of_content_accessed,
+              //   r.track, r.timespent_in_mins
+              // ]);
               this.bubbleData.push({
-                x: monthKv[k.split('_')[0]] + (.2 * i),
+                x: monthKv[k.split('_')[0]] + 0.2 * i,
                 y: r.number_of_content_accessed,
-                r: ((r.timespent_in_mins / 10) <= 3) ? 3 :
-                  ((r.timespent_in_mins / 10) > 3 && r.timespent_in_mins / 10 <= 30) ?
-                    r.timespent_in_mins / 10 : 30,
+                // r: this.getRadius(r.timespent_in_mins).toFixed(0),
+                r:
+                  r.timespent_in_mins / 10 <= 3
+                    ? 3
+                    : r.timespent_in_mins / 10 > 3 && r.timespent_in_mins / 10 <= 30
+                    ? r.timespent_in_mins / 10
+                    : 30,
                 actual: r.timespent_in_mins,
                 text: r.track,
               })
-
             }
           })
         }
@@ -382,7 +465,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
       widgetData: {
         graphId: 'jlChart',
         graphType: defaultGraphType,
-        graphHeight: '200px',
+        graphHeight: '150px',
         graphWidth: '100%',
         graphLegend: false,
         graphLegendPosition: 'top',
@@ -409,7 +492,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
       widgetData: {
         graphId: 'unitWiseChart',
         graphType: defaultGraphType,
-        graphHeight: '200px',
+        graphHeight: '150px',
         graphWidth: '100%',
         graphLegend: false,
         graphLegendPosition: 'top',
@@ -436,7 +519,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
       widgetData: {
         graphId: 'categoryWiseChart',
         graphType: defaultGraphType,
-        graphHeight: '200px',
+        graphHeight: '150px',
         graphWidth: '100%',
         graphLegend: false,
         graphLegendPosition: 'top',
@@ -493,6 +576,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.timeEvent = new Date(event)
     const clickedDate = this.timeEvent.getTime() + 330 * 60000
     if (this.learningTimeData) {
+      // type void is not assignable to type boolean error
       this.learningTimeData.date_wise.reverse().find((cur: NSProfileData.IProfileData) => {
         if (clickedDate === cur.key) {
           this.timeSpent = cur.value
@@ -550,7 +634,14 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
       queryParams: { start: startDate.getTime(), end: endDate.getTime() },
     })
   }
-
+  dateChangedStart(startDate: Date, endDate: Date) {
+    this.maxDate.setTime(endDate.getTime() - 86400000)
+    this.minDate.setTime(startDate.getTime() - 5443200000)
+    this.today.setTime(new Date().getTime() - 86400000)
+    this.router.navigate(['app', 'profile', 'learning', 'time'], {
+      queryParams: { start: startDate.getTime(), end: endDate.getTime() },
+    })
+  }
   toggleChartType() {
     this.isBarChart = !this.isBarChart
     this.updateChart()
@@ -573,6 +664,12 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dateChanged(start, end)
       } else {
         this.isNextDateValid = false
+      }
+      if (start > new Date(new Date().getTime() - 5443200000)) {
+        this.isPrevDateValid = true
+        this.dateChangedStart(start, end)
+      } else {
+        this.isPrevDateValid = false
       }
     }
   }
@@ -609,9 +706,11 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               ? this.configSvc.activeThemeObject.color.primary
               : '',
             fill: false,
-            backgroundColor: Array(this.timeSpentData.user.length).fill(this.configSvc.activeThemeObject
-                  ? this.configSvc.activeThemeObject.color.primary
-                  : ''),
+            backgroundColor: Array(this.timeSpentData.user.length).fill(
+              this.configSvc.activeThemeObject
+                ? this.configSvc.activeThemeObject.color.primary
+                : '',
+            ),
           },
           {
             label: this.labelOrgAvg.nativeElement.value,
@@ -620,18 +719,20 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               ? this.configSvc.activeThemeObject.color.accent
               : '',
             fill: false,
-            backgroundColor: Array(this.timeSpentData.org.length).fill(this.configSvc.activeThemeObject
-              ? this.configSvc.activeThemeObject.color.accent
-              : ''),
+            backgroundColor: Array(this.timeSpentData.org.length).fill(
+              this.configSvc.activeThemeObject ? this.configSvc.activeThemeObject.color.accent : '',
+            ),
           },
           {
             label: this.labelUserOverPeriod.nativeElement.value,
             data: Array(this.timeSpentData.user.length).fill(
               Number((this.timeSpentData.userAvg / 60).toFixed(1)),
             ),
-            borderColor: Array(this.timeSpentData.user.length).fill(this.configSvc.activeThemeObject
-              ? this.configSvc.activeThemeObject.color.primary
-              : ''),
+            borderColor: Array(this.timeSpentData.user.length).fill(
+              this.configSvc.activeThemeObject
+                ? this.configSvc.activeThemeObject.color.primary
+                : '',
+            ),
             type: 'line',
             lineTension: 1,
             borderDash: [5, 2],
@@ -661,6 +762,9 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               gridLines: {
                 offsetGridLines: false,
               },
+              ticks: {
+                beginAtZero: true,
+              },
             },
           ],
           yAxes: [
@@ -672,6 +776,9 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               },
               gridLines: {
                 offsetGridLines: false,
+              },
+              ticks: {
+                beginAtZero: true,
               },
             },
           ],
@@ -695,6 +802,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               display: true,
               ticks: {
                 display: false,
+                beginAtZero: true,
               },
               gridLines: {
                 offsetGridLines: false,
@@ -706,6 +814,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               display: true,
               ticks: {
                 display: true,
+                beginAtZero: true,
               },
               gridLines: {
                 offsetGridLines: false,
@@ -757,9 +866,11 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               ? this.configSvc.activeThemeObject.color.primary
               : '',
             fill: false,
-            backgroundColor: Array(this.timeSpentData.user.length).fill(this.configSvc.activeThemeObject
-                  ? this.configSvc.activeThemeObject.color.primary
-                  : ''),
+            backgroundColor: Array(this.timeSpentData.user.length).fill(
+              this.configSvc.activeThemeObject
+                ? this.configSvc.activeThemeObject.color.primary
+                : '',
+            ),
           },
           {
             label: this.labelOrgAvg.nativeElement.value,
@@ -768,18 +879,20 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               ? this.configSvc.activeThemeObject.color.accent
               : '',
             fill: false,
-            backgroundColor: Array(this.timeSpentData.org.length).fill(this.configSvc.activeThemeObject
-              ? this.configSvc.activeThemeObject.color.accent
-              : ''),
+            backgroundColor: Array(this.timeSpentData.org.length).fill(
+              this.configSvc.activeThemeObject ? this.configSvc.activeThemeObject.color.accent : '',
+            ),
           },
           {
             label: this.labelUserOverPeriod.nativeElement.value,
             data: Array(this.timeSpentData.user.length).fill(
               Number((this.timeSpentData.userAvg / 60).toFixed(1)),
             ),
-            borderColor: Array(this.timeSpentData.user.length).fill(this.configSvc.activeThemeObject
-                  ? this.configSvc.activeThemeObject.color.primary
-                  : ''),
+            borderColor: Array(this.timeSpentData.user.length).fill(
+              this.configSvc.activeThemeObject
+                ? this.configSvc.activeThemeObject.color.primary
+                : '',
+            ),
             type: 'line',
             lineTension: 0.5,
             borderDash: [5, 2],
@@ -802,6 +915,9 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
             {
               maxBarThickness: barThickness,
               display: true,
+              ticks: {
+                beginAtZero: true,
+              },
               scaleLabel: {
                 display: true,
                 labelString: this.labelX.nativeElement.value,
@@ -814,6 +930,9 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
           yAxes: [
             {
               display: true,
+              ticks: {
+                beginAtZero: true,
+              },
               scaleLabel: {
                 display: true,
                 labelString: this.labelY.nativeElement.value,
@@ -843,6 +962,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               display: true,
               ticks: {
                 display: false,
+                beginAtZero: true,
               },
               gridLines: {
                 offsetGridLines: false,
@@ -854,6 +974,7 @@ export class LearningTimeComponent implements OnInit, AfterViewInit, OnDestroy {
               display: true,
               ticks: {
                 display: true,
+                beginAtZero: true,
               },
               gridLines: {
                 offsetGridLines: false,

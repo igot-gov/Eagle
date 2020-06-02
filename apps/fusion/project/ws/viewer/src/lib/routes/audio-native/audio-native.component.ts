@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
@@ -26,6 +23,7 @@ export class AudioNativeComponent implements OnInit, OnDestroy {
   > | null = null
   defaultThumbnail = ''
   isPreviewMode = false
+  forPreview = window.location.href.includes('/author/')
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -33,55 +31,41 @@ export class AudioNativeComponent implements OnInit, OnDestroy {
     private valueSvc: ValueService,
     private viewerSvc: ViewerUtilService,
     private configSvc: ConfigurationsService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.configSvc.instanceConfig.logos.defaultContent
     }
-    this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(
-      data => {
-        this.isScreenSizeSmall = data
-      },
-    )
-    if (this.activatedRoute.snapshot.queryParamMap.get('preview')) {
-      // to do make sure the data updates for two consecutive resource of same mimeType
-      this.viewerDataSubscription = this.viewerSvc.getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '').subscribe(
-        data => {
-          data.artifactUrl = `https://${data.artifactUrl}`
-          this.audioData = data
-          if (this.audioData) {
-            this.formDiscussionForumWidget(this.audioData)
-          }
-          this.isFetchingDataComplete = true
-        },
-      )
-      // this.htmlData = this.viewerDataSvc.resource
-    } else {
-      this.routeDataSubscription = this.activatedRoute.data.subscribe(
-        async data => {
-          this.audioData = data.content.data
-          if (this.audioData) {
-            this.formDiscussionForumWidget(this.audioData)
-            if (this.audioData.appIcon) {
-              this.defaultThumbnail = this.audioData.appIcon
-            } else {
-              if (this.configSvc.instanceConfig) {
-                this.defaultThumbnail = this.configSvc.instanceConfig.logos.defaultContent
-              }
+    this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
+      this.isScreenSizeSmall = data
+    })
+    this.routeDataSubscription = this.activatedRoute.data.subscribe(
+      async data => {
+        this.audioData = data.content.data
+        if (this.audioData) {
+          this.formDiscussionForumWidget(this.audioData)
+          this.audioData.artifactUrl = this.forPreview
+            ? this.viewerSvc.getAuthoringUrl(this.audioData.artifactUrl)
+            : this.audioData.artifactUrl
+          if (this.audioData.appIcon) {
+            this.defaultThumbnail = this.forPreview
+              ? this.viewerSvc.getAuthoringUrl(this.audioData.appIcon)
+              : this.audioData.appIcon
+          } else {
+            if (this.configSvc.instanceConfig) {
+              this.defaultThumbnail = this.configSvc.instanceConfig.logos.defaultContent
             }
-
           }
-          if (this.audioData && this.audioData.artifactUrl.indexOf('content-store') >= 0) {
-            await this.setS3Cookie(this.audioData.identifier)
-          }
-          this.saveContinueLearning(this.audioData)
-          this.isFetchingDataComplete = true
-        },
-        () => {
-        },
-      )
-    }
+        }
+        if (this.audioData && this.audioData.artifactUrl.indexOf('content-store') >= 0) {
+          await this.setS3Cookie(this.audioData.identifier)
+        }
+        this.saveContinueLearning(this.audioData)
+        this.isFetchingDataComplete = true
+      },
+      () => {},
+    )
   }
 
   ngOnDestroy() {
@@ -97,14 +81,13 @@ export class AudioNativeComponent implements OnInit, OnDestroy {
   }
 
   saveContinueLearning(content: NsContent.IContent | null) {
-    this.contentSvc.saveContinueLearning(
-      {
+    this.contentSvc
+      .saveContinueLearning({
         contextPathId: content ? content.identifier : '',
         resourceId: content ? content.identifier : '',
         data: JSON.stringify({ timestamp: Date.now() }),
         dateAccessed: Date.now(),
-      },
-    )
+      })
       .toPromise()
       .catch()
   }
@@ -117,6 +100,7 @@ export class AudioNativeComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.LEARNING,
         title: content.name,
         initialPostCount: 2,
+        isDisabled: this.forPreview,
       },
       widgetSubType: 'discussionForum',
       widgetType: 'discussionForum',
@@ -132,5 +116,4 @@ export class AudioNativeComponent implements OnInit, OnDestroy {
       })
     return
   }
-
 }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { Router, ActivatedRoute } from '@angular/router'
@@ -21,6 +18,7 @@ export class AccountDetailsComponent implements OnInit {
   contentStripsHash = {}
   accountsData: IIndustries = {}
   accountsActive = false
+  updateCalled = false
   contentStrips = [
     {
       id: 'overview',
@@ -38,7 +36,7 @@ export class AccountDetailsComponent implements OnInit {
   selectedTab: string
   selectedAccount: string
   selectedPortfolio: string
-  selectedPillar = 'Experience'
+  selectedPillar = 'Accelerate'
   selectedTheme: string
   noData = false
 
@@ -47,69 +45,66 @@ export class AccountDetailsComponent implements OnInit {
   overviewWidgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
     NsContentStripMultiple.IContentStripMultiple
   > = {
-    widgetType: 'contentStrip',
-    widgetSubType: 'contentStripMultiple',
-    widgetData: {
-      strips: [
-        {
-          key: 'overview-strip',
-          preWidgets: [],
-          title: 'Overview',
-          filters: [],
-          request: {
-            ids: [],
+      // tslint:disable-next-line: ter-indent
+      widgetType: 'contentStrip',
+      // tslint:disable-next-line: ter-indent
+      widgetSubType: 'contentStripMultiple',
+      // tslint:disable-next-line: ter-indent
+      widgetData: {
+        strips: [
+          {
+            key: 'overview-strip',
+            preWidgets: [],
+            title: 'Overview',
+            filters: [],
+            request: {
+              ids: [],
+            },
           },
+          {
+            key: 'gtm-strip',
+            preWidgets: [],
+            title: 'Contents',
+            filters: [],
+            request: {
+              ids: [],
+            },
+          },
+          {
+            key: 'tech-strip',
+            preWidgets: [],
+            title: 'Tech Skills',
+            filters: [],
+            request: {
+              ids: [],
+            },
+          },
+        ],
+        errorWidget: {
+          widgetType: 'errorResolver',
+          widgetSubType: 'errorResolver',
+          widgetData: {
+            errorType: 'contentUnavailable',
+          },
+        }, noDataWidget: {
+          widgetData: {
+            // tslint:disable-next-line: max-line-length
+            html: '<div class="padding-s"> <div class="margin-bottom-s margin-top-m" i18n> <p class = "mat-h2 padding-left-m padding-right-m text-center margin-top-l font-weight">Contents will appear soon...</div>',
+            containerStyle: {},
+          },
+          widgetSubType: 'elementHtml',
+          widgetType: 'element',
         },
-      ],
-    },
-  }
+        loader: true,
+      },
+      // tslint:disable-next-line: ter-indent
+    }
 
   errorWidget: NsWidgetResolver.IRenderConfigWithTypedData<NsError.IWidgetErrorResolver> = {
     widgetType: ROOT_WIDGET_CONFIG.errorResolver._type,
     widgetSubType: ROOT_WIDGET_CONFIG.errorResolver.errorResolver,
     widgetData: {
       errorType: 'contentUnavailable',
-    },
-  }
-
-  gtmWidgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
-    NsContentStripMultiple.IContentStripMultiple
-  > = {
-    widgetType: 'contentStrip',
-    widgetSubType: 'contentStripMultiple',
-    widgetData: {
-      strips: [
-        {
-          key: 'gtm-strip',
-          preWidgets: [],
-          title: 'Contents',
-          filters: [],
-          request: {
-            ids: [],
-          },
-        },
-      ],
-      errorWidget: this.errorWidget,
-    },
-  }
-
-  techwidgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
-    NsContentStripMultiple.IContentStripMultiple
-  > = {
-    widgetType: 'contentStrip',
-    widgetSubType: 'contentStripMultiple',
-    widgetData: {
-      strips: [
-        {
-          key: 'tech-strip',
-          preWidgets: [],
-          title: 'Tech Skills',
-          filters: [],
-          request: {
-            ids: [],
-          },
-        },
-      ],
     },
   }
 
@@ -130,19 +125,15 @@ export class AccountDetailsComponent implements OnInit {
     this.accountsData = this.route.snapshot.data.pageData.data
 
     this.tabs = Object.keys(this.accountsData).sort()
-    // this.logger.log('accounts', this.accountsData)
     this.routeSubscription = this.route.params.subscribe(params => {
       if (params['tab']) {
         this.selectedTab = params.tab.toLowerCase() || 'communications'
         // this.logger.log('selected', this.selectedTab)
         const data = this.accountsData[this.selectedTab]
-        // this.logger.log('data', data, Object.keys(data))
         if (Object.keys(data).length) {
-          // this.logger.log('data exits', this.accountsData[this.selectedTab])
           this.noData = false
           this.updateData()
         } else {
-          // this.logger.log('No data inside')
           this.noData = true
         }
       } else {
@@ -153,6 +144,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   updateData() {
+    this.updateCalled = true
     this.fetchingContentData = true
     // this.logger.log('tab', this.selectedTab)
     this.selectedAccount = this.fetchAccounts()[0]
@@ -163,9 +155,9 @@ export class AccountDetailsComponent implements OnInit {
     this.selectedTheme = this.fetchThemes()[0]
     // this.logger.log('Check theme', this.selectedTheme)
 
-//     const pillars: ISubPillar = this.accountsData[this.selectedTab][this.selectedAccount][
-// this.selectedPortfolio
-// ][this.selectedPillar][this.selectedTheme]
+    //     const pillars: ISubPillar = this.accountsData[this.selectedTab][this.selectedAccount][
+    // this.selectedPortfolio
+    // ][this.selectedPillar][this.selectedTheme]
     // this.logger.log('Check pillars', pillars)
     this.updateContentStrip()
   }
@@ -177,48 +169,40 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   updateContentStrip() {
-    const pillars: ISubPillar = this.accountsData[this.selectedTab][this.selectedAccount][
-      this.selectedPortfolio
-][this.selectedPillar][this.selectedTheme]
+    if (this.updateCalled) {
+      const pillars: ISubPillar = this.accountsData[this.selectedTab][this.selectedAccount][
+        this.selectedPortfolio][this.selectedPillar][this.selectedTheme]
 
-    const gtmIds: string[] = []
-    const overViewIds: string[] = []
-    const techIds: string[] = []
+      const gtmIds: string[] = []
+      const overViewIds: string[] = []
+      const techIds: string[] = []
 
-    pillars.gtm.forEach((pillarSection: IPillarSection) => {
-      gtmIds.push(pillarSection.identifier)
-    })
+      pillars.gtm.forEach((pillarSection: IPillarSection) => {
+        gtmIds.push(pillarSection.identifier)
+      })
 
-    pillars.overview.forEach((pillarSection: IPillarSection) => {
-      overViewIds.push(pillarSection.identifier)
-    })
+      pillars.overview.forEach((pillarSection: IPillarSection) => {
+        overViewIds.push(pillarSection.identifier)
+      })
 
-    pillars.tech.forEach((pillarSection: IPillarSection) => {
-      techIds.push(pillarSection.identifier)
-    })
+      pillars.tech.forEach((pillarSection: IPillarSection) => {
+        techIds.push(pillarSection.identifier)
+      })
 
-    this.overviewWidgetResolverData.widgetData.strips.forEach(strip => {
-      if (strip.key === 'overview-strip' && strip.request) {
-        strip.request.ids = overViewIds
-      }
-    })
-    this.overviewWidgetResolverData = { ...this.overviewWidgetResolverData }
-    this.gtmWidgetResolverData.widgetData.strips.forEach(strip => {
-      if (strip.key === 'gtm-strip' && strip.request) {
-        strip.request.ids = gtmIds
-      }
-    })
-    // this.logger.log('gtm', this.gtmWidgetResolverData)
-
-    this.gtmWidgetResolverData = { ...this.gtmWidgetResolverData }
-    this.techwidgetResolverData.widgetData.strips.forEach(strip => {
-      if (strip.key === 'tech-strip' && strip.request) {
-        strip.request.ids = techIds
-      }
-    })
-    // this.logger.log('tech', this.techwidgetResolverData)
-
-    this.techwidgetResolverData = { ...this.techwidgetResolverData }
+      this.overviewWidgetResolverData.widgetData.strips.forEach(strip => {
+        if (strip.key === 'overview-strip' && strip.request && strip.request.ids) {
+          const overviewSet = new Set(overViewIds)
+          strip.request.ids = Array.from(overviewSet)
+        } else if (strip.key === 'gtm-strip' && strip.request) {
+          strip.request.ids = gtmIds
+        } else if (strip.key === 'tech-strip' && strip.request) {
+          strip.request.ids = techIds
+        }
+      })
+      this.overviewWidgetResolverData = { ...this.overviewWidgetResolverData }
+      this.updateCalled = false
+      // this.logger.log('gtm', this.gtmWidgetResolverData)
+    }
   }
 
   knowMoreClicked(lpItem: ILpData) {
@@ -245,8 +229,7 @@ export class AccountDetailsComponent implements OnInit {
     try {
       return Object.keys(
         this.accountsData[this.selectedTab][this.selectedAccount][this.selectedPortfolio][
-          this.selectedPillar
-],
+        this.selectedPillar],
       )
     } catch (e) {
       return []
@@ -254,6 +237,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   accountClicked(account: string) {
+    this.updateCalled = true
     this.selectedAccount = account
     this.selectedPortfolio = this.fetchPortfolios()[0]
     this.selectedTheme = this.fetchThemes()[0]
@@ -267,18 +251,24 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   portfolioClicked(portfolio: string) {
+    this.updateCalled = true
     this.selectedPortfolio = portfolio
     this.selectedTheme = this.fetchThemes()[0]
     this.updateContentStrip()
   }
 
   pillarClicked(pillar: string) {
-    this.selectedPillar = pillar
-    this.selectedTheme = this.fetchThemes()[0]
-    this.updateContentStrip()
+    if (this.selectedPillar !== pillar) {
+      this.updateCalled = true
+      this.selectedPillar = pillar
+      this.selectedTheme = this.fetchThemes()[0]
+      this.updateContentStrip()
+      this.selectedPillar = pillar
+    }
   }
 
   themeClicked(theme: string) {
+    this.updateCalled = true
     this.selectedTheme = theme
     this.updateContentStrip()
   }
@@ -301,6 +291,22 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   navigate(event: MatTabChangeEvent) {
+    this.updateCalled = true
+    this.routeSubscription = this.route.params.subscribe(params => {
+      if (params['tab']) {
+        this.selectedTab = params.tab.toLowerCase() || 'communications'
+        const data = this.accountsData[this.selectedTab]
+        if (Object.keys(data).length) {
+          this.noData = false
+          this.updateData()
+        } else {
+          this.noData = true
+        }
+      } else {
+        this.selectedTab = 'communications'
+        this.updateData()
+      }
+    })
     this.noData = false
     this.router.navigateByUrl(this.baseAccountsUrl + event.tab.textLabel)
   }

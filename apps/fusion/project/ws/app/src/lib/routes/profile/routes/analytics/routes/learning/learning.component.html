@@ -1,15 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div *ngIf="nsoFetchStatus === 'fetching' && userFetchStatus === 'fetching'" class="margin-top-xl flex flex-center">
+<div *ngIf="nsoFetchStatus === 'fetching' && userFetchStatus === 'fetching'"
+  class="margin-xl padding-xl flex flex-center">
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="nsoFetchStatus === 'done' && userFetchStatus === 'done'">
   <div class="margin-top-xl flex flex-center flex-around flex-wrapped">
-    <ws-app-tile class="tile-card" [icon]="'adjust'" [value]="userProgressData?.goal_shared_by_me?.length" [subTitle]="'Goals Shared By Me'"></ws-app-tile>
-    <ws-app-tile class="tile-card" [icon]="'description'" [value]="nsoData?.artifacts_shared?.length" [subTitle]="'Artifacts Shared By Me'"></ws-app-tile>
-    <ws-app-tile class="tile-card" [icon]="'account_circle'" [value]="nsoData?.experts_contacted?.length" [subTitle]="'Experts I Contacted'"></ws-app-tile>
-    <ws-app-tile class="tile-card" [icon]="'code'" [value]="nsoData?.playground_details?.length" [subTitle]="'Playgrounds'"></ws-app-tile>
+    <ws-app-tile class="tile-card" [icon]="'adjust'" [value]="userProgressData?.goal_shared_by_me?.length"
+      [subTitle]="'Goals Shared By Me'"></ws-app-tile>
+    <ws-app-tile class="tile-card" [icon]="'description'" [value]="nsoData?.artifacts_shared?.length"
+      [subTitle]="'Artifacts Shared By Me'"></ws-app-tile>
+    <ws-app-tile class="tile-card" [icon]="'account_circle'" [value]="nsoData?.experts_contacted?.length"
+      [subTitle]="'Experts I Contacted'"></ws-app-tile>
+    <ws-app-tile class="tile-card" [icon]="'code'" [value]="nsoData?.playground_details?.length"
+      [subTitle]="'Playgrounds'"></ws-app-tile>
   </div>
   <div class="margin-top-l">
     <mat-tab-group dynamicHeight>
@@ -21,8 +23,8 @@
                 <div class="progress-circular">
                   <div class="progress-circular-container">
                     <div class="progress-circular-empty"></div>
-                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'" [spinValue]="item.progress * 100"
-                      [spinColor]="'primary'" class="progress-circular-full">
+                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'"
+                      [spinValue]="item.progress * 100" [spinColor]="'primary'" class="progress-circular-full">
                     </ws-app-progress-spinner>
                     <div class="progress-circular-value">{{item.progress * 100 | number: '1.0-0'}}%</div>
                   </div>
@@ -53,8 +55,8 @@
                 <div class="progress-circular">
                   <div class="progress-circular-container">
                     <div class="progress-circular-empty"></div>
-                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'" [spinValue]="item.progress * 100"
-                      [spinColor]="'primary'" class="progress-circular-full">
+                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'"
+                      [spinValue]="item.progress * 100" [spinColor]="'primary'" class="progress-circular-full">
                     </ws-app-progress-spinner>
                     <div class="progress-circular-value">{{item.progress * 100 | number: '1.0-0'}}%</div>
                   </div>
@@ -107,8 +109,8 @@
                 <div class="progress-circular">
                   <div class="progress-circular-container">
                     <div class="progress-circular-empty"></div>
-                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'" [spinValue]="item.progress * 100"
-                      [spinColor]="'primary'" class="progress-circular-full">
+                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'"
+                      [spinValue]="item.progress * 100" [spinColor]="'primary'" class="progress-circular-full">
                     </ws-app-progress-spinner>
                     <div class="progress-circular-value">{{item.progress * 100 | number: '1.0-0'}}%</div>
                   </div>
@@ -142,8 +144,8 @@
                 <div class="progress-circular">
                   <div class="progress-circular-container">
                     <div class="progress-circular-empty"></div>
-                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'" [spinValue]="item.progress * 100"
-                      [spinColor]="'primary'" class="progress-circular-full">
+                    <ws-app-progress-spinner [spinMode]="'determinate'" [spinSize]="'medium'" [spinWidth]="'thin'"
+                      [spinValue]="item.progress * 100" [spinColor]="'primary'" class="progress-circular-full">
                     </ws-app-progress-spinner>
                     <div class="progress-circular-value">{{item.progress * 100 | number: '1.0-0'}}%</div>
                   </div>
@@ -231,6 +233,6 @@
 </div>
 <div *ngIf="nsoFetchStatus === 'error' && userFetchStatus === 'error'" class="margin-xl mat-elevation-z2">
   <h2 i18n class="flex flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
-    We are gathering the data to provide insights! Coming soon...
+    We are gathering the data to provide insights!
   </h2>
 </div>

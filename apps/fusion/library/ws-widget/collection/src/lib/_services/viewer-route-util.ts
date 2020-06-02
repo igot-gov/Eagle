@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsContent } from './widget-content.model'
 
 export const VIEWER_ROUTE_FROM_MIME = (mimeType: NsContent.EMimeTypes) => {
@@ -12,7 +9,7 @@ export const VIEWER_ROUTE_FROM_MIME = (mimeType: NsContent.EMimeTypes) => {
     case NsContent.EMimeTypes.COLLECTION:
       return 'html'
     case NsContent.EMimeTypes.CHANNEL:
-    case ('application/json' as any):
+    case 'application/json' as any:
       return 'channel'
     case NsContent.EMimeTypes.CERTIFICATION:
       return 'certification'
@@ -55,14 +52,15 @@ export function viewerRouteGenerator(
   mimeType: NsContent.EMimeTypes,
   collectionId?: string,
   collectionType?: string,
-): { url: string, queryParams: { [key: string]: any } } {
+  forPreview = false,
+): { url: string; queryParams: { [key: string]: any } } {
   let collId = collectionId
   let collType = collectionType
   if (collType && !NsContent.PLAYER_SUPPORTED_COLLECTION_TYPES.includes(collType)) {
     collId = undefined
     collType = undefined
   }
-  const url = `/viewer/${VIEWER_ROUTE_FROM_MIME(mimeType)}/${id}`
+  const url = `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(mimeType)}/${id}`
   let queryParams = {}
   if (collectionId && collectionType) {
     queryParams = { collectionId: collId, collectionType: collType }

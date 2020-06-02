@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="inputType === 'upload'">
   <button class="button" mat-stroked-button (click)="videoFile.click()">
     <ng-container *ngIf="!content?.url">
@@ -21,26 +18,49 @@
         Change Audio (less than 200MB)
       </ng-container>
     </ng-container>
-    <input type="file" (change)="upload($event.target.files[0], isVideo ? 'video' : 'audio'); videoFile.value = null"
-      class="hidden" #videoFile [accept]="isVideo ? '.mp4' : '.mp3'" />
+    <input
+      type="file"
+      (change)="upload($event.target.files[0], isVideo ? 'video' : 'audio'); videoFile.value = null"
+      class="hidden"
+      #videoFile
+      [accept]="isVideo ? '.mp4' : '.mp3'"
+    />
   </button>
-
   <button class="button" mat-stroked-button (click)="imageFile.click()">
-    <ng-container *ngIf="!content?.posterImage" i18n>Choose Poster Image (less than 1MB)</ng-container>
-    <ng-container *ngIf="content?.posterImage" i18n>Change Poster Image (less than 1MB)</ng-container>
-    <input type="file" (change)="upload($event.target.files[0], 'image'); imageFile.value = null" class="hidden"
-      #imageFile accept="image/*" />
+    <ng-container *ngIf="!content?.posterImage" i18n
+      >Choose Poster Image (less than 1MB)</ng-container
+    >
+    <ng-container *ngIf="content?.posterImage" i18n
+      >Change Poster Image (less than 1MB)</ng-container
+    >
+    <input
+      type="file"
+      (change)="upload($event.target.files[0], 'image'); imageFile.value = null"
+      class="hidden"
+      #imageFile
+      accept="image/*"
+    />
   </button>
 </ng-container>
 
 <ng-container *ngIf="inputType !== 'upload'">
   <mat-label i18n>* Type in content Id or use the search below to choose</mat-label>
-  <ws-auth-chips (data)="onContentSelection(undefined, $event)" [placeholderType]="'collection'" [type]="'array'"
-    [content]="contentId"></ws-auth-chips>
+  <ws-auth-chips
+    (data)="onContentSelection(undefined, $event)"
+    [placeholderType]="'collection'"
+    [type]="'array'"
+    [content]="contentId"
+  ></ws-auth-chips>
 
-  <ws-widget-picker-content [showFilter]="false" [customSearchFilters]="filters" [selectionType]="'radio'"
-    [widgetData]="pickerContentData" [selectedContentTypes]="['Resource']" [content]="'resource'"
-    (change)="onContentSelection($event)">
+  <ws-widget-picker-content
+    [showFilter]="false"
+    [customSearchFilters]="filters"
+    [selectionType]="'radio'"
+    [widgetData]="pickerContentData"
+    [selectedContentTypes]="['Resource']"
+    [content]="'resource'"
+    (change)="onContentSelection($event)"
+  >
   </ws-widget-picker-content>
 </ng-container>
 
@@ -69,8 +89,14 @@
 
 <mat-form-field class="button">
   <mat-label i18n>Resume From</mat-label>
-  <input type="number" matInput #resumePoint name="resumePoint" [value]="content?.resumePoint || 0"
-    (change)="update('resumePoint', resumePoint.value)" />
+  <input
+    type="number"
+    matInput
+    #resumePoint
+    name="resumePoint"
+    [value]="content?.resumePoint || 0"
+    (change)="update('resumePoint', resumePoint.value)"
+  />
 </mat-form-field>
 
 <!-- <div class="button">

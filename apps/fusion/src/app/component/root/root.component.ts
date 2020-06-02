@@ -1,8 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
-  // ApplicationRef,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -25,10 +21,12 @@ import {
   ConfigurationsService,
   TelemetryService,
   ValueService,
+  WsEvents,
 } from '@ws-widget/utils'
-import { delay } from 'rxjs/operators'
+import { delay, filter } from 'rxjs/operators'
 import { MobileAppsService } from '../../services/mobile-apps.service'
 import { RootService } from './root.service'
+import { fromEvent } from 'rxjs'
 // import { SwUpdate } from '@angular/service-worker'
 // import { environment } from '../../../environments/environment'
 // import { MatDialog } from '@angular/material'
@@ -50,8 +48,13 @@ export class RootComponent implements OnInit, AfterViewInit {
   isXSmall$ = this.valueSvc.isXSmall$
   routeChangeInProgress = false
   showNavbar = false
+  showFooter = false
   currentUrl!: string
-
+  isNavBarRequired = false
+  isInIframe = false
+  appStartRaised = false
+  isSetupPage = false
+  showChatBot = false
   constructor(
     private router: Router,
     public authSvc: AuthKeycloakService,
@@ -67,9 +70,55 @@ export class RootComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    try {
+      this.isInIframe = window.self !== window.top
+    } catch (_ex) {
+      this.isInIframe = false
+    }
+    if (this.isInIframe) {
+      setTimeout(() => {
+        window.parent.postMessage(
+          {
+            requestId: 'LOADED',
+            subApplicationName: window.location.hostname,
+          },
+          '*',
+        )
+        // tslint:disable-next-line: align
+      }, 500)
+      fromEvent<MessageEvent>(window, 'message')
+        .pipe(
+          filter(
+            (event: MessageEvent) =>
+              Boolean(event) &&
+              Boolean(event.data) &&
+              Boolean(event.source && typeof event.source.postMessage === 'function'),
+          ),
+        )
+        .subscribe(async (event: MessageEvent) => {
+          if (event.data.requestId) {
+            switch (event.data.requestId) {
+              case 'HIDE_NAVBAR':
+                this.rootSvc.showNavbarDisplay$.next(false)
+                break
+              case 'HIDE_FOOTER':
+                this.rootSvc.showFooterDisplay$.next(false)
+                break
+              case 'HIDE_HEADER':
+                this.rootSvc.showHeaderDisplay$.next(false)
+                break
+              case 'HIDE_CHATBOT':
+                this.rootSvc.showChatBotDisplay$.next(false)
+                break
+              default:
+                break
+            }
+          }
+        })
+    }
     // Dynamically adding of routes based on environment
     // if (
-path
+    //   window.location.href.toLowerCase().indexOf('siemens') > -1 ||
     //   window.location.href.toLowerCase().indexOf('localhost') > -1
     // ) {
     //   const routerConfig = this.router.config
@@ -86,9 +135,22 @@ path
     // Application start telemetry
     if (this.authSvc.isAuthenticated) {
       this.telemetrySvc.start('app', 'view', '')
+      this.appStartRaised = true
     }
     this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('/setup/')) {
+          this.isSetupPage = true
+        }
+      }
       if (event instanceof NavigationStart) {
+        if (event.url.includes('preview') || event.url.includes('embed')) {
+          this.isNavBarRequired = false
+        } else if (event.url.includes('author/') && this.isInIframe) {
+          this.isNavBarRequired = false
+        } else {
+          this.isNavBarRequired = true
+        }
         this.routeChangeInProgress = true
         this.changeDetector.detectChanges()
       } else if (
@@ -103,10 +165,20 @@ path
 
       if (event instanceof NavigationEnd) {
         this.telemetrySvc.impression()
+        if (this.appStartRaised) {
+          this.telemetrySvc.audit(WsEvents.WsAuditTypes.Created, 'Login', {})
+          this.appStartRaised = false
+        }
       }
     })
     this.rootSvc.showNavbarDisplay$.pipe(delay(500)).subscribe(display => {
       this.showNavbar = display
+    })
+    this.rootSvc.showFooterDisplay$.pipe(delay(500)).subscribe(display => {
+      this.showFooter = display
+    })
+    this.rootSvc.showChatBotDisplay$.pipe(delay(500)).subscribe(display => {
+      this.showChatBot = display
     })
   }
 

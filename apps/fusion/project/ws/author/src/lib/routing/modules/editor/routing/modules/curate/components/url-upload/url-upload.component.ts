@@ -1,20 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { IFormMeta } from './../../../../../../../../interface/form'
-import { AuthInitService } from './../../../../../../../../services/init.service'
-import { IprDialogComponent } from '@ws/author/src/lib/modules/shared/components/ipr-dialog/ipr-dialog.component'
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core'
-import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
 import { MatDialog } from '@angular/material/dialog'
-import { NSContent } from '@ws/author/src/lib/interface/content'
-import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
-import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
-import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { ConfigurationsService } from '@ws-widget/utils'
-import { URLCheckerClass } from './url-upload.helper'
+import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
+import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import { NSContent } from '@ws/author/src/lib/interface/content'
+import { IprDialogComponent } from '@ws/author/src/lib/modules/shared/components/ipr-dialog/ipr-dialog.component'
+import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
+import { IFormMeta } from './../../../../../../../../interface/form'
+import { AuthInitService } from './../../../../../../../../services/init.service'
+import { URLCheckerClass } from './url-upload.helper'
 
 @Component({
   selector: 'ws-auth-url-upload',
@@ -26,6 +23,7 @@ export class UrlUploadComponent implements OnInit {
   iprAccepted = false
   currentContent = ''
   canUpdate = true
+  @Input() isCollectionEditor = false
   @Input() isSubmitPressed = false
   @Output() data = new EventEmitter<string>()
 
@@ -36,15 +34,24 @@ export class UrlUploadComponent implements OnInit {
     private contentService: EditorContentService,
     private configSvc: ConfigurationsService,
     private initService: AuthInitService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.contentService.changeActiveCont.subscribe(
-      data => {
-        this.currentContent = data
-        this.assignData(this.contentService.getUpdatedMeta(data))
-      },
-    )
+    this.currentContent = this.contentService.currentContent
+    this.contentService.changeActiveCont.subscribe(data => {
+      this.currentContent = data
+      this.triggerDataChange()
+    })
+  }
+
+  triggerDataChange() {
+    const updatedMeta = this.contentService.getUpdatedMeta(this.currentContent)
+    if (
+      !this.isCollectionEditor ||
+      (this.isCollectionEditor && updatedMeta.category === 'Resource')
+    ) {
+      this.assignData(updatedMeta)
+    }
   }
 
   createForm() {
@@ -55,21 +62,17 @@ export class UrlUploadComponent implements OnInit {
       isInIntranet: ['', Validators.required],
       isExternal: [],
     })
-    this.urlUploadForm.valueChanges.subscribe(
-      () => {
-        if (this.canUpdate) {
-          this.storeData()
-        }
-      },
-    )
-    this.urlUploadForm.controls.artifactUrl.valueChanges.subscribe(
-      () => {
-        if (this.canUpdate) {
-          this.check()
-          this.iprAccepted = false
-        }
-      },
-    )
+    this.urlUploadForm.valueChanges.subscribe(() => {
+      if (this.canUpdate) {
+        this.storeData()
+      }
+    })
+    this.urlUploadForm.controls.artifactUrl.valueChanges.subscribe(() => {
+      if (this.canUpdate) {
+        this.check()
+        this.iprAccepted = false
+      }
+    })
   }
 
   assignData(meta: NSContent.IContentMeta) {
@@ -81,7 +84,7 @@ export class UrlUploadComponent implements OnInit {
     this.urlUploadForm.controls.mimeType.setValue(meta.mimeType || 'application/html')
     this.urlUploadForm.controls.isIframeSupported.setValue(meta.isIframeSupported || 'No')
     this.urlUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
-    this.urlUploadForm.controls.isExternal.setValue(meta.isExternal || true)
+    this.urlUploadForm.controls.isExternal.setValue(true)
     this.canUpdate = true
     if (meta.artifactUrl) {
       this.iprAccepted = true
@@ -127,22 +130,28 @@ export class UrlUploadComponent implements OnInit {
     const originalMeta = this.contentService.getOriginalMeta(this.currentContent)
     const currentMeta = this.urlUploadForm.value
     const meta: any = {}
+    if (currentMeta.artifactUrl && !this.iprAccepted) {
+      return
+    }
     Object.keys(currentMeta).map(v => {
       if (
         JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
         JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
       ) {
-        if (currentMeta[v] ||
-          (
-            this.initService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
-            meta[v] === false
-          )
+        if (
+          currentMeta[v] ||
+          (this.initService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
+            meta[v] === false)
         ) {
           meta[v] = currentMeta[v]
         } else {
           meta[v] = JSON.parse(
-            JSON.stringify(this.initService.authConfig[v as keyof IFormMeta]
-              .defaultValue[originalMeta.contentType][0].value),
+            JSON.stringify(
+              this.initService.authConfig[v as keyof IFormMeta].defaultValue[
+                originalMeta.contentType
+                // tslint:disable-next-line: ter-computed-property-spacing
+              ][0].value,
+            ),
           )
         }
       }
@@ -154,8 +163,10 @@ export class UrlUploadComponent implements OnInit {
     let disableIframe = false
     const artifactUrl = this.urlUploadForm.controls.artifactUrl.value
     this.canUpdate = false
-    if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.authoring
-      && this.configSvc.instanceConfig.authoring.urlPatternMatching
+    if (
+      this.configSvc.instanceConfig &&
+      this.configSvc.instanceConfig.authoring &&
+      this.configSvc.instanceConfig.authoring.urlPatternMatching
     ) {
       this.configSvc.instanceConfig.authoring.urlPatternMatching.map(v => {
         if (artifactUrl.match(v.pattern)) {
@@ -169,7 +180,9 @@ export class UrlUploadComponent implements OnInit {
           if (v.allowReplace) {
             switch (v.source) {
               case 'youtube':
-                this.urlUploadForm.controls.artifactUrl.setValue(URLCheckerClass.youTubeUrlChange(artifactUrl))
+                this.urlUploadForm.controls.artifactUrl.setValue(
+                  URLCheckerClass.youTubeUrlChange(artifactUrl),
+                )
                 this.urlUploadForm.controls.mimeType.setValue('video/x-youtube')
                 break
             }
@@ -199,5 +212,4 @@ export class UrlUploadComponent implements OnInit {
     }
     return false
   }
-
 }

@@ -1,11 +1,8 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="content">
   <ng-container *ngIf="isCollection">
     <div class="card-collection">
-      <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail" (click)="viewChildren = !viewChildren"
-        [wsUtilsDefaultThumbnail]="defaultThumbnail" />
+      <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail"
+        (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
       <div class="flex flex-between width-expand">
         <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
           <h2 class="margin-remove text-truncate">{{ content?.name }}</h2>
@@ -95,8 +92,8 @@
       </button>
     </div>
     <div class="children-container" *ngIf="viewChildren">
-      <ws-app-toc-content-card [content]="child" [expandAll]="expandAll" [rootId]="rootId" [rootContentType]="rootContentType"
-        *ngFor="let child of content?.children; trackBy: contentTrackBy">
+      <ws-app-toc-content-card [forPreview]="forPreview" [content]="child" [expandAll]="expandAll" [rootId]="rootId"
+        [rootContentType]="rootContentType" *ngFor="let child of content?.children; trackBy: contentTrackBy">
       </ws-app-toc-content-card>
     </div>
   </ng-container>
@@ -119,22 +116,24 @@
 </ng-container>
 
 <mat-menu #buttonMenu="matMenu">
-  <a mat-menu-item [routerLink]="'../../' + content?.identifier + '/overview'" [queryParams]="contextPath" class="flex flex-middle">
+  <a mat-menu-item [routerLink]="'../../' + content?.identifier + '/overview'" [queryParams]="contextPath"
+    class="flex flex-middle">
     <mat-icon>toc</mat-icon>
     <h3 class="margin-remove" i18n>
       View Details
     </h3>
   </a>
   <div mat-menu-item>
-    <ws-widget-btn-content-download [widgetData]="
+    <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
         content
           | pipePartialContent
-            : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal']
+            : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal',
+                  'artifactUrl']
       "></ws-widget-btn-content-download>
-    <ws-widget-btn-content-like [widgetData]="content | pipePartialContent: ['identifier']">
+    <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="content | pipePartialContent: ['identifier']">
     </ws-widget-btn-content-like>
-    <ws-widget-btn-content-share [widgetData]="content"></ws-widget-btn-content-share>
-    <ws-widget-btn-goals></ws-widget-btn-goals>
-    <ws-widget-btn-playlist></ws-widget-btn-playlist>
+    <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="content"></ws-widget-btn-content-share>
+    <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+    <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
   </div>
 </mat-menu>

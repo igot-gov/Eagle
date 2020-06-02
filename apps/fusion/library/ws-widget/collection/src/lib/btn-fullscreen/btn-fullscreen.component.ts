@@ -1,7 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Subscription, fromEvent } from 'rxjs'
 import {
@@ -19,6 +16,7 @@ import {
 export class BtnFullscreenComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<{ fsContainer: HTMLElement | null }> {
   @Input() widgetData!: { fsContainer: HTMLElement | null }
+  @Output() fsState: EventEmitter<boolean> = new EventEmitter()
 
   isFullScreenSupported = false
   isInFs = false
@@ -44,11 +42,23 @@ export class BtnFullscreenComponent extends WidgetBaseComponent
   toggleFs() {
     if (getFullScreenElement()) {
       requestExitFullScreen()
+      this.fsState.emit(false)
     } else if (this.widgetData.fsContainer) {
-      requestFullScreen(this.widgetData.fsContainer)
+      const pdfContainer = document.getElementById('pdfIframeContainer') as HTMLIFrameElement | null
+      if (pdfContainer) {
+        const window = pdfContainer.contentWindow as { [key: string]: any }
+        try {
+          window['PDFViewerApplication'].requestPresentationMode()
+        } catch (_err) {
+          requestFullScreen(this.widgetData.fsContainer)
+        }
+      } else {
+        requestFullScreen(this.widgetData.fsContainer)
+      }
+      this.fsState.emit(true)
       try {
         this.widgetData.fsContainer.classList.add('mat-app-background')
-      } catch (err) {}
+      } catch (err) { }
     }
   }
 }

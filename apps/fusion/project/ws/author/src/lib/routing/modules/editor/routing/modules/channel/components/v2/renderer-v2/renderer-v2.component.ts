@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit, OnChanges } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { responsiveSuffix, sizeSuffix } from '@ws-widget/collection/src/public-api'
@@ -57,6 +54,16 @@ export class RendererV2Component implements OnInit, OnChanges {
     if (this.widget.data.gutter != null) {
       this.containerClass = `-mx-${this.widget.data.gutter}`
     }
+    if (this.widget.data.rowGutter != null) {
+      const widgetArray = (this.containerClass || '').split(' ')
+      widgetArray.push(`pb-${this.widget.data.rowGutter}`)
+      this.containerClass = widgetArray.join(' ')
+    } else {
+      const widgetArray = (this.containerClass || '').split(' ')
+      widgetArray.push('pb-12')
+      this.containerClass = widgetArray.join(' ')
+    }
+    const rowGutterAdjustment = this.widget.data.rowGutter !== null ? `pb-${this.widget.data.rowGutter}` : ''
     const gutterAdjustment = this.widget.data.gutter !== null ? `p-${this.widget.data.gutter}` : ''
     this.widget.children.map(row => {
       const child = this.store.getUpdatedContent(row)
@@ -65,7 +72,7 @@ export class RendererV2Component implements OnInit, OnChanges {
         className: Object.entries(child.dimensions as Record<tDimensions, tSize>).reduce(
           (agg, [k, v]) =>
             `${agg} ${(responsiveSuffix as { [id: string]: string })[k]}:${sizeSuffix[v]}`,
-          `${child.className} w-full ${gutterAdjustment}`,
+          `${child.className} w-full ${gutterAdjustment} ${rowGutterAdjustment}`,
         ),
         styles: child.styles || {},
         isEmpty: child.widgetSubType ? false : true,
@@ -102,14 +109,14 @@ export class RendererV2Component implements OnInit, OnChanges {
     this.store.insertNewNode(node, rowNo ? index : undefined, rowNo ? true : false)
   }
 
-path
-path
-path
+  dragover_handler(ev: any, _index: number) {
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = 'copy'
   }
 
-path
-path
-path
+  drop_handler(ev: any, index: number) {
+    ev.preventDefault()
+    const data = ev.dataTransfer.getData('text/plain')
     let id = ''
     if (
       this.processedWidgets[index].length === 1 &&

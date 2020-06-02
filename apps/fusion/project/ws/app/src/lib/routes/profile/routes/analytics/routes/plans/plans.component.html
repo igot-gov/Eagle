@@ -1,7 +1,4 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div *ngIf="userFetchStatus === 'fetching'" class="margin-top-xl flex flex-center">
+<div *ngIf="userFetchStatus === 'fetching'" class="margin-xl padding-xl flex flex-center">
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="userFetchStatus === 'done'">
@@ -90,6 +87,6 @@
 </div>
 <div *ngIf="userFetchStatus === 'error'" class="margin-xl mat-elevation-z2">
   <h2 i18n class="flex flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
-    We are gathering the data to provide insights! Coming soon...
+    We are gathering the data to provide insights!
   </h2>
 </div>

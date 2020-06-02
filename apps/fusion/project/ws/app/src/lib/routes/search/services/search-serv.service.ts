@@ -1,32 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { NSSearch } from '@ws-widget/collection'
 import { ConfigurationsService, EventService, WsEvents } from '@ws-widget/utils'
 import { Observable, of } from 'rxjs'
 import { KnowledgeHubApiService } from '../../infy/routes/knowledge-hub/apis/knowledge-hub-api.service'
-import {
-  IKhubAutoMation,
-  IKhubFilterObj,
-  IKhubItemTile,
-  IKhubKshop,
-  IKhubProject,
-  IKhubViewResultDocs,
-  IKhubViewResultProject,
-  ISearchObjForSearch,
-} from '../../infy/routes/knowledge-hub/models/knowledgeHub.model'
+import { IKhubAutoMation, IKhubFilterObj, IKhubItemTile, IKhubKshop, IKhubProject, IKhubViewResultDocs, IKhubViewResultProject, ISearchObjForSearch } from '../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { SearchApiService } from '../apis/search-api.service'
-import {
-  IFilterUnitItem,
-  IFilterUnitResponse,
-  ISearchAutoComplete,
-  ISearchQuery,
-  ISearchRequest,
-  ISearchSocialSearchPartialRequest,
-  ISocialSearchRequest,
-} from '../models/search.model'
+import { IFilterUnitItem, IFilterUnitResponse, ISearchAutoComplete, ISearchQuery, ISearchRequest, ISearchSocialSearchPartialRequest, ISocialSearchRequest } from '../models/search.model'
 
 const API_END_POINTS = {
   translateFiltersBase: '/apis/protected/v8/translate/filterdata',
@@ -54,7 +34,7 @@ export class SearchServService {
     return { en: {}, all: {} }
   }
 
-  async getSearchConfig() {
+  async getSearchConfig(): Promise<any> {
     if (!this.searchConfig) {
       this.searchConfig = {}
       const baseUrl = this.configSrv.sitePath
@@ -74,7 +54,10 @@ export class SearchServService {
 
   searchAutoComplete(params: ISearchQuery): Promise<ISearchAutoComplete[]> {
     params.q = params.q.toLowerCase()
-    return this.searchApi.getSearchAutoCompleteResults(params).toPromise()
+    if (params.l.split(',').length === 1 && params.l.toLowerCase() !== 'all') {
+      return this.searchApi.getSearchAutoCompleteResults(params).toPromise()
+    }
+    return Promise.resolve([])
   }
 
   getLearning(request: ISearchRequest): Observable<NSSearch.ISearchV6ApiResult> {
@@ -88,6 +71,7 @@ export class SearchServService {
       pageNo: request.pageNo || undefined,
       pageSize: request.pageSize || undefined,
       query: request.query,
+      didYouMean: request.didYouMean,
       filters: [
         {
           andFilters: Object.keys(request.filters || {}).map(key => {
@@ -97,6 +81,7 @@ export class SearchServService {
       ],
       visibleFilters: {},
       isStandAlone: request.hasOwnProperty('isStandAlone') ? request.isStandAlone : undefined,
+      sort: request.hasOwnProperty('sort') ? request.sort && request.sort.length ? request.sort : undefined : undefined,
     }
     this.getSearchConfig().then(config => {
       v6Request.visibleFilters = config.search.visibleFilters
@@ -149,6 +134,22 @@ export class SearchServService {
       filterReset: filtersResetAble,
     }
   }
+
+  transformSearchV6Filters(v6filters: NSSearch.ISearchV6Filters[]) {
+    const filters: any = {}
+    v6filters.forEach((f => {
+      if (f.andFilters) {
+        f.andFilters.forEach(andFilter => {
+          Object.keys(andFilter).forEach(key => {
+            filters[key] = andFilter[key]
+          })
+
+        })
+      }
+    }))
+    return filters
+  }
+
   handleFilters(
     filters: IFilterUnitResponse[],
     selectedFilterSet: Set<string>,
@@ -377,7 +378,7 @@ export class SearchServService {
     return name
   }
 
-  raiseSearchEvent(query: string, filters: any) {
+  raiseSearchEvent(query: string, filters: any, locale: any) {
     this.events.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
       eventType: WsEvents.WsEventType.Telemetry,
       eventLogLevel: WsEvents.WsEventLogLevel.Warn,
@@ -386,6 +387,7 @@ export class SearchServService {
         object: {
           query,
           filters,
+          locale,
         },
         type: 'search',
       },
@@ -394,13 +396,14 @@ export class SearchServService {
     })
   }
 
-  raiseSearchResponseEvent(query: string, filters: any, totalHits: number) {
+  raiseSearchResponseEvent(query: string, filters: any, totalHits: number, locale: any) {
     this.events.dispatchEvent<WsEvents.IWsEventTelemetrySearch>({
       eventType: WsEvents.WsEventType.Telemetry,
       eventLogLevel: WsEvents.WsEventLogLevel.Warn,
       data: {
         query,
         filters,
+        locale,
         eventSubType: WsEvents.EnumTelemetrySubType.Search,
         size: totalHits,
         type: 'search',

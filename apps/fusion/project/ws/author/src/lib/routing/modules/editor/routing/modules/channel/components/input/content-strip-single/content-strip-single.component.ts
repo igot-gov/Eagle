@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
 import { AbstractControl, FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms'
@@ -27,7 +24,7 @@ import { InterestService } from './../../../../../../../../../../../../app/src/l
 export class ContentStripSingleComponent implements OnInit {
   @Output() data = new EventEmitter<{
     content: NsContentStripSingle.IContentStripSingle
-    isValid: boolean,
+    isValid: boolean
   }>()
   @Input() content!: NsContentStripSingle.IContentStripSingle
   @Input() identifier = ''
@@ -297,7 +294,7 @@ export class ContentStripSingleComponent implements OnInit {
   }
 
   onContentSelectionChanged(event: { content: Partial<NsContent.IContent>; checked: boolean }) {
-    const lexIDs = (this.form.controls.request as FormGroup).controls.ids.value || []
+    const lexIDs = JSON.parse(JSON.stringify((this.form.controls.request as FormGroup).controls.ids.value || []))
     if (event.checked) {
       lexIDs.push(event.content.identifier)
       if (this.pickerContentData.preselected) {
@@ -348,16 +345,27 @@ export class ContentStripSingleComponent implements OnInit {
       ) {
         searchV6.filters[0].andFilters[0].collectionsId = [searchBody.filters[0].andFilters[0].collectionsId[0]]
       } else {
-        delete searchV6.filters[0].andFilters[0].collectionsId
+        if (searchV6 && searchV6.filters &&
+          searchV6.filters[0].andFilters &&
+          searchV6.filters[0].andFilters[0] &&
+          searchV6.filters[0].andFilters[0].collectionsId) {
+          delete searchV6.filters[0].andFilters[0].collectionsId
+        }
       }
     }
-
     if (this.keywords && this.keywords.length) {
       searchV6.filters[0].andFilters[0].keywords = this.keywords || []
     } else {
-      delete searchV6.filters[0].andFilters[0].keywords
+      if (searchV6 && searchV6.filters &&
+        searchV6.filters[0].andFilters &&
+        searchV6.filters[0].andFilters[0] &&
+        searchV6.filters[0].andFilters[0].keywords) {
+        delete searchV6.filters[0].andFilters[0].keywords
+      }
     }
-    if (!Object.keys(searchV6.filters[0].andFilters).length) {
+    if (searchV6 && searchV6.filters &&
+      searchV6.filters[0].andFilters &&
+      !Object.keys(searchV6.filters[0].andFilters).length) {
       delete searchV6.filters[0].andFilters
     }
     this.pickerContentData = { ...this.pickerContentData }

@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar color="primary">
   <div>
     <a mat-icon-button routerLink="/app/infy/navigator">
@@ -24,7 +21,7 @@
     <div class="role">
       <p class="mat-headline ws-mat-primary-text">{{selectedTrack}}</p>
       <div>
-        <ws-utils-horizontal-scroller [loadStatus] = hasMore>
+        <ws-utils-horizontal-scroller [loadStatus]=hasMore>
           <div *ngIf="currentTrackData" class="card-holder" #cardContents>
             <ng-container *ngFor="let roles of currentTrackData">
               <ws-app-role-card [roleOffering]="roles"></ws-app-role-card>

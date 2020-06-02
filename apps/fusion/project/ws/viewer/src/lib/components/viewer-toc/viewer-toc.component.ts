@@ -1,25 +1,24 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-} from '@angular/core'
-import { of, Subscription } from 'rxjs'
-import { delay } from 'rxjs/operators'
 import { NestedTreeControl } from '@angular/cdk/tree'
+import { Component, EventEmitter, OnDestroy, OnInit, Output, Input } from '@angular/core'
 import { MatTreeNestedDataSource } from '@angular/material'
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
+import { ActivatedRoute } from '@angular/router'
 import {
-  UtilityService,
+  ContentProgressService,
+  NsContent,
+  VIEWER_ROUTE_FROM_MIME,
+  WidgetContentService,
+} from '@ws-widget/collection'
+import { NsWidgetResolver } from '@ws-widget/resolver'
+import {
   // LoggerService,
   ConfigurationsService,
+  UtilityService,
 } from '@ws-widget/utils'
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
-import { NsContent, VIEWER_ROUTE_FROM_MIME, WidgetContentService, ContentProgressService } from '@ws-widget/collection'
-import { ActivatedRoute } from '@angular/router'
+import { of, Subscription } from 'rxjs'
+import { delay } from 'rxjs/operators'
 import { ViewerDataService } from '../../viewer-data.service'
-import { NsWidgetResolver } from '@ws-widget/resolver'
+import { ViewerUtilService } from '../../viewer-util.service'
 interface IViewerTocCard {
   identifier: string
   viewerUrl: string
@@ -50,6 +49,8 @@ interface ICollectionCard {
   styleUrls: ['./viewer-toc.component.scss'],
 })
 export class ViewerTocComponent implements OnInit, OnDestroy {
+  @Output() hidenav = new EventEmitter<boolean>()
+  @Input() forPreview = false
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -58,6 +59,7 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
     private viewerDataSvc: ViewerDataService,
+    private viewSvc: ViewerUtilService,
     private configSvc: ConfigurationsService,
     private contentProgressSvc: ContentProgressService,
   ) {
@@ -102,12 +104,16 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       const collectionId = params.get('collectionId')
       const collectionType = params.get('collectionType')
       if (collectionId && collectionType) {
-        if (collectionType.toLowerCase() === NsContent.EMiscPlayerSupportedCollectionTypes.PLAYLIST.toLowerCase()) {
+        if (
+          collectionType.toLowerCase() ===
+          NsContent.EMiscPlayerSupportedCollectionTypes.PLAYLIST.toLowerCase()
+        ) {
           this.collection = await this.getPlaylistContent(collectionId, collectionType)
         } else if (
           collectionType.toLowerCase() === NsContent.EContentTypes.MODULE.toLowerCase() ||
           collectionType.toLowerCase() === NsContent.EContentTypes.COURSE.toLowerCase() ||
-          collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()) {
+          collectionType.toLowerCase() === NsContent.EContentTypes.PROGRAM.toLowerCase()
+        ) {
           this.collection = await this.getCollection(collectionId, collectionType)
         } else {
           this.isErrorOccurred = true
@@ -120,14 +126,12 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
         this.processCurrentResourceChange()
       }
     })
-    this.viewerDataServiceSubscription = this.viewerDataSvc.changedSubject.subscribe(
-      _data => {
-        if (this.resourceId !== this.viewerDataSvc.resourceId) {
-          this.resourceId = this.viewerDataSvc.resourceId
-          this.processCurrentResourceChange()
-        }
-      },
-    )
+    this.viewerDataServiceSubscription = this.viewerDataSvc.changedSubject.subscribe(_data => {
+      if (this.resourceId !== this.viewerDataSvc.resourceId) {
+        this.resourceId = this.viewerDataSvc.resourceId
+        this.processCurrentResourceChange()
+      }
+    })
   }
 
   private getContentProgressHash() {
@@ -156,17 +160,24 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   private processCurrentResourceChange() {
     if (this.collection && this.resourceId) {
       const currentIndex = this.queue.findIndex(c => c.identifier === this.resourceId)
-      const next = (currentIndex + 1) < this.queue.length ? this.queue[currentIndex + 1].viewerUrl : null
-      const prev = (currentIndex - 1) >= 0 ? this.queue[currentIndex - 1].viewerUrl : null
+      const next =
+        currentIndex + 1 < this.queue.length ? this.queue[currentIndex + 1].viewerUrl : null
+      const prev = currentIndex - 1 >= 0 ? this.queue[currentIndex - 1].viewerUrl : null
       this.viewerDataSvc.updateNextPrevResource(Boolean(this.collection), prev, next)
       this.processCollectionForTree()
       this.expandThePath()
       this.getContentProgressHash()
     }
   }
-  private async getCollection(collectionId: string, _collectionType: string): Promise<IViewerTocCard | null> {
+  private async getCollection(
+    collectionId: string,
+    _collectionType: string,
+  ): Promise<IViewerTocCard | null> {
     try {
-      const content: NsContent.IContent = await this.contentSvc.fetchContent(collectionId, 'detail').toPromise()
+      const content: NsContent.IContent = await (this.forPreview
+        ? this.contentSvc.fetchAuthoringContent(collectionId)
+        : this.contentSvc.fetchContent(collectionId, 'detail')
+      ).toPromise()
       this.collectionCard = this.createCollectionCard(content)
       const viewerTocCardContent = this.convertContentToIViewerTocCard(content)
       this.isFetching = false
@@ -197,13 +208,16 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       this.isFetching = false
       return null
     }
-
   }
 
-  private async getPlaylistContent(collectionId: string, _collectionType: string): Promise<IViewerTocCard | null> {
+  private async getPlaylistContent(
+    collectionId: string,
+    _collectionType: string,
+  ): Promise<IViewerTocCard | null> {
     try {
-      const playlistFetchResponse
-        = await this.contentSvc.fetchCollectionHierarchy('playlist', collectionId, 0, 1000).toPromise()
+      const playlistFetchResponse = await this.contentSvc
+        .fetchCollectionHierarchy('playlist', collectionId, 0, 1000)
+        .toPromise()
 
       const content: NsContent.IContent = playlistFetchResponse.data
       this.collectionCard = this.createCollectionCard(content)
@@ -252,18 +266,26 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     // }
     return {
       identifier: content.identifier,
-      viewerUrl: `/viewer/${VIEWER_ROUTE_FROM_MIME(content.mimeType)}/${content.identifier}`,
-      thumbnailUrl: content.appIcon,
+      viewerUrl: `${this.forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(
+        content.mimeType,
+      )}/${content.identifier}`,
+      thumbnailUrl: this.forPreview
+        ? this.viewSvc.getAuthoringUrl(content.appIcon)
+        : content.appIcon,
       title: content.name,
       duration: content.duration,
       type: content.resourceType ? content.resourceType : content.contentType,
       complexity: content.complexityLevel,
-      children: Array.isArray(content.children) && content.children.length ?
-        content.children.map(child => this.convertContentToIViewerTocCard(child)) : null,
+      children:
+        Array.isArray(content.children) && content.children.length
+          ? content.children.map(child => this.convertContentToIViewerTocCard(child))
+          : null,
     }
   }
 
-  private createCollectionCard(collection: NsContent.IContent | NsContent.IContentMinimal): ICollectionCard {
+  private createCollectionCard(
+    collection: NsContent.IContent | NsContent.IContentMinimal,
+  ): ICollectionCard {
     // return {
     //   type: this.getCollectionTypeCard(collection.displayContentType),
     //   id: collection.identifier,
@@ -278,15 +300,22 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
       type: this.getCollectionTypeCard(collection.displayContentType),
       id: collection.identifier,
       title: collection.name,
-      thumbnail: collection.appIcon,
+      thumbnail: this.forPreview
+        ? this.viewSvc.getAuthoringUrl(collection.appIcon)
+        : collection.appIcon,
       subText1: collection.resourceType ? collection.resourceType : collection.contentType,
       subText2: collection.complexityLevel,
       duration: collection.duration,
-      redirectUrl: this.getCollectionTypeRedirectUrl(collection.identifier, collection.displayContentType),
+      redirectUrl: this.getCollectionTypeRedirectUrl(
+        collection.identifier,
+        collection.displayContentType,
+      ),
     }
   }
 
-  private getCollectionTypeCard(displayContentType?: NsContent.EDisplayContentTypes): TCollectionCardType | null {
+  private getCollectionTypeCard(
+    displayContentType?: NsContent.EDisplayContentTypes,
+  ): TCollectionCardType | null {
     switch (displayContentType) {
       case NsContent.EDisplayContentTypes.PROGRAM:
       case NsContent.EDisplayContentTypes.COURSE:
@@ -301,12 +330,15 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getCollectionTypeRedirectUrl(identifier: string, displayContentType?: NsContent.EDisplayContentTypes): string | null {
+  private getCollectionTypeRedirectUrl(
+    identifier: string,
+    displayContentType?: NsContent.EDisplayContentTypes,
+  ): string | null {
     switch (displayContentType) {
       case NsContent.EDisplayContentTypes.PROGRAM:
       case NsContent.EDisplayContentTypes.COURSE:
       case NsContent.EDisplayContentTypes.MODULE:
-        return `/app/toc/${identifier}/overview`
+        return `${this.forPreview ? '/author' : '/app'}/toc/${identifier}/overview`
       case NsContent.EDisplayContentTypes.GOALS:
         return `/app/goals/${identifier}`
       case NsContent.EDisplayContentTypes.PLAYLIST:
@@ -334,10 +366,14 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
   expandThePath() {
     if (this.collection && this.resourceId) {
       const path = this.utilitySvc.getPath(this.collection, this.resourceId)
-      this.pathSet = new Set(path.map((u: { identifier: any; }) => u.identifier))
+      this.pathSet = new Set(path.map((u: { identifier: any }) => u.identifier))
       path.forEach((node: IViewerTocCard) => {
         this.nestedTreeControl.expand(node)
       })
     }
+  }
+
+  minimizenav() {
+    this.hidenav.emit(false)
   }
 }

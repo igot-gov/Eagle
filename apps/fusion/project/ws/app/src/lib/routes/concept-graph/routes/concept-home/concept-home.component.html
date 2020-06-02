@@ -1,20 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<mat-toolbar role="navigation" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
 
   <span i18n="page title: concept graph" class="margin-left-xs">Concept Graph</span>
 </mat-toolbar>
 <ng-container>
-  <div class="search-page-container">
+  <div role="main" class="search-page-container">
     <h1 class="mat-display-1 margin-remove-bottom margin-bottom-m">
       <ng-container i18n>Search for topics?</ng-container>
     </h1>
-    <form>
+    <form role="form">
       <mat-form-field class="form-container" color="primary" appearance="outline">
         <input type="search" i18n-placeholder="search content" placeholder="Search..." i18-aria-label aria-label="Query"
-          matInput [formControl]="queryControl" [matAutocomplete]="auto" autofocus #searchInput />
+          matInput [formControl]="queryControl" [matAutocomplete]="auto" #searchInput />
         <mat-icon class="cursor-pointer" (click)="updateQuery(searchInput.value)" matSuffix>search</mat-icon>
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
           (optionSelected)="updateQuery($event.option.value)">

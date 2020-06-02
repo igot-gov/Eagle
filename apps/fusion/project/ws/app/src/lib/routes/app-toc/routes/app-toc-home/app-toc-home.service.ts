@@ -1,10 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable, Type } from '@angular/core'
 import { ConfigurationsService, EInstance } from '@ws-widget/utils'
+// commercial_begin
+import { AppTocHomePathfindersComponent } from '../../components/app-toc-home-pathfinders/app-toc-home-pathfinders.component'
+import { AppTocHomeLestoreComponent } from '../../components/app-toc-home-lestore/app-toc-home-lestore.component'
+// commercial_end
 import { AppTocHomeComponent } from '../../components/app-toc-home/app-toc-home.component'
-path
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +16,19 @@ export class AppTocHomeService {
   ) { }
 
   getComponent(): Type<any> {
+    // commercial_begin
     switch (this.configSvc.rootOrg) {
-path
+      case EInstance.PATHFINDERS:
         return AppTocHomePathfindersComponent
+      case EInstance.LESTORE:
+        return AppTocHomeLestoreComponent
       default:
         return AppTocHomeComponent
     }
+    // commercial_end
+
+    // opensource_start
+    // return AppTocHomeComponent
+    //  opensource_end
   }
 }

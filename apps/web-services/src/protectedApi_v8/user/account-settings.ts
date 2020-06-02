@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -8,7 +5,7 @@ import { CONSTANTS } from '../../utils/env'
 import { ERROR } from '../../utils/message'
 const API_END_POINTS = {
   accountSettings: `${CONSTANTS.NODE_API_BASE}/userprofiles/pathfinders/upsert`,
-  resetPassword: `${CONSTANTS.HTTPS_HOST}/pid/reset-password/generate-token`,
+  resetPassword: `${CONSTANTS.RESET_PASSWORD}/pid/reset-password/generate-token`,
   viewProfile: `${CONSTANTS.NODE_API_BASE}/userprofiles/pathfinders/viewprofile`,
 }
 export const accountSettingsApi = Router()

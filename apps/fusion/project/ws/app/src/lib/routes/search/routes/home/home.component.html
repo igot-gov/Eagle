@@ -1,25 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<mat-toolbar role="navigation" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: search" class="margin-left-xs hidden-inline-s">Search</span>
   <span class="spacer"></span>
-  <!-- <button style="float: right;" mat-button [matMenuTriggerFor]="sortLang">
-    <mat-icon>language</mat-icon>
-    <span class="uppercase">
-      {{ searchQuery.l || 'en' }}
-    </span>
-  </button> -->
 </mat-toolbar>
-<div class="flex search justify-center px-4 mt-12">
+<div role="main" class="flex search justify-center px-4 mt-12">
   <div class="w-full md:w-10/12 lg:w-6/12">
-    <h1 class="text-center mat-display-1" i18n>What do you want to learn?</h1>
-    <div class="flex border border-solid search-border">
+    <h1 class="text-center mat-title" i18n>What do you want to learn?</h1>
+    <div role="form" class="flex border border-solid search-border">
       <div [ngClass]="{'border-right': languageSearch?.length}" class="flex items-center">
-        <button class="lang-btn margin-right-s" *ngIf="languageSearch?.length" mat-button [matMenuTriggerFor]="sortLang">
+        <button class="lang-btn margin-right-s" *ngIf="languageSearch?.length" mat-button
+          [matMenuTriggerFor]="sortLang">
           <span class="uppercase">
-            {{ searchQuery.l || 'en' }}
+            {{ searchQuery.l.split(',').length === 1 ? searchQuery.l : 'pref' || 'en' }}
           </span>
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
@@ -27,8 +19,8 @@
       <div class="w-full search">
         <form (submit)="search(query.value)" class="w-full search-form flex">
           <mat-form-field class="w-full" appearance="none">
-            <input name="searchQuery" [matAutocomplete]="auto" [formControl]="query" type="text" matInput placeholder="Search" i18-aria-label
-              aria-label="Query" i18n-placeholder="search content">
+            <input name="searchQuery" [matAutocomplete]="auto" [formControl]="query" type="text" matInput
+              placeholder="Search" i18-aria-label aria-label="Query" i18n-placeholder="search content">
           </mat-form-field>
           <mat-autocomplete (optionSelected)="search($event.option.value)" #auto="matAutocomplete">
             <mat-option *ngIf="query.value" [value]="query.value">{{query.value}}</mat-option>
@@ -41,26 +33,35 @@
         <mat-icon>search</mat-icon>
       </div>
     </div>
-    <div class="flex justify-around mt-10">
-      <span *ngFor="let filter of suggestedFilters" matRipple role="button" i18n-aria-label aria-label="Suggested filter" (click)="searchWithFilter(filter)"
-        class="w-1/3 cursor-pointer filter-button">
+    <div class="flex flex-wrap md:flex-no-wrap justify-around mt-10">
+      <a *ngFor="let filter of suggestedFilters" matRipple role="button" i18n-aria-label aria-label="Suggested filter"
+        [routerLink]="filter?.url" [queryParams]="filter?.queryParams" class="w-1/3 filter-button">
         <mat-icon class="mb-2">{{filter.icon}}</mat-icon>
         <span class="font-normal">{{filter.title}}</span>
-      </span>
+      </a>
     </div>
   </div>
 </div>
 
 <mat-menu #sortLang="matMenu">
   <ng-template matMenuContent>
-    <button mat-menu-item class="flex flex-between" *ngFor="let lang of languageSearch" (click)="searchLanguage(lang)">
-      <span class="flex items-center w-full">
-        <span class="mr-2 flex items-center">
-          <img class="flag" src="/assets/common/flags/{{lang}}.png">
+    <div *ngFor="let lang of languageSearch; index as i">
+      <button mat-menu-item (click)="searchLanguage(lang)">
+        <span class="flex items-center w-full">
+          <span class="mr-2 flex items-center">
+            <img *ngIf="lang.split(',').length > 1" [ngStyle]="{ height: '17px' ,width :'17px'}"
+              src="/assets/common/flags/pref.png">
+            <img *ngIf="lang.split(',').length === 1" [ngStyle]="{
+                        height: lang === 'all' ? '17px': '14px',
+                         width: lang === 'all' ? '17px': '20px'
+                      }" src="/assets/common/flags/{{lang}}.png">
+          </span>
+          <span>{{ lang }}</span>
+          <mat-icon class="ml-2" *ngIf="lang === searchQuery.l">check</mat-icon>
         </span>
-        <span>{{ lang }}</span>
-        <mat-icon class="ml-2" *ngIf="lang === searchQuery.l">check</mat-icon>
-      </span>
-    </button>
+      </button>
+      <mat-divider *ngIf="(preferredLanguages?.split(',').length > 1 ? i==1 : i==0) && languageSearch.includes('all')">
+      </mat-divider>
+    </div>
   </ng-template>
 </mat-menu>

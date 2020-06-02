@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -12,6 +9,8 @@ const API_ENDPOINTS = {
   conceptData: `${CONSTANTS.VIEWER_PLUGIN_RDBMS_API_BASE}/v1/db/conceptdata/resources`,
   execute: `${CONSTANTS.VIEWER_PLUGIN_RDBMS_API_BASE}/v1/users`,
 }
+
+const GENERAL_ERR_MSG = 'Failed due to unknown reason'
 
 export const rdbmsApi = Router()
 
@@ -25,8 +24,11 @@ rdbmsApi.get('/initializeDb/:contentId', async (req, res) => {
     )
     res.send(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('INITIALIZE DB ERROR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -37,10 +39,13 @@ rdbmsApi.get('/conceptData/:contentId', async (req, res) => {
       `${API_ENDPOINTS.conceptData}/${contentId}`,
       axiosRequestConfig
     )
-    res.json(response)
+    res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('GET RDBMS CONCEPT DATA ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -54,8 +59,11 @@ rdbmsApi.get('/expectedOutput/:contentId', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('GET EXPECTED OUTPUT ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -69,8 +77,11 @@ rdbmsApi.get('/dbstructure/:contentId', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('GET DB STRUCTURE ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -84,8 +95,11 @@ rdbmsApi.get('/tableRefresh/:contentId', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('TABLE REFRESH ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -101,8 +115,11 @@ rdbmsApi.post('/executeQuery', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('EXECUTE QUERY ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -118,8 +135,11 @@ rdbmsApi.post('/compareQuery', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('COMPARE QUERY ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -135,8 +155,11 @@ rdbmsApi.post('/playground', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('PLAYGROUND ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -153,8 +176,11 @@ rdbmsApi.post('/compositeQuery/:type', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('COMPOSITE QUERY ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -171,8 +197,11 @@ rdbmsApi.post('/verifyExercise/:contentId', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('VERIFY EXERCISE ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
@@ -189,7 +218,10 @@ rdbmsApi.post('/submitExercise/:contentId', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
-    logError(err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    logError('SUBMIT EXERCISE ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })

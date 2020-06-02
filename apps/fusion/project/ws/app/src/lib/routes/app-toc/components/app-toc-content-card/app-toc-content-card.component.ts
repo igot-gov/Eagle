@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core'
 import { NsContent, viewerRouteGenerator } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -12,11 +9,11 @@ import { NsAppToc } from '../../models/app-toc.model'
   styleUrls: ['./app-toc-content-card.component.scss'],
 })
 export class AppTocContentCardComponent implements OnInit, OnChanges {
-
   @Input() content: NsContent.IContent | null = null
   @Input() expandAll = false
   @Input() rootId!: string
   @Input() rootContentType!: string
+  @Input() forPreview = false
   hasContentStructure = false
   enumContentTypes = NsContent.EDisplayContentTypes
   contentStructure: NsAppToc.ITocStructure = {
@@ -36,9 +33,7 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
   }
   defaultThumbnail = ''
   viewChildren = false
-  constructor(
-    private configSvc: ConfigurationsService,
-  ) { }
+  constructor(private configSvc: ConfigurationsService) {}
 
   ngOnInit() {
     this.evaluateImmediateChildrenStructure()
@@ -62,13 +57,21 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
   }
   get isResource(): boolean {
     if (this.content) {
-      return this.content.contentType === 'Resource' || this.content.contentType === 'Knowledge Artifact'
+      return (
+        this.content.contentType === 'Resource' || this.content.contentType === 'Knowledge Artifact'
+      )
     }
     return false
   }
-  get resourceLink(): { url: string, queryParams: { [key: string]: any } } {
+  get resourceLink(): { url: string; queryParams: { [key: string]: any } } {
     if (this.content) {
-      return viewerRouteGenerator(this.content.identifier, this.content.mimeType, this.rootId, this.rootContentType)
+      return viewerRouteGenerator(
+        this.content.identifier,
+        this.content.mimeType,
+        this.rootId,
+        this.rootContentType,
+        this.forPreview,
+      )
     }
     return { url: '', queryParams: {} }
   }
@@ -142,5 +145,4 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
     }
     return content.identifier
   }
-
 }

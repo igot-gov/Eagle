@@ -1,23 +1,27 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
+import { Component, Input, ViewChild, ElementRef, OnDestroy, OnChanges } from '@angular/core'
 import { RdbmsHandsOnService } from '../../rdbms-hands-on.service'
 import { NSRdbmsHandsOn } from '../../rdbms-hands-on.model'
 import { MatSnackBar, MatDialog } from '@angular/material'
 import { SubmissionDialogComponent } from '../submission-dialog/submission-dialog.component'
+import { EventService } from '@ws-widget/utils'
 
 @Component({
   selector: 'viewer-dbms-exercise',
   templateUrl: './dbms-exercise.component.html',
   styleUrls: ['./dbms-exercise.component.scss'],
 })
-export class DbmsExerciseComponent implements OnInit {
+export class DbmsExerciseComponent implements  OnDestroy, OnChanges {
   @Input() resourceContent: any
   @ViewChild('dbRefreshSuccess', { static: true }) dbRefreshSuccess: ElementRef<any> | null = null
   @ViewChild('dbRefreshFailed', { static: true }) dbRefreshFailed: ElementRef<any> | null = null
   @ViewChild('someErrorOccurred', { static: true }) someErrorOccurred: ElementRef<any> | null = null
 
+  firstInput = true
+  isInput = false
+  inputInterval: any
+  firstClick = true
+  isClick = false
+  clickInterval: any
   contentData: any
   expectedOutput: NSRdbmsHandsOn.IRdbmsApiResponse | null = null
   executedResult: NSRdbmsHandsOn.IRdbmsApiResponse | null = null
@@ -44,11 +48,22 @@ export class DbmsExerciseComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dbmsSvc: RdbmsHandsOnService,
     public dialog: MatDialog,
-  ) { }
+    private eventSvc: EventService,
+  ) {
 
-  ngOnInit() {
+  }
+  ngOnChanges() {
     this.contentData = this.resourceContent.rdbms
+    this.initialLoading = false
     this.initializeDb(false)
+  }
+  ngOnDestroy() {
+    if (this.inputInterval) {
+      clearInterval(this.inputInterval)
+    }
+    if (this.clickInterval) {
+      clearInterval(this.clickInterval)
+    }
   }
 
   initializeDb(flag: boolean) {
@@ -107,6 +122,24 @@ export class DbmsExerciseComponent implements OnInit {
     }
   }
 
+  raiseInputChange() {
+    this.isInput = true
+    if (this.isInput && this.firstInput) {
+      this.raiseInteractTelemetry('editor', 'codeinput')
+      this.startInputTimer()
+    }
+    this.firstInput = false
+  }
+
+  raiseClickEvent() {
+    this.isClick = true
+    if (this.isClick && this.firstClick) {
+      this.raiseInteractTelemetry('editor', 'buttonclick')
+      this.startClickTimer()
+    }
+    this.firstClick = false
+  }
+
   submit() {
     this.executedResult = null
     this.submissionResult = null
@@ -144,6 +177,33 @@ export class DbmsExerciseComponent implements OnInit {
           this.submitted = false
         })
     }
+  }
+  raiseInteractTelemetry(action: string, event: string) {
+    if (this.resourceContent.content.identifier) {
+      this.eventSvc.raiseInteractTelemetry(action, event, {
+        contentId: this.resourceContent.content.identifier,
+      })
+    }
+    if (event === 'codeinput') {
+      this.isInput = false
+    }
+    if (event === 'buttonclick') {
+      this.isClick = false
+    }
+  }
+  startInputTimer() {
+    this.inputInterval = setInterval(() => {
+      if (this.isInput) {
+        this.raiseInteractTelemetry('editor', 'codeinput')
+      }
+    },                               2 * 60000)
+  }
+  startClickTimer() {
+    this.clickInterval = setInterval(() => {
+      if (this.isClick) {
+        this.raiseInteractTelemetry('editor', 'buttonclick')
+      }
+    },                               2 * 60000)
   }
 
 }

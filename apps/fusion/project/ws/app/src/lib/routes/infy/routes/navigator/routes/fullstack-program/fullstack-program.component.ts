@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NavigatorService } from '../../services/navigator.service'
 import { IFsData, IFsCardModel, IFsPlayground } from '../../models/navigator.model'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { LoggerService, TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
+import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 import { NsContentStripMultiple } from '@ws-widget/collection'
 
 @Component({
@@ -49,7 +46,6 @@ export class FullstackProgramComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private navSvc: NavigatorService,
-    private logger: LoggerService,
     private configSvc: ConfigurationsService,
   ) {
     this.fsData = []
@@ -57,17 +53,14 @@ export class FullstackProgramComponent implements OnInit {
     this.certificationData = []
     this.navSvc.fetchFullStackData().subscribe((data: IFsData[]) => {
       this.fsData = data
-      this.logger.log('chcek fs', this.fsData)
 
       this.fullStackData = this.fsData.filter((fs: IFsData) => {
         return fs.fs_id === Number(this.route.snapshot.params.id)
       })[0]
-      this.logger.log('fs data ', this.fullStackData)
 
       const ids = this.fullStackData.fs_course.map(course => {
         return course.course_lex_link.split('/').reverse()[0]
       })
-      this.logger.log('ids check', ids)
 
       this.fetchContentForFs(ids)
 
@@ -84,14 +77,12 @@ export class FullstackProgramComponent implements OnInit {
   }
 
   fetchContentForFs(ids: string[]) {
-    this.logger.log(ids)
     this.coursesResolverData.widgetData.strips.forEach(strip => {
       if (strip.key === 'courses-strip' && strip.request) {
         strip.request.ids = ids
       }
     })
     this.coursesResolverData = { ...this.coursesResolverData }
-    this.logger.log(this.coursesResolverData)
 
   }
 
@@ -134,6 +125,5 @@ export class FullstackProgramComponent implements OnInit {
       }
     })
 
-    this.logger.log('data', this.playgroundData, this.certificationData)
   }
 }

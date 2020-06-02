@@ -1,0 +1,50 @@
+{
+  "/apis/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/content-api/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/private-content-service/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/content-store/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/chat-bot/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/mobile-apps/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/LA/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/assets/*": {
+    "target": "https://10.177.63.204",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

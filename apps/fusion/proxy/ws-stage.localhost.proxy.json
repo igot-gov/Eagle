@@ -1,39 +1,36 @@
 {
   "/apis/*": {
-http://http-url
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
-    "changeOrigin": true,
-    "pathRewrite": {
-      "/apis": ""
-    }
+    "changeOrigin": true
   },
   "/content-api/*": {
-http://http-url
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/content-store/*": {
-http://http-url
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/chat-bot/*": {
-http://http-url
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/mobile-apps/*": {
-http://http-url
+    "target": "https://10.177.61.54",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true
   },
   "/assets/*": {
-http://http-url
+    "target": "http://localhost:5500",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true

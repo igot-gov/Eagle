@@ -1,0 +1,16 @@
+<div class="login-container flex justify-center items-center">
+  <div class="background w-full h-screen absolute top-0 left-0">
+  </div>
+  <mat-card class="ws-mat-primary-border-top-bolder rounded w-4/5 h-auto m-auto z-10 max-w-sm">
+    <div class="p-8 text-center">
+      <div class="pb-6">
+        <img [src]="appIcon" i18n-alt alt="Application Logo" class="h-20 w-full" />
+      </div>
+      <button mat-raised-button (click)="login('E')" color="primary">Login</button>
+      <div class="leading-normal pt-4">
+        For login, please write to <a href="mailto:{{contactUsMail}}">{{contactUsMail}}</a> with your name
+        and your organization.
+      </div>
+    </div>
+  </mat-card>
+</div>

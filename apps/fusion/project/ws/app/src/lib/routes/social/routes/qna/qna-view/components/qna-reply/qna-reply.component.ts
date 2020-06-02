@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
-import { WsDiscussionForumService, NsDiscussionForum, DialogSocialDeletePostComponent } from '@ws-widget/collection'
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
+import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
+import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { NsSocial } from '../../../../../models/social.model'
 import { WsSocialService } from '../../../../../services/ws-social.service'
 
@@ -49,6 +46,7 @@ export class QnaReplyComponent implements OnInit {
   commentFetchStatus: TFetchStatus | undefined
   isPostingComment = false
 
+  showSocialLike = false
   editMode = false
   replyPostEnabled = false
   updatedBody: string | undefined
@@ -73,6 +71,8 @@ export class QnaReplyComponent implements OnInit {
       this.commentAddRequest.parentId = this.item.id
       this.fetchQuestionComments()
     }
+    this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
+
   }
 
   postComment() {

@@ -1,10 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
-import { NsContent } from '@ws-widget/collection'
+import { NsContent, NsAutoComplete } from '@ws-widget/collection'
+import { ConfigurationsService } from '@ws-widget/utils'
 import { NsCohorts } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ws-app-toc-cohorts',
@@ -12,33 +11,64 @@ import { AppTocService } from '../../services/app-toc.service'
   styleUrls: ['./app-toc-cohorts.component.scss'],
 })
 export class AppTocCohortsComponent implements OnInit {
+  @Input() content!: NsContent.IContent
+  cohortResults: {
+    [key: string]: { hasError: boolean; contents: NsCohorts.ICohortsContent[] }
+  } = {}
+  cohortTypesEnum = NsCohorts.ECohortTypes
+  @Input() forPreview = false
+
   constructor(
     private tocSvc: AppTocService,
+    private configSvc: ConfigurationsService,
+    private router: Router,
   ) { }
 
-  @Input() content!: NsContent.IContent
-  cohortResults: { [key: string]: { hasError: boolean, contents: NsCohorts.ICohortsContent[] } } = {}
-  cohortTypesEnum = NsCohorts.ECohortTypes
-
   ngOnInit() { }
-  fetchCohorts(cohortType: NsCohorts.ECohortTypes) {
-    if (!this.cohortResults[cohortType]) {
-      this.tocSvc.fetchContentCohorts(cohortType, this.content.identifier)
-        .subscribe(
-          data => {
-            this.cohortResults[cohortType] = {
-              contents: data || [],
-              hasError: false,
-            }
-          },
-          () => {
-            this.cohortResults[cohortType] = {
-              contents: [],
-              hasError: true,
-            }
-          },
-      )
+
+  public get enableFeature(): boolean {
+    if (this.configSvc.restrictedFeatures) {
+      return !this.configSvc.restrictedFeatures.has('cohorts')
+    }
+    return false
+  }
+
+  public get enablePeopleSearch(): boolean {
+    if (this.configSvc.restrictedFeatures) {
+      return !this.configSvc.restrictedFeatures.has('peopleSearch')
+    }
+    return false
+  }
+
+  goToUserProfile(user: NsAutoComplete.IUserAutoComplete) {
+    if (this.enablePeopleSearch) {
+      this.router.navigate(['/app/person-profile'], { queryParams: { emailId: user.email } })
     }
   }
 
+  fetchCohorts(cohortType: NsCohorts.ECohortTypes) {
+    if (!this.cohortResults[cohortType] && !this.forPreview) {
+      this.tocSvc.fetchContentCohorts(cohortType, this.content.identifier).subscribe(
+        data => {
+          this.cohortResults[cohortType] = {
+            contents: data || [],
+            hasError: false,
+          }
+        },
+        () => {
+          this.cohortResults[cohortType] = {
+            contents: [],
+            hasError: true,
+          }
+        },
+      )
+    } else if (this.cohortResults[cohortType] && !this.forPreview) {
+      return
+    } else {
+      this.cohortResults[cohortType] = {
+        contents: [],
+        hasError: false,
+      }
+    }
+  }
 }

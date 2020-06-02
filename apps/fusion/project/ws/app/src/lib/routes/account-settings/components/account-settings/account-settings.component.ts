@@ -1,10 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  Component, OnInit, ViewEncapsulation, ViewChild,
-  ElementRef,
-} from '@angular/core'
+import { Component, OnInit, ViewEncapsulation, ViewChild, ElementRef } from '@angular/core'
 import { IMAGE_SUPPORT_TYPES, IMAGE_MAX_SIZE } from 'project/ws/author/src/lib/constants/upload'
 
 // import { NotificationComponent } from 'project/ws/app/src/lib/routes/notification/components/notification/notification.component'
@@ -67,11 +61,12 @@ export class AccountSettingsComponent implements OnInit {
     private configSvc: ConfigurationsService,
     private accountSvc: AccountSettingsService,
     private activatedRoute: ActivatedRoute,
-
   ) {
     if (this.configSvc.userProfile) {
-      this.profilePicture = (this.accountsettingsObj && this.accountsettingsObj.profile_image) ||
-        this.configSvc.userProfile.source_profile_picture || ''
+      this.profilePicture =
+        (this.accountsettingsObj && this.accountsettingsObj.profile_image) ||
+        this.configSvc.userProfile.source_profile_picture ||
+        ''
       this.userId = this.configSvc.userProfile.userId || ''
       this.email = this.configSvc.userProfile.email || ''
     }
@@ -135,14 +130,9 @@ export class AccountSettingsComponent implements OnInit {
     'West Virginia',
     'Wyoming',
   ]
-  institutes = [
-    'Summer Institute 2018',
-    'Summer Institute 2019',
-    'Winter Institute 2020',
-  ]
+  institutes = ['Summer Institute 2018', 'Summer Institute 2019', 'Winter Institute 2020']
 
   ngOnInit() {
-
     this.activatedRoute.data.subscribe(
       viewprofile => {
         this.accountsettingsObj = viewprofile.viewprofile.data
@@ -156,46 +146,96 @@ export class AccountSettingsComponent implements OnInit {
     )
 
     this.settingsForm = this.formBuilder.group({
-      name: [this.accountsettingsObj && this.accountsettingsObj.pid_name ? this.accountsettingsObj.pid_name : ''],
-      photo: [this.accountsettingsObj && this.accountsettingsObj.profile_image ? this.accountsettingsObj.profile_image : ''],
-      checkEmail: [this.accountsettingsObj && this.accountsettingsObj.emailprivacy !== null
-        ? !this.accountsettingsObj.emailprivacy : false],
-      emailId: [this.accountsettingsObj && this.accountsettingsObj.email ? this.accountsettingsObj.email : this.email],
+      name: [
+        this.accountsettingsObj && this.accountsettingsObj.pid_name
+          ? this.accountsettingsObj.pid_name
+          : this.email,
+      ],
+      photo: [
+        this.accountsettingsObj && this.accountsettingsObj.profile_image
+          ? this.accountsettingsObj.profile_image
+          : '',
+      ],
+      checkEmail: [
+        this.accountsettingsObj && this.accountsettingsObj.emailprivacy !== null
+          ? !this.accountsettingsObj.emailprivacy
+          : false,
+      ],
+      emailId: [
+        this.accountsettingsObj && this.accountsettingsObj.email
+          ? this.accountsettingsObj.email
+          : this.email,
+      ],
     })
     this.roles = this.formBuilder.group({
-      role: [this.accountsettingsObj && this.accountsettingsObj.role ? this.accountsettingsObj.role : '', [Validators.required]],
-      state: [this.accountsettingsObj && this.accountsettingsObj.teaching_state
-        ? this.accountsettingsObj.teaching_state : '', [Validators.required]],
-      school: [this.accountsettingsObj && this.accountsettingsObj.organization ? this.accountsettingsObj.organization : ''],
-      checkRole: [this.accountsettingsObj && this.accountsettingsObj.role_privacy !== null ? !this.accountsettingsObj.role_privacy : false],
-      checkState: [this.accountsettingsObj && this.accountsettingsObj.teaching_state_privacy !== null
-        ? !this.accountsettingsObj.teaching_state_privacy : false],
-      checkSchool: [this.accountsettingsObj && this.accountsettingsObj.organization_privacy !== null
-        ? !this.accountsettingsObj.organization_privacy : false],
+      role: [
+        this.accountsettingsObj && this.accountsettingsObj.role ? this.accountsettingsObj.role : '',
+        [Validators.required],
+      ],
+      state: [
+        this.accountsettingsObj && this.accountsettingsObj.teaching_state
+          ? this.accountsettingsObj.teaching_state
+          : '',
+        [Validators.required],
+      ],
+      school: [
+        this.accountsettingsObj && this.accountsettingsObj.organization
+          ? this.accountsettingsObj.organization
+          : '',
+      ],
+      checkRole: [
+        this.accountsettingsObj && this.accountsettingsObj.role_privacy !== null
+          ? !this.accountsettingsObj.role_privacy
+          : false,
+      ],
+      checkState: [
+        this.accountsettingsObj && this.accountsettingsObj.teaching_state_privacy !== null
+          ? !this.accountsettingsObj.teaching_state_privacy
+          : false,
+      ],
+      checkSchool: [
+        this.accountsettingsObj && this.accountsettingsObj.organization_privacy !== null
+          ? !this.accountsettingsObj.organization_privacy
+          : false,
+      ],
     })
     this.profile = this.formBuilder.group({
-      fb: [this.accountsettingsObj &&
-        (this.accountsettingsObj.public_profiles &&
+      fb: [
+        this.accountsettingsObj &&
+          (this.accountsettingsObj.public_profiles &&
           this.accountsettingsObj.public_profiles[0] &&
-          this.accountsettingsObj.public_profiles[0].data ?
-          this.accountsettingsObj.public_profiles[0].data.replace('https://', '') || '' : '')],
-      twitter: [this.accountsettingsObj ?
-        (this.accountsettingsObj.public_profiles &&
-          this.accountsettingsObj.public_profiles[1] &&
-          this.accountsettingsObj.public_profiles[1].data ?
-          this.accountsettingsObj.public_profiles[1].data.replace('https://', '') : '') : ''],
-      linkedin: [this.accountsettingsObj ?
-        (this.accountsettingsObj.public_profiles &&
-          this.accountsettingsObj.public_profiles[2] &&
-          this.accountsettingsObj.public_profiles[2].data ?
-          this.accountsettingsObj.public_profiles[2].data.replace('https://', '') : '') : ''],
-      web: [this.accountsettingsObj ?
-        (this.accountsettingsObj.public_profiles &&
-          this.accountsettingsObj.public_profiles[3] &&
-          this.accountsettingsObj.public_profiles[3].data ?
-          this.accountsettingsObj.public_profiles[3].data.replace('https://', '') : '') : ''],
+          this.accountsettingsObj.public_profiles[0].data
+            ? this.accountsettingsObj.public_profiles[0].data.replace('https://', '') || ''
+            : ''),
+      ],
+      twitter: [
+        this.accountsettingsObj
+          ? this.accountsettingsObj.public_profiles &&
+            this.accountsettingsObj.public_profiles[1] &&
+            this.accountsettingsObj.public_profiles[1].data
+            ? this.accountsettingsObj.public_profiles[1].data.replace('https://', '')
+            : ''
+          : '',
+      ],
+      linkedin: [
+        this.accountsettingsObj
+          ? this.accountsettingsObj.public_profiles &&
+            this.accountsettingsObj.public_profiles[2] &&
+            this.accountsettingsObj.public_profiles[2].data
+            ? this.accountsettingsObj.public_profiles[2].data.replace('https://', '')
+            : ''
+          : '',
+      ],
+      web: [
+        this.accountsettingsObj
+          ? this.accountsettingsObj.public_profiles &&
+            this.accountsettingsObj.public_profiles[3] &&
+            this.accountsettingsObj.public_profiles[3].data
+            ? this.accountsettingsObj.public_profiles[3].data.replace('https://', '')
+            : ''
+          : '',
+      ],
       // tel: [this.accountsettingsObj ? (this.accountsettingsObj.phone ? this.accountsettingsObj.phone[0] : '') : ''],
-
     })
 
     this.notification = this.formBuilder.group({
@@ -203,7 +243,6 @@ export class AccountSettingsComponent implements OnInit {
       replyToPost: [false],
       registrationOpen: [false],
     })
-
   }
 
   onReset() {
@@ -228,37 +267,22 @@ export class AccountSettingsComponent implements OnInit {
           } else {
             this.uploadSaveData = false
             this.snackBar.open(this.errorUpdatingEmailMessage.nativeElement.value)
-
           }
-        })
-
+        },
+      )
     }
-
   }
 
   uploadAppIcon(file: File) {
     const formdata = new FormData()
     const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
-    if (
-      !(
-        IMAGE_SUPPORT_TYPES.indexOf(
-          `.${fileName
-            .toLowerCase()
-            .split('.')
-            .pop()}`,
-        ) > -1
-      )
-    ) {
-      this.snackBar.open(
-        this.invalidFormatMessage.nativeElement.value,
-      )
+    if (!(IMAGE_SUPPORT_TYPES.indexOf(`.${fileName.toLowerCase().split('.').pop()}`) > -1)) {
+      this.snackBar.open(this.invalidFormatMessage.nativeElement.value)
       return
     }
 
     if (file.size > IMAGE_MAX_SIZE) {
-      this.snackBar.open(
-        'Size greater than allowed',
-      )
+      this.snackBar.open('Size greater than allowed')
       return
     }
 
@@ -276,48 +300,43 @@ export class AccountSettingsComponent implements OnInit {
           formdata.append('content', result, fileName)
           this.loader.changeLoad.next(true)
           this.uploadPhoto = true
-          this.accountSvc
-            .upload(
-              formdata,
-              this.userId,
-            )
-            .subscribe(
-              data => {
-                if (data.code) {
-                  this.accountSvc.publish(this.userId).subscribe(
-                    () => {
-                      this.loader.changeLoad.next(false)
-                      this.profilePicture = data.artifactURL
-                      this.uploadPhoto = false
-                    },
-                    () => {
-                      this.loader.changeLoad.next(false)
-                      this.uploadPhoto = false
-                    },
-                  )
-
-                }
-              },
-              () => {
-                this.loader.changeLoad.next(false)
-                this.uploadPhoto = false
-              },
-            )
+          this.accountSvc.upload(formdata, this.userId).subscribe(
+            data => {
+              if (data.code) {
+                this.accountSvc.publish(this.userId).subscribe(
+                  () => {
+                    this.loader.changeLoad.next(false)
+                    this.profilePicture = data.artifactURL
+                    this.uploadPhoto = false
+                  },
+                  () => {
+                    this.loader.changeLoad.next(false)
+                    this.uploadPhoto = false
+                  },
+                )
+              }
+            },
+            () => {
+              this.loader.changeLoad.next(false)
+              this.uploadPhoto = false
+            },
+          )
         }
       },
     })
   }
   changeToDefaultImg($event: any) {
-    $event.target.src =
-      this.fileUrl ? this.fileUrl : ''
+    $event.target.src = this.fileUrl ? this.fileUrl : ''
   }
 
   submitChanges() {
-
     if (this.settingsForm && this.roles) {
-      if (this.settingsForm.controls.name.value !== ''
-        && this.roles.controls.role.value !== null
-        && this.roles.controls.state.value !== null) {
+      this.uploadSaveData = true
+      if (
+        this.settingsForm.controls.name.value !== '' &&
+        this.roles.controls.role.value !== null &&
+        this.roles.controls.state.value !== null
+      ) {
         this.accountsettingsObj = {
           user_id: this.userId,
           user_name: this.settingsForm.controls.name.value,
@@ -334,41 +353,50 @@ export class AccountSettingsComponent implements OnInit {
           phone_privacy: false,
           email: this.settingsForm.controls.emailId.value,
           emailprivacy: !this.settingsForm.controls.checkEmail.value,
-          public_profiles: [{
-            field: 'facebook',
-            data: this.profile ? (this.profile.controls.fb.value.indexOf('https://') === 0 ?
-              this.profile.controls.fb.value :
-              `https://${this.profile.controls.fb.value}`) : null,
-            privacy: false,
-          }, {
-            field: 'twitter',
-            data: this.profile ? (this.profile.controls.twitter.value.indexOf('https://') === 0 ?
-              this.profile.controls.twitter.value :
-              `https://${this.profile.controls.twitter.value}`) : null,
-            privacy: false,
-          }, {
-            field: 'linkedin',
-            data: this.profile ? (this.profile.controls.linkedin.value.indexOf('https://') === 0 ?
-              this.profile.controls.linkedin.value :
-              `https://${this.profile.controls.linkedin.value}`) : null,
-            privacy: false,
-          }, {
-            field: 'personalwebsite',
-            data: this.profile ? (this.profile.controls.web.value.indexOf('https://') === 0 ?
-              this.profile.controls.web.value :
-              `https://${this.profile.controls.web.value}`) : null,
-            privacy: false,
-          },
-
+          public_profiles: [
+            {
+              field: 'facebook',
+              data: this.profile
+                ? this.profile.controls.fb.value.indexOf('https://') === 0
+                  ? this.profile.controls.fb.value
+                  : `https://${this.profile.controls.fb.value}`
+                : null,
+              privacy: false,
+            },
+            {
+              field: 'twitter',
+              data: this.profile
+                ? this.profile.controls.twitter.value.indexOf('https://') === 0
+                  ? this.profile.controls.twitter.value
+                  : `https://${this.profile.controls.twitter.value}`
+                : null,
+              privacy: false,
+            },
+            {
+              field: 'linkedin',
+              data: this.profile
+                ? this.profile.controls.linkedin.value.indexOf('https://') === 0
+                  ? this.profile.controls.linkedin.value
+                  : `https://${this.profile.controls.linkedin.value}`
+                : null,
+              privacy: false,
+            },
+            {
+              field: 'personalwebsite',
+              data: this.profile
+                ? this.profile.controls.web.value.indexOf('https://') === 0
+                  ? this.profile.controls.web.value
+                  : `https://${this.profile.controls.web.value}`
+                : null,
+              privacy: false,
+            },
           ],
         }
 
         this.accountSvc.accountSettings(this.accountsettingsObj).subscribe(
           () => {
-
             this.snackBar.open(this.changesUpdatedMessage.nativeElement.value)
             this.uploadSaveData = false
-
           },
           (err: any) => {
             if (err.status === 405) {
@@ -378,29 +406,30 @@ export class AccountSettingsComponent implements OnInit {
               this.uploadSaveData = false
               this.snackBar.open(this.errorUpdatingEmailMessage.nativeElement.value)
             }
-          })
+          },
+        )
       }
-
     }
     // this.checkEmail= this.settingsForm.controls.checkEmail,
     // this.newCourse= this.notification.controls.newCourse,
     // this.replyToPost= this.notification.controls.replyToPost,
     // this.registrationOpen= this.notification.controls.registrationOpen
-
   }
   async changePassword() {
-    this.fetchingPasswordUrl = true
-    let token = ''
-    let passwordUrl = ''
-    const data = await this.accountSvc.getToken().toPromise()
-    token = data.token
-    if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.keycloak.changePasswordUrl) {
-      passwordUrl = `${this.configSvc.instanceConfig.keycloak.changePasswordUrl}/pid/reset-password/${token}`
-      if (passwordUrl) {
-        this.fetchingPasswordUrl = false
-      }
+    // this.fetchingPasswordUrl = true
+    // let token = ''
+    if (this.configSvc.instanceConfig) {
+      // tslint:disable-next-line: max-line-length
+      const passwordUrl = `${this.configSvc.instanceConfig.keycloak.url}/realms/${this.configSvc.instanceConfig.keycloak.realm}/login-actions/reset-credentials?client_id=portal`
       window.open(passwordUrl)
     }
+    // const data = await this.accountSvc.getToken().toPromise()
+    // token = data.token
+    // if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.keycloak.changePasswordUrl) {
+    // passwordUrl = `${this.configSvc.instanceConfig.keycloak.changePasswordUrl}/pid/reset-password/${token}`
+    // if (passwordUrl) {
+    // this.fetchingPasswordUrl = false
+    // }
+    // }
   }
-
 }

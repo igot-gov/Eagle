@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
@@ -21,7 +18,6 @@ export enum ErrorType {
   styleUrls: ['./app-toc-home.component.scss'],
 })
 export class AppTocHomeComponent implements OnInit, OnDestroy {
-
   banners: NsAppToc.ITocBanner | null = null
   content: NsContent.IContent | null = null
   errorCode: NsAppToc.EWsTocErrorCode | null = null
@@ -29,6 +25,8 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription | null = null
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   isCohortsRestricted = false
+  isInIframe = false
+  forPreview = window.location.href.includes('/author/')
   analytics = this.route.snapshot.data.pageData.data.analytics
   errorWidgetData: NsWidgetResolver.IRenderConfigWithTypedData<any> = {
     widgetType: 'errorResolver',
@@ -44,7 +42,9 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
       type: 'mat-button',
     },
   }
-
+  moreLikeThis: NsContent.IContentMinimal[]
+  moreLikeThisFree: NsContent.IContentMinimal[]
+  tocConfig: any = null
   constructor(
     private route: ActivatedRoute,
     private contentSvc: WidgetContentService,
@@ -52,28 +52,24 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     private loggerSvc: LoggerService,
     private configSvc: ConfigurationsService,
   ) {
-    if (this.configSvc.restrictedFeatures) {
-      this.isCohortsRestricted = this.configSvc.restrictedFeatures.has('cohorts')
-    }
+    this.moreLikeThis = []
+    this.moreLikeThisFree = []
   }
 
   ngOnInit() {
+    try {
+      this.isInIframe = window.self !== window.top
+    } catch (_ex) {
+      this.isInIframe = false
+    }
     if (this.route) {
       this.routeSubscription = this.route.data.subscribe((data: Data) => {
         this.banners = data.pageData.data.banners
         this.tocSvc.subtitleOnBanners = data.pageData.data.subtitleOnBanners || false
         this.tocSvc.showDescription = data.pageData.data.showDescription || false
+        this.tocConfig = data.pageData.data
         this.initData(data)
       })
-    }
-  }
-
-  private checkIfEditEnabled() {
-    const userProfile = this.configSvc.userProfile
-    const restrictedFeatures = this.configSvc.restrictedFeatures
-    if (userProfile && this.content && restrictedFeatures) {
-      this.isAuthor = this.content.creatorContacts.some(creator => creator.id === userProfile.userId)
-        && !restrictedFeatures.has('author')
     }
   }
 
@@ -83,9 +79,18 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     }
   }
 
+  get enableAnalytics(): boolean {
+    if (this.configSvc.restrictedFeatures) {
+      return !this.configSvc.restrictedFeatures.has('tocAnalytics')
+    }
+    return false
+  }
+
   private initData(data: Data) {
     const initData = this.tocSvc.initData(data)
     this.content = initData.content
+    this.moreLikeThis = []
+    this.moreLikeThisFree = []
     this.errorCode = initData.errorCode
     switch (this.errorCode) {
       case NsAppToc.EWsTocErrorCode.API_FAILURE: {
@@ -105,10 +110,27 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
         break
       }
     }
-    if (this.content && this.content.identifier) {
-      this.checkIfEditEnabled()
+    if (this.content && this.content.identifier && !this.forPreview) {
       this.getContinueLearningData(this.content.identifier)
+      if (this.tocConfig && this.tocConfig.moreLikeThis) {
+        this.fetchMoreLikeThis(this.content.identifier)
+        if (this.content.exclusiveContent) {
+          this.fetchMoreLikeThisFree(this.content.identifier)
+        }
+      }
     }
+  }
+
+  private fetchMoreLikeThis(contentId: string) {
+    this.tocSvc.fetchContentWhatsNext(contentId).subscribe(contents => {
+      this.moreLikeThis = contents || []
+    })
+  }
+
+  private fetchMoreLikeThisFree(contentId: string) {
+    this.tocSvc.fetchMoreLikeThisFree(contentId).subscribe(contents => {
+      this.moreLikeThisFree = contents || []
+    })
   }
 
   private getContinueLearningData(contentId: string) {
@@ -119,7 +141,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
       },
       (error: any) => {
         this.loggerSvc.error('CONTENT HISTORY FETCH ERROR >', error)
-      })
+      },
+    )
   }
-
 }

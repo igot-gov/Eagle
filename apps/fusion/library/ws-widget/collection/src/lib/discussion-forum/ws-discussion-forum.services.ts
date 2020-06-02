@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 
@@ -10,8 +7,9 @@ import { NsDiscussionForum } from './ws-discussion-forum.model'
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
 const API_END_POINTS = {
-  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timeline`,
+  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timelineV2`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
+  SOCIAL_VIEW_CONVERSATION_V2: `${PROTECTED_SLAG_V8}/social/post/viewConversationV2`,
   SOCIAL_POST_PUBLISH: `${PROTECTED_SLAG_V8}/social/post/publish`,
   SOCIAL_POST_DELETE: `${PROTECTED_SLAG_V8}/social/post/delete`,
   SOCIAL_POST_ACTIVITY_UPDATE: `${PROTECTED_SLAG_V8}/social/post/activity/create`,
@@ -51,5 +49,8 @@ export class WsDiscussionForumService {
   }
   fetchPost(request: NsDiscussionForum.IPostRequest): Observable<NsDiscussionForum.IPostResult> {
     return this.http.post<NsDiscussionForum.IPostResult>(API_END_POINTS.SOCIAL_VIEW_CONVERSATION, request)
+  }
+  fetchAllPosts(request: NsDiscussionForum.IPostRequestV2): Observable<NsDiscussionForum.IPostResultV2> {
+    return this.http.post<NsDiscussionForum.IPostResultV2>(API_END_POINTS.SOCIAL_VIEW_CONVERSATION_V2, request)
   }
 }

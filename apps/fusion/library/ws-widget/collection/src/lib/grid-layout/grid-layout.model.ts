@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver } from '@ws-widget/resolver'
 type tDimensions = 'small' | 'medium' | 'large' | 'xLarge'
 type tSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
@@ -28,6 +25,7 @@ export const sizeSuffix: Record<tSize, string> = {
 
 export interface IGridLayoutDataMain {
   gutter?: number
+  rowGutter?: number
   widgets: IGridLayoutData[][]
   fromBasicEditor: boolean
 }

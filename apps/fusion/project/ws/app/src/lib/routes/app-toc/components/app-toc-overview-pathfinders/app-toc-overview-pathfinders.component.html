@@ -1,34 +1,40 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="mt-4">
-  <a [disabled]="!isStartButtonAvailable" [href]="content?.artifactUrl" target="_blank"
-    class="margin-right-m ws-mat-accent-background extWebsite font-medium text-lg" mat-flat-button>
-    <span i18n>Access to Additional Resources & Tools</span>
-    <mat-icon class="ml-2 text-white mat-icon notranslate material-icons mat-icon-no-color">open_in_new</mat-icon>
-  </a>
-</div>
 <div class="flex flex-between flex-wrapped mt-4">
   <div class="info-section2">
     <mat-card class="ws-mat-border-top-bolder info-container">
       <div class="mb-6" *ngIf="content?.skills?.length">
-        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>Skills</p>
+        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>
+          Skills
+        </p>
         <ul>
           <li *ngFor="let skill of content?.skills">{{ skill.name }}</li>
         </ul>
       </div>
 
+      <div *ngIf="content?.sourceShortName || content?.sourceName || content?.sourceIconUrl" class="mb-6">
+        <p class="item-heading leading-normal font-medium text-lg ws-mat-primary-text" i18n>
+          Source
+        </p>
+        <img *ngIf="content?.sourceIconUrl" alt="source img" [src]="getIconUrl || content.sourceIconUrl"
+          class="source-image" />
+        <!-- <div>{{ content?.sourceShortName ? content?.sourceShortName : content?.sourceName }}</div> -->
+      </div>
+
       <div *ngIf="content?.references?.length" class="mb-6">
         <p class="item-heading leading-normal font-medium text-lg ws-mat-primary-text" i18n>
-          PD Provider Website
+          Source Website
         </p>
-        <ng-container *ngIf="content?.references?.length">
-          <span *ngFor="let link of content?.references || []" class="break-all">{{ link.url }} <br></span>
-        </ng-container>
+        <div class="flex items-center" *ngIf="content?.references?.length">
+          <mat-icon class="pr-2">language</mat-icon>
+          <span *ngFor="let link of content?.references || []" class="break-all">
+            <a [href]="link.url" target="_blank">{{ link.url }}</a>
+            <br /></span>
+        </div>
       </div>
 
       <div *ngIf="content?.creatorDetails?.length">
-        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>Faculty</p>
+        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>
+          Faculty
+        </p>
         <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
             authors: content?.creatorDetails,
             title: 'AUTHOR'
@@ -37,21 +43,29 @@
       </div>
     </mat-card>
   </div>
+
   <div class="meta-section" *ngIf="content?.body || content?.description">
     <mat-card class="unit-meta-item">
       <div *ngIf="content?.body" class="unit-meta-item">
-        <p class="item-heading font-medium leading-normal text-lg ws-mat-primary-text" i18n>Course Description</p>
+        <p class="item-heading font-medium leading-normal text-lg ws-mat-primary-text" i18n>
+          Description
+        </p>
         <mat-card-content>
           <div class="break-words" [innerHTML]="body"></div>
         </mat-card-content>
       </div>
       <div *ngIf="showDescription && content?.description" class="unit-meta-item">
-        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>Course Description</p>
+        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>
+          Description
+        </p>
         <mat-card-content>
           <div class="mat-subheading-1" [innerHTML]="content?.description"></div>
         </mat-card-content>
       </div>
     </mat-card>
+    <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier" [contentId]="content?.identifier"
+      [forPreview]="forPreview">
+    </ws-widget-user-content-rating>
   </div>
 </div>
 <ng-template #creators let-authors="authors" let-title="title">

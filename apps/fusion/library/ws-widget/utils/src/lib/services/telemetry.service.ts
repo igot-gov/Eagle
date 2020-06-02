@@ -1,15 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
-import { ConfigurationsService } from './configurations.service'
-import { NsInstanceConfig } from './configurations.model'
-import { EventService } from './event.service'
-import { WsEvents } from './event.model'
+import { NsContent } from '@ws-widget/collection'
 import { filter } from 'rxjs/operators'
 import { AuthKeycloakService } from './auth-keycloak.service'
+import { NsInstanceConfig } from './configurations.model'
+import { ConfigurationsService } from './configurations.service'
+import { WsEvents } from './event.model'
+import { EventService } from './event.service'
 import { LoggerService } from './logger.service'
-import { NsContent } from '@ws-widget/collection'
 
 declare var $t: any
 
@@ -17,11 +14,12 @@ declare var $t: any
   providedIn: 'root',
 })
 export class TelemetryService {
-
   previousUrl: string | null = null
   telemetryConfig: NsInstanceConfig.ITelemetryConfig | null = null
-  externalConfig: any = null
-  eventData: any = null
+  pData: any = null
+  externalApps: any = {
+    RBCP: 'rbcp-web-ui',
+  }
   constructor(
     private configSvc: ConfigurationsService,
     private eventsSvc: EventService,
@@ -40,6 +38,7 @@ export class TelemetryService {
         uid: this.configSvc.userProfile && this.configSvc.userProfile.userId,
         authtoken: this.authSvc.token,
       }
+      this.pData = this.telemetryConfig.pdata
       this.addPlayerListener()
       this.addInteractListener()
       this.addTimeSpentListener()
@@ -62,11 +61,39 @@ export class TelemetryService {
   }
 
   end(type: string, mode: string, id: string) {
-    $t.end({
-      type,
-      mode,
-      contentId: id,
-    })
+    $t.end(
+      {
+        type,
+        mode,
+        contentId: id,
+      },
+      {
+        context: {
+          pdata: {
+            ...this.pData,
+            id: this.pData.id,
+          },
+        },
+      },
+    )
+  }
+
+  audit(type: string, props: string, data: any) {
+    $t.audit(
+      {
+        type,
+        props,
+        data,
+      },
+      {
+        context: {
+          pdata: {
+            ...this.pData,
+            id: this.pData.id,
+          },
+        },
+      },
+    )
   }
 
   heartbeat(type: string, mode: string, id: string) {
@@ -81,91 +108,121 @@ export class TelemetryService {
     const page = this.getPageDetails()
     if (page.objectId) {
       const config = {
-        ...this.telemetryConfig,
+        context: {
+          pdata: {
+            ...this.pData,
+            id: this.pData.id,
+          },
+        },
         object: {
           id: page.objectId,
         },
       }
       $t.impression(page, config)
     } else {
-      $t.impression(page, this.telemetryConfig)
+      $t.impression(page, {
+        context: {
+          pdata: {
+            ...this.pData,
+            id: this.pData.id,
+          },
+        },
+      })
     }
     this.previousUrl = page.pageUrl
   }
 
   externalImpression(impressionData: any) {
     const page = this.getPageDetails()
-    if (page.objectId) {
-      this.externalConfig = {
-        ...this.telemetryConfig,
+    if (this.externalApps[impressionData.subApplicationName]) {
+      const externalConfig = page.objectId ? {
+        context: {
+              pdata: {
+                ...this.pData,
+            id: this.externalApps[impressionData.subApplicationName],
+              },
+            },
         object: {
           id: page.objectId,
         },
-      }
-    } else {
-      this.externalConfig = this.telemetryConfig
-    }
-    this.eventData = null
-    switch (impressionData.subApplicationName) {
-      case 'RBCP':
-        if (this.telemetryConfig) {
-          this.externalConfig.pdata.id = WsEvents.externalTelemetrypdata.RBCP
-          this.eventData = impressionData.data
+      } : {
+          context: {
+              pdata: {
+              ...this.pData,
+              id: this.externalApps[impressionData.subApplicationName],
+              },
+            },
         }
-        break
-      default:
-        break
-    }
-    if (this.eventData) {
-      $t.impression(this.eventData, this.externalConfig)
+      $t.impression(impressionData.data, externalConfig)
     }
   }
 
   addTimeSpentListener() {
     this.eventsSvc.events$
       .pipe(
-        filter(event =>
-          event &&
-          event.eventType === WsEvents.WsEventType.Telemetry &&
-          event.data.type === WsEvents.WsTimeSpentType.Page &&
-          event.data.mode &&
-          event.data,
+        filter(
+          event =>
+            event &&
+            event.eventType === WsEvents.WsEventType.Telemetry &&
+            event.data.type === WsEvents.WsTimeSpentType.Page &&
+            event.data.mode &&
+            event.data,
         ),
       )
       .subscribe(event => {
-
         if (event.data.state === WsEvents.EnumTelemetrySubType.Loaded) {
-          this.start(event.data.type || WsEvents.WsTimeSpentType.Page, event.data.mode || WsEvents.WsTimeSpentMode.View, event.data.pageId)
+          this.start(
+            event.data.type || WsEvents.WsTimeSpentType.Page,
+            event.data.mode || WsEvents.WsTimeSpentMode.View,
+            event.data.pageId,
+          )
         }
         if (event.data.state === WsEvents.EnumTelemetrySubType.Unloaded) {
-          this.end(event.data.type || WsEvents.WsTimeSpentType.Page, event.data.mode || WsEvents.WsTimeSpentMode.View, event.data.pageId)
+          this.end(
+            event.data.type || WsEvents.WsTimeSpentType.Page,
+            event.data.mode || WsEvents.WsTimeSpentMode.View,
+            event.data.pageId,
+          )
         }
       })
   }
   addPlayerListener() {
     this.eventsSvc.events$
       .pipe(
-        filter(event =>
-          event &&
-          event.eventType === WsEvents.WsEventType.Telemetry &&
-          event.data.type === WsEvents.WsTimeSpentType.Player &&
-          event.data.mode &&
-          event.data,
+        filter(
+          event =>
+            event &&
+            event.eventType === WsEvents.WsEventType.Telemetry &&
+            event.data.type === WsEvents.WsTimeSpentType.Player &&
+            event.data.mode &&
+            event.data,
         ),
       )
       .subscribe(event => {
         const content: NsContent.IContent | null = event.data.content
-        if (event.data.state === WsEvents.EnumTelemetrySubType.Loaded && (!content ||
-          content.isIframeSupported === 'Maybe'
-          || event.data.content.url || content.isIframeSupported === 'Yes')) {
-          this.start(event.data.type || WsEvents.WsTimeSpentType.Player,
-                     event.data.mode || WsEvents.WsTimeSpentMode.Play, event.data.identifier)
+        if (
+          event.data.state === WsEvents.EnumTelemetrySubType.Loaded &&
+          (!content ||
+            content.isIframeSupported.toLowerCase() === 'maybe' ||
+            content.isIframeSupported.toLowerCase() === 'yes')
+        ) {
+          this.start(
+            event.data.type || WsEvents.WsTimeSpentType.Player,
+            event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            event.data.identifier,
+          )
         }
-        if (event.data.state === WsEvents.EnumTelemetrySubType.Unloaded && (!content ||
-          content.isIframeSupported === 'Maybe'
-          || event.data.content.url || content.isIframeSupported === 'Yes')) {
-          this.end(event.data.type || WsEvents.WsTimeSpentType.Player,
-                   event.data.mode || WsEvents.WsTimeSpentMode.Play, event.data.identifier)
+        if (
+          event.data.state === WsEvents.EnumTelemetrySubType.Unloaded &&
+          (!content ||
+            content.isIframeSupported.toLowerCase() === 'maybe' ||
+            content.isIframeSupported.toLowerCase() === 'yes')
+        ) {
+          this.end(
+            event.data.type || WsEvents.WsTimeSpentType.Player,
+            event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            event.data.identifier,
+          )
         }
       })
   }
@@ -173,84 +230,116 @@ export class TelemetryService {
   addInteractListener() {
     this.eventsSvc.events$
       .pipe(
-        filter((event: WsEvents.WsEventTelemetryInteract) =>
-          event && event.data &&
-          event.eventType === WsEvents.WsEventType.Telemetry &&
-          event.data.eventSubType === WsEvents.EnumTelemetrySubType.Interact,
+        filter(
+          (event: WsEvents.WsEventTelemetryInteract) =>
+            event &&
+            event.data &&
+            event.eventType === WsEvents.WsEventType.Telemetry &&
+            event.data.eventSubType === WsEvents.EnumTelemetrySubType.Interact,
         ),
       )
       .subscribe(event => {
-        this.externalConfig = null
         const page = this.getPageDetails()
-        this.eventData = {
-          type: event.data.type,
-          subtype: event.data.subType,
-          object: event.data.object,
-          pageid: page.pageid,
-          target: { page },
+        if (typeof event.from === 'string' && this.externalApps[event.from]) {
+          const externalConfig = {
+            context: {
+              pdata: {
+                ...this.pData,
+                id: this.externalApps[event.from],
+              },
+            },
+          }
+          $t.interact(event.data, externalConfig)
+        } else {
+          $t.interact(
+            {
+              type: event.data.type,
+              subtype: event.data.subType,
+              object: event.data.object,
+              pageid: page.pageid,
+              target: { page },
+            },
+            {
+              context: {
+              pdata: {
+                ...this.pData,
+                id: this.pData.id,
+              },
+            },
+            })
         }
-        switch (event.from) {
-          case 'RBCP':
-            if (this.telemetryConfig) {
-              this.externalConfig = this.telemetryConfig
-              this.externalConfig.pdata.id = WsEvents.externalTelemetrypdata.RBCP
-              this.eventData = event.data
-            }
-            break
-          default:
-            break
-        }
-        $t.interact(this.eventData, this.externalConfig)
       })
   }
   addHearbeatListener() {
     this.eventsSvc.events$
       .pipe(
-        filter((event: WsEvents.WsEventTelemetryHeartBeat) =>
-          event && event.data &&
-          event.eventType === WsEvents.WsEventType.Telemetry &&
-          event.data.eventSubType === WsEvents.EnumTelemetrySubType.HeartBeat,
+        filter(
+          (event: WsEvents.WsEventTelemetryHeartBeat) =>
+            event &&
+            event.data &&
+            event.eventType === WsEvents.WsEventType.Telemetry &&
+            event.data.eventSubType === WsEvents.EnumTelemetrySubType.HeartBeat,
         ),
       )
       .subscribe(event => {
-        this.externalConfig = null
-        this.eventData = {
-          type: event.data.type,
-          subtype: event.data.eventSubType,
-          identifier: event.data.identifier,
-          mimeType: event.data.mimeType,
-          mode: event.data.mode,
+        if (typeof event.from === 'string' && this.externalApps[event.from]) {
+          const externalConfig = {
+            context: {
+              pdata: {
+                ...this.pData,
+                id: this.externalApps[event.from],
+              },
+            },
+          }
+          $t.heartbeat(event.data, externalConfig)
+        } else {
+          $t.heartbeat(
+            {
+              type: event.data.type,
+              subtype: event.data.eventSubType,
+              identifier: event.data.identifier,
+              mimeType: event.data.mimeType,
+              mode: event.data.mode,
+            },
+            {
+              context: {
+              pdata: {
+                ...this.pData,
+                id: this.pData.id,
+              },
+            },
+            })
         }
-        switch (event.from) {
-          case 'RBCP':
-            if (this.telemetryConfig) {
-              this.externalConfig = this.telemetryConfig
-              this.externalConfig.pdata.id = WsEvents.externalTelemetrypdata.RBCP
-              this.eventData = event.data
-            }
-            break
-          default:
-            break
-        }
-        $t.heartbeat(this.eventData, this.externalConfig)
       })
   }
 
   addSearchListener() {
     this.eventsSvc.events$
       .pipe(
-        filter((event: WsEvents.WsEventTelemetrySearch) =>
-          event && event.data &&
-          event.eventType === WsEvents.WsEventType.Telemetry &&
-          event.data.eventSubType === WsEvents.EnumTelemetrySubType.Search,
+        filter(
+          (event: WsEvents.WsEventTelemetrySearch) =>
+            event &&
+            event.data &&
+            event.eventType === WsEvents.WsEventType.Telemetry &&
+            event.data.eventSubType === WsEvents.EnumTelemetrySubType.Search,
         ),
       )
       .subscribe(event => {
-        $t.search({
-          query: event.data.query,
-          filters: event.data.filters,
-          size: event.data.size,
-        })
+        $t.search(
+          {
+            query: event.data.query,
+            filters: event.data.filters,
+            size: event.data.size,
+          },
+          {
+            context: {
+              pdata: {
+                ...this.pData,
+                id: this.pData.id,
+              },
+            },
+          },
+        )
       })
   }
 

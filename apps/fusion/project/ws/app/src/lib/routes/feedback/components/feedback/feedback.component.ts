@@ -1,16 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy, Input } from '@angular/core'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { NgForm } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
+import { ActivatedRoute, Router } from '@angular/router'
+import { NsFeedback } from '@ws-widget/collection'
+import { BtnContentFeedbackService } from '@ws-widget/collection/src/lib/btn-content-feedback/btn-content-feedback.service'
+import { ConfigurationsService } from 'library/ws-widget/utils/src/lib/services/configurations.service'
 import { Subscription } from 'rxjs'
 import { debounceTime } from 'rxjs/operators'
 import { IFeedbackRequest } from '../../models/feedback.model'
-import { NgForm } from '@angular/forms'
-import { ConfigurationsService } from 'library/ws-widget/utils/src/lib/services/configurations.service'
-import { BtnContentFeedbackService } from '@ws-widget/collection/src/lib/btn-content-feedback/btn-content-feedback.service'
-import { NsFeedback } from '@ws-widget/collection'
 @Component({
   selector: 'ws-app-feedback',
   templateUrl: './feedback.component.html',
@@ -88,7 +85,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private confSvc: ConfigurationsService,
     private submitFeedbackSvc: BtnContentFeedbackService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.data.subscribe(response => {
@@ -121,7 +118,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
       () => {
         this.openSnackbar(this.toastError.nativeElement.value)
         this.submitInProgress = false
-        // console.log('err >', err);
+        // //console.log('err >', err);
       },
     )
   }

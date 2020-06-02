@@ -1,23 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-mixins';
 @import 'ws-vars';
 
-h1{
-    font-weight: 400 !important;
-    font-stretch: normal !important;
-    font-size: 30px !important;
-    line-height: 40px !important;
-}
+
 
 .textView {
   width: calc(100% - 32px);
 }
 
-.cardConatiner {
-  height:270px;
-
+.spinner {
+  margin-left: 36%;
 }
 
 
@@ -29,18 +20,6 @@ h1{
     }
 }
 
-mat-card{
-  //left: 25% !important;
-  position: relative;
-  margin-left: 30px;
-  box-shadow: 0 10px 20px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
-   @include breakpoint-lt-m {
-      width: 100%;
-      left:0% ;
-      margin:  1em 12em 2em -1em;
-    }
-
-}
 td.mat-cell{
   padding:10px !important;
 }
@@ -56,58 +35,3 @@ th.mat-header-cell{
     }
 }
 
-
-.submit-reset{
-  right: 20px;
-  bottom: 20px;
-}
-
- $color:#3f51b5;
-.loader {
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  border-radius: 50%;
-  position: absolute;
-  margin: auto;
-  background-color: lighten($color,10%);
-  width: 48px;
-  height:48px;
-  line-height:48px;
- animation-name: ripple;
- animation-duration: 0.4s;
- animation-iteration-count: infinite;
- animation-timing-function: linear;
-}
-
-
-@keyframes ripple {
-  0% {
-    box-shadow: 0 0 0 0 rgba($color, 0.1),
-                0 0 0 20px rgba($color, 0.1),
-                0 0 0 40px rgba($color, 0.1),
-                0 0 0 60px rgba($color, 0.1);
-  }
-  100% {
-    box-shadow: 0 0 0 20px rgba($color, 0.1),
-                0 0 0 40px rgba($color, 0.1),
-                0 0 0 60px rgba($color, 0.1),
-                0 0 0 80px rgba($color, 0);
-  }
-}
-
-.ripple{
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  position: absolute;
-  margin: auto;
-}
-.icon{
-  color:whitesmoke !important;
-  padding-left: 10px!important;
-  padding-top: 7px !important;
-  font-size: 30px !important;
-}

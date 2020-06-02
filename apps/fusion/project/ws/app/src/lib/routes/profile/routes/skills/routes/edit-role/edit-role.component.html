@@ -1,0 +1,110 @@
+<div *ngIf="editRoleFetchStatus === 'fetching' || !roleName" class="my-3 text-center">
+  <mat-spinner></mat-spinner>
+</div>
+<h2 *ngIf="editRoleFetchStatus === 'none'" class="text-center" i18n>No Data</h2>
+<div *ngIf="editRoleFetchStatus === 'done' && roleName"
+  class="roles-container flex flex-center flex-wrapped margin-right-xl margin-left-xl">
+  <div class="margin-right-xl margin-top-m margin-bottom-xl width-1-1">
+    <div class="flex flex-middle">
+      <h2 class="mat-title margin-left-s" i18n>Editing the Role</h2>
+      <h2 class="mat-title margin-left-xs">{{ roleName }}</h2>
+    </div>
+    <mat-card class="edit-role-card">
+      <mat-card-content>
+        <form [formGroup]="editForm" class="tab-width">
+          <p class="font-bold" i18n>Role Name *</p>
+          <mat-form-field class="length-field width-1-1">
+            <input type="text" matInput i18n-placeholder placeholder="Role Title" formControlName="roleName" required />
+          </mat-form-field>
+          <ng-container *ngIf="isClient">
+            <p class="font-bold" *ngIf="roleQuotientData?.role_headline" i18n>Description of the Role *</p>
+            <mat-form-field *ngIf="roleQuotientData?.role_headline" class="length-field width-1-1" color="primary">
+              <textarea type="text" matInput i18n-placeholder placeholder="Description" formControlName="description"
+                required></textarea>
+            </mat-form-field>
+            <p class="font-bold" i18n>Role Job Family *</p>
+            <mat-form-field class="width-1-1">
+              <input matInput i18n-placeholder placeholder="Enter the job family" formControlName="jobFamily"
+                required />
+            </mat-form-field>
+            <p class="font-bold" i18n>Role Sub-Job Family</p>
+            <mat-form-field class="width-1-1">
+              <input matInput i18n-placeholder placeholder="Enter the sub-job family" formControlName="subJobFamily" />
+            </mat-form-field>
+            <p class="font-bold" i18n>Role Position Type *</p>
+            <mat-form-field class="width-1-1">
+              <input matInput i18n-placeholder placeholder="Enter the position type" formControlName="positionType"
+                required />
+            </mat-form-field>
+            <p class="font-bold" i18n>Role Responsibilities *</p>
+            <mat-form-field class="width-1-1">
+              <textarea type="text" matInput i18n-placeholder placeholder="role responsibilities"
+                formControlName="responsibilities" required></textarea>
+            </mat-form-field>
+            <p class="font-bold" i18n>Skill Group *</p>
+            <mat-form-field class="width-1-1">
+              <input matInput i18n-placeholder placeholder="Enter the skill group" formControlName="skillGroup"
+                readonly />
+            </mat-form-field>
+          </ng-container>
+          <ng-container *ngIf="isClient">
+            <p class="font-bold" i18n>Search for the skills to add to the role *</p>
+            <mat-form-field class="length-field width-1-1" appearance="outline">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let skill of selectedSkills" [selectable]="selectable" [removable]="removable"
+                  (removed)="remove(skill)">
+                  {{ skill?.skill_name }} - ({{ skill?.skill_level }})
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Add your skill" i18n-placeholder #skillInput [formControl]="editControl"
+                  [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)" required />
+                <!-- <input type="text" placeholder="Enter Email Id" aria-label="Email Id" #emailInput [matAutocomplete]="auto" [formControl]="shareControl"
+                              formControlName="emailId" [matChipInputFor]="chipList" /> -->
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event.option.value)"
+                [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                  {{ option?.skill_name }} - ({{ option?.skill_level }})
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </ng-container>
+          <ng-container *ngIf="!isClient">
+            <p class="font-bold" i18n>Search for the skills to add to the role *</p>
+            <mat-form-field class="width-1-1">
+              <mat-chip-list #chipList>
+                <mat-chip *ngFor="let skill of selectedSkills" [selectable]="selectable" [removable]="removable"
+                  (removed)="remove(skill)">
+                  {{ skill?.skill_name }}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Add your skill" i18n-placeholder #skillInput [formControl]="roleAddControl"
+                  [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event)" required />
+                <mat-error *ngIf="submitted">Please add at least one skill</mat-error>
+                <!-- <input type="text" placeholder="Enter Email Id" aria-label="Email Id" #emailInput [matAutocomplete]="auto" [formControl]="shareControl"
+                                                      formControlName="emailId" [matChipInputFor]="chipList" /> -->
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event.option.value)"
+                [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                  {{ option?.skill_name }}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </ng-container>
+          <div class="flex flex-center flex-wrapped">
+            <button mat-raised-button color="primary" type="submit" (click)="onEditRole()" i18n>
+              Update Role
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<input #existsContent type="hidden" i18n-value value="You can not add more than one level in a skill" />
+<input #emptyContent type="hidden" i18n-value value="Please fill up all the required fields" />
+<input #successContent type="hidden" i18n-value value="Successfully updated Role" />
+<input #selectContent type="hidden" i18n-value value="Please add at least one skill" />

@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="profile-container">
   <div class="flex flex-wrap">
     <mat-card class="about-me ">
@@ -12,7 +9,7 @@
         </div>
       </div>
 
-      <div class="p-4">
+      <div class="p-4" *ngIf="enabledTabs?.subFeatures?.interests">
         <div class="flex flex-middle mb-4">
           <mat-icon>tag_faces</mat-icon>
           <span class="font-bold mat-title margin-zero pl-4" i18n="interest you follow">
@@ -91,7 +88,7 @@
                 mat-icon-button
                 class="interest-edit"
                 color="primary"
-path
+                [routerLink]="'/page/siemens-channel-hub'"
               >
                 <mat-icon> edit</mat-icon>
                 <span i18n class="px-2">Edit</span>
@@ -99,7 +96,7 @@ path
             </div>
             <div *ngIf="!channelsFollow?.length" class=" py-4">
               <span i18n="no interest">No Channels being followed, explore</span>
-path
+              <a class="ws-mat-primary-text" [routerLink]="'/page/siemens-channel-hub'"
                 >&nbsp; Channels</a
               >
             </div>
@@ -142,7 +139,7 @@ path
       <div class=" text-center" *ngIf="apiFetchStatus === 'fetching'">
         <mat-spinner></mat-spinner>
       </div>
-      <div *ngIf="apiFetchStatus === 'done'" class="flex flex-between">
+      <div *ngIf="apiFetchStatus === 'done'">
         <div class="w-full">
           <div class="flex flex-middle">
             <mat-icon>history</mat-icon>
@@ -155,24 +152,17 @@ path
               <mat-icon>info</mat-icon>
             </button>
           </div> -->
-
-          <p class="ws-mat-primary-text mat-display-1 margin-remove-bottom font-bold margin-left-xl">
-            {{ totalLearningHours | pipeDurationTransform: 'hour' }}
+          <p *ngIf="totalLearningHours > 0">
+            <span class="ws-mat-primary-text mat-display-1 margin-remove-bottom font-bold margin-left-xl">
+              {{ totalLearningHours | pipeDurationTransform: 'hms' }}
+            </span><sup class="star">*</sup>
           </p>
-          <!-- <div class="margin-top-xl">
-            <h2>
-              <ng-container i18n>Time Spent on</ng-container>
-              {{ timeEvent | date: 'd MMM, y' }}
-            </h2>
-            <h1 *ngIf="timeSpent > 0">
-              {{ timeSpent | pipeDurationTransform: 'hms' }}
-              <ng-container i18n>mins</ng-container>
-            </h1>
-            <h1 *ngIf="timeSpent === 0">
-              {{ timeSpent }}
-              <ng-container i18n>mins</ng-container>
-            </h1>
-          </div> -->
+          <p *ngIf="totalLearningHours === 0">
+            <span class="ws-mat-primary-text mat-display-1 margin-remove-bottom font-bold margin-left-xl">
+              0
+            </span>
+            <sup class="star">*</sup>
+          </p>
           <div class="w-full margin-left-xl margin-top-s" *ngIf="timeSpentData">
             <h4>
               <ng-container *ngIf="orgWideTimePercent !== 0" i18n> You are </ng-container>
@@ -216,10 +206,26 @@ path
             </h4>
           </div>
         </div>
-        <!-- <ws-app-calendar *ngIf="timeSpentData" (notify)="calendarEvent($event)" [specialDates]="specialDates"
-          class="calendar w-1/2"></ws-app-calendar> -->
+        <p class="mat-caption msg content-end text-right" i18n>* Last 12 Months only</p>
+        <div *ngIf="timeSpentData?.last_updated_on"
+          class="mat-caption flex flex-middle content-end justify-end remove-margin-top">
+          <ng-container>
+            <span i18n>Last Updated on :</span>
+            <span class="ml-2"> {{ timeSpentData?.last_updated_on | date: 'MMM d, y'}}</span>
+          </ng-container>
+        </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="enabledTabs?.subFeatures?.skill && skillData?.length > 0" class="margin-top-xl">
+    <h1 class="mat-h1" i18n>Skills recommended by Manager</h1>
+    <div class="text-center" *ngIf="skillFetchStatus === 'fetching'">
+      <mat-spinner></mat-spinner>
+    </div>
+    <ws-utils-horizontal-scroller *ngIf="skillFetchStatus === 'done'" [loadStatus]="'done'">
+      <ws-app-skill-card class="margin-bottom-xl margin-right-l" *ngFor="let skill of skillData" [cardData]="skill">
+      </ws-app-skill-card>
+    </ws-utils-horizontal-scroller>
   </div>
   <div *ngIf="enabledTabs?.subFeatures?.pendingCourses && coursePending?.length > 0" class="margin-top-xl">
     <h1 class="mat-h1" i18n>Pending Courses</h1>

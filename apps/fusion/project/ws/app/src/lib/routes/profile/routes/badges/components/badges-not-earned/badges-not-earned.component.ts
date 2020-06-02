@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input } from '@angular/core'
 import { IBadge } from '../../badges.model'
 
@@ -10,9 +7,41 @@ import { IBadge } from '../../badges.model'
   styleUrls: ['./badges-not-earned.component.scss'],
 })
 export class BadgesNotEarnedComponent implements OnInit {
-  constructor() { }
+  constructor(
+  ) { }
   @Input()
   badge!: IBadge
+  isQuiz = false
+  isCourse = false
+  isLearn = false
+  isHoverText = false
+  isDay = false
+  isResource = false
+  isMinute = false
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.badge.remainingCount === 0) {
+      this.isHoverText = true
+    }
+    if (this.badge.remainingCountUnit === 'Quiz') {
+      this.isQuiz = true
+    }
+    if (this.badge.remainingCountUnit === 'Course') {
+      this.isCourse = true
+    }
+    const howToEarn = this.badge.how_to_earn.toLowerCase()
+    if (howToEarn.includes('learn')) {
+      this.isLearn = true
+    }
+    if (this.badge.remainingCountUnit === 'Day') {
+      this.isDay = true
+    }
+    if (this.badge.remainingCountUnit === 'Minute') {
+      this.isMinute = true
+    }
+    if (this.badge.remainingCountUnit === 'Resource') {
+      this.isResource = true
+    }
+
+  }
 }

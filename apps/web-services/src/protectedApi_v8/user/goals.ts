@@ -1,52 +1,44 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { ITrackStatus } from '../../models/goal.model'
-import {
-  transformGoalUpsertRequest,
-  transformGoalUpsertResponse,
-  transformToCommonGoalGroup,
-  transformToGoalForOthers,
-  transformToTrackStatus,
-  transformToUserGoals
-} from '../../service/goals'
+import { transformGoalUpsertRequest, transformGoalUpsertResponse, transformToCommonGoalGroup, transformToGoalForOthers, transformToTrackStatus, transformToUserGoals } from '../../service/goals'
 import { CONSTANTS } from '../../utils/env'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
   acceptRejectGoal: (userId: string, id: string, action: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/goals/${id}/actions?action=${action}`,
+    `${CONSTANTS.GOALS_API_BASE}/v1/users/${userId}/goals/${id}/actions?action=${action}`,
   actionRequired: (userId: string, sourceFields: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v2/users/${userId}/goals-For-Action?sourceFields=${sourceFields}`,
+    `${CONSTANTS.GOALS_API_BASE}/v2/users/${userId}/goals-For-Action?sourceFields=${sourceFields}`,
   addContentToGoal: (userId: string, id: string, contentId: string, goalType: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v3/users/${userId}/goals/${id}/contents/${contentId}?goal_type=${goalType}`,
+    `${CONSTANTS.GOALS_API_BASE}/v3/users/${userId}/goals/${id}/contents/${contentId}?goal_type=${goalType}`,
   common: (userId: string, groupId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/common-goals/${groupId}`,
-  createUpdateGoal: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/v4/users/${userId}/goals`,
+    `${CONSTANTS.GOALS_API_BASE}/v1/users/${userId}/common-goals/${groupId}`,
+  createUpdateGoal: (userId: string) => `${CONSTANTS.GOALS_API_BASE}/v4/users/${userId}/goals`,
   deleteUserForSharedGoal: (userId: string, goalId: string, type: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v2/users/${userId}/goals/${goalId}/recipients/unshare?goal_type=${type}`,
+    `${CONSTANTS.GOALS_API_BASE}/v2/users/${userId}/goals/${goalId}/recipients/unshare?goal_type=${type}`,
   deleteUserGoal: (userId: string, goalId: string, type: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v3/users/${userId}/goals/${goalId}?goal_type=${type}`,
+    `${CONSTANTS.GOALS_API_BASE}/v3/users/${userId}/goals/${goalId}?goal_type=${type}`,
   getGoalForOthers: (userId: string, sourceFields: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v2/users/${userId}/goals-for-others?sourceFields=${sourceFields}`,
+    `${CONSTANTS.GOALS_API_BASE}/v2/users/${userId}/goals-for-others?sourceFields=${sourceFields}`,
   getUserGoals: (userId: string, type: string, sourceFields: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v5/users/${userId}/goals?goal_type=${type}&sourceFields=${sourceFields}`,
-  goalGroups: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/goal-groups`,
+    `${CONSTANTS.GOALS_API_BASE}/v5/users/${userId}/goals?goal_type=${type}&sourceFields=${sourceFields}`,
+  goalGroups: (userId: string) => `${CONSTANTS.GOALS_API_BASE}/v1/users/${userId}/goal-groups`,
   removeContentFromGoal: (userId: string, id: string, contentId: string, goalType: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v3/users/${userId}/goals/${id}/contents/${contentId}?goal_type=${goalType}`,
+    `${CONSTANTS.GOALS_API_BASE}/v3/users/${userId}/goals/${id}/contents/${contentId}?goal_type=${goalType}`,
   share: (userId: string, goalId: string, type: string) =>
     `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/goals/${goalId}/recipients?type=${type}`,
   sharev2: (userId: string, goalId: string, type: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v2/users/${userId}/goals/${goalId}/recipients?type=${type}`,
+    `${CONSTANTS.GOALS_API_BASE}/v2/users/${userId}/goals/${goalId}/recipients?type=${type}`,
   track: (userId: string, goalId: string, type: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v2/users/${userId}/goals/${goalId}?goal_type=${type}`,
+    `${CONSTANTS.GOALS_API_BASE}/v2/users/${userId}/goals/${goalId}?goal_type=${type}`,
   updateDurationCommonGoal: (userId: string, id: string, type: string, duration: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v3/users/${userId}/common-goals/${id}?goal_type=${type}&duration=${duration}`,
+    `${CONSTANTS.GOALS_API_BASE}/v3/users/${userId}/common-goals/${id}?goal_type=${type}&duration=${duration}`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export const goalsApi = Router()
 
@@ -70,7 +62,9 @@ goalsApi.get('/updateDurationCommonGoal/:goalType/:goalId', async (req, res) => 
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -92,7 +86,9 @@ goalsApi.post('/', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && transformGoalUpsertResponse(err.response.data)) || err)
+      .send((err && err.response && transformGoalUpsertResponse(err.response.data)) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -114,7 +110,9 @@ goalsApi.post('/share/:goalType/:goalId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -136,7 +134,9 @@ goalsApi.post('/sharev2/:goalType/:goalId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -167,7 +167,9 @@ goalsApi.post('/action/:type/:goalType/:goalId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -190,7 +192,9 @@ goalsApi.get('/action', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -211,7 +215,9 @@ goalsApi.get('/common', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -232,7 +238,9 @@ goalsApi.get('/common/:groupId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -255,7 +263,9 @@ goalsApi.get('/for-others', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -278,7 +288,9 @@ goalsApi.get('/track/:goalType/:goalId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -301,7 +313,9 @@ goalsApi.delete('/:goalType/:goalId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -323,13 +337,15 @@ goalsApi.post('/removeUsers/:goalType/:goalId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
 goalsApi.get('/:type', async (req, res) => {
   const goalType = req.params.type
-  const userId = extractUserIdFromRequest(req)
+  const userId = req.query.wid || extractUserIdFromRequest(req)
   const sourceFields = req.query.sourceFields
   try {
     const rootOrg = req.header('rootOrg')
@@ -346,7 +362,9 @@ goalsApi.get('/:type', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -370,7 +388,9 @@ goalsApi.patch('/addContent/:goalId/:contentId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
@@ -393,6 +413,8 @@ goalsApi.delete('/removeContent/:goalId/:contentId', async (req, res) => {
   } catch (err) {
     res
       .status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })

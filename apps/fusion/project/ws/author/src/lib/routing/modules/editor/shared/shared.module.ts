@@ -1,20 +1,27 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { AceEditorModule } from 'ng2-ace-editor'
-import { MatQuillComponent } from './components/rich-text-editor/my-own.component'
-import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { PlainCKEditorComponent } from './components/plain-ckeditor/plain-ckeditor.component'
+import { NgModule } from '@angular/core'
+import { DisplayContentTypeModule } from '@ws-widget/collection'
+import { DefaultThumbnailModule, PipeDurationTransformModule } from '@ws-widget/utils'
+import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
+import { AceEditorModule } from 'ng2-ace-editor'
+import { CKEditorModule } from 'ng2-ckeditor'
+import { CatalogSelectModule } from '../shared/components/catalog-select/catalog-select.module'
+import { AceEditorComponent } from './components/ace-editor/ace-editor.component'
+import { AuthEditorActionButtonsComponent } from './components/auth-editor-action-buttons/auth-editor-action-buttons.component'
+import { AuthLanguageSelectBarComponent } from './components/auth-language-select-bar/auth-language-select-bar.component'
+import { AuthPickerComponent } from './components/auth-picker/auth-picker.component'
 import { EditMetaComponent } from './components/edit-meta/edit-meta.component'
-import { UploadService } from './services/upload.service'
+import { PlainCKEditorComponent } from './components/plain-ckeditor/plain-ckeditor.component'
+import { MatQuillComponent } from './components/rich-text-editor/my-own.component'
 import { QuillComponent } from './components/rich-text-editor/quill.component'
 import { DragDropDirective } from './directives/drag-drop.directive'
-import { CKEditorModule } from 'ng2-ckeditor'
-import { AceEditorComponent } from './components/ace-editor/ace-editor.component'
-import { CatalogSelectModule } from '../shared/components/catalog-select/catalog-select.module'
-import { SkillsSelectModule } from './components/skills-select/skills-select.module'
+import { UploadService } from './services/upload.service'
+import { BaseComponent } from './components/editor/base/base.component'
+import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
+import { EditMetaTextComponent } from './components/editor/edit-meta-text/edit-meta-text.component'
+import { EditMetaTextareaComponent } from './components/editor/edit-meta-textarea/edit-meta-textarea.component'
+import { EditMetaDropdownComponent } from './components/editor/edit-meta-dropdown/edit-meta-dropdown.component'
+import { EditMetaInputNumberComponent } from './components/editor/edit-meta-input-number/edit-meta-input-number.component'
 
 @NgModule({
   declarations: [
@@ -24,14 +31,25 @@ import { SkillsSelectModule } from './components/skills-select/skills-select.mod
     EditMetaComponent,
     DragDropDirective,
     AceEditorComponent,
+    AuthLanguageSelectBarComponent,
+    AuthPickerComponent,
+    AuthEditorActionButtonsComponent,
+    BaseComponent,
+    EditMetaV2Component,
+    EditMetaTextComponent,
+    EditMetaTextareaComponent,
+    EditMetaDropdownComponent,
+    EditMetaInputNumberComponent,
   ],
   imports: [
     CommonModule,
+    DefaultThumbnailModule,
+    PipeDurationTransformModule,
+    DisplayContentTypeModule,
     CKEditorModule,
     SharedModule,
     AceEditorModule,
     CatalogSelectModule,
-    SkillsSelectModule,
   ],
   exports: [
     MatQuillComponent,
@@ -40,9 +58,14 @@ import { SkillsSelectModule } from './components/skills-select/skills-select.mod
     EditMetaComponent,
     DragDropDirective,
     AceEditorComponent,
+    AuthEditorActionButtonsComponent,
+    AuthPickerComponent,
+    EditMetaTextComponent,
+    EditMetaTextareaComponent,
+    EditMetaDropdownComponent,
+    EditMetaInputNumberComponent,
   ],
-  providers: [
-    UploadService,
-  ],
+  entryComponents: [AuthPickerComponent],
+  providers: [UploadService],
 })
 export class EditorSharedModule { }

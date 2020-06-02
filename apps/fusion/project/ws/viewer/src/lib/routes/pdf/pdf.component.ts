@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { AccessControlService } from '@ws/author'
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/collection'
@@ -33,6 +31,7 @@ export class PdfComponent implements OnInit, OnDestroy {
     },
   }
   isPreviewMode = false
+  forPreview = window.location.href.includes('/author/')
   discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
     NsDiscussionForum.IDiscussionForumInput
   > | null = null
@@ -41,13 +40,18 @@ export class PdfComponent implements OnInit, OnDestroy {
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private eventSvc: EventService,
+    private accessControlSvc: AccessControlService,
   ) { }
 
   ngOnInit() {
-    if (this.activatedRoute.snapshot.queryParamMap.get('preview')) {
+    if (
+      this.activatedRoute.snapshot.queryParamMap.get('preview') &&
+      !this.accessControlSvc.authoringConfig.newDesign
+    ) {
       this.isPreviewMode = true
-      this.viewerDataSubscription = this.viewerSvc.getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '').subscribe(
-        data => {
+      this.viewerDataSubscription = this.viewerSvc
+        .getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '')
+        .subscribe(data => {
           this.pdfData = data
           if (this.pdfData) {
             this.formDiscussionForumWidget(this.pdfData)
@@ -55,12 +59,12 @@ export class PdfComponent implements OnInit, OnDestroy {
               this.discussionForumWidget.widgetData.isDisabled = true
             }
           }
-          this.widgetResolverPdfData.widgetData.pdfUrl =
-            this.pdfData ? `/apis/authContent/${encodeURIComponent(this.pdfData.artifactUrl)}` : ''
+          this.widgetResolverPdfData.widgetData.pdfUrl = this.pdfData
+            ? `/apis/authContent/${encodeURIComponent(this.pdfData.artifactUrl)}`
+            : ''
           this.widgetResolverPdfData.widgetData.disableTelemetry = true
           this.isFetchingDataComplete = true
-        },
-      )
+        })
     } else {
       this.dataSubscription = this.activatedRoute.data.subscribe(
         async data => {
@@ -71,10 +75,26 @@ export class PdfComponent implements OnInit, OnDestroy {
           if (this.pdfData) {
             this.formDiscussionForumWidget(this.pdfData)
           }
+
           if (this.pdfData && this.pdfData.artifactUrl.indexOf('content-store') >= 0) {
             await this.setS3Cookie(this.pdfData.identifier)
           }
-          this.widgetResolverPdfData.widgetData.pdfUrl = this.pdfData ? this.pdfData.artifactUrl : ''
+          this.widgetResolverPdfData.widgetData.resumePage = 1
+          if (this.pdfData && this.pdfData.identifier) {
+            if (this.activatedRoute.snapshot.queryParams.collectionId) {
+              await this.fetchContinueLearning(
+                this.activatedRoute.snapshot.queryParams.collectionId,
+                this.pdfData.identifier,
+              )
+            } else {
+              await this.fetchContinueLearning(this.pdfData.identifier, this.pdfData.identifier)
+            }
+          }
+          this.widgetResolverPdfData.widgetData.pdfUrl = this.pdfData
+            ? this.forPreview
+              ? this.viewerSvc.getAuthoringUrl(this.pdfData.artifactUrl)
+              : this.pdfData.artifactUrl
+            : ''
           this.widgetResolverPdfData.widgetData.identifier = this.pdfData && this.pdfData.identifier
           this.widgetResolverPdfData = JSON.parse(JSON.stringify(this.widgetResolverPdfData))
           if (this.pdfData) {
@@ -84,14 +104,8 @@ export class PdfComponent implements OnInit, OnDestroy {
           }
           this.isFetchingDataComplete = true
         },
-        () => {
-        },
+        () => { },
       )
-      // this.telemetryIntervalSubscription = interval(30000).subscribe(() => {
-      //   if (this.pdfData && this.pdfData.identifier) {
-      //     this.raiseEvent(WsEvents.EnumTelemetrySubType.HeartBeat)
-      //   }
-      // })
     }
   }
 
@@ -103,7 +117,7 @@ export class PdfComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.LEARNING,
         title: content.name,
         initialPostCount: 2,
-        isDisabled: false,
+        isDisabled: this.forPreview,
       },
       widgetSubType: 'discussionForum',
       widgetType: 'discussionForum',
@@ -111,7 +125,7 @@ export class PdfComponent implements OnInit, OnDestroy {
   }
 
   raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
-    if (this.isPreviewMode) {
+    if (this.forPreview) {
       return
     }
 
@@ -124,17 +138,29 @@ export class PdfComponent implements OnInit, OnDestroy {
         state,
         type: WsEvents.WsTimeSpentType.Player,
         mode: WsEvents.WsTimeSpentMode.Play,
-        courseId: null,
         content: data,
         identifier: data ? data.identifier : null,
-        isCompleted: true,
         mimeType: NsContent.EMimeTypes.PDF,
-        isIdeal: false,
         url: data ? data.artifactUrl : null,
       },
     }
     this.eventSvc.dispatchEvent(event)
+  }
 
+  async fetchContinueLearning(collectionId: string, pdfId: string): Promise<boolean> {
+    return new Promise(resolve => {
+      this.contentSvc.fetchContentHistory(collectionId).subscribe(
+        data => {
+          if (data) {
+            if (data.identifier === pdfId && data.continueData && data.continueData.progress) {
+              this.widgetResolverPdfData.widgetData.resumePage = Number(data.continueData.progress)
+            }
+          }
+          resolve(true)
+        },
+        () => resolve(true),
+      )
+    })
   }
 
   private async setS3Cookie(contentId: string) {

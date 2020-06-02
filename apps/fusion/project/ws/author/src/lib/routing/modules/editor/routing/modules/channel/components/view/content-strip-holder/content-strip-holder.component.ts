@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit, OnChanges } from '@angular/core'
 import { ContentStripMultipleService, NsContent, WidgetContentService } from '@ws-widget/collection'
 import { IWidgetAuthor } from './../../../interface/widget'
@@ -12,7 +9,6 @@ import { ChannelStoreService } from './../../../services/store.service'
   styleUrls: ['./content-strip-holder.component.scss'],
 })
 export class ContentStripHolderComponent implements OnInit, OnChanges {
-
   @Input() id = ''
   @Input() isSubmitPressed = false
   @Input() showData = 'data'
@@ -29,16 +25,14 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
     private store: ChannelStoreService,
     private contentStripSvc: ContentStripMultipleService,
     private contentSvc: WidgetContentService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.store.update.subscribe(
-      (id: string) => {
-        if (id === this.id) {
-          this.initiate()
-        }
-      },
-    )
+    this.store.update.subscribe((id: string) => {
+      if (id === this.id) {
+        this.initiate()
+      }
+    })
   }
 
   ngOnChanges() {
@@ -58,46 +52,60 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
       postWidgets: [] as string[],
     }
     this.widget = this.store.getUpdatedContent(this.id)
-    this.widget.children.map(
-      v => {
-        switch (this.store.getUpdatedContent(v).purpose) {
-          case 'info':
-            this.widgetMap.info = v
-            break
-          case 'noDataWidget':
-            this.widgetMap.noData = v
-            break
-          case 'errorWidget':
-            this.widgetMap.error = v
-            break
-          case 'preWidget':
-            this.widgetMap.preWidgets.push(v)
-            break
-          case 'postWidget':
-            this.widgetMap.postWidgets.push(v)
-            break
-        }
-      },
-    )
+    this.widget.children.map(v => {
+      switch (this.store.getUpdatedContent(v).purpose) {
+        case 'info':
+          this.widgetMap.info = v
+          break
+        case 'noDataWidget':
+          this.widgetMap.noData = v
+          break
+        case 'errorWidget':
+          this.widgetMap.error = v
+          break
+        case 'preWidget':
+          this.widgetMap.preWidgets.push(v)
+          break
+        case 'postWidget':
+          this.widgetMap.postWidgets.push(v)
+          break
+      }
+    })
     if (this.widgetMap.info) {
       this.stripInfo = this.store.getUpdatedContent(this.widgetMap.info)
       this.showInfo = this.stripInfo.addOnData.visibilityMode === 'visible'
     } else {
       this.stripInfo = undefined as any
     }
-    if (this.widget.data.request && this.widget.data.request.api &&
-      Object.keys(this.widget.data.request.api).length) {
+    if (
+      this.widget.data.request &&
+      this.widget.data.request.api &&
+      Object.keys(this.widget.data.request.api).length
+    ) {
       this.fetchFromApi()
-    } else if (this.widget.data.request && this.widget.data.request.search &&
-      Object.keys(this.widget.data.request.search).length) {
+    } else if (
+      this.widget.data.request &&
+      this.widget.data.request.search &&
+      Object.keys(this.widget.data.request.search).length
+    ) {
       this.fetchFromSearch()
-    } else if (this.widget.data.request && this.widget.data.request.search &&
-      Object.keys(this.widget.data.request.search).length) {
+    } else if (
+      this.widget.data.request &&
+      this.widget.data.request.search &&
+      Object.keys(this.widget.data.request.search).length
+    ) {
       this.fetchFromSearch()
-    } else if (this.widget.data.request && this.widget.data.request.search &&
-      Object.keys(this.widget.data.request.search).length) {
+    } else if (
+      this.widget.data.request &&
+      this.widget.data.request.search &&
+      Object.keys(this.widget.data.request.search).length
+    ) {
       this.fetchFromSearch()
-    } else if (this.widget.data.request && this.widget.data.request.ids && this.widget.data.request.ids.length) {
+    } else if (
+      this.widget.data.request &&
+      this.widget.data.request.ids &&
+      this.widget.data.request.ids.length
+    ) {
       this.fetchFromIds()
     } else {
       this.showNoData = true
@@ -119,7 +127,9 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
     this.contentSvc.search(this.widget.data.request.search).subscribe(
       results => {
         this.viewMore = Boolean(
-          results.result.length && this.widget.data.stripConfig && this.widget.data.stripConfig.postCardForSearch,
+          results.result.length &&
+            this.widget.data.stripConfig &&
+            this.widget.data.stripConfig.postCardForSearch,
         )
         this.transformContentsToWidgets(results.result)
       },
@@ -141,24 +151,35 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
   }
 
   fetchFromSearchRegionRecommendation() {
-    if (this.widget.data.request && this.widget.data.request.searchRegionRecommendation
-      && Object.keys(this.widget.data.request.searchRegionRecommendation).length) {
-      this.contentSvc.searchRegionRecommendation(this.widget.data.request.searchRegionRecommendation).subscribe(
-        results => {
-          this.transformContentsToWidgets(results.contents)
-        },
-        () => {
-          this.showError = true
-        },
-      )
+    if (
+      this.widget.data.request &&
+      this.widget.data.request.searchRegionRecommendation &&
+      Object.keys(this.widget.data.request.searchRegionRecommendation).length
+    ) {
+      this.contentSvc
+        .searchRegionRecommendation(this.widget.data.request.searchRegionRecommendation)
+        .subscribe(
+          results => {
+            this.transformContentsToWidgets(results.contents)
+          },
+          () => {
+            this.showError = true
+          },
+        )
     }
   }
   fetchFromSearchV6() {
-    if (this.widget.data.request && this.widget.data.request.searchV6 && Object.keys(this.widget.data.request.searchV6).length) {
+    if (
+      this.widget.data.request &&
+      this.widget.data.request.searchV6 &&
+      Object.keys(this.widget.data.request.searchV6).length
+    ) {
       this.contentSvc.searchV6(this.widget.data.request.searchV6).subscribe(
         results => {
           this.viewMore = Boolean(
-            results.result.length && this.widget.data.stripConfig && this.widget.data.stripConfig.postCardForSearch,
+            results.result.length &&
+              this.widget.data.stripConfig &&
+              this.widget.data.stripConfig.postCardForSearch,
           )
           // this.viewMore = showViewMore
           //   ? {
@@ -180,9 +201,7 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
     }
   }
 
-  private transformContentsToWidgets(
-    contents: NsContent.IContent[],
-  ) {
+  private transformContentsToWidgets(contents: NsContent.IContent[]) {
     this.widgetDatas = (contents || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardContent',
@@ -193,6 +212,7 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
         context: { pageSection: this.widget.data.key, position: idx },
         intranetMode: this.widget.data.stripConfig && this.widget.data.stripConfig.intranetMode,
         deletedMode: this.widget.data.stripConfig && this.widget.data.stripConfig.deletedMode,
+        contentTags: this.widget.data.stripConfig && this.widget.data.stripConfig.contentTags,
       },
     }))
   }
@@ -200,5 +220,4 @@ export class ContentStripHolderComponent implements OnInit, OnChanges {
   triggerEdit(id: string) {
     this.store.triggerEdit(id)
   }
-
 }

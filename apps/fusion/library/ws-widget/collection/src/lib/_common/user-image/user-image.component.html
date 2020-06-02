@@ -1,21 +1,11 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<img
-  alt="user-image"
-  *ngIf="(!errorOccurred && verifiedMicrosoftEmail?.length) || imageUrl"
-  class="user-image"
+<!-- <img alt="user-image" *ngIf="(!errorOccurred && verifiedMicrosoftEmail?.length) || imageUrl" class="user-image"
   [src]="verifiedMicrosoftEmail?.length ? basePicUrl + verifiedMicrosoftEmail : imageUrl"
-  (error)="errorOccurred = true"
-/>
-<ng-container *ngIf="(errorOccurred || !verifiedMicrosoftEmail?.length) && !imageUrl">
+  (error)="errorOccurred = true" /> -->
+<ng-container>
   <mat-icon class="user-icon" *ngIf="imageType === 'initial'">person</mat-icon>
   <span class="mat-app-background rounded-icon" *ngIf="imageType === 'rounded'">
     <mat-icon class="user-icon">person</mat-icon>
   </span>
-  <span
-    class="name-initials-image font-normal ws-mat-primary-default-text ws-mat-primary-lite-background"
-    *ngIf="imageType === 'name-initial'"
-    >{{ shortName }}</span
-  >
+  <span class="name-initials-image font-normal ws-mat-primary-default-text ws-mat-primary-lite-background"
+    *ngIf="imageType === 'name-initial'">{{ shortName }}</span>
 </ng-container>

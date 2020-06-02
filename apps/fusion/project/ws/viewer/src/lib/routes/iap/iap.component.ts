@@ -1,14 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Subscription, fromEvent } from 'rxjs'
-import { filter } from 'rxjs/operators'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { ActivatedRoute } from '@angular/router'
-import { WsEvents, EventService } from '@ws-widget/utils'
-import { IframeRespondService } from '../../iframe-respond.service'
+import { EventService, SubapplicationRespondService, WsEvents } from '@ws-widget/utils'
+import { fromEvent, Subscription } from 'rxjs'
+import { filter } from 'rxjs/operators'
+import { ViewerUtilService } from '../../viewer-util.service'
+
 @Component({
   selector: 'viewer-iap',
   templateUrl: './iap.component.html',
@@ -16,10 +14,13 @@ import { IframeRespondService } from '../../iframe-respond.service'
 })
 export class IapComponent implements OnInit, OnDestroy {
   private routeDataSubscription: Subscription | null = null
-  // private telemetryIntervalSubscription: Subscription | null = null
-  private iframeSubscription: Subscription | null = null
+  private responseSubscription: Subscription | null = null
+  forPreview = window.location.href.includes('/author/')
+  isPreviewMode = false
   isFetchingDataComplete = false
   iapData: NsContent.IContent | null = null
+  oldData: NsContent.IContent | null = null
+  alreadyRaised = false
   discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
     NsDiscussionForum.IDiscussionForumInput
   > | null = null
@@ -27,66 +28,100 @@ export class IapComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private contentSvc: WidgetContentService,
     private eventSvc: EventService,
-    private respondSvc: IframeRespondService,
+    private viewerSvc: ViewerUtilService,
+    private respondSvc: SubapplicationRespondService,
   ) { }
   ngOnInit() {
-    this.routeDataSubscription = this.activatedRoute.data.subscribe(
-      async data => {
-        this.iapData = data.content.data
-        if (this.iapData) {
-          this.formDiscussionForumWidget(this.iapData)
-        }
-        if (this.iapData && this.iapData.artifactUrl.indexOf('content-store') >= 0) {
-          await this.setS3Cookie(this.iapData.identifier)
-        }
-        this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded)
-        if (this.iapData && this.iapData.identifier) {
-          this.iframeSubscription = fromEvent<MessageEvent>(window, 'message')
-            .pipe(
-              filter(
-                (event: MessageEvent) =>
-                  Boolean(event) &&
-                  Boolean(event.data) &&
-                  event.data.subApplicationName === 'IAP' &&
-                  Boolean(event.source && typeof event.source.postMessage === 'function'),
-              ),
-            )
-            .subscribe(async (event: MessageEvent) => {
-              const contentWindow = event.source as Window
-              if (event.data.requestId && event.data.subApplicationName === 'IAP' && this.iapData) {
-                switch (event.data.requestId) {
-                  case 'LOADED':
-                    this.respondSvc.loadedRespond(this.iapData.identifier, contentWindow, event.data.subApplicationName)
-                    break
-                  default:
-                    break
+    if (this.activatedRoute.snapshot.queryParamMap.get('preview')) {
+      this.isPreviewMode = true
+      this.routeDataSubscription = this.viewerSvc.getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '').subscribe(
+        async data => {
+          this.iapData = data
+          if (this.iapData) {
+            this.formDiscussionForumWidget(this.iapData)
+            if (this.discussionForumWidget) {
+              this.discussionForumWidget.widgetData.isDisabled = true
+            }
+          }
+          if (this.iapData && this.iapData.artifactUrl.indexOf('content-store') >= 0) {
+            await this.setS3Cookie(this.iapData.identifier)
+          }
+          this.isFetchingDataComplete = true
+        },
+      )
+    } else {
+      this.routeDataSubscription = this.activatedRoute.data.subscribe(
+        async data => {
+          this.iapData = data.content.data
+          if (this.alreadyRaised && this.oldData) {
+            this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
+          }
+          if (this.iapData) {
+            this.formDiscussionForumWidget(this.iapData)
+          }
+          if (this.iapData && this.iapData.artifactUrl.indexOf('content-store') >= 0) {
+            await this.setS3Cookie(this.iapData.identifier)
+          }
+          if (this.iapData && this.iapData.identifier) {
+            this.oldData = this.iapData
+            this.alreadyRaised = true
+            this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.iapData)
+            this.responseSubscription = fromEvent<MessageEvent>(window, 'message')
+              .pipe(
+                filter(
+                  (event: MessageEvent) =>
+                    Boolean(event) &&
+                    Boolean(event.data) &&
+                    event.data.subApplicationName === 'IAP' &&
+                    Boolean(event.source && typeof event.source.postMessage === 'function'),
+                ),
+              )
+              .subscribe(async (event: MessageEvent) => {
+                const contentWindow = event.source as Window
+                if (event.data.requestId && event.data.subApplicationName === 'IAP' && this.iapData) {
+                  switch (event.data.requestId) {
+                    case 'LOADED':
+                      this.respondSvc.loadedRespond(
+                        contentWindow,
+                        event.data.subApplicationName,
+                        this.iapData.identifier,
+                      )
+                      break
+                    default:
+                      break
+                  }
                 }
-              }
-            })
-        }
-        this.isFetchingDataComplete = true
-      },
-      () => {
-      },
-    )
-    // this.telemetryIntervalSubscription = interval(30000).subscribe(() => {
-    //   if (this.iapData && this.iapData.identifier) {
-    //     this.raiseEvent(WsEvents.EnumTelemetrySubType.HeartBeat)
-    //   }
-    // })
+              })
+          }
+          this.isFetchingDataComplete = true
+        },
+        () => {
+        },
+      )
+    }
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
+    if (this.activatedRoute.snapshot.queryParams.collectionId &&
+      this.activatedRoute.snapshot.queryParams.collectionType
+      && this.iapData) {
+      await this.contentSvc.continueLearning(this.iapData.identifier,
+                                             this.activatedRoute.snapshot.queryParams.collectionId,
+                                             this.activatedRoute.snapshot.queryParams.collectionType,
+      )
+    } else if (this.iapData) {
+      await this.contentSvc.continueLearning(this.iapData.identifier)
+    }
+    if (this.iapData) {
+      this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.iapData)
+    }
     if (this.routeDataSubscription) {
       this.routeDataSubscription.unsubscribe()
     }
-    if (this.iframeSubscription) {
-      this.iframeSubscription.unsubscribe()
+    if (this.responseSubscription) {
+      this.respondSvc.unsubscribeResponse()
+      this.responseSubscription.unsubscribe()
     }
-    // if (this.telemetryIntervalSubscription) {
-    //   this.telemetryIntervalSubscription.unsubscribe()
-    // }
-    this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded)
   }
 
   formDiscussionForumWidget(content: NsContent.IContent) {
@@ -97,32 +132,31 @@ export class IapComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.LEARNING,
         title: content.name,
         initialPostCount: 2,
+        isDisabled: this.forPreview,
       },
       widgetSubType: 'discussionForum',
       widgetType: 'discussionForum',
     }
   }
-  raiseEvent(state: WsEvents.EnumTelemetrySubType) {
-    const event = {
-      eventType: WsEvents.WsEventType.Telemetry,
-      eventLogLevel: WsEvents.WsEventLogLevel.Info,
-      from: 'iap',
-      to: '',
-      data: {
-        state,
-        type: WsEvents.WsTimeSpentType.Player,
-        mode: WsEvents.WsTimeSpentMode.Play,
-        courseId: null,
-        content: this.iapData,
-        identifier: this.iapData ? this.iapData.identifier : null,
-        isCompleted: true,
-        mimeType: NsContent.EMimeTypes.IAP,
-        isIdeal: false,
-        url: this.iapData ? this.iapData.artifactUrl : null,
-      },
+  raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
+    if (!this.forPreview) {
+      const event = {
+        eventType: WsEvents.WsEventType.Telemetry,
+        eventLogLevel: WsEvents.WsEventLogLevel.Info,
+        from: 'iap',
+        to: '',
+        data: {
+          state,
+          type: WsEvents.WsTimeSpentType.Player,
+          mode: WsEvents.WsTimeSpentMode.Play,
+          content: data,
+          identifier: data ? data.identifier : null,
+          mimeType: NsContent.EMimeTypes.IAP,
+          url: data ? data.artifactUrl : null,
+        },
+      }
+      this.eventSvc.dispatchEvent(event)
     }
-    this.eventSvc.dispatchEvent(event)
-
   }
 
   private async setS3Cookie(contentId: string) {
@@ -134,5 +168,4 @@ export class IapComponent implements OnInit, OnDestroy {
       })
     return
   }
-
 }

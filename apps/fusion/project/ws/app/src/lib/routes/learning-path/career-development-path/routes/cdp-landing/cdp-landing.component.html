@@ -1,0 +1,113 @@
+<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+  <ws-widget-btn-page-back [widgetData]="{ url: '/' }"></ws-widget-btn-page-back>
+  <h1 i18n>Learning Paths</h1>
+  <!-- <span class="spacer"></span>
+  <mat-form-field floatLabel="never" class="search-container">
+    <input matInput type="text" (input)="filterItem(value)" placeholder="Find a Learning Journey" [(ngModel)]="value" />
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="filterItem(value)">
+      <mat-icon>find_in_page</mat-icon>
+    </button>
+  </mat-form-field> -->
+</mat-toolbar>
+<div class="margin-xl">
+  <div class="flex flex-start flex-wrapped">
+    <h1 class="text-title text" i18n>Learning Paths</h1>
+    <!-- <h4 class="pt-2 pl-4" i18n>(Under Construction)</h4> -->
+  </div>
+  <h4 i18n>
+    Learning paths offer a specially curated, coherent collection of learning and training units that accompany you
+    on your
+    way to continuously developing your knowledge and skills.
+  </h4>
+</div>
+<div class="margin-xl">
+  <ng-container [wsResolverWidget]="widgetResolverCourseData"></ng-container>
+</div>
+<!-- <div class="flex flex-start flex-wrapped ml-6 margin-bottom-xl">
+  <ws-utils-horizontal-scroller [loadStatus]="'done'">
+    <div class="m-2" *ngFor="let tile of finalTile">
+      <mat-card class="card-space-saving-container">
+
+        <a class="cursor-pointer" (click)="getPathDetails(tile)">
+          <img mat-card-image [src]="tile.imageUrl" class="object-contain card-img ws-mat-primary-lite-background"
+            [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="tile.displayName" [title]="tile.displayName" />
+        </a>
+        <mat-card-content>
+          <div class="flex flex-middle flex-wrapped">
+            <a (click)="getPathDetails(tile)">
+              <p class="mat-body-strong margin-remove-bottom" i18n>Learning Path</p>
+              <div
+                class="ws-mat-primary-text ws-mat-text-block-fade-gradient flex flex-wrapped margin-remove-top mat-title title-text cursor-pointer"
+                matTooltip="{{ tile.displayName }}">
+                {{ tile?.displayName}}
+              </div>
+            </a>
+          </div>
+          <div class="leading-normal ws-mat-text-block-fade-gradient description-text">
+            {{tile?.description}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </ws-utils-horizontal-scroller>
+</div> -->
+<!-- <div class="flex flex-start flex-wrapped ml-6 mb-4">
+  <div class="m-2" *ngFor="let tile of courseTile">
+    <mat-card class="card-space-saving-container">
+      <a (click)="routeToCourse(tile.titleKey)">
+        <img mat-card-image [src]="tile.imageUrl" class="object-contain card-img ws-mat-primary-lite-background" [wsUtilsDefaultThumbnail]="defaultThumbnail"
+          [alt]="tile.displayName" [title]="tile.displayName" />
+      </a>
+      <mat-card-content>
+        <div class="flex flex-middle flex-wrapped">
+          <a class="cursor-pointer" (click)="routeToCourse(tile.titleKey)">
+            <h4 class="ws-mat-primary-text mat-title title-text cursor-pointer" matTooltip="{{ tile.displayName }}">
+              {{ tile.displayName | pipeLimitTo: 15 }}
+            </h4>
+          </a>
+          <span class="spacer"></span>
+          <mat-icon (click)="routeToCourse(tile.titleKey)" matTooltip="Course" class="padding-s cursor-pointer" *ngIf="tile.type === 'course'" i18n-matTooltip>library_books</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div> -->
+
+<!-- <div class="flex flex-start flex-wrapped ml-6 mb-4">
+  <mat-card class="course-tile" *ngFor="let tile of finalTile">
+    <a (click)="getPathDetails(tile)" class="cursor-pointer">
+      <img [src]="tile.imageUrl" [alt]="tile.displayName" [ngStyle]="{ width: tile?.width, filter: tile?.greyScale }" [wsUtilsDefaultThumbnail]="defaultThumbnail"
+        layout-fill />
+    </a>
+    <div class="flex flex-middle flex-wrapped">
+      <button class="flex flex-middle" matTooltip="{{ tile.displayName }}" mat-button>
+        <h4 (click)="getPathDetails(tile)" class="margin-remove-bottom mat-body-strong">{{ tile.displayName | pipeLimitTo: 15 }}</h4>
+      </button>
+      <span class="spacer"></span>
+      <mat-icon (click)="getPathDetails(tile)" class="padding-s" *ngIf="tile.type === 'bubble'">device_hub</mat-icon>
+      <mat-icon (click)="getPathDetails(tile)" class="padding-s" *ngIf="tile.type === 'tile'">web</mat-icon>
+    </div>
+    <div class="flex flex-wrapped ml-4">
+      <p i18n>Learning Journey</p>
+    </div>
+  </mat-card>
+</div> -->
+<!-- <div class="flex flex-start flex-wrapped ml-6 mb-4">
+  <mat-card class="course-tile" *ngFor="let tile of courseTile">
+    <a (click)="routeToCourse(tile.titleKey)" class="cursor-pointer">
+      <img [src]="tile.imageUrl" [alt]="tile.displayName" [ngStyle]="{ width: tile?.width, filter: tile?.greyScale }" [wsUtilsDefaultThumbnail]="defaultThumbnail"
+        layout-fill />
+    </a>
+    <div class="flex flex-middle flex-wrapped">
+      <button class="flex flex-middle" matTooltip="{{ tile.displayName }}" mat-button>
+        <h4 (click)="routeToCourse(tile.titleKey)" class="margin-remove-bottom mat-body-strong">{{ tile.displayName | pipeLimitTo: 15 }}</h4>
+      </button>
+      <span class="spacer"></span>
+      <mat-icon (click)="routeToCourse(tile.titleKey)" class="padding-s" *ngIf="tile.type === 'course'">library_books</mat-icon>
+    </div>
+    <div class="flex flex-wrapped ml-4">
+      <p i18n>Learning Journey</p>
+    </div>
+  </mat-card>
+</div> -->

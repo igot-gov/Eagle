@@ -1,0 +1,80 @@
+<div class="flex flex-between flex-wrapped mt-4">
+  <div class="info-section2">
+    <mat-card class="ws-mat-border-top-bolder info-container">
+      <div class="mb-6" *ngIf="content?.creatorContacts?.length">
+        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>
+          Created By
+        </p>
+        <ul>
+          <li *ngFor="let creator of content?.creatorContacts">{{ creator.name }}</li>
+        </ul>
+      </div>
+
+      <div *ngIf="content?.sourceShortName || content?.sourceName || content?.sourceIconUrl" class="mb-6">
+        <p class="item-heading leading-normal font-medium text-lg ws-mat-primary-text" i18n>
+          Source
+        </p>
+        <img *ngIf="content?.sourceIconUrl" alt="source img" [src]="getIconUrl || content.sourceIconUrl"
+          class="source-image" />
+        <!-- <div>{{ content?.sourceShortName ? content?.sourceShortName : content?.sourceName }}</div> -->
+      </div>
+
+      <div *ngIf="content?.references?.length" class="mb-6">
+        <p class="item-heading leading-normal font-medium text-lg ws-mat-primary-text" i18n>
+          Source Website
+        </p>
+        <div class="flex items-center" *ngIf="content?.references?.length">
+          <mat-icon class="pr-2">language</mat-icon>
+          <span *ngFor="let link of content?.references || []" class="break-all">
+            <a [href]="link.url" target="_blank">{{ link.url }}</a>
+            <br /></span>
+        </div>
+      </div>
+
+      <div *ngIf="content?.creatorDetails?.length">
+        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>
+          Faculty
+        </p>
+        <ng-container [ngTemplateOutlet]="creators" [ngTemplateOutletContext]="{
+            authors: content?.creatorDetails,
+            title: 'AUTHOR'
+          }">
+        </ng-container>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="meta-section" *ngIf="content?.body || content?.description">
+    <mat-card class="unit-meta-item">
+      <div *ngIf="content?.body" class="unit-meta-item">
+        <p class="item-heading font-medium leading-normal text-lg ws-mat-primary-text" i18n>
+          Description
+        </p>
+        <mat-card-content>
+          <div class="break-words" [innerHTML]="body"></div>
+        </mat-card-content>
+      </div>
+      <div *ngIf="showDescription && content?.description" class="unit-meta-item">
+        <p class="item-heading font-medium text-lg leading-normal ws-mat-primary-text" i18n>
+          Description
+        </p>
+        <mat-card-content>
+          <div class="mat-subheading-1" [innerHTML]="content?.description"></div>
+        </mat-card-content>
+      </div>
+    </mat-card>
+    <ws-widget-user-content-rating class="mb-4 block" *ngIf="content?.identifier" [contentId]="content?.identifier"
+      [forPreview]="forPreview">
+    </ws-widget-user-content-rating>
+  </div>
+</div>
+<ng-template #creators let-authors="authors" let-title="title">
+  <div *ngFor="let author of authors" class="author">
+    <ws-widget-user-image class="author-image" [userId]="author.userId" [userName]="author.name"
+      [imageType]="'name-initial'"></ws-widget-user-image>
+
+    <div class="width-expand flex flex-middle flex-between">
+      <p class="margin-remove text-md font-normal">{{ author.name }}</p>
+    </div>
+  </div>
+</ng-template>

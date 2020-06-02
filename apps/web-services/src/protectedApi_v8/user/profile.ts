@@ -1,13 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import {
   IUserDetailsResponse,
   IUserGraphProfile,
-  IUserGraphProfileResponse
+  IUserGraphProfileResponse,
 } from '../../models/user.model'
 import { CONSTANTS } from '../../utils/env'
 import { logError } from '../../utils/logger'
@@ -16,20 +13,20 @@ import {
   extractUserIdFromRequest,
   extractUserNameFromRequest,
   extractUserTokenContent,
-  IAuthorizedRequest
+  IAuthorizedRequest,
 } from '../../utils/requestExtract'
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 // Update the v1 to v2
 const apiEndpoints = {
   create: `${CONSTANTS.SB_EXT_API_BASE}/v1/user/createUser`,
-  details: `${CONSTANTS.SB_EXT_API_BASE_2}/user`,
+  details: `${CONSTANTS.USER_DETAILS_API_BASE}/user`,
   graph: `${CONSTANTS.SB_EXT_API_BASE}/v1/Users`,
   graphV2: `${CONSTANTS.SB_EXT_API_BASE}/v2/Users`,
 }
 
-export async function getUserDetailsFromApi(
-  userId: string
-): Promise<IUserDetailsResponse | null> {
+export async function getUserDetailsFromApi(userId: string): Promise<IUserDetailsResponse | null> {
   try {
     const res = await axios.get<IUserDetailsResponse>(
       `${apiEndpoints.details}/${userId}`,
@@ -41,9 +38,7 @@ export async function getUserDetailsFromApi(
   }
 }
 
-export async function getUserDetailsFromGraph(
-  userId: string
-): Promise<IUserGraphProfile | null> {
+export async function getUserDetailsFromGraph(userId: string): Promise<IUserGraphProfile | null> {
   try {
     const res = await axios.get<IUserGraphProfileResponse>(
       `${apiEndpoints.graphV2}/${userId}/Data`,
@@ -64,10 +59,7 @@ function manipulateResult(
   let empNumber = (detailsResponse && detailsResponse.empNumber) || 0
   try {
     // tslint:disable-next-line:ban
-    empNumber = parseInt(
-      (profileResponse && profileResponse.companyName) || '0',
-      10
-    )
+    empNumber = parseInt((profileResponse && profileResponse.companyName) || '0', 10)
   } catch (err) {
     logError(err)
   }
@@ -85,8 +77,7 @@ function manipulateResult(
     name:
       (detailsResponse && detailsResponse.name) ||
       defaultName ||
-      (profileResponse &&
-        `${profileResponse.givenName} ${profileResponse.surname}`),
+      (profileResponse && `${profileResponse.givenName} ${profileResponse.surname}`),
   }
 }
 
@@ -116,7 +107,11 @@ profileApi.get('/empDB', async (req, res) => {
     const response = await getUserDetailsFromApi(userId)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 profileApi.get('/graph', async (req, res) => {
@@ -125,7 +120,11 @@ profileApi.get('/graph', async (req, res) => {
     const response = await getUserDetailsFromGraph(userId)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -133,14 +132,15 @@ profileApi.get('/graph/photo/:userEmail', async (req, res) => {
   try {
     const userEmail = req.params.userEmail
     const url = `${apiEndpoints.graph}/${userEmail}/Photo`
-    const response = await axios.get<IUserGraphProfileResponse>(
-      url,
-      axiosRequestConfig
-    )
+    const response = await axios.get<IUserGraphProfileResponse>(url, axiosRequestConfig)
     res.json(response.data)
   } catch (err) {
     logError('ERROR FETCHING USER IMAGE:', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -150,7 +150,11 @@ profileApi.get('/', async (req, res) => {
     const response = await getUserProfile(userId, req)
     res.json(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -190,6 +194,10 @@ profileApi.patch('/', async (req, res) => {
     res.status(404).send('')
   } catch (err) {
     logError('err in new user acceptance >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
@@ -8,6 +5,7 @@ import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/c
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { EventService, WsEvents } from '@ws-widget/utils'
+import { ViewerUtilService } from '../../viewer-util.service'
 
 @Component({
   selector: 'viewer-resource-collection',
@@ -16,8 +14,8 @@ import { EventService, WsEvents } from '@ws-widget/utils'
 })
 export class ResourceCollectionComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | null = null
-  private telemetryIntervalSubscription: Subscription | null = null
   isFetchingDataComplete = false
+  forPreview = window.location.href.includes('/author/')
   isErrorOccured = false
   resourceCollectionData: NsContent.IContent | null = null
   oldData: NsContent.IContent | null = null
@@ -31,7 +29,8 @@ export class ResourceCollectionComponent implements OnInit, OnDestroy {
     private contentSvc: WidgetContentService,
     private http: HttpClient,
     private eventSvc: EventService,
-  ) { }
+    private viewSvc: ViewerUtilService,
+  ) {}
 
   ngOnInit() {
     this.dataSubscription = this.activatedRoute.data.subscribe(
@@ -43,11 +42,19 @@ export class ResourceCollectionComponent implements OnInit, OnDestroy {
         if (this.resourceCollectionData) {
           this.formDiscussionForumWidget(this.resourceCollectionData)
         }
-        if (this.resourceCollectionData && this.resourceCollectionData.artifactUrl.indexOf('content-store') >= 0) {
+        if (
+          this.resourceCollectionData &&
+          this.resourceCollectionData.artifactUrl.indexOf('content-store') >= 0
+        ) {
           await this.setS3Cookie(this.resourceCollectionData.identifier)
         }
-        if (this.resourceCollectionData && this.resourceCollectionData.mimeType === NsContent.EMimeTypes.COLLECTION_RESOURCE) {
-          this.resourceCollectionManifest = await this.transformResourceCollection(this.resourceCollectionData)
+        if (
+          this.resourceCollectionData &&
+          this.resourceCollectionData.mimeType === NsContent.EMimeTypes.COLLECTION_RESOURCE
+        ) {
+          this.resourceCollectionManifest = await this.transformResourceCollection(
+            this.resourceCollectionData,
+          )
         }
         if (this.resourceCollectionData && this.resourceCollectionManifest) {
           this.oldData = this.resourceCollectionData
@@ -58,34 +65,39 @@ export class ResourceCollectionComponent implements OnInit, OnDestroy {
           this.isErrorOccured = true
         }
       },
-      () => { },
+      () => {},
     )
-    // this.telemetryIntervalSubscription = interval(30000).subscribe(() => {
-    //   if (this.resourceCollectionData && this.resourceCollectionData.identifier) {
-    //     this.raiseEvent(WsEvents.EnumTelemetrySubType.HeartBeat)
-    //   }
-    // })
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
+    if (this.activatedRoute.snapshot.queryParams.collectionId &&
+      this.activatedRoute.snapshot.queryParams.collectionType
+      && this.resourceCollectionData) {
+      await this.contentSvc.continueLearning(this.resourceCollectionData.identifier,
+                                             this.activatedRoute.snapshot.queryParams.collectionId,
+                                             this.activatedRoute.snapshot.queryParams.collectionType,
+      )
+    } else if (this.resourceCollectionData) {
+      await this.contentSvc.continueLearning(this.resourceCollectionData.identifier)
+    }
     if (this.resourceCollectionData) {
       this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.resourceCollectionData)
     }
     if (this.dataSubscription) {
       this.dataSubscription.unsubscribe()
     }
-    if (this.telemetryIntervalSubscription) {
-      this.telemetryIntervalSubscription.unsubscribe()
-    }
   }
 
   private async transformResourceCollection(_content: NsContent.IContent) {
     let manifestFile = ''
     if (this.resourceCollectionData && this.resourceCollectionData.artifactUrl) {
+      const artifactUrl = this.forPreview
+        ? this.viewSvc.getAuthoringUrl(this.resourceCollectionData.artifactUrl)
+        : this.resourceCollectionData.artifactUrl
       manifestFile = await this.http
-        .get<any>(this.resourceCollectionData ? this.resourceCollectionData.artifactUrl : '')
+        .get<any>(artifactUrl || '')
         .toPromise()
-        .catch((_err: any) => { })
+        .catch((_err: any) => {})
     }
     return manifestFile
   }
@@ -98,12 +110,17 @@ export class ResourceCollectionComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.LEARNING,
         title: content.name,
         initialPostCount: 2,
+        isDisabled: this.forPreview,
       },
       widgetSubType: 'discussionForum',
       widgetType: 'discussionForum',
     }
   }
+
   raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
+    if (this.forPreview) {
+      return
+    }
     const event = {
       eventType: WsEvents.WsEventType.Telemetry,
       eventLogLevel: WsEvents.WsEventLogLevel.Info,
@@ -134,5 +151,4 @@ export class ResourceCollectionComponent implements OnInit, OnDestroy {
       })
     return
   }
-
 }
