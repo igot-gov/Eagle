@@ -15,6 +15,7 @@ under the law.
 Highly Confidential
  
 */
+package com.infosys.lex.notification.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -30,6 +31,8 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 import com.datastax.driver.core.AuthProvider;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
+import com.infosys.lex.notification.properties.ApplicationServerProperties;
+import com.infosys.lex.notification.properties.DatabaseProperties;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.sunbird")

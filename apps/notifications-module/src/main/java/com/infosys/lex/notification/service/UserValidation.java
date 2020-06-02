@@ -16,6 +16,7 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.service;
 
 public interface UserValidation {
 
@@ -25,7 +26,7 @@ public interface UserValidation {
 	 * @return
 	 * @throws Exception
 	 */
-	String checkUserExistence(String userId, String userIdType) throws Exception;
+//	String checkUserExistence(String userId, String userIdType) throws Exception;
 
 	/**
 	 * 
@@ -34,6 +35,6 @@ public interface UserValidation {
 	 * @return
 	 * @throws Exception
 	 */
-	String getValidUser(String userId, String userIdType) throws Exception;
+//	String getValidUser(String userId, String userIdType) throws Exception;
 
 }

@@ -16,72 +16,81 @@ Highly Confidential
 
 */
 
+package com.infosys.lex.notification.serviceImpl;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.notification.exception.InvalidDataInputException;
+import com.infosys.lex.notification.service.UserValidation;
+import com.infosys.lex.notification.sunbird.repository.UserMVModel;
+import com.infosys.lex.notification.sunbird.repository.UserMVRepository;
+import com.infosys.lex.notification.sunbird.repository.UserModel;
+import com.infosys.lex.notification.sunbird.repository.UserRepository;
+import com.infosys.lex.notification.util.LexNotificationLogger;
+
 
 //TODO integrate pid service
 @Service
 public class UserValidationImpl implements UserValidation {
 
-	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
-
-	@Autowired
-	UserRepository userRepository;
-
-	@Autowired
-	UserMVRepository userMVRepository;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * .String, java.lang.String)
-	 */
-	@Override
-	public String checkUserExistence(String userId, String userIdType) throws Exception {
-		if (userIdType.toLowerCase().equals("uuid")) {
-			Optional<UserModel> user = userRepository.findById(userId);
-			if (user.orElse(null) == null)
-				throw new InvalidDataInputException("Invalid User Id", null);
-			// getting uuid from email
-		} else if (userIdType.toLowerCase().equals("email")) {
-			Optional<UserMVModel> user = userMVRepository.findById(userId.toLowerCase());
-
-			UserMVModel userMVModel = user.orElse(null);
-			if (userMVModel != null) {
-				userId = userMVModel.getId();
-			} else {
-				throw new InvalidDataInputException("Invalid User Id", null);
-			}
-		}
-		return userId;
-
-	}
-
-	@Override
-	public String getValidUser(String userId, String userIdType) throws Exception {
-		if (userIdType.toLowerCase().equals("uuid")) {
-			Optional<UserModel> user = userRepository.findById(userId);
-			if (user.orElse(null) == null) {
-				logger.error(new Exception("Invalid UserId " + userId));
-				return null;
-			}
-			// getting uuid from email
-		} else if (userIdType.toLowerCase().equals("email")) {
-			Optional<UserMVModel> user = userMVRepository.findById(userId.toLowerCase());
-
-			UserMVModel userMVModel = user.orElse(null);
-			if (userMVModel != null)
-				userId = userMVModel.getId();
-			else {
-				logger.error(new Exception("Invalid UserId " + userId));
-				return null;
-			}
-		}
-		return userId;
-	}
+//	private LexNotificationLogger logger = new LexNotificationLogger(getClass().getName());
+//
+//	@Autowired
+//	UserRepository userRepository;
+//
+//	@Autowired
+//	UserMVRepository userMVRepository;
+//
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see
+//	 * .String, java.lang.String)
+//	 */
+//	@Override
+//	public String checkUserExistence(String userId, String userIdType) throws Exception {
+//		if (userIdType.toLowerCase().equals("uuid")) {
+//			Optional<UserModel> user = userRepository.findById(userId);
+//			if (user.orElse(null) == null)
+//				throw new InvalidDataInputException("Invalid User Id", null);
+//			// getting uuid from email
+//		} else if (userIdType.toLowerCase().equals("email")) {
+//			Optional<UserMVModel> user = userMVRepository.findById(userId.toLowerCase());
+//
+//			UserMVModel userMVModel = user.orElse(null);
+//			if (userMVModel != null) {
+//				userId = userMVModel.getId();
+//			} else {
+//				throw new InvalidDataInputException("Invalid User Id", null);
+//			}
+//		}
+//		return userId;
+//
+//	}
+//
+//	@Override
+//	public String getValidUser(String userId, String userIdType) throws Exception {
+//		if (userIdType.toLowerCase().equals("uuid")) {
+//			Optional<UserModel> user = userRepository.findById(userId);
+//			if (user.orElse(null) == null) {
+//				logger.error(new Exception("Invalid UserId " + userId));
+//				return null;
+//			}
+//			// getting uuid from email
+//		} else if (userIdType.toLowerCase().equals("email")) {
+//			Optional<UserMVModel> user = userMVRepository.findById(userId.toLowerCase());
+//
+//			UserMVModel userMVModel = user.orElse(null);
+//			if (userMVModel != null)
+//				userId = userMVModel.getId();
+//			else {
+//				logger.error(new Exception("Invalid UserId " + userId));
+//				return null;
+//			}
+//		}
+//		return userId;
+//	}
 }
