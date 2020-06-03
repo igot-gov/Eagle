@@ -109,11 +109,11 @@ export class LineGraphComponent implements OnInit, AfterViewInit, OnChanges {
               },
               ticks: {
                 beginAtZero: true,
-                callback(value) {
-                  if (value % 1 === 0) {
-                    return value
-                  }
-                },
+                // callback(value) {
+                //   if (value % 1 === 0) {
+                //     return value
+                //   }
+                // },
               },
 
               scaleLabel: {
