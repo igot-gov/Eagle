@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -11,7 +8,8 @@ const API_END_POINTS = {
   updateHierarchy: `/apis/protected/v8/content/hierarchy/update`,
   editKBDetails: `/apis/protected/v8/content/kb`,
   getFollowers: `/apis/protected/v8/user/follow/getFollowers`,
-
+  editKBDetailsV2: `/apis/protected/v8/content/kb/v2`,
+  reorderKbV3: `/apis/protected/v8/content/kb/v3/reorder`,
 }
 
 @Injectable({
@@ -30,13 +28,14 @@ export class BtnKbService {
         contentType: [NsContent.EContentTypes.KNOWLEDGE_BOARD],
         creatorContacts: [(this.configSvc.userProfile && this.configSvc.userProfile.userId) || ''],
       },
-      pageSize: 30,
+      pageSize: 50,
     })
   }
 
   addContentToKb(kbId: string, children: { identifier: string; reason: string | undefined }[]) {
     return this.http.post(API_END_POINTS.updateHierarchy, {
       nodesModified: {},
+      excludeRetry: true,
       hierarchy: {
         [kbId]: {
           children,
@@ -46,15 +45,34 @@ export class BtnKbService {
     })
   }
   addContentsToKb(req: any) {
-    return this.http.post(`${API_END_POINTS.updateHierarchy}`, req)
+    return this.http.post(`${API_END_POINTS.updateHierarchy}`, {
+      ...req,
+      excludeRetry: true,
+    })
   }
 
   editKBBoards(req: any, type: string) {
-    return this.http.post(`${API_END_POINTS.editKBDetails}/${type}`, req)
+    return this.http.post(`${API_END_POINTS.editKBDetails}/${type}`, {
+      ...req,
+      excludeRetry: true,
+    })
   }
 
   getFollowers(id: string) {
     return this.http.post(`${API_END_POINTS.getFollowers}`, { id })
   }
 
+  modifyKBV2(req: any, type: string) {
+    return this.http.post(`${API_END_POINTS.editKBDetailsV2}/${type}`, {
+      ...req,
+      excludeRetry: true,
+    })
+  }
+
+  reorderKBV3(req: any) {
+    return this.http.post(`${API_END_POINTS.reorderKbV3}`, {
+      ...req,
+      excludeRetry: true,
+    })
+  }
 }

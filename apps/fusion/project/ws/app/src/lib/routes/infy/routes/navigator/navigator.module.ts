@@ -1,12 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
 import { NavigatorRoutingModule } from './navigator-routing.module'
 import { AccountDetailsComponent } from './routes/account-details/account-details.component'
-import { AccountsComponent } from './routes/accounts/accounts.component'
 import { ExploreComponent } from './routes/explore/explore.component'
 import { IndustriesComponent } from './routes/industries/industries.component'
 import { LeadersComponent } from './routes/leaders/leaders.component'
@@ -60,11 +56,11 @@ import { IndustryComponent } from './routes/industry/industry.component'
 import { FsHomeComponent } from './routes/fs-home/fs-home.component'
 import { IndustryAnalyticsComponent } from './routes/industry-analytics/industry-analytics.component'
 import { RoleDetailsComponent } from './routes/role/role-details/role-details.component'
+import { BpmDetailsComponent } from './routes/bpm-details/bpm-details.component'
 
 @NgModule({
   declarations: [
     AccountDetailsComponent,
-    AccountsComponent,
     ExploreComponent,
     IndustriesComponent,
     LeadersComponent,
@@ -86,6 +82,7 @@ import { RoleDetailsComponent } from './routes/role/role-details/role-details.co
     FsHomeComponent,
     IndustryAnalyticsComponent,
     RoleDetailsComponent,
+    BpmDetailsComponent,
   ],
   entryComponents: [MultilineSnackbarComponent],
   imports: [
@@ -121,4 +118,4 @@ import { RoleDetailsComponent } from './routes/role/role-details/role-details.co
     BtnGoalsModule,
   ],
 })
-export class NavigatorModule {}
+export class NavigatorModule { }

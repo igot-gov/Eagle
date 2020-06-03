@@ -1,31 +1,15 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div>
   <div class="learning-container flex flex-wrap flex-center">
-    <div *ngIf="apiFetchStatus === 'done'">
-      <!-- <div class="flex flex-middle">
-        <mat-card class="graph-card">
-          <div class="flex flex-between flex-middle mat-toolbar mat-primary">
-            <div class="flex flex-middle p-2">
-              <mat-icon class="feature-icon mt-0">bubble_chart</mat-icon>
-              <p class="margin-left-m mat-body-strong margin-remove-bottom" i18n="Time spent by me - Track wise">
-                Time spent by me - Track wise
-              </p>
-            </div>
-          </div>
-          <div class="margin-m">
-            <ng-container [wsResolverWidget]="trackDataBarChart"> </ng-container>
-          </div>
-        </mat-card>
-        <ng-container *ngIf="graphFetchStatus === 'none'">
-          <h1 i18n>No Data Found</h1>
-        </ng-container>
-      </div> -->
-    </div>
     <div class="width-1-1 learning-graph margin-bottom-xl margin-right-m block p-6 mat-elevation-z2">
+      <div *ngIf="timeSpentData?.lastUpdatedDate" class="mat-caption justify-end flex flex-middle">
+        <ng-container>
+          <span i18n>Last Updated on :</span>
+          <span class="ml-2"> {{ timeSpentData?.lastUpdatedDate | date: 'MMM d, y' }}</span>
+        </ng-container>
+      </div>
       <div class="flex flex-middle">
-        <h2 i18n>User avg Compared to Org</h2>
+        <h2 *ngIf="chartsList?.dimensionsChart" i18n>User avg Compared to Org</h2>
+        <h2 *ngIf="!chartsList?.dimensionsChart" i18n>Learning Time</h2>
         <button type="button" mat-icon-button (click)="showInfo('learningTimePerDay')" i18n-matTooltip matTooltip="info"
           class="margin-left-xs margin-bottom-m">
           <mat-icon>info</mat-icon>
@@ -39,7 +23,7 @@
       </div>
 
       <div *ngIf="!showDateRange" class="text-center">
-        <button type="button" mat-icon-button (click)="changeWeek('prev')" accesskey="<">
+        <button type="button" mat-icon-button (click)="changeWeek('prev')" [disabled]="!isPrevDateValid" accesskey="<">
           <mat-icon>arrow_left</mat-icon>
         </button>
         <span class="mat-body-strong">{{ pickerValue1 | date }} - {{ pickerValue2 | date }}</span>
@@ -62,9 +46,9 @@
         </mat-form-field>
       </div>
       <p class="text-center">
-        <ng-container i18n>Your Avg : </ng-container>
+        <ng-container i18n>Your Average : </ng-container>
         <ng-container>{{ userAvg }}</ng-container>
-        <ng-container i18n="minutes per day"> min/day</ng-container>
+        <ng-container i18n="minutes per day"> Minutes/Day</ng-container>
       </p>
       <mat-error class="text-center" *ngIf="errorOccurred" i18n="Time Spent Page Error Message">
         Some Error Occurred
@@ -91,11 +75,12 @@
 
     <input type="hidden" i18n-value="label: X-axis" value="Date" #labelX />
     <input type="hidden" i18n-value="label: Y-axis" value="Minutes" #labelY />
-    <div class="text-center" *ngIf="apiFetchStatus === 'fetching'">
+    <div class="text-center" *ngIf="apiFetchStatus === 'fetching' && chartsList?.calendarChart">
       <mat-spinner class="spinner"></mat-spinner>
     </div>
+    <!-- <div *ngIf="apiFetchStatus === 'done'" class="flex flex-between flex-wrapped width-1-1 margin-top-l"> -->
     <div *ngIf="apiFetchStatus === 'done'" class="calendar-container">
-      <div class="calendar-data mat-elevation-z2 ">
+      <div *ngIf="chartsList?.calendarChart" class="calendar-data mat-elevation-z2">
         <div *ngIf="apiFetchStatus === 'done'">
           <ws-app-calendar *ngIf="learningTimeData" (notify)="calendarEvent($event)" [specialDates]="specialDates"
             class="calendar w-full"></ws-app-calendar>
@@ -118,23 +103,23 @@
           </div>
         </div>
       </div>
-      <div class="track-data pb-2">
+      <div *ngIf="chartsList?.dimensionsChart" class="track-data">
         <mat-card class="bubble-card">
           <div *ngIf="apiFetchStatus === 'done'" class="flex flex-between flex-middle mat-toolbar mat-primary">
-            <div class="flex flex-middle p-2">
+            <div class="flex flex-middle">
               <mat-icon class="feature-icon mt-0">pie_chart</mat-icon>
               <p class="margin-left-m mat-body-strong margin-remove-bottom" i18n="Avg # mins across dimensions">
                 Avg # mins across dimensions
               </p>
             </div>
           </div>
-          <div *ngIf="apiFetchStatus === 'done'" class="margin-s">
+          <div *ngIf="apiFetchStatus === 'done'" class="margin-top-s margin-left-s margin-right-s">
             <ng-container [wsResolverWidget]="radarChart"> </ng-container>
           </div>
         </mat-card>
       </div>
     </div>
-    <div *ngIf="apiFetchStatus === 'done'" class="radar-data margin-top-xl width-1-1">
+    <div *ngIf="apiFetchStatus === 'done' && chartsList?.trackWiseChart" class="radar-data margin-top-xl width-1-1">
       <mat-card class="radar-card">
         <div class="flex flex-between flex-middle mat-toolbar mat-primary">
           <div class="flex flex-middle p-2">
@@ -151,7 +136,7 @@
       </mat-card>
     </div>
     <div class="flex flex-between flex-wrapped width-1-1">
-      <ng-container>
+      <ng-container *ngIf="chartsList?.timeSpentByMe">
         <mat-card class="graph-card">
           <div *ngIf="apiFetchStatus === 'done'" class="flex flex-between flex-middle mat-toolbar mat-primary">
             <div class="flex flex-middle p-2">
@@ -166,12 +151,12 @@
           </div>
         </mat-card>
       </ng-container>
-      <ng-container>
+      <ng-container *ngIf="chartsList?.timeSpentByEmployees">
         <mat-card class="graph-card">
           <div *ngIf="apiFetchStatus === 'done'" class="flex flex-between flex-middle mat-toolbar mat-primary">
             <div class="flex flex-middle p-2">
               <mat-icon class="feature-icon mt-0">pie_chart</mat-icon>
-              <p class="margin-left-m mat-body-strong margin-remove-bottom" i18n="% Time spent by infoscions">
+              <p class="margin-left-m mat-body-strong margin-remove-bottom" i18n="% Time spent by Employees">
                 % Time spent by Employees
               </p>
             </div>
@@ -181,7 +166,7 @@
           </div>
         </mat-card>
       </ng-container>
-      <ng-container>
+      <ng-container *ngIf="chartsList?.timeSpentByPeers">
         <mat-card class="graph-card">
           <div *ngIf="apiFetchStatus === 'done'" class="flex flex-between flex-middle mat-toolbar mat-primary">
             <div class="flex flex-middle p-2">
@@ -199,3 +184,10 @@
     </div>
   </div>
 </div>
+<!-- <div *ngIf="!enabledTab?.learningTime?.enabled">
+  <div class="learning-container mat-elevation-z2">
+    <h2 i18n class="text-center coming-soon-msg p-4 flex ws-mat-primary-text">
+      We are gathering the data to provide insights! Coming soon...
+    </h2>
+  </div>
+</div> -->

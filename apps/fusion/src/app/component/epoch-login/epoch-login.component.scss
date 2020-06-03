@@ -1,0 +1,117 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+
+.login-container {
+  max-width: 1100px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  min-height: 100vh;
+  align-items: stretch;
+  justify-content: center;
+  @include breakpoint-xs {
+    margin: 0 16px;
+  }
+
+  .title {
+    font-size: 32px;
+    line-height: normal;
+    color: white;
+    @include breakpoint-s {
+      font-size: 24px;
+    }
+  }
+  .font-size-16 {
+    font-size: 16px !important;
+  }
+  .font-size-22 {
+    font-size: 22px !important;
+  }
+
+  .intro-section {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    position: relative;
+    width: 300px;
+    box-sizing: border-box;
+    display: flex;
+    @include breakpoint-xs {
+      min-height: 100vh;
+    }
+
+    .app-name-intro {
+      padding: 0 25px;
+      position: absolute;
+      top: 25%;
+      @include breakpoint-gt-l {
+        top: 35%;
+      }
+      @include breakpoint-s {
+        padding: 0 70px;
+      }
+    }
+
+    .powered-by-intro {
+      position: absolute;
+      bottom: 0%;
+      @include breakpoint-xs {
+        visibility: hidden;
+      }
+
+      .wingspan-logo {
+        width: 40px;
+        height: 36px;
+      }
+    }
+  }
+
+  .login-section {
+    width: calc(100% - 300px);
+    max-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    padding: 32px 64px;
+    align-items: center;
+    @include breakpoint-xs {
+      width: 100%;
+      justify-content: center;
+    }
+    @include breakpoint-xl {
+      padding: 32px 96px;
+    }
+    @include breakpoint-lt-s {
+      padding: 32px;
+    }
+
+    .login-filed-info {
+      text-align: left;
+      .login-btns {
+        padding: 16px;
+        box-sizing: border-box;
+      }
+    }
+    .bottom-section {
+      position: absolute;
+      width: 100%;
+      padding: 16px;
+      bottom: 0;
+      left: 0;
+      box-sizing: border-box;
+      @include breakpoint-xs {
+        display: none;
+        padding: 8px;
+      }
+      .app-logo {
+        width: 24px;
+
+        border-radius: 50%;
+        padding: 4px;
+        margin-left: 8px;
+      }
+    }
+  }
+}

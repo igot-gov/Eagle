@@ -1,0 +1,19 @@
+<mat-card class="activity-card padding-remove-left padding-remove-right padding-remove-top mat-elevation-z4">
+  <div class="flex flex-end" [ngClass]="{ 'visible': !completedId}">
+    <mat-icon class="pr-1 pt-1 icon">check_circle</mat-icon>
+  </div>
+  <mat-card-content class="margin-remove-bottom pb-2">
+    <a (click)="proceedToActivity(widgetData.id,widgetData.clickUrl)" class="cursor-pointer" role="link"
+      aria-label="Content" i18n-aria-label>
+      <div class="p-4 padding-remove-top padding-remove-bottom">
+        <img [src]=widgetData.icon [ngClass]="{'invisible': !widgetData.icon}" />
+        <h3 mat-h2 class="text-center title">{{ widgetData.title }}</h3>
+      </div>
+      <div class="description p-4 pb-2 padding-remove-top ws-mat-text-block-fade-gradient" title="Description">
+        {{ widgetData.description }}</div>
+      <!-- <div class="ws-mat-primary-background footer">
+        <span class="explore mt-1" i18n>Explore</span>
+      </div> -->
+    </a>
+  </mat-card-content>
+</mat-card>

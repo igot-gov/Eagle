@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export interface IWidgetGraphData {
   graphId: string
   graphType: TChartJsGraphType
@@ -26,17 +23,17 @@ export interface IWidgetGraphData {
   graphXAxisStepSize?: number
   graphXAxisMaxLimit?: number
   graphYAxisMax?: number
+  graphFilterType?: string
+  graphOnClick?: boolean
   graphYAxisStepSize?: number
   graphData: IGraphData
+  graphIsCenterText?: boolean
+  graphCenterText?: string
 }
 
 export interface IGraphData {
   labels: string[]
-  datasets:
-  | IGraphDataSets[]
-  | ILineGraphDataSets[]
-  | IBubbleGraphDataSets[]
-  | IRadarGraphDataSets[]
+  datasets: IGraphDataSets[] | ILineGraphDataSets[] | IBubbleGraphDataSets[] | IRadarGraphDataSets[]
 }
 
 export interface IGraphDataSets {
@@ -59,7 +56,7 @@ export interface ILineGraphDataSets {
   pointRadius?: number[]
   pointBorderColor?: string
   pointBackgroundColor?: string
-  pointHoverBackgroundColor?: string,
+  pointHoverBackgroundColor?: string
   pointHoverBorderColor?: string
   pointBorderWidth?: number
   pointHoverRadius?: number

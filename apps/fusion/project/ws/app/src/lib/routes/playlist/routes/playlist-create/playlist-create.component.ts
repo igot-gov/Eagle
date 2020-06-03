@@ -1,7 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, ViewChild, ElementRef } from '@angular/core'
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material'
@@ -17,7 +14,7 @@ import {
   templateUrl: './playlist-create.component.html',
   styleUrls: ['./playlist-create.component.scss'],
 })
-export class PlaylistCreateComponent {
+export class PlaylistCreateComponent implements OnInit {
 
   @ViewChild('selectContent', { static: true }) selectContentMessage!: ElementRef<any>
   @ViewChild('createPlaylistError', { static: true }) createPlaylistErrorMessage!: ElementRef<any>
@@ -33,15 +30,15 @@ export class PlaylistCreateComponent {
   selectedContentIds: Set<string> = new Set()
   // shareWithEmailIds: string[] | undefined = undefined
   sharedWithUsers: NsAutoComplete.IUserAutoComplete[] = []
-
-  pageNavbar: Partial<NsPage.INavBackground> = this.configurationSvc.pageNavBar
+  isShareEnabled = false
+  pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   constructor(
     fb: FormBuilder,
     private router: Router,
     private events: EventService,
     private snackBar: MatSnackBar,
     private playlistSvc: BtnPlaylistService,
-    private configurationSvc: ConfigurationsService,
+    private configSvc: ConfigurationsService,
   ) {
     this.createPlaylistForm = fb.group({
       title: [
@@ -53,6 +50,12 @@ export class PlaylistCreateComponent {
     })
   }
 
+  ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
+    }
+  }
+
   onContentSelectionChanged(content: Partial<NsContent.IContent>, checked: boolean) {
     if (content && content.identifier) {
       checked ? this.selectedContentIds.add(content.identifier) : this.selectedContentIds.delete(content.identifier)
@@ -61,7 +64,14 @@ export class PlaylistCreateComponent {
 
   onFormSubmit() {
     if (this.createPlaylistForm && !this.createPlaylistForm.valid) {
-      this.createPlaylistForm.markAsTouched({ onlySelf: true })
+
+      Object.keys(this.createPlaylistForm.controls).forEach(field => {
+        const control = this.createPlaylistForm.get(field)
+        if (control) {
+          control.markAsTouched({ onlySelf: true })
+        }
+      })
+
       if (this.playlistForm) {
         this.playlistForm.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
@@ -79,13 +89,10 @@ export class PlaylistCreateComponent {
     this.createPlaylistForm.disable()
     this.raiseTelemetry()
     this.playlistSvc.upsertPlaylist({
-      title: formValues.title,
-      changedContentIds: Array.from(this.selectedContentIds),
-      contentIds: Array.from(this.selectedContentIds),
-      editType: NsPlaylist.EPlaylistEditTypes.EDIT,
+      playlist_title: formValues.title,
+      content_ids: Array.from(this.selectedContentIds),
       shareWith: this.sharedWithUsers.map(user => user.wid),
       shareMsg: formValues.message,
-      userAction: NsPlaylist.EPlaylistUserAction.CREATE,
       visibility: formValues.visibility as NsPlaylist.EPlaylistVisibilityTypes,
     }).subscribe(
       () => {

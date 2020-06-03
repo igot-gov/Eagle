@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import videoJs from 'video.js'
 import 'videojs-youtube'
 import 'videojs-contrib-quality-levels'
@@ -150,11 +147,7 @@ function saveContinueLearning(
 ) {
   const data = {
     resourceId: widgetData.identifier,
-    dateAccessed: Date.now(),
-    data: JSON.stringify({
-      progress: currentTime,
-      timestamp: Date.now(),
-    }),
+    progress: currentTime,
   }
   saveCLearning(data)
 }
@@ -185,7 +178,7 @@ export function videoJsInitializer(
   fireRProgress: fireRealTimeProgressFunction,
   passThroughData: any,
   widgetSubType: string,
-  resumePoint: number = 0,
+  resumePoint: number,
   enableTelemetry: boolean,
   widgetData: IWidgetsPlayerMediaData,
   mimeType: NsContent.EMimeTypes,
@@ -199,14 +192,12 @@ export function videoJsInitializer(
   let loaded = false
   let readyToRaise = false
   let currTime = 0
+
   if (enableTelemetry) {
     player.on(videojsEventNames.loadeddata, () => {
       try {
-        if (resumePoint) {
-          const start = Number(resumePoint)
-          if (start > 10 && player.duration() - start > 20) {
-            player.currentTime(start - 10)
-          }
+        if (resumePoint !== 0 && Math.floor(player.duration()) !== Math.floor(resumePoint)) {
+          player.currentTime(resumePoint)
         }
       } catch (err) { }
     })
@@ -250,7 +241,9 @@ export function videoJsInitializer(
     })
   }
   const dispose = () => {
-    saveContinueLearning(widgetData, saveCLearning, currTime)
+    if (widgetData.continueLearning) {
+      saveContinueLearning(widgetData, saveCLearning, currTime)
+    }
     if (heartBeatSubscription) {
       heartBeatSubscription.unsubscribe()
     }
@@ -328,7 +321,9 @@ export function videoInitializer(
     })
   }
   const dispose = () => {
-    saveContinueLearning(widgetData, saveCLearning, currTime)
+    if (widgetData.continueLearning) {
+      saveContinueLearning(widgetData, saveCLearning, currTime)
+    }
     if (heartBeatSubscription) {
       heartBeatSubscription.unsubscribe()
     }
@@ -433,7 +428,9 @@ export function youtubeInitializer(
     }
   }
   const dispose = () => {
-    saveContinueLearning(widgetData, saveCLearning, currTime)
+    if (widgetData.continueLearning) {
+      saveContinueLearning(widgetData, saveCLearning, currTime)
+    }
     if (heartBeatSubscription) {
       heartBeatSubscription.unsubscribe()
     }

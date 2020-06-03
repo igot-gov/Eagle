@@ -1,0 +1,107 @@
+<div class="m-1 md:m-4">
+  <div class="flex items-center mb-4">
+    <span class="font-weight-500 cursor-pointer" routerLink="/admin/tenant/system-roles-management" i18n>
+      System Roles
+    </span>
+    <mat-icon class="mx-1">play_arrow</mat-icon>
+    <span class="font-weight-500">
+      {{role}}
+    </span>
+  </div>
+  <mat-card class="mat-elevation-z6 border-box">
+    <h1 class="font-weight-500  title">{{role}} <mat-icon class="align-text-bottom cursor-pointer"
+        (click)="showInstruction = !showInstruction">info
+      </mat-icon>
+    </h1>
+    <p class="italic" *ngIf="showInstruction" i18n>
+      Search for users to check if they have this role. Once users are found, you can add or remove them from this role.
+    </p>
+    <p class="pb-4">{{rolesHash[role]}}</p>
+    <div class="flex flex-between flex-wrap">
+      <div class="flex flex-between items-center pt-4 pb-2 pl-2 pr-1 searchBorder">
+        <div class="w-full">
+          <form class="searchBox">
+            <mat-form-field class="w-full" appearance="none">
+              <input name="searchQuery" [formControl]="queryControl" matInput placeholder="Search for user"
+                i18-aria-label aria-label="Search for user" i18n-placeholder>
+            </mat-form-field>
+          </form>
+        </div>
+        <div class="search-icon cursor-pointer">
+          <mat-icon>search</mat-icon>
+        </div>
+      </div>
+      <button mat-raised-button [disabled]="!userDataFetched" class="addButton" (click)="openAddUser()" color="primary"
+        i18n>Add Users</button>
+    </div>
+    <div class="p-8" *ngIf="!userDataFetched">
+      <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+    </div>
+    <div *ngIf="!removeTable.length && userDataFetched">
+      <p class="pt-4 text-center"><span i18n>No users found with </span>{{role}}<span i18n>
+          role</span></p>
+    </div>
+    <div class="tableProp">
+      <table [hidden]="!removeTable.length" class="rolesTable w-full" mat-table [dataSource]="removeSource">
+        <ng-container matColumnDef="firstName">
+          <th class="rolesHeader" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-header-cell
+            *matHeaderCellDef i18n> First Name </th>
+          <td class="rolesBorder" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-cell
+            *matCellDef="let element"> {{element.first_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="depName">
+          <th class="rolesHeader" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-header-cell
+            *matHeaderCellDef i18n> Department Name </th>
+          <td class="rolesBorder" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-cell
+            *matCellDef="let element"> {{element.department_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th class="rolesHeader" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-header-cell
+            *matHeaderCellDef i18n> Email ID </th>
+          <td class="rolesBorder" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-cell
+            *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th class="rolesHeader" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-header-cell
+            *matHeaderCellDef i18n> Last Name </th>
+          <td class="rolesBorder" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-cell
+            *matCellDef="let element"> {{element.last_name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="checkbox">
+          <th class="rolesHeader" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-header-cell
+            *matHeaderCellDef>
+            <mat-checkbox color="primary" [(ngModel)]="pageSelection[currentIndex]"
+              [checked]="pageSelection[currentIndex]" (change)="selectAll()"></mat-checkbox>
+          </th>
+          <td class="rolesBorder rolesCheckBox" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-cell
+            *matCellDef="let element">
+            <mat-checkbox color="primary" [value]="element.wid" [(ngModel)]="element.isSelected"
+              (change)="selectedUser()" [checked]="element.isSelected">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="mat-icon">
+          <th class="rolesHeader" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-header-cell
+            *matHeaderCellDef>
+            <mat-icon class="ws-mat-primary-text cursor-pointer flex flex-center" *ngIf="removeUserId.length"
+              (click)="confirmDelete()">
+              delete</mat-icon>
+          </th>
+          <td class="rolesBorder rolesDeleteIcon" [ngClass]="configSvc.isDarkMode ? 'darkTable' : 'lightTable'" mat-cell
+            *matCellDef="let element">
+            <mat-progress-spinner *ngIf="element.isLoading" mode="indeterminate" diameter="30">
+            </mat-progress-spinner>
+            <mat-icon class="ws-mat-primary-text cursor-pointer flex flex-center"
+              *ngIf="!element.isLoading && !removeUserId.length"
+              (click)="removeUser(element.wid) ; element.isLoading = true">delete</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator [hidden]="!this.removeSource.paginator || !removeTable.length" #paginator (page)="handlePage($event)"
+      [pageSize]="pageSize" [hidePageSize]="true">
+    </mat-paginator>
+  </mat-card>

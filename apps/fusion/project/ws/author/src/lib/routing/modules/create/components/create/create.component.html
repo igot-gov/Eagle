@@ -1,23 +1,24 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="margin-top-xl margin-l-l margin-r-l">
+<div class="margin-top-xl margin-l-l margin-r-l" *ngIf="!error">
   <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
     <div class="flex flex-middle">
       <p class="ws-mat-primary-text font-weight-bold title margin-right-xs" i18n>
         CONTENT CREATION
       </p>
-      <mat-icon class=" ws-mat-primary-text margin-bottom-xxs">create</mat-icon>
+      <mat-icon class="ws-mat-primary-text margin-bottom-xxs">create</mat-icon>
     </div>
     <div class="margin-left grid">
-      <div class="stepper-grid ">
-        <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer ws-mat-primary-background">
+      <div class="stepper-grid">
+        <div
+          class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer ws-mat-primary-background"
+        >
           1
         </div>
-        <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 ws-mat-primary-text op100">
+        <p
+          class="margin-left-xs margin-remove-bottom font-weight-500 op30 ws-mat-primary-text op100"
+        >
           Choose Type
         </p>
-        <span class=" border border-solid text-gray-500 mx-3"></span>
+        <span class="border border-solid text-gray-500 mx-3"></span>
       </div>
       <div class="stepper-grid">
         <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer">
@@ -26,7 +27,7 @@
         <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer">
           Content
         </p>
-        <span class=" border border-solid text-gray-500 mx-3"></span>
+        <span class="border border-solid text-gray-500 mx-3"></span>
       </div>
       <div class="flex flex-middle">
         <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer">
@@ -39,64 +40,57 @@
     </div>
   </div>
   <div class="margin-top-xl margin-left-xl">
-    <div class="flex justify-between items-center">
-      <h3 class="mat-h3 margin-top-xl padding-top-l">
+    <div class="flex flex-col md:flex-row margin-top-xl padding-top-l justify-between">
+      <h3 class="mat-h3">
         Choose your starting point from the below available options
       </h3>
-      <div class="mat-h3 flex items-center margin-top-xl padding-top-l  select-lang">
+      <div class="mat-h3 flex items-center select-lang">
         <span class="mr-1 text-center" i18n>Select Language: </span>
-        <button class="lang-btn" *ngIf="allLanguages?.length" mat-button [matMenuTriggerFor]="sortLang">
-          {{ language | uppercase}}
+        <button
+          class="lang-btn"
+          *ngIf="allLanguages?.length"
+          mat-button
+          [matMenuTriggerFor]="sortLang"
+        >
+          {{ language | uppercase }}
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
       </div>
     </div>
     <div class="card-holder margin-top-l">
-      <div class="flex flex-1">
+      <div class="flex flex-1 flex-col md:flex-row">
         <div class="w-4/12">
           <ws-auth-entity-card
-            [entity]="entity[0]"
+            [entity]="resourceEntity"
             [expanded]="true"
             (step)="contentClicked($event)"
           ></ws-auth-entity-card>
         </div>
         <div class="w-8/12">
-          <ws-auth-entity-card
-            [entity]="entity[1]"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
-          <ws-auth-entity-card
-            [entity]="entity[2]"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
-          <mat-divider></mat-divider>
-          <ws-auth-entity-card
-            [entity]="entity[3]"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
-          <ws-auth-entity-card
-            [entity]="entity[4]"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
-          <mat-divider></mat-divider>
-          <ws-auth-entity-card
-            [entity]="entity[5]"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
-          <ws-auth-entity-card
-            [entity]="entity[6]"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
+          <ng-container *ngFor="let createEntity of entity; let i = index">
+            <ws-auth-entity-card
+              [entity]="createEntity"
+              (step)="contentClicked($event)"
+            ></ws-auth-entity-card>
+            <mat-divider *ngIf="i % 2 !== 0"></mat-divider>
+          </ng-container>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<h2 *ngIf="error" class="mat-error margin-top-m text-center" i18n>
+  Unable to load the page. Reload or try again after some time.
+</h2>
 <mat-menu #sortLang="matMenu">
   <ng-template matMenuContent>
-    <button mat-menu-item class="flex flex-between" *ngFor="let lang of allLanguages" (click)="setCurrentLanguage(lang.srclang)">
-      <span class="flex items-center w-full" >
+    <button
+      mat-menu-item
+      class="flex flex-between"
+      *ngFor="let lang of allLanguages"
+      (click)="setCurrentLanguage(lang.srclang)"
+    >
+      <span class="flex items-center w-full">
         <span>{{ lang.label | uppercase }}</span>
         <mat-icon class="ml-2" *ngIf="lang.srclang === language">check</mat-icon>
       </span>

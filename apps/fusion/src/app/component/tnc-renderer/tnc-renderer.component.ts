@@ -1,8 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, Output, EventEmitter, OnChanges, OnInit } from '@angular/core'
 import { NsTnc } from '../../models/tnc.model'
+import { ConfigurationsService } from '../../../../library/ws-widget/utils/src/lib/services/configurations.service'
 
 @Component({
   selector: 'ws-tnc-renderer',
@@ -17,12 +15,20 @@ export class TncRendererComponent implements OnInit, OnChanges {
 
   generalTnc: NsTnc.ITncUnit | null = null
   dpTnc: NsTnc.ITncUnit | null = null
+  termsOfUser = true
 
   // UI Vars
   currentPanel: 'tnc' | 'dp' = 'tnc'
-  constructor() { }
+  constructor(private configSvc: ConfigurationsService) {
+    if (this.configSvc.restrictedFeatures) {
+      if (this.configSvc.restrictedFeatures.has('termsOfUser')) {
+        this.termsOfUser = false
+      }
+    }
+  }
 
   ngOnInit() {
+
     if (this.tncData) {
       const tncData = this.tncData
       this.assignGeneralAndDp()

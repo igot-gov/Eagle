@@ -1,13 +1,18 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser'
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router'
-import { ContentProgressService, NsContent, NsGoal, NsPlaylist, viewerRouteGenerator, WidgetContentService } from '@ws-widget/collection'
+import {
+  ContentProgressService,
+  NsContent,
+  NsGoal,
+  NsPlaylist,
+  viewerRouteGenerator,
+  WidgetContentService,
+} from '@ws-widget/collection'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { UtilityService } from '@ws-widget/utils/src/lib/services/utility.service'
+import { AccessControlService } from '@ws/author'
 import { Subscription } from 'rxjs'
 import { NsAnalytics } from '../../models/app-toc-analytics.model'
 import { NsAppToc } from '../../models/app-toc.model'
@@ -19,12 +24,14 @@ import { MobileAppsService } from 'src/app/services/mobile-apps.service'
   selector: 'ws-app-toc-banner',
   templateUrl: './app-toc-banner.component.html',
   styleUrls: ['./app-toc-banner.component.scss'],
+  providers: [AccessControlService],
 })
 export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() banners: NsAppToc.ITocBanner | null = null
   @Input() content: NsContent.IContent | null = null
   @Input() resumeData: NsContent.IContinueLearningData | null = null
   @Input() analytics: NsAnalytics.IAnalytics | null = null
+  @Input() forPreview = false
   contentProgress = 0
   bannerUrl: SafeStyle | null = null
   routePath = 'overview'
@@ -36,7 +43,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   isAssessVisible = false
   isPracticeVisible = false
   editButton = false
-  analyticsData: NsAnalytics.IAnalyticsResponse | null = null
+  reviewButton = false
   analyticsDataClient: any = null
   btnPlaylistConfig: NsPlaylist.IBtnPlaylist | null = null
   btnGoalsConfig: NsGoal.IBtnGoal | null = null
@@ -49,13 +56,13 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   isUserRegistered = false
   actionBtnStatus = 'wait'
   showIntranetMessage = false
-
+  showTakeAssessment: NsAppToc.IPostAssessment | null = null
   externalContentFetchStatus: TFetchStatus = 'done'
   registerForExternal = false
   isGoalsEnabled = false
-
   contextId?: string
   contextPath?: string
+  tocConfig: any = null
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -68,32 +75,50 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
     private mobileAppsSvc: MobileAppsService,
-  ) {
-  }
+    private authAccessService: AccessControlService,
+  ) { }
 
   ngOnInit() {
-    this.routeSubscription = this.route.queryParamMap.subscribe(
-      qParamsMap => {
-        const contextId = qParamsMap.get('contextId')
-        const contextPath = qParamsMap.get('contextPath')
-        if (contextId && contextPath) {
-          this.contextId = contextId
-          this.contextPath = contextPath
-        }
-      },
-    )
+    this.route.data.subscribe(data => {
+      this.tocConfig = data.pageData.data
+      if (this.content && this.isPostAssessment) {
+        this.tocSvc.fetchPostAssessmentStatus(this.content.identifier).subscribe(res => {
+          const assessmentData = res.result
+          for (const o of assessmentData) {
+            if (o.contentId === (this.content && this.content.identifier)) {
+              this.showTakeAssessment = o
+              break
+            }
+          }
+        })
+      }
+    })
+    if (this.configSvc.restrictedFeatures) {
+      this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
+    }
+    this.routeSubscription = this.route.queryParamMap.subscribe(qParamsMap => {
+      const contextId = qParamsMap.get('contextId')
+      const contextPath = qParamsMap.get('contextPath')
+      if (contextId && contextPath) {
+        this.contextId = contextId
+        this.contextPath = contextPath
+      }
+    })
     if (this.configSvc.restrictedFeatures) {
       this.isRegistrationSupported = this.configSvc.restrictedFeatures.has('registrationExternal')
-      this.showIntranetMessage = !this.configSvc.restrictedFeatures.has('showIntranetMessageDesktop')
+      this.showIntranetMessage = !this.configSvc.restrictedFeatures.has(
+        'showIntranetMessageDesktop',
+      )
     }
-    if (this.configSvc) {
-      if (this.configSvc.userRoles && this.configSvc.userRoles.has('editor')) {
+
+    if (this.authAccessService.hasAccess(this.content as any) && !this.isInIFrame) {
+      const status: string = (this.content as any).status
+      if (!this.forPreview) {
         this.editButton = true
-      } else if (this.configSvc.userProfile && this.content) {
-        const userId = this.configSvc.userProfile.userId
-        if (this.content.creatorContacts.some(data => data.id === userId)) {
-          this.editButton = true
-        }
+      } else if (['Draft', 'Live'].includes(status)) {
+        this.editButton = true
+      } else if (['InReview', 'Reviewed', 'QualityReview'].includes(status)) {
+        this.reviewButton = true
       }
     }
     this.checkRegistrationStatus()
@@ -125,11 +150,25 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   get showIntranetMsg() {
     if (this.isMobile) {
       return true
-    } return this.showIntranetMessage
+    }
+    return this.showIntranetMessage
   }
 
   get showStart() {
     return this.tocSvc.showStartButton(this.content)
+  }
+
+  get isPostAssessment(): boolean {
+    if (!(this.tocConfig && this.tocConfig.postAssessment)) {
+      return false
+    }
+    if (this.content) {
+      return (
+        this.content.contentType === NsContent.EContentTypes.COURSE &&
+        this.content.learningMode === 'Instructor-Led'
+      )
+    }
+    return false
   }
 
   get isMobile(): boolean {
@@ -148,18 +187,6 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       this.modifySensibleContentRating()
       this.assignPathAndUpdateBanner(this.router.url)
       this.getLearningUrls()
-      if (this.routePath === 'analytics' && this.analytics && this.analytics.courseAnalytics) {
-        this.tocSvc.fetchContentAnalyticsData(this.content.identifier)
-        this.tocSvc.analyticsReplaySubject.subscribe((data: NsAnalytics.IAnalyticsResponse) => {
-          this.analyticsData = data
-        })
-      }
-      if (this.routePath === 'analytics' && this.analytics && this.analytics.courseAnalyticsClient) {
-        this.tocSvc.fetchContentAnalyticsClientData(this.content.identifier)
-        this.tocSvc.analyticsReplaySubject.subscribe((data: any) => {
-          this.analyticsDataClient = data
-        })
-      }
     }
     if (this.resumeData && this.content) {
       this.resumeDataLink = viewerRouteGenerator(
@@ -167,13 +194,56 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         this.resumeData.mimeType,
         this.isResource ? undefined : this.content.identifier,
         this.isResource ? undefined : this.content.contentType,
+        this.forPreview,
       )
     }
   }
+
+  get showInstructorLedMsg() {
+    return (
+      this.showActionButtons &&
+      this.content &&
+      this.content.learningMode === 'Instructor-Led' &&
+      !this.content.children.length &&
+      !this.content.artifactUrl
+    )
+  }
+
+  get isHeaderHidden() {
+    return this.isResource && this.content && !this.content.artifactUrl.length
+  }
+
+  // get showStart() {
+  //   return this.content && this.content.resourceType !== 'Certification'
+  // }
+
+  get showActionButtons() {
+    return (
+      this.actionBtnStatus !== 'wait' &&
+      this.content &&
+      this.content.status !== 'Deleted' &&
+      this.content.status !== 'Expired'
+    )
+  }
+
+  get showButtonContainer() {
+    return (
+      this.actionBtnStatus === 'grant' &&
+      !(this.isMobile && this.content && this.content.isInIntranet) &&
+      !(
+        this.content &&
+        this.content.contentType === 'Course' &&
+        this.content.children.length === 0 &&
+        !this.content.artifactUrl
+      ) &&
+      !(this.content && this.content.contentType === 'Resource' && !this.content.artifactUrl)
+    )
+  }
+
   get isResource() {
     if (this.content) {
       const isResource = this.content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT ||
-        this.content.contentType === NsContent.EContentTypes.RESOURCE
+        this.content.contentType === NsContent.EContentTypes.RESOURCE || !this.content.children.length
       if (isResource) {
         this.mobileAppsSvc.sendViewerData(this.content)
       }
@@ -204,9 +274,20 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   }
   private getLearningUrls() {
     if (this.content) {
-      this.progressSvc.getProgressFor(this.content.identifier).subscribe(data => {
-        this.contentProgress = data
-      })
+      if (!this.forPreview) {
+        this.progressSvc.getProgressFor(this.content.identifier).subscribe(data => {
+          this.contentProgress = data
+        })
+      }
+      // this.progressSvc.fetchProgressHashContentsId({
+      //   "contentIds": [
+      //     "lex_29959473947367270000",
+      //     "lex_5501638797018560000"
+      //   ]
+      // }
+      // ).subscribe(data => {
+      //   console.log("DATA: ", data)
+      // })
       this.isPracticeVisible = Boolean(
         this.tocSvc.filterToc(this.content, NsContent.EFilterCategory.PRACTICE),
       )
@@ -219,6 +300,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         firstPlayableContent.mimeType,
         this.isResource ? undefined : this.content.identifier,
         this.isResource ? undefined : this.content.contentType,
+        this.forPreview,
       )
     }
   }
@@ -227,18 +309,6 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     if (path && this.validPaths.has(path)) {
       this.routePath = path
       this.updateBannerUrl()
-    }
-    if (this.routePath === 'analytics' && this.content && this.analytics && this.analytics.courseAnalyticsClient) {
-      this.tocSvc.fetchContentAnalyticsClientData(this.content.identifier)
-      this.tocSvc.analyticsReplaySubject.subscribe((data: any) => {
-        this.analyticsDataClient = data
-      })
-    }
-    if (this.routePath === 'analytics' && this.content && this.analytics && this.analytics.courseAnalytics) {
-      this.tocSvc.fetchContentAnalyticsData(this.content.identifier)
-      this.tocSvc.analyticsReplaySubject.subscribe((data: NsAnalytics.IAnalyticsResponse) => {
-        this.analyticsData = data
-      })
     }
   }
   private updateBannerUrl() {
@@ -265,18 +335,23 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   }
   private fetchExternalContentAccess() {
     if (this.content && this.content.registrationUrl) {
-      this.externalContentFetchStatus = 'fetching'
-      this.registerForExternal = false
-      this.tocSvc.fetchExternalContentAccess(this.content.identifier).subscribe(
-        data => {
-          this.externalContentFetchStatus = 'done'
-          this.registerForExternal = data.hasAccess
-        },
-        _ => {
-          this.externalContentFetchStatus = 'done'
-          this.registerForExternal = false
-        },
-      )
+      if (!this.forPreview) {
+        this.externalContentFetchStatus = 'fetching'
+        this.registerForExternal = false
+        this.tocSvc.fetchExternalContentAccess(this.content.identifier).subscribe(
+          data => {
+            this.externalContentFetchStatus = 'done'
+            this.registerForExternal = data.hasAccess
+          },
+          _ => {
+            this.externalContentFetchStatus = 'done'
+            this.registerForExternal = false
+          },
+        )
+      } else {
+        this.externalContentFetchStatus = 'done'
+        this.registerForExternal = true
+      }
     }
   }
   getRatingIcon(ratingIndex: number): 'star' | 'star_border' | 'star_half' {
@@ -295,7 +370,11 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
 
   private checkRegistrationStatus() {
     const source = (this.content && this.content.sourceShortName) || ''
-    if (!this.isRegistrationSupported && this.checkRegistrationSources.has(source)) {
+    if (
+      !this.forPreview &&
+      !this.isRegistrationSupported &&
+      this.checkRegistrationSources.has(source)
+    ) {
       this.contentSvc
         .getRegistrationStatus(source)
         .then(res => {
@@ -327,6 +406,9 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
           collectionType: this.contextPath,
         }
       }
+      if (this.forPreview) {
+        delete qParams.viewMode
+      }
       return qParams
     }
     if (this.resumeDataLink && type === 'RESUME') {
@@ -341,10 +423,24 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
           collectionType: this.contextPath,
         }
       }
+      if (this.forPreview) {
+        delete qParams.viewMode
+      }
       return qParams
+    }
+    if (this.forPreview) {
+      return {}
     }
     return {
       viewMode: type,
+    }
+  }
+
+  get isInIFrame(): boolean {
+    try {
+      return window.self !== window.top
+    } catch (e) {
+      return true
     }
   }
 }

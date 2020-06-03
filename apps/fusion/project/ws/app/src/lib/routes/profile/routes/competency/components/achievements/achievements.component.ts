@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'
 import { TFetchStatus } from '@ws-widget/utils'
 import { NSCompetency } from '../../models/competency.model'
@@ -41,36 +38,45 @@ export class AchievementsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.route) {
-      this.routeSubscription = this.route.data.subscribe((data: Data) => {
-        this.resetData()
-        this.assessmentsData = data.competencyData
-        this.assessmentsList = data.competencyData.achievements
-        this.achievementType = this.router.url.split('/')[this.router.url.split('/').length - 1]
-        if (this.achievementType === 'assessment') {
-          this.redirectUrl = {
-            path: '/app/search/learning',
-            qParams: {
-              q: 'all',
-              f: JSON.stringify({
-                contentType: ['Resource'],
-                resourceType: ['Assessment'],
-              }),
-            },
+      this.routeSubscription = this.route.data.subscribe(
+        (data: Data) => {
+          this.resetData()
+          this.assessmentsData = data.competencyData
+          if (data.competencyData === undefined) {
+            this.apiFetchStatus = 'error'
           }
-        } if (this.achievementType === 'certificate') {
-          this.redirectUrl = {
-            path: '/app/search/learning',
-            qParams: {
-              q: 'all',
-              f: JSON.stringify({
-                contentType: ['Resource'],
-                resourceType: ['Certification'],
-              }),
-            },
+          this.assessmentsList = data.competencyData.achievements
+          this.achievementType = this.router.url.split('/')[this.router.url.split('/').length - 1]
+          if (this.achievementType === 'assessment') {
+            this.redirectUrl = {
+              path: '/app/search/learning',
+              qParams: {
+                q: 'all',
+                f: JSON.stringify({
+                  contentType: ['Resource'],
+                  resourceType: ['Assessment'],
+                }),
+              },
+            }
           }
+          if (this.achievementType === 'certificate') {
+            this.redirectUrl = {
+              path: '/app/search/learning',
+              qParams: {
+                q: 'all',
+                f: JSON.stringify({
+                  contentType: ['Resource'],
+                  resourceType: ['Certification'],
+                }),
+              },
+            }
+          }
+          this.apiFetchStatus = 'done'
+        },
+        () => {
+          this.apiFetchStatus = 'error'
         }
-        this.apiFetchStatus = 'done'
-      })
+      )
     }
   }
   resetData() {

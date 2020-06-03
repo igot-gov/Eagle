@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div mat-dialog-content>
   <mat-tab-group
     mat-stretch-tabs
@@ -35,6 +32,7 @@
           class="text-right"
         >
           <button
+            name="user-likes-see-more-button"
             [disabled]="activityUsersResult.like.fetchStatus === 'fetching'"
             type="button"
             mat-button
@@ -90,6 +88,7 @@
           class="text-right"
         >
           <button
+            name="user-upvotes-see-more-button"
             [disabled]="activityUsersResult.upvote.fetchStatus === 'fetching'"
             type="button"
             mat-button
@@ -146,6 +145,7 @@
           class="text-right"
         >
           <button
+            name="user-downvotes-see-more-button"
             [disabled]="activityUsersResult.downvote.fetchStatus === 'fetching'"
             type="button"
             mat-button
@@ -184,6 +184,7 @@
       {{ user.name }}
     </h3>
     <button
+      name="follow-user-button"
       type="button"
       mat-stroked-button
       color="primary"

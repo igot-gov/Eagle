@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
   ElementRef,
@@ -18,9 +15,6 @@ import { QuestionComponent } from './components/question/question.component'
 import { SubmitQuizDialogComponent } from './components/submit-quiz-dialog/submit-quiz-dialog.component'
 import { OnConnectionBindInfo } from 'jsplumb'
 import { QuizService } from './quiz.service'
-import { ViewerUtilService } from '../../viewer-util.service'
-import { WidgetContentService } from '../../../../../../../library/ws-widget/collection/src/public-api'
-import { NsContent } from '@ws-widget/collection'
 import { EventService } from '../../../../../../../library/ws-widget/utils/src/public-api'
 export type FetchStatus = 'hasMore' | 'fetching' | 'done' | 'error' | 'none'
 
@@ -81,24 +75,13 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
   timerSubscription: Subscription | null = null
   viewState: NSQuiz.TQuizViewMode = 'initial'
   paramSubscription: Subscription | null = null
-  realTimeProgressRequest = {
-    content_type: 'Resource',
-    current: ['0'],
-    max_size: 0,
-    mime_type: NsContent.EMimeTypes.QUIZ,
-    user_id_type: 'uuid',
-  }
-  oldIdentifier = ''
   constructor(
     private events: EventService,
     public dialog: MatDialog,
     private quizSvc: QuizService,
-    private viewerSvc: ViewerUtilService,
-    private contentSvc: WidgetContentService,
   ) { }
 
   ngOnInit() {
-    this.saveContinueLearning()
   }
 
   scroll(qIndex: number) {
@@ -113,13 +96,13 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   ngOnChanges(changes: SimpleChanges) {
+    this.viewState = 'initial'
     for (const change in changes) {
       if (change === 'quiz') {
         if (
           this.quizJson &&
           this.quizJson.timeLimit
         ) {
-          this.saveContinueLearning()
           this.quizJson.timeLimit *= 1000
         }
       }
@@ -175,7 +158,7 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   fillSelectedItems(question: NSQuiz.IQuestion, optionId: string) {
-    this.raiseTelemetry('mark', optionId)
+    this.raiseTelemetry('mark', optionId, 'click')
     if (this.viewState === 'answer') {
       if (this.questionsReference) {
         this.questionsReference.forEach(questionReference => {
@@ -228,6 +211,7 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   submitQuiz() {
+    this.raiseTelemetry('quiz', null, 'submit')
     this.isSubmitted = true
     this.ngOnDestroy()
     if (!this.quizJson.isAssessment) {
@@ -263,13 +247,7 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
         this.result = res.result
         if (this.result >= this.passPercentage) {
           this.isCompleted = true
-          this.realTimeProgressRequest = {
-            ...this.realTimeProgressRequest,
-            current: ['1'],
-            max_size: 1,
-          }
         }
-        this.fireRealTimeProgress()
         // const result = {
         //   result: (this.numCorrectAnswers * 100.0) / this.processedContent.quiz.questions.length,
         //   total: this.processedContent.quiz.questions.length,
@@ -459,44 +437,20 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
       this.markedQuestions.add(questionId as unknown as never)
     }
   }
-  saveContinueLearning() {
-    this.contentSvc
-      .saveContinueLearning({
-        contextPathId: this.collectionId ? this.collectionId : this.identifier,
-        resourceId: this.identifier,
-        dateAccessed: Date.now(),
-        data: JSON.stringify({
-          timestamp: Date.now(),
-        }),
-      })
-      .toPromise()
-      .catch()
-  }
-  fireRealTimeProgress() {
-    // if (this.htmlData) {
-    //   if ((this.htmlData.contentType === NsContent.EContentTypes.COURSE && this.htmlData.isExternal)) {
-    //     return
-    //   }
-    // }
-    // if (this.htmlData) {
-    //   if (this.htmlData.sourceName === 'Cross Knowledge') {
-    //     return
-    //   }
-    // }
-    this.viewerSvc
-      .realTimeProgressUpdate(this.identifier, this.realTimeProgressRequest)
-    return
-  }
-  raiseTelemetry(action: string, optionId: string) {
+
+  raiseTelemetry(action: string, optionId: string | null, event: string) {
     if (optionId) {
       this.events.raiseInteractTelemetry(
         action,
-        'click',
+        event,
         {
           optionId,
         },
       )
+    } else {
+      this.events.raiseInteractTelemetry(action, event, {
+        contentId: this.identifier,
+      })
     }
   }
-
 }

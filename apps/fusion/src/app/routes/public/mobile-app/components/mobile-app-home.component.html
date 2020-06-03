@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs text-truncate">
@@ -9,7 +6,7 @@
 </mat-toolbar>
 <mat-card class="mobile-app-container">
   <mat-tab-group *ngIf="mobileLinks" dynamicHeight mat-align-tabs="center" [selectedIndex]="selectedTabIndex">
-    <mat-tab>
+    <mat-tab fragment="android" *ngIf="isAndriod">
       <ng-template mat-tab-label>
         <span i18n="android tab" class="mat-body-2" accesskey="1">ANDROID</span>
       </ng-template>
@@ -82,7 +79,7 @@
         Coming Soon...
       </h2>
     </mat-tab>
-    <mat-tab>
+    <mat-tab fragment="ios" *ngIf="isIos">
       <ng-template mat-tab-label>
         <span i18n="ios tab" class="mat-body-2" accesskey="2">iOS</span>
       </ng-template>

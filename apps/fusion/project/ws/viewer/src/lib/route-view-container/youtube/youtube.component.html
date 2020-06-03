@@ -1,16 +1,16 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="padding-dynamic" *ngIf="youtubeData">
   <div class="flex flex-around flex-wrapped">
-    <div [ngClass]="isTypeOfCollection ? 'w-full' : 'video-player-title'">
-      <div id="fullScreenContainer" class="video-player">
+    <div class="w-full">
+      <div>
         <mat-card class="video-player-mobile">
           <mat-card-content class="video-player-mobile-container">
-            <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverYoutubeData"></ng-container>
+            <div id="fullScreenContainer" class="video-player">
+              <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverYoutubeData">
+              </ng-container>
+            </div>
             <ng-container *ngIf="!isScreenSizeSmall">
               <div class="flex justify-end mt-3">
-                <ws-widget-btn-content-download [widgetData]="
+                <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
                     youtubeData
                       | pipePartialContent
                         : [
@@ -19,15 +19,24 @@
                             'resourceType',
                             'mimeType',
                             'downloadUrl',
-                            'isExternal'
+                            'isExternal',
+                  'artifactUrl'
                           ]
                   "></ws-widget-btn-content-download>
-                <ws-widget-btn-content-like [widgetData]="youtubeData | pipePartialContent: ['identifier']">
+                <ws-widget-btn-content-like [forPreview]="forPreview"
+                  [widgetData]="youtubeData | pipePartialContent: ['identifier']">
                 </ws-widget-btn-content-like>
-                <ws-widget-btn-content-share></ws-widget-btn-content-share>
-                <ws-widget-btn-goals></ws-widget-btn-goals>
-                <ws-widget-btn-playlist></ws-widget-btn-playlist>
-                <ws-widget-btn-content-feedback-v2
+                <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="youtubeData"></ws-widget-btn-content-share>
+                <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+                <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+                  contentId: youtubeData?.identifier,
+                  contentName: youtubeData?.name,
+                  contentType: 'Resource',
+                  mode: 'dialog',
+                  isDisabled: forPreview
+                }">
+                </ws-widget-btn-playlist>
+                <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                   [widgetData]="youtubeData | pipePartialContent: ['identifier', 'name']">
                 </ws-widget-btn-content-feedback-v2>
               </div>
@@ -38,33 +47,43 @@
       <div class="vidoe-title margin-top-m" *ngIf="youtubeData">
         <mat-card *ngIf="isScreenSizeSmall" class="unit-meta-item">
           <div class="flex">
-            <ws-widget-btn-content-download [widgetData]="
-                  youtubeData
-                    | pipePartialContent
-                      : [
-                          'identifier',
-                          'contentType',
-                          'resourceType',
-                          'mimeType',
-                          'downloadUrl',
-                          'isExternal'
-                        ]
-                "></ws-widget-btn-content-download>
-            <ws-widget-btn-content-like [widgetData]="youtubeData | pipePartialContent: ['identifier']">
+            <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+                youtubeData
+                  | pipePartialContent
+                    : [
+                        'identifier',
+                        'contentType',
+                        'resourceType',
+                        'mimeType',
+                        'downloadUrl',
+                        'isExternal',
+                  'artifactUrl'
+                      ]
+              "></ws-widget-btn-content-download>
+            <ws-widget-btn-content-like [forPreview]="forPreview"
+              [widgetData]="youtubeData | pipePartialContent: ['identifier']">
             </ws-widget-btn-content-like>
-            <ws-widget-btn-content-share [widgetData]="youtubeData"></ws-widget-btn-content-share>
-            <ws-widget-btn-goals></ws-widget-btn-goals>
-            <ws-widget-btn-playlist></ws-widget-btn-playlist>
-            <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback>
+            <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="youtubeData">
+            </ws-widget-btn-content-share>
+            <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+            <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+              contentId: youtubeData?.identifier,
+              contentName: youtubeData?.name,
+              contentType: 'Resource',
+              mode: 'dialog',
+              isDisabled: forPreview
+            }">
+            </ws-widget-btn-playlist>
+            <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
+              [widgetData]="youtubeData | pipePartialContent: ['identifier', 'name']">
+            </ws-widget-btn-content-feedback-v2>
           </div>
         </mat-card>
       </div>
     </div>
-    <div class="video-summary" *ngIf="!isTypeOfCollection">
-      <ws-widget-player-brief [content]="youtubeData" [isPreviewMode]="isPreviewMode"></ws-widget-player-brief>
-    </div>
   </div>
-  <div *ngIf="discussionForumWidget" class="video-discussion-forum-in display-block padding-m margin-bottom-m">
+  <div *ngIf="discussionForumWidget && isRestricted"
+    class="video-discussion-forum-in display-block padding-m margin-bottom-m">
     <h2 class="mat-toolbar discussion-head">Discussion Forum</h2>
     <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
   </div>

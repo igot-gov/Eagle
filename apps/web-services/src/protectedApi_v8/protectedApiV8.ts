@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import express from 'express'
 import { CONSTANTS } from '../utils/env'
 import { admin } from './admin/admin'
@@ -11,6 +8,7 @@ import { cohortsApi } from './cohorts'
 import { conceptGraphApi } from './concept'
 import { contentApi } from './content'
 import { counterApi } from './counter'
+import { externalEventsApi } from './event-external'
 import { eventsApi } from './events'
 import { infyRadioApi } from './infyradio'
 import { knowledgeHubApi } from './khub'
@@ -49,3 +47,4 @@ protectedApiV8.use('/user', user)
 protectedApiV8.use('/events', eventsApi)
 protectedApiV8.use('/translate', translateApi)
 protectedApiV8.use('/attended-content', attendedContentApi)
+protectedApiV8.use('/event-external', externalEventsApi)

@@ -1,14 +1,7 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<section
-  *ngFor="let content of contents | pipeLimitTo: (viewMore ? contents.length : MIN_CONTENT_DISPLAY)"
-  class=" truncate mb-4"
->
-  <a
-    [ngClass]="{ 'greyed-out': isGreyedOut(content) }"
-    [routerLink]="!isGreyedOut(content) ? '/app/toc/' + content?.identifier + '/overview' : null"
-  >
+<section *ngFor="let content of contents | pipeLimitTo: (viewMore ? contents.length : MIN_CONTENT_DISPLAY)"
+  class=" truncate mb-4">
+  <a [ngClass]="{ 'greyed-out': isGreyedOut(content) }"
+    [routerLink]="!isGreyedOut(content) ? '/app/toc/' + content?.identifier + '/overview' : null">
     <span class="mat-body-strong">{{ content?.name }}</span>
   </a>
 
@@ -33,20 +26,18 @@
     </span>
   </div>
   <div class="ws-mat-warn-text mat-caption">
-    <ng-container i18n *ngIf="isDeletedOrExpired(content)"
-      >Content maybe expired or deleted.</ng-container
-    >
-    <ng-container i18n *ngIf="isInIntranetMobile(content)"
-      >Content can only be viewed in intranet.</ng-container
-    >
-    <ng-container i18n *ngIf="hasNoAccess(content)"
-      >You no longer have access to this content</ng-container
-    >
+    <ng-container i18n *ngIf="isDeletedOrExpired(content)">Content maybe expired or deleted.</ng-container>
+    <ng-container i18n *ngIf="isInIntranetMobile(content)">Content can only be viewed in intranet.</ng-container>
+    <ng-container i18n *ngIf="hasNoAccess(content)">You no longer have access to this content</ng-container>
   </div>
+  
+  <mat-progress-bar class="content-progress" mode="determinate"
+    value="{{ (content?.progress || 0) * 100 | number: '1.0-0' }}">
+  </mat-progress-bar>
 </section>
 <section *ngIf="contents?.length > MIN_CONTENT_DISPLAY" class="flex flex-row-reverse">
   <button mat-button (click)="viewMore = !viewMore">
-    <ng-container *ngIf="!viewMore" i18n>VIEW MORE</ng-container>
-    <ng-container *ngIf="viewMore" i18n>VIEW LESS</ng-container>
+    <ng-container *ngIf="!viewMore" i18n>View More</ng-container>
+    <ng-container *ngIf="viewMore" i18n>View Less</ng-container>
   </button>
 </section>

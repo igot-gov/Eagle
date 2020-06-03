@@ -1,20 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  Component,
-  Input,
-  ElementRef,
-  ViewChild,
-  OnInit,
-  Output,
-  EventEmitter,
-} from '@angular/core'
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
+import { FormControl, Validators } from '@angular/forms'
+import { MatListOption, MatSnackBar } from '@angular/material'
+import { EventService, TFetchStatus } from '@ws-widget/utils'
 import { NsPlaylist } from '../btn-playlist.model'
 import { BtnPlaylistService } from '../btn-playlist.service'
-import { MatSnackBar, MatListOption } from '@angular/material'
-import { TFetchStatus, EventService } from '@ws-widget/utils'
-import { FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'ws-widget-btn-playlist-selection',
@@ -50,9 +39,10 @@ export class BtnPlaylistSelectionComponent implements OnInit {
 
   ngOnInit() {
     this.fetchPlaylistStatus = 'fetching'
-    this.playlistSvc.getAllPlaylistsApi().subscribe(response => {
+    this.playlistSvc.getAllPlaylistsApi(false).subscribe(response => {
       this.fetchPlaylistStatus = 'done'
       this.playlists = response.user
+      this.playlists = this.playlists.concat(response.share)
       this.playlists.forEach(playlist => {
         if (playlist.contents.map(content => content.identifier).includes(this.contentId)) {
           this.selectedPlaylists.add(playlist.id)
@@ -70,6 +60,7 @@ export class BtnPlaylistSelectionComponent implements OnInit {
       this.playlistSvc.addPlaylistContent(playlist, [this.contentId]).subscribe(
         () => {
           this.snackBar.open(this.contentAddMessage.nativeElement.value)
+          this.selectedPlaylists.add(playlistId)
         },
         _ => {
           this.snackBar.open(this.contentUpdateError.nativeElement.value)
@@ -82,6 +73,7 @@ export class BtnPlaylistSelectionComponent implements OnInit {
       this.playlistSvc.deletePlaylistContent(playlist, [this.contentId]).subscribe(
         () => {
           this.snackBar.open(this.contentRemoveMessage.nativeElement.value)
+          this.selectedPlaylists.delete(playlistId)
         },
         _ => {
           this.snackBar.open(this.contentUpdateError.nativeElement.value)
@@ -92,15 +84,16 @@ export class BtnPlaylistSelectionComponent implements OnInit {
     }
   }
 
+  isDoneDisabled() {
+   return this.selectedPlaylists.size > 0 ? false : true
+  }
+
   createPlaylist(playlistName: string, successToast: string, errorToast: string) {
     this.playlistCreateEvent.emit()
     this.playlistSvc.upsertPlaylist(
       {
-        title: playlistName,
-        changedContentIds: [this.contentId],
-        contentIds: [this.contentId],
-        editType: NsPlaylist.EPlaylistEditTypes.EDIT,
-        userAction: NsPlaylist.EPlaylistUserAction.CREATE,
+        playlist_title: playlistName,
+        content_ids: [this.contentId],
         visibility: NsPlaylist.EPlaylistVisibilityTypes.PRIVATE,
       },
       false,

@@ -1,11 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { ErrorResolverComponent, PageComponent, PageModule } from '@ws-widget/collection'
 import { ExploreDetailResolve, PageResolve } from '@ws-widget/utils'
-import { AdminGuard } from '@ws/admin/src/lib/guards/admin.guard'
+import { LearningGuard } from '../../project/ws/app/src/lib/routes/my-learning/guards/my-learning.guard'
 import { InvalidUserComponent } from './component/invalid-user/invalid-user.component'
 import { LoginRootComponent } from './component/login-root/login-root.component'
 import { ETopBar } from './constants/topBar.constants'
@@ -22,6 +19,9 @@ import { PublicFaqComponent } from './routes/public/public-faq/public-faq.compon
 import { TncComponent } from './routes/tnc/tnc.component'
 import { TncAppResolverService } from './services/tnc-app-resolver.service'
 import { TncPublicResolverService } from './services/tnc-public-resolver.service'
+import { AppTocResolverService } from '@ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service'
+import { SkillManagementGuard } from '../../project/ws/app/src/lib/routes/skill-management/guards/skill-management.guard'
+import { UploadPdfComponent } from './routes/upload-pdf/upload-pdf.component'
 
 // 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
 // Please declare routes in alphabetical order
@@ -38,11 +38,45 @@ const routes: Routes = [
     path: 'practice/behavioral',
     pathMatch: 'full',
     redirectTo: 'page/embed-behavioural-skills',
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/activities',
+    loadChildren: () =>
+      import('./routes/route-activities.module').then(u => u.RouteActivitiesModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'infosysagm',
+    pathMatch: 'full',
+    loadChildren: () => import('./routes/route-infosysagm.module').then(u => u.RouteInfosysagm),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'infosysagm/epochuser',
+    component: PageComponent,
+    data: {
+      pageType: 'page',
+      pageKey: 'embed-epoch',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'infosysagm/moderator',
+    pathMatch: 'full',
+    loadChildren: () => import('./routes/route-infosysagm.module').then(u => u.RouteInfosysagm),
+    canActivate: [GeneralGuard],
   },
   {
     path: 'admin',
+    data: {
+      requiredRoles: ['register-admin', 'admin', 'content-assignment-admin'],
+    },
     loadChildren: () => import('./routes/route-admin.module').then(u => u.RouteAdminModule),
-    canActivate: [GeneralGuard, AdminGuard],
+    canActivate: [GeneralGuard],
   },
   {
     path: 'analytics',
@@ -52,11 +86,26 @@ const routes: Routes = [
   {
     path: 'app/channels',
     loadChildren: () => import('./routes/route-channels.module').then(u => u.RouteChannelsModule),
+    canActivate: [GeneralGuard],
   },
+  // commercial_begin
   {
     path: 'app/concept-graph',
     loadChildren: () =>
       import('./routes/route-concept-graph.module').then(u => u.RouteConceptGraphModule),
+    canActivate: [GeneralGuard],
+  },
+  // commercial_end
+  {
+    path: 'app/content-assignment',
+    loadChildren: () =>
+      import('./routes/route-content-assignment.module').then(u => u.RouteContentAssignmentModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/gamification',
+    loadChildren: () =>
+      import('./routes/route-gamification.module').then(u => u.RouteGamificationModule),
     canActivate: [GeneralGuard],
   },
   {
@@ -75,6 +124,7 @@ const routes: Routes = [
     component: FeaturesComponent,
     canActivate: [GeneralGuard],
   },
+
   {
     path: 'app/goals',
     loadChildren: () => import('./routes/route-goals-app.module').then(u => u.RouteGoalsAppModule),
@@ -105,12 +155,45 @@ const routes: Routes = [
     path: 'app/knowledge-board',
     loadChildren: () =>
       import('./routes/route-knowledge-board.module').then(u => u.RouteKnowledgeBoardModule),
+    canActivate: [GeneralGuard],
   },
   {
     path: 'app/leaderboard',
     loadChildren: () =>
       import('./routes/route-leaderboard-app.module').then(u => u.RouteLeaderboardAppModule),
     canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/learning-path',
+    loadChildren: () =>
+      import('./routes/route-learning-path.module').then(u => u.RouteLearningPathModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/learning-paths',
+    loadChildren: () =>
+      import('./routes/route-academy-learning-paths.module').then(
+        u => u.RouteAcademyLearningPathsModule,
+      ),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/my-learning',
+    loadChildren: () =>
+      import('./routes/route-my-learning.module').then(u => u.RouteMyLearningModule),
+    canActivate: [GeneralGuard, LearningGuard],
+  },
+  {
+    path: 'app/my-dashboard',
+    loadChildren: () =>
+      import('./routes/route-my-dashboard.module').then(u => u.RouteMyDashboardModule),
+    canActivate: [GeneralGuard, LearningGuard],
+  },
+  {
+    path: 'app/my-rewards',
+    loadChildren: () =>
+      import('./routes/route-my-rewards.module').then(u => u.RouteMyRewarddModule),
+    canActivate: [GeneralGuard, LearningGuard],
   },
   {
     path: 'app/notifications',
@@ -130,11 +213,34 @@ const routes: Routes = [
       import('./routes/route-profile-app.module').then(u => u.RouteProfileAppModule),
     canActivate: [GeneralGuard],
   },
-
+  {
+    path: 'app/person-profile',
+    loadChildren: () =>
+      import('./routes/route-person-profile.module').then(u => u.RoutePersonProfileModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/pathfinders-calendar',
+    loadChildren: () =>
+      import('./routes/route-pathfinders-calendar.module').then(u => u.RouteCalendarModule),
+    data: {
+      pageType: 'feature',
+      pageKey: 'pathfinders-calendar',
+    },
+    resolve: {
+      searchPageData: PageResolve,
+    },
+    canActivate: [GeneralGuard],
+  },
   {
     path: 'app/account-settings',
     loadChildren: () =>
       import('./routes/route-account-settings.module').then(u => u.RouteAccountSettingsModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/events',
+    loadChildren: () => import('./routes/route-app-event.module').then(m => m.AppEventsModule),
     canActivate: [GeneralGuard],
   },
   {
@@ -151,6 +257,12 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/skill-management',
+    loadChildren: () =>
+      import('./routes/route-skill-management.module').then(u => u.RouteSkillManagementModule),
+    canActivate: [GeneralGuard, SkillManagementGuard],
+  },
+  {
     path: 'app/social',
     loadChildren: () =>
       import('./routes/route-social-app.module').then(u => u.RouteSocialAppModule),
@@ -162,6 +274,11 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'author/toc',
+    loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
+    canActivate: [GeneralGuard],
+  },
+  {
     path: 'app/tnc',
     component: TncComponent,
     resolve: {
@@ -169,11 +286,21 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/upload-pdf',
+    component: UploadPdfComponent,
+  },
+  {
     path: 'author',
     data: {
       requiredRoles: [
-        'content-creator', 'ka-creator', 'kb-curator', 'kb-creator',
-        'channel-creator', 'reviewer', 'publisher', 'editor', 'admin',
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
       ],
     },
     canActivate: [GeneralGuard],
@@ -234,6 +361,7 @@ const routes: Routes = [
     canActivate: [ExternalUrlResolverService],
     component: ErrorResolverComponent,
   },
+  { path: 'home', redirectTo: 'page/home', pathMatch: 'full' },
   {
     path: 'learning-hub',
     loadChildren: () =>
@@ -251,6 +379,25 @@ const routes: Routes = [
     resolve: {
       pageData: PageResolve,
     },
+  },
+  {
+    path: 'page/toc',
+    redirectTo: '/',
+    pathMatch: 'full',
+  },
+  {
+    path: 'page/toc/:id',
+    data: {
+      pageType: 'page',
+      pageKey: 'toc',
+    },
+    resolve: {
+      pageData: PageResolve,
+      content: AppTocResolverService,
+    },
+    runGuardsAndResolvers: 'paramsChange',
+    component: PageComponent,
+    canActivate: [GeneralGuard],
   },
   {
     path: 'page/:id',
@@ -339,79 +486,18 @@ const routes: Routes = [
     loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
     canActivate: [GeneralGuard],
   },
-  // adding here as temp routes did not work
   {
-    path: 'practice/behavioral',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-behavioural-skills',
-  }, {
-    path: 'practice/hands-on/code-crack',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-code-crack',
+    path: 'author/viewer',
+    loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
+    canActivate: [GeneralGuard],
   },
   {
-    path: 'practice/hands-on/puzzle-mania',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-puzzle-mania',
-  }, {
-    path: 'interview',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-interview',
-  },
-  {
-    path: 'dialogue',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-dialogue',
-  },
-  {
-    path: 'etastrategymap',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-strategy-map',
-  },
-  {
-    path: 'virtualclassroom',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-virtual-classroom',
-  },
-  {
-    path: 'projectstack',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-project-stack',
-  },
-  {
-    path: 'livetranscribe',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-live-transcribe',
-  },
-  {
-    path: 'epoch',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-epoch',
-  },
-  {
-    path: 'salesleader',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-sales-leader',
-  },
-  {
-    path: 'maq',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-maq',
-  },
-  {
-    path: 'ilipdp',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-ilipdp',
-  },
-  {
-    path: 'practice/home',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-iap-home',
-  },
-  {
-    path: 'collective',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-collective',
+    path: 'embed',
+    data: {
+      topBar: ETopBar.NONE,
+    },
+    loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
+    canActivate: [GeneralGuard],
   },
   {
     path: '**',
@@ -421,88 +507,11 @@ const routes: Routes = [
     },
   },
 ]
-
-// Temporary routes for application. Please remove from 01st January, 2020
-// 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵😵
-const tempRoutes: Routes = [
-  {
-    path: 'practice/behavioral',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-behavioural-skills',
-  }, {
-    path: 'practice/hands-on/code-crack',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-code-crack',
-  },
-  {
-    path: 'practice/hands-on/puzzle-mania',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-puzzle-mania',
-  }, {
-    path: 'interview',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-interview',
-  },
-  {
-    path: 'dialogue',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-dialogue',
-  },
-  {
-    path: 'etastrategymap',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-strategy-map',
-  },
-  {
-    path: 'virtualclassroom',
-    pathMatch: 'full',
-    redirectTo: 'embed-virtual-classroom',
-  },
-  {
-    path: 'projectstack',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-project-stack',
-  },
-  {
-    path: 'livetranscribe',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-live-transcribe',
-  },
-  {
-    path: 'epoch',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-epoch',
-  },
-  {
-    path: 'salesleader',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-sales-leader',
-  },
-  {
-    path: 'maq',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-maq',
-  },
-  {
-    path: 'ilipdp',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-ilipdp',
-  },
-  {
-    path: 'practice/home',
-    pathMatch: 'full',
-    redirectTo: 'page/embed-iap-home',
-  },
-  {
-    path: 'toc/:id',
-    redirectTo: 'app/toc/:id/overview',
-  },
-]
 @NgModule({
   imports: [
     PageModule,
     FeaturesModule,
-    RouterModule.forRoot([...tempRoutes, ...routes], {
+    RouterModule.forRoot(routes, {
       anchorScrolling: 'enabled',
       scrollPositionRestoration: 'top',
       urlUpdateStrategy: 'eager',
@@ -511,4 +520,4 @@ const tempRoutes: Routes = [
   exports: [RouterModule],
   providers: [ExploreDetailResolve],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

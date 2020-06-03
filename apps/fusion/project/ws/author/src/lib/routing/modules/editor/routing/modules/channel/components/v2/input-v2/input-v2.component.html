@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div mat-dialog-title class="flex flex-between mr-0 py-0">
   <h2>
     <ng-container [ngSwitch]="widget.widgetSubType">
@@ -48,6 +45,9 @@
       <ng-container i18n *ngSwitchCase="'tabLayout'">
         Tab
       </ng-container>
+      <ng-container i18n *ngSwitchCase="'intranetResponsive'">
+        Intranet
+      </ng-container>
       <ng-container *ngSwitchCase="'selectorResponsive'">
         <ng-container *ngIf="widget.widgetData.type === 'imageMap'" i18n>
           Image Map
@@ -56,14 +56,23 @@
           Image
         </ng-container>
         <ng-container *ngIf="!widget.widgetData.type">
-          Responsive Image Map / Image
+          Responsive Image Map / Image / Video
+        </ng-container>
+        <ng-container
+          *ngIf="widget.widgetData.type === 'gallery' && widget.widgetData.type === 'wrapper'"
+          i18n
+        >
+          Video Gallery
+        </ng-container>
+        <ng-container *ngIf="widget.widgetData.type === 'wrapper'" i18n>
+          Video
         </ng-container>
       </ng-container>
       <ng-container *ngSwitchCase="'galleryView'">
         <ng-container *ngIf="widget.widgetData.type === 'image'" i18n>
           Image Gallery
         </ng-container>
-        <ng-container *ngIf="widget.widgetData.type === 'video'" i18n>
+        <ng-container *ngIf="widget.widgetData.type === 'wrapper'" i18n>
           Video Gallery
         </ng-container>
         <ng-container *ngIf="!widget.widgetData.type" i18n>
@@ -76,12 +85,19 @@
       <ng-container i18n *ngSwitchCase="'contentStripSingle'">
         Entry List
       </ng-container>
+      <ng-container i18n *ngSwitchCase="'channelHub'">
+        Channel Hub
+      </ng-container>
       <ng-container i18n *ngSwitchDefault>
         Common Widget
       </ng-container>
     </ng-container>
-    <mat-icon class="ml-2 float-right cursor-pointer" i18n-matTooltip matTooltip="Click to copy Anchor Id"
-      (click)="copyId()">file_copy
+    <mat-icon
+      class="ml-2 float-right cursor-pointer"
+      i18n-matTooltip
+      matTooltip="Click to copy Anchor Id"
+      (click)="copyId()"
+      >file_copy
     </mat-icon>
   </h2>
   <button mat-dialog-close mat-icon-button class="float-right cursor-pointer">
@@ -92,62 +108,131 @@
   <div>
     <ng-container [ngSwitch]="widget.widgetSubType">
       <ng-container *ngSwitchCase="'sliderBanners'">
-        <ws-auth-slider [identifier]="identifier" [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData"
-          (data)="update($event.content)">
+        <ws-auth-slider
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        >
         </ws-auth-slider>
       </ng-container>
       <ng-container *ngSwitchCase="'pageEmbedded'">
-        <ws-auth-embed [editorType]="'basic'" [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData"
-          (data)="update($event.content)">
+        <ws-auth-embed
+          [editorType]="'basic'"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        >
         </ws-auth-embed>
       </ng-container>
       <ng-container *ngSwitchCase="'cardBreadcrumb'">
-        <ws-auth-breadcrum [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData"
-          (data)="update($event.content)">
+        <ws-auth-breadcrum
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        >
         </ws-auth-breadcrum>
       </ng-container>
       <ng-container *ngSwitchCase="'playerVideo'">
-        <ws-auth-audio-video [identifier]="identifier" [isVideo]="true" [isSubmitPressed]="isSubmitPressed"
-          [content]="widget.widgetData" (data)="update($event.content)">
+        <ws-auth-audio-video
+          [identifier]="identifier"
+          [isVideo]="true"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        >
         </ws-auth-audio-video>
       </ng-container>
       <ng-container *ngSwitchCase="'videoWrapper'">
-        <ws-auth-media-wrapper [identifier]="identifier" [isVideo]="true" [isSubmitPressed]="isSubmitPressed"
-          [content]="widget.widgetData" (data)="update($event.content)">
+        <ws-auth-media-wrapper
+          [identifier]="identifier"
+          [isVideo]="true"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        >
         </ws-auth-media-wrapper>
       </ng-container>
       <ng-container *ngSwitchCase="'elementHtml'">
-        <ws-auth-html-v2 [identifier]="identifier" *ngIf="!widget.widgetData.type" [isSubmitPressed]="isSubmitPressed"
-          [content]="widget.widgetData" (data)="update($event.content)"></ws-auth-html-v2>
-        <ws-auth-image-v2 [identifier]="identifier" *ngIf="widget.widgetData && widget.widgetData.type"
-          [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData"></ws-auth-image-v2>
+        <ws-auth-html-v2
+          [identifier]="identifier"
+          *ngIf="!widget.widgetData.type"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        ></ws-auth-html-v2>
+        <ws-auth-image-v2
+          [identifier]="identifier"
+          *ngIf="widget.widgetData && widget.widgetData.type"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+        ></ws-auth-image-v2>
       </ng-container>
       <ng-container *ngSwitchCase="'contentStripMultiple'">
-        <ws-auth-content-strip-v2 [identifier]="identifier" [isSubmitPressed]="isSubmitPressed"
-          [content]="widget.widgetData" [size]="size"></ws-auth-content-strip-v2>
+        <ws-auth-content-strip-v2
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          [size]="size"
+        ></ws-auth-content-strip-v2>
       </ng-container>
       <ng-container *ngSwitchCase="'selectorResponsive'">
-        <ws-auth-selector-responsive-v2 [identifier]="identifier" [isSubmitPressed]="isSubmitPressed"
-          [content]="widget.widgetData" [size]="size"></ws-auth-selector-responsive-v2>
+        <ws-auth-selector-responsive-v2
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          [size]="size"
+        ></ws-auth-selector-responsive-v2>
       </ng-container>
       <ng-container *ngSwitchCase="'contentStripSingle'">
-        <ws-auth-content-strip-single [editorMode]="'basic'" [identifier]="identifier"
-          [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData" (data)="update($event.content)">
+        <ws-auth-content-strip-single
+          [editorMode]="'basic'"
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        >
         </ws-auth-content-strip-single>
       </ng-container>
       <ng-container *ngSwitchCase="'imageMapResponsive'">
-        <ws-auth-image-map [identifier]="identifier" [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData">
+        <ws-auth-image-map
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+        >
         </ws-auth-image-map>
       </ng-container>
       <ng-container *ngSwitchCase="'galleryView'">
-        <ws-auth-gallery-v2 [identifier]="identifier" [isSubmitPressed]="isSubmitPressed" [content]="widget.widgetData"
-          [size]="size"></ws-auth-gallery-v2>
+        <ws-auth-gallery-v2
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          [size]="size"
+        ></ws-auth-gallery-v2>
+      </ng-container>
+      <ng-container *ngSwitchCase="'intranetResponsive'">
+        <ws-auth-intranet-selector
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          [size]="size"
+        ></ws-auth-intranet-selector>
+      </ng-container>
+      <ng-container *ngSwitchCase="'channelHub'">
+        <ws-auth-channel-hub
+          [identifier]="identifier"
+          [isSubmitPressed]="isSubmitPressed"
+          [content]="widget.widgetData"
+          (data)="update($event.content)"
+        ></ws-auth-channel-hub>
       </ng-container>
     </ng-container>
   </div>
   <br />
   <div class="button">
-    <span class="margin-remove-bottom mat-h3 font-weight-bold margin-right-s" i18n>Style Properties</span>
+    <span class="margin-remove-bottom mat-h3 font-weight-bold margin-right-s" i18n
+      >Style Properties</span
+    >
     <mat-slide-toggle #toggle [checked]="commonConfig" (change)="commonConfig = !commonConfig">
     </mat-slide-toggle>
   </div>
@@ -172,10 +257,20 @@
         </mat-radio-button>
       </mat-radio-group>
       <div class="mt-4" *ngIf="heightProp === 'standard' || heightProp === 'custom'">
-        <mat-form-field class="flex" [ngClass]="{
+        <mat-form-field
+          class="flex"
+          [ngClass]="{
             disabled: heightProp === 'standard'
-          }" appearance="outline">
-          <input matInput type="number" [(ngModel)]="height" i18n-placeholder placeholder="Height" />
+          }"
+          appearance="outline"
+        >
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="height"
+            i18n-placeholder
+            placeholder="Height"
+          />
           <mat-select style="width: 30%;" name="heightUnit" [(ngModel)]="heightUnit">
             <mat-option value="px">px</mat-option>
             <mat-option value="%">%</mat-option>
@@ -198,9 +293,13 @@
         </mat-radio-button>
       </mat-radio-group>
       <div class="mt-4" *ngIf="widthProp === 'standard' || widthProp === 'custom'">
-        <mat-form-field class="flex" [ngClass]="{
+        <mat-form-field
+          class="flex"
+          [ngClass]="{
             disabled: widthProp === 'standard'
-          }" appearance="outline">
+          }"
+          appearance="outline"
+        >
           <input matInput type="number" [(ngModel)]="width" i18n-placeholder placeholder="width" />
           <mat-select style="width: 30%;" name="widthUnit" [(ngModel)]="widthUnit">
             <mat-option value="px">px</mat-option>
@@ -216,7 +315,13 @@
         <div class="mr-4">
           <mat-form-field class="flex" appearance="outline">
             <mat-label i18n>Margin-Left</mat-label>
-            <input matInput type="number" [(ngModel)]="marginLeft" i18n-placeholder placeholder="Margin-Left" />
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="marginLeft"
+              i18n-placeholder
+              placeholder="Margin-Left"
+            />
             <mat-select style="width: 30%;" name="marginLeftUnit" [(ngModel)]="marginLeftUnit">
               <mat-option value="px">px</mat-option>
               <mat-option value="%">%</mat-option>
@@ -226,7 +331,13 @@
         <div class="mr-4">
           <mat-form-field class="flex" appearance="outline">
             <mat-label i18n>Margin-Right</mat-label>
-            <input matInput type="number" i18n-placeholder placeholder="Margin-Right" [(ngModel)]="marginRight" />
+            <input
+              matInput
+              type="number"
+              i18n-placeholder
+              placeholder="Margin-Right"
+              [(ngModel)]="marginRight"
+            />
             <mat-select style="width: 30%;" name="marginRightUnit" [(ngModel)]="marginRightUnit">
               <mat-option value="px">px</mat-option>
               <mat-option value="%">%</mat-option>
@@ -238,7 +349,13 @@
         <div class="mr-4">
           <mat-form-field class="flex" appearance="outline">
             <mat-label i18n>Margin-Top</mat-label>
-            <input matInput type="number" [(ngModel)]="marginTop" i18n-placeholder placeholder="Margin-Top" />
+            <input
+              matInput
+              type="number"
+              [(ngModel)]="marginTop"
+              i18n-placeholder
+              placeholder="Margin-Top"
+            />
             <mat-select style="width: 30%;" name="marginTopUnit" [(ngModel)]="marginTopUnit">
               <mat-option value="px">px</mat-option>
               <mat-option value="%">%</mat-option>
@@ -248,7 +365,13 @@
         <div class="mr-4">
           <mat-form-field class="flex" appearance="outline">
             <mat-label i18n>Margin-Bottom</mat-label>
-            <input matInput type="number" i18n-placeholder placeholder="Margin-Bottom" [(ngModel)]="marginBottom" />
+            <input
+              matInput
+              type="number"
+              i18n-placeholder
+              placeholder="Margin-Bottom"
+              [(ngModel)]="marginBottom"
+            />
             <mat-select style="width: 30%;" name="marginBottomUnit" [(ngModel)]="marginBottomUnit">
               <mat-option value="px">px</mat-option>
               <mat-option value="%">%</mat-option>

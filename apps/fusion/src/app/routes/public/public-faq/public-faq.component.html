@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs text-truncate">
@@ -29,7 +26,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-path
+    <div *ngIf="screenSizeIsLtMedium" class="flex flex-middle padding-m">
       <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
         <mat-icon>menu</mat-icon>
       </button>
@@ -42,24 +39,24 @@ path
     <section class="padding-m leading-relaxed" [ngSwitch]="currentTab">
       <mat-card class="nav-container" *ngSwitchCase="'login'">
         <p class="mat-body-2" i18n="faq page panel one question one">
-path
+          Q1. Unable to login to Lex
         </p>
         <p class="mat-body-1">
           <ng-container i18n="faq page panel one answer one section one">
-path
-path
+            For using Lex you have to register yourself for Multi-Factor Authentication.<br />
+            Please login to Lex from
           </ng-container>
           <ng-container>
-path
+            https://lex.infosysapps.com
           </ng-container>
           <ng-container i18n="faq page panel one answer one section two">
             <br />
-path
-path
-path
+            Lex is an internet facing application there are two scenarios.<br />
+            1. You are accessing Lex on Infosys Intranet (VPN yes but not IConnect)<br />
+            2. You are accessing Lex on Internet (from your personal laptop/desktop/Mobile
             browser/Android/iOS native applications)<br />
             In 1) you will not have to do separate authentication, your windows login will be
-path
+            automatically used for letting you in Lex<br />
             In 2) You need to register yourself first for Multi-Factor Authentication (MFA) at
           </ng-container>
           <ng-container>
@@ -75,19 +72,19 @@ path
         </p>
         <mat-divider></mat-divider>
         <p class="mat-body-2 pt-4" i18n="faq page panel one question two">
-path
+          Q2. Unable to logon to Lex, enclosed blue screen error
         </p>
         <p class="mat-body-1" i18n="faq page panel one answer two">
           Request to kindly clear your cookies and cache of the desktop browser once before
           trying.<br />
           Also you can use Incognito mode or Private Browsing modes of Chrome and IE.<br />
-path
+          Restart the browser and try accessing Lex.
         </p>
 
         <mat-divider></mat-divider>
 
         <p class="mat-body-2 pt-4" i18n="faq page panel one question three">
-path
+          Q3. Login credentials for Lex
         </p>
         <p class="mat-body-1">
           <ng-container i18n="faq page panel one answer three section one">
@@ -97,11 +94,11 @@ path
           <ng-container i18n="faq page panel one answer three section two">
             and register yourself for Multi-Factors Authentication.<br />
             You can set a passcode of your choice. Select Call-In method for authentication.<br />
-path
+            For accessing Lex this is a “must” criteria.<br />
             1. Visit
           </ng-container>
           <ng-container>
-path
+            https://lex.infosysapps.com
           </ng-container>
           <ng-container i18n="faq page panel one answer three section three">
             <br />
@@ -115,23 +112,23 @@ path
             6. You will receive a phone call from Microsoft on your registered phone number<br />
             7. You are required to key-in your passcode and #<br />
             8. If your authentication is successful, the web browser will automatically take you to
-path
+            Lex.
           </ng-container>
         </p>
 
         <mat-divider></mat-divider>
 
         <p class="mat-body-2 pt-4" i18n="faq page panel one question four">
-path
+          Q4. Unable to logon to Lex , getting Microsoft Login page
         </p>
         <p class="mat-body-1" i18n="faq page panel one answer four">
           Clear the browser cache and cookies (going as far back as possible).<br />
           This issue is mainly for user who use other Infosys O365 Applications like Mail, VPN,
           Yammer and many more.<br />
           The token issued by Microsoft when you used such an application is stored in the cookies
-path
+          and Microsoft needs to be forced to issue a fresh token which will allow access the Lex
           application which is also a O365 Application.<br />
-path
+          Clear the cache and cookies and restart the browser and try accessing Lex
         </p>
 
         <mat-divider></mat-divider>
@@ -146,7 +143,7 @@ path
         <mat-divider></mat-divider>
 
         <p class="mat-body-2 pt-4" i18n="faq page panel one question six">
-path
+          Q6. I am not able to get my PIN to enter with password in LEX application. Would you
           please help me with this?
         </p>
         <p class="mat-body-1">

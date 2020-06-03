@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-vars';
 @import '~src/styles/ws-mixins';
 
@@ -11,15 +8,17 @@
   background-size: cover;
   height: 200px;
   width: 100%;
-    @include breakpoint-xs {
-      height: 250px;
-    }
+
+  @include breakpoint-xs {
+    height: 250px;
+  }
 }
 
-.banner-description{
+.banner-description {
   padding: 0 $size-xl;
   margin: 0 16px;
 }
+
 .scrollable {
   height: 210px;
   overflow-x: hidden;
@@ -31,15 +30,15 @@
 }
 
 
-.content-strip{
-  h2{
+.content-strip {
+  h2 {
     margin: 0;
     margin-bottom: $size-l;
   }
 }
 
 
-.mat-chips{
+.mat-chips {
   padding: 0 16px;
   margin: $size-xs
 }
@@ -57,10 +56,10 @@
   }
 }
 
-.text-bold{
+.text-bold {
   font-weight: 500
 }
 
-.mat-chip-list-wrapper{
-  margin:8px;
+.mat-chip-list-wrapper {
+  margin: 8px;
 }

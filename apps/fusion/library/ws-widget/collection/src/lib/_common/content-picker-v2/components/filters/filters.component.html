@@ -1,0 +1,17 @@
+<div class="flex flex-between padding-left-m padding-right-m pt-1">
+  <h2 i18n>Filters</h2>
+  <mat-icon (click)="closeFilter()" class="cursor-pointer">close</mat-icon>
+</div>
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let filter of filters">
+    <mat-expansion-panel-header>
+      {{filter?.displayName}}
+    </mat-expansion-panel-header>
+    <div class="flex justify-between items-center" *ngFor="let subFilter of filter?.content">
+      <mat-checkbox [checked]="appliedFilters[filter?.type]?.has(subFilter?.type)"
+        (change)="filterChange($event.checked, filter?.type, subFilter?.type)">
+        {{subFilter?.displayName}}</mat-checkbox>
+      <span>{{subFilter?.count}}</span>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

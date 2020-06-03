@@ -1,16 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-import { KnowledgeHubService } from '../../services/knowledge-hub.service'
-import { Subscription } from 'rxjs'
-import { IKhubItemTile, ISearchObjForView, IKhubProject } from '../../models/knowledgeHub.model'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { NsContent, NsError, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
+import { NsWidgetResolver } from '@ws-widget/resolver'
 // import { WsSharedValuesService } from '@ws-shared/services/src/public-api'
 // import { map } from 'rxjs/operators'
-import { ConfigurationsService, NsPage, ValueService, UtilityService } from '@ws-widget/utils'
-import { NsWidgetResolver } from '@ws-widget/resolver'
-import { NsError, ROOT_WIDGET_CONFIG, NsContent } from '@ws-widget/collection'
+import { ConfigurationsService, NsPage, UtilityService, ValueService } from '@ws-widget/utils'
+import { Subscription } from 'rxjs'
+import { IKhubItemTile, IKhubProject, ISearchObjForView } from '../../models/knowledgeHub.model'
+import { KnowledgeHubService } from '../../services/knowledge-hub.service'
 
 @Component({
   selector: 'ws-app-infy-khub-view',
@@ -109,7 +106,7 @@ export class KhubViewComponent implements OnInit, OnDestroy {
             description: this.viewData.description || '',
             name: this.viewData.title || '',
           }
-          // console.log(this.viewData, this.projectResult)
+          // //console.log(this.viewData, this.projectResult)
           this.getMoreLikeThis()
         },
         error => {

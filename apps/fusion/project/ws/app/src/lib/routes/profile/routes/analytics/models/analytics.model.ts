@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { IWidgetGraphData, NsContent } from '@ws-widget/collection'
 
 export namespace NSAnalyticsData {
@@ -15,8 +12,8 @@ export namespace NSAnalyticsData {
     points_and_ranks: IPointsAndRanks
     time_spent_by_user: number
     timespent_user_vs_org_wide: {
-      time_spent_by_user: number;
-      usage_percent: number;
+      time_spent_by_user: number
+      usage_percent: number
     }
     total_badges_earned: number
     track_wise_user_timespent: ITrackWiseData
@@ -226,6 +223,7 @@ export namespace NSAnalyticsData {
     progress: number
   }
   export interface IUserProgressResponse {
+    last_updated_on: string
     top_content_jl: ITopContent[]
     top_content_unit: ITopContent[]
     learning_history: ILearningHistory[]
@@ -237,5 +235,4 @@ export namespace NSAnalyticsData {
     playlist_shared_by_me: IPlayListShared[]
     playlist_shared_to_me: IPlayListShared[]
   }
-
 }

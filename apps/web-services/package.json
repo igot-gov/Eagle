@@ -13,7 +13,8 @@
     "start:wsd": "nodemon --config nodemon/nodemon-wsd.json",
     "start:ws-stage": "nodemon --config nodemon/nodemon-ws-stage.json",
     "start:siemens-stage": "nodemon --config nodemon/nodemon-siemens-stage.json",
-    "start": "nodemon --config nodemon/nodemon.json"
+    "start:nodemon": "nodemon --config nodemon/nodemon.json",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "Sujeet Kumar Jaiswal<Sujeet_Jaiswal@infosys.com>",
@@ -23,8 +24,10 @@
     "cassandra-driver": "^4.1.0",
     "cassandra-store": "^5.0.0",
     "chalk": "^2.4.2",
+    "composable-middleware": "^0.3.0",
     "compression": "^1.7.4",
     "connect-timeout": "^1.9.0",
+    "cookie-parser": "^1.4.5",
     "date-fns": "^2.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.4",

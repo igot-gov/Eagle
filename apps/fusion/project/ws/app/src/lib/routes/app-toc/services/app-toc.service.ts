@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { Data } from '@angular/router'
 import { Subject, Observable } from 'rxjs'
@@ -17,10 +14,18 @@ const PROXY_SLAG_V8 = '/apis/proxies/v8'
 const API_END_POINTS = {
   CONTENT_PARENTS: `${PROTECTED_SLAG_V8}/content/parents`,
   CONTENT_NEXT: `${PROTECTED_SLAG_V8}/content/next`,
+  CONTENT_PARENT: (contentId: string) => `${PROTECTED_SLAG_V8}/content/${contentId}/parent`,
+  CONTENT_AUTH_PARENT: (contentId: string, rootOrg: string, org: string) =>
+    `/apis/authApi/action/content/parent/hierarchy/${contentId}?rootOrg=${rootOrg}&org=${org}`,
   COHORTS: (cohortType: NsCohorts.ECohortTypes, contentId: string) =>
     `${PROTECTED_SLAG_V8}/cohorts/${cohortType}/${contentId}`,
   EXTERNAL_CONTENT: (contentId: string) =>
     `${PROTECTED_SLAG_V8}/content/external-access/${contentId}`,
+  COHORTS_GROUP_USER: (groupId: number) => `${PROTECTED_SLAG_V8}/cohorts/${groupId}`,
+  RELATED_RESOURCE: (contentId: string, contentType: string) =>
+    `${PROTECTED_SLAG_V8}/khub/fetchRelatedResources/${contentId}/${contentType}`,
+  POST_ASSESSMENT: (contentId: string) =>
+    `${PROTECTED_SLAG_V8}/user/evaluate/post-assessment/${contentId}`,
 }
 
 @Injectable()
@@ -29,10 +34,8 @@ export class AppTocService {
   analyticsFetchStatus: TFetchStatus = 'none'
   private showSubtitleOnBanners = false
   private canShowDescription = false
-  constructor(
-    private http: HttpClient,
-    private configSvc: ConfigurationsService,
-  ) { }
+
+  constructor(private http: HttpClient, private configSvc: ConfigurationsService) {}
 
   get subtitleOnBanners(): boolean {
     return this.showSubtitleOnBanners
@@ -47,14 +50,17 @@ export class AppTocService {
     this.canShowDescription = val
   }
 
-  showStartButton(content: NsContent.IContent | null): { show: boolean, msg: string } {
+  showStartButton(content: NsContent.IContent | null): { show: boolean; msg: string } {
     const status = {
       show: false,
       msg: '',
     }
     if (content) {
-      if (content.artifactUrl.match(/youtu(.)?be/gi) && this.configSvc.userProfile &&
-        this.configSvc.userProfile.country === 'China') {
+      if (
+        content.artifactUrl.match(/youtu(.)?be/gi) &&
+        this.configSvc.userProfile &&
+        this.configSvc.userProfile.country === 'China'
+      ) {
         status.show = false
         status.msg = 'youtubeForbidden'
         return status
@@ -194,18 +200,16 @@ export class AppTocService {
   private getContentAnalyticsClient(contentId: string) {
     this.analyticsFetchStatus = 'fetching'
     const url = `${PROXY_SLAG_V8}/LA/api/la/contentanalytics?content_id=${contentId}&type=course`
-    this.http
-      .get(url)
-      .subscribe(
-        result => {
-          this.analyticsFetchStatus = 'done'
-          this.analyticsReplaySubject.next(result)
-        },
-        () => {
-          this.analyticsReplaySubject.next(null)
-          this.analyticsFetchStatus = 'done'
-        },
-      )
+    this.http.get(url).subscribe(
+      result => {
+        this.analyticsFetchStatus = 'done'
+        this.analyticsReplaySubject.next(result)
+      },
+      () => {
+        this.analyticsReplaySubject.next(null)
+        this.analyticsFetchStatus = 'done'
+      },
+    )
   }
 
   fetchContentAnalyticsData(contentId: string) {
@@ -216,19 +220,19 @@ export class AppTocService {
   private getContentAnalytics(contentId: string) {
     this.analyticsFetchStatus = 'fetching'
     // tslint:disable-next-line: max-line-length
-path
-    this.http
-      .get(url)
-      .subscribe(
-        result => {
-          this.analyticsFetchStatus = 'done'
-          this.analyticsReplaySubject.next(result)
-        },
-        () => {
-          this.analyticsReplaySubject.next(null)
-          this.analyticsFetchStatus = 'done'
-        },
-      )
+    const url = `${PROXY_SLAG_V8}/LA/LA/api/Users?refinementfilter=${encodeURIComponent(
+      '"source":["LEX","Learning Hub"]',
+    )}$${encodeURIComponent(`"courseCode": ["${contentId}"]`)}`
+    this.http.get(url).subscribe(
+      result => {
+        this.analyticsFetchStatus = 'done'
+        this.analyticsReplaySubject.next(result)
+      },
+      () => {
+        this.analyticsReplaySubject.next(null)
+        this.analyticsFetchStatus = 'done'
+      },
+    )
   }
 
   clearAnalyticsData() {
@@ -236,27 +240,42 @@ path
       this.analyticsReplaySubject.unsubscribe()
     }
   }
-  private get endDate() {
-    return `${new Date().getFullYear()}-${`0${new Date().getMonth() + 1}`.slice(
-      -2,
-    )}-${`0${new Date().getDate()}`.slice(-2)}`
-  }
-  private get startDate() {
-    return `2018-04-01`
-  }
 
   fetchContentParents(contentId: string): Observable<NsContent.IContentMinimal[]> {
     return this.http.get<NsContent.IContentMinimal[]>(
       `${API_END_POINTS.CONTENT_PARENTS}/${contentId}`,
     )
   }
-  fetchContentWhatsNext(contentId: string, contentType?: string): Observable<NsContent.IContentMinimal[]> {
+  fetchContentWhatsNext(
+    contentId: string,
+    contentType?: string,
+  ): Observable<NsContent.IContentMinimal[]> {
     if (contentType) {
-      return this.http.get<NsContent.IContentMinimal[]>(`${API_END_POINTS.CONTENT_NEXT}/${contentId}?contentType=${contentType}`)
+      return this.http.get<NsContent.IContentMinimal[]>(
+        `${API_END_POINTS.CONTENT_NEXT}/${contentId}?contentType=${contentType}`,
+      )
     }
-    return this.http.get<NsContent.IContentMinimal[]>(`${API_END_POINTS.CONTENT_NEXT}/${contentId}`)
-
+    return this.http.get<NsContent.IContentMinimal[]>(
+      `${API_END_POINTS.CONTENT_NEXT}/${contentId}?ts=${new Date().getTime()}`,
+    )
   }
+
+  fetchMoreLikeThisPaid(contentId: string): Observable<NsContent.IContentMinimal[]> {
+    return this.http.get<NsContent.IContentMinimal[]>(
+      `${
+        API_END_POINTS.CONTENT_NEXT
+      }/${contentId}?exclusiveContent=true&ts=${new Date().getTime()}`,
+    )
+  }
+
+  fetchMoreLikeThisFree(contentId: string): Observable<NsContent.IContentMinimal[]> {
+    return this.http.get<NsContent.IContentMinimal[]>(
+      `${
+        API_END_POINTS.CONTENT_NEXT
+      }/${contentId}?exclusiveContent=false&ts=${new Date().getTime()}`,
+    )
+  }
+
   fetchContentCohorts(
     cohortType: NsCohorts.ECohortTypes,
     contentId: string,
@@ -265,5 +284,32 @@ path
   }
   fetchExternalContentAccess(contentId: string): Observable<{ hasAccess: boolean }> {
     return this.http.get<{ hasAccess: boolean }>(API_END_POINTS.EXTERNAL_CONTENT(contentId))
+  }
+  fetchCohortGroupUsers(groupId: number) {
+    return this.http.get<NsCohorts.ICohortsGroupUsers[]>(API_END_POINTS.COHORTS_GROUP_USER(groupId))
+  }
+  fetchMoreLikeThis(contentId: string, contentType: string): Observable<any> {
+    return this.http.get<NsContent.IContent[]>(
+      API_END_POINTS.RELATED_RESOURCE(contentId, contentType),
+    )
+  }
+
+  fetchPostAssessmentStatus(contentId: string) {
+    return this.http.get<{ result: NsAppToc.IPostAssessment[] }>(
+      API_END_POINTS.POST_ASSESSMENT(contentId),
+    )
+  }
+
+  fetchContentParent(contentId: string, data: NsAppToc.IContentParentReq, forPreview = false) {
+    return this.http.post<NsAppToc.IContentParentResponse>(
+      forPreview
+        ? API_END_POINTS.CONTENT_AUTH_PARENT(
+            contentId,
+            this.configSvc.rootOrg || '',
+            this.configSvc.org ? this.configSvc.org[0] : '',
+          )
+        : API_END_POINTS.CONTENT_PARENT(contentId),
+      data,
+    )
   }
 }

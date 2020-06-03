@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -10,8 +7,11 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
   contentRating: (contentId: string, userId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/contents/${contentId}/users/${userId}/ratings`,
+    `${CONSTANTS.RATING_API_BASE}/v1/contents/${contentId}/users/${userId}/ratings`,
+  contentsRating: `${CONSTANTS.RATING_API_BASE}/v1/contents/average-rating`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export const ratingApi = Router()
 
@@ -33,7 +33,37 @@ ratingApi.get('/:contentId', async (req, res) => {
     })
     res.status(response.status).send(response.data)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
+  }
+})
+
+ratingApi.post('/rating', async (req, res) => {
+  try {
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios({
+      ...axiosRequestConfig,
+      data: req.body,
+      headers: {
+        rootOrg,
+      },
+      method: 'POST',
+      url: `${API_END_POINTS.contentsRating}`,
+    })
+    res.status(response.status).send(response.data)
+  } catch (err) {
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -56,7 +86,11 @@ ratingApi.post('/:contentId', async (req, res) => {
     })
     res.status(response.status).send(response.data)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -79,6 +113,10 @@ ratingApi.delete('/:id', async (req, res) => {
     )
     res.status(response.status).send(response.data)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

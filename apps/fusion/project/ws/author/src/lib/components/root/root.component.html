@@ -1,12 +1,12 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="outer">
+<div class="outer" [ngClass]="{ 'dim' : isLoading}">
   <ws-auth-root-navigation></ws-auth-root-navigation>
   <router-outlet></router-outlet>
 </div>
 <div class="overlay" *ngIf="isLoading">
-  <mat-progress-spinner [color]="'primary'" [mode]="'indeterminate'">
-  </mat-progress-spinner>
-  <h1 class="relative-content mat-h1 margin-left-xs" i18n> Processing... </h1>
+  <div class="loader-container">
+    <div class="loader-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </div>

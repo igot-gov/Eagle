@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar color="primary" *ngIf="fetchStatus === 'done'">
   <a mat-icon-button routerLink="/app/infy/navigator/explore">
     <mat-icon>arrow_back</mat-icon>
@@ -12,7 +9,7 @@
 </mat-toolbar>
 
 <div class="margin-bottom-xl">
-  <div class="banner ws-mat-primary-lite-background">
+  <div class="banner ws-mat-primary-background-op50">
     <div class="banner-description margin-bottom-m padding-top-m ">
       <h1 class="mat-display-1 margin-bottom-l ws-mat-primary-text text-bold padding-top-l small-banner-text" i18n>
         Choose from one of the full stack program below
@@ -51,11 +48,10 @@
       </div>
     </div>
   </div>
+  <ng-template #loader>
+    <div class="text-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
 </div>
-
-
-<ng-template #loader>
-  <div class="text-center">
-    <mat-spinner></mat-spinner>
-  </div>
-</ng-template>

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -17,10 +14,7 @@ userTokenApi.get('/', async (req, res) => {
   try {
     const { email, code, redirectUrl } = req.query
     if (email) {
-      const response = await axios.get(
-        `${apiEndpoints.tokenWithEmail}${email}`,
-        axiosRequestConfig
-      )
+      const response = await axios.get(`${apiEndpoints.tokenWithEmail}${email}`, axiosRequestConfig)
       res.json(response)
     } else if (code && redirectUrl) {
       const response = await axios.get(
@@ -29,9 +23,17 @@ userTokenApi.get('/', async (req, res) => {
       )
       res.json(response)
     } else {
-      res.status(400).send('You must pass (email) || (code && redirectUrl) in query parameter, to retrieve the code.')
+      res
+        .status(400)
+        .send(
+          'You must pass (email) || (code && redirectUrl) in query parameter, to retrieve the code.'
+        )
     }
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })

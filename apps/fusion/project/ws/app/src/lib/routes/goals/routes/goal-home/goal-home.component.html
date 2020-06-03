@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="navBackground?.color" [ngStyle]="navBackground?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-s" i18n>Goals</span>
@@ -9,10 +6,12 @@
   <div class="banner-container">
     <div class="banner-overlay ws-primary-tinted-50">
       <div class="page-container mt-8">
-        <a routerLink="/app/goals/me/pending-actions" *ngIf="numNotifications">
+        <a name="pending-actions-button-goal-home" routerLink="/app/goals/me/pending-actions" *ngIf="numNotifications">
           <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-m">
             <mat-icon color="primary" class="margin-left-s">notifications</mat-icon>
-            <p class="margin-left-xs margin-remove-bottom" i18n>Accept or Reject goals shared with you!</p>
+            <p class="margin-left-xs margin-remove-bottom" i18n>
+              Accept or Reject goals shared with you!
+            </p>
             <span class="spacer"></span>
             <div class="margin-left-xs margin-right-s notificaton-circle ws-mat-primary-background">
               {{ numNotifications }}
@@ -20,21 +19,20 @@
           </mat-card>
         </a>
 
-        <h1 *ngIf="userName" class="mat-display-1 margin-bottom-l">
-          Hey {{ userName }}!
-        </h1>
+        <h1 *ngIf="userName" class="mat-display-1 margin-bottom-l">Hey {{ userName }}!</h1>
         <!-- <h2 class="mat-h2" i18n>You have made quite some progress!</h2> -->
         <p>
           <mat-button-toggle-group (change)="goalToggle($event?.value)" [value]="goalFor">
             <mat-button-toggle value="me" i18n>My goals</mat-button-toggle>
-            <mat-button-toggle value="others" i18n>For others</mat-button-toggle>
+            <mat-button-toggle value="others" i18n *ngIf="isShareEnabled">For others</mat-button-toggle>
           </mat-button-toggle-group>
         </p>
       </div>
     </div>
     <div class="create-goal-fab width-1-1">
       <div class="page-container flex flex-row-reverse">
-        <a routerLink="/app/goals/create" mat-fab>
+        <a name="create-goal-link-goal-home"
+          [routerLink]="isCommonGoalEnabled ? '/app/goals/create/common' : '/app/goals/create/custom'" mat-fab>
           <mat-icon>add</mat-icon>
         </a>
       </div>

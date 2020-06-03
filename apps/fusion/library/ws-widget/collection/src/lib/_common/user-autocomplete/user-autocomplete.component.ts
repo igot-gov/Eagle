@@ -1,7 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core'
 import { UserAutocompleteService } from './user-autocomplete.service'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { FormControl } from '@angular/forms'
@@ -16,7 +13,7 @@ import { of } from 'rxjs'
   templateUrl: './user-autocomplete.component.html',
   styleUrls: ['./user-autocomplete.component.scss'],
 })
-export class UserAutocompleteComponent implements OnInit {
+export class UserAutocompleteComponent implements OnInit, OnChanges {
 
   separatorKeysCodes: number[] = [ENTER, COMMA]
   userFormControl = new FormControl()
@@ -26,6 +23,7 @@ export class UserAutocompleteComponent implements OnInit {
   fetchTagsStatus: TFetchStatus | undefined
   userId = ''
 
+  @Input() rolesId: string[] | null = null
   @Input() allowSelfAutocomplete = false
   @ViewChild('userInputForm', { static: true }) userInputFormRef!: ElementRef<HTMLInputElement>
   @Output() usersList = new EventEmitter<NsAutoComplete.IUserAutoComplete[]>()
@@ -56,6 +54,15 @@ export class UserAutocompleteComponent implements OnInit {
       .subscribe(
         users => {
           this.autocompleteAllUsers = users || []
+          if (this.rolesId) {
+            this.autocompleteAllUsers.forEach(data => {
+              if (this.rolesId && this.rolesId.includes(data.wid)) {
+                data.hasRole = true
+              } else {
+                data.hasRole = false
+              }
+            })
+          }
           this.fetchTagsStatus = 'done'
         },
         () => {
@@ -65,6 +72,15 @@ export class UserAutocompleteComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+  ngOnChanges(change: SimpleChanges) {
+    for (const prop in change) {
+      if (prop === 'rolesId') {
+        this.selectedUsers = []
+        this.autocompleteAllUsers = []
+      }
+    }
+  }
 
   removeUser(user: NsAutoComplete.IUserAutoComplete): void {
     const index = this.selectedUsers.findIndex(selectedUser => selectedUser.wid === user.wid)
@@ -77,6 +93,10 @@ export class UserAutocompleteComponent implements OnInit {
 
   selectUser(event: MatAutocompleteSelectedEvent, duplicateMsg: string, selfShareMsg: string): void {
     const selectedWid = (event.option.value.wid || '').trim()
+    if (this.rolesId && this.rolesId.includes(selectedWid)) {
+      this.openSnackBar('User already has the role')
+      return
+    }
     if (selectedWid === this.userId && !this.allowSelfAutocomplete) {
       this.openSnackBar(selfShareMsg)
       return

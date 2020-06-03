@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div mat-dialog-title>
   <h2 class="mat-title text-truncate">
     <span i18n>Feedback for: </span>
@@ -9,19 +6,12 @@
 </div>
 
 <div mat-dialog-content>
-  <section
-    class="container-balanced mat-toolbar p-4 rounded "
-    *ngIf="configFetchStatus !== 'fetching'"
-  >
-    <ng-container
-      [ngTemplateOutlet]="sentimentForm"
-      *ngIf="!feedbackConfig || (feedbackConfig && feedbackConfig.feedbackSentimentMode)"
-    ></ng-container>
+  <section class="container-balanced mat-toolbar p-4 rounded " *ngIf="configFetchStatus !== 'fetching'">
+    <ng-container [ngTemplateOutlet]="sentimentForm"
+      *ngIf="!feedbackConfig || (feedbackConfig && feedbackConfig.feedbackSentimentMode)"></ng-container>
 
-    <ng-container
-      [ngTemplateOutlet]="singleInputForm"
-      *ngIf="feedbackConfig && !feedbackConfig.feedbackSentimentMode"
-    ></ng-container>
+    <ng-container [ngTemplateOutlet]="singleInputForm" *ngIf="feedbackConfig && !feedbackConfig.feedbackSentimentMode">
+    </ng-container>
   </section>
 </div>
 
@@ -32,15 +22,8 @@
       <h3 class="mat-h3" i18n>What was helpful?</h3>
       <div class="mat-body">
         <mat-form-field class="w-full">
-          <textarea
-            matInput
-            [matTextareaAutosize]
-            [matAutosizeMaxRows]="10"
-            [matAutosizeMinRows]="3"
-            formControlName="positive"
-            placeholder="Type your feedback here"
-            i18n-placeholder
-          ></textarea>
+          <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
+            formControlName="positive" placeholder="Type your feedback here" i18n-placeholder></textarea>
           <mat-hint i18n>
             Limit to 2000 characters.
           </mat-hint>
@@ -56,15 +39,8 @@
         <h3 class="mat-h3" i18n>What can be improved?</h3>
         <div class="mat-body">
           <mat-form-field class="w-full">
-            <textarea
-              matInput
-              [matTextareaAutosize]
-              [matAutosizeMaxRows]="10"
-              [matAutosizeMinRows]="3"
-              formControlName="negative"
-              placeholder="Type your feedback here"
-              i18n-placeholder
-            ></textarea>
+            <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
+              formControlName="negative" placeholder="Type your feedback here" i18n-placeholder></textarea>
             <mat-hint i18n>
               Limit to 2000 characters.
             </mat-hint>
@@ -77,29 +53,17 @@
     </section>
     <div class="mt-4 flex justify-end">
       <div class="mr-2">
-        <mat-progress-spinner
-          [color]="'primary'"
-          [diameter]="40"
-          [strokeWidth]="4"
-          [mode]="'indeterminate'"
-          *ngIf="
+        <mat-progress-spinner [color]="'primary'" [diameter]="40" [strokeWidth]="4" [mode]="'indeterminate'" *ngIf="
             positiveFeedbackSendStatus === 'sending' || negativeFeedbackSendStatus === 'sending'
-          "
-        ></mat-progress-spinner>
+          "></mat-progress-spinner>
       </div>
-      <button
-        mat-flat-button
-        color="primary"
-        type="submit"
-        [disabled]="
+      <button mat-flat-button color="primary" type="submit" [disabled]="
           feedbackForm.pristine ||
           feedbackForm.invalid ||
           positiveFeedbackSendStatus === 'sending' ||
           negativeFeedbackSendStatus === 'sending'
-        "
-      >
-        <ng-container i18n>Send</ng-container>
-        <mat-icon class="ml-1">send</mat-icon>
+        ">
+        <ng-container i18n>Submit</ng-container>
       </button>
     </div>
   </form>
@@ -111,15 +75,8 @@
       <h3 class="mat-h3" i18n>What do you think of this content?</h3>
       <div class="mat-body">
         <mat-form-field class="w-full">
-          <textarea
-            matInput
-            [matTextareaAutosize]
-            [matAutosizeMaxRows]="10"
-            [matAutosizeMinRows]="3"
-            formControlName="feedback"
-            placeholder="Type your feedback here"
-            i18n-placeholder
-          ></textarea>
+          <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
+            formControlName="feedback" placeholder="Type your feedback here" i18n-placeholder></textarea>
           <mat-hint i18n>
             Limit to 2000 characters.
           </mat-hint>
@@ -131,26 +88,15 @@
     </section>
     <div class="mt-4 flex justify-end">
       <div class="mr-2">
-        <mat-progress-spinner
-          [color]="'primary'"
-          [diameter]="40"
-          [strokeWidth]="4"
-          [mode]="'indeterminate'"
-          *ngIf="singleFeedbackSendStatus === 'sending'"
-        ></mat-progress-spinner>
+        <mat-progress-spinner [color]="'primary'" [diameter]="40" [strokeWidth]="4" [mode]="'indeterminate'"
+          *ngIf="singleFeedbackSendStatus === 'sending'"></mat-progress-spinner>
       </div>
-      <button
-        mat-flat-button
-        color="primary"
-        type="submit"
-        [disabled]="
+      <button mat-flat-button color="primary" type="submit" [disabled]="
           singleFeedbackForm.pristine ||
           singleFeedbackForm.invalid ||
           singleFeedbackSendStatus === 'sending'
-        "
-      >
-        <ng-container i18n>Send</ng-container>
-        <mat-icon class="ml-1">send</mat-icon>
+        ">
+        <ng-container i18n>Submit</ng-container>
       </button>
     </div>
   </form>

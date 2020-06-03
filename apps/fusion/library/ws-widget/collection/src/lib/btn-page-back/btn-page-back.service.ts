@@ -1,15 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
-import { Router, NavigationStart } from '@angular/router'
+import { NavigationStart, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
 })
 export class BtnPageBackService {
-
+  widgetUrl!: string
   public previousRouteUrls: string[] = []
   private routerSubscription: Subscription | null = null
   constructor(
@@ -32,10 +29,19 @@ export class BtnPageBackService {
           const lastStoredUrl = this.previousRouteUrls[this.previousRouteUrls.length - 1]
           if (!lastStoredUrl || (lastStoredUrl && lastStoredUrl !== this.router.url)) {
             this.previousRouteUrls.push(this.router.url)
+
           }
+
+          if (this.widgetUrl === event.url) {
+
+            this.previousRouteUrls.pop()
+
+          }
+
         }
       }
     })
+
   }
 
   getLastUrl(pageNumber: number = 1) {
@@ -88,7 +94,7 @@ export class BtnPageBackService {
           return acc
         },
         {},
-      )
+    )
     if (errorFlag) {
       return undefined
     }
@@ -98,6 +104,9 @@ export class BtnPageBackService {
   private isUrlEncoded(url: string): boolean {
     const receivedUrl = url || ''
     return receivedUrl !== decodeURIComponent(receivedUrl)
+  }
+  checkUrl(url: any) {
+    this.widgetUrl = url
   }
 
 }

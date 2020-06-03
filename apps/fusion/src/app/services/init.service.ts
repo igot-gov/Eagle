@@ -1,28 +1,26 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Injectable, Inject } from '@angular/core'
+import { APP_BASE_HREF } from '@angular/common'
 import { HttpClient } from '@angular/common/http'
-import {
-  AuthKeycloakService,
-  LoggerService,
-  ConfigurationsService,
-  NsInstanceConfig,
-  NsAppsConfig,
-  UserPreferenceService,
-  NsUser,
-} from '@ws-widget/utils'
-import {
-  NsWidgetResolver,
-  hasPermissions,
-  WidgetResolverService,
-  hasUnitPermission,
-} from '@ws-widget/resolver'
-import { BtnSettingsService, WidgetContentService } from '@ws-widget/collection'
-import { environment } from '../../environments/environment'
+import { Inject, Injectable } from '@angular/core'
 import { MatIconRegistry } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
-import { APP_BASE_HREF } from '@angular/common'
+import { BtnSettingsService, WidgetContentService } from '@ws-widget/collection'
+import {
+  hasPermissions,
+  hasUnitPermission,
+  NsWidgetResolver,
+  WidgetResolverService,
+} from '@ws-widget/resolver'
+import {
+  AuthKeycloakService,
+  ConfigurationsService,
+  LoggerService,
+  NsAppsConfig,
+  NsInstanceConfig,
+  NsUser,
+  UserPreferenceService,
+} from '@ws-widget/utils'
+import { environment } from '../../environments/environment'
+import { BadgesService } from '../../../project/ws/app/src/lib/routes/profile/routes/badges/badges.service'
 
 interface IDetailsResponse {
   tncStatus: boolean
@@ -53,6 +51,7 @@ export class InitService {
     private userPreference: UserPreferenceService,
     private http: HttpClient,
     private widgetContentSvc: WidgetContentService,
+    private badgesSvc: BadgesService,
 
     @Inject(APP_BASE_HREF) private baseHref: string,
     // private router: Router,
@@ -66,22 +65,18 @@ export class InitService {
     iconRegistry.addSvgIcon(
       'pin',
       domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/pin.svg'),
-
     )
     iconRegistry.addSvgIcon(
       'facebook',
       domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/facebook.svg'),
-
     )
     iconRegistry.addSvgIcon(
       'linked-in',
       domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/linked-in.svg'),
-
     )
     iconRegistry.addSvgIcon(
       'twitter',
       domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/twitter.svg'),
-
     )
   }
 
@@ -112,6 +107,9 @@ export class InitService {
       if (this.configSvc.userPreference.pinnedApps) {
         const pinnedApps = this.configSvc.userPreference.pinnedApps.split(',')
         this.configSvc.pinnedApps.next(new Set(pinnedApps))
+      }
+      if (this.configSvc.userPreference.profileSettings) {
+        this.configSvc.profileSettings = this.configSvc.userPreference.profileSettings
       }
       const appsConfigPromise = this.fetchAppsConfig()
       const instanceConfigPromise = this.fetchInstanceConfig() // config: depends only on details
@@ -161,10 +159,19 @@ export class InitService {
       .catch(() => {
         // throw new DataResponseError('COOKIE_SET_FAILURE')
       })
+    if (
+      this.configSvc.restrictedFeatures &&
+      !this.configSvc.restrictedFeatures.has('badgeEnabled')
+    ) {
+      this.badgesSvc.newBadge().subscribe()
+    }
     return true
   }
 
   private reloadAccordingToLocale() {
+    if (window.location.origin.indexOf('http://localhost:') > -1) {
+      return
+    }
     let pathName = window.location.href.replace(window.location.origin, '')
     const runningAppLang = this.locale
     if (pathName.startsWith(`//${runningAppLang}//`)) {
@@ -181,7 +188,6 @@ export class InitService {
           this.configSvc.userPreference.selectedLocale &&
           runningAppLang !== this.configSvc.userPreference.selectedLocale
         ) {
-
           let languageToLoad = this.configSvc.userPreference.selectedLocale
           languageToLoad = `\\${languageToLoad}`
           if (this.configSvc.userPreference.selectedLocale === 'en') {
@@ -207,8 +213,9 @@ export class InitService {
   }
 
   get locale(): string {
-    return this.baseHref && this.baseHref.replace(/\//g, '') ?
-      this.baseHref.replace(/\//g, '') : 'en'
+    return this.baseHref && this.baseHref.replace(/\//g, '')
+      ? this.baseHref.replace(/\//g, '')
+      : 'en'
   }
 
   private async fetchAppsConfig(): Promise<NsAppsConfig.IAppsConfig> {
@@ -230,14 +237,31 @@ export class InitService {
         throw new Error('Invalid user')
       }
       if (userPidProfile) {
+        this.configSvc.unMappedUser = userPidProfile.user
         this.configSvc.userProfile = {
           country: userPidProfile.user.organization_location_country || null,
           departmentName: userPidProfile.user.department_name || '',
           email: userPidProfile.user.email,
           givenName: userPidProfile.user.first_name,
           userId: userPidProfile.user.wid,
-          userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
+          unit: userPidProfile.user.unit_name,
+          // tslint:disable-next-line:max-line-length
+          userName: `${userPidProfile.user.first_name ? userPidProfile.user.first_name : ' '} ${
+            userPidProfile.user.last_name ? userPidProfile.user.last_name : ' '
+            }`,
           source_profile_picture: userPidProfile.user.source_profile_picture || '',
+          dealerCode:
+            userPidProfile &&
+              userPidProfile.user.json_unmapped_fields &&
+              userPidProfile.user.json_unmapped_fields.dealer_code
+              ? userPidProfile.user.json_unmapped_fields.dealer_code
+              : null,
+          isManager:
+            userPidProfile &&
+              userPidProfile.user.json_unmapped_fields &&
+              userPidProfile.user.json_unmapped_fields.is_manager
+              ? userPidProfile.user.json_unmapped_fields.is_manager
+              : false,
           // userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
         }
       }
@@ -247,6 +271,9 @@ export class InitService {
       .toPromise()
     this.configSvc.userGroups = new Set(details.group)
     this.configSvc.userRoles = new Set(details.roles)
+    if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
+      this.configSvc.userRoles.add('is_manager')
+    }
     this.configSvc.hasAcceptedTnc = details.tncStatus
     return details
   }
@@ -302,6 +329,7 @@ export class InitService {
   }
 
   private processAppsConfig(appsConfig: NsAppsConfig.IAppsConfig): NsAppsConfig.IAppsConfig {
+    const tourGuide = appsConfig.tourGuide
     const features: { [id: string]: NsAppsConfig.IFeature } = Object.values(
       appsConfig.features,
     ).reduce((map: { [id: string]: NsAppsConfig.IFeature }, feature: NsAppsConfig.IFeature) => {
@@ -309,14 +337,15 @@ export class InitService {
         map[feature.id] = feature
       }
       return map
-    },       {})
+      // tslint:disable-next-line: align
+    }, {})
     const groups = appsConfig.groups
       .map((group: NsAppsConfig.IGroup) => ({
         ...group,
         featureIds: group.featureIds.filter(id => Boolean(features[id])),
       }))
       .filter(group => group.featureIds.length)
-    return { features, groups }
+    return { features, groups, tourGuide }
   }
   private updateNavConfig() {
     if (this.configSvc.instanceConfig) {
@@ -340,7 +369,8 @@ export class InitService {
         if (this.configSvc.instanceConfig.indexHtmlMeta.description) {
           const manifestElem = document.getElementById('id-app-description')
           if (manifestElem) {
-            (manifestElem as HTMLMetaElement).setAttribute(
+            // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
+            ; (manifestElem as HTMLMetaElement).setAttribute(
               'content',
               this.configSvc.instanceConfig.indexHtmlMeta.description,
             )
@@ -349,22 +379,25 @@ export class InitService {
         if (this.configSvc.instanceConfig.indexHtmlMeta.webmanifest) {
           const manifestElem = document.getElementById('id-app-webmanifest')
           if (manifestElem) {
-            (manifestElem as HTMLLinkElement).setAttribute(
+            // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
+            ; (manifestElem as HTMLLinkElement).setAttribute(
               'href',
               this.configSvc.instanceConfig.indexHtmlMeta.webmanifest,
             )
           }
         }
-        if (this.configSvc.instanceConfig.indexHtmlMeta.xIcon) {
-          const xIconElem = document.getElementById('id-app-x-icon')
-          if (xIconElem) {
-            (xIconElem as HTMLLinkElement).href = this.configSvc.instanceConfig.indexHtmlMeta.xIcon
-          }
-        }
         if (this.configSvc.instanceConfig.indexHtmlMeta.pngIcon) {
           const pngIconElem = document.getElementById('id-app-fav-icon')
           if (pngIconElem) {
-            (pngIconElem as HTMLLinkElement).href = this.configSvc.instanceConfig.indexHtmlMeta.pngIcon
+            // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
+            ; (pngIconElem as HTMLLinkElement).href = this.configSvc.instanceConfig.indexHtmlMeta.pngIcon
+          }
+        }
+        if (this.configSvc.instanceConfig.indexHtmlMeta.xIcon) {
+          const xIconElem = document.getElementById('id-app-x-icon')
+          if (xIconElem) {
+            // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
+            ; (xIconElem as HTMLLinkElement).href = this.configSvc.instanceConfig.indexHtmlMeta.xIcon
           }
         }
       } catch (error) {

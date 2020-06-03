@@ -1,16 +1,20 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { CONTENT_BASE, CONTENT_VIDEO_ENCODE, CONTENT_BASE_ENCODE } from '@ws/author/src/lib/constants/apiEndpoints'
+import {
+  CONTENT_BASE,
+  CONTENT_VIDEO_ENCODE,
+  CONTENT_BASE_ENCODE,
+  CONTENT_BASE_ZIP,
+  S3_JSON_UPLOAD,
+} from '@ws/author/src/lib/constants/apiEndpoints'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
-import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
+import { NSApiResponse, IUploadS3Request } from '@ws/author/src/lib/interface//apiResponse'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { FIXED_FILE_NAME } from '../../../../../constants/upload'
 import { HttpClient } from '@angular/common/http'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { NSContent } from '../../../../../interface/content'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -19,7 +23,6 @@ const API_END_POINTS = {
 }
 @Injectable()
 export class UploadService {
-
   constructor(
     private apiService: ApiService,
     private accessService: AccessControlService,
@@ -31,7 +34,11 @@ export class UploadService {
     data: FormData,
     contentData: NSApiRequest.IContentData,
     options?: any,
+    isZip = false,
   ): Observable<NSApiResponse.IFileApiResponse> {
+    if (isZip) {
+      return this.zipUpload(data, contentData, options)
+    }
     const file = data.get('content') as File
     let fileName = file.name
     if (FIXED_FILE_NAME.indexOf(fileName) < 0) {
@@ -41,29 +48,86 @@ export class UploadService {
     newFormData.append('content', file, fileName)
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
       // tslint:disable-next-line:max-line-length
-      `${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
+      `${CONTENT_BASE}${this.accessService.rootOrg.replace(
+        / /g,
+        '_',
+      )}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace(
+        '.img',
+        '',
+      )}${contentData.contentType}`,
       newFormData,
       false,
       options,
     )
   }
 
-  encodedUpload(data: any, fileName: string, contentData: NSApiRequest.IContentData): Observable<NSApiResponse.IFileApiResponse> {
+  multipleJsonUpload<T>(
+    data: T,
+    content: NSContent.IContentMeta,
+    path: string,
+    options?: any,
+  ) {
+    const uploadData: IUploadS3Request<T> = {
+      data,
+      path,
+      categoryType: content.categoryType || '',
+      mimeType: content.mimeType,
+    }
+    return this.apiService.post(
+      S3_JSON_UPLOAD,
+      [uploadData],
+      false,
+      options
+    )
+  }
 
+  zipUpload(
+    data: FormData,
+    contentData: NSApiRequest.IContentData,
+    options?: any,
+  ): Observable<NSApiResponse.IFileApiResponse> {
+    return this.apiService.post<NSApiResponse.IFileApiResponse>(
+      // tslint:disable-next-line:max-line-length
+      `${CONTENT_BASE_ZIP}${this.accessService.rootOrg.replace(
+        / /g,
+        '_',
+      )}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace(
+        '.img',
+        '',
+      )}${contentData.contentType}`,
+      data,
+      false,
+      options,
+    )
+  }
+
+  encodedUpload(
+    data: any,
+    fileName: string,
+    contentData: NSApiRequest.IContentData,
+  ): Observable<NSApiResponse.IFileApiResponse> {
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
       `${CONTENT_BASE_ENCODE}`,
       {
         fileName,
         text: this.apiService.base64(CONTENT_BASE_ENCODE, data).data,
         // tslint:disable-next-line:max-line-length
-        location: `${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
+        location: `${this.accessService.rootOrg.replace(
+          / /g,
+          '_',
+        )}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace(
+          '.img',
+          '',
+        )}${contentData.contentType}`,
       },
       false,
     )
   }
 
   startEncoding(url: string, id: string): Observable<any> {
-    return this.apiService.post(CONTENT_VIDEO_ENCODE + id.replace('.img', ''), { authArtifactURL: url })
+    return this.apiService.post(CONTENT_VIDEO_ENCODE + id.replace('.img', ''), {
+      authArtifactURL: url,
+    })
   }
 
   appendToFilename(filename: string) {
@@ -76,7 +140,9 @@ export class UploadService {
   }
 
   fetchCatalog(): Observable<any> {
-    return this.http.post(`${API_END_POINTS.CATALOG_AUTHORING}`, { rootOrg: this.configSvc.rootOrg, org: this.configSvc.org })
+    return this.http.post(`${API_END_POINTS.CATALOG_AUTHORING}`, {
+      rootOrg: this.configSvc.rootOrg,
+      org: this.configSvc.org,
+    })
   }
-
 }

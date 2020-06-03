@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { IGridLayoutDataMain, ISelectorResponsive, NsContentStripMultiple, NsGalleryView, NsWidgetLayoutTab } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -31,6 +28,7 @@ export class ChannelResolverService {
           const gridWidget: IGridLayoutDataMain = (widget as any).widgetData
           returnWidget.data = {
             gutter: gridWidget.gutter,
+            rowGutter: gridWidget.rowGutter,
             fromBasicEditor: gridWidget.fromBasicEditor,
           }
           for (let x = 0; x < (gridWidget.widgets || []).length; x = x + 1) {
@@ -48,7 +46,7 @@ export class ChannelResolverService {
 
         case 'linearLayout':
           const linearWidget: {
-            widgets: NsWidgetResolver.IRenderConfigWithAnyData[],
+            widgets: NsWidgetResolver.IRenderConfigWithAnyData[]
           } = (widget as any).widgetData
           returnWidget.data = undefined as any
           linearWidget.widgets.forEach(v => {
@@ -113,6 +111,7 @@ export class ChannelResolverService {
             .widgetData
           returnWidget.data = {
             loader: contentStripWidget.loader || false,
+            isChannelStrip: true,
           }
           if (contentStripWidget.noDataWidget) {
             const child = recursiveFunc(contentStripWidget.noDataWidget)
@@ -213,6 +212,7 @@ export class ChannelResolverService {
         case 'gridLayout':
           (returnWidget as NsWidgetResolver.IWidgetData<IGridLayoutDataMain>).widgetData = {
             gutter: data[id].data.gutter,
+            rowGutter: data[id].data.rowGutter,
             fromBasicEditor: data[id].data.fromBasicEditor,
             widgets: [] as any,
           }
@@ -239,7 +239,7 @@ export class ChannelResolverService {
 
         case 'linearLayout':
           (returnWidget as NsWidgetResolver.IWidgetData<{
-            widgets: NsWidgetResolver.IRenderConfigWithAnyData[],
+            widgets: NsWidgetResolver.IRenderConfigWithAnyData[]
           }>).widgetData = {
             widgets: [] as any,
           }
@@ -311,6 +311,7 @@ export class ChannelResolverService {
             loader: data[id].data.loader,
             errorWidget: undefined,
             strips: [] as any,
+            isChannelStrip: true,
           }
           const noDataWidget = data[id].children.find(v => data[v].purpose === 'noDataWidget')
           if (noDataWidget) {

@@ -1,14 +1,20 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-export const MIMI_TYPES = {
+export const MIME_TYPE = {
   collection: 'application/vnd.ekstep.content-collection',
+  ecml: 'application/vnd.ekstep.ecml-archive',
+  ePub: 'application/epub',
+  h5p: 'application/vnd.ekstep.h5p-archive',
+  html: 'application/html',
+  ilpfp: 'application/ilpfp',
+  iap: 'application/iap-assessment',
+  mp3: 'audio/mpeg',
+  mp4: 'application/x-mpegURL',
+  interaction: 'video/interactive',
   pdf: 'application/pdf',
-  web: 'application/html',
-  video: 'video/mp4',
-  youtube: 'video/x-youtube',
-  audio: 'audio/mpeg',
   quiz: 'application/quiz',
-  webPage: 'web-module',
-  channel: 'application/channel',
+  webm: 'video/webm',
+  webModule: 'application/web-module',
+  youtube: 'video/x-youtube',
+  handson: 'application/integrated-hands-on',
+  htmlPicker: 'application/htmlpicker',
+  dragDrop: 'application/drag-drop',
 }

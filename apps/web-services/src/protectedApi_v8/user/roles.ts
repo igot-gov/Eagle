@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -9,16 +6,23 @@ import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
+const GENERAL_ERR_MSG = 'Failed due to unknown reason'
 const apiEndpoints = {
-  role: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/user/roles`,
-  updateRoles: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/update/roles`,
+  role: `${CONSTANTS.ROLES_API_BASE}/v1/user/roles`,
+  rolesV2: `${CONSTANTS.ROLES_API_BASE}/v2/roles`,
+  updateRoles: `${CONSTANTS.ROLES_API_BASE}/v1/update/roles`,
 }
 
 export async function getUserRoles(userId: string, rootOrg: string) {
   try {
-    const response = await axios.get<{ result: { response: string[] } }>(
-      `${apiEndpoints.role}?userid=${userId}`,
-      { ...axiosRequestConfig, headers: { rootOrg } }
+    const response = await axios.get(
+      `${CONSTANTS.ROLES_API_BASE}/v2/users/${userId}/roles`,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          rootOrg,
+        },
+      }
     )
     return response.data
   } catch (error) {
@@ -26,9 +30,9 @@ export async function getUserRoles(userId: string, rootOrg: string) {
   }
 }
 
-export const protectedRoles = Router()
+export const rolesApi = Router()
 
-protectedRoles.get('/', async (req, res) => {
+rolesApi.get('/', async (req, res) => {
   try {
     const rootOrg = req.header('rootOrg')
     if (!rootOrg) {
@@ -40,11 +44,14 @@ protectedRoles.get('/', async (req, res) => {
     res.json(response)
   } catch (err) {
     logError('ERROR FETCHING ROLES OF USER ->', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
-protectedRoles.get('/allRoles', async (req, res) => {
+rolesApi.get('/allRoles', async (req, res) => {
   try {
     const rootOrg = req.header('rootOrg')
     if (!rootOrg) {
@@ -57,11 +64,13 @@ protectedRoles.get('/allRoles', async (req, res) => {
   } catch (err) {
     logError('ERROR FETCHING ALL ROLES ->', err)
     res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.data) || err)
+      .send((err && err.response && err.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
-protectedRoles.get('/:userId', async (req, res) => {
+rolesApi.get('/:userId', async (req, res) => {
   try {
     const rootOrg = req.header('rootOrg')
     if (!rootOrg) {
@@ -74,13 +83,19 @@ protectedRoles.get('/:userId', async (req, res) => {
   } catch (err) {
     logError('ERROR FETCHING ROLES OF SPECIFIC USER ->', err)
     res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.data) || err)
+      .send((err && err.response && err.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })
 
-protectedRoles.patch('/', async (req, res) => {
+rolesApi.patch('/', async (req, res) => {
   try {
     const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
     const response = await axios({
       ...axiosRequestConfig,
       data: req.body,
@@ -93,6 +108,88 @@ protectedRoles.patch('/', async (req, res) => {
     res.json(response.data || {})
   } catch (err) {
     logError('ERROR ON UPDATE USER ROLES >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
+  }
+})
+
+rolesApi.get('/getRolesV2/:userId', async (req, res) => {
+  try {
+    const uuid = req.params.userId
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await getUserRoles(uuid, rootOrg)
+    res.send(response)
+  } catch (err) {
+    logError('GET ROLES V2 ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
+  }
+})
+
+rolesApi.get('/getUsersV2/:role', async (req, res) => {
+  try {
+    const role = req.params.role
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios.get(
+      `${apiEndpoints.rolesV2}/${role}/users`,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          rootOrg,
+        },
+      }
+    )
+    res.send(response.data)
+  } catch (err) {
+    logError('GET ROLES V2 ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
+  }
+})
+
+rolesApi.post('/updateRolesV2', async (req, res) => {
+  try {
+    const actionBy = req.header('wid')
+    const body = {
+      ...req.body,
+      action_by: actionBy,
+    }
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios.post(
+      apiEndpoints.rolesV2,
+      body,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          rootOrg,
+        },
+        params: req.query,
+      }
+    )
+    res.send(response.data)
+  } catch (err) {
+    logError('UPDATE ROLES V2 ERR -> ', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERR_MSG,
+      })
   }
 })

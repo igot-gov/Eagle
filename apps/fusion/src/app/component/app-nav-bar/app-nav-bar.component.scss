@@ -1,27 +1,42 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-mixins';
-.tourGuideBtn{
+
+.tourGuideBtn {
   padding: 10px 16px;
   display: flex;
   flex-direction: row;
   cursor: pointer;
 }
-.tourGuideBtn:hover{
-  background:rgba(0, 0, 0, 0.04);
+
+.tourGuideBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
-.tourGuideBtn mat-icon{
+
+.tourGuideBtn mat-icon {
   width: 28%;
-  color: rgba(0, 0, 0, 0.54);
+  // color: rgba(0, 0, 0, 0.54);
 }
+
+.logo-dim {
+  min-width: 70px;
+  // max-width: 100px;
+}
+
 .app-logo {
   max-width: 100px;
   max-height: 30px;
+  min-width: 30px;
+  padding: 8px 0 0 8px;
+
   @include breakpoint-xs {
-    max-width: 100px;
-    max-height: 30px;
+    max-width: 80px;
   }
+}
+
+
+.title {
+  font-size: 12px !important;
+  line-height: 26px !important;
+  font-weight: 300 !important;
 }
 
 .search-card-view {
@@ -31,23 +46,28 @@
   top: 10px;
   right: 50px;
   padding: 10px 0px 0px 0px;
+
   @include breakpoint-l {
     top: 20px;
     left: 980px;
   }
+
   @include breakpoint-m {
     top: 20px;
     left: 980px;
   }
+
   @include breakpoint-xs {
     top: 0px;
     right: 50px;
   }
+
   @include breakpoint-s {
     top: 20px;
     left: 450px;
   }
 }
+
 @import 'ws-vars';
 
 .menu-section {
@@ -60,6 +80,7 @@
   align-items: stretch;
   justify-content: space-around;
 }
+
 .btn-feature {
   display: flex;
   align-items: center;
@@ -67,6 +88,7 @@
   padding: 0.75em;
   margin: 0.25em;
   width: 4em;
+
   .btn-feature-icon {
     font-size: 2em;
     height: 2em;
@@ -74,6 +96,7 @@
     text-align: center;
     line-height: 2em;
   }
+
   .btn-feature-name {
     text-align: center;
     margin-top: 0.15em;

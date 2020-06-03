@@ -1,29 +1,34 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-progress-bar mode="indeterminate" color="warn" class="route-change" *ngIf="routeChangeInProgress">
 </mat-progress-bar>
 
 <ws-app-public-nav-bar *ngIf="(authSvc.isLoggedIn$ | async) === false"></ws-app-public-nav-bar>
 <!-- <ws-widget-sticky-header> -->
-<ws-app-nav-bar class="top-nav-bar" *ngIf="(isXSmall$ | async) === false && (authSvc.isLoggedIn$ | async) === true" [hidden]="!showNavbar"
-  [mode]="'top'"></ws-app-nav-bar>
+<ws-app-nav-bar class="top-nav-bar" *ngIf="
+    isNavBarRequired && (isXSmall$ | async) === false && (authSvc.isLoggedIn$ | async) === true
+  " [hidden]="!showNavbar" [mode]="'top'"></ws-app-nav-bar>
 <!-- </ws-widget-sticky-header> -->
 <div class="height-adjust" [ngClass]="{
     'height-on-bottom custom-scroll':
       (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true && showNavbar,
+      'height-adjust-setup' : isSetupPage,
     'height-on-top':
-      (isXSmall$ | async) === false && (authSvc.isLoggedIn$ | async) === true && showNavbar
+      (isXSmall$ | async) === false &&
+      (authSvc.isLoggedIn$ | async) === true &&
+      showNavbar &&
+      isNavBarRequired
   }">
   <router-outlet></router-outlet>
-  <ws-app-chatbot [currentUrl]="currentUrl" *ngIf="configSvc.isAuthenticated && configSvc.hasAcceptedTnc"></ws-app-chatbot>
+  <ws-app-chatbot [currentUrl]="currentUrl"
+    *ngIf="configSvc.isAuthenticated && configSvc.hasAcceptedTnc && showChatBot">
+  </ws-app-chatbot>
 </div>
-<ws-app-footer class="app-footer" *ngIf="(authSvc.isLoggedIn$ | async) === true && showNavbar"></ws-app-footer>
-<ws-app-nav-bar class="bottom-nav-bar" [hidden]="!showNavbar" *ngIf="(isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true"
-  [mode]="'bottom'"></ws-app-nav-bar>
+<ws-app-footer [hidden]="!showFooter" class="app-footer" [ngClass]="{ 'padding-bottom: 56px': !isSetupPage}"
+  *ngIf="(authSvc.isLoggedIn$ | async) === true && showNavbar"></ws-app-footer>
+<ws-app-nav-bar class="bottom-nav-bar" [hidden]="!showNavbar"
+  *ngIf="isNavBarRequired && (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true" [mode]="'bottom'">
+</ws-app-nav-bar>
 
 <ng-container #previewContainer></ng-container>
 
 <input #appUpdateTitle type="hidden" i18n-value value="App Update" />
 <input #appUpdateBody type="hidden" i18n-value value="App has been updated. Do you want to load new version?" />
-<ws-widget-ws-tour></ws-widget-ws-tour>

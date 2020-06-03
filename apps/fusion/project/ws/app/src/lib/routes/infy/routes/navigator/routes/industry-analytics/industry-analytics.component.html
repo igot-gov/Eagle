@@ -1,9 +1,11 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-xs">{{tag}} Analytics</span>
+  <ng-container>
+    <span class="margin-left-xs">
+      {{tag}}</span>
+    <span class="margin-left-xs" i18n>
+      Analytics</span>
+  </ng-container>
 </mat-toolbar>
 <div *ngIf="fetchStatus === 'fetching'" class="flex flex-center analytics-loader">
   <mat-spinner></mat-spinner>
@@ -24,7 +26,7 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="flex flex-center flex-wrapped">
-          <h2>{{uniqueUsers}}</h2>
+          <h1 class="mat-display-2 font-bold">{{uniqueUsers}}</h1>
         </mat-card-content>
       </mat-card>
     </ng-container>
@@ -125,7 +127,8 @@
                 Participants By Location
               </p>
             </div>
-            <button *ngIf="analyticsData?.participants.location.length > 20" mat-icon-button (click)="onExpand('location')">
+            <button *ngIf="analyticsData?.participants.location.length > 20" mat-icon-button
+              (click)="onExpand('location')">
               <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
             </button>
           </div>
@@ -143,7 +146,8 @@
                 Participants By Account
               </p>
             </div>
-            <button *ngIf="analyticsData?.participants.account.length > 20" mat-icon-button (click)="onExpand('account')">
+            <button *ngIf="analyticsData?.participants.account.length > 20" mat-icon-button
+              (click)="onExpand('account')">
               <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
             </button>
           </div>
@@ -156,7 +160,8 @@
   </ng-container>
 
   <div class="mt-6" *ngIf="isExpandTrue">
-    <button (click)="onClose()" mat-raised-button i18n-matTooltip="back Action Btn Tooltip" matTooltip="back" color="primary">
+    <button (click)="onClose()" mat-raised-button i18n-matTooltip="back Action Btn Tooltip" matTooltip="back"
+      color="primary">
       <mat-icon class="mr-1">arrow_back</mat-icon>
       Back
     </button>

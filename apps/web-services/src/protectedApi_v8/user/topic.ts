@@ -1,14 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Request, Response, Router } from 'express'
 import { IGenericApiResponse } from '../../models/generic.model'
-import {
-  ITopic,
-  ITopicResponse,
-  ITopicsApiResponse
-} from '../../models/topic.model'
+import { ITopic, ITopicResponse, ITopicsApiResponse } from '../../models/topic.model'
 import { CONSTANTS } from '../../utils/env'
 
 const apiEndPoints = {
@@ -23,16 +16,18 @@ topicApi.get('/recommend', async (_req: Request, res: Response) => {
       .get<IGenericApiResponse<ITopicsApiResponse>>(apiEndPoints.recommend)
       .then((response) => response.data.result.response)
 
-    const topics: ITopic[] = topicResponse.topics.map(
-      (topicsResponse: ITopicResponse) => ({
-        count: topicsResponse.count,
-        id: topicsResponse.id,
-        name: topicsResponse['concepts.name'],
-      })
-    )
+    const topics: ITopic[] = topicResponse.topics.map((topicsResponse: ITopicResponse) => ({
+      count: topicsResponse.count,
+      id: topicsResponse.id,
+      name: topicsResponse['concepts.name'],
+    }))
     res.send(topics)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })
 
@@ -59,6 +54,10 @@ topicApi.get('/autocomplete', async (req: Request, res: Response) => {
     })
     res.json(response.data)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })

@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core'
 import { NsContent } from '../../_services/widget-content.model'
-import { MatListOption, MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material'
-import { TFetchStatus } from '../../../../../utils/src/public-api'
+import { MatListOption, MAT_DIALOG_DATA, MatSnackBar, MatDialogRef, MatDialog } from '@angular/material'
+import { TFetchStatus, ConfigurationsService } from '../../../../../utils/src/public-api'
 import { BtnKbService } from '../btn-kb.service'
 import { Router } from '@angular/router'
+import { BtnKbConfirmComponent } from '../btn-kb-confirm/btn-kb-confirm.component'
 
 @Component({
   selector: 'ws-widget-btn-kb-dialog',
@@ -22,14 +20,20 @@ export class BtnKbDialogComponent implements OnInit {
   changedBoards = new Set<string>()
   postSelectedBoards = new Set<string>()
   reason = ''
+  userId = ''
+  contentId = ''
+  contentName = ''
+  userName = ''
   fetchKbs: TFetchStatus = 'none'
   knowledgeBoards: NsContent.IContent[] | null | any[] = null
   constructor(
+    private matDialog: MatDialog,
     private dialog: MatDialogRef<BtnKbDialogComponent>,
     private snackbar: MatSnackBar,
+    private configSvc: ConfigurationsService,
     private kbSvc: BtnKbService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public contentId: string,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) { }
 
   redirectToCreateKb() {
@@ -38,14 +42,24 @@ export class BtnKbDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    // console.log("DATA: ", this.data)
+    this.contentId = this.data.contentId
+    this.contentName = this.data.name
     this.fetchKbs = 'fetching'
+    if (this.configSvc.userProfile
+      && this.configSvc.userProfile.userId
+      && this.configSvc.userProfile.userName
+      && this.configSvc.rootOrg
+    ) {
+      this.userId = this.configSvc.userProfile.userId
+      this.userName = this.configSvc.userProfile.userName
+    }
     this.kbSvc.getMyKnowledgeBoards().subscribe(response => {
       this.fetchKbs = 'done'
       this.knowledgeBoards = response.result
       this.knowledgeBoards.forEach(board => {
-        if (board.children.map((content: { identifier: any; }) => content.identifier).includes(this.contentId)) {
+        if (board.children.map((content: { identifier: any }) => content.identifier).includes(this.contentId)) {
           this.selectedBoards.add(board.identifier)
-          this.postSelectedBoards.add(board.identifier)
         }
       })
       this.knowledgeBoards.forEach(board => {
@@ -57,12 +71,12 @@ export class BtnKbDialogComponent implements OnInit {
           if (child.identifier === this.contentId) {
             if (child.childrenClassifiers.length) {
               child.childrenClassifiers.forEach((childClassifier: any) => {
-                if (board.selectedSection.indexOf(childClassifier) < 0) {
-                  board.selectedSection.push(childClassifier)
+                if (!board.selectedSection) {
+                  board.selectedSection = childClassifier
                 }
               })
             } else {
-              board.selectedSection.push('Default')
+              board.selectedSection = 'Default'
             }
           }
           child.childrenClassifiers.forEach((childClassifier: string) => {
@@ -73,7 +87,9 @@ export class BtnKbDialogComponent implements OnInit {
           })
         })
       })
-    })
+    }
+
+    )
   }
 
   selectionChange(kbId: string, checked: boolean) {
@@ -96,50 +112,57 @@ export class BtnKbDialogComponent implements OnInit {
   }
 
   addContentToKb(options: MatListOption[]) {
+    this.inProgress = 'fetching'
     options.forEach((option: MatListOption) => {
       if (this.knowledgeBoards) {
         const board = this.knowledgeBoards.find(b => b.identifier === option.value)
-        if (board) {
-          this.changedBoards.add(board.identifier)
-          let children: any = board.children.map((child: any) => ({
-            ...child,
-          }))
+        if (board && this.postSelectedBoards.has(board.identifier)) {
           if (option.selected) {
-            let newChildrenClassifier = [...board.selectedSection]
-            newChildrenClassifier = newChildrenClassifier.filter(u => u !== 'NewNewNew')
+            let newChildrenClassifier = board.selectedSection
             if (board.newSelectedSection.length) {
-              newChildrenClassifier.push(board.newSelectedSection)
+              newChildrenClassifier = board.newSelectedSection
             }
-            children.push({
-              identifier: this.contentId,
-              childrenClassifiers: newChildrenClassifier,
-              reason: this.reason,
-            })
-          } else {
-            children = children.filter((child: any) => child.identifier !== this.contentId)
+
+            const req = {
+              identifier: board.identifier,
+              children: [{ identifier: this.contentId, reason: this.reason, childrenClassifiers: [newChildrenClassifier] }],
+              actor: this.userId,
+              actorName: this.userName,
+            }
+            this.kbSvc.modifyKBV2(req, 'add').subscribe(
+              _ => {
+                this.inProgress = 'done'
+                board.message = 'success'
+                this.postSelectedBoards.clear()
+                this.selectedBoards.add(board.identifier)
+                this.snackbar.open(this.contentUpdatedMessage.nativeElement.value)
+                // this.dialog.close()
+              },
+              _ => {
+                this.inProgress = 'error'
+                board.message = 'failure'
+                this.snackbar.open(this.contentNotUpdatedMessage.nativeElement.value)
+              },
+            )
           }
-          board.children = children
         }
 
+      } else {
+        this.inProgress = 'done'
       }
     })
-    if (this.knowledgeBoards) {
-      this.knowledgeBoards.forEach(board => {
-        if (this.changedBoards.has(board.identifier)) {
-          this.inProgress = 'fetching'
-          this.kbSvc.addContentToKb(board.identifier, board.children).subscribe(
-            _ => {
-              this.inProgress = 'done'
-              this.snackbar.open(this.contentUpdatedMessage.nativeElement.value)
-              this.dialog.close()
-            },
-            _ => {
-              this.inProgress = 'error'
-              this.snackbar.open(this.contentNotUpdatedMessage.nativeElement.value)
-            },
-          )
+  }
+
+  doneChanges() {
+    if (this.postSelectedBoards.size > 0) {
+      const dialogRef = this.matDialog.open(BtnKbConfirmComponent)
+      dialogRef.afterClosed().subscribe(result => {
+        if (!result) {
+          this.dialog.close()
         }
       })
+    } else {
+      this.dialog.close()
     }
   }
 }

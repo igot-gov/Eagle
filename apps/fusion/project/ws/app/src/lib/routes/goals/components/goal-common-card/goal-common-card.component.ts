@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
   Input,
@@ -11,7 +8,7 @@ import {
   ElementRef,
 } from '@angular/core'
 import { NsGoal, BtnGoalsService } from '@ws-widget/collection'
-import { TFetchStatus, EventService } from '@ws-widget/utils'
+import { TFetchStatus, EventService, ConfigurationsService } from '@ws-widget/utils'
 import { Router } from '@angular/router'
 import { MatSnackBar } from '@angular/material'
 
@@ -33,6 +30,7 @@ export class GoalCommonCardComponent implements OnInit {
 
   duration = 1
   type: NsGoal.EGoalTypes = NsGoal.EGoalTypes.USER_COMMON
+  isShareEnabled = false
 
   createGoalStatus: TFetchStatus = 'none'
   constructor(
@@ -40,9 +38,15 @@ export class GoalCommonCardComponent implements OnInit {
     private goalSvc: BtnGoalsService,
     private router: Router,
     private snackBar: MatSnackBar,
-  ) {}
+    private configSvc: ConfigurationsService,
+  ) { }
 
   ngOnInit() {
+
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
+    }
+
     if (this.goal) {
       this.goal.duration = (this.goal.contents || [])
         .map(content => content.duration)

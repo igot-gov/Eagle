@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { WidgetContentService, NsContent, BtnFollowService } from '@ws-widget/collection'
@@ -48,8 +45,12 @@ export class KbHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.showCreate = (this.configSvc.userRoles || new Set<string>()).has('kb-curator')
+    this.showCreate = Array.from(this.configSvc.userRoles || new Set<string>()).some(role => {
+      return ['kb-creator', 'editor', 'admin'].includes(role)
+    })
     this.kbSFetchStatus = 'fetching'
+    this.myBoardsFetchStatus = 'fetching'
+
     this.contentSvc
       .search({
         filters: {
@@ -60,17 +61,18 @@ export class KbHomeComponent implements OnInit {
         // sortBy: 'lastUpdatedOn',
       })
       .subscribe(
-        response => {
+        async response => {
           this.kbSFetchStatus = 'done'
           this.knowledgeBoards = response.result
+          await this.processContentRating(this.knowledgeBoards)
         },
         _ => {
           this.kbSFetchStatus = 'error'
         })
-    this.myBoardsFetchStatus = 'fetching'
     this.kbSvc.getMyKnowledgeBoards().subscribe(
-      response => {
+      async response => {
         this.myBoards = response.result
+        await this.processContentRating(this.myBoards)
         if (response.totalHits > response.result.length) {
           this.myBoardsFetchStatus = 'hasMore'
         } else {
@@ -86,11 +88,13 @@ export class KbHomeComponent implements OnInit {
   followed() {
     this.followingFetchStatus = 'fetching'
     this.followSvc.getFollowing().subscribe(
-      data => {
+      async data => {
         this.followContent = data
+
         this.followContent.find(content => {
           this.following = content['Knowledge Board']
         })
+        await this.processContentRating(this.following)
         this.followingFetchStatus = 'done'
       },
       () => {
@@ -101,5 +105,19 @@ export class KbHomeComponent implements OnInit {
 
   unfollowed(id: string) {
     this.following = this.following.filter(item => item.identifier !== id)
+  }
+
+  processContentRating(results: NsContent.IContentMinimal[]) {
+    const contentId = {
+      contentIds:
+        results.map(result => result.identifier) || [],
+    }
+    return this.contentSvc
+      .fetchContentRatings(contentId).then(ratingHash => {
+        const likes: any = ratingHash
+        results.forEach(result => {
+          result.totalRating = (likes[result.identifier] && likes[result.identifier].averageRating) || 0
+        })
+      })
   }
 }

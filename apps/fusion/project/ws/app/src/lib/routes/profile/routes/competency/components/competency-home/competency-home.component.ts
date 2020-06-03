@@ -1,7 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-app-competency-home',
@@ -9,10 +8,15 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./competency-home.component.scss'],
 })
 export class CompetencyHomeComponent implements OnInit {
-
-  constructor() { }
+  enabledTab = this.activatedRoute.snapshot.data.pageData.data.enabledTabs.achievements.subTabs
+  badgesEnabled = false
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private configSvc: ConfigurationsService,
+  ) { }
 
   ngOnInit() {
+    this.badgesEnabled = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('badgeEnabled')) || false
   }
 
 }

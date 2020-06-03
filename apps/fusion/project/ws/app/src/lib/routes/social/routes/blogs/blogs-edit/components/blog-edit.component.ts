@@ -1,17 +1,19 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { MatAutocomplete, MatAutocompleteSelectedEvent, MatSnackBar } from '@angular/material'
+import {
+  MatAutocomplete,
+  MatAutocompleteSelectedEvent,
+  MatSnackBar,
+  MatDialog,
+} from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
+import { NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
+import { ConfigurationsService, NsPage, TFetchStatus, ValueService } from '@ws-widget/utils'
 import { Observable } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
-
-import { TFetchStatus, ValueService, ConfigurationsService, NsPage } from '@ws-widget/utils'
-import { NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
 import { WsSocialService } from '../../../../services/ws-social.service'
+import { ConfirmPublishComponent } from '../../../../widgets/confirm-publish/confirm-publish.component'
 
 @Component({
   selector: 'ws-app-blog-edit',
@@ -77,6 +79,7 @@ export class BlogEditComponent implements OnInit {
     private socialSvc: WsSocialService,
     private discussionSvc: WsDiscussionForumService,
     private valueSvc: ValueService,
+    private dialogRef: MatDialog,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -85,16 +88,22 @@ export class BlogEditComponent implements OnInit {
     this.postPublishRequest.postCreator = this.userId
     this.isXSmall$ = this.valueSvc.isXSmall$
     this.tagsCtrl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-      )
+      .pipe(debounceTime(500), distinctUntilChanged())
       .subscribe((value: string) => {
         if (value && value.length) {
           this.autocompleteAllTags = []
           this.fetchTagsStatus = 'fetching'
           this.socialSvc.fetchAutoComplete(value).subscribe(
             tags => {
+              if (
+                configSvc.restrictedFeatures &&
+                !configSvc.restrictedFeatures.has('tags-social')
+              ) {
+                tags.push({
+                  id: '',
+                  name: value,
+                })
+              }
               this.autocompleteAllTags = tags || []
               this.fetchTagsStatus = 'done'
             },
@@ -168,21 +177,23 @@ export class BlogEditComponent implements OnInit {
       this.postPublishRequest.dateCreated = this.conversation.mainPost.dtCreated
     }
     this.postPublishRequest.tags = this.selectedTags
-    this.discussionSvc.publishPost(this.postPublishRequest).subscribe(
-      data => {
+    const dialogRef = this.dialogRef.open(ConfirmPublishComponent, {
+      data: { postPublishRequest: this.postPublishRequest },
+    })
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.isCreatingPost = false
+      if (result === 'error') {
+        this.openSnackBar(errorMsg)
+      } else if (result) {
         this.openSnackBar(publishMsg)
-        this.isCreatingPost = false
-        if (data && data.id) {
-          this.router.navigate(['app', 'social', 'blogs', data.id])
+        if (result && result.id) {
+          this.router.navigate(['app', 'social', 'blogs', result.id])
         } else {
           this.router.navigate(['app', 'social', 'blogs', 'me', 'published'])
         }
-      },
-      () => {
-        this.openSnackBar(errorMsg)
-        this.isCreatingPost = false
-      },
-    )
+      }
+    })
   }
 
   saveDraft(successMsg: string, errorMsg: string) {

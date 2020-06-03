@@ -1,18 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { LoggerService } from '@ws-widget/utils'
 import { MatTabChangeEvent } from '@angular/material'
+import { ActivatedRoute, Router } from '@angular/router'
+import { NsContentStripMultiple } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import {
   IIndustriesData,
-  IMegaTrends,
-  IIndustriesIdentifiers,
   IIndustriesDataTheme,
+  IIndustriesIdentifiers,
+  IMegaTrends,
 } from '../../models/navigator.model'
-import { NsContentStripMultiple } from '@ws-widget/collection'
 
 @Component({
   selector: 'ws-app-industries',
@@ -87,7 +83,8 @@ export class IndustriesComponent implements OnInit {
         widgetData: {
           errorType: 'internalServer',
         },
-      }    },
+      },
+    },
   }
 
   navigatorwidgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
@@ -154,12 +151,7 @@ export class IndustriesComponent implements OnInit {
     },
   }
 
-  constructor(
-    private route: ActivatedRoute,
-    private loggerSvc: LoggerService,
-    private router: Router,
-  ) {
-    this.loggerSvc.log('industries', this.industriesData)
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.selectedType = this.displayTypes[1]
     this.selectedTrend = this.dummyTrends[0]
     this.selectedTheme = ''
@@ -178,22 +170,16 @@ export class IndustriesComponent implements OnInit {
       this.selectedTab = params.tab ? params.tab.split('-').join(' ') : 'CME'
       this.anaylticsTab = this.selectedTab
       this.anaylticsTab = this.anaylticsTab.replace(' ', '-')
-      this.selectedSubDomain = Object.keys(
-        this.industriesData[this.selectedTab],
-      )[0]
+      this.selectedSubDomain = Object.keys(this.industriesData[this.selectedTab])[0]
       if (
         this.industriesData[this.selectedTab] &&
         this.industriesData[this.selectedTab][this.selectedSubDomain] &&
-        this.industriesData[this.selectedTab][this.selectedSubDomain][
-          this.selectedPillar
-] &&
-        this.industriesData[this.selectedTab][this.selectedSubDomain][
-          this.selectedPillar
-].length
+        this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar] &&
+        this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar].length
       ) {
-        this.selectedTheme = this.industriesData[this.selectedTab][
-          this.selectedSubDomain
-][this.selectedPillar][0].themeName
+        this.selectedTheme = this.industriesData[this.selectedTab][this.selectedSubDomain][
+          this.selectedPillar
+][0].themeName
       }
       this.selectedType = this.displayTypes[1]
       this.selectedTrend = this.dummyTrends[0]
@@ -206,9 +192,7 @@ export class IndustriesComponent implements OnInit {
   fetchSubDomains() {
     if (this.industriesData) {
       const subDomains = Object.keys(this.industriesData[this.selectedTab])
-      const idx = Object.keys(this.industriesData[this.selectedTab]).indexOf(
-        'hasData',
-      )
+      const idx = Object.keys(this.industriesData[this.selectedTab]).indexOf('hasData')
       if (idx > -1) {
         subDomains.splice(idx, 1)
       }
@@ -222,16 +206,12 @@ export class IndustriesComponent implements OnInit {
     // this.loggerSvc.log('subdomain clicked', subDomain)
     this.selectedSubDomain = subDomain
     if (
-      this.industriesData[this.selectedTab][this.selectedSubDomain][
-        this.selectedPillar
-] &&
-      this.industriesData[this.selectedTab][this.selectedSubDomain][
-        this.selectedPillar
-].length
+      this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar] &&
+      this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar].length
     ) {
-      this.selectedTheme = this.industriesData[this.selectedTab][
-        this.selectedSubDomain
-][this.selectedPillar][0].themeName
+      this.selectedTheme = this.industriesData[this.selectedTab][this.selectedSubDomain][
+        this.selectedPillar
+][0].themeName
     }
     // this.loggerSvc.log('selectedtheme', this.selectedTheme)
     // this.selectMegaTrend()
@@ -241,16 +221,12 @@ export class IndustriesComponent implements OnInit {
   trackClicked(track: string) {
     this.selectedPillar = track
     if (
-      this.industriesData[this.selectedTab][this.selectedSubDomain][
-        this.selectedPillar
-] &&
-      this.industriesData[this.selectedTab][this.selectedSubDomain][
-        this.selectedPillar
-].length
+      this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar] &&
+      this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar].length
     ) {
-      this.selectedTheme = this.industriesData[this.selectedTab][
-        this.selectedSubDomain
-][this.selectedPillar][0].themeName
+      this.selectedTheme = this.industriesData[this.selectedTab][this.selectedSubDomain][
+        this.selectedPillar
+][0].themeName
     }
     this.updateContent()
     // this.selectedTheme = dummyData[this.selectedTab][track][0]["themeName"];
@@ -280,16 +256,14 @@ export class IndustriesComponent implements OnInit {
   selectMegaTrend() {
     try {
       this.updateMegaTrends(
-        this.industriesData[this.selectedTab][this.selectedSubDomain]
-          .megatrends[0],
+        this.industriesData[this.selectedTab][this.selectedSubDomain].megatrends[0],
       )
     } catch (e) {
-      // console.log(e);
+      // //console.log(e);
     }
   }
 
   updateMegaTrends(trend: IMegaTrends) {
-    this.loggerSvc.log(trend, trend.content)
     const ids = trend.content
     this.selectedTrend = trend.trendName
     this.fetchingContentData = false
@@ -307,28 +281,19 @@ export class IndustriesComponent implements OnInit {
   updateContentStrip() {
     const strips = ['narratives', 'clientStories', 'techSkills', 'reference']
     strips.forEach(stripName => {
-      const idObjects: IIndustriesIdentifiers[] = this.industriesData[this.selectedTab][this.selectedSubDomain][this.selectedPillar].find(
-        (themes: IIndustriesDataTheme) => {
-          return themes.themeName === this.selectedTheme
-        },
-      )[stripName]
+      const idObjects: IIndustriesIdentifiers[] = this.industriesData[this.selectedTab][
+        this.selectedSubDomain
+][this.selectedPillar].find((themes: IIndustriesDataTheme) => {
+        return themes.themeName === this.selectedTheme
+      })[stripName]
 
       const ids = idObjects.map(id => id.identifier)
-      this.loggerSvc.log('ids', ids)
       // this.contentStripsHash[stripName] = ids
 
       this.navigatorwidgetResolverData.widgetData.strips.forEach(strip => {
-        if (
-          strip.key === 'narratives-strip' &&
-          strip.request &&
-          stripName === 'narratives'
-        ) {
+        if (strip.key === 'narratives-strip' && strip.request && stripName === 'narratives') {
           strip.request.ids = ids
-        } else if (
-          strip.key === 'references-strip' &&
-          strip.request &&
-          stripName === 'reference'
-        ) {
+        } else if (strip.key === 'references-strip' && strip.request && stripName === 'reference') {
           strip.request.ids = ids
         } else if (
           strip.key === 'clientStories-strip' &&
@@ -336,19 +301,18 @@ export class IndustriesComponent implements OnInit {
           stripName === 'clientStories'
         ) {
           strip.request.ids = ids
-          // console.log("Ids assigned to client Stories", ids);
+          // //console.log("Ids assigned to client Stories", ids);
         } else if (
           strip.key === 'techSkills-strip' &&
           strip.request &&
           stripName === 'techSkills'
         ) {
           strip.request.ids = ids
-          // console.log("Ids assigned to tech", ids);
+          // //console.log("Ids assigned to tech", ids);
         }
       })
     })
 
-    this.loggerSvc.log('industry data', this.navigatorwidgetResolverData)
     this.navigatorwidgetResolverData = { ...this.navigatorwidgetResolverData }
   }
 
@@ -369,8 +333,6 @@ export class IndustriesComponent implements OnInit {
 
   navigate(event: MatTabChangeEvent) {
     // this.loggerSvc.log(event.tab.textLabel)
-    this.router.navigateByUrl(
-      this.baseIndustriesUrl + event.tab.textLabel.split(' ').join('-'),
-    )
+    this.router.navigateByUrl(this.baseIndustriesUrl + event.tab.textLabel.split(' ').join('-'))
   }
 }

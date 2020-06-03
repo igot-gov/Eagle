@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -80,6 +77,22 @@ export class HomeComponent implements OnInit {
     return this.searchSvc.getLanguageSearchIndex(locale)
   }
 
+  get preferredLanguages(): string | null {
+    if (this.configSvc.userPreference && this.configSvc.userPreference.selectedLangGroup) {
+      let prefLang: string[] | string = this.configSvc.userPreference.selectedLangGroup.split(',').map(lang => {
+        return this.searchSvc.getLanguageSearchIndex(lang || 'en')
+      })
+      prefLang = prefLang.join(',')
+      return prefLang
+    }
+    return null
+  }
+
+  swapRemove(langArray: string[], from: number, to: number) {
+    langArray.splice(to, 0, langArray[from])
+    langArray.splice(from + 1, 1)
+  }
+
   getAutoCompleteResults(): void {
     this.searchSvc.searchAutoComplete(this.searchQuery).then((results: ISearchAutoComplete[]) => {
       this.autoCompleteResults = results
@@ -93,6 +106,8 @@ export class HomeComponent implements OnInit {
       queryParams: { lang, q: this.searchQuery.q },
       queryParamsHandling: 'merge',
       relativeTo: this.route.parent,
+    }).then(() => {
+      this.getAutoCompleteResults()
     })
   }
 
@@ -112,6 +127,11 @@ export class HomeComponent implements OnInit {
       this.languageSearch = this.route.snapshot.data.pageData.data.search.languageSearch.map(
         (u: string) => u.toLowerCase(),
       )
+      this.languageSearch = this.languageSearch.sort()
+      this.swapRemove(this.languageSearch, this.languageSearch.indexOf('all'), 0)
+      if (this.preferredLanguages && this.preferredLanguages.split(',').length > 1) {
+      this.languageSearch.splice(1, 0, this.preferredLanguages)
+      }
     })
     this.searchSvc.getSearchConfig().then(res => {
       this.suggestedFilters = res.search && res.search.suggestedFilters

@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="configSvc.pageNavBar?.color" [ngStyle]="configSvc.pageNavBar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-s" i18n>Track Goal</span>
@@ -19,13 +16,13 @@
   <nav mat-tab-nav-bar>
     <a mat-tab-link routerLink="./accepted" queryParamsHandling="merge" routerLinkActive #accepted="routerLinkActive"
       [active]="accepted.isActive" i18n>
-      ACCEPTED
+      Accepted
     </a>
     <a mat-tab-link routerLink="./rejected" queryParamsHandling="merge" routerLinkActive #rejected="routerLinkActive"
-      [active]="rejected.isActive">REJECTED
+      [active]="rejected.isActive">Rejected
     </a>
     <a mat-tab-link routerLink="./pending" queryParamsHandling="merge" routerLinkActive #pending="routerLinkActive"
-      [active]="pending.isActive">PENDING
+      [active]="pending.isActive">Pending
     </a>
   </nav>
   <router-outlet></router-outlet>

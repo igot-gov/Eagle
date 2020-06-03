@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 import { ActivatedRoute, Data } from '@angular/router'
 import { AppTocService } from '../../services/app-toc.service'
-import { NsContent, ROOT_WIDGET_CONFIG, IGraphWidget, NsError, colorPalettes } from '@ws-widget/collection'
+import { NsContent, ROOT_WIDGET_CONFIG, IGraphWidget, NsError } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { NsAnalytics, NsCourseAnalytics } from '../../models/app-toc-analytics.model'
 
@@ -33,17 +30,19 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
   barChartOnExpandData: IGraphWidget = {} as IGraphWidget
   uniqueUsersDescription = 'How many unique users have visited the contents of this page?'
   hits = 0
-  hitsDescription = 'How many views were recorded for the contents of this page? A view is recorded every time a user accesses a content'
+  hitsDescription =
+    'How many views were recorded for the contents of this page? A view is recorded every time a user accesses a content'
   avgTimeSpent = 0.0
   dailyDate = ''
   months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-  timeSpentDescription = 'How much time was spent per user on the contents of this page in average in minutes?'
+  timeSpentDescription =
+    'How much time was spent per user on the contents of this page in average in minutes?'
   barChartDeptData: IGraphWidget = {} as IGraphWidget
-  barChartCityData: IGraphWidget = {} as IGraphWidget
+  barChartCountryData: IGraphWidget = {} as IGraphWidget
   pieChartDeviceData: IGraphWidget = {} as IGraphWidget
   pieChartDeviceHitsData: IGraphWidget = {} as IGraphWidget
   barChartDeptHitsData: IGraphWidget = {} as IGraphWidget
-  barChartCityHitsData: IGraphWidget = {} as IGraphWidget
+  barChartCountryHitsData: IGraphWidget = {} as IGraphWidget
   barChartExpandClientData: IGraphWidget = {} as IGraphWidget
   barChartDailyUsersData: IGraphWidget = {} as IGraphWidget
   barChartDailyHitsData: IGraphWidget = {} as IGraphWidget
@@ -58,11 +57,248 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
       errorType: 'internalServer',
     },
   }
+  // tslint:disable-next-line: max-line-length
+  chartColors = [
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+    'rgb(240, 179, 35)',
+    'rgb(255, 82, 61)',
+    'rgb(120, 157, 74)',
+    'rgb(160, 94, 181)',
+    'rgb(32, 150, 205)',
+    'rgb(104, 210, 223)',
+  ]
   constructor(
     private route: ActivatedRoute,
     private tocSharedSvc: AppTocService,
     private configSvc: ConfigurationsService,
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
@@ -72,7 +308,6 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
       const parentRoute = this.route.parent
       this.routeParentSubscription = parentRoute.data.subscribe((data: Data) => {
         this.initData(data)
-
       })
     }
   }
@@ -129,7 +364,7 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
     if (this.analyticsData) {
       // unique users count
       this.analyticsData.uniqueParticipants.forEach((count: NsAnalytics.IActivityObj) => {
-path
+        if (count.key === 'LEX') {
           this.uniqueUsers = count.uniqueCount
         }
       })
@@ -537,8 +772,7 @@ path
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: ['rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)'],
+                backgroundColor: this.chartColors,
                 borderWidth: 1,
                 data: deptData,
               },
@@ -547,22 +781,22 @@ path
         },
       }
 
-      // users by City BarChart Data
-      const barChartCityLabel: string[] = []
-      const cityData: number[] = []
-      this.analyticsDataClient.city.forEach((city: NsCourseAnalytics.IChartData) => {
-        if (barChartCityLabel.length < 20) {
-          barChartCityLabel.push(city.key)
+      // users by Country BarChart Data
+      const barChartCountryLabel: string[] = []
+      const countryData: number[] = []
+      this.analyticsDataClient.country.forEach((country: NsCourseAnalytics.IChartData) => {
+        if (barChartCountryLabel.length < 20) {
+          barChartCountryLabel.push(country.key)
         }
-        if (cityData.length < 20) {
-          cityData.push(city.doc_count)
+        if (countryData.length < 20) {
+          countryData.push(country.doc_count)
         }
       })
-      this.barChartCityData = {
+      this.barChartCountryData = {
         widgetType: ROOT_WIDGET_CONFIG.graph._type,
         widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
         widgetData: {
-          graphId: 'cityChart',
+          graphId: 'countryChart',
           graphType: 'horizontalBar',
           graphHeight: '300px',
           graphWidth: '100%',
@@ -575,14 +809,13 @@ path
           graphGridLinesDisplay: false,
           graphDefaultPalette: 'default',
           graphData: {
-            labels: barChartCityLabel,
+            labels: barChartCountryLabel,
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: ['rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)'],
+                backgroundColor: this.chartColors,
                 borderWidth: 1,
-                data: cityData,
+                data: countryData,
               },
             ],
           },
@@ -624,8 +857,7 @@ path
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: 'rgb(219, 219, 141)',
+                backgroundColor: 'rgb(32, 150, 205)',
                 borderWidth: 1,
                 data: dailyUsersData,
               },
@@ -669,8 +901,7 @@ path
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: 'rgb(219, 219, 141)',
+                backgroundColor: 'rgb(32, 150, 205)',
                 borderWidth: 1,
                 data: dailyHitsData,
               },
@@ -682,90 +913,91 @@ path
       // users by device Data
       const deviceData: number[] = []
       const deviceLabel: string[] = []
-      this.analyticsDataClient.device.forEach(
-        (device: NsCourseAnalytics.IChartData) => {
-          if (deviceLabel.length < 20) {
-            deviceLabel.push(device.key)
-          }
-          if (deviceData.length < 20) {
-            deviceData.push(device.doc_count)
-          }
-          this.pieChartDeviceData = {
-            widgetType: ROOT_WIDGET_CONFIG.graph._type,
-            widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
-            widgetData: {
-              graphId: 'deviceChart',
-              graphType: 'pie',
-              graphHeight: '250px',
-              graphWidth: '90%',
-              graphLegend: true,
-              graphLegendPosition: 'left',
-              graphLegendFontSize: 11,
-              graphTicksFontSize: 11,
-              graphGridLinesDisplay: false,
-              graphDefaultPalette: 'default',
-              graphData: {
-                labels: deviceLabel,
-                datasets: [
-                  {
-                    label: '',
-                    data: deviceData,
-                    // tslint:disable-next-line:max-line-length
-                    backgroundColor: colorPalettes.default,
-                    borderWidth: 1,
-                  },
-                ],
-              },
+      this.analyticsDataClient.device.forEach((device: NsCourseAnalytics.IChartData) => {
+        if (deviceLabel.length < 20) {
+          deviceLabel.push(device.key)
+        }
+        if (deviceData.length < 20) {
+          deviceData.push(device.doc_count)
+        }
+        this.pieChartDeviceData = {
+          widgetType: ROOT_WIDGET_CONFIG.graph._type,
+          widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+          widgetData: {
+            graphId: 'deviceChart',
+            graphType: 'pie',
+            graphHeight: '250px',
+            graphWidth: '90%',
+            graphLegend: true,
+            graphLegendPosition: 'left',
+            graphLegendFontSize: 11,
+            graphTicksFontSize: 11,
+            graphGridLinesDisplay: false,
+            graphDefaultPalette: 'default',
+            graphData: {
+              labels: deviceLabel,
+              datasets: [
+                {
+                  label: '',
+                  data: deviceData,
+                  backgroundColor: this.chartColors,
+                  borderWidth: 1,
+                },
+              ],
             },
-          }
-        },
-      )
+          },
+        }
+      })
 
       // hits by device Data
       const deviceHitsData: number[] = []
       const deviceHitsLabel: string[] = []
-      this.analyticsDataClient.device.forEach(
-        (device: NsCourseAnalytics.IChartData) => {
-          if (deviceHitsLabel.length < 20) {
-            deviceHitsLabel.push(device.key)
-          }
-          if (deviceHitsData.length < 20) {
-            deviceHitsData.push(device.total_hits)
-          }
-          this.pieChartDeviceHitsData = {
-            widgetType: ROOT_WIDGET_CONFIG.graph._type,
-            widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
-            widgetData: {
-              graphId: 'deviceHitsChart',
-              graphType: 'pie',
-              graphHeight: '250px',
-              graphWidth: '90%',
-              graphLegend: true,
-              graphLegendPosition: 'left',
-              graphLegendFontSize: 11,
-              graphTicksFontSize: 11,
-              graphGridLinesDisplay: false,
-              graphDefaultPalette: 'default',
-              graphData: {
-                labels: deviceHitsLabel,
-                datasets: [
-                  {
-                    label: '',
-                    data: deviceHitsData,
-                    // tslint:disable-next-line:max-line-length
-                    backgroundColor: colorPalettes.default,
-                    borderWidth: 1,
-                  },
-                ],
-              },
-            },
-          }
-        },
+      this.analyticsDataClient.device = this.analyticsDataClient.device.sort((a: any, b: any) =>
+        a.total_hits > b.total_hits ? -1 : a.total_hits < b.total_hits ? 1 : 0,
       )
+      this.analyticsDataClient.device.forEach((device: NsCourseAnalytics.IChartData) => {
+        if (deviceHitsLabel.length < 20) {
+          deviceHitsLabel.push(device.key)
+        }
+        if (deviceHitsData.length < 20) {
+          deviceHitsData.push(device.total_hits)
+        }
+        this.pieChartDeviceHitsData = {
+          widgetType: ROOT_WIDGET_CONFIG.graph._type,
+          widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+          widgetData: {
+            graphId: 'deviceHitsChart',
+            graphType: 'pie',
+            graphHeight: '250px',
+            graphWidth: '90%',
+            graphLegend: true,
+            graphLegendPosition: 'left',
+            graphLegendFontSize: 11,
+            graphTicksFontSize: 11,
+            graphGridLinesDisplay: false,
+            graphDefaultPalette: 'default',
+            graphData: {
+              labels: deviceHitsLabel,
+              datasets: [
+                {
+                  label: '',
+                  data: deviceHitsData,
+                  backgroundColor: this.chartColors,
+                  borderWidth: 1,
+                },
+              ],
+            },
+          },
+        }
+      })
 
       // hits by Dept BarChart Data
       const barChartDeptHitsLabel: string[] = []
       const deptHitsData: number[] = []
+      this.analyticsDataClient.department = this.analyticsDataClient.department.sort(
+        (a: any, b: any) =>
+          a.total_hits > b.total_hits ? -1 : a.total_hits < b.total_hits ? 1 : 0,
+      )
       this.analyticsDataClient.department.forEach((deptHits: NsCourseAnalytics.IChartData) => {
         if (barChartDeptHitsLabel.length < 20) {
           barChartDeptHitsLabel.push(deptHits.key)
@@ -795,8 +1027,7 @@ path
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: ['rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)'],
+                backgroundColor: this.chartColors,
                 borderWidth: 1,
                 data: deptHitsData,
               },
@@ -805,22 +1036,25 @@ path
         },
       }
 
-      // hits by City BarChart Data
-      const barChartCityHitsLabel: string[] = []
-      const cityHitsData: number[] = []
-      this.analyticsDataClient.city.forEach((cityHits: any) => {
-        if (barChartCityHitsLabel.length < 20) {
-          barChartCityHitsLabel.push(cityHits.key)
+      // hits by Country BarChart Data
+      const barChartCountryHitsLabel: string[] = []
+      const countryHitsData: number[] = []
+      this.analyticsDataClient.country = this.analyticsDataClient.country.sort((a: any, b: any) =>
+        a.total_hits > b.total_hits ? -1 : a.total_hits < b.total_hits ? 1 : 0,
+      )
+      this.analyticsDataClient.country.forEach((countryHits: any) => {
+        if (barChartCountryHitsLabel.length < 20) {
+          barChartCountryHitsLabel.push(countryHits.key)
         }
-        if (cityHitsData.length < 20) {
-          cityHitsData.push(cityHits.total_hits)
+        if (countryHitsData.length < 20) {
+          countryHitsData.push(countryHits.total_hits)
         }
       })
-      this.barChartCityHitsData = {
+      this.barChartCountryHitsData = {
         widgetType: ROOT_WIDGET_CONFIG.graph._type,
         widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
         widgetData: {
-          graphId: 'cityHitsChart',
+          graphId: 'countryHitsChart',
           graphType: 'horizontalBar',
           graphHeight: '300px',
           graphWidth: '100%',
@@ -833,14 +1067,13 @@ path
           graphGridLinesDisplay: false,
           graphDefaultPalette: 'default',
           graphData: {
-            labels: barChartCityHitsLabel,
+            labels: barChartCountryHitsLabel,
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: ['rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)'],
+                backgroundColor: this.chartColors,
                 borderWidth: 1,
-                data: cityHitsData,
+                data: countryHitsData,
               },
             ],
           },
@@ -851,10 +1084,16 @@ path
 
   onClose() {
     this.isExpandTrue = false
+    this.populateChartData()
+  }
+
+  onCloseClient() {
+    this.isExpandTrue = false
+    this.chartData()
   }
   onClick(event: string) {
     const departments = document.getElementById('departments')
-    const cities = document.getElementById('cities')
+    const countries = document.getElementById('countries')
     const devices = document.getElementById('devices')
     if (departments && event === 'departments') {
       departments.scrollIntoView({
@@ -862,8 +1101,8 @@ path
         block: 'start',
       })
     }
-    if (cities && event === 'cities') {
-      cities.scrollIntoView({
+    if (countries && event === 'countries') {
+      countries.scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       })
@@ -942,13 +1181,13 @@ path
       const barChartExpandLabel: string[] = []
       const expandData: number[] = []
       this.analyticsDataClient[field].forEach((expand: any) => {
-        if (barChartExpandLabel.length < 20) {
+        if (barChartExpandLabel.length <= 100) {
           barChartExpandLabel.push(expand.key)
         }
-        if (expandData.length < 20 && type === 'users') {
+        if (expandData.length <= 100 && type === 'users') {
           expandData.push(expand.doc_count)
         }
-        if (expandData.length < 20 && type === 'hits') {
+        if (expandData.length <= 100 && type === 'hits') {
           expandData.push(expand.total_hits)
         }
       })
@@ -958,7 +1197,7 @@ path
         widgetData: {
           graphId: 'expandChart',
           graphType: 'horizontalBar',
-          graphHeight: '300px',
+          graphHeight: '1000px',
           graphWidth: '100%',
           graphLegend: false,
           graphLegendPosition: 'top',
@@ -973,8 +1212,7 @@ path
             datasets: [
               {
                 label: '',
-                // tslint:disable-next-line:max-line-length
-                backgroundColor: ['rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)', 'rgb(219, 219, 141)', 'rgb(188, 189, 34)', 'rgb(199, 199, 199)', 'rgb(127, 127, 127)', 'rgb(247, 182, 210)', 'rgb(174, 199, 232)', 'rgb(227, 119, 194)', 'rgb(196, 156, 148)', 'rgb(140, 86, 75)', 'rgb(197, 176, 213)', 'rgb(148, 103, 189)', 'rgb(255, 152, 150)', 'rgb(214, 39, 40)', 'rgb(152, 223, 138)', 'rgb(44, 160, 44)', 'rgb(255, 187, 120)', 'rgb(255, 127, 14)', 'rgb(174, 199, 232)', 'rgb(31, 119, 180)'],
+                backgroundColor: this.chartColors,
                 borderWidth: 1,
                 data: expandData,
               },

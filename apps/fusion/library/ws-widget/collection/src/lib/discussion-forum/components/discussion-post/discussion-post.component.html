@@ -1,12 +1,12 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-card class="margin-top-s">
   <div class="flex postSection">
     <div class="flex flex-middle">
       <ws-widget-user-image class="main-post-user-image" [userId]="userId" [userName]="post.postCreator.name"
         [imageType]="'name-initial'" [email]="post.postCreator.emailId"></ws-widget-user-image>
-      <span class="ws-mat-primary-text text-base leading-normal font-medium margin-left-s">{{ post.postCreator.name }}
+      <span *ngIf="post.postCreator.name"
+        class="ws-mat-primary-text text-base leading-normal font-medium margin-left-s">{{ post.postCreator.name }}</span>
+      <span *ngIf="!post.postCreator.name && post.postCreator.emailId"
+        class="ws-mat-primary-text text-base leading-normal font-medium margin-left-s">{{ post.postCreator.emailId }}
       </span>
     </div>
     <div class="padding-left-s width-expand flex flex-end datePost">
@@ -21,7 +21,7 @@
         <ng-container>{{ post?.lastEdited.dtLastEdited | date: 'shortTime' }}</ng-container>
       </div>
       <div>
-        <button type="button" mat-icon-button [matMenuTriggerFor]="editMenu"
+        <button type="button" mat-icon-button [matMenuTriggerFor]="editMenu" name="discussion-post-more-options-button"
           *ngIf="userId === post.postCreator.postCreatorId">
           <mat-icon>more_vertical</mat-icon>
         </button>
@@ -46,12 +46,12 @@
     <ws-widget-editor-quill [htmlText]="post.postContent.title" (textData)="onTextChange($event)">
     </ws-widget-editor-quill>
     <div class="text-right">
-      <button type="button" class="margin-top-s" [disabled]="!postPublishEnabled" mat-raised-button color="primary" i18n
-        (click)="editPost(editFailMsg.value)">
+      <button type="button" name="discussion-post-update-button" class="margin-top-s" [disabled]="!postPublishEnabled"
+        mat-raised-button color="primary" i18n (click)="editPost(editFailMsg.value)">
         Update
       </button>
-      <button type="button" class="margin-top-s margin-left-s" mat-stroked-button color="primary" i18n
-        (click)="editMode = false">
+      <button type="button" name="discussion-post-cancel-button" class="margin-top-s margin-left-s" mat-stroked-button
+        color="primary" i18n (click)="editMode = false">
         Cancel
       </button>
     </div>
@@ -73,12 +73,12 @@
   </div>
   <div *ngIf="replyFetchStatus === 'hasMore' || isNewRepliesAvailable"
     class="text-center margin-top-xs margin-bottom-s flex flex-around">
-    <button type="button" mat-stroked-button color="primary" *ngIf="replyFetchStatus === 'hasMore'"
-      (click)="fetchPostReplies()" i18n>
+    <button name="discussion-post-load-previous-replies-button" type="button" mat-stroked-button color="primary"
+      *ngIf="replyFetchStatus === 'hasMore'" (click)="fetchPostReplies()" i18n>
       Load Previous Replies
     </button>
-    <button type="button" mat-stroked-button color="primary" *ngIf="isNewRepliesAvailable"
-      (click)="fetchPostReplies(true)" i18n>
+    <button name="discussion-post-load-new-replies-button" type="button" mat-stroked-button color="primary"
+      *ngIf="isNewRepliesAvailable" (click)="fetchPostReplies(true)" i18n>
       Load New Replies
     </button>
   </div>
@@ -86,8 +86,8 @@
     <ws-widget-user-image class="write-reply-user-image" [userName]="userName" [imageType]="'name-initial'"
       [email]="userEmail" [userId]="userId"></ws-widget-user-image>
     <div class="padding-left-m width-expand">
-      <div [hidden]="replyPlaceholderToggler" (click)="replyPlaceholderToggler = !replyPlaceholderToggler"
-        class="write-reply-placeholder" role="button" i18n>
+      <div name="discussion-post-respond-toggle-button" [hidden]="replyPlaceholderToggler"
+        (click)="replyPlaceholderToggler = !replyPlaceholderToggler" class="write-reply-placeholder" role="button" i18n>
         Respond to this thread
       </div>
       <div [hidden]="!replyPlaceholderToggler" class="">
@@ -95,11 +95,11 @@
         <ws-widget-editor-quill class="write-reply-editor" (textData)="onReplyTextChange($event)"
           #discussionReplyEditor></ws-widget-editor-quill>
         <div class="text-right padding-top-s mat-app-background">
-          <button [disabled]="!isValidReply || isPostingReply" (click)="publishReply(editFailMsg.value)" type="button"
-            mat-raised-button color="primary" i18n>
+          <button name="discussion-post-reply-button" [disabled]="!isValidReply || isPostingReply"
+            (click)="publishReply(editFailMsg.value)" type="button" mat-raised-button color="primary" i18n>
             Reply
           </button>
-          <button type="button" class="margin-left-xs" mat-stroked-button
+          <button name="discussion-post-cancel-reply-button" type="button" class="margin-left-xs" mat-stroked-button
             (click)="replyPlaceholderToggler = !replyPlaceholderToggler" i18n>
             Cancel
           </button>
@@ -114,8 +114,10 @@
 
 <mat-menu #editMenu="matMenu">
   <ng-template matMenuContent>
-    <button type="button" (click)="editMode = true" mat-menu-item i18n>Edit Post</button>
-    <button type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item i18n>
+    <button name="discussion-post-edit-button" type="button" (click)="editMode = true" mat-menu-item i18n>Edit
+      Post</button>
+    <button name="discussion-post-delete-button" type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item
+      i18n>
       Delete Post
     </button>
   </ng-template>

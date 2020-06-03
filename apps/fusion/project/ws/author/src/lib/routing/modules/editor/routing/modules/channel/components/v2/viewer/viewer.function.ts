@@ -1,9 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver } from '@ws-widget/resolver'
 
-export const isNotEmptyWidget = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData): boolean => {
+export const isNotEmptyWidget = (
+  widgetData: NsWidgetResolver.IRenderConfigWithAnyData,
+): boolean => {
   switch (widgetData.widgetSubType) {
     case 'selectorResponsive':
       if (widgetData.widgetData.selectFrom) {
@@ -14,6 +13,8 @@ export const isNotEmptyWidget = (widgetData: NsWidgetResolver.IRenderConfigWithA
         }
       }
       return false
+    case 'intranetResponsive':
+      return checkIframe(widgetData.widgetData.isIntranet.widget)
 
     case 'elementHtml':
       return checkHTML(widgetData)
@@ -39,15 +40,37 @@ export const isNotEmptyWidget = (widgetData: NsWidgetResolver.IRenderConfigWithA
       return checkPlayerVideo(widgetData)
     case 'videoWrapper':
       return checkWapperVideo(widgetData)
+    case 'channelHub':
+      return checkChannelHub(widgetData)
     default:
       return false
   }
 }
 
+const checkChannelHub = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData) => {
+  if (widgetData.widgetData.cards.length > 0) {
+    const data = widgetData.widgetData
+    let index = 0
+    let canBreak = false
+    let returnStatement = false
+    while (index < data.cards.length && !canBreak) {
+      if ((data.cards[index].name || data.cards[index].description) && data.cards[index].image) {
+        canBreak = true
+        returnStatement = true
+      }
+      index = index + 1
+    }
+    return returnStatement
+  }
+    return false
+
+}
+
 const checkWapperVideo = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData) => {
   if (widgetData.widgetData.externalData.iframeSrc) {
     return true
-  } if (widgetData.widgetData.videoData.url || widgetData.widgetData.videoData.identifier) {
+  }
+  if (widgetData.widgetData.videoData.url || widgetData.widgetData.videoData.identifier) {
     return true
   }
   return false
@@ -65,7 +88,6 @@ const checkPlayerVideo = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData)
     return true
   }
   return false
-
 }
 
 const checkBreadcrumb = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData) => {
@@ -106,7 +128,6 @@ const checkImageMap = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData): b
     return true
   }
   return false
-
 }
 
 const checkGalleryView = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData): boolean => {
@@ -140,7 +161,13 @@ const checkSliderBanners = (widgetData: NsWidgetResolver.IRenderConfigWithAnyDat
     let canBreak = false
     let returnStatement = false
     while (index < data.length && !canBreak) {
-      if (data[index].banners.l && data[index].banners.m && data[index].banners.s && data[index].banners.xl && data[index].banners.xs) {
+      if (
+        data[index].banners.l &&
+        data[index].banners.m &&
+        data[index].banners.s &&
+        data[index].banners.xl &&
+        data[index].banners.xs
+      ) {
         canBreak = true
         returnStatement = true
       }
@@ -151,7 +178,9 @@ const checkSliderBanners = (widgetData: NsWidgetResolver.IRenderConfigWithAnyDat
   return false
 }
 
-const checkContentStripMultiple = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData): boolean => {
+const checkContentStripMultiple = (
+  widgetData: NsWidgetResolver.IRenderConfigWithAnyData,
+): boolean => {
   const data = widgetData.widgetData
   let index = 0
   if (data.strips.length > 0) {
@@ -162,12 +191,14 @@ const checkContentStripMultiple = (widgetData: NsWidgetResolver.IRenderConfigWit
         if (
           (data.strips[index].preWidgets && data.strips[index].preWidgets.length) ||
           (data.strips[index].postWidgets && data.strips[index].postWidgets.length) ||
-          Object.keys(data.strips[index].request.searchV6 || {}).length
-          || data.strips[index].request.ids && data.strips[index].request.ids.length
-          || Object.keys(data.strips[index].request.api || {}).length
-          || Object.keys(data.strips[index].request.search || {}).length
-          || data.strips[index].request.manualData && data.strips[index].request.manualData.length > 0
-          || Object.keys(data.strips[index].request.searchRegionRecommendation || {}).length) {
+          Object.keys(data.strips[index].request.searchV6 || {}).length ||
+          (data.strips[index].request.ids && data.strips[index].request.ids.length) ||
+          Object.keys(data.strips[index].request.api || {}).length ||
+          Object.keys(data.strips[index].request.search || {}).length ||
+          (data.strips[index].request.manualData &&
+            data.strips[index].request.manualData.length > 0) ||
+          Object.keys(data.strips[index].request.searchRegionRecommendation || {}).length
+        ) {
           canBreak = true
           returnStatement = true
         }
@@ -179,15 +210,19 @@ const checkContentStripMultiple = (widgetData: NsWidgetResolver.IRenderConfigWit
   return false
 }
 
-const checkContentStripSingle = (widgetData: NsWidgetResolver.IRenderConfigWithAnyData): boolean => {
+const checkContentStripSingle = (
+  widgetData: NsWidgetResolver.IRenderConfigWithAnyData,
+): boolean => {
   const data = widgetData.widgetData
   if (Object.keys(data).length) {
-    if (Object.keys(data.request.searchV6 || {}).length
-      || data.request.ids && data.request.ids.length
-      || Object.keys(data.request.api || {}).length
-      || Object.keys(data.request.search || {}).length
-      || data.request.manualData.length > 0
-      || Object.keys(data.request.searchRegionRecommendation || {}).length) {
+    if (
+      Object.keys(data.request.searchV6 || {}).length ||
+      (data.request.ids && data.request.ids.length) ||
+      Object.keys(data.request.api || {}).length ||
+      Object.keys(data.request.search || {}).length ||
+      data.request.manualData.length > 0 ||
+      Object.keys(data.request.searchRegionRecommendation || {}).length
+    ) {
       return true
     }
   }

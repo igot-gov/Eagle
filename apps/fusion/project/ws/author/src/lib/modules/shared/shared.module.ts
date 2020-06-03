@@ -1,51 +1,64 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { NgModule } from '@angular/core'
+import { WorkFlowService } from './../../services/work-flow.service'
+import { NotificationService } from './../../services/notification.service'
+import { ConditionCheckService } from './services/condition-check.service'
+import { PipeContentRouteModule } from '@ws-widget/collection'
 import { CommonModule } from '@angular/common'
-import { MatIconModule } from '@angular/material/icon'
-import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatFormFieldModule } from '@angular/material/form-field'
-import { MatInputModule } from '@angular/material/input'
-import { MatGridListModule } from '@angular/material/grid-list'
-import { MatStepperModule } from '@angular/material/stepper'
-import { ApiService } from './services/api.service'
-import { MatTabsModule } from '@angular/material/tabs'
+import { NgModule } from '@angular/core'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
+  MatAutocompleteModule,
   MatButtonModule,
   MatButtonToggleModule,
-  MatMenuModule,
-  MatSidenavModule,
-  MatAutocompleteModule,
-  MatDialogModule,
-  MatTooltipModule,
-  MatDialogRef,
-  MatSelectModule,
-  MAT_DIALOG_DATA,
-  MatChipsModule,
-  MatNativeDateModule,
-  MatProgressSpinnerModule,
   MatCheckboxModule,
-  MatSlideToggleModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatDialogRef,
+  MatMenuModule,
+  MatNativeDateModule,
   MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSlideToggleModule,
+  MatTooltipModule,
+  MAT_DIALOG_DATA,
 } from '@angular/material'
-import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatCardModule } from '@angular/material/card'
-import { MatTreeModule } from '@angular/material/tree'
+import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatExpansionModule } from '@angular/material/expansion'
-import { CommentsComponent } from './components/comments/comments.component'
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatGridListModule } from '@angular/material/grid-list'
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input'
 import { MatListModule } from '@angular/material/list'
-import { MatSnackBarModule } from '@angular/material/snack-bar'
-import { NotificationComponent } from './components/notification/notification.component'
-import { CommentsDialogComponent } from './components/comments-dialog/comments-dialog.component'
-import { RelativeUrlPipe } from './pipes/relative-url.pipe'
 import { MatRadioModule } from '@angular/material/radio'
-import { IprDialogComponent } from './components/ipr-dialog/ipr-dialog.component'
-import { OrdinalsResolver } from './services/ordianls.resolver.service'
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component'
-import { AccessControlService } from './services/access-control.service'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatStepperModule } from '@angular/material/stepper'
+import { MatTabsModule } from '@angular/material/tabs'
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatTreeModule } from '@angular/material/tree'
 import { ImageCropModule } from '@ws-widget/utils/src/public-api'
+import { AuthEditorStepsComponent } from './components/auth-editor-steps/auth-editor-steps.component'
+import { CommentsDialogComponent } from './components/comments-dialog/comments-dialog.component'
+import { CommentsComponent } from './components/comments/comments.component'
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component'
+import { ErrorParserComponent } from './components/error-parser/error-parser.component'
+import { IprDialogComponent } from './components/ipr-dialog/ipr-dialog.component'
+import { NotificationComponent } from './components/notification/notification.component'
+import { RelativeUrlPipe } from './pipes/relative-url.pipe'
+import { AccessControlService } from './services/access-control.service'
+import { ApiService } from './services/api.service'
+import { AuthExpiryDateConfirmComponent } from './components/auth-expiry-date-confirm/auth-expiry-date-confirm.component'
+import { StatusDisplayComponent } from './components/status-display/status-display.component'
+import { LastUpdateDisplayComponent } from './components/last-update-display/last-update-display.component'
+import { ExpiryDateDisplayComponent } from './components/expiry-date-display/expiry-date-display.component'
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component'
+import { RestoreDialogComponent } from './components/restore-dialog/restore-dialog.component'
+import { UnpublishDialogComponent } from './components/unpublish-dialog/unpublish-dialog.component'
+import { DraftDialogComponent } from './components/draft-dialog/draft-dialog.component'
+import { ShowHideToolTipDirective } from './directives/show-hide-tool-tip.directive'
+import { StatusTrackComponent } from './components/status-track/status-track.component'
+import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component'
 
 @NgModule({
   declarations: [
@@ -55,6 +68,19 @@ import { ImageCropModule } from '@ws-widget/utils/src/public-api'
     CommentsDialogComponent,
     IprDialogComponent,
     ConfirmDialogComponent,
+    AuthEditorStepsComponent,
+    ErrorParserComponent,
+    AuthExpiryDateConfirmComponent,
+    StatusDisplayComponent,
+    LastUpdateDisplayComponent,
+    ExpiryDateDisplayComponent,
+    DeleteDialogComponent,
+    RestoreDialogComponent,
+    UnpublishDialogComponent,
+    DraftDialogComponent,
+    ShowHideToolTipDirective,
+    StatusTrackComponent,
+    FeedbackFormComponent,
   ],
   imports: [
     CommonModule,
@@ -90,6 +116,7 @@ import { ImageCropModule } from '@ws-widget/utils/src/public-api'
     MatRadioModule,
     MatProgressBarModule,
     ImageCropModule,
+    PipeContentRouteModule,
   ],
   exports: [
     MatIconModule,
@@ -130,19 +157,41 @@ import { ImageCropModule } from '@ws-widget/utils/src/public-api'
     MatProgressBarModule,
     IprDialogComponent,
     ImageCropModule,
+    AuthEditorStepsComponent,
+    ErrorParserComponent,
+    PipeContentRouteModule,
+    StatusDisplayComponent,
+    LastUpdateDisplayComponent,
+    DeleteDialogComponent,
+    RestoreDialogComponent,
+    UnpublishDialogComponent,
+    DraftDialogComponent,
+    ShowHideToolTipDirective,
+    StatusTrackComponent,
+    FeedbackFormComponent,
   ],
   providers: [
     ApiService,
     AccessControlService,
+    ConditionCheckService,
+    WorkFlowService,
+    NotificationService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
-    OrdinalsResolver,
   ],
   entryComponents: [
+    AuthExpiryDateConfirmComponent,
     NotificationComponent,
     IprDialogComponent,
     CommentsDialogComponent,
     ConfirmDialogComponent,
+    ErrorParserComponent,
+    DeleteDialogComponent,
+    RestoreDialogComponent,
+    UnpublishDialogComponent,
+    DraftDialogComponent,
+    StatusTrackComponent,
+    FeedbackFormComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

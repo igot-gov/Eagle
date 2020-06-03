@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-vars';
 @import 'ws-mixins';
 
@@ -11,7 +8,8 @@ $badge-padding: 12px;
 .card-container {
   position: relative;
   width: 290px;
-    @include breakpoint-xs {
+
+  @include breakpoint-xs {
     width: 230px;
   }
 }
@@ -47,9 +45,10 @@ $badge-padding: 12px;
   border: none;
   margin: $size-s 0;
 
-  button{
+  button {
     padding-right: 0;
   }
+
   span {
     margin-right: 5px;
   }
@@ -62,6 +61,7 @@ $badge-padding: 12px;
 .title {
   margin-left: $size-xs;
 }
+
 .description {
   height: 80px;
 }
@@ -84,17 +84,17 @@ $badge-padding: 12px;
 }
 
 
-.small-icon{
+.small-icon {
   width: 16px;
   height: 16px;
   font-size: 16px;
 }
 
-.grid{
+.grid {
   display: grid;
   grid-template-rows: 0.5fr 0.5fr;
 }
 
-.end{
+.end {
   justify-content: flex-end;
 }

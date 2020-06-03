@@ -1,10 +1,7 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <main *ngIf="commonGoals?.length; else error" class="pt-4">
   <ng-container *ngFor="let group of commonGoals">
-    <section class="flex items-center">
-      <button mat-icon-button (click)="getGoalGroup(group?.id)">
+    <section class="flex items-center cursor-pointer" (click)="getGoalGroup(group?.id)">
+      <button mat-icon-button (click)="$event.stopPropagation(); getGoalGroup(group?.id)">
         <mat-icon class="mat-icon-rtl-mirror">
           {{ isExpanded[group?.id] ? 'expand_more' : 'chevron_right' }}
         </mat-icon>
@@ -12,11 +9,16 @@
       <h2 class="mat-title margin-remove-bottom">{{ group?.name }}</h2>
     </section>
     <section class="ml-10 mt-2" *ngIf="isExpanded[group?.id]">
-      <ng-container *ngIf="groupFetchStatus[group?.id] !== 'fetching'; else goalGroupLoading"></ng-container>
-      <ng-container *ngIf="group?.goals?.length === 0">You have already created all the goals in this category.
+      <ng-container
+        *ngIf="groupFetchStatus[group?.id] !== 'fetching'; else goalGroupLoading"
+      ></ng-container>
+      <ng-container *ngIf="group?.goals?.length === 0"
+        >You have already created all the goals in this category.
       </ng-container>
       <ng-container *ngFor="let goal of group?.goals">
-        <ng-container *ngTemplateOutlet="goalSection; context: { groupId: group?.id, $implicit: goal}">
+        <ng-container
+          *ngTemplateOutlet="goalSection; context: { groupId: group?.id, $implicit: goal }"
+        >
         </ng-container>
       </ng-container>
     </section>
@@ -25,11 +27,16 @@
 
 <ng-template #goalSection let-groupId="groupId" let-goal>
   <div class="mb-2">
-    <ws-app-goal-common-card [goal]="goal" (goalCreated)="goalCreated(groupId, goal?.id)"></ws-app-goal-common-card>
+    <ws-app-goal-common-card
+      [goal]="goal"
+      (goalCreated)="goalCreated(groupId, goal?.id)"
+    ></ws-app-goal-common-card>
   </div>
 </ng-template>
 <ng-template #error>
-  something wrong
+  <div i18n class="text-lg leading-none my-3">
+    No Common goals present.
+  </div>
 </ng-template>
 
 <ng-template #goalGroupLoading>

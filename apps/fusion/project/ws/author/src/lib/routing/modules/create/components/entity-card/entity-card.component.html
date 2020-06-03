@@ -1,30 +1,29 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="card-container" [ngClass]="{
-    components: movableEntity === true && resourceOpened === true,
     op60: notEnabled === true
   }">
-  <mat-card class="ws-mat-primary-border-top-bolder mat-elevation-z6 margin-bottom-l" [ngClass]="{ expanded: resourceClicked === true && isResource === true }">
-    <div class="entity-container" (click)="entityClicked(entity,0)">
+  <mat-card class="ws-mat-primary-border-top-bolder mat-elevation-z6 margin-bottom-l expanded">
+    <div class="entity-container" (click)="entityClicked(entity)" [id]="entity.id" [attr.name]='entity.id'>
       <div class="icon-container ws-mat-primary-background-op30">
         <mat-icon class="ws-mat-primary-text">{{ entity.icon }}</mat-icon>
       </div>
 
-      <div class=" badge-data">
+      <div class="badge-data">
         <div class="mat-title margin-remove ws-mat-primary-text">
           {{ entity.name }}
         </div>
         <div class="mat-body margin-top-s">{{ entity.description }}</div>
       </div>
     </div>
-    <div class="margin-left-l animated" *ngIf="entity.options && resourceClicked">
-      <ng-container *ngFor="let option of entity.options; let idx = index">
-        <div class="flex flex-middle margin-left-l margin-bottom-s padding-top-s" (click)="entityClicked(option, idx)" [ngClass]="{ op60: idx >= 2 }">
-          <mat-icon class="ws-mat-primary-text">{{ option.icon }}</mat-icon>
-          <p class="margin-left-m margin-remove-bottom">{{ option.name }}</p>
-        </div>
-        <mat-divider class="margin-bottom-m divider cursor-disable" *ngIf="idx < entity.options?.length - 1"></mat-divider>
+    <div class="margin-left-l animated" *ngIf="childEntity.length && resourceClicked">
+      <ng-container *ngFor="let option of childEntity; let idx = index">
+        <ng-container *ngIf="option.available">
+          <div class="flex flex-middle margin-left-l margin-bottom-s padding-top-s" (click)="entityClicked(option)" [ngClass]="{ op60: !option.enabled }"
+            [id]="option.id" [attr.name]="option.id">
+            <mat-icon class="ws-mat-primary-text">{{ option.icon }}</mat-icon>
+            <p class="margin-left-m margin-remove-bottom">{{ option.name }}</p>
+          </div>
+          <mat-divider class="margin-bottom-m divider cursor-disable" *ngIf="idx < childEntity?.length - 1"></mat-divider>
+        </ng-container>
       </ng-container>
     </div>
   </mat-card>

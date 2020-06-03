@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -8,12 +5,14 @@ import { CONSTANTS } from '../../utils/env'
 import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
-
 const apiEndpoints = {
-  acceptTnC: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/terms/accept`,
-  tnc: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/latest/terms`,
-  tncPostProcessing: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE}/v1/user/${userId}/postprocessing`,
+  acceptTnC: `${CONSTANTS.TNC_API_BASE}/v1/terms/accept`,
+  tnc: `${CONSTANTS.TNC_API_BASE}/v1/latest/terms`,
+  tncPostProcessing: (userId: string) =>
+    `${CONSTANTS.SB_EXT_API_BASE}/v1/user/${userId}/postprocessing`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export async function getCommonTnc(rootOrg: string, org: string) {
   try {
@@ -33,22 +32,23 @@ export async function getCommonTnc(rootOrg: string, org: string) {
 
 export async function getTnc(userId: string, rootOrg: string, org: string, locale = 'en') {
   try {
-    const response = await axios.get(
-      `${apiEndpoints.tnc}?userId=${userId}`,
-      {
-        ...axiosRequestConfig,
-        headers: {
-          langCode: locale,
-          org,
-          rootOrg,
-        },
-      }
-    )
+    const response = await axios.get(`${apiEndpoints.tnc}?userId=${userId}`, {
+      ...axiosRequestConfig,
+      headers: {
+        langCode: locale,
+        org,
+        rootOrg,
+      },
+    })
     const tncData = response.data
-    const hasTerms = Boolean(Array.isArray(tncData.termsAndConditions) && tncData.termsAndConditions.length)
+    const hasTerms = Boolean(
+      Array.isArray(tncData.termsAndConditions) && tncData.termsAndConditions.length
+    )
     return {
       ...tncData,
-      isNewUser: Boolean(!tncData.isAccepted && hasTerms && !tncData.termsAndConditions[0].acceptedVersion),
+      isNewUser: Boolean(
+        !tncData.isAccepted && hasTerms && !tncData.termsAndConditions[0].acceptedVersion
+      ),
     }
   } catch (err) {
     logError('Error occurred while getting user TNC. Trying to fetch common tnc >', err)
@@ -65,7 +65,12 @@ export async function getTnc(userId: string, rootOrg: string, org: string, local
   }
 }
 
-export async function getTncStatus(userId: string, rootOrg: string, org: string, locale?: string): Promise<boolean> {
+export async function getTncStatus(
+  userId: string,
+  rootOrg: string,
+  org: string,
+  locale?: string
+): Promise<boolean> {
   try {
     const tnc = await getTnc(userId, rootOrg, org, locale)
     return tnc.isAccepted
@@ -95,7 +100,11 @@ protectedTnc.get('/status', async (req, res) => {
     const response = await getTncStatus(userId, rootOrg, org, locale)
     res.send(response)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -118,8 +127,11 @@ protectedTnc.get('/', async (req, res) => {
     res.send(response)
   } catch (err) {
     logError('TNC SEND ERROR', err)
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      })
   }
 })
 
@@ -156,7 +168,11 @@ protectedTnc.post('/accept', async (req, res) => {
     res.status(500).send(response.data)
   } catch (err) {
     logError('ERROR WHILE ACCEPTING TNC', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -183,6 +199,10 @@ protectedTnc.patch('/postprocessing', async (req, res) => {
     res.status(response.data ? 200 : 204).send(response.data)
   } catch (err) {
     logError('ERROR WHILE POSTPROCESSING', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

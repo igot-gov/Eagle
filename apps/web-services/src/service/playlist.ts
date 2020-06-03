@@ -1,82 +1,91 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   IPlaylist,
-  IPlaylistResource,
-  IPlaylistSbExt,
+  IPlaylistCreateRequest,
+  IPlaylistGetRequest,
+  IPlaylistSbDeleteRequest,
   IPlaylistSbExtBase,
   IPlaylistSbExtRequest,
-  IPlaylistSbExtV2,
+  IPlaylistSbExtSyncRequest,
   IPlaylistSbUpdateRequest,
+  IPlaylistSyncRequest,
   IPlaylistUpdateTitleRequest,
-  IPlaylistUpsertRequest,
-  IResourceSbExt
+  IPlaylistUpsertRequest
 } from '../models/playlist.model'
-import { processDisplayContentType, processUrl } from '../utils/contentHelpers'
 
-function transformToPlaylistBase(
-  playlistSbExt: IPlaylistSbExtBase,
-  contents: IPlaylistResource[]
-): IPlaylist {
+function transformToPlaylistBase(playlistSbExt: IPlaylistSbExtBase): IPlaylist {
   return {
-    contents: contents.map((content) => ({
-      ...content,
-      displayContentType: processDisplayContentType(content.contentType, content.resourceType),
-    })),
+    contents: playlistSbExt.content_meta,
     createdOn: playlistSbExt.created_on,
-    duration: contents.reduce(
-      (totalDuration: number, r: IPlaylistResource) => totalDuration + r.duration,
-      0
-    ),
-    icon: contents.length ? contents[0].appIcon : null,
+    icon: playlistSbExt.content_meta.length ? playlistSbExt.content_meta[0].appIcon : null,
     id: playlistSbExt.playlist_id,
     name: playlistSbExt.playlist_title,
+    resourceIds: playlistSbExt.resource_ids,
     sharedBy: playlistSbExt.shared_by && playlistSbExt.shared_by.user_id,
     sharedByDisplayName: playlistSbExt.shared_by && playlistSbExt.shared_by.name,
     sharedOn: playlistSbExt.shared_on,
+    status: playlistSbExt.status,
     type: Boolean(playlistSbExt.shared_by) ? 'share' : 'user',
     visibility: playlistSbExt.visibility,
   }
 }
-export function transformToPlaylistV2(playlistSbExt: IPlaylistSbExtV2): IPlaylist {
-  return transformToPlaylistBase(playlistSbExt, playlistSbExt.resource)
+export function transformToPlaylistV2(playlistSbExt: IPlaylistSbExtBase): IPlaylist {
+  return transformToPlaylistBase(playlistSbExt)
 }
 
-export function transformToPlaylist(playlistSbExt: IPlaylistSbExt): IPlaylist {
-  const contents: IPlaylistResource[] = transformToResource(playlistSbExt.resource)
-  return transformToPlaylistBase(playlistSbExt, contents)
-}
+function transformToPlaylistBaseV3(playlistSbExt: IPlaylistGetRequest, playlistId: string): IPlaylist {
 
-function transformToResource(resources: IResourceSbExt[]): IPlaylistResource[] {
-  return (resources || []).map((resource: IResourceSbExt) => ({
-    appIcon: processUrl(resource.appIcon),
-    contentType: resource.contentType,
-    displayContentType: processDisplayContentType(resource.contentType, resource.resourceType),
-    duration: resource.time_duration,
-    identifier: resource.resource_id,
-    mimeType: resource.mimeType,
-    name: resource.resource_name,
-  }))
-}
-
-export function transformToSbExtUpsertRequest(
-  upsertRequest: IPlaylistUpsertRequest
-): IPlaylistSbExtRequest {
   return {
-    changed_resources: upsertRequest.changedContentIds,
-    isShared: 0,
-    playlist_id: upsertRequest.id,
-    playlist_title: upsertRequest.title,
-    resource_ids: upsertRequest.contentIds,
-    user_action: upsertRequest.userAction,
+    contents: playlistSbExt.resource_ids,
+    createdOn: playlistSbExt.createdOn,
+    duration: playlistSbExt.resource_ids.reduce((duration, content) => duration + content.duration, 0),
+    icon: playlistSbExt.resource_ids.length ? playlistSbExt.resource_ids[0].appIcon : null,
+    id: playlistId,
+    name: playlistSbExt.playlistTitle,
+    resourceIds: playlistSbExt.resourceIds,
+    sharedBy: playlistSbExt.sharedBy,
+    status: playlistSbExt.status,
+    type: Boolean(playlistSbExt.sharedBy) ? 'share' : 'user',
+    visibility: playlistSbExt.visibility,
   }
 }
-export function transformToSbExtUpdateRequest(
-  updateRequest: IPlaylistUpdateTitleRequest
-): IPlaylistSbUpdateRequest {
+
+export function transformToPlaylistV3(playlistSbExt: IPlaylistGetRequest, playlistId: string): IPlaylist {
+  return transformToPlaylistBaseV3(playlistSbExt, playlistId)
+}
+
+export function transformToSbExtCreateRequest(upsertRequest: IPlaylistCreateRequest): IPlaylistSbExtRequest {
+  return {
+    content_ids: upsertRequest.content_ids,
+    playlist_title: upsertRequest.playlist_title,
+    visibility: upsertRequest.visibility,
+  }
+}
+
+export function transformToSbExtSyncRequest(syncRequest: IPlaylistSyncRequest): IPlaylistSbExtSyncRequest {
+  return {
+    content: syncRequest.only_sharedby_playlist_content,
+  }
+}
+
+export function transformToSbExtUpsertRequest(upsertRequest: IPlaylistUpsertRequest): IPlaylistSbExtRequest {
+  /*add content to a playlist*/
+  return {
+    content_ids: upsertRequest.contentIds,
+  }
+}
+
+export function transformToSbExtDeleteRequest(upsertRequest: IPlaylistUpsertRequest): IPlaylistSbDeleteRequest {
+  /* delete contents from playlist*/
+  return {
+    content: upsertRequest.contentIds,
+  }
+}
+
+export function transformToSbExtUpdateRequest(updateRequest: IPlaylistUpdateTitleRequest): IPlaylistSbUpdateRequest {
+  /* for Patch request to change playlist title */
   return {
     content_ids: updateRequest.content_ids.map((content) => content.identifier),
     playlist_title: updateRequest.playlist_title,
+    visibility: updateRequest.visibility,
   }
 }

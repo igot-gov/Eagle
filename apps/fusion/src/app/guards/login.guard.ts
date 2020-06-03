@@ -1,8 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { AuthKeycloakService } from './../../../library/ws-widget/utils/src/lib/services/auth-keycloak.service'
 import { Injectable } from '@angular/core'
-import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Router } from '@angular/router'
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  CanActivate,
+  Router,
+} from '@angular/router'
 import { Observable } from 'rxjs'
 import { ConfigurationsService } from '@ws-widget/utils'
 
@@ -10,12 +14,41 @@ import { ConfigurationsService } from '@ws-widget/utils'
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
-  constructor(private router: Router, private configSvc: ConfigurationsService) { }
+  constructor(
+    private router: Router,
+    private configSvc: ConfigurationsService,
+    private authSvc: AuthKeycloakService,
+  ) {}
   canActivate(
     next: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (!this.configSvc.isAuthenticated) {
+      if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.keycloak.isLoginHidden) {
+        let redirectUrl = document.baseURI
+        if (next.queryParamMap.has('ref')) {
+          const ref = decodeURIComponent(next.queryParamMap.get('ref') || '')
+          redirectUrl += this.router.parseUrl(ref || '')
+        }
+        this.authSvc.login(this.configSvc.instanceConfig.keycloak.defaultidpHint, redirectUrl)
+        return false
+      }
+      if (
+        next.queryParamMap.has('ref') &&
+        decodeURIComponent(next.queryParamMap.get('ref') || '').includes('/infosysagm/epochuser')
+      ) {
+        const redirectUrl = `${document.baseURI}/infosysagm/epochuser`
+        this.authSvc.login('S', redirectUrl)
+        return false
+      }
+      if (
+        next.queryParamMap.has('ref') &&
+        decodeURIComponent(next.queryParamMap.get('ref') || '').includes('/infosysagm/moderator')
+      ) {
+        const redirectUrl = `${document.baseURI}/infosysagm/moderator`
+        this.authSvc.login('S', redirectUrl)
+        return false
+      }
       return true
     }
 

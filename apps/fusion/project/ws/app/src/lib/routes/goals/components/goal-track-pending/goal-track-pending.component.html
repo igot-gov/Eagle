@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <main class="my-4">
   <h3 *ngIf="!trackGoal?.pending?.length" class="text-center mat-title" i18n>No Pending items</h3>
   <div *ngIf="trackGoal?.pending?.length" class="mb-4">
@@ -33,7 +30,7 @@
     </table>
 
     <div class="mt-4 flex flex-row-reverse">
-      <button *ngIf="!remindAPIProgress" [disabled]="!selectionPending.selected?.length" mat-raised-button
+      <button name="remind-button-goal-track-pending" *ngIf="!remindAPIProgress" [disabled]="!selectionPending.selected?.length" mat-raised-button
         color="primary" i18n (click)="remind()">
         Remind
       </button>

@@ -1,0 +1,40 @@
+<div class="flex flex-between items-center">
+  <h2 mat-dialog-title class="heading font-weight-500" i18n>
+    Remove Users
+  </h2>
+  <button mat-dialog-close mat-icon-button class="cursor-pointer" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+<div  class="pt-4 userList custom-scroll-small">
+  <div class="flex flex-between mb-4" *ngFor="let user of removeUserData">
+    <div class="flex items-center">
+      <ws-widget-user-image class="user-image" [email]="user.email" [userName]="user.first_name + ' ' + user.last_name"
+        [imageType]="'name-initial'">
+      </ws-widget-user-image>
+      <div class="ml-3  width-expand">
+        <div class="text-wrap font-weight-500">{{ user.first_name }} {{ user.last_name }}</div>
+        <div class="mat-caption text-truncate">
+          {{ user.email }}
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center mr-2">
+      <span class="ws-mat-primary-text cursor-pointer">
+        <mat-icon (click)="alterUser(user.wid)">cancel</mat-icon>
+      </span>
+    </div>
+  </div>
+</div>
+</div>
+<mat-divider></mat-divider>
+<div mat-dialog-actions class="flex flex-end">
+  <div class="pr-4">
+    <mat-progress-spinner mode="indeterminate" *ngIf="isRemoving" diameter="30"></mat-progress-spinner>
+  </div>
+  <button mat-raised-button class="removeButton" [disabled]="!removeUserId.length || isRemoving" type="button" color="primary" (click)="removeUser()">
+    <span i18n>Remove</span>&nbsp;
+    <span class="font-weight-500" *ngIf="removeUserId.length">({{removeUserId.length}})</span>
+  </button>
+</div>

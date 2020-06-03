@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-http://http-url
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input } from '@angular/core'
 import { IKhubProject, IItemsList, IProjectRisks } from '../../models/knowledgeHub.model'
 
@@ -18,7 +15,7 @@ export class ProjectSnapshotComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-http://http-url
+    this.url = `http://10.66.87.62:6789/view?source=promt&type=project&itemId=${
       this.projectDetails.itemId
     }&ref=home`
     this.projectDetails.mstBusinessContext =

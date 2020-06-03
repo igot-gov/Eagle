@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: playlist create" class="margin-left-xs">Create Playlist</span>
@@ -11,23 +8,27 @@
     <mat-form-field class="width-1-1 margin-bottom-m" appearance="fill">
       <mat-label i18n>Name</mat-label>
       <mat-error i18n>Playlist title should be 1-100 characters</mat-error>
-      <input matInput formControlName="title" class="width-1-1" autocomplete="off" required />
+      <input [attr.name]="'playlist-name-input-playlist-create'" matInput formControlName="title" class="width-1-1"
+        autocomplete="off" required />
     </mat-form-field>
     <h2 class="mat-h2 margin-bottom-xs" i18n>Add Content</h2>
     <ws-widget-picker-content [widgetData]="pickerContentData"
       (change)="onContentSelectionChanged($event?.content, $event?.checked)">
     </ws-widget-picker-content>
-    <h2 class="mat-h2 margin-top-m margin-bottom-xs" i18n>Share With</h2>
-    <ws-widget-user-autocomplete class="block" (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
-    <mat-form-field class="text-area w-full">
-      <textarea matInput formControlName="message" i18n-placeholder placeholder="Your message..." rows="5"
-        #txtBody></textarea>
-    </mat-form-field>
+    <ng-container *ngIf="isShareEnabled">
+      <h2 class="mat-h2 margin-top-m margin-bottom-xs" i18n>Share With</h2>
+      <ws-widget-user-autocomplete class="block" (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
+      <mat-form-field class="text-area w-full">
+        <textarea matInput [attr.name]="'user-search-input-playlist-create'" formControlName="message" i18n-placeholder
+          placeholder="Your message..." rows="5" #txtBody></textarea>
+      </mat-form-field>
+    </ng-container>
+
     <div class="flex flex-row-reverse">
-      <button (click)="onFormSubmit()" type="button" [disabled]="createPlaylistStatus === 'fetching'" mat-raised-button
-        color="primary">
+      <button name="create-button-playlist-create" (click)="onFormSubmit()" type="button"
+        [disabled]="createPlaylistStatus === 'fetching'" mat-raised-button color="primary">
         <ng-container *ngIf="createPlaylistStatus === 'fetching'">Please Wait...</ng-container>
-        <ng-container *ngIf="createPlaylistStatus !== 'fetching'">CREATE</ng-container>
+        <ng-container *ngIf="createPlaylistStatus !== 'fetching'">Create</ng-container>
       </button>
     </div>
   </form>

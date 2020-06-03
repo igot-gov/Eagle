@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { Observable, of } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
 import { map, catchError } from 'rxjs/operators'
 import { IResolveResponse } from '@ws-widget/utils'
+import { UtilityService } from '../services/utility.service'
 import { ConfigurationsService } from '../services/configurations.service'
 
 @Injectable({
@@ -19,15 +17,18 @@ export class ExploreDetailResolve
   | IResolveResponse<any>
   > {
   private baseUrl = this.configSvc.sitePath
+  isIntranetAllowedSettings = false
   constructor(
     private http: HttpClient,
     private configSvc: ConfigurationsService,
+    private utilitySvc: UtilityService,
   ) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<any>> {
+    this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
     const tag = decodeURIComponent(route.params.tags)
     let url = ''
     if (route.data.pageUrl) {
@@ -63,18 +64,23 @@ export class ExploreDetailResolve
 
       if (widget.widgetSubType === 'contentStripMultiple') {
         widget.widgetData.strips = widget.widgetData.strips.map((strip: any) => {
-          strip.request.search.filters.catalogPaths = [tag]
+          strip.request.searchV6.filters[0].andFilters.push({ catalogPaths: [tag] })
+          if (this.utilitySvc.isMobile && !this.isIntranetAllowedSettings) {
+            strip.request.searchV6.filters[0].andFilters.push({ isInIntranet: ['false'] })
+          }
           return strip
         })
         if (widget.widgetData.noDataWidget && widget.widgetData.noDataWidget.widgetData.strips) {
           widget.widgetData.noDataWidget.widgetData.strips = widget.widgetData.noDataWidget.widgetData.strips.map((strip: any) => {
-            strip.request.search.filters.catalogPaths = [tag]
+            strip.request.searchV6.filters[0].andFilters.push({ catalogPaths: [tag] })
+            if (this.utilitySvc.isMobile && !this.isIntranetAllowedSettings) {
+              strip.request.searchV6.filters[0].andFilters.push({ isInIntranet: ['false'] })
+            }
             return strip
           })
         }
 
       }
-
       return widget
     })
 

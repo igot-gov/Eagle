@@ -1,29 +1,10 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<button
-  mat-icon-button
-  i18n-aria-label
-  aria-label="Share Content"
-  i18n-matTooltip
-  matTooltip="Share Content"
-  *ngIf="widgetData && !showText"
-  (click)="shareContent()"
-  [disabled]="isDisabled"
->
+<button name="content-share-button"  mat-icon-button i18n-aria-label aria-label="Share Content" i18n-matTooltip matTooltip="Share Content" *ngIf="isShareEnabled && widgetData && !showText && showBtn"
+  (click)="shareContent()" [disabled]="isDisabled">
   <mat-icon>share</mat-icon>
 </button>
 
-<button
-  mat-button
-  i18n-aria-label
-  aria-label="Share Content"
-  i18n-matTooltip
-  matTooltip="Share Content"
-  *ngIf="widgetData && showText"
-  (click)="shareContent()"
-  [disabled]="isDisabled"
->
+<button name="content-share-button" mat-button i18n-aria-label aria-label="Share Content" i18n-matTooltip matTooltip="Share Content" *ngIf="isShareEnabled && widgetData && showText && showBtn"
+  (click)="shareContent()" [disabled]="isDisabled">
   <mat-icon class="mr-2">share</mat-icon>
   <span class="text-base font-normal">Share</span>
 </button>

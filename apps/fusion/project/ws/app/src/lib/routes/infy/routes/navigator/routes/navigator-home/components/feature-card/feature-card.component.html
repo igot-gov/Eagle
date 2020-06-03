@@ -1,8 +1,8 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<a [routerLink]="url">
-  <mat-card class="feature-container position-relative  ws-mat-primary-border-top-bolder">
+<mat-card
+  class="feature-container position-relative  ws-mat-primary-border-top-bolder"
+  [ngClass]="{ disable: !active }"
+>
+  <a [routerLink]="url" [queryParams]="{ id: groupId }">
     <div class="card-header ws-mat-primary-background"></div>
     <div class="flex height-1-1">
       <div class="width-1-1 text-left">
@@ -15,5 +15,5 @@
         <p class="margin-remove card-txt mat-subheading-1 text-bold">{{ description }}</p>
       </div>
     </div>
-  </mat-card>
-</a>
+  </a>
+</mat-card>

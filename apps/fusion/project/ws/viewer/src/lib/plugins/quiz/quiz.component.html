@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <viewer-overview *ngIf="viewState === 'initial'" [learningObjective]="learningObjective"
   [complexityLevel]="complexityLevel" [duration]="duration" [timeLimit]="quizJson?.timeLimit"
   [noOfQuestions]="quizJson?.questions?.length" (userSelection)="overViewed($event)"></viewer-overview>
@@ -8,7 +5,7 @@
 <div #quizContainer *ngIf="viewState !== 'initial'" class="quiz-container">
   <nav class="quiz-nav-bar mat-toolbar mat-caption">
     <span>
-      <button mat-icon-button (click)="sidenav.toggle()">
+      <button mat-icon-button aria-label="menu toggle" i18n-aria-label (click)="sidenav.toggle()">
         <mat-icon aria-label="open questions navigation">menu</mat-icon>
       </button>
       <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"

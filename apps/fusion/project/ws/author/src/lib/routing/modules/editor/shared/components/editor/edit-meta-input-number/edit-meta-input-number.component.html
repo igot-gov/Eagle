@@ -1,0 +1,33 @@
+<div class="margin-top-xs" [ngClass]="{ disable: isDisabled }">
+  <p class="font-weight-bold margin-remove-bottom" [ngClass]="{ required: isMandatory}">
+    <ng-container *ngIf="!tenantDisplayName">
+
+    </ng-container>
+
+    {{tenantDisplayName | titlecase}}
+  </p>
+
+
+  <mat-form-field appearance="outline" class="margin-top-xs w-full" [ngClass]="{ 'mat-form-field-invalid': errorMessage }">
+    <input #name type="number" [formControl]="metaContentCtrl" matInput [placeholder]="tenantPlaceholder" [required]="isMandatory ? true : null"
+      [max]="textMaxValue" [min]="textMinValue" />
+    <!-- <mat-hint align="end" *ngIf="textMaxValue">{{ name.value.length }} / {{textMaxValue}}</mat-hint> -->
+    <mat-error *ngIf="errorMessage">
+      <ng-container *ngIf="!tenantDisplayName">
+        <ng-container *ngIf="metaName===''">
+
+        </ng-container>
+      </ng-container>
+      {{tenantDisplayName | titlecase}}
+      <ng-container i18n *ngIf="errorMessage==='empty'">is mandatory</ng-container>
+      <ng-container *ngIf="errorMessage==='minValue'">
+        <ng-container i18n>must have atleast</ng-container>&nbsp; {{textMinValue}} &nbsp;
+        <ng-container i18n *ngIf="errorMessage==='minLength'">characters</ng-container>
+      </ng-container>
+      <ng-container *ngIf="errorMessage==='maxLength'">
+        <ng-container i18n>can have maximum of </ng-container>&nbsp; {{textMaxValue}}
+        <ng-container i18n>characters</ng-container>
+      </ng-container>
+    </mat-error>
+  </mat-form-field>
+</div>

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Request, Response, Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -8,7 +5,7 @@ import {
   IFeedback,
   IFeedbackSearch,
   IFeedbackSearchQuery,
-  IFeedbackSubmit
+  IFeedbackSubmit,
 } from '../../models/feedback.model'
 import { CONSTANTS } from '../../utils/env'
 import { ERROR } from '../../utils/message'
@@ -16,8 +13,10 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 export const feedbackV2Api = Router()
 
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
+
 const apiEndpoints = {
-  feedback: `${CONSTANTS.SB_EXT_API_BASE_2}/v1`,
+  feedback: `${CONSTANTS.FEEDBACK_API_BASE}/v1`,
 }
 
 // Middleware function for content request and service request submission
@@ -46,21 +45,19 @@ const sendSentimentNeutralFeedback = async (req: Request, res: Response) => {
       body.category = feedback.category
     }
 
-    const response = await axios.post(
-      `${apiEndpoints.feedback}/feedback/submit`,
-      body,
-      {
-        ...axiosRequestConfig,
-        headers: { rootOrg },
-        params: { role: feedback.role },
-      }
-    )
+    const response = await axios.post(`${apiEndpoints.feedback}/feedback/submit`, body, {
+      ...axiosRequestConfig,
+      headers: { rootOrg },
+      params: { role: feedback.role },
+    })
 
     return res.send(response.data)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 }
 
@@ -90,68 +87,65 @@ feedbackV2Api.post('/platform', async (req: Request, res: Response) => {
       body.category = feedback.category
     }
 
-    const response = await axios.post(
-      `${apiEndpoints.feedback}/feedback/submit`,
-      body,
-      {
-        ...axiosRequestConfig,
-        headers: { rootOrg },
-        params: { role: feedback.role },
-      }
-    )
+    const response = await axios.post(`${apiEndpoints.feedback}/feedback/submit`, body, {
+      ...axiosRequestConfig,
+      headers: { rootOrg },
+      params: { role: feedback.role },
+    })
     return res.send(response.data)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
 // Submit content feedback
-feedbackV2Api.post(
-  '/content/:contentId',
-  async (req: Request, res: Response) => {
-    try {
-      const rootOrg = req.header('rootOrg')
-      if (!rootOrg) {
-        return res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
-      }
-
-      const { contentId } = req.params
-      const uuid = extractUserIdFromRequest(req)
-      const feedback = req.body as IFeedback
-
-      const body: IFeedbackSubmit = {
-        content_id: contentId,
-        text: feedback.text,
-        type: feedback.type,
-        user_id: uuid,
-      }
-
-      if (feedback.rootFeedbackId) {
-        body.rootFeedbackId = feedback.rootFeedbackId
-      }
-
-      if (feedback.sentiment) {
-        body.sentiment = feedback.sentiment
-      }
-
-      const response = await axios
-        .post(`${apiEndpoints.feedback}/feedback/submit`, body, {
-          ...axiosRequestConfig,
-          headers: { rootOrg },
-          params: { role: feedback.role },
-        })
-        .then((resp) => resp.data)
-
-      return res.send(response)
-    } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 500)
-        .send(err)
+feedbackV2Api.post('/content/:contentId', async (req: Request, res: Response) => {
+  try {
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      return res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
     }
+
+    const { contentId } = req.params
+    const uuid = extractUserIdFromRequest(req)
+    const feedback = req.body as IFeedback
+
+    const body: IFeedbackSubmit = {
+      content_id: contentId,
+      text: feedback.text,
+      type: feedback.type,
+      user_id: uuid,
+    }
+
+    if (feedback.rootFeedbackId) {
+      body.rootFeedbackId = feedback.rootFeedbackId
+    }
+
+    if (feedback.sentiment) {
+      body.sentiment = feedback.sentiment
+    }
+
+    const response = await axios
+      .post(`${apiEndpoints.feedback}/feedback/submit`, body, {
+        ...axiosRequestConfig,
+        headers: { rootOrg },
+        params: { role: feedback.role },
+      })
+      .then((resp) => resp.data)
+
+    return res.send(response)
+  } catch (err) {
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
-)
+})
 
 // Submit content request
 feedbackV2Api.post('/content-request', sendSentimentNeutralFeedback)
@@ -177,9 +171,11 @@ feedbackV2Api.get('/feedback-summary', async (req: Request, res: Response) => {
 
     return res.send(feedbackSummary)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -212,9 +208,11 @@ feedbackV2Api.post('/search', async (req: Request, res: Response) => {
 
     return res.send(searchResults)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -237,9 +235,11 @@ feedbackV2Api.get('/:feedbackId', async (req: Request, res: Response) => {
 
     return res.send(feedbackThread)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -257,18 +257,19 @@ feedbackV2Api.patch('/:feedbackId', async (req: Request, res: Response) => {
     const uuid = extractUserIdFromRequest(req)
 
     const response = await axios
-      .patch(
-        `${apiEndpoints.feedback}/users/${uuid}/feedback/${feedbackId}`,
-        req.body,
-        { headers: { rootOrg }, params: { category } }
-      )
+      .patch(`${apiEndpoints.feedback}/users/${uuid}/feedback/${feedbackId}`, req.body, {
+        headers: { rootOrg },
+        params: { category },
+      })
       .then((resp) => resp.data)
 
     return res.send(response)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -288,8 +289,10 @@ feedbackV2Api.get('/categories', async (req: Request, res: Response) => {
 
     return res.send(feedbackConfig)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

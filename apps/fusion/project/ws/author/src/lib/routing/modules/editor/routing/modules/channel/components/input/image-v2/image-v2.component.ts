@@ -1,11 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
 import { IWidgetElementHtml } from '@ws-widget/collection'
-import { AUTHORING_CONTENT_BASE, CONTENT_BASE_WEBHOST_ASSETS } from '@ws/author/src/lib/constants/apiEndpoints'
+import {
+  AUTHORING_CONTENT_BASE,
+  CONTENT_BASE_WEBHOST_ASSETS,
+} from '@ws/author/src/lib/constants/apiEndpoints'
 import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -29,15 +29,14 @@ export class ImageV2Component implements OnChanges {
   minWidth = 331
   form!: FormGroup
   canShow: string[] = []
-  previewCard: string[] = [
-  ]
+  previewCard: string[] = []
 
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private loader: LoaderService,
     private uploadService: UploadService,
-  ) { }
+  ) {}
 
   generateForm() {
     this.form = this.formBuilder.group({
@@ -56,18 +55,27 @@ export class ImageV2Component implements OnChanges {
       next: () => {
         this.content.type = this.form.value.type
         const widgetArray = (this.content.containerClass || '').split(' ')
-        if (!this.content.containerClass) {
-          widgetArray.push('mat-elevation-z1')
-        } else if (this.content.containerClass.indexOf('mat-elevation-z1') < 0) {
-          widgetArray.push('mat-elevation-z1')
-        }
+        // if (!this.content.containerClass) {
+        //   widgetArray.push('mat-elevation-z1')
+        // } else if (this.content.containerClass.indexOf('mat-elevation-z1') < 0) {
+        //   widgetArray.push('mat-elevation-z1')
+        // }
         this.content.containerClass = widgetArray.join(' ')
         this.content.html = ''
         this.content.template = TEMPLATE_TYPES[this.form.value.type as keyof typeof TEMPLATE_TYPES]
         this.content.templateData = { ...this.form.value }
+        this.changeAnchorTagData(this.content.templateData)
         delete this.content.templateData.type
         delete this.content.templateData.template
-        this.removeShadowFromTitle()
+        if (this.form.value.type === 'text') {
+          if (!this.content.templateData.link) {
+            const htmlText = this.removeAnchorTag(this.content.template)
+            if (htmlText) {
+              this.content.template = htmlText
+            }
+          }
+        }
+        // this.removeShadowFromTitle()
         this.data.emit({
           content: this.form.value,
           isValid: this.form.valid,
@@ -75,6 +83,24 @@ export class ImageV2Component implements OnChanges {
       },
     })
     this.form.controls.type.valueChanges.subscribe(() => this.onSetChange())
+  }
+
+  removeAnchorTag(value: string): string | null {
+    const el = document.createElement('html')
+    el.innerHTML = value
+    el.getElementsByTagName('a')[0].outerHTML = el.getElementsByTagName('a')[0].innerHTML
+    return el.innerHTML
+  }
+
+  changeAnchorTagData(value: any) {
+    if (
+      value.link.toString().indexOf(this.identifier) > -1 &&
+      value.link.toString().indexOf('#') > -1
+    ) {
+      if (value.link.toString().indexOf('./page/') < 0) {
+        value.link = `./page/${this.identifier}#${value.link.split('#')[1]}`
+      }
+    }
   }
 
   ngOnChanges() {
@@ -128,6 +154,7 @@ export class ImageV2Component implements OnChanges {
         break
       case 'title':
         this.canShow = ['name']
+        // this.addClass()
         break
       case 'text':
         this.canShow = ['name', 'description', 'link']
@@ -135,21 +162,13 @@ export class ImageV2Component implements OnChanges {
       default:
         this.canShow = ['image']
     }
-
   }
 
-  removeShadowFromTitle() {
-    if (this.canShow.length === 1 && this.canShow[0] === 'name') {
-      const widgetArray = (this.content.containerClass || '').split(' ')
-      if (
-        this.content.containerClass &&
-        this.content.containerClass.indexOf('mat-elevation-z1') > -1
-      ) {
-        widgetArray.splice(widgetArray.indexOf('mat-elevation-z1'), 1)
-      }
-      this.content.containerClass = widgetArray.join(' ')
-    }
-  }
+  // addClass() {
+  //   const widgetArray = (this.content.containerClass || '').split(' ')
+  //   widgetArray.push('-mb-12')
+  //   this.content.containerClass = widgetArray.join(' ')
+  // }
 
   upload(file: File) {
     const formdata = new FormData()
@@ -184,10 +203,7 @@ export class ImageV2Component implements OnChanges {
             this.loader.changeLoad.next(false)
             this.form.controls.imageSrc.setValue(
               `${AUTHORING_CONTENT_BASE}${encodeURIComponent(
-                `/${data.artifactURL
-                  .split('/')
-                  .slice(3)
-                  .join('/')}`,
+                `/${data.artifactURL.split('/').slice(3).join('/')}`,
               )}`,
             )
             this.snackBar.openFromComponent(NotificationComponent, {
@@ -228,5 +244,4 @@ export class ImageV2Component implements OnChanges {
       this.content.containerClass = widgetArray.join(' ')
     }
   }
-
 }

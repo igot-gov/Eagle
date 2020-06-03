@@ -1,19 +1,20 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar [color]="primaryNavbarBackground?.color" [ngStyle]="primaryNavbarBackground?.styles" class="mat-elevation-z3">
+<mat-toolbar [hidden]="!showAppNavBar" [color]="primaryNavbarBackground?.color"
+  [ngStyle]="primaryNavbarBackground?.styles" class="mat-elevation-z3">
   <ng-container *ngIf="mode === 'top'">
-    <a mat-button routerLink="/page/home" [color]="'primary'" i18n-matTooltip matTooltip="Home">
+    <a routerLink="/page/home" i18n-matTooltip matTooltip="Home" name="applicationLogo" class="logo-dim">
       <img [src]="appIcon" alt="Application Logo" class="app-logo" />
     </a>
     <ng-container *ngIf="primaryNavbarConfig?.mediumScreen">
-      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }" *ngFor="let item of primaryNavbarConfig?.mediumScreen?.left">
+      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+        *ngFor="let item of primaryNavbarConfig?.mediumScreen?.left">
       </ng-container>
       <span class="spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="helpMenu" *ngIf="!isHelpMenuRestricted">
+      <button i18n-aria-label aria-label="Help" class="home-help" name="helpIconHomePage" mat-icon-button id='helper'
+        [matMenuTriggerFor]="helpMenu" *ngIf="!isHelpMenuRestricted">
         <mat-icon>help_outline</mat-icon>
       </button>
-      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }" *ngFor="let item of primaryNavbarConfig?.mediumScreen?.right">
+      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+        *ngFor="let item of primaryNavbarConfig?.mediumScreen?.right">
       </ng-container>
       <div class="mat-icon-button pipe-icon">
         |
@@ -23,20 +24,24 @@
   </ng-container>
   <div class="flex justify-between items-center w-full" *ngIf="mode === 'bottom'">
     <ng-container *ngIf="primaryNavbarConfig?.smallScreen">
-      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }" *ngFor="let item of primaryNavbarConfig?.smallScreen?.left">
+      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+        *ngFor="let item of primaryNavbarConfig?.smallScreen?.left">
       </ng-container>
     </ng-container>
-    <a role="button" matRipple class="flex items-center flex-col px-2 box-sizing-box" routerLink="/page/home" routerLinkActive="mat-error">
+    <a role="button" matRipple class="flex items-center flex-col px-2 box-sizing-box" routerLink="/page/home" active
+      routerLinkActive="ws-mat-accent-text">
       <ng-container *ngIf="!appBottomIcon">
         <mat-icon>home</mat-icon>
-        <span class="mat-caption">Home</span>
+
+        <span [ngClass]="instanceVal === 'Ford' ? 'title font-sans' : 'mat-caption'">Home</span>
       </ng-container>
       <ng-container *ngIf="appBottomIcon">
         <img width="40px" height="40px" [src]="appBottomIcon" i18n-alt alt="Home" />
       </ng-container>
     </a>
     <ng-container *ngIf="primaryNavbarConfig?.smallScreen">
-      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }" *ngFor="let item of primaryNavbarConfig?.smallScreen?.right">
+      <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+        *ngFor="let item of primaryNavbarConfig?.smallScreen?.right">
       </ng-container>
     </ng-container>
     <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
@@ -45,36 +50,47 @@
 
 <ng-template #navbarSide let-item="item">
   <ng-container *ngIf="item.type === 'widgetButton'" [wsResolverWidget]="item.config"></ng-container>
-  <ws-widget-btn-feature *ngIf="item.type === 'featureButton'" [widgetData]="item.config"></ws-widget-btn-feature>
+  <ws-widget-btn-feature *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
+    [showFixedLength]="true">dfnj</ws-widget-btn-feature>
 </ng-template>
 
-<mat-menu #helpMenu="matMenu">
-  <ws-widget-btn-feature [widgetData]="{
-      actionBtnId: 'feature_aboutUs',
-      config: {
-        type: 'mat-menu-item'
-      }
-    }"></ws-widget-btn-feature>
-  <ws-widget-btn-feature [widgetData]="{
-      actionBtnId: 'channel_how_to',
-      config: {
-        type: 'mat-menu-item'
-      }
-    }"></ws-widget-btn-feature>
-  <ws-widget-btn-feature [widgetData]="{
-      actionBtnId: 'feature_FAQs',
-      config: {
-        type: 'mat-menu-item'
-      }
-    }"></ws-widget-btn-feature>
-  <ws-widget-btn-feature [widgetData]="{
-      actionBtnId: 'feature_quickTour',
-      config: {
-        type: 'mat-menu-item'
-      }
-    }"></ws-widget-btn-feature>
-  <div class="tourGuideBtn" *ngIf="isTourGuideAvailable" (click)="startTour()">
-    <mat-icon>help</mat-icon>
-    <span>Tour Guide</span>
+<mat-menu aria-label="helpMenu" #helpMenu="matMenu" name="helpOptionsListContainerHomePage">
+  <div mat-menu-item class="padding-remove" *ngIf="featureApps.indexOf('feature_aboutUs') > -1">
+    <ws-widget-btn-feature [widgetData]="{
+          actionBtnId: 'feature_aboutUs',
+          config: {
+            type: 'mat-menu-item'
+          }
+        }"></ws-widget-btn-feature>
   </div>
+  <div mat-menu-item class="padding-remove" *ngIf="featureApps.indexOf('channel_how_to') > -1">
+    <ws-widget-btn-feature [widgetData]="{
+          actionBtnId: 'channel_how_to',
+          config: {
+            type: 'mat-menu-item'
+          }
+        }"></ws-widget-btn-feature>
+  </div>
+  <div mat-menu-item class="padding-remove" *ngIf="featureApps.indexOf('feature_FAQs') > -1">
+    <ws-widget-btn-feature [widgetData]="{
+          actionBtnId: 'feature_FAQs',
+          config: {
+            type: 'mat-menu-item'
+          }
+        }"></ws-widget-btn-feature>
+  </div>
+  <div mat-menu-item class="padding-remove" *ngIf="featureApps.indexOf('feature_quickTour') > -1">
+    <ws-widget-btn-feature [widgetData]="{
+          actionBtnId: 'feature_quickTour',
+          config: {
+            type: 'mat-menu-item'
+          }
+        }"></ws-widget-btn-feature>
+
+  </div>
+  <div mat-menu-item *ngIf="isTourGuideAvailable" (click)="startTour()">
+    <mat-icon>contact_support</mat-icon>
+    <span class="ml-2" i18n>Tour Guide</span>
+  </div>
+
 </mat-menu>

@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, Input } from '@angular/core'
-import { MatPaginator, MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material'
+import { Component, Input, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { ResourceCollectionService } from './resource-collection.service'
+import { MatDialog, MatPaginator, MatSnackBar, MatTableDataSource } from '@angular/material'
 import { NsContent } from '@ws-widget/collection'
 import { ViewSubmissionComponent } from './components/view-submission/view-submission.component'
+import { ResourceCollectionService } from './resource-collection.service'
 
 @Component({
   selector: 'viewer-plugin-resource-collection',
@@ -19,7 +16,6 @@ export class ResourceCollectionComponent implements OnInit {
   @Input() resourceCollectionData!: NsContent.IContent
   dialogHeight = 'auto'
   submissionData: any[] = []
-  noData = false
   dataSource = new MatTableDataSource(this.submissionData)
   currentTabIndex = 0
   index = 0
@@ -66,7 +62,18 @@ export class ResourceCollectionComponent implements OnInit {
     this.submitData.value = 25
     if (this.currentTabIndex === 1) {
       if (this.selectedFile) {
-        this.createContentDirectory(this.selectedFile)
+        if ((this.selectedFile.type === 'application/pdf') || (this.selectedFile.type === 'video/mp4')) {
+          this.createContentDirectory(this.selectedFile)
+        } else {
+          this.fetchingStatus = 'fetched'
+          this.submitData.isSubmit = false
+          this.snackBar.open('Invalid File Type', undefined, {
+            duration: 1000,
+          })
+          this.reset()
+
+        }
+
       } else {
         this.fetchingStatus = 'fetched'
         this.submitData.isSubmit = false
@@ -96,6 +103,7 @@ export class ResourceCollectionComponent implements OnInit {
   }
 
   uploadFile(file: File) {
+
     const date = new Date()
     // tslint:disable-next-line: max-line-length
     const fileName = `Submission_${date.getFullYear()}${String(Number(date.getMonth()) + 1)}${date.getDate()}${date.getHours()}${date.getMinutes()}${date.getMilliseconds()}${this.supportedFormatsHash[file.type ? file.type : 'input']}`
@@ -125,15 +133,20 @@ export class ResourceCollectionComponent implements OnInit {
             },
             _err => {
               this.submitData.isSubmit = false
+              this.fetchingStatus = 'fetched'
               this.submitData.value = 0
               this.message = 'Error submitting file'
               this.openSnackBar(this.message)
+
             })
         }
       },
       _err => {
+        this.submitData.isSubmit = false
+        this.fetchingStatus = 'fetched'
         this.message = 'Error uploading file'
         this.openSnackBar(this.message)
+
       })
 
   }
@@ -183,7 +196,7 @@ export class ResourceCollectionComponent implements OnInit {
     this.fetchingStatus = 'fetching'
     this.resourceSvc.getAllSubmission(this.type, this.resourceCollectionData.identifier).subscribe((data: any) => {
       if (data.response.length === 0) {
-        this.noData = true
+        this.fetchingStatus = 'fetched'
       } else {
         this.submissionData = data.response
         this.dataSource = new MatTableDataSource(this.submissionData)

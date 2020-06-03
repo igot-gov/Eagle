@@ -1,14 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Inject } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material'
-import { NsContent } from '../../_services/widget-content.model'
-import { ENTER, COMMA, SEMICOLON } from '@angular/cdk/keycodes'
-import { WidgetContentShareService } from '../../_services/widget-content-share.service'
+import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes'
+import { Component, Inject, OnInit } from '@angular/core'
+import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
+import { ConfigurationsService, EInstance, EventService } from '@ws-widget/utils'
 import { NsAutoComplete } from '../../_common/user-autocomplete/user-autocomplete.model'
+import { WidgetContentShareService } from '../../_services/widget-content-share.service'
+import { NsContent } from '../../_services/widget-content.model'
 import { NsShare } from '../../_services/widget-share.model'
-import { ConfigurationsService, EventService, EInstance } from '@ws-widget/utils'
+import { ICommon } from '../../_models/common.model'
 
 @Component({
   selector: 'ws-widget-btn-content-share-dialog',
@@ -16,17 +14,13 @@ import { ConfigurationsService, EventService, EInstance } from '@ws-widget/utils
   styleUrls: ['./btn-content-share-dialog.component.scss'],
 })
 export class BtnContentShareDialogComponent implements OnInit {
-
   readonly separatorKeysCodes: number[] = [ENTER, COMMA, SEMICOLON]
   users: NsAutoComplete.IUserAutoComplete[] = []
   errorType: 'NoDomain' | 'InvalidDomain' | 'None' = 'None'
   sendInProgress = false
-  sendStatus:
-    | 'INVALID_IDS_ALL'
-    | 'SUCCESS'
-    | 'INVALID_ID_SOME'
-    | 'ANY'
-    | 'NONE' = 'NONE'
+  message = ''
+  isSocialMediaShareEnabled = false
+  sendStatus: 'INVALID_IDS_ALL' | 'SUCCESS' | 'INVALID_ID_SOME' | 'ANY' | 'NONE' = 'NONE'
   constructor(
     private events: EventService,
     private snackBar: MatSnackBar,
@@ -34,9 +28,24 @@ export class BtnContentShareDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { content: NsContent.IContent },
     private shareSvc: WidgetContentShareService,
     private configSvc: ConfigurationsService,
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.shareSvc.fetchConfigFile().subscribe((data: ICommon) => {
+      if (data && data.shareMessage) {
+        this.message = data.shareMessage
+      } else {
+        this.message = 'I want to share this artifact I found.'
+      }
+    })
+
+    if (this.configSvc.restrictedFeatures) {
+      this.isSocialMediaShareEnabled =
+        !this.configSvc.restrictedFeatures.has('socialMediaFacebookShare') ||
+        !this.configSvc.restrictedFeatures.has('socialMediaLinkedinShare') ||
+        !this.configSvc.restrictedFeatures.has('socialMediaTwitterShare')
+    }
+  }
 
   updateUsers(users: NsAutoComplete.IUserAutoComplete[]) {
     if (Array.isArray(users)) {
@@ -112,6 +121,7 @@ export class BtnContentShareDialogComponent implements OnInit {
   }
 
   get detailUrl() {
+    // let locationOrigin = environment.sitePath ? `https://${environment.sitePath}` : location.origin
     let locationOrigin = location.origin
     if (this.configSvc.activeLocale && this.configSvc.activeLocale.path) {
       locationOrigin += `/${this.configSvc.activeLocale.path}`
@@ -122,7 +132,7 @@ export class BtnContentShareDialogComponent implements OnInit {
       case NsContent.EContentTypes.KNOWLEDGE_BOARD:
         return `${locationOrigin}/app/knowledge-board/${this.data.content.identifier}`
       case NsContent.EContentTypes.KNOWLEDGE_ARTIFACT:
-path
+        if (this.configSvc.rootOrg === EInstance.PATHFINDERS) {
           return `${locationOrigin}/app/toc/knowledge-artifact/${this.data.content.identifier}`
         }
         return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview`
@@ -132,13 +142,9 @@ path
   }
 
   raiseTelemetry() {
-    this.events.raiseInteractTelemetry(
-      'share',
-      'content',
-      {
-        contentId: this.data.content.identifier,
-        contentType: this.data.content.contentType,
-      },
-    )
+    this.events.raiseInteractTelemetry('share', 'content', {
+      contentId: this.data.content.identifier,
+      contentType: this.data.content.contentType,
+    })
   }
 }

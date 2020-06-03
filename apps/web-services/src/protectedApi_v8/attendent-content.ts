@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
@@ -10,11 +7,11 @@ import { extractUserIdFromRequest } from '../utils/requestExtract'
 
 const API_END_POINTS = {
   attendedCourses: (userId: string, sourceFields?: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/attended-content?source_fields=${sourceFields}`,
+    `${CONSTANTS.ATTENDANCE_API_BASE}/v1/users/${userId}/attended-content?source_fields=${sourceFields}`,
   attendedUsers: (contentId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content/${contentId}/attended-users`,
+    `${CONSTANTS.ATTENDANCE_API_BASE}/v1/content/${contentId}/attended-users`,
   verifyAttendedUsers: (userId: string, contentIds: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/verify-attendence?content_id=${contentIds}`,
+    `${CONSTANTS.ATTENDANCE_API_BASE}/v1/users/${userId}/verify-attendence?content_id=${contentIds}`,
 }
 
 export const attendedContentApi = Router()

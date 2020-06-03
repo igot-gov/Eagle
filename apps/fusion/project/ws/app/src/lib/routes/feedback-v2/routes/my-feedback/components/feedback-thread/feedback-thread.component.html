@@ -1,16 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <section class="py-4 h-full container-balanced mx-auto px-4">
   <section class="w-full md:overflow-y-auto custom-scroll">
-    <ng-container
-      *ngIf="(threadFetchStatus === 'done' || threadFetchStatus === 'none') && feedbackThread"
-    >
+    <ng-container *ngIf="(threadFetchStatus === 'done' || threadFetchStatus === 'none') && feedbackThread">
       <section class="mb-4">
-        <ws-app-feedback-thread-header
-          [threadHead]="feedbackThread[0]"
-          [viewedBy]="viewedBy"
-        ></ws-app-feedback-thread-header>
+        <ws-app-feedback-thread-header [threadHead]="feedbackThread[0]" [viewedBy]="viewedBy">
+        </ws-app-feedback-thread-header>
       </section>
 
       <ul class="list-none p-0">
@@ -25,15 +18,8 @@
         <form [formGroup]="replyForm" (ngSubmit)="submitReply()">
           <div class="mat-body">
             <mat-form-field class="w-full">
-              <textarea
-                matInput
-                [matTextareaAutosize]
-                [matAutosizeMaxRows]="10"
-                [matAutosizeMinRows]="3"
-                formControlName="reply"
-                placeholder="Type your text here"
-                i18n-placeholder
-              ></textarea>
+              <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
+                formControlName="reply" placeholder="Type your text here" i18n-placeholder></textarea>
               <mat-hint i18n>
                 Limit to 2000 characters.
               </mat-hint>
@@ -44,22 +30,12 @@
           </div>
           <div class="mt-4 flex justify-end">
             <div class="mr-2">
-              <mat-progress-spinner
-                [color]="'primary'"
-                [diameter]="40"
-                [strokeWidth]="4"
-                [mode]="'indeterminate'"
-                *ngIf="sendStatus === 'sending'"
-              ></mat-progress-spinner>
+              <mat-progress-spinner [color]="'primary'" [diameter]="40" [strokeWidth]="4" [mode]="'indeterminate'"
+                *ngIf="sendStatus === 'sending'"></mat-progress-spinner>
             </div>
-            <button
-              mat-flat-button
-              color="primary"
-              type="submit"
-              [disabled]="replyForm.pristine || replyForm.invalid || sendStatus === 'sending'"
-            >
-              <ng-container i18n>Send</ng-container>
-              <mat-icon class="ml-1">send</mat-icon>
+            <button mat-flat-button color="primary" type="submit"
+              [disabled]="replyForm.pristine || replyForm.invalid || sendStatus === 'sending'">
+              <ng-container i18n>Submit</ng-container>
             </button>
           </div>
         </form>

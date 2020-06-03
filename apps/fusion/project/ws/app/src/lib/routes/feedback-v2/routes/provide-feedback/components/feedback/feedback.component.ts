@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
@@ -129,7 +126,7 @@ export class FeedbackComponent {
       .subscribe(
         () => {
           this.singleFeedbackSendStatus = 'done'
-path
+          if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.rootOrg === 'Siemens') {
             const req: INotificationRequest = {
               'event-id': 'platform_feedback',
               'tag-value-pair': {

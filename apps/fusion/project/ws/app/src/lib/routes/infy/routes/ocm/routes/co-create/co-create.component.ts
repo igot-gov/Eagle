@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
-import { MatSnackBar } from '@angular/material'
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
 import { NgForm } from '@angular/forms'
-import { IWsCoCreatorConfig, IWsContribution } from '../../models/ocm.model'
-import { IWsEmailTextRequest } from '../../models/co-create.model'
+import { MatSnackBar } from '@angular/material'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { IWsEmailTextRequest } from '../../models/co-create.model'
+import { IWsCoCreatorConfig, IWsContribution } from '../../models/ocm.model'
 import { OcmService } from '../../services/ocm.service'
 
 @Component({
@@ -25,12 +22,12 @@ export class CoCreateComponent implements OnInit {
   showAnwserInput = false
 
   mailRequest: {
-    type: string;
-    answer: string;
+    type: string
+    answer: string
   } = {
-    type: '',
-    answer: '',
-  }
+      type: '',
+      answer: '',
+    }
   userEmail: string | undefined
   userName: string | undefined
 
@@ -82,7 +79,7 @@ export class CoCreateComponent implements OnInit {
       appURL: location.host,
       subject: `Be a Co-Creator - '${this.mailRequest.type}`,
     }
-    // console.log.log('rrq', req)
+    // //console.log.log('rrq', req)
     this.ocmService.shareTextMail(req).subscribe(
       () => {
         form.resetForm()

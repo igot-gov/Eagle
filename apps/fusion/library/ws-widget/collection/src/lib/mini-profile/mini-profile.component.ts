@@ -1,13 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Inject } from '@angular/core'
 import { WidgetBaseComponent } from '@ws-widget/resolver'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { UserMiniProfileService } from './user-mini-profile.service'
 import { NsMiniProfile } from './mini-profile.model'
 import { WidgetContentService } from '../_services/widget-content.service'
-import { TFetchStatus } from '@ws-widget/utils'
+import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 // import { DomSanitizer } from @angular/platform-browser;
 import { NSSearch } from '../_services/widget-search.model'
 @Component({
@@ -25,9 +22,12 @@ export class MiniProfileComponent extends WidgetBaseComponent implements OnInit 
   resultsDisplayType: 'basic' | 'advanced' = 'advanced'
   emailId = ''
   userGroupDetails: any
+  defaultThumbnail = ''
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: string,
-              public userMiniProvileSvc: UserMiniProfileService, private contentSvc: WidgetContentService,
+              private configSvc: ConfigurationsService,
+              public userMiniProvileSvc: UserMiniProfileService,
+              private contentSvc: WidgetContentService,
   ) {
     super()
 
@@ -37,6 +37,10 @@ export class MiniProfileComponent extends WidgetBaseComponent implements OnInit 
     this.userProfileDetails(this.data)
     this.search(this.data)
     this.fetchUserGroupDetails(this.data)
+    const instanceConfig = this.configSvc.instanceConfig
+    if (instanceConfig) {
+      this.defaultThumbnail = instanceConfig.logos.defaultContent
+    }
 
   }
   fetchUserGroupDetails(userId: string) {
@@ -100,7 +104,7 @@ export class MiniProfileComponent extends WidgetBaseComponent implements OnInit 
       ],
       pageSize: 24,
       uuid: wid,
-path
+      rootOrg: 'Pathfinders',
     }
     this.contentSvc.search(req).subscribe(
       response => {

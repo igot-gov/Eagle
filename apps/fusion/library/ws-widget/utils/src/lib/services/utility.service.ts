@@ -1,16 +1,19 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Platform } from '@angular/cdk/platform'
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
+interface IWindowMobileAppModified extends Window {
+  appRef?: any
+  webkit?: any
+}
+declare var window: IWindowMobileAppModified
 
 const RANDOM_ID_PER_USER = 0
 interface IRecursiveData {
   identifier: string
   children: null | IRecursiveData[]
 }
+
 @Injectable({
   providedIn: 'root',
 })
@@ -75,5 +78,19 @@ export class UtilityService {
 
   get isAndroid(): boolean {
     return this.platform.ANDROID
+  }
+  get isAndroidApp(): boolean {
+    return Boolean(window.appRef)
+  }
+
+  get iOsAppRef() {
+    if (
+      window.webkit &&
+      window.webkit.messageHandlers &&
+      window.webkit.messageHandlers.appRef
+    ) {
+      return window.webkit.messageHandlers.appRef
+    }
+    return null
   }
 }

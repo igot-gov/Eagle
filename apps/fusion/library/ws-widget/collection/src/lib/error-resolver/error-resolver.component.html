@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container [ngSwitch]="widgetData?.errorType" *ngIf="widgetData?.errorData">
   <ws-widget-error-access-forbidden [errorData]="widgetData?.errorData" *ngSwitchCase="errorType.accessForbidden"></ws-widget-error-access-forbidden>
   <ws-widget-error-content-unavailable [errorData]="widgetData?.errorData" *ngSwitchCase="errorType.contentUnavailable"></ws-widget-error-content-unavailable>

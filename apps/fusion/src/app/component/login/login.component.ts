@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs'
 import { AuthKeycloakService, ConfigurationsService } from '@ws-widget/utils'
-import { IWSPublicLoginConfig, ILoginDescriptiveFooterConfig } from './login.model'
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
+import { Subscription } from 'rxjs'
+import { ILoginDescriptiveFooterConfig, IWSPublicLoginConfig } from './login.model'
 
 @Component({
   selector: 'ws-login',
@@ -14,6 +11,7 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  objectKeys = Object.keys
   productLogo = ''
   contactUs = false
   productLogoWidth: string | undefined = ''
@@ -70,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-path
+  login(key: 'E' | 'N' | 'S' | 'siemens-entitlement') {
     this.authSvc.login(key, this.redirectUrl)
   }
 }

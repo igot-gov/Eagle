@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsContent } from '../_services/widget-content.model'
 
 export namespace NsPlaylist {
@@ -46,24 +43,21 @@ export namespace NsPlaylist {
     sharedOn?: string
   }
 
-  export interface IPlaylistUpsertRequest {
-    id?: string
-    title: string
-    contentIds: string[]
-    changedContentIds: string[]
+  export interface IPlaylistCreateRequest {
+    playlist_title: string
+    content_ids: string[]
     shareWith?: string[]
     shareMsg?: string
-    editType: EPlaylistEditTypes
-    userAction: EPlaylistUserAction
     visibility: EPlaylistVisibilityTypes
   }
 
-  export interface IPlaylistShareRequest {
-    id: string
-    name: string
+  export interface IPlaylistUpsertRequest {
     contentIds: string[]
-    shareWith: string[]
-    shareMsg?: string
+  }
+
+  export interface IPlaylistShareRequest {
+    users: string[]
+    message?: string
   }
 
   export interface IBtnPlaylist {

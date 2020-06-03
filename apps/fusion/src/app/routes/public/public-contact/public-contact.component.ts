@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
@@ -14,7 +11,7 @@ import { ActivatedRoute } from '@angular/router'
 export class PublicContactComponent implements OnInit, OnDestroy {
   contactUsMail = ''
   contactPage: any
-path
+  platform = 'lex'
   panelOpenState = false
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   private subscriptionContact: Subscription | null = null

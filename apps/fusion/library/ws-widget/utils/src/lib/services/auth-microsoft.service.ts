@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { LoggerService } from './logger.service'
 import { NsInstanceConfig } from './configurations.model'
@@ -20,7 +17,7 @@ const API_ENDPOINTS = {
 })
 export class AuthMicrosoftService {
   private msConfig: NsInstanceConfig.IMicrosoft = {
-substitute based on requirement
+    clientId: '',
     tenant: '',
     defaultEmailId: '',
     validEmailExtensions: [],
@@ -38,14 +35,14 @@ substitute based on requirement
   constructor(private loggerSvc: LoggerService, private http: HttpClient) { }
 
   get isLogoutRequired(): boolean {
-substitute based on requirement
+    return Boolean(this.msConfig.isConfigured && this.msConfig.clientId && this.emailUsed)
   }
   get loginUrl(): string | null {
-substitute based on requirement
+    if (this.msConfig.isConfigured && this.msConfig.clientId) {
       const base = 'https://login.windows.net/common/oauth2/authorize'
       const searchParam = new URLSearchParams({
         response_type: 'code',
-substitute based on requirement
+        client_id: this.msConfig.clientId,
         redirect_uri: window.location.href,
       })
       const fragment = location.search.substring(1)

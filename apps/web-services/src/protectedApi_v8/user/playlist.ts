@@ -1,25 +1,26 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
-import { IContent } from '../../models/content.model'
 import { IPaginatedApiResponse } from '../../models/paginatedApi.model'
 import {
-  EPlaylistTypes,
+  EPlaylistUpsertTypes,
   IPlaylist,
+  IPlaylistCreateRequest,
+  IPlaylistParams,
   IPlaylistSbExtResponse,
   IPlaylistShareRequest,
   IPlaylistUpdateTitleRequest,
-  IPlaylistUpsertRequest,
-} from '../../models/playlist.model'
+  IPlaylistUpsertRequest
+  } from '../../models/playlist.model'
 import {
   transformToPlaylistV2,
+  transformToPlaylistV3,
+  transformToSbExtCreateRequest,
+  transformToSbExtDeleteRequest,
+  transformToSbExtSyncRequest,
   transformToSbExtUpdateRequest,
   transformToSbExtUpsertRequest
-} from '../../service/playlist'
-import { processContent } from '../../utils/contentHelpers'
+  } from '../../service/playlist'
 import { CONSTANTS } from '../../utils/env'
 import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
@@ -27,51 +28,70 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
   playlist: (userId: string, playlistId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE}/v1/users/${userId}/playlist/${playlistId}`,
-  playlistV2: (userId: string, playlistId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE}/v2/users/${userId}/playlist/${playlistId}`,
-  playlistV3: (userId: string, playlistId: string) =>
-    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/playlists/${playlistId}`,
-  playlists: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE}/v1/users/${userId}/playlist`,
-  playlistsV2: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE}/v2/users/${userId}/playlist`,
+    `${CONSTANTS.PLAYLIST_API_BASE}/v1/users/${userId}/playlist/${playlistId}`,
+  playlistV1: (userId: string) => `${CONSTANTS.PLAYLISTV1_API_BASE}/v1/users/${userId}`,
 }
 
-async function sharePlaylist(userId: string, request: IPlaylistShareRequest, rootOrg: string) {
-  return axios.post(
-    API_END_POINTS.playlistsV2(userId),
-    {
-      request: {
-        message: request.message,
-        playlist_id: request.id,
-        playlist_title: request.name,
-        resource_ids: request.contentIds,
-        shared_with: request.shareWith,
-      },
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
+
+async function sharePlaylist(
+  userId: string,
+  playlistId: string,
+  request: IPlaylistShareRequest,
+  rootOrg: string
+) {
+  /* for sharing a playlist with another user */
+  const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/share`
+  return axios({
+    ...axiosRequestConfig,
+    data: {
+      message: request.message,
+      users: request.users,
     },
-    { params: { type: 'share' }, ...axiosRequestConfig, headers: { rootOrg } }
-  )
+    headers: {
+      rootOrg,
+    },
+    method: 'POST',
+    url,
+  })
 }
 
-async function getPlaylistsAllTypes(userId: string, rootOrg: string) {
+async function getPlaylistsAllTypes(
+  userId: string,
+  rootOrg: string,
+  params: IPlaylistParams | null
+) {
+  /* function to get user, shared, and pending playlists*/
   try {
-    const userPlaylistsPromise = axios.get(
-      API_END_POINTS.playlistsV2(userId),
-      { ...axiosRequestConfig, params: { type: EPlaylistTypes.ME }, headers: { rootOrg } }
-    )
-    const pendingPlaylistsPromise = axios.get(
-      API_END_POINTS.playlistsV2(userId),
-      { ...axiosRequestConfig, params: { type: EPlaylistTypes.PENDING }, headers: { rootOrg } }
-    )
+    const playlistsPromise = await axios.get(
+      `${API_END_POINTS.playlistV1(userId)}/playlists`,
+      { ...axiosRequestConfig, headers: { rootOrg }, params }
+    ) /* get request to fetch user and shared playlists*/
 
-    const userPlaylists: IPlaylistSbExtResponse = (await userPlaylistsPromise).data
-    const pendingPlaylists: IPlaylistSbExtResponse = (await pendingPlaylistsPromise).data
+    const pendingPlaylistsPromise = await axios.get(
+      `${API_END_POINTS.playlistV1(userId)}/shared-playlist`,
+      { ...axiosRequestConfig, headers: { rootOrg }, params }
+    ) /* get request to fetch pending playlists awaiting acceptance or refusal*/
+    const playlists: IPlaylistSbExtResponse = {
+      result: {
+        response: playlistsPromise.data,
+      },
+    }
+    const pendingPlaylists: IPlaylistSbExtResponse = {
+      result: {
+        response: pendingPlaylistsPromise.data,
+      },
+    }
+    /* content.shared_by is null for user playlists */
     return {
       data: {
         pending: pendingPlaylists.result.response.map(transformToPlaylistV2),
-        share: userPlaylists.result.response.filter(
-          (playlist) => Boolean(playlist.shared_by)).map(transformToPlaylistV2),
-        user: userPlaylists.result.response.filter(
-          (playlist) => !Boolean(playlist.shared_by)).map(transformToPlaylistV2),
+        share: playlists.result.response
+          .filter((content) => content.shared_by)
+          .map(transformToPlaylistV2),
+        user: playlists.result.response
+          .filter((content) => !content.shared_by)
+          .map(transformToPlaylistV2),
       },
       error: undefined,
     }
@@ -81,22 +101,24 @@ async function getPlaylistsAllTypes(userId: string, rootOrg: string) {
 }
 
 export async function getPlaylist(userId: string, playlistId: string, rootOrg: string) {
-  const response = await axios.get(
-    API_END_POINTS.playlist(userId, playlistId),
-    { ...axiosRequestConfig, headers: { rootOrg } }
-  )
-  return transformToPlaylistV2(response.data)
+  const response = await axios.get(`${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}`, {
+    ...axiosRequestConfig,
+    headers: { rootOrg },
+  })
+  return transformToPlaylistV3(response.data, playlistId)
 }
 
-async function getPlaylists(userId: string, type: string, rootOrg: string): Promise<IPlaylist[]> {
-  const response = await axios.get(
-    API_END_POINTS.playlistsV2(userId),
-    {
-      ...axiosRequestConfig,
-      headers: { rootOrg },
-      params: { type },
-    })
-  const playlistSbExtResponse: IPlaylistSbExtResponse = response.data
+async function getPlaylists(userId: string, rootOrg: string): Promise<IPlaylist[]> {
+  /* get pending playlists */
+  const response = await axios.get(`${API_END_POINTS.playlistV1(userId)}/shared-playlist`, {
+    ...axiosRequestConfig,
+    headers: { rootOrg },
+  })
+  const playlistSbExtResponse: IPlaylistSbExtResponse = {
+    result: {
+      response: response.data,
+    },
+  }
   if (
     playlistSbExtResponse &&
     playlistSbExtResponse.result &&
@@ -111,34 +133,7 @@ async function getPlaylists(userId: string, type: string, rootOrg: string): Prom
 
 export const playlistApi = Router()
 
-playlistApi.get('/recent', async (req, res) => {
-  const userId = extractUserIdFromRequest(req)
-  try {
-    const rootOrg = req.header('rootOrg')
-    if (!rootOrg) {
-      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
-      return
-    }
-    const response = await axios.get(
-      API_END_POINTS.playlistsV2(userId),
-      {
-        ...axiosRequestConfig,
-        headers: { rootOrg },
-        params: { type: 'recent' },
-      })
-    const result: IPaginatedApiResponse = {
-      contents: ((response.data.result || {}).response || []).map((content: IContent) => processContent(content)),
-      hasMore: false,
-    }
-    res.send(result)
-  } catch (err) {
-    logError('RECENT PLAYLIST CONTENTS FETCH ERROR >', err)
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
-  }
-})
-
-playlistApi.get('/accept/:playlistId', async (req, res) => {
+playlistApi.get('/sync/:playlistId', async (req, res) => {
   const playlistId = req.params.playlistId
   const userId = extractUserIdFromRequest(req)
   try {
@@ -147,37 +142,166 @@ playlistApi.get('/accept/:playlistId', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const playlists = await getPlaylists(userId, 'share', rootOrg)
+
+    const response = await axios({
+      method: 'GET',
+      url: `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/sync-info`,
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+      },
+    })
+
+    const result = transformToSbExtSyncRequest(response.data)
+    const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/contents`
+
+    await axios({
+      ...axiosRequestConfig,
+      data: result,
+      headers: {
+        rootOrg,
+      },
+      method: 'POST',
+      url,
+    })
+    res.send(result.content)
+    return
+  } catch (err) {
+    logError('SYNC PLAYLIST ERROR >', err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
+
+playlistApi.get('/recent', async (req, res) => {
+  /* get recent contents added to any playlist */
+  const userId = extractUserIdFromRequest(req)
+  try {
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios({
+      method: 'GET',
+      url: `${API_END_POINTS.playlistV1(userId)}/playlist-contents`,
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+      },
+    })
+    const result: IPaginatedApiResponse = {
+      contents: response.data.recentContents,
+      hasMore: false,
+    }
+    res.send(result)
+  } catch (err) {
+    logError('RECENT PLAYLIST CONTENTS FETCH ERROR >', err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
+
+playlistApi.post('/accept/:playlistId', async (req, res) => {
+  /* accept a pending playlist */
+  const playlistId = req.params.playlistId
+  const userId = extractUserIdFromRequest(req)
+  try {
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const playlists = await getPlaylists(userId, rootOrg)
     const playlist = playlists.find((p: IPlaylist) => p.id === playlistId)
     if (playlist) {
-      const request = {
-        request: {
-          changed_resources: playlist.contents.map((content) => content.identifier),
-          isShared: 0,
-          playlist_title: playlist.name,
-          resource_ids: playlist.contents.map((content) => content.identifier),
-          shared_by: playlist.sharedBy,
-          source_playlist_id: playlist.id,
-          user_action: 'create',
+      const url = `${API_END_POINTS.playlistV1(userId)}/shared-playlists/${playlistId}/accept`
+      const response = await axios({
+        ...axiosRequestConfig,
+        data: {},
+        headers: {
+          rootOrg,
         },
-      }
-      const response = await axios.post(
-        `${API_END_POINTS.playlists(userId)}?type=copy`,
-        request,
-        { ...axiosRequestConfig, headers: { rootOrg } }
-      )
-      res.status(response.status).send(response.data)
+        method: 'POST',
+        url,
+      })
+
+      res.status(response.status).send(true)
       return
     }
 
     res.status(404).send()
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
+
+playlistApi.post('/reject/:playlistId', async (req, res) => {
+  /* axios request to reject a pending playlist */
+  const playlistId = req.params.playlistId
+  const userId = extractUserIdFromRequest(req)
+  try {
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const url = `${API_END_POINTS.playlistV1(userId)}/shared-playlists/${playlistId}/reject`
+    const response = await axios({
+      ...axiosRequestConfig,
+      data: {},
+      headers: {
+        rootOrg,
+      },
+      method: 'POST',
+      url,
+    })
+    res.status(response.status).send()
+    return
+  } catch (err) {
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
+
+playlistApi.post('/share/:playlistId', async (req, res) => {
+  /* post request to share a playlist with an user */
+  const userId = extractUserIdFromRequest(req)
+  try {
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const request = req.body
+    const playlistId = req.params.playlistId
+    const response = await sharePlaylist(userId, playlistId, request, rootOrg)
+    res.status(response.status).send()
+  } catch (err) {
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
 playlistApi.get('/:type/:playlistId', async (req, res) => {
+  /* get request to fetch details of a playlist by its playlistId */
+
   const userId = extractUserIdFromRequest(req)
   try {
     const rootOrg = req.header('rootOrg')
@@ -186,23 +310,28 @@ playlistApi.get('/:type/:playlistId', async (req, res) => {
       return
     }
     const { playlistId } = req.params
+    const params = req.query
     const response = await axios({
       method: 'GET',
-      url: API_END_POINTS.playlistV2(userId, playlistId),
+      url: `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}`,
       ...axiosRequestConfig,
       headers: {
         rootOrg,
       },
+      params,
     })
-
-    res.status(response.status).send(transformToPlaylistV2(response.data))
+    res.status(response.status).send(transformToPlaylistV3(response.data, playlistId))
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
 playlistApi.delete('/:playlistId', async (req, res) => {
+  /* axios request to delete an entire playlist */
   const userId = extractUserIdFromRequest(req)
   try {
     const rootOrg = req.header('rootOrg')
@@ -211,38 +340,50 @@ playlistApi.delete('/:playlistId', async (req, res) => {
       return
     }
     const playlistId = req.params.playlistId
-    const response = await axios.delete(
-      API_END_POINTS.playlist(userId, playlistId), { ...axiosRequestConfig, headers: { rootOrg } })
-    if (response.data.result.response === 'SUCCESS') {
-      res.status(response.status).send(true)
-    } else {
-      res.status(500).send(false)
-    }
+    const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}`
+    const response = await axios({
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+      },
+      method: 'DELETE',
+      url,
+    })
+    res.status(response.status).send(true)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
 playlistApi.get('/', async (req, res) => {
-  const userId = extractUserIdFromRequest(req)
+  /* get all playlists of an user */
+  const userId = req.query.wid || extractUserIdFromRequest(req)
   const rootOrg = req.header('rootOrg')
   if (!rootOrg) {
     res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
     return
   }
-  const allPlaylists = await getPlaylistsAllTypes(userId, rootOrg)
+  const params = req.query
+  const allPlaylists = await getPlaylistsAllTypes(userId, rootOrg, params)
 
   if (allPlaylists.error) {
     const err = allPlaylists.error
-    res.status(500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
     return
   }
   res.send(allPlaylists.data)
 })
 
 playlistApi.patch('/:playlistId', async (req, res) => {
+  /* Patch request to update the title of a playlist */
   const userId = extractUserIdFromRequest(req)
   try {
     const request: IPlaylistUpdateTitleRequest = req.body
@@ -252,7 +393,7 @@ playlistApi.patch('/:playlistId', async (req, res) => {
       return
     }
     const playlistId = req.params.playlistId
-    const url = API_END_POINTS.playlistV3(userId, playlistId)
+    const url = API_END_POINTS.playlistV1(userId)
     const response = await axios({
       ...axiosRequestConfig,
       data: transformToSbExtUpdateRequest(request),
@@ -260,16 +401,67 @@ playlistApi.patch('/:playlistId', async (req, res) => {
         rootOrg,
       },
       method: 'PATCH',
-      url,
+      url: `${url}/playlists/${playlistId}`,
     })
-    res.send(response.data)
+    res.status(response.status).send()
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
-playlistApi.post('/', async (req, res) => {
+playlistApi.post('/create', async (req, res) => {
+  /*Post request to create a playlist */
+
+  const userId = extractUserIdFromRequest(req)
+  try {
+    const request: IPlaylistCreateRequest = req.body
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const url = `${API_END_POINTS.playlistV1(userId)}/playlists`
+    const response = await axios({
+      ...axiosRequestConfig,
+      data: transformToSbExtCreateRequest(request),
+      headers: {
+        rootOrg,
+      },
+      method: 'POST',
+      url,
+    })
+    const userResponse = await getPlaylistsAllTypes(userId, rootOrg, null)
+    if (userResponse.data) {
+      const createdPlaylistId = userResponse.data.user[0].id
+      if (createdPlaylistId && request.shareWith && request.shareWith.length) {
+        const shareResponse = await sharePlaylist(
+          userId,
+          createdPlaylistId,
+          {
+            message: request.shareMsg,
+            users: request.shareWith,
+          },
+          rootOrg
+        )
+        res.status(shareResponse.status).send()
+      }
+    }
+    res.status(response.status).send()
+  } catch (err) {
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
+  }
+})
+
+playlistApi.post('/:playlistId/:type', async (req, res) => {
+  /*Post request add content or delete content from a playlist */
   const userId = extractUserIdFromRequest(req)
   try {
     const request: IPlaylistUpsertRequest = req.body
@@ -278,68 +470,48 @@ playlistApi.post('/', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
+    /* axios request to add/delete playlist content is done*/
+    const type = req.params.type
+    const playlistId = req.params.playlistId
+    const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/contents`
+    if (type === EPlaylistUpsertTypes.add) {
+      const response = await axios({
+        ...axiosRequestConfig,
+        data: transformToSbExtUpsertRequest(request),
+        headers: {
+          rootOrg,
+        },
+        method: 'POST',
+        url,
+      })
+      res.status(response.status).send()
 
-    let url = API_END_POINTS.playlists(userId)
-    if (req.query && req.query.type) {
-      url += `?type=${req.query.type}`
-    }
-
-    const response = await axios.post(
-      url,
-      { request: transformToSbExtUpsertRequest(request) },
-      { ...axiosRequestConfig, headers: { rootOrg } }
-    )
-
-    let shareResponse = { data: null }
-    if (
-      response.data &&
-      response.data.result &&
-      response.data.result.playlist_id &&
-      request.shareWith &&
-      request.shareWith.length
-    ) {
-      shareResponse = await sharePlaylist(userId, {
-        contentIds: request.contentIds,
-        id: response.data.result.playlist_id,
-        message: request.shareMsg,
-        name: request.title,
-        shareWith: request.shareWith,
-      }, rootOrg)
-    }
-
-    res.json({ create: response.data, share: shareResponse.data })
-  } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
-  }
-})
-
-playlistApi.delete('/reject/:playlistId', async (req, res) => {
-  const playlistId = req.params.playlistId
-  const userId = extractUserIdFromRequest(req)
-  try {
-    const rootOrg = req.header('rootOrg')
-    if (!rootOrg) {
-      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    } else if (type === EPlaylistUpsertTypes.delete) {
+      const response = await axios({
+        ...axiosRequestConfig,
+        data: transformToSbExtDeleteRequest(request),
+        headers: {
+          rootOrg,
+        },
+        method: 'DELETE',
+        url,
+      })
+      res.status(response.status).send()
       return
     }
-    const response = await axios.delete(
-      `${API_END_POINTS.playlists(userId)}/${playlistId}`,
-      {
-        ...axiosRequestConfig,
-        headers: { rootOrg },
-        params: { type: 'share' },
-      }
-    )
-    res.status(response.status).send()
+    res.status(500).send()
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })
 
 playlistApi.get('/:type', async (req, res) => {
-  const type = req.params.type
+  /*get pending playlists*/
   const userId = extractUserIdFromRequest(req)
   try {
     const rootOrg = req.header('rootOrg')
@@ -347,30 +519,13 @@ playlistApi.get('/:type', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const playlists = await getPlaylists(userId, type, rootOrg)
+    const playlists = await getPlaylists(userId, rootOrg)
     res.send(playlists)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
-  }
-})
-
-playlistApi.post('/share', async (req, res) => {
-  const userId = extractUserIdFromRequest(req)
-  try {
-    const rootOrg = req.header('rootOrg')
-    if (!rootOrg) {
-      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
-      return
-    }
-    const request = {
-      ...req.body,
-      message: req.body.shareMsg,
-    }
-    const response = await sharePlaylist(userId, request, rootOrg)
-    res.send(response.data)
-  } catch (err) {
-    res.status((err && err.response && err.response.status) || 500)
-      .send((err && err.response && err.response.data) || err)
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      })
   }
 })

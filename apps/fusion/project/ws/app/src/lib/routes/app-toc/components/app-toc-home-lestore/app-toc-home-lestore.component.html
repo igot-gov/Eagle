@@ -1,0 +1,35 @@
+<mat-toolbar *ngIf="!(isInIframe && forPreview)" class="detailBar" [color]="pageNavbar.color"
+  [ngStyle]="pageNavbar?.styles">
+  <ws-widget-btn-page-back [widgetData]="{ url: 'back', back: forPreview  }"></ws-widget-btn-page-back>
+  <span class="margin-left-xs text-truncate"> </span>
+
+  <span class="spacer"></span>
+  <!-- <a *ngIf="isAuthor" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
+    <mat-icon>create</mat-icon>
+    <span i18n class="ml-2">Edit</span>
+  </!-->
+</mat-toolbar>
+
+<ws-app-app-toc-banner-lestore [forPreview]="forPreview" [banners]="banners" [content]="content" [analytics]="analytics"
+  [resumeData]="resumeData" [assetUrl]="assetUrl"></ws-app-app-toc-banner-lestore>
+<ng-container>
+  <div class="toc-body" *ngIf="!errorCode; else tocError">
+    <nav mat-tab-nav-bar class="toc-links mat-app-background">
+      <a mat-tab-link [routerLink]="'./overview'" routerLinkActive="ws-mat-primary-text link-active" i18n>Overview</a>
+      <a mat-tab-link *ngIf="content?.labels?.length" [routerLink]="'./classmates'"
+        routerLinkActive="ws-mat-primary-text link-active" i18n>Classmates
+      </a>
+      <a *ngIf="content?.children?.length" mat-tab-link [routerLink]="'./contents'"
+        routerLinkActive="ws-mat-primary-text link-active" i18n>Contents</a>
+      <a mat-tab-link [routerLink]="'./discussion'" routerLinkActive="ws-mat-primary-text link-active" i18n>Discussion
+        Board
+      </a>
+      <!-- <a mat-tab-link [routerLink]="'./analytics'" routerLinkActive="ws-mat-primary-text link-active" i18n>Analytics</a> -->
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</ng-container>
+
+<ng-template #tocError>
+  <div [wsResolverWidget]="errorWidgetData"></div>
+</ng-template>

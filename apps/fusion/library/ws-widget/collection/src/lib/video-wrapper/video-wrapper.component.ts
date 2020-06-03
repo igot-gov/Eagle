@@ -1,9 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '../../../../resolver/src/public-api'
 import { IWidgetWrapperMedia } from './video-wrapper.model'
+import { Platform } from '@angular/cdk/platform'
 
 @Component({
   selector: 'ws-widget-video-wrapper',
@@ -14,11 +12,26 @@ export class VideoWrapperComponent extends WidgetBaseComponent implements
   OnInit, NsWidgetResolver.IWidgetData<IWidgetWrapperMedia> {
 
   @Input() widgetData!: IWidgetWrapperMedia
-  constructor() {
+  constructor(private platform: Platform) {
     super()
   }
 
   ngOnInit() {
-  }
+    if (this.widgetData) {
+      if (this.widgetData.externalData) {
+        if (!(this.widgetData.externalData.iframeSrc) && this.widgetData.videoData) {
+          if (this.platform.IOS) {
+            this.widgetData.videoData.isVideojs = true
+          } else if ((!this.platform.WEBKIT) && (!this.platform.IOS) && (!this.platform.SAFARI)) {
+            this.widgetData.videoData.isVideojs = true
+          } else if (this.platform.ANDROID) {
+            this.widgetData.videoData.isVideojs = true
+          } else {
+            this.widgetData.videoData.isVideojs = false
+          }
+        }
+      }
+    }
 
+  }
 }

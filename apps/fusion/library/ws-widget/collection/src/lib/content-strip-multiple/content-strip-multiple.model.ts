@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { NSSearch } from '../_services/widget-search.model'
 import { NsContent } from '../_services/widget-content.model'
@@ -12,24 +9,28 @@ export namespace NsContentStripMultiple {
     loader?: boolean
     noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
     strips: IContentStripUnit[]
+    isChannelStrip?: boolean
   }
   export interface IContentStripUnit {
     key: string
     title: string
+    name?: string
+    mode?: 'accordion'
     info?: IStripInfo
     preWidgets?: NsWidgetResolver.IRenderConfigWithAnyData[]
     postWidgets?: NsWidgetResolver.IRenderConfigWithAnyData[]
     stripConfig?: IStripConfig
     canHideStrip?: boolean
     filters?: any[]
+    selectAll?: boolean | null
     request?: {
       search?: NSSearch.ISearchRequest
       searchV6?: NSSearch.ISearchV6Request
       searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
       api?: IStripRequestApi
-      ids?: string[],
+      ids?: string[]
     }
-    searchV6Type?: 'KB' | 'Collections' | null
+    searchV6Type?: 'KB' | 'Collections' | 'searchQuery' | null
     stripBackground?: string
     noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
     loader?: boolean
@@ -42,7 +43,8 @@ export namespace NsContentStripMultiple {
     queryParams?: {
       pageNo?: number
       pageSize?: number
-      pageState?: string,
+      pageState?: string
+      sourceFields?: string
     }
   }
   export interface IStripInfo {
@@ -51,7 +53,7 @@ export namespace NsContentStripMultiple {
     icon: {
       icon: string
       scale: number
-      style?: any, // added for UI
+      style?: any // added for UI
     }
     widget: NsWidgetResolver.IRenderConfigWithAnyData
   }
@@ -62,6 +64,15 @@ export namespace NsContentStripMultiple {
     postCardForSearch?: boolean
     intranetMode?: 'greyOut' | 'hide'
     deletedMode?: 'greyOut' | 'hide'
+    contentTags?: IContentTags
+  }
+
+  export interface IContentTags {
+    daysSpan?: number
+    excludeContentType?: NsContent.EContentTypes[]
+    excludeMimeType?: string[]
+    tag: string
+    criteriaField: string
   }
   export interface IContentStripResponseApi {
     contents: NsContent.IContent[]

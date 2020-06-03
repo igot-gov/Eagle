@@ -1,0 +1,102 @@
+<!-- <div *ngIf="apiFetchStatus === 'fetching'" class="margin-top-xl flex flex-center">
+  <mat-spinner></mat-spinner>
+</div> -->
+<!-- <div class="flex flex-left flex-middle flex-wrapped margin-s">
+    <h4 class="ws-mat-primary-text margin-remove-bottom" i18n>Your are a creating Learning Path for skill</h4>
+    <p class="margin-left-xs font-bold ws-mat-primary-text margin-remove-bottom">{{skillName}}</p>
+    <h4 class="margin-left-xs ws-mat-primary-text margin-remove-bottom" i18n>of level</h4>
+    <p class="margin-left-xs font-bold ws-mat-primary-text margin-remove-bottom">{{skillLevel}}</p>
+  </div> -->
+<div class="px-4 m-4">
+  <p class="font-bold" i18n>Select a skill *</p>
+  <mat-form-field class="w-full example-form" color="primary" appearance="outline">
+    <input type="text" i18n-placeholder placeholder="Search for the Skills" [value]="skillControl.value" matInput
+      [formControl]="skillControl" [matAutocomplete]="skill" required>
+    <mat-autocomplete #skill="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions" [value]="option?.skill_name" (click)="getSkillDetails(option)">
+        {{option?.skill_name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <ng-container *ngIf="showLevel">
+    <p class="font-bold" i18n>Select a skill level*</p>
+    <div class="flex flex-start flex-middle flex-wrapped">
+      <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="selectedLevel" required>
+        <mat-radio-button class="margin-left-s" *ngFor="let level of levelList" [value]="level.skill_level">
+          {{level.skill_level}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </ng-container>
+  <div class="flex flex-start margin-top-s">
+    <div class="w-full">
+      <form (submit)="search(query.value)" class="w-full example-form">
+        <p class="font-bold" i18n>Select the courses to add to your learning path*</p>
+        <mat-form-field class="w-full" color="primary" appearance="outline">
+          <input name="searchQuery" [matAutocomplete]="auto" [formControl]="query" type="text" matInput
+            placeholder="Search for a course" i18-aria-label aria-label="Query" i18n-placeholder>
+          <mat-icon (click)="search(query.value)" matSuffix>search</mat-icon>
+          <mat-autocomplete (optionSelected)="search($event.option.value)" #auto="matAutocomplete">
+            <mat-option *ngIf="query.value" [value]="query.value">{{query.value}}</mat-option>
+            <mat-option *ngFor="let query of autoCompleteResults" [value]="query._source.searchTerm">
+              {{query._source.searchTerm}}</mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+    <!-- <div  class="flex items-center justify-center w-16 cursor-pointer">
+          <mat-icon (click)="search()">search</mat-icon>
+        </div> -->
+  </div>
+  <ng-container>
+    <p class="font-bold" i18n>Select a type of course*</p>
+    <div class="flex flex-start flex-middle flex-wrapped">
+      <mat-radio-group aria-labelledby="example-radio-group-label" [(ngModel)]="selectedType">
+        <mat-radio-button class="margin-left-s" *ngFor="let type of courseType" [value]="type">
+          {{type}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="m-4">
+        <button mat-raised-button color="primary" (click)=onAddCourse()>
+          <span i18n>Add Course</span>
+        </button>
+      </div>
+    </div>
+    <div class="flex justify-around mt-10">
+      <span *ngFor="let filter of suggestedFilters" matRipple role="button" i18n-aria-label
+        aria-label="Suggested filter" (click)="searchWithFilter(filter)" class="w-1/3 cursor-pointer filter-button">
+        <mat-icon class="mb-2">{{filter.icon}}</mat-icon>
+        <span class="font-normal">{{filter.title}}</span>
+      </span>
+    </div>
+  </ng-container>
+</div>
+<div *ngIf="fetchSearchContents === 'fetching'" class="margin-top-xl flex flex-center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="fetchSearchContents === 'done' && chipList?.length > 0" class="flex flex-start m-6">
+  <mat-chip-list class="mat-chip-list-stacked" aria-label="Course">
+    <mat-chip *ngFor="let chip of chipList" class="flex flex-between">
+      {{chip?.name}}
+      <div class="flex flex-middle margin-left-s">
+        <span>({{chip?.course_type}})</span>
+        <button mat-icon-button aria-label="Example icon-button with a heart icon">
+          <mat-icon (click)="remove(chip)">cancel</mat-icon>
+        </button>
+      </div>
+    </mat-chip>
+  </mat-chip-list>
+</div>
+<div *ngIf="fetchSearchContents === 'done' && chipList?.length > 0" class="m-4 flex flex-start">
+  <button mat-raised-button color="primary" (click)=createLearningPath()>
+    <span i18n>Create Learning Path</span>
+  </button>
+</div>
+
+<input #selectContent type="hidden" i18n-value value="You have already added this course" />
+<input #emptyContent type="hidden" i18n-value value="Select a type before you add a course" />
+<input #addContent type="hidden" i18n-value value="Please select a course to add to learning path" />
+<input #existsContent type="hidden" i18n-value value="Content could not be found" />
+<input #skillContent type="hidden" i18n-value value="Please select a skill" />
+<input #skillLevelContent type="hidden" i18n-value value="Please select a skill level" />
+<input #successContent type="hidden" i18n-value value="Successfully Added a Learning Path" />

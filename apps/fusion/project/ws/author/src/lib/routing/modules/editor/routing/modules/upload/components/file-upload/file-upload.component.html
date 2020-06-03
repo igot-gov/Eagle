@@ -1,31 +1,21 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="margin-top-m margin-left-xl">
-  <div class="flex mt-8 margin-bottom-xl">
-    <div
-      class="upload-box flex flex-middle justify-center p-20 cursor-pointer"
-      (click)="fileInput.click()"
-      wsAuthDragDrop
-      (fileDropped)="onDrop($event)"
-    >
+  <div class="flex mt-8 margin-bottom-xl top-heading">
+    <div class="upload-box flex flex-middle flex-col justify-center p-20 cursor-pointer" (click)="fileInput.click()"
+      wsAuthDragDrop (fileDropped)="onDrop($event)">
+      <button *ngIf="file || fileUploadForm.controls.artifactUrl.value" mat-icon-button
+        class="close-button padding-remove ws-mat-primary-background-op30 text-white"
+        (click)="clearUploadedFile(); $event.stopPropagation()">
+        <mat-icon>close</mat-icon>
+      </button>
       <span class="font-weight-500" [hidden]="file">
-        <input
-          type="file"
-          #fileInput
-          class="inputfile"
-          accept=".mp3,.mp4,.pdf"
-          (change)="onDrop($event.target.files[0]); fileInput.value = null"
-        />
+        <input type="file" #fileInput class="inputfile" accept=".mp3,.mp4,.pdf,.zip"
+          (change)="onDrop($event.target.files[0]); fileInput.value = null" />
         <label for="file" class="mat-h2 ws-mat-primary-text flex flex-middle justify-center">
           <mat-icon style="margin-right:4px">add</mat-icon>
           <span i18n>Browse or Drag and Drop</span>
         </label>
       </span>
-      <div
-        *ngIf="file || fileUploadForm.controls.artifactUrl.value"
-        class="flex flex-middle justify-center"
-      >
+      <div *ngIf="file || fileUploadForm.controls.artifactUrl.value" class="flex flex-middle justify-center">
         <ng-container [ngSwitch]="mimeType">
           <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'audio/mpeg'">
             music_note
@@ -35,6 +25,9 @@
           </mat-icon>
           <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/pdf'">
             picture_as_pdf
+          </mat-icon>
+          <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/html'">
+            request_quote
           </mat-icon>
         </ng-container>
         <p class="margin-left-xs mat-h3 font-weight-500 margin-remove-bottom">
@@ -46,17 +39,10 @@
             <ng-container> </ng-container>
           </ng-template>
         </p>
-        <button
-          mat-icon-button
-          class="close-button padding-remove ws-mat-primary-background-op30 text-white"
-          (click)="clearUploadedFile(); $event.stopPropagation()"
-        >
-          <mat-icon>close</mat-icon>
-        </button>
       </div>
     </div>
 
-    <div class="ml-20">
+    <div class="information">
       <p class="ws-mat-primary-text font-weight-500" i18n>Instructions to upload a file</p>
       <ul>
         <li *ngIf="fileUploadForm.controls.artifactUrl.value" i18n>
@@ -65,20 +51,15 @@
         <li i18n>
           Click on browse files above and choose the file or Drag and drop the file to be upload.
         </li>
-        <li i18n>Files allowed - pdf, mp3, mp4</li>
+        <li i18n>Files allowed - pdf, mp3, mp4, zip</li>
         <li i18n>Max. file size - 200MB</li>
       </ul>
-      <button
-        type="button"
-        mat-raised-button
-        class="ws-mat-primary-background margin-top-xl"
-        [disabled]="!enableUpload"
-        (click)="triggerUpload()"
-      >
+      <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl" [disabled]="!enableUpload"
+        (click)="triggerUpload()">
         <div class="flex flex-middle justify-center">
           <mat-icon class="text-white">publish</mat-icon>
           <p class="text-white margin-left-s margin-remove-bottom">
-            <span i18n>UPLOAD</span>
+            <span i18n>Upload</span>
           </p>
         </div>
       </button>
@@ -89,10 +70,105 @@
       <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
       <p class="margin-left-xs margin-remove-bottom">
         <span i18n>I have read and I agree with the </span>
-        <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n
-          >IPR Declaration</span
-        >
+        <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n>IPR
+          Declaration</span>
       </p>
     </div>
   </div>
 </div>
+
+
+<ng-template #guideline>
+  <div class="margin-top-m margin-bottom-m">
+    <div style="position: relative;">
+      <h3 class="mat-h3 font-weight-bold margin-remove-bottom" i18n>
+        Guidelines for zip file:
+      </h3>
+      <button class="close-button primary-button" (click)="closeDialog()">
+        <mat-icon aria-label="Next" role="button">close</mat-icon>
+      </button>
+    </div>
+    <div style="overflow: auto; max-height: 400px">
+      <div class="flex w-100 pl-2 mt-2">
+        <div>&#10070;</div>
+        <div class="margin-left-s" i18n>Should not have any folder or file having special character or space in their
+          name.</div>
+      </div>
+      <div class="flex w-100 pl-2 mt-2">
+        <div>&#10070;</div>
+        <div class="margin-left-s" i18n>Should not have code with security vulnerability e.g. usage of eval function in
+          javascript.</div>
+      </div>
+      <div class="flex w-100 pl-2 mt-2">
+        <div>&#10070;</div>
+        <div class="margin-left-s" i18n>Should not refer to any external websites to load any assets like image, css or
+          javascript.</div>
+      </div>
+      <div class="flex w-100 pl-2 mt-2">
+        <div>&#10070;</div>
+        <div class="margin-left-s" i18n>Should not include an iframe.</div>
+      </div>
+      <div class="mat-form-field mt-4" i18n>
+        Non compliance will result in preview not working after successful upload
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="closeDialog()">
+      <div class="flex flex-middle justify-center">
+        <p class="text-white margin-remove-bottom agree-text" i18n>I Agree</p>
+      </div>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #errorFile>
+  <div class="margin-top-m margin-bottom-m">
+    <div style="position: relative;">
+      <h3 class="mat-h3 font-weight-bold margin-remove-bottom" i18n>
+        Following files or folders have special characters in their names
+      </h3>
+      <button class="close-button primary-button" (click)="closeDialog()">
+        <mat-icon aria-label="Next" role="button">close</mat-icon>
+      </button>
+    </div>
+    <div style="overflow: auto; max-height: 400px" class="mat-form-field mt-4" id="errorFiles">
+      <div *ngFor="let name of errorFileList">{{name}}</div>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="closeDialog()">
+      <div class="flex flex-middle justify-center">
+        <p class="text-white margin-remove-bottom agree-text" i18n>Okay</p>
+      </div>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #selectFile>
+  <div class="margin-top-m margin-bottom-m">
+    <div style="position: relative;">
+      <h3 class="mat-h3 font-weight-bold margin-remove-bottom" i18n>
+        Select the entry file
+      </h3>
+      <button class="close-button primary-button" (click)="closeDialog()">
+        <mat-icon aria-label="Next" role="button">close</mat-icon>
+      </button>
+    </div>
+    <div style="overflow: auto; max-height: 400px" class="mt-4">
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+        [(ngModel)]="fileUploadUrl">
+        <mat-radio-button class="example-radio-button" *ngFor="let file of fileList" [value]="file">
+          {{file}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="closeDialog()">
+      <div class="flex flex-middle justify-center">
+        <p class="text-white margin-remove-bottom agree-text" i18n>Done</p>
+      </div>
+    </button>
+  </div>
+</ng-template>

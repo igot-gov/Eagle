@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import '~src/styles/ws-vars';
 @import '~src/styles/ws-mixins';
 
@@ -10,6 +7,10 @@
   background-size: cover;
   height: 200px;
   width: 100%;
+
+  @media only screen and (max-width: 725px) {
+    height: 230px;
+  }
 
   @include breakpoint-xs {
     height: 250px;
@@ -106,7 +107,8 @@
 
 .know-button {
   margin-left: 95px;
-    @include breakpoint-xs {
-  margin-left: 55px;
-    }
+
+  @include breakpoint-xs {
+    margin-left: 55px;
+  }
 }

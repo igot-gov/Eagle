@@ -1,7 +1,4 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-sidenav-container class="sidenav-container" autosize *ngIf="!error.load">
+<mat-sidenav-container role="main" class="sidenav-container" autosize *ngIf="!error.load">
   <mat-sidenav #sideNavBar class="sidenav" [opened]="sideNavBarOpened" (closed)="closeFilter(false)"
     [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
     <ws-app-filter-display #appFilterDisplay *ngIf="searchResults?.result?.length" [filtersResetAble]="filtersResetAble"
@@ -14,15 +11,26 @@
       <span>{{ searchResults.totalHits }} </span>
       <span *ngIf="searchResults.totalHits > 1" i18n="search route hits results">results </span>
       <span *ngIf="searchResults.totalHits <= 1" i18n="search route hits result">result </span>
-      <span *ngIf="searchRequest?.lang?.split(',').length > 1">across your preferred languages:
-        <span class="cursor-pointer ws-mat-primary-text" *ngFor="let lang of searchRequest?.lang?.split(',')"
-          (click)="searchLanguage(lang)">{{lang | uppercase}}
+      <span *ngIf="searchRequest?.lang?.split(',').length > 1"><span i18n>across your preferred languages</span>
+        <span>:&nbsp;</span><span class="cursor-pointer ws-mat-primary-text"
+          *ngFor="let lang of searchRequest?.lang?.split(',')" (click)="searchLanguage(lang)">{{lang | uppercase}}
         </span>
       </span>
+      <ng-container *ngIf="searchResults?.doYouMean || searchResults?.queryUsed">
+        <span>.</span><span>&nbsp;</span>
+        <span *ngIf="searchResults?.doYouMean"><span i18n>Did you mean</span><span>&nbsp;“</span><span
+            [innerHTML]="searchResults?.doYouMean" (click)="didYouMeanSearch(searchResults?.doYouMean)"
+            class="cursor-pointer ws-mat-primary-text cursor-pointer"></span>”
+          ?</span>
+        <span *ngIf="searchResults?.queryUsed"><span i18n>Showing results
+            for</span><span>&nbsp;“</span>{{searchResults?.queryUsed}}”. <span i18n>Search instead for</span>
+          <span>&nbsp;“</span><span class="cursor-pointer ws-mat-primary-text cursor-pointer"
+            (click)="searchInsteadFor()">{{searchRequestObject.query}}</span>”.</span>
+      </ng-container>
       <ng-container *ngIf="exactResult.show && applyPhraseSearch">
         <span i18n="search route hits for showing exact match">for the exact match on
         </span>
-        <span>{{ searchRequestObject.query }}, </span>
+        <span>{{ searchRequestObject?.query }}, </span>
         <a (click)="getResults(true)" class="ws-mat-primary-text cursor-pointer" i18n>Click here </a>
         <span i18n="search route hits for showing actual query">to explore more. </span>
       </ng-container>
@@ -58,6 +66,7 @@
         </span>
       </mat-chip-list>
     </div>
+    <!-- commercial_start -->
     <mat-card *ngIf="concepts.length" class="margin-bottom-m mat-elevation-z3">
       <h2 i18n="search: related topics" class="margin-bottom-s mat-h2">
         Explore related concepts:
@@ -69,6 +78,7 @@
         </ws-utils-horizontal-scroller>
       </mat-card-content>
     </mat-card>
+    <!-- commercial_end -->
     <div *ngIf="searchResults?.result?.length">
       <ws-app-learning-card class="search-card" *ngFor="let result of searchResults.result; trackBy: contentTrackBy"
         [displayType]="resultsDisplayType" [content]="result"></ws-app-learning-card>

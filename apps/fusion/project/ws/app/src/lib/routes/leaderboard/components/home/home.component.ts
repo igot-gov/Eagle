@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { Router, ActivatedRoute } from '@angular/router'
 import { EDurationTypeRouteParam } from '../../models/leaderboard.model'
@@ -13,6 +10,7 @@ import { EDurationTypeRouteParam } from '../../models/leaderboard.model'
 export class HomeComponent implements OnInit {
   tabs: EDurationTypeRouteParam[]
   activeTab: EDurationTypeRouteParam
+  canShow: false | undefined
 
   constructor(private router: Router, private route: ActivatedRoute) {
     this.tabs = [
@@ -24,6 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.canShow = false
     this.route.children[0].url.subscribe(url => {
       this.activeTab =
         (url[url.length - 1].path as EDurationTypeRouteParam) || EDurationTypeRouteParam.Weekly

@@ -1,27 +1,23 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { IBadgeRecent, IBadgeResponse } from '../../models/badge.model'
-import {
-  IUserNotification,
-  IUserNotifications
-} from '../../models/notification.model'
+import { IUserNotification, IUserNotifications } from '../../models/notification.model'
 import { appendUrl } from '../../utils/contentHelpers'
 import { CONSTANTS } from '../../utils/env'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
-
 const API_END_POINTS = {
   badge: `${CONSTANTS.SB_EXT_API_BASE_2}/v3/users`,
+  newBadges: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/badges`,
   updateBadge: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/User`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export const badgeApi = Router()
 // all badges data
 badgeApi.get('/', async (req, res) => {
-  const userId = extractUserIdFromRequest(req)
+  const userId = req.query.wid || extractUserIdFromRequest(req)
   const rootOrg = req.header('rootOrg')
   const langCode = req.header('locale')
   const url = `${API_END_POINTS.badge}/${userId}/badges`
@@ -33,6 +29,47 @@ badgeApi.get('/', async (req, res) => {
     res.send(processAllBadges(response.data))
   } catch (err) {
     return err
+  }
+})
+
+badgeApi.get('/badgeDetail', async (req, res) => {
+  const userId = extractUserIdFromRequest(req)
+  const rootOrg = req.header('rootOrg')
+  const langCode = req.header('locale')
+  const badgeIds = req.query('badgeIds')
+  const url = `${API_END_POINTS.newBadges(userId)}/newUser/${badgeIds}`
+  try {
+    const response = await axios.get(url, {
+      ...axiosRequestConfig,
+      headers: { rootOrg, langCode },
+    })
+    res.send(processAllBadges(response.data))
+  } catch (err) {
+    return err
+  }
+})
+
+badgeApi.post('/newUser', async (req, res) => {
+  const userId = extractUserIdFromRequest(req)
+  const rootOrg = req.header('rootOrg')
+  const url = `${API_END_POINTS.newBadges(userId)}/newUser`
+  try {
+    const response = await axios.post(
+      url,
+      {},
+      {
+        ...axiosRequestConfig,
+        headers: { rootOrg },
+      }
+    )
+
+    res.json(response.data)
+  } catch (err) {
+    res.status(500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -52,7 +89,11 @@ badgeApi.post('/update', async (req, res) => {
 
     res.json(response.data)
   } catch (err) {
-    res.status(500).send(err)
+    res.status(500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -77,7 +118,11 @@ badgeApi.get('/notification', async (req, res) => {
     }
     res.send(result)
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -135,6 +180,9 @@ function processBadgeRecentArray(badges: IBadgeRecent[]): IBadgeRecent[] {
 
 function processBadgesRecent(badge: IBadgeRecent): IBadgeRecent {
   if (!badge) {
+    return badge
+  }
+  if (badge.image.startsWith('/assets/instances/')) {
     return badge
   }
   return {

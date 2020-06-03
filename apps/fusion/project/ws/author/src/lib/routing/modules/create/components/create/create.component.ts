@@ -1,17 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Router, ActivatedRoute } from '@angular/router'
-import { CreateService } from './create.service'
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
-import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
+import { Router } from '@angular/router'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
-import { LoaderService } from '@ws/author/src/lib/services/loader.service'
-import { IEntity } from '../../interface/entity'
+import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import { ICreateEntity } from '@ws/author/src/lib/interface/create-entity'
+import { ErrorParserComponent } from '@ws/author/src/lib/modules/shared/components/error-parser/error-parser.component'
+import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
+import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { Subscription } from 'rxjs'
+import { CreateService } from './create.service'
 
 @Component({
   selector: 'ws-auth-generic',
@@ -19,155 +19,84 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit, OnDestroy {
-
-  entity: IEntity[] = [
-    {
-      name: 'Resource',
-      description: 'Create the smallest learning entity',
-      icon: 'insert_drive_file',
-      contentType: 'Resource',
-      mimeType: 'application/html',
-      hasRole: ['content-creator', 'editor', 'admin'],
-      options: [
-        {
-          name: 'Attach a Link',
-          icon: 'link',
-          contentType: 'Resource',
-          mimeType: 'application/html',
-          hasRole: ['content-creator', 'editor', 'admin'],
-        },
-        {
-          name: 'Upload Content',
-          icon: 'cloud_upload',
-          contentType: 'Resource',
-          mimeType: 'application/pdf',
-          hasRole: ['content-creator', 'editor', 'admin'],
-        },
-        {
-          name: 'Activities',
-          icon: 'videogame_asset',
-          contentType: 'Resource',
-          mimeType: 'application/html',
-          hasRole: ['content-creator', 'editor', 'admin'],
-
-        },
-        {
-          name: 'Assessment',
-          icon: 'check_circle',
-          contentType: 'Resource',
-          mimeType: 'application/quiz',
-          hasRole: ['content-creator', 'editor', 'admin'],
-
-        },
-        {
-          name: 'Web Page',
-          icon: 'insert_drive_file',
-          contentType: 'Resource',
-          mimeType: 'application/web-module',
-          hasRole: ['content-creator', 'editor', 'admin'],
-
-        },
-      ],
-    },
-    {
-      name: 'Channel Page',
-      description: 'Create a Channel Page',
-      icon: 'chrome_reader_mode',
-      contentType: 'Channel',
-      mimeType: 'application/channel',
-      hasRole: ['channel-creator', 'editor', 'admin'],
-    },
-    {
-      name: 'Knowledge Board',
-      description: 'Create a Knowledge Board',
-      icon: 'folder',
-      mimeType: 'application/vnd.ekstep.content-collection',
-      contentType: 'Knowledge Board',
-      hasRole: ['kb-curator', 'kb-creator', 'editor', 'admin'],
-    },
-    {
-      name: 'Knowledge Artifact',
-      description: 'Create a Knowledge Artifact',
-      icon: 'folder',
-      mimeType: 'application/vnd.ekstep.content-collection',
-      contentType: 'Knowledge Artifact',
-      hasRole: ['ka-creator', 'editor', 'admin'],
-    },
-    {
-      name: 'Module',
-      description: 'Create a collection of Resources',
-      icon: 'folder',
-      contentType: 'Resource',
-      mimeType: 'application/html',
-      hasRole: ['content-creator', 'editor', 'admin'],
-    },
-    {
-      name: 'Course',
-      description: 'Create a collection of Modules',
-      icon: 'folder_open',
-      contentType: 'Resource',
-      mimeType: 'application/html',
-      hasRole: ['content-creator', 'editor', 'admin'],
-    },
-    {
-      name: 'Program',
-      description: 'Create a collection of Courses',
-      icon: 'folder_special',
-      contentType: 'Resource',
-      mimeType: 'application/html',
-      hasRole: ['content-creator', 'editor', 'admin'],
-    },
-  ]
+  entity: ICreateEntity[] = []
+  resourceEntity!: ICreateEntity
   routerSubscription = <Subscription>{}
   allLanguages: any
   language = ''
+  error = false
 
   constructor(
     private snackBar: MatSnackBar,
     private svc: CreateService,
     private router: Router,
     private loaderService: LoaderService,
-    private activatedRoute: ActivatedRoute,
     private accessControlSvc: AccessControlService,
-  ) { }
+    private authInitService: AuthInitService,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit() {
-    this.loaderService.changeLoadState(false)
-    this.routerSubscription = this.activatedRoute.data.subscribe(data => {
-      this.allLanguages = data.ordinals.subTitles || []
+    this.authInitService.creationEntity.forEach(v => {
+      if (!v.parent && v.available) {
+        if (v.id === 'resource') {
+          this.resourceEntity = v
+        } else {
+          this.entity.push(v)
+        }
+      }
     })
+    this.loaderService.changeLoadState(false)
+    this.allLanguages = this.authInitService.ordinals.subTitles || []
     this.language = this.accessControlSvc.locale
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {
+    this.loaderService.changeLoad.next(false)
+  }
 
-  contentClicked(content: IEntity) {
+  contentClicked(content: ICreateEntity) {
     this.loaderService.changeLoad.next(true)
-    this.svc.create({ contentType: content.contentType, mimeType: content.mimeType, locale: this.language }).subscribe(
-      (id: string) => {
-        this.loaderService.changeLoad.next(false)
-        this.snackBar.openFromComponent(NotificationComponent, {
-          data: {
-            type: Notify.CONTENT_CREATE_SUCCESS,
-          },
-          duration: NOTIFICATION_TIME * 1000,
-        })
-        this.router.navigateByUrl(`/author/editor/${id}`)
-      },
-      () => {
-        this.loaderService.changeLoad.next(false)
-        this.snackBar.openFromComponent(NotificationComponent, {
-          data: {
-            type: Notify.CONTENT_FAIL,
-          },
-          duration: NOTIFICATION_TIME * 1000,
-        })
-      },
-    )
+    this.svc
+      .create({
+        contentType: content.contentType,
+        mimeType: content.mimeType,
+        locale: this.language,
+        ...(content.additionalMeta || {}),
+      })
+      .subscribe(
+        (id: string) => {
+          this.loaderService.changeLoad.next(false)
+          this.snackBar.openFromComponent(NotificationComponent, {
+            data: {
+              type: Notify.CONTENT_CREATE_SUCCESS,
+            },
+            duration: NOTIFICATION_TIME * 1000,
+          })
+          this.router.navigateByUrl(`/author/editor/${id}`)
+        },
+        error => {
+          if (error.status === 409) {
+            this.dialog.open(ErrorParserComponent, {
+              width: '80vw',
+              height: '90vh',
+              data: {
+                errorFromBackendData: error.error,
+              },
+            })
+          }
+          this.loaderService.changeLoad.next(false)
+          this.snackBar.openFromComponent(NotificationComponent, {
+            data: {
+              type: Notify.CONTENT_FAIL,
+            },
+            duration: NOTIFICATION_TIME * 1000,
+          })
+        },
+      )
   }
 
   setCurrentLanguage(lang: string) {
     this.language = lang
   }
-
 }

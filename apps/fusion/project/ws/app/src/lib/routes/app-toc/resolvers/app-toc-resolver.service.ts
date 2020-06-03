@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { map, catchError, tap } from 'rxjs/operators'
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router'
+import { NsContent, PipeContentRoutePipe, WidgetContentService } from '@ws-widget/collection'
 import { IResolveResponse } from '@ws-widget/utils/src/public-api'
-import { NsContent, WidgetContentService, PipeContentRoutePipe } from '@ws-widget/collection'
+import { Observable, of } from 'rxjs'
+import { catchError, map, tap } from 'rxjs/operators'
 
 const ADDITIONAL_FIELDS_IN_CONTENT = [
   'averageRating',
@@ -33,6 +30,7 @@ const ADDITIONAL_FIELDS_IN_CONTENT = [
   'resourceType',
   'subTitle',
   'softwareRequirements',
+  'studyMaterials',
   'systemRequirements',
   'totalRating',
   'uniqueLearners',
@@ -40,8 +38,15 @@ const ADDITIONAL_FIELDS_IN_CONTENT = [
   'labels',
   'sourceUrl',
   'sourceName',
+  'sourceShortName',
   'sourceIconUrl',
   'locale',
+  'hasAssessment',
+  'preContents',
+  'postContents',
+  'kArtifacts',
+  'equivalentCertifications',
+  'certificationList',
 ]
 @Injectable()
 export class AppTocResolverService
@@ -61,19 +66,36 @@ export class AppTocResolverService
   ): Observable<IResolveResponse<NsContent.IContent>> {
     const contentId = route.paramMap.get('id')
     if (contentId) {
-      return this.contentSvc.fetchContent(contentId, 'detail', ADDITIONAL_FIELDS_IN_CONTENT).pipe(
+      const forPreview = window.location.href.includes('/author/')
+      return (forPreview
+        ? this.contentSvc.fetchAuthoringContent(contentId)
+        : this.contentSvc.fetchContent(contentId, 'detail', ADDITIONAL_FIELDS_IN_CONTENT)
+      ).pipe(
         map(data => ({ data, error: null })),
         tap(resolveData => {
           let currentRoute: string[] | string = window.location.href.split('/')
           currentRoute = currentRoute[currentRoute.length - 1]
-          if (currentRoute === 'contents' && resolveData.data && !resolveData.data.children.length) {
-            this.router.navigate([`/app/toc/${resolveData.data.identifier}/overview`])
+          if (forPreview && currentRoute !== 'contents' && currentRoute !== 'overview') {
+            this.router.navigate([
+              `${forPreview ? '/author' : '/app'}/toc/${resolveData.data.identifier}/${
+              resolveData.data.children.length ? 'contents' : 'overview'
+              }`,
+            ])
+          } else if (
+            currentRoute === 'contents' &&
+            resolveData.data &&
+            !resolveData.data.children.length
+          ) {
+            this.router.navigate([
+              `${forPreview ? '/author' : '/app'}/toc/${resolveData.data.identifier}/overview`,
+            ])
           } else if (
             resolveData.data &&
+            !forPreview &&
             (resolveData.data.contentType === NsContent.EContentTypes.CHANNEL ||
               resolveData.data.contentType === NsContent.EContentTypes.KNOWLEDGE_BOARD)
           ) {
-            const urlObj = this.routePipe.transform(resolveData.data)
+            const urlObj = this.routePipe.transform(resolveData.data, forPreview)
             this.router.navigate([urlObj.url], { queryParams: urlObj.queryParams })
           }
         }),

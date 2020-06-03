@@ -1,17 +1,13 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="table-scroll" *ngIf="executedResult">
   <table
     *ngIf="executedTable?.length"
     mat-table
     [dataSource]="executedTable"
-    class="mat-elevation-z8 executed-result"
-    style="width:100%;"
+    class="mat-elevation-z2 w-full"
   >
     <!-- Columns -->
     <ng-container *ngFor="let colName of displayColumns" matColumnDef="{{ colName }}">
-      <th class="font-weight" mat-header-cell *matHeaderCellDef>{{ colName }}</th>
+      <th class="font-weight ws-mat-primary-text ws-mat-primary-lite-background-on-day" mat-header-cell *matHeaderCellDef>{{ colName }}</th>
       <td mat-cell *matCellDef="let element">{{ element[colName] }}</td>
     </ng-container>
 

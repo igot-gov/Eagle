@@ -1,19 +1,16 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-
 export namespace NsContent {
   export interface IContinueLearningData extends IContent {
-    continueData: string
+    continueData: any
   }
 
   export interface IContent {
-    addedOn?: string
+    platform?: any
+    addedOn: string
     appIcon: string
     artifactUrl: string
-    averageRating?: number | null
+    averageRating?: any
     body?: string
-    certificationList: IContent[]
+    certificationList?: IRelatedContentMeta[]
     certificationStatus?: TCertificationStatus
     certificationSubmissionDate?: string
     certificationUrl: string
@@ -34,22 +31,26 @@ export namespace NsContent {
     duration: number
     exclusiveContent?: boolean
     expiryDate?: string
+    equivalentCertifications?: IRelatedContentMeta[]
     hasAccess: boolean
+    hasAssessment?: string
     idealScreenSize?: string
     identifier: string
     introductoryVideo?: string
     introductoryVideoIcon?: string
+    learningTrack?: string
     isExternal: boolean
     isIframeSupported: 'Yes' | 'No' | 'Maybe'
     isInIntranet?: boolean
     keywords?: string[]
+    kArtifacts?: IRelatedContentMeta[]
     lastUpdatedOn: string
     learningMode?: TLearningMode
     learningObjective: string
     labels?: string[]
     locale?: string
-    hasTranslations?: { identifier: string, locale: string }[]
-    isTranslationOf?: { identifier: string, locale: string }[]
+    hasTranslations?: { identifier: string; locale: string }[]
+    isTranslationOf?: { identifier: string; locale: string }[]
     me_totalSessionsCount: number
     mediaType: string
     mimeType: EMimeTypes
@@ -64,8 +65,8 @@ export namespace NsContent {
     preContents?: IPrePostContent[]
     preRequisites: string
     price?: {
-      currency: string,
-      value: number,
+      currency: string
+      value: number
     }
     proctorUrl?: string
     progress?: IMarkAsCompleteProgress
@@ -85,9 +86,19 @@ export namespace NsContent {
     sourceIconUrl?: string
     sourceUrl?: string
     ssoEnabled?: boolean
-    status: 'Draft' | 'InReview' | 'QualityReview' | 'Reviewed' | 'Processing' | 'Live' | 'Deleted' | 'MarkedForDeletion' | 'Expired'
+    status:
+    | 'Draft'
+    | 'InReview'
+    | 'QualityReview'
+    | 'Reviewed'
+    | 'Processing'
+    | 'Live'
+    | 'Deleted'
+    | 'MarkedForDeletion'
+    | 'Expired'
     subTitle?: string
     subTitles?: ISubtitle[]
+    studyMaterials?: IRelatedContentMeta[]
     systemRequirements?: string[]
     tags: ITag[]
     topics: IContentTopic[]
@@ -95,16 +106,18 @@ export namespace NsContent {
     totalRating?: number
     track: ITrack[]
     uniqueLearners?: number
-    viewCount?: number
+    viewCount?: { [key: string]: number }
     reason?: string // required for Knowledge board
     trainingLHubCount?: number // for LHub trainings
     verifiers?: {
       // required for External Certifications
       name: string
       email: string
-      id: string,
+      id: string
     }[]
-    references?: { url: string, title: string }[]
+    references?: { url: string; title: string }[]
+    resumePage?: number // For player WebModule in UI
+    [key: string]: any
   }
 
   export interface IContentMinimal {
@@ -116,12 +129,15 @@ export namespace NsContent {
     displayContentType?: EDisplayContentTypes
     duration: number
     identifier: string
+    hasAccess?: boolean
+    isInIntranet?: boolean
     learningMode?: TLearningMode
     mimeType: EMimeTypes
     name: string
     creatorDetails: ICreator[]
     creatorContacts: ICreator[]
     resourceType?: string
+    totalRating?: number
   }
 
   export interface ICollectionHierarchyResponse {
@@ -130,11 +146,12 @@ export namespace NsContent {
     totalContents: number
   }
 
-  type TCertificationStatus =
-    | 'ongoing'
-    | 'passed'
-    | 'canAttempt'
-    | 'cannotAttempt'
+  export interface IRelatedContentMeta {
+    identifier: string
+    name: string
+  }
+
+  type TCertificationStatus = 'ongoing' | 'passed' | 'canAttempt' | 'cannotAttempt'
   export type TLearningMode = 'Self-Paced' | 'Instructor-Led' | 'Open' | 'Closed'
 
   interface IMarkAsCompleteProgress {
@@ -212,6 +229,7 @@ export namespace NsContent {
     contextPathId: string
     data: string
     dateAccessed: number
+    contextType?: string
   }
 
   export enum EContentTypes {
@@ -315,5 +333,4 @@ export namespace NsContent {
   export enum ETagType {
     NEWLY_ADDED = 'NEWLY ADDED',
   }
-
 }

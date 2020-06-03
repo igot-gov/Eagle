@@ -1,8 +1,5 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="margin-xs" *ngIf="contentData">
-  <div class="refresh-btn">
+  <div class="flex flex-end">
     <button title="Refresh Database" mat-icon-button color="primary" (click)="initializeDb(true)">
       <mat-icon>refresh</mat-icon>
     </button>
@@ -21,15 +18,14 @@
           *ngFor="let table of loadedTables; let i = index"
         >
           <mat-expansion-panel-header class="padding-remove-left">
-            <mat-panel-title class="font-weight">
+            <mat-panel-title class="pl-3">
               {{ table.tableName }}
             </mat-panel-title>
           </mat-expansion-panel-header>
           <table
             mat-table
             [dataSource]="table.tableData"
-            class="mat-elevation-z8"
-            style="width:100%;"
+            class="w-full"
           >
             <!-- Columns -->
             <ng-container *ngFor="let colName of table.tableColumns" matColumnDef="{{ colName }}">
@@ -46,7 +42,7 @@
   </div>
   <ng-container *ngIf="contentData?.dropdown; else noDropdown">
     <form [formGroup]="dropdownQueryForm" class="margin-top-m">
-      <mat-form-field>
+      <mat-form-field *ngIf = "dropdownData.length">
         <mat-select
           placeholder="Make a selection"
           (selectionChange)="onSelectionChange($event.value)"
@@ -58,14 +54,14 @@
       </mat-form-field>
       <div *ngIf="selectedOption">
         <div class="margin-top-xs text-justify" [innerHTML]="selectedOption?.concept"></div>
-        <!-- <ace-editor class="code-container margin-top-s" [(text)]="selectedOption.query" theme="eclipse" [mode]="'sql'" [options]="options"></ace-editor> -->
+        <ace-editor class="code-container margin-top-s" (textChanged)="raiseInputChange()" [(text)]="selectedOption.query" theme="eclipse" [mode]="'sql'" [options]="options"></ace-editor>
         <div class="margin-top-s">
           <button
             mat-raised-button
             color="primary"
             [hidden]="!contentData?.run"
             [disabled]="executed"
-            (click)="run()"
+            (click)="run() ;raiseClickEvent()"
             i18n="button run"
           >
             Run
@@ -78,14 +74,14 @@
     <span
       *ngIf="errorMessage || executedResult?.status?.message"
       [ngClass]="{
-        'query-success': executedResult?.validationStatus,
-        'query-failed': !executedResult?.validationStatus
+        'ws-mat-primary-text': executedResult?.validationStatus,
+        'ws-mat-warn-text': !executedResult?.validationStatus
       }"
     >
       {{ errorMessage || executedResult?.status?.message }}
     </span>
     <viewer-execution-result
-      *ngIf="executedResult && executedResult?.data"
+      *ngIf="executedResult && executedResult?.data && executedResult?.validationStatus"
       [executedResult]="executedResult"
     ></viewer-execution-result>
   </div>
@@ -95,30 +91,30 @@
     *ngIf="selectedOption?.telltext && !contentData?.run"
   ></div>
   <div
-    class="tell-text text-justify success"
+    class="p-2 pl-0 text-justify success"
     *ngIf="selectedOption?.telltext && executedResult && showTelltext"
     [innerHTML]="selectedOption?.telltext"
   ></div>
   <div
-    class="tell-text text-justify success"
+    class="p-2 pl-0 text-justify success"
     *ngIf="contentData?.telltext && executedResult && showTelltext"
     [innerHTML]="contentData?.telltext"
   ></div>
-  <div class="tell-text text-justify" *ngIf="!selectedOption && contentData?.dropdown" i18n>
+  <div class="p-2 pl-0 text-justify" *ngIf="!selectedOption && contentData?.dropdown" i18n>
     Use the dropdown to see a concept with a sample query and query output.
   </div>
-  <div class="tell-text text-justify" *ngIf="!contentData?.dropdown && !executedResult" i18n>
+  <div class="p-2 pl-0 text-justify" *ngIf="!contentData?.dropdown && !executedResult" i18n>
     Click on Run button to see the result
   </div>
   <ng-template #noDropdown>
     <div>
-      <!-- <ace-editor class="code-container margin-top-s" [(text)]="contentData.query" theme="eclipse" [mode]="'sql'" [options]="options"></ace-editor> -->
+      <ace-editor class="code-container margin-top-s" (textChanged)="raiseInputChange()" [(text)]="contentData.query" theme="eclipse" [mode]="'sql'" [options]="options"></ace-editor>
       <div class="margin-top-s">
         <button
           mat-raised-button
           color="primary"
           [disabled]="executed"
-          (click)="run()"
+          (click)="run() ;raiseClickEvent()"
           i18n="button run"
         >
           Run

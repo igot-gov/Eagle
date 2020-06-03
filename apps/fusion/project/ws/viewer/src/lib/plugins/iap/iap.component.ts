@@ -1,8 +1,5 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input, OnChanges, OnDestroy, AfterViewInit } from '@angular/core'
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser'
+import { AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core'
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { LoggerService } from '@ws-widget/utils'
 import { NsContent } from '../../../../../../../library/ws-widget/collection/src/public-api'
 
@@ -39,7 +36,7 @@ export class IapComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
     })
   }
   ngOnChanges() {
-    // console.log(this.iapContent)
+    // //console.log(this.iapContent)
     if (this.iapContent && this.iapContent.artifactUrl) {
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.iapContent.artifactUrl)
     } else {
@@ -77,9 +74,9 @@ export class IapComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
     if (iframeElem) {
       iframeElem.postMessage(dataToSend, '*')
     }
-    // console.log('event at posting:', event);
+    // //console.log('event at posting:', event);
     if (event === 'esc' || event === 'fullScreen') {
-      // console.log('PROCTORING WARNING TURNED ON');
+      // //console.log('PROCTORING WARNING TURNED ON');
       this.proctoringWarning = true
     }
   }
@@ -119,7 +116,7 @@ export class IapComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
   }
 
   private turnOffProctoring() {
-    // console.log('turnOffProctoring called')
+    // //console.log('turnOffProctoring called')
     window.removeEventListener('contextmenu', this.contextCheck)
     window.removeEventListener('beforeunload', this.beforeUnload)
     window.removeEventListener('keydown', this.keydownCheck)
@@ -142,11 +139,11 @@ export class IapComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
     this.proctoringWarning = false
   }
 
-  contextCheck = (e: { preventDefault: () => void; }) => {
+  contextCheck = (e: { preventDefault: () => void }) => {
     this.sendProctoringInfo('rightClick')
     e.preventDefault()
   }
-  beforeUnload = (e: { returnValue: string; }) => {
+  beforeUnload = (e: { returnValue: string }) => {
     this.sendProctoringInfo('beforeunload')
     e.returnValue = 'You are not allowed to close window.'
   }
@@ -155,11 +152,11 @@ export class IapComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
     this.sendProctoringInfo('visibilitychange')
   }
   fullscreenCheck = () => {
-    // console.log('FS called');
+    // //console.log('FS called');
     this.sendProctoringInfo('fullScreen')
   }
   keydownCheck = (e: KeyboardEvent) => {
-    // console.log('key pressed e >', e)
+    // //console.log('key pressed e >', e)
     if (e.altKey) {
       this.sendProctoringInfo('alt')
       e.preventDefault()
@@ -206,15 +203,15 @@ export class IapComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit
     // }
   }
 
-  copyCheck = (e: { preventDefault: () => void; }) => {
+  copyCheck = (e: { preventDefault: () => void }) => {
     this.sendProctoringInfo('copy')
     e.preventDefault()
   }
-  cutCheck = (e: { preventDefault: () => void; }) => {
+  cutCheck = (e: { preventDefault: () => void }) => {
     this.sendProctoringInfo('cut')
     e.preventDefault()
   }
-  pasteCheck = (e: { preventDefault: () => void; }) => {
+  pasteCheck = (e: { preventDefault: () => void }) => {
     this.sendProctoringInfo('paste')
     e.preventDefault()
   }

@@ -1,11 +1,8 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Subscription } from 'rxjs'
+import { ConfigurationsService, EInstance, EventService, WsEvents } from '../../../../utils'
 import { BtnContentLikeService } from './btn-content-like.service'
-import { ConfigurationsService, EventService, WsEvents } from '../../../../utils/src/public-api'
 
 @Component({
   selector: 'ws-widget-btn-content-like',
@@ -13,13 +10,18 @@ import { ConfigurationsService, EventService, WsEvents } from '../../../../utils
   styleUrls: ['./btn-content-like.component.scss'],
 })
 export class BtnContentLikeComponent extends WidgetBaseComponent
-  implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<{
-    identifier: string,
-    isDisabled?: boolean, totalLikes?: { [key: string]: number },
+  implements
+  OnInit,
+  OnDestroy,
+  NsWidgetResolver.IWidgetData<{
+    identifier: string
+    isDisabled?: boolean
+    totalLikes?: { [key: string]: number }
   }> {
-  @Input() widgetData!: { identifier: string, isDisabled?: boolean }
+  @Input() widgetData!: { identifier: string; isDisabled?: boolean }
   @Input() likesCount = 0
   @Input() color: 'primary' | 'accent' | 'default' = 'default'
+  @Input() forPreview = false
 
   status: 'LIKED' | 'NOT_LIKED' | 'PENDING' = 'PENDING'
   isRestricted = false
@@ -36,8 +38,29 @@ export class BtnContentLikeComponent extends WidgetBaseComponent
     }
   }
 
+  get showLikesCount(): boolean {
+    switch (this.configSvc.rootOrg) {
+      case EInstance.PATHFINDERS:
+        return true
+      case EInstance.FORD:
+        return true
+      default:
+        return false
+    }
+  }
+
+  get showCount(): boolean {
+    if (this.showLikesCount) {
+      if (this.likesCount > 0) {
+        return true
+      }
+      return false
+    }
+    return false
+  }
+
   ngOnInit() {
-    if (!this.isRestricted) {
+    if (!this.isRestricted && !this.forPreview) {
       this.likeSubscription = this.btnLikeSvc
         .isLikedFor(this.widgetData.identifier)
         .subscribe(isLiked => {
@@ -49,6 +72,8 @@ export class BtnContentLikeComponent extends WidgetBaseComponent
             this.status = 'NOT_LIKED'
           }
         })
+    } else {
+      this.status = 'NOT_LIKED'
     }
   }
   ngOnDestroy() {
@@ -57,52 +82,56 @@ export class BtnContentLikeComponent extends WidgetBaseComponent
     }
   }
   like(event: Event) {
-    event.stopPropagation()
-    this.raiseTelemetry('like')
-    this.status = 'PENDING'
-    this.btnLikeSvc.like(this.widgetData.identifier).subscribe(
-      (data: { [key: string]: number }) => {
-        if (data) {
-          this.likesCount = data[this.widgetData.identifier]
-        }
-        this.status = 'LIKED'
-      },
-      () => {
-        this.status = 'NOT_LIKED'
-      },
-    )
+    if (!this.forPreview) {
+      event.stopPropagation()
+      this.raiseTelemetry('like')
+      this.status = 'PENDING'
+      this.btnLikeSvc.like(this.widgetData.identifier).subscribe(
+        (data: { [key: string]: number }) => {
+          if (data) {
+            this.likesCount = data[this.widgetData.identifier]
+          }
+          this.status = 'LIKED'
+        },
+        () => {
+          this.status = 'NOT_LIKED'
+        },
+      )
+    } else {
+      this.status = this.status === 'LIKED' ? 'NOT_LIKED' : 'LIKED'
+    }
   }
   unlike(event: Event) {
-    event.stopPropagation()
-    this.raiseTelemetry('unlike')
-    this.status = 'PENDING'
-    this.btnLikeSvc.unlike(this.widgetData.identifier).subscribe(
-      (data: { [key: string]: number }) => {
-        if (data) {
-          this.likesCount = data[this.widgetData.identifier]
-        }
-        this.status = 'NOT_LIKED'
-        this.events.dispatchEvent({
-          eventType: WsEvents.WsEventType.Action,
-          eventLogLevel: WsEvents.WsEventLogLevel.Info,
-          from: 'favourites',
-          to: 'favouritesStrip',
-          data: null,
-        })
-      },
-      () => {
-        this.status = 'LIKED'
-      },
-    )
+    if (!this.forPreview) {
+      event.stopPropagation()
+      this.raiseTelemetry('unlike')
+      this.status = 'PENDING'
+      this.btnLikeSvc.unlike(this.widgetData.identifier).subscribe(
+        (data: { [key: string]: number }) => {
+          if (data) {
+            this.likesCount = data[this.widgetData.identifier]
+          }
+          this.status = 'NOT_LIKED'
+          this.events.dispatchEvent({
+            eventType: WsEvents.WsEventType.Action,
+            eventLogLevel: WsEvents.WsEventLogLevel.Info,
+            from: 'favourites',
+            to: 'favouritesStrip',
+            data: null,
+          })
+        },
+        () => {
+          this.status = 'LIKED'
+        },
+      )
+    } else {
+      this.status = this.status === 'LIKED' ? 'NOT_LIKED' : 'LIKED'
+    }
   }
 
   raiseTelemetry(action: 'like' | 'unlike') {
-    this.events.raiseInteractTelemetry(
-      action,
-      'content',
-      {
-        contentId: this.widgetData.identifier,
-      },
-    )
+    this.events.raiseInteractTelemetry(action, 'content', {
+      contentId: this.widgetData.identifier,
+    })
   }
 }

@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RecentBlogComponent } from './components/recent-blog.component'
-import { BtnSocialLikeModule, BtnPageBackModule } from '@ws-widget/collection'
+import { BtnSocialLikeModule, BtnPageBackModule, BtnSocialVoteModule } from '@ws-widget/collection'
 import {
   MatIconModule,
   MatMenuModule,
@@ -12,8 +9,11 @@ import {
   MatCardModule,
   MatProgressSpinnerModule,
   MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
 } from '@angular/material'
 import { RouterModule } from '@angular/router'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [RecentBlogComponent],
@@ -28,6 +28,13 @@ import { RouterModule } from '@angular/router'
     MatProgressSpinnerModule,
     MatButtonModule,
     BtnPageBackModule,
+    BtnSocialVoteModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
   ],
   exports: [RecentBlogComponent],
 })

@@ -1,11 +1,57 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="mat-toolbar px-4 sm:px-8 md:px-10 py-4 flex items-center">
-  <ws-widget-user-image class="user-image" [email]="userEmail"></ws-widget-user-image>
-  <h3>
-    <ng-container i18n>Hey </ng-container>
-    <ng-container>{{ givenName }}</ng-container>
-    <ng-container *ngIf="!isNewUser" i18n>, welcome back!</ng-container>
-  </h3>
-</div>
+<ng-container *ngIf="!showActivities; else activities">
+  <div class="mat-toolbar px-4 sm:px-8 md:px-10 py-4 flex items-center" id="cardWelcomestrip">
+    <ws-widget-user-image class="user-image" [email]="userEmail"></ws-widget-user-image>
+    <h3>
+      <ng-container i18n>Hey </ng-container>
+      <ng-container>{{ givenName }}</ng-container>
+      <ng-container *ngIf="!isNewUser" i18n>, Welcome Back!</ng-container>
+    </h3>
+  </div>
+</ng-container>
+
+<ng-template #activities>
+  <div class="px-4 sm:px-8 md:px-10 py-4 my-1">
+    <mat-accordion>
+      <mat-expansion-panel name="exploreFeatureSection" [expanded]="true"
+        class="expansion-panel ws-mat-primary-lite-background-on-day">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2 class="title margin-remove pt-2" i18n>Welcome
+              <ng-container>{{ givenName }}</ng-container>
+            </h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-divider class="top-divider"></mat-divider>
+        <div class="flex flex-end">
+          <!-- <h3 class="flex-start margin-remove-bottom subtitle" i18n>Get To Know My Learning World</h3> -->
+          <div class="flex-end btn-display-top">
+            <!-- <button type="button" mat-raised-button class="activity-button" (click)="allActivities()">
+              <div class="flex flex-middle ">
+                <p class="text-white margin-remove-bottom" i18n>All Activities</p>
+              </div>
+            </button> -->
+          </div>
+        </div>
+        <div>
+          <div>
+            <ws-utils-horizontal-scroller *ngIf="challenges?.length" [loadStatus]="'done'">
+              <ws-widget-challenge *ngFor="let challenge of challenges" [widgetData]="{
+                tag:challenge.tag,
+                activities:challenge.activities
+              }">
+              </ws-widget-challenge>
+            </ws-utils-horizontal-scroller>
+          </div>
+        </div>
+        <div class="btn-display-bottom">
+          <mat-divider class="divider mt-2"></mat-divider>
+          <!-- <button type="button" mat-raised-button class="activity-button" (click)="allActivities()">
+            <div class="flex flex-middle ">
+              <p class="text-white margin-remove-bottom" i18n>All Activities</p>
+            </div>
+          </button> -->
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</ng-template>

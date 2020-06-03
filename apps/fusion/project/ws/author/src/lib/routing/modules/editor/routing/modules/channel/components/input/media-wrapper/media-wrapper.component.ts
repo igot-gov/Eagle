@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, EventEmitter, Output, OnChanges } from '@angular/core'
 import { IWidgetWrapperMedia } from '@ws-widget/collection/src/lib/video-wrapper/video-wrapper.model'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
@@ -16,15 +13,14 @@ export class MediaWrapperComponent implements OnInit, OnChanges {
   @Input() isSubmitPressed = false
   @Input() content!: IWidgetWrapperMedia
   @Input() isVideo = false
+  @Input() isResponsive = false
   @Output() data = new EventEmitter<{ content: IWidgetWrapperMedia; isValid: boolean }>()
   inputType: 'upload' | 'id' | 'external' = 'upload'
   backUpType: 'upload' | 'id' | 'external' = 'upload'
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
     if (this.content.externalData && this.content.externalData.iframeSrc) {
@@ -38,7 +34,6 @@ export class MediaWrapperComponent implements OnInit, OnChanges {
   }
 
   onSelectionChange() {
-
     const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
       width: '350px',
       data: 'dialog',
@@ -50,7 +45,9 @@ export class MediaWrapperComponent implements OnInit, OnChanges {
           title: '',
           iframeSrc: '',
         }
-        this.content.videoData = {}
+        this.content.videoData = {
+          disableTelemetry: false,
+        }
         this.data.emit({
           content: this.content,
           isValid: this.content.videoData.url || this.content.videoData.identifier ? true : false,
@@ -60,5 +57,26 @@ export class MediaWrapperComponent implements OnInit, OnChanges {
       }
       this.backUpType = this.inputType
     })
+  }
+
+  updateWrapper(event: { content: any; isValid: boolean }, type: string) {
+    if (event.isValid) {
+      if (type === 'externalData') {
+        this.content.externalData = event.content
+      } else {
+        this.content.videoData = event.content
+      }
+      if (this.content && this.content.videoData) {
+        this.data.emit({
+          content: this.content,
+          isValid:
+            this.content.videoData.url ||
+            this.content.videoData.identifier ||
+            (this.content.externalData && this.content.externalData.iframeSrc)
+              ? true
+              : false,
+        })
+      }
+    }
   }
 }

@@ -1,30 +1,19 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: router?.url.replace('/edit', '') }"
-  ></ws-widget-btn-page-back>
+  <ws-widget-btn-page-back [widgetData]="{ url: router?.url.replace('/edit', '') }"></ws-widget-btn-page-back>
   <span i18n="page title: playlist edit" class="margin-left-xs">Edit Playlist</span>
 </mat-toolbar>
 <div class="page-container margin-top-xl margin-bottom-xl">
-  <ws-widget-picker-content
-    [widgetData]="{ preselected: selectedContentIds, availableFilters: 'contentType' }"
-    (change)="contentChanged($event?.content, $event?.checked)"
-  >
+  <ws-widget-picker-content [widgetData]="{ preselected: selectedContentIds, availableFilters: 'contentType' }"
+    (change)="contentChanged($event?.content, $event?.checked)">
   </ws-widget-picker-content>
   <div class="flex flex-row-reverse">
-    <button
-      mat-raised-button
-      color="primary"
-      [disabled]="!selectedContentIds?.size || upsertPlaylistStatus === 'fetching'"
-      (click)="editPlaylist()"
-      class="margin-right-m"
-    >
-      <ng-container *ngIf="upsertPlaylistStatus !== 'fetching'" i18n>DONE</ng-container>
+    <button name="done-button-playlist-edit" mat-raised-button color="primary"
+      [disabled]="!changedContentIds.size || upsertPlaylistStatus === 'fetching'" (click)="editPlaylist()"
+      class="margin-right-m">
+      <ng-container *ngIf="upsertPlaylistStatus !== 'fetching'" i18n>Done</ng-container>
       <ng-container *ngIf="upsertPlaylistStatus === 'fetching'" i18n>Please Wait...</ng-container>
     </button>
-    <a mat-button i18n [routerLink]="router?.url.replace('/edit', '')">CANCEL</a>
+    <a name="cancel-button-playlist-edit" mat-button i18n [routerLink]="router?.url.replace('/edit', '')">Cancel</a>
   </div>
 </div>
 

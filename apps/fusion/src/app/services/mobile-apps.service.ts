@@ -1,9 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
-import { NavigationExternalService } from './navigation-external.service'
+import { AuthKeycloakService } from '@ws-widget/utils'
 import { NsContent } from '../../../library/ws-widget/collection/src/public-api'
+// tslint:disable-next-line: max-line-length
 import {
   CHAT_BOT_VISIBILITY,
   DISPLAY_SETTING,
@@ -16,7 +14,7 @@ import {
   SESSIONID_OUTGOING,
   TOKEN_OUTGOING,
 } from '../models/mobile-events.model'
-import { AuthKeycloakService } from '@ws-widget/utils'
+import { NavigationExternalService } from './navigation-external.service'
 interface IWindowMobileAppModified extends Window {
   appRef?: any
   webkit?: any
@@ -32,11 +30,10 @@ declare var window: IWindowMobileAppModified
   providedIn: 'root',
 })
 export class MobileAppsService {
-
   constructor(
     private authSvc: AuthKeycloakService,
     private navigateSvc: NavigationExternalService,
-  ) { }
+  ) {}
 
   init() {
     this.setupGlobalMethods()
@@ -57,11 +54,7 @@ export class MobileAppsService {
   }
 
   get iOsAppRef() {
-    if (
-      window.webkit &&
-      window.webkit.messageHandlers &&
-      window.webkit.messageHandlers.appRef
-    ) {
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.appRef) {
       return window.webkit.messageHandlers.appRef
     }
     return null
@@ -99,22 +92,15 @@ export class MobileAppsService {
   setupGlobalMethods() {
     // Incoming Requests
     window.navigateTo = (url: string, params?: any) => {
-      document.dispatchEvent(
-        new CustomEvent(NAVIGATION_DATA_INCOMING, { detail: { url, params } }),
-      )
+      document.dispatchEvent(new CustomEvent(NAVIGATION_DATA_INCOMING, { detail: { url, params } }))
     }
 
     // Incoming Requests with outgoing data
-    window.getToken = () =>
-      this.sendDataAppToClient(TOKEN_OUTGOING, this.authSvc.token)
+    window.getToken = () => this.sendDataAppToClient(TOKEN_OUTGOING, this.authSvc.token)
     window.getToken()
-    window.getSessionId = () =>
-      this.sendDataAppToClient(SESSIONID_OUTGOING, this.authSvc.sessionId)
+    window.getSessionId = () => this.sendDataAppToClient(SESSIONID_OUTGOING, this.authSvc.sessionId)
     window.isAuthenticated = () =>
-      this.sendDataAppToClient(
-        ISAUTHENTICATED_OUTGOING,
-        this.authSvc.isAuthenticated,
-      )
+      this.sendDataAppToClient(ISAUTHENTICATED_OUTGOING, this.authSvc.isAuthenticated)
   }
 
   isFunctionAvailableInAndroid(functionName: string) {
@@ -137,7 +123,7 @@ export class MobileAppsService {
       if (window.dispatchEventFlag) {
         document.dispatchEvent(new CustomEvent(eventName, { detail: data }))
       } else {
-        // console.log(eventName, data)
+        // //console.log(eventName, data)
       }
     }
   }

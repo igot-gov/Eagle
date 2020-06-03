@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser'
 import { NsContent, viewerRouteGenerator, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, EInstance } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 
 @Component({
@@ -17,8 +14,8 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
   styleUrls: ['./app-toc-contents.component.scss'],
 })
 export class AppTocContentsComponent implements OnInit, OnDestroy {
-
   content: NsContent.IContent | null = null
+  forPreview = false
   isPlayable = false
   contentPlayWidgetConfig: NsWidgetResolver.IRenderConfigWithTypedData<any> | null = null
   defaultThumbnail = ''
@@ -26,10 +23,8 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
   private routeSubscription: Subscription | null = null
   private routeQuerySubscription: Subscription | null = null
   contentParents: NsContent.IContentMinimal[] = []
-  contentNext: NsContent.IContentMinimal[] = []
   expandAll = false
   expandPartOf = false
-  expandWhatsNext = false
   contextId!: string
   contextPath!: string
 
@@ -38,19 +33,18 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private tocSvc: AppTocService,
     private configSvc: ConfigurationsService,
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.routeQuerySubscription = this.route.queryParamMap.subscribe(
-      qParamsMap => {
-        const contextId = qParamsMap.get('contextId')
-        const contextPath = qParamsMap.get('contextPath')
-        if (contextId && contextPath) {
-          this.contextId = contextId
-          this.contextPath = contextPath
-        }
-      },
-    )
+    this.forPreview = window.location.href.includes('/author/')
+    this.routeQuerySubscription = this.route.queryParamMap.subscribe(qParamsMap => {
+      const contextId = qParamsMap.get('contextId')
+      const contextPath = qParamsMap.get('contextPath')
+      if (contextId && contextPath) {
+        this.contextId = contextId
+        this.contextPath = contextPath
+      }
+    })
     if (this.route && this.route.parent) {
       this.routeSubscription = this.route.parent.data.subscribe((data: Data) => {
         this.initData(data)
@@ -69,6 +63,7 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
       this.routeQuerySubscription.unsubscribe()
     }
   }
+
   private initData(data: Data) {
     const initData = this.tocSvc.initData(data)
     this.content = initData.content
@@ -79,7 +74,6 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
         this.contextPath = this.content.contentType
       }
       this.fetchContentParents(this.content.identifier)
-      this.fetchContentWhatsNext(this.content.identifier)
       this.populateContentPlayWidget(this.content)
     }
   }
@@ -88,13 +82,11 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
       this.contentParents = contents || []
     })
   }
-  private fetchContentWhatsNext(contentId: string) {
-    this.tocSvc.fetchContentWhatsNext(contentId).subscribe(contents => {
-      this.contentNext = contents || []
-    })
-  }
   private populateContentPlayWidget(content: NsContent.IContent) {
-    if (content.contentType === NsContent.EContentTypes.RESOURCE || content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT) {
+    if (
+      content.contentType === NsContent.EContentTypes.RESOURCE ||
+      content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT
+    ) {
       switch (content.mimeType) {
         case NsContent.EMimeTypes.M3U8:
         case NsContent.EMimeTypes.MP4:
@@ -142,7 +134,7 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
   sanitizedBackgroundImage(url: string): SafeStyle {
     return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`)
   }
-  resourceLink(resource: NsContent.IContent): { url: string, queryParams: { [key: string]: any } } {
+  resourceLink(resource: NsContent.IContent): { url: string; queryParams: { [key: string]: any } } {
     return viewerRouteGenerator(resource.identifier, resource.mimeType)
   }
 
@@ -153,4 +145,12 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
     return content.identifier
   }
 
+  get showYouMayAlsoLikeTab(): boolean {
+    switch (this.configSvc.rootOrg) {
+      case EInstance.PATHFINDERS:
+        return false
+      default:
+        return true
+    }
+  }
 }

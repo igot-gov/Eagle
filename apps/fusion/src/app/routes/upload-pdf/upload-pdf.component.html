@@ -1,0 +1,47 @@
+<section class="my-4 text-center">
+  <h2 class="mat-title text-center" i18n>Upload PDF</h2>
+  <section class="my-2">
+    <div class="margin-top-s margin-bottom-s">
+      <div class="flex flex-wrapped flex-middle justify-center margin-top-xl">
+        <button #btnSelect mat-flat-button i18n type="button" [color]="'primary'" (click)="fileInput.click()">
+          Select File
+        </button>
+        <input type="file" (change)="validation($event.target.files[0]); fileInput.value = null" accept=".pdf"
+          #fileInput class="hidden" />
+        <div class="mat-caption padding-left-xs margin-remove-bottom">
+          <ng-container *ngIf="file">
+            {{file?.name}}
+          </ng-container>
+          <ng-container *ngIf="!file" i18n>
+            Click to select a file
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <p class="mat-caption">
+      <span i18n>Supported file types: .pdf</span>
+    </p>
+    <p class="mat-caption">
+      <span i18n>Maximum file size: 200MB</span>
+    </p>
+  </section>
+  <button mat-stroked-button class="margin-right-xs" [color]="'primary'" [disabled]="!file || isRequesting"
+    (click)="upload()">
+    <ng-container *ngIf="!isRequesting" i18n>
+      Upload
+    </ng-container>
+    <ng-container *ngIf="isRequesting">
+      <div class="flex flex-between">
+        <div i18n>Uploading...</div>
+        <div class="flex flex-column flex-center">
+          <mat-progress-spinner [color]="'primary'" [diameter]="16" [mode]="'indeterminate'">
+          </mat-progress-spinner>
+        </div>
+      </div>
+    </ng-container>
+  </button>
+</section>
+<div style="display: none;" #errorUpdating i18n>Some error has occurred! Please try after sometime.</div>
+<div style="display: none;" #invalidFormat i18n>Invalid Format</div>
+<div style="display: none;" #sizeGreaterAllowed i18n>Size greater than allowed</div>
+<div style="display: none;" #changesUpdated i18n>Uploaded Successfully</div>

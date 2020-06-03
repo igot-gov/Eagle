@@ -1,21 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
+import { MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
-import { NavigatorService } from '../../services/navigator.service'
-import {
-  ILpData,
-  IProfile,
-  ICourse,
-  ICommonData,
-  IPractiseCardModel,
-} from '../../models/navigator.model'
+import { BtnGoalsService, NsContentStripMultiple, NsGoal } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { TFetchStatus } from '@ws-widget/utils'
-import { MatSnackBar } from '@angular/material'
-import { BtnGoalsService, NsGoal, NsContentStripMultiple } from '@ws-widget/collection'
 import { MultilineSnackbarComponent } from '../../components/multiline-snackbar/multiline-snackbar.component'
+import { ICommonData, ICourse, ILpData, IPractiseCardModel, IProfile } from '../../models/navigator.model'
+import { NavigatorService } from '../../services/navigator.service'
 
 @Component({
   selector: 'ws-app-lp-details',
@@ -44,22 +35,22 @@ export class LpDetailsComponent implements OnInit {
   coursesResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
     NsContentStripMultiple.IContentStripMultiple
   > = {
-    widgetType: 'contentStrip',
-    widgetSubType: 'contentStripMultiple',
-    widgetData: {
-      strips: [
-        {
-          key: 'courses-strip',
-          preWidgets: [],
-          title: 'Content',
-          filters: [],
-          request: {
-            ids: [],
+      widgetType: 'contentStrip',
+      widgetSubType: 'contentStripMultiple',
+      widgetData: {
+        strips: [
+          {
+            key: 'courses-strip',
+            preWidgets: [],
+            title: 'Content',
+            filters: [],
+            request: {
+              ids: [],
+            },
           },
-        },
-      ],
-    },
-  }
+        ],
+      },
+    }
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -74,7 +65,7 @@ export class LpDetailsComponent implements OnInit {
     // this.logger.log('datacheck ,', this.lpData, this.route.snapshot.params.id)
 
     this.learningPath = this.lpData.filter((lp: ILpData) => {
-      return lp.lp_id === Number(this.route.snapshot.params.id)
+      return lp.lp_id.toString() === this.route.snapshot.params.id
     })[0]
 
     if (this.learningPath.profiles && this.learningPath.profiles.length > 0) {
@@ -136,7 +127,7 @@ export class LpDetailsComponent implements OnInit {
 
   onCourseClicked(courseId: string) {
     const course = this.courses.find(item => item.identifier === courseId)
-path
+    const url = course.link.replace('https://lex.infosysapps.com', '')
     this.router.navigateByUrl(url)
   }
 
@@ -145,7 +136,7 @@ path
       item => item.playground_id === practiceId,
     )
     if (playItem) {
-path
+      const url = playItem.playground_link.replace('https://lex.infosysapps.com/', '')
       this.router.navigateByUrl(url)
     }
   }
@@ -206,7 +197,7 @@ path
 
       goalRequests.push(goals)
     }
-    // console.log('requ', goalRequests)
+    // //console.log('requ', goalRequests)
 
     this.btnGoalsSvc.createGoals(goalRequests).subscribe(response => {
       for (let i = 0; i < response.length; i += 1) {

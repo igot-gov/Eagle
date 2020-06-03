@@ -1,14 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  Component,
-  Input,
-  // SimpleChanges,
-  // OnDestroy,
-  // OnChanges,
-  // AfterViewInit,
-} from '@angular/core'
+import { Component, Input } from '@angular/core'
 // import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser'
 // import { CertificationService } from './certification.service'
 import { NsContent } from '@ws-widget/collection'
@@ -84,7 +74,7 @@ export class CertificationComponent {
   // ngAfterViewInit() {
   //   window.addEventListener('message', event => {
   //     if (!event.data) {
-  //       console.log('data unavailable')
+  //       //console.log('data unavailable')
   //       return
   //     }
   //     if (
@@ -205,7 +195,7 @@ export class CertificationComponent {
   //   if (iframeElem) {
   //     iframeElem.postMessage(dataToSend, '*')
   //   }
-  //   // console.log('event at posting:', event)
+  //   // //console.log('event at posting:', event)
   //   if (event === 'esc' || event === 'fullScreen') {
   //     this.proctoringWarning = true
   //   }
@@ -247,7 +237,7 @@ export class CertificationComponent {
   // }
 
   // private turnOffProctoring() {
-  //   // console.log('turnOffProctoring called')
+  //   // //console.log('turnOffProctoring called')
   //   window.removeEventListener('contextmenu', this.contextCheck)
   //   window.removeEventListener('beforeunload', this.beforeUnload)
   //   window.removeEventListener('keydown', this.keydownCheck)
@@ -282,15 +272,15 @@ export class CertificationComponent {
   //   e.returnValue = 'You are not allowed to close window.'
   // }
   // visibilityCheck = () => {
-  //   console.log('document.visibilityState >', document.visibilityState)
+  //   //console.log('document.visibilityState >', document.visibilityState)
   //   this.sendProctoringInfo('visibilitychange')
   // }
   // fullscreenCheck = () => {
-  //   // console.log('FS call')
+  //   // //console.log('FS call')
   //   this.sendProctoringInfo('fullScreen')
   // }
   // keydownCheck = (e: KeyboardEvent) => {
-  //   // console.log('key pressed e >', e)
+  //   // //console.log('key pressed e >', e)
   //   if (e.altKey) {
   //     this.sendProctoringInfo('alt')
   //     e.preventDefault()

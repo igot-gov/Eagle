@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { NsContent } from './widget-content.model'
 import { NsShare } from './widget-share.model'
+import { ICommon } from '../_models/common.model'
 
 const API_END_POINTS = {
   USER_SHARE: `/apis/protected/v8/user/share`,
@@ -17,11 +15,13 @@ const API_END_POINTS = {
   providedIn: 'root',
 })
 export class WidgetContentShareService {
+  baseUrl = this.configSvc.sitePath
 
-  constructor(
-    private http: HttpClient,
-    private configSvc: ConfigurationsService,
-  ) { }
+  constructor(private http: HttpClient, private configSvc: ConfigurationsService) { }
+
+  fetchConfigFile(): Observable<ICommon> {
+    return this.http.get<ICommon>(`${this.baseUrl}/feature/common.json`).pipe()
+  }
 
   private shareContentApi(req: NsShare.IEmailRequest): Observable<NsShare.IEmailResponse> {
     return this.http.post<NsShare.IEmailResponse>(API_END_POINTS.USER_SHARE, req)
@@ -67,7 +67,7 @@ export class WidgetContentShareService {
           thumbnailUrl: content.appIcon,
           title: content.name,
           track: (content.track || []).map(t => t.name).join(';'),
-          url: `${document.baseURI}toc/${content.identifier}/overview`,
+          url: `${document.baseURI}app/toc/${content.identifier}/overview`,
         },
       ],
       body: {
@@ -104,9 +104,6 @@ export class WidgetContentShareService {
   }
 
   contentShareNew(req: NsShare.IShareRequest) {
-    return this.http.post(
-      API_END_POINTS.USER_CONTENT_SHARE,
-      req,
-    )
+    return this.http.post(API_END_POINTS.USER_CONTENT_SHARE, req)
   }
 }

@@ -1,38 +1,36 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { LoaderService } from '@ws/author/src/lib/services/loader.service'
-import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
-import { ConfigurationsService } from 'library/ws-widget/utils/src/lib/services/configurations.service'
-import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
-import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
-import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
-import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
+// tslint:disable-next-line: max-line-length
 import {
-  Component,
-  Input,
-  ViewChild,
-  Output,
-  EventEmitter,
   AfterViewInit,
-  OnInit,
-  OnDestroy,
-  ElementRef,
   ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core'
-import {
-  IMAGE_MAX_SIZE,
-  IMAGE_SUPPORT_TYPES,
-  FILE_MAX_SIZE,
-} from '@ws/author/src/lib/constants/upload'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import {
+  AUTHORING_CONTENT_BASE,
   CONTENT_BASE_STATIC,
   CONTENT_BASE_STREAM,
   CONTENT_BASE_WEBHOST,
   CONTENT_BASE_WEBHOST_ASSETS,
-  AUTHORING_CONTENT_BASE,
 } from '@ws/author/src/lib/constants/apiEndpoints'
+import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
+import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import {
+  FILE_MAX_SIZE,
+  IMAGE_MAX_SIZE,
+  IMAGE_SUPPORT_TYPES,
+} from '@ws/author/src/lib/constants/upload'
+import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
+import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
+import { LoaderService } from '@ws/author/src/lib/services/loader.service'
+import { ConfigurationsService } from 'library/ws-widget/utils/src/lib/services/configurations.service'
 import { Subscription } from 'rxjs'
 
 declare const CKEDITOR: any
@@ -43,12 +41,26 @@ declare const CKEDITOR: any
   styleUrls: ['./plain-ckeditor.component.scss'],
 })
 export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy {
-  downloadRegex = new RegExp(`(https://.*?/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
+  downloadRegex = new RegExp(`(https?://.*?/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
   uploadRegex = new RegExp(`${AUTHORING_CONTENT_BASE}(.*?)(\\\)?\\\\?['"])`, 'gm')
+  downloadPartialImgRegex = RegExp(` src=\s*['"](.*?)['"]`, 'gm')
+  downloadPartialAncRegex = RegExp(` href\=\s*['"](.*?)['"]`, 'gm')
   @Input() doRegex = true
+  @Input() doPartialRegex = false
   html = ''
   @Input() set content(value: string) {
-    this.html = this.doRegex ? value.replace(this.downloadRegex, this.regexDownloadReplace) : value
+    if (this.doPartialRegex) {
+      // tslint:disable-next-line:max-line-length
+      const reg = `${document.location.origin}/content-store/${this.accessControlSvc.rootOrg}/${this.accessControlSvc.org.replace(/ /g, '_')}/Public/${this.id}/web-hosted/assets/`
+      this.html = value
+        .replace(this.downloadPartialImgRegex, ` src="${reg}$1"`)
+        .replace(this.downloadPartialAncRegex, ` href="${reg}$1"`)
+        .replace(this.downloadRegex, this.regexDownloadReplace)
+    } else if (this.doRegex) {
+      this.html = value.replace(this.downloadRegex, this.regexDownloadReplace)
+    } else {
+      this.html = value
+    }
   }
   @Input() id = ''
   @Input() location:
@@ -118,7 +130,7 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
       allowedContent: true,
       extraAllowedContent: 'a[!href,download,document-href,class]',
       removeButtons:
-path
+        'Cut,Copy,Paste,PasteText,PasteFromWord,Save,NewPage,Preview,Print,' +
         'Templates,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,HiddenField,ImageButton' +
         ',Smiley,PageBreak,Flash,About,CreateDiv,Anchor,SelectAll,Image',
       disableNativeSpellChecker: true,
@@ -159,23 +171,32 @@ path
   }
 
   onContentChanged() {
-    this.value.emit(
-      this.doRegex ? this.html.replace(this.uploadRegex, this.regexUploadReplace) : this.html,
-    )
+    if (this.doPartialRegex) {
+      this.value.emit(
+        this.html
+          .replace(this.uploadRegex, this.regexUploadReplace)
+          .replace(/ src=\s*['"].*?\/assets\/(.*?)['"]/gm, ' src="$1"')
+          .replace(/ href=\s*['"].*?\/assets\/(.*?)['"]/gm, ' href="$1"'),
+      ) // try again ji     ????????
+    } else if (this.doRegex) {
+      this.value.emit(this.html.replace(this.uploadRegex, this.regexUploadReplace))
+    } else {
+      this.value.emit(this.html)
+    }
   }
 
   makeTargetAsBlank() {
-path
+    CKEDITOR.on('dialogDefinition', (ev: any) => {
       try {
-path
-path
+        const dialogName = ev.data.name
+        const dialogDefinition = ev.data.definition
         if (dialogName === 'link') {
           const informationTab = dialogDefinition.getContents('target')
           const targetField = informationTab.get('linkTargetType')
           targetField['default'] = '_blank'
         }
       } catch (exception) {
-path
+        // //console.log('Error ' + ev.message)
       }
     })
   }
@@ -219,10 +240,7 @@ path
                   if (data.code) {
                     let url = data.artifactURL
                     if (!this.doRegex) {
-                      url = `/${url
-                        .split('/')
-                        .slice(3)
-                        .join('/')}`
+                      url = `/${url.split('/').slice(3).join('/')}`
                     }
                     this.editor.instance.insertHtml(
                       `<img alt='' src='${AUTHORING_CONTENT_BASE}${encodeURIComponent(
@@ -249,7 +267,7 @@ path
                   })
                   input.remove()
                 },
-              )
+            )
           } else {
             this.snackBar.openFromComponent(NotificationComponent, {
               data: {
@@ -299,10 +317,7 @@ path
                   if (data.code) {
                     let url = data.artifactURL
                     if (this.doRegex) {
-                      url = `/${url
-                        .split('/')
-                        .slice(3)
-                        .join('/')}`
+                      url = `/${url.split('/').slice(3).join('/')}`
                     }
                     this.editor.instance.insertHtml(
                       `<a href='${url}' download>Click here to download</a>`,
@@ -327,7 +342,7 @@ path
                   })
                   input.remove()
                 },
-              )
+            )
           } else {
             input.remove()
             this.snackBar.openFromComponent(NotificationComponent, {

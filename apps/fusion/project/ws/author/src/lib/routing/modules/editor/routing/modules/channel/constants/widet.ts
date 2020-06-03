@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export const WIDGET_LIBRARY = {
   audio: {
     widgetType: 'player',
@@ -267,9 +264,6 @@ export const WIDGET_LIBRARY = {
           xl: '',
           xs: '',
         },
-        redirectUrl: '',
-        title: '',
-        openInNewTab: true,
       },
     ],
   },
@@ -285,13 +279,9 @@ export const WIDGET_LIBRARY = {
           xl: '',
           xs: '',
         },
-        redirectUrl: '',
-        title: '',
-        openInNewTab: true,
       },
     ],
-    widgetHostStyle: {
-    },
+    widgetHostStyle: {},
     dimensions: {
       small: 12,
       medium: 6,
@@ -311,13 +301,9 @@ export const WIDGET_LIBRARY = {
           xl: '',
           xs: '',
         },
-        redirectUrl: '',
-        title: '',
-        openInNewTab: true,
       },
     ],
-    widgetHostStyle: {
-    },
+    widgetHostStyle: {},
     dimensions: {
       small: 12,
       medium: 12,
@@ -337,13 +323,9 @@ export const WIDGET_LIBRARY = {
           xl: '',
           xs: '',
         },
-        redirectUrl: '',
-        title: '',
-        openInNewTab: true,
       },
     ],
-    widgetHostStyle: {
-    },
+    widgetHostStyle: {},
     dimensions: {
       small: 12,
       medium: 12,
@@ -363,14 +345,9 @@ export const WIDGET_LIBRARY = {
           xl: '',
           xs: '',
         },
-        redirectUrl: '',
-        title: '',
-        openInNewTab: true,
       },
     ],
-    widgetHostStyle: {
-
-    },
+    widgetHostStyle: {},
     dimensions: {
       small: 12,
       medium: 12,
@@ -640,7 +617,7 @@ export const WIDGET_LIBRARY = {
         overflow: 'hidden',
         'word-wrap': 'break-word',
       },
-      containerClass: 'mat-elevation-z4 h-full w-full',
+      containerClass: 'h-full w-full',
     },
     widgetSubType: 'elementHtml',
     widgetType: 'element',
@@ -668,7 +645,7 @@ export const WIDGET_LIBRARY = {
         'word-wrap': 'break-word',
         'box-sizing': 'border-box',
       },
-      containerClass: 'mat-elevation-z4 h-full w-full',
+      containerClass: 'h-full w-full',
     },
     widgetSubType: 'elementHtml',
     widgetType: 'element',
@@ -696,7 +673,7 @@ export const WIDGET_LIBRARY = {
         'word-wrap': 'break-word',
         'box-sizing': 'border-box',
       },
-      containerClass: 'mat-elevation-z4 h-full w-full',
+      containerClass: 'h-full w-full',
     },
     widgetSubType: 'elementHtml',
     widgetType: 'element',
@@ -724,7 +701,7 @@ export const WIDGET_LIBRARY = {
         'word-wrap': 'break-word',
         'box-sizing': 'border-box',
       },
-      containerClass: 'mat-elevation-z4 h-full w-full',
+      containerClass: 'h-full w-full',
     },
     widgetSubType: 'elementHtml',
     widgetType: 'element',
@@ -872,7 +849,7 @@ export const WIDGET_LIBRARY = {
     },
     widgetSubType: 'elementHtml',
     widgetType: 'element',
-    widgetHostClass: 'block -mb-8',
+    widgetHostClass: 'block -mb-16',
     widgetHostStyle: {},
     dimensions: {
       small: 12,
@@ -994,9 +971,7 @@ export const WIDGET_LIBRARY = {
           widgetSubType: 'imageMapResponsive',
           widgetType: 'imageMap',
           widgetHostClass: '',
-          widgetHostStyle: {
-
-          },
+          widgetHostStyle: {},
         },
       ],
     },
@@ -1691,7 +1666,7 @@ export const WIDGET_LIBRARY = {
     data: {},
     widgetSubType: 'contentStripMultiple',
     widgetType: 'contentStrip',
-    widgetHostClass: 'block md:-my-10 md:-mx-10 -my-8 -mx-6',
+    widgetHostClass: '',
     widgetHostStyle: {},
     dimensions: {
       small: 12,
@@ -1704,7 +1679,7 @@ export const WIDGET_LIBRARY = {
     data: {},
     widgetSubType: 'contentStripMultiple',
     widgetType: 'contentStrip',
-    widgetHostClass: 'block md:-my-10 md:-mx-10 -my-8 -mx-6',
+    widgetHostClass: '',
     widgetHostStyle: {},
     dimensions: {
       small: 12,
@@ -1717,7 +1692,7 @@ export const WIDGET_LIBRARY = {
     data: {},
     widgetSubType: 'contentStripMultiple',
     widgetType: 'contentStrip',
-    widgetHostClass: 'block md:-my-10 md:-mx-10 -my-8 -mx-6',
+    widgetHostClass: '',
     widgetHostStyle: {},
     dimensions: {
       small: 12,
@@ -1730,7 +1705,7 @@ export const WIDGET_LIBRARY = {
     data: {},
     widgetSubType: 'contentStripMultiple',
     widgetType: 'contentStrip',
-    widgetHostClass: 'block md:-my-10 md:-mx-10 -my-8 -mx-6',
+    widgetHostClass: '',
     widgetHostStyle: {},
     dimensions: {
       small: 12,
@@ -1868,11 +1843,28 @@ export const WIDGET_LIBRARY = {
     },
   },
 
+  wrapper: {
+    widgetType: 'wrapper',
+    widgetSubType: 'videoWrapper',
+    data: {
+      videoData: {
+        disableTelemetry: false,
+      },
+      externalData: {},
+    },
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '100%',
+      width: '100%',
+    },
+  },
   one_wrapper: {
     widgetType: 'wrapper',
     widgetSubType: 'videoWrapper',
     data: {
-      videoData: {},
+      videoData: {
+        disableTelemetry: false,
+      },
       externalData: {},
     },
     widgetHostClass: '',
@@ -1891,7 +1883,9 @@ export const WIDGET_LIBRARY = {
     widgetType: 'wrapper',
     widgetSubType: 'videoWrapper',
     data: {
-      videoData: {},
+      videoData: {
+        disableTelemetry: false,
+      },
       externalData: {},
     },
     widgetHostClass: '',
@@ -1910,7 +1904,9 @@ export const WIDGET_LIBRARY = {
     widgetType: 'wrapper',
     widgetSubType: 'videoWrapper',
     data: {
-      videoData: {},
+      videoData: {
+        disableTelemetry: false,
+      },
       externalData: {},
     },
     widgetHostClass: '',
@@ -1929,7 +1925,9 @@ export const WIDGET_LIBRARY = {
     widgetType: 'wrapper',
     widgetSubType: 'videoWrapper',
     data: {
-      videoData: {},
+      videoData: {
+        disableTelemetry: false,
+      },
       externalData: {},
     },
     widgetHostClass: '',
@@ -1945,6 +1943,43 @@ export const WIDGET_LIBRARY = {
     },
   },
 
+  gallery_wrapper: {
+    widgetData: {
+      type: 'video',
+      designVal: 'set2',
+      autoNext: true,
+      delay: '',
+      loop: true,
+      cardMenu: [
+        {
+          cardData: {},
+          widget: {
+            widgetType: 'wrapper',
+            widgetSubType: 'videoWrapper',
+            widgetData: {
+              videoData: {
+                disableTelemetry: false,
+              },
+              externalData: {},
+            },
+            widgetHostClass: '',
+            widgetHostStyle: {},
+          },
+        },
+      ],
+      configs: {
+        widgetPlayer: {},
+        widgetRibbon: {},
+      },
+    },
+    widgetSubType: 'galleryView',
+    widgetType: 'gallery',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '100%',
+      width: '100%',
+    },
+  },
   one_gallery_wrapper: {
     widgetData: {
       type: 'video',
@@ -1959,7 +1994,9 @@ export const WIDGET_LIBRARY = {
             widgetType: 'wrapper',
             widgetSubType: 'videoWrapper',
             widgetData: {
-              videoData: {},
+              videoData: {
+                disableTelemetry: false,
+              },
               externalData: {},
             },
             widgetHostClass: '',
@@ -2000,7 +2037,9 @@ export const WIDGET_LIBRARY = {
             widgetType: 'wrapper',
             widgetSubType: 'videoWrapper',
             widgetData: {
-              videoData: {},
+              videoData: {
+                disableTelemetry: false,
+              },
               externalData: {},
             },
             widgetHostClass: '',
@@ -2041,7 +2080,9 @@ export const WIDGET_LIBRARY = {
             widgetType: 'wrapper',
             widgetSubType: 'videoWrapper',
             widgetData: {
-              videoData: {},
+              videoData: {
+                disableTelemetry: false,
+              },
               externalData: {},
             },
             widgetHostClass: '',
@@ -2082,7 +2123,9 @@ export const WIDGET_LIBRARY = {
             widgetType: 'wrapper',
             widgetSubType: 'videoWrapper',
             widgetData: {
-              videoData: {},
+              videoData: {
+                disableTelemetry: false,
+              },
               externalData: {},
             },
             widgetHostClass: '',
@@ -2114,13 +2157,647 @@ export const WIDGET_LIBRARY = {
     widgetType: 'wrapper',
     widgetSubType: 'videoWrapper',
     widgetData: {
-      videoData: {},
+      videoData: {
+        disableTelemetry: false,
+      },
       externalData: {},
     },
+    widgetHostClass: '',
+    widgetHostStyle: {},
+  },
+
+  solo_gallery_wrapper: {
+    widgetData: {
+      type: 'video',
+      designVal: 'set2',
+      autoNext: false,
+      delay: 0,
+      loop: false,
+      cardMenu: [
+        {
+          cardData: {},
+          widget: {
+            widgetType: 'wrapper',
+            widgetSubType: 'videoWrapper',
+            widgetData: {
+              videoData: {
+                disableTelemetry: false,
+              },
+              externalData: {},
+            },
+            widgetHostClass: '',
+            widgetHostStyle: {},
+          },
+        },
+      ],
+      configs: {
+        widgetPlayer: {},
+        widgetRibbon: {},
+      },
+    },
+    widgetSubType: 'galleryView',
+    widgetType: 'gallery',
+    widgetHostClass: '',
+    widgetHostStyle: {},
+  },
+
+  one_intranet: {
+    widgetSubType: 'intranetResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {},
+    data: {
+      isIntranet: {
+        widget: {
+          widgetData: {
+            iframeSrc: '',
+            containerStyle: {
+              'min-height': '400px',
+            },
+          },
+          widgetSubType: 'pageEmbedded',
+          widgetType: 'page',
+          widgetHostClass: '',
+        },
+      },
+      isNotIntranet: {
+        widget: {
+          widgetData: {
+            template:
+              // tslint:disable-next-line: max-line-length
+              '<div class=\'w-full\'><div class=\'p-4\'><div class=\'text-3xl font-semibold text-center leading-tight\'>{{title}}</div><br /><div class=\'text-base font-medium text-center leading-normal\'>{{subheading}}</div></div></div>',
+            templateData: {
+              title: 'Content not available online',
+              subheading:
+                'You can view this on intranet only.Please connect to intranet to view this.',
+            },
+            containerClass: 'mat-elevation-z4 h-full flex bg-gray-400',
+            containerStyle: {
+              'align-items': 'center',
+            },
+          },
+          widgetSubType: 'elementHtml',
+          widgetType: 'element',
+          widgetHostClass: '',
+        },
+      },
+    },
+    dimensions: {
+      small: 12,
+      medium: 6,
+      large: 3,
+      xLarge: 3,
+    },
+  },
+  two_intranet: {
+    widgetSubType: 'intranetResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {},
+    data: {
+      isIntranet: {
+        widget: {
+          widgetData: {
+            iframeSrc: '',
+            containerStyle: {
+              'min-height': '400px',
+            },
+          },
+          widgetSubType: 'pageEmbedded',
+          widgetType: 'page',
+          widgetHostClass: '',
+        },
+      },
+      isNotIntranet: {
+        widget: {
+          widgetData: {
+            template:
+              // tslint:disable-next-line: max-line-length
+              '<div class=\'w-full\'><div class=\'p-4\'><div class=\'text-3xl font-semibold text-center leading-tight\'>{{title}}</div><br /><div class=\'text-base font-medium text-center leading-normal\'>{{subheading}}</div></div></div>',
+            templateData: {
+              title: 'Content not available online',
+              subheading:
+                'You can view this on intranet only.Please connect to intranet to view this.',
+            },
+            containerClass: 'mat-elevation-z4 h-full flex bg-gray-400',
+            containerStyle: {
+              'align-items': 'center',
+            },
+          },
+          widgetSubType: 'elementHtml',
+          widgetType: 'element',
+          widgetHostClass: '',
+        },
+      },
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 6,
+      xLarge: 6,
+    },
+  },
+  three_intranet: {
+    widgetSubType: 'intranetResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {},
+    data: {
+      isIntranet: {
+        widget: {
+          widgetData: {
+            iframeSrc: '',
+            containerStyle: {
+              'min-height': '400px',
+            },
+          },
+          widgetSubType: 'pageEmbedded',
+          widgetType: 'page',
+          widgetHostClass: '',
+        },
+      },
+      isNotIntranet: {
+        widget: {
+          widgetData: {
+            template:
+              // tslint:disable-next-line: max-line-length
+              '<div class=\'w-full\'><div class=\'p-4\'><div class=\'text-3xl font-semibold text-center leading-tight\'>{{title}}</div><br /><div class=\'text-base font-medium text-center leading-normal\'>{{subheading}}</div></div></div>',
+            templateData: {
+              title: 'Content not available online',
+              subheading:
+                'You can view this on intranet only.Please connect to intranet to view this.',
+            },
+            containerClass: 'mat-elevation-z4 h-full flex bg-gray-400',
+            containerStyle: {
+              'align-items': 'center',
+            },
+          },
+          widgetSubType: 'elementHtml',
+          widgetType: 'element',
+          widgetHostClass: '',
+        },
+      },
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 9,
+      xLarge: 9,
+    },
+  },
+
+  four_intranet: {
+    widgetSubType: 'intranetResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {},
+    data: {
+      isIntranet: {
+        widget: {
+          widgetData: {
+            iframeSrc: '',
+            containerStyle: {
+              'min-height': '400px',
+            },
+          },
+          widgetSubType: 'pageEmbedded',
+          widgetType: 'page',
+          widgetHostClass: '',
+        },
+      },
+      isNotIntranet: {
+        widget: {
+          widgetData: {
+            template:
+              // tslint:disable-next-line: max-line-length
+              '<div class=\'w-full\'><div class=\'p-4\'><div class=\'text-3xl font-semibold text-center leading-tight\'>{{title}}</div><br /><div class=\'text-base font-medium text-center leading-normal\'>{{subheading}}</div></div></div>',
+            templateData: {
+              title: 'Content not available online',
+              subheading:
+                'You can view this on intranet only.Please connect to intranet to view this.',
+            },
+            containerClass: 'mat-elevation-z4 h-full flex bg-gray-400',
+            containerStyle: {
+              'align-items': 'center',
+            },
+          },
+          widgetSubType: 'elementHtml',
+          widgetType: 'element',
+          widgetHostClass: '',
+        },
+      },
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 12,
+      xLarge: 12,
+    },
+  },
+
+  one_resp_gallery_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'gallery',
+            widgetSubType: 'galleryView',
+            widgetHostClass: '',
+            widgetHostStyle: {},
+            widgetData: {
+              type: 'video',
+              designVal: 'set2',
+              autoNext: true,
+              delay: 10,
+              loop: true,
+              configs: {
+                widgetPlayer: {},
+                widgetRibbon: {},
+              },
+              cardMenu: [
+                {
+                  cardData: {},
+                  widget: {
+                    widgetType: 'wrapper',
+                    widgetSubType: 'videoWrapper',
+                    widgetData: {
+                      videoData: {
+                        disableTelemetry: false,
+                      },
+                      externalData: {},
+                    },
+                    widgetHostClass: '',
+                    widgetHostStyle: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      type: 'gallery',
+      subType: 'wrapper',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
     widgetHostClass: '',
     widgetHostStyle: {
       height: '472px',
       width: '331px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 6,
+      large: 3,
+      xLarge: 3,
+    },
+  },
+
+  two_resp_gallery_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'gallery',
+            widgetSubType: 'galleryView',
+            widgetHostClass: '',
+            widgetHostStyle: {},
+            widgetData: {
+              type: 'video',
+              designVal: 'set2',
+              autoNext: true,
+              delay: 10,
+              loop: true,
+              configs: {
+                widgetPlayer: {},
+                widgetRibbon: {},
+              },
+              cardMenu: [
+                {
+                  cardData: {},
+                  widget: {
+                    widgetType: 'wrapper',
+                    widgetSubType: 'videoWrapper',
+                    widgetData: {
+                      videoData: {
+                        disableTelemetry: false,
+                      },
+                      externalData: {},
+                    },
+                    widgetHostClass: '',
+                    widgetHostStyle: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      type: 'gallery',
+      subType: 'wrapper',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '662px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 6,
+      xLarge: 6,
+    },
+  },
+
+  three_resp_gallery_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'gallery',
+            widgetSubType: 'galleryView',
+            widgetHostClass: '',
+            widgetHostStyle: {},
+            widgetData: {
+              type: 'video',
+              designVal: 'set2',
+              autoNext: true,
+              delay: 10,
+              loop: true,
+              configs: {
+                widgetPlayer: {},
+                widgetRibbon: {},
+              },
+              cardMenu: [
+                {
+                  cardData: {},
+                  widget: {
+                    widgetType: 'wrapper',
+                    widgetSubType: 'videoWrapper',
+                    widgetData: {
+                      videoData: {
+                        disableTelemetry: false,
+                      },
+                      externalData: {},
+                    },
+                    widgetHostClass: '',
+                    widgetHostStyle: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      type: 'gallery',
+      subType: 'wrapper',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '993px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 9,
+      xLarge: 9,
+    },
+  },
+
+  four_resp_gallery_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'gallery',
+            widgetSubType: 'galleryView',
+            widgetHostClass: '',
+            widgetHostStyle: {},
+            widgetData: {
+              type: 'video',
+              designVal: 'set2',
+              autoNext: true,
+              delay: 10,
+              loop: true,
+              configs: {
+                widgetPlayer: {},
+                widgetRibbon: {},
+              },
+              cardMenu: [
+                {
+                  cardData: {},
+                  widget: {
+                    widgetType: 'wrapper',
+                    widgetSubType: 'videoWrapper',
+                    widgetData: {
+                      videoData: {
+                        disableTelemetry: false,
+                      },
+                      externalData: {},
+                    },
+                    widgetHostClass: '',
+                    widgetHostStyle: {},
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+      type: 'gallery',
+      subType: 'wrapper',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '1324px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 12,
+      xLarge: 12,
+    },
+  },
+
+  one_resp_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'wrapper',
+            widgetSubType: 'videoWrapper',
+            widgetData: {
+              videoData: {
+                disableTelemetry: false,
+              },
+              externalData: {},
+            },
+            widgetHostClass: '',
+            widgetHostStyle: {},
+          },
+        },
+      ],
+      type: 'wrapper',
+      subType: '',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '331px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 6,
+      large: 3,
+      xLarge: 3,
+    },
+  },
+
+  two_resp_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'wrapper',
+            widgetSubType: 'videoWrapper',
+            widgetData: {
+              videoData: {
+                disableTelemetry: false,
+              },
+              externalData: {},
+            },
+            widgetHostClass: '',
+            widgetHostStyle: {},
+          },
+        },
+      ],
+      type: 'wrapper',
+      subType: '',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '662px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 6,
+      xLarge: 6,
+    },
+  },
+
+  three_resp_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'wrapper',
+            widgetSubType: 'videoWrapper',
+            widgetData: {
+              videoData: {
+                disableTelemetry: false,
+              },
+              externalData: {},
+            },
+            widgetHostClass: '',
+            widgetHostStyle: {},
+          },
+        },
+      ],
+      type: 'wrapper',
+      subType: '',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '993px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 9,
+      xLarge: 9,
+    },
+  },
+
+  four_resp_wrapper: {
+    widgetData: {
+      selectFrom: [
+        {
+          minWidth: 0,
+          maxWidth: 500090000,
+          widget: {
+            widgetType: 'wrapper',
+            widgetSubType: 'videoWrapper',
+            widgetData: {
+              videoData: {
+                disableTelemetry: false,
+              },
+              externalData: {},
+            },
+            widgetHostClass: '',
+            widgetHostStyle: {},
+          },
+        },
+      ],
+      type: 'wrapper',
+      subType: '',
+    },
+    widgetSubType: 'selectorResponsive',
+    widgetType: 'selector',
+    widgetHostClass: '',
+    widgetHostStyle: {
+      height: '472px',
+      width: '1324px',
+    },
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 12,
+      xLarge: 12,
+    },
+  },
+
+  channel_hub: {
+    data: {},
+    widgetSubType: 'channelHub',
+    widgetType: 'channelHub',
+    widgetHostClass: '',
+    widgetHostStyle: {},
+    dimensions: {
+      small: 12,
+      medium: 12,
+      large: 12,
+      xLarge: 12,
     },
   },
 }

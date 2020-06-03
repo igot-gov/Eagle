@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar color="primary">
   <a mat-icon-button routerLink="/app/infy/navigator">
     <mat-icon>arrow_back</mat-icon>
@@ -10,40 +7,39 @@
 <div class="margin-bottom-xl">
   <div class="banner ws-mat-primary-background-op50">
     <div class="banner-description margin-bottom-m padding-top-m">
-      <h1
-        class="mat-display-1 margin-bottom-l ws-mat-primary-text text-bold padding-top-l small-banner-text"
-        i18n
-      >
-       What Can I Learn?
+      <h1 class="mat-display-1 margin-bottom-l ws-mat-primary-text text-bold padding-top-l small-banner-text" i18n>
+        What Can I Learn?
       </h1>
       <h2 i18n class="mat-title margin-top-xl">
         Get suggestions based on current skills.
       </h2>
     </div>
   </div>
-  <div class = "" *ngIf="!technologies.length">
-    <h2 class = "mat-display-1 text-center margin-top-xl" i18n>Please wait while we are getting the data</h2>
+  <div class="" *ngIf="!technologies.length">
+    <h2 class="mat-display-1 text-center margin-top-xl" i18n>Please wait while we are getting the data</h2>
   </div>
-    <div class="margin-top-l margin-bottom-l padding-left-l padding-right-l" *ngIf="technologies.length">
-    <h1 class="mat-headline ws-mat-primary-text padding-top-xs padding-bottom-l padding-left-l" i18n>Select topics to get suggestions</h1>
+  <div class="margin-top-l margin-bottom-l padding-left-l padding-right-l" *ngIf="technologies.length">
+    <h1 class="mat-headline ws-mat-primary-text padding-top-xs padding-bottom-l padding-left-l" i18n>Select topics to
+      get suggestions</h1>
     <!-- <div [ngClass]="{ scrollable: isMobile }"> -->
-      <!-- <div *ngIf="searchInProgress" class="margin-top-xl"> -->
-        <!-- <mat-spinner></mat-spinner> -->
-      <!-- </div> -->
-      <h2 class="heading uk-position-center" *ngIf="!searchInProgress && technologies?.length === 0" i18n>
-        No Results for your search
-      </h2>
-      <div class = "padding-left-l margin-left-l margin-right-l">
+    <!-- <div *ngIf="searchInProgress" class="margin-top-xl"> -->
+    <!-- <mat-spinner></mat-spinner> -->
+    <!-- </div> -->
+    <h2 class="heading uk-position-center" *ngIf="!searchInProgress && technologies?.length === 0" i18n>
+      No Results for your search
+    </h2>
+    <div class="padding-left-l margin-left-l margin-right-l">
       <mat-chip-list>
         <ng-container *ngFor="let tech of technologies">
-          <mat-chip class = "mat-chips padding-left-m padding-right-m" *ngIf="isSelected(tech)" color="primary" selected (click)="toggleChipSelection(tech)">
+          <mat-chip class="mat-chips padding-left-m padding-right-m" *ngIf="isSelected(tech)" color="primary" selected
+            (click)="toggleChipSelection(tech)">
             {{ tech }}
             <mat-icon matChipRemove (click)="toggleChipSelection(tech)">cancel</mat-icon>
           </mat-chip>
           <mat-chip *ngIf="!isSelected(tech)" (click)="toggleChipSelection(tech)">{{ tech }}</mat-chip>
         </ng-container>
       </mat-chip-list>
-      </div>
+    </div>
     <!-- </div> -->
   </div>
   <div class="text-center" *ngIf="technologies.length">

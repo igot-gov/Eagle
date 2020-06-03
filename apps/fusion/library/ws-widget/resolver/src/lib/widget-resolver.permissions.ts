@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver } from './widget-resolver.model'
 
 function isStringArray(strArr: string[] | any): boolean {
@@ -68,10 +65,10 @@ export function hasUnitPermission(
     matchAgainst instanceof Set
       ? matchAgainst
       : Array.isArray(matchAgainst) && isStringArray(matchAgainst)
-      ? new Set(matchAgainst)
-      : typeof matchAgainst === 'string'
-      ? new Set([matchAgainst])
-      : new Set()
+        ? new Set(matchAgainst)
+        : typeof matchAgainst === 'string'
+          ? new Set([matchAgainst])
+          : new Set()
 
   if (typeof requiredPermission === 'object' && requiredPermission !== null) {
     if (Array.isArray(requiredPermission)) {

@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { AssessmentService } from '../../services/competency.service'
-import { NSCompetency } from '../../models/competency.model'
-import { Chart } from 'chart.js'
-import { TFetchStatus } from '@ws-widget/utils'
-import { NSProfileData } from '../../../../models/profile.model'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
+import { TFetchStatus } from '@ws-widget/utils'
+import { Chart } from 'chart.js'
+import { NSProfileData } from '../../../../models/profile.model'
+import { NSCompetency } from '../../models/competency.model'
+import { AssessmentService } from '../../services/competency.service'
 
 @Component({
   selector: 'ws-app-card-detail',
@@ -49,7 +46,7 @@ export class CardDetailComponent implements OnInit {
       })
     }
     // if (this.assessmentDetails) {
-    //   // console.log('val:', this.assessmentDetails.scoreDistribution['0.0-25.0'])
+    //   // //console.log('val:', this.assessmentDetails.scoreDistribution['0.0-25.0'])
     // }
 
     // this.lineChart = new Chart('canvas', {

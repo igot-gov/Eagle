@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar color="primary" *ngIf="fetchStatus === 'done'">
   <a mat-icon-button routerLink="/app/infy/navigator/explore">
     <mat-icon>arrow_back</mat-icon>
@@ -13,10 +10,7 @@
 <div class="margin-bottom-xl">
   <div class="banner ws-mat-primary-background-op50">
     <div class="banner-description margin-bottom-m padding-top-m">
-      <h1
-        class="mat-display-1 margin-bottom-l ws-mat-primary-text text-bold padding-top-l small-banner-text"
-        i18n
-      >
+      <h1 class="mat-display-1 margin-bottom-l ws-mat-primary-text text-bold padding-top-l small-banner-text" i18n>
         Choose a profile below to discover the courses that you need to learn
       </h1>
       <h2 i18n class="mat-title margin-top-xl">
@@ -36,26 +30,19 @@
       </h1>
       <mat-radio-group>
         <ng-container *ngFor="let profile of learningPath?.profiles; let idx = index">
-          <mat-radio-button
-            name="profile"
-            [value]="profile?.profile_id"
-            [checked]="idx === 0"
-            (change)="onProfileChange(profile?.profile_id)"
-            class="mat-title ws-mat-primary-text"
-            >{{ profile?.profile_display_name }}
+          <mat-radio-button name="profile" [value]="profile?.profile_id" [checked]="idx === 0"
+            (change)="onProfileChange(profile?.profile_id)" class="mat-title ws-mat-primary-text">
+            {{ profile?.profile_display_name }}
           </mat-radio-button>
           <div class="radio-desc">
             <p class="flex radio mat-body-1">
               <mat-icon>access_time</mat-icon>
               <span class="margin-left-xs/2 text-bold">{{ profile.profile_time + ' DAYS' }}</span>
             </p>
-            <span
-              class="mat-subheading-2 text-bold courses-profile"
-              *ngFor="let course of (learningPath?.profiles)[idx].courses; let cIdx = index"
-            >
+            <span class="mat-subheading-2 text-bold courses-profile"
+              *ngFor="let course of (learningPath?.profiles)[idx].courses; let cIdx = index">
               {{ course.course_name }}
-              <ng-container *ngIf="cIdx < (learningPath?.profiles)[idx].courses.length - 1"
-                >,
+              <ng-container *ngIf="cIdx < (learningPath?.profiles)[idx].courses.length - 1">,
               </ng-container>
             </span>
           </div>
@@ -64,12 +51,7 @@
       </mat-radio-group>
     </div>
     <div class="text-center margin-top-xl">
-      <button
-        *ngIf="!goalsAddingInProgess"
-        mat-raised-button
-        color="primary"
-        (click)="createGoalClicked()"
-      >
+      <button *ngIf="!goalsAddingInProgess" mat-raised-button color="primary" (click)="createGoalClicked()">
         Create Goal
       </button>
       <mat-spinner *ngIf="goalsAddingInProgess" class="display-inline-block"></mat-spinner>

@@ -1,9 +1,205 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { IWidgetGraphData, NsContent } from '@ws-widget/collection'
 
 export namespace NSProfileData {
+  export interface IProfileJsonData {
+      dashboard: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subFeatures: {
+          pendingCourses: boolean
+          knowledgeBoard: boolean
+          calendar: boolean
+          skill: boolean
+          interests: boolean
+          latest: boolean
+        }
+      }
+      learning: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subTabs: {
+            learningHistory: {
+            enabled: boolean
+            available: boolean
+            isClient: boolean
+            isFilter: boolean
+            tabs: {
+              courses: boolean
+              programs: boolean
+              modules: boolean
+              resources: boolean
+            }
+          }
+          learningTime: {
+            enabled: boolean
+            available: boolean
+            charts: {
+              learningBarChart: boolean
+              trackWiseChart: boolean
+              calendarChart: boolean
+              dimensionsChart: boolean
+              timeSpentByMe: boolean
+              timeSpentByPeers: boolean
+              timeSpentByEmployees: boolean
+            }
+          }
+        }
+      }
+      achievements: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subTabs: {
+          badges: {
+            enabled: boolean
+            available: boolean
+          }
+          assessments: {
+            enabled: boolean
+            available: boolean
+          }
+          certifications: {
+            enabled: boolean
+            available: boolean
+          }
+        }
+      }
+      skills: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subTabs: {
+          skills: {
+            enabled: boolean
+            available: boolean
+            client: boolean
+            subFeatures: {
+              addSkill: boolean
+              editSkill: boolean
+            }
+          }
+          roles: {
+            enabled: boolean
+            available: boolean
+            client: boolean
+            subFeatures: {
+              addRole: boolean
+              editRole: boolean
+              deleteRole: boolean
+              shareRole: boolean
+            }
+          }
+          allSkills: {
+            enabled: boolean
+            available: boolean
+            client: boolean
+            subFeatures: {
+              filters: boolean
+            }
+          }
+          projectEndorsements: {
+            enabled: boolean
+            available: boolean
+            client: boolean
+            subFeatures: {
+              createEndorsement: boolean
+            }
+          }
+          approveEndorsements: {
+            enabled: boolean
+            available: boolean
+          }
+        }
+      }
+      interests: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+      }
+      plans: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subTabs: {
+          goals: {
+            enabled: boolean
+            available: boolean
+          }
+          playlists: {
+            enabled: boolean
+            available: boolean
+          }
+        }
+      }
+      refactoring: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+      }
+      collaborators: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subTabs: {
+          goalsSharedByMe: {
+            enabled: boolean
+            available: boolean
+          }
+          goalsSharedToMe: {
+            enabled: boolean
+            available: boolean
+          }
+          ArtifactsShared: {
+            enabled: boolean
+            available: boolean
+          }
+          playlistSharedByMe: {
+            enabled: boolean
+            available: boolean
+          }
+          playlistSharedToMe: {
+            enabled: boolean
+            available: boolean
+          }
+          playground: {
+            enabled: boolean
+            available: boolean
+          }
+          expertsContacted: {
+            enabled: boolean
+            available: boolean
+          }
+          contentCreated: {
+            enabled: boolean
+            available: boolean
+          }
+        }
+      }
+      featureUsage: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+        subSections: {
+          learningTime: boolean
+          assessments: boolean
+          refactoring: boolean
+          plans: boolean
+          collaborators: boolean
+          other: boolean
+        }
+      }
+      settings: {
+        enabled: boolean
+        available: boolean
+        displayName: string
+      }
+  }
+  export interface IJson {
+    enabledTabs: IProfileJsonData
+  }
+
   export interface ITimeSpentResponse {
     JL_wise: IPieCharts[]
     badges_details: IBadgeDetails[]
@@ -15,8 +211,8 @@ export namespace NSProfileData {
     points_and_ranks: IPointsAndRanks
     time_spent_by_user: number
     timespent_user_vs_org_wide: {
-      time_spent_by_user: number;
-      usage_percent: number;
+      time_spent_by_user: number
+      usage_percent: number
     }
     total_badges_earned: number
     track_wise_user_timespent: ITrackWiseData
@@ -179,11 +375,11 @@ export namespace NSProfileData {
   //   | 'person'
   //   | 'tags'
 
-  // const SERVICES: Record<string, string> = {
-  //   doorToDoor: 'delivery at door',
-  //   airDelivery: 'flying in',
-  //   specialDelivery: 'special delivery',
-  //   inStore: 'in-store pickup',
+  // const SERVICES: Record<string string> = {
+  //   doorToDoor: 'delivery at door'
+  //   airDelivery: 'flying in'
+  //   specialDelivery: 'special delivery'
+  //   inStore: 'in-store pickup'
   // }
   export interface IFollowing {
     'Knowledge Board': NsContent.IContentMinimal[]

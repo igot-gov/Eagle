@@ -1,0 +1,50 @@
+<div *ngIf="shareRoleFetchStatus === 'fetching' || !roleName" class="my-3 text-center">
+  <mat-spinner></mat-spinner>
+</div>
+<h2 *ngIf="shareRoleFetchStatus === 'none'" class="text-center" i18n>No Data</h2>
+<div *ngIf="shareRoleFetchStatus === 'done' && roleName"
+  class="roles-container flex flex-center flex-wrapped margin-top-xl">
+  <div class="margin-bottom-xl ">
+    <div class="flex flex-middle">
+      <h2 class="mat-title margin-left-s" i18n>Assigning the role</h2>
+      <h2 class="mat-title margin-left-xs">{{ roleName }}</h2>
+    </div>
+    <mat-card class="edit-role-card">
+      <mat-card-content>
+        <form [formGroup]="shareForm" class="tab-width">
+          <mat-form-field class="length-field">
+            <input type="text" matInput i18n-placeholder placeholder="Role Name" [value]="roleName" formControlName="roleName" readonly />
+          </mat-form-field>
+
+          <!-- <mat-form-field class="length-field">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let email of emailIdList" [selectable]="selectable" [removable]="removable" (removed)="remove(email)">
+                {{ email }}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="Enter Email Id" #emailInput [formControl]="shareControl" [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)" />
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelected($event.option.value)" [displayWith]="displayFn">
+              <mat-option *ngFor="let option of filteredOptions" [value]="option.emailId">
+                {{ option.emailId }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field> -->
+          <ws-widget-user-autocomplete (usersList)="usersList($event)"></ws-widget-user-autocomplete>
+          <mat-form-field class="length-field">
+            <textarea type="text" matInput i18n-placeholder placeholder="Your Message" formControlName="message"></textarea>
+          </mat-form-field>
+          <div class="flex flex-center flex-wrapped">
+            <button mat-raised-button color="primary" type="submit"
+              (click)="onShareRole(roleName, shareForm.get('message').value)" i18n>
+              Assign Role
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<input #emptyContent type="hidden" i18n-value value="Please enter the user Id" />
+<input #successContent type="hidden" i18n-value value="Successfully Assigned role" />

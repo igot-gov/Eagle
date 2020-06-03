@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
@@ -9,13 +6,14 @@ import { Subscription } from 'rxjs'
 import { IWSPublicLoginConfig } from './login.model'
 
 @Component({
-path
-path
-path
+  selector: 'ws-pathfinders-login',
+  templateUrl: './pathfinders-login.component.html',
+  styleUrls: ['./pathfinders-login.component.scss'],
 })
 export class PathfindersLoginComponent implements OnInit, OnDestroy {
   appIcon: SafeUrl | null = null
   logo = ''
+  bottomLogo = ''
   isClientLogin = false
   loginConfig: IWSPublicLoginConfig | null = null
   private redirectUrl = ''
@@ -30,7 +28,7 @@ export class PathfindersLoginComponent implements OnInit, OnDestroy {
         this.configSvc.instanceConfig.logos.landingLogo,
       )
       this.logo = this.configSvc.instanceConfig.logos.company
-
+      this.bottomLogo = '/assets/instances/Wingspan-Pathfinders/app_logos/InfosysFoundationUSA.png'
     }
   }
 
@@ -55,8 +53,12 @@ export class PathfindersLoginComponent implements OnInit, OnDestroy {
       this.subscriptionLogin.unsubscribe()
     }
   }
-path
+  login(key: 'E' | 'N' | 'S' | 'siemens-entitlement') {
     this.authSvc.login(key, this.redirectUrl)
+  }
+
+  register() {
+    this.authSvc.register(this.redirectUrl)
   }
 
 }

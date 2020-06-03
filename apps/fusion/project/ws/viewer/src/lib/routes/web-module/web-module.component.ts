@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
@@ -8,6 +5,7 @@ import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/c
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { EventService, WsEvents } from '@ws-widget/utils'
+import { ViewerUtilService } from '../../viewer-util.service'
 
 @Component({
   selector: 'viewer-web-module',
@@ -17,6 +15,7 @@ import { EventService, WsEvents } from '@ws-widget/utils'
 export class WebModuleComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | null = null
   private telemetryIntervalSubscription: Subscription | null = null
+  forPreview = window.location.href.includes('/author/')
   isFetchingDataComplete = false
   isErrorOccured = false
   webmoduleData: NsContent.IContent | null = null
@@ -25,12 +24,13 @@ export class WebModuleComponent implements OnInit, OnDestroy {
   webmoduleManifest: any
   discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
     NsDiscussionForum.IDiscussionForumInput
-  > | null = null
+    > | null = null
   constructor(
     private activatedRoute: ActivatedRoute,
     private contentSvc: WidgetContentService,
     private http: HttpClient,
     private eventSvc: EventService,
+    private viewSvc: ViewerUtilService,
   ) { }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class WebModuleComponent implements OnInit, OnDestroy {
         if (this.webmoduleData) {
           this.formDiscussionForumWidget(this.webmoduleData)
         }
-        if (this.webmoduleData && this.webmoduleData.artifactUrl.indexOf('content-store') >= 0) {
+        if (!this.forPreview && this.webmoduleData && this.webmoduleData.artifactUrl.indexOf('content-store') >= 0) {
           await this.setS3Cookie(this.webmoduleData.identifier)
         }
         if (
@@ -52,6 +52,14 @@ export class WebModuleComponent implements OnInit, OnDestroy {
             this.webmoduleData.mimeType === NsContent.EMimeTypes.WEB_MODULE_EXERCISE)
         ) {
           this.webmoduleManifest = await this.transformWebmodule(this.webmoduleData)
+        }
+        if (this.webmoduleData && this.webmoduleData.identifier) {
+          this.webmoduleData.resumePage = 1
+          if (this.activatedRoute.snapshot.queryParams.collectionId) {
+            await this.fetchContinueLearning(this.activatedRoute.snapshot.queryParams.collectionId, this.webmoduleData.identifier)
+          } else {
+            await this.fetchContinueLearning(this.webmoduleData.identifier, this.webmoduleData.identifier)
+          }
         }
         if (this.webmoduleData && this.webmoduleManifest) {
           this.oldData = this.webmoduleData
@@ -86,8 +94,12 @@ export class WebModuleComponent implements OnInit, OnDestroy {
   private async transformWebmodule(_content: NsContent.IContent) {
     let manifestFile = ''
     if (this.webmoduleData && this.webmoduleData.artifactUrl) {
+      const artifactUrl = this.forPreview
+        ? this.viewSvc.getAuthoringUrl(this.webmoduleData.artifactUrl)
+        : this.webmoduleData.artifactUrl
+      this.webmoduleData.artifactUrl = artifactUrl
       manifestFile = await this.http
-        .get<any>(this.webmoduleData ? this.webmoduleData.artifactUrl : '')
+        .get<any>(artifactUrl || '')
         .toPromise()
         .catch((_err: any) => { })
     }
@@ -102,12 +114,16 @@ export class WebModuleComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.LEARNING,
         title: content.name,
         initialPostCount: 2,
+        isDisabled: this.forPreview,
       },
       widgetSubType: 'discussionForum',
       widgetType: 'discussionForum',
     }
   }
   raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
+    if (this.forPreview) {
+      return
+    }
     const event = {
       eventType: WsEvents.WsEventType.Telemetry,
       eventLogLevel: WsEvents.WsEventLogLevel.Info,
@@ -117,16 +133,32 @@ export class WebModuleComponent implements OnInit, OnDestroy {
         state,
         type: WsEvents.WsTimeSpentType.Player,
         mode: WsEvents.WsTimeSpentMode.Play,
-        courseId: null,
         content: data,
         identifier: data ? data.identifier : null,
-        isCompleted: true,
         mimeType: NsContent.EMimeTypes.WEB_MODULE,
-        isIdeal: false,
         url: data ? data.artifactUrl : null,
       },
     }
     this.eventSvc.dispatchEvent(event)
+  }
+  async fetchContinueLearning(collectionId: string, webModuleId: string): Promise<boolean> {
+    return new Promise(resolve => {
+      this.contentSvc.fetchContentHistory(collectionId).subscribe(
+        data => {
+          if (data) {
+            if (
+              data.identifier === webModuleId
+              && data.continueData
+              && data.continueData.progress
+              && this.webmoduleData
+            ) {
+              this.webmoduleData.resumePage = Number(data.continueData.progress)
+            }
+          }
+          resolve(true)
+        },
+        () => resolve(true))
+    })
   }
 
   private async setS3Cookie(contentId: string) {

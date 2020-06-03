@@ -1,7 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NSProfileData } from '../../../../models/profile.model'
 @Component({
@@ -15,6 +12,11 @@ export class HistoryCardComponent implements OnInit {
   @Input() source = ''
   @Input() progress = ''
   @Input() title = ''
+  @Input() lexId = ''
+  @Input() contentUrl = ''
+  @Input() isExternal = ''
+  @Input() completedUsers = 0
+  @Input() historyData: any
   widgetPieGraph: NSProfileData.IGraphWidget = {} as NSProfileData.IGraphWidget
   margin = {
     top: 25,
@@ -27,20 +29,20 @@ export class HistoryCardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    // this.graphData(this.pieData)
+    this.graphData(this.historyData.data)
   }
   graphData(pieData: any) {
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']
-    pieData.data.map((cur: any) => {
+    pieData.map((cur: any) => {
       this.graphData1.push(cur.y)
     })
     this.widgetPieGraph = {
       widgetType: ROOT_WIDGET_CONFIG.graph._type,
       widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
       widgetData: {
-        graphId: pieData.id,
+        graphId: this.historyData.id,
         graphType: 'pie',
-        graphHeight: '60px',
+        graphHeight: '50px',
         graphWidth: '90%',
         graphLegend: false,
         graphLegendFontSize: 11,
@@ -53,10 +55,7 @@ export class HistoryCardComponent implements OnInit {
             {
               data: this.graphData1,
               backgroundColor: [
-                'rgb(179, 55, 113)',
-                'rgb(250, 130, 49)',
-                'rgb(247, 183, 49)',
-                'rgb(106, 176, 76)',
+                'rgb(255, 82, 61)', 'rgb(240, 179, 35)', 'rgb(32, 150, 205)', 'rgb(120, 157, 74)',
               ],
               borderWidth: 1,
             },

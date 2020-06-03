@@ -1,16 +1,11 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="progress-circular">
   <div class="progress-circular-container">
     <div class="progress-circular-empty"></div>
-    <mat-progress-spinner
-      class="progress-circular-full"
-      [color]="'primary'"
-      [mode]="mode === 'indeterminate' ? 'indeterminate' : 'determinate'"
-      [value]="progress! * 100"
-      [strokeWidth]="3"
-    >
+    <mat-progress-spinner *ngIf="isClient" class="progress-circular-full" [color]="'accent'"
+      [mode]="mode === 'indeterminate' ? 'indeterminate' : 'determinate'" [value]="100" [strokeWidth]="3">
+    </mat-progress-spinner>
+    <mat-progress-spinner [color]="'primary'" [mode]="mode === 'indeterminate' ? 'indeterminate' : 'determinate'"
+      [value]="progress! * 100" [strokeWidth]="3">
     </mat-progress-spinner>
     <div class="progress-circular-value">{{ progress! * 100 | number: '1.0-0' }}%</div>
   </div>

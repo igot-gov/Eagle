@@ -1,34 +1,30 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
-import { MatSnackBar, MatDialog } from '@angular/material'
 import {
-  NsPlaylist,
   BtnPlaylistService,
   NsContent,
-  WidgetContentService,
-  viewerRouteGenerator,
   NsError,
+  NsPlaylist,
   ROOT_WIDGET_CONFIG,
+  viewerRouteGenerator,
+  WidgetContentService,
 } from '@ws-widget/collection'
-import { TFetchStatus, ConfigurationsService, NsPage, UtilityService } from '@ws-widget/utils'
+import { NsWidgetResolver } from '@ws-widget/resolver'
+import { ConfigurationsService, NsPage, TFetchStatus, ValueService } from '@ws-widget/utils'
+import { Subscription } from 'rxjs'
+// tslint:disable-next-line:max-line-length
+import { PlaylistContentDeleteDialogComponent } from '../../components/playlist-content-delete-dialog/playlist-content-delete-dialog.component'
+// tslint:disable-next-line:max-line-length
+import { PlaylistContentDeleteErrorDialogComponent } from '../../components/playlist-content-delete-error-dialog/playlist-content-delete-error-dialog.component'
 import { PlaylistDeleteDialogComponent } from '../../components/playlist-delete-dialog/playlist-delete-dialog.component'
-import {
-  PlaylistContentDeleteDialogComponent,
-} from '../../components/playlist-content-delete-dialog/playlist-content-delete-dialog.component'
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 import { PlaylistShareDialogComponent } from '../../components/playlist-share-dialog/playlist-share-dialog.component'
 import {
-  PlaylistContentDeleteErrorDialogComponent,
-} from '../../components/playlist-content-delete-error-dialog/playlist-content-delete-error-dialog.component'
-import { NsWidgetResolver } from '@ws-widget/resolver'
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import {
-  PLAYLIST_TITLE_MIN_LENGTH, PLAYLIST_TITLE_MAX_LENGTH,
+  PLAYLIST_TITLE_MAX_LENGTH,
+  PLAYLIST_TITLE_MIN_LENGTH,
 } from '../../constants/playlist.constant'
-import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'ws-app-playlist-detail',
@@ -36,7 +32,6 @@ import { Subscription } from 'rxjs'
   styleUrls: ['./playlist-detail.component.scss'],
 })
 export class PlaylistDetailComponent implements OnInit, OnDestroy {
-
   @ViewChild('playlistDeleteFailed', { static: true }) playlistDeleteFailedMessage!: ElementRef<any>
 
   playlist: NsPlaylist.IPlaylist | null = this.route.snapshot.data.playlist.data
@@ -44,7 +39,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   error = this.route.snapshot.data.playlist.error
 
   isIntranetAllowedSettings = false
-  playlistPlayLink: { url: string, queryParams: { [key: string]: any } } | null = null
+  playlistPlayLink: { url: string; queryParams: { [key: string]: any } } | null = null
   deletePlaylistStatus: TFetchStatus = 'none'
   addContentStatus: TFetchStatus = 'none'
 
@@ -62,18 +57,23 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   editPlaylistForm!: FormGroup
   changeName!: boolean
   defaultThumbnail = ''
+  deletedContents = new Set()
   prefChangeSubscription: Subscription | null = null
+  isShareEnabled = false
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  screenSizeIsLtMedium = false
+  screenSizeSubscription: Subscription | null = null
 
   constructor(
     fb: FormBuilder,
     private snackBar: MatSnackBar,
     public configSvc: ConfigurationsService,
-    private contentSvc: WidgetContentService,
+    public contentSvc: WidgetContentService,
     private playlistSvc: BtnPlaylistService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public router: Router,
-    private utilitySvc: UtilityService,
+    public valueSvc: ValueService
   ) {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
@@ -82,24 +82,39 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     this.editPlaylistForm = fb.group({
       title: [
         this.playlist ? this.playlist.name : null,
-        [Validators.required, Validators.minLength(PLAYLIST_TITLE_MIN_LENGTH), Validators.maxLength(PLAYLIST_TITLE_MAX_LENGTH)],
+        [
+          Validators.required,
+          Validators.minLength(PLAYLIST_TITLE_MIN_LENGTH),
+          Validators.maxLength(PLAYLIST_TITLE_MAX_LENGTH),
+        ],
       ],
       visibility: [NsPlaylist.EPlaylistVisibilityTypes.PRIVATE],
     })
   }
 
   ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
+    }
+
     if (this.playlist) {
-      this.playlistSvc
-        .getPlaylist(this.playlist.id, this.type)
-        .subscribe(playlist => {
-          this.playlist = playlist
-        })
+      // this.playlistSvc
+      //   .getPlaylist(this.playlist.id, this.type, 'isInIntranet')
+      //   .subscribe(playlist => {
+      //     this.playlist = playlist
+      //   })
+      this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
+      this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
+        this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
+      })
       this.getPlayUrl()
     }
     this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
     this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
       this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
+    })
+    this.screenSizeSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.screenSizeIsLtMedium = isLtMedium
     })
   }
 
@@ -111,21 +126,21 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
   deletePlaylist() {
     const dialogRef = this.dialog.open(PlaylistDeleteDialogComponent)
-
+    let routeTo: string
+    this.type === 'user' ? (routeTo = 'me') : (routeTo = 'shared')
     dialogRef.afterClosed().subscribe(shouldDelete => {
       if (shouldDelete && this.playlist) {
         this.deletePlaylistStatus = 'fetching'
-        this.playlistSvc
-          .deletePlaylist(this.playlist.id, this.type)
-          .subscribe(
-            () => {
-              this.deletePlaylistStatus = 'done'
-              this.router.navigate(['/app/playlist/me'])
-            },
-            _err => {
-              this.deletePlaylistStatus = 'error'
-              this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value)
-            })
+        this.playlistSvc.deletePlaylist(this.playlist.id, this.type).subscribe(
+          () => {
+            this.deletePlaylistStatus = 'done'
+            this.router.navigate([`/app/playlist/${routeTo}`])
+          },
+          _err => {
+            this.deletePlaylistStatus = 'error'
+            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value)
+          },
+        )
       }
     })
   }
@@ -136,8 +151,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
       this.changeName = changeName
       if (!this.changeName) {
         this.playlist.name = formValues.title
-        this.playlistSvc.editPlaylistName(this.playlist)
-          .subscribe()
+        this.playlistSvc.patchPlaylist(this.playlist).subscribe()
       }
     }
   }
@@ -150,7 +164,6 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteContent(identifier: string, name: string) {
-
     if (this.playlist && this.playlist.contents.length === 1) {
       this.dialog.open(PlaylistContentDeleteErrorDialogComponent)
       return
@@ -162,17 +175,20 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(shouldDelete => {
       if (shouldDelete && this.playlist) {
-        this.playlist.contents = this.playlist.contents.filter(item => item.identifier !== identifier)
-        this.playlistSvc
-          .deletePlaylistContent(this.playlist, [identifier])
-          .subscribe()
+        this.playlist.contents = this.playlist.contents.filter(
+          item => item.identifier !== identifier,
+        )
+        this.playlistSvc.deletePlaylistContent(this.playlist, [identifier]).subscribe()
       }
     })
   }
 
   sharePlaylist() {
     this.dialog.open(PlaylistShareDialogComponent, {
-      data: this.playlist,
+      data: {
+        playlist: this.playlist,
+        deleted: [...this.deletedContents],
+      },
       width: '600px',
     })
   }
@@ -180,6 +196,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   drop(event: CdkDragDrop<string[]>) {
     if (this.playlist) {
       moveItemInArray(this.playlist.contents, event.previousIndex, event.currentIndex)
+      this.playlistSvc.patchPlaylist(this.playlist).subscribe()
     }
   }
 
@@ -191,42 +208,74 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
   editPlaylist() {
     this.addContentStatus = 'fetching'
     if (this.playlist) {
-      this.playlistSvc.addPlaylistContent(this.playlist, Array.from(this.selectedContentIds)).subscribe(
-        () => {
-          this.addContentStatus = 'done'
-        },
-        () => {
-          this.addContentStatus = 'error'
-        },
-      )
+      this.playlistSvc
+        .addPlaylistContent(this.playlist, Array.from(this.selectedContentIds))
+        .subscribe(
+          () => {
+            this.addContentStatus = 'done'
+          },
+          () => {
+            this.addContentStatus = 'error'
+          },
+        )
     }
   }
 
   getPlayUrl() {
     if (this.playlist && this.playlist.contents && this.playlist.contents.length) {
       const playlist = this.playlist
-      this.contentSvc.fetchContent(this.playlist.contents[0].identifier).subscribe(response => {
-        if (response) {
-          const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(response)
-          this.playlistPlayLink = viewerRouteGenerator(
-            firstPlayableContent.identifier,
-            firstPlayableContent.mimeType,
-            playlist.id,
-            'Playlist',
-          )
+      let id = playlist.contents[0].identifier
+      this.contentSvc.fetchContentHistory(playlist.id).subscribe(data => {
+        if (data) {
+           id = data.identifier
         }
-      },
-      )
+        this.contentSvc.fetchContent(id).subscribe(response => {
+          if (response) {
+            const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(response)
+            this.playlistPlayLink = viewerRouteGenerator(
+              firstPlayableContent.identifier,
+              firstPlayableContent.mimeType,
+              playlist.id,
+              'Playlist',
+            )
+          }
+        })
+      },                                                         _err => {
+          this.contentSvc.fetchContent(playlist.contents[0].identifier).subscribe(response => {
+            if (response) {
+              const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(response)
+              this.playlistPlayLink = viewerRouteGenerator(
+                firstPlayableContent.identifier,
+                firstPlayableContent.mimeType,
+                playlist.id,
+                'Playlist',
+              )
+            }
+          })
+      })
     }
   }
 
   greyOut(content: NsContent.IContent) {
-    if (content.status && (content.status === 'Live' || content.status === 'MarkedForDeletion')) {
-      return false
+    return (
+      this.isDeletedOrExpired(content) ||
+      this.hasNoAccess(content) ||
+      this.isInIntranetMobile(content)
+    )
+  }
+
+  isInIntranetMobile(content: NsContent.IContent) {
+    return !this.isIntranetAllowedSettings && content.isInIntranet
+  }
+
+  isDeletedOrExpired(content: NsContent.IContent): boolean | void {
+    if (content.status === 'Expired' || content.status === 'Deleted') {
+      this.deletedContents.add(content.name)
     }
-    if (content.isInIntranet && this.utilitySvc.isMobile) {
-      return !this.isIntranetAllowedSettings
-    }
-    return true
+    return content.status === 'Expired' || content.status === 'Deleted'
+  }
+
+  hasNoAccess(content: NsContent.IContent) {
+    return !content.hasAccess
   }
 }

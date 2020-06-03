@@ -1,0 +1,81 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+
+.graph-card {
+  padding: 0px;
+  width: 95%;
+  margin-top: 1.5rem;
+  @include breakpoint-s {
+    width: 90%;
+    margin-top: 1.5rem;
+  }
+  @include breakpoint-xs {
+    width: 90%;
+    margin-top: 1.5rem;
+  }
+}
+span:before {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  border-radius: 50%;
+  height: 12px;
+  margin-right: 2px;
+}
+.star {
+  font-weight: 400;
+  margin-right: 5px;
+  font-size: 12px;
+  &::before {
+    background-color: #6F1E51;
+  }
+}
+.expert {
+  font-weight: 400;
+  margin-right: 5px;
+  font-size: 12px;
+  &::before {
+    background-color: #EA2027;
+  }
+}
+.novice {
+  font-weight: 400;
+  margin-right: 5px;
+  font-size: 12px;
+  &::before {
+    background-color: #F79F1F;
+  }
+}
+.excellent {
+  font-weight: 400;
+  margin-right: 5px;
+  font-size: 12px;
+  &::before {
+    background-color: #EE5A24;
+  }
+}
+.donut-card {
+  width: 35%;
+  @include breakpoint-xs {
+    width: 90%;
+    margin: $size-s;
+  }
+
+  @include breakpoint-s {
+    width: 90%;
+    margin: $size-s;
+  }
+}
+.line-card {
+  width: 50%;
+
+  @include breakpoint-xs {
+    width: 90%;
+    margin: $size-s;
+  }
+
+  @include breakpoint-s {
+    width: 90%;
+    margin: $size-s;
+  }
+}

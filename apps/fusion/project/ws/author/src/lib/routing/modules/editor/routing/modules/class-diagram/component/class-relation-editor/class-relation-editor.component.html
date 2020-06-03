@@ -1,0 +1,129 @@
+<form class="p-3 " [formGroup]="optionsForm">
+    <div mat-dialog-title class="flex flex-between">
+        <h1 class="ws-mat-primary-text flex items-center">
+            <span i18n *ngIf="data.type === 'classes'">Class Details</span>
+            <span i18n *ngIf="data.type === 'relations'">Relation Details</span>
+        </h1>
+        <button mat-dialog-close mat-icon-button class="float-right cursor-pointer">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div mat-dialog-content>
+        <div formArrayName="classes" *ngIf="data.type === 'classes'">
+            <h3 class=" margin-remove-bottom mat-h3 required" i18n>Class Name</h3>
+            <mat-form-field [formGroupName]="data.index" class="w-full " appearance="outline" [ngClass]="{'mat-form-field-invalid': showError()}">
+
+                <input matInput #className maxlength="500" formControlName="name" i18n-placeholder placeholder="Class name" i18n-aria-label
+                    aria-label="enter class name" />
+                <mat-hint align="end">{{ className.value.length }} / 500</mat-hint>
+                <mat-error *ngIf="!className.value || showError()">
+                    <span i18n *ngIf="showError()">This class is declared already</span>
+                    <span i18n *ngIf="!className.value">Class name is mandatory</span>
+                </mat-error>
+            </mat-form-field>
+            <!-- <mat-divider></mat-divider> -->
+            <div class="my-6">
+                <div class="flex title-div">
+                    <h3 class=" pr-2 margin-remove-bottom mat-h3" i18n>Attributes</h3>
+                    <button class="small-button padding-remove ws-mat-primary-background mat-elevation-z6 " mat-icon-button i18n-matTooltip matTooltip="Click to add Attribute"
+                        (click)="addEntity('attribute')" type="button" i18n-aria-label aria-label="add new attribute">
+                        <mat-icon class="text-white small-icon"> add</mat-icon>
+                    </button>
+                </div>
+                <div class="options-list container-border" [ngClass]="{'p-4': !attributesCount}">
+                    <ng-container *ngFor="let obj of data.options.classes ,let i=index">
+                        <ng-container *ngIf="obj.type==='attribute' && obj.belongsTo===originalClassName">
+                            <div class="flex justify-between m-3" [formGroupName]="i">
+                                <mat-form-field class="w-7/12">
+                                    <mat-label i18n>Attribute Name</mat-label>
+                                    <input matInput formControlName="name" #attributeName i18n-aria-label maxlength="500" aria-label="enter attribute name" />
+                                </mat-form-field>
+                                <mat-form-field class="w-1/4">
+                                    <mat-label i18n>Access</mat-label>
+                                    <mat-select matInput formControlName="access" i18n-aria-label aria-label="select access specifiers">
+                                        <mat-option value="public" i18n>Public</mat-option>
+                                        <mat-option value="protected" i18n>Protected</mat-option>
+                                        <mat-option value="private" i18n>Private</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div class="flex items-center justify-center w-16">
+                                    <button (click)="removeEntity('attribute',i)" matTooltip="Remove attribute" aria-label="remove this attribute" i18n-matTooltip
+                                        type="button" [disabled]="attributesCount===1 && !methodsCount" mat-icon-button i18n-aria-label>
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="my-6">
+                <div class="flex title-div">
+                    <h3 class=" margin-remove-bottom mat-h3 pr-2" i18n>Methods</h3>
+                    <button (click)="addEntity('method')" class="small-button padding-remove ws-mat-primary-background mat-elevation-z6 " i18n-aria-label
+                        i18n-matTooltip matTooltip="Click to add Method" mat-icon-button type="button" aria-label="add new method">
+                        <mat-icon class="text-white small-icon">add</mat-icon>
+                    </button>
+                </div>
+                <div class="options-list container-border" [ngClass]="{'p-4': !methodsCount}">
+                    <ng-container *ngFor="let obj of data.options.classes,let i=index">
+                        <ng-container *ngIf="obj.type==='method' && obj.belongsTo===originalClassName">
+                            <div class="flex justify-between m-3 " [formGroupName]="i">
+                                <mat-form-field class="w-7/12" [ngClass]="{'mat-form-field-invalid': !obj.name}">
+                                    <mat-label i18n>Method Name</mat-label>
+                                    <input matInput formControlName="name" maxlength="500" i18n-aria-label aria-label="enter method name" />
+                                </mat-form-field>
+                                <mat-form-field class="w-1/4">
+                                    <mat-label i18n>Access</mat-label>
+                                    <mat-select matInput formControlName="access">
+                                        <mat-option value="public" i18n>Public</mat-option>
+                                        <mat-option value="protected" i18n>Protected</mat-option>
+                                        <mat-option value="private" i18n>Private</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div class="flex items-center justify-center w-16">
+                                    <button (click)="removeEntity('method',i)" mat-icon-button type="button" i18n-matTooltip matTooltip="Remove method" [disabled]="!attributesCount && methodsCount===1"
+                                        i18n-aria-label aria-label="remove this method">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+        <ng-container *ngIf="data.type === 'relations'" formArrayName="relations">
+            <div class="flex p-6 justify-between" [formGroupName]="0">
+                <mat-form-field class="w-1/3 myfield" appearance="outline">
+                    <mat-label i18n>Source</mat-label>
+                    <mat-select matInput formControlName="source">
+                        <mat-option [value]="''" i18n>--Select--</mat-option>
+                        <mat-option *ngFor="let source of sourceArr" [value]="source">{{source}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="w-1/3 myfield" appearance="outline">
+                    <mat-label i18n>Relation</mat-label>
+                    <mat-select matInput formControlName="relation">
+                        <mat-option [value]="'is-a'" i18n>is-a</mat-option>
+                        <mat-option [value]="'has-a'" i18n>has-a</mat-option>
+                        <mat-option [value]="'uses-a'" i18n>uses-a</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="w-1/3 myfield" appearance="outline">
+                    <mat-label i18n>Target</mat-label>
+                    <mat-select matInput formControlName="target">
+                        <mat-option [value]="''" i18n>--Select--</mat-option>
+                        <mat-option *ngFor="let targ of targetArr" [value]="targ">{{targ}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </ng-container>
+    </div>
+    <div mat-dialog-actions class="flex-row-reverse">
+        <button class="btnpdg" type="submit" (click)="saveData()" i18n mat-raised-button color="primary">Update</button>
+        <button class="btnpdg" i18n mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    </div>
+</form>

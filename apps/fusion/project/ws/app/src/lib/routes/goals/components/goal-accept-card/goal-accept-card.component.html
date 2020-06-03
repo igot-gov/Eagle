@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-card class="relative rounded-none">
   <div class="flex items-center mb-1">
     <div class="flex-1 min-w-0">
@@ -12,7 +9,7 @@
         <span class="mat-body-strong ml-1">{{ accept?.startDate | date }}</span>
       </div>
     </div>
-    <button mat-icon-button (click)="isExpanded = !isExpanded">
+    <button name="expand-button-goal-accept-card" mat-icon-button (click)="isExpanded = !isExpanded">
       <mat-icon>expand_more</mat-icon>
     </button>
   </div>

@@ -1,8 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
+import { AccessControlService } from '@ws/author'
 import {
   NsContent,
   IWidgetsPlayerMediaData,
@@ -24,6 +22,7 @@ export class VideoComponent implements OnInit, OnDestroy {
   private routeDataSubscription: Subscription | null = null
   private screenSizeSubscription: Subscription | null = null
   private viewerDataSubscription: Subscription | null = null
+  forPreview = window.location.href.includes('/author/')
   isScreenSizeSmall = false
   videoData: NsContent.IContent | null = null
   isFetchingDataComplete = false
@@ -40,14 +39,19 @@ export class VideoComponent implements OnInit, OnDestroy {
     private viewerSvc: ViewerUtilService,
     private contentSvc: WidgetContentService,
     private platform: Platform,
-  ) { }
+    private accessControlSvc: AccessControlService,
+  ) {}
 
   ngOnInit() {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
       this.isScreenSizeSmall = data
     })
-    this.isNotEmbed = this.activatedRoute.snapshot.queryParamMap.get('embed') === 'true' ? false : true
-    if (this.activatedRoute.snapshot.queryParamMap.get('preview')) {
+    this.isNotEmbed =
+      this.activatedRoute.snapshot.queryParamMap.get('embed') === 'true' ? false : true
+    if (
+      this.activatedRoute.snapshot.queryParamMap.get('preview') &&
+      !this.accessControlSvc.authoringConfig.newDesign
+    ) {
       this.viewerDataSubscription = this.viewerSvc
         .getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '')
         .subscribe(data => {
@@ -55,7 +59,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           if (this.videoData) {
             this.formDiscussionForumWidget(this.videoData)
           }
-          this.widgetResolverVideoData = this.initWidgetResolverVideoData()
+          this.widgetResolverVideoData = this.initWidgetResolverVideoData(this.videoData)
           let url = ''
           if (this.videoData.artifactUrl.indexOf('/content-store/') > -1) {
             url = `/apis/authContent/${new URL(this.videoData.artifactUrl).pathname}`
@@ -74,27 +78,33 @@ export class VideoComponent implements OnInit, OnDestroy {
           if (this.videoData) {
             this.formDiscussionForumWidget(this.videoData)
           }
-          this.widgetResolverVideoData = this.initWidgetResolverVideoData()
-          this.widgetResolverVideoData.widgetData.url = this.videoData
-            ? this.videoData.artifactUrl
-            : ''
-          this.widgetResolverVideoData.widgetData.identifier = this.videoData ? this.videoData.identifier : ''
-          this.widgetResolverVideoData.widgetData.mimeType = data.content.data.mimeType
-          if (this.platform.IOS) {
-            this.widgetResolverVideoData.widgetData.isVideojs = true
-          } else if ((!this.platform.WEBKIT) && (!this.platform.IOS) && (!this.platform.SAFARI)) {
-            this.widgetResolverVideoData.widgetData.isVideojs = true
-          } else if (this.platform.ANDROID) {
-            this.widgetResolverVideoData.widgetData.isVideojs = true
-          } else {
-            this.widgetResolverVideoData.widgetData.isVideojs = false
+          this.widgetResolverVideoData = this.initWidgetResolverVideoData(this.videoData as any)
+          if (this.videoData && this.videoData.identifier) {
+            if (this.activatedRoute.snapshot.queryParams.collectionId) {
+              await this.fetchContinueLearning(
+                this.activatedRoute.snapshot.queryParams.collectionId,
+                this.videoData.identifier,
+              )
+            } else {
+              await this.fetchContinueLearning(this.videoData.identifier, this.videoData.identifier)
+            }
           }
+          this.widgetResolverVideoData.widgetData.url = this.videoData
+            ? this.forPreview
+              ? this.viewerSvc.getAuthoringUrl(this.videoData.artifactUrl)
+              : this.videoData.artifactUrl
+            : ''
+          this.widgetResolverVideoData.widgetData.identifier = this.videoData
+            ? this.videoData.identifier
+            : ''
+          this.widgetResolverVideoData.widgetData.mimeType = data.content.data.mimeType
+          this.widgetResolverVideoData = JSON.parse(JSON.stringify(this.widgetResolverVideoData))
           if (this.videoData && this.videoData.artifactUrl.indexOf('content-store') >= 0) {
             await this.setS3Cookie(this.videoData.identifier)
           }
           this.isFetchingDataComplete = true
         },
-        () => { },
+        () => {},
       )
     }
   }
@@ -109,17 +119,30 @@ export class VideoComponent implements OnInit, OnDestroy {
     if (this.viewerDataSubscription) {
       this.viewerDataSubscription.unsubscribe()
     }
-
   }
 
-  initWidgetResolverVideoData() {
+  initWidgetResolverVideoData(content: NsContent.IContent) {
+    let isVideojs = false
+    if (this.platform.IOS) {
+      isVideojs = true
+    } else if (!this.platform.WEBKIT && !this.platform.IOS && !this.platform.SAFARI) {
+      isVideojs = true
+    } else if (this.platform.ANDROID) {
+      isVideojs = true
+    } else {
+      isVideojs = false
+    }
     return {
       widgetType: 'player',
       widgetSubType: 'playerVideo',
       widgetData: {
+        isVideojs,
         disableTelemetry: false,
         url: '',
         identifier: '',
+        mimeType: content.mimeType,
+        resumePoint: 0,
+        continueLearning: true,
       },
       widgetHostClass: 'video-full',
     }
@@ -133,17 +156,39 @@ export class VideoComponent implements OnInit, OnDestroy {
         name: NsDiscussionForum.EDiscussionType.LEARNING,
         title: content.name,
         initialPostCount: 2,
+        isDisabled: this.forPreview,
       },
       widgetSubType: 'discussionForum',
       widgetType: 'discussionForum',
     }
   }
-
+  async fetchContinueLearning(collectionId: string, videoId: string): Promise<boolean> {
+    return new Promise(resolve => {
+      this.contentSvc.fetchContentHistory(collectionId).subscribe(
+        data => {
+          if (data) {
+            if (
+              data.identifier === videoId &&
+              data.continueData &&
+              data.continueData.progress &&
+              this.widgetResolverVideoData
+            ) {
+              this.widgetResolverVideoData.widgetData.resumePoint = Number(
+                data.continueData.progress,
+              )
+            }
+          }
+          resolve(true)
+        },
+        () => resolve(true),
+      )
+    })
+  }
   private async setS3Cookie(contentId: string) {
     await this.contentSvc
       .setS3Cookie(contentId)
       .toPromise()
-      .catch(() => { })
+      .catch(() => {})
     return
   }
 }

@@ -1,0 +1,106 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+
+.searchBorder {
+  border: 1px solid #cecece !important;
+  width:40%;
+  height:1rem;
+  @include breakpoint-xs {
+      width:96%;
+    }
+}
+:host ::ng-deep .searchBox {
+  .mat-form-field-infix {
+    width:100%;
+  }
+}
+
+.addButton{
+  border-radius: 0!important;
+  @include breakpoint-xs {
+      margin-top:1rem;
+    }
+}
+// .table{
+//   width: 100% !important;
+//    @include breakpoint-lt-m {
+//       width: 100%;
+//       margin:  1em 12em 2em -1em;
+//     }
+// }
+
+// .btn{
+//    margin-top: 2rem !important;
+//     margin-bottom: 2rem !important;
+// }
+// .spinner{
+//     margin-top: 9%;
+//     margin-left: 40%;
+// }
+
+// .smallSpinner{
+//   margin-top:2%;
+//   margin-left: 42%;
+// }
+
+// .nouser{
+//   margin-top:7rem !important;
+// }
+
+.rolesTable{
+  border-collapse: separate;
+  -webkit-border-vertical-spacing: 1rem;
+}
+.rolesBorder {
+    border-bottom-width: 2px;
+    border-top-width: 2px;
+    border-top-style: solid;
+    border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+.rolesCheckBox {
+  border-left-width: 2px;
+  border-left-color: rgba(0, 0, 0, 0.12);
+  border-left-style: solid;
+}
+
+.rolesDeleteIcon {
+  border-right-width: 2px;
+  border-right-color: rgba(0, 0, 0, 0.12);
+  border-right-style: solid;
+}
+
+.rolesHeader {
+  border-bottom-width:0;
+  padding-top: 2rem;
+}
+
+.darkTable {
+  border-left-color:rgba(255, 255, 255, 0.12);
+  border-right-color:rgba(255, 255, 255, 0.12);
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.lightTable {
+  border-left-color: rgba(0, 0, 0, 0.12);
+  border-right-color:rgba(0, 0, 0, 0.12);
+  border-top-color: rgba(0, 0, 0, 0.12);
+}
+
+
+.tableProp {
+  overflow: auto;
+}
+
+td.mat-cell{
+  @include breakpoint-lt-m {
+    padding:10px !important;
+  }
+}
+th.mat-header-cell{
+  @include breakpoint-lt-m {
+    padding:10px !important;
+  }
+}
+
+

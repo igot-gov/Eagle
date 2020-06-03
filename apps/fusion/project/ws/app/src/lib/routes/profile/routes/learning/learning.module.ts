@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
@@ -35,9 +32,9 @@ import { DisplayContentTypeModule } from '@ws-widget/collection'
 import { ProgressRadialComponent } from './components/progress-radial/progress-radial.component'
 import { CalendarModule } from '../../module/calendar-module/calendar.module'
 import { HistoryCardComponent } from './components/history-card/history-card.component'
-
 import { AnalyticsModule } from '../analytics/analytics.module'
 import { BubbleChartComponent } from './components/bubble-chart/bubble-chart.component'
+import { HistoryTileComponent } from './components/history-tile/history-tile.component'
 @NgModule({
   declarations: [
     LearningTimeComponent,
@@ -47,6 +44,7 @@ import { BubbleChartComponent } from './components/bubble-chart/bubble-chart.com
     ProgressRadialComponent,
     HistoryCardComponent,
     BubbleChartComponent,
+    HistoryTileComponent,
   ],
   imports: [
     MatIconModule,

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, ReplaySubject } from 'rxjs'
 import { environment } from '../../../../../../src/environments/environment'
@@ -11,7 +8,7 @@ import { IUserPreference } from './user-preference.model'
 let instanceConfigPath: string | null = window.location.host
 let locationHost: string | null = window.location.host
 
-if ((!environment.production) && Boolean(environment.sitePath)) {
+if (!environment.production && Boolean(environment.sitePath)) {
   locationHost = environment.sitePath
   instanceConfigPath = environment.sitePath
 }
@@ -22,8 +19,13 @@ export class ConfigurationsService {
   // update as the single source of truth
 
   appSetup = true
+  // The url the user tried to access while landing in the app before accepting tnc
+  userUrl = ''
   baseUrl = `assets/configurations/${(locationHost || window.location.host).replace(':', '_')}`
-  sitePath = `assets/configurations/${(instanceConfigPath || window.location.host).replace(':', '_')}`
+  sitePath = `assets/configurations/${(instanceConfigPath || window.location.host).replace(
+    ':',
+    '_',
+  )}`
   hostPath = (instanceConfigPath || window.location.host).replace(':', '_')
 
   userRoles: Set<string> | null = null
@@ -39,7 +41,8 @@ export class ConfigurationsService {
   hasAcceptedTnc = false
   userPreference: IUserPreference | null = null
   userProfile: NsUser.IUserProfile | null = null
-
+  // created to store complete user details sent by pid
+  unMappedUser: any
   isAuthenticated = false
   isNewUser = false
 
@@ -59,6 +62,9 @@ export class ConfigurationsService {
   isRTL = false
   activeLocale: NsInstanceConfig.ILocalsConfig | null = null
   activeLocaleGroup = ''
+  completedActivity: string[] | null = null
+  completedTour = false
+  profileSettings = ['profilePicture', 'learningTime', 'learningPoints']
 
   primaryNavBar: Partial<NsPage.INavBackground> = {
     color: 'primary',
@@ -67,5 +73,4 @@ export class ConfigurationsService {
     color: 'primary',
   }
   primaryNavBarConfig: NsInstanceConfig.IPrimaryNavbarConfig | null = null
-
 }

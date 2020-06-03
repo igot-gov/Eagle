@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Request, Response, Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
@@ -15,9 +12,8 @@ const apiEndpoints = {
     `${CONSTANTS.KHUB_SEARCH_BASE}/api/v1/moreLikeThis/${contentId}?contentType=${contentType}`,
   searchApi: `${CONSTANTS.KHUB_SEARCH_BASE}/api/v1/search`,
   topicsApi: `${CONSTANTS.KHUB_SEARCH_BASE}/api/v1/topic`,
-
 }
-
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 export const knowledgeHubApi = Router()
 
 knowledgeHubApi.get('/fetchRelatedResources/:contentId/:contentType', async (req, res) => {
@@ -30,16 +26,19 @@ knowledgeHubApi.get('/fetchRelatedResources/:contentId/:contentType', async (req
       return
     }
 
-    const response = await axios.get(apiEndpoints.relatedResources(contentId, contentType),
-      {
+    const response = await axios
+      .get(apiEndpoints.relatedResources(contentId, contentType), {
         ...axiosRequestConfig,
         headers: { rootOrg, org },
-      }).then((resp) => resp.data.result.response)
+      })
+      .then((resp) => resp.data.result.response)
     return res.status(response.status).send(response)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -57,43 +56,44 @@ knowledgeHubApi.get('/home/', async (req: Request, res: Response) => {
       .then((response) => response.data)
     return res.send(searchData)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 // GET search Results for query
-knowledgeHubApi.get(
-  '/search/:query/:from/:size/:category',
-  async (req: Request, res: Response) => {
-    try {
-      const query = req.params.query
-      const filter = req.query.filter
-      const from = req.params.from
-      const size = req.params.size
-      const category = req.params.category
-      const queryParams = getStringifiedQueryParams({
-        category,
-        filter,
-        from,
-        searchQuery: query,
-        size,
+knowledgeHubApi.get('/search/:query/:from/:size/:category', async (req: Request, res: Response) => {
+  try {
+    const query = req.params.query
+    const filter = req.query.filter
+    const from = req.params.from
+    const size = req.params.size
+    const category = req.params.category
+    const queryParams = getStringifiedQueryParams({
+      category,
+      filter,
+      from,
+      searchQuery: query,
+      size,
+    })
+    let url: string
+    url = `${apiEndpoints.searchApi}?${queryParams}`
+    const searchResultData: IKhubItemSearch = await axios
+      .get<IKhubItemSearch>(url, axiosRequestConfig)
+      .then((response) => {
+        return response.data
       })
-      let url: string
-      url = `${apiEndpoints.searchApi}?${queryParams}`
-      const searchResultData: IKhubItemSearch = await axios
-        .get<IKhubItemSearch>(url, axiosRequestConfig)
-        .then((response) => {
-          return response.data
-        })
-      return res.send(searchResultData)
-    } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 500)
-        .send(err)
-    }
+    return res.send(searchResultData)
+  } catch (err) {
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
-)
+})
 // GET search single Item
 knowledgeHubApi.get('/item/:id', async (req: Request, res: Response) => {
   try {
@@ -107,38 +107,39 @@ knowledgeHubApi.get('/item/:id', async (req: Request, res: Response) => {
       .then((response) => response.data)
     return res.send(searchResultData)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
 // GET search Morelike This
-knowledgeHubApi.get(
-  '/moreLike/:category/:itemId/:source',
-  async (req: Request, res: Response) => {
-    try {
-      const category = req.params.category
-      const itemId = req.params.itemId
-      const source = req.params.source
-      const queryParams = getStringifiedQueryParams({
-        category,
-        itemId,
-        source,
-      })
-      let url: string
-      url = `${apiEndpoints.morelikeApi}?${queryParams}`
-      const searchResultData: {} = await axios
-        .get<{}>(url, axiosRequestConfig)
-        .then((response) => response.data)
-      return res.send(searchResultData)
-    } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 500)
-        .send(err)
-    }
+knowledgeHubApi.get('/moreLike/:category/:itemId/:source', async (req: Request, res: Response) => {
+  try {
+    const category = req.params.category
+    const itemId = req.params.itemId
+    const source = req.params.source
+    const queryParams = getStringifiedQueryParams({
+      category,
+      itemId,
+      source,
+    })
+    let url: string
+    url = `${apiEndpoints.morelikeApi}?${queryParams}`
+    const searchResultData: {} = await axios
+      .get<{}>(url, axiosRequestConfig)
+      .then((response) => response.data)
+    return res.send(searchResultData)
+  } catch (err) {
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
-)
+})
 
 // GET search Topic add and delete
 knowledgeHubApi.post('/topic', async (req: Request, res: Response) => {
@@ -150,8 +151,10 @@ knowledgeHubApi.post('/topic', async (req: Request, res: Response) => {
       .then((response) => response.data)
     return res.send(searchResultData)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

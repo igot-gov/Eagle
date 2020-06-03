@@ -1,11 +1,9 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div mat-dialog-content>
   <p i18n>Deleted posts are gone forever. Are you sure?</p>
 </div>
 <div mat-dialog-actions class="flex-row-reverse">
   <button
+    name="delete-post-yes-button"
     type="button"
     [disabled]="isDeleting"
     cdkFocusInitial
@@ -18,6 +16,7 @@
     <ng-container *ngIf="!isDeleting" i18n>Yes</ng-container>
   </button>
   <button
+    name="delete-post-no-button"
     type="button"
     mat-dialog-close
     [disabled]="isDeleting"

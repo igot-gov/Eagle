@@ -1,57 +1,55 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="padding-dynamic" *ngIf="pdfData">
   <div class="flex flex-around flex-wrapped">
-    <div [ngClass]="isTypeOfCollection ? 'w-full' : 'video-player-title'">
+    <div class="w-full">
       <div>
         <mat-card>
           <mat-card-content>
             <div id="fullScreenContainer" class="video-player">
-              <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container>
+              <ws-widget-player-pdf-v2 *ngIf="isFetchingDataComplete" [widgetResolverPdfData]="widgetResolverPdfData">
+              </ws-widget-player-pdf-v2>
+              <!-- <ng-container *ngIf="isFetchingDataComplete" [wsResolverWidget]="widgetResolverPdfData"></ng-container> -->
             </div>
             <div class="flex justify-end mt-3">
-              <ws-widget-btn-content-download [widgetData]="
-                    pdfData
-                      | pipePartialContent
-                        : [
-                            'identifier',
-                            'contentType',
-                            'resourceType',
-                            'mimeType',
-                            'downloadUrl',
-                            'isExternal'
-                          ]
-                  "></ws-widget-btn-content-download>
-              <ws-widget-btn-content-like [widgetData]="{
-                    identifier: pdfData.identifier,
-                    isDisabled: isPreviewMode
-                  }"></ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [widgetData]="pdfData" [isDisabled]="isPreviewMode">
+              <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+                  pdfData
+                    | pipePartialContent
+                      : [
+                          'identifier',
+                          'contentType',
+                          'resourceType',
+                          'mimeType',
+                          'downloadUrl',
+                          'isExternal',
+                  'artifactUrl'
+                        ]
+                "></ws-widget-btn-content-download>
+              <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="{
+                  identifier: pdfData.identifier,
+                  isDisabled: isPreviewMode
+                }"></ws-widget-btn-content-like>
+              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="pdfData"
+                [isDisabled]="isPreviewMode">
               </ws-widget-btn-content-share>
-              <ws-widget-btn-goals></ws-widget-btn-goals>
-              <ws-widget-btn-playlist [widgetData]="{
-                    contentId: pdfData?.identifier,
-                    contentName: pdfData?.name,
-                    contentType: 'Resource',
-                    mode: 'dialog',
-                    isDisabled: isPreviewMode
-                  }"></ws-widget-btn-playlist>
-              <ws-widget-btn-content-feedback-v2 [widgetData]="{
-                    identifier: pdfData.identifier,
-                    name: pdfData.name,
-                    isDisabled: isPreviewMode
-                  }"></ws-widget-btn-content-feedback-v2>
+              <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+                  contentId: pdfData?.identifier,
+                  contentName: pdfData?.name,
+                  contentType: 'Resource',
+                  mode: 'dialog',
+                  isDisabled: isPreviewMode
+                }"></ws-widget-btn-playlist>
+              <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview" [widgetData]="{
+                  identifier: pdfData.identifier,
+                  name: pdfData.name,
+                  isDisabled: isPreviewMode
+                }"></ws-widget-btn-content-feedback-v2>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
     </div>
-    <div class="video-summary" *ngIf="!isTypeOfCollection">
-      <ws-widget-player-brief [content]="pdfData" [isPreviewMode]="isPreviewMode"></ws-widget-player-brief>
-    </div>
   </div>
-  <div *ngIf="discussionForumWidget" class="padding-m">
+  <div *ngIf="discussionForumWidget && isRestricted" class="padding-m">
     <div class="video-discussion-forum-in margin-top-m margin-bottom-m">
       <h2 class="mat-toolbar discussion-head">Discussion Forum</h2>
       <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 
@@ -10,16 +7,16 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
   styleUrls: ['./content-card.component.scss'],
 })
 export class ContentCardComponent implements OnInit {
-
   @Input() data: any
   @Input() ordinals: any
+  @Input() forExpiry = false
+  @Input() forDelete = false
   filteredSubTitles: any[] = []
   translationArray: any = []
   userId!: string
   @Output() action = new EventEmitter<any>()
   isBaseContent: Boolean = true
-  constructor(private accessService: AccessControlService) {
-  }
+  constructor(private accessService: AccessControlService) { }
 
   ngOnInit() {
     if (this.data.hasTranslations && this.data.hasTranslations.length) {
@@ -29,9 +26,11 @@ export class ContentCardComponent implements OnInit {
       this.isBaseContent = false
       this.translationArray = this.translationArray.concat(this.data.isTranslationOf)
     }
-    this.filteredSubTitles = this.translationArray.length ?
-      this.ordinals.subTitles.filter((elem: any) => !this.translationArray.find((item: any) => elem.srclang === item.locale)) :
-      this.ordinals.subTitles
+    this.filteredSubTitles = this.translationArray.length
+      ? this.ordinals.subTitles.filter(
+        (elem: any) => !this.translationArray.find((item: any) => elem.srclang === item.locale),
+      )
+      : this.ordinals.subTitles
     this.userId = this.accessService.userId
   }
 
@@ -53,8 +52,12 @@ export class ContentCardComponent implements OnInit {
         }
         break
       case 'moveToDraft':
-        if (this.data.status === 'InReview' || this.data.status === 'Unpublished'
-          || this.data.status === 'Reviewed' || this.data.status === 'QualityReview') {
+        if (
+          this.data.status === 'InReview' ||
+          this.data.status === 'Unpublished' ||
+          this.data.status === 'Reviewed' ||
+          this.data.status === 'QualityReview'
+        ) {
           returnValue = this.accessService.hasAccess({ ...this.data, status: 'Draft' })
         }
         break

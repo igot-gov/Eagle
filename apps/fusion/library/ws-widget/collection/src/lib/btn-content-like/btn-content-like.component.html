@@ -1,41 +1,22 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="!isRestricted && widgetData?.identifier?.length" [ngSwitch]="status">
-  <span class="font-normal ws-mat-primary-text" *ngIf="likesCount > 0">
-    {{ likesCount }}
-  </span>
-  <button
-    mat-icon-button
-    *ngSwitchCase="'NOT_LIKED'"
-    (click)="like($event)"
-    aria-label="Like"
-    i18n-aria-label
-    matTooltip="Like"
-    i18n-matTooltip="Like Button"
-    [disabled]="widgetData?.isDisabled"
-    [color]="color"
-  >
-    <mat-icon>favorite_border</mat-icon>
+
+  <button name="like-button" mat-icon-button *ngSwitchCase="'NOT_LIKED'" (click)="like($event)" aria-label="Like" i18n-aria-label matTooltip="Like"
+    i18n-matTooltip="Like Button" [disabled]="widgetData?.isDisabled || widgetData?.status==='Deleted'" [color]="color">
+    <mat-icon *ngIf="!showCount">
+      favorite_border
+    </mat-icon>
+    <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify" matBadgeSize="small">
+      favorite_border
+    </mat-icon>
   </button>
-  <button
-    mat-icon-button
-    *ngSwitchCase="'LIKED'"
-    (click)="unlike($event)"
-    aria-label="UnLike"
-    i18n-aria-label
-    matTooltip="UnLike"
-    i18n-matTooltip="UnLike Button"
-    [color]="color"
-  >
-    <mat-icon>favorite</mat-icon>
+  <button name="unlike-button" mat-icon-button *ngSwitchCase="'LIKED'" (click)="unlike($event)" aria-label="UnLike" i18n-aria-label matTooltip="UnLike"
+    i18n-matTooltip="UnLike Button" [color]="color">
+    <mat-icon *ngIf="!showCount">favorite</mat-icon>
+    <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify" matBadgeSize="small">
+    favorite
+    </mat-icon>
   </button>
-  <button
-    mat-icon-button
-    matTooltip="Please wait"
-    i18n-matTooltip="Like Button Wait"
-    *ngSwitchCase="'PENDING'"
-  >
+  <button mat-icon-button matTooltip="Please wait" i18n-matTooltip="Like Button Wait" *ngSwitchCase="'PENDING'">
     <mat-icon [color]="color">hourglass_empty</mat-icon>
   </button>
 </ng-container>

@@ -1,32 +1,17 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
-import {
-  IFsData,
-  IGroup,
-  ILpData,
-  INsoData,
-  IOfferings,
-  IProfile,
-  IRole,
-  IVariant
-} from '../models/navigator.model'
-
-import {
-  filterOnTopics,
-  findRoleVariant,
-  transformNsoData
-} from '../service/navigator'
+import { IFsData, IGroup, ILpData, INsoData, IOfferings, IProfile, IRole, IVariant } from '../models/navigator.model'
+import { filterOnTopics, findRoleVariant, transformNsoData } from '../service/navigator'
 import { appendProxiesUrl } from '../utils/contentHelpers'
 import { CONSTANTS } from '../utils/env'
+import { logError } from '../utils/logger'
 import { ERROR } from '../utils/message'
 
 const NAVIGATOR_BASE_API = `${CONSTANTS.WEB_HOST_PROXY}/web-hosted/navigator/json`
 const API_END_POINTS = {
   accountsData: `${NAVIGATOR_BASE_API}/accounts_data.json`,
+  bpmData: `${NAVIGATOR_BASE_API}/bpm_data.json`,
   commonGoalsData: `${NAVIGATOR_BASE_API}/common_goal_mapping.json`,
   commonsData: `${NAVIGATOR_BASE_API}/commonsdata.json`,
   deliveryPartnerData: `${NAVIGATOR_BASE_API}/dpn_data.json`,
@@ -41,15 +26,24 @@ const API_END_POINTS = {
 export const navigatorApi = Router()
 
 navigatorApi.get('/roles', async (_req, res) => {
-  const nsoData = await axios.get(API_END_POINTS.nsoData, axiosRequestConfig)
-  const response = nsoData.data.nso_data.reduce(
-    (map: { [key: string]: INsoData }, obj: INsoData) => {
-      map[obj.arm_name] = transformNsoData(obj)
-      return map
-    },
-    {}
-  )
-  res.json(processRolesData(response))
+  try {
+    const nsoData = await axios.get(API_END_POINTS.nsoData, axiosRequestConfig)
+    const response = nsoData.data.nso_data.reduce(
+      (map: { [key: string]: INsoData }, obj: INsoData) => {
+        map[obj.arm_name] = transformNsoData(obj)
+        return map
+      },
+      {}
+    )
+    res.json(processRolesData(response))
+  } catch (err) {
+    logError('ERR FETCHING NSODATA -> ', err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
+  }
 })
 
 navigatorApi.get('/role/:roleId/:variantId', async (req, res) => {
@@ -182,6 +176,18 @@ navigatorApi.get('/topics', async (_req, res) => {
     } else {
       res.status(204)
     }
+  }
+})
+
+navigatorApi.get('/bpm', async (_req, res) => {
+  const bpm = await axios.get(
+    API_END_POINTS.bpmData,
+    axiosRequestConfig
+  )
+  if (bpm) {
+    res.send(bpm.data)
+  } else {
+    res.status(404).send({ message: 'Json not found' })
   }
 })
 

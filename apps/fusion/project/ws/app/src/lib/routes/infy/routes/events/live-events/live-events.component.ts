@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ConfigurationsService, TFetchStatus, LoggerService } from '@ws-widget/utils'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
@@ -23,8 +20,8 @@ export class LiveEventsComponent implements OnInit, OnDestroy {
   urlHasLiveUrl = false
   fetchStatus: TFetchStatus = 'fetching'
   notifierSubscription: Subscription | undefined
-  userRoles = new Set<string>()
-  liveStream = 'ROLES_LIVE_STREAM'
+  isLiveStream = true
+  isLiveStreamMobile = true
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -36,7 +33,6 @@ export class LiveEventsComponent implements OnInit, OnDestroy {
     private logger: LoggerService,
   ) {
     this.liveUrl = ''
-    this.userRoles.add(this.liveStream)
   }
 
   ngOnInit() {
@@ -44,6 +40,8 @@ export class LiveEventsComponent implements OnInit, OnDestroy {
       (response: IEvent[]) => {
         this.logger.log('Got response', response)
         const events = (response || []).filter(event => new Date(event.end_time) > new Date())
+        // tslint:disable-next-line:max-line-length
+        // const events = [{ event_name: 'RedHat Tech day Track 2', start_time: new Date(), end_time: new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000)), event_url: 'https://join-apac.broadcast.skype.com/infosys.com/98cd8c9825b64b91ba62b427f59894da' }]
         this.liveEvents = events
         this.fetchStatus = 'done'
       },
@@ -51,6 +49,10 @@ export class LiveEventsComponent implements OnInit, OnDestroy {
         this.fetchStatus = 'error'
       },
     )
+    if (this.configSvc.restrictedFeatures) {
+      this.isLiveStream = this.configSvc.restrictedFeatures.has('live_stream')
+      this.isLiveStreamMobile = this.configSvc.restrictedFeatures.has('live_stream_mob')
+    }
 
     this.activatedRoute.queryParamMap.subscribe(qparamsMap => {
       this.liveUrl = qparamsMap.get('liveUrl')

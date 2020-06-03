@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-mixins';
 
 .feature {
@@ -11,6 +8,12 @@
   @include breakpoint-gt-xs {
     padding: 16px;
   }
+}
+
+.title {
+  font-size: 12px !important;
+  line-height: 26px !important;
+  font-weight: 300 !important;
 }
 
 .feature-status-icon {
@@ -102,5 +105,5 @@
 }
 
 .external-link-button {
-  color: inherit !important
+  color: inherit !important;
 }

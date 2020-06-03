@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { ChannelResolverService } from './../../../services/resolver.service'
 import { Component, OnInit, Input, OnChanges } from '@angular/core'
 import { IWidgetAuthor, tDimensions, tSize } from './../../../interface/widget'
@@ -53,6 +50,16 @@ export class GridComponent implements OnInit, OnChanges {
     if (this.widget.data.gutter != null) {
       this.containerClass = `-mx-${this.widget.data.gutter}`
     }
+    if (this.widget.data.rowGutter != null) {
+      const widgetArray = (this.containerClass || '').split(' ')
+      widgetArray.push(`pb-${this.widget.data.rowGutter}`)
+      this.containerClass = widgetArray.join(' ')
+    } else {
+      const widgetArray = (this.containerClass || '').split(' ')
+      widgetArray.push('pb-12')
+      this.containerClass = widgetArray.join(' ')
+    }
+    const rowGutterAdjustment = this.widget.data.rowGutter !== null ? `pb-${this.widget.data.rowGutter}` : ''
     const gutterAdjustment = this.widget.data.gutter !== null ? `p-${this.widget.data.gutter}` : ''
     this.widget.children.map(row => {
       const child = this.store.getUpdatedContent(row)
@@ -61,7 +68,7 @@ export class GridComponent implements OnInit, OnChanges {
         className: Object.entries(child.dimensions as Record<tDimensions, tSize>).reduce(
           (agg, [k, v]) =>
             `${agg} ${(responsiveSuffix as { [id: string]: string })[k]}:${sizeSuffix[v]}`,
-          `${child.className} w-full ${gutterAdjustment}`,
+          `${child.className} w-full ${gutterAdjustment} ${rowGutterAdjustment}`,
         ),
         styles: child.styles || {},
       }

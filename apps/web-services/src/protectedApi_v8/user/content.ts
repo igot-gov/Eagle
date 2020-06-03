@@ -1,20 +1,24 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
+import { IContent } from '../../models/content.model'
 import { IPaginatedApiResponse } from '../../models/paginatedApi.model'
+import { processContent } from '../../utils/contentHelpers'
 import { CONSTANTS } from '../../utils/env'
+import { getStringifiedQueryParams } from '../../utils/helpers'
 import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest, IAuthorizedRequest } from '../../utils/requestExtract'
 import { getMultipleContent } from '../content'
 
 const API_END_POINTS = {
+  assignedContent: (userId: string) =>
+    `${CONSTANTS.SB_EXT_API_BASE_2}/v1/users/${userId}/assigned-content`,
   contentLikeNumber: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/likes-count`,
-  like: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/v1/user/${userId}/likes`,
+  like: (userId: string) => `${CONSTANTS.LIKE_API_BASE}/v1/user/${userId}/likes`,
 }
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 export const userContentApi = Router()
 
@@ -34,7 +38,11 @@ userContentApi.post('/contentLikes', async (req, res) => {
     res.status(response.status).send(response.data)
   } catch (err) {
     logError('ERROR FETCHING CONTENT LIKES >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -50,7 +58,11 @@ userContentApi.get('/like', async (req, res) => {
     res.json(response)
   } catch (err) {
     logError('ERROR FETCHING LIKES >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 export async function fetchLikedIdsResponse(req: IAuthorizedRequest, rootOrg: string, org: string) {
@@ -90,7 +102,11 @@ userContentApi.get('/like/contents', async (req, res) => {
     res.json(result)
   } catch (err) {
     logError('ERROR in LIKE GET CONTENTS >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -116,7 +132,11 @@ userContentApi.post('/like/:contentId', async (req, res) => {
     res.json(response.data)
   } catch (err) {
     logError('ERROR LIKING >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 userContentApi.delete('/unlike/:contentId', async (req, res) => {
@@ -141,6 +161,49 @@ userContentApi.delete('/unlike/:contentId', async (req, res) => {
     res.json(response.data)
   } catch (err) {
     logError('ERROR UN-LIKING >', err)
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
+  }
+})
+
+userContentApi.get('/assigned-content', async (req, res) => {
+  try {
+    const { isInIntranet, isExternal, isStandAlone, pageSize, sourceFields } = req.query
+    const queryParams = getStringifiedQueryParams({
+      isExternal,
+      isInIntranet,
+      isStandAlone,
+      pageSize,
+      sourceFields,
+    })
+    const userId = extractUserIdFromRequest(req)
+    const rootOrg = req.header('rootOrg')
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios({
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+      },
+      method: 'GET',
+      url: `${API_END_POINTS.assignedContent(userId)}?${queryParams}`,
+    })
+    let contents: IContent[] = []
+    if (Array.isArray(response.data.assignedContents)) {
+      contents = response.data.assignedContents.map((content: IContent) => processContent(content))
+    }
+    const result: IPaginatedApiResponse = {
+      contents,
+      hasMore: false,
+    }
+    res.json(result)
+  } catch (error) {
+    logError('ASSIGNED CONTENT FETCH ERROR >', error)
+    res.status(500).json(error)
   }
 })

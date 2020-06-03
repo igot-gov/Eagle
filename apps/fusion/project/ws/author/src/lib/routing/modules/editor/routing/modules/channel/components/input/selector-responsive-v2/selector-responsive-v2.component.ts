@@ -1,13 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
-import { ISelectorResponsive, ISelectorResponsiveUnit } from '@ws-widget/collection/src/public-api'
+import { MatDialog } from '@angular/material/dialog'
+import {
+  ISelectorResponsive,
+  ISelectorResponsiveUnit,
+  NsGalleryView,
+} from '@ws-widget/collection/src/public-api'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { WIDGET_LIBRARY } from '../../../constants/widet'
 import { ImageMapComponent } from './../image-map/image-map.component'
-import { MatDialog } from '@angular/material/dialog'
+import { ISortEvent } from '../../../../../../../../../modules/shared/directives/draggable/sortable-list.directive'
 
 @Component({
   selector: 'ws-auth-selector-responsive-v2',
@@ -17,27 +18,52 @@ import { MatDialog } from '@angular/material/dialog'
 export class SelectorResponsiveV2Component implements OnInit {
   @Output() data = new EventEmitter<{
     content: ISelectorResponsive
-    isValid: boolean,
+    isValid: boolean
   }>()
 
   @ViewChild(ImageMapComponent, { static: false }) imageMapComponent!: ImageMapComponent
-
+  // @Input() addInGallery: string = ''
   @Input() content!: ISelectorResponsive
   @Input() identifier = ''
   @Input() isSubmitPressed = false
   @Input() size = 1
   currentSize = 1
   index = 0
-  isCommon = true
+  // isCommon = true
   currentStrip!: ISelectorResponsiveUnit
 
-  constructor(
-    public dialog: MatDialog,
-  ) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
     this.currentStrip = this.content.selectFrom[this.index]
-    this.isCommon = this.content.selectFrom.length === 1
+    // this.isCommon = this.content.selectFrom.length === 1
+    if (this.content.selectFrom.length === 1) {
+      this.setDifferentScreenType()
+    }
+  }
+
+  trigger(event: any) {
+    this.content.selectFrom.map((data: any, index: number) => {
+      if (index > 0) {
+        if (event === 'front') {
+          data.widget.widgetData.cardMenu.unshift(this.addGalleryStrip(data.widget.widgetData))
+        } else if (event === 'end') {
+          data.widget.widgetData.cardMenu.push(this.addGalleryStrip(data.widget.widgetData))
+        }
+      }
+    })
+  }
+
+  addGalleryStrip(content: any): NsGalleryView.ICardMenu {
+    const strip: NsGalleryView.ICardMenu = {
+      cardData: {
+        title: '',
+        description: '',
+        thumbnail: '',
+      },
+      widget: this.generateWidget(content),
+    }
+    return strip
   }
 
   onIndexChange(index: number) {
@@ -54,15 +80,12 @@ export class SelectorResponsiveV2Component implements OnInit {
       this.currentSize = this.size
     }
     if (this.content.type === 'imageMap') {
-      setTimeout(
-        () => {
-          if (this.imageMapComponent) {
-            this.imageMapComponent.ngOnInit()
-            setTimeout(() => this.imageMapComponent.ngAfterViewInit(), 100)
-          }
-        },
-        10,
-      )
+      setTimeout(() => {
+        if (this.imageMapComponent) {
+          this.imageMapComponent.ngOnInit()
+          setTimeout(() => this.imageMapComponent.ngAfterViewInit(), 100)
+        }
+      },         10)
     }
   }
 
@@ -114,41 +137,39 @@ export class SelectorResponsiveV2Component implements OnInit {
   }
 
   setDifferentScreenType() {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
-      data: 'dialog',
-    })
+    // const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    //   width: '350px',
+    //   data: 'dialog',
+    // })
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        if (this.isCommon) {
-          this.currentStrip.minWidth = 0
-          this.currentStrip.maxWidth = 500090000
-          this.content.selectFrom = [this.currentStrip]
-        } else {
-          if (this.size === 2) {
-            this.currentStrip.minWidth = 481
-            this.currentStrip.maxWidth = 500090000
-            this.content.selectFrom = [this.currentStrip]
-            this.addStrip(false)
-            this.content.selectFrom[1].maxWidth = 480
-            this.content.selectFrom[1].minWidth = 0
-          } else if (this.size > 2) {
-            this.currentStrip.minWidth = 841
-            this.currentStrip.maxWidth = 500090000
-            this.content.selectFrom = [this.currentStrip]
-            this.addStrip(false)
-            this.content.selectFrom[1].maxWidth = 840
-            this.content.selectFrom[1].minWidth = 481
-            this.addStrip(false)
-            this.content.selectFrom[2].maxWidth = 480
-            this.content.selectFrom[2].minWidth = 0
-          }
-        }
-      } else {
-        this.isCommon = !this.isCommon
-      }
-    })
+    // dialogRef.afterClosed().subscribe(result => {
+    // if (result) {
+    // if (this.isCommon) {
+    //   this.currentStrip.minWidth = 0
+    //   this.currentStrip.maxWidth = 500090000
+    //   this.content.selectFrom = [this.currentStrip]
+    // } else {
+    if (this.size === 2) {
+      this.currentStrip.minWidth = 481
+      this.currentStrip.maxWidth = 500090000
+      this.content.selectFrom = [this.currentStrip]
+      this.addStrip(false)
+      this.content.selectFrom[1].maxWidth = 480
+      this.content.selectFrom[1].minWidth = 0
+    } else if (this.size > 2) {
+      this.currentStrip.minWidth = 841
+      this.currentStrip.maxWidth = 500090000
+      this.content.selectFrom = [this.currentStrip]
+      this.addStrip(false)
+      this.content.selectFrom[1].maxWidth = 840
+      this.content.selectFrom[1].minWidth = 481
+      this.addStrip(false)
+      this.content.selectFrom[2].maxWidth = 480
+      this.content.selectFrom[2].minWidth = 0
+    }
+
+    // } else {
+    //   this.isCommon = !this.isCommon
   }
 
   removeStrip() {
@@ -167,20 +188,40 @@ export class SelectorResponsiveV2Component implements OnInit {
     const strip: ISelectorResponsiveUnit = {
       minWidth: 0,
       maxWidth: 0,
-      widget: this.generateWidget(),
+      widget: this.generateWidget(this.content),
     }
     this.content.selectFrom.push(strip)
     this.currentStrip = strip
-    this.onIndexChange(increaseIndex ? this.index + 1 : this.index)
+    this.onIndexChange(increaseIndex ? this.content.selectFrom.length - 1 : this.index)
   }
 
-  generateWidget(): NsWidgetResolver.IRenderConfigWithAnyData {
-    if (this.content.type === 'imageMap') {
+  generateWidget(content: any): NsWidgetResolver.IRenderConfigWithAnyData {
+    if (content.type === '' || !content.type) {
+      return this.getContentType(content)
+    }
+    if (content.type === 'imageMap') {
       return this.getEmptyData('map')
+    }
+    if (content.type === 'gallery') {
+      return this.getEmptyData('gallery_wrapper')
+    }
+    if (content.type === 'wrapper') {
+      return this.getEmptyData('wrapper')
+    }
+    if (content.type === 'video') {
+      return this.getEmptyData('wrapper')
     }
     const widget = this.getEmptyData('image')
     widget.widgetData.type = this.content.subType
     return widget
+  }
+
+  getContentType(content: any): NsWidgetResolver.IRenderConfigWithAnyData {
+    if (content.cardMenu[0].widget.widgetType === 'wrapper') {
+      content.type = 'video'
+      return this.getEmptyData('wrapper')
+    }
+    return this.getEmptyData('image')
   }
 
   getEmptyData(type: string): any {
@@ -188,5 +229,44 @@ export class SelectorResponsiveV2Component implements OnInit {
       JSON.stringify(WIDGET_LIBRARY[`solo_${type}` as keyof typeof WIDGET_LIBRARY]),
     )
     return data
+  }
+
+  updateScreens(event: { content: any; isValid: boolean }) {
+    this.currentStrip.widget.widgetData = event.content
+    this.updateScreensGallery({ index: 0, fromGallery: false })
+  }
+
+  updateScreensGallery(event: { index: number; fromGallery: boolean }) {
+    if (this.index === 0) {
+      const currentStrip = this.content.selectFrom[0]
+      if (event.fromGallery) {
+        this.content.selectFrom.map((data: any, i: number) => {
+          if (i > 0) {
+            data.widget.widgetData.cardMenu[event.index].widget.widgetData = JSON.parse(
+              JSON.stringify(
+                currentStrip.widget.widgetData.cardMenu[event.index].widget.widgetData,
+              ),
+            )
+          }
+        })
+      } else {
+        this.content.selectFrom.map((data: any, i: number) => {
+          if (i > 0) {
+            data.widget.widgetData = JSON.parse(JSON.stringify(currentStrip.widget.widgetData))
+          }
+        })
+      }
+    }
+  }
+
+  sort(event: { sort: boolean, data: ISortEvent }) {
+    this.content.selectFrom.map((data: any, i: number) => {
+      if (i > 0) {
+        const current = data.widget.widgetData.cardMenu[event.data.currentIndex]
+        const swapWith = data.widget.widgetData.cardMenu[event.data.newIndex]
+        data.widget.widgetData.cardMenu[event.data.newIndex] = current
+        data.widget.widgetData.cardMenu[event.data.currentIndex] = swapWith
+      }
+    })
   }
 }

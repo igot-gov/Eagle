@@ -1,11 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import buffer from 'buffer'
 import { Router } from 'express'
 import { UploadedFile } from 'express-fileupload'
-
 import { axiosRequestConfig } from '../configs/request.config'
 import { ICertificationUserPrivileges } from '../models/certification.model'
 import { IInfyJLStatus } from '../models/training.model'
@@ -13,9 +9,11 @@ import { CONSTANTS } from '../utils/env'
 import { getEmailLocalPart } from '../utils/helpers'
 import { extractUserEmailFromRequest } from '../utils/requestExtract'
 
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
+
 const apiEndpoints = {
-  certifications: `${CONSTANTS.SB_EXT_API_BASE_2}/lHub`,
-  trainings: `${CONSTANTS.SB_EXT_API_BASE_2}/lHub/v1`,
+  certifications: `${CONSTANTS.LEARNING_HUB_API_BASE}/lHub`,
+  trainings: `${CONSTANTS.LEARNING_HUB_API_BASE}/lHub/v1`,
 }
 
 export const certificationApi = Router()
@@ -35,9 +33,11 @@ certificationApi.get('/:certificationId/bookingInfo', async (req, res) => {
 
     return res.send(certification)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -47,17 +47,18 @@ certificationApi.get('/:certificationId/testCenters', async (req, res) => {
     const { certificationId } = req.params
 
     const testCenters = await axios
-      .get(
-        `${apiEndpoints.certifications}/certifications/${certificationId}/test-centers`,
-        { ...axiosRequestConfig }
-      )
+      .get(`${apiEndpoints.certifications}/certifications/${certificationId}/test-centers`, {
+        ...axiosRequestConfig,
+      })
       .then((response) => response.data)
 
     return res.send(testCenters)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -77,9 +78,11 @@ certificationApi.get(
 
       return res.send(accSlots)
     } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 400)
-        .send(err)
+      return res.status((err && err.response && err.response.status) || 400).send(
+        (err && err.response && err.response.data) || {
+          error: GENERAL_ERROR_MSG,
+        }
+      )
     }
   }
 )
@@ -99,9 +102,11 @@ certificationApi.post('/:certificationId/booking/:slotNo', async (req, res) => {
 
     return res.send(accBookingResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -116,9 +121,11 @@ certificationApi.get('/countries', async (_req, res) => {
 
     return res.send(atDeskCountries)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -128,17 +135,18 @@ certificationApi.get('/countries/:countryCode/locations', async (req, res) => {
     const { countryCode } = req.params
 
     const atDeskLocations = await axios
-      .get(
-        `${apiEndpoints.certifications}/countries/${countryCode}/locations`,
-        { ...axiosRequestConfig }
-      )
+      .get(`${apiEndpoints.certifications}/countries/${countryCode}/locations`, {
+        ...axiosRequestConfig,
+      })
       .then((response) => response.data)
 
     return res.send(atDeskLocations)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -151,9 +159,11 @@ certificationApi.get('/slots', async (_req, res) => {
 
     return res.send(atDeskSlots)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -173,9 +183,11 @@ certificationApi.post('/:certificationId/atDeskBooking', async (req, res) => {
 
     return res.send(atDeskBookingResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -198,9 +210,11 @@ certificationApi.delete('/:certificationId/slots/:slotNo', async (req, res) => {
 
     return res.send(slotDeleteResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -215,9 +229,11 @@ certificationApi.get('/currencies', async (_req, res) => {
 
     return res.send(currencies)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -237,9 +253,11 @@ certificationApi.post('/:certificationId/budgetRequest', async (req, res) => {
 
     return res.send(budgetRequestSubmitResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -258,9 +276,11 @@ certificationApi.delete('/:certificationId/budgetRequest', async (req, res) => {
 
     return res.send(budgetRequestCancelResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -300,9 +320,11 @@ certificationApi.post('/:certificationId/result', async (req, res) => {
 
     return res.send(resultUploadResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -323,9 +345,11 @@ certificationApi.patch('/:certificationId/result', async (req, res) => {
 
     return res.send(resultSubmitResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -343,9 +367,11 @@ certificationApi.get('/submittedDocument', async (req, res) => {
 
     return res.send(document)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -365,9 +391,11 @@ certificationApi.delete('/:certificationId/document', async (req, res) => {
 
     return res.send(docDeleteResponse)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -378,17 +406,19 @@ certificationApi.get('/certificationApprovals', async (req, res) => {
     const { type } = req.query
 
     const approvalItems = await axios
-      .get(
-        `${apiEndpoints.certifications}/users/${emailId}/certification-approvals`,
-        { ...axiosRequestConfig, params: { type } }
-      )
+      .get(`${apiEndpoints.certifications}/users/${emailId}/certification-approvals`, {
+        ...axiosRequestConfig,
+        params: { type },
+      })
       .then((response) => response.data)
 
     return res.send(approvalItems)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -398,71 +428,69 @@ certificationApi.post('/atDeskRequests/:icfdId', async (req, res) => {
     const { icfdId } = req.params
 
     const resp = await axios
+      .post(`${apiEndpoints.certifications}/certification-requests/${icfdId}`, req.body, {
+        ...axiosRequestConfig,
+      })
+      .then((response) => response.data)
+
+    return res.send(resp)
+  } catch (err) {
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
+  }
+})
+
+// Approve or reject a budget-approval request
+certificationApi.post('/:certificationId/budgetRequestApproval', async (req, res) => {
+  try {
+    const emailId = getEmailLocalPart(extractUserEmailFromRequest(req))
+    const { certificationId } = req.params
+    const { ecdpId, sino } = req.query
+
+    const resp = await axios
       .post(
-        `${apiEndpoints.certifications}/certification-requests/${icfdId}`,
+        `${apiEndpoints.certifications}/users/${emailId}/certifications/${certificationId}/budget-request-approval`,
         req.body,
-        { ...axiosRequestConfig }
+        { ...axiosRequestConfig, params: { sino, ecdp_id: ecdpId } }
       )
       .then((response) => response.data)
 
     return res.send(resp)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
-// Approve or reject a budget-approval request
-certificationApi.post(
-  '/:certificationId/budgetRequestApproval',
-  async (req, res) => {
-    try {
-      const emailId = getEmailLocalPart(extractUserEmailFromRequest(req))
-      const { certificationId } = req.params
-      const { ecdpId, sino } = req.query
-
-      const resp = await axios
-        .post(
-          `${apiEndpoints.certifications}/users/${emailId}/certifications/${certificationId}/budget-request-approval`,
-          req.body,
-          { ...axiosRequestConfig, params: { sino, ecdp_id: ecdpId } }
-        )
-        .then((response) => response.data)
-
-      return res.send(resp)
-    } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 400)
-        .send(err)
-    }
-  }
-)
-
 // Approve or reject a result-verification request
-certificationApi.post(
-  '/:certificationId/resultVerificationRequests',
-  async (req, res) => {
-    try {
-      const emailId = getEmailLocalPart(extractUserEmailFromRequest(req))
-      const { certificationId } = req.params
+certificationApi.post('/:certificationId/resultVerificationRequests', async (req, res) => {
+  try {
+    const emailId = getEmailLocalPart(extractUserEmailFromRequest(req))
+    const { certificationId } = req.params
 
-      const url =
-        `${apiEndpoints.certifications}` +
-        `/users/${emailId}/certifications/${certificationId}/result-verification-requests`
+    const url =
+      `${apiEndpoints.certifications}` +
+      `/users/${emailId}/certifications/${certificationId}/result-verification-requests`
 
-      const resp = await axios
-        .post(url, req.body, { ...axiosRequestConfig })
-        .then((response) => response.data)
+    const resp = await axios
+      .post(url, req.body, { ...axiosRequestConfig })
+      .then((response) => response.data)
 
-      return res.send(resp)
-    } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 400)
-        .send(err)
-    }
+    return res.send(resp)
+  } catch (err) {
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
-)
+})
 
 // Get completed/attempted certifications
 certificationApi.get('/', async (req, res) => {
@@ -479,9 +507,11 @@ certificationApi.get('/', async (req, res) => {
 
     return res.send(certifications)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -503,9 +533,11 @@ certificationApi.get('/certificationRequests', async (req, res) => {
 
     return res.send(certificationRequests)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -524,9 +556,11 @@ certificationApi.get('/:certificationId/submissions', async (req, res) => {
 
     return res.send(submissions)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -535,15 +569,15 @@ certificationApi.get('/:emailId/privileges', async (req, res) => {
   try {
     const { emailId } = req.params
 
-    const privileges: ICertificationUserPrivileges = await getCertificationUserPrivileges(
-      emailId
-    )
+    const privileges: ICertificationUserPrivileges = await getCertificationUserPrivileges(emailId)
 
     return res.send(privileges)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -558,9 +592,11 @@ certificationApi.get('/defaultProctor', async (req, res) => {
 
     return res.send(defaultProctor)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 400)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 400).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 

@@ -1,0 +1,48 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+
+.example-form {
+  width: 100%;
+}
+
+.example-full-width {
+  width: 55%;
+
+  @include breakpoint-xs {
+    width: 100%;
+    margin: $size-s;
+  }
+
+  @include breakpoint-s {
+    width: 100%;
+    margin: $size-s;
+  }
+}
+
+.select-div {
+  width: 20%;
+
+  @include breakpoint-xs {
+    width: 100%;
+    margin: $size-s;
+  }
+
+  @include breakpoint-s {
+    width: 100%;
+    margin: $size-s;
+  }
+}
+
+.category-card {
+  width: 40%;
+
+  @include breakpoint-xs {
+    width: 100%;
+    margin: $size-s;
+  }
+
+  @include breakpoint-s {
+    width: 100%;
+    margin: $size-s;
+  }
+}

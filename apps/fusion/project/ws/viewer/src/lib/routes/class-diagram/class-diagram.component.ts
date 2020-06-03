@@ -1,15 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Subscription } from 'rxjs'
-import {
-  NsContent,
-  WidgetContentService,
-} from '@ws-widget/collection'
-import { ValueService } from '@ws-widget/utils'
+import { NsContent, WidgetContentService } from '@ws-widget/collection'
+import { ValueService, EventService, WsEvents } from '@ws-widget/utils'
 import { ActivatedRoute } from '@angular/router'
+import { ViewerUtilService } from '../../viewer-util.service'
 
 @Component({
   selector: 'viewer-class-diagram',
@@ -21,9 +16,12 @@ export class ClassDiagramComponent implements OnInit, OnDestroy {
   private isSmallSubscription: Subscription | null = null
   private isLtMedium$ = this.valueSvc.isLtMedium$
   public isLtMedium = false
+  forPreview = window.location.href.includes('/author/')
   isFetchingDataComplete = false
   isErrorOccured = false
   classDiagramData: NsContent.IContent | null = null
+  oldData: NsContent.IContent | null = null
+  alreadyRaised = false
   classDiagramManifest: any
 
   constructor(
@@ -31,7 +29,9 @@ export class ClassDiagramComponent implements OnInit, OnDestroy {
     private contentSvc: WidgetContentService,
     private http: HttpClient,
     private valueSvc: ValueService,
-  ) { }
+    private eventSvc: EventService,
+    private viewSvc: ViewerUtilService,
+  ) {}
 
   ngOnInit() {
     this.isSmallSubscription = this.isLtMedium$.subscribe(isSmall => {
@@ -41,44 +41,87 @@ export class ClassDiagramComponent implements OnInit, OnDestroy {
     this.routeDataSubscription = this.activatedRoute.data.subscribe(
       async data => {
         this.classDiagramData = data.content.data
-        if (this.classDiagramData && this.classDiagramData.artifactUrl.indexOf('content-store') >= 0) {
+        if (this.alreadyRaised && this.oldData) {
+          this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
+        }
+        if (
+          this.classDiagramData &&
+          this.classDiagramData.artifactUrl.indexOf('content-store') >= 0
+        ) {
           await this.setS3Cookie(this.classDiagramData.identifier)
         }
-        if (this.classDiagramData && this.classDiagramData.mimeType === NsContent.EMimeTypes.CLASS_DIAGRAM) {
+        if (
+          this.classDiagramData &&
+          this.classDiagramData.mimeType === NsContent.EMimeTypes.CLASS_DIAGRAM
+        ) {
           this.classDiagramManifest = await this.transformClassDiagram(this.classDiagramData)
         }
         if (this.classDiagramData && this.classDiagramManifest) {
+          this.oldData = this.classDiagramData
+          this.alreadyRaised = true
+          this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.classDiagramData)
           this.isFetchingDataComplete = true
         } else {
           this.isErrorOccured = true
         }
       },
-      () => {
-      },
+      () => {},
     )
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
+    if (this.activatedRoute.snapshot.queryParams.collectionId &&
+      this.activatedRoute.snapshot.queryParams.collectionType
+      && this.classDiagramData) {
+      await this.contentSvc.continueLearning(this.classDiagramData.identifier,
+                                             this.activatedRoute.snapshot.queryParams.collectionId,
+                                             this.activatedRoute.snapshot.queryParams.collectionType,
+      )
+    } else if (this.classDiagramData) {
+      await this.contentSvc.continueLearning(this.classDiagramData.identifier)
+    }
     if (this.routeDataSubscription) {
       this.routeDataSubscription.unsubscribe()
     }
     if (this.isSmallSubscription) {
       this.isSmallSubscription.unsubscribe()
     }
+    if (this.classDiagramData) {
+      this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.classDiagramData)
+    }
   }
 
   private async transformClassDiagram(_content: NsContent.IContent) {
     let manifestFile = ''
     if (this.classDiagramData && this.classDiagramData.artifactUrl) {
+      const artifactUrl = this.forPreview
+        ? this.viewSvc.getAuthoringUrl(this.classDiagramData.artifactUrl)
+        : this.classDiagramData.artifactUrl
       manifestFile = await this.http
-        .get<any>(
-          this.classDiagramData.artifactUrl,
-        )
+        .get<any>(artifactUrl)
         .toPromise()
-        .catch((_err: any) => {
-        })
+        .catch((_err: any) => {})
     }
     return manifestFile
+  }
+
+  raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
+    const event = {
+      eventType: WsEvents.WsEventType.Telemetry,
+      eventLogLevel: WsEvents.WsEventLogLevel.Info,
+      from: 'class-diagram',
+      to: '',
+      data: {
+        state,
+        type: WsEvents.WsTimeSpentType.Player,
+        mode: WsEvents.WsTimeSpentMode.Play,
+        content: data,
+        identifier: data ? data.identifier : null,
+        mimeType: NsContent.EMimeTypes.CLASS_DIAGRAM,
+        url: data ? data.artifactUrl : null,
+      },
+    }
+    this.eventSvc.dispatchEvent(event)
   }
 
   private async setS3Cookie(contentId: string) {
@@ -90,5 +133,4 @@ export class ClassDiagramComponent implements OnInit, OnDestroy {
       })
     return
   }
-
 }

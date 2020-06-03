@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { NsAccountSettings } from '../models/account-settings.model'
@@ -8,11 +5,12 @@ import { Observable } from 'rxjs'
 import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
 import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
 import { NsMiniProfile } from '../../../../../../../../library/ws-widget/collection/src/public-api'
+import { ConfigurationsService } from '../../../../../../../../library/ws-widget/utils/src/lib/services/configurations.service'
 
 const API_END_POINTS = {
   accountsettings: `/apis/protected/v8/user/account-settings`,
   updateEmailId: `/apis/protected/v8/user/change-email`,
-  userMiniProfile: (wid: string) => `apis/protected/v8/user/mini-profile/${wid}`,
+  userMiniProfile: (wid: string) => `/apis/protected/v8/user/mini-profile/${wid}`,
   resetPassword: `/apis/protected/v8/user/account-settings/resetPassword`,
 }
 
@@ -21,7 +19,7 @@ const API_END_POINTS = {
 })
 export class AccountSettingsService {
 
-  constructor(private http: HttpClient, private apiService: ApiService) { }
+  constructor(private http: HttpClient, private apiService: ApiService, private configSvc: ConfigurationsService) { }
 
   accountSettings(accountsettingsObj: any): Observable<NsMiniProfile.IMiniProfileData> {
     return this.http.post<NsMiniProfile.IMiniProfileData>(API_END_POINTS.accountsettings, accountsettingsObj)
@@ -40,7 +38,7 @@ export class AccountSettingsService {
     const newFormData = new FormData()
     newFormData.append('content', file, fileName)
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
-path
+      `/apis/authContent/upload/Siemens/meta-assets/lex_profile_${userId}/assets`,
       newFormData,
       false,
     )
@@ -50,7 +48,7 @@ path
     userId: string,
   ): Observable<NSApiResponse.IFileApiResponse> {
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
-path
+      `/apis/authContent/publish/Siemens/meta-assets/lex_profile_${userId}/assets`,
       undefined, false,
 
     )
@@ -64,9 +62,14 @@ path
     }
     return filename.substring(0, dotIndex) + timeStamp + filename.substring(dotIndex)
   }
-
   getToken(): Observable<any> {
-    return this.http.post<any>(`${API_END_POINTS.resetPassword}`, {})
+    let changePasswordUrl = ''
+    if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.keycloak.changePasswordUrl) {
+      // changePasswordUrl = 'https://siemens-staging.onwingspan.com/pid/reset-password/generate-token'
+      changePasswordUrl = `${this.configSvc.instanceConfig.keycloak.changePasswordUrl}/pid/reset-password/generate-token`
+    }
+
+    return this.http.post<any>(changePasswordUrl, {})
   }
 
 }

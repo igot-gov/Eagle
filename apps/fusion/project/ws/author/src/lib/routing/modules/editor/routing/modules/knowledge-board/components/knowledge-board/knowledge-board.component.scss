@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 .cursor-disable {
   cursor: not-allowed;
 }
@@ -8,6 +5,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   width: 65%;
+}
+
+#kboard-container {
+  overflow: auto;
 }
 
 .margin-left {
@@ -48,7 +49,6 @@
 .op100 {
   opacity: 1;
 }
-
 
 .text-white {
   color: #fff;
@@ -123,18 +123,18 @@ ul li {
   justify-content: center;
 }
 
-.button-grid{
+.button-grid {
   display: grid;
   width: 160px;
   grid-template-columns: 0.2fr 0.95fr;
 }
 
-.button-text{
-      align-self: center;
-    padding-top: 17px;
-    padding-left: 4px;
+.button-text {
+  align-self: center;
+  padding-top: 17px;
+  padding-left: 4px;
 }
 
-.margin-right-xxs{
+.margin-right-xxs {
   margin-right: 4px;
 }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { BtnKbComponent } from './btn-kb.component'
@@ -14,13 +11,16 @@ import {
   MatProgressSpinnerModule,
   MatExpansionModule,
   MatTooltipModule,
+  MatDividerModule,
 } from '@angular/material'
 import { BtnKbDialogComponent } from './btn-kb-dialog/btn-kb-dialog.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
+import { MarkAsCompleteModule } from '../_common/mark-as-complete/mark-as-complete.module'
+import { BtnKbConfirmComponent } from './btn-kb-confirm/btn-kb-confirm.component'
 
 @NgModule({
-  declarations: [BtnKbComponent, BtnKbDialogComponent],
+  declarations: [BtnKbComponent, BtnKbDialogComponent, BtnKbConfirmComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -36,8 +36,11 @@ import { RouterModule } from '@angular/router'
     MatSelectModule,
     MatExpansionModule,
     MatTooltipModule,
+    MarkAsCompleteModule,
+    MatDividerModule,
+
   ],
   exports: [BtnKbComponent],
-  entryComponents: [BtnKbDialogComponent],
+  entryComponents: [BtnKbDialogComponent, BtnKbConfirmComponent],
 })
-export class BtnKbModule {}
+export class BtnKbModule { }

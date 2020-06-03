@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="tnc-container" id="tnc">
   <mat-accordion [multi]="false">
     <mat-expansion-panel [expanded]="currentPanel === 'tnc'" (opened)="currentPanel = 'tnc'"
@@ -10,7 +7,8 @@
           <h2 class="mat-title tnc-title">
             <mat-icon *ngIf="generalTnc?.isAccepted" class="accept-btn-icon ws-mat-green-text">check_circle_outline
             </mat-icon>
-            <ng-container i18n="tnc heading">Terms & Conditions</ng-container>
+            <ng-container i18n="tnc heading" *ngIf="termsOfUser">Terms of Use</ng-container>
+            <ng-container i18n="tnc heading" *ngIf="!termsOfUser">Terms & Conditions</ng-container>
           </h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
@@ -49,8 +47,11 @@
       </div>
       <article [innerHTML]="generalTnc?.content" class="text-justify"></article>
       <mat-action-row>
-        <button mat-button (click)="currentPanel = 'dp'" i18n="data privacy view">
-          View Data Privacy
+        <button mat-button *ngIf="termsOfUser" (click)="currentPanel = 'dp'" i18n="data privacy view">
+          View Policies
+        </button>
+        <button mat-button *ngIf="!termsOfUser" (click)="currentPanel = 'dp'" i18n="data privacy view">
+          Data Privacy
         </button>
       </mat-action-row>
     </mat-expansion-panel>
@@ -61,7 +62,8 @@
           <h2 class="mat-title tnc-title">
             <mat-icon *ngIf="dpTnc?.isAccepted" class="accept-btn-icon ws-mat-green-text">check_circle_outline
             </mat-icon>
-            <ng-container i18n="data privacy heading">Data Privacy</ng-container>
+            <ng-container i18n="data privacy heading" *ngIf="termsOfUser">Policies</ng-container>
+            <ng-container i18n="data privacy heading" *ngIf="!termsOfUser">Data Privacy</ng-container>
           </h2>
         </mat-panel-title>
       </mat-expansion-panel-header>

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NSContent } from './content'
 
 export namespace NSApiResponse {
@@ -41,7 +38,7 @@ export namespace NSApiResponse {
       msgid: null
       err: null
       status: null
-      errmsg: null,
+      errmsg: null
     }
     responseCode: string
     result: T
@@ -56,14 +53,27 @@ export namespace NSApiResponse {
       msgid: string,
       status: string,
       err: string,
-      errmsg: string,
+      errmsg: string
     },
     responseCode: string,
     result: {
       response: {
         count: number,
-        content: NSContent.IContentMeta[],
-      },
+        content: NSContent.IContentMeta[]
+      }
     }
   }
+}
+
+export interface IUploadS3Request<T> {
+  categoryType: string
+  mimeType: string
+  path: string
+  data: T
+  name?: string
+}
+
+export interface IWebModuleRequest {
+  name: string
+  content: string | {}
 }

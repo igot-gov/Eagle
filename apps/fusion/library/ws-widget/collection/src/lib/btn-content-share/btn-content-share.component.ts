@@ -1,9 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { ConfigurationsService } from '../../../../utils/src/public-api'
 import { NsContent } from '../_services/widget-content.model'
 import { BtnContentShareDialogComponent } from './btn-content-share-dialog/btn-content-share-dialog.component'
 
@@ -17,21 +15,30 @@ export class BtnContentShareComponent extends WidgetBaseComponent
   @Input() widgetData!: NsContent.IContent
   @Input() isDisabled = false
   @Input() showText = false
+  @Input() forPreview = false
+  showBtn = false
+  isShareEnabled = false
 
-  constructor(
-    private dialog: MatDialog,
-  ) {
+  constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) {
     super()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
+    }
+    // tslint:disable-next-line: max-line-length
+    this.showBtn = this.configSvc.rootOrg !== 'Ford'
+  }
 
   shareContent() {
-    this.dialog.open<BtnContentShareDialogComponent, { content: NsContent.IContent }>(
-      BtnContentShareDialogComponent,
-      {
-        data: { content: this.widgetData },
-      },
-    )
+    if (!this.forPreview) {
+      this.dialog.open<BtnContentShareDialogComponent, { content: NsContent.IContent }>(
+        BtnContentShareDialogComponent,
+        {
+          data: { content: this.widgetData },
+        },
+      )
+    }
   }
 }

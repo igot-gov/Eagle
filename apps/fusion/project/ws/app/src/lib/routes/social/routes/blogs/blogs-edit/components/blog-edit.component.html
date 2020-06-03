@@ -1,197 +1,100 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs">Write a Blog</span>
   <span class="spacer"></span>
-  <button
-    *ngIf="editMode === 'update'"
-    i18n-matTooltip
-    matTooltip="Save"
-    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-    mat-raised-button
-    type="button"
-    (click)="update(saved.value, error.value)"
-  >
+  <button *ngIf="editMode === 'update'" i18n-matTooltip matTooltip="Save"
+    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+    type="button" (click)="update(saved.value, error.value)">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Save </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">save</mat-icon>
   </button>
-  <button
-    *ngIf="editMode === 'draft'"
-    i18n-matTooltip
-    matTooltip="Save"
-    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-    mat-raised-button
-    type="button"
-    (click)="saveDraft(saved.value, error.value)"
-  >
+  <button *ngIf="editMode === 'draft'" i18n-matTooltip matTooltip="Save"
+    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+    type="button" (click)="saveDraft(saved.value, error.value)">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Save </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">save</mat-icon>
   </button>
-  <button
-    *ngIf="editMode === 'create'"
-    class="margin-left-xs"
-    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-    mat-raised-button
-    (click)="saveDraft(savedDraft.value, error.value)"
-    type="button"
-    i18n-matTooltip
-    matTooltip="Save as draft"
-  >
+  <button *ngIf="editMode === 'create'" class="margin-left-xs"
+    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+    (click)="saveDraft(savedDraft.value, error.value)" type="button" i18n-matTooltip matTooltip="Save as draft">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Save as draft </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">drafts</mat-icon>
   </button>
-  <button
-    *ngIf="editMode === 'create' || editMode === 'draft'"
-    class="margin-left-xs"
-    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-    mat-raised-button
-    (click)="publishBlog(publish.value, error.value)"
-    type="button"
-    i18n-matTooltip
-    matTooltip="Publish"
-  >
+  <button *ngIf="editMode === 'create' || editMode === 'draft'" class="margin-left-xs"
+    [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+    (click)="publishBlog(publish.value, error.value)" type="button" i18n-matTooltip matTooltip="Publish">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Publish </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">publish</mat-icon>
   </button>
 </mat-toolbar>
 
+
+
 <mat-card class="editor-wrapper">
   <form>
     <div>
-      <textarea
-        class="mat-typography title-textarea"
-        i18n-placeholder
-        placeholder="Title"
-        required
-        minlength="10"
-        maxlength="80"
-        name="title"
-        [(ngModel)]="title"
-        autofocus
-        #blogTitle="ngModel"
-      ></textarea>
-      <p
-        *ngIf="(blogTitle.dirty || blogTitle.touched) && blogTitle.invalid"
-        class="error-text mat-caption"
-        i18n
-      >
+      <textarea matInput class="mat-typography title-textarea" i18n-placeholder placeholder="Title" required
+        minlength="10" maxlength="80" name="title" [(ngModel)]="title" autofocus #blogTitle="ngModel"></textarea>
+      <p *ngIf="(blogTitle.dirty || blogTitle.touched) && blogTitle.invalid" class="error-text mat-caption" i18n>
         *Title range: 10-80 characters
       </p>
     </div>
 
     <div class="margin-top-m">
-      <textarea
-        class="mat-typography abstract-textarea"
-        i18n-placeholder
-        placeholder="Abstract"
-        required
-        minlength="10"
-        maxlength="150"
-        name="abstract"
-        [(ngModel)]="abstract"
-        autofocus
-        #blogAbstract="ngModel"
-      ></textarea>
-      <p
-        *ngIf="(blogAbstract.dirty || blogAbstract.touched) && blogAbstract.invalid"
-        class="error-text mat-caption"
-        i18n
-      >
+      <textarea matInput class="mat-typography abstract-textarea" i18n-placeholder placeholder="Abstract" required
+        minlength="10" maxlength="150" name="abstract" [(ngModel)]="abstract" autofocus
+        #blogAbstract="ngModel"></textarea>
+      <p *ngIf="(blogAbstract.dirty || blogAbstract.touched) && blogAbstract.invalid" class="error-text mat-caption"
+        i18n>
         *Abstract range: 10-150 characters
       </p>
     </div>
 
     <mat-form-field class="width-1-1">
       <mat-chip-list #chipList>
-        <mat-chip
-          *ngFor="let selectedTag of selectedTags"
-          [selectable]="true"
-          [removable]="true"
-          (removed)="removeTag(selectedTag)"
-        >
+        <mat-chip *ngFor="let selectedTag of selectedTags" [selectable]="true" [removable]="true"
+          (removed)="removeTag(selectedTag)">
           {{ selectedTag.name }}
           <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
-        <input
-          i18n-placeholder
-          placeholder="Relevant tags"
-          #tagsInput
-          [formControl]="tagsCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-        />
+        <input i18n-placeholder placeholder="Relevant tags" #tagsInput [formControl]="tagsCtrl" [matAutocomplete]="auto"
+          [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" />
       </mat-chip-list>
-      <mat-autocomplete
-        #auto="matAutocomplete"
-        (optionSelected)="selectTag($event, duplicate.value, invalidTag.value)"
-      >
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectTag($event, duplicate.value, invalidTag.value)">
         <mat-option *ngIf="fetchTagsStatus === 'fetching'">...</mat-option>
-        <mat-option
-          *ngIf="
+        <mat-option *ngIf="
             (fetchTagsStatus === 'done' || fetchTagsStatus === 'error') &&
             !autocompleteAllTags.length
-          "
-        >
-          No tag found</mat-option
-        >
+          ">
+          No tag found</mat-option>
         <mat-option *ngFor="let filteredTag of autocompleteAllTags" [value]="filteredTag">
           {{ filteredTag.name }}
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
-    <ws-widget-editor-quill
-      class="editor"
-      (textData)="onTextChange($event)"
-      [htmlText]="body"
-    ></ws-widget-editor-quill>
+    <ws-widget-editor-quill class="editor" (textData)="onTextChange($event)" [htmlText]="body"></ws-widget-editor-quill>
   </form>
 
   <div class="flex flex-middle flex-center margin-top-m">
-    <button
-      *ngIf="editMode === 'create'"
-      class="margin-right-s"
-      (click)="saveDraft(savedDraft.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-      mat-raised-button
-      color="primary"
-      i18n
-    >
+    <button *ngIf="editMode === 'create'" class="margin-right-s" (click)="saveDraft(savedDraft.value, error.value)"
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+      color="primary" i18n>
       Save as Draft
     </button>
-    <button
-      *ngIf="editMode === 'update'"
-      class="margin-right-s"
-      (click)="update(saved.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-      mat-raised-button
-      color="primary"
-      i18n
-    >
+    <button *ngIf="editMode === 'update'" class="margin-right-s" (click)="update(saved.value, error.value)"
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+      color="primary" i18n>
       Save
     </button>
-    <button
-      *ngIf="editMode === 'draft'"
-      class="margin-right-s"
-      (click)="saveDraft(saved.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-      mat-raised-button
-      color="primary"
-      i18n
-    >
+    <button *ngIf="editMode === 'draft'" class="margin-right-s" (click)="saveDraft(saved.value, error.value)"
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+      color="primary" i18n>
       Save
     </button>
-    <button
-      *ngIf="editMode === 'create' || editMode === 'draft'"
-      class="margin-right-s"
+    <button *ngIf="editMode === 'create' || editMode === 'draft'" class="margin-right-s"
       (click)="publishBlog(publish.value, error.value)"
-      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid"
-      mat-raised-button
-      color="primary"
-      i18n="Post of Ask a Question"
-    >
+      [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
+      color="primary" i18n="Post of Ask a Question">
       Publish
     </button>
     <div *ngIf="isCreatingPost">

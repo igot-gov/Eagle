@@ -1,0 +1,98 @@
+<!-- <div *ngIf="!allSkillsData" class="my-3 text-center">
+  <mat-spinner></mat-spinner>
+</div> -->
+<div class="margin-top-l">
+  <div class="flex flex-start flex-around flex-wrapped">
+    <form [formGroup]="skillForm" class="example-form flex flex-around flex-wrapped margin-l">
+      <mat-form-field class="example-full-width" color="primary" appearance="outline">
+        <input type="text" i18n-placeholder placeholder="Search for the Skills" [value]="skillControl.value" matInput
+          [formControl]="skillControl" [matAutocomplete]="auto" (keydown)="onPress($event)">
+        <mat-icon class="cursor-pointer" (click)="searchAllSkills(skillControl.value)" matSuffix>search</mat-icon>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions" [value]="option?.skill_name"
+            (click)="searchAllSkills(option.skill_name)">
+            {{option?.skill_name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <mat-form-field *ngIf="!isClient" color="primary" class="select-div" appearance="outline">
+        <!-- <mat-label>Horizon</mat-label> -->
+        <mat-select [(value)]="selected" i18n-placeholder placeholder="Horizon" formControlName="horizon">
+          <mat-option *ngFor="let horizon of horizonList" [value]="horizon" (click)="applyFilter(horizon, 'horizon')">
+            {{horizon}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="isClient" class="select-div" color="primary" appearance="outline">
+        <mat-select [(value)]="selected" i18n-placeholder placeholder="Relevance" formControlName="group">
+          <mat-option *ngFor="let group of groupList" [value]="group" (click)="applyFilter(group, 'relevance')">
+            {{group}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="select-div" color="primary" appearance="outline">
+        <!-- <mat-label>Category</mat-label> -->
+        <mat-select [(value)]="selected" i18n-placeholder placeholder="Category" formControlName="category">
+          <mat-option *ngFor="let category of categoryList" [value]="category"
+            (click)="applyFilter(category, 'category')">{{category}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <button class="margin-top-xs margin-bottom-l" [matTooltip]="'Reset'" mat-raised-button color="primary"
+        type="reset" (click)="reset();" i18n>
+        Reset
+      </button> -->
+    </form>
+  </div>
+  <div *ngIf="allSkillsFetchStatus === 'fetching'" class="my-3 text-center">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="allSkillsFetchStatus === 'error'" class="margin-xl">
+    <h2 i18n class="flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
+      Sorry, we ran into some error!!!
+    </h2>
+  </div>
+  <!-- <div *ngIf="!isClient" class="flex flex-center flex-around flex-wrapped">
+    <mat-card class="text-center category-card">
+      <h2>{{ allSkillsData?.total_skills }}</h2>
+      <h4 i18n>Total Skills</h4>
+    </mat-card>
+    <mat-card *ngIf="allSkillsData?.category_wise_skill_count?.length > 0"
+      class="flex flex-around flex-wrapped category-card">
+      <div *ngFor="let category of allSkillsData?.category_wise_skill_count">
+        <h2>{{ category.doc_count }}</h2>
+        <h4>{{ category.key }}</h4>
+      </div>
+    </mat-card>
+  </div> -->
+  <!-- <div *ngIf="isClient" class="flex flex-around flex-wrapped">
+    <mat-card *ngIf="allSkillsData?.total_skills > 0" class="text-center category-card">
+      <h2>{{ allSkillsData?.total_skills }}</h2>
+      <h4 i18n>Total Skills</h4>
+    </mat-card>
+    <mat-card *ngIf="groupList?.length > 0 || allSkillsData?.category_wise_skill_count?.length > 0"
+      class=" flex flex-around flex-wrapped category-card">
+      <div class="text-center">
+        <h2 class="font-bold">{{ allSkillsData?.skill_group?.length }}</h2>
+        <h4 i18n> Group </h4>
+      </div>
+      <div class="text-center">
+        <h2>{{ allSkillsData?.category_wise_skill_count?.length }}</h2>
+        <h4 i18n> Category </h4>
+      </div>
+    </mat-card>
+  </div> -->
+  <div *ngIf="allSkillsFetchStatus === 'done'"
+    class="flex flex-start justify-between justify-around flex-wrapped margin-right-l margin-left-l">
+    <ws-app-card-skill class="mb-2 mr-2 my-6" *ngFor="let skill of skillsList" [owner]="false"
+      [skillManager]="isSkillManager" [isClient]="isClient" [allSkills]="true" [cardData]="skill">
+    </ws-app-card-skill>
+  </div>
+  <!-- <div class="text-right padding-top-xs padding-bottom-l">
+    <button class="ws-mat-primary-text font-weight-bold" type="button" i18n-aria-label aria-label="see more skills"
+      mat-button (click)="more()">
+      <ng-container i18n>View More </ng-container>
+    </button>
+  </div> -->
+  <div *ngIf="allSkillsFetchStatus === 'none'" class="flex flex-center items-center margin-xl">
+    <h2 i18n>No skills found</h2>
+  </div>
+</div>

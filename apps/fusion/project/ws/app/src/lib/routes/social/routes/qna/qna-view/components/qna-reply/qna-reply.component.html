@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="card-view" *ngIf="item">
   <div class="flex">
     <div class="icon-section">
@@ -29,7 +26,11 @@
         class="margin-top-s"
         type="button"
         mat-icon-button
-        *ngIf="!isAcceptedAnswer && userId === parentPostCreatorId"
+        *ngIf="
+          !isAcceptedAnswer &&
+          userId === parentPostCreatorId &&
+          this.userId !== this.item.postCreator.postCreatorId
+        "
         (click)="acceptAnswer(acceptAnswerMsg.value)"
       >
         <mat-icon *ngIf="!isAcceptingAnswerInProgress" [ngClass]="{ isAccepted: isAcceptedAnswer }"
@@ -39,6 +40,7 @@
       </button>
       <mat-icon *ngIf="isAcceptedAnswer" class="isAccepted">check</mat-icon>
       <ws-widget-btn-social-like
+        *ngIf="showSocialLike"
         class="block flex-middle margin-top-xs"
         [postCreatorId]="item?.postCreator?.postCreatorId"
         [postId]="item.id"

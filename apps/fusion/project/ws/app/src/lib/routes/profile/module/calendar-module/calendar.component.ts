@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
 import { MatCalendarCellCssClasses } from '@angular/material'
 
@@ -11,6 +8,7 @@ import { MatCalendarCellCssClasses } from '@angular/material'
 })
 export class CalendarComponent implements OnInit {
   selectedDate: any
+  maxDate: Date = new Date()
   @Output() notify = new EventEmitter<string>()
   @Input() specialDates: number[] = []
   onSelect(event: string) {
@@ -30,5 +28,7 @@ export class CalendarComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.maxDate.setTime(new Date().getTime() - 86400000)
+  }
 }

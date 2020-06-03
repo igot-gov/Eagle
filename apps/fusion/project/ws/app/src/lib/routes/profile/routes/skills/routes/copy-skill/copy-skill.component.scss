@@ -1,0 +1,63 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+
+.edit-role-card{
+    width: 90%;
+    @include breakpoint-xs {
+        width: 100%;
+        margin: $size-s;
+      }
+
+      @include breakpoint-s {
+        width: 100%;
+        margin: $size-s;
+      }
+}
+
+.length-field{
+    width:45%;
+    @include breakpoint-xs {
+        width: 90%;
+        margin: $size-s;
+      }
+
+      @include breakpoint-s {
+        width: 90%;
+        margin: $size-s;
+      }
+}
+.level-field{
+    width:45%;
+    @include breakpoint-xs {
+        width: 90%;
+        margin: $size-s;
+      }
+
+      @include breakpoint-s {
+        width: 90%;
+        margin: $size-s;
+      }
+}
+
+.group-div {
+  width:100%;
+}
+.des-field{
+    width:80%;
+    @include breakpoint-xs {
+        width: 90%;
+        margin: $size-s;
+      }
+
+      @include breakpoint-s {
+        width: 90%;
+        margin: $size-s;
+      }
+}
+.skills-border{
+  border: 1px solid gray;
+  border-radius: 1rem;
+}
+  .form-container {
+    display: block;
+  }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export namespace NsDiscussionForum {
   export enum EActivityType {
     DOWNVOTE = 'downvote',
@@ -50,16 +47,16 @@ export namespace NsDiscussionForum {
   }
   export interface IPostActivity {
     activityData: {
-      like: number;
-      upVote: number;
-      downVote: number;
-      flag: number;
+      like: number
+      upVote: number
+      downVote: number
+      flag: number
     }
     userActivity: {
-      like: boolean;
-      upVote: boolean;
-      downVote: boolean;
-      flag: boolean;
+      like: boolean
+      upVote: boolean
+      downVote: boolean
+      flag: boolean
     }
   }
   export interface IPostActivityUpdateRequest {
@@ -108,8 +105,8 @@ export namespace NsDiscussionForum {
 
   export interface IPostFlagActivityUpdateRequest extends IPostActivityUpdateRequest {
     userComments: {
-      commentType: EPostCommentType;
-      comment: string;
+      commentType: EPostCommentType
+      comment: string
     }
   }
 
@@ -149,7 +146,7 @@ export namespace NsDiscussionForum {
     dtLastModified: string
     lastEdited: {
       dtLastEdited: string
-      editorId: string,
+      editorId: string
     }
     activity: IPostActivity
     activityEndDate: string
@@ -201,7 +198,7 @@ export namespace NsDiscussionForum {
     parentId: string
     postCreator: string
     postContent: {
-      body: string;
+      body: string
     }
     source: ITimelinePostSource
   }
@@ -215,6 +212,18 @@ export namespace NsDiscussionForum {
     pgNo?: number
     pgSize?: number
   }
+
+  export interface IPostRequestV2 {
+    postId: string[]
+    userId: string
+    answerId: string
+    sessionId: number
+    postKind: NsDiscussionForum.EPostKind[]
+    sortOrder?: EConversationSortOrder
+    pgNo?: number
+    pgSize?: number
+  }
+
   export interface IPostResult {
     acceptedAnswer: ITimelineResult | null
     idsList: string[]
@@ -223,6 +232,11 @@ export namespace NsDiscussionForum {
     mainPost: ITimelineResult
     replyPost: ITimelineResult[]
   }
+
+  export interface IPostResultV2 {
+    [key: string]: IPostResult
+  }
+
   export interface IPostUpdateRequest {
     addTags?: NsDiscussionForum.IPostTag[]
     editor: string
@@ -230,5 +244,14 @@ export namespace NsDiscussionForum {
     postKind: NsDiscussionForum.EPostKind
     meta: NsDiscussionForum.IPostContent
     removeTags?: NsDiscussionForum.IPostTag[]
+
+  }
+
+  export interface IPostUpdateRequestV2 {
+    postKind: NsDiscussionForum.EPostKind
+    postCreator?: string
+    postContent: NsDiscussionForum.IPostContent
+    tags?: string[]
+    source: IPostTag
   }
 }

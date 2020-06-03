@@ -1,23 +1,22 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<mat-toolbar class="detailBar" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+<mat-toolbar role="navigation" i18n-aria-label aria-label="Toolbar" *ngIf="!(isInIframe && forPreview)"
+  class="detailBar" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+  <ws-widget-btn-page-back [widgetData]="{ url: 'back', back: forPreview  }"></ws-widget-btn-page-back>
   <span class="margin-left-xs text-truncate">
     <span i18n>Details</span>
   </span>
   <span class="spacer"></span>
-  <a *ngIf="isAuthor" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
+  <a *ngIf="isAuthor && !forPreview" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
     <mat-icon>create</mat-icon>
     <span i18n class="ml-2">Edit</span>
   </a>
   <!-- <ng-container *ngIf="isAuthor" [wsResolverWidget]="authorBtnWidget"></ng-container> -->
 </mat-toolbar>
 
-<ws-app-toc-banner [banners]="banners" [content]="content" [analytics]="analytics" [resumeData]="resumeData">
+<ws-app-toc-banner role="banner" [banners]="banners" [forPreview]="forPreview" [content]="content"
+  [analytics]="analytics" [resumeData]="resumeData">
 </ws-app-toc-banner>
 <ng-container>
-  <div class="toc-body" *ngIf="!errorCode; else tocError">
+  <div role="main" class="toc-body" *ngIf="!errorCode; else tocError">
     <nav mat-tab-nav-bar class="toc-links mat-app-background">
       <a mat-tab-link [routerLink]="'./overview'" routerLinkActive="ws-mat-primary-text link-active" i18n>Overview</a>
       <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'"
@@ -34,14 +33,33 @@
       <!-- *ngIf="content?.children?.length" -->
       <a *ngIf="content?.children?.length" mat-tab-link [routerLink]="'./contents'"
         routerLinkActive="ws-mat-primary-text link-active" i18n>Contents</a>
-      <a mat-tab-link [routerLink]="'./analytics'" routerLinkActive="ws-mat-primary-text link-active" i18n>Analytics</a>
+      <a *ngIf="enableAnalytics" [disabled]="forPreview" mat-tab-link [routerLink]="'./analytics'"
+        routerLinkActive="ws-mat-primary-text link-active" i18n>Analytics</a>
     </nav>
     <router-outlet></router-outlet>
+    <ng-container *ngIf="moreLikeThis?.length">
+      <h2 i18n>More like this</h2>
+      <ws-utils-horizontal-scroller [loadStatus]="'done'">
+        <ng-container *ngFor="let content of moreLikeThis">
+          <ws-widget-card-content [widgetData]="{ content: content, cardSubType: 'minimal' }">
+          </ws-widget-card-content>
+        </ng-container>
+      </ws-utils-horizontal-scroller>
+    </ng-container>
+    <ng-container *ngIf="moreLikeThisFree?.length">
+      <h2 [ngClass]="{ 'margin-top-l': moreLikeThis.length }" i18n>Similar Free Content</h2>
+      <ws-utils-horizontal-scroller [loadStatus]="'done'">
+        <ng-container *ngFor="let content of moreLikeThisFree">
+          <ws-widget-card-content [widgetData]="{ content: content, cardSubType: 'minimal' }">
+          </ws-widget-card-content>
+        </ng-container>
+      </ws-utils-horizontal-scroller>
+    </ng-container>
     <ng-container>
-      <mat-divider class="margin-bottom-m"></mat-divider>
-      <div class="toc-discussion-container">
+      <mat-divider class="margin-top-m margin-bottom-m"></mat-divider>
+      <div class="toc-discussion-container" fragment="discussion-forum">
         <ws-app-toc-discussion [content]="content" class="discussion"></ws-app-toc-discussion>
-        <ws-app-toc-cohorts *ngIf="!isCohortsRestricted" [content]="content" class="cohorts"></ws-app-toc-cohorts>
+        <ws-app-toc-cohorts [content]="content" class="cohorts"></ws-app-toc-cohorts>
       </div>
     </ng-container>
   </div>

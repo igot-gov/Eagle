@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
 import { IWidgetAuthor } from './../../../interface/widget'
 import { ChannelStoreService } from './../../../services/store.service'
@@ -27,7 +24,7 @@ export class RendererComponent implements OnInit, OnChanges {
 
   @Input() id = ''
   @Input() isSubmitPressed = false
-path
+  event = false
   widgetData!: IWidgetAuthor
   @ViewChild('parent', { static: false }) parent!: ElementRef
   width = '0px'
@@ -86,18 +83,18 @@ path
       this.widgetData.children.map(
         v => {
           switch (this.store.getUpdatedContent(v).purpose) {
-            case 'noDataWidget':
-              this.widgetMap.noData = v
-              break
-            case 'info':
-              this.widgetMap.info = v
-              break
-            case 'errorWidget':
-              this.widgetMap.error = v
-              break
-            default:
-              this.widgetMap.widgets.push(v)
-              break
+          case 'noDataWidget':
+            this.widgetMap.noData = v
+            break
+          case 'info':
+            this.widgetMap.info = v
+            break
+          case 'errorWidget':
+            this.widgetMap.error = v
+            break
+          default:
+            this.widgetMap.widgets.push(v)
+            break
           }
         },
       )
@@ -153,14 +150,14 @@ path
     })
   }
 
-path
-path
-path
+  dragover_handler(ev: any) {
+    ev.preventDefault()
+    ev.dataTransfer.dropEffect = 'copy'
   }
 
-path
-path
-path
+  drop_handler(ev: any) {
+    ev.preventDefault()
+    const data = ev.dataTransfer.getData('text/plain')
     this.store.addWidget(this.id, data)
     if (data !== 'strip') {
       setTimeout(

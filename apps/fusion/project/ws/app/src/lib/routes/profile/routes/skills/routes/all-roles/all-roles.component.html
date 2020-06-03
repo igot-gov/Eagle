@@ -1,0 +1,33 @@
+<div *ngIf="apiExistingFetchStatus === 'fetching'" class="my-3 text-center">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="apiExistingFetchStatus === 'done' || apiExistingFetchStatus === 'none'" class="margin-l flex flex-left">
+  <!-- <mat-slide-toggle class="mat-body" (change)="onStatusChange($event)"> -->
+  <ng-container *ngIf="isClient">
+    <h2 i18n>Showing roles of skill group</h2>
+    <h2 class="margin-left-xs font-bold">{{skillType}}</h2>
+  </ng-container>
+  <ng-container *ngIf="skillType !== skillGroup && isClient">
+    <h4 class="margin-left-m skill-group" i18n>See roles of skill group</h4>
+    <span color="primary" class="margin-left-xs underline cursor-pointer font-bold" color="primary"
+      (click)="changeRoles()">{{skillGroup}}</span>
+  </ng-container>
+  <!-- </mat-slide-toggle> -->
+</div>
+
+<div *ngIf="apiExistingFetchStatus === 'none'" color="primary" class=" margin-xl flex-center flex items-center">
+  <h2 i18n>No Roles Found</h2>
+</div>
+<div class="margin-m flex flex-start flex-wrapped">
+  <ng-container *ngIf="apiExistingFetchStatus === 'done'">
+    <ws-app-competency-card (deleteRoleEvent)="onDelete($event)" [skillManager]="isRoleManager" [isClient]="isClient"
+      class="margin-right-m margin-bottom-xs" *ngFor="let role of existingRolesData" [cardData]="role"
+      [rolesCard]="true">
+    </ws-app-competency-card>
+  </ng-container>
+</div>
+<div *ngIf="apiExistingFetchStatus === 'error'" class="mat-elevation-z2 margin-xl">
+  <h2 i18n class="flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
+    Sorry, we ran into some error!!!
+  </h2>
+</div>

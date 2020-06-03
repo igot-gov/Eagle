@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="margin-top-m margin-left-xl">
   <form class="" [formGroup]="urlUploadForm">
     <div class="margin-left15">
@@ -18,8 +15,14 @@
         <p class="font-weight-bold margin-remove-bottom" i18n>
           Link
         </p>
-        <mat-form-field appearance="outline" class="margin-top-xs" style="width:80%;">
-          <input type = "url" matInput formControlName="artifactUrl" i18n-placeholder placeholder="Enter or paste URL here"/>
+        <mat-form-field appearance="outline" class="margin-top-xs" style="width: 80%;">
+          <input
+            type="url"
+            matInput
+            formControlName="artifactUrl"
+            i18n-placeholder
+            placeholder="Enter or paste URL here"
+          />
           <mat-error *ngIf="showError(urlUploadForm.controls.artifactUrl)" i18n>
             URL is mandatory
           </mat-error>
@@ -51,15 +54,21 @@
         <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
         <p class="margin-left-xs margin-remove-bottom">
           I have read and I agree with the
-          <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()">IPR Declaration</span>
+          <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()"
+            >IPR Declaration</span
+          >
         </p>
       </div>
     </div>
-    <div class="flex flex-end margin-bottom-xl ">
-      <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-m" (click)="submit()">
-        <div class="flex flex-middle ">
-          <p class="text-white margin-remove-bottom" i18n>PROCEED</p>
-          <mat-icon class="text-white margin-left-xs">arrow_right_alt</mat-icon>
+    <div class="flex flex-end margin-bottom-xl">
+      <button
+        type="button"
+        mat-raised-button
+        class="ws-mat-primary-background margin-top-m"
+        (click)="submit()"
+      >
+        <div class="flex flex-middle">
+          <p class="text-white margin-remove-bottom" i18n>Proceed</p>
         </div>
       </button>
     </div>

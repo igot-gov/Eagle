@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div *ngIf="fetchStatus === 'fetching'" class="analytics-loader">
   <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
 </div>
@@ -12,7 +9,7 @@
 
 <div *ngIf="fetchStatus === 'done' && uniqueUsers > 0 && apiLinkAccess?.courseAnalytics" class="mt-4">
   <ng-container *ngIf="!isExpandTrue">
-    <!-- <ng-container>
+    <ng-container>
       <mat-card *ngIf="uniqueUsers" class="unique-users-card p-4">
         <mat-card-header class="flex flex-center flex-wrapped">
           <mat-card-title>
@@ -23,7 +20,7 @@
           <h2>{{uniqueUsers}}</h2>
         </mat-card-content>
       </mat-card>
-    </ng-container> -->
+    </ng-container>
     <div class="flex flex-between flex-wrapped">
       <ng-container>
         <mat-card class="graph-card">
@@ -161,10 +158,11 @@
     </div> -->
     <div class="flex flex-around m-3 flex-wrapped">
       <ws-app-app-toc-analytics-tiles class="unique-users-card-client margin-top-s" (clickEvent)="onClick($event)"
-        [title]="'Unique Users'" [category2]="'City-wise'" [category3]="'Device-wise'" [category1]="'Department-wise'"
-        [uniqueUsers]="uniqueUsers" [description]="uniqueUsersDescription">
+        [title]="'Unique Users'" [category2]="'Country-wise'" [category3]="'Device-wise'"
+        [category1]="'Job Profile-wise'" [uniqueUsers]="uniqueUsers" [description]="uniqueUsersDescription"
+        [analyticsDataClient]="analyticsDataClient">
       </ws-app-app-toc-analytics-tiles>
-      <ng-container>
+      <ng-container *ngIf="analyticsDataClient?.day_wise_users?.length > 0">
         <mat-card class="graph-bar-card-client">
           <div class="margin-top-m margin-left-m">
             <div class="flex flex-between flex-middle">
@@ -181,10 +179,11 @@
     </div>
     <div class="flex flex-around m-3 flex-wrapped">
       <ws-app-app-toc-analytics-tiles class="unique-users-card-client margin-top-s" *ngIf="hits > 0"
-        (clickEvent)="onClick($event)" [title]="'Views'" [category3]="'Device-wise'" [category1]="'Department-wise'"
-        [category2]="'City-wise'" [uniqueUsers]="hits" [description]="hitsDescription">
+        (clickEvent)="onClick($event)" [title]="'Views'" [category3]="'Device-wise'" [category1]="'Job Profile-wise'"
+        [category2]="'Country-wise'" [uniqueUsers]="hits" [description]="hitsDescription"
+        [analyticsDataClient]="analyticsDataClient">
       </ws-app-app-toc-analytics-tiles>
-      <ng-container>
+      <ng-container *ngIf="analyticsDataClient?.day_wise_users?.length > 0">
         <mat-card class="graph-bar-card-client">
           <div class="margin-top-m margin-left-m">
             <div class="flex flex-between flex-middle">
@@ -200,7 +199,7 @@
         </mat-card>
       </ng-container>
     </div>
-    <div class="flex flex-around m-3 flex-wrapped" id="departments">
+    <div *ngIf="analyticsDataClient?.department?.length > 0" class="flex flex-around m-3 flex-wrapped" id="departments">
       <ng-container>
         <mat-card class="graph-card-client">
           <!-- <div class="flex flex-between flex-middle mat-toolbar mat-primary">
@@ -218,14 +217,14 @@
           <div class="margin-top-m margin-left-m">
             <div class="flex flex-between flex-middle">
               <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Users by
-                departments
+                Job Profiles
               </p>
               <button *ngIf="analyticsDataClient?.department?.length >= 20" mat-icon-button
                 (click)="onExpandClient('department', 'users')">
                 <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
               </button>
             </div>
-            <p class="description" i18n>This chart displays # of unique users by department</p>
+            <p class="description" i18n>This chart displays # of unique users by job profiles</p>
           </div>
           <div class="margin-m">
             <ng-container [wsResolverWidget]="barChartDeptData"> </ng-container>
@@ -249,14 +248,14 @@
           <div class="margin-top-m margin-left-m">
             <div class="flex flex-between flex-middle">
               <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Views by
-                departments
+                Job Profiles
               </p>
               <button *ngIf="analyticsDataClient?.department?.length >= 20" mat-icon-button
                 (click)="onExpandClient('department', 'hits')">
                 <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
               </button>
             </div>
-            <p class="description" i18n>This chart displays # of views by department</p>
+            <p class="description" i18n>This chart displays # of views by job profiles</p>
           </div>
           <div class="margin-m">
             <ng-container [wsResolverWidget]="barChartDeptHitsData"> </ng-container>
@@ -264,7 +263,7 @@
         </mat-card>
       </ng-container>
     </div>
-    <div class="flex flex-around m-3 flex-wrapped" id="cities">
+    <div *ngIf="analyticsDataClient?.country?.length > 0" class="flex flex-around m-3 flex-wrapped" id="countries">
       <ng-container>
         <mat-card class="graph-card-client">
           <!-- <div class="flex flex-between flex-middle mat-toolbar mat-primary">
@@ -274,25 +273,25 @@
                 Users By Cities
               </p>
             </div>
-            <button *ngIf="analyticsDataClient?.city?.length >= 20" mat-icon-button
-              (click)="onExpandClient('city', 'users')">
+            <button *ngIf="analyticsDataClient?.country?.length >= 20" mat-icon-button
+              (click)="onExpandClient('country', 'users')">
               <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
             </button>
           </div> -->
           <div class="margin-top-m margin-left-m">
             <div class="flex flex-between flex-middle">
               <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Users by
-                cities
+                Countries
               </p>
-              <button *ngIf="analyticsDataClient?.city?.length >= 20" mat-icon-button
-                (click)="onExpandClient('city', 'users')">
+              <button *ngIf="analyticsDataClient?.country?.length >= 20" mat-icon-button
+                (click)="onExpandClient('country', 'users')">
                 <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
               </button>
             </div>
-            <p class="description" i18n>This chart displays # of unique users by city</p>
+            <p class="description" i18n>This chart displays # of unique users by countries</p>
           </div>
           <div class="margin-m">
-            <ng-container [wsResolverWidget]="barChartCityData"> </ng-container>
+            <ng-container [wsResolverWidget]="barChartCountryData"> </ng-container>
           </div>
         </mat-card>
       </ng-container>
@@ -305,30 +304,30 @@
                 Users By Cities
               </p>
             </div>
-            <button *ngIf="analyticsDataClient?.city?.length >= 20" mat-icon-button
-              (click)="onExpandClient('city', 'visits')">
+            <button *ngIf="analyticsDataClient?.country?.length >= 20" mat-icon-button
+              (click)="onExpandClient('country', 'visits')">
               <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
             </button>
           </div> -->
           <div class="margin-top-m margin-left-m">
             <div class="flex flex-between flex-middle">
               <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Views by
-                cities
+                Countries
               </p>
-              <button *ngIf="analyticsDataClient?.city?.length >= 20" mat-icon-button
-                (click)="onExpandClient('city', 'hits')">
+              <button *ngIf="analyticsDataClient?.country?.length >= 20" mat-icon-button
+                (click)="onExpandClient('country', 'hits')">
                 <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
               </button>
             </div>
-            <p class="description" i18n>This chart displays # of views by city</p>
+            <p class="description" i18n>This chart displays # of views by countries</p>
           </div>
           <div class="margin-m">
-            <ng-container [wsResolverWidget]="barChartCityHitsData"> </ng-container>
+            <ng-container [wsResolverWidget]="barChartCountryHitsData"> </ng-container>
           </div>
         </mat-card>
       </ng-container>
     </div>
-    <div class="flex flex-around m-3 flex-wrapped" id="devices">
+    <div *ngIf="analyticsDataClient?.device?.length > 0" class="flex flex-around m-3 flex-wrapped" id="devices">
       <ng-container>
         <mat-card class="graph-card-client">
           <!-- <div class="flex flex-between flex-middle mat-toolbar mat-primary">
@@ -341,7 +340,7 @@
           </div> -->
           <div class="margin-top-m margin-left-m">
             <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Users by
-              devices
+              Devices
             </p>
             <p class="description" i18n>This chart displays # of unique users from device type</p>
           </div>
@@ -362,7 +361,7 @@
           </div> -->
           <div class="margin-top-m margin-left-m">
             <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>Views by
-              devices
+              Devices
             </p>
             <p class="description" i18n>This chart displays # of views by device type</p>
           </div>
@@ -375,7 +374,7 @@
   </ng-container>
 
   <div class="mt-6" *ngIf="isExpandTrue">
-    <button (click)="onClose()" mat-raised-button i18n-matTooltip="back Action Btn Tooltip" matTooltip="back"
+    <button (click)="onCloseClient()" mat-raised-button i18n-matTooltip="back Action Btn Tooltip" matTooltip="back"
       color="primary">
       <mat-icon class="mr-1">arrow_back</mat-icon>
       Back

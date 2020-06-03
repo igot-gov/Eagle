@@ -1,17 +1,31 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { CardWelcomeComponent } from './card-welcome.component'
+import { NgModule } from '@angular/core'
+import { MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatIconModule } from '@angular/material'
+import { HorizontalScrollerModule } from '@ws-widget/utils'
+import { ActivitiesService } from '../../../../../../project/ws/app/src/lib/routes/activities/services/activities.service'
+import { ActivityCardModule } from '../activity-card/activity-card.module'
+import { TourModule } from '../_common/tour-guide/tour-guide.module'
 import { UserImageModule } from '../_common/user-image/user-image.module'
+import { CardWelcomeComponent } from './card-welcome.component'
+import { ChallengeModule } from '../challenge/challenge.module'
 
 @NgModule({
   declarations: [CardWelcomeComponent],
   imports: [
     CommonModule,
     UserImageModule,
+    MatButtonModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatCardModule,
+    HorizontalScrollerModule,
+    ActivityCardModule,
+    TourModule,
+    ChallengeModule,
   ],
   entryComponents: [CardWelcomeComponent],
+  providers: [ActivitiesService],
 })
 export class CardWelcomeModule { }

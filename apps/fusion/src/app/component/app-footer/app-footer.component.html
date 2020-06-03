@@ -1,17 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="mat-toolbar mat-primary footer-container px-6 sm:px-10 py-4">
+<div class="mat-toolbar footer-container px-2 sm:px-10 py-1 sm:py-4"
+  [ngClass]="{'mat-primary':!isFordFooter || !isXSmall, 'mat-primarylight':isFordFooter && isXSmall}">
   <div class="mat-body">
     <ng-container i18n>
       Powered by Infosys Wingspan
     </ng-container>
-path
-path
+    <ng-container i18n *ngIf="isSiemensContributionShown">
+      & Siemens GLC
     </ng-container>
   </div>
   <div class="mat-body">
-    <span i18n>&copy; Infosys Ltd. 2019-2020.</span> | <a routerLink="/app/tnc" i18n>Privacy</a> |
-    <a routerLink="/app/info/faq" i18n>Help & Contact</a>
+    <span i18n>&copy; Infosys Ltd. 2019-2020.</span> |
+    <a routerLink="/app/tnc" *ngIf="!termsOfUser" name="termOfUseButtonHomePage" i18n>Terms & Conditions</a>
+    <a routerLink="/app/tnc" *ngIf="termsOfUser" name="termOfUseButtonHomePage" i18n>Terms of Use</a> |
+    <a routerLink="/app/info/faq" name="helpAndContactButtonHomePage" i18n>Help & Contact</a>
   </div>
 </div>

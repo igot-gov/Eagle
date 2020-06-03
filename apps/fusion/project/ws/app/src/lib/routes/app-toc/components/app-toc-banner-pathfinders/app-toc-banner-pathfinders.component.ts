@@ -1,25 +1,30 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog } from '@angular/material'
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser'
+import { DomSanitizer, SafeStyle, SafeHtml } from '@angular/platform-browser'
 import { ActivatedRoute, Event, NavigationEnd, Router } from '@angular/router'
-import { ContentProgressService, NsContent, NsGoal, NsPlaylist, viewerRouteGenerator, WidgetContentService } from '@ws-widget/collection'
+import {
+  NsContent,
+  viewerRouteGenerator,
+  WidgetContentService,
+  NsPlaylist,
+  ContentProgressService,
+} from '@ws-widget/collection'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
 import { UtilityService } from '@ws-widget/utils/src/lib/services/utility.service'
 import { Subscription } from 'rxjs'
 import { NsAnalytics } from '../../models/app-toc-analytics.model'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
-import { AppTocDialogIntroVideoComponent } from '../app-toc-dialog-intro-video/app-toc-dialog-intro-video.component'
+import { AccessControlService } from '../../../../../../../author/src/public-api'
+import { AppTocPathfindersService } from '../../services/app-toc-pathfinders.service'
+import { MobileAppsService } from '../../../../../../../../../src/app/services/mobile-apps.service'
 
 @Component({
-path
-path
-path
+  selector: 'ws-app-app-toc-banner-pathfinders',
+  templateUrl: './app-toc-banner-pathfinders.component.html',
+  styleUrls: ['./app-toc-banner-pathfinders.component.scss'],
 })
 export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() forPreview = false
   @Input() banners: NsAppToc.ITocBanner | null = null
   @Input() content: NsContent.IContent | null = null
   @Input() resumeData: NsContent.IContinueLearningData | null = null
@@ -27,7 +32,7 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
   contentProgress = 0
   bannerUrl: SafeStyle | null = null
   routePath = 'overview'
-  validPaths = new Set(['overview', 'contents', 'analytics'])
+  validPaths = new Set(['overview', 'contents', 'analytics', 'classmates'])
   routerParamSubscription: Subscription | null = null
   routeSubscription: Subscription | null = null
   firstResourceLink: { url: string; queryParams: { [key: string]: any } } | null = null
@@ -36,8 +41,6 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
   isPracticeVisible = false
   analyticsData: NsAnalytics.IAnalyticsResponse | null = null
   analyticsDataClient: any = null
-  btnPlaylistConfig: NsPlaylist.IBtnPlaylist | null = null
-  btnGoalsConfig: NsGoal.IBtnGoal | null = null
   isRegistrationSupported = false
   checkRegistrationSources: Set<string> = new Set([
     'SkillSoft Digitalization',
@@ -49,8 +52,9 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
 
   externalContentFetchStatus: TFetchStatus = 'done'
   registerForExternal = false
-  isGoalsEnabled = false
-
+  isStartButtonAvailable = false
+  body: SafeHtml | null = null
+  btnPlaylistConfig: NsPlaylist.IBtnPlaylist | null = null
   contextId?: string
   contextPath?: string
 
@@ -58,39 +62,31 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
     private sanitizer: DomSanitizer,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
     private tocSvc: AppTocService,
     private configSvc: ConfigurationsService,
+    private tocPathfindersSvc: AppTocPathfindersService,
     private progressSvc: ContentProgressService,
+    private mobileAppsSvc: MobileAppsService,
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
-  ) {
-  }
+    private authAccessControlSvc: AccessControlService,
+  ) {}
 
   ngOnInit() {
-    this.routeSubscription = this.route.queryParamMap.subscribe(
-      qParamsMap => {
-        const contextId = qParamsMap.get('contextId')
-        const contextPath = qParamsMap.get('contextPath')
-        if (contextId && contextPath) {
-          this.contextId = contextId
-          this.contextPath = contextPath
-        }
-      },
-    )
-    if (this.configSvc.restrictedFeatures) {
-      this.isRegistrationSupported = this.configSvc.restrictedFeatures.has('registrationExternal')
-    }
-    this.checkRegistrationStatus()
+    this.initData()
+    this.routeSubscription = this.route.queryParamMap.subscribe(qParamsMap => {
+      const contextId = qParamsMap.get('contextId')
+      const contextPath = qParamsMap.get('contextPath')
+      if (contextId && contextPath) {
+        this.contextId = contextId
+        this.contextPath = contextPath
+      }
+    })
     this.routerParamSubscription = this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationEnd) {
         this.assignPathAndUpdateBanner(routerEvent.url)
       }
     })
-
-    if (this.configSvc.restrictedFeatures) {
-      this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
-    }
 
     if (this.content) {
       this.btnPlaylistConfig = {
@@ -99,12 +95,68 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
         contentType: this.content.contentType,
         mode: 'dialog',
       }
-      this.btnGoalsConfig = {
-        contentId: this.content.identifier,
-        contentName: this.content.name,
-        contentType: this.content.contentType,
+    }
+  }
+
+  getRatingIcon(ratingIndex: number): 'star' | 'star_border' | 'star_half' {
+    if (this.content && this.content.averageRating) {
+      const avgRating = this.content.averageRating
+      const ratingFloor = Math.floor(avgRating)
+      if (ratingIndex <= ratingFloor) {
+        return 'star'
+      }
+      if (ratingFloor === ratingIndex - 1 && avgRating % 1 > 0) {
+        return 'star_half'
       }
     }
+    return 'star_border'
+  }
+
+  private initData() {
+    this.body = this.sanitizer.bypassSecurityTrustHtml(
+      this.content && this.content.body
+        ? this.forPreview
+          ? this.authAccessControlSvc.proxyToAuthoringUrl(this.content.body)
+          : this.content.body
+        : '',
+    )
+    const userProfile = this.configSvc.userProfile
+
+    if (this.content && this.content.learningMode === 'Closed') {
+      if (
+        !this.forPreview &&
+        userProfile &&
+        this.content.creatorDetails.map(user => user.id).indexOf(userProfile.userId) === -1
+      ) {
+        this.checkStartButton()
+      } else {
+        this.isStartButtonAvailable = this.checkIfArtifactUrlAvailable()
+      }
+    } else if (this.content && this.content.learningMode === 'Open') {
+      this.isStartButtonAvailable = this.checkIfArtifactUrlAvailable()
+    }
+  }
+
+  checkIfArtifactUrlAvailable(): boolean {
+    return this.content && this.content.artifactUrl.length > 0 ? true : false
+  }
+  checkStartButton() {
+    if (this.content) {
+      this.tocPathfindersSvc
+        .verifyAttendedUsers(this.content.identifier)
+        .subscribe((response: { [key: string]: boolean }) => {
+          if (response && this.content) {
+            this.isStartButtonAvailable =
+              this.checkIfArtifactUrlAvailable() && response[this.content.identifier]
+                ? response[this.content.identifier]
+                : false
+          }
+        })
+    }
+  }
+
+  get showStart() {
+    return this.tocSvc.showStartButton(this.content)
   }
 
   get isMobile(): boolean {
@@ -118,8 +170,8 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
   ngOnChanges() {
     this.assignPathAndUpdateBanner(this.router.url)
     if (this.content) {
-      // this.content.status = 'Deleted'
-      this.fetchExternalContentAccess()
+      // // this.content.status = 'Deleted'
+      // this.fetchExternalContentAccess()
       this.modifySensibleContentRating()
       this.assignPathAndUpdateBanner(this.router.url)
       this.getLearningUrls()
@@ -129,7 +181,11 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
           this.analyticsData = data
         })
       }
-      if (this.routePath === 'analytics' && this.analytics && this.analytics.courseAnalyticsClient) {
+      if (
+        this.routePath === 'analytics' &&
+        this.analytics &&
+        this.analytics.courseAnalyticsClient
+      ) {
         this.tocSvc.fetchContentAnalyticsClientData(this.content.identifier)
         this.tocSvc.analyticsReplaySubject.subscribe((data: any) => {
           this.analyticsDataClient = data
@@ -145,12 +201,16 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
       )
     }
   }
+
   get isResource() {
     if (this.content) {
-      return (
+      const isResource =
         this.content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT ||
         this.content.contentType === NsContent.EContentTypes.RESOURCE
-      )
+      if (isResource) {
+        this.mobileAppsSvc.sendViewerData(this.content)
+      }
+      return isResource
     }
     return false
   }
@@ -163,6 +223,7 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
       this.routeSubscription.unsubscribe()
     }
   }
+
   private modifySensibleContentRating() {
     if (
       this.content &&
@@ -175,17 +236,14 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
       this.content.totalRating = (this.content.totalRating as any)[this.configSvc.rootOrg || '']
     }
   }
+
   private getLearningUrls() {
     if (this.content) {
-      this.progressSvc.getProgressFor(this.content.identifier).subscribe(data => {
-        this.contentProgress = data
-      })
-      this.isPracticeVisible = Boolean(
-        this.tocSvc.filterToc(this.content, NsContent.EFilterCategory.PRACTICE),
-      )
-      this.isAssessVisible = Boolean(
-        this.tocSvc.filterToc(this.content, NsContent.EFilterCategory.ASSESS),
-      )
+      if (!this.forPreview) {
+        this.progressSvc.getProgressFor(this.content.identifier).subscribe(data => {
+          this.contentProgress = data
+        })
+      }
       const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(this.content)
       this.firstResourceLink = viewerRouteGenerator(
         firstPlayableContent.identifier,
@@ -201,13 +259,23 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
       this.routePath = path
       this.updateBannerUrl()
     }
-    if (this.routePath === 'analytics' && this.content && this.analytics && this.analytics.courseAnalyticsClient) {
+    if (
+      this.routePath === 'analytics' &&
+      this.content &&
+      this.analytics &&
+      this.analytics.courseAnalyticsClient
+    ) {
       this.tocSvc.fetchContentAnalyticsClientData(this.content.identifier)
       this.tocSvc.analyticsReplaySubject.subscribe((data: any) => {
         this.analyticsDataClient = data
       })
     }
-    if (this.routePath === 'analytics' && this.content && this.analytics && this.analytics.courseAnalytics) {
+    if (
+      this.routePath === 'analytics' &&
+      this.content &&
+      this.analytics &&
+      this.analytics.courseAnalytics
+    ) {
       this.tocSvc.fetchContentAnalyticsData(this.content.identifier)
       this.tocSvc.analyticsReplaySubject.subscribe((data: NsAnalytics.IAnalyticsResponse) => {
         this.analyticsData = data
@@ -221,74 +289,9 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
       )
     }
   }
-  playIntroVideo() {
-    if (this.content) {
-      this.dialog.open(AppTocDialogIntroVideoComponent, {
-        data: this.content.introductoryVideo,
-        height: '350px',
-        width: '620px',
-      })
-    }
-  }
-  get sanitizedIntroductoryVideoIcon() {
-    if (this.content && this.content.introductoryVideoIcon) {
-      return this.sanitizer.bypassSecurityTrustStyle(`url(${this.content.introductoryVideoIcon})`)
-    }
-    return null
-  }
-  private fetchExternalContentAccess() {
-    if (this.content && this.content.registrationUrl) {
-      this.externalContentFetchStatus = 'fetching'
-      this.registerForExternal = false
-      this.tocSvc.fetchExternalContentAccess(this.content.identifier).subscribe(
-        data => {
-          this.externalContentFetchStatus = 'done'
-          this.registerForExternal = data.hasAccess
-        },
-        _ => {
-          this.externalContentFetchStatus = 'done'
-          this.registerForExternal = false
-        },
-      )
-    }
-  }
-  getRatingIcon(ratingIndex: number): 'star' | 'star_border' | 'star_half' {
-    if (this.content && this.content.averageRating) {
-      const avgRating = this.content.averageRating
-      const ratingFloor = Math.floor(avgRating)
-      if (ratingIndex <= ratingFloor) {
-        return 'star'
-      }
-      if (ratingFloor === ratingIndex - 1 && avgRating % 1 > 0) {
-        return 'star_half'
-      }
-    }
-    return 'star_border'
-  }
 
-  private checkRegistrationStatus() {
-    const source = (this.content && this.content.sourceShortName) || ''
-    if (!this.isRegistrationSupported && this.checkRegistrationSources.has(source)) {
-      this.contentSvc
-        .getRegistrationStatus(source)
-        .then(res => {
-          if (res.hasAccess) {
-            this.actionBtnStatus = 'grant'
-          } else {
-            this.actionBtnStatus = 'reject'
-            if (res.registrationUrl && this.content) {
-              this.content.registrationUrl = res.registrationUrl
-            }
-          }
-        })
-        .catch(_err => { })
-    } else {
-      this.actionBtnStatus = 'grant'
-    }
-  }
-
-  generateQuery(type: 'resume' | 'startOver' | 'start'): { [key: string]: string } {
-    if (this.firstResourceLink && (type === 'start' || type === 'startOver')) {
+  generateQuery(type: 'RESUME' | 'START_OVER' | 'START'): { [key: string]: string } {
+    if (this.firstResourceLink && (type === 'START' || type === 'START_OVER')) {
       let qParams: { [key: string]: string } = {
         ...this.firstResourceLink.queryParams,
         viewMode: type,
@@ -302,10 +305,10 @@ export class AppTocBannerPathfindersComponent implements OnInit, OnChanges, OnDe
       }
       return qParams
     }
-    if (this.resumeDataLink && type === 'resume') {
+    if (this.resumeDataLink && type === 'RESUME') {
       let qParams: { [key: string]: string } = {
         ...this.resumeDataLink.queryParams,
-        viewMode: 'resume',
+        viewMode: 'RESUME',
       }
       if (this.contextId && this.contextPath) {
         qParams = {

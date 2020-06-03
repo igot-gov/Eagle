@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 
@@ -14,16 +11,48 @@ import {
   MatIconModule,
   MatButtonModule,
   MatRadioModule,
+  MatSelectModule,
+  MatExpansionModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatCheckboxModule,
+  MatDividerModule,
+  MatDialogModule,
+  MatProgressSpinnerModule,
 } from '@angular/material'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { InterestModule } from '../profile/routes/interest/interest.module'
 import { SettingsModule } from '../profile/routes/settings/settings.module'
 import { WidgetResolverModule } from '@ws-widget/resolver'
-import { LocaleTranslatorModule } from '@ws-widget/collection'
+import {
+  LocaleTranslatorModule,
+  LanguageSelectorModule,
+  AppTourDialogModule,
+  BtnPageBackModule,
+} from '@ws-widget/collection'
 import { AboutVideoModule } from '../info/about-video/about-video.module'
+import { HomeComponent } from './components/home/home.component'
+import { LangSelectComponent } from './components/lang-select/lang-select.component'
+import { TncComponent } from './components/tnc/tnc.component'
+import { TncRendererComponent } from './components/tnc-renderer/tnc-renderer.component'
+import { PipeSafeSanitizerModule } from '../../../../../../../library/ws-widget/utils/src/public-api'
+import { TncAppResolverService } from '../../../../../../../src/app/services/tnc-app-resolver.service'
+import { SetupDoneComponent } from './components/setup-done/setup-done.component'
+import { InterestModules } from './module/interest/interest.module'
+import { BadgesResolver } from '../profile/routes/badges/badges.resolver'
+import { Globals } from './globals'
+import { InterestModule } from '../profile/routes/interest/interest.module'
+import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component'
 
 @NgModule({
-  declarations: [AppSetupHomeComponent],
+  declarations: [
+    AppSetupHomeComponent,
+    HomeComponent,
+    LangSelectComponent,
+    TncComponent,
+    TncRendererComponent,
+    SetupDoneComponent,
+    UploadPdfComponent,
+  ],
   imports: [
     CommonModule,
     AppSetupRoutingModule,
@@ -36,12 +65,25 @@ import { AboutVideoModule } from '../info/about-video/about-video.module'
     MatIconModule,
     MatButtonModule,
     MatRadioModule,
-
-    InterestModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    PipeSafeSanitizerModule,
+    MatToolbarModule,
+    BtnPageBackModule,
+    MatProgressSpinnerModule,
     SettingsModule,
     AboutVideoModule,
     WidgetResolverModule,
     LocaleTranslatorModule,
+    InterestModules,
+    LanguageSelectorModule,
+    AppTourDialogModule,
+    InterestModule,
   ],
+  providers: [TncAppResolverService, BadgesResolver, Globals],
 })
-export class AppSetupModule { }
+export class AppSetupModule {}

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export interface IBadgeResponse {
   canEarn: IBadge[]
   closeToEarning: IBadge[]
@@ -9,13 +6,18 @@ export interface IBadgeResponse {
   recent: IBadgeRecent[]
   totalPoints: [
     {
-      collaborative_points: number;
-      learning_points: number;
+      collaborative_points: number
+      learning_points: number
     }
   ]
 }
 
 export interface IBadge {
+  requiredCount: number
+  currentCount: number
+  Description: string
+  BadgeName: string
+  BadgeImagePath: string
   badge_group: string
   badge_id: string
   badge_name: string
@@ -28,13 +30,21 @@ export interface IBadge {
   progress: number
   received_count: number
   threshold: number
+  remainingCount: number
+  remainingCountUnit: string
 }
 
 export interface IBadgeRecent extends IBadge {
+  DateOfwinning: string
+  AfterCompletionCriteria: string
+  CongratsMessage: string
   first_received_date: string
   last_received_date: string
   message: string
   image: string
+}
+export interface IBadgesearned {
+  badgeEarned: IBadgeRecent[]
 }
 
 export interface IUserNotification {

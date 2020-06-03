@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import {
   ActivatedRoute,
@@ -24,6 +21,8 @@ import { LeaderboardService } from '../../services/leaderboard.service'
   styleUrls: ['./leaderboard.component.scss'],
 })
 export class LeaderboardComponent implements OnInit, OnDestroy {
+
+  canShow: false | undefined
   private routerSub!: Subscription
   private routeDataSub!: Subscription
   private routeUrlSub!: Subscription
@@ -39,6 +38,7 @@ export class LeaderboardComponent implements OnInit, OnDestroy {
     private leaderboardSvc: LeaderboardService,
   ) {
     this.fetchStatus = 'none'
+    this.canShow = false
   }
 
   ngOnInit() {

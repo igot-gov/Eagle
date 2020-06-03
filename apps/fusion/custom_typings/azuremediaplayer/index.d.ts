@@ -1,8 +1,5 @@
-/*               "Copyright 2020 Infosys Ltd.
-http://http-url
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
-http://http-url
+ * API of Azure Media Player ([[amp]]), use azuremediaplayer.d.ts if caller is using [TypeScript](http://www.typescriptlang.org/).
  */
 declare namespace amp {
   /**
@@ -49,7 +46,7 @@ declare namespace amp {
     ended(): boolean
 
     /**
-path
+     * Gets/Sets the player level options to add new options or override the given options if
      * has already been set.
      *
      * @param  options Object of new option values
@@ -62,10 +59,10 @@ path
      * Sets a single source to play.
      * Use this method if you know the type of the source and only have one source.
      *
-http://http-url
+     * myPlayer.src({ type: "video/mp4", src: "http://www.example.com/path/to/video.mp4" },
      * ~~~
      * ~~~
-http://http-url
+     * [{ kind: "captions" src: "http://example.com/path/to/track.vtt" srclang: "fr" label: "French"}]);
      * ~~~
      * ~~~
      *
@@ -83,22 +80,22 @@ http://http-url
      * myPlayer.src([
      * ~~~
      * ~~~
-http://http-url
+     * { type: "application/dash+xml", src: "http://www.example.com/path/to/video.ism(format=mpd-csf-time)" },
      * ~~~
      * ~~~
-http://http-url
+     * { type: "application/dash+xml", src: "http://www.example.com/path/to/video.ism(format=mpd-time-csf)", protectionInfo: [{type: "AES", authenticationToken:"token"}] },
      * ~~~
      * ~~~
-http://http-url
+     * { type: "application/dash+xml", src: "http://www.example.com/path/to/video.ism(format=mpd-time-csf)", disableUrlRewriter: true },
      * ~~~
      * ~~~
-http://http-url
+     * { type: "application/dash+xml", src: "http://www.example.com/path/to/video.ism(format=mpd-time-csf)", streamingFormats: ["SMOOTH", "DASH"] },
      * ~~~
      * ~~~
-http://http-url
+     * { type: "video/ogg", src: "http://www.example.com/path/to/video.ogv" }],
      * ~~~
      * ~~~
-http://http-url
+     * [{ kind: "captions" src: "http://example.com/path/to/track.vtt" srclang: "fr" label: "French"}]
      * ~~~
      * ~~
      * );
@@ -110,7 +107,7 @@ http://http-url
     src(newSources: Player.Source[], textTracks?: Player.Track[]): Player
 
     /**
-http://http-url
+     * Get the fully qualified URL of the current source value e.g. http://mysite.com/video.mp4.
      * Can be used in conjuction with [[amp.Player.currentType]] to assist in rebuilding the current source object.
      * @return Current source.
      */
@@ -181,7 +178,7 @@ http://http-url
      * Set/Get the poster image source url.
      *
      * ##### Example of setting:
-http://http-url
+     *     myPlayer.poster('http://example.com/myImage.jpg');
      *
      * ##### Example of getting:
      *     var currentPoster = myPlayer.poster();
@@ -291,7 +288,7 @@ http://http-url
      * Length in seconds of the first time range
      *     var firstRangeLength = firstRangeEnd - firstRangeStart;
      *
-path
+     * @return TimeRanges object [following JS spec](https://developer.mozilla.org/en-US/docs/Web/API/TimeRanges).
      */
     buffered(): TimeRanges
 
@@ -381,9 +378,9 @@ path
      *
      * In some browsers, full screen is not supported natively, so it enters
      * "full window mode", where the video fills the browser window.
-path
+     * In browsers and devices that support native full screen, sometimes the
      * browser's default controls will be shown, and not the [[amp]] custom skin.
-path
+     * This includes most mobile devices (iOS, Android) and older versions of
      * Safari.
      *
      * @return The [[amp.Player]] calling this function.
@@ -403,7 +400,7 @@ path
     /**
      * Bind a listener to the Player's ready state.
      *
-path
+     * Different from event listeners in that if the ready event has already happened
      * it will trigger the function immediately.
      *
      * @param handler Ready handler
@@ -412,35 +409,35 @@ path
     ready(handler: Function): Player
 
     /**
-path
+     * Add an event listener to this Player's element.
      *
      * ##### Example:
-path
+     *	    myPlayer.addEventListener('eventType', myFunc);
      *
-path
-path
+     * @param  eventName The event type string. Use [[amp.eventName]] for the list of event types.
+     * ex: `amp.eventName.playing`
      *
      * @param  handler Event handler.
      * @return The [[amp.Player]] calling this function.
      */
-path
+    addEventListener(eventName: string, handler: Function): Player
 
     /**
-path
+     * Remove an event listener from this Player's element.
      *
      * ##### Example:
-path
+     *     myPlayer.removeEventListener('eventType', myFunc);
      *
-path
-path
+     * If myFunc is excluded, *all* listeners for the event type will be removed.
+     * If eventType is excluded, *all* listeners will be removed from the component.
      *
-path
-path
+     * @param  eventName The event type string. Use [[amp.eventName]] for the list of event types.
+     * ex: `amp.eventName.playing`
      *
      * @param  handler Event handler.
      * @return The [[amp.Player]] calling this function.
      */
-path
+    removeEventListener(eventName: string, handler?: Function): Player
 
     /**
      * Destroys the [[amp.Player]] and does any necessary cleanup.
@@ -551,7 +548,7 @@ path
      * Gets or sets the current playback rate.  A playback rate of
      * 1.0 represents normal speed and 0.5 would indicate half-speed
      * playback, for instance.
-http://http-url
+     * @see https://html.spec.whatwg.org/multipage/embedded-content.html#dom-media-playbackrate
      *
      * @param  value New playback rate to set.
      * @return The [[amp.Player]] calling this function when setting, current playback rate when getting.
@@ -586,7 +583,7 @@ http://http-url
 
     addMidRoll(newMidRoll: MidRoll): MidRoll[]
     /**
-path
+     * Returns newly seen splices, evt: "splicewaiting"
      *
      */
 
@@ -599,7 +596,7 @@ path
 
     /**
      * Get an array of associated text tracks. captions, subtitles, chapters, descriptions
-http://http-url
+     * http://www.w3.org/html/wg/drafts/html/master/embedded-content-0.html#dom-media-texttracks
      *
      * @return {Array} Array of track objects
      * @method textTracks
@@ -759,7 +756,7 @@ http://http-url
      */
     id: number
     /**
-path
+     * Start time of the splice event as an offset from the beginning of the current clip in seconds.
      * -1 if this is an immediate splice.
      */
 
@@ -770,12 +767,12 @@ path
 
     out?: boolean
     /**
-path
+     * Duration of the splice event, in seconds.
      */
 
     duration?: number
     /**
-path
+     * Set to true indicates that a previously sent splice event should be cancelled.
      * Defaults to false.
      */
 
@@ -812,17 +809,17 @@ path
 
   /**
    * Interface describing a HttpRequest.
-path
+   * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest">XMLHttpRequest</a>
    */
   export interface XMLHttpRequestWrapper {
-path
-path
-path
-path
-path
-path
-path
-path
+    onabort: (ev: Event) => any
+    onerror: (ev: Event) => any
+    onload: (ev: Event) => any
+    onloadend: (ev: ProgressEvent) => any
+    onloadstart: (ev: Event) => any
+    onprogress: (ev: ProgressEvent) => any
+    ontimeout: (ev: ProgressEvent) => any
+    onreadystatechange: (ev: ProgressEvent) => any
     responseType: string
     timeout: number
     msCaching: string
@@ -861,7 +858,7 @@ path
      * Html5            = 5
      *.Html5FairPlayHLS = 6
      * ```
-path
+     * Bits [27-20] - High level code
      * ```
      * 'MEDIA_ERR_CUSTOM'               = 0
      * 'MEDIA_ERR_ABORTED'              = 1
@@ -918,21 +915,21 @@ path
 
     /**
      * Select single track playback by tracks index. When selection has been honored, "changed"
-path
+     * event will fire.
      * @param index Index from tracks. If -1, enable auto switching heuristics.
      */
     selectTrackByIndex(index: number): void
 
     /**
-path
-path
-path
+     * Method to add a listener to an event
+     * @param streamEventName string of event name, available events are defined in [[amp.streamEventName]]
+     * @param handler handler that is called when event occurs
      */
     addEventListener(streamEventName: string, handler: Function): void
 
     /**
-path
-path
+     * Method to remove a listener from an event
+     * @param streamEventName string of event name, available events are defined in [[amp.streamEventName]]
      * @param handler handler that should be removed
      */
     removeEventListener(streamEventName: string, handler: Function): void
@@ -981,15 +978,15 @@ path
     switchIndex(streamIndex: number): void
 
     /**
-path
-path
-path
+     * Method to add a listener to an event
+     * @param streamEventName string of event name, available events are defined in StreamEventName class
+     * @param handler handler that is called when event occurs
      */
     addEventListener(streamEventName: string, handler: Function): void
 
     /**
-path
-path
+     * Method to remove a listener from an event
+     * @param streamEventName string of event name, available events are defined in StreamEventName class
      * @param handler handler that should be removed
      */
     removeEventListener(streamEventName: string, handler: Function): void
@@ -1027,47 +1024,47 @@ path
    */
   export interface BufferData {
     /**
-path
+     * Buffer level in seconds
      */
-path
+    bufferLevel: number
 
     /**
      * Bandwidth used to make heuristic decision, available with [[amp.Player.videoBufferData]] only, in bps
      */
     perceivedBandwidth?: number
     /**
-path
+     * Returns the most recent download requested, evt: "downloadrequested"
      **/
     downloadRequested: MediaDownload
 
     /**
-path
+     * Returns the most recent download completed, evt: "downloadcompleted"
      **/
     downloadCompleted: MediaDownloadCompleted
 
     /**
-path
+     * Returns the most recent download decrypted, evt: "downloaddecrypted
      **/
     downloadDecrypted: MediaDownloadDecrypted
 
     /**
-path
+     * Returns the most recent download failed, evt: "downloadfailed"
      **/
     downloadFailed: MediaDownloadFailed
 
     /**
-path
-path
-path
+     * Method to add a listener to an event
+     * @param eventName string of event name, available events are defined in BufferDataEventName class
+     * @param handler handler that is called when event occurs
      */
-path
+    addEventListener(eventName: string, handler: Function): void
 
     /**
-path
-path
+     * Method to remove a listener from an event
+     * @param eventName string of event name, available events are defined in BufferDataEventName class
      * @param handler handler that should be removed
      */
-path
+    removeEventListener(eventName: string, handler: Function): void
   }
 
   export interface MediaDownload {
@@ -1142,11 +1139,11 @@ path
   /**
    * Event types from [[amp]]
    */
-path
+  export class eventName {
     /**
-path
-path
-path
+     * Buffer has met pre-roll level. Note: There are some variation across techs.
+     * On Html5 tech, this event is only raised for the first set source,
+     * if source is set again on the same player, this event will not occur again.
      */
     static canplaythrough: string
 
@@ -1211,7 +1208,7 @@ path
     static seeking: string
 
     /**
-path
+     * App has set the source. SDN plugins should wait for this event before modifying
      * [[amp.Player.Options.sourceList]].
      */
     static sourceset: string
@@ -1397,12 +1394,12 @@ path
     static PlayReady: string
 
     /**
-path
+     * Source is Widevine encrypted.
      */
-path
+    static Widevine: string
 
     /**
-http://http-url
+     * Source is [AES envelope](http://msdn.microsoft.com/en-us/library/azure/dn783457.aspx) encrypted.
      */
     static AES: string
 
@@ -1765,7 +1762,7 @@ declare namespace amp.Player {
 
     /**
      * List of sources. SDN plugins can modify source URLs using this field.
-path
+     * SDN plugin can modify source URLs only after it catches [[amp.eventName.sourceset]] event triggered by AMP.
      */
     sourceList?: Source[]
 
@@ -1874,14 +1871,14 @@ path
     TraceTargets?: TraceTarget[]
 
     /**
-path
+     * Set the trace level to log. Default value is 0.
      * values:
      * none = 0,
      * error = 1,
      * warning = 2,
      * verbose = 3
      */
-path
+    maxLogLevel: number
   }
 
   /**
@@ -1956,9 +1953,9 @@ path
     protectionInfo?: ProtectionInfo[]
 
     /**
-http://http-url
+     * Streaming formats for the UrlRewiter to expand the sources from [Azure Media Services](http://azure.microsoft.com/en-us/services/media-services/)
      * (ex: "SMOOTH", "DASH", "HLS-V3" and "HLS-V4").
-http://http-url
+     * Default is all the streaming formats supported by [Azure Media Services](http://azure.microsoft.com/en-us/services/media-services/).
      */
     streamingFormats?: string[]
 
@@ -1974,22 +1971,22 @@ http://http-url
    */
   interface Track {
     /**
-http://http-url
+     * Type or category of the timed text track. [kind](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-kind)
      */
     kind: string
 
     /**
-http://http-url
+     * Label attribute to create a user readable title for the track. [label](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-label)
      */
     label: string
 
     /**
-http://http-url
+     * The address or Url of the media resource. [src](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-label)
      */
     src: string
 
     /**
-http://http-url
+     * The language of the text track data. [srclang](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-srclang)
      */
     srclang?: string
   }
@@ -2084,15 +2081,15 @@ http://http-url
     initialSpeed?: number
 
     /**
-path
-path
-path
+     * Playback speed levels.
+     * Every element in the levels array specify name/value pair for the playback speed choice that will be available in the user selection menu.
+     * Default speed levels are:
      *      [{ name: '2.0x', value: 2},
      *       { name: '1.0x', value: 1},
      *       { name: '0.5x', value: 0.5}]
      * values have to be between 0.5 and 4.0 inclusively.
      */
-path
+    speedLevels?: KeyValuePair<number>[]
   }
 
   /**
@@ -2100,7 +2097,7 @@ path
    */
   interface DownloadableMediaFile {
     /**
-http://http-url
+     * The language of the downloadable media file in BCP47 format. Example: "en-us". [lang](https://tools.ietf.org/html/rfc5646)
      */
     lang: string
 
@@ -2137,12 +2134,12 @@ http://http-url
     enabled?: boolean
 
     /**
-http://http-url
+     * Label attribute to create a user readable title for the track. [label](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-label)
      */
     label: string
 
     /**
-http://http-url
+     * The language of the text track data. [srclang](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-srclang)
      */
     srclang?: string
   }
@@ -2152,12 +2149,12 @@ http://http-url
    */
   interface Imsc1CaptionsSettings {
     /**
-http://http-url
+     * Label attribute to create a user readable title for the track. Cannot be empty. [label](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-label)
      */
     label: string
 
     /**
-http://http-url
+     * The language of the text track data. Can be empty. It needs to match the value of the xml:lang tag in the IMSC1. [srclang](http://www.w3.org/html/wg/drafts/html/master/semantics.html#attr-track-srclang)
      */
     srclang: string
   }
@@ -2193,17 +2190,17 @@ declare namespace amp.options.silverlightSS {
  */
 declare namespace amp.options.azureHtml5JS {
   /**
-http://http-url
+   * Number of segments to skip in case of http errors
    */
   export var maxSkipSegments: number
 
   /**
-http://http-url
+   * Number of total retries in case of http errors
    */
   export var maxTotalRetries: number
 
   /**
-http://http-url
+   * Number of retries for each segment in case of http errors
    */
   export var maxRetryPerSegment: number
 }
@@ -2211,7 +2208,7 @@ http://http-url
 /**
  * The main function for users to create a player instance
  *
-path
+ * The `amp` function can be used to initialize or retrieve a player.
  *
  * ##### Example:
  *      var myPlayer = amp('my_video_id');

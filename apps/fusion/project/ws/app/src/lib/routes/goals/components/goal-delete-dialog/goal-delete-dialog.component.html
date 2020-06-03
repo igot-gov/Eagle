@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="deleteGoalStatus !== 'fetching'; else deleteProgress">
   <h2 class="mat-title">
     <ng-container i18n>Are you sure you want to delete</ng-container>
@@ -8,11 +5,11 @@
     <ng-container i18n> ?</ng-container>
   </h2>
   <div class="flex flex-row-reverse">
-    <button mat-button i18n (click)="deleteGoal()">
-      YES
+    <button name="yes-button-goal-delete-dialog" mat-button i18n (click)="deleteGoal()">
+      Yes
     </button>
-    <button mat-button i18n mat-dialog-close>
-      NO
+    <button name="no-button-goal-delete-dialog" mat-button i18n mat-dialog-close>
+      No
     </button>
   </div>
 </ng-container>

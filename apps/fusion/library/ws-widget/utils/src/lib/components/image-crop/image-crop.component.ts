@@ -1,11 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
-import { ConfigurationsService } from '@ws-widget/utils/src/lib/services/configurations.service'
+
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper'
+import { ConfigurationsService } from '../../services/configurations.service'
+import { ValueService } from '../../services/value.service'
 
 @Component({
   selector: 'ws-utils-image-crop',
@@ -33,19 +32,20 @@ export class ImageCropComponent implements OnInit {
   transform: ImageTransform = {}
   resetValue = false
   element: any
-
+  isXSmall = false
   isThumbnail = true
 
   constructor(
     private dialogRef: MatDialogRef<ImageCropComponent>,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
+    private valueSvc: ValueService,
     @Inject(MAT_DIALOG_DATA) data: {
       isRoundCrop: boolean,
       imageFile: File,
       height: number,
       width: number,
-      imageFileName: string,
+      imageFileName: string
     },
   ) {
     this.isRoundCrop = data.isRoundCrop
@@ -63,10 +63,20 @@ export class ImageCropComponent implements OnInit {
         this.opWidth = data.width
       }
     }
+
   }
 
   ngOnInit() {
     this.thumbnailSizeDetection()
+    this.valueSvc.isXSmall$.subscribe((isXSmall: boolean) => {
+      this.isXSmall = isXSmall
+      if (this.isXSmall) {
+        this.dialogRef.updateSize('90%')
+      } else {
+        this.dialogRef.updateSize('70%')
+      }
+    })
+
   }
 
   // displays the default image

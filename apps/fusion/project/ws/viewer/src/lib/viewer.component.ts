@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy, AfterViewChecked, ChangeDetectorRef } from '@angular/core'
+import { AfterViewChecked, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { Subscription } from 'rxjs'
-import { ValueService } from '@ws-widget/utils'
-import { ViewerDataService, TStatus } from './viewer-data.service'
-import { NsWidgetResolver } from '@ws-widget/resolver'
-import { RootService } from '../../../../../src/app/component/root/root.service'
 import { NsContent } from '@ws-widget/collection'
+import { NsWidgetResolver } from '@ws-widget/resolver'
+import { UtilityService, ValueService } from '@ws-widget/utils'
+import { Subscription } from 'rxjs'
+import { RootService } from '../../../../../src/app/component/root/root.service'
+import { TStatus, ViewerDataService } from './viewer-data.service'
 
 export enum ErrorType {
   accessForbidden = 'accessForbidden',
@@ -25,7 +22,6 @@ export enum ErrorType {
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss'],
 })
-
 export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
   fullScreenContainer: HTMLElement | null = null
   content: NsContent.IContent | null = null
@@ -33,6 +29,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
   private isLtMedium$ = this.valueSvc.isLtMedium$
   sideNavBarOpened = false
   mode: 'over' | 'side' = 'side'
+  forPreview = window.location.href.includes('/author/')
   isTypeOfCollection = true
   collectionId = this.activatedRoute.snapshot.queryParamMap.get('collectionId')
   status: TStatus = 'none'
@@ -53,6 +50,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
     private valueSvc: ValueService,
     private dataSvc: ViewerDataService,
     private rootSvc: RootService,
+    private utilitySvc: UtilityService,
     private changeDetector: ChangeDetectorRef,
   ) {
     this.rootSvc.showNavbarDisplay$.next(false)
@@ -60,12 +58,17 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   getContentData(e: any) {
     e.activatedRoute.data.subscribe((data: { content: { data: NsContent.IContent } }) => {
-      this.content = data.content.data
+      if (data.content && data.content.data) {
+        this.content = data.content.data
+      }
     })
   }
 
   ngOnInit() {
-    this.isNotEmbed = this.activatedRoute.snapshot.queryParams.embed === 'true' ? false : true
+    this.isNotEmbed = !(
+      window.location.href.includes('/embed/') ||
+      this.activatedRoute.snapshot.queryParams.embed === 'true'
+    )
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
     this.screenSizeSubscription = this.isLtMedium$.subscribe(isSmall => {
       // this.sideNavBarOpened = !isSmall
@@ -99,18 +102,15 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
           }
         }
       }
-      if (this.error && (this.error.errorType === this.errorType.mimeTypeMismatch)) {
-        setTimeout(
-          () => {
-            this.router.navigate([this.error.probableUrl])
-          },
-          3000,
-        )
+      if (this.error && this.error.errorType === this.errorType.mimeTypeMismatch) {
+        setTimeout(() => {
+          this.router.navigate([this.error.probableUrl])
+          // tslint:disable-next-line: align
+        }, 3000)
       }
-      if (this.error && (this.error.errorType === this.errorType.previewUnAuthorised)) {
-
+      if (this.error && this.error.errorType === this.errorType.previewUnAuthorised) {
       }
-      // console.log(this.error)
+      // //console.log(this.error)
     })
   }
 
@@ -139,4 +139,9 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
     this.sideNavBarOpened = !this.sideNavBarOpened
   }
 
+  minimizeBar() {
+    if (this.utilitySvc.isMobile) {
+      this.sideNavBarOpened = false
+    }
+  }
 }

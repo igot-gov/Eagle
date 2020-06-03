@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsError, ROOT_WIDGET_CONFIG, NSSearch } from '@ws-widget/collection'
@@ -20,13 +17,13 @@ import { ConceptGraphService } from '../../services/concept-graph.service'
 
 export interface ISearchRequest {
   filters: {
-    [key: string]: string[],
+    [key: string]: string[]
   }
   advancedFilters?: {
     title: string,
     filters: {
-      [type: string]: string[],
-    },
+      [type: string]: string[]
+    }
   }[]
   query: string
   isStandAlone?: boolean

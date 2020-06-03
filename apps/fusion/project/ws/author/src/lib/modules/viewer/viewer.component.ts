@@ -1,7 +1,14 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, AfterViewInit, Input, OnChanges } from '@angular/core'
+import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  Input,
+  OnChanges,
+} from '@angular/core'
 import { SafeUrl } from '@angular/platform-browser'
 
 export interface IPreviewDevice {
@@ -16,21 +23,32 @@ export interface IPreviewDevice {
   templateUrl: './viewer.component.html',
   styleUrls: ['./viewer.component.scss'],
 })
-
 export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, OnChanges {
   @ViewChild('mobile', { static: true }) mobile: ElementRef<any> | null = null
   @ViewChild('tab', { static: true }) tab: ElementRef<any> | null = null
   @ViewChild('desktop', { static: true }) desktop: ElementRef<any> | null = null
   @Input() identifier: string | null = null
   @Input() mimeTypeRoute: string | null = null
-  iframeUrl: SafeUrl = `/viewer/${this.mimeTypeRoute}/${this.identifier}?preview=true`
+  iframeUrl: SafeUrl = `author/toc/${this.identifier}/overview`
   previewDevices: IPreviewDevice[] = [
-    { value: 'mobile', viewValue: this.mobile ? this.mobile.nativeElement.value : '', height: '812px', width: '375px' },
-    { value: 'tab', viewValue: this.tab ? this.tab.nativeElement.value : '', height: '1024px', width: '768px' },
+    {
+      value: 'mobile',
+      viewValue: this.mobile ? this.mobile.nativeElement.value : '',
+      height: '812px',
+      width: '375px',
+    },
+    {
+      value: 'tab',
+      viewValue: this.tab ? this.tab.nativeElement.value : '',
+      height: '1024px',
+      width: '768px',
+    },
     {
       value: 'desktop',
       viewValue: this.desktop
-        ? this.desktop.nativeElement.value ? this.desktop.nativeElement.value : 'Desktop'
+        ? this.desktop.nativeElement.value
+          ? this.desktop.nativeElement.value
+          : 'Desktop'
         : 'Desktop',
       height: '950px',
       width: '1400px',
@@ -45,24 +63,42 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, OnChan
   //   height: '950px',
   //   width: '1280px',
   // }
-  constructor() {
-  }
+  constructor(private accessControlSvc: AccessControlService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges() {
-    this.iframeUrl = `/viewer/${this.mimeTypeRoute}/${this.identifier}?preview=true`
+    if (this.accessControlSvc.authoringConfig.newDesign) {
+      if (this.mimeTypeRoute === 'channel') {
+        this.iframeUrl = `author/viewer/channel/${this.identifier}`
+      } else {
+        this.iframeUrl = `author/toc/${this.identifier}/overview`
+      }
+    } else {
+      this.iframeUrl = `/viewer/${this.mimeTypeRoute}/${this.identifier}?preview=true`
+    }
   }
 
   ngAfterViewInit() {
     this.previewDevices = [
-      { value: 'mobile', viewValue: this.mobile ? this.mobile.nativeElement.value : '', height: '812px', width: '375px' },
-      { value: 'tab', viewValue: this.tab ? this.tab.nativeElement.value : '', height: '1024px', width: '768px' },
+      {
+        value: 'mobile',
+        viewValue: this.mobile ? this.mobile.nativeElement.value : '',
+        height: '812px',
+        width: '375px',
+      },
+      {
+        value: 'tab',
+        viewValue: this.tab ? this.tab.nativeElement.value : '',
+        height: '1024px',
+        width: '768px',
+      },
       {
         value: 'desktop',
         viewValue: this.desktop
-          ? this.desktop.nativeElement.value ? this.desktop.nativeElement.value : 'Desktop'
+          ? this.desktop.nativeElement.value
+            ? this.desktop.nativeElement.value
+            : 'Desktop'
           : 'Desktop',
         height: '950px',
         width: '1400px',
@@ -79,7 +115,5 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, OnChan
     // }
   }
 
-  ngOnDestroy() {
-  }
-
+  ngOnDestroy() {}
 }

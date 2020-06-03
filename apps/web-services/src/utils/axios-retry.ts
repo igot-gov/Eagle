@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios, { AxiosError } from 'axios'
 import { AxiosRequestConfig } from '../models/axios-request-config.model'
 
@@ -19,6 +16,8 @@ axios.interceptors.response.use(undefined, (err: AxiosError) => {
 
   // Check if we've maxed out the total number of retries
   if (config.__retryCount >= config.retry) {
+    // Changing the error code so front end will not call
+    err.code = '404'
     // Reject with the error
     return Promise.reject(err)
   }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @mixin color-background-opacity($color, $opacity: 0.3) {
   background: rgba($color, $opacity);
 }
@@ -101,8 +98,20 @@
     background-color: $colorPrimaryLight !important;
   }
 
+  .auth-tree-node {
+    &:hover {
+      background: rgba(mat-color($primary, default), 0.1);
+    }
+    &.selected {
+      background: rgba(mat-color($primary, default), 0.2);
+    }
+  }
   .ws-mat-primary-background {
     background-color: $colorPrimary !important;
+  }
+
+  .ws-mat-primary-background-op10 {
+    background: rgba(mat-color($primary, default), 0.1);
   }
 
   .ws-mat-primary-background-op30 {
@@ -117,7 +126,7 @@
     background: rgba(mat-color($primary, default), 0.2);
   }
 
-  ws-mat-primary-background-op30-hover:hover {
+  .ws-mat-primary-background-op30-hover:hover {
     background: rgba(mat-color($primary, default), 0.3);
   }
 
@@ -137,6 +146,10 @@
     color: $colorWarn;
   }
 
+  .ws-mat-warn-background {
+    background-color: $colorWarn !important;
+  }
+
   .ws-mat-green-text {
     color: $colorGreen !important;
   }
@@ -147,6 +160,10 @@
 
   .ws-mat-primary-border {
     border: 1px solid $colorPrimary;
+  }
+
+  .ws-mat-primary-bolder-hover:hover {
+      border: 1px solid $colorPrimary;
   }
 
   .ws-mat-primary-border-bold {
@@ -200,6 +217,19 @@
     }
   }
 
+  .ws-mat-text-fade-gradient {
+    height: 2rem;
+    background-color: white;
+    position: absolute;
+    width: 90%;
+    margin-top: 24%;
+    background: linear-gradient(
+      to bottom,
+      rgba(mat-color($background, card), 0),
+      mat-color($background, card) 100%
+    );
+  }
+
   .mat-button-toggle-checked {
     background-color: mat-color($primary);
     color: mat-color($primary, default-contrast) !important;
@@ -211,6 +241,10 @@
 
   .ws-primary-bottom-border-hover {
     border-bottom: 1px solid transparent;
+  }
+
+  .border-box {
+    border-radius: 0!important;
   }
 
   .ws-primary-bottom-border-hover:hover {

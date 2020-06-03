@@ -1,10 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input } from '@angular/core'
-import { INavigatorCardModel } from '../../../../models/navigator.model'
+import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
-import { ConfigurationsService, ValueService, TFetchStatus } from '@ws-widget/utils'
+import { ConfigurationsService, TFetchStatus, ValueService } from '@ws-widget/utils'
+import { INavigatorCardModel } from '../../../../models/navigator.model'
 import { NavigatorService } from '../../../../services/navigator.service'
 
 @Component({
@@ -22,24 +19,31 @@ export class NavigatorCardComponent implements OnInit {
 
   isXSmall$ = this.valueSvc.isXSmall$
   screenSizeIsLtMedium = false
-  constructor(private router: Router,
-              private configSvc: ConfigurationsService,
-              private valueSvc: ValueService,
-              private navSvc: NavigatorService) { }
+  constructor(
+    private router: Router,
+    private configSvc: ConfigurationsService,
+    private valueSvc: ValueService,
+    private navSvc: NavigatorService,
+  ) { }
 
   ngOnInit() {
-    this.navSvc.fetchImageForContentID(this.navigatorCard.linkedIds).subscribe(res => {
-      // console.log('res', res, res[0], res[0].appIcon)
-      if (res) {
-        this.navigatorCard.thumbnail = res[0].appIcon
-      } else {
+    this.navSvc.fetchImageForContentID(this.navigatorCard.linkedIds).subscribe(
+      res => {
+        if (res) {
+          this.navigatorCard.thumbnail = res[0].appIcon
+        } else {
+          if (this.configSvc.instanceConfig) {
+            this.defaultThumbnail = this.configSvc.instanceConfig.logos.defaultContent
+          }
+        }
+        this.fetchStatus = 'done'
+      },
+      () => {
         if (this.configSvc.instanceConfig) {
           this.defaultThumbnail = this.configSvc.instanceConfig.logos.defaultContent
-          // console.log('default', this.defaultThumbnail, res[0].appIcon)
         }
-      }
-      this.fetchStatus = 'done'
-    })
+        this.fetchStatus = 'done'
+      })
     this.isXSmall$.subscribe((isXSmall: boolean) => {
       this.screenSizeIsLtMedium = isXSmall
     })

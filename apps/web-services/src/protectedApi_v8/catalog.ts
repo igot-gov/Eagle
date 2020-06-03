@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Router } from 'express'
 import { IFilterUnitContent } from '../models/catalog.model'
 import { getFilters, getFilterUnitByType } from '../service/catalog'
@@ -13,20 +10,23 @@ catalogApi.get('/', async (req, res) => {
   try {
     const userId = extractUserIdFromRequest(req)
     const rootOrg = req.headers.rootorg
-    const locale = req.header('locale') || ''
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
     if (typeof rootOrg === 'string') {
-      const filters = await getFilters(userId, rootOrg, 'catalogPaths', [locale])
+      const filters = await getFilters(userId, rootOrg, 'catalogPaths')
       res.send(filters)
       return
     }
 
     res.status(400).send({ error: ERROR.ERROR_NO_ORG_DATA })
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })
 
@@ -34,14 +34,13 @@ catalogApi.post('/tags', async (req, res) => {
   try {
     const userId = extractUserIdFromRequest(req)
     const rootOrg = req.headers.rootorg
-    const locale = req.header('locale') || ''
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
     const { tags, type } = req.body
     if (typeof rootOrg === 'string') {
-      const filterContents: IFilterUnitContent[] = await getFilters(userId, rootOrg, 'catalogPaths', [locale])
+      const filterContents: IFilterUnitContent[] = await getFilters(userId, rootOrg, 'catalogPaths')
       const filterContent = filterContents.find((content) => content.type === type)
       const catalog: IFilterUnitContent | null = getFilterUnitByType(filterContent, tags)
       if (catalog) {
@@ -52,6 +51,10 @@ catalogApi.post('/tags', async (req, res) => {
       res.status(400).send({ error: ERROR.ERROR_NO_ORG_DATA })
     }
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })

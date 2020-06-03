@@ -1,14 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Event, NavigationEnd, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { ConfigurationsService, NsPage, EventService } from '@ws-widget/utils'
-import { take } from 'rxjs/operators'
+import { ConfigurationsService, EventService, NsPage } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
-import { BtnFeatureService } from './btn-feature.service'
-import { NavigationEnd, Router, Event } from '@angular/router'
+import { take } from 'rxjs/operators'
 import { MobileAppsService } from '../../../../../../src/app/services/mobile-apps.service'
+import { CustomTourService } from '../_common/tour-guide/tour-guide.service'
+import { BtnFeatureService } from './btn-feature.service'
 
 export const typeMap = {
   cardFull: 'card-full',
@@ -34,10 +32,15 @@ export const typeMap = {
 export class BtnFeatureComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<NsPage.INavLink> {
   @Input() widgetData!: NsPage.INavLink
+  @Input() showFixedLength = false
+  // @Input()
+  // @HostBinding('id')
+  // public id!: string
   readonly displayType = typeMap
   badgeCount = ''
   defaultIconSize = 24
   isPinned = false
+  instanceVal = ''
   isPinFeatureAvailable = true
   private pinnedAppsChangeSubs?: Subscription
   private navigationSubs?: Subscription
@@ -48,13 +51,15 @@ export class BtnFeatureComponent extends WidgetBaseComponent
     private router: Router,
     private mobileSvc: MobileAppsService,
     private configSvc: ConfigurationsService,
+    private tour: CustomTourService,
   ) {
     super()
   }
 
   updateBadge() {
     if (this.widgetData.actionBtn && this.widgetData.actionBtn.badgeEndpoint) {
-      this.btnFeatureSvc.getBadgeCount(this.widgetData.actionBtn.badgeEndpoint)
+      this.btnFeatureSvc
+        .getBadgeCount(this.widgetData.actionBtn.badgeEndpoint)
         .then(count => {
           if (count > 99) {
             this.badgeCount = '99+'
@@ -64,12 +69,12 @@ export class BtnFeatureComponent extends WidgetBaseComponent
             this.badgeCount = ''
           }
         })
-        .catch(_err => { })
+        .catch(_err => {})
     }
   }
 
   ngOnInit() {
-
+    this.instanceVal = this.configSvc.rootOrg || ''
     if (this.configSvc.restrictedFeatures) {
       this.isPinFeatureAvailable = !this.configSvc.restrictedFeatures.has('pinFeatures')
     }
@@ -94,6 +99,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
       )
     })
   }
+
   ngOnDestroy() {
     if (this.pinnedAppsChangeSubs) {
       this.pinnedAppsChangeSubs.unsubscribe()
@@ -125,19 +131,16 @@ export class BtnFeatureComponent extends WidgetBaseComponent
         return false
       }
       return true
-    } return true
+    }
+    return true
   }
 
   togglePin(featureId: string, event: any) {
     event.preventDefault()
     event.stopPropagation()
-    this.events.raiseInteractTelemetry(
-      'pin',
-      'feature',
-      {
-        featureId,
-      },
-    )
+    this.events.raiseInteractTelemetry('pin', 'feature', {
+      featureId,
+    })
     this.configurationsSvc.pinnedApps.pipe(take(1)).subscribe(pinnedApps => {
       const newPinnedApps = new Set(pinnedApps)
       if (newPinnedApps.has(featureId)) {
@@ -153,4 +156,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
     })
   }
 
+  startTour() {
+    this.tour.startTour()
+  }
 }

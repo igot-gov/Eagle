@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export namespace WsEvents {
   export interface IWsEventsFromWidget {
     type: 'widget'
@@ -28,6 +25,11 @@ export namespace WsEvents {
     Log = 'Log',
     Trace = 'Trace',
   }
+   export enum WsAuditTypes {
+     Created = 'Created',
+     Updated = 'Updated',
+     Deleted = 'Deleted',
+   }
   export enum WsTimeSpentType {
     Page = 'Page',
     Player = 'Player',
@@ -92,6 +94,7 @@ export namespace WsEvents {
     query?: string
     filters?: string
     size?: number
+    locale?: any
   }
   export interface IWsEventTelemetryHeartBeat extends IWsEventTelemetry {
     type: string

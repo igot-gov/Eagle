@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router'
 
@@ -110,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       const roles = feedbackSummaryResolve.data.roles
 
       roles.forEach(feedbackRole => {
-        if (feedbackRole.hasAccess) {
+        if (feedbackRole.enabled && feedbackRole.hasAccess) {
           this.rolesSet.add(feedbackRole.role)
         }
       })

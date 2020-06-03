@@ -1,72 +1,84 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { AppRetryInterceptorService } from './services/app-retry-interceptor.service'
-import { StickyHeaderModule } from '@ws-widget/collection/src/lib/_common/sticky-header/sticky-header.module'
-import { NgModule, APP_INITIALIZER, Injectable } from '@angular/core'
+import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay'
 import { APP_BASE_HREF, PlatformLocation } from '@angular/common'
-import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { KeycloakAngularModule } from 'keycloak-angular'
-import { AppRoutingModule } from './app-routing.module'
+import { HttpClientJsonpModule, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
+import { APP_INITIALIZER, Injectable, NgModule, ErrorHandler } from '@angular/core'
 import {
+  GestureConfig,
   MatButtonModule,
   MatCardModule,
-  MatToolbarModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatIconModule,
   MatMenuModule,
-  MatDividerModule,
-  MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatProgressBarModule,
-  MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS,
-  MatExpansionModule,
   MatRippleModule,
-  MatDialogModule,
-  MatTooltipModule,
   MatSliderModule,
-  GestureConfig,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatProgressSpinnerModule,
+  MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS,
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatInputModule,
+  MatFormFieldModule,
 } from '@angular/material'
-
-import { LoggerService, PipeSafeSanitizerModule } from '@ws-widget/utils'
-import { WidgetResolverModule } from '@ws-widget/resolver'
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {
-  WIDGET_REGISTRATION_CONFIG,
-  WIDGET_REGISTERED_MODULES,
-  ErrorResolverModule,
   BtnFeatureModule,
+  ErrorResolverModule,
   TourModule,
+  WIDGET_REGISTERED_MODULES,
+  WIDGET_REGISTRATION_CONFIG,
+  PipeContentRoutePipe,
 } from '@ws-widget/collection'
+import { StickyHeaderModule } from '@ws-widget/collection/src/lib/_common/sticky-header/sticky-header.module'
+import { WidgetResolverModule } from '@ws-widget/resolver'
+import { LoggerService, PipeSafeSanitizerModule } from '@ws-widget/utils'
+import { SearchModule } from '@ws/app/src/public-api'
+import 'hammerjs'
+import { KeycloakAngularModule } from 'keycloak-angular'
+import { AppRoutingModule } from './app-routing.module'
 import { InitService } from './services/init.service'
+import { GlobalErrorHandlingService } from './services/global-error-handling.service'
+import { AppTocResolverService } from '@ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service'
 
 import { RootComponent } from './component/root/root.component'
 import { LoginComponent } from './component/login/login.component'
+import { AppChatbotComponent } from './component/app-chatbot/app-chatbot.component'
+import { AppFooterComponent } from './component/app-footer/app-footer.component'
 import { AppNavBarComponent } from './component/app-nav-bar/app-nav-bar.component'
 import { AppPublicNavBarComponent } from './component/app-public-nav-bar/app-public-nav-bar.component'
-import { SearchModule } from '@ws/app/src/public-api'
-import { PublicAboutModule } from './routes/public/public-about/public-about.module'
-import { PublicContactModule } from './routes/public/public-contact/public-contact.module'
-import { PublicFaqModule } from './routes/public/public-faq/public-faq.module'
-import { AppInterceptorService } from './services/app-interceptor.service'
-import { TncComponent } from './routes/tnc/tnc.component'
-import { TncRendererComponent } from './component/tnc-renderer/tnc-renderer.component'
-import { TncAppResolverService } from './services/tnc-app-resolver.service'
-import { TncPublicResolverService } from './services/tnc-public-resolver.service'
-import { MobileAppModule } from './routes/public/mobile-app/mobile-app.module'
-import { AppFooterComponent } from './component/app-footer/app-footer.component'
-import { InvalidUserComponent } from './component/invalid-user/invalid-user.component'
 // import { ServiceWorkerModule } from '@angular/service-worker'
 // import { environment } from '../environments/environment'
 import { DialogConfirmComponent } from './component/dialog-confirm/dialog-confirm.component'
-import { AppChatbotComponent } from './component/app-chatbot/app-chatbot.component'
-path
+import { FordLoginComponent } from './component/ford-login/ford-login.component'
+import { InvalidUserComponent } from './component/invalid-user/invalid-user.component'
 import { LoginRootComponent } from './component/login-root/login-root.component'
 import { LoginRootDirective } from './component/login-root/login-root.directive'
-import {
-  OverlayContainer,
-  FullscreenOverlayContainer,
-} from '@angular/cdk/overlay'
-import 'hammerjs'
+import { PathfindersLoginComponent } from './component/pathfinders-login/pathfinders-login.component'
+import { TncRendererComponent } from './component/tnc-renderer/tnc-renderer.component'
+import { MobileAppModule } from './routes/public/mobile-app/mobile-app.module'
+import { PublicAboutModule } from './routes/public/public-about/public-about.module'
+import { PublicContactModule } from './routes/public/public-contact/public-contact.module'
+import { PublicFaqModule } from './routes/public/public-faq/public-faq.module'
+import { TncComponent } from './routes/tnc/tnc.component'
+import { UploadPdfComponent } from './routes/upload-pdf/upload-pdf.component'
+import { AppInterceptorService } from './services/app-interceptor.service'
+import { AppRetryInterceptorService } from './services/app-retry-interceptor.service'
+import { TncAppResolverService } from './services/tnc-app-resolver.service'
+import { TncPublicResolverService } from './services/tnc-public-resolver.service'
+import { LoginSiemensComponent } from './component/login-siemsns/login-siemsns.component'
+import { DialogUserDetailsComponent } from './component/dialog-user-details/dialog-user-details.component'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { EpochLoginComponent } from './component/epoch-login/epoch-login.component'
+import { AcademyLoginComponent } from './component/academy-login/academy-login.component'
+import { AssistedgeLoginComponent } from './component/assistedge-login/assistedge-login.component'
+import { EpochLoginV2Component } from './component/epoch-login-v2/epoch-login-v2.component'
+import { UrlSerializer } from '@angular/router'
+import { UrlSerializerService } from './services/url-serializer.service'
+// import { ServiceWorkerModule } from '@angular/service-worker'
+// import { environment } from '../environments/environment'
 
 @Injectable()
 export class HammerConfig extends GestureConfig {
@@ -102,8 +114,18 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     PathfindersLoginComponent,
     LoginRootComponent,
     LoginRootDirective,
+    FordLoginComponent,
+    LoginSiemensComponent,
+    DialogUserDetailsComponent,
+    EpochLoginComponent,
+    AcademyLoginComponent,
+    UploadPdfComponent,
+    AssistedgeLoginComponent,
+    EpochLoginV2Component,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     HttpClientJsonpModule,
@@ -114,7 +136,6 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     WidgetResolverModule.forRoot(WIDGET_REGISTRATION_CONFIG),
     StickyHeaderModule,
     ErrorResolverModule,
-
     // Material Imports
     MatSliderModule,
     MatButtonModule,
@@ -126,7 +147,10 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     MatProgressBarModule,
     MatExpansionModule,
     MatRippleModule,
+    MatProgressSpinnerModule,
     MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     MatTooltipModule,
     SearchModule,
     BtnFeatureModule,
@@ -138,8 +162,20 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     TourModule,
     // ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
+  exports: [TncComponent],
   bootstrap: [RootComponent],
-  entryComponents: [DialogConfirmComponent, LoginComponent, PathfindersLoginComponent],
+  entryComponents: [
+    DialogConfirmComponent,
+    LoginComponent,
+    PathfindersLoginComponent,
+    AcademyLoginComponent,
+    FordLoginComponent,
+    LoginSiemensComponent,
+    DialogUserDetailsComponent,
+    EpochLoginComponent,
+    AssistedgeLoginComponent,
+    EpochLoginV2Component,
+  ],
   providers: [
     {
       deps: [InitService, LoggerService],
@@ -162,6 +198,8 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     { provide: HTTP_INTERCEPTORS, useClass: AppRetryInterceptorService, multi: true },
     TncAppResolverService,
     TncPublicResolverService,
+    PipeContentRoutePipe,
+    AppTocResolverService,
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,
@@ -169,6 +207,11 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     },
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfig },
+    { provide: ErrorHandler, useClass: GlobalErrorHandlingService },
+    {
+      provide: UrlSerializer,
+      useClass: UrlSerializerService,
+    },
   ],
 })
-export class AppModule { }
+export class AppModule {}

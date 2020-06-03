@@ -1,22 +1,28 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsContentStripMultiple } from './content-strip-multiple.model'
 import { ContentStripMultipleService } from './content-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
-import { TFetchStatus, LoggerService, EventService, ConfigurationsService } from '@ws-widget/utils'
+import {
+  TFetchStatus,
+  LoggerService,
+  EventService,
+  ConfigurationsService,
+  UtilityService,
+} from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
+import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
 
 interface IStripUnitContentData {
   key: string
   canHideStrip: boolean
+  mode?: string
   showStrip: boolean
   widgets?: NsWidgetResolver.IRenderConfigWithAnyData[]
   stripTitle: string
+  stripName?: string
   stripInfo?: NsContentStripMultiple.IStripInfo
   noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
   errorWidget?: NsWidgetResolver.IRenderConfigWithAnyData
@@ -26,7 +32,7 @@ interface IStripUnitContentData {
   stripBackground?: string
   viewMoreUrl: {
     path: string
-    queryParams: any,
+    queryParams: any
   } | null
 }
 @Component({
@@ -43,13 +49,16 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
 
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
-
+  showAccordionData = true
   showParentLoader = false
   showParentError = false
   showParentNoData = false
   errorDataCount = 0
   noDataCount = 0
   successDataCount = 0
+  searchArray = ['preview', 'channel', 'author']
+  contentAvailable = true
+  isFromAuthoring = false
 
   changeEventSubscription: Subscription | null = null
 
@@ -59,11 +68,17 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
     private loggerSvc: LoggerService,
     private eventSvc: EventService,
     private configSvc: ConfigurationsService,
+    protected utilitySvc: UtilityService,
+    private searchServSvc: SearchServService,
   ) {
     super()
   }
 
   ngOnInit() {
+    const url = window.location.href
+    this.isFromAuthoring = this.searchArray.some((word: string) => {
+      return url.indexOf(word) > -1
+    })
     this.initData()
   }
 
@@ -143,7 +158,6 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
     }
   }
   fetchFromSearch(strip: NsContentStripMultiple.IContentStripUnit, calculateParentStatus = true) {
-
     if (strip.request && strip.request.search && Object.keys(strip.request.search).length) {
       if (this.configSvc.activeLocale) {
         strip.request.search.locale = [this.configSvc.activeLocale.locals[0]]
@@ -168,10 +182,7 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
             : null
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(
-              results.result,
-              strip,
-            ),
+            this.transformContentsToWidgets(results.result, strip),
             'done',
             calculateParentStatus,
             viewMoreUrl,
@@ -183,26 +194,42 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
       )
     }
   }
-  fetchFromSearchRegionRecommendation(strip: NsContentStripMultiple.IContentStripUnit, calculateParentStatus = true) {
-    if (strip.request && strip.request.searchRegionRecommendation && Object.keys(strip.request.searchRegionRecommendation).length) {
-      this.contentSvc.searchRegionRecommendation(strip.request.searchRegionRecommendation).subscribe(
-        results => {
-          this.processStrip(
-            strip,
-            this.transformContentsToWidgets(results.contents, strip),
-            'done',
-            calculateParentStatus,
-            null,
-          )
-        },
-        () => {
-          this.processStrip(strip, [], 'error', calculateParentStatus, null)
-        },
-      )
+  fetchFromSearchRegionRecommendation(
+    strip: NsContentStripMultiple.IContentStripUnit,
+    calculateParentStatus = true,
+  ) {
+    if (
+      strip.request &&
+      strip.request.searchRegionRecommendation &&
+      Object.keys(strip.request.searchRegionRecommendation).length
+    ) {
+      this.contentSvc
+        .searchRegionRecommendation(strip.request.searchRegionRecommendation)
+        .subscribe(
+          results => {
+            this.processStrip(
+              strip,
+              this.transformContentsToWidgets(results.contents, strip),
+              'done',
+              calculateParentStatus,
+              null,
+            )
+          },
+          () => {
+            this.processStrip(strip, [], 'error', calculateParentStatus, null)
+          },
+        )
     }
   }
   fetchFromSearchV6(strip: NsContentStripMultiple.IContentStripUnit, calculateParentStatus = true) {
     if (strip.request && strip.request.searchV6 && Object.keys(strip.request.searchV6).length) {
+      if (!(strip.request.searchV6.locale && strip.request.searchV6.locale.length > 0)) {
+        if (this.configSvc.activeLocale) {
+          strip.request.searchV6.locale = [this.configSvc.activeLocale.locals[0]]
+        } else {
+          strip.request.searchV6.locale = ['en']
+        }
+      }
       this.contentSvc.searchV6(strip.request.searchV6).subscribe(
         results => {
           const showViewMore = Boolean(
@@ -213,9 +240,14 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
               path: '/app/search/learning',
               queryParams: {
                 q: strip.request && strip.request.searchV6 && strip.request.searchV6.query,
-                f: JSON.stringify(
-                  strip.request && strip.request.searchV6 && strip.request.searchV6.filters,
-                ),
+                f:
+                  strip.request && strip.request.searchV6 && strip.request.searchV6.filters
+                    ? JSON.stringify(
+                      this.searchServSvc.transformSearchV6Filters(
+                        strip.request.searchV6.filters,
+                      ),
+                    )
+                    : {},
               },
             }
             : null
@@ -266,8 +298,16 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
         context: { pageSection: strip.key, position: idx },
         intranetMode: strip.stripConfig && strip.stripConfig.intranetMode,
         deletedMode: strip.stripConfig && strip.stripConfig.deletedMode,
+        contentTags: strip.stripConfig && strip.stripConfig.contentTags,
       },
     }))
+  }
+
+  showAccordion(key: string) {
+    if (this.utilitySvc.isMobile && this.stripsResultDataMap[key].mode === 'accordion') {
+      return this.showAccordionData
+    }
+    return true
   }
 
   setHiddenForStrip(key: string) {
@@ -300,6 +340,8 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
       errorWidget: strip.errorWidget,
       stripInfo: strip.info,
       stripTitle: strip.title,
+      stripName: strip.name,
+      mode: strip.mode,
       stripBackground: strip.stripBackground,
       widgets:
         fetchStatus === 'done'
@@ -334,6 +376,11 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
       stripData.widgets
     ) {
       this.checkParentStatus(fetchStatus, stripData.widgets.length)
+    }
+    if (calculateParentStatus && !(results && results.length > 0)) {
+      this.contentAvailable = false
+    } else if (results && results.length > 0) {
+      this.contentAvailable = true
     }
   }
   private checkParentStatus(fetchStatus: TFetchStatus, stripWidgetsCount: number): void {
@@ -372,17 +419,14 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
   }
 
   checkForEmptyWidget(strip: NsContentStripMultiple.IContentStripUnit): boolean {
-    if (strip.request &&
-      (
-        (strip.request.api && Object.keys(strip.request.api).length) ||
+    if (
+      strip.request &&
+      ((strip.request.api && Object.keys(strip.request.api).length) ||
         (strip.request.search && Object.keys(strip.request.search).length) ||
-        (
-          strip.request.searchRegionRecommendation &&
-          Object.keys(strip.request.searchRegionRecommendation).length
-        ) ||
+        (strip.request.searchRegionRecommendation &&
+          Object.keys(strip.request.searchRegionRecommendation).length) ||
         (strip.request.searchV6 && Object.keys(strip.request.searchV6).length) ||
-        (strip.request.ids && Object.keys(strip.request.ids).length)
-      )
+        (strip.request.ids && Object.keys(strip.request.ids).length))
     ) {
       return true
     }
@@ -391,13 +435,18 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
 
   processContentLikes(results: NsWidgetResolver.IRenderConfigWithAnyData[]): Promise<any> {
     const contentIds = {
-      content_id: results.map(result => (result.widgetData && result.widgetData.content.identifier)) || [],
+      content_id:
+        results.map(result => result.widgetData && result.widgetData.content.identifier) || [],
     }
-    return this.contentSvc.fetchContentLikes(contentIds).then(likeHash => {
-      const likes = likeHash
-      results.forEach(result => {
-        result.widgetData.likes = likes[result.widgetData.content.identifier] || 0
+    return this.contentSvc
+      .fetchContentLikes(contentIds)
+      .then(likeHash => {
+        const likes = likeHash
+        results.forEach(result => {
+          result.widgetData.likes = likes[result.widgetData.content.identifier] || 0
+        })
       })
-    }).catch(_err => { }).finally(() => Promise.resolve())
+      .catch(_err => { })
+      .finally(() => Promise.resolve())
   }
 }

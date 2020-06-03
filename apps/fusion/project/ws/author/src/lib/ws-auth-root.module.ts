@@ -1,6 +1,5 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { ZipJSResolverService } from './services/zip-js-resolve.service'
+import { NotificationService } from './../../../app/src/lib/routes/notification-v2/services/notification.service'
 import { AuthInitService } from './services/init.service'
 import { ContentAndDataReadMultiLangTOCResolver } from './services/content-and-data-read-multi-lang.service'
 import { InitResolver } from './services/init-resolve.service'
@@ -23,6 +22,7 @@ import { BtnPageBackModule } from '@ws-widget/collection'
 import { ApiService } from './modules/shared/services/api.service'
 import { CKEditorResolverService } from './services/ckeditor-resolve.service'
 import { AuthNavBarToggleService } from './services/auth-nav-bar-toggle.service'
+import { WorkFlowService } from './services/work-flow.service'
 
 /**
  * This function is used internal to get a string instance of the `<base href="" />` value from `index.html`.
@@ -40,12 +40,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
 }
 
 @NgModule({
-  declarations: [
-    AuthRootComponent,
-    AuthNavigationComponent,
-    TocComponent,
-    ViewerComponent,
-  ],
+  declarations: [AuthRootComponent, AuthNavigationComponent, TocComponent, ViewerComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -58,11 +53,14 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
   providers: [
     AuthInitService,
     CKEditorResolverService,
+    ZipJSResolverService,
     ContentTOCResolver,
     ApiService,
     ContentAndDataReadMultiLangTOCResolver,
     LoaderService,
     InitResolver,
+    NotificationService,
+    WorkFlowService,
     { provide: ErrorHandler, useClass: AuthoringErrorHandler },
     {
       provide: APP_BASE_HREF,
@@ -72,4 +70,4 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AuthNavBarToggleService,
   ],
 })
-export class WsAuthorRootModule { }
+export class WsAuthorRootModule {}

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { MatSnackBar, MatDialog } from '@angular/material'
@@ -15,7 +12,7 @@ import { DialogSocialDeletePostComponent, NsDiscussionForum, WsDiscussionForumSe
 export class BlogViewComponent implements OnInit {
   conversation: NsDiscussionForum.IPostResult | null = null
   isFirstConversationRequestDone = false
-
+  showSocialLike = false
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   conversationRequest: NsDiscussionForum.IPostRequest = {
     postId: '',
@@ -59,6 +56,8 @@ export class BlogViewComponent implements OnInit {
         this.fetchConversationData()
       }
     })
+    this.showSocialLike = (this.configSvc.restrictedFeatures && !this.configSvc.restrictedFeatures.has('socialLike')) || false
+
   }
 
   fetchConversationData(forceNew = false) {

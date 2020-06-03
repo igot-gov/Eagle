@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsContent } from '@ws-widget/collection'
 
 export namespace NsAppToc {
@@ -20,6 +17,25 @@ export namespace NsAppToc {
     overview: string
     contents: string
     [key: string]: string
+  }
+
+  export interface IPostAssessment {
+    userId: string
+    contentId: string
+    post_assessment: boolean
+  }
+
+  export interface IContentParentReq {
+    fields: string[]
+  }
+
+  export interface IContentParentResponse {
+    identifier: string,
+    collections: IContentParentResponse[],
+    name: string,
+    description: string,
+    contentType: string,
+    status: string
   }
 
   export interface ITocStructure {
@@ -81,4 +97,23 @@ export namespace NsCohorts {
     // for ui only
     name: string
   }
+  // export interface ICohortsActiveUsers {
+  //   cohorts_users: ICohortsContent[];
+  // }
+  // export interface ICohortsSMEs {
+  //   sme_user: ICohortsContent[];
+  // }
+  // export interface ICohorts {
+  //   type: string;
+  //   name: string;
+  //   contents: ICohortsContent[];
+  // }
 }
+
+// export namespace NsRelatedResource {
+
+//   export interface IRelatedResouce {
+//     contentId: string
+//     ContentType: string
+//   }
+// }

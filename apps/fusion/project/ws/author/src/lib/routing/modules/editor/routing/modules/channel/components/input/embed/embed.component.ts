@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
 
 interface IEmbedWidget {
@@ -17,14 +14,13 @@ interface IEmbedWidget {
   styleUrls: ['./embed.component.scss'],
 })
 export class EmbedComponent implements OnInit {
-
   showInfo = ''
   @Input() isSubmitPressed = false
   @Input() editorType: 'advanced' | 'basic' = 'advanced'
   @Input() content!: IEmbedWidget
   @Input() forVideo = false
-  @Output() data = new EventEmitter<{ content: IEmbedWidget, isValid: boolean }>()
-  constructor() { }
+  @Output() data = new EventEmitter<{ content: IEmbedWidget; isValid: boolean }>()
+  constructor() {}
 
   ngOnInit() {
     if (!this.content.iframeId) {
@@ -37,13 +33,13 @@ export class EmbedComponent implements OnInit {
   }
 
   update(key: string, value: any) {
+    this.content = {
+      ...this.content,
+      [key]: value,
+    }
     this.data.emit({
-      content: {
-        ...this.content,
-        [key]: value,
-      },
+      content: this.content,
       isValid: this.content.iframeSrc ? true : false,
     })
   }
-
 }

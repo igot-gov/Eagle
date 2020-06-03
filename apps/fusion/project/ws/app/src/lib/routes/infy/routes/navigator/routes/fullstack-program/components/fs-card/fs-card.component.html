@@ -1,28 +1,17 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="card-container">
   <mat-card>
     <div class="card">
       <div class="width-auto" [matTooltip]="navigatorCard.title">
-        <img
-          class="card-image"
-          [src]="navigatorCard.thumbnail"
-          [alt]="navigatorCard.title"
-          *ngIf="navigatorCard.thumbnail != ''"
-        />
+        <img class="card-image" [src]="navigatorCard.thumbnail" [alt]="navigatorCard.title"
+          *ngIf="navigatorCard.thumbnail != ''" />
       </div>
       <div class="card-information">
         <div class="mat-headline title text-truncate">{{ navigatorCard.title }}</div>
         <div class="mat-body-1 title ">{{ navigatorCard.description | pipeLimitTo: 138 }}</div>
-        <div
-          class="button-holder"
-          *ngIf="navigatorCard.routeButton != '' && navigatorCard.type === 'internal' || navigatorCard.type === 'external'"
-        >
-          <button mat-flat-button (click) ="launchCertification()">
-            <span class="mat-subheading-1 ws-mat-primary-text font-weight-bold" i18n
-              >LAUNCH NOW</span
-            >
+        <div class="button-holder"
+          *ngIf="navigatorCard.routeButton != '' && navigatorCard.type === 'internal' || navigatorCard.type === 'external'">
+          <button mat-flat-button (click)="launchCertification()">
+            <span class="mat-subheading-1 ws-mat-primary-text font-weight-bold" i18n>LAUNCH NOW</span>
             <mat-icon color="primary" class="font-weight-bold">play_arrow</mat-icon>
           </button>
         </div>

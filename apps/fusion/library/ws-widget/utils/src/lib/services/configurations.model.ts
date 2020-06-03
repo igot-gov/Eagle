@@ -1,18 +1,23 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { NsPage } from '../resolvers/page.model'
 export namespace NsInstanceConfig {
   export interface IConfig {
     authoring: {
+      doUniqueCheck: boolean
+      isMultiStepFlow: boolean
+      allowExpiry: boolean
+      allowRestore: boolean
+      allowReview: boolean
+      allowPublish: boolean
+      allowRedo: boolean
+      newDesign: boolean
       allowedContentType: string[]
       urlPatternMatching: {
         allowReplace: boolean
         source: string
         pattern: string
-        allowIframe: boolean,
-      }[],
+        allowIframe: boolean
+      }[]
     }
     appSetup: boolean
     chatBotUrl: string
@@ -21,7 +26,7 @@ export namespace NsInstanceConfig {
     defaultLocale: string
     disablePidCheck?: boolean
     fontSizes: IFontSize[]
-    isContentDownloadAvailable: boolean,
+    isContentDownloadAvailable: boolean
     indexHtmlMeta: IIndexHtmlMeta
     keycloak: IKeycloak
     locals: ILocalsConfig[]
@@ -33,23 +38,33 @@ export namespace NsInstanceConfig {
     details: IDetails
     validMailIdExtensionsForMailMe: string[]
     defaultFeatureConfigs: {
-      error: string,
+      error: string
     }
     backgrounds: {
       primaryNavBar: NsPage.INavBackground
-      pageNavBar: NsPage.INavBackground,
+      pageNavBar: NsPage.INavBackground
     }
     featuredApps: string[]
     primaryNavBarConfig: IPrimaryNavbarConfig
     org: string[]
     rootOrg: string
     intranetIframeUrls?: string[]
+    showNavBarInSetup?: boolean
+    showNavBarInTnc?: boolean
     intranetUrlToCheck?: string
     introVideo: IPath
     tourVideo: IPath
     isDownloadableSource?: IPath
     isDownloadableIosResource?: IPath
     isDownloadableAndroidResource?: IPath
+    sourceFieldsUserAutocomplete?: string[]
+    forgotPasswordConfig?: IForgotPassword
+  }
+
+  export interface IForgotPassword {
+    local?: string
+    enterprise?: string
+    social?: string
   }
 
   export interface IPath {
@@ -69,12 +84,15 @@ export namespace NsInstanceConfig {
     scale: number
   }
   export interface IKeycloak {
+    defaultidpHint: 'E' | 'N' | 'S' | 'siemens-entitlement'
+    isLoginHidden: boolean
     bearerExcludedUrls: string[]
-substitute based on requirement
+    clientId: string
     key: string
     realm: string
-    url: string,
+    url: string
     changePasswordUrl?: string
+    onLoad?: 'check-sso' | 'login-required'
   }
   export interface ILocalsConfig {
     isAvailable: boolean
@@ -84,7 +102,7 @@ substitute based on requirement
     isRTL: boolean
   }
   export interface IMicrosoft {
-substitute based on requirement
+    clientId: string
     defaultEmailId: string
     tenant: string
     validEmailExtensions: string[]
@@ -113,6 +131,8 @@ substitute based on requirement
     poweredBy: string
     defaultContent: string
     landingLogo: string
+    navbarLogo?: string
+    thumpsUp?: string
   }
   export interface IMailIds {
     contactUs: string
@@ -139,11 +159,11 @@ substitute based on requirement
     pdata: {
       id: string
       ver: string
-      pid: string,
+      pid: string
     }
     object: {
       ver: string
-      id: string | undefined,
+      id: string | undefined
     }
     uid: string | null
     authtoken?: string
@@ -162,6 +182,7 @@ export namespace NsAppsConfig {
   export interface IAppsConfig {
     groups: IGroup[]
     features: { [id: string]: IFeature }
+    tourGuide?: string[][]
   }
 
   export interface IGroup {
@@ -206,7 +227,10 @@ export namespace NsUser {
     userName?: string
     givenName?: string
     country?: null | string
+    unit?: string | null
     source_profile_picture?: null | string
+    dealerCode?: null | string
+    isManager?: boolean
   }
   export interface IUserPidProfile {
     kid_updated: boolean

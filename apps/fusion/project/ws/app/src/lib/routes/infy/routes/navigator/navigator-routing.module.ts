@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { NavigatorHomeComponent } from './routes/navigator-home/navigator-home.component'
@@ -20,6 +17,7 @@ import { LaunchpadComponent } from './routes/launchpad/launchpad.component'
 import { FsHomeComponent } from './routes/fs-home/fs-home.component'
 import { IndustryAnalyticsComponent } from './routes/industry-analytics/industry-analytics.component'
 import { RoleDetailsComponent } from './routes/role/role-details/role-details.component'
+import { BpmDetailsComponent } from './routes/bpm-details/bpm-details.component'
 
 const API_SERVER_BASE = '/apis'
 
@@ -29,12 +27,19 @@ const routes: Routes = [
   {
     path: '',
     component: NavigatorHomeComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'navigator',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'accounts',
     component: AccountDetailsComponent,
     data: {
-      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/accounts_data.json`,
+      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/accounts_data`,
     },
     resolve: {
       pageData: PageResolve,
@@ -44,11 +49,14 @@ const routes: Routes = [
     path: 'accounts/:tab',
     component: AccountDetailsComponent,
     data: {
-      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/accounts_data.json`,
+      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/accounts_data`,
     },
     resolve: {
       pageData: PageResolve,
     },
+  }, {
+    path: 'bpm',
+    component: BpmDetailsComponent,
   },
   {
     path: 'explore',
@@ -66,7 +74,7 @@ const routes: Routes = [
     path: 'industries',
     component: IndustriesComponent,
     data: {
-      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/industries_data.json`,
+      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/industries_data`,
     },
     resolve: {
       pageData: PageResolve,
@@ -80,7 +88,7 @@ const routes: Routes = [
     path: 'industries/:tab',
     component: IndustriesComponent,
     data: {
-      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/industries_data.json`,
+      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/industries_data`,
     },
     resolve: {
       pageData: PageResolve,
@@ -90,7 +98,7 @@ const routes: Routes = [
     path: 'leaders',
     component: LeadersComponent,
     data: {
-      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/dmdata.json`,
+      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/dmdata`,
     },
     resolve: {
       pageData: PageResolve,
@@ -100,7 +108,7 @@ const routes: Routes = [
     path: 'lp/:id',
     component: LpDetailsComponent,
     data: {
-      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/data.json`,
+      pageUrl: `${PROXIES_SLAG_V8}/web-hosted/navigator/json/data`,
     },
     resolve: {
       pageData: PageResolve,
@@ -140,4 +148,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [SearchResultResolve],
 })
-export class NavigatorRoutingModule {}
+export class NavigatorRoutingModule { }

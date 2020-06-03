@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Request, Response, Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
@@ -32,22 +29,32 @@ conceptGraphApi.get('/:ids', async (req: Request, res: Response) => {
 
     return res.send(conceptData)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })
 conceptGraphApi.post('/autocomplete', async (req: Request, res: Response) => {
   try {
-    let url: string
-    url = `${apiEndpoints.autoComplete}`
+    const org = req.header('org')
+    const rootOrg = req.header('rootOrg')
     const autoCompleteData: [] = await axios
-      .post<[]>(url, req.body, axiosRequestConfig)
+      .post<[]>(apiEndpoints.autoComplete, req.body, {
+        ...axiosRequestConfig,
+        headers: {
+          org,
+          rootOrg,
+        },
+      })
       .then((response) => response.data)
     return res.send(autoCompleteData)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: 'Failed due to unknown reason',
+      }
+    )
   }
 })

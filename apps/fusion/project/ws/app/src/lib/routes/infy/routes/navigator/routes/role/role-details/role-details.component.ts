@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 import { NavigatorService } from '../../../services/navigator.service'
@@ -25,9 +22,11 @@ export class RoleDetailsComponent implements OnInit {
   fetchStatus: TFetchStatus = 'none'
   hasAlternatives = false
   hasCertifications = false
+  hasCourses = true
   showAlternatives = false
 
   strips: any[] = []
+  certificationIds: string[] = []
 
   coursesResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
     NsContentStripMultiple.IContentStripMultiple
@@ -107,6 +106,10 @@ export class RoleDetailsComponent implements OnInit {
     this.coursesResolverData.widgetData.strips.forEach(strip => {
       if (strip.key === 'courses-strip' && strip.request) {
         strip.request.ids = ids
+        this.navSvc.fetchImageForContentIDs(strip.request.ids).subscribe(_ => {
+        },                                                               _ => {
+          this.hasCourses = false
+        })
       }
     })
     this.coursesResolverData = { ...this.coursesResolverData }
@@ -121,6 +124,7 @@ export class RoleDetailsComponent implements OnInit {
       if (strip.key === 'certifications-strip' && strip.request && strip.request.ids) {
         ids = [...strip.request.ids, ...ids]
         const setIds = new Set(ids)
+        this.certificationIds = Array.from(setIds)
         strip.request.ids = Array.from(setIds)
       }
     })
@@ -135,6 +139,14 @@ export class RoleDetailsComponent implements OnInit {
       this.hasCertifications = false
     }
     this.certificationsResolverData = { ...this.certificationsResolverData }
+
+    this.navSvc.fetchImageForContentIDs(this.certificationIds).subscribe(_ => {
+      // console.log('no error')
+    },                                                                   _ => {
+      // console.log('error occured')
+      this.hasCertifications = false
+    })
+    // console.log('Has certifications', this.hasCertifications)
   }
 
   displayAlternatives() {
@@ -172,8 +184,8 @@ export class RoleDetailsComponent implements OnInit {
             this.hasAlternatives = false
           }
         })
-      } else { }
+      } else {
+      }
     })
   }
-
 }

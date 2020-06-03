@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
 import { AnalyticsService } from '../../services/analytics.service'
 import { NSAnalyticsData } from '../../models/analytics.model'
@@ -17,6 +14,7 @@ export class FeatureUsageComponent implements OnInit {
   contentType = 'Course'
   isCompleted = 0
   timeSpent = 0
+  filterType = ''
   pendingAssessments = 0
   assessmentComplete = 0
   assessments: NSCompetency.IAchievementsRes | null = null
@@ -83,7 +81,7 @@ export class FeatureUsageComponent implements OnInit {
         this.assessmentFetchStatus = 'error'
       },
     )
-    this.analyticsSrv.userProgress(this.startDate, this.endDate, this.contentType, this.isCompleted).subscribe(
+    this.analyticsSrv.userProgress(this.filterType, this.contentType).subscribe(
       (userProgressResponse: NSAnalyticsData.IUserProgressResponse) => {
         this.userProgressData = userProgressResponse
         this.pendingAssessments = Math.abs(this.userProgressData.learning_history.length - this.assessmentComplete)

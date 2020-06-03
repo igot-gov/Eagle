@@ -1,5 +1,12 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<!-- <h2 class="mat-toolbar discussion-head shadow">Discussion Forum</h2> -->
-<ng-container *ngIf="discussionForumWidget" [wsResolverWidget]="discussionForumWidget"></ng-container>
+<div [hidden]="isRestricted">
+  <div class="flex flex-middle py-4 cursor-pointer mat-toolbar discussion-head shadow"
+    (click)="showDiscussionForum = !showDiscussionForum">
+    <mat-icon *ngIf="showDiscussionForum">keyboard_arrow_down</mat-icon>
+    <mat-icon *ngIf="!showDiscussionForum">chevron_right</mat-icon>
+
+    <h2>Discussion Forum</h2>
+  </div>
+  <ng-container *ngIf="showDiscussionForum">
+    <div [wsResolverWidget]="discussionForumWidget"></div>
+  </ng-container>
+</div>

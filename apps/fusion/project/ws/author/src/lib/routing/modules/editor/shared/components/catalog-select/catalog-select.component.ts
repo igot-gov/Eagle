@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Inject } from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { FlatTreeControl } from '@angular/cdk/tree'
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
-import { ITodoItemFlatNode, TodoItemNode, ICatalog } from './models/catalog-model'
-import { UploadService } from '../../services/upload.service'
-import { TFetchStatus } from '@ws-widget/utils'
+import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree'
+import { TFetchStatus } from '@ws-widget/utils'
+import { UploadService } from '../../services/upload.service'
+import { ICatalog, ITodoItemFlatNode, TodoItemNode } from './models/catalog-model'
 
 // const TREE_DATA = {
 //   Groceries: {
@@ -33,9 +30,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
   templateUrl: './catalog-select.component.html',
   styleUrls: ['./catalog-select.component.scss'],
 })
-
 export class CatalogSelectComponent implements OnInit {
-
   status: TFetchStatus = 'none'
   treeData = {} as any
 
@@ -70,7 +65,12 @@ export class CatalogSelectComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel, this.isExpandable, this.getChildren)
+    this.treeFlattener = new MatTreeFlattener(
+      this.transformer,
+      this.getLevel,
+      this.isExpandable,
+      this.getChildren,
+    )
     this.treeControl = new FlatTreeControl<ITodoItemFlatNode>(this.getLevel, this.isExpandable)
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener)
     this.uploadSvc.fetchCatalog().subscribe((res: any) => {
@@ -79,16 +79,18 @@ export class CatalogSelectComponent implements OnInit {
       const data: TodoItemNode[] = this.buildFileTree(this.treeData, 0)
       this.dataSource.data = data
       this.status = 'done'
-      this.parentPaths.forEach(path => {
-        const currentPath = path
-        // console.log('The path now', currentPath)
-        const selectedNode = this.flatNodes.find(node => {
-          return node.path === currentPath
+      this.parentPaths
+        .filter(v => v !== 'Common')
+        .forEach(path => {
+          const currentPath = path
+          // //console.log('The path now', currentPath)
+          const selectedNode = this.flatNodes.find(node => {
+            return node.path === currentPath
+          })
+          if (selectedNode) {
+            this.checklistSelection.toggle(selectedNode)
+          }
         })
-        if (selectedNode) {
-          this.checklistSelection.toggle(selectedNode)
-        }
-      })
       this.selectedCatalogPaths = this.parentPaths
     })
   }
@@ -132,9 +134,18 @@ export class CatalogSelectComponent implements OnInit {
   // transforms the treeData to treeNode
   transformer = (node: TodoItemNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node)
-    const flatNode = existingNode && existingNode.name === node.name
-      ? existingNode
-      : { name: '', level: 0, expandable: false, identifier: '', path: '', nodeId: '', checkable: true }
+    const flatNode =
+      existingNode && existingNode.name === node.name
+        ? existingNode
+        : {
+            name: '',
+            level: 0,
+            expandable: false,
+            identifier: '',
+            path: '',
+            nodeId: '',
+            checkable: true,
+          }
     flatNode.name = node.name
     const currentNode = this.flatCatalogData.find(r => {
       return r.name === flatNode.name
@@ -170,15 +181,14 @@ export class CatalogSelectComponent implements OnInit {
       }
 
       return accumulator.concat(node)
-    },                                             [])
+      // tslint:disable-next-line: align
+    }, [])
   }
 
   /** Whether all the descendants of the node are selected. */
   descendantsAllSelected(node: ITodoItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node)
-    const descAllSelected = descendants.every(child =>
-      this.checklistSelection.isSelected(child),
-    )
+    const descAllSelected = descendants.every(child => this.checklistSelection.isSelected(child))
     return descAllSelected
   }
 
@@ -210,7 +220,6 @@ export class CatalogSelectComponent implements OnInit {
   checkAllParentsSelection(node: ITodoItemFlatNode): void {
     let parent: ITodoItemFlatNode | null = this.getParentNode(node)
     while (parent) {
-
       this.checkRootNodeSelection(parent)
       parent = this.getParentNode(parent)
     }
@@ -226,20 +235,19 @@ export class CatalogSelectComponent implements OnInit {
         return cPath !== catalogPath
       })
       if (isParent) {
-        // console.log('removing for a parent')
+        // //console.log('removing for a parent')
         // const descendants = this.treeControl.getDescendants(node)
         // descendants.forEach(descendantNode => {
         //   this.selectedCatalogPaths = this.selectedCatalogPaths.filter(cPath => {
         //     return cPath !== descendantNode.path
         //   })
         // })
-        // console.log('The selected paths after removing children', this.selectedCatalogPaths)
+        // //console.log('The selected paths after removing children', this.selectedCatalogPaths)
       }
     } else {
-      // console.log('Adding new path ', catalogPath)
+      // //console.log('Adding new path ', catalogPath)
       this.selectedCatalogPaths.push(catalogPath)
     }
-
   }
 
   /** Check root node checked state and change it accordingly */
@@ -290,13 +298,18 @@ export class CatalogSelectComponent implements OnInit {
   }
 
   onClose() {
-    const returnValue: string[] = []
+    const returnValue: string[] = ['Common']
     this.checklistSelection.selected.map(v => {
       if (v.path) {
         returnValue.push(v.path)
       }
     })
-    this.dialogRef.close(this.catalogData && this.catalogData.length ? returnValue : this.parentPaths)
-
+    this.dialogRef.close(
+      this.catalogData && this.catalogData.length
+        ? this.checklistSelection.selected.length
+          ? returnValue
+          : []
+        : this.parentPaths,
+    )
   }
 }

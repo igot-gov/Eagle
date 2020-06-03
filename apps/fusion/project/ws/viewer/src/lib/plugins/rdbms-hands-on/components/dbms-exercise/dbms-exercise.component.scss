@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 @import 'ws-vars';
 @import 'ws-mixins';
 
@@ -45,7 +42,7 @@
 }
 
 .table-result {
-  border: 1px solid rgba(0, 0, 0, 0.14);
+  border: 1px solid #cecece;
   min-height: 175px;
 
   // @include breakpoint-xs {
@@ -66,31 +63,30 @@
 }
 
 ::ng-deep .table-bordered {
-  border: 1px solid #ddd;
+  border: 1px solid #cecece;
   border-collapse: collapse;
   width: auto;
 }
 
 ::ng-deep .table-bordered > tbody > tr > td,
 ::ng-deep .table-bordered > thead > tr > th {
-  border: 1px solid #dddd;
+  border: 1px solid #cecece;
   padding: 7px;
 }
 
 ::ng-deep .table-bordered thead {
-  background-color: #d6d6d6;
   text-align: left;
 }
 
-::ng-deep .table-striped > tbody > tr:nth-child(odd) > td {
-  background-color: #f9f9f9;
-}
+// ::ng-deep .table-striped > tbody > tr:nth-child(odd) > td {
+//   background-color: #f9f9f9;
+// }
 
-.refresh-btn {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+// .refresh-btn {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+// }
 
 .expected-result .mat-header-cell,
 .executed-result .mat-header-cell,
@@ -114,13 +110,8 @@
 }
 
 .mat-header-cell {
-  background-color: #ddd;
   flex: 0 0 25% !important;
   min-width: 70px !important;
-}
-
-.mat-row:nth-child(even) {
-  background-color: #f9f9f9;
 }
 
 .query-success {
@@ -132,9 +123,7 @@
 }
 
 .tell-text {
-  border: 1px solid #e4e4e4;
-  border-radius: 5px;
-  background-color: #e3dad44a;
+  border: 1px solid #cecece;
 }
 
 ::ng-deep .row {
@@ -153,4 +142,9 @@
 .dbStructure-table {
   overflow-y: auto;
   height: 213px;
+}
+
+.rdbmsheadings{
+  margin: 0!important;
+  border-bottom: 1px solid #cecece;
 }

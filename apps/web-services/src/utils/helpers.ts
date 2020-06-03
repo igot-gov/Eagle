@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { format as formatDate } from 'date-fns'
 import { CONSTANTS } from './env'
 
@@ -11,7 +8,7 @@ export function* range(end: number, step = 1) {
 }
 
 export function getStringifiedQueryParams(obj: {
-  [key: string]: string | number;
+  [key: string]: string | number | undefined;
 }) {
   return Object.entries(obj)
     .filter((u) => u[1])

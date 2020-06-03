@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <mat-card class="ws-mat-primary-lite-background-on-day margin-top-s"
   *ngIf="showIframeSupportWarning || isIntranetUrl || htmlContent?.isInIntranet">
   <mat-card-content>
@@ -71,8 +68,8 @@
 </mat-card>
 
 <h2 class="text-center mat-primary-text margin-top-m load"
-  *ngIf="showIsExternalMessage && htmlContent?.isIframeSupported === 'Yes'" i18n>
-  This is a third party online training program. There could be a delay in loading the content.
+  *ngIf="showIsLoadingMessage "i18n>
+  Please wait! Content requested is loading
 </h2>
 
 <div class="margin-top-m text-center" *ngIf="pageFetchStatus !== 'done'">
@@ -87,11 +84,11 @@
   </h2>
 </div>
 
-<iframe *ngIf="
+<iframe #iframeElem [hidden]="this.pageFetchStatus !== 'done'" *ngIf="
     htmlContent?.isIframeSupported !== 'No' &&
     (!htmlContent?.isInIntranet || (htmlContent?.isInIntranet && isUserInIntranet)) &&
     (!isIntranetUrl || (isIntranetUrl && isUserInIntranet))
-  " title="HTML Content Viewer" i18n-title [src]="iframeUrl" (load)="onIframeLoadOrError('load')"
+  " title="HTML Content Viewer" i18n-title [src]="iframeUrl" (load)="onIframeLoadOrError('load',iframeElem,$event)"
   (error)="onIframeLoadOrError('error')"
   allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; microphone; camera;"
   class="html-iframe"></iframe>

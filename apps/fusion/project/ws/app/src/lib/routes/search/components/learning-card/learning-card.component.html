@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="displayType === 'basic'">
   <mat-card>
     <mat-card-header>
@@ -14,8 +11,7 @@
 </ng-container>
 
 <ng-container *ngIf="displayType === 'advanced'">
-  <mat-card [ngClass]="{ greyOut: greyedOut }" *ngIf="content && isIntranetContentAllowed()"
-    class="advanced-view relative">
+  <mat-card *ngIf="content" class="advanced-view relative">
     <div *ngIf="content.status === 'Deleted' || content.status === 'Expired'" i18n-aria-label
       aria-label="Content expired or deleted" i18n-matTooltip matTooltip="Content may be expired or deleted"
       class="status-danger"></div>
@@ -27,13 +23,13 @@
             [wsUtilsDefaultThumbnail]="defaultThumbnail" />
         </a>
         <div class="width-expand card-content">
-          <h4 [title]="content.name" class="margin-remove-top margin-remove-bottom flex flex-middle">
+          <h1 [title]="content.name" class="margin-remove-top margin-remove-bottom flex flex-middle">
             <mat-icon *ngIf="contentProgress > 0.99" i18n-matTooltip matTooltip="Completed" class="completed-icon">
               check_circle</mat-icon>
             <a (click)="raiseTelemetry()" [routerLink]="(content | pipeContentRoute).url"
               [queryParams]="(content | pipeContentRoute).queryParams"
               class="margin-remove-bottom text-truncate mat-title">{{ content.name }}</a>
-          </h4>
+          </h1>
           <div>
             <ws-widget-display-content-type i18n-matTooltip matTooltip="Content Type"
               *ngIf="content?.displayContentType" class="ws-mat-primary-text font-normal"
@@ -71,7 +67,7 @@
           </div>
         </div>
         <div class="width-auto">
-          <button (click)="isExpanded = !isExpanded" mat-icon-button>
+          <button aria-label="Toggle Expand" i18n-aria-label (click)="isExpanded = !isExpanded" mat-icon-button>
             <mat-icon>{{ isExpanded ? 'expand_less' : 'expand_more' }}</mat-icon>
           </button>
         </div>
@@ -84,13 +80,28 @@
               resourceType: content.resourceType,
               mimeType: content.mimeType,
               downloadUrl: content.downloadUrl,
-              isExternal: content.isExternal
+              isExternal: content.isExternal,
+              artifactUrl: content.artifactUrl
+
             }"></ws-widget-btn-content-download>
           <ws-widget-btn-content-like [widgetData]="{ contentId: content.identifier }"></ws-widget-btn-content-like>
           <ws-widget-btn-content-share [widgetData]="content"></ws-widget-btn-content-share>
           <ws-widget-btn-channel-analytics [widgetData]="content">
           </ws-widget-btn-channel-analytics>
-          <ws-widget-btn-kb [contentId]="content?.identifier" [contentType]="content?.contentType">
+          <ws-widget-btn-kb-analytics [widgetData]="
+                    content
+                      | pipePartialContent
+                        : [
+                            'identifier',
+                            'contentType',
+                            'resourceType',
+                            'mimeType',
+                            'downloadUrl',
+                            'isExternal',
+                            'artifactUrl'
+                          ]
+                  "></ws-widget-btn-kb-analytics>
+          <ws-widget-btn-kb [contentId]="content?.identifier" [forPreview]='false' [contentType]="content?.contentType">
           </ws-widget-btn-kb>
           <!-- <ws-widget-btn-playlist></ws-widget-btn-playlist> -->
           <ws-widget-btn-goals></ws-widget-btn-goals>

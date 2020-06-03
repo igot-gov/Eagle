@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <ng-container *ngIf="!emptyWidget && !isDataPresent">
   <h2 class="fullView">
     <ng-container [ngSwitch]="widgetData.widgetSubType">
@@ -9,6 +6,9 @@
       </ng-container>
       <ng-container i18n *ngSwitchCase="'playerVideo'">
         Video
+      </ng-container>
+      <ng-container i18n *ngSwitchCase="'intranetResponsive'">
+        Intranet
       </ng-container>
       <ng-container i18n *ngSwitchCase="'videoWrapper'">
         Video
@@ -55,6 +55,17 @@
         <ng-container *ngIf="widgetData.widgetData.type === 'image'">
           Image
         </ng-container>
+        <ng-container
+          *ngIf="
+            widgetData.widgetData.type === 'gallery' && widgetData.widgetData.type === 'wrapper'
+          "
+          i18n
+        >
+          Video Gallery
+        </ng-container>
+        <ng-container *ngIf="widgetData.widgetData.type === 'wrapper'" i18n>
+          Video
+        </ng-container>
       </ng-container>
       <ng-container *ngSwitchCase="'galleryView'">
         <ng-container *ngIf="widgetData.widgetData.type === 'image'" i18n>
@@ -69,6 +80,9 @@
       </ng-container>
       <ng-container i18n *ngSwitchCase="'contentStripSingle'">
         Entry List
+      </ng-container>
+      <ng-container i18n *ngSwitchCase="'channelHub'">
+        Channel Hub
       </ng-container>
       <ng-container i18n *ngSwitchDefault>
         Common

@@ -1,21 +1,20 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { PageResolve } from '@ws-widget/utils'
 import { GeneralGuard } from '../../../../../../../src/app/guards/general.guard'
 // import { AppTocCohortsComponent } from './components/app-toc-cohorts/app-toc-cohorts.component'
 import { AppTocDiscussionComponent } from './components/app-toc-discussion/app-toc-discussion.component'
+import { KnowledgeArtifactDetailsComponent } from './components/knowledge-artifact-details/knowledge-artifact-details.component'
 import { AppTocResolverService } from './resolvers/app-toc-resolver.service'
 import { AppTocAnalyticsComponent } from './routes/app-toc-analytics/app-toc-analytics.component'
 import { CertificationMetaResolver } from './routes/app-toc-certification/resolvers/certification-meta.resolver'
 import { ContentCertificationResolver } from './routes/app-toc-certification/resolvers/content-certification.resolver'
-import { AppTocContentsComponent } from './routes/app-toc-contents/app-toc-contents.component'
-import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
-import { AppTocHomeComponent } from './routes/app-toc-home/app-toc-home.component'
+// commercial_begin
 import { AppTocCohortsComponent } from './routes/app-toc-cohorts/app-toc-cohorts.component'
-import { KnowledgeArtifactDetailsComponent } from './components/knowledge-artifact-details/knowledge-artifact-details.component'
+// commercial_end
+import { AppTocContentsComponent } from './routes/app-toc-contents/app-toc-contents.component'
+import { AppTocHomeComponent } from './routes/app-toc-home/app-toc-home.component'
+import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
 
 const routes: Routes = [
   {
@@ -37,10 +36,13 @@ const routes: Routes = [
         data: {
           pageType: 'feature',
           pageKey: 'toc',
+          requiredFeatures: ['tocAnalytics'],
         },
         resolve: {
           pageData: PageResolve,
         },
+        canActivate: [GeneralGuard],
+        runGuardsAndResolvers: 'always',
       },
       {
         path: 'contents',
@@ -54,10 +56,12 @@ const routes: Routes = [
         path: 'discussion',
         component: AppTocDiscussionComponent,
       },
+      // commercial_begin
       {
         path: 'classmates',
         component: AppTocCohortsComponent,
       },
+      // commercial_end
       {
         path: 'certification',
         loadChildren: () =>

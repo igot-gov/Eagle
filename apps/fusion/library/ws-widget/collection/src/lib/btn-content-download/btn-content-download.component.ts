@@ -1,12 +1,9 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, Input } from '@angular/core'
-import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { NsContent } from '../_services/widget-content.model'
-import { MobileAppsService } from '../../../../../../src/app/services/mobile-apps.service'
-import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { Platform } from '@angular/cdk/platform'
+import { Component, Input, OnInit } from '@angular/core'
+import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
+import { MobileAppsService } from '../../../../../../src/app/services/mobile-apps.service'
+import { NsContent } from '../_services/widget-content.model'
 
 export interface IWidgetBtnDownload {
   identifier: string
@@ -15,6 +12,7 @@ export interface IWidgetBtnDownload {
   mimeType: NsContent.EMimeTypes
   downloadUrl: string
   isExternal: boolean
+  artifactUrl: string
 }
 
 @Component({
@@ -25,6 +23,7 @@ export interface IWidgetBtnDownload {
 export class BtnContentDownloadComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IWidgetBtnDownload> {
   @Input() widgetData!: IWidgetBtnDownload
+  @Input() forPreview = false
 
   downloadable = false
 
@@ -36,7 +35,6 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
   ) {
     super()
   }
-
   ngOnInit() {
     if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.isContentDownloadAvailable) {
       this.downloadable = this.mobAppSvc.isMobile && this.isContentDownloadable
@@ -48,9 +46,13 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
       if (
         this.widgetData.contentType === NsContent.EContentTypes.PROGRAM ||
         this.widgetData.resourceType === 'Assessment' ||
+        this.widgetData.resourceType === 'Competition' ||
+        this.widgetData.resourceType === 'Classroom Training' ||
         (this.widgetData.mimeType !== NsContent.EMimeTypes.COLLECTION &&
           !this.widgetData.downloadUrl) ||
-        this.widgetData.isExternal
+        this.widgetData.isExternal ||
+        (this.widgetData.artifactUrl && this.widgetData.artifactUrl.startsWith('https://scorm.')
+        )
       ) {
         return false
       }
@@ -72,19 +74,17 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
 
   download(event: Event) {
     event.stopPropagation()
-    this.raiseTelemetry()
-    this.mobAppSvc.downloadResource(this.widgetData.identifier)
+    if (!this.forPreview) {
+      this.raiseTelemetry()
+      this.mobAppSvc.downloadResource(this.widgetData.identifier)
+    }
   }
 
   raiseTelemetry() {
-    this.events.raiseInteractTelemetry(
-      'download',
-      'content',
-      {
-        platform: this.platform,
-        contentId: this.widgetData.identifier,
-        contentType: this.widgetData.contentType,
-      },
-    )
+    this.events.raiseInteractTelemetry('download', 'content', {
+      platform: this.platform,
+      contentId: this.widgetData.identifier,
+      contentType: this.widgetData.contentType,
+    })
   }
 }

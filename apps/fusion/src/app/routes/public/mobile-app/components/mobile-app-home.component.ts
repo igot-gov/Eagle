@@ -1,12 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnDestroy } from '@angular/core'
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
-import { ActivatedRoute, Data } from '@angular/router'
-import { Subscription } from 'rxjs'
 import { Platform } from '@angular/cdk/platform'
+import { Component, OnDestroy, OnInit } from '@angular/core'
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
+import { ActivatedRoute, Data } from '@angular/router'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils'
+import { Subscription } from 'rxjs'
+import { MobileAppsService } from 'src/app/services/mobile-apps.service'
 
 interface IMobileAppLink {
   appsAndroid: string
@@ -40,16 +38,25 @@ export class MobileAppHomeComponent implements OnInit, OnDestroy {
   iosVal: string | null = null
   iosSanitizedVal: string | null = null
   routeSubscription: Subscription | null = null
+  isAndriod = true
+  isIos = true
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
 
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
     private matPlatform: Platform,
+    private mobileService: MobileAppsService,
     private configSvc: ConfigurationsService,
   ) { }
 
   ngOnInit() {
+    if (this.mobileService.iOsAppRef) {
+      this.isAndriod = false
+    }
+    if (this.mobileService.isAndroidApp) {
+      this.isIos = false
+    }
     if (this.route) {
       this.routeSubscription = this.route.data.subscribe((data: Data) => {
         this.mobileLinks = data.pageData.data

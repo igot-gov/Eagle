@@ -1,8 +1,6 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <nav mat-align-tabs="center" mat-stretch-tabs mat-tab-nav-bar>
-    <a mat-tab-link [routerLink]="'/app/profile/competency/badges'" routerLinkActive #rlaBadge="routerLinkActive" [active]="rlaBadge.isActive">
+  <a *ngIf="enabledTab?.badges?.enabled && badgesEnabled" mat-tab-link [routerLink]="'/app/profile/competency/badges'"
+    routerLinkActive #rlaBadge="routerLinkActive" [active]="rlaBadge.isActive">
     <mat-icon>
       stars
     </mat-icon>
@@ -10,7 +8,8 @@
       Badges
     </span>
   </a>
-  <a mat-tab-link [routerLink]="'/app/profile/competency/assessment'" routerLinkActive #rlaAssessment="routerLinkActive" [active]="rlaAssessment.isActive">
+  <a *ngIf="enabledTab?.assessments?.enabled" mat-tab-link [routerLink]="'/app/profile/competency/assessment'"
+    routerLinkActive #rlaAssessment="routerLinkActive" [active]="rlaAssessment.isActive">
     <mat-icon>
       assignment
     </mat-icon>
@@ -18,8 +17,8 @@
       Assessments
     </span>
   </a>
-  <a mat-tab-link [routerLink]="'/app/profile/competency/certificate'" routerLinkActive #rlaCertification="routerLinkActive"
-    [active]="rlaCertification.isActive">
+  <a *ngIf="enabledTab?.certifications?.enabled" mat-tab-link [routerLink]="'/app/profile/competency/certificate'"
+    routerLinkActive #rlaCertification="routerLinkActive" [active]="rlaCertification.isActive">
     <mat-icon>
       card_membership
     </mat-icon>

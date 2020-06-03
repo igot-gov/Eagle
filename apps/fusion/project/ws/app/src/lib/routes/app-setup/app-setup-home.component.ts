@@ -1,6 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { MatDialog } from '@angular/material'
 import { StepperSelectionEvent, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
@@ -29,9 +27,7 @@ export class AppSetupHomeComponent implements OnInit, AfterViewInit {
 
   // isInterestEnabled = true
 
-  widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<
-    IWidgetsPlayerMediaData
-  > = {
+  widgetResolverData: NsWidgetResolver.IRenderConfigWithTypedData<IWidgetsPlayerMediaData> = {
     widgetData: {
       url: '',
       autoplay: true,
@@ -53,20 +49,17 @@ export class AppSetupHomeComponent implements OnInit, AfterViewInit {
     | SettingsComponent
     | undefined = undefined
 
-  constructor(private configSvc: ConfigurationsService) { }
+  constructor(private configSvc: ConfigurationsService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
-
     // if (this.configSvc.restrictedFeatures) {
     //   this.isInterestEnabled = !this.configSvc.restrictedFeatures.has('interests')
     // }
 
-    this.appLanguage =
-      (this.configSvc.activeLocale && this.configSvc.activeLocale.path) || ''
+    this.appLanguage = (this.configSvc.activeLocale && this.configSvc.activeLocale.path) || ''
     if (this.configSvc.instanceConfig) {
-
       this.introVideos = this.configSvc.instanceConfig.introVideo
-      // console.log('TYPE: ', this.introVideos)
+      // //console.log('TYPE: ', this.introVideos)
     }
     this.widgetResolverData = {
       ...this.widgetResolverData,
@@ -75,7 +68,6 @@ export class AppSetupHomeComponent implements OnInit, AfterViewInit {
         url: this.introVideos['en'],
       },
     }
-
   }
 
   ngAfterViewInit() {
@@ -83,7 +75,8 @@ export class AppSetupHomeComponent implements OnInit, AfterViewInit {
       if (this.interestCompRef) {
         this.interestCompRef.fetchUserInterests()
       }
-    },         0)
+      // tslint:disable-next-line: align
+    }, 0)
   }
 
   prevBtn() {
@@ -102,9 +95,24 @@ export class AppSetupHomeComponent implements OnInit, AfterViewInit {
     this.chosenLang = path
   }
 
-  applyChanges() {
-    if (this.settingsCompRef) {
-      this.settingsCompRef.applyChanges()
+  applyChanges(template: any) {
+    if (this.configSvc.userUrl) {
+      const dialog = this.matDialog.open(template, {
+        width: '400px',
+        backdropClass: 'backdropBackground',
+      })
+      dialog.afterClosed().subscribe(v => {
+        if (!v) {
+          this.configSvc.userUrl = ''
+        }
+        if (this.settingsCompRef) {
+          this.settingsCompRef.applyChanges()
+        }
+      })
+    } else {
+      if (this.settingsCompRef) {
+        this.settingsCompRef.applyChanges()
+      }
     }
   }
 
@@ -117,6 +125,6 @@ export class AppSetupHomeComponent implements OnInit, AfterViewInit {
       },
     }
     // this.widgetResolverData.widgetData.url = this.introVideos[value]
-    // console.log('TYPE: ', this.widgetResolverData)
+    // //console.log('TYPE: ', this.widgetResolverData)
   }
 }

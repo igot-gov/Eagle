@@ -1,0 +1,225 @@
+<div *ngIf="fetchStatus === 'fetching'" class="flex flex-center margin-xl padding-xl">
+  <mat-spinner></mat-spinner>
+</div>
+<!-- <div *ngIf="fetchStatus === 'error'" class="text-center my-8">
+  <h2 i18n>Currently, You do not have any pathway access</h2>
+</div> -->
+<ng-container *ngIf="fetchStatus === 'error'" [wsResolverWidget]="errorWidget"></ng-container>
+
+<div *ngIf="fetchStatus === 'done'" class="margin-top-m ml-5">
+  <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabIndex">
+
+    <!-- Role Based pathway -->
+
+    <!-- <mat-tab class="font-black" label="Role Based Pathway"> -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span accesskey="1" class="font-bold ws-mat-primary-text " i18n>Role-based Pathway </span>
+        <!-- <span class="mat-button-wrapper">
+          <mat-icon _ngcontent-naw-c62="" class="mat-icon notranslate material-icons mat-icon-no-color" role="img"
+            aria-hidden="true">info</mat-icon>
+        </span> -->
+      </ng-template>
+      <div class="table-view table-responsive">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="JobTitle">
+            <th *matHeaderCellDef class="mat-body-strong" i18n class="header-color pl-10 text-left">
+              Role
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-inside-grid text-left">
+              {{ element.jobTitle }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="certified">
+            <th *matHeaderCellDef class="mat-body-strong" i18n class="header-color">
+              Certified (in %)
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-inside-grid">
+              <div *ngIf="element.Certified">
+                <span class="font-bold">{{element.Certified['percentage'] }}</span>
+                <span class="pl-2 text-xs">
+                  ({{ element.Certified['completed'] }} / {{element.Certified['total']}})
+                </span>
+              </div>
+              <div *ngIf="!element.Certified">--</div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="professional">
+            <th *matHeaderCellDef class="mat-body-strong" i18n class="header-color">
+              Professional (in %)
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-inside-grid">
+              <div *ngIf="element.Professional">
+                <span class="font-bold"> {{element.Professional['percentage'] }} </span>
+                <span class="pl-2 text-xs">
+                  ({{ element.Professional['completed'] }} /
+                  {{element.Professional['total']}})
+                </span>
+              </div>
+              <div *ngIf="!element.Professional">--</div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="master">
+            <th *matHeaderCellDef class="mat-body-strong" i18n class="header-color">
+              Master (in %)
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-inside-grid">
+              <div *ngIf="element.Master">
+                <span class="font-bold">{{element.Master['percentage'] }}</span>
+                <span class="pl-2 text-xs">
+                  ({{ element.Master['completed'] }} / {{element.Master['total']}})
+                </span>
+              </div>
+              <div *ngIf="!element.Master">--</div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="notCertified">
+            <th *matHeaderCellDef class="mat-body-strong" i18n class="header-color">
+              Not Certified (in %)
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-inside-grid">
+              <div *ngIf="element.NotCertified">
+                <span class="font-bold">{{element.NotCertified['percentage'] }}</span>
+                <span class="pl-2 text-xs">
+                  ({{ element.NotCertified['completed'] }} /
+                  {{element.NotCertified['total']}})
+                </span>
+              </div>
+              <div *ngIf="!element.NotCertified">--</div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </mat-tab>
+
+    <!-- course based pathway -->
+
+    <mat-tab class="font-bold ws-mat-primary-text" label="Course Based Pathway">
+      <ng-template mat-tab-label>
+        <span accesskey="1" class="font-bold ws-mat-primary-text " i18n>Course-based Pathway</span>
+      </ng-template>
+      <mat-tab-group (selectedTabChange)="onTabChangeClient($event)" *ngIf="tabIndex == 1" [selectedIndex]="0">
+        <mat-tab *ngFor="let role of roles" label="{{ role }}">
+          <ng-container *ngIf="userFetchStatus === 'error'" [wsResolverWidget]="errorWidget"></ng-container>
+          <div *ngIf="userFetchStatus === 'fetching'" class="flex flex-center margin-xl padding-xl">
+            <mat-spinner></mat-spinner>
+          </div>
+          <!-- <ng-container
+            *ngIf="userFetchStatus === 'error'"
+            [wsResolverWidget]="errorWidget"
+          ></ng-container> -->
+          <div *ngIf="userFetchStatus === 'done'">
+
+
+            <mat-card>
+              <div class="flex">
+                <div class="w-1/6">
+                  <div>
+                    <mat-grid-list rowHeight="50px" cols="1">
+                      <!-- <mat-grid-tile [colspan]="3" class="mat-body-strong grid-width text-inside-grid">
+                                              </mat-grid-tile> -->
+                      <mat-grid-tile [style.background]="'#2096cd'"
+                        class="mat-body-strong grid-width text-inside-grid mat-primary" i18n>
+                        <p class="text-color pt-3" i18n>User Details</p>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="3" rowHeight="50px" class="header-color">
+                      <mat-grid-tile class="mat-body-strong grid-width text-inside-grid" i18n>
+                        <p class="text-xs pt-3">Stars Id</p>
+                      </mat-grid-tile>
+
+                      <mat-grid-tile class="mat-body-strong grid-width text-inside-grid" [colspan]="2" i18n>
+                        <p class="text-xs pt-3">Username</p>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                  </div>
+                  <mat-grid-list cols="3" *ngFor="let data of userTableData" rowHeight="35px"
+                    class="flex flex-middle text-inside-grid">
+                    <!-- <mat-grid-tile class="grid-width">
+                                                        {{data.StarsId}}
+                                                      </mat-grid-tile> -->
+                    <mat-grid-tile class="grid-width text-inside-grid" i18n>{{ data.StarsId }}</mat-grid-tile>
+
+                    <mat-grid-tile class="grid-width text-inside-grid text-left" [colspan]="2" i18n>
+                      {{ data.UserName | titlecase }}
+                    </mat-grid-tile>
+                    <mat-divider class="margin-top-xs"></mat-divider>
+                  </mat-grid-list>
+                </div>
+
+                <div class="w-5/6" style="max-width:1200px;overflow:auto">
+                  <div style="width:1300px">
+                    <mat-grid-list rowHeight="50px" cols="{{ displayedColumnsTwo.length }}">
+                      <!-- <mat-grid-tile [colspan]="3" class="mat-body-strong grid-width text-inside-grid">
+                            </mat-grid-tile> -->
+                      <mat-grid-tile *ngFor="let tile of levelColumn" [colspan]="tile.cols"
+                        [style.background]="tile.color" class="mat-body-strong grid-width text-inside-grid mat-primary"
+                        i18n>
+                        <p class="text-color pt-3" i18n>{{ tile.text }}</p>
+                      </mat-grid-tile>
+                    </mat-grid-list>
+                    <mat-grid-list cols="{{ displayedColumnsTwo.length }}" rowHeight="50px" class="header-color">
+                      <div *ngFor="let column of displayedColumnsTwo">
+
+                        <mat-grid-tile class="mat-body-strong grid-width text-inside-grid" i18n>
+
+                          <p class="text-xs pt-3" matTooltip="{{column.code}} - {{column.title}}">
+                            {{column.code}} -
+                            {{ column.title.length > 10 ? column.title.substring(0,10)+"..." : column.title }}
+                          </p>
+
+
+
+
+                        </mat-grid-tile>
+                      </div>
+                    </mat-grid-list>
+                    <mat-grid-list cols="{{ displayedColumnsTwo.length }}" *ngFor="let data of userTableData"
+                      rowHeight="35px" class="flex flex-middle text-inside-grid">
+                      <!-- <mat-grid-tile class="grid-width">
+                                    {{data.StarsId}}
+                                  </mat-grid-tile> -->
+                      <mat-grid-tile class="mat-body-strong grid-width text-inside-grid" i18n
+                        *ngFor="let column of displayedColumnsTwo">
+                        <mat-icon *ngIf="data[column.title] === '1.0'">done</mat-icon>
+                      </mat-grid-tile>
+
+                      <mat-divider class="margin-top-xs"></mat-divider>
+                    </mat-grid-list>
+                  </div>
+                </div>
+              </div>
+
+            </mat-card>
+
+            <div class="flex justify-end">
+              <button mat-icon-button *ngIf="disabled" class="cursor-pointer" color="primary"
+                (click)="changePagePrev(role)" disabled>
+                <mat-icon> navigate_before </mat-icon>
+              </button>
+              <button mat-icon-button class="cursor-pointer" color="primary" (click)="changePagePrev(role)"
+                *ngIf="!disabled">
+                <mat-icon> navigate_before </mat-icon>
+              </button>
+              <button mat-icon-button class="cursor-pointer" color="primary" (click)="changePageNext(role)"
+                *ngIf="disabledNext" disabled>
+                <mat-icon> navigate_next </mat-icon>
+              </button>
+              <button mat-icon-button class="cursor-pointer" color="primary" (click)="changePageNext(role)"
+                *ngIf="!disabledNext">
+                <mat-icon> navigate_next </mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <!--
+                  <mat-paginator showFirstLastButtons [length]="userTableData.length" [pageSize]="10"
+                    (page)="changePage($event)">
+                  </mat-paginator> -->
+        </mat-tab>
+      </mat-tab-group>
+    </mat-tab>
+  </mat-tab-group>
+</div>

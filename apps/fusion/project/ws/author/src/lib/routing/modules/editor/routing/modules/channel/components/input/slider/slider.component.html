@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <form [formGroup]="form">
   <div formArrayName="iCarousel" *ngFor="let image of paths.controls; let i = index">
     <mat-card class="card-design">
@@ -53,12 +50,12 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div>
+          <div *ngIf="redirectUrl.value">
             <p i18n>Target</p>
             <mat-form-field>
               <mat-select formControlName="openInNewTab">
-                <mat-option value="_blank" i18n>Open in new tab</mat-option>
-                <mat-option value="_self" i18n>Open in same tab</mat-option>
+                <mat-option value="true" i18n>Open in new tab</mat-option>
+                <mat-option value="false" i18n>Open in same tab</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
@@ -74,24 +71,10 @@
             mat-stroked-button
             (click)="imageFileXS.click()"
           >
-            <ng-container
-              *ngIf="
-                !paths
-                  .at(i)
-                  .get('banners')
-                  .get('xs').value
-              "
-              i18n
+            <ng-container *ngIf="!paths.at(i).get('banners').get('xs').value" i18n
               >Choose Image</ng-container
             >
-            <ng-container
-              *ngIf="
-                paths
-                  .at(i)
-                  .get('banners')
-                  .get('xs').value
-              "
-              i18n
+            <ng-container *ngIf="paths.at(i).get('banners').get('xs').value" i18n
               >Change Image</ng-container
             >
             <input
@@ -109,24 +92,10 @@
             mat-stroked-button
             (click)="imageFileS.click()"
           >
-            <ng-container
-              *ngIf="
-                !paths
-                  .at(i)
-                  .get('banners')
-                  .get('s').value
-              "
-              i18n
+            <ng-container *ngIf="!paths.at(i).get('banners').get('s').value" i18n
               >Choose Image</ng-container
             >
-            <ng-container
-              *ngIf="
-                paths
-                  .at(i)
-                  .get('banners')
-                  .get('s').value
-              "
-              i18n
+            <ng-container *ngIf="paths.at(i).get('banners').get('s').value" i18n
               >Change Image</ng-container
             >
             <input
@@ -145,24 +114,10 @@
             mat-stroked-button
             (click)="imageFileM.click()"
           >
-            <ng-container
-              *ngIf="
-                !paths
-                  .at(i)
-                  .get('banners')
-                  .get('m').value
-              "
-              i18n
+            <ng-container *ngIf="!paths.at(i).get('banners').get('m').value" i18n
               >Choose Image</ng-container
             >
-            <ng-container
-              *ngIf="
-                paths
-                  .at(i)
-                  .get('banners')
-                  .get('m').value
-              "
-              i18n
+            <ng-container *ngIf="paths.at(i).get('banners').get('m').value" i18n
               >Change Image</ng-container
             >
             <input
@@ -180,24 +135,10 @@
             mat-stroked-button
             (click)="imageFileL.click()"
           >
-            <ng-container
-              *ngIf="
-                !paths
-                  .at(i)
-                  .get('banners')
-                  .get('l').value
-              "
-              i18n
+            <ng-container *ngIf="!paths.at(i).get('banners').get('l').value" i18n
               >Choose Image</ng-container
             >
-            <ng-container
-              *ngIf="
-                paths
-                  .at(i)
-                  .get('banners')
-                  .get('l').value
-              "
-              i18n
+            <ng-container *ngIf="paths.at(i).get('banners').get('l').value" i18n
               >Change Image</ng-container
             >
             <input
@@ -215,24 +156,10 @@
             mat-stroked-button
             (click)="imageFileXL.click()"
           >
-            <ng-container
-              *ngIf="
-                !paths
-                  .at(i)
-                  .get('banners')
-                  .get('xl').value
-              "
-              i18n
+            <ng-container *ngIf="!paths.at(i).get('banners').get('xl').value" i18n
               >Choose Image</ng-container
             >
-            <ng-container
-              *ngIf="
-                paths
-                  .at(i)
-                  .get('banners')
-                  .get('xl').value
-              "
-              i18n
+            <ng-container *ngIf="paths.at(i).get('banners').get('xl').value" i18n
               >Change Image</ng-container
             >
             <input
@@ -251,5 +178,5 @@
 <br />
 <button type="button" color="primary" mat-raised-button (click)="addImageDetailsToForm()">
   <mat-icon>add box</mat-icon>
-  <ng-container i18n>Add a new banner</ng-container>
+  <ng-container i18n>Add A New Banner</ng-container>
 </button>

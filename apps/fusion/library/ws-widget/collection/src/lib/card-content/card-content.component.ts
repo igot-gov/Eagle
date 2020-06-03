@@ -1,16 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService, UtilityService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { NsGoal } from '../btn-goals/btn-goals.model'
 import { NsPlaylist } from '../btn-playlist/btn-playlist.model'
+import { MiniProfileComponent } from '../mini-profile/mini-profile.component'
 import { NsContent } from '../_services/widget-content.model'
 import { NsCardContent } from './card-content.model'
-import { MatDialog } from '@angular/material'
-import { MiniProfileComponent } from '../mini-profile/mini-profile.component'
 
 @Component({
   selector: 'ws-widget-card-content',
@@ -24,7 +21,7 @@ export class CardContentComponent extends WidgetBaseComponent
   showFlip = false
   isCardFlipped = false
   showIsMode = false
-  isGoalsEnabled = false
+  showContentTag = false
 
   btnPlaylistConfig: NsPlaylist.IBtnPlaylist | null = null
   btnGoalsConfig: NsGoal.IBtnGoal | null = null
@@ -35,14 +32,12 @@ export class CardContentComponent extends WidgetBaseComponent
     private events: EventService,
     private configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
+    private snackBar: MatSnackBar,
   ) {
     super()
   }
 
   ngOnInit() {
-    if (this.configSvc.restrictedFeatures) {
-      this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
-    }
     this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
     this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
       this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
@@ -74,6 +69,55 @@ export class CardContentComponent extends WidgetBaseComponent
     if (this.widgetData.content.mode) {
       this.showIsMode = this.isLatest(this.convertToISODate(this.widgetData.content.addedOn))
     }
+    if (this.widgetData.contentTags) {
+      this.showContentTag =
+        this.checkCriteria() && this.checkContentTypeCriteria() && this.checkMimeTypeCriteria()
+    }
+  }
+
+  checkContentTypeCriteria() {
+    if (
+      this.widgetData.contentTags &&
+      this.widgetData.contentTags.excludeContentType &&
+      this.widgetData.contentTags.excludeContentType.length
+    ) {
+      return !this.widgetData.contentTags.excludeContentType.includes(
+        this.widgetData.content.contentType,
+      )
+    }
+    return true
+  }
+
+  checkMimeTypeCriteria() {
+    if (
+      this.widgetData.contentTags &&
+      this.widgetData.contentTags.excludeMimeType &&
+      this.widgetData.contentTags.excludeMimeType.length
+    ) {
+      return !this.widgetData.contentTags.excludeMimeType.includes(this.widgetData.content.mimeType)
+    }
+    return true
+  }
+
+  checkCriteria() {
+    if (
+      this.widgetData.contentTags &&
+      this.widgetData.contentTags.criteriaField &&
+      this.widgetData.contentTags.daysSpan
+    ) {
+      const dateOffset = 24 * 60 * 60 * 1000 * this.widgetData.contentTags.daysSpan
+      const lastDay = new Date()
+      lastDay.setTime(lastDay.getTime() - dateOffset)
+      if (
+        this.convertToISODate(
+          this.widgetData.content[this.widgetData.contentTags.criteriaField],
+        ).getTime() >= lastDay.getTime()
+      ) {
+        return true
+      }
+      return false
+    }
+    return true
   }
 
   ngOnDestroy() {
@@ -86,13 +130,73 @@ export class CardContentComponent extends WidgetBaseComponent
     // this.assignThumbnail()
   }
 
+  get checkDisplayName(): string {
+    if (this.widgetData.content.creatorDetails && this.widgetData.content.creatorDetails.length) {
+      if (
+        !this.widgetData.content.creatorDetails[0].name ||
+        this.widgetData.content.creatorDetails[0].name === '' ||
+        this.widgetData.content.creatorDetails[0].name === 'null null'
+      ) {
+        return 'Not Disclosed'
+      }
+      return this.widgetData.content.creatorDetails[0].name
+    }
+    if (this.widgetData.content.creatorContacts && this.widgetData.content.creatorContacts.length) {
+      if (
+        !this.widgetData.content.creatorContacts[0].name ||
+        this.widgetData.content.creatorContacts[0].name === '' ||
+        this.widgetData.content.creatorContacts[0].name === 'null null'
+      ) {
+        return 'Not Disclosed'
+      }
+      return this.widgetData.content.creatorContacts[0].name
+    }
+    return ''
+  }
+
+  get imageIcon(): string[] {
+    if (this.widgetData.content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT) {
+      return ['class', 'Knowledge Artifact']
+    }
+    if (this.widgetData.content.contentType !== NsContent.EContentTypes.RESOURCE) {
+      return ['folder', 'Course']
+    }
+    switch (this.widgetData.content.mimeType) {
+      case NsContent.EMimeTypes.HTML:
+        return ['library_add', this.widgetData.content.resourceType]
+      // tslint:disable-next-line: max-line-length
+      case NsContent.EMimeTypes.MP3:
+      case NsContent.EMimeTypes.MP4:
+      case NsContent.EMimeTypes.M4A:
+      case NsContent.EMimeTypes.M3U8:
+      case NsContent.EMimeTypes.PLAYLIST:
+      case NsContent.EMimeTypes.YOUTUBE:
+        return ['library_music', this.widgetData.content.resourceType]
+      case NsContent.EMimeTypes.PDF:
+        return ['picture_as_pdf', this.widgetData.content.resourceType]
+      // tslint:disable-next-line: max-line-length
+      case NsContent.EMimeTypes.QUIZ:
+      case NsContent.EMimeTypes.HANDS_ON:
+      case NsContent.EMimeTypes.RDBMS_HANDS_ON:
+      case NsContent.EMimeTypes.IAP:
+      case NsContent.EMimeTypes.CERTIFICATION:
+        return ['assignment_ind', this.widgetData.content.resourceType]
+      default:
+        return ['description', this.widgetData.content.resourceType]
+    }
+  }
+
   private modifySensibleContentRating() {
     if (
       this.widgetData.content &&
       this.widgetData.content.averageRating &&
       typeof this.widgetData.content.averageRating !== 'number'
     ) {
-      this.widgetData.content.averageRating = (this.widgetData.content.averageRating as any)[this.configSvc.rootOrg || '']
+      // tslint:disable-next-line: ter-computed-property-spacing
+      this.widgetData.content.averageRating = (this.widgetData.content.averageRating as any)[
+        this.configSvc.rootOrg || ''
+        // tslint:disable-next-line: ter-computed-property-spacing
+      ]
     }
     this.widgetData.content.averageRating = this.widgetData.content.averageRating || 0
   }
@@ -159,7 +263,7 @@ export class CardContentComponent extends WidgetBaseComponent
 
   isLatest(addedOn: Date) {
     if (addedOn) {
-      const dateOffset = (24 * 60 * 60 * 1000) * 7
+      const dateOffset = 24 * 60 * 60 * 1000 * 7
       const last7Day = new Date()
       last7Day.setTime(last7Day.getTime() - dateOffset)
       if (addedOn.getTime() >= last7Day.getTime()) {
@@ -176,11 +280,20 @@ export class CardContentComponent extends WidgetBaseComponent
     return false
   }
 
+  showSnackbar() {
+    if (this.showIntranetContent) {
+      this.snackBar.open('Content is only available in intranet', undefined, { duration: 2000 })
+    } else if (!this.isLiveOrMarkForDeletion) {
+      this.snackBar.open('Content may be expired or deleted', undefined, { duration: 2000 })
+    }
+  }
+
   get isLiveOrMarkForDeletion() {
     if (
       !this.widgetData.content.status ||
       this.widgetData.content.status === 'Live' ||
-      this.widgetData.content.status === 'MarkedForDeletion') {
+      this.widgetData.content.status === 'MarkedForDeletion'
+    ) {
       return true
     }
     return false
@@ -193,7 +306,8 @@ export class CardContentComponent extends WidgetBaseComponent
       width: '410px',
       data: wid,
     })
-    dialogRef.afterClosed().subscribe((_result: any) => {
-    })
+    dialogRef.afterClosed().subscribe((_result: any) => {})
   }
+
+  openComment() {}
 }

@@ -1,48 +1,54 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="padding-dynamic" *ngIf="webmoduleData">
   <div class="flex flex-around flex-wrapped">
-    <div [ngClass]="isTypeOfCollection ? 'w-full' : 'video-player-title'">
+    <div class="w-full">
       <div>
         <mat-card>
           <mat-card-content>
             <div id="fullScreenContainer" class="video-player">
-              <viewer-plugin-web-module *ngIf="isFetchingDataComplete" [identifier]="webmoduleData?.identifier" [artifactUrl]="webmoduleData?.artifactUrl"
-                [webModuleManifest]="webmoduleManifest" [theme]="{ className: 'indigo' }" [collectionId]="collectionId" [mimeType]="webmoduleData?.mimeType"></viewer-plugin-web-module>
+              <viewer-plugin-web-module *ngIf="isFetchingDataComplete"
+                [widgetData]="webmoduleData | pipePartialContent: ['identifier','artifactUrl','mimeType','resumePage']"
+                [webModuleManifest]="webmoduleManifest" [theme]="{ className: 'indigo' }" [collectionId]="collectionId">
+              </viewer-plugin-web-module>
             </div>
             <div class="flex justify-end mt-3">
-              <ws-widget-btn-content-download [widgetData]="
-                    webmoduleData
-                      | pipePartialContent
-                        : [
-                            'identifier',
-                            'contentType',
-                            'resourceType',
-                            'mimeType',
-                            'downloadUrl',
-                            'isExternal'
-                          ]
-                  "></ws-widget-btn-content-download>
-              <ws-widget-btn-content-like [widgetData]="webmoduleData | pipePartialContent: ['identifier']">
+              <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+                  webmoduleData
+                    | pipePartialContent
+                      : [
+                          'identifier',
+                          'contentType',
+                          'resourceType',
+                          'mimeType',
+                          'downloadUrl',
+                          'isExternal',
+                  'artifactUrl'
+                        ]
+                "></ws-widget-btn-content-download>
+              <ws-widget-btn-content-like [forPreview]="forPreview"
+                [widgetData]="webmoduleData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [widgetData]="webmoduleData"></ws-widget-btn-content-share>
-              <ws-widget-btn-goals></ws-widget-btn-goals>
-              <ws-widget-btn-playlist></ws-widget-btn-playlist>
+              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="webmoduleData">
+              </ws-widget-btn-content-share>
+              <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
+              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
+                contentId: webmoduleData?.identifier,
+                contentName: webmoduleData?.name,
+                contentType: 'Resource',
+                mode: 'dialog',
+                isDisabled: forPreview
+              }">
+              </ws-widget-btn-playlist>
               <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
-              <ws-widget-btn-content-feedback-v2 [widgetData]="webmoduleData | pipePartialContent: ['identifier', 'name']">
+              <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
+                [widgetData]="webmoduleData | pipePartialContent: ['identifier', 'name']">
               </ws-widget-btn-content-feedback-v2>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
     </div>
-
-    <div class="video-summary" *ngIf="!isTypeOfCollection">
-      <ws-widget-player-brief [content]="webmoduleData" [isPreviewMode]="isPreviewMode"></ws-widget-player-brief>
-    </div>
   </div>
-  <div class="padding-m" *ngIf="discussionForumWidget">
+  <div class="padding-m" *ngIf="discussionForumWidget && isRestricted">
     <div class="video-discussion-forum-in">
       <h2 class="mat-toolbar discussion-head">Discussion Forum</h2>
       <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>

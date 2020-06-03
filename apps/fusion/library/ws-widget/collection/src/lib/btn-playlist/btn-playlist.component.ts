@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, Input, OnInit } from '@angular/core'
-import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { MatDialog } from '@angular/material'
-import { BtnPlaylistDialogComponent } from './btn-playlist-dialog/btn-playlist-dialog.component'
-import { BtnPlaylistService } from './btn-playlist.service'
-import { NsPlaylist } from './btn-playlist.model'
-import { TFetchStatus } from '@ws-widget/utils'
+import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 import { NsContent } from '../_services/widget-content.model'
+import { BtnPlaylistDialogComponent } from './btn-playlist-dialog/btn-playlist-dialog.component'
+import { NsPlaylist } from './btn-playlist.model'
+import { BtnPlaylistService } from './btn-playlist.service'
 
 const VALID_CONTENT_TYPES: NsContent.EContentTypes[] = [
   NsContent.EContentTypes.MODULE,
@@ -26,18 +23,29 @@ const VALID_CONTENT_TYPES: NsContent.EContentTypes[] = [
 export class BtnPlaylistComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<NsPlaylist.IBtnPlaylist> {
   @Input() widgetData!: NsPlaylist.IBtnPlaylist
-
+  @Input() forPreview = false
   playlistsFetchStatus: TFetchStatus = 'none'
   playlists: NsPlaylist.IPlaylist[] = []
   selectedPlaylists: string[] = []
   isValidContent = false
-
-  constructor(private dialog: MatDialog, private playlistSvc: BtnPlaylistService) {
+  isPlaylistEnabled = false
+  constructor(
+    private dialog: MatDialog,
+    private playlistSvc: BtnPlaylistService,
+    private configSvc: ConfigurationsService,
+  ) {
     super()
   }
 
   ngOnInit() {
-    if (this.widgetData && this.widgetData.contentType && VALID_CONTENT_TYPES.includes(this.widgetData.contentType)) {
+    if (this.configSvc.restrictedFeatures) {
+      this.isPlaylistEnabled = !this.configSvc.restrictedFeatures.has('playlist')
+    }
+    if (
+      this.widgetData &&
+      this.widgetData.contentType &&
+      VALID_CONTENT_TYPES.includes(this.widgetData.contentType)
+    ) {
       this.isValidContent = true
     }
   }
@@ -57,12 +65,14 @@ export class BtnPlaylistComponent extends WidgetBaseComponent
   }
 
   openDialog() {
-    this.dialog.open(BtnPlaylistDialogComponent, {
-      width: '600px',
-      data: {
-        contentId: this.widgetData.contentId,
-        contentName: this.widgetData.contentName,
-      },
-    })
+    if (!this.forPreview) {
+      this.dialog.open(BtnPlaylistDialogComponent, {
+        width: '600px',
+        data: {
+          contentId: this.widgetData.contentId,
+          contentName: this.widgetData.contentName,
+        },
+      })
+    }
   }
 }

@@ -1,9 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit } from '@angular/core'
-import { NsPage, ConfigurationsService, EInstance } from '@ws-widget/utils'
-import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
+import { ConfigurationsService, EInstance, NsPage } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-public-nav-bar',
@@ -13,16 +10,31 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
 export class AppPublicNavBarComponent implements OnInit {
   appIcon: SafeUrl | null = null
   logo = ''
+  appName = ''
   navBar: Partial<NsPage.INavBackground> | null = null
-  constructor(private domSanitizer: DomSanitizer, private configSvc: ConfigurationsService) { }
+  constructor(private domSanitizer: DomSanitizer, private configSvc: ConfigurationsService) {}
 
   public get showPublicNavbar(): boolean {
+    // commercial_begin
     switch (this.configSvc.rootOrg) {
-path
+      case EInstance.PATHFINDERS:
+        return false
+      case EInstance.FORD:
+        return false
+      case EInstance.EPOCH:
+        return false
+      case EInstance.ACADEMY:
+        return false
+      case EInstance.ASSISTEDGE:
         return false
       default:
         return true
     }
+    // commercial_end
+
+    // opensource_begin
+    // return true
+    // opensource_end
   }
 
   ngOnInit() {
@@ -30,7 +42,7 @@ path
       this.appIcon = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.appTransparent,
       )
-      this.logo = this.configSvc.instanceConfig.logos.company
+      this.appName = this.configSvc.instanceConfig.details.appName
       this.navBar = this.configSvc.primaryNavBar
     }
   }

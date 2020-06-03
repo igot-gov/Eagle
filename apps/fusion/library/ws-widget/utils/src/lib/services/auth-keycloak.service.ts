@@ -1,18 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
+import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { ReplaySubject, fromEvent } from 'rxjs'
+import { KeycloakEvent, KeycloakEventType, KeycloakInitOptions, KeycloakService } from 'keycloak-angular'
+import { fromEvent, ReplaySubject } from 'rxjs'
 import { filter } from 'rxjs/operators'
-import {
-  KeycloakService,
-  KeycloakEvent,
-  KeycloakEventType,
-  KeycloakInitOptions,
-} from 'keycloak-angular'
 import { AuthMicrosoftService } from './auth-microsoft.service'
 import { ConfigurationsService } from './configurations.service'
-import { HttpClient } from '@angular/common/http'
 
 interface IParsedToken {
   email?: string
@@ -37,7 +29,11 @@ export class AuthKeycloakService {
   ) {
     this.loginChangeSubject.subscribe((isLoggedIn: boolean) => {
       this.configSvc.isAuthenticated = isLoggedIn
-      if (isLoggedIn && this.configSvc.instanceConfig && Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
+      if (
+        isLoggedIn &&
+        this.configSvc.instanceConfig &&
+        Boolean(this.configSvc.instanceConfig.disablePidCheck)
+      ) {
         this.configSvc.userProfile = {
           email: this.userEmail,
           userName: this.userName,
@@ -108,12 +104,12 @@ export class AuthKeycloakService {
         config: {
           url: instanceConfig.keycloak.url,
           realm: instanceConfig.keycloak.realm,
-substitute based on requirement
+          clientId: instanceConfig.keycloak.clientId,
         },
         initOptions: {
           ...this.getSavedKcConfig(),
-          onLoad: 'check-sso',
-          checkLoginIframe: true,
+          onLoad: instanceConfig.keycloak.onLoad || 'check-sso',
+          checkLoginIframe: false,
         },
         enableBearerInterceptor: true,
         loadUserProfileAtStartUp: false,
@@ -125,11 +121,19 @@ substitute based on requirement
   }
 
   login(
-path
+    idpHint: 'E' | 'N' | 'S' | 'siemens-entitlement' = 'E',
     redirectUrl: string = this.defaultRedirectUrl,
   ): Promise<void> {
     return this.keycloakSvc.login({
       idpHint,
+      redirectUri: redirectUrl,
+    })
+  }
+
+  register(
+    redirectUrl: string = this.defaultRedirectUrl,
+  ): Promise<void> {
+    return this.keycloakSvc.register({
       redirectUri: redirectUrl,
     })
   }
@@ -183,7 +187,7 @@ path
             event.data.type === 'AUTH_REQUEST' &&
             Boolean(event.source && typeof event.source.postMessage === 'function'),
         ),
-    )
+      )
       .subscribe(async (event: MessageEvent) => {
         const contentWindow = event.source as Window
         const token = await this.keycloakSvc.getToken()

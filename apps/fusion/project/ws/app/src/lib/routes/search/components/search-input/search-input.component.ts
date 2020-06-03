@@ -1,25 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  ViewChild,
-  Input,
-  OnChanges,
-  SimpleChange,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-} from '@angular/core'
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import { Observable } from 'rxjs'
-import { debounceTime, switchMap, startWith, distinctUntilChanged } from 'rxjs/operators'
 import { ActivatedRoute, Router } from '@angular/router'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { Observable } from 'rxjs'
+import { debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs/operators'
 import { ISearchAutoComplete } from '../../models/search.model'
 import { SearchServService } from '../../services/search-serv.service'
-import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-app-search-input',
@@ -45,6 +31,7 @@ export class SearchInputComponent implements OnInit, OnChanges {
   >
   autoCompleteResults: ISearchAutoComplete[] = []
   searchLocale = this.getActiveLocale()
+  lang = ''
 
   constructor(
     private activated: ActivatedRoute,
@@ -89,6 +76,11 @@ export class SearchInputComponent implements OnInit, OnChanges {
     this.languageSearch = this.route.snapshot.data.searchPageData.data.search.languageSearch.map(
       (u: string) => u.toLowerCase(),
     )
+    this.languageSearch = this.languageSearch.sort()
+    this.swapRemove(this.languageSearch, this.languageSearch.indexOf('all'), 0)
+    if (this.preferredLanguages && this.preferredLanguages.split(',').length > 1) {
+      this.languageSearch.splice(1, 0, this.preferredLanguages)
+    }
   }
   ngOnChanges() {
     for (const change in SimpleChange) {
@@ -98,27 +90,41 @@ export class SearchInputComponent implements OnInit, OnChanges {
     }
   }
 
+  swapRemove(langArray: string[], from: number, to: number) {
+    langArray.splice(to, 0, langArray[from])
+    langArray.splice(from + 1, 1)
+  }
+
   getActiveLocale(): string {
     const locale = (this.configSvc.activeLocale && this.configSvc.activeLocale.locals[0]) || 'en'
     return this.searchServSvc.getLanguageSearchIndex(locale)
   }
 
+  get preferredLanguages(): string | null {
+    if (this.configSvc.userPreference && this.configSvc.userPreference.selectedLangGroup) {
+      let prefLang: string[] | string = this.configSvc.userPreference.selectedLangGroup.split(',').map(lang => {
+        return this.searchServSvc.getLanguageSearchIndex(lang || 'en')
+      })
+      prefLang = prefLang.join(',')
+      return prefLang
+    }
+    return null
+  }
+
   updateQuery(query: string) {
-    let q = query
-    q = query.replace(/['"]+/g, '')
     if (this.searchInputElem && this.searchInputElem.nativeElement) {
       this.searchInputElem.nativeElement.blur()
     }
     if (this.ref === 'home') {
       this.closed.emit(false)
       this.router.navigate(['/app/search'], {
-        queryParams: { q: q.trim() },
+        queryParams: { q: query.trim() },
         queryParamsHandling: 'merge',
       })
     } else {
       this.router.navigate([], {
         relativeTo: this.activated.parent,
-        queryParams: { q: q.trim() },
+        queryParams: { q: query.trim() },
         queryParamsHandling: 'merge',
       })
     }

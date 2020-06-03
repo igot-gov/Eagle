@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 .op100 {
   opacity: 1;
 }
@@ -9,6 +6,7 @@
   border: 2px dashed rgba(28, 28, 28, 0.6);
   border-radius: 2%;
   width: 235px;
+  position: relative;
 }
 
 .text-white {
@@ -36,6 +34,35 @@ ul li {
 }
 
 .close-button {
-  top: -70px;
-  left: 60px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.top-heading {
+  position: relative;
+}
+
+.information {
+  margin-left: 5rem;
+}
+
+@media only screen and (max-width: 769px) {
+  .top-heading {
+    flex-direction: column;
+  }
+  .information {
+    margin-left: 0rem;
+    margin-top: 1rem;
+  }
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.example-radio-button {
+  margin: 5px;
 }

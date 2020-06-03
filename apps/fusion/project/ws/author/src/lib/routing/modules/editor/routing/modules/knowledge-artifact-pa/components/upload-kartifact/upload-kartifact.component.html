@@ -1,81 +1,178 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <div class="px-4 py-4">
-  <h1>
+  <h1 *ngIf="isPathFinders">
     <b class="custom-heading" i18n>UPLOAD A RESOURCE</b>
   </h1>
-
-  <div class="flex">
-    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 pr-2">
+  <h2>
+    <b *ngIf="!isPathFinders" i18n>Upload Knowledge Artifact</b>
+  </h2>
+  <div class="flex flex-col-reverse md:flex-row">
+    <div *ngIf="isPathFinders" class="py-2 w- md:w-1/2 lg:w-1/2 xl:w-1/2 pr-2">
       <h5>
-path
-          working to bring computer science
-          to all. Please upload resources or materials (i.e. audio or PDF) that you think would be helpful to other
-          teachers
-          working to inspire their students to pursue computer science and making.</b>
+        <b class="sub-heading" i18n
+          >Share your expertise with the Pathfinders Institute community of likeminded teachers
+          working to bring computer science to all. Please upload resources or materials (i.e. audio
+          or PDF) that you think would be helpful to other teachers working to inspire their
+          students to pursue computer science and making.</b
+        >
       </h5>
       <div i18n>
-        As a K-12 public school teacher working to provide computer science and maker education in your classroom, you
-        are the
-        on the front lines - sparking inspiration in your students. We know that can be challenging on a daily basis.
-        The
-path
-        who are
-        sharing leading practice of what is truly working in the classroom. The Platform is designed for you to share
-        your
-        expertise and materials with fellow teachers who want to bring innovation to the classroom.
+        As a K-12 public school teacher working to provide computer science and maker education in
+        your classroom, you are the on the front lines - sparking inspiration in your students. We
+        know that can be challenging on a daily basis. The Pathfinders Institute Online Portal is
+        designed for you to access content and also to build a community of peers who are sharing
+        leading practice of what is truly working in the classroom. The Platform is designed for you
+        to share your expertise and materials with fellow teachers who want to bring innovation to
+        the classroom.
       </div>
     </div>
-    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mat-elevation-z1 px-4 py-4 h-auto">
-      <div>
-        <div class="w-full border border-dashed rounded mb-2" wsAuthDragDrop (fileDropped)="onDrop($event)">
+    <div *ngIf="!isPathFinders" class="py-2 w-full md:w-1/2 lg:w-1/2 xl:w-1/2 pr-2">
+      <div i18n>
+        I hereby declare that my contribution (i.e the complete material in case of new material or
+        any additions / modifications in case of a new version release) does not violate any
+        copyright laws or infringe upon copyrights, trademark or intellectual property rights of
+        clients, vendors or third parties. I further declare that my contribution constitutes my own
+        work, that any sources on which I relied in its creation have been acknowledged and that all
+        necessary permissions are in place wherever permission is required due to the nature or
+        source of the content. Proof of such permission has been submitted along with my
+        contribution as supporting documentation. I understand that I may be held responsible for
+        any third party claims that may arise from any breach of confidentiality or breach of
+        intellectual property rights or breach of copyrights of third party/ies; and that
+        disciplinary actions may be initiated against me by the Company if my work leads to the
+        violation of any copyright or intellectual property rights.
+      </div>
+    </div>
+    <div class="py-2 md:w-1/2 lg:w-1/2 xl:w-1/2 mat-elevation-z1 px-4 py-4 h-auto">
+      <div *ngIf="isFord" class="py-2">
+        <mat-radio-group [(ngModel)]="inputType" aria-label="Select an option">
+          <mat-radio-button value="file">File</mat-radio-button>
+          <mat-radio-button value="url">URL</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div *ngIf="inputType === 'file'">
+        <div
+          class="border border-dashed rounded mb-2"
+          wsAuthDragDrop
+          (fileDropped)="onDrop($event)"
+        >
           <div class="flex flex-col h-32 py-4 items-center justify-around">
             <div i18n>Drag and Drop file here</div>
             <div i18n>or</div>
             <div>
-              <button mat-raised-button class="primary-button" (click)="fileInput.click()" i18n>
-                Browse files
+              <button
+                mat-raised-button
+                [ngClass]="{
+                  'pathFinders-primary-button': isPathFinders
+                }"
+                [color]="!isPathFinders ? 'primary' : ''"
+                (click)="fileInput.click()"
+                i18n
+              >
+                Browse Files
               </button>
-              <input #fileInput type="file" style="display: none;" accept=".mp3,.pdf"
-                (change)="onDrop($event.target.files[0]); fileInput.value = null" />
+              <input
+                #fileInput
+                type="file"
+                style="display: none;"
+                [accept]="isPathFinders ? '.mp3,.pdf' : '.mp3,.pdf,.mp4'"
+                (change)="onDrop($event.target.files[0]); fileInput.value = null"
+              />
             </div>
           </div>
         </div>
-        <div class="mb-2" i18n>
-          Accepted file type: pdf, audio
+        <div *ngIf="isPathFinders" class="mb-2" i18n>
+          Accepted file type: .pdf, .mp3
+        </div>
+        <div *ngIf="!isPathFinders" class="mb-2" i18n>
+          Accepted file type: .pdf, .mp3, .mp4
         </div>
         <div class="mb-2">
           <ng-container i18n>Max file size: </ng-container>
           <ng-container>{{ maxSize }}</ng-container>
           <ng-container i18n>MB</ng-container>
         </div>
-        <div class="mt-6 flex flex-row flex-wrap" *ngIf="file">
+        <div class="mt-6 flex flex-row flex-wrap" *ngIf="file || fileName">
           <div class="w-full lg:w-1/3 xl:w-1/3 font-bold">
-            {{ file.name }}
+            {{ fileName || file.name }}
           </div>
-          <div class="w-full lg:w-2/3 xl:w-2/3 ">
+          <div class="w-full lg:w-2/3 xl:w-2/3">
             <mat-progress-bar [color]="'primary'" [mode]="'buffer'" [value]="percentage">
             </mat-progress-bar>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="inputType === 'url'">
+        <div class="margin-top-xs">
+          <p class="font-weight-bold margin-remove-bottom" i18n>
+            Link
+          </p>
+          <mat-form-field appearance="outline" class="margin-top-xs w-full">
+            <input
+              type="url"
+              matInput
+              [(ngModel)]="artifactUrl"
+              i18n-placeholder
+              placeholder="Enter or paste URL here"
+            />
+          </mat-form-field>
+        </div>
+        <div class="flex margin-top-xs w-full flex-col lg:flex-row">
+          <div class="w-full">
+            <p class="font-weight-bold margin-remove-bottom" i18n>
+              Is It Available on internet ?
+            </p>
+            <mat-form-field appearance="outline" class="margin-top-xs">
+              <mat-select [(ngModel)]="isInIntranet" placeholder="e.g. Yes">
+                <mat-option [value]="false" i18n>Yes</mat-option>
+                <mat-option [value]="true" i18n>No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="w-full sm:margin-top-xs">
+            <p class="font-weight-bold margin-remove-bottom" i18n>
+              Opens in a new tab?
+            </p>
+            <mat-form-field appearance="outline" class="margin-top-xs">
+              <mat-select [(ngModel)]="isIframeSupported" placeholder="e.g. Yes">
+                <mat-option [value]="'No'" i18n>Yes</mat-option>
+                <mat-option [value]="'Yes'" i18n>No</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="flex flex-middle margin-top-xs padding-top-l">
+  <div *ngIf="isPathFinders" class="flex flex-middle margin-top-xs padding-top-l">
     <mat-checkbox [(ngModel)]="isChecked"></mat-checkbox>
     <p class="margin-left-xs margin-remove-bottom">
       <span i18n>I understand the </span>
-      <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr(ipr)" i18n>Terms and
-        Conditions</span>
+      <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr(ipr)" i18n
+        >Terms and Conditions</span
+      >
     </p>
   </div>
 
-  <div class="example-button-row float-right">
+  <div *ngIf="!isPathFinders" class="flex flex-middle margin-top-xs padding-top-l">
+    <mat-checkbox [(ngModel)]="isChecked"></mat-checkbox>
+    <p class="margin-left-xs margin-remove-bottom">
+      <span i18n>I understand the above Terms and Conditions</span>
+    </p>
+  </div>
+
+  <div class="py-5 example-button-row float-right">
     <button mat-button i18n (click)="back()">Cancel</button>
-    <button (click)="storeData()" [disabled]="!enableUpload" mat-raised-button class="primary-button" i18n>
-      Continue to Description
+    <button
+      (click)="storeData()"
+      [disabled]="!enableUpload"
+      mat-raised-button
+      [ngClass]="{
+        'pathFinders-primary-button': isPathFinders
+      }"
+      [color]="!isPathFinders ? 'primary' : ''"
+      i18n
+    >
+      Continue To Description
     </button>
   </div>
 </div>
@@ -83,37 +180,42 @@ path
 <ng-template #ipr>
   <div class="margin-top-m margin-bottom-m">
     <div style="position: relative;">
-      <h3 class="mat-h3 font-weight-bold margin-remove-bottom" i18n>Resource Hub Terms & Conditions</h3>
-      <button class="close-button primary-button" (click)=" closeIpr()">
+      <h3 class="mat-h3 font-weight-bold margin-remove-bottom" i18n>
+        Resource Hub Terms & Conditions
+      </h3>
+      <button class="close-button primary-button" (click)="closeIpr()">
         <mat-icon aria-label="Next" role="button">close</mat-icon>
       </button>
     </div>
     <p class="mat-body margin-top-l" i18n>
       The User agrees when uploading a resource, the following:
-      <br>
-      <br>
-      I hereby declare that my contribution (i.e the complete material in case of new material or any additions /
-      modifications in case of a new version release) does not violate any copyright laws or infringe upon copyrights,
-      trademark or intellectual property rights of clients, vendors or third parties. I further declare that my
-      contribution
-      constitutes my own work, that any sources on which I relied in its creation have been acknowledged and that all
-      necessary permissions are in place wherever permission is required due to the nature or source of the content.
-      Proof of
-      such permission has been submitted along with my contribution as supporting documentation.
-      <br>
-      <br>
-      I understand that I may be held responsible for any third party claims that may arise from any breach of
-      confidentiality
-      or breach of intellectual property rights or breach of copyrights of third party/ies; and that legal action may be
-      initiated against me by the Foundation if my work leads to the violation of any copyright or intellectual property
-      rights.
+      <br />
+      <br />
+      I hereby declare that my contribution (i.e the complete material in case of new material or
+      any additions / modifications in case of a new version release) does not violate any copyright
+      laws or infringe upon copyrights, trademark or intellectual property rights of clients,
+      vendors or third parties. I further declare that my contribution constitutes my own work, that
+      any sources on which I relied in its creation have been acknowledged and that all necessary
+      permissions are in place wherever permission is required due to the nature or source of the
+      content. Proof of such permission has been submitted along with my contribution as supporting
+      documentation.
+      <br />
+      <br />
+      I understand that I may be held responsible for any third party claims that may arise from any
+      breach of confidentiality or breach of intellectual property rights or breach of copyrights of
+      third party/ies; and that legal action may be initiated against me by the Foundation if my
+      work leads to the violation of any copyright or intellectual property rights.
     </p>
     <div class="flex justify-center">
-      <button type="button" mat-raised-button class="margin-top-m primary-button"
-        (click)="isChecked = !isChecked; closeIpr()">
+      <button
+        type="button"
+        mat-raised-button
+        class="margin-top-m primary-button"
+        (click)="isChecked = !isChecked; closeIpr()"
+      >
         <div class="flex flex-middle justify-center">
           <mat-icon class="text-white">check</mat-icon>
-          <p class="text-white margin-remove-bottom agree-text" i18n> I AGREE</p>
+          <p class="text-white margin-remove-bottom agree-text" i18n>I Agree</p>
         </div>
       </button>
     </div>

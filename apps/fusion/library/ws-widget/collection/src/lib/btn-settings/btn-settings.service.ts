@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Injectable, LOCALE_ID, Inject } from '@angular/core'
 import { ConfigurationsService, NsInstanceConfig, UserPreferenceService } from '@ws-widget/utils'
 
@@ -41,6 +38,9 @@ export class BtnSettingsService {
     this.applyThemeMode(isDarkMode || false)
     // setup current locale Setting
     this.setLocaleSetting()
+    if (this.configurationsSvc.userPreference) {
+      this.configurationsSvc.completedTour = (this.configurationsSvc.userPreference.completedTour as boolean)
+    }
     this.notifyOnChange = true
   }
 

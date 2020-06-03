@@ -1,9 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-http://http-url
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 // @ts-check
 // Protractor configuration file, see link for more information
-http://http-url
+// https://github.com/angular/protractor/blob/master/lib/config.ts
 
 const { SpecReporter } = require('jasmine-spec-reporter');
 
@@ -19,7 +16,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   directConnect: true,
-http://http-url
+  baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

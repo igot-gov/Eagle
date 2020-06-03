@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 export const JSON_MAP: any = {
   futureland: 'lex_auth_012844607021940736184',
   'learning-lead-country-austria': 'lex_auth_012844604659965952191',
@@ -14,21 +11,21 @@ export const JSON_MAP: any = {
   'gp-marketing': 'lex_auth_012844607619547136215',
   sustainability: 'lex_auth_012844600412307456217',
   'learning-digitalization': 'lex_auth_012844606117240832222',
-path
-path
-path
-path
+  'siemens-virtual-collaboration': 'lex_auth_012844599931240448177',
+  'siemens-elearning-china': 'lex_auth_012844605785243648180',
+  'siemens-digital-enterprise': 'lex_auth_012844607645949952186',
+  'siemens-core-learning-programs': 'lex_auth_012844604194291712197',
   'mindfulness-emotional-intelligence': 'lex_auth_012844606912471040204',
-path
+  'siemens-cof-china': 'lex_auth_012844601056452608223',
   'unconscious-bias': 'lex_auth_012844600088494080178',
   communications: 'lex_auth_012844603245043712181',
   'use-it': 'lex_auth_012844604000002048190',
   'supply-chain-management': 'lex_auth_012844606529683456198',
   'zeitarbeit-wird-digital': 'lex_auth_012844601371107328206',
   sds: 'lex_auth_012844606190526464212',
-path
+  'new-@-siemens': 'lex_auth_012844606703165440216',
   ehs: 'lex_auth_012844607422660608219',
-path
+  'siemens-it-going-forward': 'lex_auth_012844603943198720179',
   nordics: 'lex_auth_012844605822877696187',
   'customer-value-co-creation': 'lex_auth_012844601185951744194',
   'digital-enterprise-in-process-industries': 'lex_auth_012844606090027008207',
@@ -36,10 +33,10 @@ path
   technologies: 'lex_auth_012844601694650368174',
   'office-365': 'lex_auth_012844604111085568182',
   'your-development': 'lex_auth_012844606269849600189',
-path
+  'siemens-sales-learning': 'lex_auth_012844600394006528193',
   'agile-cosmos': 'lex_auth_012844606964596736201',
-path
-path
+  'siemens-region-austral-andina': 'lex_auth_012844602810310656210',
+  'siemens-pa-learning': 'lex_auth_012844606655488000220',
   'use-it-china-learning-portal': 'lex_auth_012844607876997120225',
   // leadership: 'lex_auth_012844607722192896175',
   'digital-basics-for-sales': 'lex_auth_012844604328591360183',
@@ -48,7 +45,7 @@ path
   omnetric: 'lex_auth_012844604552699904209',
   'sie-sales': 'lex_auth_012844606738522112218',
   'learning-seimens-mobility': 'lex_auth_012844604637782016226',
-path
+  'siemens-channel-hub': 'lex_auth_0128445903107194886',
   digitalization: 'lex_auth_0128445940975943685',
   kompetenzmanagement: 'lex_auth_012844604812648448203',
 }

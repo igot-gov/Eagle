@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, Input } from '@angular/core'
 import { CounterService } from '../../services/counter.service'
 import { TFetchStatus } from '@ws-widget/utils'
@@ -8,7 +5,7 @@ import { IWsStatsConfig } from '../../models/ocm.model'
 
 import { IWsCounterPlatformResponse, IWsCounterInfyMeResponse } from '../../models/counter.model'
 
-path
+type TStatTitleKey = 'lex' | 'infyme'
 @Component({
   selector: 'ws-app-adoption-dashboard',
   templateUrl: './adoption-dashboard.component.html',
@@ -16,13 +13,13 @@ path
 })
 export class AdoptionDashboardComponent implements OnInit {
   @Input() config: IWsStatsConfig | null = null
-path
+  lexCounterData: IWsCounterPlatformResponse | null = null
   infyMeCounterData: IWsCounterInfyMeResponse | null = null
-path
+  lexStatFetchStatus: TFetchStatus = 'none'
   infyMeStatFetchStatus: TFetchStatus = 'none'
 
   stats: { title: string; titleKey: string; iconName: string; count: number }[] = []
-path
+  currentStat: TStatTitleKey = 'lex'
   counterEnabled = false
   constructor(private counterSvc: CounterService) {}
 
@@ -33,14 +30,14 @@ path
     // this.counterEnabled = counterStatus.isAvailable
     this.counterEnabled = true
     // }
-path
+    this.currentStat = 'lex'
     this.statsClicked()
   }
 
   statsClicked() {
     switch (this.currentStat) {
-path
-path
+      case 'lex': {
+        this.lexStatFetchStatus = 'fetching'
         this.fetchLexCounterData()
         break
       }
@@ -55,14 +52,14 @@ path
   fetchLexCounterData() {
     this.counterSvc.fetchPlatformCounterData().subscribe(
       data => {
-path
-path
-path
+        this.lexCounterData = data
+        this.lexStatFetchStatus = 'done'
+        if (this.lexCounterData) {
           this.processLexCounterData()
         }
       },
       () => {
-path
+        this.lexStatFetchStatus = 'error'
       },
     )
   }
@@ -83,27 +80,27 @@ path
   }
 
   processLexCounterData() {
-path
-path
-path
+    const lexCounterData = this.lexCounterData
+    if (lexCounterData) {
+      this.stats = this.stats.filter(stat => stat.titleKey !== 'lex')
       this.stats.push(
         {
-path
-path
+          title: 'Total unique learners on LEX',
+          titleKey: 'lex',
           iconName: 'people',
-path
+          count: lexCounterData.users[lexCounterData.users.length - 1].count,
         },
         {
           title: 'Average request per second',
-path
+          titleKey: 'lex',
           iconName: 'access_time',
-path
+          count: lexCounterData.load[lexCounterData.load.length - 1].count,
         },
         {
           title: 'Active Learners in last 5 mins',
-path
+          titleKey: 'lex',
           iconName: 'notifications',
-path
+          count: lexCounterData.learners[lexCounterData.learners.length - 1].count,
         },
       )
     }

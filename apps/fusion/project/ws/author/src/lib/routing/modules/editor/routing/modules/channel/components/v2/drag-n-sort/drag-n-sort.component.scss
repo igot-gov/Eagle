@@ -1,0 +1,36 @@
+.container {
+  min-width: 100px;
+  width: 110px;
+  height: 110px;
+  position: relative;
+  cursor: pointer;
+
+  &.sortable.dragging {
+    background: none;
+    border: 1px dashed black;
+    color: transparent;
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: transparent;
+  width: 110px;
+  height: 110px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+}
+
+iframe {
+  width: 110px;
+  height: 110px;
+  pointer-events: none;
+}
+
+.image {
+  width: 110px;
+  height: 110px;
+}

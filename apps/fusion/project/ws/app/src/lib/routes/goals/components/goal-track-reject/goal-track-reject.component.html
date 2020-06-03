@@ -1,6 +1,3 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <main class="my-4">
   <h3 *ngIf="!trackGoal?.rejected?.length" class="text-center mat-title" i18n>No one has rejected this goal</h3>
   <mat-card *ngFor="let reject of trackGoal?.rejected" class="mb-4">
@@ -10,7 +7,7 @@
     <section *ngIf="shareAgainStatus[reject?.sharedWith] !== 'fetching'">
       <div class="flex justify-between items-center">
         <div class="mat-title margin-bottom-xs">{{ reject?.sharedWith?.name }}</div>
-        <button *ngIf="!shareAgainApiProgress" mat-icon-button (click)="shareAgain(reject?.sharedWith?.userId)"
+        <button name="share-button-goal-track-reject" *ngIf="!shareAgainApiProgress" mat-icon-button (click)="shareAgain(reject?.sharedWith?.userId)"
           matTooltip="Share Again" i18n-matTooltip>
           <mat-icon>share</mat-icon>
         </button>

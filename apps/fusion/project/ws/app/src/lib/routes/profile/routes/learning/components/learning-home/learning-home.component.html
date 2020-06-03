@@ -1,9 +1,6 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
 <nav class="margin-top-s" mat-align-tabs="center" mat-stretch-tabs mat-tab-nav-bar>
-  <a mat-tab-link *ngIf="enabledTab?.learningHistory?.available" [routerLink]="'/app/profile/learning/history'" routerLinkActive
-    #rlaHistory="routerLinkActive" [active]="rlaHistory.isActive">
+  <a mat-tab-link *ngIf="enabledTab?.learningHistory?.available" [routerLink]="'/app/profile/learning/history'"
+    routerLinkActive #rlaHistory="routerLinkActive" [active]="rlaHistory.isActive">
     <mat-icon>
       date_range
     </mat-icon>
@@ -11,8 +8,8 @@
       History
     </span>
   </a>
-  <a mat-tab-link *ngIf="enabledTab?.learningTime?.available" [routerLink]="'/app/profile/learning/time'" routerLinkActive
-    #rlaTime="routerLinkActive" [active]="rlaTime.isActive">
+  <a mat-tab-link *ngIf="enabledTab?.learningTime?.available" [routerLink]="'/app/profile/learning/time'"
+    routerLinkActive #rlaTime="routerLinkActive" [active]="rlaTime.isActive">
     <mat-icon>
       history
     </mat-icon>

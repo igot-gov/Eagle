@@ -1,20 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, OnChanges } from '@angular/core'
-import { NavigatorService } from '../../../../services/navigator.service'
-import { TFetchStatus, ValueService, LoggerService, ConfigurationsService } from '@ws-widget/utils'
+import { Component, OnChanges, OnInit } from '@angular/core'
+import { MatListOption, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
-import {
-  INavigatorFilter,
-  IProfile,
-  ICommonData,
-  ILpData,
-} from '../../../../models/navigator.model'
-import { MatSnackBar, MatListOption } from '@angular/material'
 import { BtnGoalsService, NsGoal } from '@ws-widget/collection'
-import { MultilineSnackbarComponent } from '../../../../components/multiline-snackbar/multiline-snackbar.component'
+import { ConfigurationsService, TFetchStatus, ValueService } from '@ws-widget/utils'
 import { map } from 'rxjs/operators'
+import { MultilineSnackbarComponent } from '../../../../components/multiline-snackbar/multiline-snackbar.component'
+import { ICommonData, ILpData, INavigatorFilter, IProfile } from '../../../../models/navigator.model'
+import { NavigatorService } from '../../../../services/navigator.service'
 
 @Component({
   selector: 'ws-app-result',
@@ -37,7 +29,7 @@ export class ResultComponent implements OnInit, OnChanges {
   commonsData: ICommonData[] = []
 
   isLtMedium$ = this.valueSvc.isLtMedium$
-  lpdata = this.route.snapshot.data.lpdata.data
+  lpdata: ILpData[] = this.route.snapshot.data.lpdata.data
   screenSizeIsLtMedium = false
   sideNavBarOpened = false
   suggestedClip: any[] = []
@@ -57,11 +49,9 @@ export class ResultComponent implements OnInit, OnChanges {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
-    private loggerSvc: LoggerService,
     private btnGoalsSvc: BtnGoalsService,
     private configSvc: ConfigurationsService,
   ) {
-    this.loggerSvc.log('check the route', this.route.snapshot)
     this.technologies = []
     this.skillsList = []
     this.filterList = []
@@ -73,14 +63,17 @@ export class ResultComponent implements OnInit, OnChanges {
         this.skillsList = params.selection.split(',').filter((item: string) => item.length)
         this.suggestedLp = []
         this.otherLp = []
-        this.loggerSvc.log('the select list', this.skillsList)
         this.clipLists()
 
       }
       if (!this.skillsList.length) {
         this.skillsList.push('Web Development')
       }
-
+      this.lpdata.forEach(lp => {
+        this.navSvc.fetchImageForContentID(lp.linked_program).subscribe(res => {
+          lp.lp_image = res[0].appIcon
+        })
+      })
       // this.loggerSvc.log('LP data check', this.lpdata)
       Object.values(this.lpdata).forEach((lp: any) => {
         const allTech: string[] = []
@@ -105,7 +98,6 @@ export class ResultComponent implements OnInit, OnChanges {
       // this.loggerSvc.log('Commons Data', this.commonsData)
     })
 
-    this.loggerSvc.log('suggested before', this.suggestedLp)
     this.clipLists()
     if (this.configSvc.instanceConfig) {
       this.defaultThumbnail = this.configSvc.instanceConfig.logos.defaultContent
@@ -117,7 +109,6 @@ export class ResultComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.loggerSvc.log('On changes')
     this.clipLists()
   }
   hasCommonTech(arr1: string[], arr2: string[]) {
@@ -125,17 +116,14 @@ export class ResultComponent implements OnInit, OnChanges {
   }
 
   clipLists() {
-    this.loggerSvc.log('clip called')
     if (this.suggestedLp.length > 6) {
       this.suggestedClip = this.suggestedLp
       this.suggestedLp = this.suggestedClip.splice(0, 6)
-      this.loggerSvc.log('check splice', this.suggestedClip, this.suggestedLp)
       this.shouldClipSuggested = true
     }
     if (this.otherLp.length > 6) {
       this.otherClip = this.otherLp
       this.otherLp = this.otherLp.splice(0, 6)
-      this.loggerSvc.log('check splice', this.otherClip, this.otherLp)
       this.shouldClipOthers = true
     }
   }
@@ -150,9 +138,6 @@ export class ResultComponent implements OnInit, OnChanges {
       }
       this.filterList.push(data)
     })
-    this.loggerSvc.log('filter list', this.filterList)
-    this.loggerSvc.log('Suggested', this.suggestedLp)
-    this.loggerSvc.log('Other lp', this.otherLp)
     // this.snackBar.open('Select your Learning Paths')
   }
 
@@ -166,7 +151,6 @@ export class ResultComponent implements OnInit, OnChanges {
   addSkill(skill: string) {
     if (!this.skillsList.includes(skill)) {
       this.skillsList.push(skill)
-      this.loggerSvc.log('after push', this.skillsList)
       this.router.navigate(['/app/infy/navigator/tech/learning-path/result'], {
         queryParams: {
           selection: this.skillsList.join(','),
@@ -179,28 +163,23 @@ export class ResultComponent implements OnInit, OnChanges {
     if (type === 'suggested' && this.suggestedClip.length) {
       const lp = this.suggestedClip.splice(0, 6)
       this.suggestedLp = this.suggestedLp.concat(lp)
-
-      this.loggerSvc.log('After push ', this.suggestedLp)
       if (!this.suggestedClip.length) {
         this.shouldClipSuggested = false
       }
       if (this.suggestedLp.length > 6) {
         this.displayLessSuggested = true
       }
-      this.loggerSvc.log('less', this.displayLessSuggested)
     }
     if (type === 'other' && this.otherClip.length) {
       const lp = this.otherClip.splice(0, 6)
       this.otherLp = this.otherLp.concat(lp)
 
-      this.loggerSvc.log('After push ', this.otherLp)
       if (!this.otherClip.length) {
         this.shouldClipOthers = false
       }
       if (this.otherLp.length > 6) {
         this.displayLessOthers = true
       }
-      this.loggerSvc.log('less', this.displayLessOthers)
     }
   }
 
@@ -209,7 +188,6 @@ export class ResultComponent implements OnInit, OnChanges {
       const lp = this.suggestedLp.splice(this.suggestedLp.length - 6, 6)
       this.suggestedClip = this.suggestedClip.concat(lp)
 
-      this.loggerSvc.log('After push ', this.suggestedClip)
       if (this.suggestedLp.length <= 6) {
         this.displayLessSuggested = false
       }
@@ -221,7 +199,6 @@ export class ResultComponent implements OnInit, OnChanges {
       const lp = this.otherLp.splice(this.otherLp.length - 6, 6)
       this.otherClip = this.otherClip.concat(lp)
 
-      this.loggerSvc.log('After push ', this.otherClip)
       if (this.otherLp.length <= 6) {
         this.displayLessOthers = false
       }
@@ -232,7 +209,6 @@ export class ResultComponent implements OnInit, OnChanges {
   }
 
   techChange(technology: string) {
-    this.loggerSvc.log('tech changed', technology)
     let count = 0
     this.filterList.forEach((tech: INavigatorFilter) => {
       if (tech.technologyName === technology) {
@@ -254,14 +230,12 @@ export class ResultComponent implements OnInit, OnChanges {
 
     const goalsData = selectedLp.map((option: MatListOption) => String(option.value))
 
-    this.loggerSvc.log(goalsData, goalsData[0], this.suggestedLp)
-
     if (type === 'suggested') {
       goalsData.forEach((goal: string) => {
         const duration = this.suggestedLp.find((lpdata: ILpData) => {
           return lpdata.lp_id === Number(goal)
         }).profiles[0].profile_time
-        // console.log('duration', duration)
+        // //console.log('duration', duration)
         const id = this.commonsData.find((commonData: ICommonData) => {
           return commonData.lp_id === goal
         })
@@ -279,7 +253,7 @@ export class ResultComponent implements OnInit, OnChanges {
         const duration = this.otherLp.find((lpdata: ILpData) => {
           return lpdata.lp_id === Number(goal)
         }).profiles[0].profile_time
-        // console.log('duration', duration)
+        // //console.log('duration', duration)
         const id = this.commonsData.find((commonData: ICommonData) => {
           return commonData.lp_id === goal
         })
@@ -294,7 +268,7 @@ export class ResultComponent implements OnInit, OnChanges {
       })
     }
 
-    // console.log('Goal requests', goalRequests)
+    // //console.log('Goal requests', goalRequests)
 
     if (!goalRequests.length) {
       this.goalsAddingInProgess = false
@@ -302,7 +276,6 @@ export class ResultComponent implements OnInit, OnChanges {
     } else {
 
       this.btnGoalsSvc.createGoals(goalRequests).subscribe(response => {
-        this.loggerSvc.log('result', response)
         for (let i = 0; i < response.length; i += 1) {
           let goalName = ''
           if (type === 'suggested') {

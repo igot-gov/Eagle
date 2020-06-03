@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import {
   Component,
   OnInit,
@@ -60,27 +57,27 @@ export class ClassDiagramComponent implements OnInit, OnChanges, OnDestroy, Afte
 
   ngOnInit() {
     this.tmpListener = this.renderer.listen(
-path
-path
+      (this.classDiagramContainer ? this.classDiagramContainer.nativeElement : ''), 'dragover', (event: any) => {
+        event.preventDefault()
       })
     this.tmpListener = this.renderer.listen(
-path
+      (this.classDiagramContainer ? this.classDiagramContainer.nativeElement : ''), 'drop', (event: any) => {
         // tslint:disable-next-line:max-line-length
         if (
-path
-path
+          !['statemachine-class-diagram', 'card-pile'].includes(event.target.id) &&
+          !event.target.classList.contains('new-class')
         ) {
-path
+          this.drop(event)
           return false
         }
         return
       })
     this.tmpListener = this.renderer.listen(
-path
-path
-path
-path
-path
+      (this.classDiagramContainer ? this.classDiagramContainer.nativeElement : ''), 'click', (event: any) => {
+        if (event.target.className === 'drag-icon') {
+          this.jsPlumbRemoved(event)
+        } else if (event.target.nodeName === 'LI') {
+          this.removeListItems(event)
         }
       })
     this.lintErrorRemover(this.tmpListener)
@@ -210,53 +207,53 @@ path
     })
   }
 
-path
-path
+  drag(ev: any) {
+    ev.dataTransfer.setData('text', ev.target.textContent)
   }
 
-path
-path
-path
-path
+  drop(event: any) {
+    let data = event.dataTransfer.getData('text').trim()
+    event.target.id = event.target.id ? event.target.id : event.target.offsetParent.id
+    if (event.target.id.indexOf('cls') > -1) {
       const clsName = data.substring(0, 1).toLocaleUpperCase() + data.substring(1)
-path
-path
-path
-path
+      const eventTarget = document.getElementById(event.target.id)
+      if (eventTarget) {
+        eventTarget.innerHTML = ''
+        eventTarget.innerHTML = ` < ul > <li class='text-center' > ${clsName} </li></ul > `
       }
     } else {
       const access = this.selectedAccess === 'public' ? '+ ' : this.selectedAccess === 'private' ? '- ' : '# '
       data = access + data
-path
-path
-path
-path
-path
+      const eventTarget = document.getElementById(event.target.id)
+      if (eventTarget && eventTarget.getElementsByTagName('ul').length > 0) {
+        const eventTargetId = document.getElementById(event.target.id)
+        if (eventTargetId) {
+          eventTargetId.getElementsByTagName('ul')[0].innerHTML += ` < li > ${data} </li>`
         }
       } else {
-path
-path
-path
+        const eventTargetId = document.getElementById(event.target.id)
+        if (eventTargetId) {
+          eventTargetId.innerHTML = `<ul><li>${data}</li></ul>`
         }
       }
     }
   }
 
-path
-path
+  jsPlumbRemoved(event: any) {
+    const id = event.target.offsetParent.id
     const classDiagramDiv = document.getElementById('statemachine-class-diagram')
     if (this.jsPlumbInstance) {
       (this.jsPlumbInstance.select({ source: id as string }) as any).delete();
       (this.jsPlumbInstance.select({ target: id as string }) as any).delete()
     }
     if (classDiagramDiv) {
-path
+      classDiagramDiv.removeChild(event.target.parentNode)
     }
   }
 
-path
-path
-path
+  removeListItems(event: any) {
+    const parent = event.target.offsetParent.id
+    if (event.target.parentNode.childNodes.length === 1) {
       if (parent.indexOf('attr') >= 0) {
         const parentById = document.getElementById(parent)
         if (parentById) {
@@ -274,7 +271,7 @@ path
         }
       }
     } else {
-path
+      event.target.parentNode.removeChild(event.target)
     }
   }
 

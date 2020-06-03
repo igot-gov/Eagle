@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -13,7 +10,10 @@ const API_END_POINTS = {
   followers: `${CONSTANTS.NODE_API_BASE}/getFollowers`,
   getAll: `${CONSTANTS.NODE_API_BASE}/getAll`,
   getFollowers: `${CONSTANTS.NODE_API_BASE}/getfollowersv2`,
+  getFollowersv3: `${CONSTANTS.NODE_API_BASE}/getfollowersv3`,
   getFollowing: `${CONSTANTS.NODE_API_BASE}/getfollowing`,
+  getFollowingv3: (isIntranet: boolean, isStandAlone: boolean) =>
+    `${CONSTANTS.NODE_API_BASE}/getfollowingv3?isIntranet=${isIntranet}&isStandAlone=${isStandAlone}`,
   unFollow: `${CONSTANTS.NODE_API_BASE}/unfollow`,
 }
 
@@ -21,16 +21,19 @@ export const followApi = Router()
 
 followApi.post('/fetchAll', async (req, res) => {
   try {
+    const userid = extractUserIdFromRequest(req)
     const rootOrg = req.header('rootOrg')
     const org = req.header('org')
     if (!rootOrg || !org) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
+
     const requestBody = {
       ...req.body,
       org,
       rootOrg,
+      userid,
     }
     const response = await axios.post(API_END_POINTS.getAll, requestBody, axiosRequestConfig)
     res.status(response.status).send(response.data)
@@ -87,7 +90,7 @@ followApi.get('/following/:type', async (req, res) => {
 followApi.get('/getFollowing', async (req, res) => {
   try {
     const { type } = req.query
-    const userId = extractUserIdFromRequest(req)
+    const userId = req.query.wid || extractUserIdFromRequest(req)
 
     const rootOrg = req.header('rootOrg')
     const org = req.header('org')
@@ -104,6 +107,66 @@ followApi.get('/getFollowing', async (req, res) => {
     }
 
     const response = await axios.post(API_END_POINTS.getFollowing, requestBody, axiosRequestConfig)
+    res.json(response.data)
+  } catch (err) {
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || err)
+  }
+})
+
+followApi.post('/getFollowingv3', async (req, res) => {
+  try {
+    const rootOrg = req.header('rootOrg')
+    const org = req.header('org')
+
+    const isIntranet = req.query.isIntranet
+    const isStandAlone = req.query.isStandAlone
+
+    if (!rootOrg || !org) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+
+    const requestBody = {
+      org,
+      rootOrg,
+      ...req.body,
+    }
+
+    const response = await axios.post(
+      API_END_POINTS.getFollowingv3(isIntranet, isStandAlone),
+      requestBody,
+      axiosRequestConfig
+    )
+    res.json(response.data)
+  } catch (err) {
+    res
+      .status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.response.data) || err)
+  }
+})
+
+followApi.post('/getFollowersv3', async (req, res) => {
+  try {
+    const rootOrg = req.header('rootOrg')
+    const org = req.header('org')
+    if (!rootOrg || !org) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+
+    const requestBody = {
+      ...req.body,
+      org,
+      rootOrg,
+    }
+
+    const response = await axios.post(
+      API_END_POINTS.getFollowersv3,
+      requestBody,
+      axiosRequestConfig
+    )
     res.json(response.data)
   } catch (err) {
     res

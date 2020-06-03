@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
@@ -8,6 +5,8 @@ import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { NSQuiz } from '../../plugins/quiz/quiz.model'
 import { ActivatedRoute } from '@angular/router'
 import { WsEvents, EventService } from '@ws-widget/utils'
+import { ViewerUtilService } from '../../viewer-util.service'
+
 @Component({
   selector: 'viewer-quiz',
   templateUrl: './quiz.component.html',
@@ -15,8 +14,8 @@ import { WsEvents, EventService } from '@ws-widget/utils'
 })
 export class QuizComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | null = null
-  private telemetryIntervalSubscription: Subscription | null = null
   isFetchingDataComplete = false
+  forPreview = window.location.href.includes('/author/')
   isErrorOccured = false
   quizData: NsContent.IContent | null = null
   oldData: NsContent.IContent | null = null
@@ -31,6 +30,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private contentSvc: WidgetContentService,
     private eventSvc: EventService,
+    private viewSvc: ViewerUtilService,
   ) { }
 
   ngOnInit() {
@@ -53,31 +53,33 @@ export class QuizComponent implements OnInit, OnDestroy {
         }
         this.isFetchingDataComplete = true
       },
-      () => {
-      },
+      () => { },
     )
-    // this.telemetryIntervalSubscription = interval(30000).subscribe(() => {
-    //   if (this.quizData && this.quizData.identifier) {
-    //     this.raiseEvent(WsEvents.EnumTelemetrySubType.HeartBeat)
-    //   }
-    // })
   }
 
-  ngOnDestroy() {
+  async ngOnDestroy() {
+    if (this.activatedRoute.snapshot.queryParams.collectionId &&
+      this.activatedRoute.snapshot.queryParams.collectionType
+      && this.quizData) {
+      await this.contentSvc.continueLearning(this.quizData.identifier,
+                                             this.activatedRoute.snapshot.queryParams.collectionId,
+                                             this.activatedRoute.snapshot.queryParams.collectionType,
+      )
+    } else if (this.quizData) {
+      await this.contentSvc.continueLearning(this.quizData.identifier)
+    }
     if (this.quizData) {
       this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.quizData)
     }
     if (this.dataSubscription) {
       this.dataSubscription.unsubscribe()
     }
-    if (this.telemetryIntervalSubscription) {
-      this.telemetryIntervalSubscription.unsubscribe()
-    }
-
   }
 
   raiseEvent(state: WsEvents.EnumTelemetrySubType, data: NsContent.IContent) {
-
+    if (this.forPreview) {
+      return
+    }
     const event = {
       eventType: WsEvents.WsEventType.Telemetry,
       eventLogLevel: WsEvents.WsEventLogLevel.Info,
@@ -87,28 +89,28 @@ export class QuizComponent implements OnInit, OnDestroy {
         state,
         type: WsEvents.WsTimeSpentType.Player,
         mode: WsEvents.WsTimeSpentMode.Play,
-        courseId: null,
         content: data,
         identifier: data ? data.identifier : null,
-        isCompleted: true,
         mimeType: NsContent.EMimeTypes.QUIZ,
-        isIdeal: false,
         url: data ? data.artifactUrl : null,
       },
     }
     this.eventSvc.dispatchEvent(event)
-
   }
 
   private async transformQuiz(content: NsContent.IContent): Promise<NSQuiz.IQuiz> {
-    const quizJSON: NSQuiz.IQuiz =
-      await this.http
-        .get<any>(
-          content ? content.artifactUrl : '')
-        .toPromise()
-        .catch((_err: any) => {
-          // throw new DataResponseError('MANIFEST_FETCH_FAILED');
-        })
+    const artifactUrl = this.forPreview
+      ? this.viewSvc.getAuthoringUrl(content.artifactUrl)
+      : content.artifactUrl
+    let quizJSON: NSQuiz.IQuiz = await this.http
+      .get<any>(artifactUrl || '')
+      .toPromise()
+      .catch((_err: any) => {
+        // throw new DataResponseError('MANIFEST_FETCH_FAILED');
+      })
+    if (this.forPreview && quizJSON) {
+      quizJSON = this.viewSvc.replaceToAuthUrl(quizJSON)
+    }
     quizJSON.questions.forEach((question: NSQuiz.IQuestion) => {
       if (question.multiSelection && question.questionType === undefined) {
         question.questionType = 'mcq-mca'
@@ -118,7 +120,6 @@ export class QuizComponent implements OnInit, OnDestroy {
     })
     return quizJSON
   }
-
   private async setS3Cookie(contentId: string) {
     await this.contentSvc
       .setS3Cookie(contentId)

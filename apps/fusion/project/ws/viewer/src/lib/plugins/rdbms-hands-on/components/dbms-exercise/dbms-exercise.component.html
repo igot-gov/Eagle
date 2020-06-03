@@ -1,8 +1,5 @@
-<!--               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" -->
-<div class="refresh-btn">
-  <button title="Refresh Database" mat-icon-button color="primary" (click)="initializeDb(true)">
+<div class="flex flex-end">
+  <button title="Refresh Database" mat-icon-button color="primary"  (click)="initializeDb(true)">
     <mat-icon>refresh</mat-icon>
   </button>
 </div>
@@ -14,23 +11,23 @@
           'table-width-1-1': !dbStructure?.length,
           'table-width-1-2': dbStructure?.length
         }">
-        <div class="result">Write your query here</div>
-        <ace-editor class="code-container" [(text)]="contentData.query" theme="eclipse" [mode]="'sql'"
+        <h3 class="pl-2 ws-mat-primary-text rdbmsheadings">Write your query here</h3>
+        <ace-editor class="code-container" (textChanged)="raiseInputChange()" [(text)]="contentData.query" theme="eclipse" [mode]="'sql'"
           [options]="options" #queryEditor></ace-editor>
         <div class="padding-xs">
-          <button mat-raised-button color="primary" [disabled]="verified" (click)="verify()" i18n="button verify">
+          <button mat-raised-button color="primary" [disabled]="verified" (click)="verify() ; raiseClickEvent()" i18n="button verify">
             Verify
           </button>
-          <button mat-raised-button color="primary" [disabled]="submitted" class="margin-left-xs" (click)="submit()"
+          <button mat-raised-button color="primary" [disabled]="submitted" class="margin-left-xs" (click)="submit() ; raiseClickEvent()"
             i18n="button submit">
             Submit
           </button>
         </div>
       </div>
       <div class="table-result table-width-1-2 dbStructure-table" *ngIf="dbStructure?.length">
-        <div class="result">Database structure</div>
+        <h3 class="pl-2 ws-mat-primary-text rdbmsheadings">Database structure</h3>
         <div class="padding-xs" *ngFor="let db of dbStructure">
-          <span class="table-name">{{ db.tablename }}</span>
+          <span class="font-weight-bold">{{ db.tablename }}</span>
           <span> {{ ' ' + db.columnname }} </span>
         </div>
       </div>
@@ -41,18 +38,18 @@
           'table-width-1-1': !contentData.expectedOutput,
           'table-width-1-2': contentData.expectedOutput
         }">
-        <div class="result">Query Result</div>
+        <h3 class="pl-2 ws-mat-primary-text rdbmsheadings">Query Result</h3>
         <viewer-execution-result *ngIf="executedResult && executedResult?.data" [executedResult]="executedResult">
         </viewer-execution-result>
         <div class="margin-s" *ngIf="executedResult?.status?.message || errorMessage" [ngClass]="{
-            'query-success': executedResult?.validationStatus,
-            'query-failed': !executedResult?.validationStatus
+            'ws-mat-primary-text': executedResult?.validationStatus,
+            'ws-mat-warn-text': !executedResult?.validationStatus
           }">
           {{ executedResult?.status?.message || errorMessage }}
         </div>
       </div>
       <div class="table-result table-width-1-2" *ngIf="contentData.expectedOutput">
-        <div class="result">Expected Result</div>
+        <h3 class="pl-2 ws-mat-primary-text rdbmsheadings">Expected Result</h3>
         <viewer-execution-result *ngIf="expectedOutput && !loading" [executedResult]="expectedOutput">
         </viewer-execution-result>
         <div *ngIf="expectedOutputErrorMsg" class="query-failed">
@@ -61,14 +58,14 @@
       </div>
     </div>
     <div class="tell-text margin-top-s padding-s" [ngClass]="{
-        'query-success telltext-success': executedResult?.validationStatus,
-        'query-failed telltext-failed': !executedResult?.validationStatus
+        'ws-mat-primary-text': executedResult?.validationStatus,
+        'ws-mat-warn-text': !executedResult?.validationStatus
       }" *ngIf="telltext && !submissionResult">
       {{ telltext }}
     </div>
     <div class="tell-text margin-top-s padding-s" [ngClass]="{
-        'query-success telltext-success': submissionResult?.status,
-        'query-failed telltext-failed': !submissionResult?.status
+        'ws-mat-primary-text ': submissionResult?.status,
+        'ws-mat-warn-text ': !submissionResult?.status
       }" *ngIf="submissionResult">
       {{ submissionResult?.message }}
     </div>

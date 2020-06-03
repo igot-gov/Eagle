@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import {
   Component,
@@ -28,7 +25,7 @@ import { ActivatedRoute } from '@angular/router'
 
 const videoJsOptions: videoJs.PlayerOptions = {
   controls: true,
-  autoplay: true,
+  autoplay: false,
   preload: 'auto',
   fluid: false,
   techOrder: ['html5'],
@@ -67,7 +64,10 @@ export class PlayerAudioComponent extends WidgetBaseComponent
   ngOnInit() {
   }
   ngAfterViewInit() {
-    if (this.widgetData && this.widgetData.identifier) {
+    this.widgetData = {
+      ...this.widgetData,
+    }
+    if (this.widgetData && this.widgetData.identifier && !this.widgetData.url) {
       this.fetchContent()
     }
     if (this.widgetData.url) {
@@ -85,19 +85,46 @@ export class PlayerAudioComponent extends WidgetBaseComponent
   }
   private initializePlayer() {
     const dispatcher: telemetryEventDispatcherFunction = event => {
-      this.eventSvc.dispatchEvent(event)
+      if (this.widgetData.identifier) {
+        this.eventSvc.dispatchEvent(event)
+      }
     }
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
-        const continueLearningData = {
-          contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
-            this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
-          ...data,
+        if (this.activatedRoute.snapshot.queryParams.collectionType &&
+          this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+          const continueLearningData = {
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
+              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
+            resourceId: data.resourceId,
+            contextType: 'playlist',
+            dateAccessed: Date.now(),
+            data: JSON.stringify({
+              progress: data.progress,
+              timestamp: Date.now(),
+              contextFullPath: [this.activatedRoute.snapshot.queryParams.collectionId, data.resourceId],
+            }),
+          }
+          this.contentSvc
+            .saveContinueLearning(continueLearningData)
+            .toPromise()
+            .catch()
+        } else {
+          const continueLearningData = {
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
+              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
+            resourceId: data.resourceId,
+            dateAccessed: Date.now(),
+            data: JSON.stringify({
+              progress: data.progress,
+              timestamp: Date.now(),
+            }),
+          }
+          this.contentSvc
+            .saveContinueLearning(continueLearningData)
+            .toPromise()
+            .catch()
         }
-        this.contentSvc
-          .saveContinueLearning(continueLearningData)
-          .toPromise()
-          .catch()
       }
     }
     const fireRProgress: fireRealTimeProgressFunction = (identifier, data) => {
@@ -105,6 +132,10 @@ export class PlayerAudioComponent extends WidgetBaseComponent
         this.viewerSvc
           .realTimeProgressUpdate(identifier, data)
       }
+    }
+    let enableTelemetry = false
+    if (!this.widgetData.disableTelemetry && typeof (this.widgetData.disableTelemetry) !== 'undefined') {
+      enableTelemetry = true
     }
     const initObj = videoJsInitializer(
       this.audioTag.nativeElement,
@@ -114,8 +145,8 @@ export class PlayerAudioComponent extends WidgetBaseComponent
       fireRProgress,
       this.widgetData.passThroughData,
       ROOT_WIDGET_CONFIG.player.audio,
-      this.widgetData.resumePoint,
-      !(this.widgetData.disableTelemetry || false),
+      this.widgetData.resumePoint ? this.widgetData.resumePoint : 0,
+      enableTelemetry,
       this.widgetData,
       NsContent.EMimeTypes.MP3,
     )
@@ -136,7 +167,9 @@ export class PlayerAudioComponent extends WidgetBaseComponent
           )
         })
       }
-      initObj.player.src(this.widgetData.url)
+      if (this.widgetData.url) {
+        initObj.player.src(this.widgetData.url)
+      }
     })
   }
   async fetchContent() {

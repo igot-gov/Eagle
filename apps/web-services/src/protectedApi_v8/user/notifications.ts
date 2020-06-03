@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import axios from 'axios'
 import { Request, Response, Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
@@ -9,6 +6,8 @@ import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 export const notificationsApi: Router = Router()
+
+const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 const apiEndpoints = {
   notifications: `${CONSTANTS.NOTIFICATIONS_API_BASE}/v1`,
@@ -24,17 +23,17 @@ notificationsApi.patch('/settings', async (req: Request, res: Response) => {
       return
     }
     const userId = extractUserIdFromRequest(req)
-    const response = await axios
-      .patch(
-        apiEndpoints.settings(userId),
-        req.body,
-        { ...axiosRequestConfig, headers: { langCode, rootOrg } }
-      )
+    const response = await axios.patch(apiEndpoints.settings(userId), req.body, {
+      ...axiosRequestConfig,
+      headers: { langCode, rootOrg },
+    })
     return res.status(response.status).send(response.data)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -60,9 +59,11 @@ notificationsApi.get('/', async (req: Request, res: Response) => {
 
     return res.send(notificationData)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })
 
@@ -84,18 +85,16 @@ notificationsApi.patch(
         url += `/${notificationId}`
       }
       const response = await axios
-        .patch(
-          url,
-          req.body,
-          { ...axiosRequestConfig, headers: { rootOrg } }
-        )
+        .patch(url, req.body, { ...axiosRequestConfig, headers: { rootOrg } })
         .then((resp) => resp.data)
 
       return res.send(response)
     } catch (err) {
-      return res
-        .status((err && err.response && err.response.status) || 500)
-        .send(err)
+      return res.status((err && err.response && err.response.status) || 500).send(
+        (err && err.response && err.response.data) || {
+          error: GENERAL_ERROR_MSG,
+        }
+      )
     }
   }
 )
@@ -110,15 +109,16 @@ notificationsApi.get('/settings', async (req: Request, res: Response) => {
       return
     }
     const userId = extractUserIdFromRequest(req)
-    const response = await axios
-      .get(apiEndpoints.settings(userId), {
-        ...axiosRequestConfig,
-        headers: { rootOrg, langCode },
-      })
+    const response = await axios.get(apiEndpoints.settings(userId), {
+      ...axiosRequestConfig,
+      headers: { rootOrg, langCode },
+    })
     return res.status(response.status).send(response.data)
   } catch (err) {
-    return res
-      .status((err && err.response && err.response.status) || 500)
-      .send(err)
+    return res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: GENERAL_ERROR_MSG,
+      }
+    )
   }
 })

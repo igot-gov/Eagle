@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
@@ -24,8 +21,10 @@ export class SliderComponent implements OnInit {
   @Input() identifier!: string
   @Input() content!: ICarousel[]
   @Input() isSubmitPressed = false
-  @Output() data = new EventEmitter<{ content: ICarousel, isValid: Boolean }>()
+  @Output() data = new EventEmitter<{ content: any, isValid: Boolean }>()
   form!: FormGroup
+  emittingValue: any[] = []
+  formvalues = {}
 
   constructor(
     private uploadService: UploadService,
@@ -48,8 +47,31 @@ export class SliderComponent implements OnInit {
       distinctUntilChanged(),
     ).subscribe({
       next: () => {
+        this.emittingValue = []
+        this.paths.controls.map((carousel: FormGroup, index: number) => {
+          this.formvalues = {}
+          Object.keys(carousel.controls).forEach((control: any) => {
+            const abstractControl = carousel.get(control)
+            if (
+              control === 'redirectUrl' &&
+              abstractControl &&
+              abstractControl.value === '' &&
+              this.paths.at(index).controls.openInNewTab.value !== '') {
+              (this.paths.at(index).get('openInNewTab') as AbstractControl).setValue('')
+              // console.log(this.paths.at(index).controls.redirectUrl.)
+
+            }
+            if (abstractControl && abstractControl.value !== '') {
+              // this.paths.at(index).removeControl(control, null)
+              this.formvalues = { ...this.formvalues, [control]: abstractControl.value }
+            }
+
+          })
+          this.emittingValue.push(this.formvalues)
+        }
+        )
         this.data.emit({
-          content: this.form.value.iCarousel,
+          content: this.emittingValue,
           isValid: this.form.valid,
         })
       },
@@ -62,9 +84,9 @@ export class SliderComponent implements OnInit {
 
   addImageDetailsToForm(data?: ICarousel) {
     this.paths.push(this.formBuilder.group({
-      title: [data ? data.title || '' : '', Validators.required],
-      redirectUrl: [data ? data.redirectUrl || '' : '', Validators.required],
-      openInNewTab: [data ? data.openInNewTab || '_blank' : '_blank', Validators.required],
+      title: [data ? data.title || '' : ''],
+      openInNewTab: [data ? data.openInNewTab || '' : ''],
+      redirectUrl: [data ? data.redirectUrl || '' : ''],
       banners: this.formBuilder.group({
         xs: [data && data.banners ? data.banners.xs || '' : '', Validators.required],
         s: [data && data.banners ? data.banners.s || '' : '', Validators.required],

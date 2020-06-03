@@ -1,0 +1,1159 @@
+<mat-toolbar>
+  <a mat-icon-button [routerLink]="'/app/features'">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
+  <span i18n="page title: Rewards" class="margin-left-xs">Rewards And Recognition Dashboard</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+
+<mat-card class="intro-mat-card" *ngIf="users">
+  <div class="intro width-auto align">
+    <div class="margin-small align-items">
+      <div class="text-info width-auto display-items">
+        <div class="intro-text">
+          <span> {{userName}}</span>
+        </div>
+      </div>
+      <div class="text-hover">
+        <span class="mat-title" i18n>{{users.column2}}</span>
+      </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="text-hover align-center margin-small">
+      <div class="text-info child-display">{{users.TotalPoints}}</div>
+      <div class="mat-title" i18n>Current Points Balance</div>
+      <div class="margin-left-m">
+        <a class="button" mat-raised-button type="button" i18n>
+          Redeem
+        </a>
+      </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="align-items">
+      <div class="text-hover">
+        <span class="mat-title" i18n>Guild Group : {{users.column1}}</span>
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<!--Sales manager H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Sales Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex">
+      </mat-progress-bar>
+      <div class="text-float" i18n> Current Level : {{metrics.H1.level}} </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Certified'">
+        {{h1Stats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Professional'">
+        {{h1Stats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Master'"> {{h1Stats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Sales Objective"]}}% to Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Consultant Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Sales Consultant Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service manager H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Service Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Certified'">
+        {{h1Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Professional'">
+        {{h1Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Master'"> {{h1Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.ServiceRetention"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Service Retention"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Advisor Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Service Advisor Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service Teachnician H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Service Technician'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Certified'">
+        {{h1Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Professional'">
+        {{h1Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Master'"> {{h1Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Service Technician Training (Self) : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.IndividualTrainingStatus}}%</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+  </div>
+</div>
+<!--Parts manager H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Parts Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Certified'">
+        {{h1Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Professional'">
+        {{h1Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Master'"> {{h1Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Trade Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Trade Sales Objective"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Parts Sales Consultants Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.TrainingMix">
+      </mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Parts Sales Person Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<!--Sales consultant H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Sales Consultant'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Certified'">
+        {{h1Stats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Professional'">
+        {{h1Stats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Master'"> {{h1Stats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Training Status </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.SalesObjective"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service consultant H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Service Advisor'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Certified'">
+        {{h1Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Professional'">
+        {{h1Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h1Stats && metrics.H1.level==='Master'"> {{h1Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Consultant Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.TrainingMix"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.ServiceRetention"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Service Retention"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Parts Sales Consultant H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Parts Sales Consultant'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Trade Sales/Parts Purchases Performance </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.SalesObjective"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Sales Consultants Training (Self) : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<!--Dealer/Partner H1-->
+<div class="notifications-container mat-card" *ngIf="h1 && users.column2==='Dealer/Partner'">
+  <div class="group-name-container" matRipple role="button" (click)="show ? (show = false) : (show = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H1</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H1.level}} </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.CVPIndex"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Trade Sales/Parts Purchases Performance </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.SalesObjective"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <span i18n>Parts Sales Consultants Training (Self) : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h1Stats"> {{h1Stats["Sales Objective"]}}% to Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H1.ServiceRetention"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H1.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H1.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+
+<!--Sales manager H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Sales Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Sales Objective"]}}% to Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Consultant Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Sales Consultant Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service manager H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Service Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.ServiceRetention"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Service Retention"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Advisor Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Service Advisor Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service Teachnician H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Service Technician'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <span class="width-1-5" i18n>Service Technician Training (Self) : </span>
+      <span class="width-1-5" class="mat-title text-color margin-top-l"
+        i18n>{{metrics.H2.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+  </div>
+</div>
+<!--Parts manager H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Parts Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Trade Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Trade Sales Objective"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Parts Sales Consultants Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Parts Sales Person Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<!--Sales consultant H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Sales Consultant'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <span class="width-1-5" i18n>Individual Training Status : </span>
+      <span class="width-1-5" class="mat-title text-color margin-top-l"
+        i18n>{{metrics.H2.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service consultant H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Service Advisor'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Consultant Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.TrainingMix"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.ServiceRetention"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="h2Stats"> {{h2Stats["Service Retention"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Parts Sales Consultant H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Parts Sales Consultant'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Certified'">
+        {{h2Stats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Professional'">
+        {{h2Stats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="h2Stats && metrics.H2.level==='Master'"> {{h2Stats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Trade Sales/Parts Purchases Performance </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.SalesObjective"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Sales Consultants Training (Self) </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<!--Dealer/Partner H2-->
+<div class="notifications-container mat-card" *ngIf="h2 && users.column2==='Dealer/Partner'">
+  <div class="group-name-container" matRipple role="button" (click)="show1 ? (show1 = false) : (show1 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - H2</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show1">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show1">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show1">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.H2.level}} </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Trade Sales/Parts Purchases Performance </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.H2.SalesObjective"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.H2.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Sales Consultants Training (Self) </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.H2.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+
+<!--Sales manager fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Sales Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Sales Objective"]}}% to Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Sales Consultant Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Sales Consultant Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service manager fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Service Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.ServiceRetention"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Service Retention"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Advisor Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Service Advisor Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service Teachnician fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Service Technician'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - FY</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Service CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Service CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Service CVP Index Master"]}}%
+        to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Service Technician Training (Self) </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+  </div>
+</div>
+<!--Parts manager fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Parts Manager'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Trade Sales Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Trade Sales Objective"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Parts Sales Consultants Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.TrainingMix"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Parts Sales Person Training Mix"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<!--Sales consultant fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Sales Consultant'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Sales CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Training Status </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Sales Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Service consultant fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Service Advisor'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Individual Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Consultant Professional Training Mix </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.TrainingMix"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.TrainingMix}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Service Retention Objective</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.ServiceRetention"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Service Retention"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.ServiceRetention}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Individual Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>CX Process : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.QCStatus}}</span>
+    </div>
+  </div>
+</div>
+<!--Parts Sales Consultant fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Parts Sales Consultant'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Trade Sales/Parts Purchases Performance </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Parts Purchases"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Sales Consultants Training (Self) </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<!--Dealer/Partner fy-->
+<div class="notifications-container mat-card" *ngIf="fy && users.column2==='Dealer/Partner'">
+  <div class="group-name-container" matRipple role="button" (click)="show2 ? (show2 = false) : (show2 = true)">
+    <h2 class="group-name">Ford Guild Performance Metrics - Full Year</h2>
+    <button mat-icon-button>
+      <mat-icon *ngIf="!show2">arrow_drop_down</mat-icon>
+      <mat-icon *ngIf="show2">arrow_drop_up</mat-icon>
+    </button>
+  </div>
+  <div class="intro width-auto flex-align" *ngIf="show2">
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Service CVP Index</div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.CVPIndex"></mat-progress-bar>
+      <div class="text-float"> Current Level : {{metrics.FY.level}} </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Certified'">
+        {{fyStats["Sales CVP Index Certified"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Professional'">
+        {{fyStats["Sales CVP Index Professional"]}}% to Qualify </div>
+      <div class="metric" i18n *ngIf="fyStats && metrics.FY.level==='Master'"> {{fyStats["Sales CVP Index Master"]}}% to
+        Qualify </div>
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPIndex}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="box event-name">
+      <div class="width-1-5" i18n>Dealership Trade Sales/Parts Purchases Performance </div>
+      <mat-progress-bar class="progress-style" [value]="metrics.FY.SalesObjective"></mat-progress-bar>
+      <div class="metric" i18n *ngIf="fyStats"> {{fyStats["Trade Sales Objective"]}}% to Qualify </div>
+
+      <div class="width-1-5" class="mat-title text-color margin-top-l" i18n>{{metrics.FY.SalesObjective}}%</div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Sales Consultants Training (Self) </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.IndividualTrainingStatus}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Dealership Service Trust CVP Score : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.CVPTrust}}</span>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="event-name">
+      <span i18n>Parts Group : </span>
+      <span class="mat-title text-color margin-top-l" i18n>{{metrics.FY.partsGroup}}</span>
+    </div>
+  </div>
+</div>
+<section class="margin-top-xl flex flex-center" *ngIf="fetchStatus === 'fetching'">
+  <mat-progress-spinner [color]="'primary'" [strokeWidth]="5" [diameter]="60" [mode]="'indeterminate'">
+  </mat-progress-spinner>
+</section>
+<section class="mat-body text-center margin-top-l" *ngIf="!users && !role">
+  <ng-container>
+    <div class="flat-error-alert margin-m">
+      <mat-icon class="large-icon">info</mat-icon>
+      <span class="font-weight-bold margin-left-s mat-h3 margin-remove-bottom" i18n>There is no performance data
+        available for this sprint.</span>
+    </div>
+  </ng-container>
+</section>

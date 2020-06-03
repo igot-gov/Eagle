@@ -1,26 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core'
-import {
-  AbstractControl,
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms'
+// tslint:disable-next-line: max-line-length
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChild, ViewChildren } from '@angular/core'
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
 import { IWidgetImageMap, IWidgetMapMeta } from '@ws-widget/collection/src/lib/image-map-responsive/image-map-responsive.model'
 import { AUTHORING_CONTENT_BASE, CONTENT_BASE_WEBHOST_ASSETS } from '@ws/author/src/lib/constants/apiEndpoints'
@@ -118,7 +98,7 @@ export class ImageMapComponent implements OnInit, AfterViewInit {
     // }
     // url = url.concat(identifier).concat('#').concat(value)
     // console.log(url)
-    const link = (this.paths.at(index).get('link') as AbstractControl)
+    const link = this.paths.at(index).get('link') as AbstractControl
     link.setValue(`./page/${this.identifier.replace('.img', '')}#${value}`)
   }
 
@@ -477,7 +457,7 @@ export class ImageMapComponent implements OnInit, AfterViewInit {
   //     context.globalAlpha = 0.5
   //     context.strokeStyle = 'white'
   //     context.fillRect(item.coords[2], item.coords[3], width, height)
-  //     console.log("from drawALL: " + item.coords[2], item.coords[3], width, height);
+  //     //console.log("from drawALL: " + item.coords[2], item.coords[3], width, height);
 
   //   })
   //   this.drawAllnew(context)
@@ -558,7 +538,7 @@ export class ImageMapComponent implements OnInit, AfterViewInit {
   //     pathName = inputURL.pathname
   //   else
   //     pathName = url
-  //   console.log(pathName)
+  //   //console.log(pathName)
   //   return pathName
 
   // }

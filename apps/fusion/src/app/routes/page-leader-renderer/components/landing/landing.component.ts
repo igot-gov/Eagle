@@ -1,14 +1,11 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
-import { IWsLeaderData } from '../../model/leadership.model'
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
-import { IWsUserFollow, IWsEmailUserId } from '../../model/leadership-email.model'
-import { LeadershipService } from '../../services/leadership.service'
-import { MatSnackBar, MatDialog } from '@angular/material'
-import { SendMailDialogComponent } from '../send-mail-dialog/send-mail-dialog.component'
 import { ConfigurationsService } from '@ws-widget/utils'
+import { IWsEmailUserId, IWsUserFollow } from '../../model/leadership-email.model'
+import { IWsLeaderData } from '../../model/leadership.model'
+import { LeadershipService } from '../../services/leadership.service'
+import { SendMailDialogComponent } from '../send-mail-dialog/send-mail-dialog.component'
 
 @Component({
   selector: 'ws-landing',
@@ -135,7 +132,7 @@ export class LandingComponent implements OnInit {
           leaderData.profile.emailId.substr(0, leaderData.profile.emailId.indexOf('.')),
       })
       this.leaderSvc
-        .followUser({ followsourceid: this.userId, followtargetid: this.leaderUuid })
+        .followUser({ followsourceid: this.userId, followtargetid: this.leaderUuid, type: 'person' })
         .subscribe(
           () => {
             this.snackBar.open(`${this.followed.nativeElement.value}_${leaderData.profile.name}`)

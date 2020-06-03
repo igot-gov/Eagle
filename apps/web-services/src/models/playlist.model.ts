@@ -1,7 +1,4 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
-import { EMimeTypes, TContentType } from './content.model'
+import { EMimeTypes, IContent, TContentType } from './content.model'
 
 export enum EPlaylistTypes {
   ME = 'user',
@@ -9,26 +6,40 @@ export enum EPlaylistTypes {
   PENDING = 'pending',
 }
 
+export enum EPlaylistUpsertTypes {
+  add = 'add',
+  delete = 'delete',
+}
+
+export interface IPlaylistParams {
+  'details-required': boolean
+  sourceFields: string
+  'visibility': string
+}
+
 export interface IPlaylistSbExtBase {
-  user_email: string
+  user: {
+    email: string
+    name: string
+    userId: string
+  }
   isShared: number
   visibility: string
   created_on: string
   playlist_title: string
   source_playlist_id?: string
   playlist_id: string
+  last_updated_on: string
   shared_by?: {
     user_email: string
     user_id: string
     name: string
   }
   resource_ids: string[]
-  shared_with: string
-  shared_on: string
-}
-
-export interface IPlaylistSbExtV2 extends IPlaylistSbExtBase {
-  resource: IPlaylistResource[]
+  root_org: string
+  shared_on?: string
+  content_meta: IContent[]
+  status?: string
 }
 
 export interface IPlaylistSbExt extends IPlaylistSbExtBase {
@@ -47,53 +58,61 @@ export interface IResourceSbExt {
 
 export interface IPlaylistSbExtResponse {
   result: {
-    response: IPlaylistSbExtV2[]
+    response: IPlaylistSbExtBase[]
   }
 }
 
 export interface IPlaylistSbExtRequest {
-  changed_resources: string[]
-  isShared: number
+  content_ids: string[]
   playlist_id?: string
-  playlist_title: string
-  resource_ids: string[]
-  user_action: string
+  playlist_title?: string
+  shared_with?: string[]
+  share_msg?: string
+  visibility?: string
+}
+
+export interface IPlaylistSbDeleteRequest {
+  content: string[]
 }
 
 export interface IPlaylistSbUpdateRequest {
   playlist_title: string
-  content_ids: string[]
+  content_ids?: string[]
+  visibility?: string
 }
 
 export interface IPlaylistUpsertRequest {
-  id?: string
-  title: string
   contentIds: string[]
-  changedContentIds: string[]
+}
+
+export interface IPlaylistCreateRequest {
+  playlist_title: string
+  content_ids: string[]
   shareWith?: string[]
   shareMsg?: string
-  editType: string
-  userAction: string
   visibility: string
 }
 
 export interface IPlaylistUpdateTitleRequest {
   playlist_title: string
   content_ids: IPlaylistResource[]
+  visibility?: string
 }
 
 export interface IPlaylist {
-  contents: IPlaylistResource[]
+  contents: IContent[]
   createdOn: string
-  duration: number
+  duration?: number
   icon: string | null
   id: string
   name: string
   type: string
+  resourceIds?: string[]
   sharedBy?: string
   sharedByDisplayName?: string
   sharedOn?: string
   visibility: string
+  status?: string
 }
 
 export interface IPlaylistResource {
@@ -101,10 +120,12 @@ export interface IPlaylistResource {
   identifier: string
   duration: number
   mimeType: EMimeTypes
-  displayContentType: string
+  displayContentType?: string
   name: string
   contentType: TContentType
   resourceType?: string
+  hasAccess?: boolean
+  description?: string
 }
 
 export interface IPlaylistShareRequestSbExt {
@@ -117,9 +138,34 @@ export interface IPlaylistShareRequestSbExt {
 }
 
 export interface IPlaylistShareRequest {
-  id: string
-  name: string
-  contentIds: string[]
-  shareWith: string[]
+  users: string[]
   message?: string
+}
+
+export interface IPlaylistSbExtSyncRequest {
+  content?: IContent[]
+}
+
+export interface IPlaylistGetRequest {
+  createdOn: string
+  isShared: number
+  lastUpdatedOn: number
+  playlistTitle: string
+  resourceIds: string[]
+  sharedBy: string
+  sourcePlaylistId?: string
+  visibility: string
+  user: {
+    email: string
+    name: string
+    userId: string
+  }
+  resource_ids: IContent[]
+  status?: string
+}
+
+export interface IPlaylistSyncRequest {
+  only_user_playlist_content: IContent[] | []
+  only_sharedby_playlist_content: IContent[]
+  common_content: IContent[] | []
 }

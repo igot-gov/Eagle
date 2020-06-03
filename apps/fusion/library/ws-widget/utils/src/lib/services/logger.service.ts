@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 // tslint:disable:no-console
 import { Injectable } from '@angular/core'
 import { ConfigurationsService } from './configurations.service'
@@ -10,13 +7,13 @@ type consoleFun = (...args: any) => void
   providedIn: 'root',
 })
 export class LoggerService {
-  constructor(private configSvc: ConfigurationsService) {}
+  constructor(private configSvc: ConfigurationsService) { }
 
   private consoleError = console.error
   private consoleInfo = console.info
   private consoleLog = console.log
   private consoleWarn = console.warn
-  private noConsole: consoleFun = () => {}
+  private noConsole: consoleFun = () => { }
 
   get error() {
     return this.consoleError
@@ -38,7 +35,7 @@ export class LoggerService {
     const noConsoleWithError: consoleFun = () => {
       throw new Error('Console Functions Usage Are Not Allowed.')
     }
-    console.log = noConsoleWithError
+    // console.log = noConsoleWithError
     console.warn = noConsoleWithError
     console.info = noConsoleWithError
     console.error = noConsoleWithError

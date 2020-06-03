@@ -1,0 +1,86 @@
+<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
+  <span class="margin-left-xs">{{ content.name }}</span>
+  <span class="spacer"></span>
+</mat-toolbar>
+<mat-card>
+  <div class=" flex flex-wrapped width-1-1">
+    <a class="flex cursor-pointer" [routerLink]="'/app/learning-journey/'" style="display:inline-flex;" i18n>
+      Learning Journey
+      <mat-icon [color]="'primary'">chevron_right </mat-icon>
+    </a>
+    <a class="flex cursor-pointer" (click)="goToRoute(route)" *ngFor="let route of breadCrumb; let i = index">
+      {{ route.displayName }}
+      <mat-icon [color]="'primary'" *ngIf="i !== breadCrumb.length - 1">chevron_right
+      </mat-icon>
+    </a>
+  </div>
+</mat-card>
+<div class="text-left mt-4 ml-8">
+  <button mat-raised-button [color]="'primary'" (click)="collapseOrExpand('collapse')">Collapse</button>&nbsp;
+  <button mat-raised-button [color]="'primary'" (click)="collapseOrExpand('expand')">Expand All</button>
+</div>
+<div class="flex flex-wrapped flex-around mr-4">
+  <div id="vizDemo" class="vis-demo mt-6">
+  </div>
+  <div class="statistics">
+    <mat-card class="ws-mat-primary-lite-background-on-day ws-mat-primary-border-top-bolder info-container">
+      <h2 i18n>This Learning Journey at a glance</h2>
+      <div class="info-item flex flex-middle" *ngIf="content?.name">
+        <h3 class="item-heading ws-mat-primary-text pr-4" i18n>Title</h3>
+        <h3 class="ws-mat-accent-text width-expand">
+          {{ content?.name }}
+        </h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="info-item flex flex-middle">
+        <h3 class="item-heading ws-mat-primary-text pt-3 pr-4" i18n>Content</h3>
+        <h3 class="ws-mat-accent-text width-expand pt-3">
+          {{ displayData[(content?.name)]?.noOfContent }}
+        </h3>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="info-item flex flex-middle" *ngIf="content?.lastUpdatedOn">
+        <h3 class="item-heading ws-mat-primary-text pt-3 pr-4" i18n>Updated</h3>
+        <h3 class="ws-mat-accent-text width-expand pt-3">
+          {{ content?.lastUpdatedOn | date }}
+        </h3>
+      </div>
+    </mat-card>
+    <mat-card class="author-card mt-4">
+      <h2 i18n>Authors</h2>
+      <mat-divider></mat-divider>
+      <div class="author">
+        <mat-icon class="author-image">person</mat-icon>
+        <div class="width-expand flex flex-middle flex-between margin-left-xs">
+          <h3 class="margin-remove">{{ displayData[(content?.name)]?.author }}</h3>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<br />
+<div>
+  <div *ngIf="showCards">
+    <h2 class="pl-4 px-6 sm:px-8 md:px-10" *ngIf="
+        !displayData[childName]?.childData?.length &&
+        (widget?.widgetData?.strips)[0]?.request?.ids?.length
+      ">
+      {{ childName }}
+    </h2>
+    <div class="flex flex-center">
+      <mat-spinner *ngIf="loader"></mat-spinner>
+    </div>
+    <div class="flex flex-center" *ngIf="(widget?.widgetData?.strips)[0]?.request?.ids?.length === 0 && error">
+      <h2 i18n>
+        No Content mapped to
+      </h2>
+      <h2> &nbsp;{{ childName }} </h2>
+    </div>
+    <div *ngIf="(widget?.widgetData?.strips)[0]?.request?.ids?.length && dynamicData && !loader">
+      <ng-container [wsResolverWidget]="widget"></ng-container>
+    </div>
+  </div>
+  <div #contentCards>
+  </div>
+</div>
