@@ -4,5 +4,5 @@ docker run --name authoring-build authoring-service-build:latest && docker cp au
 docker rm -f authoring-build
 docker rmi -f authoring-service-build
 
-docker build --no-cache -t <DockerRepo>lex-sb-ext-authtool-service:<TagName> .
-docker push <DockerRepo>lex-sb-ext-authtool-service:<TagName>
+docker build --no-cache -t eagle-docker.tarento.com/lex-sb-ext-authtool-service:gold .
+docker push eagle-docker.tarento.com/lex-sb-ext-authtool-service:gold

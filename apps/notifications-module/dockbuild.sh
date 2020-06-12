@@ -4,5 +4,5 @@ docker run --name notifications-module notifications-module-build:latest && dock
 docker rm -f notifications-module
 docker rmi -f notifications-module-build
 
-docker build --no-cache -t <DockerRepo>/lex-notification-service:<TagName> .
-docker push <DockerRepo>/lex-notification-service:<TagName>
+docker build --no-cache -t eagle-docker.tarento.com/lex-notification-service:gold .
+docker push eagle-docker.tarento.com/lex-notification-service:gold
