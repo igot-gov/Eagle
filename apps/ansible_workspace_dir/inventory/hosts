@@ -1,0 +1,8 @@
+[dev]
+#10.0.1.10
+
+#[all:vars]
+#ansible_connection=ssh
+#ansible_ssh_user=username
+#ansible_ssh_private_key_file=ssh_keyfile_location
+

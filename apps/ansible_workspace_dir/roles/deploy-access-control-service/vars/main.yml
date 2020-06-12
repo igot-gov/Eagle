@@ -1,0 +1,26 @@
+---
+# vars file for deploy-access-control
+# For script
+template_compose_file_name: access-control-service-compose-file.j2
+template_env_file_name: access-control-service-env.j2
+compose_file_name: "{{ service_access_control_service }}.yml"
+env_file_name: "{{ service_access_control_service }}.env"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+user_friendly_name: Access control service
+
+
+# For service
+application_port: "{{ service_access_control_port }}"
+image_name: "{{ image_access_control_service }}"
+tag: "{{ tags_access_control_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_access_control_service }}"
+reserved_memory: "{{ service_mem_reserved_access_control_service }}"
+limited_memory: "{{ service_mem_limit_access_control_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}/v1/course/new 
+network_alias_name: "{{ network_alias_access_control_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_access_control_service }}"
+force_reload: "{{ force_reload_access_control_service }}"

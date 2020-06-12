@@ -1,0 +1,4 @@
+---
+  - name: Creating docker config
+    shell: "docker config create {{ docker_config_name }} {{ config_file_deployment_location }}"
+    ignore_errors: true

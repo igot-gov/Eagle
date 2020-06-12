@@ -1,0 +1,29 @@
+---
+# vars file for deploy-lex-chatbot-service
+
+# For script
+template_compose_file_name: chatbot-service.j2
+template_env_file_name: chatbot-env.j2
+compose_file_name: "{{ service_chatbot_service }}.yml"
+env_file_name: "{{ service_chatbot_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Lex chatbot service
+
+# For service
+application_port: 3008
+image_name: "{{ image_chatbot_service }}"
+tag: "{{ tags_chatbot_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ service_lex_chatbot_port }}"
+replicas: "{{ service_replicas_chatbot_service }}"
+reserved_memory: "{{ service_mem_reserved_chatbot_service }}"
+limited_memory: "{{ service_mem_limit_chatbot_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_chatbot_service }}"
+docker_service_stack_name: chatbot
+docker_service_name: "{{ service_chatbot_service }}"
+force_reload: "{{ force_reload_lex_core_service }}"
+
+# For application
+host_chatbot_mount_directory: "{{ host_content_directory_path }}/chat-bot-mount"
