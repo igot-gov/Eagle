@@ -1,11 +1,12 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.util;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -22,5 +23,25 @@ public class AuthoringUtil {
 		} catch (NoSuchAlgorithmException ex) {
 			return null;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public static boolean haveSameAuthors(Map<String, Object> parentContent, Map<String, Object> childContent) {
+
+		Set<String> parentContentAuthors = ((List<Map<String, Object>>) parentContent
+				.get(LexConstants.CREATOR_CONTACTS)).stream()
+						.map(creatorContact -> creatorContact.get(LexConstants.ID).toString())
+						.collect(Collectors.toSet());
+
+		Set<String> childContentAuthors = ((List<Map<String, Object>>) childContent.get(LexConstants.CREATOR_CONTACTS))
+				.stream().map(creatorContact -> creatorContact.get(LexConstants.ID).toString())
+				.collect(Collectors.toSet());
+
+		for (String parentContentAuthor : parentContentAuthors) {
+			if (childContentAuthors.contains(parentContentAuthor))
+				return true;
+		}
+
+		return false;
 	}
 }

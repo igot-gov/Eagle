@@ -1,7 +1,3 @@
-@REM	"Copyright 2020 Infosys Ltd. 
-@REM	Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-@REM	This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"
-
 @REM ----------------------------------------------------------------------------
 @REM Licensed to the Apache Software Foundation (ASF) under one
 @REM or more contributor license agreements.  See the NOTICE file

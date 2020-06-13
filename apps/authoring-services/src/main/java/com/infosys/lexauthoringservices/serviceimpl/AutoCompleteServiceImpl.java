@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.serviceimpl;
 
 import java.io.BufferedReader;
@@ -14,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.elasticsearch.action.search.SearchRequest;
@@ -35,10 +33,13 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lexauthoringservices.exception.ApplicationLogicError;
 import com.infosys.lexauthoringservices.exception.BadRequestException;
+import com.infosys.lexauthoringservices.exception.ResourceNotFoundException;
 import com.infosys.lexauthoringservices.model.Tag;
 import com.infosys.lexauthoringservices.model.Track;
 import com.infosys.lexauthoringservices.model.cassandra.MasterValues;
+import com.infosys.lexauthoringservices.model.cassandra.User;
 import com.infosys.lexauthoringservices.repository.cassandra.bodhi.MasterValuesRepository;
+import com.infosys.lexauthoringservices.repository.cassandra.sunbird.UserRepository;
 import com.infosys.lexauthoringservices.service.AutoCompleteService;
 import com.infosys.lexauthoringservices.util.AuthoringUtil;
 import com.infosys.lexauthoringservices.util.LexConstants;
@@ -52,8 +53,77 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 	@Autowired
 	MasterValuesRepository masterValuesRepo;
 
+	@Autowired
+	UserRepository userRepository;
+
 	@Override
-	public List<Map<String, Object>> getSkillsToBeDisplayed(String query, String limit) {
+	public List<Map<String, Object>> getUnits(Map<String, Object> reqMap) {
+
+		if (reqMap == null || reqMap.isEmpty())
+			throw new BadRequestException("Valid Contract not adhered");
+
+		String query = (String) reqMap.get("query");
+		String limit = (String) reqMap.get("limit");
+
+		if (query == null || query.trim().isEmpty())
+			throw new BadRequestException("Query cant be null or empty");
+
+		List<Map<String, Object>> unitList = new ArrayList<Map<String, Object>>();
+
+		SearchRequest searchRequestBuilder = new SearchRequest();
+		searchRequestBuilder.indices(LexConstants.EsIndex.unit.getIndexName());
+		searchRequestBuilder.types(LexConstants.EsType.skills.getTypeName());
+		searchRequestBuilder.searchType(SearchType.QUERY_THEN_FETCH);
+
+		if (query == null || query.trim().isEmpty())
+			throw new BadRequestException("Query cant be null or empty");
+
+		int size = 5;
+
+		if (limit != null && !limit.trim().isEmpty()) {
+			try {
+				size = Integer.parseInt(limit);
+			} catch (NumberFormatException e) {
+				throw new BadRequestException("Limit has to be a number");
+			}
+		}
+
+		CompletionSuggestionBuilder unitSuggest = SuggestBuilders.completionSuggestion("unit_suggest").prefix(query)
+				.size(size);
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		SuggestBuilder suggestBuilder = new SuggestBuilder();
+		suggestBuilder.addSuggestion("unit_suggest", unitSuggest);
+		sourceBuilder.suggest(suggestBuilder);
+		searchRequestBuilder.source(sourceBuilder);
+		SearchResponse searchResponse = null;
+
+		try {
+			searchResponse = esClient.search(searchRequestBuilder, RequestOptions.DEFAULT);
+			CompletionSuggestion completionSuggestion = searchResponse.getSuggest().getSuggestion("unit_suggest");
+			Entry entry = completionSuggestion.getEntries().get(0);
+			List<Option> optionList = entry.getOptions();
+
+			for (Option option : optionList) {
+				Map<String, Object> sourceMapForEachHit = option.getHit().getSourceAsMap();
+				unitList.add(sourceMapForEachHit);
+			}
+		} catch (Exception e) {
+			throw new ApplicationLogicError("Could not fetch units");
+		}
+		return unitList;
+	}
+
+	@Override
+	public List<Map<String, Object>> getSkills(Map<String, Object> reqMap) {
+
+		if (reqMap == null || reqMap.isEmpty())
+			throw new BadRequestException("Valid Contract not adhered");
+
+		String query = (String) reqMap.get("query");
+		String limit = (String) reqMap.get("limit");
+
+		if (query == null || query.trim().isEmpty())
+			throw new BadRequestException("Query cant be null or empty");
 
 		List<Map<String, Object>> skillsList = new ArrayList<Map<String, Object>>();
 
@@ -72,7 +142,7 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 		if (limit != null && !limit.trim().isEmpty()) {
 			try {
 				size = Integer.parseInt(limit);
-			} catch (Exception e) {
+			} catch (NumberFormatException e) {
 				throw new BadRequestException("Limit has to be a number");
 			}
 		}
@@ -103,61 +173,22 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 				skillsList.add(sourceMapToUI);
 			}
 		} catch (Exception ex) {
-			throw new ApplicationLogicError("Internal Server Error");
+			throw new ApplicationLogicError("could not fetch skills");
 		}
 		return skillsList;
 	}
 
 	@Override
-	public List<Map<String, Object>> getUnitsToBeDisplayed(String query, String limit) {
+	public List<Map<String, Object>> getClients(Map<String, Object> reqMap) {
 
-		List<Map<String, Object>> unitList = new ArrayList<Map<String, Object>>();
+		if (reqMap == null || reqMap.isEmpty())
+			throw new BadRequestException("Valid Contract not adhered");
 
-		SearchRequest searchRequestBuilder = new SearchRequest();
-		searchRequestBuilder.indices(LexConstants.EsIndex.unit.getIndexName());
-		searchRequestBuilder.types(LexConstants.EsType.skills.getTypeName());
-		searchRequestBuilder.searchType(SearchType.QUERY_THEN_FETCH);
+		String query = (String) reqMap.get("query");
+		String limit = (String) reqMap.get("limit");
 
 		if (query == null || query.trim().isEmpty())
 			throw new BadRequestException("Query cant be null or empty");
-
-		int size = 5;
-
-		if (limit != null && !limit.trim().isEmpty()) {
-			try {
-				size = Integer.parseInt(limit);
-			} catch (Exception e) {
-				throw new BadRequestException("Limit has to be a number");
-			}
-		}
-
-		CompletionSuggestionBuilder unitSuggest = SuggestBuilders.completionSuggestion("unit_suggest").prefix(query)
-				.size(size);
-		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-		SuggestBuilder suggestBuilder = new SuggestBuilder();
-		suggestBuilder.addSuggestion("unit_suggest", unitSuggest);
-		sourceBuilder.suggest(suggestBuilder);
-		searchRequestBuilder.source(sourceBuilder);
-		SearchResponse searchResponse = null;
-
-		try {
-			searchResponse = esClient.search(searchRequestBuilder, RequestOptions.DEFAULT);
-			CompletionSuggestion completionSuggestion = searchResponse.getSuggest().getSuggestion("unit_suggest");
-			Entry entry = completionSuggestion.getEntries().get(0);
-			List<Option> optionList = entry.getOptions();
-
-			for (Option option : optionList) {
-				Map<String, Object> sourceMapForEachHit = option.getHit().getSourceAsMap();
-				unitList.add(sourceMapForEachHit);
-			}
-		} catch (Exception ex) {
-			throw new ApplicationLogicError("Internal Server Error");
-		}
-		return unitList;
-	}
-
-	@Override
-	public List<Map<String, Object>> getClientNamesToBeDisplayed(String query, String limit) {
 
 		List<Map<String, Object>> clientNamesList = new ArrayList<Map<String, Object>>();
 
@@ -171,12 +202,10 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 
 		int size = 5;
 
-		if (limit == null || limit.trim().isEmpty())
-			;
-		else {
+		if (limit != null && !limit.trim().isEmpty()) {
 			try {
 				size = Integer.parseInt(limit);
-			} catch (Exception e) {
+			} catch (NumberFormatException e) {
 				throw new BadRequestException("Limit has to be a number");
 			}
 		}
@@ -203,25 +232,26 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 				Map<String, Object> sourceMapToUI = new HashMap<String, Object>();
 				sourceMapToUI.put("name", sourceMapForEachHit.get("customerName"));
 				sourceMapToUI.put("id", sourceMapForEachHit.get("customerCode"));
-				// sourceMapToUI.put("skill", sourceMapForEachHit.get("skill"));
 				sourceMapToUI.put("displayName",
 						sourceMapForEachHit.get("customerName") + "#" + sourceMapForEachHit.get("customerCode"));
 				clientNamesList.add(sourceMapToUI);
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new ApplicationLogicError("Internal Server Error");
+			throw new ApplicationLogicError("could not fetch clients");
 		}
 		return clientNamesList;
 	}
 
 	@Override
-	public Map<String, Object> getEnumsToBeDisplayed() {
+	public Map<String, Object> getEnums() {
+
 		List<String> idsToFetch = new ArrayList<>();
 		idsToFetch.addAll(Arrays.asList(LexConstants.CONTENT_TYPE, LexConstants.RESOURCE_TYPE,
 				LexConstants.COMPLEXITY_TYPE, LexConstants.SOURCE_NAME, LexConstants.AUDIENCE, LexConstants.COPYRIGHT,
 				LexConstants.IDEAL_SCREEN_SIZE, LexConstants.RESOURCE_CATEGORY, LexConstants.LEARNING_MODE,
-				LexConstants.UNITS));
+				LexConstants.UNITS, LexConstants.DIMENSION, LexConstants.REGION, LexConstants.OFFERING_MODE,LexConstants.CATEGORY_TYPE));
+
 		Map<String, Object> enumsToBeDisplayed = new HashMap<>();
 
 		try {
@@ -234,6 +264,14 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 			Map<String, Object> etaTrack = new HashMap<>();
 
 			for (MasterValues masterValue : masterValues) {
+				if (masterValue.getEntity().equals(LexConstants.DIMENSION)
+						|| masterValue.getEntity().equals(LexConstants.REGION)
+						|| masterValue.getEntity().equals(LexConstants.OFFERING_MODE)) {
+					enumsToBeDisplayed.put(masterValue.getEntity(), masterValue.getValues());
+				}
+			}
+
+			for (MasterValues masterValue : masterValues) {
 				if (idsToFetch.contains(masterValue.getEntity())) {
 					enumsToBeDisplayed.put(masterValue.getEntity(), masterValue.getValues());
 					if (masterValue.getEntity().equals(LexConstants.UNITS))
@@ -244,6 +282,19 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 			for (MasterValues masterValue : masterValues) {
 				if (units.contains(masterValue.getEntity())) {
 					etaTrack.put(masterValue.getEntity(), masterValue.getValues());
+				}
+			}
+			List<String> sourceNames = new ArrayList<>();
+			for (MasterValues masterValue : masterValues) {
+				if(masterValue.getEntity().equals(LexConstants.SOURCE_NAME)) {
+					sourceNames.addAll(masterValue.getValues());
+				}
+			}
+			
+			List<String> complexityLevel = new ArrayList<>();
+			for (MasterValues masterValue : masterValues) {
+				if(masterValue.getEntity().equals(LexConstants.COMPLEXITY_TYPE)) {
+					complexityLevel.addAll(masterValue.getValues());
 				}
 			}
 
@@ -261,17 +312,20 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 			tagArrays.put(LexConstants.NEW_SERVICES, newServicesTagArray);
 			enumsToBeDisplayed.put(LexConstants.TAG, tagArrays);
 			enumsToBeDisplayed.put(LexConstants.LEARNING_TRACK, etaTrack);
-			String portalOwner[] = { "email", "email" };
+			String portalOwner[] = { "email_addr" };
 			enumsToBeDisplayed.put(LexConstants.PORTAL_OWNER, portalOwner);
 			enumsToBeDisplayed.put(LexConstants.SUB_TITLES, subTitles);
+			
+			enumsToBeDisplayed.put(LexConstants.COMPLEXITY_TYPE, complexityLevel);
+			enumsToBeDisplayed.put(LexConstants.SOURCE_NAME, sourceNames);
+			enumsToBeDisplayed.put("categoryType", Arrays.asList("Analyst Report", "Article", "Assessment", "Brochure", "Capstone Project", "Case Study", "Certification", "Client Deck", "Competitive", "Elevator Pitch", "Exercise", "HandsOnAssessment", "Infographics", "Insights", "Lecture", "Live Stream", "Offering", "Podcast", "Point Of View", "Prelude", "Primer", "Quiz", "Reference", "Research Study", "Tryout", "Webinar Recording"));
+
+
 		} catch (NullPointerException nullPointerException) {
-			nullPointerException.printStackTrace();
 			throw new ApplicationLogicError(nullPointerException.getMessage());
 		} catch (IllegalArgumentException illegalArgumentException) {
-			illegalArgumentException.printStackTrace();
 			throw new ApplicationLogicError("Invalid Arguments");
 		} catch (Exception exception) {
-			exception.printStackTrace();
 			throw new ApplicationLogicError(exception.getMessage());
 		}
 		return enumsToBeDisplayed;
@@ -341,6 +395,29 @@ public class AutoCompleteServiceImpl implements AutoCompleteService {
 			trackList.add(track);
 		}
 		return trackList;
+	}
+
+	@Override
+	public Map<String, Object> getEmail() {
+
+		Optional<MasterValues> masterValues = masterValuesRepo.findById("trackLeads");
+
+		if (!masterValues.isPresent()) {
+			throw new ResourceNotFoundException("No record Found");
+		} else {
+			Map<String, Object> mapReturn = new HashMap<String, Object>();
+			List<String> returnList = new ArrayList<String>();
+			for (String uuid : masterValues.get().getValues()) {
+				Optional<User> user = userRepository.findById(uuid);
+				if (!user.isPresent()) {
+					throw new ResourceNotFoundException("No record found for id");
+				} else {
+					returnList.add(user.get().getEmail());
+					mapReturn.put("Email", returnList);
+				}
+			}
+			return mapReturn;
+		}
 	}
 
 }

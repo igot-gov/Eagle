@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 /**
  * © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved.
  * Version: 1.10
@@ -29,17 +26,12 @@ import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,18 +108,20 @@ public class SearchIndexer {
         System.out.println("#INITIALIZING SEARCH INDEXER FINISHED");
     }
 
-    public void processESMessage(String graphId, String objectType, String uniqueId, String messageId, Map<String, Object> message) throws Exception {
-        upsertDocument(uniqueId, message, true);
+    public void processESMessage(String graphId, String objectType, String uniqueId, String messageId, Map<String, Object> message, UUID messageUUID) throws Exception {
+        upsertDocument(uniqueId, message, true, messageUUID);
 //        upsertDocument(uniqueId, message, false);
     }
 
-    private Map<String, Object> getDocumentAsMapById(String uniqueId, Map<String, Object> indexDocument) {
+    private Map<String, Object> getDocumentAsMapById(String uniqueId, Map<String, Object> indexDocument, UUID messageUUID) {
         try {
             Object locale = indexDocument.get("locale");
             if (null == locale || Strings.isNullOrEmpty(String.valueOf(locale)))
                 locale = "_en";
             else
                 locale = "_" + locale;
+            System.out.println(messageUUID+"->"+"#ES INDEX = " + esIndex + locale);
+            System.out.println(messageUUID+"->"+"   ID= " + uniqueId);
             GetResponse response = esClient.get(new GetRequest(esIndex + locale).type(esIndexType).id(uniqueId), RequestOptions.DEFAULT);
             return response.getSourceAsMap();
         } catch (IOException e) {
@@ -166,20 +160,19 @@ public class SearchIndexer {
 //    }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    private Map<String, Object> getIndexDocument(Map<String, Object> message, boolean updateRequest, boolean isSearchIndex) throws Exception {
+    private Map<String, Object> getIndexDocument(Map<String, Object> message, boolean updateRequest, boolean isSearchIndex, UUID messageUUID) throws Exception {
         Map<String, Object> indexDocument = new HashMap<>();
         String identifier = (String) message.get("nodeUniqueId");
         if (updateRequest) {
-            System.out.println("#FETCHING DOC FROM INDEX");
-            indexDocument = getDocumentAsMapById(identifier, message);
-            System.out.println("    " + indexDocument);
+            System.out.println(messageUUID+"->"+"#FETCHING DOC FROM INDEX");
+            indexDocument = getDocumentAsMapById(identifier, message, messageUUID);
             if (null == indexDocument || indexDocument.isEmpty())
-                throw new Exception("DOCUMENT NOT FETCHED FROM ES");
+                throw new Exception(messageUUID+"->"+"DOCUMENT NOT FETCHED FROM ES");
         }
 
         Map<String, Object> transactionData = (Map<String, Object>) message.get("transactionData");
-        System.out.println("#TRANSACTION DATA");
-        System.out.println("    " + transactionData);
+        System.out.println(messageUUID+"->"+"#TRANSACTION DATA");
+        System.out.println(messageUUID+"->"+"    " + transactionData);
         if (transactionData != null) {
             Map<String, Object> addedProperties = (Map<String, Object>) transactionData.get("properties");
             if (addedProperties != null && !addedProperties.isEmpty()) {
@@ -192,19 +185,19 @@ public class SearchIndexer {
                         else {
                             if (nestedFields.contains(propertyName)) {
 //                                propertyNewValue = objectMapper.readValue(propertyNewValue, new TypeReference<Object>() {});
-                                System.out.println("#NESTED FIELD");
-                                System.out.println("    " + propertyName);
-                                System.out.println("        " + propertyNewValue.getClass());
-                                System.out.println("        " + propertyNewValue);
+                                System.out.println(messageUUID+"->"+"#NESTED FIELD");
+                                System.out.println(messageUUID+"->"+"    " + propertyName);
+                                System.out.println(messageUUID+"->"+"        " + propertyNewValue.getClass());
+                                System.out.println(messageUUID+"->"+"        " + propertyNewValue);
                             }
                             indexDocument.put(propertyName, propertyNewValue);
                             if (propertyName.equals("catalog") && isSearchIndex) {
-                                System.out.println("#NESTED TYPE TAGS");
-                                Map<String, List<String>> tagsData = processTags(propertyNewValue);
+                                System.out.println(messageUUID+"->"+"#NESTED TYPE TAGS");
+                                Map<String, List<String>> tagsData = processTags(propertyNewValue, messageUUID);
                                 for (Map.Entry<String, List<String>> entry : tagsData.entrySet()) {
                                     indexDocument.put(entry.getKey(), entry.getValue());
                                 }
-                                System.out.println("#NESTED TYPE TAGS COMPLETE");
+                                System.out.println(messageUUID+"->"+"#NESTED TYPE TAGS COMPLETE");
                             }
                         }
                     }
@@ -279,8 +272,8 @@ public class SearchIndexer {
         indexDocument.put("identifier", message.get("nodeUniqueId"));
         indexDocument.put("objectType", Strings.isNullOrEmpty((String) message.get("objectType")) ? "" : message.get("objectType"));
         indexDocument.put("nodeType", message.get("nodeType"));
-        System.out.println("#INDEX DOC CREATED");
-        System.out.println("    " + indexDocument);
+        System.out.println(messageUUID+"->"+"#INDEX DOC CREATED");
+        System.out.println(messageUUID+"->"+"    " + indexDocument);
         return indexDocument;
     }
 
@@ -306,15 +299,15 @@ public class SearchIndexer {
         return existingRelationList;
     }
 
-    private Map<String, List<String>> processTags(Object propertyNewValue) throws Exception {
+    private Map<String, List<String>> processTags(Object propertyNewValue, UUID messageUUID) throws Exception {
         try {
             List<Map<String, Object>> oldTags = (ArrayList<Map<String, Object>>) propertyNewValue;
-            System.out.println("#PROCESSING TAGS");
+            System.out.println(messageUUID+"->"+"#PROCESSING TAGS");
 
             URL tagsUrl = new URL(catalogUrl);
             List<Map<String, Object>> tagsResponse = objectMapper.readValue(tagsUrl, List.class);
             if (tagsResponse.size() <= 0) {
-                throw new Exception("TAGS JSON RESPONSE IS EMPTY");
+                throw new Exception(messageUUID+"->"+"TAGS JSON RESPONSE IS EMPTY");
             }
             Map<String, Map<String, Object>> tagsJson = new HashMap<>();
             tagsResponse.forEach(item -> {
@@ -331,16 +324,16 @@ public class SearchIndexer {
             Set<String> subSubTracksKeywords = new HashSet<>();
 
             oldTags.forEach(item -> {
-                if (((String) item.get("type")).equals("level1")) {
+                if (item.get("type").toString().toLowerCase().equals("level1")) {
                     categoriesIds.add(String.valueOf(item.get("id")));
                     categoriesKeywords.add(String.valueOf(item.get("value")).toLowerCase());
-                } else if (((String) item.get("type")).equals("level2")) {
+                } else if (item.get("type").toString().toLowerCase().equals("level2")) {
                     tracksIds.add(String.valueOf(item.get("id")));
                     tracksKeywords.add(String.valueOf(item.get("value")).toLowerCase());
-                } else if (((String) item.get("type")).equals("level3")) {
+                } else if (item.get("type").toString().toLowerCase().equals("level3")) {
                     subTracksIds.add(String.valueOf(item.get("id")));
                     subTracksKeywords.add(String.valueOf(item.get("value")).toLowerCase());
-                } else if (((String) item.get("type")).equals("level4")) {
+                } else if (item.get("type").toString().toLowerCase().equals("level4")) {
                     subSubTracksIds.add(String.valueOf(item.get("id")));
                     subSubTracksKeywords.add(String.valueOf(item.get("value")).toLowerCase());
                 }
@@ -348,18 +341,18 @@ public class SearchIndexer {
 
             Map<String, List<String>> tagsData = new HashMap<>();
             Set<String> paths = new HashSet<>();
-            subSubTracksIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>())));
-            subTracksIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>())));
-            tracksIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>())));
-            categoriesIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>())));
+            subSubTracksIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>(),messageUUID)));
+            subTracksIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>(), messageUUID)));
+            tracksIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>(), messageUUID)));
+            categoriesIds.forEach(item -> paths.addAll(createCatalogPath(item, tagsJson, "", new ArrayList<>(), messageUUID)));
             ArrayList<String> allIds = new ArrayList<>();
             allIds.addAll(categoriesIds);
             allIds.addAll(tracksIds);
             allIds.addAll(subTracksIds);
             allIds.addAll(subSubTracksIds);
 
-            System.out.println("#FORMED PATHS");
-            System.out.println("    " + paths);
+            System.out.println(messageUUID+"->"+"#FORMED PATHS");
+            System.out.println(messageUUID+"->"+"    " + paths);
 
 //            tagsData.put("tags", new ArrayList<>(paths));
             tagsData.put("catalogPaths", new ArrayList<>(paths));
@@ -375,8 +368,8 @@ public class SearchIndexer {
         }
     }
 
-    private List<String> createCatalogPath(String identifier, Map<String, Map<String, Object>> catalogDataMap, String path, List<String> pathsArray) {
-        System.out.println("!!!!!!!!!!!!!!!" + identifier);
+    private List<String> createCatalogPath(String identifier, Map<String, Map<String, Object>> catalogDataMap, String path, List<String> pathsArray, UUID messageUUID) {
+        System.out.println(messageUUID+"->"+"!!!!!!!!!!!!!!!" + identifier);
         if (path.isEmpty())
             path = catalogDataMap.get(identifier).get("value").toString();
         else
@@ -386,8 +379,11 @@ public class SearchIndexer {
 
         for (String parent : parents) {
             Map<String, Object> parentObj = catalogDataMap.get(parent);
-            if (!parentObj.get("type").equals("Catalog"))
-                createCatalogPath((String) parentObj.get("identifier"), catalogDataMap, path, pathsArray);
+            System.out.println(messageUUID+"->"+"!!!!!!!!!!!!!!! id = " + parentObj.get("identifier"));
+            System.out.println(messageUUID+"->"+"!!!!!!!!!!!!!!! value = " + parentObj.get("value"));
+            System.out.println(messageUUID+"->"+"!!!!!!!!!!!!!!! type = " + parentObj.get("type"));
+            if (!parentObj.get("type").toString().toLowerCase().equals("level0"))
+                createCatalogPath((String) parentObj.get("identifier"), catalogDataMap, path, pathsArray, messageUUID);
             else
                 pathsArray.add(path);
         }
@@ -411,31 +407,31 @@ public class SearchIndexer {
         }
     }
 
-    private void upsertDocument(String uniqueId, Map<String, Object> message, boolean isSearchIndex) throws Exception {
+    private void upsertDocument(String uniqueId, Map<String, Object> message, boolean isSearchIndex, UUID messageUUID) throws Exception {
         String operationType = (String) message.get("operationType");
         switch (operationType) {
             case "CREATE": {
-                System.out.println("#OPERATION TYPE = CREATE");
-                Map<String, Object> indexDocument = getIndexDocument(message, false, isSearchIndex);
-                routeAndAddDocumentWithId(uniqueId, indexDocument, isSearchIndex);
+                System.out.println(messageUUID+"->"+"#OPERATION TYPE = CREATE");
+                Map<String, Object> indexDocument = getIndexDocument(message, false, isSearchIndex, messageUUID);
+                routeAndAddDocumentWithId(uniqueId, indexDocument, isSearchIndex, messageUUID);
                 break;
             }
             case "UPDATE": {
-                System.out.println("#OPERATION TYPE = UPDATE");
+                System.out.println(messageUUID+"->"+"#OPERATION TYPE = UPDATE");
                 message.remove(LexConstants.ACCESS_PATHS);
-                Map<String, Object> indexDocument = getIndexDocument(message, true, isSearchIndex);
-                routeAndAddDocumentWithId(uniqueId, indexDocument, isSearchIndex);
+                Map<String, Object> indexDocument = getIndexDocument(message, true, isSearchIndex, messageUUID);
+                routeAndAddDocumentWithId(uniqueId, indexDocument, isSearchIndex, messageUUID);
                 break;
             }
             case "DELETE": {
-                System.out.println("#OPERATION TYPE = DELETE");
-                routeAndDeleteDocumentWithId(uniqueId, message, isSearchIndex);
+                System.out.println(messageUUID+"->"+"#OPERATION TYPE = DELETE");
+                routeAndDeleteDocumentWithId(uniqueId, message, isSearchIndex, messageUUID);
                 break;
             }
         }
     }
 
-    private void routeAndDeleteDocumentWithId(String uniqueId, Map<String, Object> indexDocument, boolean isSearchIndex) throws Exception {
+    private void routeAndDeleteDocumentWithId(String uniqueId, Map<String, Object> indexDocument, boolean isSearchIndex, UUID messageUUID) throws Exception {
         try {
             Object locale = indexDocument.get("locale");
             if (null == locale || Strings.isNullOrEmpty(String.valueOf(locale)))
@@ -443,13 +439,13 @@ public class SearchIndexer {
             else
                 locale = "_" + locale;
             if (isSearchIndex) {
-                System.out.println("#ES INDEX = " + esIndex + locale);
+                System.out.println(messageUUID+"->"+"#ES INDEX = " + esIndex + locale);
                 DeleteResponse status = esClient.delete(new DeleteRequest(esIndex + locale, esIndexType, uniqueId), RequestOptions.DEFAULT);
-                System.out.println("#ES INDEX STATUS=" + status.status().getStatus());
+                System.out.println(messageUUID+"->"+"#ES INDEX STATUS=" + status.status().getStatus());
             }else {
-                System.out.println("#ES INDEX = " + esIndex + locale);
+                System.out.println(messageUUID+"->"+"#ES INDEX = " + esIndex + locale);
                 DeleteResponse status = esClient.delete(new DeleteRequest("lexcontentindex", "resource", uniqueId), RequestOptions.DEFAULT);
-                System.out.println("#ES INDEX STATUS=" + status.status().getStatus());
+                System.out.println(messageUUID+"->"+"#ES INDEX STATUS=" + status.status().getStatus());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -457,7 +453,7 @@ public class SearchIndexer {
         }
     }
 
-    private void routeAndAddDocumentWithId(String uniqueId, Map<String, Object> indexDocument, boolean isSearchIndex) throws Exception {
+    private void routeAndAddDocumentWithId(String uniqueId, Map<String, Object> indexDocument, boolean isSearchIndex, UUID messageUUID) throws Exception {
         try {
             Object locale = indexDocument.get("locale");
             if (null == locale || Strings.isNullOrEmpty(String.valueOf(locale)))
@@ -465,32 +461,45 @@ public class SearchIndexer {
             else
                 locale = "_" + locale;
             if (isSearchIndex) {
-                System.out.println("#ES INDEX = " + esIndex + locale);
-                RestStatus status = esClient.index(new IndexRequest(esIndex + locale, esIndexType, uniqueId).source(indexDocument), RequestOptions.DEFAULT).status();
-                System.out.println("#ES INDEX STATUS=" + status.getStatus());
+                System.out.println(messageUUID+"->"+"#ES INDEX = " + esIndex + locale);
+                RestStatus status = esClient.index(new IndexRequest(esIndex + locale, esIndexType, uniqueId).source(indexDocument).setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE), RequestOptions.DEFAULT).status();
+                System.out.println(messageUUID+"->"+"#ES INDEX STATUS=" + status.getStatus());
                 int x = status.getStatus();
                 if (!(x >= 200 && x < 300)){
                     throw new Exception(status.toString());
                 }
             } else {
-                System.out.println("#ES INDEX = " + esIndex + locale);
+                System.out.println(messageUUID+"->"+"#ES INDEX = " + esIndex + locale);
                 RestStatus status = esClient.index(new IndexRequest("lexcontentindex", "resource", uniqueId).source(indexDocument), RequestOptions.DEFAULT).status();
-                System.out.println("#ES INDEX STATUS=" + status.getStatus());
+                System.out.println(messageUUID+"->"+"#ES INDEX STATUS=" + status.getStatus());
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+    
+    public void errorDocIndexing(String messageUUID,Map<String,Object> indexDocument) throws Exception {
+        try {
+        	System.out.println(messageUUID + "->" + "#ES ERROR INDEX = " + "search_error_index");
+        	RestStatus status = esClient.index(new IndexRequest("search_error_index","searchresources").source(indexDocument).setRefreshPolicy(WriteRequest.RefreshPolicy.IMMEDIATE), RequestOptions.DEFAULT).status();
+        	System.out.println(messageUUID+"->"+"#ES ERROR INDEX STATUS=" + status.getStatus());
+        	int x = status.getStatus();
+        	if(!(x>=200 && x<300)) {
+        		throw new Exception(status.toString());
+        	}
+        } catch (Exception e) {
             e.printStackTrace();
             throw e;
         }
     }
 
-    public List<Map<String, Object>> processMessageEnvelope(List<Map<String, Object>> jsonObject) {
+    public List<Map<String, Object>> processMessageEnvelope(List<Map<String, Object>> jsonObject, UUID messageUUID) {
         List<Map<String, Object>> errorMessages = new ArrayList<>();
         int cnt = 0;
         for (Map<String, Object> message : jsonObject) {
             cnt++;
-            System.out.println("===============PROCESSING SEARCH MESSAGE " + cnt);
-            System.out.println("#INCOMING MESSAGE");
-            System.out.println("    " + message);
+            System.out.println(messageUUID+"->"+"SEARCH INDEXER MSG START " + cnt + " " + message);
             try {
 
                 if (message != null && message.get("operationType") != null) {
@@ -510,7 +519,7 @@ public class SearchIndexer {
                     }
                     switch (nodeType) {
                         case "LEARNING_CONTENT": {
-                            processESMessage(graphId, objectType, uniqueId, messageId, message);
+                            processESMessage(graphId, objectType, uniqueId, messageId, message, messageUUID);
                             break;
                         }
                         default:
@@ -521,12 +530,13 @@ public class SearchIndexer {
                     message.put("SAMZA-ERROR", "operationType missing");
                     errorMessages.add(message);
                 }
-                System.out.println("===============END PROCESSING SEARCH MESSAGE " + cnt);
+                System.out.println(messageUUID+"->"+"SEARCH INDEXER MSG END   " + cnt);
             } catch (Exception e) {
                 e.printStackTrace();
                 message.put("SAMZA_ERROR", e.getMessage());
                 message.put("SAMZA_ERROR_STACK_TRACE", e.getStackTrace());
                 errorMessages.add(message);
+                System.out.println(messageUUID+"->"+"SEARCH INDEXER MSG EXCEPTION " + cnt);
             }
         }
         return errorMessages;

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.controller;
 
 import java.io.File;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lexauthoringservices.service.GeneratePlagiarismService;
 
 @RestController
@@ -28,44 +24,48 @@ public class GeneratePlagiarismController {
 
 	@Autowired
 	GeneratePlagiarismService generatePlagiarism;
-	//TODO TODO LOts todo
-	@RequestMapping(method = RequestMethod.GET, value = "/v2/auth/plagiarism" , produces = "appliction/zip")
-	public ResponseEntity<InputStreamResource> generatePlagiarism(@RequestParam("identifier") String identifier, @RequestParam("domain") String domain, @RequestParam("rootOrg") String rootOrg,@RequestParam("org") String org) throws Exception{
-		System.out.println("Hi from controller");
+
+	// TODO TODO LOts todo
+	@RequestMapping(method = RequestMethod.GET, value = "/v2/auth/plagiarism", produces = "appliction/zip")
+	public ResponseEntity<InputStreamResource> generatePlagiarism(@RequestParam("identifier") String identifier,
+			@RequestParam("domain") String domain, @RequestParam("rootOrg") String rootOrg,
+			@RequestParam("org") String org) throws Exception {
 		File zipFolder = null;
-		HttpStatus httpStatus = null;
-		
+
 		try {
 			// response.put("result",
 			// generatePlagiarism.generatePlagiarismReport(identifier));
-			httpStatus = HttpStatus.OK;
-			//returns file
+			// returns file
 			System.out.println("Before file creation");
-			zipFolder = generatePlagiarism.generatePlagiarismReport(identifier, domain,rootOrg,org);
+			zipFolder = generatePlagiarism.generatePlagiarismReport(identifier, domain, rootOrg, org);
 			System.out.println("After file creation");
 			InputStreamResource res = new InputStreamResource(new FileInputStream(zipFolder));
-			return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,"attachment;filename=" + zipFolder.getName()).contentType(MediaType.APPLICATION_OCTET_STREAM).contentLength(zipFolder.length()).body(res);
+			return ResponseEntity.ok()
+					.header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + zipFolder.getName())
+					.contentType(MediaType.APPLICATION_OCTET_STREAM).contentLength(zipFolder.length()).body(res);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e);
 		}
 
 	}
-	
-	@RequestMapping(value = "/v1/auth/plagiarism" , produces = "appliction/zip")
-	public ResponseEntity<byte[]> generatePlagiarism(String hi,@RequestParam("identifier") String identifier, @RequestParam("domain") String domain, @RequestParam("rootOrg") String rootOrg,@RequestParam("org") String org) throws Exception{
+
+	@RequestMapping(value = "/v1/auth/plagiarism", produces = "appliction/zip")
+	public ResponseEntity<byte[]> generatePlagiarism(String hi, @RequestParam("identifier") String identifier,
+			@RequestParam("domain") String domain, @RequestParam("rootOrg") String rootOrg,
+			@RequestParam("org") String org) throws Exception {
 		System.out.println("Hi from controller");
 		HttpServletResponse response = null;
 		ResponseEntity<byte[]> responseE = null;
 		File zipFolder = null;
 		HttpStatus httpStatus = null;
 		HttpHeaders header = new HttpHeaders();
-		
+
 		try {
 			// response.put("result",
 			// generatePlagiarism.generatePlagiarismReport(identifier));
 			httpStatus = HttpStatus.OK;
-			zipFolder = generatePlagiarism.generatePlagiarismReport(identifier, domain,rootOrg,org);
+			zipFolder = generatePlagiarism.generatePlagiarismReport(identifier, domain, rootOrg, org);
 			response.setContentType("APPLICATION/OCTET-STREAM");
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + identifier + ".zip" + "\"");
 			OutputStream out = response.getOutputStream();

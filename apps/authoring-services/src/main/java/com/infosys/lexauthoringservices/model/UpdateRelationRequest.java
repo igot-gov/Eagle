@@ -1,7 +1,6 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.model;
+
+import java.util.Map;
 
 //check for integer and string in index field
 public class UpdateRelationRequest {
@@ -10,12 +9,12 @@ public class UpdateRelationRequest {
 
 	private String endNodeId;
 
-	private Integer index;
+	private Map<String, Object> relationMetaData;
 
-	public UpdateRelationRequest(String startNodeId, String endNodeId, Integer index) {
+	public UpdateRelationRequest(String startNodeId, String endNodeId, Map<String, Object> relationMetaData) {
 		this.startNodeId = startNodeId;
 		this.endNodeId = endNodeId;
-		this.index = index;
+		this.relationMetaData = relationMetaData;
 	}
 
 	public String getStartNodeId() {
@@ -34,12 +33,11 @@ public class UpdateRelationRequest {
 		this.endNodeId = endNodeId;
 	}
 
-	public Integer getIndex() {
-		return index;
+	public Map<String, Object> getRelationMetaData() {
+		return relationMetaData;
 	}
 
-	public void setIndex(Integer index) {
-		this.index = index;
+	public void setRelationMetaData(Map<String, Object> relationMetaData) {
+		this.relationMetaData = relationMetaData;
 	}
-
 }

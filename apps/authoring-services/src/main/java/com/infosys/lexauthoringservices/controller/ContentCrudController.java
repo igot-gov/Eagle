@@ -1,9 +1,7 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infosys.lexauthoringservices.exception.BadRequestException;
+import com.infosys.lexauthoringservices.exception.ResourceNotFoundException;
 import com.infosys.lexauthoringservices.model.Response;
 import com.infosys.lexauthoringservices.service.ContentCrudService;
 import com.infosys.lexauthoringservices.service.ValidationsService;
@@ -43,7 +42,7 @@ public class ContentCrudController {
 		responseMap.put(LexConstants.IDENTIFIER, contentCrudService.createContentNode(rootOrg, org, requestMap));
 		return new ResponseEntity<>(responseMap, HttpStatus.CREATED);
 	}
-
+	
 	@PostMapping("/createMigration")
 	public ResponseEntity<?> createContentNodeForMigration(
 			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
@@ -52,6 +51,26 @@ public class ContentCrudController {
 
 		contentCrudService.createContentNodeForMigration(rootOrg, org, requestMap);
 		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/createMigrationV2")
+	public ResponseEntity<?> createContentNodeForMigrationV2(
+			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
+			@RequestBody Map<String, Object> requestMap) throws Exception {
+
+		String identifier = contentCrudService.createContentNodeForMigrationV2(rootOrg, org, requestMap);
+		return new ResponseEntity<>(identifier,HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/createMigrationV3")
+	public ResponseEntity<?> createContentNodeForMigrationV3(
+			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
+			@RequestBody Map<String, Object> requestMap) throws Exception {
+
+		String identifier = contentCrudService.createContentNodeForMigrationV3(rootOrg, org, requestMap);
+		return new ResponseEntity<>(identifier,HttpStatus.CREATED);
 	}
 
 	@GetMapping("/read/{identifier}")
@@ -71,17 +90,54 @@ public class ContentCrudController {
 		contentCrudService.updateContentNode(rootOrg, org, identifier, requestMap);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
-	@PostMapping("/delete/{identifier}")
-	public ResponseEntity<?> contentDelete(@PathVariable("identifier") String identifier,
-			@RequestParam(value = LexConstants.AUTHOR, required = true) String authorEmail,
+	
+	@PostMapping("/updateMeta/{identifier}")
+	public ResponseEntity<?> updateContentMetaNode(@PathVariable("identifier") String identifier,
 			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
 			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
-			@RequestParam(value = LexConstants.USER_TYPE, defaultValue = "false") String userType) throws Exception {
+			@RequestBody Map<String, Object> requestMap) throws Exception {
 
-		contentCrudService.contentDelete(identifier, authorEmail, rootOrg, userType);
+		contentCrudService.updateContentMetaNode(rootOrg, org, identifier, requestMap);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+
+	@PostMapping("/delete")
+	public ResponseEntity<?> contentDelete(@RequestBody Map<String, Object> requestMap,
+			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org) throws Exception {
+
+		return new ResponseEntity<>(contentCrudService.contentDelete(requestMap, rootOrg,org),
+				HttpStatus.OK);
+	}
+	
+	@PostMapping("/unpublish")
+	public ResponseEntity<?> contentUnpublish(@RequestBody Map<String, Object> requestMap,
+			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org) throws Exception {
+
+		try {
+			contentCrudService.contentUnpublish(requestMap, rootOrg,org);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		} catch (BadRequestException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		catch (ResourceNotFoundException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+		}
+		catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+//	@PostMapping("/editor/delete")
+//	public ResponseEntity<?> contenEditortDelete(@RequestBody Map<String, Object> requestMap,
+//			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+//			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org) throws Exception {
+//
+//		return new ResponseEntity<>(contentCrudService.contentEditorDelete(rootOrg,org, requestMap),
+//				HttpStatus.OK);
+//	}
+	
 
 //	@PostMapping("/action/playlist/update/{identifier}")
 //	public ResponseEntity<Response> updatePlaylistNode(@PathVariable("identifier") String identifier,
@@ -100,16 +156,46 @@ public class ContentCrudController {
 
 		return new ResponseEntity<>(contentCrudService.getContentHierarchy(identifier, rootOrg, org), HttpStatus.OK);
 	}
+	
+	@GetMapping("/live/hierarchy/{identifier}")
+	public ResponseEntity<?> getOnlyLiveContentHierarchy(@PathVariable("identifier") String identifier,
+			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org)
+			throws BadRequestException, Exception {
 
-	@PostMapping("/hierarchy/fields/{identifier}")
-	public ResponseEntity<?> getContentHierarchyFields(@PathVariable("identifier") String identifier,
+		return new ResponseEntity<>(contentCrudService.getOnlyLiveContentHierarchy(identifier, rootOrg, org), HttpStatus.OK);
+	}
+	
+	@PostMapping("/v2/hierarchy/{identifier}")
+	public Map<String,Object> getContentHierarchyV2(@PathVariable("identifier") String identifier,
 			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
 			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
-			@RequestBody Map<String, Object> requestMap) throws Exception {
+			@RequestBody Map<String,Object> requestMap)
+			throws BadRequestException, Exception {
 
-		return new ResponseEntity<>(contentCrudService.getContentHierarchyFields(identifier, rootOrg, org, requestMap),
-				HttpStatus.OK);
+		Map<String,Object> hMap = contentCrudService.getContentHierarchyV2(identifier, rootOrg, org,requestMap);
+		return hMap;
 	}
+	
+	@PostMapping("/multiple/hierarchy")
+	public List<Map<String,Object>> getMultipleHierarchy(@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
+			@RequestBody Map<String,Object> requestMap)
+			throws BadRequestException, Exception {
+
+		List<Map<String,Object>> hMap = contentCrudService.getMultipleHierarchy(rootOrg, org,requestMap);
+		return hMap;
+	}
+
+//	@PostMapping("/hierarchy/fields/{identifier}")
+//	public ResponseEntity<?> getContentHierarchyFields(@PathVariable("identifier") String identifier,
+//			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+//			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
+//			@RequestBody Map<String, Object> requestMap) throws Exception {
+//
+//		return new ResponseEntity<>(contentCrudService.getContentHierarchyFields(identifier, rootOrg, org, requestMap),
+//				HttpStatus.OK);
+//	}
 
 	@PostMapping("/hierarchy/update")
 	public ResponseEntity<Response> updateContentHierarchy(
@@ -121,17 +207,17 @@ public class ContentCrudController {
 		contentCrudService.updateContentHierarchy(rootOrg, org, requestMap, migration);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	@PostMapping("/v2/hierarchy/update")
+	public ResponseEntity<Response> updateContentHierarchyV2(
+			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
+			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
+			@RequestParam(value = "migration", defaultValue = "no") String migration,
+			@RequestBody Map<String, Object> requestMap) throws Exception {
 
-//	@PostMapping("/action/content/publish/{identifier}")
-//	public ResponseEntity<Response> publishContent(@PathVariable("identifier") String identifier,
-//			@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
-//			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,
-//			@RequestParam(value = LexConstants.AUTHOR, defaultValue = "") String creatorEmail)
-//			throws Exception {
-//
-//		return new ResponseEntity<>(contentCrudService.publishContent(identifier, rootOrg, org, creatorEmail),
-//				HttpStatus.OK);
-//	}
+		contentCrudService.updateContentHierarchyV2(rootOrg, org, requestMap, migration);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 
 	@PostMapping("/status/change/{identifier}")
 	public ResponseEntity<Response> statusChange(@PathVariable("identifier") String identifier,
@@ -140,16 +226,16 @@ public class ContentCrudController {
 		return new ResponseEntity<>(contentCrudService.statusChange(identifier, requestBody), HttpStatus.OK);
 	}
 
-	@PostMapping("/action/content/external/publish/{identifier}")
-	public ResponseEntity<Response> externalContentPublish(@PathVariable("identifier") String identifier,
-			@RequestBody Map<String, Object> requestBody) throws Exception {
-
-		return new ResponseEntity<>(contentCrudService.externalContentPublish(identifier, requestBody), HttpStatus.OK);
-	}
+//	@PostMapping("/action/content/external/publish/{identifier}")
+//	public ResponseEntity<Response> externalContentPublish(@PathVariable("identifier") String identifier,
+//			@RequestBody Map<String, Object> requestBody) throws Exception {
+//
+//		return new ResponseEntity<>(contentCrudService.externalContentPublish(identifier, requestBody), HttpStatus.OK);
+//	}
 
 	@PostMapping("/extend")
 	public ResponseEntity<Response> extendContentExpiry(@RequestBody Map<String, Object> requestBody) throws Exception {
+
 		return new ResponseEntity<>(contentCrudService.extendContentExpiry(requestBody), HttpStatus.OK);
 	}
-
 }

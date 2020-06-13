@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.controller;
 
 import java.util.HashMap;
@@ -9,14 +6,15 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.infosys.lexauthoringservices.service.TextExtractionService;
 import com.infosys.lexauthoringservices.util.LexConstants;
 
+@RestController
 public class TextExtractionController {
 	
 	@Autowired
@@ -31,6 +29,7 @@ public class TextExtractionController {
 		return new ResponseEntity<>(responseMap, HttpStatus.OK);
 	}
 	
+	//Most likely will not be used
 	@PostMapping("/action/hierarchy/topics")
 	public ResponseEntity<?> textBlockData(@RequestParam(value = LexConstants.ROOT_ORG, defaultValue = "Infosys") String rootOrg,
 			@RequestParam(value = LexConstants.ORG, defaultValue = "Infosys Ltd") String org,@RequestBody Map<String, Object> requestMap) throws Exception{
