@@ -1,0 +1,95 @@
+{
+    "contentType": "Page",
+    "navigationBar": {
+        "pageBackLink": "/page/explore",
+        "pageTitle": "Explore",
+        "links": [
+            {
+                "widgetType": "actionButton",
+                "widgetSubType": "buttonFeature",
+                "widgetData": {
+                    "actionBtnId": "feature_marketing",
+                    "config": {
+                        "type": "mat-stroked-button"
+                    },
+                    "tags": "Marketing"
+                }
+            }
+        ]
+    },
+    "pageLayout": {
+        "widgetData": {
+            "widgets": [
+                {
+                    "widgetData": {
+                        "path": [
+                            {
+                                "clickUrl": "REPLACE_WITH_PATH_URL",
+                                "text": "REPLACE_WITH_PATH_TEXT"
+                            }
+                        ]
+                    },
+                    "widgetSubType": "cardBreadcrumb",
+                    "widgetType": "card"
+                },
+                {
+                    "widgetType": "contentStrip",
+                    "widgetSubType": "contentStripMultiple",
+                    "widgetData": {
+                        "loader": true,
+                        "strips": [
+                            {
+                                "key": "Course",
+                                "title": "Courses",
+                                "stripConfig": {
+                                    "cardSubType": "standard",
+                                    "postCardForSearch": true
+                                },
+                                "filters": [],
+                                "request": {
+                                    "search": {
+                                        "filters": {
+                                            "contentType": [
+                                                "Course"
+                                            ],
+                                            "catalogPaths": [
+                                                "REPLACE_WITH_CATALOG_TAG"
+                                            ]
+                                        },
+                                        "pageNo": 0,
+                                        "pageSize": 10
+                                    }
+                                }
+                            },
+                            {
+                                "key": "Resources",
+                                "title": "Resources",
+                                "stripConfig": {
+                                    "cardSubType": "standard",
+                                    "postCardForSearch": true
+                                },
+                                "filters": [],
+                                "request": {
+                                    "search": {
+                                        "filters": {
+                                            "contentType": [
+                                                "Resource"
+                                            ],
+                                            "catalogPaths": [
+                                                "REPLACE_WITH_CATALOG_TAG"
+                                            ]
+                                        },
+                                        "pageNo": 0,
+                                        "pageSize": 10
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "widgetSubType": "linearLayout",
+        "widgetType": "layout"
+    }
+}

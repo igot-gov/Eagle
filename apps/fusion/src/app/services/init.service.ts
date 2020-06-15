@@ -20,7 +20,6 @@ import {
   UserPreferenceService,
 } from '@ws-widget/utils'
 import { environment } from '../../environments/environment'
-import { BadgesService } from '../../../project/ws/app/src/lib/routes/profile/routes/badges/badges.service'
 
 interface IDetailsResponse {
   tncStatus: boolean
@@ -51,7 +50,6 @@ export class InitService {
     private userPreference: UserPreferenceService,
     private http: HttpClient,
     private widgetContentSvc: WidgetContentService,
-    private badgesSvc: BadgesService,
 
     @Inject(APP_BASE_HREF) private baseHref: string,
     // private router: Router,
@@ -159,12 +157,6 @@ export class InitService {
       .catch(() => {
         // throw new DataResponseError('COOKIE_SET_FAILURE')
       })
-    if (
-      this.configSvc.restrictedFeatures &&
-      !this.configSvc.restrictedFeatures.has('badgeEnabled')
-    ) {
-      this.badgesSvc.newBadge().subscribe()
-    }
     return true
   }
 

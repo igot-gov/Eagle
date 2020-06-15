@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core'
-import { IAppliedFilters, IFilter } from '../../content-picker-v2.model'
-import { NSSearch } from '../../../../_services/widget-search.model'
+import { IAppliedFilters, IFilter, IIncludedFilters } from '../../content-picker-v2.model'
 
 @Component({
   selector: 'ws-widget-filters',
@@ -9,7 +8,8 @@ import { NSSearch } from '../../../../_services/widget-search.model'
 })
 export class FiltersComponent implements OnInit {
 
-  @Input() filters: NSSearch.IFilterUnitResponse[] = []
+  @Input()
+  includedFilters: IIncludedFilters = {}
   @Input()
   preAppliedFilters: IFilter = {}
 

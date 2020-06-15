@@ -13,6 +13,5 @@ export namespace NsAutoComplete {
     last_name: string
     root_org: string
     wid: string
-    hasRole?: boolean
   }
 }

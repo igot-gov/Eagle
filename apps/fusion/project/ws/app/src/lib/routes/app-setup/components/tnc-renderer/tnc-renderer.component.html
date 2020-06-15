@@ -14,9 +14,12 @@
         <span class="ws-mat-primary-text">{{ generalTnc?.version }}</span>
       </div>
       <mat-form-field *ngIf="generalTnc" class="small-screen-width" appearance="outline">
-        <mat-select [value]="generalTnc.language" (selectionChange)="changeTncLang($event)">
+        <mat-select [(value)]="generalTnc.language" (selectionChange)="changeTncLang($event)">
 
-
+          <mat-select-trigger>
+            <span class="flag-icon-{{ generalTnc?.language | lowercase}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span>&nbsp;&nbsp;{{generalTnc?.language | uppercase}}</span>
+          </mat-select-trigger>
           <mat-option value="en" *ngIf="isLocaleAvailable('en')">
             <a mat-line>
               <img [ngStyle]="{

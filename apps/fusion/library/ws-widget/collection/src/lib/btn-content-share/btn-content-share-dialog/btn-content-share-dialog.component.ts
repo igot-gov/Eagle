@@ -1,7 +1,7 @@
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes'
 import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
-import { ConfigurationsService, EInstance, EventService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { NsAutoComplete } from '../../_common/user-autocomplete/user-autocomplete.model'
 import { WidgetContentShareService } from '../../_services/widget-content-share.service'
 import { NsContent } from '../../_services/widget-content.model'
@@ -28,7 +28,7 @@ export class BtnContentShareDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { content: NsContent.IContent },
     private shareSvc: WidgetContentShareService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.shareSvc.fetchConfigFile().subscribe((data: ICommon) => {
@@ -132,9 +132,7 @@ export class BtnContentShareDialogComponent implements OnInit {
       case NsContent.EContentTypes.KNOWLEDGE_BOARD:
         return `${locationOrigin}/app/knowledge-board/${this.data.content.identifier}`
       case NsContent.EContentTypes.KNOWLEDGE_ARTIFACT:
-        if (this.configSvc.rootOrg === EInstance.PATHFINDERS) {
-          return `${locationOrigin}/app/toc/knowledge-artifact/${this.data.content.identifier}`
-        }
+
         return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview`
       default:
         return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview`

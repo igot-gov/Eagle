@@ -9,7 +9,6 @@ import { ProfileRoutingModule } from './profile-routing.module'
 // comps
 import { ProfileComponent } from './profile.component'
 import { AnalyticsModule } from './routes/analytics/analytics.module'
-import { BadgesResolver } from './routes/badges/badges.resolver'
 import { CompetencyModule } from './routes/competency/competency.module'
 import { CompetencyResolverService } from './routes/competency/resolver/assessment.resolver'
 import { DashboardModule } from './routes/dashboard/dashboard.module'
@@ -19,22 +18,17 @@ import { LearningModule } from './routes/learning/learning.module'
 import { LearningHistoryResolver } from './routes/learning/resolvers/learning-history.resolver'
 import { LearningTimeResolver } from './routes/learning/resolvers/learning-time.resolver'
 import { SettingsModule } from './routes/settings/settings.module'
-import { SkillGuard } from './routes/skills/guards/skill.guard'
-import { SkillsModule } from './routes/skills/skills.module'
-import { BadgesModule } from './routes/badges/badges.module'
 
 @NgModule({
   declarations: [ProfileComponent],
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    BadgesModule,
     CompetencyModule,
     DashboardModule,
     InterestModule,
     LearningModule,
     SettingsModule,
-    SkillsModule,
     AnalyticsModule,
     BtnPageBackModule,
     LogoutModule,
@@ -48,11 +42,9 @@ import { BadgesModule } from './routes/badges/badges.module'
   ],
   providers: [
     InterestUserResolve,
-    BadgesResolver,
     CompetencyResolverService,
     LearningTimeResolver,
     LearningHistoryResolver,
-    SkillGuard,
   ],
 })
 export class ProfileModule { }

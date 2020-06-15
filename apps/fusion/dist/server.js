@@ -8,11 +8,9 @@ const httpProxy = require('http-proxy')
 
 const CONSTANTS = {
   PORTAL_PORT: parseInt(process.env.PORTAL_PORT || '3002', 10),
-  LA_HOST_PROXY: process.env.LA_HOST_PROXY || 'http://10.177.157.29',
-  WEB_HOST_PROXY: process.env.WEB_HOST_PROXY || 'http://10.177.61.54:3007',
-  FRAME_ANCESTORS:
-    process.env.FRAME_ANCESTORS ||
-    "'self',https://*.infosysapps.com,https://*.infosys.com,https://*.onwingspan.com,https://lab42.idemo-ppc.com",
+  LA_HOST_PROXY: process.env.LA_HOST_PROXY || 'http://localhost',
+  WEB_HOST_PROXY: process.env.WEB_HOST_PROXY || 'http://localhost:3007',
+  FRAME_ANCESTORS: process.env.FRAME_ANCESTORS || "'self'",
 }
 
 var app = express()
@@ -43,10 +41,7 @@ app.use(
 app.use('/LA', proxyCreator(express.Router(), CONSTANTS.LA_HOST_PROXY))
 app.use(morgan('combined'))
 app.use(haltOnTimedOut)
-app.use(
-  '/ScormCoursePlayer',
-  proxyCreator(express.Router(), 'http://10.177.61.57/ScormCoursePlayer'),
-)
+app.use('/ScormCoursePlayer', proxyCreator(express.Router(), 'http://localhost/ScormCoursePlayer'))
 
 serveAssets('')
 serveAssets('/ar')

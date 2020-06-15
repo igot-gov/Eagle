@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { WidgetContentService, NsContent, BtnPlaylistService, NsPlaylist } from '@ws-widget/collection'
-import { TFetchStatus, NsPage, ConfigurationsService, EventService } from '../../../../../../../../../../library/ws-widget/utils/src/public-api'
+import { TFetchStatus, NsPage, ConfigurationsService } from '../../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material'
 import { Subscription } from 'rxjs'
@@ -32,9 +32,7 @@ export class InterestComponent implements OnInit {
               private configSvc: ConfigurationsService,
               private router: Router,
               private interestSvc: InterestService,
-              private snackbar: MatSnackBar,
-              private eventSvc: EventService,
-              ) { }
+              private snackbar: MatSnackBar) { }
   @ViewChild('createPlaylistSuccess', { static: true }) createPlaylistSuccessMessage!: ElementRef<any>
   @ViewChild('createPlaylistError', { static: true }) createPlaylistErrorMessage!: ElementRef<any>
   playlistsSubscription: Subscription | null = null
@@ -136,16 +134,6 @@ export class InterestComponent implements OnInit {
     } else {
       this.router.navigate(['/app/setup/home/done'])
     }
-    this.raiseTelemetry()
-  }
-
-  raiseTelemetry() {
-    this.eventSvc.raiseInteractTelemetry('click', 'done', {
-      contentType: 'button',
-      context: {
-        pageSection: 'interest',
-      },
-    })
   }
 
 }

@@ -14,7 +14,7 @@ export class FsCardComponent implements OnInit {
 
   launchCertification() {
     // //console.log('card data', this.navigatorCard)
-    if (this.navigatorCard.routeButton.includes('lex')) {
+    if (this.navigatorCard.routeButton.includes('Wingspan')) {
 
     } else {
       window.open(this.navigatorCard.routeButton)

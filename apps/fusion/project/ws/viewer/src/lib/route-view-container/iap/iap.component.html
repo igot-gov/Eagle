@@ -31,16 +31,9 @@
               <ws-widget-btn-content-like [forPreview]="forPreview"
                 [widgetData]="iapData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="iapData"></ws-widget-btn-content-share>
+              <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
               <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
-                  contentId: iapData?.identifier,
-                  contentName: iapData?.name,
-                  contentType: 'Resource',
-                  mode: 'dialog',
-                  isDisabled: forPreview
-                }">
-              </ws-widget-btn-playlist>
+              <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
               <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
               <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                 [widgetData]="iapData | pipePartialContent: ['identifier', 'name']">

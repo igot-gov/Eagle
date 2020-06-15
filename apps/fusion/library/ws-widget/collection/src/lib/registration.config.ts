@@ -1,7 +1,6 @@
 import { NsWidgetResolver } from '@ws-widget/resolver'
 // Components
 import { BtnAppsComponent } from './btn-apps/btn-apps.component'
-import { LayoutEmbedComponent } from './layout-embed/layout-embed.component'
 // Modules
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
 import { BtnCallComponent } from './btn-call/btn-call.component'
@@ -104,7 +103,6 @@ import { TreeComponent } from './tree/tree.component'
 import { TreeModule } from './tree/tree.module'
 import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
-import { LayoutEmbedModule } from './layout-embed/layout-embed.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   BtnAppsModule,
@@ -133,7 +131,6 @@ export const WIDGET_REGISTERED_MODULES = [
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
-  LayoutEmbedModule,
   PickerContentModule,
   PlayerAmpModule,
   PlayerAudioModule,
@@ -281,11 +278,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.graph._type,
     widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
     component: GraphGeneralComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.layout._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.layout.embed,
-    component: LayoutEmbedComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.layout._type,

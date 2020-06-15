@@ -13,7 +13,6 @@ import { BtnFollowModule } from '../btn-follow/btn-follow.module'
 import { BtnGoalsModule } from '../btn-goals/btn-goals.module'
 import { BtnKbModule } from '../btn-kb/btn-kb.module'
 import { BtnPlaylistModule } from '../btn-playlist/btn-playlist.module'
-import { MiniProfileModule } from '../mini-profile/mini-profile.module'
 import { ContentProgressModule } from '../_common/content-progress/content-progress.module'
 import { DisplayContentTypeModule } from '../_common/display-content-type/display-content-type.module'
 import { PipeContentRouteModule } from '../_common/pipe-content-route/pipe-content-route.module'
@@ -52,7 +51,6 @@ import { BtnKbAnalyticsModule } from '../btn-kb-analytics/btn-kb-analytics.modul
     BtnFollowModule,
     UserImageModule,
     BtnChannelAnalyticsModule,
-    MiniProfileModule,
     ProfileImageModule,
     BtnContentFeedbackV2Module,
     BtnKbAnalyticsModule,

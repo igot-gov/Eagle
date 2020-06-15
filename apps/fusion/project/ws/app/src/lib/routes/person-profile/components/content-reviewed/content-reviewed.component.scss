@@ -6,11 +6,22 @@
     'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
-.outer-card {
-  min-height: 260px;
+.tabgroupcard {
+  width: 50% !important;
+  max-height: 300px !important;
+  min-height: 300px !important;
+
   @media (max-width: 960px) {
-    min-height: 305px;
+    width: calc(100vw - 80px) !important;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0rem;
+    margin-right: 0rem;
   }
+}
+
+.outer-card {
+  min-height: 250px;
 }
 
 .navigationbutton {
@@ -29,7 +40,8 @@
   padding: 0.25rem !important;
 
   @include breakpoint-lt-m {
-    width: calc(100vw - 70px) !important;
+    min-width: calc(100vw - 70px) !important;
+    max-width: calc(100vw - 70px) !important;
     padding: 0.5rem !important;
     margin-top: 0.25rem !important;
     margin-bottom: 0.25rem !important;
@@ -58,6 +70,11 @@ $title-line-height: 1.3em;
   height: $title-line-count * $title-line-height;
   line-height: $title-line-height;
   text-overflow: ellipsis;
+}
+
+.heightgroup {
+  max-height: 250px !important;
+  min-height: 250px !important;
 }
 
 .arrow_bottom {

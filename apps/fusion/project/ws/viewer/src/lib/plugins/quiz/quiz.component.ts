@@ -96,7 +96,6 @@ export class QuizComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   ngOnChanges(changes: SimpleChanges) {
-    this.viewState = 'initial'
     for (const change in changes) {
       if (change === 'quiz') {
         if (

@@ -35,7 +35,6 @@ import {
   PickerContentModule,
   UserAutocompleteModule,
   UserImageModule,
-  ContentPickerV2Module,
 } from '@ws-widget/collection'
 import { DialogAssignComponent } from './components/dialog-assign/dialog-assign.component'
 import {
@@ -65,7 +64,6 @@ import { ContentAssignmentComponent } from './routes/content-assignment/content-
     EmailInputModule,
     PickerContentModule,
     UserImageModule,
-    ContentPickerV2Module,
 
     // Material Imports
     MatButtonModule,

@@ -1,6 +1,5 @@
 import { Component, OnInit, SimpleChanges, Input, OnChanges } from '@angular/core'
 import { IFollowerId } from '../../person-profile.model'
-import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-app-following-list',
@@ -11,12 +10,10 @@ export class FollowingListComponent implements OnInit, OnChanges {
   @Input() wid = ''
   @Input() name = ''
   @Input() following: IFollowerId[] = []
-  @Input() currentUserfollowers: string[] = []
 
   followingCurrentDisplay: IFollowerId[] = []
   followingCount = 0
   pageSize = 0
-  currentUserProfile = false
 
   // paginator
   nextFollowingDisable = false
@@ -26,18 +23,12 @@ export class FollowingListComponent implements OnInit, OnChanges {
   startIndexFollowingArray = 0
   isInitialized = false
 
-  constructor(private configSvc: ConfigurationsService) { }
+  constructor() { }
 
   ngOnInit() {
     if (this.wid) {
       this.fetchFollowing()
       // if (this.type === 'followers') { this.fetchFollowers() } else { this.fetchFollowing() }
-    }
-    if (this.configSvc.userProfile) {
-      if (this.wid === this.configSvc.userProfile.userId) {
-        this.currentUserProfile = true
-
-      }
     }
     this.isInitialized = true
 
@@ -49,12 +40,6 @@ export class FollowingListComponent implements OnInit, OnChanges {
         this.followingCurrentDisplay = []
         this.wid = changes.wid.currentValue
         this.fetchFollowing()
-        if (this.configSvc.userProfile) {
-          if (this.wid === this.configSvc.userProfile.userId) {
-            this.currentUserProfile = true
-
-          }
-        }
       }
     }
   }

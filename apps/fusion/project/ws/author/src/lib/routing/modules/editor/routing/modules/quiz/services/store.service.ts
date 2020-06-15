@@ -168,13 +168,12 @@ export class QuizStoreService {
         errMessage = errMessageForLog
       }
     }
-    // if (correctAnswersCount === (quizObj.options.length) &&
-    //    (quizObj.questionType === 'mcq-sca' || quizObj.questionType === 'mcq-mca')) {
-    //   errMessageForLog = Notify.MCQ_ALL_OPTIONS_CORRECT
-    //   if (!errMessage) {
-    //     errMessage = errMessageForLog
-    //   }
-    // }
+    if (correctAnswersCount === (quizObj.options.length) && (quizObj.questionType === 'mcq-sca' || quizObj.questionType === 'mcq-mca')) {
+      errMessageForLog = Notify.MCQ_ALL_OPTIONS_CORRECT
+      if (!errMessage) {
+        errMessage = errMessageForLog
+      }
+    }
     this.updateErrorlog({
       type: 'options',
       quizNumber: quizIndex,

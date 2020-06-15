@@ -25,7 +25,6 @@ export const sizeSuffix: Record<tSize, string> = {
 
 export interface IGridLayoutDataMain {
   gutter?: number
-  rowGutter?: number
   widgets: IGridLayoutData[][]
   fromBasicEditor: boolean
 }

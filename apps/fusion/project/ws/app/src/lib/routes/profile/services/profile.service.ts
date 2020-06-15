@@ -4,15 +4,9 @@ import { Observable } from 'rxjs'
 import { NSProfileData } from '../models/profile.model'
 import { ITimeSpent } from '../routes/learning/models/learning.models'
 import { ConfigurationsService } from '@ws-widget/utils'
-import { IMySkills } from '../routes/skills/models/competency-model'
 
 const PROTECTED_SLAG_V8 = `/apis/protected/v8`
 
-// const LA_API_END_POINTS = {
-//   TIME_SPENT: `${PROTECTED_SLAG_V8}/user/myAnalytics/timespent`,
-//   NSO_PROGRESS: `${PROTECTED_SLAG_V8}/user/myAnalytics/nsoArtifactsAndCollaborators`,
-// }
-// const LA_API = `https://wingspan-staging.infosysapps.com/LA1/api`
 const LA_API = `/LA1/api`
 const LA_API_END_POINTS = {
   USER_ORG_GRAPH: `${PROTECTED_SLAG_V8}/user/dashboard/userOrgTime`,
@@ -66,8 +60,5 @@ export class ProfileService {
     return this.http.get<ITimeSpent>(
       `${LA_API_END_POINTS.USER_ORG_GRAPH}?startdate=${startDate}&enddate=${endDate}`,
     )
-  }
-  getSkillDashBoard(): Observable<IMySkills[]> {
-    return this.http.get<IMySkills[]>(`${LA_API_END_POINTS.SKILL_DATA}`, this.httpOptions)
   }
 }

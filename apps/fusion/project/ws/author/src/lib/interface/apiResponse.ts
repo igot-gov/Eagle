@@ -64,16 +64,3 @@ export namespace NSApiResponse {
     }
   }
 }
-
-export interface IUploadS3Request<T> {
-  categoryType: string
-  mimeType: string
-  path: string
-  data: T
-  name?: string
-}
-
-export interface IWebModuleRequest {
-  name: string
-  content: string | {}
-}

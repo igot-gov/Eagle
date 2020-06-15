@@ -1,5 +1,8 @@
-@import 'ws-mixins';
-@import 'ws-vars';
+// .sidenav {
+//   background-color: transparent !important;
+//   margin-right: 8px !important;
+//   border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+// }
 
 .profiledetails {
   background-color: transparent !important;
@@ -7,29 +10,59 @@
   height: inherit !important;
 }
 
+@import 'ws-mixins';
+@import 'ws-vars';
+
 $app-background-lite-color: #f5f6f7;
+
+// .icon {
+//   cursor: pointer;
+// }
 
 .email {
   color: #9baebd !important;
 }
 
-.details {
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    margin-left: 0rem !important;
-  }
-}
+// .sidenav-content {
+//   overflow-x: hidden !important;
+// }
 
-.userdetails {
-  @media (max-width: 768px) {
-    margin-left: 0em !important;
-  }
-}
+
+
 
 .follownumber {
   font-weight: bolder !important;
 }
+
+// .nav-container {
+//   position: relative;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   min-height: calc(100vh - 165px);
+
+//   @include breakpoint-lt-m {
+//     display: none !important;
+//   }
+// }
+
+// .card {
+//   @media (max-width: 1024px) {
+//     display: none !important;
+//   }
+// }
+
+// .smallscreen {
+//   display: none !important;
+
+//   @media (max-width: 1024px) {
+//     display: block !important;
+//   }
+
+
+
+// }
 
 .profilecard {
   min-height: 200px;
@@ -41,13 +74,25 @@ $app-background-lite-color: #f5f6f7;
   overflow: auto;
   height: 200px !important;
 
-  @media (max-width: 768px) {
-    width: 100% !important;
+  @include breakpoint-lt-m {
+    max-width: 100% !important;
+    min-width: 100% !important;
   }
 }
 
 .followcard {
   border-radius: 8px !important;
+}
+
+// .sidenav-content {
+//   overflow-x: hidden !important;
+// }
+
+.interest_divider {
+  margin: 8px 0;
+
+  background-color: rgba(0, 0, 0, 0.12) !important;
+
 }
 
 .divider {
@@ -65,11 +110,13 @@ $app-background-lite-color: #f5f6f7;
   font-weight: 700 !important;
 }
 
+
+
 .follow-button {
   border-radius: 6px !important;
   width: 100% !important;
 
-  @media (max-width: 768px) {
+  @include breakpoint-m {
     width: 100%;
   }
 }
@@ -79,7 +126,7 @@ $app-background-lite-color: #f5f6f7;
   width: 100% !important;
   background-color: whitesmoke !important;
 
-  @media (max-width: 768px) {
+  @include breakpoint-m {
     width: 100%;
   }
 }
@@ -91,7 +138,7 @@ $app-background-lite-color: #f5f6f7;
   border-radius: 16px;
   margin-top: $size-s;
 
-  @media (max-width: 768px) {
+  @include breakpoint-lt-m {
     width: 50px;
     height: 50px;
     border-radius: 8px;
@@ -101,17 +148,13 @@ $app-background-lite-color: #f5f6f7;
   h1 {
     font-size: 70px !important;
 
-    @media (max-width: 768px) {
+    @include breakpoint-lt-m {
       font-size: 25px !important;
     }
   }
 }
 
 .profile {
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-
   title {
     font-weight: 500 !important;
   }
@@ -123,17 +166,39 @@ $app-background-lite-color: #f5f6f7;
     border-radius: 16px;
     margin-top: $size-s;
 
-    @media (max-width: 768px) {
+    @include breakpoint-lt-m {
       width: 50px;
       height: 50px;
       border-radius: 50%;
       margin-top: 12px;
     }
   }
+
+
+  // .designation {
+  //   margin-bottom: $size-xs;
+  //   display: inline-flex;
+  //   align-items: center;
+  // }
+
+  // .nav-links {
+  //   margin-top: $size-xl;
+
+  //   a {
+  //     display: block;
+  //     padding: $size-xs / 2 0;
+  //     padding-left: $size-xs;
+  //     margin-bottom: $size-xs / 2;
+  //   }
+
+  //   a.active {
+  //     font-weight: 600;
+  //   }
+  // }
 }
 
 .boxshadowcard {
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .1) !important;
 }
 
 ::-webkit-scrollbar {
@@ -162,7 +227,6 @@ $app-background-lite-color: #f5f6f7;
   }
 }
 
-.hiddenClass {
-  display: none !important;
-  margin-left: 0rem !important;
+.transparentcard {
+  background-color: transparent !important;
 }

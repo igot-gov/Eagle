@@ -121,7 +121,7 @@ export class AuthKeycloakService {
   }
 
   login(
-    idpHint: 'E' | 'N' | 'S' | 'siemens-entitlement' = 'E',
+    idpHint: 'E' | 'N' | 'S' = 'E',
     redirectUrl: string = this.defaultRedirectUrl,
   ): Promise<void> {
     return this.keycloakSvc.login({

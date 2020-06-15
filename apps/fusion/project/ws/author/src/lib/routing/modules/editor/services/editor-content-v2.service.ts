@@ -21,9 +21,8 @@ export class EditorContentV2Service {
   changeActiveCont = new BehaviorSubject<string>('')
   changeActiveParentCont = new BehaviorSubject<string>('')
   onContentChange = new BehaviorSubject<string>('')
-  onMetaChange = new BehaviorSubject<string>('')
   onDataChange = new BehaviorSubject<string>('')
-  constructor() { }
+  constructor() {}
 
   // isSizeExceedsLimit(): boolean {
   //   const totalSize: { [key: string]: any } = {}

@@ -15,7 +15,6 @@ const API_END_POINTS = {
   updateConfigs: `/apis/protected/v8/leaderboard/updateConfiguration`,
   Getsso: `/apis/protected/v8/leaderboard/GetSSO`,
   GetBalance: `/apis/protected/v8/leaderboard/GetBalance`,
-  fetchGuildConfig: `/apis/protected/v8/leaderboard/fetchGuildAwardCountData`,
 }
 
 @Injectable({
@@ -25,19 +24,15 @@ export class GamificationService {
   constructor(private http: HttpClient) { }
 
   // Fetch leaderboard to display for users
-  fetchLeaderBoard(sprintIdVal: string, dateStart: any, dateEnd: any, entityCode: string,
-                   entityId: number) {
-    return this.http.post<any>(API_END_POINTS.fetchBoards, {
-      sprintId: sprintIdVal,
-      startDate: dateStart, endDate: dateEnd, EntityCode: entityCode, EntityId: entityId,
-    })
+  fetchLeaderBoard(sprintIdVal: string) {
+    return this.http.post<any>(API_END_POINTS.fetchBoards, { sprintId: sprintIdVal })
   }
 
   // Fetch leaderboard to display for guild users
-  fetchGuildLeaderboard(sprintIdVal: string, dateStart: any, dateEnd: any, entityCode: string) {
+  fetchGuildLeaderboard(sprintIdVal: string, dateStart: any, dateEnd: any) {
     return this.http.post<any>(API_END_POINTS.fetchGuildLeaderboard, {
       sprintId: sprintIdVal,
-      startDate: dateStart, endDate: dateEnd, EntityCode: entityCode,
+      startDate: dateStart, endDate: dateEnd,
     })
   }
 
@@ -92,11 +87,6 @@ export class GamificationService {
   // Fetch Configs to display for users
   fetchConfigs(sprintIdVal: string, roleName: string) {
     return this.http.post<any>(API_END_POINTS.fetchConfigs, { EntityCode: sprintIdVal, RoleName: roleName })
-  }
-
-  // Fetch Guild Configs to display for users
-  fetchGuildConfigs(sprintIdVal: string, roleName: string) {
-    return this.http.post<any>(API_END_POINTS.fetchGuildConfig, { EntityCode: sprintIdVal, RoleName: roleName })
   }
 
   // Fetch dealers to display for users

@@ -4,9 +4,3 @@ export interface IQuizQuestionType {
   multipleChoiceQuestionSingleCorrectAnswer: 'mcq-sca',
   multipleChoiceQuestionMultipleCorrectAnswer: 'mcq-mca'
 }
-
-export interface IQuizResult {
-  timeLimit: number
-  isAssessment: boolean
-  questions: any[]
-}

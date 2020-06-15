@@ -4,7 +4,7 @@
 
 export const environment: IEnvironment = {
   production: false,
-  sitePath: 'ford-staging.onwingspan.com',
+  sitePath: 'instance.onwingspan.com',
 }
 interface IEnvironment {
   production: boolean

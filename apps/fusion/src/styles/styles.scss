@@ -343,41 +343,6 @@ area {
   box-sizing: border-box;
 }
 
-// for showing body in details page
-.wingspan-siemens-content-body {
-  p:first-of-type {
-    display: flex;
-
-    @include breakpoint-lt-m {
-      display: initial;
-    }
-  }
-
-  img {
-    padding-bottom: 1em;
-    padding-right: 1em;
-    float: left;
-    width: auto;
-  }
-
-  @include breakpoint-lt-m {
-    img {
-      display: block;
-      float: none;
-      padding-right: 0;
-    }
-  }
-}
-
-.wingspan-siemens-content-video {
-  text-align: center !important;
-
-  video {
-    min-width: 90% !important;
-    height: auto !important;
-  }
-}
-
 .night-mode .ql-editor.ql-blank::before {
   color: #cccccc;
 }

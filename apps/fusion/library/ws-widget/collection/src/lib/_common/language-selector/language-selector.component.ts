@@ -36,7 +36,6 @@ export class LanguageSelectorComponent implements OnInit {
 
   langChanged(path: MatSelectChange) {
     this.chosenLanguage = path.value
-    this.appLanguage = path.value
     this.langChangedEvent.emit(path.value)
   }
 

@@ -40,11 +40,6 @@ const routes: Routes = [
     loadChildren: () => import('./routes/channels/channels.module').then(u => u.ChannelsModule),
   },
   {
-    path: 'skills-role/:roleId',
-    loadChildren: () =>
-      import('./routes/compass-roles/compass-roles.module').then(u => u.CompassRolesModule),
-  },
-  {
     path: 'events',
     loadChildren: () => import('./routes/events/events.module').then(u => u.EventsModule),
   },
@@ -54,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InfyRoutingModule {}
+export class InfyRoutingModule { }

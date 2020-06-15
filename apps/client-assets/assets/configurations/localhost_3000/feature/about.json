@@ -1,0 +1,63 @@
+{
+  "banner": {
+    "title": "eagle",
+    "description": "Your description here.",
+    "videoLink": "/assets/videos/intro.mp4",
+    "moreInfo": "some url here"
+  },
+  "section1": {
+    "title": "Overview",
+    "leftParas": [
+      "Overview description"
+    ],
+    "rightParas": [
+      "More desciption."
+    ]
+  },
+  "section2": {
+    "description": "Description here."
+  },
+  "section3": {
+    "title": "",
+    "videoUrl": "",
+    "rightParas": []
+  },
+  "section4": {
+    "title": "Title",
+    "subTitle": "Some title here",
+    "cards": [
+      {
+        "icon": "wb_cloudy",
+        "title": "Title",
+        "para": "A scalable, secure, open-source cloud-based solution that can be easily integrated with your enterprise SSO. This solution can be accessed anytime, anywhere and on any device."
+      },
+      {
+        "icon": "info",
+        "title": "Title",
+        "para": "Some text here."
+      },
+      {
+        "icon": "tag_faces",
+        "title": "Title",
+        "para": "Some text here."
+      },
+      {
+        "icon": "chat",
+        "title": "Title",
+        "para": "Some text here."
+      }
+    ]
+  },
+  "section5": {
+    "title": "Insights",
+    "subtitle": "How Impactful is Your Organization’s Learning?",
+    "para": "The structure of organizations and jobs are changing as artificial intelligence, machine learning, robotic process automation and other digital capabilities are overwhelming the workplace. It therefore becomes imperative for employees to constantly learn new skills and develop capabilities that will make them ready for the jobs of the future."
+  },
+  "features": {
+    "title": "Features",
+    "description": "Description here.",
+    "list": {
+      "Feature Name": "<p> Feature description </p>"
+    }
+  }
+}

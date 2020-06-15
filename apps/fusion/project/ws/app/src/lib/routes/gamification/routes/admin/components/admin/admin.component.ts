@@ -1,9 +1,6 @@
-import {
-  Component, OnInit, Output, EventEmitter, ViewChild,
-  ElementRef,
-} from '@angular/core'
+import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
-import { MatSelectChange, MatSnackBar } from '@angular/material'
+import { MatSelectChange } from '@angular/material'
 import { GamificationService } from '../../../../services/gamification.service'
 import { ExcelService } from '../excel.service'
 @Component({
@@ -12,7 +9,6 @@ import { ExcelService } from '../excel.service'
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements OnInit {
-  @ViewChild('successToast', { static: true }) successToast!: ElementRef<any>
   query!: any
   leaderboard!: any
   public sideNavBarOpened = false
@@ -30,7 +26,6 @@ export class AdminComponent implements OnInit {
   roleName!: string
   dealerCode!: any
   regionName!: string
-  isRestricted!: any
   group!: any
   excelArray = [{}]
 
@@ -40,7 +35,6 @@ export class AdminComponent implements OnInit {
     private gamificationSvc: GamificationService,
     private configSvc: ConfigurationsService,
     private excelService: ExcelService,
-    private snackBar: MatSnackBar,
   ) {
     if (this.configSvc.userProfile) {
       this.userName = this.configSvc.userProfile.userName
@@ -50,10 +44,6 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.configSvc.restrictedFeatures) {
-      this.isRestricted =
-        !this.configSvc.restrictedFeatures.has('pointsApproved')
-    }
     this.rolesList = [
       'All',
       'Sales Manager',
@@ -73,7 +63,7 @@ export class AdminComponent implements OnInit {
 
   private fetchLeaderboardData() {
     this.fetchStatus = 'fetching'
-    this.gamificationSvc.fetchLeaderBoard(this.sprint, null, null, '0', 0).subscribe(data => {
+    this.gamificationSvc.fetchLeaderBoard(this.sprint).subscribe(data => {
       data.forEach((element: any) => {
         element.reason = ''
       })
@@ -90,12 +80,8 @@ export class AdminComponent implements OnInit {
   }
 
   updatePoints(leaderBoardData: []) {
-    this.fetchStatus = 'fetching'
     this.gamificationSvc.updateApprovedPoints(leaderBoardData).subscribe(data => {
       this.result = data
-      this.fetchStatus = 'done'
-      this.snackBar.open(this.successToast.nativeElement.value)
-      this.fetchLeaderboardData()
     })
   }
 

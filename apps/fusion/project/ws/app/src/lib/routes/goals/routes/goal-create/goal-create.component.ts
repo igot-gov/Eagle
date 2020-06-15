@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-app-goal-create',
@@ -7,12 +6,10 @@ import { ConfigurationsService } from '../../../../../../../../../library/ws-wid
   styleUrls: ['./goal-create.component.scss'],
 })
 export class GoalCreateComponent implements OnInit {
-  isCommonGoalEnabled = false
-  constructor(private configSvc: ConfigurationsService) {}
+
+  constructor() { }
 
   ngOnInit() {
-    if (this.configSvc.restrictedFeatures) {
-      this.isCommonGoalEnabled = !this.configSvc.restrictedFeatures.has('commonGoals')
-    }
   }
+
 }

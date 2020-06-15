@@ -1,0 +1,12 @@
+{
+    "isIosAvailable": false,
+    "isAndroidAvailable": true,
+    "appsAndroid": "https://play.google.com/store/apps/details?id=com.infosysit.wingspan",
+    "appsAndroidMirror": "/mobile-apps/android/app.apk",
+    "showQrCode": false,
+    "isClient": true,
+    "appName": "'Rainforest'",
+    "nameProvidedByClient": " ",
+    "androidMirrorQR": "/assets/images/mobile/qr_mirror_android.png",
+    "iosQR": "/assets/images/mobile/qr_ios.png"
+}

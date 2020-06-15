@@ -53,7 +53,7 @@ export class CurateComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.showSettingButtons = this.accessService.rootOrg === 'Siemens'
+    this.showSettingButtons = this.accessService.rootOrg === 'client1'
     this.allLanguages = this.authInitService.ordinals.subTitles
     Object.keys(this.contentService.originalContent).map(v =>
       this.contents.push(this.contentService.originalContent[v]),
@@ -254,7 +254,7 @@ export class CurateComponent implements OnInit, OnDestroy {
             )
             ? ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
               !this.accessService.authoringConfig.isMultiStepFlow) &&
-              this.accessService.rootOrg.toLowerCase() === 'siemens'
+              this.accessService.rootOrg.toLowerCase() === 'client1'
               ? 100000
               : 1
             : 0,
@@ -538,7 +538,7 @@ export class CurateComponent implements OnInit, OnDestroy {
     if (
       ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
         !this.accessService.authoringConfig.isMultiStepFlow) &&
-      this.accessService.rootOrg.toLowerCase() === 'siemens'
+      this.accessService.rootOrg.toLowerCase() === 'client1'
     ) {
       return 'publish'
     }

@@ -18,9 +18,9 @@ export class UserImageComponent implements OnInit, OnChanges {
   verifiedMicrosoftEmail = ''
   shortName = ''
   imageUrl: string | null = null
-  constructor(private configSvc: ConfigurationsService) {}
+  constructor(private configSvc: ConfigurationsService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges() {
     if (
@@ -37,16 +37,6 @@ export class UserImageComponent implements OnInit, OnChanges {
         this.verifiedMicrosoftEmail = this.email
       }
     }
-    //  else {
-    //   if (this.userId && this.configSvc.rootOrg === 'Pathfinders') {
-    //     this.imageUrl = null
-    //     this.miniProfileSvc.viewMiniProfile(this.userId).subscribe(
-    //       (response: NsMiniProfile.IMiniProfileData) => {
-    //         this.imageUrl = response.profile_image ? response.profile_image : null
-    //       },
-    //     )
-    //   }
-    // }
     if (this.userName && this.userName !== '  ') {
       const userNameArr = this.userName.split(' ').slice(0, 2)
       this.shortName = userNameArr

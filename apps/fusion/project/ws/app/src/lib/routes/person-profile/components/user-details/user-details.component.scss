@@ -10,17 +10,8 @@
   }
 }
 
-.badgesSkills {
-  display: flex !important;
-
-  @media (max-width: 1024px) {
-    display: block !important;
-  }
-}
-
 .tabgroupcard {
   width: 46%;
-  min-height: 358px;
 
   @media (max-width: 768px) {
     //width: calc(100vw - 110px) !important;
@@ -42,20 +33,6 @@
   margin-left: 0rem !important;
 }
 
-.achievementCard {
-  @media (max-width: 1024px) {
-    width: inherit;
-  }
-}
-
-.skillcard {
-  width: 50%;
-
-  @media (max-width: 1024px) {
-    width: auto;
-  }
-}
-
 .followerCount {
   color: #9baebd !important;
   margin-right: 0.2rem !important;
@@ -75,11 +52,13 @@
 }
 
 .heightgroup {
-  height: inherit !important;
+  max-height: inherit !important;
+  min-height: inherit !important;
 }
 
 .heightCard {
-  height: 400px;
+  min-height: 400px;
+  max-height: 400px;
 }
 
 .kbcard {
@@ -88,7 +67,6 @@
 
 .playlistCard {
   width: inherit !important;
-  min-height: 150px;
 }
 
 .followercard {

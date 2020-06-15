@@ -126,7 +126,7 @@ export class FeedbackComponent {
       .subscribe(
         () => {
           this.singleFeedbackSendStatus = 'done'
-          if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.rootOrg === 'Siemens') {
+          if (this.configSvc.instanceConfig && this.configSvc.instanceConfig.rootOrg === 'RootOrg') {
             const req: INotificationRequest = {
               'event-id': 'platform_feedback',
               'tag-value-pair': {

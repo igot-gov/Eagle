@@ -20,8 +20,6 @@ import { TncComponent } from './routes/tnc/tnc.component'
 import { TncAppResolverService } from './services/tnc-app-resolver.service'
 import { TncPublicResolverService } from './services/tnc-public-resolver.service'
 import { AppTocResolverService } from '@ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service'
-import { SkillManagementGuard } from '../../project/ws/app/src/lib/routes/skill-management/guards/skill-management.guard'
-import { UploadPdfComponent } from './routes/upload-pdf/upload-pdf.component'
 
 // 💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥💥
 // Please declare routes in alphabetical order
@@ -42,34 +40,10 @@ const routes: Routes = [
   },
   {
     path: 'app/activities',
-    loadChildren: () =>
-      import('./routes/route-activities.module').then(u => u.RouteActivitiesModule),
+    loadChildren: () => import('./routes/route-activities.module').then(u => u.RouteActivitiesModule),
     canActivate: [GeneralGuard],
   },
-  {
-    path: 'infosysagm',
-    pathMatch: 'full',
-    loadChildren: () => import('./routes/route-infosysagm.module').then(u => u.RouteInfosysagm),
-    canActivate: [GeneralGuard],
-  },
-  {
-    path: 'infosysagm/epochuser',
-    component: PageComponent,
-    data: {
-      pageType: 'page',
-      pageKey: 'embed-epoch',
-    },
-    resolve: {
-      pageData: PageResolve,
-    },
-    canActivate: [GeneralGuard],
-  },
-  {
-    path: 'infosysagm/moderator',
-    pathMatch: 'full',
-    loadChildren: () => import('./routes/route-infosysagm.module').then(u => u.RouteInfosysagm),
-    canActivate: [GeneralGuard],
-  },
+
   {
     path: 'admin',
     data: {
@@ -88,14 +62,6 @@ const routes: Routes = [
     loadChildren: () => import('./routes/route-channels.module').then(u => u.RouteChannelsModule),
     canActivate: [GeneralGuard],
   },
-  // commercial_begin
-  {
-    path: 'app/concept-graph',
-    loadChildren: () =>
-      import('./routes/route-concept-graph.module').then(u => u.RouteConceptGraphModule),
-    canActivate: [GeneralGuard],
-  },
-  // commercial_end
   {
     path: 'app/content-assignment',
     loadChildren: () =>
@@ -111,7 +77,6 @@ const routes: Routes = [
   {
     path: 'app/setup',
     loadChildren: () => import('./routes/route-app-setup.module').then(u => u.RouteAppSetupModule),
-    canActivate: [GeneralGuard],
   },
   {
     path: 'app/feedback',
@@ -151,32 +116,7 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-  {
-    path: 'app/knowledge-board',
-    loadChildren: () =>
-      import('./routes/route-knowledge-board.module').then(u => u.RouteKnowledgeBoardModule),
-    canActivate: [GeneralGuard],
-  },
-  {
-    path: 'app/leaderboard',
-    loadChildren: () =>
-      import('./routes/route-leaderboard-app.module').then(u => u.RouteLeaderboardAppModule),
-    canActivate: [GeneralGuard],
-  },
-  {
-    path: 'app/learning-path',
-    loadChildren: () =>
-      import('./routes/route-learning-path.module').then(u => u.RouteLearningPathModule),
-    canActivate: [GeneralGuard],
-  },
-  {
-    path: 'app/learning-paths',
-    loadChildren: () =>
-      import('./routes/route-academy-learning-paths.module').then(
-        u => u.RouteAcademyLearningPathsModule,
-      ),
-    canActivate: [GeneralGuard],
-  },
+
   {
     path: 'app/my-learning',
     loadChildren: () =>
@@ -220,25 +160,6 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
-    path: 'app/pathfinders-calendar',
-    loadChildren: () =>
-      import('./routes/route-pathfinders-calendar.module').then(u => u.RouteCalendarModule),
-    data: {
-      pageType: 'feature',
-      pageKey: 'pathfinders-calendar',
-    },
-    resolve: {
-      searchPageData: PageResolve,
-    },
-    canActivate: [GeneralGuard],
-  },
-  {
-    path: 'app/account-settings',
-    loadChildren: () =>
-      import('./routes/route-account-settings.module').then(u => u.RouteAccountSettingsModule),
-    canActivate: [GeneralGuard],
-  },
-  {
     path: 'app/events',
     loadChildren: () => import('./routes/route-app-event.module').then(m => m.AppEventsModule),
     canActivate: [GeneralGuard],
@@ -255,12 +176,6 @@ const routes: Routes = [
       searchPageData: PageResolve,
     },
     canActivate: [GeneralGuard],
-  },
-  {
-    path: 'app/skill-management',
-    loadChildren: () =>
-      import('./routes/route-skill-management.module').then(u => u.RouteSkillManagementModule),
-    canActivate: [GeneralGuard, SkillManagementGuard],
   },
   {
     path: 'app/social',
@@ -284,10 +199,6 @@ const routes: Routes = [
     resolve: {
       tnc: TncAppResolverService,
     },
-  },
-  {
-    path: 'app/upload-pdf',
-    component: UploadPdfComponent,
   },
   {
     path: 'author',
@@ -520,4 +431,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [ExploreDetailResolve],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

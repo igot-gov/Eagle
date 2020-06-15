@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { MatDialog, MatSnackBar } from '@angular/material'
+import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService, UtilityService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { NsGoal } from '../btn-goals/btn-goals.model'
 import { NsPlaylist } from '../btn-playlist/btn-playlist.model'
-import { MiniProfileComponent } from '../mini-profile/mini-profile.component'
 import { NsContent } from '../_services/widget-content.model'
 import { NsCardContent } from './card-content.model'
 
@@ -28,7 +27,6 @@ export class CardContentComponent extends WidgetBaseComponent
   prefChangeSubscription: Subscription | null = null
   isIntranetAllowedSettings = false
   constructor(
-    private dialog: MatDialog,
     private events: EventService,
     private configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
@@ -299,15 +297,5 @@ export class CardContentComponent extends WidgetBaseComponent
     return false
   }
 
-  openDialog(wid: string, event: Event): void {
-    event.preventDefault()
-    event.stopPropagation()
-    const dialogRef = this.dialog.open(MiniProfileComponent, {
-      width: '410px',
-      data: wid,
-    })
-    dialogRef.afterClosed().subscribe((_result: any) => {})
-  }
-
-  openComment() {}
+  openComment() { }
 }

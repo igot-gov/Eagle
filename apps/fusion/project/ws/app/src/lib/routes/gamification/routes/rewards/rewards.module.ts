@@ -12,8 +12,6 @@ import {
   MatTooltipModule,
   MatProgressBarModule,
   MatDividerModule,
-  MatProgressSpinnerModule,
-
 } from '@angular/material'
 
 @NgModule({
@@ -29,8 +27,6 @@ import {
     MatTooltipModule,
     MatProgressBarModule,
     MatDividerModule,
-    MatProgressSpinnerModule,
-
   ],
 })
 export class RewardsModule { }

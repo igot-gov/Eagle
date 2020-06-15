@@ -11,7 +11,7 @@ export class ConfigurationsComponent implements OnInit {
   configsData!: any
   public sideNavBarOpened = false
   sprintSelected!: any
-  sprint = 'H1'
+  sprint = 'h1'
   roleName = 'Sales Manager'
   rolesList = ['All', 'Sales Manager', 'Service Technician',
     'Parts Manager', 'Sales Consultant', 'Service Manager', 'Service Advisor', 'Dealer/Partner',
@@ -20,14 +20,11 @@ export class ConfigurationsComponent implements OnInit {
   col1!: any
   con!: any
   col2!: any
-  guildCol1!: any
-  guildData!: any
   objectKeys = Object.keys
   constructor(private gamificationSvc: GamificationService) { }
 
   ngOnInit() {
     this.fetchConfigs()
-    this.fetchGuildConfigs()
   }
 
   fetchConfigs() {
@@ -40,25 +37,16 @@ export class ConfigurationsComponent implements OnInit {
     })
   }
 
-  fetchGuildConfigs() {
-    this.fetchStatus = 'fetching'
-    this.gamificationSvc.fetchGuildConfigs(this.sprint, this.roleName).subscribe(data => {
-      this.guildData = data
-      this.guildCol1 = JSON.parse(this.guildData.Column1)
-      this.fetchStatus = 'done'
-    })
-  }
-
   // Function to capture sprint value
   sprintChanged(path: MatSelectChange) {
-    if (path.value === 'H1') {
-      this.sprint = 'H1'
+    if (path.value === 'h1') {
+      this.sprint = 'h1'
     }
-    if (path.value === 'H2') {
-      this.sprint = 'H2'
+    if (path.value === 'h2') {
+      this.sprint = 'h2'
     }
-    if (path.value === 'FY') {
-      this.sprint = 'FY'
+    if (path.value === 'fy') {
+      this.sprint = 'fy'
     }
     this.fetchConfigs()
   }

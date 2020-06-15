@@ -49,7 +49,15 @@ export class FileUploadComponent implements OnInit {
   enableUpload = true
   duration = 0
   canUpdate = true
-  fileUploadUrl = ''
+  fileUploadCondition = {
+    fileName: false,
+    eval: false,
+    externalReference: false,
+    iframe: false,
+    isSubmitPressed: false,
+    preview: false,
+    url: '',
+  }
   errorFileList: string[] = []
   fileList: string[] = []
   @Input() isCollectionEditor = false
@@ -133,7 +141,15 @@ export class FileUploadComponent implements OnInit {
   }
 
   onDrop(file: File) {
-    this.fileUploadUrl = ''
+    this.fileUploadCondition = {
+      fileName: false,
+      eval: false,
+      externalReference: false,
+      iframe: false,
+      isSubmitPressed: false,
+      preview: false,
+      url: '',
+    }
     const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
     if (
       !fileName.toLowerCase().endsWith('.pdf') &&
@@ -172,7 +188,15 @@ export class FileUploadComponent implements OnInit {
           height: 'auto',
         })
         dialogRef.afterClosed().subscribe(_ => {
-          this.assignFileValues(file, fileName)
+          if (
+            this.fileUploadCondition.fileName &&
+            this.fileUploadCondition.iframe &&
+            this.fileUploadCondition.eval &&
+            this.fileUploadCondition.preview &&
+            this.fileUploadCondition.externalReference
+          ) {
+            this.assignFileValues(file, fileName)
+          }
         })
       } else {
         this.assignFileValues(file, fileName)
@@ -267,8 +291,8 @@ export class FileUploadComponent implements OnInit {
           if (this.mimeType === 'application/html') {
             url = `${document.location.origin}/content-store/
               ${this.accessService.rootOrg}/${this.accessService.org}/Public/
-              ${this.currentContent}${CONTENT_BASE_WEBHOST}/
-              ${this.fileUploadUrl}`
+              ${this.currentContent}/web-hosted/
+              ${this.fileUploadCondition.url}`
           } else {
             url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
           }

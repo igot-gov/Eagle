@@ -8,8 +8,6 @@ import { ConfigurationsService, ValueService } from '@ws-widget/utils'
 })
 export class AppFooterComponent {
 
-  isSiemensContributionShown = false
-  isFordFooter = false
   isXSmall = false
   termsOfUser = true
 
@@ -25,18 +23,6 @@ export class AppFooterComponent {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
     })
-    if (this.configSvc.instanceConfig) {
-      if (this.configSvc.instanceConfig.rootOrg === 'Siemens') {
-        this.isSiemensContributionShown = true
-      } else {
-        this.isSiemensContributionShown = false
-      }
-      if (this.configSvc.instanceConfig.rootOrg === 'Ford') {
-        this.isFordFooter = true
-      } else {
-        this.isFordFooter = false
-      }
-    }
   }
 
 }

@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router'
 import { ContentComponent } from './components/content/content.component'
 import { HomeComponent } from './components/home/home.component'
 import { AnalyticsComponent } from './routes/analytics/analytics.component'
-import { ReportsComponent } from './components/reports/reports.component'
-import { MyLearningPathwayComponent } from './components/my-learning-pathway/my-learning-pathway.component'
-import { LearningAnalyticsGuard } from './guards/learning-analytics.guard'
 import { PageResolve } from '@ws-widget/utils'
 
 const routes: Routes = [
@@ -35,15 +32,6 @@ const routes: Routes = [
     resolve: {
       pageData: PageResolve,
     },
-  },
-  {
-    path: 'pathway',
-    component: MyLearningPathwayComponent,
-  },
-  {
-    path: 'reports',
-    component: ReportsComponent,
-    canActivate: [LearningAnalyticsGuard],
   },
 ]
 

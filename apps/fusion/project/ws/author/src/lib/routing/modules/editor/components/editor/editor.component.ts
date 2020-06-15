@@ -103,8 +103,7 @@ export class EditorComponent implements OnInit, OnDestroy {
           }
         })
         if (
-          (['InReview', 'Reviewed', 'QualityReview'].includes(contents[0].content.status) ||
-            this.router.snapshot.queryParamMap.get('isrejected')) &&
+          ['InReview', 'Reviewed', 'QualityReview'].includes(contents[0].content.status) &&
           this.initSvc.authAdditionalConfig.allowActionHistory
         ) {
           this.dialog.open(StatusTrackComponent, {

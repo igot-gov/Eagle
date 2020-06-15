@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core'
 import { IUserNotification } from '../../models/notifications.model'
 import { NsGoal, NsPlaylist, BtnPlaylistService, BtnGoalsService } from '@ws-widget/collection'
 import { TFetchStatus, NsPage, ConfigurationsService } from '@ws-widget/utils'
-import { BadgesService } from '../../../profile/routes/badges/badges.service'
 
 @Component({
   selector: 'ws-app-notification',
@@ -20,9 +19,8 @@ export class NotificationComponent implements OnInit {
   constructor(
     private goalsSvc: BtnGoalsService,
     private playlistSvc: BtnPlaylistService,
-    private badgeSvc: BadgesService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initiate()
@@ -31,24 +29,10 @@ export class NotificationComponent implements OnInit {
   initiate() {
     this.fetchStatus = 'fetching'
     this.statusCount = 0
-    this.fetchRecentBadge()
     this.fetchSharedPlaylist()
     this.fetchSharedGoals()
   }
 
-  fetchRecentBadge() {
-    this.badgeSvc.fetchRecentBadge().subscribe(
-      _data => {
-        if (_data && _data.recent_badge && _data.recent_badge.image) {
-          this.recentBadge = _data.recent_badge
-        }
-        this.checkContentStatus()
-      },
-      _err => {
-        this.checkContentStatus()
-      },
-    )
-  }
   fetchSharedPlaylist() {
     this.playlistSvc.getPlaylists(NsPlaylist.EPlaylistTypes.PENDING).subscribe(
       data => {

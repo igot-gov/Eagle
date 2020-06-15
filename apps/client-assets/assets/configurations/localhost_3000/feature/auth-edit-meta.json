@@ -1,0 +1,60 @@
+{
+  "class": "w-full",
+  "children": [
+    {
+      "class": "w-full md:w-1/4",
+      "formClass": "margin-top-xs margin-bottom-l",
+      "children": [
+        {
+          "class": "w-full",
+          "children": [
+            {
+              "fieldName": "appIcon",
+              "type": "imageUpload"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "class": "w-full md:w-3/4",
+      "children": [
+        {
+          "class": "w-full",
+          "children": [
+            {
+              "class": "w-full",
+              "formClass": "w-full",
+              "fieldName": "name",
+              "type": "input"
+            },
+            {
+              "class": "w-full",
+              "formClass": "w-full",
+              "fieldName": "subTitle",
+              "type": "input"
+            },
+            {
+              "class": "w-full",
+              "formClass": "w-full",
+              "fieldName": "description",
+              "type": "input"
+            },
+            {
+              "class": "w-full",
+              "formClass": "w-full",
+              "fieldName": "learningObjective",
+              "type": "input"
+            },
+            {
+              "class": "w-full",
+              "formClass": "w-full",
+              "fieldName": "name",
+              "type": "richText"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

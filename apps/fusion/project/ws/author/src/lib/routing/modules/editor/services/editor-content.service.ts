@@ -18,13 +18,12 @@ export class EditorContentService {
   public isSubmitted = false
   public changeActiveCont = new BehaviorSubject<string>('')
   public onContentChange = new BehaviorSubject<string>('')
-  isEditEnabled = false
 
   constructor(
     private accessService: AccessControlService,
     private editorService: EditorService,
     private authInitService: AuthInitService,
-  ) { }
+  ) {}
 
   getOriginalMeta(id: string): NSContent.IContentMeta {
     return this.originalContent[id]
@@ -99,13 +98,13 @@ export class EditorContentService {
       meta[v as keyof NSContent.IContentMeta] = parentMeta[v as keyof NSContent.IContentMeta]
         ? parentMeta[v as keyof NSContent.IContentMeta]
         : JSON.parse(
-          JSON.stringify(
-            this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-              parentMeta.contentType
-              // tslint:disable-next-line: ter-computed-property-spacing
-            ][0].value,
-          ),
-        )
+            JSON.stringify(
+              this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+                parentMeta.contentType
+                // tslint:disable-next-line: ter-computed-property-spacing
+              ][0].value,
+            ),
+          )
     })
     return meta
   }

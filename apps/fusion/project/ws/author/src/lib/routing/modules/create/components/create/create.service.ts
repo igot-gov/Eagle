@@ -14,7 +14,7 @@ export class CreateService {
     private apiService: ApiService,
     private configSvc: ConfigurationsService,
     private accessService: AccessControlService,
-  ) {}
+  ) { }
 
   create(meta: { mimeType: string; contentType: string; locale: string }): Observable<string> {
     const requestBody: NSApiRequest.ICreateMetaRequest = {
@@ -30,16 +30,16 @@ export class CreateService {
         isExternal: meta.mimeType === 'application/html',
       },
     }
-    if (this.accessService.rootOrg === 'Ford') {
+    if (this.accessService.rootOrg === 'client2') {
       if (meta.contentType === 'Knowledge Artifact') {
         try {
-          const userPath = `Ford/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
+          const userPath = `client2/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
           requestBody.content.accessPaths = userPath
         } catch {
-          requestBody.content.accessPaths = 'Ford'
+          requestBody.content.accessPaths = 'client2'
         }
       } else {
-        requestBody.content.accessPaths = 'Ford'
+        requestBody.content.accessPaths = 'client2'
       }
     }
     return this.apiService

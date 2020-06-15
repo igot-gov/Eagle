@@ -96,7 +96,7 @@ export class ProfileBlogComponent implements OnInit {
 
           }
         } else {
-          this.blogFetchStatus = 'done'
+          this.blogFetchStatus = 'none'
           this.fetching.emit(true)
         }
         this.count.emit(this.blogfetch.length)

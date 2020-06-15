@@ -35,7 +35,7 @@ export class AppTocService {
   private showSubtitleOnBanners = false
   private canShowDescription = false
 
-  constructor(private http: HttpClient, private configSvc: ConfigurationsService) {}
+  constructor(private http: HttpClient, private configSvc: ConfigurationsService) { }
 
   get subtitleOnBanners(): boolean {
     return this.showSubtitleOnBanners
@@ -221,7 +221,7 @@ export class AppTocService {
     this.analyticsFetchStatus = 'fetching'
     // tslint:disable-next-line: max-line-length
     const url = `${PROXY_SLAG_V8}/LA/LA/api/Users?refinementfilter=${encodeURIComponent(
-      '"source":["LEX","Learning Hub"]',
+      '"source":["Wingspan","Learning Hub"]',
     )}$${encodeURIComponent(`"courseCode": ["${contentId}"]`)}`
     this.http.get(url).subscribe(
       result => {
@@ -263,7 +263,7 @@ export class AppTocService {
   fetchMoreLikeThisPaid(contentId: string): Observable<NsContent.IContentMinimal[]> {
     return this.http.get<NsContent.IContentMinimal[]>(
       `${
-        API_END_POINTS.CONTENT_NEXT
+      API_END_POINTS.CONTENT_NEXT
       }/${contentId}?exclusiveContent=true&ts=${new Date().getTime()}`,
     )
   }
@@ -271,7 +271,7 @@ export class AppTocService {
   fetchMoreLikeThisFree(contentId: string): Observable<NsContent.IContentMinimal[]> {
     return this.http.get<NsContent.IContentMinimal[]>(
       `${
-        API_END_POINTS.CONTENT_NEXT
+      API_END_POINTS.CONTENT_NEXT
       }/${contentId}?exclusiveContent=false&ts=${new Date().getTime()}`,
     )
   }
@@ -304,10 +304,10 @@ export class AppTocService {
     return this.http.post<NsAppToc.IContentParentResponse>(
       forPreview
         ? API_END_POINTS.CONTENT_AUTH_PARENT(
-            contentId,
-            this.configSvc.rootOrg || '',
-            this.configSvc.org ? this.configSvc.org[0] : '',
-          )
+          contentId,
+          this.configSvc.rootOrg || '',
+          this.configSvc.org ? this.configSvc.org[0] : '',
+        )
         : API_END_POINTS.CONTENT_PARENT(contentId),
       data,
     )

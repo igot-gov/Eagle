@@ -1,5 +1,3 @@
-@import 'ws-mixins';
-
 .smallimage {
   width: 50px;
   height: 50px;
@@ -32,19 +30,24 @@
   overflow-x: auto;
 }
 
+@import 'ws-mixins';
+
 mat-card-content {
   width: -webkit-fill-available;
 }
 
-/* .card-container {
+.card-container {
   width: 30vw !important;
+  // min-width: 33vw !important;
   width: inherit;
   border-radius: 4px !important;
 
   @media (max-width: 960px) {
+    // @include breakpoint-lt-m {
+    //width: inherit;
     width: calc(100vw - 70px);
   }
-} */
+}
 
 .card-img {
   height: 110px;
@@ -58,18 +61,18 @@ mat-card-content {
     border-radius: 4px;
   }
 }
-/*
-.card-img {
-  width: 75px;
-  border-radius: 4px;
-  height: 50px;
 
-  @include breakpoint-xs {
-    height: 45px;
-    width: 60px;
-    border-radius: 4px;
-  }
-} */
+// .card-img {
+//   width: 75px;
+//   border-radius: 4px;
+//   height: 50px;
+
+//   @include breakpoint-xs {
+//     height: 45px;
+//     width: 60px;
+//     border-radius: 4px;
+//   }
+// }
 
 .font-family {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,

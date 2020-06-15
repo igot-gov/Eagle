@@ -6,14 +6,6 @@ export interface IWSPublicLoginConfig {
   loginButtons?: { [key: string]: string }
 }
 
-export interface IWSPublicLoginConfigSiemens {
-  bodyBackgroundImageUrl: string
-  footer: ILoginFooterConfig
-  displayName: { [key: string]: string }
-  loginButtons?: { [key: string]: string }
-  isClient: boolean
-}
-
 export interface ILoginFooterConfig {
   contactUs: boolean
   copyright: boolean

@@ -7,7 +7,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map, mergeMap, tap, catchError } from 'rxjs/operators'
-import { of, Observable, Subscription } from 'rxjs'
+import { of, Observable, Subscription, forkJoin } from 'rxjs'
 import { ActivatedRoute, Router } from '@angular/router'
 import { FormGroup } from '@angular/forms'
 
@@ -29,8 +29,8 @@ import { NSContent } from '@ws/author/src/lib/interface/content'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 
 import {
-  // CONTENT_BASE_WEBHOST_ASSETS,
-  // CONTENT_BASE_WEBHOST,
+  CONTENT_BASE_WEBHOST_ASSETS,
+  CONTENT_BASE_WEBHOST,
   STREAM_FILES,
   // AUTHORING_CONTENT_BASE,
 } from '@ws/author/src/lib/constants/apiEndpoints'
@@ -39,7 +39,6 @@ import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../constant/web
 import { IAudioObj } from '../../interface/page-interface'
 import { PlainCKEditorComponent } from '../../../../../shared/components/plain-ckeditor/plain-ckeditor.component'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
-import { IWebModuleRequest } from '../../../../../../../../interface/apiResponse'
 
 @Component({
   selector: 'ws-auth-web-module-editor',
@@ -101,7 +100,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   // }
 
   ngOnInit(): void {
-    this.showSettingButtons = this.accessService.rootOrg === 'Siemens'
+    this.showSettingButtons = this.accessService.rootOrg === 'client1'
     this.mediumSizeBreakpoint$.subscribe(isLtMedium => {
       this.sideNavBarOpened = !isLtMedium
       this.mediumScreenSize = isLtMedium
@@ -139,7 +138,8 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
               let pageBody = p
               if (p.match(getBodyReg)) {
                 pageBody = p.match(getBodyReg)[1]
-                  // .replace('src="', ` src="${this.imagesUrlbase}`)
+                  .replace('src="', ` src="${this.imagesUrlbase}`)
+                // .replace(reg2, ` href="${this.imagesUrlbase}"`)
               }
               const fileInd = parseInt(formattedObj.pageJson[index].URL.replace('/assets/index', ''), 10)
               return new Page({ body: pageBody, fileIndex: fileInd })
@@ -226,9 +226,8 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     this.changedContent = true
   }
 
-  onBodyChange(val: string) {
-    // console.log(val)
-    this.userData[this.currentId].pages[this.selectedPage].body = val
+  onBodyChange(i: any) {
+    this.userData[this.currentId].pages[this.selectedPage].body = i
     this.userData[this.currentId].pages[this.selectedPage].isBdchanged = true
     // on save pressed if invalid it will be set as false otherwise it would be undefined
     if (this.userData[this.currentId].pages[this.selectedPage].isInvalid
@@ -312,6 +311,25 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     }
   }
 
+  uploadJson(data: any, fileName: string, location: '/web-hosted' | '/web-hosted/assets') {
+    let content = JSON.parse(JSON.stringify(data))
+    if (fileName.endsWith('.html')) {
+      content = `<html><head></head><body>${data}</body></html>`
+      // const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'text/html' })
+      // const formdata = new FormData()
+      // formdata.append('content', blob, fileName)
+      // return this.uploadService.upload(
+      //   formdata,
+      //   { contentId: this.currentId, contentType: location }
+      // )
+    }
+    return this.uploadService.encodedUpload(
+      content,
+      fileName,
+      { contentId: this.currentId, contentType: location },
+    )
+  }
+
   triggerUpload() {
     const moduledata = JSON.parse(JSON.stringify(this.userData[this.currentId].pageJson))
     moduledata.map((e: ModuleObj) => {
@@ -325,62 +343,43 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     })
     const changedPages = this.userData[this.currentId].pages.filter(e => e.isBdchanged)
     const getUrlReg = new RegExp(/<img\s+[^>]*?src=("|')([^"']+)\1/)
-    // tslint:disable-next-line:max-line-length
-    const jsonPath = `${this.accessService.rootOrg}/${this.accessService.org.replace(/ /g, '_')}/Public/${this.currentId}/web-hosted`
-    const uploadData: IWebModuleRequest[] = []
-    uploadData.push({
-      name: WEB_MODULE_JSON_FILE_NAME,
-      content: moduledata,
-    })
-    changedPages.forEach(p => {
-      if (!this.imagesUrlbase && p.body.match(getUrlReg)) {
-        const url = (p.body.match(getUrlReg) as any)[2]
+    const res = changedPages.length ? changedPages.map(e => {
+      if (!this.imagesUrlbase && e.body.match(getUrlReg)) {
+        const url = (e.body.match(getUrlReg) as any)[2]
         this.imagesUrlbase = `${url.substring(0, url.lastIndexOf('/'))}/`
       }
-      const htmlFileBody = JSON.parse(
-        JSON.stringify(p.body)
+      const htmlFile = JSON.parse(
+        JSON.stringify(e.body)
           .replace(/<a href/gm, '<a target="_blank" href')
           .replace(this.imagesUrlbase, '')
           .replace(/(<img.*width=)['"](\d+?)['"](.*\/>)/gm, '$1"$2" style="width:100%; heigth: auto; max-width:$2" $3')
       )
-      const uploadPageObj = {
-        name: `index${p.fileIndex}.html`,
-        content: `<html><head></head><body>${htmlFileBody}</body></html>`,
-      }
-      uploadData.push(uploadPageObj)
-    })
-    return this.uploadService.multipleJsonUpload(
-      uploadData,
-      this.metaContentService.getUpdatedMeta(this.currentId),
-      jsonPath
+      // .replace(/ href=\s*['"].*?\/web-hosted\/.*?lex_.*?\/assets\/(.*?)['"]/gm, ' href="$1"')
+      const fileName = `index${e.fileIndex}.html`
+      return this.uploadJson(htmlFile, fileName, CONTENT_BASE_WEBHOST_ASSETS)
+    }) : of({} as any)
+    return forkJoin(res).pipe(
+      mergeMap(() => {
+        this.userData[this.currentId].pages.map(p => p.isBdchanged = false)
+        return this.uploadJson(moduledata, WEB_MODULE_JSON_FILE_NAME, CONTENT_BASE_WEBHOST)
+      })
     )
   }
 
-  wrapperForTriggerSave(): Observable<boolean> {
+  wrapperForTriggerSave() {
     this.loaderService.changeLoad.next(true)
     return (this.changedContent ? this.triggerUpload() : of({} as any))
       .pipe(
         mergeMap(v => {
           const updatedMeta = JSON.parse(JSON.stringify(this.metaContentService.upDatedContent[this.currentId] || {}))
-          if (v && v[0]) {
-            const fileUploadFailed = v[0].subResult.find((res: any) => res.error)
-            if (!fileUploadFailed) {
-              updatedMeta.artifactUrl = (v[0].artifactUrl || v[0].downloadUrl).replace(/%2F/g, '/')
-              updatedMeta.downloadUrl = v[0].downloadUrl ? v[0].downloadUrl.replace(/%2F/g, '/') : ''
-              this.changedContent = false
-              return this.triggerSave(updatedMeta, this.currentId).pipe(mergeMap(() => of(true)))
-            }
-            v[0].subResult.map((res: any, index: number) => {
-              if (!res.error && index > 0) {
-                this.userData[this.currentId].pages[index - 1].isBdchanged = true
-              }
-            })
-            return of(false)
-
+          if (v && v.code) {
+            updatedMeta.artifactUrl = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
+            updatedMeta.downloadUrl = v.downloadURL.replace(/%2F/g, '/')
+            this.changedContent = false
           }
-          return of(false)
+          return this.triggerSave(updatedMeta, this.currentId)
         }),
-    )
+      )
   }
 
   triggerSave(meta: NSContent.IContentMeta, id: string) {
@@ -488,7 +487,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
             )
             ? ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
               !this.accessService.authoringConfig.isMultiStepFlow) &&
-              this.accessService.rootOrg.toLowerCase() === 'siemens'
+              this.accessService.rootOrg.toLowerCase() === 'client1'
               ? 100000
               : 1
             : 0,
@@ -508,7 +507,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
               body,
               this.currentId,
               this.metaContentService.originalContent[this.currentId].status,
-          )
+            )
             .pipe(
               mergeMap(() =>
                 this.notificationSvc
@@ -516,14 +515,14 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
                     updatedMeta,
                     body.comment,
                     body.operation ? true : false,
-                )
+                  )
                   .pipe(
                     catchError(() => {
                       return of({} as any)
                     }),
-                ),
+                  ),
               ),
-          ),
+            ),
         ),
       )
       this.loaderService.changeLoad.next(true)
@@ -650,7 +649,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       returnValue = false
     } else if (this.changedContent) {
       if (this.checkValidity(this.currentId)) {
-        return this.wrapperForTriggerSave()
+        return this.wrapperForTriggerSave().pipe(map(() => true))
       }
       this.currentStep = 2
       returnValue = false
@@ -664,17 +663,12 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
         Object.keys((this.metaContentService.upDatedContent[this.currentId] || {})).length
       if (needSave) {
         if (this.checkValidity(this.currentId)) {
-          this.wrapperForTriggerSave().subscribe(flag => {
+          this.wrapperForTriggerSave().subscribe(() => {
             this.loaderService.changeLoad.next(false)
-            if (flag) {
-              this.previewMode = true
-              this.mimeTypeRoute = VIEWER_ROUTE_FROM_MIME(
-                this.metaContentService.getUpdatedMeta(this.currentId).mimeType as any,
-              )
-            } else {
-              this.showNotification(Notify.SAVE_FAIL)
-            }
-
+            this.previewMode = true
+            this.mimeTypeRoute = VIEWER_ROUTE_FROM_MIME(
+              this.metaContentService.getUpdatedMeta(this.currentId).mimeType as any,
+            )
           },
             // tslint:disable-next-line: align
             () => {
@@ -748,7 +742,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
             duration: 3 * 1000,
           })
         },
-    )
+      )
   }
 
   save() {
@@ -757,16 +751,12 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     if (this.userData[this.currentId].pages.length > 0 && (needSave)) {
       if (this.checkValidity(this.currentId)) {
         // if any change in data, then upload json
-        this.wrapperForTriggerSave().subscribe(fl => {
-          if (fl) {
+        this.wrapperForTriggerSave().subscribe(
+          () => {
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
-          } else {
-            this.loaderService.changeLoad.next(false)
-            this.showNotification(Notify.SAVE_FAIL)
-          }
-        },
-                                               () => {
+          },
+          () => {
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_FAIL)
           },

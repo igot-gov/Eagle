@@ -31,12 +31,10 @@ export class BtnFlagComponent implements OnInit {
   unflagRequest: SocialForum.IFlagRequest = {
     id: '',
     activityType: SocialForum.EUserActivity.FLAG,
+
   }
-  constructor(
-    private flagsvc: BtnFlagService,
-    private snackBar: MatSnackBar,
-    private configSvc: ConfigurationsService,
-    public dialog: MatDialog,
+  constructor(private flagsvc: BtnFlagService, private snackBar: MatSnackBar, private configSvc: ConfigurationsService,
+              public dialog: MatDialog,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -44,10 +42,7 @@ export class BtnFlagComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (
-      this.configSvc.restrictedFeatures &&
-      !this.configSvc.restrictedFeatures.has('flagEnabled')
-    ) {
+    if (this.configSvc.restrictedFeatures && !(this.configSvc.restrictedFeatures.has('flagEnabled'))) {
       this.flagEnabled = true
     }
     if (this.flagged) {
@@ -62,15 +57,11 @@ export class BtnFlagComponent implements OnInit {
       this.snackBar.open(invalidUserMsg)
       return
     }
-    const dialogRef = this.dialog.open(DialogBoxModeratorComponent, {
-      data: {
-        postId: this.postId,
-        type: 'flag',
-      },
-    })
+    const dialogRef = this.dialog.open(DialogBoxModeratorComponent, { data: this.postId })
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.types = 'FILLEDFLAG'
+
       } else {
         this.types = 'EMPTYFLAG'
       }
@@ -80,12 +71,12 @@ export class BtnFlagComponent implements OnInit {
   unflag() {
     this.types = 'PENDING'
     this.unflagRequest.id = this.postId
-    this.flagsvc.unflagPost(this.unflagRequest).subscribe(
-      () => {
-        this.types = 'EMPTYFLAG'
-        // console.log("THE TYPESSS HAS BEEEN CHANGED TO in UNFLAG" + this.typesss)
-      },
-      () => {},
-    )
+    this.flagsvc.unflagPost(this.unflagRequest).subscribe(() => {
+
+      this.types = 'EMPTYFLAG'
+      // console.log("THE TYPESSS HAS BEEEN CHANGED TO in UNFLAG" + this.typesss)
+
+    },                                                    () => {
+    })
   }
 }

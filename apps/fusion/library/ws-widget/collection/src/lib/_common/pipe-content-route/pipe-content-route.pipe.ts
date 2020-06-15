@@ -1,14 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core'
-// commercial_begin
-import { ConfigurationsService, EInstance } from '@ws-widget/utils'
-// commercial_end
 import { NsContent } from '../../_services/widget-content.model'
-import { viewerRouteGenerator } from '../../_services/viewer-route-util'
 @Pipe({
   name: 'pipeContentRoute',
 })
 export class PipeContentRoutePipe implements PipeTransform {
-  constructor(private configSvc: ConfigurationsService) {}
+  constructor() { }
 
   transform(
     content: NsContent.IContent,
@@ -16,17 +12,6 @@ export class PipeContentRoutePipe implements PipeTransform {
   ): { url: string; queryParams: { [key: string]: any } } {
     // commercial_begin
     const location = forPreview ? '/author' : '/app'
-    if (
-      this.configSvc.rootOrg === EInstance.PATHFINDERS &&
-      content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT
-    ) {
-      return {
-        url: forPreview
-          ? `${location}/toc/${content.identifier}/overview`
-          : `${location}/toc/knowledge-artifact/${content.identifier}`,
-        queryParams: this.getQueryParams(),
-      }
-    }
     // commercial_end
     if (content.contentType === 'Knowledge Board') {
       return {
@@ -55,15 +40,12 @@ export class PipeContentRoutePipe implements PipeTransform {
       }
     }
     if (content.continueLearningData
-    && content.continueLearningData.contextType === 'playlist'
+      && content.continueLearningData.contextType === 'playlist'
       && content.continueLearningData.contextPathId) {
-        const generatedUrl = viewerRouteGenerator(
-          content.identifier,
-          content.mimeType,
-          content.continueLearningData.contextPathId,
-          'Playlist'
-        )
-      return generatedUrl
+      return {
+        url: `/app/playlist/me/${content.continueLearningData.contextPathId}`,
+        queryParams: this.getQueryParams(),
+      }
     }
     return {
       url: `${location}/toc/${content.identifier}/overview`,

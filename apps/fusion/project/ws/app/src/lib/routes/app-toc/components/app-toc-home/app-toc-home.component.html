@@ -1,6 +1,6 @@
 <mat-toolbar role="navigation" i18n-aria-label aria-label="Toolbar" *ngIf="!(isInIframe && forPreview)"
   class="detailBar" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back', back: forPreview  }"></ws-widget-btn-page-back>
+  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs text-truncate">
     <span i18n>Details</span>
   </span>
@@ -24,37 +24,13 @@
         <ng-container *ngIf="content?.isExternal === true" i18n>Certification</ng-container>
         <ng-container *ngIf="content?.isExternal === false" i18n>Take Certification</ng-container>
       </a>
-      <!-- <a mat-tab-link *ngIf="!ispathfindertab" [routerLink]="'./Participants'" routerLinkActive="ws-mat-primary-text link-active"
-        i18n>Participants
-      </a>
-      <a mat-tab-link *ngIf="!ispathfindertab" [routerLink]="'./discussion'" routerLinkActive="ws-mat-primary-text link-active"
-        i18n>Discussion Board
-      </a> -->
-      <!-- *ngIf="content?.children?.length" -->
+
       <a *ngIf="content?.children?.length" mat-tab-link [routerLink]="'./contents'"
         routerLinkActive="ws-mat-primary-text link-active" i18n>Contents</a>
       <a *ngIf="enableAnalytics" [disabled]="forPreview" mat-tab-link [routerLink]="'./analytics'"
         routerLinkActive="ws-mat-primary-text link-active" i18n>Analytics</a>
     </nav>
     <router-outlet></router-outlet>
-    <ng-container *ngIf="moreLikeThis?.length">
-      <h2 i18n>More like this</h2>
-      <ws-utils-horizontal-scroller [loadStatus]="'done'">
-        <ng-container *ngFor="let content of moreLikeThis">
-          <ws-widget-card-content [widgetData]="{ content: content, cardSubType: 'minimal' }">
-          </ws-widget-card-content>
-        </ng-container>
-      </ws-utils-horizontal-scroller>
-    </ng-container>
-    <ng-container *ngIf="moreLikeThisFree?.length">
-      <h2 [ngClass]="{ 'margin-top-l': moreLikeThis.length }" i18n>Similar Free Content</h2>
-      <ws-utils-horizontal-scroller [loadStatus]="'done'">
-        <ng-container *ngFor="let content of moreLikeThisFree">
-          <ws-widget-card-content [widgetData]="{ content: content, cardSubType: 'minimal' }">
-          </ws-widget-card-content>
-        </ng-container>
-      </ws-utils-horizontal-scroller>
-    </ng-container>
     <ng-container>
       <mat-divider class="margin-top-m margin-bottom-m"></mat-divider>
       <div class="toc-discussion-container" fragment="discussion-forum">

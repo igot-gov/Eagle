@@ -50,7 +50,6 @@ export namespace NsInstanceConfig {
     rootOrg: string
     intranetIframeUrls?: string[]
     showNavBarInSetup?: boolean
-    showNavBarInTnc?: boolean
     intranetUrlToCheck?: string
     introVideo: IPath
     tourVideo: IPath
@@ -84,7 +83,7 @@ export namespace NsInstanceConfig {
     scale: number
   }
   export interface IKeycloak {
-    defaultidpHint: 'E' | 'N' | 'S' | 'siemens-entitlement'
+    defaultidpHint: 'E' | 'N' | 'S'
     isLoginHidden: boolean
     bearerExcludedUrls: string[]
     clientId: string

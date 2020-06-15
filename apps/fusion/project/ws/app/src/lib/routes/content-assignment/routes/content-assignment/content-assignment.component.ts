@@ -14,7 +14,6 @@ import { DialogAssignComponent } from '../../components/dialog-assign/dialog-ass
 import {
   UserFilterDisplayComponent,
 } from '../../components/user-filter-display/user-filter-display.component'
-import { SearchServService } from '../../../search/services/search-serv.service'
 @Component({
   selector: 'ws-app-content-assignment',
   templateUrl: './content-assignment.component.html',
@@ -74,7 +73,7 @@ export class ContentAssignmentComponent implements OnInit {
   userType = ''
 
   length = 0
-  pageSize = 20
+  pageSize = 10
   pageIndex = 0
   query = ''
 
@@ -117,8 +116,6 @@ export class ContentAssignmentComponent implements OnInit {
 
   sortParameter = ''
   sortOrder = 'asc'
-  contentPickerIncludedFilters: any = null
-  configLoaded = false
 
   constructor(
     public router: Router,
@@ -127,21 +124,11 @@ export class ContentAssignmentComponent implements OnInit {
     private contentAssignSvc: ContentAssignService,
     private configSvc: ConfigurationsService,
     private snackbar: MatSnackBar,
-    public route: ActivatedRoute,
-    private searchServSvc: SearchServService,
+    public route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-    this.searchServSvc.getSearchConfig().then(config => {
-      const searchConfig = config
-      this.contentPickerIncludedFilters = searchConfig.search.visibleFilters
-      this.contentPickerIncludedFilters['contentType'] = {
-        displayName: 'Content Type',
-        values: ['Course', 'Resource'],
-      }
-      this.configLoaded = true
-    })
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId
       if (this.configSvc.org) {
@@ -149,25 +136,22 @@ export class ContentAssignmentComponent implements OnInit {
       }
       if (this.configSvc.rootOrg) {
         this.rootOrg = this.configSvc.rootOrg
-        if (this.rootOrg === 'Ford') {
+        if (this.rootOrg === 'RootOrg') {
           this.isMandatory = true
         }
       }
     }
-    setTimeout(
-      () => {
-        this.userType = this.route.snapshot.queryParams.userType
-        this.userAdminLevel = this.route.snapshot.queryParams.adminLevel
-        if (this.userType === 'manager') {
-          this.directReportees = true
-          this.allReportees = false
-        } else if (this.userType === 'admin') {
-          this.directReportees = false
-          this.allReportees = false
-        }
-      },
-      60
-    )
+    setTimeout(() => {
+      this.userType = this.route.snapshot.queryParams.userType
+      this.userAdminLevel = this.route.snapshot.queryParams.adminLevel
+      if (this.userType === 'manager') {
+        this.directReportees = true
+        this.allReportees = false
+      } else if (this.userType === 'admin') {
+        this.directReportees = false
+        this.allReportees = false
+      }
+    },         60)
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.screenSizeIsLtMedium = isLtMedium
       this.sideNavBarOpened = !isLtMedium
@@ -278,20 +262,19 @@ export class ContentAssignmentComponent implements OnInit {
       } else if (!this.searchReqBody.requiredAggs) {
         this.searchReqBody.requiredAggs = this.requiredAggs
       }
-      this.contentAssignSvc.searchUsers(this.searchReqBody).subscribe(
-        (response: any) => {
-          this.userData = response.result
-          this.length = response.totalHits
-          this.filtersResponse = response.filters
-          this.fetchUserStatus = 'done'
+      this.contentAssignSvc.searchUsers(this.searchReqBody).subscribe((response: any) => {
+        this.userData = response.result
+        this.length = response.totalHits
+        this.filtersResponse = response.filters
+        this.fetchUserStatus = 'done'
 
-        },
-        err => {
-          if (err) {
-            this.fetchUserStatus = 'none'
-            return
-          }
-        })
+      },                                                              err => {
+        if (err) {
+          this.fetchUserStatus = 'none'
+          return
+        }
+
+      })
     } else {
       this.snackbar.open(this.selectContentMessage.nativeElement.value)
       return

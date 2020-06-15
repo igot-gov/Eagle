@@ -52,7 +52,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.showSettingButtons = this.accessService.rootOrg === 'Siemens'
+    this.showSettingButtons = this.accessService.rootOrg === 'client1'
     this.allLanguages = this.authInitService.ordinals.subTitles
     this.canTransCode =
       this.authInitService.ordinals.canTransCode &&
@@ -272,7 +272,7 @@ export class UploadComponent implements OnInit, OnDestroy {
             )
             ? ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
               !this.accessService.authoringConfig.isMultiStepFlow) &&
-              this.accessService.rootOrg.toLowerCase() === 'siemens'
+              this.accessService.rootOrg.toLowerCase() === 'client1'
               ? 100000
               : 1
             : 0,
@@ -575,7 +575,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     if (
       ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
         !this.accessService.authoringConfig.isMultiStepFlow) &&
-      this.accessService.rootOrg.toLowerCase() === 'siemens'
+      this.accessService.rootOrg.toLowerCase() === 'client1'
     ) {
       return 'publish'
     }

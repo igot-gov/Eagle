@@ -1,11 +1,8 @@
 <div class="mat-toolbar footer-container px-2 sm:px-10 py-1 sm:py-4"
-  [ngClass]="{'mat-primary':!isFordFooter || !isXSmall, 'mat-primarylight':isFordFooter && isXSmall}">
+  [ngClass]="{'mat-primary': !isXSmall, 'mat-primarylight': isXSmall}">
   <div class="mat-body">
     <ng-container i18n>
       Powered by Infosys Wingspan
-    </ng-container>
-    <ng-container i18n *ngIf="isSiemensContributionShown">
-      & Siemens GLC
     </ng-container>
   </div>
   <div class="mat-body">

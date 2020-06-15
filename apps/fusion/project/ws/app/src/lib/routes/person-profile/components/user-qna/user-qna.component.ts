@@ -77,7 +77,7 @@ export class UserQnaComponent implements OnInit {
             this.fetching.emit(true)
           }
         } else {
-          this.qnaFetchStatus = 'done'
+          this.qnaFetchStatus = 'none'
           this.fetching.emit(true)
         }
         this.count.emit(this.qnafetch.length)

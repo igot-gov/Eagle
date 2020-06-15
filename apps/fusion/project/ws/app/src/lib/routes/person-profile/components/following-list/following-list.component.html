@@ -9,16 +9,15 @@
             </div> -->
             <div class="pt-4 text-center" *ngIf="followingCurrentDisplay?.length === 0">
               <div class="flex flex-center">
-                <span class="font-family fetching">{{name}}
-                  <span class="font-family fetching" i18n> is not following anyone</span></span>
+                <span class="font-family fetching">{{name}}</span>
+                <span class="font-family fetching" i18n>'s not following anyone</span>
               </div>
             </div>
             <!-- <div class="pt-4 text-center">
               <p class="mat-error" i18n>Failed to fetch followers.</p>
             </div> -->
             <ws-app-view-followperson *ngFor="let person of followingCurrentDisplay" [wid]="person.identifier"
-              [name]="person.name" [userFollows]="currentUserfollowers.indexOf(person.identifier) > -1 ? true : false"
-              [currentUserProfile]="currentUserProfile">
+              [name]="person.name">
             </ws-app-view-followperson>
           </ng-container>
         </mat-card-content>

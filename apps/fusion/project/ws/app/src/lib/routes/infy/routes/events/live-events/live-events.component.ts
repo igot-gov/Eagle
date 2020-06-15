@@ -41,7 +41,7 @@ export class LiveEventsComponent implements OnInit, OnDestroy {
         this.logger.log('Got response', response)
         const events = (response || []).filter(event => new Date(event.end_time) > new Date())
         // tslint:disable-next-line:max-line-length
-        // const events = [{ event_name: 'RedHat Tech day Track 2', start_time: new Date(), end_time: new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000)), event_url: 'https://join-apac.broadcast.skype.com/infosys.com/98cd8c9825b64b91ba62b427f59894da' }]
+        // const events = [{ event_name: 'RedHat Tech day Track 2', start_time: new Date(), end_time: new Date(new Date().getTime() + (5 * 24 * 60 * 60 * 1000)), event_url: 'https://join-apac.broadcast.skype.com/wingspan.com/98cd8c9825b64b91ba62b427f59894da' }]
         this.liveEvents = events
         this.fetchStatus = 'done'
       },

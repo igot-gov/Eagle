@@ -35,7 +35,6 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
 import { ClientAnalyticsComponent } from './components/client-analytics/client-analytics.component'
 import { ContentComponent } from './components/content/content.component'
 import { HomeComponent } from './components/home/home.component'
-import { IframeAnalyticsComponent } from './components/iframe-analytics/iframe-analytics.component'
 import { QuarterFiltersComponent } from './components/quarter-filters/quarter-filters.component'
 import { LearningAnalyticsRoutingModule } from './learning-analytics-routing.module'
 import { AnalyticsComponent } from './routes/analytics/analytics.component'
@@ -43,14 +42,11 @@ import { AnalyticsDirective } from './routes/analytics/analytics.directive'
 import { ContentCardComponent } from './components/content-card/content-card.component'
 import { ProgressRadialComponent } from './components/progress-radial/progress-radial.component'
 import { AnalyticsTileComponent } from './components/analytics-tile/analytics-tile.component'
-import { ReportsComponent } from './components/reports/reports.component'
 import { QuarterServiceService } from './services/quarter-filter.service'
-import { MyLearningPathwayComponent } from './components/my-learning-pathway/my-learning-pathway.component'
 
 @NgModule({
   declarations: [
     AnalyticsComponent,
-    IframeAnalyticsComponent,
     ClientAnalyticsComponent,
     AnalyticsDirective,
     QuarterFiltersComponent,
@@ -59,8 +55,6 @@ import { MyLearningPathwayComponent } from './components/my-learning-pathway/my-
     ContentCardComponent,
     ProgressRadialComponent,
     AnalyticsTileComponent,
-    ReportsComponent,
-    MyLearningPathwayComponent,
   ],
   imports: [
     CommonModule,
@@ -99,7 +93,7 @@ import { MyLearningPathwayComponent } from './components/my-learning-pathway/my-
     ReactiveFormsModule,
     MatNativeDateModule,
   ],
-  entryComponents: [IframeAnalyticsComponent, ClientAnalyticsComponent],
+  entryComponents: [ClientAnalyticsComponent],
   providers: [DatePipe, QuarterServiceService],
 })
-export class LearningAnalyticsModule {}
+export class LearningAnalyticsModule { }

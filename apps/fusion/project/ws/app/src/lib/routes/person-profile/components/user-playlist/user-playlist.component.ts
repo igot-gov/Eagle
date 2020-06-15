@@ -14,7 +14,6 @@ export class UserPlaylistComponent implements OnInit, OnChanges {
   @Input() wid = ''
   @Input() name = ''
   @Output() fetching = new EventEmitter<Boolean>()
-  @Output() count = new EventEmitter<number>()
 
   playlists: NsPlaylist.IPlaylist[] | null = null
   type: NsPlaylist.EPlaylistTypes = NsPlaylist.EPlaylistTypes.ME
@@ -53,7 +52,6 @@ export class UserPlaylistComponent implements OnInit, OnChanges {
         this.playlists = playlists.user
         this.playlistFetchStatus = 'done'
         this.fetching.emit(true)
-        this.count.emit(this.playlists.length)
       },
       () => {
         this.playlistFetchStatus = 'error'

@@ -66,12 +66,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private utilitySvc: UtilityService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     const tab = this.route.snapshot.queryParamMap.get('tab')
     if (this.configSvc.restrictedFeatures) {
-      this.showIntranetSettings = this.utilitySvc.isMobile && !(this.configSvc.restrictedFeatures.has('showIntranetMobile'))
+      this.showIntranetSettings =
+        this.utilitySvc.isMobile && !this.configSvc.restrictedFeatures.has('showIntranetMobile')
       // this.showProfileSettings = !this.configSvc.restrictedFeatures.has('personProfile')
     }
     switch (tab) {
@@ -250,9 +251,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
       case 1:
         tab = 'notifications'
         break
-      /* case 2:
-        tab = 'profile'
-        break */
+      /*  case 2:
+         tab = 'profile'
+         break */
     }
     this.router.navigate([], { queryParams: { tab } })
   }

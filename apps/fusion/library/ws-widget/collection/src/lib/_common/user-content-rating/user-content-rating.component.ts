@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ConfigurationsService, EInstance, EventService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { WidgetContentService } from '../../_services/widget-content.service'
 
 @Component({
@@ -19,7 +19,7 @@ export class UserContentRatingComponent implements OnInit {
     private events: EventService,
     private contentSvc: WidgetContentService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (!this.forPreview) {
@@ -73,8 +73,6 @@ export class UserContentRatingComponent implements OnInit {
 
   public get enableFeature(): boolean {
     switch (this.configSvc.rootOrg) {
-      case EInstance.FORD:
-        return false
       default:
         return true
     }

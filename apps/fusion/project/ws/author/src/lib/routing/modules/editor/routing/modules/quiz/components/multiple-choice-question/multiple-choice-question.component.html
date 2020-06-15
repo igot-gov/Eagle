@@ -41,7 +41,7 @@
         <div class="flex romanN text-center items-center pl-4">{{ i + 1 | romanconvert }}.</div>
         <div class="flex items-center item1 px-3">
           <div class="w-2/5"></div>
-          <mat-checkbox formControlName="isCorrect"  i18n-matTooltip matTooltipPosition="below" matTooltip="Check for correct answer"
+          <mat-checkbox formControlName="isCorrect" (change)="onSelected($event)" i18n-matTooltip matTooltipPosition="below" matTooltip="Check for correct answer"
             i18n-aria-label aria-label="Check for correct answer"></mat-checkbox>
         </div>
         <div class="cursor-auto item2 item-spacing">
@@ -97,7 +97,7 @@
             <div class="flex justify-between forHeight">
               <div class="flex items-center item1 px-3">
                 <div class="w-2/5"></div>
-                <mat-checkbox formControlName="isCorrect" i18n-matTooltip matTooltipPosition="below" matTooltip="Check for correct answer"
+                <mat-checkbox formControlName="isCorrect" (change)="onSelected($event)" i18n-matTooltip matTooltipPosition="below" matTooltip="Check for correct answer"
                   i18n-aria-label aria-label="Check for correct answer">
                   <span i18n>is correct</span>
                 </mat-checkbox>

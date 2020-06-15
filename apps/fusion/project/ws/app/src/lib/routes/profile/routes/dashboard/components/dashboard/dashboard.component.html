@@ -41,99 +41,6 @@
       </div>
     </mat-card>
 
-    <div *ngIf="enabledTabs?.subFeatures?.knowledgeBoard" class="description-container">
-      <div class="flex flex-between flex-wrap learning-container">
-        <div class="mat-card most-used">
-          <div class="flex flex-middle">
-            <mat-icon>tag_faces</mat-icon>
-            <span class="font-bold mat-title margin-zero pl-2" i18n="interest you follow">
-              You are Following</span>
-          </div>
-          <div class="text-center" *ngIf="followFetchStatus === 'fetching'">
-            <mat-spinner></mat-spinner>
-          </div>
-
-          <ng-container *ngIf="followFetchStatus !== 'fetching'">
-            <div class="flex flex-middle flex-between my-4 pr-4">
-              <span class="font-bold mat-title margin-zero" i18n="interest you follow">
-                Knowledge Board</span>
-
-              <button mat-button class="interest-edit" color="primary" [routerLink]="'/app/knowledge-board/home'">
-                <mat-icon> edit</mat-icon>
-                <span i18n class="pl-2">Edit</span>
-              </button>
-            </div>
-            <div *ngIf="followFetchStatus === 'error'" class="pl-4 py-4">
-              <span i18n="unable to fetch">Unable to fetch followed Knowledge Board, explore</span>
-              <a class="ws-mat-primary-text" [routerLink]="'/app/knowledge-board/home'">&nbsp;Knowledge Board</a>
-            </div>
-            <div *ngIf="followFetchStatus === 'done' && !knowledgeBoardFollow?.length" class="pl-4 py-4">
-              <span i18n="no knowledge board">No Knowledge Board being followed, explore</span>
-              <a class="ws-mat-primary-text" [routerLink]="'/app/knowledge-board/home'">&nbsp;Knowledge Board</a>
-            </div>
-
-            <mat-chip-list *ngIf="followFetchStatus === 'done' && knowledgeBoardFollow?.length">
-              <mat-chip class="ws-mat-primary-border-bold interest-chip kb-chip"
-                *ngFor="let board of knowledgeBoardFollow">
-                <a [routerLink]="'/app/knowledge-board/' + board.identifier">{{ board.name }}</a>
-              </mat-chip>
-            </mat-chip-list>
-
-            <!-- <div class="flex flex-middle my-4 pr-4">
-              <span class="font-bold mat-title margin-zero " i18n="interest you follow">
-                Channels</span
-              >
-              <span class="spacer"></span>
-              <button
-                mat-icon-button
-                class="interest-edit"
-                color="primary"
-                [routerLink]="'/page/siemens-channel-hub'"
-              >
-                <mat-icon> edit</mat-icon>
-                <span i18n class="px-2">Edit</span>
-              </button>
-            </div>
-            <div *ngIf="!channelsFollow?.length" class=" py-4">
-              <span i18n="no interest">No Channels being followed, explore</span>
-              <a class="ws-mat-primary-text" [routerLink]="'/page/siemens-channel-hub'"
-                >&nbsp; Channels</a
-              >
-            </div>
-            <mat-chip-list>
-              <mat-chip
-                class="ws-mat-primary-border-bold interest-chip"
-                *ngFor="let channelFollow of channelsFollow"
-              >
-                {{ channelFollow.name }}
-              </mat-chip>
-            </mat-chip-list> -->
-          </ng-container>
-
-          <!-- <ws-utils-horizontal-scroller class="follow-item block" [loadStatus]="followFetchStatus">
-            <ng-container *ngIf="knowledgeBoardFollow?.length">
-              <ws-widget-card-knowledge
-                *ngFor="let board of knowledgeBoardFollow"
-                [widgetData]="{
-                  content: board,
-                  actionBtns: { share: false, follow: false },
-                  clickUrl: '/app/knowledge-board/' + board.identifier
-                }"
-              >
-              </ws-widget-card-knowledge>
-            </ng-container>
-          </ws-utils-horizontal-scroller> -->
-        </div>
-        <!-- <div class="mat-card learning-time">
-          <div class="flex flex-middle">
-            <mat-icon>history</mat-icon>
-            <span class="font-bold mat-title margin-zero pl-2" i18n="learning time">Learning Time</span>
-          </div>
-          <div class="font-bold mat-title title-no" i18n>Data will appear once it's aggregated</div>
-        </div> -->
-      </div>
-    </div>
-
     <div *ngIf="enabledTabs?.subFeatures?.calendar && apiFetchStatus !=='error'"
       class=" calendar-data description-container padding-xl mat-elevation-z2 ">
       <div class=" text-center" *ngIf="apiFetchStatus === 'fetching'">
@@ -216,16 +123,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="enabledTabs?.subFeatures?.skill && skillData?.length > 0" class="margin-top-xl">
-    <h1 class="mat-h1" i18n>Skills recommended by Manager</h1>
-    <div class="text-center" *ngIf="skillFetchStatus === 'fetching'">
-      <mat-spinner></mat-spinner>
-    </div>
-    <ws-utils-horizontal-scroller *ngIf="skillFetchStatus === 'done'" [loadStatus]="'done'">
-      <ws-app-skill-card class="margin-bottom-xl margin-right-l" *ngFor="let skill of skillData" [cardData]="skill">
-      </ws-app-skill-card>
-    </ws-utils-horizontal-scroller>
   </div>
   <div *ngIf="enabledTabs?.subFeatures?.pendingCourses && coursePending?.length > 0" class="margin-top-xl">
     <h1 class="mat-h1" i18n>Pending Courses</h1>

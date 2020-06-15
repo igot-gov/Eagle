@@ -12,7 +12,6 @@ import {
   LoggerService,
   ConfigurationsService,
   NsPage,
-  EventService,
 } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { TncAppResolverService } from '../../../../../../../../../src/app/services/tnc-app-resolver.service'
 import { TncPublicResolverService } from '../../../../../../../../../src/app/services/tnc-public-resolver.service'
@@ -50,7 +49,6 @@ export class TncComponent implements OnInit, OnDestroy {
     private tncProtectedSvc: TncAppResolverService,
     private tncPublicSvc: TncPublicResolverService,
     private globals: Globals,
-    private eventSvc: EventService,
   ) {}
 
   ngOnInit() {
@@ -184,14 +182,5 @@ export class TncComponent implements OnInit, OnDestroy {
   }
   postProcess() {
     this.http.patch('/apis/protected/v8/user/tnc/postprocessing', {}).subscribe()
-  }
-
-  raiseTelemetry() {
-    this.eventSvc.raiseInteractTelemetry('click', 'next', {
-      contentType: 'button',
-      context: {
-        pageSection: 'tnc',
-      },
-    })
   }
 }

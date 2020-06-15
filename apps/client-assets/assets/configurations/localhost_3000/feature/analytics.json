@@ -1,0 +1,38 @@
+{
+  "analytics": {
+    "enabled": true,
+    "available": true,
+    "subFeatures": {
+      "courseAnalytics": {
+        "enabled": true,
+        "available": true,
+        "apiLink": {
+          "iframeClientApi": true,
+          "iframeAPi": false
+        }
+      },
+      "learningAnalytics": {
+        "enabled": true,
+        "available": true,
+        "mainTitle": "Manager's Dashboard",
+        "tabs": {
+          "home": {
+            "enabled": true,
+            "available": true,
+            "displayName": "Home"
+          },
+          "content": {
+            "enabled": true,
+            "available": true,
+            "displayName": "Content",
+            "subTabs": {
+              "courses": true,
+              "modules": false,
+              "resources": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

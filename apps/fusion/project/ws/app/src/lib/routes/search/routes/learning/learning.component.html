@@ -66,19 +66,6 @@
         </span>
       </mat-chip-list>
     </div>
-    <!-- commercial_start -->
-    <mat-card *ngIf="concepts.length" class="margin-bottom-m mat-elevation-z3">
-      <h2 i18n="search: related topics" class="margin-bottom-s mat-h2">
-        Explore related concepts:
-      </h2>
-      <mat-card-content>
-        <ws-utils-horizontal-scroller [loadStatus]="'done'">
-          <a class="concept mat-toolbar" [routerLink]="'/app/concept-graph/' + concept.id"
-            *ngFor="let concept of concepts | pipeLimitTo: 15">{{ concept.displayName }}</a>
-        </ws-utils-horizontal-scroller>
-      </mat-card-content>
-    </mat-card>
-    <!-- commercial_end -->
     <div *ngIf="searchResults?.result?.length">
       <ws-app-learning-card class="search-card" *ngFor="let result of searchResults.result; trackBy: contentTrackBy"
         [displayType]="resultsDisplayType" [content]="result"></ws-app-learning-card>

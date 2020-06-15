@@ -6,7 +6,7 @@ $content-margin-left: 60px;
 
 mat-card {
   margin-bottom: 12px;
-  background: #2096cd !important;
+  background: #102b4e !important;
   color:white !important;
 }
 
@@ -28,21 +28,18 @@ mat-card {
 }
 
 .intro-mat-card {
-  margin-bottom: 20px;
+  margin: 20px 20px;
   align-items: center;
   padding: 30px;
-  border-radius: 0px;
 
   @include breakpoint-lt-m {
-  margin-bottom: 20px;
+    margin: 20px 20px;
     padding: 20px;
-    border-radius: 0px;
   }
 
   @include breakpoint-xs {
-    margin-bottom: 20px;
+    margin: 20px 20px;
     padding: 10px;
-    border-radius: 0px;
   }
 }
 
@@ -73,9 +70,7 @@ mat-card {
   display: flex;
   align-items: center;
   font-size: 2.6em;
- @media only screen and (max-width: 432px) {
-    font-size: 2.6em;
-  }
+
   @media only screen and (max-width: 514px) {
     font-size: 2.3em;
   }
@@ -107,6 +102,9 @@ mat-card {
 .text-hover {
   margin-top: 0px;
   margin-left: 18px;
+  @include breakpoint-xs {
+    font-size: 0.8em;
+  }
 }
 
 .icon-medium {
@@ -170,7 +168,6 @@ mat-card {
   padding: 0;
 
   .group-name-container {
-    background: #2096cd;
     padding-left: 10px;
     display: flex;
     justify-content: space-between;
@@ -178,7 +175,7 @@ mat-card {
     cursor: pointer;
 
     .group-name {
-      font-weight: 324;
+      font-weight: 400;
       margin: 0;
       color:white;
     }
@@ -195,8 +192,8 @@ mat-card {
 
 .progress-style{
     width: 160px;
-    border-radius: 12px;
-    height: 25px;
+    border-radius: 8px;
+    height: 15px;
     margin-left: 5%;
     margin-right: 5%;
 }
@@ -252,41 +249,4 @@ mat-card {
 
 .flex-align{
   flex-wrap: wrap;
-}
-
-.button{
-border: 2px solid white;
-color: white !important;
-background-color: #2096cd !important;
-}
-
-.text-color{
-  color: #2096cd !important;
-}
-
-.progress-style .mat-progress-bar-fill::after {
-    background-color: #808080 !important;
-}
-
-.text-float{
-  position: absolute;
-   padding: 10px;
-    color: white;
-    margin-left: 6%;
-      @media only screen and (max-width: 432px) {
-   margin-left: 23%;
-  }
-}
-
-
-.metric{
-   position: absolute;
-   padding: 10px;
-    margin-left: 8%;
-    margin-top: 2%;
-    color:gray;
-      @media only screen and (max-width: 432px) {
-         margin-top: 7%;
-        margin-left: 30%;
-  }
 }

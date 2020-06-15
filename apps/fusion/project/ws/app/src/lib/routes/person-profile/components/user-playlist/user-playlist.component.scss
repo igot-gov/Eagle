@@ -1,6 +1,9 @@
 @import 'ws-mixins';
 
 .playlist-card {
+  //width: 185px;
+
+  //new card design
   width: 200px;
 
   @media (max-width: 767px) {
@@ -9,12 +12,19 @@
   }
 }
 
+/* .card-container {
+  width: inherit;
+  border-radius: 4px;
+} */
+
 .card {
   height: 100px;
+  //new card-design
   width: 190px;
 
   @media (max-width: 767px) {
     height: 85px;
+    //new card design
     width: 150px;
   }
 }

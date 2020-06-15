@@ -1,16 +1,21 @@
 <ng-container *ngIf="widgetData?.actionBtn && widgetData?.config?.type">
   <ng-container [ngSwitch]="widgetData.config.type">
-    <ng-container *ngSwitchCase="displayType.cardFull" [ngTemplateOutlet]="cardFull" [ngTemplateOutletContext]="widgetData"></ng-container>
-    <ng-container *ngSwitchCase="displayType.cardMini" [ngTemplateOutlet]="cardMini" [ngTemplateOutletContext]="widgetData"></ng-container>
-    <ng-container *ngSwitchCase="displayType.cardSmall" [ngTemplateOutlet]="cardSmall" [ngTemplateOutletContext]="widgetData"></ng-container>
-    <ng-container *ngSwitchCase="displayType.externalLinkButton" [ngTemplateOutlet]="externalLinkButton" [ngTemplateOutletContext]="widgetData"></ng-container>
+    <ng-container *ngSwitchCase="displayType.cardFull" [ngTemplateOutlet]="cardFull"
+      [ngTemplateOutletContext]="widgetData"></ng-container>
+    <ng-container *ngSwitchCase="displayType.cardMini" [ngTemplateOutlet]="cardMini"
+      [ngTemplateOutletContext]="widgetData"></ng-container>
+    <ng-container *ngSwitchCase="displayType.cardSmall" [ngTemplateOutlet]="cardSmall"
+      [ngTemplateOutletContext]="widgetData"></ng-container>
+    <ng-container *ngSwitchCase="displayType.externalLinkButton" [ngTemplateOutlet]="externalLinkButton"
+      [ngTemplateOutletContext]="widgetData"></ng-container>
     <a [routerLink]="widgetData.actionBtn?.url" *ngSwitchCase="displayType.menuItem" mat-menu-item>
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
     <ng-container *ngSwitchCase="displayType.featureItem">
       <ng-container [ngTemplateOutlet]="featureItem" [ngTemplateOutletContext]="widgetData"></ng-container>
     </ng-container>
-    <a *ngSwitchCase="displayType.matButton" [name]="widgetData.actionBtnName" [routerLink]="widgetData.actionBtn?.url" mat-button>
+    <a *ngSwitchCase="displayType.matButton" [name]="widgetData.actionBtnName" [routerLink]="widgetData.actionBtn?.url"
+      mat-button>
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
     <a *ngSwitchCase="displayType.matFabButton" mat-fab>
@@ -19,8 +24,8 @@
     <a *ngSwitchCase="displayType.matFlatButton" [routerLink]="widgetData.actionBtn?.url" mat-flat-button>
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
-    <a [id]="widgetData.actionBtnId" *ngSwitchCase="displayType.matIconButton" [name]="widgetData.actionBtnName" [routerLink]="widgetData.actionBtn?.url"
-      mat-icon-button>
+    <a *ngSwitchCase="displayType.matIconButton" [name]="widgetData.actionBtnName"
+      [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: widgetData.actionBtn.iconType,
           icon: widgetData.actionBtn.icon
@@ -40,7 +45,8 @@
 <!-- TEMPLATES -->
 <ng-template #buttonContent let-actionBtn="actionBtn" let-config="config">
   <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="actionBtn"></ng-container>
-  <span id="widgetInstanceId" *ngIf="!config.hideTitle" [ngClass]="{ 'ml-2': actionBtn.icon }">{{ actionBtn.name }}</span>
+  <span id="widgetInstanceId" *ngIf="!config.hideTitle"
+    [ngClass]="{ 'ml-2': actionBtn.icon }">{{ actionBtn.name }}</span>
 </ng-template>
 
 <ng-template #buttonExternalLinkTextContent let-actionBtn="actionBtn">
@@ -49,7 +55,8 @@
 
 <ng-template #cardFull let-actionBtn="actionBtn" let-config="config">
   <mat-card class="card-full mr-4" id="{{actionBtn?.id}}">
-    <a [href]="actionBtn.url" [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal" matRipple class="feature">
+    <a [href]="actionBtn.url" [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal" matRipple
+      class="feature">
       <!-- <mat-icon class="feature-status-icon" *ngIf="featureStatusColor" [color]="featureStatusColor">brightness_1
       </mat-icon> -->
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
@@ -68,7 +75,8 @@
 </ng-template>
 
 <ng-template #externalLinkButton let-actionBtn="actionBtn" let-config="config">
-  <a [href]="actionBtn.url" [target]="actionBtn.target ? actionBtn.target : '_self'" [matTooltip]="actionBtn.toolTip" class="external-link-button flex items-center justify-center"
+  <a [href]="actionBtn.url" [target]="actionBtn.target ? actionBtn.target : '_self'" [matTooltip]="actionBtn.toolTip"
+    class="external-link-button flex items-center justify-center"
     [ngClass]="{'mat-button' : !config.hideTitle, 'mat-icon-button': config.hideTitle}">
     <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
             iconType: actionBtn.iconType,
@@ -80,7 +88,8 @@
 </ng-template>
 
 <ng-template #cardSmall let-actionBtn="actionBtn" let-config="config">
-  <a [href]="actionBtn.url" [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal" matRipple class="feature card-small mat-card">
+  <a [href]="actionBtn.url" [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal" matRipple
+    class="feature card-small mat-card">
     <!-- <mat-icon class="feature-status-icon" *ngIf="featureStatusColor" [color]="featureStatusColor">
       brightness_1
     </mat-icon> -->
@@ -93,10 +102,10 @@
   </a>
 </ng-template>
 <ng-template #cardMini let-actionBtn="actionBtn" let-config="config">
-  <a role="button" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal" routerLinkActive="ws-mat-accent-text"
-    class="flex items-center flex-col px-2 box-sizing-box">
+  <a role="button" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal"
+    routerLinkActive="ws-mat-accent-text" class="flex items-center flex-col px-2 box-sizing-box">
     <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon>
-    <span *ngIf="!config.hideTitle" [ngClass]="instanceVal === 'Ford' && showFixedLength ? 'title font-sans' :
+    <span *ngIf="!config.hideTitle" [ngClass]="instanceVal === 'RootOrg' && showFixedLength ? 'title font-sans' :
       'mat-caption'">{{ actionBtn.name }}</span>
   </a>
 </ng-template>
@@ -109,7 +118,8 @@
       brightness_1
     </mat-icon> -->
 
-    <a class="text-center block" [href]="actionBtn.url" [url]="actionBtn.url" [wsWidgetUrlResolver]="actionBtn.isExternal" [mobileAppFunction]="actionBtn.mobileAppFunction">
+    <a class="text-center block" [href]="actionBtn.url" [url]="actionBtn.url"
+      [wsWidgetUrlResolver]="actionBtn.isExternal" [mobileAppFunction]="actionBtn.mobileAppFunction">
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: actionBtn.iconType,
           icon: actionBtn.icon,
@@ -121,13 +131,14 @@
         {{ actionBtn.shortName }}
       </div>
     </a>
-    <mat-icon role="button" class="feature-pin" color="accent" *ngIf="!config?.hidePin && isPinFeatureAvailable" (click)="togglePin(actionBtn?.id, $event)">{{ isPinned ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+    <mat-icon role="button" class="feature-pin" color="accent" *ngIf="!config?.hidePin && isPinFeatureAvailable"
+      (click)="togglePin(actionBtn?.id, $event)">{{ isPinned ? 'bookmark' : 'bookmark_border' }}</mat-icon>
   </div>
 </ng-template>
 <ng-template #icon let-iconType="iconType" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container *ngIf="!badgeCount.length">
-    <mat-icon *ngIf="iconType === 'mat-icon'" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName" [color]="color"
-      [ngStyle]="
+    <mat-icon *ngIf="iconType === 'mat-icon'" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName"
+      [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',
@@ -140,8 +151,9 @@
     </mat-icon>
   </ng-container>
   <ng-container *ngIf="badgeCount.length">
-    <mat-icon matBadge="{{ badgeCount }}" matBadgeColor="accent" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName"
-      class="badge-notify" matBadgeSize="small" *ngIf="iconType === 'mat-icon'" [color]="color" [ngStyle]="
+    <mat-icon matBadge="{{ badgeCount }}" matBadgeColor="accent" aria-hidden="false"
+      [attr.aria-label]="widgetData.actionBtnName" class="badge-notify" matBadgeSize="small"
+      *ngIf="iconType === 'mat-icon'" [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',

@@ -59,14 +59,12 @@ export class ContentAssignmentGuard implements CanActivate {
                     ))) {
                     observer.next(true)
                     observer.complete()
-                    if (!this.stateUrl.startsWith('/admin/tenant/content-assignment/assign?userType=admin&adminLevel=')) {
-                      this.router.navigate(['/admin/tenant/content-assignment/assign'], {
-                        queryParams: {
-                          userType: 'admin',
-                          adminLevel: this.adminLevel,
-                        },
-                      })
-                    }
+                    this.router.navigate(['/admin/tenant/content-assignment/assign'], {
+                      queryParams: {
+                        userType: 'admin',
+                        adminLevel: this.adminLevel,
+                      },
+                    })
                   } else {
                     observer.next(false)
                     observer.complete()
@@ -89,13 +87,11 @@ export class ContentAssignmentGuard implements CanActivate {
                     ))) {
                     observer.next(true)
                     observer.complete()
-                    if (this.stateUrl !== '/admin/tenant/content-assignment/view?userType=admin') {
-                      this.router.navigate(['/admin/tenant/content-assignment/view'], {
-                        queryParams: {
-                          userType: 'admin',
-                        },
-                      })
-                    }
+                    this.router.navigate(['/admin/tenant/content-assignment/view'], {
+                      queryParams: {
+                        userType: 'admin',
+                      },
+                    })
                   } else {
                     observer.next(false)
                     observer.complete()

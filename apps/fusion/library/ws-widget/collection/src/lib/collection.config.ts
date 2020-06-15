@@ -52,7 +52,6 @@ export const ROOT_WIDGET_CONFIG = {
     linear: 'linearLayout',
     tab: 'tabLayout',
     grid: 'gridLayout',
-    embed: 'embedLayout',
   },
   player: {
     _type: 'player',

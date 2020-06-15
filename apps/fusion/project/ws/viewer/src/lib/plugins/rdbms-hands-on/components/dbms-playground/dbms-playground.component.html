@@ -16,23 +16,21 @@
 <div class="margin-m">
   <h4 class="mat-title">Query result</h4>
   <div class="result-container">
-    <ng-container *ngIf="executedResult?.length">
-    <div *ngFor="let result of executedResult" class="margin-top-s query-result">
+    <div class="margin-top-s query-result" *ngIf="executedResult">
       <span
-        *ngIf="errorMessage || result?.status?.message"
+        *ngIf="errorMessage || executedResult?.status?.message"
         [ngClass]="{
-          'ws-mat-primary-text': result?.validationStatus,
-          'ws-mat-warn-text': !result?.validationStatus
+          'ws-mat-primary-text': executedResult?.validationStatus,
+          'ws-mat-warn-text': !executedResult?.validationStatus
         }"
       >
-        {{ errorMessage || result?.status?.message }}
+        {{ errorMessage || executedResult?.status?.message }}
       </span>
       <viewer-execution-result
-        *ngIf="result?.data"
-        [executedResult]="result"
+        *ngIf="executedResult?.data"
+        [executedResult]="executedResult"
       ></viewer-execution-result>
     </div>
-    </ng-container>
   </div>
 </div>
 

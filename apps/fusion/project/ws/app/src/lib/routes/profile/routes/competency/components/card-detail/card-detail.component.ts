@@ -40,10 +40,6 @@ export class CardDetailComponent implements OnInit {
           this.apiFetchStatus = 'error'
         },
       )
-    } else {
-      this.assessSvc.getDetailsCertification('2018-04-01', this.endDate).subscribe((data: any) => {
-        this.assessmentDetails = data.certifications[idParam]
-      })
     }
     // if (this.assessmentDetails) {
     //   // //console.log('val:', this.assessmentDetails.scoreDistribution['0.0-25.0'])

@@ -5,7 +5,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser'
 import { NsContent, viewerRouteGenerator, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
-import { ConfigurationsService, EInstance } from '@ws-widget/utils'
+import { ConfigurationsService } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 
 @Component({
@@ -33,7 +33,7 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private tocSvc: AppTocService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.forPreview = window.location.href.includes('/author/')
@@ -147,8 +147,6 @@ export class AppTocContentsComponent implements OnInit, OnDestroy {
 
   get showYouMayAlsoLikeTab(): boolean {
     switch (this.configSvc.rootOrg) {
-      case EInstance.PATHFINDERS:
-        return false
       default:
         return true
     }

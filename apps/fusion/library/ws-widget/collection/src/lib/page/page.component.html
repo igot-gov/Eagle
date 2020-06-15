@@ -1,4 +1,4 @@
-<mat-toolbar role="navigation" *ngIf="pageData?.navigationBar && !error && showHeader" [ngClass]="{
+<mat-toolbar role="navigation" *ngIf="pageData?.navigationBar && !error" [ngClass]="{
     navbar: !isXSmall && !pageData.navigationBar.pageBackLink && !pageData.navigationBar.pageTitle
   }" [color]="navBackground?.color" [ngStyle]="navBackground?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: pageData?.navigationBar?.pageBackLink }"></ws-widget-btn-page-back>

@@ -38,16 +38,6 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field class=" margin-left-m">
-        <mat-label i18n>Select KPI</mat-label>
-        <mat-select #selectedKpi [ngModel]="selectedKpi" (ngModelChange)="onkpiChange(selectedKpi)">
-          <mat-option [value]="kpi.name" *ngFor="let kpi of kpiList">
-            <a mat-line>
-              <ng-container>{{kpi.name}}&nbsp;&nbsp;</ng-container>
-            </a>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field class=" margin-left-m">
         <mat-label i18n>Select Role</mat-label>
         <mat-select #selectedRole [ngModel]="selectedRole" (ngModelChange)="roleChanged(selectedRole)">
           <mat-option [value]="role" *ngFor="let role of rolesList">
@@ -91,7 +81,7 @@
       </mat-form-field>
       <div class="margin-left-m margin-top-l margin-bottom-l">
         <a mat-raised-button type="button" color="primary" i18n
-          (click)="fetchGuildLeaderboardData(startDate.value,endDate.value,'');fetchActivityLeaderboardData(startDate.value,endDate.value,'',0)">
+          (click)="fetchGuildLeaderboardData(startDate.value,endDate.value);fetchActivityLeaderboardData(startDate.value,endDate.value)">
           Submit
         </a>
       </div>
@@ -118,9 +108,40 @@
           </button>
         </h4>
       </div>
+      <mat-button-toggle-group (change)="onTabChange($event)" i18n-name name="leaderboardType" i18n-aria-label
+        aria-label="Select leaderboard type" class="dimension">
+        <mat-button-toggle i18n [checked]="currentTab === 'Guild'" value="Guild">Guild View
+        </mat-button-toggle>
+        <mat-button-toggle i18n [checked]="currentTab === 'Activity'" value="Activity">
+          Activity View</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
 
-    <ng-container *ngIf="fetchStatus !== 'fetching'">
+    <ng-container *ngIf="fetchStatus !== 'fetching' && activityMode">
+      <ws-app-card-list *ngIf="leaderBoardActivity && leaderBoardActivity.length">
+        <section class="p-4 highlight" *ngIf="leaderBoardFirstRowActivity[0]">
+          <ws-app-leaderboard-item [leaderboardItem]="leaderBoardFirstRowActivity[0]"></ws-app-leaderboard-item>
+        </section>
+        <ws-app-card-list-item *ngFor="let leaderboardItem of leaderBoardActivity">
+          <ws-app-leaderboard-item [leaderboardItem]="leaderboardItem"></ws-app-leaderboard-item>
+        </ws-app-card-list-item>
+        <mat-divider></mat-divider>
+      </ws-app-card-list>
+
+      <section class="mat-body text-center margin-top-l"
+        *ngIf="fetchStatus !== 'fetching' && activityMode && !leaderBoardActivity.length">
+        <ng-container>
+          <div class="flat-error-alert margin-m">
+            <mat-icon class="large-icon">info</mat-icon>
+            <span class="font-weight-bold margin-left-s mat-h3 margin-remove-bottom" i18n>There is no leaderboard data
+              available for this sprint.</span>
+          </div>
+
+        </ng-container>
+      </section>
+    </ng-container>
+
+    <ng-container *ngIf="fetchStatus !== 'fetching' && guildMode">
       <ws-app-card-list *ngIf="leaderBoardGuild && leaderBoardGuild.length">
         <section class="p-4 highlight" *ngIf="leaderBoardFirstRowGuild[0]">
           <ws-app-leaderboard-item [leaderboardItem]="leaderBoardFirstRowGuild[0]"></ws-app-leaderboard-item>
@@ -132,7 +153,7 @@
       </ws-app-card-list>
 
       <section class="mat-body text-center margin-top-l"
-        *ngIf="fetchStatus !== 'fetching' && leaderBoardGuild.length===0">
+        *ngIf="fetchStatus !== 'fetching' && guildMode && !leaderBoardGuild">
         <ng-container>
           <div class="flat-error-alert margin-m">
             <mat-icon class="large-icon">info</mat-icon>

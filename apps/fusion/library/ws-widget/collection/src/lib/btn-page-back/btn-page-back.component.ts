@@ -9,18 +9,23 @@ type TUrl = undefined | 'none' | 'back' | string
   styleUrls: ['./btn-page-back.component.scss'],
 })
 export class BtnPageBackComponent extends WidgetBaseComponent
-  implements OnInit, NsWidgetResolver.IWidgetData<{ url: TUrl; back?: boolean }> {
-  @Input() widgetData: { url: TUrl; back?: boolean } = { url: 'none' }
+  implements OnInit, NsWidgetResolver.IWidgetData<{ url: TUrl }> {
+  @Input() widgetData: { url: TUrl } = { url: 'none' }
   presentUrl = ''
-  constructor(private btnBackSvc: BtnPageBackService, private router: Router) {
+  constructor(
+    private btnBackSvc: BtnPageBackService,
+    private router: Router,
+  ) {
     super()
   }
 
   ngOnInit() {
     this.presentUrl = this.router.url
+
   }
 
   get backUrl(): { fragment?: string; routeUrl: string; queryParams: any } {
+
     if (this.presentUrl === '/page/explore') {
       return {
         queryParams: undefined,
@@ -34,8 +39,7 @@ export class BtnPageBackComponent extends WidgetBaseComponent
         queryParams: this.btnBackSvc.getLastUrl(2).queryParams,
         routeUrl: this.btnBackSvc.getLastUrl(2).route,
       }
-    }
-    if (this.widgetData.url === 'back') {
+    } if (this.widgetData.url === 'back') {
       return {
         fragment: this.btnBackSvc.getLastUrl().fragment,
         queryParams: this.btnBackSvc.getLastUrl().queryParams,
@@ -43,7 +47,9 @@ export class BtnPageBackComponent extends WidgetBaseComponent
       }
     }
     if (this.widgetData.url !== 'back' && this.widgetData.url !== 'doubleBack') {
+
       this.btnBackSvc.checkUrl(this.widgetData.url)
+
     }
 
     return {
@@ -52,7 +58,4 @@ export class BtnPageBackComponent extends WidgetBaseComponent
     }
   }
 
-  back() {
-    window.history.back()
-  }
 }

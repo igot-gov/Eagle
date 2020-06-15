@@ -4,8 +4,8 @@
 </mat-toolbar>
 <main class="max-w-3xl mx-auto p-4 mt-4">
   <nav mat-tab-nav-bar>
-    <a *ngIf="isCommonGoalEnabled" name="common-goals-button-goal-create" mat-tab-link
-      routerLink="/app/goals/create/common" routerLinkActive #common="routerLinkActive" [active]="common.isActive"
+    <a name="common-goals-button-goal-create" mat-tab-link routerLink="/app/goals/create/common" routerLinkActive
+      #common="routerLinkActive" [active]="common.isActive"
       [ngClass]="{ 'ws-mat-primary-text font-weight-500': common.isActive  }" i18n>
       COMMON GOALS
     </a>

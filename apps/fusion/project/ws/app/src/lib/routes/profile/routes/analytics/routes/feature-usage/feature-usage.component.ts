@@ -18,7 +18,6 @@ export class FeatureUsageComponent implements OnInit {
   pendingAssessments = 0
   assessmentComplete = 0
   assessments: NSCompetency.IAchievementsRes | null = null
-  certifications: NSCompetency.IAchievementsRes | null = null
   timeSpentFetchStatus: TFetchStatus = 'fetching'
   nsoFetchStatus: TFetchStatus = 'fetching'
   userProgressFetchStatus: TFetchStatus = 'fetching'
@@ -67,15 +66,6 @@ export class FeatureUsageComponent implements OnInit {
             this.assessmentFetchStatus = 'done'
           })
         }
-      },
-      () => {
-        this.assessmentFetchStatus = 'error'
-      },
-    )
-    this.analyticsSrv.fetchCertificates(this.startDate, this.endDate).subscribe(
-      (certificationsData: NSCompetency.IAchievementsRes) => {
-        this.certifications = certificationsData
-        this.assessmentFetchStatus = 'done'
       },
       () => {
         this.assessmentFetchStatus = 'error'

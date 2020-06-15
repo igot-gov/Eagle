@@ -138,7 +138,6 @@ export namespace SocialForum {
         }
       }[]
       isStandAlone: boolean
-      siemensCatalog: boolean
     }
   }
   export interface ISearchV6ApiResult {

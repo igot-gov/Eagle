@@ -32,7 +32,7 @@ export class EditorService {
     private accessService: AccessControlService,
     private userAutoComplete: UserAutocompleteService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   create(meta: NSApiRequest.ICreateMetaRequestGeneral): Observable<string> {
     const requestBody: NSApiRequest.ICreateMetaRequest = {
@@ -47,16 +47,16 @@ export class EditorService {
         createdBy: this.accessService.userId,
       },
     }
-    if (this.accessService.rootOrg === 'Ford') {
+    if (this.accessService.rootOrg === 'client2') {
       if (meta.contentType === 'Knowledge Artifact') {
         try {
-          const userPath = `Ford/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
+          const userPath = `client2/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
           requestBody.content.accessPaths = userPath
         } catch {
-          requestBody.content.accessPaths = 'Ford'
+          requestBody.content.accessPaths = 'client2'
         }
       } else {
-        requestBody.content.accessPaths = 'Ford'
+        requestBody.content.accessPaths = 'client2'
       }
     }
     return this.apiService
@@ -218,15 +218,15 @@ export class EditorService {
     return this.accessPath.length
       ? of()
       : this.apiService.get<string[]>(`/apis/protected/V8/user/accessControl`).pipe(
-          map((v: { special: { accessPaths: string[] }[] }) => {
-            if (v) {
-              v.special.forEach(acc => {
-                this.accessPath = this.accessPath.concat(acc.accessPaths)
-              })
-            }
-            return this.accessPath
-          }),
-        )
+        map((v: { special: { accessPaths: string[] }[] }) => {
+          if (v) {
+            v.special.forEach(acc => {
+              this.accessPath = this.accessPath.concat(acc.accessPaths)
+            })
+          }
+          return this.accessPath
+        }),
+      )
   }
 
   copy(lexId: string, url: string) {
@@ -250,9 +250,9 @@ export class EditorService {
     return isKnowledgeBoard
       ? this.apiService.delete(`${CONTENT_DELETE}/${id}/kb${this.accessService.orgRootOrgAsQuery}`)
       : this.apiService.post(`${CONTENT_DELETE}${this.accessService.orgRootOrgAsQuery}`, {
-          identifier: id,
-          author: this.accessService.userId,
-          isAdmin: this.accessService.hasRole(['editor', 'admin']),
-        })
+        identifier: id,
+        author: this.accessService.userId,
+        isAdmin: this.accessService.hasRole(['editor', 'admin']),
+      })
   }
 }

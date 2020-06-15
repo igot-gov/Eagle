@@ -83,7 +83,7 @@ export class NavigatorService {
   getContentAnalytics(tagName: string): Observable<NsAnalytics.IAnalyticsResponse> {
     this.analyticsFetchStatus = 'fetching'
     // tslint:disable-next-line: max-line-length
-    const url = `${PROXIES_SLAG_V8}/LA/LA/api/participants?aggsSize=1000&endDate=${this.endDate}&startDate=${this.startDate}&from=0&refinementfilter=${encodeURIComponent('"source":["LEX","Learning Hub"]')}$${encodeURIComponent(`"topics": ["${tagName}"]`)}`
+    const url = `${PROXIES_SLAG_V8}/LA/LA/api/participants?aggsSize=1000&endDate=${this.endDate}&startDate=${this.startDate}&from=0&refinementfilter=${encodeURIComponent('"source":["Wingspan","Learning Hub"]')}$${encodeURIComponent(`"topics": ["${tagName}"]`)}`
     // this.http
     //   .get(url)
     //   .subscribe(

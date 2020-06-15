@@ -25,19 +25,17 @@ import { HorizontalScrollerModule } from '@ws-widget/utils/src/lib/helpers/horiz
 import { UserKbComponent } from './components/user-kb/user-kb.component'
 import { DefaultThumbnailModule, PipeLimitToModule } from '@ws-widget/utils'
 import { UserPlaylistComponent } from './components/user-playlist/user-playlist.component'
-import { BadgeEarnedComponent } from './components/badge-earned/badge-earned.component'
 import { ProfileBlogComponent } from './components/profile-blog/profile-blog.component'
 import { ContentReviewedComponent } from './components/content-reviewed/content-reviewed.component'
 import { UserQnaComponent } from './components/user-qna/user-qna.component'
 import { UserdetailallComponent } from './components/userdetailall/userdetailall.component'
 import { UserGoalsComponent } from './components/user-goals/user-goals.component'
-import { PersonSkillsComponent } from './components/person-skills/person-skills.component'
 import { BtnPageBackModule } from '@ws-widget/collection/src/lib/btn-page-back/btn-page-back.module'
-import { BadgesModule } from '../profile/routes/badges/badges.module'
 import { BtnFollowModule } from '@ws-widget/collection/src/public-api'
 import { LastLearntComponent } from './components/last-learnt/last-learnt.component'
 import { ViewFollowpersonComponent } from './components/view-followperson/view-followperson.component'
 import { FollowListComponent } from './components/follow-list/follow-list.component'
+import { ProfileSettingsComponent } from './module/profile-settings/profile-settings.component'
 import { ContentAuthoredComponent } from './components/content-authored/content-authored.component'
 import { MyContentService } from '../../../../../author/src/lib/routing/modules/my-content/services/my-content.service'
 import { AuthInitService } from '../../../../../author/src/lib/services/init.service'
@@ -50,16 +48,15 @@ import { FollowingListComponent } from './components/following-list/following-li
     UserKbComponent,
     UserPlaylistComponent,
     UserDetailsComponent,
-    BadgeEarnedComponent,
     ProfileBlogComponent,
     ContentReviewedComponent,
     UserQnaComponent,
     UserdetailallComponent,
     UserGoalsComponent,
-    PersonSkillsComponent,
     LastLearntComponent,
     ViewFollowpersonComponent,
     FollowListComponent,
+    ProfileSettingsComponent,
     ContentAuthoredComponent,
     FollowingListComponent,
   ],
@@ -86,10 +83,9 @@ import { FollowingListComponent } from './components/following-list/following-li
     DefaultThumbnailModule,
     PipeLimitToModule,
     MatProgressSpinnerModule,
-    BadgesModule,
     BtnFollowModule,
   ],
-  exports: [UserdetailallComponent],
+  exports: [UserdetailallComponent, ProfileSettingsComponent],
   entryComponents: [UserdetailallComponent],
   providers: [MyContentService, AuthInitService, ApiService, AccessControlService],
 

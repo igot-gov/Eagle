@@ -26,7 +26,7 @@
         <div
           class="flex flex-center margin-l"
           *ngIf="
-            (currentStat === 'lex' && lexStatFetchStatus === 'fetching') ||
+            (currentStat === 'Wingspan' && lexStatFetchStatus === 'fetching') ||
             (currentStat === 'infyme' && infyMeStatFetchStatus === 'fetching')
           "
         >
@@ -35,7 +35,7 @@
         <h3
           class="mat-h3"
           *ngIf="
-            (currentStat === 'lex' && lexStatFetchStatus === 'error') ||
+            (currentStat === 'Wingspan' && lexStatFetchStatus === 'error') ||
             (currentStat === 'infyme' && infyMeStatFetchStatus === 'error')
           "
           i18n
@@ -50,7 +50,7 @@
               [ngClass]="{ 'cursor-auto': !counterEnabled }"
               [routerLink]="
                 counterEnabled
-                  ? currentStat === 'lex'
+                  ? currentStat === 'Wingspan'
                     ? '/app/infy/counter'
                     : '/app/infy/counter/infy-me'
                   : null

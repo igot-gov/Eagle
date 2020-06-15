@@ -4,7 +4,7 @@
       <a [routerLink]="'/app/social/forums/post/' + post.id" class="ws-mat-primary-text mat-title text-overwrap pb-2">
         {{ post.postContent.title }}
       </a>
-      <ws-app-btn-flag *ngIf="post.activity" [postCreatorId]="post.postCreator?.postCreatorId" [postId]="post.id"
+      <ws-app-btn-flag [postCreatorId]="post.postCreator?.postCreatorId" [postId]="post.id"
         [flagged]="post.activity.userActivity.flag">
       </ws-app-btn-flag>
     </div>

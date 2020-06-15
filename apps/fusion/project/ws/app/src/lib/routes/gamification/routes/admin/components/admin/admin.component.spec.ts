@@ -10,7 +10,7 @@ describe('AdminComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AdminComponent],
     })
-      .compileComponents()
+    .compileComponents()
   }))
 
   beforeEach(() => {

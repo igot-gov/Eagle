@@ -18,7 +18,6 @@ import {
   MatCheckboxModule,
   MatDividerModule,
   MatDialogModule,
-  MatProgressSpinnerModule,
 } from '@angular/material'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { SettingsModule } from '../profile/routes/settings/settings.module'
@@ -38,10 +37,8 @@ import { PipeSafeSanitizerModule } from '../../../../../../../library/ws-widget/
 import { TncAppResolverService } from '../../../../../../../src/app/services/tnc-app-resolver.service'
 import { SetupDoneComponent } from './components/setup-done/setup-done.component'
 import { InterestModules } from './module/interest/interest.module'
-import { BadgesResolver } from '../profile/routes/badges/badges.resolver'
 import { Globals } from './globals'
 import { InterestModule } from '../profile/routes/interest/interest.module'
-import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component'
 
 @NgModule({
   declarations: [
@@ -51,7 +48,6 @@ import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component
     TncComponent,
     TncRendererComponent,
     SetupDoneComponent,
-    UploadPdfComponent,
   ],
   imports: [
     CommonModule,
@@ -74,7 +70,7 @@ import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component
     PipeSafeSanitizerModule,
     MatToolbarModule,
     BtnPageBackModule,
-    MatProgressSpinnerModule,
+
     SettingsModule,
     AboutVideoModule,
     WidgetResolverModule,
@@ -84,6 +80,6 @@ import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component
     AppTourDialogModule,
     InterestModule,
   ],
-  providers: [TncAppResolverService, BadgesResolver, Globals],
+  providers: [TncAppResolverService, Globals],
 })
-export class AppSetupModule {}
+export class AppSetupModule { }

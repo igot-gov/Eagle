@@ -50,8 +50,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   barChartCityData: IGraphWidget = {} as IGraphWidget
   barChartSourceData: IGraphWidget = {} as IGraphWidget
   barChartGuildData: IGraphWidget = {} as IGraphWidget
-  barChartZonesData: IGraphWidget = {} as IGraphWidget
-  barChartClassificationData: IGraphWidget = {} as IGraphWidget
   barChartRoleData: IGraphWidget = {} as IGraphWidget
   barChartCountryData: IGraphWidget = {} as IGraphWidget
   barChartRegionData: IGraphWidget = {} as IGraphWidget
@@ -89,7 +87,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   hourlyData: any
   filterFetchStatus: TFetchStatus = 'none'
   private filterEventSubscription: Subscription | null = null
-  private filterDataEventSubscription: Subscription | null = null
   private removeEventSubscription: Subscription | null = null
   private dateEventSubscription: Subscription | null = null
   private searchEventSubscription: Subscription | null = null
@@ -594,31 +591,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.onExpand = false
       },
     )
-    this.filterDataEventSubscription = this.resolver.dataFilterEventChangeSubject.subscribe(
-      (filterEvent: any) => {
-        const filter = {
-          key: filterEvent.filterType,
-          value: filterEvent.filterName,
-        }
-        this.filterArray.push(filter)
-        this.initData(
-          this.endDate,
-          this.startDate,
-          this.contentType,
-          this.searchQuery,
-          this.filterArray,
-        )
-        this.getHourlyGraphData(
-          'all',
-          this.endDate,
-          this.startDate,
-          this.contentType,
-          this.searchQuery,
-          this.filterArray,
-        )
-        this.onExpand = false
-      },
-    )
     this.removeEventSubscription = this.resolver.removeFilterEventChangeSubject.subscribe(
       (removeEvent: any) => {
         this.showCategory = false
@@ -701,21 +673,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
       this.populateChartData()
     })
-    this.initData(
-      this.endDate,
-      this.startDate,
-      this.contentType,
-      this.searchQuery,
-      this.filterArray,
-    )
-    this.getHourlyGraphData(
-      'all',
-      this.endDate,
-      this.startDate,
-      this.contentType,
-      this.searchQuery,
-      this.filterArray,
-    )
+    // this.initData(this.endDate, this.startDate, this.contentType, this.searchQuery, this.filterArray)
   }
 
   applyFilter(filter: string) {
@@ -761,9 +719,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     if (this.filterEventSubscription) {
       this.filterEventSubscription.unsubscribe()
-    }
-    if (this.filterDataEventSubscription) {
-      this.filterDataEventSubscription.unsubscribe()
     }
     if (this.dateEventSubscription) {
       this.dateEventSubscription.unsubscribe()
@@ -1054,98 +1009,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                 backgroundColor: this.chartColors,
                 borderWidth: 1,
                 data: guildData,
-              },
-            ],
-          },
-        },
-      }
-      // users by Zones BarChart Data
-      const barChartZonesLabel: string[] = []
-      const zonesData: number[] = []
-      this.contentData.zones.forEach((source: any) => {
-        if (barChartZonesLabel.length < 20) {
-          barChartZonesLabel.push(source.key)
-        }
-        if (zonesData.length < 20) {
-          zonesData.push(source.doc_count)
-        }
-      })
-      this.barChartZonesData = {
-        widgetType: ROOT_WIDGET_CONFIG.graph._type,
-        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
-        widgetData: {
-          graphId: 'ZoneChart',
-          graphType: 'horizontalBar',
-          graphHeight: '300px',
-          graphWidth: '100%',
-          graphLegend: false,
-          graphLegendPosition: 'top',
-          graphLegendFontSize: 11,
-          graphTicksFontSize: 11,
-          graphTicksXAxisDisplay: true,
-          graphTicksYAxisDisplay: true,
-          graphGridLinesDisplay: false,
-          graphDefaultPalette: 'default',
-          graphFilterType: 'Zone',
-          graphXAxisLabel: '# Users',
-          graphYAxisLabel: 'Zone',
-          graphIsXAxisLabel: true,
-          graphIsYAxisLabel: true,
-          graphOnClick: true,
-          graphData: {
-            labels: barChartZonesLabel,
-            datasets: [
-              {
-                label: '',
-                backgroundColor: this.chartColors,
-                borderWidth: 1,
-                data: zonesData,
-              },
-            ],
-          },
-        },
-      }
-      // users by Classification BarChart Data
-      const barChartClassificationLabel: string[] = []
-      const classificationData: number[] = []
-      this.contentData.classifications.forEach((source: any) => {
-        if (barChartClassificationLabel.length < 20) {
-          barChartClassificationLabel.push(source.key)
-        }
-        if (classificationData.length < 20) {
-          classificationData.push(source.doc_count)
-        }
-      })
-      this.barChartClassificationData = {
-        widgetType: ROOT_WIDGET_CONFIG.graph._type,
-        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
-        widgetData: {
-          graphId: 'classificationChart',
-          graphType: 'horizontalBar',
-          graphHeight: '300px',
-          graphWidth: '100%',
-          graphLegend: false,
-          graphLegendPosition: 'top',
-          graphLegendFontSize: 11,
-          graphTicksFontSize: 11,
-          graphTicksXAxisDisplay: true,
-          graphTicksYAxisDisplay: true,
-          graphGridLinesDisplay: false,
-          graphDefaultPalette: 'default',
-          graphFilterType: 'Classification',
-          graphXAxisLabel: '# Users',
-          graphYAxisLabel: 'Classification',
-          graphIsXAxisLabel: true,
-          graphIsYAxisLabel: true,
-          graphOnClick: true,
-          graphData: {
-            labels: barChartClassificationLabel,
-            datasets: [
-              {
-                label: '',
-                backgroundColor: this.chartColors,
-                borderWidth: 1,
-                data: classificationData,
               },
             ],
           },

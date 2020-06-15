@@ -120,11 +120,9 @@ export class LearningHistoryComponent implements OnInit {
           })
         }
       }
-      if (this.history.isFilter) {
-        this.analyticsSrv.fetchFilterList().subscribe((data: any) => {
-          this.filterList = this.filterList.concat(data.progress_source)
-        })
-      }
+      this.analyticsSrv.fetchFilterList().subscribe((data: any) => {
+        this.filterList = this.filterList.concat(data.progress_source)
+      })
       this.getFilteredCourse(0)
     } else {
       this.contentTypes.forEach(contentType => {

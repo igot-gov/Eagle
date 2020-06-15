@@ -41,7 +41,7 @@ export class PdfComponent implements OnInit, OnDestroy {
     private viewerSvc: ViewerUtilService,
     private eventSvc: EventService,
     private accessControlSvc: AccessControlService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (
@@ -104,7 +104,7 @@ export class PdfComponent implements OnInit, OnDestroy {
           }
           this.isFetchingDataComplete = true
         },
-        () => { },
+        () => {},
       )
     }
   }

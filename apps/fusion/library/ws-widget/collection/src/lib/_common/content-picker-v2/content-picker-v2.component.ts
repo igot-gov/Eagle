@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core'
 import { ValueService, ConfigurationsService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { NSSearch } from '../../_services/widget-search.model'
@@ -7,13 +7,15 @@ import { SearchServService } from '@ws/app/src/lib/routes/search/services/search
 import { IWidgetData, IAppliedFilters } from './content-picker-v2.model'
 import { NsContent } from '../../_services/widget-content.model'
 import { ContentPickerV2Service } from './content-picker-v2.service'
+import { FormControl } from '@angular/forms'
+import { distinctUntilChanged } from 'rxjs/operators'
 
 @Component({
   selector: 'ws-widget-content-picker-v2',
   templateUrl: './content-picker-v2.component.html',
   styleUrls: ['./content-picker-v2.component.scss'],
 })
-export class ContentPickerV2Component implements OnInit, OnDestroy, OnChanges {
+export class ContentPickerV2Component implements OnInit, OnDestroy {
 
   @Input()
   widgetData!: IWidgetData
@@ -34,6 +36,8 @@ export class ContentPickerV2Component implements OnInit, OnDestroy, OnChanges {
   fetchStatus: 'none' | 'fetching' | 'done' | 'error'
   searchConfig: any = null
   objKey = Object.keys
+  sortOrderControl = new FormControl('desc')
+  sortByControl = new FormControl()
 
   constructor(
     private valueSvc: ValueService,
@@ -53,8 +57,8 @@ export class ContentPickerV2Component implements OnInit, OnDestroy, OnChanges {
       locale: [this.searchServSvc.getLanguageSearchIndex(
         this.configSvc.activeLocale && this.configSvc.activeLocale.locals[0] || 'en'
       )],
-      visibleFilters: {},
     }
+    this.initSearchResults()
   }
 
   initSearchResults() {
@@ -88,17 +92,6 @@ export class ContentPickerV2Component implements OnInit, OnDestroy, OnChanges {
     this.triggerSearch()
   }
 
-  sort(key: string) {
-    if (this.widgetData.sortableFields) {
-      if (key === 'relevance') {
-        this.searchReq.sort = undefined
-      } else {
-        this.searchReq.sort = [{ [key]: this.widgetData.sortableFields[key].order }]
-      }
-      this.triggerSearch()
-    }
-  }
-
   async triggerSearch() {
     if (!this.searchConfig) {
       this.searchConfig = {}
@@ -129,41 +122,28 @@ export class ContentPickerV2Component implements OnInit, OnDestroy, OnChanges {
     this.isLtMediumSubscription = this.valueSvc.isLtMedium$.subscribe(isLtMedium => {
       this.isLtMedium = isLtMedium
     })
+    this.sortByControl.valueChanges.pipe(
+      distinctUntilChanged()
+    ).subscribe(sortKey => {
+      this.searchReq.sort = [{ [sortKey]: this.sortOrderControl.value }]
+      this.triggerSearch()
+    })
+    this.sortOrderControl.valueChanges.pipe(
+      distinctUntilChanged()
+    ).subscribe(sortOrder => {
+      if (this.sortByControl.value) {
+        this.searchReq.sort = [{ [this.sortByControl.value]: sortOrder }]
+        this.triggerSearch()
+      }
+    })
   }
+
   ngOnDestroy() {
     if (this.isLtMediumSubscription) {
       this.isLtMediumSubscription.unsubscribe()
     }
     if (this.triggerSearchSubscription) {
       this.triggerSearchSubscription.unsubscribe()
-    }
-  }
-
-  ngOnChanges(props: SimpleChanges) {
-    for (const prop in props) {
-      if (prop === 'widgetData') {
-        if (this.widgetData && this.widgetData.includedFilters && this.widgetData.includedFilters.hasOwnProperty('contentType') &&
-          this.searchReq.hasOwnProperty('visibleFilters') && this.searchReq.visibleFilters) {
-          this.searchReq.visibleFilters['contentType'] = {
-            scope: 'semi_global',
-            filters: [{
-              andFilters: [{
-                ['contentType']: this.widgetData.includedFilters['contentType'].values,
-              }],
-            }],
-            displayName: this.widgetData.includedFilters['contentType'].displayName,
-          }
-        }
-        if (this.widgetData && this.widgetData.includedFilters && Object.keys(this.widgetData.includedFilters || {}).length) {
-          Object.keys(this.widgetData.includedFilters).forEach(key => {
-            if (key !== 'contentType' && this.searchReq.hasOwnProperty('visibleFilters') && this.searchReq.visibleFilters &&
-              this.widgetData && this.widgetData.includedFilters) {
-              this.searchReq.visibleFilters[key] = this.widgetData.includedFilters[key]
-            }
-          })
-        }
-        this.initSearchResults()
-      }
     }
   }
 

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsAnalytics } from '../../models/learning-analytics.model'
-import { LearningAnalyticsService } from '../../services/learning-analytics.service'
 @Component({
   selector: 'ws-analytics-content-card',
   templateUrl: './content-card.component.html',
@@ -17,7 +16,6 @@ export class ContentCardComponent implements OnInit {
   @Input() contentUrl = ''
   @Input() isExternal = false
   @Input() contentData: any
-  loader = false
   widgetPieGraph: NsAnalytics.IGraphWidget = {} as NsAnalytics.IGraphWidget
   margin = {
     top: 25,
@@ -27,48 +25,10 @@ export class ContentCardComponent implements OnInit {
   }
   graphData1: number[] = []
   labels: string[] = []
-  filterArray: NsAnalytics.IFilterObj[] = []
-  constructor(private analyticsSrv: LearningAnalyticsService) { }
+  constructor() { }
 
   ngOnInit() {
     this.graphData(this.contentData.data)
-  }
-  downloadReports(lexId: string) {
-    this.loader = true
-    const filter = {
-      key: 'content_id',
-      value: lexId,
-    }
-    this.filterArray.push(filter)
-    this.analyticsSrv.fetchOutput('R6', this.contentData.startDate, this.contentData.endDate, this.filterArray).subscribe(
-      (data: Blob) => {
-        this.downloadFile(data, lexId)
-      },
-      () => {
-        this.loader = true
-      }
-    )
-  }
-
-  downloadFile(data: Blob, lexId: any) {
-    const ieEDGE = navigator.userAgent.match(/Edge/g)
-    const blob = new Blob([data], { type: 'application/octet-stream' })
-    const fileName = `${lexId}.csv`
-    if (ieEDGE) {
-      window.navigator.msSaveBlob(blob, fileName)
-    } else {
-      const dataURL = window.URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = dataURL
-      link.download = fileName
-      link.click()
-      setTimeout(() => {
-        window.URL.revokeObjectURL(dataURL)
-      },
-        // tslint:disable-next-line:align
-        10)
-      this.loader = false
-      }
   }
   graphData(pieData: any) {
     this.labels = ['0-25%', '25-50%', '50-75%', '75-100%']

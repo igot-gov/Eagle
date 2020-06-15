@@ -53,23 +53,8 @@ export namespace NSSearch {
     [key: string]: {
       displayName: string,
       order?: { [key: string]: 'asc' | 'desc' }[]
-    } | ISearchV6SemiGlobalFilter
-  }
-
-  export interface ISearchV6SemiGlobalFilter {
-    [key: string]: {
-      displayName: string,
-      order?: { [key: string]: 'asc' | 'desc' }[],
-      scope: TFilterScope
-      filters: {
-        andFilters: {
-          [key: string]: string[]
-        }[]
-      }[]
     }
   }
-
-  type TFilterScope = 'global' | 'semi_global'
 
   export interface ISearchV6Filters {
     andFilters?: { [key: string]: string[] }[]
@@ -112,7 +97,6 @@ export namespace NSSearch {
     type: string
     displayName: string
     content: IFilterUnitContent[]
-    scope: TFilterScope
   }
   export interface IFilterUnitContent {
     type?: string

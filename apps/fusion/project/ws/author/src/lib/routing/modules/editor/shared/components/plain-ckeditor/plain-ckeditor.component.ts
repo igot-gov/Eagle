@@ -41,7 +41,7 @@ declare const CKEDITOR: any
   styleUrls: ['./plain-ckeditor.component.scss'],
 })
 export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy {
-  downloadRegex = new RegExp(`(https?://.*?/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
+  downloadRegex = new RegExp(`(https://.*?/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
   uploadRegex = new RegExp(`${AUTHORING_CONTENT_BASE}(.*?)(\\\)?\\\\?['"])`, 'gm')
   downloadPartialImgRegex = RegExp(` src=\s*['"](.*?)['"]`, 'gm')
   downloadPartialAncRegex = RegExp(` href\=\s*['"](.*?)['"]`, 'gm')
@@ -50,8 +50,9 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
   html = ''
   @Input() set content(value: string) {
     if (this.doPartialRegex) {
-      // tslint:disable-next-line:max-line-length
-      const reg = `${document.location.origin}/content-store/${this.accessControlSvc.rootOrg}/${this.accessControlSvc.org.replace(/ /g, '_')}/Public/${this.id}/web-hosted/assets/`
+      const reg = `${document.location.origin}/content-store/
+              ${this.accessControlSvc.rootOrg}/${this.accessControlSvc.org}/Public/
+              ${this.id}/web-hosted/assets`
       this.html = value
         .replace(this.downloadPartialImgRegex, ` src="${reg}$1"`)
         .replace(this.downloadPartialAncRegex, ` href="${reg}$1"`)
@@ -86,7 +87,7 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
     private accessControlSvc: AccessControlService,
     private loaderService: LoaderService,
     private cdr: ChangeDetectorRef,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initiateConfig()
@@ -175,9 +176,9 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
       this.value.emit(
         this.html
           .replace(this.uploadRegex, this.regexUploadReplace)
-          .replace(/ src=\s*['"].*?\/assets\/(.*?)['"]/gm, ' src="$1"')
-          .replace(/ href=\s*['"].*?\/assets\/(.*?)['"]/gm, ' href="$1"'),
-      ) // try again ji     ????????
+          .replace(/ src=\s*['"].*?\/content-store\/(.*?)['"]/gm, ' src="$1"')
+          .replace(/ href=\s*['"].*?\/content-store\/(.*?)['"]/gm, ' href="$1"'),
+      )
     } else if (this.doRegex) {
       this.value.emit(this.html.replace(this.uploadRegex, this.regexUploadReplace))
     } else {
@@ -267,7 +268,7 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
                   })
                   input.remove()
                 },
-            )
+              )
           } else {
             this.snackBar.openFromComponent(NotificationComponent, {
               data: {
@@ -342,7 +343,7 @@ export class PlainCKEditorComponent implements AfterViewInit, OnInit, OnDestroy 
                   })
                   input.remove()
                 },
-            )
+              )
           } else {
             input.remove()
             this.snackBar.openFromComponent(NotificationComponent, {

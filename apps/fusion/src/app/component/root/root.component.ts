@@ -23,10 +23,9 @@ import {
   ValueService,
   WsEvents,
 } from '@ws-widget/utils'
-import { delay, filter } from 'rxjs/operators'
+import { delay } from 'rxjs/operators'
 import { MobileAppsService } from '../../services/mobile-apps.service'
 import { RootService } from './root.service'
-import { fromEvent } from 'rxjs'
 // import { SwUpdate } from '@angular/service-worker'
 // import { environment } from '../../../environments/environment'
 // import { MatDialog } from '@angular/material'
@@ -48,13 +47,11 @@ export class RootComponent implements OnInit, AfterViewInit {
   isXSmall$ = this.valueSvc.isXSmall$
   routeChangeInProgress = false
   showNavbar = false
-  showFooter = false
   currentUrl!: string
   isNavBarRequired = false
   isInIframe = false
   appStartRaised = false
   isSetupPage = false
-  showChatBot = false
   constructor(
     private router: Router,
     public authSvc: AuthKeycloakService,
@@ -75,67 +72,13 @@ export class RootComponent implements OnInit, AfterViewInit {
     } catch (_ex) {
       this.isInIframe = false
     }
-    if (this.isInIframe) {
-      setTimeout(() => {
-        window.parent.postMessage(
-          {
-            requestId: 'LOADED',
-            subApplicationName: window.location.hostname,
-          },
-          '*',
-        )
-        // tslint:disable-next-line: align
-      }, 500)
-      fromEvent<MessageEvent>(window, 'message')
-        .pipe(
-          filter(
-            (event: MessageEvent) =>
-              Boolean(event) &&
-              Boolean(event.data) &&
-              Boolean(event.source && typeof event.source.postMessage === 'function'),
-          ),
-        )
-        .subscribe(async (event: MessageEvent) => {
-          if (event.data.requestId) {
-            switch (event.data.requestId) {
-              case 'HIDE_NAVBAR':
-                this.rootSvc.showNavbarDisplay$.next(false)
-                break
-              case 'HIDE_FOOTER':
-                this.rootSvc.showFooterDisplay$.next(false)
-                break
-              case 'HIDE_HEADER':
-                this.rootSvc.showHeaderDisplay$.next(false)
-                break
-              case 'HIDE_CHATBOT':
-                this.rootSvc.showChatBotDisplay$.next(false)
-                break
-              default:
-                break
-            }
-          }
-        })
-    }
-    // Dynamically adding of routes based on environment
-    // if (
-    //   window.location.href.toLowerCase().indexOf('siemens') > -1 ||
-    //   window.location.href.toLowerCase().indexOf('localhost') > -1
-    // ) {
-    //   const routerConfig = this.router.config
-    //   routerConfig.splice(0, 0, {
-    //     path: 'authoring',
-    //     loadChildren: () =>
-    //       import('../../routes/route-authoring-app.module').then(u => u.AuthoringAppModule),
-    //     canActivate: [GeneralGuard],
-    //   })
-    //   this.router.resetConfig(routerConfig)
-    // }
 
     this.btnBackSvc.initialize()
     // Application start telemetry
     if (this.authSvc.isAuthenticated) {
       this.telemetrySvc.start('app', 'view', '')
       this.appStartRaised = true
+
     }
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
@@ -173,12 +116,6 @@ export class RootComponent implements OnInit, AfterViewInit {
     })
     this.rootSvc.showNavbarDisplay$.pipe(delay(500)).subscribe(display => {
       this.showNavbar = display
-    })
-    this.rootSvc.showFooterDisplay$.pipe(delay(500)).subscribe(display => {
-      this.showFooter = display
-    })
-    this.rootSvc.showChatBotDisplay$.pipe(delay(500)).subscribe(display => {
-      this.showChatBot = display
     })
   }
 

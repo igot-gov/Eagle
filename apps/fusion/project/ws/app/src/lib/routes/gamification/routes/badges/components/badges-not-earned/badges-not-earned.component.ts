@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { IBadge } from '../../../../../profile/routes/badges/badges.model'
 
 @Component({
   selector: 'ws-app-badges-not-earned',
@@ -9,7 +8,7 @@ import { IBadge } from '../../../../../profile/routes/badges/badges.model'
 export class BadgesNotEarnedComponent implements OnInit {
   constructor() { }
   @Input()
-  badge!: IBadge
+  badge!: any
 
   ngOnInit() { }
 }

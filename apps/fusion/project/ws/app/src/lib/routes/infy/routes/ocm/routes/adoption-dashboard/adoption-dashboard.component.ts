@@ -5,7 +5,7 @@ import { IWsStatsConfig } from '../../models/ocm.model'
 
 import { IWsCounterPlatformResponse, IWsCounterInfyMeResponse } from '../../models/counter.model'
 
-type TStatTitleKey = 'lex' | 'infyme'
+type TStatTitleKey = 'Wingspan' | 'infyme'
 @Component({
   selector: 'ws-app-adoption-dashboard',
   templateUrl: './adoption-dashboard.component.html',
@@ -19,9 +19,9 @@ export class AdoptionDashboardComponent implements OnInit {
   infyMeStatFetchStatus: TFetchStatus = 'none'
 
   stats: { title: string; titleKey: string; iconName: string; count: number }[] = []
-  currentStat: TStatTitleKey = 'lex'
+  currentStat: TStatTitleKey = 'Wingspan'
   counterEnabled = false
-  constructor(private counterSvc: CounterService) {}
+  constructor(private counterSvc: CounterService) { }
 
   ngOnInit() {
     // const instanceConfig =  this.configSvc.getInstanceConfig()
@@ -30,15 +30,15 @@ export class AdoptionDashboardComponent implements OnInit {
     // this.counterEnabled = counterStatus.isAvailable
     this.counterEnabled = true
     // }
-    this.currentStat = 'lex'
+    this.currentStat = 'Wingspan'
     this.statsClicked()
   }
 
   statsClicked() {
     switch (this.currentStat) {
-      case 'lex': {
+      case 'Wingspan': {
         this.lexStatFetchStatus = 'fetching'
-        this.fetchLexCounterData()
+        this.fetchWingspanCounterData()
         break
       }
       case 'infyme': {
@@ -49,13 +49,13 @@ export class AdoptionDashboardComponent implements OnInit {
     }
   }
 
-  fetchLexCounterData() {
+  fetchWingspanCounterData() {
     this.counterSvc.fetchPlatformCounterData().subscribe(
       data => {
         this.lexCounterData = data
         this.lexStatFetchStatus = 'done'
         if (this.lexCounterData) {
-          this.processLexCounterData()
+          this.processWingspanCounterData()
         }
       },
       () => {
@@ -79,26 +79,26 @@ export class AdoptionDashboardComponent implements OnInit {
     )
   }
 
-  processLexCounterData() {
+  processWingspanCounterData() {
     const lexCounterData = this.lexCounterData
     if (lexCounterData) {
-      this.stats = this.stats.filter(stat => stat.titleKey !== 'lex')
+      this.stats = this.stats.filter(stat => stat.titleKey !== 'Wingspan')
       this.stats.push(
         {
-          title: 'Total unique learners on LEX',
-          titleKey: 'lex',
+          title: 'Total unique learners on Wingspan',
+          titleKey: 'Wingspan',
           iconName: 'people',
           count: lexCounterData.users[lexCounterData.users.length - 1].count,
         },
         {
           title: 'Average request per second',
-          titleKey: 'lex',
+          titleKey: 'Wingspan',
           iconName: 'access_time',
           count: lexCounterData.load[lexCounterData.load.length - 1].count,
         },
         {
           title: 'Active Learners in last 5 mins',
-          titleKey: 'lex',
+          titleKey: 'Wingspan',
           iconName: 'notifications',
           count: lexCounterData.learners[lexCounterData.learners.length - 1].count,
         },

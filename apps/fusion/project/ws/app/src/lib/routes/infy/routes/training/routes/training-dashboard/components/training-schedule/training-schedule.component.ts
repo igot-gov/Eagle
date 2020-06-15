@@ -107,11 +107,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
     })
   }
   ngOnInit() {
-    // if (this.authSvc.userEmail.endsWith('@ad.infosys.com')) {
-    //   this.userSvc.fetchUserGraphProfile().subscribe(data => {
-    //     this.emailId = data.onPremisesUserPrincipalName.split('@')[0];
-    //   });
-    // }
+
     this.startDate = this.startDateInitial
     this.endDate = this.endDateInitial
   }
@@ -218,7 +214,7 @@ export class TrainingScheduleComponent implements OnInit, AfterViewInit {
       this.localFilter = this.scheduleForm.controls.location.value
     }
     if (this.scheduleForm.controls.dateStart.value === '') {
-      this.startDate = this. startDateInitial
+      this.startDate = this.startDateInitial
     } else if (this.scheduleForm.controls.dateEnd.value === '') {
       this.endDate = this.endDateInitial
     } else {

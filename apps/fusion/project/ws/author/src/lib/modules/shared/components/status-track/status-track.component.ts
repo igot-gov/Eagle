@@ -36,7 +36,7 @@ export class StatusTrackComponent implements OnInit {
   currentStage = 0
   workFlowLog: IWorkFlowLog[] = []
   history: NSContent.IComments[] = []
-  isSiemens = false
+  isClient1 = false
   showModal = false
   constructor(
     private accessSvc: AccessControlService,
@@ -44,10 +44,10 @@ export class StatusTrackComponent implements OnInit {
     public dialogRef: MatDialogRef<StatusTrackComponent>,
     @Inject(MAT_DIALOG_DATA) public data: NSContent.IContentMeta | ISearchContent,
     private workFlowService: WorkFlowService,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.isSiemens = this.accessSvc.rootOrg.toLowerCase() === 'siemens'
+    this.isClient1 = this.accessSvc.rootOrg.toLowerCase() === 'client1'
     if (this.data) {
       this.content = this.data
     }
@@ -60,8 +60,8 @@ export class StatusTrackComponent implements OnInit {
         const action = (v.action || '').toLowerCase().includes('approved')
           ? 'approved'
           : (v.action || '').toLowerCase().includes('rejected')
-          ? 'rejected'
-          : v.action
+            ? 'rejected'
+            : v.action
         const log = {
           action,
           name: v.name,
