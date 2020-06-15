@@ -9,10 +9,7 @@
     },
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "editor.autoIndent": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": false
-  },
+  "editor.autoIndent": "advanced",
   "editor.codeLens": true,
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": true,
@@ -27,7 +24,6 @@
   "editor.renderWhitespace": "none",
   "editor.tabCompletion": "on",
   "editor.tabSize": 2,
-  "editor.wordWrap": "off",
   "files.defaultLanguage": "typescript",
   "files.exclude": {
     "**/*.js": {
@@ -105,6 +101,7 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "workbench.colorCustomizations": {
     "activityBar.background": "#8a2ca2",
+    "activityBar.activeBackground": "#8a2ca2",
     "activityBar.activeBorder": "#af9530",
     "activityBar.foreground": "#e7e7e7",
     "activityBar.inactiveForeground": "#e7e7e799",
@@ -112,19 +109,21 @@
     "activityBarBadge.foreground": "#15202b",
     "statusBar.background": "#68217a",
     "statusBarItem.hoverBackground": "#8a2ca2",
-    "statusBar.foreground": "#e7e7e7"
+    "statusBar.foreground": "#e7e7e7",
+    "statusBar.border": "#68217a"
   },
   "cSpell.words": [
     "azuremediaplayer",
     "behavioural",
     "brotli",
+    "datepicker",
+    "ekstep",
     "embeddable",
     "exitfullscreen",
     "followsourceid",
     "followtargetid",
     "iframe",
-    "infosys",
-    "infosysapps",
+    "wingspan",
     "infosystechnologies",
     "infy",
     "keycloak",
@@ -142,7 +141,6 @@
     "wmode",
     "youtube"
   ],
-  "workbench.enableExperiments": false,
   "workbench.settings.enableNaturalLanguageSearch": false,
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
@@ -160,11 +158,12 @@
   "typescriptHero.imports.insertSemicolons": false,
   "autoimport.useSemiColon": false,
   "javascript.format.semicolons": "remove",
+  "liveServer.settings.port": 5501,
+  "git.autofetch": true,
+  "tslint.alwaysShowRuleFailuresAsWarnings": false,
+  "prettier.trailingComma": "all",
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[scss]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
-  "liveServer.settings.port": 5501
+  "prettier.arrowParens": "avoid"
 }

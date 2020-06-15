@@ -36,8 +36,8 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
   selectedNode: number | null = null
   expandedNodes = new Set<number>()
   parentNodeId!: number
-  drawer: boolean = true
-  menubtn: boolean = true
+  drawer = true
+  menubtn = true
   parentHierarchy: number[] = []
   backUpInformation = {
     isDragging: false,
@@ -46,11 +46,11 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     draggingPosition: null as any,
   }
   invalidIds: number[] = []
-  mediumScreen: boolean = false
+  mediumScreen = false
   mediumSizeBreakpoint$ = this.breakpointObserver
     .observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(map((res: BreakpointState) => res.matches))
-  leftarrow: boolean = true
+  leftarrow = true
   constructor(
     private dialog: MatDialog,
     private snackBar: MatSnackBar,

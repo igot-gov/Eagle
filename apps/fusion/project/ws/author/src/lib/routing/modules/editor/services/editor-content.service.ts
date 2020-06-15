@@ -7,12 +7,11 @@ import { IConditionsV2 } from './../../../../interface/conditions-v2'
 import { IFormMeta } from './../../../../interface/form'
 import { AuthInitService } from './../../../../services/init.service'
 import { EditorService } from './editor.service'
-import { IAssessmentDetails } from '../routing/modules/iap-assessment/interface/iap-assessment.interface'
 @Injectable()
 export class EditorContentService {
   originalContent: { [key: string]: NSContent.IContentMeta } = {}
   upDatedContent: { [key: string]: NSContent.IContentMeta } = {}
-  iapContent: { [key: string]: IAssessmentDetails } = {}
+  iapContent: { [key: string]: any } = {}
   public currentContent!: string
   public parentContent!: string
   public isSubmitted = false
@@ -23,7 +22,7 @@ export class EditorContentService {
     private accessService: AccessControlService,
     private editorService: EditorService,
     private authInitService: AuthInitService,
-  ) {}
+  ) { }
 
   getOriginalMeta(id: string): NSContent.IContentMeta {
     return this.originalContent[id]
@@ -57,13 +56,13 @@ export class EditorContentService {
     }
   }
 
-  setIapContent(meta: IAssessmentDetails, id: string) {
+  setIapContent(meta: any, id: string) {
     this.iapContent[id] = {
       ...(this.iapContent[id] ? this.iapContent[id] : {}),
       ...JSON.parse(JSON.stringify(meta)),
     }
   }
-  getIapContent(id: string): IAssessmentDetails {
+  getIapContent(id: string): any {
     return this.iapContent[id]
   }
 
@@ -98,13 +97,13 @@ export class EditorContentService {
       meta[v as keyof NSContent.IContentMeta] = parentMeta[v as keyof NSContent.IContentMeta]
         ? parentMeta[v as keyof NSContent.IContentMeta]
         : JSON.parse(
-            JSON.stringify(
-              this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                parentMeta.contentType
-                // tslint:disable-next-line: ter-computed-property-spacing
-              ][0].value,
-            ),
-          )
+          JSON.stringify(
+            this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+              parentMeta.contentType
+              // tslint:disable-next-line: ter-computed-property-spacing
+            ][0].value,
+          ),
+        )
     })
     return meta
   }

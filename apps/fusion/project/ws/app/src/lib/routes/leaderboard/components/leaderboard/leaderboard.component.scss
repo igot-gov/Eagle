@@ -1,9 +1,0 @@
-@import 'ws-common';
-@import 'ws-mixins';
-
-.container {
-  @extend %page-center;
-  @include breakpoint-lt-m {
-    padding: 0 $size-l;
-  }
-}
