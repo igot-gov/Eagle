@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.service;
 
 import java.util.List;
@@ -33,10 +30,10 @@ public interface GraphService {
 	 * @throws Exception
 	 */
 	void createNodeV2(String rootOrg, Map<String, Object> contentMeta, Transaction transaction) throws Exception;
-	
+
 	/**
-	 * creates a Feature node in graph with Feature_rootOrg as the label. converts objects to
-	 * stringified json before creating.
+	 * creates a Feature node in graph with Feature_rootOrg as the label. converts
+	 * objects to stringified json before creating.
 	 * 
 	 * @param rootOrg
 	 * @param contentMeta
@@ -81,7 +78,6 @@ public interface GraphService {
 	void updateNodesV2(String rootOrg, List<UpdateMetaRequest> updateMetaRequests, Transaction transaction)
 			throws Exception;
 
-	
 	/**
 	 * Updates nodes in bulk. only the metadata being updated needs to be passed.
 	 * 
@@ -92,8 +88,7 @@ public interface GraphService {
 	 */
 	void updateFeatureNodesV2(String rootOrg, List<UpdateMetaRequest> updateMetaRequests, Transaction transaction)
 			throws Exception;
-	
-	
+
 	/**
 	 * get's a node by "identifier" field and rootOrg as the label.
 	 * 
@@ -102,6 +97,7 @@ public interface GraphService {
 	 * @return
 	 * @throws Exception
 	 */
+	//UNUSED
 	ContentNode getNodeByUniqueIdV2(String rootOrg, String identifier, Transaction transaction) throws Exception;
 
 	/**
@@ -126,6 +122,47 @@ public interface GraphService {
 			throws Exception;
 
 	/**
+	 * fetch nodes with relations and only few fields in the meta.check query.
+	 * 
+	 * @param rootOrg
+	 * @param identifiers
+	 * @param transaction
+	 * @return
+	 * @throws Exception
+	 */
+	List<ContentNode> getNodesByUniqueIdForHierarchyUpdate(String rootOrg, List<String> identifiers,
+			Transaction transaction) throws Exception;
+
+	
+	/**
+	 * fetch nodes with relations and all fields in the meta and limited fields for the (parents&children).
+	 * 
+	 * @param rootOrg
+	 * @param identifiers
+	 * @param  transaction
+	 * @return
+	 * @throws Exception
+	 */
+	//UNUSED
+	List<ContentNode> getNodesByUniqueIdForHierarchyUpdateV2(String rootOrg, List<String> identifiers,
+			Transaction transaction) throws Exception;
+	
+	/**
+	 * fetch nodes with relations and specified fields in the meta and limited fields for the (parents&children).
+	 * 
+	 * @param rootOrg
+	 * @param identifiers
+	 * @param  transaction
+	 * @param fields
+	 * @return
+	 * @throws Exception
+	 */
+	List<ContentNode> getNodesByUniqueIdForHierarchyUpdateV3(String rootOrg, List<String> identifiers,List<String> fields,
+			Transaction transaction) throws Exception;
+	
+	
+	
+	/**
 	 * get's nodes with the given identifiers and from the label given as rootOrg
 	 * without the relations
 	 * 
@@ -135,6 +172,7 @@ public interface GraphService {
 	 * @return
 	 * @throws Exception
 	 */
+	//UNUSED
 	List<ContentNode> getNodesByUniqueIdV2WithoutRelations(String rootOrg, List<String> identifiers,
 			Transaction transaction) throws Exception;
 
@@ -149,6 +187,7 @@ public interface GraphService {
 	 * @param endNodeId
 	 * @param index
 	 */
+	//UNUSED
 	void createRelation(String rootOrg, String startNodeId, String endNodeId, Integer index, Transaction transaction)
 			throws Exception;
 
@@ -160,7 +199,18 @@ public interface GraphService {
 	 * @param updateRelationRequests
 	 * @param transaction
 	 */
+	//UNUSED
 	void createRelations(String rootOrg, List<UpdateRelationRequest> updateRelationRequests, Transaction transaction);
+
+	/**
+	 * bulk creation for relation between given startNode and endNode with specified
+	 * index. if already exists then it is not created
+	 * 
+	 * @param rootOrg
+	 * @param updateRelationRequests
+	 * @param transaction
+	 */
+	void mergeRelations(String rootOrg, List<UpdateRelationRequest> updateRelationRequests, Transaction transaction);
 
 	/**
 	 * delete all the children(under any label) for the given identifiers
@@ -180,6 +230,7 @@ public interface GraphService {
 	 * @param startNodeId
 	 * @param endNodeIds
 	 */
+	//UNUSED
 	void deleteRelation(String rootOrg, String startNodeId, List<String> endNodeIds, Transaction transaction);
 
 	/**
@@ -190,6 +241,7 @@ public interface GraphService {
 	 * @param deleteRelationRequests
 	 * @param transaction
 	 */
+	//UNUSED
 	void deleteRelations(String rootOrg, List<DeleteRelationRequest> deleteRelationRequests, Transaction transaction);
 
 	/**
@@ -199,6 +251,7 @@ public interface GraphService {
 	 * @param identifiers
 	 * @param transaction
 	 */
+	//UNUSED
 	void deleteNodes(String rootOrg, List<String> identifiers, Transaction transaction);
 
 	/**
@@ -211,6 +264,17 @@ public interface GraphService {
 	 */
 	void createChildRelations(String rootOrg, String startNodeId, List<Map<String, Object>> updateRequests,
 			Transaction transaction);
+	
+	/**
+	 * 
+	 * @param rootOrg
+	 * @param startNodeId
+	 * @param updateRequests
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	void createChildRelationsV2(String rootOrg, String startNodeId, List<UpdateRelationRequest> updateRequests,
+			Transaction transaction);
 
 	/**
 	 * 
@@ -219,6 +283,7 @@ public interface GraphService {
 	 * @param updateRequests
 	 * @param transaction
 	 */
+	//UNUSED
 	void createParentRelations(String rootOrg, String endNodeId, List<Map<String, Object>> updateRequests,
 			Transaction transaction);
 
@@ -230,5 +295,19 @@ public interface GraphService {
 	 * @param transaction
 	 */
 	void deleteFeatureNodes(String rootOrg, Set<String> identifiers, Transaction transaction);
+
+	/**
+	 * returns metadata of specified fields for multiple ids
+	 * 
+	 * @param rootOrg
+	 * @param identifiers
+	 * @param fields
+	 * @param transaction
+	 */
+	//UNUSED
+	List<Map<String, Object>> getNodesByIdentifier(String rootOrg, List<String> identifiers, List<String> fields,
+			Transaction transaction);
+
+
 
 }

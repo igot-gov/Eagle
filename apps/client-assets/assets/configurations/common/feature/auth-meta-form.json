@@ -10,7 +10,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -18,7 +20,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -26,7 +30,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -34,7 +40,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -42,7 +50,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -73,7 +83,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -81,7 +93,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -89,7 +103,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -97,7 +113,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -105,7 +123,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -136,7 +156,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -144,7 +166,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -152,7 +176,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -160,7 +186,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -168,7 +196,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -184,20 +214,28 @@
     "notMandatoryFor": {
       "Resource": [
         {
-          "mimeType": ["application/html"],
-          "body": [true]
+          "mimeType": [
+            "application/html"
+          ],
+          "body": [
+            true
+          ]
         }
       ],
       "Course": [
         {
-          "body": [true]
+          "body": [
+            true
+          ]
         }
       ]
     },
     "showFor": {
       "Resource": [
         {
-          "mimeType": ["application/html"]
+          "mimeType": [
+            "application/html"
+          ]
         }
       ]
     },
@@ -208,7 +246,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -216,7 +256,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -224,7 +266,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -232,7 +276,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -240,7 +286,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -259,7 +307,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -267,7 +317,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -275,7 +327,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -283,7 +337,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -291,7 +347,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -322,7 +380,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -330,7 +390,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -338,7 +400,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -346,7 +410,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -354,7 +420,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -370,13 +438,19 @@
     "notMandatoryFor": {
       "Resource": [
         {
-          "mimeType": ["application/html"],
-          "artifactUrl": [true]
+          "mimeType": [
+            "application/html"
+          ],
+          "artifactUrl": [
+            true
+          ]
         }
       ],
       "Course": [
         {
-          "artifactUrl": [true]
+          "artifactUrl": [
+            true
+          ]
         }
       ]
     },
@@ -391,7 +465,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -399,7 +475,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -407,7 +485,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -415,7 +495,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -423,7 +505,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -448,7 +532,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -456,7 +542,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -464,7 +552,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -472,7 +562,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -480,7 +572,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -499,7 +593,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -507,7 +603,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -515,7 +613,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -523,7 +623,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -531,7 +633,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -550,7 +654,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -558,7 +664,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -566,7 +674,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -574,7 +684,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -582,7 +694,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -601,7 +715,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -609,7 +725,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -617,7 +735,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -625,7 +745,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -633,7 +755,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -652,7 +776,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -660,7 +786,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -668,7 +796,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -676,7 +806,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -684,7 +816,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -703,7 +837,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -711,7 +847,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -719,7 +857,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -727,7 +867,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -735,7 +877,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -762,7 +906,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -770,7 +916,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -778,7 +926,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -786,7 +936,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -794,7 +946,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -813,7 +967,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -821,7 +977,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -829,7 +987,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -837,7 +997,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -845,7 +1007,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -864,7 +1028,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": null
         }
@@ -872,7 +1038,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": null
         }
@@ -880,7 +1048,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": null
         }
@@ -888,7 +1058,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": null
         }
@@ -896,7 +1068,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -915,7 +1089,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": null
         }
@@ -923,7 +1099,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": null
         }
@@ -931,7 +1109,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": null
         }
@@ -939,7 +1119,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": null
         }
@@ -947,7 +1129,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": null
         }
@@ -966,7 +1150,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -974,7 +1160,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -982,7 +1170,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -990,7 +1180,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -998,7 +1190,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -1017,7 +1211,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1025,7 +1221,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1033,7 +1231,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1041,7 +1241,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1049,7 +1251,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1068,7 +1272,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1076,7 +1282,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1084,7 +1292,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1092,7 +1302,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1100,7 +1312,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1119,7 +1333,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1127,7 +1343,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1135,7 +1353,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1143,7 +1363,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1151,7 +1373,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1182,7 +1406,11 @@
       "Channel": [],
       "Resource": [
         {
-          "mimeType": ["application/pdf", "audio/mpeg", "application/x-mpegURL"]
+          "mimeType": [
+            "application/pdf",
+            "audio/mpeg",
+            "application/x-mpegURL"
+          ]
         }
       ]
     },
@@ -1191,7 +1419,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1199,7 +1429,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1207,7 +1439,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1215,7 +1449,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1223,7 +1459,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1248,7 +1486,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -1256,7 +1496,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -1264,7 +1506,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -1272,7 +1516,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -1280,7 +1526,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -1304,7 +1552,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -1312,7 +1562,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -1320,7 +1572,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -1328,7 +1582,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -1336,7 +1592,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -1355,7 +1613,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -1363,7 +1623,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -1371,7 +1633,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -1379,7 +1643,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -1387,7 +1653,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -1418,7 +1686,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1426,7 +1696,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1434,7 +1706,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1442,7 +1716,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1450,7 +1726,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1469,7 +1747,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1477,7 +1757,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1485,7 +1767,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1493,7 +1777,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1501,7 +1787,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1526,7 +1814,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": 0
         }
@@ -1534,7 +1824,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": 0
         }
@@ -1542,7 +1834,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": 0
         }
@@ -1550,7 +1844,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": 0
         }
@@ -1558,7 +1854,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": 0
         }
@@ -1577,7 +1875,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -1585,7 +1885,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -1593,7 +1895,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -1601,7 +1905,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -1609,7 +1915,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -1628,7 +1936,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -1636,7 +1946,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -1644,7 +1956,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -1652,7 +1966,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -1660,7 +1976,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -1691,7 +2009,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": "2020-07-23T09:52:36.487Z"
         }
@@ -1699,7 +2019,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": "2020-07-23T09:52:36.487Z"
         }
@@ -1707,7 +2029,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": "2020-07-23T09:52:36.487Z"
         }
@@ -1715,7 +2039,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": "2020-07-23T09:52:36.487Z"
         }
@@ -1723,7 +2049,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1750,7 +2078,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1758,7 +2088,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1766,7 +2098,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1774,7 +2108,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1782,7 +2118,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1809,7 +2147,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1817,7 +2157,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1825,7 +2167,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1833,7 +2177,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1841,7 +2187,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1868,7 +2216,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1876,7 +2226,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -1884,7 +2236,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1892,7 +2246,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1900,7 +2256,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1928,7 +2286,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -1936,13 +2296,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -1950,7 +2314,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -1958,7 +2324,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -1966,7 +2334,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -1994,7 +2364,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2002,13 +2374,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -2016,7 +2392,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2024,7 +2402,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2032,7 +2412,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2051,7 +2433,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": true
         }
@@ -2059,13 +2443,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": false
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": true
         }
@@ -2073,7 +2461,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": false
         }
@@ -2081,7 +2471,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": false
         }
@@ -2089,7 +2481,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": false
         }
@@ -2108,7 +2502,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": true
         }
@@ -2116,13 +2512,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": false
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": true
         }
@@ -2130,7 +2530,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": false
         }
@@ -2138,7 +2540,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": false
         }
@@ -2146,7 +2550,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": false
         }
@@ -2168,7 +2574,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": "Yes"
         }
@@ -2176,13 +2584,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": "Yes"
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": "No"
         }
@@ -2190,7 +2602,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": "Yes"
         }
@@ -2198,7 +2612,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": "Yes"
         }
@@ -2206,7 +2622,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": "Yes"
         }
@@ -2225,7 +2643,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": false
         }
@@ -2233,13 +2653,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": false
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": false
         }
@@ -2247,7 +2671,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "ontentType": ["Knowledge Board"]
+            "ontentType": [
+              "Knowledge Board"
+            ]
           },
           "value": false
         }
@@ -2255,7 +2681,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": false
         }
@@ -2263,7 +2691,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": false
         }
@@ -2294,7 +2724,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -2302,7 +2734,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -2310,7 +2744,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -2318,7 +2754,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -2326,7 +2764,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -2353,7 +2793,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -2361,7 +2803,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -2369,7 +2813,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -2377,7 +2823,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -2385,7 +2833,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -2407,7 +2857,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2415,13 +2867,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -2429,7 +2885,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2437,7 +2895,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2445,7 +2905,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2467,7 +2929,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2475,13 +2939,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -2489,7 +2957,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2497,7 +2967,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2505,7 +2977,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2527,7 +3001,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2535,13 +3011,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -2549,7 +3029,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2557,7 +3039,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2565,7 +3049,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2587,7 +3073,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2595,13 +3083,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -2609,7 +3101,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2617,7 +3111,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2625,7 +3121,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2644,7 +3142,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2652,7 +3152,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -2660,7 +3162,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2668,7 +3172,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2676,7 +3182,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2707,7 +3215,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2715,7 +3225,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -2723,7 +3235,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2731,7 +3245,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2739,7 +3255,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2761,7 +3279,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2769,13 +3289,17 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         },
         {
           "condition": {
-            "mimeType": ["application/html"]
+            "mimeType": [
+              "application/html"
+            ]
           },
           "value": ""
         }
@@ -2783,7 +3307,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2791,7 +3317,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2799,7 +3327,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2830,7 +3360,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -2838,7 +3370,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -2846,7 +3380,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -2854,7 +3390,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -2862,7 +3400,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -2881,7 +3421,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": 0
         }
@@ -2889,7 +3431,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": 0
         }
@@ -2897,7 +3441,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": 0
         }
@@ -2905,7 +3451,9 @@
       "Knowledge Artifact": [
         {
           "con": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": 0
         }
@@ -2913,7 +3461,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": 0
         }
@@ -2935,7 +3485,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2943,7 +3495,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -2951,7 +3505,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -2959,7 +3515,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -2967,7 +3525,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -2989,7 +3549,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -2997,7 +3559,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -3005,7 +3569,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -3013,7 +3579,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -3021,7 +3589,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -3052,7 +3622,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3060,7 +3632,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3068,7 +3642,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3076,7 +3652,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3084,7 +3662,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3103,7 +3683,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -3111,7 +3693,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -3119,7 +3703,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -3127,7 +3713,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -3135,7 +3723,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -3166,7 +3756,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3174,7 +3766,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3182,7 +3776,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3190,7 +3786,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3198,7 +3796,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3229,7 +3829,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -3237,7 +3839,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -3245,7 +3849,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -3253,7 +3859,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -3261,7 +3869,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -3292,7 +3902,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -3300,7 +3912,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -3308,7 +3922,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -3316,7 +3932,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -3324,7 +3942,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -3355,7 +3975,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -3363,7 +3985,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -3371,7 +3995,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -3379,7 +4005,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -3387,7 +4015,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -3418,7 +4048,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3426,7 +4058,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3434,7 +4068,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3442,7 +4078,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3450,7 +4088,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3471,7 +4111,9 @@
     "notShowFor": {
       "Resource": [
         {
-          "mimeType": ["application/html"]
+          "mimeType": [
+            "application/html"
+          ]
         }
       ]
     },
@@ -3479,7 +4121,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3487,7 +4131,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3495,7 +4141,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3503,7 +4151,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3511,7 +4161,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3542,7 +4194,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3550,7 +4204,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3558,7 +4214,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3566,7 +4224,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3574,7 +4234,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3601,7 +4263,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3609,7 +4273,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3617,7 +4283,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3625,7 +4293,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3633,7 +4303,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3652,7 +4324,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3660,7 +4334,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3668,7 +4344,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3676,7 +4354,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3684,7 +4364,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3703,7 +4385,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3711,7 +4395,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3719,7 +4405,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3727,7 +4415,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3735,7 +4425,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3767,7 +4459,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -3775,7 +4469,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -3783,7 +4479,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -3791,7 +4489,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -3799,7 +4499,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -3818,7 +4520,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3826,7 +4530,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3834,7 +4540,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3842,7 +4550,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3850,7 +4560,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3862,7 +4574,11 @@
     "mandatoryFor": {
       "Resource": [
         {
-          "mimeType": ["application/pdf", "application/x-mpegURL", "audio/mpeg"]
+          "mimeType": [
+            "application/pdf",
+            "application/x-mpegURL",
+            "audio/mpeg"
+          ]
         }
       ]
     },
@@ -3875,7 +4591,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": 0
         }
@@ -3883,7 +4601,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": 0
         }
@@ -3891,7 +4611,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["dge Board"]
+            "contentType": [
+              "dge Board"
+            ]
           },
           "value": 0
         }
@@ -3899,7 +4621,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": 0
         }
@@ -3907,7 +4631,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": 0
         }
@@ -3938,7 +4664,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -3946,7 +4674,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -3954,7 +4684,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -3962,7 +4694,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -3970,7 +4704,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -3998,31 +4734,39 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
-          "value": "Learning World"
+          "value": "eagle"
         }
       ],
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
-          "value": "Learning World"
+          "value": "eagle"
         }
       ],
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
-          "value": "Learning World"
+          "value": "eagle"
         }
       ],
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -4030,7 +4774,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -4058,7 +4804,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": false
         }
@@ -4066,7 +4814,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": false
         }
@@ -4074,7 +4824,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": false
         }
@@ -4082,7 +4834,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": false
         }
@@ -4090,7 +4844,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": false
         }
@@ -4109,7 +4865,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -4117,7 +4875,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -4125,7 +4885,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -4133,7 +4895,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -4141,7 +4905,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -4160,7 +4926,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": 0
         }
@@ -4168,7 +4936,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": 0
         }
@@ -4176,7 +4946,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": 0
         }
@@ -4184,7 +4956,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": 0
         }
@@ -4192,7 +4966,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": 0
         }
@@ -4211,7 +4987,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -4219,7 +4997,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -4227,7 +5007,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -4235,7 +5017,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -4243,7 +5027,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -4271,7 +5057,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -4279,7 +5067,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -4287,7 +5077,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -4295,7 +5087,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -4303,7 +5097,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -4322,7 +5118,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -4330,7 +5128,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -4338,7 +5138,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -4346,7 +5148,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -4354,7 +5158,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -4385,7 +5191,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -4393,7 +5201,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -4401,7 +5211,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -4409,7 +5221,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -4417,7 +5231,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -4448,7 +5264,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -4456,7 +5274,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -4464,7 +5284,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -4472,7 +5294,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -4480,7 +5304,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -4499,7 +5325,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -4507,7 +5335,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -4515,7 +5345,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -4523,7 +5355,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -4531,7 +5365,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -4551,7 +5387,9 @@
     "notShowFor": {
       "Resource": [
         {
-          "mimeType": ["application/html"]
+          "mimeType": [
+            "application/html"
+          ]
         }
       ]
     },
@@ -4559,7 +5397,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -4567,7 +5407,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -4575,7 +5417,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -4583,7 +5427,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -4591,7 +5437,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -4613,7 +5461,9 @@
     "notShowFor": {
       "Resource": [
         {
-          "mimeType": ["application/html"]
+          "mimeType": [
+            "application/html"
+          ]
         }
       ]
     },
@@ -4621,7 +5471,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": []
         }
@@ -4629,7 +5481,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": []
         }
@@ -4637,7 +5491,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": []
         }
@@ -4645,7 +5501,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": []
         }
@@ -4653,7 +5511,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": []
         }
@@ -4684,7 +5544,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": ""
         }
@@ -4692,7 +5554,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": ""
         }
@@ -4700,7 +5564,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": ""
         }
@@ -4708,7 +5574,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": ""
         }
@@ -4716,7 +5584,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": ""
         }
@@ -4743,7 +5613,9 @@
       "Course": [
         {
           "condition": {
-            "contentType": ["Course"]
+            "contentType": [
+              "Course"
+            ]
           },
           "value": "Private"
         }
@@ -4751,7 +5623,9 @@
       "Resource": [
         {
           "condition": {
-            "contentType": ["Resource"]
+            "contentType": [
+              "Resource"
+            ]
           },
           "value": "Private"
         }
@@ -4759,7 +5633,9 @@
       "Knowledge Board": [
         {
           "condition": {
-            "contentType": ["Knowledge Board"]
+            "contentType": [
+              "Knowledge Board"
+            ]
           },
           "value": "Private"
         }
@@ -4767,7 +5643,9 @@
       "Knowledge Artifact": [
         {
           "condition": {
-            "contentType": ["Knowledge Artifact"]
+            "contentType": [
+              "Knowledge Artifact"
+            ]
           },
           "value": "Private"
         }
@@ -4775,7 +5653,9 @@
       "Channel": [
         {
           "condition": {
-            "contentType": ["Channel"]
+            "contentType": [
+              "Channel"
+            ]
           },
           "value": "Private"
         }

@@ -77,7 +77,7 @@ export class UserPreferenceService {
         profileSettings:
           (this.configurationSvc.userPreference &&
             this.configurationSvc.userPreference.profileSettings) ||
-          this.configurationSvc.profileSettings, ...(changedUserPref || {}),
+          this.configurationSvc.profileSettings,
       }
       const oldUserPref: IUserPreference | null = this.configurationSvc.userPreference
       this.configurationSvc.userPreference = newUserPref

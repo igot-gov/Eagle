@@ -18,7 +18,7 @@ export class ForumHandlerService {
   filterStatus = false
   filterStatusDataReceived = false
   predefinedFiltersExist = false
-  predefinedFilterSelected = new BehaviorSubject<SocialForum.ETimelineType>(SocialForum.ETimelineType.MY_PUBLISHED)
+  predefinedFilterSelected = new BehaviorSubject(SocialForum.ETimelineType.ALL)
   predefinedAdminFilterSelected = new BehaviorSubject<SocialForum.EPostKind[]>([])
   componentActive = new BehaviorSubject('')
   sendPredefinedAdminFilterSelected(adminFilter: SocialForum.EPostKind[]) {

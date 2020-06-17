@@ -3,18 +3,16 @@ import {
   CONTENT_VIDEO_ENCODE,
   CONTENT_BASE_ENCODE,
   CONTENT_BASE_ZIP,
-  S3_JSON_UPLOAD,
 } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
-import { NSApiResponse, IUploadS3Request } from '@ws/author/src/lib/interface//apiResponse'
+import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { FIXED_FILE_NAME } from '../../../../../constants/upload'
 import { HttpClient } from '@angular/common/http'
 import { ConfigurationsService } from '@ws-widget/utils'
-import { NSContent } from '../../../../../interface/content'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
@@ -28,7 +26,7 @@ export class UploadService {
     private accessService: AccessControlService,
     private http: HttpClient,
     private configSvc: ConfigurationsService,
-  ) { }
+  ) {}
 
   upload(
     data: FormData,
@@ -58,26 +56,6 @@ export class UploadService {
       newFormData,
       false,
       options,
-    )
-  }
-
-  multipleJsonUpload<T>(
-    data: T,
-    content: NSContent.IContentMeta,
-    path: string,
-    options?: any,
-  ) {
-    const uploadData: IUploadS3Request<T> = {
-      data,
-      path,
-      categoryType: content.categoryType || '',
-      mimeType: content.mimeType,
-    }
-    return this.apiService.post(
-      S3_JSON_UPLOAD,
-      [uploadData],
-      false,
-      options
     )
   }
 

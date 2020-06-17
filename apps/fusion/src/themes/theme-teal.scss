@@ -15,7 +15,7 @@ $mat-teal: (50: #e0f2f1,
   A200: #64ffda,
   A400: #1de9b6,
   A700: #00bfa5,
-  siemens: #005f87,
+  org: #005f87,
   contrast: (50: $dark-primary-text,
     100: $dark-primary-text,
     200: $dark-primary-text,
@@ -30,7 +30,7 @@ $mat-teal: (50: #e0f2f1,
     A200: $dark-primary-text,
     A400: $dark-primary-text,
     A700: $dark-primary-text,
-    siemens: $light-primary-text));
+    org: $light-primary-text));
 
 $mat-orange: (50: #fff3e0,
   100: #ffe0b2,
@@ -46,8 +46,8 @@ $mat-orange: (50: #fff3e0,
   A200: #ffab40,
   A400: #ff9100,
   A700: #ff6d00,
-  // siemens: #ffb900,
-  siemens: #eb780a,
+  // org: #ffb900,
+  org: #eb780a,
   contrast: (50: $dark-primary-text,
     100: $dark-primary-text,
     200: $dark-primary-text,
@@ -77,7 +77,7 @@ $mat-pink: (50: #fce4ec,
   A200: #ff4081,
   A400: #f50057,
   A700: #c51162,
-  siemens: #af235f,
+  org: #af235f,
   contrast: (50: $dark-primary-text,
     100: $dark-primary-text,
     200: $dark-primary-text,
@@ -92,18 +92,18 @@ $mat-pink: (50: #fce4ec,
     A200: $light-primary-text,
     A400: $light-primary-text,
     A700: $light-primary-text,
-    siemens: $light-primary-text));
+    org: $light-primary-text));
 
 // Plus imports for other components in your app.
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$theme-primary: mat-palette($mat-teal, siemens, 50);
-$theme-accent: mat-palette($mat-pink, siemens);
+$theme-primary: mat-palette($mat-teal, org, 50);
+$theme-accent: mat-palette($mat-pink, org);
 
 // The warn palette is optional (defaults to red).
-$theme-warn: mat-palette($mat-orange, siemens);
+$theme-warn: mat-palette($mat-orange, org);
 
 .theme-teal {
   &.day-mode {

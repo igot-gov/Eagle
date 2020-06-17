@@ -31,7 +31,5 @@
 }
 
 .font-size-small{
-  @include breakpoint-xs {
   font-size: x-small !important;
-  }
 }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -27,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -47,9 +43,6 @@ import com.infosys.lexauthoringservices.util.LexLogger;
 @EnableWebMvc
 @ControllerAdvice
 public class ExceptionHandlerControllerAdvice {
-
-	@Autowired
-	private MessageSource messageSource;
 
 	@Autowired
 	LexLogger logService;
@@ -319,13 +312,6 @@ public class ExceptionHandlerControllerAdvice {
 		return errors;
 	}
 
-	/**
-	 * Handles all parse exceptions
-	 * 
-	 * @param exception
-	 * @param request
-	 * @return
-	 */
 	@ExceptionHandler({ ConflictErrorException.class })
 	@ResponseStatus(HttpStatus.CONFLICT)
 	public @ResponseBody ClientErrors conflictExceptionHandler(final ConflictErrorException exception,
@@ -337,5 +323,4 @@ public class ExceptionHandlerControllerAdvice {
 
 		return errors;
 	}
-
 }

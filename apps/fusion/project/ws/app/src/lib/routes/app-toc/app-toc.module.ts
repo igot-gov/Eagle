@@ -76,7 +76,6 @@ import {
   MarkAsCompleteModule,
   PlayerBriefModule,
   CardContentModule,
-  MiniProfileModule,
   UserAutocompleteModule,
 } from '@ws-widget/collection'
 import { AppTocDialogIntroVideoComponent } from './components/app-toc-dialog-intro-video/app-toc-dialog-intro-video.component'
@@ -85,15 +84,8 @@ import { ContentCertificationResolver } from './routes/app-toc-certification/res
 import { CertificationApiService } from './routes/app-toc-certification/apis/certification-api.service'
 import { AppTocCertificationModule } from './routes/app-toc-certification/app-toc-certification.module'
 import { TrainingService } from '../infy/routes/training/services/training.service'
-import { AppTocHomePathfindersComponent } from './components/app-toc-home-pathfinders/app-toc-home-pathfinders.component'
-import { AppTocHomeLestoreComponent } from './components/app-toc-home-lestore/app-toc-home-lestore.component'
-import { AppTocBannerPathfindersComponent } from './components/app-toc-banner-pathfinders/app-toc-banner-pathfinders.component'
-import { AppTocBannerLestoreComponent } from './components/app-toc-banner-lestore/app-toc-banner-lestore.component'
 import { AppTocOverviewDirective } from './routes/app-toc-overview/app-toc-overview.directive'
 import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
-import { AppTocOverviewLestoreComponent } from './components/app-toc-overview-lestore/app-toc-overview-lestore.component'
-import { AppTocOverviewPathfindersComponent } from './components/app-toc-overview-pathfinders/app-toc-overview-pathfinders.component'
-import { AppTocCohortsPathfindersComponent } from './components/app-toc-cohorts-pathfinders/app-toc-cohorts-pathfinders.component'
 import { AppTocHomeDirective } from './routes/app-toc-home/app-toc-home.directive'
 import { AppTocCohortsDirective } from './routes/app-toc-cohorts/app-toc-cohorts.directive'
 import { AppTocCohortsComponent as AppTocCohortsRootComponent } from './routes/app-toc-cohorts/app-toc-cohorts.component'
@@ -116,13 +108,6 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
     AppTocDialogIntroVideoComponent,
     AppTocOverviewDirective,
     AppTocOverviewRootComponent,
-    AppTocOverviewPathfindersComponent,
-    AppTocOverviewLestoreComponent,
-    AppTocCohortsPathfindersComponent,
-    AppTocHomePathfindersComponent,
-    AppTocBannerPathfindersComponent,
-    AppTocHomeLestoreComponent,
-    AppTocBannerLestoreComponent,
     AppTocHomeDirective,
     AppTocHomeRootComponent,
     AppTocCohortsDirective,
@@ -183,7 +168,6 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
     MarkAsCompleteModule,
     PlayerBriefModule,
     MatProgressSpinnerModule,
-    MiniProfileModule,
     CardContentModule,
     BtnContentShareModule,
     UserAutocompleteModule,
@@ -206,12 +190,7 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
   entryComponents: [
     AppTocDialogIntroVideoComponent,
     AppTocOverviewComponent,
-    AppTocOverviewPathfindersComponent,
-    AppTocOverviewLestoreComponent,
     AppTocHomeComponent,
-    AppTocHomeLestoreComponent,
-    AppTocHomePathfindersComponent,
-    AppTocCohortsPathfindersComponent,
   ],
 })
 export class AppTocModule { }

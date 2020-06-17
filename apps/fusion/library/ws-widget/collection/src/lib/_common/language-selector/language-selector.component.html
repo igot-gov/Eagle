@@ -1,7 +1,10 @@
 <mat-form-field class="language-drop-down-width" appearance="outline">
-  <mat-select [value]="appLanguage" (selectionChange)="langChanged($event)">
+  <mat-select [(value)]="appLanguage" (selectionChange)="langChanged($event)">
 
-
+    <mat-select-trigger>
+      <span class="flag-icon-{{ appLanguage | lowercase}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>&nbsp;&nbsp;{{appLanguage | uppercase}}</span>
+    </mat-select-trigger>
     <mat-option value="en" *ngIf="isLocaleAvailable('')" [disabled]="!isLocaleEnabled('')">
       <a mat-line>
         <img [ngStyle]="{

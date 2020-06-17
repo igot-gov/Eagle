@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
-import { ConfigurationsService, EInstance, NsPage } from '@ws-widget/utils'
+import { ConfigurationsService, NsPage } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-public-nav-bar',
@@ -12,29 +12,10 @@ export class AppPublicNavBarComponent implements OnInit {
   logo = ''
   appName = ''
   navBar: Partial<NsPage.INavBackground> | null = null
-  constructor(private domSanitizer: DomSanitizer, private configSvc: ConfigurationsService) {}
+  constructor(private domSanitizer: DomSanitizer, private configSvc: ConfigurationsService) { }
 
   public get showPublicNavbar(): boolean {
-    // commercial_begin
-    switch (this.configSvc.rootOrg) {
-      case EInstance.PATHFINDERS:
-        return false
-      case EInstance.FORD:
-        return false
-      case EInstance.EPOCH:
-        return false
-      case EInstance.ACADEMY:
-        return false
-      case EInstance.ASSISTEDGE:
-        return false
-      default:
-        return true
-    }
-    // commercial_end
-
-    // opensource_begin
-    // return true
-    // opensource_end
+    return true
   }
 
   ngOnInit() {

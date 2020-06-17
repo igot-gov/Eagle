@@ -26,8 +26,8 @@
     <mat-tab label="Create" *ngIf="contentData?.createInsert?.create" class="text-label">
       <div class="margin-s" [innerHtml]="contentData?.createInsert?.create.text"></div>
       <pre class="margin-s" *ngIf="createQuery && !isEdit" [innerHTML]="createQuery"></pre>
-      <ace-editor class="code-container margin-s" *ngIf="isEdit && contentData" [(text)]="createQuery" theme="eclipse" [mode]="'sql'"
-        [options]="options"></ace-editor>
+      <!-- <ace-editor class="code-container margin-s" *ngIf="isEdit && contentData" [(text)]="createQuery" theme="eclipse" [mode]="'sql'"
+                [options]="options"></ace-editor> -->
       <div class="margin-s">
         <button
           mat-raised-button

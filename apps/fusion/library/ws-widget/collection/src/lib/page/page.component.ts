@@ -2,19 +2,11 @@ import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/cor
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import {
-  ConfigurationsService,
-  EventService,
-  LoggerService,
-  NsPage,
-  ValueService,
-  WsEvents,
-} from '@ws-widget/utils'
+import { ConfigurationsService, EventService, LoggerService, NsPage, ValueService, WsEvents } from '@ws-widget/utils'
 import { fromEvent, Subscription } from 'rxjs'
-import { filter, delay } from 'rxjs/operators'
+import { filter } from 'rxjs/operators'
 import { SubapplicationRespondService } from '../../../../utils/src/lib/services/subapplication-respond.service'
 import { CustomTourService } from '../_common/tour-guide/tour-guide.service'
-import { RootService } from '../../../../../../src/app/component/root/root.service'
 
 @Component({
   selector: 'ws-widget-page',
@@ -26,7 +18,6 @@ export class PageComponent extends WidgetBaseComponent
   @Input() widgetData: NsPage.IPage | null = null
   pageData: NsPage.IPage | null = null
   oldData: NsPage.IPage | null = null
-  reset = false
   private responseSubscription: Subscription | null = null
   alreadyRaised = false
   error: any
@@ -34,12 +25,10 @@ export class PageComponent extends WidgetBaseComponent
   navbarIcon?: SafeUrl
   isTourGuideAvailable = false
   isHlpMenuXs = false
-  showHeader = true
   navBackground: Partial<NsPage.INavBackground> | null = null
   links: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
   constructor(
     private activateRoute: ActivatedRoute,
-    private rootSvc: RootService,
     private logger: LoggerService,
     private configSvc: ConfigurationsService,
     private valueSvc: ValueService,
@@ -52,19 +41,10 @@ export class PageComponent extends WidgetBaseComponent
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
       this.links = this.getNavLinks()
+
     })
   }
   ngOnInit() {
-    const url = window.location.href
-    if (url.indexOf('lex_auth_01302995157056716838') > -1) {
-      this.rootSvc.showNavbarDisplay$.next(false)
-      this.rootSvc.showFooterDisplay$.next(false)
-      this.rootSvc.showHeaderDisplay$.next(false)
-      this.rootSvc.showChatBotDisplay$.next(false)
-    }
-    this.rootSvc.showHeaderDisplay$.pipe(delay(500)).subscribe(display => {
-      this.showHeader = display
-    })
     if (this.configSvc.instanceConfig) {
       if (this.configSvc.instanceConfig.logos.navbarLogo) {
         this.navbarIcon = this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -85,6 +65,7 @@ export class PageComponent extends WidgetBaseComponent
       }
     })
     this.activateRoute.data.subscribe(routeData => {
+
       if (this.alreadyRaised && this.oldData) {
         this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded)
       }
@@ -93,17 +74,15 @@ export class PageComponent extends WidgetBaseComponent
         this.pageData = routeData.pageData.data
         if (this.pageData && this.pageData.navigationBar) {
           this.navBackground = this.pageData.navigationBar.background || this.configSvc.pageNavBar
-          this.links = this.isXSmall
-            ? this.getNavLinks()
-            : this.getNavLinks().filter(data => data.widgetData.actionBtnId !== 'channel_how_to')
+          this.links = this.isXSmall ? this.getNavLinks() : this.getNavLinks().filter(data =>
+            data.widgetData.actionBtnId !== 'channel_how_to')
         }
       } else if (this.widgetData) {
         this.pageData = this.widgetData
         if (this.pageData && this.pageData.navigationBar) {
           this.navBackground = this.pageData.navigationBar.background || this.configSvc.pageNavBar
-          this.links = this.isXSmall
-            ? this.getNavLinks()
-            : this.getNavLinks().filter(data => data.widgetData.actionBtnId !== 'channel_how_to')
+          this.links = this.isXSmall ? this.getNavLinks() : this.getNavLinks().filter(data =>
+            data.widgetData.actionBtnId !== 'channel_how_to')
         }
       } else {
         this.pageData = null
@@ -130,41 +109,28 @@ export class PageComponent extends WidgetBaseComponent
                 case 'LOADED':
                   this.respondSvc.loadedRespond(contentWindow, event.data.subApplicationName)
                   break
-                case 'HIDE_NAVBAR':
-                  this.reset = true
-                  this.rootSvc.showNavbarDisplay$.next(false)
-                  break
-                case 'HIDE_FOOTER':
-                  this.reset = true
-                  this.rootSvc.showFooterDisplay$.next(false)
-                  break
-                case 'HIDE_HEADER':
-                  this.reset = true
-                  this.rootSvc.showHeaderDisplay$.next(false)
-                  break
-                case 'HIDE_CHATBOT':
-                  this.reset = true
-                  this.rootSvc.showChatBotDisplay$.next(false)
-                  break
                 default:
                   break
               }
             }
           })
       }
+
     })
   }
 
   ngAfterViewInit() {
     const hash: any = window.location.hash ? window.location.hash.split('#')[1] : ''
     if (hash && isNaN(hash)) {
-      setTimeout(() => {
-        const element = document.getElementById(hash)
-        if (element) {
-          element.scrollIntoView()
-        }
-        // tslint:disable-next-line: align
-      }, 1000)
+      setTimeout(
+        () => {
+          const element = document.getElementById(hash)
+          if (element) {
+            element.scrollIntoView()
+          }
+        },
+        1000,
+      )
     }
     if (this.pageData && this.pageData.tourGuide) {
       this.configSvc.tourGuideNotifier.next(true)
@@ -187,13 +153,10 @@ export class PageComponent extends WidgetBaseComponent
       },
     }
     this.eventSvc.dispatchEvent(event)
+
   }
   getNavLinks(): NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] {
-    if (
-      this.pageData &&
-      this.pageData.navigationBar &&
-      Array.isArray(this.pageData.navigationBar.links)
-    ) {
+    if (this.pageData && this.pageData.navigationBar && Array.isArray(this.pageData.navigationBar.links)) {
       if (this.isXSmall) {
         return this.pageData.navigationBar.links.map(link => ({
           ...link,
@@ -214,12 +177,6 @@ export class PageComponent extends WidgetBaseComponent
     if (this.pageData) {
       this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded)
     }
-    if (this.reset) {
-      this.rootSvc.showNavbarDisplay$.next(true)
-      this.rootSvc.showFooterDisplay$.next(true)
-      this.rootSvc.showHeaderDisplay$.next(true)
-      this.rootSvc.showChatBotDisplay$.next(true)
-    }
     this.configSvc.tourGuideNotifier.next(false)
   }
   startTour() {
@@ -229,4 +186,5 @@ export class PageComponent extends WidgetBaseComponent
       this.responseSubscription.unsubscribe()
     }
   }
+
 }

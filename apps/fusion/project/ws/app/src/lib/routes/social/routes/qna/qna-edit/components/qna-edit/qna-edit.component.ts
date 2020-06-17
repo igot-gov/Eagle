@@ -2,24 +2,13 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/co
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { FormControl } from '@angular/forms'
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-  MatSnackBar,
-  MatDialog,
-} from '@angular/material'
+import { MatAutocomplete, MatAutocompleteSelectedEvent, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Data, Router } from '@angular/router'
 import { Subscription } from 'rxjs'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import {
-  NsError,
-  ROOT_WIDGET_CONFIG,
-  NsDiscussionForum,
-  WsDiscussionForumService,
-} from '@ws-widget/collection'
+import { NsError, ROOT_WIDGET_CONFIG, NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
 import { TFetchStatus, ConfigurationsService, NsPage } from '@ws-widget/utils'
 import { WsSocialService } from '../../../../../services/ws-social.service'
-import { ConfirmPublishComponent } from '../../../../../widgets/confirm-publish/confirm-publish.component'
 
 @Component({
   selector: 'ws-app-qna-edit',
@@ -27,6 +16,7 @@ import { ConfirmPublishComponent } from '../../../../../widgets/confirm-publish/
   styleUrls: ['./qna-edit.component.scss'],
 })
 export class QnaEditComponent implements OnInit, OnDestroy {
+
   private routeSubscription: Subscription | null = null
   qnaConversation!: NsDiscussionForum.IPostResult
   qnaRequest!: NsDiscussionForum.IPostRequest
@@ -92,7 +82,6 @@ export class QnaEditComponent implements OnInit, OnDestroy {
     private socialSvc: WsSocialService,
     private configSvc: ConfigurationsService,
     private matSnackBar: MatSnackBar,
-    private dialogRef: MatDialog,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -100,17 +89,17 @@ export class QnaEditComponent implements OnInit, OnDestroy {
     this.postPublishRequest.postCreator = this.userId
     this.postUpdateRequest.editor = this.userId
     this.tagsCtrl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+      )
       .subscribe((value: string) => {
         if (value && value.length) {
           this.autocompleteAllTags = []
           this.fetchTagsStatus = 'fetching'
           this.socialSvc.fetchAutoComplete(value).subscribe(
             tags => {
-              if (
-                configSvc.restrictedFeatures &&
-                !configSvc.restrictedFeatures.has('tags-social')
-              ) {
+              if (configSvc.restrictedFeatures && !configSvc.restrictedFeatures.has('tags-social')) {
                 tags.push({
                   id: '',
                   name: value,
@@ -181,23 +170,21 @@ export class QnaEditComponent implements OnInit, OnDestroy {
       }
     }
     this.postPublishRequest.tags = this.selectedTags
-    const dialogRef = this.dialogRef.open(ConfirmPublishComponent, {
-      data: { postPublishRequest: this.postPublishRequest },
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.isCreatingPost = false
-      if (result === 'error') {
-        this.openSnackBar(errorMsg)
-      } else if (result) {
+    this.discussionSvc.publishPost(this.postPublishRequest).subscribe(
+      data => {
         this.openSnackBar(publishMsg)
-        if (result && result.id) {
-          this.router.navigate(['app', 'social', 'qna', result.id])
+        this.isCreatingPost = false
+        if (data && data.id) {
+          this.router.navigate(['app', 'social', 'qna', data.id])
         } else {
           this.router.navigate(['app', 'social', 'qna'])
         }
-      }
-    })
+      },
+      () => {
+        this.openSnackBar(errorMsg)
+        this.isCreatingPost = false
+      },
+    )
   }
 
   saveDraft(successMsg: string, errorMsg: string) {
@@ -298,4 +285,5 @@ export class QnaEditComponent implements OnInit, OnDestroy {
   openSnackBar(message: string) {
     this.matSnackBar.open(message)
   }
+
 }

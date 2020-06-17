@@ -1,11 +1,10 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.validation;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import com.infosys.lexauthoringservices.util.LexConstants;
 
 public class ValidatorV2 {
 
@@ -14,6 +13,7 @@ public class ValidatorV2 {
 		String operationName = validateMap.get(ValidationConstants.OPERATION.get()).toString();
 		String propertyName = validateMap.get(ValidationConstants.PROPERTY.get()).toString();
 		String dataType = validateMap.get(ValidationConstants.DATA_TYPE.get()).toString();
+		String identifier = (String) contentMeta.get(LexConstants.IDENTIFIER);
 
 		if (!notExistsValidations(contentMeta, errors, propertyName, dataType))
 			return;
@@ -36,7 +36,7 @@ public class ValidatorV2 {
 		else if (operationName.equals(Operations.NOT_CONTAINS.get()))
 			notContainsValidations(contentMeta, validateMap, errors, propertyName);
 
-		else if (operationName.equals(Operations.GREATER_THAN.get()))
+		else if (operationName.equals(Operations.GREATER_THAN.get())) 
 			greaterThanValidations(contentMeta, validateMap, errors, propertyName);
 
 		else if (operationName.equals(Operations.LESS_THAN.get()))
@@ -151,10 +151,10 @@ public class ValidatorV2 {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	private static void greaterThanValidations(Map<String, Object> contentMeta, Map<String, Object> validateMap,
 			Set<String> errors, String propertyName) {
-
+		String identifier = (String) contentMeta.get(LexConstants.IDENTIFIER);
 		if (contentMeta.get(propertyName) instanceof Long && !((Long) contentMeta.get(propertyName) > Long
 				.parseLong(validateMap.get(ValidationConstants.VALUE.get()).toString()))) {
 			errors.add(propertyName + " is set to " + contentMeta.get(propertyName) + " should be greater than "

@@ -49,10 +49,11 @@ export class DialogBoxModeratorComponent implements OnInit {
     private moderatorBtnSvc: BtnModeratorService,
     public dialogRef: MatDialogRef<DialogBoxModeratorComponent>,
   ) {
-    this.type = data.type
-    if (this.type === 'moderate') {
+    if (data.type) {
+      this.type = data.type
       this.moderatorRejectRequest.postId = data.postId
-    } else if (this.type === 'flag') {
+    } else {
+      this.type = 'flag'
       this.flagRequest.id = data.postId
     }
   }
@@ -85,7 +86,7 @@ export class DialogBoxModeratorComponent implements OnInit {
             this.dialogRef.close('error')
           },
         )
-      } else if (this.type === 'flag') {
+      } else {
         if (this.flagRequest.userComment) {
           this.flagRequest.userComment.comment = this.flagReason
         }

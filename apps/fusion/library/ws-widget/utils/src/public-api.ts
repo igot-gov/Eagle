@@ -5,14 +5,11 @@ export * from './lib/components/image-crop/image-crop.module'
 export * from './lib/constants/features.enum'
 export * from './lib/constants/instances.enum'
 export * from './lib/constants/misc.constants'
-
-// directives
 export * from './lib/directives/class-change-on-scroll/class-change-on-scroll.module'
 export * from './lib/directives/default-thumbnail/default-thumbnail.module'
 export * from './lib/directives/image-responsive/image-responsive.module'
 export * from './lib/directives/in-view-port/in-view-port.module'
 export * from './lib/directives/navigation/navigation.module'
-export * from './lib/directives/execute-script/execute-script.module'
 export * from './lib/directives/permission/permission.module'
 export * from './lib/helpers/functions/getStringifiedQueryParams'
 // helpers

@@ -1,4 +1,3 @@
-import { UploadPdfComponent } from './components/upload-pdf/upload-pdf.component'
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { AppSetupHomeComponent } from './app-setup-home.component'
@@ -7,10 +6,8 @@ import { LangSelectComponent } from './components/lang-select/lang-select.compon
 import { AboutVideoComponent } from '../info/about-video/about-video.component'
 import { TncAppResolverService } from '../../../../../../../src/app/services/tnc-app-resolver.service'
 import { TncComponent } from './components/tnc/tnc.component'
-import { SetupDoneComponent } from './components/setup-done/setup-done.component'
 import { PageResolve } from '../../../../../../../library/ws-widget/utils/src/public-api'
 import { InterestComponent } from './module/interest/interest/interest.component'
-import { BadgesResolver } from '../profile/routes/badges/badges.resolver'
 
 const routes: Routes = []
 
@@ -25,53 +22,37 @@ const routes: Routes = []
       {
         path: 'home',
         component: HomeComponent,
-        children: [
-          {
-            path: '',
-            redirectTo: 'lang',
-            pathMatch: 'full',
+        children: [{
+          path: '',
+          redirectTo: 'lang',
+          pathMatch: 'full',
+        }, {
+          path: 'lang',
+          component: LangSelectComponent,
+        }, {
+          path: 'tnc',
+          component: TncComponent,
+          resolve: {
+            tnc: TncAppResolverService,
           },
-          {
-            path: 'upload-pdf',
-            component: UploadPdfComponent,
+        }, {
+          path: 'about-video',
+          component: AboutVideoComponent,
+        }, {
+          path: 'interest',
+          component: InterestComponent,
+          data: {
+            pageType: 'feature',
+            pageKey: 'interest',
           },
-          {
-            path: 'lang',
-            component: LangSelectComponent,
+          resolve: {
+            pageData: PageResolve,
           },
-          {
-            path: 'tnc',
-            component: TncComponent,
-            resolve: {
-              tnc: TncAppResolverService,
-            },
-          },
-          {
-            path: 'about-video',
-            component: AboutVideoComponent,
-          },
-          {
-            path: 'interest',
-            component: InterestComponent,
-            data: {
-              pageType: 'feature',
-              pageKey: 'interest',
-            },
-            resolve: {
-              pageData: PageResolve,
-            },
-          },
-          {
-            path: 'done',
-            component: SetupDoneComponent,
-            resolve: {
-              badges: BadgesResolver,
-            },
-          },
-        ],
+        }],
+
       },
     ]),
   ],
   exports: [RouterModule],
 })
-export class AppSetupRoutingModule {}
+export class AppSetupRoutingModule { }

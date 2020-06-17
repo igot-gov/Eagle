@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { IWidgetsPlayerMediaData } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { ConfigurationsService, NsPage, EventService } from '@ws-widget/utils'
+import { ConfigurationsService, NsPage } from '../../../../../../../../library/ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-app-about-video',
@@ -35,10 +35,7 @@ export class AboutVideoComponent implements OnInit {
       },
     }
 
-  constructor(
-    private configSvc: ConfigurationsService,
-    private eventSvc: EventService,
-    ) { }
+  constructor(private configSvc: ConfigurationsService) { }
 
   ngOnInit() {
     if (this.configSvc.instanceConfig) {
@@ -74,15 +71,6 @@ export class AboutVideoComponent implements OnInit {
     }
     // this.widgetResolverData.widgetData.url = this.introVideos[value]
     // //console.log('TYPE: ', this.widgetResolverData)
-  }
-
-  raiseTelemetry() {
-    this.eventSvc.raiseInteractTelemetry('click', 'next', {
-      contentType: 'button',
-      context: {
-        pageSection: 'about-video',
-      },
-    })
   }
 
 }

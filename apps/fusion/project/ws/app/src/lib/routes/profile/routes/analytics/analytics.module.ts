@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { LearningComponent } from './routes/learning/learning.component'
-import { RefactoringComponent } from './routes/refactoring/refactoring.component'
-import { AnalyticsHomeComponent } from './routes/analytics-home/analytics-home.component'
 import { WidgetResolverModule } from '@ws-widget/resolver'
-
 // material modules
 import {
   MatButtonModule,
@@ -41,8 +38,6 @@ import { PlansComponent } from './routes/plans/plans.component'
 @NgModule({
   declarations: [
     LearningComponent,
-    RefactoringComponent,
-    AnalyticsHomeComponent,
     TileComponent,
     FeatureUsageComponent,
     ProgressSpinnerComponent,

@@ -1,12 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { FormControl } from '@angular/forms'
-import {
-  MatAutocomplete,
-  MatAutocompleteSelectedEvent,
-  MatSnackBar,
-  MatDialog,
-} from '@angular/material'
+import { MatAutocomplete, MatAutocompleteSelectedEvent, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NsDiscussionForum, WsDiscussionForumService } from '@ws-widget/collection'
 import { ConfigurationsService, NsPage, TFetchStatus, ValueService } from '@ws-widget/utils'
@@ -14,7 +9,6 @@ import { Observable } from 'rxjs'
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import { WsSocialService } from '../../../services/ws-social.service'
 import { SocialForum } from '../models/SocialForumposts.model'
-import { ConfirmPublishComponent } from '../../../widgets/confirm-publish/confirm-publish.component'
 
 @Component({
   selector: 'ws-app-post-create',
@@ -82,7 +76,7 @@ export class PostCreateComponent implements OnInit {
     private discussionSvc: WsDiscussionForumService,
     private valueSvc: ValueService,
     private router: Router,
-    private dialogRef: MatDialog,
+
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -90,17 +84,17 @@ export class PostCreateComponent implements OnInit {
     this.postPublishRequest.postCreator = this.userId
     this.isXSmall$ = this.valueSvc.isXSmall$
     this.tagsCtrl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+      )
       .subscribe((value: string) => {
         if (value && value.length) {
           this.autocompleteAllTags = []
           this.fetchTagsStatus = 'fetching'
           this.socialSvc.fetchAutoComplete(value).subscribe(
             tags => {
-              if (
-                configSvc.restrictedFeatures &&
-                !configSvc.restrictedFeatures.has('tags-social')
-              ) {
+              if (configSvc.restrictedFeatures && !configSvc.restrictedFeatures.has('tags-social')) {
                 tags.push({
                   id: '',
                   name: value,
@@ -118,10 +112,12 @@ export class PostCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      // Defaults to 0 if no query param provided.
-      this.forumId = params['forumId']
-    })
+    this.route
+      .queryParams
+      .subscribe(params => {
+        // Defaults to 0 if no query param provided.
+        this.forumId = params['forumId']
+      })
     this.route.paramMap.subscribe(paramMap => {
       const id = paramMap.get('id')
       if (id) {
@@ -215,19 +211,17 @@ export class PostCreateComponent implements OnInit {
     this.postPublishRequest.source.id = this.forumId
     this.postPublishRequest.source.name = NsDiscussionForum.EDiscussionType.SOCIAL
     this.postPublishRequest.tags = this.selectedTags
-    const dialogRef = this.dialogRef.open(ConfirmPublishComponent, {
-      data: { postPublishRequest: this.postPublishRequest },
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.isCreatingPost = false
-      if (result === 'error') {
-        this.openSnackBar(errorMsg)
-      } else if (result) {
+    this.discussionSvc.publishPost(this.postPublishRequest).subscribe(
+      () => {
         this.openSnackBar(publishMsg)
+        this.isCreatingPost = false
         this.router.navigate(['/app/social/forums'])
-      }
-    })
+      },
+      () => {
+        this.openSnackBar(errorMsg)
+        this.isCreatingPost = false
+      },
+    )
   }
 
   removeTag(tag: NsDiscussionForum.IPostTag): void {

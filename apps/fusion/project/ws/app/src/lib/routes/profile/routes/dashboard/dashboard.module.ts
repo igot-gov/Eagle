@@ -17,10 +17,9 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
 import { CalendarModule } from '../../module/calendar-module/calendar.module'
 import { RouterModule } from '@angular/router'
 import { CoursePendingCardComponent } from './components/course-pending-card/course-pending-card.component'
-import { SkillCardComponent } from './components/skill-card/skill-card.component'
 
 @NgModule({
-  declarations: [DashboardComponent, CoursePendingCardComponent, SkillCardComponent],
+  declarations: [DashboardComponent, CoursePendingCardComponent],
   imports: [
     CommonModule,
     MatCardModule,

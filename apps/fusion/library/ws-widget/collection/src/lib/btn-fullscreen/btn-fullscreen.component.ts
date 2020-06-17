@@ -44,17 +44,7 @@ export class BtnFullscreenComponent extends WidgetBaseComponent
       requestExitFullScreen()
       this.fsState.emit(false)
     } else if (this.widgetData.fsContainer) {
-      const pdfContainer = document.getElementById('pdfIframeContainer') as HTMLIFrameElement | null
-      if (pdfContainer) {
-        const window = pdfContainer.contentWindow as { [key: string]: any }
-        try {
-          window['PDFViewerApplication'].requestPresentationMode()
-        } catch (_err) {
-          requestFullScreen(this.widgetData.fsContainer)
-        }
-      } else {
-        requestFullScreen(this.widgetData.fsContainer)
-      }
+      requestFullScreen(this.widgetData.fsContainer)
       this.fsState.emit(true)
       try {
         this.widgetData.fsContainer.classList.add('mat-app-background')

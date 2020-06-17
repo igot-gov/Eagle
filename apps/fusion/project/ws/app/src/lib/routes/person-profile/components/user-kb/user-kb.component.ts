@@ -15,7 +15,6 @@ export class UserKbComponent implements OnInit, OnChanges {
   @Input() wid = ''
   @Input() name = ''
   @Output() fetching = new EventEmitter<Boolean>()
-  @Output() count = new EventEmitter<number>()
 
   followingFetchStatus: TFetchStatus = 'none'
   followContent: NSProfileData.IFollowing[] = []
@@ -59,8 +58,6 @@ export class UserKbComponent implements OnInit, OnChanges {
         })
         this.followingFetchStatus = 'done'
         this.fetching.emit(true)
-        if (this.following) { this.count.emit(this.following.length) } else { this.count.emit(0) }
-
       },
       _ => {
         this.followingFetchStatus = 'error'

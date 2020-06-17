@@ -497,7 +497,7 @@
 <ng-template #cardDescriptionBack>
   <mat-card
     [attr.name]="'widget-card-content ' + widgetData.content.name"
-    class="card-ford-container mr-6"
+    class="card-Client-container mr-6"
     [ngClass]="{
       greyOut:
         widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
@@ -596,15 +596,15 @@
                 {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
               </div>
               <div
-                *ngIf="widgetData.content.viewCount && widgetData.content.viewCount.Ford"
+                *ngIf="widgetData.content.viewCount && widgetData.content.viewCount.Client"
                 class="duration-time"
                 i18n-title
                 title="View Count"
               >
-                {{ widgetData.content.viewCount.Ford | pipeCountTransform }} views
+                {{ widgetData.content.viewCount.Client | pipeCountTransform }} views
               </div>
               <div
-                *ngIf="!widgetData.content.viewCount || !widgetData.content.viewCount.Ford"
+                *ngIf="!widgetData.content.viewCount || !widgetData.content.viewCount.Client"
                 class="duration-time"
                 i18n-title
                 title="View Count"
@@ -870,14 +870,6 @@
             widgetData.content?.creatorContacts?.length
           "
           class="flex flex-wrap items-center mb-4"
-          (click)="
-            openDialog(
-              widgetData.content?.creatorDetails && (widgetData.content?.creatorDetails)[0]?.id
-                ? (widgetData.content?.creatorDetails)[0]?.id
-                : (widgetData.content?.creatorContacts)[0]?.id,
-              $event
-            )
-          "
         >
           <ws-widget-user-image
             class="author-image"

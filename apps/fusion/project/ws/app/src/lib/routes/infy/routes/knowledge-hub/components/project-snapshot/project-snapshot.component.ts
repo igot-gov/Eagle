@@ -12,12 +12,12 @@ export class ProjectSnapshotComponent implements OnInit {
   @Input() islargeScreen: boolean | null = null
   url = ''
   toolsRisksContributions: IItemsList[] = []
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
-    this.url = `http://10.66.87.62:6789/view?source=promt&type=project&itemId=${
+    this.url = `http://localhost:6789/view?source=promt&type=project&itemId=${
       this.projectDetails.itemId
-    }&ref=home`
+      }&ref=home`
     this.projectDetails.mstBusinessContext =
       this.projectDetails.mstBusinessContext === null ? '' : this.projectDetails.mstBusinessContext
     this.projectDetails.mstInfosysRole =

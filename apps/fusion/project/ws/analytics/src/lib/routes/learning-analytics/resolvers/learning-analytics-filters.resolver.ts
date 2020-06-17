@@ -8,8 +8,7 @@ export class AnalyticsResolver {
   dateEventChangeSubject = new ReplaySubject<{ startDate: string, endDate: string }>(1)
   searchEventChangeSubject = new ReplaySubject<{ searchQuery: string }>(1)
   removeFilterEventChangeSubject = new ReplaySubject<NsAnalytics.IFilter[]>(1)
-  dataFilterEventChangeSubject = new ReplaySubject<{ filterName: string, filterType: string | undefined }>(1)
-  dataEvent = undefined
+
   dateEvent = undefined
   searchEvent = undefined
   removeEvent = undefined
@@ -22,8 +21,5 @@ export class AnalyticsResolver {
   }
   removeFilterEvent(removeEvent: NsAnalytics.IFilter[]) {
     this.removeFilterEventChangeSubject.next(removeEvent)
-  }
-  dataFilterEvent(dataEvent: { filterName: string, filterType: string | undefined }) {
-    this.dataFilterEventChangeSubject.next(dataEvent)
   }
 }

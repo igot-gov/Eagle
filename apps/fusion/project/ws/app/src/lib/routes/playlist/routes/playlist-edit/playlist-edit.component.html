@@ -6,6 +6,22 @@
   <ws-widget-picker-content [widgetData]="{ preselected: selectedContentIds, availableFilters: 'contentType' }"
     (change)="contentChanged($event?.content, $event?.checked)">
   </ws-widget-picker-content>
+  <!-- <ws-widget-content-picker-v2 (change)="contentChanged($event?.content, $event?.checked)" [widgetData]="{
+    preselected: selectedContentIds,
+    preAppliedFilters: {
+       contentType: ['Course', 'Collection', 'Learning Path', 'Resource']
+     },
+     includedFilters: {contentType: {
+       displayName: 'Content Type',
+       values: ['Course', 'Collection', 'Resource']
+     }},
+     sortableFields: {
+       lastUpdatedOn: 'Last Updated',
+       viewCount: 'Views',
+       averageRating: 'Avg Rating'
+     }
+    }">
+  </ws-widget-content-picker-v2> -->
   <div class="flex flex-row-reverse">
     <button name="done-button-playlist-edit" mat-raised-button color="primary"
       [disabled]="!changedContentIds.size || upsertPlaylistStatus === 'fetching'" (click)="editPlaylist()"

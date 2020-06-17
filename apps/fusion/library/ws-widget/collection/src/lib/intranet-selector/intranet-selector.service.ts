@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 
 const ENDPOINTS = {
-  checkIntranet: 'https://intranet.learning-campus.siemens.com',
+  checkIntranet: 'https://intranet.link',
 }
 @Injectable({
   providedIn: 'root',

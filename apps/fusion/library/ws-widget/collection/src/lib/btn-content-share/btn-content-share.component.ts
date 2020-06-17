@@ -28,7 +28,7 @@ export class BtnContentShareComponent extends WidgetBaseComponent
       this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
     }
     // tslint:disable-next-line: max-line-length
-    this.showBtn = this.configSvc.rootOrg !== 'Ford'
+    this.showBtn = this.configSvc.rootOrg !== 'RootOrg'
   }
 
   shareContent() {

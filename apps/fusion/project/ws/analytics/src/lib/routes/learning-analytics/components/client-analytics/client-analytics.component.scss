@@ -27,7 +27,7 @@
 }
 
 .search {
-  width: 55%;
+  width: 100%;
   font-size: 14px;
 
   @include breakpoint-xs {
@@ -41,46 +41,6 @@
   }
 }
 
-.search-form {
-  width: 35%;
-
-  @include breakpoint-xs {
-    width: 100%;
-    margin: $size-s;
-  }
-}
-
-.filter {
-  font-size: 14px;
-}
-
-.group-div {
-  width: 40%;
-
-  @include breakpoint-xs {
-    width: 100%;
-    margin: $size-s;
-  }
-
-  @include breakpoint-s {
-    width: 100%;
-    margin: $size-s;
-  }
-}
-
-.select-div {
-  width: 30%;
-
-  @include breakpoint-xs {
-    width: 100%;
-    margin: $size-s;
-  }
-
-  @include breakpoint-s {
-    width: 100%;
-    margin: $size-s;
-  }
-}
 
 .filter {
   margin: 0px;

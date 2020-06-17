@@ -33,22 +33,6 @@ export class LoginGuard implements CanActivate {
         this.authSvc.login(this.configSvc.instanceConfig.keycloak.defaultidpHint, redirectUrl)
         return false
       }
-      if (
-        next.queryParamMap.has('ref') &&
-        decodeURIComponent(next.queryParamMap.get('ref') || '').includes('/infosysagm/epochuser')
-      ) {
-        const redirectUrl = `${document.baseURI}/infosysagm/epochuser`
-        this.authSvc.login('S', redirectUrl)
-        return false
-      }
-      if (
-        next.queryParamMap.has('ref') &&
-        decodeURIComponent(next.queryParamMap.get('ref') || '').includes('/infosysagm/moderator')
-      ) {
-        const redirectUrl = `${document.baseURI}/infosysagm/moderator`
-        this.authSvc.login('S', redirectUrl)
-        return false
-      }
       return true
     }
 

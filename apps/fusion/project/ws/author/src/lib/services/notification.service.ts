@@ -14,7 +14,7 @@ export class NotificationService {
     private workFlowService: WorkFlowService,
     private accessService: AccessControlService,
     private initService: AuthInitService,
-  ) {}
+  ) { }
 
   triggerPushPullNotification(
     content: NSContent.IContentMeta,
@@ -195,7 +195,7 @@ export class NotificationService {
       'tag-value-pair': {
         '#contentType': content.category,
         '#contentTitle': content.name,
-        '#targetUrl': `${document.baseURI}author/editor/${content.identifier}?isrejected=true`,
+        '#targetUrl': `${document.baseURI}author/editor/${content.identifier}`,
         '#currentActor': `${owner}`,
         '#currentStage': currentStage,
         '#comment': comment,

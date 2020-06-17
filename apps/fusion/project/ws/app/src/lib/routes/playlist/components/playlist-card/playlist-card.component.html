@@ -1,4 +1,4 @@
-<section class="flex justify-center items-center align-center px-2">
+<section class="px-2">
   <a name="content-link-playlist-card" [routerLink]="playlist?.id" *ngIf="playlist">
     <div class="card relative">
       <img [src]="playlist?.icon" [wsUtilsDefaultThumbnail]="defaultThumbnail"
@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-middle margin-top-xxs margin-remove-bottom playlist-name">
+    <div class="flex flex-middle margin-top-xxs margin-remove-bottom">
       <h3 class="mat-subheading-2 font-weight-500 margin-remove-bottom text-truncate">{{ playlist?.name }}</h3>
       <span class="margin-left-xs margin-right-xs">|</span>
       <span class="mat-caption">{{ playlist?.visibility | uppercase }}</span>

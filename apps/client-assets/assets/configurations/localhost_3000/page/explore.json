@@ -1,0 +1,23 @@
+{
+    "contentType": "Page",
+    "navigationBar": {
+        "pageBackLink": "back",
+        "pageTitle": "Explore"
+    },
+    "pageLayout": {
+        "widgetType": "layout",
+        "widgetSubType": "linearLayout",
+        "widgetData": {
+            "widgets": [
+                {
+                    "widgetType": "tree",
+                    "widgetSubType": "treeCatalog",
+                    "widgetData": {
+                        "url": "/apis/protected/v8/catalog",
+                        "baseClickUrl": "/page/explore"
+                    }
+                }
+            ]
+        }
+    }
+}

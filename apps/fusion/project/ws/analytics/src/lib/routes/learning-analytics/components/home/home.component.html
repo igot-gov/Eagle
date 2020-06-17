@@ -3,8 +3,7 @@
 </div>
 
 <ng-container *ngIf="fetchStatus === 'error'" [wsResolverWidget]="errorWidget"></ng-container>
-<div *ngIf="fetchStatus === 'done' && totalUsers === 0 && contentData?.hourly_usage?.length === 0"
-  class="text-center my-8">
+<div *ngIf="fetchStatus === 'done' && totalUsers === 0" class="text-center my-8">
   <h2 i18n>Currently, no data is available</h2>
 </div>
 <div *ngIf="fetchStatus === 'done' && contentData">
@@ -214,43 +213,6 @@
           </div>
           <div class="margin-m">
             <ng-container [wsResolverWidget]="barChartRoleData"> </ng-container>
-          </div>
-        </mat-card>
-      </ng-container>
-      <ng-container *ngIf="contentData?.zones?.length > 0">
-        <mat-card class="graph-card-client margin-s">
-          <div class="margin-top-m margin-left-m">
-            <div class="flex flex-between flex-middle">
-              <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>
-                Users by Zones
-              </p>
-              <button *ngIf="contentData?.zones?.length >= 20" mat-icon-button (click)="onExpandChart('zones', 'Zone')">
-                <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
-              </button>
-            </div>
-            <p class="description" i18n>This chart displays # of unique users by zones</p>
-          </div>
-          <div class="margin-m">
-            <ng-container [wsResolverWidget]="barChartZonesData"> </ng-container>
-          </div>
-        </mat-card>
-      </ng-container>
-      <ng-container *ngIf="contentData?.classifications?.length > 0">
-        <mat-card class="graph-card-client margin-s">
-          <div class="margin-top-m margin-left-m">
-            <div class="flex flex-between flex-middle">
-              <p class="margin-remove-bottom font-bold text-left ws-mat-primary-text" i18n>
-                Users by Classifications
-              </p>
-              <button *ngIf="contentData?.classifications?.length >= 20" mat-icon-button
-                (click)="onExpandChart('classifications', 'Classification')">
-                <mat-icon class="feature-icon mt-0">open_in_new</mat-icon>
-              </button>
-            </div>
-            <p class="description" i18n>This chart displays # of unique users by classification</p>
-          </div>
-          <div class="margin-m">
-            <ng-container [wsResolverWidget]="barChartClassificationData"> </ng-container>
           </div>
         </mat-card>
       </ng-container>

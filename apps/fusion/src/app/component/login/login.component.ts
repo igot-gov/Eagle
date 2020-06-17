@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  login(key: 'E' | 'N' | 'S' | 'siemens-entitlement') {
+  login(key: 'E' | 'N' | 'S') {
     this.authSvc.login(key, this.redirectUrl)
   }
 }

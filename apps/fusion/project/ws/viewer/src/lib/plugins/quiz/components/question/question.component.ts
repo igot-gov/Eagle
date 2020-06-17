@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core'
 import { NSQuiz } from '../../quiz.model'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { jsPlumb, jsPlumbInstance, OnConnectionBindInfo } from 'jsplumb'
+import { jsPlumb, OnConnectionBindInfo } from 'jsplumb'
 
 @Component({
   selector: 'viewer-question',
@@ -33,7 +33,7 @@ export class QuestionComponent implements OnInit, AfterViewInit {
 
   quizAnswerHash: { [questionId: string]: string[] } = {}
   title = 'match'
-  jsPlumbInstance!: jsPlumbInstance
+  jsPlumbInstance: any
   safeQuestion: SafeHtml = ''
   correctOption: boolean[] = []
   unTouchedBlank: boolean[] = []
@@ -325,7 +325,12 @@ export class QuestionComponent implements OnInit, AfterViewInit {
             const match = options.match
             const selectors: HTMLElement[] = this.jsPlumbInstance.getSelector(answerSelector) as unknown as HTMLElement[]
             if (match && match.trim() === selectors[0].innerText.trim()) {
-              const endpoint = 'Dot'
+              const endpoint = `[
+                'Dot',
+                {
+                  radius: 5
+                }
+              ]`
               this.jsPlumbInstance.connect({
                 endpoint,
                 source: this.jsPlumbInstance.getSelector(questionSelector) as unknown as Element,

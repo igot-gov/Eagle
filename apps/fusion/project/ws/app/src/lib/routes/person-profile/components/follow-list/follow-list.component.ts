@@ -12,7 +12,6 @@ export class FollowListComponent implements OnInit, OnChanges {
   @Input() wid = ''
   @Input() name = ''
   @Input() followers: IFollowerId[] = []
-  @Input() currentUserfollowers: string[] = []
   // followers: IFollowerId[] = []
   // following: IFollowerId[] = []
   followerCurrentDisplay: IFollowerId[] = []
@@ -22,7 +21,6 @@ export class FollowListComponent implements OnInit, OnChanges {
   followingCount = 0
   followersCount = 0
   pageSize = 0
-  currentUserProfile = false
 
   // paginator
   nextFollowersDisable = false
@@ -56,12 +54,6 @@ export class FollowListComponent implements OnInit, OnChanges {
         this.followingCurrentDisplay = []
         this.followerCurrentDisplay = []
         this.wid = changes.wid.currentValue
-        if (this.configSvc.userProfile) {
-          if (this.wid === this.configSvc.userProfile.userId) {
-            this.currentUserProfile = true
-
-          }
-        }
         this.fetchFollowers()
       }
     }
@@ -72,11 +64,6 @@ export class FollowListComponent implements OnInit, OnChanges {
     }
     if (this.configSvc.userProfile && this.configSvc.userProfile.userName) {
       this.currentUserId = this.configSvc.userProfile.userId
-    }
-    if (this.configSvc.userProfile) {
-      if (this.wid === this.configSvc.userProfile.userId) {
-        this.currentUserProfile = true
-      }
     }
     this.isInitialized = true
 
@@ -97,22 +84,21 @@ export class FollowListComponent implements OnInit, OnChanges {
     this.followersFetchStatus = 'fetching'
     this.lastIndexFollowersArray = 4
     this.startIndexFollowersArray = 0
-    this.personprofileSvc.getFollowers(this.wid, this.pageSize).subscribe(
-      (data: any) => {
-        if (data) {
-          if (data.person) {
-            this.followers = data.person.data
-            if (this.followers.length > this.pageDisplaySize) {
-              this.followerCurrentDisplay = this.followers.slice(this.startIndexFollowersArray, this.lastIndexFollowersArray)
-              this.previousFollowersDisable = true
-            } else {
-              this.followerCurrentDisplay = this.followers
-            }
+    this.personprofileSvc.getFollowers(this.wid, this.pageSize).subscribe((data: any) => {
+      if (data) {
+        if (data.person) {
+          this.followers = data.person.data
+          if (this.followers.length > this.pageDisplaySize) {
+            this.followerCurrentDisplay = this.followers.slice(this.startIndexFollowersArray, this.lastIndexFollowersArray)
+            this.previousFollowersDisable = true
+          } else {
+            this.followerCurrentDisplay = this.followers
           }
         }
-        this.followersFetchStatus = 'done'
-      },
-      () => {
+      }
+      this.followersFetchStatus = 'done'
+    },
+                                                                          () => {
         this.followersFetchStatus = 'error'
       })
 

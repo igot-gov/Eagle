@@ -411,13 +411,6 @@ export enum EFeatures {
   KNOWLEDGE_HUB_VIEW_TOOLS_STRIP = 'knowledgeHubViewProjectReferencesStrip',
   KNOWLEDGE_HUB_VIEW_MARKETING_STRIP = 'knowledgeHubViewMarketingStrip',
 
-  // commercial_begin
-  // Concept Graph
-  CONCEPT_GRAPH = 'conceptGraph',
-  CONCEPT_GRAPH_SEARCH_TOPICS = 'conceptGraphSearchTopics',
-  CONCEPT_GRAPH_VIEW_CONCEPT_GRAPH_FOR_TOPIC = 'conceptGraphViewConceptGraphForTopic',
-  // commercial_end
-
   // Channels
   CHANNELS = 'channels',
   CHANNELS_VIEW_LEADERSHIP_SECTION = 'channelsViewLeadershipSection',
@@ -454,7 +447,7 @@ export enum EFeatures {
   // Experience Wow Page
   EXPERIENCE_WOW_PAGE = 'experienceWowPage',
   EXPERIENCE_WOW_PAGE_VIEW_PAGE_SECTIONS = 'experienceWowPageViewPageSections',
-  EXPERIENCE_WOW_PAGE_CHECK_LEX_STATISTICS = 'experienceWowPageCheckLexStatistics',
+  EXPERIENCE_WOW_PAGE_CHECK_Wingspan_STATISTICS = 'experienceWowPageCheckWingspanStatistics',
   EXPERIENCE_WOW_PAGE_CHECK_INFY_ME_STATISTICS = 'experienceWowPageCheckInfyMeStatistics',
   EXPERIENCE_WOW_PAGE_PROVIDE_SUGGESTIONS = 'experienceWowPageProvideSuggestions',
   EXPERIENCE_WOW_PAGE_SEND_MAIL_FOR_BECOMING_COCREATOR = 'experienceWowPageSendMailForBecomingCocreator',
@@ -532,7 +525,7 @@ export enum EFeatures {
   MY_ANALYTICS_VIEW_MY_LEARNING_POINTS = 'myAnalyticsViewMyLearningPoints',
   MY_ANALYTICS_VIEW_BADGES = 'myAnalyticsViewBadges',
   MY_ANALYTICS_VIEW_TIME_SPENT_BY_USER = 'myAnalyticsViewTimeSpentByUser',
-  MY_ANALYTICS_VIEW_AVERAGE_MINUTES_ON_LEX = 'myAnalyticsViewAverageMinutesOnLex',
+  MY_ANALYTICS_VIEW_AVERAGE_MINUTES_ON_Wingspan = 'myAnalyticsViewAverageMinutesOnWingspan',
   MY_ANALYTICS_VIEW_AVERAGE_MINUTES_ACROSS_DIMENSIONS = 'myAnalyticsViewAverageMinutesAcrossDimensions',
   MY_ANALYTICS_VIEW_PERCENTAGE_TIME_SPENT_BY_USER = 'myAnalyticsViewPercentageTimeSpentByUser',
   MY_ANALYTICS_VIEW_PERCENTAGE_TIME_SPENT_BY_INFOSCIONS = 'myAnalyticsViewPercentageTimeSpentByInfoscions',

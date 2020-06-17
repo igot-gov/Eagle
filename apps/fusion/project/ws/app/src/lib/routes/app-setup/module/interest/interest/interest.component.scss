@@ -19,7 +19,7 @@
 }
 
 .item-icon {
-      $icon-size: 20px;
+      $icon-size: 15px;
       width: $icon-size;
       height: $icon-size;
       font-size: $icon-size;
@@ -97,17 +97,16 @@
     display: block;
   }
 
-.tnc-bottom-navbar {
-    // margin: 24px 0;
+  .tnc-bottom-navbar {
+      margin: 24px 0;
     position: absolute;
-    right: 3%;
-    margin: 10px 0;
-    bottom: -55px;
+    right: 5%;
 }
 
 .hide{
   visibility: hidden;
 }
+
 .show {
   visibility: visible;
 }

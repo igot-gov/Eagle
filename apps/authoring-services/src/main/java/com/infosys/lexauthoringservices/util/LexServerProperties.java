@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.util;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -36,6 +33,34 @@ public class LexServerProperties {
 	@Value("${email.service.url}")
 	private String emailServiceUrl;
 	
+	@Value("${pid.service.ip}")
+	private String pidIp;
+	
+	@Value("${pid.service.port}")
+	private String pidPort;
+	
+	@Value("${contentUrl.part}")
+	private String contentUrlPart;
+	
+	@Value("${infosys.lex.core.ip}")
+	private String lexCoreIp;
+
+	public String getLexCoreIp() {
+		return lexCoreIp;
+	}
+	
+	public String getContentUrlPart() {
+		return contentUrlPart;
+	}
+	
+	public String getPidIp() {
+		return pidIp;
+	}
+
+	public String getPidPort() {
+		return pidPort;
+	}
+
 	public String getFeatureIdPrefix() {
 		return featureIdPrefix;
 	}

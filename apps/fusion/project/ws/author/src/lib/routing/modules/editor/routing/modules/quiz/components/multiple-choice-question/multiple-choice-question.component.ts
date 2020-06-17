@@ -9,7 +9,7 @@ import {
   FormControl,
 } from '@angular/forms'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-import { MatSnackBar } from '@angular/material/snack-bar'
+import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar'
 import { debounceTime, map } from 'rxjs/operators'
 import { Observable, Subscription } from 'rxjs'
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout'
@@ -33,9 +33,11 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges, OnDes
   @Input() submitPressed!: boolean
   @Input() currentId = ''
   @Input() showHint!: boolean
+  selectedCount = 0
   selectedQuiz?: McqQuiz
   quizForm!: FormGroup
   mcqOptions: any = {}
+  snackbarRef?: MatSnackBarRef<NotificationComponent>
   contentLoaded = false
   showDeleteForCard?: number
   identifier = ''
@@ -120,6 +122,12 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges, OnDes
         }
       }
       this.assignForm()
+      this.selectedCount = 0
+      this.selectedQuiz.options.forEach(op => {
+        if (op.isCorrect) {
+          this.selectedCount = this.selectedCount + 1
+        }
+      })
     }
   }
 
@@ -164,6 +172,26 @@ export class MultipleChoiceQuestionComponent implements OnInit, OnChanges, OnDes
         }
       }
     })
+  }
+
+  onSelected($event: any) {
+    this.selectedCount = $event.checked ? this.selectedCount + 1 : this.selectedCount - 1
+    if (
+      this.selectedQuiz &&
+      this.selectedQuiz.options &&
+      this.selectedCount === this.selectedQuiz.options.length
+    ) {
+      this.snackbarRef = this.snackBar.openFromComponent(NotificationComponent, {
+        data: {
+          type: Notify.MCQ_ALL_OPTIONS_CORRECT,
+        },
+        duration: NOTIFICATION_TIME * 500,
+      })
+    } else {
+      if (this.snackbarRef) {
+        this.snackbarRef.dismiss()
+      }
+    }
   }
 
   createOptionControl(optionObj: Option) {

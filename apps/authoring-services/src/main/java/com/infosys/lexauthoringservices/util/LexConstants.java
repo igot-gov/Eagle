@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.util;
 
 public class LexConstants {
@@ -20,11 +17,11 @@ public class LexConstants {
 	}
 
 	public static enum EsIndex {
-		sunbird("searchindex"), sunbirdDataAudit("sunbirddataaudit"), bodhi("lexcontentindex"),
-		staging("lexcontentindex_14"), ekstep("ekstepcontentindex"), lexTopic("lex_topic"),
-		lex_user_feedback("lex_feedback"), authoring_tool("lexcontentindex_authoring_tool"), skills("lexskillsindex"),
-		unit("lexunitindex"), authoring_tool_bkup("lexcontentindex_authoring_tool_backup_23_4"), client("clientindex"),
-		bodhi_ui("bodhi_ui_index"), searchIndex("lexsearchall"), mandatory_fields("mandatory_fields");
+		sunbird("searchindex"), sunbirdDataAudit("sunbirddataaudit"), bodhi("contentindex"),
+		staging("contentindex_14"), ek_step("_contentindex"), Topic("_topic"),
+		lex_user_feedback("_feedback"), authoring_tool("contentindex_authoring_tool"), skills("skillsindex"),
+		unit("unitindex"), authoring_tool_bkup("contentindex_authoring_tool_backup_23_4"), client("clientindex"),
+		bodhi_ui("bodhi_ui_index"), searchIndex("searchall"), mandatory_fields("mandatory_fields");
 
 		private String indexName;
 
@@ -55,7 +52,7 @@ public class LexConstants {
 	}
 
 	public static enum Status {
-		Draft("Draft"), Live("Live"), InReview("InReview"), Reviewed("Reviewed"), Processing("Processing");
+		Draft("Draft"), Live("Live"), InReview("InReview"), Reviewed("Reviewed"), Processing("Processing"),Deleted("Deleted"),Expired("Expired"),MarkedForDeletion("MarkedForDeletion"),UnPublish("Unpublished");
 
 		private String status;
 
@@ -70,7 +67,8 @@ public class LexConstants {
 
 	public static enum ContentType {
 		LearningPath("Learning Path"), Course("Course"), Collection("Collection"), Resource("Resource"),
-		KnowledgeArtifact("Knowledge Artifact"), LeadershipReport("LeadershipReport");
+		KnowledgeArtifact("Knowledge Artifact"), LeadershipReport("LeadershipReport"),
+		KnowledgeBoard("Knowledge Board"), Channel("Channel"),LearningJourney("Learning Journey");
 
 		private String indexName;
 
@@ -97,7 +95,7 @@ public class LexConstants {
 		}
 	}
 
-	public static final String MARKED_FOR_DELETION = "markedForDeletion";
+	public static final String MARKED_FOR_DELETION = "Marked For Deletion";
 	public static final String SUB_FEATURE = "subFeature";
 	public static final String VERSION_KEY = "versionKey";
 	public static final String EXCLUSIONS = "exclusions";
@@ -116,8 +114,11 @@ public class LexConstants {
 	public static final String MODE = "mode";
 	public static final String DATE = "date";
 	public static final String ACTOR = "actor";
+	public static final String EDITORS = "editors";
+	public static final String PRICE = "price";
 	public static final String AUTHOR = "author";
 	public static final String PLAYLIST = "Playlist";
+	public static final String K_BOARD = "Knowledge Board";
 	public static final String OPERATION = "operation";
 	public static final String ACCESS_PATHS = "accessPaths";
 	public static final String COMBINED_ACCESS_PATHS = "combinedAccessPaths";
@@ -143,9 +144,9 @@ public class LexConstants {
 	public static final String TAG = "tag";
 	public static final String ETA_TRACK = "etaTrack";
 	public static final String LEARNING_TRACK = "learningTrack";
-	public static final String LEX = "Lex";
+	public static final String LEX = "rootOrg";
 	public static final String EDIT = "edit";
-	public static final String LEX_URL = "https://lex.infosysapps.com";
+	public static final String LEX_URL = "https://";
 	public static final String DRAFT = "Draft";
 	public static final String LIVE = "Live";
 	public static final String INDEX = "index";
@@ -153,6 +154,8 @@ public class LexConstants {
 	public static final String COMMENTS = "comments";
 	public static final String PLAYGROUND_RESOURCES = "playgroundResources";
 	public static final String IDENTIFIER = "identifier";
+	public static final String GROUP = "group";
+	public static final String ROLES = "roles";
 	public static final String ISSTANDALONE = "isStandAlone";
 	public static final String NAME = "name";
 	public static final String LEARNING_OBJECTIVE = "learningObjective";
@@ -234,6 +237,8 @@ public class LexConstants {
 	public static final String ORDER = "order";
 	public static final String EXTERNAL = "External";
 	public static final String IMG_SUFFIX = ".img";
+	public static final String AUTHORING_DISABLED = "authoringDisabled";
+	public static final String META_EDIT_DISABLED = "isMetaEditingDisabled";
 	public static final String NODE = "node";
 	public static final String PARENT = "parent";
 	public static final String CHILD = "child";
@@ -271,7 +276,20 @@ public class LexConstants {
 	public static final String LAST_PUBLISHED_ON = "lastPublishedOn";
 	public static final String SIZE = "size";
 	public static final String TRANSCODING = "transcoding";
+	public static final String MS_ARTIFACT_DETAILS = "msArtifactDetails";
+	public static final String VIDEO_ID = "videoId";
+	public static final String CHANNEL_ID = "channelId";
 	public static final String TRANSCODE_STATUS = "status";
 	public static final String RETRYCOUNT = "retryCount";
 	public static final String TRANSCODED_ON = "lastTranscodedOn";
+	public static final String DIMENSION = "Dimension";
+	public static final String OFFERING_MODE = "Offering Mode";
+	public static final String CATEGORY_TYPE = "categoryType";
+	public static final String REGION = "region";
+	public static final String RECOREGION = "recoRegion";
+	public static final String LABELS = "labels";
+	public static final String REASON = "reason";
+	public static final String CHILDREN_CLASSIFIERS = "childrenClassifiers";
+	public static final String ADDED_ON = "addedOn";
+	public static final String HAS_ASSESSMENT = "hasAssessment";
 }

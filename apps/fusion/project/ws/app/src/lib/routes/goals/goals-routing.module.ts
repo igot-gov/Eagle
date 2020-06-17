@@ -89,7 +89,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'custom',
+        redirectTo: 'common',
       },
       {
         path: 'common',
@@ -121,12 +121,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [
-    GoalsUserResolve,
-    GoalsCommonResolve,
-    GoalsOthersResolve,
-    GoalTrackResolve,
-    GoalsPendingResolve,
-  ],
+  providers: [GoalsUserResolve, GoalsCommonResolve, GoalsOthersResolve, GoalTrackResolve, GoalsPendingResolve],
 })
-export class GoalsRoutingModule {}
+export class GoalsRoutingModule { }

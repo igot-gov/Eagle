@@ -1,4 +1,4 @@
-<label id="example-radio-group-label">Select the reason for your action</label>
+<label id="example-radio-group-label">Select the reason for rejecting the post</label>
 <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="selectedType">
   <mat-radio-button class="example-radio-button" *ngFor="let flagType of flagTypes" [value]="flagType"
     (change)="changeButtonStatus()">

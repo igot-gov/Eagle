@@ -25,7 +25,6 @@ export class AchievementsComponent implements OnInit, OnDestroy {
       q: 'all',
       f: JSON.stringify({
         contentType: ['Resource'],
-        resourceType: ['Certification'],
       }),
     },
   }
@@ -55,18 +54,6 @@ export class AchievementsComponent implements OnInit, OnDestroy {
                 f: JSON.stringify({
                   contentType: ['Resource'],
                   resourceType: ['Assessment'],
-                }),
-              },
-            }
-          }
-          if (this.achievementType === 'certificate') {
-            this.redirectUrl = {
-              path: '/app/search/learning',
-              qParams: {
-                q: 'all',
-                f: JSON.stringify({
-                  contentType: ['Resource'],
-                  resourceType: ['Certification'],
                 }),
               },
             }

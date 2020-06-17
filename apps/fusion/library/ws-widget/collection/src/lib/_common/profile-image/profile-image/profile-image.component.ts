@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { UserMiniProfileService } from '../../../mini-profile/user-mini-profile.service'
-import { NsMiniProfile } from '../../../mini-profile/mini-profile.model'
 
 @Component({
   selector: 'ws-widget-profile-image',
@@ -14,7 +12,7 @@ export class ProfileImageComponent implements OnInit {
   shortName = ''
   imageUrl: string | null = null
   fetchingData = true
-  constructor(private miniProfileSvc: UserMiniProfileService) { }
+  constructor() { }
 
   ngOnInit() {
 
@@ -24,17 +22,7 @@ export class ProfileImageComponent implements OnInit {
     } else {
       this.shortName = ''
     }
-    if (this.userId) {
-      this.miniProfileSvc.viewMiniProfile(this.userId).subscribe(
-        (response: NsMiniProfile.IMiniProfileData) => {
-          this.fetchingData = false
-          this.imageUrl = response.profile_image ? response.profile_image : null
-        },
-        _ => {
-          this.fetchingData = false
-        },
-      )
-    }
+
   }
 
 }

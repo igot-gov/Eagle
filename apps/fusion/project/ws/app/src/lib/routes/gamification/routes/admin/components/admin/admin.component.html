@@ -101,13 +101,9 @@
         </h4>
       </div>
       <div class="margin-left-m margin-top-l margin-bottom-l">
-        <a mat-raised-button type="button" color="primary" i18n (click)="updatePoints(leaderBoardData)">
-          Approve
-        </a>
-      </div>
-      <div class="margin-left-m margin-top-l margin-bottom-l">
-        <a mat-raised-button type="button" color="primary" i18n (click)="exportToExcel(leaderBoardData)">
-          Download
+        <a mat-raised-button type="button" color="primary" i18n
+          (click)="updatePoints(leaderBoardData);exportToExcel(leaderBoardData)">
+          Save
         </a>
       </div>
     </div>
@@ -226,7 +222,7 @@
           <section class="item-container flex">
             <section class="width-1-10 flex flex-column flex-center">
               <div class="flex flex-column flex-between">
-                <div class="mat-body-2">{{ leaderboardItem.starsId }}</div>
+                <div class="mat-body-2">{{ leaderboardItem.UserSourceSystemId }}</div>
               </div>
             </section>
             <section class="width-1-10 margin-left-m flex-grow-1 flex flex-column flex-center">
@@ -318,7 +314,7 @@
             </section>
             <section class="width-1-10 flex flex-column flex-center">
               <div class="flex flex-column flex-between">
-                <input class="border" matInput name="reason+'i'" [(ngModel)]="leaderboardItem.remark"
+                <input class="border" matInput name="reason+'i'" [(ngModel)]="leaderboardItem.reason"
                   autocomplete="off" />
               </div>
             </section>
@@ -340,6 +336,3 @@
     </section>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-<input type="hidden" i18n-value="Toast msg after successfully saving data" value="Points Saved Successfully"
-  #successToast />

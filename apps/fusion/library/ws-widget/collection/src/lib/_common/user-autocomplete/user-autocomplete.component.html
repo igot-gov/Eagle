@@ -21,17 +21,7 @@
           [userName]="autocompleteUser.first_name + ' ' + autocompleteUser.last_name" [imageType]="'name-initial'">
         </ws-widget-user-image>
         <div class="ml-3 width-expand">
-          <div class="flex flex-between">
           <div>{{ autocompleteUser.first_name }} {{ autocompleteUser.last_name }}</div>
-            <div>
-              <span class="pl-1 ws-mat-primary-text" *ngIf="rolesId && autocompleteUser.hasRole">
-                <mat-icon>check_circle</mat-icon>
-              </span>
-              <span class="pl-1 ws-mat-primary-text" *ngIf="rolesId && !autocompleteUser.hasRole">
-                <mat-icon>add_circle</mat-icon>
-              </span>
-            </div>
-          </div>
           <div class="mat-caption text-truncate">
             {{ autocompleteUser.email }}
             <ng-container *ngIf="autocompleteUser.department_name">

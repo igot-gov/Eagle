@@ -3,7 +3,7 @@
     <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
 
   </mat-toolbar>
-  <span class="center-align margin-remove ws-mat-primary-text mat-title" *ngIf="isPartOfFirstTimeSetupV2">
+  <span class="center-align py-2 ws-mat-primary-text" *ngIf="isPartOfFirstTimeSetupV2">
     <span> {{appName}} </span>
     <span i18n> is built around you. Find out what´s in it for you:
     </span>
@@ -24,7 +24,7 @@
 
 </div>
 <div class="tnc-bottom-navbar" *ngIf="showNextbutton">
-  <a type="button" color="primary" mat-flat-button routerLink="/app/setup/home/interest" (click)="raiseTelemetry()" i18n>
+  <a type="button" color="primary" mat-flat-button routerLink="/app/setup/home/interest" i18n>
     Next
   </a>
 </div>

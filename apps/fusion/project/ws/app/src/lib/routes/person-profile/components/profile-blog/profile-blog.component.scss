@@ -6,26 +6,28 @@
     'Open Sans', 'Helvetica Neue', sans-serif !important;
 }
 
+.socialText {
+  color: #9baebd;
+}
+
 .navigationbutton {
   border-radius: 8px;
-  margin-right: 0.25rem !important;
-}
-
-.inheritHeight {
-  min-height: inherit;
-}
-
-.blog-card {
-  min-height: 280px;
 }
 
 .borderbottom {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
+.arrow_bottom {
+  position: absolute;
+  bottom: 0px;
+  right: 15px;
+}
+
 .fetching {
   color: #9baebd !important;
 }
+
 
 .font-weight-bold {
   font-weight: 500 !important;
@@ -34,3 +36,7 @@
 .socialRow {
   margin: 10px 0;
 }
+
+// .blogHeight{
+//   height: 480px;
+// }

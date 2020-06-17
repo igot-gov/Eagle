@@ -2,23 +2,62 @@
 @import 'ws-vars';
 
 
-.searchBorder {
-  border: 1px solid #cecece !important;
-  width:40%;
-  height:1rem;
-  @include breakpoint-xs {
-      width:96%;
+
+mat-card{
+  box-shadow: 0 10px 20px 10px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23) !important;
+  min-height: 40rem !important;
+   @include breakpoint-lt-m {
+      width: 100%;
+      margin:  1em 12em 2em -1em;
     }
 
 }
-:host ::ng-deep .searchBox {
+
+:host ::ng-deep .searchStyle {
   .mat-form-field-infix {
-    width:100%;
+    padding-left:10px;
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    width: 180px;
+    border-top: 0;
+    padding-top: 1em;
   }
 }
 
-.ws-mat-primary-bolder-hover {
-  border: 1px solid #cecece;
+
+.searchTerm {
+    border-radius: 0.5rem;
+    border: 1px solid #cecece !important;
+    height: 3em;
+    width: 26em;
+     @include breakpoint-xs {
+       margin-left: 0em;
+       margin-top:1em;
+       width:100%;
+    }
+    @include breakpoint-m {
+       margin-left: 0em;
+       margin-top:0em;
+       width:18em;
+    }
+    @include breakpoint-s {
+       margin-left: 0em;
+       margin-top:0em;
+       width:20em;
+    }
+}
+
+.privilagebutton{
+
+  width: 344px !important;
+  border-radius: 0.8rem!important;
+  border: 1px solid  #c0bebe;
+}
+.privilagebutton:hover{
+  border: 1px solid  #005f87;
+
 }
 
 

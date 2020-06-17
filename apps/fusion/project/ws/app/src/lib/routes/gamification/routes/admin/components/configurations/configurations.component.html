@@ -20,17 +20,17 @@
     <section class="margin-top-l margin-bottom-l">
       <mat-form-field class=" margin-left-m">
         <mat-select [value]="sprintSelected" (selectionChange)="sprintChanged($event)">
-          <mat-option value="FY">
+          <mat-option value="fy">
             <a mat-line>
               <ng-container>FY&nbsp;&nbsp;</ng-container>
             </a>
           </mat-option>
-          <mat-option value="H1">
+          <mat-option value="h1">
             <a mat-line>
               <ng-container>H1&nbsp;&nbsp;</ng-container>
             </a>
           </mat-option>
-          <mat-option value="H2">
+          <mat-option value="h2">
             <a mat-line>
               <ng-container>H2&nbsp;&nbsp;</ng-container>
             </a>
@@ -74,11 +74,11 @@
           <section class="item-container flex">
             <section class="width flex flex-column flex-center">
               <div class="flex flex-column flex-between">
-                <div class="mat-body">{{ key }}</div>
+                <div class="mat-body-2">{{ key }}</div>
               </div>
             </section>
             <section class="flex flex-column flex-center">
-              <div class="flex flex-column flex-between align-text">
+              <div class="flex flex-column flex-between">
                 <input class="border" matInput type="number" name="points+'i'" [(ngModel)]="col1[key]"
                   autocomplete="off" />
               </div>
@@ -86,19 +86,17 @@
           </section>
         </section>
         <section *ngIf="col2">
-          <div class="mat-headline margin-top-l" color="primary" i18n>
-            Guild Count</div>
-          <section class="align" *ngFor="let item of objectKeys(col2); let i=index">
-            <div class="p-4 mat-body-2" color="primary" i18n>
+          <section class="p-4 align" *ngFor="let item of objectKeys(col2); let i=index">
+            <div class="headings mat-headline ws-mat-primary-text mb-10 " color="primary" i18n>
               {{item}}</div>
             <section class="p-4 item-container flex" *ngFor="let key of objectKeys(col2[item]); let i=index">
               <section class="width flex flex-column flex-center">
                 <div class="flex flex-column flex-between">
-                  <div class="mat-body">{{ key }}</div>
+                  <div class="mat-body-2">{{ key }}</div>
                 </div>
               </section>
               <section class="width-1-10 flex flex-column flex-center">
-                <div class="flex flex-column flex-between align-text">
+                <div class="flex flex-column flex-between">
                   <input class="border" matInput type="number" name="points+'i'" [(ngModel)]="col2[item][key]"
                     autocomplete="off" />
                 </div>
@@ -106,27 +104,7 @@
             </section>
           </section>
         </section>
-        <section *ngIf="col2">
-          <div class="mat-headline margin-top-l" color="primary" i18n>
-            Actual Guild Count</div>
-          <section class="align" *ngFor="let item of objectKeys(col2); let i=index">
-            <div class="p-4 mat-body-2" color="primary" i18n>
-              {{item}}</div>
-            <section class="p-4 item-container flex" *ngFor="let key of objectKeys(col2[item]); let i=index">
-              <section class="width flex flex-column flex-center">
-                <div class="flex flex-column flex-between">
-                  <div class="mat-body">{{ key }}</div>
-                </div>
-              </section>
-              <section class="width-1-10 flex flex-column flex-center">
-                <div class="flex flex-column flex-between align-text">
-                  <input class="border" matInput type="number" name="points+'i'" [(ngModel)]="col2[item][key]"
-                    autocomplete="off" />
-                </div>
-              </section>
-            </section>
-          </section>
-        </section>
+
         <mat-divider></mat-divider>
       </mat-card>
 

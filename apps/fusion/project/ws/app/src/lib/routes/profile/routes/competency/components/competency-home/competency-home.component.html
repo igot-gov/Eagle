@@ -17,14 +17,5 @@
       Assessments
     </span>
   </a>
-  <a *ngIf="enabledTab?.certifications?.enabled" mat-tab-link [routerLink]="'/app/profile/competency/certificate'"
-    routerLinkActive #rlaCertification="routerLinkActive" [active]="rlaCertification.isActive">
-    <mat-icon>
-      card_membership
-    </mat-icon>
-    <span class="margin-left-m mat-body-strong" i18n>
-      Certifications
-    </span>
-  </a>
 </nav>
 <router-outlet></router-outlet>

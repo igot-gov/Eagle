@@ -2,8 +2,8 @@
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span i18n="page title: playlist" class="margin-left-xs">Playlist</span>
 </mat-toolbar>
-<div *ngIf="!error; else errorPage" class="max-w-4xl mx-auto p-4 mt-6">
-  <a name="accept-reject-link-playlist-home" routerLink="/app/playlist/notification" *ngIf="numNotifications">
+<div *ngIf="!error; else errorPage" class="max-w-3xl mx-auto p-4 mt-6">
+  <a  name="accept-reject-link-playlist-home" routerLink="/app/playlist/notification" *ngIf="numNotifications">
     <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-xl">
       <mat-icon color="accent" class="margin-left-s">notifications</mat-icon>
       <p class="margin-left-xs margin-remove-bottom" i18n>
@@ -17,22 +17,20 @@
   </a>
   <mat-form-field class="width-1-1" appearance="fill" floatLabel="never">
     <mat-icon matPrefix>search</mat-icon>
-    <mat-label i18n *ngIf="type === EPlaylistTypes.ME">
+    <mat-label  i18n *ngIf="type === EPlaylistTypes.ME">
       Search for your playlists
     </mat-label>
     <mat-label i18n *ngIf="type === EPlaylistTypes.SHARED">
       Search for playlists shared with you
     </mat-label>
-    <input name="search-playlists-input-playlist-home" matInput [(ngModel)]="searchPlaylistQuery" />
+    <input name="search-playlists-input-playlist-home"  matInput [(ngModel)]="searchPlaylistQuery" />
   </mat-form-field>
   <nav mat-tab-nav-bar>
-    <a name="my-playlists-link-playlist-home" mat-tab-link routerLink="/app/playlist/me" routerLinkActive
-      #me="routerLinkActive" [active]="me.isActive"
+    <a name="my-playlists-link-playlist-home" mat-tab-link routerLink="/app/playlist/me" routerLinkActive #me="routerLinkActive" [active]="me.isActive"
       [ngClass]="{ 'ws-mat-primary-text font-weight-500': me.isActive }">MY PLAYLISTS
     </a>
-    <a name="shared-with-me-link-playlist-home" mat-tab-link *ngIf="isShareEnabled" routerLink="/app/playlist/shared"
-      routerLinkActive #shared="routerLinkActive" [active]="shared.isActive"
-      [ngClass]="{ 'ws-mat-primary-text font-weight-500': shared.isActive }">SHARED WITH ME
+    <a name="shared-with-me-link-playlist-home" mat-tab-link *ngIf="isShareEnabled" routerLink="/app/playlist/shared" routerLinkActive #shared="routerLinkActive"
+      [active]="shared.isActive" [ngClass]="{ 'ws-mat-primary-text font-weight-500': shared.isActive }">SHARED WITH ME
     </a>
   </nav>
   <router-outlet></router-outlet>
@@ -51,8 +49,8 @@
 </div>
 
 <ng-template #create>
-  <div class="w-full sm:w-1/2 lg:w-1/3 mt-2 mb-3">
-    <section class="flex justify-center items-center align-center px-2 ">
+  <div class="w-1/2 sm:w-1/3">
+    <section class="px-2 mt-2 mb-3">
       <a routerLink="/app/playlist/create">
         <div class="create-new-card flex flex-middle flex-center">
           <div matRipple
@@ -60,7 +58,7 @@
             <span class="create-icon-text">+</span>
           </div>
         </div>
-        <h3 class="mat-subheading-2 font-weight-500 margin-top-xxs margin-remove-bottom" i18n>
+        <h3 class="mat-subheading-2 font-weight-500 margin-top-xxs margin-bottom-m" i18n>
           Create New
         </h3>
       </a>
@@ -70,7 +68,7 @@
 
 <ng-template #listing let-mode="mode">
   <ng-container *ngIf="playlists | filterPlaylist: searchPlaylistQuery as filteredPlaylists; else emptyPlaylist">
-    <ws-app-playlist-card [playlist]="playlist" class="w-full sm:w-1/2 lg:w-1/3 mt-2 mb-3"
+    <ws-app-playlist-card [playlist]="playlist" class="w-1/2 sm:w-1/3 mt-2 mb-3"
       *ngFor="let playlist of filteredPlaylists; let l = count">
     </ws-app-playlist-card>
   </ng-container>

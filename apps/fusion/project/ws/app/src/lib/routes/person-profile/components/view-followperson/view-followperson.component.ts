@@ -15,7 +15,6 @@ export class ViewFollowpersonComponent implements OnInit {
   @Input() wid = ''
   @Input() name = ''
   @Input() userFollows = false
-  @Input() currentUserProfile = false
   emailId = ''
   userName = ''
   firstName = ''

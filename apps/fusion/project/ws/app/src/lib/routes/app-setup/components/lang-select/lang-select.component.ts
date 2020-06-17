@@ -4,7 +4,6 @@ import {
   ConfigurationsService,
   NsInstanceConfig,
   UserPreferenceService,
-  EventService,
 } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { FormControl, Validators } from '@angular/forms'
 
@@ -18,7 +17,6 @@ export class LangSelectComponent implements OnInit {
     private configSvc: ConfigurationsService,
     private router: Router,
     private userPrefSvc: UserPreferenceService,
-    private eventSvc: EventService
   ) {}
   userName = ''
   selectedLang = ''
@@ -100,20 +98,8 @@ export class LangSelectComponent implements OnInit {
     if (this.configSvc.userUrl) {
       refAppend = `?ref=${encodeURIComponent(this.configSvc.userUrl)}`
     }
-    this.selectedLang === '' ? this.raiseTelemetry('en') : this.raiseTelemetry(this.selectedLang)
     this.selectedLang === ''
       ? this.router.navigateByUrl('/app/setup/home/tnc')
       : location.assign(`${location.origin}/${this.selectedLang}/app/setup/home/tnc${refAppend}`)
   }
-
-  async raiseTelemetry(lang: string) {
-      this.eventSvc.raiseInteractTelemetry('click', 'next', {
-        contentType: 'button',
-        context: {
-          pageSection: 'language',
-        },
-        selectedLanguage: lang,
-      })
-  }
-
 }

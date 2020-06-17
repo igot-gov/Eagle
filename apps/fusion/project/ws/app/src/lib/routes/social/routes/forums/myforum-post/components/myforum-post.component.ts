@@ -69,23 +69,15 @@ export class MyforumPostComponent implements OnInit {
 
     this.timelineFetchStatus = 'fetching'
     this.fetchMyPost()
-    this.setType()
-  }
-  setType() {
-    this._eventEmitter.predefinedFilterSelected.subscribe(datax => {
-      //  console.log("Received type is " + datax)
-      this.myPostTimelineReq.type = datax
-      this.myPostTimelineReq.pgNo = -1
-      this.timelineFetchStatus = 'fetching'
-      this.fetchMyPost()
-    })
   }
 
   fetchMyPost() {
     //  console.log('The mY post FETCH TIMELINE IS CALLED')
-    if (this.timelineFetchStatus === 'done') {
-      return
-    }
+    // if (this.timelineFetchStatus === 'done') {
+    //   return
+    // }
+
+    this.timelineFetchStatus = 'fetching';
 
     (this.myPostTimelineReq.pgNo as number) += 1
 

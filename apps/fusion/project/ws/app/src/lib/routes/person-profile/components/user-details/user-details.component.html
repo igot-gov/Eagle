@@ -1,35 +1,10 @@
-<div class="userdetails my-2" *ngIf="fetchStatus === 'done'">
-  <mat-card class="transparentcard achievementCard mat-elevation-z0 padding-remove"
-    [ngClass]="{'hiddenClass': !(isBadgesEnabled ? badgesEarnedPresent : false)}">
-    <mat-card-content>
-      <mat-divider class="divider"></mat-divider>
-      <h2 class="mat-h2 font-weight-bold font-family margin-remove-bottom  pt-4" i18n>Achievements</h2>
-      <div class="badgesSkills flex-between py-3">
-        <mat-card class="boxshadowcard achievementCard card mt-1 mat-card mat-elevation-z0 w-full"
-          *ngIf="isBadgesEnabled">
-          <mat-card-content>
-            <ng-container *ngIf="wid">
-              <ws-app-badge-earned [wid]="wid" [name]="name" (badgeCount)="checkBadgeEnabled($event)">
-              </ws-app-badge-earned>
-            </ng-container>
-          </mat-card-content>
-        </mat-card>
-        <!-- <div class="vertical-divider"></div> -->
-        <!-- <ng-container *ngIf="wid">
-          <div class="skillcard">
-            <ws-app-person-skills [wid]="wid"></ws-app-person-skills>
-          </div>
-        </ng-container> -->
-      </div>
-    </mat-card-content>
-  </mat-card>
+<div class="userdetails my-2">
   <mat-card class="transparentcard padding-remove mat-elevation-z0">
     <mat-card-content>
       <mat-divider class="divider"></mat-divider>
       <h2 class="mat-h2 font-weight-bold font-family margin-remove-bottom pt-4" i18n>Social</h2>
-      <div class=" pb-3">
-        <mat-card class="boxshadowcard kbcard mat-elevation-z0" [ngClass]="{'hiddenClass': !kbContentPresent}"
-          *ngIf="knowledgeBoardEnabled">
+      <div class="pt-3 pb-3">
+        <mat-card class="boxshadowcard kbcard mat-elevation-z0">
           <mat-card-content class="heightgroup">
             <div class="flex flex-between">
               <p class="font-family font-weight-bold margin-remove-bottom mat-h3 p-2 px-2" i18n>Boards {{name}}'s
@@ -37,21 +12,18 @@
               </p>
               <div *ngIf="!kbFetchingDone" class="loading ws-mat-primary-border-bottom-bolder"></div>
             </div>
-            <!-- <mat-divider class="divider"></mat-divider> -->
-            <ws-app-user-kb [wid]="wid" [name]="name" (count)="checkKbEnabled($event)"
-              (fetching)="fetchingKbDone($event)">
+            <ws-app-user-kb [wid]="wid" [name]="name" *ngIf="knowledgeBoardEnabled" (fetching)="fetchingKbDone($event)">
             </ws-app-user-kb>
           </mat-card-content>
         </mat-card>
-        <mat-card class="mt-4 boxshadowcard playlistCard mat-elevation-z0"
-          [ngClass]="{'hiddenClass': !playlistContentPresent}" *ngIf="playlistEnabled">
+        <mat-card class="mt-4 boxshadowcard playlistCard mat-elevation-z0">
           <mat-card-content class="heightgroup">
             <div class="flex flex-between">
               <p class="font-family font-weight-bold margin-remove-bottom mat-h3 p-2 px-2" i18n>Playlists</p>
               <div *ngIf="!playlistsFetchingDone" class="loading ws-mat-primary-border-bottom-bolder"></div>
             </div>
-            <!-- <mat-divider class="divider"></mat-divider> -->
-            <ws-app-user-playlist [wid]="wid" [name]="name" (count)="checkPlaylistEnabled($event)"
+
+            <ws-app-user-playlist [wid]="wid" [name]="name" *ngIf="playlistEnabled"
               (fetching)="fetchingPlaylistDone($event)">
             </ws-app-user-playlist>
           </mat-card-content>
@@ -69,9 +41,7 @@
                 </div>
               </div>
               <mat-divider class="divider"></mat-divider>
-              <ws-app-follow-list *ngIf="currentUserFollowers.length" [wid]="wid" [name]="name" [followers]="followers"
-                [currentUserfollowers]="currentUserFollowers">
-              </ws-app-follow-list>
+              <ws-app-follow-list [wid]="wid" [name]="name" [followers]="followers"></ws-app-follow-list>
             </mat-card-content>
           </mat-card>
           <mat-card class=" boxshadowcard mat-elevation-z0 tabgroupcard">
@@ -85,8 +55,7 @@
                 </div>
               </div>
               <mat-divider class="divider"></mat-divider>
-              <ws-app-following-list *ngIf="currentUserFollowers.length" [wid]="wid" [name]="name"
-                [following]="following" [currentUserfollowers]="currentUserFollowers">
+              <ws-app-following-list [wid]="wid" [name]="name" [following]="following">
               </ws-app-following-list>
             </mat-card-content>
           </mat-card>
@@ -96,14 +65,13 @@
   </mat-card>
   <mat-divider class="divider"></mat-divider>
   <mat-card class="transparentcard padding-remove mat-elevation-z0"
-    [ngClass]="{'hiddenClass': !((this.isBlogsEnabled && this.blogContentPresent) || (this.isAuthorEnabled
-  && this.authorContentPresent) || (this.isQnaEnabled && this.qnaContentPresent) || (this.isReviewEnabled && this.reviewContentPresent))}">
+    [ngClass]="{'hiddenClass': !isBlogContentPresent && !isQnaContentPresent && !authoredEnabled && !reviwedEnabled}">
     <mat-card-content>
       <h2 class="mat-h2 font-weight-bold font-family margin-remove-bottom" i18n>Contributions</h2>
       <div class="followercard flex-wrap">
         <div class="followercard  mt-4 w-full">
-          <mat-card class="boxshadowcard mat-elevation-z0 tabgroupcard heightCard width-expand"
-            [ngClass]="{'hiddenClass': !blogContentPresent}" *ngIf="isBlogsEnabled">
+          <mat-card class="boxshadowcard mat-elevation-z0 tabgroupcard   heightCard width-expand" *ngIf="isBlogsEnabled"
+            [ngClass]="{'hiddenClass': !isBlogContentPresent}">
             <mat-card-content class="heightgroup">
               <div class="flex flex-between px-2">
                 <p class="mat-h3 font-weight-bold margin-remove-bottom font-family" i18n>Blogs</p>
@@ -114,8 +82,8 @@
               </ws-app-profile-blog>
             </mat-card-content>
           </mat-card>
-          <mat-card class=" boxshadowcard mat-elevation-z0 tabgroupcard heightCard ml-6 width-expand"
-            [ngClass]="{'ml-6': isBlogsEnabled, 'hiddenClass': !qnaContentPresent}" *ngIf="isQnaEnabled">
+          <mat-card class=" boxshadowcard mat-elevation-z0 tabgroupcard heightCard ml-6" *ngIf="isQnaEnabled"
+            [ngClass]="{'hiddenClass': !isQnaContentPresent}">
             <mat-card-content class="heightgroup">
               <div class="flex flex-between px-2">
                 <p class="mat-h3 font-weight-bold margin-remove-bottom font-family" i18n>Q&A</p>
@@ -130,7 +98,7 @@
         </div>
         <div class="followercard  mt-4 w-full">
           <mat-card class="boxshadowcard mat-elevation-z0 tabgroupcard mb-6 width-expand"
-            [ngClass]="{'hiddenClass': !authorContentPresent}" *ngIf="isAuthorEnabled">
+            [ngClass]="{'hiddenClass': !authoredEnabled}">
             <mat-card-content class="heightgroup">
               <div class="flex flex-between px-2">
                 <p class="mat-h3 font-weight-bold margin-remove-bottom font-family" i18n>Content authored by
@@ -142,8 +110,8 @@
                 (fetching)="fetchingContentAuthored($event)"></ws-app-content-authored>
             </mat-card-content>
           </mat-card>
-          <mat-card class=" boxshadowcard mat-elevation-z0 tabgroupcard mb-6 width-expand"
-            [ngClass]="{'ml-6': isAuthorEnabled, 'hiddenClass': !reviewContentPresent}" *ngIf="isReviewEnabled">
+          <mat-card class=" boxshadowcard mat-elevation-z0 tabgroupcard ml-6 mb-6 width-expand"
+            [ngClass]="{'hiddenClass': !reviwedEnabled}">
             <mat-card-content class="heightgroup">
               <div class="flex flex-between px-2">
                 <p class="mat-h3 font-weight-bold margin-remove-bottom font-family" i18n>Content reviewd by
@@ -155,7 +123,10 @@
                 (fetching)="fetchingContentReviewed($event)"></ws-app-content-reviewed>
             </mat-card-content>
           </mat-card>
+
         </div>
+
+
       </div>
     </mat-card-content>
   </mat-card>

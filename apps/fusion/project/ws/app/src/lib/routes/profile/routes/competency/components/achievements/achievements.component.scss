@@ -8,10 +8,10 @@
   align-items: stretch;
 
   %assessment-add-card {
-    width: 349px;
+    width: 353px;
     margin: 4px 20px 12px 4px;
     box-sizing: border-box;
-    min-width: 349px;
+    min-width: 353px;
     padding: 0px;
     min-height: 150px;
   }
@@ -43,9 +43,7 @@
 }
 
 $description-line-count: 2;
-$description-height-size: 1.8rem;
-
-//height: 3.4rem;
+$description-height-size: 1.2em;
 
 .title-text {
   position: relative;

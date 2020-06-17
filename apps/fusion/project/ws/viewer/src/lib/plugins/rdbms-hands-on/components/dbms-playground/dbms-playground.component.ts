@@ -1,5 +1,6 @@
 import { Component, OnChanges, Input, ElementRef, ViewChild } from '@angular/core'
 import { RdbmsHandsOnService } from '../../rdbms-hands-on.service'
+import { NSRdbmsHandsOn } from '../../rdbms-hands-on.model'
 import { EventService } from '@ws-widget/utils'
 
 @Component({
@@ -26,7 +27,7 @@ export class DbmsPlaygroundComponent implements OnChanges {
     wrap: true,
   }
   userQuery = ''
-  executedResult: any = null
+  executedResult: NSRdbmsHandsOn.IRdbmsApiResponse | null = null
   executed = false
   errorMessage = ''
   loading = true
@@ -47,7 +48,7 @@ export class DbmsPlaygroundComponent implements OnChanges {
     this.executed = true
     this.dbmsSvc.playground(this.userQuery).subscribe(
       res => {
-        this.executedResult = res
+        this.executedResult = (res as unknown as any[])[0]
         this.executed = false
       },
       _err => {
@@ -89,22 +90,18 @@ export class DbmsPlaygroundComponent implements OnChanges {
   }
 
   startInputTimer() {
-    this.inputInterval = setInterval(
-      () => {
-        if (this.isInput) {
-          this.raiseInteractTelemetry('editor', 'codeinput')
-        }
-      },
-      2 * 60000)
+    this.inputInterval = setInterval(() => {
+      if (this.isInput) {
+        this.raiseInteractTelemetry('editor', 'codeinput')
+      }
+    },                               2 * 60000)
   }
   startClickTimer() {
-    this.clickInterval = setInterval(
-      () => {
-        if (this.isClick) {
-          this.raiseInteractTelemetry('editor', 'buttonclick')
-        }
-      },
-      2 * 60000)
+    this.clickInterval = setInterval(() => {
+      if (this.isClick) {
+        this.raiseInteractTelemetry('editor', 'buttonclick')
+      }
+    },                               2 * 60000)
   }
 
 }

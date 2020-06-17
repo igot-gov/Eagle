@@ -1,8 +1,7 @@
 import { ConfigurationsService } from '@ws-widget/utils'
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
-import { ContentProgressService } from '../../../../../library/ws-widget/collection/src/lib/_common/content-progress/content-progress.service'
+import { noop, Observable } from 'rxjs'
 import { NsContent } from '@ws-widget/collection'
 
 @Injectable({
@@ -15,11 +14,7 @@ export class ViewerUtilService {
   }
   downloadRegex = new RegExp(`(/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
   authoringBase = '/apis/authContent/'
-  constructor(
-    private http: HttpClient,
-    private configservice: ConfigurationsService,
-    private progressSvc: ContentProgressService,
-    ) { }
+  constructor(private http: HttpClient, private configservice: ConfigurationsService) { }
 
   async fetchManifestFile(url: string) {
     this.setS3Cookie(url)
@@ -41,9 +36,7 @@ export class ViewerUtilService {
   realTimeProgressUpdate(contentId: string, request: any) {
     this.http
       .post(`${this.API_ENDPOINTS.PROGRESS_UPDATE}/${contentId}`, request)
-      .subscribe((data: any) => {
-        this.progressSvc.updateProgressHash(data)
-      })
+      .subscribe(noop, noop)
   }
 
   getContent(contentId: string): Observable<NsContent.IContent> {

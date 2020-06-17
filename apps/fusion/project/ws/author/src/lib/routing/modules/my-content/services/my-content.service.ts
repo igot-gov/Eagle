@@ -31,7 +31,7 @@ export class MyContentService {
     private apiService: ApiService,
     private accessService: AccessControlService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   fetchContent(searchData: any): Observable<any> {
     return this.apiService
@@ -43,10 +43,10 @@ export class MyContentService {
     return isKnowledgeBoard
       ? this.apiService.delete(`${CONTENT_DELETE}/${id}/kb${this.accessService.orgRootOrgAsQuery}`)
       : this.apiService.post(`${CONTENT_DELETE}${this.accessService.orgRootOrgAsQuery}`, {
-          identifier: id,
-          author: this.accessService.userId,
-          isAdmin: this.accessService.hasRole(['editor', 'admin']),
-        })
+        identifier: id,
+        author: this.accessService.userId,
+        isAdmin: this.accessService.hasRole(['editor', 'admin']),
+      })
   }
 
   restoreContent(id: string): Observable<null> {
@@ -79,13 +79,13 @@ export class MyContentService {
             (requestObj[v as any] = content[v as keyof NSContent.IContentMeta]
               ? content[v as keyof NSContent.IContentMeta]
               : JSON.parse(
-                  JSON.stringify(
-                    this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                      content.contentType
-                      // tslint:disable-next-line: ter-computed-property-spacing
-                    ][0].value,
-                  ),
-                )),
+                JSON.stringify(
+                  this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+                    content.contentType
+                    // tslint:disable-next-line: ter-computed-property-spacing
+                  ][0].value,
+                ),
+              )),
         )
         requestObj = {
           ...requestObj,
@@ -117,16 +117,16 @@ export class MyContentService {
         locale: meta.locale ? meta.locale : this.accessService.locale,
       },
     }
-    if (this.accessService.rootOrg === 'Ford') {
+    if (this.accessService.rootOrg === 'client2') {
       if (meta.contentType === 'Knowledge Artifact') {
         try {
-          const userPath = `Ford/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
+          const userPath = `client2/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
           requestBody.content.accessPaths = userPath
         } catch {
-          requestBody.content.accessPaths = 'Ford'
+          requestBody.content.accessPaths = 'client2'
         }
       } else {
-        requestBody.content.accessPaths = 'Ford'
+        requestBody.content.accessPaths = 'client2'
       }
     }
     return this.apiService

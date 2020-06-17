@@ -27,18 +27,9 @@
               <ws-widget-btn-content-like [forPreview]="forPreview"
                 [widgetData]="audioData | pipePartialContent: ['identifier']">
               </ws-widget-btn-content-like>
-              <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="audioData">
-              </ws-widget-btn-content-share>
+              <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
               <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="
-              {
-                contentId: audioData?.identifier,
-                contentName: audioData?.name,
-                contentType: 'Resource',
-                mode: 'dialog',
-                isDisabled: forPreview
-              }">
-              </ws-widget-btn-playlist>
+              <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
               <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
               <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                 [widgetData]="audioData | pipePartialContent: ['identifier', 'name']">
@@ -65,21 +56,10 @@
               "></ws-widget-btn-content-download>
             <ws-widget-btn-content-like [widgetData]="audioData | pipePartialContent: ['identifier']">
             </ws-widget-btn-content-like>
-            <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="audioData">
-            </ws-widget-btn-content-share>
+            <ws-widget-btn-content-share [forPreview]="forPreview"></ws-widget-btn-content-share>
             <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-            <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="
-                          {
-                            contentId: audioData?.identifier,
-                            contentName: audioData?.name,
-                            contentType: 'Resource',
-                            mode: 'dialog',
-                            isDisabled: forPreview
-                          }">
-            </ws-widget-btn-playlist>
-            <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
-              [widgetData]="audioData | pipePartialContent: ['identifier', 'name']">
-            </ws-widget-btn-content-feedback-v2>
+            <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
+            <ws-widget-btn-content-feedback [forPreview]="forPreview"></ws-widget-btn-content-feedback>
           </div>
         </mat-card>
       </div>

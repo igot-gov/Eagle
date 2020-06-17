@@ -298,7 +298,7 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private tocSharedSvc: AppTocService,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   async ngOnInit() {
     this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
@@ -364,7 +364,7 @@ export class AppTocAnalyticsComponent implements OnInit, OnDestroy {
     if (this.analyticsData) {
       // unique users count
       this.analyticsData.uniqueParticipants.forEach((count: NsAnalytics.IActivityObj) => {
-        if (count.key === 'LEX') {
+        if (count.key === 'Wingspan') {
           this.uniqueUsers = count.uniqueCount
         }
       })

@@ -13,7 +13,6 @@ export class GoalHomeComponent implements OnInit {
   userName: string | undefined
   numNotifications = 0
   isShareEnabled = false
-  isCommonGoalEnabled = false
 
   goalFor = 'me'
 
@@ -29,9 +28,9 @@ export class GoalHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+
     if (this.configSvc.restrictedFeatures) {
       this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
-      this.isCommonGoalEnabled = !this.configSvc.restrictedFeatures.has('commonGoals')
     }
 
     this.goalFor = this.router.url.includes('others') ? 'others' : 'me'

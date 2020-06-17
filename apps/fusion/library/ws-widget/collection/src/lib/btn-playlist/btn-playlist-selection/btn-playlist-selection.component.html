@@ -3,13 +3,13 @@
   <mat-form-field class="width-1-1 margin-bottom-m" appearance="fill">
     <mat-label i18n>Name</mat-label>
     <mat-error i18n>Playlist title should be 1-100 characters</mat-error>
-    <input [attr.name]="'playlist-name-input-playlist-selection'" type="text" matInput [formControl]="playlistNameFormControl"
+    <input name="playlist-name-input-playlist-selection" type="text" matInput [formControl]="playlistNameFormControl"
       #playlistName class="width-1-1" autocomplete="off" />
   </mat-form-field>
 </section>
 <div class="playlists-collection custom-scroll" *ngIf="!createPlaylistMode">
   <mat-selection-list *ngIf="fetchPlaylistStatus !== 'fetching'" (selectionChange)="selectionChange($event?.option)">
-    <mat-list-option [attr.name]="'playlist-option-'+(playlists.indexOf(playlist)+1)+'-playlist-selection'" *ngFor="let playlist of playlists"
+    <mat-list-option name="playlist-name-playlist-selection" *ngFor="let playlist of playlists"
       [selected]="selectedPlaylists.has(playlist?.id)" [value]="playlist?.id" checkboxPosition="before">
       {{ playlist?.name }}
     </mat-list-option>

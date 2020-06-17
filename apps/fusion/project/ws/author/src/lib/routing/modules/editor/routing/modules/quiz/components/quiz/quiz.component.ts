@@ -2,8 +2,8 @@ import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/compone
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core'
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
-import { map, mergeMap, catchError } from 'rxjs/operators'
-import { of, Observable, Subscription } from 'rxjs'
+import { map, mergeMap, tap, catchError } from 'rxjs/operators'
+import { forkJoin, of, Observable, Subscription } from 'rxjs'
 import { MatDialog } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -27,20 +27,19 @@ import { NotificationService } from '@ws/author/src/lib/services/notification.se
 // } from '@ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz-class'
 import {
   NOTIFICATION_TIME,
-  // ASSESSMENT_JSON_WITH_KEY,
-  // ASSESSMENT_JSON_WITHOUT_KEY,
+  ASSESSMENT_JSON_WITH_KEY,
+  ASSESSMENT_JSON_WITHOUT_KEY,
   ASSESSMENT,
-  // QUIZ_JSON,
+  QUIZ_JSON,
 } from '@ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
 
-// import { CONTENT_BASE_WEBHOST } from '@ws/author/src/lib/constants/apiEndpoints'
+import { CONTENT_BASE_WEBHOST } from '@ws/author/src/lib/constants/apiEndpoints'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { FormGroup } from '@angular/forms'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
-import { IQuizResult } from '../../interface/quiz-interface'
 
 @Component({
   selector: 'ws-auth-quiz',
@@ -92,7 +91,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private quizStoreSvc: QuizStoreService,
     private loaderService: LoaderService,
-    private contentService: EditorContentService,
+    private metaContentService: EditorContentService,
     private uploadService: UploadService,
     private editorService: EditorService,
     private notificationSvc: NotificationService,
@@ -106,7 +105,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showSettingButtons = this.accessControl.rootOrg === 'Siemens'
+    this.showSettingButtons = this.accessControl.rootOrg === 'client1'
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
@@ -143,7 +142,7 @@ export class QuizComponent implements OnInit, OnDestroy {
       this.selectedQuizIndex = index
     })
     // active lex id
-    this.activeContentSubscription = this.contentService.changeActiveCont.subscribe(id => {
+    this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
       if (!this.quizStoreSvc.collectiveQuiz[id]) {
         this.quizStoreSvc.collectiveQuiz[id] = []
       }
@@ -164,7 +163,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   changeContent(data: NSContent.IContentMeta) {
     this.currentId = data.identifier
-    this.contentService.changeActiveCont.next(data.identifier)
+    this.metaContentService.changeActiveCont.next(data.identifier)
   }
 
   /**
@@ -189,7 +188,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   createInAnotherLanguage(lang: string) {
     this.loaderService.changeLoad.next(true)
-    this.contentService
+    this.metaContentService
       .createInAnotherLanguage(lang, { artifactURL: '', downloadUrl: '' })
       .subscribe(
         data => {
@@ -205,7 +204,7 @@ export class QuizComponent implements OnInit, OnDestroy {
         error => {
           if (error.status === 409) {
             const errorMap = new Map<string, NSContent.IContentMeta>()
-            errorMap.set(this.currentId, this.contentService.getUpdatedMeta(this.currentId))
+            errorMap.set(this.currentId, this.metaContentService.getUpdatedMeta(this.currentId))
             this.dialog.open(ErrorParserComponent, {
               width: '750px',
               height: '450px',
@@ -223,10 +222,10 @@ export class QuizComponent implements OnInit, OnDestroy {
             duration: NOTIFICATION_TIME * 1000,
           })
         },
-    )
+      )
   }
 
-  triggerSave(meta: NSContent.IContentMeta, id: string): Observable<boolean> {
+  triggerSave(meta: NSContent.IContentMeta, id: string) {
     const requestBody: NSApiRequest.IContentUpdate = {
       hierarchy: {},
       nodesModified: {
@@ -239,38 +238,18 @@ export class QuizComponent implements OnInit, OnDestroy {
     }
     return this.editorService
       .updateContent(requestBody)
-      .pipe(mergeMap(() => {
-        this.contentService.resetOriginalMeta(meta, id)
-        return of(true)
-      }))
+      .pipe(tap(() => this.metaContentService.resetOriginalMeta(meta, id)))
   }
 
-  // have to upload two jsons one original json and other without answer
-  // original json will be in assessment-key.json and other in assessment.json
-  triggerUpload(data: any[]) {
-    const uploadData: IQuizResult = {
-      timeLimit: this.quizDuration,
-      isAssessment: this.resourceType === ASSESSMENT,
-      questions: data,
-    }
-    // tslint:disable-next-line:max-line-length
-    const jsonPath = `${this.accessControl.rootOrg}/${this.accessControl.org.replace(/ /g, '_')}/Public/${this.currentId}/web-hosted`
-    return this.uploadService.multipleJsonUpload(
-      uploadData,
-      this.contentService.getUpdatedMeta(this.currentId),
-      jsonPath
-    )
-  }
-
-  wrapperForTriggerSave(): Observable<boolean> {
+  wrapperForTriggerSave() {
     this.loaderService.changeLoad.next(true)
     const updatedQuizData = this.quizStoreSvc.collectiveQuiz[this.currentId]
     const hasTimeChanged =
-      (this.contentService.upDatedContent[this.currentId] || {}).duration &&
-      this.quizDuration !== this.contentService.upDatedContent[this.currentId].duration
+      (this.metaContentService.upDatedContent[this.currentId] || {}).duration &&
+      this.quizDuration !== this.metaContentService.upDatedContent[this.currentId].duration
     const doUploadJson = this.quizStoreSvc.hasChanged || hasTimeChanged
-    if (!(this.contentService.getUpdatedMeta(this.currentId) || {}).duration) {
-      this.contentService.setUpdatedMeta({ duration: this.quizDuration } as any, this.currentId)
+    if (!(this.metaContentService.getUpdatedMeta(this.currentId) || {}).duration) {
+      this.metaContentService.setUpdatedMeta({ duration: this.quizDuration } as any, this.currentId)
     }
     return (doUploadJson
       ? this.triggerUpload(JSON.parse(JSON.stringify(updatedQuizData)))
@@ -278,16 +257,16 @@ export class QuizComponent implements OnInit, OnDestroy {
     ).pipe(
       mergeMap(v => {
         const updatedMeta = JSON.parse(
-          JSON.stringify(this.contentService.upDatedContent[this.currentId] || {}),
+          JSON.stringify(this.metaContentService.upDatedContent[this.currentId] || {}),
         )
-        if (v && v[0] && !v[0].error) {
-          updatedMeta.artifactUrl = (v[0].artifactUrl || v[0].downloadUrl).replace(/%2F/g, '/')
-          this.quizDuration = this.contentService.getUpdatedMeta(this.currentId).duration
-          updatedMeta.downloadUrl = v[0].downloadUrl ? v[0].downloadUrl.replace(/%2F/g, '/') : ''
+        const check = this.resourceType === ASSESSMENT ? v.length && v[1] && v[1].code : true
+        if (v && v[0] && v[0].code && check) {
+          updatedMeta.artifactUrl = (v[0].authArtifactURL || v[0].artifactURL).replace(/%2F/g, '/')
+          this.quizDuration = this.metaContentService.getUpdatedMeta(this.currentId).duration
+          updatedMeta.downloadUrl = v[0].downloadURL.replace(/%2F/g, '/')
           this.quizStoreSvc.hasChanged = false
-          return this.triggerSave(updatedMeta, this.currentId)
         }
-        return of(false)
+        return this.triggerSave(updatedMeta, this.currentId)
       }),
     )
   }
@@ -296,7 +275,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     this.canValidate = true
     const hasMinLen = (this.resourceType !== ASSESSMENT && this.questionsArr.length)
       || (this.resourceType === ASSESSMENT && this.questionsArr.length >= this.quizConfig.minQues)
-    const needSave = Object.keys(this.contentService.upDatedContent[this.currentId] || {}).length
+    const needSave = Object.keys(this.metaContentService.upDatedContent[this.currentId] || {}).length
       || this.quizStoreSvc.hasChanged
     if (hasMinLen && needSave) {
       if (this.canEditJson) {
@@ -304,16 +283,13 @@ export class QuizComponent implements OnInit, OnDestroy {
       }
       if (this.isValid) {
         // if any change in quiz, then upload json
-        this.wrapperForTriggerSave().subscribe(flag => {
-          if (flag) {
+        this.wrapperForTriggerSave().subscribe(
+          () => {
+            this.canValidate = false
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
-          } else {
-            this.loaderService.changeLoad.next(false)
-            this.showNotification(Notify.SAVE_FAIL)
-          }
-        },
-                                               () => {
+          },
+          () => {
             this.canValidate = false
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_FAIL)
@@ -339,6 +315,84 @@ export class QuizComponent implements OnInit, OnDestroy {
     }
   }
 
+  uploadJson(array: any[], fileName: string) {
+    this.quizDuration = this.metaContentService.getUpdatedMeta(this.currentId).duration
+    const quizData = {
+      timeLimit: this.quizDuration,
+      isAssessment: this.resourceType === ASSESSMENT,
+      questions: array,
+    }
+    // const blob = new Blob([JSON.stringify(quizData, null, 2)], { type: 'application/json' })
+    // const formdata = new FormData()
+    // formdata.append('content', blob)
+    return this.uploadService.encodedUpload(quizData, fileName, {
+      contentId: this.currentId,
+      contentType: CONTENT_BASE_WEBHOST,
+    })
+  }
+
+  shuffle(data: any[]) {
+    let currentIndex = data.length
+    let temporaryValue: any
+    let randomIndex: number
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex -= 1
+
+      // And swap it with the current element.
+      temporaryValue = data[currentIndex]
+      data[currentIndex] = data[randomIndex]
+      data[randomIndex] = temporaryValue
+    }
+    return data
+  }
+
+  // have to upload two jsons one original json and other without answer
+  // original json will be in assessment-key.json and other in assessment.json
+  triggerUpload(data: any[]) {
+    const dataWithOutAns = JSON.parse(JSON.stringify(data))
+    const dataWithAns = JSON.parse(JSON.stringify(data))
+    dataWithOutAns.map((ques: any) => {
+      delete ques.isInValid
+      let arr: string[] = []
+      if (ques.questionType === 'mtf') {
+        arr = this.shuffle(ques.options.map((elem: any) => elem.match))
+      }
+      ques.options.map((op: any, i: number) => {
+        if (!op.hint) {
+          delete op.hint
+        }
+        if (ques.questionType === 'fitb') {
+          op.text = ''
+        } else if (ques.questionType === 'mtf') {
+          op.match = arr[i]
+        }
+        op.isCorrect = false
+      })
+    })
+    dataWithAns.map((ques: any) => {
+      delete ques.isInValid
+      ques.options.map((op: any) => {
+        if (!op.hint) {
+          delete op.hint
+        }
+      })
+    })
+    // console.log(dataWithAns, dataWithOutAns)
+    const uploadData = this.resourceType === ASSESSMENT ? dataWithOutAns : dataWithAns
+    return forkJoin([
+      this.uploadJson(
+        uploadData,
+        this.resourceType === ASSESSMENT ? ASSESSMENT_JSON_WITHOUT_KEY : QUIZ_JSON,
+      ),
+      this.resourceType === ASSESSMENT
+        ? this.uploadJson(dataWithAns, ASSESSMENT_JSON_WITH_KEY)
+        : of({} as any),
+    ])
+  }
+
   action(type: string) {
     switch (type) {
       case 'next':
@@ -358,13 +412,13 @@ export class QuizComponent implements OnInit, OnDestroy {
         const dialog = this.dialog.open(DeleteDialogComponent, {
           width: '600px',
           height: 'auto',
-          data: this.contentService.getUpdatedMeta(this.currentId),
+          data: this.metaContentService.getUpdatedMeta(this.currentId),
         })
         dialog.afterClosed().subscribe(confirm => {
           if (confirm) {
             this.allContents = this.allContents.filter(v => v.identifier !== this.currentId)
             if (this.allContents.length) {
-              this.contentService.changeActiveCont.next(this.allContents[0].identifier)
+              this.metaContentService.changeActiveCont.next(this.allContents[0].identifier)
             } else {
               this.router.navigateByUrl('/author/home')
             }
@@ -414,7 +468,7 @@ export class QuizComponent implements OnInit, OnDestroy {
             this.showNotification(Notify.SUCCESS)
             this.allContents = this.allContents.filter(v => v.identifier !== this.currentId)
             if (this.allContents.length) {
-              this.contentService.changeActiveCont.next(this.allContents[0].identifier)
+              this.metaContentService.changeActiveCont.next(this.allContents[0].identifier)
             } else {
               this.router.navigateByUrl('/author/home')
             }
@@ -439,24 +493,19 @@ export class QuizComponent implements OnInit, OnDestroy {
     } else {
       const needSave =
         this.quizStoreSvc.hasChanged ||
-        Object.keys(this.contentService.upDatedContent[this.currentId] || {}).length
+        Object.keys(this.metaContentService.upDatedContent[this.currentId] || {}).length
       if (needSave) {
         this.checkValidity()
         if (this.isValid) {
-          this.wrapperForTriggerSave().subscribe(flag => {
-            if (flag) {
-              this.loaderService.changeLoad.next(false)
+          this.wrapperForTriggerSave().subscribe(
+            () => {
               this.loaderService.changeLoad.next(false)
               this.previewMode = true
               this.mimeTypeRoute = VIEWER_ROUTE_FROM_MIME(
-                this.contentService.getUpdatedMeta(this.currentId).mimeType as any,
+                this.metaContentService.getUpdatedMeta(this.currentId).mimeType as any,
               )
-            } else {
-              this.loaderService.changeLoad.next(false)
-              this.showNotification(Notify.SAVE_FAIL)
-            }
-          },
-                                                 () => {
+            },
+            () => {
               this.loaderService.changeLoad.next(false)
               this.showNotification(Notify.SAVE_FAIL)
             },
@@ -465,7 +514,7 @@ export class QuizComponent implements OnInit, OnDestroy {
       } else {
         this.previewMode = true
         this.mimeTypeRoute = VIEWER_ROUTE_FROM_MIME(
-          this.contentService.getUpdatedMeta(this.currentId).mimeType as any,
+          this.metaContentService.getUpdatedMeta(this.currentId).mimeType as any,
         )
       }
     }
@@ -485,9 +534,9 @@ export class QuizComponent implements OnInit, OnDestroy {
       this.showNotification(Notify.ASSESSMENT_MIN_QUIZ)
       this.currentStep = 2
     } else if (
-      !this.contentService.isValid(this.currentId) ||
-      (!this.contentService.isValid(this.currentId) &&
-        !this.contentService.getUpdatedMeta(this.currentId).artifactUrl)
+      !this.metaContentService.isValid(this.currentId) ||
+      (!this.metaContentService.isValid(this.currentId) &&
+        !this.metaContentService.getUpdatedMeta(this.currentId).artifactUrl)
     ) {
       this.submitPressed = true
       this.showNotification(Notify.MANDATORY_FIELD_ERROR)
@@ -496,7 +545,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     } else if (this.quizStoreSvc.hasChanged) {
       this.checkValidity()
       if (this.isValid) {
-        return this.wrapperForTriggerSave().pipe(mergeMap(v => of(v ? false : true)))
+        return this.wrapperForTriggerSave().pipe(map(() => true))
       }
       returnValue = false
     }
@@ -505,9 +554,9 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   takeAction() {
     const needSave =
-      Object.keys(this.contentService.upDatedContent[this.currentId] || {}).length ||
+      Object.keys(this.metaContentService.upDatedContent[this.currentId] || {}).length ||
       this.quizStoreSvc.hasChanged
-    if (!needSave && this.contentService.getUpdatedMeta(this.currentId).status === 'Live') {
+    if (!needSave && this.metaContentService.getUpdatedMeta(this.currentId).status === 'Live') {
       this.showNotification(Notify.UP_TO_DATE)
       return
     }
@@ -517,7 +566,7 @@ export class QuizComponent implements OnInit, OnDestroy {
           const dialogRef = this.dialog.open(CommentsDialogComponent, {
             width: '750px',
             height: '450px',
-            data: this.contentService.getOriginalMeta(this.currentId),
+            data: this.metaContentService.getOriginalMeta(this.currentId),
           })
           dialogRef.afterClosed().subscribe((commentsForm: FormGroup) => {
             this.finalCall(commentsForm)
@@ -532,13 +581,13 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   isPublisherSame(): boolean {
     const publisherDetails =
-      this.contentService.getUpdatedMeta(this.currentId).publisherDetails || []
+      this.metaContentService.getUpdatedMeta(this.currentId).publisherDetails || []
     return publisherDetails.find(v => v.id === this.accessControl.userId) ? true : false
   }
 
   isDirectPublish(): boolean {
     return (
-      ['Draft', 'Live'].includes(this.contentService.originalContent[this.currentId].status) &&
+      ['Draft', 'Live'].includes(this.metaContentService.originalContent[this.currentId].status) &&
       this.isPublisherSame()
     )
   }
@@ -550,19 +599,19 @@ export class QuizComponent implements OnInit, OnDestroy {
         operation:
           commentsForm.controls.action.value === 'accept' ||
             ['Draft', 'Live'].includes(
-              this.contentService.originalContent[this.currentId].status,
+              this.metaContentService.originalContent[this.currentId].status,
             )
             ? ((this.accessControl.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
               !this.accessControl.authoringConfig.isMultiStepFlow) &&
-              this.accessControl.rootOrg.toLowerCase() === 'siemens'
+              this.accessControl.rootOrg.toLowerCase() === 'client1'
               ? 100000
               : 1
             : 0,
       }
 
-      const updatedContent = this.contentService.upDatedContent[this.currentId] || {}
-      const updatedMeta = this.contentService.getUpdatedMeta(this.currentId)
-      const needSave = Object.keys(this.contentService.upDatedContent[this.currentId] || {})
+      const updatedContent = this.metaContentService.upDatedContent[this.currentId] || {}
+      const updatedMeta = this.metaContentService.getUpdatedMeta(this.currentId)
+      const needSave = Object.keys(this.metaContentService.upDatedContent[this.currentId] || {})
         .length
       const saveCall = (needSave
         ? this.triggerSave(updatedContent, this.currentId)
@@ -573,8 +622,8 @@ export class QuizComponent implements OnInit, OnDestroy {
             .forwardBackward(
               body,
               this.currentId,
-              this.contentService.originalContent[this.currentId].status,
-          )
+              this.metaContentService.originalContent[this.currentId].status,
+            )
             .pipe(
               mergeMap(() =>
                 this.notificationSvc
@@ -582,14 +631,14 @@ export class QuizComponent implements OnInit, OnDestroy {
                     updatedMeta,
                     body.comment,
                     body.operation ? true : false,
-                )
+                  )
                   .pipe(
                     catchError(() => {
                       return of({} as any)
                     }),
-                ),
+                  ),
               ),
-          ),
+            ),
         ),
       )
       this.loaderService.changeLoad.next(true)
@@ -604,7 +653,7 @@ export class QuizComponent implements OnInit, OnDestroy {
           })
           this.allContents = this.allContents.filter(v => v.identifier !== this.currentId)
           if (this.allContents.length) {
-            this.contentService.changeActiveCont.next(this.allContents[0].identifier)
+            this.metaContentService.changeActiveCont.next(this.allContents[0].identifier)
           } else {
             this.router.navigateByUrl('/author/home')
           }
@@ -614,7 +663,7 @@ export class QuizComponent implements OnInit, OnDestroy {
             const errorMap = new Map<string, NSContent.IContentMeta>()
             errorMap.set(
               this.currentId,
-              this.contentService.getUpdatedMeta(this.currentId),
+              this.metaContentService.getUpdatedMeta(this.currentId),
             )
             this.dialog.open(ErrorParserComponent, {
               width: '80vw',
@@ -639,7 +688,7 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   getMessage(type: 'success' | 'failure') {
     if (type === 'success') {
-      switch (this.contentService.originalContent[this.currentId].status) {
+      switch (this.metaContentService.originalContent[this.currentId].status) {
         case 'Draft':
         case 'Live':
           return Notify.SEND_FOR_REVIEW_SUCCESS
@@ -651,7 +700,7 @@ export class QuizComponent implements OnInit, OnDestroy {
           return ''
       }
     }
-    switch (this.contentService.originalContent[this.currentId].status) {
+    switch (this.metaContentService.originalContent[this.currentId].status) {
       case 'Draft':
       case 'Live':
         return Notify.SEND_FOR_REVIEW_FAIL
@@ -665,7 +714,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   getAction(): string {
-    switch (this.contentService.originalContent[this.currentId].status) {
+    switch (this.metaContentService.originalContent[this.currentId].status) {
       case 'Draft':
       case 'Live':
         return 'sendForReview'
@@ -698,8 +747,8 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   canDelete() {
     return this.accessControl.hasRole(['editor', 'admin']) ||
-      (['Draft', 'Live'].includes(this.contentService.originalContent[this.currentId].status) &&
-        this.contentService.originalContent[this.currentId].creatorContacts.find(v => v.id === this.accessControl.userId)
+      (['Draft', 'Live'].includes(this.metaContentService.originalContent[this.currentId].status) &&
+        this.metaContentService.originalContent[this.currentId].creatorContacts.find(v => v.id === this.accessControl.userId)
       )
   }
   // fullScreenToggle() { }

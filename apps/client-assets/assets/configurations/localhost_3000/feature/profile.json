@@ -1,0 +1,125 @@
+{
+  "enabledTabs": {
+    "dashboard": {
+      "enabled": true,
+      "available": true,
+      "subFeatures": {
+        "pendingCourses": false,
+        "interests": true,
+        "latest": true
+      }
+    },
+    "learning": {
+      "enabled": true,
+      "available": true,
+      "subTabs": {
+        "learningHistory": {
+          "enabled": true,
+          "available": true,
+          "isClient": true,
+          "tabs": {
+            "courses": true,
+            "programs": true,
+            "modules": true,
+            "resources": true
+          }
+        },
+        "learningTime": {
+          "enabled": true,
+          "available": true,
+          "charts": {
+            "learningBarChart": true,
+            "trackWiseChart": false,
+            "calendarChart": false,
+            "dimensionsChart": false,
+            "timeSpentByMe": false,
+            "timeSpentByPeers": false,
+            "timeSpentByEmployees": false
+          }
+        }
+      }
+    },
+    "achievements": {
+      "enabled": true,
+      "available": true,
+      "subTabs": {
+        "badges": {
+          "enabled": true,
+          "available": true
+        },
+        "assessments": {
+          "enabled": true,
+          "available": true
+        }
+      }
+    },
+    "interests": {
+      "enabled": true,
+      "available": true
+    },
+    "plans": {
+      "enabled": true,
+      "available": true,
+      "subTabs": {
+        "goals": {
+          "enabled": true,
+          "available": true
+        },
+        "playlists": {
+          "enabled": true,
+          "available": true
+        }
+      }
+    },
+    "collaborators": {
+      "enabled": true,
+      "available": true,
+      "subTabs": {
+        "goalsSharedByMe": {
+          "enabled": true,
+          "available": true
+        },
+        "goalsSharedToMe": {
+          "enabled": true,
+          "available": true
+        },
+        "ArtifactsShared": {
+          "enabled": true,
+          "available": true
+        },
+        "playlistSharedByMe": {
+          "enabled": true,
+          "available": true
+        },
+        "playlistSharedToMe": {
+          "enabled": true,
+          "available": true
+        },
+        "expertsContacted": {
+          "enabled": true,
+          "available": true
+        },
+        "contentCreated": {
+          "enabled": false,
+          "available": false
+        }
+      }
+    },
+    "featureUsage": {
+      "enabled": true,
+      "available": true,
+      "subSections": {
+        "learningTime": true,
+        "assessments": false,
+        "refactoring": false,
+        "plans": false,
+        "collaborators": true,
+        "other": true
+      }
+    },
+    "settings": {
+      "enabled": true,
+      "available": true
+    }
+  }
+}

@@ -94,7 +94,6 @@ export class CreateUserComponent implements OnInit {
       // username: this.registerUser.controls.username.value,
       emailVerified: true,
       noPasswordChange: true,
-      keycloakFields: ['email'],
     }
     if (this.passwordType === 'UserPassword') {
       this.userData.password = this.registerUser.controls.cpassword.value

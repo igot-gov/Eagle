@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core'
 import { PageEvent } from '@angular/material'
 import { LearningAnalyticsService } from '../../services/learning-analytics.service'
 import { MatPaginator } from '@angular/material/paginator'
-import { MatTableDataSource } from '@angular/material/table'
 import { NsAnalytics } from '../../models/learning-analytics.model'
 import { TFetchStatus, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
@@ -22,7 +21,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   contentType = 'Course'
   isCompleted = 0
   userFetchStatus: TFetchStatus = 'fetching'
-  channelFetchStatus: TFetchStatus = 'fetching'
   courseFetchStatus: TFetchStatus = 'fetching'
   modulesFetchStatus: TFetchStatus = 'fetching'
   resourceFetchStatus: TFetchStatus = 'fetching'
@@ -44,12 +42,8 @@ export class ContentComponent implements OnInit, OnDestroy {
     { status: false, data: [] },
   ]
   userProgressData: any
-  channelsData: any
   displayedColumns: string[] = ['name', 'users']
   dataSource: any
-  channelsDescription = 'Total number of channels pages'
-  knowledgeBoardDescription = 'Total number of knowledge boards'
-  learningJourneysDescription = 'Total number of learning journeys'
   coursesDescription = 'Total number of courses'
   modulesDescription = 'Total number of modules'
   resourcesDescription = 'Total number of resources'
@@ -58,7 +52,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   analytics = this.route.snapshot.data.pageData.data.analytics.subFeatures.learningAnalytics.tabs
     .content
   private filterEventSubscription: Subscription | null = null
-  private filterDataEventSubscription: Subscription | null = null
   private removeEventSubscription: Subscription | null = null
   private dateEventSubscription: Subscription | null = null
   private searchEventSubscription: Subscription | null = null
@@ -315,7 +308,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     private resolver: AnalyticsResolver,
     private route: ActivatedRoute,
     private valueSvc: ValueService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.isLtMedium$.subscribe((isLtMedium: boolean) => {
@@ -329,18 +322,6 @@ export class ContentComponent implements OnInit, OnDestroy {
         }
         this.filterArray.push(filter)
         this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
-        // this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
-      },
-    )
-    this.filterDataEventSubscription = this.resolver.dataFilterEventChangeSubject.subscribe(
-      (filterEvent: any) => {
-        const filter = {
-          key: filterEvent.filterType,
-          value: filterEvent.filterName,
-        }
-        this.filterArray.push(filter)
-        this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
-        // this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
       },
     )
     this.removeEventSubscription = this.resolver.removeFilterEventChangeSubject.subscribe(
@@ -363,7 +344,6 @@ export class ContentComponent implements OnInit, OnDestroy {
           })
         }
         this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
-        // this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
       },
     )
     this.dateEventSubscription = this.resolver.dateEventChangeSubject.subscribe(
@@ -371,7 +351,6 @@ export class ContentComponent implements OnInit, OnDestroy {
         this.startDate = dateEvent.startDate
         this.endDate = dateEvent.endDate
         this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
-        // this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
       },
     )
 
@@ -379,11 +358,8 @@ export class ContentComponent implements OnInit, OnDestroy {
       (searchEvent: any) => {
         this.searchQuery = searchEvent.searchQuery
         this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
-        // this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
       },
     )
-  this.getFilteredCourse(0, this.endDate, this.startDate, this.searchQuery, this.filterArray)
-    // this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
   }
 
   // tslint:disable-next-line:max-line-length
@@ -404,41 +380,13 @@ export class ContentComponent implements OnInit, OnDestroy {
       })
   }
   onTabChangeClient(selectedIndex: number) {
-    if (selectedIndex < 3) {
-      this.getFilteredCourse(
-        selectedIndex,
-        this.endDate,
-        this.startDate,
-        this.searchQuery,
-        this.filterArray,
-      )
-    } else {
-      this.channels(this.endDate, this.startDate, 'Course', this.searchQuery, this.filterArray)
-    }
-  }
-  channels(
-    endDate: string,
-    startDate: string,
-    contentType: string,
-    searchQuery: string,
-    filterArray: NsAnalytics.IFilterObj[],
-  ) {
-    this.channelFetchStatus = 'fetching'
-    this.analyticsSrv
-      .channels(endDate, startDate, contentType, filterArray, searchQuery)
-      .subscribe((channels: any) => {
-        this.channelsData = []
-        this.channelsData = channels.channel_users
-        this.dataSource = new MatTableDataSource<any>(this.channelsData)
-        setTimeout(
-          () => {
-            this.dataSource.paginator = this.paginator
-          },
-          // tslint:disable-next-line:align
-          500,
-        )
-        this.channelFetchStatus = 'done'
-      })
+    this.getFilteredCourse(
+      selectedIndex,
+      this.endDate,
+      this.startDate,
+      this.searchQuery,
+      this.filterArray,
+    )
   }
 
   chartData() {
@@ -586,51 +534,51 @@ export class ContentComponent implements OnInit, OnDestroy {
       },
     }
     // users by MimeType BarChart Data
-      const barChartMimeTypeLabel: string[] = []
-      const mimeTypeData: number[] = []
+    const barChartMimeTypeLabel: string[] = []
+    const mimeTypeData: number[] = []
     this.userProgressData.mime_type.forEach((source: any) => {
-        if (barChartMimeTypeLabel.length < 20) {
-          barChartMimeTypeLabel.push(source.key)
-        }
-        if (mimeTypeData.length < 20) {
-          mimeTypeData.push(source.doc_count)
-        }
-      })
-      this.barChartMimeTypeData = {
-        widgetType: ROOT_WIDGET_CONFIG.graph._type,
-        widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
-        widgetData: {
-          graphId: 'mimeTypeChart',
-          graphType: 'horizontalBar',
-          graphHeight: '300px',
-          graphWidth: '100%',
-          graphLegend: false,
-          graphLegendPosition: 'top',
-          graphLegendFontSize: 11,
-          graphTicksFontSize: 11,
-          graphTicksXAxisDisplay: true,
-          graphTicksYAxisDisplay: true,
-          graphGridLinesDisplay: false,
-          graphDefaultPalette: 'default',
-          graphFilterType: 'MimeType',
-          graphXAxisLabel: '# Users',
-          graphYAxisLabel: 'Mime Type',
-          graphIsXAxisLabel: true,
-          graphIsYAxisLabel: true,
-          graphOnClick: true,
-          graphData: {
-            labels: barChartMimeTypeLabel,
-            datasets: [
-              {
-                label: '',
-                backgroundColor: this.chartColors,
-                borderWidth: 1,
-                data: mimeTypeData,
-              },
-            ],
-          },
-        },
+      if (barChartMimeTypeLabel.length < 20) {
+        barChartMimeTypeLabel.push(source.key)
       }
+      if (mimeTypeData.length < 20) {
+        mimeTypeData.push(source.doc_count)
+      }
+    })
+    this.barChartMimeTypeData = {
+      widgetType: ROOT_WIDGET_CONFIG.graph._type,
+      widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
+      widgetData: {
+        graphId: 'mimeTypeChart',
+        graphType: 'horizontalBar',
+        graphHeight: '300px',
+        graphWidth: '100%',
+        graphLegend: false,
+        graphLegendPosition: 'top',
+        graphLegendFontSize: 11,
+        graphTicksFontSize: 11,
+        graphTicksXAxisDisplay: true,
+        graphTicksYAxisDisplay: true,
+        graphGridLinesDisplay: false,
+        graphDefaultPalette: 'default',
+        graphFilterType: 'MimeType',
+        graphXAxisLabel: '# Users',
+        graphYAxisLabel: 'Mime Type',
+        graphIsXAxisLabel: true,
+        graphIsYAxisLabel: true,
+        graphOnClick: true,
+        graphData: {
+          labels: barChartMimeTypeLabel,
+          datasets: [
+            {
+              label: '',
+              backgroundColor: this.chartColors,
+              borderWidth: 1,
+              data: mimeTypeData,
+            },
+          ],
+        },
+      },
+    }
     // users by MimeType View BarChart Data
     const barChartMimeTypeViewLabel: string[] = []
     const mimeTypeViewData: number[] = []
@@ -697,7 +645,7 @@ export class ContentComponent implements OnInit, OnDestroy {
       }
       if (yAxisType === 'users') {
         if (expandData.length <= 100) {
-        expandData.push(expand.doc_count)
+          expandData.push(expand.doc_count)
         }
       }
       if (yAxisType === 'views') {
@@ -783,8 +731,6 @@ export class ContentComponent implements OnInit, OnDestroy {
                 screenSizeIsLtMedium: this.screenSizeIsLtMedium,
                 name: cur.content_name,
                 id: cur.content_id,
-                startDate: this.startDate,
-                endDate: this.endDate,
                 progress: cur.progress,
                 source: cur.source_name,
                 isExternal: cur.is_external,
@@ -867,9 +813,6 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.filterEventSubscription) {
       this.filterEventSubscription.unsubscribe()
-    }
-    if (this.filterDataEventSubscription) {
-      this.filterDataEventSubscription.unsubscribe()
     }
     if (this.dateEventSubscription) {
       this.dateEventSubscription.unsubscribe()

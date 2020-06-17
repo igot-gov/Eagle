@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   mode$ = this.isLtMedium$.pipe(map((isMedium: boolean) => (isMedium ? 'over' : 'side')))
   screenSizeIsLtMedium = false
   showText = true
-  isSkills = false
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   enabledTabs = this.activatedRoute.snapshot.data.pageData.data.enabledTabs
 
@@ -37,8 +36,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.tabName = this.enabledTabs.learning.displayName
     } else if (tab === 'competency') {
       this.tabName = this.enabledTabs.achievements.displayName
-    } else if (tab === 'skills') {
-      this.tabName = this.enabledTabs.skills.displayName
     } else if (tab === 'interest') {
       this.tabName = this.enabledTabs.interests.displayName
     } else if (tab === 'plans') {
@@ -53,12 +50,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.screenSizeIsLtMedium = isLtMedium
     })
-    // tslint:disable-next-line:max-line-length
-    if (this.configSvc && this.configSvc.userRoles && (this.configSvc.userRoles.has('my-skills') || this.configSvc.userRoles.has('admin'))) {
-      this.isSkills = true
-    } else {
-      this.isSkills = false
-    }
   }
   tabUpdate(tab: string) {
     this.tabName = tab

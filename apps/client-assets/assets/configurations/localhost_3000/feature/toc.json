@@ -1,0 +1,9 @@
+{
+  "subtitleOnBanners": true,
+  "analytics": {
+    "enabled": true,
+    "available": true,
+    "courseAnalyticsClient": true,
+    "courseAnalytics": false
+  }
+}

@@ -227,7 +227,6 @@ export interface ISearchTab {
       }
     }[]
     isStandAlone: boolean
-    siemensCatalog: boolean
   }
 }
 
@@ -248,16 +247,3 @@ export interface ISuggestedFilters {
   url: string
   queryParams?: any
 }
-
-export type TSortableFields =
-  'lastUpdatedOn' |
-  'duration' |
-  'me_totalSessionsCount' |
-  'me_totalDownloads' |
-  'size' |
-  'uniqueLearners' |
-  'viewCount' |
-  'averageRating' |
-  'uniqueUsersCount' |
-  'totalRating' |
-  'addedOn'

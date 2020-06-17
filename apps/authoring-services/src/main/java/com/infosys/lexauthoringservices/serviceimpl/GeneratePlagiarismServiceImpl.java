@@ -1,14 +1,13 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.serviceimpl;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -18,17 +17,28 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Stack;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,6 +47,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lexauthoringservices.exception.ApplicationLogicError;
 import com.infosys.lexauthoringservices.service.GeneratePlagiarismService;
 import com.infosys.lexauthoringservices.util.LexConstants;
+import com.infosys.lexauthoringservices.util.LexServerProperties;
 
 @Service
 public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService {
@@ -46,23 +57,30 @@ public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService 
 
 	@Autowired
 	ContentCrudServiceImpl contentCrudServiceImpl;
+	
+	@Autowired
+	LexServerProperties lexServerProps;
 
 	Path des = null;
 
 	@Override
 	public File generatePlagiarismReport(String identifier, String domain, String rootOrg,String org) {
-		System.out.println("Hi from serviceImpl line 1");
 		File txtFile = null;
 		File zipFolder = null;
 
 		try {
+			//StringBuffer to hold all the textual content
 			StringBuffer writeText = new StringBuffer();
 
 			if (Files.notExists(Paths.get("Plagiarism"))) {
 				new File("Plagiarism").mkdir();
 			}
+			
+			//writes all textual content to buffer
 			generatePlagiarism(identifier, writeText, true, identifier, domain, rootOrg,org);
 			System.out.println("back after writeBuffer creation " + writeText);
+			
+			//create new text file
 			txtFile = new File("Plagiarism/" + identifier + "/" + identifier + ".html");
 			new File("Plagiarism/" + identifier).mkdir();
 			BufferedWriter writer = new BufferedWriter(new FileWriter(txtFile));
@@ -104,43 +122,40 @@ public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService 
 			firstRecur = false;
 		}
 		try {
-			contentMeta = (Map<String, Object>) contentCrudServiceImpl.getContentHierarchy(identifier,rootOrg,org);
+			
+			List<String> fields = Arrays.asList(LexConstants.IDENTIFIER,LexConstants.MIME_TYPE,LexConstants.ARTIFACT_URL,LexConstants.CONTENT_TYPE,LexConstants.ISEXTERNAL);
+			Map<String,Object> requestMap = new HashMap<>();
+			requestMap.put("fields",fields);
+			contentMeta = contentCrudServiceImpl.getContentHierarchyV2(parentIdentifier, rootOrg, org, requestMap);
+			//contentMeta = (Map<String, Object>) contentCrudServiceImpl.getContentHierarchy(identifier,rootOrg,org);
 //			contentMeta = (Map<String, Object>) contentMeta.get(LexConstants.CONTENT);
 //			System.out.println(contentMeta);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String contentType = contentMeta.get(LexConstants.CONTENT_TYPE).toString();
-		writeText.append("<b>" + identifier + ":" + contentType + "<br><br>" + "\r\n" + "\r\n" + "</b>");
-		hierarchyIterator(contentMeta, writeText, domain);
+//		writeText.append("<b>" + identifier + ":" + contentType + "<br><br>" + "\r\n" + "\r\n" + "</b>");
+		hierarchyIterator(contentMeta, writeText, domain,identifier);
 
 	}
 
 	@SuppressWarnings("unchecked")
-	private void hierarchyIterator(Map<String, Object> contentMeta, StringBuffer writeText, String domain) {
-		System.out.println(contentMeta);
-		Queue<Map<String, Object>> parentObjs = new LinkedList<>();
+	private void hierarchyIterator(Map<String, Object> contentMeta, StringBuffer writeText, String domain,String identifier) {
+		
+		Stack<Map<String,Object>> parentObjs = new Stack<Map<String,Object>>();
 		parentObjs.add(contentMeta);
 		while (!parentObjs.isEmpty()) {
-			Map<String, Object> parent = parentObjs.poll();
-			System.out.println(parent);
-			System.out.println(parent.get(LexConstants.CONTENT_TYPE));
-			System.out.println(LexConstants.RESOURCE);
+			Map<String, Object> parent = parentObjs.pop();
+			writeText.append("<b>" + parent.get(LexConstants.IDENTIFIER) + " : " + parent.get(LexConstants.CONTENT_TYPE) + "<br><br>"
+					+ "\r\n" + "\r\n" + "</b>");
 			if (parent.get(LexConstants.CONTENT_TYPE).equals(LexConstants.RESOURCE)) {
-				System.out.println("found resource");
-				resourceHandler(parent, writeText, domain);
-				break;
-			}
-			List<Map<String, Object>> childrenList = (List<Map<String, Object>>) parent.get(LexConstants.CHILDREN);
-			for (Map<String, Object> child : childrenList) {
-				String childContentType = child.get(LexConstants.CONTENT_TYPE).toString();
-				if (!childContentType.equals(LexConstants.RESOURCE)) {
-					writeText.append("<b>" + child.get(LexConstants.IDENTIFIER) + " : " + childContentType + "<br><br>"
-							+ "\r\n" + "\r\n" + "</b>");
-				} else {
-					resourceHandler(child, writeText, domain);
+				try {
+					resourceHandler(parent, writeText, domain,identifier);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
+			List<Map<String, Object>> childrenList = (List<Map<String, Object>>) parent.get(LexConstants.CHILDREN);
+			Collections.reverse(childrenList);
 			parentObjs.addAll(childrenList);
 		}
 	}
@@ -159,7 +174,7 @@ public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService 
 	}
 
 
-	private void resourceHandler(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) {
+	private void resourceHandler(Map<String, Object> resourceMeta, StringBuffer writeText, String domain,String topLevelId) throws Exception {
 		System.out.println("inside resource handler");
 		boolean isExternal = false;
 		try {
@@ -170,11 +185,11 @@ public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService 
 		if (isExternal == false) {
 			String mimeType = (String) resourceMeta.get(LexConstants.MIME_TYPE);
 			if (mimeType.equals(LexConstants.MIME_TYPE_WEB) || mimeType.equals(LexConstants.MIME_TYPE_HTML)) {
+				generateForWebHtml(resourceMeta,writeText,domain);
 			} else if (mimeType.equals(LexConstants.MIME_TYPE_QUIZ)) {
-				System.out.println("before quiz function");
 				generateQuizJson(resourceMeta, writeText, domain);
 			} else if (mimeType.equals(LexConstants.MIME_TYPE_PDF)) {
-				generatePDF(resourceMeta, writeText, domain);
+				generatePDF(resourceMeta, writeText, domain,topLevelId);
 			} else if (mimeType.equals(LexConstants.MIME_TYPE_HANDSONQUIZ)) {
 				generateIntegratedHandsOn(resourceMeta, writeText, domain);
 			} else if (mimeType.equals(LexConstants.MIME_TYPE_DNDQUIZ)) {
@@ -185,89 +200,88 @@ public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService 
 		}
 	}
 
-//	@SuppressWarnings("unchecked")
-//	private void generateForWebHtml(Map<String,Object> contentMeta, StringBuffer writeText, String domain) {
-//		try {
-//			ObjectMapper mapper = new ObjectMapper();
-//			String artUrl = getArtifactUrl(contentMeta.getArtifactUrl());
-//			String identifier = contentMeta.getIdentifier();
-//			URL artifactUrl = new URL(artUrl);
-//			List<Map<String, Object>> manifestJson = (List<Map<String, Object>>) mapper.readValue(artifactUrl,
-//					List.class);
-//			for (Map<String, Object> mObj : manifestJson) {
-//				String fName = mObj.get("URL").toString();
-//				String fileUrl = "";
-//				String parameter = "/web-hosted%2Fauth/" + identifier + "/" + fName;
-//				UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(LexProjectUtil.getWebhostProxy() + "/").path(parameter);
-//				UriComponents components = builder.build(true);
-//				URI uri = components.toUri();
-//				fileUrl = uri.toString();
-//				URL getUrl = new URL(fileUrl);
-//				System.out.println(getUrl);
-//				BufferedReader reader = new BufferedReader(new InputStreamReader(getUrl.openStream()));
-//				String line;
-//				String viewerUrl = domain;
-//				viewerUrl = viewerUrl + "/" + identifier;
-//				writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">"
-//						+ "Click here" + "</a>" + "\r\n");
-//				while ((line = reader.readLine()) != null) {
-//					writeText.append(line);
-//				}
-//				writeText.append("\r\n");
-//				reader.close();
-//				// System.out.println("A run has been completed");
-//			}
-//		} catch (Exception e) {
-//			System.out.println("Error inside the funcion:'File Not Found(html,web-module)'");
-//			e.printStackTrace();
-//		}
-//
-//	}
+	
+	//DUNZO
+	@SuppressWarnings("unchecked")
+	private void generateForWebHtml(Map<String,Object> contentMeta,StringBuffer writeText,String domain) throws Exception {
+		
+		try {
 
+			String identifier = (String) contentMeta.get(LexConstants.IDENTIFIER);
+			String authArtifactUrl = convertToAuthUrl((String) contentMeta.get(LexConstants.ARTIFACT_URL));
+			List<Map<String, Object>> manifestJson = restTemplate.getForObject(authArtifactUrl, ArrayList.class);
+			String finalStr = authArtifactUrl.toString();
+			int fnIndex = finalStr.lastIndexOf("%2F");
+			String prefix = finalStr.substring(0, fnIndex);
+			String viewerUrl = domain;
+			viewerUrl = viewerUrl + "/" + identifier;
+			writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">"
+					+ "Click here" + "</a>" + "\r\n");
+			for (Map<String, Object> mObj : manifestJson) {
+				String htmlPath = mObj.get("URL").toString();			
+				htmlPath = htmlPath.replace("/", "%2F");
+				URL readUrl = new URL((String)prefix + (String)htmlPath);
+				BufferedReader reader = new BufferedReader(new InputStreamReader(readUrl.openStream()));
+				String line;
+				while((line = reader.readLine())!=null) {
+					writeText.append(line);
+				}
+				writeText.append("\r\n");
+				reader.close();
+			}
+		} catch (Exception e) {
+			System.out.println("Error inside the funcion:'File Not Found(html,web-module)'");
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+	}
+	
+	
+	@SuppressWarnings("unused")
+	private String convertToAuthUrl(String url) throws MalformedURLException {
+		String[] parts = url.split("/");
+		System.out.println(parts);
+		URL artifactUrl = null;
+		List<String> partsList = Arrays.asList(parts);
+		System.out.println(partsList);
+		int index = partsList.indexOf("content-store");
+		index = index + 1;
+		String finalStr = lexServerProps.getContentServiceUrl()+ "/contentv3/download/" + partsList.get(index);
+		for(int i=index+1;i<partsList.size();i++) {
+			finalStr = finalStr+ "%2F" +  partsList.get(i);
+		}
+		System.out.println(finalStr);
+		return finalStr;
+//		return new URL(finalStr);
+	}
 	
 	
 	@SuppressWarnings("unchecked")
-	private void generateHTMLQuiz(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) {
-		ObjectMapper mapper = new ObjectMapper();
-		URL artifactUrl = null;
-		try {
-			artifactUrl = new URL((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		String viewerUrl = domain + "/" + resourceMeta.get(LexConstants.IDENTIFIER);
-		writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">" + "Click here"
-				+ "</a>" + "\r\n");
-		Map<String, Object> htmlJson = null;
-		try {
-			htmlJson = mapper.readValue(artifactUrl, Map.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		writeText.append("<br><div>" + htmlJson.get("question"));
-		writeText.append("<br><div>" + htmlJson.get("html"));
-
+	private void generateHTMLQuiz(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) throws MalformedURLException {
 		
+		String authArtifactUrl = null;
+		String viewerUrl = domain + resourceMeta.get(LexConstants.IDENTIFIER);
+		writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">" + "Click here"+ "</a>" + "\r\n");
+		
+		authArtifactUrl = convertToAuthUrl((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
+		Map<String, Object> htmlJson = null;
+		
+		htmlJson = restTemplate.getForObject(authArtifactUrl, Map.class);
+		
+		writeText.append("<br><div>"+htmlJson.get("question"));
+		writeText.append("<br><div>"+htmlJson.get("html"));
 	}
 
 	@SuppressWarnings("unchecked")
-	private void generateDragDrop(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) {
-		ObjectMapper mapper = new ObjectMapper();
-		URL artifactUrl = null;
-		try {
-			artifactUrl = new URL((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+	private void generateDragDrop(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) throws MalformedURLException {
+		String authUrl = convertToAuthUrl((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
 		String viewerUrl = domain + "/" + resourceMeta.get(LexConstants.IDENTIFIER);
 		writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">" + "Click here"
 				+ "</a>" + "\r\n");
-		Map<String, Object> dndJson = null;
-		try {
-			dndJson = (Map<String, Object>) mapper.readValue(artifactUrl, Map.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
+		Map<String, Object> dndJson = new HashMap<>();
+		
+		dndJson = restTemplate.getForObject(authUrl, Map.class);
 		Map<String, Object> dndQuestions = (Map<String, Object>) dndJson.get("dndQuestions");
 		Map<String, Object> options = (Map<String, Object>) dndQuestions.get("options");
 		writeText.append(dndQuestions.get("question"));
@@ -290,59 +304,63 @@ public class GeneratePlagiarismServiceImpl implements GeneratePlagiarismService 
 
 	}
 
+	//DUNZO
 	@SuppressWarnings("unchecked")
-	private void generateIntegratedHandsOn(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) {
-		ObjectMapper mapper = new ObjectMapper();
-		URL artifactUrl = null;
-		try {
-			artifactUrl = new URL((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+	private void generateIntegratedHandsOn(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) throws MalformedURLException {
+		
+		String authurl = convertToAuthUrl((String)resourceMeta.get(LexConstants.ARTIFACT_URL));
 		String viewerUrl = domain + "/" + resourceMeta.get(LexConstants.IDENTIFIER);
 		writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">" + "Click here"
 				+ "</a>" + "\r\n");
 		Map<String, Object> integratedJson = null;
-		try {
-			integratedJson = (Map<String, Object>) mapper.readValue(artifactUrl, Map.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		integratedJson = restTemplate.getForObject(authurl, Map.class);
 		writeText.append("<br><div>" + integratedJson.get("problemStatement"));
 	}
 
-	private void generatePDF(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) {
+	//DUNZO
+	private void generatePDF(Map<String, Object> resourceMeta, StringBuffer writeText, String domain,String topLevelId) {
 		try {
 			String identifier = (String) resourceMeta.get(LexConstants.IDENTIFIER);
 			String artifactUrl = (String) resourceMeta.get(LexConstants.ARTIFACT_URL);
 			String pdfFileName = artifactUrl.substring(artifactUrl.lastIndexOf("/"));
-			String filePath = "content/TestAuth/" + identifier + pdfFileName;
-			// TODO
+			String authUrl = convertToAuthUrl(artifactUrl);
+			
+			byte[] response = readDataFromContentDirectory(authUrl);
+			Path path = Paths.get("Plagiarism/" + topLevelId+"/" + pdfFileName);
+			InputStream stream = new ByteArrayInputStream(response);
+			File file = new File("Plagiarism/" + topLevelId + "/" + pdfFileName);
+			
+			long result = Files.copy(stream, file.toPath(),StandardCopyOption.REPLACE_EXISTING);
+			String viewerUrl = domain + "/" + identifier;
+			writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">" + "Click here"+ "</a><br><br>" + "\r\n");
+			stream.close();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	private byte[] readDataFromContentDirectory(String filePath) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_PDF, MediaType.APPLICATION_OCTET_STREAM));
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+		// pic url from env
+		ResponseEntity<byte[]> response = restTemplate.exchange(filePath, HttpMethod.GET, entity,byte[].class);
+		
+		return response.getBody();
 	}
 
-	@SuppressWarnings("unchecked")
-	private void generateQuizJson(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) {
-		ObjectMapper mapper = new ObjectMapper();
-		URL artifactUrl = null;
-		try {
-			artifactUrl = new URL((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+	//DUNZO
+	@SuppressWarnings("unchecked")
+	private void generateQuizJson(Map<String, Object> resourceMeta, StringBuffer writeText, String domain) throws MalformedURLException {
+		
+		String authUrl = convertToAuthUrl((String) resourceMeta.get(LexConstants.ARTIFACT_URL));
 		String viewerUrl = domain + "/" + resourceMeta.get(LexConstants.IDENTIFIER);
 		writeText.append("Viewer URL : " + "<a href = \"" + viewerUrl + "\" target=\"_blank\"" + ">" + "Click here"+ "</a>" + "\r\n");
 		System.out.println(writeText);
 		Map<String, Object> quizJson = new HashMap<>();
-		try {
-			quizJson = (Map<String, Object>) mapper.readValue(artifactUrl, Map.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		quizJson = restTemplate.getForObject(authUrl, HashMap.class);
 		try{
 			List<Map<String, Object>> questions = (List<Map<String, Object>>) quizJson.get("questions");
 			for (Map<String, Object> question : questions) {

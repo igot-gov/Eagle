@@ -31,14 +31,7 @@
               <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="resourceCollectionData">
               </ws-widget-btn-content-share>
               <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-              <ws-widget-btn-playlist [forPreview]="forPreview" [widgetData]="{
-                contentId: resourceCollectionData?.identifier,
-                contentName: resourceCollectionData?.name,
-                contentType: 'Resource',
-                mode: 'dialog',
-                isDisabled: forPreview
-              }">
-              </ws-widget-btn-playlist>
+              <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
               <!-- <ws-widget-btn-content-feedback></ws-widget-btn-content-feedback> -->
               <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
                 [widgetData]="resourceCollectionData | pipePartialContent: ['identifier', 'name']">

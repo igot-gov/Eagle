@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs'
 import { IKhubFetchStatus } from '../../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { TrainingService } from '../../../infy/routes/training/services/training.service'
 import { FilterDisplayComponent } from '../../components/filter-display/filter-display.component'
-import { IFilterUnitItem, IFilterUnitResponse, ISearchRequest, ISearchTab } from '../../models/search.model'
+import { IFilterUnitResponse, ISearchRequest, ISearchTab } from '../../models/search.model'
 import { SearchServService } from '../../services/search-serv.service'
 @Component({
   selector: 'ws-app-learning',
@@ -43,15 +43,12 @@ export class LearningComponent implements OnInit, OnDestroy {
   }
   searchResultsSubscription: Subscription | undefined
   filtersResetAble = false
-  // commercial_begin
-  concepts: IFilterUnitItem[] = []
-  // commercial_end
   resultsDisplayType: 'basic' | 'advanced' = 'advanced'
   searchRequest: {
-    query: string;
-    filters: { [type: string]: string[] };
-    sort?: string;
-    lang?: string | null;
+    query: string
+    filters: { [type: string]: string[] }
+    sort?: string
+    lang?: string | null
   } = {
       query: '',
       filters: {},
@@ -288,9 +285,6 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.searchRequestObject.sort = [{ lastUpdatedOn: 'desc' }]
       }
       this.noContent = false
-      // commercial_begin
-      this.concepts = []
-      // commercial_end
       if (
         this.searchRequestObject.filters &&
         !Object.keys(this.searchRequestObject.filters).length
@@ -386,9 +380,6 @@ export class LearningComponent implements OnInit, OnDestroy {
             this.activated.snapshot.data.pageroute !== 'learning' ? true : false,
           )
           this.filtersResponse = filteR.filtersRes
-          // commercial_begin
-          this.concepts = filteR.concept
-          // commercial_end
           if (
             this.searchResults.totalHits === 0 && this.isDefaultFilterApplied
           ) {

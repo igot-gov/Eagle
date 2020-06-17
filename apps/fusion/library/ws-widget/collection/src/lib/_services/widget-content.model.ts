@@ -54,7 +54,7 @@ export namespace NsContent {
     me_totalSessionsCount: number
     mediaType: string
     mimeType: EMimeTypes
-    minLexVersion?: string
+    minWingspanVersion?: string
     msArtifactDetails?: IMSArtifactDetails
     mode?: ETagType
     name: string

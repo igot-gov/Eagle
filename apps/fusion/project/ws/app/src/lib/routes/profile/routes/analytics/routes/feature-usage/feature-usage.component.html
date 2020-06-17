@@ -29,27 +29,8 @@
       [subTitle]="'Total Assessments'"></ws-app-tile>
     <ws-app-tile class="tile-card" [icon]="'border_color'" [value]="pendingAssessments"
       [subTitle]="'Pending Assessments'"></ws-app-tile>
-    <ws-app-tile class="tile-card" [icon]="'chrome_reader_mode'" [value]="certifications?.certifications?.length"
-      [subTitle]="'Certifications'"></ws-app-tile>
   </div>
   <div *ngIf="assessmentFetchStatus === 'error'" class="margin-xl mat-elevation-z2">
-    <h2 i18n class="flex flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
-      We are gathering the data to provide insights!
-    </h2>
-  </div>
-</ng-container>
-<ng-container>
-  <div class="mat-title margin-left-xl margin-top-xl" i18n>My Refactoring Programs</div>
-  <div *ngIf="nsoFetchStatus === 'fetching'" class="margin-xl padding-xl flex flex-center">
-    <mat-spinner></mat-spinner>
-  </div>
-  <div *ngIf="nsoFetchStatus === 'done'" class="margin-top-l margin-left-xl flex flex-start flex-around flex-wrapped">
-    <ws-app-tile class="tile-card" [icon]="'flag'" [value]="nsoData?.total_nso_program_taken"
-      [subTitle]="'My Refactoring Program'"></ws-app-tile>
-    <ws-app-tile class="tile-card" [icon]="'explore'" [value]="nsoData?.feature_usage_stats?.navigator_count"
-      [subTitle]="'Navigator'"></ws-app-tile>
-  </div>
-  <div *ngIf="nsoFetchStatus === 'error'" class="margin-xl mat-elevation-z2">
     <h2 i18n class="flex flex-center coming-soon-msg p-4 flex ws-mat-primary-text">
       We are gathering the data to provide insights!
     </h2>
@@ -90,8 +71,6 @@
   </div>
   <div *ngIf="userProgressFetchStatus === 'done'"
     class="margin-top-l  margin-left-xl margin-bottom-xl flex flex-start flex-around flex-wrapped">
-    <ws-app-tile class="tile-card" [icon]="'code'" [value]="nsoData?.playground_details?.length"
-      [subTitle]="'Playgrounds'"></ws-app-tile>
     <ws-app-tile class="tile-card" [icon]="'thumb_up'" [value]="nsoData?.likes_detail?.length" [subTitle]="'Likes'">
     </ws-app-tile>
     <ws-app-tile class="tile-card" [icon]="'search'" [value]="nsoData?.feature_usage_stats?.search_count"

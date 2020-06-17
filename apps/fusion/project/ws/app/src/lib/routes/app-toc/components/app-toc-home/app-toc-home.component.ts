@@ -42,8 +42,6 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
       type: 'mat-button',
     },
   }
-  moreLikeThis: NsContent.IContentMinimal[]
-  moreLikeThisFree: NsContent.IContentMinimal[]
   tocConfig: any = null
   constructor(
     private route: ActivatedRoute,
@@ -52,8 +50,6 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     private loggerSvc: LoggerService,
     private configSvc: ConfigurationsService,
   ) {
-    this.moreLikeThis = []
-    this.moreLikeThisFree = []
   }
 
   ngOnInit() {
@@ -89,8 +85,6 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
   private initData(data: Data) {
     const initData = this.tocSvc.initData(data)
     this.content = initData.content
-    this.moreLikeThis = []
-    this.moreLikeThisFree = []
     this.errorCode = initData.errorCode
     switch (this.errorCode) {
       case NsAppToc.EWsTocErrorCode.API_FAILURE: {
@@ -112,25 +106,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     }
     if (this.content && this.content.identifier && !this.forPreview) {
       this.getContinueLearningData(this.content.identifier)
-      if (this.tocConfig && this.tocConfig.moreLikeThis) {
-        this.fetchMoreLikeThis(this.content.identifier)
-        if (this.content.exclusiveContent) {
-          this.fetchMoreLikeThisFree(this.content.identifier)
-        }
-      }
     }
-  }
-
-  private fetchMoreLikeThis(contentId: string) {
-    this.tocSvc.fetchContentWhatsNext(contentId).subscribe(contents => {
-      this.moreLikeThis = contents || []
-    })
-  }
-
-  private fetchMoreLikeThisFree(contentId: string) {
-    this.tocSvc.fetchMoreLikeThisFree(contentId).subscribe(contents => {
-      this.moreLikeThisFree = contents || []
-    })
   }
 
   private getContinueLearningData(contentId: string) {

@@ -42,7 +42,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
     this.collectionType = this.activatedRoute.snapshot.queryParams.collectionType
-    if (this.configSvc.rootOrg === EInstance.FORD) {
+    if (this.configSvc.rootOrg === EInstance.INSTANCE) {
       this.logo = false
     }
     if (this.configSvc.instanceConfig) {

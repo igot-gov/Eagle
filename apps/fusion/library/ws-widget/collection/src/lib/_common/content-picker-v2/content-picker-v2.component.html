@@ -1,27 +1,22 @@
 <mat-sidenav-container autosize>
-  <mat-sidenav #sidenav class="sidenav mat-drawer mat-sidenav" position="start" [mode]="isLtMedium ? 'over' : 'side'"
-    [opened]="!isLtMedium">
+  <mat-sidenav #sidenav class="sidenav mat-drawer mat-sidenav" position="end" mode="over" closed>
     <ws-widget-filters (closeSideNav)="sidenav.toggle()" (appliedFiltersEmitter)="appliedFilters($event)"
-      [filters]="searchResults?.filters" [preAppliedFilters]="widgetData?.preAppliedFilters">
+      [includedFilters]="widgetData?.includedFilters" [preAppliedFilters]="widgetData?.preAppliedFilters">
     </ws-widget-filters>
   </mat-sidenav>
-  <mat-sidenav-content [ngClass]="{'pl-10': sidenav.opened}">
-    <div class="flex flex-col md:flex-row justify-between margin-bottom-m">
-      <div class="searchBox md:order-2">
+  <mat-sidenav-content>
+    <div class="flex justify-between margin-bottom-m">
+      <div class="searchBox">
         <ws-widget-search-input (searchRequest)="searchRequest($event)"></ws-widget-search-input>
       </div>
-      <div class="flex mt-1 md:mt-0 md:order-1">
-        <div [ngClass]="{'hide': sidenav.opened}" class="flex items-center filterButton">
-          <button i18n-matTooltip matTooltip="Filter" (click)="sidenav.toggle()" mat-button>
-            <mat-icon>filter_list</mat-icon>
-          </button>
-        </div>
-        <div *ngIf="objKey(widgetData?.sortableFields || {}).length" class="flex items-center filterButton ml-1">
-          <button i18n-matTooltip matTooltip="Sort" [matMenuTriggerFor]="sortMenu" mat-button>
-            <mat-icon>sort</mat-icon>
-          </button>
-        </div>
+      <div class="flex items-center ml-2 md:ml-10 filterButton">
+        <button (click)="sidenav.toggle()" mat-button>
+          <mat-icon>filter_list</mat-icon>
+        </button>
       </div>
+    </div>
+    <div *ngIf="objKey(widgetData?.sortableFields || {}).length" class="flex justify-end margin-bottom-m">
+      <button mat-stroked-button [matMenuTriggerFor]="sortMenu">Sort <mat-icon>arrow_drop_down</mat-icon></button>
     </div>
     <h2 *ngIf="fetchStatus === 'done' && !searchResults?.result.length" class="mat-title" i18n>
       No results
@@ -40,7 +35,7 @@
         <div class="w-full sm:w-1/2 mb-4 flex" *ngFor="let content of searchResults.result">
           <mat-checkbox (change)="changeSelectedContent($event.checked, content)"
             [checked]="widgetData?.mode === 'query' || widgetData?.preselected?.has(content?.identifier)"
-            [disabled]="widgetData?.mode === 'query' || (widgetData?.preselected?.has(content?.identifier) && !widgetData?.enablePreselected)"
+            [disabled]="widgetData?.mode === 'query' || widgetData?.preselected?.has(content?.identifier)"
             class="leading-none pr-4">
           </mat-checkbox>
           <img class="w-24 h-16 ws-mat-primary-lite-background" [src]="content?.appIcon"
@@ -74,13 +69,17 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 <mat-menu #sortMenu="matMenu">
-  <div *ngIf="objKey(widgetData?.sortableFields || {}).length" class="sortMenu">
-    <mat-radio-group (change)="sort($event.value)" aria-labelledby="Sort" class="flex flex-col">
-      <button *ngFor="let key of objKey(widgetData?.sortableFields)" mat-menu-item>
-        <mat-radio-button color="accent" [value]="key">
-          {{widgetData?.sortableFields[key]?.displayName}}
-        </mat-radio-button>
-      </button>
+  <div *ngIf="objKey(widgetData?.sortableFields || {}).length" class="padding-left-m padding-right-m">
+    <div class="flex justify-center">
+      <mat-icon (click)="sortOrderControl.setValue('asc')" class="cursor-pointer"
+        [ngClass]="{'ws-mat-accent-border-top-light': sortOrderControl.value === 'asc'}">arrow_upward</mat-icon>
+      <mat-icon (click)="sortOrderControl.setValue('desc')" class="cursor-pointer"
+        [ngClass]="{'ws-mat-accent-border-top-light': sortOrderControl.value === 'desc'}">arrow_downward</mat-icon>
+    </div>
+    <mat-radio-group [formControl]="sortByControl" aria-labelledby="Sort" class="flex flex-col">
+      <mat-radio-button class="my-1" *ngFor="let key of objKey(widgetData?.sortableFields)" [value]="key">
+        {{widgetData?.sortableFields[key]}}
+      </mat-radio-button>
     </mat-radio-group>
   </div>
 </mat-menu>

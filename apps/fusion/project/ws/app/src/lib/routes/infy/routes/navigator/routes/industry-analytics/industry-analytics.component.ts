@@ -104,7 +104,7 @@ export class IndustryAnalyticsComponent implements OnInit, OnDestroy {
     if (this.analyticsData) {
       // unique users count
       this.analyticsData.uniqueParticipants.forEach((count: IActivityObj) => {
-        if (count.key === 'LEX') {
+        if (count.key === 'Wingspan') {
           this.uniqueUsers = count.uniqueCount
         }
       })

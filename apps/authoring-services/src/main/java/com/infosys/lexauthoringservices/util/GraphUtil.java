@@ -1,21 +1,19 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.util;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.neo4j.driver.v1.Record;
 import org.neo4j.driver.v1.types.Node;
 import org.neo4j.driver.v1.types.Relationship;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,9 +31,12 @@ public class GraphUtil {
 			LexConstants.CREATOR_DEATILS, LexConstants.PUBLISHER_DETAILS, LexConstants.PRE_CONTENTS,
 			LexConstants.POST_CONTENTS, LexConstants.CATALOG, LexConstants.CLIENTS, LexConstants.SKILLS,
 			LexConstants.K_ARTIFACTS, LexConstants.TRACK_CONTACT_DETAILS, LexConstants.ORG,
-			LexConstants.SUBMITTER_DETAILS, LexConstants.CONCEPTS, LexConstants.PLAG_SCAN, LexConstants.TAGS,
+			LexConstants.SUBMITTER_DETAILS, LexConstants.CONCEPTS,LexConstants.PLAG_SCAN, LexConstants.TAGS,
 			"eligibility", "scoreType", "externalData", "verifiers", "verifier", "subTitles", "roles", "group",
-			"msArtifactDetails", "studyMaterials", "equivalentCertifications",LexConstants.TRANSCODING);
+			"msArtifactDetails", "studyMaterials", "equivalentCertifications", LexConstants.TRANSCODING,
+			LexConstants.PRICE, LexConstants.EDITORS);
+	
+	public static SimpleDateFormat inputFormatterDateTime = new SimpleDateFormat("yyyyMMdd'T'HHmmssZ");
 
 	public static ContentNode createContentNode(List<Record> records)
 			throws JsonParseException, JsonMappingException, IOException {
@@ -44,8 +45,14 @@ public class GraphUtil {
 		Set<Relationship> childRelations = new HashSet<>();
 		Set<Relationship> parentRelations = new HashSet<>();
 
-		for (Record record : records) {
+		if (records.get(0).get(LexConstants.NODE).isNull()) {
+			return null;
+		}
 
+		for (Record record : records) {
+			if (record.get(LexConstants.NODE).isNull()) {
+				continue;
+			}
 			Node nodeFetched = record.get(LexConstants.NODE).asNode();
 			String rootOrg = nodeFetched.labels().iterator().next();
 
@@ -62,15 +69,237 @@ public class GraphUtil {
 		return contentNode;
 	}
 
+	
+	public static List<ContentNode> createContentNodesForHierarchyUpdateV2(List<Record> records)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		List<ContentNode> contentNodes = new ArrayList<>();
+
+		//iterate on all existing records
+		Iterator<Record> recordsIterator = records.iterator();
+		while (recordsIterator.hasNext()) {
+			if (recordsIterator.next().get("node").isNull()) {
+				//if record does not contain 'node' remove from records
+				recordsIterator.remove();
+			}
+		}
+
+		//previous node identifier
+		String prevNode = records.get(0).get("node.identifier").asString();
+
+		List<Record> recordsPerContent = new ArrayList<>();
+
+		for (Record record : records) {
+			//if record does not contain identifier skip and move on
+			if (record.get("node.identifier").isNull()) {
+				continue;
+			}
+			//if previous node does not equal current record identifier then ->
+			if (!prevNode.equals(record.get("node.identifier").asString())) {
+				//add that node to list of contentNodes
+								//below function returns the node metaData and minimal data of 1st level children and parent ie (status,contentType,isStandAlone,identifier)
+				contentNodes.add(createContentNodeForHierarchyUpdateV2(recordsPerContent));
+				//reset records
+				recordsPerContent = new ArrayList<>();
+				//make new record as previous node
+				prevNode = record.get("node.identifier").asString();
+			}
+			//continue to add all records to new records list
+			recordsPerContent.add(record);
+		}
+
+		//get and then add the details of the left over records to content nodes list
+		contentNodes.add(createContentNodeForHierarchyUpdateV2(recordsPerContent));
+		//return list
+		return contentNodes;
+	}
+	
+	
+	public static List<ContentNode> createContentNodesForHierarchyUpdate(List<Record> records)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		List<ContentNode> contentNodes = new ArrayList<>();
+
+		Iterator<Record> recordsIterator = records.iterator();
+		while (recordsIterator.hasNext()) {
+			if (recordsIterator.next().get("node.identifier").isNull()) {
+				recordsIterator.remove();
+			}
+		}
+
+		String prevNode = records.get(0).get("node.identifier").asString();
+
+		List<Record> recordsPerContent = new ArrayList<>();
+
+		for (Record record : records) {
+			if (record.get("node.identifier").isNull()) {
+				continue;
+			}
+			if (!prevNode.equals(record.get("node.identifier").asString())) {
+				contentNodes.add(createContentNodeForHierarchyUpdate(recordsPerContent));
+				recordsPerContent = new ArrayList<>();
+				prevNode = record.get("node.identifier").asString();
+			}
+			recordsPerContent.add(record);
+		}
+
+		contentNodes.add(createContentNodeForHierarchyUpdate(recordsPerContent));
+		return contentNodes;
+	}
+	
+	
+	public static ContentNode createContentNodeForHierarchyUpdateV2(List<Record> records)throws JsonParseException, JsonMappingException, IOException {
+
+		ContentNode contentNode = new ContentNode();
+		
+		Set<Relationship> childRelations = new HashSet<>();
+		Set<Relationship> parentRelations = new HashSet<>();
+		
+		for(Record record : records) {
+			if(record.get("node").isNull()) {
+				continue;
+			}
+			
+			String rootOrg = (String) record.get("labels(node)").asList().get(0);
+			contentNode.setRootOrg(rootOrg);
+			contentNode.setIdentifier(record.get("node.identifier").asString());
+			Map<String,Object> metaData =record.get("node").asMap();
+			Map<String,Object> modifiableMap = new HashMap<>(metaData);
+			contentNode.setMetadata(modifiableMap);
+			
+			createChildRelationForHierarchyUpdate(contentNode, childRelations, record);
+			createParentRelationForHierarchyUpdate(contentNode, parentRelations, record);
+		}
+		
+		contentNode.setMetadata(mapParser(contentNode.getMetadata(), true));
+		return contentNode;
+	}
+	
+	
+	public static List<ContentNode> createContentNodesForHierarchyUpdateV3(List<Record> records,List<String> fields)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		List<ContentNode> contentNodes = new ArrayList<>();
+
+		Iterator<Record> recordsIterator = records.iterator();
+		while (recordsIterator.hasNext()) {
+			if (recordsIterator.next().get("node.identifier").isNull()) {
+				recordsIterator.remove();
+			}
+		}
+
+		String prevNode = records.get(0).get("node.identifier").asString();
+
+		List<Record> recordsPerContent = new ArrayList<>();
+
+		for (Record record : records) {
+			if (record.get("node.identifier").isNull()) {
+				continue;
+			}
+			if (!prevNode.equals(record.get("node.identifier").asString())) {
+				contentNodes.add(createContentNodeForHierarchyUpdateV3(recordsPerContent,fields));
+				recordsPerContent = new ArrayList<>();
+				prevNode = record.get("node.identifier").asString();
+			}
+			recordsPerContent.add(record);
+		}
+
+		contentNodes.add(createContentNodeForHierarchyUpdateV3(recordsPerContent,fields));
+		return contentNodes;
+	}
+	
+
+	public static ContentNode createContentNodeForHierarchyUpdate(List<Record> records)
+			throws JsonParseException, JsonMappingException, IOException {
+		ContentNode contentNode = new ContentNode();
+
+		Set<Relationship> childRelations = new HashSet<>();
+		Set<Relationship> parentRelations = new HashSet<>();
+
+		for (Record record : records) {
+			if (record.get("node.identifier").isNull()) {
+				continue;
+			}
+			String rootOrg = (String) record.get("labels(node)").asList().get(0);
+			contentNode.setId(Long.parseLong(record.get("id(node)").toString()));
+
+			contentNode.setRootOrg(rootOrg);
+			contentNode.setIdentifier(record.get("node.identifier").asString());
+			Map<String, Object> metaData = new HashMap<>();
+			metaData.put(LexConstants.CONTENT_TYPE, record.get("node.contentType").asString());
+			metaData.put(LexConstants.STATUS, record.get("node.status").asString());
+			metaData.put(LexConstants.IDENTIFIER, record.get("node.identifier").asString());
+			metaData.put(LexConstants.IS_STAND_ALONE, record.get("node.isStandAlone").asBoolean(true));
+			Map<String, Object> x = record.asMap();
+			metaData.put(LexConstants.AUTHORING_DISABLED, x.get("node.authoringDisabled"));
+			metaData.put(LexConstants.META_EDIT_DISABLED, x.get("node.isMetaEditingDisabled"));
+			contentNode.setMetadata(metaData);
+
+			createChildRelationForHierarchyUpdate(contentNode, childRelations, record);
+			createParentRelationForHierarchyUpdate(contentNode, parentRelations, record);
+		}
+
+		contentNode.setMetadata(mapParser(contentNode.getMetadata(), true));
+		return contentNode;
+	}
+	
+	public static ContentNode createContentNodeForHierarchyUpdateV3(List<Record> records,List<String> fields)
+			throws JsonParseException, JsonMappingException, IOException {
+		ContentNode contentNode = new ContentNode();
+
+		Set<Relationship> childRelations = new HashSet<>();
+		Set<Relationship> parentRelations = new HashSet<>();
+
+		for (Record record : records) {
+			if (record.get("node.identifier").isNull()) {
+				continue;
+			}
+			String rootOrg = (String) record.get("labels(node)").asList().get(0);
+			contentNode.setId(Long.parseLong(record.get("id(node)").toString()));
+
+			contentNode.setRootOrg(rootOrg);
+			contentNode.setIdentifier(record.get("node.identifier").asString());
+			Map<String, Object> metaData = new HashMap<>();
+			Map<String,Object> recordMap = record.asMap();
+			for(String item:fields) {
+				metaData.put(item, recordMap.get("node."+item));				
+			}
+			
+			contentNode.setMetadata(metaData);
+//			metaData.put(LexConstants.CONTENT_TYPE, record.get("node.contentType").asString());
+//			metaData.put(LexConstants.STATUS, record.get("node.status").asString());
+//			metaData.put(LexConstants.IDENTIFIER, record.get("node.identifier").asString());
+//			metaData.put(LexConstants.IS_STAND_ALONE, record.get("node.isStandAlone").asBoolean(true));
+//			Map<String, Object> x = record.asMap();
+//			metaData.put(LexConstants.AUTHORING_DISABLED, x.get("node.authoringDisabled"));
+//			metaData.put(LexConstants.META_EDIT_DISABLED, x.get("node.isMetaEditingDisabled"));
+//			contentNode.setMetadata(metaData);
+
+			createChildRelationForHierarchyUpdate(contentNode, childRelations, record);
+			createParentRelationForHierarchyUpdate(contentNode, parentRelations, record);
+		}
+
+		contentNode.setMetadata(mapParser(contentNode.getMetadata(), true));
+		return contentNode;
+	}
+
 	public static List<ContentNode> createContentNodes(List<Record> records)
 			throws JsonParseException, JsonMappingException, IOException {
+
 		List<ContentNode> contentNodes = new ArrayList<>();
+
+		if (records.get(0).get(LexConstants.NODE).isNull()) {
+			return contentNodes;
+		}
 
 		Node prevNode = records.get(0).get(LexConstants.NODE).asNode();
 		List<Record> recordsPerContent = new ArrayList<>();
 
 		for (Record record : records) {
 
+			if (record.get(LexConstants.NODE).isNull()) {
+				continue;
+			}
 			if (!prevNode.equals(record.get(LexConstants.NODE).asNode())) {
 				contentNodes.add(createContentNode(recordsPerContent));
 				recordsPerContent = new ArrayList<>();
@@ -106,6 +335,70 @@ public class GraphUtil {
 
 				contentNode.getChildren().add(relation);
 				childRelations.add(childRelation);
+			}
+		}
+	}
+
+	public static void createChildRelationForHierarchyUpdate(ContentNode contentNode, Set<Relationship> childRelations,
+			Record record) {
+
+		if (!record.get("child.identifier").isNull() && !record.get(LexConstants.CHILD_RELATION).isNull()) {
+
+			Relationship childRelation = record.get(LexConstants.CHILD_RELATION).asRelationship();
+
+			if (childRelation != null && !childRelations.contains(childRelation)) {
+				Relation relation = new Relation();
+
+				relation.setId(childRelation.id());
+				relation.setMetadata(childRelation.asMap());
+
+				relation.setStartNodeId(contentNode.getIdentifier());
+				relation.setStartNodeMetadata(contentNode.getMetadata());
+
+				relation.setEndNodeId(record.get("child.identifier").asString());
+				Map<String, Object> metaData = new HashMap<>();
+				metaData.put(LexConstants.CONTENT_TYPE, record.get("child.contentType").asString());
+				metaData.put(LexConstants.STATUS, record.get("child.status").asString());
+				metaData.put(LexConstants.IDENTIFIER, record.get("child.identifier").asString());
+				metaData.put(LexConstants.IS_STAND_ALONE, record.get("child.isStandAlone").asBoolean(true));
+				relation.setEndNodeMetadata(metaData);
+
+				relation.setRelationType("Has_Sub_Content");
+
+				contentNode.getChildren().add(relation);
+				childRelations.add(childRelation);
+			}
+		}
+	}
+
+	public static void createParentRelationForHierarchyUpdate(ContentNode contentNode,
+			Set<Relationship> parentRelations, Record record) {
+
+		if (!record.get("parent.identifier").isNull() && !record.get(LexConstants.PARENT_RELATION).isNull()) {
+
+			Relationship parentRelation = record.get(LexConstants.PARENT_RELATION).asRelationship();
+
+			if (parentRelation != null && !parentRelations.contains(parentRelation)) {
+				Relation relation = new Relation();
+
+				relation.setId(parentRelation.id());
+				relation.setMetadata(parentRelation.asMap());
+
+				relation.setStartNodeId(record.get("parent.identifier").asString());
+				Map<String, Object> metaData = new HashMap<>();
+				metaData.put(LexConstants.CONTENT_TYPE, record.get("parent.contentType").asString());
+				metaData.put(LexConstants.STATUS, record.get("parent.status").asString());
+				metaData.put(LexConstants.IDENTIFIER, record.get("parent.identifier").asString());
+				metaData.put(LexConstants.IS_STAND_ALONE, record.get("parent.isStandAlone").asBoolean(true));
+				relation.setStartNodeMetadata(metaData);
+
+				relation.setEndNodeId(contentNode.getIdentifier());
+				relation.setEndNodeMetadata(contentNode.getMetadata());
+
+				relation.setRelationType("Has_Sub_Content");
+
+				contentNode.getParents().add(relation);
+				parentRelations.add(parentRelation);
 			}
 		}
 	}
@@ -177,17 +470,29 @@ public class GraphUtil {
 		for (ContentNode imageNodeToBeCreated : imageNodesToBeCreated) {
 
 			for (Relation childRelation : imageNodeToBeCreated.getChildren()) {
-
-				updateRelationRequests.add(
-						new UpdateRelationRequest(imageNodeToBeCreated.getIdentifier(), childRelation.getEndNodeId(),
-								Integer.parseInt(childRelation.getMetadata().get(LexConstants.INDEX).toString())));
+				
+				Map<String, Object> map = childRelation.getMetadata();
+				Map<String,Object> copyMap = new HashMap<>(map);
+				if(!map.containsKey(LexConstants.ADDED_ON)) {
+					Calendar lastUpdatedOn = Calendar.getInstance();
+					String addedOn = inputFormatterDateTime.format(lastUpdatedOn.getTime()).toString();
+					copyMap.put(LexConstants.ADDED_ON, addedOn);
+				}
+				updateRelationRequests.add(new UpdateRelationRequest(imageNodeToBeCreated.getIdentifier(),
+						childRelation.getEndNodeId(), copyMap));
 			}
 
 			for (Relation parentRelation : imageNodeToBeCreated.getParents()) {
 
-				updateRelationRequests.add(
-						new UpdateRelationRequest(parentRelation.getStartNodeId(), imageNodeToBeCreated.getIdentifier(),
-								Integer.parseInt(parentRelation.getMetadata().get(LexConstants.INDEX).toString())));
+				Map<String, Object> map = parentRelation.getMetadata();
+				Map<String,Object> copyMap = new HashMap<>(map);
+				if(!map.containsKey(LexConstants.ADDED_ON)) {
+					Calendar lastUpdatedOn = Calendar.getInstance();
+					String addedOn = inputFormatterDateTime.format(lastUpdatedOn.getTime()).toString();
+					copyMap.put(LexConstants.ADDED_ON, addedOn);
+				}
+				updateRelationRequests.add(new UpdateRelationRequest(parentRelation.getStartNodeId(),
+						imageNodeToBeCreated.getIdentifier(), copyMap));
 			}
 		}
 
@@ -208,4 +513,6 @@ public class GraphUtil {
 
 		return contentMeta;
 	}
+
+	
 }

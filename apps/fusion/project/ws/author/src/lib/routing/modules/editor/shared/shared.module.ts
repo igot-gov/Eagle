@@ -18,10 +18,6 @@ import { DragDropDirective } from './directives/drag-drop.directive'
 import { UploadService } from './services/upload.service'
 import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
-import { EditMetaTextComponent } from './components/editor/edit-meta-text/edit-meta-text.component'
-import { EditMetaTextareaComponent } from './components/editor/edit-meta-textarea/edit-meta-textarea.component'
-import { EditMetaDropdownComponent } from './components/editor/edit-meta-dropdown/edit-meta-dropdown.component'
-import { EditMetaInputNumberComponent } from './components/editor/edit-meta-input-number/edit-meta-input-number.component'
 
 @NgModule({
   declarations: [
@@ -36,10 +32,6 @@ import { EditMetaInputNumberComponent } from './components/editor/edit-meta-inpu
     AuthEditorActionButtonsComponent,
     BaseComponent,
     EditMetaV2Component,
-    EditMetaTextComponent,
-    EditMetaTextareaComponent,
-    EditMetaDropdownComponent,
-    EditMetaInputNumberComponent,
   ],
   imports: [
     CommonModule,
@@ -60,12 +52,8 @@ import { EditMetaInputNumberComponent } from './components/editor/edit-meta-inpu
     AceEditorComponent,
     AuthEditorActionButtonsComponent,
     AuthPickerComponent,
-    EditMetaTextComponent,
-    EditMetaTextareaComponent,
-    EditMetaDropdownComponent,
-    EditMetaInputNumberComponent,
   ],
   entryComponents: [AuthPickerComponent],
   providers: [UploadService],
 })
-export class EditorSharedModule { }
+export class EditorSharedModule {}

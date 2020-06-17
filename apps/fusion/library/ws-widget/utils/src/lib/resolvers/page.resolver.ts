@@ -18,7 +18,7 @@ export class PageResolve implements Resolve<IResolveResponse<NsPage.IPage>> {
     private configSvc: ConfigurationsService,
     private http: HttpClient,
     @Inject(LOCALE_ID) private locale: string,
-  ) {}
+  ) { }
   resolve(
     route: ActivatedRouteSnapshot,
   ): Observable<IResolveResponse<NsPage.IPage>> | IResolveResponse<NsPage.IPage> {
@@ -35,10 +35,11 @@ export class PageResolve implements Resolve<IResolveResponse<NsPage.IPage>> {
     ) {
       return this.getData(`${this.baseUrl}/page/${route.paramMap.get(route.data.pageKey)}`)
     }
-    if (route.data.pageType === 'page' && route.data.pageKey && route.data.pageKey === 'toc') {
-      return this.getData(`${this.baseUrl}/page/${route.data.pageKey}`)
-    }
-    if (route.data.pageType === 'page' && route.data.pageKey) {
+    if (
+      route.data.pageType === 'page' &&
+      route.data.pageKey &&
+      route.data.pageKey === 'toc'
+    ) {
       return this.getData(`${this.baseUrl}/page/${route.data.pageKey}`)
     }
     return {
@@ -48,16 +49,17 @@ export class PageResolve implements Resolve<IResolveResponse<NsPage.IPage>> {
   }
 
   private setS3Cookie(contentId: string): Observable<any> {
-    return this.http
-      .post(`/apis/protected/v8/content/setCookie`, { contentId })
-      .pipe(catchError(_err => of(true)))
+    return this.http.post(`/apis/protected/v8/content/setCookie`, { contentId }).pipe(
+      catchError(_err => of(true)),
+    )
   }
 
   private getContent(id: string) {
-    return this.http.post<NsContent.IContent>(
-      `/apis/protected/v8/content/${id}?hierarchyType=minimal`,
-      ['status', 'artifactUrl'],
-    )
+    return this.http
+      .post<NsContent.IContent>(
+        `/apis/protected/v8/content/${id}?hierarchyType=minimal`,
+        ['status', 'artifactUrl'],
+      )
   }
 
   private getData(url: string) {
@@ -69,10 +71,12 @@ export class PageResolve implements Resolve<IResolveResponse<NsPage.IPage>> {
           if (v.status === 'Expired' || v.status === 'Deleted' || !v.artifactUrl) {
             return of({ data: null, error: 'NoContent' })
           }
-          return this.http.get<NsPage.IPage>(`${v.artifactUrl}?ts=${new Date().getTime()}`).pipe(
-            map(data => ({ data, error: null })),
-            catchError(err => of({ data: null, error: err })),
-          )
+          return this.http
+            .get<NsPage.IPage>(`${v.artifactUrl}?ts=${new Date().getTime()}`)
+            .pipe(
+              map(data => ({ data, error: null })),
+              catchError(err => of({ data: null, error: err })),
+            )
         }),
         catchError(err => of({ data: null, error: err })),
       )
@@ -86,12 +90,12 @@ export class PageResolve implements Resolve<IResolveResponse<NsPage.IPage>> {
           ),
         ),
       ),
-      this.locale === 'en' || this.locale === 'en-US'
-        ? of({ data: undefined as any, error: null })
-        : this.http.get<NsPage.IPage>(`${url}.${this.locale}.json`).pipe(
-            map(data => ({ data, error: null })),
-            catchError(err => of({ data: null, error: err })),
-          ),
+      this.locale === 'en' || this.locale === 'en-US' ?
+        of({ data: undefined as any, error: null }) :
+        this.http.get<NsPage.IPage>(`${url}.${this.locale}.json`).pipe(
+          map(data => ({ data, error: null })),
+          catchError(err => of({ data: null, error: err })),
+        ),
     ]
     return forkJoin(pageRequest).pipe(
       map(
@@ -104,4 +108,5 @@ export class PageResolve implements Resolve<IResolveResponse<NsPage.IPage>> {
       ),
     )
   }
+
 }

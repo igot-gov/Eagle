@@ -1,0 +1,22 @@
+{
+  "title": "",
+  "description": "",
+  "help": {
+    "title": "Help Articles",
+    "contents": [
+      {
+        "heading": "Heading",
+        "value": "Value"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact us",
+    "contents": [
+      {
+        "heading": "Heading",
+        "value": "Value"
+      }
+    ]
+  }
+}

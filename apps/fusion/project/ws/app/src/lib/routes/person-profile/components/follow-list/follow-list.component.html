@@ -15,8 +15,7 @@
               <p class="mat-error" i18n>Failed to fetch followers.</p>
             </div>
             <ws-app-view-followperson *ngFor="let person of followerCurrentDisplay" [wid]="person.identifier"
-              [name]="person.name" [userFollows]="currentUserfollowers.indexOf(person.identifier) > -1 ? true : false"
-              [currentUserProfile]="currentUserProfile">
+              [name]="person.name" [userFollows]="person.identifier === currentUserId ? true : false">
             </ws-app-view-followperson>
           </ng-container>
         </mat-card-content>

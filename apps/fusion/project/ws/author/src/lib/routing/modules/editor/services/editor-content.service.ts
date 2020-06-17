@@ -7,18 +7,16 @@ import { IConditionsV2 } from './../../../../interface/conditions-v2'
 import { IFormMeta } from './../../../../interface/form'
 import { AuthInitService } from './../../../../services/init.service'
 import { EditorService } from './editor.service'
-import { IAssessmentDetails } from '../routing/modules/iap-assessment/interface/iap-assessment.interface'
 @Injectable()
 export class EditorContentService {
   originalContent: { [key: string]: NSContent.IContentMeta } = {}
   upDatedContent: { [key: string]: NSContent.IContentMeta } = {}
-  iapContent: { [key: string]: IAssessmentDetails } = {}
+  iapContent: { [key: string]: any } = {}
   public currentContent!: string
   public parentContent!: string
   public isSubmitted = false
   public changeActiveCont = new BehaviorSubject<string>('')
   public onContentChange = new BehaviorSubject<string>('')
-  isEditEnabled = false
 
   constructor(
     private accessService: AccessControlService,
@@ -58,13 +56,13 @@ export class EditorContentService {
     }
   }
 
-  setIapContent(meta: IAssessmentDetails, id: string) {
+  setIapContent(meta: any, id: string) {
     this.iapContent[id] = {
       ...(this.iapContent[id] ? this.iapContent[id] : {}),
       ...JSON.parse(JSON.stringify(meta)),
     }
   }
-  getIapContent(id: string): IAssessmentDetails {
+  getIapContent(id: string): any {
     return this.iapContent[id]
   }
 

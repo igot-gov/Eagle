@@ -5,7 +5,6 @@ import { Observable } from 'rxjs'
 import { NSLearningData } from '../models/my-learning.model'
 
 const PROTECTED_SLAG_V8 = `/LA1`
-// const PROTECTED_SLAG_V8 = `https://ford-staging.onwingspan.com/LA1`
 
 const LA_API_END_POINTS = {
   MY_LEARNING: `${PROTECTED_SLAG_V8}/api/la/myLearning`,

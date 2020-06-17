@@ -39,13 +39,6 @@
         <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s">
           {{enabledTabs?.achievements?.displayName}}</span>
       </a>
-      <a mat-list-item *ngIf="enabledTabs?.skills?.enabled && isSkills" routerLinkActive="mat-toolbar"
-        (click)="tabUpdate(enabledTabs?.skills?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/skills" matTooltip="{{enabledTabs?.skills?.displayName}}">
-        <mat-icon>school</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium"
-          class="padding-left-s">{{enabledTabs?.skills?.displayName}}</span>
-      </a>
       <a mat-list-item *ngIf="enabledTabs?.interests?.enabled" routerLinkActive="mat-toolbar"
         (click)="tabUpdate(enabledTabs?.interests?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
         routerLink="/app/profile/interest" matTooltip="{{enabledTabs?.interests?.displayName}}">
@@ -53,11 +46,6 @@
         <span *ngIf="showText || screenSizeIsLtMedium"
           class="padding-left-s">{{enabledTabs?.interests?.displayName}}</span>
       </a>
-      <!-- <a mat-list-item *ngIf="enabledTabs?.refactoring?.enabled" routerLinkActive="mat-toolbar" (click)="tabUpdate('Refactoring'); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/refactoring" matTooltip="Refactoring" i18n-matTooltip>
-        <mat-icon>flag</mat-icon>
-        <span *ngIf="showText || screenSizeIsLtMedium" class="padding-left-s" i18n>My Refactoring</span>
-      </a> -->
       <a mat-list-item *ngIf="enabledTabs?.plans?.enabled" routerLinkActive="mat-toolbar"
         (click)="tabUpdate(enabledTabs?.plans?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
         routerLink="/app/profile/plans" matTooltip="{{enabledTabs?.plans?.displayName}}">

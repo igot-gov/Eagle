@@ -6,56 +6,92 @@
   <div class="mat-toolbar mat-primary intro-section">
     <h3 class="font-bold title-text px-6 text-intro" i18n="welcome heading">Welcome Aboard</h3>
 
-    <span class="mat-body p-4 bottom-section" i18n="powered by: infosys limited">Powered by Infosys Wingspan
+    <span class="mat-body p-4 bottom-section" i18n="powered by: wingspan limited"
+      >Powered by Infosys Wingspan
     </span>
   </div>
 
-  <div class="login-section  ws-mat-primary-text text-center">
-    <h1 *ngIf="title.length"
-      class="zero-margin-bottom font-bold title-text  py-2 ws-mat-primary-text text-center mat-display-1">
+  <div class="login-section ws-mat-primary-text text-center">
+    <h1
+      *ngIf="title.length"
+      class="zero-margin-bottom font-bold title-text py-2 ws-mat-primary-text text-center mat-display-1"
+    >
       {{ title }}
     </h1>
 
     <h3 *ngIf="subTitle?.length" class="px-4 my-0 ws-mat-primary-text text-center">
       {{ subTitle }}
     </h3>
-    <!-- todo for lex change column -->
+    <!-- todo for Wingspan change column -->
 
     <div class="flex justify-center flex-col login-btn">
-      <div *ngIf="loginConfig &&  loginConfig.loginButtons">
-        <button name="login_btn_{{loginConfig.loginButtons[key]}}"
-          *ngFor="let key of objectKeys(loginConfig.loginButtons)" color="primary" mat-raised-button
-          (click)="login((loginConfig.loginButtons)[key])" class="log-btn">
-          <span class="mat-title">{{key}}</span>
+      <div *ngIf="loginConfig && loginConfig?.loginButtons">
+        <button
+          name="login_btn_{{ (loginConfig?.loginButtons)[key] }}"
+          *ngFor="let key of objectKeys(loginConfig?.loginButtons)"
+          color="primary"
+          mat-raised-button
+          (click)="login((loginConfig?.loginButtons)[key])"
+          class="log-btn"
+        >
+          <span class="mat-title">{{ key }}</span>
         </button>
-
       </div>
 
-      <button *ngIf="isClientLogin" name="login_client_button" color="primary" mat-raised-button i18n="login: client"
-        (click)="login('S')" class="log-btn">
+      <button
+        *ngIf="isClientLogin"
+        name="login_client_button"
+        color="primary"
+        mat-raised-button
+        i18n="login: client"
+        (click)="login('S')"
+        class="log-btn"
+      >
         <span class="mat-title">Login</span>
-
       </button>
-      <button *ngIf="!isClientLogin" name="login_for_infoscions" color="primary" mat-raised-button
-        i18n="login: employee" (click)="login('E')" class="log-btn">
+      <button
+        *ngIf="!isClientLogin"
+        name="login_for_infoscions"
+        color="primary"
+        mat-raised-button
+        i18n="login: employee"
+        (click)="login('E')"
+        class="log-btn"
+      >
         <span class="mat-title">Login For Infoscions</span>
 
         <mat-icon class="margin-left-xs">exit_to_app</mat-icon>
       </button>
-      <button *ngIf="!isClientLogin" name="login_for_subsidiaries" color="primary" mat-stroked-button
-        i18n="login: subsidiary" (click)="login('S')" class="log-btn">
+      <button
+        *ngIf="!isClientLogin"
+        name="login_for_subsidiaries"
+        color="primary"
+        mat-stroked-button
+        i18n="login: subsidiary"
+        (click)="login('S')"
+        class="log-btn"
+      >
         <span class="mat-title">Login For Subsidiaries</span>
-
       </button>
-      <button *ngIf="!isClientLogin" name="login_for_recruits" color="primary" mat-stroked-button
-        i18n="login: new recruits" (click)="login('N')" class="log-btn">
+      <button
+        *ngIf="!isClientLogin"
+        name="login_for_recruits"
+        color="primary"
+        mat-stroked-button
+        i18n="login: new recruits"
+        (click)="login('N')"
+        class="log-btn"
+      >
         <span class="mat-title">Login For New Recruits</span>
-
       </button>
     </div>
     <div class="buttons-public ws-mat-primary-text">
-      <a mat-button name="terms_btn" i18n="terms and conditions" routerLink="/public/tnc">Terms of use</a>
-      <a mat-button name="contact_btn" i18n="contact us" routerLink="/public/contact">Help & Contact</a>
+      <a mat-button name="terms_btn" i18n="terms and conditions" routerLink="/public/tnc"
+        >Terms of use</a
+      >
+      <a mat-button name="contact_btn" i18n="contact us" routerLink="/public/contact"
+        >Help & Contact</a
+      >
     </div>
   </div>
 </div>

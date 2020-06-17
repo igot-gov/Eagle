@@ -65,7 +65,7 @@ export class LpDetailsComponent implements OnInit {
     // this.logger.log('datacheck ,', this.lpData, this.route.snapshot.params.id)
 
     this.learningPath = this.lpData.filter((lp: ILpData) => {
-      return lp.lp_id.toString() === this.route.snapshot.params.id
+      return lp.lp_id === this.route.snapshot.params.id
     })[0]
 
     if (this.learningPath.profiles && this.learningPath.profiles.length > 0) {
@@ -127,7 +127,7 @@ export class LpDetailsComponent implements OnInit {
 
   onCourseClicked(courseId: string) {
     const course = this.courses.find(item => item.identifier === courseId)
-    const url = course.link.replace('https://lex.infosysapps.com', '')
+    const url = course.link.replace('https://wingspan.com', '')
     this.router.navigateByUrl(url)
   }
 
@@ -136,7 +136,7 @@ export class LpDetailsComponent implements OnInit {
       item => item.playground_id === practiceId,
     )
     if (playItem) {
-      const url = playItem.playground_link.replace('https://lex.infosysapps.com/', '')
+      const url = playItem.playground_link.replace('https://wingspan.com/', '')
       this.router.navigateByUrl(url)
     }
   }

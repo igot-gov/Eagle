@@ -101,7 +101,7 @@ export class HtmlComponent implements OnInit, OnChanges {
       //     },
       //   )
       // }
-        this.showIsLoadingMessage = false
+      this.showIsLoadingMessage = false
       if (this.htmlContent.isIframeSupported !== 'No') {
         setTimeout(
           () => {
@@ -178,28 +178,11 @@ export class HtmlComponent implements OnInit, OnChanges {
         iframe.onload(event)
       }
       iframe.onload = (data => {
-         if (data.target) {
-           this.pageFetchStatus = 'done'
-           this.showIsLoadingMessage = false
-         }
+        if (data.target) {
+          this.pageFetchStatus = 'done'
+          this.showIsLoadingMessage = false
+        }
       })
     }
   }
-
-  // checkIfIntranet(): Observable<boolean> {
-  //   // const testUrl = 'http://10.177.157.45/wingspan-web/fusion/raw/dev/package.json'
-  //   // const testUrl = 'https://iscls2apps.ad.infosys.com/HMYPlus/inc/js/jquery-1.11.3.js'
-  //   const testUrl = 'http://jsfiddle.net/echo/jsonp/'
-  //   // const testUrl = 'https://iscls2apps.ad.infosys.com/HMYPlus/images/SearchIcon.png'
-  //   // const testUrl = 'http://Home.aspx'
-  //   // tslint:disable-next-line: deprecation
-  //   return this.http.jsonp(testUrl, 'callback').pipe(
-  //     mapTo(true),
-  //     catchError(err => {
-  //       //console.log('error', err)
-  //       return of(false)
-  //     }),
-  //   )
-  //   // this.http.jsonp()
-  // }
 }

@@ -142,8 +142,8 @@
                   Content
                 </p>
 
-                <ws-auth-plain-ckeditor *ngIf="currentId" [id]="currentId" [doPartialRegex]="true" [content]="(userData)? userData[currentId].pages[selectedPage].body : ''"
-                  (value)="onBodyChange($event)">
+                <ws-auth-plain-ckeditor [content]="(userData)? userData[currentId].pages[selectedPage].body : ''" (value)="onBodyChange($event)"
+                  [id]="currentId">
                 </ws-auth-plain-ckeditor>
 
               </div>
@@ -175,7 +175,7 @@
                 <mat-card class="audios-card-container">
                   <div class="cursor-pointer flex flex-row justify-between px-4 pt-2" aria-label="click to expand card" i18n-aria-label (click)="showAudioCard=!showAudioCard">
                     <div class="flex">
-                      <p class="font-weight-bold pt-1 self-center  margin-remove-bottom" i18n>
+                      <p class="font-weight-bold pb-1 self-center  margin-remove-bottom" i18n>
                         Audios
                       </p>
                       <button aria-label="add audio" id="abtn" mat-icon-button color='primary' (click)="$event.stopPropagation();audioADD()" matTooltip="Add audio file">

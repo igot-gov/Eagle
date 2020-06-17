@@ -22,7 +22,6 @@ import {
   UserContentRatingModule,
   BtnContentFeedbackV2Module,
   PlayerBriefModule,
-  PlayerPdfV2Module,
 } from '@ws-widget/collection'
 
 import {
@@ -61,7 +60,6 @@ import { RouterModule } from '@angular/router'
     UserContentRatingModule,
     BtnContentFeedbackV2Module,
     PlayerBriefModule,
-    PlayerPdfV2Module,
   ],
   exports: [
     PdfComponent,

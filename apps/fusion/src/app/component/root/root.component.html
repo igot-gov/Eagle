@@ -18,11 +18,8 @@
       isNavBarRequired
   }">
   <router-outlet></router-outlet>
-  <ws-app-chatbot [currentUrl]="currentUrl"
-    *ngIf="configSvc.isAuthenticated && configSvc.hasAcceptedTnc && showChatBot">
-  </ws-app-chatbot>
 </div>
-<ws-app-footer [hidden]="!showFooter" class="app-footer" [ngClass]="{ 'padding-bottom: 56px': !isSetupPage}"
+<ws-app-footer class="app-footer" [ngClass]="{ 'padding-bottom: 56px': !isSetupPage}"
   *ngIf="(authSvc.isLoggedIn$ | async) === true && showNavbar"></ws-app-footer>
 <ws-app-nav-bar class="bottom-nav-bar" [hidden]="!showNavbar"
   *ngIf="isNavBarRequired && (isXSmall$ | async) === true && (authSvc.isLoggedIn$ | async) === true" [mode]="'bottom'">

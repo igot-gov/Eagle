@@ -81,12 +81,6 @@ export class PersonProfileComponent implements OnInit {
     }
     this.profileSvc.fetchConfigFile().subscribe((data: any) => {
       if (data) {
-        if (data.enabledTabs.achievements.available) {
-          this.enabledFeatures.push('badges')
-        }
-        if (data.enabledTabs.skills.available) {
-          this.enabledFeatures.push('skills')
-        }
         if (data.enabledTabs.interests.available) {
           this.isInterestsEnabled = true
         }
@@ -122,7 +116,7 @@ export class PersonProfileComponent implements OnInit {
       },
     )
   }
-  unfollow() {
+  unfollowFn() {
     this.statusFollowed = 'PENDING'
     this.followSvc.unfollow(this.targetId, 'person').subscribe(
       () => {
@@ -234,9 +228,7 @@ export class PersonProfileComponent implements OnInit {
         this.openSnackBar('Error while fetching data.')
       })
   }
-  checkInterestEnabled(event: boolean) {
-    this.isInterestsEnabled = this.isInterestsEnabled && event
-  }
+
   private openSnackBar(message: string) {
     this.matSnackBar.open(message)
   }

@@ -1,7 +1,6 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core'
 import { NsTnc } from '../../../../../../../../../src/app/models/tnc.model'
 import { MatSelectChange } from '@angular/material'
-import { EventService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-tnc-renderer',
@@ -19,7 +18,7 @@ export class TncRendererComponent implements OnInit, OnChanges {
 
   // UI Vars
   currentPanel: 'tnc' | 'dp' = 'tnc'
-  constructor(private eventSvc: EventService) { }
+  constructor() { }
 
   ngOnInit() {
     if (this.tncData) {
@@ -68,19 +67,8 @@ export class TncRendererComponent implements OnInit, OnChanges {
   }
 
   changeTncLang(locale: MatSelectChange) {
-    this.raiseTelemetry(locale.value)
     this.tncChange.emit(locale.value)
     // this.dpChange.emit(locale.value)
-  }
-
-  raiseTelemetry(lang: string) {
-    this.eventSvc.raiseInteractTelemetry('click', 'dropDown', {
-      contentType: 'button',
-      context: {
-        pageSection: 'tnc',
-      },
-      selectedLanguage: lang,
-    })
   }
 
 }

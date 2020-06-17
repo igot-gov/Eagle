@@ -4,7 +4,6 @@ export interface IUserForm {
   middleName?: string
   lastName: string
   email: string
-  keycloakFields: string[]
   username?: string
   enabled?: boolean
   emailVerified?: boolean

@@ -87,8 +87,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   regionList: any[] = []
   accessPathList: any[] = []
   infoType = 'appIcon'
-  isSiemens = false
-  isFord = false
+  isClient1 = false
+  isClient2 = false
   fetchTagsStatus: 'done' | 'fetching' | null = null
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
   selectedIndex = 0
@@ -134,7 +134,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
     private valueSvc: ValueService,
-  ) {}
+  ) { }
 
   ngAfterViewInit() {
     this.ref.detach()
@@ -147,8 +147,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit() {
     this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
     this.showRoleRequest = this.authInitService.authAdditionalConfig.allowRoleRequest
-    this.isSiemens = this.accessService.rootOrg.toLowerCase() === 'siemens'
-    this.isFord = this.accessService.rootOrg.toLowerCase() === 'ford'
+    this.isClient1 = this.accessService.rootOrg.toLowerCase() === 'client1'
+    this.isClient2 = this.accessService.rootOrg.toLowerCase() === 'client2'
     this.ordinals = this.authInitService.ordinals
     this.audienceList = this.ordinals.audience
     this.jobProfileList = this.ordinals.jobProfile
@@ -228,7 +228,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           return of([])
         }),
-    )
+      )
       .subscribe(
         users => {
           this.employeeList = users || <string[]>[]
@@ -237,7 +237,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         () => {
           this.fetchTagsStatus = 'done'
         },
-    )
+      )
 
     this.trackContactsCtrl.valueChanges
       .pipe(
@@ -252,7 +252,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           return of([])
         }),
-    )
+      )
       .subscribe(
         users => {
           this.employeeList = users || <string[]>[]
@@ -261,7 +261,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         () => {
           this.fetchTagsStatus = 'done'
         },
-    )
+      )
 
     this.publisherDetailsCtrl.valueChanges
       .pipe(
@@ -276,7 +276,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           return of([])
         }),
-    )
+      )
       .subscribe(
         users => {
           this.employeeList = users || <string[]>[]
@@ -285,7 +285,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         () => {
           this.fetchTagsStatus = 'done'
         },
-    )
+      )
 
     this.editorsCtrl.valueChanges
       .pipe(
@@ -300,7 +300,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           return of([])
         }),
-    )
+      )
       .subscribe(
         users => {
           this.employeeList = users || <string[]>[]
@@ -309,7 +309,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         () => {
           this.fetchTagsStatus = 'done'
         },
-    )
+      )
 
     this.creatorDetailsCtrl.valueChanges
       .pipe(
@@ -324,7 +324,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           }
           return of([])
         }),
-    )
+      )
       .subscribe(
         users => {
           this.employeeList = users || <string[]>[]
@@ -333,7 +333,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         () => {
           this.fetchTagsStatus = 'done'
         },
-    )
+      )
 
     this.audienceCtrl.valueChanges.subscribe(() => this.fetchAudience())
 
@@ -343,7 +343,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       .pipe(
         debounceTime(400),
         filter(v => v),
-    )
+      )
       .subscribe(() => this.fetchRegion())
 
     this.accessPathsCtrl.valueChanges
@@ -415,7 +415,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       false,
       this.parentContent ? this.contentService.getUpdatedMeta(this.parentContent) : undefined,
     )
-    this.contentService.isEditEnabled = this.isEditEnabled
     this.contentMeta.name = contentMeta.name === 'Untitled Content' ? '' : contentMeta.name
     this.canExpiry = this.contentMeta.expiryDate !== '99991231T235959+0000'
     if (this.canExpiry) {
@@ -440,7 +439,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       if (v.condition) {
         let canAdd = false
           // tslint:disable-next-line: whitespace
-          ;(v.condition.showFor || []).map((con: any) => {
+          ; (v.condition.showFor || []).map((con: any) => {
             let innerCondition = false
             Object.keys(con).map(meta => {
               if (
@@ -458,7 +457,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           })
         if (canAdd) {
           // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
-          ;(v.condition.nowShowFor || []).map((con: any) => {
+          ; (v.condition.nowShowFor || []).map((con: any) => {
             let innerCondition = false
             Object.keys(con).map(meta => {
               if (
@@ -534,7 +533,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           this.contentForm.controls[v].markAsPristine()
           this.contentForm.controls[v].markAsUntouched()
         }
-      } catch (ex) {}
+      } catch (ex) { }
     })
     this.canUpdate = true
     this.storeData()
@@ -838,7 +837,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
                   duration: NOTIFICATION_TIME * 1000,
                 })
               },
-          )
+            )
         }
       },
     })
@@ -890,10 +889,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
                   (field === 'publisherDetails' && v.includes('publisher')) ||
                   (field === 'publisherDetails' &&
                     event.option.value.id === this.accessService.userId &&
-                    this.isSiemens &&
+                    this.isClient1 &&
                     this.contentMeta.contentType === 'Resource'),
               ),
-          )
+            )
           : of(true)
       observable.subscribe(
         (data: boolean) => {

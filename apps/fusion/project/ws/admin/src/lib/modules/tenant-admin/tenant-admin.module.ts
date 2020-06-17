@@ -29,8 +29,6 @@ import {
   MatSlideToggleModule,
   MatTabsModule,
   MatDividerModule,
-  MatPaginatorModule,
-  MatProgressBarModule,
 } from '@angular/material'
 import { HomeComponent } from './routes/page/home/home.component'
 import {
@@ -58,8 +56,8 @@ import { RolesManagementDetailComponent } from './routes/system-roles-management
 import { ConfirmActionComponent } from './routes/system-roles-management/roles-management-detail/components/confirm-action/confirm-action.component'
 import { UsersComponent } from './routes/users/users.component'
 import { CreateUserComponent } from './routes/users/create-user/create-user.component'
-import { AddUsersDialogComponent } from './routes/system-roles-management/roles-management-detail/components/add-users-dialog/add-users-dialog.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
+
 @NgModule({
   declarations: [
     TenantAdminComponent,
@@ -80,7 +78,6 @@ import { OpenRolesDialogComponent } from './routes/users/components/open-roles-d
     ConfirmActionComponent,
     UsersComponent,
     CreateUserComponent,
-    AddUsersDialogComponent,
     OpenRolesDialogComponent,
   ],
   imports: [
@@ -122,17 +119,12 @@ import { OpenRolesDialogComponent } from './routes/users/components/open-roles-d
     MatSlideToggleModule,
     MatDividerModule,
     UserImageModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
   ],
   providers: [TenantAdminService],
-  entryComponents: [
-    ModifyRolesDialogComponent,
-    EditBannersDialogComponent,
-    DialogDeregisterUserComponent,
-    ConfirmActionComponent,
-    AddUsersDialogComponent,
-    OpenRolesDialogComponent,
-    ],
+  entryComponents: [ModifyRolesDialogComponent,
+   EditBannersDialogComponent,
+   DialogDeregisterUserComponent,
+   ConfirmActionComponent,
+   OpenRolesDialogComponent],
 })
 export class TenantAdminModule { }

@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Subscription } from 'rxjs'
-import { ConfigurationsService, EInstance, EventService, WsEvents } from '../../../../utils'
+import { ConfigurationsService, EventService, WsEvents } from '../../../../utils'
 import { BtnContentLikeService } from './btn-content-like.service'
 
 @Component({
@@ -40,10 +40,6 @@ export class BtnContentLikeComponent extends WidgetBaseComponent
 
   get showLikesCount(): boolean {
     switch (this.configSvc.rootOrg) {
-      case EInstance.PATHFINDERS:
-        return true
-      case EInstance.FORD:
-        return true
       default:
         return false
     }

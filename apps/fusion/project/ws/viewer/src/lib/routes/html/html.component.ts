@@ -8,7 +8,6 @@ import {
   EventService,
   SubapplicationRespondService,
   WsEvents,
-  EInstance,
 } from '@ws-widget/utils'
 import { fromEvent, Subscription } from 'rxjs'
 import { filter } from 'rxjs/operators'
@@ -35,8 +34,8 @@ export class HtmlComponent implements OnInit, OnDestroy {
   uuid: string | null | undefined = null
   realTimeProgressRequest = {
     content_type: 'Resource',
-    current: ['1'],
-    max_size: 1,
+    current: ['0'],
+    max_size: 0,
     mime_type: NsContent.EMimeTypes.HTML,
     user_id_type: 'uuid',
   }
@@ -96,6 +95,12 @@ export class HtmlComponent implements OnInit, OnDestroy {
           const tempHtmlData = data.content.data
           if (this.alreadyRaised && this.oldData) {
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
+            if (!this.hasFiredRealTimeProgress) {
+              this.fireRealTimeProgress()
+              if (this.realTimeProgressTimer) {
+                clearTimeout(this.realTimeProgressTimer)
+              }
+            }
             this.subApp = false
           }
           if (tempHtmlData) {
@@ -107,7 +112,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
           } else {
             this.htmlData = tempHtmlData
           }
-          this.fireRealTimeProgress()
+          this.raiseRealTimeProgress()
           if (this.htmlData) {
             this.oldData = this.htmlData
             this.alreadyRaised = true
@@ -218,6 +223,12 @@ async  ngOnDestroy() {
     if (this.viewerDataSubscription) {
       this.viewerDataSubscription.unsubscribe()
     }
+    if (!this.hasFiredRealTimeProgress && !this.forPreview) {
+      this.fireRealTimeProgress()
+      if (this.realTimeProgressTimer) {
+        clearTimeout(this.realTimeProgressTimer)
+      }
+    }
   }
 
   formDiscussionForumWidget(content: NsContent.IContent) {
@@ -270,20 +281,29 @@ async  ngOnDestroy() {
     this.eventSvc.dispatchEvent(event)
   }
 
-  private fireRealTimeProgress() {
+  private raiseRealTimeProgress() {
     if (this.forPreview) {
       return
     }
-    if (this.htmlData && this.htmlData.isExternal && this.htmlData.sourceName === 'Wingspan'
-      && this.configSvc.rootOrg === EInstance.FORD) {
-      this.realTimeProgressRequest.content_type = this.htmlData ? this.htmlData.contentType : ''
-      this.viewerSvc.realTimeProgressUpdate(
-        this.htmlData ? this.htmlData.identifier : '',
-        this.realTimeProgressRequest,
-      )
-      return
+
+    this.realTimeProgressRequest = {
+      ...this.realTimeProgressRequest,
+      current: ['1'],
+      max_size: 1,
     }
-    if ((this.htmlData || ({} as any)).isIframeSupported.toLowerCase() !== 'yes') {
+    if (this.realTimeProgressTimer) {
+      clearTimeout(this.realTimeProgressTimer)
+    }
+    this.hasFiredRealTimeProgress = false
+    this.realTimeProgressTimer = setTimeout(() => {
+      this.hasFiredRealTimeProgress = true
+      this.fireRealTimeProgress()
+      // tslint:disable-next-line: align
+    }, 2 * 60 * 1000)
+  }
+
+  private fireRealTimeProgress() {
+    if (this.forPreview) {
       return
     }
     if (this.htmlData) {
@@ -299,6 +319,9 @@ async  ngOnDestroy() {
       ) {
         return
       }
+    }
+    if ((this.htmlData || ({} as any)).isIframeSupported.toLowerCase() !== 'yes') {
+      return
     }
     if (this.htmlData) {
       if (this.htmlData.sourceName === 'Cross Knowledge') {

@@ -3,12 +3,10 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
 import {
   ConfigurationsService,
   NsPage,
-  EventService,
 } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { MatDialog } from '@angular/material'
 import { AppTourDialogComponent } from '../../../../../../../../../library/ws-widget/collection/src/public-api'
 import { Router, ActivatedRoute } from '@angular/router'
-import { IBadgeResponse } from '../../../profile/routes/badges/badges.model'
 import { Globals } from '../../globals'
 
 @Component({
@@ -19,7 +17,7 @@ import { Globals } from '../../globals'
 export class SetupDoneComponent implements OnInit {
   appIcon: SafeUrl | null = null
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
-  badges: IBadgeResponse | null = null
+  badges: any | null = null
   constructor(
     private configSvc: ConfigurationsService,
     private route: ActivatedRoute,
@@ -27,8 +25,7 @@ export class SetupDoneComponent implements OnInit {
     private matDialog: MatDialog,
     private router: Router,
     private globals: Globals,
-    private eventSvc: EventService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.data.subscribe(async data => {
@@ -42,7 +39,6 @@ export class SetupDoneComponent implements OnInit {
   }
 
   finishSetup() {
-    this.raiseTelemetry()
     this.globals.firstTimeSetupDone = true
     this.matDialog.open(AppTourDialogComponent, {
       width: '500px',
@@ -51,14 +47,5 @@ export class SetupDoneComponent implements OnInit {
       backdropClass: 'backdropBackground',
     })
     this.router.navigate(['page', 'home'])
-  }
-
-  raiseTelemetry() {
-    this.eventSvc.raiseInteractTelemetry('click', 'finish', {
-      contentType: 'button',
-      context: {
-        pageSection: 'setup-done',
-      },
-    })
   }
 }

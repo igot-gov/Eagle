@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"*/
 package com.infosys.lexauthoringservices.model.neo4j;
 
 import java.io.Serializable;
@@ -34,10 +31,11 @@ public class Relation implements Serializable {
 		this.relationType = relationType;
 	}
 
-	public Relation(String startNodeId, String relationType, String endNodeId, Map<String, Object> metadata) {
+	public Relation(Long id, String startNodeId, String relationType, String endNodeId, Map<String, Object> metadata) {
+		this.id = id;
 		this.startNodeId = startNodeId;
-		this.endNodeId = endNodeId;
 		this.relationType = relationType;
+		this.endNodeId = endNodeId;
 		this.metadata = metadata;
 	}
 
@@ -151,5 +149,42 @@ public class Relation implements Serializable {
 
 	public void setEndNodeMetadata(Map<String, Object> endNodeMetadata) {
 		this.endNodeMetadata = endNodeMetadata;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((endNodeId == null) ? 0 : endNodeId.hashCode());
+		result = prime * result + ((relationType == null) ? 0 : relationType.hashCode());
+		result = prime * result + ((startNodeId == null) ? 0 : startNodeId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Relation other = (Relation) obj;
+		if (endNodeId == null) {
+			if (other.endNodeId != null)
+				return false;
+		} else if (!endNodeId.equals(other.endNodeId))
+			return false;
+		if (relationType == null) {
+			if (other.relationType != null)
+				return false;
+		} else if (!relationType.equals(other.relationType))
+			return false;
+		if (startNodeId == null) {
+			if (other.startNodeId != null)
+				return false;
+		} else if (!startNodeId.equals(other.startNodeId))
+			return false;
+		return true;
 	}
 }
