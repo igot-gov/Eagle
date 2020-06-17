@@ -5,5 +5,5 @@ docker run --name lex-core-build lex-core-build:latest &&  docker cp lex-core-bu
 docker rm -f lex-core-build
 docker rmi -f lex-core-build
 
-docker build --no-cache -t <DockerRepo>/lex-core-service:<TagName> .
-docker push <DockerRepo>/lex-core-service:<TagName>
+docker build --no-cache -t eagle-docker.tarento.com/lex-core-service:gold .
+docker push eagle-docker.tarento.com/lex-core-service:gold

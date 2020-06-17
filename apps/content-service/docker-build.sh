@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t <DockerRepo>/content-service:<TagName> .
+docker build -t eagle-docker.tarento.com/content-service:gold .
 
-docker push <DockerRepo>/content-service:<TagName>
+docker push eagle-docker.tarento.com/content-service:gold

@@ -1,0 +1,49 @@
+version: '3.6'
+
+services:
+  {{ docker_service_name }}:
+    image: {{ docker_hub_url }}/{{ image_name }}:{{ tag }}
+    hostname: "{{ docker_service_name }}"
+    
+    {% if publish_ports == true %}
+
+    ports:
+      - {{ host_port }}:{{ docker_port }}
+
+    {% endif %}
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == {{ var_docker_deploy_node_type }} 
+      replicas: {{ replicas }}
+      resources:
+        reservations:
+          memory: {{ reserved_memory }}
+        limits:
+          memory: {{ limited_memory }}
+      update_config:
+        parallelism: 1
+        delay: 0s
+        failure_action: rollback
+        order: start-first
+      #rollback_config:
+        #parallelism: 1
+        #delay: 0s
+      restart_policy:
+        condition: on-failure
+    #healthcheck:
+      #test: ["CMD", "curl", "-f", "http://127.0.0.1:5902"]
+      #interval: 5s
+      #timeout: 30s
+      #retries: 3
+      #start_period: 10s
+    networks:
+      application_default:
+        aliases:
+            - {{ network_alias_sb_ext_authoring_service }}
+    env_file:
+      - {{ env_file_deployment_location }}
+networks:
+  application_default:
+    external: true

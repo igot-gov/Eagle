@@ -8,8 +8,8 @@ docker rm web-services.build
 docker rmi -f web-services.build
 unzip dist.zip
 
-docker build -f Dockerfile -t <DockerRepo>/ui-proxies:<TagName> .
-docker push <DockerRepo>/ui-proxies:<TagName>
+docker build -f Dockerfile -t eagle-docker.tarento.com/ui-proxies:gold .
+docker push eagle-docker.tarento.com/ui-proxies:gold
 
 rm -rf dist
 rm -rf dist.zip

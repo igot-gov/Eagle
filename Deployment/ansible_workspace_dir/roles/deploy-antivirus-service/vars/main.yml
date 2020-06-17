@@ -1,0 +1,30 @@
+---
+# vars file for deploy-antivirus-service
+
+# For script
+template_compose_file_name: antivirus-service.j2
+template_env_file_name: antivirus-service-env.j2
+template_config_file_name: clamd.j2
+compose_file_name: "{{ service_antivirus_service }}.yml"
+env_file_name: "{{ service_antivirus_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+config_file_deployment_location: "{{ config_files_dir }}/clamd.conf"
+user_friendly_name: CLAMAV antivirus service
+
+# For service
+application_port: "{{ service_antivirus_port }}"
+image_name: "{{ image_antivirus_service }}"
+tag: "{{ tags_antivirus_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_antivirus_service }}"
+reserved_memory: "{{ service_mem_reserved_antivirus_service }}"
+limited_memory: "{{ service_mem_limit_antivirus_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_av_service }}"
+docker_service_stack_name: av
+docker_service_name: "{{ service_antivirus_service }}"
+force_reload: "{{ force_reload_antivirus_service }}"
+docker_config_name: "clamd"
+docker_config_deployment_location: "/etc/clamav/clamd.conf"

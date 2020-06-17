@@ -1,0 +1,52 @@
+# Databse configuration
+ES_IP={{ elasticsearch_host }}
+CASSANDRA_IP={{ cassandra_contact_points }}
+IS_CASSANDRA_PASSWORD_ENABLED={{ enable_password_for_cassandra }}
+CASSANDRA_USERNAME={{ cassandra_username }}
+CASSANDRA_PASSWORD={{ cassandra_password }}
+
+
+# App configuration
+KEYCLOAK={{ keycloak_token }}
+INTERNAL_IP={{ app_server_host }}
+PUBLIC_BASE={{ domain_name }}
+NODE_ENV={{ node_env }}
+NODE_TLS_REJECT_UNAUTHORIZED={{ node_tls_reject_unauthorized }}
+REALM={{ realm }}
+CLIENT={{ client }}
+PORTAL=portal
+APPID={{ app_id }}
+
+# Related service configuration
+CONTENT_BASE={{ content_base }}
+WEBHOSTED_BASE={{ webhosted_base }}
+WEBHOST_BASE={{ webhosted_base }}
+
+# External dependancies
+IAP_BASE={{ iap_base_url }}
+IAP_VERIFY_BASE_PF={{ iap_verify_base_pf }}
+IAP_VERFIY_BASE_CE={{ iap_verify_base_ce }}
+IAP_VERIFY_BASE={{ iap_verify_base }}
+IAP_CLIENT_SECRET={{ iap_client_secret }}
+IAP_CLIENT_ID={{ iap_client_id }}
+
+KM_PROJECT={{ km_project_base }}
+
+ES_PASSWORD={{ elasticsearch_password }}
+ES_USERNAME={{ elasticsearch_username }}
+ES_PASSWORD_ENABLE={{ enable_password_for_elasticsearch }}
+ES_PORT={{ elasticsearch_http_port }}
+ES_protocol={{ es_protocol }}
+
+SB_EXT={{ sb_ext_base }}
+AUTH_BACKEND={{ authtool_sb_ext_base }}
+SUNBIRD_AUTH={{ authtool_sb_ext_base }}
+NEW_SEARCH={{ sb_ext_base }}
+
+# DBMS API
+DBMS=http://{{ network_alias_dbms_api_service }}:{{ service_dbms_api_port }}/
+
+
+PID_API_BASE={{ pid_api_base }}
+SBEXT_API_BASE_2={{ sb_ext_base_2 }}
+APP_URL={{ app_url }}

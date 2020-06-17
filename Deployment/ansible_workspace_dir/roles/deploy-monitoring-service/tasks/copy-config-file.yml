@@ -1,0 +1,9 @@
+---
+  - name: Ensure config file directory exists
+    file:
+      path: "{{ config_files_dir }}"
+      state: directory
+  - name: Create and config template
+    template:
+      src: "{{ template_config_file_name }}"
+      dest: "{{ config_file_deployment_location }}"

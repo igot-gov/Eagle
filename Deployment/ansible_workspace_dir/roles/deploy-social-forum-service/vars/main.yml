@@ -1,0 +1,66 @@
+---
+# vars file for deploy-social-forum-service
+
+# For script
+template_compose_file_name: social-forum.j2
+template_env_file_name: social-forum-env.j2
+compose_file_name: "{{ service_social_forum }}.yml"
+env_file_name: "{{ service_social_forum }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Social forum service
+
+# For service
+application_port: "{{ service_social_forum_port }}"
+image_name: "{{ image_social_forum_service }}"
+tag: "{{ tags_social_forum_service }}"
+host_port: 5001 # Change this later
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_social_forum_service }}"
+reserved_memory: "{{ service_mem_reserved_social_forum_service }}"
+limited_memory: "{{ service_mem_limit_social_forum_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_social_forum_service }}"
+docker_service_stack_name: social-forum
+docker_service_name: "{{ service_social_forum }}"
+force_reload: "{{ force_reload_social_forum_service }}"
+
+# For application
+node_env: production
+
+es_post_index: post
+es_post_type: post
+
+es_thread_index: thread
+es_thread_type: thread
+es_thread_timeline_template: threadtemplate
+es_thread_timeline_template_v1: threadtemplate_v1
+
+es_post_template: posttemplate
+
+es_user_post_activity_index: userpostactivity
+es_user_post_activity_type: userpostactivity
+es_user_post_activity_template: userpostactivitytemplate
+
+es_tags_index: tags
+es_tags_type: tags
+es_tags_template: tagstemplate
+
+es_hash_tags_index: hashtags
+es_hash_tags_type: hashtags
+es_hash_tags_template: hashtagstemplate
+
+flag_threshold: 10
+
+es_social_search_index_en: socialsearch_en
+es_social_search_type: socialsearch
+es_social_search_template: socialsearchtemplate_v1
+#es_default_access_path: Infosys,Infosys/Infosys Ltd
+es_content_search_index: "{{ elasticsearch_content_search_index }}"
+es_content_search_type: "{{ elasticsearch_content_search_type }}"
+
+social_kafka_topic: social
+
+social_neo4j_url: "bolt://{{ neo4j_host }}:{{ neo4j_port }}"
+
+postgres_enable_password: true

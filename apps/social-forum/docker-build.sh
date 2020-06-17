@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t <DockerRepo>/social-forum:<TagName> .
+docker build -t eagle-docker.tarento.com/social-forum:gold .
 
-docker push <DockerRepo>/social-forum:<TagName>
+docker push eagle-docker.tarento.com/social-forum:gold

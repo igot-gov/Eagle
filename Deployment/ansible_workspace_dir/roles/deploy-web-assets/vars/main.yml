@@ -1,0 +1,4 @@
+---
+# vars file for deploy-web-assets
+source_folder: "/var/lib/jenkins/temp_copy/web-client-public-assets"
+destination_folder: "{{ host_content_directory_path }}/web-host/"

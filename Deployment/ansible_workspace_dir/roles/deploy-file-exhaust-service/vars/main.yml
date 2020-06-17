@@ -1,0 +1,30 @@
+---
+# vars file for deploy-file-exhaust-service
+template_compose_file_name: file-exhaust-service.j2
+template_env_file_name: file-exhaust-service-env.j2
+compose_file_name: "{{ service_file_exhaust_service }}.yml"
+env_file_name: "{{ service_file_exhaust_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: File exhaust service
+
+# For service
+application_port: "{{ service_file_exhuast_api_port }}"
+image_name: "{{ image_file_exhaust_service }}"
+tag: "{{ tags_file_exhaust_service }}"
+host_port: 5008
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_file_exhaust_service }}"
+reserved_memory: "{{ service_mem_reserved_file_exhaust_service }}"
+limited_memory: "{{ service_mem_limit_file_exhaust_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_file_exhaust_service }}"
+docker_service_stack_name: external
+docker_service_name: "{{ service_file_exhaust_service }}"
+force_reload: "{{ force_reload_file_exhaust_service }}"
+host_mount_location: "{{ base_mount_path }}/backups"
+docker_mount_location: "/backups"
+
+# For application
+learning_analytics_password: "#4d2JuL^K09scG"
+cassandra_host_port: "{{ cassandra_host }}:{{ cassandra_port}}"

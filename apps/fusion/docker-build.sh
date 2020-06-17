@@ -1,8 +1,8 @@
 #!/bin/bash
 
-docker build -t <DockerRepo>/ui-static:<TagName> .
+docker build -t eagle-docker.tarento.com/ui-static:gold .
 
 echo "docker build is completed !!!! Starting docker push"
 
-docker push <DockerRepo>/ui-static:<TagName> .
+docker push eagle-docker.tarento.com/ui-static:gold .
 

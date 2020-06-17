@@ -1,0 +1,62 @@
+---
+# vars file for deploy-lex-core-service
+
+# For script
+template_compose_file_name: lex-core-service.j2
+template_env_file_name: lex-core-service-env.j2
+compose_file_name: "{{ service_lex_core_service }}.yml"
+env_file_name: "{{ service_lex_core_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Lex core service
+
+# For service
+application_port: "{{ service_lex_core_port }}"
+image_name: "{{ image_lex_core_service }}"
+tag: "{{ tags_lex_core_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_lex_core_service }}"
+reserved_memory: "{{ service_mem_reserved_lex_core_service }}"
+limited_memory: "{{ service_mem_limit_lex_core_service }}"
+#limited_memory: 2048M
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_lex_core_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_lex_core_service }}"
+force_reload: "{{ force_reload_lex_core_service }}"
+
+# For application
+server_connection_timeout: 5000
+tomcat_max_threads: 400
+tomcat_min_spare_threads: 20
+servlet_multipart_max_file_size: 100Mb
+servlet_multipart_max_request_size: 100Mb
+spring_data_mongodb_uri: mongodb://{{ mongodb_user }}:{{ mongodb_password | urlencode }}@{{ mongodb_host }}:{{ mongodb_port }}/{{ mongodb_authentication_database }}
+spring_data_mongodb_database: telemetry
+spring_data_cassandra_bodhi_startupTimeoutInSeconds: 100
+
+# spring_data_elasticsearch_certificate: /certs/kirk.pem
+# spring_data_elasticsearch_certificate_key: /certs/kirk-key.pem
+# spring_data_elasticsearch_truststore: /certs/root-ca.pem
+# spring_elasticsearch_authentication: "false"
+
+pyeval_server_ip: 10.177.62.154
+pyeval_server_port: 9080
+pyeval_service_name: /PyEval6/
+
+iap_server_ip: 10.177.62.154
+iap_server_port: 8040
+iap_verification_service: /verify/
+
+log_access_key: lex_password
+
+lhub_url: "{{ var_lex_core_learning_hub_url }}"
+lhub_certifaction_url: "{{ var_lex_core_learning_hub_certification_url }}"
+spring_datasource_jdbc_url: jdbc:postgresql://{{ postgresql_host }}:{{ postgresql_port }}/{{ var_lex_core_postgres_db_name }}
+
+enable_realtime_progress: "{{ var_lex_core_enable_realtime_progress }}"
+
+root_org: Infosys
+instance_org: infy01
+access_control_url: http://{{ network_alias_sb_ext_service }}:{{ service_sb_ext_port }}/accesscontrol

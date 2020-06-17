@@ -1,0 +1,26 @@
+---
+# vars file for deploy-more-like-this-service
+
+# For script
+user_friendly_name: More like this service
+template_compose_file_name: more-like-this.j2
+template_env_file_name: more-like-this-env.j2
+compose_file_name: "{{ service_more_like_this_service }}.yml"
+env_file_name: "{{ service_more_like_this_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+
+# For service
+application_port: "{{ service_more_like_this_port }}"
+image_name: "{{ image_more_like_this_service }}"
+tag: "{{ tags_more_like_this_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_more_like_this_service }}"
+reserved_memory: "{{ service_mem_reserved_more_like_this_service }}"
+limited_memory: "{{ service_mem_limit_more_like_this_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_more_like_this_service }}"
+docker_service_stack_name: lms
+docker_service_name: "{{ service_more_like_this_service }}"
+force_reload: "{{ force_reload_more_like_this_service }}"

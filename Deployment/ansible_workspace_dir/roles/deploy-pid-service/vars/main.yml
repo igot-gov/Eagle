@@ -1,0 +1,32 @@
+---
+# vars file for deploy-pid-service
+# For script
+template_compose_file_name: pid-service.j2
+template_env_file_name: pid-service-env.j2
+compose_file_name: "{{ service_pid_service }}.yml"
+env_file_name: "{{ service_pid_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Wingspan PID Service
+
+# For service
+application_port: "{{ service_pid_service_port }}"
+image_name: "{{ image_pid_service }}"
+tag: "{{ tags_pid_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_pid_service }}"
+reserved_memory: "{{ service_mem_reserved_pid_service }}"
+limited_memory: "{{ service_mem_limit_pid_service }}"
+network_alias_name: "{{ network_alias_pid_service }}"
+# host_content_directory: /mydata/content-directory
+docker_service_stack_name: pid
+docker_service_name: "{{ service_pid_service }}"
+force_reload: "{{ force_reload_pid_service }}"
+
+# App variables
+host_content_directory: "{{ host_content_directory_path }}"
+internal_cache_directory: "/pid_cache"
+pid_http_base: "https://{{ var_pid_service_host }}/pid"
+keycloak_http_base: "http://{{ keycloak_host }}:{{ keycloak_port }}/auth"
+
