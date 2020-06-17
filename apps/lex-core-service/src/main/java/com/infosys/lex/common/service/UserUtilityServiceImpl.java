@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 ///**
 //© 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 //Version: 1.10
@@ -21,11 +18,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.infosys.lex.core.logger.LexLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -96,7 +93,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	/*
 	 * this method checks whether the list of users with whom goals/playlist is
 	 * being shared is a list of valid users. ALWAYS PASS VALUES WITH COMPLETE
-	 * DOMAIN eg. EMAIL
+	 * DOMAIN eg. genericid@domain.com
 	 */
 	/*
 	 * (non-Javadoc)
@@ -257,7 +254,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getUsersFromActiveDirectory(List<String> emails) throws Exception {
+	public List<Map<String, Object>> getUsersFromActiveDirectory(List<String> emails){
 		List<Map<String, Object>> ret = new ArrayList<>();
 		String sbExtHost = props.getSbextServiceHost();
 		String sbExtPort = props.getSbextPort();
@@ -280,7 +277,6 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			}
 			ret = (List<Map<String, Object>>) ((Map<String, Object>) responseMap.get("result")).get("response");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 
 		return ret;
@@ -290,11 +286,11 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.common.service.UserUtilityService#getUUIDsFromEmails(java.
 	 * util.List)
 	 */
 	@Override
-	public Map<String, Object> getUUIDsFromEmails(List<String> emails) throws Exception {
+	public Map<String, Object> getUUIDsFromEmails(List<String> emails) {
 
 		Map<String, Object> uuidMap = new HashMap<>();
 		// check users in cassandra
@@ -309,7 +305,7 @@ substitute url based on requirement
 //	 * (non-Javadoc)
 //	 * 
 //	 * @see
-//substitute url based on requirement
+//	 * com.infosys.lex.common.service.UserUtilityService#getUserDataFromUUID(java.
 //	 * util.List)
 //	 */
 //	@Override
@@ -395,7 +391,7 @@ substitute url based on requirement
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean validateUser(String rootOrg, String userId) throws Exception {
+	public boolean validateUser(String rootOrg, String userId) throws ApplicationLogicError {
 
 		String dataSource = getUserDataSource(rootOrg);
 		if ("su".equalsIgnoreCase(dataSource)) {
@@ -639,7 +635,7 @@ substitute url based on requirement
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getUserEmailFromUserId(String rootOrg, String userId) throws Exception {
+	public String getUserEmailFromUserId(String rootOrg, String userId) {
 
 		String dataSource = getUserDataSource(rootOrg);
 		if ("su".equalsIgnoreCase(dataSource)) {
@@ -695,8 +691,7 @@ substitute url based on requirement
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean validatePreviewUser(String rootOrg, String org, String userId, Map<String, Object> contentMeta)
-			throws Exception {
+	public boolean validatePreviewUser(String rootOrg, String org, String userId, Map<String, Object> contentMeta) {
 
 		// verify UserId
 		if (!this.validateUser(rootOrg, userId)) {
@@ -716,7 +711,6 @@ substitute url based on requirement
 		// adds author to preview user list
 		if (contentMeta.containsKey("creatorContacts") && contentMeta.get("creatorContacts") != null) {
 			Object creatorContacts = contentMeta.get("creatorContacts");
-			System.out.println(creatorContacts.getClass().toString());
 			if (creatorContacts instanceof List) {
 				List<?> creatorContactMapList = (List<?>) creatorContacts;
 				for (Object creatorDetailsMapObj : creatorContactMapList) {
@@ -898,7 +892,7 @@ substitute url based on requirement
 					} else if (map.get("wid") != null && map.get("kid") == null
 							|| map.get("kid").toString().isEmpty()) {
 						newUsers.add(map.get("wid").toString());
-						userIds.remove(map.get("kid"));
+						userIds.remove(map.get("wid"));
 					}
 				}
 
@@ -908,8 +902,157 @@ substitute url based on requirement
 			} catch (Exception e) {
 				return result;
 			}
-
 		}
 		return result;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> validateAndFetchNewUsersSet(String rootOrg, List<String> userIds) {
+		Map<String, Object> result = new HashMap<>();
+		Set<String> validUuids = new HashSet<>();
+		Set<String> newUsers = new HashSet<>();
+		Set<String> invalidUsers = new HashSet<>();
+		String dataSource = getUserDataSource(rootOrg);
+
+		if ("su".equalsIgnoreCase(dataSource)) {
+
+			Iterable<UserModel> users = userRepo.findAllById(userIds);
+
+			for (UserModel user : users) {
+				validUuids.add(user.getId());
+			}
+			for (String userId : userIds) {
+				if (!validUuids.contains(userId))
+					invalidUsers.add(userId);
+			}
+			result.put("valid_users", validUuids);
+			result.put("invalid_users", userIds);
+
+		} else {
+			Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+			pidRequestMap.put("source_fields", Arrays.asList("wid", "kid"));
+			pidRequestMap.put("values", userIds);
+
+			Map<String, String> conditions = new HashMap<String, String>();
+			conditions.put("root_org", rootOrg);
+
+			pidRequestMap.put("conditions", conditions);
+
+			try {
+
+				List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
+						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
+						List.class);
+
+				for (Map<String, Object> map : pidResponse) {
+					if (map.get("wid") != null && map.get("kid") != null && !map.get("kid").toString().isEmpty()) {
+						validUuids.add(map.get("wid").toString());
+					} else if (map.get("wid") != null && map.get("kid") == null
+							|| map.get("kid").toString().isEmpty()) {
+						newUsers.add(map.get("wid").toString());
+					}
+				}
+
+				for (String userId : userIds) {
+					if (!validUuids.contains(userId) && !newUsers.contains(userId))
+						invalidUsers.add(userId);
+				}
+
+				result.put("valid_users", validUuids);
+				result.put("invalid_users", invalidUsers);
+				result.put("new_users", newUsers);
+			} catch (Exception e) {
+				throw new ApplicationLogicError("PID ERROR :" + e);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * This method fetches the userdetail from PID based on the property values and
+	 * based on the conditions provided.
+	 * 
+	 * @param rootOrg
+	 * @param userPropertyName
+	 * @param propertyValues
+	 * @param sources
+	 * @param conditions
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> fetchUsersDataByUserProperty(String rootOrg, String userPropertyName,
+			List<String> propertyValues, List<String> sources, Map<String, Object> conditions) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+		if (sources == null || sources.isEmpty())
+			sources = Arrays.asList("wid");
+		pidRequestMap.put("source_fields", sources);
+		pidRequestMap.put("values", propertyValues);
+
+		if (conditions == null)
+			conditions = new HashMap<>();
+
+		conditions.put("root_org", rootOrg);
+
+		pidRequestMap.put("conditions", conditions);
+
+		try {
+
+			List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp() + ":"
+					+ serverConfig.getPidPort().toString() + "/user/multi-fetch/" + userPropertyName, pidRequestMap,
+					List.class);
+
+			result.put("usersDetail", pidResponse);
+		} catch (Exception e) {
+			throw new ApplicationLogicError("PID ERROR :" + e);
+		}
+		return result;
+	}
+
+	/**
+	 * This method fetches the list of users from PID based on the conditions
+	 * provided. Return Map with key "userDetail" which will be null if 
+	 * list is empty and the userdetailmap if not
+	 * 
+	 * @param rootOrg
+	 * @param conditions
+	 * @param sources
+	 * @return
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> fetchUserDataByUserProperty(String rootOrg, Map<String, Object> conditions,
+			List<String> sources) {
+		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+		if (sources == null || sources.isEmpty())
+			sources = Arrays.asList("wid");
+		pidRequestMap.put("source_fields", sources);
+
+		if (conditions == null)
+			conditions = new HashMap<>();
+
+		conditions.put("root_org", rootOrg);
+
+		pidRequestMap.put("conditions", conditions);
+
+		try {
+
+			List<Map<String, Object>> pidResponse = restTemplate.postForObject(
+					"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user/",
+					pidRequestMap, List.class);
+
+			if(pidResponse.isEmpty())
+				result.put("userDetail", null);
+			else
+				result.put("userDetail", pidResponse.get(0));
+		} catch (Exception e) {
+			throw new ApplicationLogicError("PID ERROR :" + e);
+		}
+
+		return result;
+	}
+
 }

@@ -1,6 +1,3 @@
-/*               "Copyright 2020 Infosys Ltd.
-               Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
-               This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 /**
 © 2017 - 2019 Infosys Limited, Bangalore, India. All Rights Reserved. 
 Version: 1.10
@@ -23,6 +20,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.infosys.lex.core.exception.ApplicationLogicError;
 
 public interface UserUtilityService {
 //
@@ -61,7 +59,7 @@ public interface UserUtilityService {
 //	 * @return
 //	 * @throws Exception
 //	 */
-	List<Map<String, Object>> getUsersFromActiveDirectory(List<String> emails) throws Exception;
+	List<Map<String, Object>> getUsersFromActiveDirectory(List<String> emails);
 
 //
 //	String getEmailIdForUUID(String uuid) throws Exception;
@@ -75,7 +73,7 @@ public interface UserUtilityService {
 //	 * @return
 //	 * @throws Exception
 //	 */
-	Map<String, Object> getUUIDsFromEmails(List<String> emails) throws Exception;
+	Map<String, Object> getUUIDsFromEmails(List<String> emails);
 
 //
 //	/**
@@ -113,7 +111,7 @@ public interface UserUtilityService {
 //
 //	Map<String, Object> getEmailUUIDMapForUUIDs(List<String> uuidList) throws Exception;
 
-	boolean validateUser(String rootOrg, String userId) throws Exception;
+	boolean validateUser(String rootOrg, String userId) throws ApplicationLogicError;
 
 	Map<String, Object> validateUsers(String rootOrg, List<String> userIds);
 
@@ -123,10 +121,9 @@ public interface UserUtilityService {
 
 	Map<String, Object> getUserEmailsFromUserIds(String rootOrg, List<String> userIds);
 
-	String getUserEmailFromUserId(String rootOrg, String userId) throws Exception;
+	String getUserEmailFromUserId(String rootOrg, String userId);
 
-	boolean validatePreviewUser(String rootOrg, String org, String userId, Map<String, Object> contentMeta)
-			throws Exception;
+	boolean validatePreviewUser(String rootOrg, String org, String userId, Map<String, Object> contentMeta);
 
 	String getAnswerKeyForExerciseAuthoringPreview(Map<String, Object> contentMeta);
 	
@@ -135,5 +132,14 @@ public interface UserUtilityService {
 			throws JsonParseException, JsonMappingException, IOException;
 
 	Map<String, Object> validateAndFetchNewUsers(String rootOrg, List<String> usersList);
+
+	Map<String, Object> validateAndFetchNewUsersSet(String rootOrg, List<String> userIds);
+
+
+	Map<String, Object> fetchUsersDataByUserProperty(String rootOrg, String userPropertyName,
+			List<String> propertyValues, List<String> sources, Map<String, Object> conditions);
+
+	Map<String, Object> fetchUserDataByUserProperty(String rootOrg, Map<String, Object> conditions,
+			List<String> sources);
 
 }
