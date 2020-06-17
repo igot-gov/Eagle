@@ -1,0 +1,1 @@
+{"script":{"lang":"mustache","source":"   { \"size\": {{sizeValue}}, \n  \"from\": {{fromValue}}, \n  \"sort\": [\n    {\n      \"count\": {\n        \"order\": \"desc\"\n      }\n    }\n  ],\n  \"_source\": [\"id\",\"name\"],\n  \"query\": {\n    \"match_phrase_prefix\": {\n      \"name\": \"{{nameValue}}\"\n    }\n  }\n}"}}

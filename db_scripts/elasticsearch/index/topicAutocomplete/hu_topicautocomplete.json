@@ -1,0 +1,59 @@
+{
+  "aliases" : {
+      "topicautocomplete_hu" : { }
+    },
+    "mappings" : {
+      "autocomplete" : {
+        "properties" : {
+          "dateInserted" : {
+            "type" : "date",
+            "format" : "basic_date_time_no_millis"
+          },
+          "id" : {
+            "type" : "keyword"
+          },
+          "isSuggested" : {
+            "type" : "boolean"
+          },
+          "org" : {
+            "type" : "keyword"
+          },
+          "rootOrg" : {
+            "type" : "keyword"
+          },
+          "searchTerm" : {
+            "type" : "keyword"
+          },
+          "searchTermAnalysed" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            },
+            "analyzer":"hungarian_rebuilt"
+          }
+        }
+      }
+    },
+    "settings": {
+    "analysis": {
+      "filter": {
+        "hungarian_stop": {
+          "type":       "stop",
+          "stopwords":  "_hungarian_" 
+        }
+      },
+      "analyzer": {
+        "hungarian_rebuilt": {
+          "tokenizer":  "standard",
+          "filter": [
+            "lowercase",
+            "hungarian_stop"
+          ]
+        }
+      }
+    }
+  }
+}

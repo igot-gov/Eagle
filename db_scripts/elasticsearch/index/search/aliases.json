@@ -1,0 +1,337 @@
+{
+"actions":[{
+  "remove": {
+    "index": "da_mlsearch_v2",
+    "alias": "mlsearch_da"
+  }
+},
+{
+  "add": {
+    "index": "da_mlsearch_v3",
+    "alias": "mlsearch_da"
+  }
+}
+,
+{
+  "remove": {
+    "index": "hr_mlsearch_v2",
+    "alias": "mlsearch_hr"
+  }
+},
+{
+  "add": {
+    "index": "hr_mlsearch_v3",
+    "alias": "mlsearch_hr"
+  }
+}
+,
+{
+  "remove": {
+    "index": "pl_mlsearch_v2",
+    "alias": "mlsearch_pl"
+  }
+},
+{
+  "add": {
+    "index": "pl_mlsearch_v3",
+    "alias": "mlsearch_pl"
+  }
+}
+,
+{
+  "remove": {
+    "index": "sl_mlsearch_v2",
+    "alias": "mlsearch_sl"
+  }
+},
+{
+  "add": {
+    "index": "sl_mlsearch_v3",
+    "alias": "mlsearch_sl"
+  }
+}
+,
+{
+  "remove": {
+    "index": "el_mlsearch_v2",
+    "alias": "mlsearch_el"
+  }
+},
+{
+  "add": {
+    "index": "el_mlsearch_v3",
+    "alias": "mlsearch_el"
+  }
+}
+,
+{
+  "remove": {
+    "index": "ja_mlsearch_v2",
+    "alias": "mlsearch_ja"
+  }
+},
+{
+  "add": {
+    "index": "ja_mlsearch_v3",
+    "alias": "mlsearch_ja"
+  }
+}
+,
+{
+  "remove": {
+    "index": "ko_mlsearch_v2",
+    "alias": "mlsearch_ko"
+  }
+},
+{
+  "add": {
+    "index": "ko_mlsearch_v3",
+    "alias": "mlsearch_ko"
+  }
+}
+,
+{
+  "remove": {
+    "index": "ar_mlsearch_v2",
+    "alias": "mlsearch_ar"
+  }
+},
+{
+  "add": {
+    "index": "ar_mlsearch_v3",
+    "alias": "mlsearch_ar"
+  }
+}
+,
+{
+  "remove": {
+    "index": "de_mlsearch_v2",
+    "alias": "mlsearch_de"
+  }
+},
+{
+  "add": {
+    "index": "de_mlsearch_v3",
+    "alias": "mlsearch_de"
+  }
+}
+,
+{
+  "remove": {
+    "index": "zh_mlsearch_v2",
+    "alias": "mlsearch_zh"
+  }
+},
+{
+  "add": {
+    "index": "zh_mlsearch_v3",
+    "alias": "mlsearch_zh"
+  }
+}
+,
+{
+  "remove": {
+    "index": "id_mlsearch_v2",
+    "alias": "mlsearch_id"
+  }
+},
+{
+  "add": {
+    "index": "id_mlsearch_v3",
+    "alias": "mlsearch_id"
+  }
+}
+,
+{
+  "remove": {
+    "index": "th_mlsearch_v2",
+    "alias": "mlsearch_th"
+  }
+},
+{
+  "add": {
+    "index": "th_mlsearch_v3",
+    "alias": "mlsearch_th"
+  }
+}
+,
+{
+  "remove": {
+    "index": "sv_mlsearch_v2",
+    "alias": "mlsearch_sv"
+  }
+},
+{
+  "add": {
+    "index": "sv_mlsearch_v3",
+    "alias": "mlsearch_sv"
+  }
+}
+,
+{
+  "remove": {
+    "index": "tr_mlsearch_v2",
+    "alias": "mlsearch_tr"
+  }
+},
+{
+  "add": {
+    "index": "tr_mlsearch_v3",
+    "alias": "mlsearch_tr"
+  }
+}
+,
+{
+  "remove": {
+    "index": "ru_mlsearch_v2",
+    "alias": "mlsearch_ru"
+  }
+},
+{
+  "add": {
+    "index": "ru_mlsearch_v3",
+    "alias": "mlsearch_ru"
+  }
+}
+,
+{
+  "remove": {
+    "index": "pt_mlsearch_v2",
+    "alias": "mlsearch_pt"
+  }
+},
+{
+  "add": {
+    "index": "pt_mlsearch_v3",
+    "alias": "mlsearch_pt"
+  }
+}
+,
+{
+  "remove": {
+    "index": "br_mlsearch_v2",
+    "alias": "mlsearch_br"
+  }
+},
+{
+  "add": {
+    "index": "br_mlsearch_v3",
+    "alias": "mlsearch_br"
+  }
+}
+,
+{
+  "remove": {
+    "index": "it_mlsearch_v2",
+    "alias": "mlsearch_it"
+  }
+},
+{
+  "add": {
+    "index": "it_mlsearch_v3",
+    "alias": "mlsearch_it"
+  }
+}
+,
+{
+  "remove": {
+    "index": "hu_mlsearch_v2",
+    "alias": "mlsearch_hu"
+  }
+},
+{
+  "add": {
+    "index": "hu_mlsearch_v3",
+    "alias": "mlsearch_hu"
+  }
+}
+,
+{
+  "remove": {
+    "index": "nl_mlsearch_v2",
+    "alias": "mlsearch_nl"
+  }
+},
+{
+  "add": {
+    "index": "nl_mlsearch_v3",
+    "alias": "mlsearch_nl"
+  }
+}
+,
+{
+  "remove": {
+    "index": "no_mlsearch_v2",
+    "alias": "mlsearch_no"
+  }
+},
+{
+  "add": {
+    "index": "no_mlsearch_v3",
+    "alias": "mlsearch_no"
+  }
+}
+,
+{
+  "remove": {
+    "index": "es_mlsearch_v2",
+    "alias": "mlsearch_es"
+  }
+},
+{
+  "add": {
+    "index": "es_mlsearch_v3",
+    "alias": "mlsearch_es"
+  }
+}
+,
+{
+  "remove": {
+    "index": "fr_mlsearch_v2",
+    "alias": "mlsearch_fr"
+  }
+},
+{
+  "add": {
+    "index": "fr_mlsearch_v3",
+    "alias": "mlsearch_fr"
+  }
+}
+,
+{
+  "remove": {
+    "index": "cz_mlsearch_v2",
+    "alias": "mlsearch_cz"
+  }
+},
+{
+  "add": {
+    "index": "cz_mlsearch_v3",
+    "alias": "mlsearch_cz"
+  }
+},
+{
+  "remove": {
+    "index": "en_mlsearch_v2",
+    "alias": "mlsearch_en"
+  }
+},
+{
+  "add": {
+    "index": "en_mlsearch_v3",
+    "alias": "mlsearch_en"
+  }
+},
+{
+  "remove": {
+    "index": "fr_ca_mlsearch_v2",
+    "alias": "mlsearch_fr_ca"
+  }
+},
+{
+  "add": {
+    "index": "fr_ca_mlsearch_v3",
+    "alias": "mlsearch_fr_ca"
+  }
+}
+]}

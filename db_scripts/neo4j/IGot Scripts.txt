@@ -1,0 +1,26 @@
+
+
+CREATE (node:SETTINGS)
+match (n:SETTINGS) set n = {igot:"{\"relationsMeta\":{\"Is_Translation_Of\":[\"identifier\",\"locale\"],\"Has_Sub_Content\":[\"description\",\"identifier\",\"mimeType\",\"name\",\"objectType\",\"relation\",\"status\",\"visibility\"]},\"nestedFields\":[\"editors\",\"price\",\"comments\",\"certificationList\",\"playgroundResources\",\"softwareRequirements\",\"systemRequirements\",\"references\",\"creatorContacts\",\"creatorDetails\",\"publisherDetails\",\"preContents\",\"postContents\",\"catalog\",\"clients\",\"skills\",\"trackContacts\",\"org\",\"submitterDetails\",\"concepts\",\"plagScan\",\"eligibility\",\"scoreType\",\"externalData\",\"verifiers\",\"verifier\",\"subTitles\",\"roles\",\"group\",\"msArtifactDetails\",\"studyMaterials\",\"kArtifacts\",\"equivalentCertifications\",\"transcoding\"]}"
+,Feature:"{\"relationsMeta\":{\"Has_Sub_Feature\":[]},\"nestedFields\":[]}"
+,Feature_Infosys:"{\"relationsMeta\":{\"Has_Sub_Feature\":[]},\"nestedFields\":[]}"
+,Infosys:"{\"relationsMeta\":{\"Is_Translation_Of\":[\"identifier\",\"locale\"],\"Has_Sub_Content\":[\"description\",\"identifier\",\"mimeType\",\"name\",\"objectType\",\"relation\",\"status\",\"visibility\"]},\"nestedFields\":[\"editors\",\"price\",\"comments\",\"certificationList\",\"playgroundResources\",\"softwareRequirements\",\"systemRequirements\",\"references\",\"creatorContacts\",\"creatorDetails\",\"publisherDetails\",\"preContents\",\"postContents\",\"catalog\",\"clients\",\"skills\",\"trackContacts\",\"org\",\"submitterDetails\",\"concepts\",\"plagScan\",\"eligibility\",\"scoreType\",\"externalData\",\"verifiers\",\"verifier\",\"subTitles\",\"roles\",\"group\",\"msArtifactDetails\",\"studyMaterials\",\"kArtifacts\",\"equivalentCertifications\",\"transcoding\"]}"
+,RootOrg:"{\"nestedFields\":[]}"
+,Shared:"{\"relationsMeta\":{\"Is_Translation_Of\":[\"identifier\",\"locale\"],\"Has_Sub_Content\":[\"description\",\"identifier\",\"mimeType\",\"name\",\"objectType\",\"relation\",\"status\",\"visibility\"]},\"nestedFields\":[\"comments\",\"certificationList\",\"playgroundResources\",\"softwareRequirements\",\"systemRequirements\",\"references\",\"creatorContacts\",\"creatorDetails\",\"publisherDetails\",\"preContents\",\"postContents\",\"catalog\",\"clients\",\"skills\",\"trackContacts\",\"org\",\"submitterDetails\",\"concepts\",\"plagScan\",\"eligibility\",\"scoreType\",\"externalData\",\"verifiers\",\"verifier\",\"subTitles\",\"roles\",\"group\",\"msArtifactDetails\",\"studyMaterials\",\"kArtifacts\",\"equivalentCertifications\",\"transcoding\"]}"
+,TaxonomyNode:"{\"nestedFields\":[]}"
+,WingspanDimension:"{\"nestedFields\":[]}",
+SETTINGS:"{\"skipLabels\":[\"SETTINGS\",\"Validation\"]}",
+nodeType:"PROPERTIES"}
+
+neoej server environment variables
+infosys_neo4j_kafka_producer_bootstrap_servers="10.0.1.198:9092"
+infosys_neo4j_kafka_output_topic="learning-graph-events"
+infosys_neo4j_kafka_error_output_topic="neo4j-plugin-errors"
+infosys_neo4j_kafka_producer_partitions=1
+
+
+CREATE(n:Validation{validateHere:"[{\"property\": \"name\", \"operation\": \"notnull\", \"dataType\": \"String\"}]",validateBelow:[], identifier:"val_node_igot", nodeType:"VALIDATION", rootOrg:"igot"});
+ 
+create (n:igot{rootOrg:"igot",identifier:"lex_345",locale:"en",nodeType: "LEARNING_CONTENT",isSearchable:true,accessPaths:["igot/dopt"],org: "[{ \"org\": \"dopt\", \"validTill\": \"20600101T000000+0000\" }]"});
+
+

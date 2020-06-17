@@ -1,0 +1,177 @@
+{
+    "aliases": {
+        "forum": {}
+    },
+    "mappings": {
+        "forum": {
+            "properties": {
+                "accessPaths": {
+                    "type": "keyword"
+                },
+                "description": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "dtCreated": {
+                    "type": "date"
+                },
+                "dtEdited": {
+                    "type": "date"
+                },
+                "dtLastModified": {
+                    "type": "date"
+                },
+                "dtReactivated": {
+                    "type": "date"
+                },
+                "dtRejected": {
+                    "type": "date"
+                },
+                "forumCreator": {
+                    "type": "nested",
+                    "properties": {
+                        "forumCreatorId": {
+                            "type": "keyword"
+                        },
+                        "name": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        }
+                    }
+                },
+                "forumEditor": {
+                    "type": "nested",
+                    "properties": {
+                        "forumEditorId": {
+                            "type": "keyword"
+                        },
+                        "name": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        }
+                    }
+                },
+                "forumKind": {
+                    "type": "keyword"
+                },
+                "forumModerator": {
+                    "type": "nested",
+                    "properties": {
+                        "forumModeratorId": {
+                            "type": "keyword"
+                        },
+                        "name": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        }
+                    }
+                },
+                "forumReactivator": {
+                    "type": "nested",
+                    "properties": {
+                        "forumReactivatorId": {
+                            "type": "keyword"
+                        },
+                        "name": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "reactivationReason": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        }
+                    }
+                },
+                "forumRejector": {
+                    "type": "nested",
+                    "properties": {
+                        "forumRejectorId": {
+                            "type": "keyword"
+                        },
+                        "name": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "rejectionReason": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        }
+                    }
+                },
+                "id": {
+                    "type": "keyword"
+                },
+                "moderationLevel": {
+                    "type": "keyword"
+                },
+                "name": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "org": {
+                    "type": "keyword"
+                },
+                "rootOrg": {
+                    "type": "keyword"
+                },
+                "status": {
+                    "type": "keyword"
+                },
+                "thumbnail": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

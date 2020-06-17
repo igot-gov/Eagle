@@ -1,0 +1,79 @@
+{
+  "aliases" : {
+      "userpostactivity" : { }
+    },
+    "mappings" : {
+      "userpostactivity" : {
+        "properties" : {
+          "adminActivity" : {
+            "type" : "object"
+          },
+          "downVote" : {
+            "type" : "nested",
+            "properties" : {
+              "dtActivity" : {
+                "type" : "date"
+              },
+              "isdownVoted" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "flag" : {
+            "type" : "nested",
+            "properties" : {
+              "comment" : {
+                "type" : "keyword"
+              },
+              "commentType" : {
+                "type" : "keyword"
+              },
+              "dtActivity" : {
+                "type" : "date"
+              },
+              "isFlagged" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "id" : {
+            "type" : "keyword"
+          },
+          "like" : {
+            "type" : "nested",
+            "properties" : {
+              "dtActivity" : {
+                "type" : "date"
+              },
+              "isLiked" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "org" : {
+            "type" : "keyword"
+          },
+          "postid" : {
+            "type" : "keyword"
+          },
+          "rootOrg" : {
+            "type" : "keyword"
+          },
+          "upVote" : {
+            "type" : "nested",
+            "properties" : {
+              "dtActivity" : {
+                "type" : "date"
+              },
+              "isupVoted" : {
+                "type" : "boolean"
+              }
+            }
+          },
+          "userId" : {
+            "type" : "keyword"
+          }
+        }
+      }
+    }
+}

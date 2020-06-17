@@ -1,0 +1,60 @@
+{
+  "aliases" : {
+      "topicautocomplete_ar" : { }
+    },
+    "mappings" : {
+      "autocomplete" : {
+        "properties" : {
+          "dateInserted" : {
+            "type" : "date",
+            "format" : "basic_date_time_no_millis"
+          },
+          "id" : {
+            "type" : "keyword"
+          },
+          "isSuggested" : {
+            "type" : "boolean"
+          },
+          "org" : {
+            "type" : "keyword"
+          },
+          "rootOrg" : {
+            "type" : "keyword"
+          },
+          "searchTerm" : {
+            "type" : "keyword"
+          },
+          "searchTermAnalysed" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            },
+            "analyzer":"arabic_rebuilt"
+          }
+        }
+      }
+    },
+    "settings": {
+    "analysis": {
+      "filter": {
+        "arabic_stop": {
+          "type":       "stop",
+          "stopwords":  "_arabic_" 
+        }
+      },
+      "analyzer": {
+        "arabic_rebuilt": {
+          "tokenizer":  "standard",
+          "filter": [
+            "lowercase",
+            "decimal_digit",
+            "arabic_stop"
+          ]
+        }
+      }
+    }
+  }
+}
