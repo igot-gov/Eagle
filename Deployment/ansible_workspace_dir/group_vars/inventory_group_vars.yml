@@ -33,6 +33,7 @@ elasticsearch_password: username
 elasticsearch_cluster_name: clusetername #elasticsearch
 elasticsearch_contentindex_alias_name: mlsearch_*
 elasticsearch_contentindex_type: searchresources
+kafka_authtool_elasticsearch_contentindex_alias_name: mlsearch
 elasticsearch_http_hosts_list:
     - elasticsearch_host_ip1:lasticsearch_http_port1 #10.0.1.2:9200
     - elasticsearch_host_ip2:lasticsearch_http_port2 #10.0.1.3:9200
