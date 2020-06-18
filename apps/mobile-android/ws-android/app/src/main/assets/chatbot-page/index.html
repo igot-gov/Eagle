@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" type="text/css" href="iframe-style.css" />
+</head>
+<script type="text/javascript">
+
+    window.addEventListener('load',function(e){
+    chatRef.sendAccessToken(e.data);
+    });
+
+  </script>
+<body>
+<iframe
+        id="iframe2"
+        src="https://lex.infosysapps.com/chat-bot?mic=0&keyboard=0&speech=1"
+        frameborder="0"
+        style="overflow: hidden; height: 100%;
+                width: 100%; position: absolute;"
+        scrolling="no"
+></iframe>
+</body>
+</html>

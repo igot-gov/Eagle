@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f49c29</color>
+    <color name="colorPrimaryDark">#2F3D88</color>
+    <color name="colorAccent">#3F51B5</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="backgroundConstraint">#e1e9ee</color>
+    <color name="colorLight">#757de8</color>
+    <color name="textColorApp">#81716f</color>
+
+
+
+
+    <color name="colorTealPrimary">#009688</color>
+    <color name="colorDarkPrimary">#616161</color>
+    <color name="colorLitePrimary">#616161</color>
+    <color name="colorBluePrimary">#1565c0</color>
+
+    <color name="colorTealAccent">#283593</color>
+    <color name="colorDarkAccent">#78909c</color>
+    <color name="colorLiteAccent">#78909c</color>
+    <color name="colorBlueAccent">#37474f</color>
+
+    <color name="colorTealPrimaryDark">#005951</color>
+    <color name="colorDarkPrimaryDark">#424242</color>
+    <color name="colorLitePrimaryDark">#424242</color>
+    <color name="colorBluePrimaryDark">#0E4889</color>
+
+    <!--<color name="my_statusbar_color">#ff0000</color>-->
+</resources>
+
+<!--<resources>-->
+<!--<color name="colorPrimary">#0b7dc1</color>-->
+<!--<color name="colorPrimaryDark">#0a6da9</color>-->
+<!--<color name="colorAccent">#0b7dc1</color>-->
+<!--<color name="colorWhite">#ffffff</color>-->
+<!--</resources>-->
