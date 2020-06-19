@@ -42,6 +42,7 @@ public class ValidatedSearchData implements Serializable {
     private UUID uuid;
     private Boolean isCatalog = false;
     private Boolean isStandAlone;
+    private Boolean isUserRecordEnabled = false;
     private List<String> accessPaths = new ArrayList<>();
     private List<Map<SortableFields, SortOrders>> sort = new ArrayList<>();
     private Map<SortableAggregations, List<Map<AggregationSortType, SortOrders>>> aggregationsSorting = new HashMap<>();
@@ -181,4 +182,13 @@ public class ValidatedSearchData implements Serializable {
     public void setAggregationsSorting(Map<SortableAggregations, List<Map<AggregationSortType, SortOrders>>> aggregationsSorting) {
         this.aggregationsSorting = aggregationsSorting;
     }
+
+    public Boolean getIsUserRecordEnabled() {
+        return this.isUserRecordEnabled;
+    }
+
+    public void setIsUserRecordEnabled(Boolean isUserRecordEnabled) {
+        this.isUserRecordEnabled = isUserRecordEnabled;
+    }
+
 }
