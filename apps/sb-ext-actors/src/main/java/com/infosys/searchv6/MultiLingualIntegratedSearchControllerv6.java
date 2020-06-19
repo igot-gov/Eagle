@@ -3,10 +3,12 @@
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.searchv6;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.exception.ApplicationLogicError;
 import com.infosys.exception.BadRequestException;
 import com.infosys.exception.NoContentException;
 import com.infosys.searchv6.validations.model.ValidatedSearchData;
+import com.infosys.service.ValidatedSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -36,6 +38,12 @@ public class MultiLingualIntegratedSearchControllerv6 {
 
     @Autowired
     private AuthoringToolMultiLingualIntegratedSearchServicev6 authoringToolSearchService;
+
+    @Autowired
+    ValidatedSearchService validatedSearchService;
+
+    @Autowired
+    ObjectMapper mapper;
     
     @Value("${com.infosys.enable-access-control}")
     private boolean ace;
@@ -49,6 +57,9 @@ public class MultiLingualIntegratedSearchControllerv6 {
     public ResponseEntity<Map<String,Object>> generalSearchTemplateAPIv6(@Valid @RequestBody ValidatedSearchData request) throws Exception {
 
         Map<String, Object> resp = new HashMap<>();
+
+        validatedSearchService.buildSearchRequestQuery(request);
+        ProjectLogger.log("Search.v6.request.body", mapper.writeValueAsString(request));
         try {
             resp = generalSearchService.performSearch(request);
         } catch (BadRequestException e) {

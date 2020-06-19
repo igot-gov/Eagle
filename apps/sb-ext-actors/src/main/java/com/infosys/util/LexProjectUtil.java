@@ -68,6 +68,21 @@ public class LexProjectUtil {
 		}
 	}
 
+	public static enum SearchType {
+		INTEREST("Interest"), PLAYLIST("PlayList"),
+		GOALS("Goals"), HISTORY("History"), TRENDING("Trending");
+
+		private String value;
+
+		private SearchType(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return this.value;
+		}
+	}
+
 	/**
 	 * Enum to hold the content type
 	 *

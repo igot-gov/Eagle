@@ -36,6 +36,7 @@ public class ValidatedSearchData implements Serializable {
     @Valid
     private List<FiltersGroup> filters = Collections.emptyList();//Collections.singletonList(new FiltersGroup());
 
+    private String searchType;
     private String query;
     private String changedQuery = null;
     private List<String> locale = Collections.emptyList();
@@ -226,4 +227,9 @@ public class ValidatedSearchData implements Serializable {
     public void setDidYouMean(Boolean didYouMean) {
         this.didYouMean = didYouMean;
     }
+
+    public String getSearchType() { return searchType; }
+
+    public void setSearchType(String searchType) { this.searchType = searchType; }
+
 }
