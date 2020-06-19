@@ -17,6 +17,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
+import com.infosys.lex.goal.bodhi.repo.UserGoalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,68 +69,85 @@ public class CohortsServiceImpl implements CohortsService {
 
 	@Autowired
 	AppConfigService appConfigServ;
-//
-//	@Override
-//	public List<CohortUsers> getUserWithCommonGoals(String rootOrg, String resourceId, String userUUID, int count)
-//			throws Exception {
-//		List<CohortUsers> similarGoalsUsers = new ArrayList<CohortUsers>();
-//		String parent = parentSvc.getCourseParent(resourceId);
-//
-//		parent = parent == null ? resourceId : parent;
-//
-//		// if no parent exists
-//		if (parent != null) {
-//			// Fetch user_id of users having similar goals
-//			List<Map<String, Object>> sharingGoalsRecords = learningGoalsRepo.learningGoalsContainResources(parent);
-//
-//			if (sharingGoalsRecords != null && !sharingGoalsRecords.isEmpty()) {
-//				// Sorting users with similar goals based on last updated
-//				Collections.sort(sharingGoalsRecords, new Comparator<Map<String, Object>>() {
-//					@Override
-//					public int compare(Map<String, Object> m1, Map<String, Object> m2) {
-//						if (m1.get("last_updated_on") != null && m2.get("last_updated_on") != null) {
-//							return ((Date) m2.get("last_updated_on")).compareTo((Date) (m1.get("last_updated_on")));
-//						} else {
-//							return 1;
-//						}
-//					}
-//				});
-//			}
-//
-//			int counter = 1;
-//
-//			List<String> userNames = new ArrayList<String>();
-//			for (Map<String, Object> similarGoalsRow : sharingGoalsRecords) {
-//
-//				if (similarGoalsRow.get("user_id") != null) {
-//					String uuid = similarGoalsRow.get("user_id").toString().toLowerCase();
-//					String emailId = userUtilService.getEmailIdForUUID(userUUID);
-//					String userName = emailId.substring(0, emailId.indexOf("@"));
-//
-//					// If similar-goal-user is already in active-users list or user himself is in
-//					// fetched data then
-//					// do not add him to usersSharingGoals
-//					if (!userUUID.equals(uuid) && !userNames.contains(userName)) {
-//						userNames.add(userName);
-//						CohortUsers user = new CohortUsers();
-//						user.setUser_id("similargoal");
-//						user.setDesc("Has similar goal");
-//						user.setEmail(emailId);
-//						similarGoalsUsers.add(user);
-//						// for number of user needed to be displayed
-//						if (counter == count)
-//							break;
-//						counter++;
-//					}
-//				}
-//			}
-//
-//			if (!userNames.isEmpty())
-//				validateUsersFromActiveDirectory(similarGoalsUsers, userNames);
-//
-//		}
-//		return similarGoalsUsers;
-//	}
+
+	@Autowired
+	UserGoalRepository userGoalRepository;
+
+
+	@Override
+	public List<CohortUsers> getUserWithCommonGoals(String rootOrg, String resourceId, String userUUID, int count)
+			throws Exception {
+		List<CohortUsers> similarGoalsUsers = new ArrayList<CohortUsers>();
+		String parent = parentSvc.getCourseParent(resourceId);
+
+		parent = parent == null ? resourceId : parent;
+
+		// if no parent exists
+		if (parent != null) {
+			// Fetch user_id of users having similar goals
+			List<Map<String, Object>> sharingGoalsRecords = userGoalRepository.learningGoalsContainResources(parent);
+
+			if (sharingGoalsRecords != null && !sharingGoalsRecords.isEmpty()) {
+				// Sorting users with similar goals based on last updated
+				Collections.sort(sharingGoalsRecords, new Comparator<Map<String, Object>>() {
+					@Override
+					public int compare(Map<String, Object> m1, Map<String, Object> m2) {
+						if (m1.get("last_updated_on") != null && m2.get("last_updated_on") != null) {
+							return ((Date) m2.get("last_updated_on")).compareTo((Date) (m1.get("last_updated_on")));
+						} else {
+							return 1;
+						}
+					}
+				});
+			}
+
+			int counter = 1;
+
+			Set<String> sharingGoalsUUIDSet = new HashSet<String>();
+
+			for (Map<String, Object> sharingGoalsRow : sharingGoalsRecords) {
+
+				sharingGoalsUUIDSet.add(sharingGoalsRow.get("user_id").toString());
+			}
+			List<String> sharingGoalsIdList = new ArrayList<String>(sharingGoalsUUIDSet);
+			Map<String, Object> sharingGoalsUUIDEmailMap = new HashMap<>();
+			if (!sharingGoalsUUIDSet.isEmpty())
+				sharingGoalsUUIDEmailMap = userUtilService.getUserEmailsFromUserIds(rootOrg, sharingGoalsIdList);
+
+
+			List<String> userNames = new ArrayList<String>();
+			for (Map<String, Object> similarGoalsRow : sharingGoalsRecords) {
+
+				if (similarGoalsRow.get("user_id") != null) {
+					String uuid = similarGoalsRow.get("user_id").toString().toLowerCase();
+					//String emailId = userUtilService.getEmailIdForUUID(userUUID);
+					String emailId = sharingGoalsUUIDEmailMap.get(uuid).toString();
+					String userName = emailId.substring(0, emailId.indexOf("@"));
+
+					// If similar-goal-user is already in active-users list or user himself is in
+					// fetched data then
+					// do not add him to usersSharingGoals
+					if (!userUUID.equals(uuid) && !userNames.contains(userName)) {
+						userNames.add(userName);
+						CohortUsers user = new CohortUsers();
+						user.setUser_id(uuid);
+						user.setDesc("Has similar goal");
+						user.setEmail(emailId);
+						similarGoalsUsers.add(user);
+						// for number of user needed to be displayed
+						if (counter == count)
+							break;
+						counter++;
+					}
+				}
+			}
+
+			if (!userNames.isEmpty())
+				validateUsersFromActiveDirectory(rootOrg, similarGoalsUsers, userNames, sharingGoalsIdList);
+
+		}
+		return similarGoalsUsers;
+	}
 
 	/**
 	 * This method provides the active users within the given time(if filtered) else

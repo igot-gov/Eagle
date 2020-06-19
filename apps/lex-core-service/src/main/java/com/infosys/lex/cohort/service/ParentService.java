@@ -41,6 +41,7 @@ public interface ParentService {
 
 	List<String> getAssessmentsFromChildrenOfContentList(List<String> childrenList) throws IOException;
 
+	String getCourseParent(String resourceId) throws Exception;
 
 
 }

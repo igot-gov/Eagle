@@ -121,6 +121,8 @@ public interface ContentService {
 
 	List<Map<String, Object>> getMetaByIDListandSourceRest(List<String> asList, String[] strings, String string) throws IOException;
 
+	List<Map<String, Object>> searchMatchedData(String index, String type, Map<String, Object> searchData,
+												List<String> sourceData, int size) throws IOException;
 
 
 

@@ -9,7 +9,7 @@ import com.infosys.lex.cohort.bodhi.repo.CohortUsers;
 
 public interface CohortsService {
 
-//	List<CohortUsers> getUserWithCommonGoals(String rootOrg,String resourceId,String userUUID, int count) throws Exception;
+	List<CohortUsers> getUserWithCommonGoals(String rootOrg,String resourceId,String userUUID, int count) throws Exception;
 
 
 	List<CohortUsers> getAuthors(String rootOrg,String resourceId, String userUUID, int count) throws Exception;

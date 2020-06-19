@@ -24,13 +24,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -40,6 +34,7 @@ import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -350,54 +345,54 @@ public class ContentServiceImpl implements ContentService {
 		return url;
 	}
 
-//	@SuppressWarnings({ "unchecked" })
-//	@Override
-//	public List<Map<String, Object>> searchMatchedData(String index, String type, Map<String, Object> searchData,
-//			List<String> sourceData, int size) throws IOException {
-//		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-//		sourceBuilder.size(size);
-//		if (sourceData != null && !sourceData.isEmpty())
-//			sourceBuilder.fetchSource(sourceData.toArray(new String[0]), null);
-//		BoolQueryBuilder query = QueryBuilders.boolQuery();
-//		Iterator<Entry<String, Object>> itr = searchData.entrySet().iterator();
-//		while (itr.hasNext()) {
-//			Entry<String, Object> entry = itr.next();
-//			String keyValue = entry.getKey() + ".keyword";
-//			if (entry.getValue() instanceof List) {
-//				List<Object> values = (List<Object>) entry.getValue();
-//				BoolQueryBuilder inQuery = QueryBuilders.boolQuery();
-//				for (Object value : values) {
-//					inQuery.should(QueryBuilders.matchQuery(keyValue, value));
-//				}
-//				query.must(inQuery);
-//			} else if (entry.getValue().getClass().isArray()) {
-//				Object[] values = (Object[]) entry.getValue();
-//				BoolQueryBuilder inQuery = QueryBuilders.boolQuery();
-//				for (Object value : values) {
-//					inQuery.should(QueryBuilders.matchQuery(keyValue, value));
-//				}
-//				query.must(inQuery);
-//			} else {
-//				query.must(QueryBuilders.matchQuery(keyValue, entry.getValue()));
-//			}
-//		}
-//		sourceBuilder.query(query);
-//
-//		SearchRequest searchRequest = new SearchRequest();
-//substitute url based on requirement
-//		searchRequest.types("resource");
-//
-//		searchRequest.source(sourceBuilder);
-//
-//		SearchResponse sr = client.search(searchRequest, RequestOptions.DEFAULT);
-//		Iterator<SearchHit> it = sr.getHits().iterator();
-//		List<Map<String, Object>> lst = new ArrayList<>();
-//		while (it.hasNext()) {
-//			Map<String, Object> item = it.next().getSourceAsMap();
-//			lst.add(item);
-//		}
-//		return lst;
-//	}
+	@SuppressWarnings({ "unchecked" })
+	@Override
+	public List<Map<String, Object>> searchMatchedData(String index, String type, Map<String, Object> searchData,
+			List<String> sourceData, int size) throws IOException {
+		SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+		sourceBuilder.size(size);
+		if (sourceData != null && !sourceData.isEmpty())
+			sourceBuilder.fetchSource(sourceData.toArray(new String[0]), null);
+		BoolQueryBuilder query = QueryBuilders.boolQuery();
+		Iterator<Map.Entry<String, Object>> itr = searchData.entrySet().iterator();
+		while (itr.hasNext()) {
+			Map.Entry<String, Object> entry = itr.next();
+			String keyValue = entry.getKey() + ".keyword";
+			if (entry.getValue() instanceof List) {
+				List<Object> values = (List<Object>) entry.getValue();
+				BoolQueryBuilder inQuery = QueryBuilders.boolQuery();
+				for (Object value : values) {
+					inQuery.should(QueryBuilders.matchQuery(keyValue, value));
+				}
+				query.must(inQuery);
+			} else if (entry.getValue().getClass().isArray()) {
+				Object[] values = (Object[]) entry.getValue();
+				BoolQueryBuilder inQuery = QueryBuilders.boolQuery();
+				for (Object value : values) {
+					inQuery.should(QueryBuilders.matchQuery(keyValue, value));
+				}
+				query.must(inQuery);
+			} else {
+				query.must(QueryBuilders.matchQuery(keyValue, entry.getValue()));
+			}
+		}
+		sourceBuilder.query(query);
+
+		SearchRequest searchRequest = new SearchRequest();
+		searchRequest.indices("en_mlsearch_v1");
+		searchRequest.types("resource");
+
+		searchRequest.source(sourceBuilder);
+
+		SearchResponse sr = client.search(searchRequest, RequestOptions.DEFAULT);
+		Iterator<SearchHit> it = sr.getHits().iterator();
+		List<Map<String, Object>> lst = new ArrayList<>();
+		while (it.hasNext()) {
+			Map<String, Object> item = it.next().getSourceAsMap();
+			lst.add(item);
+		}
+		return lst;
+	}
 
 	@Cacheable("mimeTypes")
 	@Override

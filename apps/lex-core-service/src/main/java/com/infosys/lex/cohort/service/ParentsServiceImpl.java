@@ -323,6 +323,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.infosys.lex.common.constants.JsonKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -339,6 +340,32 @@ public class ParentsServiceImpl implements ParentService {
 	ContentService contentService;
 
 	private LexLogger logger = new LexLogger(getClass().getName());
+
+	@Override
+	public String getCourseParent(String resourceId) throws Exception {
+		String parent = null;
+		Map<String, Object> searchData = new HashMap<>();
+		searchData.put(JsonKey.IDENTIFIER, resourceId);
+		searchData.put(JsonKey.STATUS, LexProjectUtil.Status.LIVE.getValue());
+		List<Map<String, Object>> content = contentService.searchMatchedData(
+				LexProjectUtil.EsIndex.bodhi.getIndexName(), LexProjectUtil.EsType.resource.getTypeName(), searchData,
+				null, 1);
+		if (content.isEmpty()) {
+			return parent;
+		}
+		Map<String,Object> resource = content.get(0);
+
+	/*	ObjectMeta[] parents = resource.getCollections();
+		if (parents != null && parents.length > 0) {
+			parent = parents[0].getIdentifier();
+		}*/
+		List<Map<String,Object>> parents = (List<Map<String, Object>>) resource.get("collections");
+		if (parents != null && parents.size() > 0) {
+			parent = parents.get(0).toString();
+		}
+		return parent;
+	}
+
 
 	@SuppressWarnings("unchecked")
 	private List<Map<String, Object>> parentHierarchy(String resourceId, boolean self) {

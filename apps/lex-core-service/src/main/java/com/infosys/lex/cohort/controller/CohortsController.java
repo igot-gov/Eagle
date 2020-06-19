@@ -34,14 +34,14 @@ public class CohortsController {
 	 * @return
 	 * @throws Exception
 	 */
-//	@GetMapping("/v2/rootorg/{rootOrg}/resources/{resourceId}/user/{userUUID}/cohorts/commongoals")
-//	public ResponseEntity<List<CohortUsers>> getUsersWithSimillarusers(@PathVariable("resourceId") String resourceId,
-//			@PathVariable("rootOrg") String rootOrg,
-//			@PathVariable("userUUID") String userUUID, @RequestParam(value = "count", 
-//			required = false,defaultValue = "20") Integer count) throws Exception
-//	{
-//		return new ResponseEntity<List<CohortUsers>>(cohortsServ.getUserWithCommonGoals(rootOrg,resourceId,userUUID,count),HttpStatus.OK);
-//	}
+	@GetMapping("/v2/rootorg/{rootOrg}/resources/{resourceId}/user/{userUUID}/cohorts/commongoals")
+	public ResponseEntity<List<CohortUsers>> getUsersWithSimillarusers(@PathVariable("resourceId") String resourceId,
+			@PathVariable("rootOrg") String rootOrg,
+			@PathVariable("userUUID") String userUUID, @RequestParam(value = "count",
+			required = false,defaultValue = "20") Integer count) throws Exception
+	{
+		return new ResponseEntity<List<CohortUsers>>(cohortsServ.getUserWithCommonGoals(rootOrg,resourceId,userUUID,count),HttpStatus.OK);
+	}
 
 	/**
 	 * gets all active users
