@@ -42,7 +42,7 @@ public class ValidatedSearchData implements Serializable {
     private UUID uuid;
     private Boolean isCatalog = false;
     private Boolean isStandAlone;
-    private Boolean isUserRecordEnabled = false;
+    private Boolean isUserRecordEnabled;
     private List<String> accessPaths = new ArrayList<>();
     private List<Map<SortableFields, SortOrders>> sort = new ArrayList<>();
     private Map<SortableAggregations, List<Map<AggregationSortType, SortOrders>>> aggregationsSorting = new HashMap<>();
