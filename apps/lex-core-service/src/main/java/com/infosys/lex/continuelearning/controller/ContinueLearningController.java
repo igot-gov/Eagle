@@ -17,6 +17,8 @@ Highly Confidential
 */
 package com.infosys.lex.continuelearning.controller;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -67,6 +69,22 @@ public class ContinueLearningController {
 			throws Exception {
 		return new ResponseEntity<Map<String, Object>>(continueLearningSvc.getLearningDataWithFilters(rootOrg, userId,
 				sourceFields, contextPathId, pageSize, pageState, isCompleted, isInIntranet, isStandAlone, contentType),
+				HttpStatus.OK);
+	}
+
+	@GetMapping("/v1/continue/user/{userId}")
+	public ResponseEntity<Map<String, Object>> getLearningUser(@RequestHeader("rootOrg") String rootOrg,
+															   @PathVariable("userId") String userId,
+															   @RequestParam(value = "sourceFields", required = false) Set<String> sourceFields,
+															   @RequestParam(defaultValue = "all", required = false, name = "contextPathId") String contextPathId,
+															   @RequestParam(defaultValue = "5", required = false, name = "pageSize") String pageSize,
+															   @RequestParam(defaultValue = "0", required = false, name = "pageState") String pageState,
+															   @RequestParam(defaultValue = "default", required = false, name = "isCompleted") String isCompleted,
+															   @RequestParam(defaultValue = "default", required = false, name = "isInIntranet") String isInIntranet,
+															   @RequestParam(defaultValue = "default", required = false, name = "isStandAlone") String isStandAlone,
+															   @RequestParam(defaultValue = "all", required = false, name = "resourceType") String resourceType) throws Exception {
+		return new ResponseEntity<Map<String, Object>>(continueLearningSvc.getLearningContent(rootOrg, userId,
+				sourceFields, contextPathId, pageSize, pageState, isCompleted, isInIntranet, isStandAlone, resourceType),
 				HttpStatus.OK);
 	}
 }

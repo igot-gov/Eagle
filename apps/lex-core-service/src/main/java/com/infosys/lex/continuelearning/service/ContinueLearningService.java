@@ -17,6 +17,8 @@ Highly Confidential
 */
 package com.infosys.lex.continuelearning.service;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -76,5 +78,10 @@ public interface ContinueLearningService {
 	Map<String, Object> getLearningDataWithFilters(String rootOrg, String userId, Set<String> sourceFields,
 			String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
 			String isStandAlone, List<String> contentType) throws Exception;
+
+	Map<String, Object> getLearningContent(String rootOrg, String userId, Set<String> sourceFields,
+										   String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
+										   String isStandAlone, String resourceType) throws Exception;
+
 
 }

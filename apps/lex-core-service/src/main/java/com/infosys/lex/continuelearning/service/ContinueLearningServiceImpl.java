@@ -447,4 +447,38 @@ public class ContinueLearningServiceImpl implements ContinueLearningService {
 			}
 		}
 	}
+
+	@Override
+	public Map<String, Object> getLearningContent(String rootOrg, String userId, Set<String> sourceFields,
+												  String contextPathId, String pageSize, String pageState, String isCompleted, String isInIntranet,
+												  String isStandAlone, String resourceType) throws Exception{
+		// Initial list of meta fields
+		List<String> requiredFields = new ArrayList<String>(Arrays.asList("appIcon", "artifactUrl", "complexityLevel",
+				"contentType", "description", "downloadUrl", "duration", "identifier", "lastUpdatedOn",
+				"me_totalSessionsCount", "mediaType", "mimeType", "name", "resourceType", "size", "sourceShortName",
+				"status", "averageRating", "totalRating", "isInIntranet", "isStandAlone"));
+
+		validator.validateUser(rootOrg, userId);
+		validator.validateContextPathId(contextPathId);
+		validator.validatePageSize(pageSize);
+		validator.validatePageStatus(pageState);
+
+		Map<String, Object> retMap = new HashMap<String, Object>();
+
+		List<Map<String, Object>> result = paginationRepository.fetchPagedData(rootOrg, userId, contextPathId, pageSize,
+				pageState);
+
+		List<String> contentIds = new ArrayList<>();
+		for( Map resMap: result){
+			contentIds.add(resMap.get("resourceId").toString());
+		}
+
+		retMap.put("resource_ids", contentIds);
+		retMap.put("pageSize", pageSize);
+		//retMap.put("pageState", nextPage == null ? -1 : nextPage.toString());
+		retMap.put("intranetMode", "greyOut");
+		retMap.put("deletedMode", "greyOut");
+
+		return retMap;
+	}
 }
