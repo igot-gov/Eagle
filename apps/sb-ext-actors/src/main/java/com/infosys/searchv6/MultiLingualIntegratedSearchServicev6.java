@@ -192,7 +192,7 @@ class MultiLingualIntegratedSearchServicev6 {
                 paramsMap.put(SearchConstantsv6.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstantsv6.FILTER_IDENTIFIER_FIELD_KEY), true);
                 paramsMap.put(SearchConstantsv6.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstantsv6.FILTER_IDENTIFIER_FIELD_KEY) + SearchConstantsv6.TEMPLATE_FILTER_SUFFIX, identifiersWithImage);
             } else {
-                paramsMap.put("must", true);
+                paramsMap.put("must", false);
                 paramsMap.put("should", true);
                 paramsMap.put("searchTerm", query);
             }

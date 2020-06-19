@@ -7,7 +7,7 @@ import java.util.*;
 
 public class SearchConstantsv6 {
 
-	public static final String ML_SEARCH_TEMPLATE = "mlsearchtemplatev6";
+	public static final String ML_SEARCH_TEMPLATE = "mlsearchtemplatev7";
 	public static final String FILTERS = "filters";
 	public static final String IS_STAND_ALONE = "isStandAlone";
 	public static final String USER_ID = "userId";
