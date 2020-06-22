@@ -40,6 +40,18 @@ android {
         checkReleaseBuilds false
 
     }
+
+    flavorDimensions "env"
+    productFlavors {
+        prod {
+            buildConfigField "String", "BASE_URL", '"https://igot.idc.tarento.com"'
+        }
+
+        dev {
+            applicationIdSuffix ".dev"
+            buildConfigField "String", "BASE_URL", '"https://eagle-dev.idc.tarento.com"'
+        }
+    }
 }
 
 repositories {

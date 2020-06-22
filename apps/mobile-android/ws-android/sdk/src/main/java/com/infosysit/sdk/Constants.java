@@ -39,7 +39,7 @@ public class Constants {
     public static String environmentType = "space";
     public static boolean downloadAllowed = true;
 
-    public static final String baseUrl = "https://space.sunbird.org";
+    public static String baseUrl = "https://space.sunbird.org";
     public static final String openRapUrl = "http://captive.openrap.com";
 //public static final String openRapUrl = "";
     public static  String userId = null;

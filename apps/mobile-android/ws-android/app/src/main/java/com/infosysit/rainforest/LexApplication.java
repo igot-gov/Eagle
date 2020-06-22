@@ -3,6 +3,7 @@ package com.infosysit.rainforest;
 import android.app.Application;
 
 import com.infosysit.rainforest.services.ConnectivityReceiver;
+import com.infosysit.sdk.Constants;
 
 /**
  * Created by akansha.goyal on 3/27/2018.
@@ -16,6 +17,7 @@ public class LexApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        Constants.baseUrl= BuildConfig.BASE_URL;
 
     }
 
