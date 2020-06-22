@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:layout="@layout/toolbar_layout"/>
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="@string/pref_download_over"
+        android:title="@string/summary_download_over_wifi" />
+
+
+
+    <Preference
+        android:key="@string/action_logout_key"
+        android:title="@string/action_logout"
+        android:selectable="true"
+        />
+
+    <Preference
+        android:layout="@layout/custom_pref_layout"/>
+</PreferenceScreen>

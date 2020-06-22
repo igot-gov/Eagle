@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 29
+    defaultConfig {
+        minSdkVersion 20
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    //needs to be changed now
+    buildTypes {
+        debug {
+            debuggable true
+            buildConfigField "String", "SERVER_URL", '"https://lex.infosysit.com"'
+        }
+
+        release {
+            minifyEnabled true
+            debuggable false
+            buildConfigField "String", "SERVER_URL", '"https://lex.infosysapps.com"'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.room:room-runtime:2.2.2'
+    annotationProcessor 'androidx.room:room-compiler:2.2.2'
+//    compile (
+//            [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],
+//            [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.1'],
+//            [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.1']
+//    )
+}
+repositories {
+    mavenCentral()
+}
