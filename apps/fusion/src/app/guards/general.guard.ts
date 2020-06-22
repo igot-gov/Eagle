@@ -67,6 +67,13 @@ export class GeneralGuard implements CanActivate {
       }
       return this.router.parseUrl(`/app/tnc`)
     }
+    /**
+       * Test IF User updated the profile details
+       */
+    // if (!this.configSvc.profileDetailsStatus) {
+    //   return this.router.parseUrl('/app/user-profile/details')
+    // }
+
 
     /**
      * Test IF User has requried role to access the page

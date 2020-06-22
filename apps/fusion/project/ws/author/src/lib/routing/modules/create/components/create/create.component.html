@@ -9,7 +9,7 @@
     <div class="margin-left grid">
       <div class="stepper-grid">
         <div
-          class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer ws-mat-primary-background"
+          class="ws-mat-primary-background-op30 stepper-container cursor-pointer ws-mat-primary-background"
         >
           1
         </div>
@@ -21,7 +21,7 @@
         <span class="border border-solid text-gray-500 mx-3"></span>
       </div>
       <div class="stepper-grid">
-        <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer">
+        <div class="ws-mat-primary-background-op30 stepper-container cursor-pointer">
           2
         </div>
         <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer">
@@ -30,7 +30,7 @@
         <span class="border border-solid text-gray-500 mx-3"></span>
       </div>
       <div class="flex flex-middle">
-        <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer">
+        <div class="ws-mat-primary-background-op30 stepper-container cursor-pointer">
           3
         </div>
         <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer" i18n>
@@ -59,14 +59,14 @@
     </div>
     <div class="card-holder margin-top-l">
       <div class="flex flex-1 flex-col md:flex-row">
-        <div class="w-4/12">
+        <div class="flex-1">
           <ws-auth-entity-card
             [entity]="resourceEntity"
             [expanded]="true"
             (step)="contentClicked($event)"
           ></ws-auth-entity-card>
         </div>
-        <div class="w-8/12">
+        <div class="flex-3">
           <ng-container *ngFor="let createEntity of entity; let i = index">
             <ws-auth-entity-card
               [entity]="createEntity"

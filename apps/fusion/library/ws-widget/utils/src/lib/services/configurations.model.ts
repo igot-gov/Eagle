@@ -34,6 +34,7 @@ export namespace NsInstanceConfig {
     telemetryConfig: ITelemetryConfig
     themes: ITheme[]
     logos: ILogos
+    sources?: ISourceLogo[]
     mailIds: IMailIds
     details: IDetails
     validMailIdExtensionsForMailMe: string[]
@@ -65,7 +66,11 @@ export namespace NsInstanceConfig {
     enterprise?: string
     social?: string
   }
-
+  export interface ISourceLogo {
+    sourceName?: string
+    sourceId?: string
+    logo?: string
+  }
   export interface IPath {
     [key: string]: string
   }
@@ -129,6 +134,7 @@ export namespace NsInstanceConfig {
     developedBy: string
     poweredBy: string
     defaultContent: string
+    defaultSourceLogo:string
     landingLogo: string
     navbarLogo?: string
     thumpsUp?: string

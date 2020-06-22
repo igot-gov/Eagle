@@ -7,7 +7,8 @@ import { ConfigurationsService } from '@ws-widget/utils'
 
 const PROTECTED_SLAG_V8 = `/apis/protected/v8`
 
-const LA_API = `/LA1/api`
+// const LA_API = `/LA1/api`
+const LA_API = `/api`
 const LA_API_END_POINTS = {
   USER_ORG_GRAPH: `${PROTECTED_SLAG_V8}/user/dashboard/userOrgTime`,
   TIME_SPENT: `${LA_API}/timespent`,

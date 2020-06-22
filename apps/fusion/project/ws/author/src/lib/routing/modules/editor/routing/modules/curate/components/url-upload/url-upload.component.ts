@@ -34,7 +34,7 @@ export class UrlUploadComponent implements OnInit {
     private contentService: EditorContentService,
     private configSvc: ConfigurationsService,
     private initService: AuthInitService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.currentContent = this.contentService.currentContent
@@ -57,7 +57,7 @@ export class UrlUploadComponent implements OnInit {
   createForm() {
     this.urlUploadForm = this.formBuilder.group({
       artifactUrl: [''],
-      isIframeSupported: ['', Validators.required],
+      isIframeSupported: [{ value: "No", disabled: true }, Validators.required],
       mimeType: [],
       isInIntranet: ['', Validators.required],
       isExternal: [],
@@ -160,7 +160,7 @@ export class UrlUploadComponent implements OnInit {
   }
 
   check() {
-    let disableIframe = false
+    let disableIframe = true
     const artifactUrl = this.urlUploadForm.controls.artifactUrl.value
     this.canUpdate = false
     if (
@@ -170,12 +170,13 @@ export class UrlUploadComponent implements OnInit {
     ) {
       this.configSvc.instanceConfig.authoring.urlPatternMatching.map(v => {
         if (artifactUrl.match(v.pattern)) {
-          if (v.allowIframe) {
+          if (v.allowIframe && v.source === 'youtube') {
             this.urlUploadForm.controls.isIframeSupported.setValue('Yes')
+
           } else {
             this.urlUploadForm.controls.isIframeSupported.setValue('No')
             this.urlUploadForm.controls.mimeType.setValue('application/html')
-            disableIframe = true
+            // disableIframe = false
           }
           if (v.allowReplace) {
             switch (v.source) {
@@ -183,6 +184,7 @@ export class UrlUploadComponent implements OnInit {
                 this.urlUploadForm.controls.artifactUrl.setValue(
                   URLCheckerClass.youTubeUrlChange(artifactUrl),
                 )
+                // disableIframe = false;
                 this.urlUploadForm.controls.mimeType.setValue('video/x-youtube')
                 break
             }

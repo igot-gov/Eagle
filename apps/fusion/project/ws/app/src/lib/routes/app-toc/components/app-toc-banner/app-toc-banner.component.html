@@ -87,7 +87,9 @@
               [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
               [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')" class="margin-right-m"
               mat-flat-button>
-              <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n>Start</ng-container>
+              <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n>
+                {{resumeData?"Resume":"Start"}}
+              </ng-container>
             </a>
             <a [color]="'primary'" *ngIf="isPostAssessment && showTakeAssessment?.post_assessment"
               [routerLink]="firstResourceLink?.url" class="margin-right-m" mat-flat-button>

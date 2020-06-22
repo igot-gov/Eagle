@@ -76,7 +76,13 @@
                 "bundleName": "theme-deep-blue",
                 "lazy": true
               },
-              "node_modules/pdfjs-dist/web/pdf_viewer.css"
+              {
+                "input": "src/themes/theme-igot.scss",
+                "bundleName": "theme-igot",
+                "lazy": true
+              },
+              "node_modules/pdfjs-dist/web/pdf_viewer.css",
+              "src/fusion-assets/fonts/poppins/stylesheet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

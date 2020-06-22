@@ -7,6 +7,18 @@
   cursor: pointer;
 }
 
+.fix-ww {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1167px;
+  display: flex;
+  flex: 1;
+}
+
+.custom {
+  height: 72px;
+}
+
 .tourGuideBtn:hover {
   background: rgba(0, 0, 0, 0.04);
 }
@@ -18,7 +30,8 @@
 
 .logo-dim {
   min-width: 70px;
-  // max-width: 100px;
+  max-width: 110px;
+  margin-right: 30px;
 }
 
 .app-logo {
@@ -31,7 +44,6 @@
     max-width: 80px;
   }
 }
-
 
 .title {
   font-size: 12px !important;
@@ -111,3 +123,33 @@
   width: $size-l;
   transform: scaleY(2);
 }
+
+.search-small-logo {
+  display: none;
+}
+
+.new-align-center {
+  flex: 1;
+  text-align: right;
+}
+
+.my-search {
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: center;
+  flex: 3;
+}
+
+@media only screen and (max-width: 760px) {
+  .my-search {
+    display: none;
+  }
+
+  .search-small-logo {
+    display: flex;
+  }
+}
+
+// @media 
+// 760px

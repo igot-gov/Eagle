@@ -7,7 +7,8 @@ import { IFollowDetails } from '../person-profile.model'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 const API_END_POINTS = {
-  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timelineV2`,
+  // SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timelineV2`,// this has to be changed(Temporary)
+  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   userTopics: `${PROTECTED_SLAG_V8}/user/topics`,
   lastlearnt: `${PROTECTED_SLAG_V8}/user/history`,
   getFollowersv3: `${PROTECTED_SLAG_V8}/user/follow/getFollowersv3`,

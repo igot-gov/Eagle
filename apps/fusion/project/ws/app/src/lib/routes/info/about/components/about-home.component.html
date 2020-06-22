@@ -23,7 +23,7 @@
             {{ aboutPage?.banner?.description }}
           </h2>
 
-          <div class="overview-intro ws-mat-primary-lite-background">
+          <div *ngIf="videoLink" class="overview-intro ws-mat-primary-lite-background">
             <iframe
               [src]="videoLink"
               i18n-title
@@ -36,6 +36,7 @@
         </div>
         <a
           mat-raised-button
+          *ngIf="aboutPage?.banner?.moreInfo"
           type="button"
           [href]="aboutPage?.banner?.moreInfo"
           target="_blank"
@@ -63,7 +64,7 @@
           {{ content }}
         </p>
       </div>
-      <div class="learning-overview">
+      <div class="learning-overview" *ngIf="aboutPage?.section1?.rightParas?.length>0">
         <p *ngFor="let content of aboutPage?.section1?.rightParas">
           {{ content }}
         </p>
@@ -108,7 +109,7 @@
       <p class="text-justify">
         {{ aboutPage?.features?.description }}
       </p>
-      <mat-accordion>
+      <mat-accordion *ngIf="aboutPage?.features?.list.length>0">
         <mat-expansion-panel
           class="text-justify"
           *ngFor="let key of objectKeys(aboutPage?.features?.list)"

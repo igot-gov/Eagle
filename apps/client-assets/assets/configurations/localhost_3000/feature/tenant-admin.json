@@ -1,0 +1,54 @@
+{
+    "sideNavMenu": {
+        "user_registration": {
+            "link": "/admin/tenant/user-registration",
+            "icon": "supervised_user_circle",
+            "role": [
+                "admin",
+                "register-admin"
+            ],
+            "displayName": "User Registration"
+        },
+        "registered_users": {
+            "link": "/admin/tenant/registered-users",
+            "icon": "verified_user",
+            "role": [
+                "admin",
+                "register-admin"
+            ],
+            "displayName": "Registered Users"
+        },
+        "system_roles": {
+            "link": "/admin/tenant/system-roles-management",
+            "icon": "group_add",
+            "role": [
+                "admin"
+            ],
+            "displayName": "System Roles"
+        },
+        "create_user": {
+            "link": "/admin/tenant/create-user",
+            "icon": "add_circle",
+            "role": [
+                "admin"
+            ],
+            "displayName": "Create User"
+        }
+    },
+    "roleList": {
+        "kb-curator": "Can curate a Knowledge Board - can add, remove and reorder content inside a KB for which they are a curator",
+        "kb-creator": "Can create a Knowledge Board",
+        "my-skills": "Can access \"My Skills\" section of Wingspan (under profile)",
+        "admin": "Overall application admin. Can perform admin activities and also encompasses all other roles",
+        "reviewer": "Can only review contents assigned to them through authoring tool",
+        "publisher": "Can only publish contents assigned to them through authoring tool",
+        "platform-feedback-admin": "Can see and respond to feedback given at Wingspan platform level",
+        "editor": "Can edit, review and publish all contents - including those created by others",
+        "channel-creator": "Can create channels through authoring tool",
+        "content-creator": "Can create content - resources, modules, courses, programs through authoring tool",
+        "register-admin": "Can take care of registration workflow for content sources that require registration (ex: Skillsoft, Pluralsight, etc.)",
+        "content-feedback-admin": "Can see and respond to feedback given at Wingspan content level",
+        "analytics": "Can access learning analytics section of Wingspan",
+        "channel-creator-advanced": "Can create channels in advanced mode"
+    }
+}

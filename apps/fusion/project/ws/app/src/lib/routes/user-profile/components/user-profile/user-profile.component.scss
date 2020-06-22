@@ -1,0 +1,20 @@
+.flex-align {
+    align-items: center;
+    justify-content: flex-start;
+}
+
+::ng-deep mat-form-field .mat-form-field-infix .mat-form-field-label{
+    line-height: normal !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -50,9 +50,10 @@
     "name": "Assessment",
     "icon": "check_circle",
     "available": true,
-    "enabled": false,
+    "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/quiz",
+    "additionalMeta": { "categoryType": "Assessment","resourceType": "Assessment" },
     "hasRole": ["content-creator", "editor", "admin"]
   },
   {
@@ -74,8 +75,8 @@
     "contentType": "Channel",
     "mimeType": "application/channel",
     "hasRole": ["channel-creator", "editor", "admin"],
-    "available": true,
-    "enabled": true
+    "available": false,
+    "enabled": false
   },
   {
     "id": "kb",
@@ -85,8 +86,8 @@
     "icon": "folder",
     "mimeType": "application/vnd.ekstep.content-collection",
     "contentType": "Knowledge Board",
-    "available": true,
-    "enabled": true,
+    "available": false,
+    "enabled": false,
     "hasRole": ["kb-creator", "editor", "admin"]
   },
   {
@@ -96,7 +97,7 @@
     "icon": "folder",
     "mimeType": "application/vnd.ekstep.content-collection",
     "contentType": "Knowledge Artifact",
-    "available": true,
+    "available": false,
     "enabled": false,
     "hasRole": ["ka-creator", "editor", "admin"]
   },
@@ -132,7 +133,7 @@
     "icon": "library_books",
     "contentType": "Learning Path",
     "available": true,
-    "enabled": false,
+    "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
     "hasRole": ["content-creator", "editor", "admin"]
   }

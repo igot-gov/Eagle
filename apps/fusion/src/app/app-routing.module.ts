@@ -201,6 +201,11 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/user-profile',
+    loadChildren: () =>
+      import('./routes/route-user-profile-app.module').then(u => u.RouteUserProfileAppModule),
+  },
+  {
     path: 'author',
     data: {
       requiredRoles: [
