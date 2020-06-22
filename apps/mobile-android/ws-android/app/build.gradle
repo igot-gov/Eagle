@@ -49,7 +49,7 @@ android {
 
         dev {
             applicationIdSuffix ".dev"
-            buildConfigField "String", "BASE_URL", '"https://eagle-dev.idc.tarento.com"'
+            buildConfigField "String", "BASE_URL", '"https://eagle-sb.idc.tarento.com"'
         }
     }
 }

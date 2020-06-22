@@ -404,7 +404,7 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
                             view.evaluateJavascript("navigateTo(" + url + ")", null);
                             lexExternalLink = true;
                             return false;
-                        } else if (url.contains(Constants.environmentType) || url.contains(Constants.environmentTypeSupport)) {
+                        } else if (url.contains(Constants.environmentType)) {
                             view.evaluateJavascript("navigateTo(" + url + ")", null);
                             lexExternalLink = false;
                             return false;
