@@ -404,7 +404,7 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
                             view.evaluateJavascript("navigateTo(" + url + ")", null);
                             lexExternalLink = true;
                             return false;
-                        } else if (url.contains(Constants.environmentType)) {
+                        } else if (url.contains(Constants.environmentType) || url.contains(Constants.environmentTypeSupport)) {
                             view.evaluateJavascript("navigateTo(" + url + ")", null);
                             lexExternalLink = false;
                             return false;
@@ -526,7 +526,7 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
             private void show_splash() {
                 if (loginPage.getVisibility() == View.VISIBLE && showSplashScreen) {
                     chatButton.setVisibility(View.GONE);
-                    splashPage.loadUrl("file:///android_asset/splashscreen.html");
+                    //splashPage.loadUrl("file:///android_asset/splashscreen.html");
                     loginPage.setVisibility(View.GONE);
                     splashPage.setVisibility(View.VISIBLE);
                 }

@@ -18,6 +18,13 @@ public class LexApplication extends Application {
         super.onCreate();
         mInstance = this;
         Constants.baseUrl= BuildConfig.BASE_URL;
+        if (BuildConfig.FLAVOR.equalsIgnoreCase("dev")) {
+            Constants.environmentType = "eagle-dev";
+            Constants.environmentTypeSupport = "eagle-keycloak";
+        } else if (BuildConfig.FLAVOR.equalsIgnoreCase("prod")) {
+            Constants.environmentType = "igot";
+            Constants.environmentTypeSupport = "igot";
+        }
 
     }
 

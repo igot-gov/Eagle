@@ -37,6 +37,7 @@ public class Constants {
     public static final String continueLearningTelemetry = "sharedPreference.continueLearningTelemetry";
     public static ProgressDialog progress = null;
     public static String environmentType = "space";
+    public static String environmentTypeSupport = "eagle-keycloak";
     public static boolean downloadAllowed = true;
 
     public static String baseUrl = "https://space.sunbird.org";

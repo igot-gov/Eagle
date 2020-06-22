@@ -174,7 +174,7 @@ public class ExternalPlayerActivity extends AppCompatActivity {
                         Log.d("ExternalPlayerUrl", "urltoplay: " + url);
                         if (playerwWebView.getVisibility() == View.VISIBLE) {
                             if ((externalUrl.split("\\?")[0]).contains(url) || url.contains(base) || url.contains("microsoftonline") || url.contains("stsakaash") ||
-                                    url.contains(Constants.environmentType) || url.contains("skype.com") || (externalUrl.contains(base) && base.contains("lessons"))) {
+                                    url.contains(Constants.environmentType)||url.contains(Constants.environmentTypeSupport) || url.contains("skype.com") || (externalUrl.contains(base) && base.contains("lessons"))) {
                                 return false;
                             } else if (url.contains("coursera.org") && url.contains("/learn/") && !changedExternalUrl) {
                                 String[] tempUrl = url.split("/learn/");
