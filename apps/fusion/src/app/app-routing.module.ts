@@ -184,6 +184,11 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/signup',
+    loadChildren: () =>
+      import('./routes/signup/signup.module').then(u => u.SignupModule),
+  },
+  {
     path: 'app/toc',
     loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
     canActivate: [GeneralGuard],

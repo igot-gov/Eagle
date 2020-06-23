@@ -31,6 +31,10 @@ export interface ILanguages {
   name: string
 }
 
+export interface IChipItems {
+  name: string
+}
+
 export interface ILanguagesApiData {
   languages: ILanguages[]
 }
@@ -39,28 +43,4 @@ export interface INationality {
 }
 export interface INationalityApiData {
   nationalities: INationality[]
-}
-
-export namespace NsUserProfileTypes {
-  export enum EPrimaryEmailType {
-    PERSONAL = 'personal',
-    OFFICIAL = 'official',
-  }
-
-  export enum EUserGender {
-    MALE = 'MALE',
-    FEMALE = 'FEMALE',
-    OTHER = 'OTHER',
-  }
-
-  export enum EMaritalStatus {
-    SINGLE = 'single',
-    MARRIED = 'married',
-  }
-  export enum ECategory {
-    GENERAL = 'general',
-    OBC = 'obc',
-    SC = 'sc',
-    ST = 'st',
-  }
 }

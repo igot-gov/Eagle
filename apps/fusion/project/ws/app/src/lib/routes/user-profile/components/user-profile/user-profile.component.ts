@@ -7,7 +7,8 @@ import { UserProfileService } from '../../services/user-profile.service'
 import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { Router } from '@angular/router'
 import { startWith, map, debounceTime, distinctUntilChanged } from 'rxjs/operators'
-import { INationality, ILanguages, NsUserProfileTypes } from '../../models/user-profile.model'
+import { INationality, ILanguages } from '../../models/user-profile.model'
+import { NsUserProfileDetails } from '@ws/app/src/lib/routes/user-profile/models/NsUserProfile'
 import { AppDateAdapter, APP_DATE_FORMATS, changeformat } from '../../services/format-datepicker'
 
 @Component({
@@ -24,6 +25,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   unseenCtrl!: FormControl
   unseenCtrlSub!: Subscription
   uploadSaveData = false
+  selectedIndex = 0
   masterNationality: Observable<INationality[]> | undefined
   masterLanguages: Observable<ILanguages[]> | undefined
   masterKnownLanguages: Observable<ILanguages[]> | undefined
@@ -31,13 +33,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   masterLanguagesEntries!: ILanguages[]
   selectedKnowLangs: ILanguages[] = []
   separatorKeysCodes: number[] = [ENTER, COMMA]
-  EPrimaryEmailType = NsUserProfileTypes.EPrimaryEmailType
-  EUserGender = NsUserProfileTypes.EUserGender
-  EMaritalStatus = NsUserProfileTypes.EMaritalStatus
-  ECategory = NsUserProfileTypes.ECategory
+  EPrimaryEmailType = NsUserProfileDetails.EPrimaryEmailType
+  EUserGender = NsUserProfileDetails.EUserGender
+  EMaritalStatus = NsUserProfileDetails.EMaritalStatus
+  ECategory = NsUserProfileDetails.ECategory
+  today = new Date()
+  phoneNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$'
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   @ViewChild('knownLanguagesInput', { static: true }) knownLanguagesInputRef!: ElementRef<HTMLInputElement>
+  isEditEnabled = false
 
   constructor(
     private snackBar: MatSnackBar,
@@ -49,7 +54,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       firstname: new FormControl('', [Validators.required]),
       middlename: new FormControl('', []),
       surname: new FormControl('', [Validators.required]),
-      mobile: new FormControl('', [Validators.required, Validators.minLength(10)]),
+      mobile: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumberPattern)]),
       telephone: new FormControl('', []),
       primaryEmail: new FormControl('', [Validators.required, Validators.email]),
       primaryEmailType: new FormControl('', [Validators.required]),
@@ -108,46 +113,46 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   onChangesLanuage(): void {
 
-      // tslint:disable-next-line: no-non-null-assertion
-      this.masterLanguages = this.createUserForm.get('motherTongue')!.valueChanges
-        .pipe(
-          debounceTime(500),
-          distinctUntilChanged(),
-          startWith(''),
-          map(value => typeof value === 'string' ? value : value.name),
-          map(name => name ? this.filterLanguage(name) : this.masterLanguagesEntries.slice())
-        )
+    // tslint:disable-next-line: no-non-null-assertion
+    this.masterLanguages = this.createUserForm.get('motherTongue')!.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        startWith(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this.filterLanguage(name) : this.masterLanguagesEntries.slice())
+      )
   }
 
   onChangesKnownLanuage(): void {
     // tslint:disable-next-line: no-non-null-assertion
     this.masterKnownLanguages = this.createUserForm.get('knownLanguages')!.valueChanges
-        .pipe(
-          debounceTime(500),
-          distinctUntilChanged(),
-          startWith(''),
-          map(value => typeof value === 'string' || 'ILanguages'  ? value : value.name),
-          map(name => {
-            if (name) {
-              if (name.constructor === Array) {
-                return this.filterMultiLanguage(name)
-               }
-                 return this.filterLanguage(name)
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        startWith(''),
+        map(value => typeof value === 'string' || 'ILanguages' ? value : value.name),
+        map(name => {
+          if (name) {
+            if (name.constructor === Array) {
+              return this.filterMultiLanguage(name)
             }
-              return this.masterLanguagesEntries.slice()
-          })
-        )
+            return this.filterLanguage(name)
+          }
+          return this.masterLanguagesEntries.slice()
+        })
+      )
   }
 
   private filterNationality(name: string): INationality[] {
     if (name) {
-    const filterValue = name.toLowerCase()
+      const filterValue = name.toLowerCase()
       return this.masterNationalities.filter(option => option.name.toLowerCase().includes(filterValue))
     }
     return this.masterNationalities
   }
 
-  private filterLanguage(name: string): ILanguages[]  {
+  private filterLanguage(name: string): ILanguages[] {
     if (name) {
       const filterValue = name.toLowerCase()
       return this.masterLanguagesEntries.filter(option => option.name.toLowerCase().includes(filterValue))
@@ -155,7 +160,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     return this.masterLanguagesEntries
   }
 
-  private filterMultiLanguage(name: string[]): ILanguages[]  {
+  private filterMultiLanguage(name: string[]): ILanguages[] {
     if (name) {
       const filterValue = name.map(n => n.toLowerCase())
       return this.masterLanguagesEntries.filter(option => {
@@ -219,33 +224,32 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   getUserDetails() {
     if (this.configSvc.profileDetailsStatus) {
       if (this.configSvc.userProfile) {
-      this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
-        data => {
-          if (data && data.length) {
-            this.createUserForm.patchValue({
-              firstname: data[0].firstname,
-              middlename: data[0].middlename,
-              surname: data[0].surname,
-              mobile: data[0].mobile,
-              telephone: data[0].telephone,
-              primaryEmail: data[0].primaryEmail,
-              primaryEmailType: data[0].primaryEmailType,
-              secondaryEmail: data[0].secondaryEmail,
-              nationality: data[0].nationality,
-              dob: new Date(data[0].dob),
-              gender: data[0].gender,
-              maritalStatus: data[0].maritalStatus,
-              motherTongue: data[0].motherTongue,
-              knownLanguages: data[0].knownLanguages,
-              residenceAddress: data[0].residenceAddress,
-              category: data[0].category,
-            })
-            this.selectedKnowLangs = data[0].knownLanguages
-          }
-        },
-        (err: any) => {
-          console.log('err :', err)
-        })
+        this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
+          data => {
+            if (data && data.length) {
+              this.createUserForm.patchValue({
+                firstname: data[0].firstname,
+                middlename: data[0].middlename,
+                surname: data[0].surname,
+                mobile: data[0].mobile,
+                telephone: data[0].telephone,
+                primaryEmail: data[0].primaryEmail,
+                primaryEmailType: data[0].primaryEmailType,
+                secondaryEmail: data[0].secondaryEmail,
+                nationality: data[0].nationality,
+                dob: new Date(data[0].dob),
+                gender: data[0].gender,
+                maritalStatus: data[0].maritalStatus,
+                motherTongue: data[0].motherTongue,
+                knownLanguages: data[0].knownLanguages,
+                residenceAddress: data[0].residenceAddress,
+                category: data[0].category,
+              })
+              this.selectedKnowLangs = data[0].knownLanguages
+            }
+          },
+          (_err: any) => {
+          })
       }
     } else {
       if (this.configSvc.userProfile) {
@@ -269,7 +273,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   async onSubmit(form: any) {
     // DO some co=ustomization on the input data
     form.value.knownLanguages = this.selectedKnowLangs
-    form.value.dob = changeformat(form.value.dob)
+    form.value.dob = changeformat(new Date(form.value.dob))
     this.uploadSaveData = true
     this.userProfileSvc.updateProfileDetails(form.value).subscribe(
       () => {
@@ -290,6 +294,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.snackBar.open(primaryMsg, undefined, {
       duration,
     })
+  }
+
+  formNext(index: number) {
+    this.selectedIndex = index
+  }
+  public navigateBack() {
+    this.router.navigate(['page', 'home'])
   }
 
 }

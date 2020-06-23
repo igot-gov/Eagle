@@ -20,31 +20,32 @@
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Mobile Number</mat-label>
-            <input type="number" matInput placeholder="Mobile Number" formControlName="mobile">
+            <input type="number" matInput placeholder="Mobile Number" formControlName="mobile"
+              [pattern]="phoneNumberPattern">
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Telephone Number</mat-label>
             <input type="number" matInput placeholder="Telephone Number" formControlName="telephone">
           </mat-form-field>
-            <mat-form-field appearance="outline" class="w-full">
-              <mat-label>Primary Email</mat-label>
-              <input type="primaryEmail" matInput placeholder="Primary Email" formControlName="primaryEmail" readonly>
-            </mat-form-field>
-            <div class="pb-8 flex flex-wrap flex-align">
-              <mat-label class="w-full flex  flex-align">Primary Email Type</mat-label>
-              <mat-radio-group matInput aria-label="Primary Email Type" formControlName="primaryEmailType">
-                <span class="mx-2">
-                  <mat-radio-button matInput class="my-1" [value]="EPrimaryEmailType.PERSONAL">
-                    Personal Email
-                  </mat-radio-button>
-                </span>
-                <span class="mx-2">
-                  <mat-radio-button matInput class="my-1" [value]="EPrimaryEmailType.OFFICIAL">
-                    Official Email
-                  </mat-radio-button>
-                </span>
-              </mat-radio-group>
-            </div>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Primary Email</mat-label>
+            <input type="primaryEmail" matInput placeholder="Primary Email" formControlName="primaryEmail" readonly>
+          </mat-form-field>
+          <div class="pb-8 flex flex-wrap flex-align">
+            <mat-label class="w-full flex  flex-align">Primary Email Type</mat-label>
+            <mat-radio-group matInput aria-label="Primary Email Type" formControlName="primaryEmailType">
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EPrimaryEmailType.PERSONAL">
+                  Personal Email
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EPrimaryEmailType.OFFICIAL">
+                  Official Email
+                </mat-radio-button>
+              </span>
+            </mat-radio-group>
+          </div>
           <div class="flex">
             <mat-form-field appearance="outline" class="w-full">
               <mat-label>Secondary Email</mat-label>
@@ -52,7 +53,7 @@
             </mat-form-field>
           </div>
         </div>
-        
+
       </div>
       <div class="w-full sm:w-1/2">
         <div class="px-2">
@@ -66,11 +67,11 @@
             <mat-option *ngFor="let option of masterNationality | async" [value]="option.name">{{ option.name }}
             </mat-option>
           </mat-autocomplete>
-  
+
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Date Of Birth</mat-label>
+            <mat-label>Date Of Birth (yyyy-mm-dd)</mat-label>
             <input matInput formControlName="dob" [matDatepicker]="picker" i18n-placeholder
-              placeholder="Choose Date Of Birth">
+              placeholder="Choose Date Of Birth (yyyy-mm-dd)" [max]="today">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -124,7 +125,7 @@
             <mat-option *ngFor="let option of masterLanguages | async" [value]="option.name">{{ option.name }}
             </mat-option>
           </mat-autocomplete>
-  
+
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Other Languages Known</mat-label>
             <mat-chip-list #chipList>
@@ -135,8 +136,9 @@
               </mat-chip>
               <input matInput i18n-placeholder="Known Languages" placeholder="Known Languages"
                 formControlName="knownLanguages" i18n-aria-label aria-label="Known Languages"
-                [matAutocomplete]="knownLanguagesAuto" #knownLanguagesInput [matChipInputFor]="chipList"
-                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                [matChipInputAddOnBlur]="false" [matAutocomplete]="knownLanguagesAuto" #knownLanguagesInput
+                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)" />
             </mat-chip-list>
             <!-- <input matInput type="text" placeholder="known Languages" i18n-placeholder="known Languages" formControlName="knownLanguages"
             [matAutocomplete]="knownLanguagesAuto" i18n-aria-label aria-label="known Languages" #knownLanguages /> -->
@@ -146,8 +148,8 @@
               {{ option.name }}
             </mat-option>
           </mat-autocomplete>
-  
-  
+
+
           <div class="pb-8 flex flex-wrap flex-align">
             <mat-label class="w-full flex  flex-align">Category</mat-label>
             <mat-radio-group matInput aria-label="Select an option" formControlName="category">
@@ -173,7 +175,7 @@
               </span>
             </mat-radio-group>
           </div>
-  
+
           <div class="mat-body">
             <mat-form-field class="w-full">
               <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
@@ -209,6 +211,10 @@
       <div *ngIf="uploadSaveData" class="pr-4 flex items-center justify-center">
         <mat-spinner [diameter]="30"></mat-spinner>
       </div>
+      <button mat-raised-button color="primary" class="margin-right-10" type="submit" i18n (click)="navigateBack()">
+
+        <ng-container i18n>Cancel</ng-container>
+      </button>
       <button mat-raised-button color="primary" type="submit" i18n [disabled]="uploadSaveData || !createUserForm?.valid"
         (click)="onSubmit(createUserForm)">
 

@@ -25,6 +25,7 @@ interface IDetailsResponse {
   tncStatus: boolean
   roles: string[]
   group: string[]
+  profileDetailsStatus: boolean
 }
 
 interface IFeaturePermissionConfigs {
@@ -267,6 +268,7 @@ export class InitService {
       this.configSvc.userRoles.add('is_manager')
     }
     this.configSvc.hasAcceptedTnc = details.tncStatus
+    this.configSvc.profileDetailsStatus = details.profileDetailsStatus
     return details
   }
 

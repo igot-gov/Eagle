@@ -29,6 +29,7 @@ import {
   MatSlideToggleModule,
   MatTabsModule,
   MatDividerModule,
+  MatAutocompleteModule,
 } from '@angular/material'
 import { HomeComponent } from './routes/page/home/home.component'
 import {
@@ -57,6 +58,7 @@ import { ConfirmActionComponent } from './routes/system-roles-management/roles-m
 import { UsersComponent } from './routes/users/users.component'
 import { CreateUserComponent } from './routes/users/create-user/create-user.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
+import { UserAccessPathComponent } from './routes/user-access-path/user-access-path.component'
 
 @NgModule({
   declarations: [
@@ -79,6 +81,7 @@ import { OpenRolesDialogComponent } from './routes/users/components/open-roles-d
     UsersComponent,
     CreateUserComponent,
     OpenRolesDialogComponent,
+    UserAccessPathComponent,
   ],
   imports: [
     CommonModule,
@@ -119,6 +122,7 @@ import { OpenRolesDialogComponent } from './routes/users/components/open-roles-d
     MatSlideToggleModule,
     MatDividerModule,
     UserImageModule,
+    MatAutocompleteModule,
   ],
   providers: [TenantAdminService],
   entryComponents: [ModifyRolesDialogComponent,

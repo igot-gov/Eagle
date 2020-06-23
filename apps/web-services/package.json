@@ -14,6 +14,7 @@
     "start:ws-stage": "nodemon --config nodemon/nodemon-ws-stage.json",
     "start:siemens-stage": "nodemon --config nodemon/nodemon-siemens-stage.json",
     "start:nodemon": "nodemon --config nodemon/nodemon.json",
+    "start:eagle": "nodemon --config nodemon/nodemon-eagle-stage.json",
     "start": "node index.js"
   },
   "keywords": [],
@@ -35,6 +36,7 @@
     "form-data": "^3.0.0",
     "helmet": "^3.21.2",
     "http-proxy": "^1.17.0",
+    "keycloak-admin": "^1.13.0",
     "keycloak-connect": "^3.4.3",
     "morgan": "^1.9.1",
     "request": "^2.88.0",

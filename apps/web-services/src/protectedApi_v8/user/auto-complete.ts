@@ -7,7 +7,7 @@ import { ERROR } from '../../utils/message'
 
 const API_END_POINTS = {
   users: (rootOrg: string, searchItem: string, queryParams?: string) =>
-    `${CONSTANTS.PID_API_BASE}/user/autocomplete/${rootOrg}/all/${searchItem}?${queryParams}`,
+    `${CONSTANTS.USER_PROFILE_API_BASE}/user/autocomplete/${rootOrg}/all/${searchItem}?${queryParams}`,
 }
 
 export const autocompleteApi = Router()

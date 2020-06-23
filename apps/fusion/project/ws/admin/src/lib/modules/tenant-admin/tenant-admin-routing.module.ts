@@ -9,6 +9,7 @@ import { SystemRolesManagementComponent } from './routes/system-roles-management
 import { RolesManagementDetailComponent } from './routes/system-roles-management/roles-management-detail/roles-management-detail.component'
 import { CreateUserComponent } from './routes/users/create-user/create-user.component'
 import { UsersComponent } from './routes/users/users.component'
+import { UserAccessPathComponent } from './routes/user-access-path/user-access-path.component'
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +29,13 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
     data: {
       requiredFeatures: ['adminFeatureRegisteredUsers'],
+    },
+  },
+  {
+    path: 'access-path',
+    component: UserAccessPathComponent,
+    data: {
+      requiredRoles: ['admin', 'register-admin'],
     },
   },
   {
