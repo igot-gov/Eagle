@@ -7,6 +7,7 @@ import { NsAppsConfig, ConfigurationsService, NsPage, LogoutComponent, Subapplic
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ROOT_WIDGET_CONFIG, CustomTourService } from '@ws-widget/collection'
 import { MatDialog } from '@angular/material'
+import { AccessControlService } from '../../../../project/ws/author/src/public-api'
 interface IGroupWithFeatureWidgets extends NsAppsConfig.IGroup {
   featureWidgets: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[]
 }
@@ -32,6 +33,8 @@ export class FeaturesComponent implements OnInit, OnDestroy {
     private tour: CustomTourService,
     private respondSvc: SubapplicationRespondService,
     private valueSvc: ValueService,
+    private accessService: AccessControlService,
+
   ) {
     this.valueSvc.isXSmall$.subscribe(isXSmall => {
       this.isXSmall = isXSmall
@@ -42,26 +45,32 @@ export class FeaturesComponent implements OnInit, OnDestroy {
     }
     if (this.configurationSvc.appsConfig) {
       const appsConfig = this.configurationSvc.appsConfig
-      this.featuresConfig = appsConfig.groups.map(
-        (group: NsAppsConfig.IGroup): IGroupWithFeatureWidgets => ({
-          ...group,
-          featureWidgets: group.featureIds.map(
-            (id: string): NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink> =>
-              ({
-                widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
-                widgetSubType: ROOT_WIDGET_CONFIG.actionButton.feature,
-                widgetHostClass: 'my-2 px-2 w-1/2 sm:w-1/3 md:w-1/6 w-lg-1-8 box-sizing-box',
-                widgetData: {
-                  config: {
-                    type: 'feature-item',
-                    useShortName: false,
-                    treatAsCard: true,
+      const availGroups: NsAppsConfig.IGroup[] = []
+      appsConfig.groups.forEach(group => {
+        if (group.hasRole.length === 0 || this.accessService.hasRole(group.hasRole))
+          availGroups.push(group)
+      })
+      this.featuresConfig = availGroups.map(
+        (group: NsAppsConfig.IGroup): IGroupWithFeatureWidgets => (
+          {
+            ...group,
+            featureWidgets: group.featureIds.map(
+              (id: string): NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink> =>
+                ({
+                  widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
+                  widgetSubType: ROOT_WIDGET_CONFIG.actionButton.feature,
+                  widgetHostClass: 'my-2 px-2 w-1/2 sm:w-1/3 md:w-1/6 w-lg-1-8 box-sizing-box',
+                  widgetData: {
+                    config: {
+                      type: 'feature-item',
+                      useShortName: false,
+                      treatAsCard: true,
+                    },
+                    actionBtn: appsConfig.features[id],
                   },
-                  actionBtn: appsConfig.features[id],
-                },
-              }),
-          ),
-        }),
+                }),
+            ),
+          }),
       )
     }
   }

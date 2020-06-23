@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router'
 import { BtnFeatureModule, BtnPageBackModule } from '@ws-widget/collection'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { LogoutModule } from '@ws-widget/utils'
+import { AccessControlService } from '../../../../project/ws/author/src/public-api'
 
 @NgModule({
   declarations: [FeaturesComponent],
@@ -36,5 +37,6 @@ import { LogoutModule } from '@ws-widget/utils'
     MatCardModule,
   ],
   exports: [FeaturesComponent],
+  providers: [AccessControlService]
 })
 export class FeaturesModule { }

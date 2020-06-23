@@ -37,32 +37,32 @@
                 </div>
               </div>
               <div class="margin-top-xs margin-left-l" *ngIf="checkCondition('creatorLogo', 'show')"
-              [ngClass]="{ disable: checkCondition('creatorLogo', 'disabled') }">
-              <label>
-                <div class="margin-top-xs flex flex-middle"
-                  [ngClass]="{ required: checkCondition('creatorLogo', 'required') }">
-                  <b i18n>Source Image</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('creatorLogo')">info
-                  </mat-icon>
-                </div>
-                <span i18n *ngIf="infoType === 'creatorLogo'">
-                  Maximum file size - 1 MB
-                </span>
-              </label>
-              <div class="margin-top-xs">
-                <img class="image max-width" [ngClass]="{
+                [ngClass]="{ disable: checkCondition('creatorLogo', 'disabled') }">
+                <label>
+                  <div class="margin-top-xs flex flex-middle"
+                    [ngClass]="{ required: checkCondition('creatorLogo', 'required') }">
+                    <b i18n>Source Image</b>
+                    <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('creatorLogo')">info
+                    </mat-icon>
+                  </div>
+                  <span i18n *ngIf="infoType === 'creatorLogo'">
+                    Maximum file size - 1 MB
+                  </span>
+                </label>
+                <div class="margin-top-xs">
+                  <img class="image max-width" [ngClass]="{
                     'image-border': showError('creatorLogo'),
                     'ws-mat-warn-text': showError('creatorLogo')
                   }" height="72" width="72" [src]="contentForm.controls.creatorLogo.value | relativeUrl"
-                  (error)="changeToDefaultImg($event)" />
-                <div class="photo mat-elevation-z4 mat-app-background" (click)="uploadSource.click()">
-                  <mat-icon class="photo-icon ws-mat-primary-text">photo_camera</mat-icon>
-                  <input type="file" #uploadSource
-                    (change)="uploadSourceIcon($event.target.files[0]); uploadSource.value = null"
-                    style="display: none;" [accept]="imageTypes.toString()" />
+                    (error)="changeToDefaultImg($event)" />
+                  <div class="photo mat-elevation-z4 mat-app-background" (click)="uploadSource.click()">
+                    <mat-icon class="photo-icon ws-mat-primary-text">photo_camera</mat-icon>
+                    <input type="file" #uploadSource
+                      (change)="uploadSourceIcon($event.target.files[0]); uploadSource.value = null"
+                      style="display: none;" [accept]="imageTypes.toString()" />
+                  </div>
                 </div>
               </div>
-            </div>
               <div class="flex mobile-break margin-left-l">
                 <div style="width: 230px;" class="flex flex-column  margin-right-m margin-top-m">
                   <div class="margin-bottom-m" *ngIf="checkCondition('expiryDate', 'show')"
@@ -504,23 +504,23 @@
           <div class="mobile-break">
             <div class="margin-top-m margin-left-xl flex-1" *ngIf="checkCondition('catalogPaths', 'show')"
               [ngClass]="{ disable: checkCondition('catalogPaths', 'disabled') }">
-              <label>
-                <div class="margin-top-s flex flex-middle">
-                  <b [ngClass]="{ required: checkCondition('catalogPaths', 'required') }" i18n>Catalog</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('catalogPaths')">info
-                  </mat-icon>
-                  <button mat-button (click)="openCatalogSelector()"
-                    class="ws-mat-primary-text font-weight-500 flex flex-middle cursor-pointer">
-                    <mat-icon>add</mat-icon>
-                    <span i18n>
-                      UPDATE
-                    </span>
-                  </button>
-                </div>
-                <span i18n *ngIf="infoType === 'catalogPaths'">
-                  Select the tags for placement of your content in the catalog
-                </span>
-              </label>
+              <!-- <label> -->
+              <div class="margin-top-s flex flex-middle">
+                <b [ngClass]="{ required: checkCondition('catalogPaths', 'required') }" i18n>Catalog</b>
+                <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('catalogPaths')">info
+                </mat-icon>
+                <button mat-button (click)="openCatalogSelector()"
+                  class="ws-mat-primary-text font-weight-500 flex flex-middle cursor-pointer">
+                  <mat-icon>add</mat-icon>
+                  <span i18n>
+                    UPDATE
+                  </span>
+                </button>
+              </div>
+              <span i18n *ngIf="infoType === 'catalogPaths'">
+                Select the tags for placement of your content in the catalog
+              </span>
+              <!-- </label> -->
               <div class="margin-top-l flex margin-right-xl"
                 [ngClass]="{ 'mat-form-field-invalid': showError('catalogPaths') }">
                 <mat-form-field *ngIf="(contentForm.controls.catalogPaths.value || []).length > 0"

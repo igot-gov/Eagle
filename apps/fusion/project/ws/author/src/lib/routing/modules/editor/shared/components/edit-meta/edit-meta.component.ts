@@ -1151,7 +1151,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addCommonToCatalog(catalogs: string[]): string[] {
     const newCatalog: any[] = []
-    catalogs.forEach(catalog => {
+    catalogs && catalogs.forEach(catalog => {
       const prefix = 'Common>'
       if (catalog.indexOf(prefix) > -1) {
         newCatalog.push(catalog)
