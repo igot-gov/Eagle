@@ -53,7 +53,6 @@ export class SignupComponent implements OnInit, OnDestroy {
     err => {
       this.openSnackbar(err.error.split(':')[1])
       this.uploadSaveData = false
-      console.log('err >', err)
     })
   }
 
