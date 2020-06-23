@@ -122,7 +122,7 @@ public class ExternalPlayerActivity extends AppCompatActivity {
 //            }
 //        });
         externalUrl = getIntent().getStringExtra(PATH_PARAM);
-        externalUrl = "https://ieeexplore.ieee.org/servlet/wayf.jsp?entityId=https://sts.windows.net/63ce7d59-2f3e-42cd-a8cc-be764cff5eb6/&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpl%2Febooks%2FbookPdfWithBanner.jsp%3FfileName%3D6282363.pdf%26bkn%3D6267326%26pdfType%3Dchapter";
+        //externalUrl = "https://ieeexplore.ieee.org/servlet/wayf.jsp?entityId=https://sts.windows.net/63ce7d59-2f3e-42cd-a8cc-be764cff5eb6/&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpl%2Febooks%2FbookPdfWithBanner.jsp%3FfileName%3D6282363.pdf%26bkn%3D6267326%26pdfType%3Dchapter";
         playerwWebView.loadUrl(externalUrl);
 //        playerwWebView.loadUrl("https://infosys.myhbp.org/hmm12/content/innovation_and_creativity/shape_a_creative_team.html?anchor=get_comfortable_with_team_conflict#!#get_comfortable_with_team_conflict");
 //        playerwWebView.addJavascriptInterface(new WebViewBridgeJava(this),"appRef");

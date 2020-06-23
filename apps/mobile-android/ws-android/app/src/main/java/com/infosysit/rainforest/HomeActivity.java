@@ -526,7 +526,7 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
             private void show_splash() {
                 if (loginPage.getVisibility() == View.VISIBLE && showSplashScreen) {
                     chatButton.setVisibility(View.GONE);
-                    //splashPage.loadUrl("file:///android_asset/splashscreen.html");
+                    splashPage.loadUrl("file:///android_asset/splashscreen.html");
                     loginPage.setVisibility(View.GONE);
                     splashPage.setVisibility(View.VISIBLE);
                 }
