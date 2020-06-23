@@ -134,7 +134,7 @@ export namespace NsInstanceConfig {
     developedBy: string
     poweredBy: string
     defaultContent: string
-    defaultSourceLogo:string
+    defaultSourceLogo: string
     landingLogo: string
     navbarLogo?: string
     thumpsUp?: string

@@ -74,7 +74,6 @@ export class GeneralGuard implements CanActivate {
     //   return this.router.parseUrl('/app/user-profile/details')
     // }
 
-
     /**
      * Test IF User has requried role to access the page
      */

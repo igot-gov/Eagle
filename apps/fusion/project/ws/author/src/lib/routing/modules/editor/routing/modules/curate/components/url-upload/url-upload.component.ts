@@ -57,7 +57,7 @@ export class UrlUploadComponent implements OnInit {
   createForm() {
     this.urlUploadForm = this.formBuilder.group({
       artifactUrl: [''],
-      isIframeSupported: [{ value: "No", disabled: true }, Validators.required],
+      isIframeSupported: [{ value: 'No', disabled: true }, Validators.required],
       mimeType: [],
       isInIntranet: ['', Validators.required],
       isExternal: [],
@@ -160,7 +160,7 @@ export class UrlUploadComponent implements OnInit {
   }
 
   check() {
-    let disableIframe = true
+    const disableIframe = true
     const artifactUrl = this.urlUploadForm.controls.artifactUrl.value
     this.canUpdate = false
     if (

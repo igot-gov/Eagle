@@ -8,7 +8,7 @@ const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
 const API_END_POINTS = {
   // SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timelineV2`, // this has to be changed(Temporary)
-  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timeline`, 
+  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
   SOCIAL_VIEW_CONVERSATION_V2: `${PROTECTED_SLAG_V8}/social/post/viewConversationV2`,
   SOCIAL_POST_PUBLISH: `${PROTECTED_SLAG_V8}/social/post/publish`,
