@@ -461,6 +461,8 @@ class MultiLingualIntegratedSearchServicev6 {
             indices.add(SearchConstantsv6.SEARCH_INDEX_NAME_PREFIX + SearchConstantsv6.SEARCH_INDEX_LOCALE_DELIMITER + searchIndexLocale);
         }
 
+        System.out.println("Params map "+paramsMap);
+
         SearchRequest searchRequest = new SearchRequest().searchType(SearchType.QUERY_THEN_FETCH);
         searchRequest.indices(indices.toArray(new String[0]));
         searchRequest.types(LexProjectUtil.EsType.new_lex_search.getTypeName());
