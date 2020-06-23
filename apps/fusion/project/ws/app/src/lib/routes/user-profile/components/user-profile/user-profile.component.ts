@@ -76,8 +76,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         // this.masterNationality = of(data.nationalities)
         this.onChangesNationality()
       },
-      (err: any) => {
-        console.log('err :', err)
+      () => {
+        // console.log('err :', err)
       })
 
     this.userProfileSvc.getMasterLanguages().subscribe(
@@ -86,8 +86,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.onChangesLanuage()
         this.onChangesKnownLanuage()
       },
-      (err: any) => {
-        console.log('err :', err)
+      () => {
+        // console.log('err :', err)
       })
   }
 
@@ -243,8 +243,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             this.selectedKnowLangs = data[0].knownLanguages
           }
         },
-        (err: any) => {
-          console.log('err :', err)
+        () => {
+          // console.log('err :', err)
         })
       }
     } else {
@@ -259,8 +259,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               })
             }
           },
-          (err: any) => {
-            console.log('err :', err)
+          () => {
+            // console.log('err :', err)
           })
       }
     }
@@ -279,10 +279,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.openSnackbar(this.toastSuccess.nativeElement.value)
         this.router.navigate(['page', 'home'])
       },
-      (err: any) => {
+      () => {
         this.openSnackbar(this.toastError.nativeElement.value)
         this.uploadSaveData = false
-        console.log('err :', err)
+        // console.log('err :', err)
       })
   }
 
