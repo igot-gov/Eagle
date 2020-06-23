@@ -32,8 +32,10 @@ export class BtnProfileComponent extends WidgetBaseComponent
   btnSettingsConfig!: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig>
   private pinnedAppsSubs?: Subscription
   givenName = 'Guest'
-  constructor(private configSvc: ConfigurationsService,
-              private dialog: MatDialog) {
+  constructor(
+    private configSvc: ConfigurationsService,
+    private dialog: MatDialog
+  ) {
     super()
     this.btnAppsConfig = { ...this.basicBtnAppsConfig }
     this.btnSettingsConfig = { ... this.settingBtnConfig }
@@ -44,14 +46,17 @@ export class BtnProfileComponent extends WidgetBaseComponent
   ngOnInit() {
     this.setPinnedApps()
   }
-  logout() {
-    this.dialog.open<LogoutComponent>(LogoutComponent)
-  }
+
   ngOnDestroy() {
     if (this.pinnedAppsSubs) {
       this.pinnedAppsSubs.unsubscribe()
     }
   }
+
+  logout() {
+    this.dialog.open<LogoutComponent>(LogoutComponent)
+  }
+
   setPinnedApps() {
     this.pinnedAppsSubs = this.configSvc.pinnedApps.subscribe(pinnedApps => {
       const appsConfig = this.configSvc.appsConfig
