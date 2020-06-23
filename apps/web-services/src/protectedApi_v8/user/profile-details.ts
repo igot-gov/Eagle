@@ -33,7 +33,7 @@ export async function getUserProfileStatus(wid: string) {
 
 export const profileDeatailsApi = Router()
 
-profileDeatailsApi.post('/createUserRegistry', async (req: any, res: any) => {
+profileDeatailsApi.post('/createUserRegistry', async (req, res) => {
     try {
         const userId = extractUserIdFromRequest(req)
         const response = await axios.post(API_END_POINTS.createUserRegistry, { ...req.body, userId }, {
@@ -47,7 +47,7 @@ profileDeatailsApi.post('/createUserRegistry', async (req: any, res: any) => {
 })
 
 // tslint:disable-next-line: no-identical-functions
-profileDeatailsApi.get('/getUserRegistry', async (req: any, res: any) => {
+profileDeatailsApi.get('/getUserRegistry', async (req, res) => {
     try {
         const userId = extractUserIdFromRequest(req)
 
@@ -61,7 +61,7 @@ profileDeatailsApi.get('/getUserRegistry', async (req: any, res: any) => {
     }
 })
 
-profileDeatailsApi.get('/userProfileStatus', async (req: any, res: any) => {
+profileDeatailsApi.get('/userProfileStatus', async (req, res) => {
     try {
         const org = req.header('org')
         const rootOrg = req.header('rootOrg')
@@ -81,7 +81,7 @@ profileDeatailsApi.get('/userProfileStatus', async (req: any, res: any) => {
     }
 })
 
-profileDeatailsApi.post('/setUserProfileStatus', async (req: any, res: any) => {
+profileDeatailsApi.post('/setUserProfileStatus', async (req, res) => {
     try {
         req.body.wid = extractUserIdFromRequest(req)
         const response = await axios.post(API_END_POINTS.setUserProfileStatus, req, {
@@ -95,7 +95,7 @@ profileDeatailsApi.post('/setUserProfileStatus', async (req: any, res: any) => {
     }
 })
 
-profileDeatailsApi.get('/getMasterLanguages', async (_req: any, res: any) => {
+profileDeatailsApi.get('/getMasterLanguages', async (_req, res) => {
     try {
         const response = await axios.get(API_END_POINTS.getMasterLanguages, {
             ...axiosRequestConfig,
@@ -108,7 +108,7 @@ profileDeatailsApi.get('/getMasterLanguages', async (_req: any, res: any) => {
 })
 
 // tslint:disable-next-line: no-identical-functions
-profileDeatailsApi.get('/getMasterNationalities', async (_req: any, res: any) => {
+profileDeatailsApi.get('/getMasterNationalities', async (_req, res) => {
     try {
         const response = await axios.get(API_END_POINTS.getMasterNationalities, {
             ...axiosRequestConfig,
