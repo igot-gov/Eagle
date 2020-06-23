@@ -28,7 +28,7 @@ import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { of } from 'rxjs'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
-import { map, mergeMap, tap } from 'rxjs/operators'
+import { mergeMap, tap, map } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 
@@ -299,23 +299,23 @@ export class FileUploadComponent implements OnInit {
           this.fileUploadForm.controls.artifactUrl.setValue(url)
           this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
-          if (this.mimeType === 'application/x-mpegURL') {
-            this.fileUploadForm.controls.transcoding.setValue({
-              lastTranscodedOn: null,
-              retryCount: 0,
-              status: 'STARTED',
-            })
-          }
+          // if (this.mimeType === 'application/x-mpegURL') {
+          //   this.fileUploadForm.controls.transcoding.setValue({
+          //     lastTranscodedOn: null,
+          //     retryCount: 0,
+          //     status: 'STARTED',
+          //   })
+          // }
           this.fileUploadForm.controls.duration.setValue(this.duration)
           this.fileUploadForm.controls.size.setValue((this.file as File).size)
           this.canUpdate = true
         }),
         mergeMap(v => {
-          if (this.mimeType === 'application/x-mpegURL') {
-            return this.uploadService
-              .startEncoding(v.authArtifactURL || v.artifactURL, this.currentContent)
-              .pipe(map(() => v))
-          }
+          // if (this.mimeType === 'application/x-mpegURL') {
+          //   return this.uploadService
+          //     .startEncoding(v.authArtifactURL || v.artifactURL, this.currentContent)
+          //     .pipe(map(() => v))
+          // }
           return of(v)
         }),
       )
