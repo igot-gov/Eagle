@@ -28,7 +28,7 @@ import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { of } from 'rxjs'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
-import { mergeMap, tap, map } from 'rxjs/operators'
+import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 

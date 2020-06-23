@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, LogoutComponent, NsPage } from '@ws-widget/utils/src/public-api'
 import { IBtnAppsConfig } from '../btn-apps/btn-apps.model'
@@ -12,7 +12,7 @@ import { ROOT_WIDGET_CONFIG } from '../collection.config'
   styleUrls: ['./btn-profile.component.scss'],
 })
 export class BtnProfileComponent extends WidgetBaseComponent
-  implements NsWidgetResolver.IWidgetData<any> {
+  implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<any> {
 
   @Input() widgetData!: any
   basicBtnAppsConfig: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig> = {
