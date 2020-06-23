@@ -37,6 +37,6 @@ import { AccessControlService } from '../../../../project/ws/author/src/public-a
     MatCardModule,
   ],
   exports: [FeaturesComponent],
-  providers: [AccessControlService]
+  providers: [AccessControlService],
 })
 export class FeaturesModule { }
