@@ -6,7 +6,8 @@ export interface IActivityCard {
   status?: string
   isNew: boolean
   clickUrl: string
-  tag: string
+  tag: string,
+  hasRole: string[]
 }
 export interface IActivity {
   activities: IActivityCard[]

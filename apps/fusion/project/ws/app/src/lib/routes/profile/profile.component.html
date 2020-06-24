@@ -27,7 +27,7 @@
       </a>
       <a mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar"
         (click)="tabUpdate(enabledTabs?.learning?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/learning/history" matTooltip="{{enabledTabs?.learning?.displayName}}">
+        routerLink="/app/profile/learning/time" matTooltip="{{enabledTabs?.learning?.displayName}}">
         <mat-icon>history</mat-icon>
         <span *ngIf="showText || screenSizeIsLtMedium"
           class="padding-left-s">{{enabledTabs?.learning?.displayName}}</span>

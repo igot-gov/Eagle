@@ -14,7 +14,11 @@ export class ActivityCardComponent implements OnInit {
   completedActivity: string[] = []
   completedId = false
 
-  constructor(private configSvc: ConfigurationsService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private configSvc: ConfigurationsService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.completedId = false

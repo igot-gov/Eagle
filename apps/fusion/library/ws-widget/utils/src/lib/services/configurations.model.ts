@@ -199,6 +199,7 @@ export namespace NsAppsConfig {
     toolTip: string
     featureIds: string[]
     stripBackground?: string
+    hasRole: string[]
   }
 
   // export interface IGroupWithFeatures extends IGroup {

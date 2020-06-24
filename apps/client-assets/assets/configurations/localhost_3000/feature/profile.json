@@ -17,17 +17,6 @@
       "available": true,
       "displayName": "Learning",
       "subTabs": {
-        "learningHistory": {
-          "enabled": true,
-          "available": true,
-          "isClient": true,
-          "tabs": {
-            "courses": true,
-            "programs": true,
-            "modules": true,
-            "resources": true
-          }
-        },
         "learningTime": {
           "enabled": true,
           "available": true,
@@ -40,6 +29,17 @@
             "timeSpentByMe": false,
             "timeSpentByPeers": false,
             "timeSpentByEmployees": false
+          }
+        },
+        "learningHistory": {
+          "enabled": true,
+          "available": true,
+          "isClient": true,
+          "tabs": {
+            "courses": true,
+            "programs": true,
+            "modules": true,
+            "resources": true
           }
         }
       }
@@ -116,8 +116,8 @@
       "displayName": "Interests"
     },
     "plans": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Plans",
       "subTabs": {
         "goals": {
@@ -131,8 +131,8 @@
       }
     },
     "collaborators": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Collaborators",
       "subTabs": {
         "goalsSharedByMe": {
@@ -170,8 +170,8 @@
       }
     },
     "featureUsage": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Feature Usage",
       "subSections": {
         "learningTime": true,

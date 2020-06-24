@@ -492,7 +492,8 @@
         "Dashboard"
       ],
       "name": "Activity",
-      "toolTip": "Activity"
+      "toolTip": "Activity",
+      "hasRole": []
     },
     {
       "featureIds": [
@@ -508,7 +509,17 @@
         "contribution"
       ],
       "name": "Contribution",
-      "toolTip": "Contribution"
+      "toolTip": "Contribution",
+      "hasRole": [
+        "content-creator",
+        "channel-creator",
+        "ka-creator",
+        "kb-creator",
+        "editor",
+        "reviewer",
+        "publisher",
+        "admin"
+      ]
     },
     {
       "featureIds": [
@@ -523,7 +534,8 @@
         "learning assistant"
       ],
       "name": "Learning Assistant",
-      "toolTip": "Learning Assistant"
+      "toolTip": "Learning Assistant",
+      "hasRole": []
     },
     {
       "featureIds": [
@@ -536,7 +548,8 @@
         "communication"
       ],
       "name": "Communications",
-      "toolTip": "Communications"
+      "toolTip": "Communications",
+      "hasRole": []
     },
     {
       "featureIds": [
@@ -556,7 +569,8 @@
         "info hub"
       ],
       "name": "Info Hub",
-      "toolTip": "Information Hub"
+      "toolTip": "Information Hub",
+      "hasRole": []
     },
     {
       "featureIds": [
@@ -569,7 +583,8 @@
         "settings"
       ],
       "name": "Settings",
-      "toolTip": "Settings"
+      "toolTip": "Settings",
+      "hasRole": []
     }
   ]
 }
