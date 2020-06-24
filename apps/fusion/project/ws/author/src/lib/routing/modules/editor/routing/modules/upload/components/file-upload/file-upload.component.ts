@@ -76,7 +76,7 @@ export class FileUploadComponent implements OnInit {
     private authInitService: AuthInitService,
     private valueSvc: ValueService,
     private accessService: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
@@ -209,10 +209,10 @@ export class FileUploadComponent implements OnInit {
     this.mimeType = fileName.toLowerCase().endsWith('.pdf')
       ? 'application/pdf'
       : fileName.toLowerCase().endsWith('.mp4')
-      ? 'application/x-mpegURL'
-      : fileName.toLowerCase().endsWith('.zip')
-      ? 'application/html'
-      : 'audio/mpeg'
+        ? 'application/x-mpegURL'
+        : fileName.toLowerCase().endsWith('.zip')
+          ? 'application/html'
+          : 'audio/mpeg'
     if (this.mimeType === 'application/x-mpegURL' || this.mimeType === 'audio/mpeg') {
       this.getDuration()
     } else if (this.mimeType === 'application/html') {
@@ -278,8 +278,8 @@ export class FileUploadComponent implements OnInit {
             this.mimeType === 'application/pdf'
               ? CONTENT_BASE_STATIC
               : this.mimeType === 'application/html'
-              ? CONTENT_BASE_WEBHOST
-              : CONTENT_BASE_STREAM,
+                ? CONTENT_BASE_WEBHOST
+                : CONTENT_BASE_STREAM,
         },
         undefined,
         this.mimeType === 'application/html',
@@ -394,7 +394,7 @@ export class FileUploadComponent implements OnInit {
     zip.createReader(new zip.BlobReader(this.file as File), (reader: zip.ZipReader) => {
       reader.getEntries((entry: zip.Entry[]) => {
         entry.forEach(element => {
-          if (element.filename.match(/[^A-Za-z0-9./]/g)) {
+          if (element.filename.match(/[^A-Za-z0-9_./]/g)) {
             this.errorFileList.push(element.filename)
           } else if (!element.directory) {
             this.fileList.push(element.filename)

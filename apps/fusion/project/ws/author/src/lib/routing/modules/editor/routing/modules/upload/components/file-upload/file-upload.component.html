@@ -207,7 +207,7 @@
       </button>
     </div>
     <div style="overflow: auto; max-height: 400px" class="mt-4">
-      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="flex flex-1 flex-column example-radio-group"
         [(ngModel)]="fileUploadCondition.url">
         <mat-radio-button class="example-radio-button" *ngFor="let file of fileList" [value]="file">
           {{file}}
@@ -216,9 +216,10 @@
     </div>
   </div>
   <div class="flex justify-center">
-    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="closeDialog()">
+    <button type="button" mat-raised-button color="primary" class="margin-top-m ws-mat-primary-background"
+      (click)="closeDialog()">
       <div class="flex flex-middle justify-center">
-        <p class="text-white margin-remove-bottom agree-text" i18n>Done</p>
+        <p class="margin-remove-bottom agree-text" i18n>Done</p>
       </div>
     </button>
   </div>
