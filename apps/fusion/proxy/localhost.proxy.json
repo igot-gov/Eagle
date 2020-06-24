@@ -1,6 +1,6 @@
 {
   "/apis/*": {
-    "target": "http://localhost:3003",
+    "target": "https://eagle-dev.idc.tarento.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
