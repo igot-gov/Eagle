@@ -3,9 +3,11 @@
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.lex.interest.service;
 
+
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,7 +34,6 @@ import com.infosys.lex.common.service.UserUtilityService;
 import com.infosys.lex.common.util.ValidLanguages;
 import com.infosys.lex.core.exception.InvalidDataInputException;
 import com.infosys.lex.core.exception.ResourceNotFoundException;
-import com.infosys.lex.core.logger.LexLogger;
 import com.infosys.lex.interest.bodhi.repo.InterestCassandraRepo;
 import com.infosys.lex.interest.entities.Interest;
 import com.infosys.lex.interest.entities.InterestKey;
@@ -58,12 +59,12 @@ public class InterestServiceImpl implements InterestService {
 
 	/*
 	 * (non-Javadoc)
-	 * 
-substitute url based on requirement
+	 *
+	 * @see com.infosys.lex.interest.service.InterestService#getInterest(java.lang.
 	 * String, java.lang.String)
 	 */
 	@Override
-	public Map<String, Object> getInterest(String rootOrg, String userId) throws Exception {
+	public Map<String, Object> getInterest(String rootOrg, String userId)  {
 
 		// Validating User
 		if (!userUtilService.validateUser(rootOrg, userId)) {
@@ -71,52 +72,54 @@ substitute url based on requirement
 		}
 
 		Map<String, Object> resultList = new HashMap<String, Object>();
-		InterestKey interestKey = new InterestKey();
-		interestKey.setUserId(userId);
-		interestKey.setRootOrg(rootOrg);
-		Optional<Interest> cassandraObject = interestCassandraRepo.findById(interestKey);
+
+		Optional<Interest> cassandraObject = interestCassandraRepo.findById(new InterestKey(rootOrg, userId));
 		if (!cassandraObject.isPresent()) {
 			resultList.put("user_interest", Collections.emptyList());
 			return resultList;
-		} else {
-			if (cassandraObject.get().getInterest() == null) {
-				resultList.put("user_interest", Collections.emptyList());
-			} else {
-				resultList.put("user_interest", cassandraObject.get().getInterest());
-			}
-
 		}
+		if (cassandraObject.get().getInterest() == null) {
+			resultList.put("user_interest", Collections.emptyList());
+		} else {
+			resultList.put("user_interest", cassandraObject.get().getInterest());
+		}
+
 		return resultList;
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.interest.service.InterestService#delete(java.lang.String,
 	 * java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String delete(String rootOrg, String userId, String interest) throws Exception {
+	public void deleteInterest(String rootOrg, String userId, Map<String, Object> interestMap)  {
+
+		if (interestMap.get("interest") == null || interestMap.get("interest").toString().isEmpty()) {
+			throw new InvalidDataInputException("invalid.interest");
+		}
 
 		// Validating User
 		if (!userUtilService.validateUser(rootOrg, userId)) {
 			throw new InvalidDataInputException("invalid.user");
 		}
 
-		InterestKey interestKey = new InterestKey();
-		interestKey.setRootOrg(rootOrg);
-		interestKey.setUserId(userId);
+		InterestKey interestKey = new InterestKey(rootOrg, userId);
+
+		String interest = interestMap.get("interest").toString();
 		Optional<Interest> interestCassandra = interestCassandraRepo.findById(interestKey);
+
 		// time stamp
 		Date dateCreatedOn = new Date();
 		Timestamp timeCreatedOn = new Timestamp(dateCreatedOn.getTime());
 
 		if (!interestCassandra.isPresent()) {
-			throw new ResourceNotFoundException("interests.notPresent");
+			throw new InvalidDataInputException("interest.notPresent");
 		}
 		if (!interestCassandra.get().getInterest().contains(interest)) {
-			throw new ResourceNotFoundException("intrest.doesNotExist");
+			throw new InvalidDataInputException("interest.doesNotExist");
 		}
 
 		if (interestCassandra.get().getInterest().size() == 1) {
@@ -127,20 +130,19 @@ substitute url based on requirement
 			interestCassandraRepo.save(interestCassandra.get());
 		}
 
-		return "deleted";
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.interest.service.InterestService#upsert(java.lang.String,
 	 * java.lang.String, java.lang.String)
 	 */
 	@Override
-	public String upsert(String rootOrg, @NotNull String userId, @NotNull String interest) throws Exception {
+	public void upsertInterest(String rootOrg, String userId, Map<String, Object> interestMap)  {
 
-		if (interest == null || interest.isEmpty()) {
+		if (interestMap.get("interest") == null || interestMap.get("interest").toString().isEmpty()) {
 			throw new InvalidDataInputException("invalid.interest");
 		}
 
@@ -149,46 +151,46 @@ substitute url based on requirement
 			throw new InvalidDataInputException("invalid.user");
 		}
 
-		InterestKey interestKey = new InterestKey();
-		interestKey.setRootOrg(rootOrg);
-		interestKey.setUserId(userId);
+		InterestKey interestKey = new InterestKey(rootOrg, userId);
 		Date dateCreatedOn = new Date();
+		String interest = interestMap.get("interest").toString().trim();
 		Timestamp timeCreatedOn = new Timestamp(dateCreatedOn.getTime());
-		Optional<Interest> cassandraObject = interestCassandraRepo.findById(interestKey);
-		if (!cassandraObject.isPresent()) {
+		Optional<Interest> interestObject = interestCassandraRepo.findById(interestKey);
+
+		if (!interestObject.isPresent()) {
 			// Add User if user does not exist
-			Interest newUser = new Interest();
-			newUser.setInterestKey(interestKey);
-			newUser.setCreatedOn(timeCreatedOn);
-			newUser.setUpdatedOn(timeCreatedOn);
 			Set<String> setOfInterest = new HashSet<String>();
 			setOfInterest.add(interest);
-			newUser.setInterest(setOfInterest);
+			Interest newUser = new Interest(interestKey, setOfInterest, timeCreatedOn, timeCreatedOn);
 			interestCassandraRepo.save(newUser);
 		} else {
-			// User exists update it
-			Set<String> setToBeUpdated = new HashSet<String>();
-			if (cassandraObject.get().getInterest() != null) {
-				setToBeUpdated.addAll(cassandraObject.get().getInterest());
+			Interest existingUser = interestObject.get();
+			// User already exists so update interest
+			Set<String> setToBeUpdated = existingUser.getInterest();
+			if (setToBeUpdated == null || setToBeUpdated.isEmpty()) {
+				setToBeUpdated = new HashSet<String>();
+			} else {
+				setToBeUpdated.add(interest);
 			}
-			setToBeUpdated.add(interest);
-			cassandraObject.get().setInterest(setToBeUpdated);
-			cassandraObject.get().setUpdatedOn(timeCreatedOn);
-			interestCassandraRepo.save(cassandraObject.get());
+			interestCassandraRepo.save(existingUser);
 		}
-		return "success";
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
-substitute url based on requirement
+	 *
+	 * @see com.infosys.lex.interest.service.InterestService#autoComplete(java.lang.
 	 * String, java.lang.String, java.lang.String, java.lang.String,
 	 * java.lang.String)
 	 */
 	@Override
 	public List<String> autoComplete(String rootOrg, String org, @NotNull String language, String query, String topic)
 			throws IOException {
+
+		if (query.trim().isEmpty()) {
+			return Arrays.asList("Scale up IoT", "Leadership & Management", "Ecosystems in new agile work",
+					"Artificial Intelligence", "Digitalization as key driver");
+		}
 		String alias = new String();
 		String scriptTopic = new String();
 		List<String> interest = new ArrayList<String>();
@@ -237,14 +239,14 @@ substitute url based on requirement
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
-substitute url based on requirement
+	 * com.infosys.lex.interest.service.InterestService#suggestedComplete(java.lang.
 	 * String, java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public List<String> suggestedComplete(String rootOrg, String userid, String org, @NotNull String language)
-			throws Exception {
+	public List<String> suggestedComplete(String rootOrg, String userid, String org, @NotNull String language) throws IOException
+			 {
 		// Validating User
 		if (!userUtilService.validateUser(rootOrg, userid)) {
 			throw new InvalidDataInputException("invalid.user");
@@ -253,4 +255,78 @@ substitute url based on requirement
 		languages = interestCRUD.suggestedComplete(rootOrg, org, language);
 		return languages;
 	}
+
+	@Override
+	public void delete(String rootOrg, String userId, String interest)  {
+
+		// Validating User
+		if (!userUtilService.validateUser(rootOrg, userId)) {
+			throw new InvalidDataInputException("invalid.user");
+		}
+
+		InterestKey interestKey = new InterestKey(rootOrg, userId);
+//		interestKey.setRootOrg(rootOrg);
+//		interestKey.setUserId(userId);
+		Optional<Interest> interestCassandra = interestCassandraRepo.findById(interestKey);
+		// time stamp
+		Date dateCreatedOn = new Date();
+		Timestamp timeCreatedOn = new Timestamp(dateCreatedOn.getTime());
+
+		if (!interestCassandra.isPresent()) {
+			throw new ResourceNotFoundException("interests.notPresent");
+		}
+		if (!interestCassandra.get().getInterest().contains(interest)) {
+			throw new ResourceNotFoundException("intrest.doesNotExist");
+		}
+
+		if (interestCassandra.get().getInterest().size() == 1) {
+			interestCassandraRepo.deleteById(interestKey);
+		} else {
+			interestCassandra.get().setUpdatedOn(timeCreatedOn);
+			interestCassandra.get().getInterest().remove(interest);
+			interestCassandraRepo.save(interestCassandra.get());
+		}
+
+	}
+
+	@Override
+	public String upsert(String rootOrg, @NotNull String userId, @NotNull String interest)  {
+
+		if (interest == null || interest.isEmpty()) {
+			throw new InvalidDataInputException("invalid.interest");
+		}
+
+		// Validating User
+		if (!userUtilService.validateUser(rootOrg, userId)) {
+			throw new InvalidDataInputException("invalid.user");
+		}
+
+		InterestKey interestKey = new InterestKey(rootOrg, userId);
+		Date dateCreatedOn = new Date();
+		Timestamp timeCreatedOn = new Timestamp(dateCreatedOn.getTime());
+		Optional<Interest> cassandraObject = interestCassandraRepo.findById(interestKey);
+		if (!cassandraObject.isPresent()) {
+			// Add User if user does not exist
+			Interest newUser = new Interest();
+			newUser.setInterestKey(interestKey);
+			newUser.setCreatedOn(timeCreatedOn);
+			newUser.setUpdatedOn(timeCreatedOn);
+			Set<String> setOfInterest = new HashSet<String>();
+			setOfInterest.add(interest);
+			newUser.setInterest(setOfInterest);
+			interestCassandraRepo.save(newUser);
+		} else {
+			// User exists update it
+			Set<String> setToBeUpdated = new HashSet<String>();
+			if (cassandraObject.get().getInterest() != null) {
+				setToBeUpdated.addAll(cassandraObject.get().getInterest());
+			}
+			setToBeUpdated.add(interest);
+			cassandraObject.get().setInterest(setToBeUpdated);
+			cassandraObject.get().setUpdatedOn(timeCreatedOn);
+			interestCassandraRepo.save(cassandraObject.get());
+		}
+		return "success";
+	}
+
 }
