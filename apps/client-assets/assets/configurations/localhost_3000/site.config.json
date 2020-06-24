@@ -59,8 +59,8 @@
   ],
   "indexHtmlMeta": {
     "description": "iGOT is a next-generation learning solution accessible anytime, anywhere and on any device. It enables organizations to focus on training their talent of today, to be ready for tomorrow",
-    "webmanifest": "/assets/configurations/eagle-sb.idc.tarento.com/manifest/manifest.webmanifest",
-    "xIcon": "/assets/configurations/eagle-sb.idc.tarento.com/manifest/favicon.ico"
+    "webmanifest": "/assets/configurations/igot.idc.tarento.com/manifest/manifest.webmanifest",
+    "xIcon": "/assets/configurations/igot.idc.tarento.com/manifest/favicon.ico"
   },
   "keycloak": {
     "bearerExcludedUrls": [
