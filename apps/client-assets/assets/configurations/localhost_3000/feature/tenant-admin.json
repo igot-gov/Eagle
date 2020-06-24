@@ -33,6 +33,14 @@
                 "admin"
             ],
             "displayName": "Create User"
+        },
+        "access-path": {
+            "link": "/admin/tenant/access-path",
+            "icon": "how_to_reg",
+            "role": [
+                "admin"
+            ],
+            "displayName": "User Access Path"
         }
     },
     "roleList": {
