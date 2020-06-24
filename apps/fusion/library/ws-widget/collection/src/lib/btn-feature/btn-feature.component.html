@@ -24,8 +24,8 @@
     <a *ngSwitchCase="displayType.matFlatButton" [routerLink]="widgetData.actionBtn?.url" mat-flat-button>
       <ng-container [ngTemplateOutlet]="buttonContent" [ngTemplateOutletContext]="widgetData"></ng-container>
     </a>
-    <a *ngSwitchCase="displayType.matIconButton" [name]="widgetData.actionBtnName"
-      [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
+    <a *ngSwitchCase="displayType.matIconButton" [ngClass]="widgetData?.className || ''"
+      [name]="widgetData.actionBtnName" [routerLink]="widgetData.actionBtn?.url" mat-icon-button>
       <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
           iconType: widgetData.actionBtn.iconType,
           icon: widgetData.actionBtn.icon

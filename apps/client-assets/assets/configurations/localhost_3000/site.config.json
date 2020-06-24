@@ -1,9 +1,9 @@
 {
   "authoring": {
     "allowedContentType": [],
-    "allowRedo":false,
-    "allowRestore":false,
-    "allowExpiry":false,
+    "allowRedo": false,
+    "allowRestore": false,
+    "allowExpiry": false,
     "allowPublish": true,
     "urlPatternMatching": [
       {
@@ -171,7 +171,7 @@
     "platformBanner": "/apis/public/v8/assets/common/misc/about-wingspan.jpg",
     "poweredBy": "Tarento",
     "landingLogo": "",
-    "defaultSourceLogo":"/assets/instances/eagle/app_logos/source.png"
+    "defaultSourceLogo": "/assets/instances/eagle/app_logos/source.png"
   },
   "sources": [
     {
@@ -330,6 +330,7 @@
           "config": {
             "actionBtnId": "feature_notification",
             "toolTip": "Notification",
+            "className": "fixtopMargin",
             "config": {
               "type": "mat-icon-button"
             }

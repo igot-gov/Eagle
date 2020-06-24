@@ -7,12 +7,7 @@
   </h3>
   <ws-widget-user-autocomplete (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
   <mat-form-field class="text-area">
-    <!-- <mat-spinner
-      class="text-center"
-      *ngIf="!message"
-      [diameter]="30"
-      [strokeWidth]="3"
-    ></mat-spinner> -->
+    <mat-spinner class="text-center" *ngIf="!message" [diameter]="30" [strokeWidth]="3"></mat-spinner>
     <textarea matInput i18n-placeholder placeholder="Your message ..." i18n-value
       [value]="message ? message : 'Loading...'" class="text-area-input" rows="5" #txtBody></textarea>
   </mat-form-field>

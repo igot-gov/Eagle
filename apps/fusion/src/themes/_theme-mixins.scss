@@ -113,6 +113,8 @@
       background-color: $colorAccentLight !important
     }
 
+
+
     .mat-ink-bar {
       background-color: $colorAccentLight !important
     }
@@ -214,6 +216,10 @@
     // .mat-form-field-outline-apperance-outline.mat-focused.mat-form-field-outline-thick {
     //   color: red !important;
     // }
+    .mat-form-field.mat-focused .mat-form-field-label {
+      color: $colorPrimaryDark !important;
+    }
+
     .mat-form-field-outline-thick {
       color: $colorAccent !important;
     }
@@ -431,5 +437,6 @@
 
   ws-widget-btn-catalog {
     flex: 1;
+    margin-top: 7px;
   }
 }

@@ -501,6 +501,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     } else {
       // need to supply
       // this.resourceTypes = this.ordinals['Offering Mode']
+      this.resourceTypes = this.ordinals.resourceType || []
     }
 
     if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
@@ -1083,6 +1084,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.contentForm.controls.resourceCategory.value,
       )
     })
+    // this.contentForm.controls.sourceName.valueChanges.subscribe(() => {
+    //   this.contentForm.controls.sourceName.setValue(this.contentForm.controls.sourceName.value)
+    // })
+
   }
   openCatalogSelector() {
     const oldCatalogs = this.addCommonToCatalog(this.contentForm.controls.catalogPaths.value)
