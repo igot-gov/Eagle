@@ -1,0 +1,30 @@
+{
+  "aliases" : {
+      "hashtags" : { }
+    },
+    "mappings" : {
+      "hashtags" : {
+        "properties" : {
+          "count" : {
+            "type" : "long"
+          },
+          "id" : {
+            "type" : "keyword"
+          },
+          "name" : {
+            "type" : "completion",
+            "analyzer" : "simple",
+            "preserve_separators" : true,
+            "preserve_position_increments" : true,
+            "max_input_length" : 50,
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          }
+        }
+      }
+    }
+}

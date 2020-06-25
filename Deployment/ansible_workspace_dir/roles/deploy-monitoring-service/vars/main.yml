@@ -1,0 +1,41 @@
+---
+# vars file for deploy-monitoring-service
+# For script
+template_compose_file_name: monitoring-service.j2
+template_env_file_name: monitoring-service-env.j2
+template_config_file_name: monitoring-config.j2
+compose_file_name: "{{ service_monitoring_service }}.yml"
+env_file_name: "{{ service_monitoring_service }}.env"
+config_file_name: configuration.json
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+config_file_deployment_location: "{{ config_files_dir }}/{{ config_file_name }}"
+user_friendly_name: Lex monitoring service
+
+# For service
+application_port: "{{ service_monitoring_port }}"
+image_name: "{{ image_monitoring_service }}"
+tag: "{{ tags_monitoring_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_monitoring_service }}"
+reserved_memory: "{{ service_mem_reserved_monitoring_service }}"
+limited_memory: "{{ service_mem_limit_monitoring_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_monitoring_service }}"
+docker_service_stack_name: monitoring
+docker_service_name: "{{ service_monitoring_service }}"
+force_reload: "{{ force_reload_monitoring_service }}"
+docker_config_name: monitoring-config
+docker_config_deployment_location: /usr/src/app/configuration/configuration.json
+
+# For application
+postgres_keycloak_database: postgres
+postgres_connection_string: postgres://{{ postgresql_username_keycloak }}:{{ postgresql_password_keycloak }}@{{ postgresql_host }}:{{ postgresql_port }}/{{ postgres_keycloak_database }}
+mongo_connection_string: mongodb://{{ mongodb_user }}:{{ mongodb_password }}@{{ mongodb_host }}:{{ mongodb_port }}/{{ mongodb_authentication_database }}
+cassandra_contact_point: "{{ cassandra_host }}:{{ cassandra_port }}"
+es_protocol: "http"
+from_address: shivabala.rakavi@infosys.com
+to_address: shivabala.rakavi@infosys.com
+subject : "Monitoring {{ domain_name }}"
+databases_to_check: es:::mongo:::cassandra:::postgres

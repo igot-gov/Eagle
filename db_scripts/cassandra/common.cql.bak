@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS bodhi.app_config (
+    root_org text,
+    key text,
+    remarks text,
+    value text,
+    PRIMARY KEY ((root_org, key))
+);
+
+INSERT INTO bodhi.app_config json '{"root_org": "Infosys", "key": "mac_for_external", "remarks": "mark as complete allowed for external content", "value": "false"}';
+INSERT INTO bodhi.app_config json '{"root_org": "Siemens", "key": "mac_for_external", "remarks": "mark as complete allowed for external content", "value": "true"}';
+INSERT INTO bodhi.app_config json '{"root_org": "Infosys", "key": "mac_for_instructor_led", "remarks": "mark as complete allowed for instructor-led content", "value": "false"}';
+INSERT INTO bodhi.app_config json '{"root_org": "Siemens", "key": "mac_for_instructor_led", "remarks": "mark as complete allowed for instructor-led content", "value": "true"}';
+INSERT INTO bodhi.app_config json '{"root_org": "Infosys", "key": "cohorts_activeuser_filter_duration", "remarks": "the duration by which the cohorts active user is filtered", "value": "15"}';
+INSERT INTO bodhi.app_config json '{"root_org": "Siemens", "key": "cohorts_activeuser_filter_duration", "remarks": "the duration by which the cohorts active user is filtered", "value": "15"}';

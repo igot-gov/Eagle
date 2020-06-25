@@ -1,0 +1,219 @@
+{
+  "mappings": {
+    "searchusers": {
+	  "dynamic":"strict",
+      "properties": { 
+		"root_org":								{"type":"keyword"},
+		"wid":									{"type":"keyword"},
+		"org":									{"type":"keyword"},
+		"cbg":									{"type":"keyword"},
+		"market":								{"type":"keyword"},
+		"market_group":							{"type":"keyword"},
+		"market_sub_group":						{"type":"keyword"},
+		"country":								{"type":"keyword"},
+		"first_name":							{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+		"last_name":							{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+		"middle_name":							{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+		"full_name":							{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+		"salutation":							{"type":"keyword"},
+		"user_type":							{"type":"keyword"},
+		"is_active":							{"type":"boolean"},
+		"account_expiry_date":					{"type":"date","format":"yyyy-MM-dd'T'HH:mm:ssZZ"},
+		"languages_known":						{"type":"keyword"},
+		"source_profile_picture":				{"type":"keyword"},
+		"manager_id":							{"type":"keyword"},
+		"all_managers":							{"type":"keyword"},
+		"is_manager":							{"type":"boolean"},
+		"known_as":								{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+		"employement_status":					{"type":"keyword"},
+		"contract_type":						{"type":"keyword"},
+		"job_title":							{"type":"keyword"},
+		"job_start_date":						{"type":"date","format":"yyyy-MM-dd'T'HH:mm:ssZZ"},
+		"department_name":						{"type":"keyword"},
+		"sub_department_name":					{"type":"keyword"},
+		"unit_name":							{"type":"keyword"},
+		"organization_location_country":		{"type":"keyword"},
+		"organization_location_state":			{"type":"keyword"},
+		"organization_location_city":			{"type":"keyword"},
+        "dealer_group_code":    				{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}}, 
+        "dealer_code":     						{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+        "dealer_name":	      					{ "type": "text",
+													"fields": {
+														"keyword": {
+															"type": "keyword",
+															"ignore_above": 512
+														}
+												}},
+		"dp_salutation":						{"type":"keyword"},
+		"site_function":						{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"region":								{"type":"keyword"},
+		"guild_group":							{"type":"integer"},
+		"zone":									{"type":"integer"},
+		"fdaf_group":							{"type":"integer"},
+		"pszm":									{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"dsdm":									{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"tsdm":									{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"dealer_pma":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"metro_rural_flag":						{"type":"keyword"},
+		"branch_function":						{"type":"keyword"},
+		"dealership_appointment_date":			{"type":"date","format":"yyyy-MM-dd'T'HH:mm:ssZZ"},
+		"st_address":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"st_suburb":							{"type":"keyword"},
+		"st_state":								{"type":"keyword"},
+		"st_post_code":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"webSite":								{"type":"keyword"},
+		"post_address":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"post_suburb":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"post_state":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"post_post_code":						{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"parts_delivery_address":				{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"dealer_principal":						{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"dp_title":								{"type":"keyword"},
+		"dp_first_name":						{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"dp_surname":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"dp_appointment_date":					{"type":"date","format":"yyyy-MM-dd'T'HH:mm:ssZZ"},
+		"company_name":							{"type":"text","fields": {
+													"keyword": {
+														"type": "keyword",
+														"ignore_above": 512
+													}
+												}},
+		"acn":									{"type":"keyword"},
+		"abn":									{"type":"keyword"},
+		"authorised_new":						{"type":"keyword"},
+		"authorised_used":						{"type":"keyword"},
+		"authorised_parts":						{"type":"keyword"},
+		"authorised_service":					{"type":"keyword"},
+		"type_accredited":						{"type":"keyword"},
+		"auto_club":							{"type":"keyword"},
+		"loan_vehicles":						{"type":"keyword"},
+		"service_price_promise":				{"type":"keyword"},
+		"parts_franchise":						{"type":"keyword"},
+		"dealer_phone_Number":					{"type":"keyword"},
+		"dealer_fax_number":					{"type":"keyword"},
+		"dpMobile_number":						{"type":"keyword"},
+		"classification":						{"type":"keyword"},
+		"remote":								{"type":"keyword"},
+		"dealer_name_group_code":				{"type":"keyword"},
+		"dealer_name_branch_code":				{"type":"keyword"}
+      }
+    }
+  }
+}

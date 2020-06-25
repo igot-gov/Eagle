@@ -1,0 +1,120 @@
+---
+# vars file for deploy-content-service
+# For script
+template_compose_file_name: content-service.j2
+template_env_file_name: content-service-env.j2
+compose_file_name: "{{ service_content_service }}.yml"
+env_file_name: "{{ service_content_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Content service
+
+# For service
+application_port: 80
+load_balancer_port: 3013
+image_name: "{{ image_content_service }}"
+tag: "{{ tags_content_service }}"
+host_port1: 5903
+docker_port1: "{{ application_port }}"
+host_port2: 3013
+docker_port2: "{{ load_balancer_port }}"
+replicas: "{{ service_replicas_content_service }}"
+reserved_memory: "{{ service_mem_reserved_content_service }}"
+limited_memory: "{{ service_mem_limit_content_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port1 }}
+network_alias_name: "{{ network_alias_content_service }}"
+# host_content_directory: /mydata/content-directory
+host_content_directory: "{{ host_content_directory_path }}"
+docker_service_stack_name: content
+docker_service_name: "{{ service_content_service }}"
+force_reload: "{{ force_reload_content_service }}"
+
+# Added later with Sarthak
+internal_resource_dir: /content-directory
+content_index_name: "{{ elasticsearch_contentindex_alias_name }}"
+
+# Continue learning API proxy
+sb_ext_hostname: "{{ service_sb_ext_service }}"
+sb_ext_port: "{{ service_sb_ext_port }}"
+
+# Load balancing the keycloak server
+load_balancer_address_list: "http://lex-keycloak:8080,http://lex-keycloak2:8080"
+
+# Conditional configurations
+streaming_enabled_value: "{{ var_content_service_streaming_enabled_value }}"
+load_balancer_enabled_value: "{{ var_content_service_load_balancer_enabled_value }}"
+live_api_proxies_enabled_value: "{{ var_content_service_live_api_proxies_enabled_value }}"
+stats_enabled_value: "{{ var_content_service_stats_enabled_value }}"
+should_antivirus_be_enabled: "{{ var_content_service_should_antivirus_be_enabled }}"
+public_content_enabled_value: "{{ var_content_service_public_content_enabled_value }}"
+
+# Details for antivirus
+antivirus_hostname: "{{ network_alias_av_service }}"
+antivirus_port: "{{ service_antivirus_port }}"
+
+# Proxying to Live server for Wingspan
+live_sb_ext_host: sb_ext_host_ip
+live_sb_ext_port: sb_ext_port #5902
+live_telemetry_host: sb_ext_host_ip
+live_telemetry_port: telemetry_port #8090
+live_content_host: sb_ext_host_ip
+live_content_port: telemetry_port #5903
+
+# For enabling emails to support team
+send_email_to_support_team: "{{ var_content_service_send_email_to_support}}"
+environment_name_for_email: "{{ var_content_service_environment_name }}"
+support_email_id: "{{ var_content_service_support_mail_id }}"
+
+# S3 configuration details
+
+aws_access_key: S3_Access_Key
+aws_secret_key: S3_secret_Key
+aws_cloudfront_access_key: cloudfront_access_key
+aws_private_key_file_path: /run/secrets/S3_PEM
+
+## CDN Configuration
+cdn_name: https://{{ domain_name }}
+images_cdn_name: "{{ var_images_cdn_name }}"
+
+## Buckets
+main_bucket: "{{ var_content_service_main_bucket }}"
+pre_publish_bucket: "{{ var_content_service_pre_publish_bucket }}"
+transcoding_bucket: "{{ var_content_service_transcoding_bucket }}"
+download_bucket: "{{ var_content_service_download_bucket }}"
+images_bucket: "{{ var_content_service_images_bucket }}"
+images_pre_publish_bucket: "{{ var_content_service_images_pre_publish_bucket }}"
+keys_bucket: "{{ var_content_service_keys_bucket }}"
+
+## Transcoding server configuration
+transcoding_server_ip : "{{ var_content_service_transcoding_server_ip }}"
+transcoding_server_port : "{{ var_content_service_transcoding_server_port }}"
+transcoding_status_webhook_endpoint: "http://{{ app_server_host }}:{{ service_external_api_port }}/transcode/update"
+
+## Elasticsearch index for user access paths for set cookie API
+es_access_control_index: accesscontrolgroups
+
+## Cassandra table for user access paths for set cookie API
+cassandra_user_access_paths: user_access_paths
+
+## For zipping the files on S3 
+temporary_webhost_directory: "{{ internal_resource_dir }}/temp"
+
+# For public content
+public_content_directory: /public
+
+# Cors policy
+enable_full_cors: 0
+cors_domain_url: "https://{{ domain_name }},http://kmserver13:9100"
+
+# DB config
+cassandra_contact_points: "{{ cassandra_host }}:{{ cassandra_port }}"
+
+# Docker secrets
+s3_pem_secret_name: "S3_PEM"
+s3_pem_location: "{{ docker_secret_files_dir }}/content_service_s3_pem"
+
+# For public api keycloak auth
+https_host: "https://{{ domain_name }}"
+
+# For transcoding enc files location
+transcoding_enc_dir_name: enc_keys

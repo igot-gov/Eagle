@@ -1,0 +1,94 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "html_remover":{
+          "type":"custom",
+          "tokenizer":"standard",
+          "char_filter":  [ "html_strip" ],
+          "filter": ["lowercase"]
+        }
+      }
+    }
+    
+  }, 
+  "mappings": {
+      "feedback" : {
+                  "dynamic":"strict",
+        "properties" : {
+          "assignedTo" : {
+            "type" : "keyword"
+          },
+          "category" : {
+            "type" : "keyword"
+          },
+          "contentId" : {
+            "type" : "keyword"
+          },
+          "contentTitle" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "contentType" : {
+            "type" : "keyword"
+          },
+          "createdOn" : {
+            "type" : "long"
+          },
+          "dimension" : {
+            "type" : "keyword"
+          },
+          "feedbackBy" : {
+            "type" : "keyword"
+          },
+          "feedbackCategory" : {
+            "type" : "keyword"
+          },
+          "feedbackId" : {
+            "type" : "keyword"
+          },
+          "feedbackSentimentCategory" : {
+            "type" : "keyword"
+          },
+          "feedbackSentimentValue" : {
+            "type" : "float"
+          },
+          "feedbackText" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 2000
+              }
+            },"analyzer":"html_remover"
+          },
+          "feedbackType" : {
+            "type" : "keyword"
+          },
+          "lastActivityOn" : {
+            "type" : "long"
+          },
+          "replied" : {
+            "type" : "boolean"
+          },
+          "rootFeedbackId" : {
+            "type" : "keyword"
+          },
+          "rootOrg" : {
+            "type" : "keyword"
+          },
+          "seenReply" : {
+            "type" : "boolean"
+          },
+		  "replyCount":{
+			"type":"integer"
+		  }
+        }
+      }
+    }
+}

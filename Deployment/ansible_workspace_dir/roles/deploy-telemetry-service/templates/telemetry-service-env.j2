@@ -1,0 +1,26 @@
+TELEMETRY_SERVICE_PORT={{ application_port }}
+MONGODB_IP={{ mongodb_host }}
+MONGODB_PORT={{ mongodb_port }}
+MONGODB_DBNAME={{ telemetry_database_name }}
+MONGODB_TELEMETRY_COLLECTION={{ events_collection_name }}
+MONGODB_COURSE_PROGRESS_COLLECTION={{ user_content_progress_collection_name }}
+
+ES_IP={{ elasticsearch_host }}
+ES_PORT={{ elasticsearch_http_port }}
+ES_USERNAME={{ elasticsearch_username }}
+ES_PASSWORD={{ elasticsearch_password }}
+ES_TELEMETRY_INDEX={{ es_telemetry_index }}
+ES_TELEMETRY_TYPE={{ es_telemetry_type }}
+LEX_CONTENT_INDEX={{ elasticsearch_contentindex_alias_name }}
+LEX_CONTENT_INDEX_TYPE={{ lex_content_index_type }}
+MONGODB_CONTENT_ACT_SESSION_COLLECTION={{ daily_time_spent_collection }}
+ES_ENABLE_PASSWORD={{ enable_password_for_elasticsearch }}
+MONGODB_PASSWORD={{ mongodb_password }}
+
+telemetry_log_level={{ telemetry_log_level }}
+telemetry_local_storage_enabled={{ telemetry_local_storage_enabled }}
+telemetry_proxy_enabled={{ telemetry_proxy_enabled }}
+telemetry_local_storage_type={{ telemetry_local_storage_type }}
+telemetry_kafka_broker_list={{ telemetry_kafka_broker_list }}
+telemetry_kafka_topic={{ var_telemetry_kafka_topic }}
+telemetry_service_port={{ service_telemetry_port }}

@@ -1,0 +1,97 @@
+// Command to create index
+curl -u 'elastic:' --location --request PUT 'http://IP:PORT/accesscontrolgroups_v1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "mappings": {
+        "group": {
+            "properties": {
+                "accessPaths": {
+                    "type": "keyword"
+                },
+                "createdBy": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "createdOn": {
+                    "type": "date"
+                },
+                "groupName": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "identifier": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "lastSynced": {
+                    "type": "date",
+                    "format": "basic_date_time_no_millis"
+                },
+                "lastUpdatedBy": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "lastUpdatedOn": {
+                    "type": "date"
+                },
+                "moderators": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "org": {
+                    "type": "keyword"
+                },
+                "requestedBy": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "rootOrg": {
+                    "type": "keyword"
+                },
+                "userIds": {
+                    "type": "keyword"
+                }
+            }
+        }
+    }
+}'
+
+
+// Create Alias
+curl -u 'elastic:' --location --request POST 'http://IP:PORT/_aliases' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "actions" : [
+        { "add" : { "index" : "accesscontrolgroups_v1", "alias" : "accesscontrolgroups" } }
+    ]
+}'

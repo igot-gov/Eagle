@@ -1,0 +1,6 @@
+curl --request POST \
+  --url http://<IP>:<PORT>/_aliases \
+  --header 'Content-Type: application/json' \
+  --header 'Postman-Token: <Token>' \
+  --header 'cache-control: no-cache' \
+  --data '{\r\n    "actions" : [\r\n        { "add" : { "index" : "en_usersearch_v1", "alias" : "usersearch_en" } }\r\n    ]\r\n}'

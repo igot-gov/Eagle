@@ -1,0 +1,164 @@
+# Content directory from where the organizations and their content is picked from
+resource_directory={{ internal_resource_dir }}
+
+# Security details. Will remove this later
+sec_text=MyDecryptionText
+sec_secret=$ecrEt@1987
+
+# Elasticsearch details
+ES_PASSWORD_ENABLE=true
+IS_ES_HTTPS={{ is_es_on_https }}
+ES_PASSWORD_ENABLE={{ enable_password_for_elasticsearch }}
+es_host={{ elasticsearch_host }}
+es_port={{ elasticsearch_http_port }}
+es_username={{ elasticsearch_username }}
+es_password={{ elasticsearch_password }}
+es_index_name={{ content_index_name }}
+es_sunbird_index_name=searchindex
+es_sunbird_user_type_name=user
+
+# Mongodb connection and collection details
+mongo_host={{ mongodb_host }}
+mongo_port={{ mongodb_port }}
+mongo_user_name={{ mongodb_user }}
+mongo_password={{ mongodb_password }}
+mongo_notification_db_name=notifications
+mongo_notification_collection_name=emails
+
+# Content base url, this was added tempoararily for the android app, remove this later
+content_url=http://{{ network_alias_name }}/
+
+# Cassandra db and keyspace details
+cassandra_host={{ cassandra_contact_points }}
+cassandra_keyspace={{ keyspace_bodhi }}
+cassandra_username={{ cassandra_username }}
+cassandra_password={{ cassandra_password }}
+
+access_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ing0Nzh4eU9wbHNNMUg3TlhrN1N4MTd4MXVwYyIsImtpZCI6Ing0Nzh4eU9wbHNNMUg3TlhrN1N4MTd4MXVwYyJ9.eyJhdWQiOiJodHRwczovL2luZm9zeXN0ZWNobm9sb2dpZXMuc2hhcmVwb2ludC5jb20vIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNjNjZTdkNTktMmYzZS00MmNkLWE4Y2MtYmU3NjRjZmY1ZWI2LyIsImlhdCI6MTUxNTMwNzE4NiwibmJmIjoxNTE1MzA3MTg2LCJleHAiOjE1MTUzMTEwODYsImFjciI6IjEiLCJhaW8iOiJBU1FBMi84R0FBQUFhYTlrTks3TWEzY2xSNGdza3hqNzUrYnU2b0JFME0rNVE4MjBVZnJySTJJPSIsImFtciI6WyJwd2QiXSwiYXBwX2Rpc3BsYXluYW1lIjoiTEVYIiwiYXBwaWQiOiJjNjU5N2QwYi1jNjI5LTQ4ODUtYTUzYy00NDQ5MDY0M2RkZGEiLCJhcHBpZGFjciI6IjEiLCJpcGFkZHIiOiIxMjUuMTYuMjMwLjEyIiwibmFtZSI6Iktub3dsZWRnZSBhdCBJbmZvc3lzIiwib2lkIjoiMTI0NDM2MzUtZDQ2Zi00NDIyLWI1MTMtYjZlM2RiMmI1YzNmIiwib25wcmVtX3NpZCI6IlMtMS01LTIxLTI2Njc0OTk0MC0xNjM3OTY0NDQ0LTkyOTcwMTAwMC05NjcxIiwicHVpZCI6IjEwMDMzRkZGOTg1RURCMjQiLCJzY3AiOiJBbGxTaXRlcy5Xcml0ZSBGaWxlcy5SZWFkLkFsbCBVc2VyLlJlYWQuQWxsIiwic2lnbmluX3N0YXRlIjpbImlua25vd25udHdrIiwia21zaSJdLCJzdWIiOiJmNTQwWmk2a1k1d2QwbG1Hd1hBc1RIY0pnWVByb0tQdkJIVFBnbkxoSnNnIiwidGlkIjoiNjNjZTdkNTktMmYzZS00MmNkLWE4Y2MtYmU3NjRjZmY1ZWI2IiwidW5pcXVlX25hbWUiOiJrbm93bGVkZ2VAYWQuaW5mb3N5cy5jb20iLCJ1cG4iOiJrbm93bGVkZ2VAYWQuaW5mb3N5cy5jb20iLCJ1dGkiOiJGSnVWTF9NcXAwT3pfa3VWRFc4ekFBIiwidmVyIjoiMS4wIn0.NitkhpFd8sy04ODalrbHoRSFxVvgmYsExthIx7Fwc8GDJzHcz4Y7k9RyU_6456U-1pm5YqDEqO337eKoc72O96GpWffzZhmn5NF6QNL9Lu84oGVOQT7nVuucMaa2dL_os2pbIhBjI77gL7NZTxJQjmSLh_6bC6JW4Z5Pn4T2bCcm6LZ4qtFfmW2ncpW67lfY7FdU-mTxo0lxOO5zQLWYayNjT24c0N96AiaeRdMtiMSsy9eJRnSqAUYiIkefwJ_zZ5GMzY1PpZf_9EJhjHLg0BHt3p90zXzMOg23ISjw8ZGbNfVhxG10QzmugXVKeKb9nXNavUBfsFCCrXGj-ugHzw
+refresh_token=AQABAAAAAABHh4kmS_aKT5XrjzxRAtHzJ68GT-OFDxgV-zIHdZgTqLkXlWWw5qF8m_ZqXhLmV06BLmSZH6maTMmYwrV0IzhotYnZsi6uWP-Z9N-SwPKAzw7egrMyMfJXldI95MtpWFyl1bcGXheUsl3CdMw5K4pXztX-IotMt9oQ4K5AHc-7xBnrpJyGwvTdpPHR15iWHQGvIf_HtEyWL5ss2Mm7FMIQiYOK0SQ9Bum1llgWMJ1fKWeaA2hSLo9KN0YgLZzJCyCuOPEkXlnB3KwNHUn5sGDLQmUI7F0aQC6Iw4AblCDfi-TrAhfzdR8Xa4BNXPuoRuXJBYFxEsRyt0xyVNXqs-yEleRrb-eJMJP72Rp_nDg8aO3AyAHBa5BWYp2fSZBqy7_mPN9R85AQKKB1pu53IgjWYvcJ-ms2tP0JNPMKn3BWZFhTEs9hX0RpJaJJwqWbYP2O5FeM7ZipDc7X8jG-5XlLM9p74napwCqIrwYikE1znOAZAZbRAvO68UDR2fQkl1gcHXXKLKrxA6UMRQi_r3FDZqpDHr7ioORer8oNBUEoQP_guPtPyFaub3r9rM82QccK5mIYtac0uo9mvP1KGWm7yV-iOCQ7rum2g8ObT2PTSKBX3rJK_pK3vZm7-aAOTcsf0sIqMpXrta6qqEMSbFTWl7LgUoMkKfmUYO24y6H69z4ZfyugWT-vSbBjKFwd-V7vuGPud2tVDxiMkDDRYI5ryddPvwDM8Pozrb32aXPOmCkdrJdOFn1PzPeLeHA2cpCL0ajcNev3ULnQLogR1skq6UrNnX9xQZlWQ_BmB8u4dAGV_wCm51A1mgXUCywnLBHyOXs9v6SOGpfxi_rymU4OIAA
+expires_on=1515311086
+
+# Client id and client secret for O365
+client_id={{ lex_microsoft_client_id }}
+client_secret={{ lex_microsoft_client_secret }}
+
+# Live content organization name
+live_content_org_name=ETA
+# Web hosted directory for application/html or application/quiz data types
+web_host_directory=web-host
+# Temporary location for open rap downloaded files
+open_rap_dir=open_rap_files
+
+# Default continue learning page size
+continue_learning_page_size=5
+# Should show continue learning
+show_continue=1
+save_continue_through_java=1
+
+# SB_EXT service details
+sb_ext_ip={{ sb_ext_hostname }}
+sb_ext_port={{ sb_ext_port }}
+
+# test config
+test_config_continue_learning=0
+
+# App details
+NODE_ENV=production
+port={{ application_port }}
+
+# Load balancer properties
+lb_address={{ load_balancer_address_list }}
+lb_port={{ load_balancer_port }}
+
+# Default stream enable for content
+streaming={{ streaming_enabled_value }}
+load_balancer={{ load_balancer_enabled_value }}
+live_api_proxies={{ live_api_proxies_enabled_value }}
+stats={{ stats_enabled_value }}
+
+# Temp for Wingspan
+live_sb_ext_host={{ live_sb_ext_host }}
+live_sb_ext_port={{ live_sb_ext_port }}
+live_telemetry_host={{ live_telemetry_host }}
+live_telemetry_port={{ live_telemetry_port }}
+live_content_host={{ live_content_host }}
+live_content_port={{ live_content_port }}
+
+# For Docker file
+# Added for network alises
+NETWORK_ALIAS={{ network_alias_name }}
+
+# Added for S3 access
+AWS_ACCESS_KEY={{ aws_access_key }}
+AWS_SECRET_KEY={{ aws_secret_key }}
+AWS_CF_ACCESS_KEY={{ aws_cloudfront_access_key }}
+AWS_PVT_KEY_FILE_PATH={{ aws_private_key_file_path }}
+
+# For sending emails for support team
+send_email={{ send_email_to_support_team }}
+environment_name={{ environment_name_for_email }}
+support_email_id={{ support_email_id }}
+
+# Enable antivirus check
+enable_av_check={{ should_antivirus_be_enabled }}
+av_scan_host={{ antivirus_hostname }}
+av_scan_port={{ antivirus_port }}
+
+WEB_HOST_TEMP_DIR={{ temporary_webhost_directory }}
+
+# For storing public content
+enable_public_content={{ public_content_enabled_value }}
+public_content_directory={{ public_content_directory }}
+
+# S3 bucket config
+
+main_bucket={{ var_content_service_main_bucket }}
+pre_publish_bucket={{ var_content_service_pre_publish_bucket }}
+transcoding_bucket={{ var_content_service_transcoding_bucket }}
+download_bucket={{ var_content_service_download_bucket }}
+images_bucket={{ var_content_service_images_bucket }}
+images_pre_publish_bucket={{ var_content_service_images_pre_publish_bucket }}
+keys_bucket={{ var_content_service_keys_bucket }}
+
+## Transcoding server config
+transcoding_server_ip={{ transcoding_server_ip }}
+transcoding_server_port={{ transcoding_server_port }}
+transcoding_webhook_endpoint={{ transcoding_status_webhook_endpoint }}
+transcoding_enc_dir_name={{ transcoding_enc_dir_name }}
+
+## Elasticsearch index for user access paths for set cookie API
+es_access_control_index={{ es_access_control_index }}
+
+## Cassandra table for user access paths for set cookie API
+cassandra_user_access_paths={{ cassandra_user_access_paths }}
+
+## CDN Configuration
+cdn_name=https://{{ domain_name }}
+images_cdn_name={{ var_images_cdn_name }}
+default_images_org={{ var_content_service_default_images_org }}
+
+# For cors enablement
+enable_full_cors={{ enable_full_cors }}
+cors_domain_url={{ cors_domain_url }}
+
+# For stats page
+users_keyspace={{ var_content_service_users_keyspace }}
+logs_index_name_prefix={{ var_content_service_logs_index_name_prefix }}
+logs_type_name={{ var_content_service_logs_type_name }}
+logs_server_host={{ var_content_service_logs_server_host }}
+logs_server_port={{ var_content_service_logs_server_port }}
+stats_db_name={{ var_content_service_stats_db_name }}
+stats_collection_name={{ var_content_service_stats_collection_name }}
+
+# For Public API keycloak authentication
+https_host={{ https_host }}
+keycloak_realm={{ keycloak_realm_name }}
+
+# For multi-tenancy in S3 upload
+live_content_buckets_list={{ var_content_service_live_content_buckets }}
+live_image_buckets_list={{ var_content_service_live_image_buckets }}
+pre_publish_content_buckets_list={{ var_content_service_pre_publish_content_buckets }}
+pre_publish_image_buckets_list={{ var_content_service_pre_publish_image_buckets }}
+downloads_buckets_list={{ var_content_service_downloads_buckets }}
+content_cdn_list={{ var_content_service_content_cdn }}
+images_cdn_list={{ var_content_service_images_cdn }}

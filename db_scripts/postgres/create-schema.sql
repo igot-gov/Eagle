@@ -1,0 +1,11 @@
+CREATE SCHEMA IF NOT EXISTS wingspan;
+
+ALTER SCHEMA wingspan OWNER TO wingspan;
+
+
+
+CREATE SCHEMA IF NOT EXISTS batch;
+
+ALTER SCHEMA batch OWNER TO wingspan;
+
+

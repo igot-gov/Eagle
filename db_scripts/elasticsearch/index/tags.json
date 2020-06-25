@@ -1,0 +1,58 @@
+{
+  "aliases": {
+    "tags": {}
+  },
+  "mappings": {
+    "tags": {
+      "properties": {
+        "concept_id": {
+          "type": "long"
+        },
+        "id": {
+          "type": "keyword"
+        },
+        "name": {
+          "type": "text"
+        },
+        "tokens": {
+          "type": "text",
+          "analyzer": "autocomplete"
+        }
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "shingle": {
+          "max_shingle_size": "3",
+          "min_shingle_size": "2",
+          "type": "shingle"
+        }
+      },
+      "analyzer": {
+        "autocomplete": {
+          "filter": [
+            "standard",
+            "lowercase",
+            "shingle"
+          ],
+          "type": "custom",
+          "tokenizer": "autocomplete_tokenizer"
+        }
+      },
+      "tokenizer": {
+        "autocomplete_tokenizer": {
+          "token_chars": [
+            "letter",
+            "digit",
+            "whitespace"
+          ],
+          "min_gram": "2",
+          "type": "edge_ngram",
+          "max_gram": "50"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# Application port
+port={{ docker_port }}
+
+# Postgres configurations
+PGUSER={{ var_pid_service_pguser }}
+PGHOST={{ var_pid_service_pghost }}
+PGPASSWORD={{ var_pid_service_password }}
+PGDATABASE={{ var_pid_service_pgdatabase }}
+PGPORT={{ var_pid_service_pgport }}
+
+keycloak_api_base=http://{{ network_alias_bulk_upload_service }}:{{ service_bulk_upload_port }}
+
+http_base={{ pid_http_base }}
+keycloak_http_base={{ keycloak_http_base }}
+keycloak_username={{ keycloak_username }}
+keycloak_password={{ keycloak_password }}
+# Place where cached data will be stored
+cache_location={{ internal_cache_directory }}
+
+# SMTP Server details
+smtp_host=10.66.80.118
+smtp_port=25

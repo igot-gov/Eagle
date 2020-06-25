@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  {{ docker_service_name }}:
+    image: {{ docker_hub_url }}/{{ image_name }}:{{ tag }}
+    hostname: "{{ docker_service_name }}"
+    
+    {% if publish_ports == true %}
+
+    ports:
+      - {{ host_port }}:{{ docker_port }}
+
+    {% endif %}
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == {{ var_docker_deploy_node_type }} 
+      replicas: {{ replicas }}      
+      resources:
+        reservations:
+          memory: {{ reserved_memory }}
+        limits:
+          memory: {{ limited_memory }}
+      update_config:
+        parallelism: 1
+        delay: 0s
+        failure_action: rollback
+        order: start-first
+      rollback_config:
+        parallelism: 1
+        delay: 0s
+      restart_policy:
+        condition: on-failure
+#    healthcheck:
+#      test: wget --quiet --spider http://localhost:5902/v1/latest/terms/user
+#      interval: 10s
+#      timeout: 10s
+#      retries: 3
+#      start_period: 100s
+    volumes:
+      - {{ host_logs_location }}:{{ docker_logs_location }}
+    networks:
+      application_default:
+        aliases:
+            - {{ network_alias_name }}
+    env_file:
+      - {{ env_file_deployment_location }}
+networks:
+  application_default:
+    external: true

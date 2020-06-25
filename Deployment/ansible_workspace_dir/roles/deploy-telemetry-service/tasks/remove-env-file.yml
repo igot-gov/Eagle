@@ -1,0 +1,5 @@
+---
+ - name: Remove the env file
+   file: 
+    path: "{{ env_file_deployment_location }}"
+    state: absent

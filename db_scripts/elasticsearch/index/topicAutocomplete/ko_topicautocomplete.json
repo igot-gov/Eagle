@@ -1,0 +1,67 @@
+{
+  "aliases" : {
+      "topicautocomplete_ko" : { }
+    },
+    "mappings" : {
+      "autocomplete" : {
+        "properties" : {
+          "dateInserted" : {
+            "type" : "date",
+            "format" : "basic_date_time_no_millis"
+          },
+          "id" : {
+            "type" : "keyword"
+          },
+          "isSuggested" : {
+            "type" : "boolean"
+          },
+          "org" : {
+            "type" : "keyword"
+          },
+          "rootOrg" : {
+            "type" : "keyword"
+          },
+          "searchTerm" : {
+            "type" : "keyword"
+          },
+          "searchTermAnalysed" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            },
+            "analyzer":"cjk_rebuilt"
+          }
+        }
+      }
+    },
+    "settings": {
+    "analysis": {
+      "filter": {
+        "english_stop": {
+          "type":       "stop",
+          "stopwords":  [ 
+            "a", "and", "are", "as", "at", "be", "but", "by", "for",
+            "if", "in", "into", "is", "it", "no", "not", "of", "on",
+            "or", "s", "such", "t", "that", "the", "their", "then",
+            "there", "these", "they", "this", "to", "was", "will",
+            "with", "www"
+          ]
+        }
+      },
+      "analyzer": {
+        "cjk_rebuilt": {
+          "tokenizer":  "standard",
+          "filter": [
+            "cjk_width",
+            "lowercase",
+            "cjk_bigram",
+            "english_stop"
+          ]
+        }
+      }
+    }
+  }
+}

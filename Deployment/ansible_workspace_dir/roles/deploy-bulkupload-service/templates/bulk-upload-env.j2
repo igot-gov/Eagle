@@ -1,0 +1,23 @@
+dbs_used={{ dbs_used }}
+
+#Node app.js PORT
+lex_bulk_port={{ application_port }}
+
+#Cassandra config
+sunbird_cassandra_host={{ cassandra_contact_points }}
+sunbird_cassandra_port={{ cassandra_port }}
+sunbird_cassandra_username={{ cassandra_username }}
+sunbird_cassandra_password={{ cassandra_password }}
+
+#Keycloak config
+sunbird_sso_url={{ sunbird_sso_url }}
+sunbird_sso_realm={{ sunbird_sso_realm }}
+sunbird_sso_username={{ sunbird_sso_username }}
+sunbird_sso_password={{ sunbird_sso_password }}
+sunbird_sso_client_id={{ sunbird_sso_client_id }}
+
+# Pid config
+pid_host={{ network_alias_pid_service }}
+pid_port={{ service_pid_service_port }}
+pid_client_id={{ var_bulk_upload_service_pid_client_id }}
+pid_client_secret={{ var_bulk_upload_service_pid_client_secret }}

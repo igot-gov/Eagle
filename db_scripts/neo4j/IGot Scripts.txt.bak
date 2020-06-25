@@ -1,0 +1,25 @@
+
+
+CREATE (node:SETTINGS)
+
+
+match (n:SETTINGS) set n = 
+{
+  "igot": "{"relationsMeta":{"Is_Translation_Of":["identifier","locale"],"Has_Sub_Content":["description","identifier","mimeType","name","objectType","relation","status","visibility"]},"nestedFields":["editors","price","comments","certificationList","playgroundResources","softwareRequirements","systemRequirements","references","creatorContacts","creatorDetails","publisherDetails","preContents","postContents","catalog","clients","skills","trackContacts","org","submitterDetails","concepts","plagScan","eligibility","scoreType","externalData","verifiers","verifier","subTitles","roles","group","msArtifactDetails","studyMaterials","kArtifacts","equivalentCertifications","transcoding"]}",
+  "Infosys": "{"relationsMeta":{"Is_Translation_Of":["identifier","locale"],"Has_Sub_Content":["description","identifier","mimeType","name","objectType","relation","status","visibility"]},"nestedFields":["editors","price","comments","certificationList","playgroundResources","softwareRequirements","systemRequirements","references","creatorContacts","creatorDetails","publisherDetails","preContents","postContents","catalog","clients","skills","trackContacts","org","submitterDetails","concepts","plagScan","eligibility","scoreType","externalData","verifiers","verifier","subTitles","roles","group","msArtifactDetails","studyMaterials","kArtifacts","equivalentCertifications","transcoding"]}",
+  "RootOrg": "{"nestedFields":[]}",
+  "WingspanDimension": "{"nestedFields":[]}",
+  "SETTINGS": "{"skipLabels":["SETTINGS","Validation"]}",
+  "nodeType": "PROPERTIES",
+  "Shared": "{"relationsMeta":{"Is_Translation_Of":["identifier","locale"],"Has_Sub_Content":["description","identifier","mimeType","name","objectType","relation","status","visibility"]},"nestedFields":["comments","certificationList","playgroundResources","softwareRequirements","systemRequirements","references","creatorContacts","creatorDetails","publisherDetails","preContents","postContents","catalog","clients","skills","trackContacts","org","submitterDetails","concepts","plagScan","eligibility","scoreType","externalData","verifiers","verifier","subTitles","roles","group","msArtifactDetails","studyMaterials","kArtifacts","equivalentCertifications","transcoding"]}",
+  "TaxonomyNode": "{"nestedFields":[]}",
+  "Feature": "{"relationsMeta":{"Has_Sub_Feature":[]},"nestedFields":[]}",
+  "Feature_Infosys": "{"relationsMeta":{"Has_Sub_Feature":[]},"nestedFields":[]}"
+}
+
+
+neoej server environment variables
+infosys_neo4j_kafka_producer_bootstrap_servers="10.0.1.198:9092"
+infosys_neo4j_kafka_output_topic="learning-graph-events"
+infosys_neo4j_kafka_error_output_topic="neo4j-plugin-errors"
+infosys_neo4j_kafka_producer_partitions=1

@@ -1,0 +1,68 @@
+sunbird_cassandra_host={{ cassandra_host }}
+sunbird_cassandra_port={{ cassandra_port }}
+sunbird_es_cluster={{ elasticsearch_cluster_name }}
+sunbird_es_host={{ elasticsearch_host }}
+sunbird_es_port={{ elasticsearch_tcp_port }}
+
+
+# Changed for new mongodb
+mongodb.host={{ mongodb_host }}
+mongodb.port={{ mongodb_port }}
+mongodb.database={{ mongodb_authentication_database }}
+mongodb.username={{ mongodb_user }}
+mongodb.password={{ mongodb_password }}
+spring.data.mongodb.uri={{ spring_data_mongodb_uri }}
+server_ip={{ app_server_host }}
+static_host={{ network_alias_static_host }}
+infyme_migration.host={{ network_alias_sb_ext_service }}
+infyme_migration.port={{ service_sb_ext_port }}
+bodhi_content_port={{ bodhi_content_port }}
+bodhi_ui_index={{ bodhi_ui_index }}
+spring.data.cassandra.contact-points={{ cassandra_host }}
+web_hosted_port=3007
+spring.data.cassandra.bodhi.contact-points={{ cassandra_host }}
+spring.data.cassandra.bodhi.port={{ cassandra_port }}
+spring.data.cassandra.bodhi.keyspace-name={{ keyspace_bodhi }}
+spring.data.cassandra.bodhi.username={{ cassandra_username }}
+spring.data.cassandra.bodhi.password={{ cassandra_password }}
+
+spring.data.cassandra.sunbird.contact-points={{ cassandra_host }}
+spring.data.cassandra.sunbird.port={{ cassandra_port }}
+spring.data.cassandra.sunbird.keyspace-name={{ keyspace_sunbird }}
+spring.data.cassandra.sunbird.username={{ cassandra_username }}
+spring.data.cassandra.sunbird.password={{ cassandra_password }}
+
+# spring.data.cassandra.username={{ cassandra_username }}
+# spring.data.cassandra.password={{ cassandra_password }}
+SB_EXT_IP={{ network_alias_sb_ext_service }}
+SB_EXT_PORT={{ sb_ext_port }}
+# for connection to lex core
+LEX_CORE_SERVICE={{ network_alias_lex_core_service }}:{{ service_lex_core_port }}
+
+# added for elastic authentication
+es.auth.enable={{ enable_password_for_elasticsearch }}
+elasticsearch.host={{ elasticsearch_host }}
+elasticsearch.port={{ elasticsearch_http_port }}
+elasticsearch.clustername={{ elasticsearch_cluster_name }}
+elasticsearch.user={{ elasticsearch_username }}
+elasticsearch.password={{ elasticsearch_password }}
+
+search_service_url={{ search_service_url }}
+server.tomcat.max-threads={{ server_tomcat_max_threads }}
+
+# added for python submission
+python_submission_host={{ network_alias_lex_core_service }}
+python_submission_port={{ service_lex_core_port }}
+lhub_certification.host={{ network_alias_lex_core_service }}
+lhub_certification.port={{ service_lex_core_port }}
+
+authoring.url={{ authoring_tool_backend_service }}
+infosys.domain={{ infosys_domain_name }}
+
+contentUrl.part={{ content_url_part }}
+content.service.url=http://{{ network_alias_content_service }}:{{ service_content_service_port }}
+
+pid.service.ip={{ network_alias_pid_service }}
+pid.service.port={{ service_pid_service_port }}
+
+

@@ -1,0 +1,40 @@
+---
+# vars file for deploy-telemetry-service
+# For script
+template_compose_file_name: telemetry-service.j2
+template_env_file_name: telemetry-service-env.j2
+compose_file_name: "{{ service_telemetry_service }}.yml"
+env_file_name: "{{ service_telemetry_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: Lex telemetry service
+
+# For service
+application_port: "{{ service_telemetry_port }}"
+image_name: "{{ image_telemetry_service }}"
+tag: "{{ tags_telemetry_service }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_telemetry_service }}"
+reserved_memory: "{{ service_mem_reserved_telemetry_service }}"
+limited_memory: "{{ service_mem_limit_telemetry_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_telemetry_service }}"
+docker_service_stack_name: telemetry
+docker_service_name: "{{ service_telemetry_service }}"
+force_reload: "{{ force_reload_telemetry_service }}"
+
+# For application
+telemetry_database_name: telemetry
+events_collection_name: events_collection
+daily_time_spent_collection: daily_time_spent_collection
+user_content_progress_collection_name: user_content_progress_collection
+es_telemetry_index: test_telemetry2
+es_telemetry_type: events2
+lex_content_index_type: resource
+
+telemetry_log_level: info
+telemetry_local_storage_enabled: true
+telemetry_proxy_enabled: false
+telemetry_local_storage_type: kafka
+telemetry_kafka_broker_list: "{{ kafka_servers_list }}"

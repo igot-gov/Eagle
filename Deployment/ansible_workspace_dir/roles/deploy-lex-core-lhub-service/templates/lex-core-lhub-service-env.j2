@@ -1,0 +1,87 @@
+#current application properties
+server.port={{ application_port }}
+server.connection-timeout={{ server_connection_timeout }}
+server.tomcat.max-threads={{ tomcat_max_threads }}
+server.tomcat.min-spare-threads={{ tomcat_min_spare_threads }}
+
+#data transfer properties
+spring.servlet.multipart.max-file-size={{ servlet_multipart_max_file_size }}
+spring.servlet.multipart.max-request-size={{ servlet_multipart_max_request_size }}
+
+#spring data mongo application properties
+spring.data.mongodb.uri={{ spring_data_mongodb_uri }}
+spring.data.mongodb.database={{ spring_data_mongodb_database }}
+
+#spring data cassandra application properties
+spring.data.cassandra.username={{ cassandra_username }}
+spring.data.cassandra.password={{ cassandra_password }}
+spring.data.cassandra.bodhi.startupTimeoutInSeconds={{ spring_data_cassandra_bodhi_startupTimeoutInSeconds }}
+spring.data.cassandra.bodhi.contact-points={{ cassandra_host }}
+spring.data.cassandra.bodhi.port={{ cassandra_port }}
+spring.data.cassandra.bodhi.keyspace-name={{ keyspace_bodhi }}
+spring.data.cassandra.sunbird.contact-points={{ cassandra_host }}
+spring.data.cassandra.sunbird.port={{ cassandra_port }}
+spring.data.cassandra.sunbird.keyspace-name={{ keyspace_sunbird }}
+
+#spring data elastic search
+spring.data.elasticsearch.ip={{ elasticsearch_hosts_list }}
+spring.data.elasticsearch.port={{ elasticsearch_ports_list }}
+spring.data.elasticsearch.cluster-name={{ elasticsearch_cluster_name }}
+spring.data.elasticsearch.username={{ elasticsearch_username }}
+spring.data.elasticsearch.password={{ elasticsearch_password }}
+
+#smtp application properties
+smtp.host={{ smtp_host }}
+smtp.port={{ smtp_port }}
+
+#external sources application properties
+sbext.service.host={{ network_alias_sb_ext_service }}
+content.service.host={{ network_alias_content_service }}
+sbext.service.port={{ service_sb_ext_port }}
+content.service.port={{ service_content_service_port }}
+
+#python evaluation application properties
+pyeval.server.ip={{ pyeval_server_ip }}
+pyeval.server.port={{ pyeval_server_port }}
+pyeval.service.name={{ pyeval_service_name }}
+
+#iap or multi lingual evaluation application properties
+iap.server.ip={{ iap_server_ip }}
+iap.server.port={{ iap_server_port }}
+iap.verification.service={{ iap_verification_service }}
+iap.certification.url=https://{{ var_common_iap_base }}/backend/Profile/CertificationResult
+
+#logging properties
+log.access.key={{ log_access_key }}
+
+client.id={{ lex_microsoft_client_id }}
+client.secret={{ lex_microsoft_client_secret }}
+
+#logging.pattern.console={"ts":"%d{yyyy-MM-dd HH:mm:ss.SSS}", "logger": "%logger{36}","level": "%-5p", "rid":"%X{RequestId}", "url":"%X{req.url}","message":%convMessage}%n
+
+logging.pattern.console={"ts":"%d{yyyy-MM-dd HH:mm:ss.SSS}", "logger": "%logger{36}","level": "%-5p", "rid":"%X{RequestId}", "url":"%X{req.url}","message":%m}%n
+
+lhub.url={{ lhub_url }}
+lhub.certification.url={{ lhub_certifaction_url }}
+spring.datasource.jdbc-url={{ spring_datasource_jdbc_url }}
+spring.datasource.username={{ postgresql_username_wingspan }}
+spring.datasource.password={{ postgresql_password_wingspan }}
+
+enable.realtime={{ enable_realtime_progress }}
+
+root.org={{ root_org }}
+
+instance.org={{ instance_org }}
+
+access.control.url={{ access_control_url }}
+
+pid.service.ip={{ network_alias_pid_service }}
+pid.service.port={{ service_pid_service_port }}
+
+notification.service.ip={{ network_alias_notification_service }}
+notification.service.port={{ service_notification_service_port }}
+management.endpoints.enabled-by-default={{ var_lex_core_enable_management_endpoints }}
+
+dbms.postgres.url={{ spring_datasource_jdbc_url }}
+dbms.postgres.username={{ postgresql_username_wingspan }}
+dbms.postgres.password={{ postgresql_password_wingspan }}

@@ -1,0 +1,6 @@
+{
+  "script":{
+    "lang": "mustache",
+    "source": "{\n    \"_source\": [\n        \"searchTerm\",\n        \"isSuggested\"\n    ],\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"term\": {\n                        \"rootOrg\": \"{{rootOrg}}\"\n                    }\n                },\n                {\n                    \"term\": {\n                        \"org\": \"{{org}}\"\n                    }\n                },\n                {\n                    \"bool\": {\n                        \"should\": [\n                            {\n                                \"prefix\": {\n                                    \"searchTermAnalysed.keyword\": {\n                                        \"value\": \"{{searchTerm}}\"\n                                    }\n                                }\n                            },\n                            {\n                                \"prefix\": {\n                                    \"searchTermAnalysed\": {\n                                        \"value\": \"{{searchTerm}}\"\n                                    }\n                                }\n                            }\n                        ]\n                    }\n                }\n            ]\n        }\n    }\n}"
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "aliases": {
+    "socialsearch_en": {}
+  },
+  "mappings": {
+    "socialsearch": {
+      "properties": {
+        "abstract": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          },
+          "analyzer": "content_analyzer"
+        },
+        "accessPaths": {
+          "type": "keyword"
+        },
+        "activityEndDate": {
+          "type": "date"
+        },
+        "attachments": {
+          "type": "nested",
+          "properties": {
+            "type": {
+              "type": "keyword"
+            },
+            "url": {
+              "type": "keyword"
+            }
+          }
+        },
+        "body": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          },
+          "analyzer": "content_analyzer"
+        },
+        "dtCreated": {
+          "type": "date"
+        },
+        "dtLastModified": {
+          "type": "date"
+        },
+        "dtPublished": {
+          "type": "date"
+        },
+        "hasAcceptedAnswer": {
+          "type": "boolean"
+        },
+        "hashTags": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          },
+          "analyzer": "hashTag_analyzer"
+        },
+        "id": {
+          "type": "keyword"
+        },
+        "likeCount": {
+          "type": "long"
+        },
+        "options": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "value": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "org": {
+          "type": "keyword"
+        },
+        "postCreator": {
+          "properties": {
+            "emailId": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "postCreatorId": {
+              "type": "keyword"
+            }
+          }
+        },
+        "postKind": {
+          "type": "keyword"
+        },
+        "reply": {
+          "type": "nested",
+          "properties": {
+            "body": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              },
+              "analyzer": "content_analyzer"
+            },
+            "id": {
+              "type": "keyword"
+            }
+          }
+        },
+        "replyCount": {
+          "type": "long"
+        },
+        "rootOrg": {
+          "type": "keyword"
+        },
+        "source": {
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            }
+          }
+        },
+        "status": {
+          "type": "keyword"
+        },
+        "tags": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "threadContributors": {
+          "type": "nested",
+          "properties": {
+            "emailId": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "name": {
+              "type": "text",
+              "fields": {
+                "keyword": {
+                  "type": "keyword",
+                  "ignore_above": 256
+                }
+              }
+            },
+            "threadContributorId": {
+              "type": "keyword"
+            }
+          }
+        },
+        "thumbnail": {
+          "type": "keyword",
+          "index": false
+        },
+        "title": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          },
+          "analyzer": "content_analyzer"
+        },
+        "upVoteCount": {
+          "type": "long"
+        }
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "hashTag_filter": {
+          "type": "lowercase"
+        },
+        "content_filter": {
+          "type": "stemmer"
+        }
+      },
+      "analyzer": {
+        "hashTag_analyzer": {
+          "filter": [
+            "hashTag_filter"
+          ],
+          "char_filter": [
+            "hashTag_char_filter"
+          ],
+          "tokenizer": "keyword"
+        },
+        "content_analyzer": {
+          "filter": [
+            "content_filter",
+            "lowercase"
+          ],
+          "tokenizer": "standard"
+        }
+      },
+      "char_filter": {
+        "hashTag_char_filter": {
+          "type": "mapping",
+          "mappings": [
+            "# =>  "
+          ]
+        }
+      }
+    }
+  }
+}

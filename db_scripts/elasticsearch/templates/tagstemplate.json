@@ -1,0 +1,2 @@
+{
+"script":{"lang":"mustache","source":"{\n  \"size\": {{sizeValue}}, \n  \"from\": {{fromValue}},\n  \"_source\": [\"id\",\"name\",\"concept_id\"],\n  \"query\": {\n    \"match_phrase\": {\n      \"tokens\": \"{{tokenValue}}\"\n    }\n  }\n}"}}

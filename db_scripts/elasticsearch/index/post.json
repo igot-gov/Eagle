@@ -1,0 +1,273 @@
+{
+  "aliases" : {
+      "post" : { }
+    },
+    "mappings" : {
+      "post" : {
+        "properties" : {
+          "accessPaths" : {
+            "type" : "keyword"
+          },
+          "activityEndDate" : {
+            "type" : "date"
+          },
+          "adminDateDeletion" : {
+            "type" : "date"
+          },
+          "commentCount" : {
+            "type" : "long"
+          },
+          "dtCreated" : {
+            "type" : "date"
+          },
+          "dtLastModified" : {
+            "type" : "date"
+          },
+          "dtPublished" : {
+            "type" : "date"
+          },
+          "hashTags" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            },
+            "analyzer" : "simple"
+          },
+          "id" : {
+            "type" : "keyword"
+          },
+          "isAcceptedAnswer" : {
+            "type" : "boolean"
+          },
+          "isAdminDeleted" : {
+            "type" : "boolean"
+          },
+          "isFlagged" : {
+            "type" : "boolean"
+          },
+          "lastEdited" : {
+            "type" : "nested",
+            "properties" : {
+              "dtLastEdited" : {
+                "type" : "date"
+              },
+              "editorId" : {
+                "type" : "keyword"
+              }
+            }
+          },
+          "latestReply" : {
+            "properties" : {
+              "dtLastModified" : {
+                "type" : "date"
+              },
+              "dtPublished" : {
+                "type" : "date"
+              },
+              "id" : {
+                "type" : "keyword"
+              },
+              "lastEdited" : {
+                "type" : "object"
+              },
+              "postContent" : {
+                "properties" : {
+                  "body" : {
+                    "type" : "text",
+                    "fields" : {
+                      "keyword" : {
+                        "type" : "keyword",
+                        "ignore_above" : 256
+                      }
+                    }
+                  }
+                }
+              },
+              "postKind" : {
+                "type" : "keyword"
+              }
+            }
+          },
+          "options" : {
+            "type" : "nested",
+            "properties" : {
+              "id" : {
+                "type" : "keyword"
+              },
+              "value" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              }
+            }
+          },
+          "org" : {
+            "type" : "keyword"
+          },
+          "parentId" : {
+            "type" : "keyword"
+          },
+          "postContent" : {
+            "type" : "nested",
+            "properties" : {
+              "abstract" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "body" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "title" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              }
+            }
+          },
+          "postCreator" : {
+            "type" : "nested",
+            "properties" : {
+              "name" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "postCreatorId" : {
+                "type" : "keyword"
+              }
+            }
+          },
+          "postEditor" : {
+            "type" : "nested",
+            "properties" : {
+              "name" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "postEditorId" : {
+                "type" : "keyword"
+              }
+            }
+          },
+          "postKind" : {
+            "type" : "keyword"
+          },
+          "primaryImage" : {
+            "type" : "binary"
+          },
+          "primaryLanguage" : {
+            "type" : "keyword"
+          },
+          "recipients" : {
+            "type" : "nested",
+            "properties" : {
+              "name" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              },
+              "recipientId" : {
+                "type" : "keyword"
+              },
+              "type" : {
+                "type" : "keyword"
+              }
+            }
+          },
+          "replyCount" : {
+            "type" : "long"
+          },
+          "rootOrg" : {
+            "type" : "keyword"
+          },
+          "rootParentId" : {
+            "type" : "keyword"
+          },
+          "source" : {
+            "type" : "nested",
+            "properties" : {
+              "id" : {
+                "type" : "keyword"
+              },
+              "name" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              }
+            }
+          },
+          "status" : {
+            "type" : "keyword"
+          },
+          "tags" : {
+            "type" : "nested",
+            "properties" : {
+              "concept_id" : {
+                "type" : "long"
+              },
+              "id" : {
+                "type" : "keyword"
+              },
+              "name" : {
+                "type" : "text",
+                "fields" : {
+                  "keyword" : {
+                    "type" : "keyword",
+                    "ignore_above" : 256
+                  }
+                }
+              }
+            }
+          },
+          "thumbnail" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          }
+        }
+      }
+    }
+}
