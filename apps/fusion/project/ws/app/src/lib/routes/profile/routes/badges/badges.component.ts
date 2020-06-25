@@ -61,13 +61,14 @@ export class BadgesComponent implements OnInit {
       this.badges = data.badges.data
       this.status = 'done'
     })
-
     // this.logger.log('var check', this.badges)
-
-    setTimeout(() => {
-      this.initializeObserver()
-      this.updateNavigationButtons()
-    }, 100)
+    setTimeout(
+      () => {
+        this.initializeObserver()
+        this.updateNavigationButtons()
+      },
+      100
+    )
   }
 
   reCalculateBadges() {
