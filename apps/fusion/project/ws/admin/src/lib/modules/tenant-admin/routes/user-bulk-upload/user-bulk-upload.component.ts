@@ -60,8 +60,8 @@ export class UserBulkUploadComponent implements OnInit {
     }
   }
 
-  public downloadFile(fileName: string): void {
-    this.fileService.download(fileName)
+  public downloadFile(): void {
+    this.fileService.download()
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 5000) {

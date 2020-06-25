@@ -33,7 +33,7 @@ export class FileService {
       })
     }
 
-    public download(_fileName: string): void {
+    public download(): void {
       // const httpOptions = {
       //   headers: new HttpHeaders({ responseType:  'blob',
       //   'Content-Type':  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}),
