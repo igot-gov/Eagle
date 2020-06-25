@@ -9,6 +9,7 @@ import { ProfileRoutingModule } from './profile-routing.module'
 // comps
 import { ProfileComponent } from './profile.component'
 import { AnalyticsModule } from './routes/analytics/analytics.module'
+import { BadgesResolver2 } from './routes/badges/badges.resolver2'
 import { CompetencyModule } from './routes/competency/competency.module'
 import { CompetencyResolverService } from './routes/competency/resolver/assessment.resolver'
 import { DashboardModule } from './routes/dashboard/dashboard.module'
@@ -18,10 +19,13 @@ import { LearningModule } from './routes/learning/learning.module'
 import { LearningHistoryResolver } from './routes/learning/resolvers/learning-history.resolver'
 import { LearningTimeResolver } from './routes/learning/resolvers/learning-time.resolver'
 import { SettingsModule } from './routes/settings/settings.module'
+import { BadgesModule } from './routes/badges/badges.module'
+// import { BadgesModule } from '../gamification/routes/badges/badges.module'
 
 @NgModule({
   declarations: [ProfileComponent],
   imports: [
+    BadgesModule,
     CommonModule,
     ProfileRoutingModule,
     CompetencyModule,
@@ -42,6 +46,7 @@ import { SettingsModule } from './routes/settings/settings.module'
   ],
   providers: [
     InterestUserResolve,
+    BadgesResolver2,
     CompetencyResolverService,
     LearningTimeResolver,
     LearningHistoryResolver,

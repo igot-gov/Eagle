@@ -1,6 +1,7 @@
 {
   "subtitleOnBanners": true,
   "showDescription": true,
+  "banners": [],
   "atAGlance": {
     "lastUpdatedOn": {
       "displayName": "Last Updated  On",

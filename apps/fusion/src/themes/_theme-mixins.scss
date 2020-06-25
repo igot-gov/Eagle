@@ -167,6 +167,11 @@
         }
       }
     }
+
+    .mat-tab-nav-bar,
+    .mat-form-field-outline-thick .mat-ink-bar {
+      background-color: $colorPrimaryDark !important;
+    }
   }
 
   @else {
