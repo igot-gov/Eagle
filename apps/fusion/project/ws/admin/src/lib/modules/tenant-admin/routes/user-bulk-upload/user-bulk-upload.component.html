@@ -1,0 +1,45 @@
+<h2>User Bulk upload</h2>
+
+<div class="flex flex-wrap">
+    <div class="sm:w-1/2">
+        <mat-card class="m-4 cursor-pointer">
+            <mat-card-title>Download</mat-card-title>
+            <p>
+                <mat-card-subtitle>Download the sample excel sheet</mat-card-subtitle>
+                <button mat-raised-button color="primary" i18n (click)="downloadFile()">
+                    <ng-container i18n>Download</ng-container>
+                </button>
+            </p>
+
+        </mat-card>
+
+        <mat-card class="m-4 cursor-pointer">
+            <mat-card-title>Upload</mat-card-title>
+            <p>
+                <mat-card-subtitle>Upload multiple users from excel sheet</mat-card-subtitle>
+            </p>
+            <div>
+                <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+                    <input type="file"  class="mb-5" (change)="onFileChange($event)" />
+                    <!-- <input type="submit" [disabled]="formGroup.invalid" value="upload" /> -->
+                    <mat-error *ngIf="showFileError">Only .xlsx are accepted</mat-error>
+                    <div class="mt-5 text-right">
+                        <div *ngIf="displayLoader | async" class="pr-4 flex items-center justify-center">
+                            <mat-spinner [diameter]="30"></mat-spinner>
+                        </div>
+                        <button mat-raised-button color="primary" type="submit" i18n 
+                        [disabled]="formGroup.invalid">
+                            <ng-container i18n>Upload</ng-container>
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
+        </mat-card>
+    </div>
+</div>
+
+<input type="hidden" i18-value i18-aria-value aria-value="Bulk user creation successful..!"
+    value="Bulk user creation successful..!" #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="Unable to process bulk user creation..!"
+    value="Unable to process bulk user creation..!" #toastError />
