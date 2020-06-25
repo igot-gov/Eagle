@@ -57,7 +57,7 @@ import { RolesManagementDetailComponent } from './routes/system-roles-management
 import { ConfirmActionComponent } from './routes/system-roles-management/roles-management-detail/components/confirm-action/confirm-action.component'
 import { UsersComponent } from './routes/users/users.component'
 import { CreateUserComponent } from './routes/users/create-user/create-user.component'
-import { CreateUserComponentV2 } from './routes/users/create-userV2/create-userV2.component'
+import { CreateUserV2Component } from './routes/users/create-userV2/create-userV2.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
 import { UserAccessPathComponent } from './routes/user-access-path/user-access-path.component';
 import { UserBulkUploadComponent } from './routes/user-bulk-upload/user-bulk-upload.component'
@@ -83,7 +83,7 @@ import { FileService } from './upload.service'
     ConfirmActionComponent,
     UsersComponent,
     CreateUserComponent,
-    CreateUserComponentV2,
+    CreateUserV2Component,
     OpenRolesDialogComponent,
     UserAccessPathComponent,
     UserBulkUploadComponent,

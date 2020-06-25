@@ -65,7 +65,6 @@ export class FileService {
 
     validateFile(name: String) {
         const ext = name.substring(name.lastIndexOf('.') + 1)
-        console.log('validateFile: ', ext)
         if (ext.toLowerCase() === 'xlsx') {
             return true
         // tslint:disable-next-line: no-else-after-return

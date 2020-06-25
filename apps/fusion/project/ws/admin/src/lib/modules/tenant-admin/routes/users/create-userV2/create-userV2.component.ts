@@ -9,7 +9,7 @@ import { TenantAdminService } from '../../../tenant-admin.service'
   templateUrl: './create-userV2.component.html',
   styleUrls: ['./create-userV2.component.scss'],
 })
-export class CreateUserComponentV2 implements OnInit, OnDestroy {
+export class CreateUserV2Component implements OnInit, OnDestroy {
   createUserForm: FormGroup
   unseenCtrl!: FormControl
   unseenCtrlSub!: Subscription
