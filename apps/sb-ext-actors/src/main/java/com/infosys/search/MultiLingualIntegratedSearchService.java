@@ -147,10 +147,6 @@ class MultiLingualIntegratedSearchService {
             paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_TRACK_CONTACTS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
         }
 
-        if(validatedSearchData.getFilters().getStatus().contains("Live")){
-            paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_PUBLISHER_DETAILS_FIELD_KEY) , true);
-            paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_PUBLISHER_DETAILS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
-        }
 
         //Added filter records belong to the user // apply for all status
         if(null != validatedSearchData.getIsUserRecordEnabled()){
