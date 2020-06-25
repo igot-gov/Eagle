@@ -16,6 +16,7 @@
  */
 package com.infosys.searchv6;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.infosys.elastic.helper.ConnectionManager;
 import com.infosys.exception.BadRequestException;
@@ -460,6 +461,8 @@ class MultiLingualIntegratedSearchServicev6 {
         for (String searchIndexLocale : validatedSearchData.getLocale()) {
             indices.add(SearchConstantsv6.SEARCH_INDEX_NAME_PREFIX + SearchConstantsv6.SEARCH_INDEX_LOCALE_DELIMITER + searchIndexLocale);
         }
+
+        System.out.println("Params map "+ new ObjectMapper().writeValueAsString(paramsMap));
 
         SearchRequest searchRequest = new SearchRequest().searchType(SearchType.QUERY_THEN_FETCH);
         searchRequest.indices(indices.toArray(new String[0]));

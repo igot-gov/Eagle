@@ -140,10 +140,21 @@ class MultiLingualIntegratedSearchService {
             paramsMap.put(SearchConstants.IS_STAND_ALONE + SearchConstants.TEMPLATE_FILTER_SUFFIX, isStandAlone);
         }
 
+
+        List userIds = new ArrayList(Arrays.asList(validatedSearchData.getUuid().toString().split(",")));
+        if(validatedSearchData.getFilters().getStatus().contains("InReview") || validatedSearchData.getFilters().getStatus().contains("Reviewed")){
+            paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_TRACK_CONTACTS_FIELD_KEY) , true);
+            paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_TRACK_CONTACTS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
+        }
+
+        if(validatedSearchData.getFilters().getStatus().contains("Live")){
+            paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_PUBLISHER_DETAILS_FIELD_KEY) , true);
+            paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_PUBLISHER_DETAILS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
+        }
+
         //Added filter records belong to the user // apply for all status
         if(null != validatedSearchData.getIsUserRecordEnabled()){
             Boolean isUserRecordEnabled = validatedSearchData.getIsUserRecordEnabled();
-            List userIds = new ArrayList(Arrays.asList(validatedSearchData.getUuid().toString().split(",")));
             if (isUserRecordEnabled) {
                 paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_CREATOR_CONTACTS_FIELD_KEY) , true);
                 paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_CREATOR_CONTACTS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
@@ -369,7 +380,6 @@ class MultiLingualIntegratedSearchService {
     }
 
     private SearchResponse fetchFromES(ValidatedSearchData validatedSearchData, Map<String, Object> paramsMap) throws Exception {
-        System.out.println(paramsMap);
         List<String> indices = new ArrayList<>();
         if (validatedSearchData.getLocale().isEmpty())
             validatedSearchData.setLocale(ValidatedSearchData.supportedLocales);
