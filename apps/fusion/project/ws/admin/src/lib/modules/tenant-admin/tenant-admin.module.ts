@@ -57,8 +57,11 @@ import { RolesManagementDetailComponent } from './routes/system-roles-management
 import { ConfirmActionComponent } from './routes/system-roles-management/roles-management-detail/components/confirm-action/confirm-action.component'
 import { UsersComponent } from './routes/users/users.component'
 import { CreateUserComponent } from './routes/users/create-user/create-user.component'
+import { CreateUserComponentV2 } from './routes/users/create-userV2/create-userV2.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
-import { UserAccessPathComponent } from './routes/user-access-path/user-access-path.component'
+import { UserAccessPathComponent } from './routes/user-access-path/user-access-path.component';
+import { UserBulkUploadComponent } from './routes/user-bulk-upload/user-bulk-upload.component'
+import { FileService } from './upload.service'
 
 @NgModule({
   declarations: [
@@ -80,8 +83,10 @@ import { UserAccessPathComponent } from './routes/user-access-path/user-access-p
     ConfirmActionComponent,
     UsersComponent,
     CreateUserComponent,
+    CreateUserComponentV2,
     OpenRolesDialogComponent,
     UserAccessPathComponent,
+    UserBulkUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -124,7 +129,7 @@ import { UserAccessPathComponent } from './routes/user-access-path/user-access-p
     UserImageModule,
     MatAutocompleteModule,
   ],
-  providers: [TenantAdminService],
+  providers: [TenantAdminService, FileService],
   entryComponents: [ModifyRolesDialogComponent,
    EditBannersDialogComponent,
    DialogDeregisterUserComponent,
