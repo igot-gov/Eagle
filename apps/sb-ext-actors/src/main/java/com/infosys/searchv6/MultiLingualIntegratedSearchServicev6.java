@@ -464,6 +464,7 @@ class MultiLingualIntegratedSearchServicev6 {
 
         System.out.println("Params map "+ new ObjectMapper().writeValueAsString(paramsMap));
 
+
         SearchRequest searchRequest = new SearchRequest().searchType(SearchType.QUERY_THEN_FETCH);
         searchRequest.indices(indices.toArray(new String[0]));
         searchRequest.types(LexProjectUtil.EsType.new_lex_search.getTypeName());
