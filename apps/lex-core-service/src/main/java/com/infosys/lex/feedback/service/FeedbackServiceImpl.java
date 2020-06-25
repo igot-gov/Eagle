@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.cassandra.thrift.InvalidRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -45,6 +46,7 @@ import com.infosys.lex.userroles.service.UserRolesService;
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
 
+	private LexLogger logger = new LexLogger(getClass().getName());
 	private Map<String, Object> rolesType = new HashMap<>();
 	private List<String> rolesList = new ArrayList<>();
 	private Map<String, Object> features = new HashMap<>();
@@ -72,6 +74,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 
 	@Autowired
 	LexServerProperties serviceConfig;
+
+	@Autowired
+	ObjectMapper mapper;
 
 	@Autowired
 	public FeedbackServiceImpl() {
@@ -158,6 +163,9 @@ public class FeedbackServiceImpl implements FeedbackService {
 		if (!userUtilityService.validateUser(rootOrg, feedbackSubmitDTO.getUserId())) {
 			throw new BadRequestException("Invalid User : " + feedbackSubmitDTO.getUserId());
 		}
+
+		logger.info("feedback-Submit feedbackSubmitDTO below: ");
+		logger.info(mapper.writeValueAsString(feedbackSubmitDTO));
 
 //		verify ContentId
 		if (contentId != "") {
@@ -281,6 +289,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 				// do nothing
 			}
 
+			logger.info("feedback-submit result below: ");
+			logger.info(mapper.writeValueAsString(result));
 			return result;
 		} catch (Exception e) {
 			throw new ApplicationLogicError("Failed While Updating Database", e);
@@ -475,6 +485,10 @@ public class FeedbackServiceImpl implements FeedbackService {
 			roles.add("content-request-admin");
 		}
 
+		logger.info("feedback-summary appconfig below: ");
+		logger.info(mapper.writeValueAsString(configs));
+		logger.info("feedback-summary roles below: ");
+		logger.info(mapper.writeValueAsString(roles));
 		// System.out.println(roles);
 
 		Long totalNotSeen = 0l;
@@ -537,6 +551,8 @@ public class FeedbackServiceImpl implements FeedbackService {
 		} catch (Exception e) {
 			throw new ApplicationLogicError("Data Missing in Database .pls Check RootOrg.", e);
 		}
+		logger.info("feedback-summary result below: ");
+		logger.info(mapper.writeValueAsString(result));
 		return result;
 	}
 
