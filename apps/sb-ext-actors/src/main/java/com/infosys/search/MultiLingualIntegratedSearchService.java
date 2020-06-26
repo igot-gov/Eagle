@@ -16,6 +16,7 @@
  */
 package com.infosys.search;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.elastic.helper.ConnectionManager;
 import com.infosys.exception.BadRequestException;
 import com.infosys.exception.NoContentException;
@@ -142,11 +143,11 @@ class MultiLingualIntegratedSearchService {
 
 
         List userIds = new ArrayList(Arrays.asList(validatedSearchData.getUuid().toString().split(",")));
-        if(validatedSearchData.getFilters().getStatus().contains("InReview") || validatedSearchData.getFilters().getStatus().contains("Reviewed")){
+        boolean isUnderReview = validatedSearchData.getFilters().getStatus().contains(SearchStatuses.Reviewed) || validatedSearchData.getFilters().getStatus().contains(SearchStatuses.InReview);
+        if(isUnderReview){
             paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_TRACK_CONTACTS_FIELD_KEY) , true);
             paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_TRACK_CONTACTS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
         }
-
 
         //Added filter records belong to the user // apply for all status
         if(null != validatedSearchData.getIsUserRecordEnabled()){
@@ -156,7 +157,7 @@ class MultiLingualIntegratedSearchService {
                 paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_CREATOR_CONTACTS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
             }
             //Added filter records not belong to the user //apply for status InReview, Reviewed
-            if(!isUserRecordEnabled && (validatedSearchData.getFilters().getStatus().contains("InReview") || validatedSearchData.getFilters().getStatus().contains("Reviewed"))){
+            if(!isUserRecordEnabled && (isUnderReview)){
                 paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + "Not" +WordUtils.capitalize(SearchConstants.FILTER_CREATOR_CONTACTS_FIELD_KEY) , true);
                 paramsMap.put(SearchConstants.TEMPLATE_FILTER_PREFIX + WordUtils.capitalize(SearchConstants.FILTER_CREATOR_CONTACTS_FIELD_KEY) + SearchConstants.TEMPLATE_FILTER_SUFFIX, userIds);
 
@@ -252,6 +253,7 @@ class MultiLingualIntegratedSearchService {
 //            throw new BadRequestException("Both query or filters can not be empty");
 //        }
 
+        System.out.println("Params map "+new ObjectMapper().writeValueAsString(paramsMap));
         SearchResponse searchResponse = fetchFromES(validatedSearchData, paramsMap);
 
         if (null == isStandAlone && searchResponse.getHits().totalHits == 0)
