@@ -48,10 +48,10 @@ export class EditorContentService {
   getChildData(id: string): NSContent.IContentMeta | undefined {
     let returnVal: NSContent.IContentMeta | undefined
     const keys = Object.keys(this.originalContent)
-    for (let i = 0; i < keys.length; i++) {
+    for (let i = 0; i < keys.length; i += 1) {
       if (this.originalContent[keys[i]] && this.originalContent[keys[i]]['children']) {
         const children = this.originalContent[keys[i]]['children']
-        for (let j = 0; j <= children.length; j++) {
+        for (let j = 0; j <= children.length; j += 1) {
           if (children[j] && children[j]['identifier'] && children[j]['identifier'] === id) {
             returnVal = children[j]
           }

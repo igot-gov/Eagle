@@ -1,24 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CreateUserComponentV2 } from './create-user.component'
+import { CreateUserV2Component } from './create-userV2.component'
 
 describe('CreateUserComponentV2', () => {
-  let component: CreateUserComponentV2
-  let fixture: ComponentFixture<CreateUserComponentV2>
+  let component: CreateUserV2Component
+  let fixture: ComponentFixture<CreateUserV2Component>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateUserComponentV2],
+      declarations: [CreateUserV2Component],
     })
-    .compileComponents()
+      .compileComponents()
   }))
-  
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateUserComponentV2)
+    fixture = TestBed.createComponent(CreateUserV2Component)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
-
   it('should create', () => {
     expect(component).toBeTruthy()
   })

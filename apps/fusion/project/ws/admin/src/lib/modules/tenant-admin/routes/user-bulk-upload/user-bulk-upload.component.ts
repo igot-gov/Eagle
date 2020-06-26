@@ -3,8 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { FileService } from '../../upload.service'
 import { Observable } from 'rxjs'
 import { MatSnackBar } from '@angular/material'
-
-
 @Component({
   selector: 'ws-admin-user-bulk-upload',
   templateUrl: './user-bulk-upload.component.html',
