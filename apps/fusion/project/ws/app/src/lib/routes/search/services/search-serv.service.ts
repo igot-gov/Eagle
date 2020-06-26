@@ -80,6 +80,7 @@ export class SearchServService {
         },
       ],
       visibleFilters: {},
+      includeSourceFields: ['creatorLogo'],
       isStandAlone: request.hasOwnProperty('isStandAlone') ? request.isStandAlone : undefined,
       sort: request.hasOwnProperty('sort') ? request.sort && request.sort.length ? request.sort : undefined : undefined,
     }

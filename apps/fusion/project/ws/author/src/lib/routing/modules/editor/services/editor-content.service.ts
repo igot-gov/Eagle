@@ -7,11 +7,12 @@ import { IConditionsV2 } from './../../../../interface/conditions-v2'
 import { IFormMeta } from './../../../../interface/form'
 import { AuthInitService } from './../../../../services/init.service'
 import { EditorService } from './editor.service'
+import { IAssessmentDetails } from '../routing/modules/iap-assessment/interface/iap-assessment.interface'
 @Injectable()
 export class EditorContentService {
   originalContent: { [key: string]: NSContent.IContentMeta } = {}
   upDatedContent: { [key: string]: NSContent.IContentMeta } = {}
-  iapContent: { [key: string]: any } = {}
+  iapContent: { [key: string]: IAssessmentDetails } = {}
   public currentContent!: string
   public parentContent!: string
   public isSubmitted = false
@@ -29,12 +30,35 @@ export class EditorContentService {
   }
 
   getUpdatedMeta(id: string): NSContent.IContentMeta {
-    return JSON.parse(
-      JSON.stringify({
-        ...this.originalContent[id],
-        ...(this.upDatedContent[id] ? this.upDatedContent[id] : {}),
-      }),
-    )
+    if (this.originalContent[id] || this.upDatedContent[id]) {
+      return JSON.parse(
+        JSON.stringify({
+          ...this.originalContent[id],
+          ...(this.upDatedContent[id] ? this.upDatedContent[id] : {}),
+        }),
+      )
+    } {
+      const value = this.getChildData(id)
+      if (value) {
+        return value
+      }
+      return JSON.parse(JSON.stringify({}))
+    }
+  }
+  getChildData(id: string): NSContent.IContentMeta | undefined {
+    let returnVal: NSContent.IContentMeta | undefined
+    const keys = Object.keys(this.originalContent)
+    for (let i = 0; i < keys.length; i++) {
+      if (this.originalContent[keys[i]] && this.originalContent[keys[i]]['children']) {
+        const children = this.originalContent[keys[i]]['children']
+        for (let j = 0; j <= children.length; j++) {
+          if (children[j] && children[j]['identifier'] && children[j]['identifier'] === id) {
+            returnVal = children[j]
+          }
+        }
+      }
+    }
+    return returnVal
   }
 
   setOriginalMeta(meta: NSContent.IContentMeta) {
@@ -56,13 +80,13 @@ export class EditorContentService {
     }
   }
 
-  setIapContent(meta: any, id: string) {
+  setIapContent(meta: IAssessmentDetails, id: string) {
     this.iapContent[id] = {
       ...(this.iapContent[id] ? this.iapContent[id] : {}),
       ...JSON.parse(JSON.stringify(meta)),
     }
   }
-  getIapContent(id: string): any {
+  getIapContent(id: string): IAssessmentDetails {
     return this.iapContent[id]
   }
 
@@ -257,7 +281,7 @@ export class EditorContentService {
         break
       case 'object':
       case 'boolean':
-        returnValue = data === true || data === false ? true : false
+        returnValue = data ? true : false
         break
       case 'number':
         returnValue = data > 0 ? true : false

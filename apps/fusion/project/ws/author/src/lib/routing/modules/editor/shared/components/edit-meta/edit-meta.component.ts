@@ -497,11 +497,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeResourceType() {
     if (this.contentForm.controls.contentType.value === 'Resource') {
-      this.resourceTypes = this.ordinals.resourceType || []
+      this.resourceTypes = this.ordinals.categoryType
     } else {
-      // need to supply
+      this.resourceTypes = this.ordinals.categoryType || []
       // this.resourceTypes = this.ordinals['Offering Mode']
-      this.resourceTypes = this.ordinals.resourceType || []
     }
 
     if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
@@ -1063,7 +1062,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     })
 
     this.contentForm.controls.contentType.valueChanges.subscribe(() => {
-      this.changeResourceType()
+      // this.changeResourceType()
       this.filterOrdinals()
       this.changeMimeType()
       this.contentForm.controls.category.setValue(this.contentForm.controls.contentType.value)
@@ -1076,18 +1075,14 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         )
       })
     }
-    this.contentForm.controls.resourceType.valueChanges.subscribe(() => {
-      this.contentForm.controls.categoryType.setValue(this.contentForm.controls.resourceType.value)
+    this.contentForm.controls.categoryType.valueChanges.subscribe(() => {
+      this.contentForm.controls.resourceType.setValue(this.contentForm.controls.resourceType.value)
     })
     this.contentForm.controls.resourceCategory.valueChanges.subscribe(() => {
       this.contentForm.controls.customClassifiers.setValue(
         this.contentForm.controls.resourceCategory.value,
       )
     })
-    // this.contentForm.controls.sourceName.valueChanges.subscribe(() => {
-    //   this.contentForm.controls.sourceName.setValue(this.contentForm.controls.sourceName.value)
-    // })
-
   }
   openCatalogSelector() {
     const oldCatalogs = this.addCommonToCatalog(this.contentForm.controls.catalogPaths.value)
@@ -1156,16 +1151,14 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addCommonToCatalog(catalogs: string[]): string[] {
     const newCatalog: any[] = []
-    if (catalogs && catalogs.length > 0) {
-      catalogs.forEach(catalog => {
-        const prefix = 'Common>'
-        if (catalog.indexOf(prefix) > -1) {
-          newCatalog.push(catalog)
-        } else {
-          newCatalog.push(prefix.concat(catalog))
-        }
-      })
-    }
+    catalogs.forEach(catalog => {
+      const prefix = 'Common>'
+      if (catalog.indexOf(prefix) > -1) {
+        newCatalog.push(catalog)
+      } else {
+        newCatalog.push(prefix.concat(catalog))
+      }
+    })
     return newCatalog
   }
 }
