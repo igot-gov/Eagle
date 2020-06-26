@@ -497,10 +497,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeResourceType() {
     if (this.contentForm.controls.contentType.value === 'Resource') {
-      this.resourceTypes = this.ordinals.categoryType
+      this.resourceTypes = this.ordinals.resourceType || this.ordinals.categoryType || []
     } else {
-      this.resourceTypes = this.ordinals.categoryType || []
-      // this.resourceTypes = this.ordinals['Offering Mode']
+      this.resourceTypes = this.ordinals['Offering Mode'] || this.ordinals.categoryType || []
     }
 
     if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
@@ -1062,7 +1061,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     })
 
     this.contentForm.controls.contentType.valueChanges.subscribe(() => {
-      // this.changeResourceType()
+      this.changeResourceType()
       this.filterOrdinals()
       this.changeMimeType()
       this.contentForm.controls.category.setValue(this.contentForm.controls.contentType.value)
@@ -1075,9 +1074,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         )
       })
     }
-    this.contentForm.controls.categoryType.valueChanges.subscribe(() => {
-      this.contentForm.controls.resourceType.setValue(this.contentForm.controls.resourceType.value)
+    ///resourceType
+    this.contentForm.controls.resourceType.valueChanges.subscribe(() => {
+      this.contentForm.controls.categoryType.setValue(this.contentForm.controls.resourceType.value)
     })
+
     this.contentForm.controls.resourceCategory.valueChanges.subscribe(() => {
       this.contentForm.controls.customClassifiers.setValue(
         this.contentForm.controls.resourceCategory.value,
