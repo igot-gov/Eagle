@@ -52,6 +52,8 @@ public class Neo4jQueryHelpers {
             else
                 query.append(field).append(": node.").append(field).append("} as node;");
         }
+              System.out.println("getNodeByIdentifier- query: "+query.toString());
+
 
         StatementResult result = transaction.run(query.toString());
         Map<String, Object> data = (Map<String, Object>) result.single().asMap().get("node");
