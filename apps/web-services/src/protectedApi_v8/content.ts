@@ -71,7 +71,8 @@ const API_END_POINTS = {
   externalContentAccess: (contentId: string, userId: string) =>
     `${CONSTANTS.SB_EXT_API_BASE_2}/v1/sources/${contentId}/users/${userId}`,
   fetchApi: (rootOrg?: string) => `${CONSTANTS.CONTENT_META_FETCH_API_BASE}/fetch/${rootOrg}`,
-  hierarchy: (contentId: string) => `${CONSTANTS.CONTENT_HIERARCHY}/${contentId}?dt=UI_LITE`,
+  hierarchy: (contentId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content/hierarchy/${contentId}`,
+  // hierarchy: (contentId: string) => `${CONSTANTS.CONTENT_HIERARCHY}/${contentId}?dt=UI_LITE`,
   likeCount: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/likes-count`,
   modifyKB: (apiType: string) => `${CONSTANTS.AUTHORING_BACKEND}/action/content/v2/kb/${apiType}`,
   multiple: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content/metas`,
