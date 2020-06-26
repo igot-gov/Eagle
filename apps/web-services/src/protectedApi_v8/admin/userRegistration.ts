@@ -7,6 +7,7 @@ import { CONSTANTS } from '../../utils/env'
 import {
     createKeycloakUser,
     getAuthToken,
+    sendActionsEmail,
     UpdateKeycloakUserPassword,
 } from '../../utils/keycloak-user-creation'
 import { logError, logInfo } from '../../utils/logger'
@@ -161,8 +162,13 @@ userRegistrationApi.post('/create-user', async (req, res) => {
             await UpdateKeycloakUserPassword(createKeycloak.id, true)
                 .catch((error) => {
                     logError('ERROR ON UpdateKeycloakUserPassword', error)
-                    res.status(400).send('1003: User default password could not be set !!' || {})
+                    // res.status(400).send('1003: User default password could not be set !!' || {})
                 })
+            await sendActionsEmail(createKeycloak.id)
+            .catch((error) => {
+                logError('ERROR ON sendActionsEmail', error)
+                // res.status(400).send('1003: Email could not be set !!' || {})
+            })
             // console.log('kcaAuthToken', kcaAuthToken)
             res.json({ data: 'User Created successfully!' })
         }
@@ -225,6 +231,16 @@ userRegistrationApi.post('/user/update-access-path', async (req, res) => {
         // })
     } catch (err) {
         logError('ERROR ON access-path >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+userRegistrationApi.post('bulkUpload', async (req, res) => {
+    try {
+        logInfo('inside bbulkupload:', req.body)
+    } catch (err) {
+        logError('ERROR ON BULK UPLOAD >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
