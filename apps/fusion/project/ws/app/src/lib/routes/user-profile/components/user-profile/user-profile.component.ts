@@ -57,7 +57,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       mobile: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumberPattern)]),
       telephone: new FormControl('', []),
       primaryEmail: new FormControl('', [Validators.required, Validators.email]),
-      primaryEmailType: new FormControl('', [Validators.required]),
+      primaryEmailType: new FormControl(NsUserProfileDetails.EPrimaryEmailType.PERSONAL, [Validators.required]),
       secondaryEmail: new FormControl('', []),
       nationality: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
