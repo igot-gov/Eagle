@@ -3911,21 +3911,10 @@
     "trackContacts": {
       "mandatoryFor": {},
       "notMandatoryFor": {},
-      "showFor": {
-        "Resource": [],
-        "Knowledge Board": []
-      },
+      "showFor": {},
       "notDisabledFor": {},
       "disabledFor": {},
-      "notShowFor": {
-        "Resource": [
-          {
-            "mimeType": [
-              "application/html"
-            ]
-          }
-        ]
-      },
+      "notShowFor": {},
       "defaultValue": {
         "Course": [
           {
