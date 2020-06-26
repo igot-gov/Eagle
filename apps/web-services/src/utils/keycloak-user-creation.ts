@@ -185,6 +185,7 @@ export async function sendActionsEmail(userId: string) {
     logInfo(`redirect Uri: `, CONSTANTS.HTTPS_HOST)
     return kcAdminClient.users.executeActionsEmail({
         actions: [RequiredActionAlias.VERIFY_EMAIL],
+        clientId: 'portal',
         id: userId,
         lifespan: 43200,
         redirectUri: CONSTANTS.HTTPS_HOST,
