@@ -182,10 +182,12 @@ export async function sendActionsEmail(userId: string) {
         realmName: CONSTANTS.KEYCLOAK_REALM,
     })
     logInfo(`Sending email to ${userId}`)
+    logInfo(`redirect Uri: `, CONSTANTS.HTTPS_HOST)
     return kcAdminClient.users.executeActionsEmail({
         actions: [RequiredActionAlias.VERIFY_EMAIL],
         id: userId,
         lifespan: 43200,
+        redirectUri: CONSTANTS.HTTPS_HOST,
     })
         // tslint:disable-next-line: no-any
         .then((resp: any) => {
