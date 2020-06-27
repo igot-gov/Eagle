@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
-import { logError } from '../../utils/logger'
+import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
@@ -36,6 +36,7 @@ export const profileDeatailsApi = Router()
 profileDeatailsApi.post('/createUserRegistry', async (req, res) => {
     try {
         const userId = extractUserIdFromRequest(req)
+        logInfo('Create user registry for', userId)
         const response = await axios.post(API_END_POINTS.createUserRegistry, { ...req.body, userId }, {
             ...axiosRequestConfig,
         })
@@ -50,8 +51,8 @@ profileDeatailsApi.post('/createUserRegistry', async (req, res) => {
 profileDeatailsApi.get('/getUserRegistry', async (req, res) => {
     try {
         const userId = extractUserIdFromRequest(req)
-
-        const response = await axios.post(API_END_POINTS.getUserRegistry, { wid: userId }, {
+        logInfo('Get user registry for', userId)
+        const response = await axios.post(API_END_POINTS.getUserRegistry, { userId }, {
             ...axiosRequestConfig,
         })
         res.status(response.status).send(response.data)
