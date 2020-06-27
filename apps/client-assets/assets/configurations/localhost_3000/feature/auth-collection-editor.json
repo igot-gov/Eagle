@@ -52,8 +52,7 @@
           "fit": [
             {
               "status": [
-                "Reviewed",
-                "InReview"
+                "Reviewed"
               ]
             }
           ]
@@ -118,13 +117,14 @@
       ],
       "allowCreation": true,
       "allowedCreationType": [
-        "resource"
-      ],
-      "searchFilter": {
-        "contentType": [
         "resource",
         "upload",
         "collection"
+      ],
+      "searchFilter": {
+        "contentType": [
+          "Collection",
+          "Resource"
         ]
       }
     },
@@ -149,14 +149,13 @@
       ],
       "allowCreation": true,
       "allowedCreationType": [
-        "resource"
+        "resource",
+        "upload"
       ],
       "searchFilter": {
         "contentType": [
-          "resource",
-     
-          "upload"
-          
+          "Collection",
+          "Resource"
         ]
       }
     },
