@@ -1964,13 +1964,13 @@
       "Course": [],
       "Knowledge Artifact": [],
       "Knowledge Board": [],
-      "Learning Path": [],
       "Resource": []
     },
     "notDisabledFor": {},
     "notMandatoryFor": {},
     "notShowFor": {
-      "Collection": []
+      "Collection": [],
+      "Learning Path": []
     },
     "showFor": {
       "Channel": [],
@@ -1978,7 +1978,6 @@
       "Course": [],
       "Knowledge Artifact": [],
       "Knowledge Board": [],
-      "Learning Path": [],
       "Resource": []
     },
     "type": "string"
