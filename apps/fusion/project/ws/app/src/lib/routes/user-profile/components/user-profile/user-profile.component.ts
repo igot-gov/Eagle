@@ -64,7 +64,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       gender: new FormControl('', [Validators.required]),
       maritalStatus: new FormControl('', [Validators.required]),
       motherTongue: new FormControl('', []),
-      knownLanguages: new FormControl([''], []),
+      knownLanguages: new FormControl([], []),
       residenceAddress: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
     })
@@ -187,7 +187,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.knownLanguagesInputRef.nativeElement.value = ''
     if (this.createUserForm.get('knownLanguages')) {
       // tslint:disable-next-line: no-non-null-assertion
-      this.createUserForm.get('knownLanguages')!.setValue(null)
+      // this.createUserForm.get('knownLanguages')!.setValue(null)
     }
   }
 
@@ -217,7 +217,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.knownLanguagesInputRef.nativeElement.value = ''
     if (this.createUserForm.get('knownLanguages')) {
       // tslint:disable-next-line: no-non-null-assertion
-      this.createUserForm.get('knownLanguages')!.setValue(null)
+      // this.createUserForm.get('knownLanguages')!.setValue(null)
     }
   }
 
@@ -245,7 +245,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 residenceAddress: data[0].residenceAddress,
                 category: data[0].category,
               })
-              this.selectedKnowLangs = data[0].knownLanguages
+              if (data[0].knownLanguages && data[0].knownLanguages.length) {
+                data[0].knownLanguages.map(lang => {
+                  if (lang) {
+                    this.selectedKnowLangs.push(lang)
+                  }
+                })
+              }
             }
           },
           (_err: any) => {
