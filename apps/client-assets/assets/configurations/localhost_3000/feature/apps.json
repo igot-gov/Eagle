@@ -1,25 +1,5 @@
 {
   "features": {
-    "feature_admin": {
-      "accessKey": "",
-      "icon": "supervisor_account",
-      "iconType": "mat-icon",
-      "id": "feature_admin",
-      "keywords": [
-        "admin",
-        "user",
-        "tenant"
-      ],
-      "name": "Create",
-      "permission": [
-        "admin"
-      ],
-      "show": true,
-      "status": "live",
-      "toolTip": "Admin",
-      "shortName": "admin",
-      "url": "/admin/tenant"
-    },
     "feature_FAQs": {
       "accessKey": "?",
       "icon": "chat",
