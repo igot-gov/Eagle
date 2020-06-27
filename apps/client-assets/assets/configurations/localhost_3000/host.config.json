@@ -62,7 +62,7 @@
         "clientId": "portal",
         "key": "ws-kc-token-storage",
         "realm": "wingspan",
-        "url": "https://igot.idc.tarento.com/auth"
+        "url": "https://dtsdtktcet40x.cloudfront.net/auth"
     },
     "locals": [
         {
