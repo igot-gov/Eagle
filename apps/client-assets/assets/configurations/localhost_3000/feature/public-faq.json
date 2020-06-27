@@ -6,11 +6,7 @@
         "contents": [
             {
                 "heading": "Unable to login to iGoT",
-                "value": "<p class='mat-body-1'>           <ng-container i18n='faq page panel one answer one section one'>             For using iGoT you have to register yourself </ng-container> </p> "
-            },
-            {
-                "heading": "Downtime",
-                "value": "<p class='mat-body-1' i18n='faq page panel one answer seven'>           Request you to kindly clear your cookies and cache of the desktop           browser once before trying.<br />           Also you can use Incognito mode or Private Browsing modes of Chrome           and IE.         </p>"
+                "value": "<p class='mat-body-1'><ng-container i18n>If you are logging into the iGOT account and you receive the error Invalid credentials. Please try again., this means that you're using incorrect login information. If you need to change your password, use the 'Forgot Password' link.</ng-container> </p> "
             }
         ]
     },

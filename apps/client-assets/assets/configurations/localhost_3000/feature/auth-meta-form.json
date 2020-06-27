@@ -1964,13 +1964,13 @@
       "Course": [],
       "Knowledge Artifact": [],
       "Knowledge Board": [],
-      "Learning Path": [],
       "Resource": []
     },
     "notDisabledFor": {},
     "notMandatoryFor": {},
     "notShowFor": {
-      "Collection": []
+      "Collection": [],
+      "Learning Path": []
     },
     "showFor": {
       "Channel": [],
@@ -1978,7 +1978,6 @@
       "Course": [],
       "Knowledge Artifact": [],
       "Knowledge Board": [],
-      "Learning Path": [],
       "Resource": []
     },
     "type": "string"
@@ -2919,27 +2918,16 @@
       ]
     },
     "disabledFor": {},
-    "mandatoryFor": {
-      "Channel": [],
-      "Collection": [],
-      "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
-      "Learning Path": [],
-      "Resource": []
-    },
+    "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
-      "Channel": [],
+    "notShowFor": {
       "Collection": [],
       "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "string"
   },
   "fileType": {
