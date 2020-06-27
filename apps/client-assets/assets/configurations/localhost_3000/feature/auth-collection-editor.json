@@ -31,7 +31,7 @@
       {
         "title": "Review",
         "event": "push",
-        "icon": "remove_red_eye",
+        "icon": "send",
         "conditions": {
           "fit": [
             {
