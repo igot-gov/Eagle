@@ -117,11 +117,7 @@
       ],
       "allowCreation": true,
       "allowedCreationType": [
-        "resource",
-        "web",
-        "upload",
-        "assessment",
-        "collection"
+        "resource"
       ],
       "searchFilter": {
         "contentType": [
@@ -151,10 +147,7 @@
       ],
       "allowCreation": true,
       "allowedCreationType": [
-        "resource",
-        "web",
-        "upload",
-        "assessment"
+        "resource"
       ],
       "searchFilter": {
         "contentType": [
