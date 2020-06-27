@@ -528,44 +528,49 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   storeData() {
-    const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
-    if (originalMeta && this.isEditEnabled) {
-      const expiryDate = this.contentForm.value.expiryDate
-      const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
-      const meta = <any>{}
-      if (this.canExpiry) {
-        currentMeta.expiryDate = `${
-          expiryDate
-            .toISOString()
-            .replace(/-/g, '')
-            .replace(/:/g, '')
-            .split('.')[0]
-          }+0000`
-      }
-      Object.keys(currentMeta).map(v => {
-        if (
-          JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
-          JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
-        ) {
-          if (
-            currentMeta[v as keyof NSContent.IContentMeta] ||
-            (this.authInitService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
-              currentMeta[v as keyof NSContent.IContentMeta] === false)
-          ) {
-            meta[v as keyof NSContent.IContentMeta] = currentMeta[v as keyof NSContent.IContentMeta]
-          } else {
-            meta[v as keyof NSContent.IContentMeta] = JSON.parse(
-              JSON.stringify(
-                this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                  originalMeta.contentType
-                  // tslint:disable-next-line: ter-computed-property-spacing
-                ][0].value,
-              ),
-            )
-          }
+    try {
+      const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
+      if (originalMeta && this.isEditEnabled) {
+        const expiryDate = this.contentForm.value.expiryDate
+        const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
+        const meta = <any>{}
+        if (this.canExpiry) {
+          currentMeta.expiryDate = `${
+            expiryDate
+              .toISOString()
+              .replace(/-/g, '')
+              .replace(/:/g, '')
+              .split('.')[0]
+            }+0000`
         }
-      })
-      this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
+        Object.keys(currentMeta).map(v => {
+          if (
+            JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
+            JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
+          ) {
+            if (
+              currentMeta[v as keyof NSContent.IContentMeta] ||
+              (this.authInitService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
+                currentMeta[v as keyof NSContent.IContentMeta] === false)
+            ) {
+              meta[v as keyof NSContent.IContentMeta] = currentMeta[v as keyof NSContent.IContentMeta]
+            } else {
+              meta[v as keyof NSContent.IContentMeta] = JSON.parse(
+                JSON.stringify(
+                  this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+                    originalMeta.contentType
+                    // tslint:disable-next-line: ter-computed-property-spacing
+                  ][0].value,
+                ),
+              )
+            }
+          }
+        })
+        this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
+      }
+    } catch (ex) {
+      this.snackBar.open("Please Save Parent first and refresh page.")
+
     }
   }
 
