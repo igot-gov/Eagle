@@ -672,7 +672,13 @@
     },
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
+    "notShowFor": {
+    "Channel": [],
+      "Collection": [],
+      "Course": [],
+      "Learning Path": [],
+      "Resource": []
+    },
     "showFor": {
       "Channel": [],
       "Collection": [],
@@ -1078,15 +1084,15 @@
     },
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
       "Knowledge Artifact": [],
       "Knowledge Board": [],
       "Learning Path": [],
-      "Resource": []
+      "Resource": []},
+    "showFor": {
     },
     "type": "string"
   },
