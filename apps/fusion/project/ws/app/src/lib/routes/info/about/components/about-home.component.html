@@ -6,11 +6,7 @@
 </mat-toolbar>
 
 <section class="about-content leading-relaxed" *ngIf="aboutPage">
-  <div
-    class="about-info ws-primary-tinted-50"
-    *ngIf="aboutPage?.banner"
-    [style.backgroundImage]="headerBanner"
-  >
+  <div class="about-info ws-primary-tinted-50" *ngIf="aboutPage?.banner" [style.backgroundImage]="headerBanner">
     <div class="about-info-bg header-synopsis">
       <div class="header-title">
         <h1 class="mat-display-2 margin-bottom-l">
@@ -24,25 +20,12 @@
           </h2>
 
           <div *ngIf="videoLink" class="overview-intro ws-mat-primary-lite-background">
-            <iframe
-              [src]="videoLink"
-              i18n-title
-              title="about-video"
-              allow="fullscreen"
-              class="about-video"
-              width="100%"
-            ></iframe>
+            <iframe [src]="videoLink" i18n-title title="about-video" allow="fullscreen" class="about-video"
+              width="100%"></iframe>
           </div>
         </div>
-        <a
-          mat-raised-button
-          *ngIf="aboutPage?.banner?.moreInfo"
-          type="button"
-          [href]="aboutPage?.banner?.moreInfo"
-          target="_blank"
-          color="primary"
-          i18n="about first section action button"
-          >Read More
+        <a mat-raised-button *ngIf="aboutPage?.banner?.moreInfo" type="button" [href]="aboutPage?.banner?.moreInfo"
+          target="_blank" color="primary" i18n="about first section action button">Read More
         </a>
       </div>
     </div>
@@ -70,10 +53,7 @@
         </p>
       </div>
     </div>
-    <div
-      class="text-center ws-mat-primary-background mat-toolbar mat-primary p-4"
-      *ngIf="aboutPage?.section2"
-    >
+    <div class="text-center ws-mat-primary-background mat-toolbar mat-primary p-4" *ngIf="aboutPage?.section2">
       <h1 class="mat-heading">
         {{ aboutPage?.section2?.description }}
       </h1>
@@ -110,10 +90,7 @@
         {{ aboutPage?.features?.description }}
       </p>
       <mat-accordion *ngIf="aboutPage?.features?.list.length>0">
-        <mat-expansion-panel
-          class="text-justify"
-          *ngFor="let key of objectKeys(aboutPage?.features?.list)"
-        >
+        <mat-expansion-panel class="text-justify" *ngFor="let key of objectKeys(aboutPage?.features?.list)">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ key }}</mat-panel-title>
           </mat-expansion-panel-header>
@@ -123,7 +100,7 @@
     </section>
     <mat-divider></mat-divider>
   </section>
-  <section class="container-margin" *ngIf="aboutPage?.section4">
+  <!-- <section class="container-margin" *ngIf="aboutPage?.section4">
     <div class="about-info-footer ws-primary-tinted-50" [style.backgroundImage]="footerBanner">
       <h1 class="mat-heading">
         {{ aboutPage?.section4.title }}
@@ -164,5 +141,5 @@
         </p>
       </div>
     </section>
-  </section>
+  </section> -->
 </section>
