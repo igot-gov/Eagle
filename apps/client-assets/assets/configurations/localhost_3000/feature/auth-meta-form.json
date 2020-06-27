@@ -2918,27 +2918,16 @@
       ]
     },
     "disabledFor": {},
-    "mandatoryFor": {
-      "Channel": [],
-      "Collection": [],
-      "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
-      "Learning Path": [],
-      "Resource": []
-    },
+    "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
-      "Channel": [],
+    "notShowFor": {
       "Collection": [],
       "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "string"
   },
   "fileType": {
