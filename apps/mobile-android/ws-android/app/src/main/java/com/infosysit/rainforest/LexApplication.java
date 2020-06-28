@@ -21,7 +21,7 @@ public class LexApplication extends Application {
         if (BuildConfig.FLAVOR.equalsIgnoreCase("dev")) {
             Constants.environmentType = "eagle";
         } else if (BuildConfig.FLAVOR.equalsIgnoreCase("prod")) {
-            Constants.environmentType = "igot";
+            Constants.environmentType = "dtsdtktcet40x";
         }
 
     }
