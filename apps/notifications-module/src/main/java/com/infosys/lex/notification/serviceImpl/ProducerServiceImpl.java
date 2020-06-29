@@ -15,11 +15,7 @@ Highly Confidential
 
 package com.infosys.lex.notification.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.kafka.common.network.InvalidReceiveException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +49,7 @@ public class ProducerServiceImpl implements ProducerService {
 		if (notificationEvent.getRootOrg() == null || notificationEvent.getRootOrg().isEmpty())
 			throw new InvalidReceiveException("rootOrg is mandatory");
 
-		kafkaProducer.send("notification_events", null, mapper.writeValueAsString(notificationEvent));
+		kafkaProducer.send("notification_events", UUID.randomUUID().toString(), mapper.writeValueAsString(notificationEvent));
 	}
 
 	@Override

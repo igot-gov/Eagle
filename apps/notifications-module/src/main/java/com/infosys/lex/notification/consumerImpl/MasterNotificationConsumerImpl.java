@@ -39,6 +39,9 @@ public class MasterNotificationConsumerImpl implements MasterNotificationConsume
 					"3" }) })
 	public void consumeNotificationEvent(ConsumerRecord<String, String> consumerRecord) throws Exception {
 
+		logger.info("Key: "+ consumerRecord.key() + ", Value:" +consumerRecord.value());
+		logger.info("Partition:" + consumerRecord.partition()+",Offset:"+consumerRecord.offset());
+
 		if (consumerUtilService.checkEventTimestamp(consumerRecord.timestamp())) {
 			String message = String.valueOf(consumerRecord.value());
 			NotificationEvent notificationEvent = new NotificationEvent();
