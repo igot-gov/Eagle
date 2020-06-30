@@ -144,6 +144,7 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 				String[] receiverEmails = (String[]) resp.get("receiverEmails");
 				for (Map<String, Object> userNotificationMode : userNotificationModes) {
 
+				    logger.info("** User notification mode: "+userNotificationMode.get("mode"));
 					if (userNotificationMode.get("mode").equals("email")) {
 
 						emailToBeSentAnyUser = true;
@@ -185,19 +186,25 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 				// when there is only one user for given recipient role of the event raised(No
 				// bucketing done based on org
 				// and language
-				emailProcessingServ.enqueueEmailNotificationForSingleUser(rootOrg, eventId, recipientRole,
+                logger.info("** User eventRecipientUserIdsForEmail: "+eventRecipientUserIdsForEmail);
+
+                emailProcessingServ.enqueueEmailNotificationForSingleUser(rootOrg, eventId, recipientRole,
 						eventRecipientUserIdsForEmail.get(0), recipients, usersInfoMap,
 						notificationEvent.getTagValues(), templateIdToOrgMap, orgDomainMap, targetDataMapping,
 						userIdConfiguredRecieverEmailMap, orgAppEmailMap, isEventRecieverConfigured);
 			}
 
 			else if (isEventRecieverConfigured) {
-				emailProcessingServ.enqueueEmailNotfificationForRecieverConfigedEvent(rootOrg, eventId, recipientRole,
+                logger.info("** User isEventRecieverConfigured: "+isEventRecieverConfigured);
+
+                emailProcessingServ.enqueueEmailNotfificationForRecieverConfigedEvent(rootOrg, eventId, recipientRole,
 						eventRecipientUserIdsForEmail, recipients, usersInfoMap, notificationEvent.getTagValues(),
 						templateIdToOrgMap, orgDomainMap, targetDataMapping, userIdConfiguredRecieverEmailMap,
 						orgAppEmailMap);
 			} else {
-				// sending email to all the users in given recipient role
+                logger.info("** User sending email to all the users in given recipient role");
+
+                // sending email to all the users in given recipient role
 				emailProcessingServ.enqueueEmailNotification(rootOrg, eventId, recipientRole,
 						eventRecipientUserIdsForEmail, recipients, usersInfoMap, notificationEvent.getTagValues(),
 						templateIdToOrgMap, orgDomainMap, targetDataMapping, orgAppEmailMap);

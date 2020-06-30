@@ -106,6 +106,7 @@ public class UserNotificationsSeviceImpl implements UserNotificationsService {
 	public void sendInAppNotifications(NotificationEvent notificationEvent,
 			List<InAppNotificationRequest> inAppRequests) {
 
+		logger.info("inAppRequests notification event: ");
 		Map<String, String> classificationPerRecipient = new HashMap<>();
 
 		classificationRepo
@@ -122,6 +123,8 @@ public class UserNotificationsSeviceImpl implements UserNotificationsService {
 			String targetData = "";
 			if (notificationEvent.getTargetData() != null && !notificationEvent.getTargetData().isEmpty()) {
 				try {
+					logger.info(mapper.writeValueAsString(inAppRequest));
+
 					targetData = mapper.writeValueAsString(notificationEvent.getTargetData());
 				} catch (JsonProcessingException e) {
 					logger.error("could not process target data " + notificationEvent.getTargetData().toString());
@@ -135,6 +138,13 @@ public class UserNotificationsSeviceImpl implements UserNotificationsService {
 					inAppRequest.getRecipientRole(), new Date(), false, null, targetData);
 
 			userNotificationDigests.add(userNotification);
+			try{
+				logger.info(mapper.writeValueAsString(userNotificationDigests));
+
+			}catch (JsonProcessingException e){
+				logger.error("could not print userNotificationDigests: " + userNotificationDigests.toString());
+			}
+
 		}
 		userNotificationRepo.saveAll(userNotificationDigests);
 	}
