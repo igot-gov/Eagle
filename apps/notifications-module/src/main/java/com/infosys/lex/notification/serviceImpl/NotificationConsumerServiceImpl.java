@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -122,6 +124,8 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 
 			String recipientRole = recipient.getKey();
 			List<String> recipientsUserIds = new ArrayList<>(recipient.getValue());
+            logger.info("** recipientRole: "+recipientRole);
+            logger.info("** recipientsUserIds: "+recipientsUserIds);
 			boolean emailToBeSentAnyUser = false;
 			List<String> eventRecipientUserIdsForEmail = new ArrayList<String>();
 			boolean isEventRecieverConfigured = false;
@@ -139,6 +143,14 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 				// getting all the notification modes for this user for given recipient role
 				List<Map<String, Object>> userNotificationModes = (List<Map<String, Object>>) resp
 						.get("configuredModes");
+                try{
+                    logger.info("** All User notification Config: "+new ObjectMapper().writeValueAsString(tenantNotificationConfigMaps));
+                    logger.info("** All TenantConfiguredModesForUser: "+new ObjectMapper().writeValueAsString(resp));
+
+
+                }catch (JsonProcessingException e){
+                    logger.error("could not print userNotificationDigests: " + userNotificationModes);
+                }
 
 				isEventRecieverConfigured = (boolean) resp.get("isEventRecieverConfigured");
 				String[] receiverEmails = (String[]) resp.get("receiverEmails");
@@ -359,6 +371,7 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 		boolean isAnyModeEnabledByTenant = false;
 		for (Map<String, Object> tenantNotificationConfigMap : tenantNotificationConfigMaps) {
 			String tenantMode = (String) tenantNotificationConfigMap.get("mode");
+			logger.info("tenantMode :: "+tenantMode);
 			// tenantMode
 			if (userOrgs.contains(tenantNotificationConfigMap.get("org"))
 					&& tenantNotificationConfigMap.get("recipient").equals(recipientRole)) {
