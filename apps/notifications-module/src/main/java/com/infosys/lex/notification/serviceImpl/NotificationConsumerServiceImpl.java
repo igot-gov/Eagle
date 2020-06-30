@@ -80,15 +80,16 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 	@Override
 	public void consumeNotificationEvent(NotificationEvent notificationEvent) {
 
+		logger.info("** recipients: "+notificationEvent.getRecipients().toString());
+
 		String rootOrg = notificationEvent.getRootOrg();
 		Map<String, String> orgDomainMap = consumerUtilServ.getOrgDomainMap(rootOrg);
+		logger.info("** orgDomainMap: "+orgDomainMap.toString());
+
 		String eventId = notificationEvent.getEventId();
 
 
 		Map<String, List<String>> recipients = notificationEvent.getRecipients();
-        logger.info("** recipients: "+notificationEvent.getRecipients());
-        System.out.println("** recipients: "+notificationEvent.getRecipients());
-
         //update recipients map add manager if manager recipientRole exists for that event
 		this.addManagerRecipientUsersIfExists(rootOrg, recipients, eventId);
 
@@ -116,6 +117,16 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 				.getActivatedModesForEventAndRootOrgAndOrgs(rootOrg, new ArrayList<>(distinctOrgs), eventId);
 
 		List<InAppNotificationRequest> inAppRequests = new ArrayList<>();
+
+		try{
+			logger.info("** All User notification Config: "+new ObjectMapper().writeValueAsString(tenantNotificationConfigMaps));
+			logger.info("** orgAppEmailMap: "+new ObjectMapper().writeValueAsString(orgAppEmailMap));
+			logger.info("** usersInfoMap: "+new ObjectMapper().writeValueAsString(usersInfoMap));
+
+
+		}catch (JsonProcessingException e){
+			logger.error("could not print all config: ");
+		}
 
 		for (Map.Entry<String, List<String>> recipient : recipients.entrySet()) {
 
@@ -148,7 +159,6 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
                 try{
                     logger.info("** All User notification Config: "+new ObjectMapper().writeValueAsString(tenantNotificationConfigMaps));
                     logger.info("** All TenantConfiguredModesForUser: "+new ObjectMapper().writeValueAsString(resp));
-                    System.out.println("** All TenantConfiguredModesForUser: "+new ObjectMapper().writeValueAsString(resp));
 
 
 
