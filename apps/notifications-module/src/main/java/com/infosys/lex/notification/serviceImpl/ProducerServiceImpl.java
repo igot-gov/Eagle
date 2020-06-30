@@ -49,7 +49,7 @@ public class ProducerServiceImpl implements ProducerService {
 		if (notificationEvent.getRootOrg() == null || notificationEvent.getRootOrg().isEmpty())
 			throw new InvalidReceiveException("rootOrg is mandatory");
 
-		kafkaProducer.send("notification_events", UUID.randomUUID().toString(), mapper.writeValueAsString(notificationEvent));
+		kafkaProducer.send("notification_events", null, mapper.writeValueAsString(notificationEvent));
 	}
 
 	@Override
