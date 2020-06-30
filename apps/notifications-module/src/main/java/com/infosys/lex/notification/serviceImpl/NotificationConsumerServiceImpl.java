@@ -86,8 +86,10 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
 
 
 		Map<String, List<String>> recipients = notificationEvent.getRecipients();
-		
-		//update recipients map add manager if manager recipientRole exists for that event
+        logger.info("** recipients: "+notificationEvent.getRecipients());
+        System.out.println("** recipients: "+notificationEvent.getRecipients());
+
+        //update recipients map add manager if manager recipientRole exists for that event
 		this.addManagerRecipientUsersIfExists(rootOrg, recipients, eventId);
 
 		// getting target url for email if not found in the request body
@@ -146,6 +148,8 @@ public class NotificationConsumerServiceImpl implements NotificationConsumerServ
                 try{
                     logger.info("** All User notification Config: "+new ObjectMapper().writeValueAsString(tenantNotificationConfigMaps));
                     logger.info("** All TenantConfiguredModesForUser: "+new ObjectMapper().writeValueAsString(resp));
+                    System.out.println("** All TenantConfiguredModesForUser: "+new ObjectMapper().writeValueAsString(resp));
+
 
 
                 }catch (JsonProcessingException e){
