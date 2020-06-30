@@ -49,7 +49,7 @@ public class ProducerServiceImpl implements ProducerService {
 		if (notificationEvent.getRootOrg() == null || notificationEvent.getRootOrg().isEmpty())
 			throw new InvalidReceiveException("rootOrg is mandatory");
 
-		kafkaProducer.send("notification_events", null, mapper.writeValueAsString(notificationEvent));
+		kafkaProducer.send("notification_events", UUID.randomUUID().toString(), mapper.writeValueAsString(notificationEvent));
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class ProducerServiceImpl implements ProducerService {
 
 		replaceUserIdsWithEmail(emailEvent);
 
-		kafkaProducer.send("email_notification_events", null, mapper.writeValueAsString(emailEvent));
+		kafkaProducer.send("email_notification_events", UUID.randomUUID().toString(), mapper.writeValueAsString(emailEvent));
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ProducerServiceImpl implements ProducerService {
 		if (pushEvent.getRootOrg() == null || pushEvent.getRootOrg().isEmpty())
 			throw new InvalidReceiveException("rootOrg is mandatory");
 
-		kafkaProducer.send("push_notification_events", null, mapper.writeValueAsString(pushEvent));
+		kafkaProducer.send("push_notification_events", UUID.randomUUID().toString(), mapper.writeValueAsString(pushEvent));
 	}
 
 	private void replaceUserIdsWithEmail(EmailRequest emailEvent) {
