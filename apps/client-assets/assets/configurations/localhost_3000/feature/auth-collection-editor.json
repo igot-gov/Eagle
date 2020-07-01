@@ -31,13 +31,12 @@
       {
         "title": "Review",
         "event": "push",
-        "icon": "send",
+        "icon": "remove_red_eye",
         "conditions": {
           "fit": [
             {
               "status": [
                 "Review",
-                "InReview",
                 "QualityReview"
               ]
             }
@@ -52,7 +51,8 @@
           "fit": [
             {
               "status": [
-                "Reviewed"
+                "Reviewed",
+                "InReview"
               ]
             }
           ]
@@ -118,7 +118,9 @@
       "allowCreation": true,
       "allowedCreationType": [
         "resource",
+        "web",
         "upload",
+        "assessment",
         "collection"
       ],
       "searchFilter": {
@@ -150,7 +152,9 @@
       "allowCreation": true,
       "allowedCreationType": [
         "resource",
-        "upload"
+        "web",
+        "upload",
+        "assessment"
       ],
       "searchFilter": {
         "contentType": [

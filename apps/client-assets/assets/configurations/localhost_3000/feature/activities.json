@@ -41,8 +41,8 @@
         },
         {
             "id": "4",
-            "title": "Catalog",
-            "description": "Explore the Catalog",
+            "title": "Browse Courses",
+            "description": "Explore the contents",
             "isNew": true,
             "clickUrl": "/page/explore",
             "icon": "/assets/icons/mingym.svg",

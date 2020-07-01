@@ -1,5 +1,25 @@
 {
   "features": {
+    "feature_admin": {
+      "accessKey": "",
+      "icon": "supervisor_account",
+      "iconType": "mat-icon",
+      "id": "feature_admin",
+      "keywords": [
+        "admin",
+        "user",
+        "tenant"
+      ],
+      "name": "Create",
+      "permission": [
+        "admin"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Admin",
+      "shortName": "admin",
+      "url": "/admin/tenant"
+    },
     "feature_FAQs": {
       "accessKey": "?",
       "icon": "chat",
@@ -22,25 +42,25 @@
       "url": "/app/info/faq",
       "shortName": "Help"
     },
-    "feature_admin": {
+    "feature_blogs": {
       "accessKey": "",
-      "icon": "supervisor_account",
+      "icon": "insert_drive_file",
       "iconType": "mat-icon",
-      "id": "feature_admin",
+      "id": "feature_blogs",
       "keywords": [
-        "admin",
-        "user",
-        "tenant"
+        "blogs",
+        "leader blogs"
       ],
-      "name": "Create",
+      "name": "Blogs",
       "permission": [
-        "admin"
+        "BLOGS"
       ],
       "show": true,
       "status": "live",
-      "toolTip": "Admin",
-      "shortName": "admin",
-      "url": "/admin/tenant"
+      "toolTip": "Blogs",
+      "url": "/app/social/blogs",
+      "description": "Read and write big ideas and important stories",
+      "shortName": "Blogs"
     },
     "feature_Terms&Condition": {
       "accessKey": "*",
@@ -539,16 +559,16 @@
     },
     {
       "featureIds": [
-        "feature_admin"
+        "feature_blogs"
       ],
       "icon": "",
       "iconType": "none",
-      "id": "group_admin",
+      "id": "group_communications",
       "keywords": [
-        "admin"
+        "communication"
       ],
-      "name": "Admin",
-      "toolTip": "Admin",
+      "name": "Communications",
+      "toolTip": "Communications",
       "hasRole": []
     },
     {

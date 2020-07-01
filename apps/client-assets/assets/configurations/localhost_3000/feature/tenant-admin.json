@@ -47,11 +47,7 @@
         "admin": "Overall application admin. Can perform admin activities and also encompasses all other roles",
         "reviewer": "Can only review contents assigned to them through authoring tool",
         "publisher": "Can only publish contents assigned to them through authoring tool",
-        "platform-feedback-admin": "Can see and respond to feedback given at Wingspan platform level",
         "editor": "Can edit, review and publish all contents - including those created by others",
-        "content-creator": "Can create content - resources, modules, courses, programs through authoring tool",
-        "register-admin": "Can take care of registration workflow for content sources that require registration (ex: Skillsoft, Pluralsight, etc.)",
-        "content-feedback-admin": "Can see and respond to feedback given at Wingspan content level",
-        "analytics": "Can access learning analytics section of Wingspan"
+        "content-creator": "Can create content - resources, modules, courses, programs through authoring tool"
     }
 }
