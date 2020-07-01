@@ -1,6 +1,6 @@
 import cassandraDriver from 'cassandra-driver'
 import KcAdminClient from 'keycloak-admin'
-import {RequiredActionAlias} from 'keycloak-admin/lib/defs/requiredActionProviderRepresentation'
+import { RequiredActionAlias } from 'keycloak-admin/lib/defs/requiredActionProviderRepresentation'
 import request from 'request'
 import { CONSTANTS } from './env'
 import { logError, logInfo } from './logger'
@@ -187,7 +187,7 @@ export async function sendActionsEmail(userId: string) {
         actions: [RequiredActionAlias.VERIFY_EMAIL],
         clientId: 'portal',
         id: userId,
-        lifespan: 43200,
+        lifespan: 2592000,
         redirectUri: CONSTANTS.HTTPS_HOST,
     })
         // tslint:disable-next-line: no-any
