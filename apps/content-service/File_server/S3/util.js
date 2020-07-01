@@ -15,7 +15,8 @@ const request = require('request');
 const fse = require('fs-extra');
 let { getVideoDurationInSeconds } = require('get-video-duration');
 const archiver = require('archiver');
-const unzip = require('unzip');
+// const unzip = require('unzip');
+const unzip = require('unzip-stream');
 const fs = require('fs');
 
 // File imports

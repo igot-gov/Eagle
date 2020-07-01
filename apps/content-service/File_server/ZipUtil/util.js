@@ -11,7 +11,8 @@
 const fs = require('fs');
 const fse = require('fs-extra');
 const archiver = require('archiver');
-const unzip = require('unzip');
+// const unzip = require('unzip');
+const unzip = require('unzip-stream');
 const log = require('../Logger/log');
 
 function zipTheDirectory(sourcePath, destinationPath, callback) {
