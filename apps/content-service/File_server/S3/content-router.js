@@ -15,9 +15,16 @@ const express = require('express');
 const request = require('request');
 const avUtil = require('../AvUtil/util');
 const utility = require('./util');
-const { errors, success } = require('./status-codes');
+const {
+  errors,
+  success
+} = require('./status-codes');
 const appConfig = require('../ConfigReader/loader');
-const { getBucketsFromKey, getCDNFromRootOrg, CDN_TYPES } = require('./org-util');
+const {
+  getBucketsFromKey,
+  getCDNFromRootOrg,
+  CDN_TYPES
+} = require('./org-util');
 // Logger
 const log = require('../Logger/log');
 // Busboy for file upload
@@ -130,7 +137,9 @@ async function checkPath(key, res, bucket) {
 
 router.head('/directory/:location', pathValidation, (req, res) => {
   let key = `${contentRoot}/${req.params.location}`;
-  const { authoringBucket } = getBucketsFromKey(key);
+  const {
+    authoringBucket
+  } = getBucketsFromKey(key);
 
   checkPath(key, res, authoringBucket);
 });
@@ -140,7 +149,9 @@ router.head('/directory/:location', pathValidation, (req, res) => {
  */
 router.head('/images-directory/:location', pathValidation, (req, res) => {
   let key = `${contentRoot}/${req.params.location}`;
-  const { imageAuthoringBucket } = getBucketsFromKey(key);
+  const {
+    imageAuthoringBucket
+  } = getBucketsFromKey(key);
 
   checkPath(key, res, imageAuthoringBucket);
 });
@@ -298,9 +309,9 @@ router.post('/upload/:location', pathValidation, [increaseTimeout(5 * 60 * 1000)
       if (
         utility.supportedETSExtensions.includes(
           path.extname(fileName).toLowerCase()
-        )
-        && (!key.includes('%2Fweb-hosted%2F') && !key.includes('/web-hosted/'))
-        && (!key.includes('%2Fmeta-assets%2F') && !key.includes('/meta-assets/'))
+        ) &&
+        (!key.includes('%2Fweb-hosted%2F') && !key.includes('/web-hosted/')) &&
+        (!key.includes('%2Fmeta-assets%2F') && !key.includes('/meta-assets/'))
       ) {
         let loc = `${appConfig.getProperty('resource_directory')}/${req.params.location}/${fileName}`;
 
@@ -409,9 +420,9 @@ function transformOrCreateAndUploadToS3(req, res, decodeType) {
         case 'urldecode':
           text = decodeURIComponent(text);
           break;
-        // TODO
-        /*case 'unescapeHtml':
-          break;*/
+          // TODO
+          /*case 'unescapeHtml':
+            break;*/
         case 'base64':
           text = Buffer.from(text, 'base64').toString('utf-16le');
           /*const sBinaryString = Buffer.from(text, 'base64').toString('binary');
@@ -492,9 +503,9 @@ router.get('/download/:location', pathValidation, (req, res) => {
   let key = req.params.location;
 
   // Path is a video and type is not main or  then serve from EC2
-  if (!req.query.type
-    && !key.includes('/web-hosted/')
-    && utility.supportedETSExtensions.includes(path.extname(key).toLowerCase())) {
+  if (!req.query.type &&
+    !key.includes('/web-hosted/') &&
+    utility.supportedETSExtensions.includes(path.extname(key).toLowerCase())) {
     console.log('Streaming from ' + path.join(appConfig.getProperty('resource_directory'), key));
     // fs.createReadStream(path.join(appConfig.getProperty('resource_directory'), key )).pipe(res);
 
@@ -585,8 +596,7 @@ function srcPathValidation(req, res, next) {
       let error = errors.BadRequest(`source or destination is invalid in the params`);
       res.status(error.code).send(error);
     }
-  }
-  catch (err) {
+  } catch (err) {
     log.error(err);
     res.send(errors.InternalServerError());
   }
@@ -682,16 +692,16 @@ router.post('/move/:source/to/:destination', srcPathValidation, (req, res) => {
 
   if (['authoring', 'main'].includes(type.toLowerCase()))
     utility
-      .moveContent(source, destination, type, incf)
-      .then(result => {
-        log.info(result.message);
-        res.status(result.code).send(result);
-      })
-      .catch(error => {
-        if (error.message && error.code !== 500)
-          log.error(error.message);
-        res.status(error.code).send(error);
-      });
+    .moveContent(source, destination, type, incf)
+    .then(result => {
+      log.info(result.message);
+      res.status(result.code).send(result);
+    })
+    .catch(error => {
+      if (error.message && error.code !== 500)
+        log.error(error.message);
+      res.status(error.code).send(error);
+    });
   else {
     let response = errors.BadRequest(`Type does not exist`);
     res.status(response.code).send(response);
@@ -826,8 +836,7 @@ router.post('/pullback/:location', pathValidation, (req, res) => {
 */
 
 // Change this to get from PID service
-const rootOrgToDomain = {
-};
+const rootOrgToDomain = {};
 
 
 // Set cookie for images
@@ -854,15 +863,17 @@ router.post('/cookie/', (req, res) => {
     if (!uuid || !contentId) res.send(errors.BadRequest(`uuid and contentId are required`));
     // Set the cookie
     else utility.setCookieOnResource(uuid, contentId, cookiePolicy, res);
-  }
-  catch (err) {
+  } catch (err) {
     log.error(err);
     res.send(errors.InternalServerError());
   }
 });
 
 router.get('/invalidate/:distributionId/:path', (req, res) => {
-  let { distributionId, path } = req.params;
+  let {
+    distributionId,
+    path
+  } = req.params;
 
   if (!distributionId || !path) {
     res.send(errors.BadRequest(`Distribution Id or Path not present`));
@@ -952,7 +963,10 @@ router.get('/video_transcoding_status/:location', (req, res) => {
 // Getting the status for inhouse transcoding
 
 router.get('/video-transcoding/status/:lexId', (req, res) => {
-  request({ json: true, url }, (err, response, body) => {
+  request({
+    json: true,
+    url
+  }, (err, response, body) => {
     if (err) {
       return res.status(500).send({
         msg: 'Error while fetching the status',
@@ -1019,7 +1033,8 @@ router.post('/copy/:sourceFolder/:destinationFolder', (req, res) => {
 });
 
 router.post('/upload-zip/:location', [increaseTimeout(5 * 60 * 1000)], (req, res) => {
-  const key = contentRoot + '/' + req.params.location.replaceAll('%2F', '/');
+  const key = (contentRoot + '/' + req.params.location.replaceAll('%2F', '/'))
+    .replace("content-store//", "content-store/");
 
   req.pipe(req.busboy);
   req.busboy.on('file', async function (_, file, fileName) {
