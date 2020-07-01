@@ -1236,70 +1236,99 @@ async function archiveAndUpload(location, root) {
 function archiveS3Location(bucket, s3Location, outputFileName) {
   return new Promise(async (resolve, reject) => {
     try {
+      console.log("archiveS3Location init");
+      
       s3Location = s3Location.replaceSlashes();
+      console.log("archiveS3Location=>>",s3Location);
 
       // Check if the directory being archived is a lexid or not
       if (
         !s3Location.includes('lex_')
         && !s3Location.includes('do_')
       ) {
+        console.log("Error: lex_ or do_ not in s3 path xxxxxxxxxxxxxxxxxxxxx");
         throw errors.BadRequest(`You can only archive at content level`);
       } else if (
         !path.basename(s3Location).includes('lex_')
         && !path.basename(s3Location).includes('do_')
       ) {
+        console.log("Error: lex_ or do_ in s3 path xxxxxxxxxxxxxxxxxxxxx");
         throw errors.BadRequest(`You can only zip content at lex_id folder`);
       } else {
         // Directory on the server that will temporarily contain the zip file
+        console.log("Directory on the server that will temporarily contain the zip file");        
         let temp = appConfig.getProperty('WEB_HOST_TEMP_DIR');
-
+        console.log("temp=================>>",temp);
         // Ensuring that the zipped directory exists before creating the file
+        console.log("Ensuring that the zipped directory exists before creating the file");
         fse.ensureDirSync(temp);
+        console.log("fse.ensureDirSync(temp): Passed");
 
         // Check if the content exists
+        console.log("Check if the content exists");
+        console.log("bucket, s3Location",bucket, s3Location);
+        
         let exists = await helper.exists(bucket, s3Location);
+        console.log("Check if the content exists: Passed=>", exists);
 
         // Return a 404 if content not found
         if (!exists) {
+          console.log("Content not found @bucket and s3",bucket, s3Location);
+          
           throw errors.NotFound(`Content not found`);
         }
         else {
+          console.log("content exist we are in Else now");
+          console.log("temp==========>",temp);       
+          console.log("outputFileName==============>",outputFileName);       
+          
           let zipFile = `${temp}/${outputFileName}`;
+          console.log("Create a write stream to write to the server s3Location");          
           // Create a write stream to write to the server s3Location
           let writeStream = fs.createWriteStream(zipFile);
 
           console.log('Zip file location is: ', zipFile);
 
           // Initialize the archiver
+          console.log("Initialize the archiver");          
           let archive = archiver('zip', {
             zlib: { level: 9 }
           });
+          console.log("archiver Initialized");
 
           // Archiver warning handler
           archive.on('warning', function (err) {
+            console.log("Throw =>archiver Onwarning", err);
             log.warn(err);
             throw errors.InternalServerError();
           });
 
           // Archiver error handler
           archive.on('error', function (err) {
+            console.log("Throw =>archiver OnError", err);
+
             log.error(err);
             throw errors.InternalServerError();
           });
 
           archive.on('data', () => { });
 
+          console.log("Get all the content in the lex_id");
+          
           // Get all the content in the lex_id
           if (!s3Location.endsWith('/')) {
             s3Location += '/';
           }
+          console.log("s3Location====>",s3Location);
+          console.log("bucket===>",bucket)
           let data = await helper.listObjectsByPath(bucket, s3Location);
           let { Contents, KeyCount } = data;
-
+          console.log("data ===> await passed with keyCount", KeyCount)
           // Pipe the archiver with the writestream
           archive.pipe(writeStream);
-
+          console.log("archive.pipe(writeStream) : Done")
           // Iterate through all the contents of lex id and add them to the archiver
+          console.log("Iterate through all the contents of lex id and add them to the archiver")
           for (let i = 0; i < KeyCount; i++) {
             let { Key } = Contents[i];
 
@@ -1315,22 +1344,25 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
               }
             }
           }
-
+          console.log("Run the archiver");
           // Run the archiver
           archive.finalize();
-
+          console.log("Run the archiver: finished");
           // When the writestream has closed, upload the content to S3 in the ecar_files folder of the lex_id
           writeStream.on('close', () => {
+            console.log("writeStream.on('close') called")
             resolve(zipFile);
           });
 
           // TODO
-          // writeStream.on('error', () => {
-          //   reject();
-          // });
+          writeStream.on('error', (error) => {
+            console.log("writeStream.on('error') called")
+            reject(error);
+          });
         }
       }
     } catch (e) {
+      console.log("Error in archiveS3Location");      
       console.error(e);
       reject(e);
     }
