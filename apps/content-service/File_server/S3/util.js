@@ -1187,12 +1187,16 @@ async function getKey(url) {
 async function archiveAndUpload(location, root) {
   return new Promise(async (resolve, reject) => {
     try {
+      console.log("step 1");
       const { authoringBucket } = getBucketsFromKey(location);
+      console.log("getBucketsFromKey Passed");
       const outputFileName = `${path.basename(location)}.zip`;
+      console.log(`${path.basename(location)}.zip ======================> Path`);
       let outputArchiveFilePath = await archiveS3Location(authoringBucket, location, outputFileName);
-
+      console.log("outputArchiveFilePath ===================>",outputArchiveFilePath);
       // Getting the size of the file to be stored in the download information.
       let stats = fs.statSync(outputArchiveFilePath);
+      console.log("stats ===================>",stats);
       let size;
       if (stats) {
         size = stats.size;
