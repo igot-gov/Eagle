@@ -49,9 +49,9 @@ const keysBucket = appConfig.getProperty('keys_bucket');
 
 // Supported extensions by TS (Transcoding service), was previously called ETS(Amazon Elastic Transcoder Service)
 const supportedETSExtensions = [
-  '.mp4', '.avi', '.webm', '.ogv', // video extensions
+  '.avi', '.webm', '.ogv', // video extensions
   // Audio extensions not supported for inhouse transcoding
-  // '.wav', '.mp3', '.flac', '.oga', '.ogg' // audio extensions
+  //'mp4' '.wav', '.mp3', '.flac', '.oga', '.ogg' // audio extensions
 ];
 
 const audioExtensions = [
