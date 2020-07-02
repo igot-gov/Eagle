@@ -2,7 +2,7 @@ import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@ang
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Router } from '@angular/router'
-import { NsContent } from '@ws-widget/collection'
+import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
@@ -32,6 +32,7 @@ export class HtmlComponent implements OnInit, OnChanges {
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
     // private http: HttpClient,
+    private contentSvc: WidgetContentService,
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
@@ -39,8 +40,14 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     // this.mobAppSvc.simulateMobile()
+    // this.setcookies()
   }
 
+  // async setcookies() {
+  //   if (this.htmlContent && this.htmlContent.artifactUrl && (this.htmlContent.artifactUrl.indexOf('/content-store/') > -1)) {
+  //     return await this.contentSvc.setS3Cookie(this.htmlContent.identifier || '').toPromise()
+  //   }
+  // }
   ngOnChanges() {
     this.isIntranetUrl = false
     this.progress = 100

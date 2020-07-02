@@ -569,7 +569,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
-      this.snackBar.open("Please Save Parent first and refresh page.")
+      this.snackBar.open('Please Save Parent first and refresh page.')
 
     }
   }
@@ -1079,7 +1079,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         )
       })
     }
-    ///resourceType
+    // resourceType
     this.contentForm.controls.resourceType.valueChanges.subscribe(() => {
       this.contentForm.controls.categoryType.setValue(this.contentForm.controls.resourceType.value)
     })

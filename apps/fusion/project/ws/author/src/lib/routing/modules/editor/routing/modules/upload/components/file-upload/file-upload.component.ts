@@ -150,7 +150,7 @@ export class FileUploadComponent implements OnInit {
       preview: false,
       url: '',
     }
-    const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
+    const fileName = file.name.replace(/[^A-Za-z0-9_.]/g, '')
     if (
       !fileName.toLowerCase().endsWith('.pdf') &&
       !fileName.toLowerCase().endsWith('.zip') &&
@@ -266,7 +266,7 @@ export class FileUploadComponent implements OnInit {
     formdata.append(
       'content',
       this.file as Blob,
-      (this.file as File).name.replace(/[^A-Za-z0-9.]/g, ''),
+      (this.file as File).name.replace(/[^A-Za-z0-9_.]/g, ''),
     )
     this.loaderService.changeLoad.next(true)
     this.uploadService
@@ -289,10 +289,8 @@ export class FileUploadComponent implements OnInit {
           this.canUpdate = false
           let url = ''
           if (this.mimeType === 'application/html') {
-            url = `${document.location.origin}/content-store/
-              ${this.accessService.rootOrg}/${this.accessService.org}/Public/
-              ${this.currentContent}/web-hosted/
-              ${this.fileUploadCondition.url}`
+            // tslint:disable-next-line:max-line-length
+            url = `${document.location.origin}/content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
           } else {
             url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
           }

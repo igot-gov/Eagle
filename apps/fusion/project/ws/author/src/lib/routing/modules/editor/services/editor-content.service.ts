@@ -55,7 +55,7 @@ export class EditorContentService {
           if (children[j] && children[j]['identifier'] && children[j]['identifier'] === id) {
             returnVal = children[j]
           } else if (children[j] && children[j].children && children[j].children.length > 0) {
-            let subChildrens = children[j].children
+            const subChildrens = children[j].children
             for (let k = 0; k <= subChildrens.length; k += 1) {
               if (subChildrens[k] && subChildrens[k].identifier === id) {
                 returnVal = subChildrens[k]

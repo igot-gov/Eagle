@@ -130,7 +130,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       case 'rejected':
         return ['Draft']
       case 'inreview':
-        return ['InReview', 'QualityReview'] //Reviewed
+        return ['InReview', 'QualityReview'] // Reviewed
       case 'review':
         return ['InReview']
       case 'published':
