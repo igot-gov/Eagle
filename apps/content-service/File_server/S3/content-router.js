@@ -841,6 +841,7 @@ const rootOrgToDomain = {};
 
 // Set cookie for images
 router.post('/cookie/images', (req, res) => {
+  console.log("/cookie/images ===> called");  
   const orgName = rootOrgToDomain[req.headers.host] || appConfig.getProperty('default_images_org');
   if (!orgName) {
     console.error(`The domain ${req.headers.host} does not have an ROOT ORG mapped`);
@@ -855,6 +856,8 @@ router.post('/cookie/images', (req, res) => {
 
 // Set cookie for content
 router.post('/cookie/', (req, res) => {
+  console.log("Set cookie for content");
+  
   try {
     let uuid = req.body.uuid;
     let contentId = req.body.contentId;
