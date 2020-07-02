@@ -930,9 +930,12 @@ router.post('/zip/:location', (req, res) => {
 
 router.get('/download-zip/:bucketName/:location', async (req, res) => {
   try {
+    console.log("download-zip : called");
     const zipFileLocation = await utility.archiveS3Location(req.params.bucketName, `${contentRoot}/${req.params.location}`, `${new Date().getTime()}.zip`);
     res.download(zipFileLocation, (err) => {
       if (err) {
+        console.log("Could not send the file for download", err);
+
         throw new Error('Could not send the file for download');
       }
       fs.unlinkSync(zipFileLocation);
