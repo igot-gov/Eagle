@@ -54,6 +54,8 @@ router.post('/content/setCookie', function (req, res) {
 
 // Set cookie on the organization level
 router.post('/content/setCookie/:organization', (req, res) => {
+    console.log('/content/setCookie/:organization : called');
+    
     let organization = req.params.organization;
     console.log(" Set cookie on the organization level=====>", organization);
 
@@ -87,6 +89,7 @@ router.post('/content/setCookie/:organization', (req, res) => {
 
 // Set cookie on the lex id level
 router.post('/content/setCookie/:organization/:contentId', (req, res) => {
+    console.log("Set cookie on the lex id level : called====>");    
     let organization = req.params.organization;
     let lexId = req.params.contentId;
 

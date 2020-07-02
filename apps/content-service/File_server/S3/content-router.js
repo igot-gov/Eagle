@@ -850,7 +850,9 @@ router.post('/cookie/images', (req, res) => {
       msg: `Requests domain ${req.headers.host} does not have any ROOT_ORG entry to set the cookie`,
     });
   }
+  console.log("cookiePath==========================================");  
   const cookiePath = `${getCDNFromRootOrg(CDN_TYPES.images, orgName)}/${utility.imagesBehaviourRoute}/${orgName}/*`;
+  console.log("cookiePath==========================================>",cookiePath);  
   utility.setCookie(cookiePath, res);
 });
 
