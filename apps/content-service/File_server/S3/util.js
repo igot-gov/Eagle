@@ -683,7 +683,7 @@ async function pullback(key) {
 Logic to set cookie for Cloudfront authentication
 */
 function setCookie(path, res) {
-  console.log("setCookie1 Called");
+  console.log("setCookie1 Called===>",path);
   
   let cookies = helper.getCFCookies(path);
   // Set the cookies
