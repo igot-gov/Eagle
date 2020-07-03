@@ -1233,24 +1233,24 @@ async function archiveAndUpload(location, root) {
     try {
       console.log("step 1");
       const {
-        authoringBucket
+        authoringBucket,mainBucket
       } = getBucketsFromKey(location);
-      console.log("getBucketsFromKey Passed", authoringBucket);
+      console.log("getBucketsFromKey Passed", mainBucket);
       const outputFileName = `${path.basename(location)}.zip`;
       console.log(`${path.basename(location)}.zip ======================> Path`);
-      // let outputArchiveFilePath = await archiveS3Location(authoringBucket, location, outputFileName);
-      // console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
+      let outputArchiveFilePath = await archiveS3Location(mainBucket, location, outputFileName);
+      console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
       // Getting the size of the file to be stored in the download information.
-      // let stats = fs.statSync(outputArchiveFilePath);
-      // console.log("stats ===================>", stats);
-      // let size;
-      // if (stats) {
-        // size = stats.size;
-      // }
+      let stats = fs.statSync(outputArchiveFilePath);
+      console.log("stats ===================>", stats);
+      let size;
+      if (stats) {
+        size = stats.size;
+      }
 
       try {
         const s3UploadLocation = `${location}/ecar_files/${outputFileName}`;
-        // await uploadArchiveFileToS3(authoringBucket, s3UploadLocation, outputArchiveFilePath, true);
+        await uploadArchiveFileToS3(mainBucket, s3UploadLocation, outputArchiveFilePath, true);
 
         // Replace the root location with '' for the api call
         let loc = s3UploadLocation.replaceAll(root + '/', '').replaceAll('/', '%2F');
