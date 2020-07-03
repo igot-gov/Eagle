@@ -1238,19 +1238,19 @@ async function archiveAndUpload(location, root) {
       console.log("getBucketsFromKey Passed", authoringBucket);
       const outputFileName = `${path.basename(location)}.zip`;
       console.log(`${path.basename(location)}.zip ======================> Path`);
-      let outputArchiveFilePath = await archiveS3Location(authoringBucket, location, outputFileName);
-      console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
+      // let outputArchiveFilePath = await archiveS3Location(authoringBucket, location, outputFileName);
+      // console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
       // Getting the size of the file to be stored in the download information.
-      let stats = fs.statSync(outputArchiveFilePath);
-      console.log("stats ===================>", stats);
-      let size;
-      if (stats) {
-        size = stats.size;
-      }
+      // let stats = fs.statSync(outputArchiveFilePath);
+      // console.log("stats ===================>", stats);
+      // let size;
+      // if (stats) {
+        // size = stats.size;
+      // }
 
       try {
         const s3UploadLocation = `${location}/ecar_files/${outputFileName}`;
-        await uploadArchiveFileToS3(authoringBucket, s3UploadLocation, outputArchiveFilePath, true);
+        // await uploadArchiveFileToS3(authoringBucket, s3UploadLocation, outputArchiveFilePath, true);
 
         // Replace the root location with '' for the api call
         let loc = s3UploadLocation.replaceAll(root + '/', '').replaceAll('/', '%2F');
@@ -1622,13 +1622,13 @@ function uploadZipFile(fileStream, key) {
       console.log('File location and S3 paths: ', fileAndS3Loc);
 
       const {
-        authoringBucket
+        mainBucket
       } = orgUtil.getBucketsFromKey(key);
 
-      console.log('Bucket Name: =============================>', authoringBucket);
+      console.log('Bucket Name: =============================>', mainBucket);
       const promiseArr = [];
       fileAndS3Loc.forEach(element => {
-        promiseArr.push(helper.uploadContent(authoringBucket, element.s3Location, fs.createReadStream(element.fileLocation)));
+        promiseArr.push(helper.uploadContent(mainBucket, element.s3Location, fs.createReadStream(element.fileLocation)));
       });
 
       Promise.all(promiseArr).then((values) => {
