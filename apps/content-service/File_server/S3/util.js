@@ -1231,18 +1231,18 @@ async function getKey(url) {
 async function archiveAndUpload(location, root) {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log("step 1");
+      // console.log("step 1");
       const {
         authoringBucket,mainBucket
       } = getBucketsFromKey(location);
-      console.log("getBucketsFromKey Passed", mainBucket);
+      // console.log("getBucketsFromKey Passed", mainBucket);
       const outputFileName = `${path.basename(location)}.zip`;
-      console.log(`${path.basename(location)}.zip ======================> Path`);
+      // console.log(`${path.basename(location)}.zip ======================> Path`);
       let outputArchiveFilePath = await archiveS3Location(mainBucket, location, outputFileName);
-      console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
+      // console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
       // Getting the size of the file to be stored in the download information.
       let stats = fs.statSync(outputArchiveFilePath);
-      console.log("stats ===================>", stats);
+      // console.log("stats ===================>", stats);
       let size;
       if (stats) {
         size = stats.size;
@@ -1282,10 +1282,10 @@ async function archiveAndUpload(location, root) {
 function archiveS3Location(bucket, s3Location, outputFileName) {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log("archiveS3Location init");
+      // console.log("archiveS3Location init");
 
       s3Location = s3Location.replaceSlashes();
-      console.log("archiveS3Location=>>", s3Location);
+      // console.log("archiveS3Location=>>", s3Location);
 
       // Check if the directory being archived is a lexid or not
       if (
@@ -1302,20 +1302,20 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
         throw errors.BadRequest(`You can only zip content at lex_id folder`);
       } else {
         // Directory on the server that will temporarily contain the zip file
-        console.log("Directory on the server that will temporarily contain the zip file");
+        // console.log("Directory on the server that will temporarily contain the zip file");
         let temp = appConfig.getProperty('WEB_HOST_TEMP_DIR');
-        console.log("temp=================>>", temp);
+        // console.log("temp=================>>", temp);
         // Ensuring that the zipped directory exists before creating the file
-        console.log("Ensuring that the zipped directory exists before creating the file");
+        // console.log("Ensuring that the zipped directory exists before creating the file");
         fse.ensureDirSync(temp);
-        console.log("fse.ensureDirSync(temp): Passed");
+        // console.log("fse.ensureDirSync(temp): Passed");
 
         // Check if the content exists
-        console.log("Check if the content exists");
-        console.log("bucket, s3Location", bucket, s3Location);
+        // console.log("Check if the content exists");
+        // console.log("bucket, s3Location", bucket, s3Location);
 
         let exists = await helper.exists(bucket, s3Location);
-        console.log("Check if the content exists: Passed=>", exists);
+        // console.log("Check if the content exists: Passed=>", exists);
 
         // Return a 404 if content not found
         if (!exists) {
@@ -1323,25 +1323,25 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
 
           throw errors.NotFound(`Content not found`);
         } else {
-          console.log("content exist we are in Else now");
-          console.log("temp==========>", temp);
-          console.log("outputFileName==============>", outputFileName);
+          // console.log("content exist we are in Else now");
+          // console.log("temp==========>", temp);
+          // console.log("outputFileName==============>", outputFileName);
 
           let zipFile = `${temp}/${outputFileName}`;
           console.log("Create a write stream to write to the server s3Location");
           // Create a write stream to write to the server s3Location
           let writeStream = fs.createWriteStream(zipFile);
 
-          console.log('Zip file location is: ', zipFile);
+          // console.log('Zip file location is: ', zipFile);
 
           // Initialize the archiver
-          console.log("Initialize the archiver");
+          // console.log("Initialize the archiver");
           let archive = archiver('zip', {
             zlib: {
               level: 9
             }
           });
-          console.log("archiver Initialized");
+          // console.log("archiver Initialized");
 
           // Archiver warning handler
           archive.on('warning', function (err) {
@@ -1360,7 +1360,7 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
 
           archive.on('data', () => {});
 
-          console.log("Get all the content in the lex_id");
+          // console.log("Get all the content in the lex_id");
 
           // Get all the content in the lex_id
           if (!s3Location.endsWith('/')) {
@@ -1373,12 +1373,12 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
             Contents,
             KeyCount
           } = data;
-          console.log("data ===> await passed with keyCount", KeyCount)
+          // console.log("data ===> await passed with keyCount", KeyCount)
           // Pipe the archiver with the writestream
           archive.pipe(writeStream);
-          console.log("archive.pipe(writeStream) : Done")
+          // console.log("archive.pipe(writeStream) : Done")
           // Iterate through all the contents of lex id and add them to the archiver
-          console.log("Iterate through all the contents of lex id and add them to the archiver")
+          // console.log("Iterate through all the contents of lex id and add them to the archiver")
           for (let i = 0; i < KeyCount; i++) {
             let {
               Key
@@ -1398,10 +1398,10 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
               }
             }
           }
-          console.log("Run the archiver");
+          // console.log("Run the archiver");
           // Run the archiver
           archive.finalize();
-          console.log("Run the archiver: finished");
+          // console.log("Run the archiver: finished");
           // When the writestream has closed, upload the content to S3 in the ecar_files folder of the lex_id
           writeStream.on('close', () => {
             console.log("writeStream.on('close') called")
