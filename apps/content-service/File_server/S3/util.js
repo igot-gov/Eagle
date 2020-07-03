@@ -13,7 +13,9 @@ const path = require('path');
 // Request
 const request = require('request');
 const fse = require('fs-extra');
-let { getVideoDurationInSeconds } = require('get-video-duration');
+let {
+  getVideoDurationInSeconds
+} = require('get-video-duration');
 const archiver = require('archiver');
 // const unzip = require('unzip');
 const unzip = require('unzip-stream');
@@ -24,9 +26,15 @@ const fs = require('fs');
 // helper to interact with aws-sdk
 const appConfig = require('../ConfigReader/loader');
 const log = require('../Logger/log');
-const { errors, success } = require('./status-codes');
+const {
+  errors,
+  success
+} = require('./status-codes');
 const helper = require('./helper');
-const { getBucketsFromKey, getCDNsFromKey } = require('./org-util');
+const {
+  getBucketsFromKey,
+  getCDNsFromKey
+} = require('./org-util');
 // Image extensions
 const imageExtensions = require('../Content/util').validImageExtensions;
 
@@ -34,7 +42,10 @@ const cassandraUtil = require('../CassandraUtil/cassandra');
 const esUtil = require('../ElasticsearchUtil/es-util');
 
 // Constants
-const { contentRoot, imagesBehaviourRoute } = require('./constants');
+const {
+  contentRoot,
+  imagesBehaviourRoute
+} = require('./constants');
 
 /*
 S3 & CDN Config
@@ -61,8 +72,8 @@ const audioExtensions = [
 //--------------------------------------------------------------------------------
 
 /**
-* DB services and variables
-*/
+ * DB services and variables
+ */
 
 // Elasticsearch config
 
@@ -117,8 +128,7 @@ function extractHostname(url) {
 
   if (url.indexOf("//") > -1) {
     hostname = url.split('/')[2];
-  }
-  else {
+  } else {
     hostname = url.split('/')[0];
   }
 
@@ -158,7 +168,9 @@ async function createPath(key) {
     // If the key contains %2F, replace it with /
     key = key.replaceSlashes();
 
-    const { authoringBucket } = getBucketsFromKey(key);
+    const {
+      authoringBucket
+    } = getBucketsFromKey(key);
 
     let exists = await checkPathExists(key, authoringBucket);
     if (exists) {
@@ -246,11 +258,17 @@ async function uploadContent(key, fileName, file) {
     // If the key contains %2F, replace it with /
     key = key.replaceSlashes();
 
-    const { authoringBucket, imageAuthoringBucket } = getBucketsFromKey(key);
-    const { CONTENT_CDN, IMAGES_CDN } = getCDNsFromKey(key);
+    const {
+      authoringBucket,
+      imageAuthoringBucket
+    } = getBucketsFromKey(key);
+    const {
+      CONTENT_CDN,
+      IMAGES_CDN
+    } = getCDNsFromKey(key);
 
     // Check if filename carries any special character
-    if (! /^[-A-Za-z0-9_.]+$/.test(fileName)) {
+    if (!/^[-A-Za-z0-9_.]+$/.test(fileName)) {
       throw errors.BadRequest(`Make sure your file name does not contain spaces or any special characters other than - & _`);
     }
 
@@ -329,7 +347,7 @@ async function uploadContent(key, fileName, file) {
         authArtifactUrl: downloadURL,
         downloadURL: downloadURL + '?type=main',
       });
-    } else {  //else upload it to the authoring bucket
+    } else { //else upload it to the authoring bucket
       await helper.uploadContent(authoringBucket, key, file);
       return success.ResourceCreated(`${key} created in ${authoringBucket}`, {
         artifactURL,
@@ -352,7 +370,9 @@ async function uploadContent(key, fileName, file) {
 function downloadAssessmentContent(key, res) {
   // Replacing the %2F with /
   key = key.replaceSlashes();
-  const { mainBucket } = getBucketsFromKey(key);
+  const {
+    mainBucket
+  } = getBucketsFromKey(key);
   let url = helper.generateSignedURL(mainBucket, key);
   request(url).pipe(res);
 }
@@ -364,7 +384,11 @@ async function downloadContent(key, req, res) {
   // If the key contains %2F, replace it with /
   key = key.replaceSlashes();
 
-  const { downloadBucket, imageAuthoringBucket, authoringBucket } = getBucketsFromKey(key);
+  const {
+    downloadBucket,
+    imageAuthoringBucket,
+    authoringBucket
+  } = getBucketsFromKey(key);
   let extension = path.extname(key).toLowerCase();
   let type = req.query.type;
 
@@ -401,7 +425,10 @@ async function copyContent(source, destination, type, includeFolder) {
     source = source.replaceSlashes();
     destination = destination.replaceSlashes();
 
-    const { authoringBucket, mainBucket } = getBucketsFromKey(source);
+    const {
+      authoringBucket,
+      mainBucket
+    } = getBucketsFromKey(source);
     const bucket = type === 'authoring' ? authoringBucket : mainBucket
 
     // Copy the content from source to destination
@@ -412,8 +439,7 @@ async function copyContent(source, destination, type, includeFolder) {
     } else {
       return success.MultiStatus(`Not all files were copied successfully. Copy failed.`, data);
     }
-  }
-  catch (error) {
+  } catch (error) {
     if (error.code) throw error;
     else {
       log.error(error.toString());
@@ -428,7 +454,10 @@ async function copyContent(source, destination, type, includeFolder) {
  */
 async function moveContent(source, destination, type, includeFolder) {
   try {
-    const { authoringBucket, mainBucket } = getBucketsFromKey(source);
+    const {
+      authoringBucket,
+      mainBucket
+    } = getBucketsFromKey(source);
     const bucket = type === 'authoring' ? authoringBucket : mainBucket
 
     // If the source or dest contains %2F, replace it with /
@@ -553,14 +582,17 @@ async function publish(key) {
       if (published) {
         // Asynchronously deleting the cache for the content on publish.
         try {
-          const { IMAGES_CDN, CONTENT_CDN } = getCDNsFromKey(key);
+          const {
+            IMAGES_CDN,
+            CONTENT_CDN
+          } = getCDNsFromKey(key);
           const contentInvalidationURL = `${CONTENT_CDN}/content-store/${key.endsWith('/') ? key : key + '/'}`;
           const imageInvalidationURL = `${IMAGES_CDN}/content-store/${key.endsWith('/') ? key : key + '/'}`;
 
           Promise.all([
-            createMultiplePathInvalidations([contentInvalidationURL]),
-            createMultiplePathInvalidations([imageInvalidationURL]),
-          ])
+              createMultiplePathInvalidations([contentInvalidationURL]),
+              createMultiplePathInvalidations([imageInvalidationURL]),
+            ])
             .then((values) => console.log('Invalidation completed: ', values))
             .catch((ex) => {
               console.error('Exception while trying to clear the cache after publish');
@@ -586,7 +618,9 @@ async function publish(key) {
 
 async function copyDirInSameBucket(sourceDirectory, destDirectory) {
   try {
-    const { authoringBucket } = getBucketsFromKey(sourceDirectory);
+    const {
+      authoringBucket
+    } = getBucketsFromKey(sourceDirectory);
     let data = await helper.copyInSameBucket(sourceDirectory, destDirectory, authoringBucket);
     return data;
   } catch (error) {
@@ -669,8 +703,7 @@ async function pullback(key) {
         throw success.MultiStatus(`Not all files were copied successfully. Pull back failed.`, data);
       }
     }
-  }
-  catch (error) {
+  } catch (error) {
     if (error.code) throw error;
     else {
       log.error(error.toString());
@@ -683,15 +716,17 @@ async function pullback(key) {
 Logic to set cookie for Cloudfront authentication
 */
 function setCookie(path, res) {
-  console.log("setCookie1 Called===>",path);
-  
+  console.log("setCookie1 Called===>", path);
+
   let cookies = helper.getCFCookies(path);
   // Set the cookies
   for (let id in cookies) {
     res.cookie(id, cookies[id]);
   }
   console.log('Cookies is', res.headers);
-  res.send(success.Success(`Cookie has been set`, { path }));
+  res.send(success.Success(`Cookie has been set`, {
+    path
+  }));
 }
 
 function deNormalizeBase64(str) {
@@ -737,12 +772,10 @@ function getContentMeta(contentId) {
           if (body.hits.hits && body.hits.hits.length > 0) {
             let hits = body.hits.hits;
             resolve(hits[0]);
-          }
-          else {
+          } else {
             reject(errors.NotFound('Content Id not found'));
           }
-        }
-        else {
+        } else {
           reject(errors.NotFound('Content Id not found'));
         }
       }
@@ -839,7 +872,10 @@ async function setCookieOnResource(uuid, contentId, cookiePolicy, res) {
     // If the url is not being served from CDN
     const key = artifactUrl.split('/').splice(3, artifactUrl.split('/').length).join('/');
 
-    const { IMAGES_CDN, CONTENT_CDN } = getCDNsFromKey(key);
+    const {
+      IMAGES_CDN,
+      CONTENT_CDN
+    } = getCDNsFromKey(key);
 
     if (!artifactUrl.includes(IMAGES_CDN) && !artifactUrl.includes(CONTENT_CDN)) {
       throw errors.BadRequest('The artifact URL does not point to S3');
@@ -880,7 +916,9 @@ async function setCookieOnResource(uuid, contentId, cookiePolicy, res) {
         if (timeInMilliSeconds - new Date().getTime() > 0) {
           if (artifactUrl.startsWith(currentPath.slice(0, currentPath.length - 1))) {
             cookieUpdated = true;
-            res.send(success.Success(`Cookie has been set`, { path: currentPath }));
+            res.send(success.Success(`Cookie has been set`, {
+              path: currentPath
+            }));
           }
         }
       }
@@ -914,9 +952,11 @@ function getUserAccessPathsFromCass(userId) {
     cassandraUtil.executeQuery(`SELECT * FROM ${accessPathTable} where user_id=?;`, [userId], (err, result) => {
       if (err) {
         reject(err);
-      }
-      else {
-        let { rows, rowLength } = result;
+      } else {
+        let {
+          rows,
+          rowLength
+        } = result;
         if (rowLength > 0) {
           resolve(rows[0]['access_paths']);
         } else {
@@ -961,8 +1001,7 @@ function getUserAccessPathsFromES(userId) {
             if (!accessPaths.includes(accessPath)) accessPaths = accessPaths.concat(accessPath);
           });
           resolve(accessPaths);
-        }
-        else resolve([]);
+        } else resolve([]);
       }
     });
   })
@@ -983,12 +1022,10 @@ async function getUserAccessPaths(userId) {
       })
     });
     return accessPaths;
-  }
-  catch (err) {
+  } catch (err) {
     if (err.message && err.message.startsWith('Invalid string representation of Uuid')) {
       return 400;
-    }
-    else {
+    } else {
       log.error(err);
       return 500;
     }
@@ -1007,18 +1044,15 @@ async function createInvalidation(distributionId, path) {
     let invalidationPath, result;
     if (path.toLowerCase() === 'all') {
       invalidationPath = '/*';
-    }
-    else {
+    } else {
       invalidationPath = path[0] === '/' ? `${path}*` : `/${path}*`;
     }
     result = await helper.createInvalidation(distributionId, invalidationPath);
     return success.Success(`The cache is being cleared at ${invalidationPath}`, result.Invalidation);
-  }
-  catch (err) {
+  } catch (err) {
     if (err.code & err.message) {
       throw err;
-    }
-    else {
+    } else {
       log.error(err.toString());
       throw errors.InternalServerError();
     }
@@ -1077,7 +1111,10 @@ function createMultiplePathInvalidations(urls) {
       const distributionId = await helper.getCloudFronDistributionId(domainName);
       // Now calling the cloudfront invalidation
       helper.createMultiplePathInvalidations(distributionId, invalidationPaths)
-        .then(() => resolve({ domainName, invalidationPaths }))
+        .then(() => resolve({
+          domainName,
+          invalidationPaths
+        }))
         .catch(ex => reject(ex));
     } catch (ex) {
       reject(ex);
@@ -1108,7 +1145,12 @@ async function getVideoLength(key, bucket) {
       let signedURL = helper.generateSignedURL(bucket, key);
       duration = await getVideoDurationInSeconds(signedURL);
 
-      return success.Success('Fetched video duration successfully', { fileName: key, duration: duration, unit: 'sec', origin: "S3" });
+      return success.Success('Fetched video duration successfully', {
+        fileName: key,
+        duration: duration,
+        unit: 'sec',
+        origin: "S3"
+      });
     } else {
       throw errors.BadRequest(`This file type is not supported`);
     }
@@ -1190,15 +1232,17 @@ async function archiveAndUpload(location, root) {
   return new Promise(async (resolve, reject) => {
     try {
       console.log("step 1");
-      const { authoringBucket } = getBucketsFromKey(location);
+      const {
+        authoringBucket
+      } = getBucketsFromKey(location);
       console.log("getBucketsFromKey Passed", authoringBucket);
       const outputFileName = `${path.basename(location)}.zip`;
       console.log(`${path.basename(location)}.zip ======================> Path`);
       let outputArchiveFilePath = await archiveS3Location(authoringBucket, location, outputFileName);
-      console.log("outputArchiveFilePath ===================>",outputArchiveFilePath);
+      console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
       // Getting the size of the file to be stored in the download information.
       let stats = fs.statSync(outputArchiveFilePath);
-      console.log("stats ===================>",stats);
+      console.log("stats ===================>", stats);
       let size;
       if (stats) {
         size = stats.size;
@@ -1239,28 +1283,28 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
   return new Promise(async (resolve, reject) => {
     try {
       console.log("archiveS3Location init");
-      
+
       s3Location = s3Location.replaceSlashes();
-      console.log("archiveS3Location=>>",s3Location);
+      console.log("archiveS3Location=>>", s3Location);
 
       // Check if the directory being archived is a lexid or not
       if (
-        !s3Location.includes('lex_')
-        && !s3Location.includes('do_')
+        !s3Location.includes('lex_') &&
+        !s3Location.includes('do_')
       ) {
         console.log("Error: lex_ or do_ not in s3 path xxxxxxxxxxxxxxxxxxxxx");
         throw errors.BadRequest(`You can only archive at content level`);
       } else if (
-        !path.basename(s3Location).includes('lex_')
-        && !path.basename(s3Location).includes('do_')
+        !path.basename(s3Location).includes('lex_') &&
+        !path.basename(s3Location).includes('do_')
       ) {
         console.log("Error: lex_ or do_ in s3 path xxxxxxxxxxxxxxxxxxxxx");
         throw errors.BadRequest(`You can only zip content at lex_id folder`);
       } else {
         // Directory on the server that will temporarily contain the zip file
-        console.log("Directory on the server that will temporarily contain the zip file");        
+        console.log("Directory on the server that will temporarily contain the zip file");
         let temp = appConfig.getProperty('WEB_HOST_TEMP_DIR');
-        console.log("temp=================>>",temp);
+        console.log("temp=================>>", temp);
         // Ensuring that the zipped directory exists before creating the file
         console.log("Ensuring that the zipped directory exists before creating the file");
         fse.ensureDirSync(temp);
@@ -1268,33 +1312,34 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
 
         // Check if the content exists
         console.log("Check if the content exists");
-        console.log("bucket, s3Location",bucket, s3Location);
-        
+        console.log("bucket, s3Location", bucket, s3Location);
+
         let exists = await helper.exists(bucket, s3Location);
         console.log("Check if the content exists: Passed=>", exists);
 
         // Return a 404 if content not found
         if (!exists) {
-          console.log("Content not found @bucket and s3",bucket, s3Location);
-          
+          console.log("Content not found @bucket and s3", bucket, s3Location);
+
           throw errors.NotFound(`Content not found`);
-        }
-        else {
+        } else {
           console.log("content exist we are in Else now");
-          console.log("temp==========>",temp);       
-          console.log("outputFileName==============>",outputFileName);       
-          
+          console.log("temp==========>", temp);
+          console.log("outputFileName==============>", outputFileName);
+
           let zipFile = `${temp}/${outputFileName}`;
-          console.log("Create a write stream to write to the server s3Location");          
+          console.log("Create a write stream to write to the server s3Location");
           // Create a write stream to write to the server s3Location
           let writeStream = fs.createWriteStream(zipFile);
 
           console.log('Zip file location is: ', zipFile);
 
           // Initialize the archiver
-          console.log("Initialize the archiver");          
+          console.log("Initialize the archiver");
           let archive = archiver('zip', {
-            zlib: { level: 9 }
+            zlib: {
+              level: 9
+            }
           });
           console.log("archiver Initialized");
 
@@ -1313,18 +1358,21 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
             throw errors.InternalServerError();
           });
 
-          archive.on('data', () => { });
+          archive.on('data', () => {});
 
           console.log("Get all the content in the lex_id");
-          
+
           // Get all the content in the lex_id
           if (!s3Location.endsWith('/')) {
             s3Location += '/';
           }
-          console.log("s3Location====>",s3Location);
-          console.log("bucket===>",bucket)
+          console.log("s3Location====>", s3Location);
+          console.log("bucket===>", bucket)
           let data = await helper.listObjectsByPath(bucket, s3Location);
-          let { Contents, KeyCount } = data;
+          let {
+            Contents,
+            KeyCount
+          } = data;
           console.log("data ===> await passed with keyCount", KeyCount)
           // Pipe the archiver with the writestream
           archive.pipe(writeStream);
@@ -1332,7 +1380,9 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
           // Iterate through all the contents of lex id and add them to the archiver
           console.log("Iterate through all the contents of lex id and add them to the archiver")
           for (let i = 0; i < KeyCount; i++) {
-            let { Key } = Contents[i];
+            let {
+              Key
+            } = Contents[i];
 
             // Exclude if the file is a zip file
             if (path.extname(Key) !== '.zip') {
@@ -1342,7 +1392,9 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
                 archive.append(helper.getObjectStream({
                   Bucket: bucket,
                   Key: Key
-                }), { name: name });
+                }), {
+                  name: name
+                });
               }
             }
           }
@@ -1364,7 +1416,7 @@ function archiveS3Location(bucket, s3Location, outputFileName) {
         }
       }
     } catch (e) {
-      console.log("Error in archiveS3Location");      
+      console.log("Error in archiveS3Location");
       console.error(e);
       reject(e);
     }
@@ -1395,7 +1447,9 @@ async function uploadArchiveFileToS3(bucket, s3Location, file, deleteOnFinish) {
  */
 async function getTranscodingStatus(path) {
   try {
-    const { authoringBucket } = getBucketsFromKey(path)
+    const {
+      authoringBucket
+    } = getBucketsFromKey(path)
     // Get the json meta file created by the lambda function as a buffer
     let videoMeta = await helper.getObject({
       Bucket: authoringBucket,
@@ -1459,7 +1513,10 @@ function startTranscoding(lexId, location, retryMode) {
       json: true
     }, (error, response, body) => {
       if (error) reject(error);
-      else resolve({ response, body });
+      else resolve({
+        response,
+        body
+      });
     });
   })
 }
@@ -1469,7 +1526,10 @@ async function checkIfFileExists(path) {
 
     let key = path.split(extractDomainName(path))[1].substr(1);
 
-    const { imageBucket, mainBucket } = getBucketsFromKey(key)
+    const {
+      imageBucket,
+      mainBucket
+    } = getBucketsFromKey(key)
     const bucket = path.includes('https://images') ? imageBucket : mainBucket;
 
     let params = {
@@ -1508,7 +1568,9 @@ function unzipContent(zipFileStream, outputLocation) {
     fse.ensureDirSync(outputLocation);
 
     // Creating the extractor
-    const unzipExtractor = unzip.Extract({ path: outputLocation });
+    const unzipExtractor = unzip.Extract({
+      path: outputLocation
+    });
 
     // Handling their events
     unzipExtractor.on('error', (err) => {
@@ -1527,13 +1589,17 @@ function unzipContent(zipFileStream, outputLocation) {
 const orgUtil = require('./org-util');
 
 function uploadZipFile(fileStream, key) {
-  const outputLocation = path.join(appConfig.getProperty('resource_directory'), 'unzip-temp', key.split('/')[key.split('/').length - 1]);
+  console.log("uploadZipFile called");
 
+  const outputLocation = path.join(appConfig.getProperty('resource_directory'), 'unzip-temp', key.split('/')[key.split('/').length - 1]);
+  console.log("uploadZipFile ==============>", outputLocation);
   console.log('Output dir: ', outputLocation, 'Key: ', key);
   const uploadBaseKey = key.endsWith('/') ? key : key + '/';
-
+  console.log('uploadBaseKey: ', uploadBaseKey);
   return new Promise((resolve, reject) => {
     unzipContent(fileStream, outputLocation).then(() => {
+      console.log("unzipContent : done");
+      
       // Arr to save file paths
       const filePaths = [];
       // Getting all the files from the zip location
@@ -1547,20 +1613,22 @@ function uploadZipFile(fileStream, key) {
             fileLocation: filePath,
             s3Location: uploadBaseKey +
               filePath
-                .split(outputLocation)[1]
-                .split(path.sep)
-                .filter(elem => elem.length !== 0)
-                .join('/')
+              .split(outputLocation)[1]
+              .split(path.sep)
+              .filter(elem => elem.length !== 0)
+              .join('/')
           });
         });
       console.log('File location and S3 paths: ', fileAndS3Loc);
 
-      const { mainBucket } = orgUtil.getBucketsFromKey(key);
+      const {
+        authoringBucket
+      } = orgUtil.getBucketsFromKey(key);
 
-      console.log('Bucket Name: ', mainBucket);
+      console.log('Bucket Name: =============================>', authoringBucket);
       const promiseArr = [];
       fileAndS3Loc.forEach(element => {
-        promiseArr.push(helper.uploadContent(mainBucket, element.s3Location, fs.createReadStream(element.fileLocation)));
+        promiseArr.push(helper.uploadContent(authoringBucket, element.s3Location, fs.createReadStream(element.fileLocation)));
       });
 
       Promise.all(promiseArr).then((values) => {
@@ -1570,7 +1638,9 @@ function uploadZipFile(fileStream, key) {
         fse.remove(outputLocation);
 
         // Removing the cache from the background
-        const { CONTENT_CDN } = orgUtil.getCDNsFromKey(key);
+        const {
+          CONTENT_CDN
+        } = orgUtil.getCDNsFromKey(key);
         createMultiplePathInvalidations([`${CONTENT_CDN}/${key}`]);
       }).catch((ex) => {
         reject(ex);
