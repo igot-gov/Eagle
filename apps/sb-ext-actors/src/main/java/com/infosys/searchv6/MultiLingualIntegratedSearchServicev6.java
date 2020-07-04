@@ -461,6 +461,7 @@ class MultiLingualIntegratedSearchServicev6 {
         for (String searchIndexLocale : validatedSearchData.getLocale()) {
             indices.add(SearchConstantsv6.SEARCH_INDEX_NAME_PREFIX + SearchConstantsv6.SEARCH_INDEX_LOCALE_DELIMITER + searchIndexLocale);
         }
+        System.out.println("Search Template "+ SearchConstantsv6.ML_SEARCH_TEMPLATE);
 
         System.out.println("Params map "+ new ObjectMapper().writeValueAsString(paramsMap));
 
