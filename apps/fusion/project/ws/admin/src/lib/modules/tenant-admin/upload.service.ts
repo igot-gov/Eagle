@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Subject, Observable } from 'rxjs'
-import { finalize } from 'rxjs/operators'
+import { finalize, map } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import * as fileSaver from 'file-saver'
 
 const API_ENDPOINTS = {
-  bulkUpload: `http://localhost:3003/protected/v8/admin/userRegistration/bulkUpload`,
+  bulkUpload: `/apis/protected/v8/admin/userRegistration/bulkUpload`,
+  downloadReport: `/apis/protected/v8/admin/userRegistration/report`,
 }
 
 @Injectable()
@@ -21,16 +22,10 @@ export class FileService {
       return this.displayLoader$
     }
 
-    public upload(fileName: string, fileContent: string): void {
+    public upload(fileName: string, fileContent: string): Observable<any> {
       this.displayLoader$.next(true)
-      this.http.post(API_ENDPOINTS.bulkUpload, { name: fileName, content: fileContent })
+      return this.http.post<any>(API_ENDPOINTS.bulkUpload, { name: fileName, content: fileContent })
       .pipe(finalize(() => this.displayLoader$.next(false)))
-      .subscribe(_res => {
-        this.fileList.push(fileName)
-        this.fileList$.next(this.fileList)
-      },         _error => {
-        this.displayLoader$.next(false)
-      })
     }
 
     public download(): void {
@@ -44,9 +39,26 @@ export class FileService {
       })
     }
 
-    downloadFile(): Observable<any> {
-      return this.http.get('/assets/common/sample.xls', { responseType: 'blob' })
+    public downloadReport(id: any, name: string) {
+        return this.http.get(`${API_ENDPOINTS.downloadReport}?id=${id}`, { responseType:  'blob' }).pipe(
+          map((response: any) => {
+            const blobObj = new Blob([new Uint8Array(response)])
+            // const blobObj = new Blob([new Uint8Array(response)],
+            //                          { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+            fileSaver.saveAs(blobObj, `${name}-report.xlsx`)
+
+          //         const a = document.createElement('a')
+          // document.body.appendChild(a)
+          // let file = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
+          // let fileURL = URL.createObjectURL(file)
+          // a.href = fileURL
+          // a.download = name + '.xlsx'
+          // a.click()
+            return response
+          }),
+        )
     }
+
     public remove(fileName: any): void {
       this.http.delete('/files/${fileName}').subscribe(() => {
         this.fileList.splice(this.fileList.findIndex(name => name === fileName), 1)
@@ -64,8 +76,9 @@ export class FileService {
     // }
 
     validateFile(name: String) {
-        const ext = name.substring(name.lastIndexOf('.') + 1)
-        if (ext.toLowerCase() === 'xlsx') {
+      const allowedFormats = ['xlsx']
+        const ext = name.substring(name.lastIndexOf('.') + 1).toLowerCase()
+        if (allowedFormats.indexOf(ext) > -1) {
             return true
         // tslint:disable-next-line: no-else-after-return
         } else {

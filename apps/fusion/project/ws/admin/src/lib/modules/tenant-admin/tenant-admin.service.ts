@@ -11,6 +11,7 @@ const API_ENDPOINTS = {
   getOrdinals: '/apis/authApi/action/meta/v2/ordinals/list',
   getAccessPaths: '/apis/protected/v8/admin/userRegistration/user/access-path',
   updateAccessPaths: '/apis/protected/v8/admin/userRegistration/user/update-access-path',
+  getBulkUploadData: '/apis/protected/v8/admin/userRegistration/bulkUploadData',
 }
 @Injectable()
 export class TenantAdminService {
@@ -53,6 +54,10 @@ export class TenantAdminService {
         return response
       }),
     )
+  }
+
+  async getBulkUploadData() {
+    return await this.http.get(`${API_ENDPOINTS.getBulkUploadData}`).toPromise()
   }
 
   updateAccessPaths(data: any): Observable<any> {

@@ -30,6 +30,7 @@ import {
   MatTabsModule,
   MatDividerModule,
   MatAutocompleteModule,
+  MatPaginator,
 } from '@angular/material'
 import { HomeComponent } from './routes/page/home/home.component'
 import {
@@ -87,6 +88,7 @@ import { FileService } from './upload.service'
     OpenRolesDialogComponent,
     UserAccessPathComponent,
     UserBulkUploadComponent,
+    MatPaginator,
   ],
   imports: [
     CommonModule,
