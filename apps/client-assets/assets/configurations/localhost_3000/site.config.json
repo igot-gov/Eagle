@@ -171,7 +171,8 @@
     "platformBanner": "/apis/public/v8/assets/common/misc/about-wingspan.jpg",
     "poweredBy": "Tarento",
     "landingLogo": "",
-    "defaultSourceLogo": "/assets/instances/eagle/app_logos/source.png"
+    "defaultSourceLogo": "/assets/instances/eagle/app_logos/source.png",
+    "playListLogo":"/assets/instances/eagle/about-page/about-header.jpg"
   },
   "sources": [
     {
