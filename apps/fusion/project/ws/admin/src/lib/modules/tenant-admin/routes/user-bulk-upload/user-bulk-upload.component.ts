@@ -37,7 +37,7 @@ export class UserBulkUploadComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.bulkUploadData)
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
-   }
+  }
 
   ngOnInit() {
     this.displayLoader = this.fileService.isLoading()
@@ -78,11 +78,11 @@ export class UserBulkUploadComponent implements OnInit {
       if (this.formGroup && this.formGroup.get('file')) {
         // tslint:disable-next-line: no-non-null-assertion
         this.fileService.upload(this.fileName, this.formGroup!.get('file')!.value)
-        .subscribe(res => {
-          // this.uplaodSuccessMsg = res
-          this.openSnackbar(res)
-          this.getBulkUploadData()
-        })
+          .subscribe(res => {
+            // this.uplaodSuccessMsg = res
+            this.openSnackbar(res)
+            this.getBulkUploadData()
+          })
       }
     } else {
       this.showFileError = true
@@ -101,8 +101,7 @@ export class UserBulkUploadComponent implements OnInit {
   }
 
   public downloadReport(row: any) {
-    this.fileService.downloadReport(row.id, row.name).subscribe(res => {
-    })
+    this.fileService.downloadReport(row.id, row.name).subscribe()
   }
 
 }
