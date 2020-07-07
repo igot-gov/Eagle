@@ -22,7 +22,7 @@
         <h1 *ngIf="userName" class="mat-display-1 margin-bottom-l">Hey {{ userName }}!</h1>
         <!-- <h2 class="mat-h2" i18n>You have made quite some progress!</h2> -->
         <p>
-          <mat-button-toggle-group (change)="goalToggle($event?.value)" [value]="playListFor">
+          <mat-button-toggle-group (change)="goalToggle($event?.value)" [value]="goalFor">
             <mat-button-toggle value="me" i18n>My goals</mat-button-toggle>
             <mat-button-toggle value="others" i18n *ngIf="isShareEnabled">For others</mat-button-toggle>
           </mat-button-toggle-group>

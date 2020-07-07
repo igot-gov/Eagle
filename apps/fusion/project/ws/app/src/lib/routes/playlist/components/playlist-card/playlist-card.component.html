@@ -70,7 +70,8 @@
           <mat-icon class="negative-margin-left-xxs">person_pin</mat-icon>
           <span>{{ playlist?.sharedByDisplayName }}</span>
         </span>
-        <ng-container *ngIf="playlist?.contentProgress?.length || playlist?.contents?.length">
+        <!-- playlist?.contentProgress?.length || -->
+        <ng-container *ngIf="playlist?.contents?.length">
           <div class="expand-play-list-btn">
             <button mat-icon-button (click)="isListExpanded[playlist.id] = !isListExpanded[playlist.id]">
               <mat-icon *ngIf="!isListExpanded[playlist.id]">keyboard_arrow_down</mat-icon>
@@ -82,7 +83,8 @@
       </div>
     </div>
   </div>
-  <mat-card *ngIf="isListExpanded[playlist.id]" class="border-radius-0">
+  <mat-card *ngIf="playlist && playlist.id && isListExpanded && !!isListExpanded[playlist.id] || false"
+    class="border-radius-0">
     <ng-container>
       <h3 i18n>This playlist includes</h3>
       <div class=" padding-top-s padding-bottom-s margin-bottom-xl">
