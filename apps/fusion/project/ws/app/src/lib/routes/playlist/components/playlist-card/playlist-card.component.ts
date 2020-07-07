@@ -33,11 +33,11 @@ export class PlaylistCardComponent implements OnInit {
   isListExpanded: { [playlistId: string]: boolean } = {}
 
   constructor(private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    public dialog: MatDialog,
-    private playlistSvc: BtnPlaylistService,
-    public router: Router,
-    public configSvc: ConfigurationsService,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog,
+              private playlistSvc: BtnPlaylistService,
+              public router: Router,
+              public configSvc: ConfigurationsService,
 
   ) {
     if (this.route.snapshot.data.pageData.data) {
@@ -54,7 +54,7 @@ export class PlaylistCardComponent implements OnInit {
   getDuration(playlist: NsPlaylist.IPlaylist) {
     let totalDuration = 0
     if (playlist) {
-      let contents = playlist.contents
+      const contents = playlist.contents
       contents.forEach(r => {
         totalDuration += r.duration
       })

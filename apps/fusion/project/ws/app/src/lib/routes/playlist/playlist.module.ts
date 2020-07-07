@@ -97,7 +97,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   entryComponents: [
     PlaylistContentDeleteDialogComponent,
