@@ -18,6 +18,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.hierarchy.service.HierarchyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
@@ -81,6 +83,9 @@ public class PlaylistServiceImpl implements PlaylistService {
 	private String notifSvcPort;
 
 	private String notifSvcIp;
+
+	private LexLogger logger = new LexLogger(PlaylistServiceImpl.class.getName());
+
 
 	@PostConstruct
 	void init() {
@@ -168,7 +173,8 @@ public class PlaylistServiceImpl implements PlaylistService {
 		// Get Meta of the content
 		List<Map<String, Object>> metaData = contentService.getMetaByIDListandSource(contentList, source, status);
 		if (metaData == null || metaData.isEmpty()) {
-			throw new InvalidDataInputException("invalid.playlistData");
+			logger.info("invalid.playlistData: metaData not present");
+			//throw new InvalidDataInputException("invalid.playlistData");
 		}
 		if (!isDataRequired) {
 			for (Map<String, Object> data : metaData) {
