@@ -6,6 +6,7 @@ import {
   MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
+  MatProgressBarModule,
   MatDialogModule,
   MatIconModule,
   MatInputModule,
@@ -96,6 +97,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     MatSnackBarModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatProgressBarModule
   ],
   entryComponents: [
     PlaylistContentDeleteDialogComponent,

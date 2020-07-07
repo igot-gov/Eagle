@@ -7,13 +7,14 @@
 </mat-chip-list>
 <div class="flex">
   <mat-form-field class="width-expand margin-right-m" appearance="fill" floatLabel="never">
-    <mat-icon matPrefix>search</mat-icon>
+    <mat-icon matSuffix>dashboard</mat-icon>
     <mat-label i18n>Search content</mat-label>
-    <input name="content-search-input" matInput [(ngModel)]="query" (ngModelChange)="debounceSubject.next(true)" autocomplete="off"
-      class="resize-none" />
+    <input name="content-search-input" matInput [(ngModel)]="query" (ngModelChange)="debounceSubject.next(true)"
+      autocomplete="off" class="resize-none" />
   </mat-form-field>
   <div class="btn-filter">
-    <button name="content-filter-menu-button" mat-stroked-button class="height-1-1" *ngIf="showFilter" [matMenuTriggerFor]="filterMenu" type="button">
+    <button name="content-filter-menu-button" mat-stroked-button class="height-1-1" *ngIf="showFilter"
+      [matMenuTriggerFor]="filterMenu" type="button">
       <mat-icon>filter_list</mat-icon>
     </button>
     <mat-menu #filterMenu="matMenu" xPosition="before">
@@ -43,7 +44,8 @@
         </mat-checkbox>
       </div>
     </mat-menu>
-    <button name="language-button" mat-button *ngIf="availableLanguages?.length" [matMenuTriggerFor]="sortLang" type="button">
+    <button name="language-button" mat-button *ngIf="availableLanguages?.length" [matMenuTriggerFor]="sortLang"
+      type="button">
       <mat-icon>language</mat-icon>
       <span class="uppercase">
         {{ language || 'en' }}
@@ -76,7 +78,8 @@
       " [disabled]="preSelected?.has(content?.identifier) && !widgetData?.enablePreselected"
       (change)="selectedContentChanged(content?.identifier, $event.checked)" class="leading-none pr-4">
     </mat-checkbox>
-    <mat-radio-button name="content-radio-button-{{searchResults?.indexOf(content)+1}}" *ngIf="selectionType === 'radio'" [checked]="
+    <mat-radio-button name="content-radio-button-{{searchResults?.indexOf(content)+1}}"
+      *ngIf="selectionType === 'radio'" [checked]="
         selectedContentIds?.has(content?.identifier) || preSelected?.has(content?.identifier)
       " [disabled]="preSelected?.has(content?.identifier) && !widgetData?.enablePreselected"
       (change)="selectedContentChanged(content?.identifier, true)" class="leading-none pr-4">
@@ -100,10 +103,10 @@
         </mat-checkbox> -->
       </div>
       <p class="margin-remove-bottom margin-left-xs margin-right-xs">
-        <ws-widget-display-content-type *ngIf="content.displayContentType"
-          [displayContentType]="content?.contentType==='Collection'
+        <ws-widget-display-content-type *ngIf="content.displayContentType" [displayContentType]="content?.contentType==='Collection'
           ?'Module'
-          :(content?.contentType==='Learning Path'?'Program':content?.contentType)" class="uppercase"></ws-widget-display-content-type>
+          :(content?.contentType==='Learning Path'?'Program':content?.contentType)" class="uppercase">
+        </ws-widget-display-content-type>
         <ng-container *ngIf="content.displayContentType">&nbsp; | &nbsp;</ng-container>
         <ng-container *ngIf="content?.duration">{{ content.duration | pipeDurationTransform: 'hms' }}
         </ng-container>
@@ -130,4 +133,5 @@
   </div>
 </div>
 
-<input name="content-selection-error-message" #removeSubset type="hidden" i18n-value value="Parent of this content is already selected" />
+<input name="content-selection-error-message" #removeSubset type="hidden" i18n-value
+  value="Parent of this content is already selected" />

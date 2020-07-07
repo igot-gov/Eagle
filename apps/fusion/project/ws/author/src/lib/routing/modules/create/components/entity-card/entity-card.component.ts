@@ -16,7 +16,7 @@ export class EntityCardComponent implements OnInit {
   resourceClicked = false
   notEnabled = true
 
-  constructor(private authInitService: AuthInitService, private router: Router) {}
+  constructor(private authInitService: AuthInitService, private router: Router) { }
 
   ngOnInit() {
     this.authInitService.creationEntity.forEach(v => {

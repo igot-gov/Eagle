@@ -242,13 +242,23 @@
     }
 
     .ws-mat-primary-lite-background-on-day {
-      background-color: $colorAccentLight;
+      background-color: $colorBackground;
     }
 
     ws-app-footer {
       .mat-toolbar {
         background-color: $footerColor;
         color: $footerTextColor;
+      }
+    }
+
+    .mat-chip.mat-standard-chip {
+      color: $colorAccent !important;
+      background: $colorAccentLight;
+
+      mat-icon {
+        color: $colorAccentDark !important;
+        opacity: 1 !important
       }
     }
   }
@@ -299,6 +309,10 @@
 
   .ws-mat-primary-background {
     background-color: $colorAccent !important;
+  }
+
+  .ws-primary-background {
+    background-color: $colorPrimary !important;
   }
 
   .ws-mat-primary-background-op10 {
@@ -411,7 +425,14 @@
 
   .mat-button-toggle-checked {
     // background-color: mat-color($primary);
-    color: mat-color($primary, default-contrast) !important;
+    color: $colorPrimary !important;
+    background-color: $colorAccentDark;
+  }
+
+  .ws-mat-button-theme {
+    // background-color: mat-color($primary);
+    color: $colorPrimary !important;
+    background-color: $colorAccentDark !important;
   }
 
   .ws-primary-tinted-50 {

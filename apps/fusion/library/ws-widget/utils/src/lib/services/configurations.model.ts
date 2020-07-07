@@ -137,7 +137,9 @@ export namespace NsInstanceConfig {
     defaultSourceLogo: string
     landingLogo: string
     navbarLogo?: string
+    playListLogo?: string
     thumpsUp?: string
+
   }
   export interface IMailIds {
     contactUs: string

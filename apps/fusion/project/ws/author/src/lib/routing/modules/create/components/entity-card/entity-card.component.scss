@@ -6,11 +6,18 @@ $small-badge-size: 50px;
 $badge-padding: 12px;
 
 .card-container {
-  display: inline-block;
-  position: relative;
-  width: 330px;
-  margin: 25px 25px;
-  cursor: pointer;
+  // display: inline-block;
+  // position: relative;
+  // width: 330px;
+  // margin: 25px 25px;
+  // cursor: pointer;
+  width: 250px;
+  min-height: 249px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 8px;
+  opacity: 1;
+  margin: 15px;
 
   @media only screen and (max-width: 1239px) {
     width: 300px;
@@ -23,6 +30,7 @@ $badge-padding: 12px;
   @media only screen and (max-width: 735px) {
     width: 260px;
   }
+
   @media only screen and(max-width: 718px) {
     width: 330px;
   }
@@ -65,7 +73,11 @@ $badge-padding: 12px;
 
 .entity-container {
   display: flex;
+  flex-direction: column;
   padding: 16px 16px $size-s 16px;
+  background: #FAD1AF 0% 0% no-repeat padding-box;
+  border-radius: 8px 8px 0px 0px;
+  opacity: 0.2;
 }
 
 .hover-text {

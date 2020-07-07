@@ -1,5 +1,5 @@
 <div class="margin-top-xl margin-l-l margin-r-l" *ngIf="!error">
-  <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
+  <!-- <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
     <div class="flex flex-middle">
       <p class="ws-mat-primary-text font-weight-bold title margin-right-xs" i18n>
         CONTENT CREATION
@@ -38,7 +38,7 @@
         </p>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="margin-top-xl margin-left-xl">
     <div class="flex flex-col md:flex-row margin-top-xl padding-top-l justify-between">
       <h3 class="mat-h3">
@@ -46,12 +46,7 @@
       </h3>
       <div class="mat-h3 flex items-center select-lang">
         <span class="mr-1 text-center" i18n>Select Language: </span>
-        <button
-          class="lang-btn"
-          *ngIf="allLanguages?.length"
-          mat-button
-          [matMenuTriggerFor]="sortLang"
-        >
+        <button class="lang-btn" *ngIf="allLanguages?.length" mat-button [matMenuTriggerFor]="sortLang">
           {{ language | uppercase }}
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
@@ -59,22 +54,16 @@
     </div>
     <div class="card-holder margin-top-l">
       <div class="flex flex-1 flex-col md:flex-row">
-        <div class="flex-1">
-          <ws-auth-entity-card
-            [entity]="resourceEntity"
-            [expanded]="true"
-            (step)="contentClicked($event)"
-          ></ws-auth-entity-card>
-        </div>
-        <div class="flex-3">
-          <ng-container *ngFor="let createEntity of entity; let i = index">
-            <ws-auth-entity-card
-              [entity]="createEntity"
-              (step)="contentClicked($event)"
-            ></ws-auth-entity-card>
-            <mat-divider *ngIf="i % 2 !== 0"></mat-divider>
-          </ng-container>
-        </div>
+        <!-- <div class="flex-1"> -->
+        <ws-auth-entity-card [entity]="resourceEntity" [expanded]="true" (step)="contentClicked($event)">
+        </ws-auth-entity-card>
+        <!-- </div> -->
+        <!-- <div class="flex-3"> -->
+        <ng-container *ngFor="let createEntity of entity; let i = index">
+          <ws-auth-entity-card [entity]="createEntity" (step)="contentClicked($event)"></ws-auth-entity-card>
+          <mat-divider *ngIf="i % 2 !== 0"></mat-divider>
+        </ng-container>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -84,12 +73,8 @@
 </h2>
 <mat-menu #sortLang="matMenu">
   <ng-template matMenuContent>
-    <button
-      mat-menu-item
-      class="flex flex-between"
-      *ngFor="let lang of allLanguages"
-      (click)="setCurrentLanguage(lang.srclang)"
-    >
+    <button mat-menu-item class="flex flex-between" *ngFor="let lang of allLanguages"
+      (click)="setCurrentLanguage(lang.srclang)">
       <span class="flex items-center w-full">
         <span>{{ lang.label | uppercase }}</span>
         <mat-icon class="ml-2" *ngIf="lang.srclang === language">check</mat-icon>

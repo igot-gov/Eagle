@@ -14,7 +14,7 @@ $mat-blue: (50: #eff1f3,
     600: #0358ab,
     700: #222222,
     800: #154a7d,
-    900: #103c67,
+    900: #b3bdc7,
     A100: #617284,
     A200: #587594,
     A400: #3e6792,
@@ -37,13 +37,15 @@ $mat-blue: (50: #eff1f3,
 );
 
 $mat-orange: (50: #fff3e0,
-    100: #F5F6FA,
+    100: #D9F2FE,
+    // F5F6FA
     200: #ffcc80,
     300: #ffb74d,
     400: #ffa726,
     500: #2096cd,
     600: #fb8c00,
-    700: #F5F6FA,
+    700: #15A9F4,
+    // F5F6FA
     800: #ef6c00,
     900: #2095cc,
     A100: #ffd180,
@@ -76,7 +78,7 @@ $theme-accent: mat-palette($mat-orange);
 $theme-warn: mat-palette($mat-red);
 $background-color: mat-palette($mat-blue);
 $theme-background: mat-palette($mat-blue);
- 
+
 .theme-igot {
     &.day-mode {
         $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
