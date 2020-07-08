@@ -36,7 +36,14 @@ export class PlaylistEditComponent implements OnInit {
     private snackBar: MatSnackBar,
     private configurationSvc: ConfigurationsService,
   ) {
-
+    this.editPlaylistForm = this.fb.group({
+      title: [
+        this.playlist.name || '',
+        [Validators.required, Validators.minLength(PLAYLIST_TITLE_MIN_LENGTH), Validators.maxLength(PLAYLIST_TITLE_MAX_LENGTH)],
+      ],
+      visibility: [NsPlaylist.EPlaylistVisibilityTypes.PRIVATE],
+      message: '',
+    })
     this.selectedContentIds = new Set<string>(
       (this.playlist && this.playlist.contents || []).map(content => content.identifier),
     )
