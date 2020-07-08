@@ -63,21 +63,32 @@ $badge-padding: 12px;
   }
 }
 
+.title-div {
+  flex-direction: column-reverse;
+  margin-bottom: $size-s;
+
+  span {
+    font-size: 25px;
+    line-height: 30px;
+  }
+}
+
 .badge-data {
   margin-top: 5px;
-  margin-left: 16px;
+  margin-left: $size-m;
 }
 
 .mat-card {
   padding: 0;
+  border-radius: 8px;
 }
 
 .entity-container {
   display: flex;
   flex-direction: column;
-  padding: 16px 16px $size-s 16px;
+  padding: $size-m 0 $size-s 0;
   background: rgba(250, 209, 175, 0.2) 0% 0% no-repeat padding-box;
-  border-radius: 8px 8px 0px 0px;
+  border-radius: inherit;
   cursor: pointer;
 }
 
