@@ -14,9 +14,9 @@
           autocomplete="off" required />
       </mat-form-field>
       <div class="flex flex-row-reverse">
-        <!-- !changedContentIds.size) -->
-        <button name="done-button-playlist-edit" mat-raised-button color="primary" [disabled]="editPlaylistForm.value.title === playlist.name ||
-       upsertPlaylistStatus === 'fetching' " (click)="editPlaylist()" class="margin-right-m">
+        <!-- !changedContentIds.size) || editPlaylistForm.value.title === playlist.name-->
+        <button name="done-button-playlist-edit" mat-raised-button color="primary"
+          [disabled]="upsertPlaylistStatus === 'fetching' " (click)="editPlaylist()" class="margin-right-m">
           <ng-container *ngIf="upsertPlaylistStatus !== 'fetching'" i18n>Update</ng-container>
           <ng-container *ngIf="upsertPlaylistStatus === 'fetching'" i18n>Please Wait...</ng-container>
         </button>

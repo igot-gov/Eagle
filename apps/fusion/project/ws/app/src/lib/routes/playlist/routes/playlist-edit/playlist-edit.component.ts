@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core'
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core'
 import { NsPlaylist, BtnPlaylistService, NsContent } from '@ws-widget/collection'
 import { TFetchStatus, NsPage, ConfigurationsService } from '@ws-widget/utils'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -11,7 +11,7 @@ import { PLAYLIST_TITLE_MIN_LENGTH, PLAYLIST_TITLE_MAX_LENGTH } from '../../cons
   templateUrl: './playlist-edit.component.html',
   styleUrls: ['./playlist-edit.component.scss'],
 })
-export class PlaylistEditComponent {
+export class PlaylistEditComponent implements OnInit {
 
   @ViewChild('editPlaylistError', { static: true }) editPlaylistErrorMessage!: ElementRef<any>
   @ViewChild('playlistForm', { static: true }) playlistForm!: ElementRef<any>
@@ -29,24 +29,27 @@ export class PlaylistEditComponent {
   pageNavbar: Partial<NsPage.INavBackground> = this.configurationSvc.pageNavBar
 
   constructor(
-    fb: FormBuilder,
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     public router: Router,
     private playlistSvc: BtnPlaylistService,
     private snackBar: MatSnackBar,
     private configurationSvc: ConfigurationsService,
   ) {
-    this.editPlaylistForm = fb.group({
+
+    this.selectedContentIds = new Set<string>(
+      (this.playlist && this.playlist.contents || []).map(content => content.identifier),
+    )
+  }
+  ngOnInit(): void {
+    this.editPlaylistForm = this.fb.group({
       title: [
-        this.playlist.name,
+        this.playlist.name || '',
         [Validators.required, Validators.minLength(PLAYLIST_TITLE_MIN_LENGTH), Validators.maxLength(PLAYLIST_TITLE_MAX_LENGTH)],
       ],
       visibility: [NsPlaylist.EPlaylistVisibilityTypes.PRIVATE],
       message: '',
     })
-    this.selectedContentIds = new Set<string>(
-      (this.playlist && this.playlist.contents || []).map(content => content.identifier),
-    )
   }
 
   contentChanged(content: Partial<NsContent.IContent>, checked: boolean) {
