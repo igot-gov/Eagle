@@ -1,7 +1,7 @@
 <div class="card-container" [ngClass]="{
     op60: notEnabled === true
   }">
-  <mat-card class="ws-mat-primary-border-top-bolder mat-elevation-z6 margin-bottom-l expanded">
+  <mat-card class="mat-elevation-z6 flex flex-1 flex-column" [ngClass]="{'expanded': childEntity.length>0}">
     <div class="entity-container" (click)="entityClicked(entity)" [id]="entity.id" [attr.name]='entity.id'>
       <div class="flex flex-1">
         <div class="icon-container ws-mat-primary-background-op30">

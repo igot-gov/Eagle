@@ -11,6 +11,7 @@ $badge-padding: 12px;
   // width: 330px;
   // margin: 25px 25px;
   // cursor: pointer;
+  display: flex;
   width: 250px;
   min-height: 249px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -75,9 +76,9 @@ $badge-padding: 12px;
   display: flex;
   flex-direction: column;
   padding: 16px 16px $size-s 16px;
-  background: #FAD1AF 0% 0% no-repeat padding-box;
+  background: rgba(250, 209, 175, 0.2) 0% 0% no-repeat padding-box;
   border-radius: 8px 8px 0px 0px;
-  opacity: 0.2;
+  cursor: pointer;
 }
 
 .hover-text {
