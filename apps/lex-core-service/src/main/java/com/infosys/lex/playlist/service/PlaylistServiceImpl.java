@@ -85,6 +85,7 @@ public class PlaylistServiceImpl implements PlaylistService {
 	private String notifSvcIp;
 
 	private LexLogger logger = new LexLogger(PlaylistServiceImpl.class.getName());
+	private ObjectMapper mapper = new ObjectMapper();
 
 
 	@PostConstruct
@@ -1667,13 +1668,18 @@ public class PlaylistServiceImpl implements PlaylistService {
 		contentMap = (Map<String, Object>) statusData.get(userId);
 
 		List<Map<String, Object>> resourceIdMap = new ArrayList<>();
-		for (String resource : resourceIds) {
-			resourceIdMap.add((Map<String, Object>) contentMap.get(resource));
+		if(contentMap !=null){
+			for (String resource : resourceIds) {
+				resourceIdMap.add((Map<String, Object>) contentMap.get(resource));
+			}
 		}
+
 		Map<String, Object> listUserIdAndUserName = new HashMap<String, Object>();
 		listUserIdAndUserName = this.getMultipleUserData(rootOrg, Arrays.asList(userId));
 		userPlaylistMap.put("user", listUserIdAndUserName.get(userId));
 		userPlaylistMap.put("resource_ids", resourceIdMap);
+
+		logger.info("userPlaylistMap :"+mapper.writeValueAsString(userPlaylistMap));
 		return userPlaylistMap;
 	}
 
