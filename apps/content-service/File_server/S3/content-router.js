@@ -921,7 +921,7 @@ router.post('/zip/:location', (req, res) => {
   req.setTimeout(1000 * 5 * 60);
   let key = contentRoot + '/' + req.params.location;
 
-  utility.archiveAndUpload(key, contentRoot)
+  utility.archiveAndUpload(key, contentRoot, 'ZIP')
     .then(result => {
       log.info(result.message);
       res.send(result);

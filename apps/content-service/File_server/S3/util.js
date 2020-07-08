@@ -1228,17 +1228,19 @@ async function getKey(url) {
  * Not the best way - written 7 June 2019
  * Updated this API on - ...
  */
-async function archiveAndUpload(location, root) {
+async function archiveAndUpload(location, root, type) {
   return new Promise(async (resolve, reject) => {
     try {
       // console.log("step 1");
       const {
-        authoringBucket,mainBucket
+        authoringBucket,
+        mainBucket
       } = getBucketsFromKey(location);
+      const finalbucket = type && type === 'ZIP' ? mainBucket : authoringBucket;
       // console.log("getBucketsFromKey Passed", mainBucket);
       const outputFileName = `${path.basename(location)}.zip`;
       // console.log(`${path.basename(location)}.zip ======================> Path`);
-      let outputArchiveFilePath = await archiveS3Location(mainBucket, location, outputFileName);
+      let outputArchiveFilePath = await archiveS3Location(finalbucket, location, outputFileName);
       // console.log("outputArchiveFilePath ===================>", outputArchiveFilePath);
       // Getting the size of the file to be stored in the download information.
       let stats = fs.statSync(outputArchiveFilePath);
@@ -1250,7 +1252,7 @@ async function archiveAndUpload(location, root) {
 
       try {
         const s3UploadLocation = `${location}/ecar_files/${outputFileName}`;
-        await uploadArchiveFileToS3(mainBucket, s3UploadLocation, outputArchiveFilePath, true);
+        await uploadArchiveFileToS3(finalbucket, s3UploadLocation, outputArchiveFilePath, true);
 
         // Replace the root location with '' for the api call
         let loc = s3UploadLocation.replaceAll(root + '/', '').replaceAll('/', '%2F');
@@ -1599,7 +1601,7 @@ function uploadZipFile(fileStream, key) {
   return new Promise((resolve, reject) => {
     unzipContent(fileStream, outputLocation).then(() => {
       console.log("unzipContent : done");
-      
+
       // Arr to save file paths
       const filePaths = [];
       // Getting all the files from the zip location
