@@ -6,9 +6,19 @@
     "icon": "/assets/images/authoring/resource.svg",
     "contentType": "Resource",
     "mimeType": "application/html",
-    "hasRole": ["content-creator", "editor", "admin"],
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ],
     "available": true,
-    "children": ["link", "upload", "activities", "assessment", "web"],
+    "children": [
+      "link",
+      "upload",
+      "activities",
+      "assessment",
+      "web"
+    ],
     "enabled": true
   },
   {
@@ -20,7 +30,11 @@
     "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/html",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "upload",
@@ -31,7 +45,11 @@
     "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/pdf",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "activities",
@@ -42,7 +60,11 @@
     "enabled": false,
     "contentType": "Resource",
     "mimeType": "application/html",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "assessment",
@@ -53,8 +75,15 @@
     "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/quiz",
-    "additionalMeta": { "categoryType": "Assessment","resourceType": "Assessment" },
-    "hasRole": ["content-creator", "editor", "admin"]
+    "additionalMeta": {
+      "categoryType": "Assessment",
+      "resourceType": "Assessment"
+    },
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "webModule",
@@ -62,10 +91,14 @@
     "name": "Web Page",
     "icon": "insert_drive_file",
     "available": true,
-    "enabled": false,
+    "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/web-module",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "channel",
@@ -74,7 +107,11 @@
     "icon": "chrome_reader_mode",
     "contentType": "Channel",
     "mimeType": "application/channel",
-    "hasRole": ["channel-creator", "editor", "admin"],
+    "hasRole": [
+      "channel-creator",
+      "editor",
+      "admin"
+    ],
     "available": false,
     "enabled": false
   },
@@ -88,7 +125,11 @@
     "contentType": "Knowledge Board",
     "available": false,
     "enabled": false,
-    "hasRole": ["kb-creator", "editor", "admin"]
+    "hasRole": [
+      "kb-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "ka",
@@ -99,7 +140,11 @@
     "contentType": "Knowledge Artifact",
     "available": false,
     "enabled": false,
-    "hasRole": ["ka-creator", "editor", "admin"]
+    "hasRole": [
+      "ka-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "collection",
@@ -111,7 +156,11 @@
     "available": true,
     "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "course",
@@ -123,7 +172,11 @@
     "available": true,
     "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   },
   {
     "id": "learningPath",
@@ -135,6 +188,10 @@
     "available": true,
     "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
-    "hasRole": ["content-creator", "editor", "admin"]
+    "hasRole": [
+      "content-creator",
+      "editor",
+      "admin"
+    ]
   }
 ]
