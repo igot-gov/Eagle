@@ -1231,12 +1231,14 @@ async function getKey(url) {
 async function archiveAndUpload(location, root, type) {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log("archiveAndUpload => location =>",location);
+      console.log("archiveAndUpload => location =>", location);
+      console.log("archiveAndUpload => type =>", location);
       const {
         authoringBucket,
         mainBucket
       } = getBucketsFromKey(location);
-
+      console.log("mainBucket=======>", mainBucket)
+      console.log("authoringBucket=======>", authoringBucket)
       const finalbucket = type && type === 'ZIP' ? mainBucket : authoringBucket;
       console.log("finalbucket Passed", finalbucket);
       const outputFileName = `${path.basename(location)}.zip`;
