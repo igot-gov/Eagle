@@ -1236,8 +1236,9 @@ async function archiveAndUpload(location, root, type) {
         authoringBucket,
         mainBucket
       } = getBucketsFromKey(location);
+
       const finalbucket = type && type === 'ZIP' ? mainBucket : authoringBucket;
-      // console.log("getBucketsFromKey Passed", mainBucket);
+      console.log("finalbucket Passed", finalbucket);
       const outputFileName = `${path.basename(location)}.zip`;
       // console.log(`${path.basename(location)}.zip ======================> Path`);
       let outputArchiveFilePath = await archiveS3Location(finalbucket, location, outputFileName);
