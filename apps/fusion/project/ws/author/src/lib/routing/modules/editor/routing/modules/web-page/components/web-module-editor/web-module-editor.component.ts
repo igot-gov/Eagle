@@ -349,11 +349,11 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
         this.imagesUrlbase = `${url.substring(0, url.lastIndexOf('/'))}/`
       }
       const htmlFile = JSON.parse(
-        JSON.stringify(e.body
+        JSON.stringify(e.body)
           .replace(/<a href/gm, '<a target="_blank" href')
           .replace(this.imagesUrlbase, '')
           .replace(/(<img.*width=)['"](\d+?)['"](.*\/>)/gm, '$1"$2" style="width:100%; heigth: auto; max-width:$2" $3')
-        ))
+      )
       // .replace(/ href=\s*['"].*?\/web-hosted\/.*?lex_.*?\/assets\/(.*?)['"]/gm, ' href="$1"')
       const fileName = `index${e.fileIndex}.html`
       return this.uploadJson(htmlFile, fileName, CONTENT_BASE_WEBHOST_ASSETS)
