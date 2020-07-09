@@ -19,7 +19,7 @@ node() {
 		   echo $commit_id> commit_id.txt
 
 		   pwd
-		   docker build -t $docker_server/$docker_repo:$commit_id .
+		   docker build -t $docker_server/$docker_repo:$commit_id -f $docker_file_path .
 		   docker tag $docker_server/$docker_repo:$commit_id $docker_server/$docker_repo:$image_tag
 		   '''
 	}
