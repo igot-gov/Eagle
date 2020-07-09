@@ -48,7 +48,7 @@ const CDN_TYPES = {
 
 // Getting the bucket name depending on the root_org
 function getBucketFromRootOrg(bucketType, hostingType, rootOrg) {
-  console.log("bucketType, hostingType, rootOrg====>", bucketType, hostingType, rootOrg)
+  // console.log("bucketType, hostingType, rootOrg====>", bucketType, hostingType, rootOrg)
   let currentHostingType = null;
   let bucketEnvVal = null;
 
@@ -62,7 +62,7 @@ function getBucketFromRootOrg(bucketType, hostingType, rootOrg) {
   } else {
     throw new Error('Invalid hosting type');
   }
-  console.log("currentHostingType==>", currentHostingType)
+  // console.log("currentHostingType==>", currentHostingType)
   // Now setting the respective live or pre-publish bucket
   switch (bucketType) {
     case BUCKET_TYPES.content:
@@ -85,7 +85,7 @@ function getBucketFromRootOrg(bucketType, hostingType, rootOrg) {
     default:
       throw new Error('Invalid bucket type received');
   }
-  console.log("bucketEnvVal==>", bucketEnvVal)
+  // console.log("bucketEnvVal==>", bucketEnvVal)
   // Now splitting the value and getting the respective bucket name
   const allRootOrgsAndBucketsArr = bucketEnvVal.split(';');
 
@@ -133,9 +133,9 @@ function getRootOrgFromKey(key) {
 }
 
 function getBucketsFromKey(key) {
-  console.log("key1===========>", key);
+  // console.log("key1===========>", key);
   const rootOrgName = getRootOrgFromKey(key);
-  console.log("key2===========>", BUCKET_TYPES.content, HOSTING_TYPES.prePublish, rootOrgName)
+  // console.log("key2===========>", BUCKET_TYPES.content, HOSTING_TYPES.prePublish, rootOrgName)
   return {
     authoringBucket: getBucketFromRootOrg(BUCKET_TYPES.content, HOSTING_TYPES.prePublish, rootOrgName),
     mainBucket: getBucketFromRootOrg(BUCKET_TYPES.content, HOSTING_TYPES.main, rootOrgName),

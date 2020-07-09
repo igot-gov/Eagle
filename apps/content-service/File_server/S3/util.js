@@ -1231,20 +1231,20 @@ async function getKey(url) {
 async function archiveAndUpload(location, root, type) {
   return new Promise(async (resolve, reject) => {
     try {
-      console.log("archiveAndUpload => location =>", location);
-      console.log("archiveAndUpload => type =>", type);
+      // console.log("archiveAndUpload => location =>", location);
+      // console.log("archiveAndUpload => type =>", type);
       const {
         authoringBucket,
         mainBucket
       } = getBucketsFromKey(location);
-      console.log("mainBucket=======>", mainBucket)
-      console.log("authoringBucket=======>", authoringBucket)
+      // console.log("mainBucket=======>", mainBucket)
+      // console.log("authoringBucket=======>", authoringBucket)
       let exists = await helper.exists(mainBucket, location);
-      console.log(`Is File exists @location=>${exists}`);
+      // console.log(`Is File exists @location=>${exists}`);
 
 
       const finalbucket = exists ? mainBucket : authoringBucket;
-      console.log("finalbucket Passed", finalbucket);
+      // console.log("finalbucket Passed", finalbucket);
       const outputFileName = `${path.basename(location)}.zip`;
       // console.log(`${path.basename(location)}.zip ======================> Path`);
       let outputArchiveFilePath = await archiveS3Location(finalbucket, location, outputFileName);
