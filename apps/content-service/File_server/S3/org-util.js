@@ -135,7 +135,7 @@ function getRootOrgFromKey(key) {
 function getBucketsFromKey(key) {
   console.log("key===========>", key);
   const rootOrgName = getRootOrgFromKey(key);
-  console("key===========>", BUCKET_TYPES.content, HOSTING_TYPES.prePublish, rootOrgName)
+  console.log("key===========>", BUCKET_TYPES.content, HOSTING_TYPES.prePublish, rootOrgName)
   return {
     authoringBucket: getBucketFromRootOrg(BUCKET_TYPES.content, HOSTING_TYPES.prePublish, rootOrgName),
     mainBucket: getBucketFromRootOrg(BUCKET_TYPES.content, HOSTING_TYPES.main, rootOrgName),

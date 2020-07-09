@@ -1231,7 +1231,7 @@ async function getKey(url) {
 async function archiveAndUpload(location, root, type) {
   return new Promise(async (resolve, reject) => {
     try {
-      // console.log("step 1");
+      console.log("archiveAndUpload => location =>",location);
       const {
         authoringBucket,
         mainBucket
