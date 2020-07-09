@@ -841,7 +841,7 @@ const rootOrgToDomain = {};
 
 // Set cookie for images
 router.post('/cookie/images', (req, res) => {
-  console.log("/cookie/images ===> called");  
+  console.log("/cookie/images ===> called");
   const orgName = rootOrgToDomain[req.headers.host] || appConfig.getProperty('default_images_org');
   if (!orgName) {
     console.error(`The domain ${req.headers.host} does not have an ROOT ORG mapped`);
@@ -850,16 +850,16 @@ router.post('/cookie/images', (req, res) => {
       msg: `Requests domain ${req.headers.host} does not have any ROOT_ORG entry to set the cookie`,
     });
   }
-  console.log("cookiePath==========================================");  
+  console.log("cookiePath==========================================");
   const cookiePath = `${getCDNFromRootOrg(CDN_TYPES.images, orgName)}/${utility.imagesBehaviourRoute}/${orgName}/*`;
-  console.log("cookiePath==========================================>",cookiePath);  
+  console.log("cookiePath==========================================>", cookiePath);
   utility.setCookie(cookiePath, res);
 });
 
 // Set cookie for content
 router.post('/cookie/', (req, res) => {
   console.log("Set cookie for content");
-  
+
   try {
     let uuid = req.body.uuid;
     let contentId = req.body.contentId;
@@ -920,7 +920,7 @@ router.get('/video_length/:location', (req, res) => {
 router.post('/zip/:location', (req, res) => {
   req.setTimeout(1000 * 5 * 60);
   let key = contentRoot + '/' + req.params.location;
-
+  console.log("key",contentRoot + '<=============> ' + req.params.location)
   utility.archiveAndUpload(key, contentRoot, 'ZIP')
     .then(result => {
       log.info(result.message);
