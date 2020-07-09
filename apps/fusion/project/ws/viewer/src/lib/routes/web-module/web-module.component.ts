@@ -15,7 +15,7 @@ import { ViewerUtilService } from '../../viewer-util.service'
 export class WebModuleComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | null = null
   private telemetryIntervalSubscription: Subscription | null = null
-  forPreview = window.location.href.includes('/author/')
+  forPreview = window.location.href.includes('/author/') || window.location.href.includes('?preview=true')
   isFetchingDataComplete = false
   isErrorOccured = false
   webmoduleData: NsContent.IContent | null = null
@@ -24,7 +24,7 @@ export class WebModuleComponent implements OnInit, OnDestroy {
   webmoduleManifest: any
   discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
     NsDiscussionForum.IDiscussionForumInput
-    > | null = null
+  > | null = null
   constructor(
     private activatedRoute: ActivatedRoute,
     private contentSvc: WidgetContentService,
@@ -34,44 +34,46 @@ export class WebModuleComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.dataSubscription = this.activatedRoute.data.subscribe(
-      async data => {
-        this.webmoduleData = data.content.data
-        if (this.alreadyRaised && this.oldData) {
-          this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
-        }
-        if (this.webmoduleData) {
-          this.formDiscussionForumWidget(this.webmoduleData)
-        }
-        if (!this.forPreview && this.webmoduleData && this.webmoduleData.artifactUrl.indexOf('content-store') >= 0) {
-          await this.setS3Cookie(this.webmoduleData.identifier)
-        }
-        if (
-          this.webmoduleData &&
-          (this.webmoduleData.mimeType === NsContent.EMimeTypes.WEB_MODULE ||
-            this.webmoduleData.mimeType === NsContent.EMimeTypes.WEB_MODULE_EXERCISE)
-        ) {
-          this.webmoduleManifest = await this.transformWebmodule(this.webmoduleData)
-        }
-        if (this.webmoduleData && this.webmoduleData.identifier) {
-          this.webmoduleData.resumePage = 1
-          if (this.activatedRoute.snapshot.queryParams.collectionId) {
-            await this.fetchContinueLearning(this.activatedRoute.snapshot.queryParams.collectionId, this.webmoduleData.identifier)
-          } else {
-            await this.fetchContinueLearning(this.webmoduleData.identifier, this.webmoduleData.identifier)
+    this.dataSubscription = this.viewSvc
+      .getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '')
+      .subscribe(
+        async data => {
+          this.webmoduleData = data || null
+          if (this.alreadyRaised && this.oldData) {
+            this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
           }
-        }
-        if (this.webmoduleData && this.webmoduleManifest) {
-          this.oldData = this.webmoduleData
-          this.alreadyRaised = true
-          this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.webmoduleData)
-          this.isFetchingDataComplete = true
-        } else {
-          this.isErrorOccured = true
-        }
-      },
-      () => { },
-    )
+          if (this.webmoduleData) {
+            this.formDiscussionForumWidget(this.webmoduleData)
+          }
+          if (!this.forPreview && this.webmoduleData && this.webmoduleData.artifactUrl.indexOf('content-store') >= 0) {
+            await this.setS3Cookie(this.webmoduleData.identifier)
+          }
+          if (
+            this.webmoduleData &&
+            (this.webmoduleData.mimeType === NsContent.EMimeTypes.WEB_MODULE ||
+              this.webmoduleData.mimeType === NsContent.EMimeTypes.WEB_MODULE_EXERCISE)
+          ) {
+            this.webmoduleManifest = await this.transformWebmodule(this.webmoduleData)
+          }
+          if (this.webmoduleData && this.webmoduleData.identifier) {
+            this.webmoduleData.resumePage = 1
+            if (this.activatedRoute.snapshot.queryParams.collectionId) {
+              await this.fetchContinueLearning(this.activatedRoute.snapshot.queryParams.collectionId, this.webmoduleData.identifier)
+            } else {
+              await this.fetchContinueLearning(this.webmoduleData.identifier, this.webmoduleData.identifier)
+            }
+          }
+          if (this.webmoduleData && this.webmoduleManifest) {
+            this.oldData = this.webmoduleData
+            this.alreadyRaised = true
+            this.raiseEvent(WsEvents.EnumTelemetrySubType.Loaded, this.webmoduleData)
+            this.isFetchingDataComplete = true
+          } else {
+            this.isErrorOccured = true
+          }
+        },
+        () => { },
+      )
     // this.telemetryIntervalSubscription = interval(30000).subscribe(() => {
     //   if (this.webmoduleData && this.webmoduleData.identifier) {
     //     this.raiseEvent(WsEvents.EnumTelemetrySubType.HeartBeat)
