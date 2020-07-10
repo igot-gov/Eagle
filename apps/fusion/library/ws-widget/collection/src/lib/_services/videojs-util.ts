@@ -147,7 +147,11 @@ function saveContinueLearning(
 ) {
   const data = {
     resourceId: widgetData.identifier,
-    progress: currentTime,
+    dateAccessed: Date.now(),
+    data: JSON.stringify({
+      progress: currentTime,
+      timestamp: Date.now(),
+    }),
   }
   saveCLearning(data)
 }
@@ -178,7 +182,7 @@ export function videoJsInitializer(
   fireRProgress: fireRealTimeProgressFunction,
   passThroughData: any,
   widgetSubType: string,
-  resumePoint: number,
+  resumePoint: number = 0,
   enableTelemetry: boolean,
   widgetData: IWidgetsPlayerMediaData,
   mimeType: NsContent.EMimeTypes,
@@ -192,12 +196,14 @@ export function videoJsInitializer(
   let loaded = false
   let readyToRaise = false
   let currTime = 0
-
   if (enableTelemetry) {
     player.on(videojsEventNames.loadeddata, () => {
       try {
-        if (resumePoint !== 0 && Math.floor(player.duration()) !== Math.floor(resumePoint)) {
-          player.currentTime(resumePoint)
+        if (resumePoint) {
+          const start = Number(resumePoint)
+          if (start > 10 && player.duration() - start > 20) {
+            player.currentTime(start - 10)
+          }
         }
       } catch (err) { }
     })
@@ -241,9 +247,7 @@ export function videoJsInitializer(
     })
   }
   const dispose = () => {
-    if (widgetData.continueLearning) {
-      saveContinueLearning(widgetData, saveCLearning, currTime)
-    }
+    saveContinueLearning(widgetData, saveCLearning, currTime)
     if (heartBeatSubscription) {
       heartBeatSubscription.unsubscribe()
     }
@@ -321,9 +325,7 @@ export function videoInitializer(
     })
   }
   const dispose = () => {
-    if (widgetData.continueLearning) {
-      saveContinueLearning(widgetData, saveCLearning, currTime)
-    }
+    saveContinueLearning(widgetData, saveCLearning, currTime)
     if (heartBeatSubscription) {
       heartBeatSubscription.unsubscribe()
     }
@@ -428,9 +430,7 @@ export function youtubeInitializer(
     }
   }
   const dispose = () => {
-    if (widgetData.continueLearning) {
-      saveContinueLearning(widgetData, saveCLearning, currTime)
-    }
+    saveContinueLearning(widgetData, saveCLearning, currTime)
     if (heartBeatSubscription) {
       heartBeatSubscription.unsubscribe()
     }

@@ -46,6 +46,7 @@ export class ContentProgressService {
   private get shouldFetchProgress(): boolean {
     return Boolean(this.progressHash === null && !this.isFetchingProgress)
   }
+
   fetchProgressHashContentsId(
     contentIds: any,
   ): Observable<any> {
