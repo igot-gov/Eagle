@@ -101,7 +101,7 @@ export class UserBulkUploadComponent implements OnInit {
   }
 
   public downloadReport(row: any) {
-    this.fileService.downloadReport(row.id, row.name).subscribe()
+    this.fileService.downloadReport(row.id, row.name)
   }
 
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Subject, Observable } from 'rxjs'
-import { finalize, map } from 'rxjs/operators'
+import { finalize } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import * as fileSaver from 'file-saver'
 
 const API_ENDPOINTS = {
   bulkUpload: `/apis/protected/v8/admin/userRegistration/bulkUpload`,
-  downloadReport: `/apis/protected/v8/admin/userRegistration/report`,
+  downloadReport: `/apis/protected/v8/admin/userRegistration/bulkUploadReport`,
 }
 
 @Injectable()
@@ -40,22 +40,12 @@ export class FileService {
     }
 
     public downloadReport(id: any, name: string) {
-        return this.http.get(`${API_ENDPOINTS.downloadReport}?id=${id}`, { responseType:  'blob' }).pipe(
-          map((response: any) => {
-            const blobObj = new Blob([new Uint8Array(response)])
-            // const blobObj = new Blob([new Uint8Array(response)],
-            //                          { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-            fileSaver.saveAs(blobObj, `${name}-report.xlsx`)
-
-          //         const a = document.createElement('a')
-          // document.body.appendChild(a)
-          // let file = new Blob([response], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
-          // let fileURL = URL.createObjectURL(file)
-          // a.href = fileURL
-          // a.download = name + '.xlsx'
-          // a.click()
+        return this.http.get(`${API_ENDPOINTS.downloadReport}/${id}`).subscribe(
+          (response: any) => {
+            const blobObj = new Blob([new Uint8Array(response.report.data)])
+            fileSaver.saveAs(blobObj, `${name.split('.')[0]}.csv`)
             return response
-          }),
+          },
         )
     }
 
