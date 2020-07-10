@@ -410,8 +410,10 @@ router.post('/create-and-upload/:location', pathValidation, [increaseTimeout(5 *
 });
 
 function transformOrCreateAndUploadToS3(req, res, decodeType) {
+  console.log("transformOrCreateAndUploadToS3 ====> decodeType=>>>", decodeType)
   let text = req.body.text;
   const fileName = req.body.fileName;
+  // console.log("Text=>", text);
 
   if (text && fileName) {
     if (decodeType) {
@@ -425,6 +427,7 @@ function transformOrCreateAndUploadToS3(req, res, decodeType) {
             break;*/
         case 'base64':
           text = Buffer.from(text, 'base64').toString('utf-16le');
+          text = JSON.parse(text);
           /*const sBinaryString = Buffer.from(text, 'base64').toString('binary');
           const aBinaryView = new Uint8Array(sBinaryString.length);
           Array.prototype.forEach.call(
