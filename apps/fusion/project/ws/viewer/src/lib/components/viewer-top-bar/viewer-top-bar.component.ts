@@ -27,6 +27,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   resourceName: string | null = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
   collectionId = ''
   logo = true
+  isPreview = false
   forChannel = false
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -65,6 +66,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     })
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       this.collectionId = params.get('collectionId') as string
+      this.isPreview = params.get('preview') === 'true' ? true : false
     })
     this.viewerDataServiceResourceSubscription = this.viewerDataSvc.changedSubject.subscribe(
       _data => {
