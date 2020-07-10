@@ -33,6 +33,7 @@ elasticsearch_password: username
 elasticsearch_cluster_name: clusetername #elasticsearch
 elasticsearch_contentindex_alias_name: mlsearch_*
 elasticsearch_contentindex_type: searchresources
+sb_authtool_elasticsearch_contentindex_alias_name: mlsearch
 kafka_authtool_elasticsearch_contentindex_alias_name: mlsearch
 elasticsearch_http_hosts_list:
     - elasticsearch_host_ip1:lasticsearch_http_port1 #10.0.1.2:9200
@@ -82,6 +83,7 @@ zookeeper_servers_list: "{{ zookeeper_host }}:{{ zookeeper_port }}"
 # SMTP Details
 smtp_host: smtp_host_ip
 smtp_port: smtp_port
+igot_smtpkey: smtp_key
 
 # Docker hub details
 docker_hub_url: dockerhubip:port #10.0.2.10:5000 or domainname
