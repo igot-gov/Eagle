@@ -20,6 +20,8 @@ elasticsearch_password: "<password of elasticsearch; empty string if no authenti
 elasticsearch_cluster_name: "<cluster name coonfigured on elasticsearch>"
 elasticsearch_contentindex_alias_name: mlsearch_*
 elasticsearch_contentindex_type: searchresources
+sb_authtool_elasticsearch_contentindex_alias_name: mlsearch
+kafka_authtool_elasticsearch_contentindex_alias_name: mlsearch
 elasticsearch_http_hosts_list: "<If elastisearch is deployed as cluster hostname:port list, seperated by comma>"
 # Example:
   # - 10.2.3.4:9200
@@ -72,7 +74,7 @@ zookeeper_servers_list: "{{ zookeeper_host }}:{{ zookeeper_port }}"
 # SMTP Details
 smtp_host: "<hostname or ip address of SMTP server; empty string if not available>"
 smtp_port: "<port of SMTP server; empty string if not available>"
-
+igot_smtpkey: "<smtp_key>"
 # Docker hub details
 docker_hub_url: "<Docker repo URL from which images will be pulled>"
 
