@@ -6,3 +6,9 @@ export const axiosRequestConfig: AxiosRequestConfig = {
   retryDelay: 1,
   timeout: Number(CONSTANTS.TIMEOUT) || 10000,
 }
+
+export const axiosRequestConfigLong: AxiosRequestConfig = {
+  retry: 3,
+  retryDelay: 1,
+  timeout: 20000,
+}

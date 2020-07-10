@@ -17,7 +17,7 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 import { wTokenApiMock } from '../user/details'
 
-const filePath = process.cwd() + '/user_upload/'
+const filePath = CONSTANTS.USER_BULK_UPLOAD_DIR || process.cwd() + '/user_upload/'
 const REGISTRATION_BASE = `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content-sources`
 const API_ENDPOINTS = {
     deregisterUsers: (source: string) => `${REGISTRATION_BASE}/${source}/deregistered-users`,
@@ -148,7 +148,7 @@ userRegistrationApi.post('/create-user', async (req, res) => {
             await UpdateKeycloakUserPassword(createKeycloak.id, false)
                 .catch((error) => {
                     // tslint:disable-next-line: no-duplicate-string
-                    logError('ERROR ON UpdateKeycloakUserPassword', error)
+                    logError('/create-user ERROR ON UpdateKeycloakUserPassword', error)
                     res.status(400).send('1003: User default password could not be set !!' || {})
                 })
             getAuthToken(req.body.email).then(async (kcaAuthToken) => {
@@ -166,8 +166,8 @@ userRegistrationApi.post('/create-user', async (req, res) => {
             })
             await UpdateKeycloakUserPassword(createKeycloak.id, true)
                 .catch((error) => {
-                    logError('ERROR ON UpdateKeycloakUserPassword', error)
-                    // res.status(400).send('1003: User default password could not be set !!' || {})
+                    logError('/create-user ERROR ON UpdateKeycloakUserPassword after getAuthtoken', error)
+                    res.status(400).send('1003: User default password could not be set !!' || {})
                 })
             await sendActionsEmail(createKeycloak.id)
                 .catch((error) => {
@@ -197,13 +197,12 @@ userRegistrationApi.post('/user/access-path', async (req, res) => {
                 res.json(key || {})
             } else if (err) {
                 logError(`ERROR executing the query >> ${query}`)
-                // tslint:disable-next-line: no-duplicate-string
-                res.status(400).send('Something went wrong!')
+                res.status(400).send('/user/access-path:: Something went wrong!')
             }
         })
         // })
     } catch (err) {
-        logError('ERROR ON access-path >', err)
+        logError('/user/access-path:: ERROR ON access-path >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
@@ -231,12 +230,12 @@ userRegistrationApi.post('/user/update-access-path', async (req, res) => {
             } else if (err) {
                 clientConnect.shutdown()
                 logError(`ERROR executing the query >> ${query}`)
-                res.status(400).send('Something went wrong!')
+                res.status(400).send('/user/update-access-path:: Something went wrong!')
             }
         })
         // })
     } catch (err) {
-        logError('ERROR ON post access-path >', err)
+        logError('/user/update-access-path:: ERROR ON access-path >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
@@ -244,21 +243,18 @@ userRegistrationApi.post('/user/update-access-path', async (req, res) => {
 
 userRegistrationApi.post('/bulkUpload', async (req, res) => {
     try {
-        // tslint:disable-next-line: no-any
-        const successList: any[] = []
-        // tslint:disable-next-line: no-any
-        const failedList: any[] = []
         const fileName = req.body.name
         const ext = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()
         const base64data = req.body.content.replace(/^data:.*,/, '')
         const uuid = uuidv4()
-        const reportData = [['email', 'status']]
+        const reportData = [['email', 'status\n']]
         fs.writeFileSync(filePath + `${uuid}.${ext}`, base64data, 'base64')
         const reqToInsert = {
             name: `${fileName}`,
             report: null,
             status: 'processing',
             user_id: extractUserIdFromRequest(req),
+            uuid,
         }
         await insertBulkUploadStatus(reqToInsert)
         res.json(`User upload started with id: ${uuid}, After process is finished you can download the report`)
@@ -277,35 +273,26 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                 const userId = await createUser(reqToNewUser)
                     .catch((err) => {
                         if (err.response.status === 409) {
-                            failedList.push(`User with email ${email} is already exists`)
-                            reportData.push([email, `User with email ${email} is already exists`])
+                            reportData.push([`\n${email}`, `User with email ${email} is already exists\n`])
                         } else {
-                            failedList.push(`User could not be created in Keycloack`)
-                            reportData.push([email, `User could not be created in Keycloack`])
+                            reportData.push([`\n${email}`, `User could not be created in Keycloack\n`])
                         }
                     })
                 if (userId) {
-                    successList.push(userId)
                     await performNewUserSteps(userId, req)
                         .catch((err) => {
-                            reportData.push([email, err])
+                            reportData.push([`\n${email}`, `${err}\n`])
                         })
-                    reportData.push([email, 'success'])
+                    reportData.push([`\n${email}`, `success\n`])
                 }
             }
         }
-
-        // tslint:disable-next-line: no-console
-        console.log('failedList:', failedList)
-        // tslint:disable-next-line: no-console
-        console.log('succesList:', successList)
-        // tslint:disable-next-line: no-console
-        console.log('reportData', reportData)
         const reqToUpdate = {
             name: `${fileName}`,
             report: reportData,
             status: 'completed',
             user_id: extractUserIdFromRequest(req),
+            uuid,
         }
         await insertBulkUploadStatus(reqToUpdate)
 
@@ -339,7 +326,7 @@ export async function performNewUserSteps(userId: any, req: any) {
     return new Promise(async (resolve, reject) => {
         await UpdateKeycloakUserPassword(userId, false)
             .catch((error) => {
-                logError('ERROR ON UpdateKeycloakUserPassword', error)
+                logError('performNewUserSteps:: ERROR ON UpdateKeycloakUserPassword', error)
                 reject('User default password could not be set')
             })
         // tslint:disable-next-line: no-identical-functions
@@ -359,7 +346,7 @@ export async function performNewUserSteps(userId: any, req: any) {
         await UpdateKeycloakUserPassword(userId, true)
             // tslint:disable-next-line: no-identical-functions
             .catch((error) => {
-                logError('ERROR ON UpdateKeycloakUserPassword', error)
+                logError('performNewUserSteps:: ERROR ON UpdateKeycloakUserPassword after getAuthToken', error)
                 reject('User default password could not be set')
             })
         resolve()
@@ -372,8 +359,8 @@ export async function insertBulkUploadStatus(req: any) {
         const clientConnect = new cassandraDriver.Client(cassandraClientOptions)
         const query = `INSERT INTO ${CONSTANTS.CASSANDRA_KEYSPACE}.bulk_user_upload_detail
             (id, name, user_id, status, report) VALUES
-            (uuid(), \'${req.name}\', ${req.user_id}, \'${req.status}\', textAsblob\(\'${req.report}\'\))`
-        clientConnect.execute(query, (err, _result) => {
+            (${req.uuid}, \'${req.name}\', ${req.user_id}, \'${req.status}\', textAsblob\(\'${req.report}\'\))`
+        return clientConnect.execute(query, async (err, _result) => {
             if (!err) {
                 clientConnect.shutdown()
                 logInfo('Insert Query to bulk_user_upload_detail successful')
@@ -391,7 +378,6 @@ export async function insertBulkUploadStatus(req: any) {
 userRegistrationApi.get('/bulkUploadData', async (req, res) => {
     try {
         const clientConnect = new cassandraDriver.Client(cassandraClientOptions)
-        // return new Promise((resolve, _reject) => {
         const query = `SELECT id,name,status FROM ${CONSTANTS.CASSANDRA_KEYSPACE}.bulk_user_upload_detail
             WHERE user_id=${extractUserIdFromRequest(req)}  allow filtering`
         // tslint:disable-next-line: no-identical-functions
@@ -405,18 +391,17 @@ userRegistrationApi.get('/bulkUploadData', async (req, res) => {
                 res.status(400).send('Something went wrong!')
             }
         })
-        // })
     } catch (err) {
-        logError('ERROR ON get bulkUploadData >', err)
+        logError('ERROR ON bulkUploadData >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
 })
 
-userRegistrationApi.get('/report/:id', async (req, res) => {
+userRegistrationApi.get('/bulkUploadReport/:id', async (req, res) => {
+    logInfo('fetching bulk-upload-report with id: ', req.params.id)
     try {
         const clientConnect = new cassandraDriver.Client(cassandraClientOptions)
-        // return new Promise((resolve, _reject) => {
         const query = `SELECT report FROM ${CONSTANTS.CASSANDRA_KEYSPACE}.bulk_user_upload_detail
             WHERE id=${req.params.id}  allow filtering`
         // tslint:disable-next-line: no-identical-functions
@@ -424,34 +409,14 @@ userRegistrationApi.get('/report/:id', async (req, res) => {
             if (!err && result && result.rows.length > 0) {
                 const key = result.rows[0]
                 clientConnect.shutdown()
-                const reportDataOptions = { '!cols': [{ wch: 20 }, { wch: 20 }] }
-                // fs.unlinkSync(filePath + `report.xlsx`)
-                // tslint:disable-next-line: no-any
-                const chunk = (arr: any[], size: number) =>
-                    Array.from({ length: Math.ceil(arr.length / size) }, (_v, i) =>
-                        arr.slice(i * size, i * size + size)
-                    )
-                const resultArray = Buffer.from(key.report).toString().split(',')
-                const reportdata = chunk(resultArray, 2)
-                const reportDataArray = [...reportdata]
-                const arrayBufferValue = xlsx.build([{ name: `report.xlsx`, data: reportDataArray }],
-                    reportDataOptions)
-
-                // tslint:disable-next-line: no-commented-code
-                // const bufferVal = Buffer.from(arrayBufferValue)
-                fs.writeFileSync(filePath + `report.xlsx`, arrayBufferValue)
-                fs.readFileSync(filePath + `report.xlsx`, 'binary')
-                // res.send(arrayBufferValue)
-                res.sendFile(filePath + `report.xlsx`)
-
+                res.json(key || {})
             } else if (err) {
                 logError(`ERROR executing the query >> ${query}`)
                 res.status(400).send('Something went wrong!')
             }
         })
-        // })
     } catch (err) {
-        logError('ERROR ON get report >', err)
+        logError('ERROR ON /bulkUploadReport/:id >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
