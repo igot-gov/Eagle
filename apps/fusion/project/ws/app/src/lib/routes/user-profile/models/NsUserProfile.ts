@@ -18,23 +18,37 @@ export namespace NsUserProfileDetails {
     'maritalStatus': string
     'residenceAddress': string
   }
+
+  export interface IAcademics {
+    X_STANDARD: any,
+    XII_STANDARD: any,
+    degree: any,
+    postDegree: any,
+  }
+
+  export interface IGraduation {
+    degree: any
+    instituteName: any
+    yop: any
+  }
+
   export enum EPrimaryEmailType {
     PERSONAL = 'personal',
     OFFICIAL = 'official',
   }
   export enum EUserGender {
-    MALE = 'MALE',
-    FEMALE = 'FEMALE',
-    OTHER = 'OTHER',
+    MALE = 'Male',
+    FEMALE = 'Female',
+    OTHER = 'Others',
   }
   export enum EMaritalStatus {
-    SINGLE = 'single',
-    MARRIED = 'married',
+    SINGLE = 'Single',
+    MARRIED = 'Married',
   }
   export enum ECategory {
-    GENERAL = 'general',
-    OBC = 'obc',
-    SC = 'sc',
-    ST = 'st',
+    GENERAL = 'General',
+    OBC = 'OBC',
+    SC = 'SC',
+    ST = 'ST',
   }
 }

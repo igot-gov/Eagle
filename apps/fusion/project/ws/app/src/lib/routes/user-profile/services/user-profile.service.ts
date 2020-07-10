@@ -1,14 +1,25 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
-import { IUserProfileDetails, ILanguagesApiData, INationalityApiData, IUserProfileDetailsFromRegistry } from '../models/user-profile.model'
+import { IUserProfileDetails,
+  ILanguagesApiData,
+  INationalityApiData,
+  IUserProfileDetailsFromRegistry,
+  IProfileMetaApiData,
+} from '../models/user-profile.model'
 
 const API_ENDPOINTS = {
   updateProfileDetails: '/apis/protected/v8/user/profileDetails/createUserRegistry',
+  // updateProfileDetails: 'http://localhost:3003/protected/v8/user/profileDetails/createUserRegistry',
   getUserdetailsFromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistry',
+  // getUserdetailsFromRegistry: 'http://localhost:3003/protected/v8/user/profileDetails/getUserRegistry',
   getUserdetails: '/apis/protected/v8/user/details/detailV1',
   getMasterNationlity: '/apis/protected/v8/user/profileDetails/getMasterNationalities',
   getMasterLanguages: '/apis/protected/v8/user/profileDetails/getMasterLanguages',
+  // getMasterNationlity: 'http://localhost:3003/protected/v8/user/profileDetails/getMasterNationalities',
+  // getMasterLanguages: 'http://localhost:3003/protected/v8/user/profileDetails/getMasterLanguages',
+  getProfilePageMeta: '/apis/protected/v8/user/profileDetails/getProfilePageMeta',
+  // getProfilePageMeta: 'http://localhost:3003/protected/v8/user/profileDetails/getProfilePageMeta',
 
 }
 
@@ -29,6 +40,9 @@ export class UserProfileService {
   }
   getMasterNationlity(): Observable<INationalityApiData> {
     return this.http.get<INationalityApiData>(API_ENDPOINTS.getMasterNationlity)
+  }
+  getProfilePageMeta(): Observable<IProfileMetaApiData> {
+    return this.http.get<IProfileMetaApiData>(API_ENDPOINTS.getProfilePageMeta)
   }
   getUserdetailsFromRegistry(): Observable<[IUserProfileDetailsFromRegistry]> {
     return this.http.get<[IUserProfileDetailsFromRegistry]>(API_ENDPOINTS.getUserdetailsFromRegistry)

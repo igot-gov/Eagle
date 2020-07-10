@@ -38,9 +38,52 @@ export interface IChipItems {
 export interface ILanguagesApiData {
   languages: ILanguages[]
 }
+
+export interface INation {
+  name: string
+}
 export interface INationality {
   name: string
+  countryCode: string
 }
 export interface INationalityApiData {
   nationalities: INationality[]
+}
+
+export interface INameField {
+  name: string
+}
+
+export interface IGovtOrgMeta {
+  ministries: INameField[]
+  service: INameField[]
+  cadre: INameField[]
+}
+export interface IIndustriesMeta {
+  industries: INameField[]
+}
+
+// tslint:disable-next-line: interface-name
+export interface IdegreesMeta {
+  graduations: INameField[]
+  postGraduations: INameField[]
+}
+// tslint:disable-next-line: interface-name
+export interface IdesignationsMeta {
+  designations: INameField[]
+  gradePay: INameField[]
+}
+
+export interface IProfileMetaApiData {
+  govtOrg: IGovtOrgMeta
+  industries: IIndustriesMeta
+  degrees: IdegreesMeta
+  designations: IdesignationsMeta
+}
+
+export interface IProfileAcademics {
+    nameOfQualification: string,
+    type: string,
+    nameOfInstitute: string,
+    yearOfPassing: string,
 }

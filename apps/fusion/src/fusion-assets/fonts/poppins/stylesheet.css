@@ -46,7 +46,7 @@
 }
 
 @font-face {
-    font-family: 'Poppins';
+    font-family: 'Poppins-medium';
     src: url('Poppins-Medium.woff2') format('woff2'),
         url('Poppins-Medium.woff') format('woff');
     font-weight: 500;
@@ -54,7 +54,7 @@
 }
 
 @font-face {
-    font-family: 'Poppins';
+    font-family: 'Poppins-Regular';
     src: url('Poppins-Regular.woff2') format('woff2'),
         url('Poppins-Regular.woff') format('woff');
     font-weight: normal;
@@ -140,4 +140,3 @@
     font-weight: 200;
     font-style: italic;
 }
-
