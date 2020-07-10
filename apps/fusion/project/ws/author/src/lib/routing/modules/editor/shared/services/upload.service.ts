@@ -26,7 +26,7 @@ export class UploadService {
     private accessService: AccessControlService,
     private http: HttpClient,
     private configSvc: ConfigurationsService,
-  ) {}
+  ) { }
 
   upload(
     data: FormData,
@@ -46,13 +46,7 @@ export class UploadService {
     newFormData.append('content', file, fileName)
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
       // tslint:disable-next-line:max-line-length
-      `${CONTENT_BASE}${this.accessService.rootOrg.replace(
-        / /g,
-        '_',
-      )}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace(
-        '.img',
-        '',
-      )}${contentData.contentType}`,
+      `${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
       newFormData,
       false,
       options,
@@ -66,13 +60,7 @@ export class UploadService {
   ): Observable<NSApiResponse.IFileApiResponse> {
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
       // tslint:disable-next-line:max-line-length
-      `${CONTENT_BASE_ZIP}${this.accessService.rootOrg.replace(
-        / /g,
-        '_',
-      )}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace(
-        '.img',
-        '',
-      )}${contentData.contentType}`,
+      `${CONTENT_BASE_ZIP}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
       data,
       false,
       options,
@@ -90,13 +78,7 @@ export class UploadService {
         fileName,
         text: this.apiService.base64(CONTENT_BASE_ENCODE, data).data,
         // tslint:disable-next-line:max-line-length
-        location: `${this.accessService.rootOrg.replace(
-          / /g,
-          '_',
-        )}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace(
-          '.img',
-          '',
-        )}${contentData.contentType}`,
+        location: `${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
       },
       false,
     )

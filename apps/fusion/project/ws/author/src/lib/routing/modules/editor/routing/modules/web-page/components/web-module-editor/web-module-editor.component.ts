@@ -312,9 +312,11 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   }
 
   uploadJson(data: any, fileName: string, location: '/web-hosted' | '/web-hosted/assets') {
-    let content = JSON.parse(JSON.stringify(JSON.stringify(data.replace(new RegExp('\r?\n', 'g'), ''))))
+    let content = JSON.parse(JSON.stringify(data))
     if (fileName.endsWith('.html')) {
+
       content = `<html><head></head><body>${content}</body></html>`
+      content = content.replace(new RegExp('\r?\n?\t', 'g'), '')
       // const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'text/html' })
       // const formdata = new FormData()
       // formdata.append('content', blob, fileName)

@@ -40,7 +40,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     private contentSvc: WidgetContentService,
     private platform: Platform,
     private accessControlSvc: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
@@ -94,6 +94,7 @@ export class VideoComponent implements OnInit, OnDestroy {
               ? this.viewerSvc.getAuthoringUrl(this.videoData.artifactUrl)
               : this.videoData.artifactUrl
             : ''
+          this.widgetResolverVideoData.widgetData.resumePoint = this.getResumePoint(this.videoData)
           this.widgetResolverVideoData.widgetData.identifier = this.videoData
             ? this.videoData.identifier
             : ''
@@ -104,7 +105,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           }
           this.isFetchingDataComplete = true
         },
-        () => {},
+        () => { },
       )
     }
   }
@@ -119,6 +120,16 @@ export class VideoComponent implements OnInit, OnDestroy {
     if (this.viewerDataSubscription) {
       this.viewerDataSubscription.unsubscribe()
     }
+  }
+  getResumePoint(content: NsContent.IContent | null) {
+    if (content) {
+      if (content.progress && content.progress.progressSupported && content.progress.progress) {
+        return Math.floor(content.duration * content.progress.progress) || 0
+      }
+      return 0
+
+    }
+    return 0
   }
 
   initWidgetResolverVideoData(content: NsContent.IContent) {
@@ -188,7 +199,7 @@ export class VideoComponent implements OnInit, OnDestroy {
     await this.contentSvc
       .setS3Cookie(contentId)
       .toPromise()
-      .catch(() => {})
+      .catch(() => { })
     return
   }
 }
