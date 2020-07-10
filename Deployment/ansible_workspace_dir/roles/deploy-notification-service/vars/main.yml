@@ -31,6 +31,7 @@ infosys_smtp_key: ace44299-8672-4c8e-9694-e168afe449ef
 siemens_smtp_key: ace44299-8672-4c8e-9694-e168afe449ef
 pid_service_url: "{{ network_alias_pid_service }}:{{ service_pid_service_port }}"
 spring_datasource_jdbc_url: jdbc:postgresql://{{ postgresql_host }}:{{ postgresql_port }}/{{ postgresql_wingspan_database }}
+igot_smtp_key: "{{ igot_smtpkey }}"
 # Siemens sepcific
 secret_siemens_smtp_key_name: smtp_key
 secret_siemens_smtp_cert_name: smtp_cert
