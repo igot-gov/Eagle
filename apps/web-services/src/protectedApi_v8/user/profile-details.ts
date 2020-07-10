@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Router } from 'express'
-import { axiosRequestConfig } from '../../configs/request.config'
+import { axiosRequestConfig, axiosRequestConfigLong } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
@@ -10,6 +10,7 @@ const API_END_POINTS = {
     createUserRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/createUserRegistry`,
     getMasterLanguages: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/getMasterLanguages`,
     getMasterNationalities: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/getMasterNationalities`,
+    getProfilePageMeta: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/getProfilePageMeta`,
     getUserRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/getUserRegistry`,
     setUserProfileStatus: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/setUserProfileStatus`,
     userProfileStatus: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/userProfileStatus`,
@@ -38,7 +39,7 @@ profileDeatailsApi.post('/createUserRegistry', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo('Create user registry for', userId)
         const response = await axios.post(API_END_POINTS.createUserRegistry, { ...req.body, userId }, {
-            ...axiosRequestConfig,
+            ...axiosRequestConfigLong,
         })
         res.status(response.status).json(response.data)
     } catch (err) {
@@ -112,6 +113,18 @@ profileDeatailsApi.get('/getMasterLanguages', async (_req, res) => {
 profileDeatailsApi.get('/getMasterNationalities', async (_req, res) => {
     try {
         const response = await axios.get(API_END_POINTS.getMasterNationalities, {
+            ...axiosRequestConfig,
+        })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError('ERROR FETCHING MASTER NATIONALITIES >', err)
+        res.status((err && err.response && err.response.status) || 500).send(err)
+    }
+})
+
+profileDeatailsApi.get('/getProfilePageMeta', async (_req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.getProfilePageMeta, {
             ...axiosRequestConfig,
         })
         res.status(response.status).send(response.data)
