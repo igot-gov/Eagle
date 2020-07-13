@@ -15,7 +15,7 @@ import { ViewerUtilService } from '../../viewer-util.service'
 export class WebModuleComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | null = null
   private telemetryIntervalSubscription: Subscription | null = null
-  forPreview = window.location.href.includes('/author/')
+  forPreview = window.location.href.includes('/author/') || window.location.href.includes('?preview=true')
   isFetchingDataComplete = false
   isErrorOccured = false
   webmoduleData: NsContent.IContent | null = null
