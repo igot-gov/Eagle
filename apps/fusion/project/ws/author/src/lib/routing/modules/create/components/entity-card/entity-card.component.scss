@@ -63,6 +63,10 @@ $badge-padding: 12px;
   }
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .title-div {
   flex-direction: column-reverse;
   margin-bottom: $size-s;

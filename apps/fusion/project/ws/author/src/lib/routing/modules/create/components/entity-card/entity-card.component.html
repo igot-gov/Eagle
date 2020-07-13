@@ -23,8 +23,9 @@
     <div class="margin-left-l animated" *ngIf="childEntity.length && resourceClicked">
       <ng-container *ngFor="let option of childEntity; let idx = index">
         <ng-container *ngIf="option.available">
-          <div class="flex flex-middle margin-left-l margin-bottom-s padding-top-s" (click)="entityClicked(option)"
-            [ngClass]="{ op60: !option.enabled }" [id]="option.id" [attr.name]="option.id">
+          <div class="flex flex-middle margin-left-l margin-bottom-s padding-top-s pointer"
+            (click)="entityClicked(option)" [ngClass]="{ op60: !option.enabled }" [id]="option.id"
+            [attr.name]="option.id">
             <mat-icon class="ws-mat-primary-text">{{ option.icon }}</mat-icon>
             <p class="margin-left-m margin-remove-bottom">{{ option.name }}</p>
           </div>
