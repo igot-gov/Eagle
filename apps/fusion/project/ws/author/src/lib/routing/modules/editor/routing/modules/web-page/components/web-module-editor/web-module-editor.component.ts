@@ -352,7 +352,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       }
       const htmlFile = JSON.parse(
         JSON.stringify(e.body)
-          .replace(/<a href/gm, '<a target="_blank" href')
+          .replace(/<a href/gm, '<a target=\\"_blank\\" href')
           .replace(this.imagesUrlbase, '')
           .replace(/(<img.*width=)['"](\d+?)['"](.*\/>)/gm, '$1"$2" style="width:100%; heigth: auto; max-width:$2" $3')
       )
