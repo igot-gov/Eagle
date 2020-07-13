@@ -32,6 +32,8 @@ services:
       application_default:
         aliases:
           - {{ network_alias_name }}
+    volumes:
+          - {{ host_bulk_upload }}:/usr/src/app/user_upload
     env_file:
       - {{ env_file_deployment_location }}
     environment:
