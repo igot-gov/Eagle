@@ -611,13 +611,14 @@
                       Organisation Name
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
-                      <mat-select #orgNameSelect formControlName="orgName" i18n-placeholder placeholder="--Select--">
+                      <mat-select #orgNameSelect formControlName="orgName" i18n-placeholder placeholder="--Select--"
+                      (selectionChange)="otherDropDownChange(designation.value, 'orgname')">
                         <mat-option [value]="org.name" *ngFor="let org of govtOrgMeta?.ministries">{{org.name}}</mat-option>
-                        <mat-option value="Other">Other</mat-option>
+                        <mat-option [value]="'Other'">Other</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
-                  <div class="item" *ngIf="orgNameSelect.value == 'Other'">
+                  <div class="item" *ngIf="orgNameSelect.value === 'Other' || showOrgnameOther">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Other label|Label which explains the user to enter Other">
                       Other 
@@ -638,15 +639,16 @@
                       Industry
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
-                      <mat-select #industrySelect formControlName="industry" i18n-placeholder placeholder="--Select--">
+                      <mat-select #industrySelect formControlName="industry" i18n-placeholder placeholder="--Select--"
+                      (selectionChange)="otherDropDownChange(designation.value, 'industry')">
                         <mat-option [value]="i.name" *ngFor="let i of industriesMeta">
                           {{i.name}}
                         </mat-option>
-                        <mat-option value="Other">Other</mat-option>
+                        <mat-option [value]="'Other'">Other</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
-                  <div class="item" *ngIf="industrySelect.value == 'Other'">
+                  <div class="item" *ngIf="industrySelect.value === 'Other' || showIndustryOther">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Other label|Label which explains the user to enter Other">
                       Other
@@ -667,14 +669,16 @@
                       Designation
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
-                      <mat-select #designationSelect formControlName="designation" i18n-placeholder placeholder="--Select--">
+                      <mat-select #designation formControlName="designation" i18n-placeholder placeholder="--Select--"
+                      (selectionChange)="otherDropDownChange(designation.value, 'designation')">
                         <mat-option [value]="designation.name" *ngFor="let designation of designationsMeta?.designations">
                           {{designation.name}}
                         </mat-option>
+                        <mat-option [value]="'Other'">Other</mat-option>
                       </mat-select>
                     </mat-form-field>
                   </div>
-                  <div class="item" *ngIf="designationSelect.value == 'Other'">
+                  <div class="item" *ngIf="designation.value === 'Other' || showDesignationOther">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Other label|Label which explains the user to enter Other">
                       Other
@@ -996,7 +1000,7 @@
           class="text-white btn-success btn-responsive"
           [disabled]="uploadSaveData || createUserForm?.invalid">
           <span class="text-white" i18n>
-            Save Details {{uploadSaveData}} {{createUserForm?.invalid}} {{uploadSaveData || createUserForm?.invalid}}
+            Save Details
           </span>
         </button>
         <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"

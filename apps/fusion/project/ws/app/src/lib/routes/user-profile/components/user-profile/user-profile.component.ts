@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core'
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { Subscription, Observable } from 'rxjs'
@@ -71,13 +71,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public degreeInstitutes = []
   public postDegreeInstitutes = []
   public countryCodes: string[] = []
+  showDesignationOther!: boolean
+  showOrgnameOther!: boolean
+  showIndustryOther!: boolean
 
   constructor(
     private snackBar: MatSnackBar,
     private userProfileSvc: UserProfileService,
     private configSvc: ConfigurationsService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef
   ) {
     this.createUserForm = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
@@ -444,7 +448,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private populateOrganisationDetails(data: any) {
     let org = {
-      isGovtOrg: '',
+      isGovtOrg: true,
       orgName: '',
       industry: '',
       designation: '',
@@ -453,27 +457,33 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       doj: '',
       orgDesc: '',
       completePostalAddress: '',
-      organizationOther: '',
+      orgNameOther: '',
       industryOther: '',
       designationOther: '',
     }
-    if (data && data.professionalDetails.organisations && data.professionalDetails.organisations.length > 0) {
-      const organisation = data.professionalDetails.organisations[0]
+    if (data && data.professionalDetails && data.professionalDetails.length > 0) {
+      const organisation = data.professionalDetails[0]
       org = {
         isGovtOrg: organisation.organisationType,
         orgName: organisation.name,
+        orgNameOther: organisation.nameOther,
         industry: organisation.industry,
+        industryOther: organisation.industryOther,
         designation: organisation.designation,
+        designationOther: organisation.designationOther,
         location: organisation.location,
         responsibilities: organisation.responsibilities,
-        doj: organisation.doj,
+        doj: this.getDateFromText(organisation.doj) as any,
         orgDesc: organisation.description,
         completePostalAddress: organisation.completePostalAddress,
-        organizationOther: organisation.additionalAttributes.organizationOther,
-        industryOther: organisation.additionalAttributes.industryOther,
-        designationOther: organisation.additionalAttributes.designationOther,
+      }
+      if (organisation.organisationType === 'Government') {
+        org.isGovtOrg = true
+      } else {
+        org.isGovtOrg = false
       }
     }
+
     return org
   }
 
@@ -490,28 +500,30 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       degree: [],
       postDegree: [],
     }
-    data.academics.map((item: any) => {
-      switch (item.type) {
-        case 'X_STANDARD': academics.X_STANDARD.schoolName10 = item.nameOfInstitute
-          academics.X_STANDARD.yop10 = item.yearOfPassing
-          break
-        case 'XII_STANDARD': academics.XII_STANDARD.schoolName12 = item.nameOfInstitute
-          academics.XII_STANDARD.yop12 = item.yearOfPassing
-          break
-        case 'GRADUATE': academics.degree.push({
-          degree: item.nameOfQualification,
-          instituteName: item.nameOfInstitute,
-          yop: item.yearOfPassing,
-        })
-          break
-        case 'POSTGRADUATE': academics.postDegree.push({
-          degree: item.nameOfQualification,
-          instituteName: item.nameOfInstitute,
-          yop: item.yearOfPassing,
-        })
-          break
-      }
-    })
+    if (data.academics) {
+      data.academics.map((item: any) => {
+        switch (item.type) {
+          case 'X_STANDARD': academics.X_STANDARD.schoolName10 = item.nameOfInstitute
+            academics.X_STANDARD.yop10 = item.yearOfPassing
+            break
+          case 'XII_STANDARD': academics.XII_STANDARD.schoolName12 = item.nameOfInstitute
+            academics.XII_STANDARD.yop12 = item.yearOfPassing
+            break
+          case 'GRADUATE': academics.degree.push({
+            degree: item.nameOfQualification,
+            instituteName: item.nameOfInstitute,
+            yop: item.yearOfPassing,
+          })
+            break
+          case 'POSTGRADUATE': academics.postDegree.push({
+            degree: item.nameOfQualification,
+            instituteName: item.nameOfInstitute,
+            yop: item.yearOfPassing,
+          })
+            break
+        }
+      })
+    }
     return academics
   }
 
@@ -551,7 +563,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       firstname: data.personalDetails.firstname,
       middlename: data.personalDetails.middlename,
       surname: data.personalDetails.surname,
-      dob: new Date(data.personalDetails.dob),
+      dob: this.getDateFromText(data.personalDetails.dob),
       nationality: data.personalDetails.nationality,
       domicileMedium: data.personalDetails.domicileMedium,
       gender: data.personalDetails.gender,
@@ -577,22 +589,37 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       location: organisation.location,
       doj: organisation.doj,
       orgDesc: organisation.orgDesc,
-      orgNameOther: organisation.organizationOther,
+      orgNameOther: organisation.orgNameOther,
       industryOther: organisation.industryOther,
       designationOther: organisation.designationOther,
-      service: data.professionalDetails.service,
-      cadre: data.professionalDetails.cadre,
-      allotmentYear: data.professionalDetails.allotmentYearOfService,
-      otherDetailsDoj: new Date(data.professionalDetails.dojOfService),
-      payType: data.professionalDetails.payType,
-      civilListNo: data.professionalDetails.civilListNo,
-      employeeCode: data.professionalDetails.employeeCode,
-      otherDetailsOfficeAddress: data.professionalDetails.officialPostalAddress,
-      otherDetailsOfficePinCode: data.professionalDetails.pinCode,
+      service: data.employmentDetails.service,
+      cadre: data.employmentDetails.cadre,
+      allotmentYear: data.employmentDetails.allotmentYearOfService,
+      otherDetailsDoj: this.getDateFromText(data.employmentDetails.dojOfService),
+      payType: data.employmentDetails.payType,
+      civilListNo: data.employmentDetails.civilListNo,
+      employeeCode: data.employmentDetails.employeeCode,
+      otherDetailsOfficeAddress: data.employmentDetails.officialPostalAddress,
+      otherDetailsOfficePinCode: data.employmentDetails.pinCode,
       skillAquiredDesc: data.skills.additionalSkills,
-      certificationDesc: data.skills.certificateDetails,
-    })
+      certificationDesc: data.skills.certificateDetails },
+                                   { emitEvent: true })
+    this.cd.detectChanges()
+    this.cd.markForCheck()
+    this.setDropDownOther(organisation)
+  }
 
+  setDropDownOther(organisation?: any) {
+    if (organisation.designation === 'Other') {
+      this.showDesignationOther = true
+    }
+    if (organisation.orgName === 'Other') {
+      this.showOrgnameOther = true
+    }
+
+    if (organisation.industry === 'Other') {
+        this.showIndustryOther = true
+    }
   }
 
   private setDegreeValuesArray(academics: any) {
@@ -630,8 +657,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         pincode: form.value.pincode,
       },
       academics: this.getAcademics(form),
-      professionalDetails: {
-        organisations: this.getOrganisationsHistory(form),
+      employmentDetails: {
         service: form.value.service,
         cadre: form.value.cadre,
         allotmentYearOfService: form.value.allotmentYear,
@@ -642,6 +668,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         officialPostalAddress: form.value.otherDetailsOfficeAddress,
         pinCode: form.value.otherDetailsOfficePinCode,
       },
+      professionalDetails: [
+        ...this.getOrganisationsHistory(form),
+      ],
       skills: {
         additionalSkills: form.value.skillAquiredDesc,
         certificateDetails: form.value.certificationDesc,
@@ -667,18 +696,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     const org = {
       organisationType: '',
       name: form.value.orgName,
+      nameOther: form.value.orgNameOther,
       industry: form.value.industry,
+      industryOther: form.value.industryOther,
       designation: form.value.designation,
+      designationOther: form.value.designationOther,
       location: form.value.location,
       responsibilities: '',
       doj: form.value.doj,
       description: form.value.orgDesc,
       completePostalAddress: '',
-      additionalAttributes: {
-        organizationOther: { name: form.value.orgNameOther },
-        industryOther: { name: form.value.industryOther },
-        designationOther: { name: form.value.designationOther },
-      },
+      additionalAttributes: { },
     }
     if (form.value.isGovtOrg) {
       org.organisationType = 'Government'
@@ -743,19 +771,21 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit(form: any) {
-    // DO some co=ustomization on the input data
+    // DO some customization on the input data
     form.value.knownLanguages = this.selectedKnowLangs
     form.value.interests = this.personalInterests
     form.value.hobbies = this.selectedHobbies
-    form.value.dob = changeformat(new Date(form.value.dob))
+    form.value.dob = changeformat(new Date(`${form.value.dob}`))
     form.value.allotmentYear = `${form.value.allotmentYear}`
     form.value.civilListNo = `${form.value.civilListNo}`
     form.value.employeeCode = `${form.value.employeeCode}`
     form.value.otherDetailsOfficePinCode = `${form.value.otherDetailsOfficePinCode}`
-    form.value.otherDetailsDoj = changeformat(new Date(form.value.otherDetailsDoj))
-    form.value.doj = changeformat(new Date(form.value.doj))
+    form.value.otherDetailsDoj = changeformat(new Date(`${form.value.otherDetailsDoj}`))
+    form.value.doj = changeformat(new Date(`${form.value.doj}`))
 
     this.uploadSaveData = true
+
+    // Construct the request structure for open saber
     const profileRequest = this.constructReq(form)
 
     this.userProfileSvc.updateProfileDetails(profileRequest).subscribe(
@@ -824,6 +854,28 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   private handleFormData(userObj: IUserProfileDetailsFromRegistry) {
     if (userObj) {
       this.primaryEmailTypeToBoolean(userObj.primaryEmailType)
+    }
+  }
+
+  private getDateFromText(dateString: string): Date {
+    const splitValues: string[] = dateString.split('-')
+    const [dd, mm, yyyy] = splitValues
+    const dateToBeConverted = `${yyyy}-${mm}-${dd}`
+    return new Date(dateToBeConverted)
+  }
+
+  otherDropDownChange(value: any, field: string) {
+    if (field === 'orgname' && value !== 'Other') {
+      this.showOrgnameOther = false
+      this.createUserForm.controls['orgNameOther'].setValue('')
+    }
+    if (field === 'industry' && value !== 'Other') {
+      this.showIndustryOther = false
+      this.createUserForm.controls['industryOther'].setValue('')
+    }
+    if (field === 'designation' && value !== 'Other') {
+      this.showDesignationOther = false
+      this.createUserForm.controls['designationOther'].setValue('')
     }
   }
 }

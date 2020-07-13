@@ -43,7 +43,7 @@ export class FileService {
         return this.http.get(`${API_ENDPOINTS.downloadReport}/${id}`).subscribe(
           (response: any) => {
             const blobObj = new Blob([new Uint8Array(response.report.data)])
-            fileSaver.saveAs(blobObj, `${name.split('.')[0]}.csv`)
+            fileSaver.saveAs(blobObj, `${name.split('.')[0]}-report.csv`)
             return response
           },
         )
