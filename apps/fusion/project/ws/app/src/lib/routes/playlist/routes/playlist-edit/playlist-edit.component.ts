@@ -14,6 +14,8 @@ import { PLAYLIST_TITLE_MIN_LENGTH, PLAYLIST_TITLE_MAX_LENGTH } from '../../cons
 export class PlaylistEditComponent implements OnInit {
 
   @ViewChild('editPlaylistError', { static: true }) editPlaylistErrorMessage!: ElementRef<any>
+  @ViewChild('editPlaylistSuccess', { static: true }) editPlaylistSuccess!: ElementRef<any>
+
   @ViewChild('playlistForm', { static: true }) playlistForm!: ElementRef<any>
 
   editPlaylistForm: FormGroup
@@ -87,6 +89,7 @@ export class PlaylistEditComponent implements OnInit {
       this.playlist.name = formValues.title
       this.playlistSvc.patchPlaylist(this.playlist, Array.from(this.changedContentIds)).subscribe(() => {
         // if (!this.changedContentIds.size) {
+        this.snackBar.open(this.editPlaylistSuccess.nativeElement.value)
         this.router.navigate([this.router.url.replace('/edit', '')])
 
         // }
