@@ -108,13 +108,20 @@ export class BtnPlaylistService {
     )
   }
 
-  patchPlaylist(playlist: NsPlaylist.IPlaylist) {
+  patchPlaylist(playlist: NsPlaylist.IPlaylist, newIDs?: string[]) {
+    let content_ids = playlist.contents.map(content => {
+      const id = { identifier: content.identifier }
+      return id
+    })
+    if (newIDs && newIDs.length > 0) {
+      newIDs.forEach(content => {
+        content_ids.push({ identifier: content })
+      })
+    }
+
     return this.http.patch(`${API_END_POINTS.updatePlaylists(playlist.id)}`, {
       playlist_title: playlist.name,
-      content_ids: playlist.contents.map(content => {
-        const id = { identifier: content.identifier }
-        return id
-      }),
+      content_ids: content_ids
     })
   }
 
