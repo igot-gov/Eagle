@@ -31,7 +31,7 @@ import { map } from 'rxjs/operators'
 })
 export class MyContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
-  newDesign = false
+  newDesign = true
   filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
   filterMenuTreeFlattener: any
   public cardContent!: any[]
@@ -192,6 +192,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
         pageSize: this.pagination.limit,
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
+        // this is for Author Only
+        isUserRecordEnabled: !this.isAdmin,
       },
     }
     if (this.finalFilters.length) {

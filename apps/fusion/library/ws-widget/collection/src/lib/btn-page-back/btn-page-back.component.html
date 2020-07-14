@@ -1,4 +1,13 @@
-<a i18n-aria-label aria-label="Back" *ngIf="widgetData.url && widgetData.url !== 'none'" [routerLink]="backUrl.routeUrl"
-  [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment" mat-icon-button>
-  <mat-icon>arrow_back</mat-icon>
-</a>
+<div class="flex flex-1">
+  <a i18n-aria-label aria-label="Back" *ngIf="widgetData.url && widgetData.url !== 'none'"
+    [routerLink]="backUrl.routeUrl" [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment" mat-icon-button>
+    <mat-icon class="ws-mat-default-text">home</mat-icon>
+  </a>
+  <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
+    <div class="flex flex-1 ws-mat-default-text" *ngFor="let title of widgetData.titles">
+      <mat-icon class="m-auto ws-mat-default-text">arrow_forward_ios</mat-icon>
+      <span *ngIf="title.title" i18n="page title: {{title.title}}"
+        class="flex flex-1 margin-left-xs ws-mat-default-text m-auto">{{title.title}}</span>
+    </div>
+  </ng-container>
+</div>

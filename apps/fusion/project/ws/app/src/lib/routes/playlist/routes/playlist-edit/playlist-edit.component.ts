@@ -14,6 +14,8 @@ import { PLAYLIST_TITLE_MIN_LENGTH, PLAYLIST_TITLE_MAX_LENGTH } from '../../cons
 export class PlaylistEditComponent implements OnInit {
 
   @ViewChild('editPlaylistError', { static: true }) editPlaylistErrorMessage!: ElementRef<any>
+  @ViewChild('editPlaylistSuccess', { static: true }) editPlaylistSuccess!: ElementRef<any>
+
   @ViewChild('playlistForm', { static: true }) playlistForm!: ElementRef<any>
 
   editPlaylistForm: FormGroup
@@ -68,28 +70,29 @@ export class PlaylistEditComponent implements OnInit {
   editPlaylist() {
     this.upsertPlaylistStatus = 'fetching'
     this.editName()
-    if (this.changedContentIds.size) {
-      this.playlistSvc.addPlaylistContent(this.playlist, Array.from(this.changedContentIds)).subscribe(
-        () => {
-          this.router.navigate([this.router.url.replace('/edit', '')])
-        },
-        () => {
-          this.upsertPlaylistStatus = 'error'
-          this.snackBar.open(this.editPlaylistErrorMessage.nativeElement.value)
-        },
-      )
-    }
+    // if (this.changedContentIds.size) {
+    //   this.playlistSvc.addPlaylistContent(this.playlist, Array.from(this.changedContentIds)).subscribe(
+    //     () => {
+    //       this.router.navigate([this.router.url.replace('/edit', '')])
+    //     },
+    //     () => {
+    //       this.upsertPlaylistStatus = 'error'
+    //       this.snackBar.open(this.editPlaylistErrorMessage.nativeElement.value)
+    //     },
+    //   )
+    // }
   }
 
   editName() {
     const formValues: { [field: string]: string } = this.editPlaylistForm.getRawValue()
     if (formValues.title && this.playlist) {
       this.playlist.name = formValues.title
-      this.playlistSvc.patchPlaylist(this.playlist).subscribe(() => {
-        if (!this.changedContentIds.size) {
-          this.router.navigate([this.router.url.replace('/edit', '')])
+      this.playlistSvc.patchPlaylist(this.playlist, Array.from(this.changedContentIds)).subscribe(() => {
+        // if (!this.changedContentIds.size) {
+        this.snackBar.open(this.editPlaylistSuccess.nativeElement.value)
+        this.router.navigate([this.router.url.replace('/edit', '')])
 
-        }
+        // }
       })
     }
   }

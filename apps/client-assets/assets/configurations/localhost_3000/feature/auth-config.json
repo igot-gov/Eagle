@@ -6,72 +6,122 @@
   "optimizedWorkFlow": {
     "allow": true,
     "conditions": {
-      "fit": ["*"],
+      "fit": [
+        "*"
+      ],
       "notFit": []
     }
   },
   "workFlowTable": [
     {
       "conditions": {
-        "fit": ["*"],
+        "fit": [
+          "*"
+        ],
         "notFit": []
       },
-      "workFlow": ["Draft", "Reviewed", "Processing", "Live"]
+      "workFlow": [
+        "Draft",
+        "Reviewed",
+        "Processing",
+        "Live"
+      ]
     }
   ],
   "ownerDetails": [
     {
-      "status": ["Draft", "Live"],
+      "status": [
+        "Draft",
+        "Live"
+      ],
       "owner": "creatorContacts",
       "name": "Creator",
-      "relatedActions": ["submitted", "retrieved", "restored", "pulledBack"]
+      "relatedActions": [
+        "submitted",
+        "retrieved",
+        "restored",
+        "pulledBack"
+      ]
     },
     {
-      "status": ["MarkedForDeletion"],
+      "status": [
+        "MarkedForDeletion"
+      ],
       "actionName": "Marked for deletion",
       "owner": "creatorContacts",
       "name": "Creator",
-      "relatedActions": ["markedForDeletion"]
+      "relatedActions": [
+        "markedForDeletion"
+      ]
     },
     {
-      "status": ["Unpublished"],
+      "status": [
+        "Unpublished"
+      ],
       "actionName": "Unpublished",
       "owner": "creatorContacts",
       "name": "Creator",
-      "relatedActions": ["unpublished"]
+      "relatedActions": [
+        "unpublished"
+      ]
     },
     {
-      "status": ["Deleted"],
+      "status": [
+        "Deleted"
+      ],
       "actionName": "Deleted",
       "owner": "creatorContacts",
       "name": "Creator",
-      "relatedActions": ["deleted"]
+      "relatedActions": [
+        "deleted"
+      ]
     },
     {
-      "status": ["InReview"],
+      "status": [
+        "InReview"
+      ],
       "actionName": "Review",
       "owner": "trackContacts",
       "name": "Reviewer",
-      "relatedActions": ["reviewerApproved", "reviewerRejected"]
+      "relatedActions": [
+        "reviewerApproved",
+        "reviewerRejected"
+      ]
     },
     {
-      "status": ["Reviewed"],
+      "status": [
+        "Reviewed"
+      ],
       "actionName": "Publish",
       "owner": "publisherDetails",
       "name": "Publisher",
-      "relatedActions": ["publisherApproved", "publisherRejected"]
+      "relatedActions": [
+        "publisherApproved",
+        "publisherRejected"
+      ]
     },
     {
-      "status": ["QualityReview"],
+      "status": [
+        "QualityReview"
+      ],
       "actionName": "Quality Review",
-      "relatedActions": ["qualityApproved", "qualityRejected"]
+      "relatedActions": [
+        "qualityApproved",
+        "qualityRejected"
+      ]
     },
     {
-      "status": ["Expired"],
-      "relatedActions": ["expired"]
+      "status": [
+        "Expired"
+      ],
+      "relatedActions": [
+        "expired"
+      ]
     },
     {
-      "status": ["Processing"],
+      "status": [
+        "Processing"
+      ],
       "relatedActions": []
     }
   ],
@@ -80,13 +130,27 @@
       "role": "author",
       "editContent": {
         "conditions": {
-          "fit": [{ "status": ["Draft", "Live"] }],
+          "fit": [
+            {
+              "status": [
+                "Draft",
+                "Live"
+              ]
+            }
+          ],
           "notFit": []
         }
       },
       "editMeta": {
         "conditions": {
-          "fit": [{ "status": ["Draft", "Live"] }],
+          "fit": [
+            {
+              "status": [
+                "Draft",
+                "Live"
+              ]
+            }
+          ],
           "notFit": []
         }
       }
@@ -96,7 +160,14 @@
       "editMeta": {
         "enableByDefault": false,
         "conditions": {
-          "fit": [{ "status": ["Draft", "Live"] }],
+          "fit": [
+            {
+              "status": [
+                "Draft",
+                "Live"
+              ]
+            }
+          ],
           "notFit": []
         }
       }
@@ -106,7 +177,14 @@
       "editMeta": {
         "enableByDefault": false,
         "conditions": {
-          "fit": [{ "status": ["Draft", "Live"] }],
+          "fit": [
+            {
+              "status": [
+                "Draft",
+                "Live"
+              ]
+            }
+          ],
           "notFit": []
         }
       }
