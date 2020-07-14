@@ -18,6 +18,8 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 import { wTokenApiMock } from '../user/details'
 
 const filePath = CONSTANTS.USER_BULK_UPLOAD_DIR || process.cwd() + '/user_upload/'
+// tslint:disable-next-line: max-line-length
+const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
 const REGISTRATION_BASE = `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content-sources`
 const API_ENDPOINTS = {
     deregisterUsers: (source: string) => `${REGISTRATION_BASE}/${source}/deregistered-users`,
@@ -247,7 +249,7 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
         const ext = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()
         const base64data = req.body.content.replace(/^data:.*,/, '')
         const uuid = uuidv4()
-        const reportData = [['email', 'status\n']]
+        const reportData = [['email', 'status']]
         fs.writeFileSync(filePath + `${uuid}.${ext}`, base64data, 'base64')
         const reqToInsert = {
             name: `${fileName}`,
@@ -263,28 +265,42 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
             for (const row of sheet.data.slice(1)) {
                 // tslint:disable-next-line: no-any
                 const [fname, lname, email] = row as any
-                const reqToNewUser = {
-                    body: {
-                        email,
-                        fname,
-                        lname,
-                    },
+                if (!email) {
+                    reportData.push([`\n${email}`, `Invalid Email & failed`])
                 }
-                const userId = await createUser(reqToNewUser)
-                    .catch((err) => {
-                        if (err.response.status === 409) {
-                            reportData.push([`\n${email}`, `User with email ${email} is already exists\n`])
-                        } else {
-                            reportData.push([`\n${email}`, `User could not be created in Keycloack\n`])
-                        }
-                    })
-                if (userId) {
-                    await performNewUserSteps(userId, req)
+                if (email.length > 254) {
+                    reportData.push([`\n${email}`, `Invalid Email & failed`])
+                }
+                const valid = emailRegex.test(email)
+                if (!valid) {
+                    reportData.push([`\n${email}`, `Invalid Email & failed`])
+                } else {
+                    const reqToNewUser = {
+                        body: {
+                            email,
+                            fname,
+                            lname,
+                        },
+                    }
+                    const userId = await createUser(reqToNewUser)
                         .catch((err) => {
-                            reportData.push([`\n${email}`, `${err}\n`])
+                            if (err.response.status === 409) {
+                                reportData.push([`\n${email}`, `User with email ${email} is already exists`])
+                            } else {
+                                reportData.push([`\n${email}`, `User could not be created in Keycloack`])
+                            }
                         })
-                    reportData.push([`\n${email}`, `success\n`])
+                    if (userId) {
+                        let msg = ''
+                        await performNewUserSteps(userId, req)
+                            .catch((err) => {
+                                // reportData.push([`\n${email}`, `${err}`])
+                                msg = `${err}`
+                            })
+                        reportData.push([`\n${email}`, `success & ${msg} `])
+                    }
                 }
+
             }
         }
         const reqToUpdate = {
@@ -348,6 +364,11 @@ export async function performNewUserSteps(userId: any, req: any) {
             .catch((error) => {
                 logError('performNewUserSteps:: ERROR ON UpdateKeycloakUserPassword after getAuthToken', error)
                 reject('User default password could not be set')
+            })
+        await sendActionsEmail(userId)
+            .catch((error) => {
+                logError('ERROR ON sendActionsEmail', error)
+                reject('Email could not be sent')
             })
         resolve()
     })
