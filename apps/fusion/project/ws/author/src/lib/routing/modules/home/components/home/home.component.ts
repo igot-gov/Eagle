@@ -13,6 +13,7 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
   allowReview = false
+  displayAction = false
   allowAuthor = false
   allowRedo = false
   allowPublish = false
@@ -23,7 +24,7 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
   private defaultSideNavBarOpenedSubscription: any
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   public screenSizeIsLtMedium = false
-  constructor(private valueSvc: ValueService, private accessService: AccessControlService) {}
+  constructor(private valueSvc: ValueService, private accessService: AccessControlService) { }
 
   ngOnInit() {
     this.allowAuthor = this.canShow('author')
@@ -45,15 +46,23 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
   }
 
   canShow(role: string): boolean {
+    let returnVal = false
     switch (role) {
       case 'review':
-        return this.accessService.hasRole(REVIEW_ROLE)
+        returnVal = this.accessService.hasRole(REVIEW_ROLE)
+        break
       case 'publish':
-        return this.accessService.hasRole(PUBLISH_ROLE)
+        returnVal = this.accessService.hasRole(PUBLISH_ROLE)
+        break
       case 'author':
-        return this.accessService.hasRole(CREATE_ROLE)
+        returnVal = this.accessService.hasRole(CREATE_ROLE)
+        break
       default:
-        return false
+        break
     }
+    if (returnVal) {
+      this.displayAction = returnVal
+    }
+    return returnVal
   }
 }
