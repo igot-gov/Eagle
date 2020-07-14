@@ -10,7 +10,6 @@ import { startWith, map, debounceTime, distinctUntilChanged } from 'rxjs/operato
 import {
   INationality,
   ILanguages,
-  IUserProfileDetailsFromRegistry,
   IChipItems,
   IGovtOrgMeta,
   IIndustriesMeta,
@@ -90,7 +89,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       countryCode: new FormControl('', [Validators.required]),
       mobile: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumberPattern)]),
       telephone: new FormControl('', []),
-      primaryEmail: new FormControl('admin@sunbird.org', [Validators.required, Validators.email]),
+      primaryEmail: new FormControl('', [Validators.required, Validators.email]),
       primaryEmailType: new FormControl(this.assignPrimaryEmailTypeCheckBox(this.ePrimaryEmailType.OFFICIAL), []),
       secondaryEmail: new FormControl('', []),
       nationality: new FormControl('', [Validators.required]),
@@ -422,7 +421,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               this.populateChips(data[0])
 
             }
-            this.handleFormData(data[0])
+            // this.handleFormData(data[0])
           },
           (_err: any) => {
           })
@@ -553,9 +552,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private filterPrimaryEmailType(data: any) {
     if (data.personalDetails.officialEmail) {
-      return this.ePrimaryEmailType.OFFICIAL
+      this.isOfficialEmail = true
+    } else {
+      this.isOfficialEmail = false
     }
-    return this.ePrimaryEmailType.PERSONAL
+    // this.cd.detectChanges()
+    return this.ePrimaryEmailType.OFFICIAL
+    // this.assignPrimaryEmailTypeCheckBox(this.ePrimaryEmailType.PERSONAL)
+    // return this.ePrimaryEmailType.PERSONAL
   }
 
   private constructFormFromRegistry(data: any, academics: NsUserProfileDetails.IAcademics, organisation: any) {
@@ -680,14 +684,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         hobbies: form.value.hobbies,
       },
     }
+    if (form.value.primaryEmailType === this.ePrimaryEmailType.OFFICIAL) {
+      profileReq.personalDetails.officialEmail = form.value.primaryEmail
+    } else {
+      profileReq.personalDetails.officialEmail = ''
+    }
+    profileReq.personalDetails.personalEmail = form.value.secondaryEmail
 
-    // if (form.value.primaryEmailType === this.ePrimaryEmailType.OFFICIAL) {
-    //   profileReq.personalDetails.officialEmail = form.value.primaryEmail
-    // } else {
-    //   profileReq.personalDetails.personalEmail = form.value.primaryEmail
-    // }
-    profileReq.personalDetails.personalEmail = form.value.primaryEmail
-    profileReq.personalDetails.officialEmail = form.value.primaryEmail
     return profileReq
   }
 
@@ -780,8 +783,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     form.value.civilListNo = `${form.value.civilListNo}`
     form.value.employeeCode = `${form.value.employeeCode}`
     form.value.otherDetailsOfficePinCode = `${form.value.otherDetailsOfficePinCode}`
-    form.value.otherDetailsDoj = changeformat(new Date(`${form.value.otherDetailsDoj}`))
-    form.value.doj = changeformat(new Date(`${form.value.doj}`))
+    if (form.value.otherDetailsDoj) {
+      form.value.otherDetailsDoj = changeformat(new Date(`${form.value.otherDetailsDoj}`))
+    }
+    if (form.value.doj) {
+      form.value.doj = changeformat(new Date(`${form.value.doj}`))
+    }
 
     this.uploadSaveData = true
 
@@ -799,7 +806,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       () => {
         this.openSnackbar(this.toastError.nativeElement.value)
         this.uploadSaveData = false
-        // console.log('err :', err)
       })
   }
 
@@ -843,18 +849,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     } else {
       this.isOfficialEmail = false
     }
-  }
-
-  private primaryEmailTypeToBoolean(isOfficialEmail: string) {
-    if (this.ePrimaryEmailType.OFFICIAL === isOfficialEmail) {
-      this.isOfficialEmail = true
-    }
-  }
-
-  private handleFormData(userObj: IUserProfileDetailsFromRegistry) {
-    if (userObj) {
-      this.primaryEmailTypeToBoolean(userObj.primaryEmailType)
-    }
+    // this.assignPrimaryEmailType(this.isOfficialEmail)
   }
 
   private getDateFromText(dateString: string): Date {

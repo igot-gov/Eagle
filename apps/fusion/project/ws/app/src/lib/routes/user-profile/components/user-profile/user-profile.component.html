@@ -12,14 +12,14 @@
               <div class="flex flex-column w-full md:w-1/2 ">
                 <div class="profile-cols bg-grey">
                   <div class="flex content-center flex-wrap">
-                    <div class="img-column">
+                    <!-- <div class="img-column">
                       <div class="profile-img-wrapper mt-10">
                         <mat-icon class="person">person</mat-icon>
                         <div class="camera-wrapper">
                           <mat-icon class="camera">photo_camera</mat-icon>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="input-column px-2">
                       <div class="input-wrapper margin-top-s">
                         <p class=" margin-remove-bottom form-label required"
@@ -68,9 +68,10 @@
                         </p>
                         <mat-form-field appearance="outline" class="margin-top-xs">
                           <input matInput #dob formControlName="dob" [matDatepicker]="picker" i18n-placeholder
-                            placeholder="Choose Date Of Birth (dd-mm-yyyy)" [min]="" [max]="today">
+                          (focus)="picker.open()" placeholder="Choose Date Of Birth (dd-mm-yyyy)"
+                          [min]="" [max]="today" readonly>
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker></mat-datepicker>
+                          <mat-datepicker #picker (closed)="dob.blur()"></mat-datepicker>
                           <mat-error [hidden]="false" i18n="Date Of Birth Error|Explains name is required">
                             Date Of Birth is mandatory
                           </mat-error>
