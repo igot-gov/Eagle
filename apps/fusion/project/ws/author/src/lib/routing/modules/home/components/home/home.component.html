@@ -73,8 +73,8 @@
           </mat-list>
         </mat-expansion-panel>
       </mat-accordion>
-
-      <mat-accordion *ngIf="(allowReview || allowAuthor || allowPublish) && displayAction">
+      <!-- allowAuthor -->
+      <mat-accordion *ngIf="allowReview || allowPublish">
         <mat-expansion-panel [expanded]="false" class="no-shadow">
           <mat-expansion-panel-header>
             <mat-panel-title>

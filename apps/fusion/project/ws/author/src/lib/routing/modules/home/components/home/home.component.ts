@@ -13,7 +13,6 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
   allowReview = false
-  displayAction = false
   allowAuthor = false
   allowRedo = false
   allowPublish = false
@@ -46,23 +45,15 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
   }
 
   canShow(role: string): boolean {
-    let returnVal = false
     switch (role) {
       case 'review':
-        returnVal = this.accessService.hasRole(REVIEW_ROLE)
-        break
+        return this.accessService.hasRole(REVIEW_ROLE)
       case 'publish':
-        returnVal = this.accessService.hasRole(PUBLISH_ROLE)
-        break
+        return this.accessService.hasRole(PUBLISH_ROLE)
       case 'author':
-        returnVal = this.accessService.hasRole(CREATE_ROLE)
-        break
+        return this.accessService.hasRole(CREATE_ROLE)
       default:
-        break
+        return false
     }
-    if (returnVal) {
-      this.displayAction = returnVal
-    }
-    return returnVal
   }
 }
