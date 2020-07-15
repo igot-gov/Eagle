@@ -7,26 +7,15 @@
   <div class="banner-container">
     <div class="banner-overlay ws-primary-tinted-50">
       <div class="page-container mt-8">
-        <div *ngIf="!error; else errorPage" class="max-w-4xl mx-auto p-4 mt-6"></div>
-        <a name="accept-reject-link-playlist-home" routerLink="/app/playlist/notification" *ngIf="numNotifications">
-          <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-xl">
-            <mat-icon color="accent" class="margin-left-s">notifications</mat-icon>
-            <p class="margin-left-xs margin-remove-bottom" i18n>
-              Accept or Reject playlists shared with you!
-            </p>
-            <span class="spacer"></span>
-            <div class="ws-mat-accent-background margin-left-xs margin-right-s notification-circle">
-              {{ numNotifications }}
-            </div>
-          </mat-card>
-        </a>
         <h1 *ngIf="userName" class="mat-display-1 margin-bottom-l">Hey {{ userName }}!</h1>
-        <mat-button-toggle-group value="me" (change)="goalPlayList($event?.value)" [value]="playListFor">
+        <mat-button-toggle-group class="no-border" value="me" (change)="goalPlayList($event?.value)"
+          [value]="playListFor">
           <mat-button-toggle value="me" i18n>My Playlist</mat-button-toggle>
           <mat-button-toggle value="shared" i18n *ngIf="isShareEnabled">Shared with me</mat-button-toggle>
         </mat-button-toggle-group>
       </div>
     </div>
+
     <!-- <div class="create-goal-fab width-1-1">
       <div class="page-container flex flex-row-reverse">
         <a name="create-goal-link-goal-home" routerLink="/app/playlist/create" mat-fab>
@@ -35,6 +24,21 @@
       </div>
     </div> -->
   </div>
+</div>
+<div class="max-w-4xl mx-auto p-4 mt-6">
+  <div *ngIf="!error; else errorPage" class="max-w-4xl mx-auto p-4 mt-6"></div>
+  <a name="accept-reject-link-playlist-home" routerLink="/app/playlist/notification" *ngIf="numNotifications">
+    <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-xl">
+      <mat-icon color="accent" class="margin-left-s">notifications</mat-icon>
+      <p class="margin-left-xs margin-remove-bottom" i18n>
+        Accept or Reject playlists shared with you!
+      </p>
+      <span class="spacer"></span>
+      <div class="ws-mat-accent-background margin-left-xs margin-right-s notification-circle">
+        {{ numNotifications }}
+      </div>
+    </mat-card>
+  </a>
 </div>
 <!-- </div> -->
 <div *ngIf="!error; else errorPage" class="max-w-4xl mx-auto p-4 mt-6">
