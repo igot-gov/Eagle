@@ -56,11 +56,13 @@ input[type=number] {
     padding: 1rem 3rem;
     &:first-child{
       margin: 0;
+      margin-bottom: 20px;
     }
     .section-input{
       .item{
         min-width: 340px;
         margin-right:30px;
+        // display: contents;
         &:last-child { 
           margin-right: 0;
         }
@@ -417,13 +419,16 @@ input.mat-input-element {
 
 @media screen and (max-width: 768px) {
   .profile-box {
+    // margin: 0 1rem;
+    // padding: 0.5rem 1rem;
     margin: 0;
     padding: 10px 0;
     .btn-success{
       margin-right:0;
     }
-  }
+  
   .profile-cols{
+    padding: 1rem;
     .section-input{
       .item{
         min-width: 100%;
@@ -436,12 +441,19 @@ input.mat-input-element {
     }
   }
   .profile-cols-full{
+    padding: 1rem;
+    margin: 10px !important;
+    &:first-child{
+      margin: 10px !important;
+    }
     .section-input{
       .item{
         min-width: 100%;
         margin-right:30px;
+        display: contents;
       }
     }
-  } 
+  }
+} 
   
 }

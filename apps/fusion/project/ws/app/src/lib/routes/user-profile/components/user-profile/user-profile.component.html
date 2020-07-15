@@ -729,9 +729,9 @@
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input matInput #doj formControlName="doj" [matDatepicker]="dojPicker" i18n-placeholder
-                        placeholder="Choose Date Of Joining" [min]="" [max]="today">
+                        placeholder="Choose Date Of Joining"  (focus)="dojPicker.open()" [min]="" [max]="today">
                       <mat-datepicker-toggle matSuffix [for]="dojPicker"></mat-datepicker-toggle>
-                      <mat-datepicker #dojPicker></mat-datepicker>
+                      <mat-datepicker #dojPicker (closed)="doj.blur()" ></mat-datepicker>
                       <mat-error [hidden]="false" i18n="Date Of Joining Error|Explains name is required">
                         Date Of Joining is mandatory
                       </mat-error>
@@ -836,9 +836,9 @@
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input matInput #otherDetailsDoj formControlName="otherDetailsDoj"
                         [matDatepicker]="otherDetailsDojPicker" i18n-placeholder placeholder="Choose Date Of Joining"
-                        [min]="" [max]="today">
+                         (focus)="otherDetailsDojPicker.open()" [min]="" [max]="today">
                       <mat-datepicker-toggle matSuffix [for]="otherDetailsDojPicker"></mat-datepicker-toggle>
-                      <mat-datepicker #otherDetailsDojPicker></mat-datepicker>
+                      <mat-datepicker #otherDetailsDojPicker (closed)="otherDetailsDoj.blur()" ></mat-datepicker>
                       <mat-error [hidden]="false" i18n="Date Of Joining Error|Explains name is required">
                         Date Of Joining is mandatory
                       </mat-error>

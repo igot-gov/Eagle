@@ -472,7 +472,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         designationOther: organisation.designationOther,
         location: organisation.location,
         responsibilities: organisation.responsibilities,
-        doj: this.getDateFromText(organisation.doj) as any,
+        doj: this.getDateFromText(organisation.doj),
         orgDesc: organisation.description,
         completePostalAddress: organisation.completePostalAddress,
       }
@@ -852,11 +852,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     // this.assignPrimaryEmailType(this.isOfficialEmail)
   }
 
-  private getDateFromText(dateString: string): Date {
-    const splitValues: string[] = dateString.split('-')
-    const [dd, mm, yyyy] = splitValues
-    const dateToBeConverted = `${yyyy}-${mm}-${dd}`
-    return new Date(dateToBeConverted)
+  private getDateFromText(dateString: string): any {
+    if (dateString) {
+      const splitValues: string[] = dateString.split('-')
+      const [dd, mm, yyyy] = splitValues
+      const dateToBeConverted = `${yyyy}-${mm}-${dd}`
+      return new Date(dateToBeConverted)
+    }
+    return ''
   }
 
   otherDropDownChange(value: any, field: string) {
