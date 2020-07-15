@@ -799,7 +799,7 @@
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <mat-select formControlName="cadre" i18n-placeholder placeholder="--Select--">
-                        <mat-option [value]="cad.value" *ngFor="let cad of govtOrgMeta?.cadre">
+                        <mat-option [value]="cad.name" *ngFor="let cad of govtOrgMeta?.cadre">
                           {{cad.name}}
                         </mat-option>
                       </mat-select>
