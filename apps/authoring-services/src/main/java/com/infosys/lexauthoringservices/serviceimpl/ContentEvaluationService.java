@@ -51,6 +51,10 @@ public class ContentEvaluationService {
 		try {
 			rootOrg = (String) requestBody.get(LexConstants.ROOT_ORG);
 			org = (String) requestBody.get(LexConstants.ORG);
+			contentId = (String) requestBody.get(CONTENT_ID);
+			userId = (String) requestBody.get(USER_ID);
+			role = (String) requestBody.get(ROLE);
+
 			List<Map<String,Object>>  evaluations = (List<Map<String,Object>>) requestBody.get(EVALUATIONS);
 //			List<ContentEvaluation>  evaluationObjs = (List<ContentEvaluation>) requestBody.get(EVALUATIONS);
 //			List<ContentEvaluation> pojos = mapper.convertValue(evaluationObjs, new TypeReference<List<ContentEvaluation>>() { });
@@ -62,16 +66,13 @@ public class ContentEvaluationService {
 //			});
 
 			for(Map<String,Object> evalution: evaluations){
-				contentId = (String) evalution.get(CONTENT_ID);
-				userId = (String) evalution.get(USER_ID);
 				header = (String) evalution.get(HEADER);
 				description = (String) evalution.get(DESCRIPTION);
-				role = (String) evalution.get(ROLE);
 				Map<String, String> items = (Map) evalution.get("items");
 				ContentEvaluation tableModel = new ContentEvaluation(new ContentEvaluationPrimaryKey(rootOrg, org, contentId, userId, header));
 				tableModel.setDate(formatterDateTime.format(new Date()));
 				tableModel.setItems(items);
-				//tableModel.setHeader(header);
+				tableModel.setHeader(header);
 				tableModel.setDescription(description);
 				tableModel.setRole(role);
 				System.out.println("ContentEvaluation : "+new ObjectMapper().writeValueAsString(tableModel));
@@ -94,12 +95,12 @@ public class ContentEvaluationService {
 		try{
 			String rootOrg = (String) requestBody.get(LexConstants.ROOT_ORG);
 			String org = (String) requestBody.get(LexConstants.ORG);
+			String contentId = (String) requestBody.get(CONTENT_ID);
+			String userId = (String) requestBody.get(USER_ID);
 			List<Map<String,Object>>  evaluations = (List<Map<String,Object>>) requestBody.get(EVALUATIONS);
 			for(Map<String,Object> evalution: evaluations) {
-				String contentId = (String) evalution.get(CONTENT_ID);
-				String userId = (String) evalution.get(USER_ID);
-				String header = (String) evalution.get(HEADER);
 
+				String header = (String) evalution.get(HEADER);
 				ContentEvaluationPrimaryKey pk =new ContentEvaluationPrimaryKey(rootOrg, org, contentId, userId, header);
 				Optional<ContentEvaluation> contentEvaluation = contentEvaluationRepository.findById(pk);
 				contentEvaluationList.add(contentEvaluation.get());
@@ -111,7 +112,7 @@ public class ContentEvaluationService {
 
 		}
 		response.put("Message", "Successful");
-		response.put("results", contentEvaluationList);
+		response.put(EVALUATIONS, contentEvaluationList);
 		return response;
 	}
 
@@ -122,13 +123,10 @@ public class ContentEvaluationService {
 		try{
 			String rootOrg = (String) requestBody.get(LexConstants.ROOT_ORG);
 			String org = (String) requestBody.get(LexConstants.ORG);
-			List<Map<String,Object>>  evaluations = (List<Map<String,Object>>) requestBody.get(EVALUATIONS);
-			for(Map<String,Object> evalution: evaluations) {
-				String contentId = (String) evalution.get(CONTENT_ID);
-				String userId = (String) evalution.get(USER_ID);
+			String contentId = (String) requestBody.get(CONTENT_ID);
+			String userId = (String) requestBody.get(USER_ID);
 
-				contentEvaluationList.addAll(contentEvaluationRepository.findById(rootOrg, org, contentId, userId));
-			}
+			contentEvaluationList.addAll(contentEvaluationRepository.findById(rootOrg, org, contentId, userId));
 
 		}catch (Exception e){
 			e.printStackTrace();
@@ -136,7 +134,7 @@ public class ContentEvaluationService {
 
 		}
 		response.put("Message", "Successful");
-		response.put("results", contentEvaluationList);
+		response.put(EVALUATIONS, contentEvaluationList);
 		return response;
 	}
 
@@ -146,10 +144,10 @@ public class ContentEvaluationService {
 		try{
 			String rootOrg = (String) requestBody.get(LexConstants.ROOT_ORG);
 			String org = (String) requestBody.get(LexConstants.ORG);
+			String contentId = (String) requestBody.get(CONTENT_ID);
+			String userId = (String) requestBody.get(USER_ID);
 			List<Map<String,Object>>  evaluations = (List<Map<String,Object>>) requestBody.get(EVALUATIONS);
 			for(Map<String,Object> evalution: evaluations) {
-				String contentId = (String) evalution.get(CONTENT_ID);
-				String userId = (String) evalution.get(USER_ID);
 				String header = (String) evalution.get(HEADER);
 
 				ContentEvaluationPrimaryKey pk =new ContentEvaluationPrimaryKey(rootOrg, org, contentId, userId, header);

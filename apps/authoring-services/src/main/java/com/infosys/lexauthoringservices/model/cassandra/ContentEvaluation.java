@@ -16,6 +16,8 @@ import java.util.*;
 @Table("content_evaluation")
 public class ContentEvaluation {
 
+    @Column("header")
+    private String header;
     @Column("role")
     private String role;
     @Column("date")
@@ -30,6 +32,10 @@ public class ContentEvaluation {
     public ContentEvaluation(ContentEvaluationPrimaryKey contentEvaluationPrimaryKey){
         this.contentEvaluationPrimaryKey = contentEvaluationPrimaryKey;
     }
+
+    public String getHeader() { return header; }
+
+    public void setHeader(String header) { this.header = header; }
 
     public String getRole() {
         return role;
