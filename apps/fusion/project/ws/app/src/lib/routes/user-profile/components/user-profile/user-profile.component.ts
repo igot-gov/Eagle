@@ -633,8 +633,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   private setPostDegreeValuesArray(academics: any) {
-    this.degrees = this.createUserForm.get('postDegrees') as FormArray
-    this.degrees.removeAt(0)
+    this.postDegrees = this.createUserForm.get('postDegrees') as FormArray
+    this.postDegrees.removeAt(0)
     academics.postDegree.map((degree: any) => { this.addPostDegreeValues(degree as FormArray) })
   }
 

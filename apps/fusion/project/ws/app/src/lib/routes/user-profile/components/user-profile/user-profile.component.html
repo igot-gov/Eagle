@@ -63,17 +63,17 @@
                       </div>
                       <div class="input-wrapper margin-top-s">
                         <p class=" margin-remove-bottom form-label required"
-                          i18n="Date Of Birth|Label which explains the user to enter Date Of Birth">
-                          Date Of Birth (dd-mm-yyyy)
+                          i18n="Date of Birth|Label which explains the user to enter Date of Birth">
+                          Date of Birth (dd-mm-yyyy)
                         </p>
                         <mat-form-field appearance="outline" class="margin-top-xs">
                           <input matInput #dob formControlName="dob" [matDatepicker]="picker" i18n-placeholder
-                          (focus)="picker.open()" placeholder="Choose Date Of Birth (dd-mm-yyyy)"
+                          (focus)="picker.open()" placeholder="Choose Date of Birth (dd-mm-yyyy)"
                           [min]="" [max]="today" readonly>
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker (closed)="dob.blur()"></mat-datepicker>
-                          <mat-error [hidden]="false" i18n="Date Of Birth Error|Explains name is required">
-                            Date Of Birth is mandatory
+                          <mat-error [hidden]="false" i18n="Date of Birth Error|Explains name is required">
+                            Date of Birth is mandatory
                           </mat-error>
                         </mat-form-field>
                       </div>
@@ -396,16 +396,16 @@
                   </div>
                   <div class="item ">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="Year Of Passsing label|Label which explains the user to enter Year Of Passsing">
-                      Year Of Passsing
+                      i18n="Year of Passsing label|Label which explains the user to enter Year of Passsing">
+                      Year of Passsing
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <!-- <input matInput #yop10 formControlName="yop10" [matDatepicker]="yop10Picker" i18n-placeholder
-                        placeholder="Choose Year Of Passsing" [min]="" [max]="today">
+                        placeholder="Choose Year of Passsing" [min]="" [max]="today">
                       <mat-datepicker-toggle matSuffix [for]="yop10Picker"></mat-datepicker-toggle>
                       <mat-datepicker #yop10Picker></mat-datepicker>
-                      <mat-error [hidden]="false" i18n="Year Of Passsing Error|Explains name is required">
-                        Year Of Passsing is mandatory
+                      <mat-error [hidden]="false" i18n="Year of Passsing Error|Explains name is required">
+                        Year of Passsing is mandatory
                       </mat-error> -->
                       <input matInput #yop10 type="text" name="yop10" formControlName="yop10" i18n-placeholder
                         placeholder="1998" />
@@ -434,16 +434,16 @@
                   </div>
                   <div class="item">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="Year Of Passsing label|Label which explains the user to enter Year Of Passsing">
-                      Year Of Passsing
+                      i18n="Year of Passsing label|Label which explains the user to enter Year of Passsing">
+                      Year of Passsing
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <!-- <input matInput #yop12 formControlName="yop12" [matDatepicker]="yop12Picker" i18n-placeholder
-                        placeholder="Choose Year Of Passsing" [min]="" [max]="today">
+                        placeholder="Choose Year of Passsing" [min]="" [max]="today">
                       <mat-datepicker-toggle matSuffix [for]="yop12Picker"></mat-datepicker-toggle>
                       <mat-datepicker #yop12Picker></mat-datepicker>
-                      <mat-error [hidden]="false" i18n="Year Of Passsing Error|Explains name is required">
-                        Year Of Passsing is mandatory
+                      <mat-error [hidden]="false" i18n="Year of Passsing Error|Explains name is required">
+                        Year of Passsing is mandatory
                       </mat-error> -->
                       <input matInput #yop12 type="text" formControlName="yop12" i18n-placeholder
                         placeholder="1998" />
@@ -455,7 +455,7 @@
                 </div>
               </div>
               <div class="w-full profile-cols-full bg-grey">
-                <p class="heading">Graduate Details</p>
+                <p class="heading">Graduation Details</p>
                 <ng-container formArrayName="degrees" *ngFor="let degrees of degreesControls; let i = index;">
                   <div class="flex flex-wrap section-input" [formGroupName]="i">
                     <div class="item">
@@ -490,16 +490,16 @@
                     </div>
                     <div class="item w-auto">
                       <p class=" margin-remove-bottom form-label"
-                        i18n="Year Of Passsing label|Label which explains the user to enter Year Of Passsing">
-                        Year Of Passsing
+                        i18n="Year of Passsing label|Label which explains the user to enter Year of Passsing">
+                        Year of Passsing
                       </p>
                       <mat-form-field appearance="outline" class="margin-top-xs">
                         <!-- <input matInput #yop formControlName="yop" [matDatepicker]="yop" i18n-placeholder
-                          placeholder="Choose Year Of Passsing" [min]="" [max]="today">
+                          placeholder="Choose Year of Passsing" [min]="" [max]="today">
                         <mat-datepicker-toggle matSuffix [for]="yop"></mat-datepicker-toggle>
                         <mat-datepicker #yop></mat-datepicker>
-                        <mat-error [hidden]="false" i18n="Year Of Passsing Error|Explains name is required">
-                          Year Of Passsing is mandatory
+                        <mat-error [hidden]="false" i18n="Year of Passsing Error|Explains name is required">
+                          Year of Passsing is mandatory
                         </mat-error> -->
                         <input matInput #yop type="text" formControlName="yop" i18n-placeholder placeholder="1998" />
                         <mat-error [hidden]="false" *ngIf="degrees.get('yop').errors?.pattern">
@@ -522,7 +522,7 @@
                 </div>
               </div>
               <div class="w-full profile-cols-full bg-grey">
-                <p class="heading">Post Graduate Details</p>
+                <p class="heading">Post Graduation Details</p>
                 <ng-container formArrayName="postDegrees" *ngFor="let degrees of postDegreesControls; let i = index;">
                   <div class="flex flex-wrap section-input" [formGroupName]="i">
                     <div class="item">
@@ -557,16 +557,16 @@
                     </div>
                     <div class="item w-auto">
                       <p class=" margin-remove-bottom form-label"
-                        i18n="Year Of Passsing label|Label which explains the user to enter Year Of Passsing">
-                        Year Of Passsing
+                        i18n="Year of Passsing label|Label which explains the user to enter Year of Passsing">
+                        Year of Passsing
                       </p>
                       <mat-form-field appearance="outline" class="margin-top-xs">
                         <!-- <input matInput #yop formControlName="yop" [matDatepicker]="yop" i18n-placeholder
-                          placeholder="Choose Year Of Passsing" [min]="" [max]="today">
+                          placeholder="Choose Year of Passsing" [min]="" [max]="today">
                         <mat-datepicker-toggle matSuffix [for]="yop"></mat-datepicker-toggle>
                         <mat-datepicker #yop></mat-datepicker>
-                        <mat-error [hidden]="false" i18n="Year Of Passsing Error|Explains name is required">
-                          Year Of Passsing is mandatory
+                        <mat-error [hidden]="false" i18n="Year of Passsing Error|Explains name is required">
+                          Year of Passsing is mandatory
                         </mat-error> -->
                         <input matInput #yop type="text" formControlName="yop" i18n-placeholder placeholder="1998" />
                         <mat-error [hidden]="false" *ngIf="degrees.get('yop').errors?.pattern">
@@ -724,16 +724,16 @@
                 <div class="flex flex-wrap section-input">
                   <div class="item">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="Date Of Joining|Label which explains the user to enter Date Of Joining">
-                      Date Of Joining
+                      i18n="Date of Joining|Label which explains the user to enter Date of Joining">
+                      Date of Joining
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input matInput #doj formControlName="doj" [matDatepicker]="dojPicker" i18n-placeholder
-                        placeholder="Choose Date Of Joining"  (focus)="dojPicker.open()" [min]="" [max]="today">
+                        placeholder="Choose Date of Joining"  (focus)="dojPicker.open()" [min]="" [max]="today">
                       <mat-datepicker-toggle matSuffix [for]="dojPicker"></mat-datepicker-toggle>
                       <mat-datepicker #dojPicker (closed)="doj.blur()" ></mat-datepicker>
-                      <mat-error [hidden]="false" i18n="Date Of Joining Error|Explains name is required">
-                        Date Of Joining is mandatory
+                      <mat-error [hidden]="false" i18n="Date of Joining Error|Explains name is required">
+                        Date of Joining is mandatory
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -755,7 +755,7 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <p class="heading mt-10">Other details for Government Employees (If applicable)</p>
+                <p class="heading mt-10">Other Details For Government Employees (If Applicable)</p>
                 <!-- <div class="radio-toolbar">
                   <input type="radio" id="'Pay Band'" name="payType" formControlName="payType" [value]="'Pay Band'">
                   <label for="'Pay Band'">Pay Band</label>
@@ -830,17 +830,17 @@
                   </div>
                   <div class="item">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="Date Of Joining|Label which explains the user to enter Date Of Joining">
-                      Date Of Joining
+                      i18n="Date of Joining|Label which explains the user to enter Date of Joining">
+                      Date of Joining
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input matInput #otherDetailsDoj formControlName="otherDetailsDoj"
-                        [matDatepicker]="otherDetailsDojPicker" i18n-placeholder placeholder="Choose Date Of Joining"
+                        [matDatepicker]="otherDetailsDojPicker" i18n-placeholder placeholder="Choose Date of Joining"
                          (focus)="otherDetailsDojPicker.open()" [min]="" [max]="today">
                       <mat-datepicker-toggle matSuffix [for]="otherDetailsDojPicker"></mat-datepicker-toggle>
                       <mat-datepicker #otherDetailsDojPicker (closed)="otherDetailsDoj.blur()" ></mat-datepicker>
-                      <mat-error [hidden]="false" i18n="Date Of Joining Error|Explains name is required">
-                        Date Of Joining is mandatory
+                      <mat-error [hidden]="false" i18n="Date of Joining Error|Explains name is required">
+                        Date of Joining is mandatory
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -848,14 +848,14 @@
                 <div class="flex flex-wrap section-input">
                   <div class="item">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="Civil List No label|Label which explains the user to enter Civil List No">
-                      Civil List No
+                      i18n="Civil List Number label|Label which explains the user to enter Civil List Number">
+                      Civil List Number
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input matInput type="number" #civilListNo formControlName="civilListNo" i18n-placeholder
-                        placeholder="Enter Civil List No" />
-                      <mat-error [hidden]="false" i18n="Civil List No  Error|Explains name is required">
-                        Civil List No is mandatory
+                        placeholder="Enter Civil List Number" />
+                      <mat-error [hidden]="false" i18n="Civil List Number  Error|Explains name is required">
+                        Civil List Number is mandatory
                       </mat-error>
                     </mat-form-field>
                   </div>
@@ -917,7 +917,7 @@
             <div class="flex flex-wrap mobile-break">
               <div class="w-full profile-cols-full bg-grey">
                 <div class="flex flex-column flex-wrap section-input-single">
-                  <p class="heading">Additional Skill acquired/Course completed</p>
+                  <p class="heading">Additional Skill Acquired/Course Completed</p>
                   <div class="item">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Description label|Label which explains the user to enter Description">
@@ -925,7 +925,7 @@
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs full-width">
                       <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="4"
-                        formControlName="skillAquiredDesc" placeholder="Type Your Residence Address Here"
+                        formControlName="skillAquiredDesc" placeholder="Skills acquired or courses completed"
                         i18n-placeholder #skillAquiredDesc></textarea>
                       <!-- <mat-hint align="end">{{ skillAquiredDesc.value.length }} /200 characters</mat-hint>
                       <mat-error i18n>
@@ -933,15 +933,15 @@
                       </mat-error> -->
                     </mat-form-field>
                   </div>
-                  <p class="heading">Provide certification details, if any</p>
+                  <p class="heading">Provide Certification Details</p>
                   <div class="item">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="School Name label|Label which explains the user to enter School Name">
+                      i18n="Provide Certification Details label|Label which explains the user to enter Provide Certification Details">
                       Description
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs full-width">
                       <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="4"
-                        formControlName="certificationDesc" placeholder="Type Your Residence Address Here"
+                        formControlName="certificationDesc" placeholder="Provide certification details"
                         i18n-placeholder #certificationDesc></textarea>
                       <!-- <mat-hint align="end">{{ certificationDesc.value.length }} /200 characters</mat-hint>
                       <mat-error i18n>
