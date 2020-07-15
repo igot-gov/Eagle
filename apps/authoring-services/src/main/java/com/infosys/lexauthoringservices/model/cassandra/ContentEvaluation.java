@@ -11,9 +11,8 @@ import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 @Table("content_evaluation")
 public class ContentEvaluation {
 
@@ -21,18 +20,15 @@ public class ContentEvaluation {
     private String role;
     @Column("date")
     private String date;
-    @Column("assesment_items")
-    private List<AssesmentItem> assesmentItems = new ArrayList<>();
     @PrimaryKey
     private ContentEvaluationPrimaryKey contentEvaluationPrimaryKey;
+    @Column("description")
+    private String description;
+    @Column("items")
+    private Map<String, String> items = new HashMap<>();
 
-    public ContentEvaluation(List<AssesmentItem> assesmentItems, ContentEvaluationPrimaryKey contentEvaluationPrimaryKey){
-        this.assesmentItems = assesmentItems;
+    public ContentEvaluation(ContentEvaluationPrimaryKey contentEvaluationPrimaryKey){
         this.contentEvaluationPrimaryKey = contentEvaluationPrimaryKey;
-    }
-
-    public List<AssesmentItem> getAssesmentItems() {
-        return assesmentItems;
     }
 
     public String getRole() {
@@ -50,4 +46,23 @@ public class ContentEvaluation {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Map<String, String> getItems() {
+        return items;
+    }
+
+    public void setItems(Map<String, String> items) {
+        this.items = items;
+    }
+
+
+
 }

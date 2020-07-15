@@ -25,24 +25,36 @@ public class ContentEvaluationController {
 	ContentEvaluationService contentEvaluationService;
 	
 	@PostMapping("/add")
-	public ResponseEntity<Response> add(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg, String org)
-			throws Exception {
+	public ResponseEntity<Response> add(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
+										@RequestHeader String org) throws Exception {
 		requestBody.put(LexConstants.ROOT_ORG, rootOrg);
 		requestBody.put(LexConstants.ORG, org);
 		return new ResponseEntity<>(contentEvaluationService.upsert(requestBody), HttpStatus.OK);
 	}
 
-//	@GetMapping("/workflow")
-//	public ResponseEntity<Response> FetchFromContentWorkFlow(@RequestBody Map<String, Object> requestBody)
-//			throws Exception {
-//		return new ResponseEntity<>(contentWorkFlowService.fetchWorkFlowData(requestBody), HttpStatus.OK);
-//	}
-//
-//	@DeleteMapping("/workflow")
-//	public ResponseEntity<Response> removeFromContentWorkFlow(@RequestBody Map<String, Object> requestBody)
-//			throws Exception {
-//		return new ResponseEntity<>(contentWorkFlowService.removeFromWorkFlow(requestBody), HttpStatus.OK);
-//	}
+	@PostMapping("/fetchbyheader")
+	public ResponseEntity<Response> get(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
+										@RequestHeader String org) throws Exception {
+		requestBody.put(LexConstants.ROOT_ORG, rootOrg);
+		requestBody.put(LexConstants.ORG, org);
+		return new ResponseEntity<>(contentEvaluationService.fetch(requestBody), HttpStatus.OK);
+	}
+
+	@PostMapping("/fetch")
+	public ResponseEntity<Response> getByContentId(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
+										@RequestHeader String org) throws Exception {
+		requestBody.put(LexConstants.ROOT_ORG, rootOrg);
+		requestBody.put(LexConstants.ORG, org);
+		return new ResponseEntity<>(contentEvaluationService.fetchByContentId(requestBody), HttpStatus.OK);
+	}
+
+	@DeleteMapping("/delete")
+	public ResponseEntity<Response> delete(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
+										   @RequestHeader String org) throws Exception {
+		requestBody.put(LexConstants.ROOT_ORG, rootOrg);
+		requestBody.put(LexConstants.ORG, org);
+		return new ResponseEntity<>(contentEvaluationService.delete(requestBody), HttpStatus.OK);
+	}
 	
 	
 }

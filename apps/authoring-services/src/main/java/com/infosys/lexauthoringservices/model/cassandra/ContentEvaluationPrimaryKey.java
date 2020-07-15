@@ -33,16 +33,21 @@ public class ContentEvaluationPrimaryKey implements Serializable {
 	@PrimaryKeyColumn(name = "user_id")
 	private String userId;
 
+	@PrimaryKeyColumn(name = "header")
+	private String header;
+
+
 	public ContentEvaluationPrimaryKey(){
 		super();
 	}
 
-	public ContentEvaluationPrimaryKey(String root_org, String org, String contentId, String userId) {
+	public ContentEvaluationPrimaryKey(String root_org, String org, String contentId, String userId, String header) {
 		super();
 		this.root_org = root_org;
 		this.org = org;
 		this.contentId = contentId;
 		this.userId = userId;
+		this.header = header;
 	}
 
 	public String getRoot_org() {
@@ -75,5 +80,7 @@ public class ContentEvaluationPrimaryKey implements Serializable {
 
 	public void setUserId(String userId) { this.userId = userId; }
 
+	public String getHeader() { return header; }
 
+	public void setHeader(String header) { this.header = header; }
 }

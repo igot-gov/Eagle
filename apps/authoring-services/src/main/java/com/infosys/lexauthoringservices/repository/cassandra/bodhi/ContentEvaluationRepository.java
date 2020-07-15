@@ -14,7 +14,11 @@ import org.springframework.data.cassandra.repository.Query;
 
 import java.util.List;
 
-public interface ContentEvaluationRepository
-		extends CassandraRepository<ContentEvaluation, ContentEvaluationPrimaryKey> {
+public interface ContentEvaluationRepository extends CassandraRepository<ContentEvaluation, ContentEvaluationPrimaryKey> {
+
+
+	@Query("SELECT * from content_evaluation where root_org= ?0 and org= ?1 and content_id= ?2 and user_id= ?3;")
+	public List<ContentEvaluation> findById(String rootOrg, String org, String contentId, String userId);
+
 
 }
