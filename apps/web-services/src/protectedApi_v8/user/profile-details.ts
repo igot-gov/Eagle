@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Router } from 'express'
+import * as fs from 'fs'
 import { axiosRequestConfig, axiosRequestConfigLong } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
@@ -14,6 +15,8 @@ const API_END_POINTS = {
     getUserRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/getUserRegistry`,
     setUserProfileStatus: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/setUserProfileStatus`,
     userProfileStatus: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/userProfileStatus`,
+    // tslint:disable-next-line: object-literal-sort-keys
+    migrateRegistry: `${CONSTANTS.USER_PROFILE_API_BASE}/public/v8/profileDetails/migrateRegistry`,
 }
 
 export async function getUserProfileStatus(wid: string) {
@@ -130,6 +133,36 @@ profileDeatailsApi.get('/getProfilePageMeta', async (_req, res) => {
         res.status(response.status).send(response.data)
     } catch (err) {
         logError('ERROR FETCHING MASTER NATIONALITIES >', err)
+        res.status((err && err.response && err.response.status) || 500).send(err)
+    }
+})
+
+// Api to migrate data from eagleUser opensaber  to new userProfile opensaber
+profileDeatailsApi.get('/migrateRegistry', async (req, res) => {
+    const filePath = CONSTANTS.USER_BULK_UPLOAD_DIR || process.cwd() + '/user_upload/'
+    try {
+        // tslint:disable-next-line: no-any
+        fs.readFile(filePath + 'migrateRegistry.json', async (err: any, json: any) => {
+            if (!err) {
+                const obj = JSON.parse(json)
+                const widList = obj.widList
+                const userId = extractUserIdFromRequest(req)
+
+                logInfo('migrating the registry')
+                const response = await axios.post(
+                    API_END_POINTS.migrateRegistry,
+                    { ...req.body, userId, widList },
+                    {
+                        ...axiosRequestConfigLong,
+                    }
+                )
+                res.status(response.status).json(response.data)
+            } else {
+                res.status(500).send(err)
+            }
+        })
+    } catch (err) {
+        logError('ERROR CREATING USER REGISTRY >', err)
         res.status((err && err.response && err.response.status) || 500).send(err)
     }
 })
