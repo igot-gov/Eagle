@@ -84,9 +84,10 @@
     </div>
   </div>
   <mat-card *ngIf="playlist && playlist.id && isListExpanded && !!isListExpanded[playlist.id] || false"
-    class="border-radius-0">
+    class="border-radius-0 mt-1">
     <ng-container>
-      <h3 i18n>This playlist includes</h3>
+      <h2 i18n>This playlist includes</h2>
+      <hr />
       <div class=" padding-top-s padding-bottom-s margin-bottom-xl">
         <div *ngFor="let content of playlist?.contents">
           <ng-container *ngTemplateOutlet="contentView; context: { $implicit: content }">

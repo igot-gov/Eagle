@@ -1,12 +1,15 @@
 @import 'ws-mixins';
-.sec-nav-bar {
-  font-size: inherit;
-}
+
+// .sec-nav-bar {
+//   // font-size: $size-m;
+// }
+
 .search-container {
   @include breakpoint-xs {
     max-width: 150px;
   }
 }
+
 .feature-group-heading {
   width: 100%;
 }
@@ -21,16 +24,20 @@
   height: auto;
   box-sizing: border-box;
   border-radius: 0;
+
   @include breakpoint-gt-xs {
     flex-direction: column;
     width: 25%;
   }
+
   @include breakpoint-gt-s {
     width: 20%;
   }
+
   @include breakpoint-gt-m {
     width: 12.5%;
   }
+
   @include breakpoint-gt-l {
     width: 10%;
   }
@@ -44,12 +51,14 @@
   text-align: center;
   flex-direction: column;
 }
+
 .warn-icon {
   font-size: 64px;
   width: 64px;
   height: 64px;
   margin: 16px;
 }
+
 .logout {
   @include breakpoint-xs {
     text-align: center;
@@ -61,6 +70,7 @@
 .pad {
   padding: $size-l;
 }
+
 .tourGuideBtn {
   margin-bottom: 5px;
   margin-left: 10px;

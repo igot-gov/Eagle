@@ -13,7 +13,7 @@ import { TFetchStatus, ConfigurationsService, NsPage } from '@ws-widget/utils'
 export class PlaylistNotificationComponent implements OnInit {
   @ViewChild('errorAccept', { static: true }) errorAcceptMessage!: ElementRef<any>
   @ViewChild('errorReject', { static: true }) errorRejectMessage!: ElementRef<any>
-
+  defaultThumbnail = ''
   playlists: NsPlaylist.IPlaylist[] = this.route.snapshot.data.playlists.data
 
   acceptRejectPlaylistStatus: { [id: string]: TFetchStatus } = {}
@@ -25,6 +25,10 @@ export class PlaylistNotificationComponent implements OnInit {
     private configurationSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
   ) {
+    const instanceConfig = this.configurationSvc.instanceConfig
+    if (instanceConfig) {
+      this.defaultThumbnail = instanceConfig.logos.defaultContent
+    }
   }
 
   ngOnInit() {

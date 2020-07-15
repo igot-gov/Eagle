@@ -1,6 +1,8 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: router?.url.replace('/edit', '') }"></ws-widget-btn-page-back>
-  <span i18n="page title: playlist edit" class="margin-left-xs">Edit Playlist</span>
+  <ws-widget-btn-page-back
+    [widgetData]="{ url: router?.url.replace('/edit', ''), titles: [{title:'Edit Playlist', url:'none'}] }">
+  </ws-widget-btn-page-back>
+  <!-- <span i18n="page title: playlist edit" class="margin-left-xs">Edit Playlist</span> -->
 </mat-toolbar>
 <div class="page-container margin-top-xl margin-bottom-xl">
 

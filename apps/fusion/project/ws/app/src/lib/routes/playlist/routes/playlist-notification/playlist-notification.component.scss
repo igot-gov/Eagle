@@ -7,9 +7,9 @@
   width: $size-l;
   line-height: $size-l;
   text-align: center;
-  background: #3f51b5;
+  // background: #3f51b5;
   border-radius: $size-l / 2;
-  color: white;
+  // color: white;
 }
 
 .margin-left-xxs {
@@ -31,12 +31,15 @@
 .playlist-head {
   display: flex;
   justify-content: space-between;
+
   @include breakpoint-xs {
     flex-wrap: wrap;
   }
 }
+
 .playlist-includes {
   margin-top: 0;
+
   @include breakpoint-xs {
     margin-top: 24px;
   }

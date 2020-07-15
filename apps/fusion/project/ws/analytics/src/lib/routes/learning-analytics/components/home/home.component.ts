@@ -563,7 +563,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private graphGeneralSvc: GraphGeneralService,
     private resolver: AnalyticsResolver,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.filterEventSubscription = this.graphGeneralSvc.filterEventChangeSubject.subscribe(
@@ -971,14 +971,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       // users by Guild BarChart Data
       const barChartGuildTypeLabel: string[] = []
       const guildData: number[] = []
-      this.contentData.guild_group.forEach((source: any) => {
-        if (barChartGuildTypeLabel.length < 20) {
-          barChartGuildTypeLabel.push(source.key)
-        }
-        if (guildData.length < 20) {
-          guildData.push(source.doc_count)
-        }
-      })
+      if (this.contentData.guild_group
+        && this.contentData.guild_group.length > 0) {
+        this.contentData.guild_group.forEach((source: any) => {
+          if (barChartGuildTypeLabel.length < 20) {
+            barChartGuildTypeLabel.push(source.key)
+          }
+          if (guildData.length < 20) {
+            guildData.push(source.doc_count)
+          }
+        })
+      }
       this.barChartGuildData = {
         widgetType: ROOT_WIDGET_CONFIG.graph._type,
         widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,

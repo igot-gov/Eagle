@@ -1,8 +1,9 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-xs text-truncate">
+  <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title:'Contact Us',url:'none'}] }">
+  </ws-widget-btn-page-back>
+  <!-- <span class="margin-left-xs text-truncate">
     <span i18n="page title: contact" class="margin-left-xs">Contact Us</span>
-  </span>
+  </span> -->
 </mat-toolbar>
 
 <section class="contact-container">
@@ -21,13 +22,8 @@
       </ng-container>
     </mat-card-content>
     <mat-card-actions class="contact-card-actions">
-      <a
-        mat-button
-        href="http://infysd10/CAisd/pdmweb3.exe"
-        rel="noopener noreferrer"
-        target="_blank"
-        i18n="contact section one action button"
-      >
+      <a mat-button href="http://infysd10/CAisd/pdmweb3.exe" rel="noopener noreferrer" target="_blank"
+        i18n="contact section one action button">
         Click to raise AHD
       </a>
     </mat-card-actions>

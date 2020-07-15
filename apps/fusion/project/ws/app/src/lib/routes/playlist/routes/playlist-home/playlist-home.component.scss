@@ -20,6 +20,10 @@
   border-bottom: none
 }
 
+.no-border {
+  border: none !important;
+}
+
 .notification-circle {
   height: $size-l;
   width: $size-l;
