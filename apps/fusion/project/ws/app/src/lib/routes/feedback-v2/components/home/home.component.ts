@@ -15,6 +15,7 @@ export class HomeComponent implements OnDestroy {
   feedbackType?: EFeedbackType
   feedbackTypes: typeof EFeedbackType
   private queryParamSub?: Subscription
+  feedbacktypeName?: String = 'Feedback'
 
   constructor(private configSvc: ConfigurationsService, private route: ActivatedRoute) {
     this.pageNavbar = this.configSvc.pageNavBar
@@ -24,6 +25,13 @@ export class HomeComponent implements OnDestroy {
       const feedbackType = queryParams.get('feedbackType') as EFeedbackType
       if (feedbackType) {
         this.feedbackType = feedbackType
+        if (this.feedbackType) {
+          this.feedbacktypeName = this.feedbackType === EFeedbackType.Content ? "Content Feedback"
+            : (this.feedbackType === EFeedbackType.ContentRequest ? "Content Request"
+              : (this.feedbackType === EFeedbackType.Platform ? "Platform Feedback"
+                : (this.feedbackType === EFeedbackType.ServiceRequest ? "Service Request"
+                  : 'Feedback')))
+        }
       } else {
         this.feedbackType = undefined
       }
