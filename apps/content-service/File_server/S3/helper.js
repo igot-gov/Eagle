@@ -18,7 +18,9 @@ const cf = require('aws-cloudfront-sign');
 
 // App config to load environment variables and error status codes
 const appConfig = require('../ConfigReader/loader');
-const { errors } = require('./status-codes');
+const {
+  errors
+} = require('./status-codes');
 
 // Logger
 const log = require('../Logger/log');
@@ -37,7 +39,7 @@ AWS.config = new AWS.Config({
 // Set proxy if running locally
 if (appConfig.getProperty('MY_PC')) {
   let proxyURL = appConfig.getProperty('http-proxy');
-	AWS.config.update({
+  AWS.config.update({
     httpOptions: {
       agent: proxy(proxyURL)
     }
@@ -436,7 +438,9 @@ async function deletePath(bucket, key) {
     else {
       let contents = objects.Contents;
       let keys = [];
-      contents.forEach(content => keys.push({ Key: content.Key }));
+      contents.forEach(content => keys.push({
+        Key: content.Key
+      }));
       let result = await deleteAllObjects(bucket, keys);
       return result;
     }
@@ -468,9 +472,9 @@ async function download(bucket, key, req, res, shouldStream) {
   else {
     let extension = path.extname(key).toLowerCase();
     let mimeType;
-    mimeNames[extension]
-      ? (mimeType = mimeNames[extension])
-      : (mimeType = '');
+    mimeNames[extension] ?
+      (mimeType = mimeNames[extension]) :
+      (mimeType = '');
 
     // Set Content-Type
     res.set('Content-Type', mimeType);
@@ -676,14 +680,18 @@ function copyInSameBucket(sourceDir, destinationDir, bucketName) {
  *  Generate cookies for cloudfront authentication
  */
 function getCFCookies(key) {
+  console.log("getCFCookies====>", key);
+
   let options = {
     keypairId: CLOUDFRONT_KEY_PAIR_ID,
     privateKeyString: PRIVATE_KEY_STRING,
     expireTime: new Date().getTime() + 8.64e7 // 1 day
   };
+  console.log("Generate an object with signed cookies to authenticate CF requests=>");
 
   // Generate an object with signed cookies to authenticate CF requests
   let signedCookies = cf.getSignedCookies(key, options);
+  console.log("signedCookies===>", signedCookies);
 
   return signedCookies;
 }

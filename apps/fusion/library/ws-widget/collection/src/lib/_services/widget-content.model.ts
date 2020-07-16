@@ -23,7 +23,12 @@ export namespace NsContent {
     contentType: EContentTypes
     contentUrlAtSource: string
     creatorContacts: ICreator[]
+
     creatorDetails: ICreator[]
+    creatorLogo: string
+    creatorPosterImage: string
+    creatorThumbnail: string
+
     curatedTags: string[]
     description: string
     displayContentType: EDisplayContentTypes // For UI

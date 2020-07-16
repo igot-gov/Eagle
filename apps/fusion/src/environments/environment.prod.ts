@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  sitePath: null,
+  sitePath: 'eagle-sb.idc.tarento.com',
 }

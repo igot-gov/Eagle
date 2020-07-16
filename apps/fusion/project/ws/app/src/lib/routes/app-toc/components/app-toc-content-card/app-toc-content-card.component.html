@@ -92,15 +92,40 @@
       </button>
     </div>
     <div class="children-container" *ngIf="viewChildren">
-      <ws-app-toc-content-card [forPreview]="forPreview" [content]="child" [expandAll]="expandAll" [rootId]="rootId"
+      <ws-app-toc-content-card [content]="child" [expandAll]="expandAll" [rootId]="rootId"
         [rootContentType]="rootContentType" *ngFor="let child of content?.children; trackBy: contentTrackBy">
       </ws-app-toc-content-card>
     </div>
   </ng-container>
   <div *ngIf="isResource" class="resource-container">
-    <ws-widget-display-content-type-icon class="flex" [displayContentType]="content?.displayContentType">
-    </ws-widget-display-content-type-icon>
-    <div class="resource-meta width-expand">
+    <!-- <ws-widget-display-content-type-icon class="flex" [displayContentType]="content?.displayContentType">
+    </ws-widget-display-content-type-icon> -->
+
+    <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail"
+      (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
+    <div class="flex flex-between width-expand">
+      <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
+        <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
+          <h2 class="margin-remove text-truncate">{{ content?.name }}</h2>
+          <div>
+            <span class="mat-body-strong">{{ content?.displayContentType }}</span>
+            <span>
+              <ng-container *ngIf="content?.displayContentType">&nbsp;&nbsp;|&nbsp;&nbsp;</ng-container>
+              {{ content?.duration | pipeDurationTransform: 'hms' }}
+            </span>
+          </div>
+        </div>
+      </a>
+      
+        <button *ngIf="content?.artifactUrl && !isXSmall" type="button" mat-icon-button [matMenuTriggerFor]="buttonMenu">
+          <mat-icon>more_vertical</mat-icon>
+        </button>
+     
+      <!-- <button *ngIf="content?.artifactUrl" type="button" mat-icon-button [matMenuTriggerFor]="buttonMenu">
+        <mat-icon>more_vertical</mat-icon>
+      </button> -->
+    </div>
+    <!-- <div class="resource-meta width-expand">
       <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
         <h3 *ngIf="content?.displayContentType !== enumContentTypes.ASSESSMENT" class="margin-remove text-truncate">
           {{ content?.name }}
@@ -111,7 +136,7 @@
       </a>
       <span class="mat-body-strong margin-left-xs">{{ content?.duration | pipeDurationTransform: 'time24' }}
       </span>
-    </div>
+    </div> -->
   </div>
 </ng-container>
 
@@ -124,16 +149,15 @@
     </h3>
   </a>
   <div mat-menu-item>
-    <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+    <ws-widget-btn-content-download [widgetData]="
         content
           | pipePartialContent
-            : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal',
-                  'artifactUrl']
+            : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal']
       "></ws-widget-btn-content-download>
-    <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="content | pipePartialContent: ['identifier']">
+    <ws-widget-btn-content-like [widgetData]="content | pipePartialContent: ['identifier']">
     </ws-widget-btn-content-like>
-    <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="content"></ws-widget-btn-content-share>
-    <ws-widget-btn-goals [forPreview]="forPreview"></ws-widget-btn-goals>
-    <ws-widget-btn-playlist [forPreview]="forPreview"></ws-widget-btn-playlist>
+    <ws-widget-btn-content-share [widgetData]="content"></ws-widget-btn-content-share>
+    <ws-widget-btn-goals></ws-widget-btn-goals>
+    <ws-widget-btn-playlist></ws-widget-btn-playlist>
   </div>
 </mat-menu>

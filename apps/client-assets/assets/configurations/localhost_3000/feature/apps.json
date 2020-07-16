@@ -22,6 +22,26 @@
       "url": "/app/info/faq",
       "shortName": "Help"
     },
+    "feature_admin": {
+      "accessKey": "",
+      "icon": "supervisor_account",
+      "iconType": "mat-icon",
+      "id": "feature_admin",
+      "keywords": [
+        "admin",
+        "user",
+        "tenant"
+      ],
+      "name": "Create",
+      "permission": [
+        "admin"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Admin",
+      "shortName": "admin",
+      "url": "/admin/tenant"
+    },
     "feature_Terms&Condition": {
       "accessKey": "*",
       "icon": "description",
@@ -70,6 +90,64 @@
       "url": "/app/info/about",
       "shortName": "About"
     },
+    "feature_goals": {
+      "accessKey": "",
+      "icon": "track_changes",
+      "iconType": "mat-icon",
+      "id": "feature_goals",
+      "keywords": [
+        "my goal",
+        "goals",
+        "user goals"
+      ],
+      "name": "Goals",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "My goals",
+      "url": "/app/goals",
+      "shortName": "Goals"
+    },
+    "feature_home": {
+      "accessKey": "",
+      "icon": "home",
+      "iconType": "mat-icon",
+      "id": "feature_home",
+      "keywords": [
+        "home",
+        "dashboard"
+      ],
+      "name": "Home",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Dashboard",
+      "url": "/page/home",
+      "shortName": "Home"
+    },
+    "feature_badges": {
+      "accessKey": "",
+      "icon": "stars",
+      "iconType": "mat-icon",
+      "id": "feature_badges",
+      "keywords": [
+        "badges",
+        "badges"
+      ],
+      "name": "Badges",
+      "permission": [
+        "PROFILE"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Badges",
+      "url": "/app/profile/competency/badges",
+      "shortName": "Badges"
+    },
     "feature_catalog": {
       "accessKey": "",
       "icon": "explore",
@@ -104,7 +182,9 @@
       ],
       "name": "Author",
       "permission": [
-        ""
+        "editor",
+        "admin",
+        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -124,7 +204,9 @@
       ],
       "name": "Create",
       "permission": [
-        ""
+        "editor",
+        "admin",
+        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -150,7 +232,11 @@
       ],
       "name": "Feedback",
       "permission": [
-        "FEEDBACK"
+        "FEEDBACK",
+        "author",
+        "editor",
+        "admin",
+        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -177,31 +263,26 @@
       "url": "/app/profile/interest",
       "shortName": "Interests"
     },
-    "feature_mobileApps": {
-      "accessKey": "J",
-      "icon": "phone_iphone",
+    "feature_learningAnalytics": {
+      "accessKey": "",
+      "icon": "bar_chart",
       "iconType": "mat-icon",
-      "id": "feature_mobileApps",
+      "id": "feature_learningAnalytics",
       "keywords": [
-        "mobile apps",
-        "ios",
-        "android",
-        "download",
-        "apps",
-        "application",
-        "mobile application",
-        "app",
-        "mobile applications"
+        "learning",
+        "analytics",
+        "learning analytics",
+        "la"
       ],
-      "name": "Mobile Apps",
+      "name": "Learning Analytics",
       "permission": [
-        "MOBILE_APPS"
+        "LEARNING_ANALYTICS"
       ],
       "show": true,
       "status": "live",
-      "toolTip": "Mobile Apps",
-      "url": "/public/mobile-app",
-      "shortName": "Mobile"
+      "toolTip": "Learning Analytics",
+      "url": "/analytics",
+      "shortName": "Analytics"
     },
     "feature_notification": {
       "accessKey": "",
@@ -264,6 +345,46 @@
       "url": "/app/profile",
       "shortName": "Profile"
     },
+    "feature_profile_update": {
+      "accessKey": "U",
+      "icon": "create",
+      "iconType": "mat-icon",
+      "id": "feature_profile_update",
+      "keywords": [
+        "registry",
+        "profile detail",
+        "user profile detail",
+        "profile update"
+      ],
+      "name": "Profile Update",
+      "permission": [],
+      "show": true,
+      "status": "live",
+      "toolTip": "Profile Update",
+      "url": "/app/user-profile/details",
+      "shortName": "Profile Update"
+    },
+    "feature_account": {
+      "accessKey": "U",
+      "icon": "account_circle",
+      "iconType": "mat-icon",
+      "id": "feature_account",
+      "keywords": [
+        "dashboard",
+        "profile",
+        "user",
+        "me"
+      ],
+      "name": "Account",
+      "permission": [
+        "PROFILE"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Account",
+      "url": "/app/features",
+      "shortName": "Account"
+    },
     "feature_publish": {
       "accessKey": "",
       "icon": "publish",
@@ -276,7 +397,9 @@
       ],
       "name": "Publish",
       "permission": [
-        ""
+        "editor",
+        "admin",
+        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -296,7 +419,9 @@
       ],
       "name": "Review",
       "permission": [
-        ""
+        "editor",
+        "admin",
+        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -346,13 +471,17 @@
       "shortName": "Settings"
     }
   },
-  "groups": [{
+  "groups": [
+    {
       "featureIds": [
         "feature_feedback",
-        "feature_interests",
+        "feature_badges",
         "feature_notification",
+        "feature_goals",
+        "feature_interests",
         "feature_playlist",
-        "feature_profile"
+        "feature_profile",
+        "feature_profile_update"
       ],
       "icon": "",
       "iconType": "none",
@@ -362,8 +491,9 @@
         "profile",
         "Dashboard"
       ],
-      "name": "Me",
-      "toolTip": "Me"
+      "name": "Activity",
+      "toolTip": "Activity",
+      "hasRole": []
     },
     {
       "featureIds": [
@@ -379,11 +509,20 @@
         "contribution"
       ],
       "name": "Contribution",
-      "toolTip": "Contribution"
+      "toolTip": "Contribution",
+      "hasRole": [
+        "content-creator",
+        "channel-creator",
+        "ka-creator",
+        "kb-creator",
+        "editor",
+        "reviewer",
+        "publisher",
+        "admin"
+      ]
     },
     {
       "featureIds": [
-        "feature_search",
         "feature_catalog"
       ],
       "icon": "",
@@ -395,24 +534,43 @@
         "learning assistant"
       ],
       "name": "Learning Assistant",
-      "toolTip": "Learning Assistant"
+      "toolTip": "Learning Assistant",
+      "hasRole": []
+    },
+    {
+      "featureIds": [
+        "feature_admin"
+      ],
+      "icon": "",
+      "iconType": "none",
+      "id": "group_admin",
+      "keywords": [
+        "admin"
+      ],
+      "name": "Admin",
+      "toolTip": "Admin",
+      "hasRole": []
     },
     {
       "featureIds": [
         "feature_aboutUs",
         "feature_FAQs",
+        "feature_learningAnalytics",
         "feature_mobileApps",
-        "feature_Terms&Condition"
+        "feature_Terms&Condition",
+        "feature_quickTour"
       ],
       "icon": "",
       "iconType": "none",
       "id": "group_information",
       "keywords": [
         "info",
-        "information"
+        "information hub",
+        "info hub"
       ],
-      "name": "Information",
-      "toolTip": "Information"
+      "name": "Info Hub",
+      "toolTip": "Information Hub",
+      "hasRole": []
     },
     {
       "featureIds": [
@@ -422,10 +580,11 @@
       "iconType": "none",
       "id": "group_account",
       "keywords": [
-        "account"
+        "settings"
       ],
-      "name": "Account",
-      "toolTip": "Account"
+      "name": "Settings",
+      "toolTip": "Settings",
+      "hasRole": []
     }
   ]
 }

@@ -55,10 +55,13 @@ import { SearchRootComponent } from './routes/search-root/search-root.component'
 import { SocialComponent } from './routes/social/social.component'
 import { SearchRoutingModule } from './search-routing.module'
 import { PeopleComponent } from './routes/people/people.component'
+import { SearchInputHomeComponent } from './components/search-input-home/search-input-home.component'
+
 @NgModule({
   declarations: [
     SearchRootComponent,
     SearchInputComponent,
+    SearchInputHomeComponent,
     LearningComponent,
     BlogsCardComponent,
     FilterDisplayComponent,
@@ -115,7 +118,7 @@ import { PeopleComponent } from './routes/people/people.component'
     MatDividerModule,
     UserAutocompleteModule,
   ],
-  exports: [ItemTileComponent, SearchInputComponent],
+  exports: [ItemTileComponent, SearchInputComponent, SearchInputHomeComponent],
   providers: [TrainingApiService, TrainingService],
 })
 export class SearchModule { }

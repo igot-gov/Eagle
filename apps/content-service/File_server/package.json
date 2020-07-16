@@ -54,6 +54,7 @@
     "ua-parser-js": "^0.7.18",
     "underscore": "^1.8.3",
     "unzip": "^0.1.11",
+    "unzip-stream": "^0.3.0",
     "uuid": "^3.1.0",
     "validator": "^10.11.0",
     "winston": "^2.4.0"

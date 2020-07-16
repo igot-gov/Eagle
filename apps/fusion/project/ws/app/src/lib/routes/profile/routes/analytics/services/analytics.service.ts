@@ -5,7 +5,8 @@ import { NSAnalyticsData } from '../models/analytics.model'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { NSCompetency } from '../../competency/models/competency.model'
 
-const LA_API = `/LA1/api`
+const LA_API = `/api`
+// const LA_API = `/LA1/api`
 const LA_API_END_POINTS = {
   TIME_SPENT: `${LA_API}/timespent`,
   NSO_PROGRESS: `${LA_API}/nsoArtifactsAndCollaborators`,
