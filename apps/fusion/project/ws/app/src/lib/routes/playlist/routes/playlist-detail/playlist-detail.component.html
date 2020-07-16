@@ -3,15 +3,17 @@
   <span i18n="page title: playlist detail" class="margin-left-xs">Playlist</span>
   <div class="spacer"></div>
   <div class="hidden-xs">
-    <button name="add-more-button-playlist-detail" mat-button (click)="router.navigate([router.url, 'edit'])">
-      <mat-icon>add</mat-icon>&nbsp;
-      <span i18n>Add More</span>
+    <button name="add-more-button-playlist-detail" *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)"
+      mat-button (click)="router.navigate([router.url, 'edit'])">
+      <mat-icon>edit</mat-icon>&nbsp;
+      <span i18n>Edit</span>
     </button>
     <button name="share-button-playlist-detail" mat-button (click)="sharePlaylist()">
       <mat-icon>share</mat-icon>&nbsp;
       <span i18n>Share</span>
     </button>
-    <button name="delete-button-playlist-detail" mat-button (click)="deletePlaylist()">
+    <button name="delete-button-playlist-detail" *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)"
+      mat-button (click)="deletePlaylist()">
       <mat-icon>delete</mat-icon>&nbsp;
       <span i18n>Delete</span>
     </button>
@@ -70,19 +72,21 @@
               <ng-container *ngIf="playlist?.visibility === 'public'" i18n>PUBLIC</ng-container>
             </span>
           </p>
-          <h3 class="mat-subheading-2 font-weight-500 margin-remove-bottom" i18n>CURATORS</h3>
+          <!-- <h3 class="mat-subheading-2 font-weight-500 margin-remove-bottom" i18n>CURATORS</h3>
           <div class="flex flex-middle mt-2">
             <ws-widget-user-image class="user-icon-container"
               [email]="playlist?.sharedBy || configSvc?.userProfile?.email" [imageType]="'rounded'">
             </ws-widget-user-image>
             <span class="mat-body ml-4">
+              {{playlist | json}}
               {{ playlist?.sharedByDisplayName || configSvc?.userProfile?.userName }}
             </span>
-          </div>
+          </div> -->
         </div>
         <div *ngIf="playlistPlayLink" class="playlist-fab width-1-1">
           <div class="page-container flex flex-row-reverse">
-            <a name="play-link-playlist-detail"  mat-fab [routerLink]="playlistPlayLink?.url" [queryParams]="playlistPlayLink?.queryParams">
+            <a name="play-link-playlist-detail" mat-fab [routerLink]="playlistPlayLink?.url"
+              [queryParams]="playlistPlayLink?.queryParams">
               <mat-icon>play_arrow</mat-icon>
             </a>
           </div>
@@ -104,22 +108,24 @@
 </div>
 
 <mat-menu #playlistMenu="matMenu" overlapTrigger="true">
-  <button mat-menu-item (click)="router.navigate([router.url, 'edit'])">
-    <mat-icon>add</mat-icon>
-    <span i18n>Add More</span>
+  <button mat-menu-item *ngIf="!playlist?.sharedBy || !playlist?.sharedByDisplayName"
+    (click)="router.navigate([router.url, 'edit'])">
+    <mat-icon>edit</mat-icon>
+    <span i18n>Edit </span>
   </button>
   <button mat-menu-item (click)="sharePlaylist()">
     <mat-icon>share</mat-icon>
     <span i18n>Share</span>
   </button>
-  <button mat-menu-item (click)="deletePlaylist()">
+  <button mat-menu-item *ngIf="!playlist?.sharedBy || !playlist?.sharedByDisplayName" (click)="deletePlaylist()">
     <mat-icon>delete</mat-icon>
     <span i18n>Delete</span>
   </button>
 </mat-menu>
 
 <ng-template #contentView let-content>
-  <div class="flex flex-middle padding-top-s padding-bottom-xs">
+  <!-- <mat-card class="play2"> -->
+  <div class="flex flex-middle padding-top-s padding-bottom-xs play2 ws-primary-background">
     <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted" i18n-matTooltip
       matTooltip="Content may be expired or deleted"
       *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
@@ -143,17 +149,24 @@
           <mat-icon>access_time</mat-icon>
           <span class="margin-left-xxs">
             <ng-container>{{ content?.duration | pipeDurationTransform: 'hms' }}&nbsp; | &nbsp;</ng-container>
-            <ws-widget-display-content-type [displayContentType]="content?.contentType">
+            <ws-widget-display-content-type [displayContentType]="content?.contentType==='Collection'
+              ?'Module'
+              :(content?.contentType==='Learning Path'?'Program':content?.contentType)">
             </ws-widget-display-content-type>
           </span>
         </p>
       </div>
+      <span *ngIf="playlist?.sharedBy" class="flex ws-mat-accent-text" title="Shared">
+        <mat-icon class="negative-margin-left-xxs">folder_shared</mat-icon>
+      </span>
     </div>
-    <button name="delete-content-button-playlist-detail"  *ngIf="playlist?.contents?.length > 1" mat-icon-button class="more-button"
-      (click)="deleteContent(content?.identifier, content?.name)">
+    <button name="delete-content-button-playlist-detail"
+      *ngIf="playlist?.contents?.length > 1 && !(playlist?.sharedBy || playlist?.sharedByDisplayName)" mat-icon-button
+      class="more-button" (click)="deleteContent(content?.identifier, content?.name)">
       <mat-icon>delete</mat-icon>
     </button>
   </div>
+  <!-- </mat-card> -->
 </ng-template>
 <ng-template #errorPage>
   <ng-container [wsResolverWidget]="errorWidget"></ng-container>

@@ -10,9 +10,17 @@
 }
 
 .title {
-  font-weight: bold !important;
+  // font-weight: bold !important;
+  // font-weight: 300 !important;
+  // font-size: 24px !important;
+  display: flex;
 }
-
+.mat-expansion-panel-header-title{
+  margin-left: 5px;;
+}
+mat-expansion-panel-header{
+  padding: 0;
+}
 .activity-button {
   border-radius: 2px !important;
   background-color: #05a7c9 !important;
@@ -34,12 +42,6 @@
     margin-bottom: 1.5rem !important;
   }
 
-}
-
-.top-divider {
-  @include breakpoint-lt-m {
-    margin-bottom: 0.5rem !important;
-  }
 }
 
 mat-expansion-panel-body {

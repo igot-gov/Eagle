@@ -33,6 +33,8 @@ import { BtnPlaylistComponent } from './btn-playlist/btn-playlist.component'
 import { BtnPlaylistModule } from './btn-playlist/btn-playlist.module'
 import { BtnPreviewComponent } from './btn-preview/btn-preview.component'
 import { BtnPreviewModule } from './btn-preview/btn-preview.module'
+import { BtnProfileComponent } from './btn-profile/btn-profile.component'
+import { BtnProfileModule } from './btn-profile/btn-profile.module'
 import { BtnSettingsComponent } from './btn-settings/btn-settings.component'
 import { BtnSettingsModule } from './btn-settings/btn-settings.module'
 import { CardBreadcrumbComponent } from './card-breadcrumb/card-breadcrumb.component'
@@ -120,6 +122,7 @@ export const WIDGET_REGISTERED_MODULES = [
   BtnPageBackModule,
   BtnPlaylistModule,
   BtnPreviewModule,
+  BtnProfileModule,
   BtnSettingsModule,
   CardBreadcrumbModule,
   CardContentModule,
@@ -236,9 +239,15 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.actionButton.newProfile,
+    component: BtnProfileComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
     widgetSubType: ROOT_WIDGET_CONFIG.actionButton.setting,
     component: BtnSettingsComponent,
   },
+
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.breadcrumb,

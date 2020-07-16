@@ -44,7 +44,7 @@ $mat-orange: (
   600: #fb8c00,
   700: #f57c00,
   800: #ef6c00,
-  900: #2096cd,
+  900: #2095cc,
   A100: #ffd180,
   A200: #ffab40,
   A400: #ff9100,
@@ -77,12 +77,24 @@ $theme-accent: mat-palette($mat-orange, 900);
 
 // The warn palette is optional (defaults to red).
 $theme-warn: mat-palette($mat-red);
+// $background-color: mat-palette($mat-red);
+// $theme-background: mat-palette($mat-red);
 
 .theme-deep-blue {
   &.day-mode {
     $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
+
+     // $custom-background-color: map_get($mat-blue-grey, 50);
+
+    // -or- Can set colour by hex value too
+    // $custom-background-color: #F5F6FA;
+
+    // $background: map-get($theme, background);
+    // $background: map_merge($background, (background: $custom-background-color));
+    // $theme: map_merge($theme, (background: $background));
     @include angular-material-theme($theme);
     @include theme-based-configurations($theme);
+    // $background: $background-color;
   }
 
   &.night-mode {

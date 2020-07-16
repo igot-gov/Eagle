@@ -6,6 +6,7 @@ import { FeatureUsageComponent } from './routes/analytics/routes/feature-usage/f
 import { LearningComponent } from './routes/analytics/routes/learning/learning.component'
 import { PlansComponent } from './routes/analytics/routes/plans/plans.component'
 import { AchievementsComponent } from './routes/competency/components/achievements/achievements.component'
+import { BadgesResolver2 } from './routes/badges/badges.resolver2'
 import { CardDetailComponent } from './routes/competency/components/card-detail/card-detail.component'
 import { CompetencyHomeComponent } from './routes/competency/components/competency-home/competency-home.component'
 import { CompetencyResolverService } from './routes/competency/resolver/assessment.resolver'
@@ -18,6 +19,9 @@ import { LearningTimeComponent } from './routes/learning/components/learning-tim
 import { LearningHistoryResolver } from './routes/learning/resolvers/learning-history.resolver'
 import { LearningTimeResolver } from './routes/learning/resolvers/learning-time.resolver'
 import { SettingsComponent } from './routes/settings/settings.component'
+// import { BadgeComponent } from '../gamification/routes/badges/components/badge/badge.component'
+import { BadgesComponent } from './routes/badges/badges.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -44,7 +48,13 @@ const routes: Routes = [
         pathMatch: 'full',
         redirectTo: 'assessment',
       },
-
+      {
+        path: 'badges',
+        component: BadgesComponent,
+        resolve: {
+          badges: BadgesResolver2,
+        },
+      },
       {
         path: ':type',
         component: AchievementsComponent,

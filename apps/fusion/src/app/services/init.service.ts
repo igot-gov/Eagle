@@ -1,4 +1,5 @@
 import { APP_BASE_HREF } from '@angular/common'
+import { retry } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { MatIconRegistry } from '@angular/material'
@@ -25,6 +26,7 @@ interface IDetailsResponse {
   tncStatus: boolean
   roles: string[]
   group: string[]
+  profileDetailsStatus: boolean
 }
 
 interface IFeaturePermissionConfigs {
@@ -95,7 +97,9 @@ export class InitService {
       this.settingsSvc.initializePrefChanges(environment.production)
       this.updateNavConfig()
       this.logger.info('Not Authenticated')
+      // window.location.reload() // can do this
       return false
+
     }
     try {
       // this.logger.info('User Authenticated', authenticated)
@@ -259,7 +263,7 @@ export class InitService {
       }
     }
     const details: IDetailsResponse = await this.http
-      .get<IDetailsResponse>(endpoint.details)
+      .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
       .toPromise()
     this.configSvc.userGroups = new Set(details.group)
     this.configSvc.userRoles = new Set(details.roles)
@@ -267,6 +271,7 @@ export class InitService {
       this.configSvc.userRoles.add('is_manager')
     }
     this.configSvc.hasAcceptedTnc = details.tncStatus
+    this.configSvc.profileDetailsStatus = details.profileDetailsStatus
     return details
   }
 

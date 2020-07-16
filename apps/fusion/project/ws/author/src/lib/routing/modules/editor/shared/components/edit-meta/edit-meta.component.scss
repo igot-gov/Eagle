@@ -118,6 +118,7 @@ input {
 .margin-left-40 {
   margin-left: 66px;
 }
+
 .custom-form-control {
   margin: 0.25em 25px;
 }
@@ -128,6 +129,7 @@ input {
 
 .margin-l-l {
   margin-left: 32px;
+
   @media only screen and(max-width: 585px) {
     margin-left: 0px;
   }
@@ -135,6 +137,7 @@ input {
 
 .margin-r-l {
   margin-right: 32px;
+
   @media only screen and(max-width: 585px) {
     margin-left: 0px;
   }
@@ -211,7 +214,7 @@ ul li {
   z-index: -1;
 }
 
-.inputfile + label {
+.inputfile+label {
   font-size: 1.25em;
   color: white;
   display: inline-block;
@@ -246,4 +249,18 @@ ul li {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.mobile-break{
+  display: flex;
+  flex-direction: row;
+}
+.new-mobile{
+  display: flex;
+  flex-direction: column;
+}
+// 960
+@media only screen and (max-width:960px) {
+  .mobile-break {
+    flex-direction: column;
+  }
 }

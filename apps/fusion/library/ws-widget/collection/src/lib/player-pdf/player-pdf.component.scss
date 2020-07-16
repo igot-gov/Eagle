@@ -8,14 +8,19 @@
   overflow: hidden;
   font: inherit;
 }
+
 .pdf-page-container {
-  width: calc(100%-80px);
+  // width: calc(100% - 80px);
+  flex: 1;
   text-align: center;
   overflow: auto;
+  margin: auto;
 }
+
 .pdf-page-num {
   margin: 0 5px;
 }
+
 .pdf-container {
   height: 100%;
   width: 100%;

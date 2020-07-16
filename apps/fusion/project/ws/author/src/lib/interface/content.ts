@@ -159,6 +159,9 @@ export namespace NSContent {
     studyMaterials: IInternalReference[]
     studyDuration: number
     sampleCertificates: IInternalReference[]
+    creatorLogo: string
+    creatorPosterImage: string
+    creatorThumbnail: string
   }
 
   export interface IClient {

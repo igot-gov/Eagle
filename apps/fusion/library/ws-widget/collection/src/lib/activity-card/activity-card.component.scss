@@ -1,15 +1,16 @@
 .activity-card {
-  min-width: 210px !important;
-  max-width: 210px !important;
-  max-height: 232px !important;
-  min-height: 184px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+  max-height: 200px !important;
+  min-height: 200px !important;
+  box-shadow: 0px 10px 30px #99999933 !important;
   border-radius: 8px;
   text-align: center;
   align-items: center;
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-right: 1.7rem;
+  margin-top: 1rem;
   margin-left: 0.5rem;
+  margin-bottom: 1rem;
   display: inline-block;
 
 }
@@ -49,5 +50,5 @@
 .explore {
   text-align: center;
   display: grid;
-  color: white;
+  color: #222222;
 }

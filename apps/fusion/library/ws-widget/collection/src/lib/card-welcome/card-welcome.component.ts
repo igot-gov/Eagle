@@ -28,7 +28,6 @@ export class CardWelcomeComponent extends WidgetBaseComponent
     private router: Router,
     private activitiesSvc: ActivitiesService,
     private snackBar: MatSnackBar,
-
   ) {
     super()
     if (this.configSvc.userProfile) {
@@ -47,12 +46,25 @@ export class CardWelcomeComponent extends WidgetBaseComponent
     }
 
   }
-
+  hasRole(role: string[]): boolean {
+    let returnValue = false
+    role.forEach(v => {
+      if ((this.configSvc.userRoles || new Set()).has(v)) {
+        returnValue = true
+      }
+    })
+    return returnValue
+  }
   ngOnInit() {
     if (this.showActivities) {
       this.activitiesSvc.fetchActivites().then((result: IActivity) => {
         if (result.activities.length !== 0) {
-          this.activityCards = result.activities
+          result.activities.forEach(activity => {
+            if (activity.hasRole.length === 0 || this.hasRole(activity.hasRole)) {
+              this.activityCards.push(activity)
+            }
+          })
+          // this.activityCards = result.activities
           this.activityCards.forEach(activityCard => {
             if (!(this.keyTag.includes(activityCard.tag))) {
               this.keyTag.push(activityCard.tag)

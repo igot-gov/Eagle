@@ -227,7 +227,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
       let id = playlist.contents[0].identifier
       this.contentSvc.fetchContentHistory(playlist.id).subscribe(data => {
         if (data) {
-           id = data.identifier
+          id = data.identifier
         }
         this.contentSvc.fetchContent(id).subscribe(response => {
           if (response) {
@@ -241,17 +241,17 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
           }
         })
       },                                                         _err => {
-          this.contentSvc.fetchContent(playlist.contents[0].identifier).subscribe(response => {
-            if (response) {
-              const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(response)
-              this.playlistPlayLink = viewerRouteGenerator(
-                firstPlayableContent.identifier,
-                firstPlayableContent.mimeType,
-                playlist.id,
-                'Playlist',
-              )
-            }
-          })
+        this.contentSvc.fetchContent(playlist.contents[0].identifier).subscribe(response => {
+          if (response) {
+            const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(response)
+            this.playlistPlayLink = viewerRouteGenerator(
+              firstPlayableContent.identifier,
+              firstPlayableContent.mimeType,
+              playlist.id,
+              'Playlist',
+            )
+          }
+        })
       })
     }
   }

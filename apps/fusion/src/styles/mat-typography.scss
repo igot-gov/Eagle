@@ -13,7 +13,7 @@ mat-typography-level parameters:
 // Line-height must be unit-less fraction of the font-size.
 
 $typography: mat-typography-config(
-  $font-family: $font-family-sans,
+  $font-family: $font-family-open-poppins,
   $display-4: mat-typography-level(112px, 112px, 400),
   $display-3: mat-typography-level(56px, 56px, 400),
   $display-2: mat-typography-level(45px, 52px, 400),
@@ -32,7 +32,7 @@ $typography: mat-typography-config(
 
 .x-small-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px - 48px, 112px - 48px, 300),
     $display-3: mat-typography-level(56px - 24px, 56px - 24px, 300),
     $display-2: mat-typography-level(45px - 24px, 48px - 24px, 300),
@@ -51,7 +51,7 @@ $typography: mat-typography-config(
 }
 .small-typography {
   $typography: mat-typography-config(
-    $font-family: "'Open Sans', sans-serif",
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px - 24px, 112px - 24px, 300),
     $display-3: mat-typography-level(56px - 16px, 56px - 16px, 300),
     $display-2: mat-typography-level(45px - 12px, 48px - 12px, 300),
@@ -60,6 +60,10 @@ $typography: mat-typography-config(
     $title: mat-typography-level(20px - 4px, 32px - 6px, 300),
     $subheading-2: mat-typography-level(16px - 2px, 28px - 4px, 300),
     $subheading-1: mat-typography-level(15px - 2px, 24px - 4px, 300),
+    /* $headline: mat-typography-level(28px - 4px, 41px - 6px, 400),
+    // $title: mat-typography-level(28px - 4px, 41px - 6px, 300),
+    // $subheading-2: mat-typography-level(20px - 2px, 31px - 4px, 300),
+    // $subheading-1: mat-typography-level(15px - 2px, 24px - 4px, 300), */
     $body-2: mat-typography-level(14px - 2px, 24px - 4px, 600),
     $body-1: mat-typography-level(14px - 2px, 20px - 4px, 300),
     $caption: mat-typography-level(12px - 2px, 20px - 4px, 300),
@@ -71,7 +75,7 @@ $typography: mat-typography-config(
 
 .large-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px + 24px, 112px + 24px, 400),
     $display-3: mat-typography-level(56px + 16px, 56px + 16px, 400),
     $display-2: mat-typography-level(45px + 12px, 48px + 12px, 400),
@@ -90,7 +94,7 @@ $typography: mat-typography-config(
 }
 .x-large-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px + 48px, 112px + 48px, 300),
     $display-3: mat-typography-level(56px + 24px, 56px + 24px, 300),
     $display-2: mat-typography-level(48px + 24px, 48px + 24px, 300),
@@ -110,7 +114,7 @@ $typography: mat-typography-config(
 
 .custom-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-open-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px, 112px, 400),
     $display-3: mat-typography-level(56px, 56px, 400),
     $display-2: mat-typography-level(45px, 52px, 400),
@@ -130,7 +134,7 @@ $typography: mat-typography-config(
 
 .x-small-custom-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-open-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px - 48px, 112px - 48px, 300),
     $display-3: mat-typography-level(56px - 24px, 56px - 24px, 300),
     $display-2: mat-typography-level(45px - 24px, 48px - 24px, 300),
@@ -149,7 +153,7 @@ $typography: mat-typography-config(
 }
 .small-custom-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-open-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px - 24px, 112px - 24px, 300),
     $display-3: mat-typography-level(56px - 16px, 56px - 16px, 300),
     $display-2: mat-typography-level(45px - 12px, 48px - 12px, 300),
@@ -169,7 +173,7 @@ $typography: mat-typography-config(
 
 .large-custom-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-open-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px + 24px, 112px + 24px, 400),
     $display-3: mat-typography-level(56px + 16px, 56px + 16px, 400),
     $display-2: mat-typography-level(45px + 12px, 48px + 12px, 400),
@@ -188,7 +192,7 @@ $typography: mat-typography-config(
 }
 .x-large-custom-typography {
   $typography: mat-typography-config(
-    $font-family: $font-family-open-sans,
+    $font-family: $font-family-open-poppins,
     $display-4: mat-typography-level(112px + 48px, 112px + 48px, 300),
     $display-3: mat-typography-level(56px + 24px, 56px + 24px, 300),
     $display-2: mat-typography-level(48px + 24px, 48px + 24px, 300),

@@ -7,7 +7,8 @@ import { extractUserIdFromRequest } from '../utils/requestExtract'
 
 const API_END_POINTS = {
   cohorts: `${CONSTANTS.COHORTS_API_BASE}/v2/resources`,
-  groupCohorts: (groupId: number) => `${CONSTANTS.PID_API_BASE}/groups/${groupId}/users `,
+  groupCohorts: (groupId: number) =>
+    `${CONSTANTS.USER_PROFILE_API_BASE}/groups/${groupId}/users `,
 }
 const VALID_COHORT_TYPES = new Set([
   'activeusers',

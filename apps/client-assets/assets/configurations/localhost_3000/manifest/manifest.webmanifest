@@ -1,12 +1,12 @@
 {
-  "name": "Eagle",
+  "name": "iGot: Learning Amplified",
   "categories": [
     "education",
     "books",
     "productivity",
     "social"
   ],
-  "short_name": "eagle",
+  "short_name": "iGot",
   "theme_color": "#3f51b5",
   "background_color": "#3f51b5",
   "display": "standalone",
