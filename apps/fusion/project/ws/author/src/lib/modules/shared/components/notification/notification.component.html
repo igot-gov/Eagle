@@ -70,7 +70,7 @@
 
 <p *ngIf="type === notify.UPLOAD_FILE">
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">notification_important</mat-icon>
-  <span i18n>Upload the file!</span>
+  <span i18n>Choose the files then click on upload</span>
 </p>
 
 <p *ngIf="type === notify.TRANSCODE_FAIL">
@@ -94,8 +94,10 @@
 </p>
 
 <p *ngIf="type === notify.NO_ROLE" class="flex">
-  <mat-icon class="icon self-center" aria-hidden="false" i18n-aria-label aria-label="Notification">notification_important</mat-icon>
-  <span i18n class="self-center">Selected user does not to have publish/review rights, please contact admin to get publish/review rights for this user or
+  <mat-icon class="icon self-center" aria-hidden="false" i18n-aria-label aria-label="Notification">
+    notification_important</mat-icon>
+  <span i18n class="self-center">Selected user does not to have publish/review rights, please contact admin to get
+    publish/review rights for this user or
     select another user who has publish/review rights</span>
 </p>
 <p *ngIf="type === notify.NO_ACCESS">
@@ -235,7 +237,8 @@
   <span i18n>This class is already defined</span>
 </p>
 <p *ngIf="type === notify.RELATION_MIN_CLASS_REQUIRED">
-  <mat-icon class="icon self-center" aria-hidden="false" i18n-aria-label aria-label="Notification">notification_important</mat-icon>
+  <mat-icon class="icon self-center" aria-hidden="false" i18n-aria-label aria-label="Notification">
+    notification_important</mat-icon>
   <span class="self-center" i18n>Atleast two classes are required to create a relation</span>
 </p>
 <p *ngIf="type === notify.RELATION_EXISTS">

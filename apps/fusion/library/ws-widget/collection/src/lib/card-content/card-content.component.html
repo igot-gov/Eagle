@@ -208,13 +208,13 @@
           <div style="position: relative; z-index: 1;">
             <img mat-card-image style="position: absolute; z-index: 2;" [src]="widgetData.content.appIcon"
               [id]="'card_' + widgetData.content.identifier" class="card-img ws-mat-primary-lite-background"
-              [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name"
-              [title]="widgetData.content.name" />
+              [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name" />
             <div class="source-div">
               <!-- [src]="sourseIcon(widgetData.content.sourceName)" -->
               <img [src]="widgetData.content.creatorLogo" [id]="'source_' + widgetData.content.identifier"
                 class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-                [alt]="widgetData.content.sourceName || iGOT" [title]="widgetData.content.sourceName" />
+                [alt]="widgetData.content.sourceName || iGOT" />
+              <!-- [title]="widgetData.content.sourceName" -->
             </div>
           </div>
         </a>
@@ -244,11 +244,10 @@
                 <span class="time-text">{{ widgetData.content.duration | pipeDurationTransform: 'hms' }}</span>
               </div>
             </div>
-            <!-- [matTooltip]="widgetData.content.name" -->
+
             <div class="ws-mat-primary-text mat-title title-text ws-mat-text-block-fade-gradient">
               {{ widgetData.content.name }}
             </div>
-            <!-- i18n-title title="Description" -->
             <div class="description-text ws-mat-text-block-fade-gradient mb-10">
               {{ widgetData.content.description | pipeHtmlTagRemoval }}
               <!-- {{widgetData.content | json}} -->

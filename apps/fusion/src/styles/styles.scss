@@ -171,6 +171,10 @@ iframe {
   border: 0;
 }
 
+.mat-menu-panel {
+  max-width: 290px !important;
+}
+
 // Material Over-rides
 .auto-mat-form-field-input-infix {
   .mat-form-field-infix {

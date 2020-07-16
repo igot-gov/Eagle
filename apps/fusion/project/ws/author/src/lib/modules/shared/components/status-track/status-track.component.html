@@ -19,9 +19,9 @@
       </div>
     </div>
   </div>
-  <div *ngIf="isClient1" (click)="showModal = true" class="flex w-full justify-end ws-mat-primary-text my-4 pointer">
+  <!-- <div (click)="showModal = true" class="flex w-full justify-end ws-mat-primary-text my-4 pointer">
     <span class="cursor-pointer">Complete Flow</span>
-  </div>
+  </div> -->
   <div [ngClass]="{ 'my-4': !isClient1 }" class="custom-height custom-scroll">
     <b i18n="History|History of Comments" i18n>History</b>
     <ng-container *ngIf="workFlowLog.length">
@@ -40,7 +40,7 @@
             <ng-container *ngIf="comment.action === 'restored'" i18n>Moved to Draft</ng-container>
             <ng-container *ngIf="comment.action === 'pulledBack'" i18n>Moved to Draft</ng-container>
           </span>
-          <span i18n> by </span>
+          <span i18n> By </span>
           <span>{{ comment.name || 'System' }}</span>
           <span i18n> on </span>
           <span>{{ comment.date | date }}</span>
@@ -58,7 +58,7 @@
   </div>
 </mat-dialog-content>
 
-<div class="custom-modal" [class.showModal]="showModal">
+<!-- <div class="custom-modal" [class.showModal]="showModal">
   <span (click)="showModal = false" class="modal-close cursor-pointer">&times;</span>
   <img src="/assets/images/authoring/client1.png" class="modal-image" />
-</div>
+</div> -->

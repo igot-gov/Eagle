@@ -1,10 +1,10 @@
 <section class="pt-8">
   <h3 class="mat-h3" [ngSwitch]="viewedBy" *ngIf="feedbackData && feedbackData.hits">
     <ng-container *ngSwitchCase="feedbackRoles.User" i18n>
-      Feedback that you have given.
+      Feedback provided by you.
     </ng-container>
     <ng-container *ngSwitchCase="feedbackRoles.Author" i18n>
-      Feedback that you have received for your content.
+      Feedback received on your content.
     </ng-container>
     <ng-container *ngSwitchCase="feedbackRoles.Platform" i18n>
       Feedback on the platform.
