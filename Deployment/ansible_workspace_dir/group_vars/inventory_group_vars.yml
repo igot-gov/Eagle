@@ -102,6 +102,7 @@ keycloak_sso_admin_user: user-manager
 keycloak_sso_admin_user_password: password
 keycloak_username: username
 keycloak_password: password
+keycloak_new_user_def_pwd: password
 vault_rootorg_to_authdomain_and_realm_mapping: rootorg;https://domain_name/auth;wingspan #<<= Format
 
 # Swarm variables

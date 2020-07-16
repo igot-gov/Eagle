@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="ws-android-rainforest/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sdk/sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/sdk/sdk.iml" group="ws-android-rainforest/sdk" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ws-android-rainforest.iml" filepath="$PROJECT_DIR$/.idea/modules/ws-android-rainforest.iml" group="ws-android-rainforest" />
+    </modules>
+  </component>
+</project>

@@ -4,7 +4,9 @@
     "allowRedo": false,
     "allowRestore": false,
     "allowExpiry": false,
+    "allowReview": true,
     "allowPublish": true,
+    "newDesign": false,
     "urlPatternMatching": [
       {
         "allowReplace": false,
@@ -172,7 +174,7 @@
     "poweredBy": "Tarento",
     "landingLogo": "",
     "defaultSourceLogo": "/assets/instances/eagle/app_logos/source.png",
-    "playListLogo":"/assets/instances/eagle/about-page/about-header.jpg"
+    "playListLogo": "/assets/instances/eagle/about-page/about-header.jpg"
   },
   "sources": [
     {
