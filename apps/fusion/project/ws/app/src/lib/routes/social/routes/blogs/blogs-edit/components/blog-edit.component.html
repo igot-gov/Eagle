@@ -2,13 +2,13 @@
   <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <span class="margin-left-xs">Write a Blog</span>
   <span class="spacer"></span>
-  <button *ngIf="editMode === 'update'" i18n-matTooltip matTooltip="Save"
+  <button *ngIf="editMode === 'update'"
     [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
     type="button" (click)="update(saved.value, error.value)">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Save </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">save</mat-icon>
   </button>
-  <button *ngIf="editMode === 'draft'" i18n-matTooltip matTooltip="Save"
+  <button *ngIf="editMode === 'draft'"
     [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
     type="button" (click)="saveDraft(saved.value, error.value)">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Save </ng-container>
@@ -16,13 +16,13 @@
   </button>
   <button *ngIf="editMode === 'create'" class="margin-left-xs"
     [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
-    (click)="saveDraft(savedDraft.value, error.value)" type="button" i18n-matTooltip matTooltip="Save as draft">
+    (click)="saveDraft(savedDraft.value, error.value)" type="button">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Save as draft </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">drafts</mat-icon>
   </button>
   <button *ngIf="editMode === 'create' || editMode === 'draft'" class="margin-left-xs"
     [disabled]="isCreatingPost || !actionBtnsEnabled || blogTitle.invalid || blogAbstract.invalid" mat-raised-button
-    (click)="publishBlog(publish.value, error.value)" type="button" i18n-matTooltip matTooltip="Publish">
+    (click)="publishBlog(publish.value, error.value)" type="button">
     <ng-container i18n *ngIf="(isXSmall$ | async) === false"> Publish </ng-container>
     <mat-icon *ngIf="(isXSmall$ | async) === true">publish</mat-icon>
   </button>

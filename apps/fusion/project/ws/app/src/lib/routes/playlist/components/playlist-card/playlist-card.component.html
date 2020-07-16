@@ -43,8 +43,7 @@
             </button>
             <button name="edit-button-goal-card" mat-menu-item
               *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)" (click)="editPlayList()">
-              <mat-icon *ngIf="checkNoAccess(playlist)" i18n-matTooltip matTooltip="This Playlist is not editable"
-                matTooltipPosition="left">
+              <mat-icon *ngIf="checkNoAccess(playlist)">
                 edit</mat-icon>
               <mat-icon *ngIf="!checkNoAccess(playlist)">edit</mat-icon>
               <span>Edit</span>
@@ -103,8 +102,7 @@
 
 <ng-template #contentView let-content>
   <div class="flex flex-middle padding-top-s padding-bottom-xs">
-    <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted" i18n-matTooltip
-      matTooltip="Content may be expired or deleted"
+    <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted"
       *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
     <div class="width-expand md:mx-4 flex" [ngClass]="{ greyOut: greyOut(content) }">
       <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">

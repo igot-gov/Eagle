@@ -15,14 +15,14 @@
         : (forPreview ? '/author' : '/app') + '/toc/' + resourceId + '/overview'
     }"></ws-widget-btn-page-back>
   <mat-icon style="cursor: pointer;" (click)="back()" *ngIf="forChannel">arrow_back</mat-icon> -->
-  <a *ngIf="logo" mat-button routerLink="/page/home" i18n-matTooltip matTooltip="Home">
+  <a *ngIf="logo" mat-button routerLink="/page/home">
     <img [src]="appIcon" alt="Application Logo" class="app-logo" />
   </a>
   <a mat-icon-button class="width-auto" [routerLink]="prevResourceUrl" *ngIf="isTypeOfCollection"
     [disabled]="!prevResourceUrl" queryParamsHandling="preserve" accesskey="<">
     <mat-icon>skip_previous</mat-icon><span *ngIf="logo">PREV</span>
   </a>
-  <span *ngIf="logo" class="width-expand text-center text-truncate" [matTooltip]="resourceName">
+  <span *ngIf="logo" class="width-expand text-center text-truncate">
     {{ resourceName }}
   </span>
   <a mat-icon-button class="width-auto mr-10" [routerLink]="nextResourceUrl" *ngIf="isTypeOfCollection"

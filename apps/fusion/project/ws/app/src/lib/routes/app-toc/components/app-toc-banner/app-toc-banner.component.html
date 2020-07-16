@@ -11,7 +11,7 @@
         {{ content?.name }}
       </h1>
       <span *ngIf="contentProgress === 1" class="margin-left-s">
-        <mat-icon i18n-matTooltip matTooltip="Completed" class="ws-mat-accent-text">check_circle</mat-icon>
+        <mat-icon class="ws-mat-accent-text">check_circle</mat-icon>
       </span>
     </div>
     <div *ngIf="content?.averageRating" class="flex items-center my-1 mb-3">
@@ -41,8 +41,7 @@
           {{ content?.description | pipeLimitTo: 450 }}
         </h3>
         <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
-          [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()"
-          i18n-matTooltip matTooltip="Play Intro Video">
+          [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()">
           <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
         </div>
       </div>
@@ -60,8 +59,7 @@
           {{ content?.description | pipeLimitTo: 450 }}
         </h3>
         <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
-          [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()"
-          i18n-matTooltip matTooltip="Play Intro Video">
+          [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()">
           <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
         </div>
       </div>
@@ -166,12 +164,12 @@
 </mat-menu>
 
 <ng-template #actions>
-  <a i18n-aria-label aria-label="Edit" i18n-matTooltip matTooltip="Edit" mat-icon-button *ngIf="editButton"
+  <a i18n-aria-label aria-label="Edit" mat-icon-button *ngIf="editButton"
     [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon>edit</mat-icon>
   </a>
-  <a i18n-aria-label aria-label="Take Action" i18n-matTooltip matTooltip="Take Action" mat-icon-button
-    *ngIf="reviewButton" [routerLink]="['/author/editor/' + content?.identifier]">
+  <a i18n-aria-label aria-label="Take Action" mat-icon-button *ngIf="reviewButton"
+    [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon>publish</mat-icon>
   </a>
   <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="

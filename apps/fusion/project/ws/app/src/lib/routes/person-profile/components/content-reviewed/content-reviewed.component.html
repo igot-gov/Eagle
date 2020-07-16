@@ -20,8 +20,9 @@
                     <div class="flex flex-middle">
                       <img src={{content.appIcon}} [wsUtilsDefaultThumbnail]="defaultThumbnail"
                         class="object-cover followimg" />
-                      <p class="mat-h4 ml-2 margin-remove-bottom font-weight-bold title-text font-family ws-mat-text-block-fade-gradient"
-                        [matTooltip]="content.name">
+                      <!-- [matTooltip]="content.name" -->
+                      <p
+                        class="mat-h4 ml-2 margin-remove-bottom font-weight-bold title-text font-family ws-mat-text-block-fade-gradient">
                         {{content.name}}</p>
                     </div>
                     <a class="font-family mat-caption mx-2 flex flex-middle" (click)="raiseTelemetry()"

@@ -1,5 +1,5 @@
-<button name="content-feedback-button" mat-icon-button type="button" i18n-aria-label aria-label="Open Content Feedback Dialog" i18n-matTooltip
-  matTooltip="Content Feedback" *ngIf="isFeedbackEnabled && widgetData?.identifier?.length"
+<button name="content-feedback-button" mat-icon-button type="button" i18n-aria-label
+  aria-label="Open Content Feedback Dialog" *ngIf="isFeedbackEnabled && widgetData?.identifier?.length"
   (click)="openFeedbackDialog()" [disabled]="widgetData?.isDisabled">
   <mat-icon>feedback</mat-icon>
 </button>

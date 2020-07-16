@@ -75,7 +75,8 @@
 </ng-template>
 
 <ng-template #externalLinkButton let-actionBtn="actionBtn" let-config="config">
-  <a [href]="actionBtn.url" [target]="actionBtn.target ? actionBtn.target : '_self'" [matTooltip]="actionBtn.toolTip"
+  <!-- [matTooltip]="actionBtn.toolTip" -->
+  <a [href]="actionBtn.url" [target]="actionBtn.target ? actionBtn.target : '_self'"
     class="external-link-button flex items-center justify-center"
     [ngClass]="{'mat-button' : !config.hideTitle, 'mat-icon-button': config.hideTitle}">
     <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{

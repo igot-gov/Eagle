@@ -1,22 +1,24 @@
 <ng-container *ngIf="!isRestricted && widgetData?.identifier?.length" [ngSwitch]="status">
 
-  <button mat-icon-button *ngSwitchCase="'NOT_LIKED'" (click)="like($event)" aria-label="Like" i18n-aria-label matTooltip="Like"
-    i18n-matTooltip="Like Button" [disabled]="widgetData?.isDisabled || widgetData?.status==='Deleted'" [color]="color">
+  <button mat-icon-button *ngSwitchCase="'NOT_LIKED'" (click)="like($event)" aria-label="Like" i18n-aria-label
+    [disabled]="widgetData?.isDisabled || widgetData?.status==='Deleted'" [color]="color">
     <mat-icon *ngIf="!showCount">
       favorite_border
     </mat-icon>
-    <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify" matBadgeSize="small">
+    <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify"
+      matBadgeSize="small">
       favorite_border
     </mat-icon>
   </button>
-  <button mat-icon-button *ngSwitchCase="'LIKED'" (click)="unlike($event)" aria-label="UnLike" i18n-aria-label matTooltip="UnLike"
-    i18n-matTooltip="UnLike Button" [color]="color">
+  <button mat-icon-button *ngSwitchCase="'LIKED'" (click)="unlike($event)" aria-label="UnLike" i18n-aria-label
+    [color]="color">
     <mat-icon *ngIf="!showCount">favorite</mat-icon>
-    <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify" matBadgeSize="small">
-    favorite
+    <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify"
+      matBadgeSize="small">
+      favorite
     </mat-icon>
   </button>
-  <button mat-icon-button matTooltip="Please wait" i18n-matTooltip="Like Button Wait" *ngSwitchCase="'PENDING'">
+  <button mat-icon-button *ngSwitchCase="'PENDING'">
     <mat-icon [color]="color">hourglass_empty</mat-icon>
   </button>
 </ng-container>

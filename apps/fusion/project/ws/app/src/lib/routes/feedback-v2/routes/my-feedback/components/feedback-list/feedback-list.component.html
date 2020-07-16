@@ -18,10 +18,7 @@
   </h3>
 </section>
 
-<section
-  [ngClass]="{ flex: viewedBy === feedbackRoles.User || viewedBy === feedbackRoles.Author }"
-  *ngIf="hasHits"
->
+<section [ngClass]="{ flex: viewedBy === feedbackRoles.User || viewedBy === feedbackRoles.Author }" *ngIf="hasHits">
   <div class="w-full pr-2">
     <form [formGroup]="searchForm" (ngSubmit)="fetchFeedbacks()">
       <mat-form-field class="w-full" [color]="'primary'">
@@ -40,14 +37,8 @@
       </ng-container>
     </mat-checkbox>
   </div>
-  <button
-    mat-mini-fab
-    color="primary"
-    matTooltip="Filter"
-    i18n-matTooltip
-    (click)="openFilterDialog()"
-    *ngIf="viewedBy === feedbackRoles.User || viewedBy === feedbackRoles.Author"
-  >
+  <button mat-mini-fab color="primary" (click)="openFilterDialog()"
+    *ngIf="viewedBy === feedbackRoles.User || viewedBy === feedbackRoles.Author">
     <mat-icon>filter_list</mat-icon>
   </button>
 </section>
@@ -56,16 +47,10 @@
   <ng-container *ngIf="feedbackData.result.length">
     <mat-list>
       <ng-container *ngFor="let feedback of feedbackData.result">
-        <ng-container
-          [ngTemplateOutlet]="listItemDefault"
-          [ngTemplateOutletContext]="{ $implicit: feedback }"
-          *ngIf="viewedBy !== feedbackRoles.User"
-        ></ng-container>
-        <ng-container
-          [ngTemplateOutlet]="listItemUser"
-          [ngTemplateOutletContext]="{ $implicit: feedback }"
-          *ngIf="viewedBy === feedbackRoles.User"
-        ></ng-container>
+        <ng-container [ngTemplateOutlet]="listItemDefault" [ngTemplateOutletContext]="{ $implicit: feedback }"
+          *ngIf="viewedBy !== feedbackRoles.User"></ng-container>
+        <ng-container [ngTemplateOutlet]="listItemUser" [ngTemplateOutletContext]="{ $implicit: feedback }"
+          *ngIf="viewedBy === feedbackRoles.User"></ng-container>
         <mat-divider></mat-divider>
       </ng-container>
     </mat-list>
@@ -92,26 +77,16 @@
 
 <!-- Normal list item -->
 <ng-template #listItemDefault let-feedback>
-  <mat-list-item
-    matRipple
-    class="mat-toolbar cursor-pointer"
-    (click)="onFeedbackItemClick(feedback)"
-  >
+  <mat-list-item matRipple class="mat-toolbar cursor-pointer" (click)="onFeedbackItemClick(feedback)">
     <div mat-list-avatar>
       <ws-widget-user-image [email]="feedback.feedbackBy.email"></ws-widget-user-image>
     </div>
     <div mat-line>
       <div class="w-full sm:flex sm:flex-between">
-        <h3
-          class="mat-h3 truncate m-0 flex-grow"
-          [style.font-weight]="!feedback.replied ? 500 : 'inherit'"
-        >
+        <h3 class="mat-h3 truncate m-0 flex-grow" [style.font-weight]="!feedback.replied ? 500 : 'inherit'">
           {{ feedback.feedbackBy.name }}
         </h3>
-        <div
-          class="mat-caption hidden sm:block"
-          [style.font-weight]="!feedback.replied ? 500 : 'inherit'"
-        >
+        <div class="mat-caption hidden sm:block" [style.font-weight]="!feedback.replied ? 500 : 'inherit'">
           {{ feedback.lastActivityOn | date: 'dd MMM yyyy hh:mm a' }}
         </div>
       </div>
@@ -127,23 +102,15 @@
       </span>
     </div>
     <div mat-line class="flex">
-      <span
-        mat-line
-        class="truncate m-0"
-        [style.font-weight]="!feedback.replied ? 500 : 'inherit'"
-        [innerHTML]="feedback.feedbackText | pipeSafeSanitizer: 'html'"
-      ></span>
+      <span mat-line class="truncate m-0" [style.font-weight]="!feedback.replied ? 500 : 'inherit'"
+        [innerHTML]="feedback.feedbackText | pipeSafeSanitizer: 'html'"></span>
     </div>
   </mat-list-item>
 </ng-template>
 
 <!-- User list item -->
 <ng-template #listItemUser let-feedback>
-  <mat-list-item
-    matRipple
-    class="mat-toolbar cursor-pointer"
-    (click)="onFeedbackItemClick(feedback)"
-  >
+  <mat-list-item matRipple class="mat-toolbar cursor-pointer" (click)="onFeedbackItemClick(feedback)">
     <div mat-line>
       <!-- <div class="w-full sm:flex sm:flex-between">
         <h3
@@ -160,20 +127,16 @@
         </div>
       </div> -->
       <div class="sm:text-right">
-        <span
-          class="mat-caption hidden sm:block"
-          [style.font-weight]="feedback.replied && !feedback.seenReply ? 500 : 'inherit'"
-        >
+        <span class="mat-caption hidden sm:block"
+          [style.font-weight]="feedback.replied && !feedback.seenReply ? 500 : 'inherit'">
           {{ feedback.lastActivityOn | date: 'dd MMM yyyy hh:mm a' }}
         </span>
       </div>
     </div>
 
     <div mat-line>
-      <span
-        class="mat-caption sm:hidden"
-        [style.font-weight]="feedback.replied && !feedback.seenReply ? 500 : 'inherit'"
-      >
+      <span class="mat-caption sm:hidden"
+        [style.font-weight]="feedback.replied && !feedback.seenReply ? 500 : 'inherit'">
         {{ feedback.lastActivityOn | date: 'dd MMM yyyy hh:mm a' }}
       </span>
     </div>
@@ -185,11 +148,8 @@
     </div>
 
     <div mat-line class="flex">
-      <span
-        class="truncate m-0"
-        [style.font-weight]="feedback.replied && !feedback.seenReply ? 500 : 'inherit'"
-        [innerHTML]="feedback.feedbackText | pipeSafeSanitizer: 'html'"
-      ></span>
+      <span class="truncate m-0" [style.font-weight]="feedback.replied && !feedback.seenReply ? 500 : 'inherit'"
+        [innerHTML]="feedback.feedbackText | pipeSafeSanitizer: 'html'"></span>
     </div>
   </mat-list-item>
 </ng-template>

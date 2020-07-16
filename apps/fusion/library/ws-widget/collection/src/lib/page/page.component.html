@@ -19,8 +19,7 @@
       <ng-container *ngFor="let link of pageData?.navigationBar?.xsmallNonMenuLinks" [wsResolverWidget]="link">
       </ng-container>
     </ng-container>
-    <button matTooltip="Tour Guide" mat-icon-button class="tourGuideBtn" *ngIf="isTourGuideAvailable"
-      (click)="startTour()">
+    <button mat-icon-button class="tourGuideBtn" *ngIf="isTourGuideAvailable" (click)="startTour()">
       <mat-icon>contact_support</mat-icon>
     </button>
     <button type="button" mat-icon-button *ngIf="links?.length" [matMenuTriggerFor]="quickLinksMenu">

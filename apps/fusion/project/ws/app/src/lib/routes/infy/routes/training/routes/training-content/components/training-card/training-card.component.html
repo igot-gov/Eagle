@@ -8,7 +8,7 @@
       <div class="width-3-10">
         <div class="relative">
           <div class="absolute training-options-container flex">
-            <button mat-icon-button (click)="onClickBtnShare()" matTooltip="Share" i18n-matTooltip>
+            <button mat-icon-button (click)="onClickBtnShare()">
               <mat-icon>share</mat-icon>
             </button>
             <button mat-icon-button class="btn-training-menu absolute" [matMenuTriggerFor]="trainingOptionsMenu">
@@ -142,8 +142,7 @@
     <div *ngIf="trainingPrivileges.canNominate">
       <button mat-stroked-button color="primary" class="inline-block" [disabled]="
         !training.slots_available || registerStatus === 'sending' || deregisterStatus === 'sending'
-      " (click)="onClickBtnNominate()" i18n="nominate" matTooltip="Nominate other users to undergo this training."
-        i18n-matTooltip>
+      " (click)="onClickBtnNominate()" i18n="nominate">
         Nominate
       </button>
     </div>

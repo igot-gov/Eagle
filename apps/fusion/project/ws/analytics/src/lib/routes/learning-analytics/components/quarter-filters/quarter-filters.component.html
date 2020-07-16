@@ -41,8 +41,8 @@
     <!-- </form> -->
     <div class="quarter">
       <div class="quarter-and-year calendar-today">
-        <mat-icon class="icon-close" (click)="toggleInput(); config.type = 'default'"
-          [matTooltip]="'Select year and quarter'">close</mat-icon>
+        <mat-icon class="icon-close" (click)="toggleInput(); config.type = 'default'">close</mat-icon>
+        <!-- [matTooltip]="'Select year and quarter'" -->
       </div>
     </div>
     <div class="quarter">
@@ -58,4 +58,4 @@
     </div>
   </section>
 </article>
-  <input #errorContent type="hidden" i18n-value value="End date should be greater than or equal to start date" />
+<input #errorContent type="hidden" i18n-value value="End date should be greater than or equal to start date" />

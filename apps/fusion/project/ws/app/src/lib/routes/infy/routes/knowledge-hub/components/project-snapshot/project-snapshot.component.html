@@ -3,22 +3,20 @@
     <div class="flex flex-wrapped">
       <span>
         <span class="project-project-status">
-          <span *ngIf="projectDetails.status === 'closed'" [matTooltip]="'Project Status : Closed'">
+          <!-- [matTooltip]="'Project Status : Closed'" -->
+          <span *ngIf="projectDetails.status === 'closed'">
             <span class="status-icon closed"></span>
           </span>
-          <span *ngIf="projectDetails.status === 'active'" [matTooltip]="'Project Status : Active'">
+          <!-- [matTooltip]="'Project Status : Active'" -->
+          <span *ngIf="projectDetails.status === 'active'">
             <span class="status-icon open"></span>
           </span>
-          <span
-            *ngIf="projectDetails.status === 'inactive'"
-            [matTooltip]="'Project Status : Not Available'"
-          >
+          <!-- [matTooltip]="'Project Status : Not Available'" -->
+          <span *ngIf="projectDetails.status === 'inactive'">
             <span class="status-icon not-available"></span>
           </span>
-          <span
-            *ngIf="projectDetails.status === 'archieved'"
-            [matTooltip]="'Project Status : Archived'"
-          >
+          <!-- [matTooltip]="'Project Status : Archived'" -->
+          <span *ngIf="projectDetails.status === 'archieved'">
             <span class="status-icon archived"></span>
           </span>
         </span>
@@ -78,20 +76,12 @@
         ></b
       >: {{ projectDetails.mstBusinessContext }}
     </p> -->
-    <p
-      *ngIf="!islargeScreen"
-      [matTooltip]="'This detail is currently available only on Infosys Network'"
-      style="padding: 5px 0px 5px 0px;"
-    >
-      <span i18n="view: Khub Project Elaborated details"
-        >If you are on Infosys Network, Explore more about this project
-        <a href="{{ url }}" target="_blank" style="color:cadetblue;">Here</a></span
-      >
+    <p *ngIf="!islargeScreen" style="padding: 5px 0px 5px 0px;">
+      <span i18n="view: Khub Project Elaborated details">If you are on iGOT Network, Explore more about this project
+        <a href="{{ url }}" target="_blank" style="color:cadetblue;">Here</a></span>
     </p>
-    <div
-      class="margin-top-s margin-top-xs flex flex-wrapped"
-      *ngIf="projectDetails.pm.length > 0 || projectDetails.dm.length > 0"
-    >
+    <div class="margin-top-s margin-top-xs flex flex-wrapped"
+      *ngIf="projectDetails.pm.length > 0 || projectDetails.dm.length > 0">
       <div *ngIf="projectDetails.pm.length > 0">
         <span class="flex pm-dm-class">
           <!-- <app-user-image
@@ -103,8 +93,8 @@
             <mat-icon class="user-icon">person</mat-icon>
           </span>
           <div>
-            <span>{{ projectDetails.pm[0].name }}</span
-            ><br /><span i18n="view: Khub Project Manager Label">Project Manager</span>
+            <span>{{ projectDetails.pm[0].name }}</span><br /><span i18n="view: Khub Project Manager Label">Project
+              Manager</span>
           </div>
         </span>
       </div>
@@ -119,8 +109,8 @@
             <mat-icon class="user-icon">person</mat-icon>
           </span>
           <div>
-            <span>{{ projectDetails.dm[0].name }}</span
-            ><br /><span i18n="view: Khub Delivery Manager Label">Delivery Manager</span>
+            <span>{{ projectDetails.dm[0].name }}</span><br /><span i18n="view: Khub Delivery Manager Label">Delivery
+              Manager</span>
           </div>
         </span>
       </div>
