@@ -239,17 +239,17 @@
                 Newly Added
               </div>
 
-              <div *ngIf="widgetData.content.duration" class="duration" i18n-title title="Duration">
+              <div *ngIf="widgetData.content.duration" class="duration">
                 <mat-icon class="text-green-400">access_time</mat-icon>
                 <span class="time-text">{{ widgetData.content.duration | pipeDurationTransform: 'hms' }}</span>
               </div>
             </div>
-
-            <div class="ws-mat-primary-text mat-title title-text ws-mat-text-block-fade-gradient"
-              [matTooltip]="widgetData.content.name">
+            <!-- [matTooltip]="widgetData.content.name" -->
+            <div class="ws-mat-primary-text mat-title title-text ws-mat-text-block-fade-gradient">
               {{ widgetData.content.name }}
             </div>
-            <div class="description-text ws-mat-text-block-fade-gradient mb-10" i18n-title title="Description">
+            <!-- i18n-title title="Description" -->
+            <div class="description-text ws-mat-text-block-fade-gradient mb-10">
               {{ widgetData.content.description | pipeHtmlTagRemoval }}
               <!-- {{widgetData.content | json}} -->
               <!-- {{widgetData.content.sourceName}} -->
