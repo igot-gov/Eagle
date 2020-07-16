@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Router } from 'express'
 import * as fs from 'fs'
-import { axiosRequestConfig, axiosRequestConfigLong } from '../../configs/request.config'
+import { axiosRequestConfig, axiosRequestConfigLong, axiosRequestConfigVeryLong } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
@@ -153,7 +153,7 @@ profileDeatailsApi.get('/migrateRegistry', async (req, res) => {
                     API_END_POINTS.migrateRegistry,
                     { ...req.body, userId, widList },
                     {
-                        ...axiosRequestConfigLong,
+                        ...axiosRequestConfigVeryLong,
                     }
                 )
                 res.status(response.status).json(response.data)

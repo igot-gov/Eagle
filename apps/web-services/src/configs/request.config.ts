@@ -12,3 +12,9 @@ export const axiosRequestConfigLong: AxiosRequestConfig = {
   retryDelay: 1,
   timeout: 20000,
 }
+
+export const axiosRequestConfigVeryLong: AxiosRequestConfig = {
+  retry: 1,
+  retryDelay: 1,
+  timeout: 200000,
+}
