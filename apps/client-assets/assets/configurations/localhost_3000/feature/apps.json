@@ -356,7 +356,7 @@
         "user profile detail",
         "profile update"
       ],
-      "name": "Profile Update",
+      "name": "Update Profile",
       "permission": [],
       "show": true,
       "status": "live",
@@ -523,22 +523,6 @@
     },
     {
       "featureIds": [
-        "feature_catalog"
-      ],
-      "icon": "",
-      "iconType": "none",
-      "id": "group_assistant",
-      "keywords": [
-        "learning",
-        "assistant",
-        "learning assistant"
-      ],
-      "name": "Learning Assistant",
-      "toolTip": "Learning Assistant",
-      "hasRole": []
-    },
-    {
-      "featureIds": [
         "feature_admin"
       ],
       "icon": "",
@@ -554,7 +538,6 @@
     {
       "featureIds": [
         "feature_aboutUs",
-        "feature_FAQs",
         "feature_learningAnalytics",
         "feature_mobileApps",
         "feature_Terms&Condition",
