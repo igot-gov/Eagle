@@ -1,5 +1,5 @@
 <button i18n-aria-label aria-label="Apps" *ngIf="!widgetData?.showTitle" mat-icon-button [matMenuTriggerFor]="appsMenu"
-  [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }" i18n-matTooltip matTooltip="Apps" name="appsIconHomePage">
+  [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }" name="appsIconHomePage">
   <mat-icon>apps</mat-icon>
 </button>
 <a role="button" matRipple *ngIf="widgetData?.showTitle" [ngClass]="{ 'ws-mat-accent-text': isUrlOpened }"

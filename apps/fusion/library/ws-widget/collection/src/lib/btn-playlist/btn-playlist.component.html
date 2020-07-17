@@ -1,11 +1,9 @@
 <button name="add-to-playlist-icon-button" *ngIf="isPlaylistEnabled && isValidContent && widgetData?.mode === 'dialog'"
-  mat-icon-button i18n-aria-label aria-label="Playlist" i18n-matTooltip matTooltip="Add to Playlist"
-  (click)="openDialog()" [disabled]="widgetData?.isDisabled">
+  mat-icon-button i18n-aria-label aria-label="Playlist" (click)="openDialog()" [disabled]="widgetData?.isDisabled">
   <mat-icon>playlist_add</mat-icon>
 </button>
 <button name="add-to-playlist-icon-button" *ngIf="isPlaylistEnabled && isValidContent && widgetData?.mode !== 'dialog'"
-  mat-icon-button i18n-aria-label aria-label="Playlist" i18n-matTooltip matTooltip="Add to Playlist"
-  (click)="getPlaylists($event)" [matMenuTriggerFor]="menu">
+  mat-icon-button i18n-aria-label aria-label="Playlist" (click)="getPlaylists($event)" [matMenuTriggerFor]="menu">
   <mat-icon>playlist_add</mat-icon>
 </button>
 <mat-menu #menu="matMenu">

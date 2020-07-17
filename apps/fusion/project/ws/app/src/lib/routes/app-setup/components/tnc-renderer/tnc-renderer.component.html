@@ -102,10 +102,7 @@
           </mat-option>
           <mat-option value="es" *ngIf="isLocaleAvailable('es')">
             <a mat-line>
-              <img [ngStyle]="{
-                                                                    height:  '14px',
-                                                                     width:  '20px'
-                                                                  }" src="/assets/common/flags/es.png">&nbsp;&nbsp;
+              <img [ngStyle]="{ height:  '14px', width:  '20px'}" src="/assets/common/flags/es.png">&nbsp;&nbsp;
               <ng-container>Español&nbsp;&nbsp;</ng-container>
               <ng-container i18n>Spanish (ES)</ng-container>
             </a>

@@ -14,7 +14,8 @@
     </div>
     <ng-container>
       <div class="flex badge-recent" *ngIf="badgesWon && badgesWon.length>0">
-        <div class="width-auto badge-container" [matTooltip]="badgesWon[0].Description">
+        <!-- [matTooltip]="badgesWon[0].Description" -->
+        <div class="width-auto badge-container">
           <img class="medium-badge" [src]="badgesWon[0].BadgeImagePath" [alt]="badgesWon[0].BadgeName" />
         </div>
         <div class="">

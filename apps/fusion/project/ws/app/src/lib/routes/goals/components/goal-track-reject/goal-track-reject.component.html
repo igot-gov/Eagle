@@ -7,8 +7,8 @@
     <section *ngIf="shareAgainStatus[reject?.sharedWith] !== 'fetching'">
       <div class="flex justify-between items-center">
         <div class="mat-title margin-bottom-xs">{{ reject?.sharedWith?.name }}</div>
-        <button name="share-button-goal-track-reject" *ngIf="!shareAgainApiProgress" mat-icon-button (click)="shareAgain(reject?.sharedWith?.userId)"
-          matTooltip="Share Again" i18n-matTooltip>
+        <button name="share-button-goal-track-reject" *ngIf="!shareAgainApiProgress" mat-icon-button
+          (click)="shareAgain(reject?.sharedWith?.userId)">
           <mat-icon>share</mat-icon>
         </button>
         <mat-spinner *ngIf="shareAgainApiProgress" [diameter]="30"></mat-spinner>

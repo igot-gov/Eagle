@@ -2,7 +2,7 @@
   class="mat-elevation-z3 custom">
   <div class="fix-ww">
     <ng-container *ngIf="mode === 'top'">
-      <a routerLink="/page/home" i18n-matTooltip matTooltip="Home" class="logo-dim">
+      <a routerLink="/page/home" class="logo-dim">
         <img [src]="appIcon" alt="Application Logo" class="app-logo" />
       </a>
       <!-- <span class="spacer"></span> -->
@@ -11,7 +11,7 @@
           *ngFor="let item of primaryNavbarConfig?.mediumScreen?.left">
         </ng-container>
 
-        <ws-app-search-input-home placeHolder="Search anything you want to learn..." class="my-search flex-1"
+        <ws-app-search-input-home placeHolder="Search for anything you want to learn" class="my-search flex-1"
           [ref]="'home'"></ws-app-search-input-home>
         <span class="spacer"></span>
         <div ngClass="search-small-logo">
@@ -28,7 +28,7 @@
       }"></ng-container>
         </div>
         <!-- <button class="home-help" mat-icon-button id='helper' [matMenuTriggerFor]="helpMenu" *ngIf="!isHelpMenuRestricted"
-        i18n-matTooltip matTooltip="Help">
+        >
         <mat-icon>help_outline</mat-icon>
       </button> -->
         <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
@@ -51,8 +51,7 @@
         <ng-container *ngIf="!appBottomIcon">
           <mat-icon>home</mat-icon>
 
-          <span [ngClass]="instanceVal === 'Ford' ? 'title font-sans' : 'mat-caption'" i18n-matTooltip
-            matTooltip="Home">Home</span>
+          <span [ngClass]="instanceVal === 'Ford' ? 'title font-sans' : 'mat-caption'">Home</span>
         </ng-container>
         <ng-container *ngIf="appBottomIcon">
           <img width="40px" height="40px" [src]="appBottomIcon" i18n-alt alt="Home" />
@@ -100,8 +99,8 @@
       }
     }"></ws-widget-btn-feature>
   <div mat-menu-item *ngIf="isTourGuideAvailable" (click)="startTour()">
-    <mat-icon i18n-matTooltip matTooltip="Help">help</mat-icon>
-    <span class="ml-2" i18n i18n-matTooltip matTooltip="Tour Guide">Tour Guide</span>
+    <mat-icon>help</mat-icon>
+    <span class="ml-2">Tour Guide</span>
   </div>
 
 </mat-menu>

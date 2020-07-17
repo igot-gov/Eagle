@@ -9,7 +9,7 @@
 <br>
 <div *ngIf="registeredUsers.length" class="flex justify-end mb-2 pr-2">
   <button [disabled]="!selectedUsers.size" (click)="confirmation(selectedSource.value)" color="primary"
-    mat-raised-button i18n-matTooltip matTooltip="Deregister">
+    mat-raised-button>
     <span i18n>Deregister</span>
   </button>
 </div>

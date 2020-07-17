@@ -54,7 +54,7 @@
       </div>
     </div>
     <div class="text-center ws-mat-primary-background mat-toolbar mat-primary p-4" *ngIf="aboutPage?.section2">
-      <h1 class="mat-heading">
+      <h1 class="mat-heading ws-mat-primary-default-text">
         {{ aboutPage?.section2?.description }}
       </h1>
     </div>
@@ -89,7 +89,7 @@
       <p class="text-justify">
         {{ aboutPage?.features?.description }}
       </p>
-      <mat-accordion *ngIf="aboutPage?.features?.list.length>0">
+      <mat-accordion *ngIf="aboutPage?.features?.list">
         <mat-expansion-panel class="text-justify" *ngFor="let key of objectKeys(aboutPage?.features?.list)">
           <mat-expansion-panel-header>
             <mat-panel-title>{{ key }}</mat-panel-title>

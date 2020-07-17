@@ -15,10 +15,10 @@
                   <div class="margin-top-xs flex flex-middle"
                     [ngClass]="{ required: checkCondition('appIcon', 'required') }">
                     <b i18n>Thumbnail</b>
-                    <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('appIcon')">info
-                    </mat-icon>
+                    <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('appIcon')">info
+                    </mat-icon> -->
                   </div>
-                  <span i18n *ngIf="infoType === 'appIcon'">
+                  <span i18n>
                     Maximum file size - 1 MB
                   </span>
                 </label>
@@ -42,10 +42,10 @@
                   <div class="margin-top-xs flex flex-middle"
                     [ngClass]="{ required: checkCondition('creatorLogo', 'required') }">
                     <b i18n>Source Image</b>
-                    <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('creatorLogo')">info
-                    </mat-icon>
+                    <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('creatorLogo')">info
+                    </mat-icon> -->
                   </div>
-                  <span i18n *ngIf="infoType === 'creatorLogo'">
+                  <span i18n>
                     Maximum file size - 1 MB
                   </span>
                 </label>
@@ -210,8 +210,8 @@
                   <div class="margin-top-xs flex flex-middle">
                     <b i18n [ngClass]="{ required: checkCondition('body', 'required') }">Content Body (Long Description)
                     </b>
-                    <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('contentBody')">info
-                    </mat-icon>
+                    <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('contentBody')">info
+                    </mat-icon> -->
                   </div>
                   <span *ngIf="infoType === 'contentBody'" i18n>
                     HTML supported Editor in case you'd like to provide more descriptive details
@@ -316,8 +316,8 @@
                 <div class="margin-top-xs flex flex-middle"
                   [ngClass]="{ required: checkCondition('complexityLevel', 'required') }">
                   <b i18n>Knowledge Level</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('knowledgeLevel')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('knowledgeLevel')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'knowledgeLevel'">How tough do you think the content is?</span>
               </label>
@@ -364,8 +364,8 @@
                     matTooltip="Click to copy the private url" class="margin-left-xs pointer"
                     (click)="copyData('previewUrl')">file_copy
                   </mat-icon>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('previewUrl')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('previewUrl')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'previewUrl'">Anyone with this URL can see the content</span>
               </label>
@@ -406,9 +406,9 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('exclusiveContent', 'required') }" i18n>Cost</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('exclusiveContent')">
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('exclusiveContent')">
                     info
-                  </mat-icon>
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'exclusiveContent'">Is Paid Content?</span>
               </label>
@@ -431,8 +431,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('keywords', 'required') }" i18n>Keywords</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
+                  </mat-icon> -->
                   <mat-icon class="float-right margin-left-xs cursor-pointer" *ngIf="
                       contentForm.controls.keywords.value &&
                       contentForm.controls.keywords.value.length
@@ -473,8 +473,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('skills', 'required') }">Skills</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('skills')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('skills')">info
+                  </mat-icon> -->
                 </div>
                 <span *ngIf="infoType === 'skills'">Add one or more skills associated with this content</span>
               </label>
@@ -507,8 +507,8 @@
               <!-- <label> -->
               <div class="margin-top-s flex flex-middle">
                 <b [ngClass]="{ required: checkCondition('catalogPaths', 'required') }" i18n>Catalog</b>
-                <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('catalogPaths')">info
-                </mat-icon>
+                <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('catalogPaths')">info
+                </mat-icon> -->
                 <button mat-button (click)="openCatalogSelector()"
                   class="ws-mat-primary-text font-weight-500 flex flex-middle cursor-pointer">
                   <mat-icon>add</mat-icon>
@@ -556,8 +556,8 @@
               <label>
                 <div class="margin-top-s flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('idealScreenSize', 'required') }" i18n>Best viewed in</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('bestViewedIn')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('bestViewedIn')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'bestViewedIn'">
                   The preferred screen for this content
@@ -606,8 +606,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Audience</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('audience')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('audience')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'audience'">
                   Add one or more targeted listeners for whom this content is intended for
@@ -645,8 +645,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Organisation</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('organisation')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('organisation')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'organisation'">
                   Select your organisation below
@@ -675,10 +675,9 @@
             </div>
           </div>
           <div class="mobile-break">
-            <div class="margin-top-xs margin-left-xl flex-1">
+            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('region', 'show')">
               <div class="margin-top-xs margin-bottom-s flex flex-middle">
-                <div class="margin-top-xs width-90" *ngIf="checkCondition('region', 'show')"
-                  [ngClass]="{ disable: checkCondition('region', 'disabled') }">
+                <div class="margin-top-xs width-90" [ngClass]="{ disable: checkCondition('region', 'disabled') }">
                   <label>
                     <b class="margin-remove-bottom" i18n>Region</b>
                   </label>
@@ -714,8 +713,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Access Restrictions</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('accessPaths')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('accessPaths')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'accessPaths'">
                   Restrict access to your content by choosing your preference below
@@ -753,15 +752,15 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Job Profiles</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('jobProfile')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('jobProfile')">info
+                  </mat-icon> -->
                 </div>
                 <span i18n *ngIf="infoType === 'jobProfile'">
                   Add one or more targeted listeners for whom this content is intended for
                 </span>
               </label>
               <div class="margin-top-xs">
-                <mat-form-field appearance="outline" class="margin-top-xs width-90"
+                <mat-form-field appearance="outline" class="margin-top-xs"
                   [ngClass]="{ 'mat-form-field-invalid': showError('jobProfile') }">
                   <mat-chip-list #jobProfileChipList i18n-aria-label aria-label="Job profile selection">
                     <mat-chip *ngFor="let job of contentForm.controls.jobProfile.value" [selectable]="selectable"
@@ -811,8 +810,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Curators / Contacts</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('coAuthors')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('coAuthors')">info
+                  </mat-icon> -->
                 </div>
                 <span *ngIf="infoType === 'coAuthors'">
                   Person responsible for the content
@@ -852,8 +851,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Authors</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('authors')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('authors')">info
+                  </mat-icon> -->
                 </div>
                 <span *ngIf="infoType === 'authors'">
                   Authors who are creating the content
@@ -896,11 +895,11 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b i18n>Reviewers</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('reviewers')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('reviewers')">info
+                  </mat-icon> -->
                 </div>
                 <span *ngIf="infoType === 'reviewers'">
-                  Person who can review this content
+                  A person who can review this content
                 </span>
               </label>
               <div class="margin-top-xs">
@@ -936,8 +935,8 @@
               <label>
                 <div class="margin-top-xs flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('publisherDetails', 'required') }" i18n>Publishers</b>
-                  <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('publishers')">info
-                  </mat-icon>
+                  <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('publishers')">info
+                  </mat-icon> -->
                 </div>
                 <span *ngIf="infoType === 'publishers'">
                   Person who can publish this content

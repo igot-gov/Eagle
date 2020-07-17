@@ -24,7 +24,7 @@
             (status === 'inreview' && node.displayName === 'Published Date')
         }" class="border-bottom" *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
         <div class="grid">
-          <h5 class="font-size-m margin-top-xs margin-remove-bottom" matTreeNodeToggle>
+          <h5 class="font-size-m margin-top-xs margin-remove-bottom hand" matTreeNodeToggle>
             {{ node.displayName }}
           </h5>
           <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.displayName">

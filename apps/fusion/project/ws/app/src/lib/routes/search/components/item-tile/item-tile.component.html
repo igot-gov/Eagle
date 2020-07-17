@@ -2,7 +2,8 @@
   <div class="my-tile">
     <div style="font-size: 12px;height: 20px;">
       <span class="text-{{ data?.source?.toLowerCase() }}">{{ data.source }}</span>
-      <span class="itemtile-row first-row" style="margin-left: -15px;display: inline;font-size:10px">{{ data.dateCreated | date: 'yyyy' }}</span>
+      <span class="itemtile-row first-row"
+        style="margin-left: -15px;display: inline;font-size:10px">{{ data.dateCreated | date: 'yyyy' }}</span>
       <span style="float: right;color: rgb(143, 138, 138);margin-right: 10px;">{{ data.itemType | pipeLimitTo: 12 }}
       </span>
     </div>
@@ -81,7 +82,7 @@
         </span>
         <span style="margin-top: 7%;"> {{ data.author[0].name | pipeLimitTo: 25 }}</span>
       </a>
-      <a *ngIf="!data?.author?.length && data?.pm?.length" class="flex" [matTooltip]="data.pm[0].name">
+      <a *ngIf="!data?.author?.length && data?.pm?.length" class="flex">
         <!-- <app-user-image
           class="user-profile-image"
           [email]="data.author[0].mailId"

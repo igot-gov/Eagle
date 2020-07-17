@@ -827,8 +827,7 @@
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
@@ -837,6 +836,7 @@
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "array"
   },
   "body": {
@@ -1959,26 +1959,21 @@
       ]
     },
     "mandatoryFor": {
-      "Channel": [],
-      "Collection": [],
-      "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
-      "Resource": []
+    
     },
     "notDisabledFor": {},
     "notMandatoryFor": {},
     "notShowFor": {
+      "Channel": [],
+      "Course": [],
+      "Knowledge Artifact": [],
+      "Knowledge Board": [],
+      "Resource": [],
       "Collection": [],
       "Learning Path": []
     },
     "showFor": {
-      "Channel": [],
-      "Collection": [],
-      "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
-      "Resource": []
+      
     },
     "type": "string"
   },
@@ -3009,8 +3004,7 @@
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
@@ -3019,6 +3013,7 @@
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "string"
   },
   "idealScreenSize": {
@@ -3100,8 +3095,7 @@
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
@@ -3110,6 +3104,7 @@
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "string"
   },
   "identifier": {
@@ -5868,8 +5863,7 @@
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
@@ -5878,6 +5872,7 @@
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "array"
   },
   "registrationInstructions": {
@@ -6478,8 +6473,7 @@
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
@@ -6488,6 +6482,7 @@
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "array"
   },
   "softwareRequirements": {
@@ -7730,8 +7725,7 @@
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
       "Channel": [],
       "Collection": [],
       "Course": [],
@@ -7740,6 +7734,7 @@
       "Learning Path": [],
       "Resource": []
     },
+    "showFor": {},
     "type": "string"
   }
 }

@@ -7,13 +7,10 @@
         </div>
         <div class="mat-caption">votes</div>
       </span>
-      <span
-        class="count-holder"
-        [ngClass]="{
+      <span class="count-holder" [ngClass]="{
           'accepted-answer': item.hasAcceptedAnswer,
           answer: !item.hasAcceptedAnswer && item.replyCount
-        }"
-      >
+        }">
         <div class="count">{{ item.replyCount }}</div>
         <div class="mat-caption">answers</div>
       </span>
@@ -25,36 +22,21 @@
     <div class="question-section width-expand">
       <div class="flex flex-between">
         <a [routerLink]="['/app/social/qna/' + item.id]">
-          <h2
-            *ngIf="item.highlight.title"
-            class="mat-primary-text question-text"
-            [innerHTML]="item.body"
-          ></h2>
+          <h2 *ngIf="item.highlight.title" class="mat-primary-text question-text" [innerHTML]="item.body"></h2>
           <h2 *ngIf="!item.highlight.title && item.title" class="mat-primary-text question-text">
             {{ item.title | pipeLimitTo: 120 }}
           </h2>
           <h2 *ngIf="!item.highlight.title && !item.title" class="mat-primary-text question-text">
             {{ item.abstract | pipeLimitTo: 120 }}
           </h2>
-          <h2
-            *ngIf="!item.title && !item.abstract && item.highlight.body"
-            class="mat-primary-text question-text"
-            [innerHTML]="item.highlight.body[0]"
-          ></h2>
-          <h2
-            *ngIf="!item.title && !item.abstract && !item.highlight.body"
-            class="mat-primary-text question-text"
-            [innerHTML]="item.body"
-          ></h2>
+          <h2 *ngIf="!item.title && !item.abstract && item.highlight.body" class="mat-primary-text question-text"
+            [innerHTML]="item.highlight.body[0]"></h2>
+          <h2 *ngIf="!item.title && !item.abstract && !item.highlight.body" class="mat-primary-text question-text"
+            [innerHTML]="item.body"></h2>
         </a>
         <!--[matMenuTriggerFor]="editMenu"  -->
-        <mat-icon
-          *ngIf="userId === item.postCreator.postCreatorId"
-          class="cursor-pointer"
-          role="button"
-          [matMenuTriggerFor]="editMenu"
-          >more_vertical</mat-icon
-        >
+        <mat-icon *ngIf="userId === item.postCreator.postCreatorId" class="cursor-pointer" role="button"
+          [matMenuTriggerFor]="editMenu">more_vertical</mat-icon>
       </div>
       <mat-menu #editMenu="matMenu">
         <ng-template matMenuContent>
@@ -65,15 +47,13 @@
       <div class="meta-details">
         <div class="width-auto margin-right-xs">
           <mat-chip-list>
-            <mat-chip *ngFor="let tag of item.tags" i18n-matTooltip matTooltip="Associated Tag"
-              >{{ tag }}
+            <mat-chip *ngFor="let tag of item.tags">{{ tag }}
             </mat-chip>
           </mat-chip-list>
         </div>
         <div class="creation">
           <span class="mat-caption" i18n>asked</span>&nbsp;
-          <span class="mat-caption">{{ item.dtCreated | date }}</span
-          >&nbsp;
+          <span class="mat-caption">{{ item.dtCreated | date }}</span>&nbsp;
           <!-- <a [routerLink]="'/profile/' + item.postCreator.emailId"
             class="mat-primary-text"> -->
           <span class="mat-primary-text">

@@ -71,7 +71,7 @@
     </div>
     <div class="flex">
       <mat-form-field class="width-expand margin-top-s" appearance="fill" floatLabel="never">
-        <button matTooltipPosition="before" matTooltip="Search" (click)="handleSearchQuery()" mat-icon-button matSuffix>
+        <button (click)="handleSearchQuery()" mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
         <mat-label i18n>Search users</mat-label>
@@ -121,15 +121,13 @@
               [ngClass]="{'flex-col': userType==='manager'?true:false, 'flex-row-reverse': userType==='admin'?true:false}"
               class="flex">
               <div [ngClass]="{'my-2': userType==='manager'?true:false}" class="mr-2">
-                <button class="w-auto square-button sm:px-1" matTooltipPosition="before" matTooltip="Filters"
-                  mat-stroked-button [ngClass]="{ 'hide-filter-btn': sideNavBarOpened }"
-                  (click)="sideNavBarOpened = !sideNavBarOpened">
+                <button class="w-auto square-button sm:px-1" mat-stroked-button
+                  [ngClass]="{ 'hide-filter-btn': sideNavBarOpened }" (click)="sideNavBarOpened = !sideNavBarOpened">
                   <mat-icon>filter_list</mat-icon>
                 </button>
               </div>
               <div class="mr-2">
-                <button class="w-auto square-button sm:px-1" matTooltipPosition="before" matTooltip="Sort"
-                  mat-stroked-button [matMenuTriggerFor]="sortMenu">
+                <button class="w-auto square-button sm:px-1" mat-stroked-button [matMenuTriggerFor]="sortMenu">
                   <mat-icon>sort</mat-icon>
                 </button>
               </div>
@@ -138,14 +136,14 @@
             <mat-menu #sortMenu="matMenu">
               <button class="mat-flat-button flex justify-between" mat-menu-item>
                 <span class="mx-2">
-                  <button matTooltipPosition="before" matTooltip="Sort ascending" class="mat-elevation-z0"
-                    [color]="sortOrder==='asc' ? 'accent' : ''" (click)="sortAscOrDesc('asc')" mat-mini-fab>
+                  <button class="mat-elevation-z0" [color]="sortOrder==='asc' ? 'accent' : ''"
+                    (click)="sortAscOrDesc('asc')" mat-mini-fab>
                     Asc
                   </button>
                 </span>
                 <span class="mx-2">
-                  <button i18n matTooltipPosition="before" matTooltip="Sort descending" class="mat-elevation-z0"
-                    [color]="sortOrder==='desc' ? 'accent' : ''" (click)="sortAscOrDesc('desc')" mat-mini-fab>
+                  <button class="mat-elevation-z0" [color]="sortOrder==='desc' ? 'accent' : ''"
+                    (click)="sortAscOrDesc('desc')" mat-mini-fab>
                     Desc
                   </button>
                 </span>

@@ -25,7 +25,7 @@
   <mat-sidenav #sideNavBar [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
     <mat-nav-list class="margin-left-s margin-right-xs">
       <a mat-list-item routerLinkActive="mat-toolbar" [routerLink]="'/app/social/forums/view-forum'"
-        (click)="screenSizeIsLtMedium ? sideNavBar.toggle() : null" matTooltip="Forum" i18n-matTooltip="Forum">
+        (click)="screenSizeIsLtMedium ? sideNavBar.toggle() : null">
         <mat-icon>forum</mat-icon><span class="padding-left-s" *ngIf="showText || screenSizeIsLtMedium"
           i18n>Forums</span>
       </a>

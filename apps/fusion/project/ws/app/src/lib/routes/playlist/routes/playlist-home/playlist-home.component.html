@@ -50,13 +50,13 @@
       Create Playlist
     </a>
   </div>
-  <mat-form-field class="width-1-1" appearance="fill" floatLabel="never">
+  <mat-form-field class="width-1-1" appearance="fill">
     <mat-icon matSuffix>search</mat-icon>
-    <mat-label i18n *ngIf="type === EPlaylistTypes.ME">
-      Search for your playlists
+    <mat-label i18n *ngIf=" type===EPlaylistTypes.ME">
+      Search for your playlist
     </mat-label>
     <mat-label i18n *ngIf="type === EPlaylistTypes.SHARED">
-      Search for playlists shared with you
+      Search for playlist shared with you
     </mat-label>
     <input name="search-playlists-input-playlist-home" matInput [(ngModel)]="searchPlaylistQuery" />
 

@@ -10,88 +10,80 @@
       <div class="buttons">
         <div class="button-grid margin-right-xxs cursor-pointer" (click)="toggleSettingButtons()">
           <button mat-icon-button class="padding-remove ws-mat-primary-background mat-elevation-z6">
-            <mat-icon class="text-white" *ngIf="showSettingButtons" i18n-matTooltip matTooltip="Close">close</mat-icon>
+            <mat-icon class="text-white" *ngIf="showSettingButtons">close</mat-icon>
             <mat-icon class="text-white" *ngIf="!showSettingButtons">more_vert</mat-icon>
           </button>
-          <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons" i18n-matTooltip
-            matTooltip="Close">
+          <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons">
             Close
           </p>
         </div>
         <ng-container *ngIf="showSettingButtons">
           <div class="button-grid cursor-pointer" (click)="action('preview')">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-l" i18n-matTooltip
-              matTooltip="Preview">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-l">
               <mat-icon class="text-white small-icon ws-mat-primary-text">remove_red_eye</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="preview">
+            <p class="mat-h5 margin-remove button-text">
               Preview
             </p>
           </div>
           <div class="button-grid cursor-pointer" (click)="action('save')">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip
-              matTooltip="Save">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
               <mat-icon class="text-white small-icon ws-mat-primary-text">save</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="save">
+            <p class="mat-h5 margin-remove button-text">
               Save
             </p>
           </div>
           <div class="button-grid cursor-pointer" (click)="action('push'); isSubmitPressed = true"
             *ngIf="getAction() === 'sendForReview'">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip
-              matTooltip="Send For Review">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
               <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="send for review">
+            <p class="mat-h5 margin-remove button-text">
               Send For Review
             </p>
           </div>
           <div class="button-grid cursor-pointer" (click)="action('push'); isSubmitPressed = true"
             *ngIf="getAction() === 'review'">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip
-              matTooltip="Review">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
               <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="review">
+            <p class="mat-h5 margin-remove button-text">
               Review
             </p>
           </div>
           <div class="button-grid cursor-pointer" (click)="action('push'); isSubmitPressed = true"
             *ngIf="getAction() === 'publish'">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip
-              matTooltip="Publish">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
               <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="publish">
+            <p class="mat-h5 margin-remove button-text">
               Publish
             </p>
           </div>
           <div class="button-grid cursor-pointer" (click)="action('delete')">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip
-              matTooltip="Delete">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
               <mat-icon class="text-white small-icon ws-mat-primary-text">delete</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="Delete" i18n>
+            <p class="mat-h5 margin-remove button-text" i18n>
               Delete
             </p>
           </div>
           <div class="button-grid cursor-pointer" (click)="fullScreenToggle()">
-            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip
-              matTooltip="Fullscreen">
+            <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
               <mat-icon class="text-white small-icon ws-mat-primary-text">fullscreen</mat-icon>
             </button>
-            <p class="mat-h5 margin-remove button-text" i18n-matTooltip matTooltip="fullscreen">
+            <p class="mat-h5 margin-remove button-text">
               Fullscreen
             </p>
           </div>
-          <!-- <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m" i18n-matTooltip matTooltip="Copy">
+          <!-- <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
             <mat-icon class="text-white small-icon ws-mat-primary-text">crop_portrait</mat-icon>
           </button> -->
         </ng-container>
       </div>
     </div>
-    
+
   </div>
   <div class="margin-left margin-auto grid" *ngIf="currentStep >= 0">
     <div class="stepper-grid" [ngClass]="{ 'cursor-disable': disableCursor === true }">
@@ -147,7 +139,7 @@
       </p>
       <button mat-icon-button
         class=" small-button padding-remove ws-mat-primary-background mat-elevation-z6 margin-left-s">
-        <mat-icon class="text-white small-icon" [matMenuTriggerFor]="menu" i18n-matTooltip matTooltip="Add a language">
+        <mat-icon class="text-white small-icon" [matMenuTriggerFor]="menu">
           add</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
@@ -171,8 +163,7 @@
 </div>
 
 <div *ngIf="previewMode">
-  <mat-icon (click)="closePreview()" class="close-preview" matTooltip="Back"
-    i18n-matTooltip="Back button to go to previous page">
+  <mat-icon (click)="closePreview()" class="close-preview">
     arrow_back</mat-icon>
   <ws-auth-viewer [identifier]="currentContent" [mimeTypeRoute]="mimeTypeRoute"></ws-auth-viewer>
 </div>

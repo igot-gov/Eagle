@@ -10,7 +10,7 @@
   <mat-sidenav class="sidenav mat-drawer mat-sidenav" [mode]="isLtMedium ? 'over' : 'side'" [opened]="sideNavBarOpened">
     <mat-nav-list class="margin-left-s margin-right-xs">
       <a *ngIf="!restrictedFeatures?.has('adminFeatureUsers')" mat-list-item routerLinkActive="mat-toolbar"
-        [routerLink]="'/admin/tenant/users'" matTooltip="Users" i18n-matTooltip>
+        [routerLink]="'/admin/tenant/users'">
         <span class="padding-left-s" i18n>Users</span>
       </a>
       <!-- <a *ngIf="!restrictedFeatures?.has('adminFeatureUserRegistration')" mat-list-item routerLinkActive="mat-toolbar"
@@ -30,11 +30,11 @@
         <span class="padding-left-s" i18n>Content Assignment</span>
       </a> -->
       <a *ngIf="!restrictedFeatures?.has('adminFeatureUserAccessPath')" mat-list-item routerLinkActive="mat-toolbar"
-        [routerLink]="'/admin/tenant/access-path'" matTooltip="User Access Path" i18n-matTooltip>
+        [routerLink]="'/admin/tenant/access-path'">
         <span class="padding-left-s" i18n>User Org Management</span>
       </a>
       <a *ngIf="!restrictedFeatures?.has('adminFeatureBulkUpload')" mat-list-item routerLinkActive="mat-toolbar"
-        [routerLink]="'/admin/tenant/user-bulk-upload'" matTooltip="User Bulk Upload" i18n-matTooltip>
+        [routerLink]="'/admin/tenant/user-bulk-upload'">
         <span class="padding-left-s" i18n>User Bulk Upload</span>
       </a>
     </mat-nav-list>

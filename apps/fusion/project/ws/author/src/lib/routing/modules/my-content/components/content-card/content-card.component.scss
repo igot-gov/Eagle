@@ -1,6 +1,7 @@
 @import '~src/styles/_ws-vars';
 $card-padding: $size-m;
 $action-btn-size: 2.5 * $size-m; // 40px
+
 .card-container {
   position: relative;
   width: 265px;
@@ -70,5 +71,5 @@ mat-card-actions {
 }
 
 .border-bottom {
-   border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
 }

@@ -32,7 +32,7 @@
         <div class="mx-4 my-2">
           <a class="font-family" (click)="raiseTelemetry()" [routerLink]="'/app/knowledge-board/'+ board?.identifier"
             role="link" aria-label="Content" i18n-aria-label>
-            <p class="font-family mat-h3 font-weight-normal title-text text title-size" [matTooltip]="board.name">
+            <p class="font-family mat-h3 font-weight-normal title-text text title-size">
               {{ board.name }}</p>
             <p class="font-family ws-mat-text-block-fade-gradient mat-h4 text descr-size">{{ board.description }}</p>
           </a>
@@ -67,7 +67,7 @@
           <a class="font-family mx-2 my-2" (click)="raiseTelemetry()"
             [routerLink]="'/app/knowledge-board/'+ board?.identifier" role="link" aria-label="Content" i18n-aria-label>
             <p class="font-family mat-h3 font-weight-normal ws-mat-text-block-fade-gradient title-text text title-size"
-              [matTooltip]="board.name">
+              >
               {{ board.name }}</p>
           </a>
         </div>
@@ -99,8 +99,8 @@
         <div class="p-2">
           <img [src]="board.appIcon" [id]="'card_' + board.identifier" class="image ws-mat-primary-lite-background"
             [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="board.name" [title]="board.name" />
-          <p class="font-family mat-h3 font-weight-normal ws-mat-text-block-fade-gradient title-text text title-size  mx-2"
-            [matTooltip]="board.name">
+          <p
+            class="font-family mat-h3 font-weight-normal ws-mat-text-block-fade-gradient title-text text title-size  mx-2">
             {{ board.name }}</p>
           <a class="font-family mat-caption mx-2 flex flex-middle" (click)="raiseTelemetry()"
             [routerLink]="'/app/knowledge-board/'+ board?.identifier" i18n>

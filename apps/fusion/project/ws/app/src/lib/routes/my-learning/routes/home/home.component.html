@@ -76,7 +76,7 @@
             <mat-icon *ngIf="
                 learningData?.role_status.current_level === 'Professional' ||
                 learningData?.role_status.current_level === 'Master'
-              " i18n-matTooltip matTooltip="Completed" class="ws-mat-green-text check mt-2">check_circle</mat-icon>
+              " class="ws-mat-green-text check mt-2">check_circle</mat-icon>
           </div>
         </a>
         <a (click)="onClick('professional')" class="mat-raised-button button-action" [ngClass]="{
@@ -86,8 +86,8 @@
             <span [ngClass]="{
                 'text-white': learningData?.role_status.current_level === 'Professional'
               }" class="font-bold margin-remove-bottom" i18n>Professional</span>
-            <mat-icon *ngIf="learningData?.role_status.current_level === 'Master'" i18n-matTooltip
-              matTooltip="Completed" class="ws-mat-green-text check mt-2">check_circle</mat-icon>
+            <mat-icon *ngIf="learningData?.role_status.current_level === 'Master'" class="ws-mat-green-text check mt-2">
+              check_circle</mat-icon>
           </div>
         </a>
         <a (click)="onClick('master')" class="mat-raised-button button-action" [ngClass]="{
