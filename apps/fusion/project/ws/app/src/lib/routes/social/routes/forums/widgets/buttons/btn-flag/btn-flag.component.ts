@@ -34,7 +34,7 @@ export class BtnFlagComponent implements OnInit {
 
   }
   constructor(private flagsvc: BtnFlagService, private snackBar: MatSnackBar, private configSvc: ConfigurationsService,
-    public dialog: MatDialog,
+              public dialog: MatDialog,
   ) {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId || ''
@@ -76,7 +76,7 @@ export class BtnFlagComponent implements OnInit {
       this.types = 'EMPTYFLAG'
       // console.log("THE TYPESSS HAS BEEEN CHANGED TO in UNFLAG" + this.typesss)
 
-    }, () => {
+    },                                                    () => {
     })
   }
 }

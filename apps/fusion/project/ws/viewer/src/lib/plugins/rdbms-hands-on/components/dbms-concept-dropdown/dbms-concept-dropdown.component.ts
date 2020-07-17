@@ -206,14 +206,14 @@ export class DbmsConceptDropdownComponent implements OnDestroy, OnChanges {
       if (this.isInput) {
         this.raiseInteractTelemetry('editor', 'codeinput')
       }
-    }, 2 * 60000)
+    },                               2 * 60000)
   }
   startClickTimer() {
     this.clickInterval = setInterval(() => {
       if (this.isClick) {
         this.raiseInteractTelemetry('editor', 'buttonclick')
       }
-    }, 2 * 60000)
+    },                               2 * 60000)
   }
 
 }
