@@ -1,9 +1,12 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
   <button *ngIf="isLtMedium" type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="ml-2" i18n>Manage</span>
+  <ws-widget-btn-page-back
+    [widgetData]="{ url: 'home',titles: [{title:'Features', url:'/app/features'},{title:'Manage', url:'none'}] }">
+  </ws-widget-btn-page-back>
+
+  <!-- <span class="ml-2" i18n>Manage</span> -->
 </mat-toolbar>
 
 <mat-sidenav-container autosize>

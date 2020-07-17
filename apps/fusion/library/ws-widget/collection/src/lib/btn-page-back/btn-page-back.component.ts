@@ -64,4 +64,10 @@ export class BtnPageBackComponent extends WidgetBaseComponent
     }
   }
 
+  // get titleUrl(): { fragment?: string; routeUrl: string; queryParams: any } {
+  //   return {
+  //     queryParams: undefined,
+  //     routeUrl: this.widgetData.url ? this.widgetData.url : '/app/home',
+  //   }
+  // }
 }

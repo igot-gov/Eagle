@@ -9,7 +9,8 @@
       <span *ngIf="title.title && title.url && title.url === 'none'" i18n="page title: {{title.title}}"
         class="flex flex-1 margin-left-xs ws-mat-default-text m-auto">{{title.title}}</span>
       <a class="m-auto" i18n-aria-label aria-label="Back" *ngIf="title.url && title.url !== 'none'"
-        [routerLink]="backUrl.routeUrl" [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment">
+        [routerLink]="title.url">
+        <!-- [queryParams]="titleUrl.queryParams" [fragment]="titleUrl?.fragment" -->
         {{title.title}}
       </a>
     </div>

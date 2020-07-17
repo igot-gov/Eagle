@@ -16,6 +16,10 @@
   border-radius: 5px;
 }
 
+.flex-05 {
+  flex: 0.49;
+}
+
 .width-90 {
   width: 90%;
 }
@@ -250,14 +254,17 @@ ul li {
   flex-direction: row;
   justify-content: space-around;
 }
-.mobile-break{
+
+.mobile-break {
   display: flex;
   flex-direction: row;
 }
-.new-mobile{
+
+.new-mobile {
   display: flex;
   flex-direction: column;
 }
+
 // 960
 @media only screen and (max-width:960px) {
   .mobile-break {

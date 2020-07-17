@@ -1,10 +1,13 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <div class="flex flex-middle">
-    <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
     <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="margin-left-xs">{{ analytics?.mainTitle }}</span>
+    <ws-widget-btn-page-back
+      [widgetData]="{ url: 'home',titles:[{title:'Features', url:'/app/features'},{title: analytics?.mainTitle || 'Analytics',url:'none'}] }">
+    </ws-widget-btn-page-back>
+
+    <!-- <span class="margin-left-xs">{{ analytics?.mainTitle }}</span> -->
   </div>
   <span class="spacer"></span>
   <form *ngIf="!screenSizeIsLtMedium" [formGroup]="searchForm"
