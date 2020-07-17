@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { ConfigurationsService, EventService, UtilityService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService, UtilityService, NsInstanceConfig } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { NsGoal } from '../btn-goals/btn-goals.model'
 import { NsPlaylist } from '../btn-playlist/btn-playlist.model'
@@ -17,6 +17,7 @@ export class CardContentComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, AfterViewInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard> {
   @Input() widgetData!: NsCardContent.ICard
   defaultThumbnail = ''
+  defaultSLogo = ''
   showFlip = false
   isCardFlipped = false
   showIsMode = false
@@ -25,6 +26,8 @@ export class CardContentComponent extends WidgetBaseComponent
   btnPlaylistConfig: NsPlaylist.IBtnPlaylist | null = null
   btnGoalsConfig: NsGoal.IBtnGoal | null = null
   prefChangeSubscription: Subscription | null = null
+  sourceLogos: NsInstanceConfig.ISourceLogo[] | undefined
+
   isIntranetAllowedSettings = false
   constructor(
     private events: EventService,
@@ -44,6 +47,8 @@ export class CardContentComponent extends WidgetBaseComponent
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent
+      this.sourceLogos = instanceConfig.sources
+      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo
     }
 
     if (this.widgetData) {

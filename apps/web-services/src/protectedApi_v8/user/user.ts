@@ -29,6 +29,7 @@ import { ocmApi } from './ocm'
 import { playlistApi } from './playlist'
 import { protectedPreference } from './preference'
 import { profileApi } from './profile'
+import { profileDeatailsApi } from './profile-details'
 import { progressApi } from './progress'
 import { ratingApi } from './rating'
 import { rdbmsApi } from './rdbms'
@@ -73,6 +74,7 @@ user.use('/ocm', ocmApi)
 user.use('/playlist', playlistApi)
 user.use('/preference', protectedPreference)
 user.use('/profile', profileApi)
+user.use('/profileDetails', profileDeatailsApi)
 user.use('/progress', progressApi)
 user.use('/rating', ratingApi)
 user.use('/rdbms', rdbmsApi)

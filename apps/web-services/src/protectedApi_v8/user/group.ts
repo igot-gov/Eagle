@@ -11,7 +11,7 @@ export const userGroupApi = Router()
 
 const API_END_POINTS = {
   searchV6: `${CONSTANTS.SB_EXT_API_BASE}/v6/search`,
-  userGroup: (userId: string) => `${CONSTANTS.PID_API_BASE}/user/${userId}/groups`,
+  userGroup: (userId: string) => `${CONSTANTS.USER_PROFILE_API_BASE}/user/${userId}/groups`,
 }
 
 userGroupApi.get('/groupContent', async (req, res) => {

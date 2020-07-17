@@ -33,7 +33,9 @@
           <div>
             <ws-widget-display-content-type i18n-matTooltip matTooltip="Content Type"
               *ngIf="content?.displayContentType" class="ws-mat-primary-text font-normal"
-              [displayContentType]="content?.displayContentType">
+              [displayContentType]="content?.contentType==='Collection'
+              ?'Module'
+              :(content?.contentType==='Learning Path'?'Program':content?.contentType)">
             </ws-widget-display-content-type>
             <span *ngIf="content.complexityLevel">
               | {{ content.complexityLevel | titlecase }}</span>

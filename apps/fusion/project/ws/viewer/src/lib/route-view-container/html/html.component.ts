@@ -11,6 +11,7 @@ import { ValueService, ConfigurationsService } from '@ws-widget/utils'
   styleUrls: ['./html.component.scss'],
 })
 export class HtmlComponent implements OnInit, OnChanges {
+
   @Input() isNotEmbed = true
   @Input() isFetchingDataComplete = false
   @Input() htmlData: NsContent.IContent | null = null
@@ -28,12 +29,21 @@ export class HtmlComponent implements OnInit, OnChanges {
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
+    // private contentSvc: WidgetContentService,
     private pipeLimitTo: PipeLimitToPipe,
     private valueSvc: ValueService,
     private configSvc: ConfigurationsService,
-  ) { }
 
+  ) {
+
+  }
+  // async setcookies() {
+  //   if (this.htmlData && this.htmlData.artifactUrl && (this.htmlData.artifactUrl.indexOf('/content-store/') > -1)) {
+  //     return await this.contentSvc.setS3Cookie(this.htmlData.identifier || '').toPromise()
+  //   }
+  // }
   ngOnInit() {
+    // this.setcookies().then(() => {
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
     if (this.configSvc.restrictedFeatures) {
       this.isRestricted =
@@ -42,6 +52,10 @@ export class HtmlComponent implements OnInit, OnChanges {
     this.valueSvc.isLtMedium$.subscribe(isLtMd => {
       this.isLtMedium = isLtMd
     })
+    // }).catch((ex) => {
+    //   console.warn("Please refresh Page", ex)
+    // })
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -61,6 +75,7 @@ export class HtmlComponent implements OnInit, OnChanges {
           const description = this.pipeLimitTo.transform(this.htmlData.description, 450)
           this.description = this.domSanitizer.bypassSecurityTrustHtml(description)
         }
+
       }
     }
   }

@@ -2,8 +2,8 @@
   {
     "id": "resource",
     "name": "Resource",
-    "description": "Create the smallest learning entity",
-    "icon": "insert_drive_file",
+    "description": "Smallest learning entity",
+    "icon": "/assets/images/authoring/resource.svg",
     "contentType": "Resource",
     "mimeType": "application/html",
     "hasRole": ["content-creator", "editor", "admin"],
@@ -14,7 +14,7 @@
   {
     "id": "web",
     "parent": "resource",
-    "name": "Attach a Link",
+    "name": "Attach link",
     "icon": "link",
     "available": true,
     "enabled": true,
@@ -50,9 +50,10 @@
     "name": "Assessment",
     "icon": "check_circle",
     "available": true,
-    "enabled": false,
+    "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/quiz",
+    "additionalMeta": { "categoryType": "Assessment","resourceType": "Assessment" },
     "hasRole": ["content-creator", "editor", "admin"]
   },
   {
@@ -74,8 +75,8 @@
     "contentType": "Channel",
     "mimeType": "application/channel",
     "hasRole": ["channel-creator", "editor", "admin"],
-    "available": true,
-    "enabled": true
+    "available": false,
+    "enabled": false
   },
   {
     "id": "kb",
@@ -85,8 +86,8 @@
     "icon": "folder",
     "mimeType": "application/vnd.ekstep.content-collection",
     "contentType": "Knowledge Board",
-    "available": true,
-    "enabled": true,
+    "available": false,
+    "enabled": false,
     "hasRole": ["kb-creator", "editor", "admin"]
   },
   {
@@ -96,7 +97,7 @@
     "icon": "folder",
     "mimeType": "application/vnd.ekstep.content-collection",
     "contentType": "Knowledge Artifact",
-    "available": true,
+    "available": false,
     "enabled": false,
     "hasRole": ["ka-creator", "editor", "admin"]
   },
@@ -105,7 +106,7 @@
     "isCollection": true,
     "name": "Module",
     "description": "Create a collection of Resources",
-    "icon": "folder",
+    "icon": "/assets/images/authoring/collection.svg",
     "contentType": "Collection",
     "available": true,
     "enabled": true,
@@ -117,7 +118,7 @@
     "isCollection": true,
     "name": "Course",
     "description": "Create a collection of Modules",
-    "icon": "book",
+    "icon": "/assets/images/authoring/course.svg",
     "contentType": "Course",
     "available": true,
     "enabled": true,
@@ -129,10 +130,10 @@
     "isCollection": true,
     "name": "Program",
     "description": "Create a collection of Courses",
-    "icon": "library_books",
+    "icon": "/assets/images/authoring/learningPath.svg",
     "contentType": "Learning Path",
     "available": true,
-    "enabled": false,
+    "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
     "hasRole": ["content-creator", "editor", "admin"]
   }

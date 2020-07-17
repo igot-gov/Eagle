@@ -19,13 +19,13 @@
             {{ aboutPage?.banner?.description }}
           </h2>
 
-          <div class="overview-intro ws-mat-primary-lite-background">
+          <div *ngIf="videoLink" class="overview-intro ws-mat-primary-lite-background">
             <iframe [src]="videoLink" i18n-title title="about-video" allow="fullscreen" class="about-video"
               width="100%"></iframe>
           </div>
         </div>
-        <a mat-raised-button type="button" [href]="aboutPage?.banner?.moreInfo" target="_blank" color="primary"
-          i18n="about first section action button">Read More
+        <a *ngIf="aboutPage?.banner?.moreInfo" mat-raised-button type="button" [href]="aboutPage?.banner?.moreInfo"
+          target="_blank" color="primary" i18n="about first section action button">Read More
         </a>
       </div>
     </div>
@@ -105,7 +105,7 @@
     </section>
     <mat-divider></mat-divider>
   </section>
-  <section class="container-margin" *ngIf="aboutPage?.section4">
+  <!-- <section class="container-margin" *ngIf="aboutPage?.section4">
     <div class="about-info-footer ws-primary-tinted-50" [style.backgroundImage]="footerBanner">
       <h1 class="mat-heading ">
         {{ aboutPage?.section4.title }}
@@ -144,6 +144,6 @@
         </p>
       </div>
     </section>
-  </section>
+  </section> -->
 
 </section>

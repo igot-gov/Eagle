@@ -1,0 +1,67 @@
+<resources>
+    <!--<string name="app_name">lex</string>-->
+
+    <string name="title_activity_download_manager">DownloadManagerActivity</string>
+
+
+    <string name="action_profile">Profile</string>
+    <string name="action_leaderboard">Leaderboard</string>
+    <string name="action_quicktour">Quick Tour</string>
+    <string name="action_feedback">Feedback</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_catalog">CATALOG</string>
+    <string name="action_search">Search</string>
+    <string name="download_title">Downloads</string>
+    <string name="course_btn">Courses</string>
+    <string name="module_btn">Modules</string>
+    <string name="resource_btn">Resources</string>
+    <string name="about">About</string>
+    <string name="rainforest">Rainforest</string>
+
+
+    <string name="action_downloads">Downloads</string>
+    <string name="errorConnectivityMsg">Download Failed. Check your network connectivity and try again.</string>
+    <string name="action_setting">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="pref_download_over">Wi-Fi</string>
+    <string name="action_logout_key">Logout</string>
+    <string name="summary_download_over_wifi">Require Wi-Fi for downloading</string>
+    <string name="action_marketing">BRAND</string>
+    <string name="action_login">LOG IN</string>
+
+    <string name="permissionDenied">Without this permission the app will not be able to download the content for offline viewing. Are you sure you want to deny this permission?</string>
+    <string name="downloadOverWiFi">Download over WiFi enabled. Do you want to change your preferences for Downloading?</string>
+    <string name="downloadOverMob">Continue download on cellular data?</string>
+    <string name="permissionDeniedDesc">Please provide the access permission for file system under the permissions in settings to use this feature and try again.</string>
+    <string name="intranetLink">Please check this on Infosys Intranet.</string>
+    <string name="openrapConnectivityMsg">You are currently connected to Lex Hotspot. Please connect to the Internet to view this.</string>
+    <string name="versionKey">Version 2.2.2</string>
+
+    <string name="loadingToast">Error while logging in. Retrying.</string>
+    <string name="alertDialogCheckBox">Never ask again</string>
+    <string name="how_to_use">How to Use</string>
+    <string name="app_upto_date">App up-to-date</string>
+    <string name="update_app">Please update the app</string>
+    <string name="cancel">Cancel</string>
+
+
+    <string name="start_publishing">Start Publishing</string>
+    <string name="stop_publishing">Stop Publishing</string>
+    <string name="started_publishing">Publishing Started</string>
+    <string name="stopped_publishing">Publishing Stopped</string>
+    <string name="disconnected_publishing">Publishing Disconnected</string>
+    <string name="failed_publishing">Failed To Connect</string>
+
+    <string name="error_empty_url">url is empty</string>
+
+    <string name="publishing_label">LIVE  %1$s:%2$s</string>
+    <string name="error_in_webView_url">Error while loading this. Please try again after sometime.</string>
+    <string name="error_auth_failed">Error while authentication. Please try again after sometime.</string>
+    <string name="error_in_file">Error while loading this. Please try again after sometime.</string>
+    <string name="back">Back</string>
+    <string name="report">Report</string>
+
+    <string name="access_downloads">Open Downloads to access the downloaded file</string>
+
+
+</resources>

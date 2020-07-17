@@ -6,7 +6,7 @@ import { logError } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 const API_END_POINTS = {
   changeEmail: (userId: string, metaType: string) =>
-    `${CONSTANTS.PID_API_BASE}/user/${userId}/${metaType}`,
+    `${CONSTANTS.USER_PROFILE_API_BASE}/user/${userId}/${metaType}`,
 }
 export const changeEmailApi = Router()
 changeEmailApi.put('/:metaType', async (req, res) => {

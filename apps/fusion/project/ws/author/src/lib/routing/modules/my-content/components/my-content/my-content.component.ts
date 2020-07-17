@@ -130,7 +130,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       case 'rejected':
         return ['Draft']
       case 'inreview':
-        return ['InReview', 'Reviewed', 'QualityReview']
+        return ['InReview', 'QualityReview'] // Reviewed
       case 'review':
         return ['InReview']
       case 'published':
@@ -233,14 +233,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
     const observable =
       this.status === 'expiry' || this.newDesign
         ? this.myContSvc.fetchFromSearchV6(searchV6Data, this.isAdmin).pipe(
-            map((v: any) => {
-              return {
-                result: {
-                  response: v,
-                },
-              }
-            }),
-          )
+          map((v: any) => {
+            return {
+              result: {
+                response: v,
+              },
+            }
+          }),
+        )
         : this.myContSvc.fetchContent(requestData)
     this.loadService.changeLoad.next(true)
     observable.subscribe(
@@ -256,11 +256,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
         this.cardContent =
           loadMoreFlag && !this.queryFilter
             ? (this.cardContent || []).concat(
-                data && data.result && data.result.response ? data.result.response.result : [],
-              )
+              data && data.result && data.result.response ? data.result.response.result : [],
+            )
             : data && data.result.response
-            ? data.result.response.result
-            : []
+              ? data.result.response.result
+              : []
         this.totalContent = data && data.result.response ? data.result.response.totalHits : 0
         this.showLoadMore =
           this.pagination.offset * this.pagination.limit + this.pagination.limit < this.totalContent

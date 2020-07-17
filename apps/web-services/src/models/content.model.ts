@@ -35,6 +35,9 @@ export interface IContent {
   contentType: TContentType
   contentUrlAtSource: string
   creatorContacts: ICreator[]
+  creatorLogo?: string
+  creatorPosterImage?: string
+  creatorThumbnail?: string
   creatorDetails?: ICreator[]
   categoryType: string
   description: string

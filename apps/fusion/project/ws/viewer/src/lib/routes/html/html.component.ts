@@ -50,7 +50,7 @@ export class HtmlComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private eventSvc: EventService,
     private accessControlSvc: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.uuid = this.configSvc.userProfile ? this.configSvc.userProfile.userId : ''
@@ -66,22 +66,29 @@ export class HtmlComponent implements OnInit, OnDestroy {
       // to do make sure the data updates for two consecutive resource of same mimeType
       this.viewerDataSubscription = this.viewerSvc
         .getContent(this.activatedRoute.snapshot.paramMap.get('resourceId') || '')
-        .subscribe(data => {
-          data.artifactUrl = data.artifactUrl.startsWith('https://')
-            ? data.artifactUrl
-            : data.artifactUrl.startsWith('http://')
-            ? data.artifactUrl
-            : `https://${data.artifactUrl}`
-          if (this.accessControlSvc.hasAccess(data as any, true)) {
-            this.htmlData = data
-          }
-          if (this.htmlData) {
-            this.formDiscussionForumWidget(this.htmlData)
-            if (this.discussionForumWidget) {
-              this.discussionForumWidget.widgetData.isDisabled = true
+        .subscribe(
+          async data => {
+            data.artifactUrl = (data.artifactUrl.startsWith('https://')
+              ? data.artifactUrl
+              : data.artifactUrl.startsWith('http://')
+                ? data.artifactUrl
+                : `https://${data.artifactUrl}`).replace(/ /ig, '').replace(/%20/ig, '').replace(/\n/ig, '')
+            if (this.accessControlSvc.hasAccess(data as any, true)) {
+              if (data && data.artifactUrl.indexOf('content-store') >= 0) {
+                await this.setS3Cookie(data.identifier)
+                this.htmlData = data
+              } else {
+                this.htmlData = data
+              }
+
             }
-          }
-        })
+            if (this.htmlData) {
+              this.formDiscussionForumWidget(this.htmlData)
+              if (this.discussionForumWidget) {
+                this.discussionForumWidget.widgetData.isDisabled = true
+              }
+            }
+          })
     } else {
       this.routeDataSubscription = this.activatedRoute.data.subscribe(
         async data => {
@@ -90,8 +97,8 @@ export class HtmlComponent implements OnInit, OnDestroy {
           //     `/apis/proxies/v8${data.content.data.artifactUrl}` : data.content.data.artifactUrl
           data.content.data.artifactUrl =
             data.content.data.artifactUrl.indexOf('ScormCoursePlayer') > -1
-              ? `${data.content.data.artifactUrl}&Param1=${this.uuid}`
-              : data.content.data.artifactUrl
+              ? `${data.content.data.artifactUrl.replace(/%20/g, '')}&Param1=${this.uuid}`
+              : data.content.data.artifactUrl.replace(/%20/g, '')
           const tempHtmlData = data.content.data
           if (this.alreadyRaised && this.oldData) {
             this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.oldData)
@@ -157,59 +164,59 @@ export class HtmlComponent implements OnInit, OnDestroy {
           }
           this.isFetchingDataComplete = true
         },
-        () => {},
+        () => { },
       )
     }
   }
 
- async saveContinueLearning(content: NsContent.IContent | null) {
+  async saveContinueLearning(content: NsContent.IContent | null) {
     return new Promise(async resolve => {
-    if (this.activatedRoute.snapshot.queryParams.collectionType &&
-      content &&
-      this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
-      const reqBody = {
-        contextPathId: this.activatedRoute.snapshot.queryParams.collectionId
-          ? this.activatedRoute.snapshot.queryParams.collectionId
-          : content
-            ? content.identifier
-            : '',
-        resourceId: content.identifier,
-        data: JSON.stringify({
-          timestamp: Date.now(),
-          contextFullPath: [this.activatedRoute.snapshot.queryParams.collectionId, content.identifier],
-        }),
-        dateAccessed: Date.now(),
-        contextType: 'playlist',
+      if (this.activatedRoute.snapshot.queryParams.collectionType &&
+        content &&
+        this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+        const reqBody = {
+          contextPathId: this.activatedRoute.snapshot.queryParams.collectionId
+            ? this.activatedRoute.snapshot.queryParams.collectionId
+            : content
+              ? content.identifier
+              : '',
+          resourceId: content.identifier,
+          data: JSON.stringify({
+            timestamp: Date.now(),
+            contextFullPath: [this.activatedRoute.snapshot.queryParams.collectionId, content.identifier],
+          }),
+          dateAccessed: Date.now(),
+          contextType: 'playlist',
+        }
+        this.contentSvc.saveContinueLearning(reqBody).toPromise().catch().finally(() => {
+          resolve(true)
+        }
+        )
+      } else {
+        const reqBody = {
+          contextPathId: this.activatedRoute.snapshot.queryParams.collectionId
+            ? this.activatedRoute.snapshot.queryParams.collectionId
+            : content
+              ? content.identifier
+              : '',
+          resourceId: content ? content.identifier : '',
+          data: JSON.stringify({ timestamp: Date.now() }),
+          dateAccessed: Date.now(),
+        }
+        this.contentSvc.saveContinueLearning(reqBody).toPromise().catch().finally(() => {
+          resolve(true)
+        }
+        )
       }
-      this.contentSvc.saveContinueLearning(reqBody).toPromise().catch().finally(() => {
-        resolve(true)
-      }
-      )
-    } else {
-      const reqBody = {
-        contextPathId: this.activatedRoute.snapshot.queryParams.collectionId
-          ? this.activatedRoute.snapshot.queryParams.collectionId
-          : content
-            ? content.identifier
-            : '',
-        resourceId: content ? content.identifier : '',
-        data: JSON.stringify({ timestamp: Date.now() }),
-        dateAccessed: Date.now(),
-      }
-      this.contentSvc.saveContinueLearning(reqBody).toPromise().catch().finally(() => {
-        resolve(true)
-      }
-      )
-    }
     })
   }
 
-async  ngOnDestroy() {
-  if (this.htmlData) {
-    if (!this.subApp || this.activatedRoute.snapshot.queryParams.collectionId) {
-      await this.saveContinueLearning(this.htmlData)
+  async  ngOnDestroy() {
+    if (this.htmlData) {
+      if (!this.subApp || this.activatedRoute.snapshot.queryParams.collectionId) {
+        await this.saveContinueLearning(this.htmlData)
+      }
     }
-  }
     if (this.htmlData) {
       this.raiseEvent(WsEvents.EnumTelemetrySubType.Unloaded, this.htmlData)
     }

@@ -1,4 +1,3 @@
-import { ISearchContent } from './../../../../../../interface/search'
 import { COMMA, ENTER } from '@angular/cdk/keycodes'
 import {
   AfterViewInit,
@@ -18,7 +17,8 @@ import { MatChipInputEvent } from '@angular/material/chips'
 import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
-import { ConfigurationsService, ImageCropComponent, ValueService } from '@ws-widget/utils'
+import { ConfigurationsService } from '@ws-widget/utils'
+import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
 import { CONTENT_BASE_STATIC } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
@@ -43,7 +43,6 @@ import {
   switchMap,
   map,
 } from 'rxjs/operators'
-import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/components/feedback-form/feedback-form.component'
 
 @Component({
   selector: 'ws-auth-edit-meta',
@@ -52,10 +51,10 @@ import { FeedbackFormComponent } from '@ws/author/src/lib/modules/shared/compone
 })
 export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   contentMeta!: NSContent.IContentMeta
-  isMobile = false
   @Output() data = new EventEmitter<string>()
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
+  @Input() stage = 3
   location = CONTENT_BASE_STATIC
   selectable = true
   removable = true
@@ -64,8 +63,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   isFileUploaded = false
   fileUploadForm!: FormGroup
   creatorContactsCtrl!: FormControl
-  prePostContentsCtrl = new FormControl()
-  skillCtrl = new FormControl()
   trackContactsCtrl!: FormControl
   publisherDetailsCtrl!: FormControl
   editorsCtrl!: FormControl
@@ -81,14 +78,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   ordinals!: any
   resourceTypes: string[] = []
   employeeList: any[] = []
-  contentList: ISearchContent[] = []
   audienceList: any[] = []
   jobProfileList: any[] = []
   regionList: any[] = []
   accessPathList: any[] = []
-  infoType = 'appIcon'
-  isClient1 = false
-  isClient2 = false
+  infoType = ''
+  isSiemens = false
   fetchTagsStatus: 'done' | 'fetching' | null = null
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
   selectedIndex = 0
@@ -102,7 +97,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   showMoreGlance = false
   complexityLevelList: string[] = []
   isEditEnabled = false
-  minDate = new Date(new Date().setDate(new Date().getDate() + 1))
 
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
@@ -114,10 +108,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('regionView', { static: false }) regionView!: ElementRef
   @ViewChild('accessPathsView', { static: false }) accessPathsView!: ElementRef
   @ViewChild('keywordsSearch', { static: true }) keywordsSearch!: ElementRef<any>
-  skillList = <any[]>[]
 
   timer: any
-  showRoleRequest = false
+
   filteredOptions$: Observable<string[]> = of([])
 
   constructor(
@@ -133,7 +126,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private loader: LoaderService,
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
-    private valueSvc: ValueService,
   ) { }
 
   ngAfterViewInit() {
@@ -145,10 +137,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
-    this.showRoleRequest = this.authInitService.authAdditionalConfig.allowRoleRequest
-    this.isClient1 = this.accessService.rootOrg.toLowerCase() === 'client1'
-    this.isClient2 = this.accessService.rootOrg.toLowerCase() === 'client2'
+    this.isSiemens = this.accessService.rootOrg.toLowerCase() === 'siemens'
     this.ordinals = this.authInitService.ordinals
     this.audienceList = this.ordinals.audience
     this.jobProfileList = this.ordinals.jobProfile
@@ -166,55 +155,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.regionCtrl = new FormControl()
     this.accessPathsCtrl = new FormControl()
     this.accessPathsCtrl.disable()
-    this.prePostContentsCtrl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        filter(val => typeof val === 'string'),
-        switchMap((value: string) => {
-          if (typeof value === 'string' && value) {
-            this.contentList = <ISearchContent[]>[]
-            this.fetchTagsStatus = 'fetching'
-            return this.editorService.searchV6Content(
-              value,
-              this.contentMeta && this.contentMeta.locale ? this.contentMeta.locale : 'en',
-            )
-          }
-          return of([])
-        }),
-      )
-      .subscribe(
-        (content: ISearchContent[]) => {
-          this.contentList = content || <string[]>[]
-          this.fetchTagsStatus = 'done'
-        },
-        () => {
-          this.fetchTagsStatus = 'done'
-        },
-      )
-    this.skillCtrl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        filter(val => typeof val === 'string'),
-        switchMap((value: string) => {
-          if (typeof value === 'string' && value) {
-            this.skillList = <any[]>[]
-            this.fetchTagsStatus = 'fetching'
-            return this.editorService.searchSkills(value)
-          }
-          return of([])
-        }),
-      )
-      .subscribe(
-        (content: any[]) => {
-          this.skillList = content || <any[]>[]
-          this.fetchTagsStatus = 'done'
-        },
-        () => {
-          this.fetchTagsStatus = 'done'
-        },
-      )
+
     this.creatorContactsCtrl.valueChanges
       .pipe(
         debounceTime(500),
@@ -346,31 +287,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       )
       .subscribe(() => this.fetchRegion())
 
-    this.accessPathsCtrl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        filter(val => typeof val === 'string'),
-        switchMap((value: string) => {
-          if (typeof value === 'string' && value) {
-            this.accessPathList = <string[]>[]
-            this.fetchTagsStatus = 'fetching'
-            return this.editorService.getAccessPath()
-          }
-          return of([])
-        }),
-      )
-      .subscribe(
-        paths => {
-          this.accessPathList = paths.filter(v =>
-            v.toLowerCase().includes(this.accessPathsCtrl.value.toLowerCase()),
-          )
-          this.fetchTagsStatus = 'done'
-        },
-        () => {
-          this.fetchTagsStatus = 'done'
-        },
-      )
+    this.accessPathsCtrl.valueChanges.pipe(
+      debounceTime(400),
+      filter(v => v),
+    ).subscribe(() => this.fetchAccessRestrictions())
 
     this.contentService.changeActiveCont.subscribe(data => {
       if (this.contentMeta && this.canUpdate) {
@@ -423,14 +343,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           ? <any>this.convertToISODate(contentMeta.expiryDate)
           : ''
     }
-    const date = (this.contentMeta.expiryDate as any) as Date
-    if (this.minDate > date) {
-      this.contentMeta.expiryDate = new Date(this.minDate) as any
-    }
     this.assignFields()
     this.setDuration(contentMeta.duration || 0)
     this.filterOrdinals()
-    // this.changeResourceType()
+    this.changeResourceType()
   }
 
   filterOrdinals() {
@@ -560,8 +476,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   changeMimeType() {
-    const artifactUrl =
-      this.contentService.getUpdatedMeta(this.contentMeta.identifier).artifactUrl || ''
+    const artifactUrl = this.contentForm.controls.artifactUrl.value
     if (this.contentForm.controls.contentType.value === 'Course') {
       this.contentForm.controls.mimeType.setValue('application/vnd.ekstep.content-collection')
     } else {
@@ -580,17 +495,17 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  // changeResourceType() {
-  //   if (this.contentForm.controls.contentType.value === 'Resource') {
-  //     this.resourceTypes = this.ordinals.resourceType
-  //   } else {
-  //     this.resourceTypes = this.ordinals['Offering Mode']
-  //   }
+  changeResourceType() {
+    if (this.contentForm.controls.contentType.value === 'Resource') {
+      this.resourceTypes = this.ordinals.resourceType || this.ordinals.categoryType || []
+    } else {
+      this.resourceTypes = this.ordinals['Offering Mode'] || this.ordinals.categoryType || []
+    }
 
-  //   if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
-  //     this.contentForm.controls.resourceType.setValue('')
-  //   }
-  // }
+    if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
+      this.contentForm.controls.resourceType.setValue('')
+    }
+  }
 
   private setDuration(seconds: any) {
     const minutes = seconds > 59 ? Math.floor(seconds / 60) : 0
@@ -613,40 +528,49 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   storeData() {
-    const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
-    if (originalMeta && this.isEditEnabled) {
-      const expiryDate = this.contentForm.value.expiryDate
-      const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
-      const meta = <any>{}
-      if (this.canExpiry) {
-        currentMeta.expiryDate = `${
-          expiryDate.toISOString().replace(/-/g, '').replace(/:/g, '').split('.')[0]
-          }+0000`
-      }
-      Object.keys(currentMeta).map(v => {
-        if (
-          JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
-          JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
-        ) {
-          if (
-            currentMeta[v as keyof NSContent.IContentMeta] ||
-            (this.authInitService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
-              currentMeta[v as keyof NSContent.IContentMeta] === false)
-          ) {
-            meta[v as keyof NSContent.IContentMeta] = currentMeta[v as keyof NSContent.IContentMeta]
-          } else {
-            meta[v as keyof NSContent.IContentMeta] = JSON.parse(
-              JSON.stringify(
-                this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                  originalMeta.contentType
-                  // tslint:disable-next-line: ter-computed-property-spacing
-                ][0].value,
-              ),
-            )
-          }
+    try {
+      const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
+      if (originalMeta && this.isEditEnabled) {
+        const expiryDate = this.contentForm.value.expiryDate
+        const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
+        const meta = <any>{}
+        if (this.canExpiry) {
+          currentMeta.expiryDate = `${
+            expiryDate
+              .toISOString()
+              .replace(/-/g, '')
+              .replace(/:/g, '')
+              .split('.')[0]
+            }+0000`
         }
-      })
-      this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
+        Object.keys(currentMeta).map(v => {
+          if (
+            JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
+            JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
+          ) {
+            if (
+              currentMeta[v as keyof NSContent.IContentMeta] ||
+              (this.authInitService.authConfig[v as keyof IFormMeta].type === 'boolean' &&
+                currentMeta[v as keyof NSContent.IContentMeta] === false)
+            ) {
+              meta[v as keyof NSContent.IContentMeta] = currentMeta[v as keyof NSContent.IContentMeta]
+            } else {
+              meta[v as keyof NSContent.IContentMeta] = JSON.parse(
+                JSON.stringify(
+                  this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+                    originalMeta.contentType
+                    // tslint:disable-next-line: ter-computed-property-spacing
+                  ][0].value,
+                ),
+              )
+            }
+          }
+        })
+        this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
+      }
+    } catch (ex) {
+      this.snackBar.open('Please Save Parent first and refresh page.')
+
     }
   }
 
@@ -666,19 +590,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       .map((val: string) => val.trim())
       .forEach((value: string) => this.optionSelected(value))
     input.value = ''
-  }
-
-  addContent(event: MatAutocompleteSelectedEvent, meta: string): void {
-    const value = this.contentForm.controls[meta].value || []
-    if (value.find((v: { identifier: string }) => v.identifier === event.option.value.identifier)) {
-      return
-    }
-    value.push({
-      identifier: event.option.value.identifier,
-      name: event.option.value.name,
-    })
-    this.contentForm.controls[meta].setValue(value)
-    this.prePostContentsCtrl.setValue(null)
   }
 
   addReferences(event: MatChipInputEvent): void {
@@ -704,9 +615,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentForm.controls.keywords.setValue(this.contentForm.controls.keywords.value)
   }
 
-  remove(index: number, meta: string): void {
-    this.contentForm.controls[meta].value.splice(index, 1)
-    this.contentForm.controls[meta].setValue(this.contentForm.controls[meta].value)
+  removeReferences(index: number): void {
+    this.contentForm.controls.references.value.splice(index, 1)
+    this.contentForm.controls.references.setValue(this.contentForm.controls.references.value)
   }
 
   compareSkillFn(value1: { identifier: string }, value2: { identifier: string }) {
@@ -735,15 +646,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.contentForm.controls.creatorDetails.value,
     )
   }
-  addToForm(event: MatAutocompleteSelectedEvent, meta: string) {
-    const value = this.contentForm.controls[meta].value || []
-    if (value.find((v: { identifier: string }) => v.identifier === event.option.value.identifier)) {
-      return
-    }
-    value.push(event.option.value)
-    this.contentForm.controls[meta].setValue(value)
-    this.prePostContentsCtrl.setValue(null)
-  }
+
   addToFormControl(event: MatAutocompleteSelectedEvent, fieldName: string): void {
     const value = (event.option.value || '').trim()
     if (value && this.contentForm.controls[fieldName].value.indexOf(value) === -1) {
@@ -768,7 +671,16 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   uploadAppIcon(file: File) {
     const formdata = new FormData()
     const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
-    if (!(IMAGE_SUPPORT_TYPES.indexOf(`.${fileName.toLowerCase().split('.').pop()}`) > -1)) {
+    if (
+      !(
+        IMAGE_SUPPORT_TYPES.indexOf(
+          `.${fileName
+            .toLowerCase()
+            .split('.')
+            .pop()}`,
+        ) > -1
+      )
+    ) {
       this.snackBar.openFromComponent(NotificationComponent, {
         data: {
           type: Notify.INVALID_FORMAT,
@@ -842,7 +754,92 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       },
     })
   }
+  uploadSourceIcon(file: File) {
+    const formdata = new FormData()
+    const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
+    if (
+      !(
+        IMAGE_SUPPORT_TYPES.indexOf(
+          `.${fileName
+            .toLowerCase()
+            .split('.')
+            .pop()}`,
+        ) > -1
+      )
+    ) {
+      this.snackBar.openFromComponent(NotificationComponent, {
+        data: {
+          type: Notify.INVALID_FORMAT,
+        },
+        duration: NOTIFICATION_TIME * 1000,
+      })
+      return
+    }
 
+    if (file.size > IMAGE_MAX_SIZE) {
+      this.snackBar.openFromComponent(NotificationComponent, {
+        data: {
+          type: Notify.SIZE_ERROR,
+        },
+        duration: NOTIFICATION_TIME * 1000,
+      })
+      return
+    }
+
+    const dialogRef = this.dialog.open(ImageCropComponent, {
+      width: '70%',
+      data: {
+        isRoundCrop: false,
+        imageFile: file,
+        width: 72,
+        height: 72,
+        isThumbnail: true,
+        imageFileName: fileName,
+      },
+    })
+
+    dialogRef.afterClosed().subscribe({
+      next: (result: File) => {
+        if (result) {
+          formdata.append('content', result, fileName)
+          this.loader.changeLoad.next(true)
+          this.uploadService
+            .upload(formdata, {
+              contentId: this.contentMeta.identifier,
+              contentType: CONTENT_BASE_STATIC,
+            })
+            .subscribe(
+              data => {
+                if (data.code) {
+                  this.loader.changeLoad.next(false)
+                  this.canUpdate = false
+                  this.contentForm.controls.creatorLogo.setValue(data.artifactURL)
+                  this.contentForm.controls.creatorThumbnail.setValue(data.artifactURL)
+                  this.contentForm.controls.creatorPosterImage.setValue(data.artifactURL)
+                  this.canUpdate = true
+                  this.storeData()
+                  this.snackBar.openFromComponent(NotificationComponent, {
+                    data: {
+                      type: Notify.UPLOAD_SUCCESS,
+                    },
+                    duration: NOTIFICATION_TIME * 1000,
+                  })
+                }
+              },
+              () => {
+                this.loader.changeLoad.next(false)
+                this.snackBar.openFromComponent(NotificationComponent, {
+                  data: {
+                    type: Notify.UPLOAD_FAIL,
+                  },
+                  duration: NOTIFICATION_TIME * 1000,
+                })
+              },
+            )
+        }
+      },
+    })
+  }
   changeToDefaultImg($event: any) {
     $event.target.src = this.configSvc.instanceConfig
       ? this.configSvc.instanceConfig.logos.defaultContent
@@ -866,51 +863,43 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   removeEmployee(employee: NSContent.IAuthorDetails, field: string): void {
-    const value =
-      this.contentForm.controls[field].value.filter((v: { id: string }) => v.id !== employee.id) ||
-      []
-    this.contentForm.controls[field].setValue(value)
+    const index = this.contentForm.controls[field].value.indexOf(employee)
+    this.contentForm.controls[field].value.splice(index, 1)
+    this.contentForm.controls[field].setValue(this.contentForm.controls[field].value)
   }
 
   addEmployee(event: MatAutocompleteSelectedEvent, field: string) {
     if (event.option.value && event.option.value.id) {
       this.loader.changeLoad.next(true)
-      const observable =
-        ['trackContacts', 'publisherDetails'].includes(field) &&
-          this.accessService.authoringConfig.doUniqueCheck
-          ? this.editorService
-            .checkRole(event.option.value.id)
-            .pipe(
-              map(
-                (v: string[]) =>
-                  v.includes('admin') ||
-                  v.includes('editor') ||
-                  (field === 'trackContacts' && v.includes('reviewer')) ||
-                  (field === 'publisherDetails' && v.includes('publisher')) ||
-                  (field === 'publisherDetails' &&
-                    event.option.value.id === this.accessService.userId &&
-                    this.isClient1 &&
-                    this.contentMeta.contentType === 'Resource'),
-              ),
-            )
-          : of(true)
+      const observable = ['trackContacts', 'publisherDetails'].includes(field) &&
+        this.accessService.authoringConfig.doUniqueCheck
+        ? this.editorService
+          .checkRole(event.option.value.id)
+          .pipe(
+            map(
+              (v: string[]) =>
+                v.includes('admin') ||
+                v.includes('editor') ||
+                (field === 'trackContacts' && v.includes('reviewer')) ||
+                (field === 'publisherDetails' && v.includes('publisher')) ||
+                (field === 'publisherDetails' && event.option.value.id === this.accessService.userId),
+            ),
+          )
+        : of(true)
       observable.subscribe(
         (data: boolean) => {
           if (data) {
-            const value = this.contentForm.controls[field].value
-            value.push({
+            this.contentForm.controls[field].value.push({
               id: event.option.value.id,
               name: event.option.value.displayName,
             })
-            this.contentForm.controls[field].setValue(value)
+            this.contentForm.controls[field].setValue(this.contentForm.controls[field].value)
           } else {
-            this.infoType = field === 'publisherDetails' ? 'publishers' : 'reviewers'
             this.snackBar.openFromComponent(NotificationComponent, {
               data: {
                 type: Notify.NO_ROLE,
               },
-              duration: NOTIFICATION_TIME * 2 * 1000,
-              panelClass: ['warning-popup'],
+              duration: NOTIFICATION_TIME * 1000,
             })
           }
           this[`${field}View` as keyof EditMetaComponent].nativeElement.value = ''
@@ -970,22 +959,14 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
-  openRoleRequest(role: 'reviewer' | 'publisher') {
-    this.dialog.open(FeedbackFormComponent, {
-      width: this.isMobile ? '90vw' : '600px',
-      height: 'auto',
-      data: role,
-    })
+  private fetchAccessRestrictions() {
+    if (this.accessPathsCtrl.value.trim()) {
+      this.accessPathList = this.ordinals.accessPaths.filter((v: any) => v.toLowerCase().
+        indexOf(this.accessPathsCtrl.value.toLowerCase()) === 0)
+    } else {
+      this.accessPathList = this.ordinals.accessPaths.slice()
+    }
   }
-
-  // private fetchAccessRestrictions() {
-  //   if (this.accessPathsCtrl.value.trim()) {
-  //     this.accessPathList = this.ordinals.resourceCategory.filter((v: any) => v.toLowerCase().
-  //       indexOf(this.accessPathsCtrl.value.toLowerCase()) === 0)
-  //   } else {
-  //     this.accessPathList = this.ordinals.resourceCategory.slice()
-  //   }
-  // }
 
   checkCondition(meta: string, type: 'show' | 'required' | 'disabled'): boolean {
     if (type === 'disabled' && !this.isEditEnabled) {
@@ -999,6 +980,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       accessPaths: [],
       accessibility: [],
       appIcon: [],
+      artifactUrl: [],
       audience: [],
       body: [],
       catalogPaths: [],
@@ -1021,8 +1003,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       expiryDate: [],
       exclusiveContent: [],
       idealScreenSize: [],
+      identifier: [],
       introductoryVideo: [],
       introductoryVideoIcon: [],
+      isExternal: [],
+      isIframeSupported: [],
+      isRejected: [],
       fileType: [],
       jobProfile: [],
       kArtifacts: [],
@@ -1056,6 +1042,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       skills: [],
       softwareRequirements: [],
       sourceName: [],
+      creatorLogo: [],
+      creatorPosterImage: [],
+      creatorThumbnail: [],
       status: [],
       studyDuration: [],
       studyMaterials: [],
@@ -1068,7 +1057,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       unit: [],
       verifiers: [],
       visibility: [],
-      isSearchable: [],
     })
 
     this.contentForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
@@ -1078,14 +1066,24 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     })
 
     this.contentForm.controls.contentType.valueChanges.subscribe(() => {
-      // this.changeResourceType()
+      this.changeResourceType()
       this.filterOrdinals()
       this.changeMimeType()
       this.contentForm.controls.category.setValue(this.contentForm.controls.contentType.value)
     })
+
+    if (this.stage === 1) {
+      this.contentForm.controls.creatorContacts.valueChanges.subscribe(() => {
+        this.contentForm.controls.publisherDetails.setValue(
+          this.contentForm.controls.creatorContacts.value || [],
+        )
+      })
+    }
+    // resourceType
     this.contentForm.controls.resourceType.valueChanges.subscribe(() => {
       this.contentForm.controls.categoryType.setValue(this.contentForm.controls.resourceType.value)
     })
+
     this.contentForm.controls.resourceCategory.valueChanges.subscribe(() => {
       this.contentForm.controls.customClassifiers.setValue(
         this.contentForm.controls.resourceCategory.value,
@@ -1140,9 +1138,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     } else if (type === 'previewUrl') {
       selBox.value =
         // tslint:disable-next-line: max-line-length
-        `${window.location.origin}/author/viewer/${VIEWER_ROUTE_FROM_MIME(
+        `${window.location.origin}/viewer/${VIEWER_ROUTE_FROM_MIME(
           this.contentForm.controls.mimeType.value,
-        )}/${this.contentMeta.identifier}`
+        )}/${this.contentMeta.identifier}?preview=true`
     }
     document.body.appendChild(selBox)
     selBox.focus()

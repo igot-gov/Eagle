@@ -5,8 +5,8 @@ import { NSCompetency } from '../models/competency.model'
 import { map } from 'rxjs/operators'
 import { ConfigurationsService } from '@ws-widget/utils'
 
-const PROTECTED_SLAG_V8 = `/LA1/api`
-
+// const PROTECTED_SLAG_V8 = `/LA1/api`
+const PROTECTED_SLAG_V8 = `/api`
 const LA_API_END_POINTS = {
   ASSESSMENTS: `${PROTECTED_SLAG_V8}/v1/assessment`,
 }

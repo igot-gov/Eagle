@@ -77,7 +77,6 @@ public class ContentPublisherImpl {
     private List<String> noZipButCopyAUrlMimeTypes = Arrays.asList("audio/mp3","audio/mpeg","application/pdf","application/x-mpegURL","video/mp4");
     private List<String> supportedMimeTypesForZip = Arrays.asList("application/htmlpicker", "application/drag-drop", "resource/collection", "application/web-module");
 
-    @SuppressWarnings("unchecked")
     public Map<String, Object> processMessage(Map<String, Object> message, UUID uuid) {
         logger.info(uuid + "#PROCESSING");
 
@@ -90,15 +89,16 @@ public class ContentPublisherImpl {
 
         Map<String, Object> errors = new HashMap<>();
 
-        Session session = neo4jDriver.session();
-        Transaction transaction = session.beginTransaction();
+        Session mainSession = neo4jDriver.session();
+        Transaction transaction = mainSession.beginTransaction();
 
         try {
             logger.info(uuid + "    STARTING UPDATE NEO$J STATUS");
             if (!updateNeo4jStatus(topLevelContentId, allContentIds, rootOrg, transaction, uuid, errors).isEmpty()) {
                 logger.error(uuid + "#updateNeo4jStatus FAILED");
+                transaction.failure();
                 transaction.close();
-                session.close();
+                mainSession.close();
                 return errors;
             }
             logger.info(uuid + "    END UPDATE NEO$J STATUS");
@@ -106,8 +106,9 @@ public class ContentPublisherImpl {
             logger.info(uuid + "    STARTING FILE MOVEMENT");
             if (!callContentAPIForFileMovement(rootOrg, org, allContentIds, transaction, uuid, errors).isEmpty()) {
                 logger.error(uuid + "#callContentAPIForFileMovement FAILED");
+                transaction.failure();
                 transaction.close();
-                session.close();
+                mainSession.close();
                 return errors;
             }
             logger.info(uuid + "    END FILE MOVEMENT");
@@ -116,28 +117,41 @@ public class ContentPublisherImpl {
             e.printStackTrace();
             transaction.failure();
             transaction.close();
-            session.close();
+            mainSession.close();
             errors.put("Exception",e);
             return errors;
         }
 
         transaction.success();
         transaction.close();
-        session.close();
+        mainSession.close();
 
         logger.info(uuid + "    STARTING EMAIL");
-        Session session1 = neo4jDriver.session();
+        Session emailSession = neo4jDriver.session();
         try {
-            callEmailService(rootOrg, topLevelContentId, session1, appUrl, uuid);
+            callEmailService(rootOrg, topLevelContentId, emailSession, appUrl, uuid);
         }catch (Exception e){
             logger.error(uuid + "    ERROR IN EMAIL FUNCTION");
             logger.error(uuid + "     "+e);
         }
-        session1.close();
+        emailSession.close();
         logger.info(uuid + "    END EMAIL");
+
+//        logger.info(uuid + "    STARTING SEARCH AUTOCOMPLETE POPULATION");
+//        Session searchAutocompleteSession = neo4jDriver.session();
+//        try {
+//            populateSearchAutocomplete(rootOrg, topLevelContentId, searchAutocompleteSession, uuid);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            logger.error(uuid + "    ERROR IN SEARCH AUTOCOMPLETE POPULATION");
+//            logger.error(uuid + "     "+e);
+//        }
+//        searchAutocompleteSession.close();
+//        logger.info(uuid + "    END SEARCH AUTOCOMPLETE POPULATION");
 
         return errors;
     }
+
 
     @SuppressWarnings("unchecked")
     private Map<String, Object> updateNeo4jStatus(String topLevelContentId, ArrayList<String> allContentIds, String rootOrg, Transaction transaction, UUID uuid, Map<String, Object> errors) {
@@ -278,6 +292,16 @@ public class ContentPublisherImpl {
         logger.info(uuid + "        STEP11");
         neo4JQueryHelpers.deleteNodes(rootOrg, deleteIds, transaction);
         logger.info(uuid + "        STEP12");
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        System.out.println(updateChildrenRequest);
+        System.out.println(updateMetaRequestsImageNodes);
+        System.out.println(updateMetaRequestsOriginalNodes);
+
         try {
             neo4JQueryHelpers.updateNodes(rootOrg, updateMetaRequestsOriginalNodes, transaction);
         } catch (Exception e) {
@@ -312,10 +336,10 @@ public class ContentPublisherImpl {
                 if (!data.isEmpty()) {
                     for (Map<String, Object> datum : data) {
                         if (null != datum.get(ProjectConstants.DURATION) && !datum.get(ProjectConstants.DURATION).equals("null")) {
-                                datum.put(ProjectConstants.DURATION, Long.parseLong(String.valueOf(datum.get(ProjectConstants.DURATION))) + durationDifference);
+                            datum.put(ProjectConstants.DURATION, Long.parseLong(String.valueOf(datum.get(ProjectConstants.DURATION))) + durationDifference);
                         }
                         if (null != datum.get(ProjectConstants.SIZE) && !datum.get(ProjectConstants.SIZE).equals("null")) {
-                                datum.put(ProjectConstants.SIZE, Double.parseDouble(String.valueOf(datum.get(ProjectConstants.SIZE))) + sizeDifference);
+                            datum.put(ProjectConstants.SIZE, Double.parseDouble(String.valueOf(datum.get(ProjectConstants.SIZE))) + sizeDifference);
                         }
                         allContentsUpdateMetaRequest.add(datum);
                     }
@@ -560,4 +584,6 @@ public class ContentPublisherImpl {
             logger.info(uuid + "      " + data);
         }
     }
+
+
 }

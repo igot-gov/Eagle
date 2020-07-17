@@ -1,23 +1,5 @@
-.card-holder {
-  display: flex;
-  flex-wrap: wrap;
-
-  @media only screen and(max-width: 718px) {
-    justify-content: center;
-  }
-}
-
-.title {
-  margin: 0;
-}
-
-.stepper-container {
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
+.cursor-disable {
+  cursor: not-allowed;
 }
 
 .grid {
@@ -26,8 +8,21 @@
   width: 65%;
 }
 
+#curate-container {
+  overflow: auto;
+}
+
+.mobile-r {
+  display: flex;
+  flex-direction: column;
+  // @media only screen and (max-width:960px) {
+  //     flex-direction: column;
+  // }
+}
+
 .margin-left {
   margin-left: 120px;
+
   @media only screen and(max-width: 930px) {
     // margin-top: 24px;
     margin-left: 80px;
@@ -46,6 +41,15 @@
   }
 }
 
+.stepper-container {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
 .stepper-grid {
   display: grid;
   align-items: center;
@@ -60,62 +64,8 @@
   color: #fff;
 }
 
-
-.processing-overlay {
-  position: fixed; /* Sit on top of the page content */
-  display: block; /* Hidden by default */
-  width: 100%; /* Full width (cover the whole page) */
-  height: 100%; /* Full height (cover the whole page) */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9); /* Black background with opacity */
-  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-  cursor: pointer; /* Add a pointer on hover */
-}
-
-.processing {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  color: white;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-}
-
-.select-field {
-  background: white;
-  border-radius: 5px;
-  padding: 6px 16px;
-}
-
-.uploaded {
-  position: absolute;
-  top: 8%;
-  // left: 45%;
-  text-align: center;
-  color: white;
-}
-
-
-.mat-form-field {
-  display: flex;
-  flex-direction: column;
-}
-
-.margin-l-l {
-  margin-left: 32px;
-    @media only screen and(max-width: 585px) {
-    margin-left: 0px;
-  }
-}
-
-.margin-r-l {
-  margin-right: 32px;
-    @media only screen and(max-width: 585px) {
-    margin-left: 0px;
-  }
+ul li {
+  margin: 20px 0;
 }
 
 .op30 {
@@ -126,12 +76,94 @@
   opacity: 1;
 }
 
-.lang-btn{
-  border-radius: .75rem;
-  border:1px solid #cecece;
-
+.fullView {
+  height: 100vh;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
 }
 
-.select-lang{
-  margin-right: 10% !important;
+.close-preview {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  // top: 110px;
+  right: 0px;
+  z-index: 50;
+}
+
+.small-button {
+  height: 32px;
+  width: 32px;
+  transition: 0.5s;
+  margin-right: 4px;
+}
+
+.small-icon {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  transition: 0.5s;
+}
+
+.normal-button {
+  border-radius: 50%;
+  height: 40px;
+  display: flex;
+  width: 40px;
+  z-index: 3;
+  justify-content: center;
+}
+
+.button-grid {
+  display: grid;
+  width: 160px;
+  grid-template-columns: 0.2fr 0.95fr;
+
+  @media only screen and(max-width: 930px) {
+    width: 125px;
+  }
+}
+
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+
+  @media only screen and(max-width: 400px) {
+    margin: 0;
+    margin-left: 20px;
+  }
+}
+
+.button-text {
+  align-self: center;
+  padding-top: 17px;
+  padding-left: 4px;
+  font-weight: 600;
+}
+
+.margin-right-xxs {
+  margin-right: 4px;
+}
+
+.flex-3 {
+  flex: 3;
 }

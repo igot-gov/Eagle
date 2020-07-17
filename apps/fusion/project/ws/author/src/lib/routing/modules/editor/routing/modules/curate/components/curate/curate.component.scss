@@ -10,6 +10,13 @@
 #curate-container {
   overflow: auto;
 }
+.mobile-r{
+  display: flex;
+  flex-direction: column;
+  // @media only screen and (max-width:960px) {
+  //     flex-direction: column;
+  // }
+}
 
 .margin-left {
   margin-left: 120px;
@@ -91,7 +98,7 @@ ul li {
   flex-direction: column;
   align-items: flex-end;
   position: absolute;
-  top: 110px;
+  // top: 110px;
   right: 0px;
   z-index: 50;
 }
@@ -127,12 +134,23 @@ ul li {
   display: grid;
   width: 160px;
   grid-template-columns: 0.2fr 0.95fr;
+  @media only screen and(max-width: 930px) {
+    width: 125px;
+  }
 }
-
+.margin-auto{
+  margin-left: auto;
+  margin-right: auto;
+  @media only screen and(max-width: 400px) {
+    margin: 0;
+    margin-left: 20px;
+  }
+}
 .button-text {
   align-self: center;
   padding-top: 17px;
   padding-left: 4px;
+  font-weight: 600;
 }
 
 .margin-right-xxs {

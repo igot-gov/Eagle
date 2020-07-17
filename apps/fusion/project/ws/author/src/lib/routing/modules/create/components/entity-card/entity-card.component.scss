@@ -6,11 +6,19 @@ $small-badge-size: 50px;
 $badge-padding: 12px;
 
 .card-container {
-  display: inline-block;
-  position: relative;
-  width: 330px;
-  margin: 25px 25px;
-  cursor: pointer;
+  // display: inline-block;
+  // position: relative;
+  // width: 330px;
+  // margin: 25px 25px;
+  // cursor: pointer;
+  display: flex;
+  width: 250px;
+  min-height: 249px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border-radius: 8px;
+  opacity: 1;
+  margin: 15px;
 
   @media only screen and (max-width: 1239px) {
     width: 300px;
@@ -23,6 +31,7 @@ $badge-padding: 12px;
   @media only screen and (max-width: 735px) {
     width: 260px;
   }
+
   @media only screen and(max-width: 718px) {
     width: 330px;
   }
@@ -54,18 +63,33 @@ $badge-padding: 12px;
   }
 }
 
+.title-div {
+  flex-direction: column-reverse;
+  margin-bottom: $size-s;
+
+  span {
+    font-size: 25px;
+    line-height: 30px;
+  }
+}
+
 .badge-data {
   margin-top: 5px;
-  margin-left: 16px;
+  margin-left: $size-m;
 }
 
 .mat-card {
   padding: 0;
+  border-radius: 8px;
 }
 
 .entity-container {
   display: flex;
-  padding: 16px 16px $size-s 16px;
+  flex-direction: column;
+  padding: $size-m 0 $size-s 0;
+  background: rgba(250, 209, 175, 0.2) 0% 0% no-repeat padding-box;
+  border-radius: inherit;
+  cursor: pointer;
 }
 
 .hover-text {
