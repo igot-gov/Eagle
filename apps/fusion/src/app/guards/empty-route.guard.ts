@@ -5,15 +5,21 @@ import {
   RouterStateSnapshot,
   UrlTree,
   Router,
+  ActivatedRoute,
 } from '@angular/router'
 import { Observable } from 'rxjs'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, AuthKeycloakService } from '@ws-widget/utils'
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmptyRouteGuard implements CanActivate {
-  constructor(private router: Router, private configSvc: ConfigurationsService) {}
+  constructor(
+    private router: Router,
+    private configSvc: ConfigurationsService,
+    private authSvc: AuthKeycloakService,
+    private activateRoute: ActivatedRoute
+  ) {}
   canActivate(
     _next: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
@@ -23,6 +29,14 @@ export class EmptyRouteGuard implements CanActivate {
       return this.router.parseUrl('/page/home')
     }
     // logger.log('redirecting to login page as the user is not loggedIn');
-    return this.router.parseUrl('/login')
+    // return this.router.parseUrl('/login')
+    const paramsMap = this.activateRoute.snapshot.queryParamMap
+    let redirectUrl
+    if (paramsMap.has('ref')) {
+      redirectUrl = document.baseURI + paramsMap.get('ref')
+    } else {
+      redirectUrl = document.baseURI
+    }
+    return !!Promise.resolve(this.authSvc.login('S', redirectUrl))
   }
 }

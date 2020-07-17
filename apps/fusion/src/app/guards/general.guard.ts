@@ -6,13 +6,17 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { ConfigurationsService } from '../../../library/ws-widget/utils/src/public-api'
+import { ConfigurationsService, AuthKeycloakService } from '../../../library/ws-widget/utils/src/public-api'
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeneralGuard implements CanActivate {
-  constructor(private router: Router, private configSvc: ConfigurationsService) { }
+  constructor(
+    private router: Router,
+    private configSvc: ConfigurationsService,
+    private authSvc: AuthKeycloakService
+  ) { }
 
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -36,8 +40,16 @@ export class GeneralGuard implements CanActivate {
       if (state.url) {
         refAppend = `?ref=${encodeURIComponent(state.url)}`
       }
+      // return this.router.parseUrl(`/login${refAppend}`)
 
-      return this.router.parseUrl(`/login${refAppend}`)
+      let redirectUrl
+      if (refAppend) {
+        redirectUrl = document.baseURI + refAppend
+      } else {
+        redirectUrl = document.baseURI
+      }
+      return !!Promise.resolve(this.authSvc.login('S', redirectUrl))
+
     }
     // If invalid user
     if (
