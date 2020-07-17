@@ -405,7 +405,7 @@
       "status": "live",
       "toolTip": "Publish",
       "shortName": "Publish",
-      "url": "/author/home"
+      "url": "/author/my-content?status=publish"
     },
     "feature_review": {
       "accessKey": "",
@@ -427,7 +427,7 @@
       "status": "live",
       "toolTip": "Review",
       "shortName": "Review",
-      "url": "/author/home"
+      "url": "/author/my-content?status=review"
     },
     "feature_search": {
       "accessKey": "",
