@@ -95,7 +95,7 @@ export class UserBulkUploadComponent implements OnInit {
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 5000) {
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }

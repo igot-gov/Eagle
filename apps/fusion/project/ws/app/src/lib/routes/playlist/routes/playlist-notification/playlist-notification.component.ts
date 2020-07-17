@@ -58,7 +58,7 @@ export class PlaylistNotificationComponent implements OnInit {
       },
       () => {
         this.acceptRejectPlaylistStatus[playlistId] = 'error'
-        this.snackBar.open(this.errorAcceptMessage.nativeElement.value)
+        this.snackBar.open(this.errorAcceptMessage.nativeElement.value, 'X')
       },
     )
   }
@@ -72,7 +72,7 @@ export class PlaylistNotificationComponent implements OnInit {
       },
       () => {
         this.acceptRejectPlaylistStatus[playlistId] = 'error'
-        this.snackBar.open(this.errorRejectMessage.nativeElement.value)
+        this.snackBar.open(this.errorRejectMessage.nativeElement.value, 'X')
       },
     )
   }

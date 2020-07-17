@@ -64,7 +64,7 @@ export class ActivitiesComponent implements OnInit {
         }
       }).catch(() => {
         this.showActivities = false
-        this.snackBar.open('Failed to load activities')
+        this.snackBar.open('Failed to load activities', 'X')
       })
     }
   }

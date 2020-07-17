@@ -49,7 +49,7 @@ export class DbmsBestPracticeComponent implements OnInit {
     this.initialLoading = true
     this.loadedTables = []
     this.dbmsSvc.initializeDatabase(this.resourceContent.content.identifier).subscribe(
-      (res: { forEach: (arg0: (v: any, i: any) => void) => void; }) => {
+      (res: { forEach: (arg0: (v: any, i: any) => void) => void }) => {
         res.forEach((v, i) => {
           if (v.validationStatus && i > 0) {
             const parsedData = JSON.parse(v.data)
@@ -71,12 +71,12 @@ export class DbmsBestPracticeComponent implements OnInit {
           },
         )
         if (flag) {
-          this.snackBar.open((this.dbRefreshSuccess ? this.dbRefreshSuccess.nativeElement.value : ''))
+          this.snackBar.open((this.dbRefreshSuccess ? this.dbRefreshSuccess.nativeElement.value : ''), 'X')
         }
         this.initialLoading = false
       },
       (_err: any) => {
-        this.snackBar.open((this.dbRefreshSuccess ? this.dbRefreshSuccess.nativeElement.value : ''))
+        this.snackBar.open((this.dbRefreshSuccess ? this.dbRefreshSuccess.nativeElement.value : ''), 'X')
         this.initialLoading = false
       })
   }
@@ -91,7 +91,7 @@ export class DbmsBestPracticeComponent implements OnInit {
   }
 
   fetchDropdownData() {
-    this.dbmsSvc.fetchConceptData(this.resourceContent.content.identifier).subscribe((res: { data: string; }) => {
+    this.dbmsSvc.fetchConceptData(this.resourceContent.content.identifier).subscribe((res: { data: string }) => {
       this.dropdownData = JSON.parse(res.data)
     })
   }

@@ -159,7 +159,7 @@ export class HtmlComponent implements OnInit, OnChanges {
         )
         if (isWindowOpen === null) {
           const msg = 'The pop up window has been blocked by your browser, please unblock to continue.'
-          this.snackBar.open(msg)
+          this.snackBar.open(msg, 'X')
         }
       }
     }

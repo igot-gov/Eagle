@@ -47,7 +47,7 @@ export class RegisteredUsersComponent implements OnInit {
       this.selectedUsers.clear()
       this.listAllUsers(source)
     }).catch(() => {
-      this.snackBar.open('There was some error!')
+      this.snackBar.open('There was some error!', 'X')
       this.fetchingStatus = 'fetched'
     })
   }

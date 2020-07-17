@@ -128,7 +128,7 @@ export class PostViewComponent implements OnInit {
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
         this.router.navigate(['app', 'social', 'forums', 'my-forum-post'])
-        this.snackBar.open(successMsg)
+        this.snackBar.open(successMsg, 'X')
       }
     })
   }
@@ -162,7 +162,7 @@ export class PostViewComponent implements OnInit {
         this.commentText = ''
       },
       (_err: any) => {
-        this.snackBar.open(failureMsg)
+        this.snackBar.open(failureMsg, 'X')
         this.postingReply = false
       },
     )

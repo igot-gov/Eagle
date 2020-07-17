@@ -69,7 +69,7 @@ export class DiscussionPostComponent implements OnInit {
         }
       },
       () => {
-        this.snackBar.open(failMsg)
+        this.snackBar.open(failMsg, 'X')
       },
     )
   }
@@ -97,7 +97,7 @@ export class DiscussionPostComponent implements OnInit {
       },
       () => {
         this.editMode = true
-        this.snackBar.open(failMsg)
+        this.snackBar.open(failMsg, 'X')
       },
     )
   }
@@ -130,7 +130,7 @@ export class DiscussionPostComponent implements OnInit {
         this.replyBody = undefined
       },
       () => {
-        this.snackBar.open(failureMsg)
+        this.snackBar.open(failureMsg, 'X')
         this.isPostingReply = false
       },
     )

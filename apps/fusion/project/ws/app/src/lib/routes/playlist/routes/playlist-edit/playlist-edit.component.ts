@@ -89,7 +89,7 @@ export class PlaylistEditComponent implements OnInit {
       this.playlist.name = formValues.title
       this.playlistSvc.patchPlaylist(this.playlist, Array.from(this.changedContentIds)).subscribe(() => {
         // if (!this.changedContentIds.size) {
-        this.snackBar.open(this.editPlaylistSuccess.nativeElement.value)
+        this.snackBar.open(this.editPlaylistSuccess.nativeElement.value, 'X')
         this.router.navigate([this.router.url.replace('/edit', '')])
 
         // }

@@ -147,10 +147,10 @@ export class RolesManagementDetailComponent implements OnInit {
           this.removeSource = new MatTableDataSource(this.removeTable)
           this.addUserId = []
         }).catch(
-        () => {
-          this.snackBar.open('Error occurred', undefined, { duration: 1000 })
-        }
-      )
+          () => {
+            this.snackBar.open('Error occurred', 'X', { duration: 1000 })
+          }
+        )
     }
 
   }
@@ -178,7 +178,7 @@ export class RolesManagementDetailComponent implements OnInit {
           this.removeUserId = []
         }
       ).catch(() => {
-        this.snackBar.open('Error occurred', undefined, { duration: 1000 })
+        this.snackBar.open('Error occurred', 'X', { duration: 1000 })
       })
     }
   }

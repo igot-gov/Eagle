@@ -138,7 +138,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
           },
           _err => {
             this.deletePlaylistStatus = 'error'
-            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value)
+            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value, 'X')
           },
         )
       }
@@ -240,7 +240,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
             )
           }
         })
-      },                                                         _err => {
+      }, _err => {
         this.contentSvc.fetchContent(playlist.contents[0].identifier).subscribe(response => {
           if (response) {
             const firstPlayableContent = this.contentSvc.getFirstChildInHierarchy(response)

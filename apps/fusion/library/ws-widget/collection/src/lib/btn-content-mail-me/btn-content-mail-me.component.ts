@@ -111,10 +111,10 @@ export class BtnContentMailMeComponent extends WidgetBaseComponent
       .subscribe((res: IMailMeResponseObj) => {
         switch (res.res) {
           case TMailMeResponse.SUCCESS:
-            this.snackBar.open(res.successToast)
+            this.snackBar.open(res.successToast, 'X')
             break
           case TMailMeResponse.ERROR:
-            this.snackBar.open(res.errorToast)
+            this.snackBar.open(res.errorToast, 'X')
             break
         }
       })

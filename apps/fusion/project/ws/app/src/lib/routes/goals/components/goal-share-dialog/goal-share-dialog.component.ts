@@ -80,7 +80,7 @@ export class GoalShareDialogComponent implements OnInit {
                 this.shareWithEmailIds.length || response.already_shared.length ===
                 this.shareWithEmailIds.length || response.invalid_users.length === this.shareWithEmailIds.length)
             ) {
-              this.snackBar.open(this.allInvalidIdsMessage.nativeElement.value)
+              this.snackBar.open(this.allInvalidIdsMessage.nativeElement.value, 'X')
             } else if (
               this.showPartiallySharedMessage &&
               (response.unauthorized_users.length !==
@@ -88,17 +88,17 @@ export class GoalShareDialogComponent implements OnInit {
                 this.shareWithEmailIds.length || response.invalid_users.length !== this.shareWithEmailIds.length)
             ) {
               this.snackBar.open(
-                this.sharedPartiallyMessage.nativeElement.value,
+                this.sharedPartiallyMessage.nativeElement.value, 'X'
               )
             } else {
-              this.snackBar.open(this.successShareMessage.nativeElement.value)
+              this.snackBar.open(this.successShareMessage.nativeElement.value, 'X')
               this.dialogRef.close(true)
             }
             this.shareWithEmailIds = []
           },
 
           () => {
-            this.snackBar.open(this.errorShareMessage.nativeElement.value)
+            this.snackBar.open(this.errorShareMessage.nativeElement.value, 'X')
             this.shareGoalStatus = 'error'
           },
         )

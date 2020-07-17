@@ -37,7 +37,7 @@ export class BtnSocialVoteComponent implements OnInit {
 
   upVote(invalidUserMsg: string) {
     if (this.postCreatorId === this.userId) {
-      this.snackBar.open(invalidUserMsg)
+      this.snackBar.open(invalidUserMsg, 'X')
       return
     }
     if (this.activity && this.activity.userActivity.upVote) {
@@ -71,7 +71,7 @@ export class BtnSocialVoteComponent implements OnInit {
 
   downVote(invalidUserMsg: string) {
     if (this.postCreatorId === this.userId) {
-      this.snackBar.open(invalidUserMsg)
+      this.snackBar.open(invalidUserMsg, 'X')
       return
     }
     if (this.activity && this.activity.userActivity.downVote) {

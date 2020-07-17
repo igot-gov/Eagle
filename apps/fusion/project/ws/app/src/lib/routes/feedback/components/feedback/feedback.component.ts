@@ -127,7 +127,7 @@ export class FeedbackComponent implements OnInit, OnDestroy {
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 3000) {
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }

@@ -79,7 +79,7 @@ export class BadgesComponent implements OnInit {
           (data: IBadgeResponse) => {
             this.badges = data
             this.isUpdating = false
-            this.snackBar.open('Badges Refreshed')
+            this.snackBar.open('Badges Refreshed', 'X')
           },
           (err: string) => {
             this.logger.log(err)

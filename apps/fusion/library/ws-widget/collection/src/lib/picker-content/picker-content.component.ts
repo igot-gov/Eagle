@@ -176,7 +176,7 @@ export class PickerContentComponent extends WidgetBaseComponent
                   checked: false,
                   content: contentMeta ? contentMeta : { identifier },
                 })
-                this.snackBar.open(response.goal_message[0])
+                this.snackBar.open(response.goal_message[0], 'X')
               }
               this.suggestedDurationChange.emit(response.suggested_time)
               this.selectedContentIds = new Set(response.resource_list)

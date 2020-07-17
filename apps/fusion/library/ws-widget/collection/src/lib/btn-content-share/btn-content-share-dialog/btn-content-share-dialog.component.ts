@@ -65,7 +65,7 @@ export class BtnContentShareDialogComponent implements OnInit {
       data => {
         this.sendInProgress = false
         if (!data.invalidIds || data.invalidIds.length === 0) {
-          this.snackBar.open(successToast)
+          this.snackBar.open(successToast, 'X')
           this.dialogRef.close()
         }
         if (Array.isArray(data.invalidIds) && data.invalidIds.length > 0) {
@@ -77,7 +77,7 @@ export class BtnContentShareDialogComponent implements OnInit {
             this.sendStatus = 'INVALID_IDS_ALL'
           } else {
             this.sendStatus = 'INVALID_ID_SOME'
-            this.snackBar.open(successToast)
+            this.snackBar.open(successToast, 'X')
           }
         }
       },
@@ -109,7 +109,7 @@ export class BtnContentShareDialogComponent implements OnInit {
     }
     this.shareSvc.contentShareNew(req).subscribe(
       _ => {
-        this.snackBar.open(successToast)
+        this.snackBar.open(successToast, 'X')
         this.sendInProgress = false
         this.dialogRef.close()
       },
