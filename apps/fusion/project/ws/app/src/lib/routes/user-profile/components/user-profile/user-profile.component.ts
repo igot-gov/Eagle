@@ -2,11 +2,14 @@ import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef 
 import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { Subscription, Observable } from 'rxjs'
-import { MatSnackBar, MatChipInputEvent, DateAdapter, MAT_DATE_FORMATS } from '@angular/material'
+import { startWith, map, debounceTime, distinctUntilChanged } from 'rxjs/operators'
+import { MatSnackBar, MatChipInputEvent, DateAdapter, MAT_DATE_FORMATS, MatDialog } from '@angular/material'
+import { AppDateAdapter, APP_DATE_FORMATS, changeformat } from '../../services/format-datepicker'
+import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
+import { IMAGE_MAX_SIZE, IMAGE_SUPPORT_TYPES } from '@ws/author/src/lib/constants/upload'
 import { UserProfileService } from '../../services/user-profile.service'
 import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { Router } from '@angular/router'
-import { startWith, map, debounceTime, distinctUntilChanged } from 'rxjs/operators'
 import {
   INationality,
   ILanguages,
@@ -19,7 +22,10 @@ import {
   IdesignationsMeta,
 } from '../../models/user-profile.model'
 import { NsUserProfileDetails } from '@ws/app/src/lib/routes/user-profile/models/NsUserProfile'
-import { AppDateAdapter, APP_DATE_FORMATS, changeformat } from '../../services/format-datepicker'
+import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
+import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
+import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
+import { LoaderService } from '@ws/author/src/public-api'
 
 @Component({
   selector: 'ws-app-user-profile',
@@ -51,6 +57,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   eMaritalStatus = NsUserProfileDetails.EMaritalStatus
   eCategory = NsUserProfileDetails.ECategory
   userProfileFields!: NsUserProfileDetails.IUserProfileFields
+  imageTypes = IMAGE_SUPPORT_TYPES
   today = new Date()
   phoneNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$'
   pincodePattern = '(^[0-9]{6}$)'
@@ -73,6 +80,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showDesignationOther!: boolean
   showOrgnameOther!: boolean
   showIndustryOther!: boolean
+  photoUrl!: string | ArrayBuffer | null
 
   constructor(
     private snackBar: MatSnackBar,
@@ -80,12 +88,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private router: Router,
     private fb: FormBuilder,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    public dialog: MatDialog,
+    private loader: LoaderService,
   ) {
     this.createUserForm = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
       middlename: new FormControl('', []),
       surname: new FormControl('', [Validators.required]),
+      photo: new FormControl('', []),
       countryCode: new FormControl('', [Validators.required]),
       mobile: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumberPattern)]),
       telephone: new FormControl('', []),
@@ -567,6 +578,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       firstname: data.personalDetails.firstname,
       middlename: data.personalDetails.middlename,
       surname: data.personalDetails.surname,
+      photo: data.photo,
       dob: this.getDateFromText(data.personalDetails.dob),
       nationality: data.personalDetails.nationality,
       domicileMedium: data.personalDetails.domicileMedium,
@@ -611,6 +623,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.cd.detectChanges()
     this.cd.markForCheck()
     this.setDropDownOther(organisation)
+    this.setProfilePhotoValue(data)
+  }
+
+  setProfilePhotoValue(data: any) {
+    this.photoUrl = data.photo || undefined
   }
 
   setDropDownOther(organisation?: any) {
@@ -640,6 +657,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private constructReq(form: any) {
     const profileReq = {
+      photo: form.value.photo,
       personalDetails: {
         firstname: form.value.firstname,
         middlename: form.value.middlename,
@@ -794,7 +812,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     // Construct the request structure for open saber
     const profileRequest = this.constructReq(form)
-
     this.userProfileSvc.updateProfileDetails(profileRequest).subscribe(
       () => {
         form.reset()
@@ -875,5 +892,68 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.showDesignationOther = false
       this.createUserForm.controls['designationOther'].setValue('')
     }
+  }
+
+  uploadProfileImg(file: File) {
+    const formdata = new FormData()
+    const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
+    if (
+      !(
+        IMAGE_SUPPORT_TYPES.indexOf(
+          `.${fileName
+            .toLowerCase()
+            .split('.')
+            .pop()}`,
+        ) > -1
+      )
+    ) {
+      this.snackBar.openFromComponent(NotificationComponent, {
+        data: {
+          type: Notify.INVALID_FORMAT,
+        },
+        duration: NOTIFICATION_TIME * 1000,
+      })
+      return
+    }
+
+    if (file.size > IMAGE_MAX_SIZE) {
+      this.snackBar.openFromComponent(NotificationComponent, {
+        data: {
+          type: Notify.SIZE_ERROR,
+        },
+        duration: NOTIFICATION_TIME * 1000,
+      })
+      return
+    }
+
+    const dialogRef = this.dialog.open(ImageCropComponent, {
+      width: '70%',
+      data: {
+        isRoundCrop: true,
+        imageFile: file,
+        width: 265,
+        height: 150,
+        isThumbnail: true,
+        imageFileName: fileName,
+      },
+    })
+
+    dialogRef.afterClosed().subscribe({
+      next: (result: File) => {
+        if (result) {
+          formdata.append('content', result, fileName)
+          this.loader.changeLoad.next(true)
+          const reader = new FileReader()
+          reader.readAsDataURL(result)
+          reader.onload = _event => {
+            this.photoUrl = reader.result
+            if (this.createUserForm.get('photo') !== undefined) {
+              // tslint:disable-next-line: no-non-null-assertion
+              this.createUserForm.get('photo')!.setValue(this.photoUrl)
+            }
+          }
+        }
+      },
+    })
   }
 }

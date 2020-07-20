@@ -375,6 +375,13 @@ input.mat-input-element {
   background: #D9F2FE 0% 0% no-repeat padding-box;
   border: 2px solid #FFFFFF;
   position: relative;
+
+  .photo {
+    object-fit: cover;
+    border-radius: 50%;
+    height: inherit;
+    width: 100%;
+  }
   
   mat-icon.person {
     color: #00A9F4;
@@ -394,6 +401,7 @@ input.mat-input-element {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     mat-icon.camera {
       color: #fff;
       font-size: 11px;
