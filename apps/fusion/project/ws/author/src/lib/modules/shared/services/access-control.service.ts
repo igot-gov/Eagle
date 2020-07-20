@@ -13,7 +13,7 @@ export class AccessControlService {
   constructor(
     private configService: ConfigurationsService,
     @Inject(APP_BASE_HREF) private baseHref: string,
-  ) {}
+  ) { }
 
   hasRole(role: string[]): boolean {
     let returnValue = false
@@ -52,11 +52,11 @@ export class AccessControlService {
   }
 
   get org(): string {
-    return this.configService.activeOrg || 'Infosys Ltd'
+    return this.configService.activeOrg || 'DOPT Ltd'
   }
 
   get rootOrg(): string {
-    return this.configService.rootOrg || 'Infosys'
+    return this.configService.rootOrg || 'dopt'
   }
 
   get orgRootOrgAsQuery(): string {

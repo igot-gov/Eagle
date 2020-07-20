@@ -9,10 +9,10 @@
     <span class="ml-2">{{ tabName }}</span>
   </span>
   <span class="spacer"></span>
-  <button (click)="logout()" mat-button>
+  <!-- <button (click)="logout()" mat-button>
     <mat-icon>power_settings_new</mat-icon>&nbsp;
     <span i18n>Logout</span>
-  </button>
+  </button> -->
 </mat-toolbar>
 
 <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
@@ -27,7 +27,7 @@
       </a>
       <a mat-list-item *ngIf="enabledTabs?.learning?.enabled" routerLinkActive="mat-toolbar"
         (click)="tabUpdate(enabledTabs?.learning?.displayName); screenSizeIsLtMedium ? sideNavBar.toggle() : null"
-        routerLink="/app/profile/learning/history" matTooltip="{{enabledTabs?.learning?.displayName}}">
+        routerLink="/app/profile/learning/time" matTooltip="{{enabledTabs?.learning?.displayName}}">
         <mat-icon>history</mat-icon>
         <span *ngIf="showText || screenSizeIsLtMedium"
           class="padding-left-s">{{enabledTabs?.learning?.displayName}}</span>

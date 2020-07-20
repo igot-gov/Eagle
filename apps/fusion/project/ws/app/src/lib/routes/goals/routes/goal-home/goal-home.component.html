@@ -6,10 +6,8 @@
   <div class="banner-container">
     <div class="banner-overlay ws-primary-tinted-50">
       <div class="page-container mt-8">
-        <a name="pending-actions-button-goal-home"  routerLink="/app/goals/me/pending-actions" *ngIf="numNotifications">
-          <mat-card
-            class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-m"
-          >
+        <a name="pending-actions-button-goal-home" routerLink="/app/goals/me/pending-actions" *ngIf="numNotifications">
+          <mat-card class="flex flex-middle padding-remove padding-top-s padding-bottom-s margin-bottom-m">
             <mat-icon color="primary" class="margin-left-s">notifications</mat-icon>
             <p class="margin-left-xs margin-remove-bottom" i18n>
               Accept or Reject goals shared with you!
@@ -26,16 +24,14 @@
         <p>
           <mat-button-toggle-group (change)="goalToggle($event?.value)" [value]="goalFor">
             <mat-button-toggle value="me" i18n>My goals</mat-button-toggle>
-            <mat-button-toggle value="others" i18n *ngIf="isShareEnabled"
-              >For others</mat-button-toggle
-            >
+            <mat-button-toggle value="others" i18n *ngIf="isShareEnabled">For others</mat-button-toggle>
           </mat-button-toggle-group>
         </p>
       </div>
     </div>
     <div class="create-goal-fab width-1-1">
       <div class="page-container flex flex-row-reverse">
-        <a name="create-goal-link-goal-home"  routerLink="/app/goals/create" mat-fab>
+        <a name="create-goal-link-goal-home" routerLink="/app/goals/create" mat-fab>
           <mat-icon>add</mat-icon>
         </a>
       </div>

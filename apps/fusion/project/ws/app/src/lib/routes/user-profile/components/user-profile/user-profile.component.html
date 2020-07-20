@@ -1,0 +1,231 @@
+<div class="text-center signup-container margin-xl">
+  <h2 class="mat-title" i18n="section heading create new goal">
+    Profile Details
+  </h2>
+  <form class="example-form" [formGroup]="createUserForm">
+    <div class="flex flex-wrap">
+      <div class="w-full sm:w-1/2">
+        <div class="px-2">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput placeholder="First Name" formControlName="firstname">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Middle Name</mat-label>
+            <input type="text" matInput placeholder="Middle Name" formControlName="middlename">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Surname</mat-label>
+            <input type="text" matInput placeholder="Surname" formControlName="surname">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Mobile Number</mat-label>
+            <input type="number" matInput placeholder="Mobile Number" formControlName="mobile"
+              [pattern]="phoneNumberPattern">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Telephone Number</mat-label>
+            <input type="number" matInput placeholder="Telephone Number" formControlName="telephone">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Primary Email</mat-label>
+            <input type="primaryEmail" matInput placeholder="Primary Email" formControlName="primaryEmail" readonly>
+          </mat-form-field>
+          <div class="pb-8 flex flex-wrap flex-align">
+            <mat-label class="w-full flex  flex-align">Primary Email Type</mat-label>
+            <mat-radio-group matInput aria-label="Primary Email Type" formControlName="primaryEmailType">
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EPrimaryEmailType.PERSONAL">
+                  Personal Email
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EPrimaryEmailType.OFFICIAL">
+                  Official Email
+                </mat-radio-button>
+              </span>
+            </mat-radio-group>
+          </div>
+          <div class="flex">
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label>Secondary Email</mat-label>
+              <input type="email" matInput placeholder="Secondary Email" formControlName="secondaryEmail">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+      <div class="w-full sm:w-1/2">
+        <div class="px-2">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nationality</mat-label>
+            <input matInput type="text" placeholder="Nationality" i18n-placeholder="Nationality"
+              formControlName="nationality" [matAutocomplete]="nationalityAutocomplete" i18n-aria-label
+              aria-label="Nationality" #nationality />
+          </mat-form-field>
+          <mat-autocomplete #nationalityAutocomplete="matAutocomplete">
+            <mat-option *ngFor="let option of masterNationality | async" [value]="option.name">{{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Date Of Birth (yyyy-mm-dd)</mat-label>
+            <input matInput formControlName="dob" [matDatepicker]="picker" i18n-placeholder
+              placeholder="Choose Date Of Birth (yyyy-mm-dd)" [max]="today">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <div class="pb-4 flex flex-wrap flex-align">
+            <mat-label class="w-full flex  flex-align">Gender</mat-label>
+            <mat-radio-group matInput aria-label="Select an option" formControlName="gender">
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EUserGender.MALE">
+                  Male
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EUserGender.FEMALE">
+                  Female
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EUserGender.OTHER">
+                  Others
+                </mat-radio-button>
+              </span>
+            </mat-radio-group>
+          </div>
+          <div class="pt-4 pb-8 flex flex-wrap flex-align">
+            <mat-label class="w-full flex  flex-align">Marital Status</mat-label>
+            <mat-radio-group matInput aria-label="Select an option" formControlName="maritalStatus">
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EMaritalStatus.SINGLE">
+                  Single
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="EMaritalStatus.MARRIED">
+                  Married
+                </mat-radio-button>
+              </span>
+            </mat-radio-group>
+          </div>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Domicile Medium (Mother Tongue)</mat-label>
+            <input matInput type="text" placeholder="Mother Tongue" i18n-placeholder="Mother Tongue"
+              formControlName="motherTongue" [matAutocomplete]="motherTongueAuto" i18n-aria-label
+              aria-label="Mother Tongue" #motherTongue />
+            <!-- <mat-select matInput matNativeControl formControlName="motherTongue" i18n-placeholder placeholder="--Select--">
+              <mat-option [value]="'Indian'">English</mat-option>
+              <mat-option [value]="'NRI'">Hindi</mat-option>
+              <mat-option [value]="'NRI'">Kannada</mat-option>
+            </mat-select> -->
+          </mat-form-field>
+          <mat-autocomplete #motherTongueAuto="matAutocomplete">
+            <mat-option *ngFor="let option of masterLanguages | async" [value]="option.name">{{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Other Languages Known</mat-label>
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let lang of selectedKnowLangs" [selectable]="true" [removable]="true"
+                (removed)="removeKnowLanguage(lang)">
+                {{ lang }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+              <input matInput i18n-placeholder="Known Languages" placeholder="Known Languages"
+                formControlName="knownLanguages" i18n-aria-label aria-label="Known Languages"
+                [matChipInputAddOnBlur]="false" [matAutocomplete]="knownLanguagesAuto" #knownLanguagesInput
+                [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                (matChipInputTokenEnd)="add($event)" />
+            </mat-chip-list>
+            <!-- <input matInput type="text" placeholder="known Languages" i18n-placeholder="known Languages" formControlName="knownLanguages"
+            [matAutocomplete]="knownLanguagesAuto" i18n-aria-label aria-label="known Languages" #knownLanguages /> -->
+          </mat-form-field>
+          <mat-autocomplete #knownLanguagesAuto="matAutocomplete" (optionSelected)="selectKnowLanguage($event)">
+            <mat-option *ngFor="let option of masterKnownLanguages | async" [value]="option.name">
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
+
+
+          <div class="pb-8 flex flex-wrap flex-align">
+            <mat-label class="w-full flex  flex-align">Category</mat-label>
+            <mat-radio-group matInput aria-label="Select an option" formControlName="category">
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="ECategory.GENERAL">
+                  General
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="ECategory.OBC">
+                  OBC
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="ECategory.SC">
+                  SC
+                </mat-radio-button>
+              </span>
+              <span class="mx-2">
+                <mat-radio-button matInput class="my-1" [value]="ECategory.ST">
+                  ST
+                </mat-radio-button>
+              </span>
+            </mat-radio-group>
+          </div>
+
+          <div class="mat-body">
+            <mat-form-field class="w-full">
+              <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
+                formControlName="residenceAddress" placeholder="Type Your Residence Address Here"
+                i18n-placeholder></textarea>
+              <mat-hint i18n>
+                Limit to 200 characters.
+              </mat-hint>
+              <mat-error i18n>
+                You have exceeded 200 characters.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 
+    <div class="margin-top-xs">
+      <p class="font-weight-bold margin-remove-bottom" i18n="Title label|Label which explains the user to enter title">
+        First Name
+      </p>
+      <mat-form-field appearance="outline" class="w-full">
+        <input type="text" matInput placeholder="First name" formControlName="firstname">
+      </mat-form-field>
+    </div> -->
+
+    <div class="border"></div>
+
+    <div class="mt-4 pb-2 flex justify-end">
+      <!-- <div class="center flex items-center"> -->
+      <div *ngIf="uploadSaveData" class="pr-4 flex items-center justify-center">
+        <mat-spinner [diameter]="30"></mat-spinner>
+      </div>
+      <button mat-raised-button color="primary" class="margin-right-10" type="submit" i18n (click)="navigateBack()">
+
+        <ng-container i18n>Cancel</ng-container>
+      </button>
+      <button mat-raised-button color="primary" type="submit" i18n [disabled]="uploadSaveData || !createUserForm?.valid"
+        (click)="onSubmit(createUserForm)">
+
+        <ng-container i18n>Save</ng-container>
+      </button>
+      <!-- <button type="reset" (click)="onReset()" class="pl-4 mat-button">Cancel</button> -->
+    </div>
+  </form>
+</div>
+
+<input type="hidden" i18-value i18-aria-value aria-value="User profile details update successful"
+  value="User profile details updated successfully!" #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="unable to update user profile details"
+  value="Error in saving profile details!" #toastError />

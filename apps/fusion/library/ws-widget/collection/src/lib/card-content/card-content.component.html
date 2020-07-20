@@ -340,139 +340,100 @@
 </ng-template>
 
 <ng-template #cardStandard>
-  <mat-card
-    [attr.name]="'widget-card-content ' + widgetData.content.name"
-    class="card-standard-container mr-6"
-    [ngClass]="{
+  <mat-card class="card-standard-container mr-6" [ngClass]="{
       greyOut:
         widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
           ? true
           : widgetData?.intranetMode === 'greyOut' && showIntranetContent
-    }"
-    (click)="(showIntranetContent || !isLiveOrMarkForDeletion) && showSnackbar()"
-  >
-    <div
-      class="display-contents"
-      [ngClass]="{
+    }" (click)="(showIntranetContent || !isLiveOrMarkForDeletion) && showSnackbar()">
+    <!-- <ws-widget-content-progress
+      class="progress-bar"
+      *ngIf="widgetData.content?.identifier"
+      [contentId]="widgetData.content?.identifier"
+    ></ws-widget-content-progress> -->
+    <div class="display-contents" [ngClass]="{
         disableClick:
           widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
             ? true
             : widgetData?.intranetMode === 'greyOut' && showIntranetContent
-      }"
-    >
+      }">
       <ng-container *ngIf="!isCardFlipped">
-        <div
-          class="status-danger"
-          role="note"
-          i18n-aria-label
-          aria-label="Content expired or deleted"
-          i18n-matTooltip
-          matTooltip="Content may be expired or deleted"
-          *ngIf="!isLiveOrMarkForDeletion"
-        ></div>
-        <div
-          class="status-danger"
-          role="note"
-          i18n-aria-label
-          aria-label="Intranet content"
-          i18n-matTooltip
+        <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted" i18n-matTooltip
+          matTooltip="Content may be expired or deleted" *ngIf="!isLiveOrMarkForDeletion"></div>
+        <div class="status-danger" role="note" i18n-aria-label aria-label="Intranet content" i18n-matTooltip
           matTooltip="Available only in Company's network"
-          *ngIf="widgetData?.intranetMode === 'greyOut' && showIntranetContent"
-        ></div>
-        <a
-          (click)="raiseTelemetry()"
-          [routerLink]="(widgetData.content | pipeContentRoute).url"
-          [queryParams]="(widgetData.content | pipeContentRoute).queryParams"
-          class="rounded-t"
-          role="link"
-          aria-label="Content"
-          i18n-aria-label="Content | Click to view"
-        >
-          <img
-            mat-card-image
-            [src]="widgetData.content.appIcon"
-            [id]="'card_' + widgetData.content.identifier"
-            class="card-img ws-mat-primary-lite-background"
-            [wsUtilsDefaultThumbnail]="defaultThumbnail"
-            [alt]="widgetData.content.name"
-            [title]="widgetData.content.name"
-          />
+          *ngIf="widgetData?.intranetMode === 'greyOut' && showIntranetContent"></div>
+        <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
+          [queryParams]="(widgetData.content | pipeContentRoute).queryParams" class="rounded-t" role="link"
+          aria-label="Content" i18n-aria-label="Content | Click to view">
+          <div style="position: relative; z-index: 1;">
+            <img mat-card-image style="position: absolute; z-index: 2;" [src]="widgetData.content.appIcon"
+              [id]="'card_' + widgetData.content.identifier" class="card-img ws-mat-primary-lite-background"
+              [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name"
+              [title]="widgetData.content.name" />
+            <div class="source-div">
+              <!-- [src]="sourseIcon(widgetData.content.sourceName)" -->
+              <img [src]="widgetData.content.creatorLogo" [id]="'source_' + widgetData.content.identifier"
+                class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
+                [alt]="widgetData.content.sourceName || iGOT" [title]="widgetData.content.sourceName" />
+            </div>
+          </div>
         </a>
-        <button
-          *ngIf="showFlip"
-          class="detail-button ws-mat-primary-lite-background-op30"
-          mat-icon-button
-          (click)="isCardFlipped = true"
-          aria-label="Details"
-          i18n-aria-label="Details | Click to see details"
-        >
+        <button *ngIf="showFlip" class="detail-button ws-mat-primary-lite-background-op30" mat-icon-button
+          (click)="isCardFlipped = true" aria-label="Details" i18n-aria-label="Details | Click to see details">
           <mat-icon>flip_to_back</mat-icon>
         </button>
-        <ws-widget-content-progress
-          class="progress-bar"
-          *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier"
-        ></ws-widget-content-progress>
+        <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
+          [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+
         <mat-card-content>
-          <a
-            (click)="raiseTelemetry()"
-            [routerLink]="(widgetData.content | pipeContentRoute).url"
-            [queryParams]="(widgetData.content | pipeContentRoute).queryParams"
-            role="link"
-            aria-label="Content"
-            i18n-aria-label
-          >
-            <div class="text-gray-600 complexity flex-between flex-center">
-              <div *ngIf="widgetData.content.complexityLevel" i18n-title title="Complexity Level">
+          <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
+            [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
+            i18n-aria-label>
+
+            <div class="text-gray-time complexity flex-between flex-center">
+              <!-- <div *ngIf="widgetData.content.complexityLevel" i18n-title title="Complexity Level">
                 {{ widgetData.content.complexityLevel }}
-              </div>
-              <div
-                *ngIf="showIsMode"
-                i18n
-                i18n-title
-                title="Newly Added"
-                class="mode-tag px-2 ws-mat-accent-background"
-              >
+              </div> -->
+              <div *ngIf="showIsMode" i18n i18n-title title="Newly Added"
+                class="mode-tag px-2 ws-mat-accent-background">
                 Newly Added
               </div>
+
               <div *ngIf="widgetData.content.duration" class="duration" i18n-title title="Duration">
-                {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
+                <mat-icon class="text-green-400">access_time</mat-icon>
+                <span class="time-text">{{ widgetData.content.duration | pipeDurationTransform: 'hms' }}</span>
               </div>
             </div>
-            <div
-              class="ws-mat-primary-text mat-title title-text ws-mat-text-block-fade-gradient"
-              [matTooltip]="widgetData.content.name"
-            >
+
+            <div class="ws-mat-primary-text mat-title title-text ws-mat-text-block-fade-gradient"
+              [matTooltip]="widgetData.content.name">
               {{ widgetData.content.name }}
             </div>
-            <div
-              class="description-text ws-mat-text-block-fade-gradient mb-10"
-              i18n-title
-              title="Description"
-            >
+            <div class="description-text ws-mat-text-block-fade-gradient mb-10" i18n-title title="Description">
               {{ widgetData.content.description | pipeHtmlTagRemoval }}
+              <!-- {{widgetData.content | json}} -->
+              <!-- {{widgetData.content.sourceName}} -->
             </div>
           </a>
-          <div
-            class="mt-4 flex justify-between items-center absolute bottom-0 left-0 right-0 px-3 py-2"
-          >
-            <ws-widget-display-content-type
+          <div class="mt-4 flex justify-between items-center absolute bottom-0 left-0 right-0 px-3 py-2">
+            <!-- <ws-widget-display-content-type
               i18n-title
               title="Content Type"
               *ngIf="widgetData.content?.displayContentType"
               class="ws-mat-primary-text font-normal"
               [displayContentType]="widgetData.content?.displayContentType"
             >
+            </ws-widget-display-content-type> -->
+            <ws-widget-display-content-type i18n-title title="Content Type" *ngIf="widgetData.content?.contentType"
+              class="ws-mat-primary-text font-normal" [displayContentType]="widgetData.content?.contentType==='Collection'
+              ?'Module'
+              :(widgetData.content?.contentType==='Learning Path'?'Program':widgetData.content?.contentType)">
             </ws-widget-display-content-type>
             <div class="flex items-center">
               <ng-container [ngTemplateOutlet]="rating"></ng-container>
-              <button
-                type="button"
-                mat-icon-button
-                i18n-aria-label
-                aria-label="action items"
-                [matMenuTriggerFor]="cardMenu"
-              >
+              <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+                [matMenuTriggerFor]="cardMenu">
                 <mat-icon>more_vertical</mat-icon>
               </button>
             </div>

@@ -1,11 +1,11 @@
 {
   "/apis/*": {
-    "target": "http://localhost:3003",
+    "target": "https://eagle-dev.idc.tarento.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {
-      "/apis": ""
+      "/apis": "/apis"
     }
   },
   "/content-api/*": {
@@ -54,7 +54,7 @@
     }
   },
   "/assets/*": {
-    "target": "http://localhost:3009",
+    "target": "http://127.0.0.1:8080",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,

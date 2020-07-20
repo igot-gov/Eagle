@@ -132,7 +132,7 @@ public class SearchIndexerImpl {
             }
             case "UPDATE": {
                 logger.info(messageUUID + "->" + "#OPERATION TYPE = UPDATE");
-                message.remove(ProjectConstants.ACCESS_PATHS);
+                //message.remove(ProjectConstants.ACCESS_PATHS);
                 Map<String, Object> indexDocument = getIndexDocument(message, true, messageUUID);
                 routeAndAddDocumentWithId(uniqueId, indexDocument, messageUUID);
                 break;
@@ -307,12 +307,17 @@ public class SearchIndexerImpl {
 
     private Map<String, Object> getDocumentAsMapById(String uniqueId, Map<String, Object> indexDocument, Set<String> sources, UUID messageUUID) {
         try {
+            logger.info("indexDocument "+objectMapper.writeValueAsString(indexDocument));
+            logger.info("sources "+sources);
+
             Object locale = indexDocument.get("locale");
             if (null == locale || Strings.isNullOrEmpty(String.valueOf(locale)))
                 locale = "_en";
             else
                 locale = "_" + locale;
             FetchSourceContext include = new FetchSourceContext(true, sources.toArray(new String[0]),null);
+            logger.info("indexDocument "+objectMapper.writeValueAsString(include));
+
             GetResponse response = esClient.get(new GetRequest(esIndex + locale).type(esIndexType).fetchSourceContext(include).id(uniqueId), RequestOptions.DEFAULT);
             return response.getSourceAsMap();
         } catch (IOException e) {

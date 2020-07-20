@@ -18,6 +18,7 @@ export const ROOT_WIDGET_CONFIG = {
     pageBack: 'actionButtonPageBack',
     playlist: 'actionButtonPlaylist',
     preview: 'actionButtonPreview',
+    newProfile: 'actionButtonProfile',
     search: 'actionButtonSearch',
     setting: 'actionButtonSetting',
     standard: 'actionButtonStandard',

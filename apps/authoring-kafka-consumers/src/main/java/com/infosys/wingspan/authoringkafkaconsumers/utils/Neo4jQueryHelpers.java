@@ -149,18 +149,22 @@ public class Neo4jQueryHelpers {
 
         for (Record record : results) {
             Map<String, Object> child = Maps.newHashMap(record.get("childRelation").asMap(new HashMap<>()));
-            child.put("endNodeId", record.get("child.identifier").asString(null));
+            if (!child.isEmpty())
+                child.put("endNodeId", record.get("child.identifier").asString(null));
             String nodeId = record.get("node").asMap().get("identifier").toString();
 
             if (nodes.containsKey(nodeId)) {
                 Map<String, Object> node = (Map<String, Object>) nodes.get(nodeId);
-                List<Map<String, Object>> children = (List<Map<String, Object>>) node.get("children");
-                children.add(child);
-                node.put("children", children);
+                if (!child.isEmpty()) {
+                    List<Map<String, Object>> children = (List<Map<String, Object>>) node.get("children");
+                    children.add(child);
+                    node.put("children", children);
+                }
                 nodes.put(nodeId, node);
             } else {
                 List<Map<String, Object>> children = new ArrayList<>();
-                children.add(child);
+                if (!child.isEmpty())
+                    children.add(child);
                 Map<String, Object> node = Maps.newHashMap(record.get("node").asMap());
                 node.entrySet().removeIf(stringObjectEntry1 -> stringObjectEntry1.getValue() == null);
                 node.put("children", children);
@@ -286,4 +290,5 @@ public class Neo4jQueryHelpers {
 
         return new ArrayList<>();
     }
+
 }

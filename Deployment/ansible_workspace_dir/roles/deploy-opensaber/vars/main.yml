@@ -1,0 +1,26 @@
+---
+# vars file for deploy-opensaber
+# For script
+template_compose_file_name: opensaber.j2
+template_env_file_name: opensaber_env.j2
+compose_file_name: "{{ service_opensaber_service }}.yml"
+env_file_name: "{{ service_opensaber_service }}.env"
+env_file_deployment_location: "{{ env_files_dir }}/{{ env_file_name }}"
+compose_file_deployment_location: "{{ compose_files_dir }}/{{ compose_file_name }}"
+user_friendly_name: opensaber_service
+
+# For service
+application_port: "{{ service_opensaber_port }}"
+image_name: "{{ image_opensaber }}"
+tag: "{{ tags_opensaber }}"
+host_port: "{{ application_port }}"
+docker_port: "{{ application_port }}"
+replicas: "{{ service_replicas_opensaber_service }}"
+reserved_memory: "{{ service_mem_reserved_opensaber_service }}"
+limited_memory: "{{ service_mem_limit_opensaber_service }}"
+health_check_endpoint: http://127.0.0.1:{{ docker_port }}
+network_alias_name: "{{ network_alias_opensaber }}"
+docker_service_stack_name: opensaber
+docker_service_name: "{{ service_opensaber_service }}"
+force_reload: "{{ force_reload_opensaber_service }}"
+

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.infosysit.rainforest"
+    android:targetSandboxVersion="1">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SEND_DOWNLOAD_COMPLETED_INTENTS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <uses-permission android:name="android.permission.MICROPHONE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:name=".LexApplication"
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- <meta-data android:name="android.webkit.WebView.EnableSafeBrowsing" -->
+        <!-- android:value="false"/> -->
+        <!-- tools:ignore="HardcodedDebugMode" -->
+        <receiver android:name="com.infosysit.sdk.services.DownloadStatusBroadcastJava">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+                <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".HomeActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <data
+                    android:host="lex.infosysapps.com"
+                    android:scheme="https" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".DownloadsWebView"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".TocWebView"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".SettingsActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity
+            android:name=".ExternalPlayerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize" />
+
+        <service
+            android:name=".services.DeleteDecryptedService"
+            android:exported="false" />
+        <service
+            android:name="com.infosysit.sdk.services.EncrpytDecryptService"
+            android:exported="false" />
+        <service
+            android:name=".services.TelemetryLearningService"
+            android:exported="false" />
+        <service
+            android:name=".services.TelemetryPlayerService"
+            android:exported="false" />
+        <service
+            android:name=".services.TelemetryQuizSubmission"
+            android:exported="false" />
+
+        <receiver
+            android:name=".services.DatabaseChangedReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name=".DATABASE_CHANGED" />
+            </intent-filter>
+        </receiver> <!-- [END firebase_service] -->
+        <service
+            android:name=".services.DownloadAllowedCheck"
+            android:exported="false" />
+    </application>
+
+</manifest>

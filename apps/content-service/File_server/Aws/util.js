@@ -15,6 +15,8 @@ const appConfig = require('../ConfigReader/loader');
 // Function to set cookie at object level
 
 function setCookie(artifactURL) {
+  console.log("AWS setCookie Called");
+  
   return new Promise((resolve, reject) => {
     if (artifactURL.includes("*")) {
       reject({

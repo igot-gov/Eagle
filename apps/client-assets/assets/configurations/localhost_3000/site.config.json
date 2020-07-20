@@ -1,12 +1,18 @@
 {
   "authoring": {
     "allowedContentType": [],
+    "allowRedo": false,
+    "allowRestore": false,
+    "allowExpiry": false,
+    "allowReview": true,
+    "allowPublish": true,
+    "newDesign": false,
     "urlPatternMatching": [
       {
         "allowReplace": false,
         "source": "youtube",
-        "pattern": "^(http(s)?://)?((w){3}.)?youtu(be|.be)?(\\.com)?/.+",
-        "allowIframe": false
+        "pattern": "^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\\.com)?\/.+",
+        "allowIframe": true
       }
     ]
   },
@@ -14,16 +20,17 @@
     "error": "/assets/configurations/common/feature/error.json"
   },
   "org": [
-    "eagle"
+    "dopt",
+    "istm"
   ],
-  "rootOrg": "eagle",
-  "defaultFontSize": "normal-typography",
+  "rootOrg": "igot",
+  "defaultFontSize": "theme-igot",
   "defaultLocale": "",
-  "defaultThemeClass": "theme-teal",
+  "defaultThemeClass": "theme-igot",
   "details": {
-    "appName": "eagle"
+    "appName": "iGoT"
   },
-  "disablePidCheck": false,
+  "disablePidCheck": true,
   "isContentDownloadAvailable": false,
   "fontSizes": [
     {
@@ -53,9 +60,9 @@
     }
   ],
   "indexHtmlMeta": {
-    "description": "Description",
-    "webmanifest": "/assets/configurations/localhost_3000/manifest/manifest.webmanifest",
-    "xIcon": "/assets/configurations/localhost_3000/manifest/favicon.ico"
+    "description": "iGOT is a next-generation learning solution accessible anytime, anywhere and on any device. It enables organizations to focus on training their talent of today, to be ready for tomorrow",
+    "webmanifest": "/assets/configurations/igot.idc.tarento.com/manifest/manifest.webmanifest",
+    "xIcon": "/assets/configurations/igot.idc.tarento.com/manifest/favicon.ico"
   },
   "keycloak": {
     "bearerExcludedUrls": [
@@ -66,8 +73,8 @@
     ],
     "clientId": "portal",
     "key": "ws-kc-token-storage",
-    "realm": "eagle",
-    "url": "http://localhost:3003/auth"
+    "realm": "wingspan",
+    "url": "https://eagle-keycloak.idc.tarento.com/auth"
   },
   "locals": [
     {
@@ -79,34 +86,136 @@
       ],
       "path": "",
       "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "de"
+      ],
+      "path": "de",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "zh-CN"
+      ],
+      "path": "zh-CN",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "fr"
+      ],
+      "path": "fr",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "fr-ca"
+      ],
+      "path": "fr-ca",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "es"
+      ],
+      "path": "es",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "ar"
+      ],
+      "path": "ar",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "nl"
+      ],
+      "path": "nl",
+      "isRTL": false
+    },
+    {
+      "isAvailable": false,
+      "isEnabled": false,
+      "locals": [
+        "ja"
+      ],
+      "path": "ja",
+      "isRTL": false
     }
   ],
+  "chatBotUrl": "/chat-bot/#/bot=wingspanbotv7",
   "logos": {
     "app": "/assets/instances/eagle/app_logos/eagle-logo-transparent.svg",
     "appTransparent": "/assets/instances/eagle/app_logos/eagle-logo-transparent.svg",
-    "company": "",
+    "appBottomNav": "/assets/instances/eagle/app_logos/source.png",
+    "company": "/assets/instances/eagle/app_logos/eagle-logo-transparent.svg",
     "defaultContent": "/assets/instances/eagle/app_logos/default.png",
     "aboutFooter": "/assets/instances/eagle/about-page/about-footer.jpg",
     "aboutHeader": "/assets/instances/eagle/about-page/about-header.jpg",
-    "developedBy": "/assets/instances/eagle/app_logos/ETA.png",
-    "platformBanner": "/apis/public/v8/assets/common/misc/about-eagle.jpg",
-    "poweredBy": "",
-    "landingLogo": ""
+    "developedBy": "Tarento Technologies",
+    "platformBanner": "/apis/public/v8/assets/common/misc/about-wingspan.jpg",
+    "poweredBy": "Tarento",
+    "landingLogo": "",
+    "defaultSourceLogo": "/assets/instances/eagle/app_logos/source.png",
+    "playListLogo": "/assets/instances/eagle/about-page/about-header.jpg"
   },
+  "sources": [
+    {
+      "sourceName": "Georgia Tech CEISMC",
+      "sourceId": "",
+      "logo": "/assets/instances/eagle/sources/hex-lab.png"
+    },
+    {
+      "sourceName": "Firia Labs",
+      "sourceId": "",
+      "logo": "/assets/instances/eagle/sources/Image34.png"
+    },
+    {
+      "sourceName": "Chibitronics",
+      "sourceId": "",
+      "logo": "/assets/instances/eagle/sources/hex-lab.png"
+    }
+  ],
   "mailIds": {
-    "contactUs": "eagle-support@eagle.com",
-    "default": "eagle-support@eagle.com",
-    "support": "eagle-support@eagle.com"
+    "contactUs": "support@tarento.com",
+    "default": "support@tarento.com",
+    "support": "support@tarento.com"
+  },
+  "microsoft": {
+    "clientId": "c6597d0b-c629-4885-a53c-44490643ddda",
+    "defaultEmailId": "support@tarento.com",
+    "isConfigured": true,
+    "tenant": "tarentotechnologies",
+    "validEmailExtensions": [
+      "@tarento.tarento.com"
+    ]
   },
   "telemetryConfig": {
     "pdata": {
-      "id": "web-ui",
+      "id": "lex-web-ui",
       "ver": "1.0.0",
       "pid": ""
     },
     "env": "prod",
-    "channel": "",
-    "batchsize": 1,
+    "channel": "igot",
+    "batchsize": 10,
     "host": "",
     "endpoint": "/apis/protected/v8/user/telemetry",
     "apislug": "",
@@ -115,6 +224,66 @@
     }
   },
   "themes": [
+    {
+      "color": {
+        "accent": "#607d8b",
+        "primary": "#9e9e9e",
+        "warn": "#f44336"
+      },
+      "themeFile": "theme-grey",
+      "themeClass": "theme-grey",
+      "themeName": "Grey Theme"
+    },
+    {
+      "color": {
+        "accent": "#607d8b",
+        "primary": "#673ab7",
+        "warn": "#f44336"
+      },
+      "themeFile": "theme-deep-purple",
+      "themeClass": "theme-deep-purple",
+      "themeName": "Deep Purple Theme"
+    },
+    {
+      "color": {
+        "accent": "#00A9F4",
+        "primary": "#ffffff",
+        "warn": "#f44336"
+      },
+      "themeFile": "theme-igot",
+      "themeClass": "theme-igot",
+      "themeName": "iGOT Theme"
+    },
+    {
+      "color": {
+        "accent": "#607d8b",
+        "primary": "#3f51b5",
+        "warn": "#f44336"
+      },
+      "themeFile": "theme-indigo",
+      "themeClass": "theme-indigo",
+      "themeName": "Indigo Theme"
+    },
+    {
+      "color": {
+        "accent": "#607d8b",
+        "primary": "#03a9f4",
+        "warn": "#f44336"
+      },
+      "themeFile": "theme-lite-blue",
+      "themeClass": "theme-lite-blue",
+      "themeName": "Lite Blue Theme"
+    },
+    {
+      "color": {
+        "accent": "#009688",
+        "primary": "#ff9800",
+        "warn": "#f44336"
+      },
+      "themeFile": "theme-orange",
+      "themeClass": "theme-orange",
+      "themeName": "Orange Theme"
+    },
     {
       "color": {
         "accent": "#af235f",
@@ -126,7 +295,9 @@
       "themeName": "Teal Theme"
     }
   ],
-  "validMailIdExtensionsForMailMe": [],
+  "validMailIdExtensionsForMailMe": [
+    "tarento.com"
+  ],
   "backgrounds": {
     "primaryNavBar": {
       "color": "primary"
@@ -145,22 +316,24 @@
             "widgetSubType": "actionButtonCatalog",
             "widgetData": {}
           }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_navigator",
+            "config": {
+              "type": "mat-button"
+            }
+          }
         }
       ],
       "right": [
         {
           "type": "featureButton",
           "config": {
-            "actionBtnId": "feature_search",
-            "config": {
-              "type": "mat-icon-button"
-            }
-          }
-        },
-        {
-          "type": "featureButton",
-          "config": {
             "actionBtnId": "feature_notification",
+            "toolTip": "Notification",
+            "className": "fixtopMargin",
             "config": {
               "type": "mat-icon-button"
             }
@@ -170,8 +343,8 @@
           "type": "widgetButton",
           "config": {
             "widgetType": "actionButton",
-            "widgetSubType": "actionButtonSetting",
-            "widgetData": null
+            "widgetSubType": "actionButtonProfile",
+            "widgetData": {}
           }
         }
       ]
@@ -208,13 +381,53 @@
           }
         }
       ]
+    },
+    "secondary": {
+      "left": [
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_home",
+            "config": {
+              "type": "mat-button"
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_goals",
+            "config": {
+              "type": "mat-button"
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_account",
+            "config": {
+              "type": "mat-button"
+            }
+          }
+        }
+      ],
+      "right": []
     }
   },
   "featuredApps": [
     "feature_playlist",
     "feature_goals",
     "feature_blogs",
-    "feature_Q&A"
+    "feature_Q&A",
+    "feature_create_konnect",
+    "feature_konnect"
   ],
-  "intranetIframeUrls": []
+  "intranetIframeUrls": [],
+  "introVideo": {
+    "en": "/assets/instances/eagle/videos/Eagle_New_AppTour_Final.mp4"
+  },
+  "tourVideo": {
+    "en": "/assets/instances/eagle/videos/Eagle_New_AppTour_Final.mp4"
+  }
 }

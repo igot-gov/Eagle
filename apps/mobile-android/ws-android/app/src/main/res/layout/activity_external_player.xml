@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/customViewContainerPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/external_player_toolbar"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/goBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@color/colorPrimary"
+                android:padding="12dp"
+                android:layout_weight="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/go_back" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/toolbar"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:paddingStart="16dp"
+                android:layout_weight="0.9"
+                android:background="@color/colorPrimary">
+
+
+
+                <TextView
+                    android:id="@+id/resource_name1"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/resource_name2"
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageButton
+                android:id="@+id/copyLink"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:onClick="copyLink"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:layout_weight="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_content_copy_black_24dp" />
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="80dp"
+
+            android:layout_height="80dp"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:layout_marginTop="24dp" />
+
+        <WebView
+            android:id="@+id/externalWebView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
+

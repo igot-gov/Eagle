@@ -9,6 +9,7 @@ import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 export class BtnPreviewComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: any
+  ngOnInit(): void {
+  }
 
-  ngOnInit() {}
 }

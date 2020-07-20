@@ -1,14 +1,15 @@
 <section *ngIf="sharePlaylistStatus !== 'fetching'; else sharingInProgress">
-  <h1 mat-dialog-title i18n>Share With</h1>
+  <h1 mat-dialog-title i18n>Playlist Goal With</h1>
   <div mat-dialog-content>
     <ws-widget-user-autocomplete class="block" (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
     <mat-form-field class="text-area w-full">
-      <textarea  name="share-message-input-playlist-share" matInput #playlistShareComment i18n-placeholder placeholder="Your message..." rows="5"
-        #txtBody></textarea>
+      <textarea name="share-message-input-playlist-share" class="mat-input-element" matInput #playlistShareComment
+        i18n-placeholder placeholder="Add Notes..." rows="5" #txtBody></textarea>
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="flex flex-row-reverse">
-    <button type="button" name="share-button-playlist-share"  mat-flat-button color="primary" [disabled]="!users?.length"
+    <button type="button" name="share-button-playlist-share" mat-flat-button
+      class="text-white ws-mat-primary-background" [disabled]="!users?.length"
       (click)="sharePlaylist(playlistShareComment.value, successMsg.value)" i18n>
       Share
     </button>

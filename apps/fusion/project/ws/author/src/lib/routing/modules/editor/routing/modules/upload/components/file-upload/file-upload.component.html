@@ -1,5 +1,5 @@
 <div class="margin-top-m margin-left-xl">
-  <div class="flex mt-8 margin-bottom-xl top-heading">
+  <div class="flex mt-8 margin-bottom-xl top-heading flex-Update">
     <div class="upload-box flex flex-middle flex-col justify-center p-20 cursor-pointer" (click)="fileInput.click()"
       wsAuthDragDrop (fileDropped)="onDrop($event)">
       <button *ngIf="file || fileUploadForm.controls.artifactUrl.value" mat-icon-button
@@ -10,9 +10,11 @@
       <span class="font-weight-500" [hidden]="file">
         <input type="file" #fileInput class="inputfile" accept=".mp3,.mp4,.pdf,.zip"
           (change)="onDrop($event.target.files[0]); fileInput.value = null" />
-        <label for="file" class="mat-h2 ws-mat-primary-text flex flex-middle justify-center">
-          <mat-icon style="margin-right:4px">add</mat-icon>
-          <span i18n>Browse or Drag and Drop</span>
+        <label for="file" class="up-lbl mat-h2 ws-mat-primary-text flex flex-middle justify-center">
+          <mat-icon class="upload_cloud">cloud_upload</mat-icon>
+          <span i18n>Drag and drop files here</span>
+          <span i18n>or</span>
+          <span>Browse files</span>
         </label>
       </span>
       <div *ngIf="file || fileUploadForm.controls.artifactUrl.value" class="flex flex-middle justify-center">
@@ -41,38 +43,38 @@
         </p>
       </div>
     </div>
+    <div class="instruction">
+      <div class="information">
+        <p class="ws-mat-primary-text font-weight-500" i18n>Instructions to upload a file</p>
+        <ul>
+          <li *ngIf="fileUploadForm.controls.artifactUrl.value" i18n>
+            File was already uploaded. You may use Preview to view it.
+          </li>
+          <li i18n>Files allowed - pdf, mp3, mp4, zip</li>
+          <li i18n>Max. file size - 200MB</li>
+        </ul>
 
-    <div class="information">
-      <p class="ws-mat-primary-text font-weight-500" i18n>Instructions to upload a file</p>
-      <ul>
-        <li *ngIf="fileUploadForm.controls.artifactUrl.value" i18n>
-          File was already uploaded. You may use Preview to view it.
-        </li>
-        <li i18n>
-          Click on browse files above and choose the file or Drag and drop the file to be upload.
-        </li>
-        <li i18n>Files allowed - pdf, mp3, mp4, zip</li>
-        <li i18n>Max. file size - 200MB</li>
-      </ul>
-      <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl" [disabled]="!enableUpload"
-        (click)="triggerUpload()">
-        <div class="flex flex-middle justify-center">
-          <mat-icon class="text-white">publish</mat-icon>
-          <p class="text-white margin-left-s margin-remove-bottom">
-            <span i18n>Upload</span>
+      </div>
+      <div class="flex margin-top-m margin-bottom-xl flex-Update-r">
+        <div class="flex flex-middle margin-top-xs padding-top-l">
+          <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
+          <p class="margin-left-xs margin-remove-bottom">
+            <span i18n>I have read and I agree with the </span>
+            <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n>IPR
+              Declaration</span>
           </p>
         </div>
-      </button>
-    </div>
-  </div>
-  <div class="flex margin-top-m margin-bottom-xl">
-    <div class="flex flex-middle margin-top-xs padding-top-l">
-      <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
-      <p class="margin-left-xs margin-remove-bottom">
-        <span i18n>I have read and I agree with the </span>
-        <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n>IPR
-          Declaration</span>
-      </p>
+        <span class="spacer"></span>
+        <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl"
+          [disabled]="!enableUpload" (click)="triggerUpload()">
+          <div class="flex flex-middle justify-center">
+            <mat-icon class="text-white">publish</mat-icon>
+            <p class="text-white margin-left-s margin-remove-bottom">
+              <span i18n>Upload</span>
+            </p>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -158,14 +160,14 @@
     </div>
   </div>
   <div class="flex justify-center">
-    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="fileUploadCondition.isSubmitPressed = true;
+    <button type="button" mat-raised-button class="margin-top-m ws-mat-primary-background" (click)="fileUploadCondition.isSubmitPressed = true;
         fileUploadCondition.fileName &&
         fileUploadCondition.iframe &&
         fileUploadCondition.eval &&
         fileUploadCondition.preview &&
         fileUploadCondition.externalReference ? closeDialog() : null">
       <div class="flex flex-middle justify-center">
-        <p class="text-white margin-remove-bottom agree-text" i18n>I Agree</p>
+        <p class="margin-remove-bottom agree-text" i18n>I Agree</p>
       </div>
     </button>
   </div>
@@ -186,9 +188,9 @@
     </div>
   </div>
   <div class="flex justify-center">
-    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="closeDialog()">
+    <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-m" (click)="closeDialog()">
       <div class="flex flex-middle justify-center">
-        <p class="text-white margin-remove-bottom agree-text" i18n>I Understand</p>
+        <p class="margin-remove-bottom agree-text" i18n>I Understand</p>
       </div>
     </button>
   </div>
@@ -205,7 +207,7 @@
       </button>
     </div>
     <div style="overflow: auto; max-height: 400px" class="mt-4">
-      <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+      <mat-radio-group aria-labelledby="example-radio-group-label" class="flex flex-1 flex-column example-radio-group"
         [(ngModel)]="fileUploadCondition.url">
         <mat-radio-button class="example-radio-button" *ngFor="let file of fileList" [value]="file">
           {{file}}
@@ -214,9 +216,10 @@
     </div>
   </div>
   <div class="flex justify-center">
-    <button type="button" mat-raised-button color="primary" class="margin-top-m primary-button" (click)="closeDialog()">
+    <button type="button" mat-raised-button color="primary" class="margin-top-m ws-mat-primary-background"
+      (click)="closeDialog()">
       <div class="flex flex-middle justify-center">
-        <p class="text-white margin-remove-bottom agree-text" i18n>Done</p>
+        <p class="margin-remove-bottom agree-text" i18n>Done</p>
       </div>
     </button>
   </div>

@@ -68,6 +68,11 @@
       tags: [deploy-kafka-service]
  #   - role: deploy-support-script
  #     tags: [deploy-support-script]
+    - role: deploy-opensaber
+      tags: [deploy-opensaber]
+    - role: deploy-user-profile-service
+      tags: [deploy-user-profile-service]
+ 
   tasks:
     - name: Remove the env directory
       file: 

@@ -7,18 +7,17 @@ import { logInfoHeading } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest, extractUserToken } from '../../utils/requestExtract'
 import { getUserProfile } from './profile'
+import { getUserProfileStatus } from './profile-details'
 import { getUserRoles } from './roles'
 import { getTncStatus } from './tnc'
 
 export const detailsApi = Router()
 
-const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
-
 const API_END_POINTS = {
-  detail: `${CONSTANTS.PID_API_BASE}/user/multi-fetch/wid`,
-  emailId: `${CONSTANTS.PID_API_BASE}/user/multi-fetch/email`,
-  managerDetails: `${CONSTANTS.PID_API_BASE}/user`,
-  pidProfile: `${CONSTANTS.PID_API_BASE}/user/get-update`,
+  detail: `${CONSTANTS.USER_PROFILE_API_BASE}/user/multi-fetch/wid`,
+  emailId: `${CONSTANTS.USER_PROFILE_API_BASE}/user/multi-fetch/email`,
+  managerDetails: `${CONSTANTS.USER_PROFILE_API_BASE}/user`,
+  pidProfile: `${CONSTANTS.USER_PROFILE_API_BASE}/user/get-update`,
 }
 
 detailsApi.get('/', async (req, res) => {
@@ -31,29 +30,24 @@ detailsApi.get('/', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const tncStatusPromise = getTncStatus(userId, rootOrg, org, locale)
-    const rolesPromise = getUserRoles(userId, rootOrg)
-
-    const tncStatus = await tncStatusPromise
-    const roles = await rolesPromise
+    const tncStatus = await getTncStatus(userId, rootOrg, org, locale)
+    const roles = await getUserRoles(userId, rootOrg)
+    const profileDetailsStatus = await getUserProfileStatus(userId)
     const returnRoles = [...roles.default_roles, ...roles.user_roles]
-
     res.json({
       group: [],
+      profileDetailsStatus,
       roles: returnRoles,
       tncStatus,
     })
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(
-      (err && err.response && err.response.data) || {
-        error: GENERAL_ERROR_MSG,
-      }
-    )
+    res.status((err && err.response && err.response.status) || 500).send(err)
     return
   }
 })
 
 detailsApi.get('/wtoken', async (req, res) => {
+  // console.log('called /wtoken')
   try {
     const rootOrg = req.header('rootOrg') || ''
     const org = req.header('org') || ''
@@ -83,18 +77,51 @@ detailsApi.get('/wtoken', async (req, res) => {
     // const bodyWithConfigRequestOptions = { ...body, options }
     logInfoHeading('==========WToken API Request===============')
     // tslint:disable-next-line: no-console
-    console.log(options)
+    // console.log(options)
     request.post(url, options).pipe(res)
   } catch (err) {
     // tslint:disable-next-line: no-console
     console.log('------------------W TOKEN ERROR---------\n', err)
-    res.status((err && err.response && err.response.status) || 500).send(
-      (err && err.response && err.response.data) || {
-        error: GENERAL_ERROR_MSG,
-      }
-    )
+    res.status((err && err.response && err.response.status) || 500).send(err)
   }
 })
+
+// tslint:disable-next-line: no-any
+export function wTokenApiMock(req: any, token: any): Promise<any> {
+  return new Promise((resolve, reject) => {
+    try {
+      const rootOrg = req.header('rootOrg') || ''
+      const org = req.header('org') || ''
+      // tslint:disable-next-line: no-any
+      const newReq: any = { ...req }
+      newReq.kauth.grant.access_token.token = token
+      const kcToken = extractUserToken(newReq)
+      const url = API_END_POINTS.pidProfile
+      const options: request.CoreOptions = {
+        headers: {
+          org,
+          rootOrg,
+        },
+        ...axiosRequestConfig,
+        json: {
+          token: kcToken,
+        },
+      }
+
+      request.post(url, options, (error, _res, body) => {
+        if (error) {
+          reject(error)
+        }
+        resolve(body)
+      })
+
+    } catch (err) {
+      // tslint:disable-next-line: no-console
+      console.log('------------------W TOKEN ERROR---------\n', err)
+      reject()
+    }
+  })
+}
 
 detailsApi.get('/infosys', async (req, res) => {
   try {
@@ -104,11 +131,7 @@ detailsApi.get('/infosys', async (req, res) => {
       userProfile,
     })
   } catch (err) {
-    res.status((err && err.response && err.response.status) || 500).send(
-      (err && err.response && err.response.data) || {
-        error: GENERAL_ERROR_MSG,
-      }
-    )
+    res.status((err && err.response && err.response.status) || 500).send(err)
   }
 })
 
@@ -119,10 +142,11 @@ detailsApi.post('/managerDetails', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const response = await axios.post(API_END_POINTS.managerDetails, req.body, {
-      ...axiosRequestConfig,
-      headers: { rootOrg },
-    })
+    const response = await axios.post(
+      API_END_POINTS.managerDetails,
+      req.body,
+      { ...axiosRequestConfig, headers: { rootOrg } }
+    )
     res.status(response.status).send(response.data)
   } catch (err) {
     res
@@ -156,11 +180,7 @@ detailsApi.post('/detailV1', async (req, res) => {
 
     res.json(response.data)
   } catch (err) {
-    res.status(500).send(
-      (err && err.response && err.response.data) || {
-        error: GENERAL_ERROR_MSG,
-      }
-    )
+    res.status(500).send(err)
   }
 })
 
@@ -190,46 +210,5 @@ detailsApi.get('/detailV2', async (req, res) => {
     res.json(response.data[0])
   } catch (err) {
     res.status(500).send(err.response.data)
-  }
-})
-detailsApi.post('/detailV3', async (req, res) => {
-  const _rootOrg = req.header('rootOrg')
-  const url = `${API_END_POINTS.detail}`
-  const userDetails: string[] = [
-    'wid',
-    'email',
-    'first_name',
-    'last_name',
-    'unit_name',
-    'residence_city',
-    'residence_country',
-  ]
-  try {
-    if (!_rootOrg) {
-      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
-      return
-    }
-    const response = await axios.post(
-      url,
-      {
-        conditions: {
-          root_org: _rootOrg,
-        },
-        source_fields: userDetails,
-        values: [req.body.wid],
-      },
-      {
-        ...axiosRequestConfig,
-        headers: { _rootOrg },
-      }
-    )
-
-    res.json(response.data)
-  } catch (err) {
-    res.status(500).send(
-      (err && err.response && err.response.data) || {
-        error: GENERAL_ERROR_MSG,
-      }
-    )
   }
 })

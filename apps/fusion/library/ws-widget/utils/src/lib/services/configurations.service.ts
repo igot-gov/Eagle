@@ -39,6 +39,7 @@ export class ConfigurationsService {
   activeOrg: string | null = ''
   isProduction = false
   hasAcceptedTnc = false
+  profileDetailsStatus = false
   userPreference: IUserPreference | null = null
   userProfile: NsUser.IUserProfile | null = null
   // created to store complete user details sent by pid

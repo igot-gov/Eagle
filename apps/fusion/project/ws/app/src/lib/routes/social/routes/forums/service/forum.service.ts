@@ -6,7 +6,8 @@ import { SocialForum } from '../models/SocialForumposts.model'
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 
 const API_END_POINTS = {
-  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timelinev2`, // this has to be changed(Temporary)
+  // SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timelinev2`, // this has to be changed(Temporary)
+  SOCIAL_TIMELINE: `${PROTECTED_SLAG_V8}/social/post/timeline`, // this has to be changed(Temporary)
   SOCIAL_MODERATOR_TIMELINE: `${PROTECTED_SLAG_V8}/social/moderator/timeline`,
   SOCIAL_FORUMVIEW: `${PROTECTED_SLAG_V8}/social/forum/forumTimeline`,
   SOCIAL_ADMIN_TIMELINE: `${PROTECTED_SLAG_V8}/social/admin/timeline`,

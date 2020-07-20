@@ -1,0 +1,51 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.infosysit.ledsdk"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:5:5-67
+11-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:5:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:6:5-79
+12-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:6:22-76
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:7:5-81
+13-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:7:22-78
+14
+15    <application>
+15-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:9:5-22:19
+16        <service
+16-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:10:9-12:40
+17            android:name="com.infosysit.ledsdk.services.DownloadContentService"
+17-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:11:13-60
+18            android:exported="false" />
+18-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:12:13-37
+19        <service
+19-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:13:9-15:40
+20            android:name="com.infosysit.ledsdk.services.SqlCrudService"
+20-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:14:13-52
+21            android:exported="false" />
+21-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:15:13-37
+22        <service
+22-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:16:9-18:40
+23            android:name="com.infosysit.ledsdk.services.PlayerTelemetryService"
+23-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:17:13-60
+24            android:exported="false" />
+24-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:18:13-37
+25        <service
+25-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:19:9-21:40
+26            android:name="com.infosysit.ledsdk.services.ExternalPlayerService"
+26-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:20:13-59
+27            android:exported="false" />
+27-->D:\lex\Lex-Android\ledsdk\src\main\AndroidManifest.xml:21:13-37
+28    </application>
+29
+30</manifest>

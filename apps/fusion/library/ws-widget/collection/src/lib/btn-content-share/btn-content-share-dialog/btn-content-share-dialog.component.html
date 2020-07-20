@@ -7,12 +7,7 @@
   </h3>
   <ws-widget-user-autocomplete (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
   <mat-form-field class="text-area">
-    <!-- <mat-spinner
-      class="text-center"
-      *ngIf="!message"
-      [diameter]="30"
-      [strokeWidth]="3"
-    ></mat-spinner> -->
+    <mat-spinner class="text-center" *ngIf="!message" [diameter]="30" [strokeWidth]="3"></mat-spinner>
     <textarea matInput i18n-placeholder placeholder="Your message ..." i18n-value
       [value]="message ? message : 'Loading...'" class="text-area-input" rows="5" #txtBody></textarea>
   </mat-form-field>
@@ -33,7 +28,7 @@
   #successToast />
 
 
-<div *ngIf="isSocialMediaShareEnabled" class="pt-6">
+<!-- <div *ngIf="isSocialMediaShareEnabled" class="pt-6">
   <h2 class="mat-h2 margin-remove" i18n>
     OR
   </h2>
@@ -45,4 +40,4 @@
     <ws-widget-btn-twitter-share [url]="detailUrl" [message]="message" class="pr-4 pb-3"></ws-widget-btn-twitter-share>
     <ws-widget-btn-linkedin-share [url]="detailUrl" class="pr-4 pb-3"></ws-widget-btn-linkedin-share>
   </div>
-</div>
+</div> -->
