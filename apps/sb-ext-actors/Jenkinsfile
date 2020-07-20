@@ -18,7 +18,7 @@ node() {
               pwd
 	      cp -rpf /home/ubuntu/sb-ext-jar/* .
               docker build --no-cache -f ./Dockerfile.build -t $docker_pre_build .
-              docker run --name $docker_pre_build $docker_pre_build:eagle && docker cp $docker_pre_build:/opt/target/bodhi-1.0-SNAPSHOT.jar .
+              docker run --name $docker_pre_build $docker_pre_build:latest && docker cp $docker_pre_build:/opt/target/bodhi-1.0-SNAPSHOT.jar .
               docker rm -f $docker_pre_build
               docker rmi -f $docker_pre_build
                 '''

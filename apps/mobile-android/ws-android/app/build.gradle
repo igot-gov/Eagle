@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'LexAPKKey'
+            keyPassword 'Lex.Aka.Bodhi'
+            storeFile file('/Users/akanshagoyal/Documents/keystore/LexAPKKeys.jks')
+            storePassword 'Lex.Aka.Bodhi'
+        }
+    }
+
+    compileSdkVersion 29
+    defaultConfig {
+        applicationId "com.infosysit.rainforest"
+        minSdkVersion 20
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            resValue "string", "app_name", "Rainforest"
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            resValue "string", "app_name", "Rainforest"
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
+dependencies {
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation project(path: ':sdk')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation project(path: ':rtmppublisher')
+    implementation 'org.jsoup:jsoup:1.8.3'
+
+    implementation 'com.scottyab:rootbeer-lib:0.0.7'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'com.karumi:dexter:4.2.0'
+
+
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.room:room-runtime:2.2.5'
+    annotationProcessor 'androidx.room:room-compiler:2.2.5'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50'
+
+    //added for jackson dependency
+
+//    compile (
+//            [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],
+//            [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.1'],
+//            [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.1']
+//    )
+
+}
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
