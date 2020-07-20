@@ -38,6 +38,8 @@ service_lex_hierarchy_service: hierarchy-service
 service_lex_kafka_service: kafka-service
 service_support_script_service: support-script-service
 service_redis_service: redis-service
+service_opensaber_service: opensaber	
+service_user_profile_service: eagle-user-profile
 
 # Ports
 service_antivirus_port: 3310
@@ -65,6 +67,7 @@ service_ui_proxies_fusion_port:
 service_ui_static_fusion_port: 
 service_support_api_port: 3005
 service_sb_telemetry_port: 8091
+
 #service_pid_service_port: 9200
 service_pid_service_port: 3008
 service_notification_service_port: 5805
@@ -79,6 +82,8 @@ service_lex_hierarchy_service_port: 5906
 service_lex_kafka_service_port: 5908
 service_support_script_port: 3007
 service_redis_port: 6379
+service_opensaber_port: 8080	
+service_user_profile_port: 3008
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -107,6 +112,7 @@ network_alias_monitoring_service: monitoring-service
 network_alias_dbms_api_service: dbms-api
 network_alias_support_api_service: support-api
 network_alias_sb_telemetry_service: sb-telemetry-service
+
 #network_alias_pid_service: pid-service
 network_alias_pid_service: eagle-user-profile
 network_alias_notification_service: notification-service
@@ -121,6 +127,8 @@ network_alias_lex_hierarchy_service: hierarchy-service
 network_alias_lex_kafka_service: kafka-service
 network_alias_support_script_service: support-script
 network_alias_redis_service: redis-service
+network_alias_opensaber: sb-opensaber	
+network_alias_user_profile: user-profile
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -160,6 +168,9 @@ image_lex_health_core_service_critical: lex-health-core-service
 image_lex_hierarchy_service: lex-hierarchy-service
 iamge_lex_kafka_service: wn-kafka-service
 image_support_script_service: support-jobs
+image_opensaber: opensaber	
+image_user_profile: user-profile
+
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"

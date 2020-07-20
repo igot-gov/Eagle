@@ -55,7 +55,12 @@ postgresql_password_wingspan: password #password
 postgresql_username_keycloak: username #username
 postgresql_password_keycloak: password #password
 postgresql_wingspan_database: wingspan
-
+postgresql_opensaber_password: password #password
+postgresql_opensaber_username: username #username	
+postgresql_opensaber_database: opensaber	
+postgresql_user_profile_password: password #password
+postgresql_user_profile_username: username #username
+postgresql_user_profile_database: eagle_user
 # Mongodb
 mongodb_authentication_database: admin
 mongodb_host: mongodb_host_ip #10.0.1.2
@@ -106,7 +111,10 @@ keycloak_username: username
 keycloak_password: password
 keycloak_new_user_def_pwd: password
 vault_rootorg_to_authdomain_and_realm_mapping: rootorg;https://domain_name/auth;wingspan #<<= Format
-
+HTTPS_HOST: https://domain_name
+PORTAL_PORT: 3008	
+keycloak_api_base: http://bulk-upload-service	
+keycloak_api_base_port: 3009
 # Swarm variables
 var_docker_deploy_node_type: manager
 
@@ -163,7 +171,8 @@ tags_notification_service: "{{ master_tag }}"
 tags_access_control_service: "{{ master_tag }}"
 tags_hierarchy_service: "{{ master_tag }}"
 tags_kafka_service: "{{ master_tag }}"
-
+tags_opensaber: "{{ master_tag }}"	
+tags_user_profile: "{{ master_tag }}"
 
 # Service scale levels
 service_replicas_content_service: 1
@@ -196,7 +205,8 @@ service_replicas_notification_service: 1
 service_replicas_access_control_service: 1
 service_replicas_hierarchy_service: 1
 service_replicas_kafka_service: 1
-
+service_replicas_opensaber_service: 1	
+service_replicas_user_profile_service: 1
 # Memory reserves for each service
 service_mem_reserved_content_service: "{{ memory_m }}"
 service_mem_reserved_authtool_ui_service: "{{ memory_s }}"
@@ -228,7 +238,8 @@ service_mem_reserved_notification_service: "{{ memory_s }}"
 service_mem_reserved_access_control_service: "{{ memory_s }}"
 service_mem_reserved_hierarchy_service: "{{ memory_m }}"
 service_mem_reserved_kafka_service: "{{ memory_s }}"
-
+service_mem_reserved_opensaber_service: "{{ memory_s }}"	
+service_mem_reserved_user_profile_service: "{{ memory_s }}"
 # Memory limits
 service_mem_limit_content_service: "{{ memory_l }}"
 service_mem_limit_authtool_ui_service: "{{ memory_m }}"
@@ -260,7 +271,8 @@ service_mem_limit_notification_service: "{{ memory_s }}"
 service_mem_limit_access_control_service: "{{ memory_s }}"
 service_mem_limit_hierarchy_service: "{{ memory_l }}"
 service_mem_limit_kafka_service: "{{ memory_m }}"
-
+service_mem_limit_opensaber_service: "{{ memory_m }}"	
+service_mem_limit_user_profile_service: "{{ memory_m }}"
 # Force reload for app variables
 force_reload_content_service: true
 force_reload_authtool_ui_service: true
@@ -294,6 +306,8 @@ force_reload_notification_service: true
 force_reload_access_control_service: false
 force_reload_hierarchy_service: true
 force_reload_kafka_service: false
+force_reload_opensaber_service: true	
+force_reload_user_profile_service: true	
 
 publish_ports: false
 
@@ -306,7 +320,6 @@ lex_microsoft_client_secret: client_secret
 # Mount paths
 host_content_directory_path: /mydata/content-directory
 host_bulk_upload_path: /mydata/bulk_upload
-
 # Logs
 sb_ext_logs_path: /mydata/logs/sb-ext
 ui_proxies_logs_path: /mydata/logs/ui-proxies
