@@ -4,5 +4,7 @@ docker run --name sbext-build sb-ext-service-build:eagle && docker cp sbext-buil
 docker rm -f sbext-build
 docker rmi -f sb-ext-service-build
 
-docker build --no-cache -t eagle-docker.tarento.com/lex-sb-ext-service:gold .
-docker push eagle-docker.tarento.com/lex-sb-ext-service:gold
+#docker build --no-cache -t eagle-docker.tarento.com/lex-sb-ext-service:gold .
+docker build --no-cache -t 10.0.1.129:5000/lex-sb-ext-service:bronze .
+#docker push eagle-docker.tarento.com/lex-sb-ext-service:gold
+docker push 10.0.1.129:5000/lex-sb-ext-service:bronze
