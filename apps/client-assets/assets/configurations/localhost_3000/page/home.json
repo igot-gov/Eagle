@@ -160,7 +160,7 @@
                               {
                                 "contentType": [
                                   "Course",
-                                  "Program"
+                                  "Learning Path"
                                 ]
                               }
                             ]
@@ -242,7 +242,7 @@
                 "strips": [
                   {
                     "key": "continueLearning",
-                    "title": "Last viewed",
+                    "title": "Last Viewed",
                     "viewMoreUrl": {
                       "path": "/app/search/learning",
                       "queryParams": {
@@ -302,7 +302,7 @@
                 "strips": [
                   {
                     "key": "recentToPlaylists",
-                    "title": "My playlist",
+                    "title": "Playlist",
                     "viewMoreUrl": {
                       "path": "/app/search/learning",
                       "queryParams": {

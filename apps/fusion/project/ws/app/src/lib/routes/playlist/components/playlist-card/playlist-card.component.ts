@@ -82,7 +82,7 @@ export class PlaylistCardComponent implements OnInit {
           },
           _err => {
             this.deletePlaylistStatus = 'error'
-            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value)
+            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value, 'X')
           },
         )
       }
@@ -114,7 +114,7 @@ export class PlaylistCardComponent implements OnInit {
     if (this.playlist) {
       this.router.navigate([`/app/playlist/${routeTo}/${this.playlist.id}/edit`])
     } else {
-      this.snackBar.open(this.playlistEditFailedMessage.nativeElement.value)
+      this.snackBar.open(this.playlistEditFailedMessage.nativeElement.value, 'X')
     }
   }
 

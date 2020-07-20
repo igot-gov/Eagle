@@ -12,9 +12,9 @@
           (change)="onDrop($event.target.files[0]); fileInput.value = null" />
         <label for="file" class="up-lbl mat-h2 ws-mat-primary-text flex flex-middle justify-center">
           <mat-icon class="upload_cloud">cloud_upload</mat-icon>
-          <span i18n>Drag and drop files here</span>
+          <span i18n>Drag and drop file here</span>
           <span i18n>or</span>
-          <span>Browse files</span>
+          <span>Browse file</span>
         </label>
       </span>
       <div *ngIf="file || fileUploadForm.controls.artifactUrl.value" class="flex flex-middle justify-center">

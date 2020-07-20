@@ -230,7 +230,7 @@ export class RoleComponent implements OnInit {
       })
     } else {
       this.goalsAddingInProgess = false
-      this.snackBar.open('Goal not launched yet')
+      this.snackBar.open('Goal not launched yet', 'X')
     }
   }
 

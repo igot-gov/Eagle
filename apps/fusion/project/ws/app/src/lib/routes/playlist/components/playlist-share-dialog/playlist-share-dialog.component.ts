@@ -24,29 +24,29 @@ export class PlaylistShareDialogComponent {
       playlist: NsPlaylist.IPlaylist
       deleted: string[]
     },
-  ) {}
+  ) { }
 
   sharePlaylist(shareMsg: string, successToast: string) {
     if (this.data.playlist) {
       this.sharePlaylistStatus = 'fetching'
       this.playlistSvc
         .sharePlaylist(
-        {
-          message: shareMsg,
-          users: this.users.map(user => user.wid),
-        },
-        this.data.playlist.id,
+          {
+            message: shareMsg,
+            users: this.users.map(user => user.wid),
+          },
+          this.data.playlist.id,
         )
         .subscribe(
           () => {
             this.sharePlaylistStatus = 'done'
-            this.snackBar.open(successToast)
+            this.snackBar.open(successToast, 'X')
             this.dialogRef.close()
           },
           (err: any) => {
             this.sharePlaylistStatus = 'error'
             if (err.error.errorMessage !== 'content.deleted') {
-              this.snackBar.open(this.shareErrorMessage.nativeElement.value)
+              this.snackBar.open(this.shareErrorMessage.nativeElement.value, 'X')
             } else {
               this.snackBar.openFromTemplate(this.contentDeletedErrorMessage)
             }

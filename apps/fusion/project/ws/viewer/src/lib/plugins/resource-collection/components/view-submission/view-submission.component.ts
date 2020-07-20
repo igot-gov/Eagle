@@ -57,13 +57,13 @@ export class ViewSubmissionComponent implements OnInit {
           hideControls: true,
         }
       } else {
-        this.snackBar.open('Invalid Type', undefined, {
+        this.snackBar.open('Invalid Type', 'X', {
           duration: 1000,
         })
         this.close()
       }
     } else {
-      this.snackBar.open('Invalid Content', undefined, {
+      this.snackBar.open('Invalid Content', 'X', {
         duration: 1000,
       })
       this.close()

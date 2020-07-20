@@ -108,13 +108,13 @@ export class DbmsConceptCreateComponent implements OnInit {
         })
         if (flag) {
           if (this.dbRefreshSuccess) {
-            this.snackBar.open(this.dbRefreshSuccess.nativeElement.value)
+            this.snackBar.open(this.dbRefreshSuccess.nativeElement.value, 'X')
           }
         }
       },
       _err => {
         if (this.dbRefreshFailed) {
-          this.snackBar.open(this.dbRefreshFailed.nativeElement.value)
+          this.snackBar.open(this.dbRefreshFailed.nativeElement.value, 'X')
         }
       },
     )
@@ -251,10 +251,10 @@ export class DbmsConceptCreateComponent implements OnInit {
               this.hideOnlyTable = this.counter >= 3 ? false : true
               this.insertButtonText =
                 this.counter === 1
-                ? (this.secondEntry ? this.secondEntry.nativeElement.value : '')
+                  ? (this.secondEntry ? this.secondEntry.nativeElement.value : '')
                   : this.counter >= 2
-                  ? (this.thirdEntry ? this.thirdEntry.nativeElement.value : '')
-                  : (this.firstEntry ? this.firstEntry.nativeElement.value : '')
+                    ? (this.thirdEntry ? this.thirdEntry.nativeElement.value : '')
+                    : (this.firstEntry ? this.firstEntry.nativeElement.value : '')
               // tslint:disable-next-line:max-line-length
               this.telltext = this.valuesToInsertArray[0].telltext
                 ? this.valuesToInsertArray[0].telltext

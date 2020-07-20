@@ -75,7 +75,7 @@ export class GoalCommonCardComponent implements OnInit {
             this.createGoalStatus = 'done'
             this.goalCreated.emit()
             this.snackBar.open(
-              this.createGoalSuccessMessage.nativeElement.value,
+              this.createGoalSuccessMessage.nativeElement.value, 'X'
             )
             if (this.type === NsGoal.EGoalTypes.USER_COMMON) {
               this.router.navigate(['/app/goals/me'])
@@ -85,7 +85,7 @@ export class GoalCommonCardComponent implements OnInit {
           },
           () => {
             this.createGoalStatus = 'error'
-            this.snackBar.open(this.createGoalErrorMessage.nativeElement.value)
+            this.snackBar.open(this.createGoalErrorMessage.nativeElement.value, 'X')
           },
         )
     }

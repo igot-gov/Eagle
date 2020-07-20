@@ -138,7 +138,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
           },
           _err => {
             this.deletePlaylistStatus = 'error'
-            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value)
+            this.snackBar.open(this.playlistDeleteFailedMessage.nativeElement.value, 'X')
           },
         )
       }

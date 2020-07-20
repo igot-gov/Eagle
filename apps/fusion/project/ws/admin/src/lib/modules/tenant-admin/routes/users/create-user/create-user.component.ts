@@ -72,7 +72,7 @@ export class CreateUserComponent implements OnInit {
 
   private openSnackBar(primaryMsg: string, duration: number = 3000) {
     this.isFetching = false
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }
@@ -114,12 +114,12 @@ export class CreateUserComponent implements OnInit {
                 this.registerUser.reset()
                 this.resetAllCheckedRole()
               }).catch(
-              () => {
-                this.openSnackBar('User Created Error Occured While Adding Role')
-                this.registerUser.reset()
-                this.resetAllCheckedRole()
-              }
-            )
+                () => {
+                  this.openSnackBar('User Created Error Occured While Adding Role')
+                  this.registerUser.reset()
+                  this.resetAllCheckedRole()
+                }
+              )
           } else {
             this.openSnackBar('User Created Successfully')
             this.registerUser.reset()

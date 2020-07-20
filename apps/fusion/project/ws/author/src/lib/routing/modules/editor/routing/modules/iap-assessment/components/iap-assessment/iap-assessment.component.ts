@@ -160,7 +160,7 @@ export class IapAssessmentComponent implements OnInit {
                 this.preview()
               } else {
                 this.loaderService.changeLoad.next(false)
-                this.snackBar.open(response.list[0])
+                this.snackBar.open(response.list[0], 'X')
               }
             })
           }
@@ -419,7 +419,7 @@ export class IapAssessmentComponent implements OnInit {
         })
       } else {
         if (response && response.list) {
-          this.snackBar.open(response.list[0])
+          this.snackBar.open(response.list[0], 'X')
         }
       }
     })

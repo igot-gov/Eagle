@@ -41,7 +41,7 @@ export class BtnContentFeedbackDialogComponent implements OnInit {
     )
   }
   private openSnackBar(primaryMsg: string, duration: number = 3000) {
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }

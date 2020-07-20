@@ -9,11 +9,12 @@
       </div>
       <div class="flex flex-middle">
         <h2 *ngIf="chartsList?.dimensionsChart" i18n>User avg Compared to Org</h2>
-        <h2 *ngIf="!chartsList?.dimensionsChart" i18n>Learning Time</h2>
-        <button type="button" mat-icon-button (click)="showInfo('learningTimePerDay')"
+        <h1 *ngIf="!chartsList?.dimensionsChart" i18n (click)="showInfo('learningTimePerDay')">
+          Learning Time</h1>
+        <!-- <button type="button" mat-icon-button (click)="showInfo('learningTimePerDay')"
           class="margin-left-xs margin-bottom-m">
           <mat-icon>info</mat-icon>
-        </button>
+        </button>-->
       </div>
       <ng-container *ngIf="learningTimePerDay" i18n>This chart shows Time that you are viewing learning content on a
         particular day compared to the org.-wide average.</ng-container>

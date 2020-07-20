@@ -66,7 +66,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private utilitySvc: UtilityService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     const tab = this.route.snapshot.queryParamMap.get('tab')
@@ -207,7 +207,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
     if (this.contentLangForm.value.length < 4) {
       this.contentLanguage = this.contentLangForm.value
     } else {
-      this.snackBar.open(this.maxContentLangToast.nativeElement.value)
+      this.snackBar.open(this.maxContentLangToast.nativeElement.value, 'X')
       this.contentLangForm.setValue(this.contentLanguage)
     }
   }
@@ -240,7 +240,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
             this.router.navigate(['page', 'home'])
           }
         }
-        this.snackBar.open(this.successToast.nativeElement.value)
+        this.snackBar.open(this.successToast.nativeElement.value, 'X')
       })
   }
 

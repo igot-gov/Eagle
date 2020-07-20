@@ -262,7 +262,7 @@ export class QnaViewComponent implements OnInit, OnDestroy {
       (data: boolean) => {
         if (data) {
           this.router.navigate(['../'], { relativeTo: this.activatedRoute })
-          this.snackBar.open(successMsg)
+          this.snackBar.open(successMsg, 'X')
         }
       })
   }

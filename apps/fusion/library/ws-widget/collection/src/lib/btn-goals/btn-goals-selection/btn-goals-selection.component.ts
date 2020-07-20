@@ -62,7 +62,7 @@ export class BtnGoalsSelectionComponent implements OnInit {
       this.raiseTelemetry('add', goalId, this.contentId)
       this.goalsSvc.addContentToGoal(goalId, this.contentId, NsGoal.EGoalTypes.USER).subscribe(
         () => {
-          this.snackBar.open(this.contentAddMessage.nativeElement.value)
+          this.snackBar.open(this.contentAddMessage.nativeElement.value, 'X')
         }
         ,
         err => {
@@ -81,7 +81,7 @@ export class BtnGoalsSelectionComponent implements OnInit {
       this.raiseTelemetry('remove', goalId, this.contentId)
       this.goalsSvc.removeContentFromGoal(goalId, this.contentId, NsGoal.EGoalTypes.USER).subscribe(
         () => {
-          this.snackBar.open(this.contentRemoveMessage.nativeElement.value)
+          this.snackBar.open(this.contentRemoveMessage.nativeElement.value, 'X')
         }
         ,
         err => {

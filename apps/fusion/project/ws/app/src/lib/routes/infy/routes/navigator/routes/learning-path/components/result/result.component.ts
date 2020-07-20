@@ -138,7 +138,7 @@ export class ResultComponent implements OnInit, OnChanges {
       }
       this.filterList.push(data)
     })
-    // this.snackBar.open('Select your Learning Paths')
+    // this.snackBar.open('Select your Learning Paths', 'X')
   }
 
   removeSkill(skill: string) {
@@ -272,7 +272,7 @@ export class ResultComponent implements OnInit, OnChanges {
 
     if (!goalRequests.length) {
       this.goalsAddingInProgess = false
-      this.snackBar.open('Goal not launched yet')
+      this.snackBar.open('Goal not launched yet', 'X')
     } else {
 
       this.btnGoalsSvc.createGoals(goalRequests).subscribe(response => {

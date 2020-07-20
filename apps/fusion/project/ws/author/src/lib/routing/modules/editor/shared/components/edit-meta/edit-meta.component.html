@@ -190,7 +190,7 @@
                   <mat-label class="font-weight-bold"
                     i18n="Subtitle label|Label which explains the user to enter Subtitle"
                     [ngClass]="{ required: checkCondition('description', 'required') }" i18n>
-                    Short/Card Description</mat-label>
+                    Summary</mat-label>
                   <mat-form-field appearance="outline" class="margin-top-xs"
                     [ngClass]="{ 'mat-form-field-invalid': showError('description') }">
                     <textarea cdkTextareaAutosize name="description" #description class="resize-none"
@@ -208,7 +208,7 @@
                 [ngClass]="{ disable: checkCondition('body', 'disabled') }">
                 <label>
                   <div class="margin-top-xs flex flex-middle">
-                    <b i18n [ngClass]="{ required: checkCondition('body', 'required') }">Content Body (Long Description)
+                    <b i18n [ngClass]="{ required: checkCondition('body', 'required') }">Description
                     </b>
                     <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('contentBody')">info
                     </mat-icon> -->
@@ -246,7 +246,28 @@
             * Provide meta details. Depending on the content type, some properties are enabled or
             disabled.
           </p>
-          <div class="mobile-break margin-top-m ">
+          <div class="mobile-break margin-top-m">
+            <div class="margin-top-xs margin-left-xl flex-05" *ngIf="checkCondition('resourceType', 'show')"
+              [ngClass]="{ disable: checkCondition('resourceType', 'disabled') }">
+              <label [ngClass]="{ required: checkCondition('resourceType', 'required') }">
+                <b *ngIf="isSiemens" i18n>Format</b>
+                <b *ngIf="!isSiemens" i18n>Category Type</b>
+              </label>
+              <div class="margin-top-xs">
+                <mat-form-field appearance="outline" class="margin-top-s"
+                  [ngClass]="{ 'mat-form-field-invalid': showError('resourceType') }">
+                  <mat-select formControlName="resourceType" placeholder="--Select--"
+                    [required]="checkCondition('resourceType', 'required')">
+                    <mat-option *ngIf="!checkCondition('resourceType', 'required')" i18n [value]="null">None
+                    </mat-option>
+                    <mat-option *ngFor="let resource of ordinals.categoryType" [value]="resource">
+                      {{ resource }}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="showError('resourceType')" i18n>Category Type is mandatory
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
             <div class="margin-top-s margin-left-xl flex-1" *ngIf="checkCondition('contentType', 'show')"
               [ngClass]="{ disable: checkCondition('contentType', 'disabled') }">
               <label [ngClass]="{ required: checkCondition('contentType', 'required') }">
@@ -270,27 +291,7 @@
                 </mat-error>
               </div>
             </div>
-            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('resourceType', 'show')"
-              [ngClass]="{ disable: checkCondition('resourceType', 'disabled') }">
-              <label [ngClass]="{ required: checkCondition('resourceType', 'required') }">
-                <b *ngIf="isSiemens" i18n>Format</b>
-                <b *ngIf="!isSiemens" i18n>Category Type</b>
-              </label>
-              <div class="margin-top-xs">
-                <mat-form-field appearance="outline" class="margin-top-s"
-                  [ngClass]="{ 'mat-form-field-invalid': showError('resourceType') }">
-                  <mat-select formControlName="resourceType" placeholder="--Select--"
-                    [required]="checkCondition('resourceType', 'required')">
-                    <mat-option *ngIf="!checkCondition('resourceType', 'required')" i18n [value]="null">None
-                    </mat-option>
-                    <mat-option *ngFor="let resource of ordinals.categoryType" [value]="resource">
-                      {{ resource }}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="showError('resourceType')" i18n>Category Type is mandatory
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
+
           </div>
           <div class="mobile-break">
             <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('sourceName', 'show')"
@@ -313,8 +314,7 @@
             <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('complexityLevel', 'show')"
               [ngClass]="{ disable: checkCondition('complexityLevel', 'disabled') }">
               <label>
-                <div class="margin-top-xs flex flex-middle"
-                  [ngClass]="{ required: checkCondition('complexityLevel', 'required') }">
+                <div class="flex flex-middle" [ngClass]="{ required: checkCondition('complexityLevel', 'required') }">
                   <b i18n>Knowledge Level</b>
                   <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('knowledgeLevel')">info
                   </mat-icon> -->
@@ -404,7 +404,7 @@
             <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('exclusiveContent', 'show')"
               [ngClass]="{ disable: checkCondition('exclusiveContent', 'disabled') }">
               <label>
-                <div class="margin-top-xs flex flex-middle">
+                <div class="flex flex-middle">
                   <b [ngClass]="{ required: checkCondition('exclusiveContent', 'required') }" i18n>Cost</b>
                   <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('exclusiveContent')">
                     info
@@ -426,7 +426,7 @@
             </div>
           </div>
           <div class="mobile-break">
-            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('keywords', 'show')"
+            <div class="margin-top-xs margin-left-xl flex-05" *ngIf="checkCondition('keywords', 'show')"
               [ngClass]="{ disable: checkCondition('keywords', 'disabled') }">
               <label>
                 <div class="margin-top-xs flex flex-middle">
@@ -444,8 +444,8 @@
                   keyword.
                 </span>
               </label>
-              <div class="margin-top-xs flex margin-right-xl">
-                <mat-form-field class="keywords-chip-list margin-top-xs flex-grow80" appearance="outline"
+              <div class="margin-top-xs flex flex-1">
+                <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
                   [ngClass]="{ 'mat-form-field-invalid': showError('keywords') }">
                   <mat-chip-list #keywords aria-label="Keyword selection">
                     <mat-chip *ngFor="let key of contentForm.controls.keywords.value" [selectable]="selectable"
@@ -640,7 +640,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('org', 'show')"
+            <div class="margin-top-xs margin-left-xl flex-05" *ngIf="checkCondition('org', 'show')"
               [ngClass]="{ disable: checkCondition('org', 'disabled') }">
               <label>
                 <div class="margin-top-xs flex flex-middle">
@@ -653,7 +653,7 @@
                 </span>
               </label>
               <div class="margin-top-s">
-                <mat-form-field appearance="outline" class="margin-top-xs width-90"
+                <mat-form-field appearance="outline" class="margin-top-xs"
                   [ngClass]="{ 'mat-form-field-invalid': showError('org') }">
                   <mat-select formControlName="org" i18n-placeholder placeholder="--Select--" multiple>
                     <mat-select-trigger>
@@ -708,7 +708,7 @@
                 </div>
               </div>
             </div>
-            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('accessPaths', 'show')"
+            <div class="margin-top-xs margin-left-xl flex-05" *ngIf="checkCondition('accessPaths', 'show')"
               [ngClass]="{ disable: checkCondition('accessPaths', 'disabled') }">
               <label>
                 <div class="margin-top-xs flex flex-middle">
@@ -890,7 +890,7 @@
         </div>
         <div class="margin-top-xl margin-right-l">
           <div class="mobile-break">
-            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('trackContacts', 'show')"
+            <div class="margin-top-xs margin-left-xl flex-05" *ngIf="checkCondition('trackContacts', 'show')"
               [ngClass]="{ disable: checkCondition('trackContacts', 'disabled') }">
               <label>
                 <div class="margin-top-xs flex flex-middle">
@@ -930,7 +930,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="margin-top-xs margin-left-xl flex-1" *ngIf="checkCondition('publisherDetails', 'show')"
+            <div class="margin-top-xs margin-left-xl flex-05" *ngIf="checkCondition('publisherDetails', 'show')"
               [ngClass]="{ disable: checkCondition('publisherDetails', 'disabled') }">
               <label>
                 <div class="margin-top-xs flex flex-middle">

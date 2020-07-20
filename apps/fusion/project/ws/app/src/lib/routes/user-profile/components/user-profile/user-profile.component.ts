@@ -194,7 +194,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     })
   }
 
-  createDegreeWithValues (degree: any): FormGroup {
+  createDegreeWithValues(degree: any): FormGroup {
     return this.fb.group({
       degree: new FormControl(degree.degree, []),
       instituteName: new FormControl(degree.instituteName, []),
@@ -618,7 +618,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       otherDetailsOfficeAddress: data.employmentDetails.officialPostalAddress,
       otherDetailsOfficePinCode: data.employmentDetails.pinCode,
       skillAquiredDesc: data.skills.additionalSkills,
-      certificationDesc: data.skills.certificateDetails },
+      certificationDesc: data.skills.certificateDetails,
+    },
                                    { emitEvent: true })
     this.cd.detectChanges()
     this.cd.markForCheck()
@@ -639,7 +640,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
 
     if (organisation.industry === 'Other') {
-        this.showIndustryOther = true
+      this.showIndustryOther = true
     }
   }
 
@@ -727,7 +728,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       doj: form.value.doj,
       description: form.value.orgDesc,
       completePostalAddress: '',
-      additionalAttributes: { },
+      additionalAttributes: {},
     }
     if (form.value.isGovtOrg) {
       org.organisationType = 'Government'
@@ -827,7 +828,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 5000) {
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }

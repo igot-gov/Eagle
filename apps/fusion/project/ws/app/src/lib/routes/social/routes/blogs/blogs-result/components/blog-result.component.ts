@@ -75,7 +75,7 @@ export class BlogResultComponent implements OnInit {
           hits: this.blogResult.hits - 1,
           result: this.blogResult.result.filter((blog: any) => blog.id !== blogId),
         }
-        this.snackBar.open(successMsg)
+        this.snackBar.open(successMsg, 'X')
       }
     })
   }

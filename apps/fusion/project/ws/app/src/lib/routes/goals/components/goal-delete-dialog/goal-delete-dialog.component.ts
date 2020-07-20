@@ -21,7 +21,7 @@ export class GoalDeleteDialogComponent {
     @Inject(MAT_DIALOG_DATA) public goal: NsGoal.IGoal,
     private goalSvc: BtnGoalsService,
     private snackBar: MatSnackBar,
-  ) {}
+  ) { }
 
   deleteGoal() {
     if (this.goal) {
@@ -29,12 +29,12 @@ export class GoalDeleteDialogComponent {
       this.goalSvc.deleteGoal(this.goal.type, this.goal.id).subscribe(
         () => {
           this.deleteGoalStatus = 'done'
-          this.snackBar.open(this.successDeleteMessage.nativeElement.value)
+          this.snackBar.open(this.successDeleteMessage.nativeElement.value, 'X')
           this.dialogRef.close(true)
         },
         () => {
           this.deleteGoalStatus = 'error'
-          this.snackBar.open(this.errorDeleteMessage.nativeElement.value)
+          this.snackBar.open(this.errorDeleteMessage.nativeElement.value, 'X')
         },
       )
     }

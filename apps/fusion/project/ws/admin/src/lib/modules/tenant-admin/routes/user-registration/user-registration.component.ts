@@ -50,17 +50,17 @@ export class UserRegistrationComponent implements OnInit {
     const users = this.userForm.get('registrationMeta') as FormArray
     if (!users.length) {
       const msg = 'Please select a user'
-      this.snackBar.open(msg)
+      this.snackBar.open(msg, 'X')
       return
     }
     if (source === undefined || !source.length) {
       const msg = 'Please select a source'
-      this.snackBar.open(msg)
+      this.snackBar.open(msg, 'X')
       return
     }
     if (this.userForm.invalid || this.userForm.untouched) {
       const msg = 'Please enter all the details'
-      this.snackBar.open(msg)
+      this.snackBar.open(msg, 'X')
       return
     }
     this.isLoading = true
@@ -78,7 +78,7 @@ export class UserRegistrationComponent implements OnInit {
     }
     this.tenantAdminSvc.registerUsers(req).then((res: any) => {
       if (!res.alreadyRegistered.length && !res.registrationError.length) {
-        this.snackBar.open('All users have been registered successfully')
+        this.snackBar.open('All users have been registered successfully', 'X')
       }
       if (res.alreadyRegistered.length) {
         this.alreadyRegistered(res.alreadyRegistered)

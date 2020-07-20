@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(
     private snackBar: MatSnackBar,
     private signupService: SignupService,
-    ) {
+  ) {
     this.signupForm = new FormGroup({
       fname: new FormControl('', [Validators.required]),
       lname: new FormControl('', [Validators.required]),
@@ -45,19 +45,19 @@ export class SignupComponent implements OnInit, OnDestroy {
   onSubmit(form: any) {
     this.uploadSaveData = true
     this.signupService.signup(form.value).subscribe(
-    () => {
-      form.reset()
-      this.uploadSaveData = false
-      this.openSnackbar(this.toastSuccess.nativeElement.value)
-    },
-    err => {
-      this.openSnackbar(err.error.split(':')[1])
-      this.uploadSaveData = false
-    })
+      () => {
+        form.reset()
+        this.uploadSaveData = false
+        this.openSnackbar(this.toastSuccess.nativeElement.value)
+      },
+      err => {
+        this.openSnackbar(err.error.split(':')[1])
+        this.uploadSaveData = false
+      })
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 5000) {
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }

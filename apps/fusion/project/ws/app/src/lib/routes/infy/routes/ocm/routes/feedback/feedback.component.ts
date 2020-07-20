@@ -32,7 +32,7 @@ export class FeedbackComponent implements OnInit {
   submitInProgress = false
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
-  constructor(private ocmService: OcmService, private snackBar: MatSnackBar) {}
+  constructor(private ocmService: OcmService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.resetForm()
@@ -61,10 +61,10 @@ export class FeedbackComponent implements OnInit {
         this.resetForm()
         feedbackForm.resetForm()
         this.submitInProgress = false
-        this.snackBar.open(this.toastSuccess.nativeElement.value)
+        this.snackBar.open(this.toastSuccess.nativeElement.value, 'X')
       },
       () => {
-        this.snackBar.open(this.toastError.nativeElement.value)
+        this.snackBar.open(this.toastError.nativeElement.value, 'X')
         this.submitInProgress = false
       },
     )
