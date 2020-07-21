@@ -5,37 +5,21 @@
  *
  */
 
-package com.infosys.lexauthoringservices;
+package com.infosys.recommendationservice;
 
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
+//@ComponentScan({"com.delivery.service","com.delivery.request"})
 @EnableAsync
 public class RecommendationserviceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RecommendationserviceApplication.class, args);
-    }
 
-    /**
-     * Initializes the rest template
-     *
-     * @return
-     * @throws Exception
-     */
-    @Bean
-    public RestTemplate restTemplate() throws Exception {
-        return new RestTemplate();
     }
-
 
 }

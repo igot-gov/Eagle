@@ -5,7 +5,7 @@
  *
  */
 
-package com.infosys.recommendation.util;
+package com.infosys.recommendationservice.util;
 
 import com.infosys.recommendationservice.model.cassandra.Competency;
 import com.infosys.recommendationservice.model.cassandra.CompetencyPrimarykey;

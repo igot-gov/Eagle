@@ -7,16 +7,19 @@
 
 package com.infosys.recommendationservice.repository.cassandra.bodhi;
 
-import com.infosys.recommendationservice.model.cassandra.Competency;
-import com.infosys.recommendationservice.model.cassandra.CompetencyPrimarykey;
+import com.infosys.recommendationservice.model.cassandra.UserCompetency;
+import com.infosys.recommendationservice.model.cassandra.UserCompetencyPrimarykey;
 import org.springframework.data.cassandra.repository.CassandraRepository;
+import org.springframework.data.cassandra.repository.Query;
 
-public interface CompetencyRepository
-		extends CassandraRepository<Competency, CompetencyPrimarykey> {
+import java.util.List;
 
-//	@Query("SELECT * from content_work_flow where root_org= ?0 AND org= ?1 AND content_type= ?2;")
-//	public ContentWorkFlowModel findByPrimaryKeyContentWorkFlow(String root_org, String org, String content_type);
-//
+public interface UserCompetencyRepository
+		extends CassandraRepository<UserCompetency, UserCompetencyPrimarykey> {
+
+	@Query("SELECT * from user_competency where root_org= ?0 AND org= ?1 AND user_id= ?2 AND user_role=?3;")
+	public List<UserCompetency> findAllByUser(String root_org, String org, String userId, String userrole);
+
 //	@Query("Select * from content_work_flow where root_org= ?0 AND org= ?1;")
 //	public List<ContentWorkFlowModel> findAllByRootOrg(String rootOrg, String org);
 }

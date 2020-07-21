@@ -7,6 +7,8 @@
 package com.infosys.recommendationservice.controller;
 
 import com.infosys.recommendationservice.model.Response;
+import com.infosys.recommendationservice.model.UserCompetencyRequest;
+import com.infosys.recommendationservice.service.UserCompentancyService;
 import com.infosys.recommendationservice.serviceimpl.ContentSearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,16 +18,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/recommendation")
-public class RecommendationController {
+@RequestMapping("/user/competency")
+public class CompetencyController {
 
     @Autowired
-    private ContentSearchServiceImpl searchService;
+    private UserCompentancyService userCompentancyService;
 
-    @PostMapping("/contents")
-    public ResponseEntity<Response> findContents(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody Map<String,Object> request) throws Exception{
+    @PostMapping("/add")
+    public ResponseEntity<Response> add(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody UserCompetencyRequest request) throws Exception{
 
-        Response response = searchService.search(request, rootOrg, org);
+        Response response = userCompentancyService.upsert(request, rootOrg, org);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
 
     }

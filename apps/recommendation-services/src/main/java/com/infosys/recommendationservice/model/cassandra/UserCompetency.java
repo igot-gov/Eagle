@@ -7,68 +7,80 @@
 
 package com.infosys.recommendationservice.model.cassandra;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
-@Table("user")
-public class User {
+@Table("user_competency")
+public class UserCompetency {
 
 	@PrimaryKey
-	@Column("id")
-	private String id;
+	private UserCompetencyPrimarykey userCompetencyPrimarykey;
 
-	@Column("email")
-	private String email;
+	@Column("competency")
+	private String competency;
 
-	@Column("firstname")
-	private String firstName;
+	@Column("level")
+	private int level;
 
-	@Column("lastname")
-	private String lastName;
+	@Column("isCompetent")
+	@Value("${competent.default.value}")
+	private boolean isCompetent;
 
-	public String getId() {
-		return id;
-	}
+	@Column("delta")
+	private double delta;
 
-	public void setId(String id) {
-		this.id = id;
-	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public User(String id, String email, String firstName, String lastName) {
+	public UserCompetency(UserCompetencyPrimarykey userCompetencyPrimarykey, String competency, int level) {
 		super();
-		this.id = id;
-		this.email = email;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.userCompetencyPrimarykey = userCompetencyPrimarykey;
+		this.competency = competency;
+		this.level = level;
+
 	}
 
-	public User() {
+	public UserCompetency() {
 		super();
 	}
 
+	public UserCompetencyPrimarykey getUserCompetencyPrimarykey() {
+		return userCompetencyPrimarykey;
+	}
+
+	public void setUserCompetencyPrimarykey(UserCompetencyPrimarykey userCompetencyPrimarykey) {
+		this.userCompetencyPrimarykey = userCompetencyPrimarykey;
+	}
+
+	public String getCompetency() {
+		return competency;
+	}
+
+	public void setCompetency(String competency) {
+		this.competency = competency;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public boolean isCompetent() {
+		return isCompetent;
+	}
+
+	public void setCompetent(boolean competent) {
+		isCompetent = competent;
+	}
+
+	public double getDelta() {
+		return delta;
+	}
+
+	public void setDelta(double delta) {
+		this.delta = delta;
+	}
 }

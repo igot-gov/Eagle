@@ -8,13 +8,14 @@
 package com.infosys.recommendationservice.model.cassandra;
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
 import java.io.Serializable;
 
 @PrimaryKeyClass
-public class UserCompetencyPrimarykey implements Serializable {
+public class CompetencyPrimarykey implements Serializable {
 
 	/**
 	 *
@@ -27,26 +28,21 @@ public class UserCompetencyPrimarykey implements Serializable {
 	@PrimaryKeyColumn(name = "org")
 	private String org;
 
-	@PrimaryKeyColumn(name = "user_id")
-	private String userId;
+	@PrimaryKeyColumn("competency")
+	private String competency;
 
-	@PrimaryKeyColumn(name = "user_role")
-	private String userRole;
 
-	public UserCompetencyPrimarykey(){
+	public CompetencyPrimarykey(){
 		super();
 	}
 
-	public UserCompetencyPrimarykey(String userId, String userRole) {
+	public CompetencyPrimarykey(String rootOrg, String org, String competency) {
 		super();
-		this.userId = userId;
-		this.userRole = userRole;
-	}
+		this.rootOrg = rootOrg;
+		this.org = org;
+		this.competency = competency;
 
-	public String getUserId() {
-		return userId;
 	}
-
 	public String getRootOrg() {
 		return rootOrg;
 	}
@@ -63,17 +59,6 @@ public class UserCompetencyPrimarykey implements Serializable {
 		this.org = org;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
 
 
 }

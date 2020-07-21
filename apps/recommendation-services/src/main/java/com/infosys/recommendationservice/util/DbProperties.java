@@ -5,7 +5,7 @@
  *
  */
 
-package com.infosys.recommendation.util;
+package com.infosys.recommendationservice.util;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

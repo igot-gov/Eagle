@@ -12,10 +12,10 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table("user_competency")
-public class UserCompetency {
+public class Competency {
 
 	@PrimaryKey
-	private UserCompetencyPrimarykey userCompetencyPrimarykey;
+	private CompetencyPrimarykey competencyPrimarykey;
 
 	@Column("competency")
 	private String competency;
@@ -23,32 +23,23 @@ public class UserCompetency {
 	@Column("level")
 	private int level;
 
-	@Column("isCompetent")
-	private boolean isCompetent;
-
-	@Column("delta")
-	private double delta;
-
-
-	public UserCompetency(UserCompetencyPrimarykey userCompetencyPrimarykey, String competency, int level, boolean isCompetent, double delta) {
+	public Competency(CompetencyPrimarykey competencyPrimarykey, String competency, int level) {
 		super();
-		this.userCompetencyPrimarykey = userCompetencyPrimarykey;
+		this.competencyPrimarykey = competencyPrimarykey;
 		this.competency = competency;
 		this.level = level;
-		this.isCompetent = isCompetent;
-		this.delta = delta;
 	}
 
-	public UserCompetency() {
+	public Competency() {
 		super();
 	}
 
-	public UserCompetencyPrimarykey getUserCompetencyPrimarykey() {
-		return userCompetencyPrimarykey;
+	public CompetencyPrimarykey getCompetencyPrimarykey() {
+		return competencyPrimarykey;
 	}
 
-	public void setUserCompetencyPrimarykey(UserCompetencyPrimarykey userCompetencyPrimarykey) {
-		this.userCompetencyPrimarykey = userCompetencyPrimarykey;
+	public void setCompetencyPrimarykey(CompetencyPrimarykey competencyPrimarykey) {
+		this.competencyPrimarykey = competencyPrimarykey;
 	}
 
 	public String getCompetency() {
@@ -67,19 +58,4 @@ public class UserCompetency {
 		this.level = level;
 	}
 
-	public boolean isCompetent() {
-		return isCompetent;
-	}
-
-	public void setCompetent(boolean competent) {
-		isCompetent = competent;
-	}
-
-	public double getDelta() {
-		return delta;
-	}
-
-	public void setDelta(double delta) {
-		this.delta = delta;
-	}
 }
