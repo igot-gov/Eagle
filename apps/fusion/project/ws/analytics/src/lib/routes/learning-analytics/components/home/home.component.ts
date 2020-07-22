@@ -1020,6 +1020,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // users by Roles BarChart Data
       const barChartRolesLabel: string[] = []
       const rolesData: number[] = []
+      if (!this.contentData.role) {
+        this.contentData.role = []
+      }
       this.contentData.role.forEach((source: any) => {
         if (barChartRolesLabel.length < 20) {
           barChartRolesLabel.push(source.key)
@@ -1346,6 +1349,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // users by Device Category PieChart Data
       const pieChartDeviceCategoryLabel: string[] = []
       const deviceCategoryData: number[] = []
+      if (!this.contentData.device_category) {
+        this.contentData.device_category = []
+      }
       this.contentData.device_category.forEach((city: any) => {
         if (pieChartDeviceCategoryLabel.length < 20) {
           pieChartDeviceCategoryLabel.push(city.key)

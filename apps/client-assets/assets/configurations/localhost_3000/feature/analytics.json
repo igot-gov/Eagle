@@ -7,8 +7,30 @@
         "enabled": true,
         "available": true,
         "apiLink": {
-          "iframeClientApi": false,
-          "iframeAPi": true
+          "iframeClientApi": true,
+          "iframeAPi": false
+        }
+      },
+      "learningAnalytics": {
+        "enabled": true,
+        "available": true,
+        "mainTitle": "Manager's Dashboard",
+        "tabs": {
+          "home": {
+            "enabled": true,
+            "available": true,
+            "displayName": "Home"
+          },
+          "content": {
+            "enabled": true,
+            "available": true,
+            "displayName": "Content",
+            "subTabs": {
+              "courses": true,
+              "modules": false,
+              "resources": true
+            }
+          }
         }
       }
     }
