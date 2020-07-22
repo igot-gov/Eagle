@@ -37,6 +37,7 @@ export class EmptyRouteGuard implements CanActivate {
     } else {
       redirectUrl = document.baseURI
     }
-    return !!Promise.resolve(this.authSvc.login('S', redirectUrl))
+    Promise.resolve(this.authSvc.login('S', redirectUrl))
+    return false
   }
 }
