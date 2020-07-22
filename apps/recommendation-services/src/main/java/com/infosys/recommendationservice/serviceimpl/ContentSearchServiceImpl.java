@@ -8,10 +8,15 @@ package com.infosys.recommendationservice.serviceimpl;
 
 import com.infosys.recommendationservice.model.Response;
 import com.infosys.recommendationservice.model.cassandra.UserCompetency;
+import com.infosys.recommendationservice.model.cassandra.UserPositionCompetency;
+import com.infosys.recommendationservice.model.cassandra.UserPositionCompetencyPrimarykey;
 import com.infosys.recommendationservice.repository.cassandra.bodhi.UserCompetencyRepository;
+import com.infosys.recommendationservice.repository.cassandra.bodhi.UserPositionCompetencyRepository;
+import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -24,7 +29,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.springframework.core.env.Environment;
+
+import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
+import static org.elasticsearch.index.query.QueryBuilders.rangeQuery;
 
 
 @Service
@@ -41,7 +51,7 @@ public class ContentSearchServiceImpl {
     private RestHighLevelClient restHighLevelClient;
 
     @Autowired
-    UserCompetencyRepository userCompetencyRepository;
+    UserPositionCompetencyRepository userPositionCompetencyRepository;
 
     public Response search(Map<String, Object> request, String rootOrg, String org, int pageSize, int pageNo) {
 
@@ -51,11 +61,11 @@ public class ContentSearchServiceImpl {
             String userId = (String) request.get("user_id");
             String userRole = (String) request.get("user_role");
 
-            //finds the user competency keywords
-            List<String> competencies = competencyKeywords(rootOrg, org, userId, userRole);
+            //finds the user competencies
+            List<UserPositionCompetency> userCompetencies = userPositionCompetencyRepository.findAllByUserAndPosition(rootOrg, org, userId, userRole);
 
             //Build the search request to fire ES
-            SearchRequest searchRequest = buildSearchRequest("tags", pageNo, pageSize, competencies);
+            SearchRequest searchRequest = buildCompetencySearchRequest(pageNo, pageSize, userCompetencies);
             SearchHits searchHits = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT).getHits();
 
             //Parse the ES response
@@ -76,26 +86,27 @@ public class ContentSearchServiceImpl {
         return response;
     }
 
-    private List<String> competencyKeywords(String rootOrg, String org, String userId, String userrole) {
-        List<UserCompetency> userCompetencies = userCompetencyRepository.findAllByUser(rootOrg, org, userId, userrole);
-        return userCompetencies.stream().filter(userCompetency -> userCompetency.getDelta() > 0.0)
-                .map(UserCompetency::getCompetency).collect(Collectors.toList());
 
-    }
-
-    private SearchRequest buildSearchRequest(String name, int offset, int limit, List<String> values) throws Exception{
+    private SearchRequest buildCompetencySearchRequest(int offset, int limit, List<UserPositionCompetency> userPositionCompetencies) throws Exception{
 
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(environment.getProperty("es.index"));
         searchRequest.types(environment.getProperty("es.index.type"));
 
-        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
-        if (values != null) {
-            boolQueryBuilder.must(QueryBuilders.termsQuery(name.concat(".keyword"), values));
+        String path = "tagmapping";
+        BoolQueryBuilder query = QueryBuilders.boolQuery();
+
+        for(UserPositionCompetency upc: userPositionCompetencies){
+            query.should(
+                    QueryBuilders.boolQuery()
+                            .must(QueryBuilders.termQuery(path.concat(".competency"), upc.getUserCompetency()))
+                            .must(QueryBuilders.termsQuery(path.concat(".level"), upc.getDelta())));
         }
 
+
+        BoolQueryBuilder qb = boolQuery().must(QueryBuilders.nestedQuery(path, query, ScoreMode.Avg));
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(boolQueryBuilder);
+        searchSourceBuilder.query(qb);
         searchSourceBuilder.size(limit);
         searchSourceBuilder.from(offset);
 
