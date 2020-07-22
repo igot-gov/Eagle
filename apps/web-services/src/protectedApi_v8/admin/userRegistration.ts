@@ -263,44 +263,47 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
         const workSheetsFromFile = xlsx.parse(filePath + `${uuid}.${ext}`)
         for (const sheet of workSheetsFromFile) {
             for (const row of sheet.data.slice(1)) {
-                // tslint:disable-next-line: no-any
-                const [fname, lname, email] = row as any
-                if (!email) {
-                    reportData.push([`\n${email}`, `Invalid Email & failed`])
-                }
-                if (email.length > 254) {
-                    reportData.push([`\n${email}`, `Invalid Email & failed`])
-                }
-                const valid = emailRegex.test(email)
-                if (!valid) {
-                    reportData.push([`\n${email}`, `Invalid Email & failed`])
-                } else {
-                    const reqToNewUser = {
-                        body: {
-                            email,
-                            fname,
-                            lname,
-                        },
+                if (row.length) {
+                    // tslint:disable-next-line: no-any
+                    const [fname, lname, email] = row as any
+                    if (!email) {
+                        reportData.push([`\n${email}`, `Invalid Email & failed`])
+                        continue
                     }
-                    const userId = await createUser(reqToNewUser)
-                        .catch((err) => {
-                            if (err.response.status === 409) {
-                                reportData.push([`\n${email}`, `User with email ${email} is already exists`])
-                            } else {
-                                reportData.push([`\n${email}`, `User could not be created in Keycloack`])
-                            }
-                        })
-                    if (userId) {
-                        let msg = ''
-                        await performNewUserSteps(userId, req)
+                    if (email && email.length > 254) {
+                        reportData.push([`\n${email}`, `Invalid Email & failed`])
+                        continue
+                    }
+                    const valid = emailRegex.test(email)
+                    if (!valid) {
+                        reportData.push([`\n${email}`, `Invalid Email & failed`])
+                    } else {
+                        const reqToNewUser = {
+                            body: {
+                                email,
+                                fname,
+                                lname,
+                            },
+                        }
+                        const userId = await createUser(reqToNewUser)
                             .catch((err) => {
-                                // reportData.push([`\n${email}`, `${err}`])
-                                msg = `${err}`
+                                if (err.response.status === 409) {
+                                    reportData.push([`\n${email}`, `User with email ${email} is already exists`])
+                                } else {
+                                    reportData.push([`\n${email}`, `User could not be created in Keycloack`])
+                                }
                             })
-                        reportData.push([`\n${email}`, `success & ${msg} `])
+                        if (userId) {
+                            let msg = ''
+                            await performNewUserSteps(userId, req)
+                                .catch((err) => {
+                                    // reportData.push([`\n${email}`, `${err}`])
+                                    msg = `${err}`
+                                })
+                            reportData.push([`\n${email}`, `success & ${msg} `])
+                        }
                     }
                 }
-
             }
         }
         const reqToUpdate = {
