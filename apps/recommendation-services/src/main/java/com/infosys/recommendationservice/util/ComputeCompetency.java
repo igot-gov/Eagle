@@ -7,14 +7,12 @@
 
 package com.infosys.recommendationservice.util;
 
-import com.infosys.recommendationservice.model.cassandra.Competency;
-import com.infosys.recommendationservice.model.cassandra.CompetencyPrimarykey;
-import com.infosys.recommendationservice.model.cassandra.UserCompetency;
+import com.infosys.recommendationservice.model.cassandra.*;
 import com.infosys.recommendationservice.repository.cassandra.bodhi.CompetencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import org.apache.commons.collections.CollectionUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,19 +24,16 @@ public class ComputeCompetency {
         this.competencyRepository = competencyRepository;
     }
 
-    public void compute(UserCompetency userCompetency){
+    public void compute(UserPositionCompetency userPositionCompetency){
 
-        int userLevel = userCompetency.getLevel();
-        CompetencyPrimarykey pk = new CompetencyPrimarykey(userCompetency.getUserCompetencyPrimarykey().getRootOrg(),userCompetency.getUserCompetencyPrimarykey().getOrg(),userCompetency.getCompetency());
-        Optional<Competency> competency = competencyRepository.findById(pk);
-        int expectedLevel = competency.get().getLevel();
-        double diff = Double.compare(expectedLevel, userLevel);
+        List<Integer> userLevel = userPositionCompetency.getUserLevel();
+        PositionCompetencyPrimarykey pk = new PositionCompetencyPrimarykey(userPositionCompetency.getUserPositionCompetencyPrimarykey().getRootOrg(),userPositionCompetency.getUserPositionCompetencyPrimarykey().getOrg(),userPositionCompetency.getUserPositionCompetencyPrimarykey().getUserRole(),userPositionCompetency.getUserCompetency());
+        Optional<PositionCompetency> pcompetency = competencyRepository.findById(pk);
+        List<Integer> expectedLevel = pcompetency.get().getLevel();
 
-        boolean isCompetant = (diff<0.0 || diff == 0.0) ? true : false;
-        userCompetency.setDelta(diff);
-        userCompetency.setCompetent(isCompetant);
+        List<Integer> diff = new ArrayList<>(CollectionUtils.subtract(expectedLevel, userLevel));
+        userPositionCompetency.setDelta(diff);
 
     }
-
 
 }

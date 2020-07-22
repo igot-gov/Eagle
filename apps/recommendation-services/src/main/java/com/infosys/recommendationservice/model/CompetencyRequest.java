@@ -7,10 +7,12 @@
 
 package com.infosys.recommendationservice.model;
 
+import java.util.List;
+
 public class CompetencyRequest {
 
     private String competency;
-    private int level;
+    private List<Integer> level;
 
     public String getCompetency() {
         return competency;
@@ -20,11 +22,11 @@ public class CompetencyRequest {
         this.competency = competency;
     }
 
-    public int getLevel() {
+    public List<Integer> getLevel() {
         return level;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(List<Integer> level) {
         this.level = level;
     }
 }

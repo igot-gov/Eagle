@@ -9,10 +9,12 @@ package com.infosys.recommendationservice.repository.cassandra.bodhi;
 
 import com.infosys.recommendationservice.model.cassandra.Competency;
 import com.infosys.recommendationservice.model.cassandra.CompetencyPrimarykey;
+import com.infosys.recommendationservice.model.cassandra.PositionCompetency;
+import com.infosys.recommendationservice.model.cassandra.PositionCompetencyPrimarykey;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 
 public interface CompetencyRepository
-		extends CassandraRepository<Competency, CompetencyPrimarykey> {
+		extends CassandraRepository<PositionCompetency, PositionCompetencyPrimarykey> {
 
 //	@Query("SELECT * from content_work_flow where root_org= ?0 AND org= ?1 AND content_type= ?2;")
 //	public ContentWorkFlowModel findByPrimaryKeyContentWorkFlow(String root_org, String org, String content_type);

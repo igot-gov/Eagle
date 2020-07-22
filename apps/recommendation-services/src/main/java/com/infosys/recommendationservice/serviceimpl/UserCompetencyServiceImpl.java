@@ -8,14 +8,16 @@
 package com.infosys.recommendationservice.serviceimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.recommendationservice.exception.ApplicationServiceError;
+import com.infosys.recommendationservice.exception.BadRequestException;
+import com.infosys.recommendationservice.model.cassandra.UserPositionCompetency;
+import com.infosys.recommendationservice.model.cassandra.UserPositionCompetencyPrimarykey;
+import com.infosys.recommendationservice.repository.cassandra.bodhi.UserPositionCompetencyRepository;
 import com.infosys.recommendationservice.util.ComputeCompetency;
 import com.infosys.recommendationservice.model.CompetencyRequest;
 import com.infosys.recommendationservice.model.Response;
 import com.infosys.recommendationservice.model.UserCompetencyRequest;
-import com.infosys.recommendationservice.model.cassandra.UserCompetency;
-import com.infosys.recommendationservice.model.cassandra.UserCompetencyPrimarykey;
 import com.infosys.recommendationservice.repository.cassandra.bodhi.CompetencyRepository;
-import com.infosys.recommendationservice.repository.cassandra.bodhi.UserCompetencyRepository;
 import com.infosys.recommendationservice.service.UserCompentancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +31,7 @@ public class UserCompetencyServiceImpl implements UserCompentancyService {
     //ComputeCompetency computeCompetency;
 
     @Autowired
-    UserCompetencyRepository userCompetencyRepository;
+    UserPositionCompetencyRepository userPositionCompetencyRepository;
 
     @Value("${competency.computation.enabled}")
     private boolean toCompute;
@@ -47,22 +49,22 @@ public class UserCompetencyServiceImpl implements UserCompentancyService {
             String userId = userCompetencyRequest.getUserId();
             //TODO userId and mandatory params validations
             if(userId==null || userId.isEmpty() || userRole==null || userId.isEmpty() || userCompetencyRequest.getCompetencyRequests().size()==0){
-                throw new RuntimeException("Invalid request: userId, userrole and competency cannot be empty");
+                throw new BadRequestException("Invalid request: userId, userrole and competency cannot be empty");
             }
 
-            UserCompetencyPrimarykey pk = new UserCompetencyPrimarykey(rootOrg, org, userId, userRole);
+            UserPositionCompetencyPrimarykey pk = new UserPositionCompetencyPrimarykey(rootOrg, org, userId, userRole);
 
             //TODO enhance efficiency
             for(CompetencyRequest cq : userCompetencyRequest.getCompetencyRequests()){
 
-                UserCompetency userCompetency = new UserCompetency(pk, cq.getCompetency(), cq.getLevel());
-                if(toCompute) computeCompetency.compute(userCompetency);
-                userCompetencyRepository.save(userCompetency);
+                UserPositionCompetency userPositionCompetency = new UserPositionCompetency(pk, cq.getCompetency(), cq.getLevel());
+                computeCompetency.compute(userPositionCompetency);
+                userPositionCompetencyRepository.save(userPositionCompetency);
             }
 
         } catch (Exception e){
             e.printStackTrace();
-            throw new Exception(e);
+            throw new ApplicationServiceError("Exception message: "+e.getMessage());
         }
 
         return response;
