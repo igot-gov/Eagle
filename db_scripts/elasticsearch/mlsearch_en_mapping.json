@@ -1,0 +1,2447 @@
+{
+  "en_mlsearch_v3": {
+    "mappings": {
+      "searchresources": {
+        "dynamic": "strict",
+        "properties": {
+          "accessPaths": {
+            "type": "keyword"
+          },
+          "accessPathsLockedStatus": {
+            "type": "boolean"
+          },
+          "accessibility": {
+            "type": "keyword"
+          },
+          "actor": {
+            "type": "keyword"
+          },
+          "appIcon": {
+            "type": "keyword"
+          },
+          "artifactUrl": {
+            "type": "keyword"
+          },
+          "audience": {
+            "type": "keyword"
+          },
+          "authoringDisabled": {
+            "type": "boolean"
+          },
+          "averageRating": {
+            "type": "nested",
+            "dynamic": "true",
+            "properties": {
+              "Infosys": {
+                "type": "long"
+              }
+            }
+          },
+          "competencymap": {
+            "type": "nested",
+            "properties": {
+              "competency": {
+                "type": "keyword"
+              },
+              "level": {
+                "type": "keyword"
+              }
+            }
+          },
+          "body": {
+            "type": "keyword",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            }
+          },
+          "catalog": {
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "type": {
+                "type": "keyword"
+              },
+              "value": {
+                "type": "keyword"
+              }
+            }
+          },
+          "catalogPaths": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "catalogPathsIds": {
+            "type": "keyword"
+          },
+          "catalogPaths_ar": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "arabic_rebuilt"
+          },
+          "catalogPaths_br": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "catalogPaths_cz": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "czech_rebuilt"
+          },
+          "catalogPaths_da": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "danish_rebuilt"
+          },
+          "catalogPaths_de": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "german_rebuilt"
+          },
+          "catalogPaths_el": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "greek_rebuilt"
+          },
+          "catalogPaths_en": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "catalogPaths_es": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "spanish_rebuilt"
+          },
+          "catalogPaths_fr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "french_rebuilt"
+          },
+          "catalogPaths_hr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "catalogPaths_hu": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "hungarian_rebuilt"
+          },
+          "catalogPaths_id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "indonesian_rebuilt"
+          },
+          "catalogPaths_it": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "italian_rebuilt"
+          },
+          "catalogPaths_ja": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "catalogPaths_ko": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "catalogPaths_nl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "dutch_rebuilt"
+          },
+          "catalogPaths_no": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "norwegian_rebuilt"
+          },
+          "catalogPaths_pl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "catalogPaths_pt": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "catalogPaths_ru": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "russian_rebuilt"
+          },
+          "catalogPaths_sl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "catalogPaths_sv": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "swedish_rebuilt"
+          },
+          "catalogPaths_th": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "thai_rebuilt"
+          },
+          "catalogPaths_tr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "turkish_rebuilt"
+          },
+          "catalogPaths_zh": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "category": {
+            "type": "keyword"
+          },
+          "categoryType": {
+            "type": "keyword"
+          },
+          "certificationList": {
+            "type": "nested",
+            "properties": {
+              "appIcon": {
+                "type": "keyword"
+              },
+              "artifactUrl": {
+                "type": "keyword"
+              },
+              "description": {
+                "type": "keyword"
+              },
+              "identifier": {
+                "type": "keyword"
+              },
+              "isExternalCertificate": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "certificationUrl": {
+            "type": "keyword"
+          },
+          "checksum": {
+            "type": "keyword"
+          },
+          "children": {
+            "type": "nested",
+            "properties": {
+              "addedOn": {
+                "type": "date",
+                "format": "basic_date_time_no_millis"
+              },
+              "childrenClassifiers": {
+                "type": "keyword"
+              },
+              "compatibilityLevel": {
+                "type": "keyword"
+              },
+              "contentType": {
+                "type": "keyword"
+              },
+              "depth": {
+                "type": "keyword"
+              },
+              "description": {
+                "type": "keyword"
+              },
+              "identifier": {
+                "type": "keyword"
+              },
+              "index": {
+                "type": "keyword"
+              },
+              "mimeType": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              },
+              "objectType": {
+                "type": "keyword"
+              },
+              "reason": {
+                "type": "keyword"
+              },
+              "relation": {
+                "type": "keyword"
+              },
+              "status": {
+                "type": "keyword"
+              },
+              "visibility": {
+                "type": "keyword"
+              }
+            }
+          },
+          "childrenDescription": {
+            "type": "text",
+            "analyzer": "english_rebuilt"
+          },
+          "childrenDescription_ar": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "arabic_rebuilt"
+          },
+          "childrenDescription_br": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "childrenDescription_cz": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "czech_rebuilt"
+          },
+          "childrenDescription_da": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "danish_rebuilt"
+          },
+          "childrenDescription_de": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "german_rebuilt"
+          },
+          "childrenDescription_el": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "greek_rebuilt"
+          },
+          "childrenDescription_en": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "childrenDescription_es": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "spanish_rebuilt"
+          },
+          "childrenDescription_fr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "french_rebuilt"
+          },
+          "childrenDescription_hr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "childrenDescription_hu": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "hungarian_rebuilt"
+          },
+          "childrenDescription_id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "indonesian_rebuilt"
+          },
+          "childrenDescription_it": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "italian_rebuilt"
+          },
+          "childrenDescription_ja": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "childrenDescription_ko": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "childrenDescription_nl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "dutch_rebuilt"
+          },
+          "childrenDescription_no": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "norwegian_rebuilt"
+          },
+          "childrenDescription_pl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "childrenDescription_pt": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "childrenDescription_ru": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "russian_rebuilt"
+          },
+          "childrenDescription_sl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "childrenDescription_sv": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "swedish_rebuilt"
+          },
+          "childrenDescription_th": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "thai_rebuilt"
+          },
+          "childrenDescription_tr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "turkish_rebuilt"
+          },
+          "childrenDescription_zh": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "childrenTitle": {
+            "type": "text",
+            "analyzer": "english_rebuilt"
+          },
+          "childrenTitle_ar": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "arabic_rebuilt"
+          },
+          "childrenTitle_br": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "childrenTitle_cz": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "czech_rebuilt"
+          },
+          "childrenTitle_da": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "danish_rebuilt"
+          },
+          "childrenTitle_de": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "german_rebuilt"
+          },
+          "childrenTitle_el": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "greek_rebuilt"
+          },
+          "childrenTitle_en": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "childrenTitle_es": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "spanish_rebuilt"
+          },
+          "childrenTitle_fr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "french_rebuilt"
+          },
+          "childrenTitle_hr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "childrenTitle_hu": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "hungarian_rebuilt"
+          },
+          "childrenTitle_id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "indonesian_rebuilt"
+          },
+          "childrenTitle_it": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "italian_rebuilt"
+          },
+          "childrenTitle_ja": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "childrenTitle_ko": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "childrenTitle_nl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "dutch_rebuilt"
+          },
+          "childrenTitle_no": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "norwegian_rebuilt"
+          },
+          "childrenTitle_pl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "childrenTitle_pt": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "childrenTitle_ru": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "russian_rebuilt"
+          },
+          "childrenTitle_sl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "childrenTitle_sv": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "swedish_rebuilt"
+          },
+          "childrenTitle_th": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "thai_rebuilt"
+          },
+          "childrenTitle_tr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "turkish_rebuilt"
+          },
+          "childrenTitle_zh": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "clients": {
+            "type": "nested",
+            "properties": {
+              "displayName": {
+                "type": "keyword"
+              },
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "collections": {
+            "type": "nested",
+            "properties": {
+              "addedOn": {
+                "type": "date",
+                "format": "basic_date_time_no_millis"
+              },
+              "childrenClassifiers": {
+                "type": "keyword"
+              },
+              "compatibilityLevel": {
+                "type": "keyword"
+              },
+              "contentType": {
+                "type": "keyword"
+              },
+              "depth": {
+                "type": "keyword"
+              },
+              "description": {
+                "type": "keyword"
+              },
+              "identifier": {
+                "type": "keyword"
+              },
+              "index": {
+                "type": "keyword"
+              },
+              "mimeType": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              },
+              "objectType": {
+                "type": "keyword"
+              },
+              "reason": {
+                "type": "keyword"
+              },
+              "relation": {
+                "type": "keyword"
+              },
+              "status": {
+                "type": "keyword"
+              },
+              "visibility": {
+                "type": "keyword"
+              }
+            }
+          },
+          "comments": {
+            "type": "nested",
+            "properties": {
+              "comment": {
+                "type": "keyword"
+              },
+              "commentedBy": {
+                "type": "keyword"
+              },
+              "date": {
+                "type": "date",
+                "format": "basic_date_time_no_millis"
+              },
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "completedCount": {
+            "type": "nested",
+            "dynamic": "true",
+            "properties": {
+              "Infosys": {
+                "type": "long"
+              }
+            }
+          },
+          "complexityLevel": {
+            "type": "keyword"
+          },
+          "concepts": {
+            "type": "nested",
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "text",
+                "fields": {
+                  "keyword": {
+                    "type": "keyword",
+                    "ignore_above": 512
+                  }
+                }
+              },
+              "objectType": {
+                "type": "keyword"
+              },
+              "relation": {
+                "type": "keyword"
+              },
+              "status": {
+                "type": "keyword"
+              }
+            }
+          },
+          "contentFeedbackTemplateId": {
+            "type": "keyword"
+          },
+          "contentIdAtSource": {
+            "type": "keyword"
+          },
+          "contentIdAtSource2": {
+            "type": "keyword"
+          },
+          "contentLanguage": {
+            "type": "keyword"
+          },
+          "contentStructure": {
+            "type": "keyword"
+          },
+          "contentType": {
+            "type": "keyword"
+          },
+          "contentUrlAtSource": {
+            "type": "keyword"
+          },
+          "copyright": {
+            "type": "keyword"
+          },
+          "costCenter": {
+            "type": "keyword"
+          },
+          "creator": {
+            "type": "keyword"
+          },
+          "creatorContacts": {
+            "type": "nested",
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "creatorDetails": {
+            "type": "nested",
+            "properties": {
+              "about": {
+                "type": "keyword"
+              },
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "creatorLogo": {
+            "type": "keyword"
+          },
+          "creatorPosterImage": {
+            "type": "keyword"
+          },
+          "creatorThumbnail": {
+            "type": "keyword"
+          },
+          "curatedTags": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "customClassifiers": {
+            "type": "keyword"
+          },
+          "deliveryCountries": {
+            "type": "keyword"
+          },
+          "deliveryLanguages": {
+            "type": "keyword"
+          },
+          "description": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "description_ar": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "arabic_rebuilt"
+          },
+          "description_br": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "description_cz": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "czech_rebuilt"
+          },
+          "description_da": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "danish_rebuilt"
+          },
+          "description_de": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "german_rebuilt"
+          },
+          "description_el": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "greek_rebuilt"
+          },
+          "description_en": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "description_es": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "spanish_rebuilt"
+          },
+          "description_fr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "french_rebuilt"
+          },
+          "description_hr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "description_hu": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "hungarian_rebuilt"
+          },
+          "description_id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "indonesian_rebuilt"
+          },
+          "description_it": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "italian_rebuilt"
+          },
+          "description_ja": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "description_ko": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "description_nl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "dutch_rebuilt"
+          },
+          "description_no": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "norwegian_rebuilt"
+          },
+          "description_pl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "description_pt": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "description_ru": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "russian_rebuilt"
+          },
+          "description_sl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "description_sv": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "swedish_rebuilt"
+          },
+          "description_th": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "thai_rebuilt"
+          },
+          "description_tr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "turkish_rebuilt"
+          },
+          "description_zh": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "dimension": {
+            "type": "keyword"
+          },
+          "downloadUrl": {
+            "type": "keyword"
+          },
+          "duration": {
+            "type": "long"
+          },
+          "editors": {
+            "type": "nested",
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "eligibility": {
+            "type": "nested",
+            "properties": {
+              "eligibleJL": {
+                "type": "keyword"
+              },
+              "eligibleRole": {
+                "type": "keyword"
+              },
+              "eligibleUnit": {
+                "type": "keyword"
+              }
+            }
+          },
+          "equivalentCertifications": {
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "exclusiveContent": {
+            "type": "boolean"
+          },
+          "expiryDate": {
+            "type": "date",
+            "format": "basic_date_time_no_millis"
+          },
+          "externalCertificate": {
+            "type": "boolean"
+          },
+          "externalData": {
+            "properties": {
+              "code": {
+                "type": "keyword"
+              },
+              "isProctored": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "extractedText": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "fileType": {
+            "type": "keyword"
+          },
+          "grayScaleAppIcon": {
+            "type": "keyword"
+          },
+          "hasAssessment": {
+            "type": "keyword"
+          },
+          "hasTranslations": {
+            "type": "nested",
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "locale": {
+                "type": "keyword"
+              }
+            }
+          },
+          "idealScreenSize": {
+            "type": "keyword"
+          },
+          "identifier": {
+            "type": "keyword"
+          },
+          "imageCredits": {
+            "type": "keyword"
+          },
+          "instanceCatalog": {
+            "type": "boolean"
+          },
+          "instructorFeedbackTemplateId": {
+            "type": "keyword"
+          },
+          "interactivityLevel": {
+            "type": "keyword"
+          },
+          "introductoryVideo": {
+            "type": "keyword"
+          },
+          "introductoryVideoIcon": {
+            "type": "keyword"
+          },
+          "ipReview": {
+            "type": "keyword"
+          },
+          "isContentEditingDisabled": {
+            "type": "boolean"
+          },
+          "isCuratedContent": {
+            "type": "boolean"
+          },
+          "isExternal": {
+            "type": "boolean"
+          },
+          "isIframeSupported": {
+            "type": "keyword"
+          },
+          "isInDefaultCorpus": {
+            "type": "boolean"
+          },
+          "isInIntranet": {
+            "type": "boolean"
+          },
+          "isMetaEditingDisabled": {
+            "type": "boolean"
+          },
+          "isRegistrationRequired": {
+            "type": "boolean"
+          },
+          "isRejected": {
+            "type": "boolean"
+          },
+          "isSearchable": {
+            "type": "boolean"
+          },
+          "isStandAlone": {
+            "type": "boolean"
+          },
+          "isTranslationOf": {
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "locale": {
+                "type": "keyword"
+              }
+            }
+          },
+          "jobProfile": {
+            "type": "keyword"
+          },
+          "kArtifacts": {
+            "type": "nested",
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "keywords": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "keywords_ar": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "arabic_rebuilt"
+          },
+          "keywords_br": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "keywords_cz": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "czech_rebuilt"
+          },
+          "keywords_da": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "danish_rebuilt"
+          },
+          "keywords_de": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "german_rebuilt"
+          },
+          "keywords_el": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "greek_rebuilt"
+          },
+          "keywords_en": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "keywords_es": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "spanish_rebuilt"
+          },
+          "keywords_fr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "french_rebuilt"
+          },
+          "keywords_hr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "keywords_hu": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "hungarian_rebuilt"
+          },
+          "keywords_id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "indonesian_rebuilt"
+          },
+          "keywords_it": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "italian_rebuilt"
+          },
+          "keywords_ja": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "keywords_ko": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "keywords_nl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "dutch_rebuilt"
+          },
+          "keywords_no": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "norwegian_rebuilt"
+          },
+          "keywords_pl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "keywords_pt": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "keywords_ru": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "russian_rebuilt"
+          },
+          "keywords_sl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "keywords_sv": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "swedish_rebuilt"
+          },
+          "keywords_th": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "thai_rebuilt"
+          },
+          "keywords_tr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "turkish_rebuilt"
+          },
+          "keywords_zh": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "labels": {
+            "type": "keyword"
+          },
+          "lastPublishedOn": {
+            "type": "date",
+            "format": "basic_date_time_no_millis"
+          },
+          "lastUpdatedBy": {
+            "type": "keyword"
+          },
+          "lastUpdatedOn": {
+            "type": "date",
+            "format": "basic_date_time_no_millis"
+          },
+          "learningMode": {
+            "type": "keyword"
+          },
+          "learningObjective": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "learningTrack": {
+            "type": "keyword"
+          },
+          "license": {
+            "type": "keyword"
+          },
+          "loadingMessage": {
+            "type": "keyword"
+          },
+          "locale": {
+            "type": "keyword"
+          },
+          "me_averageInteractionsPerMin": {
+            "type": "float"
+          },
+          "me_averageRating": {
+            "type": "float"
+          },
+          "me_averageSessionsPerDevice": {
+            "type": "float"
+          },
+          "me_averageTimespentPerSession": {
+            "type": "float"
+          },
+          "me_totalComments": {
+            "type": "long"
+          },
+          "me_totalDevices": {
+            "type": "long"
+          },
+          "me_totalDownloads": {
+            "type": "long"
+          },
+          "me_totalInteractions": {
+            "type": "long"
+          },
+          "me_totalRatings": {
+            "type": "long"
+          },
+          "me_totalSessionsCount": {
+            "type": "long"
+          },
+          "me_totalSideloads": {
+            "type": "long"
+          },
+          "me_totalTimespent": {
+            "type": "long"
+          },
+          "mediaType": {
+            "type": "keyword"
+          },
+          "metaDataLanguage": {
+            "type": "keyword"
+          },
+          "mimeType": {
+            "type": "keyword"
+          },
+          "minWingspanVersion": {
+            "type": "keyword"
+          },
+          "msArtifactDetails": {
+            "properties": {
+              "channelId": {
+                "type": "keyword"
+              },
+              "videoId": {
+                "type": "keyword"
+              }
+            }
+          },
+          "name": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "name_ar": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "arabic_rebuilt"
+          },
+          "name_br": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "name_cz": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "czech_rebuilt"
+          },
+          "name_da": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "danish_rebuilt"
+          },
+          "name_de": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "german_rebuilt"
+          },
+          "name_el": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "greek_rebuilt"
+          },
+          "name_en": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "name_es": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "spanish_rebuilt"
+          },
+          "name_fr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "french_rebuilt"
+          },
+          "name_hr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "name_hu": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "hungarian_rebuilt"
+          },
+          "name_id": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "indonesian_rebuilt"
+          },
+          "name_it": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "italian_rebuilt"
+          },
+          "name_ja": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "name_ko": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "name_nl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "dutch_rebuilt"
+          },
+          "name_no": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "norwegian_rebuilt"
+          },
+          "name_pl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "name_pt": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "portuguese_rebuilt"
+          },
+          "name_ru": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "russian_rebuilt"
+          },
+          "name_sl": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "standard"
+          },
+          "name_sv": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "swedish_rebuilt"
+          },
+          "name_th": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "thai_rebuilt"
+          },
+          "name_tr": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "turkish_rebuilt"
+          },
+          "name_zh": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            },
+            "analyzer": "cjk_rebuilt"
+          },
+          "nodeId": {
+            "type": "keyword"
+          },
+          "nodeType": {
+            "type": "keyword"
+          },
+          "objectType": {
+            "type": "keyword"
+          },
+          "org": {
+            "type": "nested",
+            "properties": {
+              "org": {
+                "type": "keyword"
+              },
+              "validTill": {
+                "type": "date",
+                "format": "basic_date_time_no_millis"
+              }
+            }
+          },
+          "passPercentage": {
+            "type": "long"
+          },
+          "plagScan": {
+            "type": "nested",
+            "properties": {
+              "docId": {
+                "type": "keyword"
+              },
+              "status": {
+                "type": "keyword"
+              }
+            }
+          },
+          "playgroundInstructions": {
+            "type": "keyword"
+          },
+          "playgroundResources": {
+            "type": "nested",
+            "properties": {
+              "appIcon": {
+                "type": "keyword"
+              },
+              "artifactUrl": {
+                "type": "keyword"
+              },
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "postContents": {
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "posterImage": {
+            "type": "keyword"
+          },
+          "preContents": {
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "preRequisites": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "price": {
+            "type": "nested",
+            "properties": {
+              "currency": {
+                "type": "keyword"
+              },
+              "value": {
+                "type": "double"
+              }
+            }
+          },
+          "projectCode": {
+            "type": "keyword"
+          },
+          "publicationId": {
+            "type": "keyword"
+          },
+          "publishedBy": {
+            "type": "keyword"
+          },
+          "publishedOn": {
+            "type": "date",
+            "format": "basic_date_time_no_millis"
+          },
+          "publisher": {
+            "type": "keyword"
+          },
+          "publisherDetails": {
+            "type": "nested",
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "references": {
+            "properties": {
+              "title": {
+                "type": "keyword"
+              },
+              "url": {
+                "type": "keyword"
+              }
+            }
+          },
+          "region": {
+            "type": "keyword"
+          },
+          "registrationInstructions": {
+            "type": "keyword"
+          },
+          "registrationUrl": {
+            "type": "keyword"
+          },
+          "releaseNotes": {
+            "type": "keyword"
+          },
+          "resourceCategory": {
+            "type": "keyword"
+          },
+          "resourceType": {
+            "type": "keyword"
+          },
+          "rootOrg": {
+            "type": "keyword"
+          },
+          "sampleCertificates": {
+            "type": "keyword"
+          },
+          "scoreType": {
+            "properties": {
+              "allowedGrade": {
+                "type": "keyword"
+              },
+              "maxValue": {
+                "type": "long"
+              },
+              "passValue": {
+                "type": "long"
+              }
+            }
+          },
+          "size": {
+            "type": "float"
+          },
+          "skills": {
+            "type": "nested",
+            "properties": {
+              "category": {
+                "type": "keyword"
+              },
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              },
+              "skill": {
+                "type": "keyword"
+              }
+            }
+          },
+          "softwareRequirements": {
+            "properties": {
+              "title": {
+                "type": "keyword"
+              },
+              "url": {
+                "type": "keyword"
+              }
+            }
+          },
+          "soundCredits": {
+            "type": "keyword"
+          },
+          "sourceIconUrl": {
+            "type": "keyword"
+          },
+          "sourceName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "sourceShortName": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "sourceUrl": {
+            "type": "keyword"
+          },
+          "ssoEnabled": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "keyword"
+          },
+          "studyDuration": {
+            "type": "long"
+          },
+          "studyMaterials": {
+            "properties": {
+              "identifier": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "subTitle": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "subTitles": {
+            "type": "nested",
+            "properties": {
+              "label": {
+                "type": "keyword"
+              },
+              "srclang": {
+                "type": "keyword"
+              },
+              "url": {
+                "type": "keyword"
+              }
+            }
+          },
+          "submitterDetails": {
+            "type": "nested",
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "systemRequirements": {
+            "type": "keyword"
+          },
+          "templateType": {
+            "type": "keyword"
+          },
+          "thumbnail": {
+            "type": "keyword"
+          },
+          "totalRating": {
+            "type": "nested",
+            "dynamic": "true",
+            "properties": {
+              "Infosys": {
+                "type": "long"
+              }
+            }
+          },
+          "trackContacts": {
+            "type": "nested",
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "trackOwner": {
+            "type": "keyword"
+          },
+          "transcoding": {
+            "type": "nested",
+            "properties": {
+              "lastTranscodedOn": {
+                "type": "keyword"
+              },
+              "retryCount": {
+                "type": "long"
+              },
+              "status": {
+                "type": "keyword"
+              }
+            }
+          },
+          "transcript": {
+            "type": "text",
+            "fields": {
+              "keyword": {
+                "type": "keyword",
+                "ignore_above": 512
+              }
+            },
+            "analyzer": "english_rebuilt"
+          },
+          "trendingScore": {
+            "type": "nested",
+            "dynamic": "true",
+            "properties": {
+              "Infosys": {
+                "type": "long"
+              }
+            }
+          },
+          "uniqueLearners": {
+            "type": "long"
+          },
+          "uniqueUsersCount": {
+            "type": "nested",
+            "dynamic": "true",
+            "properties": {
+              "Infosys": {
+                "type": "long"
+              }
+            }
+          },
+          "unit": {
+            "type": "keyword"
+          },
+          "verifiers": {
+            "type": "nested",
+            "properties": {
+              "id": {
+                "type": "keyword"
+              },
+              "name": {
+                "type": "keyword"
+              }
+            }
+          },
+          "versionDate": {
+            "type": "date",
+            "format": "basic_date_time_no_millis"
+          },
+          "versionKey": {
+            "type": "long"
+          },
+          "viewCount": {
+            "type": "nested",
+            "dynamic": "true",
+            "properties": {
+              "Infosys": {
+                "type": "long"
+              }
+            }
+          },
+          "visibility": {
+            "type": "keyword"
+          },
+          "voiceCredits": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
