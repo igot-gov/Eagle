@@ -21,11 +21,31 @@ public class CompetencyController {
     @Autowired
     private UserCompentancyService userCompentancyService;
 
+    /**
+     * Add or updates the user posted competencies
+     * @param rootOrg
+     * @param org
+     * @param request
+     * @return
+     * @throws Exception
+     */
     @PostMapping("/add")
-    public ResponseEntity<Response> add(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody UserCompetencyRequest request) throws Exception{
+    public Response add(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody UserCompetencyRequest request) throws Exception{
+        return userCompentancyService.upsert(request, rootOrg, org);
 
-        Response response = userCompentancyService.upsert(request, rootOrg, org);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+    }
+
+    /**
+     * Deletes user competency
+     * @param rootOrg
+     * @param org
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @DeleteMapping("/delete")
+    public Response delete(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody UserCompetencyRequest request) throws Exception{
+        return userCompentancyService.delete(request, rootOrg, org);
 
     }
 

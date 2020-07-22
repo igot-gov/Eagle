@@ -7,6 +7,7 @@
 
 package com.infosys.recommendationservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
@@ -17,41 +18,19 @@ public class Response implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -3773253896160786443L;
 
+	@JsonIgnore
 	public final String SUCCESSFUL = "SUCCESSFUL";
+	@JsonIgnore
 	public final String FAILED = "FAILED";
+	@JsonIgnore
 	public final String MESSAGE = "message";
+	@JsonIgnore
 	public final String DATA = "data";
+	@JsonIgnore
 	public final String STATUS = "status";
 
-	private String id;
-	private String ver;
-	private String ts;
 
 	private Map<String, Object> result = new HashMap<>();
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getVer() {
-		return ver;
-	}
-
-	public void setVer(String ver) {
-		this.ver = ver;
-	}
-
-	public String getTs() {
-		return ts;
-	}
-
-	public void setTs(String ts) {
-		this.ts = ts;
-	}
 
 	public Map<String, Object> getResult() {
 		return result;

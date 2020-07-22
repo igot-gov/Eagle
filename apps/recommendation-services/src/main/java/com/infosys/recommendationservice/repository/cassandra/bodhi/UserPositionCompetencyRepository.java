@@ -20,6 +20,9 @@ public interface UserPositionCompetencyRepository
 	@Query("SELECT * from user_position_competency where root_org= ?0 AND org= ?1 AND user_id= ?2 AND user_role=?3;")
 	public List<UserPositionCompetency> findAllByUserAndPosition(String root_org, String org, String userId, String userrole);
 
+	@Query("DELETE * from user_position_competency where root_org= ?0 AND org= ?1 AND user_id= ?2 AND user_role=?3;")
+	public void deleteAllByUserAndPosition(String root_org, String org, String userId, String userrole);
+
 //	@Query("Select * from content_work_flow where root_org= ?0 AND org= ?1;")
 //	public List<ContentWorkFlowModel> findAllByRootOrg(String rootOrg, String org);
 }

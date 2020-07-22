@@ -21,7 +21,10 @@ import com.infosys.recommendationservice.repository.cassandra.bodhi.CompetencyRe
 import com.infosys.recommendationservice.service.UserCompentancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserCompetencyServiceImpl implements UserCompentancyService {
@@ -38,6 +41,14 @@ public class UserCompetencyServiceImpl implements UserCompentancyService {
 
     private final ComputeCompetency computeCompetency = new ComputeCompetency(competencyRepository);
 
+    /**
+     * Saves or updates the user competency with given rootOrg and org
+     * @param userCompetencyRequest
+     * @param rootOrg
+     * @param org
+     * @return
+     * @throws Exception
+     */
 
     public Response upsert(UserCompetencyRequest userCompetencyRequest, String rootOrg, String org) throws Exception{
         Response response = new Response();
@@ -53,14 +64,15 @@ public class UserCompetencyServiceImpl implements UserCompentancyService {
             }
 
             UserPositionCompetencyPrimarykey pk = new UserPositionCompetencyPrimarykey(rootOrg, org, userId, userRole);
-
-            //TODO enhance efficiency
             for(CompetencyRequest cq : userCompetencyRequest.getCompetencyRequests()){
 
                 UserPositionCompetency userPositionCompetency = new UserPositionCompetency(pk, cq.getCompetency(), cq.getLevel());
-                computeCompetency.compute(userPositionCompetency);
+                computeCompetency.computeDiff(userPositionCompetency);
                 userPositionCompetencyRepository.save(userPositionCompetency);
             }
+
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.STATUS, HttpStatus.CREATED);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -69,7 +81,40 @@ public class UserCompetencyServiceImpl implements UserCompentancyService {
 
         return response;
     }
+
+    /**
+     * Deletes all user competency for a given rootorg and org Or a user competency as given rootorg, org, competency
+     * @param userCompetencyRequest
+     * @param rootOrg
+     * @param org
+     * @return
+     */
     public Response delete(UserCompetencyRequest userCompetencyRequest, String rootOrg, String org){
-        return null;
+
+        Response response = new Response();
+
+        String userRole = userCompetencyRequest.getUserRole();
+        String userId = userCompetencyRequest.getUserId();
+        List<CompetencyRequest> cr = userCompetencyRequest.getCompetencyRequests();
+
+        if(userId==null || userId.isEmpty() || userRole==null || userId.isEmpty() || userCompetencyRequest.getCompetencyRequests().size()==0){
+            throw new BadRequestException("Invalid request: userId, userrole and competency cannot be empty");
+        }
+
+        if(cr.size()>0) {
+            UserPositionCompetencyPrimarykey pk = new UserPositionCompetencyPrimarykey(rootOrg, org, userId, userRole);
+            for(CompetencyRequest cq : cr){
+
+                UserPositionCompetency userPositionCompetency = new UserPositionCompetency(pk, cq.getCompetency(), null);
+                userPositionCompetencyRepository.delete(userPositionCompetency);
+            }
+        } else {
+            userPositionCompetencyRepository.deleteAllByUserAndPosition(rootOrg, org, userId, userRole);
+
+        }
+
+        response.put(response.MESSAGE, response.SUCCESSFUL);
+        response.put(response.STATUS, HttpStatus.OK);
+        return response;
     }
 }

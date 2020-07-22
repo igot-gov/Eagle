@@ -24,7 +24,11 @@ public class ComputeCompetency {
         this.competencyRepository = competencyRepository;
     }
 
-    public void compute(UserPositionCompetency userPositionCompetency){
+    /**
+     * Finds the difference between expected level set and actual level set
+     * @param userPositionCompetency
+     */
+    public void computeDiff(UserPositionCompetency userPositionCompetency){
 
         List<Integer> userLevel = userPositionCompetency.getUserLevel();
         PositionCompetencyPrimarykey pk = new PositionCompetencyPrimarykey(userPositionCompetency.getUserPositionCompetencyPrimarykey().getRootOrg(),userPositionCompetency.getUserPositionCompetencyPrimarykey().getOrg(),userPositionCompetency.getUserPositionCompetencyPrimarykey().getUserRole(),userPositionCompetency.getUserCompetency());

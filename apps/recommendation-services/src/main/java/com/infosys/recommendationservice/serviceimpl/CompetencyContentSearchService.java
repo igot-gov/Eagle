@@ -53,9 +53,18 @@ public class CompetencyContentSearchService {
     @Autowired
     UserPositionCompetencyRepository userPositionCompetencyRepository;
 
+    /**
+     * Search contents for a a given user and user position
+     * @param request
+     * @param rootOrg
+     * @param org
+     * @param pageSize
+     * @param pageNo
+     * @return
+     */
     public Response search(Map<String, Object> request, String rootOrg, String org, int pageSize, int pageNo) {
 
-        Response response = new Response();
+        Response response = new Response();;
 
         try{
 
@@ -72,19 +81,26 @@ public class CompetencyContentSearchService {
 
             //Build the search request to fire ES
             SearchRequest searchRequest = buildCompetencySearchRequest(pageNo, pageSize, userCompetencies);
-            SearchHits searchHits = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT).getHits();
 
-            //Parse the ES response
-            List<Map<String, Object>> results = new ArrayList<>();
-            for (SearchHit hit : searchHits) {
-                results.add(hit.getSourceAsMap());
+            if(searchRequest.source().query()==null) {
+                response.put(response.MESSAGE, "No data recommended");
+                response.put(response.DATA, new ArrayList<>());
+                response.put(response.STATUS, HttpStatus.OK);
+            } else {
+                SearchHits searchHits = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT).getHits();
+
+                //Parse the ES response
+                List<Map<String, Object>> results = new ArrayList<>();
+                for (SearchHit hit : searchHits) {
+                    results.add(hit.getSourceAsMap());
+                }
+                response.put(response.MESSAGE, response.SUCCESSFUL);
+                response.put(response.DATA, results);
+                response.put(response.STATUS, HttpStatus.OK);
             }
 
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.DATA, results);
-            response.put(response.STATUS, HttpStatus.OK);
-
         } catch (Exception e){
+            e.printStackTrace();
             throw new ApplicationServiceError("Failed to search contents: "+e.getMessage());
 
         }
@@ -93,6 +109,14 @@ public class CompetencyContentSearchService {
     }
 
 
+    /**
+     * Builds a search request with filter of n- competencies
+     * @param offset
+     * @param limit
+     * @param userPositionCompetencies
+     * @return
+     * @throws Exception
+     */
     private SearchRequest buildCompetencySearchRequest(int offset, int limit, List<UserPositionCompetency> userPositionCompetencies) throws Exception{
 
         SearchRequest searchRequest = new SearchRequest();
@@ -102,15 +126,18 @@ public class CompetencyContentSearchService {
         BoolQueryBuilder query = QueryBuilders.boolQuery();
 
         for(UserPositionCompetency upc: userPositionCompetencies){
-            query.should(
-                    QueryBuilders.boolQuery()
-                            .must(QueryBuilders.termQuery(NESTED_PATH.concat(SEPERATOR_DOT).concat(COMPETENCY), upc.getUserCompetency()))
-                            .must(QueryBuilders.termsQuery(NESTED_PATH.concat(SEPERATOR_DOT).concat(LEVEL), upc.getDelta())));
-
+            if(upc.getDelta()!=null || upc.getDelta().size()>0){
+                query.should(
+                        QueryBuilders.boolQuery()
+                                .must(QueryBuilders.termQuery(NESTED_PATH.concat(SEPERATOR_DOT).concat(COMPETENCY), upc.getUserCompetency()))
+                                .must(QueryBuilders.termsQuery(NESTED_PATH.concat(SEPERATOR_DOT).concat(LEVEL), upc.getDelta())));
+            }
         }
 
-
-        BoolQueryBuilder qb = boolQuery().must(QueryBuilders.nestedQuery(NESTED_PATH, query, ScoreMode.Avg));
+        BoolQueryBuilder qb = null;
+        if(query.hasClauses()){
+            qb = boolQuery().must(QueryBuilders.nestedQuery(NESTED_PATH, query, ScoreMode.Avg));
+        }
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(qb);
         searchSourceBuilder.size(limit);
