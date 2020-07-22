@@ -6,17 +6,15 @@
  */
 package com.infosys.recommendationservice.serviceimpl;
 
+import com.infosys.recommendationservice.exception.ApplicationServiceError;
+import com.infosys.recommendationservice.exception.BadRequestException;
 import com.infosys.recommendationservice.model.Response;
-import com.infosys.recommendationservice.model.cassandra.UserCompetency;
 import com.infosys.recommendationservice.model.cassandra.UserPositionCompetency;
-import com.infosys.recommendationservice.model.cassandra.UserPositionCompetencyPrimarykey;
-import com.infosys.recommendationservice.repository.cassandra.bodhi.UserCompetencyRepository;
 import com.infosys.recommendationservice.repository.cassandra.bodhi.UserPositionCompetencyRepository;
 import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -25,24 +23,26 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.springframework.core.env.Environment;
-
 import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
-import static org.elasticsearch.index.query.QueryBuilders.rangeQuery;
 
 
 @Service
 @ConfigurationProperties("es")
-public class ContentSearchServiceImpl {
+public class CompetencyContentSearchService {
 
 
+    private final String NESTED_PATH = "tagmapping";
+    private final String COMPETENCY = "competency";
+    private final String LEVEL = "level";
+    private final String SEPERATOR_DOT =".";
+    private final String USER_ID ="user_id";
+    private final String USER_ROLE ="user_role";
     private final String[] source = new String[]{};
+
 
     @Autowired
     private Environment environment;
@@ -56,11 +56,17 @@ public class ContentSearchServiceImpl {
     public Response search(Map<String, Object> request, String rootOrg, String org, int pageSize, int pageNo) {
 
         Response response = new Response();
+
         try{
 
-            String userId = (String) request.get("user_id");
-            String userRole = (String) request.get("user_role");
+            String userId = (String) request.get(USER_ID);
+            String userRole = (String) request.get(USER_ROLE);
 
+            //TODO: validate - user_id and access control path
+            if(userId==null || userId.isEmpty() || userRole==null || userRole.isEmpty()){
+                throw new BadRequestException("user_id and user_role cant be null or empty");
+
+            }
             //finds the user competencies
             List<UserPositionCompetency> userCompetencies = userPositionCompetencyRepository.findAllByUserAndPosition(rootOrg, org, userId, userRole);
 
@@ -74,13 +80,13 @@ public class ContentSearchServiceImpl {
                 results.add(hit.getSourceAsMap());
             }
 
-            response.put("message", "Successful");
-            response.put("contents", results);
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.DATA, results);
+            response.put(response.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
-            response.put("message", "Failed");
-            response.put("cause",e.getCause());
-            response.put("contents", new ArrayList<>());
+            throw new ApplicationServiceError("Failed to search contents: "+e.getMessage());
+
         }
 
         return response;
@@ -93,18 +99,18 @@ public class ContentSearchServiceImpl {
         searchRequest.indices(environment.getProperty("es.index"));
         searchRequest.types(environment.getProperty("es.index.type"));
 
-        String path = "tagmapping";
         BoolQueryBuilder query = QueryBuilders.boolQuery();
 
         for(UserPositionCompetency upc: userPositionCompetencies){
             query.should(
                     QueryBuilders.boolQuery()
-                            .must(QueryBuilders.termQuery(path.concat(".competency"), upc.getUserCompetency()))
-                            .must(QueryBuilders.termsQuery(path.concat(".level"), upc.getDelta())));
+                            .must(QueryBuilders.termQuery(NESTED_PATH.concat(SEPERATOR_DOT).concat(COMPETENCY), upc.getUserCompetency()))
+                            .must(QueryBuilders.termsQuery(NESTED_PATH.concat(SEPERATOR_DOT).concat(LEVEL), upc.getDelta())));
+
         }
 
 
-        BoolQueryBuilder qb = boolQuery().must(QueryBuilders.nestedQuery(path, query, ScoreMode.Avg));
+        BoolQueryBuilder qb = boolQuery().must(QueryBuilders.nestedQuery(NESTED_PATH, query, ScoreMode.Avg));
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(qb);
         searchSourceBuilder.size(limit);

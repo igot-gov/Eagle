@@ -7,7 +7,7 @@
 package com.infosys.recommendationservice.controller;
 
 import com.infosys.recommendationservice.model.Response;
-import com.infosys.recommendationservice.serviceimpl.ContentSearchServiceImpl;
+import com.infosys.recommendationservice.serviceimpl.CompetencyContentSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.util.Map;
 public class RecommendationController {
 
     @Autowired
-    private ContentSearchServiceImpl searchService;
+    private CompetencyContentSearchService searchService;
 
     @PostMapping("/contents")
     public ResponseEntity<Response> findContents(@RequestHeader String rootOrg, @RequestHeader String org,

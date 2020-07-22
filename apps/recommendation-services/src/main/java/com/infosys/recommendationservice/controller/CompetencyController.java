@@ -9,13 +9,10 @@ package com.infosys.recommendationservice.controller;
 import com.infosys.recommendationservice.model.Response;
 import com.infosys.recommendationservice.model.UserCompetencyRequest;
 import com.infosys.recommendationservice.service.UserCompentancyService;
-import com.infosys.recommendationservice.serviceimpl.ContentSearchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/user/competency")

@@ -7,6 +7,8 @@
 
 package com.infosys.recommendationservice.model;
 
+import org.springframework.http.HttpStatus;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,9 +16,17 @@ import java.util.Map;
 public class Response implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -3773253896160786443L;
+
+	public final String SUCCESSFUL = "SUCCESSFUL";
+	public final String FAILED = "FAILED";
+	public final String MESSAGE = "message";
+	public final String DATA = "data";
+	public final String STATUS = "status";
+
 	private String id;
 	private String ver;
 	private String ts;
+
 	private Map<String, Object> result = new HashMap<>();
 
 	public String getId() {
