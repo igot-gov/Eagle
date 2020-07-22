@@ -334,7 +334,7 @@
                     </p>
                     <mat-form-field appearance="outline" class="w-full margin-top-xs">
                       <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
-                        formControlName="residenceAddress" placeholder="Type Your Residence Address Here"
+                      maxlength="200"  formControlName="residenceAddress" placeholder="Type Your Residence Address Here"
                         i18n-placeholder #residenceAddress></textarea>
                       <!-- <input matInput #residenceAddress formControlName="residenceAddress" i18n-placeholder
                         placeholder="Enter Postal Address Here" [required]="true" /> -->
@@ -752,7 +752,7 @@
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs full-width">
                       <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="4"
-                        formControlName="orgDesc" placeholder="Type Your Residence Address Here" i18n-placeholder
+                      maxlength="500" formControlName="orgDesc" placeholder="Type Your Residence Address Here" i18n-placeholder
                         #orgDesc></textarea>
                       <mat-hint align="end">{{ orgDesc.value.length }} /500 characters</mat-hint>
                       <mat-error i18n>
@@ -887,7 +887,7 @@
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input matInput #otherDetailsOfficeAddress formControlName="otherDetailsOfficeAddress"
-                        i18n-placeholder placeholder="Enter Office Postal Address" />
+                      maxlength="200" i18n-placeholder placeholder="Enter Office Postal Address" />
                       <mat-hint align="end">{{ otherDetailsOfficeAddress.value.length }} /200 characters</mat-hint>
                       <mat-error i18n>
                         You have exceeded 200 characters.
