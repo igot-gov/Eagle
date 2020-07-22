@@ -35,7 +35,7 @@ import static org.elasticsearch.index.query.QueryBuilders.boolQuery;
 public class CompetencyContentSearchService {
 
 
-    private final String NESTED_PATH = "tagmapping";
+    private final String NESTED_PATH = "competencymap";
     private final String COMPETENCY = "competency";
     private final String LEVEL = "level";
     private final String SEPERATOR_DOT =".";
