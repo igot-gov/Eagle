@@ -172,6 +172,10 @@
     .mat-form-field-outline-thick .mat-ink-bar {
       background-color: $colorPrimaryDark !important;
     }
+
+    .entity-container {
+      background: inherit;
+    }
   }
 
   @else {

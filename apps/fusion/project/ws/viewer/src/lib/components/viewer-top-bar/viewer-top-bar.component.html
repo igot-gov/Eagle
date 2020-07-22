@@ -25,10 +25,15 @@
   <span *ngIf="logo" class="width-expand text-center text-truncate">
     {{ resourceName }}
   </span>
-  <a mat-icon-button class="width-auto mr-10" [routerLink]="nextResourceUrl" *ngIf="isTypeOfCollection"
-    [disabled]="!nextResourceUrl" queryParamsHandling="preserve" accesskey=">">
+  <!-- [disabled]="!nextResourceUrl" -->
+  <a mat-icon-button class="width-auto mr-10" [routerLink]="nextResourceUrl"
+    *ngIf="isTypeOfCollection && nextResourceUrl" queryParamsHandling="preserve" accesskey=">">
     <span *ngIf="logo">NEXT</span>
     <mat-icon>skip_next</mat-icon>
+  </a>
+  <a mat-icon-button class="width-auto mr-10" routerLink="/page/home" *ngIf="isTypeOfCollection && !nextResourceUrl"
+    accesskey=">">
+    <span *ngIf="logo" class="finish">FINISH</span>
   </a>
   <a mat-icon-button>
     <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
