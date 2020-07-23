@@ -3,6 +3,7 @@
 
 $medium-badge-size: 90px;
 $small-badge-size: 50px;
+$x-small-badge-size: 32px;
 $badge-padding: 12px;
 
 .card-container {
@@ -12,8 +13,8 @@ $badge-padding: 12px;
   // margin: 25px 25px;
   // cursor: pointer;
   display: flex;
-  width: 250px;
-  min-height: 249px;
+  width: 260px;
+  min-height: 260px;
   background: #FFFFFF 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   border-radius: 8px;
@@ -47,8 +48,8 @@ $badge-padding: 12px;
 }
 
 .icon-container {
-  width: $medium-badge-size;
-  height: $medium-badge-size;
+  width: $x-small-badge-size;
+  height: $x-small-badge-size;
 
   border-radius: 50%;
   display: flex;
@@ -72,8 +73,9 @@ $badge-padding: 12px;
   margin-bottom: $size-s;
 
   span {
-    font-size: 25px;
-    line-height: 30px;
+    // font-size: 25px;
+    // line-height: 30px;
+    font-weight: 600;
   }
 }
 
@@ -90,10 +92,31 @@ $badge-padding: 12px;
 .entity-container {
   display: flex;
   flex-direction: column;
-  padding: $size-m 0 $size-s 0;
-  background: rgba(250, 209, 175, 0.2) 0% 0% no-repeat padding-box;
-  border-radius: inherit;
+  padding: $size-m 0 $size-s $size-s;
+  background: #D9F2FE 0% 0% no-repeat padding-box;
+  border-radius: $size-xs $size-xs 0 0;
   cursor: pointer;
+}
+
+.new-font {
+  font-size: $size-s;
+}
+
+.mw-110 {
+  min-width: 110px;
+  padding: 10px 2px 2px 10px;
+}
+
+.img-class {
+  height: 20px;
+  width: 18px;
+}
+
+.new-class {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  padding: 5px;
 }
 
 .hover-text {

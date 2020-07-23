@@ -18,6 +18,7 @@ import { DragDropDirective } from './directives/drag-drop.directive'
 import { UploadService } from './services/upload.service'
 import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
+import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-
     AuthEditorActionButtonsComponent,
     BaseComponent,
     EditMetaV2Component,
+    LiveHtmlEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -52,8 +54,9 @@ import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-
     AceEditorComponent,
     AuthEditorActionButtonsComponent,
     AuthPickerComponent,
+    LiveHtmlEditorComponent,
   ],
   entryComponents: [AuthPickerComponent],
   providers: [UploadService],
 })
-export class EditorSharedModule {}
+export class EditorSharedModule { }
