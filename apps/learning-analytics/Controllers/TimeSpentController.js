@@ -3,8 +3,8 @@ const constants = require("../Config/constants");
 const { getElasticSearchDbConnection } = require("../Utils/dbConnection");
 
 // const { badges } = require("./BadgesController");
-const { pointsAndRank } = require("./PointsAndRankController");
-const { trackTimeSpent } = require("./TrackTimeSpentController");
+// const { pointsAndRank } = require("./PointsAndRankController");
+// const { trackTimeSpent } = require("./TrackTimeSpentController");
 
 exports.timeSpent = async (req, res) => {
     try {

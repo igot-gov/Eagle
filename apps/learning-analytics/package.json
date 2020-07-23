@@ -19,7 +19,8 @@
     "json2csv": "^4.5.4",
     "lodash": "^4.17.11",
     "node-fetch": "^2.6.0",
-    "request": "^2.81.0",
+    "pg": "^8.3.0",
+    "request": "^2.81.0"
   },
   "devDependencies": {}
 }

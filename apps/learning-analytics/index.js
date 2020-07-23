@@ -26,19 +26,19 @@ app.use(compression());
 
 //route set up
 require("./Routes/TimeSpentRoute")(app);
-require("./Routes/AssessmentRoute")(app);
+// require("./Routes/AssessmentRoute")(app);
 require("./Routes/UserProgressRoute")(app);
-require("./Routes/NsoArtifactsCollaboratorsRoute")(app);
-require("./Routes/SkillQuotientRoute")(app);
-require("./Routes/SkillRoute")(app);
-require("./Routes/RoleQuotientRoute")(app);
-require("./Routes/RoleRoute")(app);
-require("./Routes/SearchRoute")(app);
-require("./Routes/ProjectEndorsementRoute")(app);
-require("./Routes/NsoRoleRoute")(app);
+// require("./Routes/NsoArtifactsCollaboratorsRoute")(app);
+// require("./Routes/SkillQuotientRoute")(app);
+// require("./Routes/SkillRoute")(app);
+// require("./Routes/RoleQuotientRoute")(app);
+// require("./Routes/RoleRoute")(app);
+// require("./Routes/SearchRoute")(app);
+// require("./Routes/ProjectEndorsementRoute")(app);
+// require("./Routes/NsoRoleRoute")(app);
 require("./Routes/analyticsRoute")(app);
-require("./Routes/downloadReportRoute")(app);
-require("./Routes/PathwayDashboard")(app);
+// require("./Routes/downloadReportRoute")(app);
+// require("./Routes/PathwayDashboard")(app);
 
 
 
