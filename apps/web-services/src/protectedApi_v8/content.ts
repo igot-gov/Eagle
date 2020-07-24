@@ -18,6 +18,7 @@ const MINIMAL_CONTENT_FIELDS = [
   'children',
   'complexityLevel',
   'contentType',
+  'creatorLogo',
   'description',
   'downloadUrl',
   'duration',

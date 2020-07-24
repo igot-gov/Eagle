@@ -11,7 +11,7 @@ import {
   IPlaylistShareRequest,
   IPlaylistUpdateTitleRequest,
   IPlaylistUpsertRequest
-  } from '../../models/playlist.model'
+} from '../../models/playlist.model'
 import {
   transformToPlaylistV2,
   transformToPlaylistV3,
@@ -20,11 +20,12 @@ import {
   transformToSbExtSyncRequest,
   transformToSbExtUpdateRequest,
   transformToSbExtUpsertRequest
-  } from '../../service/playlist'
+} from '../../service/playlist'
 import { CONSTANTS } from '../../utils/env'
 import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
+import { getStringifiedQueryParams } from '../../utils/helpers'
 
 const API_END_POINTS = {
   playlist: (userId: string, playlistId: string) =>
@@ -180,14 +181,25 @@ playlistApi.get('/recent', async (req, res) => {
   /* get recent contents added to any playlist */
   const userId = extractUserIdFromRequest(req)
   try {
+    const pageState = req.query.pageState
+    const pageSize = req.query.pageSize || 50
+    const isCompleted = req.query.isCompleted || false
+    const sourceFields = req.query.sourceFields
+    const org = req.header('org')
     const rootOrg = req.header('rootOrg')
-    if (!rootOrg) {
+    if (!org || !rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
+    const queryParams = getStringifiedQueryParams({
+      isCompleted,
+      pageSize,
+      pageState,
+      sourceFields,
+    })
     const response = await axios({
       method: 'GET',
-      url: `${API_END_POINTS.playlistV1(userId)}/playlist-contents`,
+      url: `${API_END_POINTS.playlistV1(userId)}/playlist-contents?${queryParams}`,
       ...axiosRequestConfig,
       headers: {
         rootOrg,
