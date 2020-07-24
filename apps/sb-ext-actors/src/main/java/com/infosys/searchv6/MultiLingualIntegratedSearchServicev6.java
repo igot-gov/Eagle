@@ -463,7 +463,7 @@ class MultiLingualIntegratedSearchServicev6 {
         }
         System.out.println("Search Template "+ SearchConstantsv6.ML_SEARCH_TEMPLATE);
 
-        System.out.println("Params map "+ new ObjectMapper().writeValueAsString(paramsMap));
+        //System.out.println("Params map "+ new ObjectMapper().writeValueAsString(paramsMap));
 
 
         SearchRequest searchRequest = new SearchRequest().searchType(SearchType.QUERY_THEN_FETCH);
