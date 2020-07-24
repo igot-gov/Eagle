@@ -1,6 +1,6 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
   <ws-widget-btn-page-back
-    [widgetData]="{ url: 'back', titles: [{title:'Playlist', url:'back'},{title:playlist?.name || 'Playlist', url:'none'}] }">
+    [widgetData]="{ url: 'back', titles: [{title:'Playlist', url: '/app/playlist/me' },{title:(playlist?.name || 'Playlist'), url:'none'}] }">
 
   </ws-widget-btn-page-back>
   <!-- <span i18n="page title: playlist detail" class="margin-left-xs">Playlist</span> -->

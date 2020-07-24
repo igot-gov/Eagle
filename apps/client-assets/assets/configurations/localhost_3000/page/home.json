@@ -160,7 +160,7 @@
                               {
                                 "contentType": [
                                   "Course",
-                                  "Learning Path"
+                                  "Program"
                                 ]
                               }
                             ]
@@ -221,7 +221,8 @@
                         "path": "/apis/protected/v8/recommendation/trending",
                         "queryParams": {
                           "pageNo": 0,
-                          "pageSize": 12
+                          "pageSize": 12,
+                          "sourceFields": ["creatorLogo"]
                         }
                       }
                     }
@@ -281,7 +282,8 @@
                       "api": {
                         "path": "/apis/protected/v8/user/history",
                         "queryParams": {
-                          "pageSize": 12
+                          "pageSize": 12,
+                          "sourceFields": ["creatorLogo"]
                         }
                       }
                     }
@@ -339,7 +341,10 @@
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/user/playlist/recent"
+                        "path": "/apis/protected/v8/user/playlist/recent",
+                        "queryParams": {
+                          "sourceFields": ["creatorLogo"]
+                        }
                       }
                     },
                     "refreshEvent": {
@@ -396,7 +401,8 @@
                         "path": "/apis/protected/v8/recommendation/interestBased",
                         "queryParams": {
                           "pageNo": 0,
-                          "pageSize": 12
+                          "pageSize": 12,
+                          "sourceFields": ["creatorLogo"]
                         }
                       }
                     }

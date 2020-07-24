@@ -91,9 +91,15 @@ export class PlaylistEditComponent implements OnInit {
         // if (!this.changedContentIds.size) {
         this.snackBar.open(this.editPlaylistSuccess.nativeElement.value, 'X')
         this.router.navigate([this.router.url.replace('/edit', '')])
-
+        this.upsertPlaylistStatus = 'none'
         // }
       })
+      // ,
+      // () => {
+      //   this.upsertPlaylistStatus = 'error'
+      //   this.snackBar.open(this.editPlaylistErrorMessage.nativeElement.value)
+      // }
+
     }
   }
 }

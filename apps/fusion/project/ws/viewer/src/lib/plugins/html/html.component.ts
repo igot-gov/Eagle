@@ -7,6 +7,9 @@ import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 
+const scormAdapter = require('scorm-api-adapter').default
+// import SCORMAdapter from 'scorm-api-adapter'
+
 @Component({
   selector: 'viewer-plugin-html',
   templateUrl: './html.component.html',
@@ -35,7 +38,10 @@ export class HtmlComponent implements OnInit, OnChanges {
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
-  ) { }
+  ) {
+    (window as any).API = new scormAdapter();
+    (window as any).API.uri = 'https://localhost:3000/great-endpoit'
+  }
 
   ngOnInit() {
     // this.mobAppSvc.simulateMobile()

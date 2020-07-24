@@ -46,7 +46,8 @@ import { SearchTemplateComponent } from './components/input/search-template/sear
 import { ChannelResolverService } from './services/resolver.service'
 import { MediaWrapperComponent } from './components/input/media-wrapper/media-wrapper.component'
 import { IntranetSelectorComponent } from './components/input/intranet-selector/intranet-selector.component'
-import { DraggableModule } from '../../../../../../directives/draggable/draggable.module'
+import { DraggableModule } from '../../../../../../modules/shared/directives/draggable/draggable.module'
+
 @NgModule({
   declarations: [
     ChannelComponent,
@@ -102,4 +103,4 @@ import { DraggableModule } from '../../../../../../directives/draggable/draggabl
   providers: [ChannelResolverService],
   entryComponents: [InputComponent, InputV2Component],
 })
-export class ChannelModule {}
+export class ChannelModule { }
