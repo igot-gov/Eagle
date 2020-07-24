@@ -69,11 +69,11 @@ class MultiLingualIntegratedSearchServicev6 {
     @Autowired
     private NestedSortableFieldsMappings nestedSortableFieldsMappings;
 
-    @Value("${com.infosys.search.did-you-mean.suggestion}")
-    private boolean didYouMeanSuggestionEnabled;
+    //@Value("${com.infosys.search.did-you-mean.suggestion}")
+    private boolean didYouMeanSuggestionEnabled = false;
 
-    @Value("${com.infosys.search.did-you-mean.defaulting}")
-    private boolean didYouMeanDefaultingEnabled;
+    //@Value("${com.infosys.search.did-you-mean.defaulting}")
+    private boolean didYouMeanDefaultingEnabled = false;
 
     private RestHighLevelClient elasticClient = ConnectionManager.getClient();
     private Map<String, PropertyDescriptor> andFiltersPropertyDescriptors = null;
