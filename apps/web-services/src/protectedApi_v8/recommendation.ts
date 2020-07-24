@@ -253,12 +253,14 @@ recommendationApi.get('/:recommendationType', async (req, res) => {
     const recommendationCategory = decodedFilters.recommendationCategory
     const pageNo = req.query.pageNo || 0
     const pageSize = req.query.pageSize || 20
+    const sourceFields = req.query.sourceFields
     const recommendationType = req.params.recommendationType
     // tslint:disable-next-line: no-any
     const params: any = {
       pageNumber: pageNo,
       pageSize,
       type: recommendationCategory,
+      sourceFields
     }
     const url = `${API_END_POINTS.recommendations}/${extractUserIdFromRequest(req)}/recommendations/${recommendationType}`
     if (recommendationType === 'latest') {
