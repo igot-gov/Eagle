@@ -463,7 +463,7 @@ class MultiLingualIntegratedSearchServicev6 {
         }
         System.out.println("Search Template "+ SearchConstantsv6.ML_SEARCH_TEMPLATE);
 
-        System.out.println("UUID "+ validatedSearchData.getUuid());
+        System.out.println("UUID "+ validatedSearchData.getUuid().toString());
 
         System.out.println("Params map "+ new ObjectMapper().writeValueAsString(paramsMap));
 
