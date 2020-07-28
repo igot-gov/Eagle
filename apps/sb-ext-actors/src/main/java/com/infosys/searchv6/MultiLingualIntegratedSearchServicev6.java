@@ -138,6 +138,7 @@ class MultiLingualIntegratedSearchServicev6 {
                         validatedSearchData.setQuery(bestOption.get().getText().string());
                         validatedSearchData.setIsStandAlone(true);
                         validatedSearchData.setChangedQuery(bestOption.get().getText().string());
+                        validatedSearchData.setDidYouMean(false);
                         return searchService(validatedSearchData);
                     }
                 } else
