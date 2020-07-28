@@ -2744,6 +2744,7 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 	@Override
 	public Response statusChange(String identifier, Map<String, Object> requestBody)
 			throws BadRequestException, Exception {
+		System.out.println("status change request: "+new ObjectMapper().writeValueAsString(requestBody));
 
 		String rootOrg = null;
 		String org = null;
@@ -2796,6 +2797,7 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 		String currentStatus = contentMeta.get(LexConstants.STATUS).toString();
 		String contentType = contentMeta.get(LexConstants.CONTENT_TYPE).toString();
 		// delta is used for +1 -1 logic in contentWorkFlow
+		System.out.println("currentStatus -> "+currentStatus);
 		Integer delta = null;
 		try {
 			if (change > 0) {
@@ -2808,6 +2810,7 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 		} catch (Exception e) {
 			throw new BadRequestException("Invalid Input change : " + change);
 		}
+		System.out.println("delta -> "+delta);
 
 		// cassandra operation to fetch work-flow for given root_org
 		ContentWorkFlowModel casResult = contentWorkFlowRepo.findByPrimaryKeyContentWorkFlow(rootOrg, org, contentType);
@@ -3003,8 +3006,10 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 				String mapStatus = (String) mapObj.get(LexConstants.STATUS);
 				int mapIndex = validStatus.indexOf(mapStatus);
 				if (mapIndex < currentIndex) {
-					errors = errors + "Cannot change status " + mapObj.get(LexConstants.IDENTIFIER)
+					errors = errors + "Cannot change status ("+currentStatus+")  " + mapObj.get(LexConstants.IDENTIFIER)
+					//errors = errors + "Cannot change status " + mapObj.get(LexConstants.IDENTIFIER)
 							+ " is at a previous status : " + mapStatus + "\n";
+					
 				} else if (mapIndex == currentIndex) {
 					contentMetas.add(mapObj);
 				}
