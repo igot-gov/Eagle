@@ -15,6 +15,7 @@ export const VALID_HIERARCHY_TYPES = new Set(['all', 'minimal', 'detail'])
 const MINIMAL_CONTENT_FIELDS = [
   'appIcon',
   'artifactUrl',
+  'bannerColor',
   'children',
   'complexityLevel',
   'contentType',

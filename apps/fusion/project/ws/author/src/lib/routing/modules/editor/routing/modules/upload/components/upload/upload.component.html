@@ -84,14 +84,16 @@
   </div>
 
   <div class="buttons margin-top-xl">
-    <div class="button-grid margin-right-xxs cursor-pointer" (click)="toggleSettingButtons()">
-      <button mat-icon-button class="padding-remove ws-mat-primary-background mat-elevation-z6">
-        <mat-icon class="text-white" *ngIf="showSettingButtons">close</mat-icon>
-        <mat-icon class="text-white" *ngIf="!showSettingButtons">more_vert</mat-icon>
+    <!-- button-grid  -->
+    <div class="cursor-pointer margin-right-xxs" (click)="toggleSettingButtons()">
+      <button mat-button class="padding-remove ws-mat-auth-tool-option mat-app-background settings">
+        <mat-icon *ngIf="showSettingButtons">close</mat-icon>
+        <mat-icon *ngIf="!showSettingButtons">settings</mat-icon>
+        <span> {{!showSettingButtons?'Options' :'Close'}}</span>
       </button>
-      <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons">
+      <!-- <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons">
         Close
-      </p>
+      </p> -->
     </div>
     <ng-container *ngIf="showSettingButtons">
       <div class="button-grid cursor-pointer" (click)="action('preview')">

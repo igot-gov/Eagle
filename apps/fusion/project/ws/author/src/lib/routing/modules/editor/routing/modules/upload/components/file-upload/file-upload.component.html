@@ -1,83 +1,89 @@
-<div class="margin-top-m margin-left-xl">
-  <div class="flex mt-8 margin-bottom-xl top-heading flex-Update">
-    <div class="upload-box flex flex-middle flex-col justify-center p-20 cursor-pointer" (click)="fileInput.click()"
-      wsAuthDragDrop (fileDropped)="onDrop($event)">
-      <button *ngIf="file || fileUploadForm.controls.artifactUrl.value" mat-icon-button
-        class="close-button padding-remove ws-mat-primary-background-op30 text-white"
-        (click)="clearUploadedFile(); $event.stopPropagation()">
-        <mat-icon>close</mat-icon>
-      </button>
-      <span class="font-weight-500" [hidden]="file">
-        <input type="file" #fileInput class="inputfile" accept=".mp3,.mp4,.pdf,.zip"
-          (change)="onDrop($event.target.files[0]); fileInput.value = null" />
-        <label for="file" class="up-lbl mat-h2 ws-mat-primary-text flex flex-middle justify-center">
-          <mat-icon class="upload_cloud">cloud_upload</mat-icon>
-          <span i18n>Drag and drop file here</span>
-          <span i18n>or</span>
-          <span>Browse file</span>
-        </label>
-      </span>
-      <div *ngIf="file || fileUploadForm.controls.artifactUrl.value" class="flex flex-middle justify-center">
-        <ng-container [ngSwitch]="mimeType">
-          <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'audio/mpeg'">
-            music_note
-          </mat-icon>
-          <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/x-mpegURL'">
-            videocam
-          </mat-icon>
-          <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/pdf'">
-            picture_as_pdf
-          </mat-icon>
-          <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/html'">
-            request_quote
-          </mat-icon>
-        </ng-container>
-        <p class="margin-left-xs mat-h3 font-weight-500 margin-remove-bottom">
-          <ng-container *ngIf="file; else elseBlock">
-            {{ file?.name }}
-          </ng-container>
-          <ng-template #elseBlock>
-            {{ fileUploadForm.controls.artifactUrl.value.split('/').pop() }}
-            <ng-container> </ng-container>
-          </ng-template>
-        </p>
+<!-- <div class="margin-top-m margin-left-xl"> -->
+<mat-card class="flex flex-1 flex-column">
+  <ng-container>
+    <div class="flex mt-8 margin-bottom-xl top-heading flex-Update ws-mat-default-text">
+      <div>
+        <h1 class="margin-remove-bottom title"><span i18n>Upload Content </span></h1>
       </div>
-    </div>
-    <div class="instruction">
-      <div class="information">
-        <p class="ws-mat-primary-text font-weight-500" i18n>Instructions to upload a file</p>
-        <ul>
-          <li *ngIf="fileUploadForm.controls.artifactUrl.value" i18n>
-            File was already uploaded. You may use Preview to view it.
-          </li>
-          <li i18n>Files allowed - pdf, mp3, mp4, zip</li>
-          <li i18n>Max. file size - 200MB</li>
-        </ul>
+      <div class="margin-top-s new-inner-div mat-app-background">
+        <h3 class="ws-mat-default-text text-center">File Type : PDF, MP3, MP4 (Upto 200 mb)</h3>
+        <div class="upload-box flex flex-middle flex-col justify-center cursor-pointer mat-card"
+          (click)="fileInput.click()" wsAuthDragDrop (fileDropped)="onDrop($event)">
 
-      </div>
-      <div class="flex margin-top-m margin-bottom-xl flex-Update-r">
-        <div class="flex flex-middle margin-top-xs padding-top-l">
-          <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
-          <p class="margin-left-xs margin-remove-bottom">
-            <span i18n>I have read and I agree with the </span>
-            <span class="ws-mat-primary-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n>IPR
-              Declaration</span>
-          </p>
+          <span class="font-weight-500 flex flex-column text-center">
+            <input type="file" #fileInput class="inputfile" accept=".mp3,.mp4,.pdf,.zip"
+              (change)="onDrop($event.target.files[0]); fileInput.value = null" />
+
+            <label for="file" class="up-lbl mat-h3 ws-mat-primary-text flex flex-middle justify-center">
+              <mat-icon class="upload_cloud ws-mat-default-text">file_upload</mat-icon>
+              <span i18n>Drop file to Upload</span>
+            </label>
+            <span i18n class="or">or</span>
+            <span class="ws-mat-default-text mat-h3 underline">Browse</span>
+          </span>
         </div>
-        <span class="spacer"></span>
-        <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl"
-          [disabled]="!enableUpload" (click)="triggerUpload()">
-          <div class="flex flex-middle justify-center">
-            <mat-icon class="text-white">publish</mat-icon>
-            <p class="text-white margin-left-s margin-remove-bottom">
-              <span i18n>Upload</span>
-            </p>
+        <div class="instruction">
+          <div class="pro-div margin-top-xl">
+            <div *ngIf="file || fileUploadForm.controls.artifactUrl.value"
+              class="flex flex-middle justify-center flex-column">
+              <ng-container [ngSwitch]="mimeType">
+                <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'audio/mpeg'">
+                  music_note
+                </mat-icon>
+                <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/x-mpegURL'">
+                  videocam
+                </mat-icon>
+                <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/pdf'">
+                  picture_as_pdf
+                </mat-icon>
+                <mat-icon class="ws-mat-primary-text" *ngSwitchCase="'application/html'">
+                  request_quote
+                </mat-icon>
+              </ng-container>
+              <p class="margin-left-xs mat-h3 font-weight-500 margin-remove-bottom break">
+                <ng-container *ngIf="file; else elseBlock">
+                  <span class="flex-wrap"> {{ file?.name }}</span>
+                </ng-container>
+                <ng-template #elseBlock>
+                  {{ fileUploadForm.controls.artifactUrl.value.split('/').pop() }}
+                  <ng-container> </ng-container>
+                </ng-template>
+              </p>
+
+              <button *ngIf="file || fileUploadForm.controls.artifactUrl.value" mat-icon-button
+                class="close-button padding-remove ws-mat-primary-background-op30 text-white"
+                (click)="clearUploadedFile(); $event.stopPropagation()">
+                <mat-icon class="rotate">add_circle_outline</mat-icon>
+              </button>
+              <mat-progress-bar *ngIf="file" mode="indeterminate"></mat-progress-bar>
+            </div>
           </div>
-        </button>
+          <div class="flex flex-column margin-top-m margin-bottom-xl">
+            <div class="flex flex-middle margin-top-xs padding-top-l">
+              <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
+              <p class="margin-left-xs margin-remove-bottom">
+                <span i18n>I have read and I agree with the </span>
+                <span class="ws-mat-default-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n>IPR
+                  Declaration</span>
+              </p>
+            </div>
+            <!-- <span class="spacer"></span> -->
+            <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
+              [disabled]="!enableUpload" (click)="triggerUpload()">
+              <div class="flex flex-middle justify-center">
+                <mat-icon class="text-white">file_upload</mat-icon>
+                <p class="text-white margin-left-s margin-remove-bottom">
+                  <span i18n>Upload</span>
+                </p>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </ng-container>
+</mat-card>
+<!-- </div> -->
 
 
 <ng-template #guideline>
@@ -90,7 +96,7 @@
         <mat-icon aria-label="Next" role="button">close</mat-icon>
       </button>
     </div>
-    <div style="overflow: auto; max-height: 400px">
+    <div style="overflow: auto; max-height: 450px; flex: 1;">
       <div class="mat-form-field mt-4">
         <div class="flex w-100">
           <mat-checkbox [(ngModel)]="fileUploadCondition.fileName" i18n></mat-checkbox>

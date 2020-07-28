@@ -46,7 +46,7 @@ $mat-orange: (50: #fff3e0,
     600: #fb8c00,
     700: #15A9F4,
     // F5F6FA
-    800: #ef6c00,
+    800: #F58634,
     900: #2095cc,
     A100: #ffd180,
     A200: #ffab40,
@@ -74,7 +74,7 @@ $mat-orange: (50: #fff3e0,
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 $theme-primary: mat-palette($mat-blue);
-$theme-accent: mat-palette($mat-orange);
+$theme-accent: mat-palette($mat-orange, 500, 700, 800);
 $theme-warn: mat-palette($mat-red);
 $background-color: mat-palette($mat-blue);
 $theme-background: mat-palette($mat-blue);

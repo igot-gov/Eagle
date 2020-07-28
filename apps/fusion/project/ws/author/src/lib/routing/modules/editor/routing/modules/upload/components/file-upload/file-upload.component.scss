@@ -1,57 +1,117 @@
+@import 'ws-mixins';
+
 .op100 {
   opacity: 1;
 }
 
 .upload-box {
   border: 2px dashed rgba(28, 28, 28, 0.6);
-  border-radius: 2%;
-  // width: 235px;
-  flex: 1;
+  border-radius: 4px;
+  // flex: 1;
+  margin: auto;
+  width: 400px;
+  height: 230px;
+  max-width: 400px;
   position: relative;
+
+  @include breakpoint-xs {
+    width: auto;
+  }
+
+}
+
+.rotate {
+  transform: rotate(45deg);
+}
+
+.break {
+  word-break: break-all;
+}
+
+.underline {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .instruction {
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 2rem;
+  margin: auto;
+  width: 400px;
+  max-width: 400px;
+  position: relative;
 
-  @media only screen and(max-width: 769px) {
-    margin: 0rem;
+  @include breakpoint-xs {
+    margin: 0.5rem;
+    width: auto;
   }
 
-}
-
-.flex-Update-r {
-  flex-direction: row;
-
-  @media only screen and(max-width: 1060px) {
-    flex-direction: column;
-  }
 }
 
 .flex-Update {
-  flex-direction: row;
+  flex-direction: column;
 
-  @media only screen and(max-width: 769px) {
-    flex-direction: column-reverse;
-  }
+  // @media only screen and(max-width: 769px) {
+  //   flex-direction: column-reverse;
+  // }
+}
+
+.mw {
+  max-width: 180px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .upload_cloud {
-  font-size: 10em;
+  // font-size: 10em;
   height: auto;
   width: auto;
+  margin: 0 5px 0 0;
 }
 
 .new-text-upload {
   font-size: 12px;
 }
 
+.title {
+  display: flex;
+  width: 650px;
+  margin: auto;
+  text-align: start;
+
+  @include breakpoint-xs {
+    width: 100%;
+  }
+}
+
+.or {
+  color: #F58634;
+  margin: -10px 0 9px 0;
+}
+
+.new-inner-div {
+  margin-left: auto;
+  background: antiquewhite;
+  margin-right: auto;
+  margin-top: 2rem;
+  padding-top: 3rem;
+  width: 650px;
+  border-radius: 8px;
+
+  @include breakpoint-xs {
+    width: 100%;
+  }
+}
+
 .up-lbl {
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
 }
 
 .text-white {
@@ -87,8 +147,8 @@ ul li {
   color: white;
   display: inline-block;
   cursor: pointer;
-  margin-top: 5rem;
-  margin-bottom: 2rem;
+  // margin-top: 5rem;
+  // margin-bottom: 2rem;
 }
 
 .close-button {

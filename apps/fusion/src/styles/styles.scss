@@ -502,3 +502,35 @@ h3.shepherd-title {
   font-weight: bold;
   border: 1px solid;
 }
+
+#bannerColors {
+  .mat-radio-label {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .mat-radio-label-content {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mat-radio-container {
+    margin: 0 0 0 10px;
+  }
+}
+
+@media only screen and(max-width: 585px) {
+  #bannerColors {
+    flex-direction: column;
+
+    .mat-radio-label {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    //  .mat-radio-label-content {}
+    //    .mat-radio-container {}
+  }
+}

@@ -1,6 +1,7 @@
 .cursor-disable {
   cursor: not-allowed;
 }
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -11,8 +12,15 @@
   overflow: auto;
 }
 
+.settings {
+  border-radius: 8px;
+  border: 1px solid;
+  padding: 0 10px 0 10px !important;
+}
+
 .margin-left {
   margin-left: 120px;
+
   @media only screen and(max-width: 930px) {
     // margin-top: 24px;
     margin-left: 80px;
