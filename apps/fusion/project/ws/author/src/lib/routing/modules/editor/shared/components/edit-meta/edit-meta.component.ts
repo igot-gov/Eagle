@@ -97,7 +97,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   showMoreGlance = false
   complexityLevelList: string[] = []
   isEditEnabled = false
-
+  banners = ['#003F5C', '#59468B', '#185F49', '#126489']
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
   @ViewChild('publisherDetailsView', { static: false }) publisherDetailsView!: ElementRef
@@ -982,6 +982,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       appIcon: [],
       artifactUrl: [],
       audience: [],
+      bannerColor: [],
       body: [],
       catalogPaths: [],
       category: [],
@@ -1057,6 +1058,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       unit: [],
       verifiers: [],
       visibility: [],
+
     })
 
     this.contentForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
