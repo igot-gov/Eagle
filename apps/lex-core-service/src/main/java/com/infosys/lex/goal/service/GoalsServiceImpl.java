@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -2627,10 +2628,21 @@ public class GoalsServiceImpl implements GoalsService {
 
 		// Fetch meta from elastic search and progress for the user for these content
 		// from Cassandra
-		Map<String, Object> requiredContentData = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields);
+		if(metaFields!=null){
+			// add the default source fields required
+			String[] requiredFields = new String[] {"artifactUrl","children","complexityLevel","creatorContacts","downloadUrl","isExternal","lastUpdatedOn","learningMode","learningObjective","me_totalSessionsCount","resourceCategory","sourceName","hasAccess"};
+			List<String> fieldsRequiredForProcessing = Arrays.asList(requiredFields);
+			fieldsRequiredForProcessing.forEach(field -> {
+				if (!metaFields.contains(field))
+					metaFields.add(field);
+			});
+		}
+		Map<String, Object> requiredContentMap = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields);
+
+		List<Object> contents = requiredContentMap.values().stream().collect(Collectors.toList());
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
-		finalMap.put("goals_content_in_progress", requiredContentData);
+		finalMap.put("contents", contents);
 		return finalMap;
 	}
 
