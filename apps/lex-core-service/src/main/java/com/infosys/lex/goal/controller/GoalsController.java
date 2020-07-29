@@ -335,6 +335,15 @@ public ResponseEntity<Map<String, Object>> addSingleContentFromHomePage(@PathVar
 		return new ResponseEntity<>(myGoalsData, HttpStatus.OK);
 	}
 
+	@GetMapping("/v5/users/{user_id}/goals/content")
+	public ResponseEntity<Map<String, Object>> fetchGoalsContentWithProgress(@PathVariable("user_id") String userUUID,
+																			 @RequestHeader("rootOrg") String rootOrg,
+																			 @RequestParam(required = false, name = "sourceFields") List<String> sourceFields) throws Exception {
+
+		Map<String, Object> myGoalsContents = goalsService.fetchUserGoalsContentWithProgress(userUUID, rootOrg, sourceFields);
+		return new ResponseEntity<>(myGoalsContents, HttpStatus.OK);
+	}
+
 	/*
 	 * This method is responsible for fetching all the goals that are displayed
 	 * under "GOALS FOR OTHERS" section. It will fetch the goals from USG<whose

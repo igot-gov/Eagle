@@ -148,6 +148,8 @@ public interface GoalsService {
 	public Map<String, Object> fetchMyGoalsWithProgress(String userUUID, String rootOrg, String language,
 			List<String> meta) throws Exception;
 
+	public Map<String, Object> fetchUserGoalsContentWithProgress(String userUUID, String rootOrg, List<String> metaFields) throws Exception;
+
 	/**
 	 * This method is responsible for fetching all the goals that are displayed
 	 * under "GOALS FOR OTHERS" section. It will fetch the goals from USG(whose

@@ -2602,6 +2602,38 @@ public class GoalsServiceImpl implements GoalsService {
 		return finalMap;
 	}
 
+	@Override
+	public Map<String, Object> fetchUserGoalsContentWithProgress(String userUUID, String rootOrg, List<String> metaFields) throws Exception{
+
+		this.validateUser(rootOrg, userUUID);
+
+		// fetch user learning goals of type "common" and "user".
+		List<Map<String, Object>> selfCreatedGoals = learningGoalsRepo
+				.findByUserLearningGoalsPrimaryKeyRootOrgAndUserLearningGoalsPrimaryKeyUuidAndUserLearningGoalsPrimaryKeyGoalTypeIn(
+						rootOrg, userUUID, Arrays.asList("common", "user"));
+
+		// fetch user shared goals that are accepted
+		List<Map<String, Object>> acceptedRecords = sharedGoalsRepo.getGoalsSharedToUserFilterStatus(rootOrg, userUUID,
+				1);
+
+		// combine and sort by last updated on
+		List<Map<String, Object>> myGoals = new ArrayList<>(selfCreatedGoals);
+		myGoals.addAll(acceptedRecords);
+		Collections.sort(myGoals,
+				(goal1, goal2) -> ((Date) goal2.get("last_updated_on")).compareTo((Date) goal1.get("last_updated_on")));
+
+		// Extract all goal contents and remove duplicates.
+		List<String> goalsContents = getGoalContentWithoutDeplicates(myGoals);
+
+		// Fetch meta from elastic search and progress for the user for these content
+		// from Cassandra
+		Map<String, Object> requiredContentData = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields);
+
+		Map<String, Object> finalMap = new HashMap<String, Object>();
+		finalMap.put("goals_content_in_progress", requiredContentData);
+		return finalMap;
+	}
+
 	@SuppressWarnings("unchecked")
 	private List<String> getGoalContentWithoutDeplicates(List<Map<String, Object>> myGoals) {
 
