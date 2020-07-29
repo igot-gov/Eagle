@@ -2608,6 +2608,19 @@ public class GoalsServiceImpl implements GoalsService {
 
 		this.validateUser(rootOrg, userUUID);
 
+		String[] requiredFields = new String[] {"artifactUrl","children","complexityLevel","creatorContacts","downloadUrl","isExternal","lastUpdatedOn","learningMode","learningObjective","me_totalSessionsCount","resourceCategory","sourceName","hasAccess"};
+		if(metaFields == null){
+			metaFields = Arrays.asList(requiredFields);
+		}
+		if(metaFields!=null){
+			// add the default source fields required
+			List<String> fieldsRequiredForProcessing = Arrays.asList(requiredFields);
+			for(String field: fieldsRequiredForProcessing){
+				if (!metaFields.contains(field)) metaFields.add(field);
+
+			}
+		}
+
 		// fetch user learning goals of type "common" and "user".
 		List<Map<String, Object>> selfCreatedGoals = learningGoalsRepo
 				.findByUserLearningGoalsPrimaryKeyRootOrgAndUserLearningGoalsPrimaryKeyUuidAndUserLearningGoalsPrimaryKeyGoalTypeIn(
@@ -2628,15 +2641,7 @@ public class GoalsServiceImpl implements GoalsService {
 
 		// Fetch meta from elastic search and progress for the user for these content
 		// from Cassandra
-		if(metaFields!=null){
-			// add the default source fields required
-			String[] requiredFields = new String[] {"artifactUrl","children","complexityLevel","creatorContacts","downloadUrl","isExternal","lastUpdatedOn","learningMode","learningObjective","me_totalSessionsCount","resourceCategory","sourceName","hasAccess"};
-			List<String> fieldsRequiredForProcessing = Arrays.asList(requiredFields);
-			fieldsRequiredForProcessing.forEach(field -> {
-				if (!metaFields.contains(field))
-					metaFields.add(field);
-			});
-		}
+
 		Map<String, Object> requiredContentMap = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields);
 
 		List<Object> contents = requiredContentMap.values().stream().collect(Collectors.toList());
