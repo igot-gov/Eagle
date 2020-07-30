@@ -39,11 +39,15 @@ import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../constant/web
 import { IAudioObj } from '../../interface/page-interface'
 import { PlainCKEditorComponent } from '../../../../../shared/components/plain-ckeditor/plain-ckeditor.component'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
   selector: 'ws-auth-web-module-editor',
   templateUrl: './web-module-editor.component.html',
   styleUrls: ['./web-module-editor.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  }],
 })
 
 export class WebModuleEditorComponent implements OnInit, OnDestroy {

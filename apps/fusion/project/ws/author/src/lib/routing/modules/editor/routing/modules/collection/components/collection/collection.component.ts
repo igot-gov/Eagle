@@ -26,6 +26,7 @@ import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 /**
  * @description
@@ -41,7 +42,9 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
   selector: 'ws-auth-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss'],
-  providers: [CollectionStoreService, CollectionResolverService],
+  providers: [CollectionStoreService, CollectionResolverService, {
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  }],
 })
 export class CollectionComponent implements OnInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []
@@ -61,6 +64,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
   isChanged = false
   previewIdentifier: string | null = null
   viewMode = 'meta'
+  newViewMode = 'meta'
   mimeTypeRoute = ''
 
   mediumScreen = false
@@ -85,14 +89,26 @@ export class CollectionComponent implements OnInit, OnDestroy {
     private notificationSvc: NotificationService,
     private accessControlSvc: AccessControlService,
     private breakpointObserver: BreakpointObserver,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
-      if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
+      let cntnt = this.contentService.getUpdatedMeta(data)
+      if (cntnt && cntnt.contentType !== 'Resource') {
         this.viewMode = 'meta'
+      } else {
+        if (['application/pdf', 'application/x-mpegURL'].includes(cntnt.mimeType)) {
+          this.viewMode = 'upload'
+        } else if (cntnt.mimeType === 'application/html' && !cntnt.isExternal) {
+          this.viewMode = 'upload'
+        } else if (cntnt.mimeType === 'application/html') {
+          this.viewMode = 'curate'
+        } else if (cntnt.mimeType === 'application/web-module') {
+          this.viewMode = 'web'
+        }
       }
+      this.newViewMode = cntnt.category || 'meta'
     })
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.routerSubscription = this.activateRoute.parent.parent.data.subscribe(data => {
@@ -290,9 +306,9 @@ export class CollectionComponent implements OnInit, OnDestroy {
         comment: commentsForm.controls.comments.value,
         operation:
           commentsForm.controls.action.value === 'accept' ||
-          ['Draft', 'Live'].includes(
-            this.contentService.originalContent[this.currentParentId].status,
-          )
+            ['Draft', 'Live'].includes(
+              this.contentService.originalContent[this.currentParentId].status,
+            )
             ? 1
             : 0,
       }
@@ -508,12 +524,14 @@ export class CollectionComponent implements OnInit, OnDestroy {
 
   subAction(event: { type: string; identifier: string }) {
     this.contentService.changeActiveCont.next(event.identifier)
+    const content = this.contentService.getUpdatedMeta(event.identifier)
+    this.newViewMode = content.category
     switch (event.type) {
       case 'editMeta':
         this.viewMode = 'meta'
         break
       case 'editContent':
-        const content = this.contentService.getUpdatedMeta(event.identifier)
+        // const content = this.contentService.getUpdatedMeta(event.identifier)
         if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
           this.viewMode = 'upload'
         } else if (content.mimeType === 'application/html' && !content.isExternal) {

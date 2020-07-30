@@ -1,3 +1,7 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+@import 'ws-common';
+
 .op100 {
   opacity: 1;
 }
@@ -12,11 +16,70 @@
   color: #fff;
 }
 
+.min-w {
+  width: 650px;
+
+  @include breakpoint-xs {
+    width: auto;
+  }
+
+  @include breakpoint-s {
+    width: auto;
+  }
+}
+
+.mobile-break {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 0 5px 0 5px;
+  flex: 1;
+  // background: bisque;
+}
+
+.t-45 {
+  transform: rotate(45deg);
+  // margin: 0 0 0 -37px;
+
+  @include breakpoint-xs {
+    display: none;
+    margin: 0;
+  }
+}
+
+.c-footer {
+  display: flex;
+  margin: auto;
+  width: fit-content;
+}
+
+.marginleftxl {
+  margin-left: $size-xl;
+
+  @include breakpoint-xs {
+    margin-left: 0
+  }
+}
+
+.card-contan {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
 ul li {
   margin: 20px 0;
 }
 
-input{
+input {
   line-height: 1px;
 }
 
@@ -29,7 +92,7 @@ input{
   z-index: -1;
 }
 
-.inputfile + label {
+.inputfile+label {
   font-size: 1.25em;
   color: white;
   display: inline-block;
@@ -46,19 +109,19 @@ input{
   padding: 0;
 }
 
-.flex-grow60{
+.flex-grow60 {
   flex-grow: 0.6;
 }
 
 
-.input{
+.input {
   font-size: 16px;
 }
 
-.margin-left15{
+.margin-left15 {
   margin-left: 15rem;
 }
 
-.margin-left5{
+.margin-left5 {
   margin-left: 5rem;
 }

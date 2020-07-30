@@ -1,5 +1,5 @@
-<div class="margin-top-xl margin-l-l margin-r-l" [hidden]="previewMode">
-  <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
+<div class="margin-l-l margin-r-l" [hidden]="previewMode">
+  <!-- <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
     <div class="flex flex-middle">
       <p class="ws-mat-primary-text font-weight-bold title margin-right-xs" i18n>
         CONTENT CREATION
@@ -47,9 +47,9 @@
         </p>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <div class="margin-left-xl margin-top-s margin-bottom-xs">
+  <!-- <div class="margin-left-xl margin-top-s margin-bottom-xs">
     <div class="flex flex-middle">
       <p class="margin-remove-bottom mat-h3 font-weight-bold" i18n>Language</p>
     </div>
@@ -71,8 +71,8 @@
         </button>
       </mat-menu>
     </div>
-  </div>
-  <div id="upload-container" class="mat-app-background">
+  </div> -->
+  <!-- <div id="upload-container" class="mat-app-background">
     <div class="margin-top-xl margin-left-xl margin-right-xl" *ngIf="currentStep === 2">
       <ws-auth-file-upload [canTransCode]="canTransCode" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
       </ws-auth-file-upload>
@@ -81,7 +81,52 @@
       <ws-auth-edit-meta [nextAction]="getAction()" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
       </ws-auth-edit-meta>
     </div>
-  </div>
+  </div> -->
+
+  <mat-horizontal-stepper labelPosition="bottom" #stepper id="upload-container">
+    <mat-step state="phone">
+      <ng-template matStepLabel>
+        <span class="ws-mat-default-text">Upload Content</span>
+      </ng-template>
+      <ng-container [ngTemplateOutlet]="top"></ng-container>
+      <ws-auth-file-upload [canTransCode]="canTransCode" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-file-upload>
+    </mat-step>
+    <mat-step state="create1">
+      <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
+      </ng-template>
+      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-edit-meta>
+    </mat-step>
+    <mat-step state="create1">
+      <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>
+      </ng-template>
+      <ws-auth-edit-meta [stage]="2" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-edit-meta>
+    </mat-step>
+    <mat-step state="create1">
+      <ng-template matStepLabel><span class="ws-mat-default-text">Collaborators</span>
+      </ng-template>
+      <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-edit-meta>
+    </mat-step>
+    <!-- Icon overrides. -->
+    <!-- check_circle -->
+    <ng-template matStepperIcon="phone">
+      <mat-icon class="ws-mat-default-text">radio_button_checked</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="create1">
+      <mat-icon class="ws-mat-default-text">radio_button_unchecked</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="edit">
+      <mat-icon class="ws-mat-default-text">radio_button_checked</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="done">
+      <mat-icon class="ws-mat-default-text">check_circle</mat-icon>
+    </ng-template>
+  </mat-horizontal-stepper>
+
+
 
   <div class="buttons margin-top-xl">
     <!-- button-grid  -->

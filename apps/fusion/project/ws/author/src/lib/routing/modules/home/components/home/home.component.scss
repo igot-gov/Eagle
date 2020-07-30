@@ -11,8 +11,16 @@
   max-width: 600px;
 }
 
+.img-class {
+  width: 20px;
+}
+
 .txt {
   text-align: inherit;
+}
+
+.font-white {
+  color: #EDEDED !important;
 }
 
 .banner-img {
@@ -42,16 +50,26 @@
   height: calc(100vh - 165px);
 }
 
+.mat-drawer {
+  background-color: #003F5C !important;
+}
+
+.border-0 {
+  border-right: none !important;
+}
+
 .matExpansion {
   height: 48px;
   cursor: pointer;
   flex-direction: row;
   align-items: center;
-  padding: 0 24px;
+  // padding: 0 24px;
+  padding: 10px 0 10px 0;
   border-radius: inherit;
   font-size: 15px;
   font-weight: 300;
   line-height: 48px;
+  background-color: #f5f6fa !important;
 }
 
 .mat-list-base {
@@ -72,4 +90,12 @@
 
 .create-button {
   outline: none;
+}
+
+.btn-create {
+  background: #34D6A4 !important;
+  flex: 1;
+  margin: 0 5px 0 5px;
+  border-radius: 8px;
+  font-weight: 600;
 }

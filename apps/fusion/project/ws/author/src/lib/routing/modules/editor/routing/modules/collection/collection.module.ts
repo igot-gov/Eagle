@@ -13,6 +13,7 @@ import { AuthEditorOptionsComponent } from './components/auth-editor-options/aut
 import { AuthTableOfContentsComponent } from './components/auth-table-of-contents/auth-table-of-contents.component'
 import { AuthTableTreeLabelComponent } from './components/auth-table-tree-label/auth-table-tree-label.component'
 import { CollectionComponent } from './components/collection/collection.component'
+import { WebPageModule } from '../web-page/web-page.module'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CollectionComponent } from './components/collection/collection.componen
     AuthViewerModule,
     UploadModule,
     CurateModule,
+    WebPageModule
   ],
 })
-export class CollectionModule {}
+export class CollectionModule { }
