@@ -73,7 +73,18 @@ class HomeViewController: UIViewController, WKScriptMessageHandler, WKNavigation
             NetworkUtil.setNetworkType(type: .None)
             Singleton.isOffline = false
             print(Singleton.isOffline)
-            self.homeToDownload()
+            //Offline Support feature disabled and showing alert.
+            //            self.homeToDownload() 
+            
+            let alertController = UIAlertController(title: "Network Disconnected", message: "It seems that internet is not available. Can you please connect the internet and continue.", preferredStyle: .alert)
+            
+            let okayAction = UIAlertAction(title: "Ok", style: .destructive) { (action) -> Void in
+                // What to be done after the action has been performed
+            }
+            
+            alertController.addAction(okayAction)
+             self.present(alertController, animated: true, completion: nil)
+
         }
     }
     
@@ -1088,9 +1099,18 @@ class HomeViewController: UIViewController, WKScriptMessageHandler, WKNavigation
             
             // User has logged in and downloads are accessible
             if userHasLoggedInBefore && canDownloadsBeAccessible && !Singleton.isOffline {
-                message = "\(message). Would you like to go to Downloads instead?"
+                //Offline Support feature disabled.
+                message = "\(message). Can you please connect to the internet and continue"
+            
+                let okayAction = UIAlertAction(title: "Exit", style: .destructive) { (action) -> Void in
+                    // What to be done after the action has been performed
+                    exit(0)
+                }
                 
+                alertController.addAction(okayAction)
+                /*
                 // Initialize Actions for alert
+                 message = "\(message). Would you like to go to Downloads instead?"
                 let yesAction = UIAlertAction(title: "Yes", style: .default) { (action) -> Void in
                     Singleton.isOffline = true
                     self.performSegue(withIdentifier: "segueHomeToToC", sender: self)
@@ -1098,7 +1118,7 @@ class HomeViewController: UIViewController, WKScriptMessageHandler, WKNavigation
                 
                 alertController.addAction(yesAction)
                 alertController.preferredAction = yesAction
-                
+                */
             } else if userHasLoggedInBefore && !canDownloadsBeAccessible { // User has logged in, but before the downloads accessiblility conditional number of days
                 message = "\(message). \(AppConstants.lexOfflineDownloadsAccessCondition)"
                 

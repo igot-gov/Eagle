@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,21 +13,21 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Lex_logo_trans" translatesAutoresizingMaskIntoConstraints="NO" id="cBp-eW-1SW">
-                                <rect key="frame" x="77" y="223" width="221" height="221"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="221" id="fQy-gr-TfF"/>
-                                    <constraint firstAttribute="width" constant="221" id="ui9-Xw-oLK"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="cBp-eW-1SW">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="cBp-eW-1SW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="C48-gs-oBJ"/>
-                            <constraint firstItem="cBp-eW-1SW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hVr-Bq-eVN"/>
+                            <constraint firstAttribute="bottom" secondItem="cBp-eW-1SW" secondAttribute="bottom" id="31v-fy-TJB"/>
+                            <constraint firstItem="cBp-eW-1SW" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="dNb-K8-L5o"/>
+                            <constraint firstItem="cBp-eW-1SW" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="iHg-Qg-M6e"/>
+                            <constraint firstAttribute="trailing" secondItem="cBp-eW-1SW" secondAttribute="trailing" id="pRC-kG-YER"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Lex_logo_trans" width="392" height="442"/>
+        <image name="LaunchImage" width="414" height="736"/>
     </resources>
 </document>

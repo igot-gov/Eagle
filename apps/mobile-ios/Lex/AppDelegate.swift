@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //timer for slow connection
     var loadingTimer : Timer!
     let loadingLabel = UILabel()
-    var homeUrl = "https://lex.infosysapps.com/page/home"
+    var homeUrl = "https://eagle-sb.idc.tarento.com"
     
     var minimumVersion : [Int:Int] = [5:3]
     var restrictRotation:UIInterfaceOrientationMask = .all
@@ -48,8 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         loadingLabel.center.x = (window?.center.x)!
         // loadingLabel.backgroundColor = UIColor.white.withAlphaComponent(0.8)
-        loadingLabel.backgroundColor = AppConstants.lexBrandColor.withAlphaComponent(0.8)
-        loadingLabel.layer.borderColor = AppConstants.lexBrandColor.cgColor
+        loadingLabel.backgroundColor = UIColor.clear
+        loadingLabel.layer.borderColor = UIColor.clear.cgColor
         loadingLabel.layer.borderWidth = 1
         loadingLabel.textColor = UIColor.white
         loadingLabel.textAlignment = .center
@@ -134,11 +134,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.deviceRotated), name: UIDevice.orientationDidChangeNotification, object: nil)
         // Override point for customization after application launch.
         splashImageView = UIImageView()
-        splashImageView?.loadGif(name: "Lex")
-        splashImageView?.contentMode = .center
+        splashImageView?.image = UIImage(named:"LaunchImage")
+        splashImageView?.contentMode = .scaleToFill
         splashImageView?.frame = CGRect(x: 0, y: 0, width: (window?.frame.width)!, height: (window?.frame.height)!)
         //splashImageView?.backgroundColor = UIColor.init(red: 63, green: 81, blue: 181, alpha: 0.9)
-        splashImageView?.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
+//        splashImageView?.backgroundColor = UIColor(red:0.25, green:0.32, blue:0.71, alpha:1.0)
         window!.addSubview(splashImageView!)
         window!.makeKeyAndVisible()
         let uuid = NSUUID().uuidString

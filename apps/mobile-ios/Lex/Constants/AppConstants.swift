@@ -8,10 +8,10 @@ import Foundation
 import UIKit
 class AppConstants {
     // Setting the default app properties for dev
-    var appUrl = "https://led1.infosysapps.com"
+    var appUrl = "https://eagle-sb.idc.tarento.com"
     var internalIp = ""
     var environment = env.DEV.name()
-    var homeUrl = "https://lex.infosysapps.com/page/home"
+    var homeUrl = "https://eagle-sb.idc.tarento.com"
     
     static let lastLoggedInKey = "lastLoggedIn"
     static let contentExpiryInDays = 30
@@ -46,8 +46,8 @@ class AppConstants {
     static let assessmentOnlyOfflineMsg = "Assessments can only be taken in online mode. Please connect to internet and try again."
     static let featureOnlyAvailableOnline = "Uh Oh, this feature requires internet. Would you like to go to Downloads instead?"
     static let inOfflineMode = "You are in offline mode. Please try again when internet is available."
-    static let inOpenRapMode = "You are currently connected to Lex Hotspot, please connect to the Internet."
-    static let lexOfflineDownloadsAccessCondition = "Lex allows access to offline downloaded content for a maximum \(AppConstants.maxOfflineUseInDays) days after your last login.\nPlease connect to the internet and login again."
+    static let inOpenRapMode = "You are currently connected to iGoT 2.0 Hotspot, please connect to the Internet."
+    static let lexOfflineDownloadsAccessCondition = "iGoT 2.0 allows access to offline downloaded content for a maximum \(AppConstants.maxOfflineUseInDays) days after your last login.\nPlease connect to the internet and login again."
     static let continueOnCellular = "Continue download on cellular data?"
     static let contentDownloadedGotoDownloads = "Content downloaded. To view it, switch to Downloads under Apps"
     static let contentExpiringSoon = "You have content which is going to be expired soon. Do you wish to extend the expiry of all downloaded content?"
@@ -69,7 +69,7 @@ class AppConstants {
     static let openRapWifiSsid = "Lex-Hotspot"
     static let openRapLaunchPageUrl = ""
     static let openRapDownloaded = "Downloading finished go to downloads to view content"
-    static let openRapLoadingErrorMessage = "It seems like Lex hot spot is unavailable right now. Please try again later"
+    static let openRapLoadingErrorMessage = "It seems like iGoT 2.0 hot spot is unavailable right now. Please try again later"
     static let openRapCoreDataKeyName = "open-rap-key"
     static let offlinePlayerNavigationMessage = "Feature not available in downloads mode"
     static let alreadyDownloading = "This content is already being downloaded"
@@ -109,16 +109,16 @@ class AppConstants {
         switch environment {
         case .DEV:
             //            self.appUrl = "https://uon.onwingspan.com"
-            self.appUrl = "https://lex-dev.infosysapps.com"
+            self.appUrl = "https://dtsdtktcet40x.cloudfront.net/ "
             self.internalIp = ""
             self.environment = env.DEV.name()
             break;
         case .STAG:
-            self.appUrl = "https://lex-staging.infosysapps.com"
+            self.appUrl = "https://dtsdtktcet40x.cloudfront.net/ "
             self.internalIp = ""
             self.environment = env.STAG.name()
         case .PROD:
-            self.appUrl = "https://lex.infosysapps.com"
+            self.appUrl = "https://eagle-sb.idc.tarento.com"
             self.internalIp = ""
             self.environment = env.PROD.name()
         }

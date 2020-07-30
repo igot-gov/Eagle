@@ -872,7 +872,7 @@ class ToCViewController: UIViewController, WKScriptMessageHandler, WKNavigationD
         if !Connectivity.isConnectedToInternet() {
             var alertController : UIAlertController
             if WiFiUtil.result{
-                alertController = UIAlertController(title: "Lex Hotspot", message: AppConstants.inOpenRapMode, preferredStyle: .alert)
+                alertController = UIAlertController(title: "iGoT 2.0 Hotspot", message: AppConstants.inOpenRapMode, preferredStyle: .alert)
             }else {
                 alertController = UIAlertController(title: "Network Disconnected", message: AppConstants.inOfflineMode, preferredStyle: .alert)
             }

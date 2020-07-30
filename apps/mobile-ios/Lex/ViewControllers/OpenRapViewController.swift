@@ -97,7 +97,7 @@ class OpenRapViewController: UIViewController, WKNavigationDelegate, WKScriptMes
                                 Telemetry().AddDownloadTelemetry(rid: lex_ID!, mimeType: "", contentType: "", status: "initiated", mode: AppConstants.downloadType.OPEN_RAP.name())
                                 DownloadService.downloadArtifact(withId: lex_ID!, downloadtype: AppConstants.downloadType.OPEN_RAP.name())
                             } else {
-                                let message = "It seems that Lex Hotspot is not available. Would you like to go downloads instead?"
+                                let message = "It seems that iGoT 2.0 Hotspot is not available. Would you like to go downloads instead?"
                                 
                                 let alertController = UIAlertController(title: "Network Disconnected", message: message, preferredStyle: .alert)
                                 alertController.view.layoutIfNeeded() //avoid Snapshotting error

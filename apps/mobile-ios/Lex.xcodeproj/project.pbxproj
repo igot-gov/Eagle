@@ -14,7 +14,6 @@
 		C364586E206BB6DD0038B285 /* Lex.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C364586C206BB6DD0038B285 /* Lex.xcdatamodeld */; };
 		C367585D2056A48500CD11C2 /* Players in Resources */ = {isa = PBXBuildFile; fileRef = C367585B2056A45700CD11C2 /* Players */; };
 		C37DC92F205F988D002EAEE7 /* Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37DC92E205F988D002EAEE7 /* Gif.swift */; };
-		C37DC932205FC610002EAEE7 /* Lex.gif in Resources */ = {isa = PBXBuildFile; fileRef = C37DC931205FC60A002EAEE7 /* Lex.gif */; };
 		C38F44DC207CF88300EF6AD5 /* AuxiliaryDataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C38F44DB207CF88300EF6AD5 /* AuxiliaryDataManagement.swift */; };
 		C3C1161E20567D9D00160C6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3C1161D20567D9D00160C6F /* AppDelegate.swift */; };
 		C3C1162820567D9D00160C6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C1162720567D9D00160C6F /* Assets.xcassets */; };
@@ -74,6 +73,7 @@
 		CFF4009320F10A47001B1482 /* ChatbotService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF4009220F10A47001B1482 /* ChatbotService.swift */; };
 		D76E5AE521662D480057E16E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76E5AE321662D480057E16E /* Main.storyboard */; };
 		D7DC14D62162626300E746F3 /* Pods_Lex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D596352ED886ECFBC3A87F04 /* Pods_Lex.framework */; };
+		D91AD2DB24D318E700E07927 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,11 +119,10 @@
 		C364586D206BB6DD0038B285 /* Lex.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lex.xcdatamodel; sourceTree = "<group>"; };
 		C367585B2056A45700CD11C2 /* Players */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Players; path = Lex/Players; sourceTree = "<group>"; };
 		C37DC92E205F988D002EAEE7 /* Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gif.swift; sourceTree = "<group>"; };
-		C37DC931205FC60A002EAEE7 /* Lex.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Lex.gif; sourceTree = "<group>"; };
 		C38F44DB207CF88300EF6AD5 /* AuxiliaryDataManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuxiliaryDataManagement.swift; sourceTree = "<group>"; };
 		C3B0D2B520569E8C00B4D133 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3B0D2B620569E8C00B4D133 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C3C1161A20567D9D00160C6F /* Lex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lex.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3C1161A20567D9D00160C6F /* iGoT 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iGoT 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3C1161D20567D9D00160C6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3C1162720567D9D00160C6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3C1162A20567D9D00160C6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -193,6 +192,7 @@
 		D7DC14DB2162627200E746F3 /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7DC14DD2162627200E746F3 /* RNCryptor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RNCryptor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7DC14DF2162627200E746F3 /* SSZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SSZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,7 +281,6 @@
 		C3C1161120567D9D00160C6F = {
 			isa = PBXGroup;
 			children = (
-				C37DC931205FC60A002EAEE7 /* Lex.gif */,
 				C367585B2056A45700CD11C2 /* Players */,
 				C3C1161C20567D9D00160C6F /* Lex */,
 				CF4B1BD9214F61E800DCD553 /* LexTest */,
@@ -295,7 +294,7 @@
 		C3C1161B20567D9D00160C6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C3C1161A20567D9D00160C6F /* Lex.app */,
+				C3C1161A20567D9D00160C6F /* iGoT 2.0.app */,
 				CF4B1BD8214F61E800DCD553 /* LexTest.xctest */,
 				B0D70F8421917220004B0053 /* LexUITests.xctest */,
 			);
@@ -305,6 +304,7 @@
 		C3C1161C20567D9D00160C6F /* Lex */ = {
 			isa = PBXGroup;
 			children = (
+				D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */,
 				CF78807923AA06DB00284DB7 /* Extensions */,
 				CF8076D82202CE3F008D1180 /* LFLiveKitSwiftDemo-Bridging-Header.h */,
 				CF2C89822181EA1800615B90 /* Lex.entitlements */,
@@ -473,7 +473,7 @@
 			);
 			name = Lex;
 			productName = Lex;
-			productReference = C3C1161A20567D9D00160C6F /* Lex.app */;
+			productReference = C3C1161A20567D9D00160C6F /* iGoT 2.0.app */;
 			productType = "com.apple.product-type.application";
 		};
 		CF4B1BD7214F61E800DCD553 /* LexTest */ = {
@@ -568,9 +568,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C37DC932205FC610002EAEE7 /* Lex.gif in Resources */,
 				D76E5AE521662D480057E16E /* Main.storyboard in Resources */,
 				C367585D2056A48500CD11C2 /* Players in Resources */,
+				D91AD2DB24D318E700E07927 /* GoogleService-Info.plist in Resources */,
 				C3C1162B20567D9D00160C6F /* LaunchScreen.storyboard in Resources */,
 				C3C1162820567D9D00160C6F /* Assets.xcassets in Resources */,
 			);
@@ -920,16 +920,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lex/Lex.entitlements;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1;
-				DEVELOPMENT_TEAM = MXY4DZWRTX;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 23W9SQ8LXN;
 				INFOPLIST_FILE = Lex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 11.1.26;
-				PRODUCT_BUNDLE_IDENTIFIER = com.infosys.eta.lex;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarento.igot;
+				PRODUCT_NAME = "iGoT 2.0";
 				PROVISIONING_PROFILE = "05c43b1e-c32a-487c-b1ff-c312e2b1d173";
-				PROVISIONING_PROFILE_SPECIFIER = "InfosysLex-Appstore";
+				PROVISIONING_PROFILE_SPECIFIER = iGoT_Development;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -941,17 +941,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Lex/Lex.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1;
-				DEVELOPMENT_TEAM = MXY4DZWRTX;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 23W9SQ8LXN;
 				INFOPLIST_FILE = Lex/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 11.1.26;
-				PRODUCT_BUNDLE_IDENTIFIER = com.infosys.eta.wingspan.dev;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tarento.igot;
+				PRODUCT_NAME = "iGoT 2.0";
 				PROVISIONING_PROFILE = "05c43b1e-c32a-487c-b1ff-c312e2b1d173";
-				PROVISIONING_PROFILE_SPECIFIER = "Wingspan Dev Profile";
+				PROVISIONING_PROFILE_SPECIFIER = iGot_Inhouse;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

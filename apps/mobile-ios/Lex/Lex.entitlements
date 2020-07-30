@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:lex.infosysapps.com</string>
+		<string>applinks:eagle-sb.idc.tarento.com</string>
 	</array>
 </dict>
 </plist>
