@@ -26,6 +26,7 @@ import { AudioStripsComponent } from './shared/component/audio-strips/audio-stri
     HorizontalScrollerModule,
   ],
   entryComponents: [UploadAudioComponent],
+  exports: [WebModuleEditorComponent]
 
 })
 export class WebPageModule { }

@@ -19,7 +19,6 @@ import { UploadService } from './services/upload.service'
 import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
 import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
-import { MatRadioModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -45,7 +44,6 @@ import { MatRadioModule } from '@angular/material'
     SharedModule,
     AceEditorModule,
     CatalogSelectModule,
-    MatRadioModule
   ],
   exports: [
     MatQuillComponent,

@@ -1,11 +1,7 @@
 <div id="edit-meta" class="margin-top-l">
   <form [formGroup]="contentForm">
-    <mat-tab-group animationDuration="0ms" class="mat-tab-labels" mat-stretch-tabs [selectedIndex]="selectedIndex"
-      (selectedTabChange)="selectedIndex = $event.index">
-      <mat-tab>
-        <ng-template mat-tab-label i18n>
-          General Details
-        </ng-template>
+    <ng-container [ngSwitch]="stage">
+      <ng-template [ngSwitchCase]="1">
         <mat-card class="margin-top-xl">
           <mat-card-title class="ml-1 ws-mat-default-text">
             Basic Details
@@ -164,8 +160,9 @@
                     <!-- [ngClass]="{ 'mat-form-field-invalid': showError('name') }"> -->
                     <mat-radio-group id="bannerColors" formControlName="bannerColor"
                       class="flex flex-1 example-radio-group">
-                      <mat-radio-button class="example-radio-button" *ngFor="let banner of banners" [value]="banner">
-                        <span class="bannerSelect" [ngStyle]="{ background: banner}">&nbsp;</span>
+                      <mat-radio-button color="banner" class="example-radio-button" *ngFor="let banner of banners"
+                        [checked]="bannerColor || banner.isDefault" [value]="banner.color">
+                        <span class="bannerSelect" [ngStyle]="{ background: banner.color}">&nbsp;</span>
                       </mat-radio-button>
                     </mat-radio-group>
                   </div>
@@ -271,11 +268,10 @@
               </div>
               <!-- need to remove as per new design -->
 
-              <!-- <div class="margin-top-s">
+              <div class="margin-top-s">
                 <div *ngIf="checkCondition('description', 'show')"
                   [ngClass]="{ disable: checkCondition('description', 'disabled') }">
-                  <mat-label class=""
-                    i18n="Subtitle label|Label which explains the user to enter Subtitle"
+                  <mat-label class="" i18n="Subtitle label|Label which explains the user to enter Subtitle"
                     [ngClass]="{ required: checkCondition('description', 'required') }" i18n>
                     Summary</mat-label>
                   <mat-form-field appearance="outline" class="margin-top-xs"
@@ -290,7 +286,7 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-              </div> -->
+              </div>
 
               <div class="margin-top-s" *ngIf="checkCondition('body', 'show')"
                 [ngClass]="{ disable: checkCondition('body', 'disabled') }">
@@ -316,23 +312,33 @@
           </mat-card-content>
           <mat-card-actions>
             <div class="flex flex-end margin-top-l margin-bottom-s margin-right-l">
-              <button mat-raised-button type="button"
-                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
-                <b class="text-white" i18n>Save</b>
+              <button mat-raised-button type="button" matStepperNext
+                class="text-white ws-mat-primary-background text-white margin-right-m"
+                (click)="data.emit('save');formNext(1)">
+                <b class="text-white" i18n>Save and Proceed</b>
               </button>
-              <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+              <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
                 (click)="formNext(1)">
                 <b class="text-white" i18n>Next</b>
-              </button>
+              </button> -->
             </div>
           </mat-card-actions>
-          <mat-card-footer></mat-card-footer>
+          <mat-card-footer>
+            <div class="c-footer">
+              <!-- matStepperPrevious -->
+              <button mat-icon-button matStepperPrevious>
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <!-- matStepperNext -->
+              <button mat-icon-button matStepperNext>
+                <mat-icon> arrow_forward</mat-icon>
+              </button>
+            </div>
+          </mat-card-footer>
         </mat-card>
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label i18n>
-          Classification
-        </ng-template>
+      </ng-template>
+      <ng-template [ngSwitchCase]="2">
+
         <mat-card class="margin-top-xl ">
           <mat-card-title class="m-auto ws-mat-default-text">
             Classification
@@ -622,23 +628,33 @@
           </mat-card-content>
           <mat-card-actions>
             <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
-              <button mat-raised-button type="button"
-                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
-                <b class="text-white" i18n>Save</b>
+              <button mat-raised-button type="button" matStepperNext
+                class="text-white ws-mat-primary-background text-white margin-right-m"
+                (click)="data.emit('save');formNext(2)">
+                <b class="text-white" i18n>Save and Proceed</b>
               </button>
-              <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
+              <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
                 (click)="formNext(2)">
                 <b class="text-white" i18n>Next</b>
-              </button>
+              </button> -->
             </div>
           </mat-card-actions>
-          <mat-card-footer></mat-card-footer>
+          <mat-card-footer>
+            <div class="c-footer">
+              <!-- matStepperPrevious -->
+              <button mat-icon-button matStepperPrevious>
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+              <!-- matStepperNext -->
+              <button mat-icon-button matStepperNext>
+                <mat-icon> arrow_forward</mat-icon>
+              </button>
+            </div>
+          </mat-card-footer>
         </mat-card>
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label i18n>
-          Intended For
-        </ng-template>
+      </ng-template>
+      <ng-template [ngSwitchCase]="3">
+
         <mat-card class="margin-top-xl">
           <mat-card class="">
             <mat-card-title class="m-auto ws-mat-default-text">
@@ -852,6 +868,10 @@
                 </div>
               </div>
             </mat-card-content>
+            <mat-card-actions></mat-card-actions>
+            <mat-card-footer>
+
+            </mat-card-footer>
           </mat-card>
           <!-- creators -->
           <mat-card class="margin-top-xl">
@@ -1053,16 +1073,21 @@
                 </div>
               </div>
             </mat-card-actions>
-            <mat-card-footer></mat-card-footer>
+            <mat-card-footer>
+              <div class="c-footer">
+                <!-- matStepperPrevious -->
+                <button mat-icon-button matStepperPrevious>
+                  <mat-icon>arrow_back</mat-icon>
+                </button>
+                <!-- matStepperNext -->
+                <button mat-icon-button matStepperNext disabled>
+                  <mat-icon> arrow_forward</mat-icon>
+                </button>
+              </div>
+            </mat-card-footer>
           </mat-card>
         </mat-card>
-      </mat-tab>
-      <!-- <mat-tab>
-        <ng-template mat-tab-label i18n>
-          Stakeholders
-        </ng-template>
-
-      </mat-tab> -->
-    </mat-tab-group>
+      </ng-template>
+    </ng-container>
   </form>
 </div>

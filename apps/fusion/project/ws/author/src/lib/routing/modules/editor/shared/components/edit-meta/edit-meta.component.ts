@@ -54,7 +54,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() data = new EventEmitter<string>()
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
-  @Input() stage = 3
+  @Input() stage = 1
   location = CONTENT_BASE_STATIC
   selectable = true
   removable = true
@@ -97,7 +97,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   showMoreGlance = false
   complexityLevelList: string[] = []
   isEditEnabled = false
-  banners = ['#003F5C', '#59468B', '#185F49', '#126489']
+  banners = [{ color: '#003F5C', isDefault: true }, { color: '#59468B', isDefault: false },
+  { color: '#185F49', isDefault: false }, { color: '#126489', isDefault: false }]
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
   @ViewChild('publisherDetailsView', { static: false }) publisherDetailsView!: ElementRef

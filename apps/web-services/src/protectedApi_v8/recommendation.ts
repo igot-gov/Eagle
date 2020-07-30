@@ -259,8 +259,8 @@ recommendationApi.get('/:recommendationType', async (req, res) => {
     const params: any = {
       pageNumber: pageNo,
       pageSize,
+      sourceFields,
       type: recommendationCategory,
-      sourceFields
     }
     const url = `${API_END_POINTS.recommendations}/${extractUserIdFromRequest(req)}/recommendations/${recommendationType}`
     if (recommendationType === 'latest') {

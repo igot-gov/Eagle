@@ -521,6 +521,32 @@ h3.shepherd-title {
   }
 }
 
+.br-8 {
+  border-radius: 8px;
+}
+
+.mat-step-header .mat-step-icon {
+  background-color: transparent !important;
+  color: inherit;
+}
+
+.mat-step-header.cdk-keyboard-focused,
+.mat-step-header.cdk-program-focused,
+.mat-step-header:hover {
+  background-color: transparent !important;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after {
+  color: inherit !important;
+}
+
+.mat-step-icon .mat-icon {
+  font-size: 32px !important;
+  height: 32px !important;
+  width: 32px !important;
+}
+
 @media only screen and(max-width: 585px) {
   #bannerColors {
     flex-direction: column;

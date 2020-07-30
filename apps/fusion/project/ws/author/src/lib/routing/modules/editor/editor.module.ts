@@ -7,6 +7,7 @@ import { EditorComponent } from './components/editor/editor.component'
 import { EditorRoutingModule } from './editor-routing.module'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { EditorSharedModule } from './shared/shared.module'
+import { WebPageModule } from './routing/modules/web-page/web-page.module'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { EditorSharedModule } from './shared/shared.module'
     EditorRoutingModule,
     EditorSharedModule,
     SharedModule,
+    WebPageModule
   ],
   providers: [
     EditorService,
