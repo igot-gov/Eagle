@@ -5892,10 +5892,15 @@ jest-worker@24.9.0:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
 
-jquery@^3.4.1:
+jquery@^3.4.1, jquery@^3.5.0:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
+
+js-base64@^2.5.2:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.6.3.tgz#7afdb9b57aa7717e15d370b66e8f36a9cb835dc3"
+  integrity sha512-fiUvdfCaAXoQTHdKMgTvg6IkecXDcVz6V5rlftUTclF9IKBjMizvSdQaCl/z/6TApDeby5NL+axYou3i0mu1Pg==
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -8707,6 +8712,13 @@ schema-utils@^2.0.0, schema-utils@^2.0.1, schema-utils@^2.6.1, schema-utils@^2.7
     "@types/json-schema" "^7.0.4"
     ajv "^6.12.2"
     ajv-keywords "^3.4.1"
+
+scorm-api-adapter@arisjulio/scorm-api-adapter:
+  version "0.4.0"
+  resolved "https://codeload.github.com/arisjulio/scorm-api-adapter/tar.gz/0241cc24b8388768ededb90471461095d3d6d764"
+  dependencies:
+    jquery "^3.5.0"
+    js-base64 "^2.5.2"
 
 select-hose@^2.0.0:
   version "2.0.0"
