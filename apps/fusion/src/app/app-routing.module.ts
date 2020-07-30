@@ -436,6 +436,7 @@ const routes: Routes = [
       anchorScrolling: 'enabled',
       scrollPositionRestoration: 'top',
       urlUpdateStrategy: 'eager',
+      scrollOffset: [0, 80],
     }),
   ],
   exports: [RouterModule],
