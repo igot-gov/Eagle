@@ -18,6 +18,7 @@ import { AppTocService } from '../../services/app-toc.service'
 })
 export class AppTocSinglePageComponent implements OnInit, OnDestroy {
   contentTypes = NsContent.EContentTypes
+  showMoreGlance = false
   askAuthorEnabled = true
   trainingLHubEnabled = false
   trainingLHubCount$?: Observable<number>
@@ -37,7 +38,7 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private tocSharedSvc: AppTocService,
-    private configSvc: ConfigurationsService,
+    public configSvc: ConfigurationsService,
     private trainingApi: TrainingApiService,
     private trainingSvc: TrainingService,
     private domSanitizer: DomSanitizer,
