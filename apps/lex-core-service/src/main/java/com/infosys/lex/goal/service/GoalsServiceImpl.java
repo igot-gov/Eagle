@@ -2646,14 +2646,16 @@ public class GoalsServiceImpl implements GoalsService {
 
 		//compute complete and incomplete goals
 		computeGoalProgress(myGoals, requiredContentMap);
-		List<Map<String, Object>> goalProgess = myGoals.stream().filter((Map<String, Object> goal) ->
-				((float) goal.get("goalProgess")) < 1).collect(Collectors.toList());
 
+		List<Object> progressContent = new ArrayList<>();
+		myGoals.forEach(goal ->{
+			List<Map<String, Object>> resourceProgress = (List<Map<String, Object>>) goal.get("resource_progress");
+			progressContent.addAll(resourceProgress.stream().filter((Map<String, Object> metaProgress) -> ((float)metaProgress.get("timeLeft"))>0).collect(Collectors.toList()));
 
-		List<Object> contents = requiredContentMap.values().stream().collect(Collectors.toList());
+		});
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
-		finalMap.put("contents", contents);
+		finalMap.put("contents", progressContent);
 		return finalMap;
 	}
 
@@ -2818,6 +2820,7 @@ public class GoalsServiceImpl implements GoalsService {
 			goal.put("goalProgess", totalGoalCompletion);
 			goal.put("resource_progress", resourceProgress);
 		}
+
 	}
 
 	/**
