@@ -2487,6 +2487,7 @@ public class GoalsServiceImpl implements GoalsService {
 	public Map<String, Object> fetchMyGoalsWithProgress(String userUUID, String rootOrg, String language,
 			List<String> metaFields) throws Exception {
 
+		System.out.println("metaFields "+metaFields);
 		this.validateUser(rootOrg, userUUID);
 
 		// fetch user learning goals of type "common" and "user".
@@ -2609,18 +2610,15 @@ public class GoalsServiceImpl implements GoalsService {
 		this.validateUser(rootOrg, userUUID);
 
 		String[] requiredFields = new String[] {"artifactUrl","children","complexityLevel","creatorContacts","downloadUrl","isExternal","lastUpdatedOn","learningMode","learningObjective","me_totalSessionsCount","resourceCategory","sourceName","hasAccess"};
-		if(metaFields == null){
-			metaFields = Arrays.asList(requiredFields);
-		}
+
 		if(metaFields!=null){
-			// add the default source fields required
 			List<String> fieldsRequiredForProcessing = Arrays.asList(requiredFields);
-			for(String field: fieldsRequiredForProcessing){
-				if (!metaFields.contains(field)) metaFields.add(field);
+			fieldsRequiredForProcessing.forEach(field -> {
+				if (!metaFields.contains(field))
+					metaFields.add(field);
+			});
 
-			}
 		}
-
 		// fetch user learning goals of type "common" and "user".
 		List<Map<String, Object>> selfCreatedGoals = learningGoalsRepo
 				.findByUserLearningGoalsPrimaryKeyRootOrgAndUserLearningGoalsPrimaryKeyUuidAndUserLearningGoalsPrimaryKeyGoalTypeIn(
@@ -2641,8 +2639,7 @@ public class GoalsServiceImpl implements GoalsService {
 
 		// Fetch meta from elastic search and progress for the user for these content
 		// from Cassandra
-
-		Map<String, Object> requiredContentMap = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields);
+		Map<String, Object> requiredContentMap = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields!=null ?metaFields: new ArrayList<String>(Arrays.asList(requiredFields)));
 
 		//compute complete and incomplete goals
 		computeGoalProgress(myGoals, requiredContentMap);
@@ -2702,6 +2699,8 @@ public class GoalsServiceImpl implements GoalsService {
 			});
 
 			source = metaFields.stream().toArray(String[]::new);
+			System.out.println("metaFields again "+metaFields);
+
 		}
 
 		this.checkForAccessAndRetiredStatus(Arrays.asList(userUUID), goalsContents, contentData, true, rootOrg, null,
