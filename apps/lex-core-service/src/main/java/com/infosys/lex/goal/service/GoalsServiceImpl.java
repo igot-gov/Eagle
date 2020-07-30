@@ -2644,6 +2644,12 @@ public class GoalsServiceImpl implements GoalsService {
 
 		Map<String, Object> requiredContentMap = getMetaAndProgress(userUUID, goalsContents, rootOrg, metaFields);
 
+		//compute complete and incomplete goals
+		computeGoalProgress(myGoals, requiredContentMap);
+		List<Map<String, Object>> goalProgess = myGoals.stream().filter((Map<String, Object> goal) ->
+				((float) goal.get("goalProgess")) < 1).collect(Collectors.toList());
+
+
 		List<Object> contents = requiredContentMap.values().stream().collect(Collectors.toList());
 
 		Map<String, Object> finalMap = new HashMap<String, Object>();
