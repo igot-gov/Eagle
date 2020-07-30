@@ -1,0 +1,18 @@
+{
+  "name": "file_transfer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm install && node cluster start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cassandra-driver": "^3.6.0",
+    "express": "4.16.3",
+    "properties-reader": "0.0.16",
+    "winston": "2.4.3"
+  }
+}

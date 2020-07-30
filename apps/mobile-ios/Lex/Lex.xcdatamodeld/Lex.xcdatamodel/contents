@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19E250c" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DownloadPersistance" representedClassName="DownloadPersistance" syncable="YES">
+        <attribute name="contentId" optional="YES" attributeType="String"/>
+        <attribute name="downloadUrl" optional="YES" attributeType="String"/>
+        <attribute name="fileType" optional="YES" attributeType="String"/>
+        <attribute name="needsUnzipping" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="sessionId" optional="YES" attributeType="String"/>
+        <attribute name="taskId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="LexResource" representedClassName="LexResource" syncable="YES">
+        <attribute name="binaryOne" optional="YES" attributeType="Binary"/>
+        <attribute name="content_id" attributeType="String"/>
+        <attribute name="content_type" attributeType="String"/>
+        <attribute name="dateOne" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateTwo" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="download_attempt" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="expiry_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="integerOne" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="integerTwo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="json" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="modified_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="percent_complete" optional="YES" attributeType="Integer 32" minValueString="0" maxValueString="100" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="requested_date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="requestedByUser" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="status" attributeType="String"/>
+        <attribute name="stringOne" optional="YES" attributeType="String"/>
+        <attribute name="stringTwo" optional="YES" attributeType="String"/>
+        <attribute name="telemetry_data" optional="YES" attributeType="Binary"/>
+    </entity>
+    <entity name="LexResourceV2" representedClassName="LexResource" syncable="YES" codeGenerationType="class">
+        <attribute name="binaryOne" optional="YES" attributeType="Binary"/>
+        <attribute name="content_id" attributeType="String"/>
+        <attribute name="content_type" attributeType="String"/>
+        <attribute name="dateOne" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateTwo" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="download_attempt" optional="YES" attributeType="Integer 32" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="expiry_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="integerOne" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="integerTwo" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="json" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="modified_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="percent_complete" optional="YES" attributeType="Integer 32" minValueString="0" maxValueString="100" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="requested_date" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="requestedByUser" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="status" attributeType="String"/>
+        <attribute name="stringOne" optional="YES" attributeType="String"/>
+        <attribute name="stringTwo" optional="YES" attributeType="String"/>
+        <attribute name="telemetry_data" optional="YES" attributeType="Binary"/>
+        <attribute name="userUuid" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SdkResource" representedClassName="SdkResource" syncable="YES">
+        <attribute name="dateInserted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="mobileAppTenant" optional="YES" attributeType="String"/>
+        <attribute name="tenantName" optional="YES" attributeType="String"/>
+        <attribute name="userEmail" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Binary"/>
+    </entity>
+    <entity name="SdkResourceWithType" representedClassName="SdkResource" syncable="YES">
+        <attribute name="dateInserted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="mobileAppTenant" optional="YES" attributeType="String"/>
+        <attribute name="tenantName" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="userEmail" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Binary"/>
+    </entity>
+    <entity name="UserPreferences" representedClassName="UserPreferences" syncable="YES">
+        <attribute name="accessToken" optional="YES" attributeType="String"/>
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="userUuid" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
+        <attribute name="wid" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="DownloadPersistance" positionX="-135" positionY="261" width="128" height="133"/>
+        <element name="LexResource" positionX="-243" positionY="117" width="128" height="315"/>
+        <element name="LexResourceV2" positionX="-144" positionY="252" width="128" height="330"/>
+        <element name="SdkResource" positionX="-144" positionY="252" width="128" height="150"/>
+        <element name="SdkResourceWithType" positionX="-135" positionY="261" width="128" height="165"/>
+        <element name="UserPreferences" positionX="-54" positionY="117" width="128" height="118"/>
+    </elements>
+</model>
