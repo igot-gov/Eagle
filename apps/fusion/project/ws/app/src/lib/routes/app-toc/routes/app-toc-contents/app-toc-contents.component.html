@@ -2,8 +2,8 @@
   <div class="main-container">
     <ng-container *ngIf="content?.children?.length; else noChildren">
       <div class="toc-section">
-        <h2 class="margin-remove">Table of contents {{contentType}}</h2>
-        <button type="button" *ngIf="!contextPath || contextPath !== 'Collection'" color="primary"
+        <h2 class="heading margin-remove">Content </h2>
+        <button type="button" class="expandButton" *ngIf="!contextPath || contextPath !== 'Collection'" color="primary"
           (click)="expandAll = !expandAll" mat-button>
           <ng-container *ngIf="!expandAll" i18n>Expand All</ng-container>
           <ng-container *ngIf="expandAll" i18n>Collapse All</ng-container>
@@ -16,7 +16,7 @@
     </ng-container>
     <ng-template #noChildren>
       <div *ngIf="!isPlayable"
-        class="ws-mat-primary-default-text ws-mat-primary-lite-background px-6 py-8 font-normal text-base" i18n>
+        class="ws-mat-primary-default-text ws-mat-primary-lite-background px-6 py-8 font-normal text-base noChildren" i18n>
         The preview for this type of content is unavailable. Please click on Start button above to view.
       </div>
       <ng-container *ngIf="isPlayable" [wsResolverWidget]="contentPlayWidgetConfig"></ng-container>

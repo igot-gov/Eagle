@@ -63,6 +63,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   contextId?: string
   contextPath?: string
   tocConfig: any = null
+  defaultSLogo = ''
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -93,6 +94,10 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         })
       }
     })
+    const instanceConfig = this.configSvc.instanceConfig
+    if (instanceConfig) {
+      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo
+    }
     if (this.configSvc.restrictedFeatures) {
       this.isGoalsEnabled = !this.configSvc.restrictedFeatures.has('goals')
     }

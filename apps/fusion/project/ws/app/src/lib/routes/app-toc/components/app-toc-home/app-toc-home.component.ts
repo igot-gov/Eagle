@@ -1,11 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, AfterViewChecked } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, LoggerService, NsPage } from '@ws-widget/utils'
-import { Subscription } from 'rxjs'
+import { Subscription, Observable } from 'rxjs'
+import { share } from 'rxjs/operators'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser'
+import { AccessControlService } from '@ws/author/src/public-api'
 
 export enum ErrorType {
   internalServer = 'internalServer',
@@ -17,7 +20,7 @@ export enum ErrorType {
   templateUrl: './app-toc-home.component.html',
   styleUrls: ['./app-toc-home.component.scss'],
 })
-export class AppTocHomeComponent implements OnInit, OnDestroy {
+export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked {
   banners: NsAppToc.ITocBanner | null = null
   content: NsContent.IContent | null = null
   errorCode: NsAppToc.EWsTocErrorCode | null = null
@@ -43,16 +46,32 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     },
   }
   tocConfig: any = null
+  contentTypes = NsContent.EContentTypes
+  askAuthorEnabled = true
+  trainingLHubEnabled = false
+  trainingLHubCount$?: Observable<number>
+  body: SafeHtml | null = null
+  viewMoreRelatedTopics = false
+  hasTocStructure = false
+  tocStructure: NsAppToc.ITocStructure | null = null
+  contentParents: { [key: string]: NsAppToc.IContentParentResponse[] } = {}
+  objKeys = Object.keys
+  fragment!: string
+  activeFragment = this.route.fragment.pipe(share())
+
   constructor(
     private route: ActivatedRoute,
     private contentSvc: WidgetContentService,
     private tocSvc: AppTocService,
     private loggerSvc: LoggerService,
     private configSvc: ConfigurationsService,
+    private domSanitizer: DomSanitizer,
+    private authAccessControlSvc: AccessControlService,
   ) {
   }
 
   ngOnInit() {
+    this.route.fragment.subscribe(fragment => { this.fragment = fragment })
     try {
       this.isInIframe = window.self !== window.top
     } catch (_ex) {
@@ -73,6 +92,18 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe()
     }
+  }
+
+  ngAfterViewChecked(): void {
+    try {
+        if (this.fragment) {
+            // tslint:disable-next-line: no-non-null-assertion
+            document!.querySelector(`#${this.fragment}`)!.scrollTo({
+              top: 80,
+              behavior: 'smooth',
+            })
+        }
+    } catch (e) { }
   }
 
   get enableAnalytics(): boolean {
@@ -107,6 +138,14 @@ export class AppTocHomeComponent implements OnInit, OnDestroy {
     if (this.content && this.content.identifier && !this.forPreview) {
       this.getContinueLearningData(this.content.identifier)
     }
+    this.body = this.domSanitizer.bypassSecurityTrustHtml(
+      this.content && this.content.body
+        ? this.forPreview
+          ? this.authAccessControlSvc.proxyToAuthoringUrl(this.content.body)
+          : this.content.body
+        : '',
+    )
+    this.contentParents = {}
   }
 
   private getContinueLearningData(contentId: string) {

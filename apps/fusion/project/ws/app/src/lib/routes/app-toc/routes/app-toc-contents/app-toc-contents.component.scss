@@ -10,23 +10,41 @@ $border-color: #d8d8d8;
   margin: $size-m 0 $size-l 0;
   .main-container {
     width: 100%;
-    padding-right: 2 * $size-l;
+    // padding-right: 2 * $size-l;
     box-sizing: border-box;
     .toc-section {
       display: flex;
       justify-content: space-between;
-      border-bottom: 1px solid $border-color;
+      // border-bottom: 1px solid $border-color;
       padding-bottom: $size-s;
+      .heading {
+        font: 18px/30px Poppins-Medium;
+        letter-spacing: 0px;
+        color: #222222;
+      }
+      .expandButton{
+        font-family: Poppins-Regular;
+        color: #222222;
+      }
     }
     .content-card {
-      padding: $size-s 0;
-      border-bottom: 1px solid $border-color;
+      // padding: $size-s 0;
+      // border-bottom: 1px solid $border-color;
+      background: #F5F6FA 0% 0% no-repeat padding-box;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 1px solid #F5F6FA;
+    }
+    .noChildren {
+      font: 18px/24px Poppins-Regular;
+      color: #222222 !important;
     }
     @include breakpoint-lt-m {
       width: 100%;
       padding-right: 0;
       margin-bottom: $size-xl;
     }
+
   }
   .side-container {
     flex: 1;

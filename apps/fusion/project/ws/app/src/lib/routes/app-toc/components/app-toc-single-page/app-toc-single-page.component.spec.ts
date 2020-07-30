@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { AppTocSinglePageComponent } from './app-toc-single-page.component';
+import { AppTocSinglePageComponent } from './app-toc-single-page.component'
 
 describe('AppTocSinglePageComponent', () => {
-  let component: AppTocSinglePageComponent;
-  let fixture: ComponentFixture<AppTocSinglePageComponent>;
+  let component: AppTocSinglePageComponent
+  let fixture: ComponentFixture<AppTocSinglePageComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AppTocSinglePageComponent ]
+      declarations: [AppTocSinglePageComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppTocSinglePageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(AppTocSinglePageComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

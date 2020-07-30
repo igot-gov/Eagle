@@ -1,12 +1,17 @@
 @import 'ws-vars';
 
 .cohorts-head {
-  padding: $size-xs $size-m;
+  padding: $size-xs $size-l;
+  margin: 0;
+  background: #fff !important;
+  border-radius: 8px 8px 0 0;
+  color: #222222 !important;
+  font: 18px/30px Poppins-Medium;
 }
 .unit-cohort {
   display: flex;
   align-items: center;
-  margin-bottom: $size-m;
+  margin-bottom: $size-l;
   .cohort-image {
     $user-image-size: 32px;
     width: $user-image-size;
@@ -23,4 +28,9 @@
 }
 .chorotsBlock{
 background: #ffffff;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type {
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
