@@ -2646,6 +2646,7 @@ public class GoalsServiceImpl implements GoalsService {
 
 		//compute complete and incomplete goals
 		computeGoalProgress(myGoals, requiredContentMap);
+		System.out.println("Computed goals "+new ObjectMapper().writeValueAsString(myGoals));
 
 		List<Object> progressContent = new ArrayList<>();
 		myGoals.forEach(goal ->{
