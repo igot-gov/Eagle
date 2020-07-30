@@ -2,7 +2,9 @@
   <div class="flex postSection">
     <div class="flex flex-middle">
       <ws-widget-user-image class="main-post-user-image" [userId]="userId" [userName]="post.postCreator.name"
-        [imageType]="'name-initial'" [email]="post.postCreator.emailId"></ws-widget-user-image>
+      [imageType]="'user-photo'"
+      [imageSize]="'small'" 
+      [email]="post.postCreator.emailId"></ws-widget-user-image>
       <span *ngIf="post.postCreator.name"
         class="ws-mat-primary-text text-base leading-normal font-medium margin-left-s">{{ post.postCreator.name }}</span>
       <span *ngIf="!post.postCreator.name && post.postCreator.emailId"
@@ -33,7 +35,7 @@
       <ws-widget-btn-social-vote [postId]="post.id" [activity]="post.activity" [voteType]="'upVote'"
         [postCreatorId]="post?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
     </div>
-    <div class="margin-left-s margin-auto" *ngIf="!editMode && post.postContent.title.length"
+    <div class="margin-left-s margin-auto post-msg" *ngIf="!editMode && post.postContent.title.length"
       [innerHTML]="post.postContent.title"></div>
     <!-- <mat-chip-list>
       <mat-chip *ngFor="let tag of qnaConversation.mainPost.tags" i18n-matTooltip matTooltip="Associated Tag">
@@ -45,8 +47,9 @@
     <!-- [minLength]="'10'" -->
     <ws-widget-editor-quill [htmlText]="post.postContent.title" (textData)="onTextChange($event)">
     </ws-widget-editor-quill>
-    <div class="text-right">
-      <button type="button" name="discussion-post-update-button" class="margin-top-s" [disabled]="!postPublishEnabled"
+    <div class="btn-container text-right">
+      <button type="button" name="discussion-post-update-button" class="margin-top-s discussion-forum-action-button" 
+      [disabled]="!postPublishEnabled"
         mat-raised-button color="primary" i18n (click)="editPost(editFailMsg.value)">
         Update
       </button>
@@ -83,8 +86,8 @@
     </button>
   </div>
   <div class="write-reply-container mat-app-background flex flex-middle">
-    <ws-widget-user-image class="write-reply-user-image" [userName]="userName" [imageType]="'name-initial'"
-      [email]="userEmail" [userId]="userId"></ws-widget-user-image>
+    <ws-widget-user-image class="write-reply-user-image" [userName]="userName" [imageType]="'user-photo'"
+    [imageSize]="'small'" [email]="userEmail" [userId]="userId"></ws-widget-user-image>
     <div class="padding-left-m width-expand">
       <div name="discussion-post-respond-toggle-button" [hidden]="replyPlaceholderToggler"
         (click)="replyPlaceholderToggler = !replyPlaceholderToggler" class="write-reply-placeholder" role="button" i18n>
@@ -94,8 +97,9 @@
         <!-- [minLength]="'10'" -->
         <ws-widget-editor-quill class="write-reply-editor" (textData)="onReplyTextChange($event)"
           #discussionReplyEditor></ws-widget-editor-quill>
-        <div class="text-right padding-top-s mat-app-background">
-          <button name="discussion-post-reply-button" [disabled]="!isValidReply || isPostingReply"
+        <div class="text-right padding-top-s mat-app-background btn-container">
+          <button name="discussion-post-reply-button" class="discussion-forum-action-button"
+          [disabled]="!isValidReply || isPostingReply"
             (click)="publishReply(editFailMsg.value)" type="button" mat-raised-button color="primary" i18n>
             Reply
           </button>
@@ -114,12 +118,13 @@
 
 <mat-menu #editMenu="matMenu">
   <ng-template matMenuContent>
-    <button name="discussion-post-edit-button" type="button" (click)="editMode = true" mat-menu-item i18n>Edit
-      Post</button>
-    <button name="discussion-post-delete-button" type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item
-      i18n>
-      Delete Post
-    </button>
+
+      <button name="discussion-post-edit-button"  type="button" (click)="editMode = true" mat-menu-item i18n>Edit
+        Post</button>
+      <button name="discussion-post-delete-button" type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item
+        i18n>
+        Delete Post
+      </button>
   </ng-template>
 </mat-menu>
 

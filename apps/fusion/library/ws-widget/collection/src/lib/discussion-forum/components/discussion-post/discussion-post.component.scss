@@ -1,10 +1,10 @@
 @import 'ws-vars';
 
-.main-post-user-image {
-  $size: 40px;
-  width: $size;
-  height: $size;
-}
+// .main-post-user-image {
+//   $size: 40px;
+//   width: $size;
+//   height: $size;
+// }
 .datePost{
   margin: auto 0;
   align-items: center;
@@ -14,11 +14,11 @@
   align-items: stretch;
   padding: $size-s;
   margin-top: $size-xs / 2;
-  .write-reply-user-image {
-    $size: 36px;
-    width: $size;
-    height: $size;
-  }
+  // .write-reply-user-image {
+  //   $size: 36px;
+  //   width: $size;
+  //   height: $size;
+  // }
   .write-reply-placeholder {
     display: flex;
     align-items: center;
@@ -41,6 +41,31 @@
 .postSection{
   align-items: center
 }
+
+.btn-container .discussion-forum-action-button{
+  background: #00A9F4 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  background-color: #00A9F4 !important;
+  color: #fff !important;
+  height: 30px;
+  line-height: 22px;
+  padding: 5px 15px;
+  width: auto;
+  box-shadow: none !important;
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+
+.post-msg {
+  ::ng-deep.mat-body p {
+    margin-bottom: 0 !important;
+  }
+  ::ng-deep.mat-body p {
+    margin-bottom: 0 !important;
+  }
+}
+
 @media only screen and (max-width:469px){
   .datePost{
     justify-content: space-between;
