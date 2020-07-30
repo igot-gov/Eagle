@@ -1,0 +1,76 @@
+<meta name="viewport" content="width= device-width, initial-scale=1">
+
+<div id="ilpPageContent">
+  <div>
+    <p style="color:#333333; font-family:Verdana; font-size:16px">The Java SE 9 divides the platform into a set of
+      modules known as <strong>platform modules</strong>. These modules are further divided&nbsp;into following two
+      types :</p>
+
+    <ul>
+      <li>
+        <p style="color:#333333; font-family:Verdana; font-size:16px"><strong>Standard modules </strong></p>
+
+        <ul>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">These&nbsp;are supported and intended to be
+              used by developers</p>
+          </li>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">The names of the standard Java&nbsp;SE
+              modules start with java.*</p>
+          </li>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">For example, the module named java.rmi
+              defines the Remote Method Invocation API, and the&nbsp;module named java.logging defines the Java Logging
+              API</p>
+          </li>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">It consists of standard API&nbsp;packages as
+              well as non-standard API packages and also depends&nbsp;upon one or more non-standard modules</p>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p style="color:#333333; font-family:Verdana; font-size:16px"><strong>Non standard modules</strong></p>
+
+        <ul>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">The non-standard modules are specific to JDK</p>
+          </li>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">Their names start with jdk.*</p>
+          </li>
+          <li>
+            <p style="color:#333333; font-family:Verdana; font-size:16px">Non-standard modules&nbsp;contain packages
+              and specific JDK code, which may be distinct between various implementations of the&nbsp;Java Development
+              Kit</p>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p style="color:#333333; font-family:Verdana; font-size:16px">You can list platform modules&nbsp;using the <strong>java&nbsp;--list-modules</strong>
+      command,&nbsp;and look at an individual module with <strong>java&nbsp;--describe-module &lt;module name&gt;</strong>&nbsp;command.</p>
+
+    <p style="color:#333333; font-family:Verdana; font-size:16px">&nbsp;<br />
+      JDK 9 also provides the following new tools:</p>
+
+    <ul>
+      <li>
+        <p style="color:#333333; font-family:Verdana; font-size:16px"><strong>jdeps - </strong>used to identify JAR and
+          module dependencies</p>
+      </li>
+      <li>
+        <p style="color:#333333; font-family:Verdana; font-size:16px"><strong>jlink</strong>&nbsp;- used to&nbsp;create
+          custom runtime by combining application and JDK modules</p>
+      </li>
+      <li>
+        <p style="color:#333333; font-family:Verdana; font-size:16px"><strong>jmod - </strong>used to create JMOD files
+          which is a new format for packaging modules</p>
+      </li>
+    </ul>
+
+    <p style="color:#333333; font-family:Verdana; font-size:16px">These tools are present in the <em>bin&nbsp;</em>folder
+      of JDK 9. We will discuss them later in the course.</p>
+  </div><br>
+</div>

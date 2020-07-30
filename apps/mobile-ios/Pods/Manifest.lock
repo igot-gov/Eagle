@@ -1,0 +1,48 @@
+PODS:
+  - Alamofire (4.7.3)
+  - CryptoSwift (0.11.0)
+  - FontAwesome.swift (1.3.2)
+  - HaishinKit (0.11.1):
+    - Logboard (~> 2.1.0)
+  - Logboard (2.1.0)
+  - ReachabilitySwift (4.1.0)
+  - RNCryptor (5.0.3)
+  - SSZipArchive (2.1.5)
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7.0)
+  - CryptoSwift (~> 0.11.0)
+  - FontAwesome.swift (~> 1.3.2)
+  - HaishinKit (~> 0.11.0)
+  - ReachabilitySwift (~> 4.1.0)
+  - RNCryptor (~> 5.0.3)
+  - SSZipArchive (~> 2.1.1)
+  - SwiftyJSON (~> 4.0.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - CryptoSwift
+    - FontAwesome.swift
+    - HaishinKit
+    - Logboard
+    - ReachabilitySwift
+    - RNCryptor
+    - SSZipArchive
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  CryptoSwift: ad5208dd2aae0a764ea4ce2c2d34bd067cae67f0
+  FontAwesome.swift: b4e4c8ccbbecb12f9b592bc533ff237af3706667
+  HaishinKit: 4419f5f1bccadaf7567eae42204a46e904c46d69
+  Logboard: ff780bba1dc55be6f9fc41b4e4e36115ec92f3e0
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  RNCryptor: c93d19029dcf7ff160aca0f24d6c9e7b0d82f664
+  SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: 4916d3123e665dd524956299c5c36a56304ed7d1
+
+COCOAPODS: 1.5.3
