@@ -458,7 +458,7 @@ export class IapAssessmentComponent implements OnInit {
       const saveCall = (needSave
         ? this.triggerSave(updatedContent, this.currentContent)
         : of({} as any)
-      ).pipe(mergeMap(() => this.editorService.forwardBackward(body, this.currentContent)))
+      ).pipe(mergeMap(() => this.editorService.forwardBackward(body, this.currentContent, '')))
       this.loaderService.changeLoad.next(true)
 
       saveCall.subscribe(

@@ -14,6 +14,7 @@ import { AuthTableOfContentsComponent } from './components/auth-table-of-content
 import { AuthTableTreeLabelComponent } from './components/auth-table-tree-label/auth-table-tree-label.component'
 import { CollectionComponent } from './components/collection/collection.component'
 import { WebPageModule } from '../web-page/web-page.module'
+import { IapAssessmentModule } from '../iap-assessment/iap-assessment.module'
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { WebPageModule } from '../web-page/web-page.module'
     AuthViewerModule,
     UploadModule,
     CurateModule,
-    WebPageModule
+    WebPageModule,
+    IapAssessmentModule
   ],
 })
 export class CollectionModule { }
