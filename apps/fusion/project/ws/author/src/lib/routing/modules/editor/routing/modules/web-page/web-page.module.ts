@@ -28,7 +28,7 @@ import { AddWebPagesComponent } from './components/web-module-editor/add-web-pag
     HorizontalScrollerModule,
   ],
   entryComponents: [UploadAudioComponent],
-  exports: [AddWebPagesComponent]
+  exports: [AddWebPagesComponent],
 
 })
 export class WebPageModule { }

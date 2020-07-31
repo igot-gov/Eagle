@@ -43,7 +43,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss'],
   providers: [CollectionStoreService, CollectionResolverService, {
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
   }],
 })
 export class CollectionComponent implements OnInit, OnDestroy {
@@ -94,7 +94,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
-      let cntnt = this.contentService.getUpdatedMeta(data)
+      const cntnt = this.contentService.getUpdatedMeta(data)
       if (cntnt && cntnt.contentType !== 'Resource') {
         this.viewMode = 'meta'
       } else {

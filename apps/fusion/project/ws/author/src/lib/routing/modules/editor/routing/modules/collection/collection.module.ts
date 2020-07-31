@@ -35,7 +35,7 @@ import { IapAssessmentModule } from '../iap-assessment/iap-assessment.module'
     UploadModule,
     CurateModule,
     WebPageModule,
-    IapAssessmentModule
+    IapAssessmentModule,
   ],
 })
 export class CollectionModule { }

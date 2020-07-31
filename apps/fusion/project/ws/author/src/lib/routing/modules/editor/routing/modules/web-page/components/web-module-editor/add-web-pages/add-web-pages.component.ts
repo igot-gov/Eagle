@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { Router, ActivatedRoute } from '@angular/router'
 import { UploadAudioComponent } from '../../upload-audio/upload-audio.component'
@@ -33,15 +33,12 @@ import {
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../../constant/web-module.constants'
 import { IAudioObj } from '../../../interface/page-interface'
-// import * as _ from 'lodash'
-
-
 @Component({
-  selector: 'ws-author-add-web-pages',
+  selector: 'ws-auth-add-web-pages',
   templateUrl: './add-web-pages.component.html',
-  styleUrls: ['./add-web-pages.component.scss']
+  styleUrls: ['./add-web-pages.component.scss'],
 })
-export class AddWebPagesComponent implements OnInit {
+export class AddWebPagesComponent implements OnInit, OnDestroy {
   userData: { [key: string]: WebModuleData } = {}
   currentId = ''
   selectedPage = 0
@@ -104,7 +101,7 @@ export class AddWebPagesComponent implements OnInit {
       }
     })
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
-      let currentContent = this.metaContentService.currentContent
+      // let currentContent = this.metaContentService.currentContent
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)

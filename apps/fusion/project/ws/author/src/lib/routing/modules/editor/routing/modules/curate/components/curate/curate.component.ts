@@ -28,8 +28,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
   templateUrl: './curate.component.html',
   styleUrls: ['./curate.component.scss'],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
-  }]
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
+  }],
 })
 export class CurateComponent implements OnInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []

@@ -47,7 +47,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
   providers: [QuizResolverService, {
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
   }],
 })
 export class QuizComponent implements OnInit, OnDestroy {

@@ -19,7 +19,7 @@ import { WebPageModule } from './routing/modules/web-page/web-page.module'
     EditorRoutingModule,
     EditorSharedModule,
     SharedModule,
-    WebPageModule
+    WebPageModule,
   ],
   providers: [
     EditorService,

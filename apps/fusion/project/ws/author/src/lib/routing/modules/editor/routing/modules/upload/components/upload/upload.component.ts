@@ -27,7 +27,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
   }],
 })
 export class UploadComponent implements OnInit, OnDestroy {

@@ -46,7 +46,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
   templateUrl: './web-module-editor.component.html',
   styleUrls: ['./web-module-editor.component.scss'],
   providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
   }],
 })
 
