@@ -265,3 +265,20 @@ mat-divider {
 .divider-transparent {
   border-top-color: transparent !important
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+  border-radius: 50%;
+  .icon{
+    font-size: 24px !important;
+  }
+}
+
+.show-scroll {
+  opacity: 1;
+  transition: all .2s ease-in-out;
+}

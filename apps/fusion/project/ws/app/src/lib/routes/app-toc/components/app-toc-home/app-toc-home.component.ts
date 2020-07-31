@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewChecked } from '@angular/core'
+import { Component, OnDestroy, OnInit, AfterViewChecked, HostListener } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -58,6 +58,10 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
   objKeys = Object.keys
   fragment!: string
   activeFragment = this.route.fragment.pipe(share())
+  currentFragment = 'overview'
+  showScroll!: boolean
+  showScrollHeight = 300
+  hideScrollHeight = 10
 
   constructor(
     private route: ActivatedRoute,
@@ -71,7 +75,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
   }
 
   ngOnInit() {
-    this.route.fragment.subscribe(fragment => { this.fragment = fragment })
+    // this.route.fragment.subscribe(fragment => { this.fragment = fragment })
     try {
       this.isInIframe = window.self !== window.top
     } catch (_ex) {
@@ -86,6 +90,9 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
         this.initData(data)
       })
     }
+    this.route.fragment.subscribe((fragment: string) => {
+      this.currentFragment = fragment
+    })
   }
 
   ngOnDestroy() {
@@ -96,13 +103,13 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   ngAfterViewChecked(): void {
     try {
-        if (this.fragment) {
-            // tslint:disable-next-line: no-non-null-assertion
-            document!.querySelector(`#${this.fragment}`)!.scrollTo({
-              top: 80,
-              behavior: 'smooth',
-            })
-        }
+      if (this.fragment) {
+        // tslint:disable-next-line: no-non-null-assertion
+        document!.querySelector(`#${this.fragment}`)!.scrollTo({
+          top: 80,
+          behavior: 'smooth',
+        })
+      }
     } catch (e) { }
   }
 
@@ -159,4 +166,28 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
       },
     )
   }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+      this.showScroll = true
+    } else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop
+      || document.body.scrollTop) < this.hideScrollHeight) {
+      this.showScroll = false
+    }
+  }
+
+scrollToTop() {
+      (function smoothscroll() {
+        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop
+        if (currentScroll > 0) {
+          // window.requestAnimationFrame(smoothscroll)
+          // window.scrollTo(0, currentScroll - (currentScroll / 5))
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      })()
+    }
 }

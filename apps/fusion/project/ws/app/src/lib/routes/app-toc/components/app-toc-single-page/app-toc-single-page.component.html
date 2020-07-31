@@ -1,4 +1,4 @@
-<section id="overview" fragment="overview">
+<section id="overview">
     <div class="fixed-width flex flex-wrap">
         <div class="meta-section">
             <!-- Description : Conditional : If not shown here, will be shown over banner -->
@@ -534,7 +534,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
     </div>
 </section>
 
-<section id="authors" fragment="authors" *ngIf="content?.creatorDetails && content?.creatorDetails.length">
+<section id="authors"  *ngIf="content?.creatorDetails && content?.creatorDetails.length">
     <div class="fluid-width contacts-container mb-10">
         <div class="fixed-width flex flex-col flex-wrap">
             <h2 _ngcontent-qml-c28="" class="mat-toolbar contacts-head">Authors</h2>
@@ -561,19 +561,19 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
         </div>
     </div>
 </section>
-<section id="content" fragment="content">
+<section id="content" >
     <div class="fixed-width" *ngIf="content?.children?.length">
         <ws-app-app-toc-contents></ws-app-app-toc-contents>
     </div>
 </section>
 <mat-divider class="fluid-width mtb-xl"></mat-divider>
-<section id="cohorts" fragment="cohorts">
+<section id="cohorts" >
     <div class="fixed-width toc-discussion-container">
         <ws-app-toc-cohorts [content]="content" class="cohorts"></ws-app-toc-cohorts>
     </div>
 </section>
 <mat-divider class="fluid-width mtb-xl"></mat-divider>
-<section id="discussion-forum" fragment="discussion-forum">
+<section id="discussion-forum" >
     <div class="fixed-width toc-discussion-container">
         <ws-app-toc-discussion [content]="content" class="discussion"></ws-app-toc-discussion>
     </div>
