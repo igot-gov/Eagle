@@ -23,6 +23,7 @@ export class DiscussionPostComponent implements OnInit {
   userEmail = ''
   userName = ''
   replyPlaceholderToggler = false
+  replyToggle = false
   isValidReply = false
   replyBody: undefined | string
   isPostingReply = false

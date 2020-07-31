@@ -78,21 +78,21 @@
           </div>
           <div class="pl-4 flex flex-middle self-end reply-editor-toggler" [hidden]="replyPlaceholderToggler"
             (click)="replyPlaceholderToggler = !replyPlaceholderToggler">
-            <span class="pr-1 sm:pr-2" *ngIf="post.replyPlaceholderToggler">
+            <span class="pr-1 sm:pr-2" *ngIf="replyPlaceholderToggler">
               <mat-icon class="flip-180">mode_comment</mat-icon>
             </span>
-            <span class="pr-1 sm:pr-2" *ngIf="!post.replyPlaceholderToggler">
+            <span class="pr-1 sm:pr-2" *ngIf="!replyPlaceholderToggler">
               <mat-icon class="flip-180">mode_comment</mat-icon>
             </span>
             <span>Reply</span>
           </div>
         </div>
         <div class="flex flex-middle self-end reply-toggler" *ngIf="postReplies && postReplies.length"
-          (click)="post.replyToggle = !post.replyToggle">
-          <span class="pr-1 sm:pr-2" *ngIf="post.replyToggle">
+          (click)="replyToggle = !replyToggle">
+          <span class="pr-1 sm:pr-2" *ngIf="replyToggle">
             <mat-icon>keyboard_arrow_up</mat-icon>
           </span>
-          <span class="pr-1 sm:pr-2" *ngIf="!post.replyToggle">
+          <span class="pr-1 sm:pr-2" *ngIf="!replyToggle">
             <mat-icon>keyboard_arrow_down</mat-icon>
           </span>
           <span>View {{postReplies.length}} </span>
@@ -128,7 +128,7 @@
     </ws-widget-btn-social-like>
   </span> -->
 
-  <ng-container *ngIf="post.replyToggle">
+  <ng-container *ngIf="replyToggle">
     <ws-widget-discussion-reply *ngFor="let reply of postReplies; let i = index" [reply]="reply"
       (deleteSuccess)="onDeleteReply(i)"></ws-widget-discussion-reply>
     <div *ngIf="replyFetchStatus === 'fetching'" class="margin-top-s text-center">
