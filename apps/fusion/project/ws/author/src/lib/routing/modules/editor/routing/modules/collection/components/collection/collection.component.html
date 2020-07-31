@@ -21,7 +21,7 @@
 
     <mat-sidenav-content class="pl-6 pr-6 ml-6">
       <div>
-        {{viewMode}}, {{newViewMode}}
+        <!-- {{viewMode}}, {{newViewMode}} -->
         <!-- <ws-auth-edit-meta [parentContent]="currentParentId" [stage]="1" [class.hidden]="viewMode == 'meta'"
           [isSubmitPressed]="isSubmitPressed" (data)="action($event)"></ws-auth-edit-meta>
         <ws-auth-url-upload [isCollectionEditor]="true" *ngIf="viewMode === 'curate'"
@@ -32,15 +32,22 @@
         <mat-horizontal-stepper labelPosition="bottom" #stepper id="curate-container">
           <mat-step state="create1" *ngIf="newViewMode === 'Resource'">
             <ng-template matStepLabel><span class="ws-mat-default-text">
-                {{viewMode === 'curate'?'Attach Link':(viewMode=== 'upload'?'Upload':'Web Module')}}</span>
+                {{viewMode === 'curate'?'Attach Link':(viewMode=== 'upload'?'Upload':
+                (viewMode=== 'web'?'Web Module':'Assessment'))}}</span>
             </ng-template>
             <ws-auth-url-upload [isCollectionEditor]="true" *ngIf="viewMode === 'curate'"
               [isSubmitPressed]="isSubmitPressed" (data)="action($event)"></ws-auth-url-upload>
             <ws-auth-file-upload [isCollectionEditor]="true" *ngIf="viewMode === 'upload'"
               [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
             </ws-auth-file-upload>
-            <ws-auth-web-module-editor *ngIf="viewMode === 'web'" (data)="action($event)">
-            </ws-auth-web-module-editor>
+            <div *ngIf="viewMode === 'web'">
+              Please go to drafts to edit Web Pages or Click
+              <a class="m-auto" target="_blank" routerLink="/author/editor/{{currentContent}}/web-module"
+                i18n-aria-label aria-label="Back">
+                here
+              </a>
+            </div>
+            <ws-auth-general-details *ngIf="viewMode === 'quiz'" (data)="action($event)"></ws-auth-general-details>
           </mat-step>
           <mat-step state="create1">
             <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>

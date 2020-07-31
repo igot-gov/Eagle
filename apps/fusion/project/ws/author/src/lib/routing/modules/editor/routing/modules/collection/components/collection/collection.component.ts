@@ -106,6 +106,8 @@ export class CollectionComponent implements OnInit, OnDestroy {
           this.viewMode = 'curate'
         } else if (cntnt.mimeType === 'application/web-module') {
           this.viewMode = 'web'
+        } else if (cntnt.mimeType === 'application/quiz') {
+          this.viewMode = 'quiz'
         }
       }
       this.newViewMode = cntnt.category || 'meta'
