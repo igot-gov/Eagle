@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { InitResolver } from '@ws/author/src/lib/services/init-resolve.service'
 import { EditorComponent } from './components/editor/editor.component'
-import { ContentAndDataReadMultiLangTOCResolver } from '../../../services/content-and-data-read-multi-lang.service'
 
 const routes: Routes = [
   {
