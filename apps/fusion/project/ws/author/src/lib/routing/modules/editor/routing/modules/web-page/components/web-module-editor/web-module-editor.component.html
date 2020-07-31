@@ -242,25 +242,25 @@
       <ng-template matStepLabel>
         <span class="ws-mat-default-text">Add Pages</span>
       </ng-template>
-      <ng-container [ngTemplateOutlet]="top"></ng-container>
+      <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
       <ws-auth-add-web-pages></ws-auth-add-web-pages>
     </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
       </ng-template>
-      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
     </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>
       </ng-template>
-      <ws-auth-edit-meta [stage]="2" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      <ws-auth-edit-meta [stage]="2" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
     </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Collaborators</span>
       </ng-template>
-      <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
     </mat-step>
     <!-- Icon overrides. -->

@@ -134,7 +134,7 @@
       <ng-template matStepLabel>
         <span class="ws-mat-default-text">Add Pages</span>
       </ng-template>
-      <ng-container [ngTemplateOutlet]="top"></ng-container>
+      <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
       <div id="whole-container" class="mat-app-background">
         <div class="margin-left15" *ngIf="currentStep === 2">
           <ws-auth-general-details (data)="action($event)" (id)="saveId($event)"></ws-auth-general-details>

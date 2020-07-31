@@ -76,7 +76,7 @@
       <ng-template matStepLabel>
         <span class="ws-mat-default-text">Upload Content</span>
       </ng-template>
-      <ng-container [ngTemplateOutlet]="top"></ng-container>
+      <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
       <div class="mat-app-background mb-10 br-8">
         <div class="margin-top-xl margin-right-xl">
           <ng-container *ngIf="contentLoaded">
@@ -135,19 +135,19 @@
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
       </ng-template>
-      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
     </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>
       </ng-template>
-      <ws-auth-edit-meta [stage]="2" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      <ws-auth-edit-meta [stage]="2" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
     </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Collaborators</span>
       </ng-template>
-      <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
     </mat-step>
     <!-- Icon overrides. -->

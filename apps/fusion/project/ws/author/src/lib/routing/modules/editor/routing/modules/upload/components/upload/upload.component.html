@@ -88,7 +88,7 @@
       <ng-template matStepLabel>
         <span class="ws-mat-default-text">Upload Content</span>
       </ng-template>
-      <ng-container [ngTemplateOutlet]="top"></ng-container>
+      <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
       <ws-auth-file-upload [canTransCode]="canTransCode" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
       </ws-auth-file-upload>
     </mat-step>
