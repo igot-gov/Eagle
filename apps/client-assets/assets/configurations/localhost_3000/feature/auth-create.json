@@ -90,7 +90,7 @@
     "parent": "resource",
     "name": "Activities",
     "icon": "business",
-    "available": true,
+    "available": false,
     "enabled": false,
     "contentType": "Resource",
     "mimeType": "application/html",
