@@ -83,12 +83,12 @@
     </mat-expansion-panel> -->
     <mat-expansion-panel class="mat-elevation-z" (opened)="fetchCohorts(cohortTypesEnum.AUTHORS)">
       <mat-expansion-panel-header>
-        <mat-panel-title i18n>Authors</mat-panel-title>
+        <mat-panel-title i18n>Curators</mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <div *ngIf="cohortResults[cohortTypesEnum.AUTHORS]">
           <h3 *ngIf="cohortResults[cohortTypesEnum.AUTHORS].hasError" class="mat-error text-center" i18n>
-            Failed to fetch authors
+            Failed to fetch curators
           </h3>
           <h3 *ngIf="
               !cohortResults[cohortTypesEnum.AUTHORS].hasError &&
