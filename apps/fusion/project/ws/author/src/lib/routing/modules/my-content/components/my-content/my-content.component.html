@@ -109,7 +109,7 @@
     </div>
     <div *ngIf="cardContent" class="flex flex-wrapped flex-dynamic margin-xs">
       <ng-template #oldDesign>
-        <div class="margin-l" *ngFor="let content of cardContent">
+        <div class="margin-s" *ngFor="let content of cardContent">
           <ws-auth-root-content-card [data]="content" [forExpiry]="status === 'expiry'"
             [forDelete]="status === 'deleted'" [ordinals]="ordinals" (action)="action($event)">
           </ws-auth-root-content-card>

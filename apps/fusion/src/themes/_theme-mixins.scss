@@ -176,6 +176,23 @@
     .entity-container {
       background: inherit;
     }
+
+    // .mat-form-field-outline {
+    //   background: $colorPrimary;
+    // }
+    .mat-chip.mat-standard-chip {
+      color: $colorPrimary !important;
+      background: $colorPrimaryDark !important;
+
+      mat-icon {
+        color: $colorAccentDark !important;
+        opacity: 1 !important
+      }
+    }
+
+    // .ws-mat-auth-exp {
+    //   background-color: $colorAccentLight !important;
+    // }
   }
 
   @else {
@@ -211,26 +228,21 @@
       caret-color: $colorAccent;
     }
 
-    // .mat-tab-nav-bar,
-    // .mat-form-field-outline-thick
-    // .mat-ink-bar  {
-    //   background-color: $colorAccent !important
-    // }
-    // .mat-form-field-outline .mat-form-field-outline-thick {
-    //   color: blue;
-    // }
-    // ::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
-    //   background-color: blue !important;
-    // }
-    // .mat-form-field-outline-apperance-outline.mat-focused.mat-form-field-outline-thick {
-    //   color: red !important;
-    // }
+    .ws-mat-auth-exp {
+      background-color: #003F5C;
+      color: #EDEDED !important;
+    }
+
     .mat-form-field.mat-focused .mat-form-field-label {
       color: $colorPrimaryDark !important;
     }
 
     .mat-form-field-outline-thick {
       color: $colorAccent !important;
+    }
+
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+      color: $colorRed !important;
     }
 
     .mat-option.mat-selected:not(.mat-option-multiple) {
@@ -258,12 +270,33 @@
 
     .mat-chip.mat-standard-chip {
       color: $colorAccent !important;
-      background: $colorAccentLight;
+      // background: $colorAccentLight;
 
       mat-icon {
         color: $colorAccentDark !important;
         opacity: 1 !important
       }
+    }
+
+    .ws-mat-auth-tool-option {
+      color: $colorAccentDark !important;
+      border-color: $colorAccentDark;
+    }
+
+    .mat-form-field-outline {
+      background: $colorPrimary;
+    }
+
+    .mat-stepper-horizontal-line {
+      border-top-color: $colorAccent !important;
+      border-top-width: 2px !important;
+    }
+
+    .mat-horizontal-stepper-header::before,
+    .mat-horizontal-stepper-header::after,
+    .mat-stepper-horizontal-line {
+      border-top-color: $colorAccent !important;
+      border-top-width: 2px !important;
     }
   }
 
@@ -459,7 +492,8 @@
 
   #cke_1_contents,
   .cke_wysiwyg_div {
-    background-color: $colorBackground !important;
+    background-color: $colorPrimary !important;
+    color: $colorAccent !important;
   }
 
   .required {

@@ -9,12 +9,14 @@ import { HorizontalScrollerModule } from '@ws-widget/utils'
 import { WebModuleEditorComponent } from './components/web-module-editor/web-module-editor.component'
 import { UploadAudioComponent } from './components/upload-audio/upload-audio.component'
 import { AudioStripsComponent } from './shared/component/audio-strips/audio-strips.component'
+import { AddWebPagesComponent } from './components/web-module-editor/add-web-pages/add-web-pages.component'
 
 @NgModule({
   declarations: [
     WebModuleEditorComponent,
     UploadAudioComponent,
     AudioStripsComponent,
+    AddWebPagesComponent,
   ],
   imports: [
     CommonModule,
@@ -26,6 +28,7 @@ import { AudioStripsComponent } from './shared/component/audio-strips/audio-stri
     HorizontalScrollerModule,
   ],
   entryComponents: [UploadAudioComponent],
+  exports: [AddWebPagesComponent],
 
 })
 export class WebPageModule { }

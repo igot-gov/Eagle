@@ -25,6 +25,7 @@ export interface IContent {
   appIcon: string
   artifactUrl: string
   averageRating?: number | string | null
+  bannerColor?: string
   body?: string
   certificationList?: IContent[]
   certificationStatus?: TCertificationStatus

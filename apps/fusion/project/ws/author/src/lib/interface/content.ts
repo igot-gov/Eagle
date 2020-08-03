@@ -11,6 +11,7 @@ export namespace NSContent {
     accessPaths: string[]
     identifier: string
     transcoding: any
+    bannerColor: string /*new*/
     name: string
     scoreType: string
     projectCode: string

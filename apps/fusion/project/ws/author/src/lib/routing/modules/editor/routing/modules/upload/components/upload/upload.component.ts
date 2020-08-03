@@ -20,11 +20,15 @@ import { of } from 'rxjs'
 import { mergeMap, tap, catchError } from 'rxjs/operators'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
   selector: 'ws-auth-upload',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
+  }],
 })
 export class UploadComponent implements OnInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []

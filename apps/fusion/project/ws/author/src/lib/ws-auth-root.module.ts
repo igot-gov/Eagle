@@ -70,4 +70,4 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     AuthNavBarToggleService,
   ],
 })
-export class WsAuthorRootModule {}
+export class WsAuthorRootModule { }

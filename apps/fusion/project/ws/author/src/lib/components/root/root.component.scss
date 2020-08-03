@@ -8,8 +8,15 @@
   opacity: 0.2;
 }
 
-router-outlet + * {
+router-outlet+* {
   flex-grow: 1;
+}
+
+.new-box {
+  max-width: 1217px;
+  // display: inline-block;
+  display: flex;
+  margin: 0 auto;
 }
 
 .overlay {

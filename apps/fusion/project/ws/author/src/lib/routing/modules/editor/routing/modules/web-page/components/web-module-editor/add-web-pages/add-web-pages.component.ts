@@ -1,33 +1,29 @@
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core'
+import { MatDialog, MatSnackBar } from '@angular/material'
+import { Router, ActivatedRoute } from '@angular/router'
+import { UploadAudioComponent } from '../../upload-audio/upload-audio.component'
 import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/components/delete-dialog/delete-dialog.component'
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core'
-import { MatDialog } from '@angular/material/dialog'
-import { UploadAudioComponent } from '../upload-audio/upload-audio.component'
-import { MatSnackBar } from '@angular/material/snack-bar'
+import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout'
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
-
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
-import { map, mergeMap, tap, catchError } from 'rxjs/operators'
+import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { LoaderService } from '@ws/author/src/lib/services/loader.service'
+import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
+import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
+import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
+import { AuthInitService } from '@ws/author/src/lib/services/init.service'
+import { NotificationService } from '@ws/author/src/lib/services/notification.service'
+import { PlainCKEditorComponent } from '../../../../../../shared/components/plain-ckeditor/plain-ckeditor.component'
 import { of, Observable, Subscription, forkJoin } from 'rxjs'
-import { ActivatedRoute, Router } from '@angular/router'
-import { FormGroup } from '@angular/forms'
-
+import { map, mergeMap, tap, catchError } from 'rxjs/operators'
+import { NSContent } from '@ws/author/src/lib/interface/content'
+import { Page, ModuleObj, WebModuleData } from '../../web-module.class'
 import { NotificationComponent } from '@ws/author/src/lib/modules/shared/components/notification/notification.component'
 import { CommentsDialogComponent } from '@ws/author/src/lib/modules/shared/components/comments-dialog/comments-dialog.component'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
 import { ErrorParserComponent } from '@ws/author/src/lib/modules/shared/components/error-parser/error-parser.component'
-
-import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
-import { LoaderService } from '@ws/author/src/lib/services/loader.service'
-import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
-import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
-import { AuthInitService } from '@ws/author/src/lib/services/init.service'
-import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
-
-import { Page, ModuleObj, WebModuleData } from '../web-module.class'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
-import { NSContent } from '@ws/author/src/lib/interface/content'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
-
+import { FormGroup } from '@angular/forms'
 import {
   CONTENT_BASE_WEBHOST_ASSETS,
   CONTENT_BASE_WEBHOST,
@@ -35,23 +31,14 @@ import {
   // AUTHORING_CONTENT_BASE,
 } from '@ws/author/src/lib/constants/apiEndpoints'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
-import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../constant/web-module.constants'
-import { IAudioObj } from '../../interface/page-interface'
-import { PlainCKEditorComponent } from '../../../../../shared/components/plain-ckeditor/plain-ckeditor.component'
-import { NotificationService } from '@ws/author/src/lib/services/notification.service'
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
-
+import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../../constant/web-module.constants'
+import { IAudioObj } from '../../../interface/page-interface'
 @Component({
-  selector: 'ws-auth-web-module-editor',
-  templateUrl: './web-module-editor.component.html',
-  styleUrls: ['./web-module-editor.component.scss'],
-  providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
-  }],
+  selector: 'ws-auth-add-web-pages',
+  templateUrl: './add-web-pages.component.html',
+  styleUrls: ['./add-web-pages.component.scss'],
 })
-
-export class WebModuleEditorComponent implements OnInit, OnDestroy {
-
+export class AddWebPagesComponent implements OnInit, OnDestroy {
   userData: { [key: string]: WebModuleData } = {}
   currentId = ''
   selectedPage = 0
@@ -62,7 +49,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   allLanguages: any[] = []
   activeContentSubscription?: Subscription
   changedContent = false
-  currentStep = 2
+  currentStep = 1
   previewMode = false
   mimeTypeRoute: any
   submitPressed = false
@@ -74,9 +61,8 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   mode$ = this.mediumSizeBreakpoint$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   showAudioCard = false
   imagesUrlbase = ''
+
   @ViewChild(PlainCKEditorComponent, { static: false }) ckEditor!: PlainCKEditorComponent
-  // @ViewChild('editor', { static: false }) ckEditor!: any
-  // downloadRegex = new RegExp(`(/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
 
   constructor(
     public dialog: MatDialog,
@@ -115,6 +101,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       }
     })
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
+      // let currentContent = this.metaContentService.currentContent
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)
@@ -149,6 +136,9 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
               return new Page({ body: pageBody, fileIndex: fileInd })
             })
             this.userData[v.contents[0].content.identifier] = formattedObj
+          } else if (v.contents[0] && v.contents[0].content && v.contents[0].content.children) {
+
+            // need to work on
           }
           this.contentLoaded = true
         }

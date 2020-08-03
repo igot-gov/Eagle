@@ -1,6 +1,7 @@
 .cursor-disable {
   cursor: not-allowed;
 }
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -10,7 +11,8 @@
 #curate-container {
   overflow: auto;
 }
-.mobile-r{
+
+.mobile-r {
   display: flex;
   flex-direction: column;
   // @media only screen and (max-width:960px) {
@@ -20,6 +22,7 @@
 
 .margin-left {
   margin-left: 120px;
+
   @media only screen and(max-width: 930px) {
     // margin-top: 24px;
     margin-left: 80px;
@@ -100,6 +103,7 @@ ul li {
   position: absolute;
   // top: 110px;
   right: 0px;
+  top: 0;
   z-index: 50;
 }
 
@@ -134,18 +138,22 @@ ul li {
   display: grid;
   width: 160px;
   grid-template-columns: 0.2fr 0.95fr;
+
   @media only screen and(max-width: 930px) {
     width: 125px;
   }
 }
-.margin-auto{
+
+.margin-auto {
   margin-left: auto;
   margin-right: auto;
+
   @media only screen and(max-width: 400px) {
     margin: 0;
     margin-left: 20px;
   }
 }
+
 .button-text {
   align-self: center;
   padding-top: 17px;

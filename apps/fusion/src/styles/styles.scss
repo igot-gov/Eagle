@@ -503,3 +503,61 @@ h3.shepherd-title {
   font-weight: bold;
   border: 1px solid;
 }
+
+#bannerColors {
+  .mat-radio-label {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+
+  .mat-radio-label-content {
+    display: flex;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mat-radio-container {
+    margin: 0 0 0 10px;
+  }
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.mat-step-header .mat-step-icon {
+  background-color: transparent !important;
+  color: inherit;
+}
+
+.mat-step-header.cdk-keyboard-focused,
+.mat-step-header.cdk-program-focused,
+.mat-step-header:hover {
+  background-color: transparent !important;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-indicator::after {
+  color: inherit !important;
+}
+
+.mat-step-icon .mat-icon {
+  font-size: 32px !important;
+  height: 32px !important;
+  width: 32px !important;
+}
+
+@media only screen and(max-width: 585px) {
+  #bannerColors {
+    flex-direction: column;
+
+    .mat-radio-label {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    //  .mat-radio-label-content {}
+    //    .mat-radio-container {}
+  }
+}

@@ -12,4 +12,4 @@ import { CurateRoutingModule } from './curate-routing.module'
   imports: [CommonModule, EditorSharedModule, SharedModule, CurateRoutingModule, AuthViewerModule],
   exports: [UrlUploadComponent],
 })
-export class CurateModule {}
+export class CurateModule { }
