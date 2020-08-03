@@ -90,8 +90,9 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
         this.initData(data)
       })
     }
+    this.currentFragment = 'overview'
     this.route.fragment.subscribe((fragment: string) => {
-      this.currentFragment = fragment
+      this.currentFragment = fragment || 'overview'
     })
   }
 

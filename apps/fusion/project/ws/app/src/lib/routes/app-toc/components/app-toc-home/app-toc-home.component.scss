@@ -45,8 +45,10 @@ mat-divider {
       font: 18px/34px Poppins-Medium;
       color: #5F5F5F;
       text-align: left;
-      padding-left: 0;
+      padding-left: 2px;
       justify-content: flex-start;
+      margin-right: 5px;
+
       &.justify-center{
         justify-content: center;
       }

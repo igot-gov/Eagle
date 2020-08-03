@@ -20,12 +20,12 @@
   }
   @media only screen and (max-width:469px) {
     flex-direction: column;
-    margin: $size-xs $size-xs $size-xs $size-xs !important;
+    margin: $size-xs $size-xs $size-xs*2 $size-xs !important;
     align-items: flex-start !important;
 
     .card-thumbnail {
-      height: 100%;
-      width: 100%;
+      height: 100% !important;
+      width: 100% !important;
     }
 
     .text-truncate {
@@ -50,12 +50,12 @@
 
   @media only screen and (max-width:469px) {
     flex-direction: column;
-    margin: $size-xs $size-xs $size-xs $size-xs !important;
+    margin: $size-xs $size-xs $size-xs*2 $size-xs !important;
     align-items: flex-start !important;
 
     .card-thumbnail {
-      height: 100%;
-      width: 100%;
+      height: 100% !important;
+      width: 100% !important;
     }
 
     .text-truncate {
@@ -92,9 +92,9 @@
 }
 
 .children-container {
-  border-left: 2px solid rgb(151, 151, 151);
+  border-left: 1px solid #00A9F4;
   padding-left: $size-s;
-  margin: $size-s 0 $size-m $size-s;
+  margin: $size-s*2 0 $size-m $size-s*2;
 }
 
 .resource-container {
@@ -119,9 +119,13 @@
 
 .children-container {
   .resource-container {
-    margin-bottom: 8px;
+    margin-bottom: 20px;
     margin-right: 8px;
-    background-color: #fff;
+    // background-color: #fff;
+    .card-thumbnail {
+      height: 65px;
+      align-self: center;
+    }
   }
 }
 
@@ -139,9 +143,9 @@
 
 .time-icon {
   color: #34D6A4;
-  height: 15px;
-  width: 15px;
-  font-size: 15px;
+  height: 21px;
+  width: 21px;
+  font-size: 20px;
   vertical-align: middle;
 }
 
@@ -193,4 +197,10 @@
 }
 .w-auto{
   width: auto;
+}
+
+@media only screen and (max-width:469px) {
+  .children-container {
+    margin: $size-s 0 $size-m $size-s;
+  }
 }
