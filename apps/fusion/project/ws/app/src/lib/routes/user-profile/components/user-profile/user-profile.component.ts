@@ -9,7 +9,7 @@ import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
 import { IMAGE_MAX_SIZE, IMAGE_SUPPORT_TYPES } from '@ws/author/src/lib/constants/upload'
 import { UserProfileService } from '../../services/user-profile.service'
 import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import {
   INationality,
   ILanguages,
@@ -81,17 +81,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showOrgnameOther!: boolean
   showIndustryOther!: boolean
   photoUrl!: string | ArrayBuffer | null
+  isForcedUpdate = false
 
   constructor(
     private snackBar: MatSnackBar,
     private userProfileSvc: UserProfileService,
     private configSvc: ConfigurationsService,
     private router: Router,
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
     public dialog: MatDialog,
     private loader: LoaderService,
   ) {
+    this.isForcedUpdate = !!this.route.snapshot.paramMap.get('isForcedUpdate')
     this.createUserForm = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
       middlename: new FormControl('', []),
@@ -151,6 +154,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     // })
     this.getUserDetails()
     this.fetchMeta()
+    this.assignPrimaryEmailType(this.isOfficialEmail)
   }
   fetchMeta() {
     this.userProfileSvc.getMasterNationlity().subscribe(
