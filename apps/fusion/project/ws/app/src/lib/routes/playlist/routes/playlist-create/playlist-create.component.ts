@@ -79,7 +79,7 @@ export class PlaylistCreateComponent implements OnInit {
     }
 
     if (!this.selectedContentIds.size) {
-      this.snackBar.open(this.selectContentMessage.nativeElement.value)
+      this.snackBar.open(this.selectContentMessage.nativeElement.value, 'X')
       return
     }
 
@@ -101,7 +101,7 @@ export class PlaylistCreateComponent implements OnInit {
       () => {
         this.createPlaylistStatus = 'error'
         this.createPlaylistForm.enable()
-        this.snackBar.open(this.createPlaylistErrorMessage.nativeElement.value)
+        this.snackBar.open(this.createPlaylistErrorMessage.nativeElement.value, 'X')
       },
     )
   }

@@ -70,11 +70,11 @@
             <h2 *ngIf="!quizJson.isAssessment" class="mat-title" i18n="quiz end message">
               Thank you for your attempt.
             </h2>
-            <h2 *ngIf="quizJson.isAssessment" class="mat-title">
+            <!-- <h2 *ngIf="quizJson.isAssessment" class="mat-title">
               <ng-container i18n="quiz result label">Result:</ng-container>
               <ng-container i18n *ngIf="isCompleted">PASS</ng-container>
               <ng-container i18n *ngIf="!isCompleted">FAIL</ng-container>
-            </h2>
+            </h2> -->
             <div class="flex flex-wrapped flex-center text-center">
               <div class="card-section">
                 <h2 class="mat-title">{{ numCorrectAnswers }}</h2>

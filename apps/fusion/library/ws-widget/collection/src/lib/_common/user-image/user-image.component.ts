@@ -12,12 +12,13 @@ export class UserImageComponent implements OnInit, OnChanges {
   @Input() email = ''
   @Input() userId: string | null = null
   @Input() userName = ''
-  @Input() imageType: 'initial' | 'rounded' | 'name-initial' = 'initial'
+  @Input() imageType: 'initial' | 'rounded' | 'user-photo' | 'name-initial' = 'initial'
+  @Input() imageUrl: string | null = null
+  @Input() imageSize: 'small' | 'large' = 'large'
   basePicUrl = `/apis/protected/v8/user/profile/graph/photo/`
   errorOccurred = false
   verifiedMicrosoftEmail = ''
   shortName = ''
-  imageUrl: string | null = null
   constructor(private configSvc: ConfigurationsService) { }
 
   ngOnInit() { }

@@ -45,7 +45,7 @@ export class BlogReplyComponent implements OnInit {
           }
         },
         () => {
-          this.snackBar.open(failMsg)
+          this.snackBar.open(failMsg, 'X')
         },
       )
     }
@@ -72,7 +72,7 @@ export class BlogReplyComponent implements OnInit {
         },
         () => {
           this.editMode = true
-          this.snackBar.open(failMsg)
+          this.snackBar.open(failMsg, 'X')
         },
       )
     }

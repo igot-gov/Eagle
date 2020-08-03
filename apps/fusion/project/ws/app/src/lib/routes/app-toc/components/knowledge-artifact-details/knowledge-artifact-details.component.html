@@ -3,10 +3,11 @@
     <mat-icon>create</mat-icon>
     <span i18n class="ml-2">Edit</span>
   </a> -->
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-xs text-truncate">
+  <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title:'Resource Detail',url:'none'}] }">
+  </ws-widget-btn-page-back>
+  <!-- <span class="margin-left-xs text-truncate">
     <span i18n>Resource Detail</span>
-  </span>
+  </span> -->
   <span class="spacer"></span>
   <!-- <a *ngIf="isAuthor" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
     <mat-icon>create</mat-icon>

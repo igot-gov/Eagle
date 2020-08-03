@@ -14,7 +14,11 @@ export class ActivityCardComponent implements OnInit {
   completedActivity: string[] = []
   completedId = false
 
-  constructor(private configSvc: ConfigurationsService, private router: Router, private snackBar: MatSnackBar) { }
+  constructor(
+    private configSvc: ConfigurationsService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.completedId = false
@@ -48,7 +52,7 @@ export class ActivityCardComponent implements OnInit {
 
   }
   openSnackBar() {
-    this.snackBar.open('This activity is already completed', undefined, {
+    this.snackBar.open('This activity is already completed', 'X', {
       duration: 2000,
     })
   }

@@ -6,13 +6,17 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router'
-import { ConfigurationsService } from '../../../library/ws-widget/utils/src/public-api'
+import { ConfigurationsService, AuthKeycloakService } from '../../../library/ws-widget/utils/src/public-api'
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeneralGuard implements CanActivate {
-  constructor(private router: Router, private configSvc: ConfigurationsService) { }
+  constructor(
+    private router: Router,
+    private configSvc: ConfigurationsService,
+    private authSvc: AuthKeycloakService
+  ) { }
 
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -36,8 +40,17 @@ export class GeneralGuard implements CanActivate {
       if (state.url) {
         refAppend = `?ref=${encodeURIComponent(state.url)}`
       }
+      // return this.router.parseUrl(`/login${refAppend}`)
 
-      return this.router.parseUrl(`/login${refAppend}`)
+      let redirectUrl
+      if (refAppend) {
+        redirectUrl = document.baseURI + refAppend
+      } else {
+        redirectUrl = document.baseURI
+      }
+      Promise.resolve(this.authSvc.login('S', redirectUrl))
+      return false
+
     }
     // If invalid user
     if (
@@ -51,21 +64,27 @@ export class GeneralGuard implements CanActivate {
      * Test IF User Tnc Is Accepted
      */
     if (!this.configSvc.hasAcceptedTnc) {
-      if (
-        state.url &&
-        !state.url.includes('/app/setup/') &&
-        !state.url.includes('/app/tnc') &&
-        !state.url.includes('/page/home')
-      ) {
-        this.configSvc.userUrl = state.url
-      }
-      if (
-        this.configSvc.restrictedFeatures &&
-        !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')
-      ) {
-        return this.router.parseUrl(`/app/setup/home/lang`)
-      }
+      // if (
+      //   state.url &&
+      //   !state.url.includes('/app/setup/') &&
+      //   !state.url.includes('/app/tnc') &&
+      //   !state.url.includes('/page/home')
+      // ) {
+      //   this.configSvc.userUrl = state.url
+      // }
+      // if (
+      //   this.configSvc.restrictedFeatures &&
+      //   !this.configSvc.restrictedFeatures.has('firstTimeSetupV2')
+      // ) {
+      //   return this.router.parseUrl(`/app/setup/home/lang`)
+      // }
       return this.router.parseUrl(`/app/tnc`)
+    }
+    /**
+       * Test IF User updated the profile details
+       */
+    if (!this.configSvc.profileDetailsStatus) {
+      return this.router.parseUrl('/app/user-profile/details')
     }
 
     /**

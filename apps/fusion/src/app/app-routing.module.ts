@@ -184,6 +184,11 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/signup',
+    loadChildren: () =>
+      import('./routes/signup/signup.module').then(u => u.SignupModule),
+  },
+  {
     path: 'app/toc',
     loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
     canActivate: [GeneralGuard],
@@ -199,6 +204,11 @@ const routes: Routes = [
     resolve: {
       tnc: TncAppResolverService,
     },
+  },
+  {
+    path: 'app/user-profile',
+    loadChildren: () =>
+      import('./routes/route-user-profile-app.module').then(u => u.RouteUserProfileAppModule),
   },
   {
     path: 'author',
@@ -426,6 +436,8 @@ const routes: Routes = [
       anchorScrolling: 'enabled',
       scrollPositionRestoration: 'top',
       urlUpdateStrategy: 'eager',
+      onSameUrlNavigation: 'reload',
+      scrollOffset: [0, 80],
     }),
   ],
   exports: [RouterModule],

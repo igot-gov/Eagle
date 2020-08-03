@@ -19,17 +19,40 @@
 }
 
 .header-synopsis-gradient {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0.3) 100%)
+    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0.8) 100%);
+*/
+}
+.fixed-width {
+  max-width: 1217px;
+  display: block;
+  margin: 0 auto;
+  padding: 24px 24px 0 24px;
+}
+.fluid-width {
+  width: 100%;
 }
 
 .header-synopsis {
   height: 100%;
   @extend %container-padding;
   box-sizing: border-box;
+  .apIcon img {
+    height: 72px;
+    width: 72px;
+    object-fit: cover;
+  }
 
   .header-title {
     display: flex;
     align-items: center;
+
+    h1{
+      // font: 48px/48px Poppins-SemiBold;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      font-family: Poppins-SemiBold;
+    }
 
     .text-truncate-title {
       max-width: 100%;
@@ -37,6 +60,21 @@
       text-overflow: ellipsis !important;
       white-space: nowrap !important;
     }
+  }
+
+  .rating-number {
+    font: 24px/35px Poppins-Medium;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+  }
+
+  .rating-count{
+    font: Regular 18px/27px Poppins;
+  letter-spacing: 0.36px;
+  color: #FFFFFF;
+  }
+  .rating mat-icon {
+    color: #fff;
   }
 
   .header-meta-banner {
@@ -48,9 +86,32 @@
     line-height: 1.5;
   }
 
+  .resumeButton {
+    height: 52px;
+    min-width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #34D6A4 0% 0% no-repeat padding-box;
+    box-shadow: 0px 10px 30px #99999933;
+    color: #fff !important;
+
+    ::ng-deep.mat-button-wrapper {
+      font: 14px/21px Poppins-SemiBold;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      text-transform: capitalize;
+    }
+  }
+
   .header-actions {
     display: flex;
     margin-top: 24px;
+     
+    &.top{
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
 
     .action-btns {
       margin-left: auto;
@@ -67,6 +128,9 @@
     flex: 1;
     min-width: 1px;
     margin-right: $size-l;
+    font: Regular 24px/35px Poppins;
+    letter-spacing: 0px;
+    color: #FFFFFF;
 
     @include breakpoint-xs {
       margin-right: 0;
@@ -130,5 +194,13 @@
 
   @include breakpoint-xs {
     display: block;
+  }
+}
+
+.info-msg{
+  color: #fff !important;
+  font: 14px/20px Poppins-Regular;;
+  mat-icon{
+    color: #fff !important;
   }
 }

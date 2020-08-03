@@ -96,7 +96,7 @@ export class ImageCropComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, undefined, {
+    this.snackBar.open(message, 'X', {
       duration: 2000,
     })
   }

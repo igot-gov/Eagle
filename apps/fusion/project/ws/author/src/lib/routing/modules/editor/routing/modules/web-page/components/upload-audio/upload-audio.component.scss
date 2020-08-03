@@ -6,10 +6,19 @@
   margin-right: 5%;
 }
 
-.upload-audio{
+.upload-audio {
   display: none;
 }
 
-.margin-bottom-remove{
+.upload {
+  margin: -4px 0 0 10px;
+}
+
+.title-new {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.margin-bottom-remove {
   margin-bottom: 0px;
 }

@@ -1,7 +1,7 @@
 {
   "contentType": "Page",
   "navigationBar": {
-    "pageTitle": "eagle",
+    "pageTitle": "",
     "pageBackLink": "none",
     "background": {
       "color": "default",
@@ -15,6 +15,18 @@
         "widgetType": "actionButton",
         "widgetSubType": "buttonFeature",
         "widgetData": {
+          "toolTop": "Search",
+          "actionBtnId": "feature_search",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "feature_notification",
           "actionBtnId": "feature_notification",
           "config": {
             "type": "mat-icon-button"
@@ -22,38 +34,7 @@
         }
       }
     ],
-    "links": [
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "actionBtnId": "feature_knowledgeBoard",
-          "config": {
-            "type": "mat-button"
-          }
-        }
-      },
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "actionBtnId": "feature_channels",
-          "config": {
-            "type": "mat-button"
-          }
-        }
-      },
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "actionBtnId": "feature_learningJourney",
-          "config": {
-            "type": "mat-button"
-          }
-        }
-      }
-    ]
+    "links": []
   },
   "pageLayout": {
     "widgetSubType": "gridLayout",
@@ -64,6 +45,64 @@
           {
             "dimensions": {},
             "widget": {
+              "widgetType": "slider",
+              "widgetSubType": "sliderBanners",
+              "widgetData": [
+                {
+                  "banners": {
+                    "l": "assets/instances/eagle/banners/home/6/l.png",
+                    "m": "assets/instances/eagle/banners/home/6/m.png",
+                    "s": "assets/instances/eagle/banners/home/6/s.png",
+                    "xl": "assets/instances/eagle/banners/home/6/xl.png",
+                    "xs": "assets/instances/eagle/banners/home/6/xs.png",
+                    "xxl": "assets/instances/eagle/banners/home/6/xxl.png"
+                  },
+                  "redirectUrl": "/app/search/learning",
+                  "queryParams": {
+                    "q": "Salesforce",
+                    "lang": "en",
+                    "f": "{}"
+                  },
+                  "title": ""
+                },
+                {
+                  "banners": {
+                    "l": "assets/instances/eagle/banners/home/7/l.png",
+                    "m": "assets/instances/eagle/banners/home/7/m.png",
+                    "s": "assets/instances/eagle/banners/home/7/s.png",
+                    "xl": "assets/instances/eagle/banners/home/7/xl.png",
+                    "xs": "assets/instances/eagle/banners/home/7/xs.png",
+                    "xxl": "assets/instances/eagle/banners/home/7/xxl.png"
+                  },
+                  "redirectUrl": "/app/search/learning",
+                  "title": ""
+                },
+                {
+                  "banners": {
+                    "l": "assets/instances/eagle/banners/home/8/l.png",
+                    "m": "assets/instances/eagle/banners/home/8/m.png",
+                    "s": "assets/instances/eagle/banners/home/8/s.png",
+                    "xl": "assets/instances/eagle/banners/home/8/xl.png",
+                    "xs": "assets/instances/eagle/banners/home/8/xs.png",
+                    "xxl": "assets/instances/eagle/banners/home/8/xxl.png"
+                  },
+                  "redirectUrl": "/app/search/learning",
+                  "queryParams": {
+                    "q": "Salesforce",
+                    "lang": "en",
+                    "f": "{}"
+                  },
+                  "title": ""
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
               "widgetType": "card",
               "widgetSubType": "cardWelcome",
               "widgetData": {}
@@ -72,10 +111,131 @@
         ],
         [
           {
-            "dimensions": {
-              "small": 12,
-              "medium": 6
-            },
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "latest",
+                    "title": "Latest Courses",
+                    "info": {
+                      "mode": "below",
+                      "visibilityMode": "hidden",
+                      "icon": {
+                        "icon": "info",
+                        "scale": 0.8
+                      },
+                      "widget": {
+                        "widgetType": "element",
+                        "widgetSubType": "elementHtml",
+                        "widgetData": {
+                          "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are in news right now.</p>"
+                        }
+                      }
+                    },
+                    "stripConfig": {
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
+                    },
+                    "filters": [],
+                    "request": {
+                      "searchV6": {
+                        "locale": [
+                          "en"
+                        ],
+                        "pageSize": 12,
+                        "query": "all",
+                        "didYouMean": true,
+                        "filters": [
+                          {
+                            "andFilters": [
+                              {
+                                "lastUpdatedOn": [
+                                  "month"
+                                ]
+                              },
+                              {
+                                "contentType": [
+                                  "Course",
+                                  "Program"
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "includeSourceFields": [
+                          "creatorLogo"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "trending",
+                    "title": "Trending Courses",
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "Trending"
+                      }
+                    },
+                    "info": {
+                      "mode": "below",
+                      "visibilityMode": "hidden",
+                      "icon": {
+                        "icon": "info",
+                        "scale": 0.8
+                      },
+                      "widget": {
+                        "widgetType": "element",
+                        "widgetSubType": "elementHtml",
+                        "widgetData": {
+                          "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are trending with other colleagues right now.</p>"
+                        }
+                      }
+                    },
+                    "stripConfig": {
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/recommendation/trending",
+                        "queryParams": {
+                          "pageNo": 0,
+                          "pageSize": 12,
+                          "sourceFields": ["creatorLogo"]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -83,7 +243,14 @@
                 "strips": [
                   {
                     "key": "continueLearning",
-                    "title": "Last viewed",
+                    "title": "Last Viewed",
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "History"
+                      }
+                    },
                     "noDataWidget": {
                       "widgetType": "element",
                       "widgetSubType": "elementHtml",
@@ -107,14 +274,16 @@
                       }
                     },
                     "stripConfig": {
-                      "cardSubType": "standard"
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
                     },
                     "filters": [],
                     "request": {
                       "api": {
                         "path": "/apis/protected/v8/user/history",
                         "queryParams": {
-                          "pageSize": 20
+                          "pageSize": 12,
+                          "sourceFields": ["creatorLogo"]
                         }
                       }
                     }
@@ -122,12 +291,12 @@
                 ]
               }
             }
-          },
+          }
+        ],
+        [
           {
-            "dimensions": {
-              "small": 12,
-              "medium": 6
-            },
+            "dimensions": {},
+            "className": "new-box",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -135,7 +304,14 @@
                 "strips": [
                   {
                     "key": "recentToPlaylists",
-                    "title": "From your playlists",
+                    "title": "Playlist",
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "PlayList"
+                      }
+                    },
                     "noDataWidget": {
                       "widgetType": "element",
                       "widgetSubType": "elementHtml",
@@ -159,12 +335,16 @@
                       }
                     },
                     "stripConfig": {
-                      "cardSubType": "standard"
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
                     },
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/user/playlist/recent"
+                        "path": "/apis/protected/v8/user/playlist/recent",
+                        "queryParams": {
+                          "sourceFields": ["creatorLogo"]
+                        }
                       }
                     },
                     "refreshEvent": {
@@ -180,99 +360,7 @@
         [
           {
             "dimensions": {},
-            "widget": {
-              "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultiple",
-              "widgetData": {
-                "strips": [
-                  {
-                    "key": "forYou",
-                    "title": "You might also like",
-                    "info": {
-                      "mode": "below",
-                      "visibilityMode": "hidden",
-                      "icon": {
-                        "icon": "info",
-                        "scale": 0.8
-                      },
-                      "widget": {
-                        "widgetType": "element",
-                        "widgetSubType": "elementHtml",
-                        "widgetData": {
-                          "html": "<p class=\"ws-mat-primary-text\">Based on your viewing history, these are a few more suggestions we think you’ll like.</p>"
-                        }
-                      }
-                    },
-                    "stripConfig": {
-                      "cardSubType": "standard"
-                    },
-                    "filters": [],
-                    "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/recommendation"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "widget": {
-              "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultiple",
-              "widgetData": {
-                "strips": [
-                  {
-                    "key": "interestBased",
-                    "title": "Based on your interests",
-                    "info": {
-                      "mode": "below",
-                      "visibilityMode": "hidden",
-                      "icon": {
-                        "icon": "info",
-                        "scale": 0.8
-                      },
-                      "widget": {
-                        "widgetType": "element",
-                        "widgetSubType": "elementHtml",
-                        "widgetData": {
-                          "html": "<p class=\"ws-mat-primary-text\">This is where we'll show you the most relevant learning opportunities, based on the interests you've chosen. </p>"
-                        }
-                      }
-                    },
-                    "stripConfig": {
-                      "cardSubType": "standard"
-                    },
-                    "filters": [],
-                    "noDataWidget": {
-                      "widgetType": "element",
-                      "widgetSubType": "elementHtml",
-                      "widgetData": {
-                        "html": "<div class=\"flex justify-between items-center\"><p class=\"ws-mat-primary-text margin-remove margin-right-xs\">Please add or modify your interest topics to find relevant content. </p><a class=\"mat-flat-button mat-primary\" onclick=\"window.navigateTo(`/app/profile/interest`)\">Edit</a></div>"
-                      }
-                    },
-                    "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/recommendation/interestBased",
-                        "queryParams": {
-                          "pageNo": 0,
-                          "pageSize": 15
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
+            "className": "new-box",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -280,7 +368,14 @@
                 "strips": [
                   {
                     "key": "viewBased",
-                    "title": "Based on what you viewed",
+                    "title": "Based On Your Interest",
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "Interest"
+                      }
+                    },
                     "info": {
                       "mode": "below",
                       "visibilityMode": "hidden",
@@ -297,60 +392,17 @@
                       }
                     },
                     "stripConfig": {
-                      "cardSubType": "standard"
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
                     },
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/recommendation/usageBased",
+                        "path": "/apis/protected/v8/recommendation/interestBased",
                         "queryParams": {
                           "pageNo": 0,
-                          "pageSize": 15
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "widget": {
-              "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultiple",
-              "widgetData": {
-                "strips": [
-                  {
-                    "key": "trending",
-                    "title": "Most Popular",
-                    "info": {
-                      "mode": "below",
-                      "visibilityMode": "hidden",
-                      "icon": {
-                        "icon": "info",
-                        "scale": 0.8
-                      },
-                      "widget": {
-                        "widgetType": "element",
-                        "widgetSubType": "elementHtml",
-                        "widgetData": {
-                          "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are trending with other colleagues right now.</p>"
-                        }
-                      }
-                    },
-                    "stripConfig": {
-                      "cardSubType": "standard"
-                    },
-                    "filters": [],
-                    "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/recommendation/trending",
-                        "queryParams": {
-                          "pageNo": 0,
-                          "pageSize": 15
+                          "pageSize": 12,
+                          "sourceFields": ["creatorLogo"]
                         }
                       }
                     }

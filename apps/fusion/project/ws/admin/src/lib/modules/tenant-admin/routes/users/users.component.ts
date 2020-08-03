@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   roleList: string[] = []
   rolesHash: { [key: string]: IUserRoleDetail } = {}
   isAdding = false
-  userDetails: {[key: string]: any} = {}
+  userDetails: { [key: string]: any } = {}
   userIds: string[] = []
   constructor(
     private snackBar: MatSnackBar,
@@ -49,12 +49,12 @@ export class UsersComponent implements OnInit {
           ...user,
           roles: data.user_roles.filter(roles => this.roleList.includes(roles)),
         }
-      this.userIds = Object.keys(this.userDetails)
-      this.isAdding = false
-    },
+        this.userIds = Object.keys(this.userDetails)
+        this.isAdding = false
+      },
       _err => {
-      this.isAdding = false
-    })
+        this.isAdding = false
+      })
   }
   removeUser(user: NsAutoComplete.IUserAutoComplete) {
     if (this.userDetails[user.wid]) {
@@ -66,35 +66,35 @@ export class UsersComponent implements OnInit {
   openDialog(wid: string) {
     if (this.userDetails[wid] && this.userDetails[wid].roles.length) {
       this.userDetails[wid].roles.forEach((data: string) => {
-          this.rolesHash[data].isSelected = true
-          this.rolesHash[data].hasRole = true
+        this.rolesHash[data].isSelected = true
+        this.rolesHash[data].hasRole = true
       })
     }
-      const dialogRef = this.dialog.open(OpenRolesDialogComponent, {
-        width: '80vw',
-        data: {
-          userId: wid,
-          rolesData: this.rolesHash,
-        },
-      })
-      dialogRef.afterClosed().subscribe(data => {
-        if (data && data.wid && data.newRoles) {
-          this.userDetails[data.wid].roles = data.newRoles
-          if (data.addingError && data.removingError) {
-            this.snackBar.open('Error Occured', undefined, { duration: 2000 })
-          } else if (data.addingError) {
-            this.snackBar.open('Error Occured adding roles', undefined, { duration: 2000 })
-          } else if (data.removingError) {
-            this.snackBar.open('Error Occured removing roles', undefined, { duration: 2000 })
-          } else {
-            this.snackBar.open('Changes Saved', undefined, { duration: 2000 })
-          }
+    const dialogRef = this.dialog.open(OpenRolesDialogComponent, {
+      width: '80vw',
+      data: {
+        userId: wid,
+        rolesData: this.rolesHash,
+      },
+    })
+    dialogRef.afterClosed().subscribe(data => {
+      if (data && data.wid && data.newRoles) {
+        this.userDetails[data.wid].roles = data.newRoles
+        if (data.addingError && data.removingError) {
+          this.snackBar.open('Error Occured', 'X', { duration: 2000 })
+        } else if (data.addingError) {
+          this.snackBar.open('Error Occured adding roles', 'X', { duration: 2000 })
+        } else if (data.removingError) {
+          this.snackBar.open('Error Occured removing roles', 'X', { duration: 2000 })
+        } else {
+          this.snackBar.open('Changes Saved', 'X', { duration: 2000 })
         }
-        this.roleList.forEach(role => {
-          this.rolesHash[role].isSelected = false
-          this.rolesHash[role].hasRole = false
-        })
+      }
+      this.roleList.forEach(role => {
+        this.rolesHash[role].isSelected = false
+        this.rolesHash[role].hasRole = false
       })
-    }
+    })
+  }
 
 }

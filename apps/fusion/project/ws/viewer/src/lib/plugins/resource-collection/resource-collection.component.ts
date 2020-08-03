@@ -44,7 +44,7 @@ export class ResourceCollectionComponent implements OnInit {
     this.answerControl = new FormControl('')
   }
   private openSnackBar(primaryMsg: string, duration: number = 3000) {
-    this.snackBar.open(primaryMsg, undefined, {
+    this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
   }
@@ -67,7 +67,7 @@ export class ResourceCollectionComponent implements OnInit {
         } else {
           this.fetchingStatus = 'fetched'
           this.submitData.isSubmit = false
-          this.snackBar.open('Invalid File Type', undefined, {
+          this.snackBar.open('Invalid File Type', 'X', {
             duration: 1000,
           })
           this.reset()
@@ -77,7 +77,7 @@ export class ResourceCollectionComponent implements OnInit {
       } else {
         this.fetchingStatus = 'fetched'
         this.submitData.isSubmit = false
-        this.snackBar.open('Please upload your answer', undefined, {
+        this.snackBar.open('Please upload your answer', 'X', {
           duration: 1000,
         })
       }
@@ -88,7 +88,7 @@ export class ResourceCollectionComponent implements OnInit {
       } else {
         this.submitData.isSubmit = false
         this.fetchingStatus = 'fetched'
-        this.snackBar.open('Please enter your answer', undefined, {
+        this.snackBar.open('Please enter your answer', 'X', {
           duration: 1000,
         })
       }
@@ -124,7 +124,7 @@ export class ResourceCollectionComponent implements OnInit {
                 this.submitData.isSubmit = false
                 this.submitData.value = 0
                 this.message = 'Submitted Successfully'
-                this.snackBar.open(this.message, undefined, {
+                this.snackBar.open(this.message, 'X', {
                   duration: 2000,
                 })
                 this.getAllSubmissions()

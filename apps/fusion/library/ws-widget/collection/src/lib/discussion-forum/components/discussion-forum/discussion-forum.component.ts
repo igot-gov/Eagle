@@ -152,7 +152,7 @@ export class DiscussionForumComponent extends WidgetBaseComponent
         this.fetchDiscussion(true)
       },
       () => {
-        this.snackBar.open(failMsg)
+        this.snackBar.open(failMsg, 'X')
         this.isPostingDiscussion = false
       },
     )

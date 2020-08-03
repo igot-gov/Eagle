@@ -563,7 +563,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private configSvc: ConfigurationsService,
     private graphGeneralSvc: GraphGeneralService,
     private resolver: AnalyticsResolver,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.filterEventSubscription = this.graphGeneralSvc.filterEventChangeSubject.subscribe(
@@ -971,14 +971,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       // users by Guild BarChart Data
       const barChartGuildTypeLabel: string[] = []
       const guildData: number[] = []
-      this.contentData.guild_group.forEach((source: any) => {
-        if (barChartGuildTypeLabel.length < 20) {
-          barChartGuildTypeLabel.push(source.key)
-        }
-        if (guildData.length < 20) {
-          guildData.push(source.doc_count)
-        }
-      })
+      if (this.contentData.guild_group
+        && this.contentData.guild_group.length > 0) {
+        this.contentData.guild_group.forEach((source: any) => {
+          if (barChartGuildTypeLabel.length < 20) {
+            barChartGuildTypeLabel.push(source.key)
+          }
+          if (guildData.length < 20) {
+            guildData.push(source.doc_count)
+          }
+        })
+      }
       this.barChartGuildData = {
         widgetType: ROOT_WIDGET_CONFIG.graph._type,
         widgetSubType: ROOT_WIDGET_CONFIG.graph.graphGeneral,
@@ -1017,6 +1020,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // users by Roles BarChart Data
       const barChartRolesLabel: string[] = []
       const rolesData: number[] = []
+      if (!this.contentData.role) {
+        this.contentData.role = []
+      }
       this.contentData.role.forEach((source: any) => {
         if (barChartRolesLabel.length < 20) {
           barChartRolesLabel.push(source.key)
@@ -1343,6 +1349,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       // users by Device Category PieChart Data
       const pieChartDeviceCategoryLabel: string[] = []
       const deviceCategoryData: number[] = []
+      if (!this.contentData.device_category) {
+        this.contentData.device_category = []
+      }
       this.contentData.device_category.forEach((city: any) => {
         if (pieChartDeviceCategoryLabel.length < 20) {
           pieChartDeviceCategoryLabel.push(city.key)

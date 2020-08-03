@@ -51,7 +51,7 @@ export class ChallengeStripComponent implements OnInit {
 
   }
   openSnackBar() {
-    this.snackBar.open('This activity is already completed', undefined, {
+    this.snackBar.open('This activity is already completed', 'X', {
       duration: 2000,
     })
   }

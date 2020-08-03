@@ -59,11 +59,11 @@ export class BtnPlaylistSelectionComponent implements OnInit {
       this.raiseTelemetry('add', playlistId, this.contentId)
       this.playlistSvc.addPlaylistContent(playlist, [this.contentId]).subscribe(
         () => {
-          this.snackBar.open(this.contentAddMessage.nativeElement.value)
+          this.snackBar.open(this.contentAddMessage.nativeElement.value, 'X')
           this.selectedPlaylists.add(playlistId)
         },
         _ => {
-          this.snackBar.open(this.contentUpdateError.nativeElement.value)
+          this.snackBar.open(this.contentUpdateError.nativeElement.value, 'X')
           this.selectedPlaylists.delete(playlistId)
           option.toggle()
         },
@@ -72,11 +72,11 @@ export class BtnPlaylistSelectionComponent implements OnInit {
       this.raiseTelemetry('remove', playlistId, this.contentId)
       this.playlistSvc.deletePlaylistContent(playlist, [this.contentId]).subscribe(
         () => {
-          this.snackBar.open(this.contentRemoveMessage.nativeElement.value)
+          this.snackBar.open(this.contentRemoveMessage.nativeElement.value, 'X')
           this.selectedPlaylists.delete(playlistId)
         },
         _ => {
-          this.snackBar.open(this.contentUpdateError.nativeElement.value)
+          this.snackBar.open(this.contentUpdateError.nativeElement.value, 'X')
           this.selectedPlaylists.add(playlistId)
           option.toggle()
         },
@@ -85,7 +85,7 @@ export class BtnPlaylistSelectionComponent implements OnInit {
   }
 
   isDoneDisabled() {
-   return this.selectedPlaylists.size > 0 ? false : true
+    return this.selectedPlaylists.size > 0 ? false : true
   }
 
   createPlaylist(playlistName: string, successToast: string, errorToast: string) {
@@ -100,10 +100,10 @@ export class BtnPlaylistSelectionComponent implements OnInit {
     )
       .subscribe(
         _ => {
-          this.snackBar.open(successToast)
+          this.snackBar.open(successToast, 'X')
         },
         _ => {
-          this.snackBar.open(errorToast)
+          this.snackBar.open(errorToast, 'X')
         },
       )
   }

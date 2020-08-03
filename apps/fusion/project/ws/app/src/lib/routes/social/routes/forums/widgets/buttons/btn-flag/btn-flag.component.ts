@@ -54,7 +54,7 @@ export class BtnFlagComponent implements OnInit {
 
   openDialog(invalidUserMsg: string): void {
     if (this.postCreatorId === this.userId) {
-      this.snackBar.open(invalidUserMsg)
+      this.snackBar.open(invalidUserMsg, 'X')
       return
     }
     const dialogRef = this.dialog.open(DialogBoxModeratorComponent, { data: this.postId })

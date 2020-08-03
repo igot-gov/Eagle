@@ -161,7 +161,7 @@ export class CollectionResolverService {
       if (content.isExternal) {
         return ICON_TYPE.externalContent
       }
-      return ICON_TYPE.internalContent
+      return ICON_TYPE.htmlPicker
     }
     if (content.mimeType === MIME_TYPE.pdf) {
       if (!content.artifactUrl) {
@@ -185,7 +185,7 @@ export class CollectionResolverService {
       return ICON_TYPE.htmlPicker
     }
     if (content.mimeType === MIME_TYPE.webModule) {
-      return ICON_TYPE.internalContent
+      return ICON_TYPE.html
     }
     if (content.mimeType === MIME_TYPE.handson) {
       return ICON_TYPE.handsOn

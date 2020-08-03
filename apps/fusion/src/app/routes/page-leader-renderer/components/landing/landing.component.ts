@@ -111,7 +111,7 @@ export class LandingComponent implements OnInit {
         this.loggedUserFollowData = data
       },
       () => {
-        this.snackBar.open(this.followUnfollowError.nativeElement.value)
+        this.snackBar.open(this.followUnfollowError.nativeElement.value, 'X')
       },
     )
   }
@@ -135,11 +135,11 @@ export class LandingComponent implements OnInit {
         .followUser({ followsourceid: this.userId, followtargetid: this.leaderUuid, type: 'person' })
         .subscribe(
           () => {
-            this.snackBar.open(`${this.followed.nativeElement.value}_${leaderData.profile.name}`)
+            this.snackBar.open(`${this.followed.nativeElement.value}_${leaderData.profile.name}`, 'X')
             this.isFetchingFollow = false
           },
           () => {
-            this.snackBar.open(this.followUnfollowError.nativeElement.value)
+            this.snackBar.open(this.followUnfollowError.nativeElement.value, 'X')
             this.loggedUserFollowData.following.pop()
             this.isFetchingFollow = false
           },
@@ -155,14 +155,14 @@ export class LandingComponent implements OnInit {
         .unFollowUser({ followsourceid: this.userId, followtargetid: this.leaderUuid })
         .subscribe(
           () => {
-            this.snackBar.open(`${this.unfollowed.nativeElement.value} ${leaderData.profile.name}`)
+            this.snackBar.open(`${this.unfollowed.nativeElement.value} ${leaderData.profile.name}`, 'X')
             this.loggedUserFollowData.following = this.loggedUserFollowData.following.filter(
               u => u.id !== this.leaderUuid,
             )
             this.isFetchingFollow = false
           },
           () => {
-            this.snackBar.open(this.followUnfollowError.nativeElement.value)
+            this.snackBar.open(this.followUnfollowError.nativeElement.value, 'X')
             this.isFetchingFollow = false
           },
         )

@@ -95,6 +95,9 @@ import { KnowledgeArtifactDetailsComponent } from './components/knowledge-artifa
 import { ProfileImageModule } from '../../../../../../../library/ws-widget/collection/src/lib/_common/profile-image/profile-image.module'
 import { EditorService } from '../../../../../author/src/lib/routing/modules/editor/services/editor.service'
 import { ApiService, AccessControlService } from '../../../../../author/src/public-api'
+import { AppTocSinglePageComponent } from './components/app-toc-single-page/app-toc-single-page.component'
+import { AppTocSinglePageComponent as AppTocSinglePageRootComponent } from './routes/app-toc-single-page/app-toc-single-page.component'
+import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-single-page.directive'
 @NgModule({
   declarations: [
     AppTocAnalyticsComponent,
@@ -114,6 +117,9 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
     AppTocCohortsRootComponent,
     KnowledgeArtifactDetailsComponent,
     AppTocAnalyticsTilesComponent,
+    AppTocSinglePageComponent,
+    AppTocSinglePageRootComponent,
+    AppTocSinglePageDirective,
   ],
   imports: [
     CommonModule,
@@ -191,6 +197,8 @@ import { ApiService, AccessControlService } from '../../../../../author/src/publ
     AppTocDialogIntroVideoComponent,
     AppTocOverviewComponent,
     AppTocHomeComponent,
+    AppTocSinglePageComponent,
+    AppTocSinglePageRootComponent,
   ],
 })
 export class AppTocModule { }

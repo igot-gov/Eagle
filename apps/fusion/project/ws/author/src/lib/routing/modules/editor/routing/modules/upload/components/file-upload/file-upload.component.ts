@@ -28,7 +28,7 @@ import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { of } from 'rxjs'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
-import { map, mergeMap, tap } from 'rxjs/operators'
+import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 
@@ -76,7 +76,7 @@ export class FileUploadComponent implements OnInit {
     private authInitService: AuthInitService,
     private valueSvc: ValueService,
     private accessService: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
@@ -150,7 +150,7 @@ export class FileUploadComponent implements OnInit {
       preview: false,
       url: '',
     }
-    const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
+    const fileName = file.name.replace(/[^A-Za-z0-9_.]/g, '')
     if (
       !fileName.toLowerCase().endsWith('.pdf') &&
       !fileName.toLowerCase().endsWith('.zip') &&
@@ -209,10 +209,10 @@ export class FileUploadComponent implements OnInit {
     this.mimeType = fileName.toLowerCase().endsWith('.pdf')
       ? 'application/pdf'
       : fileName.toLowerCase().endsWith('.mp4')
-      ? 'application/x-mpegURL'
-      : fileName.toLowerCase().endsWith('.zip')
-      ? 'application/html'
-      : 'audio/mpeg'
+        ? 'application/x-mpegURL'
+        : fileName.toLowerCase().endsWith('.zip')
+          ? 'application/html'
+          : 'audio/mpeg'
     if (this.mimeType === 'application/x-mpegURL' || this.mimeType === 'audio/mpeg') {
       this.getDuration()
     } else if (this.mimeType === 'application/html') {
@@ -266,7 +266,7 @@ export class FileUploadComponent implements OnInit {
     formdata.append(
       'content',
       this.file as Blob,
-      (this.file as File).name.replace(/[^A-Za-z0-9.]/g, ''),
+      (this.file as File).name.replace(/[^A-Za-z0-9_.]/g, ''),
     )
     this.loaderService.changeLoad.next(true)
     this.uploadService
@@ -278,8 +278,8 @@ export class FileUploadComponent implements OnInit {
             this.mimeType === 'application/pdf'
               ? CONTENT_BASE_STATIC
               : this.mimeType === 'application/html'
-              ? CONTENT_BASE_WEBHOST
-              : CONTENT_BASE_STREAM,
+                ? CONTENT_BASE_WEBHOST
+                : CONTENT_BASE_STREAM,
         },
         undefined,
         this.mimeType === 'application/html',
@@ -289,33 +289,31 @@ export class FileUploadComponent implements OnInit {
           this.canUpdate = false
           let url = ''
           if (this.mimeType === 'application/html') {
-            url = `${document.location.origin}/content-store/
-              ${this.accessService.rootOrg}/${this.accessService.org}/Public/
-              ${this.currentContent}/web-hosted/
-              ${this.fileUploadCondition.url}`
+            // tslint:disable-next-line:max-line-length
+            url = `${document.location.origin}/content-store/${this.accessService.rootOrg}/${this.accessService.org}/Public/${this.currentContent}/web-hosted/${this.fileUploadCondition.url}`
           } else {
             url = (v.authArtifactURL || v.artifactURL).replace(/%2F/g, '/')
           }
           this.fileUploadForm.controls.artifactUrl.setValue(url)
           this.fileUploadForm.controls.downloadUrl.setValue(v ? v.downloadURL : '')
           this.fileUploadForm.controls.mimeType.setValue(this.mimeType)
-          if (this.mimeType === 'application/x-mpegURL') {
-            this.fileUploadForm.controls.transcoding.setValue({
-              lastTranscodedOn: null,
-              retryCount: 0,
-              status: 'STARTED',
-            })
-          }
+          // if (this.mimeType === 'application/x-mpegURL') {
+          //   this.fileUploadForm.controls.transcoding.setValue({
+          //     lastTranscodedOn: null,
+          //     retryCount: 0,
+          //     status: 'STARTED',
+          //   })
+          // }
           this.fileUploadForm.controls.duration.setValue(this.duration)
           this.fileUploadForm.controls.size.setValue((this.file as File).size)
           this.canUpdate = true
         }),
         mergeMap(v => {
-          if (this.mimeType === 'application/x-mpegURL') {
-            return this.uploadService
-              .startEncoding(v.authArtifactURL || v.artifactURL, this.currentContent)
-              .pipe(map(() => v))
-          }
+          // if (this.mimeType === 'application/x-mpegURL') {
+          //   return this.uploadService
+          //     .startEncoding(v.authArtifactURL || v.artifactURL, this.currentContent)
+          //     .pipe(map(() => v))
+          // }
           return of(v)
         }),
       )
@@ -394,7 +392,7 @@ export class FileUploadComponent implements OnInit {
     zip.createReader(new zip.BlobReader(this.file as File), (reader: zip.ZipReader) => {
       reader.getEntries((entry: zip.Entry[]) => {
         entry.forEach(element => {
-          if (element.filename.match(/[^A-Za-z0-9./]/g)) {
+          if (element.filename.match(/[^A-Za-z0-9_.\-\/]/g)) {
             this.errorFileList.push(element.filename)
           } else if (!element.directory) {
             this.fileList.push(element.filename)

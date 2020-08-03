@@ -14,7 +14,7 @@
   "editor.cursorBlinking": "solid",
   "editor.cursorSmoothCaretAnimation": true,
   "editor.cursorStyle": "line",
-  "editor.fontFamily": "Dank Mono, Operator Mono, Fira Code, Inconsolata, Menlo, Consolas",
+  // "editor.fontFamily": "Dank Mono, Operator Mono, Fira Code, Inconsolata, Menlo, Consolas",
   "editor.fontLigatures": true,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -40,8 +40,7 @@
   "peacock.affectActivityBar": true,
   "peacock.affectStatusBar": true,
   "peacock.affectTitleBar": false,
-  "peacock.favoriteColors": [
-    {
+  "peacock.favoriteColors": [{
       "name": "Angular Red",
       "value": "#b52e31"
     },
@@ -124,8 +123,6 @@
     "followtargetid",
     "iframe",
     "wingspan",
-    "infosystechnologies",
-    "infy",
     "keycloak",
     "leaderboard",
     "mailto",
@@ -163,7 +160,10 @@
   "tslint.alwaysShowRuleFailuresAsWarnings": false,
   "prettier.trailingComma": "all",
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
-  "prettier.arrowParens": "avoid"
+  "prettier.arrowParens": "avoid",
+  "[scss]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  }
 }

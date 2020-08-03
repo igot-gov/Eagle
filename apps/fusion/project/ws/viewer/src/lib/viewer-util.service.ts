@@ -34,6 +34,7 @@ export class ViewerUtilService {
   }
 
   realTimeProgressUpdate(contentId: string, request: any) {
+    // console.log('realtime', contentId, request)
     this.http
       .post(`${this.API_ENDPOINTS.PROGRESS_UPDATE}/${contentId}`, request)
       .subscribe(noop, noop)
@@ -42,17 +43,14 @@ export class ViewerUtilService {
   getContent(contentId: string): Observable<NsContent.IContent> {
     return this.http.get<NsContent.IContent>(
       // tslint:disable-next-line:max-line-length
-      `/apis/authApi/action/content/hierarchy/${contentId}?rootOrg=${
-      this.configservice.rootOrg || 'Infosys'
-      }&org=${this.configservice.activeOrg || 'Infosys Ltd'}`,
+      `/apis/authApi/action/content/hierarchy/${contentId}?rootOrg=${this.configservice.rootOrg || 'igot'}&org=${this.configservice.activeOrg || 'dopt'}`,
     )
   }
 
   getAuthoringUrl(url: string): string {
     return url
-      ? `/apis/authContent/${
-      url.includes('/content-store/') ? new URL(url).pathname.slice(1) : encodeURIComponent(url)
-      }`
+      // tslint:disable-next-line:max-line-length
+      ? `/apis/authContent/${url.includes('/content-store/') ? new URL(url).pathname.slice(1) : encodeURIComponent(url)}`
       : ''
   }
 

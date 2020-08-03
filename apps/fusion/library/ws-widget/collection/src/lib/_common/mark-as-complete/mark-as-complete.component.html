@@ -3,7 +3,7 @@
     <h2 class="margin-remove-bottom"><span i18n>Learning Progress </span>
       <a i18n-aria-label aria-label="Learning Progress FAQ" [routerLink]="'/app/info/faq'"
         [queryParams]="{tab: 'mark_as_complete'}">
-        <mat-icon matTooltip="FAQ" class="align-text-top ws-mat-primary-text">help</mat-icon>
+        <mat-icon class="align-text-top ws-mat-primary-text">help</mat-icon>
       </a>
     </h2>
     <h3><span i18n>Status: </span>
@@ -15,12 +15,12 @@
     </h3>
     <ng-container *ngIf="content?.progress?.markAsCompleteReason !== 'not.supported'">
       <mat-divider></mat-divider>
-      <ng-container *ngIf="content?.progress?.showMarkAsComplete">
+      <!-- <ng-container *ngIf="content?.progress?.showMarkAsComplete">
         <h4 i18n class="pt-3">I confirm that I have gone through this content and want to mark it as complete.</h4>
         <div class="flex justify-center">
           <button i18n mat-raised-button color="primary" (click)="confirm()">Mark as Complete</button>
         </div>
-      </ng-container>
+      </ng-container> -->
       <ng-container *ngIf="!content?.progress?.showMarkAsComplete">
         <h4 class="pt-3" *ngIf="content?.progress?.markAsCompleteReason; let msg">
           <span i18n *ngIf="msg === 'pass.required'">Content will be marked as complete once you pass this

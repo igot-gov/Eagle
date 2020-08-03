@@ -1,7 +1,7 @@
 <section *ngIf="enableFeature">
   <h2 class="mat-toolbar cohorts-head shadow">Cohorts</h2>
   <mat-accordion [multi]="false">
-    <mat-expansion-panel (opened)="fetchCohorts(cohortTypesEnum.ACTIVE_USERS)">
+    <mat-expansion-panel class="mat-elevation-z" (opened)="fetchCohorts(cohortTypesEnum.ACTIVE_USERS)">
       <mat-expansion-panel-header>
         <mat-panel-title i18n>Learners</mat-panel-title>
       </mat-expansion-panel-header>
@@ -24,7 +24,7 @@
         </div>
       </ng-template>
     </mat-expansion-panel>
-    <mat-expansion-panel (opened)="fetchCohorts(cohortTypesEnum.TOP_PERFORMERS)">
+    <mat-expansion-panel class="mat-elevation-z" (opened)="fetchCohorts(cohortTypesEnum.TOP_PERFORMERS)">
       <mat-expansion-panel-header>
         <mat-panel-title i18n>Top performers</mat-panel-title>
       </mat-expansion-panel-header>
@@ -47,7 +47,7 @@
         </div>
       </ng-template>
     </mat-expansion-panel>
-    <!-- <mat-expansion-panel (opened)="fetchCohorts(cohortTypesEnum.COMMON_GOALS)">
+    <!-- <mat-expansion-panel class="mat-elevation-z" (opened)="fetchCohorts(cohortTypesEnum.COMMON_GOALS)">
       <mat-expansion-panel-header>
         <mat-panel-title i18n>Shares same goal</mat-panel-title>
       </mat-expansion-panel-header>
@@ -81,7 +81,7 @@
         </div>
       </ng-template>
     </mat-expansion-panel> -->
-    <mat-expansion-panel (opened)="fetchCohorts(cohortTypesEnum.AUTHORS)">
+    <mat-expansion-panel class="mat-elevation-z" (opened)="fetchCohorts(cohortTypesEnum.AUTHORS)">
       <mat-expansion-panel-header>
         <mat-panel-title i18n>Authors</mat-panel-title>
       </mat-expansion-panel-header>
@@ -104,7 +104,7 @@
         </div>
       </ng-template>
     </mat-expansion-panel>
-    <!-- <mat-expansion-panel (opened)="fetchCohorts(cohortTypesEnum.EDUCATORS)">
+    <!-- <mat-expansion-panel class="mat-elevation-z" (opened)="fetchCohorts(cohortTypesEnum.EDUCATORS)">
       <mat-expansion-panel-header>
         <mat-panel-title>Educators</mat-panel-title>
       </mat-expansion-panel-header>

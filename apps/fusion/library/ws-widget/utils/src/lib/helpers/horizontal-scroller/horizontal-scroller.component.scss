@@ -15,37 +15,14 @@ $spaceFromEnd: -$size-m;
   z-index: 999;
 }
 
-
-
 .prevBtn {
   @extend %btn;
   left: $spaceFromEnd;
 }
 
-.prevBtnHover {
-  @extend %btn;
-opacity: 0;
-  transition: opacity 800ms;
-}
-
-.prevBtnHover:hover {
-  opacity: 1.0;
-}
-
 .nextBtn {
   @extend %btn;
   right: $spaceFromEnd;
-
-}
-
-.nextBtnHover {
-  @extend %btn;
-opacity: 0;
-  transition: opacity 800ms;
-}
-
-.nextBtnHover:hover {
-  opacity: 1.0;
 }
 
 .nextLoading {

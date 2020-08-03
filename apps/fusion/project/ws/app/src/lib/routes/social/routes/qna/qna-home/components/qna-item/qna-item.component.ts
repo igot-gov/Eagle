@@ -35,7 +35,7 @@ export class QnaItemComponent implements OnInit {
     })
     dialogRef.afterClosed().subscribe(data => {
       if (data) {
-        this.snackBar.open(successMsg)
+        this.snackBar.open(successMsg, 'X')
         this.item.status = NsDiscussionForum.EPostStatus.INACTIVE
       }
     })

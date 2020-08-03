@@ -32,7 +32,7 @@ export class GoalTrackPendingComponent implements OnInit {
     private route: ActivatedRoute,
     private goalsSvc: BtnGoalsService,
     private snackBar: MatSnackBar,
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.route.parent && this.route.parent.snapshot) {
@@ -78,12 +78,12 @@ export class GoalTrackPendingComponent implements OnInit {
       this.goalsSvc.shareGoalV2(goalType, this.goalId, userIds, '').subscribe(
         (response: NsGoal.IGoalsShareResponse) => {
           if (response.result === 'success') {
-            this.snackBar.open(this.remindSuccessMessage.nativeElement.value)
+            this.snackBar.open(this.remindSuccessMessage.nativeElement.value, 'X')
           }
           this.remindAPIProgress = false
         },
         () => {
-          this.snackBar.open(this.remindErrorMessage.nativeElement.value)
+          this.snackBar.open(this.remindErrorMessage.nativeElement.value, 'X')
           this.remindAPIProgress = false
         },
       )

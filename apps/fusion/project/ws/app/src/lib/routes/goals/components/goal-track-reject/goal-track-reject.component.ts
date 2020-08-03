@@ -25,7 +25,7 @@ export class GoalTrackRejectComponent implements OnInit {
     private route: ActivatedRoute,
     private goalsSvc: BtnGoalsService,
     private snackBar: MatSnackBar,
-  ) {}
+  ) { }
 
   ngOnInit() {
     if (this.route.parent && this.route.parent.snapshot) {
@@ -46,12 +46,12 @@ export class GoalTrackRejectComponent implements OnInit {
           this.trackGoal.rejected = this.trackGoal.rejected.filter(
             (reject: any) => reject.sharedWith !== sharedWith,
           )
-          this.snackBar.open(this.shareSuccessMessage.nativeElement.value)
+          this.snackBar.open(this.shareSuccessMessage.nativeElement.value, 'X')
           this.shareAgainApiProgress = false
         },
         () => {
           this.shareAgainStatus[sharedWith] = 'error'
-          this.snackBar.open(this.shareErrorMessage.nativeElement.value)
+          this.snackBar.open(this.shareErrorMessage.nativeElement.value, 'X')
           this.shareAgainApiProgress = false
         },
       )

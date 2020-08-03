@@ -93,7 +93,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
-        this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+          this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
           const continueLearningData = {
             contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
               this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
@@ -114,13 +114,15 @@ export class PlayerVideoComponent extends WidgetBaseComponent
           const continueLearningData = {
             contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
               this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
-            resourceId: data.resourceId,
-            dateAccessed: Date.now(),
-            data: JSON.stringify({
-              progress: data.progress,
-              timestamp: Date.now(),
-            }),
+            ...data,
+            // resourceId: data.resourceId,
+            // dateAccessed: Date.now(),
+            // data: data.data,
           }
+          // JSON.stringify({
+          //   progress: data.progress,
+          //   timestamp: Date.now(),
+          // }),
           this.contentSvc
             .saveContinueLearning(continueLearningData)
             .toPromise()
@@ -163,7 +165,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
-        this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
+          this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
           const continueLearningData = {
             contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
               this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
@@ -182,14 +184,16 @@ export class PlayerVideoComponent extends WidgetBaseComponent
             .catch()
         } else {
           const continueLearningData = {
-            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId ?
-              this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier,
-            resourceId: data.resourceId,
-            dateAccessed: Date.now(),
-            data: JSON.stringify({
-              progress: data.progress,
-              timestamp: Date.now(),
-            }),
+            contextPathId: this.activatedRoute.snapshot.queryParams.collectionId
+              ? this.activatedRoute.snapshot.queryParams.collectionId
+              : this.widgetData.identifier,
+            ...data,
+            // resourceId: data.resourceId,
+            // dateAccessed: Date.now(),
+            // data: JSON.stringify({
+            //   progress: data.progress,
+            //   timestamp: Date.now(),
+            // }),
           }
           this.contentSvc
             .saveContinueLearning(continueLearningData)

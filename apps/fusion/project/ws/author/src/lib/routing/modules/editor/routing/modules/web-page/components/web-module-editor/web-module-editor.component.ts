@@ -314,7 +314,9 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   uploadJson(data: any, fileName: string, location: '/web-hosted' | '/web-hosted/assets') {
     let content = JSON.parse(JSON.stringify(data))
     if (fileName.endsWith('.html')) {
-      content = `<html><head></head><body>${data}</body></html>`
+
+      content = `<html><head></head><body>${content}</body></html>`
+      content = content.replace(new RegExp('\r?\n?\t', 'g'), '')
       // const blob = new Blob([JSON.stringify(content, null, 2)], { type: 'text/html' })
       // const formdata = new FormData()
       // formdata.append('content', blob, fileName)
@@ -350,7 +352,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       }
       const htmlFile = JSON.parse(
         JSON.stringify(e.body)
-          .replace(/<a href/gm, '<a target="_blank" href')
+          .replace(/<a href/gm, '<a target=\\"_blank\\" href')
           .replace(this.imagesUrlbase, '')
           .replace(/(<img.*width=)['"](\d+?)['"](.*\/>)/gm, '$1"$2" style="width:100%; heigth: auto; max-width:$2" $3')
       )

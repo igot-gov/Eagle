@@ -11,7 +11,8 @@ import { CertificationMetaResolver } from './routes/app-toc-certification/resolv
 import { ContentCertificationResolver } from './routes/app-toc-certification/resolvers/content-certification.resolver'
 import { AppTocContentsComponent } from './routes/app-toc-contents/app-toc-contents.component'
 import { AppTocHomeComponent } from './routes/app-toc-home/app-toc-home.component'
-import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
+// import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes/app-toc-overview/app-toc-overview.component'
+import { AppTocSinglePageComponent as AppTocSinglePageRootComponent } from './routes/app-toc-single-page/app-toc-single-page.component'
 
 const routes: Routes = [
   {
@@ -47,11 +48,17 @@ const routes: Routes = [
       },
       {
         path: 'overview',
-        component: AppTocOverviewRootComponent,
+        // component: AppTocOverviewRootComponent,
+        pathMatch: 'full',
+        redirectTo: 'single-page-view',
       },
       {
         path: 'discussion',
         component: AppTocDiscussionComponent,
+      },
+      {
+        path: 'single-page-view',
+        component: AppTocSinglePageRootComponent,
       },
       {
         path: 'certification',
@@ -72,7 +79,7 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'overview',
+        redirectTo: 'single-page-view',
       },
     ],
   },

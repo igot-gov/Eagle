@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
-import { ConfigurationsService, EInstance, NsPage } from '@ws-widget/utils'
+import { ConfigurationsService, NsPage, ValueService } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
 import { ViewerDataService } from '../../viewer-data.service'
 
@@ -27,6 +27,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   resourceName: string | null = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
   collectionId = ''
   logo = true
+  isPreview = false
   forChannel = false
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,7 +35,12 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     // private logger: LoggerService,
     private configSvc: ConfigurationsService,
     private viewerDataSvc: ViewerDataService,
-  ) { }
+    private valueSvc: ValueService
+  ) {
+    this.valueSvc.isXSmall$.subscribe(isXSmall => {
+      this.logo = !isXSmall
+    })
+  }
 
   ngOnInit() {
     if (window.location.href.includes('/channel/')) {
@@ -42,9 +48,9 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     }
     this.isTypeOfCollection = this.activatedRoute.snapshot.queryParams.collectionType ? true : false
     this.collectionType = this.activatedRoute.snapshot.queryParams.collectionType
-    if (this.configSvc.rootOrg === EInstance.INSTANCE) {
-      this.logo = false
-    }
+    // if (this.configSvc.rootOrg === EInstance.INSTANCE) {
+    // this.logo = false
+    // }
     if (this.configSvc.instanceConfig) {
       this.appIcon = this.domSanitizer.bypassSecurityTrustResourceUrl(
         this.configSvc.instanceConfig.logos.app,
@@ -60,6 +66,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
     })
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
       this.collectionId = params.get('collectionId') as string
+      this.isPreview = params.get('preview') === 'true' ? true : false
     })
     this.viewerDataServiceResourceSubscription = this.viewerDataSvc.changedSubject.subscribe(
       _data => {

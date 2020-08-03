@@ -24,3 +24,4 @@ network_alias_name: "{{ network_alias_ui_proxies }}"
 docker_service_stack_name: ui
 docker_service_name: "{{ service_ui_proxies_service }}"
 force_reload: "{{ force_reload_ui_proxies_service }}"
+host_bulk_upload: "{{ host_bulk_upload_path }}"

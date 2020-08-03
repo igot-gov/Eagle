@@ -5,6 +5,7 @@ export interface IHistory {
   complexityLevel: string
   contentType: TContentType
   continueLearningData: IContinueLearningResponse
+  creatorLogo?: string
   description: string
   displayContentType?: string // For UI
   downloadUrl?: string
@@ -35,6 +36,9 @@ export interface IContent {
   contentType: TContentType
   contentUrlAtSource: string
   creatorContacts: ICreator[]
+  creatorLogo?: string
+  creatorPosterImage?: string
+  creatorThumbnail?: string
   creatorDetails?: ICreator[]
   categoryType: string
   description: string

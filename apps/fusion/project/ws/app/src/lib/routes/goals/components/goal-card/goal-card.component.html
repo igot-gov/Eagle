@@ -1,12 +1,9 @@
 <mat-card class="relative border-radius-0 z-index-1">
-  <div
-    class="flex mb-2 cursor-pointer"
-    (click)="
+  <div class="flex mb-2 cursor-pointer" (click)="
       goal?.contentProgress?.length || goal?.contents?.length
         ? (isGoalExpanded[goal?.id] = !isGoalExpanded[goal?.id])
         : null
-    "
-  >
+    ">
     <div class="width-expand">
       <h2 class="mat-title margin-bottom-xs text-truncate">{{ goal?.name }}</h2>
       <div class="margin-bottom-xs">
@@ -41,23 +38,23 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #goalMenu="matMenu" overlapTrigger="true">
-        <button  name="edit-button-goal-card" mat-menu-item *ngIf="!goal?.isShared" (click)="editGoal()">
-          <mat-icon *ngIf="checkNoAccess(goal)" i18n-matTooltip matTooltip="This goal is not editable"
-            matTooltipPosition="left">
+        <button name="edit-button-goal-card" mat-menu-item *ngIf="!goal?.isShared" (click)="editGoal()">
+          <mat-icon *ngIf="checkNoAccess(goal)">
             edit</mat-icon>
           <mat-icon *ngIf="!checkNoAccess(goal)">edit</mat-icon>
           <span>Edit</span>
         </button>
-        <button name="share-button-goal-card"  mat-menu-item *ngIf="isShareEnabled && goal?.goalFor === 'others'" (click)="openShareGoalDialog(goal)">
+        <button name="share-button-goal-card" mat-menu-item *ngIf="isShareEnabled && goal?.goalFor === 'others'"
+          (click)="openShareGoalDialog(goal)">
           <mat-icon>share</mat-icon>
           <span>Share</span>
         </button>
-        <a  name="track-button-goal-card"  *ngIf="goal?.isShared" [routerLink]="'/app/goals/others/track/' + goal?.id"
+        <a name="track-button-goal-card" *ngIf="goal?.isShared" [routerLink]="'/app/goals/others/track/' + goal?.id"
           [queryParams]="{ goalType: goal?.type }" mat-menu-item>
           <mat-icon>track_changes</mat-icon>
           <span>Track</span>
         </a>
-        <button  name="delete-button-goal-card"  mat-menu-item (click)="openDeleteDialog()">
+        <button name="delete-button-goal-card" mat-menu-item (click)="openDeleteDialog()">
           <mat-icon>delete</mat-icon>
           <span>Delete</span>
         </button>
@@ -115,7 +112,7 @@
         </button>
       </div>
       <div class="flex flex-row-reverse">
-        <button  name="update-button-goal-card"  mat-button (click)="updateCommonGoalDuration()" i18n>
+        <button name="update-button-goal-card" mat-button (click)="updateCommonGoalDuration()" i18n>
           Update
         </button>
       </div>

@@ -1,7 +1,7 @@
-<button mat-button i18n-matTooltip matTooltip="Explore" (click)="getCatalog()" #rootTrigger="matMenuTrigger"
-  name="exploreButtonHomePage" [matMenuTriggerFor]="rootMenu.childMenu">
-  <mat-icon>explore</mat-icon>
-  <span class="padding-left-xs" i18n>Explore</span>
+<button mat-button (click)="getCatalog()" #rootTrigger="matMenuTrigger" [matMenuTriggerFor]="rootMenu.childMenu">
+  <mat-icon>apps</mat-icon>
+  <span class="padding-left-xs" i18n>Browse Courses</span>
+  <mat-icon>arrow_drop_down</mat-icon>
 </button>
 
 <ws-widget-tree-catalog-menu #rootMenu [rootTrigger]="rootTrigger" [catalogItems]="catalogItems | slice: 0:10"

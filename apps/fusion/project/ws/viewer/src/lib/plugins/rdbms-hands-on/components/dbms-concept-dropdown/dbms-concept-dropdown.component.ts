@@ -78,7 +78,7 @@ export class DbmsConceptDropdownComponent implements OnDestroy, OnChanges {
 
   initializeDb(flag: boolean) {
     this.loading = true
-     this.dbmsSvc.initializeDatabase(this.resourceContent.content.identifier).subscribe(
+    this.dbmsSvc.initializeDatabase(this.resourceContent.content.identifier).subscribe(
       res => {
         this.loadedTables = []
         res.forEach((v, i) => {
@@ -93,13 +93,13 @@ export class DbmsConceptDropdownComponent implements OnDestroy, OnChanges {
           }
         })
         if (flag && this.dbRefreshSuccess) {
-          this.snackBar.open(this.dbRefreshSuccess.nativeElement.value)
+          this.snackBar.open(this.dbRefreshSuccess.nativeElement.value, 'X')
         }
         this.loading = false
       },
       _err => {
         if (this.dbRefreshFailed) {
-          this.snackBar.open(this.dbRefreshFailed.nativeElement.value)
+          this.snackBar.open(this.dbRefreshFailed.nativeElement.value, 'X')
         }
       })
   }
@@ -140,7 +140,7 @@ export class DbmsConceptDropdownComponent implements OnDestroy, OnChanges {
       query = this.contentData.dropdown ? this.selectedOption.query : this.contentData.query
     } else {
       if (this.contentData.query && !this.contentData.dropdown) {
-      query = this.contentData.query
+        query = this.contentData.query
       }
     }
     if (query) {

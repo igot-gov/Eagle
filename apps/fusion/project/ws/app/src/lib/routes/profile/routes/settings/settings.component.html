@@ -189,8 +189,7 @@
               </div>
             </mat-slide-toggle>
             <mat-slide-toggle *ngIf="showIntranetSettings" class="mode-toggle" color="primary"
-              matTooltip="Available only in Company's network" [formControl]="intranetContentForm"
-              labelPosition="before">
+              [formControl]="intranetContentForm" labelPosition="before">
               <div class="flex flex-middle">
                 <mat-icon>link</mat-icon>
                 <span i18n class="padding-left-s">Show intranet Content</span>

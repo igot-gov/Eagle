@@ -302,6 +302,7 @@ lex_microsoft_client_secret: client_secret
 
 # Mount paths
 host_content_directory_path: /mydata/content-directory
+host_bulk_upload_path: /mydata/bulk_upload
 
 # Logs
 sb_ext_logs_path: /mydata/logs/sb-ext

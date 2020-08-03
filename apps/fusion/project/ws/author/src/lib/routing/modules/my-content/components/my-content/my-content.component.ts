@@ -31,7 +31,7 @@ import { map } from 'rxjs/operators'
 })
 export class MyContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
-  newDesign = false
+  newDesign = true
   filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
   filterMenuTreeFlattener: any
   public cardContent!: any[]
@@ -192,6 +192,8 @@ export class MyContentComponent implements OnInit, OnDestroy {
         pageSize: this.pagination.limit,
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
+        // this is for Author Only
+        isUserRecordEnabled: !this.isAdmin,
       },
     }
     if (this.finalFilters.length) {
@@ -233,14 +235,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
     const observable =
       this.status === 'expiry' || this.newDesign
         ? this.myContSvc.fetchFromSearchV6(searchV6Data, this.isAdmin).pipe(
-            map((v: any) => {
-              return {
-                result: {
-                  response: v,
-                },
-              }
-            }),
-          )
+          map((v: any) => {
+            return {
+              result: {
+                response: v,
+              },
+            }
+          }),
+        )
         : this.myContSvc.fetchContent(requestData)
     this.loadService.changeLoad.next(true)
     observable.subscribe(
@@ -256,11 +258,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
         this.cardContent =
           loadMoreFlag && !this.queryFilter
             ? (this.cardContent || []).concat(
-                data && data.result && data.result.response ? data.result.response.result : [],
-              )
+              data && data.result && data.result.response ? data.result.response.result : [],
+            )
             : data && data.result.response
-            ? data.result.response.result
-            : []
+              ? data.result.response.result
+              : []
         this.totalContent = data && data.result.response ? data.result.response.totalHits : 0
         this.showLoadMore =
           this.pagination.offset * this.pagination.limit + this.pagination.limit < this.totalContent

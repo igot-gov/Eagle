@@ -123,7 +123,7 @@ export class QnaReplyComponent implements OnInit {
 
   acceptAnswer(acceptAnswerMsg: string) {
     if (this.userId === this.item.postCreator.postCreatorId) {
-      this.snackBar.open(acceptAnswerMsg)
+      this.snackBar.open(acceptAnswerMsg, 'X')
       return
     }
     if (this.isAcceptingAnswerInProgress || this.isAcceptedAnswer) {
@@ -152,7 +152,7 @@ export class QnaReplyComponent implements OnInit {
         }
       },
       () => {
-        this.snackBar.open(failMsg)
+        this.snackBar.open(failMsg, 'X')
       },
     )
   }
@@ -176,7 +176,7 @@ export class QnaReplyComponent implements OnInit {
       },
       () => {
         this.editMode = true
-        this.snackBar.open(failMsg)
+        this.snackBar.open(failMsg, 'X')
       },
     )
   }

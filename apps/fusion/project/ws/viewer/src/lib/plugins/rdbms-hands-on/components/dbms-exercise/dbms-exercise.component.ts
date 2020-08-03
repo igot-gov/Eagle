@@ -10,7 +10,7 @@ import { EventService } from '@ws-widget/utils'
   templateUrl: './dbms-exercise.component.html',
   styleUrls: ['./dbms-exercise.component.scss'],
 })
-export class DbmsExerciseComponent implements  OnDestroy, OnChanges {
+export class DbmsExerciseComponent implements OnDestroy, OnChanges {
   @Input() resourceContent: any
   @ViewChild('dbRefreshSuccess', { static: true }) dbRefreshSuccess: ElementRef<any> | null = null
   @ViewChild('dbRefreshFailed', { static: true }) dbRefreshFailed: ElementRef<any> | null = null
@@ -70,7 +70,7 @@ export class DbmsExerciseComponent implements  OnDestroy, OnChanges {
     this.dbmsSvc.initializeDatabase(this.resourceContent.content.identifier).subscribe(
       _response => {
         if (flag && this.dbRefreshSuccess) {
-          this.snackBar.open(this.dbRefreshSuccess.nativeElement.value)
+          this.snackBar.open(this.dbRefreshSuccess.nativeElement.value, 'X')
         }
         this.dbmsSvc.fetchDBStructure(this.resourceContent.content.identifier).subscribe(
           result => {
@@ -93,7 +93,7 @@ export class DbmsExerciseComponent implements  OnDestroy, OnChanges {
       },
       _err => {
         if (this.dbRefreshFailed) {
-          this.snackBar.open(this.dbRefreshFailed.nativeElement.value)
+          this.snackBar.open(this.dbRefreshFailed.nativeElement.value, 'X')
         }
       })
   }

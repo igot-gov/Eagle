@@ -1,16 +1,12 @@
 <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <button
-    type="button"
-    mat-icon-button
-    *ngIf="faqConfigs?.length > 1"
-    (click)="sideNavBarOpened = !sideNavBarOpened"
-  >
+  <button type="button" mat-icon-button *ngIf="faqConfigs?.length > 1" (click)="sideNavBarOpened = !sideNavBarOpened">
     <mat-icon>menu</mat-icon>
   </button>
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-xs text-truncate">
+  <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title:'Support',url:'none'}] }">
+  </ws-widget-btn-page-back>
+  <!-- <span class="margin-left-xs text-truncate">
     <span i18n="page title: faq" class="margin-left-xs">Support</span>
-  </span>
+  </span> -->
 </mat-toolbar>
 <div *ngIf="!isFaqFeature">
   <h1 i18n class="mat-title margin-top-xl text-center">
@@ -18,20 +14,10 @@
   </h1>
 </div>
 <mat-sidenav-container class="sidenav-content-min-112">
-  <mat-sidenav
-    class="sidenav"
-    [mode]="mode$ | async"
-    [(opened)]="sideNavBarOpened"
-    *ngIf="faqConfigs?.length > 1"
-  >
+  <mat-sidenav class="sidenav" [mode]="mode$ | async" [(opened)]="sideNavBarOpened" *ngIf="faqConfigs?.length > 1">
     <mat-nav-list *ngFor="let faqConfig of faqConfigs; let i = index">
-      <a
-        mat-list-item
-        aria-label="Faqs Related"
-        [ngClass]="{ 'mat-toolbar active-tab': i === selectedTabIndex }"
-        (click)="sideNavOnClick(i)"
-        >{{ faqConfig.groupName }}</a
-      >
+      <a mat-list-item aria-label="Faqs Related" [ngClass]="{ 'mat-toolbar active-tab': i === selectedTabIndex }"
+        (click)="sideNavOnClick(i)">{{ faqConfig.groupName }}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -54,11 +40,8 @@
       <p class="mat-body-2">
         {{ selectedTabDatum.heading }}
       </p>
-      <p
-        *ngIf="selectedTabDatum.value"
-        class="mat-body-1"
-        [innerHTML]="selectedTabDatum.value | pipeSafeSanitizer: 'html'"
-      >
+      <p *ngIf="selectedTabDatum.value" class="mat-body-1"
+        [innerHTML]="selectedTabDatum.value | pipeSafeSanitizer: 'html'">
         <!-- [innerHTML]="selectedTabDatum.value | pipeSafeSanitizer: 'html'" -->
       </p>
     </section>

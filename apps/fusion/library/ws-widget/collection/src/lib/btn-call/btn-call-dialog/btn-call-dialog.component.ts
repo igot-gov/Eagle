@@ -31,7 +31,7 @@ export class BtnCallDialogComponent implements OnInit {
     textArea.select()
     document.execCommand('copy')
     document.body.removeChild(textArea)
-    this.snackBar.open(`${this.data.phone} : ${successMsg}`)
+    this.snackBar.open(`${this.data.phone} : ${successMsg}`, 'X')
     this.raiseTelemetry('copyToClipboard')
   }
 

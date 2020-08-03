@@ -1,39 +1,100 @@
 {
   "maxDepth": 4,
   "actionButtons": {
-    "enabled": true,
+    "enabled": false,
     "buttons": [
-      { "title": "Save", "event": "save", "icon": "save" },
-      { "title": "Preview", "event": "preview", "icon": "remove_red_eye" },
+      {
+        "title": "Save",
+        "event": "save",
+        "icon": "save"
+      },
+      {
+        "title": "Preview",
+        "event": "preview",
+        "icon": "remove_red_eye"
+      },
       {
         "title": "Send For Review",
         "event": "push",
         "icon": "send",
-        "conditions": { "fit": [{ "status": ["Draft", "Live"] }] }
+        "conditions": {
+          "fit": [
+            {
+              "status": [
+                "Draft",
+                "Live"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "title": "Review",
+        "event": "push",
+        "icon": "remove_red_eye",
+        "conditions": {
+          "fit": [
+            {
+              "status": [
+                "Review",
+                "QualityReview"
+              ]
+            }
+          ]
+        }
       },
       {
         "title": "Publish",
         "event": "push",
         "icon": "publish",
-        "conditions": { "fit": [{ "status": ["Reviewed"] }] }
+        "conditions": {
+          "fit": [
+            {
+              "status": [
+                "Reviewed",
+                "InReview"
+              ]
+            }
+          ]
+        }
       },
-      { "title": "Delete", "event": "delete", "icon": "delete" },
-      { "title": "Full Screen", "event": "fullscreen", "icon": "fullscreen" }
+      {
+        "title": "Delete",
+        "event": "delete",
+        "icon": "delete"
+      },
+      {
+        "title": "Full Screen",
+        "event": "fullscreen",
+        "icon": "fullscreen"
+      }
     ]
   },
   "stepper": [
-    { "title": "Choose Type", "disabled": true },
-    { "title": "Details", "disabled": false }
+    {
+      "title": "Choose Type",
+      "disabled": true
+    },
+    {
+      "title": "Details",
+      "disabled": false
+    }
   ],
   "languageBar": false,
   "childrenConfig": {
     "Course": {
-      "minChildren": 1,
+      "minChildren": 2,
       "maxChildren": 0,
       "childTypes": [
         {
           "conditions": {
-            "fit": [{ "contentType": ["Collection"] }]
+            "fit": [
+              {
+                "contentType": [
+                  "Collection"
+                ]
+              }
+            ]
           },
           "position": "",
           "minimum": 0,
@@ -42,7 +103,11 @@
         {
           "conditions": {
             "fit": [
-              { "contentType": ["Resource"], "categoryType": ["Assessment"] }
+              {
+                "contentType": [
+                  "Resource"
+                ]
+              }
             ]
           },
           "position": "n",
@@ -51,9 +116,18 @@
         }
       ],
       "allowCreation": true,
-      "allowedCreationType": ["resource", "web", "upload", "collection"],
+      "allowedCreationType": [
+        "resource",
+        "web",
+        "upload",
+        "assessment",
+        "collection"
+      ],
       "searchFilter": {
-        "contentType": ["Collection", "Resource"]
+        "contentType": [
+          "Collection",
+          "Resource"
+        ]
       }
     },
     "Collection": {
@@ -62,15 +136,13 @@
       "childTypes": [
         {
           "conditions": {
-            "fit": [{ "contentType": ["Collection"] }]
-          },
-          "position": "",
-          "minimum": 0,
-          "maximum": 0
-        },
-        {
-          "conditions": {
-            "fit": [{ "contentType": ["Resource"] }]
+            "fit": [
+              {
+                "contentType": [
+                  "Resource"
+                ]
+              }
+            ]
           },
           "position": "",
           "minimum": 0,
@@ -78,9 +150,17 @@
         }
       ],
       "allowCreation": true,
-      "allowedCreationType": ["resource", "web", "upload", "collection"],
+      "allowedCreationType": [
+        "resource",
+        "web",
+        "upload",
+        "assessment"
+      ],
       "searchFilter": {
-        "contentType": ["Collection", "Resource"]
+        "contentType": [
+          "Collection",
+          "Resource"
+        ]
       }
     },
     "Learning Path": {
@@ -89,7 +169,13 @@
       "childTypes": [
         {
           "conditions": {
-            "fit": [{ "contentType": ["Course"] }]
+            "fit": [
+              {
+                "contentType": [
+                  "Course"
+                ]
+              }
+            ]
           },
           "position": "",
           "minimum": 2,
@@ -97,12 +183,22 @@
         }
       ],
       "allowCreation": false,
-      "allowedCreationType": ["course"],
+      "allowedCreationType": [
+        "course"
+      ],
       "searchFilter": {
-        "contentType": ["Course"],
-        "status": ["Live"]
+        "contentType": [
+          "Course"
+        ],
+        "status": [
+          "Live"
+        ]
       }
     }
   },
-  "enabledRole": ["author", "reviewer", "publisher"]
+  "enabledRole": [
+    "author",
+    "reviewer",
+    "publisher"
+  ]
 }

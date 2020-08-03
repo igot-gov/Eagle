@@ -91,8 +91,7 @@
     <div class="flex flex-wrapped flex-between margin-horizontal-s margin-top-xs">
       <div>
         <mat-form-field class="width-expand margin-top-s" appearance="fill" floatLabel="never">
-          <button matTooltipPosition="before" matTooltip="Search" (click)="handleSearchQuery(query)" mat-icon-button
-            matSuffix>
+          <button (click)="handleSearchQuery(query)" mat-icon-button matSuffix>
             <mat-icon>search</mat-icon>
           </button>
           <mat-label i18n>Search users</mat-label>

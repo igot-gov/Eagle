@@ -31,7 +31,7 @@ export class BtnSocialLikeComponent implements OnInit {
 
   updateLike(invalidUserMsg: string) {
     if (this.postCreatorId === this.userId) {
-      this.snackBar.open(invalidUserMsg)
+      this.snackBar.open(invalidUserMsg, 'X')
       return
     }
     if (this.isUpdating) {

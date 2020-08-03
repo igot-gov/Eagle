@@ -54,11 +54,11 @@ export class NotificationSettingsComponent implements OnInit {
       this.settingsSvc.updateNotificationSettings(this.notificationSettings).subscribe(
         _ => {
           this.notificationsUpdateStatus = 'done'
-          this.snackBar.open(successMsg)
+          this.snackBar.open(successMsg, 'X')
         },
         _ => {
           this.notificationsUpdateStatus = 'error'
-          this.snackBar.open(errorMsg)
+          this.snackBar.open(errorMsg, 'X')
         },
       )
     }
