@@ -16,7 +16,7 @@
     // width: 220px;
     margin-right: 12px;
     cursor: pointer;
-    border-radius: 8px 0 0 8px;
+    border-radius: 8px 0 0 0px;
   }
   @media only screen and (max-width:469px) {
     flex-direction: column;
@@ -43,10 +43,20 @@
   .card-thumbnail {
     height: 100%;
     // width: 220px;
-    margin-right: 12px;
+    // margin-right: 12px;
     cursor: pointer;
-    border-radius: 8px 0 0 8px;
+    // border-radius: 8px 0 0 8px;
   }
+  .img-container {
+    position: relative;
+    margin-right: 12px;
+    ws-widget-content-progress{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 5px;
+    }
+  } 
 
   @media only screen and (max-width:469px) {
     flex-direction: column;
@@ -198,6 +208,29 @@
 .w-auto{
   width: auto;
 }
+
+.progress-bar-thin{
+  height:5px !important;
+  ::ng-deep.mat-progress-bar{
+    height: 5px;
+  }
+  ::ng-deep.theme-igot.day-mode .mat-progress-bar-buffer{
+    background-color: transparent !important ;
+  }
+}
+
+.progress-bar-thin  ::ng-deep.mat-progress-bar{
+  height: 5px;
+}
+
+.progress-bar-thin ::ng-deep.theme-igot.day-mode .mat-progress-bar-buffer{
+  background-color: transparent !important;
+}
+.progress-bar-thin ::ng-deep.theme-igot.day-mode .mat-progress-bar-background{
+  fill: transparent;
+}
+
+
 
 @media only screen and (max-width:469px) {
   .children-container {
