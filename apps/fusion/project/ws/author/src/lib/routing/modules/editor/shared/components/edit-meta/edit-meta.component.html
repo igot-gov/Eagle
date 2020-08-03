@@ -155,13 +155,16 @@
                   <p class="margin-remove-bottom" i18n="Title label|Label which explains the user to enter title"
                     [ngClass]="{ required: checkCondition('name', 'required') }">
                     Banner Colour
+
                   </p>
                   <div appearance="outline" class="margin-top-xs">
                     <!-- [ngClass]="{ 'mat-form-field-invalid': showError('name') }"> -->
-                    <mat-radio-group id="bannerColors" formControlName="bannerColor"
+                    <mat-radio-group id="bannerColors" formControlName="posterImage"
                       class="flex flex-1 example-radio-group">
                       <mat-radio-button color="banner" class="example-radio-button" *ngFor="let banner of banners"
-                        [checked]="bannerColor || banner.isDefault" [value]="banner.color">
+                        [checked]="(contentForm.controls.posterImage.value &&
+                              contentForm.controls.posterImage.value === banner.color)  ||
+                              (banner.isDefault && !contentForm.controls.posterImage.value)" [value]="banner.color">
                         <span class="bannerSelect" [ngStyle]="{ background: banner.color}">&nbsp;</span>
                       </mat-radio-button>
                     </mat-radio-group>
