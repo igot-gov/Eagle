@@ -45,6 +45,9 @@
     "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/html",
+    "additionalMeta": {
+      "isExternal": true
+    },
     "hasRole": [
       "content-creator",
       "editor",

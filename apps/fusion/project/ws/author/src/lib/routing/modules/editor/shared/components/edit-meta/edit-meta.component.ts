@@ -337,6 +337,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.parentContent ? this.contentService.getUpdatedMeta(this.parentContent) : undefined,
     )
     this.contentMeta.name = contentMeta.name === 'Untitled Content' ? '' : contentMeta.name
+    // this.contentMeta.posterImage = contentMeta.posterImage
     this.canExpiry = this.contentMeta.expiryDate !== '99991231T235959+0000'
     if (this.canExpiry) {
       this.contentMeta.expiryDate =
@@ -545,6 +546,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             }+0000`
         }
         Object.keys(currentMeta).map(v => {
+          console.log(v)
+
           if (
             JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
             JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
@@ -570,6 +573,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
+      console.log(ex)
+
       this.snackBar.open('Please Save Parent first and refresh page.')
 
     }
@@ -730,7 +735,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
                   this.canUpdate = false
                   this.contentForm.controls.appIcon.setValue(data.artifactURL)
                   this.contentForm.controls.thumbnail.setValue(data.artifactURL)
-                  this.contentForm.controls.posterImage.setValue(data.artifactURL)
+                  // this.contentForm.controls.posterImage.setValue(data.artifactURL)
                   this.canUpdate = true
                   this.storeData()
                   this.snackBar.openFromComponent(NotificationComponent, {
