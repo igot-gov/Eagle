@@ -56,11 +56,11 @@
       "enabled": true
     },
     "sourceShortName": {
-      "displayName": "Source Short Name",
+      "displayName": "Source Name",
       "enabled": true
     },
     "structure": {
-      "displayName": "structure",
+      "displayName": "Structure",
       "enabled": true
     }
   },
