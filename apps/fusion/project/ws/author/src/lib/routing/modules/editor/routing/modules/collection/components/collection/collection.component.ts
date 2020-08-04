@@ -551,7 +551,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
   action(type: string) {
     switch (type) {
       case 'next':
-        this.viewMode = 'meta'
+        // this.viewMode = 'meta'
         break
 
       case 'save':
