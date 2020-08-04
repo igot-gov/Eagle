@@ -39,5 +39,6 @@ import { RomanConvertPipe } from '@ws/author/src/lib/routing/modules/editor/rout
   ],
   providers: [QuizStoreService],
   entryComponents: [OpenPlainCkEditorComponent],
+  exports: [QuizComponent],
 })
 export class QuizModule { }

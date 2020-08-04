@@ -21,7 +21,7 @@
 
     <mat-sidenav-content class="pl-6 pr-6 ml-6">
       <div>
-        {{viewMode}}, {{newViewMode}}
+        <!-- {{viewMode}}, {{newViewMode}} -->
         <!-- <ws-auth-edit-meta [parentContent]="currentParentId" [stage]="1" [class.hidden]="viewMode == 'meta'"
           [isSubmitPressed]="isSubmitPressed" (data)="action($event)"></ws-auth-edit-meta>
         <ws-auth-url-upload [isCollectionEditor]="true" *ngIf="viewMode === 'curate'"
@@ -47,7 +47,7 @@
                 here
               </a>
             </div>
-            <ws-auth-general-details *ngIf="viewMode === 'quiz'" (data)="action($event)"></ws-auth-general-details>
+            <ws-auth-quiz *ngIf="viewMode === 'quiz'" (data)="action($event)"></ws-auth-quiz>
           </mat-step>
           <mat-step state="create1">
             <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>

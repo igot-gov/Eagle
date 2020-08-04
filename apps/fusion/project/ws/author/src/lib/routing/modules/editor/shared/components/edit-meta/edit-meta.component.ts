@@ -983,7 +983,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       appIcon: [],
       artifactUrl: [],
       audience: [],
-      bannerColor: [],
       body: [],
       catalogPaths: [],
       category: [],
@@ -1062,7 +1061,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     })
 
-    this.contentForm.valueChanges.pipe(debounceTime(500)).subscribe(() => {
+    this.contentForm.valueChanges.pipe(debounceTime(700)).subscribe(() => {
       if (this.canUpdate) {
         this.storeData()
       }

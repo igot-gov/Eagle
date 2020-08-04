@@ -317,7 +317,7 @@
             <div class="flex flex-end margin-top-l margin-bottom-s margin-right-l">
               <button mat-raised-button type="button" matStepperNext
                 class="text-white ws-mat-primary-background text-white margin-right-m"
-                (click)="data.emit('save');formNext(1)">
+                (click)="data.emit('saveAndNext')">
                 <b class="text-white" i18n>Save and Proceed</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -633,7 +633,7 @@
             <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
               <button mat-raised-button type="button" matStepperNext
                 class="text-white ws-mat-primary-background text-white margin-right-m"
-                (click)="data.emit('save');formNext(2)">
+                (click)="data.emit('saveAndNext')">
                 <b class="text-white" i18n>Save and Proceed</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -1064,7 +1064,8 @@
                 <div class="grid"></div>
                 <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
                   <button mat-raised-button type="button"
-                    class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
+                    class="text-white ws-mat-primary-background text-white margin-right-m"
+                    (click)="data.emit('saveAndNext')">
                     <b class="text-white" i18n>Save</b>
                   </button>
                   <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
