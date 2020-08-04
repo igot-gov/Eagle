@@ -546,8 +546,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             }+0000`
         }
         Object.keys(currentMeta).map(v => {
-          console.log(v)
-
           if (
             JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
             JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
@@ -573,10 +571,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
-      console.log(ex)
-
       this.snackBar.open('Please Save Parent first and refresh page.')
-
     }
   }
 

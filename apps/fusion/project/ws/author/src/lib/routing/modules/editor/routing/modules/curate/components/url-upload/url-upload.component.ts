@@ -122,7 +122,7 @@ export class UrlUploadComponent implements OnInit {
       })
     } else {
       this.storeData()
-      this.data.emit('next')
+      this.data.emit('saveAndNext')
     }
   }
 
