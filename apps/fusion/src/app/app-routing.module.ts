@@ -189,6 +189,11 @@ const routes: Routes = [
       import('./routes/signup/signup.module').then(u => u.SignupModule),
   },
   {
+    path: 'app/auto-signup/:id',
+    loadChildren: () =>
+      import('./routes/signup-auto/signup-auto.module').then(u => u.SignupAutoModule),
+  },
+  {
     path: 'app/toc',
     loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
     canActivate: [GeneralGuard],
