@@ -1,7 +1,7 @@
 <div [ngClass]="{
     'banner-container': bannerUrl,
     'ws-mat-primary-lite-background-on-day': !bannerUrl
-  }" [style.backgroundImage]="bannerUrl" [ngStyle]="{'background-color': content?.color || '#F8AD1E'}">
+  }" [style.backgroundImage]="bannerUrl" [ngStyle]="{'background-color': content?.posterImage || '#F8AD1E'}">
   <div class="header-synopsis fixed-width" [ngClass]="{ 'header-synopsis-gradient': bannerUrl }" *ngIf="content">
     <div class="header-actions top">
       <div class="action-btns">
