@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { SignupAutoService } from './signup-auto.service';
+import { SignupAutoService } from './signup-auto.service'
 
 describe('SignupAutoService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({}))
 
   it('should be created', () => {
-    const service: SignupAutoService = TestBed.get(SignupAutoService);
-    expect(service).toBeTruthy();
-  });
-});
+    const service: SignupAutoService = TestBed.get(SignupAutoService)
+    expect(service).toBeTruthy()
+  })
+})

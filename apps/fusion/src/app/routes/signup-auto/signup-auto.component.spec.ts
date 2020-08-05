@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SignupAutoComponent } from './signup-auto.component';
+import { SignupAutoComponent } from './signup-auto.component'
 
 describe('SignupAutoComponent', () => {
-  let component: SignupAutoComponent;
-  let fixture: ComponentFixture<SignupAutoComponent>;
+  let component: SignupAutoComponent
+  let fixture: ComponentFixture<SignupAutoComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SignupAutoComponent ]
+      declarations: [SignupAutoComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SignupAutoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(SignupAutoComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
