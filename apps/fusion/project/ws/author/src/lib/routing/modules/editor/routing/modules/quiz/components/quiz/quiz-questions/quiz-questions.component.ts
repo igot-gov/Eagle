@@ -13,11 +13,11 @@ import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/compon
 import { ErrorParserComponent } from '@ws/author/src/lib/modules/shared/components/error-parser/error-parser.component'
 
 import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
-import { QuizStoreService } from '../../services/store.service'
+import { QuizStoreService } from '../../../services/store.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { UploadService } from '@ws/author/src/lib/routing/modules/editor/shared/services/upload.service'
 import { EditorService } from '@ws/author/src/lib/routing/modules/editor/services/editor.service'
-import { QuizResolverService } from '../../services/resolver.service'
+import { QuizResolverService } from '../../../services/resolver.service'
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 // import {
@@ -43,14 +43,14 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
-  selector: 'ws-auth-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  selector: 'ws-auth-quiz-questions',
+  templateUrl: './quiz-questions.component.html',
+  styleUrls: ['./quiz-questions.component.scss'],
   providers: [QuizResolverService, {
     provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
   }],
 })
-export class QuizComponent implements OnInit, OnDestroy {
+export class QuizQusetionsComponent implements OnInit, OnDestroy {
 
   selectedQuizIndex!: number
   allContents: NSContent.IContentMeta[] = []

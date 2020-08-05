@@ -2,8 +2,9 @@
 <mat-card class="flex flex-1 flex-column">
   <ng-container>
     <div class="flex mt-8 margin-bottom-xl top-heading flex-Update ws-mat-default-text">
-      <div>
+      <div class="flex flex-1">
         <h1 class="margin-remove-bottom title"><span i18n>Upload Content </span></h1>
+        <ng-container [ngTemplateOutlet]="top"></ng-container>
       </div>
       <div class="margin-top-s new-inner-div mat-app-background">
         <h3 class="ws-mat-default-text text-center">File Type : PDF, MP3, MP4 (Upto 200 mb)</h3>
@@ -68,7 +69,7 @@
               </p>
             </div>
             <!-- <span class="spacer"></span> -->
-            <button type="button" matStepperNext mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
+            <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
               [disabled]="!enableUpload" (click)="triggerUpload()">
               <div class="flex flex-middle justify-center">
                 <mat-icon class="text-white">file_upload</mat-icon>
@@ -229,4 +230,8 @@
       </div>
     </button>
   </div>
+</ng-template>
+
+<ng-template #top>
+  <ws-auth-options [currentContent]="currentContent" (action)="data.emit($event)"></ws-auth-options>
 </ng-template>

@@ -428,6 +428,9 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       case 'close':
         this.router.navigateByUrl('/author/home')
         break
+      case 'fulls':
+        this.fullScreenToggle()
+        break
     }
   }
 
@@ -793,5 +796,17 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
         this.metaContentService.originalContent[this.currentId].creatorContacts.find(v => v.id === this.accessService.userId)
       )
   }
-
+  fullScreenToggle = () => {
+    const doc: any = document
+    const elm: any = doc.getElementById('web-container')
+    if (elm.requestFullscreen) {
+      !doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen()
+    } else if (elm.mozRequestFullScreen) {
+      !doc.mozFullScreen ? elm.mozRequestFullScreen() : doc.mozCancelFullScreen()
+    } else if (elm.msRequestFullscreen) {
+      !doc.msFullscreenElement ? elm.msRequestFullscreen() : doc.msExitFullscreen()
+    } else if (elm.webkitRequestFullscreen) {
+      !doc.webkitIsFullscreen ? elm.webkitRequestFullscreen() : doc.webkitCancelFullscreen()
+    }
+  }
 }
