@@ -38,11 +38,33 @@ export function checkUniqueKey(uniqueKey: any, callback: (arg0: Error, arg1: any
             const key = result.rows[0]
             callback(err, key)
         } else {
-            callback(new Error('No records'), null)
+            callback(new Error('checkUniqueKey: No records'), null)
         }
         // Run next function in series
         clientConnect.shutdown()
     })
+}
+
+// tslint:disable-next-line: no-any
+export function checkUUIDMaster(uniqueKey: any): Promise<any> {
+    try {
+        const clientConnect = new cassandraDriver.Client(cassandraClientOptions)
+        return new Promise((resolve, reject) => {
+            clientConnect.execute(`SELECT * FROM ${CASSANDRA_KEYSPACE}.eagle_uuid_master
+            WHERE key=${uniqueKey}`, (error, result) => {
+                if (!error && result && result.rows.length > 0) {
+                    const key = result.rows[0]
+                    resolve(key)
+                } else {
+                    reject(false)
+                }
+                clientConnect.shutdown()
+            })
+        })
+    } catch (err) {
+        logError('DB Request to open user profile status failed')
+        throw err
+    }
 }
 
 // tslint:disable-next-line: no-any
@@ -54,10 +76,32 @@ export function updateUniqueKey(uniqueKey: any, callback: (arg0: Error, arg1: an
             if (result) {
                 callback(err, result)
             } else {
-                callback(new Error('No records'), null)
+                callback(new Error('updateUniqueKey: No records'), null)
             }
             clientConnect.shutdown()
         })
+}
+
+// tslint:disable-next-line: no-any
+export function updateUUIDMaster(uniqueKey: any, email: string): Promise<any> {
+    try {
+        const clientConnect = new cassandraDriver.Client(cassandraClientOptions)
+        return new Promise((resolve, reject) => {
+            clientConnect.execute(`UPDATE ${CASSANDRA_KEYSPACE}.eagle_uuid_master
+            SET active = false WHERE key = ${uniqueKey} and email = '${email}'`,
+                (_err, result) => {
+                    if (result) {
+                        resolve(result)
+                    } else {
+                        reject(new Error('updateUUIDMaster: No records'))
+                    }
+                    clientConnect.shutdown()
+                })
+        })
+    } catch (err) {
+        logError('DB Request to open user profile status failed')
+        throw err
+    }
 }
 
 // tslint:disable-next-line: no-any

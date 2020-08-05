@@ -23,7 +23,7 @@
         "KEYCLOAK_REALM": "wingspan",
         "KEYCLOAK_ADMIN_PASSWORD": "admin",
         "KEYCLOAK_ADMIN_USERNAME": "admin",
-        "KC_NEW_USER_DEFAULT_PWD": "user123",
+        "KC_NEW_USER_DEFAULT_PWD": "User@123",
         "LA_HOST_PROXY": "http://IP-ADDR",
         "NAVIGATOR_JSON_HOST": "http://IP-ADDR:3007/web-hosted/navigator/json",
         "NODE_API_BASE_2_CLIENT_ID": "admin",
