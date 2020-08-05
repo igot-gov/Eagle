@@ -19,6 +19,7 @@ import { UploadService } from './services/upload.service'
 import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
 import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
+import { OptionsComponent } from './components/options/options.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html
     BaseComponent,
     EditMetaV2Component,
     LiveHtmlEditorComponent,
+    OptionsComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +57,7 @@ import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html
     AuthEditorActionButtonsComponent,
     AuthPickerComponent,
     LiveHtmlEditorComponent,
+    OptionsComponent,
   ],
   entryComponents: [AuthPickerComponent],
   providers: [UploadService],

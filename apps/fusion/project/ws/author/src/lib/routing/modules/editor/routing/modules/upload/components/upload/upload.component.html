@@ -82,7 +82,7 @@
       </ws-auth-edit-meta>
     </div>
   </div> -->
-
+  <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
   <mat-horizontal-stepper labelPosition="bottom" #stepper id="upload-container">
     <mat-step state="phone">
       <ng-template matStepLabel>
@@ -125,20 +125,20 @@
       <mat-icon class="ws-mat-default-text">check_circle</mat-icon>
     </ng-template>
   </mat-horizontal-stepper>
+</div>
 
+<ng-template #top>
+  <ws-auth-options [currentContent]="currentContent"></ws-auth-options>
+</ng-template>
 
-
+<!-- <ng-template #top>
   <div class="buttons margin-top-xl">
-    <!-- button-grid  -->
     <div class="cursor-pointer margin-right-xxs" (click)="toggleSettingButtons()">
       <button mat-button class="padding-remove ws-mat-auth-tool-option mat-app-background settings">
         <mat-icon *ngIf="showSettingButtons">close</mat-icon>
         <mat-icon *ngIf="!showSettingButtons">settings</mat-icon>
         <span> {{!showSettingButtons?'Options' :'Close'}}</span>
       </button>
-      <!-- <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons">
-        Close
-      </p> -->
     </div>
     <ng-container *ngIf="showSettingButtons">
       <div class="button-grid cursor-pointer" (click)="action('preview')">
@@ -200,12 +200,13 @@
           Fullscreen
         </p>
       </div>
-      <!-- <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
-            <mat-icon class="text-white small-icon ws-mat-primary-text">crop_portrait</mat-icon>
-          </button> -->
+   <button mat-icon-button class=" mat-elevation-z5 small-button padding-remove  margin-top-m">
+              <mat-icon class="text-white small-icon ws-mat-primary-text">crop_portrait</mat-icon>
+            </button>
     </ng-container>
   </div>
-</div>
+</ng-template> -->
+
 
 <div *ngIf="previewMode">
   <mat-icon (click)="closePreview()" class="close-preview">

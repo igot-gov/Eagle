@@ -38,7 +38,6 @@ export class UploadComponent implements OnInit, OnDestroy {
   disableCursor = false
   previewMode = false
   canTransCode = true
-  showSettingButtons = true
   isChanged = false
   isSubmitPressed = false
   mimeTypeRoute = ''
@@ -56,7 +55,6 @@ export class UploadComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.showSettingButtons = this.accessService.rootOrg === 'client1'
     this.allLanguages = this.authInitService.ordinals.subTitles
     this.canTransCode =
       this.authInitService.ordinals.canTransCode &&
@@ -401,10 +399,6 @@ export class UploadComponent implements OnInit, OnDestroy {
     this.previewMode = false
   }
 
-  toggleSettingButtons() {
-    this.showSettingButtons = !this.showSettingButtons
-  }
-
   triggerSave(meta: NSContent.IContentMeta, id: string) {
     const requestBody: NSApiRequest.IContentUpdate = {
       hierarchy: {},
@@ -502,6 +496,10 @@ export class UploadComponent implements OnInit, OnDestroy {
 
       case 'close':
         this.router.navigateByUrl('/author/home')
+        break
+
+      case 'fulls':
+        this.fullScreenToggle()
         break
     }
   }

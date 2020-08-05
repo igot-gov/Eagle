@@ -601,6 +601,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
         break
 
       case 'fullscreen':
+      case 'fulls':
         this.fullScreenToggle()
         break
 

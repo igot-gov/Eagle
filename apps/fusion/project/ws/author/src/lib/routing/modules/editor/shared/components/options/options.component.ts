@@ -1,0 +1,81 @@
+import { Component, OnInit, OnDestroy, AfterViewInit, EventEmitter, Input, Output } from '@angular/core'
+import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
+import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
+import { NSContent } from '@ws/author/src/lib/interface/content'
+
+@Component({
+  selector: 'ws-auth-options',
+  templateUrl: './options.component.html',
+  styleUrls: ['./options.component.scss'],
+})
+export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
+  contents: NSContent.IContentMeta[] = []
+  @Input() currentContent = ''
+  @Output() action = new EventEmitter<string>()
+  showSettingButtons = false
+  constructor(
+    private accessService: AccessControlService,
+    private contentService: EditorContentService,
+  ) { }
+
+  ngAfterViewInit() {
+
+  }
+
+  ngOnInit() {
+
+  }
+
+  toggleSettingButtons() {
+    this.showSettingButtons = !this.showSettingButtons
+  }
+
+  isPublisherSame(): boolean {
+    const publisherDetails =
+      this.contentService.getUpdatedMeta(this.currentContent).publisherDetails || []
+    return publisherDetails.find(v => v.id === this.accessService.userId) ? true : false
+  }
+
+  isDirectPublish(): boolean {
+    return (
+      ['Draft', 'Live'].includes(this.contentService.originalContent[this.currentContent].status) &&
+      this.isPublisherSame()
+    )
+  }
+
+  getAction(): string {
+    if (
+      ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
+        !this.accessService.authoringConfig.isMultiStepFlow) &&
+      this.accessService.rootOrg.toLowerCase() === 'client1'
+    ) {
+      return 'publish'
+    }
+    if (
+      this.contentService.originalContent[this.currentContent].contentType === 'Knowledge Artifact'
+    ) {
+      return 'publish'
+    }
+    switch (this.contentService.originalContent[this.currentContent].status) {
+      case 'Draft':
+      case 'Live':
+        return 'sendForReview'
+      case 'InReview':
+        return 'review'
+      case 'Reviewed':
+        return 'publish'
+      default:
+        return 'sendForReview'
+    }
+  }
+  canDelete() {
+    return this.accessService.hasRole(['editor', 'admin']) ||
+      (['Draft', 'Live'].includes(this.contentService.originalContent[this.currentContent].status) &&
+        this.contentService.originalContent[this.currentContent].creatorContacts.find(v => v.id === this.accessService.userId)
+      )
+  }
+  ngOnDestroy() {
+
+  }
+
+}

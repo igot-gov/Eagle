@@ -1,5 +1,8 @@
 <mat-card class="margin-top-xl">
-  <mat-card-title class="m-auto ws-mat-default-text">Attach a Link</mat-card-title>
+  <mat-card-title class="m-auto ws-mat-default-text">
+    <span>Attach a Link</span>
+    <ng-container [ngTemplateOutlet]="top"></ng-container>
+  </mat-card-title>
   <mat-card-content class="card-contan">
     <div class="mobile-break mat-app-background">
       <form class="flex flex-1 flex-column" [formGroup]="urlUploadForm">
@@ -83,3 +86,7 @@
     </div> -->
   </mat-card-footer>
 </mat-card>
+
+<ng-template #top>
+  <ws-auth-options [currentContent]="currentContent" (action)="data.emit($event)"></ws-auth-options>
+</ng-template>

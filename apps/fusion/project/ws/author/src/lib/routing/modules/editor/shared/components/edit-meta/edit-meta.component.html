@@ -4,7 +4,8 @@
       <ng-template [ngSwitchCase]="1">
         <mat-card class="margin-top-xl">
           <mat-card-title class="ml-1 ws-mat-default-text">
-            Basic Details
+            <span>Basic Details</span>
+            <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
           <mat-card-content class="card-contan">
             <div class="mobile-break mat-app-background">
@@ -317,7 +318,7 @@
             <div class="flex flex-end margin-top-l margin-bottom-s margin-right-l">
               <button mat-raised-button type="button" matStepperNext
                 class="text-white ws-mat-primary-background text-white margin-right-m"
-                (click)="data.emit('save');formNext(1)">
+                (click)="data.emit('saveAndNext')">
                 <b class="text-white" i18n>Save and Proceed</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -344,7 +345,8 @@
 
         <mat-card class="margin-top-xl ">
           <mat-card-title class="m-auto ws-mat-default-text">
-            Classification
+            <span>Classification</span>
+            <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
           <mat-card-content class="card-contan m-auto">
             <div class="mobile-break mat-app-background">
@@ -633,7 +635,7 @@
             <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
               <button mat-raised-button type="button" matStepperNext
                 class="text-white ws-mat-primary-background text-white margin-right-m"
-                (click)="data.emit('save');formNext(2)">
+                (click)="data.emit('saveAndNext')">
                 <b class="text-white" i18n>Save and Proceed</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -661,7 +663,8 @@
         <mat-card class="margin-top-xl">
           <mat-card class="">
             <mat-card-title class="m-auto ws-mat-default-text">
-              Intended for
+              <span>Intended for</span>
+              <ng-container [ngTemplateOutlet]="top"></ng-container>
             </mat-card-title>
             <mat-card-content class="mobile-break mat-app-background">
               <div class="margin-top-xl margin-right-l">
@@ -1064,7 +1067,8 @@
                 <div class="grid"></div>
                 <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
                   <button mat-raised-button type="button"
-                    class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
+                    class="text-white ws-mat-primary-background text-white margin-right-m"
+                    (click)="data.emit('saveAndNext')">
                     <b class="text-white" i18n>Save</b>
                   </button>
                   <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -1094,3 +1098,7 @@
     </ng-container>
   </form>
 </div>
+
+<ng-template #top>
+  <ws-auth-options [currentContent]="contentMeta.identifier" (action)="data.emit($event)"></ws-auth-options>
+</ng-template>
