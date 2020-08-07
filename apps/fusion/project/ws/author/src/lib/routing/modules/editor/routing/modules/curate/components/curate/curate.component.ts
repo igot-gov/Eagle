@@ -34,7 +34,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 export class CurateComponent implements OnInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []
   currentContent = ''
-  currentStep = 2
+  currentStep = 1
   allLanguages!: any[]
   disableCursor = false
   previewMode = false
@@ -143,7 +143,7 @@ export class CurateComponent implements OnInit, OnDestroy {
     this.contentService.changeActiveCont.next(content.identifier)
   }
 
-  save() {
+  save(next?: string) {
     const updatedContent = this.contentService.upDatedContent[this.currentContent] || {}
     if (Object.keys(updatedContent).length) {
       this.isChanged = true
@@ -157,6 +157,9 @@ export class CurateComponent implements OnInit, OnDestroy {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
+          if (next) {
+            this.action(next)
+          }
         },
         error => {
           if (error.status === 409) {
@@ -190,6 +193,9 @@ export class CurateComponent implements OnInit, OnDestroy {
         },
         duration: NOTIFICATION_TIME * 1000,
       })
+      if (next) {
+        this.action(next)
+      }
     }
   }
 
@@ -438,6 +444,10 @@ export class CurateComponent implements OnInit, OnDestroy {
 
   action(type: string) {
     switch (type) {
+      case 'back':
+        this.currentStep = 1
+        break
+
       case 'next':
         this.currentStep += 1
         break
@@ -448,6 +458,10 @@ export class CurateComponent implements OnInit, OnDestroy {
 
       case 'save':
         this.save()
+        break
+
+      case 'saveAndNext':
+        this.save('next')
         break
 
       case 'push':

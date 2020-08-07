@@ -401,6 +401,9 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   action(type: string) {
     switch (type) {
+      case 'back':
+        this.currentStep = 1
+        break
       case 'next':
         this.currentStep += 1
         break

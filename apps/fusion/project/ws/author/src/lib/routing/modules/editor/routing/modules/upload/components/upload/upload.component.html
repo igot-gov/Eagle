@@ -108,7 +108,7 @@
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
       </ng-template> -->
-  <ws-auth-edit-meta *ngIf="currentStep > 1" [stage]="currentStep" [nextAction]="'done'"
+  <ws-auth-edit-meta *ngIf="currentStep > 1" type="UPLOAD" [stage]="currentStep" [nextAction]="'done'"
     [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
   </ws-auth-edit-meta>
   <!-- </mat-step>
