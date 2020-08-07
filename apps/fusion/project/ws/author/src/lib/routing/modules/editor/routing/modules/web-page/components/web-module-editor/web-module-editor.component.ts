@@ -62,7 +62,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   allLanguages: any[] = []
   activeContentSubscription?: Subscription
   changedContent = false
-  currentStep = 2
+  currentStep = 1
   previewMode = false
   mimeTypeRoute: any
   submitPressed = false
@@ -415,6 +415,9 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       case 'save':
         this.save()
         break
+      case 'saveAndNext':
+        this.save('next')
+        break
       case 'push':
         this.takeAction()
         break
@@ -698,16 +701,16 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
   }
 
   customStepper(step: number) {
-    this.currentStep = step
-    // if (step === 3 && this.currentStep === 2) {
-    //   if (this.userData[this.currentId].pages.length) {
-    //     this.currentStep = step
-    //   } else {
-    //     this.showNotification(Notify.NO_CONTENT)
-    //   }
-    // } else {
-    //   this.currentStep = step
-    // }
+    // this.currentStep = step
+    if (step === 2 && this.currentStep === 1) {
+      if (this.userData[this.currentId].pages.length) {
+        this.currentStep = step
+      } else {
+        this.showNotification(Notify.NO_CONTENT)
+      }
+    } else {
+      this.currentStep = step
+    }
   }
 
   changeContent(data: NSContent.IContentMeta) {
@@ -754,7 +757,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       )
   }
 
-  save() {
+  save(next?: string) {
     const needSave = Object.keys((this.metaContentService.upDatedContent[this.currentId] || {})).length
       || this.changedContent
     if (this.userData[this.currentId].pages.length > 0 && (needSave)) {
@@ -764,6 +767,9 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
           () => {
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
+            if (next) {
+              this.action('next')
+            }
           },
           () => {
             this.loaderService.changeLoad.next(false)

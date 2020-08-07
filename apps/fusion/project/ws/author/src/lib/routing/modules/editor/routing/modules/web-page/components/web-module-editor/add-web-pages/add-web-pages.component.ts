@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core'
+import { Component, OnInit, ViewChild, OnDestroy, EventEmitter, Output } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { Router, ActivatedRoute } from '@angular/router'
 import { UploadAudioComponent } from '../../upload-audio/upload-audio.component'
@@ -39,6 +39,7 @@ import { IAudioObj } from '../../../interface/page-interface'
   styleUrls: ['./add-web-pages.component.scss'],
 })
 export class AddWebPagesComponent implements OnInit, OnDestroy {
+  @Output() data = new EventEmitter<string>()
   userData: { [key: string]: WebModuleData } = {}
   currentId = ''
   selectedPage = 0
@@ -398,12 +399,16 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     switch (type) {
       case 'next':
         this.currentStep += 1
+        this.data.emit('next')
         break
       case 'preview':
         this.preview()
         break
       case 'save':
         this.save()
+        break
+      case 'saveAndNext':
+        this.save('next')
         break
       case 'push':
         this.takeAction()
@@ -744,7 +749,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       )
   }
 
-  save() {
+  save(next?: string) {
     const needSave = Object.keys((this.metaContentService.upDatedContent[this.currentId] || {})).length
       || this.changedContent
     if (this.userData[this.currentId].pages.length > 0 && (needSave)) {
@@ -754,6 +759,9 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
           () => {
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
+            if (next) {
+              this.action(next)
+            }
           },
           () => {
             this.loaderService.changeLoad.next(false)
@@ -770,6 +778,9 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
         this.showNotification(Notify.WEB_MODULE_MIN_PAGE_REQUIRED)
       } else {
         this.showNotification(Notify.UP_TO_DATE)
+        if (next) {
+          this.action(next)
+        }
       }
     }
   }

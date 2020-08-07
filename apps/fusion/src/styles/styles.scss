@@ -560,3 +560,9 @@ h3.shepherd-title {
     //    .mat-radio-container {}
   }
 }
+
+#editmetagrp {
+  mat-tab-header {
+    display: none;
+  }
+}

@@ -22,6 +22,7 @@ import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
+
 @Component({
   selector: 'ws-auth-upload',
   templateUrl: './upload.component.html',
@@ -33,7 +34,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 export class UploadComponent implements OnInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []
   currentContent = ''
-  currentStep = 2
+  currentStep = 1
   allLanguages!: any[]
   disableCursor = false
   previewMode = false
@@ -42,6 +43,12 @@ export class UploadComponent implements OnInit, OnDestroy {
   isSubmitPressed = false
   mimeTypeRoute = ''
   isMobile = false
+  workFlow = [{ isActive: false, isCompleted: true, name: "Upload", step: 1 },
+  { isActive: true, isCompleted: false, name: "Basic Details", step: 2 },
+  { isActive: false, isCompleted: true, name: "Classification", step: 3 },
+  { isActive: false, isCompleted: true, name: "Intended for", step: 4 }
+  ]
+
   constructor(
     private authInitService: AuthInitService,
     private contentService: EditorContentService,
@@ -89,6 +96,7 @@ export class UploadComponent implements OnInit, OnDestroy {
       return
     }
     if (step === 1) {
+      this.currentStep = 1
       this.disableCursor = true
     } else if (
       this.currentStep === 2 &&
@@ -105,7 +113,6 @@ export class UploadComponent implements OnInit, OnDestroy {
       this.currentStep = step
     }
   }
-
   createInAnotherLanguage(language: string) {
     this.loaderService.changeLoad.next(true)
     const meta = { artifactUrl: '' }
@@ -446,6 +453,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     switch (type) {
       case 'next':
         this.currentStep += 1
+        // this.goForward()
         break
 
       case 'preview':

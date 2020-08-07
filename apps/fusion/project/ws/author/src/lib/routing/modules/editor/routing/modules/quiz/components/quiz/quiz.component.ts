@@ -65,7 +65,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   disableCursor = false
   resourceType = ''
   isValid = true
-  currentStep = 2
+  currentStep = 1
   snackbarRef?: MatSnackBarRef<NotificationComponent>
   previewMode = false
   mimeTypeRoute: any
@@ -157,11 +157,11 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   customStepper(step: number) {
-    if (step === 1) {
-      this.disableCursor = true
-    } else {
-      this.currentStep = step
-    }
+    // if (step === 1) {
+    //   this.disableCursor = true
+    // } else {
+    this.currentStep = step
+    // }
   }
 
   changeContent(data: NSContent.IContentMeta) {
@@ -274,7 +274,7 @@ export class QuizComponent implements OnInit, OnDestroy {
     )
   }
 
-  save() {
+  save(next?: string) {
     this.canValidate = true
     const hasMinLen = (this.resourceType !== ASSESSMENT && this.questionsArr.length)
       || (this.resourceType === ASSESSMENT && this.questionsArr.length >= this.quizConfig.minQues)
@@ -291,6 +291,9 @@ export class QuizComponent implements OnInit, OnDestroy {
             this.canValidate = false
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
+            if (next) {
+              this.action(next)
+            }
           },
           () => {
             this.canValidate = false
@@ -406,6 +409,9 @@ export class QuizComponent implements OnInit, OnDestroy {
         break
       case 'save':
         this.save()
+        break
+      case 'saveAndNext':
+        this.save('next')
         break
       case 'push':
         this.takeAction()
