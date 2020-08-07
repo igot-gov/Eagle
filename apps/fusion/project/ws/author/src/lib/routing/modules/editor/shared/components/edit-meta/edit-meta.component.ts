@@ -43,15 +43,15 @@ import {
   switchMap,
   map,
 } from 'rxjs/operators'
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
+// import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
   selector: 'ws-auth-edit-meta',
   templateUrl: './edit-meta.component.html',
   styleUrls: ['./edit-meta.component.scss'],
-  providers: [{
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
-  }],
+  // providers: [{
+  //   provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
+  // }],
 })
 export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   contentMeta!: NSContent.IContentMeta
@@ -59,6 +59,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
   @Input() stage = 1
+  @Input() type = ''
   location = CONTENT_BASE_STATIC
   selectable = true
   removable = true
@@ -149,6 +150,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    this.typeCheck()
     this.ordinals = this.authInitService.ordinals
     this.audienceList = this.ordinals.audience
     this.jobProfileList = this.ordinals.jobProfile
@@ -317,6 +319,36 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       switchMap(value => this.interestSvc.fetchAutocompleteInterestsV2(value)),
     )
   }
+  typeCheck() {
+    if (this.type) {
+      let dataName = ''
+      switch (this.type) {
+        case 'URL':
+          dataName = 'Attach Link'
+          break
+        case 'UPLOAD':
+          dataName = 'Upload'
+          break
+        case 'ASSE':
+          dataName = 'Assessment'
+          break
+        case 'WEB':
+          dataName = 'Web Pages'
+          break
+
+        default:
+          break
+      }
+      if (dataName) {
+        this.workFlow.push({
+          isActive: false,
+          isCompleted: true,
+          name: dataName,
+          step: -1,
+        })
+      }
+    }
+  }
 
   optionSelected(keyword: string) {
     this.keywordsCtrl.setValue(' ')
@@ -339,12 +371,16 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     clearInterval(this.timer)
   }
   customStepper(step: number) {
-    this.selectedIndex = step
-    const oldStrip = this.workFlow.find(i => i.isActive)
-    this.workFlow[step].isActive = true
-    if (oldStrip && oldStrip.step >= 0) {
-      this.workFlow[oldStrip.step].isActive = false
-      this.workFlow[oldStrip.step].isCompleted = true
+    if (step >= 0) {
+      this.selectedIndex = step
+      const oldStrip = this.workFlow.find(i => i.isActive)
+      this.workFlow[step].isActive = true
+      if (oldStrip && oldStrip.step >= 0) {
+        this.workFlow[oldStrip.step].isActive = false
+        this.workFlow[oldStrip.step].isCompleted = true
+      }
+    } else {
+      this.data.emit('back')
     }
   }
   private set content(contentMeta: NSContent.IContentMeta) {

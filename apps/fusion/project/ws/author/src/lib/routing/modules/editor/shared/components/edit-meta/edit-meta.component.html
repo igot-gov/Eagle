@@ -1,10 +1,9 @@
 <div id="edit-meta" class="margin-top-xs">
   <div class="progress" *ngIf="workFlow && workFlow.length > 0">
     <div class="progress-step" [class.active]="state.isActive" [class.complete]="state.isCompleted"
-      *ngFor="let state of workFlow; let i = index" (click)="customStepper(state.step)">
+      *ngFor="let state of workFlow | orderBy: 'step': 'asc' ; let i=index" (click)="customStepper(state.step)">
       <ws-auth-status-display [needStyle]="false" [status]="state.processName"></ws-auth-status-display>
       <div class="info" *ngIf="state.name">
-
         <span *ngIf="state.isActive" class="ws-mat-default-text font-bold">{{ state.name }}</span>
         <span *ngIf="!state.isActive" class="ws-mat-default-text">{{ state.name }}</span>
       </div>
@@ -19,9 +18,10 @@
       <mat-tab>
         <mat-card class="margin-top-m">
           <mat-card-title class="ml-1 ws-mat-default-text">
-            Basic Details
+            <span>Basic Details</span>
+            <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
-          <mat-card-content class="card-contan">
+          <mat-card-content class="card-contan margin-top-m">
             <div class="mobile-break mat-app-background">
               <div class="flex flex-column">
                 <div class="logos">
@@ -360,9 +360,10 @@
       <mat-tab>
         <mat-card class="margin-top-m">
           <mat-card-title class="m-auto ws-mat-default-text">
-            Classification
+            <span>Classification</span>
+            <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
-          <mat-card-content class="card-contan m-auto">
+          <mat-card-content class="card-contan m-auto margin-top-m">
             <div class="mobile-break mat-app-background">
               <p class="mat-h5 margin-top-s margin-left-xl flex-1" *ngIf="checkCondition('contentType', 'show')">
                 * Provide meta details. Depending on the content type, some properties are enabled or
@@ -678,9 +679,10 @@
         <mat-card class="margin-top-m">
           <mat-card class="">
             <mat-card-title class="m-auto ws-mat-default-text">
-              Intended for
+              <span>Intended for</span>
+              <ng-container [ngTemplateOutlet]="top"></ng-container>
             </mat-card-title>
-            <mat-card-content class="mobile-break mat-app-background">
+            <mat-card-content class="margin-top-m mobile-break mat-app-background">
               <div class="margin-top-xl margin-right-l">
                 <p class="mat-h5 margin-top-s margin-left-xl" *ngIf="checkCondition('audience', 'show')">
                   * Provide meta details. Depending on the content type, some properties are enabled or
@@ -1113,3 +1115,7 @@
     </mat-tab-group>
   </form>
 </div>
+
+<ng-template #top>
+  <ws-auth-options [currentContent]="contentMeta.identifier" (action)="action($event)"></ws-auth-options>
+</ng-template>
