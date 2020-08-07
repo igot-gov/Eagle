@@ -64,7 +64,7 @@
             ========================
             {{this.fileUploadForm.controls.artifactUrl.value}} -->
             <div class="flex flex-middle margin-top-xs padding-top-l">
-              <mat-checkbox [checked]="iprAccepted || currentContent.artifactUrl" (change)="iprChecked()">
+              <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()">
               </mat-checkbox>
               <p class="margin-left-xs margin-remove-bottom">
                 <span i18n>I have read and I agree with the </span>
