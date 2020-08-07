@@ -1117,5 +1117,5 @@
 </div>
 
 <ng-template #top>
-  <ws-auth-options [currentContent]="contentMeta.identifier" (action)="action($event)"></ws-auth-options>
+  <ws-auth-options [currentContent]="contentMeta.identifier" (action)="data.emit($event)"></ws-auth-options>
 </ng-template>
