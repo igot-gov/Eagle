@@ -60,15 +60,19 @@
             </div>
           </div>
           <div class="flex flex-column margin-top-m margin-bottom-xl">
+            <!-- {{iprAccepted}}
+            ========================
+            {{this.fileUploadForm.controls.artifactUrl.value}} -->
             <div class="flex flex-middle margin-top-xs padding-top-l">
-              <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
+              <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()">
+              </mat-checkbox>
               <p class="margin-left-xs margin-remove-bottom">
                 <span i18n>I have read and I agree with the </span>
                 <span class="ws-mat-default-text font-weight-bold cursor-pointer" (click)="showIpr()" i18n>IPR
                   Declaration</span>
               </p>
             </div>
-            <!-- <span class="spacer"></span> -->
+            <!-- <span class="spacer"></span> matStepperNext-->
             <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
               [disabled]="!enableUpload" (click)="triggerUpload()">
               <div class="flex flex-middle justify-center">
@@ -235,3 +239,9 @@
 <ng-template #top>
   <ws-auth-options [currentContent]="currentContent" (action)="data.emit($event)"></ws-auth-options>
 </ng-template>
+
+<!-- <div *ngIf="previewMode">
+  <mat-icon (click)="closePreview()" class="close-preview">
+    arrow_back</mat-icon>
+  <ws-auth-viewer [identifier]="currentContent" [mimeTypeRoute]="mimeTypeRoute"></ws-auth-viewer>
+</div> -->

@@ -43,11 +43,15 @@ import {
   switchMap,
   map,
 } from 'rxjs/operators'
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 @Component({
   selector: 'ws-auth-edit-meta',
   templateUrl: './edit-meta.component.html',
   styleUrls: ['./edit-meta.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false },
+  }],
 })
 export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   contentMeta!: NSContent.IContentMeta
@@ -83,7 +87,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   regionList: any[] = []
   accessPathList: any[] = []
   infoType = ''
-  isSiemens = false
   fetchTagsStatus: 'done' | 'fetching' | null = null
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
   selectedIndex = 0
@@ -99,6 +102,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   isEditEnabled = false
   banners = [{ color: '#003F5C', isDefault: true }, { color: '#59468B', isDefault: false },
   { color: '#185F49', isDefault: false }, { color: '#126489', isDefault: false }]
+
+  workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
+  { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
+  { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
+
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
   @ViewChild('publisherDetailsView', { static: false }) publisherDetailsView!: ElementRef
@@ -127,7 +135,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private loader: LoaderService,
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
-  ) { }
+  ) {
+    // console.log("Parent component", this.parentContent)
+
+  }
 
   ngAfterViewInit() {
     this.ref.detach()
@@ -138,7 +149,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    this.isSiemens = this.accessService.rootOrg.toLowerCase() === 'siemens'
     this.ordinals = this.authInitService.ordinals
     this.audienceList = this.ordinals.audience
     this.jobProfileList = this.ordinals.jobProfile
@@ -328,7 +338,15 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ref.detach()
     clearInterval(this.timer)
   }
-
+  customStepper(step: number) {
+    this.selectedIndex = step
+    const oldStrip = this.workFlow.find(i => i.isActive)
+    this.workFlow[step].isActive = true
+    if (oldStrip && oldStrip.step >= 0) {
+      this.workFlow[oldStrip.step].isActive = false
+      this.workFlow[oldStrip.step].isCompleted = true
+    }
+  }
   private set content(contentMeta: NSContent.IContentMeta) {
     this.contentMeta = contentMeta
     this.isEditEnabled = this.contentService.hasAccess(
@@ -568,6 +586,43 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             }
           }
         })
+        // Quick FIX
+        if (this.stage >= 1) {
+          delete meta.artifactUrl
+          //   delete meta.size
+          //   if (meta.creatorDetails && meta.creatorDetails.length === 0)
+          //     delete meta.creatorDetails
+          //   if (meta.trackContacts && meta.trackContacts.length === 0)
+          //     delete meta.trackContacts
+          //   if (meta.creatorContacts && meta.creatorContacts.length === 0)
+          //     delete meta.creatorContacts
+          //   if (meta.publisherDetails && meta.publisherDetails.length === 0)
+          //     delete meta.publisherDetails
+          // delete meta.duration
+        }
+        // if (this.stage >= 2) {
+        //   delete meta.name
+        //   delete meta.body
+        //   delete meta.subTitle
+        //   delete meta.description
+        //   delete meta.thumbnail
+        //   delete meta.creatorLogo
+        //   delete meta.creatorThumbnail
+        //   delete meta.creatorPosterImage
+        //   delete meta.posterImage
+        //   delete meta.sourceName
+        //   delete meta.categoryType
+        // }
+        // if (this.stage >= 3) {
+        //   delete meta.complexityLevel
+        //   delete meta.idealScreenSize
+        //   delete meta.learningMode
+        //   delete meta.visibility
+        //   delete meta.exclusiveContent
+        //   delete meta.keywords
+        //   delete meta.catalogPaths
+        // }
+
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
@@ -581,7 +636,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   formNext(index: number) {
-    this.selectedIndex = index
+    // this.selectedIndex = index
+    this.customStepper(index)
   }
 
   addKeyword(event: MatChipInputEvent): void {

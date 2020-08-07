@@ -2,12 +2,12 @@
   [class.ws-mat-primary-text]="!isInvalid" [matMenuTriggerFor]="menu" (click)="$event.stopPropagation()" i18n-aria-label
   aria-label="Menu for content">more_vert</mat-icon>
 <mat-menu #menu="matMenu">
-  <!-- <button *ngIf="node.category === 'Resource'" [class.op500]="!canEdit" [matMenuTriggerFor]="edit" mat-menu-item
+  <button *ngIf="node.category === 'Resource'" [class.op500]="!canEdit" [matMenuTriggerFor]="edit" mat-menu-item
     [disabled]="!canEdit || (metaEditDisabled && contentEditDisabled)">
     <mat-icon aria-hidden="false" class="node-icon ws-mat-primary-text" i18n-aria-label aria-label="Edit content">edit
     </mat-icon>
     <ng-container i18n>Edit</ng-container>
-  </button> -->
+  </button>
   <button *ngIf="node.category === 'Resource'" mat-menu-item (click)="click('preview')">
     <mat-icon aria-hidden="false" class="node-icon ws-mat-primary-text" i18n-aria-label aria-label="Preview">
       remove_red_eye</mat-icon>

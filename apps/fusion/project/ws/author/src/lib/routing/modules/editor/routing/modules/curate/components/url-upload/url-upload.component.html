@@ -1,4 +1,4 @@
-<mat-card class="margin-top-xl">
+<mat-card class="flex">
   <mat-card-title class="m-auto ws-mat-default-text">
     <span>Attach a Link</span>
     <ng-container [ngTemplateOutlet]="top"></ng-container>
@@ -68,8 +68,7 @@
   <mat-card-actions>
     <div class="flex flex-center margin-bottom-xl">
       <!-- matStepperNext -->
-      <button type="button" mat-button matStepperNext class="ws-mat-primary-background margin-top-m m-auto"
-        (click)="submit()">
+      <button type="button" mat-button class="ws-mat-primary-background margin-top-m m-auto" (click)="submit()">
         <mat-icon class="text-white">file_upload</mat-icon>
         <b class="text-white" i18n>Save and Proceed</b>
       </button>

@@ -15,7 +15,7 @@ export class QuizResolverService {
     if (meta.trackContacts && meta.trackContacts.length) {
       meta.trackContacts.forEach(v => {
         if (v.id === this.accessControl.userId) {
-          returnVal = false
+          returnVal = true
         }
       })
     }

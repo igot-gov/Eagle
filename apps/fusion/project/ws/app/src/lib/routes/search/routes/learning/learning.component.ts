@@ -69,7 +69,7 @@ export class LearningComponent implements OnInit, OnDestroy {
   }
   routeComp = ''
   translatedFilters: any = {}
-  isIntranetAllowedSettings = false
+  isIntranetAllowedSettings = true
   prefChangeSubscription: Subscription | null = null
 
   filtersResponse: IFilterUnitResponse[] = []
