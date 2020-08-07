@@ -103,9 +103,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   banners = [{ color: '#003F5C', isDefault: true }, { color: '#59468B', isDefault: false },
   { color: '#185F49', isDefault: false }, { color: '#126489', isDefault: false }]
 
-  workFlow = [{ isActive: true, isCompleted: false, name: "Basic Details", step: 0 },
-  { isActive: false, isCompleted: false, name: "Classification", step: 1 },
-  { isActive: false, isCompleted: false, name: "Intended for", step: 2 }]
+  workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
+  { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
+  { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
 
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
@@ -136,7 +136,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
   ) {
-    console.log("Parent component", this.parentContent)
+    // console.log("Parent component", this.parentContent)
 
   }
 
@@ -340,11 +340,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   customStepper(step: number) {
     this.selectedIndex = step
-    const old_strip = this.workFlow.find(i => i.isActive)
+    const oldStrip = this.workFlow.find(i => i.isActive)
     this.workFlow[step].isActive = true
-    if (old_strip && old_strip.step >= 0) {
-      this.workFlow[old_strip.step].isActive = false
-      this.workFlow[old_strip.step].isCompleted = true
+    if (oldStrip && oldStrip.step >= 0) {
+      this.workFlow[oldStrip.step].isActive = false
+      this.workFlow[oldStrip.step].isCompleted = true
     }
   }
   private set content(contentMeta: NSContent.IContentMeta) {
@@ -586,7 +586,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
             }
           }
         })
-        //Quick FIX
+        // Quick FIX
         if (this.stage >= 1) {
           delete meta.artifactUrl
           //   delete meta.size
@@ -598,8 +598,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
           //     delete meta.creatorContacts
           //   if (meta.publisherDetails && meta.publisherDetails.length === 0)
           //     delete meta.publisherDetails
-
-
           // delete meta.duration
         }
         // if (this.stage >= 2) {

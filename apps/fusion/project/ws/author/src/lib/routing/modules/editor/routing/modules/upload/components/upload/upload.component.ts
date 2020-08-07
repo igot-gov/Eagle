@@ -21,8 +21,6 @@ import { mergeMap, tap, catchError } from 'rxjs/operators'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
-
-
 @Component({
   selector: 'ws-auth-upload',
   templateUrl: './upload.component.html',
@@ -43,12 +41,11 @@ export class UploadComponent implements OnInit, OnDestroy {
   isSubmitPressed = false
   mimeTypeRoute = ''
   isMobile = false
-  workFlow = [{ isActive: false, isCompleted: true, name: "Upload", step: 1 },
-  { isActive: true, isCompleted: false, name: "Basic Details", step: 2 },
-  { isActive: false, isCompleted: true, name: "Classification", step: 3 },
-  { isActive: false, isCompleted: true, name: "Intended for", step: 4 }
+  workFlow = [{ isActive: false, isCompleted: true, name: 'Upload', step: 1 },
+  { isActive: true, isCompleted: false, name: 'Basic Details', step: 2 },
+  { isActive: false, isCompleted: true, name: 'Classification', step: 3 },
+  { isActive: false, isCompleted: true, name: 'Intended for', step: 4 },
   ]
-
   constructor(
     private authInitService: AuthInitService,
     private contentService: EditorContentService,
