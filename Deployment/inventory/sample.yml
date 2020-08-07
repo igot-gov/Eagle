@@ -91,6 +91,8 @@ keycloak_username: "<admin user who has create user permissions>" # Repeated ent
 keycloak_password: "<password for admin user>" # "<admin user who has create user permissions>"
 keycloak_host: "<hostname or ip address of Keycloak server>" 
 keycloak_port: "<Port on which Keycloak is running>"
+keycloak_admin_user: "<admin user email>" #admin@domain.org
+keycloak_admin_pass: "<password for admin user>"
 keycloak_domain: "http://{{ keycloak_host }}:{{ keycloak_port }}/auth/"
 
 # Swarm variables
