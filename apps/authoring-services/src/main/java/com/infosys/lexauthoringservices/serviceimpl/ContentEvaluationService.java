@@ -8,7 +8,9 @@
 package com.infosys.lexauthoringservices.serviceimpl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lexauthoringservices.exception.BadRequestException;
 import com.infosys.lexauthoringservices.model.CriteriaModel;
 import com.infosys.lexauthoringservices.model.EvaluatorModel;
 import com.infosys.lexauthoringservices.model.QualifierModel;
@@ -81,6 +83,35 @@ public class ContentEvaluationService {
 			RestStatus status = indexerService.addEntity(esIndex, esIndexType, evaluatorModel.getIdentifier(), indexDocument);
 
 			response.put("status", status);
+			response.put("id", evaluatorModel.getIdentifier());
+			response.put("Message", "Successfully operation");
+
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+
+		return response;
+	}
+
+	public Response searchV2(EvaluatorModel evaluatorModel) throws Exception{
+		Response response = new Response();
+		try{
+
+			//request all fields
+			logger.info("evaluatorModel : {}",mapper.writeValueAsString(evaluatorModel));
+
+			if ((null == evaluatorModel.getUserId() || evaluatorModel.getUserId().isEmpty()) && (null == evaluatorModel.getResourceId() || evaluatorModel.getResourceId().isEmpty())) {
+				throw new BadRequestException("Required fields, userId or resourceId is not valid ");
+			}
+			// post the data into ES index
+			Map<String, Object> searchQuery = new HashMap<>();
+			searchQuery.put("userId", evaluatorModel.getUserId());
+			searchQuery.put("resourceId", evaluatorModel.getResourceId());
+
+			JsonNode searchResponse= indexerService.search(esIndex, searchQuery);
+
+			response.put("resources", searchResponse);
 			response.put("Message", "Successfully operation");
 
 		} catch (Exception e){

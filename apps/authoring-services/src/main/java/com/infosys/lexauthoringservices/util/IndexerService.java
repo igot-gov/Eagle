@@ -97,6 +97,37 @@ public class IndexerService {
         return response.status();
     }
 
+    public JsonNode search(String index, Map<String, Object> searchQuery) throws IOException {
+        BoolQueryBuilder query = buildQuery(searchQuery);
+        logger.info("Search query " + new ObjectMapper().writeValueAsString(query));
+
+
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(query);
+        SearchRequest searchRequest = new SearchRequest(index).source(sourceBuilder);
+
+        ArrayNode resultArray = JsonNodeFactory.instance.arrayNode();
+        ObjectMapper mapper = new ObjectMapper();
+        SearchResponse searchResponse = esClient.search(searchRequest, RequestOptions.DEFAULT);
+        for (SearchHit hit : searchResponse.getHits()) {
+            JsonNode node = mapper.readValue(hit.getSourceAsString(), JsonNode.class);
+            resultArray.add(node);
+        }
+        logger.debug("Total search records found " + resultArray.size());
+
+        return resultArray;
+
+    }
+
+    private BoolQueryBuilder buildQuery(Map<String,Object> searchQuery) {
+        BoolQueryBuilder query = QueryBuilders.boolQuery();
+
+        for ( Map.Entry<String, Object> filter : searchQuery.entrySet()) {
+            String field = filter.getKey();
+            Object value = filter.getValue();
+            if(value != null) query = query.must(QueryBuilders.matchQuery(field, value));
+        }
+        return query;
+    }
     public Map<String, Object> readEntity(String index, String indexType, String entityId) throws IOException {
         logger.info("readEntity starts with index {} and entityId {}", index, entityId);
         GetResponse response = null;

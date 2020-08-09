@@ -36,6 +36,15 @@ public class ContentEvaluationController {
 		return new ResponseEntity<>(contentEvaluationService.addV2(evaluatorModel), HttpStatus.OK);
 	}
 
+	@PostMapping("/fetch/v2")
+	public ResponseEntity<Response> search(@RequestBody EvaluatorModel evaluatorModel, @RequestHeader String rootOrg,
+												   @RequestHeader String org) throws Exception {
+		evaluatorModel.setRootOrg(rootOrg);
+		evaluatorModel.setOrg(org);
+		System.out.println("request : "+new ObjectMapper().writeValueAsString(evaluatorModel));
+		return new ResponseEntity<>(contentEvaluationService.searchV2(evaluatorModel), HttpStatus.OK);
+	}
+
 	@PostMapping("/add")
 	public ResponseEntity<Response> add(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
 										@RequestHeader String org) throws Exception {
