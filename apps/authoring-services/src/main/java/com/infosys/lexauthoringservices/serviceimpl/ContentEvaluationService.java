@@ -7,17 +7,32 @@
 
 package com.infosys.lexauthoringservices.serviceimpl;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lexauthoringservices.model.CriteriaModel;
+import com.infosys.lexauthoringservices.model.EvaluatorModel;
+import com.infosys.lexauthoringservices.model.QualifierModel;
 import com.infosys.lexauthoringservices.model.Response;
 import com.infosys.lexauthoringservices.model.cassandra.*;
 import com.infosys.lexauthoringservices.repository.cassandra.bodhi.ContentEvaluationRepository;
+import com.infosys.lexauthoringservices.repository.cassandra.bodhi.evaluation.EvaluationCriteria;
+import com.infosys.lexauthoringservices.repository.cassandra.bodhi.evaluation.ScoreQualifier;
+import com.infosys.lexauthoringservices.repository.cassandra.bodhi.evaluation.ScoreQualifierRepository;
+import com.infosys.lexauthoringservices.repository.cassandra.bodhi.evaluation.ScoreCriteriaRepository;
+import com.infosys.lexauthoringservices.util.ComputeScores;
+import com.infosys.lexauthoringservices.util.IndexerService;
 import com.infosys.lexauthoringservices.util.LexConstants;
+import org.elasticsearch.rest.RestStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ContentEvaluationService {
@@ -32,10 +47,51 @@ public class ContentEvaluationService {
 	@Autowired
 	ContentEvaluationRepository contentEvaluationRepository;
 
+	@Autowired
+	ScoreCriteriaRepository scoreCriteriaRepository;
+
+	@Autowired
+	ScoreQualifierRepository scoreQualifierRepository;
+
+	@Autowired
+	IndexerService indexerService;
+
+	private ObjectMapper mapper = new ObjectMapper();
+	@Value("${infosys.es.score.index}")
+	private String esIndex;
+
+	@Value("${infosys.es.score.index.type}")
+	private String esIndexType;
 	
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private Logger logger = LoggerFactory.getLogger(ContentEvaluationService.class);
 
-	
+
+	public Response addV2(EvaluatorModel evaluatorModel) throws Exception{
+		Response response = new Response();
+		try{
+
+			// doComputations of all fields
+			ComputeScores computeScores = new ComputeScores(scoreCriteriaRepository, scoreQualifierRepository);
+			computeScores.compute(evaluatorModel);
+			logger.info("evaluatorModel : {}",mapper.writeValueAsString(evaluatorModel));
+
+			// post the data into ES index
+			Map<String, Object> indexDocument = mapper.convertValue(evaluatorModel, new TypeReference<Map<String, Object>>() {});
+			RestStatus status = indexerService.addEntity(esIndex, esIndexType, evaluatorModel.getIdentifier(), indexDocument);
+
+			response.put("status", status);
+			response.put("Message", "Successfully operation");
+
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+
+		return response;
+	}
+
+
 	public Response upsert(Map<String, Object> requestBody) throws Exception {
 		Response response = new Response();
 		String rootOrg = null;

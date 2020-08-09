@@ -7,6 +7,8 @@
 
 package com.infosys.lexauthoringservices.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lexauthoringservices.model.EvaluatorModel;
 import com.infosys.lexauthoringservices.model.Response;
 import com.infosys.lexauthoringservices.serviceimpl.ContentEvaluationService;
 import com.infosys.lexauthoringservices.util.LexConstants;
@@ -15,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
@@ -23,7 +26,16 @@ public class ContentEvaluationController {
 
 	@Autowired
 	ContentEvaluationService contentEvaluationService;
-	
+
+	@PostMapping("/add/v2")
+	public ResponseEntity<Response> add(@RequestBody EvaluatorModel evaluatorModel, @RequestHeader String rootOrg,
+										@RequestHeader String org) throws Exception {
+		evaluatorModel.setRootOrg(rootOrg);
+		evaluatorModel.setOrg(org);
+		System.out.println("request : "+new ObjectMapper().writeValueAsString(evaluatorModel));
+		return new ResponseEntity<>(contentEvaluationService.addV2(evaluatorModel), HttpStatus.OK);
+	}
+
 	@PostMapping("/add")
 	public ResponseEntity<Response> add(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
 										@RequestHeader String org) throws Exception {

@@ -7,6 +7,7 @@
 
 package com.infosys.lexauthoringservices.model.cassandra;
 
+import org.hibernate.annotations.Formula;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
@@ -28,6 +29,15 @@ public class ContentEvaluation {
     private String description;
     @Column("items")
     private Map<String, String> items = new HashMap<>();
+
+    @Column("length")
+    private int length;
+
+    @Column("width")
+    private int width;
+
+    @Formula(" length * width ")
+    public long area;
 
     public ContentEvaluation(ContentEvaluationPrimaryKey contentEvaluationPrimaryKey){
         this.contentEvaluationPrimaryKey = contentEvaluationPrimaryKey;
