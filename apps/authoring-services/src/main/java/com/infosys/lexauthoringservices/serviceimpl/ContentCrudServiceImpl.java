@@ -1973,7 +1973,8 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 
 	private boolean allowedToDelete(Map<String, Object> boolMap, ContentNode node, String uuid,
 			Map<String, String> errorMap, String topStatus,Transaction tx,String rootOrg) throws Exception {
- 
+
+		Set<String> parentNodesIds = node.getParents().stream().map(r -> r.getGraphId()).collect(Collectors.toSet());
 		if((boolean) boolMap.get("isFirstCall")) {
 			if(node.getIdentifier().contains(".img")) {
 				//fetch original node parents and compare with 'node' if not same, do not allow 
@@ -1989,12 +1990,17 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 				
 				boolean equality = relParents.equals(orgRelParents);
 				if(!equality) {
-					throw new ConflictErrorException("cannot delete as original content parents different from .img node " + orgIdentifier, null);
+					Map<String, Set<String>> conflicts = new HashMap<>();
+					conflicts.put("originalParent", relParents.stream().map(r -> r.getGraphId()).collect(Collectors.toSet()));
+					conflicts.put("imgNodeParent", orgRelParents.stream().map(o -> o.getGraphId()).collect(Collectors.toSet()));
+					throw new ConflictErrorException("cannot delete as original content parents different from .img node " + orgIdentifier , conflicts);
 				}
 			}
 			else {
 				if(node.getParents().size() > 0) {
-					throw new ConflictErrorException("cannot delete content as it is reused", null);
+					Map<String, Set<String>> conflicts = new HashMap<>();
+					conflicts.put("ParentNodesIds", parentNodesIds);
+					throw new ConflictErrorException("cannot delete content as it is reused", conflicts);
 				}
 			}
 			
@@ -2014,7 +2020,7 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 //		}
 
 		if (!(boolean) boolMap.get("isFirstCall") && node.getParents().size() > 1) {
-			errorMap.put(node.getIdentifier(), "cannot delete content as it is reused");
+			errorMap.put(node.getIdentifier(), "cannot delete content as it is reused, parent nodes ids: ["+parentNodesIds+"]");
 			return false;
 		}
 
@@ -2039,9 +2045,9 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 				// child status is live
 				if (childStatus.equals(LexConstants.Status.Live.getStatus())) {
 					// cannot delete, no operation
-					errorMap.put(node.getIdentifier(),"Not deleting Content as parent is not Live while child is Live");
-					System.out.println("Not deleting Content as parent is not Live while child is Live");
-					logger.info("Not deleting Content as parent is not Live while child is Live");
+					errorMap.put(node.getIdentifier(),"Not deleting Content as parent is not Live while child is Live, parent nodes ["+parentNodesIds+"]");
+					//System.out.println("Not deleting Content as parent is not Live while child is Live, parent nodes ["+parentNodesIds+"]");
+					logger.info("Not deleting Content as parent is not Live while child is Live, parent nodes ["+parentNodesIds+"]");
 					return false;
 				}
 			}
