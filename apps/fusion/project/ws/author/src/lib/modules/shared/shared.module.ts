@@ -59,6 +59,8 @@ import { DraftDialogComponent } from './components/draft-dialog/draft-dialog.com
 import { ShowHideToolTipDirective } from './directives/show-hide-tool-tip.directive'
 import { StatusTrackComponent } from './components/status-track/status-track.component'
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component'
+import { StatusContentDisplayComponent } from './components/status-content-display/status-content-display.component'
+import { OrderByPipe } from './components/status-content-display/order-by-pipe'
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     ShowHideToolTipDirective,
     StatusTrackComponent,
     FeedbackFormComponent,
+    StatusContentDisplayComponent,
+    OrderByPipe,
   ],
   imports: [
     CommonModule,
@@ -169,6 +173,8 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     ShowHideToolTipDirective,
     StatusTrackComponent,
     FeedbackFormComponent,
+    StatusContentDisplayComponent,
+    OrderByPipe,
   ],
   providers: [
     ApiService,
@@ -194,4 +200,4 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
     FeedbackFormComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

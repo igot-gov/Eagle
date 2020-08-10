@@ -1,15 +1,16 @@
 <div id="edit-meta" class="margin-top-xs">
-  <div class="progress" *ngIf="workFlow && workFlow.length > 0">
+  <!-- <div class="progress" *ngIf="workFlow && workFlow.length > 0">
     <div class="progress-step" [class.active]="state.isActive" [class.complete]="state.isCompleted"
       *ngFor="let state of workFlow | orderBy: 'step': 'asc' ; let i=index" (click)="customStepper(state.step)">
-      <ws-auth-status-display [needStyle]="false" [status]="state.processName"></ws-auth-status-display>
       <div class="info" *ngIf="state.name">
         <span *ngIf="state.isActive" class="ws-mat-default-text font-bold">{{ state.name }}</span>
         <span *ngIf="!state.isActive" class="ws-mat-default-text">{{ state.name }}</span>
       </div>
     </div>
-  </div>
-
+  </div> -->
+  <ws-auth-status-content-display *ngIf="workFlow && workFlow.length > 0" (selectes)="customStepper($event)"
+    [workFlow]="workFlow">
+  </ws-auth-status-content-display>
   <form [formGroup]="contentForm">
     <mat-tab-group id="editmetagrp" animationDuration="0ms" class="mat-tab-labels" mat-stretch-tabs
       [selectedIndex]="selectedIndex" (selectedTabChange)="selectedIndex = $event.index">

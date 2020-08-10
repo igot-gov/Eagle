@@ -20,7 +20,6 @@ import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
 import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
 import { OptionsComponent } from './components/options/options.component'
-import { OrderByPipe } from './components/edit-meta/order-by-pipe'
 
 @NgModule({
   declarations: [
@@ -37,7 +36,6 @@ import { OrderByPipe } from './components/edit-meta/order-by-pipe'
     EditMetaV2Component,
     LiveHtmlEditorComponent,
     OptionsComponent,
-    OrderByPipe,
   ],
   imports: [
     CommonModule,
@@ -60,7 +58,6 @@ import { OrderByPipe } from './components/edit-meta/order-by-pipe'
     AuthPickerComponent,
     LiveHtmlEditorComponent,
     OptionsComponent,
-    OrderByPipe,
   ],
   entryComponents: [AuthPickerComponent],
   providers: [UploadService],

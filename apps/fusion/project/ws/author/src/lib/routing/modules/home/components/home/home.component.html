@@ -55,17 +55,17 @@
           </mat-expansion-panel-header>
           <mat-list role="list" class="ws-mat-auth-exp">
             <mat-list-item role="listitem">
+              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'inreview' }"
+                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/send4Review.svg"
+                  id="draft" alt="draft" title="draft" />
+                <span class="font-white margin-left-xs"> Sent for review</span></a>
+            </mat-list-item>
+            <mat-list-item role="listitem">
               <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'draft' }" i18n>
                 <img class="ws-mat-default-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
                   alt="draft" title="draft" />
                 <span class="font-white margin-left-xs">Draft</span>
               </a>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'inreview' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
-                  alt="draft" title="draft" />
-                <span class="font-white margin-left-xs"> Sent for review</span></a>
             </mat-list-item>
             <mat-list-item role="listitem">
               <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'published' }"
@@ -75,8 +75,8 @@
             </mat-list-item>
             <mat-list-item role="listitem">
               <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'unpublished' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/unpublish.svg" id="draft"
-                  alt="draft" title="draft" />
+                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/Unpublished.svg"
+                  id="draft" alt="draft" title="draft" />
                 <span class="font-white margin-left-xs"> Unpublished</span></a>
             </mat-list-item>
             <mat-list-item *ngIf="allowExpiry" role="listitem">
@@ -105,8 +105,8 @@
             </mat-list-item>
             <mat-list-item role="listitem" *ngIf="allowReview">
               <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'review' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
-                  alt="draft" title="draft" />
+                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/send4Review.svg"
+                  id="draft" alt="draft" title="draft" />
                 <span class="font-white margin-left-xs"> Review</span></a>
             </mat-list-item>
             <mat-list-item role="listitem" *ngIf="allowPublish">
