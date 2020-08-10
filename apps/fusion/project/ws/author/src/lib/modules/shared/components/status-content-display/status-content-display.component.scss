@@ -1,0 +1,104 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+// Colours -----------------------------------------
+$grey: #00A9F4;
+$grey2: #00A9F4;
+$blue: #00A9F4;
+$green: #00A9F4;
+$white: #fff;
+
+
+
+// Progress Bar ------------------------------------
+.progress {
+  position: relative;
+  display: flex;
+
+  // Each Step on the Progress Bar
+  .progress-step {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+
+    // Hide the final step's progress bar
+    &:last-child:after {
+      display: none;
+    }
+
+    // Step's circle in default state
+    &:before {
+      content: '';
+      display: flex;
+      margin: 0 auto;
+      margin-bottom: 15px;
+      line-height: 30px;
+      width: 30px;
+      height: 30px;
+      background: $white;
+      border: 2px solid $grey2;
+      border-radius: 100%;
+      color: $white;
+    }
+
+    // Step's progress bar in default state
+    &:after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      width: 100%;
+      transition: width 1s ease-in;
+      height: 2px;
+      background: $grey2;
+      margin: 0px 15px;
+    }
+
+    // Step's active state
+    &.active {
+      &:before {
+        color: #fff;
+        text-align: center;
+        display: block;
+        content: '\25CF';
+        font-size: 2em;
+        color: $green;
+        //  -webkit-animation: glow 1s ease-in-out infinite alternate;
+        // -moz-animation: glow 1s ease-in-out infinite alternate;
+        // animation: glow 1s ease-in-out infinite alternate;
+      }
+    }
+
+    // Step's complete state
+    &.complete {
+
+      // Step's circle in complete state
+      &:before {
+        content: '\2714';
+        font-size: $size-xl;
+        color: $white;
+        background: $green;
+        border: 2px solid transparent;
+      }
+
+      // Step's progress bar in complete state
+      &:after {
+        background: $green;
+        animation: nextStep 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+@keyframes glow {
+  from {
+    border: 2px solid $blue;
+  }
+
+  to {
+    border: 2px solid $blue;
+    background-color: $blue;
+  }
+}

@@ -372,12 +372,16 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   customStepper(step: number) {
     if (step >= 0) {
-      this.selectedIndex = step
-      const oldStrip = this.workFlow.find(i => i.isActive)
-      this.workFlow[step].isActive = true
-      if (oldStrip && oldStrip.step >= 0) {
-        this.workFlow[oldStrip.step].isActive = false
-        this.workFlow[oldStrip.step].isCompleted = true
+      if (this.selectedIndex !== step) {
+        this.selectedIndex = step
+        const oldStrip = this.workFlow.find(i => i.isActive)
+
+        this.workFlow[step].isActive = true
+        this.workFlow[step].isCompleted = false
+        if (oldStrip && oldStrip.step >= 0) {
+          this.workFlow[oldStrip.step].isActive = false
+          this.workFlow[oldStrip.step].isCompleted = true
+        }
       }
     } else {
       this.data.emit('back')
