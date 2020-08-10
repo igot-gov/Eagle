@@ -4927,16 +4927,17 @@ public class ContentCrudServiceImpl implements ContentCrudService {
 
 	private boolean allowedToUnpublish(Map<String, Object> boolMap, ContentNode node, Map<String, Object> errorMap,
 			Transaction tx, String rootOrg,Boolean toUnpublish) {
-		
+		Set<String> parentNodesIds = node.getParents().stream().map(r -> r.getGraphId()).collect(Collectors.toSet());
+
 		if(toUnpublish) {
 			if((boolean) boolMap.get("isFirstCall")) {
 				if(node.getParents().size()>0) {
-					throw new BadRequestException("Cannot unpublish as parent exists");
+					throw new BadRequestException("Cannot unpublish as parent exists, parent node ids: ["+parentNodesIds+"]");
 				}
 			}
 			else {
 				if(node.getParents().size()>1) {
-					errorMap.put(node.getIdentifier(), "Cannot unpublish as it is being re-used");
+					errorMap.put(node.getIdentifier(), "Cannot unpublish as it is being re-used, parent node ids: ["+parentNodesIds+"]");
 					return false;
 				}
 			}
