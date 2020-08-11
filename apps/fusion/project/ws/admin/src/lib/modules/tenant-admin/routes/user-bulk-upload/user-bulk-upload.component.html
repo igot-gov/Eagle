@@ -12,6 +12,13 @@
                     <input type="file" class="mb-5" (change)="onFileChange($event)" />
                     <!-- <input type="submit" [disabled]="formGroup.invalid" value="upload" /> -->
                     <mat-error *ngIf="showFileError">Only .xlsx are accepted</mat-error>
+                    
+                    <mat-form-field appearance="outline" class="w-full margin-top-xs">
+                        <mat-select formControlName="department" i18n-placeholder placeholder="--Select Department Name--">
+                            <mat-option [value]="dept.department_name" *ngFor="let dept of departments">{{dept.department_name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                     <div class="mt-5 text-right">
                         <div *ngIf="displayLoader | async" class="pr-4 flex items-center justify-center">
                             <mat-spinner [diameter]="30"></mat-spinner>

@@ -22,9 +22,9 @@ export class FileService {
       return this.displayLoader$
     }
 
-    public upload(fileName: string, fileContent: string): Observable<any> {
+    public upload(fileName: string, fileContent: string, department: string): Observable<any> {
       this.displayLoader$.next(true)
-      return this.http.post<any>(API_ENDPOINTS.bulkUpload, { name: fileName, content: fileContent })
+      return this.http.post<any>(API_ENDPOINTS.bulkUpload, { department, name: fileName, content: fileContent })
       .pipe(finalize(() => this.displayLoader$.next(false)))
     }
 

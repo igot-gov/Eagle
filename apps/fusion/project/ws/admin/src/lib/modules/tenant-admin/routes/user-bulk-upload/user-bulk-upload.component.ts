@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
-import { FormBuilder, Validators } from '@angular/forms'
+import { FormBuilder, Validators, FormControl } from '@angular/forms'
 import { FileService } from '../../upload.service'
 import { Observable } from 'rxjs'
 import { MatSnackBar, MatSort } from '@angular/material'
@@ -16,17 +16,29 @@ export class UserBulkUploadComponent implements OnInit {
   public displayLoader!: Observable<boolean>
   public formGroup = this.fb.group({
     file: ['', Validators.required],
+    department: new FormControl('', [Validators.required]),
   })
   fetching = false
   showFileError = false
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: true }) sort!: MatSort
   bulkUploadData: any
   uplaodSuccessMsg!: string
   dataSource: MatTableDataSource<any>
   displayedColumns: string[] = ['id', 'name', 'status', 'report']
+  departments: string[] = []
+
+  objDataSource = new MatTableDataSource<any>()
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator | null = null
+
+  @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
+    this.paginator = paginator
+    this.setDataSourceAttributes()
+  }
+  setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -42,6 +54,7 @@ export class UserBulkUploadComponent implements OnInit {
   ngOnInit() {
     this.displayLoader = this.fileService.isLoading()
     this.getBulkUploadData()
+    this.getUserDepartments()
   }
   getBulkUploadData() {
     this.fetching = true
@@ -49,6 +62,7 @@ export class UserBulkUploadComponent implements OnInit {
       this.fetching = false
       this.bulkUploadData = res
       this.dataSource = new MatTableDataSource(this.bulkUploadData)
+      this.dataSource.paginator = this.paginator
     })
       .catch(() => { })
       .finally(() => {
@@ -75,9 +89,9 @@ export class UserBulkUploadComponent implements OnInit {
   public onSubmit(): void {
     // Validate File type before uploading
     if (this.fileService.validateFile(this.fileName)) {
-      if (this.formGroup && this.formGroup.get('file')) {
+      if (this.formGroup && this.formGroup.get('file') && this.formGroup.get('department')) {
         // tslint:disable-next-line: no-non-null-assertion
-        this.fileService.upload(this.fileName, this.formGroup!.get('file')!.value)
+        this.fileService.upload(this.fileName, this.formGroup!.get('file')!.value, this.formGroup!.get('department')!.value)
           .subscribe(res => {
             // this.uplaodSuccessMsg = res
             this.openSnackbar(res)
@@ -102,6 +116,16 @@ export class UserBulkUploadComponent implements OnInit {
 
   public downloadReport(row: any) {
     this.fileService.downloadReport(row.id, row.name)
+  }
+
+  getUserDepartments() {
+    this.tenantAdminSvc.getUserDepartments().then((res: any) => {
+      this.departments = res
+    })
+      .catch(() => {
+       })
+      .finally(() => {
+      })
   }
 
 }
