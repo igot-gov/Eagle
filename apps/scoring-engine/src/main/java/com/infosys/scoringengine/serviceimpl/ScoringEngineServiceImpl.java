@@ -41,10 +41,10 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 	IndexerService indexerService;
 
 	private ObjectMapper mapper = new ObjectMapper();
-	@Value("${infosys.es.score.index}")
+	@Value("${es.score.index}")
 	private String esIndex;
 
-	@Value("${infosys.es.score.index.type}")
+	@Value("${es.score.index.type}")
 	private String esIndexType;
 	
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

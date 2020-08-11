@@ -46,19 +46,19 @@ import java.util.Map;
 public class IndexerService {
     private RestHighLevelClient esClient;
 
-    @Value("${infosys.es.auth.enabled}")
+    @Value("${es.auth.enabled}")
     private boolean esAuthEnabled;
 
-    @Value("${infosys.es.host}")
+    @Value("${es.host}")
     private String esHost;
 
-    @Value("${infosys.es.port}")
+    @Value("${es.port}")
     private String esPort;
 
-    @Value("${infosys.es.username}")
+    @Value("${es.username}")
     private String esUsername;
 
-    @Value("${infosys.es.password}")
+    @Value("${es.password}")
     private String esPassword;
 
     private Logger logger = LoggerFactory.getLogger(IndexerService.class);
