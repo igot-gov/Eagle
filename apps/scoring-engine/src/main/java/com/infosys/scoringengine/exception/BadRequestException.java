@@ -5,7 +5,7 @@
  *
  */
 
-package com.infosys.recommendationservice.exception;
+package com.infosys.scoringengine.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseBody;
