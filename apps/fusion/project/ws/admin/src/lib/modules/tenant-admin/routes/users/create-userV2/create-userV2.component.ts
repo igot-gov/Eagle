@@ -14,6 +14,8 @@ export class CreateUserV2Component implements OnInit, OnDestroy {
   unseenCtrl!: FormControl
   unseenCtrlSub!: Subscription
   uploadSaveData = false
+  fetching = false
+  departments = []
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
 
@@ -26,6 +28,7 @@ export class CreateUserV2Component implements OnInit, OnDestroy {
       lname: new FormControl('', [Validators.required]),
       // mobile: new FormControl('', [Validators.required, Validators.minLength(10)]),
       email: new FormControl('', [Validators.required, Validators.email]),
+      department: new FormControl('', [Validators.required]),
     })
   }
 
@@ -33,6 +36,7 @@ export class CreateUserV2Component implements OnInit, OnDestroy {
     // this.unseenCtrlSub = this.createUserForm.valueChanges.subscribe(value => {
     //   console.log('ngOnInit - value', value);
     // })
+    this.getUserDepartments()
   }
 
   ngOnDestroy() {
@@ -59,5 +63,17 @@ export class CreateUserV2Component implements OnInit, OnDestroy {
     this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
+  }
+
+  getUserDepartments() {
+    this.fetching = true
+    this.tenantAdminSvc.getUserDepartments().then((res: any) => {
+      this.fetching = false
+      this.departments = res
+    })
+      .catch(() => { })
+      .finally(() => {
+        this.fetching = false
+      })
   }
 }
