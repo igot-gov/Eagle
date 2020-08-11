@@ -119,16 +119,13 @@ export class UsersComponent implements OnInit {
 
   getUserDepartments() {
     this.tenantAdminSvc.getUserDepartments().then((res: any) => {
-      console.log('res: ', res)
       if (res && res.length) {
         res.map((r: any) => {
           return this.departments.push(r.department_name)
         })
       }
-      console.log('this.departments: ', this.departments)
     })
-      .catch((err) => {
-        console.log('err', err)
+      .catch(() => {
        })
       .finally(() => {
       })
