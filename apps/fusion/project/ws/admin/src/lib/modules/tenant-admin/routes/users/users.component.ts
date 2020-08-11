@@ -5,6 +5,8 @@ import { NsAutoComplete } from '@ws-widget/collection'
 import { SystemRolesManagementService } from '../system-roles-management/system-roles-management.service'
 import { IUserRoleDetail } from './users.model'
 import { OpenRolesDialogComponent } from './components/open-roles-dialog/open-roles-dialog.component'
+import { EditDepartmentDialogComponent } from './components/edit-department-dialog/edit-department-dialog.component'
+import { TenantAdminService } from '../../tenant-admin.service'
 
 @Component({
   selector: 'ws-admin-users',
@@ -18,11 +20,13 @@ export class UsersComponent implements OnInit {
   isAdding = false
   userDetails: { [key: string]: any } = {}
   userIds: string[] = []
+  departments: string[] = []
   constructor(
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     public rolesSvc: SystemRolesManagementService,
+    private tenantAdminSvc: TenantAdminService,
   ) {
     if (this.activatedRoute.parent && this.activatedRoute.parent.parent) {
       this.activatedRoute.parent.parent.data.subscribe(data => {
@@ -40,6 +44,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getUserDepartments()
   }
   addUser(user: NsAutoComplete.IUserAutoComplete): void {
     this.isAdding = true
@@ -95,6 +100,38 @@ export class UsersComponent implements OnInit {
         this.rolesHash[role].hasRole = false
       })
     })
+  }
+
+  openDepartmentDialog(wid: string, department: string) {
+    const dialogRef = this.dialog.open(EditDepartmentDialogComponent, {
+      width: '80vw',
+      data: {
+        department,
+        userId: wid,
+      },
+    })
+    dialogRef.afterClosed().subscribe(data => {
+      if (data && data.userId && data.department) {
+        this.userDetails[data.userId].department_name = data.department
+      }
+    })
+  }
+
+  getUserDepartments() {
+    this.tenantAdminSvc.getUserDepartments().then((res: any) => {
+      console.log('res: ', res)
+      if (res && res.length) {
+        res.map((r: any) => {
+          return this.departments.push(r.department_name)
+        })
+      }
+      console.log('this.departments: ', this.departments)
+    })
+      .catch((err) => {
+        console.log('err', err)
+       })
+      .finally(() => {
+      })
   }
 
 }

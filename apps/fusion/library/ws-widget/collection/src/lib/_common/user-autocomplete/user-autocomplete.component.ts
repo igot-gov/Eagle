@@ -24,6 +24,8 @@ export class UserAutocompleteComponent implements OnInit {
   userId = ''
 
   @Input() allowSelfAutocomplete = false
+  @Input() autocompleteByDepartment = false
+  @Input() departments = []
   @ViewChild('userInputForm', { static: true }) userInputFormRef!: ElementRef<HTMLInputElement>
   @Output() usersList = new EventEmitter<NsAutoComplete.IUserAutoComplete[]>()
   @Output() addedUser = new EventEmitter<NsAutoComplete.IUserAutoComplete>()
@@ -36,6 +38,9 @@ export class UserAutocompleteComponent implements OnInit {
     if (this.configSvc.userProfile) {
       this.userId = this.configSvc.userProfile.userId
     }
+  }
+
+  ngOnInit() {
     this.userFormControl.valueChanges
       .pipe(
         debounceTime(500),
@@ -45,7 +50,15 @@ export class UserAutocompleteComponent implements OnInit {
           if (typeof value === 'string' && value) {
             this.autocompleteAllUsers = []
             this.fetchTagsStatus = 'fetching'
-            return this.userAutocompleteSvc.fetchAutoComplete(value).pipe(catchError(_ => of([])))
+            if (!this.autocompleteByDepartment) {
+              return this.userAutocompleteSvc.fetchAutoComplete(value).pipe(catchError(_ => of([])))
+            }
+            if (this.autocompleteByDepartment) {
+              // if (this.configSvc.userProfile) {
+                // const deptName = this.configSvc.userProfile.departmentName || 'ias'
+                return this.userAutocompleteSvc.fetchAutoCompleteByDept(value, this.departments).pipe(catchError(_ => of([])))
+              // }
+            }
           }
           return of([])
         }),
@@ -60,8 +73,6 @@ export class UserAutocompleteComponent implements OnInit {
         },
       )
   }
-
-  ngOnInit() { }
 
   removeUser(user: NsAutoComplete.IUserAutoComplete): void {
     const index = this.selectedUsers.findIndex(selectedUser => selectedUser.wid === user.wid)
