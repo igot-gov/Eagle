@@ -12,6 +12,8 @@ const API_ENDPOINTS = {
   getAccessPaths: '/apis/protected/v8/admin/userRegistration/user/access-path',
   updateAccessPaths: '/apis/protected/v8/admin/userRegistration/user/update-access-path',
   getBulkUploadData: '/apis/protected/v8/admin/userRegistration/bulkUploadData',
+  getUserDepartments: '/apis/protected/v8/admin/userRegistration/user/department',
+  updateUserDepartment: '/apis/protected/v8/admin/userRegistration/user/department/update',
 }
 @Injectable()
 export class TenantAdminService {
@@ -62,6 +64,18 @@ export class TenantAdminService {
 
   updateAccessPaths(data: any): Observable<any> {
     return this.http.post<any>(API_ENDPOINTS.updateAccessPaths, data).pipe(
+      map(response => {
+        return response.result
+      }),
+    )
+  }
+
+  async getUserDepartments() {
+    return await this.http.get(`${API_ENDPOINTS.getUserDepartments}`).toPromise()
+  }
+
+  updateUserDepartment(data: any): Observable<any> {
+    return this.http.post<any>(API_ENDPOINTS.updateUserDepartment, data).pipe(
       map(response => {
         return response.result
       }),
