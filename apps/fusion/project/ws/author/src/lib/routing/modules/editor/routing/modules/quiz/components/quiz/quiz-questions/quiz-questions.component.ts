@@ -305,13 +305,13 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
           },
         )
       } else {
-        this.currentStep = 1
+        // this.currentStep = 1
       }
     } else {
       // enters if the quiz array does not have min len or no changes has been made in meta or quiz
       if (this.resourceType !== ASSESSMENT && !this.questionsArr.length) {
         this.showNotification(Notify.RESOURCE_NO_QUIZ)
-        this.currentStep = 1
+        // this.currentStep = 1
       } else if (
         this.resourceType === ASSESSMENT &&
         this.questionsArr.length < this.quizConfig.minQues

@@ -1,6 +1,6 @@
 {
   "/apis/*": {
-    "target": "https://eagle-dev.idc.tarento.com",
+    "target": "https://d136953gtttd92.cloudfront.net",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
