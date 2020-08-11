@@ -145,6 +145,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       employeeCode: new FormControl('', []),
       otherDetailsOfficeAddress: new FormControl('', []),
       otherDetailsOfficePinCode: new FormControl('', []),
+      departmentName: new FormControl('', []),
     })
   }
 
@@ -450,6 +451,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
                 firstname: data[0].first_name,
                 surname: data[0].last_name,
                 primaryEmail: data[0].email,
+                departmentName: data[0].department_name,
               })
             }
           },
@@ -694,6 +696,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         employeeCode: form.value.employeeCode,
         officialPostalAddress: form.value.otherDetailsOfficeAddress,
         pinCode: form.value.otherDetailsOfficePinCode,
+        departmentName: form.value.departmentName,
       },
       professionalDetails: [
         ...this.getOrganisationsHistory(form),

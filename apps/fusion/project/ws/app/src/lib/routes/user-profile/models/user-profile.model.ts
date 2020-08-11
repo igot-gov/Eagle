@@ -3,6 +3,7 @@ export interface IUserProfileDetails {
   last_name: string
   email: string
   wid: string
+  department_name: string
 }
 
 export interface IUserProfileDetailsFromRegistry {
