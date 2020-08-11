@@ -276,6 +276,9 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   save(next?: string) {
     this.canValidate = true
+    if (this.questionsArr.length === 0) {
+      this.questionsArr = this.quizStoreSvc.collectiveQuiz[this.currentId]
+    }
     const hasMinLen = (this.resourceType !== ASSESSMENT && this.questionsArr.length)
       || (this.resourceType === ASSESSMENT && this.questionsArr.length >= this.quizConfig.minQues)
     const needSave = Object.keys(this.metaContentService.upDatedContent[this.currentId] || {}).length

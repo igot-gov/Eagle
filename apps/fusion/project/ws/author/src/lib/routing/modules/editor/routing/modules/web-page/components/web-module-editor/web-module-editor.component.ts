@@ -40,6 +40,7 @@ import { IAudioObj } from '../../interface/page-interface'
 import { PlainCKEditorComponent } from '../../../../../shared/components/plain-ckeditor/plain-ckeditor.component'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
+import { WebStoreService } from '../../services/store.service'
 
 @Component({
   selector: 'ws-auth-web-module-editor',
@@ -91,6 +92,7 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
     private notificationSvc: NotificationService,
+    private webStoreSvc: WebStoreService,
   ) { }
 
   ngOnDestroy() {
@@ -118,10 +120,11 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)
-          if (v.contents[0].data) {
+          const newData = this.webStoreSvc.getWeb()
+          if (v.contents[0].data || newData) {
             const url = v.contents[0].content.artifactUrl.substring(0, v.contents[0].content.artifactUrl.lastIndexOf('/'))
             this.imagesUrlbase = `${url}/assets/`
-            const formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
+            const formattedObj = JSON.parse(JSON.stringify(v.contents[0].data || newData))
             formattedObj.pageJson.map((obj: ModuleObj) => {
               if (obj.audio && obj.audio.length) {
                 obj.audio.map(audioObj => {
@@ -139,9 +142,16 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
             // const reg1 = RegExp(`src\=\s*['"](.*?)`, 'gm')
             // const reg2 = RegExp(`href\=\s*['"](.*?)['"]`, 'gm')
             formattedObj.pages = formattedObj.pages.map((p: any, index: number) => {
-              let pageBody = p
-              if (p.match(getBodyReg)) {
-                pageBody = p.match(getBodyReg)[1]
+              let q
+              if (typeof (p) === 'object') {
+                // p = `<html><head></head><body>${p.body}</body></html>`
+                q = p.body
+              } else {
+                q = p
+              }
+              let pageBody = q
+              if (q.match(getBodyReg)) {
+                pageBody = q.match(getBodyReg)[1]
                   .replace('src="', ` src="${this.imagesUrlbase}`)
                 // .replace(reg2, ` href="${this.imagesUrlbase}"`)
               }
@@ -216,7 +226,9 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     this.userData[this.currentId].pageJson[this.selectedPage].title = event
     this.changedContent = true
   }
-
+  pagesDount(userData: string) {
+    this.userData = JSON.parse(userData)
+  }
   // add new page
   addPage() {
     const fileIndex = this.userData[this.currentId].pages.length ?

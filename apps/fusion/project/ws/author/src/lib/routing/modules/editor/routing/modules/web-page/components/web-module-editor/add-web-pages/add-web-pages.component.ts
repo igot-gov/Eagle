@@ -33,6 +33,7 @@ import {
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { NOTIFICATION_TIME, WEB_MODULE_JSON_FILE_NAME } from '../../../constant/web-module.constants'
 import { IAudioObj } from '../../../interface/page-interface'
+import { WebStoreService } from '../../../services/store.service'
 @Component({
   selector: 'ws-auth-add-web-pages',
   templateUrl: './add-web-pages.component.html',
@@ -40,6 +41,8 @@ import { IAudioObj } from '../../../interface/page-interface'
 })
 export class AddWebPagesComponent implements OnInit, OnDestroy {
   @Output() data = new EventEmitter<string>()
+  @Output() pageCount = new EventEmitter<string>()
+
   userData: { [key: string]: WebModuleData } = {}
   currentId = ''
   selectedPage = 0
@@ -78,6 +81,8 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
     private notificationSvc: NotificationService,
+    private webStoreSvc: WebStoreService,
+
   ) { }
 
   ngOnDestroy() {
@@ -106,10 +111,24 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)
-          if (v.contents[0].data) {
+          const newData = this.webStoreSvc.getWeb()
+          if (v.contents[0].data || newData) {
             const url = v.contents[0].content.artifactUrl.substring(0, v.contents[0].content.artifactUrl.lastIndexOf('/'))
             this.imagesUrlbase = `${url}/assets/`
-            const formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
+            let formattedObj: any
+            if (v.contents[0].data && newData) {
+              if (JSON.stringify(v.contents[0].data) !== JSON.stringify(newData)) {
+                formattedObj = JSON.parse(JSON.stringify(newData))
+              } else {
+                formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
+              }
+            } else if (v.contents[0].data && !newData) {
+              formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
+
+            } else if (!v.contents[0].data && newData) {
+              formattedObj = JSON.parse(newData)
+
+            }
             formattedObj.pageJson.map((obj: ModuleObj) => {
               if (obj.audio && obj.audio.length) {
                 obj.audio.map(audioObj => {
@@ -127,9 +146,16 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
             // const reg1 = RegExp(`src\=\s*['"](.*?)`, 'gm')
             // const reg2 = RegExp(`href\=\s*['"](.*?)['"]`, 'gm')
             formattedObj.pages = formattedObj.pages.map((p: any, index: number) => {
-              let pageBody = p
-              if (p.match(getBodyReg)) {
-                pageBody = p.match(getBodyReg)[1]
+              let q
+              if (typeof (p) === 'object') {
+                // p = `<html><head></head><body>${p.body}</body></html>`
+                q = p.body
+              } else {
+                q = p
+              }
+              let pageBody = q
+              if (q.match(getBodyReg)) {
+                pageBody = q.match(getBodyReg)[1]
                   .replace('src="', ` src="${this.imagesUrlbase}`)
                 // .replace(reg2, ` href="${this.imagesUrlbase}"`)
               }
@@ -137,6 +163,8 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
               return new Page({ body: pageBody, fileIndex: fileInd })
             })
             this.userData[v.contents[0].content.identifier] = formattedObj
+            this.webStoreSvc.collectiveWeb[v.contents[0].content.identifier] = formattedObj
+
           } else if (v.contents[0] && v.contents[0].content && v.contents[0].content.children) {
 
             // need to work on
@@ -151,11 +179,13 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
       if (!this.userData[id]) {
         this.userData[id] = new WebModuleData({})
+        this.webStoreSvc.collectiveWeb[id] = []
       }
       this.currentId = id
+      this.webStoreSvc.currentId = id
+      this.webStoreSvc.changeWeb(0)
       this.changePage(0)
     })
-
   }
 
   drop(event: CdkDragDrop<string[]>) {
@@ -171,6 +201,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
   deleteAudio(num: number) {
     if (this.userData[this.currentId].pageJson[this.selectedPage].audio) {
       this.userData[this.currentId].pageJson[this.selectedPage].audio.splice(num, 1)
+      this.webStoreSvc.collectiveWeb[this.currentId] = JSON.parse(JSON.stringify(this.userData[this.currentId]))
       this.changedContent = true
     }
   }
@@ -205,6 +236,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
   // save title
   forTitle(event: string) {
     this.userData[this.currentId].pageJson[this.selectedPage].title = event
+    this.webStoreSvc.collectiveWeb[this.currentId] = JSON.parse(JSON.stringify(this.userData[this.currentId]))
     this.changedContent = true
   }
 
@@ -217,8 +249,10 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     const newPageObj = new Page({ fileIndex, body: '' })
     this.userData[this.currentId].pageJson.push(newModuleObj)
     this.userData[this.currentId].pages.push(newPageObj)
+    this.webStoreSvc.collectiveWeb[this.currentId] = JSON.parse(JSON.stringify(this.userData[this.currentId]))
     this.changePage(this.userData[this.currentId].pages.length - 1)
     this.changedContent = true
+    this.pageCount.emit(JSON.stringify(this.userData))
   }
 
   onBodyChange(i: any) {
@@ -253,6 +287,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       if (confirm) {
         this.userData[this.currentId].pageJson.splice(i, 1)
         this.userData[this.currentId].pages.splice(i, 1)
+        this.webStoreSvc.collectiveWeb[this.currentId] = JSON.parse(JSON.stringify(this.userData[this.currentId]))
         const dataLen = this.userData[this.currentId].pages.length
         if (i === this.selectedPage) {
           this.changePage(i && dataLen ? i - 1 : i)
@@ -260,6 +295,8 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
           this.changePage(this.selectedPage - 1)
         }
         this.changedContent = true
+        this.pageCount.emit(JSON.stringify(this.userData))
+
       }
     })
   }
@@ -399,6 +436,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
     switch (type) {
       case 'next':
         this.currentStep += 1
+        this.pageCount.emit(JSON.stringify(this.userData))
         this.data.emit('next')
         break
       case 'preview':
@@ -655,7 +693,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       if (this.checkValidity(this.currentId)) {
         return this.wrapperForTriggerSave().pipe(map(() => true))
       }
-      this.currentStep = 2
+      // this.currentStep = 1
       returnValue = false
     }
     return of(returnValue)
@@ -752,6 +790,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
   save(next?: string) {
     const needSave = Object.keys((this.metaContentService.upDatedContent[this.currentId] || {})).length
       || this.changedContent
+    this.webStoreSvc.collectiveWeb[this.currentId] = JSON.parse(JSON.stringify(this.userData[this.currentId]))
     if (this.userData[this.currentId].pages.length > 0 && (needSave)) {
       if (this.checkValidity(this.currentId)) {
         // if any change in data, then upload json
@@ -770,7 +809,7 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
         )
       } else {
         if (this.currentStep !== 2) {
-          this.currentStep = 2
+          // this.currentStep = 2
         }
       }
     } else {
