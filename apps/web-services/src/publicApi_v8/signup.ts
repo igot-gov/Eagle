@@ -68,7 +68,8 @@ signup.post('/', async (req, res) => {
 signup.post('/create/:uniqueId', async (req, res) => {
     try {
         const result = await checkUUIDMaster(req.params.uniqueId)
-            .catch((_err) => {
+            .catch((err) => {
+                logInfo(`1001: Invalid Code ${req.params.uniqueId}`, err)
                 res.json({ msg: `1001: Invalid Code ${req.params.uniqueId}` })
             })
         if (result) {

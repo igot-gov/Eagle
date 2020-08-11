@@ -51,11 +51,12 @@ export function checkUUIDMaster(uniqueKey: any): Promise<any> {
         const clientConnect = new cassandraDriver.Client(cassandraClientOptions)
         return new Promise((resolve, reject) => {
             clientConnect.execute(`SELECT * FROM ${CASSANDRA_KEYSPACE}.eagle_uuid_master
-            WHERE key=${uniqueKey}`, (error, result) => {
+            WHERE key=${uniqueKey} allow filtering`, (error, result) => {
                 if (!error && result && result.rows.length > 0) {
                     const key = result.rows[0]
                     resolve(key)
                 } else {
+                    logInfo('Error on DB request : ')
                     reject(false)
                 }
                 clientConnect.shutdown()
