@@ -94,7 +94,7 @@ signup.post('/create/:uniqueId', async (req, res) => {
                 if (userId) {
                     logInfo('user created successfully. Now performing new user')
                     let msg = ''
-                    await performNewUserSteps(userId, req)
+                    await performNewUserSteps(userId, req, reqToNewUser.body.email)
                         .catch((err) => {
                             msg = `${err}`
                         })

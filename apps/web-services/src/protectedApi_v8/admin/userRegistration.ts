@@ -23,9 +23,10 @@ const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z
 const REGISTRATION_BASE = `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content-sources`
 const API_ENDPOINTS = {
     deregisterUsers: (source: string) => `${REGISTRATION_BASE}/${source}/deregistered-users`,
+    getDepartment: `${CONSTANTS.USER_PROFILE_API_BASE}/user/department`,
     listUsers: (source: string) => `${REGISTRATION_BASE}/${source}/users`,
     registrationStatus: REGISTRATION_BASE,
-    wtokenPath: `http://localhost:3003/protected/v8/user/details/wtokenprotected/v8/user/details/wtoken`,
+    updateDepartment: `${CONSTANTS.USER_PROFILE_API_BASE}/user/department/update`,
 }
 
 export const userRegistrationApi = Router()
@@ -295,12 +296,16 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                             })
                         if (userId) {
                             let msg = ''
-                            await performNewUserSteps(userId, req)
+                            await performNewUserSteps(userId, req, reqToNewUser.body.email)
                                 .catch((err) => {
                                     // reportData.push([`\n${email}`, `${err}`])
                                     msg = `${err}`
                                 })
-                            reportData.push([`\n${email}`, `success & ${msg} `])
+                            if (msg) {
+                                reportData.push([`\n${email}`, `success & ${msg} `])
+                            } else {
+                                reportData.push([`\n${email}`, `success `])
+                            }
                         }
                     }
                 }
@@ -341,7 +346,7 @@ export async function createUser(req: any) {
 }
 
 // tslint:disable-next-line: no-any
-export async function performNewUserSteps(userId: any, req: any) {
+export async function performNewUserSteps(userId: any, req: any, email: any) {
     return new Promise(async (resolve, reject) => {
         await UpdateKeycloakUserPassword(userId, false)
             .catch((error) => {
@@ -349,13 +354,14 @@ export async function performNewUserSteps(userId: any, req: any) {
                 reject('User default password could not be set')
             })
         // tslint:disable-next-line: no-identical-functions
-        getAuthToken(req.body.email).then(async (kcaAuthToken) => {
+        await getAuthToken(email).then(async (kcaAuthToken) => {
+            logInfo('access_token successfull: ', kcaAuthToken.access_token)
             if (kcaAuthToken && kcaAuthToken.access_token) {
                 const wTokenResponse = await wTokenApiMock(req, kcaAuthToken.access_token)
                 // tslint:disable-next-line: max-line-length
                 if (wTokenResponse && wTokenResponse.user && wTokenResponse.user.length) {
                     logInfo('New User keycloak auth successfull')
-                    logInfo(`User: ${req.body.email} -- wid: ${wTokenResponse.user[0].wid}`)
+                    logInfo(`User: ${email} -- wid: ${wTokenResponse.user[0].wid}`)
                 }
             }
         }).catch((error) => {
@@ -441,6 +447,55 @@ userRegistrationApi.get('/bulkUploadReport/:id', async (req, res) => {
         })
     } catch (err) {
         logError('ERROR ON /bulkUploadReport/:id >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+userRegistrationApi.get('/user/department', async (req, res) => {
+    try {
+        const wid = extractUserIdFromRequest(req)
+        const rootOrg = req.header('rootOrg')
+        const org = req.header('org')
+        const response = await axios.post(
+            `${API_ENDPOINTS.getDepartment}`,
+            { wid },
+            {
+                ...axiosRequestConfig,
+                headers: {
+                    org,
+                    rootOrg,
+                },
+            }
+        )
+        res.json(response.data || {})
+    } catch (err) {
+        logError('ERROR ON /user/department >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+userRegistrationApi.post('/user/department/update', async (req, res) => {
+    try {
+        const userId = req.body.userId
+        const departmentName = req.body.department
+        const rootOrg = req.header('rootOrg')
+        const org = req.header('org')
+        const response = await axios.post(
+            `${API_ENDPOINTS.updateDepartment}`,
+            { userId, departmentName },
+            {
+                ...axiosRequestConfig,
+                headers: {
+                    org,
+                    rootOrg,
+                },
+            }
+        )
+        res.json(response.data || {})
+    } catch (err) {
+        logError('ERROR ON /user/department >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }

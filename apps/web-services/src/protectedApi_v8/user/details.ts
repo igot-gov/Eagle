@@ -47,7 +47,6 @@ detailsApi.get('/', async (req, res) => {
 })
 
 detailsApi.get('/wtoken', async (req, res) => {
-  // console.log('called /wtoken')
   try {
     const rootOrg = req.header('rootOrg') || ''
     const org = req.header('org') || ''
@@ -93,9 +92,8 @@ export function wTokenApiMock(req: any, token: any): Promise<any> {
       const rootOrg = req.header('rootOrg') || ''
       const org = req.header('org') || ''
       // tslint:disable-next-line: no-any
-      const newReq: any = { ...req }
-      newReq.kauth.grant.access_token.token = token
-      const kcToken = extractUserToken(newReq)
+      let kcToken: any
+      kcToken = token
       const url = API_END_POINTS.pidProfile
       const options: request.CoreOptions = {
         headers: {
@@ -104,6 +102,7 @@ export function wTokenApiMock(req: any, token: any): Promise<any> {
         },
         ...axiosRequestConfig,
         json: {
+          department_name: req.body.department,
           token: kcToken,
         },
       }
@@ -169,7 +168,7 @@ detailsApi.post('/detailV1', async (req, res) => {
         conditions: {
           root_org: _rootOrg,
         },
-        source_fields: ['wid', 'email', 'first_name', 'last_name'],
+        source_fields: ['wid', 'email', 'first_name', 'last_name', 'department_name'],
         values: [req.body.email],
       },
       {

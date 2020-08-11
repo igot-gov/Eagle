@@ -165,6 +165,7 @@ export async function getAuthToken(email: any): Promise<any> {
                 form: request1,
             }, (err, _httpResponse, body) => {
                 if (err) {
+                    logError('err in getAuthToken api ', err)
                     reject(err)
                 }
                 if (body) {
