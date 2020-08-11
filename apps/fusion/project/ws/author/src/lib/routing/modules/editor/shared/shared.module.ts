@@ -20,6 +20,7 @@ import { BaseComponent } from './components/editor/base/base.component'
 import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-v2.component'
 import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
 import { OptionsComponent } from './components/options/options.component'
+import { FormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { OptionsComponent } from './components/options/options.component'
     PipeDurationTransformModule,
     DisplayContentTypeModule,
     CKEditorModule,
+    FormsModule,
     SharedModule,
     AceEditorModule,
     CatalogSelectModule,
