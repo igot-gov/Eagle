@@ -67,7 +67,7 @@
           </mat-sidenav>
           <mat-sidenav-content>
             <ng-container *ngIf="userData[currentId].pages.length">
-              <div class="pl-3">
+              <div class="pl-3 pt-3">
                 <p class="font-weight-bold " i18n="Title label|Label which explains the user to enter title">
                   Title
                 </p>
@@ -168,7 +168,16 @@
       </ng-container>
     </div>
   </mat-card-content>
-  <mat-card-actions></mat-card-actions>
+  <mat-card-actions>
+    <div class="flex flex-end  margin-bottom-xl margin-right-s">
+      <!-- matStepperNext -->
+      <button type="button" mat-button class="ws-mat-primary-background margin-top-m m-auto"
+        (click)="action('saveAndNext')">
+        <!-- <mat-icon class="text-white">file_upload</mat-icon> -->
+        <b class="text-white" i18n>Save and Proceed</b>
+      </button>
+    </div>
+  </mat-card-actions>
   <mat-card-footer></mat-card-footer>
 
 

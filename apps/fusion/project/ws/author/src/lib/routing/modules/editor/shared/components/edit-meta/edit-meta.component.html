@@ -1,13 +1,28 @@
-<div id="edit-meta" class="margin-top-l">
+<div id="edit-meta" class="margin-top-xs">
+  <!-- <div class="progress" *ngIf="workFlow && workFlow.length > 0">
+    <div class="progress-step" [class.active]="state.isActive" [class.complete]="state.isCompleted"
+      *ngFor="let state of workFlow | orderBy: 'step': 'asc' ; let i=index" (click)="customStepper(state.step)">
+      <div class="info" *ngIf="state.name">
+        <span *ngIf="state.isActive" class="ws-mat-default-text font-bold">{{ state.name }}</span>
+        <span *ngIf="!state.isActive" class="ws-mat-default-text">{{ state.name }}</span>
+      </div>
+    </div>
+  </div> -->
+  <ws-auth-status-content-display *ngIf="workFlow && workFlow.length > 0" (selectes)="customStepper($event)"
+    [workFlow]="workFlow">
+  </ws-auth-status-content-display>
   <form [formGroup]="contentForm">
-    <ng-container [ngSwitch]="stage">
-      <ng-template [ngSwitchCase]="1">
-        <mat-card class="margin-top-xl">
+    <mat-tab-group id="editmetagrp" animationDuration="0ms" class="mat-tab-labels" mat-stretch-tabs
+      [selectedIndex]="selectedIndex" (selectedTabChange)="selectedIndex = $event.index">
+      <!-- <ng-container [ngSwitch]="stage"> -->
+      <!-- <ng-template [ngSwitchCase]="1"> -->
+      <mat-tab>
+        <mat-card class="margin-top-m">
           <mat-card-title class="ml-1 ws-mat-default-text">
             <span>Basic Details</span>
             <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
-          <mat-card-content class="card-contan">
+          <mat-card-content class="card-contan margin-top-m">
             <div class="mobile-break mat-app-background">
               <div class="flex flex-column">
                 <div class="logos">
@@ -156,7 +171,6 @@
                   <p class="margin-remove-bottom" i18n="Title label|Label which explains the user to enter title"
                     [ngClass]="{ required: checkCondition('name', 'required') }">
                     Banner Colour
-
                   </p>
                   <div appearance="outline" class="margin-top-xs">
                     <!-- [ngClass]="{ 'mat-form-field-invalid': showError('name') }"> -->
@@ -164,8 +178,9 @@
                       class="flex flex-1 example-radio-group">
                       <mat-radio-button color="banner" class="example-radio-button" *ngFor="let banner of banners"
                         [checked]="(contentForm.controls.posterImage.value &&
-                              contentForm.controls.posterImage.value === banner.color)  ||
-                              (banner.isDefault && !contentForm.controls.posterImage.value)" [value]="banner.color">
+                                              contentForm.controls.posterImage.value === banner.color)  ||
+                                              (banner.isDefault && !contentForm.controls.posterImage.value)"
+                        [value]="banner.color">
                         <span class="bannerSelect" [ngStyle]="{ background: banner.color}">&nbsp;</span>
                       </mat-radio-button>
                     </mat-radio-group>
@@ -316,9 +331,9 @@
           </mat-card-content>
           <mat-card-actions>
             <div class="flex flex-end margin-top-l margin-bottom-s margin-right-l">
-              <button mat-raised-button type="button" matStepperNext
+              <button mat-raised-button type="button"
                 class="text-white ws-mat-primary-background text-white margin-right-m"
-                (click)="data.emit('saveAndNext')">
+                (click)="data.emit('save');formNext(1)">
                 <b class="text-white" i18n>Save and Proceed</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -329,26 +344,27 @@
           </mat-card-actions>
           <mat-card-footer>
             <div class="c-footer">
-              <!-- matStepperPrevious -->
-              <button mat-icon-button matStepperPrevious>
+              <!--  -->
+              <button mat-icon-button>
                 <mat-icon>arrow_back</mat-icon>
               </button>
-              <!-- matStepperNext -->
-              <button mat-icon-button matStepperNext>
+              <!--  -->
+              <button mat-icon-button>
                 <mat-icon> arrow_forward</mat-icon>
               </button>
             </div>
           </mat-card-footer>
         </mat-card>
-      </ng-template>
-      <ng-template [ngSwitchCase]="2">
-
-        <mat-card class="margin-top-xl ">
+      </mat-tab>
+      <!-- </ng-template> -->
+      <!-- <ng-template [ngSwitchCase]="2"> -->
+      <mat-tab>
+        <mat-card class="margin-top-m">
           <mat-card-title class="m-auto ws-mat-default-text">
             <span>Classification</span>
             <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
-          <mat-card-content class="card-contan m-auto">
+          <mat-card-content class="card-contan m-auto margin-top-m">
             <div class="mobile-break mat-app-background">
               <p class="mat-h5 margin-top-s margin-left-xl flex-1" *ngIf="checkCondition('contentType', 'show')">
                 * Provide meta details. Depending on the content type, some properties are enabled or
@@ -633,9 +649,9 @@
           </mat-card-content>
           <mat-card-actions>
             <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
-              <button mat-raised-button type="button" matStepperNext
+              <button mat-raised-button type="button"
                 class="text-white ws-mat-primary-background text-white margin-right-m"
-                (click)="data.emit('saveAndNext')">
+                (click)="data.emit('save');formNext(2)">
                 <b class="text-white" i18n>Save and Proceed</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -646,27 +662,28 @@
           </mat-card-actions>
           <mat-card-footer>
             <div class="c-footer">
-              <!-- matStepperPrevious -->
-              <button mat-icon-button matStepperPrevious>
+              <!--  -->
+              <button mat-icon-button>
                 <mat-icon>arrow_back</mat-icon>
               </button>
-              <!-- matStepperNext -->
-              <button mat-icon-button matStepperNext>
+              <!--  -->
+              <button mat-icon-button>
                 <mat-icon> arrow_forward</mat-icon>
               </button>
             </div>
           </mat-card-footer>
         </mat-card>
-      </ng-template>
-      <ng-template [ngSwitchCase]="3">
-
-        <mat-card class="margin-top-xl">
+        <!-- </ng-template> -->
+        <!-- <ng-template [ngSwitchCase]="3"> -->
+      </mat-tab>
+      <mat-tab>
+        <mat-card class="margin-top-m">
           <mat-card class="">
             <mat-card-title class="m-auto ws-mat-default-text">
               <span>Intended for</span>
               <ng-container [ngTemplateOutlet]="top"></ng-container>
             </mat-card-title>
-            <mat-card-content class="mobile-break mat-app-background">
+            <mat-card-content class="margin-top-m mobile-break mat-app-background">
               <div class="margin-top-xl margin-right-l">
                 <p class="mat-h5 margin-top-s margin-left-xl" *ngIf="checkCondition('audience', 'show')">
                   * Provide meta details. Depending on the content type, some properties are enabled or
@@ -1067,8 +1084,7 @@
                 <div class="grid"></div>
                 <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
                   <button mat-raised-button type="button"
-                    class="text-white ws-mat-primary-background text-white margin-right-m"
-                    (click)="data.emit('saveAndNext')">
+                    class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
                     <b class="text-white" i18n>Save</b>
                   </button>
                   <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
@@ -1082,20 +1098,22 @@
             </mat-card-actions>
             <mat-card-footer>
               <div class="c-footer">
-                <!-- matStepperPrevious -->
-                <button mat-icon-button matStepperPrevious>
+                <!--  -->
+                <button mat-icon-button>
                   <mat-icon>arrow_back</mat-icon>
                 </button>
-                <!-- matStepperNext -->
-                <button mat-icon-button matStepperNext disabled>
+                <!--  -->
+                <button mat-icon-button disabled>
                   <mat-icon> arrow_forward</mat-icon>
                 </button>
               </div>
             </mat-card-footer>
           </mat-card>
         </mat-card>
-      </ng-template>
-    </ng-container>
+      </mat-tab>
+      <!-- </ng-template> -->
+      <!-- </ng-container> -->
+    </mat-tab-group>
   </form>
 </div>
 

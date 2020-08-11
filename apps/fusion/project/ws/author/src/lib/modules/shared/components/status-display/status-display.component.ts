@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core'
 export class StatusDisplayComponent implements OnInit {
   @Input() status = ''
   @Input() needStyle = true
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

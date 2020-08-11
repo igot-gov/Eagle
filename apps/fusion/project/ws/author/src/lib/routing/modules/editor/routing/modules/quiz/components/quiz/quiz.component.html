@@ -71,14 +71,14 @@
   </div> -->
 
 
-  <mat-horizontal-stepper labelPosition="bottom" #stepper id="auth-quiz">
+  <!-- <mat-horizontal-stepper labelPosition="bottom" #stepper id="auth-quiz">
     <mat-step state=" phone">
       <ng-template matStepLabel>
         <span class="ws-mat-default-text">Assessment</span>
-      </ng-template>
-      <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
-      <ws-auth-quiz-questions></ws-auth-quiz-questions>
-      <!-- <div class="mat-app-background mb-10 br-8">
+      </ng-template> -->
+  <!-- <ng-container [ngTemplateOutlet]="top"></ng-container> -->
+  <ws-auth-quiz-questions *ngIf="currentStep === 1" (data)="action($event)"></ws-auth-quiz-questions>
+  <!-- <div class="mat-app-background mb-10 br-8">
         <div class="margin-top-xl margin-right-xl">
           <ng-container *ngIf="contentLoaded">
             <div class="flex justify-between">
@@ -127,13 +127,14 @@
           </ng-container>
         </div>
       </div> -->
-    </mat-step>
+  <!-- </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
-      </ng-template>
-      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" (data)="action($event)">
-      </ws-auth-edit-meta>
-    </mat-step>
+      </ng-template> -->
+  <ws-auth-edit-meta *ngIf="currentStep > 1" type="ASSE" [stage]="currentStep" [nextAction]="'done'"
+    (data)="action($event)">
+  </ws-auth-edit-meta>
+  <!-- </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>
       </ng-template>
@@ -145,10 +146,10 @@
       </ng-template>
       <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" (data)="action($event)">
       </ws-auth-edit-meta>
-    </mat-step>
-    <!-- Icon overrides. -->
-    <!-- check_circle -->
-    <ng-template matStepperIcon="phone">
+    </mat-step> -->
+  <!-- Icon overrides. -->
+  <!-- check_circle -->
+  <!-- <ng-template matStepperIcon="phone">
       <mat-icon class="ws-mat-default-text">radio_button_checked</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="create1">
@@ -160,7 +161,7 @@
     <ng-template matStepperIcon="done">
       <mat-icon class="ws-mat-default-text">check_circle</mat-icon>
     </ng-template>
-  </mat-horizontal-stepper>
+  </mat-horizontal-stepper> -->
 
 
   <!-- <div class="buttons margin-top-xl">

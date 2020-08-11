@@ -41,6 +41,7 @@ export class FileUploadComponent implements OnInit {
   @ViewChild('guideline', { static: false }) guideline!: TemplateRef<HTMLElement>
   @ViewChild('errorFile', { static: false }) errorFile!: TemplateRef<HTMLElement>
   @ViewChild('selectFile', { static: false }) selectFile!: TemplateRef<HTMLElement>
+
   fileUploadForm!: FormGroup
   iprAccepted = false
   file!: File | null
@@ -135,9 +136,10 @@ export class FileUploadComponent implements OnInit {
         this.storeData()
       }
     })
-    this.fileUploadForm.controls.artifactUrl.valueChanges.subscribe(() => {
-      this.iprAccepted = false
-    })
+    // this is commented as new UI is not comptable
+    // this.fileUploadForm.controls.artifactUrl.valueChanges.subscribe(() => {
+    //   this.iprAccepted = false
+    // })
   }
 
   onDrop(file: File) {

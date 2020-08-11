@@ -65,7 +65,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   disableCursor = false
   resourceType = ''
   isValid = true
-  currentStep = 2
+  currentStep = 1
   snackbarRef?: MatSnackBarRef<NotificationComponent>
   previewMode = false
   mimeTypeRoute: any
@@ -157,11 +157,11 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   customStepper(step: number) {
-    if (step === 1) {
-      this.disableCursor = true
-    } else {
-      this.currentStep = step
-    }
+    // if (step === 1) {
+    //   this.disableCursor = true
+    // } else {
+    this.currentStep = step
+    // }
   }
 
   changeContent(data: NSContent.IContentMeta) {
@@ -274,8 +274,11 @@ export class QuizComponent implements OnInit, OnDestroy {
     )
   }
 
-  save() {
+  save(next?: string) {
     this.canValidate = true
+    if (this.questionsArr.length === 0) {
+      this.questionsArr = this.quizStoreSvc.collectiveQuiz[this.currentId]
+    }
     const hasMinLen = (this.resourceType !== ASSESSMENT && this.questionsArr.length)
       || (this.resourceType === ASSESSMENT && this.questionsArr.length >= this.quizConfig.minQues)
     const needSave = Object.keys(this.metaContentService.upDatedContent[this.currentId] || {}).length
@@ -291,6 +294,9 @@ export class QuizComponent implements OnInit, OnDestroy {
             this.canValidate = false
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
+            if (next) {
+              this.action(next)
+            }
           },
           () => {
             this.canValidate = false
@@ -398,6 +404,9 @@ export class QuizComponent implements OnInit, OnDestroy {
 
   action(type: string) {
     switch (type) {
+      case 'back':
+        this.currentStep = 1
+        break
       case 'next':
         this.currentStep += 1
         break
@@ -406,6 +415,9 @@ export class QuizComponent implements OnInit, OnDestroy {
         break
       case 'save':
         this.save()
+        break
+      case 'saveAndNext':
+        this.save('next')
         break
       case 'push':
         this.takeAction()

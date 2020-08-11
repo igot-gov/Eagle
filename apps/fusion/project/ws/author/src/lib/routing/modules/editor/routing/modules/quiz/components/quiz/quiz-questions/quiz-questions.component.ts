@@ -1,5 +1,5 @@
 import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/components/delete-dialog/delete-dialog.component'
-import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core'
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, EventEmitter, Output, Input } from '@angular/core'
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map, mergeMap, tap, catchError } from 'rxjs/operators'
@@ -51,7 +51,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
   }],
 })
 export class QuizQusetionsComponent implements OnInit, OnDestroy {
-
+  @Output() data = new EventEmitter<string>()
+  @Input() isSubmitPressed = false
   selectedQuizIndex!: number
   allContents: NSContent.IContentMeta[] = []
   contentLoaded = false
@@ -227,7 +228,9 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
         },
       )
   }
-
+  done() {
+    this.action('saveAndNext')
+  }
   triggerSave(meta: NSContent.IContentMeta, id: string) {
     const requestBody: NSApiRequest.IContentUpdate = {
       hierarchy: {},
@@ -274,7 +277,7 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
     )
   }
 
-  save() {
+  save(next?: string) {
     this.canValidate = true
     const hasMinLen = (this.resourceType !== ASSESSMENT && this.questionsArr.length)
       || (this.resourceType === ASSESSMENT && this.questionsArr.length >= this.quizConfig.minQues)
@@ -291,6 +294,9 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
             this.canValidate = false
             this.loaderService.changeLoad.next(false)
             this.showNotification(Notify.SAVE_SUCCESS)
+            if (next) {
+              this.action(next)
+            }
           },
           () => {
             this.canValidate = false
@@ -299,13 +305,13 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
           },
         )
       } else {
-        this.currentStep = 2
+        // this.currentStep = 1
       }
     } else {
       // enters if the quiz array does not have min len or no changes has been made in meta or quiz
       if (this.resourceType !== ASSESSMENT && !this.questionsArr.length) {
         this.showNotification(Notify.RESOURCE_NO_QUIZ)
-        this.currentStep = 2
+        // this.currentStep = 1
       } else if (
         this.resourceType === ASSESSMENT &&
         this.questionsArr.length < this.quizConfig.minQues
@@ -313,6 +319,9 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
         this.showNotification(Notify.ASSESSMENT_MIN_QUIZ)
         // this.currentStep = 2
       } else {
+        if (next) {
+          this.action(next)
+        }
         this.showNotification(Notify.UP_TO_DATE)
       }
     }
@@ -400,12 +409,16 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
     switch (type) {
       case 'next':
         this.currentStep += 1
+        this.data.emit('next')
         break
       case 'preview':
         this.preview()
         break
       case 'save':
         this.save()
+        break
+      case 'saveAndNext':
+        this.save('next')
         break
       case 'push':
         this.takeAction()

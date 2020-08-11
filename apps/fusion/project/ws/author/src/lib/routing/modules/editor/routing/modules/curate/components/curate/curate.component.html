@@ -41,20 +41,22 @@
     </div>
   </div> -->
 
-  <mat-horizontal-stepper labelPosition="bottom" #stepper id="curate-container">
+  <!-- <mat-horizontal-stepper labelPosition="bottom" #stepper id="curate-container">
     <mat-step state="phone">
       <ng-template matStepLabel>
         <span class="ws-mat-default-text">Upload Content</span>
       </ng-template>
-      <ng-container [ngTemplateOutlet]="top"></ng-container>
-      <ws-auth-url-upload [isSubmitPressed]="isSubmitPressed" (data)="action($event)"></ws-auth-url-upload>
-    </mat-step>
+      <ng-container [ngTemplateOutlet]="top"></ng-container> -->
+  <ws-auth-url-upload *ngIf="currentStep === 1" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+  </ws-auth-url-upload>
+  <!-- </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
-      </ng-template>
-      <ws-auth-edit-meta [stage]="1" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
-      </ws-auth-edit-meta>
-    </mat-step>
+      </ng-template> -->
+  <ws-auth-edit-meta *ngIf="currentStep > 1" type="URL" [stage]="currentStep" [nextAction]="'done'"
+    [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+  </ws-auth-edit-meta>
+  <!-- </mat-step>
     <mat-step state="create1">
       <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>
       </ng-template>
@@ -66,10 +68,10 @@
       </ng-template>
       <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
       </ws-auth-edit-meta>
-    </mat-step>
-    <!-- Icon overrides. -->
-    <!-- check_circle -->
-    <ng-template matStepperIcon="phone">
+    </mat-step> -->
+  <!-- Icon overrides. -->
+  <!-- check_circle -->
+  <!-- <ng-template matStepperIcon="phone">
       <mat-icon class="ws-mat-default-text">radio_button_checked</mat-icon>
     </ng-template>
     <ng-template matStepperIcon="create1">
@@ -81,7 +83,7 @@
     <ng-template matStepperIcon="done">
       <mat-icon class="ws-mat-default-text">check_circle</mat-icon>
     </ng-template>
-  </mat-horizontal-stepper>
+  </mat-horizontal-stepper> -->
 </div>
 
 <div *ngIf="previewMode">
