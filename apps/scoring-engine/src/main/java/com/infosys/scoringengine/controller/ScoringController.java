@@ -16,13 +16,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/scoring")
+@RequestMapping("/action/scoring")
 public class ScoringController {
 
     @Autowired
     ScoringEngineService scoringEngineService;
 
-    @PostMapping("/add/v2")
+    @PostMapping("/add")
     public ResponseEntity<Response> add(@RequestBody EvaluatorModel evaluatorModel, @RequestHeader String rootOrg,
                                         @RequestHeader String org) throws Exception {
         evaluatorModel.setRootOrg(rootOrg);
@@ -31,7 +31,7 @@ public class ScoringController {
         return new ResponseEntity<>(scoringEngineService.addV2(evaluatorModel), HttpStatus.OK);
     }
 
-    @PostMapping("/fetch/v2")
+    @PostMapping("/fetch")
     public ResponseEntity<Response> search(@RequestBody EvaluatorModel evaluatorModel, @RequestHeader String rootOrg,
                                            @RequestHeader String org) throws Exception {
         evaluatorModel.setRootOrg(rootOrg);
