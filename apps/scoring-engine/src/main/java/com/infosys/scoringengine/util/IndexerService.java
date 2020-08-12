@@ -123,7 +123,8 @@ public class IndexerService {
         for ( Map.Entry<String, Object> filter : searchQuery.entrySet()) {
             String field = filter.getKey();
             Object value = filter.getValue();
-            if(value != null) query = query.must(QueryBuilders.matchQuery(field, value));
+            boolean emptyValue = (value instanceof String) ? ((String) value).isEmpty() : false;
+            if(value != null && !emptyValue) query = query.must(QueryBuilders.matchQuery(field, value));
         }
         return query;
     }
