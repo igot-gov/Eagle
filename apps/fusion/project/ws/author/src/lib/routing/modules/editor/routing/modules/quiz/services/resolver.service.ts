@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core'
-
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { AccessControlService } from '../../../../../../../modules/shared/services/access-control.service'
+import { Observable, of } from 'rxjs'
+import { ApiService } from '../../../../../../../modules/shared/services/api.service'
+import { CONTENT_READ_HIERARCHY_AND_DATA } from '../../../../../../../constants/apiEndpoints'
+import { catchError } from 'rxjs/operators'
+import { Router } from '@angular/router'
 
 @Injectable()
 export class QuizResolverService {
   constructor(
-    private accessControl: AccessControlService
+    private accessControl: AccessControlService,
+    private apiService: ApiService,
+    private router: Router,
+
   ) { }
 
   canEdit(meta: NSContent.IContentMeta): boolean {
@@ -34,5 +41,16 @@ export class QuizResolverService {
       })
     }
     return returnVal
+  }
+
+  getUpdatedData(id: string): Observable<{ content: NSContent.IContentMeta, data: any }[]> {
+    return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
+      `${CONTENT_READ_HIERARCHY_AND_DATA}${id}`,
+    ).pipe(
+      catchError((v: any) => {
+        this.router.navigateByUrl('/error-somethings-wrong')
+        return of(v)
+      }),
+    )
   }
 }

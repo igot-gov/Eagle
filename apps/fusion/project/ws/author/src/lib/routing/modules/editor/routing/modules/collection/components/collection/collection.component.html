@@ -32,15 +32,13 @@
         </ws-auth-quiz-questions> -->
         <div *ngIf="viewMode === 'quiz'">
           Please go to drafts to edit Web Pages or Click
-          <a class="m-auto" target="_blank" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label
-            aria-label="Back">
+          <a class="m-auto" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label aria-label="Back">
             here
           </a>
         </div>
         <div *ngIf="viewMode === 'web'">
           Please go to drafts to edit Web Pages or Click
-          <a class="m-auto" target="_blank" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label
-            aria-label="Back">
+          <a class="m-auto" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label aria-label="Back">
             here
           </a>
         </div>

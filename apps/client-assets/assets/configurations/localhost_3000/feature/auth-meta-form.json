@@ -699,9 +699,6 @@
     },
     "disabledFor": {},
     "mandatoryFor": {
-      "Collection": [],
-      "Course": [],
-      "Learning Path": [],
       "Resource": []
     },
     "notDisabledFor": {},
@@ -3910,9 +3907,7 @@
       ]
     },
     "disabledFor": {},
-    "mandatoryFor": {
-      
-    },
+    "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
     "notShowFor": {
@@ -3924,8 +3919,7 @@
       "Learning Path": [],
       "Resource": []
     },
-    "showFor": {
-    },
+    "showFor": {},
     "type": "string"
   },
   "kArtifacts": {
