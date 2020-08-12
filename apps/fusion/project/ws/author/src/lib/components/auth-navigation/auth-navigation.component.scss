@@ -9,6 +9,19 @@
   flex: 1 1 auto;
 }
 
+.responsive-flex {
+  flex: 1;
+
+  @include breakpoint-xs {
+    flex: auto;
+  }
+
+  @include breakpoint-s {
+    flex: auto;
+  }
+
+}
+
 .next-b {
   width: 12px;
   height: 18px;

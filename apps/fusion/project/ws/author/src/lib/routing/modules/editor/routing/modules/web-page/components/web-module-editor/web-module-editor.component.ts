@@ -118,13 +118,44 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     })
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.activateRoute.parent.parent.data.subscribe(v => {
+        //   if (v.contents && v.contents.length) {
+        //     this.allContents.push(v.contents[0].content)
+        //     const newData = this.webStoreSvc.getWeb()
+        //     if (v.contents[0].data || newData) {
+        //       const url = v.contents[0].content.artifactUrl.substring(0, v.contents[0].content.artifactUrl.lastIndexOf('/'))
+        //       this.imagesUrlbase = `${url}/assets/`
+        //       const formattedObj = JSON.parse(JSON.stringify(v.contents[0].data || newData))
         if (v.contents && v.contents.length) {
           this.allContents.push(v.contents[0].content)
-          const newData = this.webStoreSvc.getWeb()
+          let newData
+          if (this.currentId) {
+            newData = this.webStoreSvc.getCurrentWeb(this.currentId)
+          } else {
+            newData = this.webStoreSvc.getWeb()
+          }
           if (v.contents[0].data || newData) {
             const url = v.contents[0].content.artifactUrl.substring(0, v.contents[0].content.artifactUrl.lastIndexOf('/'))
             this.imagesUrlbase = `${url}/assets/`
-            const formattedObj = JSON.parse(JSON.stringify(v.contents[0].data || newData))
+            let formattedObj: any
+            if (v.contents[0].data && !!newData) {
+              if (JSON.stringify(v.contents[0].data) !== JSON.stringify(newData)) {
+                formattedObj = JSON.parse(JSON.stringify(newData))
+              } else {
+                formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
+              }
+            } else if (v.contents[0].data && !!!newData) {
+              formattedObj = JSON.parse(JSON.stringify(v.contents[0].data))
+
+            } else if (!v.contents[0].data && !!newData) {
+              formattedObj = JSON.parse(newData)
+
+            } else if (!v.contents[0].data && !!!newData) {
+              formattedObj = {
+                pages: [],
+                pageJson: [],
+              }
+            }
+
             formattedObj.pageJson.map((obj: ModuleObj) => {
               if (obj.audio && obj.audio.length) {
                 obj.audio.map(audioObj => {
@@ -170,8 +201,11 @@ export class WebModuleEditorComponent implements OnInit, OnDestroy {
     this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
       if (!this.userData[id]) {
         this.userData[id] = new WebModuleData({})
+        this.webStoreSvc.reset()
       }
       this.currentId = id
+      this.webStoreSvc.currentId = id
+      this.webStoreSvc.changeWeb(0)
       this.changePage(0)
     })
 

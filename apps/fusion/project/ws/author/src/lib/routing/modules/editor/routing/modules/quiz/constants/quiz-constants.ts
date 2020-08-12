@@ -17,7 +17,7 @@ export const QUESTION_CONFIG = {
   },
   minMaxQuesConfig: {
     // amit
-    minQues: 10,
+    minQues: 1,
   },
 }
 
