@@ -25,6 +25,7 @@ public class EvaluatorModel {
     private String userId;
 
     private String templateId;
+    private String templeteName;
 
     private double compositeScore;
     private double minimunQualifier;
@@ -176,5 +177,13 @@ public class EvaluatorModel {
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getTempleteName() {
+        return templeteName;
+    }
+
+    public void setTempleteName(String templeteName) {
+        this.templeteName = templeteName;
     }
 }
