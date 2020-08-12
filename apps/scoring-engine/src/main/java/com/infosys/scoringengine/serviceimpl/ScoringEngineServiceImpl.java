@@ -54,6 +54,9 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 
 	@Value("${es.score.index.type}")
 	private String esIndexType;
+
+	@Value("${scoring.template.id}")
+	private String scoringTemplateId;
 	
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Logger logger = LoggerFactory.getLogger(ScoringEngineServiceImpl.class);
@@ -92,7 +95,7 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 			// doComputations of all fields
 			ScoringTemplate scoringTemplate = null;
 			if (evaluatorModel.getTemplateId() == null || evaluatorModel.getTemplateId().isEmpty()){
-				scoringTemplate = scoringSchema.getScoringTemplates().stream().filter(t -> t.getTemplate_id().equals("temp-01")).findFirst().get();
+				scoringTemplate = scoringSchema.getScoringTemplates().stream().filter(t -> t.getTemplate_id().equals(scoringTemplateId)).findFirst().get();
 			}
 			ComputeScores computeScores = new ComputeScores(scoringTemplate);
 			computeScores.compute(evaluatorModel);

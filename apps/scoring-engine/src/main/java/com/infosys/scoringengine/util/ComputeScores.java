@@ -63,6 +63,8 @@ public class ComputeScores {
             Criteria criteria = criteriaMap.get(cm.getCriteria());
             evaluatorModel.setTemplateId(scoringTemplate.getTemplate_id());
             evaluatorModel.setTempleteName(scoringTemplate.getTemplateName());
+            evaluatorModel.setRootOrg(scoringTemplate.getRootOrg());
+            evaluatorModel.setOrg(scoringTemplate.getOrg());
             //EvaluationCriteria criteria = scoreCriteriaRepository.findCriteriaByName(evaluatorModel.getRootOrg(), evaluatorModel.getOrg(), cm.getCriteria());
 
             logger.info("EvaluationCriteria: ",mapper.writeValueAsString(criteria));
