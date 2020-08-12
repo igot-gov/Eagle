@@ -28,7 +28,7 @@ public class ScoringController {
         evaluatorModel.setRootOrg(rootOrg);
         evaluatorModel.setOrg(org);
         System.out.println("request : "+new ObjectMapper().writeValueAsString(evaluatorModel));
-        return new ResponseEntity<>(scoringEngineService.addV2(evaluatorModel), HttpStatus.OK);
+        return new ResponseEntity<>(scoringEngineService.addV3(evaluatorModel), HttpStatus.OK);
     }
 
     @PostMapping("/fetch")

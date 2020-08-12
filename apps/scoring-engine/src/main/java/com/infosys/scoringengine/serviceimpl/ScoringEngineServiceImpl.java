@@ -57,6 +57,9 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 
 	@Value("${scoring.template.id}")
 	private String scoringTemplateId;
+
+	@Value("${es.scoring.enabled}")
+	private boolean esScoringEnabled;
 	
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Logger logger = LoggerFactory.getLogger(ScoringEngineServiceImpl.class);
@@ -102,11 +105,16 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 			logger.info("evaluatorModel : {}",mapper.writeValueAsString(evaluatorModel));
 
 			// post the data into ES index
-			Map<String, Object> indexDocument = mapper.convertValue(evaluatorModel, new TypeReference<Map<String, Object>>() {});
-			RestStatus status = indexerService.addEntity(esIndex, esIndexType, evaluatorModel.getIdentifier(), indexDocument);
+			if(esScoringEnabled){
+				Map<String, Object> indexDocument = mapper.convertValue(evaluatorModel, new TypeReference<Map<String, Object>>() {});
+				RestStatus status = indexerService.addEntity(esIndex, esIndexType, evaluatorModel.getIdentifier(), indexDocument);
+				response.put("status", status);
+				response.put("id", evaluatorModel.getIdentifier());
 
-			response.put("status", status);
-			response.put("id", evaluatorModel.getIdentifier());
+			} else {
+				response.put("result", evaluatorModel);
+			}
+
 			response.put("Message", "Successfully operation");
 
 		} catch (Exception e){
