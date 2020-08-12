@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 public class ComputeScores {
 
     private Logger logger = LoggerFactory.getLogger(ComputeScores.class);
@@ -69,6 +70,71 @@ public class ComputeScores {
                 qm.setScoringType("fixed");
             }
 
+            List<Double> scoreVals = cm.getQualifiers().stream().map(q -> q.getScoreValue()).collect(Collectors.toList());
+            cm.setTotalScore(MathFunction.sum(scoreVals));
+            cm.setWeightedAvg(MathFunction.weightedAvg(scoreVals ,weightage));
+            cm.setMaxWeightedAvg(MathFunction.maxWeightedAvg(maxScore, weightage));
+            cm.setMinWeightedAvg(MathFunction.minWeightedAvg(minScore, weightage));
+
+
+
+        }
+
+        List<Double> criteriaScoreValues = evaluatorModel.getCriteriaModels().stream().map(c -> c.getTotalScore()).collect(Collectors.toList());
+        evaluatorModel.setFinalTotalScore(MathFunction.sum(criteriaScoreValues));
+
+        List<Double> criteriaWeightedAvgVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getWeightedAvg).collect(Collectors.toList());
+        evaluatorModel.setFinalWeightedAvg(MathFunction.sum(criteriaWeightedAvgVals));
+
+
+        List<Double> criteriaMaxScoreVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getMaxScore).collect(Collectors.toList());
+        evaluatorModel.setFinalMaxScore(MathFunction.sum(criteriaMaxScoreVals));
+
+        List<Double> criteriaMaxWeightedAvgVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getMaxWeightedAvg).collect(Collectors.toList());
+        evaluatorModel.setFinalMaxWeightedAvg(MathFunction.sum(criteriaMaxWeightedAvgVals));
+
+        List<Double> criteriaMinScoreVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getMinScore).collect(Collectors.toList());
+        evaluatorModel.setFinalMinScore(MathFunction.sum(criteriaMinScoreVals));
+
+        List<Double> criteriaMinWeightedAvgVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getMinWeightedAvg).collect(Collectors.toList());
+        evaluatorModel.setFinalMinWeightedAvg(MathFunction.sum(criteriaMinWeightedAvgVals));
+
+
+        String timeStamp = formatterDateTime.format(Calendar.getInstance().getTime());
+        evaluatorModel.setTimeStamp(timeStamp);
+
+        long millsec = System.currentTimeMillis();
+        evaluatorModel.setIdentifier(IDENTIFIER_PREFIX + millsec);
+
+    }
+
+  /*  public void compute(EvaluatorModel evaluatorModel) throws Exception{
+
+        for (CriteriaModel cm : evaluatorModel.getCriteriaModels()){
+
+            //to get maxscore , minacceptablescore
+            EvaluationCriteria criteria = scoreCriteriaRepository.findCriteriaByName(evaluatorModel.getRootOrg(), evaluatorModel.getOrg(), cm.getCriteria());
+
+            logger.info("EvaluationCriteria: ",mapper.writeValueAsString(criteria));
+            double maxScore = criteria.getMaxScore();
+            cm.setMaxScore(maxScore);
+            double minScore = criteria.getMinScore();
+            cm.setMinScore(minScore);
+            double weightage = criteria.getWeightage();
+            cm.setWeightage(weightage);
+
+
+            List<ScoreQualifier> scoreQualifiers = scoreQualifierRepository.findQualifiersByCriteria(evaluatorModel.getRootOrg(), evaluatorModel.getOrg(), criteria.getCriteriaId());
+            logger.info("scoreQualifiers: ",mapper.writeValueAsString(scoreQualifiers));
+            Map<String, Map<String, Integer>> qualifierFixedScores = scoreQualifiers.stream().collect(
+                    Collectors.toMap(ScoreQualifier::getQualifier, ScoreQualifier::getFixedScore));
+
+            for(QualifierModel qm : cm.getQualifiers()){
+                int score = qualifierFixedScores.get(qm.getName()).get(qm.getEvaluated());
+                qm.setScoreValue(score);
+                qm.setScoringType("fixed");
+            }
+
             double totalScore = cm.getQualifiers().stream().mapToDouble(QualifierModel::getScoreValue).sum();
             cm.setTotalScore(totalScore);
 
@@ -84,7 +150,7 @@ public class ComputeScores {
         }
 
         double finalTotatScore = evaluatorModel.getCriteriaModels().stream().mapToDouble(CriteriaModel::getTotalScore).sum();
-        evaluatorModel.setFinalMaxScore(finalTotatScore);
+        evaluatorModel.setFinalTotalScore(finalTotatScore);
 
         double finalWeightedAvg = evaluatorModel.getCriteriaModels().stream().mapToDouble(CriteriaModel::getWeightedAvg).sum();
         evaluatorModel.setFinalWeightedAvg(finalWeightedAvg);
@@ -108,6 +174,7 @@ public class ComputeScores {
         long millsec = System.currentTimeMillis();
         evaluatorModel.setIdentifier(IDENTIFIER_PREFIX + millsec);
 
-    }
+    }*/
+
 
 }
