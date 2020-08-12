@@ -32,7 +32,7 @@ public class ComputeScores {
     private ObjectMapper mapper = new ObjectMapper();
 
     private static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static final String IDENTIFIER_PREFIX = "lex_score_";
+    private static String identifierPrefix = "lex_score_";
 
     private ScoreCriteriaRepository scoreCriteriaRepository;
     private ScoreQualifierRepository scoreQualifierRepository;
@@ -76,8 +76,6 @@ public class ComputeScores {
             cm.setMaxWeightedAvg(MathFunction.maxWeightedAvg(maxScore, weightage));
             cm.setMinWeightedAvg(MathFunction.minWeightedAvg(minScore, weightage));
 
-
-
         }
 
         List<Double> criteriaScoreValues = evaluatorModel.getCriteriaModels().stream().map(c -> c.getTotalScore()).collect(Collectors.toList());
@@ -104,7 +102,7 @@ public class ComputeScores {
         evaluatorModel.setTimeStamp(timeStamp);
 
         long millsec = System.currentTimeMillis();
-        evaluatorModel.setIdentifier(IDENTIFIER_PREFIX + millsec);
+        evaluatorModel.setIdentifier(identifierPrefix + millsec);
 
     }
 

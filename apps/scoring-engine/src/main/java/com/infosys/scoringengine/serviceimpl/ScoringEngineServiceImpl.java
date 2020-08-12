@@ -15,9 +15,11 @@ import com.infosys.scoringengine.models.EvaluatorModel;
 import com.infosys.scoringengine.models.Response;
 import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreCriteriaRepository;
 import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreQualifierRepository;
+import com.infosys.scoringengine.schema.model.ScoringSchema;
 import com.infosys.scoringengine.service.ScoringEngineService;
 import com.infosys.scoringengine.util.ComputeScores;
 import com.infosys.scoringengine.util.IndexerService;
+import com.infosys.scoringengine.util.ScoringSchemaLoader;
 import org.elasticsearch.rest.RestStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,12 +27,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
 public class ScoringEngineServiceImpl implements ScoringEngineService {
 
+
+	@Autowired
+	ScoringSchema scoringSchema;
 	@Autowired
 	ScoreCriteriaRepository scoreCriteriaRepository;
 
@@ -49,7 +55,6 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 	
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Logger logger = LoggerFactory.getLogger(ScoringEngineServiceImpl.class);
-
 
 	@Override
 	public Response addV2(EvaluatorModel evaluatorModel) throws Exception{
