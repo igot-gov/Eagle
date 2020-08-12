@@ -15,7 +15,9 @@ import com.infosys.scoringengine.models.EvaluatorModel;
 import com.infosys.scoringengine.models.Response;
 import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreCriteriaRepository;
 import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreQualifierRepository;
+import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreTemplate;
 import com.infosys.scoringengine.schema.model.ScoringSchema;
+import com.infosys.scoringengine.schema.model.ScoringTemplate;
 import com.infosys.scoringengine.service.ScoringEngineService;
 import com.infosys.scoringengine.util.ComputeScores;
 import com.infosys.scoringengine.util.IndexerService;
@@ -63,6 +65,36 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 
 			// doComputations of all fields
 			ComputeScores computeScores = new ComputeScores(scoreCriteriaRepository, scoreQualifierRepository);
+			computeScores.compute(evaluatorModel);
+			logger.info("evaluatorModel : {}",mapper.writeValueAsString(evaluatorModel));
+
+			// post the data into ES index
+			Map<String, Object> indexDocument = mapper.convertValue(evaluatorModel, new TypeReference<Map<String, Object>>() {});
+			RestStatus status = indexerService.addEntity(esIndex, esIndexType, evaluatorModel.getIdentifier(), indexDocument);
+
+			response.put("status", status);
+			response.put("id", evaluatorModel.getIdentifier());
+			response.put("Message", "Successfully operation");
+
+		} catch (Exception e){
+			e.printStackTrace();
+			throw new Exception(e);
+		}
+
+		return response;
+	}
+
+	@Override
+	public Response addV3(EvaluatorModel evaluatorModel) throws Exception{
+		Response response = new Response();
+		try{
+
+			// doComputations of all fields
+			ScoringTemplate scoringTemplate = null;
+			if (evaluatorModel.getTemplateId() == null || evaluatorModel.getTemplateId().isEmpty()){
+				scoringTemplate = scoringSchema.getScoringTemplates().stream().filter(t -> t.getTemplate_id().equals("temp-01")).findFirst().get();
+			}
+			ComputeScores computeScores = new ComputeScores(scoringTemplate);
 			computeScores.compute(evaluatorModel);
 			logger.info("evaluatorModel : {}",mapper.writeValueAsString(evaluatorModel));
 

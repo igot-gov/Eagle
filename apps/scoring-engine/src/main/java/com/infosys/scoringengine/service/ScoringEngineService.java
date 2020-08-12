@@ -13,5 +13,6 @@ import com.infosys.scoringengine.models.Response;
 public interface ScoringEngineService {
 
     public Response addV2(EvaluatorModel evaluatorModel) throws Exception;
+    public Response addV3(EvaluatorModel evaluatorModel) throws Exception;
     public Response searchV2(EvaluatorModel evaluatorModel) throws Exception;
 }
