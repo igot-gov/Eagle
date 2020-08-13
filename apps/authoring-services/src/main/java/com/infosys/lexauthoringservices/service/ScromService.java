@@ -15,7 +15,7 @@ import java.util.Map;
 public interface ScromService {
 
     public Response upsert(ScromRequest scromData,  String rootOrg, String org) throws Exception;
-    public Response fetch(Map<String,Object> scromData) throws Exception;
-    public Response delete(Map<String,Object> scromData) throws Exception;
+    public Response fetch(Map<String,Object> scromData, String rootOrg, String org) throws Exception;
+    public Response delete(Map<String,Object> scromData, String rootOrg, String org) throws Exception;
 
 }

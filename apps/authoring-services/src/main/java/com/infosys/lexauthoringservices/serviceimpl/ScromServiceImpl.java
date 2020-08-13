@@ -60,20 +60,16 @@ public class ScromServiceImpl implements ScromService {
     }
 
     @Override
-    public Response fetch(Map<String, Object> scromData) throws Exception {
+    public Response fetch(Map<String, Object> scromData, String rootOrg, String org) throws Exception {
 
         Response response = new Response();
         try{
 
-            String rootOrg = (String) scromData.get("rootOrg");
-            String org = (String) scromData.get("org");
             String contentId = (String) scromData.get("contentId");
             String userId = (String) scromData.get("userId");
 
-            if(rootOrg == null || rootOrg.isEmpty() || org == null || org.isEmpty() || contentId == null || contentId.isEmpty()
-                    || userId == null || userId.isEmpty() ) {
-
-                throw new BadRequestException("Invalid request: rootOrg or org or contentId or userId is missing ");
+            if(contentId == null || contentId.isEmpty() || userId == null || userId.isEmpty() ) {
+                throw new BadRequestException("Invalid request: contentId or userId is missing ");
             }
 
             ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
@@ -89,19 +85,17 @@ public class ScromServiceImpl implements ScromService {
     }
 
     @Override
-    public Response delete(Map<String, Object> scromData) throws Exception {
+    public Response delete(Map<String, Object> scromData, String rootOrg, String org) throws Exception {
         Response response = new Response();
         try{
 
-            String rootOrg = (String) scromData.get("rootOrg");
-            String org = (String) scromData.get("org");
             String contentId = (String) scromData.get("contentId");
             String userId = (String) scromData.get("userId");
 
-            if(rootOrg == null || rootOrg.isEmpty() || org == null || org.isEmpty() || contentId == null || contentId.isEmpty()
+            if( contentId == null || contentId.isEmpty()
                     || userId == null || userId.isEmpty() ) {
 
-                throw new BadRequestException("Invalid request: rootOrg or org or contentId or userId is missing ");
+                throw new BadRequestException("Invalid request: contentId or userId is missing ");
             }
 
             ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);

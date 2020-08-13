@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
@@ -29,19 +30,21 @@ public class ScromController {
 	ScromService scromService;
 
 	@PostMapping("/add")
-	public ResponseEntity<Response> add(@RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
+	public ResponseEntity<Response> add(@Valid @RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
 										@RequestHeader String org) throws Exception {
 		return new ResponseEntity<>(scromService.upsert(scromRequest, rootOrg, org), HttpStatus.OK);
 	}
 
 	@PostMapping("/fetch")
-	public ResponseEntity<Response> fetch(@RequestBody Map<String, Object> requestBody) throws Exception {
-		return new ResponseEntity<>(scromService.fetch(requestBody), HttpStatus.OK);
+	public ResponseEntity<Response> fetch(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
+										  @RequestHeader String org) throws Exception {
+		return new ResponseEntity<>(scromService.fetch(requestBody, rootOrg, org), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<Response> delete(@RequestBody Map<String, Object> requestBody) throws Exception {
-		return new ResponseEntity<>(scromService.delete(requestBody), HttpStatus.OK);
+	public ResponseEntity<Response> delete(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
+										   @RequestHeader String org) throws Exception {
+		return new ResponseEntity<>(scromService.delete(requestBody, rootOrg, org), HttpStatus.OK);
 	}
 	
 	
