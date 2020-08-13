@@ -19,7 +19,10 @@ public interface ScromModelRepository extends CassandraRepository<ScromModel, Sc
 	@Query("SELECT * from scrom_template where root_org= ?0 and org= ?1;")
 	public List<ScromModel> findAllByRootOrgAndOrg(String rootOrg, String org);
 
-	@Query("SELECT * from scrom_template where root_org= ?0 and org= ?1 and contentId= ?2 and userId= ?3;")
-	public List<ScromModel> findById(String rootOrg, String org, String contentId, String userId);
+	@Query("SELECT * from scrom_template where root_org= ?0 and org= ?1 and contentId= ?2 ;")
+	public List<ScromModel> findByContentId(String rootOrg, String org, String contentId);
+
+	@Query("SELECT * from scrom_template where root_org= ?0 and org= ?1 and userId= ?2 ;")
+	public List<ScromModel> findByUserId(String rootOrg, String org, String userId);
 
 }

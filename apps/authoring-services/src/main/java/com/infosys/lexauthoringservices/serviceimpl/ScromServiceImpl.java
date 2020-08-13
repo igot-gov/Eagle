@@ -7,6 +7,7 @@
 
 package com.infosys.lexauthoringservices.serviceimpl;
 
+import com.infosys.lexauthoringservices.exception.BadRequestException;
 import com.infosys.lexauthoringservices.model.Response;
 import com.infosys.lexauthoringservices.model.ScromRequest;
 import com.infosys.lexauthoringservices.model.cassandra.ScromModel;
@@ -59,6 +60,21 @@ public class ScromServiceImpl implements ScromService {
 
     @Override
     public Response fetch(Map<String, Object> scromData) {
+
+        String rootOrg = (String) scromData.get("rootOrg");
+        String org = (String) scromData.get("org");
+        String contentId = (String) scromData.get("contentId");
+        String userId = (String) scromData.get("userId");
+
+        if(rootOrg == null || rootOrg.isEmpty() || org == null || org.isEmpty() || contentId == null || contentId.isEmpty()
+                || userId == null || userId.isEmpty() ) {
+
+            throw new BadRequestException("Invalid request: rootOrg or org or contentId or userId is missing ");
+        }
+
+        ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
+        scromModelRepository.findById(scromPrimaryKey);
+
         return null;
     }
 
