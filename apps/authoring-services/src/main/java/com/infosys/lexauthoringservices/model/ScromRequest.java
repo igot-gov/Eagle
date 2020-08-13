@@ -5,49 +5,47 @@
  *
  */
 
-package com.infosys.lexauthoringservices.model.cassandra;
+package com.infosys.lexauthoringservices.model;
 
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
-@Table("scrom_template")
-public class ScromModel {
+public class ScromRequest {
 
-    @PrimaryKey
-    private ScromPrimaryKey scromPrimaryKey;
-
-    @Column("type")
+    @NotBlank
+    private String userId;
+    @NotBlank
+    private String contentId;
     private String type;
-
-    @Column("initialized")
+    @NotBlank
     private boolean initialized;
-
-    @Column("cmi_core_exit")
+    @NotBlank
     private String cmiCoreExit;
-
-    @Column("cmi_core_lesson_status")
+    @NotBlank
     private String cmiCoreLessonStatus;
-
-    @Column("cmi_core_session_time")
+    @NotBlank
     private String cmiCoreSessionTime;
-
-    @Column("cmi_suspend_data")
+    @NotBlank
     private String cmiSuspendData;
 
-    @Column("errors")
     private List<String> errors = new ArrayList<>();
 
-    public ScromModel(ScromPrimaryKey scromPrimaryKey){
-        super();
-        this.scromPrimaryKey = scromPrimaryKey;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public ScromPrimaryKey getScromPrimaryKey() {
-        return scromPrimaryKey;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
     }
 
     public String getType() {
