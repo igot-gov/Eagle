@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class ScromServiceImpl implements ScromService {
@@ -59,27 +60,58 @@ public class ScromServiceImpl implements ScromService {
     }
 
     @Override
-    public Response fetch(Map<String, Object> scromData) {
+    public Response fetch(Map<String, Object> scromData) throws Exception {
 
-        String rootOrg = (String) scromData.get("rootOrg");
-        String org = (String) scromData.get("org");
-        String contentId = (String) scromData.get("contentId");
-        String userId = (String) scromData.get("userId");
+        Response response = new Response();
+        try{
 
-        if(rootOrg == null || rootOrg.isEmpty() || org == null || org.isEmpty() || contentId == null || contentId.isEmpty()
-                || userId == null || userId.isEmpty() ) {
+            String rootOrg = (String) scromData.get("rootOrg");
+            String org = (String) scromData.get("org");
+            String contentId = (String) scromData.get("contentId");
+            String userId = (String) scromData.get("userId");
 
-            throw new BadRequestException("Invalid request: rootOrg or org or contentId or userId is missing ");
+            if(rootOrg == null || rootOrg.isEmpty() || org == null || org.isEmpty() || contentId == null || contentId.isEmpty()
+                    || userId == null || userId.isEmpty() ) {
+
+                throw new BadRequestException("Invalid request: rootOrg or org or contentId or userId is missing ");
+            }
+
+            ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
+            Optional<ScromModel> scromModel =scromModelRepository.findById(scromPrimaryKey);
+            response.put("data", scromModel);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception(e);
         }
-
-        ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
-        scromModelRepository.findById(scromPrimaryKey);
-
-        return null;
+        response.put("Message", "Successful");
+        return response;
     }
 
     @Override
-    public Response delete(Map<String, Object> scromData) {
-        return null;
+    public Response delete(Map<String, Object> scromData) throws Exception {
+        Response response = new Response();
+        try{
+
+            String rootOrg = (String) scromData.get("rootOrg");
+            String org = (String) scromData.get("org");
+            String contentId = (String) scromData.get("contentId");
+            String userId = (String) scromData.get("userId");
+
+            if(rootOrg == null || rootOrg.isEmpty() || org == null || org.isEmpty() || contentId == null || contentId.isEmpty()
+                    || userId == null || userId.isEmpty() ) {
+
+                throw new BadRequestException("Invalid request: rootOrg or org or contentId or userId is missing ");
+            }
+
+            ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
+            scromModelRepository.deleteById(scromPrimaryKey);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception(e);
+        }
+        response.put("Message", "Successful");
+        return response;
     }
 }

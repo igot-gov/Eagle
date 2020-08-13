@@ -36,12 +36,12 @@ public class ScromController {
 
 	@PostMapping("/fetch")
 	public ResponseEntity<Response> fetch(@RequestBody Map<String, Object> requestBody) throws Exception {
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		return new ResponseEntity<>(scromService.fetch(requestBody), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
 	public ResponseEntity<Response> delete(@RequestBody Map<String, Object> requestBody) throws Exception {
-		return new ResponseEntity<>(null, HttpStatus.OK);
+		return new ResponseEntity<>(scromService.delete(requestBody), HttpStatus.OK);
 	}
 	
 	
