@@ -86,10 +86,9 @@ export class SCORMAdapterService {
   }
 
   LMSGetLastError() {
-    let errors = this.store.getItem('errors')
-    errors = JSON.parse(errors || '[]')
-    if (errors && errors.length > 0) {
-      // return errors.pop()
+    const newErrors = JSON.parse(this.store.getItem('errors') || '[]')
+    if (newErrors && newErrors.length > 0) {
+      return newErrors.pop()
     }
     return ""
   }
@@ -117,9 +116,10 @@ export class SCORMAdapterService {
     // let errorCodes = errorCode.toString()
     let errors = this.store.getItem('errors')
     if (!errors) errors = '[]'
-    errors = JSON.parse(errors)
-      (errors).push(errorCode)
-    errors = JSON.stringify(errors)
-    this.store.setItem('errors', errors)
+    const newErrors = JSON.parse(errors)
+    if (newErrors && typeof (newErrors) === 'object') {
+      newErrors.push(errorCode)
+    }
+    this.store.setItem('errors', JSON.stringify(errors))
   }
 }
