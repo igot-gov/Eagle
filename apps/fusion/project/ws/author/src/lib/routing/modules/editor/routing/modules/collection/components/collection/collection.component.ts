@@ -522,6 +522,8 @@ export class CollectionComponent implements OnInit, OnDestroy {
           this.viewMode = 'curate'
         } else if (content.mimeType === 'application/quiz') {
           this.viewMode = 'quiz'
+        } else if (content.mimeType === 'application/web-module') {
+          this.viewMode = 'web'
         }
         break
       case 'preview':
