@@ -20,8 +20,9 @@ export class Storage {
     if (getItem) {
       const itemParsed = JSON.parse(getItem)
       if (itemParsed) {
-        itemParsed[element] = value
+        itemParsed[element] = JSON.parse(value)
         // _.set(itemParsed,'element',value);
+        console.log("return Item=> stringfy", JSON.stringify(itemParsed))
         window.localStorage.setItem(VARIABLES.KEY, JSON.stringify(itemParsed))
       }
     }
@@ -35,8 +36,9 @@ export class Storage {
     }
     item = JSON.parse(item)
     if (item) {
-      const _return = item[element] || null
-      return _return
+      console.log("return Item", item)
+      return item[element] || null
+
     }
     return null
   }
@@ -47,6 +49,7 @@ export class Storage {
       return ''
     }
     item = JSON.parse(item)
+    console.log("GET ALL", item)
     return item || ''
   }
 
