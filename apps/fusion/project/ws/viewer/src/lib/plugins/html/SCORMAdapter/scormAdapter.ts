@@ -120,6 +120,6 @@ export class SCORMAdapterService {
     if (newErrors && typeof (newErrors) === 'object') {
       newErrors.push(errorCode)
     }
-    this.store.setItem('errors', JSON.stringify(errors))
+    this.store.setItem('errors', errors)
   }
 }
