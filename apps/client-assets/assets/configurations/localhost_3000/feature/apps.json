@@ -90,6 +90,24 @@
       "url": "/app/info/about",
       "shortName": "About"
     },
+    "feature_frac": {
+      "accessKey": "A",
+      "icon": "airplay",
+      "iconType": "mat-icon",
+      "id": "feature_frac",
+      "keywords": [
+        "frac"
+      ],
+      "name": "Frac",
+      "permission": [
+        "admin"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Frac",
+      "url": "/app/frac",
+      "shortName": "Frac"
+    },
     "feature_goals": {
       "accessKey": "",
       "icon": "track_changes",
@@ -523,7 +541,8 @@
     },
     {
       "featureIds": [
-        "feature_admin"
+        "feature_admin",
+        "feature_frac"
       ],
       "icon": "",
       "iconType": "none",

@@ -43,7 +43,11 @@ const routes: Routes = [
     loadChildren: () => import('./routes/route-activities.module').then(u => u.RouteActivitiesModule),
     canActivate: [GeneralGuard],
   },
-
+  {
+    path: 'app/frac',
+    loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
+    canActivate: [GeneralGuard],
+  },
   {
     path: 'admin',
     data: {

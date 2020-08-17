@@ -723,16 +723,6 @@
             true
           ]
         }
-      ],
-      "Resource": [
-        {
-          "body": [
-            true
-          ],
-          "mimeType": [
-            "application/html"
-          ]
-        }
       ]
     },
     "notShowFor": {},
