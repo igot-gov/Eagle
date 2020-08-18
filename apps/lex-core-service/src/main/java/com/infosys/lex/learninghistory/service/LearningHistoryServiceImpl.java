@@ -236,11 +236,11 @@ public class LearningHistoryServiceImpl implements LearningHistoryService {
 		if (!contentIds.isEmpty()){
 			data = contentProgressRepo.getProgress(rootOrg, userUUID,
 					Arrays.asList(new String[] { "Resource", "Course", "Collection", "Learning Path" }), contentIds);
-			System.out.println("ContentProgressModel data for given contentId "+new ObjectMapper().writeValueAsString(data));
+			//System.out.println("ContentProgressModel data for given contentId "+new ObjectMapper().writeValueAsString(data));
 		} else {
 			data = contentProgressRepo.getProgressForAll(rootOrg, userUUID,
 					Arrays.asList(new String[] { "Resource", "Course", "Collection", "Learning Path" }));
-			System.out.println("ContentProgressModel data for all "+new ObjectMapper().writeValueAsString(data));
+			//System.out.println("ContentProgressModel data for all "+new ObjectMapper().writeValueAsString(data));
 
 		}
 

@@ -71,7 +71,7 @@ public class HierarchyServiceImpl implements HierarchyService {
 
 	List<String> masterAllowedStatus = Arrays.asList("Live", "Expired", "Deleted","MarkedForDeletion");
 	
-	List<String> masterEmailFetchFields = Arrays.asList("creatorContacts", "verifiers");
+	List<String> masterEmailFetchFields = Arrays.asList("creatorContacts", "verifiers", "creatorDetails");
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
