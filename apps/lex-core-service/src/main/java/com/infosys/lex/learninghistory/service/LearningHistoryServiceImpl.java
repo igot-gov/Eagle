@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -232,12 +233,17 @@ public class LearningHistoryServiceImpl implements LearningHistoryService {
 		}
 
 		List<ContentProgressModel> data = new ArrayList<>();
-		if (!contentIds.isEmpty())
+		if (!contentIds.isEmpty()){
 			data = contentProgressRepo.getProgress(rootOrg, userUUID,
 					Arrays.asList(new String[] { "Resource", "Course", "Collection", "Learning Path" }), contentIds);
-		else
+			System.out.println("ContentProgressModel data for given contentId "+new ObjectMapper().writeValueAsString(data));
+		} else {
 			data = contentProgressRepo.getProgressForAll(rootOrg, userUUID,
 					Arrays.asList(new String[] { "Resource", "Course", "Collection", "Learning Path" }));
+			System.out.println("ContentProgressModel data for all "+new ObjectMapper().writeValueAsString(data));
+
+		}
+
 
 		List<String> contentIdList = new ArrayList<>();
 		data.forEach(content -> contentIdList.add(content.getPrimaryKey().getContentId()));

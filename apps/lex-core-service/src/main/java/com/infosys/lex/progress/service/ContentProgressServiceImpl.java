@@ -701,6 +701,8 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 				"Live");
 		List<ContentProgressModel> contentProgressList = contentProgressRepo.getProgress(rootOrg, userUUID, contentList,
 				idsList);
+		System.out.println("ContentProgressModel data  "+new ObjectMapper().writeValueAsString(contentProgressList));
+
 		for (ContentProgressModel cpm : contentProgressList) {
 			contentProgressMap.put(cpm.getPrimaryKey().getContentId(), cpm.getProgress());
 		}
