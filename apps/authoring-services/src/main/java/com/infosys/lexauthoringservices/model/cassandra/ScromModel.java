@@ -46,8 +46,24 @@ public class ScromModel {
         this.scromPrimaryKey = scromPrimaryKey;
     }
 
-    public ScromPrimaryKey getScromPrimaryKey() {
-        return scromPrimaryKey;
+    public void setScromPrimaryKey(ScromPrimaryKey scromPrimaryKey){
+        this.scromPrimaryKey = scromPrimaryKey;
+    }
+
+    public String getRootOrg() {
+        return scromPrimaryKey.getRootOrg();
+    }
+
+    public String getOrg() {
+        return scromPrimaryKey.getOrg();
+    }
+
+    public String getContentId() {
+        return scromPrimaryKey.getContentId();
+    }
+
+    public String getUserId() {
+        return scromPrimaryKey.getUserId();
     }
 
     public String getType() {

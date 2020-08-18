@@ -7,26 +7,34 @@
 
 package com.infosys.lexauthoringservices.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScromRequest {
 
-    @NotBlank
+    @NotNull
     private String userId;
-    @NotBlank
+    @NotNull
     private String contentId;
     private String type;
-    @NotBlank
+    @NotNull
+    @JsonProperty("Initialized")
     private boolean initialized;
-    @NotBlank
+    @NotNull
+    @JsonProperty("cmi.core.exit")
     private String cmiCoreExit;
-    @NotBlank
+    @NotNull
+    @JsonProperty("cmi.core.lesson_status")
     private String cmiCoreLessonStatus;
-    @NotBlank
+    @NotNull
+    @JsonProperty("cmi.core.session_time")
     private String cmiCoreSessionTime;
-    @NotBlank
+    @NotNull
+    @JsonProperty("cmi.suspend_data")
     private String cmiSuspendData;
 
     private List<String> errors = new ArrayList<>();

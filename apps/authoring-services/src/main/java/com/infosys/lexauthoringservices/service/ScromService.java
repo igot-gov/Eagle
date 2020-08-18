@@ -10,12 +10,10 @@ package com.infosys.lexauthoringservices.service;
 import com.infosys.lexauthoringservices.model.Response;
 import com.infosys.lexauthoringservices.model.ScromRequest;
 
-import java.util.Map;
-
 public interface ScromService {
 
     public Response upsert(ScromRequest scromData,  String rootOrg, String org) throws Exception;
-    public Response fetch(Map<String,Object> scromData, String rootOrg, String org) throws Exception;
-    public Response delete(Map<String,Object> scromData, String rootOrg, String org) throws Exception;
+    public Response fetch( String rootOrg, String org, String contentId, String userId) throws Exception;
+    public Response delete(String rootOrg, String org, String contentId, String userId) throws Exception;
 
 }

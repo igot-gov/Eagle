@@ -7,6 +7,7 @@
 
 package com.infosys.lexauthoringservices.serviceimpl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lexauthoringservices.exception.BadRequestException;
 import com.infosys.lexauthoringservices.model.Response;
 import com.infosys.lexauthoringservices.model.ScromRequest;
@@ -60,21 +61,17 @@ public class ScromServiceImpl implements ScromService {
     }
 
     @Override
-    public Response fetch(Map<String, Object> scromData, String rootOrg, String org) throws Exception {
+    public Response fetch(String rootOrg, String org, String contentId, String userId) throws Exception {
 
         Response response = new Response();
         try{
 
-            String contentId = (String) scromData.get("contentId");
-            String userId = (String) scromData.get("userId");
-
-            if(contentId == null || contentId.isEmpty() || userId == null || userId.isEmpty() ) {
-                throw new BadRequestException("Invalid request: contentId or userId is missing ");
-            }
-
             ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
             Optional<ScromModel> scromModel =scromModelRepository.findById(scromPrimaryKey);
-            response.put("data", scromModel);
+
+            scromModel.get().setScromPrimaryKey(scromPrimaryKey);
+
+            response.put("data", scromModel.get());
 
         }catch (Exception e){
             e.printStackTrace();
@@ -85,18 +82,9 @@ public class ScromServiceImpl implements ScromService {
     }
 
     @Override
-    public Response delete(Map<String, Object> scromData, String rootOrg, String org) throws Exception {
+    public Response delete( String rootOrg, String org,  String contentId, String userId) throws Exception {
         Response response = new Response();
         try{
-
-            String contentId = (String) scromData.get("contentId");
-            String userId = (String) scromData.get("userId");
-
-            if( contentId == null || contentId.isEmpty()
-                    || userId == null || userId.isEmpty() ) {
-
-                throw new BadRequestException("Invalid request: contentId or userId is missing ");
-            }
 
             ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
             scromModelRepository.deleteById(scromPrimaryKey);

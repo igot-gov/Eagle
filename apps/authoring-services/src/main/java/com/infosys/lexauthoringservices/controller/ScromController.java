@@ -30,21 +30,21 @@ public class ScromController {
 	ScromService scromService;
 
 	@PostMapping("/add")
-	public ResponseEntity<Response> add(@Valid @RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
+	public ResponseEntity<Response> add(/*@Valid*/ @RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
 										@RequestHeader String org) throws Exception {
 		return new ResponseEntity<>(scromService.upsert(scromRequest, rootOrg, org), HttpStatus.OK);
 	}
 
-	@PostMapping("/fetch")
-	public ResponseEntity<Response> fetch(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
-										  @RequestHeader String org) throws Exception {
-		return new ResponseEntity<>(scromService.fetch(requestBody, rootOrg, org), HttpStatus.OK);
+	@GetMapping("/fetch")
+	public ResponseEntity<Response> fetch(@RequestHeader String rootOrg, @RequestHeader String org,
+										  @RequestParam String contentId, @RequestParam String userId) throws Exception {
+		return new ResponseEntity<>(scromService.fetch(rootOrg, org, contentId, userId), HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<Response> delete(@RequestBody Map<String, Object> requestBody, @RequestHeader String rootOrg,
-										   @RequestHeader String org) throws Exception {
-		return new ResponseEntity<>(scromService.delete(requestBody, rootOrg, org), HttpStatus.OK);
+	public ResponseEntity<Response> delete(@RequestHeader String rootOrg, @RequestHeader String org,
+										   @RequestParam String contentId, @RequestParam String userId) throws Exception {
+		return new ResponseEntity<>(scromService.delete(rootOrg, org, contentId, userId), HttpStatus.OK);
 	}
 	
 	
