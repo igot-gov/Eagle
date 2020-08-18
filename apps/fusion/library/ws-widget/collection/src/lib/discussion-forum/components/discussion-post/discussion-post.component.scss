@@ -47,7 +47,7 @@
   border-radius: 6px;
   background-color: #00A9F4 !important;
   color: #fff !important;
-  height: 30px;
+  height: 36px;
   line-height: 22px;
   padding: 5px 15px;
   width: auto;
@@ -96,6 +96,7 @@
   font: 14px/14px Poppins-Medium;
   letter-spacing: 0px;
   color: #000;
+  height: 35px;
 }
 
 .reply-heading{
@@ -112,6 +113,7 @@
 ::ng-deep.ql-editor{
   background: #fff;
   border-radius: 8px;
+  line-height: inherit !important;
 }
 
 ::ng-deep.ql-editor.ql-blank::before {
@@ -122,7 +124,11 @@
     color: #00A9F4;
     opacity: 0.5;
     bottom: 15px;
-    top:15px;
+    top: 22px;
+}
+
+.write-reply-container ::ng-deep.ql-editor.ql-blank::before {
+  top: 15px;
 }
 
 .flip-180{

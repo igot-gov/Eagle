@@ -1,6 +1,6 @@
 <mat-card class="margin-top-s no-card-style">
   <div class="flex postSection">
-    <div class="flex self-start mt-6">
+    <div class="flex self-start sm:mt-8" [ngClass]="{'sm:mt-12': userId === post.postCreator.postCreatorId}">
       <ws-widget-user-image class="main-post-user-image" [userId]="userId" [userName]="post.postCreator.name"
         [imageType]="'user-photo'" [imageSize]="'small'" [email]="post.postCreator.emailId"></ws-widget-user-image>
         <div class="sm:hidden">
@@ -34,7 +34,7 @@
     </div>
     <div class="flex flex-col width-expand pl-0 sm:pl-3">
       <div class="hidden sm:block">
-        <div class="flex flex-col sm:flex-row flex-wrap">
+        <div class="flex flex-col flex-middle sm:flex-row flex-wrap">
           <span *ngIf="post.postCreator.name"
             class="user-name leading-normal margin-left-l">{{ post.postCreator.name }}</span>
           <span *ngIf="!post.postCreator.name && post.postCreator.emailId"
@@ -61,7 +61,7 @@
         </div>
       </div>
       
-      <div class="flex margin-top-s">
+      <div class="flex mt-2">
         <div class="margin-left-s margin-auto post-msg width-expand" *ngIf="!editMode && post.postContent.title.length"
           [innerHTML]="post.postContent.title"></div>
         <!-- <mat-chip-list>

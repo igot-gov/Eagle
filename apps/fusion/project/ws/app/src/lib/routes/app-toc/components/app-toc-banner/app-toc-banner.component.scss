@@ -28,7 +28,7 @@ background: inherit;
   max-width: 1217px;
   display: block;
   margin: 0 auto;
-  padding: 24px 24px 0 24px;
+  padding: 0 15px !important;
 }
 .fluid-width {
   width: 100%;
@@ -38,14 +38,17 @@ background: inherit;
   height: 100%;
   @extend %container-padding;
   box-sizing: border-box;
-  .apIcon img {
-    height: 72px;
-    width: 72px;
-    object-fit: cover;
-    background-color: #fff;
-    padding: 7px;
-    border-radius: 8px;
-  }
+  .apIcon{
+    min-width: 86px;
+    img {
+      height: 72px;
+      width: 72px;
+      object-fit: cover;
+      background-color: #fff;
+      padding: 7px;
+      border-radius: 8px;
+    }
+  } 
 
   .header-title {
     display: flex;
@@ -73,7 +76,7 @@ background: inherit;
   }
 
   .rating-count{
-    font: Regular 18px/27px Poppins;
+    font: 18px/27px Poppins-regular;
   letter-spacing: 0.36px;
   color: #FFFFFF;
   }
@@ -110,11 +113,11 @@ background: inherit;
 
   .header-actions {
     display: flex;
-    margin-top: 24px;
+    // margin-top: 24px;
      
     &.top{
       margin-top: 0;
-      margin-bottom: 24px;
+      margin-bottom: 40px;
     }
 
     .action-btns {
