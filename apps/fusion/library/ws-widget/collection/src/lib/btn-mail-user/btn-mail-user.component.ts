@@ -39,7 +39,6 @@ export class BtnMailUserComponent extends WidgetBaseComponent
   openQueryMailDialog(event: Event) {
     event.stopPropagation()
     this.raiseTelemetry()
-    console.log('this.widgetData: ', this.widgetData)
     this.dialog.open<BtnMailUserDialogComponent, IBtnMailUser>(
       BtnMailUserDialogComponent,
       {
