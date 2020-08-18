@@ -8,6 +8,7 @@ import { EventService, ConfigurationsService } from '@ws-widget/utils'
 export interface IBtnMailUser {
   content: NsContent.IContent
   emails: string[]
+  user: any
   labelled?: boolean
 }
 
@@ -38,9 +39,11 @@ export class BtnMailUserComponent extends WidgetBaseComponent
   openQueryMailDialog(event: Event) {
     event.stopPropagation()
     this.raiseTelemetry()
+    console.log('this.widgetData: ', this.widgetData)
     this.dialog.open<BtnMailUserDialogComponent, IBtnMailUser>(
       BtnMailUserDialogComponent,
       {
+        width: '60vw',
         data: this.widgetData,
       },
     )

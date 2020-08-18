@@ -67,4 +67,8 @@ export class BtnMailUserDialogComponent implements OnInit {
       },
     )
   }
+
+  close() {
+    this.dialogRef.close()
+  }
 }

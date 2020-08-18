@@ -1,9 +1,22 @@
-<h1 mat-dialog-title>Send Mail</h1>
+<div class="flex items-center">
+  <h2 mat-dialog-title class="heading font-weight-500 width-expand" i18n>
+    {{ data.content.name }}
+  </h2>
+  <button mat-dialog-close mat-icon-button class="cursor-pointer self-end closeBtn " (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
 <div mat-dialog-content>
-  <mat-form-field>
-    <mat-label>{{ data.content.name }}</mat-label>
+  <div class="author" *ngIf="!data?.user?.name">
+    <span>To: {{data?.user?.first_name}} {{data?.user?.last_name}}</span>
+  </div>
+  <div class="author" *ngIf="data?.user?.name">
+    <span>To: {{data?.user?.name}}</span>
+  </div>
+  <mat-form-field appearance="outline" class="w-full margin-top-xs">
+    <!-- <mat-label>{{ data.content.name }}</mat-label> -->
     <textarea matInput i18n-placeholder placeholder="I need your help in 'Elaborate your query'" #mailBody
-      rows="5"></textarea>
+      rows="5" [matTextareaAutosize] [matAutosizeMinRows]="10"></textarea>
   </mat-form-field>
   <div class="mat-caption" *ngIf="sendStatus === 'INVALID_ID'" i18n>
     Invalid Ids. Failed to send mail.
@@ -13,10 +26,14 @@
   </div>
 </div>
 <div mat-dialog-actions class="flex-row-reverse">
-  <button mat-raised-button [disabled]="mailSendInProgress || !mailBody.value" [color]="'primary'"
+  <button class="margin-left-s" mat-raised-button [disabled]="mailSendInProgress || !mailBody.value" [color]="'accent'"
     (click)="send(mailBody.value, successToast.value, errorToast.value, invalidIdToast.value)" i18n-aria-label
     aria-label="Send Your Query" i18n>
     Send Mail
+  </button>
+  <button mat-raised-button [color]="'primary'" i18n-aria-label (click)="close()"
+    aria-label="Cancel" i18n>
+    Cancel
   </button>
 </div>
 <input type="hidden" i18n-value value="Mail Sent" #successToast />
