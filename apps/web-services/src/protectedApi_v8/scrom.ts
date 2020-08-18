@@ -67,7 +67,13 @@ scromApi.post('/add/:id', async (req, res) => {
       return
     }
     const url = `${apiEndpoints.postScromData}`
-    const response = await axios.post(url, req.body,
+    const body = {
+      ...req.body,
+      contentId,
+      userId,
+    }
+    const response = await axios.post(url,
+      body,
       {
         ...axiosRequestConfig,
         headers: {
