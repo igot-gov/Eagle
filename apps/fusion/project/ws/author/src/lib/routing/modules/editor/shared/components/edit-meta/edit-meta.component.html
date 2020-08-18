@@ -40,7 +40,9 @@
                       </span> -->
                     </label>
                     <div class="margin-top-xs">
-                      <div class="thumbnail-logo">
+                      <div [ngClass]="{'cursor-pointer': !(contentForm.controls.appIcon.value || relativeUrl),
+                        'thumbnail-logo': true}"
+                        (click)="contentForm.controls.appIcon.value || relativeUrl ? false : uploadThumbnail.click()">
                         <img class="image max-width" *ngIf="contentForm.controls.appIcon.value | relativeUrl" [ngClass]="{
                     'image-border': showError('appIcon'),
                     'ws-mat-warn-text': showError('appIcon')
@@ -55,6 +57,7 @@
                       </div>
                     </div>
                   </div>
+
                   <div class="margin-top-xs m-auto" *ngIf="checkCondition('creatorLogo', 'show')"
                     [ngClass]="{ disable: checkCondition('creatorLogo', 'disabled') }">
                     <label>
@@ -69,7 +72,10 @@
                       </span> -->
                     </label>
                     <div class="margin-top-xs">
-                      <div class="source-logo">
+                      <div [ngClass]="{
+                         'cursor-pointer': !(contentForm.controls.creatorLogo.value) || relativeUrl,
+                         'source-logo': true}"
+                        (click)="contentForm.controls.creatorLogo.value || relativeUrl ? false : uploadSource.click()">
                         <img class="image max-width" *ngIf="contentForm.controls.creatorLogo.value | relativeUrl"
                           [ngClass]="{
                     'image-border': showError('creatorLogo'),
@@ -603,8 +609,8 @@
                   <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('catalogPaths')">info
                 </mat-icon> -->
                   <button mat-button (click)="openCatalogSelector()"
-                    class="ws-mat-primary-text font-weight-500 flex flex-middle cursor-pointer">
-                    <mat-icon>add</mat-icon>
+                    class="margin-left-m text-white ws-mat-primary-background font-weight-500 flex flex-middle cursor-pointer">
+                    <mat-icon>replay</mat-icon>
                     <span i18n>
                       UPDATE
                     </span>
@@ -1090,7 +1096,7 @@
                   <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
                     (click)="data.emit('push'); isSubmitPressed = true">
                     <b class="text-white" i18n>
-                      Send for Review
+                      Done
                     </b>
                   </button>
                 </div>

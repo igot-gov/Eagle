@@ -113,16 +113,18 @@ export class UrlUploadComponent implements OnInit {
   }
 
   submit() {
-    if (this.urlUploadForm.controls.artifactUrl.value && !this.iprAccepted) {
-      this.snackBar.openFromComponent(NotificationComponent, {
-        data: {
-          type: Notify.IPR_DECLARATION,
-        },
-        duration: NOTIFICATION_TIME * 1000,
-      })
-    } else {
-      this.storeData()
-      this.data.emit('saveAndNext')
+    if (this.urlUploadForm.controls.artifactUrl.value) {
+      if (this.urlUploadForm.controls.artifactUrl.value && !this.iprAccepted) {
+        this.snackBar.openFromComponent(NotificationComponent, {
+          data: {
+            type: Notify.IPR_DECLARATION,
+          },
+          duration: NOTIFICATION_TIME * 1000,
+        })
+      } else {
+        this.storeData()
+        this.data.emit('saveAndNext')
+      }
     }
   }
 

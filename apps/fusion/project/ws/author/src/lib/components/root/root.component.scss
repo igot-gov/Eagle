@@ -1,3 +1,6 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
 .outer {
   display: flex;
   flex-flow: column;
@@ -17,6 +20,15 @@ router-outlet+* {
   // display: inline-block;
   display: flex;
   margin: 0 auto;
+
+  @include breakpoint-s {
+    margin-top: 2rem;
+  }
+
+  @include breakpoint-xs {
+    margin-top: 2rem;
+  }
+
 }
 
 .overlay {

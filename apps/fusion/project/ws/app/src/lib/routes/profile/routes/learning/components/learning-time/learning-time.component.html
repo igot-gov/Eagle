@@ -1,7 +1,8 @@
 <div>
   <div class="learning-container flex flex-wrap flex-center">
     <div class="width-1-1 learning-graph margin-bottom-xl margin-right-m block p-6 mat-elevation-z2">
-      <div *ngIf="timeSpentData?.lastUpdatedDate" class="mat-caption justify-end flex flex-middle">
+      <div *ngIf="timeSpentData?.lastUpdatedDate!= '01 Jan 1970 00:00 UTC'"
+        class="mat-caption justify-end flex flex-middle">
         <ng-container>
           <span i18n>Last Updated on :</span>
           <span class="ml-2"> {{ timeSpentData?.lastUpdatedDate | date: 'MMM d, y' }}</span>

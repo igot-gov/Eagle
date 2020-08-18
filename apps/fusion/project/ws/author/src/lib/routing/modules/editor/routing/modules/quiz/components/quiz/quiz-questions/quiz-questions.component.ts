@@ -112,21 +112,33 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
     this.showSettingButtons = this.accessControl.rootOrg === 'client1'
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.activateRoute.parent.parent.data.subscribe(v => {
-        if (v.contents && v.contents.length) {
-          this.allContents.push(v.contents[0].content)
-          this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = v.contents[0].data
-            ? v.contents[0].data.questions
-            : []
-          this.canEditJson = this.quizResolverSvc.canEdit(v.contents[0].content)
-          this.resourceType = v.contents[0].content.categoryType || 'Quiz'
-          this.quizDuration = v.contents[0].content.duration || 300
-          this.questionsArr =
-            this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] || []
-          this.contentLoaded = true
-        }
-        if (!this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier]) {
-          this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = []
-        }
+        this.quizResolverSvc.getUpdatedData(v.contents[0].content.identifier).subscribe(newData => {
+
+          if (v.contents && v.contents.length) {
+            this.allContents.push(v.contents[0].content)
+            if (v.contents[0].data) {
+              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = v.contents[0].data.questions
+            } else if (newData[0] && newData[0].data && newData[0].data.questions) {
+              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = newData[0].data.questions
+
+            } else {
+              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = []
+            }
+            // this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = v.contents[0].data
+            //   ? v.contents[0].data.questions
+            //   : []
+
+            this.canEditJson = this.quizResolverSvc.canEdit(v.contents[0].content)
+            this.resourceType = v.contents[0].content.categoryType || 'Quiz'
+            this.quizDuration = v.contents[0].content.duration || 300
+            this.questionsArr =
+              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] || []
+            this.contentLoaded = true
+          }
+          if (!this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier]) {
+            this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = []
+          }
+        })
       })
     }
     this.allLanguages = this.authInitService.ordinals.subTitles

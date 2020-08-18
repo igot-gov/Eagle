@@ -236,8 +236,8 @@
     </div>
   </div>
   <div class="flex justify-center">
-    <button type="button" mat-raised-button color="primary" class="margin-top-m ws-mat-primary-background"
-      (click)="closeDialog()">
+    <button [disabled]="!!!fileUploadCondition.url" type="button" mat-raised-button color="primary"
+      class="margin-top-m ws-mat-primary-background" (click)="closeDialog()">
       <div class="flex flex-middle justify-center">
         <p class="margin-remove-bottom agree-text" i18n>Done</p>
       </div>

@@ -486,7 +486,11 @@
 
 // font properties
 .font-weight-bold {
-  font-weight: bold !important;
+  font-weight: 500 !important;
+}
+
+.font-weight-normal {
+  font-weight: 600 !important;
 }
 
 .font-weight-500 {
@@ -536,7 +540,7 @@
   outline: 0em !important;
 }
 
-.backdropBackground{
+.backdropBackground {
   background-color: darkgrey;
   opacity: 0.8 !important;
 }

@@ -155,11 +155,11 @@
   MAX_OPTIONS_REACHED = 'MAX_QUIZ_REACHED', -->
 <p *ngIf="type === notify.RESOURCE_NO_QUIZ">
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">error</mat-icon>
-  <span i18n>Resource should have atlest one Quiz!</span>
+  <span i18n>Resource should have at least one Quiz!</span>
 </p>
 <p *ngIf="type === notify.ASSESSMENT_MIN_QUIZ">
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">error</mat-icon>
-  <span i18n>Assessment should have atlest 10 Quizzes!</span>
+  <span i18n>Assessment should have at least 10 Quizzes!</span>
 </p>
 <p *ngIf="type === notify.MAX_QUIZ_REACHED">
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">error</mat-icon>
@@ -191,7 +191,7 @@
 </p>
 <p *ngIf="type === notify.MCQ_NO_OPTION_CORRECT">
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">error</mat-icon>
-  <span i18n>Atleast one option should be correct for MCQ!</span>
+  <span i18n>At least one option should be correct for MCQ!</span>
 </p>
 <p *ngIf="type === notify.MCQ_ALL_OPTIONS_CORRECT">
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">error</mat-icon>

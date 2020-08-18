@@ -51,7 +51,8 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
     ) {
       return 'publish'
     }
-    if (
+    if (this.contentService.originalContent &&
+      this.contentService.originalContent[this.currentContent] &&
       this.contentService.originalContent[this.currentContent].contentType === 'Knowledge Artifact'
     ) {
       return 'publish'

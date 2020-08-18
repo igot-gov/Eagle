@@ -699,9 +699,6 @@
     },
     "disabledFor": {},
     "mandatoryFor": {
-      "Collection": [],
-      "Course": [],
-      "Learning Path": [],
       "Resource": []
     },
     "notDisabledFor": {},
@@ -724,16 +721,6 @@
         {
           "body": [
             true
-          ]
-        }
-      ],
-      "Resource": [
-        {
-          "body": [
-            true
-          ],
-          "mimeType": [
-            "application/html"
           ]
         }
       ]
@@ -3910,9 +3897,7 @@
       ]
     },
     "disabledFor": {},
-    "mandatoryFor": {
-      
-    },
+    "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
     "notShowFor": {
@@ -3924,8 +3909,7 @@
       "Learning Path": [],
       "Resource": []
     },
-    "showFor": {
-    },
+    "showFor": {},
     "type": "string"
   },
   "kArtifacts": {

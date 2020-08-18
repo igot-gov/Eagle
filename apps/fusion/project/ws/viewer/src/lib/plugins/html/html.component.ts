@@ -6,8 +6,9 @@ import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
+import { SCORMAdapterService } from './SCORMAdapter/scormAdapter'
 
-const scormAdapter = require('scorm-api-adapter').default
+// const scormAdapter = require('scorm-api-adapter').default
 // import SCORMAdapter from 'scorm-api-adapter'
 
 @Component({
@@ -35,12 +36,16 @@ export class HtmlComponent implements OnInit, OnChanges {
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
     // private http: HttpClient,
+    private scormAdapterService: SCORMAdapterService,
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
   ) {
-    (window as any).API = new scormAdapter();
-    (window as any).API.uri = 'https://localhost:3000/great-endpoit'
+    // (window as any).API = new scormAdapter();
+    // (window as any).API.uri = 'https://localhost:3000/great-endpoit'
+    // this.ScormAdapterService = new SCORMAdapterService()
+    // this.ScormAdapterService.uri('https://localhost:3000/great-endpoit')
+    (window as any).API = this.scormAdapterService
   }
 
   ngOnInit() {

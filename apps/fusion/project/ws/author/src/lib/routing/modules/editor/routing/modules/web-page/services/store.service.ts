@@ -25,5 +25,12 @@ export class WebStoreService {
   getWeb() {
     return (this.currentId && this.collectiveWeb[this.currentId]) ? JSON.parse(JSON.stringify(this.collectiveWeb[this.currentId])) : null
   }
-
+  getCurrentWeb(id: string) {
+    return (id && this.collectiveWeb[id]) ? JSON.parse(JSON.stringify(this.collectiveWeb[id])) : null
+  }
+  reset() {
+    this.currentId = ''
+    this.currentWebIndex = 0
+    this.collectiveWeb = {}
+  }
 }

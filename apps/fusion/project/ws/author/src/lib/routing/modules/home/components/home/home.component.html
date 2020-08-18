@@ -1,4 +1,4 @@
-<mat-sidenav-container class="nav-container" autosize>
+<mat-sidenav-container class="nav-container" autosize name="auth-tool-exp">
   <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="border-0">
     <div *ngIf="allowAuthor" class="matExpansion flex flex-middle  padding-remove-left create-button">
       <button mat-button class="btn-create margin-remove-bottom mat-h3 font-white ws-mat-primary-border"
@@ -7,118 +7,132 @@
         <ng-container i18n><span class="font-white margin-left-xs">Create</span></ng-container>
       </button>
     </div>
-    <ng-container *ngIf="isNewDesign">
-      <mat-accordion expanded>
-        <mat-expansion-panel [expanded]="true" class="no-shadow">
-          <mat-list role="list">
-            <mat-list-item mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'all' }" i18n>All</a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'draft' }" i18n>
-                <img class="ws-mat-primary-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
-                  alt="draft" title="draft" />
-                Draft</a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'inreview' }" i18n>Sent for review</a>
-            </mat-list-item>
-            <mat-list-item role="listitem" *ngIf="allowReview">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'review' }" i18n>Review</a>
-            </mat-list-item>
-            <mat-list-item role="listitem" *ngIf="allowPublish">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'publish' }" i18n>Publish</a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'published' }" i18n>Published</a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'unpublished' }" i18n>Unpublished</a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowExpiry && allowAuthor" mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'expiry' }" i18n>Expiring</a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowRestore && allowAuthor" mat-button role="listitem">
-              <a routerLink="/author/my-content" [queryParams]="{ status: 'deleted' }" i18n>Deleted</a>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ng-container>
-    <ng-container *ngIf="!isNewDesign">
-      <mat-accordion expanded *ngIf="allowAuthor">
-        <mat-expansion-panel [expanded]="true" class="no-shadow ws-mat-auth-exp">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span class="font-weight-500 font-white" i18n>My Content</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-list role="list" class="ws-mat-auth-exp">
-            <mat-list-item role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'inreview' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/send4Review.svg"
-                  id="draft" alt="draft" title="draft" />
-                <span class="font-white margin-left-xs"> Sent for review</span></a>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'draft' }" i18n>
-                <img class="ws-mat-default-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
-                  alt="draft" title="draft" />
-                <span class="font-white margin-left-xs">Draft</span>
-              </a>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'published' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/publish.svg" id="draft"
-                  alt="draft" title="draft" />
-                <span class="font-white margin-left-xs"> Published</span></a>
-            </mat-list-item>
-            <mat-list-item role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'unpublished' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/Unpublished.svg"
-                  id="draft" alt="draft" title="draft" />
-                <span class="font-white margin-left-xs"> Unpublished</span></a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowExpiry" role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'expiry' }"
-                i18n><span class="font-white margin-left-xs"> Expiring</span></a>
-            </mat-list-item>
-            <mat-list-item *ngIf="allowRestore" role="listitem">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'deleted' }"
-                i18n><span class="font-white margin-left-xs">Deleted</span></a>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-      <!-- allowAuthor -->
-      <mat-accordion *ngIf="allowReview || allowPublish">
-        <mat-expansion-panel [expanded]="false" class="no-shadow ws-mat-auth-exp font-white">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              <span class="font-weight-500 font-white" i18n>Action Items</span>
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <mat-list role="list" class="ws-mat-auth-exp">
-            <mat-list-item role="listitem" *ngIf="allowRedo">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'rejected' }"
-                i18n><span class="font-white margin-left-xs">Redo</span></a>
-            </mat-list-item>
-            <mat-list-item role="listitem" *ngIf="allowReview">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'review' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/send4Review.svg"
-                  id="draft" alt="draft" title="draft" />
-                <span class="font-white margin-left-xs"> Review</span></a>
-            </mat-list-item>
-            <mat-list-item role="listitem" *ngIf="allowPublish">
-              <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'publish' }"
-                i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/publish.svg" id="draft"
-                  alt="draft" title="draft" />
-                <span class="font-white margin-left-xs"> Publish</span></a>
-            </mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </ng-container>
+    <div class="contain">
+      <ng-container *ngIf="isNewDesign">
+        <mat-accordion expanded>
+          <mat-expansion-panel [expanded]="true" class="no-shadow">
+            <mat-list role="list">
+              <mat-list-item mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'all' }" i18n>All</a>
+              </mat-list-item>
+              <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'draft' }" i18n>
+                  <img class="ws-mat-primary-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
+                    alt="draft" title="draft" />
+                  Draft</a>
+              </mat-list-item>
+              <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'inreview' }" i18n>Sent for review</a>
+              </mat-list-item>
+              <mat-list-item role="listitem" *ngIf="allowReview">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'review' }" i18n>Review</a>
+              </mat-list-item>
+              <mat-list-item role="listitem" *ngIf="allowPublish">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'publish' }" i18n>Publish</a>
+              </mat-list-item>
+              <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'published' }" i18n>Published</a>
+              </mat-list-item>
+              <mat-list-item *ngIf="allowAuthor" mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'unpublished' }" i18n>Unpublished</a>
+              </mat-list-item>
+              <mat-list-item *ngIf="allowExpiry && allowAuthor" mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'expiry' }" i18n>Expiring</a>
+              </mat-list-item>
+              <mat-list-item *ngIf="allowRestore && allowAuthor" mat-button role="listitem">
+                <a routerLink="/author/my-content" [queryParams]="{ status: 'deleted' }" i18n>Deleted</a>
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+      <ng-container *ngIf="!isNewDesign">
+        <mat-accordion expanded *ngIf="allowAuthor">
+          <mat-expansion-panel [expanded]="true" class="no-shadow ws-mat-auth-exp">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <span class="font-weight-500 font-white" i18n>My Content</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-divider fxFlex="1 0" class="new-mat-divider"></mat-divider>
+            <mat-list role="list" class="ws-mat-auth-exp">
+              <mat-list-item role="listitem">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'inreview' }"
+                  i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/send4Review.svg"
+                    id="draft" alt="draft" title="draft" />
+                  <span class="font-white margin-left-xs"> Sent for review</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" class="new-mat-divider"></mat-divider>
+              <mat-list-item role="listitem">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'draft' }"
+                  i18n>
+                  <img class="ws-mat-default-text img-class" src="/assets/images/authoring/draft.svg" id="draft"
+                    alt="draft" title="draft" />
+                  <span class="font-white margin-left-xs">Draft</span>
+                </a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" class="new-mat-divider"></mat-divider>
+              <mat-list-item role="listitem">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'published' }"
+                  i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/publish.svg" id="draft"
+                    alt="draft" title="draft" />
+                  <span class="font-white margin-left-xs"> Published</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" class="new-mat-divider"></mat-divider>
+              <mat-list-item role="listitem">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content"
+                  [queryParams]="{ status: 'unpublished' }" i18n><img class="ws-mat-default-text img-class"
+                    src="/assets/images/authoring/Unpublished.svg" id="draft" alt="draft" title="draft" />
+                  <span class="font-white margin-left-xs"> Unpublished</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" *ngIf="allowExpiry" class="new-mat-divider"></mat-divider>
+              <mat-list-item *ngIf="allowExpiry" role="listitem">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'expiry' }"
+                  i18n><span class="font-white margin-left-xs"> Expiring</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" *ngIf="allowRestore" class="new-mat-divider"></mat-divider>
+              <mat-list-item *ngIf="allowRestore" role="listitem">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'deleted' }"
+                  i18n><span class="font-white margin-left-xs">Deleted</span></a>
+              </mat-list-item>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+        <!-- allowAuthor -->
+        <mat-divider fxFlex="1 0" class="new-mat-divider"></mat-divider>
+        <mat-accordion *ngIf="allowReview || allowPublish">
+          <mat-expansion-panel [expanded]="false" class="no-shadow ws-mat-auth-exp font-white">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                <span class="font-weight-500 font-white" i18n>Action Items</span>
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list role="list" class="ws-mat-auth-exp">
+              <mat-divider fxFlex="1 0" class="new-mat-divider" *ngIf="allowRedo"></mat-divider>
+              <mat-list-item role=" listitem" *ngIf="allowRedo">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'rejected' }"
+                  i18n><span class="font-white margin-left-xs">Redo</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" class="new-mat-divider" *ngIf="allowReview"></mat-divider>
+              <mat-list-item role="listitem" *ngIf="allowReview">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'review' }"
+                  i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/send4Review.svg"
+                    id="draft" alt="draft" title="draft" />
+                  <span class="font-white margin-left-xs"> Review</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" class="new-mat-divider" *ngIf="allowPublish"></mat-divider>
+              <mat-list-item role="listitem" *ngIf="allowPublish">
+                <a mat-button class="flex-1 txt" routerLink="/author/my-content" [queryParams]="{ status: 'publish' }"
+                  i18n><img class="ws-mat-default-text img-class" src="/assets/images/authoring/publish.svg" id="draft"
+                    alt="draft" title="draft" />
+                  <span class="font-white margin-left-xs"> Publish</span></a>
+              </mat-list-item>
+              <mat-divider fxFlex="1 0" class="new-mat-divider"></mat-divider>
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </ng-container>
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <div *ngIf="screenSizeIsLtMedium">

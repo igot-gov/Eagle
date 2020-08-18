@@ -14,7 +14,7 @@ html,
 body {
   margin: 0px;
   font-family: $font-family-open-poppins;
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 ::selection {
@@ -432,6 +432,7 @@ ws-app-role {
     overflow: unset;
   }
 }
+
 
 h3.shepherd-title {
   margin: 0px 0px 0px 0px !important;

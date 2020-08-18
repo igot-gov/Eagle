@@ -111,6 +111,8 @@ export class AuthEditorOptionsComponent implements OnInit {
   }
 
   click(action: string, type?: string) {
-    this.action.emit({ action, type })
+    if (type !== 'resource') {
+      this.action.emit({ action, type })
+    }
   }
 }
