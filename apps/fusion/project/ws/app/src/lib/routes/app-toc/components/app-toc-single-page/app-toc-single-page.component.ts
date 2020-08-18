@@ -10,6 +10,9 @@ import { TrainingApiService } from '../../../infy/routes/training/apis/training-
 import { TrainingService } from '../../../infy/routes/training/services/training.service'
 import { NsAppToc } from '../../models/app-toc.model'
 import { AppTocService } from '../../services/app-toc.service'
+import { BtnMailUserDialogComponent } from '@ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component'
+import { IBtnMailUser } from '@ws-widget/collection/src/lib/btn-mail-user/btn-mail-user.component'
+import { MatDialog } from '@angular/material'
 
 @Component({
   selector: 'ws-app-app-toc-single-page',
@@ -43,6 +46,7 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
     private trainingSvc: TrainingService,
     private domSanitizer: DomSanitizer,
     private authAccessControlSvc: AccessControlService,
+    private dialog: MatDialog,
   ) {
     if (this.configSvc.restrictedFeatures) {
       this.askAuthorEnabled = !this.configSvc.restrictedFeatures.has('askAuthor')
@@ -164,5 +168,20 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
         .getTrainingCount(this.content.identifier)
         .pipe(retry(2))
     }
+  }
+
+  openQueryMailDialog(content: any, data: any) {
+    const dialogdata = {
+      content,
+      user: data,
+      emails: [...data.email],
+    }
+    this.dialog.open<BtnMailUserDialogComponent, IBtnMailUser>(
+      BtnMailUserDialogComponent,
+      {
+        width: '80vw',
+        data: dialogdata,
+      }
+    )
   }
 }

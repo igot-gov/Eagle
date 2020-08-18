@@ -9,8 +9,8 @@
   font: 18px/30px Poppins-Medium;
 }
 .unit-cohort {
-  display: flex;
-  align-items: center;
+  display: inline-flex;
+  // align-items: center;
   margin-bottom: $size-l;
   .cohort-image {
     $user-image-size: 32px;
@@ -18,6 +18,14 @@
     height: $user-image-size;
     font-size: $user-image-size;
   }
+}
+
+.cohorts-name {
+  letter-spacing: 0px;
+  color: #5F5F5F;
+  font-size: 0.9rem;
+  font-weight: normal;
+  font-family: Poppins-regular;
 }
 .cohortSection{
   margin:50px auto;
@@ -33,4 +41,8 @@ background: #ffffff;
 .mat-accordion .mat-expansion-panel:last-of-type {
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
+}
+
+.user-action-container {
+  color: #ADADAE;
 }

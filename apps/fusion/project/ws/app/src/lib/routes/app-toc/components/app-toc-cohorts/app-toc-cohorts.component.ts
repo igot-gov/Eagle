@@ -46,6 +46,13 @@ export class AppTocCohortsComponent implements OnInit {
     }
   }
 
+  getUserFullName(user: any) {
+    if (user && user.first_name && user.last_name) {
+      return `${user.first_name.trim()} ${user.last_name.trim()}`
+    }
+    return ''
+  }
+
   fetchCohorts(cohortType: NsCohorts.ECohortTypes) {
     if (!this.cohortResults[cohortType] && !this.forPreview) {
       this.tocSvc.fetchContentCohorts(cohortType, this.content.identifier).subscribe(
