@@ -15,6 +15,7 @@ import { knowledgeHubApi } from './khub'
 import { leaderBoardApi } from './leaderboard'
 import { navigatorApi } from './navigator'
 import { recommendationApi } from './recommendation'
+import { scromApi } from './scrom'
 import { socialApi } from './social'
 import { trainingApi } from './training'
 import { translateApi } from './translate'
@@ -41,6 +42,7 @@ protectedApiV8.use('/khub', knowledgeHubApi)
 protectedApiV8.use('/leaderboard', leaderBoardApi)
 protectedApiV8.use('/navigator', navigatorApi)
 protectedApiV8.use('/recommendation', recommendationApi)
+protectedApiV8.use('/scrom', scromApi)
 protectedApiV8.use('/social', socialApi)
 protectedApiV8.use('/training', trainingApi)
 protectedApiV8.use('/user', user)
