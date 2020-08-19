@@ -2,8 +2,8 @@
     op60: notEnabled === true
   }">
   <mat-card class="mat-elevation-z6 flex flex-1 flex-column" [ngClass]="{'expanded': childEntity.length>0}">
-    <div class="entity-container" [id]="entity.id" [attr.name]='entity.id'>
-      <!-- (click)="entityClicked(entity)" -->
+    <div class="entity-container" [id]="entity.id" [attr.name]='entity.id' (click)="entityClicked(entity)">
+      <!--  -->
       <div class="flex flex-1">
         <div class="icon-container ws-mat-primary-background-op30">
           <!-- <mat-icon class="ws-mat-primary-text">{{ entity.icon }}</mat-icon> -->
