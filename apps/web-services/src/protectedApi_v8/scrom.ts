@@ -4,6 +4,7 @@ import { axiosRequestConfig } from '../configs/request.config'
 import { CONSTANTS } from '../utils/env'
 import { ERROR } from '../utils/message'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
+import { logError, logInfo } from '../utils/logger'
 
 const unknown = 'Failed due to unknown reason'
 const apiEndpoints = {
@@ -15,6 +16,7 @@ const apiEndpoints = {
 export const scromApi = Router()
 
 scromApi.get('/:id', async (req, res) => {
+  logInfo("Scrom=> GET API called=====>", req.params.id || "id missing");
   try {
     const userId = extractUserIdFromRequest(req)
     const org = req.header('org')
@@ -44,6 +46,7 @@ scromApi.get('/:id', async (req, res) => {
     res.send((response.data))
 
   } catch (err) {
+    logError(err)
     res.status((err && err.response && err.response.status) || 500).send(
       (err && err.response && err.response.data) || {
         error: unknown,
@@ -90,6 +93,7 @@ scromApi.post('/add/:id', async (req, res) => {
     res.send(response.data)
 
   } catch (err) {
+    logError(err)
     res.status((err && err.response && err.response.status) || 500).send(
       (err && err.response && err.response.data) || {
         error: unknown,
@@ -127,6 +131,7 @@ scromApi.delete('/remove/:id', async (req, res) => {
     res.send((response.data))
 
   } catch (err) {
+    logError(err)
     res.status((err && err.response && err.response.status) || 500).send(
       (err && err.response && err.response.data) || {
         error: unknown,
