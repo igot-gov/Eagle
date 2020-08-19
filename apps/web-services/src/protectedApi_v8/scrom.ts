@@ -15,7 +15,7 @@ const apiEndpoints = {
 
 export const scromApi = Router()
 
-scromApi.get('/:id', async (req, res) => {
+scromApi.get('/get/:id', async (req, res) => {
   logInfo("Scrom=> GET API called=====>", req.params.id || "id missing");
   try {
     const userId = extractUserIdFromRequest(req)
