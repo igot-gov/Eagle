@@ -70,8 +70,22 @@ public class ScromServiceImpl implements ScromService {
             Optional<ScromModel> scromModel =scromModelRepository.findById(scromPrimaryKey);
 
             scromModel.get().setScromPrimaryKey(scromPrimaryKey);
+            ScromModel  scromModel1 = scromModel.get();
 
-            response.put("data", scromModel.get());
+            //new ObjectMapper().convertValue(scromModel1, ScromRequest.class);
+            ScromRequest scrom = new ScromRequest();
+            scrom.setUserId(scromModel1.getUserId());
+            scrom.setContentId(scromModel1.getContentId());
+            scrom.setType(scromModel1.getType());
+            scrom.setInitialized(scromModel1.isInitialized());
+            scrom.setCmiCoreExit(scromModel1.getCmiCoreExit());
+            scrom.setCmiCoreLessonStatus(scromModel1.getCmiCoreLessonStatus());
+            scrom.setCmiCoreSessionTime(scromModel1.getCmiCoreSessionTime());
+            scrom.setCmiSuspendData(scromModel1.getCmiSuspendData());
+            scrom.setErrors(scromModel1.getErrors());
+
+            //response.put("data", scromModel.get());
+            response.put("data", scrom);
 
         }catch (Exception e){
             e.printStackTrace();
