@@ -21,6 +21,10 @@
   border-radius: 5px;
 }
 
+.remove-card-box {
+  box-shadow: none !important;
+}
+
 .flex-05 {
   flex: 0.49;
 }
@@ -223,7 +227,15 @@ textarea {
 }
 
 .text-white {
-  color: #fff;
+  color: #fff !important;
+}
+
+.set-hw {
+  .mat-form-field-wrapper {
+    .mat-form-field-infix {
+      padding: 4px 0 8px 0px !important;
+    }
+  }
 }
 
 ul li {

@@ -14,7 +14,11 @@
 
 .new-style-grid {
   display: flex;
-  width: 109px
+  width: 146px;
+  /* margin-left: auto !important; */
+  margin-right: auto;
+  padding-left: 11px;
+  margin-bottom: 0px;
 }
 
 #upload-container {

@@ -50,6 +50,11 @@ export class HtmlComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     // this.mobAppSvc.simulateMobile()
+    if (this.htmlContent && this.htmlContent.identifier) {
+      this.scormAdapterService.contentId = this.htmlContent.identifier
+      this.scormAdapterService.loadData()
+      // this.scormAdapterService.LMSCommit()
+    }
   }
 
   ngOnChanges() {

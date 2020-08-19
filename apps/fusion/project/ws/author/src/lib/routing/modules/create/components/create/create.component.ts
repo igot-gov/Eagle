@@ -24,6 +24,7 @@ export class CreateComponent implements OnInit, OnDestroy {
   routerSubscription = <Subscription>{}
   allLanguages: any
   language = ''
+  languageName = ''
   error = false
 
   constructor(
@@ -34,7 +35,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     private accessControlSvc: AccessControlService,
     private authInitService: AuthInitService,
     private dialog: MatDialog,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.authInitService.creationEntity.forEach(v => {
@@ -49,6 +50,11 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.loaderService.changeLoadState(false)
     this.allLanguages = this.authInitService.ordinals.subTitles || []
     this.language = this.accessControlSvc.locale
+
+    const selectedLang = this.allLanguages.find((i: any) => i.srclang === this.language)
+    if (selectedLang && selectedLang.srclang) {
+      this.languageName = selectedLang.label
+    }
   }
 
   ngOnDestroy() {
@@ -96,7 +102,8 @@ export class CreateComponent implements OnInit, OnDestroy {
       )
   }
 
-  setCurrentLanguage(lang: string) {
+  setCurrentLanguage(lang: string, label: string) {
+    this.languageName = label
     this.language = lang
   }
 }

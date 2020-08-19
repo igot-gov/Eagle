@@ -11,7 +11,7 @@
         </p> -->
   </div>
   <ng-container *ngIf="showSettingButtons">
-    <div class="new-style-grid cursor-pointer" (click)="action.emit('preview')">
+    <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('preview')">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-l mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">remove_red_eye</mat-icon>
@@ -20,7 +20,7 @@
         Preview
       </p>
     </div>
-    <div class="new-style-grid cursor-pointer" (click)="action.emit('save')">
+    <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('save')">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">save</mat-icon>
@@ -29,8 +29,8 @@
         Save
       </p>
     </div>
-    <div class="new-style-grid cursor-pointer" (click)="action.emit('push'); isSubmitPressed = true"
-      *ngIf="getAction() === 'sendForReview'">
+    <div class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('push'); isSubmitPressed = true" *ngIf="getAction() === 'sendForReview'">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
@@ -39,8 +39,8 @@
         Send For Review
       </p>
     </div>
-    <div class="new-style-grid cursor-pointer" (click)="action.emit('push'); isSubmitPressed = true"
-      *ngIf="getAction() === 'review'">
+    <div class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('push'); isSubmitPressed = true" *ngIf="getAction() === 'review'">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
@@ -49,8 +49,8 @@
         Review
       </p>
     </div>
-    <div class="new-style-grid cursor-pointer" (click)="action.emit('push'); isSubmitPressed = true"
-      *ngIf="getAction() === 'publish'">
+    <div class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('push'); isSubmitPressed = true" *ngIf="getAction() === 'publish'">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
@@ -59,7 +59,8 @@
         Publish
       </p>
     </div>
-    <div *ngIf="canDelete()" class="new-style-grid cursor-pointer" (click)="action.emit('delete')">
+    <div *ngIf="canDelete()" class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('delete')">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">delete</mat-icon>
@@ -68,7 +69,7 @@
         Delete
       </p>
     </div>
-    <div class="new-style-grid cursor-pointer" (click)="action.emit('fulls')">
+    <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('fulls')">
       <button mat-icon-button
         class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
         <mat-icon class="text-white small-icon ws-mat-primary-text">fullscreen</mat-icon>

@@ -12,12 +12,23 @@
   width: 65%;
 }
 
+.ml-14 {
+  margin-left: 14px;
+}
+
+.select-lang {
+  border: 0.30000001192092896px solid;
+  // color: #00A9F4;
+  border-radius: 8px;
+
+}
+
 #curate-container {
   overflow: auto;
 }
 
 .res-margin {
-  margin-top: $size-xl;
+  // margin-top: $size-xl;
   margin-left: $size-xl;
 
   @include breakpoint-xs {

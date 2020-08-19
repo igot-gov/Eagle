@@ -1,26 +1,32 @@
 /* tslint:disable */
 // import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Storage } from './storage'
+import { Storage, IScromData } from './storage'
 import { errorCodes } from './errors'
 import _ from 'lodash'
-
+import { HttpClient } from '@angular/common/http'
+const API_END_POINTS = {
+  SCROM_ADD_UPDTE: '/apis/protected/v8/scrom/add',
+  SCROM_FETCH: '/apis/protected/v8/scrom/get',
+}
 @Injectable({
   providedIn: 'root',
 })
 export class SCORMAdapterService {
-  apiURL = null
-  constructor(private store: Storage) { }
+  id = ''
+  constructor(private store: Storage, private http: HttpClient) { }
 
-  set uri(uri) {
-    this.apiURL = uri
+  set contentId(id: string) {
+    this.store.key = id
+    this.id = id
   }
 
-  get uri() {
-    return this.apiURL
+  get contentId() {
+    return this.id
   }
 
   LMSInitialize() {
+    this.store.contentKey = this.contentId
     this.store.setItem('Initialized', true)
     return true
   }
@@ -60,29 +66,24 @@ export class SCORMAdapterService {
 
   LMSCommit() {
     let data = this.store.getAll()
-    // delete data['errors']
-    // delete data['Initialized']
-    // data = JSON.stringify(data)
-    // data = Base64.encode(data)
-    // let response
-    let _return = data ? true : false
-    // $.post({
-    //   url: this.apiURL,
-    //   async: false,
-    //   data: { data },
-    //   success: res => {
-    //     response = res
-    //   },
-    //   error: () => {
-    //     this._setError(101)
-    //     _return = false
-    //   }
-    // })
-    // if (!response.success) {
-    //   this._setError(101)
-    //   return false
-    // }
-    return _return
+    if (data) {
+      delete data['errors']
+      // delete data['Initialized']
+      let newData = JSON.stringify(data)
+      // data = Base64.encode(newData)
+      let _return = false
+      this.addData(newData).subscribe((response) => {
+        console.log(response)
+        _return = true
+      }, (error) => {
+        this._setError(101)
+        if (error) {
+          console.log(error)
+        }
+      })
+      return _return
+    }
+    return false
   }
 
   LMSGetLastError() {
@@ -94,14 +95,12 @@ export class SCORMAdapterService {
   }
 
   LMSGetErrorString(errorCode: number) {
-    // let errorCodes = errorCode.toString()
     let error = errorCodes[errorCode]
     if (!error) return ""
     return error[errorCode]["errorString"]
   }
 
   LMSGetDiagnostic(errorCode: number) {
-    // let errorCodes = errorCode.toString()
     let error = errorCodes[errorCode]
     if (!error) return ""
     return error[errorCode]["diagnostic"]
@@ -113,7 +112,6 @@ export class SCORMAdapterService {
   }
 
   _setError(errorCode: number) {
-    // let errorCodes = errorCode.toString()
     let errors = this.store.getItem('errors')
     if (!errors) errors = '[]'
     const newErrors = JSON.parse(errors)
@@ -121,5 +119,28 @@ export class SCORMAdapterService {
       newErrors.push(errorCode)
     }
     this.store.setItem('errors', errors)
+  }
+  loadData() {
+    this.http.get<any>(API_END_POINTS.SCROM_FETCH + '/' + this.contentId).subscribe((response) => {
+      console.log(response.result.data)
+      const data = response.result.data
+      const loadData: IScromData = {
+        "cmi.core.exit": data["cmi.core.exit"],
+        "cmi.core.lesson_status": data["cmi.core.lesson_status"],
+        "cmi.core.session_time": data["cmi.core.session_time"],
+        "cmi.suspend_data": data["cmi.suspend_data"],
+        Initialized: data["Initialized"],
+        errors: data["errors"]
+      }
+      this.store.setAll(loadData)
+    }, (error) => {
+      if (error) {
+        console.log(error)
+        this._setError(101)
+      }
+    })
+  }
+  addData(postData: any) {
+    return this.http.post<any>(API_END_POINTS.SCROM_ADD_UPDTE + '/' + this.contentId, postData)
   }
 }

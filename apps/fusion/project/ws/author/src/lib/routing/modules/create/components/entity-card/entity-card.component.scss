@@ -7,19 +7,16 @@ $x-small-badge-size: 32px;
 $badge-padding: 12px;
 
 .card-container {
-  // display: inline-block;
-  // position: relative;
-  // width: 330px;
-  // margin: 25px 25px;
-  // cursor: pointer;
   display: flex;
-  width: 260px;
-  min-height: 260px;
-  background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 0px 3px 6px #00000029;
+  max-width: 260px;
+  min-width: 260px;
+  max-height: 260px;
+  background: no-repeat padding-box #fff;
+  box-shadow: 0 3px 6px #00000029;
   border-radius: 8px;
   opacity: 1;
   margin: 15px;
+  height: 260px;
 
   @media only screen and (max-width: 1239px) {
     width: 300px;
@@ -87,6 +84,14 @@ $badge-padding: 12px;
 .mat-card {
   padding: 0;
   border-radius: 8px;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.ml-8p {
+  margin-left: 8px !important;
 }
 
 .entity-container {

@@ -1,53 +1,14 @@
-<div class="margin-top-xl margin-l-l margin-r-l new-box" *ngIf="!error">
-  <!-- <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
-    <div class="flex flex-middle">
-      <p class="ws-mat-primary-text font-weight-bold title margin-right-xs" i18n>
-        CONTENT CREATION
-      </p>
-      <mat-icon class="ws-mat-primary-text margin-bottom-xxs">create</mat-icon>
-    </div>
-    <div class="margin-left grid">
-      <div class="stepper-grid">
-        <div
-          class="ws-mat-primary-background-op30 stepper-container cursor-pointer ws-mat-primary-background"
-        >
-          1
-        </div>
-        <p
-          class="margin-left-xs margin-remove-bottom font-weight-500 op30 ws-mat-primary-text op100"
-        >
-          Choose Type
-        </p>
-        <span class="border border-solid text-gray-500 mx-3"></span>
-      </div>
-      <div class="stepper-grid">
-        <div class="ws-mat-primary-background-op30 stepper-container cursor-pointer">
-          2
-        </div>
-        <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer">
-          Content
-        </p>
-        <span class="border border-solid text-gray-500 mx-3"></span>
-      </div>
-      <div class="flex flex-middle">
-        <div class="ws-mat-primary-background-op30 stepper-container cursor-pointer">
-          3
-        </div>
-        <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer" i18n>
-          Details
-        </p>
-      </div>
-    </div>
-  </div> -->
+<div class="margin-l-l margin-r-l new-box" *ngIf="!error">
   <div class="res-margin">
-    <div class="flex flex-col md:flex-row margin-top-xl padding-top-l justify-between">
-      <h3 class="mat-h3">
+    <div class="flex flex-col md:flex-row margin-top-xl padding-top-l justify-between margin-right-m">
+      <h2 class="mat-h3 ml-14">
         Choose your starting point from the below available options
-      </h3>
-      <div class="mat-h3 flex items-center select-lang">
-        <span class="mr-1 text-center" i18n>Select Language: </span>
+      </h2>
+      <div class="mat-h3 flex items-center select-lang ws-mat-default-text">
+        <!-- {{allLanguages | json}} -->
+        <!-- <span class="mr-1 text-center" i18n>Select Language: </span> -->
         <button class="lang-btn" *ngIf="allLanguages?.length" mat-button [matMenuTriggerFor]="sortLang">
-          {{ language | uppercase }}
+          {{ languageName }}
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
       </div>
@@ -73,8 +34,8 @@
 </h2>
 <mat-menu #sortLang="matMenu">
   <ng-template matMenuContent>
-    <button mat-menu-item class="flex flex-between" *ngFor="let lang of allLanguages"
-      (click)="setCurrentLanguage(lang.srclang)">
+    <button mat-menu-item class="flex flex-between ws-mat-default-text" *ngFor="let lang of allLanguages"
+      (click)="setCurrentLanguage(lang.srclang,lang.label)">
       <span class="flex items-center w-full">
         <span>{{ lang.label | uppercase }}</span>
         <mat-icon class="ml-2" *ngIf="lang.srclang === language">check</mat-icon>
