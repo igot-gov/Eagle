@@ -71,7 +71,9 @@ scromApi.post('/add/:id', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    logInfo(req.body);
+    logInfo("======================================================================================================")
+    logInfo(JSON.stringify(req));
+    logInfo("======================================================================================================")
 
     const body = req.body
     body.contentId = contentId
