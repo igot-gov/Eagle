@@ -30,9 +30,9 @@ public class ScromController {
 	ScromService scromService;
 
 	@PostMapping("/add")
-	public ResponseEntity<Response> add(/*@Valid*/ @RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
+	public ResponseEntity<Response> add(@Valid @RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
 										@RequestHeader String org) throws Exception {
-		return new ResponseEntity<>(scromService.upsert(scromRequest, rootOrg, org), HttpStatus.OK);
+		return new ResponseEntity<>(scromService.upsert(scromRequest, rootOrg, org), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/fetch")

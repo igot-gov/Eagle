@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,6 +28,9 @@ import java.util.Optional;
 public class ScromServiceImpl implements ScromService {
 
     private Logger logger = LoggerFactory.getLogger(ScromServiceImpl.class);
+
+    @Autowired
+    ObjectMapper mapper;
 
     @Autowired
     ScromModelRepository scromModelRepository;
@@ -37,6 +41,7 @@ public class ScromServiceImpl implements ScromService {
         Response response = new Response();
 
         try{
+            logger.info("scrom request: {}", mapper.writeValueAsString(scromData));
 
             ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, scromData.getContentId(), scromData.getUserId());
             ScromModel scromModel = new ScromModel(scromPrimaryKey);
@@ -72,7 +77,6 @@ public class ScromServiceImpl implements ScromService {
             scromModel.get().setScromPrimaryKey(scromPrimaryKey);
             ScromModel  scromModel1 = scromModel.get();
 
-            //new ObjectMapper().convertValue(scromModel1, ScromRequest.class);
             ScromRequest scrom = new ScromRequest();
             scrom.setUserId(scromModel1.getUserId());
             scrom.setContentId(scromModel1.getContentId());
@@ -82,7 +86,7 @@ public class ScromServiceImpl implements ScromService {
             scrom.setCmiCoreLessonStatus(scromModel1.getCmiCoreLessonStatus());
             scrom.setCmiCoreSessionTime(scromModel1.getCmiCoreSessionTime());
             scrom.setCmiSuspendData(scromModel1.getCmiSuspendData());
-            scrom.setErrors(scromModel1.getErrors());
+            scrom.setErrors(scromModel1.getErrors() == null ? new ArrayList<>():scromModel1.getErrors());
 
             //response.put("data", scromModel.get());
             response.put("data", scrom);

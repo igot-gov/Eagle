@@ -16,24 +16,24 @@ import java.util.List;
 
 public class ScromRequest {
 
-    @NotNull
+    @NotNull @NotBlank
     private String userId;
-    @NotNull
+    @NotNull @NotBlank
     private String contentId;
     private String type;
     @NotNull
     @JsonProperty("Initialized")
     private boolean initialized;
-    @NotNull
+    @NotNull @NotBlank
     @JsonProperty("cmi.core.exit")
     private String cmiCoreExit;
-    @NotNull
+    @NotNull @NotBlank
     @JsonProperty("cmi.core.lesson_status")
     private String cmiCoreLessonStatus;
-    @NotNull
+    @NotNull @NotBlank
     @JsonProperty("cmi.core.session_time")
     private String cmiCoreSessionTime;
-    @NotNull
+    @NotNull @NotBlank
     @JsonProperty("cmi.suspend_data")
     private String cmiSuspendData;
 
