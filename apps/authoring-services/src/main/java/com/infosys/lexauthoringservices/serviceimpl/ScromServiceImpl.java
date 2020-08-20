@@ -8,9 +8,8 @@
 package com.infosys.lexauthoringservices.serviceimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infosys.lexauthoringservices.exception.BadRequestException;
 import com.infosys.lexauthoringservices.model.Response;
-import com.infosys.lexauthoringservices.model.ScromRequest;
+import com.infosys.lexauthoringservices.model.ScromData;
 import com.infosys.lexauthoringservices.model.cassandra.ScromModel;
 import com.infosys.lexauthoringservices.model.cassandra.ScromPrimaryKey;
 import com.infosys.lexauthoringservices.repository.cassandra.bodhi.ScromModelRepository;
@@ -21,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -36,7 +34,7 @@ public class ScromServiceImpl implements ScromService {
     ScromModelRepository scromModelRepository;
 
     @Override
-    public Response upsert(ScromRequest scromData, String rootOrg, String org) throws Exception{
+    public Response upsert(ScromData scromData, String rootOrg, String org) throws Exception{
 
         Response response = new Response();
 
@@ -73,23 +71,24 @@ public class ScromServiceImpl implements ScromService {
 
             ScromPrimaryKey scromPrimaryKey = new ScromPrimaryKey(rootOrg, org, contentId, userId);
             Optional<ScromModel> scromModel =scromModelRepository.findById(scromPrimaryKey);
+            logger.info("scrom model: {}", mapper.writeValueAsString(scromModel));
 
             scromModel.get().setScromPrimaryKey(scromPrimaryKey);
-            ScromModel  scromModel1 = scromModel.get();
+            ScromModel  model = scromModel.get();
 
-            ScromRequest scrom = new ScromRequest();
-            scrom.setUserId(scromModel1.getUserId());
-            scrom.setContentId(scromModel1.getContentId());
-            scrom.setType(scromModel1.getType());
-            scrom.setInitialized(scromModel1.isInitialized());
-            scrom.setCmiCoreExit(scromModel1.getCmiCoreExit());
-            scrom.setCmiCoreLessonStatus(scromModel1.getCmiCoreLessonStatus());
-            scrom.setCmiCoreSessionTime(scromModel1.getCmiCoreSessionTime());
-            scrom.setCmiSuspendData(scromModel1.getCmiSuspendData());
-            scrom.setErrors(scromModel1.getErrors() == null ? new ArrayList<>():scromModel1.getErrors());
+            ScromData scromData = new ScromData();
+            scromData.setUserId(model.getUserId());
+            scromData.setContentId(model.getContentId());
+            scromData.setType(model.getType());
+            scromData.setInitialized(model.isInitialized());
+            scromData.setCmiCoreExit(model.getCmiCoreExit());
+            scromData.setCmiCoreLessonStatus(model.getCmiCoreLessonStatus());
+            scromData.setCmiCoreSessionTime(model.getCmiCoreSessionTime());
+            scromData.setCmiSuspendData(model.getCmiSuspendData());
+            scromData.setErrors(model.getErrors() == null ? new ArrayList<>():model.getErrors());
 
             //response.put("data", scromModel.get());
-            response.put("data", scrom);
+            response.put("data", scromData);
 
         }catch (Exception e){
             e.printStackTrace();

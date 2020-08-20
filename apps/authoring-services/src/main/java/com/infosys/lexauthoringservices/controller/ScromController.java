@@ -7,20 +7,15 @@
 
 package com.infosys.lexauthoringservices.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infosys.lexauthoringservices.model.EvaluatorModel;
 import com.infosys.lexauthoringservices.model.Response;
-import com.infosys.lexauthoringservices.model.ScromRequest;
+import com.infosys.lexauthoringservices.model.ScromData;
 import com.infosys.lexauthoringservices.service.ScromService;
-import com.infosys.lexauthoringservices.serviceimpl.ContentEvaluationService;
-import com.infosys.lexauthoringservices.util.LexConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/action/scrom")
@@ -30,9 +25,9 @@ public class ScromController {
 	ScromService scromService;
 
 	@PostMapping("/add")
-	public ResponseEntity<Response> add(@Valid @RequestBody ScromRequest scromRequest, @RequestHeader String rootOrg,
+	public ResponseEntity<Response> add(@Valid @RequestBody ScromData scromData, @RequestHeader String rootOrg,
 										@RequestHeader String org) throws Exception {
-		return new ResponseEntity<>(scromService.upsert(scromRequest, rootOrg, org), HttpStatus.CREATED);
+		return new ResponseEntity<>(scromService.upsert(scromData, rootOrg, org), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/fetch")

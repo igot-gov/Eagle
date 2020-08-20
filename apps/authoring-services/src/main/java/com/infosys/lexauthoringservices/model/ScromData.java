@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScromRequest {
+public class ScromData {
 
     @NotNull @NotBlank
     private String userId;
