@@ -35,8 +35,8 @@ scromApi.get('/get/:id', async (req, res) => {
     const response = await axios.get(apiEndpoints.getScromData, {
       ...axiosRequestConfig,
       headers: {
-        org,
-        rootOrg,
+        org: org,
+        rootOrg: rootOrg,
       },
       params: {
         contentId,
@@ -72,23 +72,19 @@ scromApi.post('/add/:id', async (req, res) => {
       return
     }
     logInfo(...req.body);
-    const url = `${apiEndpoints.postScromData}`
     const body = {
       ...req.body,
       contentId,
       userId,
     }
-    const response = await axios.post(url,
+    const response = await axios.post(
+      apiEndpoints.postScromData,
       body,
       {
         ...axiosRequestConfig,
         headers: {
-          org,
-          rootOrg,
-        },
-        params: {
-          contentId,
-          userId,
+          org: org,
+          rootOrg: rootOrg,
         },
         timeout: Number(CONSTANTS.KB_TIMEOUT),
       }
@@ -130,6 +126,7 @@ scromApi.delete('/remove/:id', async (req, res) => {
         contentId,
         userId,
       },
+      timeout: Number(CONSTANTS.KB_TIMEOUT),
     })
     res.send((response.data))
 
