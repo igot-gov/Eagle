@@ -141,6 +141,6 @@ export class SCORMAdapterService {
     })
   }
   addData(postData: any) {
-    return this.http.post<any>(API_END_POINTS.SCROM_ADD_UPDTE + '/' + this.contentId, postData)
+    return this.http.post(API_END_POINTS.SCROM_ADD_UPDTE + '/' + this.contentId, postData)
   }
 }
