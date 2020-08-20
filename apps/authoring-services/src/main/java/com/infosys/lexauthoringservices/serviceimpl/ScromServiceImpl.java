@@ -49,7 +49,6 @@ public class ScromServiceImpl implements ScromService {
             scromModel.setCmiCoreLessonStatus(scromData.getCmiCoreLessonStatus());
             scromModel.setCmiCoreSessionTime(scromData.getCmiCoreSessionTime());
             scromModel.setCmiSuspendData(scromData.getCmiSuspendData());
-            scromModel.setErrors(scromData.getErrors());
 
             scromModelRepository.save(scromModel);
 
@@ -85,7 +84,6 @@ public class ScromServiceImpl implements ScromService {
             scromData.setCmiCoreLessonStatus(model.getCmiCoreLessonStatus());
             scromData.setCmiCoreSessionTime(model.getCmiCoreSessionTime());
             scromData.setCmiSuspendData(model.getCmiSuspendData());
-            scromData.setErrors(model.getErrors() == null ? new ArrayList<>():model.getErrors());
 
             //response.put("data", scromModel.get());
             response.put("data", scromData);

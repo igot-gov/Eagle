@@ -38,9 +38,6 @@ public class ScromModel {
     @Column("cmi_suspend_data")
     private String cmiSuspendData;
 
-    @Column("errors")
-    private List<String> errors = new ArrayList<>();
-
     public ScromModel(ScromPrimaryKey scromPrimaryKey){
         super();
         this.scromPrimaryKey = scromPrimaryKey;
@@ -114,11 +111,4 @@ public class ScromModel {
         this.cmiSuspendData = cmiSuspendData;
     }
 
-    public List<String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
-    }
 }

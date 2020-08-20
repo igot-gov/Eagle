@@ -24,20 +24,14 @@ public class ScromData {
     @NotNull
     @JsonProperty("Initialized")
     private boolean initialized;
-    @NotNull @NotBlank
     @JsonProperty("cmi.core.exit")
     private String cmiCoreExit;
-    @NotNull @NotBlank
     @JsonProperty("cmi.core.lesson_status")
     private String cmiCoreLessonStatus;
-    @NotNull @NotBlank
     @JsonProperty("cmi.core.session_time")
     private String cmiCoreSessionTime;
-    @NotNull @NotBlank
     @JsonProperty("cmi.suspend_data")
     private String cmiSuspendData;
-
-    private List<String> errors = new ArrayList<>();
 
 
     public String getUserId() {
@@ -104,11 +98,4 @@ public class ScromData {
         this.cmiSuspendData = cmiSuspendData;
     }
 
-    public List<String> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
-    }
 }
