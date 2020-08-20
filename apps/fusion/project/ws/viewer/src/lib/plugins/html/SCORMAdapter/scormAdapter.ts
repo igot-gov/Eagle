@@ -69,10 +69,10 @@ export class SCORMAdapterService {
     if (data) {
       delete data['errors']
       // delete data['Initialized']
-      let newData = JSON.stringify(data)
+      // let newData = JSON.stringify(data)
       // data = Base64.encode(newData)
       let _return = false
-      this.addData(newData).subscribe((response) => {
+      this.addData(data).subscribe((response) => {
         console.log(response)
         _return = true
       }, (error) => {
@@ -140,7 +140,12 @@ export class SCORMAdapterService {
       }
     })
   }
-  addData(postData: any) {
+  addData(postData: IScromData) {
+    this.http.post(API_END_POINTS.SCROM_ADD_UPDTE + '/' + this.contentId, postData, {
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
     return this.http.post(API_END_POINTS.SCROM_ADD_UPDTE + '/' + this.contentId, postData)
   }
 }
