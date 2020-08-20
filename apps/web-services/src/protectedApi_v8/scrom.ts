@@ -31,27 +31,19 @@ scromApi.get('/get/:id', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-
-    const response = {
-      id: null,
-      result: {
-        data: {
-          'cmi.core.exit': 'suspend',
-          'cmi.core.lesson_status': 'incomplete',
-          'cmi.core.session_time': '0000:07:58.56',
-          // tslint:disable-next-line:max-line-length
-          'cmi.suspend_data': '2P146070ji1001112a0101201112~2g14000010101010101010101010101010101010102A110v_player.6FlkGhcbzJJ.60FKCB1zZZ31^1^001000',
-          contentId,
-          // tslint:disable-next-line
-          Initialized: true,
-          type: null,
-          userId,
-        },
+    const response = await axios.get(apiEndpoints.getScromData, {
+      ...axiosRequestConfig,
+      headers: {
+        org: org,
+        rootOrg: rootOrg,
       },
-      ts: null,
-      ver: null,
-    }
-    res.send((response))
+      params: {
+        contentId,
+        userId,
+      },
+    })
+    res.send((response.data))
+
   } catch (err) {
     logError(err)
     res.status((err && err.response && err.response.status) || 500).send(
