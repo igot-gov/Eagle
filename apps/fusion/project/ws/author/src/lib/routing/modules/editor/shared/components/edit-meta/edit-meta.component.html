@@ -312,11 +312,11 @@
           <mat-card-footer>
             <div class="c-footer">
               <!--  -->
-              <button mat-icon-button>
+              <button mat-icon-button disabled (click)="customStepper(-1)">
                 <mat-icon>arrow_back</mat-icon>
               </button>
               <!--  -->
-              <button mat-icon-button>
+              <button mat-icon-button (click)="customStepper(1)">
                 <mat-icon> arrow_forward</mat-icon>
               </button>
             </div>
@@ -633,7 +633,7 @@
                       class="margin-left-m text-white ws-mat-primary-background font-weight-500 flex flex-middle cursor-pointer">
                       <mat-icon>replay</mat-icon>
                       <span i18n>
-                        UPDATE
+                        Update
                       </span>
                     </button>
                   </div>
@@ -690,11 +690,11 @@
           <mat-card-footer>
             <div class="c-footer">
               <!--  -->
-              <button mat-icon-button>
+              <button mat-icon-button (click)="customStepper(0)">
                 <mat-icon>arrow_back</mat-icon>
               </button>
               <!--  -->
-              <button mat-icon-button>
+              <button mat-icon-button (click)="customStepper(2)">
                 <mat-icon> arrow_forward</mat-icon>
               </button>
             </div>
@@ -937,7 +937,7 @@
                     [ngClass]="{ disable: checkCondition('creatorContacts', 'disabled') }">
                     <label>
                       <div class="margin-top-xs flex flex-middle">
-                        <b i18n>Curators / Contacts</b>
+                        <span i18n>Curators / Contacts</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('coAuthors')">info
                                                 </mat-icon> -->
                       </div>
@@ -978,7 +978,7 @@
                     [ngClass]="{ disable: checkCondition('creatorDetails', 'disabled') }">
                     <label>
                       <div class="margin-top-xs flex flex-middle">
-                        <b i18n>Authors</b>
+                        <span i18n>Authors</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('authors')">info
                                                 </mat-icon> -->
                       </div>
@@ -1023,7 +1023,7 @@
                     [ngClass]="{ disable: checkCondition('trackContacts', 'disabled') }">
                     <label>
                       <div class="margin-top-xs flex flex-middle">
-                        <b i18n>Reviewers</b>
+                        <span i18n>Reviewers</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('reviewers')">info
                                                 </mat-icon> -->
                       </div>
@@ -1064,7 +1064,8 @@
                     [ngClass]="{ disable: checkCondition('publisherDetails', 'disabled') }">
                     <label>
                       <div class="margin-top-xs flex flex-middle">
-                        <b [ngClass]="{ required: checkCondition('publisherDetails', 'required') }" i18n>Publishers</b>
+                        <span [ngClass]="{ required: checkCondition('publisherDetails', 'required') }"
+                          i18n>Publishers</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('publishers')">info
                                                 </mat-icon> -->
                       </div>
@@ -1126,7 +1127,7 @@
             <mat-card-footer>
               <div class="c-footer">
                 <!--  -->
-                <button mat-icon-button>
+                <button mat-icon-button (click)="customStepper(1)">
                   <mat-icon>arrow_back</mat-icon>
                 </button>
                 <!--  -->

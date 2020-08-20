@@ -130,7 +130,7 @@ export class SCORMAdapterService {
         "cmi.core.session_time": data["cmi.core.session_time"],
         "cmi.suspend_data": data["cmi.suspend_data"],
         Initialized: data["Initialized"],
-        errors: data["errors"]
+        // errors: data["errors"]
       }
       this.store.setAll(loadData)
     }, (error) => {
