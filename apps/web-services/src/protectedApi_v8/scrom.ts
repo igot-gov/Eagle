@@ -2,9 +2,9 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
 import { CONSTANTS } from '../utils/env'
+import { logError, logInfo } from '../utils/logger'
 import { ERROR } from '../utils/message'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
-import { logError, logInfo } from '../utils/logger'
 
 const unknown = 'Failed due to unknown reason'
 const apiEndpoints = {
@@ -16,7 +16,7 @@ const apiEndpoints = {
 export const scromApi = Router()
 
 scromApi.get('/get/:id', async (req, res) => {
-  logInfo("Scrom=> GET API called=====>", req.params.id || "id missing");
+  logInfo('Scrom=> GET API called=====>', req.params.id || 'id missing')
   try {
     const userId = extractUserIdFromRequest(req)
     const org = req.header('org')
@@ -32,36 +32,25 @@ scromApi.get('/get/:id', async (req, res) => {
       return
     }
 
-    // const response = await axios.get(apiEndpoints.getScromData, {
-    //   ...axiosRequestConfig,
-    //   headers: {
-    //     org: org,
-    //     rootOrg: rootOrg,
-    //   },
-    //   params: {
-    //     contentId,
-    //     userId,
-    //   },
-    // })
-    let response = {
-      "id": null,
-      "ver": null,
-      "ts": null,
-      "result": {
-        "data": {
-          "userId": userId,
-          "contentId": contentId,
-          "type": null,
-          "cmi.core.exit": "suspend",
-          "cmi.core.lesson_status": "incomplete",
-          "cmi.core.session_time": "0000:07:58.56",
-          "cmi.suspend_data": "2P146070ji1001112a0101201112~2g14000010101010101010101010101010101010102A110v_player.6FlkGhcbzJJ.60FKCB1zZZ31^1^001000",
-          "Initialized": true
+    const response = {
+      id: null,
+      result: {
+        data: {
+          'cmi.core.exit': 'suspend',
+          'cmi.core.lesson_status': 'incomplete',
+          'cmi.core.session_time': '0000:07:58.56',
+          // tslint:disable-next-line:max-line-length
+          'cmi.suspend_data': '2P146070ji1001112a0101201112~2g14000010101010101010101010101010101010102A110v_player.6FlkGhcbzJJ.60FKCB1zZZ31^1^001000',
+          contentId,
+          // tslint:disable-next-line
+          Initialized: true,
+          type: null,
+          userId,
         },
-        "Message": "Successful"
-      }
+      },
+      ts: null,
+      ver: null,
     }
-    // res.send((response.data))
     res.send((response))
   } catch (err) {
     logError(err)
@@ -80,7 +69,7 @@ scromApi.post('/add/:id', async (req, res) => {
     const rootOrg = req.header('rootorg') || 'igot'
     const contentId = req.params.id
 
-    logInfo("org, rootOrg, contentId", org, rootOrg, contentId)
+    logInfo('org, rootOrg, contentId', org, rootOrg, contentId)
     if (!org || !rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
@@ -89,15 +78,15 @@ scromApi.post('/add/:id', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    logInfo("======================================================================================================")
-    logInfo(JSON.stringify(req.body));
-    logInfo("======================================================================================================")
+    logInfo('======================================================================================================')
+    logInfo(JSON.stringify(req.body))
+    logInfo('======================================================================================================')
 
     const body = req.body
     body.contentId = contentId
     body.userId = userId
 
-    logInfo("body========>", JSON.stringify(body))
+    logInfo('body========>', JSON.stringify(body))
 
     const response = await axios.post(
       apiEndpoints.postScromData,
@@ -105,9 +94,9 @@ scromApi.post('/add/:id', async (req, res) => {
       {
         ...axiosRequestConfig,
         headers: {
-          org: org,
-          rootOrg: rootOrg,
-        }
+          org,
+          rootOrg,
+        },
       }
     )
     res.send(response.data)
