@@ -58,9 +58,11 @@ scromApi.get('/get/:id', async (req, res) => {
 scromApi.post('/add/:id', async (req, res) => {
   try {
     const userId = extractUserIdFromRequest(req)
-    const org = req.header('org')
-    const rootOrg = req.headers.rootorg
+    const org = req.header('org') || 'dopt'
+    const rootOrg = req.header('rootorg') || 'igot'
     const contentId = req.params.id
+
+    logInfo("org, rootOrg, contentId", org, rootOrg, contentId)
     if (!org || !rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
