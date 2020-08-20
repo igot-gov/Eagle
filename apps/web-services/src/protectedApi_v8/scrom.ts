@@ -71,13 +71,15 @@ scromApi.post('/add/:id', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    logInfo(...req.body);
+    logInfo(req.body);
+
     const body = {
-      ...req.body,
       contentId,
-      userId,
+      userId
     }
-    logInfo("body========>", body)
+
+    logInfo("body========>", JSON.stringify(body))
+
     const response = await axios.post(
       apiEndpoints.postScromData,
       body,
