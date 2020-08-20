@@ -32,19 +32,37 @@ scromApi.get('/get/:id', async (req, res) => {
       return
     }
 
-    const response = await axios.get(apiEndpoints.getScromData, {
-      ...axiosRequestConfig,
-      headers: {
-        org: org,
-        rootOrg: rootOrg,
-      },
-      params: {
-        contentId,
-        userId,
-      },
-    })
-    res.send((response.data))
-
+    // const response = await axios.get(apiEndpoints.getScromData, {
+    //   ...axiosRequestConfig,
+    //   headers: {
+    //     org: org,
+    //     rootOrg: rootOrg,
+    //   },
+    //   params: {
+    //     contentId,
+    //     userId,
+    //   },
+    // })
+    let response = {
+      "id": null,
+      "ver": null,
+      "ts": null,
+      "result": {
+        "data": {
+          "userId": userId,
+          "contentId": contentId,
+          "type": null,
+          "cmi.core.exit": "suspend",
+          "cmi.core.lesson_status": "incomplete",
+          "cmi.core.session_time": "0000:07:58.56",
+          "cmi.suspend_data": "2P146070ji1001112a0101201112~2g14000010101010101010101010101010101010102A110v_player.6FlkGhcbzJJ.60FKCB1zZZ31^1^001000",
+          "Initialized": true
+        },
+        "Message": "Successful"
+      }
+    }
+    // res.send((response.data))
+    res.send((response))
   } catch (err) {
     logError(err)
     res.status((err && err.response && err.response.status) || 500).send(
