@@ -72,7 +72,7 @@ scromApi.post('/add/:id', async (req, res) => {
       return
     }
     logInfo("======================================================================================================")
-    logInfo(JSON.stringify(req));
+    logInfo(JSON.stringify(req.body));
     logInfo("======================================================================================================")
 
     const body = req.body
