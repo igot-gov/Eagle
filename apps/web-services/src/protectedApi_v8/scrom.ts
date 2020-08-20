@@ -77,6 +77,7 @@ scromApi.post('/add/:id', async (req, res) => {
       contentId,
       userId,
     }
+    logInfo("body========>", body)
     const response = await axios.post(
       apiEndpoints.postScromData,
       body,
@@ -85,8 +86,7 @@ scromApi.post('/add/:id', async (req, res) => {
         headers: {
           org: org,
           rootOrg: rootOrg,
-        },
-        timeout: Number(CONSTANTS.KB_TIMEOUT),
+        }
       }
     )
     res.send(response.data)
