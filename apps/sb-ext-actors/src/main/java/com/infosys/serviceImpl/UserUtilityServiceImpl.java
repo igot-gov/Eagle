@@ -1032,7 +1032,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		try {
 			Map<String, Object> propertyMap = new HashMap<String, Object>();
 			// hard coding root_org here because this will be removed soon.
-			propertyMap.put("root_org", "Infosys");
+			//propertyMap.put("root_org", "Infosys");
+			propertyMap.put("root_org", "igot");
 			propertyMap.put("key", Arrays.asList("valid_domains", "mail_id", "mail_name"));
 			Response result = this.getRecordsByProperties(bodhiKeyspace, appPropertiesTable, propertyMap);
 
