@@ -1042,8 +1042,8 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 
 		if (!verifyIds.equals("")) {
 			List<String> invalids = new ArrayList<>();
-			Map<String, Object> ids = userUtilService.verifyUsers(Arrays.asList(verifyIds.split(",")));
-			invalidIds.addAll(((List<String>) ids.get("invalid_users")));
+			//Map<String, Object> ids = userUtilService.verifyUsers(Arrays.asList(verifyIds.split(",")));
+			//invalidIds.addAll(((List<String>) ids.get("invalid_users")));
 			for (String id : invalidIds)
 				invalids.add(id.replace("@infosys", "@ad.infosys"));
 
