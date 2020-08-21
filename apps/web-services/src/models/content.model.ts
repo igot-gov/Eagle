@@ -16,6 +16,7 @@ export interface IHistory {
   mediaType: string
   mimeType: EMimeTypes
   name: string
+  posterImage?: string
   resourceCategory?: string[]
   resourceType: string
   size?: number
@@ -270,6 +271,7 @@ export interface IContentMinimal {
   learningMode?: TLearningMode
   mimeType: EMimeTypes
   name: string
+  posterImage?: string
   resourceType?: string
   status?: string
 }
