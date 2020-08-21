@@ -5,11 +5,15 @@
     <div class="entity-container" [id]="entity.id" [attr.name]='entity.id' (click)="entityClicked(entity)">
       <!--  -->
       <div class="flex flex-1">
-        <div class="icon-container ws-mat-primary-background-op30">
-          <!-- <mat-icon class="ws-mat-primary-text">{{ entity.icon }}</mat-icon> -->
-          <img [src]="entity.icon" [id]="'card_' + entity.id" class="ws-mat-primary-text img-class" [alt]="entity.name"
-            [title]="entity.name" />
-          <!-- [wsUtilsDefaultThumbnail]="defaultThumbnail" -->
+        <div class="type-container">
+          <mat-icon *ngIf="entity.name === 'Resource'" class="mr-1 custom-icon resource rotate-90">{{ entity.icon }}
+          </mat-icon>
+          <mat-icon *ngIf="entity.name === 'Module'" class="mr-1 custom-icon module rotate-90">{{ entity.icon }}
+          </mat-icon>
+          <mat-icon *ngIf="entity.name === 'Course'" class="mr-1 custom-icon course rotate-90">{{ entity.icon }}
+          </mat-icon>
+          <mat-icon *ngIf="entity.name === 'Program'" class="mr-1 custom-icon program rotate-90">{{ entity.icon }}
+          </mat-icon>
         </div>
         <div class="flex flex-1 margin-remove ws-mat-primary-text">
           <span class="mat-title mb-0">{{ entity.name }}</span>

@@ -1,7 +1,4 @@
-<div [ngClass]="{
-    'banner-container': bannerUrl,
-    'ws-mat-primary-lite-background-on-day banner-container': !bannerUrl
-  }" [style.backgroundImage]="bannerUrl" [ngStyle]="{'background-color': content?.posterImage || '#F8AD1E'}">
+<div [ngStyle]="{'background-color': ((content?.posterImage || '').length === 7? content?.posterImage : '#F8AD1E')}">
   <div class="header-synopsis fixed-width" [ngClass]="{ 'header-synopsis-gradient': bannerUrl }" *ngIf="content">
     <div class="pt-10 header-actions top">
       <div class="action-btns">
@@ -36,7 +33,7 @@
               <mat-icon class="ws-mat-accent-text">check_circle</mat-icon>
             </span>
           </div>
-          
+
         </div>
         <div class="flex flex-col sm:flex-row">
           <div class="apIcon">
