@@ -1,5 +1,4 @@
 /* tslint:disable */
-// import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Storage, IScromData } from './storage'
 import { errorCodes } from './errors'
@@ -73,12 +72,14 @@ export class SCORMAdapterService {
       // data = Base64.encode(newData)
       let _return = false
       this.addData(data).subscribe((response) => {
-        console.log(response)
-        _return = true
+        // console.log(response)
+        if (response) {
+          _return = true
+        }
       }, (error) => {
-        this._setError(101)
         if (error) {
-          console.log(error)
+          this._setError(101)
+          // console.log(error)
         }
       })
       return _return
@@ -122,7 +123,7 @@ export class SCORMAdapterService {
   }
   loadData() {
     this.http.get<any>(API_END_POINTS.SCROM_FETCH + '/' + this.contentId).subscribe((response) => {
-      console.log(response.result.data)
+      // console.log(response.result.data)
       const data = response.result.data
       const loadData: IScromData = {
         "cmi.core.exit": data["cmi.core.exit"],
@@ -135,7 +136,7 @@ export class SCORMAdapterService {
       this.store.setAll(loadData)
     }, (error) => {
       if (error) {
-        console.log(error)
+        // console.log(error)
         this._setError(101)
       }
     })
