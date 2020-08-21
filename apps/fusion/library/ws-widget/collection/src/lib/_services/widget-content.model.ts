@@ -142,6 +142,7 @@ export namespace NsContent {
     name: string
     creatorDetails: ICreator[]
     creatorContacts: ICreator[]
+    PosterImage: string
     resourceType?: string
     totalRating?: number
   }
