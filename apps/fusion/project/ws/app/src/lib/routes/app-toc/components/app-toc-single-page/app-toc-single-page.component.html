@@ -534,7 +534,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
     </div>
 </section>
 
-<section id="authors"  *ngIf="content?.creatorDetails && content?.creatorDetails.length">
+<section id="authors" *ngIf="content?.creatorDetails && content?.creatorDetails.length">
     <div class="fluid-width contacts-container mb-10">
         <div class="fixed-width flex flex-col flex-wrap">
             <h2 _ngcontent-qml-c28="" class="mat-toolbar contacts-head">Authors</h2>
@@ -545,7 +545,10 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     <div class="right flex flex-col flex-wrap right">
                         <div class="user-name mb-2">{{ author.name }}</div>
                         <!-- <div class="user-university">VTU Bangalore</div> -->
-                        <button class="user-button" (click)="openQueryMailDialog(content, author)">Ask</button>
+                        <button class="user-button" *ngIf="loggedInUserId !== author.id"
+                            (click)="openQueryMailDialog(content, author)">
+                            Ask
+                        </button>
                     </div>
                 </div>
                 <!-- <div *ngFor="let author of content?.creatorContacts" class="author-card">
@@ -561,19 +564,19 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
         </div>
     </div>
 </section>
-<section id="content" >
+<section id="content">
     <div class="fixed-width" *ngIf="content?.children?.length">
         <ws-app-app-toc-contents></ws-app-app-toc-contents>
     </div>
 </section>
 <mat-divider class="fluid-width mtb-xl"></mat-divider>
-<section id="cohorts" >
+<section id="cohorts">
     <div class="fixed-width toc-discussion-container">
         <ws-app-toc-cohorts [content]="content" class="cohorts"></ws-app-toc-cohorts>
     </div>
 </section>
 <mat-divider class="fluid-width mtb-xl"></mat-divider>
-<section id="discussion-forum" >
+<section id="discussion-forum">
     <div class="fixed-width toc-discussion-container">
         <ws-app-toc-discussion [content]="content" class="discussion"></ws-app-toc-discussion>
     </div>

@@ -11,15 +11,15 @@
                 {{ content?.name }}
               </h2>
               <div class="type-container resource mt-2 sm:mt-0" *ngIf="content?.category === 'Resource'">
-                <mat-icon class="mr-1">book</mat-icon>
+                <mat-icon class="mr-1 custom-iconrotate-90">call_to_action</mat-icon>
                 <span>Resource</span>
               </div>
               <div class="type-container module mt-2 sm:mt-0" *ngIf="content?.category === 'Collection'">
-                <mat-icon class="mr-1">book</mat-icon>
+                <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
                 <span>Module</span>
               </div>
               <div class="type-container course mt-2 sm:mt-0" *ngIf="content?.category === 'Course'">
-                <mat-icon class="mr-1">book</mat-icon>
+                <mat-icon class="mr-1 custom-iconrotate-90">call_to_action</mat-icon>
                 <span>Course</span>
               </div>
             </div>
@@ -161,15 +161,15 @@
       </a>
       <div class="flex flex-wrap items-center justify-end">
         <div class="type-container resource" *ngIf="content?.category === 'Resource'">
-          <mat-icon class="mr-1">book</mat-icon>
+          <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Resource</span>
         </div>
         <div class="type-container module" *ngIf="content?.category === 'Collection'">
-          <mat-icon class="mr-1">book</mat-icon>
+          <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Module</span>
         </div>
         <div class="type-container course" *ngIf="content?.category === 'Course'">
-          <mat-icon class="mr-1">book</mat-icon>
+          <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Course</span>
         </div>
         <button *ngIf="content?.artifactUrl && !isXSmall" type="button" mat-icon-button class="text-right"

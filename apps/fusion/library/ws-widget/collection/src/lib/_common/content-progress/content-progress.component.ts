@@ -16,6 +16,9 @@ export class ContentProgressComponent implements OnChanges {
   @Input()
   forPreview = false
 
+  @Input()
+  className = ''
+
   constructor(private progressSvc: ContentProgressService) {}
 
   ngOnChanges() {

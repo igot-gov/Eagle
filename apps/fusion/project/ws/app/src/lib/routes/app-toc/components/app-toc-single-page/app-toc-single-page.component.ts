@@ -37,6 +37,7 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription | null = null
   @Input() forPreview = false
   tocConfig: any = null
+  loggedInUserId!: any
 
   constructor(
     private route: ActivatedRoute,
@@ -63,6 +64,9 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
         this.initData(data)
         this.tocConfig = data.pageData.data
       })
+    }
+    if (this.configSvc && this.configSvc.userProfile &&  this.configSvc.userProfile.userId) {
+      this.loggedInUserId = this.configSvc.userProfile.userId
     }
   }
 
@@ -171,15 +175,19 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
   }
 
   openQueryMailDialog(content: any, data: any) {
+    const emailArray = []
+    emailArray.push(data.email)
     const dialogdata = {
       content,
       user: data,
-      emails: [...data.email],
+      emails: emailArray,
     }
+    dialogdata.user.isAuthor = true
     this.dialog.open<BtnMailUserDialogComponent, IBtnMailUser>(
       BtnMailUserDialogComponent,
       {
-        width: '80vw',
+        // width: '50vw',
+        maxWidth: '80vw',
         data: dialogdata,
       }
     )

@@ -28,7 +28,13 @@ background: inherit;
   max-width: 1217px;
   display: block;
   margin: 0 auto;
-  padding: 0 15px !important;
+  padding: 0 !important;
+  @include breakpoint-s {
+    padding: 0 15px !important;
+  }
+  @include breakpoint-xs {
+    padding: 0 15px !important;
+  }
 }
 .fluid-width {
   width: 100%;
@@ -59,6 +65,7 @@ background: inherit;
       letter-spacing: 0px;
       color: #FFFFFF;
       font-family: Poppins-SemiBold;
+      
     }
 
     .text-truncate-title {
@@ -204,6 +211,22 @@ background: inherit;
   }
 }
 
+.hidden-block-s {
+  display: block;
+
+  @include breakpoint-s {
+    display: none;
+  }
+}
+
+.visible-block-s {
+  display: none;
+
+  @include breakpoint-s {
+    display: block;
+  }
+}
+
 .info-msg{
   color: #fff !important;
   font: 14px/20px Poppins-Regular;;
@@ -211,3 +234,21 @@ background: inherit;
     color: #fff !important;
   }
 }
+
+.sticky-banner {
+  z-index: 999;
+  position: sticky;
+  top: 128px;
+
+  .header-title {
+    h1{
+      font: normal normal 300 24px/35px Poppins;    
+    }
+  }
+
+  .overview-description {
+    font: normal normal 300 14px/21px Poppins;
+  }
+}
+
+
