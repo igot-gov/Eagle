@@ -68,7 +68,7 @@ export interface IContent {
   nextCertificationAttemptDate?: string
   playgroundInstructions?: string
   playgroundResources?: IResourcePlayground[]
-  posterImage: string
+  posterImage?: string
   postContents?: IPrePostContent[]
   preContents?: IPrePostContent[]
   preRequisites: string
