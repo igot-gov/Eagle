@@ -89,8 +89,8 @@ detailsApi.get('/wtoken', async (req, res) => {
 export function wTokenApiMock(req: any, token: any): Promise<any> {
   return new Promise((resolve, reject) => {
     try {
-      const rootOrg = req.header('rootOrg') || ''
-      const org = req.header('org') || ''
+      const rootOrg = req.header('rootOrg') || CONSTANTS.DEFAULT_ROOT_ORG
+      const org = req.header('org') || CONSTANTS.DEFAULT_ORG
       // tslint:disable-next-line: no-any
       let kcToken: any
       kcToken = token

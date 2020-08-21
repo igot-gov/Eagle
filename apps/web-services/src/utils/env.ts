@@ -19,6 +19,8 @@ export const CONSTANTS = {
   CONTENT_META_FETCH_API_BASE: env.CONTENT_META_FETCH_API_BASE || 'http://10.177.22.26:5906',
   CONTENT_STORE_DEVELOPMENT_BASE: 'https://lex-dev.infosysapps.com',
   COUNTER: 'http://10.177.157.30:5903',
+  DEFAULT_ORG: env.DEFAULT_ORG || 'dopt',
+  DEFAULT_ROOT_ORG: env.DEFAULT_ROOT_ORG || 'igot',
   ES_BASE: env.ES_BASE || 'http://10.177.157.30:9200',
   ES_PASSWORD: env.ES_PASSWORD || 'Infy@123+',
   ES_USERNAME: env.ES_USERNAME || 'elastic',
