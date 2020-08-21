@@ -47,7 +47,7 @@ const ADDITIONAL_FIELDS_IN_CONTENT = [
   'kArtifacts',
   'equivalentCertifications',
   'certificationList',
-  'posterImage'
+  'posterImage',
 ]
 @Injectable()
 export class AppTocResolverService
