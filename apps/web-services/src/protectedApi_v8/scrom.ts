@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
 import { CONSTANTS } from '../utils/env'
-import { logError, logInfo } from '../utils/logger'
+import { logError } from '../utils/logger'
 import { ERROR } from '../utils/message'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
 
@@ -70,9 +70,6 @@ scromApi.post('/add/:id', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    // logInfo('======================================================================================================')
-    // logInfo(JSON.stringify(req.body))
-    // logInfo('======================================================================================================')
 
     const body = req.body
     body.contentId = contentId
