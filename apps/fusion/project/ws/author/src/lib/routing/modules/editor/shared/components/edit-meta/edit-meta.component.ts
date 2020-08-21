@@ -395,6 +395,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.parentContent ? this.contentService.getUpdatedMeta(this.parentContent) : undefined,
     )
     this.contentMeta.name = contentMeta.name === 'Untitled Content' ? '' : contentMeta.name
+    if (!this.contentMeta.posterImage) {
+      this.contentMeta.posterImage = this.banners[0].color
+    }
     // this.contentMeta.posterImage = contentMeta.posterImage
     this.canExpiry = this.contentMeta.expiryDate !== '99991231T235959+0000'
     if (this.canExpiry) {
