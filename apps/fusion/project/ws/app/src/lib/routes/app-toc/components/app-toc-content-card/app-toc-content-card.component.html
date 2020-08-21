@@ -1,10 +1,10 @@
 <ng-container *ngIf="content">
   <ng-container *ngIf="isCollection">
     <div class="flex flex-col">
-      <div class="card-collection w-100">
+      <div class="card-collection w-auto sm:w-100">
         <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail"
           (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
-        <div class="flex flex-col flex-wrap flex-between width-expand pr-0 sm:pr-4 sm:w-auto">
+        <div class="flex flex-col flex-wrap flex-between width-expand pr-0 w-100 sm:pr-4 sm:w-auto">
           <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
             <div class="flex flex-col sm:flex-row flex-wrap">
               <h2 class="margin-remove text-truncate content-heading flex-auto">
@@ -140,7 +140,7 @@
     </div>
 
 
-    <div class="flex flex-col sm:flex-row flex-between width-expand pr-0 sm:pr-4 sm:w-auto">
+    <div class="flex flex-col sm:flex-row flex-between width-expand pr-0 w-100 sm:pr-4 sm:w-auto">
 
       <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
         <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
@@ -159,7 +159,7 @@
           </div>
         </div>
       </a>
-      <div class="flex flex-wrap items-center justify-end">
+      <div class="flex flex-wrap items-center justify-start sm:justify-end">
         <div class="type-container resource" *ngIf="content?.category === 'Resource'">
           <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Resource</span>
