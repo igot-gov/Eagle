@@ -2,7 +2,11 @@ base_mount_path: /data
 var_pid_service_host: "{{auth_domain_name}}" 
 
 #Opensaber Registry
-OPEN_SABER_USER_REGISTRY_BASE: http://open_saber_base_ip:open_saber_port # http://10.0.1.1:8005
+#OPEN_SABER_USER_REGISTRY_BASE: http://open_saber_base_ip:open_saber_port # http://10.0.1.1:8005
+
+default_department_name: iGOT
+default_org: dopt
+default_root_org: igot
 
 #sunbird Cassandra
 sunbird_cassandra_host: cassandra_host_ip #10.0.1.2
