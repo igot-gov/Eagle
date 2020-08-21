@@ -541,8 +541,7 @@
     },
     {
       "featureIds": [
-        "feature_admin",
-        "feature_frac"
+        "feature_admin"
       ],
       "icon": "",
       "iconType": "none",
