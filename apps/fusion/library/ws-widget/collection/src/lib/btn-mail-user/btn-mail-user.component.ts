@@ -42,7 +42,8 @@ export class BtnMailUserComponent extends WidgetBaseComponent
     this.dialog.open<BtnMailUserDialogComponent, IBtnMailUser>(
       BtnMailUserDialogComponent,
       {
-        width: '60vw',
+        minWidth: '40vw',
+        maxWidth: '80vw',
         data: this.widgetData,
       },
     )

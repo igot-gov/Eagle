@@ -187,6 +187,7 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
       BtnMailUserDialogComponent,
       {
         // width: '50vw',
+        minWidth: '40vw',
         maxWidth: '80vw',
         data: dialogdata,
       }

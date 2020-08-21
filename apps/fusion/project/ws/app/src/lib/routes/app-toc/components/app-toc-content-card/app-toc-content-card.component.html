@@ -4,14 +4,14 @@
       <div class="card-collection w-100">
         <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail"
           (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
-        <div class="flex flex-col flex-wrap flex-between width-expand pr-0 sm:pr-4 w-100 sm:w-auto">
+        <div class="flex flex-col flex-wrap flex-between width-expand pr-0 sm:pr-4 sm:w-auto">
           <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
-            <div class="flex flex-wrap">
+            <div class="flex flex-col sm:flex-row flex-wrap">
               <h2 class="margin-remove text-truncate content-heading flex-auto">
                 {{ content?.name }}
               </h2>
               <div class="type-container resource mt-2 sm:mt-0" *ngIf="content?.category === 'Resource'">
-                <mat-icon class="mr-1 custom-iconrotate-90">call_to_action</mat-icon>
+                <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
                 <span>Resource</span>
               </div>
               <div class="type-container module mt-2 sm:mt-0" *ngIf="content?.category === 'Collection'">
@@ -19,7 +19,7 @@
                 <span>Module</span>
               </div>
               <div class="type-container course mt-2 sm:mt-0" *ngIf="content?.category === 'Course'">
-                <mat-icon class="mr-1 custom-iconrotate-90">call_to_action</mat-icon>
+                <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
                 <span>Course</span>
               </div>
             </div>
@@ -140,11 +140,11 @@
     </div>
 
 
-    <div class="flex flex-col sm:flex-row flex-between width-expand pr-0 sm:pr-4 w-100 sm:w-auto">
+    <div class="flex flex-col sm:flex-row flex-between width-expand pr-0 sm:pr-4 sm:w-auto">
 
       <a [routerLink]="resourceLink.url" [queryParams]="resourceLink.queryParams">
         <div class="text-truncate cursor-pointer" (click)="viewChildren = !viewChildren">
-          <div class="flex flex-wrap">
+          <div class="flex flex-col sm:flex-row flex-wrap">
             <h2 class="margin-remove text-truncate content-heading flex-auto">
               {{ content?.name }}
             </h2>
