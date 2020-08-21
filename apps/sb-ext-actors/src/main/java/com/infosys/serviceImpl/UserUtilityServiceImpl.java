@@ -897,7 +897,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	@Override
 	public String getValidationOptions() {
 		Select select = QueryBuilder.select().column("value").from(bodhiKeyspace, appPropertiesTable);
-		select.where(eq("key", LexJsonKey.EMAIL_VALIDATE_OPTIONS)).and(eq("root_org", "Infosys"));
+		select.where(eq("key", LexJsonKey.EMAIL_VALIDATE_OPTIONS)).and(eq("root_org", "igot"));
 		ProjectLogger.log("Query: " + select, LoggerEnum.DEBUG);
 		ResultSet appResults = connectionManager.getSession(bodhiKeyspace).execute(select);
 		String emailValidationOptions = "";
