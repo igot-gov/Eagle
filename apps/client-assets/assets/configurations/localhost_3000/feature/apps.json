@@ -551,7 +551,9 @@
       ],
       "name": "Admin",
       "toolTip": "Admin",
-      "hasRole": []
+      "hasRole": [
+        "admin"
+      ]
     },
     {
       "featureIds": [
