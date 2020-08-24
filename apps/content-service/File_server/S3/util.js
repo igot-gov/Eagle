@@ -721,9 +721,12 @@ function setCookie(path, res) {
   let cookies = helper.getCFCookies(path);
   // Set the cookies
   for (let id in cookies) {
-    console.log("setCookie1 id===>", id)
-    console.log("setCookie1 ===>" + id + "==========>", cookies[id])
-    res.cookie(id, cookies[id]);
+    // console.log("setCookie1 id===>", id)
+    // console.log("setCookie1 ===>" + id + "==========>", cookies[id])
+    res.cookie(id, cookies[id], {
+      httpOnly: true,
+      secure: true
+    });
   }
   console.log('Cookies is', res.headers);
   res.send(success.Success(`Cookie has been set`, {
