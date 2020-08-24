@@ -8,18 +8,12 @@ import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 import { SCORMAdapterService } from './SCORMAdapter/scormAdapter'
 
-// const scormAdapter = require('scorm-api-adapter').default
-// import SCORMAdapter from 'scorm-api-adapter'
-
 @Component({
   selector: 'viewer-plugin-html',
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
 })
 export class HtmlComponent implements OnInit, OnChanges {
-
-  // private mobileOpenInNewTab!: any
-
   @ViewChild('mobileOpenInNewTab', { read: ElementRef, static: false }) mobileOpenInNewTab !: ElementRef<HTMLAnchorElement>
   @Input() htmlContent: NsContent.IContent | null = null
   iframeUrl: SafeResourceUrl | null = null
@@ -35,25 +29,18 @@ export class HtmlComponent implements OnInit, OnChanges {
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
-    // private http: HttpClient,
     private scormAdapterService: SCORMAdapterService,
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
   ) {
-    // (window as any).API = new scormAdapter();
-    // (window as any).API.uri = 'https://localhost:3000/great-endpoit'
-    // this.ScormAdapterService = new SCORMAdapterService()
-    // this.ScormAdapterService.uri('https://localhost:3000/great-endpoit')
     (window as any).API = this.scormAdapterService
   }
 
   ngOnInit() {
-    // this.mobAppSvc.simulateMobile()
     if (this.htmlContent && this.htmlContent.identifier) {
       this.scormAdapterService.contentId = this.htmlContent.identifier
-      this.scormAdapterService.loadData()
-      // this.scormAdapterService.LMSCommit()
+      // this.scormAdapterService.loadData()
     }
   }
 
