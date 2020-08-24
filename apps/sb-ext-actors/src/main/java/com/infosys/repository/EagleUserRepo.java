@@ -16,7 +16,7 @@ import java.util.List;
 public interface EagleUserRepo extends JpaRepository<EagleUser, String> {
 
     @Query(nativeQuery = true, value = "select wid, root_org, org, first_name, last_name, email from public.eagle_user where email=?1")
-    List<EagleUser> fetchUserByEmail(String email);
+    EagleUser fetchUserByEmail(String email);
 
 
 }

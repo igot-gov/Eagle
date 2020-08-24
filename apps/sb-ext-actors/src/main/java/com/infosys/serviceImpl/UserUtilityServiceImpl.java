@@ -25,6 +25,8 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
+import com.infosys.model.com.infosys.model.postgres.EagleUser;
+import com.infosys.repository.EagleUserRepo;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -113,6 +115,9 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	@Autowired
 	ConfigurationsUtil configUtil;
+
+	@Autowired
+	EagleUserRepo eagleUserRepo;
 
 	@Value("${content.service.host}")
 	private String contentHost;
@@ -848,6 +853,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	@Override
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> verifyUsers(List<String> emails) {
+		System.out.println("Verifying EmailIds :"+emails);
+
 		List<String> graphApiValidUsers = new ArrayList<>();
 		List<String> validUsers = new ArrayList<>();
 		List<String> dataForGraphApi = new ArrayList<>();
@@ -886,6 +893,9 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		Map<String, Object> userValidityMap = new HashMap<String, Object>();
 		userValidityMap.put("valid_users", validUsers);
 		userValidityMap.put("invalid_users", new ArrayList<String>(emails));
+		System.out.println("Valid EmailIds :"+validUsers);
+		System.out.println("Invalid EmailIds :"+emails);
+
 		return userValidityMap;
 	}
 
@@ -917,16 +927,24 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			if (emailValidationOptions.toLowerCase().contains("graph")) {
 				validateOptions.add("graph");
 			}
-			Select emailSelect = QueryBuilder.select().column("email").from(JsonKey.SUNBIRD, LexJsonKey.MV_USER);
+/*			Select emailSelect = QueryBuilder.select().column("email").from(JsonKey.SUNBIRD, LexJsonKey.MV_USER);
 			emailSelect.where(QueryBuilder.in("email", userData));
 			ProjectLogger.log("Query: " + emailSelect, LoggerEnum.DEBUG);
 			ResultSet results = connectionManager.getSession(JsonKey.SUNBIRD).execute(emailSelect);
 			for (Row row : results) {
 				validUsers.add(row.getString(0).toLowerCase().trim());
+			}*/
+
+			for(String userEmail:userData){
+				EagleUser eagleUser = eagleUserRepo.fetchUserByEmail(userEmail);
+				System.out.println("Eagle user EmailId :"+eagleUser.getEmail());
+				validUsers.add(eagleUser.getEmail());
+
 			}
 			output.put("validate_options", validateOptions);
 			output.put("valid_users", validUsers);
 		} catch (Exception e) {
+			e.printStackTrace();
 			ProjectLogger.log(Constants.EXCEPTION_MSG_FETCH + LexJsonKey.MV_USER + " : " + e.getMessage(), e);
 			throw new ProjectCommonException(ResponseCode.SERVER_ERROR.getErrorCode(),
 					ResponseCode.SERVER_ERROR.getErrorMessage(), ResponseCode.SERVER_ERROR.getResponseCode());
