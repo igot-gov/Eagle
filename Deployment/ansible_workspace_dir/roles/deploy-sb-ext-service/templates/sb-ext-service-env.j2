@@ -25,6 +25,10 @@ es.host.authentication.active={{ enable_password_for_elasticsearch }}
 sbext.service.host={{ network_alias_sb_ext_service }}
 sbext.service.port={{ service_sb_ext_port }}
 
+#eagle_user db details
+spring.datasource.jdbc-url={{ spring_datasource_jdbc_url }}
+spring.datasource.username={{ postgresql_user_profile_username }}
+spring.datasource.password={{ postgresql_user_profile_password }}
 
 # Mongodb connection and collection details
 mongodb.host={{ mongodb_host }}
