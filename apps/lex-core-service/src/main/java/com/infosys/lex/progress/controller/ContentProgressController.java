@@ -104,8 +104,18 @@ public class ContentProgressController {
 			@PathVariable("user_id") String userId,
 			@PathVariable("content_id") String contentId) throws Exception {
 		
-		return new ResponseEntity<>(service.metaForProgressForContentId(rootOrg, userId, contentId),HttpStatus.OK);
+		return new ResponseEntity<>(service.metaForProgressForContentId(rootOrg, userId, contentId, false),HttpStatus.OK);
 		
+	}
+
+	@GetMapping("/v1/users/{user_id}/content-ids/{content_id}/progress-meta/hierarchy")
+	public ResponseEntity<?> getProgressMetaHierarchy(
+			@RequestHeader("rootOrg") String rootOrg,
+			@PathVariable("user_id") String userId,
+			@PathVariable("content_id") String contentId) throws Exception {
+
+		return new ResponseEntity<>(service.metaForProgressForContentId(rootOrg, userId, contentId, true),HttpStatus.OK);
+
 	}
 	
 	@PostMapping("/v1/users/{user_id}/assessment/{content_id}/progress/recalculate")

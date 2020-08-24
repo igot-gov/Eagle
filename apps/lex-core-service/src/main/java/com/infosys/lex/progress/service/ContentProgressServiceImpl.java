@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -673,7 +674,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Map<String, Object> metaForProgressForContentId(String rootOrg, String userUUID, String contentId) throws Exception {
+	public Map<String, Object> metaForProgressForContentId(String rootOrg, String userUUID, String contentId, boolean withChildren) throws Exception {
 		
 		Map<String,Object> progressMap = this.metaForProgress(rootOrg, userUUID, new ArrayList<>(Arrays.asList(contentId)));
 		
@@ -863,7 +864,195 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		}
 		return ret;
 	}
-	
+
+
+	private Map<String, Object> progressMetaData(String rootOrg, String userUUID, List<String> idsList) throws Exception {
+
+		Map<String, Object> ret = new HashMap<>();
+		// Map<String, Object> meta = new HashMap<>();
+		Map<String, Boolean> contentSourceMap = new HashMap<>();
+		Map<String, String> mimes = contentService.getMimeTypes();
+		Map<String, Float> contentProgressMap = new HashMap<>();
+		List<String> contentList = Arrays.asList("Course", "Collection", "Resource", "Learning Path");
+
+//		System.out.println(contentSourceMap);
+//		contentSourceMap.put("Lex",true);
+		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandSource(idsList,
+				new String[] { "identifier", "children.identifier", "mimeType", "contentType", "resourceType",
+						"sourceShortName", "learningMode", "isExternal" },
+				"Live");
+		List<ContentProgressModel> contentProgressList = contentProgressRepo.getProgress(rootOrg, userUUID, contentList,
+				idsList);
+		//System.out.println("ContentProgressModel data  "+new ObjectMapper().writeValueAsString(contentProgressList));
+
+		for (ContentProgressModel cpm : contentProgressList) {
+			contentProgressMap.put(cpm.getPrimaryKey().getContentId(), cpm.getProgress());
+		}
+		for (Map<String, Object> source : searchHits) {
+
+			// this flag is to mark if for this lex id the progress is provided from
+			// external source in which case the markAsComplete reason would remain same
+			// whether its
+			// completed or not
+			boolean isExternalProgressProvided = false;
+			Map<String, Object> meta = new HashMap<>();
+			meta.put("progressStatus", null);
+			meta.put("showMarkAsComplete", null);
+			meta.put("markAsCompleteReason", null);
+			meta.put("progressSupported", null);
+			String contentType = source.get("contentType").toString();
+			String id = source.get("identifier").toString();
+//			System.out.println(id);
+//			System.out.println(contentProgressMap.containsKey(id));
+			if (contentProgressMap.containsKey(id))
+				meta.put("progress", contentProgressMap.get(id));
+			else
+				meta.put("progress", null);
+
+			if (!contentList.contains(contentType))
+				meta.put("progressSupported", false);
+
+			else {
+				meta.put("progressSupported", true);
+
+				String sourceShortName = (String) source.getOrDefault("sourceShortName", null);
+				Boolean isExternal = (Boolean) source.getOrDefault("isExternal", null);
+				String learningMode = (String) source.getOrDefault("learningMode", null);
+
+				if (isExternal == null  || learningMode == null) {
+					throw new ApplicationLogicError("Invalid meta for mark as complete for contentId : " + id);
+				}
+
+				Map<String, String> macConfigMap = contentService.getMACConfiguration(rootOrg);
+				Boolean rootOrgExtContentEnabled = Boolean.valueOf(macConfigMap.get("mac_for_external"));
+				Boolean rootOrgILContentEnabled = Boolean.valueOf(macConfigMap.get("mac_for_instructor_led"));
+				Boolean rootOrgSourceShortNameEnabled = Boolean.valueOf(macConfigMap.get("mac_for_source_short_name"));
+				if (rootOrgSourceShortNameEnabled ) {
+					List<ContentSourceProj> contentSourceList = contentSourceService.fetchAllContentsourcesForRootOrg(rootOrg,
+							null);
+					contentSourceList.forEach(contentSource -> contentSourceMap.put(contentSource.getSourceShortName(),
+							contentSource.getProgressProvided()));
+					if (contentSourceMap.containsKey(sourceShortName)) {
+						if (contentSourceMap.get(sourceShortName) == true) {
+							isExternalProgressProvided = true;
+							meta.put("showMarkAsComplete", false);
+							meta.put("markAsCompleteReason", "external.vendor.provided"); // todo- Add enum
+						}
+						else {
+							if (source.get("contentType").toString().toLowerCase().equals("resource")) {
+								String mimeType = source.get("mimeType").toString();
+								List<String> mimeTypes = Arrays.asList(mimes.get("result").split(","));
+								if (mimeTypes.contains(mimeType)) {
+									meta.put("showMarkAsComplete", false);
+									if (source.get("resourceType").toString().toLowerCase().equals("assessment"))
+										meta.put("markAsCompleteReason", "pass.required");
+									else
+										meta.put("markAsCompleteReason", "submission.required");
+								} else {
+									meta.put("showMarkAsComplete", true);
+								}
+							} else if (source.containsKey("children")) {
+
+								List<Map<String, Object>> child = ((List<Map<String, Object>>) source.get("children"));
+								if (!child.isEmpty()) {
+									meta.put("showMarkAsComplete", false);
+									meta.put("markAsCompleteReason", "has.children"); // todo- Add enum
+
+									//add child progress data
+									List<String> childIds = child.stream().map(c -> c.get("identifier").toString()).collect(Collectors.toList());
+									Map<String, Object> childrenProgress = progressMetaData(rootOrg, userUUID, childIds);
+									meta.put("childrenProgress", childrenProgress);
+
+								} else {
+									meta.put("showMarkAsComplete", true);
+								}
+							} else
+								meta.put("showMarkAsComplete", true);
+						}
+					}
+					else {
+
+						throw new Exception("sourceShortName not found");
+
+					}
+				}
+				else {
+					if (isExternal == true && !rootOrgExtContentEnabled) {
+						// configured for infosys content in which case if external content the mark as
+						// complete is
+						// not shown.
+						if (source.get("mimeType").toString().equals("video/x-youtube"))
+						{
+							meta.put("showMarkAsComplete", true);
+							isExternalProgressProvided = false;
+						}
+						else {
+							isExternalProgressProvided = true;
+							meta.put("showMarkAsComplete", false);
+							meta.put("markAsCompleteReason", "external.vendor.provided");
+						}
+					} else if (learningMode.equalsIgnoreCase("Instructor-Led") && !rootOrgILContentEnabled) {
+						meta.put("showMarkAsComplete", false);
+						meta.put("markAsCompleteReason", "instructor.led");
+					} else if (source.containsKey("resourceType")
+							&& source.get("resourceType").toString().equalsIgnoreCase("certification")) {
+						meta.put("showMarkAsComplete", false);
+						meta.put("markAsCompleteReason", "pass.required");
+
+					}
+//					else if (isExternal == false && !rootOrgExtContentEnabled) {
+//					// configured for infosys internal content in which case mark as complete is
+//					// always shown.
+//					meta.put("showMarkAsComplete", true);
+//				}
+					else {
+						if (source.get("contentType").toString().toLowerCase().equals("resource")) {
+							String mimeType = source.get("mimeType").toString();
+							List<String> mimeTypes = Arrays.asList(mimes.get("result").split(","));
+							if (mimeTypes.contains(mimeType)) {
+								meta.put("showMarkAsComplete", false);
+								if (source.get("resourceType").toString().toLowerCase().equals("assessment"))
+									meta.put("markAsCompleteReason", "pass.required");
+								else
+									meta.put("markAsCompleteReason", "submission.required");
+							} else {
+								meta.put("showMarkAsComplete", true);
+							}
+						} else if (source.containsKey("children")) {
+
+							List<Map<String, Object>> child = ((List<Map<String, Object>>) source.get("children"));
+							if (!child.isEmpty()) {
+								meta.put("showMarkAsComplete", false);
+								meta.put("markAsCompleteReason", "has.children"); // todo- Add enum
+							} else {
+								meta.put("showMarkAsComplete", true);
+							}
+						} else
+							meta.put("showMarkAsComplete", true);
+					}
+				}
+
+
+				if (meta.get("progress") != null) {
+					Float pro = (Float) meta.get("progress");
+					if (pro >= 1f) {
+						meta.put("progressStatus", "completed");
+						meta.put("showMarkAsComplete", false);
+						// update if its not external provided content
+						if (!isExternalProgressProvided)
+							meta.put("markAsCompleteReason", "already.completed");
+
+					} else
+						meta.put("progressStatus", "started");
+				} else
+					meta.put("progressStatus", "open");
+			}
+			ret.put(id, meta);
+		}
+		return ret;
+	}
+
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public String updateAssessmentRecalculate(AssessmentRecalculateDTO assessmentInfo) throws Exception{
