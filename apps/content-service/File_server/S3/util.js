@@ -722,6 +722,7 @@ function setCookie(path, res) {
   // Set the cookies
   for (let id in cookies) {
     console.log("setCookie1 id===>", id)
+    console.log("setCookie1 ===>" + id + "==========>", cookies[id])
     res.cookie(id, cookies[id]);
   }
   console.log('Cookies is', res.headers);
