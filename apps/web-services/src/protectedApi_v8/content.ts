@@ -6,7 +6,7 @@ import { ECollectionTypes, IContent, IContentMinimal } from '../models/content.m
 import { IPaginatedApiResponse } from '../models/paginatedApi.model'
 import { getMinimalContent, processContent } from '../utils/contentHelpers'
 import { CONSTANTS } from '../utils/env'
-import { logError } from '../utils/logger'
+import { logError, logInfo } from '../utils/logger'
 import { ERROR } from '../utils/message'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
 import { getPlaylist } from './user/playlist'
@@ -532,6 +532,8 @@ contentApi.post('/setImageCookie', async (req, res) => {
       json: body,
     }
     const bodyWithConfigRequestOptions = { ...bodyInJson, ...axiosRequestConfig }
+    logInfo("bodyInJson=======>", JSON.stringify(bodyInJson))
+    logInfo("bodyWithConfigRequestOptions=======>", JSON.stringify(bodyWithConfigRequestOptions))
     request.post(url, bodyWithConfigRequestOptions).pipe(res)
   } catch (err) {
     res.status((err && err.response && err.response.status) || 500).send(
