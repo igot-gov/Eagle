@@ -28,6 +28,7 @@ import { BtnGoalsModule } from './btn-goals/btn-goals.module'
 import { BtnMailUserComponent } from './btn-mail-user/btn-mail-user.component'
 import { BtnMailUserModule } from './btn-mail-user/btn-mail-user.module'
 import { BtnPageBackComponent } from './btn-page-back/btn-page-back.component'
+import { BtnPageBackNavModule } from './btn-page-back-nav/btn-page-back-nav.module'
 import { BtnPageBackModule } from './btn-page-back/btn-page-back.module'
 import { BtnPlaylistComponent } from './btn-playlist/btn-playlist.component'
 import { BtnPlaylistModule } from './btn-playlist/btn-playlist.module'
@@ -119,6 +120,7 @@ export const WIDGET_REGISTERED_MODULES = [
   BtnFullscreenModule,
   BtnGoalsModule,
   BtnMailUserModule,
+  BtnPageBackNavModule,
   BtnPageBackModule,
   BtnPlaylistModule,
   BtnPreviewModule,
