@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild, OnDestroy } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Router } from '@angular/router'
@@ -13,7 +13,7 @@ import { SCORMAdapterService } from './SCORMAdapter/scormAdapter'
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
 })
-export class HtmlComponent implements OnInit, OnChanges {
+export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('mobileOpenInNewTab', { read: ElementRef, static: false }) mobileOpenInNewTab !: ElementRef<HTMLAnchorElement>
   @Input() htmlContent: NsContent.IContent | null = null
   iframeUrl: SafeResourceUrl | null = null
@@ -35,6 +35,12 @@ export class HtmlComponent implements OnInit, OnChanges {
     private snackBar: MatSnackBar,
   ) {
     (window as any).API = this.scormAdapterService
+
+    if (window.addEventListener) {
+      window.addEventListener('message', this.receiveMessage.bind(this), false)
+    } else {
+      (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
+    }
   }
 
   ngOnInit() {
@@ -43,7 +49,10 @@ export class HtmlComponent implements OnInit, OnChanges {
       // this.scormAdapterService.loadData()
     }
   }
-
+  ngOnDestroy() {
+    window.removeEventListener('message', this.receiveMessage, false)
+    window.removeEventListener('onmessage', this.receiveMessage)
+  }
   ngOnChanges() {
     this.isIntranetUrl = false
     this.progress = 100
@@ -132,7 +141,10 @@ export class HtmlComponent implements OnInit, OnChanges {
       `/app/toc/${this.htmlContent ? this.htmlContent.identifier : ''}/overview`,
     ])
   }
-
+  receiveMessage(msg: any) {
+    /* tslint:disable-next-line */
+    console.log("msg=>", msg)
+  }
   openInNewTab() {
     if (this.htmlContent) {
       if (this.mobAppSvc && this.mobAppSvc.isMobile) {
