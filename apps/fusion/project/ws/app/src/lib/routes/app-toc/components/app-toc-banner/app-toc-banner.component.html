@@ -1,4 +1,8 @@
-<div [ngStyle]="{'background-color': ((content?.posterImage || '').length === 7? content?.posterImage : '#F8AD1E')}">
+<div *ngIf="!isSticky" [ngClass]="{
+  'banner-container': bannerUrl,
+  'ws-mat-primary-lite-background-on-day banner-container': !bannerUrl
+}" [style.backgroundImage]="bannerUrl"
+  [ngStyle]="{'background-color': ((content?.posterImage || '').length === 7? content?.posterImage : '#F8AD1E')}">
   <div class="header-synopsis fixed-width" [ngClass]="{ 'header-synopsis-gradient': bannerUrl }" *ngIf="content">
     <div class="pt-10 header-actions top">
       <div class="action-btns">
@@ -12,10 +16,10 @@
     </div>
     <div class="flex flex-row mb-10">
       <!-- <div *ngIf="content?.appIcon" class="apIcon">
-        <img [src]="content?.creatorLogo" [id]="'source_' + content.identifier"
-                class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-                [alt]="content.sourceName || iGOT" />
-      </div> -->
+      <img [src]="content?.creatorLogo" [id]="'source_' + content.identifier"
+              class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
+              [alt]="content.sourceName || iGOT" />
+    </div> -->
       <div class="flex-auto">
         <div class="header-title flex-col sm:flex-row">
           <div *ngIf="content?.appIcon" class="apIcon">
@@ -82,13 +86,13 @@
               <span class="rating-count" *ngIf="content?.totalRating">
                 ( {{ content?.totalRating | pipeCountTransform }} )</span>
               <!-- <span>
-                <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
-                  votes
-                </ng-container>
-                <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
-                  vote
-                </ng-container>
-              </span> -->
+              <ng-container i18n *ngIf="(content?.totalRating || 0) > 1">
+                votes
+              </ng-container>
+              <ng-container i18n *ngIf="(content?.totalRating || 0) <= 1">
+                vote
+              </ng-container>
+            </span> -->
             </div>
             <div *ngIf="!content?.averageRating" class="flex items-center my-1 mb-3 rating mt-5 mb-5">
               <span class="mr-2 rating-number"> 0.0 &nbsp;</span>
@@ -100,21 +104,21 @@
             </div>
             <div class="header-actions mt-8">
               <ng-container *ngIf="
-                  actionBtnStatus !== 'wait' &&
-                  content?.status !== 'Deleted' &&
-                  content?.status !== 'Expired'
-                ">
+                actionBtnStatus !== 'wait' &&
+                content?.status !== 'Deleted' &&
+                content?.status !== 'Expired'
+              ">
                 <div [hidden]="isResource && !content?.artifactUrl?.length">
                   <ng-container *ngIf="
-                      actionBtnStatus === 'grant' &&
-                      !(isMobile && content?.isInIntranet) &&
-                      !(
-                        content?.contentType === 'Course' &&
-                        content?.children.length === 0 &&
-                        !content?.artifactUrl?.length
-                      ) &&
-                      !(content?.contentType === 'Resource' && !content?.artifactUrl)
-                    ">
+                    actionBtnStatus === 'grant' &&
+                    !(isMobile && content?.isInIntranet) &&
+                    !(
+                      content?.contentType === 'Course' &&
+                      content?.children.length === 0 &&
+                      !content?.artifactUrl?.length
+                    ) &&
+                    !(content?.contentType === 'Resource' && !content?.artifactUrl)
+                  ">
                     <a [color]="'primary'" *ngIf="showStart.show && !isPostAssessment"
                       [routerLink]="resumeData ? resumeDataLink?.url : firstResourceLink?.url"
                       [queryParams]="resumeData ? generateQuery('RESUME') : generateQuery('START')"
@@ -128,22 +132,22 @@
                       <ng-container *ngIf="!forPreview || isInIFrame; else authView" i18n>Take Assessment</ng-container>
                     </a>
                     <!-- <a
-                          [color]="'primary'"
-                          *ngIf="isPracticeVisible"
-                          [hidden]="!content?.children?.length"
-                          class="margin-right-m"
-                          mat-flat-button
-                          i18n
-                          >Practice</a
-                        >
-                        <a
-                          [color]="'primary'"
-                          *ngIf="isAssessVisible"
-                          [hidden]="!content?.children?.length"
-                          mat-flat-button
-                          i18n
-                          >Assess</a
-                        > -->
+                        [color]="'primary'"
+                        *ngIf="isPracticeVisible"
+                        [hidden]="!content?.children?.length"
+                        class="margin-right-m"
+                        mat-flat-button
+                        i18n
+                        >Practice</a
+                      >
+                      <a
+                        [color]="'primary'"
+                        *ngIf="isAssessVisible"
+                        [hidden]="!content?.children?.length"
+                        mat-flat-button
+                        i18n
+                        >Assess</a
+                      > -->
                   </ng-container>
                   <ng-container *ngIf="actionBtnStatus == 'reject' && content?.registrationUrl">
                     <a [href]="content?.registrationUrl" target="_blank" [color]="'primary'" class="margin-right-m" i18n
@@ -182,8 +186,90 @@
       <mat-icon class="align-bottom">info</mat-icon>&nbsp;
       <ng-container i18n>Access to this YouTube content is blocked.</ng-container>
     </p>
-    <ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview" [contentId]="content?.identifier">
+    <ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview" [contentId]="content?.identifier"
+      [className]="'thick'">
     </ws-widget-content-progress>
+  </div>
+</div>
+
+<div *ngIf="isSticky" [ngClass]="{
+'banner-container': bannerUrl,
+'ws-mat-primary-lite-background-on-day banner-container': !bannerUrl,
+'sticky-banner': isSticky
+}" [style.backgroundImage]="bannerUrl" [ngStyle]="{'background-color': content?.posterImage || '#F8AD1E'}">
+  <div class="header-synopsis fixed-width" [ngClass]="{ 'header-synopsis-gradient': bannerUrl }" *ngIf="content">
+
+    <div class="flex flex-row">
+      <div class="flex-auto py-5">
+        <div class="header-title flex-col sm:flex-row">
+          <div *ngIf="content?.appIcon" class="apIcon">
+            <img [src]="content?.creatorLogo" [id]="'source_' + content.identifier" class="source-icon"
+              [wsUtilsDefaultThumbnail]="defaultSLogo" [alt]="content.sourceName || iGOT" />
+          </div>
+          <div class="flex flex-col width-expand">
+            <div class="sm:ml-5 sm:mr-5  flex flex-auto">
+              <h1 class="mat-display-2 margin-remove-bottom padding-bottom-xs hidden sm:block truncate"
+                [title]="content?.name">
+                {{ content?.name }}
+              </h1>
+              <h1 class="mat-display-1 margin-remove-bottom padding-bottom-xs block sm:hidden truncate"
+                [title]="content?.name">
+                {{ content?.name }}
+              </h1>
+              <span *ngIf="contentProgress === 1" class="margin-left-s">
+                <mat-icon class="ws-mat-accent-text">check_circle</mat-icon>
+              </span>
+
+            </div>
+            <div [ngSwitch]="routePath" class="sm:ml-5 header-meta" [ngClass]="{ 'header-meta-banner': bannerUrl }">
+              <!-- Overview Section -->
+              <div class="banner-overview-container truncate" [hidden]="!content?.subTitle && showSubtitleOnBanner"
+                *ngSwitchCase="'overview'">
+                <h2 class="overview-description" *ngIf="showSubtitleOnBanner" i18n-title title="Subtitle">
+                  {{ content?.subTitle | pipeLimitTo: 250 }}
+                </h2>
+                <h3 class="overview-description" *ngIf="!showSubtitleOnBanner" i18n-title title="Description">
+                  {{ content?.description | pipeLimitTo: 450 }}
+                </h3>
+                <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
+                  [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()">
+                  <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
+                </div>
+              </div>
+              <!-- Toc Section -->
+              <div *ngSwitchCase="'contents'">
+                <!-- Contents Bannner -->
+              </div>
+              <!-- Analytics Section -->
+              <div class="banner-overview-container" [hidden]="!content?.subTitle && showSubtitleOnBanner"
+                *ngSwitchCase="'analytics'">
+                <h2 class="overview-description" *ngIf="showSubtitleOnBanner" i18n-title title="Subtitle">
+                  {{ content?.subTitle | pipeLimitTo: 250 }}
+                </h2>
+                <h3 class="overview-description" *ngIf="!showSubtitleOnBanner" i18n-title title="Description">
+                  {{ content?.description | pipeLimitTo: 450 }}
+                </h3>
+                <div *ngIf="sanitizedIntroductoryVideoIcon" class="overview-intro ws-mat-primary-lite-background"
+                  [style.backgroundImage]="sanitizedIntroductoryVideoIcon" role="button" (click)="playIntroVideo()">
+                  <mat-icon role="button" class="overview-intro-overlay">play_arrow</mat-icon>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-0 header-actions top self-start">
+            <div class="action-btns">
+              <div class="hidden-block-xs">
+                <ng-container [ngTemplateOutlet]="actions"></ng-container>
+              </div>
+              <button mat-icon-button class="visible-block-xs" [matMenuTriggerFor]="actionMenu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -196,19 +282,19 @@
 
 <ng-template #actions>
   <!-- <a i18n-aria-label aria-label="Edit" mat-icon-button *ngIf="editButton"
-    [routerLink]="['/author/editor/' + content?.identifier]" color="primary">
-    <mat-icon>edit</mat-icon>
-  </a> -->
+  [routerLink]="['/author/editor/' + content?.identifier]" color="primary">
+  <mat-icon>edit</mat-icon>
+</a> -->
   <a i18n-aria-label aria-label="Take Action" mat-icon-button *ngIf="reviewButton"
     [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon>publish</mat-icon>
   </a>
   <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
-      content
-        | pipePartialContent
-          : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal',
-                  'artifactUrl']
-    "></ws-widget-btn-content-download>
+    content
+      | pipePartialContent
+        : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal',
+                'artifactUrl']
+  "></ws-widget-btn-content-download>
   <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="content | pipePartialContent: ['identifier']"
     [color]="default">
   </ws-widget-btn-content-like>

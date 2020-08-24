@@ -1,27 +1,31 @@
-<mat-toolbar role="navigation" i18n-aria-label aria-label="Toolbar" *ngIf="!(isInIframe && forPreview)"
-  class="detailBar fixed-width" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title:'Details',url:'none'}] }">
-  </ws-widget-btn-page-back>
-  <!-- <span class="margin-left-xs text-truncate">
-    <span i18n>Details</span>
-  </span> -->
-  <span class="spacer"></span>
-  <a *ngIf="isAuthor && !forPreview" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
-    <mat-icon>create</mat-icon>
-    <span i18n class="ml-2">Edit</span>
-  </a>
-  <!-- <ng-container *ngIf="isAuthor" [wsResolverWidget]="authorBtnWidget"></ng-container> -->
+<mat-toolbar id="sticky-breadcrumbs" role="navigation" i18n-aria-label aria-label="Toolbar" *ngIf="!(isInIframe && forPreview)"
+  class="detailBar full-width" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles" [ngClass]="{'sticky-breadcrumbs': showScroll}">
+  <div class="fixed-width w-full">
+    <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title:'Details',url:'none'}] }">
+    </ws-widget-btn-page-back>
+    <!-- <span class="margin-left-xs text-truncate">
+      <span i18n>Details</span>
+    </span> -->
+    <span class="spacer"></span>
+    <a *ngIf="isAuthor && !forPreview" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
+      <mat-icon>create</mat-icon>
+      <span i18n class="ml-2">Edit</span>
+    </a>
+    <!-- <ng-container *ngIf="isAuthor" [wsResolverWidget]="authorBtnWidget"></ng-container> -->
+  </div>
 </mat-toolbar>
 
-<ws-app-toc-banner role="banner" [banners]="banners" [forPreview]="forPreview" [content]="content"
-  [analytics]="analytics" [resumeData]="resumeData">
+<ws-app-toc-banner id="sticky-banner" [ngClass]="{'sticky-banner': showScroll}" role="banner" [banners]="banners" [forPreview]="forPreview" [content]="content"
+  [analytics]="analytics" [resumeData]="resumeData" [isSticky]='showScroll'>
 </ws-app-toc-banner>
 <ng-container>
   <div class="toc-container">
     <div role="main" class="toc-body" *ngIf="!errorCode; else tocError">
-      <div class="flex fixed-width">
+      <div id="sticky-navs" class="full-width white-bg"  [ngClass]="{'sticky-navs shadow': showScroll}"
+      [ngStyle]="{'top':'259px'}">
+        <div  class="flex fixed-width">
 
-        <nav mat-tab-nav-bar class="toc-links mat-app-background">
+        <nav mat-tab-nav-bar  class="toc-links mat-app-background">
           <a mat-tab-link [routerLink]='"./single-page-view"' fragment="overview"
            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n>Overview</a>
           <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'"
@@ -55,6 +59,7 @@
             <mat-icon>bar_chart</mat-icon>
           </a>
         </nav>
+        </div>
       </div>
 
       <mat-divider class="fluid-width margin-top-m margin-bottom-m"></mat-divider>

@@ -446,7 +446,7 @@ const routes: Routes = [
       scrollPositionRestoration: 'top',
       urlUpdateStrategy: 'eager',
       onSameUrlNavigation: 'reload',
-      scrollOffset: [0, 80],
+      scrollOffset: [0, 331],
     }),
   ],
   exports: [RouterModule],

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewChecked, HostListener } from '@angular/core'
+import { Component, OnDestroy, OnInit, AfterViewChecked, HostListener, AfterViewInit } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -20,7 +20,7 @@ export enum ErrorType {
   templateUrl: './app-toc-home.component.html',
   styleUrls: ['./app-toc-home.component.scss'],
 })
-export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked, AfterViewInit {
   banners: NsAppToc.ITocBanner | null = null
   content: NsContent.IContent | null = null
   errorCode: NsAppToc.EWsTocErrorCode | null = null
@@ -60,6 +60,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
   activeFragment = this.route.fragment.pipe(share())
   currentFragment = 'overview'
   showScroll!: boolean
+  isStickyHeight!: string
   showScrollHeight = 300
   hideScrollHeight = 10
 
@@ -102,16 +103,44 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
     }
   }
 
+  ngAfterViewInit() {
+    if (this.currentFragment) {
+    const bodyRect = document.body.getBoundingClientRect()
+    // tslint:disable-next-line: no-non-null-assertion
+    const elemRect = document.querySelector(`#${this.currentFragment}`)!.getBoundingClientRect()
+    const offset   = elemRect.top - bodyRect.top
+      // tslint:disable-next-line: no-non-null-assertion
+      document.querySelector(`#${this.currentFragment}`)!.scrollTo({
+        top: 331,
+        behavior: 'smooth',
+      })
+
+      window.scroll(0, offset - 331)
+    }
+  }
+
   ngAfterViewChecked(): void {
     try {
-      if (this.fragment) {
+      if (this.currentFragment) {
         // tslint:disable-next-line: no-non-null-assertion
-        document!.querySelector(`#${this.fragment}`)!.scrollTo({
-          top: 80,
+        document!.querySelector(`#${this.currentFragment}`)!.scrollTo({
+          top: 331,
           behavior: 'smooth',
         })
       }
     } catch (e) { }
+    // if (this.currentFragment) {
+    //   const bodyRect = document.body.getBoundingClientRect()
+    //   // tslint:disable-next-line: no-non-null-assertion
+    //   const elemRect = document.querySelector(`#${this.currentFragment}`)!.getBoundingClientRect()
+    //   const offset   = elemRect.top - bodyRect.top
+    //     // tslint:disable-next-line: no-non-null-assertion
+    //     document.querySelector(`#${this.currentFragment}`)!.scrollTo({
+    //       top: 331,
+    //       behavior: 'smooth',
+    //     })
+    //     window.scroll(0, offset - 331)
+    //   }
   }
 
   get enableAnalytics(): boolean {
@@ -172,6 +201,20 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
   onWindowScroll() {
     if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
       this.showScroll = true
+      // window.scroll(0, 300)
+      const stickyBreadcrumbs = document.getElementById('sticky-breadcrumbs')
+       // tslint:disable-next-line: no-non-null-assertion
+       stickyBreadcrumbs!.classList.add('sticky-breadcrumbs')
+
+       const stickBanner = document.getElementById('sticky-banner')
+       // tslint:disable-next-line: no-non-null-assertion
+       stickBanner!.classList.add('sticky-banner')
+       // tslint:disable-next-line: no-non-null-assertion
+       this.isStickyHeight = `${stickBanner!.offsetHeight}px`
+
+       const stickyNav = document.getElementById('sticky-navs')
+       // tslint:disable-next-line: no-non-null-assertion
+       stickyNav!.classList.add('sticky-navs')
     } else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop
       || document.body.scrollTop) < this.hideScrollHeight) {
       this.showScroll = false

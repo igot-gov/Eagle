@@ -32,6 +32,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() resumeData: NsContent.IContinueLearningData | null = null
   @Input() analytics: NsAnalytics.IAnalytics | null = null
   @Input() forPreview = false
+  @Input() isSticky = false
   contentProgress = 0
   bannerUrl: SafeStyle | null = null
   routePath = 'overview'
@@ -285,13 +286,13 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
         })
       }
       // this.progressSvc.fetchProgressHashContentsId({
-      //   "contentIds": [
-      //     "lex_29959473947367270000",
-      //     "lex_5501638797018560000"
-      //   ]
+      //   contentIds: [
+      //     'lex_auth_013071100228288512114',
+      //     'lex_auth_013064092539084800475',
+      //   ],
       // }
       // ).subscribe(data => {
-      //   console.log("DATA: ", data)
+      //   console.log('DATA: ', data)
       // })
       this.isPracticeVisible = Boolean(
         this.tocSvc.filterToc(this.content, NsContent.EFilterCategory.PRACTICE),
