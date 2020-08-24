@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
-import com.infosys.model.com.infosys.model.postgres.EagleUser;
+import com.infosys.model.postgres.EagleUser;
 import com.infosys.repository.EagleUserRepo;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;

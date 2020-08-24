@@ -5,18 +5,20 @@
  *
  */
 
-package com.infosys.model.com.infosys.model.postgres;
+package com.infosys.model.postgres;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Table(name = "eagle_user", schema = "public")
 public class EagleUser {
 
-    @Column(name = "wid")
-    private long wid;
+    @Id
+    private UUID wid;
     @Column(name = "root_org")
     private String rootOrg;
     @Column(name = "org")
@@ -28,11 +30,11 @@ public class EagleUser {
     @Column(name = "last_name")
     private String lastName;
 
-    public long getWid() {
+    public UUID getWid() {
         return wid;
     }
 
-    public void setWid(long wid) {
+    public void setWid(UUID wid) {
         this.wid = wid;
     }
 

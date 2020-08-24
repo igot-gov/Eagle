@@ -7,11 +7,9 @@
 
 package com.infosys.repository;
 
-import com.infosys.model.com.infosys.model.postgres.EagleUser;
+import com.infosys.model.postgres.EagleUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 public interface EagleUserRepo extends JpaRepository<EagleUser, String> {
 
