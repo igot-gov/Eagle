@@ -53,6 +53,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -71,6 +72,9 @@ import com.infosys.util.Templates;
 
 @Service
 public class EmailNotificationServiceImpl implements EmailNotificationService {
+
+	@Value("${enable.domain.validation}")
+	boolean enableDomainValidation;
 
 	@Autowired
 	UserUtilityService userUtilService;
@@ -1008,9 +1012,9 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 			String toEmailId = tempTo.get("email").toString().contains("@") ? tempTo.get("email").toString()
 					: tempTo.get("email").toString() + "";
 			System.out.println("toEmailId : "+toEmailId);
-			System.out.println("domains : "+domains);
+				System.out.println("domains : "+domains);
 
-			if (!domains.contains("@" + toEmailId.split("@")[1])) {
+			if (enableDomainValidation && !domains.contains("@" + toEmailId.split("@")[1])) {
 				invalidIds.add(toEmailId);
 				continue;
 			}
