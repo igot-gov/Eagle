@@ -62,6 +62,7 @@ import org.sunbird.common.models.response.Response;
 import org.sunbird.common.models.util.ProjectLogger;
 import org.sunbird.common.models.util.ProjectUtil;
 import org.sunbird.common.models.util.PropertiesCache;
+import org.sunbird.common.models.util.mail.GMailAuthenticator;
 import org.sunbird.helper.ServiceFactory;
 
 import com.infosys.elastic.helper.ConnectionManager;
@@ -84,6 +85,8 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 	private PropertiesCache properties = PropertiesCache.getInstance();
 	private String SMTPHOST;
 	private String SMTPPORT;
+	private String SMTPUSERNAME;
+	private String SMTPPASSWORD;
 	private String bodhiKeyspace = LexJsonKey.BODHI_DB_KEYSPACE;
 	private String shareTable = properties.getProperty(LexJsonKey.SHARED_GOALS_TRACKER);
 	private CassandraOperation cassandraOperation = ServiceFactory.getInstance();
@@ -96,6 +99,8 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 	public Map<String, Object> Notify(Map<String, Object> data) {
 		SMTPHOST = System.getenv(LexJsonKey.SMTP_HOST);
 		SMTPPORT = System.getenv(LexJsonKey.SMTP_PORT);
+		SMTPUSERNAME = System.getenv(LexJsonKey.SMTP_USERNAME);
+		SMTPPASSWORD = System.getenv(LexJsonKey.SMTP_PASSWORD);
 
 		if (ProjectUtil.isStringNullOREmpty(SMTPHOST) || ProjectUtil.isStringNullOREmpty(SMTPPORT)) {
 			ProjectLogger.log("SMTP config is not coming form System variable.");
@@ -134,7 +139,10 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 		props.put("mail.smtp.host", SMTPHOST);
 		props.put("mail.smtp.port", SMTPPORT);
 
-		Session session = Session.getDefaultInstance(props, null);
+		props.put("mail.smtp.socketFactory.port", SMTPPORT);
+		props.put("mail.smtp.auth", "true");
+
+		Session session = Session.getInstance(props, new GMailAuthenticator(SMTPUSERNAME, SMTPPASSWORD));
 
 		try {
 			Multipart multipart = new MimeMultipart();
@@ -399,6 +407,7 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 			Transport.send(message);
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			msg = e.getMessage();
 			ProjectLogger.log("EmailError : " + e.getMessage(), e);
 		}

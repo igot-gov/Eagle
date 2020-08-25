@@ -85,6 +85,8 @@ public class LexJsonKey {
 	public static final String SHARED_PLAYLIST_DB = "playlist_shared";
 	public static final String SMTP_HOST = "smtp.host";
 	public static final String SMTP_PORT = "smtp.port";
+	public static final String SMTP_USERNAME = "smtp.username";
+	public static final String SMTP_PASSWORD = "smtp.password";
 	public static final String USER_ROLES = "user_roles";
 	public static final String CONTENT_SERVICE_HOST = "content.service.host";
 	public static final String Content_Port = "bodhi_content_port";
