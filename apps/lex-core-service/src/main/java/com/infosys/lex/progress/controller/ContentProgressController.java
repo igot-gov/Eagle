@@ -104,7 +104,7 @@ public class ContentProgressController {
 			@PathVariable("user_id") String userId,
 			@PathVariable("content_id") String contentId) throws Exception {
 		
-		return new ResponseEntity<>(service.metaForProgressForContentId(rootOrg, userId, contentId, false),HttpStatus.OK);
+		return new ResponseEntity<>(service.metaForProgressForContentId(rootOrg, userId, contentId),HttpStatus.OK);
 		
 	}
 
@@ -114,7 +114,7 @@ public class ContentProgressController {
 			@PathVariable("user_id") String userId,
 			@PathVariable("content_id") String contentId) throws Exception {
 
-		return new ResponseEntity<>(service.metaForProgressForContentId(rootOrg, userId, contentId, true),HttpStatus.OK);
+		return new ResponseEntity<>(service.metaForProgressHierarchy(rootOrg, userId, contentId),HttpStatus.OK);
 
 	}
 	

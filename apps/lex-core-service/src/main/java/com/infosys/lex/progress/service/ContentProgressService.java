@@ -55,7 +55,9 @@ public interface ContentProgressService {
 
 	public String updateAssessmentRecalculate(@Valid AssessmentRecalculateDTO progressDTO) throws Exception;
 
-	Map<String, Object> metaForProgressForContentId(String rootOrg, String userUUID, String contentId, boolean withChildren) throws Exception;
+	Map<String, Object> metaForProgressForContentId(String rootOrg, String userUUID, String contentId) throws Exception;
+
+	Map<String, Object> metaForProgressHierarchy(String rootOrg, String userUUID, String contentId) throws Exception;
 
 	String updateExternalProgress(ExternalProgressDTO externalInfo) throws Exception;
 
