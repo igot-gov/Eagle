@@ -688,7 +688,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 
 		Map<String,Object> progressMap = this.progressMetaData(rootOrg, userUUID, new ArrayList<>(Arrays.asList(contentId)));
 
-		System.out.println("Final hierarchy progressMap->" +new ObjectMapper().writeValueAsString(progressMap));
+		//System.out.println("Final hierarchy progressMap->" +new ObjectMapper().writeValueAsString(progressMap));
 
 		if(!progressMap.containsKey(contentId) || progressMap.get(contentId) == null )
 			throw new InvalidDataInputException("Invalid Content Id ");
@@ -973,7 +973,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 									//add child progress data
 									List<String> childIds = child.stream().map(c -> c.get("identifier").toString()).collect(Collectors.toList());
 									Map<String, Object> childrenProgress = progressMetaData(rootOrg, userUUID, childIds);
-									System.out.println("Child ids ->"+childIds+" child progress data: "+childrenProgress);
+									//System.out.println("Child ids ->"+childIds+" child progress data: "+childrenProgress);
 									meta.put("childrenProgress", childrenProgress);
 
 								} else {
@@ -1068,7 +1068,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			}
 			ret.put(id, meta);
 		}
-		System.out.println("result -> "+new ObjectMapper().writeValueAsString(ret));
+		//System.out.println("result -> "+new ObjectMapper().writeValueAsString(ret));
 		return ret;
 	}
 
