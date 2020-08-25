@@ -22,12 +22,7 @@ import java.util.UUID;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -106,6 +101,8 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 			ProjectLogger.log("SMTP config is not coming form System variable.");
 			SMTPHOST = properties.getProperty(LexJsonKey.SMTP_HOST);
 			SMTPPORT = properties.getProperty(LexJsonKey.SMTP_PORT);
+			SMTPUSERNAME = properties.getProperty(LexJsonKey.SMTP_USERNAME);
+			SMTPPASSWORD = properties.getProperty(LexJsonKey.SMTP_PASSWORD);
 		}
 		Map<String, Object> ret = new HashMap<String, Object>();
 		String msg = "Success";
@@ -141,8 +138,17 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 
 		props.put("mail.smtp.socketFactory.port", SMTPPORT);
 		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
 
-		Session session = Session.getInstance(props, new GMailAuthenticator(SMTPUSERNAME, SMTPPASSWORD));
+		Session session = Session.getDefaultInstance(props,
+				new Authenticator() {
+					protected PasswordAuthentication  getPasswordAuthentication() {
+						return new PasswordAuthentication(
+								SMTPUSERNAME, SMTPPASSWORD);
+					}
+				});
+
+		//Session session = Session.getInstance(props, new GMailAuthenticator(SMTPUSERNAME, SMTPPASSWORD));
 
 		try {
 			Multipart multipart = new MimeMultipart();
