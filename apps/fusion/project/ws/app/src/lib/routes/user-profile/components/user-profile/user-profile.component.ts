@@ -62,6 +62,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   phoneNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$'
   pincodePattern = '(^[0-9]{6}$)'
   yearPattern = '(^[0-9]{4}$)'
+  namePatern = `^[a-zA-Z\\s\\']{1,32}$`
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   @ViewChild('knownLanguagesInput', { static: true }) knownLanguagesInputRef!: ElementRef<HTMLInputElement>
@@ -96,9 +97,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ) {
     this.isForcedUpdate = !!this.route.snapshot.paramMap.get('isForcedUpdate')
     this.createUserForm = new FormGroup({
-      firstname: new FormControl('', [Validators.required]),
-      middlename: new FormControl('', []),
-      surname: new FormControl('', [Validators.required]),
+      firstname: new FormControl('', [Validators.required, Validators.pattern(this.namePatern)]),
+      middlename: new FormControl('', [Validators.pattern(this.namePatern)]),
+      surname: new FormControl('', [Validators.required, Validators.pattern(this.namePatern)]),
       photo: new FormControl('', []),
       countryCode: new FormControl('', [Validators.required]),
       mobile: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumberPattern)]),

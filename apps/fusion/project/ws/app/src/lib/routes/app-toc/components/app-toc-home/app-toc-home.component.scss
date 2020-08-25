@@ -12,8 +12,13 @@
   max-width: 1217px;
   display: block;
   margin: 0 auto;
-  padding: 0 15px !important;
-  // padding: 32px 0px !important;
+  padding: 0 !important;
+  @include breakpoint-s {
+    padding: 0 15px !important;
+  }
+  @include breakpoint-xs {
+    padding: 0 15px !important;
+  }
 }
 .fluid-width {
   width: 100%;
@@ -285,3 +290,24 @@ mat-divider {
   opacity: 1;
   transition: all .2s ease-in-out;
 }
+
+.sticky-breadcrumbs{
+  position: sticky;
+  z-index: 999;
+  top: 72px;
+  width: 100%;
+
+}
+
+.sticky-banner{
+  position:sticky;
+  z-index: 999;
+}
+
+.sticky-navs{
+  position: sticky !important;
+  background: #fff;
+  z-index: 999;
+  top: auto;
+}
+
