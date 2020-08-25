@@ -34,6 +34,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.pdfbox.multipdf.Overlay;
@@ -999,16 +1000,26 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 		String bccList = "";
 		Set<String> invalidIds = new HashSet<String>();
 		Map<String, Object> mailData = userUtilService.getMailData();
+		System.out.println("mailData : "+mailData);
 		List<String> domains = new ArrayList<>(Arrays.asList(mailData.get("domains").toString().split(",")));
 		for (Map<String, Object> tempTo : (List<Map<String, Object>>) data.get("emailTo")) {
+			System.out.println("tempTo : "+tempTo);
+
 			String toEmailId = tempTo.get("email").toString().contains("@") ? tempTo.get("email").toString()
 					: tempTo.get("email").toString() + "";
+			System.out.println("toEmailId : "+toEmailId);
+			System.out.println("domains : "+domains);
+
 			if (!domains.contains("@" + toEmailId.split("@")[1])) {
 				invalidIds.add(toEmailId);
 				continue;
 			}
+			System.out.println("invalidIds : "+invalidIds);
+
 			toList += toEmailId;
 			toList += ",";
+			System.out.println("toList : "+toList);
+
 		}
 		if (!toList.isEmpty()) {
 			toList = toList.substring(0, toList.length() - 1);
@@ -1023,6 +1034,8 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 		if (!ccList.isEmpty()) {
 			ccList = ccList.substring(0, ccList.length() - 1);
 		}
+		System.out.println("ccList : "+ccList);
+
 
 		if (data.containsKey("bccTo"))
 			for (Map<String, Object> bccTo : (List<Map<String, Object>>) data.get("bccTo")) {
@@ -1033,6 +1046,7 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 		if (!bccList.isEmpty()) {
 			bccList = bccList.substring(0, bccList.length() - 1);
 		}
+		System.out.println("bccList : "+bccList);
 
 		String verifyIds = (toList.equals("") ? "" : toList.replaceAll("@infosys", "@ad.infosys"))
 				+ (ccList.equals("") ? ""
