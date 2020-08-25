@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { cassandraClientOptions } from '../../configs/cassandra.config'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
+import { validateInputWithRegex } from '../../utils/helpers'
 import {
     createKeycloakUser,
     getAuthToken,
@@ -20,6 +21,7 @@ import { wTokenApiMock } from '../user/details'
 const filePath = CONSTANTS.USER_BULK_UPLOAD_DIR || process.cwd() + '/user_upload/'
 // tslint:disable-next-line: max-line-length
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/
+const nameRegex = /^[a-zA-Z\s\']{1,32}$/
 const REGISTRATION_BASE = `${CONSTANTS.SB_EXT_API_BASE_2}/v1/content-sources`
 const API_ENDPOINTS = {
     deregisterUsers: (source: string) => `${REGISTRATION_BASE}/${source}/deregistered-users`,
@@ -267,17 +269,32 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                 if (row.length) {
                     // tslint:disable-next-line: no-any
                     const [fname, lname, email] = row as any
-                    if (!email) {
-                        reportData.push([`\n${email}`, `Invalid Email & failed`])
+                    const validFname = await validateInputWithRegex(fname, nameRegex)
+                    const validLname = await validateInputWithRegex(lname, nameRegex)
+                    const validEmail = await validateInputWithRegex(email, emailRegex)
+                    if (!validFname || !validLname) {
+                        reportData.push(
+                            [`\n${email}`,
+                                // tslint:disable-next-line: max-line-length
+                                `Name fields cannot contain numbers and special characters except single quotes  & failed`,
+                            ]
+                        )
+                        continue
+                    }
+                    if (!validEmail) {
+                        reportData.push(
+                            [`\n${email}`,
+                                `Invalid Email & failed`,
+                            ]
+                        )
                         continue
                     }
                     if (email && email.length > 254) {
                         reportData.push([`\n${email}`, `Invalid Email & failed`])
                         continue
                     }
-                    const valid = emailRegex.test(email)
-                    if (!valid) {
-                        reportData.push([`\n${email}`, `Invalid Email & failed`])
+                    if (!validFname || !validLname || !validEmail) {
+                        continue
                     } else {
                         const reqToNewUser = {
                             body: {
@@ -289,7 +306,7 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                         const userId = await createUser(reqToNewUser)
                             .catch((err) => {
                                 if (err.response.status === 409) {
-                                    reportData.push([`\n${email}`, `User with email ${email} is already exists`])
+                                    reportData.push([`\n${email}`, `User with email ${email} already exists`])
                                 } else {
                                     reportData.push([`\n${email}`, `User could not be created in Keycloack`])
                                 }
