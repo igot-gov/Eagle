@@ -59,7 +59,7 @@ public class MultiLingualIntegratedSearchControllerv6 {
         Map<String, Object> resp = new HashMap<>();
 
         validatedSearchService.buildSearchRequestQuery(request);
-        ProjectLogger.log("Search.v6.request.body", mapper.writeValueAsString(request));
+        System.out.println("Search.v6.request.body"+ mapper.writeValueAsString(request));
         try {
             resp = generalSearchService.performSearch(request);
         } catch (BadRequestException e) {
