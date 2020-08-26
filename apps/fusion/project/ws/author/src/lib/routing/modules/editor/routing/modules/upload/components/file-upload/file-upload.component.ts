@@ -399,13 +399,6 @@ export class FileUploadComponent implements OnInit {
           } else if (!element.directory) {
             this.fileList.push(element.filename)
           }
-          if (element.filename.indexOf('analytics-frame.html') >= 0) {
-            let nwFileWriter = new zip.BlobWriter(element.filename)
-            nwFileWriter.writeUint8Array(new Uint8Array([21, 31]), () => {
-              console.log()
-
-            })
-          }
         })
         this.processAndShowResult()
       })
