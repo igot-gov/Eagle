@@ -103,7 +103,7 @@ public class UtilityJava {
 
 
     public static void unzipFile (String fileName, Context context) throws IOException {
-        Log.d("openRapTesting","filePath: "+fileName);
+        /*Log.d("openRapTesting","filePath: "+fileName);
         String [] fileNameWithex = fileName.split("\\.");
         File path = context.getExternalFilesDir("");
         File letDirectory = new File(path, Constants.TMP_DIR_PATH+fileName);
@@ -126,14 +126,14 @@ public class UtilityJava {
                     while ((count = zis.read(buffer)) != -1)
                         fout.write(buffer, 0, count);
                 }
-            /* if time should be restored as well
+            *//* if time should be restored as well
             long time = ze.getTime();
             if (time > 0)
                 file.setLastModified(time);
-            */
+            *//*
             }
             Log.d("openRapTesting","unzip done");
-        }
+        }*/
     }
 
     public static void moveFile(String inputPath, String inputFile, String outputPath, String outputFile) {

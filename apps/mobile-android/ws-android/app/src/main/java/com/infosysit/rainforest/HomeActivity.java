@@ -107,7 +107,8 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
             if (onlineCheck) {
                 loadWebview();
             } else {
-                goOffline();           }
+                //goOffline();
+            }
 
             ConstraintLayout homeLayout = findViewById(R.id.home_constraint_layout);
             mSnackbarOffline = Snackbar.make(homeLayout, "Check your network.", Snackbar.LENGTH_INDEFINITE);
@@ -115,7 +116,7 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
 
                 @Override
                 public void onClick(View v) {
-                    goOffline();
+                    //goOffline();
                 }
             });
             mSnackbarOffline.setActionTextColor(Color.WHITE);
@@ -295,7 +296,7 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
 
     public void loadWebview() {
         if (!isOnline(this)) {
-            goOffline();
+            //goOffline();
             return;
         }
 //        chatButton.setVisibility(View.VISIBLE);

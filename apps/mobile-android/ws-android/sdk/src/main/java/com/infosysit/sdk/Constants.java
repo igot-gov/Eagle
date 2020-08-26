@@ -68,7 +68,7 @@ public class Constants {
     public static final String telemetryTokenKey = "sharedPreference.telemetry";
     public static final String telemetryQuizTokenKey = "sharedPreference.telemetryQuiz";
     public static final String continueLearningTelemetryJson = "sharedPrefrence.continueLearningTelemetry";
-    public static final String decryptedFileKey = "decryptedFileKey";
+    /*public static final String decryptedFileKey = "decryptedFileKey";*/
     public static final String continueLearningKey = Constants.persistence+"sharedPreference.continue";
     public static final String openRapDownload = "sharedPreference.openrap";
 

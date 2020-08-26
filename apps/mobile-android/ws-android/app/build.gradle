@@ -44,7 +44,7 @@ android {
     flavorDimensions "env"
     productFlavors {
         prod {
-            buildConfigField "String", "BASE_URL", '"https://dtsdtktcet40x.cloudfront.net/"'
+            buildConfigField "String", "BASE_URL", '"https://d136953gtttd92.cloudfront.net/"'
         }
 
         dev {
