@@ -36,11 +36,12 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     private events: EventService,
   ) {
     (window as any).API = this.scormAdapterService
-    if (window.addEventListener) {
-      window.addEventListener('message', this.receiveMessage.bind(this), false)
-    } else {
-      (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
-    }
+    // if (window.addEventListener) {
+    window.addEventListener('message', this.receiveMessage.bind(this))
+    // }
+    // else {
+    //   (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
+    // }
     // window.addEventListener('message', function (event) {
     //   /* tslint:disable-next-line */
     //   console.log('message', event)
@@ -58,7 +59,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   ngOnDestroy() {
-    window.removeEventListener('message', this.receiveMessage, false)
+    window.removeEventListener('message', this.receiveMessage)
     // window.removeEventListener('onmessage', this.receiveMessage)
   }
   ngOnChanges() {
@@ -151,7 +152,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   }
   receiveMessage(msg: any) {
     /* tslint:disable-next-line */
-    // console.log("msg=>", msg)
+    console.log("msg=>", msg)
     if (msg.data) {
       this.raiseTelemetry(msg.data)
     } else {
