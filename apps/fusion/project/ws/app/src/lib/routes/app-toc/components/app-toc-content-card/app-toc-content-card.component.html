@@ -116,7 +116,7 @@
       </div>
       <div class="w-100">
         <ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview"
-          [contentId]="content?.identifier" class="progress-bar-thin">
+          [contentId]="content?.identifier" class="progress-bar-thin" [progress]="content?.progress?.progress">
         </ws-widget-content-progress>
       </div>
     </div>
@@ -135,7 +135,7 @@
       <img class="card-thumbnail ws-mat-primary-lite-background" [src]="content?.appIcon" alt="Thumbnail"
         (click)="viewChildren = !viewChildren" [wsUtilsDefaultThumbnail]="defaultThumbnail" />
       <ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview"
-        [contentId]="content?.identifier" class="progress-bar-thin">
+        [contentId]="content?.identifier" class="progress-bar-thin" [progress]="content?.progress?.progress">
       </ws-widget-content-progress>
     </div>
 

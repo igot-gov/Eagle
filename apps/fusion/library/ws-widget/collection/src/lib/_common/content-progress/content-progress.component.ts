@@ -30,5 +30,9 @@ export class ContentProgressComponent implements OnChanges {
         }
       })
     }
+
+    if (this.progress) {
+      this.progress = Math.round(this.progress * 10000) / 100
+    }
   }
 }

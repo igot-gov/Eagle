@@ -61,7 +61,7 @@
         </div>
       </div>
       <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-        [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+        [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
     </div>
   </div>
 </ng-template>
@@ -94,7 +94,7 @@
             [alt]="widgetData.content.name" [title]="widgetData.content.name" />
         </a>
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
             [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
@@ -223,7 +223,7 @@
           <mat-icon>flip_to_back</mat-icon>
         </button>
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
 
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
@@ -324,7 +324,7 @@
           <mat-icon>flip_to_back</mat-icon>
         </button>
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
             [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
@@ -431,7 +431,7 @@
           class="card-img ws-mat-primary-lite-background" [wsUtilsDefaultThumbnail]="defaultThumbnail"
           [alt]="widgetData.content.name" [title]="widgetData.content.name" />
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
       </a>
 
       <mat-card-content class="m-small">
@@ -531,7 +531,7 @@
           [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name"
           [title]="widgetData.content.name" />
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
       </a>
       <mat-card-content>
         <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
