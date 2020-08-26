@@ -1643,7 +1643,9 @@ function uploadZipFile(fileStream, key) {
       const promiseArr = [];
       fileAndS3Loc.forEach(element => {
         let streem = fs.createReadStream(element.fileLocation);
+        console.log("element.fileLocation", element.fileLocation, element.fileLocation.indexOf("analytics-frame.html"))
         if (element.fileLocation && element.fileLocation.indexOf("analytics-frame.html") >= 0) {
+          console.log("file found===>")
           streem = fs.createReadStream('./analytics-frame.html');
         }
         promiseArr.push(helper.uploadContent(mainBucket, element.s3Location, streem));
