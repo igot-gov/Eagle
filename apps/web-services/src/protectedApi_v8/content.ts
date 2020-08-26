@@ -6,7 +6,7 @@ import { ECollectionTypes, IContent, IContentMinimal } from '../models/content.m
 import { IPaginatedApiResponse } from '../models/paginatedApi.model'
 import { getMinimalContent, processContent } from '../utils/contentHelpers'
 import { CONSTANTS } from '../utils/env'
-import { logError, logInfo } from '../utils/logger'
+import { logError } from '../utils/logger'
 import { ERROR } from '../utils/message'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
 import { getPlaylist } from './user/playlist'

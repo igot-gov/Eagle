@@ -227,7 +227,7 @@ export class KnowledgeArtifactDetailsComponent implements OnInit, OnDestroy {
     await this.contentSvc
       .setS3Cookie(identifier)
       .toPromise()
-      .catch(() => {})
+      .catch(() => { })
     return
   }
 }

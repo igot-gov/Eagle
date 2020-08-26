@@ -137,7 +137,7 @@ const contentUtil = require('../Content/util');
 function uploadContent(bucket, key, file) {
   console.log('Started the content upload process...');
   return new Promise((resolve, reject) => {
-
+    console.log(file)
     /*if (!avUtil.getClamScan()) {
       return reject({
         error: 'Unable to connect to AV endpoint'
@@ -227,6 +227,7 @@ function uploadContent(bucket, key, file) {
     };
 
     console.log('File name Key: ', key);
+    // File name Key:  content-store/igot/dopt/Public/lex_auth_01309428963604070456/web-hosted/CB_Negotiation-Understanding_Perspective_COLLABORATE/analytics-frame.html
     try {
       params['ContentType'] = contentUtil.getMimeTypeFromFileName(key);
     } catch (e) {

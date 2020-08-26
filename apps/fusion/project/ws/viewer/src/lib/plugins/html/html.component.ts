@@ -35,12 +35,19 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     private snackBar: MatSnackBar,
   ) {
     (window as any).API = this.scormAdapterService
-
-    if (window.addEventListener) {
-      window.addEventListener('message', this.receiveMessage.bind(this), false)
-    } else {
-      (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
-    }
+    // if (window.addEventListener) {
+    //   window.addEventListener('message', this.receiveMessage.bind(this), false)
+    // } else {
+    //   (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
+    // }
+    window.addEventListener('message', function (event) {
+      /* tslint:disable-next-line */
+      console.log('message', event)
+    })
+    window.addEventListener('onmessage', function (event) {
+      /* tslint:disable-next-line */
+      console.log('onmessage===>', event)
+    })
   }
 
   ngOnInit() {
@@ -50,8 +57,8 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   ngOnDestroy() {
-    window.removeEventListener('message', this.receiveMessage, false)
-    window.removeEventListener('onmessage', this.receiveMessage)
+    // window.removeEventListener('message', this.receiveMessage, false)
+    // window.removeEventListener('onmessage', this.receiveMessage)
   }
   ngOnChanges() {
     this.isIntranetUrl = false
