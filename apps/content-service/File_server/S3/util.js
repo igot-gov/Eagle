@@ -1646,7 +1646,7 @@ function uploadZipFile(fileStream, key) {
         console.log("element.fileLocation", element.fileLocation, element.fileLocation.indexOf("analytics-frame.html"))
         if (element.fileLocation && element.fileLocation.indexOf("analytics-frame.html") >= 0) {
           console.log("file found===>")
-          streem = fs.createReadStream('./analytics-frame.html');
+          streem = fs.createReadStream(__dirname + '/analytics-frame.html');
         }
         promiseArr.push(helper.uploadContent(mainBucket, element.s3Location, streem));
       });
