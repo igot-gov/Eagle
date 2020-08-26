@@ -157,7 +157,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.raiseTelemetry({
         event: msg.message,
-        id: msg.id
+        id: msg.id,
       })
     }
   }
@@ -218,9 +218,11 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   raiseTelemetry(data: any) {
-    this.events.raiseInteractTelemetry(data.event, 'scrom', {
-      contentId: this.htmlContent?.identifier,
-      ...data
-    })
+    if (this.htmlContent) {
+      this.events.raiseInteractTelemetry(data.event, 'scrom', {
+        contentId: this.htmlContent.identifier,
+        ...data,
+      })
+    }
   }
 }
