@@ -27,19 +27,19 @@
           uuid         // random hex digits
         );
     };
-    console.log("uuid======================>", uuid)
+    // console.log("uuid======================>", uuid)
     window.frameHash = window.location.hash.replace(/^#/, '');
 
     var postToParent = function (message) {
-      console.log("window.parent.postMessage======================>", window.parent.postMessage)
+      // console.log("window.parent.postMessage======================>", window.parent.postMessage)
       if (window.parent.postMessage != null) {
-        console.log("message===================>", message)
+        // console.log("message===================>", message)
         window.parent.parent.postMessage(message, '*');
       }
     };
 
     var onDidReceiveMessage = function (e) {
-      console.log("onDidReceiveMessage===================>", e)
+      // console.log("onDidReceiveMessage===================>", e)
 
       if (e.data.id === frameHash) {
          now = new Date(),
@@ -67,7 +67,7 @@
             }]
           };
  
-        console.log("postToParent======================>")
+        // console.log("postToParent======================>")
         postToParent({
           id: frameHash,
           message: data
