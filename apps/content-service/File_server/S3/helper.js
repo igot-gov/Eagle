@@ -67,7 +67,6 @@ let s3 = new AWS.S3();
 let kms = new AWS.KMS();
 let cloudfront = new AWS.CloudFront();
 let ets = new AWS.ElasticTranscoder();
-
 /*
     Promisified aws-sdk functions
 */
@@ -130,6 +129,15 @@ function headObject(params) {
 }
 
 const contentUtil = require('../Content/util');
+// const { Transform } = require('stream');
+
+// const newHtmlTransform = new Transform({
+//   transform: (chunk, encoding, done) => {
+//       const result = chunk.toString().toUpperCase()
+//       done(null, result)
+//   }
+// })
+
 /**
  * Promisify s3.upload()
  */
@@ -137,7 +145,8 @@ const contentUtil = require('../Content/util');
 function uploadContent(bucket, key, file) {
   console.log('Started the content upload process...');
   return new Promise((resolve, reject) => {
-    console.log(file)
+    // console.log(file.pipe(newHtmlTransform))
+
     /*if (!avUtil.getClamScan()) {
       return reject({
         error: 'Unable to connect to AV endpoint'

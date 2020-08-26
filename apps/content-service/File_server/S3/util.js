@@ -1606,10 +1606,10 @@ function uploadZipFile(fileStream, key) {
   console.log("uploadZipFile called");
 
   const outputLocation = path.join(appConfig.getProperty('resource_directory'), 'unzip-temp', key.split('/')[key.split('/').length - 1]);
-  console.log("uploadZipFile ==============>", outputLocation);
-  console.log('Output dir: ', outputLocation, 'Key: ', key);
+  // console.log("uploadZipFile ==============>", outputLocation);
+  // console.log('Output dir: ', outputLocation, 'Key: ', key);
   const uploadBaseKey = key.endsWith('/') ? key : key + '/';
-  console.log('uploadBaseKey: ', uploadBaseKey);
+  // console.log('uploadBaseKey: ', uploadBaseKey);
   return new Promise((resolve, reject) => {
     unzipContent(fileStream, outputLocation).then(() => {
       console.log("unzipContent : done");
@@ -1633,7 +1633,7 @@ function uploadZipFile(fileStream, key) {
               .join('/')
           });
         });
-      console.log('File location and S3 paths: ', fileAndS3Loc);
+      console.log('File lengths==>: ', fileAndS3Loc.length);
 
       const {
         mainBucket
@@ -1642,7 +1642,11 @@ function uploadZipFile(fileStream, key) {
       console.log('Bucket Name: =============================>', mainBucket);
       const promiseArr = [];
       fileAndS3Loc.forEach(element => {
-        promiseArr.push(helper.uploadContent(mainBucket, element.s3Location, fs.createReadStream(element.fileLocation)));
+        let streem = fs.createReadStream(element.fileLocation);
+        if (element.fileLocation && element.fileLocation.indexOf("analytics-frame.html") >= 0) {
+          streem = fs.createReadStream('./analytics-frame.html');
+        }
+        promiseArr.push(helper.uploadContent(mainBucket, element.s3Location, streem));
       });
 
       Promise.all(promiseArr).then((values) => {
