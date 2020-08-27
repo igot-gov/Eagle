@@ -1,4 +1,5 @@
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes'
+import { Meta } from '@angular/platform-browser';
 import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
 import { ConfigurationsService, EventService } from '@ws-widget/utils'
@@ -28,6 +29,7 @@ export class BtnContentShareDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { content: NsContent.IContent },
     private shareSvc: WidgetContentShareService,
     private configSvc: ConfigurationsService,
+    private meta: Meta
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,34 @@ export class BtnContentShareDialogComponent implements OnInit {
         !this.configSvc.restrictedFeatures.has('socialMediaLinkedinShare') ||
         !this.configSvc.restrictedFeatures.has('socialMediaTwitterShare')
     }
+    this.meta.updateTag(
+      { name: 'og:title', content: this.data.content.name },
+      `name='og:title'`
+    )
+    this.meta.updateTag(
+      { name: 'og:description', content: this.data.content.description },
+      `name='og:description'`
+    )
+    this.meta.updateTag(
+      { name: 'og:image', content: this.data.content.appIcon },
+      `name='og:image'`
+    )
+    this.meta.updateTag(
+      { name: 'twitter:title', content: this.data.content.name },
+      `name='twitter:title'`
+    )
+    this.meta.updateTag(
+      { name: 'twitter:description', content: this.data.content.description },
+      `name='twitter:description'`
+    )
+    this.meta.updateTag(
+      { name: 'twitter:image', content: this.data.content.appIcon },
+      `name='twitter:image'`
+    )
+    this.meta.updateTag(
+      { name: 'twitter:card', content: this.data.content.appIcon },
+      `name='twitter:card'`
+    )
   }
 
   updateUsers(users: NsAutoComplete.IUserAutoComplete[]) {
@@ -126,6 +156,12 @@ export class BtnContentShareDialogComponent implements OnInit {
     if (this.configSvc.activeLocale && this.configSvc.activeLocale.path) {
       locationOrigin += `/${this.configSvc.activeLocale.path}`
     }
+    // tslint:disable-next-line: no-console
+    console.log(this.data.content.appIcon)
+    // tslint:disable-next-line: no-console
+    console.log(this.data.content.name)
+    // tslint:disable-next-line: no-console
+    console.log(this.data.content.description)
     switch (this.data.content.contentType) {
       case NsContent.EContentTypes.CHANNEL:
         return `${locationOrigin}${this.data.content.artifactUrl}`
