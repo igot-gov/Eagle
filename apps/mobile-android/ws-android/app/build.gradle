@@ -86,6 +86,7 @@ dependencies {
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50'
 
+    implementation 'com.google.android.gms:play-services-base:17.4.0'
     //added for jackson dependency
 
 //    compile (

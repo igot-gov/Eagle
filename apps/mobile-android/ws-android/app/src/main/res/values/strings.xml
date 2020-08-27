@@ -62,6 +62,8 @@
     <string name="report">Report</string>
 
     <string name="access_downloads">Open Downloads to access the downloaded file</string>
+    <string name="important_info">Important Info</string>
+    <string name="google_play_services_info">Google Play services should be installed and up-to-date to use this application!</string>
 
 
 </resources>

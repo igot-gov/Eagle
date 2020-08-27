@@ -13,7 +13,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Process;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -56,10 +61,13 @@ import static com.infosysit.sdk.Constants.baseUrl;
 import static com.infosysit.sdk.Constants.isAuthenticated;
 import static com.infosysit.sdk.UtilityJava.isOnline;
 
-public class HomeActivity extends Activity implements ConnectivityReceiver.ConnectivityReceiverListener {
+public class HomeActivity extends Activity implements ConnectivityReceiver.ConnectivityReceiverListener,
+        ProviderInstaller.ProviderInstallListener {
     public static WebView loginPage = null;
     public static WebView splashPage = null;
     public static FloatingActionButton chatButton = null;
+    private static final int ERROR_DIALOG_REQUEST_CODE = 1;
+    private boolean retryProviderInstall;
     static JsonObject telemetryJSON = new JsonObject();
     static boolean showSplashScreen = true;
     private static int retryLoggin = 0;
@@ -86,40 +94,41 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
                 WindowManager.LayoutParams.FLAG_SECURE);
         setContentView(R.layout.activity_home);
-
+        ProviderInstaller.installIfNeededAsync(this, this);
 
 //        checkAndroidVersion();
-        RootBeer rootBeer = new RootBeer(this);
 //        WebView.setWebContentsDebuggingEnabled(true);
         splashPage = (WebView) findViewById(R.id.splashScreen);
         customViewContainer = (FrameLayout) findViewById(R.id.customViewContainer);
         chatButton = (FloatingActionButton) findViewById(R.id.floatingchatButton);
+    }
 
+    private void launchHomeURL() {
         Boolean onlineCheck = isOnline(this);
         Log.d("SplashHTMLLOg","REACHED2");
-
+        RootBeer rootBeer = new RootBeer(this);
         //todo remove not
         if (rootBeer.isRootedWithoutBusyBoxCheck()) {
             loginPage = (WebView) findViewById(R.id.actMainWebLogIn);
             loginPage.getSettings().setJavaScriptEnabled(true);
             loginPage.loadUrl("file:///android_asset/rooted_device.html");
         } else {
-            if (onlineCheck) {
-                loadWebview();
-            } else {
+        if (onlineCheck) {
+            loadWebview();
+        } else {
+            //goOffline();
+        }
+
+        ConstraintLayout homeLayout = findViewById(R.id.home_constraint_layout);
+        mSnackbarOffline = Snackbar.make(homeLayout, "Check your network.", Snackbar.LENGTH_INDEFINITE);
+        mSnackbarOffline.setAction("VIEW DOWNLOADS", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
                 //goOffline();
             }
-
-            ConstraintLayout homeLayout = findViewById(R.id.home_constraint_layout);
-            mSnackbarOffline = Snackbar.make(homeLayout, "Check your network.", Snackbar.LENGTH_INDEFINITE);
-            mSnackbarOffline.setAction("VIEW DOWNLOADS", new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    //goOffline();
-                }
-            });
-            mSnackbarOffline.setActionTextColor(Color.WHITE);
+        });
+        mSnackbarOffline.setActionTextColor(Color.WHITE);
 
         }
     }
@@ -679,9 +688,77 @@ public class HomeActivity extends Activity implements ConnectivityReceiver.Conne
 
     }
 
+    @Override
+    public void onProviderInstalled() {
+        launchHomeURL();
+    }
 
+    @Override
+    public void onProviderInstallFailed(@NonNull int errorCode, @NonNull Intent intent) {
+        GoogleApiAvailability availability = GoogleApiAvailability.getInstance();
+        if (availability.isUserResolvableError(errorCode)) {
+            // Recoverable error. Show a dialog prompting the user to
+            // install/update/enable Google Play services.
+            availability.showErrorDialogFragment(
+                    this,
+                    errorCode,
+                    ERROR_DIALOG_REQUEST_CODE,
+                    new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            // The user chose not to take the recovery action
+                            onProviderInstallerNotAvailable();
+                        }
+                    });
+        } else {
+            // Google Play services is not available.
+            onProviderInstallerNotAvailable();
+        }
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ERROR_DIALOG_REQUEST_CODE) {
+            // Adding a fragment via GoogleApiAvailability.showErrorDialogFragment
+            // before the instance state is restored throws an error. So instead,
+            // set a flag here, which will cause the fragment to delay until
+            // onPostResume.
+            retryProviderInstall = true;
+        }
+    }
 
+    /**
+     * On resume, check to see if we flagged that we need to reinstall the
+     * provider.
+     */
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (retryProviderInstall) {
+            // We can now safely retry installation.
+            ProviderInstaller.installIfNeededAsync(this, this);
+        }
+        retryProviderInstall = false;
+    }
+
+    private void onProviderInstallerNotAvailable() {
+        // This is reached if the provider cannot be updated for some reason.
+        // App should consider all HTTP communication to be vulnerable, and take
+        // appropriate action.
+        AlertDialog installerNotAvailable = new AlertDialog.Builder(this).create();
+        installerNotAvailable.setTitle(getString(R.string.important_info));
+        installerNotAvailable.setMessage(getString(R.string.google_play_services_info));
+        installerNotAvailable.setCancelable(false);
+        installerNotAvailable.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        });
+        installerNotAvailable.show();
+    }
 
 
     class myWebChromeClient extends WebChromeClient {
