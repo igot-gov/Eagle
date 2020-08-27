@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 import { SCORMAdapterService } from './SCORMAdapter/scormAdapter'
@@ -33,31 +33,33 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
+    private events: EventService,
   ) {
     (window as any).API = this.scormAdapterService
     // if (window.addEventListener) {
-    //   window.addEventListener('message', this.receiveMessage.bind(this), false)
-    // } else {
+    window.addEventListener('message', this.receiveMessage.bind(this))
+    // }
+    // else {
     //   (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
     // }
-    window.addEventListener('message', function (event) {
-      /* tslint:disable-next-line */
-      console.log('message', event)
-    })
-    window.addEventListener('onmessage', function (event) {
-      /* tslint:disable-next-line */
-      console.log('onmessage===>', event)
-    })
+    // window.addEventListener('message', function (event) {
+    //   /* tslint:disable-next-line */
+    //   console.log('message', event)
+    // })
+    // window.addEventListener('onmessage', function (event) {
+    //   /* tslint:disable-next-line */
+    //   console.log('onmessage===>', event)
+    // })
   }
 
   ngOnInit() {
     if (this.htmlContent && this.htmlContent.identifier) {
       this.scormAdapterService.contentId = this.htmlContent.identifier
-      // this.scormAdapterService.loadData()
+      this.scormAdapterService.loadData()
     }
   }
   ngOnDestroy() {
-    // window.removeEventListener('message', this.receiveMessage, false)
+    window.removeEventListener('message', this.receiveMessage)
     // window.removeEventListener('onmessage', this.receiveMessage)
   }
   ngOnChanges() {
@@ -151,6 +153,14 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   receiveMessage(msg: any) {
     /* tslint:disable-next-line */
     console.log("msg=>", msg)
+    if (msg.data) {
+      this.raiseTelemetry(msg.data)
+    } else {
+      this.raiseTelemetry({
+        event: msg.message,
+        id: msg.id,
+      })
+    }
   }
   openInNewTab() {
     if (this.htmlContent) {
@@ -204,6 +214,15 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
           this.pageFetchStatus = 'done'
           this.showIsLoadingMessage = false
         }
+      })
+    }
+  }
+
+  raiseTelemetry(data: any) {
+    if (this.htmlContent) {
+      this.events.raiseInteractTelemetry(data.event, 'scrom', {
+        contentId: this.htmlContent.identifier,
+        ...data,
       })
     }
   }
