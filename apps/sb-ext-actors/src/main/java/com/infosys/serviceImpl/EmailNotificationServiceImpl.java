@@ -170,7 +170,8 @@ public class EmailNotificationServiceImpl implements EmailNotificationService {
 
 			if (data.containsKey("emailType") && data.get("emailType").toString().toLowerCase().equals("query")) {
 				BodyPart messageBodyPart = new MimeBodyPart();
-				message.setSubject("Need help");
+				//message.setSubject("Need help");
+				message.setSubject(senderApplicationName + ": <Title> - Reg");
 
 				messageBodyPart.setContent(
 						Templates.QueryTemplate(bodyText.replaceAll("\n", "</br>"),
