@@ -33,7 +33,7 @@ export class AuthTableTreeLabelComponent implements OnInit {
     const updatedMeta = this.storeService.getUpdatedMeta(this.identifier)
     this.resourceTyp = updatedMeta.category
     this.name = updatedMeta.name
-    this.icon = "call_to_action"
-    //this.resolverService.getIcon(updatedMeta)
+    this.icon = 'call_to_action'
+    // this.resolverService.getIcon(updatedMeta)
   }
 }
