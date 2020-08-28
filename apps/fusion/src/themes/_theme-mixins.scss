@@ -336,11 +336,11 @@
 
   .auth-tree-node {
     &:hover {
-      background: rgba(mat-color($primary, default), 0.1);
+      background: rgba($colorAccent, 0.1);
     }
 
     &.selected {
-      background: rgba(mat-color($primary, default), 0.2);
+      background: rgba($colorAccent, 0.2);
     }
   }
 
