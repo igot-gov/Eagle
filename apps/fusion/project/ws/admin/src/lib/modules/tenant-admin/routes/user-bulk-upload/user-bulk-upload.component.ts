@@ -104,6 +104,9 @@ export class UserBulkUploadComponent implements OnInit {
     }
   }
 
+  public refreshTable() {
+    this.getBulkUploadData()
+  }
   public downloadFile(): void {
     this.fileService.download()
   }

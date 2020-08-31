@@ -62,9 +62,9 @@ export class EditDepartmentDialogComponent implements OnInit {
         })
         this.openSnackbar(this.toastSuccess.nativeElement.value)
       },
-      err => {
+      (err: any) => {
         this.openSnackbar(err.error.split(':')[1])
-        this.uploadSaveData = false
+        this.processing = true
       })
   }
 
