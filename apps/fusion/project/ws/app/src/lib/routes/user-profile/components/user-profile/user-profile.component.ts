@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core'
-import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms'
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder, AbstractControl, ValidatorFn } from '@angular/forms'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { Subscription, Observable } from 'rxjs'
 import { startWith, map, debounceTime, distinctUntilChanged } from 'rxjs/operators'
@@ -27,6 +27,20 @@ import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { LoaderService } from '@ws/author/src/public-api'
 
+export function forbiddenNamesValidator(optionsArray: any): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if (!optionsArray) {
+        return null
+      // tslint:disable-next-line: no-else-after-return
+      } else {
+        const index = optionsArray.findIndex((op: any) => {
+          // tslint:disable-next-line: prefer-template
+          return new RegExp('^' + op.name + '$').test(control.value)
+        })
+        return index < 0 ? { forbiddenNames: { value: control.value } } : null
+      }
+    }
+}
 @Component({
   selector: 'ws-app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -107,11 +121,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       primaryEmail: new FormControl('', [Validators.required, Validators.email]),
       primaryEmailType: new FormControl(this.assignPrimaryEmailTypeCheckBox(this.ePrimaryEmailType.OFFICIAL), []),
       secondaryEmail: new FormControl('', []),
-      nationality: new FormControl('', [Validators.required]),
+      nationality: new FormControl('', [Validators.required, forbiddenNamesValidator(this.masterNationality)]),
       dob: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       maritalStatus: new FormControl('', [Validators.required]),
-      domicileMedium: new FormControl('', []),
+      domicileMedium: new FormControl('', [Validators.required]),
       knownLanguages: new FormControl([], []),
       residenceAddress: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
@@ -258,6 +272,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           map(value => typeof value === 'string' ? value : value.name),
           map(name => name ? this.filterNationality(name) : this.masterNationalities.slice())
         )
+      const newLocal = 'nationality'
+      this.masterNationality.subscribe(event => {
+        // tslint:disable-next-line: no-non-null-assertion
+        this.createUserForm.get(newLocal)!.setValidators([Validators.required, forbiddenNamesValidator(event)])
+        this.createUserForm.updateValueAndValidity()
+      })
     }
   }
 
@@ -334,10 +354,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (!this.selectedKnowLangs.includes(value)) {
       this.selectedKnowLangs.push(data.option.value)
     }
-    this.knownLanguagesInputRef.nativeElement.value = ''
+    // this.knownLanguagesInputRef.nativeElement.value = ''
     if (this.createUserForm.get('knownLanguages')) {
       // tslint:disable-next-line: no-non-null-assertion
-      // this.createUserForm.get('knownLanguages')!.setValue(null)
+      this.createUserForm.get('knownLanguages')!.setValue(null)
     }
   }
 
@@ -366,8 +386,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
     this.knownLanguagesInputRef.nativeElement.value = ''
     if (this.createUserForm.get('knownLanguages')) {
-      // tslint:disable-next-line: no-non-null-assertion
-      // this.createUserForm.get('knownLanguages')!.setValue(null)
+    // tslint:disable-next-line: no-non-null-assertion
+    this.createUserForm.get('knownLanguages')!.setValue(null)
     }
   }
 
@@ -679,7 +699,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         knownLanguages: form.value.knownLanguages,
         countryCode: form.value.countryCode,
         mobile: form.value.mobile,
-        telephone: form.value.telephone,
+        telephone: `${form.value.telephone}` || '',
         primaryEmail: form.value.primaryEmail,
         officialEmail: '',
         personalEmail: '',

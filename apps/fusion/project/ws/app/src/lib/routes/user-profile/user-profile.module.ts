@@ -27,13 +27,18 @@ import {
 } from '@angular/material'
 import { UserProfileRoutingModule } from './user-profile-routing.module'
 import { UserProfileComponent } from './components/user-profile/user-profile.component'
+import { TabDirective } from './components/user-profile/tab.directive'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { UserProfileService } from './services/user-profile.service'
 import { LoaderService } from '@ws/author/src/public-api'
 
+
 @NgModule({
-  declarations: [UserProfileComponent],
+  declarations: [
+    UserProfileComponent,
+    TabDirective,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

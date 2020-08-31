@@ -42,7 +42,7 @@
                           </mat-error>
                         </mat-form-field>
                       </div>
-                      <div class="input-wrapper margin-top-s">
+                      <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                         <p class=" margin-remove-bottom form-label"
                           i18n="Middle Name label|Label which explains the user to enter Middle Name">
                           Middle Name
@@ -98,21 +98,25 @@
                           Nationality
                         </p>
                         <mat-form-field appearance="outline" class="margin-top-xs w-full">
-                          <input matInput type="text" placeholder="Nationality" i18n-placeholder="Nationality"
+                          <input matInput tab-directive type="text" placeholder="Nationality" i18n-placeholder="Nationality"
                             formControlName="nationality" [matAutocomplete]="nationalityAutocomplete" i18n-aria-label
                             aria-label="Nationality" #nationality />
-                          <mat-error [hidden]="false" i18n="Nationality Error|Explains name is required">
+                          <mat-error [hidden]="false" i18n="Nationality Error|Explains Nationality is required"
+                          *ngIf="createUserForm?.controls['nationality'].errors?.required">
                             Nationality is mandatory
                           </mat-error>
+                          <mat-error *ngIf="createUserForm?.controls['nationality'].errors?.forbiddenNames">
+                            You must enter value from suggested list only.
+                          </mat-error>
                         </mat-form-field>
-                        <mat-autocomplete #nationalityAutocomplete="matAutocomplete">
+                        <mat-autocomplete #nationalityAutocomplete="matAutocomplete" autoActiveFirstOption="true">
                           <mat-option *ngFor="let option of masterNationality | async" [value]="option.name">
                             {{ option.name }}
                           </mat-option>
                         </mat-autocomplete>
                       </div>
                       <div class="input-wrapper margin-top-s">
-                        <p class=" margin-remove-bottom form-label"
+                        <p class=" margin-remove-bottom form-label required"
                           i18n="Domicile Medium|Label which explains the user to enter Domicile Medium">
                           Domicile Medium (Mother Tongue)
                         </p>
@@ -120,8 +124,15 @@
                           <input matInput type="text" placeholder="Mother Tongue" i18n-placeholder="Mother Tongue"
                             formControlName="domicileMedium" [matAutocomplete]="motherTongueAuto" i18n-aria-label
                             aria-label="Mother Tongue" #motherTongue />
+                          <mat-error [hidden]="false" i18n="domicileMedium Error|Explains Domicile Medium is required"
+                            *ngIf="createUserForm?.controls['domicileMedium'].errors?.required">
+                            Domicile Medium is mandatory
+                          </mat-error>
+                          <mat-error *ngIf="createUserForm?.controls['domicileMedium'].errors?.forbiddenNames">
+                            You must enter value from suggested list only.
+                          </mat-error>
                         </mat-form-field>
-                        <mat-autocomplete #motherTongueAuto="matAutocomplete">
+                        <mat-autocomplete #motherTongueAuto="matAutocomplete" autoActiveFirstOption="true">
                           <mat-option *ngFor="let option of masterLanguages | async" [value]="option.name">
                             {{ option.name }}
                           </mat-option>
@@ -240,7 +251,7 @@
               </div>
               <div class="flex flex-column w-full md:w-1/2 ">
                 <div class="profile-cols bg-grey">
-                  <div class="input-wrapper margin-top-s">
+                  <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Other Languages Known label|Label which explains the user to enter Other Languages Known">
                       Other Languages Known
@@ -255,7 +266,7 @@
                         <input matInput i18n-placeholder="Known Languages" placeholder="Known Languages"
                           formControlName="knownLanguages" i18n-aria-label aria-label="Known Languages"
                           [matAutocomplete]="knownLanguagesAuto" #knownLanguagesInput [matChipInputFor]="chipList"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"  />
                       </mat-chip-list>
                       <mat-error [hidden]="false" i18n="Telephone Number Error|Explains name is required">
                         Other Languages Known is mandatory
@@ -295,7 +306,7 @@
                       </mat-form-field>
                     </div>
                   </div>
-                  <div class="input-wrapper margin-top-s">
+                  <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Telephone Number label|Label which explains the user to enter Telephone Number">
                       Telephone Number
@@ -330,7 +341,7 @@
                     </div>
                   </div>
 
-                  <div class="input-wrapper margin-top-s">
+                  <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Secondary Email label|Label which explains the user to enter Secondary Email">
                       Secondary Email
@@ -351,7 +362,11 @@
                       <!-- <input matInput #residenceAddress formControlName="residenceAddress" i18n-placeholder
                         placeholder="Enter Postal Address Here" [required]="true" /> -->
                       <mat-hint align="end">{{ residenceAddress.value.length }} /200 characters</mat-hint>
-                      <mat-error i18n>
+                      <mat-error [hidden]="false" i18n="Postal address error |Explains Postal address is required"
+                          *ngIf="createUserForm?.controls['residenceAddress'].errors?.required">
+                        Postal Address is mandatory
+                      </mat-error>
+                      <mat-error i18n *ngIf="createUserForm?.controls['residenceAddress'].errors?.maxlength">
                         You have exceeded 200 characters.
                       </mat-error>
                     </mat-form-field>
