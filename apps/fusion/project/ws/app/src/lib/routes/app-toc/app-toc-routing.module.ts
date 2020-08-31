@@ -48,9 +48,9 @@ const routes: Routes = [
       },
       {
         path: 'overview',
-        // component: AppTocOverviewRootComponent,
-        pathMatch: 'full',
-        redirectTo: 'single-page-view',
+        component: AppTocSinglePageRootComponent,
+        // pathMatch: 'full',
+        // redirectTo: 'single-page-view',
       },
       {
         path: 'discussion',

@@ -7,6 +7,7 @@ import { WidgetContentShareService } from '../../_services/widget-content-share.
 import { NsContent } from '../../_services/widget-content.model'
 import { NsShare } from '../../_services/widget-share.model'
 import { ICommon } from '../../_models/common.model'
+import { TitleTagService } from '@ws/app/src/lib/routes/app-toc/services/title-tag.service'
 
 @Component({
   selector: 'ws-widget-btn-content-share-dialog',
@@ -28,6 +29,7 @@ export class BtnContentShareDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { content: NsContent.IContent },
     private shareSvc: WidgetContentShareService,
     private configSvc: ConfigurationsService,
+    private titleTagService: TitleTagService
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,12 @@ export class BtnContentShareDialogComponent implements OnInit {
         !this.configSvc.restrictedFeatures.has('socialMediaLinkedinShare') ||
         !this.configSvc.restrictedFeatures.has('socialMediaTwitterShare')
     }
+
+    this.titleTagService.setSocialMediaTags(
+      this.detailUrl,
+      this.data.content.name,
+      this.data.content.description,
+      this.data.content.appIcon)
   }
 
   updateUsers(users: NsAutoComplete.IUserAutoComplete[]) {

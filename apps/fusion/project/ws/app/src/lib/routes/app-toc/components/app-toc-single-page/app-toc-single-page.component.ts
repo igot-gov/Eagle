@@ -1,6 +1,6 @@
 import { AccessControlService } from '@ws/author'
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
-import { DomSanitizer, SafeHtml, Meta } from '@angular/platform-browser'
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -48,7 +48,6 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     private authAccessControlSvc: AccessControlService,
     private dialog: MatDialog,
-    private meta: Meta,
   ) {
     if (this.configSvc.restrictedFeatures) {
       this.askAuthorEnabled = !this.configSvc.restrictedFeatures.has('askAuthor')
@@ -96,41 +95,6 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
           ? this.authAccessControlSvc.proxyToAuthoringUrl(this.content.body)
           : this.content.body
         : '',
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'og:title', content: this.content!.name },
-      `name='og:title'`
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'og:description', content: this.content!.description },
-      `name='og:description'`
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'og:image', content: this.content!.appIcon },
-      `name='og:image'`
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'twitter:title', content: this.content!.name },
-      `name='twitter:title'`
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'twitter:description', content: this.content!.description },
-      `name='twitter:description'`
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'twitter:image', content: this.content!.appIcon },
-      `name='twitter:image'`
-    )
-    this.meta.updateTag(
-      // tslint:disable-next-line: no-non-null-assertion
-      { name: 'twitter:card', content: this.content!.appIcon },
-      `name='twitter:card'`
     )
     this.contentParents = {}
     this.resetAndFetchTocStructure()
