@@ -38,7 +38,14 @@ public class SearchTemplateUtil {
     ObjectMapper objectMapper;
 
 
-    public void addBaseScriptParams(Map<String, Object> prepareScriptParams, int pageNo, int pageSize, List<String> additionalSources){
+    /**
+     * Adds the base params to build the script map for stored template
+     * @param prepareScriptParams
+     * @param pageNo
+     * @param pageSize
+     * @param additionalSources
+     */
+    public void addBaseScriptParams(Map<String, Object> prepareScriptParams, int pageNo, int pageSize, Set<String> additionalSources){
 
         if (prepareScriptParams==null){
             prepareScriptParams = new HashMap<>();
@@ -56,7 +63,7 @@ public class SearchTemplateUtil {
     }
 
 
-    public SearchResponse searchTemplate(String locale, Map<String, Object> scriptParams) throws Exception {
+    public SearchResponse searchTemplate(String locale, Map<String, Object> scriptParams, String script) throws Exception {
 
         System.out.println("fetchFromES-paramsMap: "+scriptParams);
         List<String> indices = new ArrayList<>();
@@ -68,7 +75,7 @@ public class SearchTemplateUtil {
         searchRequest.types(SearchConstants.SEARCH_INDEX_TYPE);
 
         SearchTemplateRequest templateRequest = new SearchTemplateRequest();
-        templateRequest.setScript(SearchConstants.ML_SEARCH_TEMPLATE);
+        templateRequest.setScript(script);
         templateRequest.setScriptType(ScriptType.STORED);
         templateRequest.setScriptParams(scriptParams);
         templateRequest.setRequest(searchRequest);

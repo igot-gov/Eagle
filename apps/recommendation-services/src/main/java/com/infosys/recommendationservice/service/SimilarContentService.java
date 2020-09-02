@@ -10,8 +10,10 @@ package com.infosys.recommendationservice.service;
 import com.infosys.recommendationservice.model.Response;
 import com.infosys.recommendationservice.model.UserCompetencyRequest;
 
+import java.util.Set;
+
 public interface SimilarContentService {
 
-    public Response findSimilarContents(String userId, String rootOrg, String org, String locale, String contentId, int pageNo, int pageSize) throws Exception;
+    public Response findSimilarContents(String userId, String rootOrg, String org, String locale, String contentId, int pageNo, int pageSize, Set<String> sourceFields) throws Exception;
 
 }

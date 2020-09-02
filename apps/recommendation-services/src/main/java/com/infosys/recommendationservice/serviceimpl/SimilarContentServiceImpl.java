@@ -53,12 +53,9 @@ public class SimilarContentServiceImpl implements SimilarContentService {
     SearchTemplateUtil searchTemplateUtil;
 
 
-    private List<String> defaultSourceFields = new ArrayList<>(Arrays.asList("hasAssessment", "locale", "subTitle", "totalLikes", "sourceName", "sourceShortName", "sourceIconUrl", "isStandAlone", "isInIntranet", "deliveryLanguages", "deliveryCountries", "costCenter", "exclusiveContent", "instanceCatalog", "price", "isContentEditingDisabled", "isMetaEditingDisabled", "labels", "publishedOn", "expiryDate", "hasTranslations", "isTranslationOf", "viewCount", "averageRating", "uniqueUsersCount", "totalRating", "collections", "unit", "status", "isExternal", "learningMode", "uniqueLearners", "name", "identifier", "description", "resourceType", "contentType", "isExternal", "appIcon", "artifactUrl", "children", "mimeType", "creatorContacts", "downloadUrl", "duration", "me_totalSessionsCount", "size", "complexityLevel", "lastUpdatedOn", "resourceCategory", "msArtifactDetails", "isIframeSupported", "contentUrlAtSource", "certificationUrl", "certificationList", "skills", "topics", "creatorDetails", "catalogPaths", "learningObjective", "preRequisites", "softwareRequirements", "systemRequirements", "track", "idealScreenSize", "minLexVersion", "preContents", "postContents", "isExternal", "certificationStatus", "subTitles", "publisherDetails", "trackContacts", "creatorContacts", "appIcon", "trackContacts", "publisherDetails"));
-
-
 
     @Override
-    public Response findSimilarContents(String userId, String rootOrg, String org, String locale, String contentId, int pageNo, int pageSize) throws Exception {
+    public Response findSimilarContents(String userId, String rootOrg, String org, String locale, String contentId, int pageNo, int pageSize, Set<String> sourceFields) throws Exception {
 
         //TODO: Validate userId
 
@@ -67,18 +64,14 @@ public class SimilarContentServiceImpl implements SimilarContentService {
         System.out.println("content metadata = "+contentMeta);
 
         //create the script params/paramsMap to build the search query
-
         ObjectNode node = objectMapper.convertValue(contentMeta, ObjectNode.class);
         Map<String, Object> prepareScriptParams = new HashMap<>();
-        prepareScriptParams.put("fetchSource", defaultSourceFields);
-        prepareScriptParams.put("from", pageNo * pageSize);
-        prepareScriptParams.put("size", pageSize);
+        searchTemplateUtil.addBaseScriptParams(prepareScriptParams, pageNo, pageSize, sourceFields);
 
-        searchTemplateUtil.addBaseScriptParams(prepareScriptParams, pageNo, pageSize, null);
         parseMeta(node, prepareScriptParams);
 
         //Fetch ES search result
-        SearchResponse searchResponse = searchTemplateUtil.searchTemplate(locale, prepareScriptParams);
+        SearchResponse searchResponse = searchTemplateUtil.searchTemplate(locale, prepareScriptParams, SearchConstants.ML_SEARCH_TEMPLATE);
         System.out.println("searchResponse = "+searchResponse);
 
 

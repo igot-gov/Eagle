@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/recommendations")
@@ -39,7 +40,8 @@ public class RecommendationController {
                                                         @RequestHeader String locale, @RequestHeader String userId,
                                                         @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                         @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
-                                                        @RequestParam(required = true, name = "contentId") String contentId) {
+                                                        @RequestParam(required = true, name = "contentId") String contentId,
+                                                        @RequestParam(value = "sourceFields", required = false) Set<String> sourceFields) {
 
         Response response = null;//searchService.search(request, rootOrg, org, pageSize, pageNo);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
