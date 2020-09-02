@@ -15,5 +15,8 @@ public class SearchConstants {
     public static final String ML_SEARCH_TEMPLATE = "mlsearchtemplatev7";
     public static final String SEARCH_INDEX_TYPE = "searchresources";
 
+    public final static String SEARCHTEMPLATE_KEY_SUFFIX = "Enable";
+    public final static String SEARCHTEMPLATE_VALUE_SUFFIX = "Val";
+
 
 }
