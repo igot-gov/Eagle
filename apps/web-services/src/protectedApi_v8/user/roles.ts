@@ -218,8 +218,8 @@ export async function updateRolesV2Mock(actionByWid: any, updateRolesReq: any, r
       logError('UPDATE ROLES V2 Mock ERR -> ', err)
       reject(err)
     })
-    if (response && response.data) {
-      resolve(response.data)
-    }
+    // tslint:disable-next-line: no-console
+    console.log('response from api', response)
+    resolve(response)
   })
 }
