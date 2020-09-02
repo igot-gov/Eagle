@@ -73,6 +73,12 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/discuss',
+    loadChildren: () =>
+      import('./routes/route-discuss.module').then(u => u.DiscussModule),
+    canActivate: [GeneralGuard],
+  },
+  {
     path: 'app/gamification',
     loadChildren: () =>
       import('./routes/route-gamification.module').then(u => u.RouteGamificationModule),
