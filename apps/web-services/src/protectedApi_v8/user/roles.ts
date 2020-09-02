@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
-import { logError } from '../../utils/logger'
+import { logError, logObject } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
@@ -193,3 +193,33 @@ rolesApi.post('/updateRolesV2', async (req, res) => {
       })
   }
 })
+
+// tslint:disable-next-line: no-any
+export async function updateRolesV2Mock(actionByWid: any, updateRolesReq: any, rootOrg: string) {
+  return new Promise(async (resolve, reject) => {
+    const body = {
+      ...updateRolesReq,
+      action_by: actionByWid,
+    }
+    if (!rootOrg) {
+      reject(ERROR.ERROR_NO_ORG_DATA)
+    }
+    logObject('Updating roles with', body)
+    const response = await axios.post(
+      apiEndpoints.rolesV2,
+      body,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          rootOrg,
+        },
+      }
+    ).catch((err) => {
+      logError('UPDATE ROLES V2 Mock ERR -> ', err)
+      reject(err)
+    })
+    if (response && response.data) {
+      resolve(response.data)
+    }
+  })
+}

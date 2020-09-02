@@ -17,6 +17,7 @@ import {
 import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 import { wTokenApiMock } from '../user/details'
+import { updateRolesV2Mock } from '../user/roles'
 
 const filePath = CONSTANTS.USER_BULK_UPLOAD_DIR || process.cwd() + '/user_upload/'
 // tslint:disable-next-line: max-line-length
@@ -265,63 +266,76 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
         res.json(`User upload started with id: ${uuid}, After process is finished you can download the report`)
         const workSheetsFromFile = xlsx.parse(filePath + `${uuid}.${ext}`)
         for (const sheet of workSheetsFromFile) {
-            for (const row of sheet.data.slice(1)) {
-                if (row.length) {
-                    // tslint:disable-next-line: no-any
-                    const [fname, lname, email] = row as any
-                    const validFname = await validateInputWithRegex(fname, nameRegex)
-                    const validLname = await validateInputWithRegex(lname, nameRegex)
-                    const validEmail = await validateInputWithRegex(email, emailRegex)
-                    if (!validFname || !validLname) {
-                        reportData.push(
-                            [`\n${email}`,
-                                // tslint:disable-next-line: max-line-length
-                                `Name fields cannot contain numbers and special characters except single quotes  & failed`,
-                            ]
-                        )
-                        continue
-                    }
-                    if (!validEmail) {
-                        reportData.push(
-                            [`\n${email}`,
-                                `Invalid Email & failed`,
-                            ]
-                        )
-                        continue
-                    }
-                    if (email && email.length > 254) {
-                        reportData.push([`\n${email}`, `Invalid Email & failed`])
-                        continue
-                    }
-                    if (!validFname || !validLname || !validEmail) {
-                        continue
-                    } else {
-                        const reqToNewUser = {
-                            body: {
-                                email,
-                                fname,
-                                lname,
-                            },
-                        }
-                        const userId = await createUser(reqToNewUser)
-                            .catch((err) => {
-                                if (err.response.status === 409) {
-                                    reportData.push([`\n${email}`, `User with email ${email} already exists`])
-                                } else {
-                                    reportData.push([`\n${email}`, `User could not be created in Keycloack`])
+            if (sheet.data && sheet.data.length) {
+                // tslint:disable-next-line: no-any
+                const [fnameHeader, lnameHeader, emailHeader, ...rolesHeaders] = sheet.data[0] as any
+                logInfo('Columns: ', fnameHeader, lnameHeader, emailHeader, rolesHeaders)
+                for (const row of sheet.data.slice(1)) {
+                    if (row.length) {
+                        const yesRoles: string[] = []
+                        // tslint:disable-next-line: no-any
+                        const [fname, lname, email, ...roles] = row as any
+                        const validFname = await validateInputWithRegex(fname, nameRegex)
+                        const validLname = await validateInputWithRegex(lname, nameRegex)
+                        const validEmail = await validateInputWithRegex(email, emailRegex)
+                        if (rolesHeaders && rolesHeaders.length && roles && roles.length) {
+                            for (const [i, val] of rolesHeaders.entries()) {
+                                if (roles[i].toLowerCase() === 'y' || roles[i].toLowerCase() === 'yes') {
+                                    yesRoles.push(val)
                                 }
-                            })
-                        if (userId) {
-                            let msg = ''
-                            await performNewUserSteps(userId, req, reqToNewUser.body.email)
+                            }
+                        }
+                        if (!validFname || !validLname) {
+                            reportData.push(
+                                [`\n${email}`,
+                                    // tslint:disable-next-line: max-line-length
+                                    `Name fields cannot contain numbers and special characters except single quotes  & failed`,
+                                ]
+                            )
+                            continue
+                        }
+                        if (!validEmail) {
+                            reportData.push(
+                                [`\n${email}`,
+                                    `Invalid Email & failed`,
+                                ]
+                            )
+                            continue
+                        }
+                        if (email && email.length > 254) {
+                            reportData.push([`\n${email}`, `Invalid Email & failed`])
+                            continue
+                        }
+                        if (!validFname || !validLname || !validEmail) {
+                            continue
+                        } else {
+                            const reqToNewUser = {
+                                body: {
+                                    email,
+                                    fname,
+                                    lname,
+                                },
+                            }
+                            const userId = await createUser(reqToNewUser)
                                 .catch((err) => {
-                                    // reportData.push([`\n${email}`, `${err}`])
-                                    msg = `${err}`
+                                    if (err.response.status === 409) {
+                                        reportData.push([`\n${email}`, `User with email ${email} already exists`])
+                                    } else {
+                                        reportData.push([`\n${email}`, `User could not be created in Keycloack`])
+                                    }
                                 })
-                            if (msg) {
-                                reportData.push([`\n${email}`, `success & ${msg} `])
-                            } else {
-                                reportData.push([`\n${email}`, `success `])
+                            if (userId) {
+                                let msg = ''
+                                await performNewUserSteps(userId, req, reqToNewUser.body.email, yesRoles)
+                                    .catch((err) => {
+                                        // reportData.push([`\n${email}`, `${err}`])
+                                        msg = `${err}`
+                                    })
+                                if (msg) {
+                                    reportData.push([`\n${email}`, `success & ${msg} `])
+                                } else {
+                                    reportData.push([`\n${email}`, `success `])
+                                }
                             }
                         }
                     }
@@ -363,7 +377,7 @@ export async function createUser(req: any) {
 }
 
 // tslint:disable-next-line: no-any
-export async function performNewUserSteps(userId: any, req: any, email: any) {
+export async function performNewUserSteps(userId: any, req: any, email: any, roles?: any) {
     return new Promise(async (resolve, reject) => {
         await UpdateKeycloakUserPassword(userId, false)
             .catch((error) => {
@@ -376,9 +390,24 @@ export async function performNewUserSteps(userId: any, req: any, email: any) {
             if (kcaAuthToken && kcaAuthToken.access_token) {
                 const wTokenResponse = await wTokenApiMock(req, kcaAuthToken.access_token)
                 // tslint:disable-next-line: max-line-length
-                if (wTokenResponse && wTokenResponse.user && wTokenResponse.user.length) {
-                    logInfo('New User keycloak auth successfull')
-                    logInfo(`User: ${email} -- wid: ${wTokenResponse.user[0].wid}`)
+                if (wTokenResponse && wTokenResponse.user) {
+                    logInfo('New User Wtoken auth successfull')
+                    logInfo(`User: ${email} -- wid: ${wTokenResponse.user.wid}`)
+                    if (roles && roles.length) {
+                        const updateRolesReq = {
+                            operation: 'add',
+                            roles: [...roles],
+                            users: [`${wTokenResponse.user.wid}`],
+                        }
+                        const actionByWid = extractUserIdFromRequest(req)
+                        const rootOrg = req.header('rootOrg')
+                        logInfo('Updating the roles for wid:', wTokenResponse.user.wid)
+                        await updateRolesV2Mock(actionByWid, updateRolesReq, rootOrg)
+                            .catch((err) => {
+                                logError('performNewUserSteps:: ERROR ON updateRolesV2Mock', err)
+                                reject('Roles could not be updated')
+                            })
+                    }
                 }
             }
         }).catch((error) => {
