@@ -14,6 +14,6 @@ import java.util.Set;
 
 public interface SimilarContentService {
 
-    public Response findSimilarContents(String userId, String rootOrg, String org, String locale, String contentId, int pageNo, int pageSize, Set<String> sourceFields) throws Exception;
+    public Response findSimilarContents(String userId, String rootOrg, String org, String locale, String contentId, int pageNo, int pageSize, Set<String> sourceFields);
 
 }

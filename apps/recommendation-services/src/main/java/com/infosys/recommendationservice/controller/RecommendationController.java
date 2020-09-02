@@ -7,6 +7,7 @@
 package com.infosys.recommendationservice.controller;
 
 import com.infosys.recommendationservice.model.Response;
+import com.infosys.recommendationservice.service.SimilarContentService;
 import com.infosys.recommendationservice.serviceimpl.CompetencyContentSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class RecommendationController {
 
     @Autowired
     private CompetencyContentSearchService searchService;
+
+    @Autowired
+    private SimilarContentService similarContentService;
 
     @PostMapping("/competency/contents")
     public ResponseEntity<Response> findContents(@RequestHeader String rootOrg, @RequestHeader String org,
@@ -43,7 +47,7 @@ public class RecommendationController {
                                                         @RequestParam(required = true, name = "contentId") String contentId,
                                                         @RequestParam(value = "sourceFields", required = false) Set<String> sourceFields) {
 
-        Response response = null;//searchService.search(request, rootOrg, org, pageSize, pageNo);
+        Response response = similarContentService.findSimilarContents(userId,rootOrg, org, locale, contentId, pageNo, pageSize, sourceFields);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
 
     }
