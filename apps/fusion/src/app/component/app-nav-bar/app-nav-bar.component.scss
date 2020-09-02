@@ -10,7 +10,7 @@
 .fix-ww {
   margin-left: auto;
   margin-right: auto;
-  max-width: 1167px;
+  max-width: $max-width;
   display: flex;
   flex: 1;
 }
@@ -140,6 +140,7 @@
   margin-right: 0;
   text-align: center;
   flex: 3;
+  max-width: 500px;
 }
 
 @media only screen and (max-width: 760px) {

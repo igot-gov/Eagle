@@ -20,22 +20,26 @@
 
 .header-synopsis-gradient {
   // background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0.3) 100%)
-    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0.8) 100%);
+  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0, rgba(0, 0, 0, 0.8) 100%);
 */
-background: inherit;
+  background: inherit;
 }
+
 .fixed-width {
-  max-width: 1217px;
+  max-width: $max-width;
   display: block;
   margin: 0 auto;
   padding: 0 !important;
+
   @include breakpoint-s {
     padding: 0 15px !important;
   }
+
   @include breakpoint-xs {
     padding: 0 15px !important;
   }
 }
+
 .fluid-width {
   width: 100%;
 }
@@ -44,8 +48,10 @@ background: inherit;
   height: 100%;
   @extend %container-padding;
   box-sizing: border-box;
-  .apIcon{
+
+  .apIcon {
     min-width: 86px;
+
     img {
       height: 72px;
       width: 72px;
@@ -54,18 +60,18 @@ background: inherit;
       padding: 7px;
       border-radius: 8px;
     }
-  } 
+  }
 
   .header-title {
     display: flex;
     align-items: center;
 
-    h1{
+    h1 {
       // font: 48px/48px Poppins-SemiBold;
       letter-spacing: 0px;
       color: #FFFFFF;
       font-family: Poppins-SemiBold;
-      
+
     }
 
     .text-truncate-title {
@@ -82,11 +88,12 @@ background: inherit;
     color: #FFFFFF;
   }
 
-  .rating-count{
+  .rating-count {
     font: 18px/27px Poppins-regular;
-  letter-spacing: 0.36px;
-  color: #FFFFFF;
+    letter-spacing: 0.36px;
+    color: #FFFFFF;
   }
+
   .rating mat-icon {
     color: #fff;
   }
@@ -121,8 +128,8 @@ background: inherit;
   .header-actions {
     display: flex;
     // margin-top: 24px;
-     
-    &.top{
+
+    &.top {
       margin-top: 0;
       margin-bottom: 40px;
     }
@@ -228,10 +235,12 @@ background: inherit;
   }
 }
 
-.info-msg{
+.info-msg {
   color: #fff !important;
-  font: 14px/20px Poppins-Regular;;
-  mat-icon{
+  font: 14px/20px Poppins-Regular;
+  ;
+
+  mat-icon {
     color: #fff !important;
   }
 }
@@ -242,8 +251,8 @@ background: inherit;
   top: 128px;
 
   .header-title {
-    h1{
-      font: normal normal 300 24px/35px Poppins;    
+    h1 {
+      font: normal normal 300 24px/35px Poppins;
     }
   }
 
@@ -251,5 +260,3 @@ background: inherit;
     font: normal normal 300 14px/21px Poppins;
   }
 }
-
-

@@ -26,6 +26,39 @@
         "widgetType": "actionButton",
         "widgetSubType": "buttonFeature",
         "widgetData": {
+          "toolTop": "network",
+          "actionBtnId": "feature_discuss",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "network",
+          "actionBtnId": "feature_network",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "learn",
+          "actionBtnId": "feature_learn",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
           "toolTop": "feature_notification",
           "actionBtnId": "feature_notification",
           "config": {
@@ -394,6 +427,56 @@
                         "widgetSubType": "elementHtml",
                         "widgetData": {
                           "html": "<p>Recommendations based on the what you recently viewed.</p>"
+                        }
+                      }
+                    },
+                    "stripConfig": {
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/recommendation/interestBased",
+                        "queryParams": {
+                          "pageNo": 0,
+                          "pageSize": 12,
+                          "sourceFields": [
+                            "creatorLogo"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "RecentDiscussions",
+                    "title": "Recent Discussions",
+                    "info": {
+                      "mode": "below",
+                      "visibilityMode": "hidden",
+                      "icon": {
+                        "icon": "info",
+                        "scale": 0.8
+                      },
+                      "widget": {
+                        "widgetType": "element",
+                        "widgetSubType": "elementHtml",
+                        "widgetData": {
+                          "html": "<p>Recent Discussions.</p>"
                         }
                       }
                     },

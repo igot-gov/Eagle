@@ -111,6 +111,44 @@
       "url": "/app/discuss",
       "shortName": "Discuss"
     },
+    "feature_learn":{
+      "accessKey": "L",
+      "icon": "school",
+      "iconType": "mat-icon",
+      "id": "feature_learn",
+      "keywords": [
+        "learn",
+        "learning"
+      ],
+      "name": "Learn",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "learn",
+      "url": "/app/learn",
+      "shortName": "Learn"
+    },
+    "feature_network":{
+      "accessKey": "N",
+      "icon": "group",
+      "iconType": "mat-icon",
+      "id": "feature_network",
+      "keywords": [
+        "network",
+        "learning"
+      ],
+      "name": "Network",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "network",
+      "url": "/app/network",
+      "shortName": "Network"
+    },
     "feature_frac": {
       "accessKey": "A",
       "icon": "airplay",

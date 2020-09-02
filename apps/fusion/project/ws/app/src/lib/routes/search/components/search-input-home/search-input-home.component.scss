@@ -8,7 +8,8 @@ ws-app-search-input-home .autocomplete-form {
   display: block;
   margin: auto;
 }
-.search-home{
+
+.search-home {
   background: #00A9F4 0% 0% no-repeat padding-box;
   border-radius: 0px 4px 4px 0px;
   padding: $size-s $size-m;
@@ -19,19 +20,22 @@ ws-app-search-input-home input {
 }
 
 ws-app-search-input-home .search .mat-form-field-wrapper {
-   padding-bottom: 0px;
-   .mat-form-field-infix{
-      border-top-width: 5px !important;
-      padding: 0px;
-      padding-bottom: 5px;
-   }
+  padding-bottom: 0px;
+
+  .mat-form-field-infix {
+    border-top-width: 5px !important;
+    padding: 0px;
+    padding-bottom: 5px;
+  }
 
 }
 
 ws-app-search-input-home .search-border {
-  border-radius: 4px; /*.75rem;*/
-  border:1px solid #DEDFE0;
+  border-radius: 4px;
+  /*.75rem;*/
+  border: 1px solid #DEDFE0;
   flex: 1;
+  max-width: 500px;
   /* border-color: #cecece;*/
 }
 
@@ -88,6 +92,7 @@ ws-app-search-input-home .feature-group {
     height: auto;
     box-sizing: border-box;
     border-radius: 0;
+
     @include breakpoint-xs {
       width: 50%;
     }
@@ -98,13 +103,13 @@ ws-app-search-input-home .feature-group {
     width: $icon-size;
     height: $icon-size;
     font-size: $size-l;
+
     @include breakpoint-gt-xs {
       margin-right: 0;
       margin-bottom: $size-s;
     }
   }
 }
-// 821
-@media only screen and (max-width:821px){
 
-}
+// 821
+@media only screen and (max-width:821px) {}

@@ -317,6 +317,14 @@
               "type": "mat-button"
             }
           }
+        },
+        {
+          "type": "widgetButton",
+          "config": {
+            "widgetType": "actionButton",
+            "widgetSubType": "actionButtonCatalog",
+            "widgetData": {}
+          }
         }
       ],
       "right": [
@@ -336,6 +344,28 @@
           "config": {
             "actionBtnId": "feature_discuss",
             "toolTip": "Notification",
+            "className": "fixtopMargin",
+            "config": {
+              "type": "card-mini"
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_network",
+            "toolTip": "Neweork",
+            "className": "fixtopMargin",
+            "config": {
+              "type": "card-mini"
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_learn",
+            "toolTip": "Learn",
             "className": "fixtopMargin",
             "config": {
               "type": "card-mini"
