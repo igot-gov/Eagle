@@ -331,6 +331,28 @@
         {
           "type": "featureButton",
           "config": {
+            "actionBtnId": "feature_home",
+            "toolTip": "Home",
+            "className": "fixtopMargin",
+            "config": {
+              "type": "mat-icon-button"
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_discuss",
+            "toolTip": "Notification",
+            "className": "fixtopMargin",
+            "config": {
+              "type": "mat-icon-button"
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
             "actionBtnId": "feature_notification",
             "toolTip": "Notification",
             "className": "fixtopMargin",

@@ -90,6 +90,27 @@
       "url": "/app/info/about",
       "shortName": "About"
     },
+    "feature_discuss":{
+      "accessKey": "D",
+      "icon": "forum",
+      "iconType": "mat-icon",
+      "id": "feature_discuss",
+      "keywords": [
+        "about platform",
+        "information",
+        "descuss",
+        "discussion forum"
+      ],
+      "name": "Descuss",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "descuss",
+      "url": "/app/descuss",
+      "shortName": "Descuss"
+    },
     "feature_frac": {
       "accessKey": "A",
       "icon": "airplay",
