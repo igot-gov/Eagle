@@ -481,7 +481,7 @@
                       }
                     },
                     "stripConfig": {
-                      "cardSubType": "standard",
+                      "cardSubType": "minimal",
                       "postCardForSearch": true
                     },
                     "filters": [],

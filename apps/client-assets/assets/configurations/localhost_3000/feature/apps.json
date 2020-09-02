@@ -127,7 +127,7 @@
       "show": true,
       "status": "live",
       "toolTip": "learn",
-      "url": "/app/learn",
+      "url": "/page/learn",
       "shortName": "Learn"
     },
     "feature_network":{
@@ -146,7 +146,7 @@
       "show": true,
       "status": "live",
       "toolTip": "network",
-      "url": "/app/network",
+      "url": "/page/network",
       "shortName": "Network"
     },
     "feature_frac": {
