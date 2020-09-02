@@ -29,6 +29,7 @@ export const ROOT_WIDGET_CONFIG = {
     content: 'cardContent',
     channel: 'cardChannel',
     welcome: 'cardWelcome',
+    learning: 'cardLearn',
   },
   contentStrip: {
     _type: 'contentStrip',

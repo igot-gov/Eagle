@@ -1,4 +1,5 @@
-<mat-card class="activity-card padding-remove-left padding-remove-right padding-remove-top">
+<mat-card [ngClass]="{'activity-card': !widgetData.class, 'activity-learning-card' : widgetData.class}"
+  class="padding-remove-left padding-remove-right padding-remove-top">
   <div class="flex flex-end" [ngClass]="{ 'visible': !completedId}">
     <mat-icon class="pr-1 pt-1 icon">check_circle</mat-icon>
   </div>

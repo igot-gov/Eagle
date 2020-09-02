@@ -310,6 +310,7 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
+  { path: 'network', redirectTo: 'page/network', pathMatch: 'full' },
   {
     path: 'page/toc',
     redirectTo: '/',

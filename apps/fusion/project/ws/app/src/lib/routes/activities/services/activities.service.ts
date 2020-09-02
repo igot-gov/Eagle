@@ -18,4 +18,11 @@ export class ActivitiesService {
       .toPromise()
     return activities
   }
+
+  fetchLearnActivites() {
+    const activities: Promise<IActivity> = this.http
+      .get<IActivity>(`${this.configSvc.baseUrl}/feature/learn-activities.json`)
+      .toPromise()
+    return activities
+  }
 }
