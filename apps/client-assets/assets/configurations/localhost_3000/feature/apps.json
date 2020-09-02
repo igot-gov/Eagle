@@ -98,7 +98,7 @@
       "keywords": [
         "about platform",
         "information",
-        "descuss",
+        "discuss",
         "discussion forum"
       ],
       "name": "Descuss",
@@ -107,9 +107,9 @@
       ],
       "show": true,
       "status": "live",
-      "toolTip": "descuss",
-      "url": "/app/descuss",
-      "shortName": "Descuss"
+      "toolTip": "discuss",
+      "url": "/app/discuss",
+      "shortName": "Discuss"
     },
     "feature_frac": {
       "accessKey": "A",
