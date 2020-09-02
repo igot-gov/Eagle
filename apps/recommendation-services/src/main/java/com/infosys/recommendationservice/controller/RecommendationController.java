@@ -22,13 +22,26 @@ public class RecommendationController {
     @Autowired
     private CompetencyContentSearchService searchService;
 
-    @PostMapping("/contents")
+    @PostMapping("/competency/contents")
     public ResponseEntity<Response> findContents(@RequestHeader String rootOrg, @RequestHeader String org,
                                                  @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                  @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
                                                  @RequestBody Map<String,Object> request){
 
         Response response = searchService.search(request, rootOrg, org, pageSize, pageNo);
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
+
+    }
+
+
+    @GetMapping("/related/contents")
+    public ResponseEntity<Response> findRelatedContents(@RequestHeader String rootOrg, @RequestHeader String org,
+                                                        @RequestHeader String locale, @RequestHeader String userId,
+                                                        @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+                                                        @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
+                                                        @RequestParam(required = true, name = "contentId") String contentId) {
+
+        Response response = null;//searchService.search(request, rootOrg, org, pageSize, pageNo);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
 
     }
