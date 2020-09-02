@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { DiscussModule } from '@ws/app'
 
 @NgModule({
-  imports: [],
-  exports: [],
+  imports: [CommonModule, DiscussModule],
+  exports: [DiscussModule],
 })
-export class DiscussModule {
+export class RouteDiscussModule {
 
 }

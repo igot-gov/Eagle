@@ -75,7 +75,7 @@ const routes: Routes = [
   {
     path: 'app/discuss',
     loadChildren: () =>
-      import('./routes/route-discuss.module').then(u => u.DiscussModule),
+      import('./routes/route-discuss.module').then(u => u.RouteDiscussModule),
     canActivate: [GeneralGuard],
   },
   {
