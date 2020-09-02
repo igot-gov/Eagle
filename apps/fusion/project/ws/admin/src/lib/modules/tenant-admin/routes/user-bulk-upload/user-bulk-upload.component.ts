@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
 import { FormBuilder, Validators, FormControl } from '@angular/forms'
 import { FileService } from '../../upload.service'
 import { Observable } from 'rxjs'
@@ -11,7 +11,7 @@ import { MatTableDataSource } from '@angular/material/table'
   templateUrl: './user-bulk-upload.component.html',
   styleUrls: ['./user-bulk-upload.component.scss'],
 })
-export class UserBulkUploadComponent implements OnInit {
+export class UserBulkUploadComponent implements OnInit, AfterViewInit {
   private fileName: any
   public displayLoader!: Observable<boolean>
   public formGroup = this.fb.group({
@@ -56,13 +56,17 @@ export class UserBulkUploadComponent implements OnInit {
     this.getBulkUploadData()
     this.getUserDepartments()
   }
+
+  ngAfterViewInit() {
+      this.dataSource.paginator = this.paginator
+  }
   getBulkUploadData() {
     this.fetching = true
     this.tenantAdminSvc.getBulkUploadData().then((res: any) => {
       this.fetching = false
       this.bulkUploadData = res
       this.dataSource = new MatTableDataSource(this.bulkUploadData)
-      this.dataSource.paginator = this.paginator
+      setTimeout(() => this.dataSource.paginator = this.paginator)
     })
       .catch(() => { })
       .finally(() => {
