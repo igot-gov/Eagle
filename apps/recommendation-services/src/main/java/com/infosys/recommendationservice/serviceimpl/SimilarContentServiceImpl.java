@@ -12,14 +12,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.infosys.recommendationservice.model.Response;
 import com.infosys.recommendationservice.service.SimilarContentService;
+import com.infosys.recommendationservice.util.SearchConstants;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.script.ScriptType;
+import org.elasticsearch.script.mustache.SearchTemplateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SimilarContentServiceImpl implements SimilarContentService {
@@ -34,6 +40,9 @@ public class SimilarContentServiceImpl implements SimilarContentService {
     private String authserviceEndpoint;
 
     @Autowired
+    private RestHighLevelClient restHighLevelClient;
+
+    @Autowired
     RestTemplate restTemplate;
 
     @Autowired
@@ -41,6 +50,9 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
     private final static String SEARCHTEMPLATE_KEY_SUFFIX = "Enable";
     private final static String SEARCHTEMPLATE_VALUE_SUFFIX = "Val";
+
+    private List<String> defaultSourceFields = new ArrayList<>(Arrays.asList("hasAssessment", "locale", "subTitle", "totalLikes", "sourceName", "sourceShortName", "sourceIconUrl", "isStandAlone", "isInIntranet", "deliveryLanguages", "deliveryCountries", "costCenter", "exclusiveContent", "instanceCatalog", "price", "isContentEditingDisabled", "isMetaEditingDisabled", "labels", "publishedOn", "expiryDate", "hasTranslations", "isTranslationOf", "viewCount", "averageRating", "uniqueUsersCount", "totalRating", "collections", "unit", "status", "isExternal", "learningMode", "uniqueLearners", "name", "identifier", "description", "resourceType", "contentType", "isExternal", "appIcon", "artifactUrl", "children", "mimeType", "creatorContacts", "downloadUrl", "duration", "me_totalSessionsCount", "size", "complexityLevel", "lastUpdatedOn", "resourceCategory", "msArtifactDetails", "isIframeSupported", "contentUrlAtSource", "certificationUrl", "certificationList", "skills", "topics", "creatorDetails", "catalogPaths", "learningObjective", "preRequisites", "softwareRequirements", "systemRequirements", "track", "idealScreenSize", "minLexVersion", "preContents", "postContents", "isExternal", "certificationStatus", "subTitles", "publisherDetails", "trackContacts", "creatorContacts", "appIcon", "trackContacts", "publisherDetails"));
+
 
 
     @Override
@@ -56,9 +68,15 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
         ObjectNode node = objectMapper.convertValue(contentMeta, ObjectNode.class);
         Map<String, Object> prepareScriptParams = new HashMap<>();
+        prepareScriptParams.put("fetchSource", defaultSourceFields);
+        prepareScriptParams.put("from", pageNo * pageSize);
+        prepareScriptParams.put("size", pageSize);
         parseMeta(node, prepareScriptParams);
 
-        //TODO: build ES search request and fire the query.
+        //Fetch ES search result
+        SearchResponse searchResponse = searchTemplate(locale, prepareScriptParams);
+        System.out.println("searchResponse = "+searchResponse);
+
 
         return null;
     }
@@ -80,7 +98,13 @@ public class SimilarContentServiceImpl implements SimilarContentService {
         return restTemplate.getForObject(uri, Map.class, params);
     }
 
+    /**
+     * Parse the metaNode to prepare the script params
+     * @param metaNode
+     * @param prepareScriptParams
+     */
     private void parseMeta(ObjectNode metaNode, Map<String, Object> prepareScriptParams){
+
         for(String field : fieldsToSearch){
 
             JsonNode fieldNode =metaNode.findValue(field);
@@ -90,6 +114,28 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
         }
 
-
     }
+
+
+    private SearchResponse searchTemplate(String locale, Map<String, Object> scriptParams) throws Exception {
+
+        System.out.println("fetchFromES-paramsMap: "+scriptParams);
+        List<String> indices = new ArrayList<>();
+        indices.add(SearchConstants.SEARCH_INDEX_NAME_PREFIX + SearchConstants.SEARCH_INDEX_LOCALE_DELIMITER + locale);
+
+
+        SearchRequest searchRequest = new SearchRequest().searchType(SearchType.QUERY_THEN_FETCH);
+        searchRequest.indices(indices.toArray(new String[0]));
+        searchRequest.types(SearchConstants.SEARCH_INDEX_TYPE);
+
+        SearchTemplateRequest templateRequest = new SearchTemplateRequest();
+        templateRequest.setScript(SearchConstants.ML_SEARCH_TEMPLATE);
+        templateRequest.setScriptType(ScriptType.STORED);
+        templateRequest.setScriptParams(scriptParams);
+        templateRequest.setRequest(searchRequest);
+        templateRequest.getRequest();
+
+        return restHighLevelClient.searchTemplate(templateRequest, RequestOptions.DEFAULT).getResponse();
+    }
+
 }
