@@ -89,4 +89,3 @@ export function validateInputWithRegex(input: any, regex: any): Promise<boolean>
     resolve(regex.test(input))
   })
 }
-

@@ -532,8 +532,6 @@ contentApi.post('/setImageCookie', async (req, res) => {
       json: body,
     }
     const bodyWithConfigRequestOptions = { ...bodyInJson, ...axiosRequestConfig }
-    // logInfo("bodyInJson=======>", JSON.stringify(bodyInJson))
-    // logInfo("bodyWithConfigRequestOptions=======>", JSON.stringify(bodyWithConfigRequestOptions))
     request.post(url, bodyWithConfigRequestOptions).pipe(res)
   } catch (err) {
     res.status((err && err.response && err.response.status) || 500).send(

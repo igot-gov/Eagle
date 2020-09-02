@@ -34,8 +34,8 @@ scromApi.get('/get/:id', async (req, res) => {
     const response = await axios.get(apiEndpoints.getScromData, {
       ...axiosRequestConfig,
       headers: {
-        org: org,
-        rootOrg: rootOrg,
+        org,
+        rootOrg,
       },
       params: {
         contentId,
