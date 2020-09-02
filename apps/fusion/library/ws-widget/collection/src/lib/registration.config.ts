@@ -2,6 +2,7 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 // Components
 import { BtnAppsComponent } from './btn-apps/btn-apps.component'
 // Modules
+import { AvatarPhotoModule } from './avatar-photo/avatar.photo.module'
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
 import { BtnCallComponent } from './btn-call/btn-call.component'
 import { BtnCallModule } from './btn-call/btn-call.module'
@@ -75,6 +76,8 @@ import { LayoutLinearComponent } from './layout-linear/layout-linear.component'
 import { LayoutLinearModule } from './layout-linear/layout-linear.module'
 import { LayoutTabComponent } from './layout-tab/layout-tab.component'
 import { LayoutTabModule } from './layout-tab/layout-tab.module'
+import { MiniProfileModule } from './mini-profile/mini-profile.module'
+import { MiniProfileComponent } from './mini-profile/mini-profile.component'
 import { PageComponent } from './page/page.component'
 import { PageModule } from './page/page.module'
 import { PickerContentModule } from './picker-content/picker-content.module'
@@ -108,6 +111,7 @@ import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
 
 export const WIDGET_REGISTERED_MODULES = [
+  AvatarPhotoModule,
   BtnAppsModule,
   BtnCallModule,
   BtnCatalogModule,
@@ -136,6 +140,7 @@ export const WIDGET_REGISTERED_MODULES = [
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
+  MiniProfileModule,
   PickerContentModule,
   PlayerAmpModule,
   PlayerAudioModule,
@@ -299,6 +304,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.layout._type,
     widgetSubType: ROOT_WIDGET_CONFIG.layout.tab,
     component: LayoutTabComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.miniProfile._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.miniProfile.miniProfile,
+    component: MiniProfileComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.player._type,

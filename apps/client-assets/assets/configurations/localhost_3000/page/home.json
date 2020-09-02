@@ -15,7 +15,7 @@
         "widgetType": "actionButton",
         "widgetSubType": "buttonFeature",
         "widgetData": {
-          "toolTop": "Search",
+          "toolTip": "Search",
           "actionBtnId": "feature_search",
           "config": {
             "type": "mat-icon-button"
@@ -26,7 +26,7 @@
         "widgetType": "actionButton",
         "widgetSubType": "buttonFeature",
         "widgetData": {
-          "toolTop": "feature_notification",
+          "toolTip": "feature_notification",
           "actionBtnId": "feature_notification",
           "config": {
             "type": "mat-icon-button"
@@ -43,7 +43,28 @@
       "widgets": [
         [
           {
-            "dimensions": {},
+            "dimensions": {
+              "medium": 2,
+              "small": 12
+            },
+            "className": "new-box-left",
+            "widget": {
+              "widgetType": "miniProfile",
+              "widgetSubType": "miniProfile",
+              "widgetData": [
+                {
+                  "toolTip": "Profile",
+                  "inVisible": false
+                }
+              ]
+            }
+          },
+          {
+            "dimensions": {
+              "small": 12,
+              "medium": 6
+            },
+            "className": "margin-left-xs",
             "widget": {
               "widgetType": "slider",
               "widgetSubType": "sliderBanners",
@@ -64,35 +85,6 @@
                     "f": "{}"
                   },
                   "title": ""
-                },
-                {
-                  "banners": {
-                    "l": "assets/instances/eagle/banners/home/7/l.png",
-                    "m": "assets/instances/eagle/banners/home/7/m.png",
-                    "s": "assets/instances/eagle/banners/home/7/s.png",
-                    "xl": "assets/instances/eagle/banners/home/7/xl.png",
-                    "xs": "assets/instances/eagle/banners/home/7/xs.png",
-                    "xxl": "assets/instances/eagle/banners/home/7/xxl.png"
-                  },
-                  "redirectUrl": "/app/search/learning",
-                  "title": ""
-                },
-                {
-                  "banners": {
-                    "l": "assets/instances/eagle/banners/home/8/l.png",
-                    "m": "assets/instances/eagle/banners/home/8/m.png",
-                    "s": "assets/instances/eagle/banners/home/8/s.png",
-                    "xl": "assets/instances/eagle/banners/home/8/xl.png",
-                    "xs": "assets/instances/eagle/banners/home/8/xs.png",
-                    "xxl": "assets/instances/eagle/banners/home/8/xxl.png"
-                  },
-                  "redirectUrl": "/app/search/learning",
-                  "queryParams": {
-                    "q": "Salesforce",
-                    "lang": "en",
-                    "f": "{}"
-                  },
-                  "title": ""
                 }
               ]
             }
@@ -100,19 +92,28 @@
         ],
         [
           {
-            "dimensions": {},
-            "className": "new-box",
+            "dimensions": {
+              "medium": 2,
+              "small": 12
+            },
+            "className": "new-box-left",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardWelcome",
-              "widgetData": {}
+              "widgetType": "miniProfile",
+              "widgetSubType": "miniProfile",
+              "widgetData": [
+                {
+                  "toolTip": "Profile",
+                  "inVisible": false
+                }
+              ]
             }
-          }
-        ],
-        [
+          },
           {
-            "dimensions": {},
-            "className": "new-box",
+            "dimensions": {
+              "small": 12,
+              "medium": 6
+            },
+            "className": "margin-left-xs",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -120,7 +121,7 @@
                 "strips": [
                   {
                     "key": "latest",
-                    "title": "Latest Courses",
+                    "title": "Newly added courses",
                     "info": {
                       "mode": "below",
                       "visibilityMode": "hidden",
@@ -179,8 +180,28 @@
         ],
         [
           {
-            "dimensions": {},
-            "className": "new-box",
+            "dimensions": {
+              "medium": 2,
+              "small": 12
+            },
+            "className": "new-box-left",
+            "widget": {
+              "widgetType": "miniProfile",
+              "widgetSubType": "miniProfile",
+              "widgetData": [
+                {
+                  "toolTip": "Profile",
+                  "inVisible": true
+                }
+              ]
+            }
+          },
+          {
+            "dimensions": {
+              "small": 12,
+              "medium": 6
+            },
+            "className": "margin-left-xs",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -237,7 +258,7 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "margin-left-xs",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -300,7 +321,7 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "margin-left-xs",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
@@ -366,7 +387,7 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "margin-left-xs",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",

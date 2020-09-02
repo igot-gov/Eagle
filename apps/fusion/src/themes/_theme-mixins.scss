@@ -193,6 +193,10 @@
     // .ws-mat-auth-exp {
     //   background-color: $colorAccentLight !important;
     // }
+
+    .mat-caption {
+      color: $colorText;
+    }
   }
 
   @else {
@@ -297,6 +301,16 @@
     .mat-stepper-horizontal-line {
       border-top-color: $colorAccent !important;
       border-top-width: 2px !important;
+    }
+
+    .mat-caption {
+      color: $colorText;
+    }
+
+    .ws-mat-selected-home-menu {
+      color: $colorAccent;
+      background: #F5F5F5;
+      box-shadow: 0 2px 0 0 $colorAccent;
     }
   }
 

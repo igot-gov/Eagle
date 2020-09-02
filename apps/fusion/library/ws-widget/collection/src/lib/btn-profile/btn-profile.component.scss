@@ -5,5 +5,11 @@
 }
 
 .new-margin {
-    margin-top: 8px;
+    // margin-top: 8px;
+    height: -webkit-fill-available;
+    max-height: -webkit-fill-available;
+}
+
+.text-new {
+    line-height: normal;
 }

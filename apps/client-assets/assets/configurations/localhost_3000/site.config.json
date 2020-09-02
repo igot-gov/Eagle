@@ -308,26 +308,19 @@
   },
   "primaryNavBarConfig": {
     "mediumScreen": {
-      "left": [
-        {
-          "type": "widgetButton",
-          "config": {
-            "widgetType": "actionButton",
-            "widgetSubType": "actionButtonCatalog",
-            "widgetData": {}
-          }
-        },
+      "left": [],
+      "right": [
         {
           "type": "featureButton",
           "config": {
-            "actionBtnId": "feature_navigator",
+            "actionBtnId": "feature_home",
+            "toolTip": "Home",
+            "className": "fixtopMargin",
             "config": {
-              "type": "mat-button"
+              "type": "card-mini"
             }
           }
-        }
-      ],
-      "right": [
+        },
         {
           "type": "featureButton",
           "config": {
@@ -335,7 +328,7 @@
             "toolTip": "Notification",
             "className": "fixtopMargin",
             "config": {
-              "type": "mat-icon-button"
+              "type": "card-mini"
             }
           }
         },

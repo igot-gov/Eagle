@@ -1,0 +1,43 @@
+.circle-s {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+  }
+
+  .initials {
+    color: #FFFFFF;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.2625px;
+  }
+}
+
+.circle-m {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+  }
+
+  .initials {
+    color: #FFFFFF;
+    font-size: 20px;
+    line-height: 19px;
+    letter-spacing: 0.2625px;
+  }
+}
