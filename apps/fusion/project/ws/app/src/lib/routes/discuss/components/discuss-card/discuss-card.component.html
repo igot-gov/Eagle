@@ -1,5 +1,5 @@
 <div *ngFor="let item of items">
-  <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+  <mat-expansion-panel hideToggle>
     <mat-expansion-panel-header>
       <mat-panel-title>
         Government of India launches a training module for management of COVID 19
@@ -8,7 +8,7 @@
         5 hours ago
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header class="quest-user">
       <p class="quest-user-info">Asked by&nbsp;<span class="user-name">Raghavendra Krishnamoorti</span></p>
     </mat-expansion-panel-header>
     <mat-expansion-panel-header>
