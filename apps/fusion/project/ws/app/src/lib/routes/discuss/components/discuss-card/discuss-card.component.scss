@@ -1,0 +1,55 @@
+mat-grid-tile {
+  background: lightblue;
+}
+
+mat-expansion-panel {
+  margin: 30px;
+  width: 800px;
+  min-height: 120px;
+}
+mat-panel-description {
+  text-align: end;
+  font-size: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: rgb(119, 110, 247);
+}
+
+mat-panel-title {
+  padding: 10px;
+}
+.para_info {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+mat-expansion-panel-header {
+  mat-icon {
+    display: none;
+  }
+}
+
+.icon-tour {
+  font-size: 30px;
+}
+.mat-expanded .mat-expansion-panel-header-title .material-icons {
+  // color: orange;
+}
+
+.like-comment-icon {
+  font-size: 20px;
+  color: orange;
+}
+.like-comment {
+  text-align: center;
+  padding: 3px;
+  margin: 0 2px 2px 2px;
+}
+.quest-user-info {
+  margin: 0 20px 0 20px;
+  font-size: 14px;
+  .user-name {
+    color: rgba(62, 62, 190, 0.911);
+  }
+}
