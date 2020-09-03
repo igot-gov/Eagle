@@ -148,7 +148,8 @@ const routes: Routes = [
   {
     path: 'app/notifications',
     loadChildren: () =>
-      import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
+      // import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
+      import('./routes/route-discuss.module').then(u => u.RouteDiscussModule),
     canActivate: [GeneralGuard],
   },
   {
