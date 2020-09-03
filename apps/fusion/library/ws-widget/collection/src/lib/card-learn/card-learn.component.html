@@ -11,16 +11,10 @@
 
 <ng-template #activities>
   <div class="px-4 sm:px-8 md:px-0 py-4 my-1">
-    <!-- <mat-accordion>
-      <mat-expansion-panel [expanded]="true" class="expansion-panel ws-mat-primary-lite-background-on-day">
-        <mat-expansion-panel-header>
-          <mat-panel-title> -->
-    <h2 class="title margin-remove" i18n>Welcome,
+
+    <h2 class="title" i18n>Welcome,
       <ng-container>{{ givenName }}</ng-container>
     </h2>
-    <!-- </mat-panel-title>
-        </mat-expansion-panel-header> -->
-
     <div class="row-justify">
       <ws-widget-activity-card *ngFor="let card of activityCards" [widgetData]="{
             id : card.id,
@@ -34,7 +28,5 @@
             }">
       </ws-widget-activity-card>
     </div>
-    <!-- </mat-expansion-panel> -->
-    <!-- </mat-accordion> -->
   </div>
 </ng-template>
