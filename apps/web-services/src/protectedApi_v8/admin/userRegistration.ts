@@ -280,7 +280,10 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                         const validEmail = await validateInputWithRegex(email, emailRegex)
                         if (rolesHeaders && rolesHeaders.length && roles && roles.length) {
                             for (const [i, val] of rolesHeaders.entries()) {
-                                if (roles[i] && (roles[i].toLowerCase() === 'y' || roles[i].toLowerCase() === 'yes')) {
+                                if (roles[i] &&
+                                    (roles[i].toString().toLowerCase() === 'y' ||
+                                        roles[i].toString().toLowerCase() === 'yes')
+                                ) {
                                     yesRoles.push(val)
                                 }
                             }
