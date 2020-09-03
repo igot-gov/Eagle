@@ -11,7 +11,6 @@ import { MatDividerModule } from '@angular/material/divider'
 import { MatIconModule } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 
-
 @NgModule({
   declarations: [DiscussComponent, DiscussCardComponent, DiscussCommetsComponent],
   imports: [CommonModule, DiscussRoutingModule, MatGridListModule, MatExpansionModule, MatDividerModule, MatIconModule, MatCardModule],
