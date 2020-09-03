@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 @Component({
   selector: 'app-dicuss-card',
   templateUrl: './discuss-card.component.html',
-  styleUrls: ['./discuss-card.component.scss']
+  styleUrls: ['./discuss-card.component.scss'],
 
 })
 export class DiscussCardComponent {
