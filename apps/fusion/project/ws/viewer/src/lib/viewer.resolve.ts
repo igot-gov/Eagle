@@ -13,9 +13,9 @@ const ADDITIONAL_FIELDS_IN_CONTENT = ['creatorContacts', 'source', 'exclusiveCon
 @Injectable()
 export class ViewerResolve
   implements
-    Resolve<
-      Observable<IResolveResponse<NsContent.IContent>> | IResolveResponse<NsContent.IContent> | null
-    > {
+  Resolve<
+  Observable<IResolveResponse<NsContent.IContent>> | IResolveResponse<NsContent.IContent> | null
+  > {
   constructor(
     private contentSvc: WidgetContentService,
     private viewerDataSvc: ViewerDataService,
@@ -25,7 +25,7 @@ export class ViewerResolve
     private msAuthSvc: AuthMicrosoftService,
     private configSvc: ConfigurationsService,
     private platform: Platform,
-  ) {}
+  ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<IResolveResponse<NsContent.IContent>> | null {
     const resourceType = route.data.resourceType
@@ -35,19 +35,20 @@ export class ViewerResolve
     }
     if (
       route.queryParamMap.get('preview') === 'true' &&
-      !this.accessControlSvc.authoringConfig.newDesign
+      !this.accessControlSvc.authoringConfig.newDesign &&
+      resourceType !== 'quiz'
     ) {
       return null
     }
 
-    const forPreview = window.location.href.includes('/author/')
+    const forPreview = window.location.href.includes('/author/') || route.queryParamMap.get('preview') === 'true'
     return (forPreview
       ? this.contentSvc.fetchAuthoringContent(this.viewerDataSvc.resourceId)
       : this.contentSvc.fetchContent(
-          this.viewerDataSvc.resourceId,
-          'detail',
-          ADDITIONAL_FIELDS_IN_CONTENT,
-        )
+        this.viewerDataSvc.resourceId,
+        'detail',
+        ADDITIONAL_FIELDS_IN_CONTENT,
+      )
     ).pipe(
       tap(content => {
         if (content.status === 'Deleted' || content.status === 'Expired') {
@@ -64,7 +65,7 @@ export class ViewerResolve
         if (resourceType === 'unknown') {
           this.router.navigate([
             `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(content.mimeType)}/${
-              content.identifier
+            content.identifier
             }`,
           ])
         } else if (resourceType === VIEWER_ROUTE_FROM_MIME(content.mimeType)) {
@@ -83,7 +84,7 @@ export class ViewerResolve
         if (resourceType === 'unknown') {
           this.router.navigate([
             `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(data.mimeType)}/${
-              data.identifier
+            data.identifier
             }`,
           ])
         } else if (resourceType === VIEWER_ROUTE_FROM_MIME(data.mimeType)) {

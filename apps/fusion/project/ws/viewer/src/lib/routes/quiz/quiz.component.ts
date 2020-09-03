@@ -15,7 +15,7 @@ import { ViewerUtilService } from '../../viewer-util.service'
 export class QuizComponent implements OnInit, OnDestroy {
   private dataSubscription: Subscription | null = null
   isFetchingDataComplete = false
-  forPreview = window.location.href.includes('/author/')
+  forPreview = window.location.href.includes('/author/') || window.location.href.includes('?preview=true')
   isErrorOccured = false
   quizData: NsContent.IContent | null = null
   oldData: NsContent.IContent | null = null
@@ -62,8 +62,8 @@ export class QuizComponent implements OnInit, OnDestroy {
       this.activatedRoute.snapshot.queryParams.collectionType
       && this.quizData) {
       await this.contentSvc.continueLearning(this.quizData.identifier,
-                                             this.activatedRoute.snapshot.queryParams.collectionId,
-                                             this.activatedRoute.snapshot.queryParams.collectionType,
+        this.activatedRoute.snapshot.queryParams.collectionId,
+        this.activatedRoute.snapshot.queryParams.collectionType,
       )
     } else if (this.quizData) {
       await this.contentSvc.continueLearning(this.quizData.identifier)
