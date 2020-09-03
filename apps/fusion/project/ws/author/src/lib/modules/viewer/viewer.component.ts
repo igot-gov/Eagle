@@ -63,9 +63,9 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, OnChan
   //   height: '950px',
   //   width: '1280px',
   // }
-  constructor(private accessControlSvc: AccessControlService) {}
+  constructor(private accessControlSvc: AccessControlService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngOnChanges() {
     if (this.accessControlSvc.authoringConfig.newDesign) {
@@ -115,5 +115,5 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewInit, OnChan
     // }
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 }

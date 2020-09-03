@@ -108,7 +108,6 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showSettingButtons = this.accessControl.rootOrg === 'client1'
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.activateRoute.parent.parent.data.subscribe(v => {
         if (v.contents && v.contents.length) {
