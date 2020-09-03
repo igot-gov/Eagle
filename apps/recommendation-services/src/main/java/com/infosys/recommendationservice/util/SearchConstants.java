@@ -12,7 +12,7 @@ public class SearchConstants {
     public static final String SEARCH_INDEX_NAME_PREFIX = "mlsearch";
     public static final String SEARCH_INDEX_LOCALE_DELIMITER = "_";
 
-    public static final String ML_SEARCH_TEMPLATE = "mlsearchtemplatev7";
+    public static final String ML_SEARCH_TEMPLATE = "mlsearchtemplate_relatedContent";
     public static final String SEARCH_INDEX_TYPE = "searchresources";
 
     public final static String SEARCHTEMPLATE_KEY_SUFFIX = "Enable";

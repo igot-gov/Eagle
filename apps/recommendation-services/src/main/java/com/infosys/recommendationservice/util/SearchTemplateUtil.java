@@ -15,6 +15,9 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.script.ScriptService;
 import org.elasticsearch.script.ScriptType;
 import org.elasticsearch.script.mustache.SearchTemplateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +30,7 @@ import java.util.*;
 public class SearchTemplateUtil {
 
 
-    private List<String> defaultSourceFields = new ArrayList<>(Arrays.asList("hasAssessment", "locale", "subTitle", "totalLikes", "sourceName", "sourceShortName", "sourceIconUrl", "isStandAlone", "isInIntranet", "deliveryLanguages", "deliveryCountries", "costCenter", "exclusiveContent", "instanceCatalog", "price", "isContentEditingDisabled", "isMetaEditingDisabled", "labels", "publishedOn", "expiryDate", "hasTranslations", "isTranslationOf", "viewCount", "averageRating", "uniqueUsersCount", "totalRating", "collections", "unit", "status", "isExternal", "learningMode", "uniqueLearners", "name", "identifier", "description", "resourceType", "contentType", "isExternal", "appIcon", "artifactUrl", "children", "mimeType", "creatorContacts", "downloadUrl", "duration", "me_totalSessionsCount", "size", "complexityLevel", "lastUpdatedOn", "resourceCategory", "msArtifactDetails", "isIframeSupported", "contentUrlAtSource", "certificationUrl", "certificationList", "skills", "topics", "creatorDetails", "catalogPaths", "learningObjective", "preRequisites", "softwareRequirements", "systemRequirements", "track", "idealScreenSize", "minLexVersion", "preContents", "postContents", "isExternal", "certificationStatus", "subTitles", "publisherDetails", "trackContacts", "creatorContacts", "appIcon", "trackContacts", "publisherDetails"));
+    private List<String> defaultSourceFields = new ArrayList<>(Arrays.asList("keywords","hasAssessment", "locale", "subTitle", "totalLikes", "sourceName", "sourceShortName", "sourceIconUrl", "isStandAlone", "isInIntranet", "deliveryLanguages", "deliveryCountries", "costCenter", "exclusiveContent", "instanceCatalog", "price", "isContentEditingDisabled", "isMetaEditingDisabled", "labels", "publishedOn", "expiryDate", "hasTranslations", "isTranslationOf", "viewCount", "averageRating", "uniqueUsersCount", "totalRating", "collections", "unit", "status", "isExternal", "learningMode", "uniqueLearners", "name", "identifier", "description", "resourceType", "contentType", "isExternal", "appIcon", "artifactUrl", "children", "mimeType", "creatorContacts", "downloadUrl", "duration", "me_totalSessionsCount", "size", "complexityLevel", "lastUpdatedOn", "resourceCategory", "msArtifactDetails", "isIframeSupported", "contentUrlAtSource", "certificationUrl", "certificationList", "skills", "topics", "creatorDetails", "catalogPaths", "learningObjective", "preRequisites", "softwareRequirements", "systemRequirements", "track", "idealScreenSize", "minLexVersion", "preContents", "postContents", "isExternal", "certificationStatus", "subTitles", "publisherDetails", "trackContacts", "creatorContacts", "appIcon", "trackContacts", "publisherDetails"));
     private List<String> searchOn = Arrays.asList("learningObjective^1","preRequisites^1","subTitle^1","catalogPaths^1","childrenDescription^1","childrenTitle^1","concepts.name^1","description^1","keywords^1","sourceShortName^1","sourceName^1","name^2");
 
 
@@ -58,14 +61,14 @@ public class SearchTemplateUtil {
         prepareScriptParams.put("from", pageNo * pageSize);
         prepareScriptParams.put("size", pageSize);
 
-        prepareScriptParams.put("searchFieldsWithBoost", searchOn);
+        //prepareScriptParams.put("searchFieldsWithBoost", searchOn);
 
     }
 
 
     public SearchResponse searchTemplate(String locale, Map<String, Object> scriptParams, String script) throws Exception {
 
-        System.out.println("fetchFromES-paramsMap: "+scriptParams);
+        System.out.println("fetchFromES-paramsMap: "+objectMapper.writeValueAsString(scriptParams));
         List<String> indices = new ArrayList<>();
         indices.add(SearchConstants.SEARCH_INDEX_NAME_PREFIX + SearchConstants.SEARCH_INDEX_LOCALE_DELIMITER + locale);
 
@@ -79,24 +82,12 @@ public class SearchTemplateUtil {
         templateRequest.setScriptType(ScriptType.STORED);
         templateRequest.setScriptParams(scriptParams);
         templateRequest.setRequest(searchRequest);
-        templateRequest.getRequest();
+        //templateRequest.getRequest();
+
+        System.out.println("Query : "+templateRequest.getRequest());
 
         return restHighLevelClient.searchTemplate(templateRequest, RequestOptions.DEFAULT).getResponse();
     }
-
-
-//    private void addScriptParams(ObjectNode metaNode, Map<String, Object> prepareScriptParams){
-//
-//        for(String field : fieldsToSearch){
-//
-//            JsonNode fieldNode =metaNode.findValue(field);
-//
-//            prepareScriptParams.put(field + SEARCHTEMPLATE_KEY_SUFFIX, true);
-//            prepareScriptParams.put(field + SEARCHTEMPLATE_VALUE_SUFFIX, fieldNode);
-//
-//        }
-//
-//    }
 
 
 

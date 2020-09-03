@@ -9,6 +9,8 @@ package com.infosys.recommendationservice.serviceimpl;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.infosys.recommendationservice.exception.ApplicationServiceError;
 import com.infosys.recommendationservice.model.Response;
@@ -46,14 +48,16 @@ public class SimilarContentServiceImpl implements SimilarContentService {
     @Autowired
     private RestHighLevelClient restHighLevelClient;
 
-    @Autowired
-    RestTemplate restTemplate;
+/*    @Autowired
+    RestTemplate restTemplate;*/
 
     @Autowired
     ObjectMapper objectMapper;
 
     @Autowired
     SearchTemplateUtil searchTemplateUtil;
+
+    private List<String> searchFields = new ArrayList<>();
 
 
     @Override
@@ -63,16 +67,23 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
         try {
             //TODO: Validate userId
+            searchFields = Arrays.asList(fieldsToSearch);
+            if(fieldsToSearch.length == 0)
+                throw new  ApplicationServiceError("Consider configuring search fields");
+
+            if(!searchFields.contains("name") || !searchFields.get(0).equalsIgnoreCase("name")){
+                searchFields.add(0, "name");
+            }
 
             //get content metadata through Auth API /read/{id};
             Map<String, Object> contentMeta = getContentMetadata(rootOrg, org, contentId);
-            System.out.println("content metadata = " + contentMeta);
+            System.out.println("content metadata # " + objectMapper.writeValueAsString(contentMeta));
 
             //create the script params/paramsMap to build the search query
-            ObjectNode node = objectMapper.convertValue(contentMeta, ObjectNode.class);
             Map<String, Object> prepareScriptParams = new HashMap<>();
             searchTemplateUtil.addBaseScriptParams(prepareScriptParams, pageNo, pageSize, sourceFields);
 
+            ObjectNode node = objectMapper.convertValue(contentMeta, ObjectNode.class);
             parseMeta(node, prepareScriptParams);
 
             //Fetch ES search result
@@ -86,6 +97,7 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
             response.put(response.MESSAGE, response.SUCCESSFUL);
             response.put(response.DATA, results);
+            response.put("hitCount", searchResponse.getHits().getHits().length);
             response.put("totalHits", searchResponse.getHits().totalHits);
             response.put(response.STATUS, HttpStatus.OK);
 
@@ -112,8 +124,10 @@ public class SimilarContentServiceImpl implements SimilarContentService {
         params.put("org", org);
 
         final String uri = authserviceIp.concat(authserviceEndpoint);
+        RestTemplate restTemplate = new RestTemplate();
         return restTemplate.getForObject(uri, Map.class, params);
     }
+
 
     /**
      * Parse the metaNode to prepare the script params
@@ -125,15 +139,88 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
         for (String field : fieldsToSearch) {
 
-            JsonNode fieldNode = metaNode.findValue(field);
+            JsonNode fieldNode = null;
+            String[] fieldArray = field.split("[.]");
 
-            prepareScriptParams.put(field + SearchConstants.SEARCHTEMPLATE_KEY_SUFFIX, true);
-            prepareScriptParams.put(field + SearchConstants.SEARCHTEMPLATE_VALUE_SUFFIX, fieldNode);
+            if(fieldArray.length == 1){
+                fieldNode = metaNode.get(field);
+
+            } else if(fieldArray.length > 1){
+                fieldNode = metaNode;
+
+                for(String fieldName : fieldArray){
+                    fieldNode = parseTree(fieldNode, fieldName);
+
+                }
+            }
+
+            Object value = new Object();
+
+            if(fieldNode.isTextual()){
+                value = fieldNode.asText();
+            }
+            if(fieldNode.isArray()){
+               value = objectMapper.convertValue(fieldNode, List.class);
+            }
+            if(fieldNode.isObject()){
+                value = objectMapper.convertValue(fieldNode, Map.class);
+            }
+
+            prepareScriptParams.put(fieldArray[0] + SearchConstants.SEARCHTEMPLATE_KEY_SUFFIX, true);
+            prepareScriptParams.put(fieldArray[0] + SearchConstants.SEARCHTEMPLATE_VALUE_SUFFIX, value);
 
         }
 
     }
 
+
+    private JsonNode parseTree(JsonNode fieldNode, String fieldName){
+        if(fieldNode.isObject()){
+            System.out.println("object field node --- "+fieldNode);
+            return  fieldNode = fieldNode.path(fieldName);
+        }
+        if(fieldNode.isArray()){
+            System.out.println("Array one field node --- "+fieldNode.get(0));
+            ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
+            for (int i = 0; i < fieldNode.size(); i++) {
+                arrayNode.add(fieldNode.get(i).path(fieldName));
+            }
+            return  arrayNode;//fieldNode = fieldNode.iterator().next().path(fieldName);
+        }
+        return null;
+    }
+
+
+    /*private JsonNode findNodeQ(ObjectNode root, String fieldName) {
+
+        if (fieldName == null || fieldName.isEmpty())
+            throw new IllegalArgumentException("Invalid field name :"+fieldName);
+
+        String [] fieldArray = fieldName.split(".");
+        if(fieldArray.length == 1){
+            return root.get(fieldArray[0]);
+
+        } else if(fieldArray.length > 1) {
+            for(String f : fieldArray){
+
+            }
+            root.fields().forEachRemaining(entry -> {
+                JsonNode entryValue = entry.getValue();
+                if (entryValue.isObject()) {
+                    findNodeQ((ObjectNode) entry.getValue(), fieldName);
+                }
+                if (entryValue.isArray()) {
+                    for (int i = 0; i < entryValue.size(); i++) {
+                        if (entry.getValue().get(i).isObject())
+                            findNodeQ((ObjectNode) entry.getValue().get(i), fieldName);
+                    }
+                }
+
+            });
+        }
+        return null;
+
+    }*/
 
 //    private SearchResponse searchTemplate(String locale, Map<String, Object> scriptParams) throws Exception {
 //
