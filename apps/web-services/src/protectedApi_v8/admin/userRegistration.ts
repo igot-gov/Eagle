@@ -280,7 +280,7 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                         const validEmail = await validateInputWithRegex(email, emailRegex)
                         if (rolesHeaders && rolesHeaders.length && roles && roles.length) {
                             for (const [i, val] of rolesHeaders.entries()) {
-                                if (roles[i].toLowerCase() === 'y' || roles[i].toLowerCase() === 'yes') {
+                                if (roles[i] && (roles[i].toLowerCase() === 'y' || roles[i].toLowerCase() === 'yes')) {
                                     yesRoles.push(val)
                                 }
                             }
@@ -289,7 +289,7 @@ userRegistrationApi.post('/bulkUpload', async (req, res) => {
                             reportData.push(
                                 [`\n${email}`,
                                     // tslint:disable-next-line: max-line-length
-                                    `Name fields cannot contain numbers and special characters except single quotes  & failed`,
+                                    `Name fields cannot be empty or cannot contain numbers and special characters except single quotes  & failed`,
                                 ]
                             )
                             continue
