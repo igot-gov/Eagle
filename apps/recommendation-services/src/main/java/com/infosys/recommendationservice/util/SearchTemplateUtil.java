@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SearchTemplateUtil {
@@ -60,6 +61,32 @@ public class SearchTemplateUtil {
         prepareScriptParams.put("fetchSource", defaultSourceFields);
         prepareScriptParams.put("from", pageNo * pageSize);
         prepareScriptParams.put("size", pageSize);
+
+        //prepareScriptParams.put("searchFieldsWithBoost", searchOn);
+
+    }
+
+    public void addSortingScriptParams(Map<String, Object> prepareScriptParams, List<String> descSortParams, List<String> ascSortParams){
+
+        if (prepareScriptParams==null){
+            prepareScriptParams = new HashMap<>();
+        }
+
+        Map<String, Object> sortableParams = new HashMap<>();
+        if(descSortParams!=null){
+
+            sortableParams.putAll(descSortParams.stream().collect(
+                    Collectors.toMap(x -> x, x -> "desc")));
+        }
+
+        if(ascSortParams!=null){
+
+            sortableParams.putAll(ascSortParams.stream().collect(
+                    Collectors.toMap(x -> x, x -> "asc")));
+        }
+
+        prepareScriptParams.put("sort",true);
+        prepareScriptParams.put("sortVal", sortableParams);
 
         //prepareScriptParams.put("searchFieldsWithBoost", searchOn);
 

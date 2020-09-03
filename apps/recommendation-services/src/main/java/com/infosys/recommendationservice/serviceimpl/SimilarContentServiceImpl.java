@@ -39,6 +39,15 @@ public class SimilarContentServiceImpl implements SimilarContentService {
     @Value("${related.content.search.fields}")
     private String[] fieldsToSearch;
 
+    @Value("${related.content.sorting.desc.fields}")
+    private String[] fieldsToSortDesc;
+
+    @Value("${related.content.sorting.asc.fields}")
+    private String[] fieldsToSortAsc;
+
+    @Value("${related.content.sorting.enabled}")
+    private boolean enableSorting;
+
     @Value("${auth.tool.ip}")
     private String authserviceIp;
 
@@ -47,9 +56,6 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
     @Autowired
     private RestHighLevelClient restHighLevelClient;
-
-/*    @Autowired
-    RestTemplate restTemplate;*/
 
     @Autowired
     ObjectMapper objectMapper;
@@ -74,7 +80,6 @@ public class SimilarContentServiceImpl implements SimilarContentService {
             if(!searchFields.contains("name") || !searchFields.get(0).equalsIgnoreCase("name")){
                 searchFields.add(0, "name");
             }
-
             //get content metadata through Auth API /read/{id};
             Map<String, Object> contentMeta = getContentMetadata(rootOrg, org, contentId);
             System.out.println("content metadata # " + objectMapper.writeValueAsString(contentMeta));
@@ -82,6 +87,11 @@ public class SimilarContentServiceImpl implements SimilarContentService {
             //create the script params/paramsMap to build the search query
             Map<String, Object> prepareScriptParams = new HashMap<>();
             searchTemplateUtil.addBaseScriptParams(prepareScriptParams, pageNo, pageSize, sourceFields);
+
+            if(enableSorting){
+                searchTemplateUtil.addSortingScriptParams(prepareScriptParams, Arrays.asList(fieldsToSortDesc), Arrays.asList(fieldsToSortAsc));
+
+            }
 
             ObjectNode node = objectMapper.convertValue(contentMeta, ObjectNode.class);
             parseMeta(node, prepareScriptParams);
@@ -137,7 +147,7 @@ public class SimilarContentServiceImpl implements SimilarContentService {
      */
     private void parseMeta(ObjectNode metaNode, Map<String, Object> prepareScriptParams) {
 
-        for (String field : fieldsToSearch) {
+        for (String field : searchFields) {
 
             JsonNode fieldNode = null;
             String[] fieldArray = field.split("[.]");
