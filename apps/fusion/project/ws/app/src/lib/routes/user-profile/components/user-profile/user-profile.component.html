@@ -266,7 +266,7 @@
                         <input matInput i18n-placeholder="Known Languages" placeholder="Known Languages"
                           formControlName="knownLanguages" i18n-aria-label aria-label="Known Languages"
                           [matAutocomplete]="knownLanguagesAuto" #knownLanguagesInput [matChipInputFor]="chipList"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"  />
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"  (matChipInputTokenEnd)="add($event)"/>
                       </mat-chip-list>
                       <mat-error [hidden]="false" i18n="Telephone Number Error|Explains name is required">
                         Other Languages Known is mandatory
@@ -275,7 +275,7 @@
                       [matAutocomplete]="knownLanguagesAuto" i18n-aria-label aria-label="known Languages" #knownLanguages /> -->
                     </mat-form-field>
                     <mat-autocomplete #knownLanguagesAuto="matAutocomplete"
-                      (optionSelected)="selectKnowLanguage($event)">
+                      (optionSelected)="selectKnowLanguage($event, knownLanguagesInput)">
                       <mat-option *ngFor="let option of masterKnownLanguages | async" [value]="option.name">
                         {{ option.name }}
                       </mat-option>
@@ -309,12 +309,16 @@
                   <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <p class=" margin-remove-bottom form-label"
                       i18n="Telephone Number label|Label which explains the user to enter Telephone Number">
-                      Telephone Number
+                      Telephone Number (e.g., 0123-26104183 or 012327204281)
                     </p>
                     <mat-form-field appearance="outline" class="margin-top-xs">
-                      <input #telephone type="number" matInput placeholder="Telephone Number"
+                      <input #telephone type="text" matInput placeholder="Telephone Number"
                         formControlName="telephone">
-                      <mat-error [hidden]="false" i18n="Telephone Number Error|Explains name is required">
+                      <mat-error [hidden]="false" *ngIf="createUserForm?.controls['telephone'].errors?.pattern">
+                        Please enter a valid telephone number (e.g., 0123-26104183 or 012327204281)
+                      </mat-error>
+                      <mat-error [hidden]="false" i18n="Telephone Number Error|Explains name is required"
+                      *ngIf="createUserForm?.controls['telephone'].errors?.required">
                         Telephone Number is mandatory
                       </mat-error>
                     </mat-form-field>

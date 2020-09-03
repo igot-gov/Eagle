@@ -77,6 +77,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   pincodePattern = '(^[0-9]{6}$)'
   yearPattern = '(^[0-9]{4}$)'
   namePatern = `^[a-zA-Z\\s\\']{1,32}$`
+  telephonePattern = `^[0-9]+-?[0-9]+$`
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   @ViewChild('knownLanguagesInput', { static: true }) knownLanguagesInputRef!: ElementRef<HTMLInputElement>
@@ -117,7 +118,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       photo: new FormControl('', []),
       countryCode: new FormControl('', [Validators.required]),
       mobile: new FormControl('', [Validators.required, Validators.pattern(this.phoneNumberPattern)]),
-      telephone: new FormControl('', []),
+      telephone: new FormControl('', [Validators.pattern(this.telephonePattern)]),
       primaryEmail: new FormControl('', [Validators.required, Validators.email]),
       primaryEmailType: new FormControl(this.assignPrimaryEmailTypeCheckBox(this.ePrimaryEmailType.OFFICIAL), []),
       secondaryEmail: new FormControl('', []),
@@ -349,10 +350,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     }
   }
 
-  public selectKnowLanguage(data: any) {
+  public selectKnowLanguage(data: any, input: any) {
     const value: ILanguages = data.option.value
     if (!this.selectedKnowLangs.includes(value)) {
       this.selectedKnowLangs.push(data.option.value)
+    }
+    if (this.knownLanguagesInputRef && this.knownLanguagesInputRef.nativeElement) {
+      this.knownLanguagesInputRef.nativeElement.value = ''
+    }
+    if (input && input.value) {
+      input.value = ''
     }
     // this.knownLanguagesInputRef.nativeElement.value = ''
     if (this.createUserForm.get('knownLanguages')) {
@@ -383,11 +390,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (input) {
       input.value = ''
     }
-
-    this.knownLanguagesInputRef.nativeElement.value = ''
+    if (this.knownLanguagesInputRef && this.knownLanguagesInputRef.nativeElement) {
+      this.knownLanguagesInputRef.nativeElement.value = ''
+    }
     if (this.createUserForm.get('knownLanguages')) {
-    // tslint:disable-next-line: no-non-null-assertion
-    this.createUserForm.get('knownLanguages')!.setValue(null)
+      // tslint:disable-next-line: no-non-null-assertion
+      this.createUserForm.get('knownLanguages')!.setValue(null)
     }
   }
 
