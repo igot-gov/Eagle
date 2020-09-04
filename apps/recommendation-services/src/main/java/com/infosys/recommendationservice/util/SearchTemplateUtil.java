@@ -111,7 +111,7 @@ public class SearchTemplateUtil {
         templateRequest.setRequest(searchRequest);
         //templateRequest.getRequest();
 
-        System.out.println("Query : "+templateRequest.getRequest());
+        //System.out.println("Query : "+templateRequest.getRequest());
 
         return restHighLevelClient.searchTemplate(templateRequest, RequestOptions.DEFAULT).getResponse();
     }
