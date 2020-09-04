@@ -1,32 +1,38 @@
-/* Split the screen in half */
-.split-70 {
-  height: 100%;
+* {
+  box-sizing: border-box;
+}
+main,
+div {
+  display: flex;
+  padding: 1rem;
+}
+
+.desktop {
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 800px;
   width: 100%;
-  position: relative;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
+  overflow-x: scroll;
 }
 
-.split-30 {
-  height: 100%;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
+div {
+  flex: 1;
+}
+div.first-part {
+  flex: 0 0 100%;
+  width: 60%;
 }
 
-/* Control the left side */
-.left {
-  left: 0;
+div.second-part {
+  width: 40%;
 }
 
-/* Control the right side */
-.right {
-  right: 0;
+@media (max-width: 480px) {
+  .desktop div {
+    flex: 1;
+    width: 100%;
+  }
+  div[first-part] {
+    flex: 5;
+  }
 }
-
-/* If you want the content centered horizontally and vertically */
