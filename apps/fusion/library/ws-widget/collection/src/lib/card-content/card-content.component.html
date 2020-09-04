@@ -10,6 +10,7 @@
   <ng-container *ngSwitchCase="'card-user-details'" [ngTemplateOutlet]="cardWithUserDetails"></ng-container>
   <ng-container *ngSwitchCase="'card-description-back'" [ngTemplateOutlet]="cardDescriptionBack"></ng-container>
   <ng-container *ngSwitchCase="'basic-details'" [ngTemplateOutlet]="cardBasicDetails"></ng-container>
+  <ng-container *ngSwitchCase="'card-discussion'" [ngTemplateOutlet]="cardDiscussion"></ng-container>
   <ng-container *ngSwitchDefault [ngTemplateOutlet]="cardStandard"></ng-container>
 </ng-container>
 
@@ -61,7 +62,8 @@
         </div>
       </div>
       <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-        [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
+        [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
+      </ws-widget-content-progress>
     </div>
   </div>
 </ng-template>
@@ -94,7 +96,8 @@
             [alt]="widgetData.content.name" [title]="widgetData.content.name" />
         </a>
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
+        </ws-widget-content-progress>
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
             [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
@@ -223,7 +226,8 @@
           <mat-icon>flip_to_back</mat-icon>
         </button>
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
+        </ws-widget-content-progress>
 
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
@@ -324,7 +328,8 @@
           <mat-icon>flip_to_back</mat-icon>
         </button>
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
+        </ws-widget-content-progress>
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
             [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
@@ -431,7 +436,8 @@
           class="card-img ws-mat-primary-lite-background" [wsUtilsDefaultThumbnail]="defaultThumbnail"
           [alt]="widgetData.content.name" [title]="widgetData.content.name" />
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
+        </ws-widget-content-progress>
       </a>
 
       <mat-card-content class="m-small">
@@ -531,7 +537,8 @@
           [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name"
           [title]="widgetData.content.name" />
         <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress"></ws-widget-content-progress>
+          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
+        </ws-widget-content-progress>
       </a>
       <mat-card-content>
         <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
@@ -671,6 +678,105 @@
             </div>
           </div>
         </a>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</ng-template>
+
+<ng-template #cardDiscussion>
+  <mat-card [attr.name]="'widget-card-content ' + widgetData.content.name" class="card-discussions-container mr-6"
+    [ngClass]="{
+        greyOut:
+          widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
+            ? true
+            : widgetData?.intranetMode === 'greyOut' && showIntranetContent
+      }" (click)="(showIntranetContent || !isLiveOrMarkForDeletion) && showSnackbar()">
+    <div class="display-contents" [ngClass]="{
+          disableClick:
+            widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
+              ? true
+              : widgetData?.intranetMode === 'greyOut' && showIntranetContent
+        }">
+      <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted" i18n-matTooltip
+        matTooltip="Content may be expired or deleted" *ngIf="!isLiveOrMarkForDeletion"></div>
+      <div class="status-danger" role="note" i18n-aria-label aria-label="Intranet content" i18n-matTooltip
+        matTooltip="Available only in Company's network"
+        *ngIf="widgetData?.intranetMode === 'greyOut' && showIntranetContent"></div>
+      <mat-card-content>
+
+        <!-- <div class="text-gray-600 complexity flex-between flex-center">
+            <div *ngIf="widgetData.content.duration" class="duration" i18n-title title="Duration">
+              {{ widgetData.content.duration | pipeDurationTransform: 'hms' }}
+            </div>
+          </div> -->
+        <!-- <div class="ws-mat-primary-text mat-title title-text title-truncate">
+            {{ widgetData.content.name }}
+          </div> -->
+        <div class="flex flex-1 flex-row">
+          <div class="flex-9 description-text mb-4" i18n-title title="Description">
+            <a (click)="raiseTelemetry()" [routerLink]="['/app/discuss']" class="flex flex-column"
+              [queryParams]="{'disid':'abc-bcdf-mnj-llk'}" role="link" aria-label="Content" i18n-aria-label>
+              <h2 class="ws-mat-primary-text mat-title title-text"> {{ widgetData.content.name }}</h2>
+            </a>
+          </div>
+          <div class="flex flex-1">
+            <div class="ws-mat-default-text">
+              <span>{{5}} hours ago</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-1 flex-row">
+          <div class="flex-9 description-text mb-4" i18n-title title="Description">
+            Asked by <a (click)="raiseTelemetry()" [routerLink]="['/app/person-profile']"
+              [queryParams]="{'emailId':'amit.sengar@tarento.com'}" role="link" aria-label="Content" i18n-aria-label>
+              <span class="ws-mat-default-text">{{'Amit Kumar'}}</span>
+            </a>
+          </div>
+          <div class="flex flex-1">
+            <div class="typeofc">
+              <span>Law</span>
+            </div>
+          </div>
+        </div>
+        <!-- <mat-accordion>
+          <mat-expansion-panel class="no-box" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header #panelH (click)="panelH._toggle()">
+              <mat-panel-title> -->
+        <div class="flex flex-1 flex-row">
+          <div class="flex flex-1">
+            <div class="flex flex-1 flex-row">
+              <span>
+                <mat-icon class="ws-mat-warn-text">thumb_up_off_alt</mat-icon>
+              </span>
+              &nbsp;
+              <h3 class="ws-mat-warn-text">{{21}}</h3>
+              &nbsp;
+              &nbsp;
+              <span>
+                <mat-icon class="ws-mat-primary-text">reply</mat-icon>
+              </span>
+              &nbsp;
+              <h3 class="ws-mat-warn-text">Reply</h3>
+            </div>
+          </div>
+          <div class="flex flex-1 center-right">
+            <span>view {{2}} replies
+              <!-- <mat-icon>keyboard_arrow_up </mat-icon> -->
+            </span>
+          </div>
+        </div>
+        <!-- </mat-panel-title>
+              <mat-panel-description>
+                <span class="flex flex-1 center-right" (click)="panelH._toggle()">view {{2}} replies</span>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+              <p>I'm visible because I am open</p>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion> -->
+
+
       </mat-card-content>
     </div>
   </mat-card>

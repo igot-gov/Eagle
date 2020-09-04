@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatIconModule, MatMenuModule, MatTooltipModule } from '@angular/material'
+import { MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatIconModule, MatMenuModule, MatTooltipModule, MatExpansionModule } from '@angular/material'
 import { RouterModule } from '@angular/router'
 import { DefaultThumbnailModule, PipeCountTransformModule, PipeDurationTransformModule, PipeHtmlTagRemovalModule, PipePartialContentModule } from '@ws-widget/utils'
 import { BtnChannelAnalyticsModule } from '../btn-channel-analytics/btn-channel-analytics.module'
@@ -29,6 +29,7 @@ import { BtnKbAnalyticsModule } from '../btn-kb-analytics/btn-kb-analytics.modul
     MatCardModule,
     MatIconModule,
     MatButtonModule,
+    MatExpansionModule,
     MatTooltipModule,
     MatMenuModule,
     MatChipsModule,
