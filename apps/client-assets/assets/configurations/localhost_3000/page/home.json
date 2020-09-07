@@ -459,7 +459,7 @@
             "className": "new-box",
             "widget": {
               "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultiple",
+              "widgetSubType": "contentStripVertical",
               "widgetData": {
                 "strips": [
                   {
@@ -481,7 +481,7 @@
                       }
                     },
                     "stripConfig": {
-                      "cardSubType": "minimal",
+                      "cardSubType": "card-discussion",
                       "postCardForSearch": true
                     },
                     "filters": [],

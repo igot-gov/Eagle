@@ -108,6 +108,8 @@ import { TreeComponent } from './tree/tree.component'
 import { TreeModule } from './tree/tree.module'
 import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
+import { ContentStripVerticalModule } from './content-strip-vertical/content-strip-vertical.module'
+import { ContentStripVerticalComponent } from './content-strip-vertical/content-strip-vertical.component'
 
 export const WIDGET_REGISTERED_MODULES = [
   BtnAppsModule,
@@ -136,6 +138,7 @@ export const WIDGET_REGISTERED_MODULES = [
   ChannelHubModule,
   ContentStripMultipleModule,
   ContentStripSingleModule,
+  ContentStripVerticalModule,
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
@@ -287,6 +290,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
     component: ContentStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.verticalStrip,
+    component: ContentStripVerticalComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
