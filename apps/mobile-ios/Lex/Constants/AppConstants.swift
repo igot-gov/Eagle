@@ -107,18 +107,18 @@ class AppConstants {
     
     init(_ environment: env) {
         switch environment {
-        case .DEV:
+        case .DEV: //(Developement)
             //            self.appUrl = "https://uon.onwingspan.com"
-            self.appUrl = "https://dtsdtktcet40x.cloudfront.net/ "
+            self.appUrl = "https://d136953gtttd92.cloudfront.net"
             self.internalIp = ""
             self.environment = env.DEV.name()
             break;
-        case .STAG:
-            self.appUrl = "https://dtsdtktcet40x.cloudfront.net/ "
+        case .STAG: //(pre-prod)
+            self.appUrl = "https://eagle-sb.idc.tarento.com"
             self.internalIp = ""
             self.environment = env.STAG.name()
-        case .PROD:
-            self.appUrl = "https://eagle-sb.idc.tarento.com"
+        case .PROD: //(Producation)
+            self.appUrl = "https://dtsdtktcet40x.cloudfront.net/"
             self.internalIp = ""
             self.environment = env.PROD.name()
         }
