@@ -16,7 +16,7 @@ mat-panel-description {
   text-align: end;
 }
 
-mat-panel-title {
+.first-title {
   padding: 10px;
 }
 .para_info {
@@ -25,22 +25,25 @@ mat-panel-title {
 }
 
 .like-comment-icon {
-  font-size: 20px;
   color: orange;
+  font-size: 16px;
 }
 .like-comment {
   text-align: center;
-  padding: 3px;
-  margin: 0 2px 2px 2px;
 }
 
 .quest-user {
   height: 20px;
   .quest-user-info {
-    margin: 0 20px 0 20px;
+    margin: 0 0 0 10px;
     font-size: 14px;
-    .user-name {
-      color: rgba(62, 62, 190, 0.911);
-    }
   }
+}
+.second-title {
+  margin-left: 10px;
+}
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  display: block;
+  color: rgba(62, 62, 190, 0.911);
 }
