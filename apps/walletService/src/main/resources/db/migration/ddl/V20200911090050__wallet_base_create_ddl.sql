@@ -1,3 +1,4 @@
+CREATE DATABASE wallet_service;
 CREATE TABLE IF NOT EXISTS user_wallet
 (
   id character varying(64) NOT NULL,
