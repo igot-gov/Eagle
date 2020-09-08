@@ -47,7 +47,9 @@ import { CardContentModule } from './card-content/card-content.module'
 import { CardLearnComponent } from './card-learn/card-learn.component'
 import { CardLearnModule } from './card-learn/card-learn.module'
 import { CardWelcomeComponent } from './card-welcome/card-welcome.component'
+import { CardNetworkComponent } from './card-network/card-network.component'
 import { CardWelcomeModule } from './card-welcome/card-welcome.module'
+import { CardNetworkModule } from './card-network/card-network.module'
 import { ChannelHubComponent } from './channel-hub/channel-hub.component'
 import { ChannelHubModule } from './channel-hub/channel-hub.module'
 import { ROOT_WIDGET_CONFIG } from './collection.config'
@@ -135,6 +137,7 @@ export const WIDGET_REGISTERED_MODULES = [
   CardChannelModule,
   CardLearnModule,
   CardWelcomeModule,
+  CardNetworkModule,
   ChannelHubModule,
   ContentStripMultipleModule,
   ContentStripSingleModule,
@@ -280,6 +283,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.welcome,
     component: CardWelcomeComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.network,
+    component: CardNetworkComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.channelHub._type,

@@ -80,7 +80,7 @@
             "className": "new-box",
             "widget": {
               "widgetType": "card",
-              "widgetSubType": "cardChannel",
+              "widgetSubType": "cardWelcome",
               "widgetData": {}
             }
           }

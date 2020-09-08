@@ -73,19 +73,7 @@
     "widgetSubType": "gridLayout",
     "widgetType": "layout",
     "widgetData": {
-      "widgets": [
-        [
-          {
-            "dimensions": {},
-            "className": "new-box",
-            "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardChannel",
-              "widgetData": {}
-            }
-          }
-        ]
-      ]
+      "widgets": []
     }
   }
 }
