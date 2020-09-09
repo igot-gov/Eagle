@@ -74,17 +74,19 @@ public class SimilarContentServiceImpl implements SimilarContentService {
 
         try {
             //TODO: Validate userId
+            System.out.println("Default Search fields-- "+objectMapper.writeValueAsString(fieldsToSearch));
+
             if(fieldsToSearch.length == 0)
                 throw new  ApplicationServiceError("Consider configuring search fields");
 
-            if(!Arrays.asList(fieldsToSearch).contains(defaultSearchField) || !Arrays.asList(fieldsToSearch).get(0).equalsIgnoreCase(defaultSearchField)){
+            if(!Arrays.asList(fieldsToSearch).contains(defaultSearchField)){
                 searchFields.add(defaultSearchField);
             }
             searchFields.addAll(Arrays.asList(fieldsToSearch));
-            System.out.println("Search fields-- "+searchFields);
+            System.out.println("Final Search fields-- "+searchFields);
 
             //get content metadata through Auth API /read/{id};
-            Map<String, Object> contentMeta = getDummyMeta();//getContentMetadata(rootOrg, org, contentId);
+            Map<String, Object> contentMeta = getContentMetadata(rootOrg, org, contentId);
             System.out.println("content metadata # " + objectMapper.writeValueAsString(contentMeta));
 
             //create the script params/paramsMap to build the search query
