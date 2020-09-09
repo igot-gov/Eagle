@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tarento.walletService.models.RequestInfo;
-import com.tarento.walletService.models.WalletLedgerResponse;
+import com.tarento.walletService.web.models.RequestInfo;
+import com.tarento.walletService.web.models.WalletLedgerResponse;
 
 @RestController
 @RequestMapping("/v1/")

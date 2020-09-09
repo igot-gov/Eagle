@@ -1,5 +1,4 @@
-package com.tarento.walletService.models;
-
+package com.tarento.walletService.web.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,11 +8,11 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
- * Wallet information for a specific User
+ * Object to keep the old records of the
  */
 @Entity
-@Table(name = "wallet")
-public class WalletInfo {
+@Table(name = "wallet_audit")
+public class WalletAudit {
 
     @Id
     @Column(name = "id")
@@ -42,14 +41,6 @@ public class WalletInfo {
     @JsonProperty("updated_by")
     private String updatedBy = null;
 
-    public UserWallet getUser_walletInfo() {
-        return userWalletInfo;
-    }
-
-    public void setUser_walletInfo(UserWallet user_walletInfo) {
-        this.userWalletInfo = user_walletInfo;
-    }
-
     @Column(name = "updated_time")
     @JsonProperty("updation_time")
     private Long updationTime = null;
@@ -57,8 +48,8 @@ public class WalletInfo {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_wallet_id", referencedColumnName = "id", nullable = false)
     @JsonBackReference
-    @JsonProperty("user_walletInfo")
-    private UserWallet userWalletInfo;
+    @JsonProperty("wallet_audit")
+    private UserWallet walletAudit;
 
 
     /**
@@ -74,11 +65,6 @@ public class WalletInfo {
         this.id = id;
     }
 
-    public WalletInfo expiryDate(Long expiryDate) {
-        this.expiryDate = expiryDate;
-        return this;
-    }
-
     /**
      * Expiry date of coins in EPOCH format
      *
@@ -90,11 +76,6 @@ public class WalletInfo {
 
     public void setExpiryDate(Long expiryDate) {
         this.expiryDate = expiryDate;
-    }
-
-    public WalletInfo numberOfCoins(Integer numberOfCoins) {
-        this.numberOfCoins = numberOfCoins;
-        return this;
     }
 
     /**
@@ -136,6 +117,11 @@ public class WalletInfo {
         this.creationTime = creationTime;
     }
 
+    public WalletAudit updatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+        return this;
+    }
+
     /**
      * Reference to UserId of the person who updates this entry
      *
@@ -162,12 +148,12 @@ public class WalletInfo {
         this.updationTime = updationTime;
     }
 
-    public UserWallet getUserWalletInfo() {
-        return userWalletInfo;
+    public UserWallet getWalletAudit() {
+        return walletAudit;
     }
 
-    public void setUserWalletInfo(UserWallet userWalletInfo) {
-        this.userWalletInfo = userWalletInfo;
+    public void setWalletAudit(UserWallet walletAudit) {
+        this.walletAudit = walletAudit;
     }
 
     @Override
@@ -178,30 +164,30 @@ public class WalletInfo {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        WalletInfo walletInfo = (WalletInfo) o;
-        return Objects.equals(this.id, walletInfo.id) &&
-                Objects.equals(this.userWalletInfo, walletInfo.userWalletInfo) &&
-                Objects.equals(this.expiryDate, walletInfo.expiryDate) &&
-                Objects.equals(this.numberOfCoins, walletInfo.numberOfCoins) &&
-                Objects.equals(this.createdBy, walletInfo.createdBy) &&
-                Objects.equals(this.creationTime, walletInfo.creationTime) &&
-                Objects.equals(this.updatedBy, walletInfo.updatedBy) &&
-                Objects.equals(this.updationTime, walletInfo.updationTime);
+        WalletAudit walletAudit = (WalletAudit) o;
+        return Objects.equals(this.id, walletAudit.id) &&
+                Objects.equals(this.walletAudit, walletAudit.walletAudit) &&
+                Objects.equals(this.expiryDate, walletAudit.expiryDate) &&
+                Objects.equals(this.numberOfCoins, walletAudit.numberOfCoins) &&
+                Objects.equals(this.createdBy, walletAudit.createdBy) &&
+                Objects.equals(this.creationTime, walletAudit.creationTime) &&
+                Objects.equals(this.updatedBy, walletAudit.updatedBy) &&
+                Objects.equals(this.updationTime, walletAudit.updationTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userWalletInfo, expiryDate, numberOfCoins, createdBy, creationTime, updatedBy, updationTime);
+        return Objects.hash(id, walletAudit, expiryDate, numberOfCoins, createdBy, creationTime, updatedBy, updationTime);
     }
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class WalletInfo {\n");
+        sb.append("class WalletAudit {\n");
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    userWalletId: ").append(toIndentedString(userWalletInfo)).append("\n");
+        sb.append("    userWalletId: ").append(toIndentedString(walletAudit)).append("\n");
         sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
         sb.append("    numberOfCoins: ").append(toIndentedString(numberOfCoins)).append("\n");
         sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");

@@ -1,4 +1,4 @@
-package com.tarento.walletService.models;
+package com.tarento.walletService.web.models;
 
 /**
  * Enum to list the available wallet types
