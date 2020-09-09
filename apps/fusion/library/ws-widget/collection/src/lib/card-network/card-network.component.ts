@@ -1,8 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-
-
+import { CardNetWorkService } from './card-network.service'
 @Component({
   selector: 'ws-widget-card-welcome',
   templateUrl: './card-network.component.html',
@@ -17,104 +16,18 @@ export class CardNetworkComponent extends WidgetBaseComponent
   givenName: string | undefined
   userEmail: string | undefined
   keyTag: string[] = []
+  newUserReq: any
+  deptUserReq: any
 
-  constructor(private router: Router) {
-
+  constructor(private router: Router, private cardNetworkService: CardNetWorkService) {
     super()
-
   }
 
-  cardArray = [{
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }, {
-    first_name: 'Amit',
-    last_name: 'Yadav',
-    email: 'amitkumar.yadav@tarento.com',
-    desc: 'Last active 8 days ago',
-    user_id: null,
-    department: 'igot',
-    phone_No: '0',
-    designation: '',
-    userLocation: '',
-    city: '',
-  }]
+  newUserArray = []
+  departmentUserArray = []
   ngOnInit() {
-
+    this.getAllActiveUsers()
+    this.getAllDepartmentUsers()
   }
 
   getUserFullName(user: any) {
@@ -127,4 +40,29 @@ export class CardNetworkComponent extends WidgetBaseComponent
     this.router.navigate(['/app/person-profile'], { queryParams: { emailId: user.email } })
   }
 
+  getAllActiveUsers() {
+    this.newUserReq = {
+      limit: 50,
+      offset: 0,
+      intervalInDays: 7,
+      type: 'latestUsers',
+    }
+    this.cardNetworkService.fetchLatestUserInfo(this.newUserReq).subscribe(data => {
+      this.newUserArray = data.users
+    })
+
+  }
+  getAllDepartmentUsers() {
+    this.deptUserReq = {
+      limit: 50,
+      offset: 0,
+      department: 'istm',
+      intervalInDays: 7,
+      type: 'deptUsers',
+    }
+    this.cardNetworkService.fetchLatestUserInfo(this.deptUserReq).subscribe(data => {
+      this.departmentUserArray = data.users
+    })
+
+  }
 }

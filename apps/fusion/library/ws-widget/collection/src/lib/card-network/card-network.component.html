@@ -1,4 +1,4 @@
-<section *ngIf="enableFeature">
+<section *ngIf="enableFeature" class="base-layout">
   <!-- <h2 class="mat-toolbar cohorts-head shadow">Cohorts</h2> -->
   <mat-accordion [multi]="false">
     <mat-expansion-panel class="mat-elevation-z" (opened)="true">
@@ -7,11 +7,11 @@
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <div>
-          <h3 class="mat-error text-center" *ngIf="cardArray.length === 0" i18n>
+          <h3 class="mat-error text-center" *ngIf="newUserArray.length === 0" i18n>
             No Active User Info Available
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
-            <ng-container *ngFor="let cohort of cardArray" [ngTemplateOutlet]="unitCohortNew"
+            <ng-container *ngFor="let cohort of newUserArray" [ngTemplateOutlet]="unitCohortNew"
               [ngTemplateOutletContext]="{ user: cohort }">
             </ng-container>
           </div>
@@ -27,11 +27,11 @@
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <div>
-          <h3 class="mat-error text-center" *ngIf="cardArray.length === 0" i18n>
+          <h3 class="mat-error text-center" *ngIf="departmentUserArray.length === 0" i18n>
             No People info Available
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
-            <ng-container *ngFor="let cohort of cardArray" [ngTemplateOutlet]="unitCohortNew"
+            <ng-container *ngFor="let cohort of departmentUserArray" [ngTemplateOutlet]="unitCohortNew"
               [ngTemplateOutletContext]="{ user: cohort }"></ng-container>
           </div>
         </div>
@@ -53,7 +53,7 @@
             { firstName: user.first_name, lastName: user.last_name, email: user.email } | pipeNameTransform
           }}
         </div>
-        <div class="mat-caption cohorts-desc">{{ user.desc }}</div>
+        <div class="mat-caption cohorts-desc">{{ user.department_name }}</div>
       </div>
     </div>
   </ng-template>
@@ -71,7 +71,7 @@
             { firstName: user.first_name, lastName: user.last_name, email: user.email } | pipeNameTransform
           }}
         </div>
-        <div class="mat-caption cohorts-desc">{{ user.desc }}</div>
+        <div class="mat-caption cohorts-desc">{{ user.department_name }}</div>
       </div>
     </div>
 
