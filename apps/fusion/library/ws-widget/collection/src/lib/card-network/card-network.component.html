@@ -3,15 +3,12 @@
   <mat-accordion [multi]="false">
     <mat-expansion-panel class="mat-elevation-z" (opened)="true">
       <mat-expansion-panel-header>
-        <mat-panel-title i18n>Learners</mat-panel-title>
+        <mat-panel-title i18n>New on IGOT Karmyogi</mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <div>
-          <h3 class="mat-error text-center" i18n>
-            Failed to fetch active users
-          </h3>
-          <h3 class="text-center" i18n>
-            None
+          <h3 class="mat-error text-center" *ngIf="cardArray.length === 0" i18n>
+            No Active User Info Available
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
             <ng-container *ngFor="let cohort of cardArray" [ngTemplateOutlet]="unitCohortNew"
@@ -26,37 +23,12 @@
     </mat-expansion-panel>
     <mat-expansion-panel class="mat-elevation-z" (opened)="true">
       <mat-expansion-panel-header>
-        <mat-panel-title i18n>Top performers</mat-panel-title>
+        <mat-panel-title i18n>People to Follow</mat-panel-title>
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <div>
-          <h3 class="mat-error text-center" i18n>
-            Failed to fetch top performers
-          </h3>
-          <h3 class="text-center" i18n>
-            None
-          </h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
-            <ng-container [ngTemplateOutlet]="unitCohortNew" [ngTemplateOutletContext]="{ user: cohort }">
-            </ng-container>
-          </div>
-        </div>
-        <div class="text-center">
-          <mat-spinner [strokeWidth]="3" [diameter]="40" class="display-inline-block"></mat-spinner>
-        </div>
-      </ng-template>
-    </mat-expansion-panel>
-    <mat-expansion-panel class="mat-elevation-z" (opened)="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title i18n>Curators</mat-panel-title>
-      </mat-expansion-panel-header>
-      <ng-template matExpansionPanelContent>
-        <div>
-          <h3 class="mat-error text-center" i18n>
-            Failed to fetch curators
-          </h3>
-          <h3 class="text-center" i18n>
-            None
+          <h3 class="mat-error text-center" *ngIf="cardArray.length === 0" i18n>
+            No People info Available
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
             <ng-container *ngFor="let cohort of cardArray" [ngTemplateOutlet]="unitCohortNew"
@@ -78,7 +50,7 @@
         class="width-expand padding-left-xs">
         <div class="mat-body-strong cohorts-name">
           {{
-            { firstName: user.first_name, lastName: user.last_name, email: user.email }
+            { firstName: user.first_name, lastName: user.last_name, email: user.email } | pipeNameTransform
           }}
         </div>
         <div class="mat-caption cohorts-desc">{{ user.desc }}</div>
@@ -96,7 +68,7 @@
         class="width-expand padding-left-xs">
         <div class="mat-body-strong cohorts-name">
           {{
-            { firstName: user.first_name, lastName: user.last_name, email: user.email }
+            { firstName: user.first_name, lastName: user.last_name, email: user.email } | pipeNameTransform
           }}
         </div>
         <div class="mat-caption cohorts-desc">{{ user.desc }}</div>
