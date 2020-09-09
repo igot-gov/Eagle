@@ -193,6 +193,12 @@
     // .ws-mat-auth-exp {
     //   background-color: $colorAccentLight !important;
     // }
+    #cke_1_contents,
+    .cke_wysiwyg_div {
+      background: none;
+      background-color: $colorPrimaryDark !important;
+      color: $colorPrimary !important;
+    }
   }
 
   @else {
@@ -490,11 +496,11 @@
     box-shadow: 0 -1px 0 0 $colorPrimary inset, 0 -2px 0 0 $colorPrimary inset;
   }
 
-  #cke_1_contents,
-  .cke_wysiwyg_div {
-    background-color: $colorPrimary !important;
-    color: $colorAccent !important;
-  }
+  // #cke_1_contents,
+  // .cke_wysiwyg_div {
+  //   background-color: $colorPrimary !important;
+  //   // color: $colorPrimary !important;
+  // }
 
   .required {
     &::after {
