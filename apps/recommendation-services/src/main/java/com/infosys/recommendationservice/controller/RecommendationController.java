@@ -42,7 +42,7 @@ public class RecommendationController {
     @GetMapping("/related/contents")
     public ResponseEntity<Response> findRelatedContents(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = true) String org,
                                                         @RequestHeader(required = true) String locale, @RequestHeader String userId,
-                                                        @RequestParam(required = false) String contentId,
+                                                        @RequestParam(required = true) String contentId,
                                                         @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                         @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
                                                         @RequestParam(value = "sourceFields", required = false) Set<String> sourceFields) {
