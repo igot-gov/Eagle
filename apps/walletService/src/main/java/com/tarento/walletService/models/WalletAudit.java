@@ -1,36 +1,56 @@
 package com.tarento.walletService.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Object to keep the old records of the
  */
+@Entity
+@Table(name = "wallet_audit")
 public class WalletAudit {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @JsonProperty("id")
     private String id = null;
 
-    @JsonProperty("user_wallet_id")
-    private String userWalletId = null;
-
+    @Column(name = "expiry_date")
     @JsonProperty("expiry_date")
     private Long expiryDate = null;
 
+    @Column(name = "number_of_coins")
     @JsonProperty("number_of_coins")
     private Integer numberOfCoins = null;
 
+    @Column(name = "created_by")
     @JsonProperty("created_by")
     private String createdBy = null;
 
+    @Column(name = "creation_time")
     @JsonProperty("creation_time")
     private Long creationTime = null;
 
+    @Column(name = "updated_by")
     @JsonProperty("updated_by")
     private String updatedBy = null;
 
+    @Column(name = "updated_time")
     @JsonProperty("updation_time")
     private Long updationTime = null;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_wallet_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
+    @JsonProperty("wallet_audit")
+    private UserWallet walletAudit;
+
 
     /**
      * Auto Generated Primary Key Id
@@ -43,19 +63,6 @@ public class WalletAudit {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    /**
-     * Reference to Primary Key Id of User_Wallet entry
-     *
-     * @return userWalletId
-     **/
-    public String getUserWalletId() {
-        return userWalletId;
-    }
-
-    public void setUserWalletId(String userWalletId) {
-        this.userWalletId = userWalletId;
     }
 
     /**
@@ -141,6 +148,13 @@ public class WalletAudit {
         this.updationTime = updationTime;
     }
 
+    public UserWallet getWalletAudit() {
+        return walletAudit;
+    }
+
+    public void setWalletAudit(UserWallet walletAudit) {
+        this.walletAudit = walletAudit;
+    }
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -152,7 +166,7 @@ public class WalletAudit {
         }
         WalletAudit walletAudit = (WalletAudit) o;
         return Objects.equals(this.id, walletAudit.id) &&
-                Objects.equals(this.userWalletId, walletAudit.userWalletId) &&
+                Objects.equals(this.walletAudit, walletAudit.walletAudit) &&
                 Objects.equals(this.expiryDate, walletAudit.expiryDate) &&
                 Objects.equals(this.numberOfCoins, walletAudit.numberOfCoins) &&
                 Objects.equals(this.createdBy, walletAudit.createdBy) &&
@@ -163,7 +177,7 @@ public class WalletAudit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userWalletId, expiryDate, numberOfCoins, createdBy, creationTime, updatedBy, updationTime);
+        return Objects.hash(id, walletAudit, expiryDate, numberOfCoins, createdBy, creationTime, updatedBy, updationTime);
     }
 
 
@@ -173,7 +187,7 @@ public class WalletAudit {
         sb.append("class WalletAudit {\n");
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    userWalletId: ").append(toIndentedString(userWalletId)).append("\n");
+        sb.append("    userWalletId: ").append(toIndentedString(walletAudit)).append("\n");
         sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
         sb.append("    numberOfCoins: ").append(toIndentedString(numberOfCoins)).append("\n");
         sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");

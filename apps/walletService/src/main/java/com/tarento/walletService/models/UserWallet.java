@@ -1,25 +1,50 @@
 package com.tarento.walletService.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
+@Entity
+@Table(name = "user_wallet")
 public class UserWallet {
 
-    @JsonProperty("id")
-    private String id = null;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    private String id;
 
+    @Column(name = "wid")
     @JsonProperty("wid")
     private String wid = null;
 
+    @Column(name = "wallet_type")
     @JsonProperty("wallet_type")
     private WalletType walletType = null;
 
+    @Column(name = "created_by")
     @JsonProperty("created_by")
     private String createdBy = null;
 
+    @Column(name = "creation_time")
     @JsonProperty("creation_time")
     private Long creationTime = null;
+
+    @OneToMany(mappedBy = "userWalletInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WalletInfo> walletInfos;
+
+    @OneToMany(mappedBy = "fromUserWalletLedger", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WalletLedger> fromWalletLedgers;
+
+    @OneToMany(mappedBy = "toUserWalletLedger", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WalletLedger> toWalletLedgers;
+
+    @OneToMany(mappedBy = "walletAudit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<WalletAudit> audits;
+
 
     public String getId() {
         return id;
@@ -59,6 +84,38 @@ public class UserWallet {
 
     public void setCreationTime(Long creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public Set<WalletInfo> getWalletInfos() {
+        return walletInfos;
+    }
+
+    public void setWalletInfos(Set<WalletInfo> walletInfos) {
+        this.walletInfos = walletInfos;
+    }
+
+    public Set<WalletLedger> getFromWalletLedgers() {
+        return fromWalletLedgers;
+    }
+
+    public void setFromWalletLedgers(Set<WalletLedger> fromWalletLedgers) {
+        this.fromWalletLedgers = fromWalletLedgers;
+    }
+
+    public Set<WalletLedger> getToWalletLedgers() {
+        return toWalletLedgers;
+    }
+
+    public void setToWalletLedgers(Set<WalletLedger> toWalletLedgers) {
+        this.toWalletLedgers = toWalletLedgers;
+    }
+
+    public Set<WalletAudit> getAudits() {
+        return audits;
+    }
+
+    public void setAudits(Set<WalletAudit> audits) {
+        this.audits = audits;
     }
 
     @Override

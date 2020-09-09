@@ -1,34 +1,54 @@
 package com.tarento.walletService.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Keeps the information about each transaction of coins
  */
+@Entity
+@Table(name = "wallet_ledger")
 public class WalletLedger {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @JsonProperty("id")
     private String id = null;
 
-    @JsonProperty("from_user_wallet_id")
-    private String fromUserWalletId = null;
-
-    @JsonProperty("to_user_wallet_id")
-    private String toUserWalletId = null;
-
+    @Column(name = "number_of_coins")
     @JsonProperty("number_of_coins")
     private Integer numberOfCoins = null;
 
+    @Column(name = "comments")
     @JsonProperty("comments")
     private String comments = null;
 
+    @Column(name = "created_by")
     @JsonProperty("transaction_by")
     private String transactionBy = null;
 
+    @Column(name = "creation_time")
     @JsonProperty("transaction_datetime")
     private Long transactionDatetime = null;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "from_user_wallet_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
+    @JsonProperty("from_user_walletLedger")
+    private UserWallet fromUserWalletLedger;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "to_user_wallet_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
+    @JsonProperty("to_user_walletLedger")
+    private UserWallet toUserWalletLedger;
+
 
     /**
      * Auto generated Primary Key Id
@@ -43,31 +63,6 @@ public class WalletLedger {
         this.id = id;
     }
 
-    /**
-     * Reference to UserId of the person who initiated the transfer
-     *
-     * @return fromUserWalletId
-     **/
-    public String getFromUserWalletId() {
-        return fromUserWalletId;
-    }
-
-    public void setFromUserWalletId(String fromUserWalletId) {
-        this.fromUserWalletId = fromUserWalletId;
-    }
-
-    /**
-     * Reference to UserId of the person who receives the coins in the transfer
-     *
-     * @return toUserWalletId
-     **/
-    public String getToUserWalletId() {
-        return toUserWalletId;
-    }
-
-    public void setToUserWalletId(String toUserWalletId) {
-        this.toUserWalletId = toUserWalletId;
-    }
 
     /**
      * Number of coins transferred
@@ -121,6 +116,21 @@ public class WalletLedger {
         this.transactionDatetime = transactionDatetime;
     }
 
+    public UserWallet getFromUserWalletLedger() {
+        return fromUserWalletLedger;
+    }
+
+    public void setFromUserWalletLedger(UserWallet fromUserWalletLedger) {
+        this.fromUserWalletLedger = fromUserWalletLedger;
+    }
+
+    public UserWallet getToUserWalletLedger() {
+        return toUserWalletLedger;
+    }
+
+    public void setToUserWalletLedger(UserWallet toUserWalletLedger) {
+        this.toUserWalletLedger = toUserWalletLedger;
+    }
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -132,8 +142,8 @@ public class WalletLedger {
         }
         WalletLedger walletLedger = (WalletLedger) o;
         return Objects.equals(this.id, walletLedger.id) &&
-                Objects.equals(this.fromUserWalletId, walletLedger.fromUserWalletId) &&
-                Objects.equals(this.toUserWalletId, walletLedger.toUserWalletId) &&
+                Objects.equals(this.fromUserWalletLedger, walletLedger.fromUserWalletLedger) &&
+                Objects.equals(this.toUserWalletLedger, walletLedger.toUserWalletLedger) &&
                 Objects.equals(this.numberOfCoins, walletLedger.numberOfCoins) &&
                 Objects.equals(this.comments, walletLedger.comments) &&
                 Objects.equals(this.transactionBy, walletLedger.transactionBy) &&
@@ -142,7 +152,7 @@ public class WalletLedger {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fromUserWalletId, toUserWalletId, numberOfCoins, comments, transactionBy, transactionDatetime);
+        return Objects.hash(id, fromUserWalletLedger, toUserWalletLedger, numberOfCoins, comments, transactionBy, transactionDatetime);
     }
 
 
@@ -152,8 +162,8 @@ public class WalletLedger {
         sb.append("class WalletLedger {\n");
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    fromUserWalletId: ").append(toIndentedString(fromUserWalletId)).append("\n");
-        sb.append("    toUserWalletId: ").append(toIndentedString(toUserWalletId)).append("\n");
+        sb.append("    fromUserWalletId: ").append(toIndentedString(fromUserWalletLedger)).append("\n");
+        sb.append("    toUserWalletId: ").append(toIndentedString(toUserWalletLedger)).append("\n");
         sb.append("    numberOfCoins: ").append(toIndentedString(numberOfCoins)).append("\n");
         sb.append("    comments: ").append(toIndentedString(comments)).append("\n");
         sb.append("    transactionBy: ").append(toIndentedString(transactionBy)).append("\n");

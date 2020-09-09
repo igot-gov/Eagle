@@ -1,38 +1,65 @@
 package com.tarento.walletService.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * Wallet information for a specific User
  */
+@Entity
+@Table(name = "wallet")
 public class WalletInfo {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @JsonProperty("id")
     private String id = null;
 
-    @JsonProperty("user_wallet_id")
-    private String userWalletId = null;
-
+    @Column(name = "expiry_date")
     @JsonProperty("expiry_date")
     private Long expiryDate = null;
 
+    @Column(name = "number_of_coins")
     @JsonProperty("number_of_coins")
     private Integer numberOfCoins = null;
 
+    @Column(name = "created_by")
     @JsonProperty("created_by")
     private String createdBy = null;
 
+    @Column(name = "creation_time")
     @JsonProperty("creation_time")
     private Long creationTime = null;
 
+    @Column(name = "updated_by")
     @JsonProperty("updated_by")
     private String updatedBy = null;
 
+    public UserWallet getUser_walletInfo() {
+        return userWalletInfo;
+    }
+
+    public void setUser_walletInfo(UserWallet user_walletInfo) {
+        this.userWalletInfo = user_walletInfo;
+    }
+
+    @Column(name = "updated_time")
     @JsonProperty("updation_time")
     private Long updationTime = null;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_wallet_id", referencedColumnName = "id", nullable = false)
+    @JsonBackReference
+    @JsonProperty("user_walletInfo")
+    private UserWallet userWalletInfo;
+
 
     /**
      * Auto Generated Primary Key Id
@@ -45,20 +72,6 @@ public class WalletInfo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-
-    /**
-     * Reference to Primary Key Id of User_Wallet entry
-     *
-     * @return userWalletId
-     **/
-    public String getUserWalletId() {
-        return userWalletId;
-    }
-
-    public void setUserWalletId(String userWalletId) {
-        this.userWalletId = userWalletId;
     }
 
     public WalletInfo expiryDate(Long expiryDate) {
@@ -149,6 +162,14 @@ public class WalletInfo {
         this.updationTime = updationTime;
     }
 
+    public UserWallet getUserWalletInfo() {
+        return userWalletInfo;
+    }
+
+    public void setUserWalletInfo(UserWallet userWalletInfo) {
+        this.userWalletInfo = userWalletInfo;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -159,7 +180,7 @@ public class WalletInfo {
         }
         WalletInfo walletInfo = (WalletInfo) o;
         return Objects.equals(this.id, walletInfo.id) &&
-                Objects.equals(this.userWalletId, walletInfo.userWalletId) &&
+                Objects.equals(this.userWalletInfo, walletInfo.userWalletInfo) &&
                 Objects.equals(this.expiryDate, walletInfo.expiryDate) &&
                 Objects.equals(this.numberOfCoins, walletInfo.numberOfCoins) &&
                 Objects.equals(this.createdBy, walletInfo.createdBy) &&
@@ -170,7 +191,7 @@ public class WalletInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userWalletId, expiryDate, numberOfCoins, createdBy, creationTime, updatedBy, updationTime);
+        return Objects.hash(id, userWalletInfo, expiryDate, numberOfCoins, createdBy, creationTime, updatedBy, updationTime);
     }
 
 
@@ -180,7 +201,7 @@ public class WalletInfo {
         sb.append("class WalletInfo {\n");
 
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    userWalletId: ").append(toIndentedString(userWalletId)).append("\n");
+        sb.append("    userWalletId: ").append(toIndentedString(userWalletInfo)).append("\n");
         sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
         sb.append("    numberOfCoins: ").append(toIndentedString(numberOfCoins)).append("\n");
         sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
