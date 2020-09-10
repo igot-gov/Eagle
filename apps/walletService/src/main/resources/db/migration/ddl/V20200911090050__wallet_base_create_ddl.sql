@@ -1,4 +1,3 @@
-CREATE DATABASE wallet_service;
 CREATE TABLE IF NOT EXISTS user_wallet
 (
   id character varying(64) NOT NULL,
@@ -6,6 +5,7 @@ CREATE TABLE IF NOT EXISTS user_wallet
   wallet_type character varying(256) NOT NULL,
   created_by character varying(64),
   creation_time bigint,
+  UNIQUE (wid, wallet_type),
   CONSTRAINT user_wallet_pkey PRIMARY KEY (id)
 );
 
