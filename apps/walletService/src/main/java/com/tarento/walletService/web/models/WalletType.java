@@ -5,7 +5,8 @@ package com.tarento.walletService.web.models;
  */
 public enum WalletType {
     DEPARTMENT("Department"),
-    USER("User");
+    USER("User"),
+    MANAGER("Manager");
 
     private String value;
 
