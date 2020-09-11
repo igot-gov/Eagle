@@ -1,7 +1,15 @@
 @import 'ws-vars';
 
+.base-header {
+  margin-top: 40px;
+  margin-left: 5px;
+}
 .base-layout {
-  margin-top: 80px;
+  margin-top: 40px;
+}
+.mat-elevation-z {
+  margin-top: 38px;
+  border-radius: 8px;
 }
 .cohorts-head {
   padding: $size-xs $size-l;
