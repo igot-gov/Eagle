@@ -70,6 +70,9 @@ public class AndFilters implements Serializable {
     private List<String> authoringDisabled = Collections.emptyList();
     private List<String> isMetaEditingDisabled = Collections.emptyList();
     private List<String> isContentEditingDisabled = Collections.emptyList();
+    private List<String> license = Collections.emptyList();
+    private List<String> priceCurrency = Collections.emptyList();
+    private List<Double> priceValue = Collections.emptyList();
 
 //    @AssertTrue(message = "Can be applied only if " + SearchConstants.FILTER_CONTENT_TYPE_FIELD_KEY + " has " + SearchConstants.RESOURCE)
 //    private boolean isResourceType() {
@@ -392,5 +395,29 @@ public class AndFilters implements Serializable {
 
     public void setIsContentEditingDisabled(List<String> isContentEditingDisabled) {
         this.isContentEditingDisabled = isContentEditingDisabled;
+    }
+
+    public List<String> getLicense() {
+        return license;
+    }
+
+    public void setLicense(List<String> license) {
+        this.license = license;
+    }
+
+    public List<String> getPriceCurrency() {
+        return priceCurrency;
+    }
+
+    public void setPriceCurrency(List<String> priceCurrency) {
+        this.priceCurrency = priceCurrency;
+    }
+
+    public List<Double> getPriceValue() {
+        return priceValue;
+    }
+
+    public void setPriceValue(List<Double> priceValue) {
+        this.priceValue = priceValue;
     }
 }
