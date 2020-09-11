@@ -1,16 +1,22 @@
-package com.tarento.walletService.web.models;
+package com.tarento.walletService.web.models.communication;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tarento.walletService.web.models.Error;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
  * test
  */
-public class ResponseInfo {
+public class ErrorResponse {
     /**
-     * Gets or Sets status
+     * status of request processing
      */
     public enum StatusEnum {
-        SUCCESS("SUCCESS"),
+        COMPLETED("COMPLETED"),
+        ACCEPTED("ACCEPTED"),
         FAILED("FAILED");
 
         private String value;
@@ -38,15 +44,19 @@ public class ResponseInfo {
         }
     }
 
+    @JsonProperty("status")
     private StatusEnum status = null;
 
-    public ResponseInfo status(StatusEnum status) {
+    @JsonProperty("Errors")
+    private List<Error> errors = null;
+
+    public ErrorResponse status(StatusEnum status) {
         this.status = status;
         return this;
     }
 
     /**
-     * Get status
+     * status of request processing
      *
      * @return status
      **/
@@ -58,6 +68,32 @@ public class ResponseInfo {
         this.status = status;
     }
 
+    public ErrorResponse errors(List<Error> errors) {
+        this.errors = errors;
+        return this;
+    }
+
+    public ErrorResponse addErrorsItem(Error errorsItem) {
+        if (this.errors == null) {
+            this.errors = new ArrayList<Error>();
+        }
+        this.errors.add(errorsItem);
+        return this;
+    }
+
+    /**
+     * Get errors
+     *
+     * @return errors
+     **/
+    public List<Error> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<Error> errors) {
+        this.errors = errors;
+    }
+
 
     @Override
     public boolean equals(java.lang.Object o) {
@@ -67,22 +103,24 @@ public class ResponseInfo {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        ResponseInfo responseInfo = (ResponseInfo) o;
-        return Objects.equals(this.status, responseInfo.status);
+        ErrorResponse errorResponse = (ErrorResponse) o;
+        return Objects.equals(this.status, errorResponse.status) &&
+                Objects.equals(this.errors, errorResponse.errors);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(status);
+        return Objects.hash(status, errors);
     }
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ResponseInfo {\n");
+        sb.append("class ErrorResponse {\n");
 
         sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    errors: ").append(toIndentedString(errors)).append("\n");
         sb.append("}");
         return sb.toString();
     }

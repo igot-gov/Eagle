@@ -1,4 +1,4 @@
-package com.tarento.walletService.web.models;
+package com.tarento.walletService.web.models.communication;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

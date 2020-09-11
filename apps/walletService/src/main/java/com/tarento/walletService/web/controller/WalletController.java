@@ -1,23 +1,21 @@
 package com.tarento.walletService.web.controller;
 
-import java.util.List;
-
+import com.tarento.walletService.service.UserCoinService;
+import com.tarento.walletService.service.WalletLedgerService;
+import com.tarento.walletService.web.models.WalletLedger;
+import com.tarento.walletService.web.models.WalletLedgerResponse;
+import com.tarento.walletService.web.models.WalletType;
+import com.tarento.walletService.web.models.communication.RequestInfo;
+import com.tarento.walletService.web.models.communication.UserCoinRequestInfo;
+import com.tarento.walletService.web.models.communication.UserCoinResponseInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.tarento.walletService.service.WalletLedgerService;
-import com.tarento.walletService.web.models.RequestInfo;
-import com.tarento.walletService.web.models.WalletLedger;
-import com.tarento.walletService.web.models.WalletLedgerResponse;
-import com.tarento.walletService.web.models.WalletType;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/")
@@ -26,6 +24,9 @@ public class WalletController {
 
 	@Autowired
 	private WalletLedgerService ledgerService;
+
+	@Autowired
+	private UserCoinService userCoinService;
 
 	@RequestMapping(value = "/ledgerOfCoins", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<WalletLedgerResponse> ledgerOfCoins(@RequestBody RequestInfo requestInfo,
@@ -37,7 +38,12 @@ public class WalletController {
 		// TODO - Need to call service layer and construct the response object properly.
 		List<WalletLedger> walletLedger = ledgerService.getWalletLedgerDetails(wids.get(0),
 				WalletType.fromValue("Manager"), fromDate, toDate);
-
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/coins", produces = "application/json")
+	public ResponseEntity<List<UserCoinResponseInfo>> getUsersCoin(@RequestHeader("wid") String wid,
+																   @RequestBody UserCoinRequestInfo userCoinRequestInfo) throws Exception {
+		return new ResponseEntity<>(userCoinService.getUsersCoins(wid, userCoinRequestInfo), HttpStatus.OK);
 	}
 }

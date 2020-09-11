@@ -1,6 +1,7 @@
 package com.tarento.walletService.web.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tarento.walletService.web.models.communication.ResponseInfo;
 
 import java.util.ArrayList;
 import java.util.List;
