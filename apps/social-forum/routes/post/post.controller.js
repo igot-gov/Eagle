@@ -573,6 +573,236 @@ function shouldFilter(params, key, value, shouldComma) {
   }
   return params;
 }
+//to fetch the timeline for discussion
+async function discussList(request, pgNo, pgSize) {
+  try {
+    let result = {}
+    let hitCount = 0
+    let newDataCount = 0
+    let idsList = []
+    let timelineContent = []
+    let followData = {}
+    let threadcontributorsList = []
+    let accessPathsList = []
+    estype = "threadType"
+    esindex = "threadIndex"
+    estemplate = "threadTimelineTemplate"
+
+    let pageNo = pgNo * pgSize
+    accessPathsList =await timelineUtilServices.getAccessPaths(request.userId,request.rootOrg)
+
+    let userId = request['userId']
+    let rootOrg = request['rootOrg']
+    let org = request['org']
+    let params = {}
+    params['sizeValue'] = pgSize
+    params['fromValue'] = pageNo
+    params['sortField'] = "dtLastModified"
+    params['sortOrder'] = "desc"
+    params['rootOrgValue'] = request['rootOrg']
+    params['orgValue'] = request['org']
+    params['mustfilterdtLastModified'] = true
+    params['mustfilterdtLastModifiedgteValue'] = 0
+    params['mustfilterdtLastModifiedltValue'] = request['sessionId']
+    params['mustfilteraccessPathsValue'] = accessPathsList
+    if (request['postKind'] != "") {
+      params['mustfilterpostKind'] = true
+      params['mustfilterpostKindValue'] = request['postKind']
+    }
+
+    if (request['type'] != 'myDrafts') {
+      params = mustFilter(params, 'status', ['Active'])
+    }
+    // if(request['type'] == 'discussionForum'){
+    //   params['mustfiltersourceid'] = true
+    //   params['']
+    // }
+
+    /**
+     * type =
+     * all => get all the active data w.r.t current timeline
+     * myTimeline => get all active data ,where user have contributed,tags followed,persons followed, groups part of ,posted to user
+     * people => get all active data contributed by people user follow
+     * tags => get all active data tagged to tags user follow
+     * groups => get all data posted to me and groups iam part of ,currently no groups
+     * unanswered => get all questions where replycount=0
+     * mydraft => get all my contents where the status is draft
+     * myContributions =>get all thread where the user id is present in threadcontributors
+     * myPublished => get all thread where user is the creator and status active
+     */
+    if (request['type'] == 'myTimeline') {
+      //activating the shouldfilter in mustfilter of es template
+      params['mustshouldfilter'] = true
+      //get following 
+
+      followquery = "select type,targetid from bodhi.follow_by_sourceid where sourceid = ? and status='follow' and root_org = ? and org =?;"
+      let result = await cassDb.executeQuery(followquery, [userId, rootOrg, org])
+      if (result.rowLength > 0) {
+        result.rows.forEach(element => {
+          console.log(element)
+          value = []
+          if (element['type'] in followData) {
+            value = followData[element['type']]
+          }
+          value.push(element['targetid'].toString())
+          followData[element['type']] = value
+        });
+      }
+
+      if ("person" in followData) {
+        for (let i = 0; i < followData['person'].length; i++) {
+          threadcontributorsList.push(followData['person'][i])
+        }
+      }
+      threadcontributorsList.push(userId)
+      params = shouldFilter(params, 'threadContributors', threadcontributorsList, true)
+      //console.log(threadcontributorsList)
+      //getting accessPaths of user
+
+
+      //tags to be added
+      if ("tags" in followData) {
+        params = shouldFilter(params, 'tags', followData['tags'], true)
+      }
+    }
+    else if (request['type'] == "people") {
+      //get followings from cassandra
+      followquery = "select targetid from bodhi.follow_by_sourceid where sourceid = ? and status='follow' and type='person' and root_org = ? and org =?;"
+      let result = await cassDb.executeQuery(followquery, [userId, rootOrg, org])
+      if (result.rowLength > 0) {
+        result.rows.forEach(element => {
+          threadcontributorsList.push(element['targetid'].toString())
+        });
+        params = mustFilter(params, 'threadContributors', threadcontributorsList)
+      }
+      else {
+        return 'You have not yet followed any one!!'
+      }
+    }
+    else if (request['type'] == "tags") {
+      //if there is a searchWord in the request body ,it means the threads associated with that searchWord should be returned
+      //get followings from cassandra
+      let tagsList = []
+      if(request.hasOwnProperty('searchWord')==true && request.searchWord.length>0){
+        tagsList = request.searchWord
+        params = mustFilter(params, 'tags', tagsList)
+      }
+      else{
+        followquery = "select targetid from bodhi.follow_by_sourceid where sourceid = ? and status='follow' and type='tags' and root_org = ? and org =?;"
+        let result = await cassDb.executeQuery(followquery, [userId, rootOrg, org])
+        if (result.rowLength > 0) {
+          result.rows.forEach(element => {
+            tagsList.push(element['targetid'].toString())
+          });
+          params = mustFilter(params, 'tags', tagsList)
+        }
+        else {
+          return 'You have not yet followed any tags!!'
+        }
+      }
+      
+    }
+    else if (request['type'] == "groups") {
+      //get followings from cassandra
+      let groupsList = []
+      groupsList.push(userId)
+      followquery = "select targetid from bodhi.follow_by_sourceid where sourceid = ? and status='follow' and type='groups' and root_org = ? and org =?;"
+      let result = await cassDb.executeQuery(followquery, [userId, rootOrg, org])
+      if (result.rowLength > 0) {
+        result.rows.forEach(element => {
+          groupsList.push(element['targetid'].toString())
+        });
+      }
+      // else{
+      //   return 'You have not yet part of any groups!!'
+      // }
+    }
+    else if (request['type'] == 'unanswered') {
+      params = mustFilter(params, 'replyCount', 0)
+    }
+    else if (request['type'] == 'myDrafts') {
+      threadcontributorsList.push(userId)
+      params = mustFilter(params, 'postCreator', threadcontributorsList)
+      params = mustFilter(params, 'status', ['Draft'])
+      estype = "postType"
+      esindex = "postIndex"
+      estemplate = "postTemplate"
+    }
+    else if(request['type'] == 'hashTags'){
+      //threads based on hashtags
+      //`TODO: Check if searchWord check is there
+      params = mustFilter(params,'hashTags',request.searchWord)
+    }
+    if(request['type'] == 'discussionForum'){
+      params['mustfiltersourceid'] = true
+      params['mustfiltersourceidValue'] = [request['source']['id']]
+      params['mustfiltersourcename'] = true
+      params['mustfiltersourcenameValue'] = [request['source']['name']]
+    }
+    else{
+      params['mustfiltersourcename'] = true
+      params['mustfiltersourcenameValue'] = ["Social"]
+    }
+
+    console.log(params)
+    let timelineResult = await esDb.templateSearch(params, estype, esindex, estemplate)
+    result_Hits = timelineResult["hits"]
+    hitCount = 0
+    if (result_Hits["total"] > 0 && result_Hits['hits'].length>0) {
+      hitCount = result_Hits["total"]
+      sourceData = result_Hits["hits"]
+      for (let data of sourceData) {
+        data = data['_source']
+        idsList.push(data["id"])
+        timelineContent.push(data)
+        if (request['type'] != 'myDrafts') {
+          latestReply = data["latestReply"]
+          if (Object.keys(latestReply).length) {
+            idsList.push(latestReply["id"])
+          }
+        }
+
+      }
+    }
+
+    params['mustfilterdtLastModifiedgteValue'] = request['sessionId']
+    params['mustfilterdtLastModifiedltValue'] = Date.now()
+    //console.log(params)
+    let newDataResult = await esDb.templateSearch(params, estype, esindex, estemplate)
+    newDataCount = newDataResult["hits"]["total"]
+    
+    if(idsList.length>0 && request['type'] != 'myDrafts'){
+      activityObject = {
+        userId: request['userId'],
+        rootOrg: request['rootOrg'],
+        org: request['org'],
+        postId: idsList
+      }
+  
+      let activityResult = await timelineUtilServices.fetchActivity(activityObject)
+      timelineContent.forEach(element => {
+        element.activity = activityResult.get(element['id'])
+        latestReply = element['latestReply']
+        latestReply.activity = activityResult.get(latestReply['id'])
+        element.latestReply = latestReply
+      });
+    }
+
+    result = {
+      "hits": hitCount,
+      "result": timelineContent,
+      "sessionId": request['sessionId'],
+      "newDataCount": newDataCount,
+    }
+    return result
+
+
+  } catch (error) {
+    log.error('error', JSON.stringify(error))
+    throw error.toString()
+  }
+}
+
 
 //to fetch the timeline
 async function timeline(request, pgNo, pgSize) {
@@ -1255,6 +1485,7 @@ async function timelinev2(request,pgNo,pgSize){
 
 module.exports = {
   viewConversation,
+  discussList,
   timeline,
   tagsAutocomplete,
   validateAuthor,

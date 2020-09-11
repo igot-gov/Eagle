@@ -90,7 +90,7 @@
       "url": "/app/info/about",
       "shortName": "About"
     },
-    "feature_discuss":{
+    "feature_discuss": {
       "accessKey": "D",
       "icon": "forum",
       "iconType": "mat-icon",
@@ -101,7 +101,7 @@
         "discuss",
         "discussion forum"
       ],
-      "name": "Descuss",
+      "name": "Discuss",
       "permission": [
         "ABOUT_US"
       ],
@@ -111,7 +111,7 @@
       "url": "/app/discuss",
       "shortName": "Discuss"
     },
-    "feature_learn":{
+    "feature_learn": {
       "accessKey": "L",
       "icon": "school",
       "iconType": "mat-icon",
@@ -130,7 +130,7 @@
       "url": "/page/learn",
       "shortName": "Learn"
     },
-    "feature_network":{
+    "feature_network": {
       "accessKey": "N",
       "icon": "group",
       "iconType": "mat-icon",
