@@ -1,38 +1,19 @@
-* {
-  box-sizing: border-box;
-}
-main,
-div {
-  display: flex;
-  padding: 1rem;
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.flex-3 {
+  flex: 3;
 }
 
-.desktop {
-  flex-direction: column;
-  flex-wrap: wrap;
-  height: 800px;
-  width: 100%;
-  overflow-x: scroll;
-}
+.flex-update {
+  flex-direction: row;
 
-div {
-  flex: 1;
-}
-div.first-part {
-  flex: 0 0 100%;
-  width: 60%;
-}
-
-div.second-part {
-  width: 40%;
-}
-
-@media (max-width: 480px) {
-  .desktop div {
-    flex: 1;
-    width: 100%;
+  @include breakpoint-xs {
+    flex-direction: row;
   }
-  div[first-part] {
-    flex: 5;
+
+  @include breakpoint-s {
+    flex-direction: row;
   }
 }
