@@ -39,6 +39,8 @@ public class SearchConstantsv6 {
 	public static final String FILTER_CONTENT_TYPE_FIELD_KEY = "contentType";
 	public static final String FILTER_FILE_TYPE_FIELD_KEY = "fileType";
 	public static final String FILTER_DURATION_FIELD_KEY = "duration";
+	public static final String FILTER_PRICE_RANGE_FIELD_KEY = "priceRange";
+
 	public static final String FILTER_COMPLEXITY_LEVEL_FIELD_KEY = "complexityLevel";
 	public static final String FILTER_CATALOG_PATHS_FIELD_KEY = "catalogPaths";
 	public static final String FILTER_LAST_UPDATED_ON_FIELD_KEY = "lastUpdatedOn";

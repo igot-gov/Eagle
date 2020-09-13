@@ -344,6 +344,7 @@ class MultiLingualIntegratedSearchServicev6 {
                         filtersGroupMap.put(SearchConstantsv6.TEMPLATE_FILTER_PREFIX + templateFilterPrefix +  capitalizedName, true);
                     }
                     break;
+                case SearchConstantsv6.FILTER_PRICE_RANGE_FIELD_KEY:
                 case SearchConstantsv6.FILTER_DURATION_FIELD_KEY:
                     Object[] data = value.toArray();
                     int size = data.length;
@@ -351,7 +352,7 @@ class MultiLingualIntegratedSearchServicev6 {
                     for (int i = 0; i < size; i++) {
                         Long[] range = getDurationRangeArray(String.valueOf(data[i]));
                         if (range == null) {
-                            throw new BadRequestException("DURATION RANGE INVALID");
+                            throw new BadRequestException("DURATION/PRICE RANGE INVALID");
                         }
                         Map<String, Object> tempMap = new HashMap<>();
                         tempMap.put(SearchConstantsv6.TEMPLATE_FILTER_PREFIX + templateFilterPrefix +  capitalizedName + "ItemGte", range[0]);
