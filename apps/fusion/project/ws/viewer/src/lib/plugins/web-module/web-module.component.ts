@@ -392,7 +392,7 @@ export class WebModuleComponent implements OnInit, OnChanges, OnDestroy {
           document.body.classList.add('app-background', '${theme.className}', 'custom-scroll-small');
           <!--  for(var i=0; i < document.querySelectorAll("[style]").length; i++ ) {
             document.querySelectorAll("[style]")[i].setAttribute('style', null);
-                 } -->
+                } -->
           for(var i=0; i < document.querySelectorAll("pre").length; i++ ) {
             document.querySelectorAll("pre")[i].classList.add('prettyprint');
             document.querySelectorAll("pre")[i].setAttribute("id", "codepane"+i);

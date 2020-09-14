@@ -33,7 +33,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { UserProfileService } from './services/user-profile.service'
 import { LoaderService } from '@ws/author/src/public-api'
 
-
 @NgModule({
   declarations: [
     UserProfileComponent,

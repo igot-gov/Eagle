@@ -8,5 +8,5 @@ describe('TitleTagService', () => {
   it('should be created', () => {
     const service: TitleTagService = TestBed.get(TitleTagService)
     expect(service).toBeTruthy()
-  });
-});
+  })
+})
