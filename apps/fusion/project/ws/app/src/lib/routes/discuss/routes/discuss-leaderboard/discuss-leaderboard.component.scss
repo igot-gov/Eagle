@@ -1,0 +1,23 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-update {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: row;
+  }
+
+  @include breakpoint-s {
+    flex-direction: row;
+  }
+}

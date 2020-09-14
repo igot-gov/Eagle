@@ -77,6 +77,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/route-discuss.module').then(u => u.RouteDiscussModule),
     canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'discuss',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'app/gamification',

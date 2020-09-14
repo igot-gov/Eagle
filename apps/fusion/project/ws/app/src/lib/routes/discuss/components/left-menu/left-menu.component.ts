@@ -1,14 +1,36 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
+// import { BreakpointObserver } from '@angular/cdk/layout'
+// import { DomSanitizer } from '@angular/platform-browser'
+// import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
+import { ActivatedRoute } from '@angular/router'
+import { Subscription } from 'rxjs'
 
 @Component({
   selector: 'app-discuss-left-menu',
   templateUrl: './left-menu.component.html',
   styleUrls: ['./left-menu.component.scss'],
 })
-export class LeftMenuComponent implements OnInit {
-  items = ['1', '2', '3', '4', '5']
+export class LeftMenuComponent implements OnInit, OnDestroy {
+  // tabs: any = []
+  tabsData: any = []
+  private tabs: Subscription | null = null
+  constructor(
+    // private breakpointObserver: BreakpointObserver,
+    // private domSanitizer: DomSanitizer,
+    // private configSvc: ConfigurationsService,
+    private activateRoute: ActivatedRoute,
+  ) { }
+
   ngOnInit(): void {
-
+    this.tabs = this.activateRoute.data.subscribe(data => {
+      if (data && data.pageData) {
+        this.tabsData = data.pageData.data.tabs || []
+      }
+    })
   }
-
+  ngOnDestroy() {
+    if (this.tabs) {
+      this.tabs.unsubscribe()
+    }
+  }
 }
