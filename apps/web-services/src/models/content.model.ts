@@ -60,6 +60,7 @@ export interface IContent {
   learningMode?: TLearningMode
   learningObjective: string
   learningTrack?: string
+  license: string
   locale: string
   me_totalSessionsCount: number
   mimeType: EMimeTypes
@@ -73,6 +74,7 @@ export interface IContent {
   postContents?: IPrePostContent[]
   preContents?: IPrePostContent[]
   preRequisites: string
+  price: IPrice
   proctorUrl?: string
   progress?: number
   recentCertificationAttemptScore?: number
@@ -211,6 +213,11 @@ export interface IContact {
   id: string
   name: string
   email: string
+}
+
+export interface IPrice {
+  currency: string
+  value: number
 }
 
 export interface IContinueLearningResponse {
