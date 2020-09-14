@@ -1,0 +1,46 @@
+{
+  "name": "hierarchy-service",
+  "version": "1.0.0",
+  "description": "File server for bodhi",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "mocha -R spec test/**/*.spec.js --exit --reporter mochawesome --reporter-options reportDir=D:/MochaReports/lex_content_service",
+    "start": "node server/cluster.js start",
+    "docs": "apidoc -e node_modules/ -o C:/Users/nagasai_govula/Desktop/apidocs",
+    "security-scan": "node ./scripts/sonar.js"
+  },
+  "author": "nagasai_govula",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cassandra-driver": "3.5.0",
+    "cls-hooked": "^4.2.2",
+    "cls-rtracer": "^1.4.0",
+    "compression": "^1.7.4",
+    "elasticsearch": "^16.5.0",
+    "express": "^4.16.2",
+    "express-favicon": "^2.0.1",
+    "express-http-proxy": "^1.2.0",
+    "express-session": "^1.15.6",
+    "flat-cache": "^2.0.1",
+    "fs-extra": "^5.0.0",
+    "helmet": "^3.21.2",
+    "helmet-csp": "^2.9.4",
+    "morgan": "^1.9.1",
+    "properties-reader": "0.0.16",
+    "request": "^2.88.0",
+    "underscore": "^1.8.3",
+    "uuid": "^3.1.0",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.11.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^4.1.0",
+    "mochawesome": "^4.1.0",
+    "really-need": "^1.9.2",
+    "sonarqube-scanner": "^2.4.0",
+    "supertest": "^3.0.0"
+  }
+}

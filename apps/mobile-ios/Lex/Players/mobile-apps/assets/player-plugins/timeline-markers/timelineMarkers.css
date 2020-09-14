@@ -1,0 +1,16 @@
+
+        .azuremediaplayer {
+            position: relative;
+        }
+        .amp-timeline-marker {
+            position: absolute;
+            background-color: #ffd800;
+            width: 7px;
+            height: auto;
+            /*border: solid 2px #3c454f;*/
+        }
+ 
+        .vjs-control .vjs-menu {
+            z-index: 1000 !important;
+        }
+      

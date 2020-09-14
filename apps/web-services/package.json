@@ -17,7 +17,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "Sujeet Kumar Jaiswal<Sujeet_Jaiswal@infosys.com>",
+  "author": "author",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",

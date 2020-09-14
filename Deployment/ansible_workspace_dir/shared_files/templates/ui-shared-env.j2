@@ -70,6 +70,9 @@ KEYCLOAK_ADMIN_PASSWORD={{ keycloak_password }}
 KEYCLOAK_ADMIN_USERNAME={{ keycloak_username }}
 KC_NEW_USER_DEFAULT_PWD={{ keycloak_new_user_def_pwd }}
 
+DEFAULT_ORG={{ default_org }}
+DEFAULT_ROOT_ORG={{ default_root_org }}
+
 ## Database configurations ##
 # Elasticsearch configuration
 ES_BASE=http://{{ elasticsearch_host }}:{{ elasticsearch_http_port }}
@@ -91,6 +94,7 @@ PID_API_BASE={{ pid_api_base }}
 NOTIFICATIONS_API_BASE={{ notification_api_base }}
 
 # Lex Core split
+PREFERENCE_API_BASE={{ lms_core_cassandra_api_base }}
 HIERARCHY_API_BASE={{ lms_core_high_api_base }}
 CONTENT_SOURCE_API_BASE={{ lms_core_cassandra_api_base }}
 GOALS_API_BASE={{ lms_core_api_base }}

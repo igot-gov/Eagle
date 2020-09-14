@@ -1,0 +1,112 @@
+lex_23168078451736867000
+{lex_23168078451736867000={size= is not valid }}
+lex_17086167202950840000
+{lex_32949306101813256000={tags= does not contain category or track as a tag }, lex_5866189189266830000={tags= does not contain category or track as a tag }, lex_17086167202950840000={tags= does not contain category or track as a tag }, lex_27532971941295604000={tags= does not contain category or track as a tag }}
+lex_26240989463726770000
+{lex_15486402368658495000={tags= does not contain category or track as a tag }, lex_18636574342866498000={size= is not valid }, lex_9800513048211173000={size= is not valid }, lex_7582971348748637000={size= is not valid , tags= does not contain category or track as a tag }}
+lex_3434165716151020500
+{lex_3434165716151020500={tags= does not contain category or track as a tag }}
+lex_auth_01251533598750310435
+{lex_auth_01251533598750310435={creatorContacts= is empty or null , downloadurl= is empty or not accessible}}
+lex_auth_012498527497175040226
+{lex_auth_012498527497175040226={downloadurl= is empty or not accessible}}
+lex_10050617260631388000
+{lex_10050617260631388000={tags= does not contain category or track as a tag }}
+lex_1998123136632058442079
+{lex_1998123136632058442079={learningObjective= is not clear, kindly elaborate }}
+lex_21206991691615126000
+{lex_21206991691615126000={tags= does not contain category or track as a tag }, lex_5754720971482413000={tags= does not contain category or track as a tag }}
+lex_25329860120808080000
+{lex_25329860120808080000={tags= does not contain category or track as a tag }, lex_33284532507625087000={tags= does not contain category or track as a tag }}
+lex_9126356809856506000
+{lex_9126356809856506000={size= is not valid }}
+lex_2940551732965324868620
+{lex_2940551732965324868620={learningObjective= is not clear, kindly elaborate , resourceType= is not valid , tags= does not contain category or track as a tag }}
+lex_30501093233813440000
+{lex_30501093233813440000={tags= does not contain category or track as a tag }}
+lex_3274050247413342759218
+{lex_3274050247413342759218={learningObjective= is not clear, kindly elaborate }}
+lex_auth_01249611661672448070
+{lex_auth_01249611661672448070={downloadurl= is empty or not accessible}}
+lex_2893691140691032190972
+{lex_2893691140691032190972={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible}}
+lex_11924800850680965000
+{lex_11924800850680965000={tags= does not contain category or track as a tag }}
+lex_2966846864518546144201
+{lex_2966846864518546144201={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, keywords= length is small , learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible, resourceType= is not valid , tags= does not contain category or track as a tag }}
+lex_17381008502370281000
+{lex_17381008502370281000={tags= does not contain category or track as a tag }}
+lex_8379797443390301000
+{lex_23168078451736867000={size= is not valid }}
+lex_4202971590343499000
+{lex_4202971590343499000={tags= does not contain category or track as a tag }}
+lex_auth_01248204958729011233
+{lex_19045015658228195000={size= is not valid }, lex_23579172788492456000={size= is not valid }, lex_2225254594421289000={size= is not valid }, lex_25212608678909215000={size= is not valid }, lex_15269226660677538000={size= is not valid }, lex_26836321951538800000={size= is not valid }, lex_26726007179795366000={size= is not valid }, lex_23760127555891405000={size= is not valid }, lex_22147571913379615000={size= is not valid }, lex_28618390959664447000={size= is not valid }, lex_23537943506467103000={size= is not valid }, lex_33282273069659947000={size= is not valid }, lex_10131910003625906000={size= is not valid }, lex_20014180978866890000={size= is not valid }, lex_9251997249892407000={size= is not valid }, lex_1416330281002604300={Assessment or Assessment-key= not found }, lex_25482319753546334000={size= is not valid }, lex_4755957627866180000={size= is not valid }, lex_20609576672881880000={size= is not valid }, lex_17157245299629726000={size= is not valid }, lex_22722405281835102000={size= is not valid }, lex_15440839637333969000={size= is not valid }, lex_12149086766608771000={size= is not valid }, lex_1191758295167673900={size= is not valid }, lex_27405655198401376000={description= is not clear, kindly elaborate }, lex_14526030512018610000={size= is not valid }, lex_7639513908780586000={size= is not valid }, lex_7824750916392082000={size= is not valid }, lex_15332400308949768000={size= is not valid }, lex_4203666696532123000={hasAssessment= assessment found at last }, lex_15577280397880515000={size= is not valid }, lex_19636171230257290000={size= is not valid }, lex_28497067054851633000={size= is not valid }, lex_6565095607576933000={size= is not valid }, lex_6007878648362788000={resourceType= is not valid }, lex_24641821912830386000={size= is not valid }}
+lex_2639766936197747428536
+{lex_2639766936197747428536={learningObjective= is not clear, kindly elaborate }}
+lex_12711001203061193000
+{lex_32596343813042140000={resourceType= is not valid }}
+lex_117466000566664400
+{lex_117466000566664400={tags= does not contain category or track as a tag }}
+lex_3391226445826399917211
+{lex_3391226445826399917211={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible, tags= does not contain category or track as a tag }}
+lex_29308079026492383000
+{lex_29308079026492383000={tags= does not contain category or track as a tag }}
+lex_1626111947505596562383
+{lex_1626111947505596562383={learningObjective= is not clear, kindly elaborate }}
+lex_3006624382451674545467
+{lex_3006624382451674545467={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible}}
+lex_13304591601691793000
+{lex_13304591601691793000={tags= does not contain category or track as a tag }}
+lex_2265129868401437200
+{lex_2265129868401437200={tags= does not contain category or track as a tag }, lex_6276875134925085000={tags= does not contain category or track as a tag }}
+lex_27697980739316912000
+{lex_31686026450825210000={Assessment or Assessment-key= not found }, lex_33486756470719934000={size= is not valid }}
+lex_11946498371505816000
+{lex_11946498371505816000={tags= does not contain category or track as a tag }}
+lex_33021671285427880000
+{lex_33021671285427880000={tags= does not contain category or track as a tag }}
+lex_1230607949071528149938
+{lex_1230607949071528149938={learningObjective= is not clear, kindly elaborate }}
+lex_18571157877652780000
+{lex_2040384152326550800={tags= does not contain category or track as a tag }, lex_13809264865234342000={tags= does not contain category or track as a tag }, lex_8372796507080130000={tags= does not contain category or track as a tag }, lex_18571157877652780000={tags= does not contain category or track as a tag }, lex_23767709943128570000={tags= does not contain category or track as a tag }}
+lex_3269512726205468700
+{lex_3269512726205468700={tags= does not contain category or track as a tag }}
+lex_15569583749165249000
+{lex_15569583749165249000={tags= does not contain category or track as a tag }, lex_14564534165761910000={resourceType= is not valid , tags= does not contain category or track as a tag }}
+lex_20310939703760224000
+{lex_22700516746087272000={tags= does not contain category or track as a tag }, lex_14639660103266105000={tags= does not contain category or track as a tag }, lex_21172200569412890000={tags= does not contain category or track as a tag }, lex_31391229549412184000={tags= does not contain category or track as a tag }, lex_22801021505123650000={tags= does not contain category or track as a tag }, lex_19169826952781870000={tags= does not contain category or track as a tag }, lex_33656965188830867000={tags= does not contain category or track as a tag }, lex_27224174797425060000={tags= does not contain category or track as a tag }, lex_4770317822008633000={tags= does not contain category or track as a tag }, lex_21948410076178477000={tags= does not contain category or track as a tag }, lex_7792235545711255000={tags= does not contain category or track as a tag }, lex_30611049609980006000={tags= does not contain category or track as a tag }, lex_5792124834469994000={tags= does not contain category or track as a tag }, lex_33334191070539956000={tags= does not contain category or track as a tag }, lex_29760610333681648000={tags= does not contain category or track as a tag }, lex_4203575907720337400={tags= does not contain category or track as a tag }, lex_26357515749920612000={tags= does not contain category or track as a tag }, lex_33586818815743510000={tags= does not contain category or track as a tag }, lex_16386684292118358000={tags= does not contain category or track as a tag }, lex_27864484862736010000={size= is not valid , tags= does not contain category or track as a tag }, lex_21117936109275260000={tags= does not contain category or track as a tag }, lex_2760103728836641000={tags= does not contain category or track as a tag }, lex_28437344953831790000={tags= does not contain category or track as a tag }, lex_20310939703760224000={tags= does not contain category or track as a tag }, lex_16733797452271956000={tags= does not contain category or track as a tag }, lex_6176007847178303000={tags= does not contain category or track as a tag }, lex_20247681284851646000={tags= does not contain category or track as a tag }, lex_29049637050080510000={tags= does not contain category or track as a tag }, lex_24197285975694880000={tags= does not contain category or track as a tag }, lex_21866901096270990000={tags= does not contain category or track as a tag }, lex_7523792097703778000={tags= does not contain category or track as a tag }, lex_18179551086129508000={tags= does not contain category or track as a tag }, lex_24850610162948497000={tags= does not contain category or track as a tag }, lex_2920146095985223000={tags= does not contain category or track as a tag }, lex_31723028782816498000={tags= does not contain category or track as a tag }, lex_17108974421912037000={tags= does not contain category or track as a tag }, lex_23851948279079633000={tags= does not contain category or track as a tag }, lex_713910902898133000={tags= does not contain category or track as a tag }, lex_828198812078029800={tags= does not contain category or track as a tag }, lex_10741390522074157000={tags= does not contain category or track as a tag }, lex_12356565165471850000={tags= does not contain category or track as a tag }, lex_16012723586570478000={tags= does not contain category or track as a tag }, lex_32531335209089094000={tags= does not contain category or track as a tag }, lex_33110688873116676000={tags= does not contain category or track as a tag }, lex_6614785288207015000={tags= does not contain category or track as a tag }, lex_20310242871054967000={tags= does not contain category or track as a tag }, lex_24304771134578205000={tags= does not contain category or track as a tag }, lex_16903067518788092000={tags= does not contain category or track as a tag }, lex_25451136028607017000={tags= does not contain category or track as a tag }, lex_12186644943240450000={tags= does not contain category or track as a tag }}
+lex_2507509478970873995331
+{lex_2507509478970873995331={learningObjective= is not clear, kindly elaborate }}
+do_2124119381874278401163
+{do_2124119381874278401163={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible}}
+lex_11683833709054490000
+{lex_11683833709054490000={resourceType= is not valid }}
+lex_2217809627016376793689
+{lex_2217809627016376793689={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible}}
+lex_3220746844613126260438
+{lex_3220746844613126260438={learningObjective= is not clear, kindly elaborate }}
+lex_2694692481790920142689
+{lex_2694692481790920142689={appIcon= is empty or not accessible, thumbnail= is empty or not accessible, learningObjective= is not clear, kindly elaborate , posterImage= is empty or not accessible}}
+lex_10839734335259420000
+{lex_10839734335259420000={tags= does not contain category or track as a tag }}
+lex_4528582233406372000
+{lex_1073993770654677000={size= is not valid }, lex_8194951097207487000={size= is not valid }, lex_29134244413310235000={size= is not valid }, lex_1000288157138672300={resourceType= is not valid }, lex_26309858814125183000={size= is not valid }, lex_8088789335671909000={size= is not valid }, lex_6208173169370004000={size= is not valid }, lex_30045587811515298000={size= is not valid }, lex_8848576659300814000={resourceType= is not valid }, lex_17499503970470916000={resourceType= is not valid }, lex_28160056795985870000={size= is not valid }, lex_19844651977893786000={size= is not valid }, lex_32308695590918150000={size= is not valid }, lex_11061060926940050000={size= is not valid }, lex_2589465606999964000={size= is not valid }}
+lex_14058967063474178000
+{lex_12529664628412197000={size= is not valid }}
+lex_18105543271019588000
+{lex_18105543271019588000={tags= does not contain category or track as a tag }}
+lex_2189297954108388401987
+{lex_2189297954108388401987={learningObjective= is not clear, kindly elaborate , tags= does not contain category or track as a tag }}
+lex_2772546583287114770638
+{lex_2772546583287114770638={learningObjective= is not clear, kindly elaborate , resourceType= is not valid , tags= does not contain category or track as a tag }}
+lex_22231570113113473000
+{lex_15709554200412447000={tags= does not contain category or track as a tag }, lex_11816331773082050000={tags= does not contain category or track as a tag }, lex_9956886628341254000={tags= does not contain category or track as a tag }, lex_14959838151898962000={tags= does not contain category or track as a tag }, lex_25542648310488100000={tags= does not contain category or track as a tag }, lex_14673975392753183000={tags= does not contain category or track as a tag }, lex_23836107288616354000={tags= does not contain category or track as a tag }, lex_15722534972093534000={tags= does not contain category or track as a tag }, lex_9858110560809683000={description= character length less than required , tags= does not contain category or track as a tag }, lex_30329354328931020000={tags= does not contain category or track as a tag }, lex_22231570113113473000={tags= does not contain category or track as a tag }, lex_22775022718099345000={tags= does not contain category or track as a tag }, lex_16526585615701025000={tags= does not contain category or track as a tag }, lex_5432115806795434000={tags= does not contain category or track as a tag }, lex_33020768946588650000={tags= does not contain category or track as a tag }, lex_10388921504918395000={tags= does not contain category or track as a tag }, lex_653201015879138300={tags= does not contain category or track as a tag }, lex_20432095087297310000={tags= does not contain category or track as a tag }, lex_17619319437092172000={tags= does not contain category or track as a tag }, lex_3423445272885195300={tags= does not contain category or track as a tag }, lex_16726630420212640000={tags= does not contain category or track as a tag }, lex_25518462929033957000={tags= does not contain category or track as a tag }, lex_7894942769706418000={tags= does not contain category or track as a tag }, lex_6535734136280485000={tags= does not contain category or track as a tag }, lex_16672482596297535000={tags= does not contain category or track as a tag }}
+lex_14431194473151750000
+{lex_32635162572062958000={resourceType= is not valid }, lex_11657933758010730000={resourceType= is not valid }, lex_28756225036109152000={resourceType= is not valid }}
+lex_9378957095714884887158
+{lex_9378957095714884887158={learningObjective= is not clear, kindly elaborate }}
+lex_1600059177692888705715
+{lex_1600059177692888705715={learningObjective= is not clear, kindly elaborate }}
+lex_2646774333617226165115
+{lex_2646774333617226165115={appIcon= is empty or not ac

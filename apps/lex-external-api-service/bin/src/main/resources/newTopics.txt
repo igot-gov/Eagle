@@ -1,0 +1,27 @@
+API Economy
+BI Modernization
+Big Data and Analytics
+Big Data Testing
+Business process management
+Cyber Security
+Data Monetization
+DevOps and Agile adoption in the enterprise
+Digital Factory/ADS 
+HANA BI Migration and Simplification
+HCM Cloud - SuccessFactors
+Internet of Things
+Mainframe Modernization
+Mobility Testing
+MS Dynamics – CRM
+Open Source Development and Migration
+Oracle Cloud Ecosystem
+Oracle Edge
+Oracle vertical stacks
+Product Cost Optimization
+Public Cloud workload migration 
+S/4 HANA Adoption
+Salesforce.com / Net Suite
+SDN - Software Defined Networks
+ServiceNow ESM Café
+UX Transformation – SAP Fiori
+Workload Transformation for the Cloud

@@ -1,0 +1,139 @@
+{
+  "timeLimit": 1800,
+  "questions": [{
+    "multiSelection": true,
+    "question": "<p style=\"color:#333333; font-family:Verdana; font-size:16px\">Which of the following are valid method declarations for interfaces in Java 8?</p>\n",
+    "questionId": "q2021_1",
+    "options": [{
+      "optionId": "q2021_1-a",
+      "text": "private void display();",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_1-b",
+      "text": "default void display() { }",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_1-c",
+      "text": "abstract void display();",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_1-d",
+      "text": "static void display();",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_1-e",
+      "text": "default void display();",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_1-f",
+      "text": "static void display() { }",
+      "isCorrect": true
+    }]
+  }, {
+    "multiSelection": true,
+    "question": "<p style=\"color:#333333; font-family:Verdana; font-size:16px\">Which of the following are valid try-catch blocks prior to Java 9?</p>\n",
+    "questionId": "q2021_2",
+    "options": [{
+      "optionId": "q2021_2-a",
+      "text": "<pre class=\"prettyprint\">try { }\ncatch(NullPointerException | ArrayIndexOutOfBoundsException e) { }",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_2-b",
+      "text": "<pre class=\"prettyprint\">try { }\ncatch(NullPointerException,  ArrayIndexOutOfBoundsException e) { }",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_2-c",
+      "text": "<pre class=\"prettyprint\">try(InputStream s = new FileInputStream(\"data.txt\")) { }\ncatch(NullPointerException | ArrayIndexOutOfBoundsException e) { }",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_2-d",
+      "text": "<pre class=\"prettyprint\">InputStream s = new FileInputStream(\"data.txt\");\ntry(s) { }\ncatch(NullPointerException | ArrayIndexOutOfBoundsException e) { }",
+      "isCorrect": false
+    }]
+  }, {
+    "multiSelection": true,
+    "question": "<p style=\"color:#333333; font-family:Verdana; font-size:16px\">Which of the following statements are true for the following switch statement?</p>\n\n<pre class=\"prettyprint\">\nswitch(gadget) {\n\tcase &quot;Mobile&quot;: System.out.println(&quot;Rs.5000 to 50000&quot;);\n\t\tbreak;\n\tcase &quot;iPad&quot;: System.out.println(&quot;Rs.10000 to 50000&quot;);\n\t\tbreak;\n\tcase &quot;Laptop&quot;: System.out.println(&quot;Rs.20000 to 50000&quot;);\n\t\tbreak;\n\tdefault: System.out.println(&quot;Not available&quot;);\n}\n</pre>\n",
+    "questionId": "q2021_3",
+    "options": [{
+      "optionId": "q2021_3-a",
+      "text": "It is a valid declaration prior to Java 7",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_3-b",
+      "text": "It is a valid declaration in Java 7 and above",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_3-c",
+      "text": "It is a valid declaration in Java 8 and above",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_3-d",
+      "text": "It is not a valid declaration",
+      "isCorrect": false
+    }]
+  }, {
+    "multiSelection": true,
+    "question": "<p style=\"color:#333333; font-family:Verdana; font-size:16px\">Which of the following declarations are true for Java 7 and above?</p>\n",
+    "questionId": "q2021_4",
+    "options": [{
+      "optionId": "q2021_4-a",
+      "text": "ArrayList<String> names = new ArrayList<String>();",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_4-b",
+      "text": "ArrayList<String> names = new ArrayList<>();",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_4-c",
+      "text": "ArrayList<> names = new ArrayList<String>();",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_4-d",
+      "text": "ArrayList<String> names = new ArrayList<String>;",
+      "isCorrect": false
+    }]
+  }, {
+    "multiSelection": false,
+    "question": "<p style=\"color:#333333; font-family:Verdana; font-size:16px\">What is the equivalent method reference for the given lambda expression?</p>\n\n<pre class=\"prettyprint\">\n(String s) -&gt; System.out.println(s);\n</pre>\n",
+    "questionId": "q2021_5",
+    "options": [{
+      "optionId": "q2021_5-a",
+      "text": "System::out::println",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_5-b",
+      "text": "System::out::println()",
+      "isCorrect": false
+    }, {
+      "optionId": "q2021_5-c",
+      "text": "System.out::println",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_5-d",
+      "text": "System.out::println()",
+      "isCorrect": false
+    }]
+  }, {
+    "multiSelection": true,
+    "question": "<p style=\"color:#333333; font-family:Verdana; font-size:16px\">Which of the following are true about classpath?</p>\n",
+    "questionId": "q2021_6",
+    "options": [{
+      "optionId": "q2021_6-a",
+      "text": "It is a parameter for the JVM or Java compiler set using the -classpath option",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_6-b",
+      "text": "It specifies the location of third-party libraries",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_6-c",
+      "text": "It specifies the location of user-defined classes",
+      "isCorrect": true
+    }, {
+      "optionId": "q2021_6-d",
+      "text": "It can be set using CLASSPATH environment variable",
+      "isCorrect": true
+    }]
+  }],
+  "isAssessment": false
+}
