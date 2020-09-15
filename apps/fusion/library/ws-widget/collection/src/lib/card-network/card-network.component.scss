@@ -1,8 +1,21 @@
 @import 'ws-vars';
 
 .base-header {
-  margin-top: 40px;
   margin-left: 5px;
+}
+.mat-grid-tile {
+  display: inline;
+  position: absolute;
+}
+h2 {
+  width: 98%;
+}
+mat-form-field {
+  width: 100%;
+}
+mat-grid-list {
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 .base-layout {
   margin-top: 40px;
