@@ -1,1 +1,17 @@
-DiscussAllComponent
+<div class="flex flex-1 flex-column">
+  <div class="flex flex-1 custom">
+    <div class="flex flex-1 items-center border discuss border-solid discuss-border ws-mat-primary-background-op100">
+      <div class="w-full discuss">
+        <span class="ml-4">Ask a question or post an idea</span>
+      </div>
+      <div class="discuss-home flex items-center justify-center cursor-pointer" (click)="start($event)">
+        Start discussion
+      </div>
+    </div>
+    <!-- <div class="text-box">Ask a question or post an idea</div>
+    <div class="buton">start discussion</div> -->
+  </div>
+  <div class="flex flex-1">
+    <app-dicuss-card [discuss]="data"></app-dicuss-card>
+  </div>
+</div>

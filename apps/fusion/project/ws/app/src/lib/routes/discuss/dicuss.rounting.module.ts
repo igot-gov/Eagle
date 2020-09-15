@@ -16,13 +16,12 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'all-discussions',
+        redirectTo: 'discussions',
       },
       {
-        path: 'all-discussions',
+        path: 'discussions',
         component: DiscussAllComponent,
       },
-
       {
         path: 'categories',
         component: DiscussCategoriesComponent,
@@ -43,8 +42,8 @@ const routes: Routes = [
         path: 'my-discussions',
         component: DiscussMyDiscussionsComponent,
       },
-    ]
-  }
+    ],
+  },
 ]
 
 @NgModule({

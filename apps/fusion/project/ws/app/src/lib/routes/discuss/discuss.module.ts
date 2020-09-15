@@ -14,11 +14,10 @@ import { RightMenuComponent } from './components/right-menu/right-menu.component
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
-import { MatIconModule, MatListModule } from '@angular/material'
+import { MatIconModule, MatListModule, MatFormFieldModule, MatDialogModule } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
-
-
+import { DiscussStartComponent } from './components/discuss-start/discuss-start.component'
 @NgModule({
   declarations: [
     DiscussComponent,
@@ -29,6 +28,7 @@ import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
     DiscussGroupsComponent,
     DiscussLeaderboardComponent,
     DiscussMyDiscussionsComponent,
+    DiscussStartComponent,
     DiscussTagsComponent,
     LeftMenuComponent,
     RightMenuComponent,
@@ -38,10 +38,15 @@ import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
     DiscussRoutingModule,
     MatGridListModule,
     MatExpansionModule,
+    MatFormFieldModule,
     MatDividerModule,
     MatIconModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    DiscussStartComponent,
   ],
 })
 export class DiscussModule {

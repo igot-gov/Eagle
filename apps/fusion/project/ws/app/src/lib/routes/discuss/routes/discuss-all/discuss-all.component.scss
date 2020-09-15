@@ -2,22 +2,55 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-.container-balanced {
-  @extend %page-center;
+.buton {
+  display: flex;
+  border: 1px solid;
+  flex: 1;
+  background: red;
+  align-content: center;
+  text-align: center;
 }
 
-.flex-3 {
+.text-box {
+  display: flex;
+  border: 1px solid;
   flex: 3;
+  align-content: center;
+  text-align: center;
 }
 
-.flex-update {
-  flex-direction: row;
+.custom {
+  height: 48px;
+  max-height: 48px;
+}
 
-  @include breakpoint-xs {
-    flex-direction: row;
+.discuss-border {
+  border-radius: 4px;
+  /*.75rem;*/
+  border: 1px solid #DEDFE0;
+  flex: 1;
+  // max-width: 500px;
+  /* border-color: #cecece;*/
+}
+
+.discuss .mat-form-field-wrapper {
+  padding-bottom: 0px;
+
+  .mat-form-field-infix {
+    border-top-width: 5px !important;
+    padding: 0px;
+    padding-bottom: 5px;
   }
 
-  @include breakpoint-s {
-    flex-direction: row;
-  }
+}
+
+
+.discuss-home {
+  background: #00A9F4 0% 0% no-repeat padding-box;
+  border-radius: 0px 4px 4px 0px;
+  padding: 13px 32px;
+  // text-decoration: underline;
+  /* flex: 1; */
+  min-width: fit-content;
+  margin: 0;
 }

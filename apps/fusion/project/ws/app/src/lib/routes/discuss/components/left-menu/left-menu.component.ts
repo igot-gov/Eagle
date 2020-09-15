@@ -4,6 +4,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 // import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { ActivatedRoute } from '@angular/router'
 import { Subscription } from 'rxjs'
+import { NSDiscussData } from '../../models/discuss.model'
 
 @Component({
   selector: 'app-discuss-left-menu',
@@ -12,7 +13,8 @@ import { Subscription } from 'rxjs'
 })
 export class LeftMenuComponent implements OnInit, OnDestroy {
   // tabs: any = []
-  tabsData: any = []
+  // tabs: any = []
+  tabsData!: NSDiscussData.IDiscussJsonData
   private tabs: Subscription | null = null
   constructor(
     // private breakpointObserver: BreakpointObserver,
