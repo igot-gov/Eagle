@@ -8,8 +8,8 @@
 }
 
 %page-center {
-  max-width: 1160px;
-  //800px;
+  // max-width: $page-center;
+  max-width: $max-width;
   margin-left: auto !important;
   margin-right: auto !important;
 }
