@@ -1,7 +1,7 @@
 <h2 class="base-header">NetWork</h2>
 <section *ngIf="enableFeature" class="base-layout">
   <mat-accordion multi>
-    <mat-expansion-panel class="mat-elevation-z" (opened)="true" hideToggle>
+    <mat-expansion-panel class="mat-elevation-z" [expanded]="true" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title i18n>New on IGOT Karmyogi</mat-panel-title>
       </mat-expansion-panel-header>
@@ -16,12 +16,13 @@
             </ng-container>
           </div>
         </div>
-        <!-- <div class="text-center">
-          <mat-spinner [strokeWidth]="3" [diameter]="40" class="display-inline-block"></mat-spinner>
-        </div> -->
+        <div class="text-center">
+          <mat-spinner [strokeWidth]="3" *ngIf="newUserArray.length ===0" [diameter]="40" class="display-inline-block">
+          </mat-spinner>
+        </div>
       </ng-template>
     </mat-expansion-panel>
-    <mat-expansion-panel class="mat-elevation-z" (opened)="true" hideToggle>
+    <mat-expansion-panel class="mat-elevation-z" [expanded]="true" hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title i18n>People to Follow</mat-panel-title>
 
@@ -36,9 +37,10 @@
               [ngTemplateOutletContext]="{ user: cohort }"></ng-container>
           </div>
         </div>
-        <!-- <div class="text-center">
-          <mat-spinner [strokeWidth]="3" [diameter]="40" class="display-inline-block"></mat-spinner>
-        </div> -->
+        <div class="text-center">
+          <mat-spinner *ngIf="newUserArray.length ===0" [strokeWidth]="3" [diameter]="40" class="display-inline-block">
+          </mat-spinner>
+        </div>
       </ng-template>
     </mat-expansion-panel>
 
