@@ -15,6 +15,7 @@ import { knowledgeHubApi } from './khub'
 import { leaderBoardApi } from './leaderboard'
 import { navigatorApi } from './navigator'
 import { networkHubApi } from './network-hub'
+import { nodebbApi } from './nodebb/nodebb'
 import { recommendationApi } from './recommendation'
 import { scromApi } from './scrom'
 import { socialApi } from './social'
@@ -43,6 +44,7 @@ protectedApiV8.use('/khub', knowledgeHubApi)
 protectedApiV8.use('/leaderboard', leaderBoardApi)
 protectedApiV8.use('/navigator', navigatorApi)
 protectedApiV8.use('/networkHub', networkHubApi)
+protectedApiV8.use('/nodebb', nodebbApi)
 protectedApiV8.use('/recommendation', recommendationApi)
 protectedApiV8.use('/scrom', scromApi)
 protectedApiV8.use('/social', socialApi)
