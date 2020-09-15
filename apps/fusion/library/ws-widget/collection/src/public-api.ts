@@ -142,6 +142,7 @@ export * from './lib/_common/user-autocomplete/user-autocomplete.service'
 // common modules
 export * from './lib/_common/user-content-rating/user-content-rating.module'
 export * from './lib/_common/user-image/user-image.module'
+export * from './lib/_common/avatar-photo/avatar-photo.module'
 export * from './lib/_common/content-picker-v2/content-picker-v2.module'
 // constants
 export * from './lib/_constants/widget-content.constants'

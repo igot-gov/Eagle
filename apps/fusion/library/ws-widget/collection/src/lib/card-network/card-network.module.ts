@@ -5,7 +5,7 @@ import { HorizontalScrollerModule, PipeNameTransformModule } from '@ws-widget/ut
 import { CardNetWorkService } from './card-network.service'
 import { ActivityCardModule } from '../activity-card/activity-card.module'
 import { TourModule } from '../_common/tour-guide/tour-guide.module'
-import { UserImageModule } from '../_common/user-image/user-image.module'
+import { AvatarPhotoModule } from '../_common/avatar-photo/avatar-photo.module'
 import { CardNetworkComponent } from './card-network.component'
 import { ChallengeModule } from '../challenge/challenge.module'
 
@@ -13,7 +13,7 @@ import { ChallengeModule } from '../challenge/challenge.module'
   declarations: [CardNetworkComponent],
   imports: [
     CommonModule,
-    UserImageModule,
+    AvatarPhotoModule,
     MatButtonModule,
     MatChipsModule,
     MatDividerModule,

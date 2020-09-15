@@ -12,21 +12,18 @@ export class AvatarPhotoComponent implements OnInit {
 
   @Input()
   public name!: string
-  @Input() public size: string = 's'
-
-
-  public showInitials = false;
+  @Input() public size = 'm'
+  public showInitials = false
   public initials!: string
   public circleColor!: string
 
-
   private colors = [
-    // '#EB7181', // red
-    // '#468547', // green
-    // '#FFD558', // yellow
-    // '#3670B2', // blue
-    '#4E9E87'
-  ];
+    '#EB7181', // red
+    '#468547', // green
+    '#FFD558', // yellow
+    '#3670B2', // blue
+    '#4E9E87',
+  ]
 
   ngOnInit() {
 
@@ -41,22 +38,22 @@ export class AvatarPhotoComponent implements OnInit {
   }
 
   private createInititals(): void {
-    let initials = ""
+    let initials = ''
 
     for (let i = 0; i < this.name.length; i++) {
       if (this.name.charAt(i) === ' ') {
         continue
       }
 
-      if (this.name.charAt(i) === this.name.charAt(i).toUpperCase()) {
+      if (this.name.charAt(i) === this.name.charAt(i)) {
         initials += this.name.charAt(i)
 
-        if (initials.length == 2) {
+        if (initials.length === 2) {
           break
         }
       }
     }
 
-    this.initials = initials
+    this.initials = initials.toUpperCase()
   }
 }

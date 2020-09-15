@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { CardNetWorkService } from './card-network.service'
+
 @Component({
   selector: 'ws-widget-card-welcome',
   templateUrl: './card-network.component.html',
@@ -18,6 +19,7 @@ export class CardNetworkComponent extends WidgetBaseComponent
   keyTag: string[] = []
   newUserReq: any
   deptUserReq: any
+  photoUrl = ''
 
   constructor(private router: Router, private cardNetworkService: CardNetWorkService) {
     super()
@@ -26,6 +28,7 @@ export class CardNetworkComponent extends WidgetBaseComponent
   newUserArray = []
   departmentUserArray = []
   ngOnInit() {
+    this.photoUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU'
     this.getAllActiveUsers()
     this.getAllDepartmentUsers()
   }
