@@ -1,5 +1,3 @@
-import { Time } from '@angular/common'
-
 export namespace NSDiscussData {
   export interface IDiscussJsonData {
     tabs: DiscussionTab[]

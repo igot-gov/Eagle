@@ -14,10 +14,12 @@ import { RightMenuComponent } from './components/right-menu/right-menu.component
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
-import { MatIconModule, MatListModule, MatFormFieldModule, MatDialogModule } from '@angular/material'
+import { MatIconModule, MatListModule, MatFormFieldModule, MatDialogModule, MatSelectModule, MatInputModule, MatButtonModule } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
 import { DiscussStartComponent } from './components/discuss-start/discuss-start.component'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { TrendingTagsComponent } from './components/trending-tags/trending-tags.component'
 @NgModule({
   declarations: [
     DiscussComponent,
@@ -32,6 +34,7 @@ import { DiscussStartComponent } from './components/discuss-start/discuss-start.
     DiscussTagsComponent,
     LeftMenuComponent,
     RightMenuComponent,
+    TrendingTagsComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,12 @@ import { DiscussStartComponent } from './components/discuss-start/discuss-start.
     MatIconModule,
     MatCardModule,
     MatListModule,
-    MatDialogModule
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   entryComponents: [
     DiscussStartComponent,

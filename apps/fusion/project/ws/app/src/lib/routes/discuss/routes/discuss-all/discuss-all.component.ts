@@ -107,8 +107,9 @@ export class DiscussAllComponent implements OnInit {
   }
   start() {
     let dialogRef = this.dialog.open(DiscussStartComponent, {
-      height: '400px',
-      width: '600px',
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       console.log(response)
