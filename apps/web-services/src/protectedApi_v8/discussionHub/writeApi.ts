@@ -125,4 +125,3 @@ writeApi.post('/posts/:postId/vote', async (req, res) => {
             .send(err && err.response && err.response.data || {})
     }
 })
-
