@@ -22,6 +22,7 @@ const ADDITIONAL_FIELDS_IN_CONTENT = [
   'isTranslationOf',
   'keywords',
   'learningMode',
+  'license',
   'playgroundResources',
   'price',
   'registrationInstructions',

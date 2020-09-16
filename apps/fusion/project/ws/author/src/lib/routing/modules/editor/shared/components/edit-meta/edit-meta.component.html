@@ -534,11 +534,74 @@
                   <div class="margin-top-m">
                     <mat-form-field appearance="outline" class="margin-top-s"
                       [ngClass]="{ 'mat-form-field-invalid': showError('exclusiveContent') }">
-                      <mat-select formControlName="exclusiveContent" i18n-placeholder placeholder="--Select--">
+                      <mat-select formControlName="exclusiveContent" i18n-placeholder placeholder="--Select--"
+                        #exclusiveContent>
                         <mat-option [value]="true" i18n> Paid</mat-option>
                         <mat-option [value]="false" i18n> Free </mat-option>
                       </mat-select>
                       <mat-error *ngIf="showError('exclusiveContent')" i18n>Cost is mandatory
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="margin-top-xs margin-right-xs margin-left-xs flex-1 flex" >
+                  <div class="width-expand "
+                    *ngIf="checkCondition('price', 'show') && checkExclusive()"
+                    [ngClass]="{ disable: checkCondition('price', 'disabled') }">
+                    <label>
+                      <div class="flex flex-middle">
+                        <span [ngClass]="{ required: checkCondition('price', 'required') }" i18n>Price</span>
+                        <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('price')">
+                      info
+                    </mat-icon> -->
+                      </div>
+                      <span i18n *ngIf="infoType === 'price'">What is the amount in rupees?</span>
+                    </label>
+                    <div class="margin-top-m">
+                      <div class="flex flex-align combined-field">
+                        <mat-form-field appearance="outline" class="currency-width mr-2"
+                          [ngClass]="{ 'mat-form-field-invalid': showError('currency') }">
+                          <mat-select  i18n-placeholder placeholder="--Select--" name="currency" [(ngModel)]="currency"
+                          [ngModelOptions]="{ standalone: true }" (ngModelChange)="updatePrice()" required>
+                            <mat-option *ngFor="let cur of ordinals.currency, let i = index" 
+                            [value]="cur">
+                              {{ cur }}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="flex-1" [ngClass]="{ 'mat-form-field-invalid': showError('amount') }">
+                          <input matInput  name="amount" type="number" placeholder="599.99" [(ngModel)]="amount"
+                          [ngModelOptions]="{ standalone: true }" (ngModelChange)="updatePrice()" required/>
+                        </mat-form-field>
+                        <mat-error *ngIf="showError('currency')" i18n>Currency is mandatory
+                        </mat-error>
+                      </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex new-mobile">
+                <div class="margin-top-xs margin-right-xs margin-left-xs flex-1"
+                  *ngIf="checkCondition('license', 'show')"
+                  [ngClass]="{ disable: checkCondition('license', 'disabled') }">
+                  <label>
+                    <div class="flex flex-middle">
+                      <span [ngClass]="{ required: checkCondition('license', 'required') }" i18n>License</span>
+                      <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('license')">
+                                  info
+                                </mat-icon> -->
+                    </div>
+                    <span i18n *ngIf="infoType === 'license'">Assign license for the content</span>
+                  </label>
+                  <div class="margin-top-m">
+                    <mat-form-field appearance="outline" class="margin-top-s"
+                      [ngClass]="{ 'mat-form-field-invalid': showError('license') }">
+                      <mat-select formControlName="license" i18n-placeholder placeholder="--Select--">
+                        <mat-option *ngIf="!checkCondition('license', 'required')" i18n [value]="null">None
+                        </mat-option>
+                        <mat-option *ngFor="let license of ordinals.licenses" [value]="license">
+                          {{ license }}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="showError('license')" i18n>License is mandatory
                       </mat-error>
                     </mat-form-field>
                   </div>

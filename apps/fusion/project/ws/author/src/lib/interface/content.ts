@@ -162,7 +162,8 @@ export namespace NSContent {
     sampleCertificates: IInternalReference[]
     creatorLogo: string
     creatorPosterImage: string
-    creatorThumbnail: string
+    creatorThumbnail: string,
+    price: IPrice,
   }
 
   export interface IClient {
@@ -249,5 +250,10 @@ export namespace NSContent {
     mimeType: string
     visibility: string
     compatibilityLevel: string
+  }
+
+  export interface IPrice {
+    currency: string
+    value: number
   }
 }

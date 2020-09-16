@@ -94,6 +94,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   hours = 0
   minutes = 0
   seconds = 0
+  currency!: string
+  amount = 0.0
   @Input() parentContent: string | null = null
   routerSubscription!: Subscription
   imageTypes = IMAGE_SUPPORT_TYPES
@@ -155,6 +157,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.audienceList = this.ordinals.audience
     this.jobProfileList = this.ordinals.jobProfile
     this.complexityLevelList = this.ordinals.audience
+    if (this.ordinals.currency && this.ordinals.currency.length) {
+      this.currency = this.ordinals.currency[0]
+    }
 
     this.creatorContactsCtrl = new FormControl()
     this.trackContactsCtrl = new FormControl()
@@ -410,6 +415,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.setDuration(contentMeta.duration || 0)
     this.filterOrdinals()
     this.changeResourceType()
+    this.setPrice(contentMeta.price)
   }
 
   filterOrdinals() {
@@ -590,6 +596,21 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.infoType = this.infoType === type ? '' : type
   }
 
+  public updatePrice() {
+    const price =  {
+        currency: this.currency,
+        value: this.amount,
+      }
+    this.contentForm.controls.price.setValue(price)
+  }
+
+  public setPrice(price: NSContent.IPrice) {
+    if (price && price.currency && price.value) {
+      this.currency = price.currency
+      this.amount = price.value
+    }
+  }
+
   storeData() {
     try {
       const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
@@ -666,9 +687,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         //   delete meta.catalogPaths
         // }
 
+        console.log('meta', meta)
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
+      console.log(ex)
       this.snackBar.open('Please Save Parent first and refresh page.')
     }
   }
@@ -1075,6 +1098,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.contentService.checkCondition(this.contentMeta.identifier, meta, type)
   }
 
+  public checkExclusive() {
+    return this.contentForm.controls.exclusiveContent.value
+  }
+
   createForm() {
     this.contentForm = this.formBuilder.group({
       accessPaths: [],
@@ -1116,6 +1143,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       learningMode: [],
       learningObjective: [],
       learningTrack: [],
+      license: [],
       locale: [],
       mimeType: [],
       name: [],
@@ -1133,6 +1161,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       projectCode: [],
       publicationId: [],
       publisherDetails: [],
+      price: [],
       references: [],
       region: [],
       registrationInstructions: [],
@@ -1189,6 +1218,16 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.contentForm.controls.customClassifiers.setValue(
         this.contentForm.controls.resourceCategory.value,
       )
+    })
+
+    this.contentForm.controls.exclusiveContent.valueChanges.subscribe(() => {
+      if (!this.contentForm.controls.exclusiveContent.value) {
+        if (this.ordinals.currency && this.ordinals.currency.length) {
+          this.currency = this.ordinals.currency[0]
+        }
+        this.amount = 0
+        this.updatePrice()
+      }
     })
   }
   openCatalogSelector() {
