@@ -7,11 +7,11 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_ENDPOINTS = {
-    getPopularTopics: `${CONSTANTS.NODE_BB_API_BASE}/api/popular`,
-    getRecentTopics: `${CONSTANTS.NODE_BB_API_BASE}/api/recent`,
-    getTopTopics: `${CONSTANTS.NODE_BB_API_BASE}/api/top`,
-    getUnreadTopics: `${CONSTANTS.NODE_BB_API_BASE}/api/unread`,
-    getUnreadTopicsTotal: `${CONSTANTS.NODE_BB_API_BASE}/api/unread/total`,
+    getPopularTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/popular`,
+    getRecentTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/recent`,
+    getTopTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/top`,
+    getUnreadTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/unread`,
+    getUnreadTopicsTotal: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/unread/total`,
 }
 
 export const topicsApi = Router()

@@ -3,9 +3,11 @@ import { Router } from 'express'
 import request from 'request'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
-import { logInfoHeading } from '../../utils/logger'
+import { logError, logInfo, logInfoHeading } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 import { extractUserIdFromRequest, extractUserToken } from '../../utils/requestExtract'
+import { getUserByEmail } from '../discussionHub/users'
+import { createDiscussionHubUser } from '../discussionHub/writeApi'
 import { getUserProfile } from './profile'
 import { getUserProfileStatus } from './profile-details'
 import { getUserRoles } from './roles'
@@ -75,9 +77,35 @@ detailsApi.get('/wtoken', async (req, res) => {
     // tslint:disable-next-line: no-commented-code
     // const bodyWithConfigRequestOptions = { ...body, options }
     logInfoHeading('==========WToken API Request===============')
-    // tslint:disable-next-line: no-console
-    // console.log(options)
-    request.post(url, options).pipe(res)
+    // tslint:disable-next-line: no-commented-code
+    // request.post(url, options).pipe(res)
+    request.post(url, options, async (error, _res, body) => {
+      if (error) {
+        logError(`Error on wtoken api call to user profile service: `, error)
+      }
+      if (body.user) {
+        const user = body.user
+        // Check if user is present in NodeBB NodeBB DiscussionHub
+        // tslint:disable-next-line: no-any
+        const userPresent = await getUserByEmail(user.email).catch(async (err: any) => {
+          if (err.response && (err.response.status === 404)) {
+            // If user is not already present in nodeBB NodeBB DiscussionHub
+            // then create the user
+            const reqToDiscussionHub = {
+              email: user.email,
+              fullname: `${user.first_name} ${user.last_name}`,
+              password: CONSTANTS.DISCUSSION_HUB_DEFAULT_PASSWORD,
+              username: user.wid,
+            }
+            await createDiscussionHubUser(reqToDiscussionHub)
+          }
+        })
+        if (userPresent) {
+          logInfo('User already present in NodeBB DiscussionHub. Skiping create')
+        }
+      }
+      res.send(body)
+    })
   } catch (err) {
     // tslint:disable-next-line: no-console
     console.log('------------------W TOKEN ERROR---------\n', err)
@@ -85,7 +113,7 @@ detailsApi.get('/wtoken', async (req, res) => {
   }
 })
 
-// tslint:disable-next-line: no-any
+// tslint:disable-next-line: no-any // tslint:disable-next-line: cognitive-complexity
 export function wTokenApiMock(req: any, token: any): Promise<any> {
   return new Promise((resolve, reject) => {
     try {
@@ -107,9 +135,30 @@ export function wTokenApiMock(req: any, token: any): Promise<any> {
         },
       }
 
-      request.post(url, options, (error, _res, body) => {
+      request.post(url, options, async (error, _res, body) => {
         if (error) {
           reject(error)
+        }
+        if (body.user) {
+          const user = body.user
+          // Check if user is present in NodeBB DiscussionHub
+          // tslint:disable-next-line: no-identical-functions
+          const userPresent = await getUserByEmail(user.email).catch(async (err) => {
+            if (err.response && (err.response.status === 404)) {
+              // If user is not already present in nodeBB DiscussionHub
+              // then create the user
+              const reqToDiscussionHub = {
+                email: user.email,
+                fullname: `${user.first_name} ${user.last_name}`,
+                password: CONSTANTS.DISCUSSION_HUB_DEFAULT_PASSWORD,
+                username: user.wid,
+              }
+              await createDiscussionHubUser(reqToDiscussionHub)
+            }
+          })
+          if (userPresent) {
+            logInfo('User already present in NodeBB DiscussionHub. Skiping create')
+          }
         }
         resolve(body)
       })

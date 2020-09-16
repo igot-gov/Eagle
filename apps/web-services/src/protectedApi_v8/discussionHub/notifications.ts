@@ -7,25 +7,24 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_ENDPOINTS = {
-    getPosts: (term: string) => `${CONSTANTS.NODE_BB_API_BASE}/api/recent/posts/${term}`,
+    getNotifications: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/notifications`,
 }
 
-export const postsApi = Router()
+export const notificationsApi = Router()
 
-postsApi.get('/:term', async (req, res) => {
+notificationsApi.get('/', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        const term = req.params.term
-        const url = API_ENDPOINTS.getPosts(term)
+        const url = API_ENDPOINTS.getNotifications
         const response = await axios.get(
             url,
             { ...axiosRequestConfig, headers: { rootOrg } }
         )
         res.send(response.data)
     } catch (err) {
-        logError('ERROR ON GET postsApi /:term >', err)
+        logError('ERROR ON GET topicsApi /recent >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }

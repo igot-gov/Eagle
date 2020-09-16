@@ -8,6 +8,7 @@ import { cohortsApi } from './cohorts'
 import { conceptGraphApi } from './concept'
 import { contentApi } from './content'
 import { counterApi } from './counter'
+import { discussionHubApi } from './discussionHub/discussionHub'
 import { externalEventsApi } from './event-external'
 import { eventsApi } from './events'
 import { infyRadioApi } from './infyradio'
@@ -15,7 +16,6 @@ import { knowledgeHubApi } from './khub'
 import { leaderBoardApi } from './leaderboard'
 import { navigatorApi } from './navigator'
 import { networkHubApi } from './network-hub'
-import { nodebbApi } from './nodebb/nodebb'
 import { recommendationApi } from './recommendation'
 import { scromApi } from './scrom'
 import { socialApi } from './social'
@@ -39,12 +39,12 @@ protectedApiV8.use('/cohorts', cohortsApi)
 protectedApiV8.use('/concept', conceptGraphApi)
 protectedApiV8.use('/content', contentApi)
 protectedApiV8.use('/counter', counterApi)
+protectedApiV8.use('/discussionHub', discussionHubApi)
 protectedApiV8.use('/infyradio', infyRadioApi)
 protectedApiV8.use('/khub', knowledgeHubApi)
 protectedApiV8.use('/leaderboard', leaderBoardApi)
 protectedApiV8.use('/navigator', navigatorApi)
 protectedApiV8.use('/networkHub', networkHubApi)
-protectedApiV8.use('/nodebb', nodebbApi)
 protectedApiV8.use('/recommendation', recommendationApi)
 protectedApiV8.use('/scrom', scromApi)
 protectedApiV8.use('/social', socialApi)

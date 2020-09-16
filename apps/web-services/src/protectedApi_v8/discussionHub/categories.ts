@@ -7,10 +7,10 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_ENDPOINTS = {
-    getAllCategories: `${CONSTANTS.NODE_BB_API_BASE}/api/categories`,
+    getAllCategories: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/categories`,
     // tslint:disable-next-line: no-any
     getCategoryDetails: (cid: any, slug?: any, tid?: any) => {
-        let url = `${CONSTANTS.NODE_BB_API_BASE}/api/category/${cid}`
+        let url = `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/category/${cid}`
         if (slug) {
             url = `${url}/${slug}`
         }
