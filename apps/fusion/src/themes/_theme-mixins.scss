@@ -193,6 +193,9 @@
     // .ws-mat-auth-exp {
     //   background-color: $colorAccentLight !important;
     // }
+    .ws-mat-primary-tags {
+      background-color: #F5F5F5 !important;
+    }
   }
 
   @else {
@@ -226,6 +229,10 @@
 
     .mat-input-element {
       caret-color: $colorAccent;
+    }
+
+    .mat-imput-placeholder {
+      color: rgba(0, 0, 0, 0.4);
     }
 
     .ws-mat-auth-exp {
@@ -298,6 +305,8 @@
       border-top-color: $colorAccent !important;
       border-top-width: 2px !important;
     }
+
+
   }
 
 
@@ -346,6 +355,10 @@
 
   .ws-mat-primary-background {
     background-color: $colorAccent !important;
+  }
+
+  .ws-mat-primary-tags {
+    background-color: #F5F5F5 !important;
   }
 
   .ws-primary-background {
