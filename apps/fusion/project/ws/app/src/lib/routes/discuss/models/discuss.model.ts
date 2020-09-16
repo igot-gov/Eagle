@@ -1,9 +1,9 @@
 export namespace NSDiscussData {
   export interface IDiscussJsonData {
-    tabs: DiscussionTab[]
+    tabs: IDiscussionTab[]
   }
 
-  export interface DiscussionTab {
+  export interface IDiscussionTab {
     name: string
     key: string
     badges: {
@@ -55,8 +55,8 @@ export namespace NSDiscussData {
       signature: string | null
       banned: number
       status: string
-      "icon:text": string | null
-      "icon:bgColor": string | null
+      'icon:text': string | null
+      'icon:bgColor': string | null
       banned_until_readable: string
     }
     teaser: any
@@ -103,7 +103,7 @@ export namespace NSDiscussData {
     totalPostCount: number,
     totalTopicCount: number,
     tagWhitelist: [],
-    "unread-class"?: string,
+    'unread-class'?: string,
     children?: any[],
     posts?: any[],
     teaser?: any

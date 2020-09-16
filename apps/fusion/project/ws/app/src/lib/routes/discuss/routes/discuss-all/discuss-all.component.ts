@@ -8,7 +8,9 @@ import { DiscussStartComponent } from '../../components/discuss-start/discuss-st
   selector: 'app-discuss-all',
   templateUrl: './discuss-all.component.html',
   styleUrls: ['./discuss-all.component.scss'],
-  host: { 'class': 'flex flex-1 margin-top-l' }
+  /* tslint:disable */
+  host: { class: 'flex flex-1 margin-top-l' },
+  /* tslint:enable */
 })
 export class DiscussAllComponent implements OnInit {
 
@@ -17,6 +19,7 @@ export class DiscussAllComponent implements OnInit {
   }
   descussionList!: NSDiscussData.IDiscussionData[]
   ngOnInit(): void {
+    /* tslint:disable */
     this.descussionList = [
       {
         "cid": 2,
@@ -360,16 +363,18 @@ export class DiscussAllComponent implements OnInit {
         "index": 0
       }
     ]
+    /* tslint:enable */
   }
   start() {
-    let dialogRef = this.dialog.open(DiscussStartComponent, {
+    // const dialogRef =
+    this.dialog.open(DiscussStartComponent, {
       minHeight: 'auto',
       width: '80%',
       panelClass: 'remove-pad',
     })
-    dialogRef.afterClosed().subscribe((response: any) => {
-      console.log(response)
+    // dialogRef.afterClosed().subscribe((response: any) => {
+    //   console.log(response)
 
-    })
+    // })
   }
 }

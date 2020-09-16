@@ -13,6 +13,7 @@ export class DiscussCategoriesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    /* tslint:disable */
     this.categories = [
       {
         "bgColor": "#fda34b",
@@ -189,5 +190,7 @@ export class DiscussCategoriesComponent implements OnInit {
         "posts": []
       }
     ]
+    /* tslint:enable */
+
   }
 }

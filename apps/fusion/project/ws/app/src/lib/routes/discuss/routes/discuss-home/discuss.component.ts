@@ -2,8 +2,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { map } from 'rxjs/operators'
-
-
 @Component({
   selector: 'app-discuss',
   templateUrl: './discuss.component.html',

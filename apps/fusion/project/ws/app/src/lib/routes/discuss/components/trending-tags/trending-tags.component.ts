@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
+/* tslint:disable */
 import _ from 'lodash'
-
+/* tslint:enable */
 @Component({
   selector: 'app-discuss-trending-tags',
   templateUrl: './trending-tags.component.html',
@@ -9,7 +10,7 @@ import _ from 'lodash'
 })
 export class TrendingTagsComponent implements OnInit {
   tags!: NSDiscussData.ITag[]
-  max: number = 0
+  max = 0
   constructor() {
 
   }
@@ -20,21 +21,21 @@ export class TrendingTagsComponent implements OnInit {
         color: '',
         score: 12,
         value: 'Tag 1',
-        valueEscaped: 'Tag 1'
+        valueEscaped: 'Tag 1',
       },
       {
         bgColor: '',
         color: '',
         score: 6,
         value: 'Tag 2',
-        valueEscaped: 'Tag 2'
-      }
+        valueEscaped: 'Tag 2',
+      },
     ]
 
     this.max = _.get(_.maxBy(this.tags, 'score'), 'score') || 0
 
   }
   css() {
-    return "linear - gradient(to left, #00ff00 " + 80 + " %, #ff0000 20 %)"
+    // return 'linear - gradient(to left, #00ff00 " + 80 + " %, #ff0000 20 %)"
   }
 }

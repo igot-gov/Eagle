@@ -24,7 +24,7 @@ import {
   MatSelectModule,
   MatInputModule,
   MatButtonModule,
-  MatSidenavModule
+  MatSidenavModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
@@ -67,7 +67,7 @@ import { DiscussionComponent } from './routes/discussion/discussion.component'
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
-    PipeFilterModule
+    PipeFilterModule,
   ],
   entryComponents: [
     DiscussStartComponent,

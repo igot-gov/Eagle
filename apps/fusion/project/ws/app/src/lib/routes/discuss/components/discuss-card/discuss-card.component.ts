@@ -5,7 +5,9 @@ import { Router } from '@angular/router'
   selector: 'app-dicuss-card',
   templateUrl: './discuss-card.component.html',
   styleUrls: ['./discuss-card.component.scss'],
-  host: { 'class': 'flex flex-1 margin-top-l' }
+  /* tslint:disable */
+  host: { class: 'flex flex-1 margin-top-l' },
+  /* tslint:enable */
 })
 
 export class DiscussCardComponent implements OnInit {
@@ -20,11 +22,17 @@ export class DiscussCardComponent implements OnInit {
 
   ngOnInit() { }
   upvote(discuss: NSDiscussData.IDiscussionData) {
-    console.log(discuss)
+    // console.log(discuss)
+    if (discuss) {
+
+    }
 
   }
   downvote(discuss: NSDiscussData.IDiscussionData) {
-    console.log(discuss)
+    // console.log(discuss)
+    if (discuss) {
+
+    }
   }
   getDiscussion() {
     this.router.navigate([`/app/discuss/home/${this.discuss.tid}`])

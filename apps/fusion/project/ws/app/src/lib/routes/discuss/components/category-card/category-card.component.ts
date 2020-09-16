@@ -5,7 +5,10 @@ import { NSDiscussData } from '../../models/discuss.model'
   selector: 'app-dicuss-category-card',
   templateUrl: './category-card.component.html',
   styleUrls: ['./category-card.component.scss'],
-  host: { 'class': 'flex flex-1 margin-s margin-top-l' }
+  /* tslint:disable */
+  host: { class: 'flex flex-1 margin-s margin-top-l' },
+  /* tslint:enable */
+
 })
 
 export class CategoryCardComponent implements OnInit {
