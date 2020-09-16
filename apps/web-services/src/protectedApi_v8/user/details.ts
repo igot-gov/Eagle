@@ -97,7 +97,11 @@ detailsApi.get('/wtoken', async (req, res) => {
               password: CONSTANTS.DISCUSSION_HUB_DEFAULT_PASSWORD,
               username: user.wid,
             }
-            await createDiscussionHubUser(reqToDiscussionHub)
+            // tslint:disable-next-line: no-any
+            await createDiscussionHubUser(reqToDiscussionHub).catch((createDiscussionHubUserErr: any) => {
+              logError(`Creatin of User failed..!:`, createDiscussionHubUserErr)
+              res.send(body)
+            })
           }
         })
         if (userPresent) {
@@ -153,7 +157,11 @@ export function wTokenApiMock(req: any, token: any): Promise<any> {
                 password: CONSTANTS.DISCUSSION_HUB_DEFAULT_PASSWORD,
                 username: user.wid,
               }
-              await createDiscussionHubUser(reqToDiscussionHub)
+              // tslint:disable-next-line: no-any
+              await createDiscussionHubUser(reqToDiscussionHub).catch((createDiscussionHubUserErr: any) => {
+                logError(`Creatin of User failed..!:`, createDiscussionHubUserErr)
+                resolve(body)
+              })
             }
           })
           if (userPresent) {
