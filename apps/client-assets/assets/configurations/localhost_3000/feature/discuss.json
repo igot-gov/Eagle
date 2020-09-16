@@ -8,7 +8,7 @@
                 "uri": "/api/unread/total"
             },
             "enabled": true,
-            "routerLink": "/app/discuss/all-discussions"
+            "routerLink": "/app/discuss/home"
         },
         {
             "name": "Categories",

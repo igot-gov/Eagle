@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core'
   selector: 'app-discuss-right-menu',
   templateUrl: './right-menu.component.html',
   styleUrls: ['./right-menu.component.scss'],
+  host: { 'class': 'flex flex-1' }
 })
 export class RightMenuComponent implements OnInit {
   items = [

@@ -1,17 +1,25 @@
-<div class="flex flex-1 flex-column">
-  <div class="flex flex-1 custom cursor-pointer" (click)="start()">
-    <div class="flex flex-1 items-center border discuss border-solid discuss-border ws-mat-primary-background-op100">
-      <div class="w-full discuss">
-        <span class="ml-4">Ask a question or post an idea</span>
+<div class="flex flex-1 custom">
+  <div class="flex flex-3 flex-column">
+    <div class="flex flex-1 cursor-pointer margin-fix" (click)="start()">
+      <div class="flex flex-1 items-center border discuss border-solid discuss-border ws-mat-primary-background-op100">
+        <div class="w-full discuss">
+          <span class="ml-4">Ask a question or post an idea</span>
+        </div>
+        <div class="discuss-home text-white flex items-center justify-center cursor-pointer">
+          Start discussion
+        </div>
       </div>
-      <div class="discuss-home text-white flex items-center justify-center cursor-pointer">
-        Start discussion
-      </div>
-    </div>
-    <!-- <div class="text-box">Ask a question or post an idea</div>
+      <!-- <div class="text-box">Ask a question or post an idea</div>
     <div class="buton">start discussion</div> -->
+    </div>
+    <div class="flex flex-1 flex-column margin-fix">
+      <ng-container *ngFor="let data of descussionList">
+        <app-dicuss-card [discuss]="data"></app-dicuss-card>
+      </ng-container>
+
+    </div>
   </div>
   <div class="flex flex-1">
-    <app-dicuss-card [discuss]="data"></app-dicuss-card>
+    <app-discuss-right-menu></app-discuss-right-menu>
   </div>
 </div>

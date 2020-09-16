@@ -196,6 +196,14 @@
     .ws-mat-primary-tags {
       background-color: #F5F5F5 !important;
     }
+
+    .ws-mat-primary-tags-list {
+      background-color: #EEEEEE !important;
+    }
+
+    .ws-active-discuss-route {
+      background-color: #EEEEEE !important;
+    }
   }
 
   @else {
@@ -306,6 +314,19 @@
       border-top-width: 2px !important;
     }
 
+    .ws-active-discuss-route {
+      background-color: #EEEEEE !important;
+      // font-weight: 700;
+
+      &:before {
+        content: '';
+        position: absolute;
+        border-color: #347BB6;
+        border-style: solid;
+        border-width: 0 0 0 2px;
+        height: inherit;
+      }
+    }
 
   }
 
@@ -359,6 +380,10 @@
 
   .ws-mat-primary-tags {
     background-color: #F5F5F5 !important;
+  }
+
+  .ws-mat-primary-tags-list {
+    background-color: #EEEEEE !important;
   }
 
   .ws-primary-background {

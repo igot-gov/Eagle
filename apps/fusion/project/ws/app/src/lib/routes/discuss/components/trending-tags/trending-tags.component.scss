@@ -9,8 +9,18 @@
   border-radius: 4px;
   justify-content: space-between;
   margin: $size-m 0;
-  background-color: red;
+  // background-color: red;
   align-items: center;
+
+  @include breakpoint-xs {
+    width: auto;
+
+  }
+
+  @include breakpoint-s {
+    width: auto;
+
+  }
 }
 
 // .progress {

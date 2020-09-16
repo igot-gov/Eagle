@@ -19,9 +19,27 @@
   text-align: center;
 }
 
+.margin-fix {
+  @include breakpoint-xs {
+    margin: 0 $size-l 0 $size-l;
+  }
+
+  @include breakpoint-s {
+    margin: 0 $size-l 0 $size-l;
+  }
+}
+
 .custom {
-  height: 48px;
-  max-height: 48px;
+
+  // height: 48px;
+  // max-height: 48px;
+  @include breakpoint-xs {
+    flex-direction: column-reverse;
+  }
+
+  @include breakpoint-s {
+    flex-direction: column-reverse;
+  }
 }
 
 .discuss-border {
@@ -53,4 +71,8 @@
   /* flex: 1; */
   min-width: fit-content;
   margin: 0;
+}
+
+.flex-3 {
+  flex: 3;
 }

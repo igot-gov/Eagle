@@ -8,7 +8,7 @@ import _ from 'lodash'
   styleUrls: ['./trending-tags.component.scss'],
 })
 export class TrendingTagsComponent implements OnInit {
-  tags!: NSDiscussData.tag[]
+  tags!: NSDiscussData.ITag[]
   max: number = 0
   constructor() {
 
