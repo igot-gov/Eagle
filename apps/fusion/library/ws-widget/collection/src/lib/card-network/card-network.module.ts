@@ -9,6 +9,7 @@ import { AvatarPhotoModule } from '../_common/avatar-photo/avatar-photo.module'
 import { CardNetworkComponent } from './card-network.component'
 import { ChallengeModule } from '../challenge/challenge.module'
 import { MatGridListModule } from '@angular/material/grid-list'
+import { SlidersModule } from '../sliders/sliders.module'
 
 @NgModule({
   declarations: [CardNetworkComponent],
@@ -29,6 +30,7 @@ import { MatGridListModule } from '@angular/material/grid-list'
     ChallengeModule,
     MatInputModule,
     MatGridListModule,
+    SlidersModule,
   ],
   entryComponents: [CardNetworkComponent],
   providers: [CardNetWorkService],

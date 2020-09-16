@@ -52,6 +52,9 @@ export class CardNetworkComponent extends WidgetBaseComponent
     }
     this.cardNetworkService.fetchLatestUserInfo(this.newUserReq).subscribe(data => {
       this.newUserArray = data.users
+      if (typeof this.newUserArray === 'undefined') {
+        this.newUserArray = []
+      }
     })
 
   }
