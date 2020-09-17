@@ -243,7 +243,7 @@ detailsApi.post('/detailV1', async (req, res) => {
 detailsApi.get('/detailV2', async (req, res) => {
   const _rootOrg = req.header('rootOrg')
   const wid = extractUserIdFromRequest(req)
-  const url = `http://10.177.22.26:9200/user/multi-fetch/wid`
+  const url = `${API_END_POINTS.detail}`
   try {
     if (!_rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
@@ -255,7 +255,7 @@ detailsApi.get('/detailV2', async (req, res) => {
         conditions: {
           root_org: _rootOrg,
         },
-        source_fields: ['wid', 'email', 'first_name', 'last_name'],
+        source_fields: ['wid', 'email', 'first_name', 'last_name', 'department_name'],
         values: [wid],
       },
       {
@@ -263,7 +263,7 @@ detailsApi.get('/detailV2', async (req, res) => {
         headers: { _rootOrg },
       }
     )
-    res.json(response.data[0])
+    res.json(response.data)
   } catch (err) {
     res.status(500).send(err.response.data)
   }
