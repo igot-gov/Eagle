@@ -30,7 +30,6 @@ export class AvatarPhotoComponent implements OnInit {
     if (!this.photoUrl) {
       this.showInitials = true
       this.createInititals()
-
       const randomIndex = Math.floor(Math.random() * Math.floor(this.colors.length))
       this.circleColor = this.colors[randomIndex]
     }

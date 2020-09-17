@@ -19,6 +19,10 @@ export class CardNetworkComponent extends WidgetBaseComponent
   keyTag: string[] = []
   newUserReq: any
   deptUserReq: any
+  picTempArray = ['https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpIGUpmvAHj4TibHHMhN1pDQdi7pplyj5kWg&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS_PDNKKD_KGnjnuckRGUiSpOxlmLT6R_KXMA&usqp=CAU',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRh4moBSRCeyvWaJI8pPsFRCczpc9rB-f53ew&usqp=CAU']
   photoUrl = ''
 
   constructor(private router: Router, private cardNetworkService: CardNetWorkService) {
@@ -28,7 +32,7 @@ export class CardNetworkComponent extends WidgetBaseComponent
   newUserArray = []
   departmentUserArray = []
   ngOnInit() {
-    this.photoUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU'
+    this.photoUrl = this.getUserRandomPic()
     this.getAllActiveUsers()
     this.getAllDepartmentUsers()
   }
@@ -42,8 +46,13 @@ export class CardNetworkComponent extends WidgetBaseComponent
   goToUserProfile(user: any) {
     this.router.navigate(['/app/person-profile'], { queryParams: { emailId: user.email } })
   }
+  getUserRandomPic() {
+    const randomIndex = Math.floor(Math.random() * Math.floor(this.picTempArray.length))
+    return `${this.picTempArray[randomIndex].trim()}`
+  }
 
   getAllActiveUsers() {
+
     this.newUserReq = {
       limit: 50,
       offset: 0,
