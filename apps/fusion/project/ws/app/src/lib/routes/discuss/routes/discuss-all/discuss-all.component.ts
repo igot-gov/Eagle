@@ -13,7 +13,7 @@ import { DiscussStartComponent } from '../../components/discuss-start/discuss-st
   /* tslint:enable */
 })
 export class DiscussAllComponent implements OnInit {
-
+  currentFilter = 'recent'
   constructor(public dialog: MatDialog) {
 
   }
@@ -376,5 +376,10 @@ export class DiscussAllComponent implements OnInit {
     //   console.log(response)
 
     // })
+  }
+  filter(key: string | 'recent' | 'popular' | 'watched') {
+    if (key) {
+      this.currentFilter = key
+    }
   }
 }

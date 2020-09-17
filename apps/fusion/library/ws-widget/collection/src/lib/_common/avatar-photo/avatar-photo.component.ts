@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 
 @Component({
-  selector: 'app-avatar-photo',
+  selector: 'ws-widget-avatar-photo',
   templateUrl: './avatar-photo.component.html',
   styleUrls: ['./avatar-photo.component.scss'],
 })
@@ -23,6 +23,7 @@ export class AvatarPhotoComponent implements OnInit {
     '#FFD558', // yellow
     '#3670B2', // blue
     '#4E9E87',
+    '#7E4C8D',
   ]
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class AvatarPhotoComponent implements OnInit {
   private createInititals(): void {
     let initials = ''
 
-    for (let i = 0; i < this.name.length; i++) {
+    for (let i = 0; i < this.name.length; i += 1) {
       if (this.name.charAt(i) === ' ') {
         continue
       }

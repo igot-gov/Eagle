@@ -1,3 +1,74 @@
-<div class="flex flex-1 flex-column">
-  sss
+<div class="flex flex-1 related-discussion">
+  <div class="flex flex-3">
+    <mat-card class="flex-1">
+      <mat-card-header>
+        <mat-card-title class="margin-l-0">{{data.title}}</mat-card-title>
+        <!-- <mat-card-subtitle>{{'General discussion'}}</mat-card-subtitle> -->
+      </mat-card-header>
+      <mat-card-content class="margin-left-m">
+        <ng-container *ngFor="let post of data.posts | pipeFilter:'index':1">
+          <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
+          <p>{{ post.content | pipeHtmlTagRemoval}}</p>
+          <div class="flex flex-1">
+            <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
+            <ws-widget-avatar-photo [name]="post.user.username" size="s"></ws-widget-avatar-photo>
+            <span class="margin-left-s">{{'Asked by '}}</span>
+            <span class="margin-left-s">{{post.user.username}}</span>
+            <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
+          </div>
+        </ng-container>
+
+        <div class="flex flex-1 margin-top-m">
+          <ng-container *ngIf="data && data.tags && data.tags.length > 0">
+            <span *ngFor="let tag of data.tags" class="tag ws-mat-primary-tags">
+              {{tag.value}}
+            </span>
+          </ng-container>
+        </div>
+        <div class="flex flex-1 custom margin-0 margin-top-xl">
+          <div class="flex flex-1 flex-row margin-left-xs">
+            <span class="flex margin-right-l mobile">
+              <mat-icon (click)="upvote(discuss)" class="cursor-pointer">arrow_upward</mat-icon>
+              <span class="pad-4">{{data.upvotes}}</span>
+            </span>
+            <span class="flex margin-right-l mobile">
+              <mat-icon (click)="downvote(discuss)" class="cursor-pointer">arrow_downward</mat-icon>
+              <span class="pad-4">{{data.downvotes}}</span>
+            </span>
+            <span class="flex margin-right-l mobile">
+              <mat-icon>trending_up</mat-icon>
+              <span class="pad-4">{{data.viewcount}} views</span>
+            </span>
+            <span class="flex mobile">
+              <mat-icon [ngClass]="{'ws-mat-accent-text': !!data.posts[0].bookmarked }">bookmark</mat-icon>
+              <!-- <span class="pad-4">{{data.posts[0].bookmarked}}</span> -->
+            </span>
+          </div>
+          <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+            <span class="noocoments ws-mat-default-text">{{data.postcount }}
+              comments</span>
+          </div>
+        </div>
+        <div class="flex flex-1 flex-column margin-top-xl">
+          <h2> Your answer here </h2>
+          <form [formGroup]=" postAnswerForm">
+            <mat-form-field appearance="outline" class="margin-top-xs display-block"
+              [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
+              <textarea matInput formControlName="answer" #description cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30"
+                [required]="true"></textarea>
+              <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
+                This is mandatory
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </div>
+      </mat-card-content>
+      <!-- <mat-card-actions></mat-card-actions> -->
+      <mat-card-footer></mat-card-footer>
+    </mat-card>
+  </div>
+  <div class="flex flex-1 display-hide">
+    <app-discuss-related-discussion></app-discuss-related-discussion>
+  </div>
 </div>

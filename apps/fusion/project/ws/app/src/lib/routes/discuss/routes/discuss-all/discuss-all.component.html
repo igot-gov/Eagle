@@ -13,6 +13,14 @@
     <div class="buton">start discussion</div> -->
     </div>
     <div class="flex flex-1 flex-column margin-fix">
+      <div class="flex flex-1 filter">
+        <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'recent',
+        'ws-mat-accent-border':currentFilter !== 'recent'}" mat-button (click)="filter('recent')">Recent</a>
+        <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'popular',
+        'ws-mat-accent-border':currentFilter !== 'popular'}" mat-button (click)="filter('popular')">Popular</a>
+        <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
+        'ws-mat-accent-border':currentFilter !== 'watched'}" mat-button (click)="filter('watched')">Watched</a> -->
+      </div>
       <ng-container *ngFor="let data of descussionList">
         <app-dicuss-card [discuss]="data"></app-dicuss-card>
       </ng-container>

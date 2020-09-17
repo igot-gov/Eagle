@@ -1,3 +1,7 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
 .start-card {
   // width: 40%;
   min-width: 80px;
@@ -9,9 +13,50 @@
   }
 }
 
+.flex-auto-display {
+  @include breakpoint-xs {
+    flex: auto;
+    margin-left: 0 !important;
+    margin-top: 1rem;
+  }
+
+  @include breakpoint-s {
+    flex: auto;
+  }
+}
+
+.similar {
+  display: none !important;
+
+  @include breakpoint-xs {
+    display: none !important;
+  }
+
+  @include breakpoint-s {
+    display: none !important;
+  }
+}
+
+.mob {
+  @include breakpoint-xs {
+    margin-left: 0 !important;
+  }
+
+  @include breakpoint-s {
+    margin-left: 0 !important;
+  }
+}
 
 .custom {
   flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
 }
 
 .pad-fix {

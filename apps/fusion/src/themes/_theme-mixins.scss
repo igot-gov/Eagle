@@ -29,7 +29,8 @@
   $colorRed: #ff0000;
   $footerColor: #373434;
   $footerTextColor: #DEDFE0;
-
+  $colorWhite: #FFFFFF;
+  $colorBlack: #000000;
 
   outline-color: mat-color($accent, lighter);
 
@@ -62,6 +63,9 @@
   }
 
   @if $is-dark {
+    .app-logo {
+      filter: contrast(0.5);
+    }
 
     .mat-progress-spinner circle,
     .mat-spinner circle {
@@ -77,7 +81,7 @@
 
     a {
       // color: $colorAccentLight !important;
-      color: $colorAccentLight !important;
+      color: $colorPrimary;
       opacity: 0.8;
     }
 
@@ -95,11 +99,11 @@
     }
 
     .ws-mat-primary-text {
-      color: $colorAccentLight !important;
+      color: $colorPrimaryLight !important;
     }
 
     .ws-mat-accent-text {
-      color: $colorAccentLight !important;
+      color: $colorAccentDark !important;
     }
 
     .ws-mat-primary-lite-background-on-day {
@@ -193,16 +197,41 @@
     // .ws-mat-auth-exp {
     //   background-color: $colorAccentLight !important;
     // }
+    .ws-mat-default-text {
+      color: $colorAccentDark;
+    }
+
+    .ws-mat-primary-lite-background-important {
+      background-color: $colorPrimaryDark !important;
+    }
+
     .ws-mat-primary-tags {
-      background-color: #F5F5F5 !important;
+      background: rgba(mat-color($primary, default), 0.1);
     }
 
     .ws-mat-primary-tags-list {
-      background-color: #EEEEEE !important;
+      background: rgba(mat-color($primary, default), 0.1);
     }
 
     .ws-active-discuss-route {
-      background-color: #EEEEEE !important;
+      background: rgba(mat-color($primary, default), 0.1);
+
+      &:before {
+        content: '';
+        position: absolute;
+        border-color: $colorAccentDark;
+        border-style: solid;
+        border-width: 0 0 0 2px;
+        height: inherit;
+      }
+    }
+
+    .ws-mat-accent-border {
+      border: 1px solid rgba($colorWhite, 0.08);
+    }
+
+    .ws-mat-accent-border-active {
+      border: 1px solid $colorAccent;
     }
   }
 
@@ -338,7 +367,7 @@
     a[href^='mailto'],
     a[target='_blank'] {
       // color: $colorPrimaryLight;
-      color: $colorPrimaryLight !important;
+      color: $colorPrimaryDark !important;
       background-color: $colorPrimaryDark !important;
       // background-color: red !important;
     }
@@ -353,196 +382,206 @@
       color: $colorAccent;
       background-color: $colorPrimaryLight;
     }
-  }
 
-  // ws-widget-page a[href^='http'],
-  // ws-widget-page a[target='_blank'] {
-  //   text-decoration: none !important;
-  // }
 
-  .ws-mat-primary-lite-background-important {
-    background-color: $colorPrimaryLight !important;
-  }
+    // ws-widget-page a[href^='http'],
+    // ws-widget-page a[target='_blank'] {
+    //   text-decoration: none !important;
+    // }
 
-  .auth-tree-node {
-    &:hover {
-      background: rgba($colorAccent, 0.1);
+    .ws-mat-primary-lite-background-important {
+      background-color: $colorPrimaryLight !important;
     }
 
-    &.selected {
-      background: rgba($colorAccent, 0.2);
+    .auth-tree-node {
+      &:hover {
+        background: rgba($colorAccent, 0.1);
+      }
+
+      &.selected {
+        background: rgba($colorAccent, 0.2);
+      }
     }
-  }
 
-  .ws-mat-primary-background {
-    background-color: $colorAccent !important;
-  }
+    .ws-mat-primary-background {
+      background-color: $colorAccent !important;
+    }
 
-  .ws-mat-primary-tags {
-    background-color: #F5F5F5 !important;
-  }
+    .ws-mat-primary-tags {
+      background-color: #F5F5F5 !important;
+    }
 
-  .ws-mat-primary-tags-list {
-    background-color: #EEEEEE !important;
-  }
+    .ws-mat-primary-tags-list {
+      background-color: #EEEEEE !important;
+    }
 
-  .ws-primary-background {
-    background-color: $colorPrimary !important;
-  }
+    .ws-primary-background {
+      background-color: $colorPrimary !important;
+    }
 
-  .ws-mat-primary-background-op10 {
-    background: rgba(mat-color($primary, default), 0.1);
-  }
 
-  .ws-mat-primary-background-op30 {
-    background: rgba(mat-color($primary, default), 0.3);
-  }
 
-  .ws-mat-primary-background-op50 {
-    background: rgba(mat-color($primary, default), 0.5);
-  }
+    .ws-mat-primary-background-op10 {
+      background: rgba(mat-color($primary, default), 0.1);
+    }
 
-  .ws-mat-primary-background-op20 {
-    background: rgba(mat-color($primary, default), 0.2);
-  }
+    .ws-mat-primary-background-op30 {
+      background: rgba(mat-color($primary, default), 0.3);
+    }
 
-  .ws-mat-primary-background-op30-hover:hover {
-    background: rgba(mat-color($primary, default), 0.3);
-  }
+    .ws-mat-primary-background-op50 {
+      background: rgba(mat-color($primary, default), 0.5);
+    }
 
-  .ws-mat-primary-background-op100 {
-    background: rgba(mat-color($primary, default), 1);
-  }
+    .ws-mat-primary-background-op20 {
+      background: rgba(mat-color($primary, default), 0.2);
+    }
 
-  .ws-mat-accent-background {
-    background-color: $colorAccent;
-  }
+    .ws-mat-primary-background-op30-hover:hover {
+      background: rgba(mat-color($primary, default), 0.3);
+    }
 
-  .ws-mat-primary-default-text {
-    color: $colorPrimary !important;
-  }
+    .ws-mat-primary-background-op100 {
+      background: rgba(mat-color($primary, default), 1);
+    }
 
-  .ws-mat-default-text {
-    color: $colorAccent;
-  }
+    .ws-mat-accent-background {
+      background-color: $colorAccent;
+    }
 
-  .ws-mat-warn-text {
-    color: $colorWarn;
-  }
+    .ws-mat-primary-default-text {
+      color: $colorPrimary !important;
+    }
 
-  .ws-mat-green-text {
-    color: $colorGreen !important;
-  }
+    .ws-mat-default-text {
+      color: $colorAccent;
+    }
 
-  .ws-mat-red-text {
-    color: $colorRed !important;
-  }
+    .ws-mat-warn-text {
+      color: $colorWarn;
+    }
 
-  .ws-mat-primary-border {
-    border: 1px solid $colorPrimary;
-  }
+    .ws-mat-green-text {
+      color: $colorGreen !important;
+    }
 
-  .ws-mat-primary-border-bold {
-    border: 2px solid $colorAccent;
-  }
+    .ws-mat-red-text {
+      color: $colorRed !important;
+    }
 
-  .ws-mat-primary-border-top-bolder {
-    border-top: 4px solid $colorPrimary;
-  }
+    .ws-mat-primary-border {
+      border: 1px solid $colorPrimary;
+    }
 
-  .ws-mat-primary-lite-border-bottom {
-    border-bottom: 1px solid $colorPrimaryLight;
-  }
+    .ws-mat-primary-border-bold {
+      border: 2px solid $colorAccent;
+    }
 
-  .ws-mat-primary-border-bottom-bolder {
-    border-bottom: 3px solid $colorAccent;
-  }
+    .ws-mat-primary-border-top-bolder {
+      border-top: 4px solid $colorPrimary;
+    }
 
-  .ws-mat-accent-border-top-light {
-    border-top: 1px solid $colorAccent;
-  }
+    .ws-mat-primary-lite-border-bottom {
+      border-bottom: 1px solid $colorPrimaryLight;
+    }
 
-  .ws-mat-accent-border {
-    border: 1px solid $colorAccent;
-  }
+    .ws-mat-primary-border-bottom-bolder {
+      border-bottom: 3px solid $colorAccent;
+    }
 
-  .ws-mat-text-block-fade-gradient {
-    position: relative;
+    .ws-mat-accent-border-top-light {
+      border-top: 1px solid $colorAccent;
+    }
 
-    &::after,
-    &::before {
-      text-align: right;
+    .ws-mat-accent-border {
+      border: 1px solid rgba($colorBlack, 0.08);
+    }
+
+    .ws-mat-accent-border-active {
+      border: 1px solid $colorAccent;
+    }
+
+    .ws-mat-text-block-fade-gradient {
+      position: relative;
+      background: linear-gradient(to bottom,
+          rgba(mat-color($background, card), 0),
+          mat-color($background, card) 100%);
+
+      &::after,
+      &::before {
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+        height: 1.2em;
+      }
+
+      // &::after {
+      //   content: '';
+      //   background: linear-gradient(to right,
+      //       rgba(mat-color($background, card), 0),
+      //       mat-color($background, card) 50%);
+      // }
+
+      // &::before {
+      //   content: '...';
+      // }
+    }
+
+    .ws-mat-text-fade-gradient {
+      height: 2rem;
+      background-color: white;
       position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 40%;
-      height: 1.2em;
+      width: 90%;
+      margin-top: 24%;
+      background: linear-gradient(to bottom,
+          rgba(mat-color($background, card), 0),
+          mat-color($background, card) 100%);
     }
 
-    // &::after {
-    //   content: '';
-    //   background: linear-gradient(to right,
-    //       rgba(mat-color($background, card), 0),
-    //       mat-color($background, card) 50%);
-    // }
-
-    // &::before {
-    //   content: '...';
-    // }
-  }
-
-  .ws-mat-text-fade-gradient {
-    height: 2rem;
-    background-color: white;
-    position: absolute;
-    width: 90%;
-    margin-top: 24%;
-    background: linear-gradient(to bottom,
-        rgba(mat-color($background, card), 0),
-        mat-color($background, card) 100%);
-  }
-
-  .mat-button-toggle-checked {
-    // background-color: mat-color($primary);
-    color: $colorPrimary !important;
-    background-color: $colorAccentDark;
-  }
-
-  .ws-mat-button-theme {
-    // background-color: mat-color($primary);
-    color: $colorPrimary !important;
-    background-color: $colorAccentDark !important;
-  }
-
-  .ws-primary-tinted-50 {
-    @include color-background-opacity($colorPrimary, 0.5);
-  }
-
-  .ws-primary-bottom-border-hover {
-    border-bottom: 1px solid transparent;
-  }
-
-  .ws-primary-bottom-border-hover:hover {
-    border-bottom: 1px solid $colorPrimary;
-    transition: all 0.2s ease-out;
-    box-shadow: 0 -1px 0 0 $colorPrimary inset, 0 -2px 0 0 $colorPrimary inset;
-  }
-
-  #cke_1_contents,
-  .cke_wysiwyg_div {
-    background-color: $colorPrimary !important;
-    color: $colorAccent !important;
-  }
-
-  .required {
-    &::after {
-      color: $colorWarnDark;
-      content: ' *';
+    .mat-button-toggle-checked {
+      // background-color: mat-color($primary);
+      color: $colorPrimary !important;
+      background-color: $colorAccentDark;
     }
-  }
 
-  ws-widget-btn-catalog {
-    flex: 1;
-    margin-top: 7px;
+    .ws-mat-button-theme {
+      // background-color: mat-color($primary);
+      color: $colorPrimary !important;
+      background-color: $colorAccentDark !important;
+    }
+
+    .ws-primary-tinted-50 {
+      @include color-background-opacity($colorPrimary, 0.5);
+    }
+
+    .ws-primary-bottom-border-hover {
+      border-bottom: 1px solid transparent;
+    }
+
+    .ws-primary-bottom-border-hover:hover {
+      border-bottom: 1px solid $colorPrimary;
+      transition: all 0.2s ease-out;
+      box-shadow: 0 -1px 0 0 $colorPrimary inset, 0 -2px 0 0 $colorPrimary inset;
+    }
+
+    #cke_1_contents,
+    .cke_wysiwyg_div {
+      background-color: $colorPrimary !important;
+      color: $colorAccent !important;
+    }
+
+    .required {
+      &::after {
+        color: $colorWarnDark;
+        content: ' *';
+      }
+    }
+
+    ws-widget-btn-catalog {
+      flex: 1;
+      margin-top: 7px;
+    }
   }
 }

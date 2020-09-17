@@ -27,7 +27,7 @@
                 "enabled": false,
                 "uri": ""
             },
-            "enabled": true,
+            "enabled": false,
             "routerLink": "/app/discuss/groups"
         },
         {
@@ -47,7 +47,7 @@
                 "enabled": false,
                 "uri": ""
             },
-            "enabled": false,
+            "enabled": true,
             "routerLink": "/app/discuss/leaderboard"
         },
         {
@@ -57,7 +57,7 @@
                 "enabled": false,
                 "uri": ""
             },
-            "enabled": false,
+            "enabled": true,
             "routerLink": "/app/discuss/my-discussions"
         }
     ]

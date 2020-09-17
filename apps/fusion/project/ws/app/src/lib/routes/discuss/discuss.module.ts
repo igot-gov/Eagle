@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { PipeFilterModule } from '@ws-widget/utils'
+import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeRelativeTimeModule } from '@ws-widget/utils'
 import { DiscussComponent } from './routes/discuss-home/discuss.component'
 import { DiscussCommetsComponent } from './components/discuss-comments/discuss-comments.component'
 import { DiscussCategoriesComponent } from './routes/discuss-categories/discuss-categories.component'
@@ -32,6 +32,8 @@ import { DiscussStartComponent } from './components/discuss-start/discuss-start.
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { TrendingTagsComponent } from './components/trending-tags/trending-tags.component'
 import { DiscussionComponent } from './routes/discussion/discussion.component'
+import { RelatedDiscussionComponent } from './components/related-discussion/related-discussion.component'
+import { AvatarPhotoModule } from '@ws-widget/collection'
 @NgModule({
   declarations: [
     CategoryCardComponent,
@@ -48,6 +50,7 @@ import { DiscussionComponent } from './routes/discussion/discussion.component'
     DiscussTagsComponent,
     LeftMenuComponent,
     RightMenuComponent,
+    RelatedDiscussionComponent,
     TrendingTagsComponent,
   ],
   imports: [
@@ -68,6 +71,9 @@ import { DiscussionComponent } from './routes/discussion/discussion.component'
     MatButtonModule,
     MatSidenavModule,
     PipeFilterModule,
+    PipeHtmlTagRemovalModule,
+    PipeRelativeTimeModule,
+    AvatarPhotoModule,
   ],
   entryComponents: [
     DiscussStartComponent,
