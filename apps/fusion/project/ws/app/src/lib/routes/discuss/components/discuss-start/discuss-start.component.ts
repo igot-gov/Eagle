@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { FormGroup, FormBuilder } from '@angular/forms'
-export interface DialogData {
+export interface IDialogData {
   animal: string
   name: string
 }
@@ -12,8 +12,10 @@ export interface DialogData {
 })
 export class DiscussStartComponent implements OnInit {
   startForm!: FormGroup
-  constructor(public dialogRef: MatDialogRef<DiscussStartComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private formBuilder: FormBuilder) {
+  constructor(
+    public dialogRef: MatDialogRef<DiscussStartComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData,
+    private formBuilder: FormBuilder) {
 
   }
 
@@ -22,7 +24,7 @@ export class DiscussStartComponent implements OnInit {
       category: [],
       question: [],
       description: [],
-      tags: []
+      tags: [],
     })
   }
   onNoClick(): void {

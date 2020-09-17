@@ -2,10 +2,15 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-.discuss-card {
-  // display: flex;
+.category-card {
   flex: 1;
   height: auto;
+  max-width: 481px;
+  width: max-content;
+
+  @include breakpoint-xs {
+    width: auto;
+  }
 }
 
 .dot:before {
@@ -55,7 +60,7 @@
 
   @include breakpoint-xs {
     flex-direction: column;
-    margin: 0 24px 0 24px;
+    // margin: 0 24px 0 24px;
 
   }
 
@@ -72,4 +77,9 @@
 
 .pad-4 {
   padding: 4px;
+}
+
+.example-header-image {
+  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

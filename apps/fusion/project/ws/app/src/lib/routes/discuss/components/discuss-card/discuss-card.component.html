@@ -16,12 +16,27 @@
       </span>
     </ng-container>
   </mat-card-content>
-  <mat-card-actions>
-    <span>{{discuss.upvotes}} upvotes</span>
-    <span>{{discuss.downvotes}} downvotes</span>
-    <span>{{discuss.viewcount}} viewcount</span>
-    <span>{{(discuss.teaser.index || 1) -1 }} comments</span>
-  </mat-card-actions>
-  <mat-card-footer>
+  <!-- <mat-card-actions>
+
+  </mat-card-actions> -->
+  <mat-card-footer class="flex flex-1 custom margin-0">
+    <div class="flex flex-1 flex-row margin-left-xs">
+      <span class="flex margin-right-l mobile">
+        <mat-icon (click)="upvote(discuss)" class="cursor-pointer">arrow_upward</mat-icon>
+        <span class="pad-4">{{discuss.upvotes}}</span>
+      </span>
+      <span class="flex margin-right-l mobile">
+        <mat-icon (click)="downvote(discuss)" class="cursor-pointer">arrow_downward</mat-icon>
+        <span class="pad-4">{{discuss.downvotes}}</span>
+      </span>
+      <span class="flex mobile">
+        <mat-icon>trending_up</mat-icon>
+        <span class="pad-4">{{discuss.viewcount}}</span>
+      </span>
+    </div>
+    <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+      <span class="noocoments ws-mat-default-text" (click)="getDiscussion()">{{(discuss.teaser.index || 1) -1 }}
+        comments</span>
+    </div>
   </mat-card-footer>
 </mat-card>

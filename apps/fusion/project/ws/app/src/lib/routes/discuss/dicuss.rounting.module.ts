@@ -7,6 +7,7 @@ import { DiscussGroupsComponent } from './routes/discuss-groups/discuss-groups.c
 import { DiscussTagsComponent } from './routes/discuss-tags/discuss-tags.component'
 import { DiscussLeaderboardComponent } from './routes/discuss-leaderboard/discuss-leaderboard.component'
 import { DiscussMyDiscussionsComponent } from './routes/discuss-my-discussions/discuss-my-discussions.component'
+import { DiscussionComponent } from './routes/discussion/discussion.component'
 
 const routes: Routes = [
   {
@@ -16,11 +17,14 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'discussions',
+        redirectTo: 'home',
       },
       {
-        path: 'discussions',
+        path: 'home',
         component: DiscussAllComponent,
+      }, {
+        path: 'home/:topicId',
+        component: DiscussionComponent,
       },
       {
         path: 'categories',
