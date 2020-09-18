@@ -10,6 +10,10 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 const API_ENDPOINTS = {
     createTopic: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/topics`,
     createUser: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/users`,
+    // tslint:disable-next-line: object-literal-sort-keys
+    createOrUpdateTags: (topicId: string | number) =>
+        `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/topics/${topicId}/tags`,
+    followTopic: (topicId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/topics/${topicId}/follow`,
     replyToTopic: (topicId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/topics/${topicId}`,
     votePost: (postId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/posts/${postId}/vote`,
 }
@@ -121,6 +125,51 @@ writeApi.post('/posts/:postId/vote', async (req, res) => {
         res.send(response.data)
     } catch (err) {
         logError('ERROR ON writeAPI POST /posts/:postId/vote >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+writeApi.put('/topics/:topicId/follow', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const topicId = req.params.topicId
+        const url = API_ENDPOINTS.followTopic(topicId)
+        const response = await axios.put(
+            url,
+            {
+                // TODO :
+                _uid: 2,
+            },
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        res.send(response.data)
+    } catch (err) {
+        logError('ERROR ON writeAPI  PUT /topics/:topicId/follow >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+writeApi.put('/topics/:topicId/tags', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const topicId = req.params.topicId
+        const url = API_ENDPOINTS.createOrUpdateTags(topicId)
+        const response = await axios.put(
+            url,
+            {
+                ...req.body,
+            },
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        res.send(response.data)
+    } catch (err) {
+        logError('ERROR ON writeAPI  PUT /topics/:topicId/tags >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
