@@ -1,25 +1,19 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild, OnDestroy } from '@angular/core'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 import { NsContent } from '@ws-widget/collection'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 import { SCORMAdapterService } from './SCORMAdapter/scormAdapter'
-
-// const scormAdapter = require('scorm-api-adapter').default
-// import SCORMAdapter from 'scorm-api-adapter'
 
 @Component({
   selector: 'viewer-plugin-html',
   templateUrl: './html.component.html',
   styleUrls: ['./html.component.scss'],
 })
-export class HtmlComponent implements OnInit, OnChanges {
-
-  // private mobileOpenInNewTab!: any
-
+export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('mobileOpenInNewTab', { read: ElementRef, static: false }) mobileOpenInNewTab !: ElementRef<HTMLAnchorElement>
   @Input() htmlContent: NsContent.IContent | null = null
   iframeUrl: SafeResourceUrl | null = null
@@ -35,28 +29,39 @@ export class HtmlComponent implements OnInit, OnChanges {
   constructor(
     private domSanitizer: DomSanitizer,
     public mobAppSvc: MobileAppsService,
-    // private http: HttpClient,
     private scormAdapterService: SCORMAdapterService,
     private router: Router,
     private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
+    private events: EventService,
   ) {
-    // (window as any).API = new scormAdapter();
-    // (window as any).API.uri = 'https://localhost:3000/great-endpoit'
-    // this.ScormAdapterService = new SCORMAdapterService()
-    // this.ScormAdapterService.uri('https://localhost:3000/great-endpoit')
     (window as any).API = this.scormAdapterService
+    // if (window.addEventListener) {
+    window.addEventListener('message', this.receiveMessage.bind(this))
+    // }
+    // else {
+    //   (<any>window).attachEvent('onmessage', this.receiveMessage.bind(this))
+    // }
+    // window.addEventListener('message', function (event) {
+    //   /* tslint:disable-next-line */
+    //   console.log('message', event)
+    // })
+    // window.addEventListener('onmessage', function (event) {
+    //   /* tslint:disable-next-line */
+    //   console.log('onmessage===>', event)
+    // })
   }
 
   ngOnInit() {
-    // this.mobAppSvc.simulateMobile()
     if (this.htmlContent && this.htmlContent.identifier) {
       this.scormAdapterService.contentId = this.htmlContent.identifier
       this.scormAdapterService.loadData()
-      // this.scormAdapterService.LMSCommit()
     }
   }
-
+  ngOnDestroy() {
+    window.removeEventListener('message', this.receiveMessage)
+    // window.removeEventListener('onmessage', this.receiveMessage)
+  }
   ngOnChanges() {
     this.isIntranetUrl = false
     this.progress = 100
@@ -145,7 +150,18 @@ export class HtmlComponent implements OnInit, OnChanges {
       `/app/toc/${this.htmlContent ? this.htmlContent.identifier : ''}/overview`,
     ])
   }
-
+  receiveMessage(msg: any) {
+    /* tslint:disable-next-line */
+    console.log("msg=>", msg)
+    if (msg.data) {
+      this.raiseTelemetry(msg.data)
+    } else {
+      this.raiseTelemetry({
+        event: msg.message,
+        id: msg.id,
+      })
+    }
+  }
   openInNewTab() {
     if (this.htmlContent) {
       if (this.mobAppSvc && this.mobAppSvc.isMobile) {
@@ -198,6 +214,17 @@ export class HtmlComponent implements OnInit, OnChanges {
           this.pageFetchStatus = 'done'
           this.showIsLoadingMessage = false
         }
+      })
+    }
+  }
+
+  raiseTelemetry(data: any) {
+    if (this.htmlContent) {
+      /* tslint:disable-next-line */
+      console.log(this.htmlContent.identifier)
+      this.events.raiseInteractTelemetry(data.event, 'scrom', {
+        contentId: this.htmlContent.identifier,
+        ...data,
       })
     }
   }

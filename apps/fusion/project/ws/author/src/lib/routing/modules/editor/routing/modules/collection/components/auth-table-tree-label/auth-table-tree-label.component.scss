@@ -6,7 +6,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
   -webkit-box-orient: vertical;
 }
 
@@ -19,4 +20,38 @@
 
 div {
   display: flex;
+}
+
+.type-container {
+  letter-spacing: 0px;
+  display: flex;
+  align-items: center;
+
+  // justify-content: center;
+  .rotate-90 {
+    transform: rotate(-90deg);
+  }
+
+  .custom-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    margin-right: 8px;
+  }
+
+  .resource {
+    color: #00A9F4;
+  }
+
+  .module {
+    color: #34D6A4;
+  }
+
+  .course {
+    color: #F58634;
+  }
+
+  .program {
+    color: #003F5C;
+  }
 }

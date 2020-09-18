@@ -26,6 +26,21 @@ export class SCORMAdapterService {
 
   LMSInitialize() {
     this.store.contentKey = this.contentId
+    // this.loadDataAsync().subscribe((response) => {
+    //   const data = response.result.data
+    //   const loadDatas: IScromData = {
+    //     "cmi.core.exit": data["cmi.core.exit"],
+    //     "cmi.core.lesson_status": data["cmi.core.lesson_status"],
+    //     "cmi.core.session_time": data["cmi.core.session_time"],
+    //     "cmi.suspend_data": data["cmi.suspend_data"],
+    //     Initialized: true,
+    //   }
+    //   this.store.setAll(loadDatas)
+    // }, (error) => {
+    //   if (error) {
+    //     this._setError(101)
+    //   }
+    // })
     this.store.setItem('Initialized', true)
     return true
   }
@@ -121,11 +136,14 @@ export class SCORMAdapterService {
     }
     this.store.setItem('errors', errors)
   }
+  loadDataAsync() {
+    return this.http.get<any>(API_END_POINTS.SCROM_FETCH + '/' + this.contentId)
+  }
   loadData() {
     this.http.get<any>(API_END_POINTS.SCROM_FETCH + '/' + this.contentId).subscribe((response) => {
       // console.log(response.result.data)
       const data = response.result.data
-      const loadData: IScromData = {
+      const loadDatas: IScromData = {
         "cmi.core.exit": data["cmi.core.exit"],
         "cmi.core.lesson_status": data["cmi.core.lesson_status"],
         "cmi.core.session_time": data["cmi.core.session_time"],
@@ -133,7 +151,7 @@ export class SCORMAdapterService {
         Initialized: data["Initialized"],
         // errors: data["errors"]
       }
-      this.store.setAll(loadData)
+      this.store.setAll(loadDatas)
     }, (error) => {
       if (error) {
         // console.log(error)

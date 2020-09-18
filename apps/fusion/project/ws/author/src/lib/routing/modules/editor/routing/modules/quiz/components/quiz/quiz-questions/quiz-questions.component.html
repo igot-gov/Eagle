@@ -74,3 +74,11 @@
   <ng-template #top>
     <ws-auth-options [currentContent]="currentId" (action)="action($event)"></ws-auth-options>
   </ng-template>
+
+
+  <div *ngIf="previewMode">
+    <mat-icon (click)="closePreview()" class="close-preview" matTooltip="Back"
+      i18n-matTooltip="Back button to go to previous page">
+      arrow_back</mat-icon>
+    <ws-auth-viewer [identifier]="currentId" [mimeTypeRoute]="mimeTypeRoute"></ws-auth-viewer>
+  </div>

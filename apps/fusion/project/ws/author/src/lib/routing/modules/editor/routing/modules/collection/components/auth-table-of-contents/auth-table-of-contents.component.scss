@@ -13,11 +13,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 1; /* number of lines to show */
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
   -webkit-box-orient: vertical;
 }
 
-.node-name + .placeholder {
+.node-name+.placeholder {
   margin-top: 19px;
 }
 
@@ -100,6 +101,7 @@ mat-tree {
   max-height: 650px;
   overflow: hidden;
   width: 310px;
+
   &:hover {
     overflow: auto;
   }

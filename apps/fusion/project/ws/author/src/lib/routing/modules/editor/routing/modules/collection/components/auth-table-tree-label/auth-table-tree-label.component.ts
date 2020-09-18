@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
-import { CollectionResolverService } from './../../services/resolver.service'
+// import { CollectionResolverService } from './../../services/resolver.service'
 
 @Component({
   selector: 'ws-auth-table-tree-label',
@@ -14,9 +14,10 @@ export class AuthTableTreeLabelComponent implements OnInit {
   @Input() isInvalid = false
   name = ''
   @Input() icon = ''
+  resourceTyp = 'Resource'
   constructor(
     private storeService: EditorContentService,
-    private resolverService: CollectionResolverService,
+    // private resolverService: CollectionResolverService,
   ) { }
 
   ngOnInit() {
@@ -30,7 +31,9 @@ export class AuthTableTreeLabelComponent implements OnInit {
 
   getUpdatedContent() {
     const updatedMeta = this.storeService.getUpdatedMeta(this.identifier)
+    this.resourceTyp = updatedMeta.category
     this.name = updatedMeta.name
-    this.icon = this.resolverService.getIcon(updatedMeta)
+    this.icon = 'call_to_action'
+    // this.resolverService.getIcon(updatedMeta)
   }
 }
