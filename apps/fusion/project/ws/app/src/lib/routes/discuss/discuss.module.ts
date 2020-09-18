@@ -13,6 +13,7 @@ import { DiscussCardComponent } from './components/discuss-card/discuss-card.com
 import { CategoryCardComponent } from './components/category-card/category-card.component'
 import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 import { RightMenuComponent } from './components/right-menu/right-menu.component'
+// import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
@@ -34,6 +35,12 @@ import { TrendingTagsComponent } from './components/trending-tags/trending-tags.
 import { DiscussionComponent } from './routes/discussion/discussion.component'
 import { RelatedDiscussionComponent } from './components/related-discussion/related-discussion.component'
 import { AvatarPhotoModule } from '@ws-widget/collection'
+import { EditorSharedModule } from '@ws/author/src/lib/routing/modules/editor/shared/shared.module'
+import { CkEditorModule } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.module'
+import { LoaderService } from '@ws/author/src/lib/services/loader.service'
+import { InitResolver } from './resolvers/init-resolve.service'
+import { CKEditorService } from '../../../../../../../library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
+
 @NgModule({
   declarations: [
     CategoryCardComponent,
@@ -74,10 +81,17 @@ import { AvatarPhotoModule } from '@ws-widget/collection'
     PipeHtmlTagRemovalModule,
     PipeRelativeTimeModule,
     AvatarPhotoModule,
+    EditorSharedModule,
+    CkEditorModule,
   ],
   entryComponents: [
     DiscussStartComponent,
   ],
+  providers: [
+    CKEditorService,
+    LoaderService,
+    InitResolver,
+  ]
 })
 export class DiscussModule {
 

@@ -8,6 +8,7 @@ import { DiscussTagsComponent } from './routes/discuss-tags/discuss-tags.compone
 import { DiscussLeaderboardComponent } from './routes/discuss-leaderboard/discuss-leaderboard.component'
 import { DiscussMyDiscussionsComponent } from './routes/discuss-my-discussions/discuss-my-discussions.component'
 import { DiscussionComponent } from './routes/discussion/discussion.component'
+import { InitResolver } from './resolvers/init-resolve.service'
 
 const routes: Routes = [
   {
@@ -25,6 +26,12 @@ const routes: Routes = [
       }, {
         path: 'home/:topicId',
         component: DiscussionComponent,
+        data: {
+          load: ['ckeditor'],
+        },
+        resolve: {
+          script: InitResolver,
+        },
       },
       {
         path: 'categories',

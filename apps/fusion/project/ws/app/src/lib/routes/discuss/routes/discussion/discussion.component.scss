@@ -14,9 +14,9 @@
   justify-content: space-between;
 }
 
-.display-hide {
-  display: none !important;
-}
+// .display-hide {
+//   display: none !important;
+// }
 
 .tag {
   display: flex;
@@ -41,4 +41,37 @@
 
 .pad-4 {
   padding: 4px;
+}
+
+.filter {
+  .filter-option {
+    margin: $size-xs $size-m;
+    /* border-bottom: darkslateblue; */
+    border-radius: 0;
+    border-bottom-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+  }
+}
+
+.mat-card-header-text {
+  margin-left: 0;
+}
+
+.posttime {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.post-card {
+  box-shadow: none !important;
+  border-radius: unset;
+
+}
+
+.remove-botton-radius {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
