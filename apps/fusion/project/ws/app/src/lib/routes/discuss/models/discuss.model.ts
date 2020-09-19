@@ -145,16 +145,16 @@ export namespace NSDiscussData {
   //   disabled: boolean | number
   // }
   export interface IPagination {
-    prev: IpageData
-    next: IpageData
-    first: IpageData
-    last: IpageData
+    prev: IPageData
+    next: IPageData
+    first: IPageData
+    last: IPageData
     rel?: any[]
     pages?: any[]
     currentPage: number
     pageCount: number
   }
-  export interface IpageData {
+  export interface IPageData {
     page: number
     active: boolean
   }

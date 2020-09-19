@@ -1,7 +1,9 @@
 
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { FormGroup, FormBuilder } from '@angular/forms'
+import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
+import { LoaderService } from '../../../../../../../author/src/public-api'
 
 @Component({
   selector: 'app-discuss-discussion',
@@ -10,11 +12,17 @@ import { FormGroup, FormBuilder } from '@angular/forms'
   // tslint:disable-next-line
   host: { class: 'flex flex-1 margin-top-l' }
 })
-export class DiscussionComponent implements OnInit {
+export class DiscussionComponent implements OnInit, OnDestroy {
   postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
-
-  constructor(private formBuilder: FormBuilder) {
+  currentFilter = 'recent'
+  location = CONTENT_BASE_STREAM
+  timer: any
+  constructor(
+    private formBuilder: FormBuilder,
+    private loader: LoaderService,
+    private ref: ChangeDetectorRef,
+  ) {
 
   }
   ngOnInit(): void {
@@ -22,6 +30,19 @@ export class DiscussionComponent implements OnInit {
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
+  }
+  ngAfterViewInit() {
+    this.ref.detach()
+    this.timer = setInterval(() => {
+      this.ref.detectChanges()
+      // tslint:disable-next-line: align
+    }, 100)
+  }
+
+  ngOnDestroy() {
+    this.loader.changeLoad.next(false)
+    this.ref.detach()
+    clearInterval(this.timer)
   }
   assignData() {
     // tslint:disable
@@ -33,7 +54,7 @@ export class DiscussionComponent implements OnInit {
       "slug": "5/new-topic",
       "tid": 5,
       "timestamp": 1600058707867,
-      "title": "What is the meaning of Project?",
+      "title": "What are some merits and demerits of the Dicey’s Rule of law?",
       "uid": 2,
       "viewcount": 6,
       "teaserPid": 10,
@@ -73,7 +94,7 @@ export class DiscussionComponent implements OnInit {
       ],
       "posts": [
         {
-          "content": "<p dir=\"auto\">new topic new topic new topic new topic new topic new topic</p>\n",
+          "content": "The Rule of Law according to Dicey means that no man is punishable or can be lawfully made to suffer in body or goods except for distinct breach of law and no man is above the law. The term Rule of Law thus, means the paramountcy of Law over Government.",
           "pid": 7,
           "tid": 5,
           "timestamp": 1600058707867,
@@ -81,7 +102,7 @@ export class DiscussionComponent implements OnInit {
           "bookmarks": 1,
           "deleted": 0,
           "deleterUid": 0,
-          "downvotes": 0,
+          "downvotes": 10,
           "edited": 1600365438917,
           "editedISO": "2020-09-17T17:57:18.917Z",
           "editor": {
@@ -90,8 +111,8 @@ export class DiscussionComponent implements OnInit {
             "userslug": "admin"
           },
           "timestampISO": "2020-09-14T04:45:07.867Z",
-          "upvotes": 0,
-          "votes": 0,
+          "upvotes": 30,
+          "votes": 40,
           "index": 0,
           "user": {
             "uid": 2,
@@ -135,17 +156,17 @@ export class DiscussionComponent implements OnInit {
           "display_post_menu": true
         },
         {
-          "content": "<p dir=\"auto\">do something in this.</p>\n",
+          "content": "Retro occupy organic, stumptown shabby chic pour-over roof party DIY normcore. Actually artisan organic occupy",
           "pid": 9,
           "tid": 5,
           "timestamp": 1600059125295,
           "uid": 2,
           "deleted": 0,
-          "upvotes": 0,
-          "downvotes": 0,
+          "upvotes": 20,
+          "downvotes": 2,
           "deleterUid": 0,
           "edited": 0,
-          "votes": 0,
+          "votes": 22,
           "timestampISO": "2020-09-14T04:52:05.295Z",
           "editedISO": "",
           "index": 1,
@@ -192,17 +213,26 @@ export class DiscussionComponent implements OnInit {
           "display_post_menu": true
         },
         {
-          "content": "<p dir=\"auto\">Don't do something in this.</p>\n",
+          "content": `Merits:
+
+Help in making limits to the power of administrative authorities.
+A major role in growth and recognition of administrative law.
+Act as a scale for the test of administrative action.
+            Demerits:
+
+          His theory was not fully accepted during that era also.
+Failed to distinguish between discretionary and arbitrary power.
+He misunderstood the concept of Droit administration which was actually successful in France.`,
           "pid": 10,
           "tid": 5,
           "timestamp": 1600059162772,
           "uid": 2,
           "deleted": 0,
-          "upvotes": 0,
-          "downvotes": 0,
+          "upvotes": 20,
+          "downvotes": 5,
           "deleterUid": 0,
           "edited": 0,
-          "votes": 0,
+          "votes": 25,
           "timestampISO": "2020-09-14T04:52:42.772Z",
           "editedISO": "",
           "index": 2,
@@ -345,6 +375,11 @@ export class DiscussionComponent implements OnInit {
     }
     // tslint:enable
   }
+  updatedata(meta: string, value: any, event = false) {
+    this.postAnswerForm.controls[meta].setValue(value, { events: event })
+    // this.contentService.setUpdatedMeta({ [meta]: value } as any, this.contentMeta.identifier)
+  }
+
   upvote(discuss: NSDiscussData.IDiscussionData) {
     // console.log(discuss)
     if (discuss) {
@@ -356,6 +391,11 @@ export class DiscussionComponent implements OnInit {
     // console.log(discuss)
     if (discuss) {
 
+    }
+  }
+  filter(key: string | 'recent' | 'popular') {
+    if (key) {
+      this.currentFilter = key
     }
   }
   showError(meta: string) {
