@@ -24,8 +24,8 @@
             No Active User Info Available
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
-            <ng-container *ngFor="let cohort of newUserArray" [ngTemplateOutlet]="unitCohortNew"
-              [ngTemplateOutletContext]="{ user: cohort }">
+            <ng-container *ngFor="let userObj of newUserArray" [ngTemplateOutlet]="userIndividualNew"
+              [ngTemplateOutletContext]="{ user: userObj }">
             </ng-container>
           </div>
         </div>
@@ -46,8 +46,8 @@
             No People info Available
           </h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
-            <ng-container *ngFor="let cohort of departmentUserArray" [ngTemplateOutlet]="unitCohortNew"
-              [ngTemplateOutletContext]="{ user: cohort }"></ng-container>
+            <ng-container *ngFor="let userObj of departmentUserArray" [ngTemplateOutlet]="userIndividualNew"
+              [ngTemplateOutletContext]="{ user: userObj }"></ng-container>
           </div>
         </div>
         <div class="text-center">
@@ -59,35 +59,17 @@
 
   </mat-accordion>
 
-  <ng-template #unitCohort let-user="user">
-    <div class="unit-cohort">
-      <!-- <ws-widget-user-image class="cohort-image" [email]="user.email"></ws-widget-user-image> -->
-      <ws-widget-avatar-photo [name]="getUserFullName(user)" size="m" [photoUrl]="photoUrl"></ws-widget-avatar-photo>
-      <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
-        class="width-expand padding-left-xs">
-        <div class="mat-body-strong cohorts-name">
-          {{
-            { firstName: user.first_name, lastName: user.last_name, email: user.email } | pipeNameTransform
-          }}
-        </div>
-        <div class="mat-caption cohorts-desc">{{ user.department_name }}</div>
-      </div>
-    </div>
-  </ng-template>
-
-  <ng-template #unitCohortNew let-user="user">
+  <ng-template #userIndividualNew let-user="user">
     <div class="unit-cohort sm:pr-8 md:pr-10">
-      <!-- <ws-widget-user-image class="user-image" [imageType]="'user-photo'" [userName]="getUserFullName(user)"
-        [imageSize]="'small'" [email]="user.email" [imageUrl]="user.photo || ''"></ws-widget-user-image> -->
-      <ws-widget-avatar-photo [name]="getUserFullName(user)" [photoUrl]="photoUrl"></ws-widget-avatar-photo>
+      <ws-widget-avatar-photo [name]="getUserFullName(user)" [photoUrl]=""></ws-widget-avatar-photo>
       <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
         class="width-expand padding-left-xs">
         <div class="mat-body-strong cohorts-name">
           {{
-            { firstName: user.first_name, lastName: user.last_name, email: user.email } | pipeNameTransform
+            { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
           }}
         </div>
-        <div class="mat-caption cohorts-desc">{{ user.department_name }}</div>
+        <div class="mat-caption cohorts-desc">{{ user.employmentDetails.departmentName }}</div>
       </div>
     </div>
 
