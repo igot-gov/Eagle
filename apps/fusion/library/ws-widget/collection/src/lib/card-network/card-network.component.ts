@@ -19,11 +19,6 @@ export class CardNetworkComponent extends WidgetBaseComponent
   keyTag: string[] = []
   newUserReq: any
   deptUserReq: any
-  picTempArray = ['https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpIGUpmvAHj4TibHHMhN1pDQdi7pplyj5kWg&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcS_PDNKKD_KGnjnuckRGUiSpOxlmLT6R_KXMA&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRh4moBSRCeyvWaJI8pPsFRCczpc9rB-f53ew&usqp=CAU']
-  photoUrl = ''
 
   constructor(private router: Router, private cardNetworkService: CardNetWorkService) {
     super()
@@ -32,23 +27,18 @@ export class CardNetworkComponent extends WidgetBaseComponent
   newUserArray = []
   departmentUserArray = []
   ngOnInit() {
-    this.photoUrl = this.getUserRandomPic()
     this.getAllActiveUsers()
     this.getAllDepartmentUsers()
   }
 
   getUserFullName(user: any) {
-    if (user && user.first_name && user.last_name) {
-      return `${user.first_name.trim()} ${user.last_name.trim()}`
+    if (user && user.personalDetails.firstname && user.personalDetails.surname) {
+      return `${user.personalDetails.firstname.trim()} ${user.personalDetails.surname.trim()}`
     }
     return ''
   }
   goToUserProfile(user: any) {
     this.router.navigate(['/app/person-profile'], { queryParams: { emailId: user.email } })
-  }
-  getUserRandomPic() {
-    const randomIndex = Math.floor(Math.random() * Math.floor(this.picTempArray.length))
-    return `${this.picTempArray[randomIndex].trim()}`
   }
 
   getAllActiveUsers() {
@@ -61,6 +51,8 @@ export class CardNetworkComponent extends WidgetBaseComponent
     }
     this.cardNetworkService.fetchLatestUserInfo(this.newUserReq).subscribe(data => {
       this.newUserArray = data.users
+      console.log(this.newUserArray)
+
       if (typeof this.newUserArray === 'undefined') {
         this.newUserArray = []
       }
