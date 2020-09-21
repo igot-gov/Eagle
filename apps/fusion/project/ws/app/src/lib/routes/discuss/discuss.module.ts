@@ -26,6 +26,8 @@ import {
   MatInputModule,
   MatButtonModule,
   MatSidenavModule,
+  MatChipsModule,
+  MatProgressSpinnerModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { DiscussAllComponent } from './routes/discuss-all/discuss-all.component'
@@ -62,6 +64,8 @@ import { CKEditorService } from '../../../../../../../library/ws-widget/collecti
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     DiscussRoutingModule,
     MatGridListModule,
     MatExpansionModule,
@@ -69,6 +73,7 @@ import { CKEditorService } from '../../../../../../../library/ws-widget/collecti
     MatDividerModule,
     MatIconModule,
     MatCardModule,
+    MatChipsModule,
     MatListModule,
     MatSelectModule,
     FormsModule,
@@ -77,6 +82,7 @@ import { CKEditorService } from '../../../../../../../library/ws-widget/collecti
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
+    MatProgressSpinnerModule,
     PipeFilterModule,
     PipeHtmlTagRemovalModule,
     PipeRelativeTimeModule,
