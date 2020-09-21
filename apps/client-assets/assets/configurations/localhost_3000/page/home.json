@@ -137,7 +137,7 @@
             "className": "new-box",
             "widget": {
               "widgetType": "card",
-              "widgetSubType": "cardWelcome",
+              "widgetSubType": "cardHome",
               "widgetData": {}
             }
           }
