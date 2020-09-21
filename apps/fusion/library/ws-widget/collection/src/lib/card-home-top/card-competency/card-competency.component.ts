@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 
 @Component({
-  selector: 'app-card-competency',
+  selector: 'ws-widget-card-competency',
   templateUrl: './card-competency.component.html',
   styleUrls: ['./card-competency.component.scss'],
 

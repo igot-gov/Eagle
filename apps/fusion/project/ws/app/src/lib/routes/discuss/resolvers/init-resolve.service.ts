@@ -23,7 +23,6 @@ export class InitResolver implements Resolve<any> {
     // const pushedJobs: string[] = ['']
     const data: string[] = route.data ? route.data.load || [] : []
 
-
     if (data.includes('ckeditor')) {
       forkProcess.push(this.ckEditorInject.inject())
       // forkProcess.push(this.zipJSInject.inject())

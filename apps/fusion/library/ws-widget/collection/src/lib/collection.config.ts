@@ -31,7 +31,9 @@ export const ROOT_WIDGET_CONFIG = {
     welcome: 'cardWelcome',
     learning: 'cardLearn',
     network: 'cardNetwork',
-    home: 'cardHome',
+    home_top: 'cardHomeTop',
+    home_network: 'cardHomeNetwork',
+    home_discuss: 'cardHomeDiscuss',
   },
   contentStrip: {
     _type: 'contentStrip',

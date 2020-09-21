@@ -91,7 +91,7 @@ import { CKEditorService } from '../../../../../../../library/ws-widget/collecti
     CKEditorService,
     LoaderService,
     InitResolver,
-  ]
+  ],
 })
 export class DiscussModule {
 
