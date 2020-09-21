@@ -19,6 +19,6 @@ import { CKEditorService } from './ck-editor.service'
   entryComponents: [
     CkEditorComponent,
   ],
-  providers: [CKEditorService]
+  providers: [CKEditorService],
 })
 export class CkEditorModule { }

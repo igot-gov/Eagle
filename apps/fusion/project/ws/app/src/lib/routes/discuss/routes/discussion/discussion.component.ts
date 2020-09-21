@@ -1,5 +1,5 @@
 
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core'
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
@@ -12,7 +12,7 @@ import { LoaderService } from '../../../../../../../author/src/public-api'
   // tslint:disable-next-line
   host: { class: 'flex flex-1 margin-top-l' }
 })
-export class DiscussionComponent implements OnInit, OnDestroy {
+export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
   currentFilter = 'recent'
