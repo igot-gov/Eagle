@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { getRootOrg } from '../../authoring/utils/header'
 import { axiosRequestConfig } from '../../configs/request.config'
-import { getWriteApiAdminUID, getWriteApiToken } from '../../utils/discussionHub-helper'
+import { getUserUID, getWriteApiAdminUID, getWriteApiToken } from '../../utils/discussionHub-helper'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
@@ -54,15 +54,18 @@ writeApi.post('/topics', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const url = API_ENDPOINTS.createTopic
+        const userUid = await getUserUID(userId)
         const response = await axios.post(
             url,
             {
                 ...req.body,
-                // _uid: getWriteApiAdminUID(),
+                _uid: userUid,
             },
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
-        res.send(response.data)
+        if (response && response.data) {
+            res.send(response.data)
+        }
     } catch (err) {
         logError('ERROR ON POST writeApi /topics >', err)
         res.status((err && err.response && err.response.status) || 500)
@@ -77,15 +80,18 @@ writeApi.post('/topics/:topicId', async (req, res) => {
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const topicId = req.params.topicId
         const url = API_ENDPOINTS.replyToTopic(topicId)
+        const userUid = await getUserUID(userId)
         const response = await axios.post(
             url,
             {
                 ...req.body,
-                // _uid: getWriteApiAdminUID(),
+                _uid: userUid,
             },
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
-        res.send(response.data)
+        if (response && response.data) {
+            res.send(response.data)
+        }
     } catch (err) {
         logError('ERROR ON writeAPI  POST /topics/:topicId >', err)
         res.status((err && err.response && err.response.status) || 500)
@@ -114,15 +120,18 @@ writeApi.post('/posts/:postId/vote', async (req, res) => {
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const postId = req.params.postId
         const url = API_ENDPOINTS.votePost(postId)
+        const userUid = await getUserUID(userId)
         const response = await axios.post(
             url,
             {
                 ...req.body,
-                // _uid: getWriteApiAdminUID(),
+                _uid: userUid,
             },
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
-        res.send(response.data)
+        if (response && response.data) {
+            res.send(response.data)
+        }
     } catch (err) {
         logError('ERROR ON writeAPI POST /posts/:postId/vote >', err)
         res.status((err && err.response && err.response.status) || 500)
@@ -137,15 +146,18 @@ writeApi.put('/topics/:topicId/follow', async (req, res) => {
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const topicId = req.params.topicId
         const url = API_ENDPOINTS.followTopic(topicId)
+        const userUid = await getUserUID(userId)
         const response = await axios.put(
             url,
             {
                 // TODO :
-                _uid: 2,
+                _uid: userUid,
             },
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
-        res.send(response.data)
+        if (response && response.data) {
+            res.send(response.data)
+        }
     } catch (err) {
         logError('ERROR ON writeAPI  PUT /topics/:topicId/follow >', err)
         res.status((err && err.response && err.response.status) || 500)
@@ -167,7 +179,9 @@ writeApi.put('/topics/:topicId/tags', async (req, res) => {
             },
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
-        res.send(response.data)
+        if (response && response.data) {
+            res.send(response.data)
+        }
     } catch (err) {
         logError('ERROR ON writeAPI  PUT /topics/:topicId/tags >', err)
         res.status((err && err.response && err.response.status) || 500)

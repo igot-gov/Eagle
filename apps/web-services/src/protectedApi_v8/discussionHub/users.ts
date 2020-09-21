@@ -16,6 +16,7 @@ const API_ENDPOINTS = {
     getUsersWatchedTopics: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/watched`,
     // tslint:disable-next-line: object-literal-sort-keys
     getUserByEmail: (email: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/email/${email}`,
+    getUserByUsername: (username: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/username/${username}`,
 }
 
 export const usersApi = Router()
@@ -188,6 +189,31 @@ export async function getUserByEmail(email: any): Promise<any> {
 
     } catch (err) {
         logError('ERROR ON method getUserByEmail >', err)
+        return err
+    }
+}
+
+// tslint:disable-next-line: no-any
+export async function getUserByUsername(username: any): Promise<any> {
+    logInfo('Finding user in NodeBB DiscussionHub...')
+    // tslint:disable-next-line: no-try-promise
+    try {
+        const url = API_ENDPOINTS.getUserByUsername(username)
+        return new Promise(async (resolve, reject) => {
+            const response = await axios.get(
+                url,
+                { ...axiosRequestConfig }
+            ).catch((err) => {
+                logError('ERROR ON method getUserByUsername api call to nodebb DiscussionHub >', err)
+                reject(err)
+            })
+            if (response && response.data) {
+                resolve(response.data)
+            }
+        })
+
+    } catch (err) {
+        logError('ERROR ON method getUserByUsername >', err)
         return err
     }
 }
