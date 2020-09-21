@@ -31,6 +31,7 @@ export const ROOT_WIDGET_CONFIG = {
     welcome: 'cardWelcome',
     learning: 'cardLearn',
     network: 'cardNetwork',
+    home: 'cardHome',
   },
   contentStrip: {
     _type: 'contentStrip',

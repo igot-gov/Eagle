@@ -50,6 +50,7 @@ import { CardWelcomeComponent } from './card-welcome/card-welcome.component'
 import { CardNetworkComponent } from './card-network/card-network.component'
 import { CardWelcomeModule } from './card-welcome/card-welcome.module'
 import { CardNetworkModule } from './card-network/card-network.module'
+import { CardHomeModule } from './card-home/card-home.module'
 import { ChannelHubComponent } from './channel-hub/channel-hub.component'
 import { ChannelHubModule } from './channel-hub/channel-hub.module'
 import { ROOT_WIDGET_CONFIG } from './collection.config'
@@ -112,6 +113,7 @@ import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
 import { ContentStripVerticalModule } from './content-strip-vertical/content-strip-vertical.module'
 import { ContentStripVerticalComponent } from './content-strip-vertical/content-strip-vertical.component'
+import { CardHomeComponent } from './card-home/card-home.component'
 
 export const WIDGET_REGISTERED_MODULES = [
   BtnAppsModule,
@@ -139,6 +141,7 @@ export const WIDGET_REGISTERED_MODULES = [
   CardWelcomeModule,
   CardNetworkModule,
   ChannelHubModule,
+  CardHomeModule,
   ContentStripMultipleModule,
   ContentStripSingleModule,
   ContentStripVerticalModule,
@@ -288,6 +291,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.network,
     component: CardNetworkComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home,
+    component: CardHomeComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.channelHub._type,
