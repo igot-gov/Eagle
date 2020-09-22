@@ -8,12 +8,13 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_ENDPOINTS = {
-    getTopicDetails: (tid: number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/topic/${tid}`,
     getPopularTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/popular`,
     getRecentTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/recent`,
     getTopTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/top`,
     getUnreadTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/unread`,
     getUnreadTopicsTotal: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/unread/total`,
+    // tslint:disable-next-line: object-literal-sort-keys
+    getTopicDetails: (tid: number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/topic/${tid}`,
 }
 
 export const topicsApi = Router()
