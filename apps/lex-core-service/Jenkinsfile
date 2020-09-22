@@ -12,22 +12,22 @@ node() {
 		checkout scm
 		}
 	}
-           stage('docker-pre-build') {
-             sh '''
-              cd $docker_file_path
-              pwd
-              docker build -f ./Dockerfile.build -t $docker_pre_build .
-              docker run --name $docker_pre_build $docker_pre_build:latest && docker cp $docker_pre_build:/opt/target/bodhi-1.0-SNAPSHOT.jar .
-	      docker rm -f $docker_pre_build
-	      docker rmi -f $docker_pre_build
+      //     stage('docker-pre-build') {
+       //      sh '''
+        //      cd $docker_file_path
+       //       pwd
+       //       docker build -f ./Dockerfile.build -t $docker_pre_build .
+       //       docker run --name $docker_pre_build $docker_pre_build:latest && docker cp $docker_pre_build:/opt/target/bodhi-1.0-SNAPSHOT.jar .
+	//      docker rm -f $docker_pre_build
+	 //     docker rmi -f $docker_pre_build
                 '''
-        }
+      //  }
 	 
 	stage('SonarQube analysis') {
    		 // requires SonarQube Scanner 2.8+
    		def scannerHome = tool 'sonar_scanner';
    		withSonarQubeEnv('sonarqube') {
-    		sh 'mvn clean package sonar:sonar'
+    		sh 'cd $docker_file_path && mvn clean package sonar:sonar'
     			 }
   	}
   	stage("Quality Gate") {
