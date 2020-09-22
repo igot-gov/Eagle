@@ -11,29 +11,30 @@ import _ from 'lodash'
 export class TrendingTagsComponent implements OnInit {
   @Input() tags!: NSDiscussData.ITag[]
   max = 0
+  trandingTags: NSDiscussData.ITag[]
   constructor() {
 
   }
   ngOnInit(): void {
-    this.tags = [
-      {
-        bgColor: '',
-        color: '',
-        score: 12,
-        value: 'Tag 1',
-        valueEscaped: 'Tag 1',
-      },
-      {
-        bgColor: '',
-        color: '',
-        score: 6,
-        value: 'Tag 2',
-        valueEscaped: 'Tag 2',
-      },
-    ]
+    // this.tags = [
+    //   {
+    //     bgColor: '',
+    //     color: '',
+    //     score: 12,
+    //     value: 'Tag 1',
+    //     valueEscaped: 'Tag 1',
+    //   },
+    //   {
+    //     bgColor: '',
+    //     color: '',
+    //     score: 6,
+    //     value: 'Tag 2',
+    //     valueEscaped: 'Tag 2',
+    //   },
+    // ]
 
     this.max = _.get(_.maxBy(this.tags, 'score'), 'score') || 0
-
+    this.trandingTags = _.chain(this.tags).orderBy('score', 'desc').take(10).value()
   }
   css() {
     // return 'linear - gradient(to left, #00ff00 " + 80 + " %, #ff0000 20 %)"
