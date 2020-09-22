@@ -11,6 +11,10 @@ import { DiscussionComponent } from './routes/discussion/discussion.component'
 import { InitResolver } from './resolvers/init-resolve.service'
 import { DiscussTagsResolve } from './resolvers/discuss-tags-resolve'
 import { DiscussCategoriesResolve } from './resolvers/discuss-category-resolve'
+import { DiscussRecentResolve } from './resolvers/discuss-recent-resolve'
+// import { DiscussCategoriesResolve } from './resolvers/discuss-category-resolve'
+import { DiscussTopicResolve } from './resolvers/discuss-topic-resolve'
+import { DiscussUnreadResolve } from './resolvers/discuss-unread-resolve'
 
 const routes: Routes = [
   {
@@ -27,7 +31,9 @@ const routes: Routes = [
         component: DiscussAllComponent,
         resolve: {
           availCategories: DiscussCategoriesResolve,
-          availableTags: DiscussTagsResolve
+          availableTags: DiscussTagsResolve,
+          recent: DiscussRecentResolve,
+          unread: DiscussUnreadResolve
         }
       }, {
         path: 'home/:topicId',
@@ -37,6 +43,7 @@ const routes: Routes = [
         },
         resolve: {
           script: InitResolver,
+          topic: DiscussTopicResolve
         },
       },
       {
@@ -72,6 +79,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [DiscussTagsResolve, DiscussCategoriesResolve]
+  providers: [DiscussTagsResolve, DiscussCategoriesResolve, DiscussRecentResolve, DiscussTopicResolve, DiscussUnreadResolve]
 })
 export class DiscussRoutingModule { }

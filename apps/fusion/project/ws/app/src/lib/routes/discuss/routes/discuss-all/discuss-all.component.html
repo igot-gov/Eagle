@@ -21,10 +21,11 @@
         <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
         'ws-mat-accent-border':currentFilter !== 'watched'}" mat-button (click)="filter('watched')">Watched</a> -->
       </div>
-      <ng-container *ngFor="let data of descussionList">
-        <app-dicuss-card [discuss]="data"></app-dicuss-card>
+      <ng-container *ngIf="discussionList && discussionList.topics">
+        <ng-container *ngFor="let data of discussionList.topics">
+          <app-dicuss-card [discuss]="data"></app-dicuss-card>
+        </ng-container>
       </ng-container>
-
     </div>
   </div>
   <div class="flex flex-1">

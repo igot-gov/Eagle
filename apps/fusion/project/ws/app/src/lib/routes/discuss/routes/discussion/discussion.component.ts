@@ -1,5 +1,6 @@
 
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { NSDiscussData } from '../../models/discuss.model'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
@@ -22,11 +23,12 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     private formBuilder: FormBuilder,
     private loader: LoaderService,
     private ref: ChangeDetectorRef,
+    private route: ActivatedRoute
   ) {
-
   }
   ngOnInit(): void {
-    this.assignData()
+    // this.assignData()
+    this.data = this.route.snapshot.data.topic
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
