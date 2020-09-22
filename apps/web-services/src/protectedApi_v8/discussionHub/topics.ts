@@ -8,6 +8,7 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_ENDPOINTS = {
+    getTopicDetails: (tid: number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/topic/${tid}`,
     getPopularTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/popular`,
     getRecentTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/recent`,
     getTopTopics: `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/top`,
@@ -16,6 +17,25 @@ const API_ENDPOINTS = {
 }
 
 export const topicsApi = Router()
+
+topicsApi.get('/:tid', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const tid = req.params.tid
+        const url = API_ENDPOINTS.getTopicDetails(tid)
+        const response = await axios.get(
+            url,
+            { ...axiosRequestConfig, headers: { rootOrg } }
+        )
+        res.send(response.data)
+    } catch (err) {
+        logError('ERROR ON GET topicsApi /recent >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
 
 topicsApi.get('/recent', async (req, res) => {
     try {
