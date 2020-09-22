@@ -9,6 +9,8 @@ import { DiscussLeaderboardComponent } from './routes/discuss-leaderboard/discus
 import { DiscussMyDiscussionsComponent } from './routes/discuss-my-discussions/discuss-my-discussions.component'
 import { DiscussionComponent } from './routes/discussion/discussion.component'
 import { InitResolver } from './resolvers/init-resolve.service'
+import { DiscussTagsResolve } from './resolvers/discuss-tags-resolve'
+import { DiscussCategoriesResolve } from './resolvers/discuss-category-resolve'
 
 const routes: Routes = [
   {
@@ -23,6 +25,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: DiscussAllComponent,
+        resolve: {
+          availCategories: DiscussCategoriesResolve,
+          availableTags: DiscussTagsResolve
+        }
       }, {
         path: 'home/:topicId',
         component: DiscussionComponent,
@@ -36,6 +42,9 @@ const routes: Routes = [
       {
         path: 'categories',
         component: DiscussCategoriesComponent,
+        resolve: {
+          availCategories: DiscussCategoriesResolve
+        }
       },
       {
         path: 'groups',
@@ -44,6 +53,9 @@ const routes: Routes = [
       {
         path: 'tags',
         component: DiscussTagsComponent,
+        resolve: {
+          availableTags: DiscussTagsResolve
+        }
       },
       {
         path: 'leaderboard',
@@ -60,5 +72,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  providers: [DiscussTagsResolve, DiscussCategoriesResolve]
 })
 export class DiscussRoutingModule { }

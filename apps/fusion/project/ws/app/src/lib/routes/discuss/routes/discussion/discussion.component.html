@@ -57,20 +57,36 @@
             </ws-widget-ck-editor>
           </form>
         </div>
-        <div *ngIf="data.posts && data.postcount > 1" class="flex flex-1 flex-column">
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button type="button" [mat-dialog-close]="true"
+          class="text-white ws-mat-primary-background flex-auto-display margin-right-xs">
+          <span class="text-white" i18n>Post reply</span>
+        </button>
+        <!-- <button mat-raised-button type="button" [mat-dialog-close]="true"
+                    class="ws-mat-accent-border flex-auto-display">
+                    <span class="ws-mat-default-text" i18n>Discard</span>
+                  </button> -->
+      </mat-card-actions>
+    </mat-card>
+    <ng-container *ngIf="data.posts && data.postcount > 1">
+      <mat-card class="recent-most">
+        <div class="flex flex-1 flex-column">
           <div class="flex flex-1 filter">
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'recent',
-                      'ws-mat-accent-border':currentFilter !== 'recent'}" mat-button (click)="filter('recent')">
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                            'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+              (click)="filter('timestamp')">
               Recent </a>
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'popular',
-                      'ws-mat-accent-border':currentFilter !== 'popular'}" mat-button (click)="filter('popular')">
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvotes',
+                            'ws-mat-accent-border':currentFilter !== 'upvotes'}" mat-button
+              (click)="filter('upvotes')">
               Most upvoted </a>
           </div>
         </div>
-      </mat-card-content>
-
-    </mat-card>
-    <ng-container *ngFor="let post of data.posts">
+      </mat-card>
+    </ng-container>
+    <ng-container *ngFor="let post of data.posts | orderBy: currentFilter :'desc'">
       <mat-card *ngIf="post.index != 0" class="post-card">
         <mat-card-header>
           <ws-widget-avatar-photo mat-card-avatar [name]="post.user.username" size="s">
@@ -113,3 +129,21 @@
     <app-discuss-related-discussion></app-discuss-related-discussion>
   </div>
 </div>
+
+
+<ng-template #reply let-reply="reply" let-title="title">
+  <mat-card>
+    <mat-card-title>Post your reply-{{title}}</mat-card-title>
+    <mat-card-content></mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button type="button" [mat-dialog-close]="true"
+        class="text-white ws-mat-primary-background flex-auto-display">
+        <span class="text-white" i18n>Post reply</span>
+      </button>
+      <!-- <button mat-raised-button type="button" [mat-dialog-close]="true"
+                        class="ws-mat-accent-border flex-auto-display">
+                        <span class="ws-mat-default-text" i18n>Discard</span>
+                      </button> -->
+    </mat-card-actions>
+  </mat-card>
+</ng-template>

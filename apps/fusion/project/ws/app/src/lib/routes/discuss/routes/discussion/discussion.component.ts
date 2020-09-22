@@ -15,7 +15,7 @@ import { LoaderService } from '../../../../../../../author/src/public-api'
 export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
-  currentFilter = 'recent'
+  currentFilter = 'timestamp' //  'recent'
   location = CONTENT_BASE_STREAM
   timer: any
   constructor(
@@ -53,7 +53,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       "postcount": 3,
       "slug": "5/new-topic",
       "tid": 5,
-      "timestamp": 1600058707867,
+      "timestamp": 1612058707867,
       "title": "What are some merits and demerits of the Dicey’s Rule of law?",
       "uid": 2,
       "viewcount": 6,
@@ -159,10 +159,10 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
           "content": "Retro occupy organic, stumptown shabby chic pour-over roof party DIY normcore. Actually artisan organic occupy",
           "pid": 9,
           "tid": 5,
-          "timestamp": 1600059125295,
+          "timestamp": 1610059125295,
           "uid": 2,
           "deleted": 0,
-          "upvotes": 20,
+          "upvotes": 21,
           "downvotes": 2,
           "deleterUid": 0,
           "edited": 0,
@@ -182,7 +182,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
             "banned": 0,
             "banned:expire": 0,
             "status": "online",
-            "lastonline": 1600365178879,
+            "lastonline": 1600365178279,
             "groupTitle": "[\"administrators\"]",
             "groupTitleArray": [
               "administrators"
@@ -228,7 +228,7 @@ He misunderstood the concept of Droit administration which was actually successf
           "timestamp": 1600059162772,
           "uid": 2,
           "deleted": 0,
-          "upvotes": 20,
+          "upvotes": 30,
           "downvotes": 5,
           "deleterUid": 0,
           "edited": 0,
@@ -393,7 +393,7 @@ He misunderstood the concept of Droit administration which was actually successf
 
     }
   }
-  filter(key: string | 'recent' | 'popular') {
+  filter(key: string | 'timestamp' | 'upvotes') {
     if (key) {
       this.currentFilter = key
     }

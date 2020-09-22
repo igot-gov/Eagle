@@ -53,6 +53,10 @@
     border-left-width: 0;
     border-right-width: 0;
   }
+
+  .filter-option:first-child {
+    margin-left: 0;
+  }
 }
 
 .mat-card-header-text {
@@ -68,10 +72,28 @@
 .post-card {
   box-shadow: none !important;
   border-radius: unset;
+  padding: $size-m $size-xl $size-m $size-l;
 
+}
+
+.recent-most {
+  box-shadow: none !important;
+  border-radius: unset;
 }
 
 .remove-botton-radius {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.flex-auto-display {
+  @include breakpoint-xs {
+    flex: auto;
+    margin-left: 0 !important;
+    margin-top: 1rem;
+  }
+
+  @include breakpoint-s {
+    flex: auto;
+  }
 }

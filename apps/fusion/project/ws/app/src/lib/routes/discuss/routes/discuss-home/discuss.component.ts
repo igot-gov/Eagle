@@ -15,7 +15,8 @@ export class DiscussComponent implements OnInit, OnDestroy {
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private valueSvc: ValueService) { }
+  constructor(private valueSvc: ValueService) {
+  }
 
   ngOnInit() {
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {

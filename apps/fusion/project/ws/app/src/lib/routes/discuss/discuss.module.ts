@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeRelativeTimeModule } from '@ws-widget/utils'
+import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
 import { DiscussComponent } from './routes/discuss-home/discuss.component'
 import { DiscussCommetsComponent } from './components/discuss-comments/discuss-comments.component'
 import { DiscussCategoriesComponent } from './routes/discuss-categories/discuss-categories.component'
@@ -41,7 +41,7 @@ import { EditorSharedModule } from '@ws/author/src/lib/routing/modules/editor/sh
 import { CkEditorModule } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.module'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { InitResolver } from './resolvers/init-resolve.service'
-import { CKEditorService } from '../../../../../../../library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
+import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
 
 @NgModule({
   declarations: [
@@ -89,6 +89,7 @@ import { CKEditorService } from '../../../../../../../library/ws-widget/collecti
     AvatarPhotoModule,
     EditorSharedModule,
     CkEditorModule,
+    PipeOrderByModule
   ],
   entryComponents: [
     DiscussStartComponent,

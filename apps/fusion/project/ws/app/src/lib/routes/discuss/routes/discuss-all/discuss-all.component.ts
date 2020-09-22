@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussStartComponent } from '../../components/discuss-start/discuss-start.component'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-discuss-all',
@@ -14,7 +15,9 @@ import { DiscussStartComponent } from '../../components/discuss-start/discuss-st
 })
 export class DiscussAllComponent implements OnInit {
   currentFilter = 'recent'
-  constructor(public dialog: MatDialog) {
+  trendingTags: NSDiscussData.ITag[] = [];
+  constructor(public dialog: MatDialog, private route: ActivatedRoute) {
+    this.trendingTags = this.route.snapshot.data.availableTags.data.tags
 
   }
   descussionList!: NSDiscussData.IDiscussionData[]

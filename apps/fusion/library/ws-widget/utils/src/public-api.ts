@@ -24,6 +24,7 @@ export * from './lib/pipes/pipe-duration-transform/pipe-duration-transform.modul
 export * from './lib/pipes/pipe-html-tag-removal/pipe-html-tag-removal.module'
 export * from './lib/pipes/pipe-filter/pipe-filter.module'
 export * from './lib/pipes/pipe-relative-time/pipe-relative-time.module'
+export * from './lib/pipes/pipe-order-by/pipe-order-by.module'
 export * from './lib/pipes/pipe-limit-to/pipe-limit-to.module'
 export * from './lib/pipes/pipe-name-transform/pipe-name-transform.module'
 export * from './lib/pipes/pipe-partial-content/pipe-partial-content.module'
