@@ -5,7 +5,6 @@ import { FormGroup, FormBuilder } from '@angular/forms'
 import { MatChipInputEvent, MatSnackBar } from '@angular/material'
 import { DiscussService } from '../../services/discuss.service'
 import { NSDiscussData } from '../../models/discuss.model'
-import { IChipItems } from '../../../user-profile/models/user-profile.model'
 export interface IDialogData {
   animal: string
   name: string
@@ -20,7 +19,7 @@ export class DiscussStartComponent implements OnInit {
   allCategories!: NSDiscussData.ICategorie[]
   allTags!: NSDiscussData.ITag[]
   separatorKeysCodes: number[] = [ENTER, COMMA]
-  postTagsArray: IChipItems[] = []
+  postTagsArray: string[] = []
   uploadSaveData = false
   showErrorMsg = false
   createErrorMsg = ''
@@ -68,17 +67,17 @@ export class DiscussStartComponent implements OnInit {
 
   addPersonalInterests(event: MatChipInputEvent): void {
     const input = event.input
-    const value = event.value as unknown as IChipItems
-
-    if ((value || '')) {
+    const value = event.value
+    if ((value && (value.length >= 3) && (value.length) <= 24)) {
       this.postTagsArray.push(value)
+    } else {
+      return
     }
 
     if (input) {
       input.value = ''
     }
 
-    // this.knownLanguagesInputRef.nativeElement.value = ''
     if (this.startForm.get('tags')) {
       // tslint:disable-next-line: no-non-null-assertion
       this.startForm.get('tags')!.setValue(null)

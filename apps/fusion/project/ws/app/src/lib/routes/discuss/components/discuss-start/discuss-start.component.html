@@ -8,7 +8,7 @@
             <mat-form-field appearance="fill" class="margin-top-l">
               <mat-label>Select category</mat-label>
               <mat-select formControlName="category" #category [required]="true">
-                <mat-option [value]="c.cid" *ngFor="let c of allCategories">{{c.name}}</mat-option>
+                <mat-option [value]="c.cid" *ngFor="let c of allCategories" [innerHTML]="c.name"></mat-option>
               </mat-select>
               <mat-error *ngIf="showError('category')" i18n="category Error|Explains category is required">
                 category is mandatory
@@ -21,8 +21,9 @@
             </p> -->
             <mat-form-field appearance="outline" class="margin-top-m"
               [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
+              <mat-label>Ask a question or post an idea</mat-label>
               <input matInput formControlName="question" #question maxlength="1000" i18n-placeholder
-                placeholder="Ask a question or post an idea" [required]="true" />
+                placeholder="" [required]="true" />
               <!-- <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint> -->
               <mat-error *ngIf="showError('question')" i18n="question Error|Explains question is required">
                 Question is mandatory
@@ -61,7 +62,7 @@
             <input matInput i18n-placeholder="Enter tags here between 3 to 24 characters each"
               placeholder="Enter tags here between 3 to 24 characters each" formControlName="tags" i18n-aria-label
               aria-label="Enter tags" [matChipInputFor]="postTags"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" maxlength="24"
               (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp" [required]="false"/>
           </mat-form-field>
         </div>
