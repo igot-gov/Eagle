@@ -8,7 +8,15 @@ import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 })
 export class CardHomeNetworkComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
+  newUserArray = ['1', '2', '3', '4']
+  enablePeopleSearch = true
+  imageSize = 'm'
   ngOnInit(): void {
   }
-
+  getUserFullName() {
+    return 'SH'
+  }
+  getUserSize() {
+    return 'm'
+  }
 }

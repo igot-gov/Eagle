@@ -8,5 +8,15 @@ import { Component } from '@angular/core'
 })
 
 export class CardLearningStatusComponent {
+  items = [{
+    count: 14,
+    status: 'Completed',
+  }, {
+    count: 32,
+    status: 'In Progress',
+  }, {
+    count: 11,
+    status: 'Not Started',
+  }]
 
 }

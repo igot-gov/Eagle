@@ -61,7 +61,7 @@
 
   <ng-template #userIndividualNew let-user="user">
     <div class="unit-cohort sm:pr-8 md:pr-10">
-      <ws-widget-avatar-photo [name]="getUserFullName(user)" [photoUrl]=""></ws-widget-avatar-photo>
+      <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
       <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
         class="width-expand padding-left-xs">
         <div class="mat-body-strong cohorts-name">
