@@ -11,7 +11,7 @@ import _ from 'lodash'
 export class TrendingTagsComponent implements OnInit {
   @Input() tags!: NSDiscussData.ITag[]
   max = 0
-  trandingTags: NSDiscussData.ITag[]
+  trandingTags!: NSDiscussData.ITag[]
   constructor() {
 
   }
