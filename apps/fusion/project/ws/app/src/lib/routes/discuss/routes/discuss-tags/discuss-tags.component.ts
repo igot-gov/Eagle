@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 /* tslint:disable */
 import _ from 'lodash'
+import { ActivatedRoute } from '@angular/router'
 /* tslint:enable */
 @Component({
   selector: 'app-discuss-tags',
@@ -10,11 +11,12 @@ import _ from 'lodash'
   styleUrls: ['./discuss-tags.component.scss'],
 })
 export class DiscussTagsComponent implements OnInit {
-
+  tag = this.route.snapshot.data.availableTags.data;
   tags!: NSDiscussData.ITag[]
   filteredTags!: NSDiscussData.ITag[]
-  constructor() {
-    this.assignTags()
+  constructor(private route: ActivatedRoute) {
+    // this.assignTags()
+    this.tags = this.tag.tags
   }
 
   ngOnInit() {

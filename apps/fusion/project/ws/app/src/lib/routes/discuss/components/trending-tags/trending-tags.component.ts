@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 /* tslint:disable */
 import _ from 'lodash'
@@ -9,7 +9,7 @@ import _ from 'lodash'
   styleUrls: ['./trending-tags.component.scss'],
 })
 export class TrendingTagsComponent implements OnInit {
-  tags!: NSDiscussData.ITag[]
+  @Input() tags!: NSDiscussData.ITag[]
   max = 0
   constructor() {
 

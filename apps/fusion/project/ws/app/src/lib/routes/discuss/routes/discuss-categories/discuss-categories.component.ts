@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { NSDiscussData } from '../../models/discuss.model'
 
 @Component({
@@ -8,11 +9,18 @@ import { NSDiscussData } from '../../models/discuss.model'
   styleUrls: ['./discuss-categories.component.scss'],
 })
 export class DiscussCategoriesComponent implements OnInit {
+  data = this.route.snapshot.data.availCategories.data
   categories!: NSDiscussData.ICategorie[]
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+    this.categories = this.data.categories
+  }
 
   ngOnInit(): void {
+    // this.initC()
+
+  }
+  initC() {
     /* tslint:disable */
     this.categories = [
       {
@@ -191,6 +199,5 @@ export class DiscussCategoriesComponent implements OnInit {
       }
     ]
     /* tslint:enable */
-
   }
 }
