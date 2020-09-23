@@ -1,8 +1,11 @@
-.box{
+@import 'ws-mixins';
+
+.box {
   box-sizing: border-box !important
 }
+
 .new-box {
-  max-width: 1217px;
+  max-width: $max-width-2;
   display: inline-block;
   margin: 0 auto;
 }

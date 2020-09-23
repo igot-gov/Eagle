@@ -1,0 +1,226 @@
+{
+  "contentType": "Page",
+  "navigationBar": {
+    "pageTitle": "",
+    "pageBackLink": "none",
+    "background": {
+      "color": "default",
+      "styles": {
+        "background-color": "white",
+        "color": "#333"
+      }
+    },
+    "xsmallNonMenuLinks": [
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "Search",
+          "actionBtnId": "feature_search",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "network",
+          "actionBtnId": "feature_discuss",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "network",
+          "actionBtnId": "feature_network",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "learn",
+          "actionBtnId": "feature_learn",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      },
+      {
+        "widgetType": "actionButton",
+        "widgetSubType": "buttonFeature",
+        "widgetData": {
+          "toolTop": "feature_notification",
+          "actionBtnId": "feature_notification",
+          "config": {
+            "type": "mat-icon-button"
+          }
+        }
+      }
+    ],
+    "links": []
+  },
+  "pageLayout": {
+    "widgetSubType": "gridLayout",
+    "widgetType": "layout",
+    "widgetData": {
+      "widgets": [
+       [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "card",
+              "widgetSubType": "cardLearn",
+              "widgetData": {}
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "latest",
+                    "title": "Recently added",
+                    "info": {
+                      "mode": "below",
+                      "visibilityMode": "hidden",
+                      "icon": {
+                        "icon": "info",
+                        "scale": 0.8
+                      },
+                      "widget": {
+                        "widgetType": "element",
+                        "widgetSubType": "elementHtml",
+                        "widgetData": {
+                          "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are in news right now.</p>"
+                        }
+                      }
+                    },
+                    "stripConfig": {
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
+                    },
+                    "filters": [],
+                    "request": {
+                      "searchV6": {
+                        "locale": [
+                          "en"
+                        ],
+                        "pageSize": 12,
+                        "query": "all",
+                        "didYouMean": true,
+                        "filters": [
+                          {
+                            "andFilters": [
+                              {
+                                "lastUpdatedOn": [
+                                  "month"
+                                ]
+                              },
+                              {
+                                "contentType": [
+                                  "Course",
+                                  "Learning Path"
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "includeSourceFields": [
+                          "creatorLogo"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "continueLearning",
+                    "title": "Continue Learning",
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "History"
+                      }
+                    },
+                    "noDataWidget": {
+                      "widgetType": "element",
+                      "widgetSubType": "elementHtml",
+                      "widgetData": {
+                        "html": "<p class=\"ws-mat-primary-text\">Learning activities you start will appear here.</p>"
+                      }
+                    },
+                    "info": {
+                      "mode": "below",
+                      "visibilityMode": "hidden",
+                      "icon": {
+                        "icon": "info",
+                        "scale": 0.8
+                      },
+                      "widget": {
+                        "widgetType": "element",
+                        "widgetSubType": "elementHtml",
+                        "widgetData": {
+                          "html": "<p class=\"ws-mat-primary-text\">These are the learning activities you’ve started but haven’t finished yet. Ready to keep going?</p>"
+                        }
+                      }
+                    },
+                    "stripConfig": {
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/user/history",
+                        "queryParams": {
+                          "pageSize": 12,
+                          "sourceFields": [
+                            "creatorLogo"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      
+       
+     
+      ]
+    }
+  }
+}

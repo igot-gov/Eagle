@@ -1,0 +1,44 @@
+{
+    "activities": [
+        {
+            "id": "1",
+            "title": "Favourites",
+            "description": "",
+            "isNew": true,
+            "clickUrl": "/app/playlist/me",
+            "icon": "/assets/icons/playlist.svg",
+            "tag": "KF",
+            "hasRole": []
+        },
+        {
+            "id": "2",
+            "title": "Goals",
+            "description": "",
+            "isNew": true,
+            "clickUrl": "/app/goals/me",
+            "icon": "/assets/icons/module.svg",
+            "tag": "LC",
+            "hasRole": []
+        },
+        {
+            "id": "3",
+            "title": "Interests",
+            "description": "",
+            "isNew": true,
+            "clickUrl": "/app/profile/interest",
+            "icon": "/assets/icons/interest.svg",
+            "tag": "KF",
+            "hasRole": []
+        },
+        {
+            "id": "4",
+            "title": "Courses",
+            "description": "",
+            "isNew": true,
+            "clickUrl": "/page/explore",
+            "icon": "/assets/icons/mingym.svg",
+            "tag": "CAT",
+            "hasRole": []
+        }
+    ]
+}

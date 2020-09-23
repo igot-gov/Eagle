@@ -1,0 +1,77 @@
+<section *ngIf="enableFeature" class="base-layout">
+  <mat-grid-list cols="2" rowHeight="8:1">
+    <mat-grid-tile class="network-title">
+      <h2>Network</h2>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field>
+        <mat-placeholder>Search by name</mat-placeholder>
+        <input matInput type="search">
+        <button mat-button matSuffix mat-stroked-button aria-label="search">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-accordion multi>
+    <mat-expansion-panel class="mat-elevation-z" [expanded]="true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title i18n>New on IGOT Karmyogi</mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div>
+          <h3 class="mat-error text-center" *ngIf="newUserArray.length === 0" i18n>
+            No Active User Info Available
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
+            <ng-container *ngFor="let userObj of newUserArray" [ngTemplateOutlet]="userIndividualNew"
+              [ngTemplateOutletContext]="{ user: userObj }">
+            </ng-container>
+          </div>
+        </div>
+        <div class="text-center">
+          <mat-spinner [strokeWidth]="3" *ngIf="newUserArray.length ===0" [diameter]="40" class="display-inline-block">
+          </mat-spinner>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+    <mat-expansion-panel class="mat-elevation-z" [expanded]="true" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title i18n>People to Follow</mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div>
+          <h3 class="mat-error text-center" *ngIf="departmentUserArray.length === 0" i18n>
+            No People info Available
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
+            <ng-container *ngFor="let userObj of departmentUserArray" [ngTemplateOutlet]="userIndividualNew"
+              [ngTemplateOutletContext]="{ user: userObj }"></ng-container>
+          </div>
+        </div>
+        <div class="text-center">
+          <mat-spinner *ngIf="newUserArray.length ===0" [strokeWidth]="3" [diameter]="40" class="display-inline-block">
+          </mat-spinner>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+  <ng-template #userIndividualNew let-user="user">
+    <div class="unit-cohort sm:pr-8 md:pr-10">
+      <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
+      <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
+        class="width-expand padding-left-xs">
+        <div class="mat-body-strong cohorts-name">
+          {{
+            { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
+          }}
+        </div>
+        <div class="mat-caption cohorts-desc">{{ user.employmentDetails.departmentName }}</div>
+      </div>
+    </div>
+
+  </ng-template>
+</section>

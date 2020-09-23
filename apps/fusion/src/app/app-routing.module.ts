@@ -73,6 +73,19 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/discuss',
+    loadChildren: () =>
+      import('./routes/route-discuss.module').then(u => u.RouteDiscussModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'discuss',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/gamification',
     loadChildren: () =>
       import('./routes/route-gamification.module').then(u => u.RouteGamificationModule),
@@ -310,6 +323,7 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
+  { path: 'network', redirectTo: 'page/network', pathMatch: 'full' },
   {
     path: 'page/toc',
     redirectTo: '/',

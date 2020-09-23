@@ -16,7 +16,7 @@ router-outlet+* {
 }
 
 .new-box {
-  max-width: 1217px;
+  max-width: $max-width-2;
   // display: inline-block;
   display: flex;
   margin: 0 auto;

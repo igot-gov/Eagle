@@ -1,0 +1,9 @@
+<div class="flex flex-1 custom">
+  <div class="flex flex-3 flex-column">
+    <div class="flex flex-1 flex-row margin-fix flex-wrap">
+      <ng-container *ngFor="let data of categories">
+        <app-dicuss-category-card [category]="data"></app-dicuss-category-card>
+      </ng-container>
+    </div>
+  </div>
+</div>

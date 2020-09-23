@@ -44,8 +44,16 @@ import { CardChannelComponent } from './card-channel/card-channel.component'
 import { CardChannelModule } from './card-channel/card-channel.module'
 import { CardContentComponent } from './card-content/card-content.component'
 import { CardContentModule } from './card-content/card-content.module'
+import { CardLearnComponent } from './card-learn/card-learn.component'
+import { CardLearnModule } from './card-learn/card-learn.module'
 import { CardWelcomeComponent } from './card-welcome/card-welcome.component'
+import { CardNetworkComponent } from './card-network/card-network.component'
 import { CardWelcomeModule } from './card-welcome/card-welcome.module'
+import { CardNetworkModule } from './card-network/card-network.module'
+import { CardHomeNetworkModule } from './card-home-network/card-home-network.module'
+import { CardHomeTopModule } from './card-home-top/card-home-top.module'
+import { CardBrowseCourseModule } from './card-browse-course/card-browse-course.module'
+import { CardHomeDiscussModule } from './card-home-discuss/card-home-discuss.module'
 import { ChannelHubComponent } from './channel-hub/channel-hub.component'
 import { ChannelHubModule } from './channel-hub/channel-hub.module'
 import { ROOT_WIDGET_CONFIG } from './collection.config'
@@ -106,6 +114,12 @@ import { TreeComponent } from './tree/tree.component'
 import { TreeModule } from './tree/tree.module'
 import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
+import { ContentStripVerticalModule } from './content-strip-vertical/content-strip-vertical.module'
+import { ContentStripVerticalComponent } from './content-strip-vertical/content-strip-vertical.component'
+import { CardHomeTopComponent } from './card-home-top/card-home-top.component'
+import { CardHomeNetworkComponent } from './card-home-network/card-home-network.component'
+import { CardHomeDiscussComponent } from './card-home-discuss/card-home-discuss.component'
+import { CardBrowseCourseComponent } from './card-browse-course/card-browse-course.component'
 
 export const WIDGET_REGISTERED_MODULES = [
   BtnAppsModule,
@@ -129,10 +143,17 @@ export const WIDGET_REGISTERED_MODULES = [
   CardBreadcrumbModule,
   CardContentModule,
   CardChannelModule,
+  CardLearnModule,
   CardWelcomeModule,
+  CardNetworkModule,
   ChannelHubModule,
+  CardHomeNetworkModule,
+  CardHomeTopModule,
+  CardBrowseCourseModule,
+  CardHomeDiscussModule,
   ContentStripMultipleModule,
   ContentStripSingleModule,
+  ContentStripVerticalModule,
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
@@ -267,8 +288,38 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.learning,
+    component: CardLearnComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.welcome,
     component: CardWelcomeComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.network,
+    component: CardNetworkComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_top,
+    component: CardHomeTopComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.browse_course,
+    component: CardBrowseCourseComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_network,
+    component: CardHomeNetworkComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_discuss,
+    component: CardHomeDiscussComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.channelHub._type,
@@ -279,6 +330,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
     component: ContentStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.verticalStrip,
+    component: ContentStripVerticalComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,

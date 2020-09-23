@@ -7,7 +7,8 @@ export interface IActivityCard {
   isNew: boolean
   clickUrl: string
   tag: string,
-  hasRole: string[]
+  hasRole: string[],
+  class?: string
 }
 export interface IActivity {
   activities: IActivityCard[]

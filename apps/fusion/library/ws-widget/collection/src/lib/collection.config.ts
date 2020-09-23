@@ -29,11 +29,18 @@ export const ROOT_WIDGET_CONFIG = {
     content: 'cardContent',
     channel: 'cardChannel',
     welcome: 'cardWelcome',
+    browse_course: 'cardBrowseCourse',
+    learning: 'cardLearn',
+    network: 'cardNetwork',
+    home_top: 'cardHomeTop',
+    home_network: 'cardHomeNetwork',
+    home_discuss: 'cardHomeDiscuss',
   },
   contentStrip: {
     _type: 'contentStrip',
     multiStrip: 'contentStripMultiple',
     singleStrip: 'contentStripSingle',
+    verticalStrip: 'contentStripVertical',
   },
   channelHub: {
     _type: 'channelHub',

@@ -1,0 +1,18 @@
+<mat-accordion>
+  <mat-expansion-panel hideToggle [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Learning Status</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="flex_display">
+      <section class="flex_section" *ngFor="let item of items">
+        <div class="section_details">
+          <p class="count">{{item.count}}</p>
+          <p class="status">{{item.status}}</p>
+          <mat-progress-bar value="50"></mat-progress-bar>
+        </div>
+      </section>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
