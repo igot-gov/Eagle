@@ -117,10 +117,11 @@ topicsApi.get('/:tid', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const tid = req.params.tid
-        const url = API_ENDPOINTS.getTopicDetails(tid)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getTopicDetails(tid) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {

@@ -139,6 +139,28 @@ writeApi.post('/posts/:postId/vote', async (req, res) => {
     }
 })
 
+writeApi.delete('/posts/:postId/vote', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const postId = req.params.postId
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.votePost(postId) + `?_uid=${userUid}`
+        const response = await axios.delete(
+            url,
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        if (response && response.data) {
+            res.send(response.data)
+        }
+    } catch (err) {
+        logError('ERROR ON writeAPI Delete /posts/:postId/vote >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
 writeApi.put('/topics/:topicId/follow', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
