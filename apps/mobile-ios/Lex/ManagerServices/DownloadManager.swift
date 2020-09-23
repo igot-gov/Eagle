@@ -6,7 +6,7 @@
 
 import Foundation
 import CoreData
-import SSZipArchive
+//import SSZipArchive
 import CryptoSwift
 import RNCryptor
 
@@ -124,7 +124,7 @@ class DownloadManager : NSObject, URLSessionDelegate, URLSessionDownloadDelegate
                     
                     try stringData?.write(to: newFileUrl1, atomically: true, encoding: .utf8)
                     
-                    SSZipArchive.unzipFile(atPath: newFileUrl.path, toDestination: documentDirectory.path)
+//                    SSZipArchive.unzipFile(atPath: newFileUrl.path, toDestination: documentDirectory.path)
                     
                     print("Path is", documentDirectory.path)
                     print("downloaded")
@@ -302,7 +302,7 @@ class DownloadManager : NSObject, URLSessionDelegate, URLSessionDownloadDelegate
                             // Unzip
                             
                             zipFileId = String(destinationUrl.path.split(separator: "/").last!).replacingOccurrences(of: ".zip", with: "")
-                            
+                            /*
                             SSZipArchive.unzipFile(atPath: destinationUrl.path, toDestination: documentsDirectoryURL.appendingPathComponent(contentIdFromFetch).path)
                             SSZipArchive.unzipFile(atPath: destinationUrl.path, toDestination: documentsDirectoryURL.appendingPathComponent(contentIdFromFetch).path, progressHandler: nil) { (data, result, error) in
                                 if let _ = error {
@@ -311,7 +311,7 @@ class DownloadManager : NSObject, URLSessionDelegate, URLSessionDownloadDelegate
                                     
                                 }
                             }
-                            
+                            */
                             //removing the zip file after extraction
                             do {
                                 try FileManager.default.removeItem(at: destinationUrl)

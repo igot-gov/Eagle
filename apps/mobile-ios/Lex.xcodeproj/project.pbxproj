@@ -174,7 +174,7 @@
 		D7DC14DF2162627200E746F3 /* SSZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SSZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D99109B025066F4B00BE6D34 /* iGOt 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iGOt 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D99109B125066F4B00BE6D34 /* Lex copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Lex copy-Info.plist"; path = "/Users/TIMAC023/Workspace/TarentoProjectWorkspace/iGOT_OpenSource/Eagle/apps/mobile-ios/Lex copy-Info.plist"; sourceTree = "<absolute>"; };
+		D99109B125066F4B00BE6D34 /* Lex.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Lex.plist; path = "/Users/TIMAC023/Workspace/TarentoProjectWorkspace/iGOT_OpenSource/Eagle/apps/mobile-ios/Lex.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,7 +269,7 @@
 				C3C1161B20567D9D00160C6F /* Products */,
 				4CB2C546A0ACD3E58E802371 /* Frameworks */,
 				6133C4D0D590EEA6B486A8D5 /* Pods */,
-				D99109B125066F4B00BE6D34 /* Lex copy-Info.plist */,
+				D99109B125066F4B00BE6D34 /* Lex.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -454,9 +454,9 @@
 			productReference = CF4B1BD8214F61E800DCD553 /* LexTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D991096725066F4B00BE6D34 /* iGOt */ = {
+		D991096725066F4B00BE6D34 /* Lex */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D99109AD25066F4B00BE6D34 /* Build configuration list for PBXNativeTarget "iGOt" */;
+			buildConfigurationList = D99109AD25066F4B00BE6D34 /* Build configuration list for PBXNativeTarget "Lex" */;
 			buildPhases = (
 				D991096825066F4B00BE6D34 /* [CP] Check Pods Manifest.lock */,
 				D991096925066F4B00BE6D34 /* Sources */,
@@ -469,7 +469,7 @@
 			);
 			dependencies = (
 			);
-			name = iGOt;
+			name = Lex;
 			productName = Lex;
 			productReference = D99109B025066F4B00BE6D34 /* iGOt 2.0.app */;
 			productType = "com.apple.product-type.application";
@@ -516,7 +516,7 @@
 			targets = (
 				CF4B1BD7214F61E800DCD553 /* LexTest */,
 				B0D70F8321917220004B0053 /* LexUITests */,
-				D991096725066F4B00BE6D34 /* iGOt */,
+				D991096725066F4B00BE6D34 /* Lex */,
 			);
 		};
 /* End PBXProject section */
@@ -574,7 +574,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Lex/Pods-Lex-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Lex/Pods-Lex-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
@@ -582,7 +582,6 @@
 				"${BUILT_PRODUCTS_DIR}/Logboard/Logboard.framework",
 				"${BUILT_PRODUCTS_DIR}/RNCryptor/RNCryptor.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -594,12 +593,11 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Logboard.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RNCryptor.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lex/Pods-Lex-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Lex/Pods-Lex-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -909,7 +907,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 23W9SQ8LXN;
-				INFOPLIST_FILE = "Lex copy-Info.plist";
+				INFOPLIST_FILE = Lex.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0.0;
@@ -932,7 +930,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 23W9SQ8LXN;
-				INFOPLIST_FILE = "Lex copy-Info.plist";
+				INFOPLIST_FILE = Lex.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0.0;
@@ -976,7 +974,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D99109AD25066F4B00BE6D34 /* Build configuration list for PBXNativeTarget "iGOt" */ = {
+		D99109AD25066F4B00BE6D34 /* Build configuration list for PBXNativeTarget "Lex" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D99109AE25066F4B00BE6D34 /* Debug */,

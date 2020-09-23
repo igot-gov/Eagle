@@ -47,31 +47,14 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>captive.openrap.com</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<false/>
-				<key>NSIncludesSubdomains</key>
-				<false/>
-			</dict>
-		</dict>
-	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera will be used to capture audio and video for live streaming</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Used for owner authentication.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Your microphone will be used to record your speech when you tap and hold the "Mic" button.</string>
+	<string>Your microphone will be used to record your speech when you tap and hold the &quot;Mic&quot; button.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Speech recognition will be used to determine which words you speak into this device's microphone.</string>
+	<string>Speech recognition will be used to determine which words you speak into this device&apos;s microphone.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

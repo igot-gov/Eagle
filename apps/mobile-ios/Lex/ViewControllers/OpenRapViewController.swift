@@ -9,7 +9,7 @@ import SwiftyJSON
 import UserNotifications
 import CoreData
 import CryptoSwift
-import SSZipArchive
+//import SSZipArchive
 
 class OpenRapViewController: UIViewController, WKNavigationDelegate, WKScriptMessageHandler {
     

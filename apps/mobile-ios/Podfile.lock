@@ -7,7 +7,6 @@ PODS:
   - Logboard (2.1.0)
   - ReachabilitySwift (4.1.0)
   - RNCryptor (5.0.3)
-  - SSZipArchive (2.1.5)
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
@@ -17,11 +16,10 @@ DEPENDENCIES:
   - HaishinKit (~> 0.11.0)
   - ReachabilitySwift (~> 4.1.0)
   - RNCryptor (~> 5.0.3)
-  - SSZipArchive (~> 2.1.1)
   - SwiftyJSON (~> 4.0.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Alamofire
     - CryptoSwift
     - FontAwesome.swift
@@ -29,7 +27,6 @@ SPEC REPOS:
     - Logboard
     - ReachabilitySwift
     - RNCryptor
-    - SSZipArchive
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -40,9 +37,8 @@ SPEC CHECKSUMS:
   Logboard: ff780bba1dc55be6f9fc41b4e4e36115ec92f3e0
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   RNCryptor: c93d19029dcf7ff160aca0f24d6c9e7b0d82f664
-  SSZipArchive: cefe1364104a0231268a5deb8495bdf2861f52f0
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 4916d3123e665dd524956299c5c36a56304ed7d1
+PODFILE CHECKSUM: 35fbeba3dadc345b1d89a63f332eed31881a144e
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

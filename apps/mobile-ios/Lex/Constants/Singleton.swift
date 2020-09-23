@@ -10,7 +10,7 @@ import UserNotifications
 
 class Singleton : NSObject {
     
-    static let appConfigConstants = AppConstants(.DEV)
+    static let appConfigConstants = AppConstants(.STAG)
     static var tempCounter : String = "" // Some bogus counter
     static var accessToken : String = ""
     static var wid: String = ""
