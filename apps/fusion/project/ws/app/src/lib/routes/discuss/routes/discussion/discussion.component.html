@@ -11,7 +11,7 @@
           <p>{{ post.content | pipeHtmlTagRemoval}}</p>
           <div class="flex flex-1">
             <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
-            <ws-widget-avatar-photo [name]="post.user.fullname" size="s"></ws-widget-avatar-photo>
+            <ws-widget-avatar-photo [name]="post.user.fullname || 'Anonymous'" size="s"></ws-widget-avatar-photo>
             <span class="margin-left-s">{{'Asked by '}}</span>
             <span class="margin-left-s">{{post.user.fullname || 'Anonymous'}}</span>
             <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
@@ -45,7 +45,7 @@
             </span>
           </div>
           <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-            <span class="noocoments ws-mat-default-text">{{data.postcount }}
+            <span class="noocoments ws-mat-default-text">{{((data.postcount || 1) - 1)  }}
               comments</span>
           </div>
         </div>
@@ -89,7 +89,7 @@
     <ng-container *ngFor="let post of data.posts | orderBy: currentFilter :'desc'">
       <mat-card *ngIf="post.index != 0" class="post-card">
         <mat-card-header>
-          <ws-widget-avatar-photo mat-card-avatar [name]="post.user.fullname" size="s">
+          <ws-widget-avatar-photo mat-card-avatar [name]="post.user.fullname || 'Anonymous'" size="s">
           </ws-widget-avatar-photo>
           <mat-card-title class="text-capitalize">{{post.user.fullname || 'Anonymous'}} </mat-card-title>
           <span class="posttime">{{ post.timestamp | date}}</span>

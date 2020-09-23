@@ -89,7 +89,7 @@ import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck
     AvatarPhotoModule,
     EditorSharedModule,
     CkEditorModule,
-    PipeOrderByModule
+    PipeOrderByModule,
   ],
   entryComponents: [
     DiscussStartComponent,
