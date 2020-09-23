@@ -5,7 +5,9 @@ import { MatDialog } from '@angular/material/dialog'
 import { DiscussStartComponent } from '../../components/discuss-start/discuss-start.component'
 import { ActivatedRoute } from '@angular/router'
 import { DiscussService } from '../../services/discuss.service'
+/* tslint:disable */
 import _ from 'lodash'
+/* tslint:enable */
 
 @Component({
   selector: 'app-discuss-all',
