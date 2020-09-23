@@ -169,6 +169,17 @@
             "dimensions": {},
             "className": "new-box",
             "widget": {
+              "widgetType": "card",
+              "widgetSubType": "cardBrowseCourse",
+              "widgetData": {}
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
               "widgetData": {

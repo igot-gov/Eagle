@@ -8,7 +8,11 @@ import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 })
 export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
+  newUserArray = ['1']
   ngOnInit(): void {
+  }
+  getUserFullName() {
+    return 'JR'
   }
 
 }

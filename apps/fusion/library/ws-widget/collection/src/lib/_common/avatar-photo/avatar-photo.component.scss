@@ -85,3 +85,25 @@
     letter-spacing: 0.2625px;
   }
 }
+
+.circle-xxl {
+  border-radius: 50%;
+  width: 145px;
+  height: 145px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 145px;
+    height: 145px;
+  }
+
+  .initials {
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 19px;
+    letter-spacing: 0.2625px;
+  }
+}
