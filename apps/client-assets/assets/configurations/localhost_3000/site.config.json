@@ -74,7 +74,7 @@
     "clientId": "portal",
     "key": "ws-kc-token-storage",
     "realm": "wingspan",
-    "url": "https://eagle-keycloak.idc.tarento.com/auth"
+    "url": "https://d136953gtttd92.cloudfront.net/auth"
   },
   "locals": [
     {
