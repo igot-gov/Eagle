@@ -33,7 +33,7 @@ node() {
    			 // requires SonarQube Scanner 2.8+
    				 def scannerHome = tool 'sonar_scanner';
    				 withSonarQubeEnv('sonarqube') {
-    					   sh '"${scannerHome}/bin/sonar-scanner"'
+    					   sh "${scannerHome}/bin/sonar-scanner"
     			 }
   	}
   stage("Quality Gate") {
