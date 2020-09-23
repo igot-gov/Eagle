@@ -55,7 +55,7 @@ export class DiscussService {
     return this.http.post(url, data)
   }
 
-  replyPost (tid: number, data: any) {
+  replyPost(tid: number, data: any) {
     const url = API_ENDPOINTS.replyPost(tid)
     return this.http.post(url, data)
   }
@@ -64,10 +64,10 @@ export class DiscussService {
     return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.recentPost)
   }
   fetchPopularD() {
-    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.popularPost)
+    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.popularPost)
   }
   fetchTopicById(topicId: number) {
-    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.getTopic + topicId.toString())
+    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.getTopic + topicId.toString())
   }
   fetchNotifications() {
     return this.http.get<any>(API_ENDPOINTS.unread)

@@ -19,7 +19,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   postAnswerForm!: FormGroup
-  data!: NSDiscussData.IDiscussionData[]
+  data!: NSDiscussData.IDiscussionData
   currentFilter = 'timestamp' //  'recent'
   location = CONTENT_BASE_STREAM
   timer: any
