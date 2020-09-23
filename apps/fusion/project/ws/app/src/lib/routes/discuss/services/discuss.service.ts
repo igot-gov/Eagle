@@ -29,7 +29,6 @@ export class DiscussService {
     return categories
   }
 
-
   fetchAllTags() {
     const tags = this.http.get(API_ENDPOINTS.getAllTags)
       .toPromise()

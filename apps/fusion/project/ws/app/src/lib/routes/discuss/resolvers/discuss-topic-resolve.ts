@@ -17,7 +17,7 @@ export class DiscussTopicResolve
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSDiscussData.IDiscussionData[]>> {
-    let topicId = _route.params.topicId
+    const topicId = _route.params.topicId
     return this.discussionSvc.fetchTopicById(topicId).pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),

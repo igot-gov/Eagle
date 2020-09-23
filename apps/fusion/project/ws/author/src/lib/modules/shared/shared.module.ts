@@ -119,7 +119,7 @@ import { StatusContentDisplayComponent } from './components/status-content-displ
     MatProgressBarModule,
     ImageCropModule,
     PipeContentRouteModule,
-    PipeOrderByModule
+    PipeOrderByModule,
   ],
   exports: [
     MatIconModule,

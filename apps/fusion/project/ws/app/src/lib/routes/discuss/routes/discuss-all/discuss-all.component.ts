@@ -18,15 +18,17 @@ export class DiscussAllComponent implements OnInit {
   currentFilter = 'recent'
   trendingTags!: NSDiscussData.ITag[]
   discussionList!: NSDiscussData.IDiscussionData[]
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     private route: ActivatedRoute,
-    private discussService: DiscussService) {
+    private discussService: DiscussService
+  ) {
     this.trendingTags = this.route.snapshot.data.availableTags.data.tags
     this.discussionList = this.route.snapshot.data.recent.data
   }
   ngOnInit() {
     // this.fillDummyData()
-    console.log(this.discussionList)
+    // console.log(this.discussionList)
   }
   start() {
     // const dialogRef =
@@ -54,8 +56,6 @@ export class DiscussAllComponent implements OnInit {
       default:
         break
     }
-
-
   }
   fillrecent() {
     this.discussionList = this.route.snapshot.data.recent.data
@@ -64,9 +64,10 @@ export class DiscussAllComponent implements OnInit {
     this.discussionList = []
     this.discussService.fetchPopularD().subscribe(response => {
       this.discussionList = response
-    }, () => {
-      // IN TROUBL
     })
+    // , () => {
+    //   // IN TROUBL
+    // })
   }
   fillDummyData() {
     /* tslint:disable */

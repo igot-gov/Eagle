@@ -34,8 +34,9 @@ const routes: Routes = [
           availableTags: DiscussTagsResolve,
           recent: DiscussRecentResolve,
           unread: DiscussUnreadResolve,
-        }
-      }, {
+        },
+      },
+      {
         path: 'home/:topicId',
         component: DiscussionComponent,
         data: {
@@ -51,7 +52,7 @@ const routes: Routes = [
         component: DiscussCategoriesComponent,
         resolve: {
           availCategories: DiscussCategoriesResolve,
-        }
+        },
       },
       {
         path: 'groups',
@@ -62,7 +63,7 @@ const routes: Routes = [
         component: DiscussTagsComponent,
         resolve: {
           availableTags: DiscussTagsResolve,
-        }
+        },
       },
       {
         path: 'leaderboard',
@@ -79,6 +80,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [DiscussTagsResolve, DiscussCategoriesResolve, DiscussRecentResolve, DiscussTopicResolve, DiscussUnreadResolve]
+  providers: [DiscussTagsResolve, DiscussCategoriesResolve, DiscussRecentResolve, DiscussTopicResolve, DiscussUnreadResolve],
 })
 export class DiscussRoutingModule { }

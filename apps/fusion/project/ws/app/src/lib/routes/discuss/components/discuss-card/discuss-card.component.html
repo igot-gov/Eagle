@@ -35,7 +35,7 @@
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-      <span class="noocoments ws-mat-default-text" (click)="getDiscussion()">{{discuss.postcount || 0 }}
+      <span class="noocoments ws-mat-default-text" (click)="getDiscussion()">{{((discuss.postcount || 1) -1) }}
         comments</span>
     </div>
   </mat-card-footer>
