@@ -54,10 +54,19 @@
 
           <div class="flex flex-1 flex-column margin-top-xl">
             <h2> Your answer here </h2>
-            <form [formGroup]=" postAnswerForm">
-              <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
+            <form [formGroup]="postAnswerForm">
+              <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
                 [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
-              </ws-widget-ck-editor>
+              </ws-widget-ck-editor> -->
+              <mat-form-field appearance="outline" class="margin-top-xs display-block"
+                [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
+                <textarea matInput formControlName="answer" #description cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30"
+                  [required]="true"></textarea>
+                <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
+                  This is mandatory
+                </mat-error>
+              </mat-form-field>
             </form>
           </div>
 
@@ -95,7 +104,7 @@
         <mat-card-header>
           <ws-widget-avatar-photo mat-card-avatar [name]="post.user.fullname || 'Anonymous'" size="s">
           </ws-widget-avatar-photo>
-          <mat-card-title class="text-capitalize" *ngIf="post.user.fullname">{{post.user.username}} </mat-card-title>
+          <mat-card-title class="text-capitalize" *ngIf="post.user.fullname">{{post.user.fullname}} </mat-card-title>
           <mat-card-title class="text-capitalize" *ngIf="!post.user.fullname">{{post.user.username}} </mat-card-title>
           <span class="posttime">{{ post.timestamp | date}}</span>
         </mat-card-header>

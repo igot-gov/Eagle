@@ -80,6 +80,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       this.discussService.votePost(discuss.uid, req).subscribe(
         () => {
           this.openSnackbar(this.toastSuccess.nativeElement.value)
+          this.postAnswerForm.reset()
           this.refreshPostData()
         },
         (err: any) => {
