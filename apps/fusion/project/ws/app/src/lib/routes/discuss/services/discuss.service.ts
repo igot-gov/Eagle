@@ -6,6 +6,11 @@ const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
   getAllTags: '/apis/protected/v8/discussionHub/tags',
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
+  recentPost: '/apis/protected/v8/discussionHub/topics/recent',
+  popularPost: '/apis/protected/v8/discussionHub/topics/popular',
+  unread: '/apis/protected/v8/discussionHub/topics/unread',
+  getTopic: '/apis/protected/v8/discussionHub/topics/',
+
 }
 /* this page needs refactor*/
 @Injectable({
@@ -39,5 +44,16 @@ export class DiscussService {
   fetchAllTag() {
     return this.http.get<NSDiscussData.ITag[]>(API_ENDPOINTS.getAllTags)
   }
-
+  fetchRecentD() {
+    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.recentPost)
+  }
+  fetchPopularD() {
+    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.popularPost)
+  }
+  fetchTopicById(topicId: number) {
+    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.getTopic + topicId.toString())
+  }
+  fetchNotifications() {
+    return this.http.get<any>(API_ENDPOINTS.unread)
+  }
 }

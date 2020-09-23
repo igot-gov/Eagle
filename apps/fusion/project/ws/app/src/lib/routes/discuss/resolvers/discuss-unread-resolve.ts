@@ -5,19 +5,18 @@ import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
 import { IResolveResponse } from '@ws-widget/utils'
 import { DiscussService } from '../services/discuss.service'
-import { NSDiscussData } from '../models/discuss.model'
 
 @Injectable()
-export class DiscussCategoriesResolve
+export class DiscussUnreadResolve
   implements
-  Resolve<Observable<IResolveResponse<NSDiscussData.ICategorie[]>> | IResolveResponse<NSDiscussData.ICategorie[]>> {
+  Resolve<Observable<IResolveResponse<any>> | IResolveResponse<any>> {
   constructor(private discussionSvc: DiscussService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSDiscussData.ICategorie[]>> {
-    return this.discussionSvc.fetchAllCategorie().pipe(
+  ): Observable<IResolveResponse<any>> {
+    return this.discussionSvc.fetchNotifications().pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

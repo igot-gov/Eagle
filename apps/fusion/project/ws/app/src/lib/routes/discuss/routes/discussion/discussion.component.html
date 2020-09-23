@@ -11,9 +11,9 @@
           <p>{{ post.content | pipeHtmlTagRemoval}}</p>
           <div class="flex flex-1">
             <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
-            <ws-widget-avatar-photo [name]="post.user.username" size="s"></ws-widget-avatar-photo>
+            <ws-widget-avatar-photo [name]="post.user.fullname" size="s"></ws-widget-avatar-photo>
             <span class="margin-left-s">{{'Asked by '}}</span>
-            <span class="margin-left-s">{{post.user.username}}</span>
+            <span class="margin-left-s">{{post.user.fullname || 'Anonymous'}}</span>
             <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
           </div>
         </ng-container>
@@ -40,7 +40,7 @@
               <span class="pad-4">{{data.viewcount}} views</span>
             </span>
             <span class="flex mobile">
-              <mat-icon [ngClass]="{'ws-mat-accent-text': !!data.posts[0].bookmarked }">bookmark</mat-icon>
+              <!-- <mat-icon [ngClass]="{'ws-mat-accent-text': !!data.posts[0].bookmarked }">bookmark</mat-icon> -->
               <!-- <span class="pad-4">{{data.posts[0].bookmarked}}</span> -->
             </span>
           </div>
@@ -89,9 +89,9 @@
     <ng-container *ngFor="let post of data.posts | orderBy: currentFilter :'desc'">
       <mat-card *ngIf="post.index != 0" class="post-card">
         <mat-card-header>
-          <ws-widget-avatar-photo mat-card-avatar [name]="post.user.username" size="s">
+          <ws-widget-avatar-photo mat-card-avatar [name]="post.user.fullname" size="s">
           </ws-widget-avatar-photo>
-          <mat-card-title class="text-capitalize">{{post.user.username}} </mat-card-title>
+          <mat-card-title class="text-capitalize">{{post.user.fullname || 'Anonymous'}} </mat-card-title>
           <span class="posttime">{{ post.timestamp | date}}</span>
         </mat-card-header>
         <mat-card-content>

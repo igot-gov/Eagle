@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 // import { BreakpointObserver } from '@angular/cdk/layout'
 // import { DomSanitizer } from '@angular/platform-browser'
 // import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
@@ -14,6 +14,7 @@ import { NSDiscussData } from '../../models/discuss.model'
 export class LeftMenuComponent implements OnInit, OnDestroy {
   // tabs: any = []
   // tabs: any = []
+  @Input() unseen = 0
   tabsData!: NSDiscussData.IDiscussJsonData
   private tabs: Subscription | null = null
   constructor(
