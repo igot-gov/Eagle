@@ -1,7 +1,7 @@
 <div class="flex flex-1 custom">
   <div class="flex flex-3 flex-column">
-    <div class="flex flex-1 cursor-pointer margin-fix" (click)="start()">
-      <div class="flex flex-1 items-center border discuss border-solid discuss-border ws-mat-primary-background-op100">
+    <div class="flex flex-1 cursor-pointer margin-fix height-48" (click)="start()">
+      <div class="flex flex-1 items-center border discuss border-solid discuss-border ws-mat-primary-background-op100 ">
         <div class="w-full discuss">
           <span class="ml-4">Ask a question or post an idea</span>
         </div>
@@ -13,7 +13,7 @@
     <div class="buton">start discussion</div> -->
     </div>
     <div class="flex flex-1 flex-column margin-fix">
-      <div class="flex flex-1 filter">
+      <div class="flex flex-1 filter max-height-60">
         <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'recent',
         'ws-mat-accent-border':currentFilter !== 'recent'}" mat-button (click)="filter('recent')">Recent</a>
         <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'popular',
@@ -25,6 +25,13 @@
         <ng-container *ngFor="let data of discussionList.topics">
           <app-dicuss-card [discuss]="data"></app-dicuss-card>
         </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!(discussionList && discussionList.topics)">
+        <mat-card class="mat-card margin-bottom-l">
+          <mat-card-content>
+            <span>loading</span>
+          </mat-card-content>
+        </mat-card>
       </ng-container>
     </div>
   </div>

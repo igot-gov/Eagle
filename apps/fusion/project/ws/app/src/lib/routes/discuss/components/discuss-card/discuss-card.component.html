@@ -5,7 +5,7 @@
     </mat-card-title>
     <mat-card-subtitle>
       <span class="ws-mat-default-text">{{discuss.category.name}}</span>
-      <span class="dot">{{discuss.user.username}}</span>
+      <span class="dot">{{discuss.user.fullname || 'Anonymous'}}</span>
       <span class="margin-left-s">{{discuss.timestamp | date}}</span>
     </mat-card-subtitle>
   </mat-card-header>

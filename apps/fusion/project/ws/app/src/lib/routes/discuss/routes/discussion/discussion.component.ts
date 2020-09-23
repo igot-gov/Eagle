@@ -28,7 +28,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   ngOnInit(): void {
     // this.assignData()
-    this.data = this.route.snapshot.data.topic
+    this.data = this.route.snapshot.data.topic.data
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
