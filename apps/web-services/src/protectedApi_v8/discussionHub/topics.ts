@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { getRootOrg } from '../../authoring/utils/header'
 import { axiosRequestConfig } from '../../configs/request.config'
-import { getWriteApiToken } from '../../utils/discussionHub-helper'
+import { getUserUID, getWriteApiToken } from '../../utils/discussionHub-helper'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
@@ -18,25 +18,6 @@ const API_ENDPOINTS = {
 }
 
 export const topicsApi = Router()
-
-topicsApi.get('/:tid', async (req, res) => {
-    try {
-        const rootOrg = getRootOrg(req)
-        const userId = extractUserIdFromRequest(req)
-        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        const tid = req.params.tid
-        const url = API_ENDPOINTS.getTopicDetails(tid)
-        const response = await axios.get(
-            url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
-        )
-        res.send(response.data)
-    } catch (err) {
-        logError('ERROR ON GET topicsApi /recent >', err)
-        res.status((err && err.response && err.response.status) || 500)
-            .send(err && err.response && err.response.data || {})
-    }
-})
 
 topicsApi.get('/recent', async (req, res) => {
     try {
@@ -97,10 +78,11 @@ topicsApi.get('/unread', async (req, res) => {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        const url = API_ENDPOINTS.getUnreadTopics
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUnreadTopics + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -115,7 +97,8 @@ topicsApi.get('/unread/total', async (req, res) => {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        const url = API_ENDPOINTS.getUnreadTopicsTotal
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUnreadTopicsTotal + `?_uid=${userUid}`
         const response = await axios.get(
             url,
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
@@ -123,6 +106,25 @@ topicsApi.get('/unread/total', async (req, res) => {
         res.send(response.data)
     } catch (err) {
         logError('ERROR ON GET topicsApi /unread >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+topicsApi.get('/:tid', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const tid = req.params.tid
+        const url = API_ENDPOINTS.getTopicDetails(tid)
+        const response = await axios.get(
+            url,
+            { ...axiosRequestConfig, headers: { rootOrg } }
+        )
+        res.send(response.data)
+    } catch (err) {
+        logError('ERROR ON GET topicsApi /:tid >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }

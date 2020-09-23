@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { getRootOrg } from '../../authoring/utils/header'
 import { axiosRequestConfig } from '../../configs/request.config'
+import { getUserUID, getWriteApiToken } from '../../utils/discussionHub-helper'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
@@ -27,10 +28,11 @@ usersApi.get('/:slug/bookmarks', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUserBookmarks(slug)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserBookmarks(slug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -46,10 +48,11 @@ usersApi.get('/:slug/downvoted', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUserDownvotedPosts(slug)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserDownvotedPosts(slug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -65,10 +68,11 @@ usersApi.get('/:slug/groups', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUserGroups(slug)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserGroups(slug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -84,10 +88,11 @@ usersApi.get('/:slug/info', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUserInfo(slug)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserInfo(slug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -103,10 +108,11 @@ usersApi.get('/:slug/posts', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUserPosts(slug)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserPosts(slug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -122,10 +128,11 @@ usersApi.get('/:slug/upvoted', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUserUpvotedPosts(slug)
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserUpvotedPosts(slug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: {} }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -141,11 +148,11 @@ usersApi.get('/:slug/watched', async (req, res) => {
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
-        const url = API_ENDPOINTS.getUsersWatchedTopics(slug)
-        const response = await axios.post(
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUsersWatchedTopics(slug) + `?_uid=${userUid}`
+        const response = await axios.get(
             url,
-            { _uid: 1 },
-            { ...axiosRequestConfig, headers: {} }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
@@ -164,7 +171,7 @@ usersApi.get('/email/:email', async (req, res) => {
         const response = await getUserByEmail(email)
         res.send(response.data)
     } catch (err) {
-        logError('ERROR ON GET topicsApi /:slug/watched >', err)
+        logError('ERROR ON GET topicsApi /email/:email >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }

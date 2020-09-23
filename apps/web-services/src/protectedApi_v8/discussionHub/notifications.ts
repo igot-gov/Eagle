@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { getRootOrg } from '../../authoring/utils/header'
 import { axiosRequestConfig } from '../../configs/request.config'
+import { getUserUID, getWriteApiToken  } from '../../utils/discussionHub-helper'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
@@ -17,10 +18,11 @@ notificationsApi.get('/', async (req, res) => {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        const url = API_ENDPOINTS.getNotifications
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getNotifications + `?_uid=${userUid}`
         const response = await axios.get(
             url,
-            { ...axiosRequestConfig, headers: { rootOrg } }
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
