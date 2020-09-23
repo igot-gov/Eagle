@@ -73,4 +73,16 @@
       </div>
     </mat-card>
   </ng-container>
+  <ng-container *ngIf="discussionList && discussionList">
+    <ng-container *ngFor="let data of discussionList">
+      <app-dicuss-card [discuss]="data"></app-dicuss-card>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!(discussionList)">
+    <mat-card class="mat-card margin-bottom-l">
+      <mat-card-content>
+        <span>loading</span>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
 </div>
