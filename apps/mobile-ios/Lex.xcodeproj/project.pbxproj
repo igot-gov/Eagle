@@ -70,7 +70,6 @@
 		D99109A325066F4B00BE6D34 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF91154B24A36DC200C36AC6 /* SystemConfiguration.framework */; };
 		D99109A425066F4B00BE6D34 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF91155324A36E0C00C36AC6 /* AudioToolbox.framework */; };
 		D99109A625066F4B00BE6D34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D76E5AE321662D480057E16E /* Main.storyboard */; };
-		D99109A825066F4B00BE6D34 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */; };
 		D99109A925066F4B00BE6D34 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3C1162920567D9D00160C6F /* LaunchScreen.storyboard */; };
 		D99109AA25066F4B00BE6D34 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C1162720567D9D00160C6F /* Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -172,7 +171,6 @@
 		D7DC14DB2162627200E746F3 /* Reachability.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Reachability.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7DC14DD2162627200E746F3 /* RNCryptor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RNCryptor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7DC14DF2162627200E746F3 /* SSZipArchive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SSZipArchive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D99109B025066F4B00BE6D34 /* iGOt 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iGOt 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D99109B125066F4B00BE6D34 /* Lex.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Lex.plist; path = "/Users/TIMAC023/Workspace/TarentoProjectWorkspace/iGOT_OpenSource/Eagle/apps/mobile-ios/Lex.plist"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -286,7 +284,6 @@
 		C3C1161C20567D9D00160C6F /* Lex */ = {
 			isa = PBXGroup;
 			children = (
-				D91AD2DA24D318E700E07927 /* GoogleService-Info.plist */,
 				CF78807923AA06DB00284DB7 /* Extensions */,
 				CF8076D82202CE3F008D1180 /* LFLiveKitSwiftDemo-Bridging-Header.h */,
 				CF2C89822181EA1800615B90 /* Lex.entitlements */,
@@ -541,7 +538,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D99109A625066F4B00BE6D34 /* Main.storyboard in Resources */,
-				D99109A825066F4B00BE6D34 /* GoogleService-Info.plist in Resources */,
 				D99109A925066F4B00BE6D34 /* LaunchScreen.storyboard in Resources */,
 				D99109AA25066F4B00BE6D34 /* Assets.xcassets in Resources */,
 			);
