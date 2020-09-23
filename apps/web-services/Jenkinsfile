@@ -27,9 +27,9 @@ node() {
         }
       
               stage('SonarQube analysis') {
-                {
+               
                   sh 'cd $docker_file_path'
-                }
+             
    			 // requires SonarQube Scanner 2.8+
    				 def scannerHome = tool 'sonar_scanner';
    				 withSonarQubeEnv('sonarqube') {
