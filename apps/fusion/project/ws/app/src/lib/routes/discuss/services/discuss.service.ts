@@ -6,6 +6,9 @@ const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
   getAllTags: '/apis/protected/v8/discussionHub/tags',
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
+  votePost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/vote`,
+  getTopicDetails: (tid: number) => `apis/protected/v8/discussionHub/topics/${tid}`,
+  replyPost: (tid: number) => `apis/protected/v8/discussionHub/writeApi/v2/topics/${tid}`,
 }
 /* this page needs refactor*/
 @Injectable({
@@ -38,6 +41,24 @@ export class DiscussService {
   }
   fetchAllTag() {
     return this.http.get<NSDiscussData.ITag[]>(API_ENDPOINTS.getAllTags)
+  }
+
+  fetchPostDetails() {
+    return this.http.get<NSDiscussData.ITag[]>(API_ENDPOINTS.getAllTags)
+  }
+
+  votePost(pid: number, data: any) {
+    const url = API_ENDPOINTS.votePost(pid)
+    return this.http.post(url, data)
+  }
+
+  replyPost (tid: number, data: any) {
+    const url = API_ENDPOINTS.replyPost(tid)
+    return this.http.post(url, data)
+  }
+
+  getTopicDetails(tid: number) {
+    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.getTopicDetails(tid))
   }
 
 }
