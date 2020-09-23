@@ -6,11 +6,22 @@
           <h2>Network</h2>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  md:grid-cols-4 col-gap-4">
-        <ng-container *ngFor="let userObj of newUserArray" [ngTemplateOutlet]="userIndividualNew"
-          [ngTemplateOutletContext]="{ user: userObj }">
-        </ng-container>
+      <div class="flex_display">
+        <div class="first_flex">
+          <p>Connect with experts and peers from various departments across different states</p>
+          <button class="btn-primary">Get Connected</button>
+        </div>
+        <div class="second_flex">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  md:grid-cols-4 col-gap-4">
+            <ng-container *ngFor="let userObj of newUserArray" [ngTemplateOutlet]="userIndividualNew"
+              [ngTemplateOutletContext]="{ user: userObj }">
+            </ng-container>
+          </div>
+        </div>
       </div>
+
+
+
     </mat-expansion-panel>
   </mat-accordion>
 </div>

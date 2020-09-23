@@ -52,6 +52,7 @@ import { CardWelcomeModule } from './card-welcome/card-welcome.module'
 import { CardNetworkModule } from './card-network/card-network.module'
 import { CardHomeNetworkModule } from './card-home-network/card-home-network.module'
 import { CardHomeTopModule } from './card-home-top/card-home-top.module'
+import { CardBrowseCourseModule } from './card-browse-course/card-browse-course.module'
 import { CardHomeDiscussModule } from './card-home-discuss/card-home-discuss.module'
 import { ChannelHubComponent } from './channel-hub/channel-hub.component'
 import { ChannelHubModule } from './channel-hub/channel-hub.module'
@@ -118,6 +119,7 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 import { CardHomeTopComponent } from './card-home-top/card-home-top.component'
 import { CardHomeNetworkComponent } from './card-home-network/card-home-network.component'
 import { CardHomeDiscussComponent } from './card-home-discuss/card-home-discuss.component'
+import { CardBrowseCourseComponent } from './card-browse-course/card-browse-course.component'
 
 export const WIDGET_REGISTERED_MODULES = [
   BtnAppsModule,
@@ -147,6 +149,7 @@ export const WIDGET_REGISTERED_MODULES = [
   ChannelHubModule,
   CardHomeNetworkModule,
   CardHomeTopModule,
+  CardBrowseCourseModule,
   CardHomeDiscussModule,
   ContentStripMultipleModule,
   ContentStripSingleModule,
@@ -302,6 +305,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.home_top,
     component: CardHomeTopComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.browse_course,
+    component: CardBrowseCourseComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,

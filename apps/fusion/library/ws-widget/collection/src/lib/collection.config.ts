@@ -29,6 +29,7 @@ export const ROOT_WIDGET_CONFIG = {
     content: 'cardContent',
     channel: 'cardChannel',
     welcome: 'cardWelcome',
+    browse_course: 'cardBrowseCourse',
     learning: 'cardLearn',
     network: 'cardNetwork',
     home_top: 'cardHomeTop',
