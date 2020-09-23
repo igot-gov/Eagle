@@ -1,4 +1,29 @@
 mat-expansion-panel {
   width: 580px;
-  height: 245px;
+  margin: 0px 20px 0px 20px;
+}
+
+.progress_flex {
+  display: flex;
+  margin: 8px 0px 8px 0px;
+  .progress_name {
+    display: flex;
+    flex: 1;
+  }
+  .progress_value {
+    flex: 2;
+    height: 12px;
+    border-radius: 9px;
+    margin: 10px;
+  }
+}
+.mat-progress-bar {
+  display: block;
+  height: 8px;
+  overflow: hidden;
+  position: relative;
+  transition: opacity 250ms linear;
+  border-radius: 10px;
+  background-color: red($color: #000000);
+  width: 100%;
 }

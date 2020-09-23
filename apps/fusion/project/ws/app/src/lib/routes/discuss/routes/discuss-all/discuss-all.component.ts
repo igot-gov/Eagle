@@ -4,6 +4,7 @@ import { NSDiscussData } from '../../models/discuss.model'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussStartComponent } from '../../components/discuss-start/discuss-start.component'
 import { ActivatedRoute } from '@angular/router'
+import { DiscussService } from '../../services/discuss.service'
 
 @Component({
   selector: 'app-discuss-all',
@@ -15,15 +16,61 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class DiscussAllComponent implements OnInit {
   currentFilter = 'recent'
-  trendingTags: NSDiscussData.ITag[] = [];
-  constructor(public dialog: MatDialog, private route: ActivatedRoute) {
+  trendingTags!: NSDiscussData.ITag[]
+  discussionList!: NSDiscussData.IDiscussionData[]
+  constructor(public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private discussService: DiscussService) {
     this.trendingTags = this.route.snapshot.data.availableTags.data.tags
+    this.discussionList = this.route.snapshot.data.recent.data
+  }
+  ngOnInit() {
+    // this.fillDummyData()
+    console.log(this.discussionList)
+  }
+  start() {
+    // const dialogRef =
+    this.dialog.open(DiscussStartComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    // dialogRef.afterClosed().subscribe((response: any) => {
+    //   console.log(response)
+
+    // })
+  }
+  filter(key: string | 'recent' | 'popular' | 'watched') {
+    if (key) {
+      this.currentFilter = key
+    }
+    switch (key) {
+      case 'recent':
+        this.fillrecent()
+        break
+      case 'popular':
+        this.fillPopular()
+        break
+      default:
+        break
+    }
+
 
   }
-  descussionList!: NSDiscussData.IDiscussionData[]
-  ngOnInit(): void {
+  fillrecent() {
+    this.discussionList = this.route.snapshot.data.recent.data
+  }
+  fillPopular() {
+    this.discussionList = []
+    this.discussService.fetchPopularD().subscribe(response => {
+      this.discussionList = response
+    }, () => {
+      // IN TROUBL
+    })
+  }
+  fillDummyData() {
     /* tslint:disable */
-    this.descussionList = [
+    this.discussionList = [
       {
         "cid": 2,
         "lastposttime": 1600146633396,
@@ -367,22 +414,5 @@ export class DiscussAllComponent implements OnInit {
       }
     ]
     /* tslint:enable */
-  }
-  start() {
-    // const dialogRef =
-    this.dialog.open(DiscussStartComponent, {
-      minHeight: 'auto',
-      width: '80%',
-      panelClass: 'remove-pad',
-    })
-    // dialogRef.afterClosed().subscribe((response: any) => {
-    //   console.log(response)
-
-    // })
-  }
-  filter(key: string | 'recent' | 'popular' | 'watched') {
-    if (key) {
-      this.currentFilter = key
-    }
   }
 }

@@ -41,3 +41,47 @@
     letter-spacing: 0.2625px;
   }
 }
+
+.circle-l {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+  }
+
+  .initials {
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 19px;
+    letter-spacing: 0.2625px;
+  }
+}
+
+.circle-xl {
+  border-radius: 50%;
+  width: 105px;
+  height: 105px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    width: 105px;
+    height: 105px;
+  }
+
+  .initials {
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 19px;
+    letter-spacing: 0.2625px;
+  }
+}

@@ -8,5 +8,21 @@ import { Component } from '@angular/core'
 })
 
 export class CardCompetencyComponent {
+  value = 50
+  bufferValue = 75
+
+  items = [{
+    name: 'Personal Details',
+    value: 40,
+  }, {
+    name: 'Academics',
+    value: 60,
+  }, {
+    name: 'Professional Details',
+    value: 50,
+  }, {
+    name: 'Certification & Skills',
+    value: 80,
+  }]
 
 }

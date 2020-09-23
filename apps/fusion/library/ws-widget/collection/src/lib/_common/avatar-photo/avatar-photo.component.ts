@@ -12,7 +12,7 @@ export class AvatarPhotoComponent implements OnInit {
 
   @Input()
   public name!: string
-  @Input() public size = 'm'
+  @Input() public size = ''
   public showInitials = false
   public initials!: string
   public circleColor!: string

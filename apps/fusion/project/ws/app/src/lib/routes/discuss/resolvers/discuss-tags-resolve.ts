@@ -11,13 +11,13 @@ import { NSDiscussData } from '../models/discuss.model'
 export class DiscussTagsResolve
   implements
   Resolve<Observable<IResolveResponse<NSDiscussData.ITag[]>> | IResolveResponse<NSDiscussData.ITag[]>> {
-  constructor(private tagsSvc: DiscussService) { }
+  constructor(private discussionSvc: DiscussService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSDiscussData.ITag[]>> {
-    return this.tagsSvc.fetchAllTag().pipe(
+    return this.discussionSvc.fetchAllTag().pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

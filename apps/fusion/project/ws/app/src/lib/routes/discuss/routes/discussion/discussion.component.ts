@@ -1,10 +1,10 @@
 
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { NSDiscussData } from '../../models/discuss.model'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { LoaderService } from '../../../../../../../author/src/public-api'
-import { ActivatedRoute } from '@angular/router'
 import { DiscussService } from '../../services/discuss.service'
 import { MatSnackBar } from '@angular/material'
 
@@ -33,14 +33,13 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     private discussService: DiscussService,
     private snackBar: MatSnackBar,
   ) {
-
   }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.topicId = params.topicId
     })
-    this.data = this.route.snapshot.data.discussData.data
     // this.assignData()
+    this.data = this.route.snapshot.data.topic.data
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
@@ -456,7 +455,7 @@ He misunderstood the concept of Droit administration which was actually successf
   }
 
   refreshPostData() {
-    this.discussService.getTopicDetails(this.topicId).subscribe(
+    this.discussService.fetchTopicById(this.topicId).subscribe(
       (data: NSDiscussData.IDiscussionData) => {
         this.data = data
       },
