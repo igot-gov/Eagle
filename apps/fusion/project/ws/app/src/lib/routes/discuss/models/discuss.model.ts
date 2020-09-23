@@ -64,6 +64,7 @@ export namespace NSDiscussData {
     teaserPid: number | null | undefined
     pagination?: IPagination
     posts?: IPosts[]
+    // topics?: any[]
   }
 
   export interface ITag {
@@ -112,6 +113,7 @@ export namespace NSDiscussData {
   export interface IUser {
     uid: number
     username: string
+    fullname?: string
     userslug: string
     reputation: number
     postcount: number

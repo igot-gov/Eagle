@@ -14,6 +14,7 @@ export class DiscussTagsComponent implements OnInit {
   tag = this.route.snapshot.data.availableTags.data
   tags!: NSDiscussData.ITag[]
   filteredTags!: NSDiscussData.ITag[]
+  query!: string
   constructor(private route: ActivatedRoute) {
     // this.assignTags()
     this.tags = this.tag.tags
