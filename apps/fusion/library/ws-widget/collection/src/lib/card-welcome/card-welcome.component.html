@@ -2,7 +2,7 @@
   <div class="mat-toolbar px-4 sm:px-8 md:px-0 py-4 flex items-center">
     <ws-widget-user-image class="user-image" [email]="userEmail"></ws-widget-user-image>
     <h3>
-      <ng-container i18n>Hey,  </ng-container>
+      <ng-container i18n>Hey, </ng-container>
       <ng-container>{{ givenName }}</ng-container>
       <ng-container *ngIf="!isNewUser" i18n>, Welcome Back!</ng-container>
     </h3>
@@ -15,7 +15,7 @@
       <mat-expansion-panel [expanded]="false" class="expansion-panel ws-mat-primary-lite-background-on-day">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h2 class="title margin-remove" i18n>Welcome, 
+            <h2 class="title margin-remove" i18n>Welcome,
               <ng-container>{{ givenName }}</ng-container>
             </h2>
           </mat-panel-title>
@@ -33,7 +33,7 @@
         </div> -->
         <div>
           <!-- <ws-utils-horizontal-scroller *ngIf="activityCards?.length" [loadStatus]="'done'"> -->
-            <ws-widget-activity-card *ngFor="let card of activityCards" [widgetData]="{
+          <ws-widget-activity-card *ngFor="let card of activityCards" [widgetData]="{
             id : card.id,
             title : card.title,
             description : card.description,
@@ -42,7 +42,7 @@
             clickUrl: card.clickUrl,
             tag : card.tag
             }">
-            </ws-widget-activity-card>
+          </ws-widget-activity-card>
           <!-- </ws-utils-horizontal-scroller> -->
         </div>
         <!-- <div class="btn-display-bottom">

@@ -37,7 +37,7 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatTreeModule } from '@angular/material/tree'
-import { ImageCropModule } from '@ws-widget/utils/src/public-api'
+import { ImageCropModule, PipeOrderByModule } from '@ws-widget/utils/src/public-api'
 import { AuthEditorStepsComponent } from './components/auth-editor-steps/auth-editor-steps.component'
 import { CommentsDialogComponent } from './components/comments-dialog/comments-dialog.component'
 import { CommentsComponent } from './components/comments/comments.component'
@@ -60,7 +60,6 @@ import { ShowHideToolTipDirective } from './directives/show-hide-tool-tip.direct
 import { StatusTrackComponent } from './components/status-track/status-track.component'
 import { FeedbackFormComponent } from './components/feedback-form/feedback-form.component'
 import { StatusContentDisplayComponent } from './components/status-content-display/status-content-display.component'
-import { OrderByPipe } from './components/status-content-display/order-by-pipe'
 
 @NgModule({
   declarations: [
@@ -84,7 +83,6 @@ import { OrderByPipe } from './components/status-content-display/order-by-pipe'
     StatusTrackComponent,
     FeedbackFormComponent,
     StatusContentDisplayComponent,
-    OrderByPipe,
   ],
   imports: [
     CommonModule,
@@ -121,6 +119,7 @@ import { OrderByPipe } from './components/status-content-display/order-by-pipe'
     MatProgressBarModule,
     ImageCropModule,
     PipeContentRouteModule,
+    PipeOrderByModule,
   ],
   exports: [
     MatIconModule,
@@ -174,7 +173,6 @@ import { OrderByPipe } from './components/status-content-display/order-by-pipe'
     StatusTrackComponent,
     FeedbackFormComponent,
     StatusContentDisplayComponent,
-    OrderByPipe,
   ],
   providers: [
     ApiService,

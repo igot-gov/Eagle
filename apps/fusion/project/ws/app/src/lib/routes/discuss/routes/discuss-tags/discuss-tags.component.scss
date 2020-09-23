@@ -1,0 +1,52 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.max-width {
+  max-width: 686px;
+}
+
+.tag {
+  display: flex;
+  width: auto;
+  min-width: max-content;
+  height: 48px;
+  border-radius: 4px;
+  justify-content: space-between;
+  margin: 16px 12px;
+  align-items: center;
+
+  @include breakpoint-xs {
+    width: auto;
+
+  }
+
+  @include breakpoint-s {
+    width: auto;
+
+  }
+}
+
+.container-balanced {
+  @extend %page-center;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-update {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: row;
+  }
+
+  @include breakpoint-s {
+    flex-direction: row;
+  }
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}

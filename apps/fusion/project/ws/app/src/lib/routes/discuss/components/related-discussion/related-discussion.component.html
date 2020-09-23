@@ -1,0 +1,12 @@
+<div class="margin-right-s">
+  <h3>Related discussions</h3>
+  <ng-container *ngIf="discussions && discussions.length > 0">
+    <div *ngFor="let discussion of discussions" class="tag ws-mat-primary-lite-background-important">
+      <mat-card class="flex-1">
+        <mat-card-header>
+          <mat-card-subtitle class="margin-0">{{discussion.title}}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>

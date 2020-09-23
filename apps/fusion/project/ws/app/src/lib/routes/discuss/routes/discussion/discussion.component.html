@@ -1,0 +1,167 @@
+<div class="flex flex-1 related-discussion">
+  <div class="flex flex-3 flex-column pb-10">
+    <mat-card class="flex-1 remove-botton-radius">
+      <mat-card-header>
+        <mat-card-title class="margin-l-0" [innerHTML]="data.title"></mat-card-title>
+        <!-- <mat-card-subtitle>{{'General discussion'}}</mat-card-subtitle> -->
+      </mat-card-header>
+      <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'">
+        <mat-card-content class="margin-left-m">
+          <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
+          <p>{{ post.content | pipeHtmlTagRemoval}}</p>
+          <div class="flex flex-1">
+            <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
+            <ws-widget-avatar-photo [name]="post.user.fullname || 'Anonymous'" size="s"></ws-widget-avatar-photo>
+            <span class="margin-left-s">{{'Asked by '}}</span>
+            <span class="margin-left-s" *ngIf="post.user.fullname" [innerHTML]="post.user.fullname"></span>
+            <span class="margin-left-s" *ngIf="!post.user.fullname" [innerHTML]="post.user.username"></span>
+            <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
+          </div>
+
+
+          <div class="flex flex-1 margin-top-m">
+            <ng-container *ngIf="data && data.tags && data.tags.length > 0">
+              <span *ngFor="let tag of data.tags" class="tag ws-mat-primary-tags">
+                {{tag.value}}
+              </span>
+            </ng-container>
+          </div>
+          <div class="flex flex-1 custom margin-0 margin-top-xl">
+            <div class="flex flex-1 flex-row margin-left-xs">
+              <span class="flex margin-right-l mobile">
+                <mat-icon (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
+                <span class="pad-4">{{data.upvotes}}</span>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <mat-icon (click)="downvote(post)" class="cursor-pointer">arrow_downward</mat-icon>
+                <span class="pad-4">{{data.downvotes}}</span>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <mat-icon>trending_up</mat-icon>
+                <span class="pad-4">{{data.viewcount}} views</span>
+              </span>
+              <!-- <span class="flex mobile">
+              <mat-icon [ngClass]="{'ws-mat-accent-text': !!data.posts[0].bookmarked }">bookmark</mat-icon>
+            </span> -->
+            </div>
+            <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+              <span class="noocoments ws-mat-default-text" *ngIf="data.postcount-1 > 0">{{data.postcount-1}}
+                comments</span>
+              <span class="noocoments ws-mat-default-text" *ngIf="data.postcount-1 <=0">0
+                comments</span>
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-column margin-top-xl">
+            <h2> Your answer here </h2>
+            <form [formGroup]="postAnswerForm">
+              <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
+                [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
+              </ws-widget-ck-editor> -->
+              <mat-form-field appearance="outline" class="margin-top-xs display-block"
+                [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
+                <textarea matInput formControlName="answer" #description cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30"
+                  [required]="true"></textarea>
+                <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
+                  This is mandatory
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button type="button" (click)="postReply(post)"
+            class="text-white ws-mat-primary-background flex-auto-display margin-right-xs">
+            <span class="text-white" i18n>Post reply</span>
+          </button>
+          <!-- <button mat-raised-button type="button" [mat-dialog-close]="true"
+                    class="ws-mat-accent-border flex-auto-display">
+                    <span class="ws-mat-default-text" i18n>Discard</span>
+                  </button> -->
+        </mat-card-actions>
+      </ng-container>
+    </mat-card>
+    <ng-container *ngIf="data.posts && data.postcount > 1">
+      <mat-card class="recent-most">
+        <div class="flex flex-1 flex-column">
+          <div class="flex flex-1 filter">
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                            'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+              (click)="filter('timestamp')">
+              Recent </a>
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvotes',
+                            'ws-mat-accent-border':currentFilter !== 'upvotes'}" mat-button
+              (click)="filter('upvotes')">
+              Most upvoted </a>
+          </div>
+        </div>
+      </mat-card>
+    </ng-container>
+    <ng-container *ngFor="let post of data.posts | orderBy: currentFilter :'desc'">
+      <mat-card *ngIf="post.index != 0" class="post-card">
+        <mat-card-header>
+          <ws-widget-avatar-photo mat-card-avatar [name]="post.user.fullname || 'Anonymous'" size="s">
+          </ws-widget-avatar-photo>
+          <mat-card-title class="text-capitalize" *ngIf="post.user.fullname">{{post.user.fullname}} </mat-card-title>
+          <mat-card-title class="text-capitalize" *ngIf="!post.user.fullname">{{post.user.username}} </mat-card-title>
+          <span class="posttime">{{ post.timestamp | date}}</span>
+        </mat-card-header>
+        <mat-card-content>
+          <p [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+
+          <div class="flex flex-1 custom margin-0 margin-top-xl">
+            <div class="flex flex-1 flex-row margin-left-xs">
+              <span class="flex margin-right-l mobile">
+                <mat-icon (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
+                <span class="pad-4">{{post.upvotes}}</span>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <mat-icon (click)="downvote(post)" class="cursor-pointer">arrow_downward</mat-icon>
+                <span class="pad-4">{{post.downvotes}}</span>
+              </span>
+              <!-- <span class="flex margin-right-l mobile">
+                <mat-icon>trending_up</mat-icon>
+                <span class="pad-4">{{post.viewcount}} views</span>
+              </span> -->
+              <!-- <span class="flex mobile">
+                <mat-icon [ngClass]="{'ws-mat-accent-text': !!post.bookmarked }">bookmark</mat-icon
+              </span> -->
+            </div>
+            <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+              <span class="noocoments"> Reply</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-divider *ngIf="post.index != 0"></mat-divider>
+    </ng-container>
+  </div>
+  <div class="flex flex-1 display-hide">
+    <app-discuss-related-discussion></app-discuss-related-discussion>
+  </div>
+</div>
+
+
+<ng-template #reply let-reply="reply" let-title="title">
+  <mat-card>
+    <mat-card-title>Post your reply-{{title}}</mat-card-title>
+    <mat-card-content></mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button type="button" [mat-dialog-close]="true"
+        class="text-white ws-mat-primary-background flex-auto-display">
+        <span class="text-white" i18n>Post reply</span>
+      </button>
+      <!-- <button mat-raised-button type="button" [mat-dialog-close]="true"
+                        class="ws-mat-accent-border flex-auto-display">
+                        <span class="ws-mat-default-text" i18n>Discard</span>
+                      </button> -->
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+
+<input type="hidden" i18-value i18-aria-value aria-value="Thank you for voting!" value="Thank you for voting!!"
+  #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="Something went wrong, please try again later!"
+  value="Something went wrong, please try again later!" #toastError />

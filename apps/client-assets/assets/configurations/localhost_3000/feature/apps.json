@@ -90,6 +90,65 @@
       "url": "/app/info/about",
       "shortName": "About"
     },
+    "feature_discuss": {
+      "accessKey": "D",
+      "icon": "forum",
+      "iconType": "mat-icon",
+      "id": "feature_discuss",
+      "keywords": [
+        "about platform",
+        "information",
+        "discuss",
+        "discussion forum"
+      ],
+      "name": "Discuss",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "discuss",
+      "url": "/app/discuss",
+      "shortName": "Discuss"
+    },
+    "feature_learn": {
+      "accessKey": "L",
+      "icon": "school",
+      "iconType": "mat-icon",
+      "id": "feature_learn",
+      "keywords": [
+        "learn",
+        "learning"
+      ],
+      "name": "Learn",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "learn",
+      "url": "/page/learn",
+      "shortName": "Learn"
+    },
+    "feature_network": {
+      "accessKey": "N",
+      "icon": "group",
+      "iconType": "mat-icon",
+      "id": "feature_network",
+      "keywords": [
+        "network",
+        "learning"
+      ],
+      "name": "Network",
+      "permission": [
+        "ABOUT_US"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "network",
+      "url": "/page/network",
+      "shortName": "Network"
+    },
     "feature_frac": {
       "accessKey": "A",
       "icon": "airplay",

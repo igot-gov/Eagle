@@ -28,6 +28,7 @@ export class CkEditorComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() set content(value: string) {
     this.html = this.doRegex ? value.replace(this.downloadRegex, this.regexDownloadReplace) : value
   }
+  @Input() basic = false
   @Input() id = ''
   @Input() location:
     | typeof CONTENT_BASE_STATIC
@@ -55,7 +56,12 @@ export class CkEditorComponent implements AfterViewInit, OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.initiateConfig()
+    if (this.basic) {
+      this.initiateBasicConfig()
+    } else {
+      this.initiateConfig()
+    }
+
     this.makeTargetAsBlank()
     this.allowAdditionalContents()
     this.configurationSvc.prefChangeNotifier.subscribe(() => {
@@ -121,7 +127,49 @@ export class CkEditorComponent implements AfterViewInit, OnInit, OnDestroy {
       ],
     }
   }
-
+  initiateBasicConfig() {
+    this.config = {
+      skin: 'moono',
+      uiColor: this.theme,
+      language: this.accessControlSvc.locale,
+      toolbarGroups: [
+        { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
+        { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
+        { name: 'clipboard', groups: ['clipboard', 'undo'] },
+        { name: 'editing', groups: ['find', 'selection', 'editing'] },
+        { name: 'links', groups: ['links'] },
+        { name: 'insert', groups: ['insert', 'colors', 'tools'] },
+        '/',
+      ],
+      allowedContent: true,
+      extraAllowedContent: 'a[!href,download,document-href,class]',
+      // removeDialogTabs = '';
+      removeButtons:
+        'Iframe,Cut,Copy,Paste,PasteText,PasteFromWord,Save,NewPage,Preview,Print,' +
+        'Templates,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,HiddenField,ImageButton' +
+        ',Smiley,Flash,About,CreateDiv,Anchor,SelectAll,Image',
+      disableNativeSpellChecker: true,
+      removeDialogTabs: 'image:advanced;link:advanced',
+      format_tags: 'p;h1;h2;h3;h4;h5;h6;div',
+      forcePasteAsPlainText: false,
+      image2_alignClasses: ['image-align-left', 'image-align-center', 'image-align-right'],
+      image2_captionedClass: 'image-captioned',
+      stylesSet: [
+        {
+          name: 'Narrow image',
+          type: 'widget',
+          widget: 'image',
+          attributes: { class: 'image-narrow' },
+        },
+        {
+          name: 'Wide image',
+          type: 'widget',
+          widget: 'image',
+          attributes: { class: 'image-wide' },
+        },
+      ],
+    }
+  }
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe()

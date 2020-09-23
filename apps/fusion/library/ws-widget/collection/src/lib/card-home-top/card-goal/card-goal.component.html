@@ -1,0 +1,20 @@
+<mat-accordion>
+  <mat-expansion-panel hideToggle [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h2>Goals</h2>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let item of items">
+      <div class="progress_flex">
+        <p class="progress_name">{{item.name}}</p>
+        <div class="progress_value">
+          <section class="example-section">
+            <span class="days_detail">{{item.days_left}}</span>
+            <mat-progress-bar value={{item.value}}></mat-progress-bar>
+          </section>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

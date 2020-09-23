@@ -1,8 +1,8 @@
 <ckeditor #editor [config]="config" [(ngModel)]="html" (change)="onContentChanged()">
-  <ckbutton [name]="'uploadImage'" [command]="'uploadImage'" (click)="addImageUploadBtn()"
+  <ckbutton *ngIf="!basic" [name]="'uploadImage'" [command]="'uploadImage'" (click)="addImageUploadBtn()"
     [icon]="'/assets/authoring/ckeditor/plugins/icons.png'" [label]="imageName" [toolbar]="'insert'">
   </ckbutton>
-  <ckbutton [name]="'uploadFile'" [command]="'uploadFile'" (click)="addFileUploadBtn()"
+  <ckbutton *ngIf="!basic" [name]="'uploadFile'" [command]="'uploadFile'" (click)="addFileUploadBtn()"
     [icon]="'/assets/authoring/ckeditor/plugins/icons.png'" [label]="fileName" [toolbar]="'insert'">
   </ckbutton>
   <ckbutton [name]="'Blank'" [command]="'Blank'" (click)="addBlankBtn()"

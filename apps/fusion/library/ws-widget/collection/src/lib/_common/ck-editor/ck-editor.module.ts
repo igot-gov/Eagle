@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { CkEditorComponent } from './ck-editor.component'
 import { CKEditorModule } from 'ng2-ckeditor'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { CKEditorService } from './ck-editor.service'
 
 @NgModule({
   declarations: [CkEditorComponent],
@@ -18,5 +19,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
   entryComponents: [
     CkEditorComponent,
   ],
+  providers: [CKEditorService],
 })
 export class CkEditorModule { }
