@@ -1,9 +1,12 @@
 
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core'
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { LoaderService } from '../../../../../../../author/src/public-api'
+import { ActivatedRoute } from '@angular/router'
+import { DiscussService } from '../../services/discuss.service'
+import { MatSnackBar } from '@angular/material'
 
 @Component({
   selector: 'app-discuss-discussion',
@@ -13,20 +16,31 @@ import { LoaderService } from '../../../../../../../author/src/public-api'
   host: { class: 'flex flex-1 margin-top-l' }
 })
 export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
+  @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
   currentFilter = 'timestamp' //  'recent'
   location = CONTENT_BASE_STREAM
   timer: any
+  defaultError = 'Something went wrong, Please try again after sometime!'
+  topicId!: number
   constructor(
     private formBuilder: FormBuilder,
     private loader: LoaderService,
     private ref: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private discussService: DiscussService,
+    private snackBar: MatSnackBar,
   ) {
 
   }
   ngOnInit(): void {
-    this.assignData()
+    this.route.params.subscribe(params => {
+      this.topicId = params.topicId
+    })
+    this.data = this.route.snapshot.data.discussData.data
+    // this.assignData()
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
@@ -381,18 +395,48 @@ He misunderstood the concept of Droit administration which was actually successf
   }
 
   upvote(discuss: NSDiscussData.IDiscussionData) {
-    // console.log(discuss)
-    if (discuss) {
-
+    const req = {
+      delta: 1,
     }
-
+    this.processVote(discuss, req)
   }
+
   downvote(discuss: NSDiscussData.IDiscussionData) {
-    // console.log(discuss)
-    if (discuss) {
+    const req = {
+      delta: -1,
+    }
+    this.processVote(discuss, req)
+  }
 
+  private async processVote(discuss: any, req: any) {
+    if (discuss && discuss.uid) {
+      this.discussService.votePost(discuss.uid, req).subscribe(
+        () => {
+          this.openSnackbar(this.toastSuccess.nativeElement.value)
+          this.refreshPostData()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
     }
   }
+
+  postReply(post: NSDiscussData.IDiscussionData) {
+    const req = {
+      content: this.postAnswerForm.controls['answer'].value,
+    }
+    if (post && post.tid) {
+      this.discussService.replyPost(post.tid, req).subscribe(
+        () => {
+          this.openSnackbar('Your reply was saved succesfuly!')
+          this.refreshPostData()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    }
+  }
+
   filter(key: string | 'timestamp' | 'upvotes') {
     if (key) {
       this.currentFilter = key
@@ -403,5 +447,21 @@ He misunderstood the concept of Droit administration which was actually successf
       return true
     }
     return false
+  }
+
+  private openSnackbar(primaryMsg: string, duration: number = 5000) {
+    this.snackBar.open(primaryMsg, 'X', {
+      duration,
+    })
+  }
+
+  refreshPostData() {
+    this.discussService.getTopicDetails(this.topicId).subscribe(
+      (data: NSDiscussData.IDiscussionData) => {
+        this.data = data
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
   }
 }

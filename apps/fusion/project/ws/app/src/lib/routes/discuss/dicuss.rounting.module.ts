@@ -11,6 +11,7 @@ import { DiscussionComponent } from './routes/discussion/discussion.component'
 import { InitResolver } from './resolvers/init-resolve.service'
 import { DiscussTagsResolve } from './resolvers/discuss-tags-resolve'
 import { DiscussCategoriesResolve } from './resolvers/discuss-category-resolve'
+import { DiscussResolve } from './resolvers/discuss-resolve'
 
 const routes: Routes = [
   {
@@ -27,7 +28,7 @@ const routes: Routes = [
         component: DiscussAllComponent,
         resolve: {
           availCategories: DiscussCategoriesResolve,
-          availableTags: DiscussTagsResolve
+          availableTags: DiscussTagsResolve,
         }
       }, {
         path: 'home/:topicId',
@@ -37,6 +38,7 @@ const routes: Routes = [
         },
         resolve: {
           script: InitResolver,
+          discussData: DiscussResolve,
         },
       },
       {
@@ -72,6 +74,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [DiscussTagsResolve, DiscussCategoriesResolve]
+  providers: [DiscussTagsResolve, DiscussCategoriesResolve, DiscussResolve],
 })
 export class DiscussRoutingModule { }
