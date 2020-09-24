@@ -12,6 +12,7 @@ const API_ENDPOINTS = {
     getUserDownvotedPosts: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/downvoted`,
     getUserGroups: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/groups`,
     getUserInfo: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/info`,
+    getUserProfile: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}`,
     getUserPosts: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/posts`,
     getUserUpvotedPosts: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/upvoted`,
     getUsersWatchedTopics: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/watched`,
@@ -97,6 +98,26 @@ usersApi.get('/:slug/info', async (req, res) => {
         res.send(response.data)
     } catch (err) {
         logError('ERROR ON GET topicsApi /:slug/info >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+usersApi.get('/:slug/profile', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const slug = req.params.slug
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.getUserProfile(slug) + `?_uid=${userUid}`
+        const response = await axios.get(
+            url,
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        res.send(response.data)
+    } catch (err) {
+        logError('ERROR ON GET User Profile /:slug/profile >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
