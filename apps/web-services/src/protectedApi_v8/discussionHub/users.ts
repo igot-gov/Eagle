@@ -12,8 +12,8 @@ const API_ENDPOINTS = {
     getUserDownvotedPosts: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/downvoted`,
     getUserGroups: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/groups`,
     getUserInfo: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/info`,
-    getUserProfile: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}`,
     getUserPosts: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/posts`,
+    getUserProfile: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}`,
     getUserUpvotedPosts: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/upvoted`,
     getUsersWatchedTopics: (slug: string) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/user/${slug}/watched`,
     // tslint:disable-next-line: object-literal-sort-keys
