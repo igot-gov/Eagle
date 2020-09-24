@@ -16,6 +16,8 @@ const API_ENDPOINTS = {
     followTopic: (topicId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/topics/${topicId}/follow`,
     replyToTopic: (topicId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/topics/${topicId}`,
     votePost: (postId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/posts/${postId}/vote`,
+    // tslint:disable-next-line: object-literal-sort-keys
+    bookmarkPost: (postId: string | number) => `${CONSTANTS.DISCUSSION_HUB_API_BASE}/api/v2/posts/${postId}/bookmark`,
 }
 
 export const writeApi = Router()
@@ -108,6 +110,53 @@ writeApi.post('/users', async (req, res) => {
         res.send(response.data)
     } catch (err) {
         logError('ERROR ON writeAPI POST /users >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+writeApi.post('/posts/:postId/bookmark', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const postId = req.params.postId
+        const url = API_ENDPOINTS.bookmarkPost(postId)
+        const userUid = await getUserUID(userId)
+        const response = await axios.post(
+            url,
+            {
+                _uid: userUid,
+            },
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        if (response && response.data) {
+            res.send(response.data)
+        }
+    } catch (err) {
+        logError('ERROR ON writeAPI POST /posts/:postId/bookmark >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
+writeApi.delete('/posts/:postId/bookmark', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const postId = req.params.postId
+        const userUid = await getUserUID(userId)
+        const url = API_ENDPOINTS.bookmarkPost(postId) + `?_uid=${userUid}`
+        const response = await axios.delete(
+            url,
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        if (response && response.data) {
+            res.send(response.data)
+        }
+    } catch (err) {
+        logError('ERROR ON writeAPI DELETE /posts/:postId/bookmark >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
