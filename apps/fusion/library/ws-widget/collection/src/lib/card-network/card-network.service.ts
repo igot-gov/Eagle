@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core'
 
 const API_END_POINTS = {
   GET_ALL_ACTIVE_USER: `/apis/protected/v8/networkHub/users`,
+  GET_ALL_SEARCH_USER: `/apis/protected/v8/user/autocomplete/`,
 }
 
 @Injectable({
@@ -15,6 +16,13 @@ export class CardNetWorkService {
 
   fetchLatestUserInfo(data: any) {
     return this.http.post<any>(API_END_POINTS.GET_ALL_ACTIVE_USER, data).pipe(
+      map(response => {
+        return response
+      }),
+    )
+  }
+  fetchSearchUserInfo(searchKey: string) {
+    return this.http.get<any>(API_END_POINTS.GET_ALL_SEARCH_USER + searchKey).pipe(
       map(response => {
         return response
       }),
