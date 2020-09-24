@@ -1,12 +1,12 @@
 <mat-card class="discuss-card">
   <mat-card-header>
     <mat-card-title>
-      <h2>{{discuss.title}}</h2>
+      <h2 class="cursor-pointer" (click)="getDiscussion()">{{discuss?.topic?.title}}</h2>
     </mat-card-title>
     <mat-card-subtitle>
       <span class="ws-mat-default-text">{{discuss.category.name}}</span>
-      <span class="dot" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span>
-      <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Anonymous'}}</span>
+      <!-- <span class="dot" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span> -->
+      <span class="dot" *ngIf="!(discuss?.user?.fullname)">Asked</span>
       <span class="margin-left-s">{{discuss.timestamp | pipeRelativeTime}}</span>
     </mat-card-subtitle>
   </mat-card-header>
@@ -36,7 +36,7 @@
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-      <span class="noocoments ws-mat-default-text" (click)="getDiscussion()">{{((discuss.postcount || 1) -1) }}
+      <span class="noocoments ws-mat-default-text" (click)="getDiscussion()">{{((discuss?.topic?.postcount || 1) -1) }}
         comments</span>
     </div>
   </mat-card-footer>
