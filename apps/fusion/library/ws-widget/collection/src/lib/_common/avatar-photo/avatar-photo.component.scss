@@ -1,3 +1,7 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
 .circle-s {
   border-radius: 50%;
   width: 24px;
@@ -104,6 +108,28 @@
     color: #ffffff;
     font-size: 20px;
     line-height: 19px;
+    letter-spacing: 0.2625px;
+  }
+}
+
+.circle-xl-s {
+  border-radius: 4px;
+  width: 152px;
+  height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 4px;
+    width: 105px;
+    height: 105px;
+  }
+
+  .initials {
+    color: #ffffff;
+    font-size: $size-xl;
+    line-height: $size-xl;
     letter-spacing: 0.2625px;
   }
 }

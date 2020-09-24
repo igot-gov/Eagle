@@ -11,9 +11,10 @@ import { ActivatedRoute } from '@angular/router'
   styleUrls: ['./discuss-tags.component.scss'],
 })
 export class DiscussTagsComponent implements OnInit {
-  tag = this.route.snapshot.data.availableTags.data;
+  tag = this.route.snapshot.data.availableTags.data
   tags!: NSDiscussData.ITag[]
   filteredTags!: NSDiscussData.ITag[]
+  query!: string
   constructor(private route: ActivatedRoute) {
     // this.assignTags()
     this.tags = this.tag.tags

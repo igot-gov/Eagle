@@ -10,13 +10,13 @@ import { NSDiscussData } from '../models/discuss.model'
 @Injectable()
 export class DiscussPopularResolve
   implements
-  Resolve<Observable<IResolveResponse<NSDiscussData.IDiscussionData[]>> | IResolveResponse<NSDiscussData.IDiscussionData[]>> {
+  Resolve<Observable<IResolveResponse<NSDiscussData.IDiscussionData>> | IResolveResponse<NSDiscussData.IDiscussionData>> {
   constructor(private discussionSvc: DiscussService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSDiscussData.IDiscussionData[]>> {
+  ): Observable<IResolveResponse<NSDiscussData.IDiscussionData>> {
     return this.discussionSvc.fetchPopularD().pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
