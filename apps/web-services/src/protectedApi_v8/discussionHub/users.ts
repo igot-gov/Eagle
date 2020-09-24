@@ -108,7 +108,6 @@ usersApi.get('/me', async (req, res) => {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        // const slug = req.params.slug
         const userSlug = await getUserSlug(userId)
         const userUid = await getUserUID(userId)
         const url = API_ENDPOINTS.getUserProfile(userSlug) + `?_uid=${userUid}`
