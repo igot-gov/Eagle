@@ -69,6 +69,23 @@ export class VideoComponent implements OnInit, OnDestroy {
           this.widgetResolverVideoData.widgetData.url = this.videoData ? url : ''
           this.widgetResolverVideoData.widgetData.disableTelemetry = true
           this.isFetchingDataComplete = true
+
+          if (this.videoData.subTitles) {
+
+            let subTitleUrl = ""
+
+            if (this.videoData.subTitles[0].url.indexOf('/content-store/') > -1) {
+              subTitleUrl = `/apis/authContent/${new URL(this.videoData.subTitles[0].url).pathname}`
+            } else {
+              subTitleUrl = `/apis/authContent/${encodeURIComponent(this.videoData.subTitles[0].url)}`
+            }
+
+            this.widgetResolverVideoData.widgetData.subtitles = [{
+              srclang: "",
+              label: "",
+              url: subTitleUrl
+            }]
+          }
         })
     } else {
       this.routeDataSubscription = this.activatedRoute.data.subscribe(
@@ -99,6 +116,29 @@ export class VideoComponent implements OnInit, OnDestroy {
             ? this.videoData.identifier
             : ''
           this.widgetResolverVideoData.widgetData.mimeType = data.content.data.mimeType
+
+
+          console.log({
+            content: data.content
+          })
+
+          if (data.content.data.subTitles[0]) {
+
+            let subTitlesUrl = ""
+            if (data.content.data.subTitles[0].url.indexOf('/content-store/') > -1) {
+              subTitlesUrl = `/apis/authContent/${new URL(data.content.data.subTitles[0].url).pathname}`
+            } else {
+              subTitlesUrl = `/apis/authContent/${encodeURIComponent(data.content.data.subTitles[0].url)}`
+            }
+
+            this.widgetResolverVideoData.widgetData.subtitles = [{
+              srclang: "",
+              label: "",
+              url: subTitlesUrl
+            }]
+
+          }
+
           this.widgetResolverVideoData = JSON.parse(JSON.stringify(this.widgetResolverVideoData))
           if (this.videoData && this.videoData.artifactUrl.indexOf('content-store') >= 0) {
             await this.setS3Cookie(this.videoData.identifier)
@@ -154,6 +194,7 @@ export class VideoComponent implements OnInit, OnDestroy {
         mimeType: content.mimeType,
         resumePoint: 0,
         continueLearning: true,
+        subtitles: []
       },
       widgetHostClass: 'video-full',
     }
