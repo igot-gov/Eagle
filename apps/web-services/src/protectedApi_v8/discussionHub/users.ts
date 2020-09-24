@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Router } from 'express'
 import { getRootOrg } from '../../authoring/utils/header'
 import { axiosRequestConfig } from '../../configs/request.config'
-import { getUserUID, getWriteApiToken } from '../../utils/discussionHub-helper'
+import { getUserSlug, getUserUID, getWriteApiToken } from '../../utils/discussionHub-helper'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
@@ -103,21 +103,22 @@ usersApi.get('/:slug/info', async (req, res) => {
     }
 })
 
-usersApi.get('/:slug/profile', async (req, res) => {
+usersApi.get('/me', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
-        const slug = req.params.slug
+        // const slug = req.params.slug
+        const userSlug = await getUserSlug(userId)
         const userUid = await getUserUID(userId)
-        const url = API_ENDPOINTS.getUserProfile(slug) + `?_uid=${userUid}`
+        const url = API_ENDPOINTS.getUserProfile(userSlug) + `?_uid=${userUid}`
         const response = await axios.get(
             url,
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
     } catch (err) {
-        logError('ERROR ON GET User Profile /:slug/profile >', err)
+        logError('ERROR ON GET User Profile /me >', err)
         res.status((err && err.response && err.response.status) || 500)
             .send(err && err.response && err.response.data || {})
     }
