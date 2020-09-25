@@ -1,7 +1,7 @@
 <mat-card class="discuss-card">
   <mat-card-header>
     <mat-card-title>
-      <h2>{{discuss.title}}</h2>
+      <h2 class="cursor-pointer" (click)="getDiscussion()">{{discuss.title}}</h2>
     </mat-card-title>
     <mat-card-subtitle>
       <span class="ws-mat-default-text">{{discuss.category.name}}</span>

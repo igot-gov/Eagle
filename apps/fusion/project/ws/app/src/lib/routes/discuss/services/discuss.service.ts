@@ -8,11 +8,11 @@ const API_ENDPOINTS = {
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
   votePost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/vote`,
   replyPost: (tid: number) => `apis/protected/v8/discussionHub/writeApi/v2/topics/${tid}`,
+  bookmarkPost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/bookmark`,
   recentPost: '/apis/protected/v8/discussionHub/topics/recent',
   popularPost: '/apis/protected/v8/discussionHub/topics/popular',
   unread: '/apis/protected/v8/discussionHub/topics/unread',
   getTopic: '/apis/protected/v8/discussionHub/topics/',
-
 }
 /* this page needs refactor*/
 @Injectable({
@@ -53,6 +53,21 @@ export class DiscussService {
   votePost(pid: number, data: any) {
     const url = API_ENDPOINTS.votePost(pid)
     return this.http.post(url, data)
+  }
+
+  deleteVotePost(pid: number) {
+    const url = API_ENDPOINTS.votePost(pid)
+    return this.http.delete(url)
+  }
+
+  bookmarkPost(pid: number) {
+    const url = API_ENDPOINTS.bookmarkPost(pid)
+    return this.http.post(url, {})
+  }
+
+  deleteBookmarkPost(pid: number) {
+    const url = API_ENDPOINTS.bookmarkPost(pid)
+    return this.http.delete(url)
   }
 
   replyPost (tid: number, data: any) {

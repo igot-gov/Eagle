@@ -10,6 +10,10 @@
   flex: 3;
 }
 
+.f-medium {
+  font-family: "Poppins-Medium";
+}
+
 .related-discussion {
   justify-content: space-between;
 }
@@ -29,6 +33,13 @@
 
 }
 
+mat-icon.upvoted {
+  color: #5FAD41;
+}
+mat-icon.downvoted {
+  color: #F0466F
+}
+
 .noocoments {
   flex: 1;
   text-align: right;
@@ -37,6 +48,10 @@
 
 .margin-0 {
   margin: 0;
+}
+
+.mb-0-imp {
+  margin-bottom: 0 !important;
 }
 
 .pad-4 {
@@ -63,9 +78,14 @@
   margin-left: 0;
 }
 
+::ng-deep.comment-section .mat-card-header-text {
+  margin: 0 !important;
+  display: none;
+}
+
 .posttime {
   display: flex;
-  flex: 1;
+  // flex: 1;
   justify-content: flex-end;
 }
 
@@ -96,4 +116,5 @@
   @include breakpoint-s {
     flex: auto;
   }
+  
 }

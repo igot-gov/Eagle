@@ -75,9 +75,40 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.processVote(discuss, req)
   }
 
+  bookmark(discuss: any) {
+    this.discussService.bookmarkPost(discuss.pid).subscribe(
+      _data => {
+        this.openSnackbar('Bookmark added successfully!')
+        this.refreshPostData()
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+  unBookMark(discuss: any) {
+    this.discussService.deleteBookmarkPost(discuss.pid).subscribe(
+      _data => {
+        this.openSnackbar('Bookmark Removed successfully!')
+        this.refreshPostData()
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
+  delteVote(discuss: any) {
+    this.discussService.deleteVotePost(discuss.pid).subscribe(
+      _data => {
+        this.refreshPostData()
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
   private async processVote(discuss: any, req: any) {
     if (discuss && discuss.uid) {
-      this.discussService.votePost(discuss.uid, req).subscribe(
+      this.discussService.votePost(discuss.pid, req).subscribe(
         () => {
           this.openSnackbar(this.toastSuccess.nativeElement.value)
           this.refreshPostData()
@@ -91,6 +122,24 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   postReply(post: NSDiscussData.IDiscussionData) {
     const req = {
       content: this.postAnswerForm.controls['answer'].value,
+    }
+    this.postAnswerForm.controls['answer'].setValue('')
+    if (post && post.tid) {
+      this.discussService.replyPost(post.tid, req).subscribe(
+        () => {
+          this.openSnackbar('Your reply was saved succesfuly!')
+          this.refreshPostData()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    }
+  }
+
+  postCommentsReply(post: NSDiscussData.IPosts, comment: string) {
+    const req = {
+      content: comment,
+      toPid: post.pid,
     }
     if (post && post.tid) {
       this.discussService.replyPost(post.tid, req).subscribe(
