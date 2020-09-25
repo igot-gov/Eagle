@@ -11,9 +11,14 @@
 </ws-widget-tree-catalog-menu> -->
 
 <button mat-button class="new-margin" #rootTrigger="matMenuTrigger" [matMenuTriggerFor]="settingsMenu">
-  <mat-icon class="trnsform">account_circle</mat-icon>
-  <span class="padding-left-xs" i18n>{{ givenName || 'Guest'}}</span>
-  <mat-icon>arrow_drop_down</mat-icon>
+  <span class="flex flex-column flex-middle">
+    <!-- <mat-icon>account_circle</mat-icon> -->
+    <ws-widget-avatar-photo [ngStyle]="{'margin-top':'7px'}" [photoUrl]="" [name]="givenName" size="s">
+    </ws-widget-avatar-photo>
+    <!-- <span class="padding-left-xs" i18n>{{ givenName || 'Guest'}}</span> -->
+    <!-- <mat-icon>arrow_drop_down</mat-icon> -->
+    <!-- <span class="text-new mat-caption" i18n>{{'Profile'}}</span> -->
+  </span>
 </button>
 
 <!-- <ws-widget-tree-catalog-menu #rootMenu [rootTrigger]="rootTrigger" [catalogItems]="catalogItems | slice: 0:10"

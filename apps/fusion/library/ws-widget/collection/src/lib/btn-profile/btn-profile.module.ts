@@ -5,11 +5,13 @@ import { BtnProfileComponent } from './btn-profile.component'
 import { WidgetResolverModule } from '@ws-widget/resolver/src/public-api'
 import { RouterModule } from '@angular/router'
 import { LogoutModule } from '@ws-widget/utils'
+import { AvatarPhotoModule } from '../avatar-photo/avatar.photo.module'
 // import { TreeCatalogModule } from '../tree-catalog/tree-catalog.module'
 
 @NgModule({
   declarations: [BtnProfileComponent],
   imports: [
+    AvatarPhotoModule,
     CommonModule,
     LogoutModule,
     MatButtonModule,

@@ -232,6 +232,10 @@
 
     .ws-mat-accent-border-active {
       border: 1px solid $colorAccent;
+
+      .mat-caption {
+        color: $colorText;
+      }
     }
   }
 
@@ -357,6 +361,15 @@
       }
     }
 
+    .mat-caption {
+      color: $colorText;
+    }
+
+    .ws-mat-selected-home-menu {
+      color: $colorAccent;
+      background: #F5F5F5;
+      box-shadow: 0 2px 0 0 $colorAccent;
+    }
   }
 
 
