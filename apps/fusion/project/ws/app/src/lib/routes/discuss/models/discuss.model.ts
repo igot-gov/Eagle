@@ -176,6 +176,7 @@ export namespace NSDiscussData {
     deleted: number | boolean
     upvotes: number
     downvotes: number
+    viewcount?: number
     deleterUid: number
     edited: number | boolean
     votes: number

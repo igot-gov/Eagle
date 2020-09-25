@@ -5,7 +5,7 @@ import { BtnProfileComponent } from './btn-profile.component'
 import { WidgetResolverModule } from '@ws-widget/resolver/src/public-api'
 import { RouterModule } from '@angular/router'
 import { LogoutModule } from '@ws-widget/utils'
-import { AvatarPhotoModule } from '../avatar-photo/avatar.photo.module'
+import { AvatarPhotoModule } from '../_common/avatar-photo/avatar-photo.module'
 // import { TreeCatalogModule } from '../tree-catalog/tree-catalog.module'
 
 @NgModule({

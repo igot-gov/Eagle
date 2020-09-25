@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router'
 import { MatButtonModule, MatIconModule, MatMenuModule, MatRippleModule, MatCardModule } from '@angular/material'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { MiniProfileComponent } from './mini-profile.component'
-import { AvatarPhotoModule } from '../avatar-photo/avatar.photo.module'
+import { AvatarPhotoModule } from '../_common/avatar-photo/avatar-photo.module'
 
 @NgModule({
   declarations: [MiniProfileComponent],

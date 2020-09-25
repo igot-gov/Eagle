@@ -2,7 +2,7 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 // Components
 import { BtnAppsComponent } from './btn-apps/btn-apps.component'
 // Modules
-import { AvatarPhotoModule } from './avatar-photo/avatar.photo.module'
+import { AvatarPhotoModule } from './_common/avatar-photo/avatar-photo.module'
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
 import { BtnCallComponent } from './btn-call/btn-call.component'
 import { BtnCallModule } from './btn-call/btn-call.module'
