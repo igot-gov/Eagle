@@ -8,17 +8,16 @@ import { DiscussService } from '../services/discuss.service'
 import { NSDiscussData } from '../models/discuss.model'
 
 @Injectable()
-export class DiscussTopicResolve
+export class DiscussProfileResolve
   implements
-  Resolve<Observable<IResolveResponse<NSDiscussData.IDiscussionData>> | IResolveResponse<NSDiscussData.IDiscussionData>> {
+  Resolve<Observable<IResolveResponse<NSDiscussData.IProfile>> | IResolveResponse<NSDiscussData.IProfile>> {
   constructor(private discussionSvc: DiscussService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSDiscussData.IDiscussionData>> {
-    const topicId = _route.params.topicId
-    return this.discussionSvc.fetchTopicById(topicId).pipe(
+  ): Observable<IResolveResponse<NSDiscussData.IProfile>> {
+    return this.discussionSvc.fetchProfile().pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

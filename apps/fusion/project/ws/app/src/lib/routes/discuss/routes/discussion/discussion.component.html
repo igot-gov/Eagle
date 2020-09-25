@@ -61,9 +61,12 @@
               <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
                 [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
               </ws-widget-ck-editor> -->
-              <mat-form-field appearance="outline" class="flex-1 w-full">
+              <mat-form-field appearance="outline" class="flex-1 w-full" [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
                 <textarea matInput formControlName="answer" #answer cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
+                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30" [required]="true"></textarea>
+                <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
+                  This is mandatory
+                </mat-error>
               </mat-form-field>
             </form>
           </div>

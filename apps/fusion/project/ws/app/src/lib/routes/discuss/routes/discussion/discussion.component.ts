@@ -19,7 +19,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   postAnswerForm!: FormGroup
-  data!: NSDiscussData.IDiscussionData[]
+  data!: NSDiscussData.IDiscussionData
   currentFilter = 'timestamp' //  'recent'
   location = CONTENT_BASE_STREAM
   timer: any
@@ -111,6 +111,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       this.discussService.votePost(discuss.pid, req).subscribe(
         () => {
           this.openSnackbar(this.toastSuccess.nativeElement.value)
+          this.postAnswerForm.reset()
           this.refreshPostData()
         },
         (err: any) => {

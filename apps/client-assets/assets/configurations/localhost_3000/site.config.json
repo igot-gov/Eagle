@@ -308,25 +308,7 @@
   },
   "primaryNavBarConfig": {
     "mediumScreen": {
-      "left": [
-        {
-          "type": "featureButton",
-          "config": {
-            "actionBtnId": "feature_navigator",
-            "config": {
-              "type": "mat-button"
-            }
-          }
-        },
-        {
-          "type": "widgetButton",
-          "config": {
-            "widgetType": "actionButton",
-            "widgetSubType": "actionButtonCatalog",
-            "widgetData": {}
-          }
-        }
-      ],
+      "left": [],
       "right": [
         {
           "type": "featureButton",
@@ -335,7 +317,8 @@
             "toolTip": "Home",
             "className": "fixtopMargin",
             "config": {
-              "type": "card-mini"
+              "type": "card-mini",
+              "hideTitle": true
             }
           }
         },
@@ -346,7 +329,8 @@
             "toolTip": "Notification",
             "className": "fixtopMargin",
             "config": {
-              "type": "card-mini"
+              "type": "card-mini",
+              "hideTitle": true
             }
           }
         },
@@ -357,7 +341,8 @@
             "toolTip": "Neweork",
             "className": "fixtopMargin",
             "config": {
-              "type": "card-mini"
+              "type": "card-mini",
+              "hideTitle": true
             }
           }
         },
@@ -368,7 +353,8 @@
             "toolTip": "Learn",
             "className": "fixtopMargin",
             "config": {
-              "type": "card-mini"
+              "type": "card-mini",
+              "hideTitle": true
             }
           }
         },
@@ -379,7 +365,8 @@
             "toolTip": "Notification",
             "className": "fixtopMargin",
             "config": {
-              "type": "card-mini"
+              "type": "card-mini",
+              "hideTitle": true
             }
           }
         },
@@ -388,7 +375,8 @@
           "config": {
             "widgetType": "actionButton",
             "widgetSubType": "actionButtonProfile",
-            "widgetData": {}
+            "widgetData": {},
+            "hideTitle": true
           }
         }
       ]

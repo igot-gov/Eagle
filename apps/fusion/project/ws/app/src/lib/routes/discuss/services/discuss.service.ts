@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { NSDiscussData } from '../models/discuss.model'
+import { ConfigurationsService } from 'library/ws-widget/utils/src/public-api'
 
 const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
@@ -13,15 +14,21 @@ const API_ENDPOINTS = {
   popularPost: '/apis/protected/v8/discussionHub/topics/popular',
   unread: '/apis/protected/v8/discussionHub/topics/unread',
   getTopic: '/apis/protected/v8/discussionHub/topics/',
+  profile: '/apis/protected/v8/discussionHub/users/me',
+  listUpVote: (slug: string) => `/apis//protected/v8/discussionHub/users/${slug}/upvoted`,
+  listDownVoted: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/downvoted`,
+  listSaved: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/bookmarks`,
 }
 /* this page needs refactor*/
 @Injectable({
   providedIn: 'root',
 })
 export class DiscussService {
-
+  usr: any
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient, private configSvc: ConfigurationsService) {
+    this.usr = this.configSvc.userProfile
+  }
 
   fetchAllCategories() {
     const categories = this.http.get(API_ENDPOINTS.getAllCategories)
@@ -70,7 +77,7 @@ export class DiscussService {
     return this.http.delete(url)
   }
 
-  replyPost (tid: number, data: any) {
+  replyPost(tid: number, data: any) {
     const url = API_ENDPOINTS.replyPost(tid)
     return this.http.post(url, data)
   }
@@ -79,12 +86,24 @@ export class DiscussService {
     return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.recentPost)
   }
   fetchPopularD() {
-    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.popularPost)
+    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.popularPost)
   }
   fetchTopicById(topicId: number) {
-    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.getTopic + topicId.toString())
+    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.getTopic + topicId.toString())
   }
   fetchNotifications() {
     return this.http.get<any>(API_ENDPOINTS.unread)
+  }
+  fetchProfile() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.profile)
+  }
+  fetchUpvoted() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listUpVote(this.usr.userId))
+  }
+  fetchDownvoted() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listDownVoted(this.usr.userId))
+  }
+  fetchSaved() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listSaved(this.usr.userId))
   }
 }

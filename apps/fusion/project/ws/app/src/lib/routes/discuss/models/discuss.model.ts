@@ -1,3 +1,5 @@
+import { IGroup } from '../../infy/routes/navigator/models/navigator.model'
+
 export namespace NSDiscussData {
   export interface IDiscussJsonData {
     tabs: IDiscussionTab[]
@@ -64,6 +66,7 @@ export namespace NSDiscussData {
     teaserPid: number | null | undefined
     pagination?: IPagination
     posts?: IPosts[]
+    // topics?: any[]
   }
 
   export interface ITag {
@@ -112,6 +115,7 @@ export namespace NSDiscussData {
   export interface IUser {
     uid: number
     username: string
+    fullname?: string
     userslug: string
     reputation: number
     postcount: number
@@ -179,6 +183,8 @@ export namespace NSDiscussData {
     editedISO?: string
     index: number
     user: IUser
+    category?: ICategorie
+    topic?: ITopic
     editor?: IEditor | null
     bookmarked: boolean
     upvoted: boolean
@@ -196,5 +202,61 @@ export namespace NSDiscussData {
     display_moderator_tools: boolean
     display_move_tools: boolean
     display_post_menu: boolean
+  }
+
+  export interface ITopic {
+    cid: number
+    deleted: number
+    mainPid: number
+    postcount: number
+    slug: string
+    teaserPid: number
+    tid: number
+    title: string
+    titleRaw: string
+    uid: number
+  }
+  export interface IProfile {
+    uid: number
+    username: string
+    userslug: string
+    email: string
+    'email:confirmed': number
+    joindate: number
+    lastonline: number
+    picture: string
+    fullname: string
+    location: string
+    birthday: string
+    website: string
+    aboutme: string
+    signature: string
+    uploadedpicture: string
+    profileviews: number
+    reputation: number
+    postcount: number
+    topiccount: number
+    lastposttime: number
+    banned: number
+    'banned:expire': number
+    status: string
+    flags: number
+    followerCount: number
+    followingCount: number
+    'cover:url': string
+    'cover:position': string
+    groupTitle: string
+    groupTitleArray: []
+    joindateISO: string
+    lastonlineISO: string
+    isBlocked: true
+    blocksCount: number
+    canEdit: true
+    canBan: true
+    groups: IGroup[]
+    posts: IPosts[]
+    latestPosts: IPosts[]
+    bestPosts: IPosts[]
+    title: string
   }
 }

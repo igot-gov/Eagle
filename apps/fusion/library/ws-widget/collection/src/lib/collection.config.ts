@@ -42,6 +42,10 @@ export const ROOT_WIDGET_CONFIG = {
     singleStrip: 'contentStripSingle',
     verticalStrip: 'contentStripVertical',
   },
+  miniProfile: {
+    _type: 'miniProfile',
+    miniProfile: 'miniProfile',
+  },
   channelHub: {
     _type: 'channelHub',
     channelHub: 'channelHub',
