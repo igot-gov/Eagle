@@ -12,6 +12,7 @@ import { DiscussRoutingModule } from './dicuss.rounting.module'
 import { DiscussCardComponent } from './components/discuss-card/discuss-card.component'
 import { CategoryCardComponent } from './components/category-card/category-card.component'
 import { LeftMenuComponent } from './components/left-menu/left-menu.component'
+import { PostCardComponent } from './components/post-card/post-card.component'
 import { RightMenuComponent } from './components/right-menu/right-menu.component'
 // import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
 import { MatGridListModule } from '@angular/material/grid-list'
@@ -58,6 +59,7 @@ import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck
     DiscussStartComponent,
     DiscussTagsComponent,
     LeftMenuComponent,
+    PostCardComponent,
     RightMenuComponent,
     RelatedDiscussionComponent,
     TrendingTagsComponent,

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { NSDiscussData } from '../models/discuss.model'
+import { ConfigurationsService } from 'library/ws-widget/utils/src/public-api'
 
 const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
@@ -8,20 +9,26 @@ const API_ENDPOINTS = {
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
   votePost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/vote`,
   replyPost: (tid: number) => `apis/protected/v8/discussionHub/writeApi/v2/topics/${tid}`,
+  bookmarkPost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/bookmark`,
   recentPost: '/apis/protected/v8/discussionHub/topics/recent',
   popularPost: '/apis/protected/v8/discussionHub/topics/popular',
   unread: '/apis/protected/v8/discussionHub/topics/unread',
   getTopic: '/apis/protected/v8/discussionHub/topics/',
-
+  profile: '/apis/protected/v8/discussionHub/users/me',
+  listUpVote: (slug: string) => `/apis//protected/v8/discussionHub/users/${slug}/upvoted`,
+  listDownVoted: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/downvoted`,
+  listSaved: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/bookmarks`,
 }
 /* this page needs refactor*/
 @Injectable({
   providedIn: 'root',
 })
 export class DiscussService {
-
+  usr: any
   constructor(
-    private http: HttpClient) { }
+    private http: HttpClient, private configSvc: ConfigurationsService) {
+    this.usr = this.configSvc.userProfile
+  }
 
   fetchAllCategories() {
     const categories = this.http.get(API_ENDPOINTS.getAllCategories)
@@ -55,6 +62,21 @@ export class DiscussService {
     return this.http.post(url, data)
   }
 
+  deleteVotePost(pid: number) {
+    const url = API_ENDPOINTS.votePost(pid)
+    return this.http.delete(url)
+  }
+
+  bookmarkPost(pid: number) {
+    const url = API_ENDPOINTS.bookmarkPost(pid)
+    return this.http.post(url, {})
+  }
+
+  deleteBookmarkPost(pid: number) {
+    const url = API_ENDPOINTS.bookmarkPost(pid)
+    return this.http.delete(url)
+  }
+
   replyPost(tid: number, data: any) {
     const url = API_ENDPOINTS.replyPost(tid)
     return this.http.post(url, data)
@@ -71,5 +93,17 @@ export class DiscussService {
   }
   fetchNotifications() {
     return this.http.get<any>(API_ENDPOINTS.unread)
+  }
+  fetchProfile() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.profile)
+  }
+  fetchUpvoted() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listUpVote(this.usr.userId))
+  }
+  fetchDownvoted() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listDownVoted(this.usr.userId))
+  }
+  fetchSaved() {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listSaved(this.usr.userId))
   }
 }
