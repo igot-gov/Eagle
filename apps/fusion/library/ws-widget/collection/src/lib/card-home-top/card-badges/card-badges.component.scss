@@ -1,6 +1,11 @@
-mat-expansion-panel {
-  width: 580px;
+.example-card {
+  max-width: 250px;
+  img {
+    max-height: 200px;
+  }
 }
-.unit-user {
-  margin: 15px 0 10px 0;
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
 }

@@ -182,6 +182,11 @@
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",
+              "styles": {
+                "background-color": "red",
+                "background-repeat": "no-repeat",
+                "background-size": "300px 100px"
+              },
               "widgetData": {
                 "strips": [
                   {

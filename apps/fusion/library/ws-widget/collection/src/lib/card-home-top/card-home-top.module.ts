@@ -7,13 +7,20 @@ import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { BrowserModule } from '@angular/platform-browser'
 import { AvatarPhotoModule } from '../_common/avatar-photo/avatar-photo.module'
 import { CardLearningStatusComponent } from './card-learning-status/card-learning-status.component'
-import { MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material'
+import { StarRatingComponent } from './star-rating/star-rating.component'
+import { MatTooltipModule } from '@angular/material/tooltip'
+// import { ContentStripMultipleComponent } from '../content-strip-multiple/content-strip-multiple.component'
+// import { ContentStripMultipleComponent } from '../content-strip-multiple/content-strip-multiple.model'
+import {
+  MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule,
+  MatIconModule, MatProgressSpinnerModule, MatFormFieldModule,
+} from '@angular/material'
 
 @NgModule({
-  declarations: [CardHomeTopComponent,
+  declarations: [CardHomeTopComponent, StarRatingComponent,
     CardBadgeComponent, CardCompetencyComponent, CardGoalComponent, CardLearningStatusComponent],
   imports: [AvatarPhotoModule, BrowserModule, MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule,
-    MatExpansionModule, MatIconModule, MatProgressSpinnerModule, MatProgressBarModule],
+    MatExpansionModule, MatIconModule, MatProgressSpinnerModule, MatProgressBarModule, MatFormFieldModule, MatTooltipModule],
   entryComponents: [CardHomeTopComponent],
 })
 export class CardHomeTopModule {
