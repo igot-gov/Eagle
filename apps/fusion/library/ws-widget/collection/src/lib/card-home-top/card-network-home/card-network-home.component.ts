@@ -4,11 +4,11 @@ import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { CardNetWorkService } from './card-network.service'
 
 @Component({
-  selector: 'ws-widget-card-network',
-  templateUrl: './card-network.component.html',
-  styleUrls: ['./card-network.component.scss'],
+  selector: 'ws-widget-card-home-network',
+  templateUrl: './card-network-home.component.html',
+  styleUrls: ['./card-network-home.component.scss'],
 })
-export class CardNetworkComponent extends WidgetBaseComponent
+export class CardNetworkHomeComponent extends WidgetBaseComponent
 
   implements OnInit, NsWidgetResolver.IWidgetData<any> {
   enableFeature = true

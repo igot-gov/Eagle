@@ -1,11 +1,14 @@
-.example-card {
-  max-width: 250px;
-  img {
-    max-height: 200px;
-  }
+#main {
+  display: flex;
+  flex-flow: row;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
+#main div {
+  .example-card {
+    margin: 12px;
+    max-width: 250px;
+    img {
+      max-height: 200px;
+    }
+  }
 }

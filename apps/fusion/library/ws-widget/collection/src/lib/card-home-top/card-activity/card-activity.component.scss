@@ -1,0 +1,32 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+#main {
+  display: flex;
+  flex-flow: row;
+}
+
+#main div {
+  $size: 150px;
+  .example-card {
+    margin: 12px;
+    max-width: $size;
+    max-height: $size - 50;
+  }
+  .content {
+    padding: 20px 0 20px 0;
+    .count {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .course-detail {
+      font-size: 14px;
+      margin: 12px 0 0 0;
+      .mat-icon {
+        font-size: 24px;
+        padding: 8px 8px 0 0;
+      }
+    }
+  }
+}

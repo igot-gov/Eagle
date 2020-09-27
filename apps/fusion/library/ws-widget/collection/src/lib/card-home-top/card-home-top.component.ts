@@ -7,6 +7,7 @@ import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
   styleUrls: ['./card-home-top.component.scss'],
 })
 export class CardHomeTopComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
+  items = ['1', '2', '3', '4']
   @Input() widgetData: any
   ngOnInit(): void {
   }
