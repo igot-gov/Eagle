@@ -37,7 +37,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { TrendingTagsComponent } from './components/trending-tags/trending-tags.component'
 import { DiscussionComponent } from './routes/discussion/discussion.component'
 import { RelatedDiscussionComponent } from './components/related-discussion/related-discussion.component'
-import { AvatarPhotoModule } from '@ws-widget/collection'
+import { AvatarPhotoModule, BtnPageBackModule } from '@ws-widget/collection'
 import { EditorSharedModule } from '@ws/author/src/lib/routing/modules/editor/shared/shared.module'
 import { CkEditorModule } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.module'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
@@ -92,6 +92,7 @@ import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck
     EditorSharedModule,
     CkEditorModule,
     PipeOrderByModule,
+    BtnPageBackModule,
   ],
   entryComponents: [
     DiscussStartComponent,

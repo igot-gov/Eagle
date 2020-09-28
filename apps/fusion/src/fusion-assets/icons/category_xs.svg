@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Category_image_1</title>
+    <g id="Category_image_1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group">
+            <circle id="Oval" fill="#FFF4EC" cx="24" cy="24" r="24"></circle>
+            <path d="M24,16 C28.418278,16 32,19.581722 32,24 C32,28.418278 28.418278,32 24,32 C19.581722,32 16,28.418278 16,24 C16,19.581722 19.581722,16 24,16 Z" id="Combined-Shape" fill="#293D3B"></path>
+            <path d="M32,16 C36.418278,16 40,19.581722 40,24 C40,28.418278 36.418278,32 32,32 C27.581722,32 24,28.418278 24,24 C24,19.581722 27.581722,16 32,16 Z" id="Combined-Shape" fill="#F58634"></path>
+            <path d="M16,16 C20.418278,16 24,19.581722 24,24 C24,28.418278 20.418278,32 16,32 C11.581722,32 8,28.418278 8,24 C8,19.581722 11.581722,16 16,16 Z" id="Combined-Shape" fill="#377AB4"></path>
+        </g>
+    </g>
+</svg>

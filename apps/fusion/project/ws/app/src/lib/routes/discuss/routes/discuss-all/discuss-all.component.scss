@@ -29,16 +29,31 @@
   }
 }
 
+.overflow {
+  // @include breakpoint-xs {
+  //   width: 10em;
+  //   // outline: 1px solid #000;
+  //   margin: 0 0 2em 0;
+  //   text-overflow: ellipsis !important;
+  //   /**
+  //  * Required properties to achieve text-overflow
+  //  */
+  //   white-space: nowrap;
+  //   overflow: hidden;
+  // }
+  overflow: hidden;
+}
+
 .custom {
 
   // height: 48px;
   // max-height: 48px;
   @include breakpoint-xs {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   @include breakpoint-s {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 }
 

@@ -1,6 +1,6 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router, Event, NavigationEnd, NavigationError } from '@angular/router'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { map } from 'rxjs/operators'
 @Component({
@@ -11,14 +11,29 @@ import { map } from 'rxjs/operators'
 export class DiscussComponent implements OnInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
+  titles = [{ title: 'DISCUSS', url: 'app/discuss/home', icon: 'forum' }]
   unread = 0
   public screenSizeIsLtMedium = false
   isLtMedium$ = this.valueSvc.isLtMedium$
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private valueSvc: ValueService, private route: ActivatedRoute) {
+  constructor(private valueSvc: ValueService, private route: ActivatedRoute, private router: Router) {
     this.unread = this.route.snapshot.data.unread
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        // Hide loading indicator
+        // console.log(event.url)
+        this.bindUrl(event.urlAfterRedirects.replace('/app/discuss/', ''))
+      }
+
+      if (event instanceof NavigationError) {
+        // Hide loading indicator
+
+        // Present error to user
+        // console.log(event.error)
+      }
+    })
   }
 
   ngOnInit() {
@@ -30,6 +45,33 @@ export class DiscussComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()
+    }
+  }
+  bindUrl(path: string) {
+    if (path) {
+      if (this.titles.length > 1) {
+        this.titles.pop()
+      }
+      switch (path) {
+        case 'home':
+          this.titles.push({ title: 'Discussion', icon: '', url: 'none' })
+          break
+        case 'categories':
+          this.titles.push({ title: 'Categories', icon: '', url: 'none' })
+          break
+        case 'tags':
+          this.titles.push({ title: 'Tags', icon: '', url: 'none' })
+          break
+        case 'leaderboard':
+          this.titles.push({ title: 'Leaderboard', icon: '', url: 'none' })
+          break
+        case 'my-discussions':
+          this.titles.push({ title: 'My Discussions', icon: '', url: 'none' })
+          break
+
+        default:
+          break
+      }
     }
   }
 }
