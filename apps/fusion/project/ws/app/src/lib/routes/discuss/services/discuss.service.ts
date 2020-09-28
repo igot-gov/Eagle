@@ -108,6 +108,6 @@ export class DiscussService {
     return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listSaved(this.usr.userId))
   }
   fetchSingleCategoryDetails(cid: number) {
-    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.getSingleCategoryDetails(cid))
+    return this.http.get<NSDiscussData.ICategoryData>(API_ENDPOINTS.getSingleCategoryDetails(cid))
   }
 }

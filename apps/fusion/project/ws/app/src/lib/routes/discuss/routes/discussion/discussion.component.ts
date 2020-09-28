@@ -177,7 +177,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
 
   refreshPostData() {
     this.discussService.fetchTopicById(this.topicId).subscribe(
-      data => {
+      (data: NSDiscussData.IDiscussionData) => {
         this.data = data
       },
       (err: any) => {
@@ -188,7 +188,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   fetchSingleCategoryDetails(cid: number) {
     this.fetchSingleCategoryLoader = true
     this.discussService.fetchSingleCategoryDetails(cid).subscribe(
-      data => {
+      (data: NSDiscussData.ICategoryData) => {
         this.similarPosts = data.topics
         this.fetchSingleCategoryLoader = false
       },
