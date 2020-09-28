@@ -20,11 +20,13 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
+  similarPosts!: any
   currentFilter = 'timestamp' //  'recent'
   location = CONTENT_BASE_STREAM
   timer: any
   defaultError = 'Something went wrong, Please try again after sometime!'
   topicId!: number
+  fetchSingleCategoryLoader = false
   constructor(
     private formBuilder: FormBuilder,
     private loader: LoaderService,
@@ -42,6 +44,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
+    this.fetchSingleCategoryDetails(this.data.cid)
   }
   ngAfterViewInit() {
     this.ref.detach()
@@ -174,11 +177,24 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
 
   refreshPostData() {
     this.discussService.fetchTopicById(this.topicId).subscribe(
-      data => {
+      (data: NSDiscussData.IDiscussionData) => {
         this.data = data
       },
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
+  fetchSingleCategoryDetails(cid: number) {
+    this.fetchSingleCategoryLoader = true
+    this.discussService.fetchSingleCategoryDetails(cid).subscribe(
+      (data: NSDiscussData.ICategoryData) => {
+        this.similarPosts = data.topics
+        this.fetchSingleCategoryLoader = false
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        this.fetchSingleCategoryLoader = false
       })
   }
 }

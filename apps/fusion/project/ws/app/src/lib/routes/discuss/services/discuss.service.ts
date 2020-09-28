@@ -5,6 +5,7 @@ import { ConfigurationsService } from 'library/ws-widget/utils/src/public-api'
 
 const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
+  getSingleCategoryDetails: (cid: number) => `/apis/protected/v8/discussionHub/categories/${cid}`,
   getAllTags: '/apis/protected/v8/discussionHub/tags',
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
   votePost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/vote`,
@@ -105,5 +106,8 @@ export class DiscussService {
   }
   fetchSaved() {
     return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listSaved(this.usr.userId))
+  }
+  fetchSingleCategoryDetails(cid: number) {
+    return this.http.get<NSDiscussData.ICategoryData>(API_ENDPOINTS.getSingleCategoryDetails(cid))
   }
 }

@@ -118,3 +118,9 @@ mat-icon.downvoted {
   }
   
 }
+
+.hidden-imp {
+  @include breakpoint-xs {
+    display: none !important;
+  }
+}
