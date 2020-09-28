@@ -32,7 +32,7 @@ export class StarRatingComponent implements OnInit {
   onClick(rating: number) {
     // console.log(rating)
     this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
-      duration: this.snackBarDuration
+      duration: this.snackBarDuration,
     })
     this.ratingUpdated.emit(rating)
     return false
@@ -41,9 +41,9 @@ export class StarRatingComponent implements OnInit {
   showIcon(index: number) {
     if (this.rating >= index + 1) {
       return 'star'
-    } else {
-      return 'star_border'
     }
+      return 'star_border'
+
   }
 
 }
