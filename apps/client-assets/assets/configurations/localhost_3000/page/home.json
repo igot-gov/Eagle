@@ -77,6 +77,17 @@
         [
           {
             "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "card",
+              "widgetSubType": "cardHomeHubs",
+              "widgetData": {}
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
             "widget": {
               "widgetType": "slider",
               "widgetSubType": "sliderBanners",
@@ -137,6 +148,17 @@
             "className": "new-box",
             "widget": {
               "widgetType": "card",
+              "widgetSubType": "cardCourse",
+              "widgetData": {}
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "card",
               "widgetSubType": "cardHomeTop",
               "widgetData": {}
             }
@@ -150,90 +172,6 @@
               "widgetType": "card",
               "widgetSubType": "cardHomeNetwork",
               "widgetData": {}
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "className": "new-box",
-            "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeDiscuss",
-              "widgetData": {}
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "className": "new-box",
-            "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardBrowseCourse",
-              "widgetData": {}
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "className": "new-box",
-            "widget": {
-              "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultiple",
-              "styles": {
-                "background-color": "red",
-                "background-repeat": "no-repeat",
-                "background-size": "300px 100px"
-              },
-              "widgetData": {
-                "strips": [
-                  {
-                    "key": "trending",
-                    "title": "Trending Courses",
-                    "viewMoreUrl": {
-                      "path": "/app/search/learning",
-                      "queryParams": {
-                        "q": "all",
-                        "p": "Trending"
-                      }
-                    },
-                    "info": {
-                      "mode": "below",
-                      "visibilityMode": "hidden",
-                      "icon": {
-                        "icon": "info",
-                        "scale": 0.8
-                      },
-                      "widget": {
-                        "widgetType": "element",
-                        "widgetSubType": "elementHtml",
-                        "widgetData": {
-                          "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are trending with other colleagues right now.</p>"
-                        }
-                      }
-                    },
-                    "stripConfig": {
-                      "cardSubType": "standard",
-                      "postCardForSearch": true
-                    },
-                    "filters": [],
-                    "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/recommendation/trending",
-                        "queryParams": {
-                          "pageNo": 0,
-                          "pageSize": 12,
-                          "sourceFields": [
-                            "creatorLogo"
-                          ]
-                        }
-                      }
-                    }
-                  }
-                ]
-              }
             }
           }
         ]

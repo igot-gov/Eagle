@@ -1,4 +1,6 @@
+@import 'ws-common';
 @import 'ws-vars';
+@import 'ws-mixins';
 
 .base-header {
   margin-left: 5px;
@@ -6,17 +8,6 @@
 .mat-grid-tile {
   display: inline;
   position: absolute;
-}
-.mat-icon {
-  padding: 16px;
-}
-
-.icon {
-  background: lightslategrey;
-  width: 60px;
-  height: 60px;
-  border-radius: 3px;
-  text-align: center;
 }
 h2 {
   width: 98%;
@@ -43,7 +34,7 @@ mat-grid-list {
   color: #222222 !important;
   font: 18px/30px Poppins-Medium;
 }
-.unit-hubs {
+.unit-cohort {
   display: inline-flex;
   // align-items: center;
   margin-bottom: $size-l;
