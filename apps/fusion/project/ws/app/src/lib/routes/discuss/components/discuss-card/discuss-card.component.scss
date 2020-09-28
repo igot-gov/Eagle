@@ -11,6 +11,10 @@
 .dot:before {
   content: '•';
   margin: 1rem;
+
+  @include breakpoint-xs {
+    margin: 0.65rem;
+  }
 }
 
 .mobile {
@@ -20,6 +24,15 @@
 
   @include breakpoint-s {
     flex: 1;
+  }
+}
+
+.responsive {
+  display: flex;
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
   }
 }
 

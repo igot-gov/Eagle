@@ -12,7 +12,7 @@ import { ValueService } from '../../services/value.service'
   styleUrls: ['./image-crop.component.scss'],
 })
 export class ImageCropComponent implements OnInit {
-
+  // need to set for creator Logo
   @Output() data = new EventEmitter<File>()
   isRoundCrop = false
   isNotOfRequiredSize = false

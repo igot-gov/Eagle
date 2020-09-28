@@ -1,6 +1,7 @@
 // Widget Modules
 export * from './lib/btn-apps/btn-apps.model'
 // modules
+export * from './lib/_common/avatar-photo/avatar-photo.module'
 export * from './lib/btn-apps/btn-apps.module'
 export * from './lib/btn-call/btn-call.module'
 export * from './lib/btn-catalog/btn-catalog.module'
@@ -53,8 +54,9 @@ export * from './lib/card-content/card-content.module'
 export * from './lib/card-knowledge/card-knowledge.module'
 export * from './lib/card-welcome/card-welcome.module'
 export * from './lib/card-network/card-network.module'
+export * from './lib/card-network-home/card-network-home.module'
+export * from './lib/card-hubs-list/card-hubs-list.module'
 export * from './lib/card-home-top/card-home-top.module'
-export * from './lib/card-home-network/card-home-network.module'
 export * from './lib/card-browse-course/card-browse-course.module'
 export * from './lib/channel-hub/channel-hub.module'
 export * from './lib/collection.config'

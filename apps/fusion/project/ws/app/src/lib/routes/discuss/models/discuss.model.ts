@@ -69,6 +69,49 @@ export namespace NSDiscussData {
     // topics?: any[]
   }
 
+  export interface ICategoryData {
+    bgColor: string,
+    cid: number,
+    class: string,
+    color: string,
+    description: string,
+    descriptionParsed: string,
+    disabled: number,
+    icon: string,
+    imageClass: string,
+    isSection: number,
+    link: string,
+    name: string,
+    numRecentReplies: number,
+    order: number,
+    parentCid: number,
+    post_count: number,
+    slug: string,
+    topic_count: number,
+    minTags: number,
+    maxTags: number,
+    totalPostCount: number,
+    totalTopicCount: number,
+    tagWhitelist: any[],
+    children: any[],
+    topics: any[],
+    nextStart: number,
+    isWatched: boolean,
+    isNotWatched: boolean,
+    isIgnored: boolean,
+    breadcrumbs: any[],
+    title: string,
+    privileges: any,
+    pagination: any,
+    loggedIn: boolean,
+    relative_path: string,
+    template: any,
+    url: string,
+    bodyClass: string,
+    _header: any,
+    widgets: any
+  }
+
   export interface ITag {
     value: string
     valueEscaped: string
@@ -176,6 +219,7 @@ export namespace NSDiscussData {
     deleted: number | boolean
     upvotes: number
     downvotes: number
+    viewcount?: number
     deleterUid: number
     edited: number | boolean
     votes: number

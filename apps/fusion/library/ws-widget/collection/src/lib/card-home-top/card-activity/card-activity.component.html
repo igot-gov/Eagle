@@ -1,0 +1,18 @@
+<section class="base-layout">
+  <h2>
+    My Activity
+  </h2>
+  <div id="main">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4" *ngFor="let item of items">
+      <mat-card class="example-card">
+        <mat-card-content class="content">
+          <div class="count"><b>7</b></div>
+          <p class="course-detail">
+            <mat-icon>person</mat-icon>
+            <span class="detail-text">Course</span>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

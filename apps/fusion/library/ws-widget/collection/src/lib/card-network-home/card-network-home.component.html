@@ -1,0 +1,41 @@
+<section class="base-layout">
+  <h2>Network</h2>
+  <div>
+    <h3 class="mat-error text-center" *ngIf="newUserArray.length === 0" i18n>
+      No Active User Info Available
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
+      <ng-container *ngFor="let userObj of newUserArray" [ngTemplateOutlet]="userIndividualNew"
+        [ngTemplateOutletContext]="{ user: userObj }">
+      </ng-container>
+    </div>
+  </div>
+  <div class="text-center">
+    <mat-spinner [strokeWidth]="3" *ngIf="newUserArray.length ===0" [diameter]="40" class="display-inline-block">
+    </mat-spinner>
+  </div>
+
+  <ng-template #userIndividualNew let-user="user">
+    <mat-card>
+      <mat-card-content class="content">
+        <div class="unit-cohort sm:pr-8 md:pr-10">
+          <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
+          <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
+            class="width-expand padding-left-xs">
+            <div class="mat-body-strong cohorts-name">
+              {{
+            { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
+          }}
+            </div>
+            <div class="mat-caption cohorts-desc">{{ user.employmentDetails.departmentName }}</div>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-divider></mat-divider>
+        <p class="center">Connect Now</p>
+      </mat-card-actions>
+    </mat-card>
+
+  </ng-template>
+</section>

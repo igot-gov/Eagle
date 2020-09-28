@@ -10,9 +10,10 @@ ws-app-search-input-home .autocomplete-form {
 }
 
 .search-home {
-  background: #00A9F4 0% 0% no-repeat padding-box;
+  // background: #00A9F4 0% 0% no-repeat padding-box;
+  // background: #00A9F4 0% 0% no-repeat padding-box;
   border-radius: 0px 4px 4px 0px;
-  padding: $size-s $size-m;
+  padding: $size-s $size-s;
 }
 
 ws-app-search-input-home input {
@@ -32,11 +33,19 @@ ws-app-search-input-home .search .mat-form-field-wrapper {
 
 ws-app-search-input-home .search-border {
   border-radius: 4px;
-  /*.75rem;*/
+  // <<<<<<< HEAD
+  // /*.75rem;*/
+  // border: 1px solid #DEDFE0;
+  // flex: 1;
+  // max-width: 500px;
+  // /* border-color: #cecece;*/
+  // =======
   border: 1px solid #DEDFE0;
   flex: 1;
-  max-width: 500px;
-  /* border-color: #cecece;*/
+  max-width: 690px;
+  height: 36px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 ws-app-search-input-home .border-right {

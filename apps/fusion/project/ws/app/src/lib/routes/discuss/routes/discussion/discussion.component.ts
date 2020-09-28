@@ -20,11 +20,13 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
+  similarPosts!: any
   currentFilter = 'timestamp' //  'recent'
   location = CONTENT_BASE_STREAM
   timer: any
   defaultError = 'Something went wrong, Please try again after sometime!'
   topicId!: number
+  fetchSingleCategoryLoader = false
   constructor(
     private formBuilder: FormBuilder,
     private loader: LoaderService,
@@ -42,6 +44,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
+    this.fetchSingleCategoryDetails(this.data.cid)
   }
   ngAfterViewInit() {
     this.ref.detach()
@@ -75,9 +78,40 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.processVote(discuss, req)
   }
 
+  bookmark(discuss: any) {
+    this.discussService.bookmarkPost(discuss.pid).subscribe(
+      _data => {
+        this.openSnackbar('Bookmark added successfully!')
+        this.refreshPostData()
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+  unBookMark(discuss: any) {
+    this.discussService.deleteBookmarkPost(discuss.pid).subscribe(
+      _data => {
+        this.openSnackbar('Bookmark Removed successfully!')
+        this.refreshPostData()
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
+  delteVote(discuss: any) {
+    this.discussService.deleteVotePost(discuss.pid).subscribe(
+      _data => {
+        this.refreshPostData()
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
   private async processVote(discuss: any, req: any) {
     if (discuss && discuss.uid) {
-      this.discussService.votePost(discuss.uid, req).subscribe(
+      this.discussService.votePost(discuss.pid, req).subscribe(
         () => {
           this.openSnackbar(this.toastSuccess.nativeElement.value)
           this.postAnswerForm.reset()
@@ -92,6 +126,24 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   postReply(post: NSDiscussData.IDiscussionData) {
     const req = {
       content: this.postAnswerForm.controls['answer'].value,
+    }
+    this.postAnswerForm.controls['answer'].setValue('')
+    if (post && post.tid) {
+      this.discussService.replyPost(post.tid, req).subscribe(
+        () => {
+          this.openSnackbar('Your reply was saved succesfuly!')
+          this.refreshPostData()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    }
+  }
+
+  postCommentsReply(post: NSDiscussData.IPosts, comment: string) {
+    const req = {
+      content: comment,
+      toPid: post.pid,
     }
     if (post && post.tid) {
       this.discussService.replyPost(post.tid, req).subscribe(
@@ -125,11 +177,24 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
 
   refreshPostData() {
     this.discussService.fetchTopicById(this.topicId).subscribe(
-      data => {
+      (data: NSDiscussData.IDiscussionData) => {
         this.data = data
       },
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
+  fetchSingleCategoryDetails(cid: number) {
+    this.fetchSingleCategoryLoader = true
+    this.discussService.fetchSingleCategoryDetails(cid).subscribe(
+      (data: NSDiscussData.ICategoryData) => {
+        this.similarPosts = data.topics
+        this.fetchSingleCategoryLoader = false
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        this.fetchSingleCategoryLoader = false
       })
   }
 }

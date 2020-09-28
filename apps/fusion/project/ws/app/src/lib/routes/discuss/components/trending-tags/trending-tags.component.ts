@@ -34,7 +34,7 @@ export class TrendingTagsComponent implements OnInit {
     // ]
 
     this.max = _.get(_.maxBy(this.tags, 'score'), 'score') || 0
-    this.trandingTags = _.chain(this.tags).orderBy('score', 'desc').take(10).value()
+    this.trandingTags = _.chain(this.tags).orderBy('score', 'desc').take(5).value()
   }
   css() {
     // return 'linear - gradient(to left, #00ff00 " + 80 + " %, #ff0000 20 %)"

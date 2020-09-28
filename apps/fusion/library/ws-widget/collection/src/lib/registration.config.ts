@@ -2,6 +2,7 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 // Components
 import { BtnAppsComponent } from './btn-apps/btn-apps.component'
 // Modules
+import { AvatarPhotoModule } from './_common/avatar-photo/avatar-photo.module'
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
 import { BtnCallComponent } from './btn-call/btn-call.component'
 import { BtnCallModule } from './btn-call/btn-call.module'
@@ -48,6 +49,7 @@ import { CardLearnComponent } from './card-learn/card-learn.component'
 import { CardLearnModule } from './card-learn/card-learn.module'
 import { CardWelcomeComponent } from './card-welcome/card-welcome.component'
 import { CardNetworkComponent } from './card-network/card-network.component'
+import { CardHubsListComponent } from './card-hubs-list/card-hubs-list.component'
 import { CardWelcomeModule } from './card-welcome/card-welcome.module'
 import { CardNetworkModule } from './card-network/card-network.module'
 import { CardHomeNetworkModule } from './card-home-network/card-home-network.module'
@@ -117,11 +119,16 @@ import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
 import { ContentStripVerticalModule } from './content-strip-vertical/content-strip-vertical.module'
 import { ContentStripVerticalComponent } from './content-strip-vertical/content-strip-vertical.component'
 import { CardHomeTopComponent } from './card-home-top/card-home-top.component'
-import { CardHomeNetworkComponent } from './card-home-network/card-home-network.component'
+import { CardNetworkHomeComponent } from './card-network-home/card-network-home.component'
 import { CardHomeDiscussComponent } from './card-home-discuss/card-home-discuss.component'
 import { CardBrowseCourseComponent } from './card-browse-course/card-browse-course.component'
+import { CardHubsListModule } from './card-hubs-list/card-hubs-list.module'
+import { CardNetworkHomeModule } from './card-network-home/card-network-home.module'
+import { CardCourseComponent } from './card-course/card-course.component'
+import { CardCourseModule } from './card-course/card-course.module'
 
 export const WIDGET_REGISTERED_MODULES = [
+  AvatarPhotoModule,
   BtnAppsModule,
   BtnCallModule,
   BtnCatalogModule,
@@ -182,6 +189,9 @@ export const WIDGET_REGISTERED_MODULES = [
   IntranetSelectorModule,
   VideoWrapperModule,
   SlidersMobModule,
+  CardHubsListModule,
+  CardNetworkHomeModule,
+  CardCourseModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -314,7 +324,7 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.home_network,
-    component: CardHomeNetworkComponent,
+    component: CardNetworkHomeComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
@@ -476,5 +486,15 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.wrapper._type,
     widgetSubType: ROOT_WIDGET_CONFIG.wrapper.videoWrapper,
     component: VideoWrapperComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_hubs,
+    component: CardHubsListComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_course,
+    component: CardCourseComponent,
   },
 ]

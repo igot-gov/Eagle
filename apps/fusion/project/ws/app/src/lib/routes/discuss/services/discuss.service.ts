@@ -5,10 +5,12 @@ import { ConfigurationsService } from 'library/ws-widget/utils/src/public-api'
 
 const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
+  getSingleCategoryDetails: (cid: number) => `/apis/protected/v8/discussionHub/categories/${cid}`,
   getAllTags: '/apis/protected/v8/discussionHub/tags',
   createPost: '/apis/protected/v8/discussionHub/writeApi/v2/topics',
   votePost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/vote`,
   replyPost: (tid: number) => `apis/protected/v8/discussionHub/writeApi/v2/topics/${tid}`,
+  bookmarkPost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/bookmark`,
   recentPost: '/apis/protected/v8/discussionHub/topics/recent',
   popularPost: '/apis/protected/v8/discussionHub/topics/popular',
   unread: '/apis/protected/v8/discussionHub/topics/unread',
@@ -61,6 +63,21 @@ export class DiscussService {
     return this.http.post(url, data)
   }
 
+  deleteVotePost(pid: number) {
+    const url = API_ENDPOINTS.votePost(pid)
+    return this.http.delete(url)
+  }
+
+  bookmarkPost(pid: number) {
+    const url = API_ENDPOINTS.bookmarkPost(pid)
+    return this.http.post(url, {})
+  }
+
+  deleteBookmarkPost(pid: number) {
+    const url = API_ENDPOINTS.bookmarkPost(pid)
+    return this.http.delete(url)
+  }
+
   replyPost(tid: number, data: any) {
     const url = API_ENDPOINTS.replyPost(tid)
     return this.http.post(url, data)
@@ -89,5 +106,8 @@ export class DiscussService {
   }
   fetchSaved() {
     return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listSaved(this.usr.userId))
+  }
+  fetchSingleCategoryDetails(cid: number) {
+    return this.http.get<NSDiscussData.ICategoryData>(API_ENDPOINTS.getSingleCategoryDetails(cid))
   }
 }
