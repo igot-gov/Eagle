@@ -78,6 +78,18 @@ export class InitService {
       'twitter',
       domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/twitter.svg'),
     )
+    iconRegistry.addSvgIcon(
+      'category_xs',
+      domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/category_xs.svg'),
+    )
+    iconRegistry.addSvgIcon(
+      'category_m',
+      domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/category_m.svg'),
+    )
+    iconRegistry.addSvgIcon(
+      'hubs',
+      domSanitizer.bypassSecurityTrustResourceUrl('fusion-assets/icons/hubs.svg'),
+    )
   }
 
   async init() {
@@ -242,8 +254,7 @@ export class InitService {
           userId: userPidProfile.user.wid,
           unit: userPidProfile.user.unit_name,
           // tslint:disable-next-line:max-line-length
-          userName: `${userPidProfile.user.first_name ? userPidProfile.user.first_name : ' '} ${
-            userPidProfile.user.last_name ? userPidProfile.user.last_name : ' '
+          userName: `${userPidProfile.user.first_name ? userPidProfile.user.first_name : ' '} ${userPidProfile.user.last_name ? userPidProfile.user.last_name : ' '
             }`,
           source_profile_picture: userPidProfile.user.source_profile_picture || '',
           dealerCode:

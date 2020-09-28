@@ -3,11 +3,13 @@
     <mat-card-title>
       <h2 class="cursor-pointer" (click)="getDiscussion()">{{discuss.title}}</h2>
     </mat-card-title>
-    <mat-card-subtitle>
-      <span class="ws-mat-default-text">{{discuss.category.name}}</span>
+    <mat-card-subtitle class="responsive">
+      <span class="flex ws-mat-default-text">
+        <mat-icon svgIcon="category_xs"></mat-icon>{{discuss.category.name}}
+      </span>
       <span class="dot" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span>
       <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Anonymous'}}</span>
-      <span class="margin-left-s">{{discuss.timestamp | pipeRelativeTime}}</span>
+      <span class="margin-left-l">{{discuss.timestamp | pipeRelativeTime}}</span>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="flex flex-1">
