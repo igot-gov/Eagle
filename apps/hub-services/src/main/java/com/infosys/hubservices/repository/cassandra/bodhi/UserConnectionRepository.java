@@ -20,10 +20,13 @@ public interface UserConnectionRepository
 	@Query("SELECT * from user_connection where user_id=?0;")
 	public List<UserConnection> findAllByUser(String userId);
 
-	@Query("SELECT * from user_connection where user_id=?0 AND connection_status;")
+	@Query("SELECT * from user_connection where user_id=?0 AND connection_status=?1;")
 	public List<UserConnection> findByUserAndStatus(String userId, String status);
 
-	@Query("SELECT * from user_connection where user_id=?0 AND connection_status AND connection_type;")
+	@Query("SELECT * from user_connection where user_id=?0 AND connection_status=?1 AND connection_type=?2;")
 	public List<UserConnection> findByUserAndTypeAndStatus(String userId, String type, String status);
+
+	@Query("SELECT * FROM user_connection WHERE user_id IN ?0 AND connection_status=?1")
+	public List<UserConnection> findByUsersAndStatus(List<String> userIds, String status);
 
 }

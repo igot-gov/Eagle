@@ -36,11 +36,11 @@ public class UserConnectionController {
 
     @PostMapping("/find/common")
     public ResponseEntity<Response> findCommonConnections(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
-                                                 @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                 @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
-                                                 @RequestBody Map<String,Object> request){
+                                                          @RequestHeader String userId,
+                                                          @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+                                                          @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo){
 
-        Response response = null;
+        Response response = connectionService.findCommonConnection(userId, pageNo, pageSize);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
 
     }

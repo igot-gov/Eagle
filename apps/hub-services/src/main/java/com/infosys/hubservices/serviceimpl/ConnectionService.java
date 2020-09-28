@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ConnectionService implements IConnectionService {
@@ -32,8 +33,41 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response findCommonConnection(ConnectionRequest request) {
-        return null;
+    public Response findCommonConnection(String userId, int offset, int limit) {
+
+        Response response = new Response();
+        try {
+            if(userId==null || userId.isEmpty()){
+                throw new BadRequestException("user_id cant be null or empty");
+            }
+
+            //get established connections
+            List<UserConnection> userApprovedConnections = userConnectionRepository.findByUserAndStatus(userId,  "Approved");
+
+            //approved the connectionIds of established connection
+            List<String> approvedConnectionIds = userApprovedConnections.stream().map(userConnection -> userConnection.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
+
+            //get the established related connection
+            List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndStatus(approvedConnectionIds, "Approved");
+
+            //find the common new connections that could be established
+            List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
+
+            if(commonConnections.size()==0){
+                response.put(response.MESSAGE, response.FAILED);
+                response.put(response.DATA, commonConnections);
+                response.put(response.STATUS, HttpStatus.NO_CONTENT);
+            }
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.DATA, commonConnections);
+            response.put(response.STATUS, HttpStatus.OK);
+
+        }catch (Exception e){
+            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+
+        }
+
+        return response;
     }
 
     @Override
@@ -60,9 +94,8 @@ public class ConnectionService implements IConnectionService {
             response.put(response.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
-            throw new ApplicationServiceError("Failed to search contents: "+e.getMessage());
+            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
         }
-
 
         return response;
     }

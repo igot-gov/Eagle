@@ -13,7 +13,7 @@ import com.infosys.hubservices.model.Response;
 public interface IConnectionService {
 
     Response findRecommendedConnection(ConnectionRequest request);
-    Response findCommonConnection(ConnectionRequest request);
+    Response findCommonConnection(String userId, int offset, int limit);
 
     /**
      * Find connections which are established
