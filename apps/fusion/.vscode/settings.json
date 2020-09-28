@@ -98,6 +98,7 @@
   "stylelint.enable": true,
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "eslint.codeActionsOnSave.mode": "all",
   "workbench.colorCustomizations": {
     "activityBar.background": "#8a2ca2",
     "activityBar.activeBackground": "#8a2ca2",

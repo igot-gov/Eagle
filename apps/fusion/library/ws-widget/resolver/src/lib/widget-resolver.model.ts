@@ -59,6 +59,7 @@ export namespace NsWidgetResolver {
   }
   export interface ITitle {
     title: string,
-    url: TUrl
+    url: TUrl,
+    icon?: string
   }
 }

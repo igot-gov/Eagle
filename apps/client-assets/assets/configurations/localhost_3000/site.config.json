@@ -60,9 +60,9 @@
     }
   ],
   "indexHtmlMeta": {
-    "description": "iGOT is a next-generation learning solution accessible anytime, anywhere and on any device. It enables organizations to focus on training their talent of today, to be ready for tomorrow",
+    "description": "iGOT 2.0 is a learning platform aimed at promoting capacity development among civil services. It is a solution built to be ‘fit for purpose’ to meet the exact learning needs of the civil services. iGOT 2.0 will help create impactful and relevant learning paths to achieve the outcomes relevant to their career aspirations.",
     "webmanifest": "/assets/configurations/igot.idc.tarento.com/manifest/manifest.webmanifest",
-    "xIcon": "/assets/configurations/igot.idc.tarento.com/manifest/favicon.ico"
+    "xIcon": "/assets/configurations/localhost_3000/manifest/favicon.ico"
   },
   "keycloak": {
     "bearerExcludedUrls": [

@@ -84,8 +84,6 @@ import { LayoutLinearComponent } from './layout-linear/layout-linear.component'
 import { LayoutLinearModule } from './layout-linear/layout-linear.module'
 import { LayoutTabComponent } from './layout-tab/layout-tab.component'
 import { LayoutTabModule } from './layout-tab/layout-tab.module'
-import { MiniProfileModule } from './mini-profile/mini-profile.module'
-import { MiniProfileComponent } from './mini-profile/mini-profile.component'
 import { PageComponent } from './page/page.component'
 import { PageModule } from './page/page.module'
 import { PickerContentModule } from './picker-content/picker-content.module'
@@ -161,7 +159,6 @@ export const WIDGET_REGISTERED_MODULES = [
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
-  MiniProfileModule,
   PickerContentModule,
   PlayerAmpModule,
   PlayerAudioModule,
@@ -360,11 +357,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.layout._type,
     widgetSubType: ROOT_WIDGET_CONFIG.layout.tab,
     component: LayoutTabComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.miniProfile._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.miniProfile.miniProfile,
-    component: MiniProfileComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.player._type,
