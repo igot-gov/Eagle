@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators'
 export class DiscussComponent implements OnInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
-  titles = [{ title: 'DISCUSS', url: 'app/discuss/home', icon: 'forum' }]
+  titles = [{ title: 'DISCUSS', url: '/app/discuss/home', icon: 'forum' }]
   unread = 0
   public screenSizeIsLtMedium = false
   isLtMedium$ = this.valueSvc.isLtMedium$

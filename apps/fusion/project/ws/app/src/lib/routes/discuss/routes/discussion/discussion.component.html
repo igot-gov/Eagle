@@ -13,8 +13,10 @@
             <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
             <ws-widget-avatar-photo [name]="post.user.fullname || 'Anonymous'" size="s"></ws-widget-avatar-photo>
             <span class="margin-left-s">{{'Asked by '}}</span>
-            <span class="margin-left-s capitalize f-medium" *ngIf="post.user.fullname" [innerHTML]="post.user.fullname"></span>
-            <span class="margin-left-s capitalize f-medium" *ngIf="!post.user.fullname" [innerHTML]="post.user.username"></span>
+            <span class="margin-left-s capitalize f-medium" *ngIf="post.user.fullname"
+              [innerHTML]="post.user.fullname"></span>
+            <span class="margin-left-s capitalize f-medium" *ngIf="!post.user.fullname"
+              [innerHTML]="post.user.username"></span>
             <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
           </div>
 
@@ -29,13 +31,16 @@
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">
-                <mat-icon *ngIf="!post.upvoted"(click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
-                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward</mat-icon>
+                <mat-icon *ngIf="!post.upvoted" (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
+                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward
+                </mat-icon>
                 <span class="pad-4">{{data.upvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
-                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward</mat-icon>
-                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">arrow_downward</mat-icon>
+                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward
+                </mat-icon>
+                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">
+                  arrow_downward</mat-icon>
                 <span class="pad-4">{{data.downvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
@@ -43,8 +48,10 @@
                 <span class="pad-4">{{data.viewcount}} views</span>
               </span>
               <span class="flex mobile">
-                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">bookmark</mat-icon>
-                <mat-icon *ngIf="data.posts[0].bookmarked" class="cursor-pointer ws-mat-accent-text" (click)="unBookMark(post)">bookmark</mat-icon>
+                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">bookmark
+                </mat-icon>
+                <mat-icon *ngIf="data.posts[0].bookmarked" class="cursor-pointer ws-mat-accent-text"
+                  (click)="unBookMark(post)">bookmark</mat-icon>
               </span>
             </div>
             <div class="flex flex-1" class="cursor-pointer text-right mobile2">
@@ -61,9 +68,10 @@
               <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
                 [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
               </ws-widget-ck-editor> -->
-              <mat-form-field appearance="outline" class="flex-1 w-full" [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
-                <textarea matInput formControlName="answer" #answer cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30" [required]="true"></textarea>
+              <mat-form-field appearance="outline" class="flex-1 w-full"
+                [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
+                <textarea matInput formControlName="answer" #answer cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30" [required]="true"></textarea>
                 <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
                   This is mandatory
                 </mat-error>
@@ -105,8 +113,10 @@
         <mat-card-header class="mb-5 comment-section align-center">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname" [innerHTML]="post.user.fullname"></span>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname" [innerHTML]="post.user.username"></span>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
+            [innerHTML]="post.user.fullname"></span>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
+            [innerHTML]="post.user.username"></span>
           <span class="posttime">{{ post.timestamp | date}}</span>
         </mat-card-header>
         <mat-card-content>
@@ -115,13 +125,16 @@
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">
-                <mat-icon *ngIf="!post.upvoted"(click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
-                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward</mat-icon>
+                <mat-icon *ngIf="!post.upvoted" (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
+                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward
+                </mat-icon>
                 <span class="pad-4">{{post.upvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
-                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward</mat-icon>
-                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">arrow_downward</mat-icon>
+                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward
+                </mat-icon>
+                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">
+                  arrow_downward</mat-icon>
                 <span class="pad-4">{{post.downvotes}}</span>
               </span>
               <!-- <span class="flex margin-right-l mobile">
@@ -139,13 +152,11 @@
             </div>
           </div>
           <div class="w-full" *ngIf="post.toggle">
-            <ng-container 
-                [ngTemplateOutlet]="reply" 
-                [ngTemplateOutletContext]="{post:post}">
+            <ng-container [ngTemplateOutlet]="reply" [ngTemplateOutletContext]="{post:post}">
             </ng-container>
           </div>
           <ng-container *ngIf="post.replies.count == 1">
-            <div class="flex flex-1 custom margin-0 margin-top-xl" >
+            <div class="flex flex-1 custom margin-0 margin-top-xl">
               <div class="width-expand flex align-center">
                 <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <ng-container *ngFor="let user of post?.replies?.users">
@@ -168,15 +179,14 @@
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">
-              <ng-container 
-                  [ngTemplateOutlet]="replies" 
-                  [ngTemplateOutletContext]="{posts:data.posts, postId:post.pid}">
+              <ng-container [ngTemplateOutlet]="replies"
+                [ngTemplateOutletContext]="{posts:data.posts, postId:post.pid}">
               </ng-container>
             </div>
           </ng-container>
-          
+
           <ng-container *ngIf="post.replies.count > 1">
-            <div class="flex flex-1 custom margin-0 margin-top-xl" >
+            <div class="flex flex-1 custom margin-0 margin-top-xl">
               <div class="width-expand flex align-center">
                 <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <ng-container *ngFor="let user of post?.replies?.users">
@@ -199,9 +209,8 @@
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">
-              <ng-container 
-                  [ngTemplateOutlet]="replies" 
-                  [ngTemplateOutletContext]="{posts:data.posts, postId:post.pid}">
+              <ng-container [ngTemplateOutlet]="replies"
+                [ngTemplateOutletContext]="{posts:data.posts, postId:post.pid}">
               </ng-container>
             </div>
           </ng-container>
@@ -212,14 +221,15 @@
   </div>
   <div class="flex flex-1 display-hide hidden-imp">
     <div *ngIf="fetchSingleCategoryLoader" class="pr-4 flex items-center justify-center">
-        <mat-spinner [diameter]="30"></mat-spinner>
+      <mat-spinner [diameter]="30"></mat-spinner>
     </div>
-    <app-discuss-related-discussion *ngIf="!fetchSingleCategoryLoader" [relatedDiscussions]="similarPosts"></app-discuss-related-discussion>
+    <app-discuss-related-discussion *ngIf="!fetchSingleCategoryLoader" [relatedDiscussions]="similarPosts">
+    </app-discuss-related-discussion>
   </div>
 </div>
 
 
-<ng-template #reply let-post="post" >
+<ng-template #reply let-post="post">
   <div class="mt-2 flex flex-col">
     <div class="flex-1">
       <form name="replyForm">
@@ -228,7 +238,7 @@
         </ws-widget-ck-editor> -->
         <mat-form-field appearance="outline" class="flex-1 w-full">
           <textarea matInput [(ngModel)]="post.comment" cdkTextareaAutosize name="comment"
-          #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
         </mat-form-field>
       </form>
     </div>
@@ -236,23 +246,25 @@
       <button mat-button class="mr-2" (click)="post.toggle=!post.toggle; post.comment=''">
         <span class="noocoments"> Cancel</span>
       </button>
-      <button mat-raised-button type="button" (click)="postCommentsReply(post, post.comment )" [disabled]="post.comment?.length < 3"
-      class="text-white ws-mat-primary-background flex-auto-display">
+      <button mat-raised-button type="button" (click)="postCommentsReply(post, post.comment )"
+        [disabled]="post.comment?.length < 3" class="text-white ws-mat-primary-background flex-auto-display">
         <span class="text-white" i18n>Post reply</span>
       </button>
     </div>
   </div>
 </ng-template>
 
-<ng-template #replies let-posts="posts" let-postId="postId" >
+<ng-template #replies let-posts="posts" let-postId="postId">
   <div class="mt-2 flex flex-col">
     <ng-container *ngFor="let post of posts | pipeFilter:'toPid': postId; index as index; last as last">
       <mat-card class="ml-4 post-card">
         <mat-card-header class="mb-5 comment-section align-center">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname" [innerHTML]="post.user.fullname"></span>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname" [innerHTML]="post.user.username"></span>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
+            [innerHTML]="post.user.fullname"></span>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
+            [innerHTML]="post.user.username"></span>
           <span class="posttime">{{ post.timestamp | date}}</span>
         </mat-card-header>
         <mat-card-content>
@@ -260,13 +272,16 @@
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">
-                <mat-icon *ngIf="!post.upvoted"(click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
-                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward</mat-icon>
+                <mat-icon *ngIf="!post.upvoted" (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
+                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward
+                </mat-icon>
                 <span class="pad-4">{{post.upvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
-                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward</mat-icon>
-                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">arrow_downward</mat-icon>
+                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward
+                </mat-icon>
+                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">
+                  arrow_downward</mat-icon>
                 <span class="pad-4">{{post.downvotes}}</span>
               </span>
             </div>
