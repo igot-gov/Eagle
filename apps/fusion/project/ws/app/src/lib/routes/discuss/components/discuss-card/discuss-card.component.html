@@ -1,7 +1,7 @@
-<mat-card class="discuss-card">
+<mat-card class="discuss-card cursor-pointer" (click)="getDiscussion()">
   <mat-card-header>
     <mat-card-title>
-      <h2 class="cursor-pointer" (click)="getDiscussion()">{{discuss.title}}</h2>
+      <h2 class="cursor-pointer f-medium">{{discuss.title}}</h2>
     </mat-card-title>
     <mat-card-subtitle>
       <span class="ws-mat-default-text">{{discuss.category.name}}</span>
@@ -23,12 +23,8 @@
   <mat-card-footer class="flex flex-1 custom margin-0">
     <div class="flex flex-1 flex-row margin-left-xs">
       <span class="flex margin-right-l mobile">
-        <mat-icon (click)="upvote(discuss)" class="cursor-pointer">arrow_upward</mat-icon>
-        <span class="pad-4">{{discuss.upvotes || 0}}</span>
-      </span>
-      <span class="flex margin-right-l mobile">
-        <mat-icon (click)="downvote(discuss)" class="cursor-pointer">arrow_downward</mat-icon>
-        <span class="pad-4">{{discuss.downvotes || 0}}</span>
+        <mat-icon (click)="upvote(discuss)" class="cursor-pointer">import_export</mat-icon>
+        <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }}</span>
       </span>
       <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
@@ -36,7 +32,7 @@
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-      <span class="noocoments ws-mat-default-text" (click)="getDiscussion()">{{((discuss.postcount || 1) -1) }}
+      <span class="noocoments ws-mat-default-text">{{((discuss.postcount || 1) -1) }}
         comments</span>
     </div>
   </mat-card-footer>

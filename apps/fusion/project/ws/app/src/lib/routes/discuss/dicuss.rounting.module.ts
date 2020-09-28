@@ -74,7 +74,7 @@ const routes: Routes = [
         path: 'my-discussions',
         component: DiscussMyDiscussionsComponent,
         resolve: {
-          profile: DiscussProfileResolve
+          profile: DiscussProfileResolve,
         },
       },
     ],
@@ -90,7 +90,7 @@ const routes: Routes = [
     DiscussRecentResolve,
     DiscussTopicResolve,
     DiscussUnreadResolve,
-    DiscussProfileResolve
+    DiscussProfileResolve,
   ],
 })
 export class DiscussRoutingModule { }

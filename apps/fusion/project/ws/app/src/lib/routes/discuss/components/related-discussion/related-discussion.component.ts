@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 /* tslint:disable */
 import _ from 'lodash'
+import { Router } from '@angular/router'
 /* tslint:enable */
 @Component({
   selector: 'app-discuss-related-discussion',
@@ -11,35 +12,16 @@ import _ from 'lodash'
   host: { class: 'margin-left-l' },
 })
 export class RelatedDiscussionComponent implements OnInit {
-  discussions!: NSDiscussData.IRelatedDiscussion[]
-  constructor() {
+  @Input()
+  relatedDiscussions!: NSDiscussData.IDiscussionData[]
+
+  constructor(private router: Router) {
 
   }
   ngOnInit(): void {
-    this.discussions = [
-      {
-        category: 'Category name',
-        id: 1,
-        time: '3 hours ago',
-        title: 'What is Dicey’s Rule of law?',
-      }, {
-        category: 'Category name',
-        id: 1,
-        time: '3 hours ago',
-        title: 'What is Dicey’s Rule of law?',
-      },
-      {
-        category: 'Category name',
-        id: 1,
-        time: '3 hours ago',
-        title: 'What is Dicey’s Rule of law?',
-      },
-      {
-        category: 'Category name',
-        id: 1,
-        time: '3 hours ago',
-        title: 'What is Dicey’s Rule of law?',
-      },
-    ]
+  }
+
+  getDiscussion(discuss: NSDiscussData.IDiscussionData) {
+    this.router.navigate([`/app/discuss/home/${discuss.tid}`])
   }
 }
