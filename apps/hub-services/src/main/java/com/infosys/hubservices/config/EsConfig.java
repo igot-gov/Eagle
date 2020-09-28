@@ -5,9 +5,9 @@
  *
  */
 
-package com.infosys.recommendationservice.config;
+package com.infosys.hubservices.config;
 
-import com.infosys.recommendationservice.util.DbProperties;
+import com.infosys.hubservices.util.DbProperties;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
