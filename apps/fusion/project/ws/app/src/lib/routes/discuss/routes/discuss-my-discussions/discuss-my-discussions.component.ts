@@ -33,13 +33,13 @@ export class DiscussMyDiscussionsComponent implements OnInit {
           this.discussionList = this.data.bestPosts
           break
         case 'saved':
-          this.discussService.fetchSaved().subscribe((response) => {
+          this.discussService.fetchSaved().subscribe(response => {
             if (response) {
               this.discussionList = response.posts
             } else {
               this.discussionList = []
             }
-          }, () => {
+          },                                         () => {
             this.discussionList = []
           })
           break
@@ -47,25 +47,25 @@ export class DiscussMyDiscussionsComponent implements OnInit {
           this.discussionList = []
           break
         case 'upvoted':
-          this.discussService.fetchUpvoted().subscribe((response) => {
+          this.discussService.fetchUpvoted().subscribe(response => {
             if (response) {
               this.discussionList = response.posts
             } else {
               this.discussionList = []
             }
-          }, () => {
+          },                                           () => {
             this.discussionList = []
           })
 
           break
         case 'downvoted':
-          this.discussService.fetchDownvoted().subscribe((response) => {
+          this.discussService.fetchDownvoted().subscribe(response => {
             if (response) {
               this.discussionList = response.posts
             } else {
               this.discussionList = []
             }
-          }, () => {
+          },                                             () => {
             this.discussionList = []
           })
           break

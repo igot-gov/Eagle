@@ -210,8 +210,11 @@
       <mat-divider *ngIf="post.index != 0"></mat-divider>
     </ng-container>
   </div>
-  <div class="flex flex-1 display-hide">
-    <app-discuss-related-discussion></app-discuss-related-discussion>
+  <div class="flex flex-1 display-hide hidden-imp">
+    <div *ngIf="fetchSingleCategoryLoader" class="pr-4 flex items-center justify-center">
+        <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+    <app-discuss-related-discussion *ngIf="!fetchSingleCategoryLoader" [relatedDiscussions]="similarPosts"></app-discuss-related-discussion>
   </div>
 </div>
 
