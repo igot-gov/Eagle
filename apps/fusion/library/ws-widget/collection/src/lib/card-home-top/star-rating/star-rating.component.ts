@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 import { MatSnackBar } from '@angular/material'
 
 @Component({
-  selector: 'mat-star-rating',
+  selector: 'ws-widget-mat-star-rating',
   templateUrl: './star-rating.component.html',
   styleUrls: ['./star-rating.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
@@ -31,7 +31,7 @@ export class StarRatingComponent implements OnInit {
   }
   onClick(rating: number) {
     // console.log(rating)
-    this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
+    this.snackBar.open(`You rated ${rating}' / '${this.starCount}`, '', {
       duration: this.snackBarDuration,
     })
     this.ratingUpdated.emit(rating)
@@ -42,7 +42,7 @@ export class StarRatingComponent implements OnInit {
     if (this.rating >= index + 1) {
       return 'star'
     }
-      return 'star_border'
+    return 'star_border'
 
   }
 
