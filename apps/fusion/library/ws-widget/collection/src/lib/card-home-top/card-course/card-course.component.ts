@@ -2,13 +2,13 @@ import { Component } from '@angular/core'
 import { StarRatingColor } from '../star-rating/star-rating.component'
 
 @Component({
-  selector: 'ws-widget-card-badges',
-  templateUrl: './card-badges.component.html',
-  styleUrls: ['./card-badges.component.scss'],
+  selector: 'ws-widget-card-course',
+  templateUrl: './card-course.component.html',
+  styleUrls: ['./card-course.component.scss'],
 
 })
 
-export class CardBadgeComponent {
+export class CardCourseComponent {
   rating = 3
   starCount = 5
   items = ['1', '2', '3', '4']

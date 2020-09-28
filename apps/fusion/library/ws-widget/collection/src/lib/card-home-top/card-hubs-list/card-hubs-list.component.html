@@ -1,0 +1,33 @@
+<section class="base-layout">
+  <h2>Hubs</h2>
+  <div>
+    <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
+      No hubs Info Available
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-4">
+      <ng-container *ngFor="let hubsObj of hubsList" [ngTemplateOutlet]="userIndividualNew"
+        [ngTemplateOutletContext]="{ hubs: hubsObj }">
+      </ng-container>
+    </div>
+  </div>
+  <div class="text-center">
+    <mat-spinner [strokeWidth]="3" *ngIf="hubsList.length ===0" [diameter]="40" class="display-inline-block">
+    </mat-spinner>
+  </div>
+
+  <ng-template #userIndividualNew let-hubs="hubs">
+    <div class="unit-hubs sm:pr-8 md:pr-10">
+      <div class="icon">
+        <mat-icon>person</mat-icon>
+      </div>
+      <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
+        <div class="mat-body-strong cohorts-name">
+          {{
+          {firstName: hubs.hubname} | pipeNameTransform
+          }}
+        </div>
+        <div class="mat-caption cohorts-desc">{{hubs.desc}}</div>
+      </div>
+    </div>
+  </ng-template>
+</section>
