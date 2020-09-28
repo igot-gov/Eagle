@@ -4,9 +4,11 @@
  *                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"
  *
  */
-package com.infosys.hubservices.controller;
+package com.infosys.hubservices.network.controller;
 
 import com.infosys.hubservices.model.Response;
+import com.infosys.hubservices.serviceimpl.ConnectionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/network/hub")
-public class NetworkHubController {
+@RequestMapping("/connections")
+public class UserConnectionController {
 
 
-    @PostMapping("/find/recommended/connections")
-    public ResponseEntity<Response> findRecommendedConnection(@RequestHeader String rootOrg, @RequestHeader String org,
+    @Autowired
+    private ConnectionService connectionService;
+
+    @PostMapping("/find/recommended")
+    public ResponseEntity<Response> findRecommendedConnection(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
                                                  @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                  @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
                                                  @RequestBody Map<String,Object> request){
@@ -29,8 +34,8 @@ public class NetworkHubController {
 
     }
 
-    @PostMapping("/find/common/connections")
-    public ResponseEntity<Response> findCommonConnections(@RequestHeader String rootOrg, @RequestHeader String org,
+    @PostMapping("/find/common")
+    public ResponseEntity<Response> findCommonConnections(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
                                                  @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                  @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
                                                  @RequestBody Map<String,Object> request){
@@ -41,13 +46,13 @@ public class NetworkHubController {
     }
 
 
-    @GetMapping("/fetch/connections")
-    public ResponseEntity<Response> findConnections(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = true) String org,
+    @GetMapping("/fetch/requested")
+    public ResponseEntity<Response> findConnections(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
                                                         @RequestHeader String userId,
                                                         @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                         @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = null;
+        Response response = connectionService.findConnectionsRequested(userId, pageNo, pageSize);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
 
     }
