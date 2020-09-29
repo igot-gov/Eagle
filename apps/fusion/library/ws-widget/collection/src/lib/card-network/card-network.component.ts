@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { CardNetWorkService } from './card-network.service'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-widget-card-network',
@@ -21,8 +22,10 @@ export class CardNetworkComponent extends WidgetBaseComponent
   deptUserReq: any
   nameFilter = ''
   searchSpinner = false
+  deptpeopleSpinner = false
+  newPeopleSpinner = false
 
-  constructor(private router: Router, private cardNetworkService: CardNetWorkService) {
+  constructor(private router: Router, private cardNetworkService: CardNetWorkService, public configurationsService: ConfigurationsService) {
     super()
   }
 
@@ -61,6 +64,7 @@ export class CardNetworkComponent extends WidgetBaseComponent
 
   }
   getAllActiveUsers() {
+    this.newPeopleSpinner = true
 
     this.newUserReq = {
       limit: 50,
@@ -73,19 +77,26 @@ export class CardNetworkComponent extends WidgetBaseComponent
       if (typeof this.newUserArray === 'undefined') {
         this.newUserArray = []
       }
-    })
 
+    })
+    this.newPeopleSpinner = false
   }
   getAllDepartmentUsers() {
+    this.deptpeopleSpinner = true
     this.deptUserReq = {
       limit: 50,
       offset: 0,
-      department: 'istm',
+      department: this.configurationsService.activeOrg,
       intervalInDays: 7,
       type: 'deptUsers',
     }
     this.cardNetworkService.fetchLatestUserInfo(this.deptUserReq).subscribe(data => {
-      this.departmentUserArray = data.users
+      if (Array.isArray(data.users) && data.users.length) {
+        this.departmentUserArray = data.users
+      } else {
+        this.departmentUserArray = []
+      }
+      this.deptpeopleSpinner = true
     })
 
   }
