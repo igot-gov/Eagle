@@ -12,6 +12,14 @@ import com.infosys.hubservices.model.Response;
 
 public interface IConnectionService {
 
+
+    Response add(String roorOrg, ConnectionRequest request);
+
+    Response update(String roorOrg, ConnectionRequest request);
+
+    Response delete(String userId, String connectionId);
+
+
     Response findRecommendedConnection(ConnectionRequest request);
     Response findCommonConnection(String userId, int offset, int limit);
 

@@ -34,7 +34,7 @@ public class UserConnectionPrimarykey implements Serializable {
 		super();
 	}
 
-	public UserConnectionPrimarykey(String rootOrg, String org, String userId, String connectionId) {
+	public UserConnectionPrimarykey(String rootOrg, String userId, String connectionId) {
 		super();
 		this.userId = userId;
 		this.rootOrg = rootOrg;

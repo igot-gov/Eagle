@@ -12,12 +12,14 @@ import com.infosys.hubservices.exception.BadRequestException;
 import com.infosys.hubservices.model.ConnectionRequest;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
+import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,23 @@ public class ConnectionService implements IConnectionService {
 
     @Autowired
     private UserConnectionRepository userConnectionRepository;
+
+    @Autowired
+    public Response add(String roorOrg, ConnectionRequest request){
+        return null;
+
+    }
+
+    @Override
+    public Response update(String roorOrg, ConnectionRequest request) {
+        return null;
+    }
+
+    @Override
+    public Response delete(String userId, String connectionId) {
+        return null;
+    }
+
 
     @Override
     public Response findRecommendedConnection(ConnectionRequest request) {
@@ -72,7 +91,27 @@ public class ConnectionService implements IConnectionService {
 
     @Override
     public Response findConnections(String userId, int offset, int limit) {
-        return null;
+        Response response = new Response();
+
+        try{
+            if(userId==null || userId.isEmpty()){
+                throw new BadRequestException("user_id cant be null or empty");
+            }
+            List<UserConnection> userConnectionsEstablished = userConnectionRepository.findByUserAndStatus(userId, "Approved");
+            if(userConnectionsEstablished.size()==0){
+                response.put(response.MESSAGE, response.FAILED);
+                response.put(response.DATA, userConnectionsEstablished);
+                response.put(response.STATUS, HttpStatus.NO_CONTENT);
+            }
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.DATA, userConnectionsEstablished);
+            response.put(response.STATUS, HttpStatus.OK);
+
+        } catch (Exception e){
+            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+        }
+
+        return response;
     }
 
     @Override

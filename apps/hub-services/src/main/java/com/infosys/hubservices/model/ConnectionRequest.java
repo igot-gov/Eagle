@@ -8,14 +8,17 @@
 package com.infosys.hubservices.model;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ConnectionRequest {
 
     @NotNull
     private String userId;
-    private List<String> criterias = new ArrayList<>();
+    @NotNull
+    private String connectionId;
+    @NotNull
+    private String status;
+    @NotNull
+    private String type;
 
 
     public String getUserId() {
@@ -26,11 +29,27 @@ public class ConnectionRequest {
         this.userId = userId;
     }
 
-    public List<String> getCriterias() {
-        return criterias;
+    public String getConnectionId() {
+        return connectionId;
     }
 
-    public void setCriterias(List<String> criterias) {
-        this.criterias = criterias;
+    public void setConnectionId(String connectionId) {
+        this.connectionId = connectionId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
