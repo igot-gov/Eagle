@@ -3,7 +3,14 @@
           (ratingUpdated)="onRatingChanged($event)"></mat-star-rating> -->
 <!-- <star-rating-comp [starType]="'svg'" [rating]="2.63"></star-rating-comp> -->
 
+<div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 col-gap-4">
+    <ng-container *ngFor="let item of discussionList">
+      <ws-widget-card-discuss [discuss]="item"></ws-widget-card-discuss>
+    </ng-container>
 
+  </div>
+</div>
 <section class="base-layout">
   <h2>Learn | Continue Learning</h2>
   <div>
