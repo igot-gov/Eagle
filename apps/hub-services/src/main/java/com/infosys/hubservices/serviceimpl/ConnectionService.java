@@ -30,6 +30,9 @@ public class ConnectionService implements IConnectionService {
     private UserConnectionRepository userConnectionRepository;
 
     @Autowired
+    private ProfileService profileService;
+
+    @Autowired
     public Response add(String roorOrg, ConnectionRequest request){
         Response response = new Response();
         try {
@@ -45,7 +48,6 @@ public class ConnectionService implements IConnectionService {
             throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
 
         }
-
         return response;
 
     }
@@ -89,7 +91,8 @@ public class ConnectionService implements IConnectionService {
 
         }
 
-        return response;    }
+        return response;
+    }
 
 
     @Override
@@ -168,7 +171,9 @@ public class ConnectionService implements IConnectionService {
             if(userId==null || userId.isEmpty()){
                 throw new BadRequestException("user_id cant be null or empty");
             }
-            List<UserConnection> userConnections = userConnectionRepository.findByUserAndTypeAndStatus(userId, "requests", "Pending");
+            //List<UserConnection> userConnections = userConnectionRepository.findByUserAndTypeAndStatus(userId, "requests", "Pending");
+
+            List<UserConnection> userConnections = userConnectionRepository.findByConnectionAndStatus(userId,  "Pending");
             if(userConnections.size()==0){
                 response.put(response.MESSAGE, response.FAILED);
                 response.put(response.DATA, userConnections);

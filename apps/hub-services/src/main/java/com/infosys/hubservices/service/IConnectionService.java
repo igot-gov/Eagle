@@ -21,6 +21,14 @@ public interface IConnectionService {
 
 
     Response findRecommendedConnection(ConnectionRequest request);
+
+    /**
+     * Find related connections from existing connections
+     * @param userId
+     * @param offset
+     * @param limit
+     * @return
+     */
     Response findCommonConnection(String userId, int offset, int limit);
 
     /**

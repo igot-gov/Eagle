@@ -32,4 +32,7 @@ public interface UserConnectionRepository
 	@Query("SELECT * FROM user_connection WHERE user_id=?0 AND connection_id=?1")
 	public UserConnection findByUsersAndConnection(String userId, String connectionId);
 
+	@Query("SELECT * from user_connection where connection_id=?0 AND connection_status=?1;")
+	public List<UserConnection> findByConnectionAndStatus(String connectionId, String status);
+
 }

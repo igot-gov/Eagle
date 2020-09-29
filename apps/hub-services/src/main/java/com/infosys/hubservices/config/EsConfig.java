@@ -7,7 +7,7 @@
 
 package com.infosys.hubservices.config;
 
-import com.infosys.hubservices.util.DbProperties;
+import com.infosys.hubservices.util.ConnectionProperties;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -24,17 +24,17 @@ import org.springframework.context.annotation.Configuration;
 public class EsConfig {
 
 	@Autowired
-	DbProperties dbProps;
+	ConnectionProperties connectionProperties;
 
 	@Bean(destroyMethod = "close")
 	public RestHighLevelClient restHighLevelClient() {
 
 		final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		credentialsProvider.setCredentials(AuthScope.ANY,
-				new UsernamePasswordCredentials(dbProps.getEsUser(), dbProps.getEsPassword()));
+				new UsernamePasswordCredentials(connectionProperties.getEsUser(), connectionProperties.getEsPassword()));
 
 		RestClientBuilder builder = RestClient
-				.builder(new HttpHost(dbProps.getEsHost(), Integer.parseInt(dbProps.getEsPort())))
+				.builder(new HttpHost(connectionProperties.getEsHost(), Integer.parseInt(connectionProperties.getEsPort())))
 				.setHttpClientConfigCallback(
 						httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
 

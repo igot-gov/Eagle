@@ -10,8 +10,10 @@ package com.infosys.hubservices.util;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
-public class DbProperties {
+public class ConnectionProperties {
 
 	@Value("${es.host}")
 	private String esHost;
@@ -25,6 +27,25 @@ public class DbProperties {
 	@Value("${es.password}")
 	private String esPassword;
 
+	@Value("${es.profile.index}")
+	private String esProfileIndex;
+
+	@Value("${es.profile.index.type}")
+	private String esProfileIndexType;
+
+	@Value("${es.profile.source.fields}")
+	private String[] esProfileSourceFields;
+
+	public String getEsProfileIndex() {
+		return esProfileIndex;
+	}
+
+	public String getEsProfileIndexType() {
+		return esProfileIndexType;
+	}
+	public String[] getEsProfileSourceFields() {
+		return esProfileSourceFields;
+	}
 
 	public String getEsHost() {
 		return esHost;
@@ -41,4 +62,6 @@ public class DbProperties {
 	public String getEsPassword() {
 		return esPassword;
 	}
+
+
 }
