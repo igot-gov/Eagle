@@ -59,6 +59,7 @@ export namespace NsInstanceConfig {
     isDownloadableAndroidResource?: IPath
     sourceFieldsUserAutocomplete?: string[]
     forgotPasswordConfig?: IForgotPassword
+    hubs: IHubs[]
   }
 
   export interface IForgotPassword {
@@ -74,7 +75,13 @@ export namespace NsInstanceConfig {
   export interface IPath {
     [key: string]: string
   }
-
+  export interface IHubs {
+    active: boolean
+    desc: string
+    hubname: string
+    icon: string
+    path: string
+  }
   export interface IIndexHtmlMeta {
     description?: string
     openSearchUrl?: string
