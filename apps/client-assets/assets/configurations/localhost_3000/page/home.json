@@ -88,9 +88,14 @@
         [
           {
             "dimensions": {},
+            "className": "new-box",
             "widget": {
               "widgetType": "slider",
               "widgetSubType": "sliderBanners",
+              "style": {
+                "border-radius": "12px",
+                "height": "600px"
+              },
               "widgetData": [
                 {
                   "banners": {
