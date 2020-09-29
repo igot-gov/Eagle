@@ -150,6 +150,17 @@
               "widgetData": {}
             }
           }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "card",
+              "widgetSubType": "cardHomeDiscuss",
+              "widgetData": {}
+            }
+          }
         ]
       ]
     }
