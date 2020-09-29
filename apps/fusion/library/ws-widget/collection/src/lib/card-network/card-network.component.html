@@ -30,7 +30,8 @@
           </div>
         </div>
         <div class="text-center">
-          <mat-spinner [strokeWidth]="3" *ngIf="newUserArray.length ===0" [diameter]="40" class="display-inline-block">
+          <mat-spinner [strokeWidth]="3" *ngIf="newUserArray.length ===0 && !this.newPeopleSpinner" [diameter]="40"
+            class="display-inline-block">
           </mat-spinner>
         </div>
       </ng-template>
@@ -51,8 +52,8 @@
           </div>
         </div>
         <div class="text-center">
-          <mat-spinner *ngIf="departmentUserArray.length ===0" [strokeWidth]="3" [diameter]="40"
-            class="display-inline-block">
+          <mat-spinner *ngIf="departmentUserArray.length ===0 && !this.deptpeopleSpinner" [strokeWidth]="3"
+            [diameter]="40" class="display-inline-block">
           </mat-spinner>
         </div>
       </ng-template>

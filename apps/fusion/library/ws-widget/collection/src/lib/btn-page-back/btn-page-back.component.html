@@ -1,24 +1,26 @@
-<div class="flex flex-1 fix-ww">
-  <a i18n-aria-label aria-label="Back" style="width: fit-content;" *ngIf="widgetData.url && widgetData.url !== 'none'"
-    class="ws-mat-default-text" [routerLink]="backUrl.routeUrl" [queryParams]="backUrl.queryParams"
-    [fragment]="backUrl?.fragment" mat-icon-button>
-    <mat-icon class="ws-mat-default-text icon-margin">apps</mat-icon>
-    <span>HUBS</span>
-  </a>
-  <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
-    <div class="flex" *ngFor="let title of widgetData.titles">
-      <mat-icon class="main-back m-auto mat-imput-placeholder">keyboard_arrow_right</mat-icon>
-      <span *ngIf="title.title && title.url && title.url === 'none'" i18n="page title: {{title.title}}"
-        class="flex margin-left-xs m-auto">
-        <mat-icon class="ws-mat-default-text icon-margin" *ngIf="title.icon">{{title.icon}}</mat-icon>
-        <span class="mat-imput-placeholder">{{title.title}}</span>
-      </span>
-      <a class="flex m-auto ws-mat-default-text" i18n-aria-label aria-label="Back"
-        *ngIf="title.url && title.url !== 'none'" [routerLink]="title.url">
-        <!-- [queryParams]="titleUrl.queryParams" [fragment]="titleUrl?.fragment" -->
-        <mat-icon class="ws-mat-default-text icon-margin" *ngIf="title.icon">{{title.icon}}</mat-icon>
-        <span> {{title.title}}</span>
-      </a>
-    </div>
-  </ng-container>
+<div class="flex flex-1 ws-mat-primary-lite-background-important">
+  <div class="flex flex-1 fix-ww padding-xs">
+    <a i18n-aria-label aria-label="Back" style="width: fit-content;" *ngIf="widgetData.url && widgetData.url !== 'none'"
+      class="flex ws-mat-default-text margin-left-xs" [routerLink]="backUrl.routeUrl"
+      [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment">
+      <mat-icon class="flexws-mat-default-text icon-margin">apps</mat-icon>
+      <span class="flex mat-typography m-t-b">HUBS</span>
+    </a>
+    <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
+      <div class="flex" *ngFor="let title of widgetData.titles">
+        <mat-icon class="main-back m-auto mat-imput-placeholder">keyboard_arrow_right</mat-icon>
+        <span *ngIf="title.title && title.url && title.url === 'none'" i18n="page title: {{title.title}}"
+          class="flex margin-left-xs m-auto">
+          <mat-icon class="ws-mat-default-text icon-margin m-t-b" *ngIf="title.icon">{{title.icon}}</mat-icon>
+          <span class="mat-imput-placeholder text-capitalize m-t-b mat-typography">{{title.title}}</span>
+        </span>
+        <a class="flex m-auto ws-mat-default-text" i18n-aria-label aria-label="Back"
+          *ngIf="title.url && title.url !== 'none'" [routerLink]="title.url">
+          <!-- [queryParams]="titleUrl.queryParams" [fragment]="titleUrl?.fragment" -->
+          <mat-icon class="ws-mat-default-text icon-margin" *ngIf="title.icon">{{title.icon}}</mat-icon>
+          <span class="text-uppercase m-t-b mat-typography"> {{title.title}}</span>
+        </a>
+      </div>
+    </ng-container>
+  </div>
 </div>

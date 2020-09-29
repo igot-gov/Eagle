@@ -74,7 +74,27 @@
     "widgetType": "layout",
     "widgetData": {
       "widgets": [
-       [
+        [
+          {
+            "dimensions": {},
+            "className": "",
+            "widget": {
+              "widgetType": "actionButton",
+              "widgetSubType": "actionButtonPageBack",
+              "widgetData": {
+                "url": "home",
+                "titles": [
+                  {
+                    "url": "/page/learn",
+                    "title": "Learning",
+                    "icon": "school"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
           {
             "dimensions": {},
             "className": "new-box",
@@ -153,7 +173,6 @@
             }
           }
         ],
-        
         [
           {
             "dimensions": {},
@@ -217,9 +236,6 @@
             }
           }
         ]
-      
-       
-     
       ]
     }
   }

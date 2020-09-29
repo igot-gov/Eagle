@@ -11,6 +11,10 @@
   margin: 0 auto;
 }
 
+.new-box-hubs {
+  margin: 0 0 $size-s 0;
+}
+
 .new-box-left {
   flex-direction: row-reverse;
   display: flex;
@@ -41,4 +45,14 @@
   // max-width: $max-screen;
   display: flex;
   flex: 1;
+
+  @include breakpoint-s {
+    margin-left: $size-xs;
+    margin-right: $size-xs;
+  }
+
+  @include breakpoint-xs {
+    margin-left: $size-xs;
+    margin-right: $size-xs;
+  }
 }

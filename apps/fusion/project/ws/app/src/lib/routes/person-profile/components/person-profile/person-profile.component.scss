@@ -1,3 +1,6 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
 // .sidenav {
 //   background-color: transparent !important;
 //   margin-right: 8px !important;
@@ -10,8 +13,12 @@
   height: inherit !important;
 }
 
-@import 'ws-mixins';
-@import 'ws-vars';
+
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  // min-height: 400px;
+}
 
 $app-background-lite-color: #f5f6f7;
 

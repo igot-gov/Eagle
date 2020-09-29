@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { CardNetWorkService } from './card-network.service'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 
 @Component({
   selector: 'ws-widget-card-home-network',
@@ -22,7 +23,7 @@ export class CardNetworkHomeComponent extends WidgetBaseComponent
   nameFilter = ''
   searchSpinner = false
 
-  constructor(private router: Router, private cardNetworkService: CardNetWorkService) {
+  constructor(private router: Router, private cardNetworkService: CardNetWorkService, public configurationsService: ConfigurationsService) {
     super()
   }
 
@@ -32,6 +33,7 @@ export class CardNetworkHomeComponent extends WidgetBaseComponent
   ngOnInit() {
     this.getAllActiveUsers()
     this.getAllDepartmentUsers()
+
   }
 
   getUserFullName(user: any) {
@@ -80,7 +82,7 @@ export class CardNetworkHomeComponent extends WidgetBaseComponent
     this.deptUserReq = {
       limit: 50,
       offset: 0,
-      department: 'istm',
+      department: this.configurationsService.activeOrg,
       intervalInDays: 7,
       type: 'deptUsers',
     }

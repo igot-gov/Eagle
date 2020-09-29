@@ -9,6 +9,7 @@ $banner-min-height: 200px;
   overflow: hidden;
   position: relative;
   margin: auto;
+  border-radius: 12px;
 }
 
 .banner-overlay {
@@ -43,7 +44,8 @@ $banner-min-height: 200px;
     width: 100%;
     min-height: $banner-min-height;
     display: block;
-    // height: 250px;
+    height: 350px;
+    border-radius: 12px;
   }
 }
 
@@ -54,6 +56,7 @@ $banner-min-height: 200px;
   position: absolute;
   bottom: 0;
   left: 50%;
+  border-radius: 12px;
   transform: translateX(-50%);
   box-sizing: border-box;
 

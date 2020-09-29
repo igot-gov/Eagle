@@ -77,7 +77,7 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "ws-mat-primary-lite-background-important new-box-hubs",
             "widget": {
               "widgetType": "card",
               "widgetSubType": "cardHomeHubs",
@@ -88,47 +88,23 @@
         [
           {
             "dimensions": {},
+            "className": "new-box",
             "widget": {
               "widgetType": "slider",
               "widgetSubType": "sliderBanners",
+              "style": {
+                "border-radius": "12px",
+                "height": "600px"
+              },
               "widgetData": [
                 {
                   "banners": {
-                    "l": "assets/instances/eagle/banners/home/6/l.png",
-                    "m": "assets/instances/eagle/banners/home/6/m.png",
-                    "s": "assets/instances/eagle/banners/home/6/s.png",
-                    "xl": "assets/instances/eagle/banners/home/6/xl.png",
-                    "xs": "assets/instances/eagle/banners/home/6/xs.png",
-                    "xxl": "assets/instances/eagle/banners/home/6/xxl.png"
-                  },
-                  "redirectUrl": "/app/search/learning",
-                  "queryParams": {
-                    "q": "Salesforce",
-                    "lang": "en",
-                    "f": "{}"
-                  },
-                  "title": ""
-                },
-                {
-                  "banners": {
-                    "l": "assets/instances/eagle/banners/home/7/l.png",
-                    "m": "assets/instances/eagle/banners/home/7/m.png",
-                    "s": "assets/instances/eagle/banners/home/7/s.png",
-                    "xl": "assets/instances/eagle/banners/home/7/xl.png",
-                    "xs": "assets/instances/eagle/banners/home/7/xs.png",
-                    "xxl": "assets/instances/eagle/banners/home/7/xxl.png"
-                  },
-                  "redirectUrl": "/app/search/learning",
-                  "title": ""
-                },
-                {
-                  "banners": {
-                    "l": "assets/instances/eagle/banners/home/8/l.png",
-                    "m": "assets/instances/eagle/banners/home/8/m.png",
-                    "s": "assets/instances/eagle/banners/home/8/s.png",
-                    "xl": "assets/instances/eagle/banners/home/8/xl.png",
-                    "xs": "assets/instances/eagle/banners/home/8/xs.png",
-                    "xxl": "assets/instances/eagle/banners/home/8/xxl.png"
+                    "l": "assets/instances/eagle/banners/home/1/l.png",
+                    "m": "assets/instances/eagle/banners/home/1/m.png",
+                    "s": "assets/instances/eagle/banners/home/1/s.png",
+                    "xl": "assets/instances/eagle/banners/home/1/xl.png",
+                    "xs": "assets/instances/eagle/banners/home/1/xs.png",
+                    "xxl": "assets/instances/eagle/banners/home/1/xxl.png"
                   },
                   "redirectUrl": "/app/search/learning",
                   "queryParams": {
@@ -171,6 +147,17 @@
             "widget": {
               "widgetType": "card",
               "widgetSubType": "cardHomeNetwork",
+              "widgetData": {}
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "card",
+              "widgetSubType": "cardHomeDiscuss",
               "widgetData": {}
             }
           }

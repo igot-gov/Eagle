@@ -447,6 +447,43 @@
       "right": []
     }
   },
+  "hubs": [
+    {
+      "path": "/page/learn",
+      "active": true,
+      "hubname": "Learn",
+      "desc": "Shape your Skills with hunderds-of online course",
+      "icon": "school"
+    },
+    {
+      "path": "/app/discuss/home",
+      "active": true,
+      "hubname": "Discuss",
+      "desc": "Have a question? Have an Idea? discuss with your peers",
+      "icon": "forum"
+    },
+    {
+      "path": "/page/network",
+      "active": true,
+      "hubname": "Network",
+      "desc": "Connect with Interesting people, see what they are upto.",
+      "icon": "group"
+    },
+    {
+      "path": "/page/learn",
+      "active": false,
+      "hubname": "Carrier",
+      "desc": "Explore the carrier option grow into the path you are",
+      "icon": "test"
+    },
+    {
+      "path": "/app/notifications",
+      "active": true,
+      "hubname": "News",
+      "desc": "Keep you self update with the latest news from IGOT",
+      "icon": "library_books"
+    }
+  ],
   "featuredApps": [
     "feature_playlist",
     "feature_goals",

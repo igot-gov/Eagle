@@ -1,33 +1,48 @@
-<section class="base-layout">
-  <h2>Hubs</h2>
-  <div>
-    <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
-      No hubs Info Available
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-4">
-      <ng-container *ngFor="let hubsObj of hubsList" [ngTemplateOutlet]="userIndividualNew"
-        [ngTemplateOutletContext]="{ hubs: hubsObj }">
-      </ng-container>
-    </div>
-  </div>
-  <div class="text-center">
-    <mat-spinner [strokeWidth]="3" *ngIf="hubsList.length ===0" [diameter]="40" class="display-inline-block">
-    </mat-spinner>
-  </div>
+<mat-card class="base-layout container-balanced">
+  <mat-card-content>
+    <div class="flex flex-1 flex-column">
+      <div class="flex flex-1 ws-mat-default-text">
+        <span class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()">
+          <mat-icon class="margin-xs">apps</mat-icon>
+          <span class="margin-auto ws-mat-default-text">HUBS</span>
+        </span>
+        <ng-container *ngIf="!visible && !isMobile">
+          <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
+            <span class="mat-card-subtitle margin-0"> {{hub.hubname}}</span>
+          </a>
+        </ng-container>
 
-  <ng-template #userIndividualNew let-hubs="hubs">
-    <div class="unit-hubs sm:pr-8 md:pr-10">
-      <div class="icon">
-        <mat-icon>person</mat-icon>
       </div>
-      <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
-        <div class="mat-body-strong cohorts-name">
-          {{
-          {firstName: hubs.hubname} | pipeNameTransform
-          }}
+      <div class="flex flex-1" [hidden]="!visible">
+        <div class="flex flex-1">
+          <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
+            No hubs Info Available
+          </h3>
+          <div class="grid grid-cols-1 margin-xs sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-2">
+            <ng-container *ngFor="let hubsObj of hubsList" [ngTemplateOutlet]="userIndividualNew"
+              [ngTemplateOutletContext]="{ hubs: hubsObj }">
+            </ng-container>
+          </div>
         </div>
-        <div class="mat-caption cohorts-desc">{{hubs.desc}}</div>
+        <div class="text-center">
+          <mat-spinner [strokeWidth]="3" *ngIf="hubsList.length === 0" [diameter]="40" class="display-inline-block">
+          </mat-spinner>
+        </div>
       </div>
     </div>
-  </ng-template>
-</section>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #userIndividualNew let-hubs="hubs">
+  <div class="flex flex-wrap" [routerLink]="(hubs.path)">
+    <div class="icon ws-mat-primary-tags">
+      <mat-icon class="mat-icon1">{{hubs.icon}}</mat-icon>
+    </div>
+    <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
+      <div class="mat-body-strong mat-card-subtitle margin-0">
+        {{hubs.hubname}}
+      </div>
+      <div class="mat-caption cohorts-desc">{{hubs.desc}}</div>
+    </div>
+  </div>
+</ng-template>

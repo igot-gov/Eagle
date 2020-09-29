@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewEncapsulation } fro
 import { MatSnackBar } from '@angular/material'
 
 @Component({
-  selector: 'ws-widget-mat-star-rating',
+  selector: 'ws-widget-star-rating',
   templateUrl: './star-rating.component.html',
   styleUrls: ['./star-rating.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
