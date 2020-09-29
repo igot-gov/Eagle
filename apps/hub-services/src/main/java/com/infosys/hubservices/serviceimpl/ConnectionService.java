@@ -31,19 +31,65 @@ public class ConnectionService implements IConnectionService {
 
     @Autowired
     public Response add(String roorOrg, ConnectionRequest request){
-        return null;
+        Response response = new Response();
+        try {
+
+            UserConnectionPrimarykey pk = new UserConnectionPrimarykey(roorOrg, request.getUserId(), request.getConnectionId());
+            UserConnection userConnection = new UserConnection(pk, "pending", "", new Date());
+            userConnectionRepository.save(userConnection);
+
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.STATUS, HttpStatus.CREATED);
+
+        } catch (Exception e){
+            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+
+        }
+
+        return response;
 
     }
 
     @Override
     public Response update(String roorOrg, ConnectionRequest request) {
-        return null;
+        Response response = new Response();
+        try {
+
+            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(request.getUserId(), request.getConnectionId());
+            userConnection.setConnectionStatus(request.getStatus());
+            userConnection.setEndOn(request.getEndDate());
+
+            userConnectionRepository.save(userConnection);
+
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.STATUS, HttpStatus.CREATED);
+
+        } catch (Exception e){
+            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+
+        }
+
+        return response;
     }
 
     @Override
     public Response delete(String userId, String connectionId) {
-        return null;
-    }
+        Response response = new Response();
+        try {
+
+            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(userId, connectionId);
+            userConnection.setConnectionStatus("Rejected");
+            userConnectionRepository.save(userConnection);
+
+            response.put(response.MESSAGE, response.SUCCESSFUL);
+            response.put(response.STATUS, HttpStatus.OK);
+
+        } catch (Exception e){
+            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+
+        }
+
+        return response;    }
 
 
     @Override

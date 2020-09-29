@@ -8,6 +8,7 @@
 package com.infosys.hubservices.model;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 public class ConnectionRequest {
 
@@ -15,11 +16,17 @@ public class ConnectionRequest {
     private String userId;
     @NotNull
     private String connectionId;
-    @NotNull
     private String status;
-    @NotNull
     private String type;
+    private Date endDate;
 
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
     public String getUserId() {
         return userId;
