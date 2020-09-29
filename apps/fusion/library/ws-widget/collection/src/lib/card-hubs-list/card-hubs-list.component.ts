@@ -19,6 +19,7 @@ export class CardHubsListComponent extends WidgetBaseComponent
   newUserReq: any
   deptUserReq: any
   nameFilter = ''
+  visible = false
   searchSpinner = false
 
   constructor(private configSvc: ConfigurationsService, private router: Router) {
@@ -30,7 +31,7 @@ export class CardHubsListComponent extends WidgetBaseComponent
   ngOnInit() {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
-      this.hubsList = instanceConfig.hubs || []
+      this.hubsList = (instanceConfig.hubs || []).filter(i => i.active)
     }
   }
 
@@ -59,5 +60,8 @@ export class CardHubsListComponent extends WidgetBaseComponent
 
     }
 
+  }
+  toggleVisibility() {
+    this.visible = !this.visible
   }
 }
