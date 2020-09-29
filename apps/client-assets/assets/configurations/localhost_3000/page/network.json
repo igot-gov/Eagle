@@ -77,6 +77,26 @@
         [
           {
             "dimensions": {},
+            "className": "",
+            "widget": {
+              "widgetType": "actionButton",
+              "widgetSubType": "actionButtonPageBack",
+              "widgetData": {
+                "url": "home",
+                "titles": [
+                  {
+                    "url": "/page/network",
+                    "title": "Network",
+                    "icon": "group"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
             "className": "new-box",
             "widget": {
               "widgetType": "card",

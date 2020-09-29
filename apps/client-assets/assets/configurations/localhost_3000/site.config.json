@@ -449,7 +449,7 @@
   },
   "hubs": [
     {
-      "path": "/app/search/learning",
+      "path": "/page/learn",
       "active": true,
       "hubname": "Learn",
       "desc": "Shape your Skills with hunderds-of online course",
@@ -478,10 +478,10 @@
     },
     {
       "path": "/app/notifications",
-      "active": false,
+      "active": true,
       "hubname": "News",
       "desc": "Keep you self update with the latest news from IGOT",
-      "icon": "test"
+      "icon": "library_books"
     }
   ],
   "featuredApps": [

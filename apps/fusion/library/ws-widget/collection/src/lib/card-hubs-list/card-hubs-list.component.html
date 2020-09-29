@@ -2,11 +2,11 @@
   <mat-card-content>
     <div class="flex flex-1 flex-column">
       <div class="flex flex-1 ws-mat-default-text">
-        <span class="flex cursor-pointer simple-hubs-link" (click)="toggleVisibility()">
+        <span class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()">
           <mat-icon class="margin-xs">apps</mat-icon>
           <span class="margin-auto ws-mat-default-text">HUBS</span>
         </span>
-        <ng-container *ngIf="!visible">
+        <ng-container *ngIf="!visible && !isMobile">
           <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
             <span class="mat-card-subtitle margin-0"> {{hub.hubname}}</span>
           </a>

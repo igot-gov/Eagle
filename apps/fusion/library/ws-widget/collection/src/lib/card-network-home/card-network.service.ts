@@ -17,7 +17,6 @@ export class CardNetWorkService {
   fetchLatestUserInfo(data: any) {
     return this.http.post<any>(API_END_POINTS.GET_ALL_ACTIVE_USER, data).pipe(
       map(response => {
-        console.log(response)
         return response
       }),
     )
