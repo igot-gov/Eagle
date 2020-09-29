@@ -24,10 +24,12 @@ export class CardHubsListComponent extends WidgetBaseComponent
     super()
   }
 
-  hubsList = [{ hubname: 'Learn', desc: 'Shape your Skills with hunderds-of online course', icon: 'test' },
-  { hubname: 'Learn', desc: 'Shape your Skills with hunderds-of online course', icon: 'test' },
-  { hubname: 'Learn', desc: 'Shape your Skills with hunderds-of online course', icon: 'test' },
-  { hubname: 'Learn', desc: 'Shape your Skills with hunderds-of online course', icon: 'test' }]
+  hubsList = [{ path: '/app/search/learning', hubname: 'Learn', desc: 'Shape your Skills with hunderds-of online course', icon: 'test' },
+  { path: '/app/discuss/home', hubname: 'Discuss', desc: 'Have a question? Have an Idea? discuss with your peers', icon: 'test' },
+  { path: '/page/network', hubname: 'Network', desc: 'Connect with Interesting people, see what they are upto.', icon: 'test' },
+  { path: '/page/learn', hubname: 'Carrier', desc: 'Explore the carrier option grow into the path you are', icon: 'test' },
+  { path: '/app/notifications', hubname: 'News', desc: 'Keep you self update with the latest news from IGOT', icon: 'test' }]
+
   ngOnInit() {
 
   }

@@ -4,7 +4,7 @@
     <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
       No hubs Info Available
     </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-2">
       <ng-container *ngFor="let hubsObj of hubsList" [ngTemplateOutlet]="userIndividualNew"
         [ngTemplateOutletContext]="{ hubs: hubsObj }">
       </ng-container>
@@ -16,7 +16,7 @@
   </div>
 
   <ng-template #userIndividualNew let-hubs="hubs">
-    <div class="unit-hubs sm:pr-8 md:pr-10">
+    <div class="unit-hubs sm:pr-8 md:pr-10" [routerLink]="(hubs.path)">
       <div class="icon">
         <mat-icon>person</mat-icon>
       </div>
