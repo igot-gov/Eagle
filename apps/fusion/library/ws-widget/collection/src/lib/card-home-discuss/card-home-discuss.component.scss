@@ -1,31 +1,6 @@
-mat-expansion-panel {
-  width: 1160px;
-}
-.top_align {
-  margin: 30px;
-}
-mat-expansion-panel {
-  width: 1160px;
-  height: 245px;
-}
-
-.flex_display {
-  display: flex;
-  .first_flex {
-    flex: 0.25;
-    margin: 0px 40px 20px 20px;
-  }
-  .second_flex {
-    flex: 1;
-    .btn-primary {
-      width: 620px;
-      height: 45px;
-      margin-top: 10px;
-      border-radius: 8px;
-      border: brown;
-      color: white;
-      background-color: #7ed321;
-      font-size: 18px;
-    }
+.base-card {
+  margin-top: 40px;
+  .card-align {
+    margin: 5px 10px 5px 0;
   }
 }

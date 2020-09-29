@@ -6,9 +6,10 @@ import {
 } from '@angular/material'
 import { AvatarPhotoModule } from '../_common/avatar-photo/avatar-photo.module'
 import { BrowserModule } from '@angular/platform-browser'
+import { CardDiscussComponent } from '../card-discuss/card-discuss.component'
 
 @NgModule({
-  declarations: [CardHomeDiscussComponent],
+  declarations: [CardHomeDiscussComponent, CardDiscussComponent],
   imports: [BrowserModule, AvatarPhotoModule, MatButtonModule, MatCardModule, MatChipsModule,
     MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule],
   entryComponents: [CardHomeDiscussComponent],
