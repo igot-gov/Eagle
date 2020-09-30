@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CardHomeDiscussComponent } from './card-home-discuss.component'
+import { CardCarrierComponent } from '../card-carrier/card-carrier.component'
 import {
   MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule,
   MatExpansionModule, MatIconModule, MatProgressSpinnerModule,
@@ -9,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser'
 import { CardDiscussComponent } from '../card-discuss/card-discuss.component'
 
 @NgModule({
-  declarations: [CardHomeDiscussComponent, CardDiscussComponent],
+  declarations: [CardHomeDiscussComponent, CardDiscussComponent, CardCarrierComponent],
   imports: [BrowserModule, AvatarPhotoModule, MatButtonModule, MatCardModule, MatChipsModule,
     MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule],
   entryComponents: [CardHomeDiscussComponent],
