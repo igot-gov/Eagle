@@ -3,7 +3,7 @@ server.context-path=/notifyHandler
 server.servlet.context-path=/notifyHandler
 spring.kafka.bootstrap.servers={{ kafka_servers_list }}
 
-spring.data.mongodb.uri=mongodb://{{ mongodb_nodebb_user }}:{{ mongodb_nodebb_password | urlencode }}@{{ mongodb_host }}:{{ mongodb_port }}//{{ mongodb_nodebb_database }}
+spring.data.mongodb.uri=mongodb://{{ mongodb_nodebb_user }}:{{ mongodb_nodebb_password | urlencode }}@{{ mongodb_host }}:{{ mongodb_port }}/{{ mongodb_nodebb_database }}
 spring.data.mongodb.database={{ mongodb_nodebb_database }}
 
 spring.kafka.consumer.value-deserializer=com.eagle.hubnotifier.consumer.HashMapDeserializer
