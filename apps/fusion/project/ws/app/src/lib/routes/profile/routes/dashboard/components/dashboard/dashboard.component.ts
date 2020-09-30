@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     },
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
-    widgetHostClass: 'block sm:-mx-10 -mx-6',
+    widgetHostClass: 'block sm:-mx-1 mx-2',
   }
 
   coursePending: NSLearningHistory.ILearningHistoryItem[] = []

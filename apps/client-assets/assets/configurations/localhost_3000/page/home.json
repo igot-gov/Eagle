@@ -121,6 +121,115 @@
         [
           {
             "dimensions": {},
+            "className": "",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultipleNew",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "continueLearning",
+                    "logo": "school",
+                    "title": "learn",
+                    "stripBackground": "assets/instances/eagle/background/learn.svg",
+                    "titleDescription": "Continue Learning",
+                    "stripConfig": {
+                      "cardSubType": "standard"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "viewMoreText": "Learn",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "Trending"
+                      }
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/user/history",
+                        "queryParams": {
+                          "pageSize": 50
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "contentStrip",
+              "widgetSubType": "contentStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "latest",
+                    "title": "Newly added courses",
+                    "info": {
+                      "mode": "below",
+                      "visibilityMode": "hidden",
+                      "icon": {
+                        "icon": "info",
+                        "scale": 0.8
+                      },
+                      "widget": {
+                        "widgetType": "element",
+                        "widgetSubType": "elementHtml",
+                        "widgetData": {
+                          "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are in news right now.</p>"
+                        }
+                      }
+                    },
+                    "stripConfig": {
+                      "cardSubType": "standard",
+                      "postCardForSearch": true
+                    },
+                    "filters": [],
+                    "request": {
+                      "searchV6": {
+                        "locale": [
+                          "en"
+                        ],
+                        "pageSize": 12,
+                        "query": "all",
+                        "didYouMean": true,
+                        "filters": [
+                          {
+                            "andFilters": [
+                              {
+                                "lastUpdatedOn": [
+                                  "month"
+                                ]
+                              },
+                              {
+                                "contentType": [
+                                  "Course",
+                                  "Learning Path"
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "includeSourceFields": [
+                          "creatorLogo"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
             "className": "new-box",
             "widget": {
               "widgetType": "card",

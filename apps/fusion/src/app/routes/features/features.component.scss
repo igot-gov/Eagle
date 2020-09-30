@@ -1,4 +1,9 @@
 @import 'ws-mixins';
+@import 'ws-common';
+
+.container-balanced {
+  @extend %page-center;
+}
 
 // .sec-nav-bar {
 //   // font-size: $size-m;

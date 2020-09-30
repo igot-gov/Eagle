@@ -1,6 +1,7 @@
-<mat-toolbar class="sec-nav-bar" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: '/',titles:[{title:'Features',url:'none'}] }"></ws-widget-btn-page-back>
-  <!-- <h1 i18n>Features</h1> -->
+<!-- <mat-toolbar class="sec-nav-bar" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
+<ws-widget-btn-page-back [widgetData]="{ url: '/',titles:[{title:'Features',url:'none'}] }"></ws-widget-btn-page-back>
+<!-- <h1 i18n>Features</h1> -->
+<div class="flex flex-1 container-balanced">
   <span class="spacer"></span>
   <mat-form-field floatLabel="never" class="search-container">
     <input name="query" matInput [formControl]="queryControl" i18n-placeholder placeholder="Find Features"
@@ -14,9 +15,10 @@
     (click)="startTour()">
     <mat-icon>contact_support</mat-icon>
   </button>
-</mat-toolbar>
+</div>
+<!-- </mat-toolbar> -->
 
-<section class="padding-m" *ngFor="let group of featureGroups">
+<section class="padding-m container-balanced" *ngFor="let group of featureGroups">
   <div [ngClass]="{ pad: group?.stripBackground }" [ngStyle]="{ 'background-color': group?.stripBackground }">
     <h2 class="feature-group-heading">
       <span>{{ group.name }}</span>

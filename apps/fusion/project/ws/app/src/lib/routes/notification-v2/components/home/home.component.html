@@ -1,17 +1,20 @@
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles" class="container-balanced">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'home',titles:[{title:'Features', url:'/app/features'},{title:'Notifications',url:'none'}] }">
-  </ws-widget-btn-page-back>
-  <!-- <span class="margin-left-xs text-truncate" i18n>
+<!-- <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles" class="display-block"> -->
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'home',titles:[{title:'Features', url:'/app/features'},{title:'Notifications',url:'none'}] }">
+</ws-widget-btn-page-back>
+<!-- <span class="margin-left-xs text-truncate" i18n>
     Notifications
   </span> -->
+<div class="flex flex-1 container-balanced">
   <span class="spacer"></span>
-  <a [routerLink]="'/app/profile/settings'" [queryParams]="{ tab: 'notifications' }" mat-icon-button>
+  <a [routerLink]="'/app/profile/settings'" style="z-index: 100;" [queryParams]="{ tab: 'notifications' }"
+    mat-icon-button>
     <mat-icon>settings</mat-icon>
   </a>
-</mat-toolbar>
+</div>
+<!-- </mat-toolbar> -->
 
-<section class="my-4 pt-4 pb-8 pl-4 pr-4 container-balanced">
+<section class="my-4 pt-4 pb-8 pl-4 pr-4 container-balanced ws-mat-primary-lite-background-important">
   <button [disabled]="!showMarkAsRead" mat-raised-button class="text-right"
     *ngIf="actionNotifications.length || infoNotifications.length" (click)="readAllNotifications()" i18n>
     Mark all as read

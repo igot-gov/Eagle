@@ -60,7 +60,9 @@ import { ChannelHubComponent } from './channel-hub/channel-hub.component'
 import { ChannelHubModule } from './channel-hub/channel-hub.module'
 import { ROOT_WIDGET_CONFIG } from './collection.config'
 import { ContentStripMultipleComponent } from './content-strip-multiple/content-strip-multiple.component'
+import { ContentStripNewMultipleComponent } from './content-strip-new-multiple/content-strip-new-multiple.component'
 import { ContentStripMultipleModule } from './content-strip-multiple/content-strip-multiple.module'
+import { ContentStripNewMultipleModule } from './content-strip-new-multiple/content-strip-new-multiple.module'
 import { ContentStripSingleComponent } from './content-strip-single/content-strip-single.component'
 import { ContentStripSingleModule } from './content-strip-single/content-strip-single.module'
 import { DiscussionForumComponent } from './discussion-forum/components/discussion-forum/discussion-forum.component'
@@ -159,6 +161,7 @@ export const WIDGET_REGISTERED_MODULES = [
   CardBrowseCourseModule,
   CardHomeDiscussModule,
   ContentStripMultipleModule,
+  ContentStripNewMultipleModule,
   ContentStripSingleModule,
   ContentStripVerticalModule,
   GraphGeneralModule,
@@ -340,6 +343,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
     component: ContentStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStripNew,
+    component: ContentStripNewMultipleComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
