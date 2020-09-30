@@ -60,6 +60,9 @@ public class ConnectionProperties {
 	@Value("${notification.template.response}")
 	private String notificationTemplateResponse;
 
+	@Value("${notification.enabled}")
+	private boolean notificationEnabled;
+
 	public String getEsProfileIndex() {
 		return esProfileIndex;
 	}
@@ -117,5 +120,9 @@ public class ConnectionProperties {
 
 	public String getNotificationTemplateResponse() {
 		return notificationTemplateResponse;
+	}
+
+	public boolean isNotificationEnabled() {
+		return notificationEnabled;
 	}
 }

@@ -25,9 +25,9 @@ public class UserConnectionController {
 
     @PostMapping("/find/recommended")
     public ResponseEntity<Response> findRecommendedConnection(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
-                                                 @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                 @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
-                                                 @RequestBody Map<String,Object> request){
+                                                              @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+                                                              @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
+                                                              @RequestBody Map<String, Object> request) {
 
         Response response = null;
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -38,7 +38,7 @@ public class UserConnectionController {
     public ResponseEntity<Response> findCommonConnections(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
                                                           @RequestHeader String userId,
                                                           @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                          @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo){
+                                                          @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findCommonConnection(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -48,9 +48,9 @@ public class UserConnectionController {
 
     @GetMapping("/fetch/requested")
     public ResponseEntity<Response> findConnections(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
-                                                        @RequestHeader String userId,
-                                                        @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                        @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+                                                    @RequestHeader String userId,
+                                                    @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+                                                    @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findConnectionsRequested(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -59,9 +59,9 @@ public class UserConnectionController {
 
     @GetMapping("/fetch/established")
     public ResponseEntity<Response> findConnectionsEstablished(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
-                                                    @RequestHeader String userId,
-                                                    @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                    @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+                                                               @RequestHeader String userId,
+                                                               @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+                                                               @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findConnections(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);

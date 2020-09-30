@@ -10,6 +10,7 @@ package com.infosys.hubservices.serviceimpl;
 import com.infosys.hubservices.exception.ApplicationServiceError;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
+import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.service.IProfileService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
@@ -79,7 +80,7 @@ public class ProfileService implements IProfileService {
             searchRequest.indices(connectionProperties.getEsProfileIndex());
             searchRequest.types(connectionProperties.getEsProfileIndexType());
 
-            BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("id", userIds));
+            BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("id.keyword", userIds));
 
             SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
             searchSourceBuilder.query(query);
@@ -119,7 +120,7 @@ public class ProfileService implements IProfileService {
         }
 
         List<String> connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
-        return findProfiles(connectionIds, connectionProperties.getEsProfileSourceFields());
+        return findProfiles(connectionIds, /*connectionProperties.getEsProfileSourceFields()*/null);
 
     }
 }

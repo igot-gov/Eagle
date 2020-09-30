@@ -16,6 +16,8 @@ import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
+import com.infosys.hubservices.service.INotificationService;
+import com.infosys.hubservices.service.IProfileService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,7 @@ public class ConnectionService implements IConnectionService {
     @Autowired
     private ConnectionProperties connectionProperties;
 
-    @Autowired
+    @Override
     public Response add(String roorOrg, ConnectionRequest request){
         Response response = new Response();
         try {
@@ -53,7 +55,8 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
-            sendNotification(connectionProperties.getNotificationTemplateRequest(), userConnection);
+            if(connectionProperties.isNotificationEnabled())
+                sendNotification(connectionProperties.getNotificationTemplateRequest(), userConnection);
 
 
 
@@ -77,9 +80,10 @@ public class ConnectionService implements IConnectionService {
             userConnectionRepository.save(userConnection);
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
-            response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
-            sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
+            if(connectionProperties.isNotificationEnabled())
+                sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
 
         } catch (Exception e){
             throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
@@ -95,13 +99,15 @@ public class ConnectionService implements IConnectionService {
         try {
 
             UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(userId, connectionId);
-            userConnection.setConnectionStatus("Rejected");
+            userConnection.setConnectionStatus(Constants.Status.DELETED);
+            userConnection.setEndOn(new Date());
             userConnectionRepository.save(userConnection);
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
-            sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
+            if(connectionProperties.isNotificationEnabled())
+                sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
 
 
         } catch (Exception e){
@@ -195,7 +201,7 @@ public class ConnectionService implements IConnectionService {
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
 
-            List<UserConnection> userConnections = userConnectionRepository.findByConnectionAndStatus(userId,  Constants.Status.PENDING);
+            List<UserConnection> userConnections = userConnectionRepository.findByUserAndStatus(userId,  Constants.Status.PENDING);
             if(userConnections.size()==0){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnections);

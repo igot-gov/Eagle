@@ -15,10 +15,12 @@ public class Constants {
         public static final String APPROVED = "Approved";
         public static final String REJECTED = "Rejected";
         public static final String PENDING = "Pending";
+        public static final String DELETED = "Deleted";
+
     }
 
     public static class Message {
-        public static final String FAILED_CONNECTION = "Failed to find connections:-";
+        public static final String FAILED_CONNECTION = "Failed user connections:-";
         public static final String USER_ID_INVALID = "user_id cant be null or empty";
         public static final String SENT_NOTIFICATION_ERROR ="Notification event send error occurred: ";
         public static final String SENT_NOTIFICATION_SUCCESS ="Notification event send : ";

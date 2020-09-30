@@ -26,23 +26,23 @@ public class UserConnectionCrudController {
 
     @PostMapping("/add")
     public ResponseEntity<Response> add(@RequestHeader String rootOrg,
-                                           @RequestBody ConnectionRequest request){
+                                        @RequestBody ConnectionRequest request) {
         Response response = connectionService.add(rootOrg, request);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }
 
     @PostMapping("/update")
     public ResponseEntity<Response> update(@RequestHeader String rootOrg,
-                                        @RequestBody ConnectionRequest request){
+                                           @RequestBody ConnectionRequest request) {
         Response response = connectionService.update(rootOrg, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
-    @GetMapping("delete")
+    @GetMapping("/delete")
     public ResponseEntity<Response> delete(@RequestHeader String rootOrg,
-                                           @RequestHeader String userId, @RequestHeader String connectionId){
+                                           @RequestHeader String userId, @RequestHeader String connectionId) {
 
         //mark status as rejected
         Response response = connectionService.delete(userId, connectionId);
@@ -53,8 +53,8 @@ public class UserConnectionCrudController {
 
     @GetMapping("/fetch/all")
     public ResponseEntity<Response> getAll(@RequestHeader(required = true) String rootOrg, @RequestHeader String userId,
-                                                        @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                        @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+                                           @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+                                           @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findConnections(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);

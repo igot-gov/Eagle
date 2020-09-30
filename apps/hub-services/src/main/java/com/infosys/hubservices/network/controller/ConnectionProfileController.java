@@ -27,9 +27,9 @@ public class ConnectionProfileController {
 
     @PostMapping("/find/common")
     public ResponseEntity<Response> findCommon(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
-                                                          @RequestHeader String userId,
-                                                          @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
-                                                          @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo){
+                                               @RequestHeader String userId,
+                                               @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
+                                               @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = profileService.findCommonProfile(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -39,9 +39,9 @@ public class ConnectionProfileController {
 
     @GetMapping("/fetch/requested")
     public ResponseEntity<Response> findRequests(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
-                                                        @RequestHeader String userId,
-                                                        @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
-                                                        @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+                                                 @RequestHeader String userId,
+                                                 @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
+                                                 @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = profileService.findProfileRequested(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -61,11 +61,11 @@ public class ConnectionProfileController {
 
     @GetMapping("/fetch/all")
     public ResponseEntity<Response> findAll(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
-                                                    @RequestHeader String userId,
-                                                    @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
-                                                    @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
-                                                    @RequestParam(required = true, name = "connectionIds") List<String> connectionIds,
-                                                    @RequestParam(required = false, name = "includeSources") String[] includeSources) {
+                                            @RequestHeader String userId,
+                                            @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
+                                            @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
+                                            @RequestParam(required = true, name = "connectionIds") List<String> connectionIds,
+                                            @RequestParam(required = false, name = "includeSources") String[] includeSources) {
 
         Response response = profileService.findProfiles(connectionIds, includeSources);
         return new ResponseEntity<>(response, HttpStatus.OK);

@@ -25,10 +25,10 @@ public class UserConnection {
 	@Column("connection_type")
 	private String connectionType;
 
-	@Column("started_on")
+	@Column("start_on")
 	private Date startedOn;
 
-	@Column("ended_on")
+	@Column("end_on")
 	private Date endOn;
 
 
