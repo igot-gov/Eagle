@@ -30,7 +30,7 @@ public class UserConnectionController {
                                                  @RequestBody Map<String,Object> request){
 
         Response response = null;
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -41,7 +41,7 @@ public class UserConnectionController {
                                                           @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo){
 
         Response response = connectionService.findCommonConnection(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -53,7 +53,7 @@ public class UserConnectionController {
                                                         @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findConnectionsRequested(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -64,7 +64,7 @@ public class UserConnectionController {
                                                     @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findConnections(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 

@@ -17,6 +17,7 @@ import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.util.ConnectionProperties;
+import com.infosys.hubservices.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -46,18 +47,18 @@ public class ConnectionService implements IConnectionService {
         try {
 
             UserConnectionPrimarykey pk = new UserConnectionPrimarykey(roorOrg, request.getUserId(), request.getConnectionId());
-            UserConnection userConnection = new UserConnection(pk, "pending", "", new Date());
+            UserConnection userConnection = new UserConnection(pk, Constants.Status.PENDING, "", new Date());
             userConnectionRepository.save(userConnection);
 
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.STATUS, HttpStatus.CREATED);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
             sendNotification(connectionProperties.getNotificationTemplateRequest(), userConnection);
 
 
 
         } catch (Exception e){
-            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
         return response;
@@ -75,13 +76,13 @@ public class ConnectionService implements IConnectionService {
 
             userConnectionRepository.save(userConnection);
 
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.STATUS, HttpStatus.CREATED);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
             sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
 
         } catch (Exception e){
-            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -97,14 +98,14 @@ public class ConnectionService implements IConnectionService {
             userConnection.setConnectionStatus("Rejected");
             userConnectionRepository.save(userConnection);
 
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.STATUS, HttpStatus.OK);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
             sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
 
 
         } catch (Exception e){
-            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -128,32 +129,32 @@ public class ConnectionService implements IConnectionService {
         Response response = new Response();
         try {
             if(userId==null || userId.isEmpty()){
-                throw new BadRequestException("user_id cant be null or empty");
+                throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
 
             //get established connections
-            List<UserConnection> userApprovedConnections = userConnectionRepository.findByUserAndStatus(userId,  "Approved");
+            List<UserConnection> userApprovedConnections = userConnectionRepository.findByUserAndStatus(userId, Constants.Status.APPROVED);
 
             //approved the connectionIds of established connection
             List<String> approvedConnectionIds = userApprovedConnections.stream().map(userConnection -> userConnection.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
 
             //get the established related connection
-            List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndStatus(approvedConnectionIds, "Approved");
+            List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndStatus(approvedConnectionIds, Constants.Status.APPROVED);
 
             //find the common new connections that could be established
             List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
 
             if(commonConnections.size()==0){
-                response.put(response.MESSAGE, response.FAILED);
-                response.put(response.DATA, commonConnections);
-                response.put(response.STATUS, HttpStatus.NO_CONTENT);
+                response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
+                response.put(Constants.ResponseStatus.DATA, commonConnections);
+                response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
             }
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.DATA, commonConnections);
-            response.put(response.STATUS, HttpStatus.OK);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.DATA, commonConnections);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         }catch (Exception e){
-            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -166,20 +167,20 @@ public class ConnectionService implements IConnectionService {
 
         try{
             if(userId==null || userId.isEmpty()){
-                throw new BadRequestException("user_id cant be null or empty");
+                throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
-            List<UserConnection> userConnectionsEstablished = userConnectionRepository.findByUserAndStatus(userId, "Approved");
+            List<UserConnection> userConnectionsEstablished = userConnectionRepository.findByUserAndStatus(userId, Constants.Status.APPROVED);
             if(userConnectionsEstablished.size()==0){
-                response.put(response.MESSAGE, response.FAILED);
-                response.put(response.DATA, userConnectionsEstablished);
-                response.put(response.STATUS, HttpStatus.NO_CONTENT);
+                response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
+                response.put(Constants.ResponseStatus.DATA, userConnectionsEstablished);
+                response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
             }
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.DATA, userConnectionsEstablished);
-            response.put(response.STATUS, HttpStatus.OK);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.DATA, userConnectionsEstablished);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
-            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
         }
 
         return response;
@@ -191,22 +192,21 @@ public class ConnectionService implements IConnectionService {
 
         try{
             if(userId==null || userId.isEmpty()){
-                throw new BadRequestException("user_id cant be null or empty");
+                throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
-            //List<UserConnection> userConnections = userConnectionRepository.findByUserAndTypeAndStatus(userId, "requests", "Pending");
 
-            List<UserConnection> userConnections = userConnectionRepository.findByConnectionAndStatus(userId,  "Pending");
+            List<UserConnection> userConnections = userConnectionRepository.findByConnectionAndStatus(userId,  Constants.Status.PENDING);
             if(userConnections.size()==0){
-                response.put(response.MESSAGE, response.FAILED);
-                response.put(response.DATA, userConnections);
-                response.put(response.STATUS, HttpStatus.NO_CONTENT);
+                response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
+                response.put(Constants.ResponseStatus.DATA, userConnections);
+                response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
             }
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.DATA, userConnections);
-            response.put(response.STATUS, HttpStatus.OK);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.DATA, userConnections);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
-            throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
         }
 
         return response;

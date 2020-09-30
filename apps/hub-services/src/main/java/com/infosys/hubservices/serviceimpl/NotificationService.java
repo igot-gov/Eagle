@@ -8,10 +8,12 @@
 package com.infosys.hubservices.serviceimpl;
 
 import com.infosys.hubservices.model.NotificationEvent;
-import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
 import com.infosys.hubservices.util.ConnectionProperties;
+import com.infosys.hubservices.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -27,6 +29,8 @@ import java.util.Map;
 
 @Service
 public class NotificationService implements INotificationService {
+
+    private Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
     @Autowired
     ConnectionProperties connectionProperties;
@@ -68,11 +72,11 @@ public class NotificationService implements INotificationService {
             HttpEntity<NotificationEvent> request = new HttpEntity<>(notificationEvent);
             response = restTemplate.exchange(uri, HttpMethod.POST, request, String.class);
 
-            System.out.println("Notification event send : "+response.getStatusCode());
+            logger.info(Constants.Message.SENT_NOTIFICATION_SUCCESS + response.getStatusCode());
 
         }catch (Exception e){
             e.printStackTrace();
-            System.out.println("Notification event send error occurred: "+e.getMessage());
+            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR+e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
         }

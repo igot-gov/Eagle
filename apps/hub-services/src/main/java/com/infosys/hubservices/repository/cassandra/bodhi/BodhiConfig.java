@@ -5,8 +5,10 @@
  *
  */
 
-package com.infosys.recommendationservice.repository.cassandra.bodhi;
+package com.infosys.hubservices.repository.cassandra.bodhi;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,14 +21,14 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 import com.datastax.driver.core.AuthProvider;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
-import com.infosys.recommendationservice.config.CassandraConfig;
+import com.infosys.hubservices.config.CassandraConfig;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.bodhi")
-@EnableCassandraRepositories(basePackages = "com.infosys.recommendationservice.repository.cassandra.bodhi", cassandraTemplateRef = "bodhiTemplate")
+@EnableCassandraRepositories(basePackages = "com.infosys.hubservices.repository.cassandra.bodhi", cassandraTemplateRef = "bodhiTemplate")
 public class BodhiConfig extends CassandraConfig {
 
-	//private LexLogger logger = new LexLogger(getClass().getName());
+	private Logger logger = LoggerFactory.getLogger(BodhiConfig.class);
 
 	@Value("${spring.data.cassandra.bodhi.username}")
 	private String bodhiUser;
@@ -55,7 +57,7 @@ public class BodhiConfig extends CassandraConfig {
 		session.setSchemaAction(getSchemaAction());
 		session.setStartupScripts(getStartupScripts());
 		session.setShutdownScripts(getShutdownScripts());
-		System.out.println("Cassandra session created for " + getKeyspaceName() + "keyspace with IP : " + getContactPoints()
+		logger.info("Cassandra session created for " + getKeyspaceName() + "keyspace with IP : " + getContactPoints()
 				+ ":" + getPort());
 		return session;
 	}

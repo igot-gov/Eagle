@@ -12,6 +12,7 @@ import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.IProfileService;
 import com.infosys.hubservices.util.ConnectionProperties;
+import com.infosys.hubservices.util.Constants;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -98,11 +99,11 @@ public class ProfileService implements IProfileService {
                 results.add(hit.getSourceAsMap());
             }
 
-            response.put(response.MESSAGE, response.SUCCESSFUL);
-            response.put(response.DATA, results);
-            response.put(response.STATUS, HttpStatus.OK);
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.DATA, results);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
         } catch (IOException e){
-            throw new ApplicationServiceError("Failed to find profiles: "+e.getMessage());
+            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -112,7 +113,7 @@ public class ProfileService implements IProfileService {
 
     private Response getProfiles(Response connections){
 
-        List<UserConnection> userConnections = (List<UserConnection>)connections.get(connections.DATA);
+        List<UserConnection> userConnections = (List<UserConnection>)connections.get(Constants.ResponseStatus.DATA);
         if(userConnections.size()==0){
             return connections;
         }

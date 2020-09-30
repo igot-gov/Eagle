@@ -13,7 +13,6 @@ import com.infosys.hubservices.model.cassandra.UserConnection;
 
 public interface IConnectionService {
 
-
     /**
      * Creates a connection
      * @param roorOrg

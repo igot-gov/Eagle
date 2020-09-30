@@ -32,7 +32,7 @@ public class ConnectionProfileController {
                                                           @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo){
 
         Response response = profileService.findCommonProfile(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -44,7 +44,7 @@ public class ConnectionProfileController {
                                                         @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = profileService.findProfileRequested(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -55,7 +55,7 @@ public class ConnectionProfileController {
                                                     @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = profileService.findProfiles(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -68,7 +68,7 @@ public class ConnectionProfileController {
                                                     @RequestParam(required = false, name = "includeSources") String[] includeSources) {
 
         Response response = profileService.findProfiles(connectionIds, includeSources);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 

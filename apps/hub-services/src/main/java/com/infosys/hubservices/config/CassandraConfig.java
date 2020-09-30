@@ -5,7 +5,7 @@
  *
  */
 
-package com.infosys.recommendationservice.config;
+package com.infosys.hubservices.config;
 
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
 

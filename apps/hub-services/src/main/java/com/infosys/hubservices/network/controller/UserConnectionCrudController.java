@@ -28,7 +28,7 @@ public class UserConnectionCrudController {
     public ResponseEntity<Response> add(@RequestHeader String rootOrg,
                                            @RequestBody ConnectionRequest request){
         Response response = connectionService.add(rootOrg, request);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -36,7 +36,7 @@ public class UserConnectionCrudController {
     public ResponseEntity<Response> update(@RequestHeader String rootOrg,
                                         @RequestBody ConnectionRequest request){
         Response response = connectionService.update(rootOrg, request);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -46,7 +46,7 @@ public class UserConnectionCrudController {
 
         //mark status as rejected
         Response response = connectionService.delete(userId, connectionId);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 
@@ -57,7 +57,7 @@ public class UserConnectionCrudController {
                                                         @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = connectionService.findConnections(userId, pageNo, pageSize);
-        return new ResponseEntity<Response>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
 

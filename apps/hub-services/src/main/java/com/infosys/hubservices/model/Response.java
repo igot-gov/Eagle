@@ -8,7 +8,6 @@
 package com.infosys.hubservices.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -18,16 +17,16 @@ public class Response implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -3773253896160786443L;
 
+/*	@JsonIgnore
+	public static final String SUCCESSFUL = "SUCCESSFUL";
 	@JsonIgnore
-	public final String SUCCESSFUL = "SUCCESSFUL";
+	public static final String FAILED = "FAILED";
 	@JsonIgnore
-	public final String FAILED = "FAILED";
+	public static final String MESSAGE = "message";
 	@JsonIgnore
-	public final String MESSAGE = "message";
+	public static final String DATA = "data";
 	@JsonIgnore
-	public final String DATA = "data";
-	@JsonIgnore
-	public final String STATUS = "status";
+	public static final String STATUS = "status";*/
 
 
 	private Map<String, Object> result = new HashMap<>();

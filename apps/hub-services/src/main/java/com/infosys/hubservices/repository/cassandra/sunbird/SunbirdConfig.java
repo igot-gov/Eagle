@@ -5,8 +5,10 @@
  *
  */
 
-package com.infosys.recommendationservice.repository.cassandra.sunbird;
+package com.infosys.hubservices.repository.cassandra.sunbird;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -18,14 +20,14 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 import com.datastax.driver.core.AuthProvider;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
-import com.infosys.recommendationservice.config.CassandraConfig;
+import com.infosys.hubservices.config.CassandraConfig;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.sunbird")
-@EnableCassandraRepositories(basePackages = "com.infosys.recommendationservice.repository.cassandra.sunbird", cassandraTemplateRef = "sunbirdTemplate")
+@EnableCassandraRepositories(basePackages = "com.infosys.hubservices.repository.cassandra.sunbird", cassandraTemplateRef = "sunbirdTemplate")
 public class SunbirdConfig extends CassandraConfig {
 
-	//private LexLogger logger = new LexLogger(getClass().getName());
+	private Logger logger = LoggerFactory.getLogger(SunbirdConfig.class);
 
 	@Value("${spring.data.cassandra.sunbird.username}")
 	private String sunbirdUser;
@@ -53,7 +55,7 @@ public class SunbirdConfig extends CassandraConfig {
 		session.setSchemaAction(getSchemaAction());
 		session.setStartupScripts(getStartupScripts());
 		session.setShutdownScripts(getShutdownScripts());
-		System.out.println("Cassandra session created for " + getKeyspaceName() + "keyspace with IP : " + getContactPoints()
+		logger.info("Cassandra session created for " + getKeyspaceName() + "keyspace with IP : " + getContactPoints()
 				+ ":" + getPort());
 		return session;
 	}
