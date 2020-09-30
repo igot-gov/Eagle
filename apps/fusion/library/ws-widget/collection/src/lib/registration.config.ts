@@ -128,6 +128,8 @@ import { CardHubsListModule } from './card-hubs-list/card-hubs-list.module'
 import { CardNetworkHomeModule } from './card-network-home/card-network-home.module'
 import { CardCourseComponent } from './card-course/card-course.component'
 import { CardCourseModule } from './card-course/card-course.module'
+import { CardCarrierHomeComponent } from './card-carrier-home/card-carrier-home.component'
+import { CardCarrierHomeModule } from './card-carrier-home/card-carrier-home.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -195,6 +197,7 @@ export const WIDGET_REGISTERED_MODULES = [
   CardHubsListModule,
   CardNetworkHomeModule,
   CardCourseModule,
+  CardCarrierHomeModule
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -504,5 +507,10 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.home_course,
     component: CardCourseComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_carrier,
+    component: CardCarrierHomeComponent,
   },
 ]

@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core'
-import { CardCarrierComponent } from './card-carrier.component'
+import { CardCarrierHomeComponent } from './card-carrier-home.component'
+import { CardCarrierComponent } from '../card-carrier/card-carrier.component'
 import { MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
-import { DiscussCardComponent } from '@ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component'
+
 
 @NgModule({
-  declarations: [CardCarrierComponent, DiscussCardComponent],
+  declarations: [CardCarrierHomeComponent, CardCarrierComponent],
   imports: [BrowserModule, MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule,
     MatExpansionModule, MatIconModule, MatProgressSpinnerModule],
-  entryComponents: [CardCarrierComponent],
+  entryComponents: [CardCarrierHomeComponent],
 })
-export class CardDiscussModule {
+export class CardCarrierHomeModule {
 
 }

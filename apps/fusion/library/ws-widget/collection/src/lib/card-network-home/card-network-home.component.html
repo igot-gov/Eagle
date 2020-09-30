@@ -20,8 +20,7 @@
       <mat-card-content class="content">
         <div class="unit-cohort sm:pr-8 md:pr-10">
           <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
-          <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
-            class="width-expand padding-left-xs">
+          <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
             <div class="mat-body-strong cohorts-name">
               {{
             { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
@@ -33,7 +32,7 @@
       </mat-card-content>
       <mat-card-actions>
         <mat-divider></mat-divider>
-        <p class="center">Connect Now</p>
+        <p class="center cursor-pointer" (click)="goToUserProfile(user)">Connect Now</p>
       </mat-card-actions>
     </mat-card>
 

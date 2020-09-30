@@ -2,27 +2,23 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-#main {
-  display: flex;
-  flex-flow: row;
-  .example-card {
-    $size: 75px;
-    margin: 12px 12px 12px 0;
-    width: $size + $size;
+.example-card {
+  $size: 75px;
+  margin: 12px 12px 12px 0;
+  width: $size + $size;
+}
+.content {
+  padding: 20px 0 20px 0;
+  .count {
+    font-size: 24px;
+    font-weight: bold;
   }
-  .content {
-    padding: 20px 0 20px 0;
-    .count {
+  .course-detail {
+    font-size: 14px;
+    margin: 12px 0 0 0;
+    .mat-icon {
       font-size: 24px;
-      font-weight: bold;
-    }
-    .course-detail {
-      font-size: 14px;
-      margin: 12px 0 0 0;
-      .mat-icon {
-        font-size: 24px;
-        padding: 8px 8px 0 0;
-      }
+      padding: 8px 8px 0 0;
     }
   }
 }

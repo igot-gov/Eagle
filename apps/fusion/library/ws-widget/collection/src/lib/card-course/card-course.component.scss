@@ -2,12 +2,7 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-#main {
-  display: flex;
-  flex-flow: row;
-}
-
-#main div {
+div {
   .example-card {
     $width: 400px;
     $height: 150px;
