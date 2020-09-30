@@ -175,6 +175,7 @@ tags_kafka_service: "{{ master_tag }}"
 tags_opensaber: "{{ master_tag }}"	
 tags_user_profile: "{{ master_tag }}"
 tags_sb_recommendation_service: "{{ master_tag }}"
+tags_sb_discuss_connect_service: "{{ master_tag }}"
 
 # Service scale levels
 service_replicas_content_service: 1
@@ -210,6 +211,7 @@ service_replicas_kafka_service: 1
 service_replicas_opensaber_service: 1	
 service_replicas_user_profile_service: 1
 service_replicas_sb_recommendation_service: 1
+service_replicas_sb_discuss_connect_service: 1
 
 # Memory reserves for each service
 service_mem_reserved_content_service: "{{ memory_m }}"
@@ -245,6 +247,7 @@ service_mem_reserved_kafka_service: "{{ memory_s }}"
 service_mem_reserved_opensaber_service: "{{ memory_s }}"	
 service_mem_reserved_user_profile_service: "{{ memory_s }}"
 service_mem_reserved_sb_recommendation_service: "{{ memory_s }}"
+service_mem_reserved_sb_discuss_connect_service: "{{ memory_s }}"
 
 # Memory limits
 service_mem_limit_content_service: "{{ memory_l }}"
@@ -280,6 +283,7 @@ service_mem_limit_kafka_service: "{{ memory_m }}"
 service_mem_limit_opensaber_service: "{{ memory_m }}"	
 service_mem_limit_user_profile_service: "{{ memory_m }}"
 service_mem_limit_sb_recommendation_service: "{{ memory_m }}"
+service_mem_limit_sb_discuss_connect_service: "{{ memory_m }}"
 
 # Force reload for app variables
 force_reload_content_service: true
@@ -317,6 +321,7 @@ force_reload_kafka_service: false
 force_reload_opensaber_service: true	
 force_reload_user_profile_service: true	
 force_reload_sb_recommendation_service: true
+force_reload_sb_discuss_connect_service: true
 
 publish_ports: false
 
