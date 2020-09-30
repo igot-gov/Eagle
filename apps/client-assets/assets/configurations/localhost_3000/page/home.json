@@ -137,12 +137,9 @@
                       "cardSubType": "standard"
                     },
                     "viewMoreUrl": {
-                      "path": "/app/search/learning",
+                      "path": "/page/learn",
                       "viewMoreText": "Learn",
-                      "queryParams": {
-                        "q": "all",
-                        "p": "Trending"
-                      }
+                      "queryParams": {}
                     },
                     "filters": [],
                     "request": {
@@ -184,6 +181,13 @@
                         "widgetData": {
                           "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are in news right now.</p>"
                         }
+                      }
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "Trending"
                       }
                     },
                     "stripConfig": {
