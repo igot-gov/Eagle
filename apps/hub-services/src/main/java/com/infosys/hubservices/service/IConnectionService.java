@@ -9,14 +9,33 @@ package com.infosys.hubservices.service;
 
 import com.infosys.hubservices.model.ConnectionRequest;
 import com.infosys.hubservices.model.Response;
+import com.infosys.hubservices.model.cassandra.UserConnection;
 
 public interface IConnectionService {
 
 
+    /**
+     * Creates a connection
+     * @param roorOrg
+     * @param request
+     * @return
+     */
     Response add(String roorOrg, ConnectionRequest request);
 
+    /**
+     * To update the status and dates of connection
+     * @param roorOrg
+     * @param request
+     * @return
+     */
     Response update(String roorOrg, ConnectionRequest request);
 
+    /**
+     * Marked as rejected - deletes the connection
+     * @param userId
+     * @param connectionId
+     * @return
+     */
     Response delete(String userId, String connectionId);
 
 
@@ -45,6 +64,14 @@ public interface IConnectionService {
      * @return
      */
     Response findConnectionsRequested(String userId, int offset, int limit);
+
+    /**
+     * Send notification
+     *
+     * @param userId
+     * @param userConnection
+     */
+    void sendNotification(String eventId, UserConnection userConnection);
 
 
 

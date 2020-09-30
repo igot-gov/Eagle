@@ -10,11 +10,13 @@ package com.infosys.hubservices.serviceimpl;
 import com.infosys.hubservices.exception.ApplicationServiceError;
 import com.infosys.hubservices.exception.BadRequestException;
 import com.infosys.hubservices.model.ConnectionRequest;
+import com.infosys.hubservices.model.NotificationEvent;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
+import com.infosys.hubservices.util.ConnectionProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,12 @@ public class ConnectionService implements IConnectionService {
     private ProfileService profileService;
 
     @Autowired
+    private NotificationService notificationService;
+
+    @Autowired
+    private ConnectionProperties connectionProperties;
+
+    @Autowired
     public Response add(String roorOrg, ConnectionRequest request){
         Response response = new Response();
         try {
@@ -43,6 +51,10 @@ public class ConnectionService implements IConnectionService {
 
             response.put(response.MESSAGE, response.SUCCESSFUL);
             response.put(response.STATUS, HttpStatus.CREATED);
+
+            sendNotification(connectionProperties.getNotificationTemplateRequest(), userConnection);
+
+
 
         } catch (Exception e){
             throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
@@ -66,6 +78,8 @@ public class ConnectionService implements IConnectionService {
             response.put(response.MESSAGE, response.SUCCESSFUL);
             response.put(response.STATUS, HttpStatus.CREATED);
 
+            sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
+
         } catch (Exception e){
             throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
 
@@ -86,6 +100,9 @@ public class ConnectionService implements IConnectionService {
             response.put(response.MESSAGE, response.SUCCESSFUL);
             response.put(response.STATUS, HttpStatus.OK);
 
+            sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
+
+
         } catch (Exception e){
             throw new ApplicationServiceError("Failed to find connections: "+e.getMessage());
 
@@ -94,6 +111,11 @@ public class ConnectionService implements IConnectionService {
         return response;
     }
 
+    @Override
+    public void sendNotification(String eventId, UserConnection userConnection) {
+        NotificationEvent event = notificationService.buildEvent(eventId, userConnection);
+        notificationService.postEvent(event);
+    }
 
     @Override
     public Response findRecommendedConnection(ConnectionRequest request) {

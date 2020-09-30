@@ -22,7 +22,7 @@ public interface INotificationService {
      * @param eventId
      * @param userConnection
      */
-    NotificationEvent buildNotificationEvent(String eventId, UserConnection userConnection);
+    NotificationEvent buildEvent(String eventId, UserConnection userConnection);
 
     /**
      * Sends notifications
@@ -30,7 +30,7 @@ public interface INotificationService {
      * @param notificationEvent
      * @return
      */
-    ResponseEntity sendNotification(NotificationEvent notificationEvent);
+    ResponseEntity postEvent(NotificationEvent notificationEvent);
 
 
 }

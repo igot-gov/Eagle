@@ -32,7 +32,7 @@ public class NotificationService implements INotificationService {
     ConnectionProperties connectionProperties;
 
     @Override
-    public NotificationEvent buildNotificationEvent(String eventId, UserConnection userConnection) {
+    public NotificationEvent buildEvent(String eventId, UserConnection userConnection) {
 
         NotificationEvent notificationEvent = new NotificationEvent();
 
@@ -59,7 +59,7 @@ public class NotificationService implements INotificationService {
     }
 
     @Override
-    public ResponseEntity sendNotification(NotificationEvent notificationEvent) {
+    public ResponseEntity postEvent(NotificationEvent notificationEvent) {
 
         ResponseEntity<?> response = null;
         try{
