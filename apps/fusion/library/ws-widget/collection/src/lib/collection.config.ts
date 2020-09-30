@@ -42,6 +42,7 @@ export const ROOT_WIDGET_CONFIG = {
     _type: 'contentStrip',
     multiStrip: 'contentStripMultiple',
     singleStrip: 'contentStripSingle',
+    multiStripNew: 'contentStripMultipleNew',
     verticalStrip: 'contentStripVertical',
   },
   channelHub: {
