@@ -1,12 +1,13 @@
-<mat-toolbar class="ws-mat-light-background container-balanced" [ngStyle]="configSvc?.pageNavBar?.styles">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'home',titles:[{title: (firstName +'s Profile') ,url:'none', icon:'person'}]  }">
-  </ws-widget-btn-page-back>
-  <!-- <div>
+<!-- <mat-toolbar class="ws-mat-primary-lite-background-important container-balanced"
+  [ngStyle]="configSvc?.pageNavBar?.styles"> -->
+<ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title: 'NETWORK', url:'/page/network', icon:'person'},
+  {title: (firstName +'\'s Profile') ,url:'none', icon:''}]  }">
+</ws-widget-btn-page-back>
+<!-- <div>
     <span class="margin-left-s">{{ firstName }}</span>
     <span i18n>'s Profile</span>
   </div> -->
-</mat-toolbar>
+<!-- </mat-toolbar> -->
 <ng-container *ngIf="isPersonProfileAvailable">
   <div class="px-6 sm:px-8 md:px-20 py-4 my-2 container-balanced">
     <ng-container *ngIf="!isSmallScreen">

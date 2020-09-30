@@ -125,7 +125,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
       widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
-      widgetHostClass: 'block sm:-mx-10 -mx-6',
+      widgetHostClass: 'block sm:mx-10 mx-6',
     }
     this.widgetResolverProfessionalData = {
       widgetData: {
@@ -148,7 +148,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
       widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
-      widgetHostClass: 'block sm:-mx-10 -mx-6',
+      widgetHostClass: 'block sm:mx-10 mx-6',
     }
     this.widgetResolverMasterData = {
       widgetData: {
@@ -171,7 +171,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       },
       widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
       widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
-      widgetHostClass: 'block sm:-mx-10 -mx-6',
+      widgetHostClass: 'block sm:mx-10 mx-6',
     }
   }
   getGraphData() {

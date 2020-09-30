@@ -1,5 +1,9 @@
 @import 'ws-common';
 
+.container-balanced {
+  @extend %page-center;
+}
+
 .sidenav-content-min-height {
   min-height: calc(100vh - 168px);
 
