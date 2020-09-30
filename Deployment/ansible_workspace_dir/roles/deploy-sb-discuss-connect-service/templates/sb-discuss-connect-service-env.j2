@@ -24,7 +24,7 @@ kafka.consumer.config.auto_offset_reset=earliest
 #Topics
 kafka.topics.incoming.notify=notifyHookTopic
 
-notify.service.host=http://{{ service_notification_service }}:{{ service_notification_service_port }}
+notify.service.host=http://{{ service_notification_service }}:{{ service_notification_service_port }}/
 notify.service.path=v1/notification/event
 
 hub.service.host={{ nodebb_url }}
