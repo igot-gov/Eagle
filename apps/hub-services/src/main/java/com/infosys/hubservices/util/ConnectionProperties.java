@@ -36,6 +36,30 @@ public class ConnectionProperties {
 	@Value("${es.profile.source.fields}")
 	private String[] esProfileSourceFields;
 
+	@Value("${notification.ip}")
+	private String notificationIp;
+
+	@Value("${notification.event.endpoint}")
+	private String notificationEventEndpoint;
+
+	@Value("${notification.template.targetUrl}")
+	private String notificationTemplateTargetUrl;
+
+	@Value("${notification.template.targetUrl.value}")
+	private String notificationTemplateTargetUrlValue;
+
+	@Value("${notification.template.sender}")
+	private String notificationTemplateSender;
+
+	@Value("${notification.template.reciepient}")
+	private String notificationTemplateReciepient;
+
+	@Value("${notification.template.request}")
+	private String notificationTemplateRequest;
+
+	@Value("${notification.template.response}")
+	private String notificationTemplateResponse;
+
 	public String getEsProfileIndex() {
 		return esProfileIndex;
 	}
@@ -63,5 +87,35 @@ public class ConnectionProperties {
 		return esPassword;
 	}
 
+	public String getNotificationTemplateTargetUrlValue() {
+		return notificationTemplateTargetUrlValue;
+	}
 
+	public String getNotificationTemplateSender() {
+		return notificationTemplateSender;
+	}
+
+	public String getNotificationIp() {
+		return notificationIp;
+	}
+
+	public String getNotificationEventEndpoint() {
+		return notificationEventEndpoint;
+	}
+
+	public String getNotificationTemplateTargetUrl() {
+		return notificationTemplateTargetUrl;
+	}
+
+	public String getNotificationTemplateReciepient() {
+		return notificationTemplateReciepient;
+	}
+
+	public String getNotificationTemplateRequest() {
+		return notificationTemplateRequest;
+	}
+
+	public String getNotificationTemplateResponse() {
+		return notificationTemplateResponse;
+	}
 }
