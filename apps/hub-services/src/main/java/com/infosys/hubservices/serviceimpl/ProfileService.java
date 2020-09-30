@@ -10,7 +10,6 @@ package com.infosys.hubservices.serviceimpl;
 import com.infosys.hubservices.exception.ApplicationServiceError;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
-import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.service.IProfileService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
@@ -115,7 +114,7 @@ public class ProfileService implements IProfileService {
     private Response getProfiles(Response connections){
 
         List<UserConnection> userConnections = (List<UserConnection>)connections.get(Constants.ResponseStatus.DATA);
-        if(userConnections.size()==0){
+        if(userConnections.isEmpty() || userConnections.size()==0){
             return connections;
         }
 

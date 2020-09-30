@@ -9,7 +9,6 @@ package com.infosys.hubservices.service;
 
 import com.infosys.hubservices.model.Response;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface IProfileService {

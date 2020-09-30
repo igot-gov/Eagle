@@ -17,18 +17,6 @@ public class Response implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -3773253896160786443L;
 
-/*	@JsonIgnore
-	public static final String SUCCESSFUL = "SUCCESSFUL";
-	@JsonIgnore
-	public static final String FAILED = "FAILED";
-	@JsonIgnore
-	public static final String MESSAGE = "message";
-	@JsonIgnore
-	public static final String DATA = "data";
-	@JsonIgnore
-	public static final String STATUS = "status";*/
-
-
 	private Map<String, Object> result = new HashMap<>();
 
 	public Map<String, Object> getResult() {

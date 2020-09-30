@@ -16,8 +16,6 @@ import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
-import com.infosys.hubservices.service.INotificationService;
-import com.infosys.hubservices.service.IProfileService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -150,7 +148,7 @@ public class ConnectionService implements IConnectionService {
             //find the common new connections that could be established
             List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
 
-            if(commonConnections.size()==0){
+            if(commonConnections.isEmpty() || commonConnections.size()==0){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, commonConnections);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
@@ -176,7 +174,7 @@ public class ConnectionService implements IConnectionService {
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
             List<UserConnection> userConnectionsEstablished = userConnectionRepository.findByUserAndStatus(userId, Constants.Status.APPROVED);
-            if(userConnectionsEstablished.size()==0){
+            if(userConnectionsEstablished.isEmpty() || userConnectionsEstablished.size()==0){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnectionsEstablished);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
@@ -202,7 +200,7 @@ public class ConnectionService implements IConnectionService {
             }
 
             List<UserConnection> userConnections = userConnectionRepository.findByUserAndStatus(userId,  Constants.Status.PENDING);
-            if(userConnections.size()==0){
+            if(userConnections.isEmpty() || userConnections.size()==0){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnections);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);

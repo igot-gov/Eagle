@@ -40,7 +40,7 @@ public class NotificationService implements INotificationService {
 
         NotificationEvent notificationEvent = new NotificationEvent();
 
-        if(eventId!=null && userConnection!=null){
+        if (eventId != null && userConnection != null) {
 
             String fromUUID = userConnection.getUserConnectionPrimarykey().getUserId();
 
@@ -66,17 +66,16 @@ public class NotificationService implements INotificationService {
     public ResponseEntity postEvent(NotificationEvent notificationEvent) {
 
         ResponseEntity<?> response = null;
-        try{
+        try {
             final String uri = connectionProperties.getNotificationIp().concat(connectionProperties.getNotificationEventEndpoint());
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<NotificationEvent> request = new HttpEntity<>(notificationEvent);
             response = restTemplate.exchange(uri, HttpMethod.POST, request, String.class);
 
-            logger.info(Constants.Message.SENT_NOTIFICATION_SUCCESS + response.getStatusCode());
+            logger.info(Constants.Message.SENT_NOTIFICATION_SUCCESS, response.getStatusCode());
 
-        }catch (Exception e){
-            e.printStackTrace();
-            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR+e.getMessage());
+        } catch (Exception e) {
+            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR, e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
         }

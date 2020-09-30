@@ -7,7 +7,6 @@
 package com.infosys.hubservices.network.controller;
 
 import com.infosys.hubservices.model.Response;
-import com.infosys.hubservices.serviceimpl.ConnectionService;
 import com.infosys.hubservices.serviceimpl.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/connections/profile")

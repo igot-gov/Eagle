@@ -8,11 +8,9 @@
 package com.infosys.hubservices.service;
 
 import com.infosys.hubservices.model.NotificationEvent;
-import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
 
 public interface INotificationService {
 
