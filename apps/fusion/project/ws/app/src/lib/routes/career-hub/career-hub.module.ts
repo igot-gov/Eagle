@@ -29,7 +29,7 @@ import { PipeHtmlTagRemovalModule } from '@ws-widget/utils/src/public-api'
 import { PipeRelativeTimeModule } from '@ws-widget/utils/src/lib/pipes/pipe-relative-time/pipe-relative-time.module'
 import { PipeFilterModule } from '@ws-widget/utils/src/lib/pipes/pipe-filter/pipe-filter.module'
 import { CareersCardComponent } from './components/careers-card/careers-card.component'
-import { CareerDetailComponent } from './routes/career-detail/career-detail.component';
+import { CareerDetailComponent } from './routes/career-detail/career-detail.component'
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component'
 
 @NgModule({

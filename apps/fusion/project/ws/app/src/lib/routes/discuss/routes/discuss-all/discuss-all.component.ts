@@ -65,7 +65,7 @@ export class DiscussAllComponent implements OnInit {
   }
   fillPopular() {
     // this.discussionList =;
-    this.discussService.fetchPopularD().subscribe(response => {
+    this.discussService.fetchPopularD().subscribe((response: any) => {
       this.discussionList = _.get(response, 'topics')
     })
     // , () => {

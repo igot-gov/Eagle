@@ -21,6 +21,7 @@ export namespace NSDiscussData {
     tid: number
     uid: number
     mainPid: number
+    content?: string
     slug: string
     title: string
     titleRaw: string
@@ -66,7 +67,7 @@ export namespace NSDiscussData {
     teaserPid: number | null | undefined
     pagination?: IPagination
     posts?: IPosts[]
-    // topics?: any[]
+    topics?: any[]
   }
 
   export interface ICategoryData {

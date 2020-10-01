@@ -4,8 +4,6 @@ import { CardCarrierComponent } from '../card-carrier/card-carrier.component'
 import { MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
 import { PipeRelativeTimeModule } from '@ws-widget/utils/src/public-api'
-
-
 @NgModule({
   declarations: [CardCarrierHomeComponent, CardCarrierComponent],
   imports: [
@@ -17,7 +15,7 @@ import { PipeRelativeTimeModule } from '@ws-widget/utils/src/public-api'
     MatExpansionModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    PipeRelativeTimeModule
+    PipeRelativeTimeModule,
   ],
   entryComponents: [CardCarrierHomeComponent],
 })

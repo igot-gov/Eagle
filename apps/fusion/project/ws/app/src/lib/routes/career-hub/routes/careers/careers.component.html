@@ -15,9 +15,9 @@
     </div>
     <div class="flex flex-wrap margin-fix">
         <ng-container *ngFor="let discuss of data.topics; let i = index;let odd=odd; let even=even;">
-                <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
-                    <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
-                </div>
+            <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
+                <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
+            </div>
         </ng-container>
     </div>
 </div>

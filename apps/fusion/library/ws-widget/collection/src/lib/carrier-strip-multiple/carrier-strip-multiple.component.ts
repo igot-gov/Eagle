@@ -93,8 +93,6 @@ export class CarrierStripMultipleComponent extends WidgetBaseComponent
       }
     }
   }
-
-
   private fetchStripFromRequestData(
     strip: NsCarrierStripNewMultiple.ICarrierStripUnit,
     calculateParentStatus = true,

@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class CareersComponent implements OnInit {
   data!: NSDiscussData.IDiscussionData
-
+  currentFilter: string = 'recent'
   constructor(
     private route: ActivatedRoute
   ) {
@@ -17,6 +17,9 @@ export class CareersComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  filter(key: string) {
+    this.currentFilter = key
   }
 
 }

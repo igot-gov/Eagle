@@ -206,7 +206,7 @@ export const WIDGET_REGISTERED_MODULES = [
   CardCourseModule,
   CardCarrierHomeModule,
   CarrierStripMultipleModule,
-  DiscussStripMultipleModule
+  DiscussStripMultipleModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
