@@ -26,11 +26,11 @@
             <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'viewcount',
                             'ws-mat-accent-border':currentFilter !== 'viewcount'}" mat-button
                 (click)="filter('viewcount')">
-                Most upvoted </a>
+                Most Viewed </a>
         </div>
     </div>
     <div class="flex flex-wrap margin-fix">
-        <ng-container *ngFor="let discuss of data.topics| orderBy: currentFilter :'desc'; let i = index;let odd=odd; let even=even;">
+        <ng-container *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;">
             <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
                 <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
             </div>
