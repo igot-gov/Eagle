@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./careers-home.component.scss'],
 })
 export class CareersHomeComponent implements OnInit {
-  titles = [{ title: 'CAREER', url: '/app/careers/home', icon: 'school' }]
+  titles = [{ title: 'CAREER', url: '/app/careers/home', icon: 'work' }]
 
   constructor() { }
 
