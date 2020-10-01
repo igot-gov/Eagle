@@ -30,6 +30,7 @@ export namespace NsContentStripNewMultiple {
       searchV6?: NSSearch.ISearchV6Request
       searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
       api?: IStripRequestApi
+      networkApi?: INetworkRequestApi
       ids?: string[]
     }
     searchV6Type?: 'KB' | 'Collections' | 'searchQuery' | null
@@ -48,6 +49,10 @@ export namespace NsContentStripNewMultiple {
       pageState?: string
       sourceFields?: string
     }
+  }
+  export interface INetworkRequestApi {
+    path: string
+    data?: any
   }
   export interface IStripInfo {
     mode: 'below' | 'popup' | 'modal'

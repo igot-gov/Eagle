@@ -37,6 +37,7 @@ export const ROOT_WIDGET_CONFIG = {
     home_discuss: 'cardHomeDiscuss',
     home_hubs: 'cardHomeHubs',
     home_course: 'cardCourse',
+    home_carrier: 'cardHomeCarrier',
   },
   contentStrip: {
     _type: 'contentStrip',
@@ -44,6 +45,18 @@ export const ROOT_WIDGET_CONFIG = {
     singleStrip: 'contentStripSingle',
     multiStripNew: 'contentStripMultipleNew',
     verticalStrip: 'contentStripVertical',
+  },
+  networkStrip: {
+    _type: 'networkStrip',
+    multipleStrip: 'NetworkStripMultiple',
+  },
+  carrierStrip: {
+    _type: 'carrierStrip',
+    multipleStrip: 'CarrierStripMultiple',
+  },
+  discussStrip: {
+    _type: 'discussStrip',
+    multipleStrip: 'DiscussStripMultiple',
   },
   channelHub: {
     _type: 'channelHub',

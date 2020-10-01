@@ -121,6 +121,17 @@
         [
           {
             "dimensions": {},
+            "className": "new-box",
+            "widget": {
+              "widgetType": "card",
+              "widgetSubType": "cardHomeTop",
+              "widgetData": {}
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
             "className": "",
             "widget": {
               "widgetType": "contentStrip",
@@ -137,12 +148,9 @@
                       "cardSubType": "standard"
                     },
                     "viewMoreUrl": {
-                      "path": "/app/search/learning",
+                      "path": "/page/learn",
                       "viewMoreText": "Learn",
-                      "queryParams": {
-                        "q": "all",
-                        "p": "Trending"
-                      }
+                      "queryParams": {}
                     },
                     "filters": [],
                     "request": {
@@ -184,6 +192,13 @@
                         "widgetData": {
                           "html": "<p class=\"ws-mat-primary-text\">This is where you’ll see which topics are in news right now.</p>"
                         }
+                      }
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/search/learning",
+                      "queryParams": {
+                        "q": "all",
+                        "p": "Trending"
                       }
                     },
                     "stripConfig": {
@@ -230,44 +245,118 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardCourse",
-              "widgetData": {}
+              "widgetType": "networkStrip",
+              "widgetSubType": "NetworkStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "network",
+                    "logo": "group",
+                    "title": "network",
+                    "stripBackground": "assets/instances/eagle/background/network.svg",
+                    "titleDescription": "Connect with people you may know",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeNetwork"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/page/network",
+                      "viewMoreText": "Network",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/networkHub/users",
+                        "queryParams": {
+                          "limit": 5,
+                          "offset": 0,
+                          "intervalInDays": 7,
+                          "type": "latestUsers"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
             }
           }
         ],
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeTop",
-              "widgetData": {}
+              "widgetType": "discussStrip",
+              "widgetSubType": "DiscussStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "discuss",
+                    "logo": "group",
+                    "title": "discuss",
+                    "stripBackground": "assets/instances/eagle/background/discuss.svg",
+                    "titleDescription": "Trending discusstions",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeDiscuss"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/discuss/home",
+                      "viewMoreText": "Discuss",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/networkHub/users",
+                        "queryParams": {
+                          "limit": 5,
+                          "offset": 0,
+                          "intervalInDays": 7,
+                          "type": "latestUsers"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
             }
           }
         ],
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeNetwork",
-              "widgetData": {}
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "className": "new-box",
-            "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeDiscuss",
-              "widgetData": {}
+              "widgetType": "carrierStrip",
+              "widgetSubType": "CarrierStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "Career",
+                    "logo": "group",
+                    "title": "Career",
+                    "stripBackground": "assets/instances/eagle/background/careers.svg",
+                    "titleDescription": "Latest openings",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeCarrier"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/page/career",
+                      "viewMoreText": "Carrier",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/discussionHub/categories/1",
+                        "queryParams": {}
+                      }
+                    }
+                  }
+                ]
+              }
             }
           }
         ]

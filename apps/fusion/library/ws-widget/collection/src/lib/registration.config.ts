@@ -87,6 +87,9 @@ import { LayoutLinearComponent } from './layout-linear/layout-linear.component'
 import { LayoutLinearModule } from './layout-linear/layout-linear.module'
 import { LayoutTabComponent } from './layout-tab/layout-tab.component'
 import { LayoutTabModule } from './layout-tab/layout-tab.module'
+import { NetworkStripMultipleModule } from './network-strip-multiple/network-strip-multiple.module'
+import { CarrierStripMultipleModule } from './carrier-strip-multiple/carrier-strip-multiple.module'
+import { NetworkStripMultipleComponent } from './network-strip-multiple/network-strip-multiple.component'
 import { PageComponent } from './page/page.component'
 import { PageModule } from './page/page.module'
 import { PickerContentModule } from './picker-content/picker-content.module'
@@ -128,6 +131,11 @@ import { CardHubsListModule } from './card-hubs-list/card-hubs-list.module'
 import { CardNetworkHomeModule } from './card-network-home/card-network-home.module'
 import { CardCourseComponent } from './card-course/card-course.component'
 import { CardCourseModule } from './card-course/card-course.module'
+import { CardCarrierHomeComponent } from './card-carrier-home/card-carrier-home.component'
+import { CardCarrierHomeModule } from './card-carrier-home/card-carrier-home.module'
+import { CarrierStripMultipleComponent } from './carrier-strip-multiple/carrier-strip-multiple.component'
+import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-strip-multiple.component'
+import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -167,6 +175,7 @@ export const WIDGET_REGISTERED_MODULES = [
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
+  NetworkStripMultipleModule,
   PickerContentModule,
   PlayerAmpModule,
   PlayerAudioModule,
@@ -195,6 +204,9 @@ export const WIDGET_REGISTERED_MODULES = [
   CardHubsListModule,
   CardNetworkHomeModule,
   CardCourseModule,
+  CardCarrierHomeModule,
+  CarrierStripMultipleModule,
+  DiscussStripMultipleModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -375,6 +387,21 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     component: LayoutTabComponent,
   },
   {
+    widgetType: ROOT_WIDGET_CONFIG.networkStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.networkStrip.multipleStrip,
+    component: NetworkStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.carrierStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.carrierStrip.multipleStrip,
+    component: CarrierStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.discussStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.discussStrip.multipleStrip,
+    component: DiscussStripMultipleComponent,
+  },
+  {
     widgetType: ROOT_WIDGET_CONFIG.player._type,
     widgetSubType: ROOT_WIDGET_CONFIG.player.amp,
     component: PlayerAmpComponent,
@@ -504,5 +531,10 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.home_course,
     component: CardCourseComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_carrier,
+    component: CardCarrierHomeComponent,
   },
 ]

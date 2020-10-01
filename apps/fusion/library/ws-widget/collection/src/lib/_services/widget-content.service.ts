@@ -38,7 +38,7 @@ export class WidgetContentService {
   constructor(
     private http: HttpClient,
     private configSvc: ConfigurationsService
-    ) { }
+  ) { }
 
   fetchMarkAsCompleteMeta(identifier: string): Promise<any> {
     const url = API_END_POINTS.MARK_AS_COMPLETE_META(identifier)
@@ -171,6 +171,7 @@ export class WidgetContentService {
     req.query = req.query || ''
     return this.http.post<NSSearch.ISearchV6ApiResult>(API_END_POINTS.CONTENT_SEARCH_V6, req)
   }
+
   fetchContentRating(contentId: string): Observable<{ rating: number }> {
     return this.http.get<{ rating: number }>(`${API_END_POINTS.CONTENT_RATING}/${contentId}`)
   }

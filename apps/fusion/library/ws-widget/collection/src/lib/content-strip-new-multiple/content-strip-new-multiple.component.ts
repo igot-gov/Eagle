@@ -133,12 +133,31 @@ export class ContentStripNewMultipleComponent extends WidgetBaseComponent
   ) {
     // setting initial values
     this.processStrip(strip, [], 'fetching', false, null)
+    // if (!(strip.request && strip.request.networkApi)) {
     this.fetchFromApi(strip, calculateParentStatus)
     this.fetchFromSearch(strip, calculateParentStatus)
     this.fetchFromSearchRegionRecommendation(strip, calculateParentStatus)
     this.fetchFromSearchV6(strip, calculateParentStatus)
     this.fetchFromIds(strip, calculateParentStatus)
+    // } else {
+    //   this.fetchNetworkUsers(strip, calculateParentStatus)
+    // }
   }
+  // fetchNetworkUsers(strip: NsContentStripNewMultiple.IContentStripUnit, calculateParentStatus: boolean) {
+  //   if (strip.request && strip.request.networkApi && Object.keys(strip.request.networkApi).length) {
+  //     this.contentStripSvc.fetchNetworkUsers(strip.request.networkApi.data, strip.request.networkApi.path).subscribe(
+  //       results => {
+  //         this.processStrip(
+  //           strip,
+  //           this.transformContentsToWidgets(results.contents, strip),
+  //           'done',
+  //           calculateParentStatus,
+  //           null,
+  //         )
+  //       }
+  //     )
+  //   }
+  // }
   fetchFromApi(strip: NsContentStripNewMultiple.IContentStripUnit, calculateParentStatus = true) {
     if (strip.request && strip.request.api && Object.keys(strip.request.api).length) {
       this.contentStripSvc.getContentStripResponseApi(strip.request.api).subscribe(
