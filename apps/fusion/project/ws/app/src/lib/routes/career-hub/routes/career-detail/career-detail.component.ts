@@ -11,7 +11,7 @@ import _ from 'lodash'
 @Component({
   selector: 'ws-app-career-detail',
   templateUrl: './career-detail.component.html',
-  styleUrls: ['./career-detail.component.scss']
+  styleUrls: ['./career-detail.component.scss'],
 })
 export class CareerDetailComponent implements OnInit {
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
@@ -59,12 +59,12 @@ export class CareerDetailComponent implements OnInit {
 
   getTIDData() {
     this.discussService.fetchTopicById(this.topicId).subscribe(
-    (data: NSDiscussData.IDiscussionData) => {
-      this.data = data
-    },
-    (err: any) => {
-      this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-    })
+      (data: NSDiscussData.IDiscussionData) => {
+        this.data = data
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
   }
 
 }

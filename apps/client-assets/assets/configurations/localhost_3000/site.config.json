@@ -434,11 +434,11 @@
       "icon": "group"
     },
     {
-      "path": "/page/learn",
-      "active": false,
-      "hubname": "Carrier",
+      "path": "/app/careers/home",
+      "active": true,
+      "hubname": "Career",
       "desc": "Explore the carrier option grow into the path you are",
-      "icon": "test"
+      "icon": "work"
     },
     {
       "path": "/app/notifications",

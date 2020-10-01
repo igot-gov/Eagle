@@ -1,4 +1,4 @@
-<section class="base-layout">
+<section class="flex">
   <h3 class="mat-error text-center" *ngIf="!networkUser" i18n>
     No Active User Info Available
   </h3>
@@ -10,7 +10,7 @@
   </div>
 
   <ng-template #userIndividualNew let-user="user">
-    <mat-card>
+    <mat-card class="network-card mr-6">
       <mat-card-content class="content">
         <div class="unit-cohort sm:pr-8 md:pr-10">
           <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
