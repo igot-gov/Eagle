@@ -1,17 +1,11 @@
 <section class="base-layout">
-  <h2>Network</h2>
-  <div>
-    <h3 class="mat-error text-center" *ngIf="newUserArray.length === 0" i18n>
-      No Active User Info Available
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
-      <ng-container *ngFor="let userObj of newUserArray" [ngTemplateOutlet]="userIndividualNew"
-        [ngTemplateOutletContext]="{ user: userObj }">
-      </ng-container>
-    </div>
-  </div>
+  <h3 class="mat-error text-center" *ngIf="!networkUser" i18n>
+    No Active User Info Available
+  </h3>
+  <ng-container [ngTemplateOutlet]="userIndividualNew" [ngTemplateOutletContext]="{ user: networkUser }">
+  </ng-container>
   <div class="text-center">
-    <mat-spinner [strokeWidth]="3" *ngIf="newUserArray.length ===0" [diameter]="40" class="display-inline-block">
+    <mat-spinner [strokeWidth]="3" *ngIf="!networkUser" [diameter]="40" class="display-inline-block">
     </mat-spinner>
   </div>
 

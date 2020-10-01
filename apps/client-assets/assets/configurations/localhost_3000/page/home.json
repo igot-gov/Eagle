@@ -234,11 +234,41 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardCourse",
-              "widgetData": {}
+              "widgetType": "networkStrip",
+              "widgetSubType": "NetworkStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "network",
+                    "logo": "group",
+                    "title": "network",
+                    "stripBackground": "assets/instances/eagle/background/network.svg",
+                    "titleDescription": "Connect with people you may know",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeNetwork"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/page/network",
+                      "viewMoreText": "Network",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/networkHub/users",
+                        "queryParams": {
+                          "limit": 5,
+                          "offset": 0,
+                          "intervalInDays": 7,
+                          "type": "latestUsers"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
             }
           }
         ],
@@ -249,17 +279,6 @@
             "widget": {
               "widgetType": "card",
               "widgetSubType": "cardHomeTop",
-              "widgetData": {}
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "className": "new-box",
-            "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeNetwork",
               "widgetData": {}
             }
           }

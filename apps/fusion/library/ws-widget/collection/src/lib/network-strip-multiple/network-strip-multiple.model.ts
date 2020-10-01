@@ -1,17 +1,16 @@
 import { NsWidgetResolver } from '@ws-widget/resolver'
-import { NSSearch } from '../_services/widget-search.model'
-import { NsContent } from '../_services/widget-content.model'
+// import { NSSearch } from '../_services/widget-search.model'
 import { NsCardContent } from '../card-content/card-content.model'
 
-export namespace NsContentStripNewMultiple {
-  export interface IContentStripMultiple {
+export namespace NsNetworkStripNewMultiple {
+  export interface INetworkStripMultiple {
     errorWidget?: NsWidgetResolver.IRenderConfigWithAnyData
     loader?: boolean
     noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
-    strips: IContentStripUnit[]
+    strips: INetworkStripUnit[]
     isChannelStrip?: boolean
   }
-  export interface IContentStripUnit {
+  export interface INetworkStripUnit {
     key: string
     title: string
     titleDescription?: string
@@ -26,12 +25,11 @@ export namespace NsContentStripNewMultiple {
     filters?: any[]
     selectAll?: boolean | null
     request?: {
-      search?: NSSearch.ISearchRequest
-      searchV6?: NSSearch.ISearchV6Request
-      searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
+      // search?: NSSearch.ISearchRequest
+      // searchV6?: NSSearch.ISearchV6Request
+      // searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
       api?: IStripRequestApi
-      networkApi?: INetworkRequestApi
-      ids?: string[]
+      // ids?: string[]
     }
     searchV6Type?: 'KB' | 'Collections' | 'searchQuery' | null
     stripBackground?: string
@@ -50,10 +48,7 @@ export namespace NsContentStripNewMultiple {
       sourceFields?: string
     }
   }
-  export interface INetworkRequestApi {
-    path: string
-    data?: any
-  }
+
   export interface IStripInfo {
     mode: 'below' | 'popup' | 'modal'
     visibilityMode?: 'hidden' | 'visible'
@@ -65,24 +60,17 @@ export namespace NsContentStripNewMultiple {
     widget: NsWidgetResolver.IRenderConfigWithAnyData
   }
   interface IStripConfig {
-    // card subType key is used to determine the content Card display type
+    // card subType key is used to determine the Network Card display type
     cardSubType: NsCardContent.TCardSubType
     // to show view more card for a search strip
     postCardForSearch?: boolean
     intranetMode?: 'greyOut' | 'hide'
     deletedMode?: 'greyOut' | 'hide'
-    contentTags?: IContentTags
+    // contentTags?: IContentTags
   }
-
-  export interface IContentTags {
-    daysSpan?: number
-    excludeContentType?: NsContent.EContentTypes[]
-    excludeMimeType?: string[]
-    tag: string
-    criteriaField: string
-  }
-  export interface IContentStripResponseApi {
-    contents: NsContent.IContent[]
+  export interface INetworkStripResponseApi {
+    // contents: NsContent.IContent[]
+    contents: any
     hasMore?: boolean
     pageState?: string
     totalHits?: number

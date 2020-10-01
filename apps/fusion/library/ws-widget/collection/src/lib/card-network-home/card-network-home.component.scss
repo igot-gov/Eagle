@@ -5,27 +5,34 @@
 .base-header {
   margin-left: 5px;
 }
+
 .mat-grid-tile {
   display: inline;
   position: absolute;
 }
+
 h2 {
   width: 98%;
 }
+
 mat-form-field {
   width: 100%;
 }
+
 mat-grid-list {
   margin-top: 40px;
   margin-bottom: 20px;
 }
+
 .base-layout {
-  margin-top: 40px;
+  margin-top: 50%;
 }
+
 .mat-elevation-z {
   margin-top: 38px;
   border-radius: 8px;
 }
+
 .cohorts-head {
   padding: $size-xs $size-l;
   margin: 0;
@@ -34,10 +41,12 @@ mat-grid-list {
   color: #222222 !important;
   font: 18px/30px Poppins-Medium;
 }
+
 .unit-cohort {
   display: inline-flex;
   // align-items: center;
   margin-bottom: $size-l;
+
   .cohort-image {
     $user-image-size: 32px;
     width: $user-image-size;
@@ -53,13 +62,16 @@ mat-grid-list {
   font-weight: normal;
   font-family: Poppins-regular;
 }
+
 .cohortSection {
   margin: 50px auto;
   width: 70%;
 }
+
 .flex {
   display: flex;
 }
+
 .chorotsBlock {
   background: #ffffff;
 }
@@ -72,6 +84,7 @@ mat-grid-list {
 .user-action-container {
   color: #adadae;
 }
+
 .center {
   text-align: center;
   color: #187bcd;
