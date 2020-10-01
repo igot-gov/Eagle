@@ -1,0 +1,43 @@
+<div class="flex flex-1 related-discussion pt-5 px-2">
+    <div class="flex flex-3 flex-column pb-10 fit-content-height" >
+        <mat-card class="flex-1 remove-botton-radius">
+            <mat-card-header>
+              <mat-card-title class="margin-l-0 f-medium" [innerHTML]="data.title"></mat-card-title>
+              <mat-card-subtitle>{{ data.timestamp | pipeRelativeTime}}</mat-card-subtitle>
+            </mat-card-header>
+            <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'">
+              <mat-card-content class="margin-left-m mb-0-imp">
+                <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
+                <p class="post-content"> {{ post.content | pipeHtmlTagRemoval}}</p>
+     
+                <div class="flex flex-1 margin-top-m">
+                  <ng-container *ngIf="data && data.tags && data.tags.length > 0">
+                    <span *ngFor="let tag of data.tags" class="tag ws-mat-primary-tags">
+                      {{tag.value}}
+                    </span>
+                  </ng-container>
+                </div>
+                <div class="flex flex-1 custom margin-0 margin-top-xl">
+                    <div class="flex flex-1">
+                        <span class="flex margin-right-l mobile">
+                            <mat-icon>trending_up</mat-icon>
+                            <span class="ml-2">{{data.viewcount}} views</span>
+                          </span>
+                    </div>
+                </div>
+    
+              </mat-card-content>
+              <mat-card-actions align="end">
+
+              </mat-card-actions>
+            </ng-container>
+          </mat-card>
+    </div>
+    <div class="flex flex-1 display-hide hidden-imp ">
+        <div *ngIf="fetchSingleCategoryLoader" class="w-full flex items-center justify-center">
+            <mat-spinner [diameter]="30"></mat-spinner>
+        </div>
+        <ws-app-related-posts class="margin-left-l " *ngIf="!fetchSingleCategoryLoader" [relatedDiscussions]="similarPosts">
+        </ws-app-related-posts>
+    </div>
+</div>
