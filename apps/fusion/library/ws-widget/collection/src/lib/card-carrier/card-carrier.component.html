@@ -7,7 +7,7 @@
       <span class="flex ws-mat-default-text">
         <mat-icon svgIcon="category_xs"></mat-icon>{{carrier?.category}}
       </span>
-      <span class="dot" *ngIf="carrier?.timeinfo">{{carrier?.timeinfo}}</span>
+      <span class="dot" *ngIf="carrier?.timeinfo">{{carrier?.timeinfo | pipeRelativeTime}}</span>
       <span class="dot" *ngIf="!(carrier?.timeinfo)">{{'Time Info Not Available'}}</span>
       <!-- <span class="margin-left-l">{{carrier.timestamp | pipeRelativeTime}}</span> -->
     </mat-card-subtitle>
