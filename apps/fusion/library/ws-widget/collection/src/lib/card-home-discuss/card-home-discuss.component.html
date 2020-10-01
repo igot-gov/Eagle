@@ -1,9 +1,7 @@
 <section class="base-layout">
-  <h2>Discuss</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 col-gap-4">
     <ng-container *ngFor="let item of discussionList">
       <ws-widget-card-discuss class="card-align" [discuss]="item"></ws-widget-card-discuss>
     </ng-container>
-
   </div>
 </section>
