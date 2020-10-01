@@ -39,6 +39,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.topicId = params.topicId
+      this.getTIDData()
     })
     this.data = this.route.snapshot.data.topic.data
     this.postAnswerForm = this.formBuilder.group({
@@ -195,6 +196,16 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
         this.fetchSingleCategoryLoader = false
+      })
+  }
+
+  getTIDData() {
+    this.discussService.fetchTopicById(this.topicId).subscribe(
+      (data: NSDiscussData.IDiscussionData) => {
+        this.data = data
+      },
+      (err: any) => {
+        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
       })
   }
 }
