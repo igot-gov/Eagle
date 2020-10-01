@@ -62,6 +62,19 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/careers',
+    loadChildren: () =>
+      import('./routes/route-careers.module').then(u => u.RouteCareerHubModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'career',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/channels',
     loadChildren: () => import('./routes/route-channels.module').then(u => u.RouteChannelsModule),
     canActivate: [GeneralGuard],

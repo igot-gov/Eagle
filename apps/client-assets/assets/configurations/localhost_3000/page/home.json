@@ -286,22 +286,82 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeDiscuss",
-              "widgetData": {}
+              "widgetType": "discussStrip",
+              "widgetSubType": "DiscussStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "discuss",
+                    "logo": "group",
+                    "title": "discuss",
+                    "stripBackground": "assets/instances/eagle/background/discuss.svg",
+                    "titleDescription": "Trending discusstions",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeDiscuss"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/discuss/home",
+                      "viewMoreText": "Discuss",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/networkHub/users",
+                        "queryParams": {
+                          "limit": 5,
+                          "offset": 0,
+                          "intervalInDays": 7,
+                          "type": "latestUsers"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
             }
           }
         ],
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeCarrier",
-              "widgetData": {}
+              "widgetType": "carrierStrip",
+              "widgetSubType": "CarrierStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "carrier",
+                    "logo": "group",
+                    "title": "Carrier",
+                    "stripBackground": "assets/instances/eagle/background/careers.svg",
+                    "titleDescription": "Latest openings",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeCarrier"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/page/carrier",
+                      "viewMoreText": "Carrier",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/networkHub/users",
+                        "queryParams": {
+                          "limit": 5,
+                          "offset": 0,
+                          "intervalInDays": 7,
+                          "type": "latestUsers"
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
             }
           }
         ]
