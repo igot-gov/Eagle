@@ -134,6 +134,8 @@ import { CardCourseModule } from './card-course/card-course.module'
 import { CardCarrierHomeComponent } from './card-carrier-home/card-carrier-home.component'
 import { CardCarrierHomeModule } from './card-carrier-home/card-carrier-home.module'
 import { CarrierStripMultipleComponent } from './carrier-strip-multiple/carrier-strip-multiple.component'
+import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-strip-multiple.component'
+import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -203,7 +205,8 @@ export const WIDGET_REGISTERED_MODULES = [
   CardNetworkHomeModule,
   CardCourseModule,
   CardCarrierHomeModule,
-  CarrierStripMultipleModule
+  CarrierStripMultipleModule,
+  DiscussStripMultipleModule
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -392,6 +395,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.carrierStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.carrierStrip.multipleStrip,
     component: CarrierStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.discussStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.discussStrip.multipleStrip,
+    component: DiscussStripMultipleComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.player._type,

@@ -54,6 +54,10 @@ export const ROOT_WIDGET_CONFIG = {
     _type: 'carrierStrip',
     multipleStrip: 'CarrierStripMultiple',
   },
+  discussStrip: {
+    _type: 'discussStrip',
+    multipleStrip: 'DiscussStripMultiple',
+  },
   channelHub: {
     _type: 'channelHub',
     channelHub: 'channelHub',
