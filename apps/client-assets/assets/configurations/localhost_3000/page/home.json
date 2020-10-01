@@ -334,9 +334,9 @@
               "widgetData": {
                 "strips": [
                   {
-                    "key": "carrier",
+                    "key": "Career",
                     "logo": "group",
-                    "title": "Carrier",
+                    "title": "Career",
                     "stripBackground": "assets/instances/eagle/background/careers.svg",
                     "titleDescription": "Latest openings",
                     "stripConfig": {
