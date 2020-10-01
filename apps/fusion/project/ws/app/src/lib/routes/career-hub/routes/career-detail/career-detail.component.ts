@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core'
 import { NSDiscussData } from '../../../discuss/models/discuss.model'
 import { ActivatedRoute } from '@angular/router'
+import { MatSnackBar } from '@angular/material'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussService } from '../../../discuss/services/discuss.service'
 import { FormGroup } from '@angular/forms'
@@ -30,7 +31,8 @@ export class CareerDetailComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private discussService: DiscussService
+    private discussService: DiscussService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -92,7 +94,6 @@ export class CareerDetailComponent implements OnInit {
   getTIDData() {
     this.discussService.fetchTopicById(this.topicId).subscribe(
     (data: NSDiscussData.IDiscussionData) => {
-      console.log(data)
       this.data = data
     },
     (err: any) => {

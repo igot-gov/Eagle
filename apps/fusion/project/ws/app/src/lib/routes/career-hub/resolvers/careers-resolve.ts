@@ -17,15 +17,10 @@ export class CareerRecentResolve
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSDiscussData.ICategoryData[]>> {
-    // return route.data.subscribe(data => {
-    //   if (data && data.pageData) {
-        const categoryId = _route.data['careersCategoryId'] || 1
-        console.log('inside resolver - ', categoryId)
-        return this.discussionSvc.fetchSingleCategoryDetails(categoryId).pipe(
-          map(data => ({ data, error: null })),
-          catchError(error => of({ error, data: null })),
-        )
-    //   }
-    // })
+    const categoryId = _route.data['careersCategoryId'] || 1
+    return this.discussionSvc.fetchSingleCategoryDetails(categoryId).pipe(
+      map(data => ({ data, error: null })),
+      catchError(error => of({ error, data: null })),
+    )
   }
 }

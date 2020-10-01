@@ -13,12 +13,10 @@ export class CareersComponent implements OnInit {
   constructor(
     private route: ActivatedRoute
   ) {
-    console.log('this.route.snapshot.data: ', this.route.snapshot.data)
     this.data = this.route.snapshot.data.topics.data
   }
 
   ngOnInit() {
-    
   }
 
 }
