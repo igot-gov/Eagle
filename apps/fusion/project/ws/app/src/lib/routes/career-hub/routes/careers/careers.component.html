@@ -2,19 +2,35 @@
 
 </div>
 
-<div class="w-full">
+
+<div class="w-full pt-5 px-2">
     <div class="flex flex-1 flex-column margin-fix">
-        <div class="flex flex-1 filter max-height-60">
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'recent',
-            'ws-mat-accent-border':currentFilter !== 'recent'}" mat-button (click)="filter('recent')">Recent</a>
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'popular',
-            'ws-mat-accent-border':currentFilter !== 'popular'}" mat-button (click)="filter('popular')">Popular</a>
-            <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
-            'ws-mat-accent-border':currentFilter !== 'watched'}" mat-button (click)="filter('watched')">Watched</a> -->
+        <h2 class="f-medium">All openings </h2>
+    </div>
+    <div class="flex flex-1 flex-column margin-fix search">
+        <form (submit)="updateQuery(queryControl.value)">
+            <mat-form-field appearance="none" class="autocomplete-form" color="primary" [floatLabel]="'never'">
+                <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+                <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
+                    [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
+                    accesskey="F" />
+            </mat-form-field>
+        </form>
+    </div>
+    <div class="flex flex-1 flex-column margin-fix">
+        <div class="flex flex-1 filter">
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                            'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+                (click)="filter('timestamp')">
+                Recent </a>
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'viewcount',
+                            'ws-mat-accent-border':currentFilter !== 'viewcount'}" mat-button
+                (click)="filter('viewcount')">
+                Most Viewed </a>
         </div>
     </div>
     <div class="flex flex-wrap margin-fix">
-        <ng-container *ngFor="let discuss of data.topics; let i = index;let odd=odd; let even=even;">
+        <ng-container *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;">
             <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
                 <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
             </div>

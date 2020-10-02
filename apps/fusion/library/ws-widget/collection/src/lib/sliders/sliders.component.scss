@@ -4,8 +4,8 @@
 $banner-min-height: 365px;
 
 .banner-container {
-  max-height: 442px;
-  min-height: $banner-min-height;
+  // max-height: 442px;
+  // min-height: $banner-min-height;
   overflow: hidden;
   position: relative;
   margin: auto;
@@ -40,9 +40,9 @@ $banner-min-height: 365px;
 
   .banner-image {
     width: 100%;
-    min-height: $banner-min-height;
+    // min-height: $banner-min-height;
     display: block;
-    height: 350px;
+    // height: 350px;
     border-radius: 12px;
   }
 }

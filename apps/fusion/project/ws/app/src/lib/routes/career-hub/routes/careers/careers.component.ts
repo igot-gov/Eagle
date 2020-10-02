@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { NSDiscussData } from '../../../discuss/models/discuss.model'
 import { ActivatedRoute } from '@angular/router'
+import { FormControl } from '@angular/forms'
 
 @Component({
   selector: 'ws-app-careers',
@@ -9,7 +10,9 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class CareersComponent implements OnInit {
   data!: NSDiscussData.IDiscussionData
-  currentFilter: string = 'recent'
+  queryControl = new FormControl('')
+  currentFilter = 'timestamp'
+
   constructor(
     private route: ActivatedRoute
   ) {
@@ -18,8 +21,11 @@ export class CareersComponent implements OnInit {
 
   ngOnInit() {
   }
-  filter(key: string) {
-    this.currentFilter = key
+
+  filter(key: string | 'timestamp' | 'viewcount') {
+    if (key) {
+      this.currentFilter = key
+    }
   }
 
 }

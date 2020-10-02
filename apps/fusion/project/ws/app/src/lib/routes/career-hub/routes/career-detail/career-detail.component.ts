@@ -4,10 +4,10 @@ import { ActivatedRoute } from '@angular/router'
 import { MatSnackBar } from '@angular/material'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussService } from '../../../discuss/services/discuss.service'
-import { FormGroup } from '@angular/forms'
 /* tslint:disable */
 import _ from 'lodash'
 /* tslint:enable */
+
 @Component({
   selector: 'ws-app-career-detail',
   templateUrl: './career-detail.component.html',
@@ -16,13 +16,9 @@ import _ from 'lodash'
 export class CareerDetailComponent implements OnInit {
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
-  postAnswerForm!: FormGroup
   data!: NSDiscussData.IDiscussionData
   similarPosts!: any
-  timer: any
   defaultError = 'Something went wrong, Please try again after sometime!'
-  currentFilter = 'recent'
-  discussionList!: NSDiscussData.IDiscussionData[]
   topicId!: number
   fetchSingleCategoryLoader = false
 
@@ -40,37 +36,6 @@ export class CareerDetailComponent implements OnInit {
     })
     this.data = this.route.snapshot.data.topic.data
     this.fetchSingleCategoryDetails(this.data.cid)
-  }
-
-  filter(key: string | 'recent' | 'popular' | 'watched') {
-    if (key) {
-      this.currentFilter = key
-    }
-    switch (key) {
-      case 'recent':
-        this.fillrecent()
-        break
-      case 'popular':
-        this.fillPopular()
-        break
-      default:
-        break
-    }
-  }
-  fillrecent() {
-    this.discussionList = this.route.snapshot.data.recent.data.topics || []
-  }
-  fillPopular() {
-    // this.discussionList =;
-    this.discussService.fetchPopularD().subscribe((response: any) => {
-      // tslint:disable-next-line
-      this.discussionList = _.get(response, 'topics')
-      // this.discussionList = response.topics || []
-
-    })
-    // , () => {
-    //   // IN TROUBL
-    // })
   }
 
   fetchSingleCategoryDetails(cid: number) {

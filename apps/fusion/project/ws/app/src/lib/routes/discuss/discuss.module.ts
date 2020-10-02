@@ -18,6 +18,7 @@ import { RightMenuComponent } from './components/right-menu/right-menu.component
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
+import { WidgetResolverModule } from '@ws-widget/resolver'
 import {
   MatIconModule,
   MatListModule,
@@ -93,6 +94,7 @@ import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck
     CkEditorModule,
     PipeOrderByModule,
     BtnPageBackModule,
+    WidgetResolverModule,
   ],
   entryComponents: [
     DiscussStartComponent,

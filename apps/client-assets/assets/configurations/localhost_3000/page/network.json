@@ -99,6 +99,32 @@
             "dimensions": {},
             "className": "new-box",
             "widget": {
+              "widgetType": "slider",
+              "widgetSubType": "sliderBanners",
+              "style": {
+                "border-radius": "12px",
+                "height": "600px"
+              },
+              "widgetData": [
+                {
+                  "banners": {
+                    "l": "assets/instances/eagle/banners/hubs/network/l.png",
+                    "m": "assets/instances/eagle/banners/hubs/network/m.png",
+                    "s": "assets/instances/eagle/banners/hubs/network/s.png",
+                    "xl": "assets/instances/eagle/banners/hubs/network/xl.png",
+                    "xs": "assets/instances/eagle/banners/hubs/network/xs.png",
+                    "xxl": "assets/instances/eagle/banners/hubs/network/xxl.png"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
               "widgetType": "card",
               "widgetSubType": "cardNetwork",
               "widgetData": {}

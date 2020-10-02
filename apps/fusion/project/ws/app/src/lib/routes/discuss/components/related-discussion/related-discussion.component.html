@@ -2,7 +2,7 @@
   <h3>Related discussions</h3>
   <ng-container *ngIf="relatedDiscussions && relatedDiscussions.length > 0">
     <div *ngFor="let discussion of relatedDiscussions | slice:0:5;" class="tag ws-mat-primary-lite-background-important">
-      <mat-card class="flex-1" (click)="getDiscussion(discussion)" >
+      <mat-card class="flex-1 cursor-pointer" (click)="getDiscussion(discussion)" >
         <!-- <mat-card-header> -->
           <mat-card-subtitle class="title f-medium">{{discussion.title}}</mat-card-subtitle>
         <!-- </mat-card-header> -->
