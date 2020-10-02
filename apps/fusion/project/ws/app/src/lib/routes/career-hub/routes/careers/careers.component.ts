@@ -27,5 +27,10 @@ export class CareersComponent implements OnInit {
       this.currentFilter = key
     }
   }
+  updateQuery(key: string) {
+    if (key) {
+
+    }
+  }
 
 }
