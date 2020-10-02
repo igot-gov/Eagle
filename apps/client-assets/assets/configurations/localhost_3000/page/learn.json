@@ -99,6 +99,39 @@
             "dimensions": {},
             "className": "new-box",
             "widget": {
+              "widgetType": "slider",
+              "widgetSubType": "sliderBanners",
+              "style": {
+                "border-radius": "12px",
+                "height": "600px"
+              },
+              "widgetData": [
+                {
+                  "banners": {
+                    "l": "assets/instances/eagle/banners/hubs/learning/l.png",
+                    "m": "assets/instances/eagle/banners/hubs/learning/m.png",
+                    "s": "assets/instances/eagle/banners/hubs/learning/s.png",
+                    "xl": "assets/instances/eagle/banners/hubs/learning/xl.png",
+                    "xs": "assets/instances/eagle/banners/hubs/learning/xs.png",
+                    "xxl": "assets/instances/eagle/banners/hubs/learning/xxl.png"
+                  },
+                  "redirectUrl": "/app/search/learning",
+                  "queryParams": {
+                    "q": "Salesforce",
+                    "lang": "en",
+                    "f": "{}"
+                  },
+                  "title": ""
+                }
+              ]
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "new-box",
+            "widget": {
               "widgetType": "card",
               "widgetSubType": "cardLearn",
               "widgetData": {}

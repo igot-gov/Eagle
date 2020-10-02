@@ -8,6 +8,11 @@
   min-height: 400px;
 }
 
+.container-balanced-banner {
+  @extend %page-center;
+  height: auto;
+}
+
 .flex-3 {
   flex: 3;
 }
