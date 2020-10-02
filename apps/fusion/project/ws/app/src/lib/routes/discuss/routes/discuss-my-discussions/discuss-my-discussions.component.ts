@@ -15,12 +15,16 @@ export class DiscussMyDiscussionsComponent implements OnInit {
   data!: NSDiscussData.IProfile // this is for user
   discussionList!: NSDiscussData.IPosts[] // this is for posts
   currentFilter = 'timestamp'
+  department!: string | null
+  location!: string | null
   constructor(private route: ActivatedRoute, private discussService: DiscussService) { }
 
   ngOnInit() {
     // this.fillDummyData()
     this.data = this.route.snapshot.data.profile.data
     this.discussionList = this.data.latestPosts
+    this.department = this.discussService.getUserProfile.departmentName || null
+    this.location = this.discussService.getUserProfile.country || null
   }
   filter(key: string | 'timestamp' | 'best' | 'saved' | 'watched' | 'upvoted' | 'downvoted') {
     if (key) {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { NSDiscussData } from '../models/discuss.model'
-import { ConfigurationsService } from 'library/ws-widget/utils/src/public-api'
+import { ConfigurationsService, NsUser } from 'library/ws-widget/utils/src/public-api'
 
 const API_ENDPOINTS = {
   getAllCategories: '/apis/protected/v8/discussionHub/categories',
@@ -13,7 +13,7 @@ const API_ENDPOINTS = {
   bookmarkPost: (pid: number) => `apis/protected/v8/discussionHub/writeApi/v2/posts/${pid}/bookmark`,
   recentPost: '/apis/protected/v8/discussionHub/topics/recent',
   popularPost: '/apis/protected/v8/discussionHub/topics/popular',
-  unread: '/apis/protected/v8/discussionHub/topics/unread',
+  unread: '/apis/protected/v8/discussionHub/topics/unread/total',
   getTopic: '/apis/protected/v8/discussionHub/topics/',
   profile: '/apis/protected/v8/discussionHub/users/me',
   listUpVote: (slug: string) => `/apis//protected/v8/discussionHub/users/${slug}/upvoted`,
@@ -31,6 +31,9 @@ export class DiscussService {
     this.usr = this.configSvc.userProfile
   }
 
+  get getUserProfile(): NsUser.IUserProfile {
+    return this.usr
+  }
   fetchAllCategories() {
     const categories = this.http.get(API_ENDPOINTS.getAllCategories)
       .toPromise()
@@ -92,7 +95,7 @@ export class DiscussService {
   fetchTopicById(topicId: number) {
     return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.getTopic + topicId.toString())
   }
-  fetchNotifications() {
+  fetchUnreadCOunt() {
     return this.http.get<any>(API_ENDPOINTS.unread)
   }
   fetchProfile() {
