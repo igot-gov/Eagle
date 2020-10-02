@@ -32,6 +32,7 @@ import { PipeFilterModule } from '@ws-widget/utils/src/lib/pipes/pipe-filter/pip
 import { CareersCardComponent } from './components/careers-card/careers-card.component'
 import { CareerDetailComponent } from './routes/career-detail/career-detail.component'
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component'
+import { WidgetResolverModule } from '@ws-widget/resolver'
 
 @NgModule({
   declarations: [CareersHomeComponent, CareersComponent, CareersCardComponent, CareerDetailComponent, RelatedPostsComponent],
@@ -61,6 +62,7 @@ import { RelatedPostsComponent } from './components/related-posts/related-posts.
     PipeOrderByModule,
     PipeFilterSearchModule,
     BtnPageBackModule,
+    WidgetResolverModule,
   ],
   providers: [
     LoaderService,

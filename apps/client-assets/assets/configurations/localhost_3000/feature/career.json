@@ -1,3 +1,22 @@
 {
-    "careersCategoryId": 1
+    "careersCategoryId": 1,
+    "banner": {
+        "widgetType": "slider",
+        "widgetSubType": "sliderBanners",
+        "style": {
+            "border-radius": "12px"
+        },
+        "widgetData": [
+            {
+                "banners": {
+                    "l": "assets/instances/eagle/banners/hubs/career/l.png",
+                    "m": "assets/instances/eagle/banners/hubs/career/m.png",
+                    "s": "assets/instances/eagle/banners/hubs/career/s.png",
+                    "xl": "assets/instances/eagle/banners/hubs/career/xl.png",
+                    "xs": "assets/instances/eagle/banners/hubs/career/xs.png",
+                    "xxl": "assets/instances/eagle/banners/hubs/career/xxl.png"
+                }
+            }
+        ]
+    }
 }

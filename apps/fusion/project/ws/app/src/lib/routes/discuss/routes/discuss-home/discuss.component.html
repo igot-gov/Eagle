@@ -1,6 +1,11 @@
 <ws-widget-btn-page-back [widgetData]="{ url: 'home',titles: titles }">
 </ws-widget-btn-page-back>
+
+<div *ngIf="currentRoute === 'home'" class="container-balanced-banner">
+  <ng-container [wsResolverWidget]="banner"></ng-container>
+</div>
 <mat-sidenav-container class="container-balanced" autosize name="discuss-menu">
+
   <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="border-0">
     <div class="contain">
       <app-discuss-left-menu [unseen]="unread"></app-discuss-left-menu>
