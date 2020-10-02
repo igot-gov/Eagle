@@ -58,22 +58,6 @@ mat-icon.downvoted {
   padding: 4px;
 }
 
-.filter {
-  .filter-option {
-    margin: $size-xs $size-m;
-    /* border-bottom: darkslateblue; */
-    border-radius: 0;
-    border-bottom-width: 2px;
-    border-top-width: 0;
-    border-left-width: 0;
-    border-right-width: 0;
-  }
-
-  .filter-option:first-child {
-    margin-left: 0;
-  }
-}
-
 .mat-card-header-text {
   margin-left: 0;
 }

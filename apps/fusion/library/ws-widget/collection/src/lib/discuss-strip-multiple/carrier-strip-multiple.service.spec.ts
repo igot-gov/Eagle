@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 
-import { ContentStripNewMultipleService } from './carrier-strip-multiple.service'
+import { ContentStripNewMultipleService } from './discuss-strip-multiple.service'
 
 describe('ContentStripNewMultipleService', () => {
   beforeEach(() => TestBed.configureTestingModule({}))

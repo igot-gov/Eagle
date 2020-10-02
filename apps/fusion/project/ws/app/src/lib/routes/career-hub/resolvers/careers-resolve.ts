@@ -10,22 +10,17 @@ import { NSDiscussData } from '../../discuss/models/discuss.model'
 @Injectable()
 export class CareerRecentResolve
   implements
-  Resolve<Observable<IResolveResponse<NSDiscussData.ICategoryData[]>> | IResolveResponse<NSDiscussData.ICategoryData[]>> {
+  Resolve<Observable<IResolveResponse<NSDiscussData.ICategoryData>> | IResolveResponse<NSDiscussData.ICategoryData>> {
   constructor(private discussionSvc: DiscussService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSDiscussData.ICategoryData[]>> {
-    // return route.data.subscribe(data => {
-    //   if (data && data.pageData) {
-        const categoryId = _route.data['careersCategoryId'] || 1
-        console.log('inside resolver - ', categoryId)
-        return this.discussionSvc.fetchSingleCategoryDetails(categoryId).pipe(
-          map(data => ({ data, error: null })),
-          catchError(error => of({ error, data: null })),
-        )
-    //   }
-    // })
+  ): Observable<IResolveResponse<NSDiscussData.ICategoryData>> {
+    const categoryId = _route.data['careersCategoryId'] || 1
+    return this.discussionSvc.fetchSingleCategoryDetails(categoryId).pipe(
+      map(data => ({ data, error: null })),
+      catchError(error => of({ error, data: null })),
+    )
   }
 }

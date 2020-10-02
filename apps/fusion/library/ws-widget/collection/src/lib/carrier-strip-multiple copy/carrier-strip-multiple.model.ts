@@ -1,22 +1,23 @@
-import { NsWidgetResolver } from '../discuss-strip-multiple/node_modules/@ws-widget/resolver'
-import { NSSearch } from '../_services/widget-search.model'
-import { NsContent } from '../_services/widget-content.model'
+import { NsWidgetResolver } from './node_modules/@ws-widget/resolver'
+// import { NSSearch } from '../_services/widget-search.model'
 import { NsCardContent } from '../card-content/card-content.model'
 
-export namespace NsContentStripMultiple {
-  export interface IContentStripMultiple {
+export namespace NsCarrierStripNewMultiple {
+  export interface ICarrierMultiple {
     errorWidget?: NsWidgetResolver.IRenderConfigWithAnyData
     loader?: boolean
     noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
-    strips: IContentStripUnit[]
+    strips: ICarrierStripUnit[]
     isChannelStrip?: boolean
   }
-  export interface IContentStripUnit {
+  export interface ICarrierStripUnit {
     key: string
     title: string
+    titleDescription?: string
     name?: string
     mode?: 'accordion'
     info?: IStripInfo
+    logo?: string
     preWidgets?: NsWidgetResolver.IRenderConfigWithAnyData[]
     postWidgets?: NsWidgetResolver.IRenderConfigWithAnyData[]
     stripConfig?: IStripConfig
@@ -24,11 +25,11 @@ export namespace NsContentStripMultiple {
     filters?: any[]
     selectAll?: boolean | null
     request?: {
-      search?: NSSearch.ISearchRequest
-      searchV6?: NSSearch.ISearchV6Request
-      searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
+      // search?: NSSearch.ISearchRequest
+      // searchV6?: NSSearch.ISearchV6Request
+      // searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
       api?: IStripRequestApi
-      ids?: string[]
+      // ids?: string[]
     }
     searchV6Type?: 'KB' | 'Collections' | 'searchQuery' | null
     stripBackground?: string
@@ -47,6 +48,7 @@ export namespace NsContentStripMultiple {
       sourceFields?: string
     }
   }
+
   export interface IStripInfo {
     mode: 'below' | 'popup' | 'modal'
     visibilityMode?: 'hidden' | 'visible'
@@ -58,24 +60,17 @@ export namespace NsContentStripMultiple {
     widget: NsWidgetResolver.IRenderConfigWithAnyData
   }
   interface IStripConfig {
-    // card subType key is used to determine the content Card display type
+    // card subType key is used to determine the Network Card display type
     cardSubType: NsCardContent.TCardSubType
     // to show view more card for a search strip
     postCardForSearch?: boolean
     intranetMode?: 'greyOut' | 'hide'
     deletedMode?: 'greyOut' | 'hide'
-    contentTags?: IContentTags
+    // contentTags?: IContentTags
   }
-
-  export interface IContentTags {
-    daysSpan?: number
-    excludeContentType?: NsContent.EContentTypes[]
-    excludeMimeType?: string[]
-    tag: string
-    criteriaField: string
-  }
-  export interface IContentStripResponseApi {
-    contents: NsContent.IContent[]
+  export interface INetworkStripResponseApi {
+    // contents: NsContent.IContent[]
+    contents: any
     hasMore?: boolean
     pageState?: string
     totalHits?: number

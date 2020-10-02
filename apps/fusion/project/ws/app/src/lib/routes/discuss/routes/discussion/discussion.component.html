@@ -147,12 +147,13 @@
           <ng-container *ngIf="post.replies.count == 1">
             <div class="flex flex-1 custom margin-0 margin-top-xl" >
               <div class="width-expand flex align-center">
-                <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
+                <!-- Disabled the user display of users avatars who replied -->
+                <!-- <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <ng-container *ngFor="let user of post?.replies?.users">
                     <ws-widget-avatar-photo [name]="user.fullname || user.username" size="s">
                     </ws-widget-avatar-photo>
                   </ng-container>
-                </div>
+                </div> -->
                 <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <span class="cursor-pointer"> 1 reply </span>
                   <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="post.replyCountToggle">
@@ -178,12 +179,13 @@
           <ng-container *ngIf="post.replies.count > 1">
             <div class="flex flex-1 custom margin-0 margin-top-xl" >
               <div class="width-expand flex align-center">
-                <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
+                <!-- Disabled the user display of users avatars who replied -->
+                <!-- <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <ng-container *ngFor="let user of post?.replies?.users">
                     <ws-widget-avatar-photo [name]="user.fullname || user.username" size="s" class="mr-2">
                     </ws-widget-avatar-photo>
                   </ng-container>
-                </div>
+                </div> -->
                 <div class="ml-2 flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <span class="cursor-pointer"> {{post.replies.count}} replies </span>
                   <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="post.replyCountToggle">

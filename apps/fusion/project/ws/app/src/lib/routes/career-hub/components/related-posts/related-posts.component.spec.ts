@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { RelatedPostsComponent } from './related-posts.component';
+import { RelatedPostsComponent } from './related-posts.component'
 
 describe('RelatedPostsComponent', () => {
-  let component: RelatedPostsComponent;
-  let fixture: ComponentFixture<RelatedPostsComponent>;
+  let component: RelatedPostsComponent
+  let fixture: ComponentFixture<RelatedPostsComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RelatedPostsComponent ]
+      declarations: [RelatedPostsComponent],
     })
-    .compileComponents();
-  }));
+      .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RelatedPostsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(RelatedPostsComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

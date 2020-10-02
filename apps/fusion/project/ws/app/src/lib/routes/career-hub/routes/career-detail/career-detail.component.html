@@ -8,8 +8,8 @@
             <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'">
               <mat-card-content class="margin-left-m mb-0-imp">
                 <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
+                <!-- <p class="post-content" [innerHTML]="post.content"> {{ post.content | pipeHtmlTagRemoval}}</p> -->
                 <p class="post-content"> {{ post.content | pipeHtmlTagRemoval}}</p>
-     
                 <div class="flex flex-1 margin-top-m">
                   <ng-container *ngIf="data && data.tags && data.tags.length > 0">
                     <span *ngFor="let tag of data.tags" class="tag ws-mat-primary-tags">

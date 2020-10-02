@@ -1,17 +1,19 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { NsCarrierStripNewMultiple } from './carrier-strip-multiple.model'
-import { ContentStripNewMultipleService } from './carrier-strip-multiple.service'
+import { NsCarrierStripNewMultiple } from './discuss-strip-multiple.model'
+import { ContentStripNewMultipleService } from './discuss-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
-// tslint:disable-next-line
-import _ from 'lodash'
 import {
   TFetchStatus,
   LoggerService,
+  // EventService,
+  // ConfigurationsService,
   UtilityService,
 } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
+// import { filter } from 'rxjs/operators'
+// import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
 
 interface IStripUnitContentData {
   key: string
@@ -64,7 +66,10 @@ export class CarrierStripMultipleComponent extends WidgetBaseComponent
     private contentStripSvc: ContentStripNewMultipleService,
     private contentSvc: WidgetContentService,
     private loggerSvc: LoggerService,
+    // private eventSvc: EventService,
+    // private configSvc: ConfigurationsService,
     protected utilitySvc: UtilityService,
+    // private searchServSvc: SearchServService,
   ) {
     super()
   }
@@ -93,6 +98,14 @@ export class CarrierStripMultipleComponent extends WidgetBaseComponent
       }
     }
   }
+
+  // private fetchStripFromKey(key: string, calculateParentStatus = true) {
+  //   const stripData = this.widgetData.strips.find(strip => strip.key === key)
+  //   if (stripData) {
+  //     this.fetchStripFromRequestData(stripData, calculateParentStatus)
+  //   }
+  // }
+
   private fetchStripFromRequestData(
     strip: NsCarrierStripNewMultiple.ICarrierStripUnit,
     calculateParentStatus = true,
@@ -102,11 +115,11 @@ export class CarrierStripMultipleComponent extends WidgetBaseComponent
   }
   fetchNetworkUsers(strip: NsCarrierStripNewMultiple.ICarrierStripUnit, calculateParentStatus: boolean) {
     if (strip.request && strip.request.api && Object.keys(strip.request.api).length) {
-      this.contentStripSvc.fetchCareerdata(strip.request.api.queryParams, strip.request.api.path).subscribe(
+      this.contentStripSvc.fetchNetworkUsers(strip.request.api.queryParams, strip.request.api.path).subscribe(
         results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.topics, strip),
+            this.transformContentsToWidgets(results.users, strip),
             'done',
             calculateParentStatus,
             null,
@@ -120,7 +133,7 @@ export class CarrierStripMultipleComponent extends WidgetBaseComponent
     contents: NsContent.IContent[],
     strip: NsCarrierStripNewMultiple.ICarrierStripUnit,
   ) {
-    return _.take(contents || [], 10).map((content, idx) => ({
+    return (contents.reverse() || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardHomeCarrier',
       widgetHostClass: 'mb-2',

@@ -82,7 +82,10 @@ export class CardNetworkComponent extends WidgetBaseComponent
     this.newPeopleSpinner = false
   }
   getAllDepartmentUsers() {
-    const departmentName = this.configurationsService.userProfile.departmentName
+    let departmentName = this.configurationsService.userProfile.departmentName
+    if (departmentName == null) {
+      departmentName = ''
+    }
     this.deptpeopleSpinner = true
     this.deptUserReq = {
       limit: 50,
