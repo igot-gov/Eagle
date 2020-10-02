@@ -36,7 +36,7 @@ interface IStripUnitContentData {
   } | null
 }
 @Component({
-  selector: 'ws-widget-carrier-strip-multiple',
+  selector: 'ws-widget-discuss-strip-multiple',
   templateUrl: './discuss-strip-multiple.component.html',
   styleUrls: ['./discuss-strip-multiple.component.scss'],
 })

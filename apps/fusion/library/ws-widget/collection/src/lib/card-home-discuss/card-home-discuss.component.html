@@ -1,4 +1,4 @@
-<mat-card class="discuss-card cursor-pointer">
+<mat-card class="discuss-home-card cursor-pointer mr-6">
   <mat-card-header>
     <mat-card-title>
       <h2 class="cursor-pointer f-medium">{{discuss.title}}</h2>
@@ -23,7 +23,7 @@
 
   </mat-card-actions> -->
   <mat-card-footer class="flex flex-1 custom margin-0">
-    <div class="flex flex-1 flex-row margin-left-xs">
+    <div class="flex flex-1 flex-row margin-left-l">
       <span class="flex margin-right-l mobile">
         <mat-icon class="cursor-pointer">import_export</mat-icon>
         <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }}</span>
@@ -33,7 +33,7 @@
         <span class="pad-4">{{discuss.viewcount || 0}}</span>
       </span>
     </div>
-    <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+    <div class="flex flex-1" class="cursor-pointer text-right mobile2 margin-right-s">
       <span class="noocoments ws-mat-default-text">{{((discuss.postcount || 1) -1) }}
         comments</span>
     </div>

@@ -309,7 +309,7 @@
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/discussionHub/categories/1",
+                        "path": "/apis/protected/v8/discussionHub/topics/recent",
                         "queryParams": {}
                       }
                     }
