@@ -344,7 +344,7 @@
                     },
                     "viewMoreUrl": {
                       "path": "/page/career",
-                      "viewMoreText": "Carrier",
+                      "viewMoreText": "Career",
                       "queryParams": {}
                     },
                     "filters": [],
