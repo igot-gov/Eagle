@@ -1,16 +1,17 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-$banner-min-height: 365px;
+$banner-min-height: 243px;
 
 .banner-container {
   // max-height: 442px;
-  // min-height: $banner-min-height;
+  min-height: $banner-min-height;
   overflow: hidden;
   position: relative;
   margin: auto;
   border-radius: 12px;
 }
+
 
 .banner-overlay {
   position: absolute;
@@ -40,9 +41,9 @@ $banner-min-height: 365px;
 
   .banner-image {
     width: 100%;
-    // min-height: $banner-min-height;
+    min-height: $banner-min-height;
     display: block;
-    // height: 350px;
+    height: 350px;
     border-radius: 12px;
   }
 }
@@ -142,4 +143,17 @@ $banner-min-height: 365px;
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
+}
+
+
+.banner-container-solo {
+  overflow: hidden;
+  margin: auto;
+  border-radius: 12px;
+}
+
+.banner-image-solo {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
 }
