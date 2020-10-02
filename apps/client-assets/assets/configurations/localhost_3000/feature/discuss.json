@@ -47,7 +47,7 @@
                 "enabled": false,
                 "uri": ""
             },
-            "enabled": true,
+            "enabled": false,
             "routerLink": "/app/discuss/leaderboard"
         },
         {
