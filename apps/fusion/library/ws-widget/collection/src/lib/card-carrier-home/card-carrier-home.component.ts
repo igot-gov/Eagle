@@ -18,6 +18,7 @@ export class CardCarrierHomeComponent extends WidgetBaseComponent implements OnI
   ngOnInit() {
     // this.filldummyData()
     if (this.widgetData && this.widgetData.content) {
+      // console.log(this.widgetData.content)
       this.carrier = ([this.widgetData.content] || []).map((d: any) => {
         return {
           title: d.title,

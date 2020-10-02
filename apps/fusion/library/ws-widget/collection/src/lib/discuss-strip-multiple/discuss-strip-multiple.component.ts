@@ -119,7 +119,7 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
         results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.users, strip),
+            this.transformContentsToWidgets(results.topics, strip),
             'done',
             calculateParentStatus,
             null,
