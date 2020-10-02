@@ -1,13 +1,14 @@
 <section class="flex">
-  <h3 class="mat-error text-center" *ngIf="!networkUser" i18n>
+  <!-- <h3 class="mat-error text-center" *ngIf="!networkUser" i18n>
     No Active User Info Available
-  </h3>
-  <ng-container [ngTemplateOutlet]="userIndividualNew" [ngTemplateOutletContext]="{ user: networkUser }">
+  </h3> -->
+  <ng-container *ngIf="networkUser && networkUser.personalDetails && networkUser.personalDetails.firstname"
+    [ngTemplateOutlet]="userIndividualNew" [ngTemplateOutletContext]="{ user: networkUser }">
   </ng-container>
-  <div class="text-center">
+  <!-- <div class="text-center">
     <mat-spinner [strokeWidth]="3" *ngIf="!networkUser" [diameter]="40" class="display-inline-block">
     </mat-spinner>
-  </div>
+  </div> -->
 
   <ng-template #userIndividualNew let-user="user">
     <mat-card class="network-card mr-6">

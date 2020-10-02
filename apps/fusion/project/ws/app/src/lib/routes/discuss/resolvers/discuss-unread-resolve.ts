@@ -16,7 +16,7 @@ export class DiscussUnreadResolve
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<any>> {
-    return this.discussionSvc.fetchNotifications().pipe(
+    return this.discussionSvc.fetchUnreadCOunt().pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

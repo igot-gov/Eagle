@@ -21,6 +21,7 @@ export class DiscussAllComponent implements OnInit {
   currentFilter = 'recent'
   trendingTags!: NSDiscussData.ITag[]
   discussionList!: NSDiscussData.IDiscussionData[]
+  unread: any
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -28,6 +29,7 @@ export class DiscussAllComponent implements OnInit {
   ) {
     this.trendingTags = this.route.snapshot.data.availableTags.data.tags
     this.discussionList = this.route.snapshot.data.recent.data.topics || []
+    this.unread = this.route.snapshot.data.unread
   }
   ngOnInit() {
     // this.fillDummyData()

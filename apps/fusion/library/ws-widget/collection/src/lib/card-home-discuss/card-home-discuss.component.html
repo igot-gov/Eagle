@@ -1,4 +1,4 @@
-<mat-card class="discuss-home-card cursor-pointer mr-6">
+<mat-card *ngIf="discuss && discuss.title" class="discuss-home-card cursor-pointer mr-6">
   <mat-card-header>
     <mat-card-title>
       <h2 class="cursor-pointer f-medium">{{discuss.title}}</h2>
