@@ -54,7 +54,7 @@
     }
   },
   "/assets/*": {
-    "target": "https://d136953gtttd92.cloudfront.net",
+    "target": "http://127.0.0.1:8080",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
