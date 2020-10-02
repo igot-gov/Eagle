@@ -62,7 +62,7 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
     PipeOrderByModule,
     PipeFilterSearchModule,
     BtnPageBackModule,
-    WidgetResolverModule
+    WidgetResolverModule,
   ],
   providers: [
     LoaderService,
