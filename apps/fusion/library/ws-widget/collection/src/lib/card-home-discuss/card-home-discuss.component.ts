@@ -4,6 +4,7 @@ import { DiscussService } from '@ws/app/src/lib/routes/discuss/services/discuss.
 
 /* tslint:disable */
 import _ from 'lodash'
+import { NSDiscuss } from './discuss.model'
 /* tslint:enable */
 @Component({
   selector: 'ws-widget-home-component',
@@ -13,7 +14,7 @@ import _ from 'lodash'
 })
 export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
-  homePageMaxLength = 4
+  discuss!: NSDiscuss.IDiscuss
   constructor(private discussService: DiscussService) {
     super()
   }
@@ -22,13 +23,30 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
   // starColorP: StarRatingColor = StarRatingColor.primary
   // starColorW: StarRatingColor = StarRatingColor.warn
   ngOnInit(): void {
-    this.fillPopular()
+    if (this.widgetData && this.widgetData.content) {
+      // console.log(this.widgetData.content)
+      this.discuss = ([this.widgetData.content] || []).map((d: any) => {
+        return {
+          title: d.title,
+          description: d.title,
+          category: d.category, // d.category.name
+          count: d.viewcount,
+          timeinfo: d.timestamp,
+          user: d.user,
+          upvotes: d.upvote,
+          downvotes: d.downvote,
+          tags: d.tags,
+          postcount: d.postcount,
+
+        }
+      })[0]
+    }
   }
 
   fillPopular() {
     this.discussService.fetchRecentD().subscribe(response => {
-      this.discussionList = _.get(response, 'topics')
-      this.discussionList.length = this.homePageMaxLength
+      this.discuss = _.get(response, 'topics')
+      // console.log(this.discuss)
     })
   }
 }

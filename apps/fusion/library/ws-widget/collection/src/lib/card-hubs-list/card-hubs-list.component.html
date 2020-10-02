@@ -8,7 +8,7 @@
         </span>
         <ng-container *ngIf="!visible && !isMobile">
           <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
-            <span class="mat-card-subtitle margin-0"> {{hub.hubname}}</span>
+            <span class="mat-card-subtitle margin-0 text-uppercase"> {{hub.hubname}}</span>
           </a>
         </ng-container>
 

@@ -36,7 +36,7 @@ interface IStripUnitContentData {
   } | null
 }
 @Component({
-  selector: 'ws-widget-carrier-strip-multiple',
+  selector: 'ws-widget-discuss-strip-multiple',
   templateUrl: './discuss-strip-multiple.component.html',
   styleUrls: ['./discuss-strip-multiple.component.scss'],
 })
@@ -119,7 +119,7 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
         results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.users, strip),
+            this.transformContentsToWidgets(results.topics, strip),
             'done',
             calculateParentStatus,
             null,
