@@ -27,8 +27,8 @@ public class Constants {
     }
 
     public static class ResponseStatus {
-        public static final String SUCCESSFUL = "SUCCESSFUL";
-        public static final String FAILED = "FAILED";
+        public static final String SUCCESSFUL = "Successful";
+        public static final String FAILED = "Failed";
         public static final String MESSAGE = "message";
         public static final String DATA = "data";
         public static final String STATUS = "status";
