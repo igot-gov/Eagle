@@ -58,6 +58,7 @@ public class NotificationService implements INotificationService {
             Map<String, Object> tagValues = new HashMap<>();
             tagValues.put(connectionProperties.getNotificationTemplateSender(), getUserName(fromUUID));
             tagValues.put(connectionProperties.getNotificationTemplateTargetUrl(), connectionProperties.getNotificationTemplateTargetUrlValue());
+            tagValues.put(connectionProperties.getNotificationTemplateStatus(), userConnection.getConnectionStatus());
 
             notificationEvent.setEventId(eventId);
             notificationEvent.setRecipients(recipients);
