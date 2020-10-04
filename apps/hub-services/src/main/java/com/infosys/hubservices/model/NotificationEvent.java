@@ -20,7 +20,7 @@ public class NotificationEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String rootOrg;
+    //private String rootOrg;
 
     @NotBlank
     @JsonProperty(value = "event-id")
@@ -34,13 +34,13 @@ public class NotificationEvent implements Serializable {
     @JsonProperty(value = "recipients")
     private Map<String, List<String>> recipients;
 
-    public String getRootOrg() {
-        return rootOrg;
-    }
-
-    public void setRootOrg(String rootOrg) {
-        this.rootOrg = rootOrg;
-    }
+//    public String getRootOrg() {
+//        return rootOrg;
+//    }
+//
+//    public void setRootOrg(String rootOrg) {
+//        this.rootOrg = rootOrg;
+//    }
 
     public String getEventId() {
         return eventId;
