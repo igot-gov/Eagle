@@ -24,11 +24,9 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class NotificationService implements INotificationService {
@@ -77,7 +75,11 @@ public class NotificationService implements INotificationService {
         try{
             Map<String, Object> profiles = profileService.findProfiles(Arrays.asList(uuid),null).getResult();
             if(profiles.size()>0){
-                JsonNode profilePersonalDetails =((ArrayNode)profiles.get(Constants.ResponseStatus.DATA)).get(0).get(Constants.Profile.PERSONAL_DETAILS);
+
+                ArrayNode dataNodes = mapper.convertValue(profiles.get(Constants.ResponseStatus.DATA), ArrayNode.class);
+                logger.info("dataNodes :-{}",dataNodes);
+
+                JsonNode profilePersonalDetails =dataNodes.get(0).get(Constants.Profile.PERSONAL_DETAILS);
                 fromName = profilePersonalDetails.get(Constants.Profile.FIRST_NAME).asText().concat(" ").concat(profilePersonalDetails.get(Constants.Profile.SUR_NAME).asText());
 
             } else {
