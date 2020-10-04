@@ -1792,6 +1792,51 @@ INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, u
 INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, updated_on, updated_by) VALUES ('igot', 'dopt', 'push', false, '4567', current_timestamp, '');
 
 
+------------------------------- Template to received connect requests-------------------------------------------------------------------------------------------------------------------
+INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('connect_request', 'author', '#from-connect-UUID,#targetUrl', NULL, current_timestamp, '', 'Information', NULL);
+
+INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('connect_request', 'author', 'en', 'Hub Member', 'Author', 'Some description', current_timestamp, '');
+
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('bb382eee-f747-11ea-adc1-0242ac110000', 'en', 'Recieved Connection request!',
+'<p>Hello,<br /> </p>
+<p>You received a connect request on the IGoT platform with the name #from-connect-UUID. For more please visit <a href="#targetUrl">here.</a></p>
+<p>Have a great day!</p>
+<br /> Regards,<br /> <br /> The IGoT Team</p>
+<p>&nbsp;</p>',
+current_timestamp, 'admin@eagle.com');
+
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('42d1b168-f748-11ea-adc1-0242ac110000', 'en', 'Recieved Connection request!', 'You recieved a connect request on the IGoT platform with the name #from-connect-UUID.', '2020-09-15 11:00:16.6', 'admin@eagle.com');
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'connect_request', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac110000', current_timestamp, 'admin@eagle.com', NULL);
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'connect_request', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac110000', current_timestamp, '', NULL);
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'connect_request', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac110000', current_timestamp, 'admin@eagle.com', NULL);
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'connect_request', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac110000', current_timestamp, '', NULL);
+
+
+------------------------------------------------ Template to receive action taken on connection request---------------------------------------------------------------------
+INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('connect_response', 'author', '#from-connect-UUID,#targetUrl', NULL, current_timestamp, '', 'Information', NULL);
+
+INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('connect_response', 'author', 'en', 'Hub Member', 'Author', 'Some description', current_timestamp, '');
+
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('bb382eee-f747-11ea-adc1-0242ac220000', 'en', 'Received Connection response!',
+'<p>Hello,<br /> </p>
+<p>Your connect request on the IGoT platform is #status from the name #from-connect-UUID. For more please visit <a href="#targetUrl">here.</a></p>
+<br /> Regards,<br /> <br /> The IGoT Team</p>
+<p>&nbsp;</p>',
+current_timestamp, 'admin@eagle.com');
+
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('42d1b168-f748-11ea-adc1-0242ac220000', 'en', 'Received Connection response!', 'Your connect request on the IGoT platform is #status from the name #from-connect-UUID.', '2020-09-15 11:00:16.6', 'admin@eagle.com');
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'connect_response', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac220000', current_timestamp, 'admin@eagle.com', NULL);
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'connect_response', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac220000', current_timestamp, '', NULL);
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'connect_response', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac220000', current_timestamp, 'admin@eagle.com', NULL);
+
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'connect_response', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac220000', current_timestamp, '', NULL);
 
 
 
