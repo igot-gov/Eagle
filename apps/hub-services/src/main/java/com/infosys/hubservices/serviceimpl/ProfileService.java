@@ -43,6 +43,7 @@ public class ProfileService implements IProfileService {
     ConnectionService connectionService;
 
 
+
     @Override
     public Response findCommonProfile(String userId, int offset, int limit) {
 

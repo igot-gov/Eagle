@@ -7,9 +7,12 @@
 
 package com.infosys.hubservices.serviceimpl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.infosys.hubservices.exception.ApplicationServiceError;
 import com.infosys.hubservices.model.NotificationEvent;
+import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
 import com.infosys.hubservices.util.ConnectionProperties;
@@ -21,6 +24,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +40,9 @@ public class NotificationService implements INotificationService {
     @Autowired
     ConnectionProperties connectionProperties;
 
+    @Autowired
+    private ProfileService profileService;
+
     @Override
     public NotificationEvent buildEvent(String eventId, UserConnection userConnection) {
 
@@ -49,8 +56,9 @@ public class NotificationService implements INotificationService {
             List<String> toList = Arrays.asList(userConnection.getUserConnectionPrimarykey().getConnectionId());
             recipients.put(connectionProperties.getNotificationTemplateReciepient(), toList);
 
+            //values in body of notification template
             Map<String, Object> tagValues = new HashMap<>();
-            tagValues.put(connectionProperties.getNotificationTemplateSender(), fromUUID);
+            tagValues.put(connectionProperties.getNotificationTemplateSender(), getUserName(fromUUID));
             tagValues.put(connectionProperties.getNotificationTemplateTargetUrl(), connectionProperties.getNotificationTemplateTargetUrlValue());
 
             notificationEvent.setEventId(eventId);
@@ -61,6 +69,27 @@ public class NotificationService implements INotificationService {
         }
         return notificationEvent;
 
+    }
+
+    private String getUserName(String uuid){
+
+        String fromName = null;
+        try{
+            Map<String, Object> profiles = profileService.findProfiles(Arrays.asList(uuid),null).getResult();
+            if(profiles.size()>0){
+                JsonNode profilePersonalDetails =((ArrayNode)profiles.get(Constants.ResponseStatus.DATA)).get(0).get(Constants.Profile.PERSONAL_DETAILS);
+                fromName = profilePersonalDetails.get(Constants.Profile.FIRST_NAME).asText().concat(" ").concat(profilePersonalDetails.get(Constants.Profile.SUR_NAME).asText());
+
+            } else {
+                fromName = Constants.Profile.HUB_MEMBER;
+            }
+        }catch (Exception e){
+            logger.error("Profile name could not be extracted :-{}",e.getMessage());
+            fromName = Constants.Profile.HUB_MEMBER;
+
+        }
+
+        return fromName;
     }
 
     @Override

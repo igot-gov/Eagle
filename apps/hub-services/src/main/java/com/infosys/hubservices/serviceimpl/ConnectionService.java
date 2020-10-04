@@ -33,9 +33,6 @@ public class ConnectionService implements IConnectionService {
     private UserConnectionRepository userConnectionRepository;
 
     @Autowired
-    private ProfileService profileService;
-
-    @Autowired
     private NotificationService notificationService;
 
     @Autowired

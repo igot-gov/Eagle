@@ -40,5 +40,13 @@ public class Constants {
 
     }
 
+    public static class Profile {
+        public static final String FIRST_NAME = "firstname";
+        public static final String SUR_NAME = "surname";
+        public static final String PERSONAL_DETAILS = "personalDetails";
+        public static final String HUB_MEMBER = "Hub member";
+
+    }
+
 
 }
