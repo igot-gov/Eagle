@@ -22,6 +22,7 @@ public class Constants {
     public static class Message {
         public static final String FAILED_CONNECTION = "Failed user connections:-";
         public static final String USER_ID_INVALID = "user_id cant be null or empty";
+        public static final String ROOT_ORG_INVALID = "rootOrg cant be null or empty";
         public static final String SENT_NOTIFICATION_ERROR ="Notification event send error occurred: ";
         public static final String SENT_NOTIFICATION_SUCCESS ="Notification event send : ";
     }
@@ -32,6 +33,11 @@ public class Constants {
         public static final String MESSAGE = "message";
         public static final String DATA = "data";
         public static final String STATUS = "status";
+    }
+
+    public static class Parmeters {
+        public static final String ROOT_ORG = "rootOrg";
+
     }
 
 

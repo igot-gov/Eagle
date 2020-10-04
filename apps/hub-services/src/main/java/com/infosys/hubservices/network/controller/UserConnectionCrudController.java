@@ -44,7 +44,7 @@ public class UserConnectionCrudController {
                                            @RequestHeader String userId, @RequestHeader String connectionId) {
 
         //mark status as rejected
-        Response response = connectionService.delete(userId, connectionId);
+        Response response = connectionService.delete(rootOrg, userId, connectionId);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

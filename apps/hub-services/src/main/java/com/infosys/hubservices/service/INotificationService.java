@@ -28,7 +28,7 @@ public interface INotificationService {
      * @param notificationEvent
      * @return
      */
-    ResponseEntity postEvent(NotificationEvent notificationEvent);
+    ResponseEntity postEvent(String rootOrg,NotificationEvent notificationEvent);
 
 
 }

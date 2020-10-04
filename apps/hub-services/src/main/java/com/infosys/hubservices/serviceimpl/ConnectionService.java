@@ -42,11 +42,11 @@ public class ConnectionService implements IConnectionService {
     private ConnectionProperties connectionProperties;
 
     @Override
-    public Response add(String roorOrg, ConnectionRequest request){
+    public Response add(String rootOrg, ConnectionRequest request){
         Response response = new Response();
         try {
 
-            UserConnectionPrimarykey pk = new UserConnectionPrimarykey(roorOrg, request.getUserId(), request.getConnectionId());
+            UserConnectionPrimarykey pk = new UserConnectionPrimarykey(rootOrg, request.getUserId(), request.getConnectionId());
             UserConnection userConnection = new UserConnection(pk, Constants.Status.PENDING, "", new Date());
             userConnectionRepository.save(userConnection);
 
@@ -54,7 +54,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
             if(connectionProperties.isNotificationEnabled())
-                sendNotification(connectionProperties.getNotificationTemplateRequest(), userConnection);
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(), userConnection);
 
 
 
@@ -81,7 +81,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
             if(connectionProperties.isNotificationEnabled())
-                sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
+                sendNotification(roorOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
 
         } catch (Exception e){
             throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
@@ -92,7 +92,7 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response delete(String userId, String connectionId) {
+    public Response delete(String rootOrg, String userId, String connectionId) {
         Response response = new Response();
         try {
 
@@ -105,7 +105,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
             if(connectionProperties.isNotificationEnabled())
-                sendNotification(connectionProperties.getNotificationTemplateResponse(), userConnection);
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
 
 
         } catch (Exception e){
@@ -117,9 +117,9 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public void sendNotification(String eventId, UserConnection userConnection) {
+    public void sendNotification(String rootOrg, String eventId, UserConnection userConnection) {
         NotificationEvent event = notificationService.buildEvent(eventId, userConnection);
-        notificationService.postEvent(event);
+        notificationService.postEvent(rootOrg, event);
     }
 
     @Override

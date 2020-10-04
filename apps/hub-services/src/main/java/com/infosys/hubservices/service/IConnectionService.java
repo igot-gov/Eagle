@@ -15,11 +15,11 @@ public interface IConnectionService {
 
     /**
      * Creates a connection
-     * @param roorOrg
+     * @param rootOrg
      * @param request
      * @return
      */
-    Response add(String roorOrg, ConnectionRequest request);
+    Response add(String rootOrg, ConnectionRequest request);
 
     /**
      * To update the status and dates of connection
@@ -35,7 +35,7 @@ public interface IConnectionService {
      * @param connectionId
      * @return
      */
-    Response delete(String userId, String connectionId);
+    Response delete(String rootOrg, String userId, String connectionId);
 
 
     Response findRecommendedConnection(ConnectionRequest request);
@@ -67,10 +67,11 @@ public interface IConnectionService {
     /**
      * Send notification
      *
-     * @param userId
+     * @param rootOrg
+     * @param eventId
      * @param userConnection
      */
-    void sendNotification(String eventId, UserConnection userConnection);
+    void sendNotification(String rootOrg, String eventId, UserConnection userConnection);
 
 
 

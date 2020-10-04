@@ -8,6 +8,7 @@
 package com.infosys.hubservices.serviceimpl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.hubservices.exception.ApplicationServiceError;
 import com.infosys.hubservices.model.NotificationEvent;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
@@ -16,10 +17,7 @@ import com.infosys.hubservices.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -66,7 +64,10 @@ public class NotificationService implements INotificationService {
     }
 
     @Override
-    public ResponseEntity postEvent(NotificationEvent notificationEvent) {
+    public ResponseEntity postEvent(String rootOrg, NotificationEvent notificationEvent) {
+        if(rootOrg == null || rootOrg.isEmpty()){
+            throw new ApplicationServiceError(Constants.Message.ROOT_ORG_INVALID);
+        }
 
         ResponseEntity<?> response = null;
         try {
@@ -74,7 +75,9 @@ public class NotificationService implements INotificationService {
 
             final String uri = connectionProperties.getNotificationIp().concat(connectionProperties.getNotificationEventEndpoint());
             RestTemplate restTemplate = new RestTemplate();
-            HttpEntity<NotificationEvent> request = new HttpEntity<>(notificationEvent);
+            HttpHeaders headers = new HttpHeaders();
+            headers.set(Constants.Parmeters.ROOT_ORG, rootOrg);
+            HttpEntity request = new HttpEntity<>(notificationEvent, headers);
             response = restTemplate.exchange(uri, HttpMethod.POST, request, String.class);
 
             logger.info(Constants.Message.SENT_NOTIFICATION_SUCCESS, response.getStatusCode());
