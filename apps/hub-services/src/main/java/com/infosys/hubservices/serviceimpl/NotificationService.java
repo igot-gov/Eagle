@@ -7,6 +7,7 @@
 
 package com.infosys.hubservices.serviceimpl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.hubservices.model.NotificationEvent;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
@@ -31,6 +32,8 @@ import java.util.Map;
 public class NotificationService implements INotificationService {
 
     private Logger logger = LoggerFactory.getLogger(NotificationService.class);
+    @Autowired
+    private ObjectMapper mapper;
 
     @Autowired
     ConnectionProperties connectionProperties;
@@ -67,6 +70,8 @@ public class NotificationService implements INotificationService {
 
         ResponseEntity<?> response = null;
         try {
+            logger.info("notification event -> {}", mapper.writeValueAsString(notificationEvent));
+
             final String uri = connectionProperties.getNotificationIp().concat(connectionProperties.getNotificationEventEndpoint());
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<NotificationEvent> request = new HttpEntity<>(notificationEvent);
@@ -75,7 +80,8 @@ public class NotificationService implements INotificationService {
             logger.info(Constants.Message.SENT_NOTIFICATION_SUCCESS, response.getStatusCode());
 
         } catch (Exception e) {
-            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR, e.getMessage());
+            e.printStackTrace();
+            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR + e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
