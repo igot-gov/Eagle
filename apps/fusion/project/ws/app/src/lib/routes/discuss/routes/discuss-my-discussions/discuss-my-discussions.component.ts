@@ -24,7 +24,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
   ngOnInit() {
     // this.fillDummyData()
     this.data = this.route.snapshot.data.profile.data
-    this.discussionList = _.uniqBy(this.data.latestPosts, 'title')
+    this.discussionList = _.uniqBy(this.data.latestPosts, 'tid')
     this.department = this.discussService.getUserProfile.departmentName || null
     this.location = this.discussService.getUserProfile.country || null
   }
@@ -33,15 +33,15 @@ export class DiscussMyDiscussionsComponent implements OnInit {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = this.data.latestPosts
+          this.discussionList = _.uniqBy(this.data.latestPosts, 'tid')
           break
         case 'best':
-          this.discussionList = this.data.bestPosts
+          this.discussionList = _.uniqBy(this.data.bestPosts, 'tid')
           break
         case 'saved':
           this.discussService.fetchSaved().subscribe(response => {
             if (response) {
-              this.discussionList = response.posts
+              this.discussionList = _.uniqBy(response.posts, 'tid')
             } else {
               this.discussionList = []
             }
@@ -57,7 +57,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
         case 'upvoted':
           this.discussService.fetchUpvoted().subscribe(response => {
             if (response) {
-              this.discussionList = response.posts
+              this.discussionList = _.uniqBy(response.posts, 'tid')
             } else {
               this.discussionList = []
             }
@@ -71,7 +71,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
         case 'downvoted':
           this.discussService.fetchDownvoted().subscribe(response => {
             if (response) {
-              this.discussionList = response.posts
+              this.discussionList = _.uniqBy(response.posts, 'tid')
             } else {
               this.discussionList = []
             }
@@ -82,7 +82,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
             })
           break
         default:
-          this.discussionList = this.data.latestPosts
+          this.discussionList = _.uniqBy(this.data.latestPosts, 'tid')
           break
       }
     }
