@@ -21,21 +21,21 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class MyActivitiesController {
 
-	@Autowired
-	private MyActivities myActivities;
+    @Autowired
+    private MyActivities myActivities;
 
 
-	@GetMapping("/v1/activities/user/{userId}")
-	public ResponseEntity<Map<String, Object>> getMyActivities(@RequestHeader("rootOrg") String rootOrg,
-															   @PathVariable("userId") String userId) throws Exception {
+    @GetMapping("/v1/activities/user/{userId}")
+    public ResponseEntity<Map<String, Object>> getMyActivities(@RequestHeader("rootOrg") String rootOrg,
+                                                               @PathVariable("userId") String userId) throws Exception {
 
 
-		Map<String, Object> response = new HashMap<>();
-		response.put(Constants.LearningHistory.CONTENT_COUNT, myActivities.countUserLearningHistory(rootOrg, userId));
-		response.put(Constants.Badges.CERTIFICATE_COUNT, myActivities.countUserBadges(rootOrg, userId));
-		response.put(Constants.LearningHistory.TOTAL_DURATION, myActivities.userTimeSpentOnTraning(rootOrg, userId));
-		response.put(Constants.TimeSpent.DAILY_TIME_SPENT, myActivities.userTimeSpentOnPlatform(rootOrg, userId));
+        Map<String, Object> response = new HashMap<>();
+        response.put(Constants.LearningHistory.CONTENT_COUNT, myActivities.countUserLearningHistory(rootOrg, userId));
+        response.put(Constants.Badges.CERTIFICATE_COUNT, myActivities.countUserBadges(rootOrg, userId));
+        response.put(Constants.LearningHistory.TOTAL_DURATION, myActivities.userTimeSpentOnTraning(rootOrg, userId));
+        response.put(Constants.TimeSpent.DAILY_TIME_SPENT, myActivities.userTimeSpentOnPlatform(rootOrg, userId));
 
-		return new ResponseEntity(response, HttpStatus.OK);
-	}
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
 }

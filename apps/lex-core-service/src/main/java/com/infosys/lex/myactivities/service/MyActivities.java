@@ -17,10 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
-public class MyActivities implements IMyActivities{
+public class MyActivities implements IMyActivities {
 
     @Autowired
     private UserBadgeRepository userBadgeRepository;
@@ -53,15 +54,16 @@ public class MyActivities implements IMyActivities{
     public Long userTimeSpentOnTraning(String rootOrg, String userId) {
 
         List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
-        List<String> courseIds = continueLearningMVS.stream().map(mv->mv.getResourceId()).collect(Collectors.toList());
+        List<String> courseIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
         List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, courseIds);
 
-        Long totolDuration = new Long(0);
-        for(ContentProgressModel model:progress){
+        Long totalDuration = new Long(0);
+        for (ContentProgressModel model : progress) {
 
-            totolDuration = totolDuration + (model.getLastAccessedOn().getTime() - model.getFirstAccessedOn().getTime());
+            long diff = model.getLastAccessedOn().getTime() - model.getFirstAccessedOn().getTime();
+            totalDuration = totalDuration + TimeUnit.MILLISECONDS.toHours(diff);
 
         }
-        return totolDuration;
+        return totalDuration;
     }
 }
