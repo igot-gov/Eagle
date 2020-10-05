@@ -18,12 +18,12 @@ export class AvatarPhotoComponent implements OnInit {
   public circleColor!: string
 
   private colors = [
-    '#EB7181', // red
+    // '#EB7181', // red
     '#468547', // green
-    '#000000', // black
-    '#3670B2', // blue
-    '#4E9E87',
-    '#7E4C8D',
+    // '#000000', // black
+    // '#3670B2', // blue
+    // '#4E9E87',
+    // '#7E4C8D',
   ]
 
   ngOnInit() {

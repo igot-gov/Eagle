@@ -8,18 +8,29 @@
 
 <ng-template #userIndividualNew let-user="user">
   <mat-card class="network-card mr-6">
+    <mat-card-header>
+      <ws-widget-avatar-photo mat-card-avatar [name]="getUserFullName(user)" [size]="'m'" [photoUrl]="">
+      </ws-widget-avatar-photo>
+      <mat-card-title>
+        {{
+             { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
+          }}
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span class="text-capitalize">{{ user.employmentDetails.departmentName }}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content class="content">
-      <div class="unit-cohort sm:pr-8 md:pr-10">
-        <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
-        <div class="width-expand padding-left-xs">
-          <div class="mat-body-strong cohorts-name">
-            {{
+      <!-- <div class="unit-cohort sm:pr-8 md:pr-10">
+          <ws-widget-avatar-photo [name]="getUserFullName(user)" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
+          <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
+            <div class="mat-body-strong cohorts-name">
+              {{
             { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
           }}
           </div>
-          <div class="mat-caption cohorts-desc">{{ user.employmentDetails.departmentName }}</div>
-        </div>
-      </div>
+        </div> -->
+      <span class=min100h></span>
     </mat-card-content>
     <mat-card-actions>
       <mat-divider></mat-divider>

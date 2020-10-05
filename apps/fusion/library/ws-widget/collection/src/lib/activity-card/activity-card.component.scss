@@ -1,3 +1,6 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
 .activity-card {
   min-width: 240px !important;
   max-width: 240px !important;
@@ -29,6 +32,13 @@
   margin-left: 0.5rem;
   margin-bottom: 1rem;
   display: inline-block;
+
+  @include breakpoint-xs {
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+  }
 
 }
 

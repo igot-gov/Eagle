@@ -157,13 +157,18 @@ mat-grid-list {
   border-radius: 8px;
 }
 
+.min100h {
+  min-height: 100px;
+  display: block;
+}
+
 .cohorts-head {
   padding: $size-xs $size-l;
   margin: 0;
   background: #fff !important;
   border-radius: 8px 8px 0 0;
   color: #222222 !important;
-  font: 18px/30px Poppins-Medium;
+  // font: 18px/30px Poppins-Medium;
 }
 
 .unit-cohort {
@@ -184,7 +189,7 @@ mat-grid-list {
   color: #5f5f5f;
   font-size: 0.9rem;
   font-weight: normal;
-  font-family: Poppins-regular;
+  // font-family: Poppins-regular;
 }
 
 .cohortSection {

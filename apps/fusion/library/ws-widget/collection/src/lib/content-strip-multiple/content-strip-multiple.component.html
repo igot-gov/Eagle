@@ -41,7 +41,7 @@
                 <!-- viewAll -->
                 <div
                   *ngIf="widgetData.strips[0].viewMoreUrl && stripsResultDataMap[key] && stripsResultDataMap[key].widgets && stripsResultDataMap[key].widgets.length >=4"
-                  class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all">
+                  class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
                   <a mat-button [routerLink]="widgetData.strips[0]?.viewMoreUrl?.path"
                     [queryParams]="widgetData.strips[0]?.viewMoreUrl?.queryParams">
                     <span i18n>SEE ALL</span>
