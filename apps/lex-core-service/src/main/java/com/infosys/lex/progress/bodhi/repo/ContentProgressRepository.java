@@ -41,6 +41,16 @@ public interface ContentProgressRepository extends
 			List<String> contentIds);
 
 	/**
+	 * find all progress for all content ids
+	 * @param rootOrg
+	 * @param userId
+	 * @param contentIds
+	 * @return
+	 */
+	@Query("select * from user_content_progress where root_org=?0 and user_id=?1 and content_id in ?2")
+	public List<ContentProgressModel> findProgress(String rootOrg, String userId, List<String> contentIds);
+
+	/**
 	 * fetches the progress for all
 	 * 
 	 * @param userId

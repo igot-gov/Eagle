@@ -9,12 +9,17 @@ package com.infosys.lex.myactivities.service;
 
 import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
 import com.infosys.lex.continuelearning.bodhi.repo.ContinueLearningMVRepository;
+import com.infosys.lex.continuelearning.entities.ContinueLearningMV;
 import com.infosys.lex.myactivities.repo.UserTimeSpentRepository;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
+@Service
 public class MyActivities implements IMyActivities{
 
     @Autowired
@@ -29,24 +34,34 @@ public class MyActivities implements IMyActivities{
     @Autowired
     private UserTimeSpentRepository userTimeSpentRepository;
 
-
     @Override
-    public Map<String, Object> countUserLearningHistory(String rootOrg, String userId) {
-        return null;
+    public Integer countUserLearningHistory(String rootOrg, String userId) {
+        return continueLearningMVRepository.countByRootOrgAndUserId(rootOrg, userId);
     }
 
     @Override
-    public Map<String, Object> countUserBadges(String rootOrg, String userId) {
-        return null;
+    public Integer countUserBadges(String rootOrg, String userId) {
+        return userBadgeRepository.countForCompleted(rootOrg, userId);
     }
 
     @Override
-    public Map<String, Object> userTimeSpentOnPlatform(String rootOrg, String userId) {
-        return null;
+    public Double userTimeSpentOnPlatform(String rootOrg, String userId) {
+        return userTimeSpentRepository.avgTimeSpentByRootOrgAndUserId(rootOrg, userId);
     }
 
     @Override
-    public Map<String, Object> userTimeSpentOnTraning(String rootOrg, String userId) {
-        return null;
+    public Long userTimeSpentOnTraning(String rootOrg, String userId) {
+
+        List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
+        List<String> courseIds = continueLearningMVS.stream().map(mv->mv.getResourceId()).collect(Collectors.toList());
+        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, courseIds);
+
+        Long totolDuration = new Long(0);
+        for(ContentProgressModel model:progress){
+
+            totolDuration = totolDuration + (model.getLastAccessedOn().getTime() - model.getFirstAccessedOn().getTime());
+
+        }
+        return totolDuration;
     }
 }

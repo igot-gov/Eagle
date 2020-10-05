@@ -11,12 +11,12 @@ import java.util.Map;
 
 public interface IMyActivities {
 
-    public Map<String, Object> countUserLearningHistory(String rootOrg, String userId);
+    public Integer countUserLearningHistory(String rootOrg, String userId);
 
-    public Map<String, Object> countUserBadges(String rootOrg, String userId);
+    public Integer countUserBadges(String rootOrg, String userId);
 
-    public Map<String, Object> userTimeSpentOnPlatform(String rootOrg, String userId);
+    public Double userTimeSpentOnPlatform(String rootOrg, String userId);
 
-    public Map<String, Object> userTimeSpentOnTraning(String rootOrg, String userId);
+    public Long userTimeSpentOnTraning(String rootOrg, String userId);
 
 }

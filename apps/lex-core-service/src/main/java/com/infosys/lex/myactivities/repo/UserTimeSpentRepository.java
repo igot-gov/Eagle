@@ -18,4 +18,7 @@ public interface UserTimeSpentRepository extends CassandraRepository<UserTimeSpe
     @Query("select * from daily_time_spent where root_org=?0 and user_id=?1 allow filtering;")
     public List<UserTimeSpentModel> findByRootOrgAndUserId(String rootOrg, String userId);
 
+    @Query("select avg(time_spent) from daily_time_spent where root_org=?0 and user_id=?1 allow filtering;")
+    public Double avgTimeSpentByRootOrgAndUserId(String rootOrg, String userId);
+
 }

@@ -64,4 +64,7 @@ public interface UserBadgeRepository
 	 */
 	@Query("select * from user_badges where root_org=?0 and user_id=?1 and received_count>0 and progress= 100 allow filtering;")
 	public List<Map<String, Object>> findByRootOrgAndUserIdAndReceivedCountAndProgress(String rootOrg, String userId);
+
+	@Query("select count(badge_id) from user_badges where root_org=?0 and user_id=?1 and received_count>0 and progress= 100 allow filtering;")
+	public int countForCompleted(String rootOrg, String userId);
 }
