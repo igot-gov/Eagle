@@ -48,15 +48,10 @@
                 <span class="pad-4">{{data.viewcount}} views</span>
               </span>
               <span class="flex mobile">
-<<<<<<< HEAD
-                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">bookmark
-                </mat-icon>
+                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">
+                  bookmark_border</mat-icon>
                 <mat-icon *ngIf="data.posts[0].bookmarked" class="cursor-pointer ws-mat-accent-text"
                   (click)="unBookMark(post)">bookmark</mat-icon>
-=======
-                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">bookmark_border</mat-icon>
-                <mat-icon *ngIf="data.posts[0].bookmarked" class="cursor-pointer ws-mat-accent-text" (click)="unBookMark(post)">bookmark</mat-icon>
->>>>>>> pre-hubs
               </span>
             </div>
             <div class="flex flex-1" class="cursor-pointer  mobile2">
@@ -73,16 +68,10 @@
               <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
                 [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
               </ws-widget-ck-editor> -->
-<<<<<<< HEAD
               <mat-form-field appearance="outline" class="flex-1 w-full"
                 [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
                 <textarea matInput formControlName="answer" #answer cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                  cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30" [required]="true"></textarea>
-=======
-              <mat-form-field appearance="outline" class="flex-1 w-full" [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
-                <textarea matInput formControlName="answer" #answer cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
->>>>>>> pre-hubs
+                  cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
                 <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
                   This is mandatory
                 </mat-error>
@@ -124,17 +113,11 @@
         <mat-card-header class="mb-5 comment-section align-center">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
-<<<<<<< HEAD
           <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
             [innerHTML]="post.user.fullname"></span>
           <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
             [innerHTML]="post.user.username"></span>
-          <span class="posttime">{{ post.timestamp | date}}</span>
-=======
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname" [innerHTML]="post.user.fullname"></span>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname" [innerHTML]="post.user.username"></span>
           <span class="posttime">{{ post.timestamp | date: 'dd MMM yyyy hh:mm a'}}</span>
->>>>>>> pre-hubs
         </mat-card-header>
         <mat-card-content>
           <p [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
