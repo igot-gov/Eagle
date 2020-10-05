@@ -1,12 +1,12 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { DiscussUtilsService } from './discuss-utils.service';
+import { DiscussUtilsService } from './discuss-utils.service'
 
 describe('DiscussUtilsService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({}))
 
   it('should be created', () => {
-    const service: DiscussUtilsService = TestBed.get(DiscussUtilsService);
-    expect(service).toBeTruthy();
-  });
-});
+    const service: DiscussUtilsService = TestBed.get(DiscussUtilsService)
+    expect(service).toBeTruthy()
+  })
+})
