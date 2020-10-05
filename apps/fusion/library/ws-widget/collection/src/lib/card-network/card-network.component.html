@@ -101,7 +101,7 @@
   <ng-template #searchUserTemplate let-user="user">
     <div class="unit-cohort sm:pr-8 md:pr-10">
       <ws-widget-avatar-photo [name]="'JJ'" [size]="'m'" [photoUrl]=""></ws-widget-avatar-photo>
-      <div (click)="goToUserProfile(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
+      <div (click)="goToUserProfileForSearch(user)" [ngClass]="{'cursor-pointer': enablePeopleSearch}"
         class="width-expand padding-left-xs">
         <div class="mat-body-strong cohorts-name">
           {{
