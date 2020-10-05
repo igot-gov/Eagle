@@ -10,7 +10,7 @@ package com.infosys.lex.myactivities.service;
 import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
 import com.infosys.lex.continuelearning.bodhi.repo.ContinueLearningMVRepository;
 import com.infosys.lex.continuelearning.entities.ContinueLearningMV;
-import com.infosys.lex.myactivities.repo.UserTimeSpentRepository;
+import com.infosys.lex.myactivities.bodhi.repo.UserTimeSpentRepository;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;

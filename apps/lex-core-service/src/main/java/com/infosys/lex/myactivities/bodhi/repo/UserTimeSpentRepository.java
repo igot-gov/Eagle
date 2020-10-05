@@ -5,14 +5,15 @@
  *
  */
 
-package com.infosys.lex.myactivities.repo;
+package com.infosys.lex.myactivities.bodhi.repo;
 
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
+@Repository
 public interface UserTimeSpentRepository extends CassandraRepository<UserTimeSpentModel, UserTimeSpentPrimaryKey> {
 
     @Query("select * from daily_time_spent where root_org=?0 and user_id=?1 allow filtering;")

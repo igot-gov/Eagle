@@ -5,7 +5,7 @@
  *
  */
 
-package com.infosys.lex.myactivities.repo;
+package com.infosys.lex.myactivities.bodhi.repo;
 
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
@@ -15,17 +15,17 @@ import org.springframework.data.cassandra.core.mapping.Table;
 public class UserTimeSpentModel {
 
     @PrimaryKey
-    private UserTimeSpentPrimaryKey primaryKey;
+    private UserTimeSpentPrimaryKey userTimeSpentPrimaryKey;
 
     @Column("time_spent")
     private Double timeSpent;
 
-    public UserTimeSpentPrimaryKey getPrimaryKey() {
-        return primaryKey;
+    public UserTimeSpentPrimaryKey getUserTimeSpentPrimaryKey() {
+        return userTimeSpentPrimaryKey;
     }
 
-    public void setPrimaryKey(UserTimeSpentPrimaryKey primaryKey) {
-        this.primaryKey = primaryKey;
+    public void setUserTimeSpentPrimaryKey(UserTimeSpentPrimaryKey userTimeSpentPrimaryKey) {
+        this.userTimeSpentPrimaryKey = userTimeSpentPrimaryKey;
     }
 
     public Double getTimeSpent() {
@@ -33,6 +33,14 @@ public class UserTimeSpentModel {
     }
 
     public void setTimeSpent(Double timeSpent) {
+        this.timeSpent = timeSpent;
+    }
+
+    public UserTimeSpentModel() {
+        super();
+    }
+    public UserTimeSpentModel(UserTimeSpentPrimaryKey userTimeSpentPrimaryKey, Double timeSpent) {
+        this.userTimeSpentPrimaryKey = userTimeSpentPrimaryKey;
         this.timeSpent = timeSpent;
     }
 }
