@@ -5,6 +5,7 @@ import { DiscussService } from '@ws/app/src/lib/routes/discuss/services/discuss.
 /* tslint:disable */
 import _ from 'lodash'
 import { NSDiscuss } from './discuss.model'
+import { Router } from '@angular/router'
 /* tslint:enable */
 @Component({
   selector: 'ws-widget-home-component',
@@ -15,7 +16,7 @@ import { NSDiscuss } from './discuss.model'
 export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
   discuss!: NSDiscuss.IDiscuss
-  constructor(private discussService: DiscussService) {
+  constructor(private discussService: DiscussService, private router: Router) {
     super()
   }
   discussionList = Array()
@@ -27,6 +28,7 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
       // console.log(this.widgetData.content)
       this.discuss = ([this.widgetData.content] || []).map((d: any) => {
         return {
+          tid: d.tid,
           title: d.title,
           description: d.title,
           category: d.category, // d.category.name
@@ -48,5 +50,9 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
       this.discuss = _.get(response, 'topics')
       // console.log(this.discuss)
     })
+  }
+
+  getDiscussion(discuss: any) {
+    this.router.navigate([`/app/discuss/home/${discuss.tid}`])
   }
 }

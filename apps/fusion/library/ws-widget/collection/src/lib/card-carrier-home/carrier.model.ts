@@ -1,5 +1,6 @@
 export namespace NSCarrierData {
   export interface ICarrierData {
+    tid: string
     title: string
     description: string
     category: string

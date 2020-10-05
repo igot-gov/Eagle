@@ -5,7 +5,7 @@
       <mat-icon style="width: auto; height: auto;" svgIcon="category_m"></mat-icon>
     </div>
     <mat-card-title>
-      <h2>{{category.name}}</h2>
+      <h2 [innerHTML]="category.name"></h2>
     </mat-card-title>
     <mat-card-subtitle>
       <span class="ws-mat-primary-text">{{category.description}}</span>

@@ -7,6 +7,7 @@ import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { LoaderService } from '../../../../../../../author/src/public-api'
 import { DiscussService } from '../../services/discuss.service'
 import { MatSnackBar } from '@angular/material'
+import { DiscussUtilsService } from '../../services/discuss-utils.service'
 
 @Component({
   selector: 'app-discuss-discussion',
@@ -34,6 +35,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     private route: ActivatedRoute,
     private discussService: DiscussService,
     private snackBar: MatSnackBar,
+    private discussUtils: DiscussUtilsService,
   ) {
   }
   ngOnInit(): void {
@@ -207,5 +209,11 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
       })
+  }
+
+  public getBgColor(tagTitle: any) {
+    const bgColor = this.discussUtils.stringToColor(tagTitle.toLowerCase())
+    const color = this.discussUtils.getContrast(bgColor)
+    return { color, 'background-color': bgColor }
   }
 }

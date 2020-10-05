@@ -1,7 +1,8 @@
-<mat-card *ngIf="discuss && discuss.title" class="discuss-home-card cursor-pointer mr-6">
+<mat-card *ngIf="discuss && discuss.title" class="discuss-home-card cursor-pointer mr-6"
+  (click)="getDiscussion(discuss)">
   <mat-card-header>
     <mat-card-title>
-      <h2 class="cursor-pointer f-medium">{{discuss.title}}</h2>
+      <h2 class="cursor-pointer f-medium"><b>{{discuss.title}}</b></h2>
     </mat-card-title>
     <mat-card-subtitle class="responsive">
       <span class="flex ws-mat-default-text">
@@ -26,11 +27,11 @@
     <div class="flex flex-1 flex-row margin-left-l">
       <span class="flex margin-right-l mobile">
         <mat-icon class="cursor-pointer">import_export</mat-icon>
-        <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }}</span>
+        <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }}&nbsp;votes</span>
       </span>
       <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
-        <span class="pad-4">{{discuss.viewcount || 0}}</span>
+        <span class="pad-4">{{discuss.viewcount || 0}}&nbsp;views</span>
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2 margin-right-s">

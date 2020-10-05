@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { NSCarrierData } from './carrier.model'
 import { WidgetBaseComponent } from '@ws-widget/resolver'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ws-widget-card-carrier-home',
@@ -12,6 +13,9 @@ import { WidgetBaseComponent } from '@ws-widget/resolver'
 export class CardCarrierHomeComponent extends WidgetBaseComponent implements OnInit {
   // @Input()
   // carrierList!: NSCarrierData.ICarrierData[]
+  constructor(private router: Router) {
+    super()
+  }
 
   @Input() widgetData: any
   carrier!: NSCarrierData.ICarrierData
@@ -26,8 +30,13 @@ export class CardCarrierHomeComponent extends WidgetBaseComponent implements OnI
           category: 'Career', // d.category.name
           count: d.viewcount,
           timeinfo: d.timestamp,
+          tid: d.tid,
         }
       })[0]
     }
   }
+  getCareer(discuss: any) {
+    this.router.navigate([`/app/careers/home/${discuss.tid}`])
+  }
+
 }
