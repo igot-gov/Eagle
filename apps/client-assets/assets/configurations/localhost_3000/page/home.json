@@ -338,7 +338,7 @@
                       "cardSubType": "cardHomeCarrier"
                     },
                     "viewMoreUrl": {
-                      "path": "/page/career",
+                      "path": "/app/careers/home",
                       "viewMoreText": "Career",
                       "queryParams": {}
                     },

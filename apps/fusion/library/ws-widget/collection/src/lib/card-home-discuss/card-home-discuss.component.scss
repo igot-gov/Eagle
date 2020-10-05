@@ -131,11 +131,13 @@
 
 .mat-card-header {
   .mat-card-title {
-    flex-shrink: 0;
+    flex-shrink: 4;
     flex-grow: 4;
+    height: 125px;
+    overflow-y: overlay;
   }
   .mat-card-sub-title {
-    flex-shrink: 0;
+    flex-shrink: 4;
     flex-grow: 2;
   }
 }
@@ -143,9 +145,10 @@
 .mat-card-content {
   flex-grow: 5;
   overflow: auto;
+  height: 50px;
+  overflow-y: overlay;
 }
 
 .mat-card-footer {
-  padding-bottom: 15px;
-  padding-top: 15px;
+  padding-bottom: 22px;
 }
