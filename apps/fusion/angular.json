@@ -82,7 +82,8 @@
                 "lazy": true
               },
               "node_modules/pdfjs-dist/web/pdf_viewer.css",
-              "src/fusion-assets/fonts/poppins/stylesheet.css"
+              "src/fusion-assets/fonts/lato/stylesheet.css",
+              "src/fusion-assets/fonts/montserrat/stylesheet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",

@@ -2,18 +2,18 @@
   display: inline-block;
 }
 
-.main-container{
+.main-container {
   margin: -0.8rem 0;
 }
 
 .heading {
-  font: normal 16px/22px Poppins-Medium;
+  // font: normal 16px/22px Poppins-Medium;
   letter-spacing: 0px;
   color: #00A9F4;
   margin: 0;
 }
 
-.closeBtn{
+.closeBtn {
   height: 30px;
   width: 30px;
   line-height: 30px;
@@ -22,7 +22,7 @@
   align-self: center;
 }
 
-.actions-container{
+.actions-container {
   padding: 4px 0;
   display: flex;
   flex-wrap: wrap;

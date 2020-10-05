@@ -11,7 +11,7 @@
 }
 
 .f-medium {
-  font-family: "Poppins-Medium";
+  // font-family: "Poppins-Medium";
   line-height: normal;
 }
 
@@ -37,6 +37,7 @@
 mat-icon.upvoted {
   color: #5FAD41;
 }
+
 mat-icon.downvoted {
   color: #F0466F
 }
@@ -117,7 +118,7 @@ mat-icon.downvoted {
   @include breakpoint-s {
     flex: auto;
   }
-  
+
 }
 
 .hidden-imp {
