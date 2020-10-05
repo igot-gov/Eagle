@@ -6,6 +6,7 @@
  */
 package com.infosys.hubservices.network.controller;
 
+import com.infosys.hubservices.model.MultiSearch;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.serviceimpl.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/connections/profile")
@@ -23,6 +25,15 @@ public class ConnectionProfileController {
     @Autowired
     private ProfileService profileService;
 
+    @PostMapping("/find/recommended")
+    public ResponseEntity<Response> findRecommendedConnection(@RequestHeader String rootOrg,
+                                                              @RequestParam(required = false, name = "includeSources") String[] includeSources,
+                                                              @RequestBody MultiSearch multiSearch) {
+
+        Response response = profileService.multiSearchProfiles(rootOrg, multiSearch, includeSources);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
+    }
     @PostMapping("/find/common")
     public ResponseEntity<Response> findCommon(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
                                                @RequestHeader String userId,

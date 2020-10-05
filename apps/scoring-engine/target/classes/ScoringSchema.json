@@ -1,0 +1,90 @@
+{
+  "id": "",
+  "scoringTemplates": [
+    {
+      "rootOrg": "igot",
+      "org": "dopt",
+      "template_id": "temp-01",
+      "templateName": "Quality score card",
+      "version": 1.0,
+      "weightage": 0,
+      "max_score": 0,
+      "min_acceptable_score": 0,
+      "criteria": [
+        {
+          "criteria": "Instructional Methods",
+          "weightage": 0.3,
+          "max_score": 45,
+          "min_acceptable_score": 33.75,
+          "qualifiers": [
+            {
+              "qualifier": "The course puts the learner at the centre of the learning experience",
+              "weightage": 0.4,
+              "max_score": 10,
+              "min_acceptable_score": 4,
+              "fixed_score": {
+                "StronglyAgree": 5,
+                "Agree": 3,
+                "Disagree": 1,
+                "Strongly Disagree": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 10,
+                  "max": 20,
+                  "assignedValue": 3
+
+                },
+                "20-30": {
+                  "min": 20,
+                  "max": 30,
+                  "assignedValue": 4
+
+                },
+                "30-40": {
+                  "min": 30,
+                  "max": 40,
+                  "assignedValue": 6
+                }
+              }
+            },
+            {
+              "qualifier": "Passing criteria is clearly stated",
+              "weightage": 0.6,
+              "max_score": 10,
+              "min_acceptable_score": 3.75,
+              "fixed_score": {
+                "StronglyAgree": 5,
+                "Agree": 3,
+                "Disagree": 1,
+                "Strongly Disagree": 0
+              },
+              "range_score": {
+                "10-20": {
+                  "min": 10,
+                  "max": 20,
+                  "assignedValue": 4
+
+                },
+                "20-30": {
+                  "min": 20,
+                  "max": 30,
+                  "assignedValue": 5
+
+                },
+                "30-40": {
+                  "min": 30,
+                  "max": 40,
+                  "assignedValue": 7
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+
+
