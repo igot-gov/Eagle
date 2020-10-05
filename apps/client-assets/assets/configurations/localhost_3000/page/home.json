@@ -297,7 +297,7 @@
                     "logo": "group",
                     "title": "discuss",
                     "stripBackground": "assets/instances/eagle/background/discuss.svg",
-                    "titleDescription": "Trending discusstions",
+                    "titleDescription": "Trending discussions",
                     "stripConfig": {
                       "cardSubType": "cardHomeDiscuss"
                     },
