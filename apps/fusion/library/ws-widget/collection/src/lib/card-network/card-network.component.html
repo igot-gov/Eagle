@@ -7,9 +7,10 @@
       <mat-form-field>
         <mat-placeholder>Search by name</mat-placeholder>
         <input [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput type="search">
-        <button mat-button matSuffix mat-stroked-button aria-label="search">
-          <mat-icon>search</mat-icon>
-        </button>
+        <!-- <button mat-button matSuffix mat-stroked-button aria-label="search"> -->
+        <span matPrefix>
+          <mat-icon>search</mat-icon>&nbsp;&nbsp;
+        </span>
       </mat-form-field>
     </mat-grid-tile>
   </mat-grid-list>
