@@ -151,6 +151,12 @@
   // >>>>>>>hubs
 }
 
+.mobile {
+  @include breakpoint-xs {
+    padding: $size-xs;
+  }
+}
+
 @media only screen and (max-width: 760px) {
   .my-search {
     display: none;

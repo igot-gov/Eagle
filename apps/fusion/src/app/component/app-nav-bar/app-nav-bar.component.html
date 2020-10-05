@@ -1,6 +1,6 @@
 <mat-toolbar [color]="primaryNavbarBackground?.color" [ngStyle]="primaryNavbarBackground?.styles"
-  class="mat-elevation-z3 custom">
-  <div class="fix-ww">
+  class="mat-elevation-z3 custom mobile">
+  <div class="fix-ww ">
     <ng-container *ngIf="mode === 'top'">
       <a routerLink="/page/home" class="logo-dim">
         <img [src]="appIcon" alt="Application Logo" class="app-logo" />
@@ -39,6 +39,7 @@
       </div> -->
         <!-- <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container> -->
       </ng-container>
+
     </ng-container>
     <div class="flex justify-between items-center w-full" *ngIf="mode === 'bottom'">
       <ng-container *ngIf="primaryNavbarConfig?.smallScreen">
@@ -65,7 +66,14 @@
       <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
     </div>
   </div>
+  <!-- <div class="fix-ww" *ngIf="mode === 'top'">
+    <ng-container [wsResolverWidget]="{ 'widgetType': 'card',
+      'widgetSubType': 'cardHomeHubs',
+      widgetData: {}}">
+    </ng-container>
+  </div> -->
 </mat-toolbar>
+
 <ng-template #navbarSide let-item="item">
   <ng-container *ngIf="item.type === 'widgetButton'" [wsResolverWidget]="item.config"></ng-container>
   <ws-widget-btn-feature *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
