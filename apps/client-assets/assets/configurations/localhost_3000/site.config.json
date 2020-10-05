@@ -442,7 +442,7 @@
     },
     {
       "path": "/app/notifications",
-      "active": true,
+      "active": false,
       "hubname": "News",
       "desc": "Keep you self update with the latest news from IGOT",
       "icon": "library_books"
