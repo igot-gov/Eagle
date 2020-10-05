@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router'
 import { DiscussService } from '../../services/discuss.service'
 /* tslint:disable */
 import _ from 'lodash'
+import { NsDiscussionForum } from '@ws-widget/collection/src/public-api'
 /* tslint:enable */
 
 @Component({
@@ -36,16 +37,16 @@ export class DiscussAllComponent implements OnInit {
     // console.log(this.discussionList)
   }
   start() {
-    // const dialogRef =
-    this.dialog.open(DiscussStartComponent, {
+    const dialogRef =  this.dialog.open(DiscussStartComponent, {
       minHeight: 'auto',
       width: '80%',
       panelClass: 'remove-pad',
     })
-    // dialogRef.afterClosed().subscribe((response: any) => {
-    //   console.log(response)
-
-    // })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        this.refreshData()
+      }
+    })
   }
   filter(key: string | 'recent' | 'popular' | 'watched') {
     if (key) {
@@ -63,7 +64,8 @@ export class DiscussAllComponent implements OnInit {
     }
   }
   fillrecent() {
-    this.discussionList = this.route.snapshot.data.recent.data.topics || []
+    // this.discussionList = this.route.snapshot.data.recent.data.topics || []
+    this.getRecentData()
   }
   fillPopular() {
     // this.discussionList =;
@@ -73,5 +75,20 @@ export class DiscussAllComponent implements OnInit {
     // , () => {
     //   // IN TROUBL
     // })
+  }
+
+  refreshData() {
+    if (this.currentFilter === 'recent') {
+      this.getRecentData()
+    } else {
+      this.fillPopular()
+    }
+  }
+
+  getRecentData() {
+    return this.discussService.fetchRecentD().subscribe(
+      data => {
+        this.discussionList = _.get(data, 'topics')
+      })
   }
 }

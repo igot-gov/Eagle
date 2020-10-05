@@ -14,7 +14,7 @@
   </mat-card-header>
   <mat-card-content class="flex flex-1">
     <ng-container *ngIf="discuss && discuss.tags && discuss.tags.length > 0">
-      <span *ngFor="let tag of discuss.tags" class="tag ws-mat-primary-tags">
+      <span *ngFor="let tag of discuss.tags" class="tag" [ngStyle]="getBgColor(tag.value)">
         {{tag.value}}
       </span>
     </ng-container>
