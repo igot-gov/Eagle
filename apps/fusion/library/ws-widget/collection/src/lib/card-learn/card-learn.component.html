@@ -4,7 +4,7 @@
     <h3>
       <ng-container i18n>Hey, </ng-container>
       <ng-container>{{ givenName }}</ng-container>
-      <ng-container *ngIf="!isNewUser" i18n>, Welcome Back!</ng-container>
+      <!-- <ng-container *ngIf="!isNewUser" i18n>, Welcome Back!</ng-container> -->
     </h3>
   </div>
 </ng-container>
@@ -15,7 +15,7 @@
     <h2 class="title" i18n>Welcome,
       <ng-container>{{ givenName }}</ng-container>
     </h2>
-    <div class="row-justify">
+    <div class="row-justify flex-wrap">
       <ws-widget-activity-card *ngFor="let card of activityCards" [widgetData]="{
             id : card.id,
             title : card.title,

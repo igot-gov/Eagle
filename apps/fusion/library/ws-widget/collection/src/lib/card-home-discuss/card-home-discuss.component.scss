@@ -10,7 +10,7 @@
   width: $card-discuss-home-width;
   min-width: 265px;
   height: 100%;
-  min-height: 346px;
+  min-height: 300px;
   border-radius: 8px;
   box-sizing: border-box;
   box-shadow: 0px 10px 30px #99999933;
@@ -123,9 +123,32 @@
     line-height: $description-line-height;
   }
 }
-.base-layout {
-  margin-top: 48px;
-  .card-align {
-    margin: 5px 10px 5px 0;
+
+.mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-header {
+  .mat-card-title {
+    flex-shrink: 4;
+    flex-grow: 4;
+    height: 125px;
+    overflow-y: overlay;
   }
+  .mat-card-sub-title {
+    flex-shrink: 4;
+    flex-grow: 2;
+  }
+}
+
+.mat-card-content {
+  flex-grow: 5;
+  overflow: auto;
+  height: 50px;
+  overflow-y: overlay;
+}
+
+.mat-card-footer {
+  padding-bottom: 22px;
 }

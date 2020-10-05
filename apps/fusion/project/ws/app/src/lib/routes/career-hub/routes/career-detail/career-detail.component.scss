@@ -11,7 +11,7 @@
 }
 
 .f-medium {
-  font-family: "Poppins-Medium";
+  // font-family: "Poppins-Medium";
 }
 
 .related-discussion {
@@ -36,6 +36,7 @@
 mat-icon.upvoted {
   color: #5FAD41;
 }
+
 mat-icon.downvoted {
   color: #F0466F
 }
@@ -100,11 +101,11 @@ mat-icon.downvoted {
   @include breakpoint-s {
     flex: auto;
   }
-  
+
 }
 
 .fit-content-height {
-    height: fit-content;
+  height: fit-content;
 }
 
 .hidden-imp {

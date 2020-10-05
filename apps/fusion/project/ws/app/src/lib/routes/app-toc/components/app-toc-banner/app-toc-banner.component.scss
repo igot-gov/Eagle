@@ -70,7 +70,7 @@
       // font: 48px/48px Poppins-SemiBold;
       letter-spacing: 0px;
       color: #FFFFFF;
-      font-family: Poppins-SemiBold;
+      // font-family: Poppins-SemiBold;
 
     }
 
@@ -83,13 +83,13 @@
   }
 
   .rating-number {
-    font: 24px/35px Poppins-Medium;
+    // font: 24px/35px Poppins-Medium;
     letter-spacing: 0px;
     color: #FFFFFF;
   }
 
   .rating-count {
-    font: 18px/27px Poppins-regular;
+    // font: 18px/27px Poppins-regular;
     letter-spacing: 0.36px;
     color: #FFFFFF;
   }
@@ -118,7 +118,7 @@
     color: #fff !important;
 
     ::ng-deep.mat-button-wrapper {
-      font: 14px/21px Poppins-SemiBold;
+      // font: 14px/21px Poppins-SemiBold;
       letter-spacing: 0px;
       color: #FFFFFF;
       text-transform: capitalize;
@@ -150,7 +150,7 @@
     flex: 1;
     min-width: 1px;
     margin-right: $size-l;
-    font: Regular 24px/35px Poppins;
+    // font: Regular 24px/35px Poppins;
     letter-spacing: 0px;
     color: #FFFFFF;
 
@@ -237,7 +237,7 @@
 
 .info-msg {
   color: #fff !important;
-  font: 14px/20px Poppins-Regular;
+  // font: 14px/20px Poppins-Regular;
   ;
 
   mat-icon {
@@ -252,11 +252,11 @@
 
   .header-title {
     h1 {
-      font: normal normal 300 24px/35px Poppins;
+      font: normal normal 300 24px/35px;
     }
   }
 
   .overview-description {
-    font: normal normal 300 14px/21px Poppins;
+    font: normal normal 300 14px/21px;
   }
 }

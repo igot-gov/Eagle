@@ -26,39 +26,6 @@
         "widgetType": "actionButton",
         "widgetSubType": "buttonFeature",
         "widgetData": {
-          "toolTop": "network",
-          "actionBtnId": "feature_discuss",
-          "config": {
-            "type": "mat-icon-button"
-          }
-        }
-      },
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "toolTop": "network",
-          "actionBtnId": "feature_network",
-          "config": {
-            "type": "mat-icon-button"
-          }
-        }
-      },
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "toolTop": "learn",
-          "actionBtnId": "feature_learn",
-          "config": {
-            "type": "mat-icon-button"
-          }
-        }
-      },
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
           "toolTop": "feature_notification",
           "actionBtnId": "feature_notification",
           "config": {
@@ -297,7 +264,7 @@
                     "logo": "group",
                     "title": "discuss",
                     "stripBackground": "assets/instances/eagle/background/discuss.svg",
-                    "titleDescription": "Trending discusstions",
+                    "titleDescription": "Trending discussions",
                     "stripConfig": {
                       "cardSubType": "cardHomeDiscuss"
                     },
@@ -338,7 +305,7 @@
                       "cardSubType": "cardHomeCarrier"
                     },
                     "viewMoreUrl": {
-                      "path": "/page/career",
+                      "path": "/app/careers/home",
                       "viewMoreText": "Career",
                       "queryParams": {}
                     },
