@@ -21,13 +21,13 @@
 
           <div class="flex flex-1 margin-top-m">
             <ng-container *ngIf="data && data.tags && data.tags.length > 0">
-              <span *ngFor="let tag of data.tags" class="tag ws-mat-primary-tags">
+              <span *ngFor="let tag of data.tags" class="tag" [ngStyle]="getBgColor(tag.value)">
                 {{tag.value}}
               </span>
             </ng-container>
           </div>
           <div class="flex flex-1 custom margin-0 margin-top-xl">
-            <div class="flex flex-1 flex-row margin-left-xs">
+            <div class="flex flex-1 flex-row margin-left-xs margin-right-xs">
               <span class="flex margin-right-l mobile">
                 <mat-icon *ngIf="!post.upvoted"(click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
                 <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward</mat-icon>
@@ -43,11 +43,11 @@
                 <span class="pad-4">{{data.viewcount}} views</span>
               </span>
               <span class="flex mobile">
-                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">bookmark</mat-icon>
+                <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer" (click)="bookmark(post)">bookmark_border</mat-icon>
                 <mat-icon *ngIf="data.posts[0].bookmarked" class="cursor-pointer ws-mat-accent-text" (click)="unBookMark(post)">bookmark</mat-icon>
               </span>
             </div>
-            <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+            <div class="flex flex-1" class="cursor-pointer  mobile2">
               <span class="noocoments ws-mat-default-text" *ngIf="data.postcount-1 > 0">{{data.postcount-1}}
                 comments</span>
               <span class="noocoments ws-mat-default-text" *ngIf="data.postcount-1 <=0">0
@@ -63,7 +63,7 @@
               </ws-widget-ck-editor> -->
               <mat-form-field appearance="outline" class="flex-1 w-full" [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
                 <textarea matInput formControlName="answer" #answer cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30" [required]="true"></textarea>
+                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
                 <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
                   This is mandatory
                 </mat-error>
@@ -107,7 +107,7 @@
           </ws-widget-avatar-photo>
           <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname" [innerHTML]="post.user.fullname"></span>
           <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname" [innerHTML]="post.user.username"></span>
-          <span class="posttime">{{ post.timestamp | date}}</span>
+          <span class="posttime">{{ post.timestamp | date: 'dd MMM yyyy hh:mm a'}}</span>
         </mat-card-header>
         <mat-card-content>
           <p [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
@@ -156,16 +156,16 @@
                 </div> -->
                 <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <span class="cursor-pointer"> 1 reply </span>
-                  <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="post.replyCountToggle">
+                  <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="post.replyCountToggle">
                     <mat-icon>keyboard_arrow_up</mat-icon>
                   </span>
-                  <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="!post.replyCountToggle">
+                  <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="!post.replyCountToggle">
                     <mat-icon>keyboard_arrow_down</mat-icon>
                   </span>
                 </div>
               </div>
               <div class="">
-                <span>Last reply {{ post.replies.timestampISO | pipeRelativeTime }} </span>
+                <span>Last reply {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">
@@ -197,7 +197,7 @@
                 </div>
               </div>
               <div class="">
-                <span>Last reply {{ post.replies.timestampISO | pipeRelativeTime }} </span>
+                <span>Last reply {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">

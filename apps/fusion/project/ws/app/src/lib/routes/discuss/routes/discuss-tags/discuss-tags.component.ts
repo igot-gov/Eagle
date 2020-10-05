@@ -4,6 +4,7 @@ import { NSDiscussData } from '../../models/discuss.model'
 /* tslint:disable */
 import _ from 'lodash'
 import { ActivatedRoute } from '@angular/router'
+import { DiscussUtilsService } from '../../services/discuss-utils.service'
 /* tslint:enable */
 @Component({
   selector: 'app-discuss-tags',
@@ -15,8 +16,10 @@ export class DiscussTagsComponent implements OnInit {
   tags!: NSDiscussData.ITag[]
   filteredTags!: NSDiscussData.ITag[]
   query!: string
-  constructor(private route: ActivatedRoute) {
-    // this.assignTags()
+  constructor(
+    private route: ActivatedRoute,
+    private discussUtils: DiscussUtilsService
+  ) {
     this.tags = this.tag.tags
   }
 
@@ -28,95 +31,9 @@ export class DiscussTagsComponent implements OnInit {
     this.filteredTags = _.filter(this.tags, i => i.value === name)
   }
 
-  assignTags() {
-    /* tslint:disable */
-    this.tags = [
-      {
-        'value': 'topic',
-        'score': 1,
-        'valueEscaped': 'topic',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'welcome',
-        'score': 6,
-        'valueEscaped': 'welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'tag1',
-        'score': 156,
-        'valueEscaped': 'tag1',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'tag 2',
-        'score': 1,
-        'valueEscaped': 'tag 2',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'tag 3',
-        'score': 1,
-        'valueEscaped': 'tag 3',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'tag 3',
-        'score': 20,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'Tag welcome',
-        'score': 100,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'Tag welcome',
-        'score': 1,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'Tag welcome',
-        'score': 1,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'Tag welcome',
-        'score': 1,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'Tag welcome',
-        'score': 1,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      },
-      {
-        'value': 'Tag welcome',
-        'score': 1,
-        'valueEscaped': 'Tag welcome',
-        'color': '',
-        'bgColor': ''
-      }
-    ]
-    /* tslint:enable */
-
+  public getBgColor(tagTitle: any) {
+    const bgColor = this.discussUtils.stringToColor(tagTitle.toLowerCase())
+    const color = this.discussUtils.getContrast(bgColor)
+    return { color, 'background-color': bgColor }
   }
 }
