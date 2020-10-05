@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NSDiscussData } from '../../models/discuss.model'
 import { DiscussService } from '../../services/discuss.service'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'app-discuss-my-discussions',
   templateUrl: './discuss-my-discussions.component.html',
@@ -22,7 +24,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
   ngOnInit() {
     // this.fillDummyData()
     this.data = this.route.snapshot.data.profile.data
-    this.discussionList = this.data.latestPosts
+    this.discussionList = _.uniqBy(this.data.latestPosts, 'title')
     this.department = this.discussService.getUserProfile.departmentName || null
     this.location = this.discussService.getUserProfile.country || null
   }
