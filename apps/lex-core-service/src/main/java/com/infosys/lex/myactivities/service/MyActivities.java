@@ -16,6 +16,7 @@ import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class MyActivities implements IMyActivities {
 
     @Override
     public Integer countUserLearningHistory(String rootOrg, String userId) {
-        return contentProgressRepository.findProgress(rootOrg, userId).size();
+        return continueLearningMVRepository.countByRootOrgAndUserId(rootOrg, userId);
     }
 
     @Override
@@ -53,11 +54,13 @@ public class MyActivities implements IMyActivities {
     @Override
     public Long userTimeSpentOnTraning(String rootOrg, String userId) {
 
-        //List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
-        //List<String> courseIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
-        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId);
+        List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
+        List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
+        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, contentIds);
 
         Long totalDuration = new Long(0);
+        Long totalDays = new Long(0);
+
         for (ContentProgressModel model : progress) {
 
             long diff = model.getLastAccessedOn().getTime() - model.getFirstAccessedOn().getTime();
