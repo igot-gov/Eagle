@@ -1,7 +1,7 @@
-<mat-card class="carrier-card cursor-pointer mr-6">
+<mat-card class="carrier-card cursor-pointer mr-6" (click)="getCareer(carrier)">
   <mat-card-header>
     <mat-card-title>
-      <h3 class="cursor-pointer f-medium">{{carrier.title}}</h3>
+      <h2 class="cursor-pointer f-medium"><b>{{carrier.title}}</b></h2>
     </mat-card-title>
     <mat-card-subtitle class="responsive">
       <span class="flex ws-mat-default-text">
@@ -23,7 +23,7 @@
     <div class="flex flex-1 flex-row margin-left-xs">
       <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
-        <span class="pad-4">{{carrier.count || 0}}</span>
+        <span class="pad-4">{{carrier.count || 0}}&nbsp;views</span>
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2">
