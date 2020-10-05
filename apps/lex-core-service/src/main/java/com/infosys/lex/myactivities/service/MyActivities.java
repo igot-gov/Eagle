@@ -37,7 +37,7 @@ public class MyActivities implements IMyActivities {
 
     @Override
     public Integer countUserLearningHistory(String rootOrg, String userId) {
-        return continueLearningMVRepository.countByRootOrgAndUserId(rootOrg, userId);
+        return contentProgressRepository.findProgress(rootOrg, userId).size();
     }
 
     @Override
@@ -53,9 +53,9 @@ public class MyActivities implements IMyActivities {
     @Override
     public Long userTimeSpentOnTraning(String rootOrg, String userId) {
 
-        List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
-        List<String> courseIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
-        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, courseIds);
+        //List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
+        //List<String> courseIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
+        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId);
 
         Long totalDuration = new Long(0);
         for (ContentProgressModel model : progress) {
