@@ -64,7 +64,7 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "new-box margin-top-s",
             "widget": {
               "widgetType": "slider",
               "widgetSubType": "sliderBanners",
