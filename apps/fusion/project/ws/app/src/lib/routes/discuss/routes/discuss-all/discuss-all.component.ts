@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router'
 import { DiscussService } from '../../services/discuss.service'
 /* tslint:disable */
 import _ from 'lodash'
-import { NsDiscussionForum } from '@ws-widget/collection/src/public-api'
 /* tslint:enable */
 
 @Component({
@@ -37,7 +36,7 @@ export class DiscussAllComponent implements OnInit {
     // console.log(this.discussionList)
   }
   start() {
-    const dialogRef =  this.dialog.open(DiscussStartComponent, {
+    const dialogRef = this.dialog.open(DiscussStartComponent, {
       minHeight: 'auto',
       width: '80%',
       panelClass: 'remove-pad',

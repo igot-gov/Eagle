@@ -69,6 +69,7 @@ export namespace NSDiscuss {
 
   export interface IDiscuss {
     title: string
+    tid: string
     description: string
     category: ICategorie
     count: number
