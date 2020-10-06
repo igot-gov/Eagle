@@ -28,13 +28,12 @@
   $colorGreen: #5fa800;
   $colorRed: #ff0000;
   $footerColor: #373434;
-  $footerTextColor: #DEDFE0;
-  $colorWhite: #FFFFFF;
+  $footerTextColor: #dedfe0;
+  $colorWhite: #ffffff;
   $colorBlack: #000000;
+  $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
-
-
 
   .icon-svg {
     fill: $iconColor;
@@ -69,7 +68,7 @@
 
     .mat-progress-spinner circle,
     .mat-spinner circle {
-      stroke: #FFFFFF;
+      stroke: #ffffff;
     }
 
     mat-toolbar {
@@ -114,13 +113,11 @@
     // .mat-tab-group
     .mat-tab-nav-bar,
     .mat-form-field-outline-thick .mat-ink-bar {
-      background-color: $colorAccentLight !important
+      background-color: $colorAccentLight !important;
     }
 
-
-
     .mat-ink-bar {
-      background-color: $colorAccentLight !important
+      background-color: $colorAccentLight !important;
     }
 
     .mat-option.mat-selected:not(.mat-option-multiple) {
@@ -130,7 +127,7 @@
 
     .mat-mini-fab {
       background: #777777 0% 0% no-repeat padding-box !important;
-      border: 2px solid #CCCCCC;
+      border: 2px solid #cccccc;
       box-shadow: 0px 10px 30px #99999933 !important;
     }
 
@@ -190,7 +187,7 @@
 
       mat-icon {
         color: $colorAccentDark !important;
-        opacity: 1 !important
+        opacity: 1 !important;
       }
     }
 
@@ -237,14 +234,11 @@
         color: $colorText;
       }
     }
-  }
-
-  @else {
+  } @else {
     .mat-radio-button {
       background-color: transparent !important;
 
       .mat-radio-container {
-
         .mat-radio-inner-circle {
           background-color: $colorPrimaryDark !important;
         }
@@ -265,7 +259,7 @@
     }
 
     .mat-ink-bar {
-      background-color: $colorAccent !important
+      background-color: $colorAccent !important;
     }
 
     .mat-input-element {
@@ -277,8 +271,8 @@
     }
 
     .ws-mat-auth-exp {
-      background-color: #003F5C;
-      color: #EDEDED !important;
+      background-color: #003f5c;
+      color: #ededed !important;
     }
 
     .mat-form-field.mat-focused .mat-form-field-label {
@@ -289,12 +283,13 @@
       color: $colorAccent !important;
     }
 
-    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
+      .mat-form-field-outline-thick {
       color: $colorRed !important;
     }
 
     .mat-option.mat-selected:not(.mat-option-multiple) {
-      background: $colorAccent !important
+      background: $colorAccent !important;
     }
 
     .ws-mat-primary-text {
@@ -322,7 +317,7 @@
 
       mat-icon {
         color: $colorAccentDark !important;
-        opacity: 1 !important
+        opacity: 1 !important;
       }
     }
 
@@ -348,13 +343,13 @@
     }
 
     .ws-active-discuss-route {
-      background-color: #EEEEEE !important;
+      background-color: #eeeeee !important;
       // font-weight: 700;
 
       &:before {
         content: '';
         position: absolute;
-        border-color: #347BB6;
+        border-color: #347bb6;
         border-style: solid;
         border-width: 0 0 0 2px;
         height: inherit;
@@ -372,9 +367,7 @@
     }
   }
 
-
   @if $is-dark {
-
     a[href^='/'][target='_self'],
     a[href^='http'],
     a[href^='mailto'],
@@ -384,10 +377,7 @@
       background-color: $colorPrimaryDark !important;
       // background-color: red !important;
     }
-  }
-
-  @else {
-
+  } @else {
     a[href^='/'][target='_self'],
     a[href^='http'],
     a[href^='mailto'],
@@ -395,7 +385,6 @@
       color: $colorAccent;
       background-color: $colorPrimaryLight;
     }
-
 
     // ws-widget-page a[href^='http'],
     // ws-widget-page a[target='_blank'] {
@@ -421,18 +410,16 @@
     }
 
     .ws-mat-primary-tags {
-      background-color: #F5F5F5 !important;
+      background-color: #f5f5f5 !important;
     }
 
     .ws-mat-primary-tags-list {
-      background-color: #EEEEEE !important;
+      background-color: #eeeeee !important;
     }
 
     .ws-primary-background {
       background-color: $colorPrimary !important;
     }
-
-
 
     .ws-mat-primary-background-op10 {
       background: rgba(mat-color($primary, default), 0.1);
@@ -464,6 +451,12 @@
 
     .ws-mat-primary-default-text {
       color: $colorPrimary !important;
+    }
+    .ws-mat-black-text {
+      color: $colorBlack;
+    }
+    .ws-mat-lighter-grey-text {
+      color: $colorLighterGrey;
     }
 
     .ws-mat-default-text {
@@ -516,9 +509,11 @@
 
     .ws-mat-text-block-fade-gradient {
       position: relative;
-      background: linear-gradient(to bottom,
-          rgba(mat-color($background, card), 0),
-          mat-color($background, card) 100%);
+      background: linear-gradient(
+        to bottom,
+        rgba(mat-color($background, card), 0),
+        mat-color($background, card) 100%
+      );
 
       &::after,
       &::before {
@@ -548,9 +543,11 @@
       position: absolute;
       width: 90%;
       margin-top: 24%;
-      background: linear-gradient(to bottom,
-          rgba(mat-color($background, card), 0),
-          mat-color($background, card) 100%);
+      background: linear-gradient(
+        to bottom,
+        rgba(mat-color($background, card), 0),
+        mat-color($background, card) 100%
+      );
     }
 
     .mat-button-toggle-checked {

@@ -2,9 +2,9 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-.example-card {
+.activity-card {
   $size: 75px;
-  margin: 12px 12px 12px 0;
+  margin: 12px 26px 12px 0;
   width: $size + $size;
 }
 .content {

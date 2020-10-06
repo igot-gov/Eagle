@@ -26,8 +26,6 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
       this.discuss = ([this.widgetData.content] || []).map((d: any) => {
-        console.log(d.upvotes)
-        console.log(d.downvotes)
         // console.log(d.viewcount)
         return {
           tid: d.tid,

@@ -16,7 +16,7 @@
                   stripsResultDataMap[key]?.showOnLoader ||
                   stripsResultDataMap[key]?.showOnError
                 " [ngClass]="
-                  !widgetData.isChannelStrip ? 'xs:px-8 sx:px-10ss py-2 my-1' : i > 0 ? 'mt-12' : ''
+                  !widgetData.isChannelStrip ? 'xs:px-8 sx:px-10ss py-2 mt-16' : i > 0 ? 'mt-12' : ''
                 " [id]="key">
           <div [ngClass]="{ pad: stripsResultDataMap[key]?.stripBackground }" class="background-norepeat"
             [ngStyle]="{ 'background-image': 'url('+ stripsResultDataMap[key]?.stripBackground+')'}">
@@ -31,7 +31,7 @@
                 <!-- <mat-icon class="ws-mat-black-text transform-2x title-background">
                   {{stripsResultDataMap[key]?.stripLogo}}
                 </mat-icon> -->
-                <h2 class="ws-mat-black-text margin-remove inline-block text-uppercase margin-left-l title-background"
+                <h2 class="ws-mat-black-text margin-remove inline-block title-background"
                   *ngIf="stripsResultDataMap[key]?.stripTitle">
                   {{ stripsResultDataMap[key]?.stripTitle }}
                 </h2>

@@ -59,6 +59,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   searchArray = ['preview', 'channel', 'author']
   contentAvailable = true
   isFromAuthoring = false
+  tempItem: any
 
   changeEventSubscription: Subscription | null = null
 
@@ -114,12 +115,18 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     this.fetchNetworkUsers(strip, calculateParentStatus)
   }
   fetchNetworkUsers(strip: NsNetworkStripNewMultiple.INetworkStripUnit, calculateParentStatus: boolean) {
+    this.tempItem = [{ count: 7, icon: 'shop_two', name: 'Course' },
+    { count: 3, icon: 'bookmark_border', name: 'Cretificates' },
+    { count: 42, icon: 'shop_two', name: 'Training Hours' },
+    { count: 20, icon: 'access_time', name: 'Daily minutes' },
+    { count: 56, icon: 'hourglass_empty', name: 'Karma' },
+    { count: 123, icon: 'monetization_on', name: 'IGOT Coins' }]
     if (strip.request && strip.request.api && Object.keys(strip.request.api).length) {
       this.contentStripSvc.fetchNetworkUsers(strip.request.api.queryParams, strip.request.api.path).subscribe(
-        results => {
+        _results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.users, strip),
+            this.transformContentsToWidgets(this.tempItem, strip),
             'done',
             calculateParentStatus,
             null,

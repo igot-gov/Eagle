@@ -12,7 +12,10 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
 
   @Input()
   widgetData!: any
-  item = { count: 7, icon: 'shop_two', name: 'Courses' }
+  item: any
   ngOnInit(): void {
+    if (this.widgetData && this.widgetData.content) {
+      this.item = this.widgetData.content
+    }
   }
 }

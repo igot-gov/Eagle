@@ -95,20 +95,30 @@
               "widgetData": {
                 "strips": [
                   {
-                    "key": "My activity",
+                    "key": "network",
                     "logo": "group",
-                    "title": "activity",
-                    "stripBackground": "assets/instances/eagle/background/learn.svg",
+                    "title": "My Activity",
                     "titleDescription": "All of India",
                     "stripConfig": {
                       "cardSubType": "cardActivity"
                     },
                     "viewMoreUrl": {
-                      "path": "/page/network",
-                      "viewMoreText": "Network",
+                      "path": "/page/home",
+                      "viewMoreText": "MY DASHBOARD",
                       "queryParams": {}
                     },
-                    "filters": []
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/networkHub/users",
+                        "queryParams": {
+                          "limit": 5,
+                          "offset": 0,
+                          "intervalInDays": 7,
+                          "type": "latestUsers"
+                        }
+                      }
+                    }
                   }
                 ]
               }
