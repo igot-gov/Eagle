@@ -11,6 +11,8 @@ import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
 import com.infosys.lex.continuelearning.bodhi.repo.ContinueLearningMVRepository;
 import com.infosys.lex.continuelearning.entities.ContinueLearningMV;
 import com.infosys.lex.myactivities.bodhi.repo.UserTimeSpentRepository;
+import com.infosys.lex.myactivities.utils.Activity;
+import com.infosys.lex.myactivities.utils.Constants;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,29 +39,31 @@ public class MyActivities implements IMyActivities {
     private UserTimeSpentRepository userTimeSpentRepository;
 
     @Override
-    public Integer countUserLearningHistory(String rootOrg, String userId) {
-        return continueLearningMVRepository.countByRootOrgAndUserId(rootOrg, userId);
+    public Activity countUserLearningHistory(String rootOrg, String userId) {
+        Integer noOfContentsInLearning = continueLearningMVRepository.countByRootOrgAndUserId(rootOrg, userId);
+        return new Activity(Constants.Unit.NUMBER, noOfContentsInLearning);
     }
 
     @Override
-    public Integer countUserBadges(String rootOrg, String userId) {
-        return userBadgeRepository.countForCompleted(rootOrg, userId);
+    public Activity countUserBadges(String rootOrg, String userId) {
+        Integer noOfCertificates = userBadgeRepository.countForCompleted(rootOrg, userId);
+        return new Activity(Constants.Unit.NUMBER, noOfCertificates);
     }
 
     @Override
-    public Double userTimeSpentOnPlatform(String rootOrg, String userId) {
-        return userTimeSpentRepository.avgTimeSpentByRootOrgAndUserId(rootOrg, userId);
+    public Activity userTimeSpentOnPlatform(String rootOrg, String userId) {
+
+        Double duration = userTimeSpentRepository.avgTimeSpentByRootOrgAndUserId(rootOrg, userId);
+        return new Activity( Constants.Unit.MINUTE, TimeUnit.SECONDS.toHours(duration.longValue()));
     }
 
     @Override
-    public Long userTimeSpentOnTraning(String rootOrg, String userId) {
-
+    public Activity userTimeSpentOnTraning(String rootOrg, String userId) {
         List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
         List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
         List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, contentIds);
 
         Long totalDuration = new Long(0);
-        Long totalDays = new Long(0);
 
         for (ContentProgressModel model : progress) {
 
@@ -67,6 +71,7 @@ public class MyActivities implements IMyActivities {
             totalDuration = totalDuration + TimeUnit.MILLISECONDS.toHours(diff);
 
         }
-        return totalDuration;
+        return new Activity( Constants.Unit.HOUR, totalDuration);
     }
+
 }

@@ -7,16 +7,28 @@
 
 package com.infosys.lex.myactivities.service;
 
+import com.infosys.lex.myactivities.utils.Activity;
+
 import java.util.Map;
 
 public interface IMyActivities {
 
-    public Integer countUserLearningHistory(String rootOrg, String userId);
+
+/*    public Integer countUserLearningHistory(String rootOrg, String userId);
 
     public Integer countUserBadges(String rootOrg, String userId);
 
     public Double userTimeSpentOnPlatform(String rootOrg, String userId);
 
-    public Long userTimeSpentOnTraning(String rootOrg, String userId);
+    public Long userTimeSpentOnTraning(String rootOrg, String userId);*/
+
+
+    public Activity countUserLearningHistory(String rootOrg, String userId);
+
+    public Activity countUserBadges(String rootOrg, String userId);
+
+    public Activity userTimeSpentOnPlatform(String rootOrg, String userId);
+
+    public Activity userTimeSpentOnTraning(String rootOrg, String userId);
 
 }

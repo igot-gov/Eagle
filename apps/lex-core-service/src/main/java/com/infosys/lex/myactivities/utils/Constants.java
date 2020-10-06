@@ -9,6 +9,7 @@ package com.infosys.lex.myactivities.utils;
 
 public class Constants {
 
+    public enum Unit {NUMBER, HOUR, MINUTE}
 
     public static class MyActivity {
         public static final String ROOT_ORG = "rootOrg";
