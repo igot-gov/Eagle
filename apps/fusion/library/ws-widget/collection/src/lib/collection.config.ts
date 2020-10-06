@@ -32,7 +32,7 @@ export const ROOT_WIDGET_CONFIG = {
     browse_course: 'cardBrowseCourse',
     learning: 'cardLearn',
     network: 'cardNetwork',
-    home_top: 'cardHomeTop',
+    home_activity: 'cardActivity',
     home_network: 'cardHomeNetwork',
     home_discuss: 'cardHomeDiscuss',
     home_hubs: 'cardHomeHubs',
@@ -53,6 +53,10 @@ export const ROOT_WIDGET_CONFIG = {
   carrierStrip: {
     _type: 'carrierStrip',
     multipleStrip: 'CarrierStripMultiple',
+  },
+  activityStrip: {
+    _type: 'activityStrip',
+    multipleStrip: 'ActivityStripMultiple',
   },
   discussStrip: {
     _type: 'discussStrip',

@@ -44,6 +44,7 @@ import { topicApi } from './topic'
 import { topicsApi } from './topics'
 import { validateApi } from './validate'
 import { viewProfileApi } from './viewprofile'
+import { activity } from './activity'
 
 export const user = Router()
 user.use('/group', userGroupApi)
@@ -51,6 +52,7 @@ user.use('/accessControl', accessControlApi)
 user.use('/content-assign', contentAssignApi)
 user.use('/account-settings', accountSettingsApi)
 user.use('/mini-profile', userMiniProfile)
+user.use('/activity', activity)
 user.use('/change-email', changeEmailApi)
 user.use('/autocomplete', autocompleteApi)
 user.use('/badge', badgeApi)
