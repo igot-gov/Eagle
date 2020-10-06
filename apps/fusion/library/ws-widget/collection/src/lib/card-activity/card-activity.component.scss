@@ -1,0 +1,29 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.activity-card {
+  $size: 75px;
+  margin: 12px 26px 12px 0;
+  width: $size + $size;
+}
+.content {
+  padding: 20px 0 20px 0;
+  .count {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  .course-detail {
+    margin-top: 25px;
+    .icon-text {
+      font-size: 21px;
+      line-height: 24px;
+      margin-left: 10px;
+    }
+    .material-icons {
+      display: inline-flex;
+      vertical-align: top;
+    }
+  }
+}

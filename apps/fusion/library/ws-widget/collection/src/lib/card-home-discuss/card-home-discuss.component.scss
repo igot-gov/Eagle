@@ -133,8 +133,8 @@
   .mat-card-title {
     flex-shrink: 4;
     flex-grow: 4;
-    height: 125px;
-    overflow-y: overlay;
+    height: 116px;
+    overflow-y: hidden;
   }
   .mat-card-sub-title {
     flex-shrink: 4;
@@ -146,7 +146,7 @@
   flex-grow: 5;
   overflow: auto;
   height: 50px;
-  overflow-y: overlay;
+  overflow-y: hidden;
 }
 
 .mat-card-footer {
