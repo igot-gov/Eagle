@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Response implements Serializable, Cloneable {
+public class Response implements Serializable{
 
 	private static final long serialVersionUID = -3773253896160786443L;
 
@@ -38,8 +38,4 @@ public class Response implements Serializable, Cloneable {
 		return result.containsKey(key);
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
 }
