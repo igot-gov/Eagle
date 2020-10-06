@@ -3,13 +3,13 @@
 </div>
 
 
-<div class="w-full pt-5 px-2">
-    <div class="flex flex-1 flex-column margin-fix">
+<div class="w-full pt-10  px-2">
+    <div class="flex flex-1 flex-column margin-fix mb-2">
         <h2 class="f-medium">All openings </h2>
     </div>
     <div class="flex flex-1 flex-column margin-fix search">
         <form (submit)="updateQuery(queryControl.value)">
-            <mat-form-field appearance="none" class="autocomplete-form" color="primary" [floatLabel]="'never'">
+            <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
                 <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
                 <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
                     [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
@@ -17,7 +17,7 @@
             </mat-form-field>
         </form>
     </div>
-    <div class="flex flex-1 flex-column margin-fix">
+    <div class="flex flex-1 flex-column margin-fix mt-5">
         <div class="flex flex-1 filter">
             <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
                             'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
