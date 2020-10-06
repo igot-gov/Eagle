@@ -362,8 +362,8 @@
       "shortName": "Analytics"
     },
     "feature_notification": {
-      "accessKey": "",
-      "icon": "notifications_none",
+      "accessKey": "N",
+      "icon": "notifications",
       "iconType": "mat-icon",
       "id": "feature_notification",
       "keywords": [

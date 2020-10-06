@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussStartComponent } from '../../components/discuss-start/discuss-start.component'
@@ -17,7 +17,10 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class DiscussAllComponent implements OnInit {
+export class DiscussAllComponent implements OnInit, AfterViewInit {
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  sticky: boolean = false;
+  elementPosition: any
   currentFilter = 'recent'
   trendingTags!: NSDiscussData.ITag[]
   discussionList!: NSDiscussData.IDiscussionData[]
@@ -89,5 +92,19 @@ export class DiscussAllComponent implements OnInit {
       data => {
         this.discussionList = _.get(data, 'topics')
       })
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset
+    if (windowScroll >= this.elementPosition + 417) {
+      this.sticky = false
+    } else {
+      this.sticky = false
+    }
+  }
+
+  ngAfterViewInit() {
+    this.elementPosition = this.menuElement.nativeElement.offsetTop
   }
 }
