@@ -100,7 +100,10 @@ public class NotificationService implements INotificationService {
 
         ResponseEntity<?> response = null;
         try {
-            logger.debug("notification event -> {}", mapper.writeValueAsString(notificationEvent));
+            if(notificationEvent!=null || !notificationEvent.getEventId().isEmpty()){
+                logger.debug("notification event -> {}", mapper.writeValueAsString(notificationEvent));
+
+            }
 
             final String uri = connectionProperties.getNotificationIp().concat(connectionProperties.getNotificationEventEndpoint());
             RestTemplate restTemplate = new RestTemplate();

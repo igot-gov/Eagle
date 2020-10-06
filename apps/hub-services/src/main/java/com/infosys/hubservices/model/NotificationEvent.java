@@ -25,9 +25,8 @@ public class NotificationEvent implements Serializable {
     @JsonProperty(value = "event-id")
     private String eventId;
 
-    @Transient
     @JsonProperty(value = "tag-value-pair")
-    private Map<String, Object> tagValues;
+    private transient Map<String, Object> tagValues;
 
     @NotNull
     @NotEmpty

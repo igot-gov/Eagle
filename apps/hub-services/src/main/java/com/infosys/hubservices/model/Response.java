@@ -17,8 +17,7 @@ public class Response implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -3773253896160786443L;
 
-	@Transient
-	private Map<String, Object> result = new HashMap<>();
+	private transient Map<String, Object> result = new HashMap<>();
 
 	public Map<String, Object> getResult() {
 		return result;
@@ -48,8 +47,4 @@ public class Response implements Serializable, Cloneable {
 		}
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
-	}
 }

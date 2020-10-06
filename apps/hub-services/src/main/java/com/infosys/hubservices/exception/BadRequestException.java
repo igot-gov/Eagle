@@ -22,13 +22,10 @@ public class BadRequestException extends RuntimeException {
 		return message;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	private String message;
+	private final String message;
 
 	public BadRequestException(String message) {
+		super(message);
 		this.message = message;
 	}
 
