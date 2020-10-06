@@ -89,7 +89,9 @@ import { LayoutTabComponent } from './layout-tab/layout-tab.component'
 import { LayoutTabModule } from './layout-tab/layout-tab.module'
 import { NetworkStripMultipleModule } from './network-strip-multiple/network-strip-multiple.module'
 import { CarrierStripMultipleModule } from './carrier-strip-multiple/carrier-strip-multiple.module'
+import { ActivityStripMultipleModule } from './activity-strip-multiple/activity-strip-multiple.module'
 import { NetworkStripMultipleComponent } from './network-strip-multiple/network-strip-multiple.component'
+import { ActivityStripMultipleComponent } from './activity-strip-multiple/activity-strip-multiple.component'
 import { PageComponent } from './page/page.component'
 import { PageModule } from './page/page.module'
 import { PickerContentModule } from './picker-content/picker-content.module'
@@ -123,7 +125,6 @@ import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
 import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
 import { ContentStripVerticalModule } from './content-strip-vertical/content-strip-vertical.module'
 import { ContentStripVerticalComponent } from './content-strip-vertical/content-strip-vertical.component'
-import { CardHomeTopComponent } from './card-home-top/card-home-top.component'
 import { CardNetworkHomeComponent } from './card-network-home/card-network-home.component'
 import { CardHomeDiscussComponent } from './card-home-discuss/card-home-discuss.component'
 import { CardBrowseCourseComponent } from './card-browse-course/card-browse-course.component'
@@ -136,6 +137,8 @@ import { CardCarrierHomeModule } from './card-carrier-home/card-carrier-home.mod
 import { CarrierStripMultipleComponent } from './carrier-strip-multiple/carrier-strip-multiple.component'
 import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-strip-multiple.component'
 import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
+import { CardActivityComponent } from './card-activity/card-activity.component'
+import { CardActivityModule } from './card-activity/card-activity.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -207,6 +210,8 @@ export const WIDGET_REGISTERED_MODULES = [
   CardCarrierHomeModule,
   CarrierStripMultipleModule,
   DiscussStripMultipleModule,
+  CardActivityModule,
+  ActivityStripMultipleModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -328,8 +333,8 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.card.home_top,
-    component: CardHomeTopComponent,
+    widgetSubType: ROOT_WIDGET_CONFIG.card.home_activity,
+    component: CardActivityComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
@@ -390,6 +395,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.networkStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.networkStrip.multipleStrip,
     component: NetworkStripMultipleComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.activityStrip._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.activityStrip.multipleStrip,
+    component: ActivityStripMultipleComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.carrierStrip._type,

@@ -88,11 +88,30 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "",
             "widget": {
-              "widgetType": "card",
-              "widgetSubType": "cardHomeTop",
-              "widgetData": {}
+              "widgetType": "activityStrip",
+              "widgetSubType": "ActivityStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "My activity",
+                    "logo": "group",
+                    "title": "activity",
+                    "stripBackground": "assets/instances/eagle/background/learn.svg",
+                    "titleDescription": "All of India",
+                    "stripConfig": {
+                      "cardSubType": "cardActivity"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/page/network",
+                      "viewMoreText": "Network",
+                      "queryParams": {}
+                    },
+                    "filters": []
+                  }
+                ]
+              }
             }
           }
         ],

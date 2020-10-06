@@ -25,8 +25,10 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
   // starColorW: StarRatingColor = StarRatingColor.warn
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
-      // console.log(this.widgetData.content)
       this.discuss = ([this.widgetData.content] || []).map((d: any) => {
+        console.log(d.upvotes)
+        console.log(d.downvotes)
+        // console.log(d.viewcount)
         return {
           tid: d.tid,
           title: d.title,
@@ -36,7 +38,7 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
           timeinfo: d.timestamp,
           user: d.user,
           upvotes: d.upvote,
-          downvotes: d.downvote,
+          downvotes: d.downvotes,
           tags: d.tags,
           postcount: d.postcount,
 
