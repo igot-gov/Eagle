@@ -203,7 +203,7 @@ public class ProfileService implements IProfileService {
     private Response getProfiles(Response connections){
 
         List<UserConnection> userConnections = (List<UserConnection>)connections.get(Constants.ResponseStatus.DATA);
-        if(userConnections.isEmpty() || userConnections.size()==0){
+        if(userConnections.isEmpty()){
             return connections;
         }
 

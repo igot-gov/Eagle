@@ -12,6 +12,9 @@ public class Constants {
     public enum STATUS { APPROVED, REJECTED, PENDING }
 
     public static class Status {
+        private Status() {
+            throw new IllegalStateException("Utility class");
+        }
         public static final String APPROVED = "Approved";
         public static final String REJECTED = "Rejected";
         public static final String PENDING = "Pending";
@@ -20,14 +23,20 @@ public class Constants {
     }
 
     public static class Message {
+        private Message() {
+            throw new IllegalStateException("Utility class");
+        }
         public static final String FAILED_CONNECTION = "Failed user connections:-";
         public static final String USER_ID_INVALID = "user_id cant be null or empty";
         public static final String ROOT_ORG_INVALID = "rootOrg cant be null or empty";
-        public static final String SENT_NOTIFICATION_ERROR ="Notification event send error occurred: ";
-        public static final String SENT_NOTIFICATION_SUCCESS ="Notification event send : ";
+        public static final String SENT_NOTIFICATION_ERROR ="Notification event send error occurred: {}";
+        public static final String SENT_NOTIFICATION_SUCCESS ="Notification event send : {}";
     }
 
     public static class ResponseStatus {
+        private ResponseStatus() {
+            throw new IllegalStateException("Utility class");
+        }
         public static final String SUCCESSFUL = "Successful";
         public static final String FAILED = "Failed";
         public static final String MESSAGE = "message";
@@ -36,11 +45,17 @@ public class Constants {
     }
 
     public static class Parmeters {
+        private Parmeters() {
+            throw new IllegalStateException("Utility class");
+        }
         public static final String ROOT_ORG = "rootOrg";
 
     }
 
     public static class Profile {
+        private Profile() {
+            throw new IllegalStateException("Utility class");
+        }
         public static final String FIRST_NAME = "firstname";
         public static final String SUR_NAME = "surname";
         public static final String PERSONAL_DETAILS = "personalDetails";

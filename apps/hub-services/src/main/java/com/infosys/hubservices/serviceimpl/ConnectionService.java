@@ -145,7 +145,7 @@ public class ConnectionService implements IConnectionService {
             //find the common new connections that could be established
             List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
 
-            if(commonConnections.isEmpty() || commonConnections.size()==0){
+            if(commonConnections.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, commonConnections);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
@@ -171,7 +171,7 @@ public class ConnectionService implements IConnectionService {
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
             List<UserConnection> userConnectionsEstablished = userConnectionRepository.findByUserAndStatus(userId, Constants.Status.APPROVED);
-            if(userConnectionsEstablished.isEmpty() || userConnectionsEstablished.size()==0){
+            if(userConnectionsEstablished.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnectionsEstablished);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
@@ -197,7 +197,7 @@ public class ConnectionService implements IConnectionService {
             }
 
             List<UserConnection> userConnections = userConnectionRepository.findByUserAndStatus(userId,  Constants.Status.PENDING);
-            if(userConnections.isEmpty() || userConnections.size()==0){
+            if(userConnections.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnections);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);

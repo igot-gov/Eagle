@@ -17,9 +17,10 @@ public class ApplicationServiceError extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	private String message;
+	private final String message;
 
 	public ApplicationServiceError(String message) {
+		super(message);
 		this.message = message;
 	}
 
@@ -28,8 +29,5 @@ public class ApplicationServiceError extends RuntimeException {
 		return message;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
 
 }

@@ -27,7 +27,7 @@ public class EsConfig {
 	ConnectionProperties connectionProperties;
 
 	@Bean(destroyMethod = "close")
-	public RestHighLevelClient restHighLevelClient() {
+	public RestHighLevelClient restHighLevelClient(ConnectionProperties connectionProperties) {
 
 		final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
 		credentialsProvider.setCredentials(AuthScope.ANY,

@@ -8,6 +8,7 @@
 package com.infosys.hubservices.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Transient;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -20,12 +21,11 @@ public class NotificationEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //private String rootOrg;
-
     @NotBlank
     @JsonProperty(value = "event-id")
     private String eventId;
 
+    @Transient
     @JsonProperty(value = "tag-value-pair")
     private Map<String, Object> tagValues;
 
@@ -33,14 +33,6 @@ public class NotificationEvent implements Serializable {
     @NotEmpty
     @JsonProperty(value = "recipients")
     private Map<String, List<String>> recipients;
-
-//    public String getRootOrg() {
-//        return rootOrg;
-//    }
-//
-//    public void setRootOrg(String rootOrg) {
-//        this.rootOrg = rootOrg;
-//    }
 
     public String getEventId() {
         return eventId;

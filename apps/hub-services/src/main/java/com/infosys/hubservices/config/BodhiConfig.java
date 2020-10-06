@@ -5,7 +5,7 @@
  *
  */
 
-package com.infosys.hubservices.repository.cassandra.bodhi;
+package com.infosys.hubservices.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,6 @@ import org.springframework.data.cassandra.repository.config.EnableCassandraRepos
 import com.datastax.driver.core.AuthProvider;
 import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.PlainTextAuthProvider;
-import com.infosys.hubservices.config.CassandraConfig;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.bodhi")

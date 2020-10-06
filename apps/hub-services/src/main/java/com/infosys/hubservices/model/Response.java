@@ -7,7 +7,7 @@
 
 package com.infosys.hubservices.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ public class Response implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = -3773253896160786443L;
 
+	@Transient
 	private Map<String, Object> result = new HashMap<>();
 
 	public Map<String, Object> getResult() {
@@ -45,5 +46,10 @@ public class Response implements Serializable, Cloneable {
 		} catch (CloneNotSupportedException e) {
 			return null;
 		}
+	}
+
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
 }

@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.infosys.hubservices.exception.ApplicationServiceError;
 import com.infosys.hubservices.model.NotificationEvent;
-import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
 import com.infosys.hubservices.util.ConnectionProperties;
@@ -24,8 +23,6 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.crypto.Data;
-import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -103,7 +100,7 @@ public class NotificationService implements INotificationService {
 
         ResponseEntity<?> response = null;
         try {
-            logger.info("notification event -> {}", mapper.writeValueAsString(notificationEvent));
+            logger.debug("notification event -> {}", mapper.writeValueAsString(notificationEvent));
 
             final String uri = connectionProperties.getNotificationIp().concat(connectionProperties.getNotificationEventEndpoint());
             RestTemplate restTemplate = new RestTemplate();
@@ -116,7 +113,7 @@ public class NotificationService implements INotificationService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR + e.getMessage());
+            logger.error(Constants.Message.SENT_NOTIFICATION_ERROR , e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
