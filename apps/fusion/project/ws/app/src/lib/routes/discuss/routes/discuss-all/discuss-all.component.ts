@@ -19,7 +19,7 @@ import _ from 'lodash'
 })
 export class DiscussAllComponent implements OnInit, AfterViewInit {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
-  sticky: boolean = false;
+  sticky = false
   elementPosition: any
   currentFilter = 'recent'
   trendingTags!: NSDiscussData.ITag[]
