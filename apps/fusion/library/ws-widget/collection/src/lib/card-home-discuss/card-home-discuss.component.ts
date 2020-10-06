@@ -37,7 +37,7 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
           count: d.viewcount,
           timeinfo: d.timestamp,
           user: d.user,
-          upvotes: d.upvote,
+          upvotes: d.upvotes,
           downvotes: d.downvotes,
           tags: d.tags,
           postcount: d.postcount,

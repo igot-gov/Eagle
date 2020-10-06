@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { getStringifiedQueryParams } from '@ws-widget/utils'
-import { NsDiscussStripNewMultiple } from './activity-strip-multiple.model'
+import { NsNetworkStripNewMultiple } from './activity-strip-multiple.model'
 
 @Injectable({
   providedIn: 'root',
 })
-export class ActivityStripNewMultipleService {
+export class ContentStripNewMultipleService {
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  getContentStripResponseApi(request: NsDiscussStripNewMultiple.IStripRequestApi, filters?: { [key: string]: string | undefined }):
-    Observable<NsDiscussStripNewMultiple.INetworkStripResponseApi> {
+  getContentStripResponseApi(request: NsNetworkStripNewMultiple.IStripRequestApi, filters?: { [key: string]: string | undefined }):
+    Observable<NsNetworkStripNewMultiple.INetworkStripResponseApi> {
     let stringifiedQueryParams = ''
     stringifiedQueryParams = getStringifiedQueryParams({
       pageNo: request.queryParams ? request.queryParams.pageNo : undefined,
@@ -25,9 +25,9 @@ export class ActivityStripNewMultipleService {
     })
     let url = request.path
     url += stringifiedQueryParams ? `?${stringifiedQueryParams}` : ''
-    return this.http.get<NsDiscussStripNewMultiple.INetworkStripResponseApi>(url)
+    return this.http.get<NsNetworkStripNewMultiple.INetworkStripResponseApi>(url)
   }
-  fetchActivityCard(req: string, url: string): Observable<any> {
+  fetchNetworkUsers(req: string, url: string): Observable<any> {
     return this.http.post<any>(url, req)
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { NsDiscussStripNewMultiple } from './activity-strip-multiple.model'
+import { NsNetworkStripNewMultiple } from './activity-strip-multiple.model'
 import { ActivityStripNewMultipleService } from './activity-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
@@ -23,7 +23,7 @@ interface IStripUnitContentData {
   widgets?: NsWidgetResolver.IRenderConfigWithAnyData[]
   stripTitle: string
   stripName?: string
-  stripInfo?: NsDiscussStripNewMultiple.IStripInfo
+  stripInfo?: NsNetworkStripNewMultiple.IStripInfo
   noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
   errorWidget?: NsWidgetResolver.IRenderConfigWithAnyData
   showOnNoData: boolean
@@ -44,8 +44,8 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   implements
   OnInit,
   OnDestroy,
-  NsWidgetResolver.IWidgetData<NsDiscussStripNewMultiple.IDiscussMultiple> {
-  @Input() widgetData!: NsDiscussStripNewMultiple.IDiscussMultiple
+  NsWidgetResolver.IWidgetData<NsNetworkStripNewMultiple.INetworkStripMultiple> {
+  @Input() widgetData!: NsNetworkStripNewMultiple.INetworkStripMultiple
 
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
@@ -63,7 +63,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   changeEventSubscription: Subscription | null = null
 
   constructor(
-    private activityStripSvc: ActivityStripNewMultipleService,
+    private contentStripSvc: ActivityStripNewMultipleService,
     private contentSvc: WidgetContentService,
     private loggerSvc: LoggerService,
     // private eventSvc: EventService,
@@ -107,19 +107,19 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   // }
 
   private fetchStripFromRequestData(
-    strip: NsDiscussStripNewMultiple.IDiscussStripUnit,
+    strip: NsNetworkStripNewMultiple.INetworkStripUnit,
     calculateParentStatus = true,
   ) {
     this.processStrip(strip, [], 'fetching', false, null)
-    this.fetchActivityCard(strip, calculateParentStatus)
+    this.fetchNetworkUsers(strip, calculateParentStatus)
   }
-  fetchActivityCard(strip: NsDiscussStripNewMultiple.IDiscussStripUnit, calculateParentStatus: boolean) {
+  fetchNetworkUsers(strip: NsNetworkStripNewMultiple.INetworkStripUnit, calculateParentStatus: boolean) {
     if (strip.request && strip.request.api && Object.keys(strip.request.api).length) {
-      this.activityStripSvc.fetchActivityCard(strip.request.api.queryParams, strip.request.api.path).subscribe(
+      this.contentStripSvc.fetchNetworkUsers(strip.request.api.queryParams, strip.request.api.path).subscribe(
         results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.topics, strip),
+            this.transformContentsToWidgets(results.users, strip),
             'done',
             calculateParentStatus,
             null,
@@ -131,7 +131,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
 
   private transformContentsToWidgets(
     contents: NsContent.IContent[],
-    strip: NsDiscussStripNewMultiple.IDiscussStripUnit,
+    strip: NsNetworkStripNewMultiple.INetworkStripUnit,
   ) {
     return (contents.reverse() || []).map((content, idx) => ({
       widgetType: 'card',
@@ -165,7 +165,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   }
 
   private async processStrip(
-    strip: NsDiscussStripNewMultiple.IDiscussStripUnit,
+    strip: NsNetworkStripNewMultiple.INetworkStripUnit,
     results: NsWidgetResolver.IRenderConfigWithAnyData[] = [],
     fetchStatus: TFetchStatus,
     calculateParentStatus = true,
@@ -266,7 +266,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     }
   }
 
-  checkForEmptyWidget(strip: NsDiscussStripNewMultiple.IDiscussStripUnit): boolean {
+  checkForEmptyWidget(strip: NsNetworkStripNewMultiple.INetworkStripUnit): boolean {
     if (
       strip.request &&
       (strip.request.api && Object.keys(strip.request.api).length

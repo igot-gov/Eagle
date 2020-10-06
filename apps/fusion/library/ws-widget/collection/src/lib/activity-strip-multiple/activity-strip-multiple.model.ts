@@ -2,15 +2,15 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 // import { NSSearch } from '../_services/widget-search.model'
 import { NsCardContent } from '../card-content/card-content.model'
 
-export namespace NsDiscussStripNewMultiple {
-  export interface IDiscussMultiple {
+export namespace NsNetworkStripNewMultiple {
+  export interface INetworkStripMultiple {
     errorWidget?: NsWidgetResolver.IRenderConfigWithAnyData
     loader?: boolean
     noDataWidget?: NsWidgetResolver.IRenderConfigWithAnyData
-    strips: IDiscussStripUnit[]
+    strips: INetworkStripUnit[]
     isChannelStrip?: boolean
   }
-  export interface IDiscussStripUnit {
+  export interface INetworkStripUnit {
     key: string
     title: string
     titleDescription?: string
