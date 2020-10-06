@@ -7,7 +7,6 @@
 
 package com.infosys.hubservices.model;
 
-import org.springframework.data.annotation.Transient;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -39,12 +38,8 @@ public class Response implements Serializable, Cloneable {
 		return result.containsKey(key);
 	}
 
-	public Response clone(Response response) {
-		try {
-			return (Response) response.clone();
-		} catch (CloneNotSupportedException e) {
-			return null;
-		}
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return super.clone();
 	}
-
 }

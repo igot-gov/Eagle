@@ -8,7 +8,6 @@
 package com.infosys.hubservices.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.data.annotation.Transient;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;

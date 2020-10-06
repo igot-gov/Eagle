@@ -100,11 +100,6 @@ public class NotificationService implements INotificationService {
 
         ResponseEntity<?> response = null;
         try {
-            if(notificationEvent!=null || !notificationEvent.getEventId().isEmpty()){
-                logger.debug("notification event -> {}", mapper.writeValueAsString(notificationEvent));
-
-            }
-
             final String uri = connectionProperties.getNotificationIp().concat(connectionProperties.getNotificationEventEndpoint());
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
@@ -115,7 +110,6 @@ public class NotificationService implements INotificationService {
             logger.info(Constants.Message.SENT_NOTIFICATION_SUCCESS, response.getStatusCode());
 
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error(Constants.Message.SENT_NOTIFICATION_ERROR , e.getMessage());
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 
