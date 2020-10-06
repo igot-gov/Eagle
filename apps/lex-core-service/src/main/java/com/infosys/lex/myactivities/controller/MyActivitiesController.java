@@ -32,9 +32,11 @@ public class MyActivitiesController {
 
         Map<String, Object> response = new HashMap<>();
         response.put(Constants.LearningHistory.CONTENT_COUNT, myActivities.countUserLearningHistory(rootOrg, userId));
-        response.put(Constants.Badges.CERTIFICATE_COUNT, myActivities.countUserBadges(rootOrg, userId));
+        response.put(Constants.Achieved.CERTIFICATE_COUNT, myActivities.countUserBadges(rootOrg, userId));
         response.put(Constants.LearningHistory.TOTAL_DURATION, myActivities.userTimeSpentOnTraning(rootOrg, userId));
         response.put(Constants.TimeSpent.DAILY_TIME_SPENT, myActivities.userTimeSpentOnPlatform(rootOrg, userId));
+        response.put(Constants.Achieved.KARMA_POINTS, myActivities.userKarmaPoints(rootOrg, userId));
+        response.put(Constants.Achieved.COINS, myActivities.userCoins(rootOrg, userId));
 
         return new ResponseEntity(response, HttpStatus.OK);
     }

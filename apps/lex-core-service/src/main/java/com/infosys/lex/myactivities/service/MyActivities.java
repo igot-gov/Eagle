@@ -54,7 +54,7 @@ public class MyActivities implements IMyActivities {
     public Activity userTimeSpentOnPlatform(String rootOrg, String userId) {
 
         Double duration = userTimeSpentRepository.avgTimeSpentByRootOrgAndUserId(rootOrg, userId);
-        return new Activity( Constants.Unit.MINUTE, TimeUnit.SECONDS.toHours(duration.longValue()));
+        return new Activity(Constants.Unit.MINUTE, TimeUnit.SECONDS.toHours(duration.longValue()));
     }
 
     @Override
@@ -74,4 +74,13 @@ public class MyActivities implements IMyActivities {
         return new Activity( Constants.Unit.HOUR, totalDuration);
     }
 
+    @Override
+    public Activity userKarmaPoints(String rootOrg, String userId) {
+        return new Activity( Constants.Unit.NUMBER, 0);
+    }
+
+    @Override
+    public Activity userCoins(String rootOrg, String userId) {
+        return new Activity( Constants.Unit.NUMBER, 0);
+    }
 }

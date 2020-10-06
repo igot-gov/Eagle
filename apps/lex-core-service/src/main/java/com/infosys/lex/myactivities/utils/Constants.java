@@ -24,11 +24,12 @@ public class Constants {
 
     }
 
-    public static class Badges {
+    public static class Achieved {
         public static final String EARNED_COUNT = "earnedCount";
         public static final String CAN_EARN_COUNT = "canEarnCount";
         public static final String CERTIFICATE_COUNT = "certificateCount";
-
+        public static final String KARMA_POINTS = "karmaPoints";
+        public static final String COINS = "coins";
     }
 
     public static class TimeSpent {
