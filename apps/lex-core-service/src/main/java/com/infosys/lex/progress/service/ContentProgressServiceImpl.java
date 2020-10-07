@@ -71,6 +71,11 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private LexLogger logger = new LexLogger(getClass().getName());
 
+	public static final String PROGRESS_CONSTANT = "progress";
+
+	public static final Integer PERCENTAGE_CONST = 100;
+
+	public static final Integer MINIMUM_PASS_CRITERIA = 70;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1191,9 +1196,9 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 					return Boolean.FALSE;
 				}
 				resultMap = (Map<String, Object>) progressMap.get(contentId);
-				Float progress = (Float) resultMap.get("progress");
-				Float progressPercentage = progress * 100;
-				if (progressPercentage < 70)
+				Float progress = (Float) resultMap.get(PROGRESS_CONSTANT);
+				Float progressPercentage = progress * PERCENTAGE_CONST;
+				if (progressPercentage < MINIMUM_PASS_CRITERIA)
 					return Boolean.FALSE;
 			}
 		} catch (Exception e) {
