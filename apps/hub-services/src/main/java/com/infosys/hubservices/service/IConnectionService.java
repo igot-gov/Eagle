@@ -47,7 +47,7 @@ public interface IConnectionService {
      * @param limit
      * @return
      */
-    Response findCommonConnection(String userId, int offset, int limit);
+    Response findSuggestedConnections(String userId, int offset, int limit);
 
     /**
      * Find connections which are established

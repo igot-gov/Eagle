@@ -56,7 +56,7 @@ public class ProfileService implements IProfileService {
     @Override
     public Response findCommonProfile(String userId, int offset, int limit) {
 
-        Response responseConnections = connectionService.findCommonConnection(userId, offset, limit);
+        Response responseConnections = connectionService.findSuggestedConnections(userId, offset, limit);
         return getProfiles(responseConnections);
 
 
@@ -104,6 +104,7 @@ public class ProfileService implements IProfileService {
             searchSourceBuilder.size(userIds.size());
             searchRequest.source(searchSourceBuilder);
             SearchHits searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT).getHits();
+            logger.info("ids: {} and user profiles searched : {}", userIds, searchResponse.getHits().length );
             List<Object> results = new ArrayList<>();
             for (SearchHit hit : searchResponse.getHits()) {
                 results.add(hit.getSourceAsMap());

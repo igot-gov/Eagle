@@ -25,19 +25,19 @@ public class ConnectionProfileController {
     private ProfileService profileService;
 
     @PostMapping("/find/recommended")
-    public ResponseEntity<Response> findRecommendedConnection(@RequestHeader String rootOrg,
-                                                              @RequestParam(required = false, name = "includeSources") String[] includeSources,
-                                                              @RequestBody MultiSearch multiSearch) {
+    public ResponseEntity<Response> findRecommendedConnections(@RequestHeader String rootOrg,
+                                                               @RequestParam(required = false, name = "includeSources") String[] includeSources,
+                                                               @RequestBody MultiSearch multiSearch) {
 
         Response response = profileService.multiSearchProfiles(rootOrg, multiSearch, includeSources);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
-    @GetMapping("/find/common")
-    public ResponseEntity<Response> findCommon(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
-                                               @RequestHeader String userId,
-                                               @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
-                                               @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+    @GetMapping("/find/suggests")
+    public ResponseEntity<Response> findSuggests(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
+                                                 @RequestHeader String userId,
+                                                 @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
+                                                 @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
         Response response = profileService.findCommonProfile(userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);

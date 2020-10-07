@@ -125,7 +125,7 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response findCommonConnection(String userId, int offset, int limit) {
+    public Response findSuggestedConnections(String userId, int offset, int limit) {
 
         Response response = new Response();
         try {
