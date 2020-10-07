@@ -19,6 +19,7 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
   constructor(private discussService: DiscussService, private router: Router) {
     super()
   }
+
   discussionList = Array()
   // starColor: StarRatingColor = StarRatingColor.accent
   // starColorP: StarRatingColor = StarRatingColor.primary
@@ -26,7 +27,7 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
       this.discuss = ([this.widgetData.content] || []).map((d: any) => {
-        // console.log(d.viewcount)
+        console.log(d.category.viewcount)
         return {
           tid: d.tid,
           title: d.title,

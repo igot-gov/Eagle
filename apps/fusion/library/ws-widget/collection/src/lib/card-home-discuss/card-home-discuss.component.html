@@ -1,5 +1,5 @@
-<mat-card *ngIf="discuss && discuss.title" class="discuss-home-card cursor-pointer mr-6"
-  (click)="getDiscussion(discuss)">
+<mat-card *ngIf="discuss && discuss.title && discuss.category.name!='Announcements'"
+  class="discuss-home-card cursor-pointer mr-6" (click)="getDiscussion(discuss)">
   <mat-card-header>
     <mat-card-title>
       <h2 class="cursor-pointer f-medium">{{discuss.title}}</h2>
@@ -31,7 +31,7 @@
       </span>
       <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
-        <span class="pad-4">{{discuss.viewcount || 0}}&nbsp;views</span>
+        <span class="pad-4">{{discuss.count || 0}}&nbsp;views</span>
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2 margin-right-s">
