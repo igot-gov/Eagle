@@ -67,13 +67,18 @@
 
 .filter {
     .filter-option {
-      margin: $size-xs $size-m;
+      margin: 0 $size-m $size-l;
       /* border-bottom: darkslateblue; */
       border-radius: 0;
       border-bottom-width: 2px;
       border-top-width: 0;
       border-left-width: 0;
       border-right-width: 0;
+      height: 48px;
+      font-size: 14px;
+      line-height: 21px;
+      display: flex;
+      align-items: center;
     }
   
     .filter-option:first-child {
@@ -90,15 +95,15 @@
 }
 
 .search {
-    border-radius: 4px;
-    border: 1px solid #DEDFE0;
+    // border-radius: 4px;
+    // border: 1px solid #DEDFE0;
     flex: 1;
     max-width: 320px;
     height: 48px;
     margin-top: auto;
-    margin-bottom: auto;
-    background: #FFF;
-    margin-bottom: 1rem;
+    // margin-bottom: auto;
+    // background: #FFF;
+    margin-bottom: 1.5rem;
 }
 
 .search .autocomplete-form {
@@ -106,6 +111,15 @@
   font-size: 1em;
   display: block;
   margin: auto;
+  ::ng-deep .mat-form-field-infix {
+      border-top-width: 10px !important;
+      padding: 0px;
+      padding-bottom: 5px;
+  }
+  ::ng-deep.mat-form-field-wrapper .mat-form-field-flex {
+    align-items: center;
+    padding: 0 .75rem 0 .25rem;
+  }
 }
 
 .search-home {
@@ -115,9 +129,9 @@
   padding: $size-s $size-s;
 }
 
-.search input {
-  padding-left: .5rem !important;
-}
+// .search input {
+//   padding-left: .5rem !important;
+// }
 
 .search .search .mat-form-field-wrapper {
   padding-bottom: 0px;
