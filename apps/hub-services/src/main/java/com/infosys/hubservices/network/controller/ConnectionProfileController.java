@@ -33,7 +33,7 @@ public class ConnectionProfileController {
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
-    @PostMapping("/find/common")
+    @GetMapping("/find/common")
     public ResponseEntity<Response> findCommon(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
                                                @RequestHeader String userId,
                                                @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,

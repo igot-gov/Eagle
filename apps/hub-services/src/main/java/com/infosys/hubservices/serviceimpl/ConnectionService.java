@@ -7,7 +7,7 @@
 
 package com.infosys.hubservices.serviceimpl;
 
-import com.infosys.hubservices.exception.ApplicationServiceError;
+import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.exception.BadRequestException;
 import com.infosys.hubservices.model.ConnectionRequest;
 import com.infosys.hubservices.model.NotificationEvent;
@@ -56,7 +56,7 @@ public class ConnectionService implements IConnectionService {
 
 
         } catch (Exception e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
         return response;
@@ -81,7 +81,7 @@ public class ConnectionService implements IConnectionService {
                 sendNotification(roorOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
 
         } catch (Exception e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -106,7 +106,7 @@ public class ConnectionService implements IConnectionService {
 
 
         } catch (Exception e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -155,7 +155,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         }catch (Exception e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -181,7 +181,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
         }
 
         return response;
@@ -207,7 +207,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
         }
 
         return response;

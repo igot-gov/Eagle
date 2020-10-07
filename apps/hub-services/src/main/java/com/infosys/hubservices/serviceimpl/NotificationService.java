@@ -10,7 +10,7 @@ package com.infosys.hubservices.serviceimpl;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.infosys.hubservices.exception.ApplicationServiceError;
+import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.model.NotificationEvent;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
@@ -95,7 +95,7 @@ public class NotificationService implements INotificationService {
     @Override
     public ResponseEntity postEvent(String rootOrg, NotificationEvent notificationEvent) {
         if(rootOrg == null || rootOrg.isEmpty()){
-            throw new ApplicationServiceError(Constants.Message.ROOT_ORG_INVALID);
+            throw new ApplicationException(Constants.Message.ROOT_ORG_INVALID);
         }
 
         ResponseEntity<?> response = null;

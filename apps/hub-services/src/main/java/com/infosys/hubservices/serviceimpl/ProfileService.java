@@ -7,7 +7,7 @@
 
 package com.infosys.hubservices.serviceimpl;
 
-import com.infosys.hubservices.exception.ApplicationServiceError;
+import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.model.MultiSearch;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.Search;
@@ -113,7 +113,7 @@ public class ProfileService implements IProfileService {
             response.put(Constants.ResponseStatus.DATA, results);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
         } catch (IOException e){
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION + e.getMessage());
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
@@ -180,7 +180,7 @@ public class ProfileService implements IProfileService {
 
         } catch (IOException e){
             logger.error(Constants.Message.CONNECTION_EXCEPTION_OCCURED, e);
-            throw new ApplicationServiceError(Constants.Message.FAILED_CONNECTION );
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION );
 
         }
 
