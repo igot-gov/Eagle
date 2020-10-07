@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.model.NotificationEvent;
+import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.service.INotificationService;
 import com.infosys.hubservices.util.ConnectionProperties;
@@ -71,7 +72,8 @@ public class NotificationService implements INotificationService {
 
         String fromName = null;
         try{
-            Map<String, Object> profiles = profileService.findProfiles(Arrays.asList(uuid),null).getResult();
+            Response res = profileService.findProfiles(Arrays.asList(uuid),null);
+            Map<String, Object> profiles = res.getResult();
             if(profiles.size()>0){
 
                 ArrayNode dataNodes = mapper.convertValue(profiles.get(Constants.ResponseStatus.DATA), ArrayNode.class);

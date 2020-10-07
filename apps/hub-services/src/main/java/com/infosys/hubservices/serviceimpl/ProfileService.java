@@ -85,25 +85,8 @@ public class ProfileService implements IProfileService {
 
         Response response = new Response();
         try{
-            SearchRequest searchRequest = new SearchRequest();
-            searchRequest.indices(connectionProperties.getEsProfileIndex());
-            searchRequest.types(connectionProperties.getEsProfileIndexType());
 
-            BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("id.keyword", userIds));
-
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            searchSourceBuilder.query(query);
-            if (sourceFields != null && sourceFields.length>0) {
-                String[] mergedSource = (String[])Stream.of(connectionProperties.getEsProfileSourceFields(), sourceFields).flatMap(Stream::of).toArray();
-                searchSourceBuilder.fetchSource(mergedSource, new String[] {});
-
-            } else {
-                searchSourceBuilder.fetchSource(connectionProperties.getEsProfileSourceFields(), new String[] {});
-
-            }
-            searchSourceBuilder.size(userIds.size());
-            searchRequest.source(searchSourceBuilder);
-            SearchHits searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT).getHits();
+            SearchHits searchResponse = restHighLevelClient.search(build(userIds, sourceFields), RequestOptions.DEFAULT).getHits();
             logger.info("ids: {} and user profiles searched : {}", userIds, searchResponse.getHits().length );
             List<Object> results = new ArrayList<>();
             for (SearchHit hit : searchResponse.getHits()) {
@@ -119,6 +102,28 @@ public class ProfileService implements IProfileService {
         }
 
         return response;
+    }
+
+    private SearchRequest build(List<String> userIds, String[] sourceFields){
+        SearchRequest searchRequest = new SearchRequest();
+        searchRequest.indices(connectionProperties.getEsProfileIndex());
+        searchRequest.types(connectionProperties.getEsProfileIndexType());
+
+        BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("id.keyword", userIds));
+
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(query);
+        if (sourceFields != null && sourceFields.length>0) {
+            String[] mergedSource = (String[])Stream.of(connectionProperties.getEsProfileSourceFields(), sourceFields).flatMap(Stream::of).toArray();
+            searchSourceBuilder.fetchSource(mergedSource, new String[] {});
+
+        } else {
+            searchSourceBuilder.fetchSource(connectionProperties.getEsProfileSourceFields(), new String[] {});
+
+        }
+        searchSourceBuilder.size(userIds.size());
+        searchRequest.source(searchSourceBuilder);
+        return searchRequest;
     }
 
     @Override

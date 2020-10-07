@@ -39,7 +39,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.infosys.lex.goal.dto.ActionDTO;
 import com.infosys.lex.goal.dto.GoalDTO;
-import com.infosys.lex.goal.service.GoalsService;
+import com.infosys.hubservices.serviceImpl.GoalsService;
 
 @RestController
 @CrossOrigin(origins = "*")
