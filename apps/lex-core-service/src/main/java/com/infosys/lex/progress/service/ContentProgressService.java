@@ -61,4 +61,6 @@ public interface ContentProgressService {
 
 	String updateExternalProgress(ExternalProgressDTO externalInfo) throws Exception;
 
+	public Boolean getMandatoryContentStatusForUser(String rootOrg, String org, String userId);
+
 }
