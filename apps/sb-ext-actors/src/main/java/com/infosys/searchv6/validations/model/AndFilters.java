@@ -74,7 +74,7 @@ public class AndFilters implements Serializable {
     private List<String> priceCurrency = Collections.emptyList();
     private List<Double> priceValue = Collections.emptyList();
     private List<Double> priceRange = Collections.emptyList();
-
+    private List<String> competencies = Collections.emptyList();
 
 //    @AssertTrue(message = "Can be applied only if " + SearchConstants.FILTER_CONTENT_TYPE_FIELD_KEY + " has " + SearchConstants.RESOURCE)
 //    private boolean isResourceType() {
@@ -430,4 +430,8 @@ public class AndFilters implements Serializable {
     public void setPriceRange(List<Double> priceRange) {
         this.priceRange = priceRange;
     }
+
+    public List<String> getCompetencies() {return competencies;}
+
+    public void setCompetencies(List<String> competencies) {this.competencies = competencies;}
 }
