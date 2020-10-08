@@ -10,7 +10,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-  Inject
+  Inject,
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@angular/material'
@@ -55,8 +55,6 @@ export interface IUsersData {
   srclang: string
   languages: any[]
 }
-
-
 
 @Component({
   selector: 'ws-auth-edit-meta',
@@ -156,8 +154,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     @Inject(MAT_DIALOG_DATA) public data1: IUsersData,
   ) {
     // console.log("Parent component", this.parentContent)
-
-
 
   }
 
@@ -338,7 +334,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       distinctUntilChanged(),
       switchMap(value => this.interestSvc.fetchAutocompleteInterestsV2(value)),
     )
-
 
     this.allLanguages = this.data1.languages
   }
@@ -1321,12 +1316,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         formdata, {
         contentId: this.contentMeta.identifier,
         contentType: CONTENT_BASE_STREAM,
-      }).subscribe((vtt) => {
+      }).subscribe(vtt => {
 
         this.loader.changeLoad.next(false)
 
         this.contentForm.controls.subTitles.setValue([{
-          url: vtt.artifactURL
+          url: vtt.artifactURL,
         }])
         console.log({ vtt })
 

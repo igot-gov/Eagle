@@ -94,7 +94,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       if (this.widgetData.identifier) {
 
         console.log({
-          data
+          data,
         })
 
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
@@ -239,10 +239,8 @@ export class PlayerVideoComponent extends WidgetBaseComponent
 
     console.log({
       subtitles: this.widgetData,
-      contentSvc: this.contentSvc
+      contentSvc: this.contentSvc,
     })
-
-
 
     initObj.player.ready(() => {
       if (Array.isArray(this.widgetData.subtitles)) {

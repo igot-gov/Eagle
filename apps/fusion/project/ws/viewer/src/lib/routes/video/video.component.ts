@@ -72,7 +72,7 @@ export class VideoComponent implements OnInit, OnDestroy {
 
           if (this.videoData.subTitles) {
 
-            let subTitleUrl = ""
+            let subTitleUrl = ''
 
             if (this.videoData.subTitles[0].url.indexOf('/content-store/') > -1) {
               subTitleUrl = `/apis/authContent/${new URL(this.videoData.subTitles[0].url).pathname}`
@@ -81,9 +81,9 @@ export class VideoComponent implements OnInit, OnDestroy {
             }
 
             this.widgetResolverVideoData.widgetData.subtitles = [{
-              srclang: "",
-              label: "",
-              url: subTitleUrl
+              srclang: '',
+              label: '',
+              url: subTitleUrl,
             }]
           }
         })
@@ -117,14 +117,9 @@ export class VideoComponent implements OnInit, OnDestroy {
             : ''
           this.widgetResolverVideoData.widgetData.mimeType = data.content.data.mimeType
 
-
-          console.log({
-            content: data.content
-          })
-
           if (data.content.data.subTitles[0]) {
 
-            let subTitlesUrl = ""
+            let subTitlesUrl = ''
             if (data.content.data.subTitles[0].url.indexOf('/content-store/') > -1) {
               subTitlesUrl = `/apis/authContent/${new URL(data.content.data.subTitles[0].url).pathname}`
             } else {
@@ -132,9 +127,9 @@ export class VideoComponent implements OnInit, OnDestroy {
             }
 
             this.widgetResolverVideoData.widgetData.subtitles = [{
-              srclang: "",
-              label: "",
-              url: subTitlesUrl
+              srclang: '',
+              label: '',
+              url: subTitlesUrl,
             }]
 
           }
@@ -194,7 +189,7 @@ export class VideoComponent implements OnInit, OnDestroy {
         mimeType: content.mimeType,
         resumePoint: 0,
         continueLearning: true,
-        subtitles: []
+        subtitles: [],
       },
       widgetHostClass: 'video-full',
     }
