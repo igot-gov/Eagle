@@ -116,6 +116,7 @@ public class LexConstants {
 	public static final String ACTOR = "actor";
 	public static final String EDITORS = "editors";
 	public static final String PRICE = "price";
+	public static final String COMPETENCIES = "competencies";
 	public static final String AUTHOR = "author";
 	public static final String PLAYLIST = "Playlist";
 	public static final String K_BOARD = "Knowledge Board";

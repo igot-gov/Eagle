@@ -34,7 +34,7 @@ public class GraphUtil {
 			LexConstants.SUBMITTER_DETAILS, LexConstants.CONCEPTS,LexConstants.PLAG_SCAN, LexConstants.TAGS,
 			"eligibility", "scoreType", "externalData", "verifiers", "verifier", "subTitles", "roles", "group",
 			"msArtifactDetails", "studyMaterials", "equivalentCertifications", LexConstants.TRANSCODING,
-			LexConstants.PRICE, LexConstants.EDITORS);
+			LexConstants.PRICE, LexConstants.EDITORS,LexConstants.COMPETENCIES);
 	
 	public static SimpleDateFormat inputFormatterDateTime = new SimpleDateFormat("yyyyMMdd'T'HHmmssZ");
 
