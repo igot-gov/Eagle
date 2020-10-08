@@ -22,11 +22,12 @@ export const topicsApi = Router()
 topicsApi.get('/recent', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
+        const pageNo = req.query.page || 1
         const userId = extractUserIdFromRequest(req)
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const url = API_ENDPOINTS.getRecentTopics
         const response = await axios.get(
-            url,
+            `${url}?page=${pageNo}`,
             { ...axiosRequestConfig, headers: { rootOrg } }
         )
         res.send(response.data)
@@ -59,10 +60,11 @@ topicsApi.get('/popular', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
+        const pageNo = req.query.page || 1
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const url = API_ENDPOINTS.getPopularTopics
         const response = await axios.get(
-            url,
+            `${url}?page=${pageNo}`,
             { ...axiosRequestConfig, headers: { rootOrg } }
         )
         res.send(response.data)
