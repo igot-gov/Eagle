@@ -205,7 +205,9 @@ usersApi.get('/:slug/about', async (req, res) => {
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const slug = req.params.slug
         const userUid = await getUserUID(userId)
+        logInfo("called /:slug/about slug=> ", slug)
         const url = API_ENDPOINTS.getUserProfile(slug) + `?_uid=${userUid}`
+        logInfo("called /:slug/about url=> ", url)
         const response = await axios.get(
             url,
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
