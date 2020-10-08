@@ -121,9 +121,9 @@ topicsApi.get('/:tid', async (req, res) => {
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const tid = req.params.tid
         const userUid = await getUserUID(userId)
-        const url = API_ENDPOINTS.getTopicDetails(tid) + `?_uid=${userUid}`
+        const url = API_ENDPOINTS.getTopicDetails(tid) + `?page=${pageNo}&_uid=${userUid}`
         const response = await axios.get(
-            `${url}?page=${pageNo}`,
+            url,
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
         )
         res.send(response.data)
