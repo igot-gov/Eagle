@@ -81,7 +81,6 @@ public class ConnectionService implements IConnectionService {
                 sendNotification(roorOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
 
         } catch (Exception e){
-            e.printStackTrace();
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
