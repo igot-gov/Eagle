@@ -40,7 +40,12 @@
 .new-width {
   max-width: $max-screen;
   display: inline-block;
-  margin: 0 auto;
+  // margin: 0 auto;
+  margin-top: 2.5rem;
+
+  @include breakpoint-xs {
+    margin-top: 1rem;
+  }
 }
 
 .rotate-t-90 {

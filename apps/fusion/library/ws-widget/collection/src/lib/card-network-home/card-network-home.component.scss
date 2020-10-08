@@ -8,8 +8,9 @@
   // $card-standard-width-: 331px;
   position: relative;
   width: $card-network-width;
-  min-width: 260px;
-  border-radius: 8px;
+  max-width: 280px;
+  min-width: 280px;
+  border-radius: 5px;
   box-sizing: border-box;
   box-shadow: 0px 10px 30px #99999933;
 
@@ -55,6 +56,10 @@
       max-width: 58px;
       max-height: -webkit-fill-available;
     }
+  }
+
+  .mat-card-header .mat-card-title {
+    font-size: 16px;
   }
 
   mat-card-content {

@@ -133,7 +133,7 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
     contents: NsContent.IContent[],
     strip: NsDiscussStripNewMultiple.IDiscussStripUnit,
   ) {
-    return (contents.reverse() || []).map((content, idx) => ({
+    return (contents || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardHomeDiscuss',
       widgetHostClass: 'mb-2',
