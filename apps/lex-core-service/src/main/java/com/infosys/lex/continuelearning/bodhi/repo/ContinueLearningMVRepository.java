@@ -18,12 +18,34 @@ Highly Confidential
 package com.infosys.lex.continuelearning.bodhi.repo;
 
 import org.springframework.data.cassandra.repository.CassandraRepository;
+import org.springframework.data.cassandra.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.infosys.lex.continuelearning.entities.ContinueLearningMV;
 import com.infosys.lex.continuelearning.entities.ContinueLearningMVKey;
 
+import java.util.List;
+
 @Repository
 public interface ContinueLearningMVRepository extends CassandraRepository<ContinueLearningMV, ContinueLearningMVKey> {
+
+    /**
+     * find all resources of a user's leaning history
+     * @param rootOrg
+     * @param userId
+     * @return
+     */
+    @Query("select resource_id from mv_continue_learning where root_org=?0 and user_id=?1  allow filtering;")
+    public List<ContinueLearningMV> findByRootOrgAndUserId(String rootOrg, String userId);
+
+    /**
+     * get count of resources of a user's learning history
+     *
+     * @param rootOrg
+     * @param userId
+     * @return
+     */
+    @Query("select count(resource_id) from mv_continue_learning where root_org=?0 and user_id=?1  allow filtering;")
+    public int countByRootOrgAndUserId(String rootOrg, String userId);
 
 }

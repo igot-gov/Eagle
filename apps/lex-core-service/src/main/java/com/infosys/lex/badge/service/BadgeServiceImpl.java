@@ -185,12 +185,12 @@ public class BadgeServiceImpl implements BadgeService {
 //						temp.put("message", "Congratulations on completing the course '" + source.get("name") + "'.");
 //						temp.put("hover_text", "For completing '" + source.get("name") + "' course.");
 //						temp.put("how_to_earn", "Complete the course");
-//						temp.put("image", "/content/Achievements/Badges/Certificate.png?type=assets");// get image
+//						temp.put("image", "/content/Achievements/Achieved/Certificate.png?type=assets");// get image
 //					} else {
 //						temp.put("message", "Hats off to you, elite learner! Congrats.");
 //						temp.put("hover_text", "For completing '" + source.get("name") + "' learning path.");
 //						temp.put("how_to_earn", "Complete the learning path");
-//						temp.put("image", "/content/Achievements/Badges/Eilte.png?type=assets");// get image
+//						temp.put("image", "/content/Achievements/Achieved/Eilte.png?type=assets");// get image
 //					}
 //					temp.put("badge_order", temp.get("badge_type"));
 //					if (Double.parseDouble(temp.get("progress").toString()) == 100
@@ -492,13 +492,13 @@ public class BadgeServiceImpl implements BadgeService {
 //						latest.put("message", "Congratulations on completing the course '" + source.get("name") + "'.");
 //						latest.put("hover_text", "For completing '" + source.get("name") + "' course.");
 //						latest.put("how_to_earn", "Complete the course");
-//						latest.put("image", "/content/Achievements/Badges/Certificate.png?type=assets");// get
+//						latest.put("image", "/content/Achievements/Achieved/Certificate.png?type=assets");// get
 //																										// image
 //					} else {
 //						latest.put("message", "Hats off to you, elite learner! Congrats.");
 //						latest.put("hover_text", "For completing '" + source.get("name") + "' learning path.");
 //						latest.put("how_to_earn", "Complete the learning path");
-//						latest.put("image", "/content/Achievements/Badges/Eilte.png?type=assets");// get image
+//						latest.put("image", "/content/Achievements/Achieved/Eilte.png?type=assets");// get image
 //					}
 //				}
 //			}
@@ -955,12 +955,12 @@ public class BadgeServiceImpl implements BadgeService {
 					temp.put("message", "Congratulations on completing the course '" + source.get("name") + "'.");
 					temp.put("hover_text", "For completing '" + source.get("name") + "' course.");
 					temp.put("how_to_earn", "Complete the course");
-					temp.put("image", "/content/Achievements/Badges/Certificate.png?type=assets");
+					temp.put("image", "/content/Achievements/Achieved/Certificate.png?type=assets");
 				} else {
 					temp.put("message", "Hats off to you, elite learner! Congrats.");
 					temp.put("hover_text", "For completing '" + source.get("name") + "' learning path.");
 					temp.put("how_to_earn", "Complete the learning path");
-					temp.put("image", "/content/Achievements/Badges/Eilte.png?type=assets");
+					temp.put("image", "/content/Achievements/Achieved/Eilte.png?type=assets");
 				}
 				temp.put("badge_order", temp.get("badge_type"));
 				if (Double.parseDouble(temp.get("progress").toString()) == 100
@@ -1147,13 +1147,13 @@ public class BadgeServiceImpl implements BadgeService {
 						latest.put("message", "Congratulations on completing the course '" + source.get("name") + "'.");
 						latest.put("hover_text", "For completing '" + source.get("name") + "' course.");
 						latest.put("how_to_earn", "Complete the course");
-						latest.put("image", "/content/Achievements/Badges/Certificate.png?type=assets");
+						latest.put("image", "/content/Achievements/Achieved/Certificate.png?type=assets");
 
 					} else {
 						latest.put("message", "Hats off to you, elite learner! Congrats.");
 						latest.put("hover_text", "For completing '" + source.get("name") + "' learning path.");
 						latest.put("how_to_earn", "Complete the learning path");
-						latest.put("image", "/content/Achievements/Badges/Eilte.png?type=assets");
+						latest.put("image", "/content/Achievements/Achieved/Eilte.png?type=assets");
 					}
 				}
 			}

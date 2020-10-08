@@ -46,7 +46,7 @@ public class BadgeController {
 	 * @return
 	 * @throws Exception
 	 */
-//	@GetMapping("/v2/Users/{email_id}/Badges")
+//	@GetMapping("/v2/Users/{email_id}/Achieved")
 //	public ResponseEntity<Map<String, Object>> generateBagdes(@PathVariable("email_id") String emailId,
 //			@PathVariable("rootOrg") String rootOrg) throws Exception {
 //		return new ResponseEntity<Map<String, Object>>(badgeService.getAllBadges(rootOrg, emailId), HttpStatus.CREATED);
