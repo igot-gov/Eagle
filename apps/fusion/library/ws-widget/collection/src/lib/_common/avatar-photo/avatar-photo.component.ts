@@ -39,21 +39,26 @@ export class AvatarPhotoComponent implements OnInit {
 
   private createInititals(): void {
     let initials = ''
+    const array = this.name.split(' ')
 
-    for (let i = 0; i < this.name.length; i += 1) {
-      if (this.name.charAt(i) === ' ') {
-        continue
-      }
+    if (array[0] !== 'undefined' && typeof array[1] !== 'undefined') {
+      initials += array[0].charAt(0)
+      initials += array[1].charAt(0)
+    } else {
+      for (let i = 0; i < this.name.length; i += 1) {
+        if (this.name.charAt(i) === ' ') {
+          continue
+        }
 
-      if (this.name.charAt(i) === this.name.charAt(i)) {
-        initials += this.name.charAt(i)
+        if (this.name.charAt(i) === this.name.charAt(i)) {
+          initials += this.name.charAt(i)
 
-        if (initials.length === 2) {
-          break
+          if (initials.length === 2) {
+            break
+          }
         }
       }
     }
-
     this.initials = initials.toUpperCase()
   }
 }

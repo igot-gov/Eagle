@@ -16,10 +16,14 @@
   }
   .course-detail {
     margin-top: 25px;
+    .icon {
+      opacity: 60%;
+    }
     .icon-text {
-      font-size: 21px;
+      font-size: 14px;
       line-height: 24px;
       margin-left: 10px;
+      color: black;
     }
     .material-icons {
       display: inline-flex;

@@ -134,12 +134,6 @@ export class BtnContentShareDialogComponent implements OnInit {
     if (this.configSvc.activeLocale && this.configSvc.activeLocale.path) {
       locationOrigin += `/${this.configSvc.activeLocale.path}`
     }
-    // tslint:disable-next-line: no-console
-    console.log(this.data.content.appIcon)
-    // tslint:disable-next-line: no-console
-    console.log(this.data.content.name)
-    // tslint:disable-next-line: no-console
-    console.log(this.data.content.description)
     switch (this.data.content.contentType) {
       case NsContent.EContentTypes.CHANNEL:
         return `${locationOrigin}${this.data.content.artifactUrl}`
