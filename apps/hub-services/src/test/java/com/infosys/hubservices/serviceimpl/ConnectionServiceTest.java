@@ -1,9 +1,3 @@
-/*
- *                "Copyright 2020 Infosys Ltd.
- *                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
- *                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"
- *
- */
 
 package com.infosys.hubservices.serviceimpl;
 
@@ -43,6 +37,12 @@ class ConnectionServiceTest {
     @Mock
     NotificationService notificationService;
 
+    final static String rootOrg = "rootOrg";
+    final static String user_id = "user_id";
+    final static String connect_id = "connect_id";
+
+
+
     @BeforeEach
     public void setUp(){
         MockitoAnnotations.initMocks(this);
@@ -53,49 +53,42 @@ class ConnectionServiceTest {
     void add() {
 
         ConnectionRequest request = mock(ConnectionRequest.class);
-        Response res =connectionService.add("rootOrg",request);
+        Response res =connectionService.add(rootOrg,request);
         assertTrue(!res.getResult().isEmpty());
-        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE) == Constants.ResponseStatus.SUCCESSFUL);
-        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS) == HttpStatus.CREATED);
+        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE).equals(Constants.ResponseStatus.SUCCESSFUL));
+        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS).equals(HttpStatus.CREATED));
 
     }
 
     @Test
     void update() {
         ConnectionRequest request = mock(ConnectionRequest.class);
-        when(request.getUserId()).thenReturn("user_id");
-        when(request.getConnectionId()).thenReturn("connect_id");
+        when(request.getUserId()).thenReturn(user_id);
+        when(request.getConnectionId()).thenReturn(connect_id);
 
         UserConnection connection = mock(UserConnection.class);
-        when(userConnectionRepository.findByUsersAndConnection("user_id","connect_id")).thenReturn(connection);
-        Response res =connectionService.update("rootOrg",request);
+        when(userConnectionRepository.findByUsersAndConnection(user_id,connect_id)).thenReturn(connection);
+        Response res =connectionService.update(rootOrg,request);
         assertTrue(!res.getResult().isEmpty());
-        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE) == Constants.ResponseStatus.SUCCESSFUL);
-        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS) == HttpStatus.OK);
+        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE).equals(Constants.ResponseStatus.SUCCESSFUL));
+        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS).equals(HttpStatus.OK));
     }
 
     @Test
     void delete() {
 
         ConnectionRequest request = mock(ConnectionRequest.class);
-        when(request.getUserId()).thenReturn("user_id");
-        when(request.getConnectionId()).thenReturn("connect_id");
+        when(request.getUserId()).thenReturn(user_id);
+        when(request.getConnectionId()).thenReturn(connect_id);
 
         UserConnection connection = mock(UserConnection.class);
-        when(userConnectionRepository.findByUsersAndConnection("user_id","connect_id")).thenReturn(connection);
-        Response res =connectionService.update("rootOrg",request);
+        when(userConnectionRepository.findByUsersAndConnection(user_id,connect_id)).thenReturn(connection);
+        Response res =connectionService.update(rootOrg,request);
         assertTrue(!res.getResult().isEmpty());
-        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE) == Constants.ResponseStatus.SUCCESSFUL);
-        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS) == HttpStatus.OK);
+        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE).equals(Constants.ResponseStatus.SUCCESSFUL));
+        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS).equals(HttpStatus.OK));
     }
 
-    @Test
-    void sendNotification() {
-    }
-
-    @Test
-    void findRecommendedConnection() {
-    }
 
     @Test
     void findSuggestedConnectionsThrowsApplicationException() {
@@ -113,12 +106,12 @@ class ConnectionServiceTest {
         List<UserConnection> connectionList = new ArrayList<>();
         UserConnection mockConnection = mock(UserConnection.class);
         connectionList.add(mockConnection);
-        when(userConnectionRepository.findByUserAndStatus("user_id", Constants.Status.APPROVED)).thenReturn(connectionList);
+        when(userConnectionRepository.findByUserAndStatus(user_id, Constants.Status.APPROVED)).thenReturn(connectionList);
 
-        Response res =connectionService.findConnections("user_id", 0, 1);
+        Response res =connectionService.findConnections(user_id, 0, 1);
         assertTrue(!res.getResult().isEmpty());
-        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE) == Constants.ResponseStatus.SUCCESSFUL);
-        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS) == HttpStatus.OK);
+        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE).equals(Constants.ResponseStatus.SUCCESSFUL));
+        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS).equals(HttpStatus.OK));
 
     }
 
@@ -128,11 +121,11 @@ class ConnectionServiceTest {
         List<UserConnection> connectionList = new ArrayList<>();
         UserConnection mockConnection = mock(UserConnection.class);
         connectionList.add(mockConnection);
-        when(userConnectionRepository.findByUserAndStatus("user_id", Constants.Status.PENDING)).thenReturn(connectionList);
+        when(userConnectionRepository.findByUserAndStatus(user_id, Constants.Status.PENDING)).thenReturn(connectionList);
 
-        Response res =connectionService.findConnectionsRequested("user_id", 0, 1);
+        Response res =connectionService.findConnectionsRequested(user_id, 0, 1);
         assertTrue(!res.getResult().isEmpty());
-        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE) == Constants.ResponseStatus.SUCCESSFUL);
-        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS) == HttpStatus.OK);
+        assertTrue(res.getResult().get(Constants.ResponseStatus.MESSAGE).equals(Constants.ResponseStatus.SUCCESSFUL));
+        assertTrue(res.getResult().get(Constants.ResponseStatus.STATUS).equals(HttpStatus.OK));
     }
 }

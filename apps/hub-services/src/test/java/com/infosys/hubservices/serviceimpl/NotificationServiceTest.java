@@ -1,9 +1,4 @@
-/*
- *                "Copyright 2020 Infosys Ltd.
- *                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
- *                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3"
- *
- */
+
 
 package com.infosys.hubservices.serviceimpl;
 
@@ -13,7 +8,6 @@ import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
 
-import org.apache.kafka.common.protocol.types.Field;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +25,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,16 +47,24 @@ class NotificationServiceTest {
     @Test
     void buildEvent_all_values_set() throws Exception{
 
+
+        final String sender = "#sender";
+        final String targetUrl = "#targetUrl";
+        final String urlValues = "#urlValues";
+        final String status = "#status";
+        final String id = "mockId";
+
+
         Map<String, Object> mockProfiles = new HashMap<>();
         Response response = new Response();
         response.put(Constants.ResponseStatus.DATA, mockProfiles);
 
-        when(profileService.findProfiles(Arrays.asList("abc"),null)).thenReturn(response);
+        when(profileService.findProfiles(Arrays.asList(id),null)).thenReturn(response);
 
-        when(connectionProperties.getNotificationTemplateSender()).thenReturn("#sender");
-        when(connectionProperties.getNotificationTemplateTargetUrl()).thenReturn("#targetUrl");
-        when(connectionProperties.getNotificationTemplateTargetUrlValue()).thenReturn("#urlValues");
-        when(connectionProperties.getNotificationTemplateStatus()).thenReturn("#status");
+        when(connectionProperties.getNotificationTemplateSender()).thenReturn(sender);
+        when(connectionProperties.getNotificationTemplateTargetUrl()).thenReturn(targetUrl);
+        when(connectionProperties.getNotificationTemplateTargetUrlValue()).thenReturn(urlValues);
+        when(connectionProperties.getNotificationTemplateStatus()).thenReturn(status);
         when(connectionProperties.getNotificationTemplateReciepient()).thenReturn("#reciepient");
 
         UserConnection userConnection = mock(UserConnection.class, Mockito.RETURNS_DEEP_STUBS);
@@ -71,14 +72,14 @@ class NotificationServiceTest {
         when(userConnection.getUserConnectionPrimarykey().getConnectionId()).thenReturn("connect_id");
         when(userConnection.getConnectionStatus()).thenReturn("status");
 
-        NotificationEvent notificationEvent = notificationService.buildEvent("abc", userConnection);
+        NotificationEvent notificationEvent = notificationService.buildEvent(id, userConnection);
 
-        assertTrue(notificationEvent.getEventId().equalsIgnoreCase("abc"));
+        assertTrue(notificationEvent.getEventId().equalsIgnoreCase(id));
         assertTrue(!notificationEvent.getRecipients().isEmpty());
         assertTrue(!notificationEvent.getTagValues().isEmpty());
-        assertTrue(notificationEvent.getTagValues().get("#sender")!=null);
-        assertTrue(notificationEvent.getTagValues().get("#status")!=null);
-        assertTrue(notificationEvent.getTagValues().get("#targetUrl")!=null);
+        assertTrue(notificationEvent.getTagValues().get(sender)!=null);
+        assertTrue(notificationEvent.getTagValues().get(status)!=null);
+        assertTrue(notificationEvent.getTagValues().get(targetUrl)!=null);
 
     }
 
@@ -89,9 +90,9 @@ class NotificationServiceTest {
 
         NotificationEvent notificationEvent = mock(NotificationEvent.class, Mockito.RETURNS_DEEP_STUBS);
 
-        ResponseEntity entity  = notificationService.postEvent(any(String.class), notificationEvent);
+        ResponseEntity entity  = notificationService.postEvent("rootOrg", notificationEvent);
         assertTrue(entity!=null);
-        assertTrue(entity.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR);
+        assertTrue(entity.getStatusCode().equals(HttpStatus.INTERNAL_SERVER_ERROR));
 
     }
 }
