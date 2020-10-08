@@ -209,6 +209,7 @@ public final class ProjectConstants {
     public static final String STUDY_MATERIALS = "studyMaterials";
     public static final String EQUIVALENT_CERTIFICATIONS = "equivalentCertifications";
     public static final String SOURCE_SHORT_NAME = "sourceShortName";
+    public static final String COMPETENCIES = "competencies";
 
     public ProjectConstants() {
     }
