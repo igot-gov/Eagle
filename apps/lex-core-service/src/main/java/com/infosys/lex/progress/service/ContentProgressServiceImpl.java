@@ -17,21 +17,6 @@ Highly Confidential
 */
 package com.infosys.lex.progress.service;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.service.UserUtilityService;
@@ -43,13 +28,18 @@ import com.infosys.lex.core.exception.ApplicationLogicError;
 import com.infosys.lex.core.exception.BadRequestException;
 import com.infosys.lex.core.exception.InvalidDataInputException;
 import com.infosys.lex.core.logger.LexLogger;
-import com.infosys.lex.progress.bodhi.repo.ContentProgress;
-import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
-import com.infosys.lex.progress.bodhi.repo.ContentProgressPrimaryKeyModel;
-import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
+import com.infosys.lex.progress.bodhi.repo.*;
 import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
 import com.infosys.lex.progress.dto.ContentProgressDTO;
 import com.infosys.lex.progress.dto.ExternalProgressDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ContentProgressServiceImpl implements ContentProgressService {
@@ -75,9 +65,17 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	@Autowired
 	ContentSourceService contentSourceService;
 
+	@Autowired
+    private MandatoryContentRepository mandatoryContentRepository;
+
 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	private LexLogger logger = new LexLogger(getClass().getName());
 
+	public static final String PROGRESS_CONSTANT = "progress";
+
+	public static final Integer PERCENTAGE_CONST = 100;
+
+	public static final Integer MINIMUM_PASS_CRITERIA = 70;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1177,6 +1175,37 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		
 		return "success";
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Boolean getMandatoryContentStatusForUser(String rootOrg, String org, String userId) {
+		List<MandatoryContentModel> contentList = mandatoryContentRepository.getMandatoryContentsInfo(rootOrg, org);
+		if (CollectionUtils.isEmpty(contentList)) {
+			return Boolean.TRUE;
+		}
+		List<String> contentIds = contentList.stream().map(content -> content.getPrimaryKey().getContent_id())
+				.collect(Collectors.toList());
+		try {
+			Map<String, Object> progressMap = this.metaForProgress(rootOrg, userId, contentIds);
+			if (CollectionUtils.isEmpty(progressMap)) {
+				return Boolean.FALSE;
+			}
+			Map<String, Object> resultMap = new HashMap<String, Object>();
+			for (String contentId : contentIds) {
+				if (!progressMap.containsKey(contentId)) {
+					return Boolean.FALSE;
+				}
+				resultMap = (Map<String, Object>) progressMap.get(contentId);
+				Float progress = (Float) resultMap.get(PROGRESS_CONSTANT);
+				Float progressPercentage = progress * PERCENTAGE_CONST;
+				if (progressPercentage < MINIMUM_PASS_CRITERIA)
+					return Boolean.FALSE;
+			}
+		} catch (Exception e) {
+			logger.error(e);
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
+	}
 
 }
