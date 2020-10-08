@@ -42,6 +42,7 @@ service_opensaber_service: opensaber
 service_user_profile_service: eagle-user-profile
 service_sb_recommendation_service: sb-recommendation_service
 service_sb_discuss_connect_service: sb-discuss_connect_service
+service_sb_hub_service: sb-hub-service
 
 # Ports
 service_antivirus_port: 3310
@@ -88,6 +89,7 @@ service_opensaber_port: 8080
 service_user_profile_port: 3008
 service_sb_recommendation_port: 3012
 service_sb_discuss_connect_port: 9050
+service_sb_hub_port: 3013
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -135,6 +137,7 @@ network_alias_opensaber: sb-opensaber
 network_alias_user_profile: user-profile
 network_alias_sb_recommendation_service: recommendation_service
 network_alias_sb_discuss_connect_service: discuss-connect-service
+network_alias_sb_hub_service: hub-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -178,6 +181,7 @@ image_opensaber: opensaber
 image_user_profile: user-profile
 image_sb_recommendation_service: sb-recommendation-service
 image_sb_discuss_connect_service: discuss-connect-service
+image_sb_hub_service: sb-hub-service
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"

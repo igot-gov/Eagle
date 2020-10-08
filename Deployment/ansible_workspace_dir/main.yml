@@ -76,6 +76,8 @@
       tags: [deploy-sb-recommendation-service]
     - role: deploy-sb-discuss-connect-service
       tags: [deploy-sb-discuss-connect-service]
+    - role: deploy-sb-hub-service
+      tags: [deploy-sb-hub-service]
  
   tasks:
     - name: Remove the env directory
