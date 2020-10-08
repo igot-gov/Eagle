@@ -40,7 +40,7 @@ public class Neo4jQueryHelpers {
             ProjectConstants.SUBMITTER_DETAILS, ProjectConstants.CONCEPTS,ProjectConstants.PLAG_SCAN, ProjectConstants.TAGS,
             "eligibility", "scoreType", "externalData", "verifiers", "verifier", "subTitles", "roles", "group",
             "msArtifactDetails", "studyMaterials", "equivalentCertifications", ProjectConstants.TRANSCODING,
-            ProjectConstants.PRICE, ProjectConstants.EDITORS);
+            ProjectConstants.PRICE, ProjectConstants.EDITORS, ProjectConstants.COMPETENCIES);
 
     public Map<String, Object> getNodeByIdentifier(String rootOrg, String identifier, Set<String> fields, Transaction transaction) {
         StringBuilder query = new StringBuilder("match (node) where node.identifier='" + identifier + "' and (node:" + rootOrg + " or node:Shared) return {");
