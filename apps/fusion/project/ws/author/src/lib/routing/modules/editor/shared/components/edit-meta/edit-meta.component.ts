@@ -15,12 +15,12 @@ import {
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@angular/material'
 import { MatChipInputEvent } from '@angular/material/chips'
-import { MatDialog } from '@angular/material/dialog'
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
-import { CONTENT_BASE_STATIC } from '@ws/author/src/lib/constants/apiEndpoints'
+import { CONTENT_BASE_STATIC, CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { IMAGE_MAX_SIZE, IMAGE_SUPPORT_TYPES } from '@ws/author/src/lib/constants/upload'
@@ -45,9 +45,6 @@ import {
   map,
 } from 'rxjs/operators'
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
-import { MAT_DIALOG_DATA } from '@angular/material/dialog'
-
-import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 
 export interface IUsersData {
   name?: string
@@ -1323,7 +1320,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         this.contentForm.controls.subTitles.setValue([{
           url: vtt.artifactURL,
         }])
-        console.log({ vtt })
 
       })
   }

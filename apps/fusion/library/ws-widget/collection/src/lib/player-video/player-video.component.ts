@@ -93,10 +93,6 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
 
-        console.log({
-          data,
-        })
-
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
           this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
           const continueLearningData = {
@@ -236,11 +232,6 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     )
     this.player = initObj.player
     this.dispose = initObj.dispose
-
-    console.log({
-      subtitles: this.widgetData,
-      contentSvc: this.contentSvc,
-    })
 
     initObj.player.ready(() => {
       if (Array.isArray(this.widgetData.subtitles)) {
