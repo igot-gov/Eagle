@@ -45,13 +45,14 @@ categoriesApi.get('/:cid/:slug?/:tid?', async (req, res) => {
     try {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
+        const pageNo = req.query.page || 1
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const cid = req.params.cid
         const slug = req.params.slug || undefined
         const tid = req.params.tid || undefined
         const url = API_ENDPOINTS.getCategoryDetails(cid, slug, tid)
         const response = await axios.get(
-            url,
+            `${url}?page=${pageNo}`,
             { ...axiosRequestConfig, headers: { rootOrg } }
         )
         res.send(response.data)
