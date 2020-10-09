@@ -33,7 +33,7 @@ import { CareersCardComponent } from './components/careers-card/careers-card.com
 import { CareerDetailComponent } from './routes/career-detail/career-detail.component'
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component'
 import { WidgetResolverModule } from '@ws-widget/resolver'
-import { PaginationComponent } from '../discuss/components/pagination/pagination.component'
+import { CareersPaginationComponent } from './components/careers-pagination/careers-pagination.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { PaginationComponent } from '../discuss/components/pagination/pagination
     CareersCardComponent,
     CareerDetailComponent,
     RelatedPostsComponent,
-    PaginationComponent,
+    CareersPaginationComponent,
   ],
   imports: [
     CommonModule,
