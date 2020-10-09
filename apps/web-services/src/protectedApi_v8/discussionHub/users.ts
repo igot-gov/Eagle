@@ -198,6 +198,28 @@ usersApi.get('/email/:email', async (req, res) => {
     }
 })
 
+usersApi.get('/:slug/about', async (req, res) => {
+    try {
+        const rootOrg = getRootOrg(req)
+        const userId = extractUserIdFromRequest(req)
+        logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
+        const slug = req.params.slug
+        const userUid = await getUserUID(userId)
+        logInfo('called /:slug/about slug=> ', slug)
+        const url = API_ENDPOINTS.getUserProfile(slug) + `?_uid=${userUid}`
+        logInfo('called /:slug/about url=> ', url)
+        const response = await axios.get(
+            url,
+            { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
+        )
+        res.send(response.data)
+    } catch (err) {
+        logError('ERROR ON GET topicsApi /:slug/about >', err)
+        res.status((err && err.response && err.response.status) || 500)
+            .send(err && err.response && err.response.data || {})
+    }
+})
+
 // tslint:disable-next-line: no-any
 export async function getUserByEmail(email: any): Promise<any> {
     logInfo('Finding user in NodeBB DiscussionHub...')

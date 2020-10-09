@@ -1,0 +1,25 @@
+<ws-widget-btn-page-back [widgetData]="{ url: 'home',titles: titles }">
+</ws-widget-btn-page-back>
+
+<div *ngIf="currentRoute === 'home'" class="container-balanced-banner margin-top-s">
+  <ng-container [wsResolverWidget]="banner"></ng-container>
+</div>
+<!--
+<mat-sidenav-container class="container-balanced" autosize name="discuss-menu">
+  <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="border-0">
+    <div class="contain">
+      <app-profile-v2-left-menu [unseen]="unread"></app-profile-v2-left-menu>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div *ngIf="screenSizeIsLtMedium">
+      <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened"
+        id="ws-auth-root-home-btn-menu" name="ws-auth-root-home-btn-menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div> -->
+<div class="container-balanced">
+  <router-outlet></router-outlet>
+</div>
+<!-- </mat-sidenav-content>
+</mat-sidenav-container> -->

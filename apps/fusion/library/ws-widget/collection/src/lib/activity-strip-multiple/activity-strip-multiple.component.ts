@@ -116,7 +116,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   }
   fetchNetworkUsers(strip: NsNetworkStripNewMultiple.INetworkStripUnit, calculateParentStatus: boolean) {
     this.tempItem = [{ count: 7, icon: 'shop_two', name: 'Course' },
-    { count: 3, icon: 'bookmark_border', name: 'Cretificates' },
+    { count: 3, icon: 'bookmark_border', name: 'Certificates' },
     { count: 42, icon: 'shop_two', name: 'Training Hours' },
     { count: 20, icon: 'access_time', name: 'Daily minutes' }]
     if (strip.request && strip.request.api && Object.keys(strip.request.api).length) {
