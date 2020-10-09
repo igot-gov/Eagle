@@ -33,9 +33,17 @@ import { CareersCardComponent } from './components/careers-card/careers-card.com
 import { CareerDetailComponent } from './routes/career-detail/career-detail.component'
 import { RelatedPostsComponent } from './components/related-posts/related-posts.component'
 import { WidgetResolverModule } from '@ws-widget/resolver'
+import { PaginationComponent } from '../discuss/components/pagination/pagination.component'
 
 @NgModule({
-  declarations: [CareersHomeComponent, CareersComponent, CareersCardComponent, CareerDetailComponent, RelatedPostsComponent],
+  declarations: [
+    CareersHomeComponent,
+    CareersComponent,
+    CareersCardComponent,
+    CareerDetailComponent,
+    RelatedPostsComponent,
+    PaginationComponent,
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

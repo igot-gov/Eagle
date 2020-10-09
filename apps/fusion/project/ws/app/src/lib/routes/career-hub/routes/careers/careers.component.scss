@@ -173,3 +173,8 @@
 .search .search-tabs-group {
   @extend %height-mat-toolbar-sibling;
 }
+
+.pagination-container{
+  margin-top: $size-l;
+ 
+}
