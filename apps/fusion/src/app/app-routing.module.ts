@@ -184,6 +184,19 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/person-profile2',
+    loadChildren: () =>
+      import('./routes/route-profile-v2.module').then(u => u.RouteProfileV2Module),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'profile-v2',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/person-profile',
     loadChildren: () =>
       import('./routes/route-person-profile.module').then(u => u.RoutePersonProfileModule),

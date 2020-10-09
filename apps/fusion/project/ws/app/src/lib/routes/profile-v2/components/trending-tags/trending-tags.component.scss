@@ -1,0 +1,40 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.tag {
+  display: flex;
+  width: 276px;
+  height: 32px;
+  border-radius: 4px;
+  justify-content: space-between;
+  margin: $size-m 0;
+  // background-color: red;
+  align-items: center;
+
+  @include breakpoint-xs {
+    width: auto;
+
+  }
+
+  @include breakpoint-s {
+    width: auto;
+
+  }
+}
+
+// .progress {
+//   background: #000000;
+//   border-radius: 13px;
+//   /* (height of inner div) / 2 + padding */
+//   // padding: 3px;
+// }
+
+// .progress::after {
+//   content: '';
+//   position: fixed;
+//   height: 100%;
+//   width: 50%;
+//   left: 50%;
+//   background: #116699
+// }

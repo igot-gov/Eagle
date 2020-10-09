@@ -16,6 +16,7 @@ const API_ENDPOINTS = {
   unread: '/apis/protected/v8/discussionHub/topics/unread/total',
   getTopic: '/apis/protected/v8/discussionHub/topics/',
   profile: '/apis/protected/v8/discussionHub/users/me',
+  fetchProfile: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/about`,
   listUpVote: (slug: string) => `/apis//protected/v8/discussionHub/users/${slug}/upvoted`,
   listDownVoted: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/downvoted`,
   listSaved: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/bookmarks`,
@@ -100,6 +101,9 @@ export class DiscussService {
   }
   fetchProfile() {
     return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.profile)
+  }
+  fetchProfileInfo(slug: string) {
+    return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.fetchProfile(slug))
   }
   fetchUpvoted() {
     return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listUpVote(this.usr.userId))
