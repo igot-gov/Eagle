@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
 
-import { DiscussCardComponent } from './components/discuss-card/discuss-card.component'
 import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 import { RightMenuComponent } from './components/right-menu/right-menu.component'
 // import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
@@ -40,7 +39,6 @@ import { DiscussModule } from '../discuss/discuss.module'
 
 @NgModule({
   declarations: [
-    DiscussCardComponent,
     ProfileComponent,
     ProfileViewComponent,
     LeftMenuComponent,
