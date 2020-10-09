@@ -44,6 +44,7 @@ import { CkEditorModule } from 'library/ws-widget/collection/src/lib/_common/ck-
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { InitResolver } from './resolvers/init-resolve.service'
 import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
+import { PaginationComponent } from './components/pagination/pagination.component'
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck
     RightMenuComponent,
     RelatedDiscussionComponent,
     TrendingTagsComponent,
+    PaginationComponent,
   ],
   imports: [
     CommonModule,

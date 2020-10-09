@@ -220,6 +220,9 @@
       </mat-card>
       <mat-divider *ngIf="post.index != 0"></mat-divider>
     </ng-container>
+    <div class="flex flex-1 flex-column margin-fix pagination-container">
+        <ws-app-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-pagination>
+    </div>
   </div>
   <div class="flex flex-1 display-hide hidden-imp">
     <div *ngIf="fetchSingleCategoryLoader" class="pr-4 flex items-center justify-center">
