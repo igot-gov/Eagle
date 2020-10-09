@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { accessControlApi } from './accessControl'
 import { accountSettingsApi } from './account-settings'
+import { activity } from './activity'
 import { usersApi } from './admin-users'
 import { autocompleteApi } from './auto-complete'
 import { badgeApi } from './badge'
@@ -44,7 +45,6 @@ import { topicApi } from './topic'
 import { topicsApi } from './topics'
 import { validateApi } from './validate'
 import { viewProfileApi } from './viewprofile'
-import { activity } from './activity'
 
 export const user = Router()
 user.use('/group', userGroupApi)
