@@ -133,3 +133,25 @@
     letter-spacing: 0.2625px;
   }
 }
+
+.circle-xxl-s {
+  border-radius: 4px;
+  width: 276px;
+  height: 208px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    border-radius: 4px;
+    width: 105px;
+    height: 105px;
+  }
+
+  .initials {
+    color: #ffffff;
+    font-size: $size-xxl;
+    line-height: $size-xxl;
+    letter-spacing: 0.2625px;
+  }
+}

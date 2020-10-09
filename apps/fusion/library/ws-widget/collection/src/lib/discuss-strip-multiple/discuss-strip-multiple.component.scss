@@ -22,6 +22,12 @@
   }
 }
 
+.mob {
+  @include breakpoint-xs {
+    display: none;
+  }
+}
+
 .view-all {
   display: flex;
   margin: 0 auto;

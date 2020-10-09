@@ -12,7 +12,7 @@ mat-typography-level parameters:
 */
 // Line-height must be unit-less fraction of the font-size.
 
-$typography: mat-typography-config($font-family: 'Montserrat, Lato',
+$typography: mat-typography-config($font-family: 'Lato',
   $display-4: mat-typography-level(112px, 112px, 400, $font-family-lato),
   $display-3: mat-typography-level(56px, 56px, 400, $font-family-lato),
   $display-2: mat-typography-level(45px, 52px, 400, $font-family-lato),

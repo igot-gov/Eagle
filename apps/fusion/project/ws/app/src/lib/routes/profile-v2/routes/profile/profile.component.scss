@@ -1,0 +1,39 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  min-height: 400px;
+}
+
+.container-balanced-banner {
+  @extend %page-center;
+  height: auto;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.border-0 {
+  border-right: none !important;
+  background: inherit !important;
+}
+
+.flex-update {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+}
