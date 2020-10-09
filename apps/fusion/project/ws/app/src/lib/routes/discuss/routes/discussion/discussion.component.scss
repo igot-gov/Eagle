@@ -129,6 +129,16 @@ mat-icon.downvoted {
     display: none !important;
   }
 }
+
+.margin-fix {
+  @include breakpoint-xs {
+    margin: 0 $size-l 0 $size-l;
+  }
+
+  @include breakpoint-s {
+    margin: 0 $size-l 0 $size-l;
+  }
+}
 .pagination-container{
   margin-top: $size-l;
  

@@ -1,4 +1,4 @@
-<div class="flex flex-1 related-discussion">
+<div class="flex flex-1 related-discussion margin-fix">
   <div class="flex flex-3 flex-column pb-10">
     <mat-card class="flex-1 remove-botton-radius">
       <mat-card-header>
@@ -28,7 +28,7 @@
               </span>
             </ng-container>
           </div>
-          <div class="flex flex-1 custom margin-0 margin-top-xl">
+          <div class="flex flex-1 flex-wrap custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs margin-right-xs">
               <span class="flex margin-right-l mobile">
                 <mat-icon *ngIf="!post.upvoted" (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
