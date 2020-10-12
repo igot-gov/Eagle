@@ -118,10 +118,11 @@ topicsApi.get('/:tid', async (req, res) => {
         const rootOrg = getRootOrg(req)
         const userId = extractUserIdFromRequest(req)
         const pageNo = req.query.page || 1
+        const sort = req.query.sort || ''
         logInfo(`UserId: ${userId}, rootOrg: ${rootOrg}`)
         const tid = req.params.tid
         const userUid = await getUserUID(userId)
-        const url = API_ENDPOINTS.getTopicDetails(tid) + `?page=${pageNo}&_uid=${userUid}`
+        const url = API_ENDPOINTS.getTopicDetails(tid) + `?page=${pageNo}&_uid=${userUid}&sort=${sort}`
         const response = await axios.get(
             url,
             { ...axiosRequestConfig, headers: { authorization: getWriteApiToken() } }
