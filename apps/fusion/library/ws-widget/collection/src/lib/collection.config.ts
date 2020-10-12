@@ -106,6 +106,15 @@ export const ROOT_WIDGET_CONFIG = {
     standard: 'pageStandard',
     embedded: 'pageEmbedded',
   },
+  profileV2: {
+    _type: 'profilev2',
+    academics: 'academics',
+    career: 'career',
+    competencies: 'competencies',
+    cretifications: 'cretifications',
+    departments: 'departments',
+    // publications: 'publications'
+  },
   element: {
     _type: 'element',
     html: 'elementHtml',

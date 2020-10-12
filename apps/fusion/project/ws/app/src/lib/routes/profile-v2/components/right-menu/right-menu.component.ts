@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { NSProfileDataV2 } from '../../models/profile-v2.model'
+import { Component, OnInit } from '@angular/core'
+// import { NSProfileDataV2 } from '../../models/profile-v2.model'
 
 @Component({
   selector: 'app-profile-v2-right-menu',
@@ -10,9 +10,9 @@ import { NSProfileDataV2 } from '../../models/profile-v2.model'
   /* tslint:enable */
 })
 export class RightMenuComponent implements OnInit {
-  // @Input() tags!: NSProfileDataV2.IProfile[]
+  completedPercent!: number
   ngOnInit(): void {
-
+    this.completedPercent = 86
   }
 
 }

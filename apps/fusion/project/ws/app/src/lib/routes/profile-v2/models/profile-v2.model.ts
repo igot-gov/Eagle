@@ -7,6 +7,7 @@ export namespace NSProfileDataV2 {
   export interface IProfileTab {
     name: string
     key: string
+    render: boolean
     badges: {
       enabled: boolean
       uri?: string
@@ -20,6 +21,7 @@ export namespace NSProfileDataV2 {
     academics?: Iacademics[]
     employmentDetails?: IemploymentDetails[]
     interests: Iinterests[]
+    photo: string | null | undefined
     osCreatedAt: string
     osCreatedBy: string
     osUpdatedAt: string

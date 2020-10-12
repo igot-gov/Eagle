@@ -1,15 +1,26 @@
 <div class="flex flex-4 flex-column">
-  <mat-card class="flex-custom">
+  <mat-card class="flex-custom" [attr.id]='tabsData && tabsData[0] && tabsData[0].key'>
     <mat-card-header class="flex-custom-m">
       <div mat-card-avatar class="example-header-image">
-        <ws-widget-avatar-photo
+        <ws-widget-avatar-photo [photoUrl]="portalProfile.photo || null"
           [name]="(portalProfile.personalDetails.firstname +' ' + portalProfile.personalDetails.lasttname) || 'User'"
           size="xxl-s"></ws-widget-avatar-photo>
       </div>
       <div class="flex-1">
-        <mat-card-title class="mobile-margin text-capitalize"
-          [innerHTML]="portalProfile.personalDetails.firstname + ' '+ portalProfile.personalDetails.middlename + ' ' + portalProfile.personalDetails.surname">
-        </mat-card-title>
+        <div class="flex flex-1">
+          <mat-card-title class="flex-4 mobile-margin text-capitalize"
+            [innerHTML]="portalProfile.personalDetails.firstname + ' '+ portalProfile.personalDetails.middlename + ' ' + portalProfile.personalDetails.surname">
+          </mat-card-title>
+          <div class="flex flex-1 flex-row-reverse">
+            <div *ngIf="portalProfile.id === currentUser"
+              class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
+              <a mat-button [routerLink]="app/user-profile/details">
+                <mat-icon>edit</mat-icon>
+                <span i18n>{{'Edit Profile'}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
         <mat-card-subtitle>{{portalProfile.employmentDetails.departmentName}}</mat-card-subtitle>
         <mat-card-subtitle>{{portalProfile.employmentDetails.officialPostalAddress}}</mat-card-subtitle>
         <!-- <mat-card-subtitle>{{discussProfileData.email}}</mat-card-subtitle> -->
@@ -44,27 +55,17 @@
     </div>
     <div class="flex-3">
       <ng-container *ngFor="let tab of tabsData">
-        <mat-card [attr.id]='tab.key' class="margin-top-xs margin-botton-xs">
-          <mat-card-header>
-            <mat-card-title>{{tab.name}}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            data will appear here
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-          </mat-card-content>
-        </mat-card>
+        <!-- <ws-widget-profile-v2-academics *ngIf="pdfData" [widgetData]="tab"></ws-widget-profile-v2-academics> -->
+        <ng-container *ngIf="tab && tab.render && tab.enabled" [wsResolverWidget]="{
+                'widgetType': tab.widget.widgetType,
+                'widgetSubType': tab.widget.widgetSubType,
+                'widgetHostClass': tab.widget.widgetHostClass,
+                'widgetData': {
+                  name: tab.name,
+                  key: tab.key,
+                  data: portalProfile[tab.dataKey]
+                }
+          }"></ng-container>
       </ng-container>
       <ng-container *ngIf="discussionList">
         <mat-card [attr.id]='discussions' class="margin-top-xs margin-botton-xs">

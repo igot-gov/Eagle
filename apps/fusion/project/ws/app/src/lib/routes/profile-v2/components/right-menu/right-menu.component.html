@@ -1,3 +1,17 @@
 <div class="flex flex-1 flex-column margin-top-xs margin-left-l">
-  right
+  <mat-card class="flex-custom" [attr.id]='tabsData && tabsData[0] && tabsData[0].key'>
+    <mat-card-content>
+      <div class=" mat-h3 flex-4 mobile-margin">
+        Your profile is {{completedPercent}} complete
+      </div>
+      <ng-container>
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
+          <a mat-button [routerLink]="app/user-profile/details">
+            <mat-icon>edit</mat-icon>
+            <span i18n *ngIf="completedPercent < 100">{{'Complete Profile'}}</span>
+          </a>
+        </div>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
 </div>
