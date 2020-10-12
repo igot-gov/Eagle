@@ -18,7 +18,7 @@ export class DiscussRecentResolve
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSDiscussData.IDiscussionData[]>> {
     return this.discussionSvc.fetchRecentD().pipe(
-      map(data => ({ data, error: null })),
+      map((data: any) => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )
   }

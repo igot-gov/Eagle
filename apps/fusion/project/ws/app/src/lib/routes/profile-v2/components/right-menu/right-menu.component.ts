@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { NSProfileData } from '../../models/profile-v2.model'
+import { Component, OnInit } from '@angular/core'
+// import { NSProfileDataV2 } from '../../models/profile-v2.model'
 
 @Component({
   selector: 'app-profile-v2-right-menu',
@@ -10,14 +10,9 @@ import { NSProfileData } from '../../models/profile-v2.model'
   /* tslint:enable */
 })
 export class RightMenuComponent implements OnInit {
-  @Input() tags!: NSProfileData.IProfile[]
-
-  items = [
-    'All new methods of control of powers of the administrative authorities and more such policies.',
-    'Powers and functions of the administrative authorities Methods of control of powers of the administrative authorities',
-  ]
+  completedPercent!: number
   ngOnInit(): void {
-
+    this.completedPercent = 86
   }
 
 }

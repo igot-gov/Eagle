@@ -5,26 +5,26 @@ import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
 import { ConfigurationsService, IResolveResponse } from '@ws-widget/utils'
 import { ProfileV2Service } from '../services/profile-v2.servive'
-import { NSProfileData } from '../models/profile-v2.model'
+import { NSProfileDataV2 } from '../models/profile-v2.model'
 
 @Injectable()
 export class Profilev2Resolve
   implements
-  Resolve<Observable<IResolveResponse<NSProfileData.IProfile>> | IResolveResponse<NSProfileData.IProfile>> {
+  Resolve<Observable<IResolveResponse<NSProfileDataV2.IProfile>> | IResolveResponse<NSProfileDataV2.IProfile>> {
   constructor(private profileV2Svc: ProfileV2Service, private configSvc: ConfigurationsService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSProfileData.IProfile>> {
-    let emailId = _route.params.emailId
-    if (!emailId) {
-      emailId = _route.queryParams.emailId
+  ): Observable<IResolveResponse<NSProfileDataV2.IProfile>> {
+    let userId = _route.params.userId
+    if (!userId) {
+      userId = _route.queryParams.userId
     }
-    if (!emailId) {
-      emailId = this.configSvc.userProfile && this.configSvc.userProfile.email || null
+    if (!userId) {
+      userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
     }
-    return this.profileV2Svc.fetchProfile(emailId).pipe(
+    return this.profileV2Svc.fetchProfile(userId).pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

@@ -46,7 +46,7 @@ export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnI
   }
 
   fillPopular() {
-    this.discussService.fetchRecentD().subscribe(response => {
+    this.discussService.fetchRecentD().subscribe((response: any) => {
       this.discuss = _.get(response, 'topics')
       // console.log(this.discuss)
     })

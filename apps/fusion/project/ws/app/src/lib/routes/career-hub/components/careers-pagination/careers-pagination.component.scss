@@ -1,0 +1,64 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: .25rem;
+  }
+  
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #0074B6;
+    border-color: #0074B6;
+    pointer-events: none;
+  }
+  
+  a:not([href]):not([tabindex]) {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .page-link {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #0074B6;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  
+    &.separator {
+      font-size: inherit;
+    }
+  }
+  .page-item:not(.disabled) {
+    cursor: pointer;
+  }
+  
+  .page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+  }
+
+.number-item{
+    @include breakpoint-xs {
+        display: none;
+    }
+
+    @include breakpoint-s {
+            display: none;
+    }
+}

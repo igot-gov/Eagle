@@ -34,6 +34,9 @@
         </mat-card>
       </ng-container>
     </div>
+    <div class="flex flex-1 flex-column margin-fix pagination-container">
+        <ws-app-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-pagination>
+    </div>
   </div>
   <div class="flex flex-1" #stickyMenu [class.sticky]="sticky">
     <app-discuss-right-menu [tags]="trendingTags"></app-discuss-right-menu>

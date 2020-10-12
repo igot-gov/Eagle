@@ -133,7 +133,7 @@ export class NetworkStripMultipleComponent extends WidgetBaseComponent
     contents: NsContent.IContent[],
     strip: NsNetworkStripNewMultiple.INetworkStripUnit,
   ) {
-    return (contents.reverse() || []).map((content, idx) => ({
+    return (contents || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardHomeNetwork',
       widgetHostClass: 'mb-2',

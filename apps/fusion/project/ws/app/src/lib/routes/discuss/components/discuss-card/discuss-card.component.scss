@@ -49,12 +49,11 @@
 .tag {
   display: flex;
   margin: 0 10px;
-  padding: 5px 10px;
-  font-size: $size-s;
-  min-width: 60px;
-  /* max-height: 84px !important; */
+  padding: 3px 15px;
+  font-size: 12px;
+  min-width: 50px;
   justify-content: center;
-
+  border-radius: 20px 5px 5px 20px;
 }
 
 .noocoments {

@@ -96,14 +96,13 @@ a {
   //
   width: 100%;
   .tag {
-    // color: $color-cdg-gray-a;
-    border: 1px solid $color-thin-gray;
-    border-radius: 4px;
-    display: inline-block;
-    padding: 2px 3px;
-    margin: 1px 1px;
-    font-size: 10px;
-    // @include font-size(10px);
+    display: flex;
+    margin: 0 10px;
+    padding: 3px 15px;
+    font-size: 12px;
+    min-width: 50px;
+    justify-content: center;
+    border-radius: 20px 5px 5px 20px;
   }
 }
 .more-tags {

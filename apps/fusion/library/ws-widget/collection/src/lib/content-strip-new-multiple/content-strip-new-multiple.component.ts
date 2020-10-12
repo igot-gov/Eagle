@@ -307,7 +307,7 @@ export class ContentStripNewMultipleComponent extends WidgetBaseComponent
     contents: NsContent.IContent[],
     strip: NsContentStripNewMultiple.IContentStripUnit,
   ) {
-    return (contents.reverse() || []).map((content, idx) => ({
+    return (contents || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardContent',
       widgetHostClass: 'mb-2',

@@ -75,12 +75,12 @@
               "widgetData": [
                 {
                   "banners": {
-                    "l": "assets/instances/eagle/banners/hubs/network/l.png",
-                    "m": "assets/instances/eagle/banners/hubs/network/m.png",
-                    "s": "assets/instances/eagle/banners/hubs/network/s.png",
-                    "xl": "assets/instances/eagle/banners/hubs/network/xl.png",
-                    "xs": "assets/instances/eagle/banners/hubs/network/xs.png",
-                    "xxl": "assets/instances/eagle/banners/hubs/network/xxl.png"
+                    "l": "assets/instances/eagle/banners/hubs/network/l.jpg",
+                    "m": "assets/instances/eagle/banners/hubs/network/m.jpg",
+                    "s": "assets/instances/eagle/banners/hubs/network/s.jpg",
+                    "xl": "assets/instances/eagle/banners/hubs/network/xl.jpg",
+                    "xs": "assets/instances/eagle/banners/hubs/network/xs.jpg",
+                    "xxl": "assets/instances/eagle/banners/hubs/network/xxl.jpg"
                   }
                 }
               ]
