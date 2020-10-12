@@ -40,14 +40,14 @@
                   {{stripsResultDataMap[key]?.description}}</h2>
 
                 <span class="spacer"></span>
-                <!-- <div
+                <div
                   *ngIf="widgetData.strips[0].viewMoreUrl && stripsResultDataMap[key] && stripsResultDataMap[key].widgets"
                   class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
                   <a mat-button [routerLink]="widgetData.strips[0]?.viewMoreUrl?.path"
                     [queryParams]="widgetData.strips[0]?.viewMoreUrl?.queryParams">
                     <span i18n>My Activity</span>
                   </a>
-                </div> -->
+                </div>
               </div>
               <button mat-icon-button (click)="setHiddenForStrip(key)" *ngIf="stripsResultDataMap[key]?.canHideStrip">
                 <mat-icon>close</mat-icon>

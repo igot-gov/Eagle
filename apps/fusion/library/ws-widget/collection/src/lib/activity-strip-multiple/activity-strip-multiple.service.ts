@@ -28,6 +28,6 @@ export class ActivityStripNewMultipleService {
   //   return this.http.get<NsNetworkStripNewMultiple.INetworkStripResponseApi>(url)
   // }
   fetchNetworkUsers(req: any, url: string): Observable<any> {
-    return this.http.post<any>(url, req)
+    return this.http.get<any>(url, req)
   }
 }

@@ -103,20 +103,15 @@
                       "cardSubType": "cardActivity"
                     },
                     "viewMoreUrl": {
-                      "path": "/page/home",
+                      "path": "/app/profile/dashboard",
                       "viewMoreText": "MY DASHBOARD",
                       "queryParams": {}
                     },
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/networkHub/users",
-                        "queryParams": {
-                          "limit": 5,
-                          "offset": 0,
-                          "intervalInDays": 7,
-                          "type": "latestUsers"
-                        }
+                        "path": "/apis/protected/v8/user/activity",
+                        "queryParams": {}
                       }
                     }
                   }

@@ -1,22 +1,24 @@
-@import 'ws-common';
-@import 'ws-vars';
-@import 'ws-mixins';
+// @import 'ws-common';
+// @import 'ws-vars';
+// @import 'ws-mixins';
 
 .activity-card {
-  $size: 75px;
-  margin: 12px 26px 12px 0;
+  $size: 70px;
+  margin: 12px 28px 12px 0;
   width: $size + $size;
-  background-image: url(./activity_card.svg);
+}
+.count {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding-left: 12px;
 }
 .content {
-  padding: 20px 0 20px 0;
-  .count {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 12px;
-  }
+  padding-left: 10px;
+  padding-bottom: 10px;
+
   .course-detail {
-    margin-top: 25px;
+    margin-bottom: 8px;
     .icon {
       opacity: 60%;
     }
@@ -24,6 +26,7 @@
       font-size: 14px;
       line-height: 24px;
       margin-left: 10px;
+      font-weight: bold;
       color: black;
     }
     .material-icons {

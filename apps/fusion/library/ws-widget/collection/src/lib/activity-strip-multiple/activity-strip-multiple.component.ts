@@ -115,18 +115,18 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     this.fetchNetworkUsers(strip, calculateParentStatus)
   }
   fetchNetworkUsers(strip: NsNetworkStripNewMultiple.INetworkStripUnit, calculateParentStatus: boolean) {
-    this.tempItem = [{ totalDuration: { unit: 'HOUR', value: 4064 } },
-    { karmaPoints: { unit: 'NUMBER', value: 0 } },
-    { dailyTimeSpent: { unit: 'MINUTE', value: 0 } },
-    { coins: { unit: 'NUMBER', value: 0 } },
-    { certificateCount: { unit: 'NUMBER', value: 1 } },
-    { contentCount: { unit: 'NUMBER', value: 70 } }]
+    // this.tempItem = [{ totalDuration: { unit: 'HOUR', value: 4064 } },
+    // { karmaPoints: { unit: 'NUMBER', value: 0 } },
+    // { dailyTimeSpent: { unit: 'MINUTE', value: 0 } },
+    // { coins: { unit: 'NUMBER', value: 0 } },
+    // { certificateCount: { unit: 'NUMBER', value: 1 } },
+    // { contentCount: { unit: 'NUMBER', value: 70 } }]
     if (strip.request && strip.request.api && Object.keys(strip.request.api).length) {
       this.contentStripSvc.fetchNetworkUsers(strip.request.api.queryParams, strip.request.api.path).subscribe(
         _results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(this.tempItem, strip),
+            this.transformContentsToWidgets(_results, strip),
             'done',
             calculateParentStatus,
             null,
@@ -140,7 +140,9 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     contents: NsContent.IContent[],
     strip: NsNetworkStripNewMultiple.INetworkStripUnit,
   ) {
-    return (contents.reverse() || []).map((content, idx) => ({
+    // tslint:disable-next-line:no-console
+    console.log(contents)
+    return (contents || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardActivity',
       widgetHostClass: 'mb-2',
