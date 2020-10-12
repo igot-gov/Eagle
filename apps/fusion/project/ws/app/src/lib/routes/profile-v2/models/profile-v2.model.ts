@@ -18,21 +18,21 @@ export namespace NSProfileDataV2 {
   export interface IProfile {
     id: string
     userId: string
-    academics?: Iacademics[]
-    employmentDetails?: IemploymentDetails[]
-    interests: Iinterests[]
+    academics?: IAcademics[]
+    employmentDetails?: IEmploymentDetails
+    interests: IInterests[]
     photo: string | null | undefined
     osCreatedAt: string
     osCreatedBy: string
     osUpdatedAt: string
     osUpdatedBy: string
     osid: string
-    personalDetails: IpersonalDetails[]
-    professionalDetails: IprofessionalDetails[]
-    skills: Iskills[]
+    personalDetails: IPersonalDetails
+    professionalDetails: IProfessionalDetails[]
+    skills: ISkills[]
 
   }
-  export interface Iacademics {
+  export interface IAcademics {
     nameOfInstitute: string
     nameOfQualification: string
     osCreatedAt: string
@@ -44,7 +44,7 @@ export namespace NSProfileDataV2 {
     yearOfPassing: string
   }
 
-  export interface IemploymentDetails {
+  export interface IEmploymentDetails {
     allotmentYearOfService: string
     cadre: string
     civilListNo: string
@@ -62,7 +62,7 @@ export namespace NSProfileDataV2 {
     service: string
   }
 
-  export interface Iinterests {
+  export interface IInterests {
     hobbies: any[]
     osCreatedAt: string
     osCreatedBy: string
@@ -71,12 +71,13 @@ export namespace NSProfileDataV2 {
     osid: string
     professional: any[]
   }
-  export interface IpersonalDetails {
+  export interface IPersonalDetails {
     category: string
     countryCode: string
     dob: string
     domicileMedium: string
     firstname: string
+    lasttname: string
     gender: string
     knownLanguages: any[]
     maritalStatus: string
@@ -96,7 +97,7 @@ export namespace NSProfileDataV2 {
     surname: string
     telephone: string
   }
-  export interface IprofessionalDetails {
+  export interface IProfessionalDetails {
     additionalAttributes: { osid: string }
     completePostalAddress: string
     description: string
@@ -116,7 +117,7 @@ export namespace NSProfileDataV2 {
     osid: string
     responsibilities: string
   }
-  export interface Iskills {
+  export interface ISkills {
     additionalSkills: string
     certificateDetails: string
     osCreatedAt: string

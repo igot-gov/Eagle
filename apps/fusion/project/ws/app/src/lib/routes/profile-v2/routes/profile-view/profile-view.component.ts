@@ -29,7 +29,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   userDetails: any
   location!: string | null
   tabs: any
-  tabsData: NSProfileDataV2.IProfileTab
+  tabsData: NSProfileDataV2.IProfileTab[]
   currentUser!: string | null
   @HostListener('window:scroll', ['$event'])
   handleScroll() {

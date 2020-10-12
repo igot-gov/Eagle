@@ -211,7 +211,6 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
           this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
         })
     }
-    
   }
 
   fetchSingleCategoryDetails(cid: number) {
