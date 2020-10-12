@@ -107,6 +107,11 @@ export class DiscussService {
     url = this.appendPage(page, url)
     return this.http.get<NSDiscussData.IDiscussionData>(url)
   }
+  fetchTopicByIdSort(topicId: number, sort: any, page?: any) {
+    let url = API_ENDPOINTS.getTopic + topicId.toString()
+    url = this.appendPage(page, url)
+    return this.http.get<NSDiscussData.IDiscussionData>(`${url}&sort=${sort}`)
+  }
   fetchUnreadCOunt() {
     return this.http.get<any>(API_ENDPOINTS.unread)
   }
@@ -128,6 +133,10 @@ export class DiscussService {
   fetchSingleCategoryDetails(cid: number, page?: any) {
     const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
     return this.http.get<NSDiscussData.ICategoryData>(url)
+  }
+  fetchSingleCategoryDetailsSort(cid: number, sort: any, page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
+    return this.http.get<NSDiscussData.ICategoryData>(`${url}&sort=${sort}`)
   }
 
 }
