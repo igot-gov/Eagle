@@ -173,6 +173,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   filter(key: string | 'timestamp' | 'upvotes') {
     if (key) {
       this.currentFilter = key
+      this.refreshPostData(this.currentActivePage)
     }
   }
   showError(meta: string) {
@@ -189,15 +190,28 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   refreshPostData(page: any) {
-    this.discussService.fetchTopicById(this.topicId, page).subscribe(
-      (data: NSDiscussData.IDiscussionData) => {
-        this.data = data
-        this.paginationData = data.pagination
-        this.setPagination()
-      },
-      (err: any) => {
-        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-      })
+    if (this.currentFilter === 'recent') {
+      this.discussService.fetchTopicById(this.topicId, page).subscribe(
+        (data: NSDiscussData.IDiscussionData) => {
+          this.data = data
+          this.paginationData = data.pagination
+          this.setPagination()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    } else {
+      this.discussService.fetchTopicByIdSort(this.topicId, 'voted', page).subscribe(
+        (data: NSDiscussData.IDiscussionData) => {
+          this.data = data
+          this.paginationData = data.pagination
+          this.setPagination()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    }
+    
   }
 
   fetchSingleCategoryDetails(cid: number) {

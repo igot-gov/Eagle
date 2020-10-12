@@ -39,6 +39,7 @@ export class CareersComponent implements OnInit {
   filter(key: string | 'timestamp' | 'viewcount') {
     if (key) {
       this.currentFilter = key
+      this.refreshData(this.currentActivePage)
     }
   }
   updateQuery(key: string) {
@@ -48,14 +49,25 @@ export class CareersComponent implements OnInit {
   }
 
   refreshData(page: any) {
-    this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
-      (data: any) => {
-        this.data = data
-        this.paginationData = data.pagination
-        this.setPagination()
-      },
-      (_err: any) => {
-      })
+    if (this.currentFilter === 'recent') {
+      this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
+        (data: any) => {
+          this.data = data
+          this.paginationData = data.pagination
+          this.setPagination()
+        },
+        (_err: any) => {
+        })
+    } else {
+      this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
+        (data: any) => {
+          this.data = data
+          this.paginationData = data.pagination
+          this.setPagination()
+        },
+        (_err: any) => {
+        })
+    }
   }
 
   navigateWithPage(page: any) {
