@@ -12,7 +12,7 @@
         },
         {
             "name": "Career history",
-            "key": "Career history",
+            "key": "CareerHistory",
             "badges": {
                 "enabled": false,
                 "uri": ""

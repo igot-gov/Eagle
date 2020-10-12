@@ -1,13 +1,13 @@
 
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core'
-import { NSProfileData } from '../../models/profile-v2.model'
+import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
+import { DiscussService } from '../../../discuss/services/discuss.service'
+import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 // import { ProfileV2Service } from '../../services/profile-v2.servive'
 /* tslint:disable */
 import _ from 'lodash'
-import { DiscussService } from '../../../discuss/services/discuss.service'
-import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:enable */
 
 @Component({
@@ -25,7 +25,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit {
   currentFilter = 'timestamp'
   discussionList!: any
   discussProfileData!: any
-  portalProfile: NSProfileData.IPortalProfile
+  portalProfile!: NSProfileDataV2.IProfile
   userDetails: any
   location!: string | null
   tabs: any
@@ -34,7 +34,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit {
   handleScroll() {
     const windowScroll = window.pageYOffset
     if (windowScroll >= this.elementPosition) {
-      this.sticky = false
+      this.sticky = true
     } else {
       this.sticky = false
     }
@@ -47,17 +47,17 @@ export class ProfileViewComponent implements OnInit, AfterViewInit {
     private configSvc: ConfigurationsService,
     // private profileV2Svc: ProfileV2Service
   ) {
+    this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     this.tabs = this.route.data.subscribe(data => {
-      if (data && data.pageData && data.pageData.data) {
-        this.tabsData = data.pageData.data.tabs || []
-      }
+      this.portalProfile = data.profile
+        && data.profile.data
+        && data.profile.data.length > 0
+        && data.profile.data[0]
     })
-    this.portalProfile = this.route.snapshot.data.profile.data[0]
-
   }
   ngOnInit() {
-    if (this.portalProfile && this.portalProfile.wid) {
-      this.fetchUserDetails(this.portalProfile.wid)
+    if (this.portalProfile && this.portalProfile.userId) {
+      this.fetchUserDetails(this.portalProfile.userId)
     } else {
       const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
       if (me) {
@@ -66,7 +66,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit {
     }
   }
   ngAfterViewInit() {
-    this.elementPosition = this.menuElement.nativeElement.offsetTop
+    this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
   }
   fetchUserDetails(wid: string) {
     if (wid) {

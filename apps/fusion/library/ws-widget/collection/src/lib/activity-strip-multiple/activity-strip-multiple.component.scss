@@ -4,6 +4,7 @@
 .container-balanced {
   @extend %page-center;
 }
+
 .view-more {
   display: flex;
   align-items: center;
@@ -56,7 +57,9 @@
 
 .background-norepeat {
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100%;
+  background-attachment: local;
+  background-position-y: top;
 
   @include breakpoint-s {
     background-size: auto;

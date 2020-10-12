@@ -2,21 +2,22 @@
   <mat-card class="flex-custom">
     <mat-card-header class="flex-custom-m">
       <div mat-card-avatar class="example-header-image">
-        <ws-widget-avatar-photo [name]="(portalProfile.first_name + ' ' + portalProfile.last_name) || 'User'"
+        <ws-widget-avatar-photo
+          [name]="(portalProfile.personalDetails.firstname +' ' + portalProfile.personalDetails.lasttname) || 'User'"
           size="xxl-s"></ws-widget-avatar-photo>
       </div>
       <div class="flex-1">
         <mat-card-title class="mobile-margin text-capitalize"
-          [innerHTML]="(portalProfile.first_name + ' ' + portalProfile.last_name)">
+          [innerHTML]="portalProfile.personalDetails.firstname + ' '+ portalProfile.personalDetails.middlename + ' ' + portalProfile.personalDetails.surname">
         </mat-card-title>
-        <mat-card-subtitle>{{portalProfile.department_name}}</mat-card-subtitle>
-        <mat-card-subtitle>{{location}} </mat-card-subtitle>
+        <mat-card-subtitle>{{portalProfile.employmentDetails.departmentName}}</mat-card-subtitle>
+        <mat-card-subtitle>{{portalProfile.employmentDetails.officialPostalAddress}}</mat-card-subtitle>
         <!-- <mat-card-subtitle>{{discussProfileData.email}}</mat-card-subtitle> -->
         <ng-container>
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-custom-m">
               <span class="flex margin-right-l mobile">
-                <span class="ws-mat-default-text">{{0 }}</span>
+                <span class="ws-mat-default-text">{{0}}</span>
                 <span class="pad-4">Connections</span>
               </span>
               <span class="flex margin-right-l mobile">
@@ -34,9 +35,12 @@
       </div>
     </mat-card-header>
   </mat-card>
+
   <div class="flex flex-1 custom">
-    <div #stickyMenu [class.sticky]="sticky">
-      <app-profile-v2-left-menu class="flex flex-1"></app-profile-v2-left-menu>
+    <div class="flex-1" style="position: relative;">
+      <div #stickyMenu [class.sticky]="sticky">
+        <app-profile-v2-left-menu [tabsData]="tabsData" class="flex flex-1"></app-profile-v2-left-menu>
+      </div>
     </div>
     <div class="flex-3">
       <ng-container *ngFor="let tab of tabsData">
@@ -45,21 +49,44 @@
             <mat-card-title>{{tab.name}}</mat-card-title>
           </mat-card-header>
           <mat-card-content>
+            data will appear here
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+      <ng-container *ngIf="discussionList">
+        <mat-card [attr.id]='discussions' class="margin-top-xs margin-botton-xs">
+          <mat-card-header>
+            <mat-card-title>{{'Discussions'}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
             <ng-container>
               <mat-card class="recent-tabs">
                 <div class="flex flex-1 flex-column">
                   <div class="flex flex-1 filter flex-wrap">
                     <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                                          'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+                                                'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
                       (click)="filter('timestamp')">
                       Recent posts </a>
                     <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
-                                          'ws-mat-accent-border':currentFilter !== 'best'}" mat-button
+                                                'ws-mat-accent-border':currentFilter !== 'best'}" mat-button
                       (click)="filter('best')">
                       Best posts </a>
                     <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
-                                                      'ws-mat-accent-border':currentFilter !== 'saved'}" mat-button
-                      (click)="filter('saved')">
+                                                            'ws-mat-accent-border':currentFilter !== 'saved'}"
+                      mat-button (click)="filter('saved')">
                       Saved posts </a>
                   </div>
                 </div>
@@ -84,6 +111,11 @@
         </mat-card>
       </ng-container>
     </div>
-    <app-profile-v2-right-menu class="flex flex-1"></app-profile-v2-right-menu>
+    <div class="flex flex-1 custom">
+      <div class="flex-1" style="position: relative;">
+        <div #stickyMenu [class.sticky]="sticky">
+          <app-profile-v2-right-menu class="flex flex-1"></app-profile-v2-right-menu>
+        </div>
+      </div>
+    </div>
   </div>
-</div>

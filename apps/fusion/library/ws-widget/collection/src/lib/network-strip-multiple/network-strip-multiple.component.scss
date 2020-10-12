@@ -46,10 +46,26 @@
   max-width: $max-screen;
   display: inline-block;
   // margin: 0 auto;
-  margin-top: 10rem;
+  padding-top: 7rem;
+
+  @include breakpoint-xl {
+    padding-top: 19rem;
+  }
+
+  @include breakpoint-l {
+    padding-top: 11rem;
+  }
+
+  @include breakpoint-m {
+    padding-top: 1rem;
+  }
+
+  @include breakpoint-s {
+    padding-top: 6rem;
+  }
 
   @include breakpoint-xs {
-    margin-top: 2rem;
+    padding-top: 4.3rem;
   }
 }
 
@@ -63,7 +79,9 @@
 
 .background-norepeat {
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100%;
+  background-attachment: local;
+  background-position-y: top;
 
   @include breakpoint-s {
     background-size: auto;
