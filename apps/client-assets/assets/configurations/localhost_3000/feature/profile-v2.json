@@ -1,0 +1,65 @@
+{
+    "tabs": [
+        {
+            "name": "Profile info",
+            "key": "profileInfo",
+            "badges": {
+                "enabled": true,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "#"
+        },
+        {
+            "name": "Career history",
+            "key": "Career history",
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "#"
+        },
+        {
+            "name": "Certifications",
+            "key": "certifications",
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "#"
+        },
+        {
+            "name": "Academics",
+            "key": "academics",
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "#"
+        },
+        {
+            "name": "My Competencies",
+            "key": "competencies",
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "#"
+        },
+        {
+            "name": "Publications",
+            "key": "publications",
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "#"
+        }
+    ],
+    "banner": {}
+}
