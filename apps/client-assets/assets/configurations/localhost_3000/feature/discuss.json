@@ -70,12 +70,12 @@
         "widgetData": [
             {
                 "banners": {
-                    "l": "assets/instances/eagle/banners/hubs/discuss/l.png",
-                    "m": "assets/instances/eagle/banners/hubs/discuss/m.png",
-                    "s": "assets/instances/eagle/banners/hubs/discuss/s.png",
-                    "xl": "assets/instances/eagle/banners/hubs/discuss/xl.png",
-                    "xs": "assets/instances/eagle/banners/hubs/discuss/xs.png",
-                    "xxl": "assets/instances/eagle/banners/hubs/discuss/xxl.png"
+                    "l": "assets/instances/eagle/banners/hubs/discuss/l.jpg",
+                    "m": "assets/instances/eagle/banners/hubs/discuss/m.jpg",
+                    "s": "assets/instances/eagle/banners/hubs/discuss/s.jpg",
+                    "xl": "assets/instances/eagle/banners/hubs/discuss/xl.jpg",
+                    "xs": "assets/instances/eagle/banners/hubs/discuss/xs.jpg",
+                    "xxl": "assets/instances/eagle/banners/hubs/discuss/xxl.jpg"
                 }
             }
         ]

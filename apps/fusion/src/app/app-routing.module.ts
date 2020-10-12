@@ -184,7 +184,7 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
-    path: 'app/person-profile',
+    path: 'app/person-profile2',
     loadChildren: () =>
       import('./routes/route-profile-v2.module').then(u => u.RouteProfileV2Module),
     canActivate: [GeneralGuard],
@@ -197,7 +197,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'app/person-profile2',
+    path: 'app/person-profile',
     loadChildren: () =>
       import('./routes/route-person-profile.module').then(u => u.RoutePersonProfileModule),
     canActivate: [GeneralGuard],

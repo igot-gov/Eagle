@@ -140,8 +140,6 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     contents: NsContent.IContent[],
     strip: NsNetworkStripNewMultiple.INetworkStripUnit,
   ) {
-    // tslint:disable-next-line:no-console
-    console.log(contents)
     return (contents || []).map((content, idx) => ({
       widgetType: 'card',
       widgetSubType: 'cardActivity',

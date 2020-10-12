@@ -66,12 +66,12 @@
               "widgetData": [
                 {
                   "banners": {
-                    "l": "assets/instances/eagle/banners/home/1/l.png",
-                    "m": "assets/instances/eagle/banners/home/1/m.png",
-                    "s": "assets/instances/eagle/banners/home/1/s.png",
-                    "xl": "assets/instances/eagle/banners/home/1/xl.png",
-                    "xs": "assets/instances/eagle/banners/home/1/xs.png",
-                    "xxl": "assets/instances/eagle/banners/home/1/xxl.png"
+                    "l": "assets/instances/eagle/banners/home/1/l.jpg",
+                    "m": "assets/instances/eagle/banners/home/1/m.jpg",
+                    "s": "assets/instances/eagle/banners/home/1/s.jpg",
+                    "xl": "assets/instances/eagle/banners/home/1/xl.jpg",
+                    "xs": "assets/instances/eagle/banners/home/1/xs.jpg",
+                    "xxl": "assets/instances/eagle/banners/home/1/xxl.jpg"
                   },
                   "redirectUrl": "/app/search/learning",
                   "queryParams": {

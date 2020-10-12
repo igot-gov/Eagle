@@ -94,6 +94,16 @@ import { NetworkStripMultipleComponent } from './network-strip-multiple/network-
 import { ActivityStripMultipleComponent } from './activity-strip-multiple/activity-strip-multiple.component'
 import { PageComponent } from './page/page.component'
 import { PageModule } from './page/page.module'
+import { ProfileAcademicsComponent } from './profile-v2/profile-academics/profile-academics.component'
+import { ProfileAcademicsModule } from './profile-v2/profile-academics/profile-academics.module'
+import { ProfileCareerComponent } from './profile-v2/profile-career/profile-career.component'
+import { ProfileCareerModule } from './profile-v2/profile-career/profile-career.module'
+import { ProfileCompetenciesComponent } from './profile-v2/profile-competencies/profile-competencies.component'
+import { ProfileCompetenciesModule } from './profile-v2/profile-competencies/profile-competencies.module'
+import { ProfileCretificationsComponent } from './profile-v2/profile-cretifications/profile-cretifications.component'
+import { ProfileCretificationsModule } from './profile-v2/profile-cretifications/profile-cretifications.module'
+import { ProfileDepartmentsComponent } from './profile-v2/profile-departments/profile-departments.component'
+import { ProfileDepartmentsModule } from './profile-v2/profile-departments/profile-departments.module'
 import { PickerContentModule } from './picker-content/picker-content.module'
 import { PlayerAmpComponent } from './player-amp/player-amp.component'
 import { PlayerAmpModule } from './player-amp/player-amp.module'
@@ -193,6 +203,11 @@ export const WIDGET_REGISTERED_MODULES = [
   TreeModule,
   TreeCatalogModule,
   PageModule,
+  ProfileAcademicsModule,
+  ProfileCareerModule,
+  ProfileCompetenciesModule,
+  ProfileCretificationsModule,
+  ProfileDepartmentsModule,
   EmbeddedPageModule,
   SelectorResponsiveModule,
   DiscussionForumModule,
@@ -475,6 +490,31 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.page._type,
     widgetSubType: ROOT_WIDGET_CONFIG.page.standard,
     component: PageComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.academics,
+    component: ProfileAcademicsComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.career,
+    component: ProfileCareerComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.competencies,
+    component: ProfileCompetenciesComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.cretifications,
+    component: ProfileCretificationsComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.departments,
+    component: ProfileDepartmentsComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.page._type,

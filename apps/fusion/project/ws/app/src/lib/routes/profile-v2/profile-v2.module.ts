@@ -43,6 +43,7 @@ import { DiscussModule } from '../discuss/discuss.module'
   ],
   imports: [
     CommonModule,
+    WidgetResolverModule,
     ReactiveFormsModule,
     ProfileV2RoutingModule,
     DiscussModule,

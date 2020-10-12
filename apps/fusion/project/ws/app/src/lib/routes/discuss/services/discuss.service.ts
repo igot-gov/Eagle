@@ -37,9 +37,9 @@ export class DiscussService {
   }
   appendPage(page: any, url: string) {
     if (page) {
-     return `${url}?page=${page}`
+      return `${url}?page=${page}`
     }
-      return url
+    return url
   }
 
   fetchAllCategories() {
@@ -102,16 +102,19 @@ export class DiscussService {
     const url = this.appendPage(page, API_ENDPOINTS.popularPost)
     return this.http.get<NSDiscussData.IDiscussionData>(url)
   }
+
   fetchTopicById(topicId: number, page?: any) {
     let url = API_ENDPOINTS.getTopic + topicId.toString()
     url = this.appendPage(page, url)
     return this.http.get<NSDiscussData.IDiscussionData>(url)
   }
+
   fetchTopicByIdSort(topicId: number, sort: any, page?: any) {
     let url = API_ENDPOINTS.getTopic + topicId.toString()
     url = this.appendPage(page, url)
     return this.http.get<NSDiscussData.IDiscussionData>(`${url}&sort=${sort}`)
   }
+
   fetchUnreadCOunt() {
     return this.http.get<any>(API_ENDPOINTS.unread)
   }

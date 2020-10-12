@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
@@ -18,7 +18,7 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class ProfileViewComponent implements OnInit, AfterViewInit {
+export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
   sticky = false
   elementPosition: any
@@ -29,7 +29,8 @@ export class ProfileViewComponent implements OnInit, AfterViewInit {
   userDetails: any
   location!: string | null
   tabs: any
-  tabsData: any
+  tabsData: NSProfileDataV2.IProfileTab[]
+  currentUser!: string | null
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.pageYOffset
@@ -54,6 +55,12 @@ export class ProfileViewComponent implements OnInit, AfterViewInit {
         && data.profile.data.length > 0
         && data.profile.data[0]
     })
+    this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
+  }
+  ngOnDestroy() {
+    if (this.tabs) {
+      this.tabs.unsubscribe()
+    }
   }
   ngOnInit() {
     if (this.portalProfile && this.portalProfile.userId) {
