@@ -38,3 +38,4 @@ lms_core_critical_api_base: "http://{{ network_alias_lex_core_critical_service }
 lms_core_high_api_base: "http://{{ network_alias_lex_core_high_service }}:{{ service_lex_core_high_port }}"
 lms_core_lhub_api_base: "http://{{ network_alias_lex_core_lhub_service }}:{{ service_lex_core_lhub_port }}"
 lms_core_cassandra_api_base: "http://{{ network_alias_lex_core_cassandra_service }}:{{ service_lex_core_cassandra_port }}"
+network_hub_service: "http://{{ service_sb_hub_service }}:{{ service_sb_hub_port }}"
