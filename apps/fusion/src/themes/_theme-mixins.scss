@@ -366,6 +366,14 @@
       // background: #F5F5F5;
       box-shadow: 0 2px 0 0 $colorAccent;
     }
+
+    .dark-card {
+      background: $colorBackground !important;
+      color: rgba(0, 0, 0, 0.87) !important;
+      // $colorBackground: mat-color($background, background);
+      //  $background: map-get($theme, background);
+      //  $foreground: map-get($theme, foreground);
+    }
   }
 
   @if $is-dark {

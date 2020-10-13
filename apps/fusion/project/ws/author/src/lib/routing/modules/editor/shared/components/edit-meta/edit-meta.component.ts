@@ -77,6 +77,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   regionCtrl!: FormControl
   accessPathsCtrl!: FormControl
   keywordsCtrl!: FormControl
+  competencyCtrl!: FormControl
   contentForm!: FormGroup
   selectedSkills: string[] = []
   canUpdate = true
@@ -87,6 +88,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   jobProfileList: any[] = []
   regionList: any[] = []
   accessPathList: any[] = []
+  competencyValue: any[] = []
   infoType = ''
   fetchTagsStatus: 'done' | 'fetching' | null = null
   readonly separatorKeysCodes: number[] = [ENTER, COMMA]
@@ -122,6 +124,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   timer: any
 
   filteredOptions$: Observable<string[]> = of([])
+  competencyOptions$: Observable<any[]> = of([])
 
   constructor(
     private formBuilder: FormBuilder,
@@ -162,6 +165,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.editorsCtrl = new FormControl()
     this.creatorDetailsCtrl = new FormControl()
     this.keywordsCtrl = new FormControl('')
+    this.competencyCtrl = new FormControl('')
 
     this.audienceCtrl = new FormControl()
     this.jobProfileCtrl = new FormControl()
@@ -318,6 +322,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       distinctUntilChanged(),
       switchMap(value => this.interestSvc.fetchAutocompleteInterestsV2(value)),
     )
+    this.competencyOptions$ = this.competencyCtrl.valueChanges.pipe(
+      startWith(this.competencyCtrl.value),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
+    )
   }
   typeCheck() {
     if (this.type) {
@@ -358,6 +368,18 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       if (value.indexOf(keyword) === -1) {
         value.push(keyword)
         this.contentForm.controls.keywords.setValue(value)
+      }
+    }
+  }
+  optionSelectedCompetency(competency: any) {
+    this.competencyCtrl.setValue(' ')
+    if (competency) {
+
+      const value = this.contentForm.controls.competency.value || []
+      if (value.indexOf(competency) === -1) {
+        const displayData = competency.type.concat('-').concat(competency.name)
+        value.push(displayData)
+        this.contentForm.controls.competency.setValue(value)
       }
     }
   }
@@ -1113,6 +1135,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       jobProfile: [],
       kArtifacts: [],
       keywords: [],
+      competency: [],
       learningMode: [],
       learningObjective: [],
       learningTrack: [],

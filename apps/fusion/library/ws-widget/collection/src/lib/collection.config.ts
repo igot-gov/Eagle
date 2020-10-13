@@ -111,9 +111,10 @@ export const ROOT_WIDGET_CONFIG = {
     academics: 'academics',
     career: 'career',
     competencies: 'competencies',
-    cretifications: 'cretifications',
+    certifications: 'certifications',
     departments: 'departments',
-    // publications: 'publications'
+    // publications: 'publications',
+    hobbies: 'hobbies',
   },
   element: {
     _type: 'element',
