@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
+import { IProCert } from './profile-cretifications.model'
 
 @Component({
   selector: 'ws-widget-profile-v2-cretifications',
@@ -9,8 +10,10 @@ import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
   host: { class: 'flex flex-1' },
   /* tslint:enable */
 })
+
+// developing for old skill+certifications
 export class ProfileCretificationsComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
-  @Input() widgetData: any
+  @Input() widgetData!: IProCert
   ngOnInit(): void {
   }
 

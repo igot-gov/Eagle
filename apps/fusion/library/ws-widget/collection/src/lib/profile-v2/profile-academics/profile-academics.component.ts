@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
-
+import { IProfileAcademic } from './profile-academics.model'
 @Component({
   selector: 'ws-widget-profile-v2-academics',
   templateUrl: './profile-academics.component.html',
@@ -10,7 +10,7 @@ import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
   /* tslint:enable */
 })
 export class ProfileAcademicsComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
-  @Input() widgetData: any
+  @Input() widgetData!: IProfileAcademic
   ngOnInit(): void {
   }
 

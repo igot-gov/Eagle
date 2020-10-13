@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core'
-import { ProfileCareerComponent } from './profile-career.component'
+import { ProfileHobbiesComponent } from './profile-hobbies.component'
 import {
   MatButtonModule, MatCardModule, MatChipsModule, MatDividerModule,
   MatExpansionModule, MatIconModule, MatProgressSpinnerModule,
 } from '@angular/material'
 import { BrowserModule } from '@angular/platform-browser'
-import { PipeRelativeTimeModule } from '@ws-widget/utils'
 
 @NgModule({
-  declarations: [ProfileCareerComponent],
+  declarations: [ProfileHobbiesComponent],
   imports: [BrowserModule, MatButtonModule, MatCardModule, MatChipsModule,
-    MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule, PipeRelativeTimeModule],
-  entryComponents: [ProfileCareerComponent],
+    MatDividerModule, MatExpansionModule, MatIconModule, MatProgressSpinnerModule],
+  entryComponents: [ProfileHobbiesComponent],
 })
-export class ProfileCareerModule {
+export class ProfileHobbiesModule {
 
 }

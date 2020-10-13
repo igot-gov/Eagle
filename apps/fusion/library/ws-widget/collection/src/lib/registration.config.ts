@@ -104,6 +104,8 @@ import { ProfileCretificationsComponent } from './profile-v2/profile-cretificati
 import { ProfileCretificationsModule } from './profile-v2/profile-cretifications/profile-cretifications.module'
 import { ProfileDepartmentsComponent } from './profile-v2/profile-departments/profile-departments.component'
 import { ProfileDepartmentsModule } from './profile-v2/profile-departments/profile-departments.module'
+import { ProfileHobbiesModule } from './profile-v2/profile-hobbies/profile-hobbies.module'
+import { ProfileHobbiesComponent } from './profile-v2/profile-hobbies/profile-hobbies.component'
 import { PickerContentModule } from './picker-content/picker-content.module'
 import { PlayerAmpComponent } from './player-amp/player-amp.component'
 import { PlayerAmpModule } from './player-amp/player-amp.module'
@@ -208,6 +210,7 @@ export const WIDGET_REGISTERED_MODULES = [
   ProfileCompetenciesModule,
   ProfileCretificationsModule,
   ProfileDepartmentsModule,
+  ProfileHobbiesModule,
   EmbeddedPageModule,
   SelectorResponsiveModule,
   DiscussionForumModule,
@@ -508,8 +511,13 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.cretifications,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.certifications,
     component: ProfileCretificationsComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.profileV2._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.profileV2.hobbies,
+    component: ProfileHobbiesComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.profileV2._type,

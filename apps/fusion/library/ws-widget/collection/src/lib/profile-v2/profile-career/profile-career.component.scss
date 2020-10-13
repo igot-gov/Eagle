@@ -1,4 +1,6 @@
+@import 'ws-common';
 @import 'ws-vars';
+@import 'ws-mixins';
 
 .comment-card {
   // width: 40%;
@@ -14,6 +16,10 @@
 mat-card-actions {
   color: rgba(46, 91, 216, 0.966);
   margin-left: $size-xs;
+}
+
+.font-medium {
+  font-weight: 500 !important;
 }
 
 .view-more {
@@ -43,4 +49,16 @@ mat-card-actions {
   box-shadow: 0px 10px 30p;
   /*#99999933*/
   border-radius: 8px;
+}
+
+.mobile-margin {
+  margin: 1rem 0;
+
+  @include breakpoint-xs {
+    margin-top: $size-s;
+  }
+}
+
+.margin-f {
+  margin: 0 0 1rem 0 !important;
 }

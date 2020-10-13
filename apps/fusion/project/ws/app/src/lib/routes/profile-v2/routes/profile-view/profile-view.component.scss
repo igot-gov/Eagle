@@ -15,6 +15,15 @@
   flex: 4;
 }
 
+.font-medium {
+  font-weight: 500 !important;
+}
+
+.bottom-fix {
+  bottom: 1.5rem;
+  position: absolute;
+}
+
 .view-more {
   display: flex;
   align-items: center;
