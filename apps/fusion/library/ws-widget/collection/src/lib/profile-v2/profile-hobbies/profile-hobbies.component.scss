@@ -62,3 +62,29 @@ mat-card-actions {
 .margin-f {
   margin: 0 0 1rem 0 !important;
 }
+
+
+.hobby {
+  display: flex;
+  width: auto;
+  min-width: max-content;
+  height: 32px;
+  justify-content: space-between;
+  margin: 16px 12px;
+  align-items: center;
+  text-transform: lowercase;
+  padding: 5px 15px;
+
+  // border-radius: 20px 5px 5px 20px;
+  border-radius: 4px;
+
+  @include breakpoint-xs {
+    width: auto;
+
+  }
+
+  @include breakpoint-s {
+    width: auto;
+
+  }
+}
