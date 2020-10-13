@@ -75,8 +75,8 @@ public class MyActivitiesController {
         response.add(certCount);
         response.add(totDuration);
         response.add(dailyts);
-        response.add(karmaPoints);
-        response.add(coins);
+        //response.add(karmaPoints);
+        //response.add(coins);
 
         return response;
     }
