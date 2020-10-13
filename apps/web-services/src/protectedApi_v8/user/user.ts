@@ -23,6 +23,7 @@ import { goalsApi } from './goals'
 import { userGroupApi } from './group'
 import { historyApi } from './history'
 import { iconBadgeApi } from './iconBadge'
+import { mandatoryContent } from './mandatoryContent'
 import { userMiniProfile } from './miniProfile'
 import { myAnalyticsApi } from './myAnalytics'
 import { notificationsApi } from './notifications'
@@ -93,3 +94,4 @@ user.use('/validate', validateApi)
 user.use('/realTimeProgress', realTimeProgressApi)
 user.use('/exercise', exerciseApi)
 user.use('/users', usersApi)
+user.use('/mandatoryContent', mandatoryContent)
