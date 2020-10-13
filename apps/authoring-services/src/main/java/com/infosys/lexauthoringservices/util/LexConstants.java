@@ -1,5 +1,7 @@
 package com.infosys.lexauthoringservices.util;
 
+import org.springframework.http.HttpStatus;
+
 public class LexConstants {
 
 	public static enum TagType {
@@ -293,4 +295,8 @@ public class LexConstants {
 	public static final String CHILDREN_CLASSIFIERS = "childrenClassifiers";
 	public static final String ADDED_ON = "addedOn";
 	public static final String HAS_ASSESSMENT = "hasAssessment";
+	public static final String STATUS_CODE = "statusCode";
+	public static final String STATUS_MESSAGE = "statusMessage";
+	public static final String STATUS_MESSAGE_VALUE = "request has been accepted for processing";
+	public static final String ERROR_MESSAGE = "errorMessage";
 }
