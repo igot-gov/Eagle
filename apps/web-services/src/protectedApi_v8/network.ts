@@ -8,28 +8,18 @@ import { extractUserIdFromRequest } from '../utils/requestExtract'
 
 const unknown = 'Network Apis:- Failed due to unknown reason'
 const apiEndpoints = {
-  getConnectionEstablishedData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/fetch/established`,
-  getConnectionRequestsData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/fetch/requested`,
-<<<<<<< HEAD
-  getConnectionSuggestsData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/suggests`,
-  postConnectionAddData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/add`,
-  postConnectionRecommendationData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/recommended`,
-  postConnectionUpdateData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/update`,
-=======
-  getSuggestedConnectionData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/suggests`,
-  postAddConnectionData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/add`,
-  postConnectionRecommendationData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/recommended`,
-  postUpdateConnectionData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/update`,
->>>>>>> 5bc29914bb8452851190595e5a491582546f174a
+  getConnectionEstablishedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/established`,
+  getConnectionRequestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requested`,
+  getConnectionSuggestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/suggests`,
+  postConnectionAddData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/add`,
+  postConnectionRecommendationData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/recommended`,
+  postConnectionUpdateData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/update`,
+
 }
 
 export const networkConnectionApi = Router()
 
-<<<<<<< HEAD
 networkConnectionApi.get('/connections/requested', async (req, res) => {
-=======
-networkConnectionApi.get('/get/connections/requested', async (req, res) => {
->>>>>>> 5bc29914bb8452851190595e5a491582546f174a
   try {
     const rootOrg = req.headers.rootorg
     const userId = extractUserIdFromRequest(req)
@@ -131,10 +121,6 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
     const connectionId = req.body.connectionId
     const userId = req.body.userId
 
-<<<<<<< HEAD
-=======
-    // logInfo('org, rootOrg, contentId', org, rootOrg, contentId)
->>>>>>> 5bc29914bb8452851190595e5a491582546f174a
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
@@ -145,10 +131,6 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
     }
 
     const body = req.body
-<<<<<<< HEAD
-=======
-
->>>>>>> 5bc29914bb8452851190595e5a491582546f174a
     const response = await axios.post(
       apiEndpoints.postConnectionAddData,
       body,
@@ -174,10 +156,7 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
 networkConnectionApi.post('/update/connection', async (req, res) => {
   try {
     const body = req.body
-<<<<<<< HEAD
-=======
 
->>>>>>> 5bc29914bb8452851190595e5a491582546f174a
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
     const userId = req.body.userId
@@ -217,10 +196,6 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
 networkConnectionApi.post('/connections/recommended', async (req, res) => {
   try {
     const body = req.body
-<<<<<<< HEAD
-=======
-
->>>>>>> 5bc29914bb8452851190595e5a491582546f174a
     const rootOrg = req.header('rootorg') || 'igot'
 
     if (!rootOrg) {

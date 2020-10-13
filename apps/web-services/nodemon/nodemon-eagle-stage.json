@@ -7,7 +7,7 @@
         "CASSANDRA_IP": "localhost",
         "CASSANDRA_PASSWORD": "cassandra",
         "CASSANDRA_USERNAME": "cassandra",
-        "NETWORK_SERVICE_BACKEND": "http://localhost:3013",
+        "NETWORK_HUB_SERVICE_BACKEND": "http://localhost:3013",
         "CONTENT_API_BASE": "http://IP-ADDR:5903",
         "PID_API_BASE": "http://IP-ADDR:9200",
         "ES_BASE": "http://IP-ADDR:9200",
