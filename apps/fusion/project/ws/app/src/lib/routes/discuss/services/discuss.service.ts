@@ -35,6 +35,13 @@ export class DiscussService {
   get getUserProfile(): NsUser.IUserProfile {
     return this.usr
   }
+  appendPage(page: any, url: string) {
+    if (page) {
+      return `${url}?page=${page}`
+    }
+    return url
+  }
+
   fetchAllCategories() {
     const categories = this.http.get(API_ENDPOINTS.getAllCategories)
       .toPromise()
@@ -87,15 +94,27 @@ export class DiscussService {
     return this.http.post(url, data)
   }
 
-  fetchRecentD() {
-    return this.http.get<NSDiscussData.IDiscussionData[]>(API_ENDPOINTS.recentPost)
+  fetchRecentD(page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.recentPost)
+    return this.http.get<NSDiscussData.IDiscussionData>(url)
   }
-  fetchPopularD() {
-    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.popularPost)
+  fetchPopularD(page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.popularPost)
+    return this.http.get<NSDiscussData.IDiscussionData>(url)
   }
-  fetchTopicById(topicId: number) {
-    return this.http.get<NSDiscussData.IDiscussionData>(API_ENDPOINTS.getTopic + topicId.toString())
+
+  fetchTopicById(topicId: number, page?: any) {
+    let url = API_ENDPOINTS.getTopic + topicId.toString()
+    url = this.appendPage(page, url)
+    return this.http.get<NSDiscussData.IDiscussionData>(url)
   }
+
+  fetchTopicByIdSort(topicId: number, sort: any, page?: any) {
+    let url = API_ENDPOINTS.getTopic + topicId.toString()
+    url = this.appendPage(page, url)
+    return this.http.get<NSDiscussData.IDiscussionData>(`${url}&sort=${sort}`)
+  }
+
   fetchUnreadCOunt() {
     return this.http.get<any>(API_ENDPOINTS.unread)
   }
@@ -114,34 +133,13 @@ export class DiscussService {
   fetchSaved() {
     return this.http.get<NSDiscussData.IProfile>(API_ENDPOINTS.listSaved(this.usr.userId))
   }
-  fetchSingleCategoryDetails(cid: number) {
-    return this.http.get<NSDiscussData.ICategoryData>(API_ENDPOINTS.getSingleCategoryDetails(cid))
+  fetchSingleCategoryDetails(cid: number, page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
+    return this.http.get<NSDiscussData.ICategoryData>(url)
+  }
+  fetchSingleCategoryDetailsSort(cid: number, sort: any, page?: any) {
+    const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
+    return this.http.get<NSDiscussData.ICategoryData>(`${url}&sort=${sort}`)
   }
 
-  /*Get color Hex code by passing a string*/
-  stringToColor(str: string) {
-    let hash = 0
-    // tslint:disable-next-line: no-increment-decrement
-    for (let i = 0; i < str.length; i++) {
-      // tslint:disable-next-line: no-bitwise
-      hash = str.charCodeAt(i) + ((hash << 5) - hash)
-    }
-    let colour = '#'
-    // tslint:disable-next-line: no-increment-decrement
-    for (let i = 0; i < 3; i++) {
-      // tslint:disable-next-line: no-bitwise
-      const value = (hash >> (i * 8)) & 0xFF
-      colour += (`00${value.toString(16)}`).substr(-2)
-    }
-    return colour
-  }
-
-  /*Get text contrast by passing background hex color*/
-  getContrast(hexcolor: any) {
-    const r = parseInt(hexcolor.substr(1, 2), 16)
-    const g = parseInt(hexcolor.substr(3, 2), 16)
-    const b = parseInt(hexcolor.substr(5, 2), 16)
-    const color = ((r * 299) + (g * 587) + (b * 114)) / 1000
-    return (color >= 128) ? '#000000' : '#ffffff'
-  }
 }

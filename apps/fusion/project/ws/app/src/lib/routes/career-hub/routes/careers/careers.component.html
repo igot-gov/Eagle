@@ -36,4 +36,7 @@
             </div>
         </ng-container>
     </div>
+    <div class="flex flex-1 flex-column margin-fix pagination-container">
+        <ws-app-careers-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-careers-pagination>
+    </div>
 </div>

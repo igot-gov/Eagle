@@ -66,11 +66,11 @@
               "widgetData": [
                 {
                   "banners": {
-                    "l": "assets/instances/eagle/banners/home/1/l.png",
-                    "m": "assets/instances/eagle/banners/home/1/m.png",
-                    "s": "assets/instances/eagle/banners/home/1/s.png",
+                    "l": "assets/instances/eagle/banners/home/1/l.jpg",
+                    "m": "assets/instances/eagle/banners/home/1/m.jpg",
+                    "s": "assets/instances/eagle/banners/home/1/s.jpg",
                     "xl": "assets/instances/eagle/banners/home/1/xl.jpg",
-                    "xs": "assets/instances/eagle/banners/home/1/xs.png",
+                    "xs": "assets/instances/eagle/banners/home/1/xs.jpg",
                     "xxl": "assets/instances/eagle/banners/home/1/xxl.jpg"
                   },
                   "redirectUrl": "/app/search/learning",
@@ -103,20 +103,15 @@
                       "cardSubType": "cardActivity"
                     },
                     "viewMoreUrl": {
-                      "path": "/page/home",
+                      "path": "/app/profile/dashboard",
                       "viewMoreText": "MY DASHBOARD",
                       "queryParams": {}
                     },
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/networkHub/users",
-                        "queryParams": {
-                          "limit": 5,
-                          "offset": 0,
-                          "intervalInDays": 7,
-                          "type": "latestUsers"
-                        }
+                        "path": "/apis/protected/v8/user/activity",
+                        "queryParams": {}
                       }
                     }
                   }

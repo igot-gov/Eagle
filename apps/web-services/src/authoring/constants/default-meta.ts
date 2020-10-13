@@ -12,6 +12,7 @@ export const DEFAULT_META = [
   'certificationList',
   'certificationUrl',
   'clients',
+  'competencies',
   'complexityLevel',
   'comments',
   'concepts',

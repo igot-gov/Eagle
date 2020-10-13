@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
-
 import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 import { RightMenuComponent } from './components/right-menu/right-menu.component'
 // import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
@@ -23,8 +22,6 @@ import {
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { TrendingTagsComponent } from './components/trending-tags/trending-tags.component'
-import { RelatedDiscussionComponent } from './components/related-discussion/related-discussion.component'
 import { AvatarPhotoModule, BtnPageBackModule } from '@ws-widget/collection'
 import { EditorSharedModule } from '@ws/author/src/lib/routing/modules/editor/shared/shared.module'
 import { CkEditorModule } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.module'
@@ -43,11 +40,10 @@ import { DiscussModule } from '../discuss/discuss.module'
     ProfileViewComponent,
     LeftMenuComponent,
     RightMenuComponent,
-    RelatedDiscussionComponent,
-    TrendingTagsComponent,
   ],
   imports: [
     CommonModule,
+    WidgetResolverModule,
     ReactiveFormsModule,
     ProfileV2RoutingModule,
     DiscussModule,

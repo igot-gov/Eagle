@@ -30,7 +30,7 @@
   $footerColor: #373434;
   $footerTextColor: #dedfe0;
   $colorWhite: #ffffff;
-  $colorBlack: #000000;
+  $colorBlack: rgba(0, 0, 0, 0.87);
   $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
@@ -73,7 +73,7 @@
 
     mat-toolbar {
       button[disabled] {
-        color: black !important;
+        color: rgba(0, 0, 0, 0.87) !important;
         opacity: 0.3;
       }
     }
@@ -234,7 +234,9 @@
         color: $colorText;
       }
     }
-  } @else {
+  }
+
+  @else {
     .mat-radio-button {
       background-color: transparent !important;
 
@@ -283,8 +285,7 @@
       color: $colorAccent !important;
     }
 
-    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid
-      .mat-form-field-outline-thick {
+    .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
       color: $colorRed !important;
     }
 
@@ -368,6 +369,7 @@
   }
 
   @if $is-dark {
+
     a[href^='/'][target='_self'],
     a[href^='http'],
     a[href^='mailto'],
@@ -377,7 +379,10 @@
       background-color: $colorPrimaryDark !important;
       // background-color: red !important;
     }
-  } @else {
+  }
+
+  @else {
+
     a[href^='/'][target='_self'],
     a[href^='http'],
     a[href^='mailto'],
@@ -452,9 +457,11 @@
     .ws-mat-primary-default-text {
       color: $colorPrimary !important;
     }
+
     .ws-mat-black-text {
       color: $colorBlack;
     }
+
     .ws-mat-lighter-grey-text {
       color: $colorLighterGrey;
     }
@@ -509,11 +516,9 @@
 
     .ws-mat-text-block-fade-gradient {
       position: relative;
-      background: linear-gradient(
-        to bottom,
-        rgba(mat-color($background, card), 0),
-        mat-color($background, card) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(mat-color($background, card), 0),
+          mat-color($background, card) 100%);
 
       &::after,
       &::before {
@@ -543,11 +548,9 @@
       position: absolute;
       width: 90%;
       margin-top: 24%;
-      background: linear-gradient(
-        to bottom,
-        rgba(mat-color($background, card), 0),
-        mat-color($background, card) 100%
-      );
+      background: linear-gradient(to bottom,
+          rgba(mat-color($background, card), 0),
+          mat-color($background, card) 100%);
     }
 
     .mat-button-toggle-checked {

@@ -1,10 +1,5 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
-// import { BreakpointObserver } from '@angular/cdk/layout'
-// import { DomSanitizer } from '@angular/platform-browser'
-// import { ConfigurationsService } from '../../../../../../../../../library/ws-widget/utils/src/public-api'
-import { ActivatedRoute } from '@angular/router'
-import { Subscription } from 'rxjs'
-import { NSProfileData } from '../../models/profile-v2.model'
+import { NSProfileDataV2 } from '../../models/profile-v2.model'
 
 @Component({
   selector: 'app-profile-v2-left-menu',
@@ -12,31 +7,15 @@ import { NSProfileData } from '../../models/profile-v2.model'
   styleUrls: ['./left-menu.component.scss'],
 })
 export class LeftMenuComponent implements OnInit, OnDestroy {
-  // tabs: any = []
-  // tabs: any = []
-  @Input() unseen = 0
-  tabsData!: NSProfileData.IProfileJsonData
-  private tabs: Subscription | null = null
-  constructor(
-    // private breakpointObserver: BreakpointObserver,
-    // private domSanitizer: DomSanitizer,
-    // private configSvc: ConfigurationsService,
-    private activateRoute: ActivatedRoute,
-  ) {
 
-  }
+  @Input()
+  tabsData!: NSProfileDataV2.IProfileTab
+  constructor() { }
 
   ngOnInit(): void {
-    // debugger
-    this.tabs = this.activateRoute.data.subscribe(data => {
-      if (data && data.pageData && data.pageData.data) {
-        this.tabsData = data.pageData.data.tabs || []
-      }
-    })
+
   }
   ngOnDestroy() {
-    if (this.tabs) {
-      this.tabs.unsubscribe()
-    }
+
   }
 }

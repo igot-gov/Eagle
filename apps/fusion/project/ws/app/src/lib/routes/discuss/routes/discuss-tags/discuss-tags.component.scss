@@ -10,11 +10,26 @@
   display: flex;
   width: auto;
   min-width: max-content;
-  height: 48px;
-  border-radius: 4px;
+  height: 32px;
   justify-content: space-between;
   margin: 16px 12px;
   align-items: center;
+  text-transform: lowercase;
+  padding: 5px 15px;
+  border-radius: 20px 5px 5px 20px;
+
+  .count {
+    height: auto;
+    background: #fff;
+    border-radius: 4px;
+    padding: 1px 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    min-width: 16px;
+    margin: 0 0 0 15px;
+  }
 
   @include breakpoint-xs {
     width: auto;

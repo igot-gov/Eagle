@@ -10,12 +10,12 @@
   <ng-container *ngIf="tags && tags.length > 0">
     <div class="flex flex-1 flex-row flex-wrap">
       <div *ngFor="let tag of filteredTags | pipeFilter:'score,value':query"
-        class="tag ws-mat-primary-tags-list text-capitalize">
+        class="tag " [ngStyle]="getBgColor(tag.value)">
         <!-- Can enable random colors from below commented code -->
         <!-- <div *ngFor="let tag of filteredTags | pipeFilter:'score,value':query"
         class="tag text-capitalize" [ngStyle]="getBgColor(tag.value)"> -->
         <span class="margin-left-m">{{tag.value}}</span>
-        <span class="ws-mat-default-text margin-right-m margin-left-m">{{tag.score}}</span>
+        <span class="ws-mat-default-text count">{{tag.score}}</span>
       </div>
     </div>
   </ng-container>

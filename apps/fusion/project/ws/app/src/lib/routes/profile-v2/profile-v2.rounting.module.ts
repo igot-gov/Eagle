@@ -11,7 +11,7 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
-        path: '',
+        path: ':userId',
         component: ProfileViewComponent,
         resolve: {
           profile: Profilev2Resolve,

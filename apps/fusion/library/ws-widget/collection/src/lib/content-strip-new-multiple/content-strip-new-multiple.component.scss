@@ -47,6 +47,27 @@
   max-width: $max-screen;
   display: inline-block;
   margin: 0 auto;
+  padding-top: 0;
+
+  @include breakpoint-xl {
+    padding-top: 4rem;
+  }
+
+  @include breakpoint-l {
+    padding-top: 1.8rem;
+  }
+
+  @include breakpoint-m {
+    padding-top: 2rem;
+  }
+
+  @include breakpoint-s {
+    padding-top: 0;
+  }
+
+  @include breakpoint-xs {
+    padding-top: 0;
+  }
 }
 
 .rotate-t-90 {
@@ -59,7 +80,9 @@
 
 .background-norepeat {
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100%;
+  background-attachment: local;
+  background-position-y: top;
 
   @include breakpoint-s {
     background-size: auto;

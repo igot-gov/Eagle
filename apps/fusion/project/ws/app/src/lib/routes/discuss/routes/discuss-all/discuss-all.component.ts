@@ -1,9 +1,9 @@
 
-import { Component, OnInit, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussStartComponent } from '../../components/discuss-start/discuss-start.component'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { DiscussService } from '../../services/discuss.service'
 /* tslint:disable */
 import _ from 'lodash'
@@ -23,20 +23,32 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
   elementPosition: any
   currentFilter = 'recent'
   trendingTags!: NSDiscussData.ITag[]
-  discussionList!: NSDiscussData.IDiscussionData[]
+  discussionList!: NSDiscussData.IDiscussionData
   unread: any
+  pager = {}
+  paginationData!: any
+  currentActivePage!: any
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private discussService: DiscussService
+    private discussService: DiscussService,
+    private router: Router
   ) {
     this.trendingTags = this.route.snapshot.data.availableTags.data.tags
     this.discussionList = this.route.snapshot.data.recent.data.topics || []
+    this.paginationData = this.route.snapshot.data.recent.data.pagination
+    this.setPagination()
     this.unread = this.route.snapshot.data.unread
   }
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.')
+  }
   ngOnInit() {
-    // this.fillDummyData()
-    // console.log(this.discussionList)
+    // load page based on 'page' query param or default to 1
+    this.route.queryParams.subscribe(x => {
+      this.currentActivePage = x.page || 1
+      this.refreshData(this.currentActivePage)
+    })
   }
   start() {
     const dialogRef = this.dialog.open(DiscussStartComponent, {
@@ -46,7 +58,7 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response === 'postCreated') {
-        this.refreshData()
+        this.refreshData(this.currentActivePage)
       }
     })
   }
@@ -56,22 +68,24 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
     }
     switch (key) {
       case 'recent':
-        this.fillrecent()
+        this.fillrecent(this.currentActivePage)
         break
       case 'popular':
-        this.fillPopular()
+        this.fillPopular(this.currentActivePage)
         break
       default:
         break
     }
   }
-  fillrecent() {
+  fillrecent(_page: any) {
     // this.discussionList = this.route.snapshot.data.recent.data.topics || []
-    this.getRecentData()
+    this.getRecentData(this.currentActivePage)
   }
-  fillPopular() {
+  fillPopular(page: any) {
     // this.discussionList =;
-    this.discussService.fetchPopularD().subscribe((response: any) => {
+    this.discussService.fetchPopularD(page).subscribe((response: any) => {
+      this.paginationData = response.pagination
+      this.setPagination()
       this.discussionList = _.get(response, 'topics')
     })
     // , () => {
@@ -79,32 +93,37 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
     // })
   }
 
-  refreshData() {
+  refreshData(page: any) {
     if (this.currentFilter === 'recent') {
-      this.getRecentData()
+      this.getRecentData(page)
     } else {
-      this.fillPopular()
+      this.fillPopular(page)
     }
   }
 
-  getRecentData() {
-    return this.discussService.fetchRecentD().subscribe(
-      data => {
+  getRecentData(page: any) {
+    return this.discussService.fetchRecentD(page).subscribe(
+      (data: any) => {
+        this.paginationData = data.pagination
+        this.setPagination()
         this.discussionList = _.get(data, 'topics')
       })
   }
 
-  @HostListener('window:scroll', ['$event'])
-  handleScroll() {
-    const windowScroll = window.pageYOffset
-    if (windowScroll >= this.elementPosition + 417) {
-      this.sticky = false
-    } else {
-      this.sticky = false
+  setPagination() {
+    this.pager = {
+      startIndex: this.paginationData.first.page,
+      endIndex: this.paginationData.last.page,
+      // pages: Array.from(Array(this.paginationData.pageCount), (_x, index) => index + 1),
+      pages: this.paginationData.pages,
+      currentPage: this.paginationData.currentPage,
+      totalPage: this.paginationData.pageCount,
     }
   }
 
-  ngAfterViewInit() {
-    this.elementPosition = this.menuElement.nativeElement.offsetTop
+  navigateWithPage(page: any) {
+    if (page !== this.currentActivePage) {
+      this.router.navigate([`/app/discuss/home`], { queryParams: { page } })
+    }
   }
 }

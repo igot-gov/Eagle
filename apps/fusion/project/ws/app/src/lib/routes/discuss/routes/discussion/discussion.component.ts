@@ -1,6 +1,6 @@
 
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewInit, ViewChild, ElementRef } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { NSDiscussData } from '../../models/discuss.model'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
@@ -28,6 +28,9 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   defaultError = 'Something went wrong, Please try again after sometime!'
   topicId!: number
   fetchSingleCategoryLoader = false
+  pager = {}
+  paginationData!: any
+  currentActivePage!: any
   constructor(
     private formBuilder: FormBuilder,
     private loader: LoaderService,
@@ -36,14 +39,21 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     private discussService: DiscussService,
     private snackBar: MatSnackBar,
     private discussUtils: DiscussUtilsService,
+    private router: Router
   ) {
   }
   ngOnInit(): void {
+    this.data = this.route.snapshot.data.topic.data
+    this.paginationData = this.route.snapshot.data.topic.data.pagination
+    this.setPagination()
     this.route.params.subscribe(params => {
       this.topicId = params.topicId
-      this.getTIDData()
+      this.getTIDData(this.currentActivePage)
     })
-    this.data = this.route.snapshot.data.topic.data
+    this.route.queryParams.subscribe(x => {
+      this.currentActivePage = x.page || 1
+      this.refreshPostData(this.currentActivePage)
+    })
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
     })
@@ -85,7 +95,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.discussService.bookmarkPost(discuss.pid).subscribe(
       _data => {
         this.openSnackbar('Bookmark added successfully!')
-        this.refreshPostData()
+        this.refreshPostData(this.currentActivePage)
       },
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -95,7 +105,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.discussService.deleteBookmarkPost(discuss.pid).subscribe(
       _data => {
         this.openSnackbar('Bookmark Removed successfully!')
-        this.refreshPostData()
+        this.refreshPostData(this.currentActivePage)
       },
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -105,7 +115,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   delteVote(discuss: any) {
     this.discussService.deleteVotePost(discuss.pid).subscribe(
       _data => {
-        this.refreshPostData()
+        this.refreshPostData(this.currentActivePage)
       },
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -118,7 +128,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
         () => {
           this.openSnackbar(this.toastSuccess.nativeElement.value)
           this.postAnswerForm.reset()
-          this.refreshPostData()
+          this.refreshPostData(this.currentActivePage)
         },
         (err: any) => {
           this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -135,7 +145,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       this.discussService.replyPost(post.tid, req).subscribe(
         () => {
           this.openSnackbar('Your reply was saved succesfuly!')
-          this.refreshPostData()
+          this.refreshPostData(this.currentActivePage)
         },
         (err: any) => {
           this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -152,7 +162,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       this.discussService.replyPost(post.tid, req).subscribe(
         () => {
           this.openSnackbar('Your reply was saved succesfuly!')
-          this.refreshPostData()
+          this.refreshPostData(this.currentActivePage)
         },
         (err: any) => {
           this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -163,6 +173,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   filter(key: string | 'timestamp' | 'upvotes') {
     if (key) {
       this.currentFilter = key
+      this.refreshPostData(this.currentActivePage)
     }
   }
   showError(meta: string) {
@@ -178,14 +189,28 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     })
   }
 
-  refreshPostData() {
-    this.discussService.fetchTopicById(this.topicId).subscribe(
-      (data: NSDiscussData.IDiscussionData) => {
-        this.data = data
-      },
-      (err: any) => {
-        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-      })
+  refreshPostData(page: any) {
+    if (this.currentFilter === 'recent') {
+      this.discussService.fetchTopicById(this.topicId, page).subscribe(
+        (data: NSDiscussData.IDiscussionData) => {
+          this.data = data
+          this.paginationData = data.pagination
+          this.setPagination()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    } else {
+      this.discussService.fetchTopicByIdSort(this.topicId, 'voted', page).subscribe(
+        (data: NSDiscussData.IDiscussionData) => {
+          this.data = data
+          this.paginationData = data.pagination
+          this.setPagination()
+        },
+        (err: any) => {
+          this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+        })
+    }
   }
 
   fetchSingleCategoryDetails(cid: number) {
@@ -201,10 +226,12 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       })
   }
 
-  getTIDData() {
-    this.discussService.fetchTopicById(this.topicId).subscribe(
+  getTIDData(page: any) {
+    this.discussService.fetchTopicById(this.topicId, page).subscribe(
       (data: NSDiscussData.IDiscussionData) => {
         this.data = data
+        this.paginationData = data.pagination
+        this.setPagination()
       },
       (err: any) => {
         this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
@@ -215,5 +242,22 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     const bgColor = this.discussUtils.stringToColor(tagTitle.toLowerCase())
     const color = this.discussUtils.getContrast(bgColor)
     return { color, 'background-color': bgColor }
+  }
+
+  navigateWithPage(page: any) {
+    if (page !== this.currentActivePage) {
+      this.router.navigate([`/app/discuss/home/${this.topicId}`], { queryParams: { page } })
+    }
+  }
+
+  setPagination() {
+    this.pager = {
+      startIndex: this.paginationData.first.page,
+      endIndex: this.paginationData.last.page,
+      // pages: Array.from(Array(this.paginationData.pageCount), (_x, index) => index + 1),
+      pages: this.paginationData.pages,
+      currentPage: this.paginationData.currentPage,
+      totalPage: this.paginationData.pageCount,
+    }
   }
 }
