@@ -5,6 +5,7 @@ import { attendedContentApi } from './attendent-content'
 import { catalogApi } from './catalog'
 import { certificationApi } from './certifications'
 import { cohortsApi } from './cohorts'
+import { competencyApi } from './competency'
 import { conceptGraphApi } from './concept'
 import { contentApi } from './content'
 import { counterApi } from './counter'
@@ -56,3 +57,4 @@ protectedApiV8.use('/translate', translateApi)
 protectedApiV8.use('/attended-content', attendedContentApi)
 protectedApiV8.use('/event-external', externalEventsApi)
 protectedApiV8.use('/network', networkConnectionApi)
+protectedApiV8.use('/competency', competencyApi)
