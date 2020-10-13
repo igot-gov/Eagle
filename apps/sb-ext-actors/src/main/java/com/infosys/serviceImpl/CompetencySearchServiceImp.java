@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -54,7 +55,7 @@ public class CompetencySearchServiceImp implements CompetencySearchService {
         searchRequest.source(sourceBuilder);
         SearchResponse searchResponse = elasticClient.search(searchRequest, RequestOptions.DEFAULT);
         if (searchResponse.getHits().totalHits == 0) {
-            return new ArrayList<>();
+            return Collections.emptyList();
         }
         List<Object> totalRecords = new ArrayList<>();
         for (SearchHit hit : searchResponse.getHits()) {
