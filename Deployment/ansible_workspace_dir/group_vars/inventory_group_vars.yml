@@ -13,6 +13,7 @@ sunbird_cassandra_port: cassandra_host_port #9042
 sunbird_cassandra_username: username
 sunbird_cassandra_password: password
 
+frac_api_base: https://frac_url
 
 # Cassandra configuration
 enable_password_for_cassandra: "false"  #can be true or false
@@ -69,6 +70,11 @@ mongodb_host: mongodb_host_ip #10.0.1.2
 mongodb_port: mongodb_host_port #27017
 mongodb_user: username #username
 mongodb_password: username #password
+mongodb_nodebb_database: nodebb
+mongodb_nodebb_user: nodeusername
+mongodb_nodebb_password: password
+nodebb_url: nodebb_url
+
 
 # Neo4j
 enable_password_for_neo4j: "true" # can be true or false
