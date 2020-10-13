@@ -16,6 +16,6 @@ public interface MandatoryContentRepository extends
      * @param org
      * @return
      */
-    @Query("select content_id, content_type from mandatory_user_content where root_org=?0 and org=?1")
+    @Query("select content_id, content_type, minprogressforcompletion from mandatory_user_content where root_org=?0 and org=?1")
     public List<MandatoryContentModel> getMandatoryContentsInfo(String rootOrg, String org);
 }

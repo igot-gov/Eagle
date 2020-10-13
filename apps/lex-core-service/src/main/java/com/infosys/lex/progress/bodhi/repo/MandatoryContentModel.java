@@ -13,6 +13,9 @@ public class MandatoryContentModel {
     @Column("content_type")
     private String contentType;
 
+    @Column("minProgressForCompletion")
+    private Float minProgressCheck;
+
     public MandatoryContentPrimaryKeyModel getPrimaryKey() {
         return primaryKey;
     }
@@ -27,5 +30,13 @@ public class MandatoryContentModel {
 
     public void setContentType(String contentType) {
         this.contentType = contentType;
+    }
+
+    public Float getMinProgressCheck() {
+        return minProgressCheck;
+    }
+
+    public void setMinProgressCheck(Float minProgressCheck) {
+        this.minProgressCheck = minProgressCheck;
     }
 }

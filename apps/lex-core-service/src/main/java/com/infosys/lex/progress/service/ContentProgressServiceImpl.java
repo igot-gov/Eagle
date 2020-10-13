@@ -73,9 +73,6 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 
 	public static final String PROGRESS_CONSTANT = "progress";
 
-	public static final Integer PERCENTAGE_CONST = 100;
-
-	public static final Integer MINIMUM_PASS_CRITERIA = 70;
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1185,20 +1182,21 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		}
 		List<String> contentIds = contentList.stream().map(content -> content.getPrimaryKey().getContent_id())
 				.collect(Collectors.toList());
+		Map<String, MandatoryContentModel> contentModelMap = contentList.stream().collect(Collectors.toMap(content -> content.getPrimaryKey().getContent_id(), content -> content, (e1, e2) -> e1));
 		try {
 			Map<String, Object> progressMap = this.metaForProgress(rootOrg, userId, contentIds);
 			if (CollectionUtils.isEmpty(progressMap)) {
 				return Boolean.FALSE;
 			}
-			Map<String, Object> resultMap = new HashMap<String, Object>();
+			Map<String, Object> resultMap = new HashMap<>();
 			for (String contentId : contentIds) {
 				if (!progressMap.containsKey(contentId)) {
 					return Boolean.FALSE;
 				}
 				resultMap = (Map<String, Object>) progressMap.get(contentId);
 				Float progress = (Float) resultMap.get(PROGRESS_CONSTANT);
-				Float progressPercentage = progress * PERCENTAGE_CONST;
-				if (progressPercentage < MINIMUM_PASS_CRITERIA)
+				Float minimumCriteria = contentModelMap.get(contentId).getMinProgressCheck();
+				if (progress < minimumCriteria)
 					return Boolean.FALSE;
 			}
 		} catch (Exception e) {
