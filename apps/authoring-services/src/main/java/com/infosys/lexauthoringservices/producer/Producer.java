@@ -18,10 +18,8 @@ public class Producer {
 
 	public void push(String topic, Object value) {
 		ObjectMapper mapper = new ObjectMapper();
-		String message = null;
 		try {
-			message = mapper.writeValueAsString(value);
-			kafkaTemplate.send(topic, message);
+			kafkaTemplate.send(topic, mapper.writeValueAsString(value));
 		} catch (JsonProcessingException e) {
 			logger.error(e);
 		}

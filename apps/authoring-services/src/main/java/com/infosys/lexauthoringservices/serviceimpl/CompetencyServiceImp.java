@@ -1,7 +1,5 @@
 package com.infosys.lexauthoringservices.serviceimpl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.infosys.lexauthoringservices.model.Competency;
 import com.infosys.lexauthoringservices.producer.Producer;
 import com.infosys.lexauthoringservices.service.CompetencyService;
@@ -11,13 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class CompetencyServiceImp implements CompetencyService {
@@ -35,7 +28,7 @@ public class CompetencyServiceImp implements CompetencyService {
     private GraphServiceImpl graphService;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private OutBoundRequestServiceImpl outBoundRequestService;
 
     @Value("${kafka.topics.competency.update}")
     private String competencyUpdateTopic;
@@ -74,73 +67,45 @@ public class CompetencyServiceImp implements CompetencyService {
         StringBuilder builder = new StringBuilder();
         String path = competencySearchPath.replace("{org}", competency.getRootOrg()).replace("{id}", competency.getId());
         builder.append(sbextServiceURL).append(path);
-        Object response = fetchResult(builder);
+        Object response = outBoundRequestService.fetchResult(builder);
         if (ObjectUtils.isEmpty(response))
             return competency;
         List<HashMap<String, Object>> listOfIds = (List<HashMap<String, Object>>) response;
-        if (!listOfIds.isEmpty()) {
-            List<String> successRecords = new ArrayList<>();
-            List<String> failedRecords = new ArrayList<>();
-            logger.info("Competency update started ..............");
-            for (HashMap<String, Object> map : listOfIds) {
-                String lex_id = (String) map.get(IDENTIFIER_CONST);
-                try {
-                    Map<String, Object> contentData = contentCrudService.getContentNode(competency.getRootOrg(), lex_id);
-                    Object competencyObject = contentData.get(COMPETENCIES_CONST);
-                    if (!ObjectUtils.isEmpty(competencyObject)) {
-                        List<HashMap<String, String>> oldCompetencyData = (List<HashMap<String, String>>) competencyObject;
-                        List<HashMap<String, String>> newCompetencyData = new ArrayList<>();
-                        HashMap<String, String> competencyMap = new HashMap<>();
-                        for (HashMap<String, String> data : oldCompetencyData) {
-                            if (data.get(ID_CONST).equals(competency.getId())) {
-                                competencyMap = new HashMap<>();
-                                competencyMap.put(ID_CONST, competency.getId());
-                                competencyMap.put(NAME_CONST, competency.getName());
-                                competencyMap.put(DESCRIPTION_CONST, competency.getDescription());
-                                newCompetencyData.add(competencyMap);
-                            } else {
-                                newCompetencyData.add(data);
-                            }
-                        }
-                        contentData.put(COMPETENCIES_CONST, newCompetencyData);
-                        contentCrudService.updateContentMetaNode(competency.getRootOrg(), "", lex_id, contentData);
-                        successRecords.add(lex_id);
-                    }
-                } catch (Exception ex) {
-                    failedRecords.add(lex_id);
-                    logger.error(ex.toString());
-                }
-            }
-            if(!successRecords.isEmpty())
-            logger.info("Success Records : " + successRecords.toString());
-            if(!failedRecords.isEmpty())
-            logger.info("Failed Records : " + failedRecords.toString());
-            logger.info("Competency update finished ..............");
-        }
-        return competency;
-    }
 
-    /**
-     * @param uri
-     * @return
-     * @throws Exception
-     */
-    public Object fetchResult(StringBuilder uri) {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        Object response = null;
-        StringBuilder str = new StringBuilder(this.getClass().getCanonicalName()).append(".fetchResult:")
-                .append(System.lineSeparator());
-        str.append("URI: ").append(uri.toString()).append(System.lineSeparator());
-        try {
-            String message = str.toString();
-            logger.debug(message);
-            response = restTemplate.getForObject(uri.toString(), List.class);
-        } catch (HttpClientErrorException e) {
-            logger.error("External Service threw an Exception: " + e.toString());
-        } catch (Exception e) {
-            logger.error("Exception while fetching from the external service: " + e.toString());
+        if (listOfIds.isEmpty())
+            return competency;
+        List<String> successRecords = new ArrayList<>();
+        List<String> failedRecords = new ArrayList<>();
+        logger.info("Competency update started ..............");
+        for (HashMap<String, Object> map : listOfIds) {
+            String lex_id = (String) map.get(IDENTIFIER_CONST);
+            try {
+                Map<String, Object> contentData = contentCrudService.getContentNode(competency.getRootOrg(), lex_id);
+                Object competencyObject = contentData.get(COMPETENCIES_CONST);
+                if (ObjectUtils.isEmpty(competencyObject)) {
+                    failedRecords.add(lex_id);
+                    continue;
+                }
+                List<HashMap<String, String>> competencyData = (List<HashMap<String, String>>) competencyObject;
+                for (HashMap<String, String> data : competencyData) {
+                    if (data.get(ID_CONST).equals(competency.getId())) {
+                        data.put(NAME_CONST, competency.getName());
+                        data.put(DESCRIPTION_CONST, competency.getDescription());
+                    }
+                }
+                contentData.put(COMPETENCIES_CONST, competencyData);
+                contentCrudService.updateContentMetaNode(competency.getRootOrg(), "", lex_id, contentData);
+                successRecords.add(lex_id);
+            } catch (Exception ex) {
+                failedRecords.add(lex_id);
+                logger.error(ex.toString());
+            }
         }
-        return response;
+        if (!successRecords.isEmpty())
+            logger.info("Success Records : " + successRecords.toString());
+        if (!failedRecords.isEmpty())
+            logger.info("Failed Records : " + failedRecords.toString());
+        logger.info("Competency update finished ..............");
+        return competency;
     }
 }

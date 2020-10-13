@@ -25,10 +25,8 @@ public class CompetencyDataConsumer {
 			@TopicPartition(topic = "${kafka.topics.competency.update}", partitions = { "0", "1", "2", "3" }) })
 	public void processMessage(ConsumerRecord<String, String> data) throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		String message = String.valueOf(data.value());
-
 		try {
-			Competency competency = mapper.readValue(message, Competency.class);
+			Competency competency = mapper.readValue(String.valueOf(data.value()), Competency.class);
 			competencyService.processUpdateCompetencyData(competency);
 		} catch (Exception ex) {
 			logger.error("Competency Update Process Exception : " + ex.toString());
