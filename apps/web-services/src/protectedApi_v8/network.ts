@@ -2,23 +2,22 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
 import { CONSTANTS } from '../utils/env'
-import { logError, logInfo } from '../utils/logger'
+import { logError } from '../utils/logger'
 import { ERROR } from '../utils/message'
 
 const unknown = 'Failed due to unknown reason'
 const apiEndpoints = {
-  getConnectionRequestsData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/fetch/requested`,
   getConnectionEstablishedData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/fetch/established`,
+  getConnectionRequestsData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/fetch/requested`,
   getSuggestedConnectionData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/suggests`,
-  postConnectionRecommendationData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/recommended`,
   postAddConnectionData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/add`,
+  postConnectionRecommendationData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/profile/find/recommended`,
   postUpdateConnectionData: `${CONSTANTS.NETWORK_SERVICE_BACKEND}/connections/update`,
 }
 
 export const networkConnectionApi = Router()
 
 networkConnectionApi.get('/get/connections/requested', async (req, res) => {
-  console.log('Connection requests GET API called=====>', req.header('userId') || 'uuid missing')
   try {
     const rootOrg = req.headers.rootorg
     const userId = req.header('userId')
@@ -35,8 +34,8 @@ networkConnectionApi.get('/get/connections/requested', async (req, res) => {
       ...axiosRequestConfig,
       headers: {
         rootOrg,
-        userId
-      }
+        userId,
+      },
     })
     res.send((response.data))
 
@@ -51,7 +50,6 @@ networkConnectionApi.get('/get/connections/requested', async (req, res) => {
 })
 
 networkConnectionApi.get('/get/connections/established', async (req, res) => {
-  console.log('Connection requests GET API called=====>', req.header('userId') || 'uuid missing')
   try {
     const rootOrg = req.headers.rootorg
     const userId = req.header('userId')
@@ -68,8 +66,8 @@ networkConnectionApi.get('/get/connections/established', async (req, res) => {
       ...axiosRequestConfig,
       headers: {
         rootOrg,
-        userId
-      }
+        userId,
+      },
     })
     res.send((response.data))
 
@@ -84,8 +82,6 @@ networkConnectionApi.get('/get/connections/established', async (req, res) => {
 })
 
 networkConnectionApi.get('/connections/suggests', async (req, res) => {
-  console.log('Connection requests GET API called=====>', req.header('userId') || 'uuid missing')
-console.log("exec - /connections/suggests");
   try {
     const rootOrg = req.headers.rootorg
     const userId = req.header('userId')
@@ -102,8 +98,8 @@ console.log("exec - /connections/suggests");
       ...axiosRequestConfig,
       headers: {
         rootOrg,
-        userId
-      }
+        userId,
+      },
     })
     res.send((response.data))
 
@@ -117,13 +113,11 @@ console.log("exec - /connections/suggests");
   }
 })
 
-
 networkConnectionApi.post('/add/connection', async (req, res) => {
   try {
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
     const userId = req.body.userId
-
 
     // logInfo('org, rootOrg, contentId', org, rootOrg, contentId)
     if (!rootOrg) {
@@ -136,7 +130,6 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
     }
 
     const body = req.body
-    console.log('body========>', JSON.stringify(body))
 
     const response = await axios.post(
       apiEndpoints.postAddConnectionData,
@@ -145,7 +138,7 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
         ...axiosRequestConfig,
         headers: {
           rootOrg,
-        }
+        },
       }
     )
     res.send(response.data)
@@ -163,7 +156,6 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
 networkConnectionApi.post('/update/connection', async (req, res) => {
   try {
     const body = req.body
-    console.log('body========>', JSON.stringify(body))
 
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
@@ -186,7 +178,7 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
         ...axiosRequestConfig,
         headers: {
           rootOrg,
-        }
+        },
       }
     )
     res.send(response.data)
@@ -204,7 +196,6 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
 networkConnectionApi.post('/recommended', async (req, res) => {
   try {
     const body = req.body
-    console.log('body========>', JSON.stringify(body))
 
     const rootOrg = req.header('rootorg') || 'igot'
 
@@ -220,7 +211,7 @@ networkConnectionApi.post('/recommended', async (req, res) => {
         ...axiosRequestConfig,
         headers: {
           rootOrg,
-        }
+        },
       }
     )
     res.send(response.data)
@@ -234,5 +225,3 @@ networkConnectionApi.post('/recommended', async (req, res) => {
     )
   }
 })
-
-

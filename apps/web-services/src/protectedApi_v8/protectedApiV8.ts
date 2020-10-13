@@ -5,6 +5,7 @@ import { attendedContentApi } from './attendent-content'
 import { catalogApi } from './catalog'
 import { certificationApi } from './certifications'
 import { cohortsApi } from './cohorts'
+import { competencyApi } from './competency'
 import { conceptGraphApi } from './concept'
 import { contentApi } from './content'
 import { counterApi } from './counter'
@@ -15,6 +16,7 @@ import { infyRadioApi } from './infyradio'
 import { knowledgeHubApi } from './khub'
 import { leaderBoardApi } from './leaderboard'
 import { navigatorApi } from './navigator'
+import { networkConnectionApi } from './network'
 import { networkHubApi } from './network-hub'
 import { recommendationApi } from './recommendation'
 import { scromApi } from './scrom'
@@ -22,7 +24,6 @@ import { socialApi } from './social'
 import { trainingApi } from './training'
 import { translateApi } from './translate'
 import { user } from './user/user'
-import { networkConnectionApi } from './network'
 
 export const protectedApiV8 = express.Router()
 
@@ -56,4 +57,4 @@ protectedApiV8.use('/translate', translateApi)
 protectedApiV8.use('/attended-content', attendedContentApi)
 protectedApiV8.use('/event-external', externalEventsApi)
 protectedApiV8.use('/network', networkConnectionApi)
-
+protectedApiV8.use('/competency', competencyApi)
