@@ -2648,6 +2648,35 @@ mappings={
 				},
 				"contentStructure": {
 					"type": "keyword"
+				},
+				  "competencies": {
+					    "type": "nested",
+					    "properties": {
+					      "id": {
+						"type": "keyword"
+					      },
+					      "competencyType": {
+						"type": "keyword"
+					      },
+					      "description": {
+						"type": "text",
+						"fields": {
+						  "keyword": {
+						    "type": "keyword",
+						    "ignore_above": 512
+						  }
+						}
+					      },
+					      "name": {
+						"type": "text",
+						"fields": {
+						  "keyword": {
+						    "type": "keyword",
+						    "ignore_above": 512
+						  }
+						}
+					      }
+					  }
 				}
 			}
 		}
