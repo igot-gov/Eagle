@@ -41,7 +41,7 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
     this.unread = this.route.snapshot.data.unread
   }
   ngAfterViewInit(): void {
-    throw new Error('Method not implemented.')
+    // throw new Error('Method not implemented.')
   }
   ngOnInit() {
     // load page based on 'page' query param or default to 1

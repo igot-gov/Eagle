@@ -17,14 +17,6 @@ const routes: Routes = [
           profile: Profilev2Resolve,
         },
       },
-      // {
-      //   path: '/:emailId',
-      //   component: ProfileViewComponent,
-      // },
-      // {
-      //   path: 'home',
-      //   component: ProfileViewComponent,
-      // },
     ],
   },
 ]
