@@ -119,7 +119,7 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
   try {
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
-    const userId = req.body.userId
+    const userId = extractUserIdFromRequest(req)
 
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
@@ -159,7 +159,7 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
 
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
-    const userId = req.body.userId
+    const userId = extractUserIdFromRequest(req)
     const status = req.body.status
 
     if (!rootOrg) {
