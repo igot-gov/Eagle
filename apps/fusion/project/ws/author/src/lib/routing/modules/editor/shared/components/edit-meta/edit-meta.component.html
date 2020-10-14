@@ -548,7 +548,7 @@
                   [ngClass]="{ disable: checkCondition('keywords', 'disabled') }">
                   <label>
                     <div class="flex flex-middle">
-                      <span [ngClass]="{ required: checkCondition('keywords', 'required') }" i18n>Keywords</span>
+                      <span [ngClass]="{ required: checkCondition('keywords', 'required') }" i18n>Keywordssss</span>
                       <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
                   </mat-icon> -->
                       <mat-icon class="float-right margin-left-xs cursor-pointer" *ngIf="
@@ -562,6 +562,7 @@
                       keyword.
                     </span>
                   </label>
+
                   <div class="margin-top-xs flex flex-1">
                     <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
                       [ngClass]="{ 'mat-form-field-invalid': showError('keywords') }">
@@ -582,6 +583,59 @@
                       <mat-option *ngIf="keywordsSearch.value" [value]="keywordsSearch.value">{{ keywordsSearch.value }}
                       </mat-option>
                       <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option">{{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </div>
+                </div>
+              </div>
+              <div class="flex new-mobile">
+                <div class="margin-top-xs margin-right-xs margin-left-xs flex-1"
+                  *ngIf="checkCondition('exclusiveContent', 'show')"
+                  [ngClass]="{ disable: checkCondition('exclusiveContent', 'disabled') }">
+                </div>
+
+                <div class="margin-top-xs margin-right-xs margin-left-xs flex-1"
+                  *ngIf="checkCondition('keywords', 'show')"
+                  [ngClass]="{ disable: checkCondition('keywords', 'disabled') }">
+                  <label>
+                    <div class="flex flex-middle">
+                      <span [ngClass]="{ required: checkCondition('keywords', 'required') }" i18n>Competency
+                        Tagging</span>
+                      <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
+                                  </mat-icon> -->
+                      <mat-icon class="float-right margin-left-xs cursor-pointer" *ngIf="
+                                      contentForm.controls.competency.value &&
+                                      contentForm.controls.competency.value.length
+                                    " (click)="copyData('keyword')">
+                        file_copy
+                      </mat-icon>
+                    </div>
+                    <span i18n *ngIf="infoType === 'keyword'">Add relevant tags to your content. Press Enter after each
+                      keyword.
+                    </span>
+                  </label>
+
+                  <div class="margin-top-xs flex flex-1">
+                    <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
+                      [ngClass]="{ 'mat-form-field-invalid': showError('keywords') }">
+                      <mat-chip-list #keywords aria-label="Keyword selection">
+                        <mat-chip *ngFor="let key of contentForm.controls.competency.value" [selectable]="selectable"
+                          [removable]="removable" (removed)="removeKeyword(key)">
+                          {{ key }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input i18n-placeholder [formControl]="competencyCtrl" [matAutocomplete]="auto"
+                          placeholder="Search Competency" #keywordsView [matChipInputFor]="keywords"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="false"
+                          (matChipInputTokenEnd)="addKeyword($event)" #keywordsSearch />
+                      </mat-chip-list>
+                    </mat-form-field>
+                    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
+                      (optionSelected)="optionSelectedCompetency($event.option.value); keywordsView.value = ''">
+                      <mat-option *ngIf="keywordsSearch.value" [value]="keywordsSearch.value">{{ keywordsSearch.value }}
+                      </mat-option>
+                      <mat-option *ngFor="let option of competencyOptions$ | async" [value]="option">{{option.type }}
+                        - {{option.name }}
                       </mat-option>
                     </mat-autocomplete>
                   </div>
@@ -672,6 +726,7 @@
                   </p>
                 </div>
               </div>
+
             </div>
           </mat-card-content>
           <mat-card-actions>

@@ -12,6 +12,7 @@ const API_END_POINTS = {
   addMultiple: `${PROTECTED_SLAG_V8}/user/topics/addMultiple`,
   recommendedTopics: `${PROTECTED_SLAG_V8}/user/topics/suggested`,
   autocompleteTopics: `${PROTECTED_SLAG_V8}/user/topics/autocomplete`,
+  competencyTopics: `${PROTECTED_SLAG_V8}/competency/getCompetency`,
 }
 @Injectable({
   providedIn: 'root',
@@ -83,4 +84,12 @@ export class InterestService {
   fetchAutocompleteInterestsV2(query: string): Observable<string[]> {
     return this.http.get<string[]>(`${API_END_POINTS.autocompleteTopics}?query=${query}`)
   }
+  fetchAutocompleteCompetencyV2(query: string): Observable<any[]> {
+    return this.http
+      .get<any>(`${API_END_POINTS.competencyTopics}?query=${query}`)
+      .pipe(
+        map(data => data.responseData.map((item: { name: any }) => item))
+      )
+  }
+
 }

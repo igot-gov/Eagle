@@ -1,20 +1,27 @@
 <div class="flex flex-1 flex-column margin-top-xs margin-left-l">
   <mat-card class="flex-custom" [attr.id]='widgetData.key'>
     <mat-card-content>
-      <mat-card-title class="mat-h3 flex-4 mobile-margin">
+      <span class="mat-h3 font-medium flex-4 mobile-margin">
         {{widgetData.name}}
-      </mat-card-title>
+      </span>
       <!-- {{widgetData | json}} -->
       <ng-container *ngFor="let career of widgetData.data">
-        <mat-card class="mat-list-item">
-          <div class="mat-h3 flex-4 mobile-margin">
-            {{career.designation}}
+        <mat-card class="mt-2 mat-list-item dark-card" *ngIf="career.designation">
+          <div class="flex flex-1 mobile-margin margin-f">
+            <span class="flex-1 mat-h3 font-medium"> {{career.designation}}
+            </span>
+            <span *ngIf="career.doj" class="mat-subtitle">Joined {{career.doj | pipeRelativeTime}}</span>
           </div>
-          <div class="mat-subtitle flex-4 mobile-margin">
+          <div class="mat-subtitle flex-1 mobile-margin">
             {{career.name}}
           </div>
-          <div class="mat-subtitle flex-4 mobile-margin">
+          <div class="mat-subtitle flex-1 mobile-margin">
             {{career.location}}
+          </div>
+        </mat-card>
+        <mat-card class="mt-2 mat-list-item dark-card" *ngIf="!career.designation">
+          <div class="flex flex-1 mobile-margin margin-f">
+            <span class="flex-1 mat-h3 font-medium"> No Information Available </span>
           </div>
         </mat-card>
       </ng-container>

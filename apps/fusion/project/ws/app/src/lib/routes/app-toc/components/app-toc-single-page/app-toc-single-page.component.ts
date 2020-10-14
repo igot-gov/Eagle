@@ -13,6 +13,7 @@ import { AppTocService } from '../../services/app-toc.service'
 import { BtnMailUserDialogComponent } from '@ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component'
 import { IBtnMailUser } from '@ws-widget/collection/src/lib/btn-mail-user/btn-mail-user.component'
 import { MatDialog } from '@angular/material'
+import { TitleTagService } from '@ws/app/src/lib/routes/app-toc/services/title-tag.service'
 
 @Component({
   selector: 'ws-app-app-toc-single-page',
@@ -48,6 +49,7 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     private authAccessControlSvc: AccessControlService,
     private dialog: MatDialog,
+    private titleTagService: TitleTagService,
   ) {
     if (this.configSvc.restrictedFeatures) {
       this.askAuthorEnabled = !this.configSvc.restrictedFeatures.has('askAuthor')
@@ -70,6 +72,25 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
     }
   }
 
+  detailUrl(data: any) {
+    // let locationOrigin = environment.sitePath ? `https://${environment.sitePath}` : location.origin
+    let locationOrigin = location.origin
+    if (this.configSvc.activeLocale && this.configSvc.activeLocale.path) {
+      locationOrigin += `/${this.configSvc.activeLocale.path}`
+    }
+    switch (data.contentType) {
+      case NsContent.EContentTypes.CHANNEL:
+        return `${locationOrigin}${data.artifactUrl}`
+      case NsContent.EContentTypes.KNOWLEDGE_BOARD:
+        return `${locationOrigin}/app/knowledge-board/${data.identifier}`
+      case NsContent.EContentTypes.KNOWLEDGE_ARTIFACT:
+
+        return `${locationOrigin}/app/toc/${data.identifier}/overview`
+      default:
+        return `${locationOrigin}/app/toc/${data.identifier}/overview`
+    }
+  }
+
   ngOnDestroy() {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe()
@@ -86,9 +107,18 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
     return this.tocSharedSvc.showDescription
   }
 
+  setSocialMediaMetaTags(data: any) {
+    this.titleTagService.setSocialMediaTags(
+      this.detailUrl(data),
+      data.name,
+      data.description,
+      data.appIcon)
+  }
+
   private initData(data: Data) {
     const initData = this.tocSharedSvc.initData(data)
     this.content = initData.content
+    this.setSocialMediaMetaTags(this.content)
     this.body = this.domSanitizer.bypassSecurityTrustHtml(
       this.content && this.content.body
         ? this.forPreview
