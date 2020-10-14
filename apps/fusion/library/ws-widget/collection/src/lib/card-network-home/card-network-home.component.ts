@@ -32,5 +32,6 @@ export class CardNetworkHomeComponent extends WidgetBaseComponent
 
   goToUserProfile(user: any) {
     this.router.navigate([`/app/person-profile`, user.id])
+    // this.router.navigate(['/app/person-profile'], { queryParams: { emailId: user.personalDetails.primaryEmail } })
   }
 }

@@ -50,10 +50,14 @@ export class CardNetworkComponent extends WidgetBaseComponent
     return ''
   }
   goToUserProfile(user: any) {
-    this.router.navigate(['/app/person-profile', user.userId])
+    this.router.navigate(['/app/person-profile', (user.userId || user.id)])
+    // this.router.navigate(['/app/person-profile'], { queryParams: { emailId: } })
+
   }
   goToUserProfileForSearch(user: any) {
     this.router.navigate(['/app/person-profile', user.wid])
+    // this.router.navigate(['/app/person-profile'], { queryParams: { emailId:  } })
+
   }
   searchUser() {
 

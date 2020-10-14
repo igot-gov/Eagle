@@ -4,7 +4,7 @@
       <span class="mat-h3 font-medium flex-4 mobile-margin">
         {{widgetData.name}}
       </span>
-      <ng-container *ngIf="widgetData?.data?.hobbies">
+      <ng-container *ngIf="widgetData?.data?.hobbies?.length > 0">
         <div class="flex flex-1 flex-row flex-wrap">
           <ng-container *ngFor="let hobby of widgetData.data.hobbies">
             <div class="hobby dark-card">
@@ -13,7 +13,7 @@
           </ng-container>
         </div>
       </ng-container>
-      <ng-container *ngIf="!widgetData?.data?.hobbies">
+      <ng-container *ngIf="!(widgetData?.data?.hobbies?.length > 0)">
         <mat-card class="mt-2 mat-list-item dark-card">
           <div class="flex flex-1 mobile-margin margin-f">
             <span class="flex-1 mat-h3 font-medium"> No Information Available </span>

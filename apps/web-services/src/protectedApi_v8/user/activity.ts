@@ -2,7 +2,6 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
-
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
@@ -26,6 +25,8 @@ activity.get('/', async (req, res) => {
     const data = response.data
     res.send(data)
   } catch (err) {
+    // tslint:disable-next-line: no-console
+    console.log('err::', err)
     res.status((err && err.response && err.response.status) || 500).send(
       (err && err.response && err.response.data) || {
         error: 'Failed due to unknown reason',

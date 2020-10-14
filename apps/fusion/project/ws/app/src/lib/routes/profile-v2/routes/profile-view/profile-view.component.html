@@ -16,7 +16,7 @@
             <div *ngIf="portalProfile.id === currentUser"
               class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
               <a mat-button [routerLink]="'/app/user-profile/details'">
-                <mat-icon>edit</mat-icon>
+                <mat-icon class="margin-right-xs">edit</mat-icon>
                 <span i18n>{{'Edit Profile'}}</span>
               </a>
             </div>
@@ -76,7 +76,10 @@
 
           <!-- </mat-card-header> -->
           <mat-card-content>
-            <span class="mat-h3 font-medium">{{'Discussions'}}</span>
+            <div class="flex flex-1">
+              <span class="mat-h3 font-medium">{{'Discussions'}}</span>
+              <!-- <span class="mat-h3 font-medium">{{'Discussions'}}</span> -->
+            </div>
             <ng-container>
               <mat-card class="recent-tabs">
                 <div class="flex flex-1 flex-column">

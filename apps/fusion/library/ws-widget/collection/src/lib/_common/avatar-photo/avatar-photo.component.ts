@@ -13,9 +13,11 @@ export class AvatarPhotoComponent implements OnInit {
   @Input()
   public name!: string
   @Input() public size = ''
+  @Input() initials?: string
   public showInitials = false
-  public initials!: string
   public circleColor!: string
+
+  // public initials!: string
 
   private colors = [
     // '#EB7181', // red
@@ -27,10 +29,11 @@ export class AvatarPhotoComponent implements OnInit {
   ]
 
   ngOnInit() {
-
     if (!this.photoUrl) {
       this.showInitials = true
-      this.createInititals()
+      if (!this.initials) {
+        this.createInititals()
+      }
       const randomIndex = Math.floor(Math.random() * Math.floor(this.colors.length))
       this.circleColor = this.colors[randomIndex]
     }
@@ -39,8 +42,7 @@ export class AvatarPhotoComponent implements OnInit {
 
   private createInititals(): void {
     let initials = ''
-    const array = this.name.split(' ')
-
+    const array = `${this.name} `.toString().split(' ')
     if (array[0] !== 'undefined' && typeof array[1] !== 'undefined') {
       initials += array[0].charAt(0)
       initials += array[1].charAt(0)

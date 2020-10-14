@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
 import { NSDiscussData } from '../../models/discuss.model'
 import { MatDialog } from '@angular/material/dialog'
 import { DiscussStartComponent } from '../../components/discuss-start/discuss-start.component'
@@ -17,7 +17,10 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class DiscussAllComponent implements OnInit {
+export class DiscussAllComponent implements OnInit, AfterViewInit {
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  sticky = false
+  elementPosition: any
   currentFilter = 'recent'
   trendingTags!: NSDiscussData.ITag[]
   discussionList!: NSDiscussData.IDiscussionData
@@ -36,6 +39,9 @@ export class DiscussAllComponent implements OnInit {
     this.paginationData = this.route.snapshot.data.recent.data.pagination
     this.setPagination()
     this.unread = this.route.snapshot.data.unread
+  }
+  ngAfterViewInit(): void {
+    // throw new Error('Method not implemented.')
   }
   ngOnInit() {
     // load page based on 'page' query param or default to 1

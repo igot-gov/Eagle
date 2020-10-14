@@ -4,6 +4,7 @@ import { ProfileComponent } from './routes/profile/profile.component'
 // import { InitResolver } from './resol./routes/profile-v2/discuss-all.component'
 import { Profilev2Resolve } from './resolvers/profile-v2-resolve'
 import { ProfileViewComponent } from './routes/profile-view/profile-view.component'
+import { Profilev2BadgesResolve } from './resolvers/badges-resolve'
 
 const routes: Routes = [
   {
@@ -15,16 +16,9 @@ const routes: Routes = [
         component: ProfileViewComponent,
         resolve: {
           profile: Profilev2Resolve,
+          badges: Profilev2BadgesResolve,
         },
       },
-      // {
-      //   path: '/:emailId',
-      //   component: ProfileViewComponent,
-      // },
-      // {
-      //   path: 'home',
-      //   component: ProfileViewComponent,
-      // },
     ],
   },
 ]
@@ -34,6 +28,7 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     Profilev2Resolve,
+    Profilev2BadgesResolve,
   ],
 })
 export class ProfileV2RoutingModule { }
