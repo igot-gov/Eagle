@@ -34,7 +34,7 @@ const routes: Routes = [
           availCategories: DiscussCategoriesResolve,
           availableTags: DiscussTagsResolve,
           recent: DiscussRecentResolve,
-          unread: DiscussUnreadResolve,
+          // unread: DiscussUnreadResolve,
         },
       },
       {
