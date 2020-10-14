@@ -1,12 +1,25 @@
 <div class="flex flex-1 flex-column margin-top-xs margin-left-l">
-  <mat-card class="flex-custom">
-    <!-- [attr.id]='certification' -->
+  <mat-card class="flex-custom" [attr.id]='widgetData.key'>
     <mat-card-content>
-      <div class=" mat-h3 flex-4 mobile-margin">
-        certification </div>
-      <ng-container>
-        certification
-      </ng-container>
+      <span class="mat-h3 font-medium flex-4 mobile-margin">
+        {{widgetData.name}}
+      </span>
+      <!-- <ng-container *ngFor="let career of widgetData.data"> -->
+      <mat-card class="mt-2 mat-list-item dark-card" *ngIf="widgetData.data && widgetData.data.additionalSkills">
+        <div class="flex flex-1 mobile-margin margin-f">
+          <span class="flex-1 mat-h3 font-medium"> {{widgetData?.data?.additionalSkills}}
+          </span>
+        </div>
+        <div class="mat-subtitle flex-1 mobile-margin">
+          {{widgetData?.data?.certificateDetails}}
+        </div>
+      </mat-card>
+      <mat-card class="mt-2 mat-list-item dark-card" *ngIf="!widgetData?.data?.additionalSkills">
+        <div class="flex flex-1 mobile-margin margin-f">
+          <span class="flex-1 mat-h3 font-medium"> No Information Available </span>
+        </div>
+      </mat-card>
+      <!-- </ng-container> -->
     </mat-card-content>
   </mat-card>
 </div>

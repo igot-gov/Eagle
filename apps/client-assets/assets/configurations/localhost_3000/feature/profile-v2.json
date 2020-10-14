@@ -10,7 +10,7 @@
                 "uri": ""
             },
             "enabled": true,
-            "routerLink": "#",
+            "routerLink": ".",
             "widget": {}
         },
         {
@@ -23,7 +23,7 @@
                 "uri": ""
             },
             "enabled": true,
-            "routerLink": "#",
+            "routerLink": ".",
             "widget": {
                 "widgetType": "profilev2",
                 "widgetSubType": "career",
@@ -41,10 +41,28 @@
                 "uri": ""
             },
             "enabled": false,
-            "routerLink": "#",
+            "routerLink": ".",
             "widget": {
                 "widgetType": "profilev2",
-                "widgetSubType": "cretifications",
+                "widgetSubType": "certifications",
+                "widgetHostClass": "margin-bottom-l",
+                "widgetData": {}
+            }
+        },
+        {
+            "name": "Certifications and Skills",
+            "key": "cAnds",
+            "dataKey": "skills",
+            "render": true,
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": ".",
+            "widget": {
+                "widgetType": "profilev2",
+                "widgetSubType": "certifications",
                 "widgetHostClass": "margin-bottom-l",
                 "widgetData": {}
             }
@@ -59,10 +77,28 @@
                 "uri": ""
             },
             "enabled": true,
-            "routerLink": "#",
+            "routerLink": ".",
             "widget": {
                 "widgetType": "profilev2",
                 "widgetSubType": "academics",
+                "widgetHostClass": "margin-bottom-l",
+                "widgetData": {}
+            }
+        },
+        {
+            "name": "Hobbies",
+            "key": "hobbies",
+            "dataKey": "interests",
+            "render": true,
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": ".",
+            "widget": {
+                "widgetType": "profilev2",
+                "widgetSubType": "hobbies",
                 "widgetHostClass": "margin-bottom-l",
                 "widgetData": {}
             }
@@ -76,8 +112,8 @@
                 "enabled": false,
                 "uri": ""
             },
-            "enabled": true,
-            "routerLink": "#",
+            "enabled": false,
+            "routerLink": ".",
             "widget": {
                 "widgetType": "profilev2",
                 "widgetSubType": "competencies",
@@ -94,8 +130,8 @@
                 "enabled": false,
                 "uri": ""
             },
-            "enabled": true,
-            "routerLink": "#",
+            "enabled": false,
+            "routerLink": ".",
             "widget": {
                 "widgetType": "profilev2",
                 "widgetSubType": "departments",
@@ -113,7 +149,7 @@
                 "uri": ""
             },
             "enabled": false,
-            "routerLink": "#",
+            "routerLink": ".",
             "widget": {
                 "widgetType": "profilev2",
                 "widgetSubType": "publications",
