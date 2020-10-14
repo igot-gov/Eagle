@@ -44,17 +44,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
         // console.log(event.error)
       }
     })
-
-    this.activeRoute.firstChild && this.activeRoute.firstChild.data.subscribe(response => {
-      this.userRouteName = response && response.profile && response.profile.data && response.profile.data[0]
-        && response.profile.data[0].personalDetails && ((response.profile.data[0].personalDetails.firstname || '') + ' ' + (response.profile.data[0].personalDetails.surname))
-    })
-    if (this.userRouteName && this.userRouteName.trim()) {
-      this.titles.push({
-        icon: '',
-        title: this.userRouteName + "' profile",
-        url: 'none'
+    if (this.activeRoute.firstChild) {
+      this.activeRoute.firstChild.data.subscribe(response => {
+        this.userRouteName = response && response.profile && response.profile.data && response.profile.data[0]
+          && response.profile.data[0].personalDetails &&
+          `${(response.profile.data[0].personalDetails.firstname || '')} ${(response.profile.data[0].personalDetails.surname)}`
       })
+      if (this.userRouteName && this.userRouteName.trim()) {
+        this.titles.push({
+          icon: '',
+          title: `${this.userRouteName}\'profile`,
+          url: 'none',
+        })
+      }
     }
   }
   ngOnInit() {

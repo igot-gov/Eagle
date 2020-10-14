@@ -15,7 +15,7 @@ export class RightMenuComponent implements OnInit, OnDestroy {
   completedPercent!: number
   badgesSubscription: any
   portalProfile!: NSProfileDataV2.IProfile
-  badges!: NSProfileDataV2.IBadge[]
+  badges!: NSProfileDataV2.IBadgeResponse
   currentUser!: any
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +23,7 @@ export class RightMenuComponent implements OnInit, OnDestroy {
   ) {
     this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
     this.badgesSubscription = this.route.data.subscribe(response => {
-      this.badges = response && response.badges && response.badges.data || []
+      this.badges = response && response.badges && response.badges.data
       this.portalProfile = response.profile.data[0]
       this.completedPercent = this.calculatePercent(this.portalProfile || null)
     })
@@ -35,33 +35,32 @@ export class RightMenuComponent implements OnInit, OnDestroy {
     let count = 20
     if (!profile) {
       return count
-    } else {
-      if (profile.academics && profile.academics[0] && profile.academics[0].nameOfQualification) {
-        count += 11.43
-      }
-      if (profile.employmentDetails && profile.employmentDetails.departmentName) {
-        count += 11.43
-      }
-      if (profile.personalDetails && profile.personalDetails.nationality) {
-        count += 11.43
-      }
-      if (profile.photo) {
-        count += 11.43
-      }
-      if (profile.professionalDetails && profile.professionalDetails[0] && profile.professionalDetails[0].designation) {
-        count += 11.43
-      }
-      if (profile.skills && profile.skills[0] && profile.skills[0].additionalSkills) {
-        count += 11.43
-      }
-      if (profile.interests && profile.interests[0] && profile.interests[0].hobbies && profile.interests[0].hobbies.length > 0) {
-        count += 11.43
-      }
-      if (count > 100) {
-        count = 100
-      }
-      return count
     }
+    if (profile.academics && profile.academics[0] && profile.academics[0].nameOfQualification) {
+      count += 11.43
+    }
+    if (profile.employmentDetails && profile.employmentDetails.departmentName) {
+      count += 11.43
+    }
+    if (profile.personalDetails && profile.personalDetails.nationality) {
+      count += 11.43
+    }
+    if (profile.photo) {
+      count += 11.43
+    }
+    if (profile.professionalDetails && profile.professionalDetails[0] && profile.professionalDetails[0].designation) {
+      count += 11.43
+    }
+    if (profile.skills && profile.skills[0] && profile.skills[0].additionalSkills) {
+      count += 11.43
+    }
+    if (profile.interests && profile.interests[0] && profile.interests[0].hobbies && profile.interests[0].hobbies.length > 0) {
+      count += 11.43
+    }
+    if (count > 100) {
+      count = 100
+    }
+    return count
   }
   ngOnDestroy() {
     if (this.badgesSubscription) {

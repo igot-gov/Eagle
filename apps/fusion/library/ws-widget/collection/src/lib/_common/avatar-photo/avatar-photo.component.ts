@@ -42,8 +42,7 @@ export class AvatarPhotoComponent implements OnInit {
 
   private createInititals(): void {
     let initials = ''
-    const array = (this.name + '').split(' ')
-
+    const array = `${this.name} `.toString().split(' ')
     if (array[0] !== 'undefined' && typeof array[1] !== 'undefined') {
       initials += array[0].charAt(0)
       initials += array[1].charAt(0)

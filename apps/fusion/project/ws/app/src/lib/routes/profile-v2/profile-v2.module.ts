@@ -19,7 +19,7 @@ import {
   MatSidenavModule,
   MatChipsModule,
   MatProgressSpinnerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
