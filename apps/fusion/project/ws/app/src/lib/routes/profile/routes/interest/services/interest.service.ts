@@ -12,7 +12,7 @@ const API_END_POINTS = {
   addMultiple: `${PROTECTED_SLAG_V8}/user/topics/addMultiple`,
   recommendedTopics: `${PROTECTED_SLAG_V8}/user/topics/suggested`,
   autocompleteTopics: `${PROTECTED_SLAG_V8}/user/topics/autocomplete`,
-  competencyTopics: `${PROTECTED_SLAG_V8}/competency/getCompetency`,
+  competencyTopics: `${PROTECTED_SLAG_V8}/competency/searchCompetency`,
 }
 @Injectable({
   providedIn: 'root',
@@ -85,8 +85,28 @@ export class InterestService {
     return this.http.get<string[]>(`${API_END_POINTS.autocompleteTopics}?query=${query}`)
   }
   fetchAutocompleteCompetencyV2(query: string): Observable<any[]> {
+    // if (query === undefined || query === null || query.length <= 0) {
+    //   query = ''
+    // }
+
+    const comp = 'COMPETENCY'
+    const arrayData = []
+
+    const firstRequest = {
+      type: comp,
+      field: 'name',
+      keyword: query,
+    }
+    const secondObj = {
+      type: comp,
+      field: 'status',
+      keyword: 'VERIFIED',
+    }
+    arrayData.push(firstRequest)
+    arrayData.push(secondObj)
+    const finalObj = { searches: arrayData }
     return this.http
-      .get<any>(`${API_END_POINTS.competencyTopics}?query=${query}`)
+      .post<any>(`${API_END_POINTS.competencyTopics}`, finalObj)
       .pipe(
         map(data => data.responseData.map((item: { name: any }) => item))
       )
