@@ -19,6 +19,7 @@ import {
   MatSidenavModule,
   MatChipsModule,
   MatProgressSpinnerModule,
+  MatProgressBarModule
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
@@ -65,6 +66,7 @@ import { DiscussModule } from '../discuss/discuss.module'
     MatButtonModule,
     MatSidenavModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     PipeFilterModule,
     PipeHtmlTagRemovalModule,
     PipeRelativeTimeModule,

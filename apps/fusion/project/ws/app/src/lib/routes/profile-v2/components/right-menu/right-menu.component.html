@@ -1,17 +1,57 @@
-<div class="flex flex-1 flex-column margin-top-xs margin-left-l">
-  <mat-card class="flex-custom">
+<div class="flex flex-1 flex-column margin-top-xs margin-left-s">
+  <mat-card class="no-border" *ngIf="portalProfile.id === currentUser">
     <mat-card-content>
-      <div class=" mat-h3 flex-4 mobile-margin">
-        Your profile is {{completedPercent}} complete
+      <div class="mat-h3 font-medium flex-4 mobile-margin">
+        Your profile is {{completedPercent}}% complete
       </div>
+      <mat-progress-bar class="margin-top-m margin-bottom-l profile-progress" mode="determinate"
+        [value]="completedPercent">
+      </mat-progress-bar>
       <ng-container>
-        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
-          <a mat-button [routerLink]="'/app/user-profile/details'">
-            <mat-icon>edit</mat-icon>
-            <span i18n *ngIf="completedPercent < 100">{{'Complete Profile'}}</span>
+        <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-accent-background">
+          <a mat-button [routerLink]="'/app/user-profile/details'" class="flex-1">
+            <!-- <mat-icon>edit</mat-icon> -->
+            <span class="text-white" i18n *ngIf="completedPercent < 100">{{'Complete Profile'}}</span>
+            <span class="text-white" i18n *ngIf="completedPercent === 100">{{'View Profile'}}</span>
           </a>
         </div>
       </ng-container>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="margin-top-m margin-botton-xs dark-card padding-0 no-border">
+    <span class="mat-h3 font-medium">Badges</span>
+    <mat-card-content *ngIf="badges.earned && badges.earned.length > 0">
+      <span class="mat-h4 font-bold">Badges</span>
+      <div class="flex flex-wrap">
+        <ng-container *ngFor="let badge of badges.earned;let idx = index">
+          <img *ngIf="idx<= 2" [src]="badge.image" [alt]="badge.badge_name" class="badge-image" />
+        </ng-container>
+        <ws-widget-avatar-photo class="badge-image" *ngIf="badges.earned && badges.earned.length>3"
+          [initials]="'+' + (badges.earned.length - 3)" [size]="'m'">
+        </ws-widget-avatar-photo>
+      </div>
+    </mat-card-content>
+    <mat-card-content *ngIf="badges.recent && badges.recent.length > 0">
+      <span class="mat-h4 font-bold">Recently Earned</span>
+      <div class="flex flex-wrap">
+        <ng-container *ngFor="let badge of badges.recent;let idx = index">
+          <img *ngIf="idx<= 2" [src]="badge.image" [alt]="badge.badge_name" class="badge-image" />
+        </ng-container>
+        <ws-widget-avatar-photo class="badge-image" *ngIf="badges.recent && badges.recent.length>3"
+          [initials]="'+' + (badges.recent.length - 3)" [size]="'m'">
+        </ws-widget-avatar-photo>
+      </div>
+    </mat-card-content>
+    <mat-card-content *ngIf="badges.canEarn && badges.canEarn.length > 0">
+      <span class="mat-h4 font-bold">Can Earn</span>
+      <div class="flex flex-wrap">
+        <ng-container *ngFor="let badge of badges.canEarn;let idx = index">
+          <img *ngIf="idx<= 2" [src]="badge.image" [alt]="badge.badge_name" class="badge-image" />
+        </ng-container>
+        <ws-widget-avatar-photo class="badge-image" *ngIf="badges.canEarn && badges.canEarn.length>3"
+          [initials]="'+' + (badges.canEarn.length - 3)" [size]="'m'">
+        </ws-widget-avatar-photo>
+      </div>
     </mat-card-content>
   </mat-card>
 </div>
