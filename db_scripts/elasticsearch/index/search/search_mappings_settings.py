@@ -1890,6 +1890,15 @@ mappings={
 				"creator": {
 					"type": "keyword"
 				},
+                                "creatorLogo": {
+                                        "type": "keyword"
+                                },
+                                "creatorPosterImage": {
+                                        "type": "keyword"
+                                },
+                                "creatorThumbnail": {
+                                       "type": "keyword"
+                                },
 				"creatorContacts": {
 					"type": "nested",
 					"properties": {
@@ -2648,35 +2657,6 @@ mappings={
 				},
 				"contentStructure": {
 					"type": "keyword"
-				},
-				  "competencies": {
-					    "type": "nested",
-					    "properties": {
-					      "id": {
-						"type": "keyword"
-					      },
-					      "competencyType": {
-						"type": "keyword"
-					      },
-					      "description": {
-						"type": "text",
-						"fields": {
-						  "keyword": {
-						    "type": "keyword",
-						    "ignore_above": 512
-						  }
-						}
-					      },
-					      "name": {
-						"type": "text",
-						"fields": {
-						  "keyword": {
-						    "type": "keyword",
-						    "ignore_above": 512
-						  }
-						}
-					      }
-					  }
 				}
 			}
 		}
