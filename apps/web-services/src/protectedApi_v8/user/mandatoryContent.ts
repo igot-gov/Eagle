@@ -24,9 +24,8 @@ mandatoryContent.get('/checkStatus/:userId', async (req, res) => {
         const response = await axios.get(API_END_POINTS.mandatoryContentStatus(userId), {
             ...axiosRequestConfig,
             headers: {
-                org,
-                rootOrg,
-                wid,
+              'rootOrg': rootOrg,
+              'org' : org
             },
         })
         res.status(response.status).send(response.data)
