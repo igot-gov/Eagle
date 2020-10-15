@@ -371,17 +371,31 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
   }
-  optionSelectedCompetency(competency: any) {
+  optionSelectedCompetency(competencies: any) {
     this.competencyCtrl.setValue(' ')
-    if (competency) {
+    if (competencies) {
+      const value = this.contentForm.controls.competencies.value || []
+      const tempObj = {
+        id: competencies.id,
+        name: competencies.name,
+        description: competencies.description,
+        competencyType: competencies.additionalProperties.competencyType,
+      }
+      if (this.canPush(value, tempObj)) {
+        value.push(tempObj)
+        this.contentForm.controls.competencies.setValue(value)
+      }
 
-      const value = this.contentForm.controls.competency.value || []
-      if (value.indexOf(competency) === -1) {
-        const displayData = competency.type.concat('-').concat(competency.name)
-        value.push(displayData)
-        this.contentForm.controls.competency.setValue(value)
+    }
+  }
+  canPush(arr: any[], obj: any) {
+    for (const test of arr) {
+      if (test.id === obj.id) {
+        return false
       }
     }
+    return true
+
   }
 
   ngOnDestroy() {
@@ -735,6 +749,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     const index = this.contentForm.controls.keywords.value.indexOf(keyword)
     this.contentForm.controls.keywords.value.splice(index, 1)
     this.contentForm.controls.keywords.setValue(this.contentForm.controls.keywords.value)
+  }
+
+  removeCompetency(competencies: any): void {
+    const index = this.contentForm.controls.competencies.value.indexOf(competencies)
+    this.contentForm.controls.competencies.value.splice(index, 1)
+    this.contentForm.controls.competencies.setValue(this.contentForm.controls.competencies.value)
   }
 
   removeReferences(index: number): void {
@@ -1135,7 +1155,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       jobProfile: [],
       kArtifacts: [],
       keywords: [],
-      competency: [],
+      competencies: [],
       learningMode: [],
       learningObjective: [],
       learningTrack: [],
