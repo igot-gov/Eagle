@@ -32,6 +32,22 @@ badgeApi.get('/', async (req, res) => {
   }
 })
 
+badgeApi.get('/for/:wid', async (req, res) => {
+  const rootOrg = req.header('rootOrg')
+  const langCode = req.header('locale')
+  const forId = req.params.wid
+  const url = `${API_END_POINTS.badge}/${forId}/badges`
+  try {
+    const response = await axios.get(url, {
+      ...axiosRequestConfig,
+      headers: { rootOrg, langCode },
+    })
+    res.send(processAllBadges(response.data))
+  } catch (err) {
+    return err
+  }
+})
+
 badgeApi.get('/badgeDetail', async (req, res) => {
   const userId = extractUserIdFromRequest(req)
   const rootOrg = req.header('rootOrg')
