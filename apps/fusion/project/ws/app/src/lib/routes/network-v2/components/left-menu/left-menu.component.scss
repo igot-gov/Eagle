@@ -1,0 +1,10 @@
+@import 'ws-vars';
+
+mat-expansion-panel {
+  margin: 36px;
+
+  mat-panel-description {
+    display: flex;
+    flex-grow: 0;
+  }
+}
