@@ -173,6 +173,7 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
     }
     const body = {
       connectionId,
+      status,
       userId,
     }
     const response = await axios.post(
