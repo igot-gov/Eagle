@@ -130,7 +130,10 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
       return
     }
 
-    const body = req.body
+    const body = {
+      connectionId,
+      userId,
+    }
     const response = await axios.post(
       apiEndpoints.postConnectionAddData,
       body,
@@ -155,8 +158,6 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
 
 networkConnectionApi.post('/update/connection', async (req, res) => {
   try {
-    const body = req.body
-
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
     const userId = extractUserIdFromRequest(req)
@@ -170,7 +171,10 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-
+    const body = {
+      connectionId,
+      userId,
+    }
     const response = await axios.post(
       apiEndpoints.postConnectionUpdateData,
       body,
