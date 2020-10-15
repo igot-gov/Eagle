@@ -166,6 +166,19 @@ const routes: Routes = [
     canActivate: [GeneralGuard, LearningGuard],
   },
   {
+    path: 'app/network-v2',
+    loadChildren: () =>
+      import('./routes/route-network-v2.module').then(u => u.RouteNetworkV2Module),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'network-v2',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/notifications',
     loadChildren: () =>
       import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
