@@ -1,0 +1,63 @@
+{
+    "tabs": [
+        {
+            "name": "Network home",
+            "key": "NetworkHome",
+            "badges": {
+                "enabled": true,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/network-v2/home"
+        },
+        {
+            "name": "My connections",
+            "key": "MyConnections",
+            "badges": {
+                "enabled": true,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/network-v2/my-connection"
+        },
+        {
+            "name": "From my MDO",
+            "key": "formMyMDO",
+            "badges": {
+                "enabled": true,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/network/home"
+        },
+        {
+            "name": "Recommended connections",
+            "key": "recommendedConnections",
+            "badges": {
+                "enabled": true,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/network/home"
+        }
+    ],
+    "banner": {
+        "widgetType": "slider",
+        "widgetSubType": "sliderBanners",
+        "style": {
+            "border-radius": "12px"
+        },
+        "widgetData": [
+            {
+                "banners": {
+                    "l": "assets/instances/eagle/banners/hubs/network/l.jpg",
+                    "m": "assets/instances/eagle/banners/hubs/network/m.jpg",
+                    "s": "assets/instances/eagle/banners/hubs/network/s.jpg",
+                    "xl": "assets/instances/eagle/banners/hubs/network/xl.jpg",
+                    "xs": "assets/instances/eagle/banners/hubs/network/xs.jpg",
+                    "xxl": "assets/instances/eagle/banners/hubs/network/xxl.jpg"
+                }
+            }
+        ]
+    }
+}
