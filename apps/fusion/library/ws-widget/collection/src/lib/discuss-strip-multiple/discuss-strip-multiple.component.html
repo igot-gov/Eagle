@@ -17,9 +17,10 @@
                   stripsResultDataMap[key]?.showOnError
                 " [ngClass]="
                   !widgetData.isChannelStrip ? 'xs:px-8 sx:px-10ss py-2 my-1' : i > 0 ? 'mt-12' : ''
-                " [id]="key">
-          <div [ngClass]="{ pad: stripsResultDataMap[key]?.stripBackground }" class="background-norepeat"
-            [ngStyle]="{ 'background-image': 'url('+ stripsResultDataMap[key]?.stripBackground+')'}">
+                " [id]="key" class="margin-bottom-custom">
+          <div class="oneBox">
+            <div [ngClass]="{ pad: stripsResultDataMap[key]?.stripBackground }" class="background-norepeat"
+              [ngStyle]="{ 'background-image': 'url('+ stripsResultDataMap[key]?.stripBackground+')'}"></div>
             <div class="flex items-center justify-between" [ngClass]="
                       !widgetData.isChannelStrip
                         ? 'mb-4'
@@ -27,7 +28,7 @@
                         ? 'mb-8'
                         : ''
                     ">
-              <div class="flex items-center flex-1 container-balanced padding-xs flex-wrap">
+              <div class="flex items-center flex-1 container-balanced padding-l flex-wrap">
                 <mat-icon class="ws-mat-primary-default-text transform-2x">
                   {{stripsResultDataMap[key]?.stripLogo}}
                 </mat-icon>

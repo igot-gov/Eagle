@@ -23,7 +23,7 @@
 }
 
 .mob {
-  @include breakpoint-xs {
+  @include breakpoint-767 {
     display: none;
   }
 }
@@ -39,34 +39,38 @@
 }
 
 .pad {
-  padding: $size-l $size-l $size-l $size-l;
+  padding: 0 // $size-l $size-l $size-l $size-l;
+}
+
+.margin-bottom-custom {
+  margin-bottom: 60px
 }
 
 .new-width {
   max-width: $max-screen;
   display: inline-block;
   // margin: 0 auto;
-  padding-top: 6rem;
+  margin-top: 7rem;
 
-  @include breakpoint-xl {
-    padding-top: 6rem;
-  }
+  // @include breakpoint-xl {
+  //   padding-top: 6rem;
+  // }
 
-  @include breakpoint-l {
-    padding-top: 6rem;
-  }
+  // @include breakpoint-l {
+  //   padding-top: 1rem;
+  // }
 
-  @include breakpoint-m {
-    padding-top: 6rem;
-  }
+  // @include breakpoint-m {
+  //   padding-top: 6rem;
+  // }
 
-  @include breakpoint-s {
-    padding-top: 6rem;
-  }
+  // @include breakpoint-s {
+  //   padding-top: 6rem;
+  // }
 
-  @include breakpoint-xs {
-    padding-top: 5rem;
-  }
+  // @include breakpoint-xs {
+  //   padding-top: 5rem;
+  // }
 }
 
 .rotate-t-90 {
@@ -77,18 +81,22 @@
   transform: scale(2);
 }
 
+.oneBox {
+  position: relative;
+}
+
 .background-norepeat {
   background-repeat: no-repeat;
   background-size: 100%;
   // background-size: 100% 269px;
   background-attachment: local;
   background-position-y: top;
+  height: 269px;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
 
-  @include breakpoint-s {
-    background-size: auto;
-  }
-
-  @include breakpoint-xs {
+  @include breakpoint-lt-l {
     background-size: auto;
   }
 }

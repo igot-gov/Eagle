@@ -1,0 +1,47 @@
+{
+    "tabs": [
+        {
+            "name": "Tab 1",
+            "key": "tab1",
+            "dataKey": "",
+            "render": true,
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "."
+        },
+        {
+            "name": "Tab 2",
+            "key": "tab2",
+            "dataKey": "",
+            "render": true,
+            "badges": {
+                "enabled": false,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "."
+        }
+    ],
+    "banner": {
+        "widgetType": "slider",
+        "widgetSubType": "sliderBanners",
+        "style": {
+            "border-radius": "12px"
+        },
+        "widgetData": [
+            {
+                "banners": {
+                    "l": "assets/instances/eagle/banners/hubs/discuss/l.jpg",
+                    "m": "assets/instances/eagle/banners/hubs/discuss/m.jpg",
+                    "s": "assets/instances/eagle/banners/hubs/discuss/s.jpg",
+                    "xl": "assets/instances/eagle/banners/hubs/discuss/xl.jpg",
+                    "xs": "assets/instances/eagle/banners/hubs/discuss/xs.jpg",
+                    "xxl": "assets/instances/eagle/banners/hubs/discuss/xxl.jpg"
+                }
+            }
+        ]
+    }
+}

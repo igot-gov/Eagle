@@ -6,6 +6,7 @@
 export * from './lib/routes/app-setup/app-setup.module'
 export * from './lib/routes/app-toc/app-toc.module'
 export * from './lib/routes/channels/channels.module'
+export * from './lib/routes/competencies/competence.module'
 export * from './lib/routes/content-assignment/content-assignment.module'
 export * from './lib/routes/feedback-v2/feedback-v2.module'
 export * from './lib/routes/feedback/feedback.module'

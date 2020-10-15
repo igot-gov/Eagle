@@ -80,6 +80,19 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/competencies',
+    loadChildren: () =>
+      import('./routes/route-competencie.module').then(u => u.RouteCompetenciesModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'competencie',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/content-assignment',
     loadChildren: () =>
       import('./routes/route-content-assignment.module').then(u => u.RouteContentAssignmentModule),
