@@ -17,11 +17,17 @@ const unknownError = 'Failed due to unknown reason'
 competencyApi.get('/getCompetency', async (req, res) => {
     try {
         const rootOrg = req.header('rootOrg')
+        const authToken = req.header('Authorization')
         if (!rootOrg) {
             res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
             return
         }
-        const response = await axios.get(API_END_POINTS.getCompetency, axiosRequestConfig)
+        const response = await axios.get(API_END_POINTS.getCompetency, {
+            ...axiosRequestConfig,
+            headers: {
+                Authorization: authToken,
+            },
+        })
         res.status(response.status).send(response.data)
     } catch (err) {
         res.status((err && err.response && err.response.status) || 500).send(
@@ -34,7 +40,13 @@ competencyApi.get('/getCompetency', async (req, res) => {
 
 competencyApi.post('/addCompetency', async (req, res) => {
     try {
-        const response = await axios.post(API_END_POINTS.addCompetency, req.body, axiosRequestConfig)
+        const authToken = req.header('Authorization')
+        const response = await axios.post(API_END_POINTS.addCompetency, req.body, {
+            ...axiosRequestConfig,
+            headers: {
+                Authorization: authToken,
+            },
+        })
         res.status(response.status).send(response.data)
     } catch (err) {
         res.status((err && err.response && err.response.status) || 500).send(
@@ -47,7 +59,13 @@ competencyApi.post('/addCompetency', async (req, res) => {
 
 competencyApi.post('/searchCompetency', async (req, res) => {
     try {
-        const response = await axios.post(API_END_POINTS.searchCompetency, req.body, axiosRequestConfig)
+        const authToken = req.header('Authorization')
+        const response = await axios.post(API_END_POINTS.searchCompetency, req.body, {
+            ...axiosRequestConfig,
+            headers: {
+                Authorization: authToken,
+            },
+        })
         res.status(response.status).send(response.data)
     } catch (err) {
         res.status((err && err.response && err.response.status) || 500).send(
