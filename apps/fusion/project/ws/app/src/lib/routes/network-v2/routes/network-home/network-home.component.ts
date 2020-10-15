@@ -19,7 +19,6 @@ export class NetworkHomeComponent implements OnInit {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     this.recommendedUsers = this.route.snapshot.data.recommendedUsers.data.result.data.
     find((item: any) => item.field === 'employmentDetails.departmentName').results
-    console.log('this.recommendedUsers : ', this.recommendedUsers)
   }
 
   ngOnInit() {

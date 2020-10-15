@@ -22,7 +22,6 @@ export class NetworkMyConnectionComponent implements OnInit {
     // private networkV2Service: NetworkV2Service,
   ) {
     this.data = this.route.snapshot.data.myConnectionList.data.result.data
-    console.log('this.data :', this.data)
    }
 
   ngOnInit() {

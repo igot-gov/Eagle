@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 import { Observable, forkJoin, of } from 'rxjs'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InitResolveService implements Resolve<any> {
   constructor(
