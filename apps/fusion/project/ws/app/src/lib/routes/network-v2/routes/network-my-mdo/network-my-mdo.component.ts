@@ -5,14 +5,15 @@ import { ActivatedRoute } from '@angular/router'
 import { NetworkV2Service } from '../../services/network-v2.service'
 
 @Component({
-  selector: 'ws-app-network-my-connection',
-  templateUrl: './network-my-connection.component.html',
-  styleUrls: ['./network-my-connection.component.scss'],
+  selector: 'ws-app-network-my-mdo',
+  templateUrl: './network-my-mdo.component.html',
+  styleUrls: ['./network-my-mdo.component.scss'],
   /* tslint:disable */
   host: { class: 'flex flex-1 mt-4' },
   /* tslint:enable */
 })
-export class NetworkMyConnectionComponent implements OnInit {
+export class NetworkMyMdoComponent implements OnInit {
+
   data!: NSNetworkDataV2.INetworkUser[]
   queryControl = new FormControl('')
   currentFilter = 'timestamp'
@@ -21,7 +22,10 @@ export class NetworkMyConnectionComponent implements OnInit {
     private route: ActivatedRoute,
     private networkV2Service: NetworkV2Service,
   ) {
-    this.data = this.route.snapshot.data.myConnectionList.data.result.data
+    console.log('this.route.snapshot.data.myMdoList.data :', this.route.snapshot.data.myMdoList.data)
+    this.data = this.route.snapshot.data.myMdoList.data.result.data.
+    find((item: any) => item.field === 'employmentDetails.departmentName').results
+    console.log('this.data : ', this.data)
    }
 
   ngOnInit() {

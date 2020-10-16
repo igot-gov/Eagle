@@ -14,7 +14,8 @@
         <!-- </ng-container> -->
       </mat-card-content>
       <mat-card-actions align="center">
-        <button mat-button color="default" type="button" [mat-dialog-close]="true" class=" flex-auto-display">
+        <button mat-button color="default" type="button" class=" flex-auto-display"
+        (click)="goToConnectionRequests()">
           <span class="ws-mat-default-text" i18n>SEE MORE</span>
         </button>
       </mat-card-actions>
@@ -30,7 +31,8 @@
           </span>
         </mat-card-title>
         <span>
-          <button mat-button color="default" type="button" [mat-dialog-close]="true" class=" flex-auto-display">
+          <button mat-button color="default" type="button" class=" flex-auto-display"
+          (click)="goToRecommendedUsers()">
             <span class="ws-mat-default-text" i18n>SEE ALL</span>
           </button>
         </span>

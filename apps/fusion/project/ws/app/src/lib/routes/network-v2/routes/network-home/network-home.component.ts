@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 
 @Component({
@@ -15,6 +15,7 @@ export class NetworkHomeComponent implements OnInit {
   recommendedUsers!: NSNetworkDataV2.IRecommendedUserResult
   constructor(
     private route: ActivatedRoute,
+    private router: Router
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     this.recommendedUsers = this.route.snapshot.data.recommendedUsers.data.result.data.
@@ -22,6 +23,14 @@ export class NetworkHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  goToRecommendedUsers() {
+    this.router.navigate(['/app/network-v2/recommended'])
+  }
+
+  goToConnectionRequests() {
+    this.router.navigate(['/app/network-v2/connection-requests'])
   }
 
 }

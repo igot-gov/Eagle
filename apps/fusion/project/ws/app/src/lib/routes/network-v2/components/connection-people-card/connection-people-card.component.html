@@ -23,13 +23,13 @@
 
 <div class="flex flex-col item-center">
     <div class="flex flex-col card-container">
-        <div class="photo-container flex items-center justify-center">
+        <div class="photo-container flex items-center justify-center cursor-pointer" (click)="goToUserProfile(user)">
             <ws-widget-avatar-photo [name]="getUseravatarName()" 
             [randomColor]="true" size="m">
             </ws-widget-avatar-photo>
         </div>
         <div class="name-container flex flex-col width-expand">
-            <div class="name ws-mat-black-text">
+            <div class="name ws-mat-black-text cursor-pointer" (click)="goToUserProfile(user)">
                 {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}   {{user?.personalDetails?.surname}}
             </div>
             <div class="designation ws-mat-black60-text">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="action-container flex items-center justify-center">
-            <button mat-stroked-button color="accent" type="submit" class=" mat-accent-border flex-auto-display"
+            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
                 (click)="connetToUser()">
                 <span class="" i18n>Connect</span>
             </button>
@@ -45,8 +45,8 @@
     </div>
 </div>
 
-<input type="hidden" i18-value i18-aria-value aria-value="Connection accepted"
-  value="Connection accepted successfully!" #toastSuccess />
-<input type="hidden" i18-value i18-aria-value aria-value="Connection rejected"
-  value="Connection rejected successfully!" #toastError />
+<input type="hidden" i18-value i18-aria-value aria-value="Connection sent"
+  value="Connection sent successfully!" #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="Connection failed"
+  value="Something went wrong, please try again later!" #toastError />
 

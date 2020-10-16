@@ -10,16 +10,16 @@ import { NSNetworkDataV2 } from '../models/network-v2.model'
 @Injectable({
   providedIn: 'root',
 })
-export class MyConnectionResolveService implements
-  Resolve<Observable<IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> |
-  IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> {
+export class ConnectionRequestResolveService implements
+  Resolve<Observable<IResolveResponse<NSNetworkDataV2.IConnectionRequest>> |
+  IResolveResponse<NSNetworkDataV2.IConnectionRequest>> {
   constructor(private networkV2Service: NetworkV2Service) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> {
-    return this.networkV2Service.fetchAllConnectionEstablished().pipe(
+  ): Observable<IResolveResponse<NSNetworkDataV2.IConnectionRequest>> {
+    return this.networkV2Service.fetchAllConnectionRequests().pipe(
       map((data: any) => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )
