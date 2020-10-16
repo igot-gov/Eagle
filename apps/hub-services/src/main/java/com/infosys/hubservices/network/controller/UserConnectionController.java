@@ -40,7 +40,7 @@ public class UserConnectionController {
                                                           @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                           @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = connectionService.findSuggestedConnections(userId, pageNo, pageSize);
+        Response response = connectionService.findSuggestedConnections(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
@@ -52,7 +52,7 @@ public class UserConnectionController {
                                                     @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                     @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = connectionService.findConnectionsRequested(userId, pageNo, pageSize);
+        Response response = connectionService.findConnectionsRequested(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
@@ -63,7 +63,7 @@ public class UserConnectionController {
                                                                @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                                                @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = connectionService.findConnections(userId, pageNo, pageSize);
+        Response response = connectionService.findConnections(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

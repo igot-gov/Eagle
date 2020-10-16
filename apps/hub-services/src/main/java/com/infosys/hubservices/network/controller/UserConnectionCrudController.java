@@ -55,7 +55,7 @@ public class UserConnectionCrudController {
                                            @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
                                            @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = connectionService.findConnections(userId, pageNo, pageSize);
+        Response response = connectionService.findConnections(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

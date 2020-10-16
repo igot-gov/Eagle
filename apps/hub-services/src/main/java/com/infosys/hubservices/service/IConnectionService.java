@@ -23,11 +23,11 @@ public interface IConnectionService {
 
     /**
      * To update the status and dates of connection
-     * @param roorOrg
+     * @param rootOrg
      * @param request
      * @return
      */
-    Response update(String roorOrg, ConnectionRequest request);
+    Response update(String rootOrg, ConnectionRequest request);
 
     /**
      * Marked as rejected - deletes the connection
@@ -47,7 +47,7 @@ public interface IConnectionService {
      * @param limit
      * @return
      */
-    Response findSuggestedConnections(String userId, int offset, int limit);
+    Response findSuggestedConnections(String rootOrg, String userId, int offset, int limit);
 
     /**
      * Find connections which are established
@@ -55,14 +55,14 @@ public interface IConnectionService {
      * @param userId
      * @return
      */
-    Response findConnections(String userId, int offset, int limit);
+    Response findConnections(String rootOrg, String userId, int offset, int limit);
 
     /**
      * Find connections which is not established/pending for approval
      * @param userId
      * @return
      */
-    Response findConnectionsRequested(String userId, int offset, int limit);
+    Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit);
 
     /**
      * Send notification

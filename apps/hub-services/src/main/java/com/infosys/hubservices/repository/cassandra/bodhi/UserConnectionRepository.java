@@ -11,28 +11,28 @@ import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 
 import java.util.List;
 
 public interface UserConnectionRepository
 		extends CassandraRepository<UserConnection, UserConnectionPrimarykey> {
 
-	@Query("SELECT * from user_connection where user_id=?0 ALLOW FILTERING;")
-	public List<UserConnection> findAllByUser(String userId);
 
-	@Query("SELECT * from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
-	public List<UserConnection> findByUserAndStatus(String userId, String status);
+	/*@Query("SELECT * from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
+	public List<UserConnection> findByUserAndStatus(String userId, String status);*/
 
-	@Query("SELECT * from user_connection where user_id=?0 AND connection_status=?1 AND connection_type=?2 ALLOW FILTERING;")
-	public List<UserConnection> findByUserAndTypeAndStatus(String userId, String type, String status);
+	@Query("SELECT count(user_id) from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
+	public int countByUserAndStatus(String userId, String status);
 
-	@Query("SELECT * FROM user_connection WHERE user_id IN ?0 AND connection_status=?1 ALLOW FILTERING;")
-	public List<UserConnection> findByUsersAndStatus(List<String> userIds, String status);
+	Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(String rootOrg, String userId,  Pageable pageable);
 
-	@Query("SELECT * FROM user_connection WHERE user_id=?0 AND connection_id=?1 ALLOW FILTERING;")
-	public UserConnection findByUsersAndConnection(String userId, String connectionId);
+	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id IN ?1 ;")
+	public List<UserConnection> findByUsersAndRootOrg(String rootOrg, List<String> userIds);
 
-	@Query("SELECT * from user_connection where connection_id=?0 AND connection_status=?1 ALLOW FILTERING;")
-	public List<UserConnection> findByConnectionAndStatus(String connectionId, String status);
+
+	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id=?1 AND connection_id=?2 ;")
+	public UserConnection findByUsersAndConnection(String rootOrg, String userId, String connectionId);
 
 }

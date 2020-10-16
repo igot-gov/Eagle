@@ -26,6 +26,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,28 +55,56 @@ public class ProfileService implements IProfileService {
 
 
     @Override
-    public Response findCommonProfile(String userId, int offset, int limit) {
+    public Response findCommonProfile(String rootOrg, String userId, int offset, int limit) {
 
-        Response responseConnections = connectionService.findSuggestedConnections(userId, offset, limit);
+        Response responseConnections = connectionService.findSuggestedConnections(rootOrg, userId, offset, limit);
+        Response profileRes = getProfiles(responseConnections);
+        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+
+        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
+
         return getProfiles(responseConnections);
 
 
     }
 
     @Override
-    public Response findProfiles(String userId, int offset, int limit) {
+    public Response findProfiles(String rootOrg, String userId, int offset, int limit) {
 
-        Response responseConnections = connectionService.findConnections(userId, offset, limit);
-        return getProfiles(responseConnections);
+        Response responseConnections = connectionService.findConnections(rootOrg, userId, offset, limit);
+
+        Response profileRes = getProfiles(responseConnections);
+        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+
+        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
+
+        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
+            profileRes.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
+
+        return profileRes;
 
     }
 
 
 
     @Override
-    public Response findProfileRequested(String userId, int offset, int limit) {
-        Response responseConnections = connectionService.findConnectionsRequested(userId, offset, limit);
-        return getProfiles(responseConnections);
+    public Response findProfileRequested(String rootOrg, String userId, int offset, int limit) {
+        Response responseConnections = connectionService.findConnectionsRequested(rootOrg, userId, offset, limit);
+        Response profileRes = getProfiles(responseConnections);
+        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+
+        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
+
+        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
+            profileRes.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
+
+        return profileRes;
 
     }
 

@@ -7,6 +7,7 @@
 
 package com.infosys.hubservices.serviceimpl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.exception.BadRequestException;
 import com.infosys.hubservices.model.ConnectionRequest;
@@ -19,6 +20,9 @@ import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -64,11 +68,11 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response update(String roorOrg, ConnectionRequest request) {
+    public Response update(String rootOrg, ConnectionRequest request) {
         Response response = new Response();
         try {
 
-            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(request.getUserId(), request.getConnectionId());
+            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(rootOrg, request.getUserId(), request.getConnectionId());
             userConnection.setConnectionStatus(request.getStatus());
             userConnection.setEndOn(request.getEndDate());
 
@@ -78,7 +82,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
             if(connectionProperties.isNotificationEnabled())
-                sendNotification(roorOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
 
         } catch (Exception e){
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
@@ -93,7 +97,7 @@ public class ConnectionService implements IConnectionService {
         Response response = new Response();
         try {
 
-            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(userId, connectionId);
+            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(rootOrg, userId, connectionId);
             userConnection.setConnectionStatus(Constants.Status.DELETED);
             userConnection.setEndOn(new Date());
             userConnectionRepository.save(userConnection);
@@ -125,25 +129,28 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response findSuggestedConnections(String userId, int offset, int limit) {
+    public Response findSuggestedConnections(String rootOrg, String userId, int offset, int limit) {
 
         Response response = new Response();
         try {
             if(userId==null || userId.isEmpty()){
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
+            Pageable pageable = PageRequest.of(offset, limit);
+            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
 
             //get established connections
-            List<UserConnection> userApprovedConnections = userConnectionRepository.findByUserAndStatus(userId, Constants.Status.APPROVED);
+            List<UserConnection> userApprovedConnections = sliceUserConnections.getContent().stream().filter(c->c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
 
             //approved the connectionIds of established connection
             List<String> approvedConnectionIds = userApprovedConnections.stream().map(userConnection -> userConnection.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
 
             //get the established related connection
-            List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndStatus(approvedConnectionIds, Constants.Status.APPROVED);
+            List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndRootOrg(rootOrg, approvedConnectionIds).stream().filter(c->c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
 
             //find the common new connections that could be established
             List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
+
 
             if(commonConnections.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
@@ -163,14 +170,23 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response findConnections(String userId, int offset, int limit) {
+    public Response findConnections(String rootOrg, String userId, int offset, int limit) {
         Response response = new Response();
 
         try{
             if(userId==null || userId.isEmpty()){
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
-            List<UserConnection> userConnectionsEstablished = userConnectionRepository.findByUserAndStatus(userId, Constants.Status.APPROVED);
+
+            Pageable pageable = PageRequest.of(offset, limit);
+            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
+            List<UserConnection> userConnectionsEstablished = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
+
+
+            response.put(Constants.ResponseStatus.PAGENO, offset);
+            response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
+            response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, Constants.Status.APPROVED));
+
             if(userConnectionsEstablished.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnectionsEstablished);
@@ -188,7 +204,7 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response findConnectionsRequested(String userId, int offset, int limit) {
+    public Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit) {
         Response response = new Response();
 
         try{
@@ -196,7 +212,14 @@ public class ConnectionService implements IConnectionService {
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
 
-            List<UserConnection> userConnections = userConnectionRepository.findByUserAndStatus(userId,  Constants.Status.PENDING);
+            Pageable pageable = PageRequest.of(offset, limit);
+            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
+            List<UserConnection> userConnections = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equals(Constants.Status.PENDING)).collect(Collectors.toList());
+
+            response.put(Constants.ResponseStatus.PAGENO, offset);
+            response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
+            response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, Constants.Status.PENDING));
+
             if(userConnections.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, userConnections);

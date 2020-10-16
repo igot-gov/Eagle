@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -37,9 +38,9 @@ public class ConnectionProfileController {
     public ResponseEntity<Response> findSuggests(@RequestHeader String rootOrg, @RequestHeader(required = false) String org,
                                                  @RequestHeader String userId,
                                                  @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
-                                                 @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+                                                 @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) throws IOException {
 
-        Response response = profileService.findCommonProfile(userId, pageNo, pageSize);
+        Response response = profileService.findCommonProfile(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
@@ -51,7 +52,7 @@ public class ConnectionProfileController {
                                                  @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
                                                  @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = profileService.findProfileRequested(userId, pageNo, pageSize);
+        Response response = profileService.findProfileRequested(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
@@ -62,7 +63,7 @@ public class ConnectionProfileController {
                                                     @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
                                                     @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
 
-        Response response = profileService.findProfiles(userId, pageNo, pageSize);
+        Response response = profileService.findProfiles(rootOrg, userId, pageNo, pageSize);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

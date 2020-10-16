@@ -30,7 +30,7 @@ public interface IProfileService {
      * @param limit
      * @return
      */
-    Response findCommonProfile(String userId, int offset, int limit);
+    Response findCommonProfile(String rootOrg, String userId, int offset, int limit);
 
     /**
      * Find profile for which connections are established
@@ -38,14 +38,14 @@ public interface IProfileService {
      * @param userId
      * @return
      */
-    Response findProfiles(String userId, int offset, int limit);
+    Response findProfiles(String rootOrg, String userId, int offset, int limit);
 
     /**
      * Find profiles for which is not established/pending for approval
      * @param userId
      * @return
      */
-    Response findProfileRequested(String userId, int offset, int limit);
+    Response findProfileRequested(String rootOrg, String userId, int offset, int limit);
 
 
     Response multiSearchProfiles(String rootOrg, MultiSearch multiSearchRequest, String[] sourceFields);
