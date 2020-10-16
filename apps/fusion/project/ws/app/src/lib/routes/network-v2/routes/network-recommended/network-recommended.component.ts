@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { NetworkV2Service } from '../../services/network-v2.service'
 
 @Component({
   selector: 'ws-app-network-recommended',
   templateUrl: './network-recommended.component.html',
   styleUrls: ['./network-recommended.component.scss'],
   /* tslint:disable */
-  host: { class: 'flex flex-1 mt-4' },
+  host: { class: 'flex flex-1 mt-6 ' },
   /* tslint:enable */
 })
 export class NetworkRecommendedComponent implements OnInit {
@@ -19,11 +18,9 @@ export class NetworkRecommendedComponent implements OnInit {
   currentFilterSort = 'desc'
   constructor(
     private route: ActivatedRoute,
-    private networkV2Service: NetworkV2Service,
   ) {
-    this.data = this.route.snapshot.data.recommendedList.data.result.data.
-    find((item: any) => item.field === 'employmentDetails.departmentName').results
-   }
+    this.data = this.route.snapshot.data.recommendedList.data.result.data
+  }
 
   ngOnInit() {
   }

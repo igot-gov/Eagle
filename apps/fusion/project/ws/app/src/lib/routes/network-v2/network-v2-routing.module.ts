@@ -25,7 +25,8 @@ const routes: Routes = [
         path: 'home',
         component: NetworkHomeComponent,
         resolve: {
-          recommendedUsers: RecommendedResolveService,
+          recommendedUsers: MyMdoResolveService,
+          connectionRequests: ConnectionRequestResolveService,
         },
       },
       {

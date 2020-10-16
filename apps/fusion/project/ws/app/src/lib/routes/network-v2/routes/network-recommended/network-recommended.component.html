@@ -29,14 +29,12 @@
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap ">
-                <!-- <ng-container *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;">
-                    <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
-                        <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
-                    </div>
-                </ng-container> -->
-                <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
-                    <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"></ws-app-connection-people-card>
+                <ng-container *ngIf="data && data.length">
+                    <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
+                        <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"></ws-app-connection-people-card>
+                    </ng-container>
                 </ng-container>
+                <h4 class="ws-mat-black60-text" *ngIf="data && data.length <= 0">No recommended users</h4>
             </mat-card-content>
             <mat-card-actions align="center">
             </mat-card-actions>

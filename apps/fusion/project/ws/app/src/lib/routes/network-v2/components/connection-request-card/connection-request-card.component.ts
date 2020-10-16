@@ -24,11 +24,11 @@ export class ConnectionRequestCardComponent implements OnInit {
   }
 
   acceptConnection() {
-    this.connetToUser('accept')
+    this.connetToUser('Approved')
   }
 
   rejectConnection() {
-    this.connetToUser('reject')
+    this.connetToUser('Rejected')
   }
 
   goToUserProfile(user: any) {
@@ -36,8 +36,8 @@ export class ConnectionRequestCardComponent implements OnInit {
     // this.router.navigate(['/app/person-profile'], { queryParams: { emailId: } })
   }
 
-  connetToUser(action: string | 'accept' | 'reject') {
-    const req = { connectionId: this.user.id }
+  connetToUser(action: string | 'Approved' | 'Rejected') {
+    const req = { connectionId: this.user.id, status: action }
     this.networkV2Service.updateConnection(req).subscribe(
       () => {
         if (action === 'accept') {

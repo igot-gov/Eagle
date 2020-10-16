@@ -25,22 +25,7 @@ export class RecommendedResolveService implements
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSNetworkDataV2.IRecommendedUserResponse>> {
-    // let usrDept = ''
-    // if (this.configSvc.userProfile) {
-    //    usrDept = this.configSvc.userProfile.departmentName || ''
-    // }
-    let req: NSNetworkDataV2.IRecommendedUserReq
-    req = {
-      size: 50,
-      offset: 0,
-      search: [
-        {
-          field: 'employmentDetails.departmentName',
-          values: ['igot'],
-        },
-      ],
-    }
-    return this.networkV2Service.fetchAllRecommendedUsers(req).pipe(
+    return this.networkV2Service.fetchAllSuggestedUsers().pipe(
       map((data: any) => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

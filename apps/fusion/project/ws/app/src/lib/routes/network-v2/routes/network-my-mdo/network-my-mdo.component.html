@@ -15,9 +15,9 @@
                             'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
                 (click)="filter('timestamp', 'desc')">
                 Last added </a>
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'alphabetical',
-                            'ws-mat-accent-border':currentFilter !== 'alphabetical'}" mat-button
-                (click)="filter('alphabetical', 'asc')">
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'personalDetails.firstname',
+                            'ws-mat-accent-border':currentFilter !== 'personalDetails.firstname'}" mat-button
+                (click)="filter('personalDetails.firstname', 'asc')">
                 Sort by name </a>
         </div>
     </div>
@@ -28,15 +28,18 @@
                     <h2>Users from MDO</h2>
                 </mat-card-title>
             </mat-card-header>
-            <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap md:justify-between">
+            <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap">
                 <!-- <ng-container *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;">
                     <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
                         <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
                     </div>
                 </ng-container> -->
-                <ng-container *ngFor="let user of data | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value;">
-                    <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"></ws-app-connection-people-card>
+                <ng-container *ngIf="data && data.length">
+                    <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
+                        <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"></ws-app-connection-people-card>
+                    </ng-container>
                 </ng-container>
+                <h4 class="ws-mat-black60-text" *ngIf="data && data.length <= 0">No users found</h4>
             </mat-card-content>
             <mat-card-actions align="center">
             </mat-card-actions>

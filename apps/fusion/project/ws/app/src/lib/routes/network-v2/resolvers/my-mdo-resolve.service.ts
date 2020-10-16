@@ -19,9 +19,9 @@ export class MyMdoResolveService implements
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSNetworkDataV2.IRecommendedUserResponse>> {
-    let usrDept = ''
+    let usrDept = 'igot'
     if (this.configSvc.userProfile) {
-      usrDept = this.configSvc.userProfile.departmentName || ''
+      usrDept = this.configSvc.userProfile.departmentName || 'igot'
     }
     let req: NSNetworkDataV2.IRecommendedUserReq
     req = {
@@ -30,7 +30,7 @@ export class MyMdoResolveService implements
       search: [
         {
           field: 'employmentDetails.departmentName',
-          values: ['igot'],
+          values: [usrDept],
         },
       ],
     }

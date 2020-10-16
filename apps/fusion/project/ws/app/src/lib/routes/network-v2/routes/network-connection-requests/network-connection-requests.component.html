@@ -15,9 +15,9 @@
                             'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
                 (click)="filter('timestamp', 'desc')">
                 Last added </a>
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'alphabetical',
-                            'ws-mat-accent-border':currentFilter !== 'alphabetical'}" mat-button
-                (click)="filter('alphabetical', 'asc')">
+            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'personalDetails.firstname',
+                            'ws-mat-accent-border':currentFilter !== 'personalDetails.firstname'}" mat-button
+                (click)="filter('personalDetails.firstname', 'asc')">
                 Sort by name </a>
         </div>
     </div>
@@ -25,7 +25,8 @@
         <mat-card class="flex-1 remove-botton-radius">
             <mat-card-header>
                 <mat-card-title class="margin-l-0 f-medium">
-                    <h2>431 Connections</h2>
+                    <h2 *ngIf="data && data.length">{{data.length}} Connection requests</h2>
+                    <h4 class="w-full text-center ws-mat-black60-text" *ngIf="data && data.length <= 0">No connections found!</h4>
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content class="margin-left-m mb-0-imp">
@@ -34,8 +35,10 @@
                         <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
                     </div>
                 </ng-container> -->
-                <ng-container *ngFor="let user of [1,2,3,4,5,6] | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value;">
-                    <ws-app-connection-request-card class="mr-4 mb-5"></ws-app-connection-request-card>
+                <ng-container *ngIf="data && data.length">
+                    <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
+                        <ws-app-connection-request-card [user]="user" class="mr-4 mb-5"></ws-app-connection-request-card>
+                    </ng-container>
                 </ng-container>
             </mat-card-content>
             <mat-card-actions align="center">
