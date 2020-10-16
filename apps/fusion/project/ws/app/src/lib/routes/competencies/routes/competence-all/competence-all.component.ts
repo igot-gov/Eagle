@@ -72,7 +72,7 @@ export class CompetenceAllComponent implements OnInit, AfterViewInit {
     }
   }
 
-  navigateWithPage(page: any) {
+  navigateWithPage() {
     // if (page !== this.currentActivePage) {
     //   this.router.navigate([`/app/careers/home`], { queryParams: { page } })
     // }
