@@ -11,17 +11,17 @@ import { NSNetworkDataV2 } from '../models/network-v2.model'
   providedIn: 'root',
 })
 export class MyConnectionResolveService implements
-Resolve<Observable<IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> |
-IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> {
-constructor(private networkV2Service: NetworkV2Service) { }
+  Resolve<Observable<IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> |
+  IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> {
+  constructor(private networkV2Service: NetworkV2Service) { }
 
-resolve(
-  _route: ActivatedRouteSnapshot,
-  _state: RouterStateSnapshot,
-): Observable<IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> {
-  return this.networkV2Service.fetchAllConnectionEstablished().pipe(
-    map((data: any) => ({ data, error: null })),
-    catchError(error => of({ error, data: null })),
-  )
-}
+  resolve(
+    _route: ActivatedRouteSnapshot,
+    _state: RouterStateSnapshot,
+  ): Observable<IResolveResponse<NSNetworkDataV2.IEstablishedConnectResopnse>> {
+    return this.networkV2Service.fetchAllConnectionEstablished().pipe(
+      map((data: any) => ({ data, error: null })),
+      catchError(error => of({ error, data: null })),
+    )
+  }
 }

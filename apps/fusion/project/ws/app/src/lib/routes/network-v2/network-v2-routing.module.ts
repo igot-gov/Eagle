@@ -5,7 +5,11 @@ import { NetworkHomeComponent } from './routes/network-home/network-home.compone
 import { NetworkMyConnectionComponent } from './routes/network-my-connection/network-my-connection.component'
 import { RecommendedResolveService } from './resolvers/recommended-resolve.service'
 import { MyConnectionResolveService } from './resolvers/my-connection-resolve.service'
-// import { NetworkV2ResolveService } from './resolvers/network-v2-resolve.service'
+import { NetworkConnectionRequestsComponent } from './routes/network-connection-requests/network-connection-requests.component'
+import { NetworkMyMdoComponent } from './routes/network-my-mdo/network-my-mdo.component'
+import { NetworkRecommendedComponent } from './routes/network-recommended/network-recommended.component'
+import { MyMdoResolveService } from './resolvers/my-mdo-resolve.service'
+import { ConnectionRequestResolveService } from './resolvers/connection-request-resolve.service'
 
 const routes: Routes = [
   {
@@ -21,7 +25,8 @@ const routes: Routes = [
         path: 'home',
         component: NetworkHomeComponent,
         resolve: {
-          recommendedUsers: RecommendedResolveService,
+          recommendedUsers: MyMdoResolveService,
+          connectionRequests: ConnectionRequestResolveService,
         },
       },
       {
@@ -29,6 +34,27 @@ const routes: Routes = [
         component: NetworkMyConnectionComponent,
         resolve: {
           myConnectionList: MyConnectionResolveService,
+        },
+      },
+      {
+        path: 'connection-requests',
+        component: NetworkConnectionRequestsComponent,
+        resolve: {
+          connectionRequests: ConnectionRequestResolveService,
+        },
+      },
+      {
+        path: 'my-mdo',
+        component: NetworkMyMdoComponent,
+        resolve: {
+          myMdoList: MyMdoResolveService,
+        },
+      },
+      {
+        path: 'recommended',
+        component: NetworkRecommendedComponent,
+        resolve: {
+          recommendedList: RecommendedResolveService,
         },
       },
     ],

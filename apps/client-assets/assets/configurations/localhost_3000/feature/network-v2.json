@@ -21,6 +21,16 @@
             "routerLink": "/app/network-v2/my-connection"
         },
         {
+            "name": "Connection Requests",
+            "key": "connectionRequests",
+            "badges": {
+                "enabled": true,
+                "uri": ""
+            },
+            "enabled": true,
+            "routerLink": "/app/network-v2/connection-requests"
+        },
+        {
             "name": "From my MDO",
             "key": "formMyMDO",
             "badges": {
@@ -28,7 +38,7 @@
                 "uri": ""
             },
             "enabled": true,
-            "routerLink": "/app/network/home"
+            "routerLink": "/app/network-v2/my-mdo"
         },
         {
             "name": "Recommended connections",
@@ -38,7 +48,7 @@
                 "uri": ""
             },
             "enabled": true,
-            "routerLink": "/app/network/home"
+            "routerLink": "/app/network-v2/recommended"
         }
     ],
     "banner": {

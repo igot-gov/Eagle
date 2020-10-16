@@ -34,12 +34,12 @@
         "widgetData": [
             {
                 "banners": {
-                    "l": "assets/instances/eagle/banners/hubs/discuss/l.jpg",
-                    "m": "assets/instances/eagle/banners/hubs/discuss/m.jpg",
-                    "s": "assets/instances/eagle/banners/hubs/discuss/s.jpg",
-                    "xl": "assets/instances/eagle/banners/hubs/discuss/xl.jpg",
-                    "xs": "assets/instances/eagle/banners/hubs/discuss/xs.jpg",
-                    "xxl": "assets/instances/eagle/banners/hubs/discuss/xxl.jpg"
+                    "l": "assets/instances/eagle/banners/hubs/competencies/l.jpg",
+                    "m": "assets/instances/eagle/banners/hubs/competencies/m.jpg",
+                    "s": "assets/instances/eagle/banners/hubs/competencies/s.jpg",
+                    "xl": "assets/instances/eagle/banners/hubs/competencies/xl.jpg",
+                    "xs": "assets/instances/eagle/banners/hubs/competencies/xs.jpg",
+                    "xxl": "assets/instances/eagle/banners/hubs/competencies/xxl.jpg"
                 }
             }
         ]

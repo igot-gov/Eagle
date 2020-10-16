@@ -19,7 +19,7 @@ import _ from 'lodash'
 export class ProfileComponent implements OnInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
-  titles = [{ title: 'NETWORK', url: '/page/network', icon: 'group' }]
+  titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
   unread = 0
   currentRoute = 'home'
   banner!: NsWidgetResolver.IWidgetData<any>

@@ -24,8 +24,8 @@
     <div class="flex flex-1 mb-4">
         <mat-card class="flex-1 remove-botton-radius">
             <mat-card-header>
-                <mat-card-title class="w-full margin-l-0 f-medium">
-                    <h2 *ngIf="data && data.length">{{data.length}} Connections</h2>
+                <mat-card-title class="margin-l-0 f-medium">
+                    <h2 *ngIf="data && data.length">{{data.length}} Connection requests</h2>
                     <h4 class="w-full text-center ws-mat-black60-text" *ngIf="data && data.length <= 0">No connections found!</h4>
                 </mat-card-title>
             </mat-card-header>
@@ -37,7 +37,7 @@
                 </ng-container> -->
                 <ng-container *ngIf="data && data.length">
                     <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
-                        <ws-app-my-connection-card class="mr-4 mb-5" [user]="user"></ws-app-my-connection-card>
+                        <ws-app-connection-request-card [user]="user" class="mr-4 mb-5"></ws-app-connection-request-card>
                     </ng-container>
                 </ng-container>
             </mat-card-content>
