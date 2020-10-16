@@ -21,8 +21,8 @@ export class NetworkConnectionRequestsComponent implements OnInit {
     private route: ActivatedRoute,
     private networkV2Service: NetworkV2Service,
   ) {
-    console.log('this.route.snapshot.data.connectionRequests.data: ', this.route.snapshot.data.connectionRequests.data)
-    // this.data = this.route.snapshot.data.connectionRequests.data.result.data
+    // console.log('this.route.snapshot.data.connectionRequests.data: ', this.route.snapshot.data.connectionRequests.data)
+    this.data = this.route.snapshot.data.connectionRequests.data.result.data
    }
 
   ngOnInit() {

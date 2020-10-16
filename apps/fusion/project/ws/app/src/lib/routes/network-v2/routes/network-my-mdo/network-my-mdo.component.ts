@@ -22,10 +22,10 @@ export class NetworkMyMdoComponent implements OnInit {
     private route: ActivatedRoute,
     private networkV2Service: NetworkV2Service,
   ) {
-    console.log('this.route.snapshot.data.myMdoList.data :', this.route.snapshot.data.myMdoList.data)
+    // console.log('this.route.snapshot.data.myMdoList.data :', this.route.snapshot.data.myMdoList.data)
     this.data = this.route.snapshot.data.myMdoList.data.result.data.
     find((item: any) => item.field === 'employmentDetails.departmentName').results
-    console.log('this.data : ', this.data)
+    // console.log('this.data : ', this.data)
    }
 
   ngOnInit() {

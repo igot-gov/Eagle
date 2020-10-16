@@ -21,10 +21,8 @@ export class NetworkRecommendedComponent implements OnInit {
     private route: ActivatedRoute,
     private networkV2Service: NetworkV2Service,
   ) {
-    console.log('this.route.snapshot.data.recommendedList.data : ',this.route.snapshot.data.recommendedList.data)
     this.data = this.route.snapshot.data.recommendedList.data.result.data.
     find((item: any) => item.field === 'employmentDetails.departmentName').results
-    console.log('this.data : ', this.data)
    }
 
   ngOnInit() {
