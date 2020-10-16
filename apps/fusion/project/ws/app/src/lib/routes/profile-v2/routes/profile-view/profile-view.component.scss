@@ -15,6 +15,10 @@
   flex: 4;
 }
 
+:host ::ng-deep .mat-card-header-text {
+  flex: none;
+}
+
 .font-medium {
   font-weight: 500 !important;
 }
