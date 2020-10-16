@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { ConnectionPeopleCardComponent } from './connection-people-card.component';
+import { ConnectionPeopleCardComponent } from './connection-people-card.component'
 
 describe('ConnectionPeopleCardComponent', () => {
-  let component: ConnectionPeopleCardComponent;
-  let fixture: ComponentFixture<ConnectionPeopleCardComponent>;
+  let component: ConnectionPeopleCardComponent
+  let fixture: ComponentFixture<ConnectionPeopleCardComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConnectionPeopleCardComponent ]
+      declarations: [ConnectionPeopleCardComponent],
     })
-    .compileComponents();
-  }));
+      .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConnectionPeopleCardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(ConnectionPeopleCardComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

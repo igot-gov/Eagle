@@ -11,5 +11,6 @@ export class ConnectionRequestCardComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  submitPost() {
+  }
 }

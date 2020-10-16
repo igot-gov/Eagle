@@ -3,8 +3,6 @@ import { Routes, RouterModule } from '@angular/router'
 import { CompetenceComponent } from './routes/competence-home/competence.component'
 import { CompetenceAllComponent } from './routes/competence-all/competence-all.component'
 import { InitResolver } from './resolvers/init-resolve.service'
-
-
 const routes: Routes = [
   {
     path: '',
@@ -28,7 +26,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [
-    InitResolver
+    InitResolver,
   ],
 })
 export class CompetencieRoutingModule { }
