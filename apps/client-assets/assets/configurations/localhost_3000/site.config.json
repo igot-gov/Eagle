@@ -427,7 +427,7 @@
       "icon": "forum"
     },
     {
-      "path": "/page/network",
+      "path": "/app/network-v2",
       "active": true,
       "hubname": "Network",
       "desc": "Connect with Interesting people, see what they are upto.",

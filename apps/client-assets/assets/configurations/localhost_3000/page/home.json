@@ -252,7 +252,7 @@
                       "cardSubType": "cardHomeNetwork"
                     },
                     "viewMoreUrl": {
-                      "path": "/page/network",
+                      "path": "/app/network-v2",
                       "viewMoreText": "Network",
                       "queryParams": {}
                     },
