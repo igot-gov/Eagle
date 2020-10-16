@@ -82,7 +82,4 @@ export class CompetenceService {
     const url = API_ENDPOINTS.replyPost(tid)
     return this.http.post(url, data)
   }
-
-
-
 }

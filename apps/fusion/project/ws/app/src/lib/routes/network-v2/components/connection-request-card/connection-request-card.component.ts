@@ -24,12 +24,10 @@ export class ConnectionRequestCardComponent implements OnInit {
   }
 
   acceptConnection() {
-    console.log('acceptConnection')
     this.connetToUser('accept')
   }
 
   rejectConnection() {
-    console.log('rejectConnection')
     this.connetToUser('reject')
   }
 

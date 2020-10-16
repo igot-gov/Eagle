@@ -3,7 +3,10 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/r
 import { Observable, of } from 'rxjs'
 import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
-import { IResolveResponse, ConfigurationsService } from '@ws-widget/utils'
+import {
+  IResolveResponse,
+  // ConfigurationsService
+} from '@ws-widget/utils'
 import { NetworkV2Service } from '../services/network-v2.service'
 import { NSNetworkDataV2 } from '../models/network-v2.model'
 
@@ -13,25 +16,28 @@ import { NSNetworkDataV2 } from '../models/network-v2.model'
 export class RecommendedResolveService implements
   Resolve<Observable<IResolveResponse<NSNetworkDataV2.IRecommendedUserResponse>> |
   IResolveResponse<NSNetworkDataV2.IRecommendedUserResponse>> {
-  constructor(private networkV2Service: NetworkV2Service, private configSvc: ConfigurationsService) { }
+  constructor(
+    private networkV2Service: NetworkV2Service,
+    // private configSvc: ConfigurationsService
+  ) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSNetworkDataV2.IRecommendedUserResponse>> {
-    let usrDept = ''
-    if (this.configSvc.userProfile) {
-       usrDept = this.configSvc.userProfile.departmentName || ''
-    }
+    // let usrDept = ''
+    // if (this.configSvc.userProfile) {
+    //    usrDept = this.configSvc.userProfile.departmentName || ''
+    // }
     let req: NSNetworkDataV2.IRecommendedUserReq
     req = {
       size: 50,
       offset: 0,
       search: [
-          {
-            field: 'employmentDetails.departmentName',
-            values: ['igot'],
-          },
+        {
+          field: 'employmentDetails.departmentName',
+          values: ['igot'],
+        },
       ],
     }
     return this.networkV2Service.fetchAllRecommendedUsers(req).pipe(

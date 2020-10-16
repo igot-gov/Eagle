@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { FormControl } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router'
-import { NetworkV2Service } from '../../services/network-v2.service'
+// import { NetworkV2Service } from '../../services/network-v2.service'
 
 @Component({
   selector: 'ws-app-network-my-connection',
@@ -22,7 +22,7 @@ export class NetworkMyConnectionComponent implements OnInit {
     private networkV2Service: NetworkV2Service,
   ) {
     this.data = this.route.snapshot.data.myConnectionList.data.result.data
-   }
+  }
 
   ngOnInit() {
   }
