@@ -19,8 +19,7 @@
         <!-- </ng-container> -->
       </mat-card-content>
       <mat-card-actions align="center" *ngIf="connectionRequests && connectionRequests.length">
-        <button mat-button color="default" type="button" class=" flex-auto-display"
-        (click)="goToConnectionRequests()">
+        <button mat-button color="default" type="button" class=" flex-auto-display" (click)="goToConnectionRequests()">
           <span class="ws-mat-default-text" i18n>SEE MORE</span>
         </button>
       </mat-card-actions>
@@ -35,12 +34,10 @@
             <h2>People you may know</h2>
           </span>
         </mat-card-title>
-        <span>
-          <button mat-button color="default" type="button" class=" flex-auto-display"
-          (click)="goToMyMdo()">
-            <span class="ws-mat-default-text" i18n>SEE ALL</span>
-          </button>
-        </span>
+        <span class="spacer"></span>
+        <button mat-button color="default" type="button" class=" flex-auto-display" (click)="goToMyMdo()">
+          <span class="ws-mat-default-text" i18n>SEE ALL</span>
+        </button>
       </mat-card-header>
       <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap">
         <ng-container *ngFor="let user of recommendedUsers | slice: 0: 20">
