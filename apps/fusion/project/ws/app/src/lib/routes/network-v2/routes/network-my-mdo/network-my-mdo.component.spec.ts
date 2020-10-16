@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NetworkMyMdoComponent } from './network-my-mdo.component';
+import { NetworkMyMdoComponent } from './network-my-mdo.component'
 
 describe('NetworkMyMdoComponent', () => {
-  let component: NetworkMyMdoComponent;
-  let fixture: ComponentFixture<NetworkMyMdoComponent>;
+  let component: NetworkMyMdoComponent
+  let fixture: ComponentFixture<NetworkMyMdoComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NetworkMyMdoComponent ]
+      declarations: [NetworkMyMdoComponent],
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NetworkMyMdoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(NetworkMyMdoComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
