@@ -31,6 +31,7 @@
   $footerTextColor: #dedfe0;
   $colorWhite: #ffffff;
   $colorBlack: rgba(0, 0, 0, 0.87);
+  $colorBlack60: rgba(0, 0, 0, 0.60);
   $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
@@ -197,6 +198,7 @@
     .ws-mat-default-text {
       color: $colorAccentDark;
     }
+    
 
     .ws-mat-primary-lite-background-important {
       background-color: $colorPrimaryDark !important;
@@ -469,6 +471,11 @@
     .ws-mat-black-text {
       color: $colorBlack;
     }
+
+    .ws-mat-black60-text {
+      color: $colorBlack60;
+    }
+    
 
     .ws-mat-lighter-grey-text {
       color: $colorLighterGrey;

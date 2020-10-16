@@ -1,0 +1,26 @@
+<div class="flex flex-1 items-center card-container ws-mat-primary-tags">
+    <div class="mr-3">
+        <ws-widget-avatar-photo [name]="'Christopher Fernandes'" size="m">
+        </ws-widget-avatar-photo>
+    </div>
+    <div class="flex flex-col flex-1 ">
+        <div class="name truncate ws-mat-black-text ">
+            Christopher B Fernandes
+        </div>
+        <div class="designation truncate ws-mat-black60-text">
+            Executive Director at Finance
+        </div>
+    </div>
+    <div class="text-right">
+        <button mat-button color="default" type="button" [mat-dialog-close]="true" class=" flex-auto-display">
+            <span class="ws-mat-black60-text" i18n>Reject</span>
+        </button>
+        <!-- <span *ngIf="uploadSaveData" class="px-4 flex items-center justify-center">
+            <mat-spinner [diameter]="30"></mat-spinner>
+          </span> -->
+        <button mat-stroked-button color="accent" type="submit" class=" mat-accent-border flex-auto-display"
+            (click)="submitPost()">
+            <span class="" i18n>Accept</span>
+        </button>
+    </div>
+</div>

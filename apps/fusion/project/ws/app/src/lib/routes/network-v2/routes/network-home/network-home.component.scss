@@ -1,0 +1,46 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.margin-l-0 {
+  margin-left: 0;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.f-medium {
+    line-height: normal;
+}
+.flex-auto-display {
+    @include breakpoint-xs {
+      flex: auto;
+      margin-left: 0 !important;
+      margin-top: 1rem;
+    }
+  
+    @include breakpoint-s {
+      flex: auto;
+    }
+  
+  }
+  
+  .hidden-imp {
+    @include breakpoint-xs {
+      display: none !important;
+    }
+  }
+  
+  .margin-fix {
+    @include breakpoint-xs {
+      margin: 0 $size-l 0 $size-l;
+    }
+  
+    @include breakpoint-s {
+      margin: 0 $size-l 0 $size-l;
+    }
+  }
+::ng-deep .mat-card-header-text {
+  flex: 1 1 0%;
+}

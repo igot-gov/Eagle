@@ -80,6 +80,19 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
   },
   {
+    path: 'app/competencies',
+    loadChildren: () =>
+      import('./routes/route-competencie.module').then(u => u.RouteCompetenciesModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'competencie',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/content-assignment',
     loadChildren: () =>
       import('./routes/route-content-assignment.module').then(u => u.RouteContentAssignmentModule),
@@ -164,6 +177,19 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/route-my-rewards.module').then(u => u.RouteMyRewarddModule),
     canActivate: [GeneralGuard, LearningGuard],
+  },
+  {
+    path: 'app/network-v2',
+    loadChildren: () =>
+      import('./routes/route-network-v2.module').then(u => u.RouteNetworkV2Module),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'network-v2',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
   },
   {
     path: 'app/notifications',
