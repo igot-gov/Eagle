@@ -329,6 +329,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
     )
   }
+
   typeCheck() {
     if (this.type) {
       let dataName = ''
