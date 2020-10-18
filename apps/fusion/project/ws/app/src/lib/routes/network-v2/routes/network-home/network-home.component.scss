@@ -11,36 +11,38 @@
 }
 
 .f-medium {
-    line-height: normal;
+  line-height: normal;
 }
+
 .flex-auto-display {
-    @include breakpoint-xs {
-      flex: auto;
-      margin-left: 0 !important;
-      margin-top: 1rem;
-    }
-  
-    @include breakpoint-s {
-      flex: auto;
-    }
-  
+  @include breakpoint-xs {
+    flex: auto;
+    margin-left: 0 !important;
+    margin-top: 1rem;
   }
-  
-  .hidden-imp {
-    @include breakpoint-xs {
-      display: none !important;
-    }
+
+  @include breakpoint-s {
+    flex: auto;
   }
-  
-  .margin-fix {
-    @include breakpoint-xs {
-      margin: 0 $size-l 0 $size-l;
-    }
-  
-    @include breakpoint-s {
-      margin: 0 $size-l 0 $size-l;
-    }
-  }
-::ng-deep .mat-card-header-text {
-  flex: 1 1 0%;
+
 }
+
+.hidden-imp {
+  @include breakpoint-xs {
+    display: none !important;
+  }
+}
+
+.margin-fix {
+  @include breakpoint-xs {
+    margin: 0 $size-l 0 $size-l;
+  }
+
+  @include breakpoint-s {
+    margin: 0 $size-l 0 $size-l;
+  }
+}
+
+// ::ng-deep .mat-card-header-text {
+//   flex: 1 1 0%;
+// }

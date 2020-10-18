@@ -427,7 +427,7 @@
       "icon": "forum"
     },
     {
-      "path": "/page/network",
+      "path": "/app/network-v2",
       "active": true,
       "hubname": "Network",
       "desc": "Connect with Interesting people, see what they are upto.",
@@ -441,11 +441,11 @@
       "icon": "work"
     },
     {
-      "path": "/app/notifications",
-      "active": false,
-      "hubname": "News",
-      "desc": "Keep you self update with the latest news from IGOT",
-      "icon": "library_books"
+      "path": "/app/competencies",
+      "active": true,
+      "hubname": "Competencies",
+      "desc": "Add your competencies, see what others are adding",
+      "icon": "extension"
     }
   ],
   "featuredApps": [

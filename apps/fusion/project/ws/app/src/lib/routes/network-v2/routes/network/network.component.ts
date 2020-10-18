@@ -19,7 +19,7 @@ export class NetworkComponent implements OnInit, OnDestroy {
   elementPosition: any
   sideNavBarOpened = true
   panelOpenState = false
-  titles = [{ title: 'NETWORK', url: '/page/network', icon: 'group' }]
+  titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
   unread = 0
   currentRoute = 'home'
   banner!: NsWidgetResolver.IWidgetData<any>
@@ -54,7 +54,7 @@ export class NetworkComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         // Hide loading indicator
         // console.log(event.url)
-        this.bindUrl(event.urlAfterRedirects.replace('/app/network-v2/', ''))
+        this.bindUrl(event.urlAfterRedirects.replace('/app/network-v2', ''))
       }
 
       if (event instanceof NavigationError) {

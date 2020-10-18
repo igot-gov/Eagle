@@ -33,11 +33,14 @@ import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 import { ConnectionRequestCardComponent } from './components/connection-request-card/connection-request-card.component'
 import { ConnectionPeopleCardComponent } from './components/connection-people-card/connection-people-card.component'
 import { RecommendedResolveService } from './resolvers/recommended-resolve.service'
-import { ConnectionRequestsResolveService } from './resolvers/connection-requests-resolve.service'
 import { NetworkMyConnectionComponent } from './routes/network-my-connection/network-my-connection.component'
 import { MyConnectionResolveService } from './resolvers/my-connection-resolve.service'
 import { MyConnectionCardComponent } from './components/my-connection-card/my-connection-card.component'
 import { PipeFilterSearchModule } from '@ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.module'
+import { NetworkMyMdoComponent } from './routes/network-my-mdo/network-my-mdo.component'
+import { NetworkRecommendedComponent } from './routes/network-recommended/network-recommended.component'
+import { NetworkConnectionRequestsComponent } from './routes/network-connection-requests/network-connection-requests.component'
+import { ConnectionRequestResolveService } from './resolvers/connection-request-resolve.service'
 
 @NgModule({
   declarations: [
@@ -48,6 +51,9 @@ import { PipeFilterSearchModule } from '@ws-widget/utils/src/lib/pipes/pipe-filt
     ConnectionPeopleCardComponent,
     NetworkMyConnectionComponent,
     MyConnectionCardComponent,
+    NetworkMyMdoComponent,
+    NetworkRecommendedComponent,
+    NetworkConnectionRequestsComponent,
   ],
   imports: [
     CommonModule,
@@ -87,7 +93,7 @@ import { PipeFilterSearchModule } from '@ws-widget/utils/src/lib/pipes/pipe-filt
     LoaderService,
     InitResolveService,
     RecommendedResolveService,
-    ConnectionRequestsResolveService,
+    ConnectionRequestResolveService,
     MyConnectionResolveService,
   ],
 })

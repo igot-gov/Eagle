@@ -8,13 +8,18 @@
       </mat-card-header>
       <mat-card-content class="margin-left-m mb-0-imp">
         <!-- <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'"> -->
-        <ng-container *ngFor="let post of [1,2,3]">
-          <ws-app-connection-request-card></ws-app-connection-request-card>
+        <ng-container *ngIf="connectionRequests && connectionRequests.length">
+          <ng-container *ngFor="let user of connectionRequests | slice: 0: 3">
+            <ws-app-connection-request-card [user]="user"></ws-app-connection-request-card>
+          </ng-container>
         </ng-container>
+        <h4 *ngIf="connectionRequests && connectionRequests.length <=0" class="w-full text-center ws-mat-black60-text">
+          No connection requests!
+        </h4>
         <!-- </ng-container> -->
       </mat-card-content>
-      <mat-card-actions align="center">
-        <button mat-button color="default" type="button" [mat-dialog-close]="true" class=" flex-auto-display">
+      <mat-card-actions align="center" *ngIf="connectionRequests && connectionRequests.length">
+        <button mat-button color="default" type="button" class=" flex-auto-display" (click)="goToConnectionRequests()">
           <span class="ws-mat-default-text" i18n>SEE MORE</span>
         </button>
       </mat-card-actions>
@@ -29,17 +34,13 @@
             <h2>People you may know</h2>
           </span>
         </mat-card-title>
-        <span>
-          <button mat-button color="default" type="button" [mat-dialog-close]="true" class=" flex-auto-display">
-            <span class="ws-mat-default-text" i18n>SEE ALL</span>
-          </button>
-        </span>
+        <span class="spacer"></span>
+        <button mat-button color="default" type="button" class=" flex-auto-display" (click)="goToMyMdo()">
+          <span class="ws-mat-default-text" i18n>SEE ALL</span>
+        </button>
       </mat-card-header>
-      <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap md:justify-between">
-        <!-- <ng-container *ngFor="let post of [1,2,3,4,5,6,7,8,9,10]">
-          <ws-app-connection-people-card class="mr-4 mb-5"></ws-app-connection-people-card>
-        </ng-container> -->
-        <ng-container *ngFor="let user of recommendedUsers">
+      <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap">
+        <ng-container *ngFor="let user of recommendedUsers | slice: 0: 20">
           <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"></ws-app-connection-people-card>
         </ng-container>
       </mat-card-content>

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { NetworkV2Service } from '../../services/network-v2.service'
 import { MatSnackBar } from '@angular/material'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'ws-app-connection-people-card',
@@ -14,7 +15,8 @@ export class ConnectionPeopleCardComponent implements OnInit {
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   constructor(
     private networkV2Service: NetworkV2Service,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,12 @@ export class ConnectionPeopleCardComponent implements OnInit {
     this.snackBar.open(primaryMsg, 'X', {
       duration,
     })
+  }
+
+  goToUserProfile(user: any) {
+    this.router.navigate(['/app/person-profile', (user.userId || user.id)])
+    // this.router.navigate(['/app/person-profile'], { queryParams: { emailId: } })
+
   }
 
 }

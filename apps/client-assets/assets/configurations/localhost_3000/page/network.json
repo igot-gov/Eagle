@@ -52,7 +52,7 @@
                 "url": "home",
                 "titles": [
                   {
-                    "url": "/page/network",
+                    "url": "/app/network-v2",
                     "title": "Network",
                     "icon": "group"
                   }

@@ -8,6 +8,7 @@ const API_ENDPOINTS = {
   updateConnection: `/apis/protected/v8/network/update/connection`,
   connectionRequests : `/apis/protected/v8/network/connections/requested`,
   connectionEstablished: `/apis/protected/v8/network/connections/established`,
+  getSuggestedUsers: `/apis/protected/v8/network/connections/suggests`,
 }
 
 @Injectable({
@@ -24,6 +25,10 @@ export class NetworkV2Service {
   }
   fetchAllRecommendedUsers(data: NSNetworkDataV2.IRecommendedUserReq) {
     return this.http.post(API_ENDPOINTS.getRecommendedUsers, data)
+  }
+
+  fetchAllSuggestedUsers() {
+    return this.http.get(API_ENDPOINTS.getSuggestedUsers)
   }
 
   createConnection(data: any) {
