@@ -60,11 +60,14 @@ public interface IConnectionService {
      */
     Response findConnections(String rootOrg, String userId, int offset, int limit);
 
-    /**
-     * Find connections which is not established/pending for approval
-     * @param userId
-     * @return
-     */
+    public Response findAllConnectionsIdsByStatus(String rootOrg, String userId, String status, int offset, int limit);
+
+
+        /**
+         * Find connections which is not established/pending for approval
+         * @param userId
+         * @return
+         */
     Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction);
 
     /**

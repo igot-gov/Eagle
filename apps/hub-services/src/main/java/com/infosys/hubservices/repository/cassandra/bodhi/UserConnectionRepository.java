@@ -26,6 +26,9 @@ public interface UserConnectionRepository
 	@Query("SELECT count(user_id) from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
 	public int countByUserAndStatus(String userId, String status);
 
+	@Query("SELECT count(user_id) from user_connection where connection_id=?0 AND connection_status=?1 ALLOW FILTERING;")
+	public int countByConnectionAndStatus(String connectionId, String status);
+
 	Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(String rootOrg, String userId,  Pageable pageable);
 
 	//Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyConnectionId(String rootOrg, String connectionId,  Pageable pageable);

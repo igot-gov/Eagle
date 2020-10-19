@@ -72,19 +72,19 @@ public class ProfileService implements IProfileService {
     @Override
     public Response findProfiles(String rootOrg, String userId, int offset, int limit) {
 
-        Response responseConnections = connectionService.findConnections(rootOrg, userId, offset, limit);
+        Response responseConnections = connectionService.findAllConnectionsIdsByStatus(rootOrg, userId, Constants.Status.APPROVED, offset, limit);
+        List<String> userConnectionIds = (List<String>)responseConnections.get(Constants.ResponseStatus.DATA);
 
-        Response profileRes = getProfiles(responseConnections, null);
+        Response response = findProfiles(userConnectionIds,null);
         if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+            response.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
 
         if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
+            response.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
 
         if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
-            profileRes.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
-
-        return profileRes;
+            response.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
+        return response;
 
     }
 

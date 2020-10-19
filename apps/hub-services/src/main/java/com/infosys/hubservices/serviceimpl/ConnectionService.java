@@ -26,6 +26,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -198,6 +199,51 @@ public class ConnectionService implements IConnectionService {
             }
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.DATA, userConnectionsEstablished);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
+
+        } catch (Exception e){
+            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
+        }
+
+        return response;
+    }
+
+
+    @Override
+    public Response findAllConnectionsIdsByStatus(String rootOrg, String userId, String status, int offset, int limit) {
+        Response response = new Response();
+
+        try{
+            if(userId==null || userId.isEmpty()){
+                throw new BadRequestException(Constants.Message.USER_ID_INVALID);
+            }
+
+            List<String> connectionIds = new ArrayList<>();
+
+            //for direction OUT
+            Pageable pageable = PageRequest.of(offset, limit);
+            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
+            List<UserConnection> userConnectionsEstablishedIn = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equalsIgnoreCase(status)).collect(Collectors.toList());
+            connectionIds.addAll(userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
+
+
+            //for direction IN
+            List<UserConnection> userConnectionsEstablishedOut = userConnectionRepository.findByConnection(rootOrg, userId, status);
+            connectionIds.addAll(userConnectionsEstablishedOut.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList()));
+
+
+            response.put(Constants.ResponseStatus.PAGENO, offset);
+            response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
+
+            response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, status)+userConnectionRepository.countByConnectionAndStatus(userId, status));
+
+            if(connectionIds.isEmpty()){
+                response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
+                response.put(Constants.ResponseStatus.DATA, connectionIds);
+                response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
+            }
+            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
+            response.put(Constants.ResponseStatus.DATA, connectionIds);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         } catch (Exception e){
