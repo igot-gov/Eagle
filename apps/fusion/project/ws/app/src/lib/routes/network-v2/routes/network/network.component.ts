@@ -54,7 +54,7 @@ export class NetworkComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         // Hide loading indicator
         // console.log(event.url)
-        this.bindUrl(event.urlAfterRedirects.replace('/app/network-v2', ''))
+        this.bindUrl(event.urlAfterRedirects.replace('/app/network-v2/', ''))
       }
 
       if (event instanceof NavigationError) {

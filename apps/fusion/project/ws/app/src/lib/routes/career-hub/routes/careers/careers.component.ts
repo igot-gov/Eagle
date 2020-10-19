@@ -17,6 +17,7 @@ export class CareersComponent implements OnInit {
   paginationData!: any
   currentActivePage!: any
   categoryId!: any
+  fetchNewData = false
 
   constructor(
     private route: ActivatedRoute,
@@ -49,30 +50,33 @@ export class CareersComponent implements OnInit {
   }
 
   refreshData(page: any) {
-    if (this.currentFilter === 'timestamp') {
-      this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
-        (data: any) => {
-          this.data = data
-          this.paginationData = data.pagination
-          this.setPagination()
-        },
-        (_err: any) => {
-        })
-    } else {
-      this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
-        (data: any) => {
-          this.data = data
-          this.paginationData = data.pagination
-          this.setPagination()
-        },
-        (_err: any) => {
-        })
+    if (this.fetchNewData) { 
+      if (this.currentFilter === 'timestamp') {
+        this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
+          (data: any) => {
+            this.data = data
+            this.paginationData = data.pagination
+            this.setPagination()
+          },
+          (_err: any) => {
+          })
+      } else {
+        this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
+          (data: any) => {
+            this.data = data
+            this.paginationData = data.pagination
+            this.setPagination()
+          },
+          (_err: any) => {
+          })
+      }
     }
   }
 
   navigateWithPage(page: any) {
     if (page !== this.currentActivePage) {
       this.router.navigate([`/app/careers/home`], { queryParams: { page } })
+      this.fetchNewData = true
     }
   }
 
