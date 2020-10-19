@@ -49,7 +49,7 @@ export class CareersComponent implements OnInit {
   }
 
   refreshData(page: any) {
-    if (this.currentFilter === 'recent') {
+    if (this.currentFilter === 'timestamp') {
       this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
         (data: any) => {
           this.data = data
