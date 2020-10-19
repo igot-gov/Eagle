@@ -179,10 +179,13 @@ public class ConnectionService implements IConnectionService {
                 throw new BadRequestException(Constants.Message.USER_ID_INVALID);
             }
 
+            //for direction OUT
             Pageable pageable = PageRequest.of(offset, limit);
             Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
             List<UserConnection> userConnectionsEstablished = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
 
+            //for direction IN
+            userConnectionsEstablished.addAll(userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.APPROVED));
 
             response.put(Constants.ResponseStatus.PAGENO, offset);
             response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
@@ -225,7 +228,7 @@ public class ConnectionService implements IConnectionService {
             System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
 
             if(direction.equals(Constants.DIRECTION.IN))
-                userConnections = userConnectionRepository.findByConnection(rootOrg, userId);
+                userConnections = userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.PENDING);
 
 
             response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, Constants.Status.PENDING));

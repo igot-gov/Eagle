@@ -30,8 +30,8 @@ public interface UserConnectionRepository
 
 	//Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyConnectionId(String rootOrg, String connectionId,  Pageable pageable);
 
-	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND connection_id=?1 ALLOW FILTERING;")
-	public List<UserConnection> findByConnection(String rootOrg, String connectionId);
+	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND connection_id=?1 AND connection_status=?2 ALLOW FILTERING;")
+	public List<UserConnection> findByConnection(String rootOrg, String connectionId, String status);
 
 	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id IN ?1 ;")
 	public List<UserConnection> findByUsersAndRootOrg(String rootOrg, List<String> userIds);
