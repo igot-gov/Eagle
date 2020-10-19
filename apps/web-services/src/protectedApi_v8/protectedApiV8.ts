@@ -9,6 +9,7 @@ import { competencyApi } from './competency'
 import { conceptGraphApi } from './concept'
 import { contentApi } from './content'
 import { counterApi } from './counter'
+import { deptApi } from './departments'
 import { discussionHubApi } from './discussionHub/discussionHub'
 import { externalEventsApi } from './event-external'
 import { eventsApi } from './events'
@@ -58,3 +59,4 @@ protectedApiV8.use('/attended-content', attendedContentApi)
 protectedApiV8.use('/event-external', externalEventsApi)
 protectedApiV8.use('/network', networkConnectionApi)
 protectedApiV8.use('/competency', competencyApi)
+protectedApiV8.use('/dept', deptApi)
