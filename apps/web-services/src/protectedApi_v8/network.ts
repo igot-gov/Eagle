@@ -205,9 +205,9 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
       return
     }
     const body = {
-      connectionId,
+      connectionId: userId,
       status,
-      userId,
+      userId: connectionId,
     }
     const response = await axios.post(
       apiEndpoints.postConnectionUpdateData,
