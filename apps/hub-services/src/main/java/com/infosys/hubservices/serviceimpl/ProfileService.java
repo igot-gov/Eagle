@@ -26,7 +26,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,14 +57,14 @@ public class ProfileService implements IProfileService {
     public Response findCommonProfile(String rootOrg, String userId, int offset, int limit) {
 
         Response responseConnections = connectionService.findSuggestedConnections(rootOrg, userId, offset, limit);
-        Response profileRes = getProfiles(responseConnections);
+        Response profileRes = getProfiles(responseConnections, null);
         if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
             profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
 
         if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
             profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
 
-        return getProfiles(responseConnections);
+        return profileRes;
 
 
     }
@@ -75,7 +74,7 @@ public class ProfileService implements IProfileService {
 
         Response responseConnections = connectionService.findConnections(rootOrg, userId, offset, limit);
 
-        Response profileRes = getProfiles(responseConnections);
+        Response profileRes = getProfiles(responseConnections, null);
         if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
             profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
 
@@ -92,9 +91,9 @@ public class ProfileService implements IProfileService {
 
 
     @Override
-    public Response findProfileRequested(String rootOrg, String userId, int offset, int limit) {
-        Response responseConnections = connectionService.findConnectionsRequested(rootOrg, userId, offset, limit);
-        Response profileRes = getProfiles(responseConnections);
+    public Response findProfileRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction) {
+        Response responseConnections = connectionService.findConnectionsRequested(rootOrg, userId, offset, limit, direction);
+        Response profileRes = getProfiles(responseConnections, direction);
         if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
             profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
 
@@ -156,13 +155,18 @@ public class ProfileService implements IProfileService {
     }
 
     @Override
-    public Response multiSearchProfiles(String rootOrg, MultiSearch mSearchRequest, String[] sourceFields) {
+    public Response multiSearchProfiles(String rootOrg, String userId, MultiSearch mSearchRequest, String[] sourceFields) {
+
+        List<String> connectionIdsToExclude = connectionService.findUserConnections(rootOrg, userId);
+
+        logger.info("connectionIdsToExclude ->"+connectionIdsToExclude);
         Response response = new Response();
         try{
 
             List<String> tags = new ArrayList<>();
 
             MultiSearchRequest request = new MultiSearchRequest();
+
             for(Search sRequest: mSearchRequest.getSearch()) {
 
                 SearchRequest searchRequest = new SearchRequest();
@@ -172,7 +176,8 @@ public class ProfileService implements IProfileService {
 
                 SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
                 tags.add(sRequest.getField());
-                BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery(sRequest.getField(), sRequest.getValues()));
+                BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery(sRequest.getField(), sRequest.getValues())).mustNot(QueryBuilders.termsQuery("id.keyword", connectionIdsToExclude));
+
                 searchSourceBuilder.query(query);
                 searchRequest.source(searchSourceBuilder);
                 if (sourceFields != null && sourceFields.length>0) {
@@ -222,14 +227,20 @@ public class ProfileService implements IProfileService {
         return response;
     }
 
-    private Response getProfiles(Response connections){
+    private Response getProfiles(Response connections,Constants.DIRECTION direction){
 
         List<UserConnection> userConnections = (List<UserConnection>)connections.get(Constants.ResponseStatus.DATA);
         if(userConnections.isEmpty()){
             return connections;
         }
+        List<String> connectionIds = Collections.emptyList();
+        if(direction.equals(Constants.DIRECTION.IN)){
+            connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
+        } else {
+            connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
+        }
+        System.out.println("con ids "+connectionIds);
 
-        List<String> connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
         return findProfiles(connectionIds,null);
 
     }

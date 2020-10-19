@@ -13,6 +13,9 @@ public class Constants {
 
     public enum STATUS { APPROVED, REJECTED, PENDING }
 
+    public enum DIRECTION { IN, OUT }
+
+
     public static class Status {
         private Status() {
             throw new IllegalStateException(UTIL_CLASS);

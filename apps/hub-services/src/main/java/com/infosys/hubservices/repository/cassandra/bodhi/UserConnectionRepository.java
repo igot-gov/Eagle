@@ -20,13 +20,18 @@ public interface UserConnectionRepository
 		extends CassandraRepository<UserConnection, UserConnectionPrimarykey> {
 
 
-	/*@Query("SELECT * from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
-	public List<UserConnection> findByUserAndStatus(String userId, String status);*/
+	@Query("SELECT count(user_id) from user_connection where roott_org=?0 AND user_id=?1 ;")
+	public int countByUser(String rootOrg, String userId);
 
 	@Query("SELECT count(user_id) from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
 	public int countByUserAndStatus(String userId, String status);
 
 	Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(String rootOrg, String userId,  Pageable pageable);
+
+	//Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyConnectionId(String rootOrg, String connectionId,  Pageable pageable);
+
+	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND connection_id=?1 ALLOW FILTERING;")
+	public List<UserConnection> findByConnection(String rootOrg, String connectionId);
 
 	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id IN ?1 ;")
 	public List<UserConnection> findByUsersAndRootOrg(String rootOrg, List<String> userIds);

@@ -9,6 +9,7 @@ package com.infosys.hubservices.service;
 
 import com.infosys.hubservices.model.MultiSearch;
 import com.infosys.hubservices.model.Response;
+import com.infosys.hubservices.util.Constants;
 
 import java.util.List;
 
@@ -45,10 +46,10 @@ public interface IProfileService {
      * @param userId
      * @return
      */
-    Response findProfileRequested(String rootOrg, String userId, int offset, int limit);
+    Response findProfileRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction);
 
 
-    Response multiSearchProfiles(String rootOrg, MultiSearch multiSearchRequest, String[] sourceFields);
+    Response multiSearchProfiles(String rootOrg, String userId, MultiSearch multiSearchRequest, String[] sourceFields);
 
 
 

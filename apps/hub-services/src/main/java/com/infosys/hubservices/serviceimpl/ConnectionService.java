@@ -26,6 +26,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -204,7 +205,7 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit) {
+    public Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction) {
         Response response = new Response();
 
         try{
@@ -213,11 +214,20 @@ public class ConnectionService implements IConnectionService {
             }
 
             Pageable pageable = PageRequest.of(offset, limit);
-            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
-            List<UserConnection> userConnections = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equals(Constants.Status.PENDING)).collect(Collectors.toList());
 
-            response.put(Constants.ResponseStatus.PAGENO, offset);
-            response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
+            List<UserConnection> userConnections = Collections.emptyList();
+            if(direction.equals(Constants.DIRECTION.OUT)){
+                Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
+                userConnections = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equals(Constants.Status.PENDING)).collect(Collectors.toList());
+                response.put(Constants.ResponseStatus.PAGENO, offset);
+                response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
+            }
+            System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
+
+            if(direction.equals(Constants.DIRECTION.IN))
+                userConnections = userConnectionRepository.findByConnection(rootOrg, userId);
+
+
             response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, Constants.Status.PENDING));
 
             if(userConnections.isEmpty()){
@@ -236,5 +246,14 @@ public class ConnectionService implements IConnectionService {
         return response;
     }
 
+    @Override
+    public List<String> findUserConnections(String rootOrg, String userId) {
 
+        int count = userConnectionRepository.countByUser(rootOrg, userId);
+
+        Pageable pageable = PageRequest.of(0, count);
+        Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId, pageable);
+
+        return sliceUserConnections.getContent().stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
+    }
 }

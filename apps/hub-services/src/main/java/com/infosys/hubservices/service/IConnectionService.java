@@ -10,6 +10,9 @@ package com.infosys.hubservices.service;
 import com.infosys.hubservices.model.ConnectionRequest;
 import com.infosys.hubservices.model.Response;
 import com.infosys.hubservices.model.cassandra.UserConnection;
+import com.infosys.hubservices.util.Constants;
+
+import java.util.List;
 
 public interface IConnectionService {
 
@@ -62,7 +65,7 @@ public interface IConnectionService {
      * @param userId
      * @return
      */
-    Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit);
+    Response findConnectionsRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction);
 
     /**
      * Send notification
@@ -72,6 +75,9 @@ public interface IConnectionService {
      * @param userConnection
      */
     void sendNotification(String rootOrg, String eventId, UserConnection userConnection);
+
+    List<String> findUserConnections(String rootOrg, String userId);
+
 
 
 
