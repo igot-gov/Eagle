@@ -253,6 +253,7 @@ networkConnectionApi.post('/connections/recommended', async (req, res) => {
         ...axiosRequestConfig,
         headers: {
           rootOrg,
+          userId,
         },
       }
     )
