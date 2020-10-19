@@ -21,6 +21,7 @@ import { EditMetaV2Component } from './components/editor/edit-meta-v2/edit-meta-
 import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html-editor.component'
 import { OptionsComponent } from './components/options/options.component'
 import { FormsModule } from '@angular/forms'
+import { CompetencyAddPopUpComponent } from './components/competency-add-popup/competency-add-popup'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FormsModule } from '@angular/forms'
     EditMetaV2Component,
     LiveHtmlEditorComponent,
     OptionsComponent,
+    CompetencyAddPopUpComponent,
   ],
   imports: [
     CommonModule,
@@ -60,8 +62,9 @@ import { FormsModule } from '@angular/forms'
     AuthPickerComponent,
     LiveHtmlEditorComponent,
     OptionsComponent,
+    CompetencyAddPopUpComponent,
   ],
-  entryComponents: [AuthPickerComponent],
+  entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent],
   providers: [UploadService],
 })
 export class EditorSharedModule { }

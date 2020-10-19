@@ -612,6 +612,7 @@
                     <span i18n *ngIf="infoType === 'keyword'">Add relevant tags to your content. Press Enter after each
                       keyword.
                     </span>
+
                   </label>
                   <div class="margin-top-xs flex flex-1">
                     <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
@@ -637,6 +638,10 @@
                         - {{option.name }}
                       </mat-option>
                     </mat-autocomplete>
+                    <button mat-raised-button type="button"
+                      class="text-white ws-mat-primary-background text-white margin-right-m" (click)="start()">
+                      <b class="text-white" i18n>Add Competency</b>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -734,6 +739,10 @@
                 class="text-white ws-mat-primary-background text-white margin-right-m"
                 (click)="data.emit('save');formNext(2)">
                 <b class="text-white" i18n>Save and Proceed</b>
+              </button>
+              <button mat-raised-button type="button"
+                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="start()">
+                <b class="text-white" i18n>Add Competency</b>
               </button>
               <!-- <button mat-raised-button type="button" class="text-white ws-mat-primary-background text-white"
                 (click)="formNext(2)">
@@ -1188,6 +1197,7 @@
                 <button mat-icon-button disabled>
                   <mat-icon> arrow_forward</mat-icon>
                 </button>
+
               </div>
             </mat-card-footer>
           </mat-card>

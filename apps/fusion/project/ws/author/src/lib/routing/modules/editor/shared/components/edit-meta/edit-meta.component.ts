@@ -35,6 +35,7 @@ import { IFormMeta } from './../../../../../../interface/form'
 import { AccessControlService } from './../../../../../../modules/shared/services/access-control.service'
 import { AuthInitService } from './../../../../../../services/init.service'
 import { LoaderService } from './../../../../../../services/loader.service'
+import { CompetencyAddPopUpComponent } from '../competency-add-popup/competency-add-popup'
 import {
   debounceTime,
   distinctUntilChanged,
@@ -329,7 +330,18 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
     )
   }
-
+  start() {
+    const dialogRef = this.dialog.open(CompetencyAddPopUpComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
+  }
   typeCheck() {
     if (this.type) {
       let dataName = ''
