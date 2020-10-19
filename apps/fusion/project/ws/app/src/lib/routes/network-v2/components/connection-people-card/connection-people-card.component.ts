@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { NetworkV2Service } from '../../services/network-v2.service'
 import { MatSnackBar } from '@angular/material'
@@ -11,6 +11,7 @@ import { Router } from '@angular/router'
 })
 export class ConnectionPeopleCardComponent implements OnInit {
   @Input() user!: NSNetworkDataV2.INetworkUser
+  @Output() connection = new EventEmitter<string>()
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   constructor(
@@ -33,6 +34,7 @@ export class ConnectionPeopleCardComponent implements OnInit {
     this.networkV2Service.createConnection(req).subscribe(
       () => {
         this.openSnackbar(this.toastSuccess.nativeElement.value)
+        this.connection.emit('connection-updated')
       },
       () => {
         this.openSnackbar(this.toastError.nativeElement.value)

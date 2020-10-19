@@ -36,7 +36,7 @@
                 </ng-container> -->
                 <ng-container *ngIf="data && data.length">
                     <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
-                        <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"></ws-app-connection-people-card>
+                        <ws-app-connection-people-card class="mr-4 mb-5" [user]="user" (connection)="connectionUpdate($event)"></ws-app-connection-people-card>
                     </ng-container>
                 </ng-container>
                 <h4 class="ws-mat-black60-text" *ngIf="data && data.length <= 0">No users found</h4>

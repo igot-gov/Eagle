@@ -19,7 +19,7 @@ export class ConnectionRequestResolveService implements
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSNetworkDataV2.IConnectionRequest>> {
-    return this.networkV2Service.fetchAllConnectionRequests().pipe(
+    return this.networkV2Service.fetchAllReceivedConnectionRequests().pipe(
       map((data: any) => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )
