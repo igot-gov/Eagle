@@ -7,6 +7,7 @@ const API_ENDPOINTS = {
   createConnection: `/apis/protected/v8/network/add/connection`,
   updateConnection: `/apis/protected/v8/network/update/connection`,
   connectionRequests : `/apis/protected/v8/network/connections/requested`,
+  connectionRequestsReceived : `/apis/protected/v8/network/connections/requests/received`,
   connectionEstablished: `/apis/protected/v8/network/connections/established`,
   getSuggestedUsers: `/apis/protected/v8/network/connections/suggests`,
 }
@@ -23,6 +24,11 @@ export class NetworkV2Service {
   fetchAllConnectionRequests() {
     return this.http.get<NSNetworkDataV2.IConnectionRequest>(API_ENDPOINTS.connectionRequests)
   }
+
+  fetchAllReceivedConnectionRequests() {
+    return this.http.get<NSNetworkDataV2.IConnectionRequest>(API_ENDPOINTS.connectionRequestsReceived)
+  }
+
   fetchAllRecommendedUsers(data: NSNetworkDataV2.IRecommendedUserReq) {
     return this.http.post(API_ENDPOINTS.getRecommendedUsers, data)
   }

@@ -4,6 +4,7 @@ import { GeneralGuard } from '../../../../../src/app/guards/general.guard'
 import { AuthRootComponent } from './components/root/root.component'
 import { ViewerComponent } from './routing/components/viewer/viewer.component'
 import { CreateComponent } from './routing/modules/create/components/create/create.component'
+import { ConfirmationComponent } from './routing/modules/create/components/confirmation/confirmation.component'
 import { AuthHomeComponent } from './routing/modules/home/components/home/home.component'
 import { ContentAndDataReadMultiLangTOCResolver } from './services/content-and-data-read-multi-lang.service'
 import { ContentTOCResolver } from './services/content-resolve.service'
@@ -69,6 +70,10 @@ const routes: Routes = [
       content: ContentTOCResolver,
     },
   },
+  {
+    path: 'confirmation',
+    component: ConfirmationComponent,
+  },
 ]
 
 @NgModule({
@@ -83,4 +88,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class WsAuthorRootRoutingModule {}
+export class WsAuthorRootRoutingModule { }

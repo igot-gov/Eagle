@@ -15,8 +15,6 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
   item: any
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
-      // tslint:disable-next-line:no-console
-      console.log(this.widgetData.content)
       if (this.widgetData.content.hasOwnProperty('totalDuration')) {
         this.item = { name: 'Total Duration', icon: 'av_timer', count: this.widgetData.content.totalDuration.value }
       } else if (this.widgetData.content.hasOwnProperty('contentCount')) {

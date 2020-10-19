@@ -2,7 +2,7 @@
   <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="border-0">
     <div *ngIf="allowAuthor" class="matExpansion flex flex-middle  padding-remove-left create-button">
       <button mat-button class="btn-create margin-remove-bottom mat-h3 font-white ws-mat-primary-border"
-        [routerLink]="'/author/create'" id="ws-auth-root-home-btn-create" name="ws-auth-root-home-btn-create">
+        [routerLink]="'/author/confirmation'" id="ws-auth-root-home-btn-create" name="ws-auth-root-home-btn-create">
         <mat-icon class="font-white margin-bottom-xxs">create</mat-icon>
         <ng-container i18n><span class="font-white margin-left-xs">Create</span></ng-container>
       </button>

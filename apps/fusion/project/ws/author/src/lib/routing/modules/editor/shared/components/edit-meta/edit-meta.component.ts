@@ -344,6 +344,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.allLanguages = this.data1.languages
   }
+
   typeCheck() {
     if (this.type) {
       let dataName = ''

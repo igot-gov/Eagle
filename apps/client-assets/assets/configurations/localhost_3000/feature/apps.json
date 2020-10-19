@@ -289,7 +289,7 @@
       "status": "live",
       "toolTip": "Create",
       "shortName": "Create",
-      "url": "/author/create"
+      "url": "/author/confirmation"
     },
     "feature_feedback": {
       "accessKey": "#",

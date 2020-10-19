@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core'
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core'
 import { Router } from '@angular/router'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { NetworkV2Service } from '../../services/network-v2.service'
@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material'
 })
 export class ConnectionRequestCardComponent implements OnInit {
   @Input() user!: NSNetworkDataV2.INetworkUser
+  @Output() connection = new EventEmitter<string>()
   @ViewChild('toastAccept', { static: true }) toastAccept!: ElementRef<any>
   @ViewChild('toastReject', { static: true }) toastReject!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
@@ -40,11 +41,12 @@ export class ConnectionRequestCardComponent implements OnInit {
     const req = { connectionId: this.user.id, status: action }
     this.networkV2Service.updateConnection(req).subscribe(
       () => {
-        if (action === 'accept') {
+        if (action === 'Approved') {
           this.openSnackbar(this.toastAccept.nativeElement.value)
         } else {
           this.openSnackbar(this.toastReject.nativeElement.value)
         }
+        this.connection.emit('connection-updated')
       },
       () => {
         this.openSnackbar(this.toastError.nativeElement.value)
