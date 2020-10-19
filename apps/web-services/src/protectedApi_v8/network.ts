@@ -232,7 +232,6 @@ networkConnectionApi.post('/connections/recommended', async (req, res) => {
     const rootOrg = req.header('rootorg')
     const userId = extractUserIdFromRequest(req)
 
-
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
