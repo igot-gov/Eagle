@@ -20,7 +20,7 @@ public interface UserConnectionRepository
 		extends CassandraRepository<UserConnection, UserConnectionPrimarykey> {
 
 
-	@Query("SELECT count(user_id) from user_connection where roott_org=?0 AND user_id=?1 ;")
+	@Query("SELECT count(user_id) from user_connection where root_org=?0 AND user_id=?1 ;")
 	public int countByUser(String rootOrg, String userId);
 
 	@Query("SELECT count(user_id) from user_connection where user_id=?0 AND connection_status=?1 ALLOW FILTERING;")
