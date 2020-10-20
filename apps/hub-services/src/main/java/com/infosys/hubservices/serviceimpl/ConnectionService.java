@@ -300,7 +300,7 @@ public class ConnectionService implements IConnectionService {
 
         int count = userConnectionRepository.countByUser(rootOrg, userId);
 
-        Pageable pageable = PageRequest.of(0, count);
+        Pageable pageable = PageRequest.of(0, count==0? count+1 : count);
         Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId, pageable);
 
         return sliceUserConnections.getContent().stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
