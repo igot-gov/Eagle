@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
 import { NSCompetencie } from '../../models/competencies.model'
 // import { Router } from '@angular/router'
 @Component({
@@ -14,16 +14,18 @@ import { NSCompetencie } from '../../models/competencies.model'
 export class CompetenceCardComponent implements OnInit {
   @Input()
   data!: NSCompetencie.ICompetencie
-  constructor(
-    // private router: Router,
-    // private snackBar: MatSnackBar,
-    // private discussionSvc: DiscussService,
-    // private configSvc: ConfigurationsService,
-  ) { }
+  @Input()
+  isSelected!: boolean
 
+  @Output() setSelected = new EventEmitter<string>()
+  @Output() addComp = new EventEmitter<string>()
+  constructor() { }
   ngOnInit() { }
-
-  getDiscussion() {
-    // this.router.navigate([`/app/discuss/home/${this.category.cid}`])
+  setSelectedCompetency() {
+    this.isSelected = true
+    this.setSelected.emit(this.data.id)
+  }
+  add() {
+    this.addComp.emit(this.data.id)
   }
 }

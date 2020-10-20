@@ -113,6 +113,19 @@
   }
 }
 
+.tag {
+  display: flex;
+  width: auto;
+  min-width: max-content;
+  height: $size-l;
+  justify-content: space-between;
+  margin: $size-l $size-m;
+  align-items: center;
+  text-transform: capitalize;
+  padding: 5px 15px;
+  // border-radius: 20px 5px 5px 20px;
+}
+
 .custom-content {
   flex-direction: column;
   margin-left: $size-m;

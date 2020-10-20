@@ -198,7 +198,7 @@
     .ws-mat-default-text {
       color: $colorAccentDark;
     }
-    
+
 
     .ws-mat-primary-lite-background-important {
       background-color: $colorPrimaryDark !important;
@@ -235,6 +235,11 @@
       .mat-caption {
         color: $colorText;
       }
+    }
+
+    .mat-copmetence {
+      background-color: #ededed;
+      color: black !important;
     }
   }
 
@@ -277,6 +282,11 @@
     .ws-mat-auth-exp {
       background-color: #003f5c;
       color: #ededed !important;
+    }
+
+    .mat-copmetence {
+      background-color: rgba(0, 0, 0, 0.8);
+      color: rgba(255, 255, 255, 0.7) !important;
     }
 
     .mat-form-field.mat-focused .mat-form-field-label {
@@ -475,7 +485,7 @@
     .ws-mat-black60-text {
       color: $colorBlack60;
     }
-    
+
 
     .ws-mat-lighter-grey-text {
       color: $colorLighterGrey;
