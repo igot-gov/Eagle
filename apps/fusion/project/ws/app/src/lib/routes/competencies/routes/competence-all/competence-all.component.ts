@@ -64,7 +64,7 @@ export class CompetenceAllComponent implements OnInit {
   }
 
   reset() {
-    this.searchKey = ""
+    this.searchKey = '
     this.queryControl.setValue('')
     this.selectedId = ''
     this.refreshData()
@@ -100,12 +100,12 @@ export class CompetenceAllComponent implements OnInit {
   }
   refreshData() {
     this.searchJson = [
-      { type: "COMPETENCY", field: "name", keyword: this.searchKey },
-      { type: "COMPETENCY", field: "status", keyword: "VERIFIED" }
+      { type: 'COMPETENCY', field: 'name', keyword: this.searchKey },
+      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' }
     ]
 
     const searchObj = {
-      "searches": this.searchJson
+      'searches': this.searchJson
     }
     this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
       if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
