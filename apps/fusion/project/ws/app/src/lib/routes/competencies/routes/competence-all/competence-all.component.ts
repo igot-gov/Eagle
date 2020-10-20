@@ -26,9 +26,9 @@ export class CompetenceAllComponent implements OnInit {
   tabsData: NSCompetencie.ICompetenciesTab[]
   allCompetencies!: NSCompetencie.ICompetencie[]
   searchJson!: NSCompetencie.ISearch[]
-  searchKey: string = ''
+  searchKey = ''
   queryControl = new FormControl('')
-  selectedId: string = ''
+  selectedId = ''
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -51,9 +51,6 @@ export class CompetenceAllComponent implements OnInit {
         this.allCompetencies = reponse.responseData
       }
     })
-  }
-  ngAfterViewInit(): void {
-    // throw new Error('Method not implemented.')
   }
 
   updateQuery(key: string) {
@@ -85,13 +82,10 @@ export class CompetenceAllComponent implements OnInit {
   }
   resetcomp() {
     let data: any[] = []
-    let allCompetencies = this.allCompetencies
+    const allCompetencies = this.allCompetencies
     if (this.myCompetencies && this.myCompetencies.length > 0) {
-      data = _.flatten(_.map(this.myCompetencies, function (item: NSCompetencie.ICompetencie) {
-        return _.filter(allCompetencies, item)
-      }.bind(this)))
-
-      this.allCompetencies = this.allCompetencies.filter(function (obj) {
+      data = _.flatten(_.map(this.myCompetencies, (item: NSCompetencie.ICompetencie) => _.filter(allCompetencies, item)))
+      this.allCompetencies = this.allCompetencies.filter(obj => {
         return data.indexOf(obj) === -1
       })
     } else {
@@ -101,20 +95,19 @@ export class CompetenceAllComponent implements OnInit {
   refreshData() {
     this.searchJson = [
       { type: 'COMPETENCY', field: 'name', keyword: this.searchKey },
-      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' }
+      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' },
     ]
-
     const searchObj = {
-      'searches': this.searchJson
+      searches: this.searchJson,
     }
     this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
       if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
         let data = reponse.responseData
         if (this.myCompetencies && this.myCompetencies.length > 0) {
-          data = _.flatten(_.map(this.myCompetencies, function (item) {
+          data = _.flatten(_.map(this.myCompetencies, item => {
             return _.filter(reponse.responseData, item)
           }))
-          this.allCompetencies = reponse.responseData.filter(function (obj) {
+          this.allCompetencies = reponse.responseData.filter(obj => {
             return data.indexOf(obj) === -1
           })
         } else {
