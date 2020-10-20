@@ -9,7 +9,7 @@ export interface IDialogData {
   name: string
 }
 @Component({
-  selector: 'app-discuss-start',
+  selector: 'ws-auth-competency-add-popup',
   templateUrl: './competency-add-popup.html',
   styleUrls: ['./competency-add-popup.scss'],
 })

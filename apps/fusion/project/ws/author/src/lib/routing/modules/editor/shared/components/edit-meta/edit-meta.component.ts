@@ -121,6 +121,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('regionView', { static: false }) regionView!: ElementRef
   @ViewChild('accessPathsView', { static: false }) accessPathsView!: ElementRef
   @ViewChild('keywordsSearch', { static: true }) keywordsSearch!: ElementRef<any>
+  @ViewChild('competencySearch', { static: true }) competencySearch!: ElementRef<any>
 
   timer: any
 
@@ -375,7 +376,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   optionSelected(keyword: string) {
     this.keywordsCtrl.setValue(' ')
-    // this.keywordsSearch.nativeElement.blur()
+    this.keywordsSearch.nativeElement.blur()
     if (keyword && keyword.length) {
       const value = this.contentForm.controls.keywords.value || []
       if (value.indexOf(keyword) === -1) {
@@ -386,6 +387,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   optionSelectedCompetency(competencies: any) {
     this.competencyCtrl.setValue(' ')
+    this.competencySearch.nativeElement.blur()
+
     if (competencies) {
       const value = this.contentForm.controls.competencies.value || []
       const tempObj = {

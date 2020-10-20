@@ -704,6 +704,67 @@
     },
     "type": "string"
   },
+  "competencies": {
+    "mandatoryFor": {},
+    "notMandatoryFor": {},
+    "showFor": {},
+    "notDisabledFor": {},
+    "disabledFor": {},
+    "notShowFor": {},
+    "defaultValue": {
+      "Course": [
+        {
+          "condition": {
+            "contentType": [
+              "Course"
+            ]
+          },
+          "value": ""
+        }
+      ],
+      "Resource": [
+        {
+          "condition": {
+            "contentType": [
+              "Resource"
+            ]
+          },
+          "value": ""
+        }
+      ],
+      "Knowledge Board": [
+        {
+          "condition": {
+            "contentType": [
+              "Knowledge Board"
+            ]
+          },
+          "value": ""
+        }
+      ],
+      "Knowledge Artifact": [
+        {
+          "condition": {
+            "contentType": [
+              "Knowledge Artifact"
+            ]
+          },
+          "value": ""
+        }
+      ],
+      "Channel": [
+        {
+          "condition": {
+            "contentType": [
+              "Channel"
+            ]
+          },
+          "value": ""
+        }
+      ]
+    },
+    "type": "string"
+  },
   "certificationList": {
     "mandatoryFor": {},
     "notMandatoryFor": {},
