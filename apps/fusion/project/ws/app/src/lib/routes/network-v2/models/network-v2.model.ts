@@ -26,6 +26,14 @@ export namespace NSNetworkDataV2 {
         ]
     }
 
+    export interface IConnectionRequestResponse {
+        size?: number,
+        offset: number,
+        result: {
+            data: INetworkUser[]
+        }
+    }
+
     export interface IConnectionRequest {
         employmentDetails: IEmploymentDetails,
         personalDetails: IPersonalDetails,
@@ -38,6 +46,16 @@ export namespace NSNetworkDataV2 {
         personalDetails: IPersonalDetails,
         id: string,
         photo: string | null | undefined
+    }
+
+    export interface IAutocompleteUser {
+        department_name: string,
+        email: string,
+        first_name: string,
+        kid: string,
+        last_name: string,
+        rank: number,
+        wid: string
     }
 
     export interface IRecommendedUserResponse {

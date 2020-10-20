@@ -41,6 +41,7 @@ import { NetworkMyMdoComponent } from './routes/network-my-mdo/network-my-mdo.co
 import { NetworkRecommendedComponent } from './routes/network-recommended/network-recommended.component'
 import { NetworkConnectionRequestsComponent } from './routes/network-connection-requests/network-connection-requests.component'
 import { ConnectionRequestResolveService } from './resolvers/connection-request-resolve.service'
+import { ConnectionSearchCardComponent } from './components/connection-search-card/connection-search-card.component'
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ConnectionRequestResolveService } from './resolvers/connection-request-
     NetworkMyMdoComponent,
     NetworkRecommendedComponent,
     NetworkConnectionRequestsComponent,
+    ConnectionSearchCardComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,33 @@
+<div class="flex flex-col item-center">
+    <div class="flex flex-col card-container">
+        <div class="photo-container flex items-center justify-center cursor-pointer" (click)="goToUserProfile(user)">
+            <ws-widget-avatar-photo [name]="getUseravatarName()" 
+            [randomColor]="true" size="m">
+            </ws-widget-avatar-photo>
+        </div>
+        <div class="name-container flex flex-col width-expand">
+            <div class="name ws-mat-black-text cursor-pointer" (click)="goToUserProfile(user)">
+                {{user?.first_name}} {{user?.last_name}}
+            </div>
+            <div class="designation ws-mat-black60-text">
+                {{user?.department_name}}
+            </div>
+        </div>
+        <div class="action-container flex items-center justify-center">
+            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
+                (click)="connetToUser()" *ngIf="!user?.requestSent">
+                <span class="" i18n>Connect</span>
+            </button>
+            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
+                (click)="connetToUser()" disabled *ngIf="user?.requestSent">
+                <span class="" i18n>Connection sent</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" i18-value i18-aria-value aria-value="Connection sent"
+  value="Connection sent successfully!" #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="Connection failed"
+  value="Something went wrong, please try again later!" #toastError />
+

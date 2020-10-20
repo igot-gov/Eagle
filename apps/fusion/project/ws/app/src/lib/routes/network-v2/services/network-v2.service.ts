@@ -22,7 +22,7 @@ export class NetworkV2Service {
   }
 
   fetchAllConnectionRequests() {
-    return this.http.get<NSNetworkDataV2.IConnectionRequest>(API_ENDPOINTS.connectionRequests)
+    return this.http.get<NSNetworkDataV2.IConnectionRequestResponse>(API_ENDPOINTS.connectionRequests)
   }
 
   fetchAllReceivedConnectionRequests() {
