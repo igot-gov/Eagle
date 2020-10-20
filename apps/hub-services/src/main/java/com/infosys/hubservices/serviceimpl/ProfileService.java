@@ -7,6 +7,7 @@
 
 package com.infosys.hubservices.serviceimpl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.model.MultiSearch;
 import com.infosys.hubservices.model.Response;
@@ -50,6 +51,9 @@ public class ProfileService implements IProfileService {
 
     @Autowired
     ConnectionService connectionService;
+
+    @Autowired
+    ObjectMapper mapper;
 
 
 
@@ -162,6 +166,7 @@ public class ProfileService implements IProfileService {
         logger.info("connectionIdsToExclude ->"+connectionIdsToExclude);
         Response response = new Response();
         try{
+            logger.info("multisearch request -> "+mapper.writeValueAsString(mSearchRequest));
 
             List<String> tags = new ArrayList<>();
 
@@ -201,6 +206,7 @@ public class ProfileService implements IProfileService {
             for(int i=0; i< multiSearchResponse.getResponses().length; i++){
                 SearchResponse searchResponse = multiSearchResponse.getResponses()[i].getResponse();
 
+                logger.info("multi search searchResponse->"+searchResponse);
                 Map<String, Object> resObjects = new HashMap<>();
                 List<Object> results = new ArrayList<>();
                 for (SearchHit hit : searchResponse.getHits()) {
