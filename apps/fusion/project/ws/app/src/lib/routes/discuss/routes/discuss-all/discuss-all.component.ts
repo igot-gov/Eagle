@@ -28,6 +28,7 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
   pager = {}
   paginationData!: any
   currentActivePage!: any
+  fetchNewData = false
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -94,10 +95,12 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
   }
 
   refreshData(page: any) {
-    if (this.currentFilter === 'recent') {
-      this.getRecentData(page)
-    } else {
-      this.fillPopular(page)
+    if (this.fetchNewData) {
+      if (this.currentFilter === 'recent') {
+        this.getRecentData(page)
+      } else {
+        this.fillPopular(page)
+      }
     }
   }
 
@@ -124,6 +127,7 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
   navigateWithPage(page: any) {
     if (page !== this.currentActivePage) {
       this.router.navigate([`/app/discuss/home`], { queryParams: { page } })
+      this.fetchNewData = true
     }
   }
 }

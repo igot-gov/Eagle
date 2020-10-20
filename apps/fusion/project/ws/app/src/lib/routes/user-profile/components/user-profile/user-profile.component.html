@@ -16,11 +16,11 @@
                       <div class="profile-img-wrapper mt-10">
                         <mat-icon class="person" *ngIf="!photoUrl">person</mat-icon>
                         <img class="photo" *ngIf="photoUrl" [src]="photoUrl">
-                        <div class="camera-wrapper" (click)="uploadProfilePic.click()">
-                          <label for="profilePic">
+                        <div class="camera-wrapper cursor-pointer" (click)="uploadProfilePic.click(); $event.stopPropagation()">
+                          <label for="profilePic" class="cursor-pointer" (click)="$event.stopPropagation()">
                             <mat-icon class="camera">photo_camera</mat-icon>
                           </label>
-                          <input id="profilePic" type="file" #uploadProfilePic
+                          <input id="profilePic" type="file" #uploadProfilePic class="hidden"
                             (change)="uploadProfileImg($event.target.files[0]); uploadProfilePic.value = null"
                             style="display: none;" [accept]="imageTypes.toString()" />
                         </div>

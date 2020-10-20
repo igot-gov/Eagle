@@ -7,26 +7,71 @@
     </div> -->
     <div class="flex-3">
       <div class="w-full pt-10  px-2">
+        <mat-card class="no-competency-card" *ngIf="myCompetencies && myCompetencies.length === 0">
+          <mat-card-header>
+            <mat-card-title>
+              <!-- <h2 [innerHTML]="category.name"></h2> -->
+              You have’t added any competencies yet!
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="flex flex-1 custom-content">
+            <h5>What do you think are your competencies? Are you not sure how to write your competencies? </h5>
+            <h5>It is not a bad idea to learn from what others did.</h5>
+            <div class="mb-2 view-more text-white others">
+              <a mat-button>
+                <span i18n>{{'Explore what others have added'}}</span>
+              </a>
+            </div>
+          </mat-card-content>
+          <!-- <mat-card-footer class="flex flex-1 custom margin-0">
+
+        </mat-card-footer> -->
+        </mat-card>
+        <mat-card class="competency-card" *ngIf="myCompetencies && myCompetencies.length > 0">
+          <mat-card-header>
+            <mat-card-title>
+              My comptencies
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="flex flex-1 flex-wrap">
+            <span>&nbsp;</span>
+            <div class="tag mat-copmetence" *ngFor="let item of myCompetencies">
+              <span>{{item.name}}</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="w-full pt-10  px-2">
         <div class="flex flex-1 flex-column margin-fix mb-2">
           <h2 class="f-medium">Popular competencies </h2>
         </div>
-        <div class="flex flex-1 flex-column margin-fix search">
-          <!-- <form (submit)="updateQuery(queryControl.value)">
+        <div class="flex flex-1 flex-row margin-fix search">
+          <form (submit)="updateQuery(queryControl.value)" class="flex-1">
             <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
               <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
-              <input type="search" #searchInput class="ml-2" i18n-placeholder="search content" [placeholder]="'Search'"
-                i18-aria-label aria-label="Query" matInput [formControl]="queryControl" accesskey="F" />
+              <input type="search" #searchInput class="ml-2 flex-1" i18n-placeholder="search content"
+                [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
+                accesskey="F" />
             </mat-form-field>
-          </form> -->
+          </form>
+          <!-- <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important"> -->
+          <button class="margin-top-s" mat-icon-button (click)="resetSearch()">
+            <mat-icon>refresh</mat-icon>
+          </button>
+          <!-- </div> -->
         </div>
 
         <div class="flex flex-wrap margin-fix">
-          <!-- <ng-container
-            *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;">
-            <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
-              <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
+          <ng-container *ngFor="let comp of allCompetencies">
+            <!-- <div class="flex sm:w-full md:w-1/3 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}"> -->
+            <!-- <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card> -->
+            <div class="flex sm:w-full md:w-1/3">
+              <app-competence-card [data]="comp" [isSelected]="comp.id === selectedId"
+                (setSelected)="setSelectedCompetency($event)" (addComp)="addCompetency($event)">
+              </app-competence-card>
             </div>
-          </ng-container> -->
+          </ng-container>
+          <!-- <app-competence-card></app-competence-card> -->
         </div>
         <div class="flex flex-1 flex-column margin-fix pagination-container">
           <!-- <ws-app-careers-pagination [pager]="pager" (changePage)="navigateWithPage($event)">

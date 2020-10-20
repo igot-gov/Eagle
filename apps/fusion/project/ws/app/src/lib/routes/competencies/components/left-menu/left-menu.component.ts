@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { NSCompetenciesData } from '../../models/competencies.model'
+import { NSCompetencie } from '../../models/competencies.model'
 
 @Component({
   selector: 'app-competence-left-menu',
@@ -10,7 +10,7 @@ import { NSCompetenciesData } from '../../models/competencies.model'
 export class LeftMenuComponent implements OnInit, OnDestroy {
 
   @Input()
-  tabsData!: NSCompetenciesData.ICompetenciesTab
+  tabsData!: NSCompetencie.ICompetenciesTab
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {

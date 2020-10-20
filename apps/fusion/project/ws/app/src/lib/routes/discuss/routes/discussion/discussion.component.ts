@@ -31,6 +31,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   pager = {}
   paginationData!: any
   currentActivePage!: any
+  fetchNewData = false
   constructor(
     private formBuilder: FormBuilder,
     private loader: LoaderService,
@@ -48,11 +49,15 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.setPagination()
     this.route.params.subscribe(params => {
       this.topicId = params.topicId
-      this.getTIDData(this.currentActivePage)
+       if (this.fetchNewData) {
+        this.getTIDData(this.currentActivePage)
+      }
     })
     this.route.queryParams.subscribe(x => {
-      this.currentActivePage = x.page || 1
-      this.refreshPostData(this.currentActivePage)
+      if (x.page) {
+        this.currentActivePage = x.page || 1
+        this.refreshPostData(this.currentActivePage)
+      }
     })
     this.postAnswerForm = this.formBuilder.group({
       answer: [],
@@ -247,6 +252,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   navigateWithPage(page: any) {
     if (page !== this.currentActivePage) {
       this.router.navigate([`/app/discuss/home/${this.topicId}`], { queryParams: { page } })
+      this.fetchNewData = true
     }
   }
 

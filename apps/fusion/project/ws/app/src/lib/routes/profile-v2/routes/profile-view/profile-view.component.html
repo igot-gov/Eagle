@@ -78,14 +78,12 @@
           <mat-card-content>
             <div class="flex flex-1">
               <span class="mat-h3 font-medium flex-1">{{'Discussions'}}</span>
-              <!-- <span class="mat-h3 font-medium">{{'Discussions'}}</span> -->
-              <div
+              <!-- <div
                 class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
                 <a mat-button [routerLink]="'/app/discuss/my-discussions'">
-                  <!-- <mat-icon class="margin-right-xs">edit</mat-icon> -->
-                  <span i18n>{{'Go to discussion profile'}}</span>
+                   <span i18n>{{'Go to discussion profile'}}</span>
                 </a>
-              </div>
+              </div> -->
             </div>
             <ng-container>
               <mat-card class="recent-tabs">
@@ -113,7 +111,7 @@
               </ng-container>
             </ng-container>
             <ng-container *ngIf="!(discussionList && discussionList.length > 0)">
-              <mat-card class="mat-card margin-bottom-l">
+              <mat-card class="no-shadow mat-card margin-bottom-l">
                 <mat-card-header>
                   <mat-card-title>No Data</mat-card-title>
                 </mat-card-header>

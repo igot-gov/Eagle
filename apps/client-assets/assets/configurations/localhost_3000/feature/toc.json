@@ -19,6 +19,10 @@
       "displayName": "Region",
       "enabled": true
     },
+    "license": {
+      "displayName": "License",
+      "enabled": true
+    },
     "locale": {
       "displayName": "Locale",
       "enabled": true

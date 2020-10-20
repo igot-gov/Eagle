@@ -13,6 +13,7 @@ const API_END_POINTS = {
   recommendedTopics: `${PROTECTED_SLAG_V8}/user/topics/suggested`,
   autocompleteTopics: `${PROTECTED_SLAG_V8}/user/topics/autocomplete`,
   competencyTopics: `${PROTECTED_SLAG_V8}/competency/searchCompetency`,
+  addCompetency: `${PROTECTED_SLAG_V8}/competency/addCompetency`,
 }
 @Injectable({
   providedIn: 'root',
@@ -110,6 +111,10 @@ export class InterestService {
       .pipe(
         map(data => data.responseData.map((item: { name: any }) => item))
       )
+  }
+
+  createPost(data: any) {
+    return this.http.post(`${API_END_POINTS.addCompetency}`, data)
   }
 
 }

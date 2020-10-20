@@ -2,15 +2,22 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
-.category-card {
+.competency-card {
   flex: 1;
   height: auto;
-  max-width: 481px;
-  width: max-content;
+  min-width: 346px;
+  min-width: 346px;
+  height: fit-content;
+  min-height: -webkit-fill-available;
 
+  // width: max-content;
   @include breakpoint-xs {
     width: auto;
   }
+}
+
+.font-medium {
+  font-weight: 500 !important;
 }
 
 .dot:before {
@@ -55,19 +62,29 @@
 }
 
 .custom {
-  flex-direction: row;
+  flex-direction: column;
 
   @include breakpoint-xs {
     flex-direction: column;
-    // margin: 0 24px 0 24px;
-
   }
+}
 
-  // @include breakpoint-s {
-  //   flex-direction: column;
-  //   margin: 0 24px 0 24px;
+.custom-reverse {
+  flex-direction: column;
 
-  // }
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.add-comp {
+  right: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  height: 48px;
+  width: 48px;
+  background: rgb(29, 137, 35) !important;
 }
 
 .margin-0 {

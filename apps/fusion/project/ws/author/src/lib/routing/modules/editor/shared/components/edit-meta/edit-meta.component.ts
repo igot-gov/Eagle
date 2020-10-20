@@ -36,6 +36,7 @@ import { IFormMeta } from './../../../../../../interface/form'
 import { AccessControlService } from './../../../../../../modules/shared/services/access-control.service'
 import { AuthInitService } from './../../../../../../services/init.service'
 import { LoaderService } from './../../../../../../services/loader.service'
+import { CompetencyAddPopUpComponent } from '../competency-add-popup/competency-add-popup'
 import {
   debounceTime,
   distinctUntilChanged,
@@ -132,6 +133,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('regionView', { static: false }) regionView!: ElementRef
   @ViewChild('accessPathsView', { static: false }) accessPathsView!: ElementRef
   @ViewChild('keywordsSearch', { static: true }) keywordsSearch!: ElementRef<any>
+  @ViewChild('competencySearch', { static: true }) competencySearch!: ElementRef<any>
 
   timer: any
 
@@ -344,7 +346,18 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.allLanguages = this.data1.languages
   }
-
+  start() {
+    const dialogRef = this.dialog.open(CompetencyAddPopUpComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
+  }
   typeCheck() {
     if (this.type) {
       let dataName = ''
@@ -378,7 +391,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   optionSelected(keyword: string) {
     this.keywordsCtrl.setValue(' ')
-    // this.keywordsSearch.nativeElement.blur()
+    this.keywordsSearch.nativeElement.blur()
     if (keyword && keyword.length) {
       const value = this.contentForm.controls.keywords.value || []
       if (value.indexOf(keyword) === -1) {
@@ -389,6 +402,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   optionSelectedCompetency(competencies: any) {
     this.competencyCtrl.setValue(' ')
+    this.competencySearch.nativeElement.blur()
+
     if (competencies) {
       const value = this.contentForm.controls.competencies.value || []
       const tempObj = {
@@ -1175,6 +1190,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       learningMode: [],
       learningObjective: [],
       learningTrack: [],
+      license: [],
       locale: [],
       mimeType: [],
       name: [],

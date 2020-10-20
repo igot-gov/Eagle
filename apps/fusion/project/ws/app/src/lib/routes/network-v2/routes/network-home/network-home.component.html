@@ -1,4 +1,53 @@
 <div class="flex width-expand flex-column">
+  <div class="flex flex-1 mb-4 search">
+    <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
+      <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+      <!-- <mat-placeholder>Search user</mat-placeholder> -->
+      <!-- <input [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput type="search"> -->
+      <input type="search" #searchInput class="ml-2"  [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" 
+      matInput type="search" [placeholder]="'Search user'"/>
+    </mat-form-field>
+  </div>
+  <div class="flex flex-1 mb-4">
+    <mat-expansion-panel class="w-full mat-elevation-z" [expanded]="true" hideToggle *ngIf="!enableFeature">
+      <mat-expansion-panel-header>
+        <mat-panel-title i18n>User Search</mat-panel-title>
+
+      </mat-expansion-panel-header>
+      <ng-template matExpansionPanelContent>
+        <div>
+          <h4 class="w-full text-center ws-mat-black60-text" *ngIf="searchResultUserArray.length === 0 && !this.searchSpinner" i18n>
+            No search results found!
+          </h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
+            <ng-container *ngFor="let user of searchResultUserArray">
+              <ws-app-connection-search-card class="mr-4 mb-5" [user]="user" (connection)="connectionUpdateSearchCard($event)"></ws-app-connection-search-card>
+            </ng-container>
+          </div>
+        </div>
+        <div class="text-center">
+          <mat-spinner *ngIf="searchSpinner" [strokeWidth]="3" [diameter]="40" class="display-inline-block">
+          </mat-spinner>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+    <!-- <mat-card class="flex-1 remove-botton-radius" *ngIf="!enableFeature">
+      <mat-card-header class="flex items-baseline margin-fix">
+        <mat-card-title class="margin-l-0 f-medium  flex-1">
+          <span class="width-expand">
+            <h2>User search</h2>
+          </span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap">
+        <ng-container *ngFor="let user of searchResultUserArray">
+          <ws-app-connection-search-card class="mr-4 mb-5" [user]="user" (connection)="connectionUpdatePeopleCard($event)"></ws-app-connection-search-card>
+        </ng-container>
+      </mat-card-content>
+      <mat-card-actions align="end">
+      </mat-card-actions>
+    </mat-card> -->
+  </div>
   <div class="flex flex-1 mb-4">
     <mat-card class="flex-1 remove-botton-radius">
       <mat-card-header>

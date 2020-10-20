@@ -53,5 +53,9 @@
         </ws-widget-avatar-photo>
       </div>
     </mat-card-content>
+    <mat-card-content
+      *ngIf="badges.earned && badges.earned.length === 0 && badges.recent && badges.recent.length === 0 ">
+      <h5>No Information Available</h5>
+    </mat-card-content>
   </mat-card>
 </div>

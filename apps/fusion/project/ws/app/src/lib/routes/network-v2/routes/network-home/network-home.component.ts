@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { NetworkV2Service } from '../../services/network-v2.service'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { CardNetWorkService } from '@ws-widget/collection/src/lib/card-network/card-network.service'
 
 @Component({
   selector: 'ws-app-network-home',
@@ -16,15 +17,22 @@ export class NetworkHomeComponent implements OnInit {
   tabsData: NSNetworkDataV2.IProfileTab[]
   recommendedUsers!: NSNetworkDataV2.IRecommendedUserResult
   connectionRequests!: any
+  enableFeature = true
+  nameFilter = ''
+  searchSpinner = false
+  searchResultUserArray: any = []
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private networkV2Service: NetworkV2Service,
     private configSvc: ConfigurationsService,
+    private cardNetworkService: CardNetWorkService,
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
-    this.recommendedUsers = this.route.snapshot.data.recommendedUsers.data.result.data.
-    find((item: any) => item.field === 'employmentDetails.departmentName').results
+    if (this.route.snapshot.data.recommendedUsers && this.route.snapshot.data.recommendedUsers.data.result) {
+      this.recommendedUsers = this.route.snapshot.data.recommendedUsers.data.result.data.
+      find((item: any) => item.field === 'employmentDetails.departmentName').results
+    }
     this.connectionRequests = this.route.snapshot.data.connectionRequests.data.result.data
   }
 
@@ -48,6 +56,12 @@ export class NetworkHomeComponent implements OnInit {
         (_err: any) => {
           // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
         })
+    }
+  }
+
+  connectionUpdateSearchCard(event: any) {
+    if (event === 'connection-updated') {
+      this.searchUser()
     }
   }
 
@@ -77,6 +91,45 @@ export class NetworkHomeComponent implements OnInit {
           // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
         })
     }
+  }
+
+  searchUser() {
+
+    if (this.nameFilter.length === 0) {
+      this.enableFeature = true
+    } else {
+      this.searchSpinner = true
+      this.enableFeature = false
+      this.getSearchResult()
+    }
+
+  }
+
+  getSearchResult() {
+    this.cardNetworkService.fetchSearchUserInfo(this.nameFilter.trim()).subscribe(data => {
+      this.searchResultUserArray = data
+      this.networkV2Service.fetchAllConnectionRequests().subscribe(requests => {
+        if (requests && requests.result && requests.result.data) {
+          requests.result.data.map(user => {
+            if (user.id) {
+              this.searchResultUserArray.map((autoCompleteUser: any) => {
+                if (autoCompleteUser.wid === user.id) {
+                  autoCompleteUser['requestSent'] = true
+                }
+              })
+            }
+            this.searchSpinner = false
+          })
+        }
+      })
+      this.searchResultUserArray.splice(this.searchResultUserArray.findIndex((el: any) => {
+        if (this.configSvc.userProfile && this.configSvc.userProfile.userId) {
+          return el.wid === this.configSvc.userProfile.userId
+        }
+        return -1
+      // tslint:disable-next-line: align
+      }), 1)
+    })
   }
 
 }
