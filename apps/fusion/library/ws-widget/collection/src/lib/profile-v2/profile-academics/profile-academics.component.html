@@ -6,7 +6,7 @@
       </span>
       <!-- {{widgetData | json}} -->
       <ng-container *ngFor="let academic of widgetData.data | orderBy:'yearOfPassing':'desc'">
-        <mat-card class="mt-2 mat-list-item dark-card">
+        <mat-card class="no-shadow mt-2 mat-list-item dark-card">
           <div class="flex flex-1 mobile-margin margin-f">
             <span class="flex-1 mat-h3 font-medium"> {{academic.nameOfQualification || academic.type.replace("_"," ")}}
             </span>
