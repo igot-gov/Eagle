@@ -86,8 +86,6 @@ export class FeaturesComponent implements OnInit, OnDestroy {
       .subscribe((query: string) => {
         this.router.navigate([], { queryParams: { q: query || null } })
         this.featureGroups = this.filteredFeatures(query)
-        // tslint:disable-next-line:no-console
-        console.log(this.featureGroups)
       })
     this.configurationSvc.tourGuideNotifier.subscribe(canShow => {
       if (
