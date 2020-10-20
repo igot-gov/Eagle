@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common'
 import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
 import { CompetenceComponent } from './routes/competence-home/competence.component'
 import { CompetencieRoutingModule } from './competence.rounting.module'
-import { CategoryCardComponent } from './components/competencies-card/category-card.component'
+import { CompetenceCardComponent } from './components/competencies-card/competencies-card.component'
 import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 import { RightMenuComponent } from './components/right-menu/right-menu.component'
 // import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
@@ -35,7 +35,7 @@ import { CompetenceAllComponent } from './routes/competence-all/competence-all.c
 
 @NgModule({
   declarations: [
-    CategoryCardComponent,
+    CompetenceCardComponent,
     CompetenceComponent,
     LeftMenuComponent,
     RightMenuComponent,

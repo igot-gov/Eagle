@@ -1,9 +1,9 @@
 
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
-import { NSCompetenciesData } from '../../models/competencies.model'
+import { NSCompetencie } from '../../models/competencies.model'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
-// import { CompetenceService } from '../../services/competence.service'
+import { CompetenceService } from '../../services/competence.service'
 /* tslint:disable */
 import _ from 'lodash'
 /* tslint:enable */
@@ -22,17 +22,31 @@ export class CompetenceAllComponent implements OnInit, AfterViewInit {
   elementPosition: any
   currentFilter = 'recent'
   unread: any
-  tabsData: NSCompetenciesData.ICompetenciesTab[]
-
+  tabsData: NSCompetencie.ICompetenciesTab[]
+  allCompetencies!: NSCompetencie.ICompetencie[]
+  searchJson!: NSCompetencie.ISearch[]
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private competencySvc: CompetenceService
     //  private router: Router
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
   }
   ngOnInit() {
     // load page based on 'page' query param or default to 1
+    this.searchJson = [
+      { type: "COMPETENCY", field: "name", keyword: "" },
+      { type: "COMPETENCY", field: "status", keyword: "VERIFIED" }
+    ]
+
+    const searchObj = {
+      "searches": this.searchJson
+    }
+    this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
+      if (reponse.statusInfo && reponse.statusInfo.statusCode === 200)
+        this.allCompetencies = reponse.responseData
+    })
   }
   ngAfterViewInit(): void {
     // throw new Error('Method not implemented.')

@@ -1,19 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core'
-import { NSCompetenciesData } from '../../models/competencies.model'
+import { NSCompetencie } from '../../models/competencies.model'
 // import { Router } from '@angular/router'
 @Component({
-  selector: 'app-competence-category-card',
-  templateUrl: './category-card.component.html',
-  styleUrls: ['./category-card.component.scss'],
+  selector: 'app-competence-card',
+  templateUrl: './competencies-card.component.html',
+  styleUrls: ['./competencies-card.component.scss'],
   /* tslint:disable */
-  host: { class: 'flex flex-1 margin-s margin-top-l' },
+  host: { class: 'flex flex-1 margin-xs' },
   /* tslint:enable */
 
 })
 
-export class CategoryCardComponent implements OnInit {
+export class CompetenceCardComponent implements OnInit {
   @Input()
-  category!: NSCompetenciesData.ICompetenciesJsonData
+  data!: NSCompetencie.ICompetencie
   constructor(
     // private router: Router,
     // private snackBar: MatSnackBar,
