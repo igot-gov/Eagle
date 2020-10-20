@@ -64,7 +64,7 @@ export class CompetenceAllComponent implements OnInit {
   }
 
   reset() {
-    this.searchKey = '
+    this.searchKey = ''
     this.queryControl.setValue('')
     this.selectedId = ''
     this.refreshData()
