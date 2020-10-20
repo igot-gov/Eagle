@@ -37,7 +37,23 @@ export class CompetenceAllComponent implements OnInit {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
   }
   ngOnInit() {
-    this.refreshData()
+    // load page based on 'page' query param or default to 1
+    this.searchJson = [
+      { type: 'COMPETENCY', field: 'name', keyword: '' },
+      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' },
+    ]
+
+    const searchObj = {
+      searches: this.searchJson,
+    }
+    this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
+      if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
+        this.allCompetencies = reponse.responseData
+      }
+    })
+  }
+  ngAfterViewInit(): void {
+    // throw new Error('Method not implemented.')
   }
 
   updateQuery(key: string) {
