@@ -19,6 +19,7 @@ export class NetworkMyMdoComponent implements OnInit {
   queryControl = new FormControl('')
   currentFilter = 'timestamp'
   currentFilterSort = 'desc'
+  enableSearchFeature = false
   constructor(
     private route: ActivatedRoute,
     private networkV2Service: NetworkV2Service,
@@ -27,10 +28,24 @@ export class NetworkMyMdoComponent implements OnInit {
     // console.log('this.route.snapshot.data.myMdoList.data :', this.route.snapshot.data.myMdoList.data)
     this.data = this.route.snapshot.data.myMdoList.data.result.data.
       find((item: any) => item.field === 'employmentDetails.departmentName').results
+
+    this.data = this.data.map((v: NSNetworkDataV2.INetworkUser) => {
+        if (v && v.personalDetails && v.personalDetails.firstname) {
+          v.personalDetails.firstname = v.personalDetails.firstname.toLowerCase()
+        }
+        return v
+      })
     // console.log('this.data : ', this.data)
   }
 
   ngOnInit() {
+    this.queryControl.valueChanges.subscribe(val => {
+      if (val.length === 0) {
+        this.enableSearchFeature = false
+      } else {
+        this.enableSearchFeature = true
+      }
+    })
   }
 
   updateQuery(key: string) {
