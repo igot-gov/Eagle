@@ -1,11 +1,12 @@
 
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core'
-import { NSCompetenciesData } from '../../models/competencies.model'
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core'
+import { NSCompetencie } from '../../models/competencies.model'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
-// import { CompetenceService } from '../../services/competence.service'
+import { CompetenceService } from '../../services/competence.service'
 /* tslint:disable */
 import _ from 'lodash'
+import { FormControl } from '@angular/forms'
 /* tslint:enable */
 
 @Component({
@@ -16,76 +17,106 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class CompetenceAllComponent implements OnInit, AfterViewInit {
+export class CompetenceAllComponent implements OnInit {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
   sticky = false
   elementPosition: any
   currentFilter = 'recent'
-  unread: any
-  tabsData: NSCompetenciesData.ICompetenciesTab[]
-
+  myCompetencies: NSCompetencie.ICompetencie[] = []
+  tabsData: NSCompetencie.ICompetenciesTab[]
+  allCompetencies!: NSCompetencie.ICompetencie[]
+  searchJson!: NSCompetencie.ISearch[]
+  searchKey = ''
+  queryControl = new FormControl('')
+  selectedId = ''
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    //  private router: Router
+    private competencySvc: CompetenceService
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
   }
   ngOnInit() {
     // load page based on 'page' query param or default to 1
-  }
-  ngAfterViewInit(): void {
-    // throw new Error('Method not implemented.')
+    this.searchJson = [
+      { type: 'COMPETENCY', field: 'name', keyword: '' },
+      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' },
+    ]
+
+    const searchObj = {
+      searches: this.searchJson,
+    }
+    this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
+      if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
+        this.allCompetencies = reponse.responseData
+      }
+    })
   }
 
   updateQuery(key: string) {
     if (key) {
-
-    }
-  }
-  filter(key: string | 'timestamp' | 'viewcount') {
-    if (key) {
-      this.currentFilter = key
-      // this.refreshData(this.currentActivePage)
+      this.searchKey = key
+      this.refreshData()
     }
   }
 
-  refreshData(page: any) {
-    if (page && this.currentFilter === 'recent') {
-      // this.discussService.fetchSingleCategoryDetails(this.categoryId, page).subscribe(
-      //   (data: any) => {
-      //     this.data = data
-      //     this.paginationData = data.pagination
-      //     this.setPagination()
-      //   },
-      //   (_err: any) => {
-      //   })
+  reset() {
+    this.searchKey = ''
+    this.queryControl.setValue('')
+    this.selectedId = ''
+    this.refreshData()
+  }
+  resetSearch() {
+    this.reset()
+    this.refreshData()
+  }
+  addCompetency(id: string) {
+    if (id) {
+      // API is not available
+      const vc = _.chain(this.allCompetencies).filter(i => {
+        return i.id === id
+      }).first().value()
+      this.myCompetencies.push(vc)
+      this.resetcomp()
+    }
+  }
+  resetcomp() {
+    let data: any[] = []
+    const allCompetencies = this.allCompetencies
+    if (this.myCompetencies && this.myCompetencies.length > 0) {
+      data = _.flatten(_.map(this.myCompetencies, (item: NSCompetencie.ICompetencie) => _.filter(allCompetencies, item)))
+      this.allCompetencies = this.allCompetencies.filter(obj => {
+        return data.indexOf(obj) === -1
+      })
     } else {
-      // this.discussService.fetchSingleCategoryDetailsSort(this.categoryId, 'voted', page).subscribe(
-      //   (data: any) => {
-      //     this.data = data
-      //     this.paginationData = data.pagination
-      //     this.setPagination()
-      //   },
-      //   (_err: any) => {
-      //   })
+      // this.allCompetencies = reponse.responseData
     }
   }
-
-  navigateWithPage() {
-    // if (page !== this.currentActivePage) {
-    //   this.router.navigate([`/app/careers/home`], { queryParams: { page } })
-    // }
+  refreshData() {
+    this.searchJson = [
+      { type: 'COMPETENCY', field: 'name', keyword: this.searchKey },
+      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' },
+    ]
+    const searchObj = {
+      searches: this.searchJson,
+    }
+    this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
+      if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
+        let data = reponse.responseData
+        if (this.myCompetencies && this.myCompetencies.length > 0) {
+          data = _.flatten(_.map(this.myCompetencies, item => {
+            return _.filter(reponse.responseData, item)
+          }))
+          this.allCompetencies = reponse.responseData.filter(obj => {
+            return data.indexOf(obj) === -1
+          })
+        } else {
+          this.allCompetencies = reponse.responseData
+        }
+      }
+    })
   }
-
-  setPagination() {
-    // this.pager = {
-    //   startIndex: this.paginationData.first.page,
-    //   endIndex: this.paginationData.last.page,
-    //   // pages: Array.from(Array(this.paginationData.pageCount), (_x, index) => index + 1),
-    //   pages: this.paginationData.pages,
-    //   currentPage: this.paginationData.currentPage,
-    //   totalPage: this.paginationData.pageCount,
-    // }
+  setSelectedCompetency(id: string) {
+    this.selectedId = id
   }
 }

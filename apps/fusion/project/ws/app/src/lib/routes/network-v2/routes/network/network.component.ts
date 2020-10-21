@@ -75,6 +75,29 @@ export class NetworkComponent implements OnInit, OnDestroy {
   bindUrl(path: string) {
     if (path) {
       this.currentRoute = path
+      if (this.titles.length > 1) {
+        this.titles.pop()
+      }
+      switch (path) {
+        case 'home':
+          this.titles.push({ title: 'Network', icon: '', url: 'none' })
+          break
+        case 'my-connection':
+          this.titles.push({ title: 'My connections', icon: '', url: 'none' })
+          break
+        case 'connection-requests':
+          this.titles.push({ title: 'Connection Requests', icon: '', url: 'none' })
+          break
+        case 'my-mdo':
+          this.titles.push({ title: 'My MDO', icon: '', url: 'none' })
+          break
+        case 'recommended':
+          this.titles.push({ title: 'Recommended connections', icon: '', url: 'none' })
+          break
+
+        default:
+          break
+      }
     }
   }
 

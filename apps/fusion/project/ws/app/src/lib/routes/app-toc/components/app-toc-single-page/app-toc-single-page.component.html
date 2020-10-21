@@ -324,6 +324,13 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         <h3 *ngIf="!content?.exclusiveContent" class="item-value width-expand">Free</h3>
                     </div>
                     <mat-divider class="divider-transparent" *ngIf="tocConfig?.atAGlance?.cost?.enabled"></mat-divider>
+                    <div class="info-item" *ngIf="tocConfig?.atAGlance?.license?.enabled">
+                        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.license?.displayName}}</h3>
+                        <h3 *ngIf="content?.license" class="item-value width-expand">
+                            {{content?.license}}
+                        </h3>
+                    </div>
+                    <mat-divider class="divider-transparent" *ngIf="tocConfig?.atAGlance?.license?.enabled"></mat-divider>
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.viewCount?.enabled && content?.viewCount && configSvc?.rootOrg">
                         <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.viewCount?.displayName}}
