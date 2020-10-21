@@ -181,7 +181,7 @@ public class ProfileService implements IProfileService {
 
                 SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
                 tags.add(sRequest.getField());
-                BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery(sRequest.getField(), sRequest.getValues())).mustNot(QueryBuilders.termsQuery("id.keyword", connectionIdsToExclude));
+                BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery(sRequest.getField().concat(".keyword"), sRequest.getValues())).mustNot(QueryBuilders.termsQuery("id.keyword", connectionIdsToExclude));
 
                 searchSourceBuilder.query(query);
                 searchRequest.source(searchSourceBuilder);
@@ -206,7 +206,7 @@ public class ProfileService implements IProfileService {
             for(int i=0; i< multiSearchResponse.getResponses().length; i++){
                 SearchResponse searchResponse = multiSearchResponse.getResponses()[i].getResponse();
 
-                logger.info("multi search searchResponse->"+searchResponse);
+                //logger.info("multi search searchResponse->"+searchResponse);
                 Map<String, Object> resObjects = new HashMap<>();
                 List<Object> results = new ArrayList<>();
                 for (SearchHit hit : searchResponse.getHits()) {
@@ -245,7 +245,7 @@ public class ProfileService implements IProfileService {
         } else {
             connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
         }
-        System.out.println("con ids "+connectionIds);
+        logger.debug("con ids "+connectionIds);
 
         return findProfiles(connectionIds,null);
 
