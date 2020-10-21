@@ -1,27 +1,77 @@
-<div class="flex flex-1 ws-mat-primary-lite-background-important">
-  <!-- top-fixed-menu -->
-  <div class="flex flex-1 fix-ww padding-xs">
-    <a i18n-aria-label aria-label="Back" style="width: fit-content;" *ngIf="widgetData.url && widgetData.url !== 'none'"
-      class="flex ws-mat-default-text margin-left-xs" [routerLink]="backUrl.routeUrl"
-      [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment">
-      <mat-icon class="flexws-mat-default-text icon-margin">apps</mat-icon>
+<mat-card class="base-layout">
+  <mat-card-content class="container-balanced">
+    <div class="flex flex-1 flex-column">
+      <!-- top-fixed-menu -->
+      <!-- fix-ww -->
+      <div class="flex flex-1 flex-column">
+        <div class="flex flex-1">
+          <!-- <a i18n-aria-label aria-label="Back" (click)="toggleVisibility()" style="width: fit-content;"
+      class="flex ws-mat-default-text margin-left-xs" *ngIf="widgetData.url && widgetData.url !== 'none'"
+    [routerLink]="backUrl.routeUrl" [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment">
+         <mat-icon class="flexws-mat-default-text icon-margin">apps</mat-icon>
       <span class="flex mat-typography m-t-b">HUBS</span>
-    </a>
-    <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
-      <div class="flex" *ngFor="let title of widgetData.titles">
-        <mat-icon class="main-back m-auto mat-imput-placeholder">keyboard_arrow_right</mat-icon>
-        <span *ngIf="title.title && title.url && title.url === 'none'" i18n="page title: {{title.title}}"
-          class="flex margin-left-xs m-auto">
-          <mat-icon class="ws-mat-default-text icon-margin m-t-b" *ngIf="title.icon">{{title.icon}}</mat-icon>
-          <span class="mat-imput-placeholder text-capitalize m-t-b mat-typography">{{title.title}}</span>
-        </span>
-        <a class="flex m-auto ws-mat-default-text" i18n-aria-label aria-label="Back"
-          *ngIf="title.url && title.url !== 'none'" [routerLink]="title.url">
-          <!-- [queryParams]="titleUrl.queryParams" [fragment]="titleUrl?.fragment" -->
-          <mat-icon class="ws-mat-default-text icon-margin" *ngIf="title.icon">{{title.icon}}</mat-icon>
-          <span class="text-uppercase m-t-b mat-typography"> {{title.title}}</span>
-        </a>
+    </a> -->
+          <span class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()">
+            <mat-icon class="margin-xs">apps</mat-icon>
+            <span class="margin-auto ws-mat-default-text">HUBS</span>
+          </span>
+          <!-- <ng-container *ngIf="!visible && !isMobile">
+      <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
+        <span class="mat-card-subtitle margin-0 text-uppercase"> {{hub.hubname}}</span>
+      </a>
+    </ng-container> -->
+          <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
+            <div class="flex" *ngFor="let title of widgetData.titles">
+              <mat-icon class="main-back m-auto mat-imput-placeholder">keyboard_arrow_right</mat-icon>
+              <span *ngIf="title.title && title.url && title.url === 'none'" i18n="page title: {{title.title}}"
+                class="flex margin-left-xs m-auto">
+                <mat-icon class="ws-mat-default-text icon-margin m-t-b" *ngIf="title.icon">{{title.icon}}</mat-icon>
+                <span class="mat-imput-placeholder text-capitalize m-t-b mat-typography">{{title.title}}</span>
+              </span>
+              <a class="flex m-auto ws-mat-default-text" i18n-aria-label aria-label="Back"
+                *ngIf="title.url && title.url !== 'none'" [routerLink]="title.url">
+                <!-- [queryParams]="titleUrl.queryParams" [fragment]="titleUrl?.fragment" -->
+                <mat-icon class="ws-mat-default-text icon-margin" *ngIf="title.icon">{{title.icon}}</mat-icon>
+                <span class="text-uppercase m-t-b mat-typography"> {{title.title}}</span>
+              </a>
+            </div>
+          </ng-container>
+        </div>
+        <div class="flex flex-1" [hidden]="!visible">
+          <div class="flex flex-1">
+            <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
+              No hubs Info Available
+            </h3>
+            <div class="grid grid-cols-1 margin-xs sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-2">
+              <ng-container *ngFor="let hubsObj of hubsList" [ngTemplateOutlet]="userIndividualNew"
+                [ngTemplateOutletContext]="{ hubs: hubsObj }">
+              </ng-container>
+            </div>
+          </div>
+          <div class="text-center">
+            <!-- <mat-spinner [strokeWidth]="3" *ngIf="hubsList.length === 0" [diameter]="40" class="display-inline-block">
+      </mat-spinner> -->
+          </div>
+        </div>
       </div>
-    </ng-container>
+    </div>
+  </mat-card-content>
+</mat-card>
+<!--
+<div class="flex flex-1 ws-mat-primary-lite-background-important flex-column">
+
+</div> -->
+
+<ng-template #userIndividualNew let-hubs="hubs">
+  <div class="flex flex-wrap" [routerLink]="(hubs.path)">
+    <div class="icon ws-mat-primary-tags">
+      <mat-icon class="mat-icon1">{{hubs.icon}}</mat-icon>
+    </div>
+    <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
+      <div class="mat-body-strong mat-card-subtitle margin-0">
+        {{hubs.hubname}}
+      </div>
+      <div class="mat-caption cohorts-desc">{{hubs.desc}}</div>
+    </div>
   </div>
-</div>
+</ng-template>

@@ -6,7 +6,7 @@ import { NSCompetencie } from '../../models/competencies.model'
   templateUrl: './competencies-card.component.html',
   styleUrls: ['./competencies-card.component.scss'],
   /* tslint:disable */
-  host: { class: 'flex flex-1 margin-xs' },
+  host: { class: 'flex flex-1 margin-right-xs margin-top-xs margin-bottom-s' },
   /* tslint:enable */
 
 })

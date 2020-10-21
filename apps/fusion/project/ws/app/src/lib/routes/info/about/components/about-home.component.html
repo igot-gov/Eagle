@@ -1,11 +1,10 @@
-<mat-toolbar [color]="pageNavbar?.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'home',titles:[{title:'Features', url:'/app/features'},{title:'About',url:'none'}] }">
-  </ws-widget-btn-page-back>
-  <!-- <span class="margin-left-xs text-truncate">
+<!-- <mat-toolbar [color]="pageNavbar?.color" [ngStyle]="pageNavbar?.styles"> -->
+<ws-widget-btn-page-back-nav [widgetData]="{ url: 'home',titles:[] }">
+</ws-widget-btn-page-back-nav>
+<!-- <span class="margin-left-xs text-truncate">
     <span i18n="page title: about" class="margin-left-xs">About</span>
   </span> -->
-</mat-toolbar>
+<!-- </mat-toolbar> -->
 
 <section class="about-content leading-relaxed" *ngIf="aboutPage">
   <div class="about-info ws-primary-tinted-50" *ngIf="aboutPage?.banner" [style.backgroundImage]="headerBanner">

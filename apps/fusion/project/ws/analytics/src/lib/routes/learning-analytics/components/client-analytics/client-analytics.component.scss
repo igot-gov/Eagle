@@ -1,5 +1,10 @@
 @import 'ws-common';
 @import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+}
 
 .sidenav-container {
   min-height: calc(100vh - 2 * #{$mat-toolbar-gt-xs});

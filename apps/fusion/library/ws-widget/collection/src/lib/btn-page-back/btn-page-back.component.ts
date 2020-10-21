@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
+import { ConfigurationsService, NsInstanceConfig } from '@ws-widget/utils'
 import { BtnPageBackService } from './btn-page-back.service'
 type TUrl = undefined | 'none' | 'back' | string
 @Component({
@@ -12,14 +13,22 @@ export class BtnPageBackComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<{ url: TUrl }> {
   @Input() widgetData: { url: TUrl, titles?: NsWidgetResolver.ITitle[] } = { url: 'none', titles: [] }
   presentUrl = ''
+  visible = false
+  enablePeopleSearch = true
+  hubsList!: NsInstanceConfig.IHubs[]
   constructor(
     private btnBackSvc: BtnPageBackService,
     private router: Router,
+    private configSvc: ConfigurationsService,
   ) {
     super()
   }
 
   ngOnInit() {
+    const instanceConfig = this.configSvc.instanceConfig
+    if (instanceConfig) {
+      this.hubsList = (instanceConfig.hubs || []).filter(i => i.active)
+    }
     this.presentUrl = this.router.url
 
   }
@@ -70,4 +79,7 @@ export class BtnPageBackComponent extends WidgetBaseComponent
   //     routeUrl: this.widgetData.url ? this.widgetData.url : '/app/home',
   //   }
   // }
+  toggleVisibility() {
+    this.visible = !this.visible
+  }
 }

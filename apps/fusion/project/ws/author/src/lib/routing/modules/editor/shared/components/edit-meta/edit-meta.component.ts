@@ -402,7 +402,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   optionSelectedCompetency(competencies: any) {
     this.competencyCtrl.setValue(' ')
-    this.competencySearch.nativeElement.blur()
+    // this.competencySearch.nativeElement.blur()
 
     if (competencies) {
       const value = this.contentForm.controls.competencies.value || []

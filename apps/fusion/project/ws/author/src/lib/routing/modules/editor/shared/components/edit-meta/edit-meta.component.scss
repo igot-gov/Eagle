@@ -2,7 +2,6 @@
 @import 'ws-vars';
 @import 'ws-common';
 
-
 .font-weight-300 {
   font-weight: 300;
 }
@@ -52,6 +51,9 @@ input {
     color: red;
     content: ' *';
   }
+}
+.floatright {
+  float: right;
 }
 
 .max-width {
@@ -251,7 +253,7 @@ ul li {
   z-index: -1;
 }
 
-.inputfile+label {
+.inputfile + label {
   font-size: 1.25em;
   color: white;
   display: inline-block;
@@ -308,7 +310,6 @@ ul li {
   @include breakpoint-m {
     max-width: 70px;
   }
-
 }
 
 .padding-small {
@@ -355,8 +356,6 @@ ul li {
   }
 }
 
-
-
 .logos {
   display: flex;
   flex-direction: row;
@@ -397,9 +396,7 @@ ul li {
     width: 72px;
     height: 74px;
     box-shadow: 0px 2px 4px #00000029;
-
   }
-
 
   @include breakpoint-s {
     // flex-direction: column;
@@ -433,8 +430,6 @@ ul li {
 
 .example-radio-button {
   display: flex;
-
-
 }
 
 .c-footer {
