@@ -9,7 +9,7 @@ import {
   MatButtonModule,
   MatCardModule,
 } from '@angular/material'
-import { BtnPageBackModule } from '@ws-widget/collection'
+import { BtnPageBackNavModule } from '@ws-widget/collection'
 import { HorizontalScrollerModule, PipeSafeSanitizerModule } from '@ws-widget/utils'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 
@@ -24,7 +24,7 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
     MatButtonModule,
     MatCardModule,
 
-    BtnPageBackModule,
+    BtnPageBackNavModule,
     HorizontalScrollerModule,
     WidgetResolverModule,
     PipeSafeSanitizerModule,
