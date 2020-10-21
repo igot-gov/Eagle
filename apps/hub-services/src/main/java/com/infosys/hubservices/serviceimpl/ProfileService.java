@@ -27,6 +27,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -195,6 +196,7 @@ public class ProfileService implements IProfileService {
                 }
                 searchSourceBuilder.from(mSearchRequest.getOffset());
                 searchSourceBuilder.size(mSearchRequest.getSize());
+                searchSourceBuilder.sort("osCreatedAt", SortOrder.DESC);
 
                 request.add(searchRequest);
 

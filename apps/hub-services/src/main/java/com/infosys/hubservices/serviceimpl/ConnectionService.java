@@ -26,10 +26,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -153,6 +150,7 @@ public class ConnectionService implements IConnectionService {
             //find the common new connections that could be established
             List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
 
+            commonConnections.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
 
             if(commonConnections.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
@@ -191,6 +189,8 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.PAGENO, offset);
             response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
             response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, Constants.Status.APPROVED));
+
+            userConnectionsEstablished.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
 
             if(userConnectionsEstablished.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
@@ -276,6 +276,8 @@ public class ConnectionService implements IConnectionService {
             if(direction.equals(Constants.DIRECTION.IN))
                 userConnections = userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.PENDING);
 
+
+            userConnections.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
 
             response.put(Constants.ResponseStatus.TOTALHIT, userConnectionRepository.countByUserAndStatus(userId, Constants.Status.PENDING));
 
