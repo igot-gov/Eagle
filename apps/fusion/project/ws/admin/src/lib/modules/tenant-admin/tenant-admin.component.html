@@ -1,15 +1,15 @@
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <button *ngIf="isLtMedium" type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'home',titles: [{title:'Features', url:'/app/features'},{title:'Manage', url:'none'}] }">
-  </ws-widget-btn-page-back>
+<!-- <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
 
-  <!-- <span class="ml-2" i18n>Manage</span> -->
-</mat-toolbar>
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'home',titles: [{title:'Features', url:'/app/features'},{title:'Manage', url:'none'}] }">
+</ws-widget-btn-page-back>
 
-<mat-sidenav-container autosize>
+<!-- <span class="ml-2" i18n>Manage</span> -->
+<!-- </mat-toolbar> -->
+<button *ngIf="isLtMedium" type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-sidenav-container autosize class="container-balanced">
   <mat-sidenav class="sidenav mat-drawer mat-sidenav" [mode]="isLtMedium ? 'over' : 'side'" [opened]="sideNavBarOpened">
     <mat-nav-list class="margin-left-s margin-right-xs">
       <a *ngIf="!restrictedFeatures?.has('adminFeatureUsers')" mat-list-item routerLinkActive="mat-toolbar"
