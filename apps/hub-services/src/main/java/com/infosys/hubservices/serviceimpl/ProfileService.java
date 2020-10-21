@@ -163,6 +163,7 @@ public class ProfileService implements IProfileService {
     public Response multiSearchProfiles(String rootOrg, String userId, MultiSearch mSearchRequest, String[] sourceFields) {
 
         List<String> connectionIdsToExclude = connectionService.findUserConnections(rootOrg, userId);
+        connectionIdsToExclude.add(userId);
 
         logger.info("connectionIdsToExclude ->"+connectionIdsToExclude);
         Response response = new Response();
