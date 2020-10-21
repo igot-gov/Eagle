@@ -39,6 +39,8 @@ public interface UserConnectionRepository
 	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id IN ?1 ;")
 	public List<UserConnection> findByUsersAndRootOrg(String rootOrg, List<String> userIds);
 
+	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND connection_id IN ?1 ALLOW FILTERING;;")
+	public List<UserConnection> findByConnectionAndRootOrg(String rootOrg, List<String> connectionIds);
 
 	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id=?1 AND connection_id=?2 ;")
 	public UserConnection findByUsersAndConnection(String rootOrg, String userId, String connectionId);

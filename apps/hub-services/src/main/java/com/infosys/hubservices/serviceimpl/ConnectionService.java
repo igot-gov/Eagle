@@ -27,6 +27,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Service
@@ -300,11 +301,11 @@ public class ConnectionService implements IConnectionService {
     @Override
     public List<String> findUserConnections(String rootOrg, String userId) {
 
-        int count = userConnectionRepository.countByUser(rootOrg, userId);
+        List<String> connectionIds = new ArrayList<>();
+        connectionIds = userConnectionRepository.findByConnectionAndRootOrg(rootOrg, Arrays.asList(userId)).stream().map(c->c.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
+        connectionIds.addAll(userConnectionRepository.findByUsersAndRootOrg(rootOrg, Arrays.asList(userId)).stream().map(c->c.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
 
-        Pageable pageable = PageRequest.of(0, count==0? count+1 : count);
-        Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId, pageable);
+        return connectionIds;
 
-        return sliceUserConnections.getContent().stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
     }
 }
