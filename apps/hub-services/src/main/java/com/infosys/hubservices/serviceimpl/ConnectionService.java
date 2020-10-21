@@ -302,7 +302,7 @@ public class ConnectionService implements IConnectionService {
     public List<String> findUserConnections(String rootOrg, String userId) {
 
         List<String> connectionIds = new ArrayList<>();
-        connectionIds = userConnectionRepository.findByConnectionAndRootOrg(rootOrg, Arrays.asList(userId)).stream().map(c->c.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
+        connectionIds = userConnectionRepository.findByConnectionAndRootOrg(rootOrg, userId).stream().map(c->c.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
         connectionIds.addAll(userConnectionRepository.findByUsersAndRootOrg(rootOrg, Arrays.asList(userId)).stream().map(c->c.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
 
         return connectionIds;
