@@ -11,7 +11,7 @@ import { BtnPageBackComponent } from './btn-page-back.component'
     RouterModule,
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
   ],
   exports: [BtnPageBackComponent],
   entryComponents: [BtnPageBackComponent],
