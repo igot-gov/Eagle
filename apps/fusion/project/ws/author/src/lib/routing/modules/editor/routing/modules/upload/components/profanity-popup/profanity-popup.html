@@ -77,7 +77,7 @@
             <mat-spinner [diameter]="30"></mat-spinner>
           </span>
           <button mat-raised-button type="submit" class="text-white ws-mat-primary-background flex-auto-display"
-            [disabled]="uploadSaveData || startForm?.invalid" (click)="submitPost(startForm)">
+            [disabled]="uploadSaveData || startForm?.invalid" (click)="submitPost()">
             <span class="text-white" i18n>Ok</span>
           </button>
         </mat-dialog-actions>

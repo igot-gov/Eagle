@@ -16,7 +16,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'users'
+    redirectTo: 'users',
   },
   {
     path: 'user-registration',
