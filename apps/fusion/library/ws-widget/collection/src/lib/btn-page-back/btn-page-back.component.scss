@@ -2,6 +2,20 @@
 @import 'ws-vars';
 @import 'ws-mixins';
 
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  // min-height: 400px;
+}
+
+.base-layout {
+  // margin-top: 10px;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0;
+  margin: auto;
+  // background: inherit !important;
+}
 
 .fix-ww {
   margin-left: auto;
@@ -53,4 +67,48 @@
   position: fixed;
   width: 100%;
   z-index: 99;
+}
+
+.simple-hubs-link {
+  margin: auto $size-s;
+}
+
+.center {
+  text-align: center;
+  // color: #187bcd;
+  padding-top: $size-s;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-grid-list {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.base-header {
+  margin-left: 5px;
+}
+
+.mat-grid-tile {
+  display: inline;
+  position: absolute;
+}
+
+.mat-icon1 {
+  padding: 16px;
+  color: #347bb6;
 }
