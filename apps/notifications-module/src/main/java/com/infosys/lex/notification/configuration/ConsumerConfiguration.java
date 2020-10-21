@@ -60,8 +60,8 @@ public class ConsumerConfiguration {
 		propsMap.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, props.getKafkabootstrapAddress());
 		propsMap.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
 		propsMap.put(ConsumerConfig.FETCH_MAX_WAIT_MS_CONFIG, "1000");
-		propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "1000");
-		propsMap.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
+		propsMap.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "8000");
+		propsMap.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "30000");
 		propsMap.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		propsMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		propsMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,props.getKafkaOffsetResetValue());
