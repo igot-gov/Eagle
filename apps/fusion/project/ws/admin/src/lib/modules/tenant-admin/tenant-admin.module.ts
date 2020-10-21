@@ -64,6 +64,8 @@ import { UserAccessPathComponent } from './routes/user-access-path/user-access-p
 import { UserBulkUploadComponent } from './routes/user-bulk-upload/user-bulk-upload.component'
 import { FileService } from './upload.service'
 import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
+import { UserDepartmentManagementComponent } from './routes/user-department-management/user-department-management.component'
+import { ActionDialogComponent } from './routes/user-department-management/components/action-dialog/action-dialog.component'
 @NgModule({
   declarations: [
     TenantAdminComponent,
@@ -89,6 +91,8 @@ import { EditDepartmentDialogComponent } from './routes/users/components/edit-de
     UserAccessPathComponent,
     UserBulkUploadComponent,
     EditDepartmentDialogComponent,
+    UserDepartmentManagementComponent,
+    ActionDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -139,6 +143,7 @@ import { EditDepartmentDialogComponent } from './routes/users/components/edit-de
     ConfirmActionComponent,
     OpenRolesDialogComponent,
     EditDepartmentDialogComponent,
+    ActionDialogComponent,
   ],
 })
 export class TenantAdminModule { }

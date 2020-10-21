@@ -1,0 +1,132 @@
+<div class="m-1 md:m-4">
+    <div class="flex flex-between">
+        <div>
+            <h1 class="font-weight-500" i18n>Users Department Management</h1>
+            <p>
+                <mat-card-subtitle>View requests and take actions (approve, reject) on the requests</mat-card-subtitle>
+            </p>
+        </div>
+    </div>
+    <mat-card class="mt-5 mat-elevation-z6 main-card">
+        <mat-tab-group #tabGroup [(selectedIndex)]="currentTabIndex" dynamicHeight (selectedTabChange)="tabChange($event)">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span i18n class="mat-body-2 font-weight-bold" i18n>Pending Requests</span>
+                </ng-template>
+                <div class="overflow-auto" *ngIf="pendingTable.length && !isFetching">
+                    <ng-container *ngTemplateOutlet="userPendingTable"></ng-container>
+                </div>
+                <!-- Spinner -->
+                <div *ngIf="isAdding" class="smallSpinner">
+                    <mat-progress-spinner mode="indeterminate" diameter="50">
+                    </mat-progress-spinner>
+                </div>
+                <!-- Fetching Spinner -->
+                <div *ngIf="isFetching" class="spinner">
+                    <mat-progress-spinner mode="indeterminate" diameter="100">
+                    </mat-progress-spinner>
+                </div>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span i18n class="mat-body-2 font-weight-bold" i18n>Other Requests</span>
+                </ng-template>
+                <div class="overflow-auto" *ngIf="otherTable.length && !isFetching">
+                    <ng-container *ngTemplateOutlet="userOtherTable"></ng-container>
+                </div>
+                <!-- Spinner -->
+                <div *ngIf="isAdding" class="smallSpinner">
+                    <mat-progress-spinner mode="indeterminate" diameter="50">
+                    </mat-progress-spinner>
+                </div>
+                <!-- Fetching Spinner -->
+                <div *ngIf="isFetching" class="spinner">
+                    <mat-progress-spinner mode="indeterminate" diameter="100">
+                    </mat-progress-spinner>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+
+        <ng-template #userPendingTable>
+            <table class="w-full" mat-table [dataSource]="pendingSource">
+              <ng-container matColumnDef="firstname">
+                <th mat-header-cell *matHeaderCellDef i18n> Firstname</th>
+                <td mat-cell *matCellDef="let element"> {{element.user_firstname}} </td>
+              </ng-container>
+              <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef i18n> Lastname</th>
+                <td mat-cell *matCellDef="let element"> {{element.user_lastname}} </td>
+              </ng-container>
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef i18n> Email</th>
+                <td mat-cell *matCellDef="let element"> {{element.user_email}} </td>
+              </ng-container>
+              <ng-container matColumnDef="currentdept">
+                <th mat-header-cell *matHeaderCellDef i18n> Current Department </th>
+                <td mat-cell *matCellDef="let element"> {{element.existing_org_name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="newDept">
+                <th mat-header-cell *matHeaderCellDef i18n> New Department </th>
+                <td mat-cell *matCellDef="let element"> {{element.new_org_name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef i18n> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+              <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="primary" i18n (click)="takeAction(element)">
+                        <ng-container i18n>Action</ng-container>
+                    </button>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedPendingColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedPendingColumns;"></tr>
+            </table>
+          </ng-template>
+
+          <ng-template #userOtherTable>
+            <table class="w-full" mat-table [dataSource]="otherSource">
+              <ng-container matColumnDef="firstname">
+                <th mat-header-cell *matHeaderCellDef i18n> Firstname</th>
+                <td mat-cell *matCellDef="let element"> {{element.user_firstname}} </td>
+              </ng-container>
+              <ng-container matColumnDef="lastname">
+                <th mat-header-cell *matHeaderCellDef i18n> Lastname</th>
+                <td mat-cell *matCellDef="let element"> {{element.user_lastname}} </td>
+              </ng-container>
+              <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef i18n> Email</th>
+                <td mat-cell *matCellDef="let element"> {{element.user_email}} </td>
+              </ng-container>
+              <ng-container matColumnDef="currentdept">
+                <th mat-header-cell *matHeaderCellDef i18n> Current Department </th>
+                <td mat-cell *matCellDef="let element"> {{element.existing_org_name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="newDept">
+                <th mat-header-cell *matHeaderCellDef i18n> New Department </th>
+                <td mat-cell *matCellDef="let element"> {{element.new_org_name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef i18n> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+              </ng-container>
+              <ng-container matColumnDef="approverFname">
+                <th mat-header-cell *matHeaderCellDef i18n> Approver Firstname</th>
+                <td mat-cell *matCellDef="let element"> {{element.approver_firstname}} </td>
+              </ng-container>
+              <ng-container matColumnDef="approverLname">
+                <th mat-header-cell *matHeaderCellDef i18n> Approver Lastname</th>
+                <td mat-cell *matCellDef="let element"> {{element.approver_lastname}} </td>
+              </ng-container>
+              <ng-container matColumnDef="approverEmail">
+                <th mat-header-cell *matHeaderCellDef i18n> Approver Email</th>
+                <td mat-cell *matCellDef="let element"> {{element.approver_email}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedOtherColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedOtherColumns;"></tr>
+            </table>
+          </ng-template>
+    </mat-card>
+</div>

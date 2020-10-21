@@ -7,13 +7,17 @@ import { map } from 'rxjs/operators'
 const API_ENDPOINTS = {
   getAllSources: '/apis/protected/v8/admin/userRegistration/getAllSources',
   registerUsers: '/apis/protected/v8/admin/userRegistration/register',
-  createUser: '/apis/protected/v8/admin/userRegistration/create-user',
+  // createUser: '/apis/protected/v8/admin/userRegistration/create-user',
+  createUser: 'http://localhost:3003/protected/v8/admin/userRegistration/create-user',
   getOrdinals: '/apis/authApi/action/meta/v2/ordinals/list',
   getAccessPaths: '/apis/protected/v8/admin/userRegistration/user/access-path',
   updateAccessPaths: '/apis/protected/v8/admin/userRegistration/user/update-access-path',
-  getBulkUploadData: '/apis/protected/v8/admin/userRegistration/bulkUploadData',
+  // getBulkUploadData: '/apis/protected/v8/admin/userRegistration/bulkUploadData',
+  getBulkUploadData: 'http://localhost:3003/protected/v8/admin/userRegistration/bulkUploadData',
   getUserDepartments: '/apis/protected/v8/admin/userRegistration/user/department',
   updateUserDepartment: '/apis/protected/v8/admin/userRegistration/user/department/update',
+  getPendingRequests: 'http://localhost:3003/protected/v8/admin/department/change-requests/by-status',
+  actionOnDeptChangeReq: 'http://localhost:3003/protected/v8/admin/department/change-requests/action',
 }
 @Injectable()
 export class TenantAdminService {
@@ -78,7 +82,23 @@ export class TenantAdminService {
     return this.http.post<any>(API_ENDPOINTS.updateUserDepartment, data).pipe(
       map(response => {
         return response.result
-      }),
+      })
+    )
+  }
+
+  getPendingRequests(data: any): Observable<any> {
+    return this.http.post<any>(API_ENDPOINTS.getPendingRequests, data).pipe(
+      map(response => {
+        return response
+      })
+    )
+  }
+
+  actionOnDeptChangeReq(data: any): Observable<any> {
+    return this.http.post<any>(API_ENDPOINTS.actionOnDeptChangeReq, data).pipe(
+      map(response => {
+        return response
+      })
     )
   }
 

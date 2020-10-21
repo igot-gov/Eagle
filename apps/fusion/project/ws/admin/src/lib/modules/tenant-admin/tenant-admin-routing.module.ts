@@ -12,6 +12,7 @@ import { CreateUserV2Component } from './routes/users/create-userV2/create-userV
 import { UsersComponent } from './routes/users/users.component'
 import { UserAccessPathComponent } from './routes/user-access-path/user-access-path.component'
 import { UserBulkUploadComponent } from './routes/user-bulk-upload/user-bulk-upload.component'
+import { UserDepartmentManagementComponent } from './routes/user-department-management/user-department-management.component'
 const routes: Routes = [
   {
     path: '',
@@ -95,6 +96,13 @@ const routes: Routes = [
     canActivate: [GeneralGuard],
     data: {
       requiredFeatures: ['adminFeatureContentAssignment'],
+    },
+  },
+  {
+    path: 'user-department-management',
+    component: UserDepartmentManagementComponent,
+    data: {
+      requiredRoles: ['admin', 'register-admin'],
     },
   },
 ]

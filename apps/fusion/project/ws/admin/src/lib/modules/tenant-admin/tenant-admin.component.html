@@ -40,6 +40,10 @@
         [routerLink]="'/admin/tenant/user-bulk-upload'">
         <span class="padding-left-s" i18n>User Bulk Upload</span>
       </a>
+      <a *ngIf="!restrictedFeatures?.has('adminFeatureDepartmentMgmt')" mat-list-item routerLinkActive="mat-toolbar"
+        [routerLink]="'/admin/tenant/user-department-management'">
+        <span class="padding-left-s" i18n>User Department Management</span>
+      </a>
     </mat-nav-list>
 
   </mat-sidenav>

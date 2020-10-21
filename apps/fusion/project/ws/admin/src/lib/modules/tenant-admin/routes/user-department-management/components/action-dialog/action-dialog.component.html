@@ -1,0 +1,58 @@
+<div class="flex flex-between items-center">
+    <h1 mat-dialog-title class="heading font-weight-500" i18n>
+        Take Action
+    </h1>
+    <button mat-dialog-close mat-icon-button class="cursor-pointer" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<form class="example-form" [formGroup]="editForm">
+    <div mat-dialog-content class="custom-scroll-small">
+        <div class="mt-5 flex flex-col">
+            <mat-card-title>{{reqdata?.user_firstname}} {{reqdata?.user_lastname}}</mat-card-title>
+            <div class="change-info">
+                <mat-card-subtitle>{{reqdata?.user_email}}</mat-card-subtitle>
+            </div>
+            <div class="flex items-center change-info">
+                Department change request from 
+                <span class="dept-name">{{reqdata?.existing_org_name}}</span>
+                <span class="">
+                    <mat-icon class="icon"> arrow_forward </mat-icon>
+                </span>
+                <span class="dept-name">{{reqdata?.new_org_name}}</span>
+            </div>
+        </div>
+        <mat-form-field appearance="outline" class="w-full margin-top-xs">
+            <mat-select formControlName="action" i18n-placeholder placeholder="--Select action --">
+                <mat-option [value]="status.value" *ngFor="let status of changeReqStatusTypes | keyvalue">{{status.key}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions class="flex flex-end pt-4 pr-4">
+        <div class="pr-4">
+            <mat-progress-spinner mode="indeterminate" *ngIf="processing" diameter="30"></mat-progress-spinner>
+        </div>
+        <button mat-raised-button class="pt-4" type="button" color="primary" (click)="takeAction(editForm)">
+            <span i18n>Save Changes</span>
+        </button>
+    </div>
+</form>
+
+<input
+type="hidden"
+i18-value
+i18-aria-value
+aria-value="Update department name  successful"
+value="User's department name updated successfully!"
+#toastSuccess
+/>
+<input
+type="hidden"
+i18-value
+i18-aria-value
+aria-value="unable to update department name!"
+value="Error updating the users's department name!"
+#toastError
+/>
