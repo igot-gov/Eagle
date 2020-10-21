@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    redirectTo: 'users',
   },
   {
     path: 'user-registration',
@@ -117,4 +118,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class TenantAdminRoutingModule {}
+export class TenantAdminRoutingModule { }

@@ -1,8 +1,8 @@
-<mat-toolbar [color]="pageNavbar.color">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'back',titles:[{title:'Features',url:'/app/features'},{title:feedbacktypeName,url:'none'}] }">
-  </ws-widget-btn-page-back>
-  <!-- <span class="margin-left-xs text-truncate">
+<!-- <mat-toolbar [color]="pageNavbar.color"> -->
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'back',titles:[{title:'Features',url:'/app/features'},{title:feedbacktypeName,url:'none'}] }">
+</ws-widget-btn-page-back>
+<!-- <span class="margin-left-xs text-truncate">
     <ng-container [ngSwitch]="feedbackType">
       <ng-container *ngSwitchCase="feedbackTypes.Content" i18n>Content Feedback</ng-container>
       <ng-container *ngSwitchCase="feedbackTypes.Platform" i18n>Platform Feedback</ng-container>
@@ -11,6 +11,6 @@
       <ng-container *ngSwitchDefault i18n>Feedback</ng-container>
     </ng-container>
   </span> -->
-</mat-toolbar>
+<!-- </mat-toolbar> -->
 
 <router-outlet></router-outlet>

@@ -31,6 +31,7 @@ import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/compon
 import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
+import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
 
 @Component({
   selector: 'ws-auth-file-upload',
@@ -330,6 +331,8 @@ export class FileUploadComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
           this.data.emit('saveAndNext')
+          // this.start()
+
         },
         () => {
           this.loaderService.changeLoad.next(false)
@@ -342,7 +345,20 @@ export class FileUploadComponent implements OnInit {
         },
       )
   }
+  start() {
+    const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
 
+      }
+      this.data.emit('saveAndNext')
+    })
+  }
   storeData() {
     const originalMeta = this.contentService.getOriginalMeta(this.currentContent)
     const currentMeta = this.fileUploadForm.value

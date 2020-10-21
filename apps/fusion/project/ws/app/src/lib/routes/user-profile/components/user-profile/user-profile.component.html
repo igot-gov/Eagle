@@ -1,4 +1,7 @@
-<div class="profile-container">
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'home', titles: [{title:'Features', url:'/app/features'},{title:'Update Profile', url:'none'}] }">
+</ws-widget-btn-page-back>
+<div class="profile-container container-balanced">
   <div class="profile-box">
     <form class="" [formGroup]="createUserForm">
       <mat-tab-group animationDuration="0ms" class="mat-tab-labels w-full" mat-stretch-tabs
@@ -16,7 +19,8 @@
                       <div class="profile-img-wrapper mt-10">
                         <mat-icon class="person" *ngIf="!photoUrl">person</mat-icon>
                         <img class="photo" *ngIf="photoUrl" [src]="photoUrl">
-                        <div class="camera-wrapper cursor-pointer" (click)="uploadProfilePic.click(); $event.stopPropagation()">
+                        <div class="camera-wrapper cursor-pointer"
+                          (click)="uploadProfilePic.click(); $event.stopPropagation()">
                           <label for="profilePic" class="cursor-pointer" (click)="$event.stopPropagation()">
                             <mat-icon class="camera">photo_camera</mat-icon>
                           </label>

@@ -1,11 +1,12 @@
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
+<!-- <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'home',titles:[{title:'Features', url:'/app/features'},{title: analytics?.mainTitle || 'Analytics',url:'none'}] }">
+</ws-widget-btn-page-back>
+<div class="flex container-balanced">
   <div class="flex flex-middle">
     <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened">
       <mat-icon>menu</mat-icon>
     </button>
-    <ws-widget-btn-page-back
-      [widgetData]="{ url: 'home',titles:[{title:'Features', url:'/app/features'},{title: analytics?.mainTitle || 'Analytics',url:'none'}] }">
-    </ws-widget-btn-page-back>
 
     <!-- <span class="margin-left-xs">{{ analytics?.mainTitle }}</span> -->
   </div>
@@ -18,9 +19,10 @@
       <mat-icon class="cursor-pointer" (click)="search(searchControl.value)" matSuffix>search</mat-icon>
     </mat-form-field>
   </form>
-</mat-toolbar>
+</div>
+<!-- </mat-toolbar> -->
 
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container container-balanced">
   <mat-sidenav class="sidenav" [mode]="mode$ | async" [(opened)]="sideNavBarOpened">
     <mat-nav-list class="padding-remove-top">
       <a *ngIf="analytics?.tabs?.home?.enabled" mat-list-item [routerLink]="'/analytics/home'"
