@@ -52,6 +52,7 @@ public class NotificationService implements INotificationService {
             List<String> toList = Arrays.asList(userConnection.getUserConnectionPrimarykey().getConnectionId());
             recipients.put(connectionProperties.getNotificationTemplateReciepient(), toList);
 
+            logger.info("Notification recipients --> "+recipients);
             //values in body of notification template
             Map<String, Object> tagValues = new HashMap<>();
             tagValues.put(connectionProperties.getNotificationTemplateSender(), getUserName(fromUUID));
