@@ -59,6 +59,7 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response === 'postCreated') {
+        this.fetchNewData = true
         this.refreshData(this.currentActivePage)
       }
     })
@@ -126,8 +127,8 @@ export class DiscussAllComponent implements OnInit, AfterViewInit {
 
   navigateWithPage(page: any) {
     if (page !== this.currentActivePage) {
-      this.router.navigate([`/app/discuss/home`], { queryParams: { page } })
       this.fetchNewData = true
+      this.router.navigate([`/app/discuss/home`], { queryParams: { page } })
     }
   }
 }

@@ -56,7 +56,8 @@ export namespace NSNetworkDataV2 {
         last_name: string,
         rank: number,
         wid: string,
-        requestSent?: boolean
+        requestSent?: boolean,
+        photo?: string | null | undefined
     }
 
     export interface IRecommendedUserResponse {

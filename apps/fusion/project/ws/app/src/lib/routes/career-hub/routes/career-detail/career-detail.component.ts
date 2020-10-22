@@ -21,6 +21,7 @@ export class CareerDetailComponent implements OnInit {
   defaultError = 'Something went wrong, Please try again after sometime!'
   topicId!: number
   fetchSingleCategoryLoader = false
+  // fetchNewData = false
 
   constructor(
     public dialog: MatDialog,
@@ -32,9 +33,11 @@ export class CareerDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.topicId = params.topicId
-      this.getTIDData()
+      // if (this.fetchNewData) {
+      //   this.getTIDData()
+      // }
+      this.data = this.route.snapshot.data.topic.data
     })
-    this.data = this.route.snapshot.data.topic.data
     this.fetchSingleCategoryDetails(this.data.cid)
   }
 
@@ -57,14 +60,15 @@ export class CareerDetailComponent implements OnInit {
     })
   }
 
-  getTIDData() {
-    this.discussService.fetchTopicById(this.topicId).subscribe(
-      (data: NSDiscussData.IDiscussionData) => {
-        this.data = data
-      },
-      (err: any) => {
-        this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-      })
-  }
+  // getTIDData() {
+  //   this.fetchNewData = true
+  //   this.discussService.fetchTopicById(this.topicId).subscribe(
+  //     (data: NSDiscussData.IDiscussionData) => {
+  //       this.data = data
+  //     },
+  //     (err: any) => {
+  //       this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+  //     })
+  // }
 
 }
