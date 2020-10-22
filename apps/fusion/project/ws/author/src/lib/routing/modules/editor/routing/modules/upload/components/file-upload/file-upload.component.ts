@@ -330,8 +330,8 @@ export class FileUploadComponent implements OnInit {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          this.data.emit('saveAndNext')
-          // this.start()
+          // this.data.emit('saveAndNext')
+          this.start()
 
         },
         () => {
