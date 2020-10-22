@@ -4,7 +4,7 @@
     <div *ngFor="let discussion of relatedDiscussions | slice:0:5;" class="tag ws-mat-primary-lite-background-important">
       <mat-card class="flex-1 cursor-pointer" (click)="getDiscussion(discussion)" >
         <!-- <mat-card-header> -->
-          <mat-card-subtitle class="title f-medium">{{discussion.title}}</mat-card-subtitle>
+          <mat-card-subtitle class="title f-medium" [innerHTML]="discussion?.title"></mat-card-subtitle>
         <!-- </mat-card-header> -->
         <mat-card-content>
           <div class="flex items-center justify-start">

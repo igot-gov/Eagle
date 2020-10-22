@@ -8,6 +8,8 @@ import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 // import { ProfileV2Service } from '../../services/profile-v2.servive'
 /* tslint:disable */
 import _ from 'lodash'
+import { NetworkV2Service } from '../../../network-v2/services/network-v2.service'
+import { NSNetworkDataV2 } from '../../../network-v2/models/network-v2.model'
 /* tslint:enable */
 
 @Component({
@@ -31,6 +33,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   tabs: any
   tabsData: NSProfileDataV2.IProfileTab[]
   currentUser!: string | null
+  connectionRequests!: NSNetworkDataV2.INetworkUser[]
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.pageYOffset
@@ -46,6 +49,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private discussService: DiscussService,
     private configSvc: ConfigurationsService,
+    private networkV2Service: NetworkV2Service,
     // private profileV2Svc: ProfileV2Service
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
@@ -71,6 +75,13 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
         this.fetchUserDetails(me)
       }
     }
+    this.networkV2Service.fetchAllConnectionEstablished().subscribe(
+      (data: any) => {
+        this.connectionRequests = data.result.data
+      },
+      (_err: any) => {
+        // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
   }
   ngAfterViewInit() {
     this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
