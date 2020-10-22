@@ -35,7 +35,7 @@ export class CompetenceCardComponent implements OnInit {
       minHeight: 'auto',
       // width: '80%',
       panelClass: 'remove-pad',
-      data: this.data
+      data: this.data,
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response === 'postCreated') {
