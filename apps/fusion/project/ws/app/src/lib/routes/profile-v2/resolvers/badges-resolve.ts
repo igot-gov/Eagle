@@ -17,12 +17,18 @@ export class Profilev2BadgesResolve
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSProfileDataV2.IBadgeResponse>> {
-    let userId = _route.params.userId
-    if (!userId) {
-      userId = _route.queryParams.userId
-    }
-    if (!userId) {
-      userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
+    const path = _route.routeConfig && _route.routeConfig.path
+    let userId = ''
+    if (path !== 'me') {
+      userId = _route.params.userId
+      if (!userId) {
+        userId = _route.queryParams.userId
+      }
+      if (!userId) {
+        userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
+      }
+    } else {
+      userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
     }
     return this.profileV2Svc.fetchBadges(userId).pipe(
       map(data => ({ data, error: null })),

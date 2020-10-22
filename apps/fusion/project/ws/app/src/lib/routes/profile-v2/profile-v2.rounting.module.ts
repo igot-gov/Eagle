@@ -12,6 +12,14 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
+        path: 'me',
+        component: ProfileViewComponent,
+        resolve: {
+          profile: Profilev2Resolve,
+          badges: Profilev2BadgesResolve,
+        },
+      },
+      {
         path: ':userId',
         component: ProfileViewComponent,
         resolve: {
@@ -19,6 +27,7 @@ const routes: Routes = [
           badges: Profilev2BadgesResolve,
         },
       },
+
     ],
   },
 ]

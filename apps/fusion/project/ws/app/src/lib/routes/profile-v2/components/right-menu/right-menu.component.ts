@@ -24,7 +24,7 @@ export class RightMenuComponent implements OnInit, OnDestroy {
     this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
     this.badgesSubscription = this.route.data.subscribe(response => {
       this.badges = response && response.badges && response.badges.data
-      this.portalProfile = response.profile.data[0]
+      this.portalProfile = response && response.profile && response.profile.data[0]
       this.completedPercent = this.calculatePercent(this.portalProfile || null)
     })
   }
