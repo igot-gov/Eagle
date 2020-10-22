@@ -139,20 +139,26 @@ public class ConnectionService implements IConnectionService {
             Pageable pageable = PageRequest.of(offset, limit);
             Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
 
-            //get established connections
+            //get established connections // OUT
             List<UserConnection> userApprovedConnections = sliceUserConnections.getContent().stream().filter(c->c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
+
+            //for direction IN
+            List<UserConnection> userApprovedConnectionsIn = userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.APPROVED);
 
             //approved the connectionIds of established connection
             List<String> approvedConnectionIds = userApprovedConnections.stream().map(userConnection -> userConnection.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
+
+            approvedConnectionIds.addAll(userApprovedConnectionsIn.stream().map(userConnection -> userConnection.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList()));
 
             //get the established related connection
             List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndRootOrg(rootOrg, approvedConnectionIds).stream().filter(c->c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
 
             //find the common new connections that could be established
-            List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !approvedConnectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
+            List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> notExistFlag(approvedConnectionIds, userConnection)).collect(Collectors.toList());
 
             commonConnections.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
 
+            System.out.println("commons ->"+new ObjectMapper().writeValueAsString(commonConnections));
             if(commonConnections.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
                 response.put(Constants.ResponseStatus.DATA, commonConnections);
@@ -168,6 +174,10 @@ public class ConnectionService implements IConnectionService {
         }
 
         return response;
+    }
+
+    private boolean notExistFlag(List<String> approvedIds, UserConnection userConnection){
+       return !approvedIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId()) || !approvedIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId());
     }
 
     @Override
