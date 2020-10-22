@@ -243,7 +243,7 @@ public class ProfileService implements IProfileService {
             return connections;
         }
         List<String> connectionIds = Collections.emptyList();
-        if(direction.equals(Constants.DIRECTION.IN)){
+        if(direction!=null && direction.equals(Constants.DIRECTION.IN)){
             connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
         } else {
             connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
