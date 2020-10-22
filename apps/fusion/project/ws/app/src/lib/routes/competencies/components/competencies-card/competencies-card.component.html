@@ -1,5 +1,5 @@
-<mat-card class="competency-card" [ngClass]="{'mat-copmetence': isSelected,'cursor-pointer':!isSelected}"
-  (click)="setSelectedCompetency()">
+<mat-card class="competency-card cursor-pointer" [ngClass]="{'mat-copmetence': isSelected}"
+  (click)="!isSelected ? setSelectedCompetency(): view()">
   <mat-card-content class="flex flex-1 custom" *ngIf="!isSelected">
     <span class="mat-h3 font-medium">{{data.name}}</span>
     <h5 class="mat-h4">{{data.description}}</h5>
@@ -9,6 +9,6 @@
       <mat-icon class="m-auto">add</mat-icon>
     </div>
     <span class="mat-h3 font-medium">{{data.name}}</span>
-    <h5 class="mat-h4">{{data.description}}</h5>
+    <h5 class="mat-h4" (click)="view()">{{data.description}}</h5>
   </mat-card-content>
 </mat-card>

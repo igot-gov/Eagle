@@ -17,14 +17,27 @@ export class NetworkRecommendedComponent implements OnInit {
   queryControl = new FormControl('')
   currentFilter = 'timestamp'
   currentFilterSort = 'desc'
+  enableSearchFeature = false
   constructor(
     private route: ActivatedRoute,
     private networkV2Service: NetworkV2Service,
   ) {
-    this.data = this.route.snapshot.data.recommendedList.data.result.data
+    this.data = this.route.snapshot.data.recommendedList.data.result.data.map((v: NSNetworkDataV2.INetworkUser) => {
+      if (v && v.personalDetails && v.personalDetails.firstname) {
+        v.personalDetails.firstname = v.personalDetails.firstname.toLowerCase()
+      }
+      return v
+    })
   }
 
   ngOnInit() {
+    this.queryControl.valueChanges.subscribe(val => {
+      if (val.length === 0) {
+        this.enableSearchFeature = false
+      } else {
+        this.enableSearchFeature = true
+      }
+    })
   }
 
   updateQuery(key: string) {

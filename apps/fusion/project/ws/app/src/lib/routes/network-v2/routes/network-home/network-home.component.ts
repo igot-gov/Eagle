@@ -108,20 +108,24 @@ export class NetworkHomeComponent implements OnInit {
   getSearchResult() {
     this.cardNetworkService.fetchSearchUserInfo(this.nameFilter.trim()).subscribe(data => {
       this.searchResultUserArray = data
-      this.networkV2Service.fetchAllConnectionRequests().subscribe(requests => {
-        if (requests && requests.result && requests.result.data) {
-          requests.result.data.map(user => {
-            if (user.id) {
-              this.searchResultUserArray.map((autoCompleteUser: any) => {
-                if (autoCompleteUser.wid === user.id) {
-                  autoCompleteUser['requestSent'] = true
-                }
-              })
-            }
-            this.searchSpinner = false
-          })
-        }
-      })
+      this.networkV2Service.fetchAllConnectionRequests().subscribe(
+        requests => {
+          if (requests && requests.result && requests.result.data) {
+            requests.result.data.map(user => {
+              if (user.id) {
+                this.searchResultUserArray.map((autoCompleteUser: any) => {
+                  if (autoCompleteUser.wid === user.id) {
+                    autoCompleteUser['requestSent'] = true
+                  }
+                })
+              }
+              this.searchSpinner = false
+            })
+          }
+        },
+        (_err: any) => {
+          this.searchSpinner = false
+        })
       this.searchResultUserArray.splice(this.searchResultUserArray.findIndex((el: any) => {
         if (this.configSvc.userProfile && this.configSvc.userProfile.userId) {
           return el.wid === this.configSvc.userProfile.userId

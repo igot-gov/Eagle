@@ -1,6 +1,6 @@
 <div class="flex flex-1 items-center card-container ws-mat-primary-tags cursor-pointer" (click)="goToUserProfile(user)">
     <div class="mr-3">
-        <ws-widget-avatar-photo [name]="getUseravatarName()" [randomColor]="true" size="m">
+        <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
         </ws-widget-avatar-photo>
     </div>
     <div class="flex flex-col flex-1 ">

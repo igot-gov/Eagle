@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class PipeFilterSearchPipe implements PipeTransform {
 
-  transform(items: any[], searchText: string, ...keys: any): any[] {
+  transform(items: any[], searchText: string, ...keys: any): any {
     if (!items) { return [] }
     if (!searchText) { return items }
     const searchTextLowerCase = searchText.toLowerCase()
     if (keys && keys.length) {
-      return items.filter(it => {
+      const result =  items.filter(it => {
         return it['personalDetails'][keys[0]].toLowerCase().includes(searchTextLowerCase)
         // keys.map((key: any) => {
         //   console.log('key:', key)
@@ -18,6 +18,10 @@ export class PipeFilterSearchPipe implements PipeTransform {
         //   return it['personalDetails'][key].toLowerCase().includes(searchTextLowerCase)
         // })
       })
+      if (result && result.length <= 0) {
+        return [-1]
+      }
+      return result
     }
     return items.filter(it => {
       return it.title.toLowerCase().includes(searchTextLowerCase)
