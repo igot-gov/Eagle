@@ -25,7 +25,8 @@
         <mat-card class="flex-1 remove-botton-radius">
             <mat-card-header>
                 <mat-card-title class="w-full margin-l-0 f-medium" >
-                    <h2 *ngIf="data && data.length && !enableSearchFeature">{{data.length}} connections</h2>
+                    <h2 *ngIf="data && data.length && !enableSearchFeature && data.length > 1 ">{{data.length}} connections</h2>
+                    <h2 *ngIf="data && data.length && !enableSearchFeature && data.length === 1">{{data.length}} connection</h2>
                     <h2 *ngIf="data && data.length && enableSearchFeature">Search results</h2>
                     <h4 class="w-full text-center ws-mat-black60-text" *ngIf="data && data.length <= 0">No connections found!</h4>
                 </mat-card-title>
