@@ -126,7 +126,7 @@ export class CompetenceAllComponent implements OnInit {
       minHeight: 'auto',
       // width: '80%',
       panelClass: 'remove-pad',
-      data: item
+      data: item,
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response === 'yes') {
