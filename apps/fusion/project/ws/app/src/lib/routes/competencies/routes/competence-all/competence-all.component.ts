@@ -7,6 +7,7 @@ import { CompetenceService } from '../../services/competence.service'
 /* tslint:disable */
 import _ from 'lodash'
 import { FormControl } from '@angular/forms'
+import { CompetenceViewComponent } from '../../components/competencies-view/competencies-view.component'
 /* tslint:enable */
 
 @Component({
@@ -118,5 +119,19 @@ export class CompetenceAllComponent implements OnInit {
   }
   setSelectedCompetency(id: string) {
     this.selectedId = id
+  }
+
+  view(item?: NSCompetencie.ICompetencie) {
+    const dialogRef = this.dialog.open(CompetenceViewComponent, {
+      minHeight: 'auto',
+      // width: '80%',
+      panelClass: 'remove-pad',
+      data: item
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'yes') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
   }
 }
