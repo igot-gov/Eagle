@@ -63,14 +63,14 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   ngOnInit() {
-    if (this.portalProfile && this.portalProfile.userId) {
-      this.fetchUserDetails(this.portalProfile.userId)
-    } else {
-      const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
-      if (me) {
-        this.fetchUserDetails(me)
-      }
-    }
+    // if (this.portalProfile && this.portalProfile.userId) {
+    //   this.fetchUserDetails(this.portalProfile.userId)
+    // } else {
+    //   const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
+    //   if (me) {
+    //     this.fetchUserDetails(me)
+    //   }
+    // }
   }
   ngAfterViewInit() {
     this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
