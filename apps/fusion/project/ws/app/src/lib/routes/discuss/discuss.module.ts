@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
+import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule, PipeListFilterModule } from '@ws-widget/utils'
 import { DiscussComponent } from './routes/discuss-home/discuss.component'
 import { DiscussCommetsComponent } from './components/discuss-comments/discuss-comments.component'
 import { DiscussCategoriesComponent } from './routes/discuss-categories/discuss-categories.component'
@@ -95,6 +95,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     EditorSharedModule,
     CkEditorModule,
     PipeOrderByModule,
+    PipeListFilterModule,
     BtnPageBackModule,
     WidgetResolverModule,
   ],

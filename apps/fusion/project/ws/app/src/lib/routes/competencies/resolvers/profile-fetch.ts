@@ -5,8 +5,6 @@ import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
 import { IResolveResponse } from '@ws-widget/utils'
 import { CompetenceService } from '../services/competence.service'
-
-
 @Injectable()
 export class ProfileResolve
   implements

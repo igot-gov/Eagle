@@ -609,6 +609,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   private constructFormFromRegistry(data: any, academics: NsUserProfileDetails.IAcademics, organisation: any) {
+    /* tslint:disable */
     this.createUserForm.patchValue({
       firstname: data.personalDetails.firstname,
       middlename: data.personalDetails.middlename,
@@ -655,7 +656,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       skillAquiredDesc: data.skills.additionalSkills,
       certificationDesc: data.skills.certificateDetails,
     },
-      { emitEvent: true })
+      {
+        emitEvent: true,
+      })
+    /* tslint:enable */
     this.cd.detectChanges()
     this.cd.markForCheck()
     this.setDropDownOther(organisation)
