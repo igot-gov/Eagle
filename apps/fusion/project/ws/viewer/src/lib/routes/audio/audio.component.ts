@@ -70,7 +70,7 @@ export class AudioComponent implements OnInit, OnDestroy {
           if (this.audioData.subTitles) {
 
             let subTitleUrl = ''
-            if (this.videoData.subTitles[0]) {
+            if (this.audioData.subTitles[0]) {
               if (this.audioData.subTitles[0].url.indexOf('/content-store/') > -1) {
                 subTitleUrl = `/apis/authContent/${new URL(this.audioData.subTitles[0].url).pathname}`
               } else {
