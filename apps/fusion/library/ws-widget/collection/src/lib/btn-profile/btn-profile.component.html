@@ -13,7 +13,7 @@
 <button mat-button class="new-margin" #rootTrigger="matMenuTrigger" [matMenuTriggerFor]="settingsMenu">
   <span class="flex flex-column flex-middle">
     <!-- <mat-icon>account_circle</mat-icon> -->
-    <ws-widget-avatar-photo [photoUrl]="" [name]="givenName" size="s">
+    <ws-widget-avatar-photo [photoUrl]="profileImage" [name]="givenName" size="s">
     </ws-widget-avatar-photo>
     <!-- <span class="padding-left-xs" i18n>{{ givenName || 'Guest'}}</span> -->
     <!-- <mat-icon>arrow_drop_down</mat-icon> -->
@@ -46,7 +46,7 @@
     </div>
   </section>
   <div mat-menu-item>
-    <a mat-menu-item routerLink="/app/profile/dashboard" class="all-features">
+    <a mat-menu-item routerLink="/app/person-profile/me" class="all-features">
       <mat-icon>account_circle</mat-icon>
       <span i18n>Profile</span>
     </a>

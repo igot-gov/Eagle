@@ -7,6 +7,7 @@ import { CompetenceService } from '../../services/competence.service'
 /* tslint:disable */
 import _ from 'lodash'
 import { FormControl } from '@angular/forms'
+import { CompetenceViewComponent } from '../../components/competencies-view/competencies-view.component'
 /* tslint:enable */
 
 @Component({
@@ -29,12 +30,23 @@ export class CompetenceAllComponent implements OnInit {
   searchKey = ''
   queryControl = new FormControl('')
   selectedId = ''
+  currentProfile: any
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private competencySvc: CompetenceService
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
+    if (this.route.snapshot.data &&
+      this.route.snapshot.data.profile &&
+      this.route.snapshot.data.profile.data &&
+      this.route.snapshot.data.profile.data[0]
+    ) {
+      if (this.route.snapshot.data.profile.data[0].competencies) {
+        this.myCompetencies = this.route.snapshot.data.profile.data[0].competencies
+      }
+      this.currentProfile = this.route.snapshot.data.profile.data[0]
+    }
   }
   ngOnInit() {
     // load page based on 'page' query param or default to 1
@@ -77,9 +89,36 @@ export class CompetenceAllComponent implements OnInit {
         return i.id === id
       }).first().value()
       this.myCompetencies.push(vc)
+      this.addToProfile(vc)
       this.resetcomp()
     }
   }
+  addToProfile(item: NSCompetencie.ICompetencie) {
+    if (item) {
+      const newCompetence = {
+        type: item.type,
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        status: item.status,
+        source: item.source,
+        competencyType: item.additionalProperties.competencyType,
+      }
+      const updatedProfile = this.currentProfile
+      if (_.get(this, 'currentProfile.competencies')) {
+        updatedProfile.competencies.push(newCompetence)
+      } else {
+        updatedProfile.competencies = []
+        updatedProfile.competencies.push(newCompetence)
+      }
+      this.competencySvc.updateProfile(updatedProfile).subscribe(response => {
+        if (response) {
+          // success
+        }
+      })
+    }
+  }
+
   resetcomp() {
     let data: any[] = []
     const allCompetencies = this.allCompetencies
@@ -118,5 +157,19 @@ export class CompetenceAllComponent implements OnInit {
   }
   setSelectedCompetency(id: string) {
     this.selectedId = id
+  }
+
+  view(item?: NSCompetencie.ICompetencie) {
+    const dialogRef = this.dialog.open(CompetenceViewComponent, {
+      minHeight: 'auto',
+      // width: '80%',
+      panelClass: 'remove-pad',
+      data: item,
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'yes') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
   }
 }

@@ -22,6 +22,12 @@ export class NetworkConnectionRequestsComponent implements OnInit {
     private networkV2Service: NetworkV2Service,
   ) {
     this.data = this.route.snapshot.data.connectionRequests.data.result.data
+    this.data = this.data.map((v: NSNetworkDataV2.INetworkUser) => {
+      if (v && v.personalDetails && v.personalDetails.firstname) {
+        v.personalDetails.firstname = v.personalDetails.firstname.toLowerCase()
+      }
+      return v
+    })
    }
 
   ngOnInit() {

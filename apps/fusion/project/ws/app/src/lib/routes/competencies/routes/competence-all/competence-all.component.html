@@ -7,7 +7,7 @@
     </div> -->
     <div class="flex-3">
       <div class="w-full pt-10  px-2">
-        <mat-card class="no-competency-card" *ngIf="myCompetencies && myCompetencies.length === 0">
+        <mat-card class="no-competency-card margin-right-s" *ngIf="myCompetencies && myCompetencies.length === 0">
           <mat-card-header>
             <mat-card-title>
               <!-- <h2 [innerHTML]="category.name"></h2> -->
@@ -35,7 +35,7 @@
           </mat-card-header>
           <mat-card-content class="flex flex-1 flex-wrap">
             <span>&nbsp;</span>
-            <div class="tag mat-copmetence" *ngFor="let item of myCompetencies">
+            <div class="tag mat-copmetence cursor-pointer" (click)=view(item) *ngFor="let item of myCompetencies">
               <span>{{item.name}}</span>
             </div>
           </mat-card-content>
@@ -55,9 +55,9 @@
             </mat-form-field>
           </form>
           <!-- <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important"> -->
-          <button class="margin-top-s" mat-icon-button (click)="resetSearch()">
+          <!-- <button class="margin-top-s" mat-icon-button (click)="resetSearch()">
             <mat-icon>refresh</mat-icon>
-          </button>
+          </button> -->
           <!-- </div> -->
         </div>
 

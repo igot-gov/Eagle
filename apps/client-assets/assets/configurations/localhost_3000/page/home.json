@@ -238,6 +238,42 @@
             "dimensions": {},
             "className": "",
             "widget": {
+              "widgetType": "discussStrip",
+              "widgetSubType": "DiscussStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "discuss",
+                    "logo": "forum",
+                    "title": "discuss",
+                    "stripBackground": "assets/instances/eagle/background/discuss.svg",
+                    "titleDescription": "Trending discussions",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeDiscuss"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/discuss/home",
+                      "viewMoreText": "Discuss",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/discussionHub/topics/recent",
+                        "queryParams": {}
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "",
+            "widget": {
               "widgetType": "networkStrip",
               "widgetSubType": "NetworkStripMultiple",
               "widgetData": {
@@ -266,42 +302,6 @@
                           "intervalInDays": 7,
                           "type": "latestUsers"
                         }
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ],
-        [
-          {
-            "dimensions": {},
-            "className": "",
-            "widget": {
-              "widgetType": "discussStrip",
-              "widgetSubType": "DiscussStripMultiple",
-              "widgetData": {
-                "strips": [
-                  {
-                    "key": "discuss",
-                    "logo": "group",
-                    "title": "discuss",
-                    "stripBackground": "assets/instances/eagle/background/discuss.svg",
-                    "titleDescription": "Trending discussions",
-                    "stripConfig": {
-                      "cardSubType": "cardHomeDiscuss"
-                    },
-                    "viewMoreUrl": {
-                      "path": "/app/discuss/home",
-                      "viewMoreText": "Discuss",
-                      "queryParams": {}
-                    },
-                    "filters": [],
-                    "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/discussionHub/topics/recent",
-                        "queryParams": {}
                       }
                     }
                   }

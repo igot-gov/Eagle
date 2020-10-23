@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core'
+import { MatDialog } from '@angular/material'
 import { NSCompetencie } from '../../models/competencies.model'
+import { CompetenceViewComponent } from '../competencies-view/competencies-view.component'
 // import { Router } from '@angular/router'
 @Component({
   selector: 'app-competence-card',
@@ -19,7 +21,7 @@ export class CompetenceCardComponent implements OnInit {
 
   @Output() setSelected = new EventEmitter<string>()
   @Output() addComp = new EventEmitter<string>()
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
   ngOnInit() { }
   setSelectedCompetency() {
     this.isSelected = true
@@ -27,5 +29,18 @@ export class CompetenceCardComponent implements OnInit {
   }
   add() {
     this.addComp.emit(this.data.id)
+  }
+  view() {
+    const dialogRef = this.dialog.open(CompetenceViewComponent, {
+      minHeight: 'auto',
+      // width: '80%',
+      panelClass: 'remove-pad',
+      data: this.data,
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
   }
 }

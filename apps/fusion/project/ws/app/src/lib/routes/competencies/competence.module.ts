@@ -4,6 +4,7 @@ import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRela
 import { CompetenceComponent } from './routes/competence-home/competence.component'
 import { CompetencieRoutingModule } from './competence.rounting.module'
 import { CompetenceCardComponent } from './components/competencies-card/competencies-card.component'
+import { CompetenceViewComponent } from './components/competencies-view/competencies-view.component'
 import { LeftMenuComponent } from './components/left-menu/left-menu.component'
 import { RightMenuComponent } from './components/right-menu/right-menu.component'
 // import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
@@ -40,6 +41,7 @@ import { CompetenceAllComponent } from './routes/competence-all/competence-all.c
     LeftMenuComponent,
     RightMenuComponent,
     CompetenceAllComponent,
+    CompetenceViewComponent,
   ],
   imports: [
     CommonModule,
@@ -72,7 +74,7 @@ import { CompetenceAllComponent } from './routes/competence-all/competence-all.c
     BtnPageBackModule,
     WidgetResolverModule,
   ],
-  entryComponents: [],
+  entryComponents: [CompetenceViewComponent],
   providers: [
     CKEditorService,
     LoaderService,

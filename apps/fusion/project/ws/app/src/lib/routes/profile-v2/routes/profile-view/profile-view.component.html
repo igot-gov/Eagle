@@ -3,8 +3,7 @@
     <mat-card-header class="flex-custom-m">
       <div mat-card-avatar class="example-header-image">
         <ws-widget-avatar-photo [photoUrl]="portalProfile.photo || null"
-          [name]="(portalProfile.personalDetails.firstname +' ' + portalProfile.personalDetails.lasttname) || 'User'"
-          size="xxl-s">
+          [name]="(portalProfile.personalDetails.firstname +' ' + portalProfile.personalDetails.surname)" size="xxl-s">
         </ws-widget-avatar-photo>
       </div>
       <div class="flex-1">
@@ -26,10 +25,10 @@
         <mat-card-subtitle>{{portalProfile?.employmentDetails?.officialPostalAddress}}</mat-card-subtitle>
         <!-- <mat-card-subtitle>{{discussProfileData.email}}</mat-card-subtitle> -->
         <ng-container>
-          <div class="flex flex-1 custom margin-0 margin-top-m bottom-fix">
-            <div class="flex flex-1 flex-custom-m">
+          <div class="flex flex-1 custom margin-0 margin-top-m bottom-fix mob">
+            <div class="flex flex-1">
               <span class="flex margin-right-l mobile">
-                <span class="ws-mat-default-text">{{0}}</span>
+                <span class="ws-mat-default-text">{{connectionRequests?.length}}</span>
                 <span class="pad-4">Connections</span>
               </span>
               <span class="flex margin-right-l mobile">
