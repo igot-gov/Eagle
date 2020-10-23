@@ -11,13 +11,13 @@ import { CompetenceService } from '../services/competence.service'
 export class ProfileResolve
   implements
   Resolve<Observable<IResolveResponse<any>> | IResolveResponse<any>> {
-  constructor(private CompetenceSvc: CompetenceService) { }
+  constructor(private competenceSvc: CompetenceService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<any>> {
-    return this.CompetenceSvc.fetchProfile().pipe(
+    return this.competenceSvc.fetchProfile().pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )

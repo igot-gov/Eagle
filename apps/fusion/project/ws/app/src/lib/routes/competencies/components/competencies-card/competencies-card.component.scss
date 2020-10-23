@@ -5,13 +5,13 @@
 .competency-card {
   flex: 1;
   height: auto;
-  min-width: 346px;
-  min-width: 346px;
+  // min-width: 346px;
   height: fit-content;
   min-height: -webkit-fill-available;
 
   // width: max-content;
   @include breakpoint-xs {
+    // min-width: 100%;
     width: auto;
   }
 }
