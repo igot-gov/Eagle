@@ -53,31 +53,27 @@ router.get("/content/:id", function (req, res) {
           var html = `<!DOCTYPE html>
           <html lang="en">
             <head>
+              <title>"${data.name}"</title>
               <meta charset="utf-8" />
               <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <meta name="title" content="${data.name}" />
+              <meta name="description" content="${data.description}" />
+       
+             
+              <meta property="og:type" content="website">
+              <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview`}" />
               <meta property="og:title" content="${data.name}" />
-              <meta property="og:description" expr:content="${
-                data.description
-              }" />
-              <meta
-                property="og:url"
-                content="${`https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview`}"
-              />
-              <meta
-                name="image"
-                property="og:image"
-                content="${data.appIcon}" />          
+              <meta property="og:description" expr:content="${data.description}" />
+              <meta property="og:image" content="${data.appIcon}" />          
           
-              <meta name="twitter:card" content="summary" />
-              <meta name="twitter:site" content="@iGot" />
-              <meta name="twitter:title" content="${data.name}" />
-              <meta name="twitter:description" content="${data.description}" />
-              <meta name="twitter:image" content="${data.appIcon}" />
-              <meta name="twitter:image:alt" content="Twitter Image" />
+              <meta property="twitter:card" content="summary_large_image" />
+              <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview`}" />
+              <meta property="twitter:title" content="${data.name}" />
+              <meta property="twitter:description" content="${data.description}" />
+              <meta property="twitter:image" content="${data.appIcon}" />
             </head>
             <body></body>
-          </html>
-          
+          </html>          
             `;
           res.send(html);
         }
