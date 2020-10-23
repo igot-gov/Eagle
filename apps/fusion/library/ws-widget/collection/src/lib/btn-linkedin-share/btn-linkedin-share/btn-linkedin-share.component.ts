@@ -35,7 +35,6 @@ export class BtnLinkedinShareComponent implements OnInit, AfterViewInit {
       const urlarr = location.href.split('/')
       const contentId = urlarr[urlarr.length - 2]
       const url = `https://d136953gtttd92.cloudfront.net/share/content/${contentId}`
-      
 
       this.element.nativeElement.innerHTML = `<script type="IN/Share" data-url="${url}"></script>`
 
