@@ -20,7 +20,7 @@ export namespace NSProfileDataV2 {
     userId: string
     academics?: IAcademics[]
     employmentDetails?: IEmploymentDetails
-    interests: IInterests[]
+    interests: IInterests
     photo: string | null | undefined
     osCreatedAt: string
     osCreatedBy: string
@@ -29,7 +29,7 @@ export namespace NSProfileDataV2 {
     osid: string
     personalDetails: IPersonalDetails
     professionalDetails: IProfessionalDetails[]
-    skills: ISkills[]
+    skills: ISkills
 
   }
   export interface IAcademics {

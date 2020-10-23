@@ -419,7 +419,7 @@
       "show": true,
       "status": "live",
       "toolTip": "Profile",
-      "url": "/app/profile",
+      "url": "/app/person-profile/me",
       "shortName": "Profile"
     },
     "feature_profile_update": {
