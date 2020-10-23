@@ -116,6 +116,38 @@ networkConnectionApi.get('/connections/established', async (req, res) => {
   }
 })
 
+networkConnectionApi.get('/connections/established/:id', async (req, res) => {
+  try {
+    const rootOrg = req.headers.rootorg
+    const userId = req.params.id
+
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    if (!userId) {
+      res.status(400).send(ERROR.GENERAL_ERR_MSG)
+      return
+    }
+    const response = await axios.get(apiEndpoints.getConnectionEstablishedData, {
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+        userId,
+      },
+    })
+    res.send((response.data))
+
+  } catch (err) {
+    logError('CONNECTIONS ERROR', err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: unknown,
+      }
+    )
+  }
+})
+
 networkConnectionApi.get('/connections/suggests', async (req, res) => {
   try {
     const rootOrg = req.headers.rootorg
