@@ -5,6 +5,10 @@ import { Observable } from 'rxjs'
 
 const API_ENDPOINTS = {
   searchCompetency: '/apis/protected/v8/competency/searchCompetency',
+  fetchProfileNyId: (id: string) => `/apis/protected/v8/user/profileDetails/getUserRegistryById${id}`,
+  fetchProfile: '/apis/protected/v8/user/profileDetails/getUserRegistry',
+
+  updateProfile: '/apis/protected/v8/user/profileDetails/createUserRegistry'
 
 }
 /* this page needs refactor*/
@@ -30,5 +34,17 @@ export class CompetenceService {
 
   fetchCompetency(searchData: any): Observable<any> {
     return this.http.post<any>(API_ENDPOINTS.searchCompetency, searchData)
+  }
+
+  fetchProfileById(id: any): Observable<any> {
+    return this.http.get<any>(API_ENDPOINTS.fetchProfileNyId(id))
+  }
+
+  fetchProfile(): Observable<any> {
+    return this.http.get<any>(API_ENDPOINTS.fetchProfile)
+  }
+
+  updateProfile(profileData: any): Observable<any> {
+    return this.http.post<any>(API_ENDPOINTS.updateProfile, profileData)
   }
 }

@@ -32,6 +32,7 @@ export class BtnProfileComponent extends WidgetBaseComponent
   btnSettingsConfig!: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig>
   private pinnedAppsSubs?: Subscription
   givenName = 'Guest'
+  profileImage!: string | null
   constructor(
     private configSvc: ConfigurationsService,
     private dialog: MatDialog
@@ -41,6 +42,7 @@ export class BtnProfileComponent extends WidgetBaseComponent
     this.btnSettingsConfig = { ... this.settingBtnConfig }
     if (this.configSvc.userProfile) {
       this.givenName = this.configSvc.userProfile.givenName || ''
+      this.profileImage = this.configSvc.userProfile.source_profile_picture || null
     }
   }
   ngOnInit() {

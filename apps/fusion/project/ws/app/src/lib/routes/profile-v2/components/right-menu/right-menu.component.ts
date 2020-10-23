@@ -32,16 +32,16 @@ export class RightMenuComponent implements OnInit, OnDestroy {
     // this.completedPercent = 86
   }
   calculatePercent(profile: NSProfileDataV2.IProfile | null): number {
-    let count = 20
+    let count = 30
     if (!profile) {
       return count
     }
-    if (profile.academics && profile.academics[0] && profile.academics[0].nameOfQualification) {
-      count += 11.43
+    if (profile.academics && profile.academics[0] && (profile.academics[0].nameOfInstitute || profile.academics[0].nameOfQualification)) {
+      count += 23
     }
-    if (profile.employmentDetails && profile.employmentDetails.departmentName) {
-      count += 11.43
-    }
+    // if (profile.employmentDetails && profile.employmentDetails.departmentName) {
+    //   count += 11.43
+    // }
     if (profile.personalDetails && profile.personalDetails.nationality) {
       count += 11.43
     }
@@ -51,16 +51,16 @@ export class RightMenuComponent implements OnInit, OnDestroy {
     if (profile.professionalDetails && profile.professionalDetails[0] && profile.professionalDetails[0].designation) {
       count += 11.43
     }
-    if (profile.skills && profile.skills[0] && profile.skills[0].additionalSkills) {
+    if (profile.skills && profile.skills.additionalSkills) {
       count += 11.43
     }
-    if (profile.interests && profile.interests[0] && profile.interests[0].hobbies && profile.interests[0].hobbies.length > 0) {
+    if (profile.interests && profile.interests.hobbies && profile.interests.hobbies.length > 0) {
       count += 11.43
     }
     if (count > 100) {
       count = 100
     }
-    return count
+    return Math.round(count || 0)
   }
   ngOnDestroy() {
     if (this.badgesSubscription) {

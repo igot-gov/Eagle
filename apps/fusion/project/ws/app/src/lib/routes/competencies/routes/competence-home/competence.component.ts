@@ -56,10 +56,10 @@ export class CompetenceComponent implements OnInit, OnDestroy {
 
   bindUrl(path: string) {
     if (path) {
-      this.currentRoute = path
-      if (this.titles.length > 1) {
-        this.titles.pop()
-      }
+      // this.currentRoute = path
+      // if (this.titles.length > 1) {
+      // this.titles.pop()
+      // }
       // switch (path) {
       //   case 'home':
       //     this.titles.push({ title: 'Discussion', icon: '', url: 'none' })
