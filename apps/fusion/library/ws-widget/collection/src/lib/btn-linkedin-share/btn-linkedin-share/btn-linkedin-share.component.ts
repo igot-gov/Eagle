@@ -32,7 +32,12 @@ export class BtnLinkedinShareComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     if (this.isSocialMediaLinkedinShareEnabled && this.element) {
       // add linkedin share button script tag to element
-      this.element.nativeElement.innerHTML = `<script type="IN/Share" data-url="${this.url}"></script>`
+      let urlarr=location.href.split('/');
+      let contentId= urlarr[urlarr.length-2]
+      let url = `https://d136953gtttd92.cloudfront.net/share/content/${contentId}` 
+      console.log(url); 
+
+      this.element.nativeElement.innerHTML = `<script type="IN/Share" data-url="${url}"></script>`
 
       // render share button
       // tslint:disable-next-line: no-unused-expression  tslint:disable-next-line: whitespace
