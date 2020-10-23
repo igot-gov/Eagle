@@ -14,14 +14,14 @@ type TUrl = undefined | 'none' | 'back' | string
       'enterAnimation', [
       transition(':enter', [
         style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 0 }),
-        animate('300ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 1 }))
+        animate('300ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 1 })),
       ]),
       transition(':leave', [
         style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 1 }),
-        animate('300ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 0 }))
-      ])
+        animate('300ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 0 })),
+      ]),
     ]
-    )
+    ),
   ],
 })
 export class BtnPageBackComponent extends WidgetBaseComponent

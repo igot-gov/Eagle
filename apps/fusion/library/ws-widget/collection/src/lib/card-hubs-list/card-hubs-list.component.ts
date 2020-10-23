@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs'
       ]),
       transition(':leave', [
         style({ transition: 'visibility 1s linear 0.33s, opacity 0.33s linear', opacity: 1 }),
-        animate('200ms', style({ transition: 'visibility 1s linear 0.33s, opacity 0.33s linear', opacity: 0, 'transition-delay': '0s' }))
+        animate('300ms', style({ transition: 'visibility 1s linear 0.33s, opacity 0.33s linear', opacity: 0, 'transition-delay': '0s' }))
       ])
     ]
     )
