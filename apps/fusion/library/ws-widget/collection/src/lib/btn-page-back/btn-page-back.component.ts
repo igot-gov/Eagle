@@ -1,3 +1,4 @@
+import { animate, style, transition, trigger } from '@angular/animations'
 import { Component, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
@@ -8,6 +9,20 @@ type TUrl = undefined | 'none' | 'back' | string
   selector: 'ws-widget-btn-page-back',
   templateUrl: './btn-page-back.component.html',
   styleUrls: ['./btn-page-back.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+      transition(':enter', [
+        style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 0 }),
+        animate('300ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 1 }))
+      ]),
+      transition(':leave', [
+        style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 1 }),
+        animate('300ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 0 }))
+      ])
+    ]
+    )
+  ],
 })
 export class BtnPageBackComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<{ url: TUrl }> {
