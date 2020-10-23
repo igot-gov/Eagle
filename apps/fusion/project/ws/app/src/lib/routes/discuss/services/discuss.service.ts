@@ -39,7 +39,7 @@ export class DiscussService {
     if (page) {
       return `${url}?page=${page}`
     }
-    return url
+    return `${url}?page=1`
   }
 
   fetchAllCategories() {

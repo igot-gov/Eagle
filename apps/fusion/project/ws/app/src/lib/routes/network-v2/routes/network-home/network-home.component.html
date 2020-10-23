@@ -67,7 +67,7 @@
         </h4>
         <!-- </ng-container> -->
       </mat-card-content>
-      <mat-card-actions align="center" *ngIf="connectionRequests && connectionRequests.length">
+      <mat-card-actions align="center" *ngIf="connectionRequests && connectionRequests.length > 3">
         <button mat-button color="default" type="button" class=" flex-auto-display" (click)="goToConnectionRequests()">
           <span class="ws-mat-default-text" i18n>SEE MORE</span>
         </button>

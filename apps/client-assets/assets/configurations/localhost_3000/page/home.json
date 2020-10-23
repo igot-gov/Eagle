@@ -321,7 +321,7 @@
                 "strips": [
                   {
                     "key": "Career",
-                    "logo": "group",
+                    "logo": "work",
                     "title": "Careers",
                     "stripBackground": "assets/instances/eagle/background/careers.svg",
                     "titleDescription": "Latest openings",

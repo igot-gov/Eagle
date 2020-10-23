@@ -8,6 +8,23 @@
   // min-height: 400px;
 }
 
+.show {
+  display: flex !important;
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 1s;
+  transition: visibility 0s linear 0.33s,
+    opacity 0.33s linear;
+}
+
+.hide {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.33s,
+    opacity 0.33s linear;
+}
+
 .base-layout {
   // margin-top: 10px;
   box-shadow: none !important;

@@ -69,19 +69,14 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     if (this.portalProfile && this.portalProfile.userId) {
       this.fetchUserDetails(this.portalProfile.userId)
+      this.fetchConnectionDetails(this.portalProfile.userId)
     } else {
       const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
       if (me) {
         this.fetchUserDetails(me)
+        this.fetchConnectionDetails(me)
       }
     }
-    this.networkV2Service.fetchAllConnectionEstablished().subscribe(
-      (data: any) => {
-        this.connectionRequests = data.result.data
-      },
-      (_err: any) => {
-        // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-      })
   }
   ngAfterViewInit() {
     this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
@@ -96,6 +91,16 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     }
   }
+  fetchConnectionDetails(wid: string) {
+    this.networkV2Service.fetchAllConnectionEstablishedById(wid).subscribe(
+      (data: any) => {
+        this.connectionRequests = data.result.data
+      },
+      (_err: any) => {
+        // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
   filter(key: string | 'timestamp' | 'best' | 'saved') {
     if (key) {
       this.currentFilter = key
