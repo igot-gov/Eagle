@@ -655,7 +655,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       skillAquiredDesc: data.skills.additionalSkills,
       certificationDesc: data.skills.certificateDetails,
     },
-      { emitEvent: true })
+                                   { emitEvent: true })
     this.cd.detectChanges()
     this.cd.markForCheck()
     this.setDropDownOther(organisation)

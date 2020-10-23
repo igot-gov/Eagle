@@ -18,7 +18,7 @@ const routes: Routes = [
         path: 'home',
         component: CompetenceAllComponent,
         resolve: {
-          profile: ProfileResolve
+          profile: ProfileResolve,
         },
       },
     ],

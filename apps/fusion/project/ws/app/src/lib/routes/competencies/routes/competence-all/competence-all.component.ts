@@ -95,16 +95,16 @@ export class CompetenceAllComponent implements OnInit {
   }
   addToProfile(item: NSCompetencie.ICompetencie) {
     if (item) {
-      let newCompetence = {
-        "type": item.type,
-        "id": item.id,
-        "name": item.name,
-        "description": item.description,
-        "status": item.status,
-        "source": item.source,
-        "competencyType": item.additionalProperties.competencyType,
+      const newCompetence = {
+        type: item.type,
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        status: item.status,
+        source: item.source,
+        competencyType: item.additionalProperties.competencyType,
       }
-      let updatedProfile = this.currentProfile
+      const updatedProfile = this.currentProfile
       if (_.get(this, 'currentProfile.competencies')) {
         updatedProfile.competencies.push(newCompetence)
       } else {

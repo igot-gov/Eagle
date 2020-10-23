@@ -8,7 +8,7 @@ const API_ENDPOINTS = {
   fetchProfileNyId: (id: string) => `/apis/protected/v8/user/profileDetails/getUserRegistryById${id}`,
   fetchProfile: '/apis/protected/v8/user/profileDetails/getUserRegistry',
 
-  updateProfile: '/apis/protected/v8/user/profileDetails/createUserRegistry'
+  updateProfile: '/apis/protected/v8/user/profileDetails/createUserRegistry',
 
 }
 /* this page needs refactor*/
