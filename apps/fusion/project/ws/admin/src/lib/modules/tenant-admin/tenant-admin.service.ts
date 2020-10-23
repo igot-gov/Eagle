@@ -46,7 +46,7 @@ export class TenantAdminService {
 
   async getOrdinals(rootOrg: string | null, org: string[] | null) {
     // tslint:disable-next-line: no-console
-    console.log('org', org)
+    // console.log('org', org)
     return await this.http.get(`${API_ENDPOINTS.getOrdinals}?rootOrg=${rootOrg}&org=${org}`).toPromise()
   }
 

@@ -13,7 +13,7 @@ import { IProfileCareer } from './profile-career.model'
 export class ProfileCareerComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: IProfileCareer
   ngOnInit(): void {
-    console.log(this.widgetData)
+    // console.log(this.widgetData)
   }
 
 }
