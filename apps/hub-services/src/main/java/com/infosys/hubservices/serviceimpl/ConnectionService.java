@@ -19,6 +19,8 @@ import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionReposito
 import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class ConnectionService implements IConnectionService {
+
+    private Logger logger = LoggerFactory.getLogger(ConnectionService.class);
+    @Autowired
+    private ObjectMapper mapper;
 
     @Autowired
     private UserConnectionRepository userConnectionRepository;
@@ -47,6 +53,7 @@ public class ConnectionService implements IConnectionService {
         Response response = new Response();
         try {
 
+            logger.info("Add request: {}", mapper.writeValueAsString(request));
             UserConnectionPrimarykey pk = new UserConnectionPrimarykey(rootOrg, request.getUserId(), request.getConnectionId());
             UserConnection userConnection = new UserConnection(pk, Constants.Status.PENDING, "", new Date());
             userConnectionRepository.save(userConnection);
@@ -71,6 +78,7 @@ public class ConnectionService implements IConnectionService {
     public Response update(String rootOrg, ConnectionRequest request) {
         Response response = new Response();
         try {
+            logger.info("update request: {}", mapper.writeValueAsString(request));
 
             UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(rootOrg, request.getUserId(), request.getConnectionId());
             userConnection.setConnectionStatus(request.getStatus());
