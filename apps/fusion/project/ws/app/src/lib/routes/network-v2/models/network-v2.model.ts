@@ -58,6 +58,8 @@ export namespace NSNetworkDataV2 {
         wid: string,
         requestSent?: boolean,
         photo?: string | null | undefined
+        requestRecieved?: boolean,
+        connectionEstablished?: boolean,
     }
 
     export interface IRecommendedUserResponse {

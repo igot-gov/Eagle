@@ -27,6 +27,7 @@ const routes: Routes = [
         resolve: {
           recommendedUsers: MyMdoResolveService,
           connectionRequests: ConnectionRequestResolveService,
+          myConnectionList: MyConnectionResolveService,
         },
       },
       {
