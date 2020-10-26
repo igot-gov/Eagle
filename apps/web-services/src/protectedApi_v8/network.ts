@@ -301,7 +301,7 @@ networkConnectionApi.post('/connections/recommended', async (req, res) => {
   }
 })
 
-networkConnectionApi.post('/connections/recommended/rootOrg', async (req, res) => {
+networkConnectionApi.get('/connections/recommended/rootOrg', async (req, res) => {
   try {
     let usrDept = ''
     const rootOrg = req.header('rootorg')
