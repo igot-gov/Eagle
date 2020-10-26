@@ -619,11 +619,10 @@
                   </div>
                 </div>
                 <div class="margin-top-xs margin-right-xs margin-left-xs flex-1"
-                  *ngIf="checkCondition('resourceType', 'show')"
-                  [ngClass]="{ disable: checkCondition('resourceType', 'disabled') }">
+                  [ngClass]="{ disable: checkCondition('competencies', 'disabled') }">
                   <label>
                     <div class="flex flex-middle">
-                      <span [ngClass]="{ required: checkCondition('resourceType', 'required') }"
+                      <span [ngClass]="{ required: checkCondition('competencies', 'required') }"
                         i18n>Competencies</span>
                       <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
                                   </mat-icon> -->
@@ -641,7 +640,7 @@
                   </label>
                   <div class="margin-top-xs flex flex-1">
                     <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
-                      [ngClass]="{ 'mat-form-field-invalid': showError('resourceType') }">
+                      [ngClass]="{ 'mat-form-field-invalid': showError('competencies') }">
                       <mat-chip-list #keywords aria-label="Keyword selection">
                         <mat-chip *ngFor="let key of contentForm.controls.competencies.value" [selectable]="selectable"
                           [removable]="removable" (removed)="removeCompetency(key)">
@@ -653,12 +652,12 @@
                           [matChipInputFor]="keywords" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                           [matChipInputAddOnBlur]="false" (matChipInputTokenEnd)="addKeyword($event)" #keywordsSearch />
                       </mat-chip-list>
-                      <mat-error *ngIf="showError('resourceType')" i18n>Category Type is mandatory
+                      <mat-error *ngIf="showError('competencies')" i18n>Competency Type is mandatory
                       </mat-error>
                     </mat-form-field>
                     <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
                       (optionSelected)="optionSelectedCompetency($event.option.value); keywordsView.value = ''">
-                      <mat-option *ngIf="!checkCondition('resourceType', 'required')" i18n [value]="null">None
+                      <mat-option *ngIf="!checkCondition('competencies', 'required')" i18n [value]="null">None
                       </mat-option>
                       <mat-option *ngIf="keywordsSearch.value" [value]="keywordsSearch.value">{{ keywordsSearch.value }}
                       </mat-option>

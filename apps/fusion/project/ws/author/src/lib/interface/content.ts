@@ -80,6 +80,7 @@ export namespace NSContent {
     pkgVersion: string
     developer: string
     license: string
+    competencies: string
     attributions: string[]
     copyright: string[]
     creator: string
