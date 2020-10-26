@@ -88,7 +88,7 @@
     (!htmlContent?.isInIntranet || (htmlContent?.isInIntranet && isUserInIntranet)) &&
     (!isIntranetUrl || (isIntranetUrl && isUserInIntranet))
   " title="HTML Content Viewer" i18n-title [src]="iframeUrl" (load)="onIframeLoadOrError('load',iframeElem,$event)"
-    (error)="onIframeLoadOrError('error')"
+    (error)="onIframeLoadOrError('error')" [name]="iframeName"
     allow="fullscreen; accelerometer; autoplay; encrypted-media; gyroscope; microphone; camera;"
     class="html-iframe"></iframe>
 </div>
