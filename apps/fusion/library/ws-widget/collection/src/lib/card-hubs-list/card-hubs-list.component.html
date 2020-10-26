@@ -6,14 +6,14 @@
           <mat-icon class="margin-xs">apps</mat-icon>
           <span class="margin-auto ws-mat-default-text">HUBS</span>
         </span>
-        <ng-container *ngIf="!visible && !isMobile">
+        <ng-container *ngIf="!visible && !isMobile" [@enterAnimation]="visible">
           <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
             <span class="mat-card-subtitle margin-0 text-uppercase"> {{hub.hubname}}</span>
           </a>
         </ng-container>
 
       </div>
-      <div class="flex flex-1" [hidden]="!visible">
+      <div class="flex flex-1" *ngIf="visible" [@enterAnimation]="visible">
         <div class="flex flex-1">
           <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
             No hubs Info Available

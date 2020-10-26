@@ -86,6 +86,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     const req = {
       delta: 1,
     }
+    this.fetchNewData = true
     this.processVote(discuss, req)
   }
 
@@ -93,6 +94,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     const req = {
       delta: -1,
     }
+    this.fetchNewData = true
     this.processVote(discuss, req)
   }
 
@@ -100,6 +102,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.discussService.bookmarkPost(discuss.pid).subscribe(
       _data => {
         this.openSnackbar('Bookmark added successfully!')
+        this.fetchNewData = true
         this.refreshPostData(this.currentActivePage)
       },
       (err: any) => {
@@ -110,6 +113,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.discussService.deleteBookmarkPost(discuss.pid).subscribe(
       _data => {
         this.openSnackbar('Bookmark Removed successfully!')
+        this.fetchNewData = true
         this.refreshPostData(this.currentActivePage)
       },
       (err: any) => {
@@ -120,6 +124,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   delteVote(discuss: any) {
     this.discussService.deleteVotePost(discuss.pid).subscribe(
       _data => {
+        this.fetchNewData = true
         this.refreshPostData(this.currentActivePage)
       },
       (err: any) => {
@@ -150,6 +155,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
       this.discussService.replyPost(post.tid, req).subscribe(
         () => {
           this.openSnackbar('Your reply was saved succesfuly!')
+          this.fetchNewData = true
           this.refreshPostData(this.currentActivePage)
         },
         (err: any) => {
@@ -195,7 +201,7 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   refreshPostData(page: any) {
-    if (this.currentFilter === 'recent') {
+    if (this.currentFilter === 'timestamp') {
       this.discussService.fetchTopicById(this.topicId, page).subscribe(
         (data: NSDiscussData.IDiscussionData) => {
           this.data = data

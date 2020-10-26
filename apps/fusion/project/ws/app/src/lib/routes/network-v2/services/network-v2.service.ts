@@ -48,4 +48,9 @@ export class NetworkV2Service {
   fetchAllConnectionEstablished() {
     return this.http.get<NSNetworkDataV2.IEstablishedConnectResopnse>(API_ENDPOINTS.connectionEstablished)
   }
+
+  fetchAllConnectionEstablishedById(wid: any) {
+    const url = `${API_ENDPOINTS.connectionEstablished}/${wid}`
+    return this.http.get<NSNetworkDataV2.IEstablishedConnectResopnse>(url)
+  }
 }
