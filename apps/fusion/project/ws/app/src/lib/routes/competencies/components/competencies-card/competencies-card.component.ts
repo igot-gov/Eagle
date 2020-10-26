@@ -21,6 +21,8 @@ export class CompetenceCardComponent implements OnInit {
 
   @Output() setSelected = new EventEmitter<string>()
   @Output() addComp = new EventEmitter<string>()
+  @Output() delComp = new EventEmitter<string>()
+
   constructor(public dialog: MatDialog) { }
   ngOnInit() { }
   setSelectedCompetency() {
@@ -37,9 +39,14 @@ export class CompetenceCardComponent implements OnInit {
       panelClass: 'remove-pad',
       data: this.data,
     })
+    let instance = dialogRef.componentInstance
+    instance.isUpdate = false
     dialogRef.afterClosed().subscribe((response: any) => {
-      if (response === 'postCreated') {
+      if (response && response.action === 'ADD') {
         // this.refreshData(this.currentActivePage)
+        this.addComp.emit(this.data.id)
+      } else if (response && response.action === 'DELETE') {
+        this.delComp.emit(this.data.id)
       }
     })
   }

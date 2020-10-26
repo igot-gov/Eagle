@@ -42,7 +42,10 @@ export class BtnProfileComponent extends WidgetBaseComponent
     this.btnSettingsConfig = { ... this.settingBtnConfig }
     if (this.configSvc.userProfile) {
       this.givenName = this.configSvc.userProfile.givenName || ''
-      this.profileImage = this.configSvc.userProfile.source_profile_picture || null
+      // this.profileImage = this.configSvc.userProfile.source_profile_picture || null
+      if (localStorage.getItem(this.configSvc.userProfile.userId)) {
+        this.profileImage = localStorage.getItem(this.configSvc.userProfile.userId)
+      }
     }
   }
   ngOnInit() {

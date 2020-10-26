@@ -691,12 +691,12 @@
                           {{ key.competencyType+"-"+key.name}}
                           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
-                        <input i18n-placeholder [formControl]="competencyCtrl" formControlName="resourceType"
-                          [matAutocomplete]="auto" placeholder="Search Competency" #competencyView
-                          [matChipInputFor]="keywords" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                          [matChipInputAddOnBlur]="false" (matChipInputTokenEnd)="addKeyword($event)" #keywordsSearch />
+                        <input i18n-placeholder [formControl]="competencyCtrl" [matAutocomplete]="auto"
+                          placeholder="Search Competency" #competencyView [matChipInputFor]="keywords"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="false"
+                          (matChipInputTokenEnd)="addKeyword($event)" #keywordsSearch />
                       </mat-chip-list>
-                      <mat-error *ngIf="showError('competencies')" i18n>Competency Type is mandatory
+                      <mat-error *ngIf="showError('competencies')" i18n>Competence is mandatory
                       </mat-error>
                     </mat-form-field>
                     <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
@@ -712,6 +712,34 @@
                     </mat-autocomplete>
 
                   </div>
+                  <!-- <div class="margin-top-xs">
+                    <mat-form-field appearance="outline" class="margin-top-xs" class="margin-top-xs"
+                      [ngClass]="{ 'mat-form-field-invalid': showError('trackContacts') }">
+                      <mat-chip-list #reviewerChipList i18n-aria-label aria-label="Reviewer selection">
+                        <mat-chip *ngFor="let author of contentForm.controls.trackContacts.value"
+                          [selectable]="selectable" [removable]="removable"
+                          (removed)="removeEmployee(author, 'trackContacts')">
+                          {{ author.name }}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input i18n-placeholder placeholder="Search by mail" #trackContactsView
+                          [formControl]="trackContactsCtrl" [matChipInputFor]="reviewerChipList"
+                          [matAutocomplete]="reivewerAuto" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="false" (matChipInputTokenEnd)="removeField($event)" />
+                      </mat-chip-list>
+                      <mat-autocomplete #reivewerAuto="matAutocomplete"
+                        (optionSelected)="addEmployee($event, 'trackContacts')">
+                        <mat-option *ngIf="fetchTagsStatus === 'fetching'" i18n>Fetching users...</mat-option>
+                        <mat-option *ngIf="fetchTagsStatus === 'done' && !employeeList.length" i18n>
+                          No user found. Please check the value entered.</mat-option>
+                        <mat-option *ngFor="let author of employeeList" [value]="author">
+                          {{ author.displayName }} | {{ author.mail }}
+                        </mat-option>
+                      </mat-autocomplete>
+                      <mat-error class="error-font" *ngIf="showError('trackContacts')" i18n>Reviewer is mandatory
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
                   <button mat-raised-button type="button"
                     class="text-white ws-mat-primary-background text-white margin-right-m floatright" (click)="start()">
                     <b class="text-white" i18n>Request Competency</b>

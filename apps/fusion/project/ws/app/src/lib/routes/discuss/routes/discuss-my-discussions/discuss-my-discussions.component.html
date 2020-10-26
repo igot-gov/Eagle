@@ -2,7 +2,12 @@
   <mat-card class="flex-custom">
     <mat-card-header class="flex-custom-m">
       <div mat-card-avatar class="example-header-image">
-        <ws-widget-avatar-photo [name]="data.fullname || 'User'" size="xl-s"></ws-widget-avatar-photo>
+        <ws-widget-avatar-photo *ngIf="profilePhoto" [photoUrl]="profilePhoto" [name]="data.fullname || 'User'"
+          size="xl-s">
+        </ws-widget-avatar-photo>
+        <ws-widget-avatar-photo *ngIf="!profilePhoto" [photoUrl]="profilePhoto" [name]="data.fullname || 'User'"
+          size="xl-s">
+        </ws-widget-avatar-photo>
       </div>
       <div class="flex-1">
         <mat-card-title class="mobile-margin text-capitalize" [innerHTML]="data.fullname"></mat-card-title>

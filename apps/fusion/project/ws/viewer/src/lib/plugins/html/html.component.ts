@@ -17,7 +17,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('mobileOpenInNewTab', { read: ElementRef, static: false }) mobileOpenInNewTab !: ElementRef<HTMLAnchorElement>
   @Input() htmlContent: NsContent.IContent | null = null
   iframeUrl: SafeResourceUrl | null = null
-  iframeName = Date.now()
+  iframeName = `piframe_${Date.now()}`;
   showIframeSupportWarning = false
   showIsLoadingMessage = false
   showUnBlockMessage = false
@@ -134,7 +134,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         )
       }
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
-        this.htmlContent.artifactUrl,
+        this.htmlContent.artifactUrl + '?timestamp=' + new Date().getTime(),
       )
     } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
       this.iframeUrl = null

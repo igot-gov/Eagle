@@ -133,7 +133,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('regionView', { static: false }) regionView!: ElementRef
   @ViewChild('accessPathsView', { static: false }) accessPathsView!: ElementRef
   @ViewChild('keywordsSearch', { static: true }) keywordsSearch!: ElementRef<any>
-  @ViewChild('competencySearch', { static: true }) competencySearch!: ElementRef<any>
+  @ViewChild('competencyView', { static: true }) competencyView!: ElementRef<any>
 
   timer: any
 
@@ -665,12 +665,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
         const meta = <any>{}
         if (this.canExpiry) {
-          currentMeta.expiryDate = `${
-            expiryDate
-              .toISOString()
-              .replace(/-/g, '')
-              .replace(/:/g, '')
-              .split('.')[0]
+          currentMeta.expiryDate = `${expiryDate
+            .toISOString()
+            .replace(/-/g, '')
+            .replace(/:/g, '')
+            .split('.')[0]
             }+0000`
         }
         Object.keys(currentMeta).map(v => {

@@ -62,12 +62,13 @@
         </div>
 
         <div class="flex flex-wrap margin-fix">
-          <ng-container *ngFor="let comp of allCompetencies">
+          <ng-container *ngFor="let comp of filteredCompetencies">
             <!-- <div class="flex sm:w-full md:w-1/3 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}"> -->
             <!-- <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card> -->
             <div class="flex sm:w-full md:w-1/3">
               <app-competence-card [data]="comp" [isSelected]="comp.id === selectedId"
-                (setSelected)="setSelectedCompetency($event)" (addComp)="addCompetency($event)">
+                (setSelected)="setSelectedCompetency($event)" (addComp)="addCompetency($event)"
+                (delComp)="deleteCompetency($event)">
               </app-competence-card>
             </div>
           </ng-container>

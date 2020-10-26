@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NSDiscussData } from '../../models/discuss.model'
 import { DiscussService } from '../../services/discuss.service'
+import { ConfigurationsService } from '@ws-widget/utils'
 /* tslint:disable */
 import _ from 'lodash'
 /* tslint:enable */
@@ -19,12 +20,25 @@ export class DiscussMyDiscussionsComponent implements OnInit {
   currentFilter = 'timestamp'
   department!: string | null
   location!: string | null
-  constructor(private route: ActivatedRoute, private discussService: DiscussService) { }
+  profilePhoto!: string
+  constructor(private route: ActivatedRoute, private discussService: DiscussService, private configSvc: ConfigurationsService) {
+    this.fetchNetworkProfile()
+  }
+  fetchNetworkProfile() {
+    this.discussService.fetchNetworkProfile().subscribe(response => {
+      this.profilePhoto = _.get(_.first(response), 'photo')
+      if (this.configSvc.userProfile) {
+        localStorage.setItem(this.configSvc.userProfile.userId, this.profilePhoto)
+      }
+    }, () => {
+      this.profilePhoto = ""
+    })
+  }
 
   ngOnInit() {
     // this.fillDummyData()
     this.data = this.route.snapshot.data.profile.data
-    this.discussionList = _.uniqBy(this.data.latestPosts, 'tid')
+    this.discussionList = _.filter(_.uniqBy(this.data.posts, 'tid'), p => _.get(p, "isMainPost") === true)
     this.department = this.discussService.getUserProfile.departmentName || null
     this.location = this.discussService.getUserProfile.country || null
   }
@@ -33,7 +47,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = _.uniqBy(this.data.latestPosts, 'tid')
+          this.discussionList = _.filter(_.uniqBy(this.data.posts, 'tid'), p => _.get(p, "isMainPost") === true)
           break
         case 'best':
           this.discussionList = _.uniqBy(this.data.bestPosts, 'tid')

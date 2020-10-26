@@ -6,22 +6,26 @@
   $size: 70px;
   margin: 12px 28px 12px 0;
   width: $size + $size;
+  background-position: bottom !important;
+  background-repeat: no-repeat !important;
 }
+
 .count {
-  font-size: 20px;
-  font-weight: bold;
   margin-top: 20px;
   padding-left: 12px;
 }
+
 .content {
   padding-left: 10px;
   padding-bottom: 10px;
 
   .course-detail {
     margin-bottom: 8px;
+
     .icon {
       opacity: 60%;
     }
+
     .icon-text {
       font-size: 14px;
       line-height: 24px;
@@ -29,6 +33,7 @@
       font-weight: bold;
       color: black;
     }
+
     .material-icons {
       display: inline-flex;
       vertical-align: top;

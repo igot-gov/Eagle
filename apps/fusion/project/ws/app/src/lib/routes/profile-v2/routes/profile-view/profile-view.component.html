@@ -1,6 +1,6 @@
 <div class="flex flex-4 flex-column">
   <mat-card class="flex-custom" [attr.id]='tabsData && tabsData[0] && tabsData[0].key'>
-    <mat-card-header class="flex-custom-m">
+    <mat-card-header class="flex-custom-m" *ngIf="portalProfile && portalProfile.personalDetails">
       <div mat-card-avatar class="example-header-image">
         <ws-widget-avatar-photo [photoUrl]="portalProfile.photo || null"
           [name]="(portalProfile.personalDetails.firstname +' ' + portalProfile.personalDetails.surname)" size="xxl-s">
@@ -33,7 +33,7 @@
               </span>
               <span class="flex margin-right-l mobile">
                 <!-- {{discussProfileData | json}} -->
-                <span class="ws-mat-default-text">{{discussProfileData?.postcount || 0 }}</span>
+                <span class="ws-mat-default-text">{{Math.abs(discussProfileData?.postcount || 0) }}</span>
                 <span class="pad-4">Discussions</span>
               </span>
             </div>
@@ -44,6 +44,15 @@
               </div> -->
           </div>
         </ng-container>
+      </div>
+    </mat-card-header>
+    <mat-card-header class="flex-custom-m" *ngIf="!portalProfile || !portalProfile.personalDetails">
+      <div class="flex-1">
+        <div class="flex flex-1">
+          <mat-card-title class="flex-4 mobile-margin text-capitalize mat-h2">
+            No Information Available
+          </mat-card-title>
+        </div>
       </div>
     </mat-card-header>
   </mat-card>
@@ -96,10 +105,10 @@
                                                 'ws-mat-accent-border':currentFilter !== 'best'}" mat-button
                       (click)="filter('best')">
                       Best posts </a>
-                    <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
+                    <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
                                                             'ws-mat-accent-border':currentFilter !== 'saved'}"
-                      mat-button (click)="filter('saved')">
-                      Saved posts </a> -->
+                      mat-button (click)="filter('saved')" *ngIf="portalProfile.id === currentUser">
+                      Saved posts </a>
                   </div>
                 </div>
               </mat-card>

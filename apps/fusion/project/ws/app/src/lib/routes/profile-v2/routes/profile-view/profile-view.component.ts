@@ -23,6 +23,7 @@ import { NSNetworkDataV2 } from '../../../network-v2/models/network-v2.model'
 export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
   sticky = false
+  Math: any
   elementPosition: any
   currentFilter = 'timestamp'
   discussionList!: any
@@ -52,24 +53,23 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private networkV2Service: NetworkV2Service,
     // private profileV2Svc: ProfileV2Service
   ) {
+    this.Math = Math
+    this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     this.tabs = this.route.data.subscribe(data => {
       this.portalProfile = data.profile
         && data.profile.data
         && data.profile.data.length > 0
         && data.profile.data[0]
+      this.decideAPICall()
     })
-    this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
   }
-  ngOnDestroy() {
-    if (this.tabs) {
-      this.tabs.unsubscribe()
-    }
-  }
-  ngOnInit() {
-    if (this.portalProfile && this.portalProfile.userId) {
-      this.fetchUserDetails(this.portalProfile.userId)
-      this.fetchConnectionDetails(this.portalProfile.userId)
+
+
+  decideAPICall() {
+    if (this.portalProfile && this.portalProfile.id) {
+      this.fetchUserDetails(this.portalProfile.id)
+      this.fetchConnectionDetails(this.portalProfile.id)
     } else {
       const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
       if (me) {
@@ -77,6 +77,14 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
         this.fetchConnectionDetails(me)
       }
     }
+  }
+  ngOnDestroy() {
+    if (this.tabs) {
+      this.tabs.unsubscribe()
+    }
+  }
+  ngOnInit() {
+    // int left blank
   }
   ngAfterViewInit() {
     this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
@@ -86,7 +94,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
         if (response) {
           this.discussProfileData = response
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid') || []
+          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, "isMainPost") === true) || []
         }
       })
     }
@@ -106,7 +114,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
+          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, "isMainPost") === true)
           break
         case 'best':
           this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
