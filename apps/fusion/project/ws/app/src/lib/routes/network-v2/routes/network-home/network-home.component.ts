@@ -21,6 +21,7 @@ export class NetworkHomeComponent implements OnInit {
   nameFilter = ''
   searchSpinner = false
   searchResultUserArray: any = []
+  establishedConnections!: NSNetworkDataV2.INetworkUser[]
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -33,6 +34,12 @@ export class NetworkHomeComponent implements OnInit {
       this.recommendedUsers = this.route.snapshot.data.recommendedUsers.data.result.data.
       find((item: any) => item.field === 'employmentDetails.departmentName').results
     }
+    this.establishedConnections = this.route.snapshot.data.myConnectionList.data.result.data.map((v: NSNetworkDataV2.INetworkUser) => {
+      if (v && v.personalDetails && v.personalDetails.firstname) {
+        v.personalDetails.firstname = v.personalDetails.firstname.toLowerCase()
+      }
+      return v
+    })
     this.connectionRequests = this.route.snapshot.data.connectionRequests.data.result.data
   }
 
@@ -119,6 +126,28 @@ export class NetworkHomeComponent implements OnInit {
                   }
                 })
               }
+              if (this.connectionRequests) {
+                this.connectionRequests.map((con: any) => {
+                  if (con.id) {
+                    this.searchResultUserArray.map((autoCompleteUser: any) => {
+                      if (autoCompleteUser.wid === con.id) {
+                        autoCompleteUser['requestRecieved'] = true
+                      }
+                    })
+                  }
+                })
+              }
+              if (this.establishedConnections) {
+                this.establishedConnections.map((con: any) => {
+                  if (con.id) {
+                    this.searchResultUserArray.map((autoCompleteUser: any) => {
+                      if (autoCompleteUser.wid === con.id) {
+                        autoCompleteUser['connectionEstablished'] = true
+                      }
+                    })
+                  }
+                })
+              }
               this.searchSpinner = false
             })
           }
@@ -126,13 +155,21 @@ export class NetworkHomeComponent implements OnInit {
         (_err: any) => {
           this.searchSpinner = false
         })
-      this.searchResultUserArray.splice(this.searchResultUserArray.findIndex((el: any) => {
+      // this.searchResultUserArray.splice(this.searchResultUserArray.findIndex((el: any) => {
+      //   if (this.configSvc.userProfile && this.configSvc.userProfile.userId) {
+      //     return el.wid === this.configSvc.userProfile.userId
+      //   }
+      //   return -1
+      // // tslint:disable-next-line: align
+      // }), 0)
+      this.searchResultUserArray = this.searchResultUserArray.filter((el: any) => {
         if (this.configSvc.userProfile && this.configSvc.userProfile.userId) {
-          return el.wid === this.configSvc.userProfile.userId
+          if (el.wid === this.configSvc.userProfile.userId) {
+            return false
+          }
         }
-        return -1
-      // tslint:disable-next-line: align
-      }), 1)
+        return el
+      })
     })
   }
 
