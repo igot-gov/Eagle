@@ -119,7 +119,7 @@ export class NetworkStripMultipleComponent extends WidgetBaseComponent
         results => {
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.users, strip),
+            this.transformContentsToWidgets(results, strip),
             'done',
             calculateParentStatus,
             null,
@@ -130,10 +130,15 @@ export class NetworkStripMultipleComponent extends WidgetBaseComponent
   }
 
   private transformContentsToWidgets(
-    contents: NsContent.IContent[],
+    contents: any,
     strip: NsNetworkStripNewMultiple.INetworkStripUnit,
   ) {
-    return (contents || []).map((content, idx) => ({
+    let data = []
+    if (contents) {
+      data = contents.result.data.
+      find((item: any) => item.field === 'employmentDetails.departmentName').results
+    }
+    return (data || []).map((content: any, idx: any) => ({
       widgetType: 'card',
       widgetSubType: 'cardHomeNetwork',
       widgetHostClass: 'mb-2',
