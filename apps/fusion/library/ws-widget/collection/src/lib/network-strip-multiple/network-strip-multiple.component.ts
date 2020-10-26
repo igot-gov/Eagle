@@ -3,7 +3,6 @@ import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsNetworkStripNewMultiple } from './network-strip-multiple.model'
 import { ContentStripNewMultipleService } from './network-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
-import { NsContent } from '../_services/widget-content.model'
 import {
   TFetchStatus,
   LoggerService,
