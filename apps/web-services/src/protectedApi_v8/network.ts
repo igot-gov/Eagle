@@ -10,6 +10,7 @@ const unknown = 'Network Apis:- Failed due to unknown reason'
 const apiEndpoints = {
   getConnectionEstablishedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/established`,
   getConnectionRequestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requested`,
+  getConnectionRequestsReceivedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requests/received`,
   getConnectionSuggestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/suggests`,
   postConnectionAddData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/add`,
   postConnectionRecommendationData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/recommended`,
@@ -51,10 +52,74 @@ networkConnectionApi.get('/connections/requested', async (req, res) => {
   }
 })
 
+networkConnectionApi.get('/connections/requests/received', async (req, res) => {
+  try {
+    const rootOrg = req.headers.rootorg
+    const userId = extractUserIdFromRequest(req)
+
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    if (!userId) {
+      res.status(400).send(ERROR.GENERAL_ERR_MSG)
+      return
+    }
+    const response = await axios.get(apiEndpoints.getConnectionRequestsReceivedData, {
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+        userId,
+      },
+    })
+    res.send((response.data))
+
+  } catch (err) {
+    logError('CONNECTIONS REQUESTS ERROR> ', err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: unknown,
+      }
+    )
+  }
+})
+
 networkConnectionApi.get('/connections/established', async (req, res) => {
   try {
     const rootOrg = req.headers.rootorg
     const userId = extractUserIdFromRequest(req)
+
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    if (!userId) {
+      res.status(400).send(ERROR.GENERAL_ERR_MSG)
+      return
+    }
+    const response = await axios.get(apiEndpoints.getConnectionEstablishedData, {
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg,
+        userId,
+      },
+    })
+    res.send((response.data))
+
+  } catch (err) {
+    logError('CONNECTIONS ERROR', err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: unknown,
+      }
+    )
+  }
+})
+
+networkConnectionApi.get('/connections/established/:id', async (req, res) => {
+  try {
+    const rootOrg = req.headers.rootorg
+    const userId = req.params.id
 
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
@@ -119,7 +184,7 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
   try {
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
-    const userId = req.body.userId
+    const userId = extractUserIdFromRequest(req)
 
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
@@ -130,7 +195,10 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
       return
     }
 
-    const body = req.body
+    const body = {
+      connectionId,
+      userId,
+    }
     const response = await axios.post(
       apiEndpoints.postConnectionAddData,
       body,
@@ -155,11 +223,9 @@ networkConnectionApi.post('/add/connection', async (req, res) => {
 
 networkConnectionApi.post('/update/connection', async (req, res) => {
   try {
-    const body = req.body
-
     const rootOrg = req.header('rootorg')
     const connectionId = req.body.connectionId
-    const userId = req.body.userId
+    const userId = extractUserIdFromRequest(req)
     const status = req.body.status
 
     if (!rootOrg) {
@@ -170,7 +236,11 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-
+    const body = {
+      connectionId: userId,
+      status,
+      userId: connectionId,
+    }
     const response = await axios.post(
       apiEndpoints.postConnectionUpdateData,
       body,
@@ -196,10 +266,15 @@ networkConnectionApi.post('/update/connection', async (req, res) => {
 networkConnectionApi.post('/connections/recommended', async (req, res) => {
   try {
     const body = req.body
-    const rootOrg = req.header('rootorg') || 'igot'
+    const rootOrg = req.header('rootorg')
+    const userId = extractUserIdFromRequest(req)
 
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    if (!userId) {
+      res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
 
@@ -210,6 +285,7 @@ networkConnectionApi.post('/connections/recommended', async (req, res) => {
         ...axiosRequestConfig,
         headers: {
           rootOrg,
+          userId,
         },
       }
     )

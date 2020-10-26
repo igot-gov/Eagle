@@ -322,7 +322,8 @@
                       Telephone Number (e.g., 0123-26104183 or 012327204281)
                     </label>
                     <mat-form-field appearance="outline" class="margin-top-xs">
-                      <input #telephone type="text" matInput placeholder="Telephone Number" formControlName="telephone">
+                      <input id="telephoneNumber" #telephone type="text" matInput placeholder="Telephone Number"
+                        formControlName="telephone">
                       <mat-error [hidden]="false" *ngIf="createUserForm?.controls['telephone'].errors?.pattern">
                         Please enter a valid telephone number (e.g., 0123-26104183 or 012327204281)
                       </mat-error>
@@ -346,7 +347,8 @@
                     </mat-form-field>
                     <div class="input-wrapper margin-top-s margin-bottom-s">
                       <div class="flex flex-middle">
-                        <mat-checkbox id="officialEmail" [checked]="isOfficialEmail" (change)="officialEmailCheck()">
+                        <mat-checkbox aria-label="This is my official email" id="officialEmail"
+                          [checked]="isOfficialEmail" (change)="officialEmailCheck()">
                         </mat-checkbox>
                         <p class="margin-left-xs margin-remove-bottom">
                           This is my official email

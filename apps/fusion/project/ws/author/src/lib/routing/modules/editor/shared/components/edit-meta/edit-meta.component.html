@@ -215,7 +215,51 @@
                   </div>
 
                 </div>
+
+
+                <!-- <div class="margin-top-s" *ngIf="!contentForm.controls.subTitles.value.length"></div> -->
+                <div class="margin-top-s">
+                  <p class="margin-remove-bottom">
+                    Subtitles
+                  </p>
+                  <div appearance="outline" class="margin-top-xs"
+                    [ngClass]="{ 'mat-form-field-invalid': showError('subTitles') }">
+                    <!-- <div class="flex flex-col pr-6 w-2/5">
+                                    <label>
+                                      <b i18n>Language</b>
+                                    </label>
+                                    <mat-form-field class="margin-top-xs w-full" appearance="outline">
+                                      <mat-select required="true">
+                                        <mat-option *ngFor="let lang of allLanguages" [value]="lang.srclang">
+                                          {{lang.label}}
+                                        </mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div> -->
+
+                    <div class="cursor-pointer h-12 w-2/5 upload-box flex items-center justify-center"
+                      (click)="fileInput.click()">
+                      <span class="font-weight-500" [hidden]="file">
+                        <input class="hidden" type="file" accept=".vtt"
+                          (change)="onDrop($event.target.files[0]); fileInput.value = null" #fileInput />
+                      </span>
+                      <label style="margin: auto;" for="file"
+                        class="mat-h2 margin-bottom-remove ws-mat-primary-text cursor-pointer flex flex-middle justify-center">
+                        <mat-icon style="margin-right:4px">add</mat-icon>
+                        <span i18n>Browse</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <!-- <mat-card *ngIf="contentForm.controls.subTitles.value.length" class="audios-card-container">
+                  <div class="mb-4 pr-8">
+                    Subtitle
+                  </div>
+                </mat-card> -->
               </div>
+
+
+
               <div class="mobile-break mat-app-background">
                 <div class="margin-top-s">
                   <div class="margin-top-xs" *ngIf="checkCondition('name', 'show')"

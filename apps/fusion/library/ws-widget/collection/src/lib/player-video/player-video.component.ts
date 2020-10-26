@@ -92,6 +92,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     }
     const saveCLearning: saveContinueLearningFunction = data => {
       if (this.widgetData.identifier) {
+
         if (this.activatedRoute.snapshot.queryParams.collectionType &&
           this.activatedRoute.snapshot.queryParams.collectionType.toLowerCase() === 'playlist') {
           const continueLearningData = {
@@ -231,6 +232,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     )
     this.player = initObj.player
     this.dispose = initObj.dispose
+
     initObj.player.ready(() => {
       if (Array.isArray(this.widgetData.subtitles)) {
         this.widgetData.subtitles.forEach((u, index) => {
@@ -260,5 +262,7 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       this.widgetData.posterImage = content.appIcon
       await this.contentSvc.setS3Cookie(this.widgetData.identifier || '').toPromise()
     }
+
+    this.widgetData.subtitles = content.subTitles
   }
 }

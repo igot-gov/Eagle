@@ -98,6 +98,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   showIndustryOther!: boolean
   photoUrl!: string | ArrayBuffer | null
   isForcedUpdate = false
+  userProfileData!: any
 
   constructor(
     private snackBar: MatSnackBar,
@@ -464,7 +465,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               const organisations = this.populateOrganisationDetails(data[0])
               this.constructFormFromRegistry(data[0], academics, organisations)
               this.populateChips(data[0])
-
+              this.userProfileData = data[0]
             }
             // this.handleFormData(data[0])
           },
@@ -859,7 +860,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.uploadSaveData = false
         this.configSvc.profileDetailsStatus = true
         this.openSnackbar(this.toastSuccess.nativeElement.value)
-        this.router.navigate(['page', 'home'])
+        if (!this.isForcedUpdate && this.userProfileData) {
+            this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
+        } else {
+          this.router.navigate(['page', 'home'])
+        }
       },
       () => {
         this.openSnackbar(this.toastError.nativeElement.value)

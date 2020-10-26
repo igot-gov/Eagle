@@ -38,7 +38,7 @@ export class AudioComponent implements OnInit, OnDestroy {
     private valueSvc: ValueService,
     private viewerSvc: ViewerUtilService,
     private accessControlSvc: AccessControlService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.screenSizeSubscription = this.valueSvc.isXSmall$.subscribe(data => {
@@ -66,6 +66,24 @@ export class AudioComponent implements OnInit, OnDestroy {
             : ''
           this.widgetResolverAudioData.widgetData.disableTelemetry = true
           this.isFetchingDataComplete = true
+
+          if (this.audioData.subTitles) {
+
+            let subTitleUrl = ''
+
+            if (this.audioData.subTitles[0].url.indexOf('/content-store/') > -1) {
+              subTitleUrl = `/apis/authContent/${new URL(this.audioData.subTitles[0].url).pathname}`
+            } else {
+              subTitleUrl = `/apis/authContent/${encodeURIComponent(this.audioData.subTitles[0].url)}`
+            }
+
+            this.widgetResolverAudioData.widgetData.subtitles = [{
+              srclang: '',
+              label: '',
+              url: subTitleUrl,
+            }]
+          }
+
         })
       // this.htmlData = this.viewerDataSvc.resource
     } else {
@@ -93,6 +111,23 @@ export class AudioComponent implements OnInit, OnDestroy {
           if (this.forPreview) {
             this.widgetResolverAudioData.widgetData.disableTelemetry = true
           }
+
+          if (data.content.data.subTitles[0]) {
+
+            let subTitlesUrl = ''
+            if (data.content.data.subTitles[0].url.indexOf('/content-store/') > -1) {
+              subTitlesUrl = `/apis/authContent/${new URL(data.content.data.subTitles[0].url).pathname}`
+            } else {
+              subTitlesUrl = `/apis/authContent/${encodeURIComponent(data.content.data.subTitles[0].url)}`
+            }
+            this.widgetResolverAudioData.widgetData.subtitles = [{
+              srclang: '',
+              label: '',
+              url: subTitlesUrl,
+            }]
+
+          }
+
           this.widgetResolverAudioData.widgetData.url = this.audioData
             ? this.forPreview
               ? this.viewerSvc.getAuthoringUrl(this.audioData.artifactUrl)
@@ -103,8 +138,9 @@ export class AudioComponent implements OnInit, OnDestroy {
             : ''
           this.widgetResolverAudioData = JSON.parse(JSON.stringify(this.widgetResolverAudioData))
           this.isFetchingDataComplete = true
+
         },
-        () => {},
+        () => { },
       )
     }
   }

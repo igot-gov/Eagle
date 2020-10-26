@@ -10,16 +10,17 @@ import {
   OnInit,
   Output,
   ViewChild,
+  Inject,
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@angular/material'
 import { MatChipInputEvent } from '@angular/material/chips'
-import { MatDialog } from '@angular/material/dialog'
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
-import { CONTENT_BASE_STATIC } from '@ws/author/src/lib/constants/apiEndpoints'
+import { CONTENT_BASE_STATIC, CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { IMAGE_MAX_SIZE, IMAGE_SUPPORT_TYPES } from '@ws/author/src/lib/constants/upload'
@@ -45,6 +46,13 @@ import {
   map,
 } from 'rxjs/operators'
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
+
+export interface IUsersData {
+  name?: string
+  id: string
+  srclang: string
+  languages: any[]
+}
 
 @Component({
   selector: 'ws-auth-edit-meta',
@@ -111,6 +119,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
 
+  allLanguages: any[] = []
+
+  file?: File
+
   @ViewChild('creatorContactsView', { static: false }) creatorContactsView!: ElementRef
   @ViewChild('trackContactsView', { static: false }) trackContactsView!: ElementRef
   @ViewChild('publisherDetailsView', { static: false }) publisherDetailsView!: ElementRef
@@ -141,6 +153,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private loader: LoaderService,
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
+    @Inject(MAT_DIALOG_DATA) public data1: IUsersData,
   ) {
     // console.log("Parent component", this.parentContent)
 
@@ -330,6 +343,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       distinctUntilChanged(),
       switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
     )
+
+    this.allLanguages = this.data1.languages
   }
   start() {
     const dialogRef = this.dialog.open(CompetencyAddPopUpComponent, {
@@ -1256,7 +1271,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     const dialogRef = this.dialog.open(CatalogSelectComponent, {
       width: '70%',
       maxHeight: '90vh',
-
       data: JSON.parse(JSON.stringify(oldCatalogs)),
     })
     dialogRef.afterClosed().subscribe((response: string[]) => {
@@ -1328,4 +1342,46 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     })
     return newCatalog
   }
+
+  onDrop(file: any) {
+    const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
+    if (!fileName.toLowerCase().endsWith('.vtt')) {
+      this.snackBar.openFromComponent(NotificationComponent, {
+        data: {
+          type: Notify.INVALID_FORMAT,
+        },
+        duration: NOTIFICATION_TIME * 1000,
+      })
+    } else {
+      this.file = file
+      // this.getDuration()
+      this.upload()
+    }
+  }
+
+  upload() {
+
+    this.loader.changeLoad.next(true)
+    const formdata = new FormData()
+    formdata.append(
+      'content',
+      this.file as Blob,
+      (this.file as File).name.replace(/[^A-Za-z0-9.]/g, ''),
+    )
+    this.uploadService
+      .upload(
+        formdata, {
+        contentId: this.contentMeta.identifier,
+        contentType: CONTENT_BASE_STREAM,
+      }).subscribe(vtt => {
+
+        this.loader.changeLoad.next(false)
+
+        this.contentForm.controls.subTitles.setValue([{
+          url: vtt.artifactURL,
+        }])
+
+      })
+  }
+
 }
