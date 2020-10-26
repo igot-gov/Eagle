@@ -39,7 +39,7 @@ export class CompetenceCardComponent implements OnInit {
       panelClass: 'remove-pad',
       data: this.data,
     })
-    let instance = dialogRef.componentInstance
+    const instance = dialogRef.componentInstance
     instance.isUpdate = false
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response && response.action === 'ADD') {

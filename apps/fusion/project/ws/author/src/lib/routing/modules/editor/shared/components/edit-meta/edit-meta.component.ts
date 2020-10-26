@@ -400,25 +400,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     }
   }
-  optionSelectedCompetency(competencies: any) {
-    this.competencyCtrl.setValue(' ')
-    // this.competencySearch.nativeElement.blur()
 
-    if (competencies) {
-      const value = this.contentForm.controls.competencies.value || []
-      const tempObj = {
-        id: competencies.id,
-        name: competencies.name,
-        description: competencies.description,
-        competencyType: competencies.additionalProperties.competencyType,
-      }
-      if (this.canPush(value, tempObj)) {
-        value.push(tempObj)
-        this.contentForm.controls.competencies.setValue(value)
-      }
-
-    }
-  }
   canPush(arr: any[], obj: any) {
     for (const test of arr) {
       if (test.id === obj.id) {
@@ -1038,6 +1020,25 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     const index = this.contentForm.controls[field].value.indexOf(employee)
     this.contentForm.controls[field].value.splice(index, 1)
     this.contentForm.controls[field].setValue(this.contentForm.controls[field].value)
+  }
+  optionSelectedCompetency(competencies: any) {
+    this.competencyCtrl.setValue(' ')
+    // this.competencySearch.nativeElement.blur()
+
+    if (competencies) {
+      const value = this.contentForm.controls.competencies.value || []
+      const tempObj = {
+        id: competencies.id,
+        name: competencies.name,
+        description: competencies.description,
+        competencyType: competencies.additionalProperties.competencyType,
+      }
+      if (this.canPush(value, tempObj)) {
+        value.push(tempObj)
+        this.contentForm.controls.competencies.setValue(value)
+      }
+
+    }
   }
 
   addEmployee(event: MatAutocompleteSelectedEvent, field: string) {

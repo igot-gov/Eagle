@@ -30,15 +30,18 @@ export class DiscussMyDiscussionsComponent implements OnInit {
       if (this.configSvc.userProfile) {
         localStorage.setItem(this.configSvc.userProfile.userId, this.profilePhoto)
       }
-    }, () => {
-      this.profilePhoto = ""
-    })
+    },
+      /* tslint:disable */
+      () => {
+        this.profilePhoto = ''
+      })
+    /* tslint:enable */
   }
 
   ngOnInit() {
     // this.fillDummyData()
     this.data = this.route.snapshot.data.profile.data
-    this.discussionList = _.filter(_.uniqBy(this.data.posts, 'tid'), p => _.get(p, "isMainPost") === true)
+    this.discussionList = _.filter(_.uniqBy(this.data.posts, 'tid'), p => _.get(p, 'isMainPost') === true)
     this.department = this.discussService.getUserProfile.departmentName || null
     this.location = this.discussService.getUserProfile.country || null
   }
@@ -47,7 +50,7 @@ export class DiscussMyDiscussionsComponent implements OnInit {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = _.filter(_.uniqBy(this.data.posts, 'tid'), p => _.get(p, "isMainPost") === true)
+          this.discussionList = _.filter(_.uniqBy(this.data.posts, 'tid'), p => _.get(p, 'isMainPost') === true)
           break
         case 'best':
           this.discussionList = _.uniqBy(this.data.bestPosts, 'tid')

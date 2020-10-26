@@ -23,7 +23,9 @@ import { NSNetworkDataV2 } from '../../../network-v2/models/network-v2.model'
 export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
   sticky = false
+  /* tslint:disable */
   Math: any
+  /* tslint:enable */
   elementPosition: any
   currentFilter = 'timestamp'
   discussionList!: any
@@ -64,8 +66,6 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.decideAPICall()
     })
   }
-
-
   decideAPICall() {
     if (this.portalProfile && this.portalProfile.id) {
       this.fetchUserDetails(this.portalProfile.id)
@@ -94,7 +94,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
         if (response) {
           this.discussProfileData = response
-          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, "isMainPost") === true) || []
+          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, 'isMainPost') === true) || []
         }
       })
     }
@@ -114,7 +114,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, "isMainPost") === true)
+          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, 'isMainPost') === true)
           break
         case 'best':
           this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')

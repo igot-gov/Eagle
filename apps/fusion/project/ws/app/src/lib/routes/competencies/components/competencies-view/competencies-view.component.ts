@@ -17,20 +17,22 @@ export interface IDialogData {
 })
 
 export class CompetenceViewComponent implements OnInit {
-  @Input() isUpdate: boolean = false
-  constructor(public dialogRef: MatDialogRef<CompetenceViewComponent>,
-    @Inject(MAT_DIALOG_DATA) public dData: NSCompetencie.ICompetencie) { }
+  @Input() isUpdate = false
+  constructor(
+    public dialogRef: MatDialogRef<CompetenceViewComponent>,
+    @Inject(MAT_DIALOG_DATA) public dData: NSCompetencie.ICompetencie
+  ) { }
   ngOnInit() { }
   add() {
     this.dialogRef.close({
       id: this.dData.id,
-      action: "ADD"
+      action: 'ADD',
     })
   }
   remove() {
     this.dialogRef.close({
       id: this.dData.id,
-      action: "DELETE"
+      action: 'DELETE',
     })
   }
 }

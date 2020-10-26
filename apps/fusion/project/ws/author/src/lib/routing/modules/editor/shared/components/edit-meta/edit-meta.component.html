@@ -700,7 +700,7 @@
                       </mat-error>
                     </mat-form-field>
                     <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
-                      (optionSelected)="optionSelectedCompetency($event.option.value); keywordsView.value = ''">
+                      (optionSelected)="optionSelectedCompetency($event.option.value);">
                       <mat-option *ngIf="!checkCondition('competencies', 'required')" i18n [value]="null">None
                       </mat-option>
                       <mat-option *ngIf="keywordsSearch.value" [value]="keywordsSearch.value">{{ keywordsSearch.value }}

@@ -101,7 +101,7 @@ export class CompetenceAllComponent implements OnInit {
       // const vc = _.chain(this.allCompetencies).filter(i => {
       //   return i.id === id
       // }).first().value()
-      const vc = _.remove(this.myCompetencies, itm => _.get(itm, "id") === id)
+      const vc = _.remove(this.myCompetencies, itm => _.get(itm, 'id') === id)
       // this.myCompetencies.push(vc)
       if (vc && vc[0]) {
         this.removeFromProfile(vc[0])
@@ -122,7 +122,7 @@ export class CompetenceAllComponent implements OnInit {
       }
       const updatedProfile = { ...this.currentProfile }
       if (_.get(this, 'currentProfile.competencies')) {
-        _.remove(updatedProfile.competencies, itm => _.get(itm, "id") === item.id)
+        _.remove(updatedProfile.competencies, itm => _.get(itm, 'id') === item.id)
         updatedProfile.competencies.push(newCompetence)
       } else {
         updatedProfile.competencies = []
@@ -139,9 +139,9 @@ export class CompetenceAllComponent implements OnInit {
   }
   removeFromProfile(item: NSCompetencie.ICompetencie) {
     if (item) {
-      let currentCompetencies = _.get(this, 'currentProfile.competencies')
+      const currentCompetencies = _.get(this, 'currentProfile.competencies')
       const updatedProfile = { ...this.currentProfile }
-      _.remove(currentCompetencies, itm => _.get(itm, "id") === item.id)
+      _.remove(currentCompetencies, itm => _.get(itm, 'id') === item.id)
       if (updatedProfile) {
         updatedProfile.competencies = currentCompetencies
       }
@@ -157,7 +157,8 @@ export class CompetenceAllComponent implements OnInit {
     const allCompetencies = [...this.allCompetencies]
     if (this.myCompetencies && this.myCompetencies.length > 0) {
 
-      data = _.flatten(_.map(this.myCompetencies, (item: NSCompetencie.ICompetencie) => _.filter(allCompetencies, (i: NSCompetencie.ICompetencie) => i.id === item.id)))
+      data = _.flatten(_.map(this.myCompetencies, (item: NSCompetencie.ICompetencie) =>
+        _.filter(allCompetencies, (i: NSCompetencie.ICompetencie) => i.id === item.id)))
 
       this.filteredCompetencies = this.allCompetencies.filter(obj => {
         return data.indexOf(obj) === -1
@@ -202,7 +203,7 @@ export class CompetenceAllComponent implements OnInit {
       panelClass: 'remove-pad',
       data: item,
     })
-    let instance = dialogRef.componentInstance
+    const instance = dialogRef.componentInstance
     instance.isUpdate = true
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response && response.action === 'ADD') {
