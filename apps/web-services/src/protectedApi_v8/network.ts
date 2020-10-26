@@ -324,7 +324,7 @@ networkConnectionApi.post('/connections/recommended/rootOrg', async (req, res) =
           values: [usrDept],
         },
       ],
-      size: 50,
+      size: 5,
     }
 
     const response = await axios.post(
