@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core'
-import { MAT_DIALOG_DATA } from '@angular/material'
+import { Component, OnInit, Inject, Input } from '@angular/core'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
 import { NSCompetencie } from '../../models/competencies.model'
 // import { Router } from '@angular/router'
 
@@ -17,10 +17,22 @@ export interface IDialogData {
 })
 
 export class CompetenceViewComponent implements OnInit {
-
-  constructor(@Inject(MAT_DIALOG_DATA) public dData: NSCompetencie.ICompetencie) { }
+  @Input() isUpdate = false
+  constructor(
+    public dialogRef: MatDialogRef<CompetenceViewComponent>,
+    @Inject(MAT_DIALOG_DATA) public dData: NSCompetencie.ICompetencie
+  ) { }
   ngOnInit() { }
   add() {
-    // this.addComp.emit(this.data.id)
+    this.dialogRef.close({
+      id: this.dData.id,
+      action: 'ADD',
+    })
+  }
+  remove() {
+    this.dialogRef.close({
+      id: this.dData.id,
+      action: 'DELETE',
+    })
   }
 }

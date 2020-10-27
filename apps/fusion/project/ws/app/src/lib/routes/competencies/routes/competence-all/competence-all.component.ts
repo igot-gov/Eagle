@@ -26,6 +26,7 @@ export class CompetenceAllComponent implements OnInit {
   myCompetencies: NSCompetencie.ICompetencie[] = []
   tabsData: NSCompetencie.ICompetenciesTab[]
   allCompetencies!: NSCompetencie.ICompetencie[]
+  filteredCompetencies!: NSCompetencie.ICompetencie[]
   searchJson!: NSCompetencie.ISearch[]
   searchKey = ''
   queryControl = new FormControl('')
@@ -61,6 +62,7 @@ export class CompetenceAllComponent implements OnInit {
     this.competencySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
       if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
         this.allCompetencies = reponse.responseData
+        this.resetcomp()
       }
     })
   }
@@ -93,19 +95,34 @@ export class CompetenceAllComponent implements OnInit {
       this.resetcomp()
     }
   }
+  deleteCompetency(id: string) {
+    if (id) {
+      // API is not available
+      // const vc = _.chain(this.allCompetencies).filter(i => {
+      //   return i.id === id
+      // }).first().value()
+      const vc = _.remove(this.myCompetencies, itm => _.get(itm, 'id') === id)
+      // this.myCompetencies.push(vc)
+      if (vc && vc[0]) {
+        this.removeFromProfile(vc[0])
+        this.resetcomp()
+      }
+    }
+  }
   addToProfile(item: NSCompetencie.ICompetencie) {
     if (item) {
       const newCompetence = {
-        type: item.type,
+        type: item.type || 'COMPETENCY',
         id: item.id,
-        name: item.name,
-        description: item.description,
-        status: item.status,
-        source: item.source,
+        name: item.name || '',
+        description: item.description || '',
+        status: item.status || '',
+        source: item.source || '',
         competencyType: item.additionalProperties.competencyType,
       }
-      const updatedProfile = this.currentProfile
+      const updatedProfile = { ...this.currentProfile }
       if (_.get(this, 'currentProfile.competencies')) {
+        _.remove(updatedProfile.competencies, itm => _.get(itm, 'id') === item.id)
         updatedProfile.competencies.push(newCompetence)
       } else {
         updatedProfile.competencies = []
@@ -114,21 +131,41 @@ export class CompetenceAllComponent implements OnInit {
       this.competencySvc.updateProfile(updatedProfile).subscribe(response => {
         if (response) {
           // success
+          // this.myCompetencies.push(item)
+
         }
       })
     }
   }
-
+  removeFromProfile(item: NSCompetencie.ICompetencie) {
+    if (item) {
+      const currentCompetencies = _.get(this, 'currentProfile.competencies')
+      const updatedProfile = { ...this.currentProfile }
+      _.remove(currentCompetencies, itm => _.get(itm, 'id') === item.id)
+      if (updatedProfile) {
+        updatedProfile.competencies = currentCompetencies
+      }
+      this.competencySvc.updateProfile(updatedProfile).subscribe(response => {
+        if (response) {
+          // success => removed
+        }
+      })
+    }
+  }
   resetcomp() {
     let data: any[] = []
-    const allCompetencies = this.allCompetencies
+    const allCompetencies = [...this.allCompetencies]
     if (this.myCompetencies && this.myCompetencies.length > 0) {
-      data = _.flatten(_.map(this.myCompetencies, (item: NSCompetencie.ICompetencie) => _.filter(allCompetencies, item)))
-      this.allCompetencies = this.allCompetencies.filter(obj => {
+
+      data = _.flatten(_.map(this.myCompetencies, (item: NSCompetencie.ICompetencie) =>
+        _.filter(allCompetencies, (i: NSCompetencie.ICompetencie) => i.id === item.id)))
+
+      this.filteredCompetencies = this.allCompetencies.filter(obj => {
         return data.indexOf(obj) === -1
       })
+      // this.filteredCompetencies = data
     } else {
-      // this.allCompetencies = reponse.responseData
+      this.filteredCompetencies = allCompetencies
     }
   }
   refreshData() {
@@ -166,9 +203,14 @@ export class CompetenceAllComponent implements OnInit {
       panelClass: 'remove-pad',
       data: item,
     })
+    const instance = dialogRef.componentInstance
+    instance.isUpdate = true
     dialogRef.afterClosed().subscribe((response: any) => {
-      if (response === 'yes') {
+      if (response && response.action === 'ADD') {
+        this.addCompetency(response.id)
         // this.refreshData(this.currentActivePage)
+      } else if (response && response.action === 'DELETE') {
+        this.deleteCompetency(response.id)
       }
     })
   }

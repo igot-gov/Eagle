@@ -37,7 +37,8 @@
             </div>
           </ng-container>
         </div>
-        <div class="flex flex-1" [hidden]="!visible">
+        <div class="flex flex-1" *ngIf="visible" [@enterAnimation]="visible">
+          <!-- <div class="flex flex-1" [ngClass]="{'show': visible,'hide': !visible}"> -->
           <div class="flex flex-1">
             <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
               No hubs Info Available

@@ -96,7 +96,8 @@ export class CompetencyAddPopUpComponent implements OnInit {
       () => {
         form.reset()
         this.uploadSaveData = false
-        this.openSnackbar(this.toastSuccess.nativeElement.value)
+        // this.openSnackbar(this.toastSuccess.nativeElement.value)
+        this.openSnackbar('Competency Request created succesfully! Please wait for reviewer to approve it')
         this.dialogRef.close('postCreated')
       },
       err => {

@@ -300,3 +300,52 @@ networkConnectionApi.post('/connections/recommended', async (req, res) => {
     )
   }
 })
+
+networkConnectionApi.post('/connections/recommended/rootOrg', async (req, res) => {
+  try {
+    let usrDept = ''
+    const rootOrg = req.header('rootorg')
+    const userId = extractUserIdFromRequest(req)
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    if (!userId) {
+      res.status(400).send(ERROR.GENERAL_ERR_MSG)
+      return
+    }
+    usrDept = rootOrg || 'igot'
+
+    const reqtoApi = {
+      offset: 0,
+      search: [
+        {
+          field: 'employmentDetails.departmentName',
+          values: [usrDept],
+        },
+      ],
+      size: 5,
+    }
+
+    const response = await axios.post(
+      apiEndpoints.postConnectionRecommendationData,
+      reqtoApi,
+      {
+        ...axiosRequestConfig,
+        headers: {
+          rootOrg,
+          userId,
+        },
+      }
+    )
+    res.send(response.data)
+
+  } catch (err) {
+    logError('RECOMMENDED ERROR > ', err)
+    res.status((err && err.response && err.response.status) || 500).send(
+      (err && err.response && err.response.data) || {
+        error: unknown,
+      }
+    )
+  }
+})

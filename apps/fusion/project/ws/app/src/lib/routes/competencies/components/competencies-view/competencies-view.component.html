@@ -9,13 +9,14 @@
   </mat-card-content>
   <mat-card-actions class="flex flex-row-reverse">
     <div class="mb-2 mr-2 view-more text-white others">
-      <a mat-button>
+      <a mat-button mat-dialog-close>
         <span i18n>{{'Okey'}}</span>
       </a>
     </div>
     <div class="mb-2 ml-4 mr-6 ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
       <a mat-button>
-        <span i18n>{{'Add/remove from my competencies'}}</span>
+        <span i18n *ngIf="isUpdate" (click)="remove()">{{'Remove from my list'}}</span>
+        <span i18n *ngIf="!isUpdate" (click)="add()">{{'Add my competencies'}}</span>
       </a>
     </div>
   </mat-card-actions>

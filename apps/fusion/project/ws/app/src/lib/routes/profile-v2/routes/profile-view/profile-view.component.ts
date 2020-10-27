@@ -23,6 +23,9 @@ import { NSNetworkDataV2 } from '../../../network-v2/models/network-v2.model'
 export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
   sticky = false
+  /* tslint:disable */
+  Math: any
+  /* tslint:enable */
   elementPosition: any
   currentFilter = 'timestamp'
   discussionList!: any
@@ -52,14 +55,28 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
     private networkV2Service: NetworkV2Service,
     // private profileV2Svc: ProfileV2Service
   ) {
+    this.Math = Math
+    this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     this.tabs = this.route.data.subscribe(data => {
       this.portalProfile = data.profile
         && data.profile.data
         && data.profile.data.length > 0
         && data.profile.data[0]
+      this.decideAPICall()
     })
-    this.currentUser = configSvc.userProfile && configSvc.userProfile.userId
+  }
+  decideAPICall() {
+    if (this.portalProfile && this.portalProfile.id) {
+      this.fetchUserDetails(this.portalProfile.id)
+      this.fetchConnectionDetails(this.portalProfile.id)
+    } else {
+      const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
+      if (me) {
+        this.fetchUserDetails(me)
+        this.fetchConnectionDetails(me)
+      }
+    }
   }
   ngOnDestroy() {
     if (this.tabs) {
@@ -67,21 +84,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   ngOnInit() {
-    if (this.portalProfile && this.portalProfile.userId) {
-      this.fetchUserDetails(this.portalProfile.userId)
-    } else {
-      const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
-      if (me) {
-        this.fetchUserDetails(me)
-      }
-    }
-    this.networkV2Service.fetchAllConnectionEstablished().subscribe(
-      (data: any) => {
-        this.connectionRequests = data.result.data
-      },
-      (_err: any) => {
-        // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-      })
+    // int left blank
   }
   ngAfterViewInit() {
     this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
@@ -91,17 +94,27 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
         if (response) {
           this.discussProfileData = response
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid') || []
+          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, 'isMainPost') === true) || []
         }
       })
     }
   }
+  fetchConnectionDetails(wid: string) {
+    this.networkV2Service.fetchAllConnectionEstablishedById(wid).subscribe(
+      (data: any) => {
+        this.connectionRequests = data.result.data
+      },
+      (_err: any) => {
+        // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
+      })
+  }
+
   filter(key: string | 'timestamp' | 'best' | 'saved') {
     if (key) {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
+          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, 'isMainPost') === true)
           break
         case 'best':
           this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')

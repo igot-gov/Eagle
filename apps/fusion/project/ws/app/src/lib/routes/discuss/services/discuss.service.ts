@@ -20,6 +20,8 @@ const API_ENDPOINTS = {
   listUpVote: (slug: string) => `/apis//protected/v8/discussionHub/users/${slug}/upvoted`,
   listDownVoted: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/downvoted`,
   listSaved: (slug: string) => `/apis/protected/v8/discussionHub/users/${slug}/bookmarks`,
+  fetchNetworkProfile: '/apis/protected/v8/user/profileDetails/getUserRegistry',
+  // Above line is to fetch own details only for loged in user.
 }
 /* this page needs refactor*/
 @Injectable({
@@ -39,7 +41,7 @@ export class DiscussService {
     if (page) {
       return `${url}?page=${page}`
     }
-    return url
+    return `${url}?page=1`
   }
 
   fetchAllCategories() {
@@ -140,6 +142,9 @@ export class DiscussService {
   fetchSingleCategoryDetailsSort(cid: number, sort: any, page?: any) {
     const url = this.appendPage(page, API_ENDPOINTS.getSingleCategoryDetails(cid))
     return this.http.get<NSDiscussData.ICategoryData>(`${url}&sort=${sort}`)
+  }
+  fetchNetworkProfile() {
+    return this.http.get<any>(API_ENDPOINTS.fetchNetworkProfile)
   }
 
 }

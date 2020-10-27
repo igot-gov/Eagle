@@ -17,8 +17,14 @@
             <mat-form-field appearance="outline" class="margin-top-l"
               [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
               <mat-label>Compentency Category</mat-label>
-              <input matInput formControlName="category" #category maxlength="1000" i18n-placeholder placeholder=""
-                [required]="true" />
+              <!-- <input matInput formControlName="category" #category maxlength="1000" i18n-placeholder placeholder=""
+                [required]="true" /> -->
+              <mat-select [required]="true" formControlName="category" i18n-placeholder placeholder="--Select--"
+                #category>
+                <mat-option [value]="'Behavioural'" i18n>Behavioural</mat-option>
+                <mat-option [value]="'Domain'" i18n>Domain</mat-option>
+                <mat-option [value]="'Functional'" i18n>Functional</mat-option>
+              </mat-select>
               <!-- <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint> -->
               <mat-error *ngIf="showError('category')" i18n="question Error|Explains question is required">
                 Compentency Category is Mandatory
@@ -78,12 +84,12 @@
           </mat-form-field> -->
           <mat-form-field appearance="outline" class="margin-top-l"
             [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
-            <mat-label>Compentency Category</mat-label>
+            <mat-label>Compentency Source</mat-label>
             <input matInput formControlName="tags" #tags maxlength="1000" i18n-placeholder placeholder=""
               [required]="true" />
             <!-- <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint> -->
             <mat-error *ngIf="showError('tags')" i18n="question Error|Explains question is required">
-              Compentency Category is Mandatory
+              Compentency Source is Mandatory
             </mat-error>
           </mat-form-field>
         </div>
@@ -112,7 +118,7 @@
           </span>
           <button mat-raised-button type="submit" class="text-white ws-mat-primary-background flex-auto-display"
             [disabled]="uploadSaveData || startForm?.invalid" (click)="submitPost(startForm)">
-            <span class="text-white" i18n>Submit post</span>
+            <span class="text-white" i18n>Submit Competency</span>
           </button>
         </mat-dialog-actions>
       </div>

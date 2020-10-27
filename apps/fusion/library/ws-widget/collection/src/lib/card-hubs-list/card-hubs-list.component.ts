@@ -1,3 +1,4 @@
+import { trigger, transition, style, animate } from '@angular/animations'
 import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
@@ -7,6 +8,20 @@ import { Subscription } from 'rxjs'
   selector: 'ws-widget-card-hubs-list',
   templateUrl: './card-hubs-list.component.html',
   styleUrls: ['./card-hubs-list.component.scss'],
+  animations: [
+    trigger(
+      'enterAnimation', [
+      transition(':enter', [
+        style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 0 }),
+        animate('500ms', style({ transition: 'visibility 0s linear 0.23s, opacity 0.33s linear', opacity: 1, 'transition-delay': '0s' })),
+      ]),
+      transition(':leave', [
+        style({ transition: 'visibility 1s linear 0.33s, opacity 0.33s linear', opacity: 1 }),
+        animate('300ms', style({ transition: 'visibility 1s linear 0.33s, opacity 0.33s linear', opacity: 0, 'transition-delay': '0s' })),
+      ]),
+    ]
+    ),
+  ],
 })
 export class CardHubsListComponent extends WidgetBaseComponent
 

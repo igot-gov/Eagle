@@ -295,12 +295,8 @@
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/networkHub/users",
+                        "path": "/apis/protected/v8/network/connections/recommended/rootOrg",
                         "queryParams": {
-                          "limit": 5,
-                          "offset": 0,
-                          "intervalInDays": 7,
-                          "type": "latestUsers"
                         }
                       }
                     }
@@ -321,7 +317,7 @@
                 "strips": [
                   {
                     "key": "Career",
-                    "logo": "group",
+                    "logo": "work",
                     "title": "Careers",
                     "stripBackground": "assets/instances/eagle/background/careers.svg",
                     "titleDescription": "Latest openings",

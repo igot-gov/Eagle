@@ -255,3 +255,8 @@
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">error</mat-icon>
   <span i18n>Unable to submit your request. Try again </span>
 </p>
+
+<p *ngIf="type === notify.COMPETENCY_CREATED_SUCCESS">
+  <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">notification_important</mat-icon>
+  <span i18n>Your Competency Request Success!. please wait the reviewer to approve it</span>
+</p>

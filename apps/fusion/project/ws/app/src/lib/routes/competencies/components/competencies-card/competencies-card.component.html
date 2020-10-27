@@ -5,7 +5,7 @@
     <h5 class="mat-h4">{{data.description}}</h5>
   </mat-card-content>
   <mat-card-content class="flex flex-1 custom-reverse" *ngIf="isSelected">
-    <div class="add-comp cursor-pointer" (click)="add()">
+    <div class="add-comp cursor-pointer" (click)="add() ;$event.stopPropagation()">
       <mat-icon class="m-auto">add</mat-icon>
     </div>
     <span class="mat-h3 font-medium">{{data.name}}</span>

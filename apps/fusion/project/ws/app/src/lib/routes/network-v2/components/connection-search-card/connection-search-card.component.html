@@ -14,12 +14,20 @@
         </div>
         <div class="action-container flex items-center justify-center">
             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()" *ngIf="!user?.requestSent">
+                (click)="connetToUser()" *ngIf="!user?.requestSent && !user?.requestRecieved && !user?.connectionEstablished">
                 <span class="" i18n>Connect</span>
             </button>
             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
                 (click)="connetToUser()" disabled *ngIf="user?.requestSent">
                 <span class="" i18n>Connection sent</span>
+            </button>
+            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
+                (click)="connetToUser()" disabled *ngIf="user?.requestRecieved">
+                <span class="" i18n>Connection received</span>
+            </button>
+            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
+                (click)="connetToUser()" disabled *ngIf="user?.connectionEstablished">
+                <span class="" i18n>Connected</span>
             </button>
         </div>
     </div>
