@@ -240,13 +240,20 @@ public class ConnectionService implements IConnectionService {
             Pageable pageable = PageRequest.of(offset, limit);
             Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
             List<UserConnection> userConnectionsEstablishedIn = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equalsIgnoreCase(status)).collect(Collectors.toList());
-            connectionIds.addAll(userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
+            //connectionIds.addAll(userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
 
 
             //for direction IN
             List<UserConnection> userConnectionsEstablishedOut = userConnectionRepository.findByConnection(rootOrg, userId, status);
-            connectionIds.addAll(userConnectionsEstablishedOut.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList()));
 
+            //Merge in and out
+            userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
+
+            // sort all
+            userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
+
+            //filter all ids
+            connectionIds = userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
 
             response.put(Constants.ResponseStatus.PAGENO, offset);
             response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
