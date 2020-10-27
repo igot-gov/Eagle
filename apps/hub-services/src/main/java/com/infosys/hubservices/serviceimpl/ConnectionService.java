@@ -82,7 +82,8 @@ public class ConnectionService implements IConnectionService {
 
             UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(rootOrg, request.getUserId(), request.getConnectionId());
             userConnection.setConnectionStatus(request.getStatus());
-            userConnection.setEndOn(request.getEndDate());
+            //as updated date
+            userConnection.setEndOn(request.getEndDate()==null? new Date() : request.getEndDate());
 
             userConnectionRepository.save(userConnection);
 
@@ -245,7 +246,7 @@ public class ConnectionService implements IConnectionService {
             userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
 
             // sort all
-            userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
+            userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getEndOn).reversed());
 
             //filter all ids
             connectionIds = userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
