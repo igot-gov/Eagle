@@ -7,6 +7,9 @@ import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { TFetchStatus } from '@ws-widget/utils/src/public-api'
 import { MobileAppsService } from '../../../../../../../src/app/services/mobile-apps.service'
 import { SCORMAdapterService } from './SCORMAdapter/scormAdapter'
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 
 @Component({
   selector: 'viewer-plugin-html',
@@ -135,6 +138,16 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       }
       this.iframeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(
         `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`
+      )
+      // testing purpose only
+      setTimeout(
+        () => {
+          const ifram = document.getElementsByClassName('html-iframe')[0]
+          if (ifram) {
+            _.set(ifram, 'src', this.iframeUrl)
+          }
+        },
+        3000,
       )
     } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
       this.iframeUrl = null
