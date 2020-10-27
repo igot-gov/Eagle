@@ -20,7 +20,7 @@ public interface INotificationService {
      * @param eventId
      * @param userConnection
      */
-    NotificationEvent buildEvent(String eventId, UserConnection userConnection);
+    NotificationEvent buildEvent(String eventId, String sender, String reciepient, String status);
 
     /**
      * Sends notifications

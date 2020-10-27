@@ -62,7 +62,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
             if(connectionProperties.isNotificationEnabled())
-                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(), userConnection);
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
 
 
 
@@ -90,7 +90,7 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
             if(connectionProperties.isNotificationEnabled())
-                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
 
         } catch (Exception e){
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
@@ -113,9 +113,6 @@ public class ConnectionService implements IConnectionService {
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
-            if(connectionProperties.isNotificationEnabled())
-                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), userConnection);
-
 
         } catch (Exception e){
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
@@ -126,8 +123,8 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public void sendNotification(String rootOrg, String eventId, UserConnection userConnection) {
-        NotificationEvent event = notificationService.buildEvent(eventId, userConnection);
+    public void sendNotification(String rootOrg, String eventId, String sender, String reciepient, String status) {
+        NotificationEvent event = notificationService.buildEvent(eventId, sender, reciepient, status);
         notificationService.postEvent(rootOrg, event);
     }
 

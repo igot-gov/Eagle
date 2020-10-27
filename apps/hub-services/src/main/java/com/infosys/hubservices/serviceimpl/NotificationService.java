@@ -40,16 +40,16 @@ public class NotificationService implements INotificationService {
     private ProfileService profileService;
 
     @Override
-    public NotificationEvent buildEvent(String eventId, UserConnection userConnection) {
+    public NotificationEvent buildEvent(String eventId, String sender, String reciepient, String status) {
 
         NotificationEvent notificationEvent = new NotificationEvent();
 
-        if (eventId != null && userConnection != null) {
+        if (eventId != null && sender != null && reciepient != null) {
 
-            String fromUUID = userConnection.getUserConnectionPrimarykey().getUserId();
+            String fromUUID = sender;
 
             Map<String, List<String>> recipients = new HashMap<>();
-            List<String> toList = Arrays.asList(userConnection.getUserConnectionPrimarykey().getConnectionId());
+            List<String> toList = Arrays.asList(reciepient);
             recipients.put(connectionProperties.getNotificationTemplateReciepient(), toList);
 
             logger.info("Notification sender --> {}",fromUUID);
@@ -58,7 +58,7 @@ public class NotificationService implements INotificationService {
             Map<String, Object> tagValues = new HashMap<>();
             tagValues.put(connectionProperties.getNotificationTemplateSender(), getUserName(fromUUID));
             tagValues.put(connectionProperties.getNotificationTemplateTargetUrl(), connectionProperties.getNotificationTemplateTargetUrlValue());
-            tagValues.put(connectionProperties.getNotificationTemplateStatus(), userConnection.getConnectionStatus());
+            tagValues.put(connectionProperties.getNotificationTemplateStatus(), status);
 
             notificationEvent.setEventId(eventId);
             notificationEvent.setRecipients(recipients);

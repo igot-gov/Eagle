@@ -77,7 +77,7 @@ public interface IConnectionService {
      * @param eventId
      * @param userConnection
      */
-    void sendNotification(String rootOrg, String eventId, UserConnection userConnection);
+    void sendNotification(String rootOrg, String eventId, String sender, String reciepient, String status);
 
     List<String> findUserConnections(String rootOrg, String userId);
 

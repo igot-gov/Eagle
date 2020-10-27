@@ -67,12 +67,12 @@ class NotificationServiceTest {
         when(connectionProperties.getNotificationTemplateStatus()).thenReturn(status);
         when(connectionProperties.getNotificationTemplateReciepient()).thenReturn("#reciepient");
 
-        UserConnection userConnection = mock(UserConnection.class, Mockito.RETURNS_DEEP_STUBS);
+  /*      UserConnection userConnection = mock(UserConnection.class, Mockito.RETURNS_DEEP_STUBS);
         when(userConnection.getUserConnectionPrimarykey().getUserId()).thenReturn("uuid");
         when(userConnection.getUserConnectionPrimarykey().getConnectionId()).thenReturn("connect_id");
-        when(userConnection.getConnectionStatus()).thenReturn("status");
+        when(userConnection.getConnectionStatus()).thenReturn("status");*/
 
-        NotificationEvent notificationEvent = notificationService.buildEvent(id, userConnection);
+        NotificationEvent notificationEvent = notificationService.buildEvent(id, "sender", "reciepient", "status");
 
         assertTrue(notificationEvent.getEventId().equalsIgnoreCase(id));
         assertTrue(!notificationEvent.getRecipients().isEmpty());
