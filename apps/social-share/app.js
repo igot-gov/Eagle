@@ -52,9 +52,9 @@ router.get("/content/:id", function (req, res) {
         if (data) {
           var html = `<!DOCTYPE html>
           <html lang="en">
-            <head>
-              <title>"${data.name}"</title>
+            <head>             
               <meta charset="utf-8" />
+              <title>"${data.name}"</title>
               <meta name="viewport" content="width=device-width, initial-scale=1" />
               <meta name="title" content="${data.name}" />
               <meta name="description" content="${data.description}" />
