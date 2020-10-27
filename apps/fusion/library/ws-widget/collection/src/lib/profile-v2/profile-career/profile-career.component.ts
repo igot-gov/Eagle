@@ -16,7 +16,7 @@ export class ProfileCareerComponent extends WidgetBaseComponent implements OnIni
   ngOnInit(): void {
     // console.log(this.widgetData)
   }
-  PaDate(date: any): string {
+  paDate(date: any): string {
     const dat = moment(date, 'dd-mm-yyyy').toDate()
     return dat.toDateString()
   }

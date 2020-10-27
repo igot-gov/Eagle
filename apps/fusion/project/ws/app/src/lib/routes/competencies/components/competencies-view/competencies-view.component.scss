@@ -14,12 +14,23 @@
   // width: max-content;
   @include breakpoint-xs {
     width: auto;
+    min-width: auto;
+  }
+}
+
+.responsive {
+  @include breakpoint-xs {
+    flex-direction: column-reverse;
   }
 }
 
 .others {
   background: #0074B6 0% 0% no-repeat padding-box;
   border-radius: 4px;
+
+  @include breakpoint-xs {
+    margin: auto !important;
+  }
 }
 
 .font-medium {
