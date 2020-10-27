@@ -143,8 +143,9 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
       setTimeout(
         () => {
           const ifram = document.getElementsByClassName('html-iframe')[0]
-          if (ifram) {
-            _.set(ifram, 'src', this.iframeUrl)
+          if (ifram && this.htmlContent) {
+            _.set(ifram, 'src',
+              `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`)
           }
         },
         3000,
