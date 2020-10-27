@@ -8,7 +8,7 @@
   <!-- <track kind="captions"
     src="/apis/authContent/content-store/igot/dopt/Public/lex_auth_013114377081208832249/assets/sample1600885058308.vtt"
     srclang="en" label="English" default> -->
-  <track kind="captions" *ngIf="widgetData.subtitles" [src]="widgetData.subtitles[0].url" srclang="en" label="English"
+  <track kind="captions" *ngIf="widgetData.subtitles" [src]="widgetData?.subtitles[0]?.url" srclang="en" label="English"
     default>
 </video>
 
@@ -19,6 +19,6 @@
   <!-- <track kind="captions"
     src="/apis/authContent/content-store/igot/dopt/Public/lex_auth_013114377081208832249/assets/sample1600885058308.vtt"
     srclang="en" label="English" default> -->
-  <track kind="captions" *ngIf="widgetData.subtitles" [src]="widgetData.subtitles[0].url" srclang="en" label="English"
+  <track kind="captions" *ngIf="widgetData.subtitles" [src]="widgetData?.subtitles[0]?.url" srclang="en" label="English"
     default>
 </video>
