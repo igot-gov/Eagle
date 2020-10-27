@@ -73,7 +73,7 @@ export class VideoComponent implements OnInit, OnDestroy {
           if (this.videoData.subTitles) {
 
             let subTitleUrl = ''
-            if (this.videoData.subTitles[0]) {
+            if (this.videoData.subTitles.length > 0 && this.videoData.subTitles[0]) {
               if (this.videoData.subTitles[0].url.indexOf('/content-store/') > -1) {
                 subTitleUrl = `/apis/authContent/${new URL(this.videoData.subTitles[0].url).pathname}`
               } else {
