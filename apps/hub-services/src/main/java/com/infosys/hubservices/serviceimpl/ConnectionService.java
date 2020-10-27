@@ -155,6 +155,7 @@ public class ConnectionService implements IConnectionService {
             List<UserConnection> userConnectionsIn = userConnectionRepository.findByConnectionAndRootOrg(rootOrg, userId);
             List<String> connectedUserIds = userConnectionsIn.stream().map(userConnection -> userConnection.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
             connectionIds.addAll(connectedUserIds);
+            connectionIds.add(userId);
 
             List<UserConnection> relatedConnections = userConnectionRepository.findByUsersAndRootOrg(rootOrg, connectionIds).stream().filter(c->c.getConnectionStatus().equals(Constants.Status.APPROVED)).collect(Collectors.toList());
             List<UserConnection> commonConnections = relatedConnections.stream().filter(userConnection -> !connectionIds.contains(userConnection.getUserConnectionPrimarykey().getConnectionId())).collect(Collectors.toList());
