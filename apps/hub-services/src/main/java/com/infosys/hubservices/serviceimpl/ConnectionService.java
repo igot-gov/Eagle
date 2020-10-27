@@ -247,7 +247,8 @@ public class ConnectionService implements IConnectionService {
             userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
 
             // sort all
-            userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getEndOn).reversed());
+            userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getEndOn, Comparator.nullsLast(
+                    Comparator.naturalOrder())).reversed());
 
             //filter all ids
             connectionIds = userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
