@@ -7444,12 +7444,28 @@
         }
       ]
     },
-    "disabledFor": {},
+    "disabledFor": {
+      "Channel": [],
+      "Collection": [],
+      "Course": [],
+      "Knowledge Artifact": [],
+      "Knowledge Board": [],
+      "Learning Path": []
+    },
     "mandatoryFor": {},
     "notDisabledFor": {},
     "notMandatoryFor": {},
     "notShowFor": {},
-    "showFor": {},
+    "showFor": {
+      "Resource": [
+        {
+          "mimeType": [
+            "application/x-mpegURL",
+            "audio/mpeg"
+          ]
+        }
+      ]
+    },
     "type": "array"
   },
   "systemRequirements": {
