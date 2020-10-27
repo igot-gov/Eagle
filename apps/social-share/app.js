@@ -72,7 +72,11 @@ router.get("/content/:id", function (req, res) {
               <meta property="twitter:description" content="${data.description}" />
               <meta property="twitter:image" content="${data.appIcon}" />
             </head>
-            <body></body>
+            <body>
+              <h1 title="${data.name}" />
+              <img src="${data.appIcon}" alt="${data.name}" />
+              <p title="${data.description}" />
+            </body>
           </html>          
             `;
           res.send(html);
