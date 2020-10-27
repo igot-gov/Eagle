@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 import { IProfileCareer } from './profile-career.model'
+import moment from 'moment'
 
 @Component({
   selector: 'ws-widget-profile-v2-career',
@@ -15,5 +16,8 @@ export class ProfileCareerComponent extends WidgetBaseComponent implements OnIni
   ngOnInit(): void {
     // console.log(this.widgetData)
   }
-
+  PaDate(date: any): string {
+    const dat = moment(date, 'dd-mm-yyyy').toDate()
+    return dat.toDateString()
+  }
 }

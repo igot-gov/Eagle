@@ -11,7 +11,10 @@
             <div class="flex flex-1 mobile-margin margin-f">
               <span class="flex-1 mat-h3 font-medium"> {{career.designation}}
               </span>
-              <span *ngIf="career.doj" class="mat-subtitle">Joined {{career.doj | pipeRelativeTime}}</span>
+              <span class="mat-subtitle" *ngIf="career.doj && (PaDate(career.doj) !== 'Invalid Date')">
+                Joined {{PaDate(career.doj) | pipeRelativeTime}}</span>
+              <span class="mat-subtitle" *ngIf=" career.doj && (PaDate(career.doj) === 'Invalid Date')">
+                Joined {{career.doj}}</span>
             </div>
             <div class="mat-subtitle flex-1 mobile-margin">
               {{career.name}}
