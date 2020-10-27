@@ -60,21 +60,23 @@ router.get("/content/:id", function (req, res) {
        
              
               <meta property="og:type" content="website">
-              <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview`}" />
+              <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/content/${req.params.id}`}" />
               <meta property="og:title" content="${data.name}" />
               <meta property="og:description" expr:content="${data.description}" />
               <meta property="og:image" content="${data.appIcon}" />          
           
               <meta property="twitter:card" content="summary_large_image" />
-              <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview`}" />
+              <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/content/${req.params.id}`}" />
               <meta property="twitter:title" content="${data.name}" />
               <meta property="twitter:description" content="${data.description}" />
               <meta property="twitter:image" content="${data.appIcon}" />
             </head>
             <body>
-              <h1 title="${data.name}" />
-              <img src="${data.appIcon}" alt="${data.name}" />
-              <p title="${data.description}" />
+              <a href="https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview}>
+                <h1 title="${data.name}">${data.name}<h1>
+                <p title="${data.description}">${data.description}</p>
+                <img src="${data.appIcon}" alt="${data.name}" />
+              </a>             
             </body>
           </html>          
             `;
