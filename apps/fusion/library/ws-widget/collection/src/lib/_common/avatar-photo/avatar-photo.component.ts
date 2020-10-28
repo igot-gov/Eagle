@@ -19,7 +19,6 @@ export class AvatarPhotoComponent implements OnInit {
   public circleColor!: string
   random = Math.random().toString(36).slice(2)
 
-
   // public initials!: string
 
   private colors = [
