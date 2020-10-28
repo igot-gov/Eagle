@@ -65,7 +65,7 @@ public class MyActivities implements IMyActivities {
         List<BadgeDetailsProjection> filterBadgeData = badgeData.stream().filter(bd->badgeIds.contains(bd.getbadgeId())).collect(Collectors.toList());
 
 
-        System.out.println("filterBadgeIds -> "+filterBadgeData.stream().map(f -> f.getbadgeId()).collect(Collectors.toList());
+        System.out.println("filterBadgeIds -> "+filterBadgeData.stream().map(f -> f.getbadgeId()).collect(Collectors.toList()));
 
 
         Integer noOfCertificates = userBadgeRepository.countForCompleted(rootOrg, userId);
