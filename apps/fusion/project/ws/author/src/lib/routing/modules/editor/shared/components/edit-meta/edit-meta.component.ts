@@ -1359,6 +1359,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  clearUploadedFile() {
+    this.contentForm.controls.subTitles.setValue([])
+    this.file = undefined
+  }
+
   upload() {
 
     this.loader.changeLoad.next(true)
