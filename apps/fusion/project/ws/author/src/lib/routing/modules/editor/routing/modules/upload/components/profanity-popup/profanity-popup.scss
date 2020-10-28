@@ -24,12 +24,26 @@
     flex: auto;
   }
 }
-.circle {
-  border: 2px solid red;
-  background-color: #ffffff;
-  height: 3px;
+.circle-red {
+  height: 14px;
+  width: 14px;
+  background-color: red;
   border-radius: 50%;
-  width: 100px;
+  display: inline-block;
+}
+.circle-orange {
+  height: 14px;
+  width: 14px;
+  background-color: orange;
+  border-radius: 50%;
+  display: inline-block;
+}
+.circle-yellow {
+  height: 14px;
+  width: 14px;
+  background-color: yellow;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 .similar {
