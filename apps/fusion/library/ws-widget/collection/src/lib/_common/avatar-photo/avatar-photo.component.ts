@@ -19,12 +19,11 @@ export class AvatarPhotoComponent implements OnInit {
   public circleColor!: string
   random = Math.random().toString(36).slice(2)
 
-
   // public initials!: string
 
   private colors = [
     // '#EB7181', // red
-    '#006400', // green
+    '#306933', // green
     // '#000000', // black
     // '#3670B2', // blue
     // '#4E9E87',

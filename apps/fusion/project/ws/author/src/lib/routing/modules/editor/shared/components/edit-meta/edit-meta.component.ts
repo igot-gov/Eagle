@@ -645,6 +645,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       if (originalMeta && this.isEditEnabled) {
         const expiryDate = this.contentForm.value.expiryDate
         const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
+        if (originalMeta.mimeType) {
+          currentMeta.mimeType = originalMeta.mimeType
+        }
         const meta = <any>{}
         if (this.canExpiry) {
           currentMeta.expiryDate = `${expiryDate
@@ -1357,6 +1360,11 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       // this.getDuration()
       this.upload()
     }
+  }
+
+  clearUploadedFile() {
+    this.contentForm.controls.subTitles.setValue([])
+    this.file = undefined
   }
 
   upload() {
