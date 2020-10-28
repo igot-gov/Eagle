@@ -238,10 +238,13 @@ public class ConnectionService implements IConnectionService {
             Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
             List<UserConnection> userConnectionsEstablishedIn = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equalsIgnoreCase(status)).collect(Collectors.toList());
             //connectionIds.addAll(userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
+            logger.info("userConnectionsEstablishedIn "+mapper.writeValueAsString(userConnectionsEstablishedIn));
 
 
             //for direction IN
             List<UserConnection> userConnectionsEstablishedOut = userConnectionRepository.findByConnection(rootOrg, userId, status);
+            logger.info("userConnectionsEstablishedOut "+mapper.writeValueAsString(userConnectionsEstablishedOut));
+
 
             //Merge in and out
             userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
@@ -252,6 +255,9 @@ public class ConnectionService implements IConnectionService {
 
             //filter all ids
             connectionIds = userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
+            logger.info("to rem userid "+userId);
+
+            connectionIds.removeAll(Arrays.asList(userId));
 
             logger.info("established sorted connectionIds "+connectionIds);
 
@@ -294,7 +300,7 @@ public class ConnectionService implements IConnectionService {
                 response.put(Constants.ResponseStatus.PAGENO, offset);
                 response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
             }
-            System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
+            //System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
 
             if(direction.equals(Constants.DIRECTION.IN))
                 userConnections = userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.PENDING);
