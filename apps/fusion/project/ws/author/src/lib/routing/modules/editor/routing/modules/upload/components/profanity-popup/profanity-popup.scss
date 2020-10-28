@@ -24,6 +24,13 @@
     flex: auto;
   }
 }
+.circle {
+  border: 2px solid red;
+  background-color: #ffffff;
+  height: 3px;
+  border-radius: 50%;
+  width: 100px;
+}
 
 .similar {
   display: none !important;
@@ -68,7 +75,7 @@
 }
 
 .flex-3 {
-  flex: 3
+  flex: 3;
 }
 
 .flex-2 {
