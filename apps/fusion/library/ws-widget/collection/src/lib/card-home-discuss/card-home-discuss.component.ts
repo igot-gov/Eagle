@@ -8,7 +8,7 @@ import { NSDiscuss } from './discuss.model'
 import { Router } from '@angular/router'
 /* tslint:enable */
 @Component({
-  selector: 'ws-widget-home-component',
+  selector: 'ws-widget-home-discuss-component',
   templateUrl: './card-home-discuss.component.html',
   styleUrls: ['./card-home-discuss.component.scss'],
   providers: [DiscussService],
