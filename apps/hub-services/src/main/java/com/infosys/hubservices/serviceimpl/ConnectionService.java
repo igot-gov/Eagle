@@ -236,18 +236,18 @@ public class ConnectionService implements IConnectionService {
             //for direction OUT
             Pageable pageable = PageRequest.of(offset, limit);
             Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
-            List<UserConnection> userConnectionsEstablishedIn = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equalsIgnoreCase(status)).collect(Collectors.toList());
+            List<UserConnection> userConnectionsEstablishedOut = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equalsIgnoreCase(status)).collect(Collectors.toList());
             //connectionIds.addAll(userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
-            logger.info("userConnectionsEstablishedIn "+mapper.writeValueAsString(userConnectionsEstablishedIn));
+            logger.info("userConnectionsEstablishedIn "+mapper.writeValueAsString(userConnectionsEstablishedOut));
 
 
             //for direction IN
-            List<UserConnection> userConnectionsEstablishedOut = userConnectionRepository.findByConnection(rootOrg, userId, status);
-            logger.info("userConnectionsEstablishedOut "+mapper.writeValueAsString(userConnectionsEstablishedOut));
+            List<UserConnection> userConnectionsEstablishedIn = userConnectionRepository.findByConnection(rootOrg, userId, status);
+            logger.info("userConnectionsEstablishedOut "+mapper.writeValueAsString(userConnectionsEstablishedIn));
 
 
             //Merge in and out
-            userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
+            //userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
 
             // sort all
            /* userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getEndOn, Comparator.nullsFirst(
