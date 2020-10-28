@@ -8,6 +8,8 @@ import com.infosys.lex.notification.dto.UserInfo;
 import com.infosys.lex.notification.exception.ApplicationLogicException;
 
 public class NotificationTemplateUtil {
+	
+	private static LexNotificationLogger logger = new LexNotificationLogger(NotificationTemplateUtil.class.getName());
 
 	public static String replaceTags(String rootOrg, Map<String, Object> tagValuePairs, String text,
 			Map<String, UserInfo> usersInfoMap, Map<String, List<String>> recipients, String recipientRole,
@@ -229,6 +231,7 @@ public class NotificationTemplateUtil {
 		for (Map.Entry<String, Object> entry : tagValuePairs.entrySet()) {
 			if (!usersInfoMap.containsKey(entry.getValue()))
 				continue;
+			logger.info("Current Text: " + text  + ", Replacing key: " + entry.getKey());
 			if (text.contains(entry.getKey() + "Name"))
 				text = text.replaceAll(entry.getKey() + "Name", usersInfoMap.get(entry.getValue()).getName());
 
@@ -237,6 +240,8 @@ public class NotificationTemplateUtil {
 
 			if (text.contains(entry.getKey() + "FirstName"))
 				text = text.replaceAll(entry.getKey() + "FirstName", usersInfoMap.get(entry.getValue()).getFirstName());
+			
+			logger.info("After replacing tagValueParis text is - " + text);
 		}
 
 		// also searching in recipients of the notification event, if tag name matches
@@ -244,6 +249,7 @@ public class NotificationTemplateUtil {
 		for (Map.Entry<String, List<String>> recipientEntry : recipients.entrySet()) {
 			String replaceWith = "";
 			String replaceText = "";
+			logger.info("Current Text: " + text + ", Replacing Key: " + recipientEntry.getKey());
 			
 			//replace count of the given recipient
 			if(text.contains("#" + recipientEntry.getKey() + "Count"))
@@ -297,9 +303,9 @@ public class NotificationTemplateUtil {
 					text = text.replaceAll( replaceText, replaceWith);
 				}
 			}
-
+			logger.info("After replacing recipients text is - " + text);
 		}
-
+		
 		return text;
 	}
 
