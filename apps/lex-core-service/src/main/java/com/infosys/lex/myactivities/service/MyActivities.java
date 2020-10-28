@@ -60,15 +60,11 @@ public class MyActivities implements IMyActivities {
 
         List<UserBadgesModel> bm = userBadgeRepository.findByRootOrgAndUserIdAndReceivedCountAndProgress(rootOrg, userId);
         List<String> badgeIds = bm.stream().map(m->m.getPrimaryKey().getBadgeId()).collect(Collectors.toList());
-        System.out.println("badgeIds -> "+badgeIds);
-
+        //System.out.println("badgeIds -> "+badgeIds);
         List<BadgeDetailsProjection> filterBadgeData = badgeData.stream().filter(bd->badgeIds.contains(bd.getbadgeId())).collect(Collectors.toList());
+        //System.out.println("filterBadgeIds -> "+filterBadgeData.stream().map(f -> f.getbadgeId()).collect(Collectors.toList()));
 
-
-        System.out.println("filterBadgeIds -> "+filterBadgeData.stream().map(f -> f.getbadgeId()).collect(Collectors.toList()));
-
-
-        Integer noOfCertificates = userBadgeRepository.countForCompleted(rootOrg, userId);
+        Integer noOfCertificates = filterBadgeData.size();//userBadgeRepository.countForCompleted(rootOrg, userId);
         return new Activity(Constants.Unit.NUMBER, noOfCertificates);
     }
 
@@ -76,7 +72,7 @@ public class MyActivities implements IMyActivities {
     public Activity userTimeSpentOnPlatform(String rootOrg, String userId) {
 
         Double duration = userTimeSpentRepository.avgTimeSpentByRootOrgAndUserId(rootOrg, userId);
-        System.out.println("Daily duration :: "+duration);
+        //System.out.println("Daily duration :: "+duration);
         return new Activity(Constants.Unit.MINUTE, TimeUnit.SECONDS.toMinutes(duration.longValue()));
     }
 
