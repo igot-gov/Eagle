@@ -58,12 +58,13 @@ router.get("/content/:id", function (req, res) {
               <title>"${data.name}"</title>
               <link id="id-app-fav-icon" rel="icon" type="image/png" href="./image/favicon.png")
               " />
-             
+              <meta id="id-social-description" name="description"  content="${data.description}">             
               <meta property="og:type" content="website">
               <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/content/${req.params.id}`}" />
               <meta property="og:title" content="${data.name}" />
               <meta property="og:description" content="${data.description}" />
-              <meta property="og:image" content="${data.appIcon}" />          
+              <meta property="og:image" content="${data.appIcon}" />  
+              <meta property="og:image:secure_url" content="${data.appIcon}" />        
           
               <meta property="twitter:card" content="summary_large_image" />
               <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/content/${req.params.id}`}" />
@@ -109,7 +110,7 @@ router.get("/content/:id", function (req, res) {
             </head>
             <body>
               <div class="social-card">
-                <a href="https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview}">
+                <a href="https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview">
                   <img src="${data.appIcon}" alt="${data.name}"  class="social-card-img" />
                   <div class="sub-card">
                     <pclass="title">${data.name}</p>
