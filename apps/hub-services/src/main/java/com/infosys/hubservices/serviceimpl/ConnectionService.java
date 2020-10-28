@@ -252,6 +252,9 @@ public class ConnectionService implements IConnectionService {
 
             //filter all ids
             connectionIds = userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
+            logger.info("to rem userid "+userId);
+
+            connectionIds.removeAll(Arrays.asList(userId));
 
             logger.info("established sorted connectionIds "+connectionIds);
 
@@ -294,7 +297,7 @@ public class ConnectionService implements IConnectionService {
                 response.put(Constants.ResponseStatus.PAGENO, offset);
                 response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
             }
-            System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
+            //System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
 
             if(direction.equals(Constants.DIRECTION.IN))
                 userConnections = userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.PENDING);
