@@ -159,6 +159,7 @@ public class EmailServiceImpl implements EmailService {
 					endIndex = tolistSize;
 
 				emailEvent.setBcc(newToList);
+				emailEvent.setTo(new ArrayList<>());
 				MimeMessage message = new MimeMessage(session);
 
 				MimeBodyPart emailBody = createEmailBodyPart(emailEvent.getBody());
