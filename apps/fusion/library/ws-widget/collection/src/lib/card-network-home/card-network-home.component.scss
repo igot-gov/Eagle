@@ -162,10 +162,10 @@ mat-grid-list {
   border-radius: 8px;
 }
 
-.min100h {
-  // min-height: 100px;
-  // display: block;
-}
+// .min100h {
+//   // min-height: 100px;
+//   // display: block;
+// }
 
 .cohorts-head {
   padding: $size-xs $size-l;
@@ -220,7 +220,8 @@ mat-grid-list {
 }
 
 .center {
-  text-align: center;
-  color: #187bcd;
-  padding-top: 15px;
+  // text-align: center;
+  // color: #187bcd;
+  margin: 0.5rem auto 0.5rem auto;
+  // padding-top: 15px;
 }

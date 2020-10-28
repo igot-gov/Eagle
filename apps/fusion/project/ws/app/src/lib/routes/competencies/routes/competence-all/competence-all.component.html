@@ -30,28 +30,31 @@
         <mat-card class="competency-card" *ngIf="myCompetencies && myCompetencies.length > 0">
           <mat-card-header>
             <mat-card-title>
-              My competencies
+              <span class="mat-subheading-1">
+                My competencies
+              </span>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="flex flex-1 flex-wrap">
             <span>&nbsp;</span>
             <div class="tag mat-copmetence cursor-pointer" (click)=view(item) *ngFor="let item of myCompetencies">
-              <span>{{item.name}}</span>
+              <span class="mat-body-1 margin-xs">{{item.name}}</span>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
       <div class="w-full pt-10">
         <div class="flex flex-1 flex-column margin-fix mb-2">
-          <h2 class="f-medium">Popular competencies </h2>
+          <span class="mat-subheading-1">
+            Popular competencies
+          </span>
         </div>
         <div class="flex flex-1 flex-row margin-fix search">
           <form (submit)="updateQuery(queryControl.value)" class="flex-1">
             <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
               <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
               <input type="search" #searchInput class="ml-2 flex-1" i18n-placeholder="search content"
-                [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
-                accesskey="F" />
+                [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl" />
             </mat-form-field>
           </form>
           <!-- <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important"> -->

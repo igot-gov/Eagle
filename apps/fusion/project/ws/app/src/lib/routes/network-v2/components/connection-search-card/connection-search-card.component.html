@@ -18,11 +18,11 @@
                 <span class="" i18n>Connect</span>
             </button>
             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()" disabled *ngIf="user?.requestSent">
+                (click)="connetToUser()" disabled *ngIf="user?.requestSent && !user?.connectionEstablished">
                 <span class="" i18n>Connection sent</span>
             </button>
             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()" disabled *ngIf="user?.requestRecieved">
+                (click)="connetToUser()" disabled *ngIf="user?.requestRecieved && !user?.connectionEstablished">
                 <span class="" i18n>Connection received</span>
             </button>
             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"

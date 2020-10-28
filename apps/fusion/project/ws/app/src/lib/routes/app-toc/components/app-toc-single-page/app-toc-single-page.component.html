@@ -282,7 +282,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     <h2 class="at-glance-heading" i18n>At a glance</h2>
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.displayContentType?.enabled && content?.displayContentType">
-                        <h3 class="item-heading ws-mat-primary-text">
+                        <h3 class="item-heading ws-mat-default-text">
                             {{tocConfig?.atAGlance?.displayContentType?.displayName}}
                         </h3>
                         <ws-widget-display-content-type *ngIf="content?.contentType !== contentTypes.RESOURCE"
@@ -299,7 +299,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     </mat-divider>
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.complexityLevel?.enabled && content?.complexityLevel">
-                        <h3 class="item-heading ws-mat-primary-text">
+                        <h3 class="item-heading ws-mat-default-text">
                             {{tocConfig?.atAGlance?.complexityLevel?.displayName}}
                         </h3>
                         <h3 class="item-value width-expand">
@@ -310,7 +310,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         *ngIf="tocConfig?.atAGlance?.complexityLevel?.enabled && content?.complexityLevel">
                     </mat-divider>
                     <div class="info-item" *ngIf="tocConfig?.atAGlance?.duration?.enabled && content?.duration">
-                        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.duration?.displayName}}
+                        <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.duration?.displayName}}
                         </h3>
                         <h3 class="item-value width-expand">
                             {{ content?.duration | pipeDurationTransform: 'hms' }}
@@ -319,21 +319,22 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     <mat-divider class="divider-transparent"
                         *ngIf="tocConfig?.atAGlance?.duration?.enabled && content?.duration"></mat-divider>
                     <div class="info-item" *ngIf="tocConfig?.atAGlance?.cost?.enabled">
-                        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.cost?.displayName}}</h3>
+                        <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.cost?.displayName}}</h3>
                         <h3 *ngIf="content?.exclusiveContent" class="item-value width-expand">Paid Content</h3>
                         <h3 *ngIf="!content?.exclusiveContent" class="item-value width-expand">Free</h3>
                     </div>
                     <mat-divider class="divider-transparent" *ngIf="tocConfig?.atAGlance?.cost?.enabled"></mat-divider>
                     <div class="info-item" *ngIf="tocConfig?.atAGlance?.license?.enabled">
-                        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.license?.displayName}}</h3>
+                        <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.license?.displayName}}</h3>
                         <h3 *ngIf="content?.license" class="item-value width-expand">
                             {{content?.license}}
                         </h3>
                     </div>
-                    <mat-divider class="divider-transparent" *ngIf="tocConfig?.atAGlance?.license?.enabled"></mat-divider>
+                    <mat-divider class="divider-transparent" *ngIf="tocConfig?.atAGlance?.license?.enabled">
+                    </mat-divider>
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.viewCount?.enabled && content?.viewCount && configSvc?.rootOrg">
-                        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.viewCount?.displayName}}
+                        <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.viewCount?.displayName}}
                         </h3>
                         <h3 class="item-value width-expand">
                             {{ content?.viewCount[configSvc.rootOrg] | pipeCountTransform }}
@@ -348,7 +349,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     </mat-divider>
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.sourceShortName?.enabled && content?.sourceShortName">
-                        <h3 class="item-heading ws-mat-primary-text">
+                        <h3 class="item-heading ws-mat-default-text">
                             {{tocConfig?.atAGlance?.sourceShortName?.displayName}}
                         </h3>
                         <h3 class="item-value width-expand">
@@ -361,7 +362,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     <!-- Structure -->
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.structure?.enabled && hasTocStructure && content?.children?.length">
-                        <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.structure?.displayName}}
+                        <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.structure?.displayName}}
                         </h3>
                         <div class="item-value width-expand">
                             <h3 *ngIf="tocStructure?.course > 0">
@@ -433,7 +434,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     </mat-divider>
                     <div class="info-item"
                         *ngIf="tocConfig?.atAGlance?.lastUpdatedOn?.enabled && content?.lastUpdatedOn">
-                        <h3 class="item-heading ws-mat-primary-text">
+                        <h3 class="item-heading ws-mat-default-text">
                             {{tocConfig?.atAGlance?.lastUpdatedOn?.displayName}}</h3>
                         <h3 class="item-value width-expand">
                             {{ content?.lastUpdatedOn | date }}
@@ -445,7 +446,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         </mat-divider>
                         <div class="info-item"
                             *ngIf="tocConfig?.atAGlance?.expiryDate?.enabled && content?.expiryDate && content?.expiryDate?.startsWith('20')">
-                            <h3 class="item-heading ws-mat-primary-text">
+                            <h3 class="item-heading ws-mat-default-text">
                                 {{tocConfig?.atAGlance?.expiryDate?.displayName}}</h3>
                             <h3 class="item-value width-expand">
                                 {{ content?.expiryDate | date }}
@@ -456,7 +457,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         </mat-divider>
                         <div class="info-item"
                             *ngIf="tocConfig?.atAGlance?.learningMode?.enabled && content?.learningMode">
-                            <h3 class="item-heading ws-mat-primary-text">
+                            <h3 class="item-heading ws-mat-default-text">
                                 {{tocConfig?.atAGlance?.learningMode?.displayName}}
                             </h3>
                             <h3 class="item-value width-expand">
@@ -466,7 +467,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         <mat-divider class="divider-transparent"
                             *ngIf="tocConfig?.atAGlance?.learningMode?.enabled && content?.learningMode"></mat-divider>
                         <div class="info-item" *ngIf="tocConfig?.atAGlance?.region?.enabled && content?.region?.length">
-                            <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.region?.displayName}}
+                            <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.region?.displayName}}
                             </h3>
                             <h3 class="item-value width-expand">
                                 {{ content?.region }}
@@ -475,7 +476,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         <mat-divider class="divider-transparent"
                             *ngIf="tocConfig?.atAGlance?.region?.enabled && content?.region?.length"></mat-divider>
                         <div class="info-item" *ngIf="tocConfig?.atAGlance?.locale?.enabled && content?.locale">
-                            <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.locale?.displayName}}
+                            <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.locale?.displayName}}
                             </h3>
                             <h3 class="item-value width-expand">
                                 {{ content?.locale | uppercase }}
@@ -485,7 +486,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                             *ngIf="tocConfig?.atAGlance?.locale?.enabled && content?.locale"></mat-divider>
                         <div class="info-item"
                             *ngIf="tocConfig?.atAGlance?.hasTranslations?.enabled && (content?.hasTranslations?.length || content?.isTranslationOf?.length)">
-                            <h3 class="item-heading ws-mat-primary-text">
+                            <h3 class="item-heading ws-mat-default-text">
                                 {{tocConfig?.atAGlance?.hasTranslations?.displayName}}
                             </h3>
                             <h3 class="item-value width-expand">
@@ -499,7 +500,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         </mat-divider>
                         <div class="info-item"
                             *ngIf="tocConfig?.atAGlance?.keywords?.enabled && content?.keywords?.length">
-                            <h3 class="item-heading ws-mat-primary-text">{{tocConfig?.atAGlance?.keywords?.displayName}}
+                            <h3 class="item-heading ws-mat-default-text">{{tocConfig?.atAGlance?.keywords?.displayName}}
                             </h3>
                             <h3 class="item-value width-expand">
                                 {{ content?.keywords?.join(', ') }}
@@ -510,7 +511,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                         <ng-container *ngFor="let item of content?.collections">
                             <div class="info-item"
                                 *ngIf="tocConfig?.atAGlance?.curatedInKB?.enabled && item.contentType === 'Knowledge Board' && item.status === 'Live'">
-                                <h3 class="item-heading ws-mat-primary-text">
+                                <h3 class="item-heading ws-mat-default-text">
                                     {{tocConfig?.atAGlance?.curatedInKB?.displayName}}
                                 </h3>
                                 <mat-chip-list>
