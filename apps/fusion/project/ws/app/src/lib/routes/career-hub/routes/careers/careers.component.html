@@ -31,7 +31,7 @@
     </div>
     <div class="flex flex-wrap margin-fix">
         <ng-container *ngFor="let discuss of data.topics | orderBy: currentFilter :'desc' | pipeFilterSearch: searchInput.value; let i = index;let odd=odd; let even=even;">
-            <div class="flex sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}">
+            <div class="flex w-full sm:w-full md:w-1/2 mb-5" [ngClass]="{ 'justify-start  md:justify-end': odd, 'justify-start':even}">
                 <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card>
             </div>
         </ng-container>
