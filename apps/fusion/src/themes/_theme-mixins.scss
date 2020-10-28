@@ -32,6 +32,7 @@
   $colorWhite: #ffffff;
   $colorBlack: rgba(0, 0, 0, 0.87);
   $colorBlack60: rgba(0, 0, 0, 0.60);
+  $colorBlack40: rgba(0, 0, 0, 0.40);
   $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
@@ -486,6 +487,9 @@
       color: $colorBlack60;
     }
 
+    .ws-mat-black40-text {
+      color: $colorBlack40;
+    }
 
     .ws-mat-lighter-grey-text {
       color: $colorLighterGrey;

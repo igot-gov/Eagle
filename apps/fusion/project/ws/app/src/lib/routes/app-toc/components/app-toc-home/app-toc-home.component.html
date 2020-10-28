@@ -24,7 +24,8 @@ TODO: edit option while preview Mode
 
         <nav mat-tab-nav-bar class="toc-links mat-app-background">
           <a mat-tab-link [routerLink]='"./single-page-view"' fragment="overview"
-            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n>Overview</a>
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n><span
+              class="mat-h2 margin-top-m">Overview</span></a>
           <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'"
             [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="ws-mat-primary-text link-active">
             <ng-container *ngIf="content?.isExternal === true" i18n>Certification</ng-container>
