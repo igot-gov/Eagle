@@ -9,7 +9,7 @@ import com.infosys.lex.notification.exception.ApplicationLogicException;
 
 public class NotificationTemplateUtil {
 	
-	private static LexNotificationLogger logger = new LexNotificationLogger(NotificationTemplateUtil.class.getName());
+	private static LexNotificationLogger logger = new LexNotificationLogger("EmailNotificationProcessingServiceImpl");
 
 	public static String replaceTags(String rootOrg, Map<String, Object> tagValuePairs, String text,
 			Map<String, UserInfo> usersInfoMap, Map<String, List<String>> recipients, String recipientRole,
