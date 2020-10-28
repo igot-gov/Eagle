@@ -8,7 +8,7 @@
       <span class="flex ws-mat-default-text">
         <mat-icon svgIcon="category_xs"></mat-icon>{{discuss.category.name}}
       </span>
-      <span class="dot" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span>
+      <span class="dot ws-mat-black40-text" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span>
       <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Anonymous'}}</span>
       <!-- <span class="margin-left-l">{{discuss.timestamp | pipeRelativeTime}}</span> -->
     </mat-card-subtitle>
@@ -24,7 +24,7 @@
 
   </mat-card-actions> -->
   <mat-card-footer class="flex flex-1 custom margin-0">
-    <div class="flex flex-1 flex-row margin-left-l">
+    <div class="flex flex-1 flex-row margin-left-l ws-mat-black60-text">
       <span class="flex margin-right-l mobile">
         <mat-icon class="cursor-pointer">import_export</mat-icon>
         <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }}&nbsp;votes</span>

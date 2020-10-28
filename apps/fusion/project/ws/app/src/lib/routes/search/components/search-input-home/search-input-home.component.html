@@ -13,8 +13,7 @@
       <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
         <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
         <input type="search" #searchInput class="ml-2" i18n-placeholder="search content" [placeholder]="placeHolder"
-          i18-aria-label aria-label="Query" matInput [formControl]="queryControl" [matAutocomplete]="auto"
-          accesskey="F" />
+          i18-aria-label aria-label="Query" matInput [formControl]="queryControl" [matAutocomplete]="auto" />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
           (optionSelected)="updateQuery($event.option.value)">
           <mat-option *ngIf="queryControl.value" [value]="queryControl.value">{{ queryControl.value }}
