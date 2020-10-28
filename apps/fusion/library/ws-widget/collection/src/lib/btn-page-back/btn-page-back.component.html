@@ -12,8 +12,8 @@
       <span class="flex mat-typography m-t-b">HUBS</span>
     </a> -->
           <span class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()">
-            <mat-icon class="margin-xs">apps</mat-icon>
-            <span class="margin-auto ws-mat-default-text">HUBS</span>
+            <mat-icon class="margin-xs ws-mat-default-text">apps</mat-icon>
+            <span class="margin-auto ws-mat-default-text font-bold">HUBS</span>
           </span>
           <!-- <ng-container *ngIf="!visible && !isMobile">
       <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
@@ -69,10 +69,10 @@
       <mat-icon class="mat-icon1">{{hubs.icon}}</mat-icon>
     </div>
     <div [ngClass]="{'cursor-pointer': enablePeopleSearch}" class="width-expand padding-left-xs">
-      <div class="mat-body-strong mat-card-subtitle margin-0">
+      <div class="mat-body-strong  margin-0">
         {{hubs.hubname}}
       </div>
-      <div class="mat-caption cohorts-desc">{{hubs.desc}}</div>
+      <div class="mat-caption cohorts-desc ws-mat-black60-text">{{hubs.desc}}</div>
     </div>
   </div>
 </ng-template>
