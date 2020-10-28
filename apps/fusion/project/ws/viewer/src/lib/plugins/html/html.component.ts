@@ -140,16 +140,16 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
         `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`
       )
       // testing purpose only
-      setTimeout(
-        () => {
-          const ifram = document.getElementsByClassName('html-iframe')[0]
-          if (ifram && this.htmlContent) {
-            _.set(ifram, 'src',
-                  `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`)
-          }
-        },
-        3000,
-      )
+      // setTimeout(
+      //   () => {
+      //     const ifram = document.getElementsByClassName('html-iframe')[0]
+      //     if (ifram && this.htmlContent) {
+      //       _.set(ifram, 'src',
+      //         `${this.htmlContent.artifactUrl}?timestamp='${new Date().getTime()}`)
+      //     }
+      //   },
+      //   1000,
+      // )
     } else if (this.htmlContent && this.htmlContent.artifactUrl === '') {
       this.iframeUrl = null
       this.pageFetchStatus = 'artifactUrlMissing'
@@ -165,8 +165,8 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
     ])
   }
   receiveMessage(msg: any) {
-    /* tslint:disable-next-line */
-    console.log("msg=>", msg)
+    // /* tslint:disable-next-line */
+    // console.log("msg=>", msg)
     if (msg.data) {
       this.raiseTelemetry(msg.data)
     } else {
