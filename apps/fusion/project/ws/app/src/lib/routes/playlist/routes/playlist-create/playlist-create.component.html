@@ -1,10 +1,10 @@
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'home', titles: [{title:'Playlist', url:'/app/playlist/me'},{title:'Create Playlist', url:'none'}] }">
+<!-- <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'home', titles: [{title:'Playlist', url:'/app/playlist/me'},{title:'Create Playlist', url:'none'}] }">
 
-  </ws-widget-btn-page-back>
-  <!-- <span i18n="page title: playlist create" class="margin-left-xs">Create Playlist</span> -->
-</mat-toolbar>
+</ws-widget-btn-page-back>
+<!-- <span i18n="page title: playlist create" class="margin-left-xs">Create Playlist</span> -->
+<!-- </mat-toolbar> -->
 <main class="page-container margin-top-xl margin-bottom-xl">
   <form #playlistForm [formGroup]="createPlaylistForm">
     <mat-card class="card2">

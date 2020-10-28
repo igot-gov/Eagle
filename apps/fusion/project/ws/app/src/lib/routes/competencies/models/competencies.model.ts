@@ -20,6 +20,7 @@ export namespace NSCompetencie {
   }
   export interface ICompetencie {
     additionalProperties: { competencyType: string }
+    competencyType?: string
     description: string
     id: string
     name: string

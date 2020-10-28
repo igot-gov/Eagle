@@ -1,30 +1,30 @@
-<mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles">
-  <ws-widget-btn-page-back
-    [widgetData]="{ url: 'back', titles: [{title:'Playlist', url: '/app/playlist/me' },{title:(playlist?.name || 'Playlist'), url:'none'}] }">
+<!-- <mat-toolbar [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'back', titles: [{title:'Playlist', url: '/app/playlist/me' },{title:(playlist?.name || 'Playlist'), url:'none'}] }">
 
-  </ws-widget-btn-page-back>
-  <!-- <span i18n="page title: playlist detail" class="margin-left-xs">Playlist</span> -->
+</ws-widget-btn-page-back>
+<!-- <span i18n="page title: playlist detail" class="margin-left-xs">Playlist</span> -->
+<div class="flex hidden-xs">
   <div class="spacer"></div>
-  <div class="hidden-xs">
-    <button name="add-more-button-playlist-detail" *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)"
-      mat-button (click)="router.navigate([router.url, 'edit'])">
-      <mat-icon>edit</mat-icon>&nbsp;
-      <span i18n>Edit</span>
-    </button>
-    <button name="share-button-playlist-detail" mat-button (click)="sharePlaylist()">
-      <mat-icon>share</mat-icon>&nbsp;
-      <span i18n>Share</span>
-    </button>
-    <button name="delete-button-playlist-detail" *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)"
-      mat-button (click)="deletePlaylist()">
-      <mat-icon>delete</mat-icon>&nbsp;
-      <span i18n>Delete</span>
-    </button>
-  </div>
-  <button class="hidden-gt-xs" mat-icon-button [matMenuTriggerFor]="playlistMenu">
-    <mat-icon>more_vert</mat-icon>
+  <button name="add-more-button-playlist-detail" *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)"
+    mat-button (click)="router.navigate([router.url, 'edit'])">
+    <mat-icon>edit</mat-icon>&nbsp;
+    <span i18n>Edit</span>
   </button>
-</mat-toolbar>
+  <button name="share-button-playlist-detail" mat-button (click)="sharePlaylist()">
+    <mat-icon>share</mat-icon>&nbsp;
+    <span i18n>Share</span>
+  </button>
+  <button name="delete-button-playlist-detail" *ngIf="!(playlist?.sharedBy || playlist?.sharedByDisplayName)" mat-button
+    (click)="deletePlaylist()">
+    <mat-icon>delete</mat-icon>&nbsp;
+    <span i18n>Delete</span>
+  </button>
+</div>
+<button class="hidden-gt-xs" mat-icon-button [matMenuTriggerFor]="playlistMenu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<!-- </mat-toolbar> -->
 <div *ngIf="!error; else errorPage">
   <div class="playlist-header" *ngIf="playlist">
     <div class="banner-container">

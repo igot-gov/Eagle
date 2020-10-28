@@ -218,7 +218,7 @@
 
 
                 <!-- <div class="margin-top-s" *ngIf="!contentForm.controls.subTitles.value.length"></div> -->
-                <div class="margin-top-s">
+                <div class="margin-top-s" *ngIf="checkCondition('subTitles', 'show')">
                   <p class="margin-remove-bottom">
                     Subtitles
                   </p>

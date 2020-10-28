@@ -94,7 +94,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
         if (response) {
           this.discussProfileData = response
-          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, 'isMainPost') === true) || []
+          this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid') || []
         }
       })
     }
@@ -114,7 +114,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.currentFilter = key
       switch (key) {
         case 'timestamp':
-          this.discussionList = _.filter(_.uniqBy(this.discussProfileData.posts, 'tid'), p => _.get(p, 'isMainPost') === true)
+          this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
           break
         case 'best':
           this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
