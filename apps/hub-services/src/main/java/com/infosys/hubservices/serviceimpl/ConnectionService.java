@@ -250,16 +250,19 @@ public class ConnectionService implements IConnectionService {
             userConnectionsEstablishedIn.addAll(userConnectionsEstablishedOut);
 
             // sort all
-            userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getEndOn, Comparator.nullsFirst(
-                    Comparator.naturalOrder())).reversed());
+           /* userConnectionsEstablishedIn.sort(Comparator.comparing(UserConnection::getEndOn, Comparator.nullsFirst(
+                    Comparator.naturalOrder())).reversed());*/
 
             //filter all ids
             connectionIds = userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
+
+            connectionIds.addAll(userConnectionsEstablishedOut.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
+
             logger.info("to rem userid "+userId);
 
             connectionIds.removeAll(Arrays.asList(userId));
 
-            logger.info("established sorted connectionIds "+connectionIds);
+            logger.info("established connectionIds "+connectionIds);
 
             response.put(Constants.ResponseStatus.PAGENO, offset);
             response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
