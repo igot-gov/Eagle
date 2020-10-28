@@ -8,6 +8,9 @@
 package com.infosys.lex.myactivities.service;
 
 import com.infosys.lex.badge.bodhi.repo.UserBadgeRepository;
+import com.infosys.lex.badge.bodhi.repo.UserBadgesModel;
+import com.infosys.lex.badge.postgredb.projection.BadgeDetailsProjection;
+import com.infosys.lex.badge.postgredb.repository.BadgeRepo;
 import com.infosys.lex.continuelearning.bodhi.repo.ContinueLearningMVRepository;
 import com.infosys.lex.continuelearning.entities.ContinueLearningMV;
 import com.infosys.lex.myactivities.bodhi.repo.UserTimeSpentRepository;
@@ -18,6 +21,7 @@ import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +42,9 @@ public class MyActivities implements IMyActivities {
     @Autowired
     private UserTimeSpentRepository userTimeSpentRepository;
 
+    @Autowired
+    private BadgeRepo badgeRepo;
+
     @Override
     public Activity countUserLearningHistory(String rootOrg, String userId) {
         Integer noOfContentsInLearning = continueLearningMVRepository.countByRootOrgAndUserId(rootOrg, userId);
@@ -46,6 +53,21 @@ public class MyActivities implements IMyActivities {
 
     @Override
     public Activity countUserBadges(String rootOrg, String userId) {
+
+
+        List<BadgeDetailsProjection> badgeData = badgeRepo.fetchBadgeDetailsByRootOrgAndLanguage(rootOrg,
+                Arrays.asList("en"));
+
+        List<UserBadgesModel> bm = userBadgeRepository.findByRootOrgAndUserIdAndReceivedCountAndProgress(rootOrg, userId);
+        List<String> badgeIds = bm.stream().map(m->m.getPrimaryKey().getBadgeId()).collect(Collectors.toList());
+        System.out.println("badgeIds -> "+badgeIds);
+
+        List<BadgeDetailsProjection> filterBadgeData = badgeData.stream().filter(bd->badgeIds.contains(bd.getbadgeId())).collect(Collectors.toList());
+
+
+        System.out.println("filterBadgeIds -> "+filterBadgeData.stream().map(f -> f.getbadgeId()).collect(Collectors.toList());
+
+
         Integer noOfCertificates = userBadgeRepository.countForCompleted(rootOrg, userId);
         return new Activity(Constants.Unit.NUMBER, noOfCertificates);
     }
@@ -54,7 +76,8 @@ public class MyActivities implements IMyActivities {
     public Activity userTimeSpentOnPlatform(String rootOrg, String userId) {
 
         Double duration = userTimeSpentRepository.avgTimeSpentByRootOrgAndUserId(rootOrg, userId);
-        return new Activity(Constants.Unit.MINUTE, TimeUnit.SECONDS.toHours(duration.longValue()));
+        System.out.println("Daily duration :: "+duration);
+        return new Activity(Constants.Unit.MINUTE, TimeUnit.SECONDS.toMinutes(duration.longValue()));
     }
 
     @Override
