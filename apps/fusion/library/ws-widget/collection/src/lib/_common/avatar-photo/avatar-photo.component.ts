@@ -22,7 +22,7 @@ export class AvatarPhotoComponent implements OnInit {
 
   private colors = [
     // '#EB7181', // red
-    '#468547', // green
+    '#306933', // green
     // '#000000', // black
     // '#3670B2', // blue
     // '#4E9E87',
