@@ -549,6 +549,13 @@ h3.shepherd-title {
   width: 32px !important;
 }
 
+// top right menu
+.profile-link {
+  padding-left: $size-xs;
+  padding-right: 0;
+  padding-top: $size-xs;
+}
+
 // used at discussion start component
 .remove-pad {
   .mat-dialog-container {

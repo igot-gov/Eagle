@@ -98,16 +98,17 @@
                 <div class="flex flex-1 flex-column">
                   <div class="flex flex-1 filter flex-wrap">
                     <a class="filter-option font-normal" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                                                'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
-                      (click)="filter('timestamp')">
+                                                'ws-mat-accent-border font-medium':currentFilter !== 'timestamp'}"
+                      mat-button (click)="filter('timestamp')">
                       Recent posts </a>
                     <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
-                                                'ws-mat-accent-border':currentFilter !== 'best'}" mat-button
-                      (click)="filter('best')">
+                                                'ws-mat-accent-border font-medium':currentFilter !== 'best'}"
+                      mat-button (click)="filter('best')">
                       Best posts </a>
-                    <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
-                                                            'ws-mat-accent-border':currentFilter !== 'saved'}"
-                      mat-button (click)="filter('saved')" *ngIf="portalProfile.id === currentUser">
+                    <a class="filter-option"
+                      [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
+                                                            'ws-mat-accent-border font-medium':currentFilter !== 'saved'}" mat-button
+                      (click)="filter('saved')" *ngIf="portalProfile.id === currentUser">
                       Saved posts </a>
                   </div>
                 </div>

@@ -45,27 +45,28 @@
       <div class="flex flex-1 flex-column">
         <div class="flex flex-1 filter flex-wrap">
           <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                              'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+                              'ws-mat-accent-border font-medium':currentFilter !== 'timestamp'}" mat-button
             (click)="filter('timestamp')">
             Recent posts </a>
           <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
-                              'ws-mat-accent-border':currentFilter !== 'best'}" mat-button (click)="filter('best')">
+                              'ws-mat-accent-border font-medium':currentFilter !== 'best'}" mat-button
+            (click)="filter('best')">
             Best posts </a>
           <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
-                                          'ws-mat-accent-border':currentFilter !== 'saved'}" mat-button
+                                          'ws-mat-accent-border font-medium':currentFilter !== 'saved'}" mat-button
             (click)="filter('saved')">
             Saved posts </a>
           <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
-                                            'ws-mat-accent-border':currentFilter !== 'watched'}" mat-button
+                                            'ws-mat-accent-border font-medium':currentFilter !== 'watched'}" mat-button
             (click)="filter('watched')">
             Watched </a> -->
           <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvoted',
-                                              'ws-mat-accent-border':currentFilter !== 'upvoted'}" mat-button
-            (click)="filter('upvoted')">
+                                              'ws-mat-accent-border font-medium':currentFilter !== 'upvoted'}"
+            mat-button (click)="filter('upvoted')">
             Upvoted </a>
           <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'downvoted',
-                                                'ws-mat-accent-border':currentFilter !== 'downvoted'}" mat-button
-            (click)="filter('downvoted')">
+                                                'ws-mat-accent-border font-medium':currentFilter !== 'downvoted'}"
+            mat-button (click)="filter('downvoted')">
             Downvoted </a>
         </div>
       </div>

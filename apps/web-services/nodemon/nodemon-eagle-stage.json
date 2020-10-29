@@ -37,7 +37,7 @@
         "NODE_TLS_REJECT_UNAUTHORIZED": "0",
         "NOTIFICATIONS_API_BASE": "http://IP-ADDR:5805",
         "PORTAL_PORT": "3003",
-        "SBEXT_API_BASE_2": "http://IP-ADDR:7001",
+        "SBEXT_API_BASE_2": "http://localhost:7001",
         "SBEXT_API_BASE": "http://IP-ADDR:5902",
         "STATIC_ILP_PROXY": "http://IP-ADDR:3005",
         "SUNBIRD_BACKEND": "http://IP-ADDR:3011",
