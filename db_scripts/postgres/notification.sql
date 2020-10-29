@@ -1791,6 +1791,65 @@ INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, u
 INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, updated_on, updated_by) VALUES ('igot', 'dopt', 'sms', false, '1234', current_timestamp, '');
 INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, updated_on, updated_by) VALUES ('igot', 'dopt', 'push', false, '4567', current_timestamp, '');
 
+-- Discussion hub notification config
+  -- Discussion Creation Notification config
+INSERT INTO wingspan.event_group (event_id, language, event_name, group_id, group_name, updated_on, updated_by, event_description) VALUES ('discussion_creation', 'en', 'Discussion Creation', 'Discussion Hub', 'Discussion Hub', current_timestamp, '', 'When discussion has been created');
+INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('discussion_creation', 'author', '#discussionTopic,#targetUrl', NULL, current_timestamp, '', 'Information', NULL);
+INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('discussion_creation', 'author', 'en', 'Comment Creator', 'Author', 'Some description', current_timestamp, '');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('bb382eee-f747-11ea-adc1-0242ac120002', 'en', 'Discussion is created successfully!', '<p>Hello,<br /> </p>
+<p>You created a discussion on the IGoT platform with the name #discussionTopic. you can check the discussion <a href="#targetUrl">here.</a></p>
+<br /> Thanks for now,<br /> <br /> The IGoT Team</p>
+<p>&nbsp;</p>
+', '2020-09-15 11:00:16.6', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('42d1b168-f748-11ea-adc1-0242ac120002', 'en', 'Discussion is created successfully!', 'You have created a discussion successfully with the name #discussionTopic.', '2020-09-15 11:00:16.6', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_creation', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac120002', '2020-09-15 11:00:16.6', 'admin@eagle.com', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_creation', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+-- add to the default 
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_creation', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac120002', '2020-09-15 11:00:16.6', 'admin@eagle.com', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_creation', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+ -- Comment Creation Config
+INSERT INTO wingspan.event_group (event_id, language, event_name, group_id, group_name, updated_on, updated_by, event_description) VALUES ('discussion_comment_creation', 'en', 'Comment Creation', 'Discussion Hub', 'Discussion Hub', current_timestamp, '', 'Comment creation event');
+INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('discussion_comment_creation', 'author', '#discussionTopic,#replyText,#targetUrl,#commentedByName', NULL, current_timestamp, '', 'Information', NULL);
+INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('discussion_comment_creation', 'author', 'en', 'Author', 'Some description', 'Some description', current_timestamp, '');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('4af1eb34-f74c-11ea-adc1-0242ac120002', 'en', '#commentedByName commented on a discussion topic!', '#commentedByName commented on #discussionTopic discussion topic with #replyText', '2020-09-15 08:49:16.556', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('4af1ed00-f74c-11ea-adc1-0242ac120002', 'en', '#commentedByName commented on a discussion topic', '<p>Hello,<br /> </p>
+<p>#commentedByName commented on <b>#discussionTopic</b> discussion topic with <b>#replyText</b>. you can check the discussion <a href="#targetUrl">here.</a></p>
+<br /> Thanks for now,<br /> <br /> The IGoT Team</p>
+<p>&nbsp;</p>', '2020-09-15 08:49:16.556', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_comment_creation', 'author', 'inApp', true, '4af1eb34-f74c-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_comment_creation', 'author', 'email', true, '4af1ed00-f74c-11ea-adc1-0242ac120002', '2020-09-15 11:00:16.6', 'admin@eagle.com', NULL);
+-- add to the default 
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_comment_creation', 'author', 'inApp', true, '4af1eb34-f74c-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_comment_creation', 'author', 'email', true, '4af1ed00-f74c-11ea-adc1-0242ac120002', '2020-09-15 11:00:16.6', 'admin@eagle.com', NULL);
+ -- Upvote Comment Config
+INSERT INTO wingspan.event_group (event_id, language, event_name, group_id, group_name, updated_on, updated_by, event_description) VALUES ('discussion_upvote_event', 'en', 'Upvote Event', 'Discussion Hub', 'Discussion Hub', current_timestamp, '', 'When some one has upvoted a comment');
+INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('discussion_upvote_event', 'author', '#upvotedByName,#comment,#targetUrl', NULL, current_timestamp, '', 'Information', NULL);
+INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('discussion_upvote_event', 'author', 'en', 'Upvoted By', 'Author', 'Some description', current_timestamp, '');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('51fbd310-f7cc-11ea-adc1-0242ac120002', 'en', '#upvotedByName upvoted on a comment', '#upvotedByName upvoted on #comment.', '2020-09-16 08:49:16.556', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('f45c68f4-f7cc-11ea-adc1-0242ac120002', 'en', '#upvotedByName upvoted on a comment', '<p>Hello,<br /> </p>
+<p>#upvotedByName upvoted on #comment. you can check the discussion <a href="#targetUrl">here.</a></p>
+<br /> Thanks for now,<br /> <br /> The IGoT Team</p>
+<p>&nbsp;</p>', '2020-09-16 08:49:16.556', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_upvote_event', 'author', 'inApp', true, '51fbd310-f7cc-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_upvote_event', 'author', 'email', true, 'f45c68f4-f7cc-11ea-adc1-0242ac120002', '2020-09-16 11:00:16.6', 'admin@eagle.com', NULL);
+-- add to the default 
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_upvote_event', 'author', 'inApp', true, '51fbd310-f7cc-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_upvote_event', 'author', 'email', true, 'f45c68f4-f7cc-11ea-adc1-0242ac120002', '2020-09-16 11:00:16.6', 'admin@eagle.com', NULL);
+ -- Downvote Comment Config
+INSERT INTO wingspan.event_group (event_id, language, event_name, group_id, group_name, updated_on, updated_by, event_description) VALUES ('discussion_downvote_event', 'en', 'Downvote Event', 'Discussion Hub', 'Discussion Hub', current_timestamp, '', 'When some one downvoted a comment');
+INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('discussion_downvote_event', 'author', '#downvotedByName,#comment,#targetUrl', NULL, current_timestamp, '', 'Information', NULL);
+INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('discussion_downvote_event', 'author', 'en', 'Downvoted By', 'Author', 'Some description', current_timestamp, '');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('b7d84e46-f7ce-11ea-adc1-0242ac120002', 'en', '#downvotedByName downvoted on a comment!', '#downvotedByName downvoted on #comment.', '2020-09-16 08:49:16.556', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('00e11686-f7cf-11ea-adc1-0242ac120002', 'en', '#downvotedByName downvoted on a comment!', '<p>Hello,<br /> </p>
+<p>#downvotedByName downvoted on #comment. you can check the discussion <a href="#targetUrl">here.</a></p>
+<br /> Thanks for now,<br /> <br /> The IGoT Team</p>
+<p>&nbsp;</p>', '2020-09-16 08:49:16.556', 'admin@eagle.com');
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_downvote_event', 'author', 'inApp', true, 'b7d84e46-f7ce-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_downvote_event', 'author', 'email', true, '00e11686-f7cf-11ea-adc1-0242ac120002', '2020-09-16 11:00:16.6', 'admin@eagle.com', NULL);
+-- add to the default
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_downvote_event', 'author', 'inApp', true, 'b7d84e46-f7ce-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_downvote_event', 'author', 'email', true, '00e11686-f7cf-11ea-adc1-0242ac120002', '2020-09-16 11:00:16.6', 'admin@eagle.com', NULL);
+
 
 
 
