@@ -6,7 +6,7 @@ router.get("/playlist", function (req, res) {
     <html lang="en">
       <head>             
         <meta charset="utf-8" />
-        <title>"Playlist"</title>
+        <title>Playlist</title>
         <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
         " />
         </head>

@@ -5,8 +5,9 @@ var request = require("request");
 
 request.gzip = true;
 
-router.get("/", function (req, res) {
+router.get("/content/:id", function (req, res) {
   console.log("api service started");
+  console.log(req.params.id)
   let URL = `http://lex-core:7001/v1/content/hierarchy/${req.params.id}?hierarchyType=minimal`;
   let data;
 
