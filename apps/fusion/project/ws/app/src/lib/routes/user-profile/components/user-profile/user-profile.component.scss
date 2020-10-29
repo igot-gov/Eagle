@@ -155,24 +155,24 @@ input[type=number] {
   }
 
   .radio-toolbar input[type="radio"]:checked+label {
-    background: #00A9F4 0% 0% no-repeat padding-box;
+    background: #0074b6 0% 0% no-repeat padding-box;
     border-radius: 6px;
-    border-color: #00A9F4;
+    border-color: #0074b6;
     color: #fff;
   }
 
   .radio-toolbar input[type="radio"]:focus+label {
-    background: #00A9F4 0% 0% no-repeat padding-box;
+    background: #0074b6 0% 0% no-repeat padding-box;
     border-radius: 6px;
-    border-color: #00A9F4;
+    border-color: #0074b6;
     color: #fff;
   }
 
 
   .radio-toolbar label:hover {
     background: none;
-    border-color: #00A9F4;
-    color: #00A9F4;
+    border-color: #0074b6;
+    color: #0074b6;
   }
 
   ::ng-deep .mat-form-field {
@@ -198,7 +198,7 @@ input[type=number] {
   }
 
   .btn-success {
-    background-color: #34D6A4 !important;
+    background-color: rgb(48, 105, 51) !important;
     border-radius: 8px;
     width: 240px;
     box-shadow: none;
@@ -326,7 +326,7 @@ input.mat-input-element {
   font-weight: normal;
   background: #F1F9FF 0% 0% no-repeat padding-box !important;
   border-radius: 12px !important;
-  color: #00A9F4 !important;
+  color: #0074b6 !important;
   // font-family: Poppins-regular;
 
   &:hover {
@@ -339,7 +339,7 @@ input.mat-input-element {
 
   .mat-chip-remove {
     opacity: 1 !important;
-    color: #00A9F4 !important;
+    color: #0074b6 !important;
     border-radius: 50%;
   }
 }
@@ -349,7 +349,7 @@ input.mat-input-element {
 }
 
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
-  background: #00A9F4 0% 0% no-repeat padding-box !important;
+  background: #0074b6 0% 0% no-repeat padding-box !important;
   border-radius: 4px;
 }
 
@@ -371,13 +371,13 @@ input.mat-input-element {
 
   .mat-tab-labels .mat-tab-label-active {
     .mat-tab-label-content {
-      color: #00A9F4;
+      color: #0074b6;
     }
   }
 
   .mat-ink-bar {
     height: 3px;
-    background-color: #00A9F4 !important;
+    background-color: #0074b6 !important;
   }
 }
 
@@ -394,7 +394,7 @@ input.mat-input-element {
   }
 
   &:focus {
-    border: 2px solid #00A9F4;
+    border: 2px solid #0074b6;
     outline: none;
   }
 
@@ -426,14 +426,14 @@ input.mat-input-element {
   }
 
   mat-icon.person {
-    color: #00A9F4;
+    color: #0074b6;
     font-size: 4rem;
     width: auto;
     height: auto;
   }
 
   .camera-wrapper {
-    background: #00A9F4 0% 0% no-repeat padding-box;
+    background: #0074b6 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 4px #00000029;
     position: absolute;
     height: 20px;

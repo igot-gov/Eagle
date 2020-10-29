@@ -77,6 +77,45 @@
         selectedContentIds?.has(content?.identifier) || preSelected?.has(content?.identifier)
       " [disabled]="preSelected?.has(content?.identifier) && !widgetData?.enablePreselected"
       (change)="selectedContentChanged(content?.identifier, $event.checked)" class="leading-none pr-4">
+      <label class="flex flex-row-reverse-responsive">
+        <div class="flex-1 min-w-0 custom">
+          <div class="flex">
+            <h3
+              class="flex-1 min-w-0 mat-subheading-2 margin-remove-bottom margin-left-xs margin-right-xs truncate leading-none pb-1">
+              {{ content?.name }}
+            </h3>
+            <!-- <mat-checkbox
+                [checked]="
+                  selectedContentIds?.has(content?.identifier) ||
+                  widgetData?.preselected?.has(content?.identifier)
+                "
+                (change)="selectedContentChanged(content?.identifier, $event.checked)"
+                class="leading-none pr-4"
+              >
+              </mat-checkbox> -->
+          </div>
+          <p class="margin-remove-bottom margin-left-xs margin-right-xs">
+            <ws-widget-display-content-type *ngIf="content.displayContentType" [displayContentType]="content?.contentType==='Collection'
+                ?'Module'
+                :(content?.contentType==='Learning Path'?'Program':content?.contentType)" class="uppercase">
+            </ws-widget-display-content-type>
+            <ng-container *ngIf="content.displayContentType">&nbsp; | &nbsp;</ng-container>
+            <ng-container *ngIf="content?.duration">{{ content.duration | pipeDurationTransform: 'hms' }}
+            </ng-container>
+          </p>
+          <p *ngIf="content?.uniqueLearners" class="margin-remove-bottom margin-left-xs margin-right-xs">
+            {{ content?.uniqueLearners }}
+            <ng-container *ngIf="(content?.uniqueLearners || 0) > 1" i18n>
+              people are studying this
+            </ng-container>
+            <ng-container *ngIf="content?.uniqueLearners === 1" i18n>
+              person is studying this
+            </ng-container>
+          </p>
+        </div>
+        <img class="w-24 h-16 ws-mat-primary-lite-background" [src]="content?.appIcon"
+          [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
+      </label>
     </mat-checkbox>
     <mat-radio-button name="content-radio-button-{{searchResults?.indexOf(content)+1}}"
       *ngIf="selectionType === 'radio'" [checked]="
@@ -84,43 +123,7 @@
       " [disabled]="preSelected?.has(content?.identifier) && !widgetData?.enablePreselected"
       (change)="selectedContentChanged(content?.identifier, true)" class="leading-none pr-4">
     </mat-radio-button>
-    <img class="w-24 h-16 ws-mat-primary-lite-background" [src]="content?.appIcon"
-      [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
-    <div class="flex-1 min-w-0">
-      <div class="flex">
-        <h3
-          class="flex-1 min-w-0 mat-subheading-2 margin-remove-bottom margin-left-xs margin-right-xs truncate leading-none pb-1">
-          {{ content?.name }}
-        </h3>
-        <!-- <mat-checkbox
-          [checked]="
-            selectedContentIds?.has(content?.identifier) ||
-            widgetData?.preselected?.has(content?.identifier)
-          "
-          (change)="selectedContentChanged(content?.identifier, $event.checked)"
-          class="leading-none pr-4"
-        >
-        </mat-checkbox> -->
-      </div>
-      <p class="margin-remove-bottom margin-left-xs margin-right-xs">
-        <ws-widget-display-content-type *ngIf="content.displayContentType" [displayContentType]="content?.contentType==='Collection'
-          ?'Module'
-          :(content?.contentType==='Learning Path'?'Program':content?.contentType)" class="uppercase">
-        </ws-widget-display-content-type>
-        <ng-container *ngIf="content.displayContentType">&nbsp; | &nbsp;</ng-container>
-        <ng-container *ngIf="content?.duration">{{ content.duration | pipeDurationTransform: 'hms' }}
-        </ng-container>
-      </p>
-      <p *ngIf="content?.uniqueLearners" class="margin-remove-bottom margin-left-xs margin-right-xs">
-        {{ content?.uniqueLearners }}
-        <ng-container *ngIf="(content?.uniqueLearners || 0) > 1" i18n>
-          people are studying this
-        </ng-container>
-        <ng-container *ngIf="content?.uniqueLearners === 1" i18n>
-          person is studying this
-        </ng-container>
-      </p>
-    </div>
+
   </div>
 </div>
 <div class="flex flex-wrap -mr-4" *ngIf="searchFetchStatus === 'fetching'">
