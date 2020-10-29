@@ -45,8 +45,7 @@
         "TELEMETRY_SB_BASE": "http://IP-ADDR:9090",
         "TIMEOUT": "10000",
         "USER_PROFILE_API_BASE": "http://localhost:3004",
-        "WEB_HOST_PROXY": "http://127.0.0.1:8086",
-        "CONTENT_VALIDATION_API_BASE": "http://localhost:6590"
+        "WEB_HOST_PROXY": "http://127.0.0.1:8086"
     },
     "exec": "ts-node ./src/index.ts",
     "ext": "ts",
