@@ -120,6 +120,7 @@ export const CONSTANTS = {
   CONTINUE_LEARNING_API_BASE: env.CONTINUE_LEARNING_API_BASE || env.SB_EXT_API_BASE_2,
   FRAC_API_BASE: env.FRAC_API_BASE || 'https://igot-frac-dev.tarento.com',
   NETWORK_SERVICE_BACKEND: env.NETWOR_SERVICE_API_BASE || 'http:localhost:7001',
+  CONTENT_VALIDATION_API_BASE: env.CONTENT_VALIDATION_API_BASE || 'http://localhost:6590',
 }
 
 export const RESTRICTED_PYTHON_STMT: string[] = process.env.RESTRICTED_CHARACTERS

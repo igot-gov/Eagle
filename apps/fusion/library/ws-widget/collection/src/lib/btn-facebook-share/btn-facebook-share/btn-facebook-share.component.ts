@@ -21,8 +21,12 @@ export class BtnFacebookShareComponent implements OnInit {
   }
 
   get sanitizeFbUrl() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.facebook.com/plugins/share_button.php?href=${this.url}&layout=button&size=large`,
+
+    const urlarr = location.href.split('/')
+    const contentId = urlarr[urlarr.length - 2]
+    const url = `https://d136953gtttd92.cloudfront.net/share/content/${contentId}`
+        return this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.facebook.com/plugins/share_button.php?href=${url}&layout=button&size=large`,
     )
   }
 }
