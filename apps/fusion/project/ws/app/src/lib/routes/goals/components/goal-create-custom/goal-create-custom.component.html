@@ -1,7 +1,9 @@
-<mat-toolbar *ngIf="mode === 'edit'">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span i18n="page title: edit goal" class="margin-left-xs">Edit Goal</span>
-</mat-toolbar>
+<!-- <mat-toolbar > -->
+<ws-widget-btn-page-back *ngIf="mode === 'edit'"
+  [widgetData]="{ url: 'back',titles: [{title:'Features', url:'/app/features'},{title:'Goals', url:'none'}]  }">
+</ws-widget-btn-page-back>
+<span i18n="page title: edit goal" class="margin-left-xs">Edit Goal</span>
+<!-- </mat-toolbar> -->
 <main class="my-4 pt-8" [ngClass]="{ 'max-w-3xl mx-auto p-4 mt-4': mode === 'edit' }" *ngIf="
     createGoalStatus !== 'fetching' && fetchEditGoalStatus !== 'fetching';
     else fetchingSection
@@ -18,6 +20,7 @@
         <h3 class="mat-subheading-2" i18n>Name your Goal</h3>
         <p>
           <mat-form-field appearance="fill" class="w-full" floatLabel="never">
+            <mat-label>Name your Goal</mat-label>
             <textarea name="name-goal-input-goal-create-custom" rows="1" matInput
               placeholder="For eg: My Awesome goal (10-100 charchters)" i18n-placeholder autocomplete="off"
               class="resize-none" formControlName="name"></textarea>
@@ -26,6 +29,7 @@
         </p>
         <h3 class="mat-subheading-2" i18n>Describe your Goal</h3>
         <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Describe your Goal</mat-label>
           <textarea name="describe-goal-input-goal-create-custom" matInput rows="3"
             placeholder="For eg: This goal would help me to..." i18n-placeholder
             formControlName="description"></textarea>
@@ -74,6 +78,7 @@
           <ng-container i18n>Set Duration</ng-container>
           <p class="w-16 margin-left-xs margin-right-xs">
             <mat-form-field class="w-full">
+              <mat-label>duration</mat-label>
               <input name="name-duration-input-goal-create-custom" matInput type="number" formControlName="duration"
                 autocomplete="off" min="1" max="365" />
               <mat-error i18n>Should be less than 365 days.</mat-error>
