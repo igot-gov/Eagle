@@ -9,6 +9,7 @@ import { ConfigurationsService } from '../../../../../utils/src/public-api'
 })
 export class BtnFacebookShareComponent implements OnInit {
   @Input() url = location.href
+  @Input() contentId: string | null = null
   isSocialMediaFacebookShareEnabled = false
   constructor(private sanitizer: DomSanitizer, private configSvc: ConfigurationsService) {}
 
@@ -21,11 +22,8 @@ export class BtnFacebookShareComponent implements OnInit {
   }
 
   get sanitizeFbUrl() {
-
-    const urlarr = location.href.split('/')
-    const contentId = urlarr[urlarr.length - 2]
-    const url = `https://d136953gtttd92.cloudfront.net/share/content/${contentId}`
-        return this.sanitizer.bypassSecurityTrustResourceUrl(
+    const url = `https://d136953gtttd92.cloudfront.net/share/content/${this.contentId}`
+      return this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.facebook.com/plugins/share_button.php?href=${url}&layout=button&size=large`,
     )
   }

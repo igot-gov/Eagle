@@ -14,7 +14,7 @@ import { ROOT_WIDGET_CONFIG } from '../collection.config'
 export class BtnProfileComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<any> {
   @HostBinding('id')
-  public id: string = "Profile_link"
+  public id = 'Profile_link'
   @Input() widgetData!: any
   basicBtnAppsConfig: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig> = {
     widgetType: 'actionButton',

@@ -18,6 +18,10 @@ import { GoalCreateComponent } from './routes/goal-create/goal-create.component'
 import { GoalTrackComponent } from './routes/goal-track/goal-track.component'
 import { GoalHomeComponent } from './routes/goal-home/goal-home.component'
 import { GoalNotificationComponent } from './routes/goal-notification/goal-notification.component'
+import { BtnLinkedinShareModule } from '../../../../../../../library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share.module'
+import { BtnFacebookShareModule } from '../../../../../../../library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share.module'
+import { BtnTwitterShareModule } from '../../../../../../../library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share.module'
+
 import {
   MatProgressSpinnerModule,
   MatButtonModule,
@@ -114,6 +118,9 @@ import { NoAccessDialogComponent } from './components/no-access-dialog/no-access
     MatChipsModule,
     MatCheckboxModule,
     MatTableModule,
+    BtnLinkedinShareModule,
+    BtnFacebookShareModule,
+    BtnTwitterShareModule,
   ],
   entryComponents: [
     GoalAcceptDialogComponent,
