@@ -317,6 +317,7 @@
             "toolTip": "Home",
             "className": "fixtopMargin",
             "config": {
+              "actionBtnId": "feature_home",
               "type": "card-mini",
               "hideTitle": true
             }
@@ -329,6 +330,7 @@
             "toolTip": "Notification",
             "className": "fixtopMargin",
             "config": {
+              "actionBtnId": "feature_notification",
               "type": "card-mini",
               "hideTitle": true
             }

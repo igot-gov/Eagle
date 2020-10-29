@@ -1,4 +1,4 @@
-<mat-card class="base-layout">
+<mat-card class="base-layout" role="main">
   <mat-card-content class="container-balanced">
     <div class="flex flex-1 flex-column">
       <!-- top-fixed-menu -->
@@ -22,7 +22,7 @@
     </ng-container> -->
           <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
             <div class="flex" *ngFor="let title of widgetData.titles">
-              <mat-icon class="main-back m-auto mat-imput-placeholder">keyboard_arrow_right</mat-icon>
+              <mat-icon class="main-back m-auto">keyboard_arrow_right</mat-icon>
               <span *ngIf="title.title && title.url && title.url === 'none'" i18n="page title: {{title.title}}"
                 class="flex margin-left-xs m-auto">
                 <mat-icon class="ws-mat-default-text icon-margin m-t-b" *ngIf="title.icon">{{title.icon}}</mat-icon>

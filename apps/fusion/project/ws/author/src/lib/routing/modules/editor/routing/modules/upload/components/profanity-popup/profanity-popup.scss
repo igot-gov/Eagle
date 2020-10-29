@@ -24,6 +24,27 @@
     flex: auto;
   }
 }
+.circle-red {
+  height: 14px;
+  width: 14px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+.circle-orange {
+  height: 14px;
+  width: 14px;
+  background-color: orange;
+  border-radius: 50%;
+  display: inline-block;
+}
+.circle-yellow {
+  height: 14px;
+  width: 14px;
+  background-color: yellow;
+  border-radius: 50%;
+  display: inline-block;
+}
 
 .similar {
   display: none !important;
@@ -68,7 +89,7 @@
 }
 
 .flex-3 {
-  flex: 3
+  flex: 3;
 }
 
 .flex-2 {

@@ -8,12 +8,13 @@
   right: 5px;
 }
 .btn-create {
-  background: #34d6a4 !important;
+  background: #34d6a4;
   flex: 2;
   margin: 0 5px 0 5px;
   border-radius: 8px;
   font-weight: 600;
   color: white;
+  padding: 5px 10px 5px 10px;
 }
 .mat-card {
   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -66,4 +67,7 @@
   background-color: #035388;
   flex-direction: column;
   min-height: 300px;
+}
+.disabled_class {
+  background-color: lightgrey;
 }
