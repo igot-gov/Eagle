@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, LogoutComponent, NsPage } from '@ws-widget/utils/src/public-api'
 import { IBtnAppsConfig } from '../btn-apps/btn-apps.model'
@@ -13,7 +13,8 @@ import { ROOT_WIDGET_CONFIG } from '../collection.config'
 })
 export class BtnProfileComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<any> {
-
+  @HostBinding('id')
+  public id: string = "Profile_link"
   @Input() widgetData!: any
   basicBtnAppsConfig: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig> = {
     widgetType: 'actionButton',
@@ -48,8 +49,12 @@ export class BtnProfileComponent extends WidgetBaseComponent
       }
     }
   }
+
   ngOnInit() {
     this.setPinnedApps()
+    if (this.widgetData && this.widgetData.actionBtnId) {
+      this.id = this.widgetData.actionBtnId
+    }
   }
 
   ngOnDestroy() {
