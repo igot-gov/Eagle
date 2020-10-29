@@ -8,6 +8,7 @@ import { cohortsApi } from './cohorts'
 import { competencyApi } from './competency'
 import { conceptGraphApi } from './concept'
 import { contentApi } from './content'
+import { contentValidationApi } from './contentValidation'
 import { counterApi } from './counter'
 import { deptApi } from './departments'
 import { discussionHubApi } from './discussionHub/discussionHub'
@@ -41,6 +42,7 @@ protectedApiV8.use('/certifications', certificationApi)
 protectedApiV8.use('/cohorts', cohortsApi)
 protectedApiV8.use('/concept', conceptGraphApi)
 protectedApiV8.use('/content', contentApi)
+protectedApiV8.use('/profanity', contentValidationApi)
 protectedApiV8.use('/counter', counterApi)
 protectedApiV8.use('/discussionHub', discussionHubApi)
 protectedApiV8.use('/infyradio', infyRadioApi)
