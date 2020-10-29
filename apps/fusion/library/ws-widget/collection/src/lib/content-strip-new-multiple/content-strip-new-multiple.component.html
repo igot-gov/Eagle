@@ -33,13 +33,14 @@
                 <mat-icon class="ws-mat-primary-default-text transform-2x">
                   {{stripsResultDataMap[key]?.stripLogo}}
                 </mat-icon>
-                <h1 class="ws-mat-primary-default-text margin-remove inline-block text-uppercase margin-left-l"
+                <h1
+                  class="ws-mat-primary-default-text font-semibold-imp margin-remove inline-block text-uppercase margin-left-l"
                   *ngIf="stripsResultDataMap[key]?.stripTitle">
                   {{ stripsResultDataMap[key]?.stripTitle }}
                 </h1>
                 <mat-icon class="rotate-t-90 ws-mat-primary-default-text mob">maximize</mat-icon>
-                <h3 class="mat-h3 margin-remove inline-block ws-mat-primary-default-text margin-left-s mob">
-                  {{stripsResultDataMap[key]?.description}}</h3>
+                <span class="mat-subheading-1 margin-remove inline-block ws-mat-primary-default-text margin-left-s mob">
+                  {{stripsResultDataMap[key]?.description}}</span>
                 <!-- <button *ngIf="stripsResultDataMap[key]?.stripInfo?.icon" type="button" mat-icon-button
                   (click)="toggleInfo(stripsResultDataMap[key])" i18n-matTooltip matTooltip="info"
                   class="margin-left-xs">

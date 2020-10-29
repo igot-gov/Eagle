@@ -205,22 +205,22 @@
         <div class="status-danger" role="note" i18n-aria-label aria-label="Intranet content" i18n-matTooltip
           matTooltip="Available only in Company's network"
           *ngIf="widgetData?.intranetMode === 'greyOut' && showIntranetContent"></div>
-        <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
+        <!-- <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
           [queryParams]="(widgetData.content | pipeContentRoute).queryParams" class="rounded-t" role="link"
-          aria-label="Content" i18n-aria-label="Content | Click to view">
-          <div style="position: relative; z-index: 1;">
-            <img mat-card-image style="position: absolute; z-index: 2;" [src]="widgetData.content.appIcon"
-              [id]="'card_' + widgetData.content.identifier" class="card-img ws-mat-primary-lite-background"
-              [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name" />
-            <div class="source-div">
-              <!-- [src]="sourseIcon(widgetData.content.sourceName)" -->
-              <img [src]="widgetData.content.creatorLogo" [id]="'source_' + widgetData.content.identifier"
-                class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-                [alt]="widgetData.content.sourceName || iGOT" />
-              <!-- [title]="widgetData.content.sourceName" -->
-            </div>
+          aria-label="Content" i18n-aria-label="Content | Click to view"> -->
+        <div style="position: relative; z-index: 1;">
+          <img mat-card-image style="position: absolute; z-index: 2;" [src]="widgetData.content.appIcon"
+            [id]="'card_' + widgetData.content.identifier" class="card-img ws-mat-primary-lite-background"
+            [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.content.name" />
+          <div class="source-div">
+            <!-- [src]="sourseIcon(widgetData.content.sourceName)" -->
+            <img [src]="widgetData.content.creatorLogo" [id]="'source_' + widgetData.content.identifier"
+              class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
+              [alt]="(widgetData.content.sourceName + '_' + widgetData.content.identifier)" />
+            <!-- [title]="widgetData.content.sourceName" -->
           </div>
-        </a>
+        </div>
+        <!-- </a> -->
         <button *ngIf="showFlip" class="detail-button ws-mat-primary-lite-background-op30" mat-icon-button
           (click)="isCardFlipped = true" aria-label="Details" i18n-aria-label="Details | Click to see details">
           <mat-icon>flip_to_back</mat-icon>
@@ -244,7 +244,7 @@
               </div>
 
               <div *ngIf="widgetData.content.duration" class="duration">
-                <mat-icon class="text-green-400">access_time</mat-icon>
+                <mat-icon>access_time</mat-icon>
                 <span class="time-text">{{ widgetData.content.duration | pipeDurationTransform: 'hms' }}</span>
               </div>
             </div>

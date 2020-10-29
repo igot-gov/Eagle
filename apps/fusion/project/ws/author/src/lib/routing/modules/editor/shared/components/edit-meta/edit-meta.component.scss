@@ -24,6 +24,10 @@
   box-shadow: none !important;
 }
 
+.rotate {
+  transform: rotate(45deg);
+}
+
 .flex-05 {
   flex: 0.49;
 }

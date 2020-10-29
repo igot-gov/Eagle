@@ -4,19 +4,21 @@
     <h3 class="mat-h3">{{dData.description}}</h3>
     <div class="flex">
       <h3 class="mat-h3">Competency type: &nbsp;</h3>
-      <span class="mat-h3 font-medium">{{dData?.additionalProperties?.competencyType}}</span>
+      <span class="mat-h3 font-medium">{{dData?.additionalProperties?.competencyType || dData?.competencyType}}</span>
     </div>
   </mat-card-content>
-  <mat-card-actions class="flex flex-row-reverse">
-    <div class="mb-2 mr-2 view-more text-white others">
-      <a mat-button mat-dialog-close>
+  <mat-card-actions class="flex flex-row-reverse responsive">
+    <div class="mb-2 mr-2 flex view-more text-white others">
+      <a mat-button mat-dialog-close class="flex">
         <span i18n>{{'Okey'}}</span>
       </a>
     </div>
     <div class="mb-2 ml-4 mr-6 ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
-      <a mat-button>
-        <span i18n *ngIf="isUpdate" (click)="remove()">{{'Remove from my list'}}</span>
-        <span i18n *ngIf="!isUpdate" (click)="add()">{{'Add my competencies'}}</span>
+      <a mat-button *ngIf="isUpdate" (click)="remove()">
+        <span i18n>{{'Remove from my list'}}</span>
+      </a>
+      <a mat-button *ngIf="!isUpdate" (click)="add()">
+        <span i18n>{{'Add to my competencies'}}</span>
       </a>
     </div>
   </mat-card-actions>

@@ -183,11 +183,11 @@ export class CompetenceAllComponent implements OnInit {
           data = _.flatten(_.map(this.myCompetencies, item => {
             return _.filter(reponse.responseData, item)
           }))
-          this.allCompetencies = reponse.responseData.filter(obj => {
+          this.filteredCompetencies = reponse.responseData.filter(obj => {
             return data.indexOf(obj) === -1
           })
         } else {
-          this.allCompetencies = reponse.responseData
+          this.filteredCompetencies = reponse.responseData
         }
       }
     })

@@ -1,7 +1,9 @@
-<mat-toolbar [color]="configSvc.pageNavBar?.color" [ngStyle]="configSvc.pageNavBar?.styles">
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span class="margin-left-s" i18n>Track Goal</span>
-</mat-toolbar>
+<!-- <mat-toolbar [color]="configSvc.pageNavBar?.color" [ngStyle]="configSvc.pageNavBar?.styles"> -->
+<ws-widget-btn-page-back
+  [widgetData]="{ url: 'home', titles: [{title:'Goals', url:'/app/goals'},{title:'Track Goal', url:'none'}] }">
+</ws-widget-btn-page-back>
+<!-- <span class="margin-left-s" i18n>Track Goal</span> -->
+<!-- </mat-toolbar> -->
 <main class="max-w-3xl m-auto p-4">
   <h2 class="mat-title margin-bottom-xs">{{ goal?.name }}</h2>
   <div *ngIf="goal?.duration">

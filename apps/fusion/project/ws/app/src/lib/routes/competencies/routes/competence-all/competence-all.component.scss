@@ -76,8 +76,10 @@
 }
 
 .margin-fix {
+
   @include breakpoint-xs {
     margin: 0 $size-l 0 $size-l;
+    flex-direction: column;
   }
 
   @include breakpoint-s {

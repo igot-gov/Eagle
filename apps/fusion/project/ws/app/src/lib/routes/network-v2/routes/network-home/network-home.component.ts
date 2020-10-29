@@ -117,6 +117,7 @@ export class NetworkHomeComponent implements OnInit {
       this.searchResultUserArray = data
       this.networkV2Service.fetchAllConnectionRequests().subscribe(
         requests => {
+          // Filter all the connection requests sent
           if (requests && requests.result && requests.result.data) {
             requests.result.data.map(user => {
               if (user.id) {
@@ -126,31 +127,33 @@ export class NetworkHomeComponent implements OnInit {
                   }
                 })
               }
-              if (this.connectionRequests) {
-                this.connectionRequests.map((con: any) => {
-                  if (con.id) {
-                    this.searchResultUserArray.map((autoCompleteUser: any) => {
-                      if (autoCompleteUser.wid === con.id) {
-                        autoCompleteUser['requestRecieved'] = true
-                      }
-                    })
-                  }
-                })
-              }
-              if (this.establishedConnections) {
-                this.establishedConnections.map((con: any) => {
-                  if (con.id) {
-                    this.searchResultUserArray.map((autoCompleteUser: any) => {
-                      if (autoCompleteUser.wid === con.id) {
-                        autoCompleteUser['connectionEstablished'] = true
-                      }
-                    })
-                  }
-                })
-              }
-              this.searchSpinner = false
             })
           }
+          // Filter all the connection requests recieved
+          if (this.connectionRequests) {
+            this.connectionRequests.map((con: any) => {
+              if (con.id) {
+                this.searchResultUserArray.map((autoCompleteUser: any) => {
+                  if (autoCompleteUser.wid === con.id) {
+                    autoCompleteUser['requestRecieved'] = true
+                  }
+                })
+              }
+            })
+          }
+          // Filter all the estalished connections
+          if (this.establishedConnections) {
+            this.establishedConnections.map((con: any) => {
+              if (con.id) {
+                this.searchResultUserArray.map((autoCompleteUser: any) => {
+                  if (autoCompleteUser.wid === con.id) {
+                    autoCompleteUser['connectionEstablished'] = true
+                  }
+                })
+              }
+            })
+          }
+          this.searchSpinner = false
         },
         (_err: any) => {
           this.searchSpinner = false
