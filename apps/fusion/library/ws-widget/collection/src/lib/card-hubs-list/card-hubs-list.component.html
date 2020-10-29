@@ -1,4 +1,4 @@
-<mat-card class="base-layout container-balanced" role="main">
+<mat-card class="base-layout container-balanced" role="menubar">
   <mat-card-content>
     <div class="flex flex-1 flex-column">
       <div class="flex flex-1 ws-mat-default-text">
@@ -7,7 +7,8 @@
           <span class="margin-auto ws-mat-default-text font-bold">HUBS</span>
         </span>
         <ng-container *ngIf="!visible && !isMobile" [@enterAnimation]="visible">
-          <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
+          <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" role="menuitem"
+            [routerLink]="hub.path">
             <span class="mat-card-subtitle margin-0 text-uppercase"> {{hub.hubname}}</span>
           </a>
         </ng-container>
@@ -34,7 +35,7 @@
 </mat-card>
 
 <ng-template #userIndividualNew let-hubs="hubs">
-  <div class="flex flex-wrap" [routerLink]="(hubs.path)">
+  <div class="flex flex-wrap" [routerLink]="(hubs.path)" role="menuitem">
     <div class="icon ws-mat-primary-tags">
       <mat-icon class="mat-icon1">{{hubs.icon}}</mat-icon>
     </div>

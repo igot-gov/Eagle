@@ -1,3 +1,8 @@
+//@import 'ws-common';
+
+@import 'ws-vars';
+
+// @import 'ws-mixins';
 .log-o {
     flex: 1;
     min-width: 100%;
@@ -5,12 +10,12 @@
 }
 
 .new-margin {
-    // margin-top: 8px;
-    padding-right: 0;
-    padding-top: 1rem;
-    padding-bottom: 0.8rem;
+    // margin-left: $size-xs;
+    // padding-right: 0;
+    // padding-top: 1rem;
+    // padding-bottom: 0.8rem;
     box-sizing: border-box;
-    display: flex;
+    // display: flex;
 }
 
 .trnsform {

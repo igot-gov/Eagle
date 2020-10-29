@@ -15,9 +15,11 @@
     <div class="flex flex-1 flex-column margin-fix">
       <div class="flex flex-1 filter max-height-60">
         <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'recent',
-        'ws-mat-accent-border':currentFilter !== 'recent'}" mat-button (click)="filter('recent')">Recent</a>
+        'ws-mat-accent-border font-medium':currentFilter !== 'recent'}" mat-button
+          (click)="filter('recent')">Recent</a>
         <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'popular',
-        'ws-mat-accent-border':currentFilter !== 'popular'}" mat-button (click)="filter('popular')">Popular</a>
+        'ws-mat-accent-border font-medium':currentFilter !== 'popular'}" mat-button
+          (click)="filter('popular')">Popular</a>
         <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
         'ws-mat-accent-border':currentFilter !== 'watched'}" mat-button (click)="filter('watched')">Watched</a> -->
       </div>
@@ -35,7 +37,7 @@
       </ng-container>
     </div>
     <div class="flex flex-1 flex-column margin-fix pagination-container">
-        <ws-app-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-pagination>
+      <ws-app-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-pagination>
     </div>
   </div>
   <div class="flex flex-1" #stickyMenu [class.sticky]="sticky">
