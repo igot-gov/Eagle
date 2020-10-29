@@ -1,4 +1,5 @@
-import { Component, ElementRef, AfterViewInit, Input, ViewChild, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
+import { DomSanitizer } from '@angular/platform-browser'
 import { ConfigurationsService } from '../../../../../utils/src/public-api'
 
 @Component({
@@ -6,20 +7,10 @@ import { ConfigurationsService } from '../../../../../utils/src/public-api'
   templateUrl: './btn-linkedin-share.component.html',
   styleUrls: ['./btn-linkedin-share.component.scss'],
 })
-export class BtnLinkedinShareComponent implements OnInit, AfterViewInit {
+export class BtnLinkedinShareComponent implements OnInit {
   @Input() url = location.href
-  @ViewChild('element', { static: true }) element: ElementRef | null = null
   isSocialMediaLinkedinShareEnabled = false
-  constructor(private configSvc: ConfigurationsService) {
-    // load twitter sdk if required
-    const url = 'https://platform.linkedin.com/in.js'
-    if (!document.querySelector(`script[src='${url}']`)) {
-      const script = document.createElement('script')
-      script.src = url
-      script.innerHTML = ' lang: en_US'
-      document.body.appendChild(script)
-    }
-  }
+  constructor(private sanitizer: DomSanitizer, private configSvc: ConfigurationsService) {}
 
   ngOnInit() {
     if (this.configSvc.restrictedFeatures) {
@@ -29,14 +20,12 @@ export class BtnLinkedinShareComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit(): void {
-    if (this.isSocialMediaLinkedinShareEnabled && this.element) {
-      // add linkedin share button script tag to element
-      this.element.nativeElement.innerHTML = `<script type="IN/Share" data-url="${this.url}"></script>`
-
-      // render share button
-      // tslint:disable-next-line: no-unused-expression  tslint:disable-next-line: whitespace
-      ;(window as any)['IN'] && (window as any)['IN'].parse()
-    }
+  get sanitizeFbUrl() {
+    const urlarr = location.href.split('/')
+    const contentId = urlarr[urlarr.length - 2]
+    const url = `https://d136953gtttd92.cloudfront.net/share/content/${contentId}`
+        return this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.linkedin.com/shareArticle?mini=true&url=${url}&source=LinkedIn`,
+    )
   }
 }
