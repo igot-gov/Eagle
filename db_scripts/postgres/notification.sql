@@ -1792,21 +1792,7 @@ INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, u
 INSERT INTO wingspan.tbl_tenant_mode (root_org, org, mode, activated, icon_id, updated_on, updated_by) VALUES ('igot', 'dopt', 'push', false, '4567', current_timestamp, '');
 
 -- Discussion hub notification config
-  -- Discussion Creation Notification config
-INSERT INTO wingspan.event_group (event_id, language, event_name, group_id, group_name, updated_on, updated_by, event_description) VALUES ('discussion_creation', 'en', 'Discussion Creation', 'Discussion Hub', 'Discussion Hub', current_timestamp, '', 'When discussion has been created');
-INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('discussion_creation', 'author', '#discussionTopic,#targetUrl', NULL, current_timestamp, '', 'Information', NULL);
-INSERT INTO wingspan.recipient_description (event_id, recipient, language, recipient_name, recipient_description, admin_description, updated_on, updated_by) VALUES ('discussion_creation', 'author', 'en', 'Comment Creator', 'Author', 'Some description', current_timestamp, '');
-INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('bb382eee-f747-11ea-adc1-0242ac120002', 'en', 'Discussion is created successfully!', '<p>Hello,<br /> </p>
-<p>You created a discussion on the IGoT platform with the name #discussionTopic. you can check the discussion <a href="#targetUrl">here.</a></p>
-<br /> Thanks for now,<br /> <br /> The IGoT Team</p>
-<p>&nbsp;</p>
-', '2020-09-15 11:00:16.6', 'admin@eagle.com');
-INSERT INTO wingspan.tenant_event_template (template_id, language, template_subject, template_text, updated_on, updated_by) VALUES ('42d1b168-f748-11ea-adc1-0242ac120002', 'en', 'Discussion is created successfully!', 'You have created a discussion successfully with the name #discussionTopic.', '2020-09-15 11:00:16.6', 'admin@eagle.com');
-INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_creation', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac120002', '2020-09-15 11:00:16.6', 'admin@eagle.com', NULL);
-INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('igot', 'dopt', 'discussion_creation', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
--- add to the default 
-INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_creation', 'author', 'email', true, 'bb382eee-f747-11ea-adc1-0242ac120002', '2020-09-15 11:00:16.6', 'admin@eagle.com', NULL);
-INSERT INTO wingspan.tenant_event_notification (root_org, org, event_id, recipient, mode, mode_activated, template_id, updated_on, updated_by, receiver_emails) VALUES ('default', 'default', 'discussion_creation', 'author', 'inApp', true, '42d1b168-f748-11ea-adc1-0242ac120002', current_timestamp, '', NULL);
+
  -- Comment Creation Config
 INSERT INTO wingspan.event_group (event_id, language, event_name, group_id, group_name, updated_on, updated_by, event_description) VALUES ('discussion_comment_creation', 'en', 'Comment Creation', 'Discussion Hub', 'Discussion Hub', current_timestamp, '', 'Comment creation event');
 INSERT INTO wingspan.event_recipient (event_id, recipient, tag, target_url, updated_on, updated_by, classification, user_roles) VALUES ('discussion_comment_creation', 'author', '#discussionTopic,#replyText,#targetUrl,#commentedByName', NULL, current_timestamp, '', 'Information', NULL);
