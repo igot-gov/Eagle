@@ -1,5 +1,5 @@
 import { trigger, transition, style, animate } from '@angular/animations'
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, NsInstanceConfig, ValueService } from '@ws-widget/utils/src/public-api'
@@ -24,7 +24,6 @@ import { Subscription } from 'rxjs'
   ],
 })
 export class CardHubsListComponent extends WidgetBaseComponent
-
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<any> {
   private defaultMenuSubscribe: Subscription | null = null
   isLtMedium$ = this.valueSvc.isLtMedium$
@@ -40,7 +39,8 @@ export class CardHubsListComponent extends WidgetBaseComponent
   visible = false
   searchSpinner = false
   isMobile = false
-
+  @HostBinding('id')
+  public id = `hub_${Math.random()}`
   constructor(private configSvc: ConfigurationsService, private router: Router, private valueSvc: ValueService) {
     super()
   }

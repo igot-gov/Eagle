@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { NSCarrierData } from './carrier.model'
 import { WidgetBaseComponent } from '@ws-widget/resolver'
 import { Router } from '@angular/router'
@@ -13,6 +13,8 @@ import { Router } from '@angular/router'
 export class CardCarrierHomeComponent extends WidgetBaseComponent implements OnInit {
   // @Input()
   // carrierList!: NSCarrierData.ICarrierData[]
+  @HostBinding('id')
+  public id = `ws-card-carrier-home_${Math.random()}`
   constructor(private router: Router) {
     super()
   }

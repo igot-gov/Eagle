@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsContentStripNewMultiple } from './content-strip-new-multiple.model'
 import { ContentStripNewMultipleService } from './content-strip-new-multiple.service'
@@ -46,7 +46,8 @@ export class ContentStripNewMultipleComponent extends WidgetBaseComponent
   OnDestroy,
   NsWidgetResolver.IWidgetData<NsContentStripNewMultiple.IContentStripMultiple> {
   @Input() widgetData!: NsContentStripNewMultiple.IContentStripMultiple
-
+  @HostBinding('id')
+  public id = `new-multiple_${Math.random()}`
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true

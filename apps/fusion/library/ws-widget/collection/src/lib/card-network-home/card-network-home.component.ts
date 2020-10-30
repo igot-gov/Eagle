@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
@@ -13,6 +13,8 @@ export class CardNetworkHomeComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
   networkUser!: any
+  @HostBinding('id')
+  public id = `ws-card-home-network_${Math.random()}`
   constructor(private router: Router, public configurationsService: ConfigurationsService) {
     super()
   }
