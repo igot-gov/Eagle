@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core'
-import { ConfigurationsService } from '@ws-widget/utils'
 import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
 // tslint:disable-next-line:max-line-length
-const CONTENT_READ_MULTIPLE_HIERARCHY = '/apis/protected/v8/profanity/checkProfanity/'
-const backwordSlash = '/'
+const VALIDATE_PDF_CONTENT = '/apis/protected/v8/profanity/validatePdfContent'
+// const backwordSlash = '/'
 
 @Injectable()
 export class ProfanityService {
@@ -11,13 +10,21 @@ export class ProfanityService {
   accessPath: string[] = []
   constructor(
     private apiService: ApiService,
-    private configSvc: ConfigurationsService,
   ) { }
 
-  featchProfanity(content: string) {
-    const userId = this.configSvc.userProfile && this.configSvc.userProfile.userId
-    return this.apiService.get<any>(
-      `${CONTENT_READ_MULTIPLE_HIERARCHY}` + `${content}` + `${backwordSlash}` + `${userId}`,
+  featchProfanity(content: string, url: string) {
+    // tslint:disable-next-line:no-console
+    console.log(content)
+    // tslint:disable-next-line:no-console
+    const finalUrl = url.replace('type=main', '')
+    // tslint:disable-next-line:no-console
+    console.log(finalUrl)
+    const requestData = {
+      pdfDownloadUrl: finalUrl,
+    }
+    // const userId = this.configSvc.userProfile && this.configSvc.userProfile.userId
+    return this.apiService.post<any>(
+      `${VALIDATE_PDF_CONTENT}`, requestData
     )
   }
 }

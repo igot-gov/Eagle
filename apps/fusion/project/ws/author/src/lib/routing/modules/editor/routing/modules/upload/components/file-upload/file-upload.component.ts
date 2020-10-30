@@ -342,12 +342,14 @@ export class FileUploadComponent implements OnInit {
           //     .startEncoding(v.authArtifactURL || v.artifactURL, this.currentContent)
           //     .pipe(map(() => v))
           // }
+          if (this.mimeType === 'application/pdf') {
+            this.profanityCheckAPICall(v.downloadURL)
+          }
           return of(v)
         }),
       )
       .subscribe(
         _ => {
-          this.loaderService.changeLoad.next(false)
           this.storeData()
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -355,13 +357,12 @@ export class FileUploadComponent implements OnInit {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          // this.data.emit('saveAndNext')
-          // need to insert this. save methord
-          this.profanityCheckAPICall()
-
+          if (this.mimeType !== 'application/pdf') {
+            this.data.emit('saveAndNext')
+          }
         },
         () => {
-          this.loaderService.changeLoad.next(false)
+          // this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
               type: Notify.UPLOAD_FAIL,
@@ -371,20 +372,16 @@ export class FileUploadComponent implements OnInit {
         },
       )
   }
-  profanityCheckAPICall() {
-    this.profanityService.featchProfanity(this.currentContent).subscribe(data => {
-
+  profanityCheckAPICall(url: string) {
+    this.profanityService.featchProfanity(this.currentContent, url).subscribe(data => {
       this.profanityData = data
-      // tslint:disable-next-line:no-console
-      console.log(this.profanityData)
-      // tslint:disable-next-line:no-console
-      console.log(this.currentContent)
       if (this.profanityData !== null && this.profanityData !== undefined) {
         this.startProfanityPopup()
       }
     })
   }
   startProfanityPopup() {
+    this.loaderService.changeLoad.next(false)
     const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
       minHeight: 'auto',
       width: '80%',
