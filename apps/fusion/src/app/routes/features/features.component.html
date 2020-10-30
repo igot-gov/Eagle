@@ -30,7 +30,7 @@
   </div>
 </section>
 <section *ngIf="featureGroups !== null" [hidden]="featureGroups?.length" class="mat-card warn-card">
-  <mat-icon class="warn-icon" color="warn">warning</mat-icon>
+  <mat-icon aria-label="warning" role="image" class="warn-icon" color="warn">warning</mat-icon>
   <span i18n>No features matches your query</span>
 </section>
 

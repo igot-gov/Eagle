@@ -1,7 +1,9 @@
 <mat-card class="carrier-card cursor-pointer mr-6" (click)="getCareer(carrier)">
   <mat-card-header>
     <mat-card-title>
-      <h2 class="cursor-pointer f-medium">{{carrier.title}}</h2>
+      <a href="javascript:void(0)" role="link" i18n-aria-label>
+        <h2 class="cursor-pointer f-medium">{{carrier.title}}</h2>
+      </a>
     </mat-card-title>
     <mat-card-subtitle class="responsive">
       <span class="flex ws-mat-default-text">

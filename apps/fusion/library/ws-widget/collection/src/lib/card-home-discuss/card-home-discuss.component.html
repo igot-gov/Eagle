@@ -2,8 +2,9 @@
   class="discuss-home-card cursor-pointer mr-6" (click)="getDiscussion(discuss)">
   <mat-card-header>
     <mat-card-title>
-      <h2 class="cursor-pointer f-medium" [innerHTML]="discuss?.title"></h2>
-    </mat-card-title>
+      <a href="javascript:void(0)" role="link" i18n-aria-label>
+        <h2 class="cursor-pointer f-medium" [innerHTML]="discuss?.title"></h2>
+      </a></mat-card-title>
     <mat-card-subtitle class="responsive">
       <span class="flex ws-mat-default-text">
         <mat-icon svgIcon="category_xs"></mat-icon>{{discuss.category.name}}
