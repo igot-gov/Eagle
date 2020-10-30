@@ -62,7 +62,7 @@ contentValidationApi.post('/checkTextProfanity', async (req, res) => {
     }
 })
 
-contentValidationApi.post('/checkPdfProfanity', async (req, res) => {
+contentValidationApi.post('/validatePdfContent', async (req, res) => {
     try {
         const response = await axios.post(API_END_POINTS.checkPdfProfanity, req.body, axiosRequestConfig)
         res.status(response.status).send(response.data)
