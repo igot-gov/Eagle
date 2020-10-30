@@ -9,6 +9,7 @@ package com.infosys.hubservices.repository.cassandra.bodhi;
 
 import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
+import org.springframework.data.cassandra.repository.AllowFiltering;
 import org.springframework.data.cassandra.repository.CassandraRepository;
 import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.domain.Pageable;
@@ -29,12 +30,18 @@ public interface UserConnectionRepository
 	@Query("SELECT count(user_id) from user_connection where connection_id=?0 AND connection_status=?1 ALLOW FILTERING;")
 	public int countByConnectionAndStatus(String connectionId, String status);
 
+	//@AllowFiltering
 	Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(String rootOrg, String userId,  Pageable pageable);
 
-	//Slice<UserConnection> findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyConnectionId(String rootOrg, String connectionId,  Pageable pageable);
+	@AllowFiltering
+	Slice<UserConnection> findByUserConnectionPrimarykeyUserId(String userId,  Pageable pageable);
 
 	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND connection_id=?1 AND connection_status=?2 ALLOW FILTERING;")
 	public List<UserConnection> findByConnection(String rootOrg, String connectionId, String status);
+
+	@Query("SELECT * FROM user_connection WHERE connection_id=?0 AND connection_status=?1 ALLOW FILTERING;")
+	public List<UserConnection> findByConnectionId(String connectionId, String status);
+
 
 	@Query("SELECT * FROM user_connection WHERE root_org=?0 AND user_id IN ?1 ;")
 	public List<UserConnection> findByUsersAndRootOrg(String rootOrg, List<String> userIds);

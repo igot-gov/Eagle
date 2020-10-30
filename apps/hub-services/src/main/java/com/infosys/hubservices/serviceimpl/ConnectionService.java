@@ -235,14 +235,14 @@ public class ConnectionService implements IConnectionService {
 
             //for direction OUT
             Pageable pageable = PageRequest.of(offset, limit);
-            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
+            Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyUserId(userId,  pageable);
             List<UserConnection> userConnectionsEstablishedOut = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equalsIgnoreCase(status)).collect(Collectors.toList());
             //connectionIds.addAll(userConnectionsEstablishedIn.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList()));
             logger.info("userConnectionsEstablishedIn "+mapper.writeValueAsString(userConnectionsEstablishedOut));
 
 
             //for direction IN
-            List<UserConnection> userConnectionsEstablishedIn = userConnectionRepository.findByConnection(rootOrg, userId, status);
+            List<UserConnection> userConnectionsEstablishedIn = userConnectionRepository.findByConnectionId(userId, status);
             logger.info("userConnectionsEstablishedOut "+mapper.writeValueAsString(userConnectionsEstablishedIn));
 
 
@@ -298,7 +298,7 @@ public class ConnectionService implements IConnectionService {
 
             List<UserConnection> userConnections = Collections.emptyList();
             if(direction.equals(Constants.DIRECTION.OUT)){
-                Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyRootOrgAndUserConnectionPrimarykeyUserId(rootOrg, userId,  pageable);
+                Slice<UserConnection> sliceUserConnections = userConnectionRepository.findByUserConnectionPrimarykeyUserId(userId,  pageable);
                 userConnections = sliceUserConnections.getContent().stream().filter(c -> c.getConnectionStatus().equals(Constants.Status.PENDING)).collect(Collectors.toList());
                 response.put(Constants.ResponseStatus.PAGENO, offset);
                 response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());
@@ -306,7 +306,7 @@ public class ConnectionService implements IConnectionService {
             //System.out.println("rootOrg:"+rootOrg+" userId:"+userId);
 
             if(direction.equals(Constants.DIRECTION.IN))
-                userConnections = userConnectionRepository.findByConnection(rootOrg, userId, Constants.Status.PENDING);
+                userConnections = userConnectionRepository.findByConnectionId(userId, Constants.Status.PENDING);
 
 
             userConnections.sort(Comparator.comparing(UserConnection::getStartedOn).reversed());
