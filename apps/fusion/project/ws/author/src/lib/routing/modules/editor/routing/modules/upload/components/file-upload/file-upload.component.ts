@@ -32,6 +32,7 @@ import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
+import { ProfanityService } from '../../services/profanity.service'
 
 @Component({
   selector: 'ws-auth-file-upload',
@@ -51,6 +52,7 @@ export class FileUploadComponent implements OnInit {
   enableUpload = true
   duration = 0
   canUpdate = true
+  profanityData: any
   fileUploadCondition = {
     fileName: false,
     eval: false,
@@ -78,6 +80,7 @@ export class FileUploadComponent implements OnInit {
     private authInitService: AuthInitService,
     private valueSvc: ValueService,
     private accessService: AccessControlService,
+    private profanityService: ProfanityService,
   ) { }
 
   ngOnInit() {
@@ -88,8 +91,30 @@ export class FileUploadComponent implements OnInit {
       this.currentContent = data
       this.triggerDataChange()
     })
-  }
+    // this.profanityData = {
+    //   overAllOffensivescore: 0.996727610651836,
+    //   fileName: 'FINAL_14_03_2020_ENg1602233642821.pdf',
+    //   totalPageUploaded: 1,
+    //   profanityWordCount: 0,
+    //   pagesWithImages: 1,
+    //   profanityClassifications: {
+    //     bastard: {
+    //       offenceCategory: 'Offensive',
+    //       occurenceOnPage: [1, 2, 3],
+    //       totalWordCount: 3,
+    //     },
+    //     fuck: {
+    //       offenceCategory: 'Offensive',
+    //       occurenceOnPage: [1, 2, 3],
+    //       totalWordCount: 3,
+    //     },
+    //   },
+    //   imagesOccurrenceOnPageNo: [
+    //     1, 3, 5, 5,
+    //   ],
+    // }
 
+  }
   triggerDataChange() {
     const updatedMeta = this.contentService.getUpdatedMeta(this.currentContent)
     if (
@@ -331,7 +356,8 @@ export class FileUploadComponent implements OnInit {
             duration: NOTIFICATION_TIME * 1000,
           })
           // this.data.emit('saveAndNext')
-          this.start()
+          // need to insert this. save methord
+          this.profanityCheckAPICall()
 
         },
         () => {
@@ -345,11 +371,25 @@ export class FileUploadComponent implements OnInit {
         },
       )
   }
-  start() {
+  profanityCheckAPICall() {
+    this.profanityService.featchProfanity(this.currentContent).subscribe(data => {
+
+      this.profanityData = data
+      // tslint:disable-next-line:no-console
+      console.log(this.profanityData)
+      // tslint:disable-next-line:no-console
+      console.log(this.currentContent)
+      if (this.profanityData !== null && this.profanityData !== undefined) {
+        this.startProfanityPopup()
+      }
+    })
+  }
+  startProfanityPopup() {
     const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
       minHeight: 'auto',
       width: '80%',
       panelClass: 'remove-pad',
+      data: this.profanityData,
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response === 'postCreated') {

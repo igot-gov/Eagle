@@ -6,6 +6,7 @@ import { MatChipInputEvent } from '@angular/material'
 export interface IDialogData {
   animal: string
   name: string
+  data: any
 }
 @Component({
   selector: 'ws-auth-profanity-popup',
@@ -19,6 +20,12 @@ export class ProfanityPopUpComponent implements OnInit {
   uploadSaveData = false
   showErrorMsg = false
   createErrorMsg = ''
+  profanityData: any
+  offensiveValue: any
+  offensiveName: any
+  offensiveDataNameArray: String[] = []
+  offensiveDataValueArray: any[] = []
+
   defaultError = 'Something went wrong, Please try again after sometime!'
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
@@ -31,14 +38,27 @@ export class ProfanityPopUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.startForm = this.formBuilder.group({
-      category: [],
-      question: [],
-      description: [],
-      tags: [],
-    })
+    this.profanityData = this.data
+    if (this.profanityData.profanityClassifications != null && this.profanityData.profanityClassifications !== undefined) {
+      this.offensiveValue = Object.values(this.profanityData.profanityClassifications)
+      this.offensiveName = Object.keys(this.profanityData.profanityClassifications)
+      for (let i = 0; i < this.offensiveValue.length;) {
+        const finalObj = {
+          category: this.offensiveValue[i].offenceCategory,
+          name: this.offensiveName[i],
+          occurenceOnPage: this.offensiveValue[i].occurenceOnPage,
+        }
+        this.offensiveDataValueArray.push(finalObj)
+        i += 1
+      }
+      this.startForm = this.formBuilder.group({
+        category: [],
+        question: [],
+        description: [],
+        tags: [],
+      })
+    }
   }
-
   onNoClick(): void {
     this.dialogRef.close()
   }
