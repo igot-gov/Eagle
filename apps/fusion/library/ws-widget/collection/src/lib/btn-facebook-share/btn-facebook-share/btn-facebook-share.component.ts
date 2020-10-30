@@ -10,19 +10,25 @@ import { ConfigurationsService } from '../../../../../utils/src/public-api'
 export class BtnFacebookShareComponent implements OnInit {
   @Input() url = location.href
   @Input() contentId: string | null = null
+  @Input() shareType: string | null = null
   isSocialMediaFacebookShareEnabled = false
+  userId: string | undefined
   constructor(private sanitizer: DomSanitizer, private configSvc: ConfigurationsService) {}
 
   ngOnInit() {
+
     if (this.configSvc.restrictedFeatures) {
       this.isSocialMediaFacebookShareEnabled = !this.configSvc.restrictedFeatures.has(
         'socialMediaFacebookShare',
       )
     }
+    if (this.configSvc.userProfile) {
+      this.userId = this.configSvc.userProfile.userId
+    }
   }
 
   get sanitizeFbUrl() {
-    const url = `https://d136953gtttd92.cloudfront.net/share/content/${this.contentId}`
+    const url = `https://d136953gtttd92.cloudfront.net/share/${this.shareType}/${this.userId}/${this.contentId}`
       return this.sanitizer.bypassSecurityTrustResourceUrl(
       `https://www.facebook.com/plugins/share_button.php?href=${url}&layout=button&size=large`,
     )
