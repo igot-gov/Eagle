@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ICarousel } from './sliders.model'
 import { Subscription, interval } from 'rxjs'
@@ -12,7 +12,8 @@ import { EventService } from '../../../../utils/src/public-api'
 export class SlidersComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<ICarousel[]> {
   @Input() widgetData!: ICarousel[]
-
+  @HostBinding('id')
+  public id = `banner_${Math.random()}`
   currentIndex = 0
   slideInterval: Subscription | null = null
 

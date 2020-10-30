@@ -61,8 +61,8 @@ export class HorizontalScrollerComponent implements OnInit, OnChanges, OnDestroy
       // const elem = this.horizontalScrollElem.nativeElement
       // elem.scrollLeft -= 0.20 * elem.clientWidth
       if (this.horizontalScrollElem) {
-        const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth * 0.24)
-        // const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth)
+        // const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth * 0.24)
+        const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth)
         this.horizontalScrollElem.nativeElement.scrollTo({
           left: this.horizontalScrollElem.nativeElement.scrollLeft - clientWidth,
           behavior: 'smooth',
@@ -75,8 +75,8 @@ export class HorizontalScrollerComponent implements OnInit, OnChanges, OnDestroy
       // const elem = this.horizontalScrollElem.nativeElement
       // elem.scrollLeft += 0.20 * elem.clientWidth
       if (this.horizontalScrollElem) {
-        const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth * 0.24)
-        // const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth)
+        // const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth * 0.24)
+        const clientWidth = (this.horizontalScrollElem.nativeElement.clientWidth)
         this.horizontalScrollElem.nativeElement.scrollTo({
           left: this.horizontalScrollElem.nativeElement.scrollLeft + clientWidth,
           behavior: 'smooth',

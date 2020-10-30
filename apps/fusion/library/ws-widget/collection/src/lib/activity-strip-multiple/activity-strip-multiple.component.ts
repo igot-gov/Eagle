@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsNetworkStripNewMultiple } from './activity-strip-multiple.model'
 import { ActivityStripNewMultipleService } from './activity-strip-multiple.service'
@@ -46,7 +46,8 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   OnDestroy,
   NsWidgetResolver.IWidgetData<NsNetworkStripNewMultiple.INetworkStripMultiple> {
   @Input() widgetData!: NsNetworkStripNewMultiple.INetworkStripMultiple
-
+  @HostBinding('id')
+  public id = `activity-multiple_${Math.random()}`
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsCarrierStripNewMultiple } from './carrier-strip-multiple.model'
 import { ContentStripNewMultipleService } from './carrier-strip-multiple.service'
@@ -44,7 +44,8 @@ export class CarrierStripMultipleComponent extends WidgetBaseComponent
   OnDestroy,
   NsWidgetResolver.IWidgetData<NsCarrierStripNewMultiple.ICarrierMultiple> {
   @Input() widgetData!: NsCarrierStripNewMultiple.ICarrierMultiple
-
+  @HostBinding('id')
+  public id = `ws-carrier-strip-multiple_${Math.random()}`
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true

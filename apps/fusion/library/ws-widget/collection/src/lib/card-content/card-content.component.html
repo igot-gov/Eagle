@@ -231,8 +231,7 @@
 
         <mat-card-content>
           <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
-            [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" aria-label="Content"
-            i18n-aria-label>
+            [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" i18n-aria-label>
 
             <div class="text-gray-time complexity flex-between flex-center">
               <!-- <div *ngIf="widgetData.content.complexityLevel" i18n-title title="Complexity Level">
@@ -274,8 +273,7 @@
             </ws-widget-display-content-type>
             <div class="flex items-center">
               <ng-container [ngTemplateOutlet]="rating"></ng-container>
-              <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
-                [matMenuTriggerFor]="cardMenu">
+              <button type="button" mat-icon-button i18n-aria-label [matMenuTriggerFor]="cardMenu">
                 <mat-icon>more_vertical</mat-icon>
               </button>
             </div>

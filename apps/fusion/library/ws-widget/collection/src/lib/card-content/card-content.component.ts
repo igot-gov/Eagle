@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService, UtilityService, NsInstanceConfig } from '@ws-widget/utils'
@@ -16,6 +16,8 @@ import { NsCardContent } from './card-content.model'
 export class CardContentComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, AfterViewInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard> {
   @Input() widgetData!: NsCardContent.ICard
+  @HostBinding('id')
+  public id = `ws-card_${Math.random()}`
   defaultThumbnail = ''
   defaultSLogo = ''
   showFlip = false
@@ -39,6 +41,7 @@ export class CardContentComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    // this.widgetInstanceId=his.id
     this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed
     this.prefChangeSubscription = this.configSvc.prefChangeNotifier.subscribe(() => {
       this.isIntranetAllowedSettings = this.configSvc.isIntranetAllowed

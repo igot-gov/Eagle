@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsDiscussStripNewMultiple } from './discuss-strip-multiple.model'
 import { ContentStripNewMultipleService } from './discuss-strip-multiple.service'
@@ -46,7 +46,8 @@ export class DiscussStripMultipleComponent extends WidgetBaseComponent
   OnDestroy,
   NsWidgetResolver.IWidgetData<NsDiscussStripNewMultiple.IDiscussMultiple> {
   @Input() widgetData!: NsDiscussStripNewMultiple.IDiscussMultiple
-
+  @HostBinding('id')
+  public id = `ws-discuss-strip-multiple'_${Math.random()}`
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true

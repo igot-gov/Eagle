@@ -27,7 +27,7 @@
 
         </mat-card-footer> -->
         </mat-card>
-        <mat-card class="competency-card" *ngIf="myCompetencies && myCompetencies.length > 0">
+        <mat-card id="competency-card" class="competency-card" *ngIf="myCompetencies && myCompetencies.length > 0">
           <mat-card-header>
             <mat-card-title>
               <span class="mat-subheading-1">
@@ -35,10 +35,12 @@
               </span>
             </mat-card-title>
           </mat-card-header>
-          <mat-card-content class="flex flex-1 flex-wrap">
+          <mat-card-content class="flex flex-1 flex-wrap" role="list">
             <span>&nbsp;</span>
-            <div class="tag mat-copmetence cursor-pointer" (click)=view(item) *ngFor="let item of myCompetencies">
-              <span class="mat-body-1 margin-xs">{{item.name}}</span>
+            <div class="tag mat-copmetence cursor-pointer" role="listitem" (click)=view(item)
+              *ngFor="let item of myCompetencies">
+              <a href="javascript:void(0)" [attr.id]="item.name" class="mat-body-1 margin-xs" i18n-aria-label
+                role="link">{{item.name}}</a>
             </div>
           </mat-card-content>
         </mat-card>
@@ -53,6 +55,7 @@
           <form (submit)="updateQuery(queryControl.value)" class="flex-1">
             <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
               <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+              <mat-label>Search</mat-label>
               <input type="search" #searchInput class="ml-2 flex-1" i18n-placeholder="search content"
                 [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl" />
             </mat-form-field>

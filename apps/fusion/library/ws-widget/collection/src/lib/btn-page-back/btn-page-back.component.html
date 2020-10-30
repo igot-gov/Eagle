@@ -1,25 +1,15 @@
-<mat-card class="base-layout" role="main">
+<mat-card class="base-layout" role="navigation">
   <mat-card-content class="container-balanced">
     <div class="flex flex-1 flex-column">
-      <!-- top-fixed-menu -->
-      <!-- fix-ww -->
+
       <div class="flex flex-1 flex-column">
-        <div class="flex flex-1 flex-wrap">
-          <!-- <a i18n-aria-label aria-label="Back" (click)="toggleVisibility()" style="width: fit-content;"
-      class="flex ws-mat-default-text margin-left-xs" *ngIf="widgetData.url && widgetData.url !== 'none'"
-    [routerLink]="backUrl.routeUrl" [queryParams]="backUrl.queryParams" [fragment]="backUrl?.fragment">
-         <mat-icon class="flexws-mat-default-text icon-margin">apps</mat-icon>
-      <span class="flex mat-typography m-t-b">HUBS</span>
-    </a> -->
-          <span class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()">
-            <mat-icon class="margin-xs ws-mat-default-text">apps</mat-icon>
+        <div class="flex flex-1 flex-wrap margin-bottom-xs margin-top-xs" role="menubar">
+          <a class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()"
+            href="javascript:void(0)" role="menuitem" accesskey="H" i18n-aria-label>
+            <mat-icon class="margin-right-xs ws-mat-default-text">apps</mat-icon>
             <span class="margin-auto ws-mat-default-text font-bold">HUBS</span>
-          </span>
-          <!-- <ng-container *ngIf="!visible && !isMobile">
-      <a *ngFor="let hub of hubsList" class="simple-hubs-link cursor-pointer" [routerLink]="hub.path">
-        <span class="mat-card-subtitle margin-0 text-uppercase"> {{hub.hubname}}</span>
-      </a>
-    </ng-container> -->
+          </a>
+
           <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
             <div class="flex" *ngFor="let title of widgetData.titles">
               <mat-icon class="main-back m-auto">keyboard_arrow_right</mat-icon>
@@ -28,9 +18,8 @@
                 <mat-icon class="ws-mat-default-text icon-margin m-t-b" *ngIf="title.icon">{{title.icon}}</mat-icon>
                 <span class="mat-imput-placeholder text-capitalize m-t-b mat-typography">{{title.title}}</span>
               </span>
-              <a class="flex m-auto ws-mat-default-text" i18n-aria-label aria-label="Back"
-                *ngIf="title.url && title.url !== 'none'" [routerLink]="title.url">
-                <!-- [queryParams]="titleUrl.queryParams" [fragment]="titleUrl?.fragment" -->
+              <a class="flex m-auto ws-mat-default-text" i18n-aria-label *ngIf="title.url && title.url !== 'none'"
+                [routerLink]="title.url" role="menuitem" [routerLink]="title.path" [attr.accesskey]="title.accessKey">
                 <mat-icon class="ws-mat-default-text icon-margin" *ngIf="title.icon">{{title.icon}}</mat-icon>
                 <span class="text-uppercase m-t-b mat-typography"> {{title.title}}</span>
               </a>
@@ -38,33 +27,29 @@
           </ng-container>
         </div>
         <div class="flex flex-1" *ngIf="visible" [@enterAnimation]="visible">
-          <!-- <div class="flex flex-1" [ngClass]="{'show': visible,'hide': !visible}"> -->
           <div class="flex flex-1">
             <h3 class="mat-error text-center" *ngIf="hubsList.length === 0" i18n>
               No hubs Info Available
             </h3>
-            <div class="grid grid-cols-1 margin-xs sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-2">
+            <div class="grid grid-cols-1 margin-xs sm:grid-cols-2 md:grid-cols-3 md:grid-cols-4 col-gap-2"
+              role="menubar">
               <ng-container *ngFor="let hubsObj of hubsList" [ngTemplateOutlet]="userIndividualNew"
                 [ngTemplateOutletContext]="{ hubs: hubsObj }">
               </ng-container>
             </div>
           </div>
           <div class="text-center">
-            <!-- <mat-spinner [strokeWidth]="3" *ngIf="hubsList.length === 0" [diameter]="40" class="display-inline-block">
-      </mat-spinner> -->
+
           </div>
         </div>
       </div>
     </div>
   </mat-card-content>
 </mat-card>
-<!--
-<div class="flex flex-1 ws-mat-primary-lite-background-important flex-column">
 
-</div> -->
 
 <ng-template #userIndividualNew let-hubs="hubs">
-  <div class="flex flex-wrap mb-4" [routerLink]="(hubs.path)">
+  <a class="flex flex-wrap mb-4" [routerLink]="(hubs.path)" role="menuitem" i18n-aria-label>
     <div class="icon ws-mat-primary-tags">
       <mat-icon class="mat-icon1">{{hubs.icon}}</mat-icon>
     </div>
@@ -74,5 +59,5 @@
       </div>
       <div class="mat-caption cohorts-desc ws-mat-black60-text">{{hubs.desc}}</div>
     </div>
-  </div>
+  </a>
 </ng-template>
