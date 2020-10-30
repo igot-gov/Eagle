@@ -7,6 +7,7 @@ import { logError } from '../utils/logger'
 import { ERROR } from '../utils/message'
 
 const API_END_POINTS = {
+    checkPdfProfanity: `${CONSTANTS.CONTENT_VALIDATION_API_BASE}/checkPdfProfanity`,
     checkProfanity: (contentId: string, userId: string) =>
         `${CONSTANTS.CONTENT_VALIDATION_API_BASE}/contentValidation/v1/checkProfanity/${contentId}/${userId}`,
     checkTextProfanity: `${CONSTANTS.PROFANITY_SERVICE_API_BASE}/checkProfanity`,
@@ -14,6 +15,7 @@ const API_END_POINTS = {
 
 export const contentValidationApi = Router()
 const unknownError = 'Failed due to unknown reason'
+const failedToProcess = 'Failed to process the request. Error: '
 
 contentValidationApi.get('/checkProfanity/:contentId/:userId', async (req, res) => {
     try {
@@ -37,7 +39,7 @@ contentValidationApi.get('/checkProfanity/:contentId/:userId', async (req, res) 
         })
         res.status(response.status).send(response.data)
     } catch (err) {
-        logError('failed to process the request' + err)
+        logError(failedToProcess + err)
         res.status((err && err.response && err.response.status) || 500).send(
             (err && err.response && err.response.data) || {
                 error: unknownError,
@@ -51,7 +53,21 @@ contentValidationApi.post('/checkTextProfanity', async (req, res) => {
         const response = await axios.post(API_END_POINTS.checkTextProfanity, req.body, axiosRequestConfig)
         res.status(response.status).send(response.data)
     } catch (err) {
-        logError('failed to process the request' + err)
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+contentValidationApi.get('/checkPdfProfanity', async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.checkPdfProfanity, req.body)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
         res.status((err && err.response && err.response.status) || 500).send(
             (err && err.response && err.response.data) || {
                 error: unknownError,
