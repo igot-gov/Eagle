@@ -14,6 +14,20 @@
       Share
     </button>
   </div>
+
+  <div *ngIf="isSocialMediaShareEnabled" class="pt-6">
+    <h2 class="mat-h2 margin-remove" i18n>
+      OR
+    </h2>
+  
+    <h3 class="mat-h3 margin-remove py-2" i18n>Share on Social Media</h3>
+  
+    <div class="flex flex-wrap items-center">
+      <ws-widget-btn-facebook-share [url]="detailUrl"  [contentId]="data.playlist.id" class="pr-4 pb-3"></ws-widget-btn-facebook-share>
+      <ws-widget-btn-twitter-share [url]="detailUrl"  [contentId]="data.playlist.id" [message]="message" class="pr-4 pb-3"></ws-widget-btn-twitter-share>
+      <ws-widget-btn-linkedin-share [url]="detailUrl"  [contentId]="data.playlist.id" class="pr-4 pb-3"></ws-widget-btn-linkedin-share>
+    </div>
+  </div>
 </section>
 <ng-template #sharingInProgress>
   <div class="flex flex-middle width-420">

@@ -1,23 +1,24 @@
-import { Component, ElementRef, Inject, TemplateRef, ViewChild } from '@angular/core'
+import { Component, ElementRef, Inject, TemplateRef, ViewChild, OnInit } from '@angular/core'
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
 import { BtnPlaylistService, NsAutoComplete, NsPlaylist } from '@ws-widget/collection'
-import { TFetchStatus } from '@ws-widget/utils'
+import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-playlist-share-dialog',
   templateUrl: './playlist-share-dialog.component.html',
   styleUrls: ['./playlist-share-dialog.component.scss'],
 })
-export class PlaylistShareDialogComponent {
+export class PlaylistShareDialogComponent implements OnInit {
   @ViewChild('shareError', { static: true }) shareErrorMessage!: ElementRef<any>
   @ViewChild('contentDeletedError', { static: true }) contentDeletedErrorMessage!: TemplateRef<any>
 
   users: NsAutoComplete.IUserAutoComplete[] = []
   sharePlaylistStatus: TFetchStatus = 'none'
-
+  isSocialMediaShareEnabled = false
   constructor(
     private snackBar: MatSnackBar,
     private playlistSvc: BtnPlaylistService,
+    private configSvc: ConfigurationsService,
     private dialogRef: MatDialogRef<PlaylistShareDialogComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
@@ -25,6 +26,15 @@ export class PlaylistShareDialogComponent {
       deleted: string[]
     },
   ) { }
+
+  ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isSocialMediaShareEnabled =
+        !this.configSvc.restrictedFeatures.has('socialMediaFacebookShare') ||
+        !this.configSvc.restrictedFeatures.has('socialMediaLinkedinShare') ||
+        !this.configSvc.restrictedFeatures.has('socialMediaTwitterShare')
+    }
+  }
 
   sharePlaylist(shareMsg: string, successToast: string) {
     if (this.data.playlist) {
