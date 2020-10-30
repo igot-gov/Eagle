@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/playlist", function (req, res) {
+router.get("/playlist/:id", function (req, res) {
     var html = `<!DOCTYPE html>
     <html lang="en">
       <head>             
