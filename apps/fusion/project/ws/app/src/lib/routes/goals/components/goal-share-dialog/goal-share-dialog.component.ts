@@ -6,7 +6,7 @@ import {
   ElementRef,
 } from '@angular/core'
 import { NsGoal, BtnGoalsService, NsAutoComplete } from '@ws-widget/collection'
-import { TFetchStatus } from '@ws-widget/utils'
+import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material'
 
 @Component({
@@ -39,15 +39,23 @@ export class GoalShareDialogComponent implements OnInit {
   showPartiallySharedMessage = false
 
   shareGoalStatus: TFetchStatus = 'none'
-
+  isSocialMediaShareEnabled = false
   constructor(
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<GoalShareDialogComponent>,
     private goalSvc: BtnGoalsService,
+    private configSvc: ConfigurationsService,
     @Inject(MAT_DIALOG_DATA) public goal: NsGoal.IGoal,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.configSvc.restrictedFeatures) {
+      this.isSocialMediaShareEnabled =
+        !this.configSvc.restrictedFeatures.has('socialMediaFacebookShare') ||
+        !this.configSvc.restrictedFeatures.has('socialMediaLinkedinShare') ||
+        !this.configSvc.restrictedFeatures.has('socialMediaTwitterShare')
+    }
+   }
 
   updateUsers(users: NsAutoComplete.IUserAutoComplete[]) {
     if (Array.isArray(users)) {

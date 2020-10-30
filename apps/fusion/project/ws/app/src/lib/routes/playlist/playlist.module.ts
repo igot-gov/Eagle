@@ -47,6 +47,10 @@ import { PlaylistEditComponent } from './routes/playlist-edit/playlist-edit.comp
 import { PlaylistHomeComponent } from './routes/playlist-home/playlist-home.component'
 import { PlaylistNotificationComponent } from './routes/playlist-notification/playlist-notification.component'
 import { DragDropModule } from '@angular/cdk/drag-drop'
+import { BtnLinkedinShareModule } from '../../../../../../../library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share.module'
+import { BtnFacebookShareModule } from '../../../../../../../library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share.module'
+import { BtnTwitterShareModule } from '../../../../../../../library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share.module'
+
 @NgModule({
   declarations: [
     PlaylistCardComponent,
@@ -98,6 +102,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     MatToolbarModule,
     MatTooltipModule,
     MatProgressBarModule,
+    BtnLinkedinShareModule,
+    BtnFacebookShareModule,
+    BtnTwitterShareModule,
   ],
   entryComponents: [
     PlaylistContentDeleteDialogComponent,
