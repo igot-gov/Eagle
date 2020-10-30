@@ -1,7 +1,8 @@
 <ng-container *ngIf="!isRestricted && widgetData?.identifier?.length" [ngSwitch]="status">
 
   <button mat-icon-button *ngSwitchCase="'NOT_LIKED'" (click)="like($event)" aria-label="Like" i18n-aria-label
-    [disabled]="widgetData?.isDisabled || widgetData?.status==='Deleted'" [color]="color">
+    [disabled]="widgetData?.isDisabled || widgetData?.status==='Deleted'" [color]="color"
+    class="ws-mat-primary-default-text">
     <mat-icon *ngIf="!showCount">
       favorite_border
     </mat-icon>
@@ -11,7 +12,7 @@
     </mat-icon>
   </button>
   <button mat-icon-button *ngSwitchCase="'LIKED'" (click)="unlike($event)" aria-label="UnLike" i18n-aria-label
-    [color]="color">
+    [color]="color" class="ws-mat-primary-default-text">
     <mat-icon *ngIf="!showCount">favorite</mat-icon>
     <mat-icon *ngIf="showCount" matBadge="{{ likesCount }}" matBadgeColor="accent" class="badge-notify"
       matBadgeSize="small">

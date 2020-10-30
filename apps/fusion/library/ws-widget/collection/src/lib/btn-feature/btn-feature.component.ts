@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { Event, NavigationEnd, Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService, NsPage } from '@ws-widget/utils'
@@ -33,9 +33,9 @@ export class BtnFeatureComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<NsPage.INavLink> {
   @Input() widgetData!: NsPage.INavLink
   @Input() showFixedLength = false
-  // @Input()
-  // @HostBinding('id')
-  // public id!: string
+  @Input()
+  @HostBinding('id')
+  public id!: string
   readonly displayType = typeMap
   badgeCount = ''
   defaultIconSize = 24
@@ -69,7 +69,7 @@ export class BtnFeatureComponent extends WidgetBaseComponent
             this.badgeCount = ''
           }
         })
-        .catch(_err => {})
+        .catch(_err => { })
     }
   }
 
@@ -98,6 +98,9 @@ export class BtnFeatureComponent extends WidgetBaseComponent
         this.widgetData.actionBtn && pinnedApps.has(this.widgetData.actionBtn.id),
       )
     })
+    if (!this.id && this.widgetData.actionBtnId) {
+      this.id = this.widgetData.actionBtnId
+    }
   }
 
   ngOnDestroy() {

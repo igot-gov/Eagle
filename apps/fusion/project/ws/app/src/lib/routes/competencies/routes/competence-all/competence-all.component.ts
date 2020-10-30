@@ -68,10 +68,8 @@ export class CompetenceAllComponent implements OnInit {
   }
 
   updateQuery(key: string) {
-    if (key) {
-      this.searchKey = key
-      this.refreshData()
-    }
+    this.searchKey = key
+    this.refreshData()
   }
 
   reset() {
@@ -82,7 +80,7 @@ export class CompetenceAllComponent implements OnInit {
   }
   resetSearch() {
     this.reset()
-    this.refreshData()
+    // this.refreshData()
   }
   addCompetency(id: string) {
     if (id) {
@@ -181,7 +179,7 @@ export class CompetenceAllComponent implements OnInit {
         let data = reponse.responseData
         if (this.myCompetencies && this.myCompetencies.length > 0) {
           data = _.flatten(_.map(this.myCompetencies, item => {
-            return _.filter(reponse.responseData, item)
+            return _.filter(reponse.responseData, i => i.id === item.id)
           }))
           this.filteredCompetencies = reponse.responseData.filter(obj => {
             return data.indexOf(obj) === -1

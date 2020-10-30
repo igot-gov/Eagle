@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { AfterViewInit, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser'
 import { ActivatedRoute } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
@@ -16,6 +16,9 @@ import { CustomTourService } from '../_common/tour-guide/tour-guide.service'
 export class PageComponent extends WidgetBaseComponent
   implements OnInit, AfterViewInit, OnDestroy, NsWidgetResolver.IWidgetData<NsPage.IPage | null> {
   @Input() widgetData: NsPage.IPage | null = null
+  @Input()
+  @HostBinding('id')
+  public id!: string
   pageData: NsPage.IPage | null = null
   oldData: NsPage.IPage | null = null
   private responseSubscription: Subscription | null = null

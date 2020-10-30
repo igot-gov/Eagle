@@ -15,7 +15,7 @@ body {
   margin: 0px;
   font-family: $font-family-lato;
   scroll-behavior: smooth;
-  letter-spacing: $letter-spacing;
+  // letter-spacing: $letter-spacing;
   word-spacing: $word-spacing;
 }
 
@@ -195,6 +195,7 @@ iframe {
 }
 
 mat-toolbar {
+
   &.mat-toolbar-row,
   &.mat-toolbar-single-row {
     // height: 56px;
@@ -391,7 +392,7 @@ area {
 }
 
 .night-mode .ql-editor.ql-blank::before {
-  color: #cccccc;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .ws-widget-user-autocomplete {
@@ -486,7 +487,7 @@ h3.shepherd-title {
 //   overflow: hidden;
 // }
 
-.checkbox-sidenav > div.mat-drawer-inner-container {
+.checkbox-sidenav>div.mat-drawer-inner-container {
   height: auto !important;
   overflow: hidden !important;
 }

@@ -1,8 +1,8 @@
-<mat-card class="base-layout container-balanced">
+<mat-card class="base-layout container-balanced" role="navigation">
   <mat-card-content>
-    <div class="flex flex-1 flex-column">
+    <div class="flex flex-1 flex-column" role="presentation">
       <div class="flex flex-1 ws-mat-default-text">
-        <span class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()">
+        <span class="flex cursor-pointer simple-hubs-link margin-left-0" role="link" (click)="toggleVisibility()">
           <mat-icon class="margin-xs">apps</mat-icon>
           <span class="margin-auto ws-mat-default-text font-bold">HUBS</span>
         </span>
@@ -34,7 +34,7 @@
 </mat-card>
 
 <ng-template #userIndividualNew let-hubs="hubs">
-  <div class="flex flex-wrap" [routerLink]="(hubs.path)">
+  <div class="flex flex-wrap mb-4" [routerLink]="(hubs.path)">
     <div class="icon ws-mat-primary-tags">
       <mat-icon class="mat-icon1">{{hubs.icon}}</mat-icon>
     </div>
