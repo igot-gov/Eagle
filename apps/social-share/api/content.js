@@ -47,7 +47,7 @@ router.get("/toc/:userId/:id", function (req, res) {
                   data.description
                 }">             
                 <meta property="og:type" content="website">
-                <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/content/${req.params.id}`}" />
+                <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/toc/${req.params.userId}/${req.params.id}`}" />
                 <meta property="og:title" content="${data.name}" />
                 <meta property="og:description" content="${data.description}" />
                 <meta property="og:image" content="${data.appIcon}" />  
@@ -56,7 +56,7 @@ router.get("/toc/:userId/:id", function (req, res) {
                 }" />        
             
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/content/${req.params.id}`}" />
+                <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/toc/${req.params.userId}/${req.params.id}`}" />
                 <meta property="twitter:title" content="${data.name}" />
                 <meta property="twitter:description" content="${
                   data.description
