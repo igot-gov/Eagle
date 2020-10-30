@@ -1,11 +1,10 @@
 const express = require("express");
 const router = express.Router();
 var request = require("request");
-// const f = require('../public/image/favicon.png')
 
 request.gzip = true;
 
-router.get("/content/:id", function (req, res) {
+router.get("/toc/:userId/:id", function (req, res) {
   console.log("api service started"); 
   let URL = `http://lex-core:7001/v1/content/hierarchy/${req.params.id}?hierarchyType=minimal`;
   let data;
@@ -14,12 +13,9 @@ router.get("/content/:id", function (req, res) {
     {
       headers: {
         "content-type": "application/json",
-        rootorg: req.get("rootorg") ? req.get("rootorg") : "igot",
-        org: req.get("org") ? req.get("org") : "dopt",
-        wid: req.get("wid")
-          ? req.get("wid")
-          : "9cdd9f76-2584-4ae5-940d-3f51dce020dc",
-        //authorization: req.get("authorization"),
+        rootorg: "igot",
+        org: "dopt",
+        wid: req.params.userId,
       },
       uri: URL,
       method: "POST",
