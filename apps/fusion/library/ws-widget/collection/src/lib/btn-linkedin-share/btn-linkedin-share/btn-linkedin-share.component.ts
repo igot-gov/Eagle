@@ -9,7 +9,10 @@ import { ConfigurationsService } from '../../../../../utils/src/public-api'
 })
 export class BtnLinkedinShareComponent implements OnInit {
   @Input() url = location.href
+  @Input() contentId: string | null = null
+  @Input() shareType: string | null = null
   isSocialMediaLinkedinShareEnabled = false
+  userId: string | undefined
   constructor(private sanitizer: DomSanitizer, private configSvc: ConfigurationsService) {}
 
   ngOnInit() {
@@ -18,14 +21,15 @@ export class BtnLinkedinShareComponent implements OnInit {
         'socialMediaLinkedinShare',
       )
     }
+    if (this.configSvc.userProfile) {
+      this.userId = this.configSvc.userProfile.userId
+    }
   }
 
   get sanitizeFbUrl() {
-    const urlarr = location.href.split('/')
-    const contentId = urlarr[urlarr.length - 2]
-    const url = `https://d136953gtttd92.cloudfront.net/share/content/${contentId}`
-        return this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.linkedin.com/shareArticle?mini=true&url=${url}&source=LinkedIn`,
-    )
-  }
+    const url = `https://d136953gtttd92.cloudfront.net/share/${this.shareType}/${this.userId}/${this.contentId}`
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+    `https://www.linkedin.com/shareArticle?mini=true&url=${url}&source=LinkedIn`,
+  )
+}
 }
