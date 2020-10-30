@@ -9,6 +9,7 @@ import { ERROR } from '../utils/message'
 const API_END_POINTS = {
     checkProfanity: (contentId: string, userId: string) =>
         `${CONSTANTS.CONTENT_VALIDATION_API_BASE}/contentValidation/v1/checkProfanity/${contentId}/${userId}`,
+    checkTextProfanity: `${CONSTANTS.PROFANITY_SERVICE_API_BASE}/checkProfanity`,
 }
 
 export const contentValidationApi = Router()
@@ -34,6 +35,20 @@ contentValidationApi.get('/checkProfanity/:contentId/:userId', async (req, res) 
                 wid: widValue,
             },
         })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError('failed to process the request' + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+contentValidationApi.post('/checkTextProfanity', async (req, res) => {
+    try {
+        const response = await axios.post(API_END_POINTS.checkTextProfanity, req.body, axiosRequestConfig)
         res.status(response.status).send(response.data)
     } catch (err) {
         logError('failed to process the request' + err)
