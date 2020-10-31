@@ -101,12 +101,8 @@ router.get("/toc/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://d136953gtttd92.cloudfront.net/app/toc/${
-                    req.params.id
-                  }/overview">
-                    <img src="${data.appIcon}" alt="${
-            data.name
-          }"  class="social-card-img" />
+                  <a href="https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview">
+                    <img src="${data.appIcon}" alt="${data.nam}"  class="social-card-img" />
                     <div class="sub-card">
                       <pclass="title">${data.name}</p>
                       <p class="desc">${data.description}</p>
