@@ -3,8 +3,7 @@ const router = express.Router();
 var request = require("request");
 var _ = require("underscore");
 
-router.get("/badge/:userId/:id", function (req, res) {
-  
+router.get("/badge/:userId/:id", function (req, res) {  
   console.log("api service started",req.params.id);
   let URL = `http://lex-core:7001/v3/users/${req.params.userId}/badges`;
   let badges,badge;
@@ -12,7 +11,8 @@ router.get("/badge/:userId/:id", function (req, res) {
     {
       headers: {
         "content-type": "application/json",
-        local: "en"       
+        local: "en",
+        rootOrg :"igot"
       },
       uri: URL,
       method: "GET"     
@@ -23,9 +23,8 @@ router.get("/badge/:userId/:id", function (req, res) {
         res.send(err);
       } else {
         console.log("api successful",JSON.parse(body));
-        badges = JSON.parse(body);
-        res.send('badges data',badges);
-        let badge = _.where(badges.earned, {badge_id: req.params.id});
+        badges = JSON.parse(body);       
+        badge = _.where(badges.earned, {badge_id: req.params.id});
         if (badge) {
           var html = `<!DOCTYPE html>
             <html lang="en">
