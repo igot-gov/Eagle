@@ -1,15 +1,22 @@
 <div class="flex flex-1 items-center card-container ws-mat-primary-tags">
-    <div class="mr-3 cursor-pointer"  (click)="goToUserProfile(user)">
-        <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
-        </ws-widget-avatar-photo>
+    <div class="mr-3 cursor-pointer" (click)="goToUserProfile(user)">
+        <a href="javascript:void(0)" class="" i18n-aria-label role="link"
+            aria-label="click on it to visit user profile">
+            <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
+            </ws-widget-avatar-photo>
+        </a>
     </div>
     <div class="flex flex-col flex-1 cursor-pointer" (click)="goToUserProfile(user)">
-        <div class="name truncate ws-mat-black-text ">
-            {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}   {{user?.personalDetails?.surname}}
-        </div>
-        <div class="designation truncate ws-mat-black60-text">
-            {{user?.employmentDetails?.departmentName}}
-        </div>
+        <a href="javascript:void(0)" class="" i18n-aria-label role="link"
+            aria-label="click on it to visit user profile">
+            <div class="name truncate ws-mat-black-text ">
+                {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}
+                {{user?.personalDetails?.surname}}
+            </div>
+            <div class="designation truncate ws-mat-black60-text">
+                {{user?.employmentDetails?.departmentName}}
+            </div>
+        </a>
     </div>
     <div class="text-right">
         <button mat-button color="default" type="button" class="flex-auto-display margin-right-m"
@@ -26,10 +33,9 @@
     </div>
 </div>
 
-<input type="hidden" i18-value i18-aria-value aria-value="Connection accepted"
-  value="Connection accepted successfully!" #toastAccept />
+<input type="hidden" i18-value i18-aria-value aria-value="Connection accepted" value="Connection accepted successfully!"
+    #toastAccept />
+<input type="hidden" i18-value i18-aria-value aria-value="Connection rejected" value="Connection rejected successfully!"
+    #toastReject />
 <input type="hidden" i18-value i18-aria-value aria-value="Connection rejected"
-  value="Connection rejected successfully!" #toastReject />
-  <input type="hidden" i18-value i18-aria-value aria-value="Connection rejected"
-  value="Something went wrong, please try again later!" #toastError />
-  
+    value="Something went wrong, please try again later!" #toastError />

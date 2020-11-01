@@ -1,7 +1,9 @@
 <mat-card class="discuss-card cursor-pointer" (click)="getDiscussion()">
   <mat-card-header>
     <mat-card-title>
-      <h2 class="cursor-pointer f-medium" [innerHTML]="discuss.title"></h2>
+      <a href="javascript:void(0)" i18n-aria-label role="link">
+        <h2 class="cursor-pointer f-medium" [innerHTML]="discuss.title"></h2>
+      </a>
     </mat-card-title>
     <mat-card-subtitle class="responsive">
       <span class="flex ws-mat-default-text">
