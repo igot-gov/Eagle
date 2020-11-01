@@ -16,6 +16,8 @@ export class BtnProfileComponent extends WidgetBaseComponent
   @HostBinding('id')
   public id = 'Profile_link'
   @Input() widgetData!: any
+  @HostBinding('class')
+  public class = 'profile-link'
   basicBtnAppsConfig: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig> = {
     widgetType: 'actionButton',
     widgetSubType: 'actionButtonApps',

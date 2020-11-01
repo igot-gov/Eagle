@@ -95,7 +95,7 @@
               "widgetData": {
                 "strips": [
                   {
-                    "key": "network",
+                    "key": "MyActivity",
                     "logo": "group",
                     "title": "My Activity",
                     "titleDescription": "All of India",
@@ -296,8 +296,7 @@
                     "request": {
                       "api": {
                         "path": "/apis/protected/v8/network/connections/recommended/rootOrg",
-                        "queryParams": {
-                        }
+                        "queryParams": {}
                       }
                     }
                   }

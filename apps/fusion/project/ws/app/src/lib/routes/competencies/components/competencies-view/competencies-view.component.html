@@ -8,16 +8,16 @@
     </div>
   </mat-card-content>
   <mat-card-actions class="flex flex-row-reverse responsive">
-    <div class="mb-2 mr-2 flex view-more text-white others">
-      <a mat-button mat-dialog-close class="flex">
-        <span i18n>{{'Okey'}}</span>
+    <div class="mb-2 ml-2 mr-2 flex view-more text-white others">
+      <a href="javascript:void(0)" mat-button mat-dialog-close i18n-aria-label class="flex">
+        <span i18n>{{'Ok'}}</span>
       </a>
     </div>
-    <div class="mb-2 ml-4 mr-6 ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
-      <a mat-button *ngIf="isUpdate" (click)="remove()">
+    <div class="mb-2 ws-mat-accent-text view-all ws-mat-primary-lite-background-important wid-auro">
+      <a href="javascript:void(0)" mat-button i18n-aria-label *ngIf="isUpdate" (click)="remove()">
         <span i18n>{{'Remove from my list'}}</span>
       </a>
-      <a mat-button *ngIf="!isUpdate" (click)="add()">
+      <a href="javascript:void(0)" mat-button i18n-aria-label *ngIf="!isUpdate" (click)="add()">
         <span i18n>{{'Add to my competencies'}}</span>
       </a>
     </div>

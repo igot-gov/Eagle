@@ -32,6 +32,7 @@ import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
 import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
+import { ProfanityService } from '../../services/profanity.service'
 
 @Component({
   selector: 'ws-auth-file-upload',
@@ -51,6 +52,7 @@ export class FileUploadComponent implements OnInit {
   enableUpload = true
   duration = 0
   canUpdate = true
+  profanityData: any
   fileUploadCondition = {
     fileName: false,
     eval: false,
@@ -78,6 +80,7 @@ export class FileUploadComponent implements OnInit {
     private authInitService: AuthInitService,
     private valueSvc: ValueService,
     private accessService: AccessControlService,
+    private profanityService: ProfanityService,
   ) { }
 
   ngOnInit() {
@@ -88,8 +91,30 @@ export class FileUploadComponent implements OnInit {
       this.currentContent = data
       this.triggerDataChange()
     })
-  }
+    // this.profanityData = {
+    //   overAllOffensivescore: 0.996727610651836,
+    //   fileName: 'FINAL_14_03_2020_ENg1602233642821.pdf',
+    //   totalPageUploaded: 1,
+    //   profanityWordCount: 0,
+    //   pagesWithImages: 1,
+    //   profanityClassifications: {
+    //     bastard: {
+    //       offenceCategory: 'Offensive',
+    //       occurenceOnPage: [1, 2, 3],
+    //       totalWordCount: 3,
+    //     },
+    //     fuck: {
+    //       offenceCategory: 'Offensive',
+    //       occurenceOnPage: [1, 2, 3],
+    //       totalWordCount: 3,
+    //     },
+    //   },
+    //   imagesOccurrenceOnPageNo: [
+    //     1, 3, 5, 5,
+    //   ],
+    // }
 
+  }
   triggerDataChange() {
     const updatedMeta = this.contentService.getUpdatedMeta(this.currentContent)
     if (
@@ -317,12 +342,14 @@ export class FileUploadComponent implements OnInit {
           //     .startEncoding(v.authArtifactURL || v.artifactURL, this.currentContent)
           //     .pipe(map(() => v))
           // }
+          if (this.mimeType === 'application/pdf') {
+            this.profanityCheckAPICall(v.downloadURL)
+          }
           return of(v)
         }),
       )
       .subscribe(
         _ => {
-          this.loaderService.changeLoad.next(false)
           this.storeData()
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -330,12 +357,12 @@ export class FileUploadComponent implements OnInit {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          // this.data.emit('saveAndNext')
-          this.start()
-
+          if (this.mimeType !== 'application/pdf') {
+            this.data.emit('saveAndNext')
+          }
         },
         () => {
-          this.loaderService.changeLoad.next(false)
+          // this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
               type: Notify.UPLOAD_FAIL,
@@ -345,11 +372,21 @@ export class FileUploadComponent implements OnInit {
         },
       )
   }
-  start() {
+  profanityCheckAPICall(url: string) {
+    this.profanityService.featchProfanity(this.currentContent, url).subscribe(data => {
+      this.profanityData = data
+      if (this.profanityData !== null && this.profanityData !== undefined) {
+        this.startProfanityPopup()
+      }
+    })
+  }
+  startProfanityPopup() {
+    this.loaderService.changeLoad.next(false)
     const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
       minHeight: 'auto',
       width: '80%',
       panelClass: 'remove-pad',
+      data: this.profanityData,
     })
     dialogRef.afterClosed().subscribe((response: any) => {
       if (response === 'postCreated') {

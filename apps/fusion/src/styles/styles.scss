@@ -392,7 +392,7 @@ area {
 }
 
 .night-mode .ql-editor.ql-blank::before {
-  color: #cccccc;
+  color: rgba(0, 0, 0, 0.87);
 }
 
 .ws-widget-user-autocomplete {
@@ -547,6 +547,13 @@ h3.shepherd-title {
   font-size: 32px !important;
   height: 32px !important;
   width: 32px !important;
+}
+
+// top right menu
+.profile-link {
+  padding-left: $size-xs;
+  padding-right: 0;
+  padding-top: $size-xs;
 }
 
 // used at discussion start component

@@ -18,13 +18,13 @@
                     <div class="img-column">
                       <div class="profile-img-wrapper mt-10">
                         <mat-icon class="person" *ngIf="!photoUrl">person</mat-icon>
-                        <img class="photo" *ngIf="photoUrl" [src]="photoUrl">
+                        <img class="photo" *ngIf="photoUrl" [src]="photoUrl" [alt]="Avatar">
                         <div class="camera-wrapper cursor-pointer"
                           (click)="uploadProfilePic.click(); $event.stopPropagation()">
-                          <label for="profilePic" class="cursor-pointer" (click)="$event.stopPropagation()">
+                          <label id="profilePicLabel" for="uploadProfile" class="cursor-pointer" (click)="$event.stopPropagation()">
                             <mat-icon class="camera">photo_camera</mat-icon>
                           </label>
-                          <input id="profilePic" type="file" #uploadProfilePic class="hidden"
+                          <input id="uploadProfile" name="uploadProfileName" type="file" #uploadProfilePic class="hidden"
                             (change)="uploadProfileImg($event.target.files[0]); uploadProfilePic.value = null"
                             style="display: none;" [accept]="imageTypes.toString()" />
                         </div>
@@ -33,58 +33,68 @@
                     <div class="input-column px-2">
                       <div class="input-wrapper margin-top-s">
                         <label for="firstName" class=" margin-remove-bottom form-label required"
-                          i18n="First Name label|Label which explains the user to enter first name">
+                          i18n="First Name label|Label which explains the user to enter first name"
+                          i18n-aria-label aria-label="First Name label">
                           First Name
                         </label>
                         <mat-form-field appearance="outline" class="margin-top-xs">
                           <input id="firstName" matInput #firstname formControlName="firstname" i18n-placeholder
-                            placeholder="Enter First Name" />
+                            placeholder="Enter First Name" i18n-aria-label aria-label="First Name input"/>
                           <mat-error [hidden]="false" i18n="First Name Error|Explains name is required"
+                          i18n-aria-label aria-label="First Name Error|Explains name is required "
                             *ngIf="createUserForm?.controls['firstname'].errors?.required">
                             First name is mandatory
                           </mat-error>
-                          <mat-error [hidden]="false" *ngIf="createUserForm?.controls['firstname'].errors?.pattern">
+                          <mat-error [hidden]="false" *ngIf="createUserForm?.controls['firstname'].errors?.pattern"
+                          i18n-aria-label aria-label="First Name Error|Name fields cannot contain numbers and special characters except ">
                             Name fields cannot contain numbers and special characters except '
                           </mat-error>
                         </mat-form-field>
                       </div>
                       <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                         <label for="midleName" class=" margin-remove-bottom form-label"
-                          i18n="Middle Name label|Label which explains the user to enter Middle Name">
+                          i18n="Middle Name label|Label which explains the user to enter Middle Name"
+                          i18n-aria-label aria-label="Middle Name label">
                           Middle Name
                         </label>
                         <mat-form-field appearance="outline" class="margin-top-xs">
                           <input id="midleName" matInput #middlename formControlName="middlename" i18n-placeholder
-                            placeholder="Enter Middle Name" />
+                            placeholder="Enter Middle Name" i18n-aria-label aria-label="Middle Name input"/>
                           <mat-error [hidden]="false" i18n="Middle Name Error|Explains name is required"
-                            *ngIf="createUserForm?.controls['middlename'].errors?.required">
+                            *ngIf="createUserForm?.controls['middlename'].errors?.required"
+                            i18n-aria-label aria-label="Middle name is mandatory">
                             Middle name is mandatory
                           </mat-error>
-                          <mat-error [hidden]="false" *ngIf="createUserForm?.controls['middlename'].errors?.pattern">
+                          <mat-error [hidden]="false" *ngIf="createUserForm?.controls['middlename'].errors?.pattern"
+                          i18n-aria-label aria-label="Name fields cannot contain numbers and special characters except '">
                             Name fields cannot contain numbers and special characters except '
                           </mat-error>
                         </mat-form-field>
                       </div>
                       <div class="input-wrapper margin-top-s">
                         <label for="surName" class=" margin-remove-bottom form-label required"
-                          i18n="Surname label|Label which explains the user to enter Surname">
+                          i18n="Surname label|Label which explains the user to enter Surname"
+                          i18n-aria-label aria-label="Surname label">
                           Surname
                         </label>
                         <mat-form-field appearance="outline" class="margin-top-xs">
                           <input id="surName" matInput #surname formControlName="surname" i18n-placeholder
-                            placeholder="Enter Surname" />
+                            placeholder="Enter Surname" i18n-aria-label aria-label="Surname input field"/>
                           <mat-error [hidden]="false" i18n="Surname Error|Explains name is required"
-                            *ngIf="createUserForm?.controls['surname'].errors?.required">
+                            *ngIf="createUserForm?.controls['surname'].errors?.required"
+                            i18n-aria-label aria-label="Surname is mandatory error">
                             Surname is mandatory
                           </mat-error>
-                          <mat-error [hidden]="false" *ngIf="createUserForm?.controls['surname'].errors?.pattern">
+                          <mat-error [hidden]="false" *ngIf="createUserForm?.controls['surname'].errors?.pattern"
+                          i18n-aria-label aria-label="Surname field cannot contain numbers and special characters except '">
                             Name fields cannot contain numbers and special characters except '
                           </mat-error>
                         </mat-form-field>
                       </div>
                       <div class="input-wrapper margin-top-s">
                         <label for="birthDate" class=" margin-remove-bottom form-label required"
-                          i18n="Date of Birth|Label which explains the user to enter Date of Birth">
+                          i18n="Date of Birth|Label which explains the user to enter Date of Birth"
+                          i18n-aria-label aria-label="Date of Birth label">
                           Date of Birth (dd-mm-yyyy)
                         </label>
                         <mat-form-field appearance="outline" class="margin-top-xs">
@@ -92,7 +102,7 @@
                             i18n-placeholder (focus)="picker.open()" placeholder="Choose Date of Birth (dd-mm-yyyy)"
                             [min]="" [max]="today" readonly>
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker (closed)="dob.blur()"></mat-datepicker>
+                          <mat-datepicker #picker (closed)="dob.blur()" i18n-aria-label aria-label="Date picker"></mat-datepicker>
                           <mat-error [hidden]="false" i18n="Date of Birth Error|Explains name is required">
                             Date of Birth is mandatory
                           </mat-error>
@@ -100,43 +110,51 @@
                       </div>
                       <div class="input-wrapper margin-top-s">
                         <label for="country" class=" margin-remove-bottom form-label required"
-                          i18n="Nationality|Label which explains the user to enter Nationality">
+                          i18n="Nationality|Label which explains the user to enter Nationality"
+                          i18n-aria-label aria-label="Nationality Field label">
                           Nationality
                         </label>
                         <mat-form-field appearance="outline" class="margin-top-xs w-full">
                           <input id="country" matInput tab-directive type="text" placeholder="Nationality"
                             i18n-placeholder="Nationality" formControlName="nationality"
                             [matAutocomplete]="nationalityAutocomplete" i18n-aria-label aria-label="Nationality"
-                            #nationality />
+                            #nationality i18n-aria-label aria-label="Nationality Field input"/>
                           <mat-error [hidden]="false" i18n="Nationality Error|Explains Nationality is required"
-                            *ngIf="createUserForm?.controls['nationality'].errors?.required">
+                            *ngIf="createUserForm?.controls['nationality'].errors?.required"
+                            i18n-aria-label aria-label="Nationality is mandatory">
                             Nationality is mandatory
                           </mat-error>
-                          <mat-error *ngIf="createUserForm?.controls['nationality'].errors?.forbiddenNames">
+                          <mat-error *ngIf="createUserForm?.controls['nationality'].errors?.forbiddenNames"
+                          i18n-aria-label aria-label="You must enter value from suggested list only.">
                             You must enter value from suggested list only.
                           </mat-error>
                         </mat-form-field>
-                        <mat-autocomplete #nationalityAutocomplete="matAutocomplete" autoActiveFirstOption="true">
-                          <mat-option *ngFor="let option of masterNationality | async" [value]="option.name">
+                        <mat-autocomplete #nationalityAutocomplete="matAutocomplete" autoActiveFirstOption="true" 
+                        i18n-aria-label aria-label="Nationality list autocomplete">
+                          <mat-option *ngFor="let option of masterNationality | async" [value]="option.name" 
+                          i18n-aria-label aria-label="Nationality list autocomplete option">
                             {{ option.name }}
                           </mat-option>
                         </mat-autocomplete>
                       </div>
                       <div class="input-wrapper margin-top-s">
                         <label for="language" class=" margin-remove-bottom form-label required"
-                          i18n="Domicile Medium|Label which explains the user to enter Domicile Medium">
+                          i18n="Domicile Medium|Label which explains the user to enter Domicile Medium"
+                          i18n-aria-label aria-label="Domicile Medium (Mother Tongue)">
                           Domicile Medium (Mother Tongue)
                         </label>
                         <mat-form-field appearance="outline" class="margin-top-xs">
                           <input id="language" matInput type="text" placeholder="Mother Tongue"
                             i18n-placeholder="Mother Tongue" formControlName="domicileMedium"
-                            [matAutocomplete]="motherTongueAuto" i18n-aria-label aria-label="Mother Tongue"
+                            [matAutocomplete]="motherTongueAuto" i18n-aria-label aria-label="Domicile Medium (Mother Tongue)"
                             #motherTongue />
                           <mat-error [hidden]="false" i18n="domicileMedium Error|Explains Domicile Medium is required"
-                            *ngIf="createUserForm?.controls['domicileMedium'].errors?.required">
+                            *ngIf="createUserForm?.controls['domicileMedium'].errors?.required" 
+                            i18n-aria-label aria-label="Domicile Medium is mandatory">
                             Domicile Medium is mandatory
                           </mat-error>
-                          <mat-error *ngIf="createUserForm?.controls['domicileMedium'].errors?.forbiddenNames">
+                          <mat-error *ngIf="createUserForm?.controls['domicileMedium'].errors?.forbiddenNames"
+                          i18n-aria-label aria-label="You must enter value from suggested list only.">
                             You must enter value from suggested list only.
                           </mat-error>
                         </mat-form-field>
@@ -147,11 +165,16 @@
                         </mat-autocomplete>
                       </div>
                       <div class="input-wrapper margin-top-s">
-                        <label for="gender" class=" margin-remove-bottom form-label required"
-                          i18n="Gender |Label which explains the user to enter Gender">
-                          Gender
-                        </label>
-                        <!-- <mat-radio-group matInput aria-label="Select an option" formControlName="gender">
+                        <fieldset>
+                          <legend>
+                            <label class=" margin-remove-bottom form-label required"
+                              i18n="Gender |Label which explains the user to enter Gender"
+                              i18n-aria-label aria-label="Gender label">
+                              Gender
+                            </label>
+                          </legend>
+
+                          <!-- <mat-radio-group matInput aria-label="Select an option" formControlName="gender">
                           <span class="mx-2">
                             <mat-radio-button matInput class="my-1" [value]="eUserGender.MALE">
                               Male
@@ -168,27 +191,32 @@
                             </mat-radio-button>
                           </span>
                         </mat-radio-group> -->
-                        <div class="radio-toolbar">
-                          <input id="gender" type="radio" id="{{eUserGender.MALE}}" name="gender"
-                            formControlName="gender" [value]="eUserGender.MALE">
+                          <div class="radio-toolbar">
+                            <input id="gender" type="radio" id="{{eUserGender.MALE}}" name="gender"
+                              formControlName="gender" [value]="eUserGender.MALE" i18n-aria-label aria-label="Gender male input">
 
-                          <label for="{{eUserGender.MALE}}">{{eUserGender.MALE}}</label>
+                            <label for="{{eUserGender.MALE}}" i18n-aria-label aria-label="Gender male label">{{eUserGender.MALE}}</label>
 
-                          <input type="radio" id="{{eUserGender.FEMALE}}" name="gender" formControlName="gender"
-                            [value]="eUserGender.FEMALE">
-                          <label for="{{eUserGender.FEMALE}}">{{eUserGender.FEMALE}}</label>
+                            <input type="radio" id="{{eUserGender.FEMALE}}" name="gender" formControlName="gender"
+                              [value]="eUserGender.FEMALE" i18n-aria-label aria-label="Gender female input">
+                            <label for="{{eUserGender.FEMALE}}" i18n-aria-label aria-label="Gender female label">{{eUserGender.FEMALE}}</label>
 
-                          <input type="radio" id="{{eUserGender.OTHER}}" name="gender" formControlName="gender"
-                            [value]="eUserGender.OTHER">
-                          <label for="{{eUserGender.OTHER}}">{{eUserGender.OTHER}}</label>
-                        </div>
+                            <input type="radio" id="{{eUserGender.OTHER}}" name="gender" formControlName="gender"
+                              [value]="eUserGender.OTHER" i18n-aria-label aria-label="Gender other input">
+                            <label for="{{eUserGender.OTHER}}" i18n-aria-label aria-label="Gender other label">{{eUserGender.OTHER}}</label>
+                          </div>
+                        </fieldset>
+
                       </div>
                       <div class="input-wrapper margin-top-s">
-                        <label for="maritalStatus" class=" margin-remove-bottom form-label required"
-                          i18n="Marital Status |Label which explains the user to enter Marital Status">
-                          Marital Status
-                        </label>
-                        <!-- <mat-radio-group matInput aria-label="Select an option" formControlName="maritalStatus">
+                        <fieldset>
+                          <legend>
+                            <label class=" margin-remove-bottom form-label required"
+                              i18n="Marital Status |Label which explains the user to enter Marital Status">
+                              Marital Status
+                            </label>
+                          </legend>
+                          <!-- <mat-radio-group matInput aria-label="Select an option" formControlName="maritalStatus">
                           <span class="mx-2">
                             <mat-radio-button matInput class="my-1" [value]="eMaritalStatus.SINGLE">
                               Single
@@ -200,22 +228,28 @@
                             </mat-radio-button>
                           </span>
                         </mat-radio-group> -->
-                        <div class="radio-toolbar">
-                          <input id="maritalStatus" type="radio" id="{{eMaritalStatus.SINGLE}}" name="maritalStatus"
-                            formControlName="maritalStatus" [value]="eMaritalStatus.SINGLE">
-                          <label for="{{eMaritalStatus.SINGLE}}">{{eMaritalStatus.SINGLE}}</label>
+                          <div class="radio-toolbar">
+                            <input id="maritalStatus" type="radio" id="{{eMaritalStatus.SINGLE}}" name="maritalStatus"
+                              formControlName="maritalStatus" [value]="eMaritalStatus.SINGLE"
+                              i18n-aria-label aria-label="Marital Status single input">
+                            <label for="{{eMaritalStatus.SINGLE}}" i18n-aria-label aria-label="Marital Status single label">{{eMaritalStatus.SINGLE}}</label>
 
-                          <input type="radio" id="{{eMaritalStatus.MARRIED}}" name="maritalStatus"
-                            formControlName="maritalStatus" [value]="eMaritalStatus.MARRIED">
-                          <label for="{{eMaritalStatus.MARRIED}}">{{eMaritalStatus.MARRIED}}</label>
-                        </div>
+                            <input type="radio" id="{{eMaritalStatus.MARRIED}}" name="maritalStatus"
+                              formControlName="maritalStatus" [value]="eMaritalStatus.MARRIED"
+                              i18n-aria-label aria-label="Marital Status married input">
+                            <label for="{{eMaritalStatus.MARRIED}}" i18n-aria-label aria-label="Marital Status married label">{{eMaritalStatus.MARRIED}}</label>
+                          </div>
+                        </fieldset>
                       </div>
                       <div class="input-wrapper margin-top-s">
-                        <label for="category" class=" margin-remove-bottom form-label required"
-                          i18n="Category |Label which explains the user to enter Category">
-                          Category
-                        </label>
-                        <!-- <mat-radio-group matInput aria-label="Select an option" formControlName="category">
+                        <fieldset>
+                          <legend>
+                            <label class=" margin-remove-bottom form-label required"
+                              i18n="Category |Label which explains the user to enter Category">
+                              Category
+                            </label>
+                          </legend>
+                          <!-- <mat-radio-group matInput aria-label="Select an option" formControlName="category">
                           <span class="mx-2">
                             <mat-radio-button matInput class="my-1" [value]="eCategory?.GENERAL">
                               General
@@ -237,22 +271,24 @@
                             </mat-radio-button>
                           </span>
                         </mat-radio-group> -->
-                        <div class="radio-toolbar">
-                          <input id="category" type="radio" id="{{eCategory.GENERAL}}" name="category"
-                            formControlName="category" [value]="eCategory.GENERAL">
-                          <label for="{{eCategory.GENERAL}}">{{eCategory.GENERAL}}</label>
+                          <div class="radio-toolbar">
+                            <input id="category" type="radio" id="{{eCategory.GENERAL}}" name="category"
+                              formControlName="category" [value]="eCategory.GENERAL"
+                              i18n-aria-label aria-label="Category GENERAL input">
+                            <label for="{{eCategory.GENERAL}}" i18n-aria-label aria-label="Category GENERAL label">{{eCategory.GENERAL}}</label>
 
-                          <input type="radio" id="{{eCategory.OBC}}" name="category" formControlName="category"
-                            [value]="eCategory.OBC">
-                          <label for="{{eCategory.OBC}}">{{eCategory.OBC}}</label>
-                          <input type="radio" id="{{eCategory.SC}}" name="category" formControlName="category"
-                            [value]="eCategory.SC">
-                          <label for="{{eCategory.SC}}">{{eCategory.SC}}</label>
+                            <input type="radio" id="{{eCategory.OBC}}" name="category" formControlName="category"
+                              [value]="eCategory.OBC" i18n-aria-label aria-label="Category OBC input">
+                            <label for="{{eCategory.OBC}}" i18n-aria-label aria-label="Category OBC label">{{eCategory.OBC}}</label>
+                            <input type="radio" id="{{eCategory.SC}}" name="category" formControlName="category"
+                              [value]="eCategory.SC" i18n-aria-label aria-label="Category SC input">
+                            <label for="{{eCategory.SC}}" i18n-aria-label aria-label="Category SC label">{{eCategory.SC}}</label>
 
-                          <input type="radio" id="{{eCategory.ST}}" name="category" formControlName="category"
-                            [value]="eCategory.ST">
-                          <label for="{{eCategory.ST}}">{{eCategory.ST}}</label>
-                        </div>
+                            <input type="radio" id="{{eCategory.ST}}" name="category" formControlName="category"
+                              [value]="eCategory.ST" i18n-aria-label aria-label="Category ST input">
+                            <label for="{{eCategory.ST}}" i18n-aria-label aria-label="Category ST label">{{eCategory.ST}}</label>
+                          </div>
+                        </fieldset>
                       </div>
                     </div>
                   </div>
@@ -262,11 +298,12 @@
                 <div class="profile-cols bg-grey">
                   <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <p class=" margin-remove-bottom form-label"
-                      i18n="Other Languages Known label|Label which explains the user to enter Other Languages Known">
+                      i18n="Other Languages Known label|Label which explains the user to enter Other Languages Known"
+                      i18n-aria-label aria-label="Other Languages Known label">
                       Other Languages Known
                     </p>
                     <mat-form-field appearance="outline" class="w-full margin-top-xs">
-                      <mat-chip-list #chipList>
+                      <mat-chip-list #chipList title="chip input for selecting languages">
                         <mat-chip *ngFor="let lang of selectedKnowLangs" [selectable]="true" [removable]="true"
                           (removed)="removeKnowLanguage(lang)">
                           {{ lang }}
@@ -275,9 +312,10 @@
                         <input matInput i18n-placeholder="Known Languages" placeholder="Known Languages"
                           formControlName="knownLanguages" i18n-aria-label aria-label="Known Languages"
                           [matAutocomplete]="knownLanguagesAuto" #knownLanguagesInput [matChipInputFor]="chipList"
-                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" 
+                          i18n-aria-label aria-label="Other Languages Known input mutiple select autocomplete"/>
                       </mat-chip-list>
-                      <mat-error [hidden]="false" i18n="Telephone Number Error|Explains name is required">
+                      <mat-error [hidden]="false" i18n="Other Languages Known is mandatory">
                         Other Languages Known is mandatory
                       </mat-error>
                       <!-- <input matInput type="text" placeholder="known Languages" i18n-placeholder="known Languages" formControlName="knownLanguages"
@@ -292,23 +330,26 @@
                   </div>
                   <div class="input-wrapper margin-top-s">
                     <label for="mobileNumber" class=" margin-remove-bottom form-label required"
-                      i18n="Mobile Number label|Label which explains the user to enter Mobile Number">
+                      i18n="Mobile Number label|Label which explains the user to enter Mobile Number"
+                      i18n-aria-label aria-label="Mobile Number label">
                       Mobile Number
                     </label>
                     <div class="flex flex-align combined-field">
                       <mat-form-field appearance="outline" class="margin-top-xs w80">
-                        <mat-select formControlName="countryCode" i18n-placeholder placeholder="--Select--">
+                        <mat-select formControlName="countryCode" i18n-placeholder placeholder="--Select--"
+                        i18n-aria-label aria-label="Mobile Number label">
                           <mat-option [value]="code" *ngFor="let code of countryCodes">{{code}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       <mat-form-field appearance="outline" class="margin-top-xs flex-expand w-minus-w80">
                         <input id="mobileNumber" #mobile type="number" matInput placeholder="Mobile Number"
-                          formControlName="mobile">
+                          formControlName="mobile" i18n-aria-label aria-label="Mobile Number input">
                         <mat-error [hidden]="false" i18n="Mobile Number Error|Explains name is required"
-                          *ngIf="createUserForm?.controls['mobile'].errors?.required">
+                          *ngIf="createUserForm?.controls['mobile'].errors?.required" i18n-aria-label aria-label="Mobile Number is mandatory">
                           Mobile Number is mandatory
                         </mat-error>
-                        <mat-error [hidden]="false" *ngIf="createUserForm?.controls['mobile'].errors?.pattern">
+                        <mat-error [hidden]="false" *ngIf="createUserForm?.controls['mobile'].errors?.pattern"
+                        i18n-aria-label aria-label="Please enter a valid 10 digit mobile number">
                           Please enter a valid 10 digit mobile number
                         </mat-error>
                         <!-- <mat-error *ngIf="createUserForm?.controls['mobile'].errors?.required">This field is mandatory.</mat-error>
@@ -318,16 +359,18 @@
                   </div>
                   <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <label for="telephoneNumber" class=" margin-remove-bottom form-label"
-                      i18n="Telephone Number label|Label which explains the user to enter Telephone Number">
+                      i18n="Telephone Number label|Label which explains the user to enter Telephone Number"
+                      i18n-aria-label aria-label="Telephone Number (e.g., 0123-26104183 or 012327204281)">
                       Telephone Number (e.g., 0123-26104183 or 012327204281)
                     </label>
                     <mat-form-field appearance="outline" class="margin-top-xs">
                       <input id="telephoneNumber" #telephone type="text" matInput placeholder="Telephone Number"
-                        formControlName="telephone">
+                        formControlName="telephone" i18n-aria-label aria-label="Telephone Number input field">
                       <mat-error [hidden]="false" *ngIf="createUserForm?.controls['telephone'].errors?.pattern">
                         Please enter a valid telephone number (e.g., 0123-26104183 or 012327204281)
                       </mat-error>
                       <mat-error [hidden]="false" i18n="Telephone Number Error|Explains name is required"
+                      i18n-aria-label aria-label="Telephone Number Error|Explains name is required"
                         *ngIf="createUserForm?.controls['telephone'].errors?.required">
                         Telephone Number is mandatory
                       </mat-error>
@@ -335,12 +378,13 @@
                   </div>
                   <div class="input-wrapper margin-top-s">
                     <label for="primaryEmail" class=" margin-remove-bottom form-label required"
-                      i18n="Primary Email label|Label which explains the user to enter Primary Email">
+                      i18n="Primary Email label|Label which explains the user to enter Primary Email"
+                      i18n-aria-label aria-label="Primary Email label">
                       Primary Email
                     </label>
                     <mat-form-field appearance="outline" class="margin-top-xs no-pb">
-                      <input id="primaryEmail" type="primaryEmail" matInput placeholder="Primary Email" #primaryEmail
-                        formControlName="primaryEmail" readonly>
+                      <input id="primaryEmail" name="primaryEmailField" type="email" matInput placeholder="Primary Email" #primaryEmail
+                        formControlName="primaryEmail" readonly i18n-aria-label aria-label="Primary Email readonly input">
                       <mat-error [hidden]="false" i18n="Primary Email Error|Explains name is required">
                         Primary Email is mandatory
                       </mat-error>
@@ -348,58 +392,67 @@
                     <div class="input-wrapper margin-top-s margin-bottom-s">
                       <div class="flex flex-middle">
                         <mat-checkbox aria-label="This is my official email" id="officialEmail"
-                          [checked]="isOfficialEmail" (change)="officialEmailCheck()">
+                          [checked]="isOfficialEmail" (change)="officialEmailCheck()" i18n-aria-label aria-label="This is my official email checkbox">
+                          <label class="margin-left-xs margin-remove-bottom" i18n-aria-label aria-label="This is my official email checkbox label">
+                            This is my official email
+                          </label>
                         </mat-checkbox>
-                        <p class="margin-left-xs margin-remove-bottom">
-                          This is my official email
-                        </p>
                       </div>
                     </div>
                   </div>
 
                   <div class="input-wrapper margin-top-s" *ngIf="!isForcedUpdate">
                     <label for="secondaryEmail" class=" margin-remove-bottom form-label"
+                    i18n-aria-label aria-label="Secondary Email label"
                       i18n="Secondary Email label|Label which explains the user to enter Secondary Email">
                       Secondary Email
                     </label>
                     <mat-form-field appearance="outline" class="w-full margin-top-xs">
                       <input id="secondaryEmail" type="email" matInput placeholder="Secondary Email"
-                        formControlName="secondaryEmail">
+                        formControlName="secondaryEmail" i18n-aria-label aria-label="Secondary Email input filed">
                     </mat-form-field>
                   </div>
                   <div class="input-wrapper margin-top-s">
                     <label for="postalAddress" class=" margin-remove-bottom form-label required"
-                      i18n="Postal Address label|Label which explains the user to enter Postal Address">
+                      i18n="Postal Address label|Label which explains the user to enter Postal Address"
+                      i18n-aria-label aria-label="Postal Address label">
                       Postal Address
                     </label>
                     <mat-form-field appearance="outline" class="w-full margin-top-xs">
                       <textarea id="postalAddress" matInput [matTextareaAutosize] [matAutosizeMaxRows]="10"
                         [matAutosizeMinRows]="3" maxlength="200" formControlName="residenceAddress"
-                        placeholder="Type Your Residence Address Here" i18n-placeholder #residenceAddress></textarea>
+                        placeholder="Type Your Residence Address Here" i18n-placeholder #residenceAddress
+                        i18n-aria-label aria-label="Postal Address textarea input"></textarea>
                       <!-- <input matInput #residenceAddress formControlName="residenceAddress" i18n-placeholder
                         placeholder="Enter Postal Address Here" [required]="true" /> -->
                       <mat-hint align="end">{{ residenceAddress.value.length }} /200 characters</mat-hint>
                       <mat-error [hidden]="false" i18n="Postal address error |Explains Postal address is required"
-                        *ngIf="createUserForm?.controls['residenceAddress'].errors?.required">
+                        *ngIf="createUserForm?.controls['residenceAddress'].errors?.required"
+                        i18n-aria-label aria-label="Postal address error |Explains Postal address is required">
                         Postal Address is mandatory
                       </mat-error>
-                      <mat-error i18n *ngIf="createUserForm?.controls['residenceAddress'].errors?.maxlength">
+                      <mat-error i18n *ngIf="createUserForm?.controls['residenceAddress'].errors?.maxlength"
+                      i18n-aria-label aria-label="Postal address error |You have exceeded 200 characters">
                         You have exceeded 200 characters.
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="input-wrapper margin-top-s">
                     <label for="pinCode" class=" margin-remove-bottom form-label required"
-                      i18n="Pin Code label|Label which explains the user to enter Pin Code">
+                      i18n="Pin Code label|Label which explains the user to enter Pin Code"
+                      i18n-aria-label aria-label="Pin Code label">
                       Pin Code
                     </label>
                     <mat-form-field appearance="outline" class="margin-top-xs">
-                      <input id="pinCode" #pincode type="text" matInput placeholder="123456" formControlName="pincode">
-                      <mat-error [hidden]="false" i18n="Pin Code Error|Explains name is required"
-                        *ngIf="createUserForm?.controls['pincode'].errors?.required">
+                      <input id="pinCode" #pincode type="text" matInput placeholder="123456" formControlName="pincode"
+                      i18n-aria-label aria-label="Pin Code inpput field">
+                      <mat-error [hidden]="false" i18n="Pin Code Error|Explains pincode is required"
+                        *ngIf="createUserForm?.controls['pincode'].errors?.required"
+                        i18n-aria-label aria-label="Pin Code Error|Explains pincode is required">
                         Pin Code is mandatory
                       </mat-error>
-                      <mat-error [hidden]="false" *ngIf="createUserForm?.controls['pincode'].errors?.pattern">
+                      <mat-error [hidden]="false" *ngIf="createUserForm?.controls['pincode'].errors?.pattern"
+                      i18n-aria-label aria-label="Pin Code Error|Please enter a valid 6 digit pincode">
                         Please enter a valid 6 digit pincode
                       </mat-error>
                     </mat-form-field>

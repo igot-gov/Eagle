@@ -18,7 +18,7 @@ export class PageComponent extends WidgetBaseComponent
   @Input() widgetData: NsPage.IPage | null = null
   @Input()
   @HostBinding('id')
-  public id!: string
+  public id = `page_${Math.random()}`
   pageData: NsPage.IPage | null = null
   oldData: NsPage.IPage | null = null
   private responseSubscription: Subscription | null = null

@@ -17,7 +17,7 @@ export class ProfileCareerComponent extends WidgetBaseComponent implements OnIni
     // console.log(this.widgetData)
   }
   paDate(date: any): string {
-    const dat = moment(date, 'dd-mm-yyyy').toDate()
+    const dat = moment(date, 'DD-MM-YYYY').toDate()
     return dat.toDateString()
   }
 }

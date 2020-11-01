@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 
 @Component({
@@ -13,6 +13,8 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
   @Input()
   widgetData!: any
   item: any
+  @HostBinding('id')
+  public id = `activity_${Math.random()}`
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
       if (this.widgetData.content.hasOwnProperty('totalDuration')) {

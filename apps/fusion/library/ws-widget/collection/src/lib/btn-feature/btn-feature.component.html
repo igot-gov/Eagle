@@ -103,8 +103,9 @@
   </a>
 </ng-template>
 <ng-template #cardMini let-actionBtn="actionBtn" let-config="config">
-  <a role="button" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal"
-    routerLinkActive="ws-mat-selected-home-menu" class="flex items-center flex-col px-4 box-sizing-box rem">
+  <a role="link" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal"
+    [attr.aria-label]="actionBtn.name" role="link" routerLinkActive="ws-mat-selected-home-menu"
+    class="flex items-center flex-col px-4 box-sizing-box rem">
     <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon>
     <span *ngIf="!config.hideTitle" [ngClass]="instanceVal === 'RootOrg' && showFixedLength ? 'title font-sans' :
       'mat-caption'">{{ actionBtn.name }}</span>
@@ -127,7 +128,7 @@
           scale: 1.7,
           color: actionBtn.color
         }"></ng-container>
-      <div class="mt-2 text-center" *ngIf="!config.useShortName">{{ actionBtn.name }}</div>
+      <div class="mt-2 text-center" *ngIf="!config.useShortName" [attr.id]="actionBtn.icon">{{ actionBtn.name }}</div>
       <div class="mt-2 text-center" *ngIf="config.useShortName">
         {{ actionBtn.shortName }}
       </div>
@@ -138,8 +139,8 @@
 </ng-template>
 <ng-template #icon let-iconType="iconType" let-icon="icon" let-scale="scale" let-color="color">
   <ng-container *ngIf="!badgeCount.length">
-    <mat-icon *ngIf="iconType === 'mat-icon'" aria-hidden="false" [attr.aria-label]="widgetData.actionBtnName"
-      [color]="color" [ngStyle]="
+    <mat-icon *ngIf="iconType === 'mat-icon'" role="img" aria-hidden="false" [attr.aria-label]="icon"
+      [attr.aria-labelledby]="icon" [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',
@@ -152,9 +153,9 @@
     </mat-icon>
   </ng-container>
   <ng-container *ngIf="badgeCount.length">
-    <mat-icon matBadge="{{ badgeCount }}" matBadgeColor="accent" aria-hidden="false"
-      [attr.aria-label]="widgetData.actionBtnName" class="badge-notify" matBadgeSize="small"
-      *ngIf="iconType === 'mat-icon'" [color]="color" [ngStyle]="
+    <mat-icon matBadge="{{ badgeCount }}" matBadgeColor="accent" aria-hidden="false" role="img" [attr.aria-label]="icon"
+      [attr.aria-labelledby]="icon" class="badge-notify" matBadgeSize="small" *ngIf="iconType === 'mat-icon'"
+      [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',

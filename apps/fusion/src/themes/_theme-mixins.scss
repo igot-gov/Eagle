@@ -184,11 +184,11 @@
     //   background: $colorPrimary;
     // }
     .mat-chip.mat-standard-chip {
-      color: $colorPrimary !important;
-      background: $colorPrimaryDark !important;
+      color: $colorPrimaryDark !important;
+      // background: $colorPrimaryDark !important;
 
       mat-icon {
-        color: $colorAccentDark !important;
+        color: $colorPrimaryDark !important;
         opacity: 1 !important;
       }
     }
@@ -239,8 +239,8 @@
     }
 
     .mat-copmetence {
-      background-color: #ededed;
-      color: black !important;
+      background-color: black !important;
+      color: #ededed;
     }
   }
 
@@ -326,11 +326,11 @@
     }
 
     .mat-chip.mat-standard-chip {
-      color: $colorAccent !important;
+      color: $colorPrimaryDark !important;
       // background: $colorAccentLight;
 
       mat-icon {
-        color: $colorAccentDark !important;
+        color: $colorPrimaryDark !important;
         opacity: 1 !important;
       }
     }

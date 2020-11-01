@@ -1,8 +1,8 @@
 <mat-toolbar [color]="primaryNavbarBackground?.color" [ngStyle]="primaryNavbarBackground?.styles"
   class="mat-elevation-z3 custom mobile">
-  <div class="fix-ww " role="main">
+  <div class="fix-ww " role="toolbar">
     <ng-container *ngIf="mode === 'top'">
-      <a routerLink="/page/home" class="logo-dim" role="navigation">
+      <a routerLink="/page/home" class="logo-dim" role="link">
         <img [src]="appIcon" alt="Application Logo" class="app-logo" />
       </a>
       <!-- <span class="spacer"></span> -->

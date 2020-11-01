@@ -1,6 +1,7 @@
 <div class="flex flex-1 margin-top-m flex-column">
   <ng-container>
     <mat-form-field appearance="outline" class="margin-top-m max-width">
+      <mat-label>{{ 'Search' }}</mat-label>
       <input matInput #question autocomplete="off" maxlength="20" [(ngModel)]="query" i18n-placeholder
         placeholder="Search by name" [required]="false" />
       <mat-icon matPrefix>search</mat-icon>

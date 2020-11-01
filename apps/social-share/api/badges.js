@@ -1,21 +1,21 @@
 const express = require("express");
 const router = express.Router();
-var request = require("request");
 
-request.gzip = true;
-
-router.get("/toc/:userId/:id", function (req, res) {
-  console.log("api service started"); 
-  let URL = `http://lex-core:7001/v1/content/hierarchy/${req.params.id}?hierarchyType=minimal`;
+router.get("/badges/:userId/:id", function (req, res) {
+  console.log("api service started");
+  console.log("user id : userId"); 
+  let URL = `http://lex-core:7001/v3/users/${req.params.userId}/badges`;
   let data;
-
   request(
     {
       headers: {
         "content-type": "application/json",
-        rootorg: "igot",
-        org: "dopt",
-        wid: req.params.userId,
+        rootorg: req.get("rootorg") ? req.get("rootorg") : "igot",
+        org: req.get("org") ? req.get("org") : "dopt",
+        wid: req.get("wid")
+          ? req.get("wid")
+          : "9cdd9f76-2584-4ae5-940d-3f51dce020dc",
+        //authorization: req.get("authorization"),
       },
       uri: URL,
       method: "POST",
@@ -33,7 +33,7 @@ router.get("/toc/:userId/:id", function (req, res) {
         console.log("error:", err);
         res.send(err);
       } else {
-        console.log("api successful"); 
+        console.log("api successful");
         data = JSON.parse(body);
         if (data) {
           var html = `<!DOCTYPE html>
