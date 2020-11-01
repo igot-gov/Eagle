@@ -22,11 +22,15 @@ router.get("/badge/:userId/:id", function (req, res) {
         res.send(err);
       } else {
 
-        res.send('test');
-        console.log("api successful",JSON.parse(body));
-        badges = JSON.parse(body);       
-        //badge = _.where(badges.earned, {badge_id: req.params.id});
-        badge = badges.earned[0];
+        if (typeof body === "string"){
+          JSON.parse(body)
+          badges = body;  
+        }else{
+          badges = body; 
+        }
+          
+        badge = _.where(badges.earned, {badge_id: req.params.id});
+       
         if (badge) {
           var html = `<!DOCTYPE html>
             <html lang="en">
