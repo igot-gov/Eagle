@@ -26,7 +26,7 @@ router.get("/badge/:userId/:id", function (req, res) {
         console.log("api successful",JSON.parse(body));
         badges = JSON.parse(body);       
         //badge = _.where(badges.earned, {badge_id: req.params.id});
-        badge = badges[0];
+        badge = badges.earned[0];
         if (badge) {
           var html = `<!DOCTYPE html>
             <html lang="en">
