@@ -10,7 +10,6 @@ router.get("/badge/:userId/:id", function (req, res) {
   request(
     {
       headers: {
-        "content-type": "application/json",
         local: "en",
         rootOrg :"igot"
       },
@@ -22,95 +21,97 @@ router.get("/badge/:userId/:id", function (req, res) {
         console.log("error:", err);
         res.send(err);
       } else {
-        console.log("api successful",JSON.parse(body));
-        badges = JSON.parse(body);       
-        badge = _.where(badges.earned, {badge_id: req.params.id});
-        if (badge) {
-          var html = `<!DOCTYPE html>
-            <html lang="en">
-              <head>             
-                <meta charset="utf-8" />
-                <title>"${badge.badge_name}"</title>
-                <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
-                " />
-                <meta id="id-social-description" name="description"  content="${
-                  badge.message
-                }">             
-                <meta property="og:type" content="website">
-                <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
-                <meta property="og:title" content="${badge.badge_name}" />
-                <meta property="og:description" content="${badge.message}" />
-                <meta property="og:image" content="${badge.image}" />  
-                <meta property="og:image:secure_url" content="${
-                  badge.image
-                }" />        
+
+        res.send('test');
+        // console.log("api successful",JSON.parse(body));
+        // badges = JSON.parse(body);       
+        // badge = _.where(badges.earned, {badge_id: req.params.id});
+        // if (badge) {
+        //   var html = `<!DOCTYPE html>
+        //     <html lang="en">
+        //       <head>             
+        //         <meta charset="utf-8" />
+        //         <title>"${badge.badge_name}"</title>
+        //         <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
+        //         " />
+        //         <meta id="id-social-description" name="description"  content="${
+        //           badge.message
+        //         }">             
+        //         <meta property="og:type" content="website">
+        //         <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
+        //         <meta property="og:title" content="${badge.badge_name}" />
+        //         <meta property="og:description" content="${badge.message}" />
+        //         <meta property="og:image" content="${badge.image}" />  
+        //         <meta property="og:image:secure_url" content="${
+        //           badge.image
+        //         }" />        
             
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
-                <meta property="twitter:title" content="${data.name}" />
-                <meta property="twitter:description" content="${
-                  data.description
-                }" />
-                <meta property="twitter:image" content="${badge.image}" />
-                <style>
-                a {
-                  text-decoration: none;
-                  font-size: 22px;
-                  color: black;
-                  display: flex;
-                }
-                .card-container {
-                  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
-                    0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
-                  width: 340px;
-                  height: 120px;
-                  margin: 20px 10px;
-                  display: flex;
-                  padding: 16px;
-                  border-radius: 4px;
-                  font-family: Lato;
-                }
-                .badge-data {
-                  margin-top: 5px;
-                  margin-left: 16px;
-                }
-                .title {
-                  font: 600 16px/24px Montserrat;
-                  margin: 0;
-                }
-                .message {
-                  font: 400 14px/24px Montserrat;
-                }
-                .badge-img {
-                  width: 94px;
-                }
+        //         <meta property="twitter:card" content="summary_large_image" />
+        //         <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
+        //         <meta property="twitter:title" content="${data.name}" />
+        //         <meta property="twitter:description" content="${
+        //           data.description
+        //         }" />
+        //         <meta property="twitter:image" content="${badge.image}" />
+        //         <style>
+        //         a {
+        //           text-decoration: none;
+        //           font-size: 22px;
+        //           color: black;
+        //           display: flex;
+        //         }
+        //         .card-container {
+        //           box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+        //             0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+        //           width: 340px;
+        //           height: 120px;
+        //           margin: 20px 10px;
+        //           display: flex;
+        //           padding: 16px;
+        //           border-radius: 4px;
+        //           font-family: Lato;
+        //         }
+        //         .badge-data {
+        //           margin-top: 5px;
+        //           margin-left: 16px;
+        //         }
+        //         .title {
+        //           font: 600 16px/24px Montserrat;
+        //           margin: 0;
+        //         }
+        //         .message {
+        //           font: 400 14px/24px Montserrat;
+        //         }
+        //         .badge-img {
+        //           width: 94px;
+        //         }
           
-                .image-container {
-                  box-sizing: border-box;
-                  width: 114px;
-                }             
-                </style>
-              </head>
-              <body>
-              <div class="card-container">
-                  <a href="https://d136953gtttd92.cloudfront.net/app/profile/competency/badges">
-                    <div class="image-container">
-                      <img
-                        class="badge-img"
-                        src="${badge.image}"
-                      />
-                    </div>
-                    <div class="badge-data">
-                      <p class="title">${badge.badge_name}</p>
-                      <p class="message">${badge.message}</p>
-                    </div>
-                  </a> 
-                </div>                  
-              </body>
-            </html>          
-              `;
-          res.send(html);
-        }
+        //         .image-container {
+        //           box-sizing: border-box;
+        //           width: 114px;
+        //         }             
+        //         </style>
+        //       </head>
+        //       <body>
+        //       <div class="card-container">
+        //           <a href="https://d136953gtttd92.cloudfront.net/app/profile/competency/badges">
+        //             <div class="image-container">
+        //               <img
+        //                 class="badge-img"
+        //                 src="${badge.image}"
+        //               />
+        //             </div>
+        //             <div class="badge-data">
+        //               <p class="title">${badge.badge_name}</p>
+        //               <p class="message">${badge.message}</p>
+        //             </div>
+        //           </a> 
+        //         </div>                  
+        //       </body>
+        //     </html>          
+        //       `;
+        //   res.send(html);
+        // }
       }
     }
   );
