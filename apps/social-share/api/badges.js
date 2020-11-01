@@ -45,16 +45,12 @@ router.get("/badge/:userId/:id", function (req, res) {
                 <meta property="og:title" content="${badge.badge_name}" />
                 <meta property="og:description" content="${badge.message}" />
                 <meta property="og:image" content="${badge.image}" />  
-                <meta property="og:image:secure_url" content="${
-                  badge.image
-                }" />        
+                <meta property="og:image:secure_url" content="${badge.image}" />        
             
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
-                <meta property="twitter:title" content="${data.name}" />
-                <meta property="twitter:description" content="${
-                  data.description
-                }" />
+                <meta property="twitter:title" content="${badge..badge_name}" />
+                <meta property="twitter:description" content="${badge.message}" />
                 <meta property="twitter:image" content="${badge.image}" />
                 <style>
                 a {
