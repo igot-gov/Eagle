@@ -84,6 +84,9 @@ public class BadgeController {
 	public ResponseEntity<Map<String, Object>> generateBadges(@RequestHeader String rootOrg,
 			@PathVariable("userId") String userId,
 			@RequestHeader(name = "langCode", required = false) List<String> language) throws Exception {
+		System.out.println("rootOrg "+rootOrg);
+		System.out.println("userId "+userId);
+
 		return new ResponseEntity<Map<String, Object>>(badgeService.getAllBadges(rootOrg, userId, language),
 				HttpStatus.CREATED);
 	}
