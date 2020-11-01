@@ -49,7 +49,7 @@ router.get("/badge/:userId/:id", function (req, res) {
             
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
-                <meta property="twitter:title" content="${badge..badge_name}" />
+                <meta property="twitter:title" content="${badge.badge_name}" />
                 <meta property="twitter:description" content="${badge.message}" />
                 <meta property="twitter:image" content="${badge.image}" />
                 <style>
