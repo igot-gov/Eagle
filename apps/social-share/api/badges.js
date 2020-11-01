@@ -21,16 +21,14 @@ router.get("/badge/:userId/:id", function (req, res) {
         console.log("error:", err);
         res.send(err);
       } else {
-
         if (typeof body === "string"){
           JSON.parse(body)
           badges = body;  
         }else{
           badges = body; 
-        }
-          
+        }          
         badge = _.where(badges.earned, {badge_id: req.params.id});
-       
+        badge= badge[0];
         if (badge) {
           var html = `<!DOCTYPE html>
             <html lang="en">
