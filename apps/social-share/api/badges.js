@@ -34,7 +34,7 @@ router.get("/badge/:userId/:id", function (req, res) {
           badgeArray= badges.earned.filter(function(badge){
             return badge.badge_id == req.params.id;
           });
-          badge= badgeArray[0];
+          badge= badgeArray.length >0 ? badgeArray[0]:null;
         }
         //badge = _.where(badges.earned, {badge_id: req.params.id});
         
