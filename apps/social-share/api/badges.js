@@ -4,7 +4,7 @@ var request = require("request");
 
 router.get("/badge/:userId/:id", function (req, res) {
   let URL = `http://lex-core:7001/v3/users/${req.params.userId}/badges`;
-  console.log("api service started"); 
+  console.log("api service started");
   let badges;
   request(
     {
@@ -13,7 +13,7 @@ router.get("/badge/:userId/:id", function (req, res) {
         rootOrg: "igot",
       },
       uri: URL,
-      method: "GET"
+      method: "GET",
     },
     function (err, response, body) {
       if (err) {
@@ -25,7 +25,6 @@ router.get("/badge/:userId/:id", function (req, res) {
         } else {
           badges = body;
         }
-
         let badgeArray = [];
         let badge;
         if (badges.earned && badges.earned.length > 0) {
@@ -58,57 +57,66 @@ router.get("/badge/:userId/:id", function (req, res) {
               <meta property="twitter:card" content="summary_large_image" />
               <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="twitter:title" content="${badge.badge_name}" />
-              <meta property="twitter:description" content="${
-                badge.message
-              }" />
+              <meta property="twitter:description" content="${badge.message}" />
               <meta property="twitter:image" content="${badge.image}" />
               <style>
-                .social-card {
-                  box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
-                  max-width: 300px;
-                  margin: 16px;
-                  text-align: center;
-                  font-family: arial;
-                }
-                
-                .sub-card {
-                    padding: 10px;
-                  
-                }
-                
-                .title {
-                    font-size: 1.2rem;    
-                    font-weight: 600;
-                    color: rgba(0,0,0,.9);
-                }
-                
-                .desc{
-                  font-size: 0.6rem;  
-                    font-weight: 600;
-                    color: rgba(0,0,0,.9);    
-                }
-                
-                .social-card-img {	
-                  width:100%;   
-                }
-                
                 a {
                   text-decoration: none;
                   font-size: 22px;
                   color: black;
-                }                          
+                  display: flex;
+                }
+                .card-container {
+                  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+                    0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+                  width: 340px;
+                  height: 120px;
+                  margin: 20px 10px;
+                  display: flex;
+                  padding: 16px;
+                  border-radius: 4px;
+                  font-family: Lato;
+                }
+                  
+                .badge-data {
+                  margin-top: 5px;
+                  margin-left: 16px;
+                }
+
+                .title {
+                  font: 600 16px/24px Montserrat;
+                  margin: 0;
+                }
+
+                .message {
+                  font: 400 14px/24px Montserrat;
+                }
+
+                .badge-img {
+                  width: 94px;
+                }
+        
+                .image-container {
+                  box-sizing: border-box;
+                  width: 114px;
+                }             
               </style>
             </head>
             <body>
-              <div class="social-card">
-                <a href="https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview">
-                  <img src="${badge.image}" alt="${badge.badge_name}"  class="social-card-img" />
-                  <div class="sub-card">
-                    <pclass="title">${badge.badge_name}</p>
-                    <p class="desc">${badge.message}</p>
-                  </div>  
-                </a>   
-              </div>                       
+              <div class="card-container">
+                <a href="https://d136953gtttd92.cloudfront.net/app/profile/competency/badges">
+                  <div class="image-container">
+                    <img
+                      class="badge-img"
+                      src="${badge.image}"
+                    />
+                  </div>
+                  <div class="badge-data">
+                    <p class="title">${badge.badge_name}</p>
+                    <p class="message">${badge.message}</p>
+                  </div>
+                </a> 
+              </div>                            
             </body>
           </html>          
               `;
