@@ -39,7 +39,7 @@ router.get("/badge/:userId/:id", function (req, res) {
         //badge = _.where(badges.earned, {badge_id: req.params.id});
         
         if (badge) {
-          var html = `<!DOCTYPE html>
+          let html = `<!DOCTYPE html>
             <html lang="en">
               <head>             
                 <meta charset="utf-8" />
