@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { ConfigurationsService } from '../../../../utils/src/public-api'
 import { NsContent } from '../_services/widget-content.model'
@@ -15,6 +15,8 @@ export class BtnKbComponent implements OnInit {
   @Input() contentId!: string
   @Input() contentType!: NsContent.EContentTypes
   @Input() forPreview = false
+  @HostBinding('id')
+  public id = 'kb-content'
   showBtn = false
   constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) { }
 

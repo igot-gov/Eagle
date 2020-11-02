@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsContent } from '../_services/widget-content.model'
@@ -24,6 +24,8 @@ export class BtnGoalsComponent extends WidgetBaseComponent
   @Input() widgetData!: NsGoal.IBtnGoal
   @Input() forPreview = false
   @Input() status?: string
+  @HostBinding('id')
+  public id = 'add-togoal-content'
   isValidContent = false
   isGoalsEnabled = false
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { MatDialog } from '@angular/material'
 import { BtnContentFeedbackDialogComponent } from './btn-content-feedback-dialog/btn-content-feedback-dialog.component'
@@ -19,6 +19,8 @@ export class BtnContentFeedbackComponent extends WidgetBaseComponent
   @Input() widgetData!: IWidgetBtnContentFeedback
   @Input() forPreview = false
   isFeedbackEnabled = false
+  @HostBinding('id')
+  public id = 'content-feedback'
   constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) {
     super()
   }

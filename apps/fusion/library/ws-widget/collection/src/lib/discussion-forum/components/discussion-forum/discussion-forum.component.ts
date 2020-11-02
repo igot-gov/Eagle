@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core'
+import { Component, ElementRef, HostBinding, Input, OnInit, ViewChild } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, TFetchStatus } from '@ws-widget/utils'
@@ -14,7 +14,8 @@ import { WsDiscussionForumService } from '../../ws-discussion-forum.services'
 export class DiscussionForumComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<NsDiscussionForum.IDiscussionForumInput> {
   @Input() widgetData!: NsDiscussionForum.IDiscussionForumInput
-
+  @HostBinding('id')
+  public id = 'c-discuss-forum'
   @ViewChild('editorQuill', { static: true }) editorQuill: EditorQuillComponent | null = null
   @ViewChild('postEnabled', { static: true }) postEnabled: ElementRef<
     HTMLInputElement

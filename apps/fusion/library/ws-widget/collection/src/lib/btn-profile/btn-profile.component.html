@@ -10,7 +10,8 @@
   [fetchStatus]="catalogFetchStatus" isRoot="true">
 </ws-widget-tree-catalog-menu> -->
 
-<button mat-icon-button class="new-margin" #rootTrigger="matMenuTrigger" [matMenuTriggerFor]="settingsMenu">
+<button mat-icon-button class="new-margin" #rootTrigger="matMenuTrigger" [matMenuTriggerFor]="settingsMenu"
+  role="button">
   <span class="flex flex-column flex-middle">
     <ws-widget-avatar-photo [photoUrl]="profileImage" [name]="givenName" size="s">
     </ws-widget-avatar-photo>

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Subscription } from 'rxjs'
 import { ConfigurationsService, EventService, WsEvents } from '../../../../utils'
@@ -22,7 +22,8 @@ export class BtnContentLikeComponent extends WidgetBaseComponent
   @Input() likesCount = 0
   @Input() color: 'primary' | 'accent' | 'default' = 'default'
   @Input() forPreview = false
-
+  @HostBinding('id')
+  public id = 'like-content'
   status: 'LIKED' | 'NOT_LIKED' | 'PENDING' = 'PENDING'
   isRestricted = false
   rootOrg = this.configSvc.rootOrg

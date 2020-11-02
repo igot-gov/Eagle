@@ -98,7 +98,7 @@
               <span class="rating-count" *ngIf="!content?.totalRating">
                 ( {{ 0 | pipeCountTransform }} )</span>
             </div>
-            <div class="header-actions mt-8">
+            <div class="header-actions mt-8 mb-4">
               <ng-container *ngIf="
                   actionBtnStatus !== 'wait' &&
                   content?.status !== 'Deleted' &&
@@ -183,7 +183,7 @@
       <ng-container i18n>Access to this YouTube content is blocked.</ng-container>
     </p>
     <ws-widget-content-progress *ngIf="content?.identifier" [forPreview]="forPreview" [contentId]="content?.identifier"
-    [className]="'thick'" [progress]="content?.progress?.progress">
+      [className]="'thick'" [progress]="content?.progress?.progress">
     </ws-widget-content-progress>
   </div>
 </div>
@@ -204,24 +204,27 @@
     [routerLink]="['/author/editor/' + content?.identifier]">
     <mat-icon>publish</mat-icon>
   </a>
-  <ws-widget-btn-content-download [forPreview]="forPreview" [widgetData]="
+  <ws-widget-btn-content-download id="prevfordownload" [forPreview]="forPreview" [widgetData]="
       content
         | pipePartialContent
           : ['identifier', 'contentType', 'resourceType', 'mimeType', 'downloadUrl', 'isExternal',
                   'artifactUrl']
     "></ws-widget-btn-content-download>
-  <ws-widget-btn-content-like [forPreview]="forPreview" [widgetData]="content | pipePartialContent: ['identifier']"
-    [color]="default">
+  <ws-widget-btn-content-like id="prevforlike" [forPreview]="forPreview"
+    [widgetData]="content | pipePartialContent: ['identifier']" [color]="default">
   </ws-widget-btn-content-like>
-  <ws-widget-btn-content-share [forPreview]="forPreview" [widgetData]="content"></ws-widget-btn-content-share>
-  <ws-widget-btn-kb [forPreview]="forPreview" [contentId]="content?.identifier" [contentName]="content?.name"
+  <ws-widget-btn-content-share id="prevforshare" [forPreview]="forPreview" [widgetData]="content">
+  </ws-widget-btn-content-share>
+  <ws-widget-btn-kb [forPreview]="forPreview" id="prev" [contentId]="content?.identifier" [contentName]="content?.name"
     [contentType]="content?.contentType" [status]="content?.status">
   </ws-widget-btn-kb>
-  <ws-widget-btn-goals [forPreview]="forPreview" *ngIf="isGoalsEnabled && btnGoalsConfig" [widgetData]="btnGoalsConfig">
+  <ws-widget-btn-goals [forPreview]="forPreview" id="goalsforprev" *ngIf="isGoalsEnabled && btnGoalsConfig"
+    [widgetData]="btnGoalsConfig">
   </ws-widget-btn-goals>
-  <ws-widget-btn-playlist [forPreview]="forPreview" *ngIf="btnPlaylistConfig" [widgetData]="btnPlaylistConfig">
+  <ws-widget-btn-playlist [forPreview]="forPreview" id="playlistforprev" *ngIf="btnPlaylistConfig"
+    [widgetData]="btnPlaylistConfig">
   </ws-widget-btn-playlist>
-  <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview"
+  <ws-widget-btn-content-feedback-v2 [forPreview]="forPreview" id="feedbackforprev"
     [widgetData]="content | pipePartialContent: ['identifier', 'name']">
   </ws-widget-btn-content-feedback-v2>
 </ng-template>

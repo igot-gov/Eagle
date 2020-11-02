@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService } from '../../../../utils/src/public-api'
@@ -16,6 +16,8 @@ export class BtnContentShareComponent extends WidgetBaseComponent
   @Input() isDisabled = false
   @Input() showText = false
   @Input() forPreview = false
+  @HostBinding('id')
+  public id = 'share-content'
   showBtn = false
   isShareEnabled = false
 

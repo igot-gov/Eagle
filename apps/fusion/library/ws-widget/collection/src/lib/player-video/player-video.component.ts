@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { EventService } from '@ws-widget/utils'
@@ -48,6 +48,8 @@ export class PlayerVideoComponent extends WidgetBaseComponent
   @Input() widgetData!: IWidgetsPlayerMediaData
   @ViewChild('videoTag', { static: false }) videoTag!: ElementRef<HTMLVideoElement>
   @ViewChild('realvideoTag', { static: false }) realvideoTag!: ElementRef<HTMLVideoElement>
+  @HostBinding('id')
+  public id = 'v-player'
   private player: videoJs.Player | null = null
   private dispose: (() => void) | null = null
   constructor(

@@ -1,5 +1,5 @@
 import { Platform } from '@angular/cdk/platform'
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { MobileAppsService } from '../../../../../../src/app/services/mobile-apps.service'
@@ -24,7 +24,8 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IWidgetBtnDownload> {
   @Input() widgetData!: IWidgetBtnDownload
   @Input() forPreview = false
-
+  @HostBinding('id')
+  public id = 'download-content'
   downloadable = false
 
   constructor(
