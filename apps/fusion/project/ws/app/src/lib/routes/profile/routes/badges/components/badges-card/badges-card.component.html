@@ -16,5 +16,16 @@
       </div>
       <div class="mat-body margin-top-s">{{ badge.message }}</div>
     </div>
-  </div>
+    <ng-container>
+      <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="badgesMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #badgesMenu="matMenu" overlapTrigger="true">     
+        <button name="share-button-goal-card" mat-menu-item (click)="openShareBadgesDialog()">
+          <mat-icon>share</mat-icon>
+          <span>Share</span>
+        </button>    
+      </mat-menu>
+    </ng-container>
+  </div> 
 </mat-card>

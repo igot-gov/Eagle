@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "jade": "^1.11.0",
     "request": "^2.88.2",
-    "require": "^2.4.20"
+    "require": "^2.4.20",
+    "underscore": "^1.11.0"
   }
 }

@@ -44,12 +44,12 @@ export class DiscussionComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {
   }
   ngOnInit(): void {
-    this.data = this.route.snapshot.data.topic.data
-    this.paginationData = this.route.snapshot.data.topic.data.pagination
-    this.setPagination()
     this.route.params.subscribe(params => {
+      this.data = this.route.snapshot.data.topic.data
+      this.paginationData = this.route.snapshot.data.topic.data.pagination
+      this.setPagination()
       this.topicId = params.topicId
-       if (this.fetchNewData) {
+      if (this.data.posts && this.data.posts.length && this.data.posts[0].tid !== Number(this.topicId)) {
         this.getTIDData(this.currentActivePage)
       }
     })
