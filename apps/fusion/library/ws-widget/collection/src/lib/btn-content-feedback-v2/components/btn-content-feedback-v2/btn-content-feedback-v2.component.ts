@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { IWidgetBtnContentFeedbackV2 } from '@ws-widget/collection'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
@@ -14,6 +14,8 @@ export class BtnContentFeedbackV2Component extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IWidgetBtnContentFeedbackV2> {
   @Input() widgetData!: IWidgetBtnContentFeedbackV2
   @Input() forPreview = false
+  @HostBinding('id')
+  public id = 'v2-feedbak-content'
   isFeedbackEnabled = false
   constructor(private dialog: MatDialog, private configSvc: ConfigurationsService) {
     super()

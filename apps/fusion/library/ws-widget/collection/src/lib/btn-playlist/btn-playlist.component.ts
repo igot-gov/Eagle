@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { MatDialog } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
@@ -24,6 +24,8 @@ export class BtnPlaylistComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<NsPlaylist.IBtnPlaylist> {
   @Input() widgetData!: NsPlaylist.IBtnPlaylist
   @Input() forPreview = false
+  @HostBinding('id')
+  public id = 'playlist-content'
   playlistsFetchStatus: TFetchStatus = 'none'
   playlists: NsPlaylist.IPlaylist[] = []
   selectedPlaylists: string[] = []
