@@ -152,7 +152,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   }
   receiveMessage(msg: any) {
     /* tslint:disable-next-line */
-    console.log("msg=>", msg)
+    // console.log("msg=>", msg)
     if (msg.data) {
       this.raiseTelemetry(msg.data)
     } else {
@@ -221,7 +221,7 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   raiseTelemetry(data: any) {
     if (this.htmlContent) {
       /* tslint:disable-next-line */
-      console.log(this.htmlContent.identifier)
+      // console.log(this.htmlContent.identifier)
       this.events.raiseInteractTelemetry(data.event, 'scrom', {
         contentId: this.htmlContent.identifier,
         ...data,
