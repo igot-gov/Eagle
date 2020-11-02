@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, OnInit, Input, HostBinding } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 import { DiscussService } from '@ws/app/src/lib/routes/discuss/services/discuss.service'
 
@@ -16,6 +16,8 @@ import { Router } from '@angular/router'
 export class CardHomeDiscussComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
   discuss!: NSDiscuss.IDiscuss
+  @HostBinding('id')
+  public id = 'h-d-component'
   constructor(private discussService: DiscussService, private router: Router) {
     super()
   }

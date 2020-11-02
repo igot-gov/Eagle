@@ -19,7 +19,7 @@ TODO: edit option while preview Mode
 </ws-app-toc-banner>
 <ng-container>
   <div class="toc-container">
-    <div role="columnheader" class="toc-body" *ngIf="!errorCode; else tocError">
+    <div role="none" class="toc-body" *ngIf="!errorCode; else tocError">
       <div class="flex fixed-width">
         <nav mat-tab-nav-bar class="toc-links mat-app-background" aria-label="content navigation">
           <a mat-tab-link [routerLink]='"./single-page-view"' fragment="overview" i18n-aria-label aria-label="overview"

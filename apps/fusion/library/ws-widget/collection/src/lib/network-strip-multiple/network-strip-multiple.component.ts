@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsNetworkStripNewMultiple } from './network-strip-multiple.model'
 import { ContentStripNewMultipleService } from './network-strip-multiple.service'
@@ -45,7 +45,8 @@ export class NetworkStripMultipleComponent extends WidgetBaseComponent
   OnDestroy,
   NsWidgetResolver.IWidgetData<NsNetworkStripNewMultiple.INetworkStripMultiple> {
   @Input() widgetData!: NsNetworkStripNewMultiple.INetworkStripMultiple
-
+  @HostBinding('id')
+  public id = 'h-n-s-component'
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true
@@ -135,7 +136,7 @@ export class NetworkStripMultipleComponent extends WidgetBaseComponent
     let data = []
     if (contents) {
       data = contents.result.data.
-      find((item: any) => item.field === 'employmentDetails.departmentName').results
+        find((item: any) => item.field === 'employmentDetails.departmentName').results
     }
     return (data || []).map((content: any, idx: any) => ({
       widgetType: 'card',

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core'
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter, HostBinding } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { Subscription, fromEvent } from 'rxjs'
 import {
@@ -17,6 +17,8 @@ export class BtnFullscreenComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<{ fsContainer: HTMLElement | null }> {
   @Input() widgetData!: { fsContainer: HTMLElement | null }
   @Output() fsState: EventEmitter<boolean> = new EventEmitter()
+  @HostBinding('id')
+  public id = 'fullscreen'
 
   isFullScreenSupported = false
   isInFs = false
