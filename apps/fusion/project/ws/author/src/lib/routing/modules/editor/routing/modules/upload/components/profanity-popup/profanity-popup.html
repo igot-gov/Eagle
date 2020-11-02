@@ -5,12 +5,12 @@
 
       <div class="flex new-mobile">
         <div class="margin-top-xs margin-right-xs margin-left-xs flex-3">
-          <h3>Overall Offensive score: {{profanityData.overAllOffensivescore}}%</h3>
-          <p>{{profanityData.fileName}}</p>
-          <p>Total Pages Uploaded: {{profanityData.totalPageUploaded}}</p>
-          <p>Profanity word count: {{profanityData.profanityWordCount}}</p>
+          <h3>Overall Offensive score: {{profanityData.score}}%</h3>
+          <p>{{profanityData.pdfFileName}}</p>
+          <p>Total Pages Uploaded: {{profanityData.total_pages}}</p>
+          <p>Profanity word count: {{profanityData.profanity_word_count}}</p>
           <p>Pages with images: {{profanityData.pagesWithImages}}</p>
-          <p>Image Occurrence on Page No: {{profanityData.imagesOccurrenceOnPageNo}}</p>
+          <p>Image Occurrence on Page No: {{profanityData.total_page_images}}</p>
         </div>
         <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
           <p class="margin-remove-bottom">
@@ -50,11 +50,11 @@
           <div>
             <p><b>Profanity Word</b></p>
           </div>
-          <div *ngFor="let profanity of this.offensiveDataValueArray">
+          <div *ngFor="let profanity of profanityData.profanityWordList">
             <p><span [ngClass]="{'circle-orange':profanity.category ==='lightlyOffensive',
             'circle-red':profanity.category ==='Offensive',
             'circle-brown':profanity.category ==='extreamlyOffensive'}">
-              </span>&nbsp;{{profanity.name}}&nbsp;{{profanity.count}}</p>
+              </span>&nbsp;{{profanity.word}}&nbsp;{{profanity.no_of_occurrence}}</p>
 
           </div>
           <!-- <p><span class="circle-orange">
@@ -66,16 +66,16 @@
           <p>
             <b>Offence Category</b>
           </p>
-          <p *ngFor="let cat of offensiveValue">
-            {{cat.offenceCategory}}
+          <p *ngFor="let cat of profanityData.profanityWordList">
+            {{cat.category}}
           </p>
         </div>
         <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
           <p>
             <b>Occurance on Page</b>
           </p>
-          <p *ngFor="let occ of offensiveValue">
-            {{occ.occurenceOnPage}}
+          <p *ngFor="let occ of profanityData.profanityWordList">
+            {{occ.pageOccurred}}
           </p>
         </div>
         <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
