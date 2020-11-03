@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewChecked, HostListener } from '@angular/core'
+import { Component, OnDestroy, OnInit, AfterViewChecked, HostListener, ElementRef, ViewChild } from '@angular/core'
 import { ActivatedRoute, Data } from '@angular/router'
 import { NsContent, WidgetContentService } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
@@ -28,6 +28,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
   routeSubscription: Subscription | null = null
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   isCohortsRestricted = false
+  sticky = false
   isInIframe = false
   forPreview = window.location.href.includes('/author/')
   analytics = this.route.snapshot.data.pageData.data.analytics
@@ -62,6 +63,17 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
   showScroll!: boolean
   showScrollHeight = 300
   hideScrollHeight = 10
+  elementPosition: any
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset
+    if (windowScroll >= this.elementPosition - 100) {
+      this.sticky = true
+    } else {
+      this.sticky = false
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -95,7 +107,9 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
       this.currentFragment = fragment || 'overview'
     })
   }
-
+  ngAfterViewInit() {
+    this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
+  }
   ngOnDestroy() {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe()
@@ -168,27 +182,27 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked 
     )
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
-      this.showScroll = true
-    } else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop
-      || document.body.scrollTop) < this.hideScrollHeight) {
-      this.showScroll = false
-    }
-  }
+  // @HostListener('window:scroll', [])
+  // onWindowScroll() {
+  //   if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+  //     this.showScroll = true
+  //   } else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop
+  //     || document.body.scrollTop) < this.hideScrollHeight) {
+  //     this.showScroll = false
+  //   }
+  // }
 
-scrollToTop() {
-      (function smoothscroll() {
-        const currentScroll = document.documentElement.scrollTop || document.body.scrollTop
-        if (currentScroll > 0) {
-          // window.requestAnimationFrame(smoothscroll)
-          // window.scrollTo(0, currentScroll - (currentScroll / 5))
-          window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }
-      })()
-    }
+  scrollToTop() {
+    (function smoothscroll() {
+      const currentScroll = document.documentElement.scrollTop || document.body.scrollTop
+      if (currentScroll > 0) {
+        // window.requestAnimationFrame(smoothscroll)
+        // window.scrollTo(0, currentScroll - (currentScroll / 5))
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      }
+    })()
+  }
 }

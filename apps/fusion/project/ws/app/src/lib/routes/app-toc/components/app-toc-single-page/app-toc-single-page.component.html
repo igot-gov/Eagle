@@ -553,7 +553,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                     <div class="right flex flex-col flex-wrap right">
                         <div class="user-name mb-2">{{ author.name }}</div>
                         <!-- <div class="user-university">VTU Bangalore</div> -->
-                        <button class="user-button" *ngIf="loggedInUserId !== author.id"
+                        <button mat-button role="button" class="user-button" *ngIf="loggedInUserId !== author.id"
                             (click)="openQueryMailDialog(content, author)">
                             Ask
                         </button>
