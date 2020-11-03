@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 
 @Component({
@@ -11,6 +11,8 @@ import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 })
 export class ProfileCompetenciesComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData: any
+  @HostBinding('id')
+  public id = 'profile-comp'
   ngOnInit(): void {
   }
 
