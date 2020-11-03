@@ -26,12 +26,14 @@ router.get("/badge/:userId/:id", function (req, res) {
           badges = body;
         }
         let badgeArray = [];
-        let badge;
+        let badge,imagePath;
         if (badges.earned && badges.earned.length > 0) {
           badgeArray = badges.earned.filter(function (badge) {
             return badge.badge_id == req.params.id;
           });
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
+          let badgeImage= badge?badge.image:null;
+          imagePath=(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
         }
         //badge = _.where(badges.earned, {badge_id: req.params.id});
         if (badge) {
@@ -49,16 +51,16 @@ router.get("/badge/:userId/:id", function (req, res) {
               <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="og:title" content="${badge.badge_name}" />
               <meta property="og:description" content="${badge.message}" />
-              <meta property="og:image" content="${badge.image}" />  
+              <meta property="og:image" content="${imagePath}" />  
               <meta property="og:image:secure_url" content="${
-                badge.image
+                imagePath
               }" />        
           
               <meta property="twitter:card" content="summary_large_image" />
               <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="twitter:title" content="${badge.badge_name}" />
               <meta property="twitter:description" content="${badge.message}" />
-              <meta property="twitter:image" content="${badge.image}" />
+              <meta property="twitter:image" content="${imagePath}" />
               <style>
                 a {
                   text-decoration: none;
@@ -108,7 +110,7 @@ router.get("/badge/:userId/:id", function (req, res) {
                   <div class="image-container">
                     <img
                       class="badge-img"
-                      src="${badge.image}"
+                      src="${imagePath}"
                     />
                   </div>
                   <div class="badge-data">
