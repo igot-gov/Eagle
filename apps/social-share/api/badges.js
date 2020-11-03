@@ -34,7 +34,7 @@ router.get("/badge/:userId/:id", function (req, res) {
           });
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
           let badgeImage= badge?badge.image:null;
-          imagePath=(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
+          imagePath='https://d12iy889j4sfk0.cloudfront.net/assets/instances/eagle/Achievements/Badges/'+(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
         }
         //badge = _.where(badges.earned, {badge_id: req.params.id});
         if (badge) {
