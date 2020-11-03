@@ -104,13 +104,13 @@
             </div>
           </div>
           <div class="see-all-container">
-            <button type="button" (click)="viewChildren = !viewChildren" class="margin-left-m see-all-btn" mat-button
-              color="primary">
+            <a href="javascript:void(0)" role="button" (click)="viewChildren = !viewChildren"
+              class="margin-left-m see-all-btn tab" mat-button>
               <!-- <ng-container *ngIf="!viewChildren" i18n>See All</ng-container>
               <ng-container *ngIf="viewChildren" i18n>See Less</ng-container> -->
               <mat-icon *ngIf="!viewChildren">keyboard_arrow_down</mat-icon>
               <mat-icon *ngIf="viewChildren">keyboard_arrow_up</mat-icon>
-            </button>
+            </a>
           </div>
         </div>
       </div>

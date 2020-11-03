@@ -35,6 +35,10 @@
   }
 }
 
+.tab:focus {
+  outline: 1px solid !important;
+}
+
 .resource-container {
   display: flex;
   align-items: center;

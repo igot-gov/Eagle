@@ -4,8 +4,9 @@
       <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
       <!-- <mat-placeholder>Search user</mat-placeholder> -->
       <!-- <input [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput type="search"> -->
-      <input type="search" #searchInput class="ml-2"  [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" 
-      matInput type="search" [placeholder]="'Search user'"/>
+      <mat-label>Search user</mat-label>
+      <input type="search" #searchInput class="ml-2" [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput
+        type="search" [placeholder]="'Search user'" />
     </mat-form-field>
   </div>
   <div class="flex flex-1 mb-4">
@@ -16,12 +17,14 @@
       </mat-expansion-panel-header>
       <ng-template matExpansionPanelContent>
         <div>
-          <h4 class="w-full text-center ws-mat-black60-text" *ngIf="searchResultUserArray.length === 0 && !this.searchSpinner" i18n>
+          <h4 class="w-full text-center ws-mat-black60-text"
+            *ngIf="searchResultUserArray.length === 0 && !this.searchSpinner" i18n>
             No search results found!
           </h4>
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 col-gap-4">
             <ng-container *ngFor="let user of searchResultUserArray">
-              <ws-app-connection-search-card class="mr-4 mb-5" [user]="user" (connection)="connectionUpdateSearchCard($event)"></ws-app-connection-search-card>
+              <ws-app-connection-search-card class="mr-4 mb-5" [user]="user"
+                (connection)="connectionUpdateSearchCard($event)"></ws-app-connection-search-card>
             </ng-container>
           </div>
         </div>
@@ -59,7 +62,8 @@
         <!-- <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'"> -->
         <ng-container *ngIf="connectionRequests && connectionRequests.length">
           <ng-container *ngFor="let user of connectionRequests | slice: 0: 3">
-            <ws-app-connection-request-card [user]="user" (connection)="connectionUpdate($event)"></ws-app-connection-request-card>
+            <ws-app-connection-request-card [user]="user" (connection)="connectionUpdate($event)">
+            </ws-app-connection-request-card>
           </ng-container>
         </ng-container>
         <h4 *ngIf="connectionRequests && connectionRequests.length <=0" class="w-full text-center ws-mat-black60-text">
@@ -90,7 +94,8 @@
       </mat-card-header>
       <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap">
         <ng-container *ngFor="let user of recommendedUsers | slice: 0: 20">
-          <ws-app-connection-people-card class="mr-4 mb-5" [user]="user" (connection)="connectionUpdatePeopleCard($event)"></ws-app-connection-people-card>
+          <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"
+            (connection)="connectionUpdatePeopleCard($event)"></ws-app-connection-people-card>
         </ng-container>
       </mat-card-content>
       <mat-card-actions align="end">

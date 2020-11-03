@@ -1,15 +1,18 @@
 <div class="flex flex-col item-center">
     <div class="flex flex-col card-container">
         <div class="photo-container flex items-center justify-center cursor-pointer" (click)="goToUserProfile(user)">
-            <a href="javascript:void(0)" class="" i18n-aria-label role="link"
+            <a *ngIf="user?.photo" href="javascript:void(0)" class="" i18n-aria-label role="link"
                 aria-label="click on it to visit user profile">
+                <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
+                </ws-widget-avatar-photo>
+            </a>
+            <a *ngIf="!user?.photo" href="javascript:void(0)" class="" i18n-aria-label role="link">
                 <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
                 </ws-widget-avatar-photo>
             </a>
         </div>
         <div class="name-container flex flex-col width-expand">
-            <a href="javascript:void(0)" class="" i18n-aria-label role="link"
-                aria-label="click on it to visit user profile" (click)="goToUserProfile(user)">
+            <a href="javascript:void(0)" class="" i18n-aria-label role="link" (click)="goToUserProfile(user)">
                 <div class="name ws-mat-black-text cursor-pointer">
                     {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}
                     {{user?.personalDetails?.surname}}

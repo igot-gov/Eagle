@@ -42,20 +42,21 @@
     margin: 0 $size-l 0 $size-l;
   }
 }
+
 .height-48 {
   max-height: 48px;
 }
 
 .search {
-    // border-radius: 4px;
-    // border: 1px solid #DEDFE0;
-    flex: 1;
-    // max-width: 320px;
-    height: 48px;
-    margin-top: auto;
-    // margin-bottom: auto;
-    // background: #FFF;
-    margin-bottom: 8px;
+  // border-radius: 4px;
+  // border: 1px solid #DEDFE0;
+  flex: 1;
+  // max-width: 320px;
+  height: 48px;
+  margin-top: auto;
+  // margin-bottom: auto;
+  // background: #FFF;
+  margin-bottom: 8px;
 }
 
 .search .autocomplete-form {
@@ -63,11 +64,12 @@
   font-size: 1em;
   display: block;
   margin: auto;
-  ::ng-deep .mat-form-field-infix {
-      border-top-width: 10px !important;
-      padding: 0px;
-      padding-bottom: 5px;
-  }
+
+  // ::ng-deep .mat-form-field-infix {
+  //     border-top-width: 10px !important;
+  //     padding: 0px;
+  //     padding-bottom: 5px;
+  // }
   ::ng-deep.mat-form-field-wrapper .mat-form-field-flex {
     align-items: center;
     padding: 0 .75rem 0 .25rem;
@@ -126,10 +128,11 @@
   @extend %height-mat-toolbar-sibling;
 }
 
-.pagination-container{
+.pagination-container {
   margin-top: $size-l;
- 
+
 }
+
 // ::ng-deep .mat-card-header-text {
 //   flex: 1 1 0%;
 // }

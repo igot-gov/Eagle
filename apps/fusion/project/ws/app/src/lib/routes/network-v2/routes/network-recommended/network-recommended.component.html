@@ -3,6 +3,7 @@
         <form (submit)="updateQuery(queryControl.value)">
             <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
                 <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+                <mat-label>Search user</mat-label>
                 <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
                     [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
                     accesskey="F" />
@@ -11,11 +12,11 @@
     </div>
     <div class="flex flex-1 flex-column margin-fix">
         <div class="flex flex-1 filter">
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
                             'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
                 (click)="filter('timestamp', 'desc')">
                 Last added </a>
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'personalDetails.firstname',
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'personalDetails.firstname',
                             'ws-mat-accent-border':currentFilter !== 'personalDetails.firstname'}" mat-button
                 (click)="filter('personalDetails.firstname', 'asc')">
                 Sort by name </a>
@@ -30,9 +31,12 @@
             </mat-card-header>
             <mat-card-content class="margin-left-m mb-0-imp flex flex-wrap ">
                 <ng-container *ngIf="data && data.length">
-                    <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
-                        <ws-app-connection-people-card class="mr-4 mb-5" [user]="user" (connection)="connectionUpdate($event)" *ngIf="user !== -1"></ws-app-connection-people-card>
-                        <h4 class="w-full text-center ws-mat-black60-text" *ngIf="user === -1">No search results found!</h4>
+                    <ng-container
+                        *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
+                        <ws-app-connection-people-card class="mr-4 mb-5" [user]="user"
+                            (connection)="connectionUpdate($event)" *ngIf="user !== -1"></ws-app-connection-people-card>
+                        <h4 class="w-full text-center ws-mat-black60-text" *ngIf="user === -1">No search results found!
+                        </h4>
                     </ng-container>
                 </ng-container>
                 <h4 class="ws-mat-black60-text" *ngIf="data && data.length <= 0">No recommended users!</h4>

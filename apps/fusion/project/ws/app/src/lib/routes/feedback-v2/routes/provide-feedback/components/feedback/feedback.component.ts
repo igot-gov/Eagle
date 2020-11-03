@@ -10,7 +10,7 @@ import {
   IFeedbackConfig,
   INotificationRequest,
 } from '@ws-widget/collection'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'ws-app-feedback',
@@ -24,12 +24,14 @@ export class FeedbackComponent {
   feedbackForm: FormGroup
   singleFeedbackForm: FormGroup
   feedbackConfig!: IFeedbackConfig
+  showImporveError = false
 
   constructor(
     private feedbackApi: FeedbackService,
     private snackbar: MatSnackBar,
     private route: ActivatedRoute,
     private configSvc: ConfigurationsService,
+    private router: Router,
   ) {
     this.positiveFeedbackSendStatus = 'none'
     this.negativeFeedbackSendStatus = 'none'
@@ -53,6 +55,7 @@ export class FeedbackComponent {
   }
 
   submitPositiveFeedback(text: string) {
+    this.showImporveError = true
     this.positiveFeedbackSendStatus = 'sending'
     this.feedbackApi
       .submitPlatformFeedback({
@@ -63,11 +66,13 @@ export class FeedbackComponent {
       })
       .subscribe(
         () => {
+          this.router.navigate(['/app/feedback/my-feedback/user'])
           this.positiveFeedbackSendStatus = 'done'
           this.feedbackForm.patchValue({ positive: null })
           this.snackbar.openFromComponent(FeedbackSnackbarComponent, {
             data: { action: 'platform_feedback_submit', code: 'success' },
-          })
+          }
+          )
         },
         () => {
           this.positiveFeedbackSendStatus = 'error'
