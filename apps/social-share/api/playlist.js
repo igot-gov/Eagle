@@ -9,8 +9,11 @@ router.get("/playlist/:userId/:id", function (req, res) {
   let data;
   request(
     {
+      headers: {
+        rootOrg: "igot"
+      },
       uri: URL,
-      method: "POST",    
+      method: "GET",    
     },
     function (err, response, body) {
       if (err) {
