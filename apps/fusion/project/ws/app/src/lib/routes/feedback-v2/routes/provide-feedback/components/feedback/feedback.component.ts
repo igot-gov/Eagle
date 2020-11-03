@@ -24,6 +24,7 @@ export class FeedbackComponent {
   feedbackForm: FormGroup
   singleFeedbackForm: FormGroup
   feedbackConfig!: IFeedbackConfig
+  showImporveError = false
 
   constructor(
     private feedbackApi: FeedbackService,
@@ -53,6 +54,7 @@ export class FeedbackComponent {
   }
 
   submitPositiveFeedback(text: string) {
+    this.showImporveError = true
     this.positiveFeedbackSendStatus = 'sending'
     this.feedbackApi
       .submitPlatformFeedback({

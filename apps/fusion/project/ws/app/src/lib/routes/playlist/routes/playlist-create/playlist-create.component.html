@@ -36,6 +36,7 @@
       <ws-widget-picker-content [widgetData]="pickerContentData"
         (change)="onContentSelectionChanged($event?.content, $event?.checked)">
       </ws-widget-picker-content>
+      <mat-error *ngIf="showContentPlayListError" i18n>Select atleast one content to create playlist</mat-error>
     </mat-card>
   </form>
 </main>
