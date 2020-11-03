@@ -124,11 +124,11 @@
       <mat-card class="recent-most">
         <div class="flex flex-1 flex-column">
           <div class="flex flex-1 filter">
-            <a class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+            <a href="javascript:void(0)" class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
                             'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
               (click)="filter('timestamp')">
               Recent </a>
-            <a class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvotes',
+            <a href="javascript:void(0)" class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvotes',
                             'ws-mat-accent-border':currentFilter !== 'upvotes'}" mat-button
               (click)="filter('upvotes')">
               Most upvoted </a>
@@ -153,11 +153,13 @@
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="upvote(post)"
+                <a href="javascript:void(0)" *ngIf="!post.upvoted" i18n-aria-label role="link" (click)="upvote(post)"
                   aria-label="upvote comment">
                   <mat-icon *ngIf="!post.upvoted" class="cursor-pointer">arrow_upward</mat-icon>
                 </a>
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="delteVote(post)"
+              </span>
+              <span class="flex margin-right-l mobile">
+                <a href="javascript:void(0)" *ngIf="post.upvoted" i18n-aria-label role="link" (click)="delteVote(post)"
                   aria-label="delete upvote on comment">
                   <mat-icon *ngIf="post.upvoted" class="cursor-pointer upvoted">arrow_upward
                   </mat-icon>
@@ -165,13 +167,15 @@
                 <span class="pad-4">{{post.upvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="downvote(post)"
-                  aria-label="downvote comment">
+                <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
+                  (click)="downvote(post)" aria-label="downvote comment">
                   <mat-icon *ngIf="!post.downvoted" class="cursor-pointer">arrow_downward
                   </mat-icon>
                 </a>
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="delteVote(post)"
-                  aria-label="delete downvote on comment">
+              </span>
+              <span class="flex margin-right-l mobile">
+                <a href="javascript:void(0)" *ngIf="post.downvoted" i18n-aria-label role="link"
+                  (click)="delteVote(post)" aria-label="delete downvote on comment">
                   <mat-icon *ngIf="post.downvoted" class="cursor-pointer downvoted">
                     arrow_downward</mat-icon>
                 </a>
@@ -207,12 +211,15 @@
                 </div> -->
                 <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <a href="javascript:void(0)" class="flex align-center" i18n-aria-label role="link"
-                    (click)="downvote(post)" aria-label="reply toggle">
+                    aria-label="reply toggle">
                     <span class="cursor-pointer"> 1 reply </span>
                     <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="post.replyCountToggle"
                       aria-label="reply toggle upwards">
                       <mat-icon>keyboard_arrow_up</mat-icon>
                     </span>
+                  </a>
+                  <a href="javascript:void(0)" class="flex align-center" i18n-aria-label role="link"
+                    aria-label="reply toggle">
                     <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="!post.replyCountToggle"
                       aria-label="reply toggle downwards">
                       <mat-icon>keyboard_arrow_down</mat-icon>
@@ -242,13 +249,16 @@
                   </ng-container>
                 </div> -->
                 <div class="ml-2 flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
-                  <a href="javascript:void(0)" class="flex align-center" i18n-aria-label role="link"
-                    (click)="downvote(post)" aria-label="reply toggle">
-                    <span class="cursor-pointer"> {{post.replies.count}} replies </span>
+                  <span class="cursor-pointer"> {{post.replies.count}} replies </span>
+                  <a href="javascript:void(0)" class="flex align-center" *ngIf="post.replyCountToggle" i18n-aria-label
+                    role="link" aria-label="reply toggle">
                     <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="post.replyCountToggle"
                       aria-label="reply toggle upwards">
                       <mat-icon>keyboard_arrow_up</mat-icon>
                     </span>
+                  </a>
+                  <a href="javascript:void(0)" *ngIf="!post.replyCountToggle" class="flex align-center" i18n-aria-label
+                    role="link" aria-label="reply toggle">
                     <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="!post.replyCountToggle"
                       aria-label="reply toggle downwards">
                       <mat-icon>keyboard_arrow_down</mat-icon>
@@ -257,7 +267,7 @@
                 </div>
               </div>
               <div class="">
-                <span>Last reply {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
+                <span>Last reply1 {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">
