@@ -19,14 +19,14 @@ TODO: edit option while preview Mode
 </ws-app-toc-banner>
 <ng-container>
   <div class="toc-container">
-    <div role="none" class="toc-body" *ngIf="!errorCode; else tocError">
-      <div class="flex fixed-width">
-        <nav mat-tab-nav-bar class="toc-links mat-app-background" aria-label="content navigation">
+    <div role="none" class="toc-body">
+      <div class="flex mat-app-background" #stickyMenu [class.sticky]="sticky">
+        <nav mat-tab-nav-bar class="toc-links fixed-width" aria-label="content navigation">
           <a mat-tab-link [routerLink]='"./single-page-view"' fragment="overview" i18n-aria-label aria-label="overview"
-            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n>
+            class="tab" [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n>
             <span i18n class="margin-top-m mat-title">Overview</span>
           </a>
-          <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'"
+          <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'" class="tab"
             i18n-aria-label aria-label="certification" [routerLinkActiveOptions]="{ exact: true }"
             routerLinkActive="ws-mat-primary-text link-active">
             <ng-container *ngIf="content?.isExternal === true" i18n>
@@ -38,18 +38,20 @@ TODO: edit option while preview Mode
           </a>
 
           <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
-            fragment="content" [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'content'}" i18n>
+            class="tab" fragment="content"
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'content'}" i18n>
             <span i18n class="margin-top-m mat-title">Content</span>
           </a>
 
-          <a *ngIf="content?.children?.length && content?.creatorDetails && content?.creatorDetails.length"
+          <a *ngIf="content?.children?.length && content?.creatorDetails && content?.creatorDetails.length" class="tab"
             i18n-aria-label mat-tab-link [routerLink]='"./single-page-view"' fragment="authors"
             [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'authors'}" i18n>
             <span i18n class="margin-top-m mat-title">Authors</span>
           </a>
 
           <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
-            fragment="cohorts" [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'cohorts'}" i18n>
+            class="tab" fragment="cohorts"
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'cohorts'}" i18n>
             <span i18n class="margin-top-m mat-title">Cohorts</span>
           </a>
           <!-- <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' fragment="cohorts"
@@ -57,23 +59,23 @@ TODO: edit option while preview Mode
             i18n>Cohorts</a> -->
 
           <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
-            fragment="discussion-forum"
+            class="tab" fragment="discussion-forum"
             [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'discussion-forum'}" i18n>
             <span i18n class="margin-top-m mat-title">Discussion</span>
 
           </a>
 
           <a *ngIf="enableAnalytics" class="rounded-icon justify-center" [disabled]="forPreview" i18n-aria-label
-            mat-tab-link [routerLink]="'./analytics'" [routerLinkActiveOptions]="{ exact: true }" aria-label="analytics"
-            routerLinkActive="ws-mat-primary-text link-active" i18n>
+            class="tab" mat-tab-link [routerLink]="'./analytics'" [routerLinkActiveOptions]="{ exact: true }"
+            aria-label="analytics" routerLinkActive="ws-mat-primary-text link-active" i18n>
             <mat-icon>bar_chart</mat-icon>
           </a>
         </nav>
       </div>
 
-      <mat-divider class="fluid-width margin-top-m margin-bottom-m"></mat-divider>
+      <mat-divider class="fluid-width margin-bottom-m"></mat-divider>
       <section>
-        <div class="">
+        <div class="" *ngIf="!errorCode; else tocError">
           <router-outlet #routerRef></router-outlet>
         </div>
       </section>

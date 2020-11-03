@@ -11,11 +11,11 @@
     </div>
     <div class="flex flex-1 flex-column margin-fix">
         <div class="flex flex-1 filter">
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
                             'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
                 (click)="filter('timestamp', 'desc')">
                 Last added </a>
-            <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'personalDetails.firstname',
+            <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'personalDetails.firstname',
                             'ws-mat-accent-border':currentFilter !== 'personalDetails.firstname'}" mat-button
                 (click)="filter('personalDetails.firstname', 'asc')">
                 Sort by name </a>
@@ -24,11 +24,14 @@
     <div class="flex flex-1 mb-4">
         <mat-card class="flex-1 remove-botton-radius">
             <mat-card-header>
-                <mat-card-title class="w-full margin-l-0 f-medium" >
-                    <h2 *ngIf="data && data.length && !enableSearchFeature && data.length > 1 ">{{data.length}} connections</h2>
-                    <h2 *ngIf="data && data.length && !enableSearchFeature && data.length === 1">{{data.length}} connection</h2>
+                <mat-card-title class="w-full margin-l-0 f-medium">
+                    <h2 *ngIf="data && data.length && !enableSearchFeature && data.length > 1 ">{{data.length}}
+                        connections</h2>
+                    <h2 *ngIf="data && data.length && !enableSearchFeature && data.length === 1">{{data.length}}
+                        connection</h2>
                     <h2 *ngIf="data && data.length && enableSearchFeature">Search results</h2>
-                    <h4 class="w-full text-center ws-mat-black60-text" *ngIf="data && data.length <= 0">No connections found!</h4>
+                    <h4 class="w-full text-center ws-mat-black60-text" *ngIf="data && data.length <= 0">No connections
+                        found!</h4>
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content class="margin-left-m mb-0-imp">
@@ -38,9 +41,12 @@
                     </div>
                 </ng-container> -->
                 <ng-container *ngIf="data && data.length">
-                    <ng-container *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
-                        <ws-app-my-connection-card class="mr-4 mb-5" [user]="user" *ngIf="user !== -1"></ws-app-my-connection-card>
-                        <h4 class="w-full text-center ws-mat-black60-text" *ngIf="user === -1">No search results found!</h4>
+                    <ng-container
+                        *ngFor="let user of data | orderBy: currentFilter : currentFilterSort | pipeFilterSearch: searchInput.value: 'firstname':'surname'">
+                        <ws-app-my-connection-card class="mr-4 mb-5" [user]="user" *ngIf="user !== -1">
+                        </ws-app-my-connection-card>
+                        <h4 class="w-full text-center ws-mat-black60-text" *ngIf="user === -1">No search results found!
+                        </h4>
                     </ng-container>
                 </ng-container>
             </mat-card-content>
