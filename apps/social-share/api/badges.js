@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var request = require("request");
+request.gzip = true;
 
 router.get("/badge/:userId/:id", function (req, res) {
   let URL = `http://lex-core:7001/v3/users/${req.params.userId}/badges`;
