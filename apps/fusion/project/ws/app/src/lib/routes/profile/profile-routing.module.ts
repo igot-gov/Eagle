@@ -21,6 +21,7 @@ import { LearningTimeResolver } from './routes/learning/resolvers/learning-time.
 import { SettingsComponent } from './routes/settings/settings.component'
 // import { BadgeComponent } from '../gamification/routes/badges/components/badge/badge.component'
 import { BadgesComponent } from './routes/badges/badges.component'
+import { GeneralGuard } from '../../../../../../../src/app/guards/general.guard'
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
         resolve: {
           badges: BadgesResolver2,
         },
+        canActivate: [GeneralGuard],
       },
       {
         path: ':type',
