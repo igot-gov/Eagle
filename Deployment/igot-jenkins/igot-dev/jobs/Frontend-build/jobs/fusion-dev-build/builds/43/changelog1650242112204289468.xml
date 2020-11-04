@@ -1,0 +1,35 @@
+commit e7284f2c3a0cef82357806d1ecbe9f522f9dc58a
+tree bb8abd6d59cc357f7db46085e5af3f4cea4f2f84
+parent 0a3839fff9d6f511dc7f2664a96634b14ba1a338
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-17 17:50:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-17 17:50:59 +0530
+
+    frac init commit
+
+
+:100644 100644 02bf092a44d4a56b9e7fcf08256402028dc76ee6 59f38d2d06f29bc01aeacdd4a06d2f5ec3591ab4 M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 0e7e7356982d9e0f551c6db2ae37c9a94178c84d 484f768995d18b51f0be80a10278d9bdcfb9d6b6 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:000000 100644 0000000000000000000000000000000000000000 c50985af7581ff133063771449636fea732726da A	apps/client-assets/assets/configurations/localhost_3000/feature/frac.json
+:000000 100644 0000000000000000000000000000000000000000 1b9d99157d848b9b2bb5c6037486af5e040717b5 A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.html
+:000000 100644 0000000000000000000000000000000000000000 8b137891791fe96927ad78e64b0aad7bded08bdc A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.scss
+:000000 100644 0000000000000000000000000000000000000000 e8aac709413e8474dce5f6fc3e9496cd723ec723 A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 42c6cc250188632e996606b9da164b0c817c49e1 A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.ts
+:000000 100644 0000000000000000000000000000000000000000 5998a96bd1ec1d1b511325ae509c9096ba42b7e8 A	apps/fusion/project/ws/app/src/lib/routes/frac/frac-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 77e04da6b5ca855acb3d39e703c2895e203583af A	apps/fusion/project/ws/app/src/lib/routes/frac/frac.module.ts
+:000000 100644 0000000000000000000000000000000000000000 9f13c7c14d38c0d4d05ad4e12018cd13b6718949 A	apps/fusion/project/ws/app/src/lib/routes/frac/interfaces/frac.model.ts
+:000000 100644 0000000000000000000000000000000000000000 2146aaeb8e13c1e040702de12bcf1d409b136852 A	apps/fusion/project/ws/app/src/lib/routes/frac/services/frac.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 cd8b8444f7e90ab48a8adb6e2876cea78dcad937 A	apps/fusion/project/ws/app/src/lib/routes/frac/services/frac.service.ts
+:100644 100644 165fd8687f6e26345de27b242750128d498296ed d7325d5b0a34f7b2328ce10b3c77696a253126aa M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/last-learnt/last-learnt.component.scss
+:100644 100644 83b7d2f2f45c1ef11c7e35261ea8dc2203e03653 d8d6d1ee0a4f32d3e50c00b2080d06e3eebcb1d5 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/person-profile/person-profile.component.scss
+:100644 100644 a995e2de92c4fb423e8bd60f73e48cc6ad1a50ef bc8df7f21634d965005eadf184041b5cfd43c7b5 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/user-details/user-details.component.scss
+:100644 100644 89947c4646aeeb2d1bfd1b9c378206ac26b4ce83 2957a08d22e23009bf08d2c13a3fd7c6f9eb3aa4 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/userdetailall/userdetailall.component.scss
+:100644 100644 068a622157dc5dc99d544fe3cde1999705dad969 2aba2ec2afe285b14c79c1d9246897cce3857402 M	apps/fusion/project/ws/app/src/public-api.ts
+:100644 100644 526dddb8a87342c055aa797ef95c22143cf3f080 9166a3ec97a8bc35eed6929be818bf3c17a95a33 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 37dc33234069ec43b448fb1ef3b3dd39b31f4406 2802147e421bf9929c1408ec89716cfc24b53e1f M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/dashboard/dashboard.component.html
+:100644 100644 ec5a8369169bc6bb6bd08dfe091037c2cf9c242c 6eef80913a43511130c328353bfeb19aa082ae82 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/dashboard/dashboard.component.scss
+:100644 100644 ec7a06c4c0555cc55ddb95b3696db695613d0954 45fdcb3e463278e456a756be9393d6cc2ad0a56f M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.html
+:100644 100644 f0d5c999cb73908e7eb6ee630bf5786f7ad129da dbe173d2019e50880dcd4aa18d1073713ab239b0 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.scss
+:100644 100644 95ebf374a7c165c66fb4bc25a2db055236c19476 fe74890da94652e75416958d5cacf6a9175bbdd5 M	apps/fusion/src/app/app-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 2316d5dda4ace4c719fd2d7c987d1c1884a92c4a A	apps/fusion/src/app/routes/route-frac.module.ts
+:100644 100644 98d2a61ae2aec34ce2a8e98bd179f40e4189f9de e77a786cfde11fea2947bdfdeb05bdd20b697ca2 M	apps/fusion/src/styles/styles.scss
+:100644 100644 a2077dc02ebf157b5de523ff1eb0bee13e783d2e 04e2af41e263ce90c6ab15d6ce8b0585b87f0962 M	apps/fusion/src/styles/utility.scss

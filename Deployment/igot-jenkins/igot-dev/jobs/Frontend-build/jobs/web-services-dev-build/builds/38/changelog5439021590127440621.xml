@@ -1,0 +1,53 @@
+commit b9759c49f49581065bc25b398749f785895851af
+tree 0acecfbed0cbe7a55eff8cb07d51182dea2817f6
+parent aa5cb044a9790f6966b01dc0c9a0e2890d5e4c28
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-14 16:56:23 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-14 16:56:23 +0530
+
+    Task #51514: Added new fields in web service req
+
+
+:100644 100644 981c39de4e3d9f4fd6ea1c004dd97775d4c5ec19 21e35be20ba92d905f03543d25754a45ad5ccd5e M	apps/web-services/src/models/content.model.ts
+commit 0c4f0f6e7cf6480e0a1bb1c13b587d69b58896e3
+tree 6277fa9814503eab673e2518546d84ef0a07f24f
+parent aa5cb044a9790f6966b01dc0c9a0e2890d5e4c28
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-10 09:58:52 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-10 09:59:35 +0530
+
+    need to fix
+
+
+:100644 100644 cc1b43ebb8ae676d4a59b9cd055bd00e09d9082a 41474d26f92fffeec7077ca4a15237d1e160580f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/services/title-tag.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 04ac120b3d90c8fa738035b4fb61ea6b462c35b9 A	apps/fusion/project/ws/app/src/lib/routes/discuss/components/services/discuss.servive.ts
+:100644 100644 30d3384b8e027d2a77579bb35a69fa7c3eeffaf3 57a8db06cb5b95ce0bdcc04ee2534bdf9375623a M	apps/fusion/project/ws/app/src/lib/routes/user-profile/user-profile.module.ts
+:100644 100644 11339daa7680b089aa918c64b34c2373d9b9d708 bf0563b3a7dec5be9c21214861d466ce9322831a M	apps/fusion/project/ws/viewer/src/lib/plugins/web-module/web-module.component.ts
+:100644 100644 7c227e434c13807776c278c202e541c8c271a207 dbc4ca95801fe596551c656a7e37b6cffe1399ae M	apps/fusion/project/ws/viewer/src/lib/routes/quiz/quiz.component.ts
+:100644 100644 8ce601c87f4d7261b67d4fe637aa69fa0a78ccb8 d55e26e70fb2401c954e62982e723ec66d029c6e M	apps/fusion/src/environments/environment.ts
+:100644 100644 9e2499aea1859bf7acc82aaa47fe86a4dd317ea2 fc8975bdac7312e7dee922ab79fb4bfb3d5af6d4 M	apps/social-forum/routes/post/index.js
+:100644 100644 5bfd376162814ec3e6be520a5acc2c24b4968ce3 ec024c632fab62a78920b84ba50d530058c3dc15 M	apps/social-forum/routes/post/post.controller.js
+commit 2e68b2a4f148d3c3913534061a5cffacad1bf512
+tree 277957d8158f5531b2d772efd05fdff337976248
+parent b92b28ff695582c66dc5f323ddd727d909a48e08
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-09-04 13:24:05 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-09-04 13:24:05 +0530
+
+    fix for web accessibility error on image alt and input labels
+
+
+:100644 100644 b13ce184fcb001f990630cab4647833b903ce96e 3d24a21dab590df8571935531a4adcca1a9227d1 M	apps/fusion/library/ws-widget/collection/src/lib/activity-card/activity-card.component.html
+:100644 100644 4d1d7854a337292e353d7c2a5eed95e1ddb80959 b25ac147b53ea2af57333fac69ed4064c464cddb M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.html
+:100644 100644 f6ff7b2b56b9ae2b6a630e38db0e4ae4c57ee8fb 4bdab5baf385d7a2554ee2108c5dc43358e4173c M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/content-authored/content-authored.component.html
+:100644 100644 c558ac5995739f145b54479c97f7ba5bf58f1a22 e0146d913406d63460c99846496d97962a99c563 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+commit b92b28ff695582c66dc5f323ddd727d909a48e08
+tree 5967ff1de29d0fcdfeaa3bbcdedbd4ea3c2c8e7c
+parent 4449207233ad4e722678333ef6e983c3641417ed
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-09-03 19:05:06 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-09-03 19:05:06 +0530
+
+    reduced profile section card box shadow
+
+
+:100644 100644 c14b9e61c6ce699de2af15dae96ad3794875db6f 3f09277322aa2723d9e9291832e1f3e1fcd51842 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/follow-list/follow-list.component.scss
+:100644 100644 25d5e689cbf146c85802282f774e7209f092fe89 13346c45c776538e975e004f43882595365eec12 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/following-list/following-list.component.scss
+:100644 100644 d8d6d1ee0a4f32d3e50c00b2080d06e3eebcb1d5 1377ebf96fd223a9fb4a0d7c6dbff32c57e20807 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/person-profile/person-profile.component.scss
+:100644 100644 bc8df7f21634d965005eadf184041b5cfd43c7b5 e784f1835a15e34d55f3dfaba1f353f1b7ab903c M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/user-details/user-details.component.scss

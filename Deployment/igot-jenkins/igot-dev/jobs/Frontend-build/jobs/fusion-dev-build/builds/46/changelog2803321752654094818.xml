@@ -1,0 +1,10 @@
+commit ed6934d1ee7ebb315a9bc4841a504d6bdce06d57
+tree 565fe6ebb7dedd46e9781ffd5940993feb616c8d
+parent aab94db309afba59a698a7513297fc29960e2b24
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-19 15:35:26 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-19 15:35:26 +0530
+
+    removed scorm-api-adapter
+
+
+:100644 100644 d51666710ae599f74b2ee68692e397f5900ef653 52f3c9ce0846a175a8d8de631650294a31e6cf4f M	apps/fusion/package.json

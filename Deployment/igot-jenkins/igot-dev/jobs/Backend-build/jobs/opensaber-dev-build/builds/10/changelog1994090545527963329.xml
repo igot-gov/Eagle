@@ -1,0 +1,10 @@
+commit dd936da8086b88f7fca66b5dbf5df734b1737292
+tree 8ffe02a869697343e169f35012e7bd6fc2c6ae27
+parent dfa74cfd76e6bc4e8b8b46d14c3d8d1875868202
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-18 18:36:19 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-18 18:36:19 +0530
+
+    Fixed pagination issue for Elastic search
+
+
+:100644 100644 2e4615a6bfe6465acccfd6172c3e7275f24ab4ca 082802c473d99f0923b30833eb7cee1fe8ec0e0c M	java/elastic-search/src/main/java/io/opensaber/elastic/ElasticServiceImpl.java

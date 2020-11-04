@@ -1,0 +1,33 @@
+commit df7a970fce021f19ac8eb40b5638610aa26ad0c1
+tree a4df990c1ea9160cac26514c4659e2010609af0a
+parent 8a155983b2f557db3b0b8a1db180500590086d5b
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-23 15:14:47 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-23 15:14:47 +0530
+
+    LMS APIS
+
+
+:100644 100644 4a055a1b3436f5d42ee51e941493541ae419332e 185cf8e462afc652bb0779f5021e077256387edd M	apps/fusion/package.json
+:100644 100644 a65df69692bce59e134b20d3186013ec90eae044 f120082036bf504c9d4ac757c22a847526e27d3a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 8a155983b2f557db3b0b8a1db180500590086d5b
+tree f70ed1ec1852cb000c654e35dc2d7af5a8ba8873
+parent 5ee6fbb8ee737e37b12d775fef32df504fb3080a
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:21:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:21:49 +0530
+
+    build fix
+
+
+:100644 100644 b11ef3f9662600094c9e3c736365a94391e6baf6 a588a454984b0464e03aaa632886505bfd5eabff M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+commit 5ee6fbb8ee737e37b12d775fef32df504fb3080a
+tree 5924d6a78de1f4790ea82153c5de64e51db21bb7
+parent 66e9a804b1e8eb6a2c41d7e934365dde21fdb279
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:00:18 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:07:23 +0530
+
+    lint fix
+
+
+:100644 100644 8f7373830c380f218f1aa34ea4cb880e7979b4be b11ef3f9662600094c9e3c736365a94391e6baf6 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 1dcaf3d717cf1d2f775bee6bb8c69139ce577722 e0d17e6a435e59949993919f24b2de13f80c13c5 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.ts
+:000000 100644 0000000000000000000000000000000000000000 369bf2cf28ec7868a22694f69323cbe8c007876c A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/live-html-editor/live-html-editor.component.ts

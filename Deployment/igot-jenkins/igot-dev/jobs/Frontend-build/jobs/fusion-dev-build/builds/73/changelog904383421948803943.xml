@@ -1,0 +1,10 @@
+commit 9416c05cf8c43b90b3b510ead53184d1c82dba6c
+tree 0ae82f9e09f67e789cdb50552bb4336c4e781e78
+parent 4f99ce2c55aa9fda5cc8d558c9020d97989c3013
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:03:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:03:27 +0530
+
+    Task #514000: Fix for the table pagination
+
+
+:100644 100644 fe4ba7f628fdc99de3df7e618d5f668c9a4d32b1 6031c5567794f885b289b0905681fb4e5906b6f1 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.ts

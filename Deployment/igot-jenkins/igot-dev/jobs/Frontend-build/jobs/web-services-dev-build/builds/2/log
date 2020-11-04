@@ -1,0 +1,704 @@
+Started by user [8mha:////4IC/XGvaJgDWPDkzydBhNmQZQV0m+OlPLzVeSdGBpAbTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgZu/dLi1CL9xJTczDwAawhpaMAAAAA=[0midc-eagle
+Checking out git https://github.com/igot-gov/Eagle.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/web-services-dev-build@script to read apps/web-services/Jenkinsfile
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/igot-dev^{commit} # timeout=10
+Checking out Revision e5efe1a75b51dea6a70b593f5aa227fca6e2a446 (origin/igot-dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e5efe1a75b51dea6a70b593f5aa227fca6e2a446 # timeout=10
+Commit message: "Merge branch 'igot-dev' of https://github.com/igot-gov/Eagle into igot-dev"
+ > git rev-list --no-walk 127cb4bed68ac76d90a6e6dd303141c3609818ae # timeout=10
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4CogtAq7rn74jxj7uLVCcsx+t/y35kGeqvPkPZObyMXKAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4M4HhYYw5g8Q/T69bF4Q03CXP5QrGLTB/3G02QXJo6U5AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4I8dzKCIF5MAVfX6mSSVw/7BBA8CLo8Y4KOcAQfTfDT/AAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/lib/jenkins/workspace/igot-dev/Frontend-build/web-services-dev-build
+[8mha:////4LB3xgJ5/i6rvwz3UzIGQskalXp7BJ5rM3CcuPAq8uCGAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4BIodQLml+s7Yz/VUwXw69YMXxgGKkA2g9ogG2rdJzvnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] ansiColor
+[8mha:////4I+DPNrJrY6nGXv0HKYd6twr+ClidgSYIrE439NWgujzAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E6ZFoOz08tWaQiXki4hIu1lr7b/L8x53DGJZd+Tu1RuAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4EOWAYBHBge05it7SsmJIpeBzlZnHLfW1vjcORdWPYclAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Checkout)
+[8mha:////4P8hajGSU1NmcDK7zr6c+qSTk1RCMgeBZweWlwN28t5yAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4O62hg3nuWQGYzJSRPAYJinD89yjNHB3k3WDfrzy132vAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYO0G2F+S7bfcBITL9lL0AAAA=[0m[Pipeline] checkout
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/igot-gov/Eagle.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/web-services-dev-build # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/igot-dev^{commit} # timeout=10
+Checking out Revision e5efe1a75b51dea6a70b593f5aa227fca6e2a446 (origin/igot-dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e5efe1a75b51dea6a70b593f5aa227fca6e2a446 # timeout=10
+Commit message: "Merge branch 'igot-dev' of https://github.com/igot-gov/Eagle into igot-dev"
+[8mha:////4PphThmGcYjzIXYO8baHSsc/I1mRgpU76NMkOh1sjp0sAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEzcQ4uTYsfkGFWgvNe9g+hMkv8tf8B4kkTt7pnrOc1xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8AHk6T5r0AAAA=[0m[Pipeline] }
+[8mha:////4N1Qgn8AATg0PJlfa+zx4/XZh3bPHqh2xDfBbhJgS8Y2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRNBSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsPXymMMb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EMnktzjW7yUEZ67srpVpNNd9ZDB2RgNDQ8SkV11xlyUAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5NudINt/AHkw63u9AAAA[0m[Pipeline] }
+[8mha:////4P0iBvoKjc4AyO3aqqUerJXSHuX/cs0cWTvuLSIHcSjvAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRElSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsP073CUL0AAAA=[0m[Pipeline] // ansiColor
+[8mha:////4CNnUvLMQQkxTLdb9/c6+Fx6wGWbU8RzyyrIP2Q7WnhBAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjJKgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvBXXnAcEAAAA=[0m[Pipeline] stage
+[8mha:////4CBaTsQr90lV5hpKm/1Gi+wkLJENS/ytk4SMdVNyA5vCAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] { (docker-pre-build)
+[8mha:////4HHuxzc+yx4ZPKmtro1JSpobF3oS2uHDg6qhlNjVyMk5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGigQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN27Iu42+AAAA[0m[Pipeline] sh
++ cd ./apps/web-services/
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/web-services-dev-build/apps/web-services
++ docker build -f ./Dockerfile.build -t web-services.build .
+Sending build context to Docker daemon  1.021MB
+Step 1/6 : FROM node:12
+ ---> 1fa6026dd8bb
+Step 2/6 : WORKDIR /usr/src/app
+ ---> Running in dcf6253ebb2b
+Removing intermediate container dcf6253ebb2b
+ ---> 30b44cee2c68
+Step 3/6 : COPY . .
+ ---> 2cb6c7326efc
+Step 4/6 : RUN apt update && apt install -y zip
+ ---> Running in 3b4597af557b
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mGet:1 http://security.debian.org/debian-security stretch/updates InRelease [53.0 kB]
+Get:2 http://security.debian.org/debian-security stretch/updates/main amd64 Packages [537 kB]
+Ign:3 http://deb.debian.org/debian stretch InRelease
+Get:4 http://deb.debian.org/debian stretch-updates InRelease [93.6 kB]
+Get:5 http://deb.debian.org/debian stretch Release [118 kB]
+Get:6 http://deb.debian.org/debian stretch-updates/main amd64 Packages [2596 B]
+Get:7 http://deb.debian.org/debian stretch Release.gpg [2410 B]
+Get:8 http://deb.debian.org/debian stretch/main amd64 Packages [7080 kB]
+Fetched 7886 kB in 1s (4553 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+38 packages can be upgraded. Run 'apt list --upgradable' to see them.
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  zip
+0 upgraded, 1 newly installed, 0 to remove and 38 not upgraded.
+Need to get 234 kB of archives.
+After this operation, 623 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian stretch/main amd64 zip amd64 3.0-11+b1 [234 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 234 kB in 0s (18.2 MB/s)
+Selecting previously unselected package zip.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 29934 files and directories currently installed.)
+Preparing to unpack .../zip_3.0-11+b1_amd64.deb ...
+Unpacking zip (3.0-11+b1) ...
+Setting up zip (3.0-11+b1) ...
+Removing intermediate container 3b4597af557b
+ ---> 4d9d067a24fa
+Step 5/6 : RUN npm install && npm run build
+ ---> Running in 9caca39ba2a8
+
+> husky@2.3.0 install /usr/src/app/node_modules/husky
+> node husky install
+
+husky > Setting up git hooks
+Can't find .git, skipping Git hooks installation.
+Please check that you're in a cloned repository or run 'git init' to create an empty Git repository and reinstall husky.
+
+> nodemon@1.19.1 postinstall /usr/src/app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+[32mLove nodemon? You can now support the project via the open collective:[22m[39m
+ > [96m[1mhttps://opencollective.com/nodemon/donate[0m
+
+[91mnpm WARN ui_web-services-v8@1.0.0 No description
+npm WARN ui_web-services-v8@1.0.0 No repository field.
+[0m[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules/fsevents):
+[0m[91mnpm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91m
+[0madded 825 packages from 537 contributors and audited 897 packages in 14.376s
+found 1163 vulnerabilities (1160 low, 1 moderate, 2 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+> ui_web-services-v8@1.0.0 prebuild /usr/src/app
+> npm run lint
+
+
+> ui_web-services-v8@1.0.0 lint /usr/src/app
+> tslint -c tslint.json -p tsconfig.json --fix
+
+
+> ui_web-services-v8@1.0.0 build /usr/src/app
+> gulp build
+
+[14:50:55] Requiring external module ts-node/register
+[14:50:56] Using gulpfile /usr/src/app/gulpfile.ts
+[14:50:56] Starting 'build'...
+[14:50:56] Starting 'del-dist'...
+[14:50:56] Finished 'del-dist' after 4.53 ms
+[14:50:56] Starting 'compile-project'...
+[14:51:02] Finished 'compile-project' after 5.74 s
+[14:51:02] Starting 'copy-package'...
+[14:51:02] Finished 'copy-package' after 6.31 ms
+[14:51:02] Starting 'copy-json'...
+[14:51:02] Finished 'copy-json' after 17 ms
+[14:51:02] Starting 'copy-assets'...
+[14:51:02] Finished 'copy-assets' after 2.34 ms
+[14:51:02] Finished 'build' after 5.77 s
+Removing intermediate container 9caca39ba2a8
+ ---> c72d6f630ead
+Step 6/6 : RUN zip -r dist.zip dist
+ ---> Running in b406be946c34
+  adding: dist/ (stored 0%)
+  adding: dist/models/ (stored 0%)
+  adding: dist/models/navigator.model.js (stored 0%)
+  adding: dist/models/content.model.js (deflated 74%)
+  adding: dist/models/learningHistory.model.js (stored 0%)
+  adding: dist/models/goal.model.js (deflated 11%)
+  adding: dist/models/khub.model.js (stored 0%)
+  adding: dist/models/notification.model.js (stored 0%)
+  adding: dist/models/leaderboard.model.js (stored 0%)
+  adding: dist/models/user.model.js (stored 0%)
+  adding: dist/models/feedback.model.js (stored 0%)
+  adding: dist/models/generic.model.js (stored 0%)
+  adding: dist/models/account-settings.model.js (stored 0%)
+  adding: dist/models/certification.model.js (stored 0%)
+  adding: dist/models/search.model.js (stored 0%)
+  adding: dist/models/playlist.model.js (deflated 59%)
+  adding: dist/models/badge.model.js (stored 0%)
+  adding: dist/models/catalog.model.js (stored 0%)
+  adding: dist/models/axios-request-config.model.js (stored 0%)
+  adding: dist/models/usergroup.model.js (stored 0%)
+  adding: dist/models/topic.model.js (stored 0%)
+  adding: dist/models/exercise.model.js (stored 0%)
+  adding: dist/models/training.model.js (stored 0%)
+  adding: dist/models/conceptGraph.model.js (stored 0%)
+  adding: dist/models/myAnalytics.model.js (stored 0%)
+  adding: dist/models/paginatedApi.model.js (stored 0%)
+  adding: dist/static-data/ (stored 0%)
+  adding: dist/static-data/nationality.json (deflated 56%)
+  adding: dist/static-data/languages.json (deflated 55%)
+  adding: dist/index.js (deflated 60%)
+  adding: dist/package.json (deflated 67%)
+  adding: dist/configs/ (stored 0%)
+  adding: dist/configs/cassandra.config.js (deflated 30%)
+  adding: dist/configs/session.config.js (deflated 60%)
+  adding: dist/configs/request.config.js (deflated 49%)
+  adding: dist/configs/keycloak.config.js (deflated 35%)
+  adding: dist/utils/ (stored 0%)
+  adding: dist/utils/helpers.js (deflated 69%)
+  adding: dist/utils/requestExtract.js (deflated 65%)
+  adding: dist/utils/logger.js (deflated 68%)
+  adding: dist/utils/message.js (deflated 35%)
+  adding: dist/utils/axios-retry.js (deflated 57%)
+  adding: dist/utils/env.js (deflated 74%)
+  adding: dist/utils/custom-keycloak.js (deflated 68%)
+  adding: dist/utils/proxyCreator.js (deflated 65%)
+  adding: dist/utils/contentHelpers.js (deflated 69%)
+  adding: dist/utils/keycloak-user-creation.js (deflated 71%)
+  adding: dist/proxies_v8/ (stored 0%)
+  adding: dist/proxies_v8/proxies_v8.js (deflated 72%)
+  adding: dist/service/ (stored 0%)
+  adding: dist/service/catalog.js (deflated 59%)
+  adding: dist/service/navigator.js (deflated 63%)
+  adding: dist/service/goals.js (deflated 76%)
+  adding: dist/service/playlist.js (deflated 80%)
+  adding: dist/server.js (deflated 72%)
+  adding: dist/publicApi_v8/ (stored 0%)
+  adding: dist/publicApi_v8/tnc.js (deflated 57%)
+  adding: dist/publicApi_v8/signup.js (deflated 71%)
+  adding: dist/publicApi_v8/publicApiV8.js (deflated 49%)
+  adding: dist/protectedApi_v8/ (stored 0%)
+  adding: dist/protectedApi_v8/protectedApiV8.js (deflated 71%)
+  adding: dist/protectedApi_v8/certifications.js (deflated 90%)
+  adding: dist/protectedApi_v8/concept.js (deflated 66%)
+  adding: dist/protectedApi_v8/cohorts.js (deflated 68%)
+  adding: dist/protectedApi_v8/khub.js (deflated 80%)
+  adding: dist/protectedApi_v8/event-external.js (deflated 50%)
+  adding: dist/protectedApi_v8/catalog.js (deflated 73%)
+  adding: dist/protectedApi_v8/navigator.js (deflated 76%)
+  adding: dist/protectedApi_v8/social.js (deflated 92%)
+  adding: dist/protectedApi_v8/user/ (stored 0%)
+  adding: dist/protectedApi_v8/user/tnc.js (deflated 78%)
+  adding: dist/protectedApi_v8/user/dashboard.js (deflated 72%)
+  adding: dist/protectedApi_v8/user/follow.js (deflated 88%)
+  adding: dist/protectedApi_v8/user/telemetry.js (deflated 52%)
+  adding: dist/protectedApi_v8/user/badge.js (deflated 78%)
+  adding: dist/protectedApi_v8/user/evaluate.js (deflated 71%)
+  adding: dist/protectedApi_v8/user/feedback.js (deflated 54%)
+  adding: dist/protectedApi_v8/user/history.js (deflated 76%)
+  adding: dist/protectedApi_v8/user/accessControl.js (deflated 67%)
+  adding: dist/protectedApi_v8/user/token.js (deflated 60%)
+  adding: dist/protectedApi_v8/user/topics.js (deflated 83%)
+  adding: dist/protectedApi_v8/user/classDiagram.js (deflated 56%)
+  adding: dist/protectedApi_v8/user/user.js (deflated 77%)
+  adding: dist/protectedApi_v8/user/progress.js (deflated 73%)
+  adding: dist/protectedApi_v8/user/validate.js (deflated 52%)
+  adding: dist/protectedApi_v8/user/group.js (deflated 68%)
+  adding: dist/protectedApi_v8/user/admin-users.js (deflated 57%)
+  adding: dist/protectedApi_v8/user/share.js (deflated 70%)
+  adding: dist/protectedApi_v8/user/realTimeProgress.js (deflated 68%)
+  adding: dist/protectedApi_v8/user/email.js (deflated 51%)
+  adding: dist/protectedApi_v8/user/details.js (deflated 78%)
+  adding: dist/protectedApi_v8/user/content.js (deflated 81%)
+  adding: dist/protectedApi_v8/user/emailToUserId.js (deflated 57%)
+  adding: dist/protectedApi_v8/user/skills.js (deflated 53%)
+  adding: dist/protectedApi_v8/user/content-assign.js (deflated 79%)
+  adding: dist/protectedApi_v8/user/iconBadge.js (deflated 54%)
+  adding: dist/protectedApi_v8/user/account-settings.js (deflated 66%)
+  adding: dist/protectedApi_v8/user/goals.js (deflated 89%)
+  adding: dist/protectedApi_v8/user/preference.js (deflated 71%)
+  adding: dist/protectedApi_v8/user/profile-details.js (deflated 82%)
+  adding: dist/protectedApi_v8/user/rdbms.js (deflated 87%)
+  adding: dist/protectedApi_v8/user/ocm.js (deflated 54%)
+  adding: dist/protectedApi_v8/user/changeEmail.js (deflated 55%)
+  adding: dist/protectedApi_v8/user/exercise.js (deflated 75%)
+  adding: dist/protectedApi_v8/user/profile.js (deflated 77%)
+  adding: dist/protectedApi_v8/user/notifications.js (deflated 79%)
+  adding: dist/protectedApi_v8/user/feedbackV2.js (deflated 86%)
+  adding: dist/protectedApi_v8/user/roles.js (deflated 83%)
+  adding: dist/protectedApi_v8/user/rating.js (deflated 80%)
+  adding: dist/protectedApi_v8/user/topic.js (deflated 64%)
+  adding: dist/protectedApi_v8/user/playlist.js (deflated 88%)
+  adding: dist/protectedApi_v8/user/auto-complete.js (deflated 57%)
+  adding: dist/protectedApi_v8/user/viewprofile.js (deflated 59%)
+  adding: dist/protectedApi_v8/user/miniProfile.js (deflated 54%)
+  adding: dist/protectedApi_v8/user/myAnalytics.js (deflated 94%)
+  adding: dist/protectedApi_v8/user/code.js (deflated 74%)
+  adding: dist/protectedApi_v8/infyradio.js (deflated 64%)
+  adding: dist/protectedApi_v8/content.js (deflated 84%)
+  adding: dist/protectedApi_v8/admin/ (stored 0%)
+  adding: dist/protectedApi_v8/admin/userRoles.js (deflated 76%)
+  adding: dist/protectedApi_v8/admin/admin.js (deflated 57%)
+  adding: dist/protectedApi_v8/admin/userRegistration.js (deflated 83%)
+  adding: dist/protectedApi_v8/admin/banner.js (deflated 82%)
+  adding: dist/protectedApi_v8/training.js (deflated 88%)
+  adding: dist/protectedApi_v8/attendent-content.js (deflated 76%)
+  adding: dist/protectedApi_v8/leaderboard.js (deflated 88%)
+  adding: dist/protectedApi_v8/events.js (deflated 52%)
+  adding: dist/protectedApi_v8/translate.js (deflated 55%)
+  adding: dist/protectedApi_v8/recommendation.js (deflated 84%)
+  adding: dist/protectedApi_v8/counter.js (deflated 66%)
+  adding: dist/protectedApi_v8/socialv2.js (deflated 91%)
+  adding: dist/authoring/ (stored 0%)
+  adding: dist/authoring/models/ (stored 0%)
+  adding: dist/authoring/models/quiz.js (stored 0%)
+  adding: dist/authoring/models/class-diagram.js (stored 0%)
+  adding: dist/authoring/models/response/ (stored 0%)
+  adding: dist/authoring/models/response/custom-s3-download.js (stored 0%)
+  adding: dist/authoring/models/response/search-model.js (stored 0%)
+  adding: dist/authoring/models/response/custom-s3-upload.js (stored 0%)
+  adding: dist/authoring/models/content-model.js (stored 0%)
+  adding: dist/authoring/authBackend.js (deflated 44%)
+  adding: dist/authoring/utils/ (stored 0%)
+  adding: dist/authoring/utils/header.js (deflated 53%)
+  adding: dist/authoring/utils/fetch-related-content.js (deflated 62%)
+  adding: dist/authoring/utils/org-rootOrg-query.js (deflated 33%)
+  adding: dist/authoring/utils/S3/ (stored 0%)
+  adding: dist/authoring/utils/S3/read.js (deflated 46%)
+  adding: dist/authoring/utils/S3/copy.js (stored 0%)
+  adding: dist/authoring/utils/S3/upload.js (deflated 52%)
+  adding: dist/authoring/utils/upload-meta-and-json/ (stored 0%)
+  adding: dist/authoring/utils/upload-meta-and-json/assessment.js (deflated 69%)
+  adding: dist/authoring/utils/upload-meta-and-json/index.js (deflated 68%)
+  adding: dist/authoring/utils/upload-meta-and-json/web-module.js (deflated 57%)
+  adding: dist/authoring/utils/upload-meta-and-json/channel.js (deflated 34%)
+  adding: dist/authoring/utils/upload-meta-and-json/quiz.js (deflated 31%)
+  adding: dist/authoring/utils/upload-meta-and-json/class-diagram.js (deflated 59%)
+  adding: dist/authoring/utils/upload-meta-and-json/unkown.js (deflated 32%)
+  adding: dist/authoring/utils/read-meta-and-json/ (stored 0%)
+  adding: dist/authoring/utils/read-meta-and-json/index.js (deflated 67%)
+  adding: dist/authoring/utils/read-meta-and-json/channel.js (deflated 30%)
+  adding: dist/authoring/utils/decode.js (deflated 38%)
+  adding: dist/authoring/utils/api.js (stored 0%)
+  adding: dist/authoring/apis/ (stored 0%)
+  adding: dist/authoring/apis/search/ (stored 0%)
+  adding: dist/authoring/apis/search/index.js (stored 0%)
+  adding: dist/authoring/apis/index.js (deflated 36%)
+  adding: dist/authoring/apis/editor/ (stored 0%)
+  adding: dist/authoring/apis/editor/index.js (deflated 29%)
+  adding: dist/authoring/content/ (stored 0%)
+  adding: dist/authoring/content/language-search.js (deflated 65%)
+  adding: dist/authoring/content/index.js (deflated 80%)
+  adding: dist/authoring/content/hierarchy-and-content.js (deflated 64%)
+  adding: dist/authoring/content/hierarchy.js (deflated 69%)
+  adding: dist/authoring/authNotification.js (deflated 45%)
+  adding: dist/authoring/authContent.js (deflated 73%)
+  adding: dist/authoring/constants/ (stored 0%)
+  adding: dist/authoring/constants/default-meta.js (deflated 63%)
+  adding: dist/authoring/constants/error.js (deflated 8%)
+  adding: dist/authoring/authSearch.js (deflated 52%)
+  adding: dist/authoring/authIapBackend.js (deflated 45%)
+Removing intermediate container b406be946c34
+ ---> 630407e2aa75
+Successfully built 630407e2aa75
+Successfully tagged web-services.build:latest
++ docker run --name=web-services.build web-services.build
++ docker cp web-services.build:/usr/src/app/dist.zip .
++ sleep 30
++ docker rm -f web-services.build
+web-services.build
++ docker rmi -f web-services.build
+Untagged: web-services.build:latest
+Deleted: sha256:630407e2aa7570ad82d1ac8720425be3e61510e6af27627e001f4afce0b1e82e
+Deleted: sha256:2ae889a99e362af59f4eb051f053e53630619148468139dfbe3a0a27625458ff
+Deleted: sha256:c72d6f630eadb229533904a3aa41b266e946dd8e6257f543e1244ea197154f10
+Deleted: sha256:a3e04872d590c8b6b03ac94c1f0551e1102a2d5d5696bd31a0511c3d18c68849
+Deleted: sha256:4d9d067a24fae534f3779e3b5f42bdb804547192b0101412a963d93eb7506890
+Deleted: sha256:db1b6f8c1b66eac6e6f57b216115f6ed80704197c64969f18cec4bd9e178b4a5
+Deleted: sha256:2cb6c7326efcb985aab7af70c474f96afdd37f90881076ca7b41eea45f661e17
+Deleted: sha256:c790435c07d0cd964c4b5ae021d27a7655f164c27fdfad418ee7ee0d12c8d2bd
+Deleted: sha256:30b44cee2c68f39e45420fd3c85425f9a9c610a1d08bafc3f6fd8e48e781df66
+Deleted: sha256:cc8b3c3ea0995cced4458e4d33ef9fd93415f729eba408677e0c22bb7dcf5f48
++ unzip dist.zip
+Archive:  dist.zip
+   creating: dist/
+   creating: dist/models/
+ extracting: dist/models/navigator.model.js  
+  inflating: dist/models/content.model.js  
+ extracting: dist/models/learningHistory.model.js  
+  inflating: dist/models/goal.model.js  
+ extracting: dist/models/khub.model.js  
+ extracting: dist/models/notification.model.js  
+ extracting: dist/models/leaderboard.model.js  
+ extracting: dist/models/user.model.js  
+ extracting: dist/models/feedback.model.js  
+ extracting: dist/models/generic.model.js  
+ extracting: dist/models/account-settings.model.js  
+ extracting: dist/models/certification.model.js  
+ extracting: dist/models/search.model.js  
+  inflating: dist/models/playlist.model.js  
+ extracting: dist/models/badge.model.js  
+ extracting: dist/models/catalog.model.js  
+ extracting: dist/models/axios-request-config.model.js  
+ extracting: dist/models/usergroup.model.js  
+ extracting: dist/models/topic.model.js  
+ extracting: dist/models/exercise.model.js  
+ extracting: dist/models/training.model.js  
+ extracting: dist/models/conceptGraph.model.js  
+ extracting: dist/models/myAnalytics.model.js  
+ extracting: dist/models/paginatedApi.model.js  
+   creating: dist/static-data/
+  inflating: dist/static-data/nationality.json  
+  inflating: dist/static-data/languages.json  
+  inflating: dist/index.js           
+  inflating: dist/package.json       
+   creating: dist/configs/
+  inflating: dist/configs/cassandra.config.js  
+  inflating: dist/configs/session.config.js  
+  inflating: dist/configs/request.config.js  
+  inflating: dist/configs/keycloak.config.js  
+   creating: dist/utils/
+  inflating: dist/utils/helpers.js   
+  inflating: dist/utils/requestExtract.js  
+  inflating: dist/utils/logger.js    
+  inflating: dist/utils/message.js   
+  inflating: dist/utils/axios-retry.js  
+  inflating: dist/utils/env.js       
+  inflating: dist/utils/custom-keycloak.js  
+  inflating: dist/utils/proxyCreator.js  
+  inflating: dist/utils/contentHelpers.js  
+  inflating: dist/utils/keycloak-user-creation.js  
+   creating: dist/proxies_v8/
+  inflating: dist/proxies_v8/proxies_v8.js  
+   creating: dist/service/
+  inflating: dist/service/catalog.js  
+  inflating: dist/service/navigator.js  
+  inflating: dist/service/goals.js   
+  inflating: dist/service/playlist.js  
+  inflating: dist/server.js          
+   creating: dist/publicApi_v8/
+  inflating: dist/publicApi_v8/tnc.js  
+  inflating: dist/publicApi_v8/signup.js  
+  inflating: dist/publicApi_v8/publicApiV8.js  
+   creating: dist/protectedApi_v8/
+  inflating: dist/protectedApi_v8/protectedApiV8.js  
+  inflating: dist/protectedApi_v8/certifications.js  
+  inflating: dist/protectedApi_v8/concept.js  
+  inflating: dist/protectedApi_v8/cohorts.js  
+  inflating: dist/protectedApi_v8/khub.js  
+  inflating: dist/protectedApi_v8/event-external.js  
+  inflating: dist/protectedApi_v8/catalog.js  
+  inflating: dist/protectedApi_v8/navigator.js  
+  inflating: dist/protectedApi_v8/social.js  
+   creating: dist/protectedApi_v8/user/
+  inflating: dist/protectedApi_v8/user/tnc.js  
+  inflating: dist/protectedApi_v8/user/dashboard.js  
+  inflating: dist/protectedApi_v8/user/follow.js  
+  inflating: dist/protectedApi_v8/user/telemetry.js  
+  inflating: dist/protectedApi_v8/user/badge.js  
+  inflating: dist/protectedApi_v8/user/evaluate.js  
+  inflating: dist/protectedApi_v8/user/feedback.js  
+  inflating: dist/protectedApi_v8/user/history.js  
+  inflating: dist/protectedApi_v8/user/accessControl.js  
+  inflating: dist/protectedApi_v8/user/token.js  
+  inflating: dist/protectedApi_v8/user/topics.js  
+  inflating: dist/protectedApi_v8/user/classDiagram.js  
+  inflating: dist/protectedApi_v8/user/user.js  
+  inflating: dist/protectedApi_v8/user/progress.js  
+  inflating: dist/protectedApi_v8/user/validate.js  
+  inflating: dist/protectedApi_v8/user/group.js  
+  inflating: dist/protectedApi_v8/user/admin-users.js  
+  inflating: dist/protectedApi_v8/user/share.js  
+  inflating: dist/protectedApi_v8/user/realTimeProgress.js  
+  inflating: dist/protectedApi_v8/user/email.js  
+  inflating: dist/protectedApi_v8/user/details.js  
+  inflating: dist/protectedApi_v8/user/content.js  
+  inflating: dist/protectedApi_v8/user/emailToUserId.js  
+  inflating: dist/protectedApi_v8/user/skills.js  
+  inflating: dist/protectedApi_v8/user/content-assign.js  
+  inflating: dist/protectedApi_v8/user/iconBadge.js  
+  inflating: dist/protectedApi_v8/user/account-settings.js  
+  inflating: dist/protectedApi_v8/user/goals.js  
+  inflating: dist/protectedApi_v8/user/preference.js  
+  inflating: dist/protectedApi_v8/user/profile-details.js  
+  inflating: dist/protectedApi_v8/user/rdbms.js  
+  inflating: dist/protectedApi_v8/user/ocm.js  
+  inflating: dist/protectedApi_v8/user/changeEmail.js  
+  inflating: dist/protectedApi_v8/user/exercise.js  
+  inflating: dist/protectedApi_v8/user/profile.js  
+  inflating: dist/protectedApi_v8/user/notifications.js  
+  inflating: dist/protectedApi_v8/user/feedbackV2.js  
+  inflating: dist/protectedApi_v8/user/roles.js  
+  inflating: dist/protectedApi_v8/user/rating.js  
+  inflating: dist/protectedApi_v8/user/topic.js  
+  inflating: dist/protectedApi_v8/user/playlist.js  
+  inflating: dist/protectedApi_v8/user/auto-complete.js  
+  inflating: dist/protectedApi_v8/user/viewprofile.js  
+  inflating: dist/protectedApi_v8/user/miniProfile.js  
+  inflating: dist/protectedApi_v8/user/myAnalytics.js  
+  inflating: dist/protectedApi_v8/user/code.js  
+  inflating: dist/protectedApi_v8/infyradio.js  
+  inflating: dist/protectedApi_v8/content.js  
+   creating: dist/protectedApi_v8/admin/
+  inflating: dist/protectedApi_v8/admin/userRoles.js  
+  inflating: dist/protectedApi_v8/admin/admin.js  
+  inflating: dist/protectedApi_v8/admin/userRegistration.js  
+  inflating: dist/protectedApi_v8/admin/banner.js  
+  inflating: dist/protectedApi_v8/training.js  
+  inflating: dist/protectedApi_v8/attendent-content.js  
+  inflating: dist/protectedApi_v8/leaderboard.js  
+  inflating: dist/protectedApi_v8/events.js  
+  inflating: dist/protectedApi_v8/translate.js  
+  inflating: dist/protectedApi_v8/recommendation.js  
+  inflating: dist/protectedApi_v8/counter.js  
+  inflating: dist/protectedApi_v8/socialv2.js  
+   creating: dist/authoring/
+   creating: dist/authoring/models/
+ extracting: dist/authoring/models/quiz.js  
+ extracting: dist/authoring/models/class-diagram.js  
+   creating: dist/authoring/models/response/
+ extracting: dist/authoring/models/response/custom-s3-download.js  
+ extracting: dist/authoring/models/response/search-model.js  
+ extracting: dist/authoring/models/response/custom-s3-upload.js  
+ extracting: dist/authoring/models/content-model.js  
+  inflating: dist/authoring/authBackend.js  
+   creating: dist/authoring/utils/
+  inflating: dist/authoring/utils/header.js  
+  inflating: dist/authoring/utils/fetch-related-content.js  
+  inflating: dist/authoring/utils/org-rootOrg-query.js  
+   creating: dist/authoring/utils/S3/
+  inflating: dist/authoring/utils/S3/read.js  
+ extracting: dist/authoring/utils/S3/copy.js  
+  inflating: dist/authoring/utils/S3/upload.js  
+   creating: dist/authoring/utils/upload-meta-and-json/
+  inflating: dist/authoring/utils/upload-meta-and-json/assessment.js  
+  inflating: dist/authoring/utils/upload-meta-and-json/index.js  
+  inflating: dist/authoring/utils/upload-meta-and-json/web-module.js  
+  inflating: dist/authoring/utils/upload-meta-and-json/channel.js  
+  inflating: dist/authoring/utils/upload-meta-and-json/quiz.js  
+  inflating: dist/authoring/utils/upload-meta-and-json/class-diagram.js  
+  inflating: dist/authoring/utils/upload-meta-and-json/unkown.js  
+   creating: dist/authoring/utils/read-meta-and-json/
+  inflating: dist/authoring/utils/read-meta-and-json/index.js  
+  inflating: dist/authoring/utils/read-meta-and-json/channel.js  
+  inflating: dist/authoring/utils/decode.js  
+ extracting: dist/authoring/utils/api.js  
+   creating: dist/authoring/apis/
+   creating: dist/authoring/apis/search/
+ extracting: dist/authoring/apis/search/index.js  
+  inflating: dist/authoring/apis/index.js  
+   creating: dist/authoring/apis/editor/
+  inflating: dist/authoring/apis/editor/index.js  
+   creating: dist/authoring/content/
+  inflating: dist/authoring/content/language-search.js  
+  inflating: dist/authoring/content/index.js  
+  inflating: dist/authoring/content/hierarchy-and-content.js  
+  inflating: dist/authoring/content/hierarchy.js  
+  inflating: dist/authoring/authNotification.js  
+  inflating: dist/authoring/authContent.js  
+   creating: dist/authoring/constants/
+  inflating: dist/authoring/constants/default-meta.js  
+  inflating: dist/authoring/constants/error.js  
+  inflating: dist/authoring/authSearch.js  
+  inflating: dist/authoring/authIapBackend.js  
+[8mha:////4DW9QfjIqkQjbk0As03mWXshjqakH9wcOztMVQanDcdGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGoSEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHhgNoTvgAAAA==[0m[Pipeline] }
+[8mha:////4EuThnuO/bxP/NWEHp5uhxRcX5RxIFZUATvKwJeb4b/6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCgqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQH+Ao9BvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AXU9pjXrV3DcNQ6Eb6d+G4sMdtRURTPJn5v5jBgzo08AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INK/7CYMEAAAA=[0m[Pipeline] stage
+[8mha:////4P8otm/db14WqDuVB8uFWYQY1DxABVDArZsA1CmUEBBgAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUWBFT1ygLJwhNCGmj/8tPSjtxIq7GHWipxIQHy7ZkvdcbishwInaisdh6jLUXXejdlMRA3F4DDaKhi6gJIwUrlB0UGVstVVGysCjLYSVhbbEOFD26BBvZ6Icug0ZXnhNP21FC7s0dnpDJiZw0p28ZGba33kTCH+cvAMYuQX7Yzbafn8UHbGnGmsIAAAA=[0m[Pipeline] { (docker-build)
+[8mha:////4I93nRfJXXHYqNQ9n8ZryBqCBI50TLJhruonpCB0f+KSAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi0iIqWisNLzCJMXasO8d2cCpexNf4A4FIVGyx2tlmni9YxwBHDhqtot5QbA16N+p5YebQXx1ntHzBlimyU9io3HCnTgs2nBQsKUpYCdgoah1HQzrBVlh5l5WTpKtzCvN3EFCaboAHFGI2JxnSF6YAu9vYRaaf568AJp+grPefqv0bH7uiub4AAAA=[0m[Pipeline] sh
++ git rev-parse --short HEAD
++ commit_id=e5efe1a
++ echo e5efe1a
++ cd ./apps/web-services/
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/web-services-dev-build/apps/web-services
++ docker build -f Dockerfile -t 10.0.1.129:5000/ui-proxies:e5efe1a .
+Sending build context to Docker daemon  1.829MB
+Step 1/8 : FROM node:12
+ ---> 1fa6026dd8bb
+Step 2/8 : WORKDIR /usr/src/app
+ ---> Running in 0f42f1b214f0
+Removing intermediate container 0f42f1b214f0
+ ---> 32bf66cac6d2
+Step 3/8 : RUN mkdir -p /usr/src/app/user_upload
+ ---> Running in f9ac2513c12e
+Removing intermediate container f9ac2513c12e
+ ---> 0ed37a57902d
+Step 4/8 : COPY package*.json ./
+ ---> 88b3c0bdd9b2
+Step 5/8 : RUN npm install --only=production
+ ---> Running in 1cc71e5f88d3
+[91mnpm WARN ui_web-services-v8@1.0.0 No description
+[0m[91mnpm WARN[0m[91m ui_web-services-v8@1.0.0 No repository field.
+[0m[91m
+[0madded 215 packages from 190 contributors and audited 897 packages in 7.048s
+found 1163 vulnerabilities (1160 low, 1 moderate, 2 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 1cc71e5f88d3
+ ---> 9f662459977a
+Step 6/8 : COPY dist/ .
+ ---> a8d64bf763f9
+Step 7/8 : EXPOSE 8080
+ ---> Running in 304e339dde98
+Removing intermediate container 304e339dde98
+ ---> 90077f14083e
+Step 8/8 : CMD [ "node", "index.js" ]
+ ---> Running in 08ba073da08c
+Removing intermediate container 08ba073da08c
+ ---> 0e576fbe8229
+Successfully built 0e576fbe8229
+Successfully tagged 10.0.1.129:5000/ui-proxies:e5efe1a
++ docker tag 10.0.1.129:5000/ui-proxies:e5efe1a 10.0.1.129:5000/ui-proxies:bronze
+[8mha:////4MXsYXnb4p7FgiEOMp7sCWEPUy1bdW722lZ/PP4Z+CyxAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFkKHf7T23f36y8/b4AAAA=[0m[Pipeline] }
+[8mha:////4ADhGD/71LyTTCLwqIdrANDxNP6S4NTyh7Fc/Zz1XH+5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCEB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BvGsvpe+AAAA[0m[Pipeline] // stage
+[8mha:////4Pqex8SOPKqtieLNGiSe5v2zn7dUf74RpgAKszPrXCumAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjIagQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvmG8PMMEAAAA=[0m[Pipeline] stage
+[8mha:////4KwAK1j0yzGjwR2n9VRQvXqKilE+P7dTJFL12wkwFi//AAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUQoIFMXWNsnCC0ISQNvq//KS0EyfiatyBlkpMeLBsS9Z7vaGIDCdiJxqLrcdYe9GF3k1JDMTtNdAgGrqImjBSsELZQZGx1VIVJQuLshxWEtYW60DRo0uwkY1+6DJodOU58bQdJeTe3OEJmZzISXP6lpFhe+tNJPxx/gJg7BLku/1sh/lZfACW9ZT2wgAAAA==[0m[Pipeline] { (docker-push)
+[8mha:////4KskLrn9k7rbG/w7PmiQkXYcdP4adTYJhEPSQYUEY7q5AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiUUCBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK7+9Q+vAHUcXIBvgAAAA==[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/web-services-dev-build
++ git rev-parse --short HEAD
++ commit_id=e5efe1a
++ docker push 10.0.1.129:5000/ui-proxies:e5efe1a
+The push refers to repository [10.0.1.129:5000/ui-proxies]
+5c2c4b4270ba: Preparing
+f4451858cd37: Preparing
+5ee20acf2f15: Preparing
+8f9e752f64de: Preparing
+86da60c327cc: Preparing
+a0dec5cb284e: Preparing
+03d91b28d371: Preparing
+4d8e964e233a: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+a0dec5cb284e: Waiting
+03d91b28d371: Waiting
+4d8e964e233a: Waiting
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+8f9e752f64de: Pushed
+86da60c327cc: Pushed
+a0dec5cb284e: Layer already exists
+03d91b28d371: Layer already exists
+4d8e964e233a: Layer already exists
+bc17cd405095: Layer already exists
+740ffea5d5c3: Layer already exists
+ee854067fbbd: Layer already exists
+eac9ead92b24: Layer already exists
+23bca356262f: Layer already exists
+5c2c4b4270ba: Pushed
+8354d5896557: Layer already exists
+5ee20acf2f15: Pushed
+f4451858cd37: Pushed
+e5efe1a: digest: sha256:2899abe3e1e76910d7a4905dde337c0caac6eee2ad82e0e6f36e0e01d98989ed size: 3259
++ docker push 10.0.1.129:5000/ui-proxies:bronze
+The push refers to repository [10.0.1.129:5000/ui-proxies]
+5c2c4b4270ba: Preparing
+f4451858cd37: Preparing
+5ee20acf2f15: Preparing
+8f9e752f64de: Preparing
+86da60c327cc: Preparing
+a0dec5cb284e: Preparing
+03d91b28d371: Preparing
+4d8e964e233a: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+4d8e964e233a: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+740ffea5d5c3: Waiting
+a0dec5cb284e: Waiting
+03d91b28d371: Waiting
+86da60c327cc: Layer already exists
+8f9e752f64de: Layer already exists
+5ee20acf2f15: Layer already exists
+03d91b28d371: Layer already exists
+a0dec5cb284e: Layer already exists
+bc17cd405095: Layer already exists
+740ffea5d5c3: Layer already exists
+ee854067fbbd: Layer already exists
+5c2c4b4270ba: Layer already exists
+f4451858cd37: Layer already exists
+4d8e964e233a: Layer already exists
+23bca356262f: Layer already exists
+8354d5896557: Layer already exists
+eac9ead92b24: Layer already exists
+bronze: digest: sha256:2899abe3e1e76910d7a4905dde337c0caac6eee2ad82e0e6f36e0e01d98989ed size: 3259
++ docker rmi -f 10.0.1.129:5000/ui-proxies:e5efe1a
+Untagged: 10.0.1.129:5000/ui-proxies:e5efe1a
++ docker rmi -f 10.0.1.129:5000/ui-proxies:bronze
+Untagged: 10.0.1.129:5000/ui-proxies:bronze
+Untagged: 10.0.1.129:5000/ui-proxies@sha256:2899abe3e1e76910d7a4905dde337c0caac6eee2ad82e0e6f36e0e01d98989ed
+Deleted: sha256:0e576fbe822935529f36b50088692a4f1bd2175ac40722a2caafc87fac146488
+Deleted: sha256:90077f14083e3aa9d2276b7f7eab37e048e621c89efdc0d097dabf013d3fc736
+Deleted: sha256:a8d64bf763f98aab4883bc6e93073a25fa69a581686aba2323f0b46b153b5ea6
+Deleted: sha256:a171b3d9eede0a9c3a1168f0a554db6d765d9bbf5beb93a0f72d7cafe6c7c6db
+Deleted: sha256:9f662459977adbe1321723a553d036275fa79a763bd77616bbe3c6943cf7ed06
+Deleted: sha256:c6c2572d198415d09cfe006f82d329eb1dc4578cf6ba60dbd14fb5e75f397f41
+Deleted: sha256:88b3c0bdd9b2f5d872963aff9be2dec58d6fab831047d2057aba8fa872897293
+Deleted: sha256:7153193162f008ca870e287083b8f14e273c8e6d0afddadb987341bae727b245
+Deleted: sha256:0ed37a57902d7ee50bed3df5d2be5cfb8d1e1af3ce13456e74d5659387054060
+Deleted: sha256:8d8399e42a33bacc2778865229351e695ff572119d0b4d926e8484b9760ed31f
+Deleted: sha256:32bf66cac6d208ea1a4c33d4033fdf6e87532c11d3a81c2c6dd5c8fdd9f822d2
+Deleted: sha256:385289c4d7f7cd2ebc3b84318316fac09be40b9989d8abb159176f7f74726cf2
++ rm -rf dist
++ rm -rf dist.zip
+[8mha:////4HCp4RoOKOvjlatS+wt8jqbfj6Q+wmm53JWgnwi3Q3tnAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiUSAkRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g2/yR8JvgAAAA==[0m[Pipeline] }
+[8mha:////4IhYpdVhexcJWWOzYXO+Kkswi3/yRysznKdaSnQ5C1/HAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIVEgRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g2gS0pbvgAAAA==[0m[Pipeline] // stage
+[8mha:////4As1Luf+vmpIfGKYQjaSW3l8DsAUOBqPW0u58+IH5jFqAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMJBgg5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8BjoqNn70AAAA=[0m[Pipeline] }
+[8mha:////4BCsJ8dqwfnNxOPrd1lH90LsMi15EglykOdCKjIjQ23/AAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6LEMBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfk5V6QlR+dNok8vQAAAA==[0m[Pipeline] // node
+[8mha:////4Kurxp+vMIjq1vRNYxFDAy6bs2tctZaCIavpexChswjqAAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkOBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfk+1KQlR/bfC4MvQAAAA==[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

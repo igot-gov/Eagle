@@ -1,0 +1,23 @@
+commit e83dd9eda2d6f81b54a29df1e5a23487979d99ba
+tree 202827b1ed629d603052fabd154ed9fd95ec4422
+parent 30de91572ed0aa809195e652ea30f10384e426fe
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 08:40:48 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 08:40:48 +0530
+
+    Reverting the config changes
+
+
+:100644 100644 adf47abd40f0ae5e4e3ff1ee3dc8615c5f0ce528 05a986fbbd84d959988f6704295c91e7c00aea22 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/NotificationConsumerServiceImpl.java
+commit 30de91572ed0aa809195e652ea30f10384e426fe
+tree 6b639fbb61e11827bf1b17fb96d26a599e14c31a
+parent d9a8e9b37e377b4b33b04dce0f200fd4a825b6ec
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 08:29:00 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 08:29:00 +0530
+
+    Revert "Changing the consumer and producer config"
+    
+    This reverts commit d9a8e9b37e377b4b33b04dce0f200fd4a825b6ec.
+
+
+:100644 100644 a6e9c04453306de0626236f52d3e3f7c11275bd5 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 adbaf7e31f4c543a88f0133c7d69c817faa09a17 da36e6a48ba155c41e73867a2595955a355f2a85 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ProducerConfiguration.java

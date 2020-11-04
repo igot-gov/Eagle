@@ -1,0 +1,21 @@
+commit 921d0b4f88b57f4c9df21d1942d2cd6f6a1f292e
+tree 24468e241cf2f8da43e7c0d51ec63812a3e26b8b
+parent c421221c181d36352c551c41bdb1d56824e634b6
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 19:17:27 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 19:17:27 +0530
+
+    Bannor default selected color
+
+
+:100644 100644 4cf87ce39ae32c3cc89741e23738aa1e590e8db6 80b7f5c3ab0042b6978e6cd42b31408fd75d7591 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit c421221c181d36352c551c41bdb1d56824e634b6
+tree bef12bddf34a82bc5a27f0cce60ec5b69e4696d7
+parent 22af266ed3f1810d36ade9a9269ff9f5ae9f0148
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 18:28:43 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 18:28:43 +0530
+
+    apend to last commit
+
+
+:100644 100644 59f38d2d06f29bc01aeacdd4a06d2f5ec3591ab4 0f739dd609776b7e4885244a66e81e65a52b92ca M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 d14c8fade8212a9d3a399f814dcf921dcd566832 d41fece7cc0a32163d9e055f7ac4340dbcd2f75d M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-create.json

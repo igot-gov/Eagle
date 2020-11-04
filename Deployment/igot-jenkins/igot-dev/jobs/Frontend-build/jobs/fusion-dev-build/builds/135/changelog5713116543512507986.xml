@@ -1,0 +1,10 @@
+commit 246c204713aada2a58b07b91a99afea37202c319
+tree 96b74e163334af5ebd8b071c08534cf9a11aee68
+parent 22f399766fc95f154893c3c6ce40dc89a5c8d594
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 15:06:53 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 15:06:53 +0530
+
+    fix1: build
+
+
+:100644 100644 92ff9a11c3d0b7e611851302295f378be43c00e7 cbeaa23fec220c604032e3a2170ba87867703be7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts

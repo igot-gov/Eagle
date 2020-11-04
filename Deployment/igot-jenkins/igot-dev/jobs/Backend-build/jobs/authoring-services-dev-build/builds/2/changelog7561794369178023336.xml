@@ -1,0 +1,140 @@
+commit f054ee2aec216367650d1e7f0172bda82e814103
+tree 5c13a6992e9a465cf45abfce5102546b5c99060b
+parent 5932d0b6a9335d430051ba2701fe59433c55ba83
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-18 12:22:25 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-18 12:22:25 +0530
+
+    Scrom API refactored for fetch and delete
+
+
+:100644 100644 0b8ab6b22dec63d2d6fbad5e1054595333686b47 70ce2fe4c0b3363969492998b3e360211b185b13 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ScromController.java
+:100644 100644 4e253b665829425a16b82f2b219b590cd74a9305 4be5370ff7eeae1ddf9aa97a46cd8ce5b6fad9a4 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/ScromRequest.java
+:100644 100644 327f818c3a74f42c503da749ed0a29e18120a7f0 1e1ba2282859b23aef1b0bec4d851e1524f3bdc9 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/cassandra/ScromModel.java
+:100644 100644 a76f0ac98da9d662c7c82de27c24a309110232e9 8269257ba6ba533d7687ede3723033253e989bde M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/service/ScromService.java
+:100644 100644 88834ea0c7dfc2f28b0999e9ce583ce4f50a3925 3c1661bcd5b696a20f54c11086e36008f2d1b4a5 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java
+commit 5932d0b6a9335d430051ba2701fe59433c55ba83
+tree 2a64dc205db59caf67f86a0be98acfdc5a565c7c
+parent 68e0a8528ee7161bbf5c74ffd0191f58aad68ab1
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 21:07:07 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 21:07:07 +0530
+
+    Added validation and request headers for fetch and delete APIs
+
+
+:100644 100644 28ed461c99085cf57392f80dfc66b134bcc44764 0b8ab6b22dec63d2d6fbad5e1054595333686b47 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ScromController.java
+:100644 100644 4d07c22d226e334703358895a1bb27c869b59844 a76f0ac98da9d662c7c82de27c24a309110232e9 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/service/ScromService.java
+:100644 100644 3e99c2690d22ecf819933f18bd0f902eeee08cd6 88834ea0c7dfc2f28b0999e9ce583ce4f50a3925 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java
+commit 68e0a8528ee7161bbf5c74ffd0191f58aad68ab1
+tree 5dd517a9e8abf862280fcbe27c5daca20d9ac825
+parent 1de4db5f6bfc2a8215fb493a5bf2a595e48207d6
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 21:01:38 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 21:01:38 +0530
+
+    Added scrom delete API
+
+
+:100644 100644 9a530f29aa751638088e4d0c2db78e4f8e4b8be6 28ed461c99085cf57392f80dfc66b134bcc44764 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ScromController.java
+:100644 100644 6bf3335b8c41ee5a5ac7598e4397ee897052f19d 3e99c2690d22ecf819933f18bd0f902eeee08cd6 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java
+commit 1de4db5f6bfc2a8215fb493a5bf2a595e48207d6
+tree d53af6a027c6deea83c27bc7d5a193bc450e931d
+parent 624443673366e2eaac37916c9b84fe7380e62819
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 20:54:49 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 20:54:49 +0530
+
+    Added Scrom fetch API
+
+
+:100644 100644 8b71dde54c4707a106ea9f43c755fcea1e80d9ab 17a6108a9e47a7f872d2b6cb0264398046e1d1e9 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/ScromModelRepository.java
+:100644 100644 2e8c7e170880fa643efed4c63b4305c5b952c932 6bf3335b8c41ee5a5ac7598e4397ee897052f19d M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java
+commit 624443673366e2eaac37916c9b84fe7380e62819
+tree 7bceeae9e38b3733234bba77850287280aaae89d
+parent 35a6a43986b61972eb7ea9da84affdc466c5b796
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 20:47:13 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 20:47:13 +0530
+
+    Added Scrom add and update API
+
+
+:000000 100644 0000000000000000000000000000000000000000 9a530f29aa751638088e4d0c2db78e4f8e4b8be6 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ScromController.java
+:000000 100644 0000000000000000000000000000000000000000 4e253b665829425a16b82f2b219b590cd74a9305 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/ScromRequest.java
+:100644 100644 c14fdb2ce1b078fd399030458d223b4924dca970 327f818c3a74f42c503da749ed0a29e18120a7f0 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/cassandra/ScromModel.java
+:000000 100644 0000000000000000000000000000000000000000 4d07c22d226e334703358895a1bb27c869b59844 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/service/ScromService.java
+:000000 100644 0000000000000000000000000000000000000000 2e8c7e170880fa643efed4c63b4305c5b952c932 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java
+commit 35a6a43986b61972eb7ea9da84affdc466c5b796
+tree 904ac03b37d0af80226b3ee76070450aba50afa1
+parent 62aec83050b14491424f4372f8f94c09e898d6f1
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 20:13:23 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-13 20:13:23 +0530
+
+    Added scrom schema and repository
+
+
+:000000 100644 0000000000000000000000000000000000000000 c14fdb2ce1b078fd399030458d223b4924dca970 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/cassandra/ScromModel.java
+:000000 100644 0000000000000000000000000000000000000000 132148210e477d7348aa70c4554052a5a679394f A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/cassandra/ScromPrimaryKey.java
+:000000 100644 0000000000000000000000000000000000000000 8b71dde54c4707a106ea9f43c755fcea1e80d9ab A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/ScromModelRepository.java
+commit 62aec83050b14491424f4372f8f94c09e898d6f1
+tree 607785e7aeb2b0985aa0a180773c0a47e3956199
+parent 36398903f3d13bffe99a459633ee45e76c771ace
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-10 19:49:24 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-10 19:49:24 +0530
+
+    Added script for score card
+
+
+:000000 100644 0000000000000000000000000000000000000000 9d3d580e0a7f07c4d5ee79230cbbd8c018540862 A	db_scripts/cassandra/Scoring.cql
+commit 36398903f3d13bffe99a459633ee45e76c771ace
+tree c6fd25759f1111c74649fa251ead799bc97fb0f3
+parent 5a34c4cfe051703c72162072a0f4765d498b8e04
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-10 19:26:02 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-10 19:26:02 +0530
+
+    Logged parent details for unpublish API exceptions
+
+
+:100644 100644 eeea98c2d83fb83ebf1892ed5aa63d239e81ae04 4af4e4f7a97750ab128d6998110ed3cdb473a7d9 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ContentCrudServiceImpl.java
+commit 5a34c4cfe051703c72162072a0f4765d498b8e04
+tree f05157ba7420acddccb700c136a05196c295b152
+parent 5dc438da1deacd892e2b8c756d4ef5c656b7423c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-10 19:21:19 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-10 19:21:19 +0530
+
+    Logged parent details for delete API exceptions
+
+
+:100644 100644 940acae82c97b99db32ec45ef1f5a27704d1af2b eeea98c2d83fb83ebf1892ed5aa63d239e81ae04 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ContentCrudServiceImpl.java
+commit 5dc438da1deacd892e2b8c756d4ef5c656b7423c
+tree adb66a8d47c1d636fabae0cf65a7d6df93468140
+parent ebec47469c16526a6c932177946756065cce09d8
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-09 20:30:31 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-09 20:30:31 +0530
+
+    Fetch API added for resource quality score card
+
+
+:100644 100644 cb84534d5207e7b34a7122e8ab079c8d5ad77232 09367a7bd1bfac8ccc53d1ca20ebbe5c6be03ded M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ContentEvaluationController.java
+:100644 100644 adf50cb07bfc9c82081b88759d710c4ea8737d44 59dbfe0116406ad84071cd863a063d36fe80c79e M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ContentEvaluationService.java
+:100644 100644 4f7f0e55fb045619cd84724c58d7a39649b9708a 6c633a11f6743f05f89514a0ad4ab115fa8ba6db M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/util/IndexerService.java
+commit ebec47469c16526a6c932177946756065cce09d8
+tree e514e023b6c178b9d64a8dca8a173d283aaffe50
+parent 651e286a5c74e1a375ed99b40e00c493c9e85e45
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-09 19:47:45 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-09 19:47:45 +0530
+
+    Resource quality score card impl
+
+
+:100644 100644 7ad81d3bd70aa3174113324dbe996331e64426b2 55d7ed57e769d260b8ffb0616518f7b453c5080b M	apps/authoring-services/pom.xml
+:100644 100644 bc4192f03b128368f356c7e538344100a962d31c cb84534d5207e7b34a7122e8ab079c8d5ad77232 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ContentEvaluationController.java
+:000000 100644 0000000000000000000000000000000000000000 de39e5c1722aa491aff18d149adb387b210a5a9a A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/CriteriaModel.java
+:000000 100644 0000000000000000000000000000000000000000 d6f148a46dd54e13107aa7c3059cc33486d9ba48 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/EvaluatorModel.java
+:000000 100644 0000000000000000000000000000000000000000 e5380a27454c51e65c06a8a736f27d78b1e80708 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/QualifierModel.java
+:100644 100644 186951512c576556cbfcf7860022223980a1b252 b18cd4eb7bc12035383ee273b46a1fbeb37bc4c2 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/cassandra/ContentEvaluation.java
+:000000 100644 0000000000000000000000000000000000000000 1dc51c09dca9c8d674c30cabb271acd7ecdb7d29 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/evaluation/EvaluationCriteria.java
+:000000 100644 0000000000000000000000000000000000000000 ba6bffb488e4b2a5f356eed51ca83a0ff63e2d1b A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/evaluation/ScoreCriteriaRepository.java
+:000000 100644 0000000000000000000000000000000000000000 5b4ff3873aba4cd25489a9dbb9543abfaa6eb6fc A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/evaluation/ScoreQualifier.java
+:000000 100644 0000000000000000000000000000000000000000 4b276909678247ec6b050e5136f10e6ca32d2729 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/evaluation/ScoreQualifierRepository.java
+:000000 100644 0000000000000000000000000000000000000000 21b832df251571e857c97c0b936542d0ea8731ab A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/repository/cassandra/bodhi/evaluation/ScoreTemplate.java
+:100644 100644 f7c955b3d7e6fffed27dcd597ff376841266730b adf50cb07bfc9c82081b88759d710c4ea8737d44 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ContentEvaluationService.java
+:000000 100644 0000000000000000000000000000000000000000 b907f788b9518e33d1c2cf4d590882691c6f7fc0 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/util/ComputeScores.java
+:000000 100644 0000000000000000000000000000000000000000 4f7f0e55fb045619cd84724c58d7a39649b9708a A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/util/IndexerService.java
+:100644 100644 67c5df14732cc3efb4081290912dfe8906969bab 8c638e2ddd0fd9b8cd54057afa3093ad59b9c9c3 M	apps/authoring-services/src/main/resources/application.properties

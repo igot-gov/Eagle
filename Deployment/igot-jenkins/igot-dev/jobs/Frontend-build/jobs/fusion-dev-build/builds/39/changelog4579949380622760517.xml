@@ -1,0 +1,10 @@
+commit e613ca6088656f0d2f3fb4315a6a1856910a172c
+tree e8ea1e477851f9c146eb4d682958029b6df65ffd
+parent 95212129aca4cf7151e40e35f2516ceb10048af9
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 19:45:12 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 19:45:12 +0530
+
+    LMS API test
+
+
+:100644 100644 52017300291bda88ef9aebd805aec573a8fc8b4a 4065ed8733a3a1b2cc77541da6377a458e3c369a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts

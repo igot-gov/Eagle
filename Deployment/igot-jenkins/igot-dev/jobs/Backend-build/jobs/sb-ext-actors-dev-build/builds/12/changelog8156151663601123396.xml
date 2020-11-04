@@ -1,0 +1,10 @@
+commit 38e418dbd9958625c5a6b03fa5b0144b2d3c7596
+tree 94eb884a3ed1f8b6485d8cd397a18a6eb222e34e
+parent 928463f3c1481ae3ad8165c1c91fcbb8b1798c39
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 15:00:16 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 15:00:16 +0530
+
+    Issue #51322 updated application.properties
+
+
+:100644 100644 7ec0de97c4653360f3aa02a2d35c332324dd6dc0 2f015a2817720f4c36cd1227c094b9601a0c4aa8 M	apps/sb-ext-actors/src/main/resources/application.properties

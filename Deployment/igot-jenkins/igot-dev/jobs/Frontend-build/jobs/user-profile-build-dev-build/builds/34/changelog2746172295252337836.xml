@@ -1,0 +1,10 @@
+commit 64fe3677ba23196c2511126c1be9057b4a63dde9
+tree 9e3491c8fc4cd337509f4ab51d41ca0b145359a6
+parent 4601d8bd156548dc86bd788b0a772345984766b0
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 16:37:47 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 16:37:47 +0530
+
+    Task #52183: limit of the query increased to 15
+
+
+:100644 100644 5ce8f5b0a6e49a2aea3ffc5a2ccddc8351640acb 53a22aa9aa52aaa80ff0e26c5407eebabb05b6ae M	src/utils/postgres.ts

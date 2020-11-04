@@ -1,0 +1,9 @@
+commit 39f88f1dda07c256c76d139e24dcd3d25a35053b
+tree d86d74e00eeebfefcfc9bf9f3661bdbfba17f2b2
+parent f46c96acfb6436d1560d535766f9af57cd845021
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 12:04:54 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 12:04:54 +0530
+
+    Added loggers
+
+:100644 100644 ac0b5f7ab8d9f30ce318f05273e2207d3e91dbbe 93fc54ee5885ed78d3b1a29bbb5593ebf9ee253a M	apps/notifications-module/src/main/java/com/infosys/lex/notification/util/NotificationTemplateUtil.java

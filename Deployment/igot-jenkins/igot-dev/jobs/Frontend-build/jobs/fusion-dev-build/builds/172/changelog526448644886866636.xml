@@ -1,0 +1,10 @@
+commit 56bd96222cdf7015a665d7b50c2ba882c7bdbac0
+tree e45e4c75f8c1bc79e8a6674347988434c20b45d8
+parent 157e088623c1455fd68c79e0052bd7483c2fea24
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-02 20:17:35 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-02 20:17:35 +0530
+
+    grid Role Updated
+
+
+:100644 100644 ec1571ef6302c59f99bd0f78b633bfbc428f050e 7b4fdeb2ec46b77fa8ced34269860fc0cd40756d M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.html

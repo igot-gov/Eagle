@@ -1,0 +1,11 @@
+commit f6b51b6a22829e2e8553d16b4ff2a608cc608330
+tree de302a07f6f2fe24d65cfd01c71a0fb40d54fb68
+parent 77e5ffdb1b92abb558e59e7ccbb8e27c99552927
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-27 11:59:53 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-27 11:59:53 +0530
+
+    Task #0000: Fixed the subtitles length issue
+
+
+:100644 100644 d9b4836ca8f39a185af8e8b5958e90569002577b bb6b9561fb1b9a908e68f6f5f2ea7a8893122cfe M	apps/fusion/project/ws/viewer/src/lib/routes/audio/audio.component.ts
+:100644 100644 89d79e2cf999aafc89bced83b0b4ee2532ecac32 0ca38c8d330e6f36fcf8b97ecb575c98e98d3a8c M	apps/fusion/project/ws/viewer/src/lib/routes/video/video.component.ts

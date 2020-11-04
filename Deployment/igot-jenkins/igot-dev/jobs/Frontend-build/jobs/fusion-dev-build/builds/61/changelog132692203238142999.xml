@@ -1,0 +1,27 @@
+commit 88a4cb5d007e304ab1ab6b81807a444391414904
+tree 281e311293cda958245de358b1062b22489663d5
+parent c54dfbd6945a1104b0ebea492d4a86866529a2b4
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:26:56 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:28:19 +0530
+
+    log added
+
+
+:100644 100644 2a588daf5f2147b85a99ec9a2704da9ece01087c c06595c6eb311ea1e72a76b5ff5013f9074477f5 M	apps/content-service/File_server/S3/helper.js
+:100644 100644 087c5014b6cd458d6288b2e7e2a71b1804c33c0e e7a32b3eda47c1f9a92a2a5110f58e423d831b0a M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/knowledge-artifact-details/knowledge-artifact-details.component.ts
+:100644 100644 fce8882be241e4ecf422eb96e107d3552e8bc6dc f37f35154e70d490b7b8360ee2104caa81378acb M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-notification/playlist-notification.component.html
+:100644 100644 2ed023c234c9e1c3bf9117c8c14fa783ba088ca8 3ee153a998f496d5dd7c8c13750475d664fb8807 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-collection-matmenu/auth-collection-matmenu.component.html
+:100644 100644 907b4422bbc42cd8f3f1012e8019a4ef113834f9 a44aef59be91f6a34ce1a52611a6631ba4f93db0 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-collection-matmenu/auth-collection-matmenu.component.scss
+:100644 100644 367820eee21f5ab81f29200154b5138b878619b8 b2e05b39bdc019475c11357f46a4825630db900b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 baa1653f317bf902cbe0f86b38bbd8de65db0211 c8ea2fe4bb1e3a50617bb5efc8f1bd8801ce4c66 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+:100644 100644 276d4c33e1ba73f0b47a68a0df612ecaae440b46 adde3c0ae067c66a1423164d9dc100046c2a696f M	apps/web-services/src/protectedApi_v8/content.ts
+commit c54dfbd6945a1104b0ebea492d4a86866529a2b4
+tree 0eafac1a03f572759b71ca449768205a40036226
+parent 88f02de88fd83752316fb595b015d9ce8a6a46e5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:20:58 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:28:19 +0530
+
+    log added
+
+
+:100644 100644 92de046db6b280ed2169a1dace94c06605c585ad 276d4c33e1ba73f0b47a68a0df612ecaae440b46 M	apps/web-services/src/protectedApi_v8/content.ts

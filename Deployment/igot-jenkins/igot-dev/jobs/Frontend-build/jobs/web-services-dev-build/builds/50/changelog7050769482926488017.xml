@@ -1,0 +1,18 @@
+commit 4a48dd899e3308357a3c421b39ed84ac451a4933
+tree 6697ecb1da6df0545ed691d3dce9dd2feed61519
+parent c319f2a696cb0f97eddc156cbc9afeae31a92cdc
+author Haritest <haridasksd@gmail.com> 2020-09-23 15:45:59 +0530
+committer GitHub <noreply@github.com> 2020-09-23 15:45:59 +0530
+
+    sonar stage added in jenkisfile
+
+:100644 100644 5c5099e0a81d102cb4b1fa7b3da0220acecdf9d5 1badf76eb798922c9dd7df0c70e06fac6972073a M	apps/web-services/Jenkinsfile
+commit c319f2a696cb0f97eddc156cbc9afeae31a92cdc
+tree f5841e6e8cad9f6d573e4db10eaeb0b32347e905
+parent 61f55985cc9d1a5e0ac43ae2fa41c408b5db6de3
+author Haritest <haridasksd@gmail.com> 2020-09-23 15:44:20 +0530
+committer GitHub <noreply@github.com> 2020-09-23 15:44:20 +0530
+
+    Create sonar-project.properties
+
+:000000 100644 0000000000000000000000000000000000000000 cb2b0146f3f15ac508d835733f3fb562fd8a9319 A	apps/web-services/sonar-project.properties

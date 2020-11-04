@@ -1,0 +1,10 @@
+commit bacbe92807f5fc1042791593f615a31c6d8f28e2
+tree 6b1755fb856e9be113ed6856a90615b4a4c4d05a
+parent 2fc42e7da45b5163c028f2d72deb1e1892176867
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 11:20:09 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 11:20:09 +0530
+
+    Task #51689 rmv rootOrg
+
+
+:100644 100644 2a2c29dae89ac130a43b23b4398a8be257734934 11c89d8f346e53deb6118797c8193799c4245ae4 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/NotificationEvent.java

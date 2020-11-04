@@ -1,0 +1,12 @@
+commit 3c3350c9cf02c51f6a3f6f4309cf5d7373234889
+tree 3bee5348aa64d4ae3c1d2f1203511a18c845c6c7
+parent 5efcd49c77b5d03c90c6c1771c308929bf252a9b
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-20 08:27:28 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-20 08:27:28 +0530
+
+    Scrom - Added logs and enabled validations
+
+
+:100644 100644 70ce2fe4c0b3363969492998b3e360211b185b13 b71af3a2939964f8b02ea6139f56732777759d12 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ScromController.java
+:100644 100644 4be5370ff7eeae1ddf9aa97a46cd8ce5b6fad9a4 e5b512e7dde4846620d0274642f76f89b17ec980 R095	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/ScromRequest.java	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/ScromData.java
+:100644 100644 1a2dd212fd192e3ffc637a0f41b0a8a4e6a52f6f 5a349ba4e836b58a99f3555ec3c3c1b432ee9eae M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java

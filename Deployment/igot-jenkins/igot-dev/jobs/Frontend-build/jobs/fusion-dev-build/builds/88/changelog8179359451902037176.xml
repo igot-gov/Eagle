@@ -1,0 +1,14 @@
+commit ba7f48805aa8a83b0a97f34da0ed20343971709f
+tree f2bc98a0d9b2d60d095e1aaa7bcaa0e16653fcd3
+parent 35b392cae03eb18e61fa3d34273884e85422183c
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-28 22:26:02 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-28 22:26:02 +0530
+
+    lint error removed
+
+
+:100644 100644 33a25ba351a5fede085e860d0246a0cf8c8b2d46 5a30dc67e8eaa0f1ccf9f81ccc6adcf7fcc09e33 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-top/star-rating/star-rating.component.ts
+:100644 000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/home/component/learn/discuss/discuss.component.html
+:100644 000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/home/component/learn/discuss/discuss.component.scss
+:100644 000000 d4e082ef4ff7250da5145beb44b0a286dc22dbfe 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/home/component/learn/discuss/discuss.component.ts
+:100644 000000 1cf9713bf797f848c64a2881cdb81342555e8511 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/home/home.module.ts

@@ -1,0 +1,70 @@
+commit 57ac1b23c5a1a14f5d4cf3e953dfa984249e1479
+tree 53814e0170a4d0cee7e191c8c97fe3aa50499038
+parent ac998b53d599508254ee81658643be2b5138ae39
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 23:05:06 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 23:05:06 +0530
+
+    Fixing code smells
+
+
+:100644 100644 c0aa593d45f1ca9bff91530bfb6f8fb2f25a4be4 6613a3a1d0434a853cdbf1544eb52834926f86fd M	apps/hub-services/src/main/java/com/infosys/hubservices/model/cassandra/UserConnection.java
+:100644 100644 bc2938096ee0bc9c2e1a4c498104c8db2d22b4fd 98221bf74e914d59d6f83707fc0424b18637ec40 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 d68ccf793555a4990d6e4e165fc85e1b89190fa1 f0ae8023252187c1378333059feb079349742bad M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionController.java
+:100644 100644 ff5e6ff2f18d1d97a854ba7d91fc13d961dcf409 69f069a3e3e92f8065288645299ceb4f3d53ff84 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionCrudController.java
+:100644 100644 2258364f944885e91a4487e4cb0cd6f68f524f34 d98ee5fd46cb03f0e7e26a0a850d91761b77c7ac M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+:100644 100644 d5d33e41cab1afb6223a5b6bfd04f5dafd8b6de0 caa06e5054a9294130c0850a3a0b99bc9bf4e490 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 e0044c6b2b84d6a8448b3400e9cdd448e5a07b72 5d87d037b85feaf863597bd038e03ba98a081573 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 c3cddb57d57a44d34374739df5de92f3d9b63cb1 b68b8ae55904d66d7f0044ffd1cde12e55eedb76 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/ConnectionProperties.java
+:100644 100644 cc159715b8d4660fbb5a1681749fd7f5bc5a0559 1a98e736cc47bb6e2f0a7d836ee43c412e189551 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java
+:100644 100644 d53ff4ca28ef6e7033901a87aa8b9c329a133484 abc75892266ecd2e3806bf830a739478f6cd312b M	apps/hub-services/src/main/resources/application.properties
+commit ac998b53d599508254ee81658643be2b5138ae39
+tree 4a7b6c1c1854e01748ba9c89ab041dd704a76986
+parent abbfb2ab728b18b56c54136d6e4db09dee561b99
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 21:14:21 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 21:14:21 +0530
+
+    Fixed code smells
+
+
+:100644 100644 fd381054570e840601791179617784d8cde7ac80 e6d5521140e8241c0eb4c2e477afc690c4092f44 M	apps/hub-services/src/main/java/com/infosys/hubservices/config/CassandraConfig.java
+:100644 100644 cd86d1f38df4115d466e0f8a044dbe04e1d59bd7 6fedb78e5512a8801425a2c7016ae1c350d01c12 M	apps/hub-services/src/main/java/com/infosys/hubservices/config/EsConfig.java
+:100644 100644 0993636f901b1e55af8174d9169c52c24ccedc42 534fc650f0afc0d12c70819d61060225556bb89f M	apps/hub-services/src/main/java/com/infosys/hubservices/exception/ApplicationServiceError.java
+:100644 100644 9acd38108ea33271e2fa8bacfd4052892d3211c1 89ad21a9e1ece627ebbeb1a8450538008c55d13a M	apps/hub-services/src/main/java/com/infosys/hubservices/exception/BadRequestException.java
+:100644 100644 2c9c927627a95d926451781bf451f429cc1c102b 2c0701438e4ab6633f4461d162f66f47e01a2c2f M	apps/hub-services/src/main/java/com/infosys/hubservices/model/Response.java
+:100644 100644 b9e2eb9244b24cc2bce493a69c8ff615bbf55b20 bc2938096ee0bc9c2e1a4c498104c8db2d22b4fd M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 8738085fefc80ef531631408d5257f741a2fe2b3 d68ccf793555a4990d6e4e165fc85e1b89190fa1 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionController.java
+:100644 100644 291aa6b843be6a51a312863a01b2e5a87fe3a1bd ff5e6ff2f18d1d97a854ba7d91fc13d961dcf409 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionCrudController.java
+:100644 100644 e709d5d4bc2ecdd4716d8cec9a1fe138d5c82f1c 806f671e48ea281208ba2484ed951db0643d41df M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/BodhiConfig.java
+:100644 100644 80da7cd085507352648e65f26feefc9a938173d9 9f27fa76df491dbb5ed436006f9c9574ba8dcb6e M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/sunbird/SunbirdConfig.java
+:100644 100644 25cdb2f5492cbab2bddc9b6cc9297197b7868dbd 2ab243f096fe72a464456a6b2b87d2fcee655392 M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 9a04c7dc0d2bf9b15ad9ad600f174c7923ae66b8 d5d33e41cab1afb6223a5b6bfd04f5dafd8b6de0 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 ff3d4235f8073c49e1ccfe4f205ab1937bf9220f 266d859696e3a1d233d942ab0de1efc123202bf5 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 7e10aa293d4a269b1efcb0bbc807b8ff3b6e75c4 e0044c6b2b84d6a8448b3400e9cdd448e5a07b72 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:000000 100644 0000000000000000000000000000000000000000 cc159715b8d4660fbb5a1681749fd7f5bc5a0559 A	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java
+commit abbfb2ab728b18b56c54136d6e4db09dee561b99
+tree b07baaba37d5b9f913ee496151f937612d5a4ec9
+parent 5f6f10ddab9d7fbdacceaa7620a17d9664586a81
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 18:20:13 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 18:20:13 +0530
+
+    Task #51810 - Updated connection service for notification
+
+
+:100644 100644 a84ae7796b4833bcf85403fd57a393188549f259 25cdb2f5492cbab2bddc9b6cc9297197b7868dbd M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 ea4bf0f1f15f9f5b7374419aa5a03c1e62d9f464 4da3ceda2d8672d1b99fc0d88533881f8f3b7de6 M	apps/hub-services/src/main/java/com/infosys/hubservices/service/INotificationService.java
+:100644 100644 025dfee85c79d17a20d5e9e8febec5822dc2a8d4 9a04c7dc0d2bf9b15ad9ad600f174c7923ae66b8 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 01adf99d50aff7cf6ffa26ab665de5cb52a87879 ff3d4235f8073c49e1ccfe4f205ab1937bf9220f M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+commit 0445cb8b6b12e8f2e844abf70184dcb053a68b1d
+tree 985b05438625a7171a4314ee97eae58d3bc3374b
+parent 93c80e3fefd393158b2543b5ca9c3a99ec4fdada
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 17:57:49 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-30 17:57:49 +0530
+
+    Task #51810 - Implemented notification service
+
+
+:000000 100644 0000000000000000000000000000000000000000 2a2c29dae89ac130a43b23b4398a8be257734934 A	apps/hub-services/src/main/java/com/infosys/hubservices/model/NotificationEvent.java
+:000000 100644 0000000000000000000000000000000000000000 ea4bf0f1f15f9f5b7374419aa5a03c1e62d9f464 A	apps/hub-services/src/main/java/com/infosys/hubservices/service/INotificationService.java
+:000000 100644 0000000000000000000000000000000000000000 01adf99d50aff7cf6ffa26ab665de5cb52a87879 A	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 5d4cc6407084290f54de9c2fbf81eafd5b5a6c87 c3cddb57d57a44d34374739df5de92f3d9b63cb1 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/ConnectionProperties.java
+:100644 100644 1b2e980ad6e2fc5991e15ff89003bf7478187c88 d53ff4ca28ef6e7033901a87aa8b9c329a133484 M	apps/hub-services/src/main/resources/application.properties

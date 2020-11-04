@@ -1,0 +1,21 @@
+commit 8968c0e08cf5f0673d0d6ff7b8d3048f9b28db6a
+tree 6c572c6a0597efdf7037362102cdda8e81d3cc6c
+parent 26a16dc46210218d6d432fffeeb3b82a767c6362
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:17:37 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:17:37 +0530
+
+    Updated checkPdfProfanity API - using POST
+
+
+:100644 100644 884a0ff526bc8510d9f6255ef23d45c6c6310030 603818c95400b047d123fad4db119a89553eb030 M	apps/web-services/src/protectedApi_v8/contentValidation.ts
+commit 26a16dc46210218d6d432fffeeb3b82a767c6362
+tree cad8ff11897f6b6883462cb05690ed6494ae288a
+parent af368af9380d328945c78216071d96c8314ef21f
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:02:26 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:02:26 +0530
+
+    Added an API to check PDF file profanity
+
+
+:100644 100644 87226c8fc0bd61ad730fa8784cb6e2f7f1e257fb 884a0ff526bc8510d9f6255ef23d45c6c6310030 M	apps/web-services/src/protectedApi_v8/contentValidation.ts
+:100644 100644 ed0e1cd81e42eb932b168a93a80177c98cd532d0 7829809cd5bd90e732098c5cd7f518901c233dbd M	apps/web-services/src/utils/env.ts

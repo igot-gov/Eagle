@@ -1,0 +1,10 @@
+commit d70c19d697c9cc104efec27b3331bbc751214973
+tree 149205aec2f84cea1470cde6f1fbee53a5f5e707
+parent 2336914fe4e3980893377a5fca6cad5cd6f6fefe
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-19 19:21:48 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-19 19:21:48 +0530
+
+    Search Dept API gets the header value properly
+
+
+:100644 100644 efb14dd24c85631dc2d0535e6de9ee70be106d47 16e5555e6b81c852016afde26b71418dd538ea3d M	src/profileApi/departments.ts

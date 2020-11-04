@@ -1,0 +1,14 @@
+commit 3c0ea8da9a4e67bd1545866b235b17e643d16a7a
+tree 047d254ce07218b1887f91642c3216280e3b8edc
+parent 10233d0790a0d388d0775da0f2abdd8978a6dd5a
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 22:55:01 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 22:55:01 +0530
+
+    Task #51908: Refactoring
+
+
+:100644 100644 faaeb606d58a950b9ef69f4e52d020843ee0d39e 19a5d28b2f81cba6acab914810048052e592323d R057	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentModel.java	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/bodhi/repo/UserTimeSpentModel.java
+:100644 100644 46ffd74703fd34ca199c5242f6da2947793456f0 05f76dd3c597994dce454cbc7faf90e431fdb2aa R075	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentPrimaryKey.java	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/bodhi/repo/UserTimeSpentPrimaryKey.java
+:100644 100644 31fd535ec47942509441429d4f700c8e57d64e43 f1b90ddcd3374146bfcf95d2c5eb531e962491eb R090	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentRepository.java	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/bodhi/repo/UserTimeSpentRepository.java
+:100644 100644 caf0236df5e0a48fb75dadd1067566266b56784e 774a33748a37cd9a8afce8f89f3ab3e1eb9fffb7 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 6108d4a47bd2d031fb3de24f41ed786df5d9aca0 4fea913ffe1582ab28f27873627d8a87257c7f4c M	apps/lex-core-service/src/main/resources/application.properties

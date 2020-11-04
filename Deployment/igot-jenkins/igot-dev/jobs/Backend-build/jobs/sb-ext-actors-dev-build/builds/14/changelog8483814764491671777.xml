@@ -1,0 +1,10 @@
+commit 9cf2c911feebe0f3ec14787dd318d465706be098
+tree 3a120495e39d55d86a32131a53e7603acb9c68df
+parent e00cd6c81791a771e468059579b264c9344345fa
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 19:22:35 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 19:22:35 +0530
+
+    Issue #51322 - modified mail session params
+
+
+:100644 100644 857d4d40306a77cea55f0f91bf769d851c9688ba f3a87d99867e94d8d78a020f42f02cc9ca73630a M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java

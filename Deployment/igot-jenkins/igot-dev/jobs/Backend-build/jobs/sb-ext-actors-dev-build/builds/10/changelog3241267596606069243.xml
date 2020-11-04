@@ -1,0 +1,10 @@
+commit 522a6b2262ec19db5951cb713872f1b3daf3b2b7
+tree 8db5eade5d1136012a16bc6551eeee3285761bba
+parent b4f54c5a44bece1485ebe5e14ad34e18a9b38afb
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 12:44:55 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 12:44:55 +0530
+
+    added logs
+
+
+:100644 100644 29725f84c08b351dce702bd38d6bbe9a5e8050d6 5cff56861bd471355a12e8230cb795d73022d39b M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java

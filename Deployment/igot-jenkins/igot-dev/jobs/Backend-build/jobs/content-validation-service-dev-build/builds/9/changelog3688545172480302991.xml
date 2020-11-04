@@ -1,0 +1,12 @@
+commit 6f12db9e4b4e719c7d885880e65da9cf539688f2
+tree 71056a549dd94c1cf140aad61ba7480df047649b
+parent 7e49dc7aca90a9f5418fbb0f0aecfdc29e208b03
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 16:46:28 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 16:46:28 +0530
+
+    Added an API to download the PDF file directly
+
+:100644 100644 8a1444bf56712aa38bb45e2e7c06ee5a1d25617b 2646a7718b2108c1ddb73c972a69b7ce46f851fd M	src/main/java/com/eagle/contentvalidation/controller/ContentValidationController.java
+:000000 100644 0000000000000000000000000000000000000000 caa03cf00d0b4b243aaf4d6c179c9d8e7dbe4fba A	src/main/java/com/eagle/contentvalidation/model/ContentPdfValidation.java
+:100644 100644 ac2ae09dd8c253a88c9f7a984e07843688ceef66 2c2f85231c35b68cb43fff0cf2f2786bbf32dca8 M	src/main/java/com/eagle/contentvalidation/service/ContentValidationService.java
+:100644 100644 a1377dba0c96e915bfa7a65b2d802778065100d0 377cf1c59ab5da90a53d05efc30ca8ef44eae97d M	src/main/java/com/eagle/contentvalidation/service/impl/ContentValidationServiceImpl.java

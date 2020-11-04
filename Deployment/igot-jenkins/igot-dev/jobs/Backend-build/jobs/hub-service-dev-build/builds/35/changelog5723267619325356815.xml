@@ -1,0 +1,11 @@
+commit 3fd2f10e973066ad8e7d55365b00b9dc573adc2a
+tree 80e1d1dd8439bd91224a01e993d897222fc758da
+parent 7495937fee368abb4fe64d33b7dbca6def081bdf
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-25 12:37:43 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-25 12:37:43 +0530
+
+    Added logs for notifications
+
+
+:100644 100644 92ac585adce5ac934f343c4ce693b0cdcc8f5f4a a10622485bb61cc171960736862602fda2339866 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 163c62d0305d7b5624a0acb425ad85e5470a3160 67df17b57ad22f6192b43784dc521b09186af2a2 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java

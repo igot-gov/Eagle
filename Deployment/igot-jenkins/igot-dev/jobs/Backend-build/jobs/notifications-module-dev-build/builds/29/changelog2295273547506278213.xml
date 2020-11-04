@@ -1,0 +1,11 @@
+commit f46c96acfb6436d1560d535766f9af57cd845021
+tree 2ad6d8e2ed7a5687489b4aeee10df727e184f6f2
+parent 5127d727b3c66a42e8b57d27db82c940ef4bb504
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 11:32:05 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 11:32:05 +0530
+
+    Reverting kafka changes and Adding BCC to email
+
+
+:100644 100644 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 66ff1b15a8547a501ff14d571901beb6659b7235 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 9874abd0178d74e719e7c97249e2d2fae9c95a3a 8b06886accf6738a546a453dadf633de899382b3 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/EmailServiceImpl.java

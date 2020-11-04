@@ -1,0 +1,31 @@
+Started by user [8mha:////4K/lLZeTn+SsVJAldrnQS6KsRviCBkClIIQX+y2RsM01AAAAmB+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAyREgYe/dLi1CL9gqLMkoxEAOqmTUrBAAAA[0mpritha.chattopadhyay
+Building in workspace /var/lib/jenkins/workspace/igot-dev/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins3692570508512032523.sh
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-sb-hub-service : Ensure env directory exists] *********************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-sb-hub-service : Create and save env template] ********************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-sb-hub-service : Ensure compose files directory exists] ***********
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-sb-hub-service : Create and move Sb Hub service template] *********
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-sb-hub-service : Removing the existing service] *******************
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-sb-hub-service : Deploy Sb Hub service] ***************************
+[0;33mchanged: [10.0.1.111][0m
+
+PLAY RECAP *********************************************************************
+[0;33m10.0.1.111[0m                 : [0;32mok=7   [0m [0;33mchanged=2   [0m unreachable=0    failed=0   
+
+Finished: SUCCESS

@@ -1,0 +1,11 @@
+commit d9a8e9b37e377b4b33b04dce0f200fd4a825b6ec
+tree 24cd362f5653150910d7469b87868afb91e0727f
+parent ea68fcafcc17e9947f01c52855ec57503504c8c5
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 08:17:54 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 08:17:54 +0530
+
+    Changing the consumer and producer config
+
+
+:100644 100644 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 a6e9c04453306de0626236f52d3e3f7c11275bd5 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 da36e6a48ba155c41e73867a2595955a355f2a85 adbaf7e31f4c543a88f0133c7d69c817faa09a17 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ProducerConfiguration.java

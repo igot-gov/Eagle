@@ -1,0 +1,13 @@
+commit 63b57c961bc4c9d47f13432164140af3654d5d92
+tree 43d8bebf8ae8bf4e8d6722bc545431e513916e9a
+parent 0ed123557882dc7b233453fe17c8a88d3d6ead3d
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 15:39:47 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 15:39:47 +0530
+
+    Task #52094 fetch esablished connection API modified
+
+
+:100644 100644 e98c50a4e8e1409f1004de2805bfe2ad5ac36804 50998cea964da5fa634df74ed923fb86e57e35f8 M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+:100644 100644 9330204eba306ab0bd4c5f8f5f83465058092676 670c2a6b755c80a25ba3dc5afba379d74e119ced M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 6c3a6056a44c6a9fbe22ea01a349b410fa98cffe be5585d5897c02f025598c678f8e55f5cb0ef9da M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 d02c68c3386f0cf3f6d50e046f019230e6cc1cc3 4c69046b69d157efb31ffd55a0557b9d13a90b6a M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java

@@ -1,0 +1,12 @@
+commit bb5510622369a9930a94ea92ebb6289344f86ea5
+tree fe21d89c503f18aacf24d4917bb6a79f18d5b473
+parent 579dbb98645cb8c76ba77ce65e88c9d4cd10e7fb
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 16:52:43 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 16:52:43 +0530
+
+    Task #51329: Dynamically added meta tags for testing in dev
+
+
+:100644 100644 4333d4a4d10148428793217c4f1e8c86cfeae650 8c6219c8bb2c0c8974741ac09905ad7d6d04d762 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 5f0ab11cf2d246b7809a274960f282389f784a8e 12eb1c6968c36936066fd6b1423a8212f3811e68 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 76d422c236af7162bbc6d22059e49c956b00e79c 7d43223e6f9431777b7b27ca65dc473d85ef4052 M	apps/fusion/src/index.html

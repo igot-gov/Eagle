@@ -1,0 +1,18 @@
+commit 4fac4dc9e2ac13c1a9026887cd1123b130e4ae52
+tree 0aad697a4a1ff46802fa2ebdcbfea8b839d3aa8e
+parent f3b0039d3374cc59c94c72203bda2fcd95466d54
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-23 22:19:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-23 22:19:16 +0530
+
+    Build fix
+
+
+:100644 100644 9505024ee725ff1de5e4d05c02d3484646f84d8b ef6b2c7a478332697877acc094c4cd7649431d8e M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component.html
+:100644 100644 765901913302e17dc2554c389c12ba39dcf88c6b aa4b501c05831c85eaab0798fe86b7eac046a307 M	apps/fusion/project/ws/app/src/lib/routes/discuss/models/discuss.model.ts
+:100644 100644 9d1d98d16102eef868e9e99504294b79a6b5962c f823fc04b7392a9668a80e87113b3c6c072b46d2 M	apps/fusion/project/ws/app/src/lib/routes/discuss/resolvers/discuss-popular-resolve.ts
+:100644 100644 73048d414eb2d466c117711498c8587b41460595 401c6c9323243923bb02e022ec662be88f2932bc M	apps/fusion/project/ws/app/src/lib/routes/discuss/resolvers/discuss-topic-resolve.ts
+:100644 100644 1ca5a375b8a70f2fd172303562a291b3bd56e490 43ccc3dd4b71816196b9ccb733edad9c790b8e1d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.html
+:100644 100644 bdeaf8e3f40c86895903eb5357a3abf95c688b68 59aa96825d80ec8efc7ac1d66567f4e8ea0623aa M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 5b50f9b6f9a9f68f4a3942b5840755f979ed7859 2cbd8e54d2789489a74d35224af4a5824878c64b M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-tags/discuss-tags.component.ts
+:100644 100644 c987fe28dbc95467ca84ffa5f5df370510445a97 99ff1f9f0621f63d6637097b82327a645083313d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.ts
+:100644 100644 baff701183da1ebd1b2006f1802a2bf15e913f88 b434990d83a6182a58a758f27cef01765275f53e M	apps/fusion/project/ws/app/src/lib/routes/discuss/services/discuss.service.ts

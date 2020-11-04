@@ -1,0 +1,15 @@
+commit 4f33fa097509da097d2ee27451396a151d030a45
+tree 21d723c7bd96d13152fe6e237bf87a8afc7aab77
+parent bacbe92807f5fc1042791593f615a31c6d8f28e2
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 14:03:50 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 14:03:50 +0530
+
+    Task 51689 Added rootOrg for notifications
+
+
+:100644 100644 ec20a79b58a47b816e16c325d3edad99d95d18ff 43cb16e0ff1cd931563fa196841fd7aefac02f2d M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionCrudController.java
+:100644 100644 2ab243f096fe72a464456a6b2b87d2fcee655392 42d5c29a89ad2d8a2994dace8a4ef99e3d3a930d M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 b1a74a50333bf8b4f412a4fab66292c142f28a5d dcbcbe5edce692efa3cccee0a1cd3201d03be00e M	apps/hub-services/src/main/java/com/infosys/hubservices/service/INotificationService.java
+:100644 100644 faaa9d23a8eef20cd7e08abf5dd6c5f392b4cba7 2e2c456e9e5b283b014c98d9490670bc54e1fada M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 93139192d40cbb3a0e54ce9e478adc078fc168de a0ac0b2d7223a399c4f50fec6efa1806d25a77f8 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 41e35cceccb244eb6c71d99b0bb73b83933193e3 41a713061080026d843084edf5392ae20c23800c M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java

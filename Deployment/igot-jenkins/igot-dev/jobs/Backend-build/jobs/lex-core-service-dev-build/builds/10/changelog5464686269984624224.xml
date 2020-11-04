@@ -1,0 +1,24 @@
+commit 57ee4f62a81523150efd4c0238882efddbcbb26f
+tree 7be668869a799ccd763587519838b82e67eb9623
+parent 8d2165e668ee92b9cbd192eb2159bc6c0f4b7100
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 10:25:38 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 10:25:48 +0530
+
+    Issue #51284 Updated the progress API hierarchy
+
+
+:100644 100644 2281590ef0590e7594f5b0b4231c7d6bc1f505d5 01e4a30d10027926e067a4bf58d36c10f2862f14 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/controller/ContentProgressController.java
+:100644 100644 1385c30c362cc92bc55e79bebb6dd24a54811375 ecfd7d1ddf16453c3b1dd76909a7dc2524ae08c0 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressService.java
+:100644 100644 9f112d3bee7525fccb8484f2f2e9a142e570b60a 14d74af6305f657ba0208ab391526c5802e0a899 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java
+commit 8d2165e668ee92b9cbd192eb2159bc6c0f4b7100
+tree 1baab71854ee2a0dcc62d78ddc8d9598d0a7f1c5
+parent f103726b4dec0fe8c96ee95d31943206153b6e2b
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 21:02:09 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 21:02:09 +0530
+
+    Issue #51284 Created the progress API including child progress
+
+
+:100644 100644 61f95de7b0835fe1322c3248bf7e23db8d5dedf3 2281590ef0590e7594f5b0b4231c7d6bc1f505d5 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/controller/ContentProgressController.java
+:100644 100644 4f618786f4a98d3124599ae0b2ea4d676c032438 1385c30c362cc92bc55e79bebb6dd24a54811375 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressService.java
+:100644 100644 8a7dab23714a8b2ef53819c022ed7cd1398b4383 9f112d3bee7525fccb8484f2f2e9a142e570b60a M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java

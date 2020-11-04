@@ -1,0 +1,9 @@
+commit 927f297533fa594f18af258536eb68725b5af1ba
+tree 99ce96c4e223a5cd6393a47fd77f0927a9b5afd5
+parent 1c6f2a2311575d2e4c47b2e61d7cdcf03a22e78b
+author Haritest <haridasksd@gmail.com> 2020-09-23 17:27:51 +0530
+committer GitHub <noreply@github.com> 2020-09-23 17:27:51 +0530
+
+    Update Jenkinsfile
+
+:100644 100644 0ff34ef059dfd59dafa66bf3dbdd2015f423720a 9809447b3be7dda5c5b782bd9237db9e7e120f6e M	apps/web-services/Jenkinsfile

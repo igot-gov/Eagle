@@ -1,0 +1,11 @@
+commit 107a055771f4f58dca1b6ecfe41d3686720802c0
+tree e151944a18d700e50ed9feff5f84a4418cc5a1f6
+parent 629897121590674c4df41fde3402c4fbcd7a33e5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 12:15:05 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 12:15:05 +0530
+
+    task #51329: Added meta tags to test in dev
+
+
+:100644 100644 41404059f0cfee1b75279b7552bd8235544e4918 5f0ab11cf2d246b7809a274960f282389f784a8e M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 8022880fa6ba0ce5f1e9fab6df0a347b403511fb 779532f9386f1e7f5e72d490491702791ca1c189 M	apps/fusion/src/index.html

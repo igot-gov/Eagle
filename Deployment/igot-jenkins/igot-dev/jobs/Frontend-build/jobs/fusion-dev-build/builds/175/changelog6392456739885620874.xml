@@ -1,0 +1,11 @@
+commit efb0c93b98f1667796746c83aba637a0e318775b
+tree c1518a7f2b8de948877d6bc63c7ee9d1ec4b154e
+parent b4963346b7869bc873e471edd5bdef6f2564d3f4
+author Amit Sengar <aAmitSengar@users.noreply.github.com> 2020-11-03 16:30:50 +0530
+committer GitHub <noreply@github.com> 2020-11-03 16:30:50 +0530
+
+    Update app-toc-home.component.ts
+    
+    Quick lintel fix
+
+:100644 100644 650572362d4300c58f39fbce6127213547cf8e63 20f37f18df699dcd1c128aa2b932581fc4322b0d M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.ts

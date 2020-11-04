@@ -1,0 +1,21 @@
+commit 464f14fc28dc328d4f94cb13f81535bc88533221
+tree 40bce8ed74c7bbcffc7726e4cb91ac0f6dc8e72d
+parent 49c01e1865b0bc2cf565923eef2bb00240afbdeb
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 20:06:23 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 20:06:42 +0530
+
+    Share this playlist with
+
+
+:100644 100644 90816c2d203442b4034f9feba953f39a88366668 5c5167c623fb3803b6e96b1f02cad232b232aad5 M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-share-dialog/playlist-share-dialog.component.html
+commit 928f693f845079d7a365966d8b4fd749fc1add9a
+tree 04773deef2f539d135a03bd126084ca875fd436f
+parent 303740faa4a4335b80a57325771c2886c2776e90
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 19:52:49 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 19:52:49 +0530
+
+    Task #51319: Fixed QR code signup blank rootorg & org
+
+
+:100644 100644 83b6047056656839af86765d3e01ffd29c78429e 75bf695c363efdec1e8ad5b57f3bd028dde03298 M	apps/web-services/src/protectedApi_v8/user/details.ts
+:100644 100644 c3bb5baa9e6bf3f3ae8866bf8e6bc2160ab60a48 78b522b5d4b7f174911e9478c9b0656a95a71ded M	apps/web-services/src/utils/env.ts

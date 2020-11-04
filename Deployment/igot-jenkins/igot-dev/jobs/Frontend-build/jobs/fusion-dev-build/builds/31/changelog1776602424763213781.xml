@@ -1,0 +1,21 @@
+commit a5796c1e7ff8ebd25912f6cb51812bb8ab269949
+tree c501d76220cb62278d18b6f7fe0e6afef59b6761
+parent 44a6de114a13216d2babacb96143f9ee7779f5cc
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-11 12:13:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-11 12:13:31 +0530
+
+     Web page and assisment : updated : need refactor
+
+
+:100644 100644 15c50d512191f55bb3c8ecbbfad81b05de3501ff 480b6b3423fdab577532201049fe2d6c9049d157 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 128dbdb29149dc05bb601ef6aa0dd744cf9504d3 bc4004c7af995de1757ef3629b20d5cc7798804c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 cade1ae0a09553df98dd0f7dabcb5b78a22f1227 aab1ed43a091fb79e78085c88155371221a9c43c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+:100644 100644 9fc7533e12d185fb5894aba812dbdd5907c73ea1 2a0a3b81526254a7d1ecc50dd60ad3228387251d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 da5e1dbd6316de07d8a224f068bc52100afd8c88 600fb1a004d86b70e9b129709f3b41069070a1cb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 9f9999c45956143b3045e81bdaf9acab2547c026 882a664fec92ff58559cfa7412a4385b2f5e572c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:000000 100644 0000000000000000000000000000000000000000 f18db629e0cd623d3de77e30847eb51afd3b689b A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/services/store.service.ts
+:100644 100644 6118e9bd2d626614fd7964a5351dcc7d345e7faf 497d33a205b27ee523d541076d3ef3960f5a53ab M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/web-page.module.ts
+:100644 100644 af17bbb473a97bee8132831715dcf8241762da45 9ba43f25fe28acdd51af4d345f5b2708614941ea M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 206f9e65637e3bd08453acd1e93d911707e0b21e 604ed11863b2744958bfab61c0e595e82c5fd7a7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 4f929614c7920daab6fc7aa6a0199ff68c441044 6bfb6f67048864618fdfb8dc81abffce3b67e09b M	apps/fusion/proxy/localhost.proxy.json
+:100644 100644 88c74085539a610b541840de528de177869da66d 9d387d0aed22ac95307bd36cc19fd8d991872859 M	apps/fusion/yarn.lock

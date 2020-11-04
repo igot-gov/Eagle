@@ -1,0 +1,10 @@
+commit 4204684c02d377f58909b6658c9219875037e8e6
+tree c4c1111057b61cf74b283afeb629b4f764ed43f0
+parent f531e1778b80ca02d29b24d12799c0ad6e5dcc75
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 12:29:58 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 12:29:58 +0530
+
+    Task #51289: Fixed flat button font boldness
+
+
+:100644 100644 e77a786cfde11fea2947bdfdeb05bdd20b697ca2 7a9561b6e4087bd670eaef33d70f81e6c038bdc4 M	apps/fusion/src/styles/styles.scss

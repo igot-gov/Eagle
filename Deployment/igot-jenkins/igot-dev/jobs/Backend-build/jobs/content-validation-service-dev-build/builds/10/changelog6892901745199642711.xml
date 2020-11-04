@@ -1,0 +1,9 @@
+commit 915720b265e2d675ff6098a12f7bf860b5a2b8a8
+tree a94d9317c6c97e2d7e37db5cca27c79fe3d29ad6
+parent 6f12db9e4b4e719c7d885880e65da9cf539688f2
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:15:24 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:15:24 +0530
+
+    Using POST instead of GET
+
+:100644 100644 2646a7718b2108c1ddb73c972a69b7ce46f851fd c00c62fe135359c4fd666a6fd996196e7b1a92c1 M	src/main/java/com/eagle/contentvalidation/controller/ContentValidationController.java

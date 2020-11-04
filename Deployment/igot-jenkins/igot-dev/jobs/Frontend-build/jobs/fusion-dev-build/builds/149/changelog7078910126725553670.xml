@@ -1,0 +1,66 @@
+commit 6d6202761bbae3d4462ecd6c0d7823c927afebe6
+tree edf0907da006be19bee4d330ec932320607e0f9f
+parent 847df1290955f2d4b93b903e3759f19a1c7252ff
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 13:36:37 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 13:36:37 +0530
+
+    Task #52221: update profile redirection to profile view page
+
+
+:100644 100644 038b314a53126c0370bb7deb4f9d55f81f942319 d521ba54f83485012856dc020b002b46d529d34a M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 5928ae462c9114c4c2a6dbb20e8a33cbca5e6d33 afe5ff57ac19ee07db7be25c72101250c4fa54bf M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+commit 847df1290955f2d4b93b903e3759f19a1c7252ff
+tree 776a6fa2e64bddf2be052c9c07c559985180e930
+parent a1d7624db6aeb43b5893d09c33348e8f163335ab
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 13:35:42 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 13:35:42 +0530
+
+    Task #52225: latest from igot-dev
+
+
+:100644 100644 58f05bb07ead0525c887f3bab22d3871114c6b9f f63d6ccdba753eeb08a51fca16e8af629bb587e1 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html
+:100644 100644 e9840f9937a6daab27e6020293963cfd410fcf91 aa2bdc8f8f1e1ddbb5ce4ba44d27a20632b0d305 M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.service.ts
+:100644 100644 2ee106a1f75c8f726531bbb19f39823d29ef458c c91e8d590316c2df19322e565bfbc322128ca7a0 M	apps/fusion/library/ws-widget/collection/src/lib/player-audio/player-audio.component.html
+:100644 100644 bda9d29476ccccfcec9dcd61d13e23ae3300825f 0568070efff1d280e413c3052a0553c8d286fc65 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.html
+:100644 100644 36c6ecf7a3de0a848e231b7b81af5237278798fe 1408a61069477587c0c1d2655ddb3faff2aad516 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 c4b20f7e575ac046b1756d73738f2bc57c192f45 a523a2ecdf230e2428d4d72413fcf90c21cc6d76 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 e430ae00004b6484569cce7255f842be30911a99 e505804fbd00f9fe0c70d2137dfb4f262442f598 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 8c551bbedefd9ed21eecf2705f09bcd740f3b5e8 6caa3b956e96ae78304b72d8da15f1ab4357dfb6 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 a5cdab941c787a0aec4560c01305f8507a3daad9 25dc8b522b285584d0ad52dd5e6c56dfb220d9b3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 a46c9271ed3c62a95526291e80476860a29733dd 35b72a0441ee00cd938dba67d4d7396e404d243f M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.html
+:100644 100644 2ec4646ca33bbe294193c7ce7886351dbc2d7012 aa01effab90be42d1947d509d0c5ea7513d46cee M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+:100644 100644 01d726cd9ea2afb620817971c8145cf5a2602600 4349e519772c6ffa217cc16aee1d96ed5a8c54d1 M	apps/fusion/project/ws/viewer/src/lib/routes/audio/audio.component.ts
+:100644 100644 c6857fec75ff509a415fec13db8b79d9b877b772 8633845d3277d78a29b2e00ad2101196ace52863 M	apps/fusion/project/ws/viewer/src/lib/routes/video/video.component.ts
+:100644 100644 286b7218beb11a7c08b04ff73b9236b0955f72e1 56fd4ba406b9c715ecb00c8b4e3f1762879c8061 M	apps/web-services/src/protectedApi_v8/competency.ts
+:000000 100644 0000000000000000000000000000000000000000 51556da33b9f68fe2512c304792e56d70313c5e4 A	apps/web-services/src/protectedApi_v8/departments.ts
+:100644 100644 5e64d038cdc79ec7639257e10c9b5759ebca8a10 accde6f76908e35c1a4090b290754faafa2e3335 M	apps/web-services/src/protectedApi_v8/network.ts
+:100644 100644 6fd2c828cabce10698243b91e57fa159fa069407 4e19da7bd8dea93984d89aefc334af1304f042a2 M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts
+:100644 100644 a3c8bd9db9ee2c4ee1632592a5a157cfc3bbe7ee 2fdc721afe1086d6344a70005a89c9c01b349271 M	apps/web-services/src/protectedApi_v8/user/badge.ts
+:100644 100644 6ab66812a0a7f4206bfdf6022258f1e3c06d9ea7 d6f9eb78c651fb68d7352bbafe1b7dae343782b0 M	apps/web-services/src/protectedApi_v8/user/mandatoryContent.ts
+:100644 100644 cc52b5c1b792f01115417aaaf479e9801496b6ee 8803dbb82bd581e7f919f3a5dad4a09866429b98 M	apps/web-services/src/protectedApi_v8/user/profile-details.ts
+commit d4c0e52201f4380377791e73e4d61551df1dc1d0
+tree 54518d6c16ac01881f2287d5142fc189732df1fd
+parent 52529ded22af999cabdb6b7eabd7908e2f94314e
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-23 12:02:19 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-23 12:02:19 +0530
+
+    fixed issue player preview not loading with subtitle
+
+
+:100644 100644 30fc9cb3873a778dbec09ac54b1e4c196b48b0bd d9b4836ca8f39a185af8e8b5958e90569002577b M	apps/fusion/project/ws/viewer/src/lib/routes/audio/audio.component.ts
+commit 52529ded22af999cabdb6b7eabd7908e2f94314e
+tree b56fbeaaf5242af14000fe6b50b5d299c97c556b
+parent f1619a41c1b46a87291be4620d748122def83bb2
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-23 11:19:43 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-23 11:19:43 +0530
+
+    fixed issue player preview not loading with subtitle
+
+
+:100644 100644 4598680778826732be9dc5a6ae4d69d35802d841 294d24eae71eb8c618c603f59387fc5a74459ffc M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.rounting.module.ts
+:100644 100644 da3cddcabd46e12d7be0c50d2111bb1adb4c474e abd6f49d449c03761a4e139b9a1763b4c5778e78 M	apps/fusion/project/ws/app/src/lib/routes/competencies/resolvers/profile-fetch.ts
+:100644 100644 5ced9423928ebf1878e2c049a5d25097b1f3574c 5452afc24db3274968bb2ee8d6a7f073db19f0b5 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 bb48ab6392b22e228567e0237823c9e285128abf d4e8fe1d68ca4d73705308dd3ca0893ba2b5d2ac M	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+:100644 100644 61e19f1a5bc919b7f02c9325fea64ba0db020ef1 ebad67fd473617f06ad6d5c71a12c44dec9ca19b M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 4349e519772c6ffa217cc16aee1d96ed5a8c54d1 30fc9cb3873a778dbec09ac54b1e4c196b48b0bd M	apps/fusion/project/ws/viewer/src/lib/routes/audio/audio.component.ts
+:100644 100644 8633845d3277d78a29b2e00ad2101196ace52863 89d79e2cf999aafc89bced83b0b4ee2532ecac32 M	apps/fusion/project/ws/viewer/src/lib/routes/video/video.component.ts

@@ -1,0 +1,10 @@
+commit 03dc0243878a65c2220d1c98170f78454328f672
+tree 8b40094ce85beb9e436ad7296d54e0ac5c08c9f8
+parent 3dcd107a37a73d3d29e6188cea03a635838e6e74
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 13:38:28 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 13:38:28 +0530
+
+    build fix
+
+
+:100644 100644 df638683823f8e25f8c19c37e6cad99e747ce0a5 773ee6a6716bb3659005014b54eb427554bc60d7 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.ts

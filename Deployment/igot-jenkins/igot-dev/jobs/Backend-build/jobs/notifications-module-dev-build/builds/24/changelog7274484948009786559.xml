@@ -1,0 +1,12 @@
+commit ea68fcafcc17e9947f01c52855ec57503504c8c5
+tree 6b639fbb61e11827bf1b17fb96d26a599e14c31a
+parent c64f6fe55dc114fb781a0376908e688c749e9116
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-27 19:27:32 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-27 19:27:32 +0530
+
+    Reverted producer config changes. Updated consumer topicPartitions.
+
+:100644 100644 3cbb1d959aee30a29ffafc15269012a18e6ecfae 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 8a22b772c366645cff7ee70627ff389105b1fe74 da36e6a48ba155c41e73867a2595955a355f2a85 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ProducerConfiguration.java
+:100644 100644 0238b7cf1090fae63ac7cf033eeb89c85726e20c 59d518c857af269f23348020ec3828eb3c2c39ee M	apps/notifications-module/src/main/java/com/infosys/lex/notification/consumerImpl/MasterNotificationConsumerImpl.java
+:100644 100644 448cfccdd1fce0b9cc9bf9e4d84fba6e3999a486 6e8528e9ca72d0e548b95404f33ce7027438d50c M	apps/notifications-module/src/main/java/com/infosys/lex/notification/consumerImpl/PushNotificationConsumerImpl.java

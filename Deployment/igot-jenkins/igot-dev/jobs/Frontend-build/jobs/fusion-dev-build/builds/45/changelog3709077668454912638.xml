@@ -1,0 +1,23 @@
+commit aab94db309afba59a698a7513297fc29960e2b24
+tree 8e0fdd91d7a10fc27f54fe4cd1f039d34d0aed5f
+parent b71f8df2422ac24d0f697a52a2e2942b25a4104d
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-19 14:58:40 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-19 14:59:00 +0530
+
+    UI Update and SCROM Integration
+
+
+:100644 100644 7fd461efb0cb40c0263d40ba69241426dafb1283 13174e194d97a1fac086eabce9c5e1ce7744bf05 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/create/create.component.html
+:100644 100644 f8d1fc1fae80747d6273c3db1b9c329a383a37b4 3cba09a3c14976ccacbc61d1a398e88d5e2b3f0d M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/create/create.component.scss
+:100644 100644 cb22cfd06ebeb8ac43e200ee247c65f1edd323ee 5fa59e62f5cbc0d07e69092c5792d1e9f9052a3d M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/create/create.component.ts
+:100644 100644 9b6c2d84d4cad4335766c0c3859c83b43581d04a 859684cc623938b69455465a3773b054a457366b M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.html
+:100644 100644 efb95945f15b5b57dccdfa1a105ae3fb5fd19fe8 b605a2461dc4ca5874b1537d121628cefdcd1357 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.scss
+:100644 100644 1e335a0497c1dfde58f122bd3c1c06e35deff3d1 1f36bbb225de4c1e5cd0ea34eaebaeda6fff7258 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/catalog-select/catalog-select.component.scss
+:100644 100644 8566d7acc13ae33799ef8f0fbf512fb224021de7 6e071ff14a9d064eff1af246e3ea849e12b5245e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 9ba43f25fe28acdd51af4d345f5b2708614941ea 22ebdd22f951f6f6abc775de125d1500261b645a M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 b27c08cb120b699e14a687bf29bf66779fc8dfff 89658922944a5218a6e8a5718cfc0f054baa50f2 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.html
+:100644 100644 9437996160f7862e704d4ceed5c4789bb768b1ed b3d2043b6a1fadcf4688753dbcce0e7b9eb0b9f2 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.scss
+:100644 100644 dbe173d2019e50880dcd4aa18d1073713ab239b0 4b04d86d5ce305ac59d728129aa3c2d71f8712e9 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.scss
+:100644 100644 6bad59864302d2e8f3170347c3bd89484768058c b7382f78d737397f855b14ccc712d2db6b474837 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:100644 100644 1b31142cf3eea7a073fb7b2d530496ec0e58366a 8488909d9b9dd27c9ce781f3c7a36e385d8395fe M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts
+:100644 100644 b845158a0b01b127e7c296589acfcf840546495f 95369086d2d9ac01402c7aac97ec26e354ad1cf9 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

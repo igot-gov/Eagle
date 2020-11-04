@@ -1,0 +1,10 @@
+commit f1b2db0582164508cad1b0af8e00db3f10ae04ec
+tree ec2c5484a79f09af6195f03f28ca9e33a85c46d8
+parent ed6934d1ee7ebb315a9bc4841a504d6bdce06d57
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-19 16:32:17 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-19 16:32:17 +0530
+
+    Fix Enabled Click
+
+
+:100644 100644 859684cc623938b69455465a3773b054a457366b 70774465116472d235392d572d12b1248437e172 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.html

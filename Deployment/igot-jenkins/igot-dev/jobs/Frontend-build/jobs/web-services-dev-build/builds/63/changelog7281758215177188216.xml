@@ -1,0 +1,21 @@
+commit 27ab307270189156ea434eb2c845e346114627d9
+tree e1d6b34a3743edae38b5bca7bedaa42dbca52028
+parent 030191a71798a32255e8faefeba457985d196c5c
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 10:20:50 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 10:20:50 +0530
+
+    added sonar-project.properties file
+
+
+:100644 100644 2ff5d9497914eda468954f867413a943bccd5e3d 2ff5d9497914eda468954f867413a943bccd5e3d R100	apps/content-service/sonar-project.properties	apps/content-service/File_server/sonar-project.properties
+commit ad3dcd0899810beed675d92ad9948309a4421a32
+tree 6ddbeb2b276bbb574430239cdcb4c3e1735aee93
+parent c4e6ba920dbefea354d192d25713b85f9e99f3b7
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 09:56:45 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 09:56:45 +0530
+
+    sonar stage added in jenkinsfile
+
+
+:100644 100644 7191579c728a25f30319bad1aabe549f0bb72ad1 e5fb0d0686a8ce8ba68837fcf90bf87c9a38b40a M	apps/content-service/Jenkinsfile
+:000000 100644 0000000000000000000000000000000000000000 2ff5d9497914eda468954f867413a943bccd5e3d A	apps/content-service/sonar-project.properties

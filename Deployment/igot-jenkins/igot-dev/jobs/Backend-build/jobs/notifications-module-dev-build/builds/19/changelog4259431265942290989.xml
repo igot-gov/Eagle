@@ -1,0 +1,10 @@
+commit 0974ae7697de6593049776b2d2cb21a904bcd608
+tree 6398f9f7828f0bbb8cd7686babce4197cb0fb6f1
+parent dff976c4cfd8cf02602a064099e44ffa57d1d7d4
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 17:11:14 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 17:11:14 +0530
+
+    decreasing the ms config value
+
+
+:100644 100644 511a3f0070e13d64182630d757166f8d640f78ee 3cbb1d959aee30a29ffafc15269012a18e6ecfae M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java

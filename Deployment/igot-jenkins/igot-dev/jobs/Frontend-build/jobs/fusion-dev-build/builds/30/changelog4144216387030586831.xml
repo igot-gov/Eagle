@@ -1,0 +1,25 @@
+commit 44a6de114a13216d2babacb96143f9ee7779f5cc
+tree ee9127c768ca22320a8caec133f5b89f40fe4487
+parent edfeb6669c53adf7de9affbe292041aa8d3b2475
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-10 16:09:20 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-10 16:09:20 +0530
+
+    UI changes
+
+
+:000000 100644 0000000000000000000000000000000000000000 d842ab9643be1816eb161112f07c40f9ba6ab5c2 A	apps/client-assets/assets/images/authoring/Unpublished.svg
+:000000 100644 0000000000000000000000000000000000000000 bb137aa4e930b12139ee5b87f626d91d1867f04f A	apps/client-assets/assets/images/authoring/send4Review.svg
+:100644 100644 521fbd0af17ad06aff914b39057fa5513d52d102 eb85e3a5f4410b537ff535811f5d1c375be618a6 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 2a0fb4473570c8d59069dca66f6baf57c364b1d1 35a34c692eb539272f18c8db70fe33a50264bccd M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.ts
+:100644 100644 27ee124095669435d16b3a09d21adf672988b25e 27ee124095669435d16b3a09d21adf672988b25e R100	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/order-by-pipe.ts	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/order-by-pipe.ts
+:000000 100644 0000000000000000000000000000000000000000 d1d3da33167b46f59c2bca38d719560d2a45bfc9 A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.html
+:000000 100644 0000000000000000000000000000000000000000 56892a64b4bd0e21ec419528ad5cc06025ff5d54 A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.scss
+:000000 100644 0000000000000000000000000000000000000000 0c23377357f5ff4fe1c4528dd846370f0809a94f A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 84fd90fb38ffcb4dd3b78c407b32bfbd8f4ed8fc A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.ts
+:100644 100644 b0648ce51c5fad189cc1da3725a0a5218a3883b0 0a8ff378e742af3b3e4b7e75902d2519b6126c10 M	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-display/status-display.component.ts
+:100644 100644 68d2573ae589acf711fd7f58c7d01f9724e2c726 5ea1f8d133c9a6e29aef0f5bca2ad147e1eb7be6 M	apps/fusion/project/ws/author/src/lib/modules/shared/shared.module.ts
+:100644 100644 003f0a08d2255011a3bff2d08226421e0ac56279 bb46df695fbb612d3086695173c07b434e1806f7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 c630ba60e9532b9b421452863813dfad5bf25fb1 af17bbb473a97bee8132831715dcf8241762da45 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 768c1c7e0faec9662c7c901365278089add31a69 206f9e65637e3bd08453acd1e93d911707e0b21e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 f68512bfc594acbbcb0fd44a6b41485ed1a80868 36948556ae313be2614653163312478809acdfec M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+:100644 100644 be9a06b36d6c623ab423b179493c907b87b6290a ec7a06c4c0555cc55ddb95b3696db695613d0954 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.html

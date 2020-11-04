@@ -1,0 +1,10 @@
+commit b83b374f6612030245562b4b1698e7fd59151e85
+tree 7720da52f943bd5b60b79bd51c7f2d3568e401d3
+parent d5778dacf3bd4f1cc35e5f873893bbd5e91e4020
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-11-01 13:10:09 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-11-01 13:10:09 +0530
+
+    Added logs on badges API
+
+
+:100644 100644 df1855dcd08154a52898e296b5ccc50e1f17e934 c1142b95dd598c25f195b8804c681707602c734d M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/controller/BadgeController.java

@@ -1,0 +1,9 @@
+commit 5b3c282a191eb8faeae553009ea1bc03a91965d7
+tree 1940d2cd84ef556286ba6a7715cb0b3e6abc1bf4
+parent 8e0adc99bdaec9104eb0997586904ba49b966909
+author vjtarento <65936695+vjtarento@users.noreply.github.com> 2020-09-16 08:51:39 +0530
+committer GitHub <noreply@github.com> 2020-09-16 08:51:39 +0530
+
+    Update Dockerfile
+
+:100644 100644 709122c831ce4075b19b0e57181d42756d241921 3e622f4afe84b6a5146e7fb1e89ddf79bda47dc9 M	apps/lex-core-service/Dockerfile

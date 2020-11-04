@@ -1,0 +1,47 @@
+commit a1af5d91f81b51b5c3a951315e806cf2e98c552f
+tree f87e8f7d69e9847b54f8ed238b0dd3ab56ad4044
+parent c41e3e1c74bee82d3ebdeaf1535f9210bda6659c
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-28 19:15:47 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-28 19:15:47 +0530
+
+    typography Updates
+
+
+:100644 100644 31d58ef9aad8741605d4e8c41ef287f932d679aa 892f490fe068451f433f046b1ea268be3da451a6 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:100644 100644 32b49af65f93e73d4480ffe8751f6e4fc90c3c9a 575a9b1de3d0dee110b7ba2d337363ae52e870d7 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 284a3a99a88c4dc0b374648963b76d9f36b60c5f 8cf15eebc6f2d94305a23e3ee3772724150a40a0 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 27e2f68b44b3b51501076dd3aaf16076660f2a47 4696ec14759c94f12a87c8a8a0729182002d0d7e M	apps/fusion/library/ws-widget/collection/src/lib/card-learn/card-learn.component.html
+:100644 100644 decb14e90018e7246acc274eb27fe6029fd85b48 0dcf15aebc5fb91f7fdc869557a116120ff2e5ed M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 a5812cb6c107c3e474e06c42cb458bc9b2668aa4 35935d18ff995d7a2b5d73ed4462b305b419e8ec M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.scss
+:100644 100644 630a467a91d6720dfe86d4cb3ca89193d98fd869 d8296b69c0bd11ed470b4c04b81e23293edc8f79 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 511949b233690f2b9e76264dd77163b8b0c4051f 248c57141fc2b71e4f83bf0f8b1421bb07be0ffa M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 abb97793d08f9f9206b3718343ca26f732db6226 8ae21e4b8f0eb0b1330219856281de777b40e3d6 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.scss
+:100644 100644 9be6b2d6f48d2e67bf332d3b8461581eb973f8e8 4ca759b300e7f978742e5f308d53fb0a8c8dde44 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 4ef2527d90abe684b25e1434f3714903178a7143 e5704ea2bb13585a23a3ff59257b81397e16d0fb M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 eb143ec97f1027be0263edc49dc34bc07064e758 aba5bfd3f3cbf9d7be5ed403aff261838f7603c6 M	apps/fusion/src/styles/mat-typography.scss
+commit c41e3e1c74bee82d3ebdeaf1535f9210bda6659c
+tree acf19bbc9fe73d7a0b68c1bc0dcf516121a67107
+parent a22b32a1939c454fe2a31f49f4ecbb2f2460c0af
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-28 16:56:20 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-28 16:56:20 +0530
+
+    wave tool fix with typography  update
+
+
+:100644 100644 d517f1cb915178a7e4c3a05c45a35ee8e2a04949 fdd003a0bd64ab4311a71555fb9caebe4e0b1a04 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.html
+:100644 100644 31206b86e384dc5cdbf5ec74b197e79745257561 4b566af8ef3e8d98110fa5335e04c5ebbb58b3bf M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+:100644 100644 e87b7eb816bac9d383f4dcb6ee1a0c32b3237232 31d58ef9aad8741605d4e8c41ef287f932d679aa M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:100644 100644 6bbd1afff4c1de355a3970048c600f50289c8f54 d38c64fe4b4a1c7e855ecb503c4ea01c8a5121a2 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.html
+:100644 100644 dc4f760eeeabda296ce86c2b1e7861c22afff0e2 2c3d29f58a4ab239e637faf2ffc5cc5f3be7e332 M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.html
+:100644 100644 8e9e00bcc5640508365309ac8374eee830b8af6d 568ce0011f562fc1afc71d04136f0b4d6b95d1a2 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 b3fa9f290199935f50258afa03ba4e3e8c901ad9 544154bdf30989c396fb38b33e38a1ed3867874e M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html
+:100644 100644 3b343f803835f9d336f8fad5465410b7b8a51f49 29d9dfa9d45c6fe1d19d1503f4c2661af2851c4b M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.scss
+:100644 100644 24e4ac6c23a020e191bb4f9e3273923ceadc94a3 c208a3338cc3d11ed7a4d06bb9bce1cf91c0f3f6 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.html
+:100644 100644 6ad1e887c3d1461256ff85d5e047cd21bcbb9a1f cd278134366feb3e62b88dcfa611a74b636cfa2f M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.html
+:100644 100644 24e4ac6c23a020e191bb4f9e3273923ceadc94a3 c208a3338cc3d11ed7a4d06bb9bce1cf91c0f3f6 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.html
+:100644 100644 24e4ac6c23a020e191bb4f9e3273923ceadc94a3 c208a3338cc3d11ed7a4d06bb9bce1cf91c0f3f6 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.html
+:100644 100644 882e29f0cdf90acd9ec91504ef3d24c9b55793d0 c0e2ba0074c0216abf29a6a9059c402bd32e17b0 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 152fbf10c1023836f34789c967e4082f384c4f59 7907a5c4ac89ef2289fba7ddcd1747d464d33388 M	apps/fusion/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.html
+:100644 100644 afc96b7fa58254c1a637c079f1fea4d39e460da6 e258037e52cf74a8d5b84dccc6a7f8bf231e99c5 M	apps/fusion/src/styles.scss
+:100644 100644 d424f40443d803775e875d3c7fce232b5a1dc059 eb143ec97f1027be0263edc49dc34bc07064e758 M	apps/fusion/src/styles/mat-typography.scss
+:100644 100644 42475e0f0671dad92767d4d2e163914877b78851 f367195f60ccc973b93364c460edf1255cd2e622 M	apps/fusion/src/themes/_theme-mixins.scss

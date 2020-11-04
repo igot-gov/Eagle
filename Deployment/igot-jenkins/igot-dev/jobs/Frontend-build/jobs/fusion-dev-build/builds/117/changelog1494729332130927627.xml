@@ -1,0 +1,174 @@
+commit b7788b1e5d53609825cdb43a53a2cb5055401033
+tree f778b9df7fd7d90fc5e2d5ce548de539240b4306
+parent 961073067f0adde44d43733862715925729dc63f
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 18:05:08 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 18:05:08 +0530
+
+    lint fix
+
+
+:100644 100644 4a0523a892d775ce0ee901107d2ebf8f2bb3e5c8 c8e4a2709c7f57caf28a1987af4d6556107aa9a6 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-request-resolve.service.spec.ts
+:100644 100644 05d099d3438697db6fee9b46f6bc4baf881ade22 4231e08dc73a55d6c28c735c7cca958a03c0a0b0 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-mdo-resolve.service.spec.ts
+:100644 100644 7f11ac269cb22f1636040f514d8f16ab1966cfdb 52bb41e79fcfe195f2f10182d844204ef42d57ac M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.spec.ts
+:100644 100644 8ad69282b88bf65987c2b2d607b3dc51d6d85182 833aab6263cb3d3c4ef864c4a3d4a981f4e815ef M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.spec.ts
+:100644 100644 f37329024214a7f579c654466eb00b287d7f4cac c42c5845894b97bdee2e80eb96a989db63fc1da3 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.spec.ts
+commit 961073067f0adde44d43733862715925729dc63f
+tree 9e623f7ebc2aeba4887f2182730531ea61a9b1df
+parent fff7369eae9bb45932e9a8762500120ee4b879a0
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 18:01:25 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 18:01:25 +0530
+
+    lint fix
+
+
+:100644 100644 cf846c99bc5867eeb649c3c27fa0685fdba44f78 60c156828f456d6b4d41209146d003c8b6c89321 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit 09ba968203ad629c3f9e8b2188ba7e81a643a3b4
+tree 1d7d32263f6aa0b71dbfead3ce466f084d256af0
+parent f86bcaaa88ec823e4b024c78a93fe7925bae7c1d
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 17:48:24 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 17:48:24 +0530
+
+    removed unused vars
+
+
+:100644 100644 cf846c99bc5867eeb649c3c27fa0685fdba44f78 60c156828f456d6b4d41209146d003c8b6c89321 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit fff7369eae9bb45932e9a8762500120ee4b879a0
+tree c106c3f6b86da4fa395881108c8c7516c9fb5162
+parent caa2a79e6f7f501accb90e000e86870886824f3e
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 17:45:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 17:45:29 +0530
+
+    competencies new updates
+
+
+:100644 100644 7a1ab5bf0ddcd97c8abf11964df9bd471627a9ea e3b49a85df91730ec14732897d86e809cae48f6f M	apps/client-assets/assets/configurations/localhost_3000/feature/competencie.json
+:000000 100644 0000000000000000000000000000000000000000 20eb2c1f710c73ffb292ca12dcecc2ea929d1172 A	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/l.jpg
+:000000 100644 0000000000000000000000000000000000000000 b8c42292c25576ab2a17b4667ddb37d5477f9acb A	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/m.jpg
+:000000 100644 0000000000000000000000000000000000000000 7a5797347d58f3966b9df726a9b8f9be996ab7f6 A	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/s.jpg
+:000000 100644 0000000000000000000000000000000000000000 0e3b995d11f07b1484909b4b0da71656d6196dcc A	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/xl.jpg
+:000000 100644 0000000000000000000000000000000000000000 271e0132aba2fd8d005eef141e1dcc0754bb9446 A	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/xs.jpg
+:000000 100644 0000000000000000000000000000000000000000 0e3b995d11f07b1484909b4b0da71656d6196dcc A	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/xxl.jpg
+:100644 100644 3ee6741f90831a3875bf0593f33edeb104b2dde7 bcf8cc3d44b0edc6bc9f4ec9af08ce3918b3d995 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 18e4f2786588ac8d1e11800dac543d650430725c cf846c99bc5867eeb649c3c27fa0685fdba44f78 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 a536fa6f7d4b88b691ec5104151b006c004c6dcd a46c9271ed3c62a95526291e80476860a29733dd M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.html
+:100644 100644 9e18825fd8006293dc422e03055ab976d7c99617 5f5b14686dac5df5361532e44fcea474d197628f M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.scss
+commit e707000b1839057ccc7ae27ac1e75b2a85a2dcd8
+tree 74c812ca94d9c138b585237ca99506deab660dbd
+parent c018bb4ebdb0e9ccff266184943e9b10ed63607c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 17:37:44 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 17:37:44 +0530
+
+    Task #52010: Api integration for the network v2
+
+
+:100644 100644 256ac9b1aeb8b51d26cef9ef7df3080759f1d4c4 5911451a32b9e677b1b70e5f415b834990b2eb78 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 ee99ebe83b70c64b93b5be4526c334c31d2e2368 7f1c1802e1598a0987f7aac565eaea3a5ce7329a M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 c2f862a713696d5887402bd5005203fdb5bff2bc 8c9a90e4517666c7db71d3cb5121d086b294a5cb M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:100644 100644 4ccb8fce83b451ed8f0831c5abc19fbc3662e036 513f0654620a6b3ead80fd3c556e7ce317e11d51 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.html
+:100644 100644 f58916b6945616c023eb82e8ce024ede4bbfd43f eea0dfe3084df682a9dbc93bfdefe50a8304fade M	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2-routing.module.ts
+:100644 100644 f4d8476f5e981bcdbd720791f09b149c3b0018b7 1a7b9b14b3460c4fb97555ee22512342c7e45b69 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-mdo-resolve.service.ts
+:100644 100644 3ac8f4d3b421b76408aeb4b7b2a07f7cf6ab6417 c3af629f8e855a134729e9e51427677840b21057 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/recommended-resolve.service.ts
+:100644 100644 03e7e2214cf947239880d565f6c44a6102307d96 3c260213a30ceb438f4b74e4e9570d92982e1759 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:100644 100644 be84578f7d7aecf9a39b6c1f3672e439cd3ec841 1dc66f2c5b56079b3d25e8041eb28f49d8b58532 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.ts
+:100644 100644 55e55e5dd98104222552d1fa0c293c1b4d435cbe b72775db9adb7112e869f0d3b9951c0652fc9897 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 4843f22077628095e844a7b50b9703db6ef04469 5be994d05827f1baf0eb83348ac3613efe68940b M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 756b289233f9a6df67e419ba2ab9e4b9eca53ee7 59968617f09efaef724b1af332a66e23b514c07b M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:100644 100644 da80a9b276fee1a940e5d7c0ffadd55602821e93 b4bfc97e479d1f453e3e6e7b976a911fc9b788ec M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.scss
+:100644 100644 b9a9673492a85b95d8cb1b28744be5977d4d483a 4d9741748527016e197718288dd7e22bcbe83e96 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:100644 100644 9744e0c406012765ba1dadc7dda1d6e3ce5a9c94 2971f885c138d25480c9013b9bd8109dd6306dfc M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 ec17da9a67ecec7db37e305c0ceeb235ef098e58 178d1b2be1987442a653426ac095660bb0c53679 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:100644 100644 3050923aad61f72c7cdc7f5f588fa47fad819542 6fe77aba792dcc286b96e5034de7772ee87d31ba M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:100644 100644 2b67fb47328ff995cce47c72e9cfb6a55ffa8e6d a51359a67e1f9131db967392d568bf866e0ce933 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.ts
+:100644 100644 30a5b8f3b81d01257bb756d08be41782989719e0 fb1d38fb7182f99b1ef9f026efa5b1df1e2c0028 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.ts
+commit c106da7b6948f29567584fd5acb60c113810af3d
+tree 6b7e3080d9c125546388e2191bc128e3dfc8a007
+parent d22ed49da0638847de4a53f826e6172b71709bf0
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 17:34:37 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 17:34:37 +0530
+
+    scrom player fix
+
+
+:100644 100644 a536fa6f7d4b88b691ec5104151b006c004c6dcd a46c9271ed3c62a95526291e80476860a29733dd M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.html
+:100644 100644 9e18825fd8006293dc422e03055ab976d7c99617 5f5b14686dac5df5361532e44fcea474d197628f M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.scss
+commit 3aeb122d6d71a6a96fd46d2f231c1d59922fbd61
+tree 218016f08995a5d778c541294ce6142095aadc1e
+parent c018bb4ebdb0e9ccff266184943e9b10ed63607c
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 15:59:50 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 15:59:50 +0530
+
+    competencies image and other UI update
+
+
+:100644 100644 2c551e4b17937a7dea70fbcf63593b366ea6aebe 3ee6741f90831a3875bf0593f33edeb104b2dde7 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+commit c018bb4ebdb0e9ccff266184943e9b10ed63607c
+tree 4c0ff3fb54fdcccf2a671af4f1ad6d8a3a99f1a0
+parent 9608f347c5626786b4d774b208e73d12b4583c8a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 13:58:30 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 13:58:30 +0530
+
+    Task #52010: Resolved lint errors
+
+
+:100644 100644 d5549ffd5fcf32b756b075cc5c2e2e734c1f88fa 78e4b5331d1d475ce19f7eed30ba606f00dc770d M	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2.module.ts
+:100644 100644 a924298af90d05fee1d0ee965e8c9ba175199189 be84578f7d7aecf9a39b6c1f3672e439cd3ec841 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.ts
+:100644 100644 c376392bf49baeb3d24c988782a3678ff4f654aa b9a9673492a85b95d8cb1b28744be5977d4d483a M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:100644 100644 259b5552456374b57eb956860d799483c9c6b8ed ec17da9a67ecec7db37e305c0ceeb235ef098e58 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:100644 100644 df1c59d7097f81c3e4a6968aad816135f9fb928e 2b67fb47328ff995cce47c72e9cfb6a55ffa8e6d M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.ts
+commit 5984c13939152cb63f9344aa72c23c2066869b14
+tree 303b1fac4c26eae9836d907e4d740e21c04c8b1d
+parent 68aa0013cadb72c4f3ff595bf5b556992f5bf43e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 13:46:50 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 13:46:50 +0530
+
+    Task #52010: Network hub v2 implmentation
+
+
+:100644 100644 66b1c36580eb59c950abd03e9f8882e07026582f 4dd88bcd58cb6630c18001663216ccc968357729 M	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.pipe.ts
+:100644 100644 fd5c5dad715def97a93bf7fe690dc6bc92c26569 256ac9b1aeb8b51d26cef9ef7df3080759f1d4c4 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 40733dd2078c0411b58126c3739722d40a208f1b 4bfba90b3f1aef0b204af112266a958f6b6efc59 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.ts
+:100644 100644 79c25b815c2a508ab5c18988d8250738aa10e33f ee99ebe83b70c64b93b5be4526c334c31d2e2368 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 45b9934bee26f3d4386cc356a5f4009d9a800d7c 6c92d3ded47a6fb0ef478ce01bbcc3e4df90af5b M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:100644 100644 f01f1c88e06d3f8c18e615315b2c705ac47a8b6f 958316fa185e246edd5ab95f3f12cf4f4293e092 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.html
+:100644 100644 a244036adca203d9deff84c9e3a0cfd1dbaba637 1e307e2441cc1ac424b3e0b967dc92d7deeeaaed M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.ts
+:100644 100644 c1c054b71bcc0dd712be82be414cf1a1d1fb07a6 f58916b6945616c023eb82e8ce024ede4bbfd43f M	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2-routing.module.ts
+:100644 100644 d3a6b099481b4d4931d505fd4fbe6d4878b3e17e d5549ffd5fcf32b756b075cc5c2e2e734c1f88fa M	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2.module.ts
+:000000 100644 0000000000000000000000000000000000000000 4a0523a892d775ce0ee901107d2ebf8f2bb3e5c8 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-request-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 116c4de78a96cb0c9031852752f004dd90da0b8a A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-request-resolve.service.ts
+:100644 000000 ca8c61ab97f53c6fa0b97e3e20a0f1938f95b2d2 0000000000000000000000000000000000000000 D	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-requests-resolve.service.spec.ts
+:100644 000000 0a0cdc5c2c5c416eef14dd68ac81b0d520c177ac 0000000000000000000000000000000000000000 D	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-requests-resolve.service.ts
+:100644 100644 1a3f613ef2f1898e37a2a43932c52675f08f7f0b de7daf80d9ae2199767c5059ff4430a5a724c1bd M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-connection-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 05d099d3438697db6fee9b46f6bc4baf881ade22 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-mdo-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 f4d8476f5e981bcdbd720791f09b149c3b0018b7 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-mdo-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 03e7e2214cf947239880d565f6c44a6102307d96 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:000000 100644 0000000000000000000000000000000000000000 da80a9b276fee1a940e5d7c0ffadd55602821e93 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.scss
+:000000 100644 0000000000000000000000000000000000000000 7f11ac269cb22f1636040f514d8f16ab1966cfdb A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 a924298af90d05fee1d0ee965e8c9ba175199189 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.ts
+:100644 100644 6c4fdca7a079de35ea6b1595ebb5aba724c95fa9 55e55e5dd98104222552d1fa0c293c1b4d435cbe M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 c562e6e3b1de470bef79c35e0304af1432f3aa8e 4843f22077628095e844a7b50b9703db6ef04469 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 4f0a536726adc4d2fa5acea8dcbe320b0466d520 f36a9a3e3d71bd73491eb443b8b5f68622c1500d M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:000000 100644 0000000000000000000000000000000000000000 9744e0c406012765ba1dadc7dda1d6e3ce5a9c94 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:000000 100644 0000000000000000000000000000000000000000 da80a9b276fee1a940e5d7c0ffadd55602821e93 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.scss
+:000000 100644 0000000000000000000000000000000000000000 8ad69282b88bf65987c2b2d607b3dc51d6d85182 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 259b5552456374b57eb956860d799483c9c6b8ed A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:000000 100644 0000000000000000000000000000000000000000 3050923aad61f72c7cdc7f5f588fa47fad819542 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:000000 100644 0000000000000000000000000000000000000000 da80a9b276fee1a940e5d7c0ffadd55602821e93 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.scss
+:000000 100644 0000000000000000000000000000000000000000 f37329024214a7f579c654466eb00b287d7f4cac A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 df1c59d7097f81c3e4a6968aad816135f9fb928e A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.ts
+:100644 100644 cf2f45be250b476b6ebb744c94b81efb465ffc6c 583a6bb42b59e1ec3eeb2a0644562eb8637bf76b M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.ts
+:100644 100644 881419d46b1f0abf4a77ce01412d2538dc5a806d c740e5d527c5dd983c0c565b73dfe139586e6309 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/person-profile/person-profile.component.html
+:100644 100644 67f0ef8b9f6019d6730a3db4985b40f18fd1586b 396df780b5cc0e1bd1cb626c8a6e547441380e75 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile/profile.component.ts
+commit 68aa0013cadb72c4f3ff595bf5b556992f5bf43e
+tree 4a594f18cfab3a4338e49a7aaedb0fb834b6acab
+parent ef64af5da98dcd2e7b40581a0f75ca7f1b4e4327
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 13:44:29 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 13:44:29 +0530
+
+    Task #52010: Updated the links to network v2
+
+
+:100644 100644 63434b3ff498053319c731e9e990cf9e10fbd423 59ae21a83cb2444e5e635c6ec7a878724aa085ed M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 513c35ff77f3781fdf4fbdb2f7207c565421767b f7b823add5bee13dac65c78640a148cc424284d5 M	apps/client-assets/assets/configurations/localhost_3000/feature/network-v2.json
+:100644 100644 57c6d42c8050f19675862858c2e2f376e2b69ebc beb6a88a60f45642fa7edb0638d61e98af6d8892 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 f71f94ffed1d7f137be2aeff35c405a4c21ba968 bedd9d768bf96b4f08cc85619c6995ee33284277 M	apps/client-assets/assets/configurations/localhost_3000/page/network.json
+:100644 100644 e4fbbb606b33505b5917806ee5b6853a6eb3b09d f8e041738374bdc4fcc225a02f7249aa213af66c M	apps/client-assets/assets/configurations/localhost_3000/site.config.json

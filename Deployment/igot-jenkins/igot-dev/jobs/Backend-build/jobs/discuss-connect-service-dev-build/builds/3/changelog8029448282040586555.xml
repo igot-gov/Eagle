@@ -1,0 +1,66 @@
+commit 9bbf5ca15f965020f4229be1231a6b5879429d71
+tree cae79a856bdb5777fcdd2261279ce05eed1074cf
+parent 3db20f60f3be3854c4f0f98f6ff39c42b2212503
+author amit-kumaryadav <amtydv630@gmail.com> 2020-09-30 18:22:52 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-09-30 18:22:52 +0530
+
+    Task #51692 Kafka Issue
+
+
+:100644 100644 14c571c45cf59699fe46c70687e8fe15fc74d1dc 6c9ed9eb87d8e0dad258186d35c277f1c7afb671 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/Configuration.java
+:000000 100644 0000000000000000000000000000000000000000 28e3055908939b1aecc5216df4c6c54da17969f1 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/ConsumerConfiguration.java
+:000000 100644 0000000000000000000000000000000000000000 41c5e7b993b77412749f4df223d498d71074c10f A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/ProducerConfiguration.java
+:100644 100644 9d7b3000325f3ea01303b786321b831defad96b1 9c763c083ad84425135778ad9480fa8454b283bd M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/consumer/NotifyHookConsumer.java
+:100644 100644 e53c6dc438c851dbe1d9764b976bfe98bade616b d09bbee0c27430b03b8438b6b150e2b8cafaff1e M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/consumer/NotifyHookConsumerConfig.java
+:000000 100644 0000000000000000000000000000000000000000 7fa18ef9b7141762758886cb44cbf6e74ae535e4 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubTopic.java
+:100644 000000 055b95d134ca6f52f407f9d0e240696317d85655 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/PostData.java
+:100644 000000 2bef83a01075ddf09e7ab5d8a5862c02fbe9da11 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/TopicData.java
+:100644 100644 37ae536a419e3fdf1fdd36f80dab5e99f34fbf48 50d3051bce6d5aac4ab041043e39a0c9acb20424 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/HashMapSerializer.java
+:100644 100644 ccb35c36dd78f8e1792892ea43ee013bea6171e0 bb85028a252f7d090bb9d7f4fd8a5576d75be8e0 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/NotifyHookProducer.java
+:100644 100644 175f4c35441e198ae1e88634781b4ee52e4bb74e 9759419b552e34f5963bc80f6eaec2f6742295ea M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/NotifyHookProducerConfig.java
+:000000 100644 0000000000000000000000000000000000000000 19b936bf530c65bc4bde9cdd57a131ba2cb5260a A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/HubTopicRepository.java
+:100644 100644 ccc4972ff5e63b3938b94f5f73739ede549a4243 80cdf6e498dd211c019f97b2a00620fb14cf76c5 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/NotifyHookServiceImpl.java
+:100644 100644 2fe21dccc83a40fe467d26ec38fdcf639b97505c 908bbd21f599b7f7634c3bd36bbe008a44eae4ea M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/util/Constants.java
+:100644 100644 9b7ec81d54e1efbab72fc20b048cb187a581eade a60db5d906a27d00b2399ea13a5b9a374703a72b M	HubNotificationHandler/src/main/resources/application.properties
+commit 3db20f60f3be3854c4f0f98f6ff39c42b2212503
+tree 9119772c67ef25f1d3eead908ed26cdeaee164ff
+parent 07c473f64eb539937e485efba5d0e01c38eaba8a
+author amit-kumaryadav <amtydv630@gmail.com> 2020-09-29 17:22:25 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-09-29 17:22:25 +0530
+
+    Task #51692 Resolved crossorigin attribute
+
+
+:100644 100644 e139fab6f3156b3b8c7a3bdef20c3f18b45c33fe 2c4928e2fca312150ac7aff4db41816d9486e286 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/web/HubNotificationController.java
+commit 07c473f64eb539937e485efba5d0e01c38eaba8a
+tree 13886264e2fdaf04cd559cdf10cefee27c726a46
+parent a717b6c759d0961e065fbf966faecbacc2d69d46
+author amit-kumaryadav <amtydv630@gmail.com> 2020-09-29 17:15:10 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-09-29 17:15:10 +0530
+
+    Task #51692 Resolved code smell & bugs pointed by Sonar
+
+
+:100644 100644 5ee695f2db7d747c1342f52fbdaa79a5e0d3a3fc e53c6dc438c851dbe1d9764b976bfe98bade616b M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/consumer/NotifyHookConsumerConfig.java
+:100644 000000 e92e978ca6035651318c3eec1c5ea9d2b8631209 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubTopic.java
+:100644 100644 1264e4debdd7f3efc24b2653ff7f35972a7ca165 37ae536a419e3fdf1fdd36f80dab5e99f34fbf48 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/HashMapSerializer.java
+:100644 000000 2835eedfc929f1b26aa290d0b027418df68df30b 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/TopicRepository.java
+:100644 100644 b46b9f37944585fe5be7a713cbc3cf61be7af43a ccc4972ff5e63b3938b94f5f73739ede549a4243 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/NotifyHookServiceImpl.java
+:100644 100644 39ec4881bc912681883b800c17eef42ff9e0703e 2fe21dccc83a40fe467d26ec38fdcf639b97505c M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/util/Constants.java
+:100644 100644 9adf47980c8435b66a1625aa806ee9368fb2fea2 e139fab6f3156b3b8c7a3bdef20c3f18b45c33fe M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/web/HubNotificationController.java
+commit d03620207ca45eca067b2da2f8646f505355c76c
+tree 225d0bfdc27a1af4de15d2495965140bf866efac
+parent abc856420ca14cb974be3e2ef92cd3ebeee538c6
+author amit-kumaryadav <amtydv630@gmail.com> 2020-09-29 14:59:01 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-09-29 14:59:01 +0530
+
+    Task #51692 Upvote & Downvote Event Completed!
+
+
+:000000 100644 0000000000000000000000000000000000000000 9ce0b2d69eb839fdc1388bb81fff12eb3c2d64f0 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubPost.java
+:100644 100644 33d8f7dcd86cefc4ee1d40dfd11c509cac6a26dd b47f3e7027cd4bc019a126d20f4125014c5a6303 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubUser.java
+:100644 100644 42514dbcbf9f9044ebc3dbffc29a35e05081f5a1 055b95d134ca6f52f407f9d0e240696317d85655 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/PostData.java
+:000000 100644 0000000000000000000000000000000000000000 6db7bcbbe3bf4ebe3a07cc33dda58952fc404606 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/HubPostRepository.java
+:100644 100644 f4ed24c2160d054f8e15f62c0d276702e8984790 dc4c6aaa9582df39f970e2ee7156528c6f8c2473 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/NotifyHandlerServiceImpl.java
+:100644 100644 2368d73251334fd719e029426c55027278deab48 b46b9f37944585fe5be7a713cbc3cf61be7af43a M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/NotifyHookServiceImpl.java
+:100644 100644 44d2a0b7783df3ba30054d3a99a5b43eddd831f1 39ec4881bc912681883b800c17eef42ff9e0703e M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/util/Constants.java

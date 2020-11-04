@@ -1,0 +1,28 @@
+commit e71d1c0de82989be48d9dd5fb15ca365f8bbcc69
+tree 5dd2a4d8cb361f6c38d68b98829c06ca52fbf2ce
+parent c879502b4bec25a00d12b891d57d189bcbaabcb2
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-30 22:09:45 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-30 22:09:45 +0530
+
+    profanity integration is done
+
+
+:100644 100644 7931e51666248715655f4c27d2f7be8d76f9b598 bd0605ebe27ae6671def2c126ebfa4c141ce56be M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 aa3566f0757b795f6796e1caf305002985ba2bcf f79d9869574a6f6de97a91f8e8bc27ffd5f8359a M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/services/profanity.service.ts
+commit 528796abe187ab927a86b0eecff3e3e86460265c
+tree 6cc8556077794a1913d044439af0367ce31614fd
+parent eb5d8662c3ee322a7213c43df876f16b1022fb6c
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-30 15:26:59 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-30 15:26:59 +0530
+
+    profanity popup is done
+
+
+:100644 100644 bee2e8ca0e45143c2eccaf99ad29a44ad3663fb8 7931e51666248715655f4c27d2f7be8d76f9b598 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 ca1ddea51c23a6ec0e1f4ff51ba49a4767691cdf 967d050bb689db621d25bb83d7b56be3c42a22f6 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:100644 100644 4011af07f39177e9db85fd0839a4280e9e051132 cd08715867ea1096f35dae5dfca4e6b87d08b064 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.scss
+:100644 100644 2f126fc38a9f0a6ca953e36a9ee0a6b64c3b8345 8287c4ff4538524c2f12e199060a79b042c255c9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.ts
+:100644 100644 97f4b8b638a1eb6d9fe0ef65e1bf854f19202728 86f3de1f26a699ddbee4b28def9397b9f5bf5bce M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:000000 100644 0000000000000000000000000000000000000000 aa3566f0757b795f6796e1caf305002985ba2bcf A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/services/profanity.service.ts
+:100644 100644 46b557bef165b1ba0657b449fdea027cfc981600 9fa7862e1b60e692079dfc47e43e99d68157feb9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/upload.module.ts
+:100644 100644 e258037e52cf74a8d5b84dccc6a7f8bf231e99c5 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss

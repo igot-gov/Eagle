@@ -1,0 +1,146 @@
+commit cd4a76efd64b69f4330710679367a95c626179ae
+tree e20ca5692749d6edba0b00ffbdbaaccd2b45ccef
+parent 3cfef33b947bd1ba5c66469e6bf90e6c58846cda
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-29 20:10:36 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-29 20:10:36 +0530
+
+    nav fix
+
+
+:100644 100644 fa88b1fd50f58f63b9b7413a6239af76ceeb6653 1156277f785eceec2a66c26003e915d186ee286f M	apps/client-assets/assets/configurations/localhost_3000/page/learn.json
+:100644 100644 9544d334375725e17823ad7c940abe8869df71a6 649c4845caeec0f9192c34d6416e3a0cb9bb4662 M	apps/client-assets/assets/configurations/localhost_3000/page/network.json
+:100644 100644 9bb73e3436b97b5640533b43ff23d6bd043fd49e bf1f46c8e9915834cab98ea26d049d17f5ed77ac M	apps/client-assets/assets/configurations/localhost_3000/site.config.json
+:100644 100644 f697e283d279dca7edf4c03ae83677c73da0f877 c702db5458091b5c2ac634447967282fef7a4ac4 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 51fafd2e477224f02bf54f99e956393db797cd99 73fabe61b8baaad82b2cb5c0913928d2909370f2 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.scss
+:100644 100644 d4ed13e22b6369c758813970b557bc109562044d e5d1a78066e4d530fa1b507a4b4613526bd4c271 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 6666556753ea08b089a792a2060f09cd2dcacd2e f37a76fbac3eecea760a4c4ecfa489fe4c25c60b M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 ca02e888319b0118d6290bd6863d3748e81cf005 e9840f9937a6daab27e6020293963cfd410fcf91 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network.service.ts
+:100644 100644 dbd8d059b21f3c5cda7f4ee24856fc4959fe5c4f 2bf959b551d5f25f663ef974fe1a85b51ffb6181 M	apps/fusion/project/ws/app/src/lib/routes/notification-v2/components/home/home.component.html
+:100644 100644 d91f49209bde6c6cbaf6da22f11c51d33a112317 4ad4276c3bbf0dcf915a94b6658d392252da45b0 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/person-profile/person-profile.component.html
+:100644 100644 d8d6d1ee0a4f32d3e50c00b2080d06e3eebcb1d5 5ed16f20ebe65840d6fe580c4765b0b5e981eec3 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/person-profile/person-profile.component.scss
+:100644 100644 f3f9855c6aeb08e5c658d7521e809258b0ee3202 d35497b7d5d7e973ba51347b4464fbf6dda1c0e3 M	apps/fusion/project/ws/app/src/lib/routes/search/routes/home/home.component.html
+:100644 100644 33a2789f039493aec130e890f4a29bbb6d16d55e 63008af412dd09e69ff22587acd372f02bd36645 M	apps/fusion/project/ws/app/src/lib/routes/search/routes/home/home.component.scss
+:100644 100644 0dea9dd8cfb614e11417966fa9b92c9803c7e5de ae4e43a01d71f2754f12f48575c2c6aee7d379a6 M	apps/fusion/project/ws/app/src/lib/routes/search/routes/search-root/search-root.component.html
+:100644 100644 ccda382a987c4b1f9c86d0b7b24eba338cf7cd65 58c90dc15c6cba8b432ed773752772f5bcdc0059 M	apps/fusion/project/ws/app/src/lib/routes/search/routes/search-root/search-root.component.scss
+:100644 100644 9486d809e00fd2a94c0944622587ceb818cdafbc 35ea88b60a8814472d73b0c374d260a9792386ca M	apps/fusion/src/styles/utility.scss
+commit 3cfef33b947bd1ba5c66469e6bf90e6c58846cda
+tree 174f81427f4ac26d52d638e374129c788fb67fc1
+parent f51d025729faacf5c563153d733b3e3a8ff503c0
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-29 18:19:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-29 18:19:32 +0530
+
+    hubs completed
+
+
+:100644 100644 6417e75d19b3a832cb54eaab286ae70993808f31 778cf2d8c9a7a23c502794915e9494d0fca140c3 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 fbf3a0ee563c8fcad974891663e2dad04fe467ec d4ed13e22b6369c758813970b557bc109562044d M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 cc46c657e6075035f754c2ef52e5488f036c1aac e57baa1cf6f63fc6f194063ee9c36d93e8e9a8ff M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.scss
+:100644 100644 6f8a81e18298d40562d04f140b937db136d6dd56 6666556753ea08b089a792a2060f09cd2dcacd2e M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 0f3cce5151c0e18f7e3cd075943562ab00f04484 404e7a972341165667b11d5fc92fcc7665eeecfe M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.scss
+:100644 100644 fc3bfc64f7b774f99e01cd94d01d53bcf6cee7fd 82d40b18c081964e3a4481bcd7c25280aa743227 M	apps/fusion/src/app/component/root/root.component.scss
+:100644 100644 f1d1de875a25fadce5edce50adf87b14dc844a03 9babd073b2444ae539d5afc47f54fa8fe821879f M	apps/fusion/src/styles/_ws-common.scss
+commit f51d025729faacf5c563153d733b3e3a8ff503c0
+tree d88f6c6dadb215ed213a2839e72fb74d52f1493c
+parent 7570f2c0319b00e3204d129c14fac595b632ed89
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 17:05:34 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 17:05:34 +0530
+
+    discuss page is added into home.json
+
+
+:100644 100644 cce23e3c3e2d502e60e67e9617702fbe0b53f0d5 6417e75d19b3a832cb54eaab286ae70993808f31 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+commit ea9ea56194dd047c9a49c3e588c6ef2993897d1b
+tree 86dd48876357992a251d68d82781cc73f80e8ee5
+parent 74b1bc922ec48397d69f1f84a4905823d9ef3ab3
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-29 17:00:34 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-29 17:00:34 +0530
+
+    hubs changes
+
+
+:100644 100644 0865c583ebebcc201888f095c7449926e12be1a5 db69f567a667d168011c6109026d79810f971b01 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+:100644 100644 2e87125b531889fd99bf1297ef36207d21aaa6b8 fbf3a0ee563c8fcad974891663e2dad04fe467ec M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 294d0705bbefb5d55c061e9938b9a42e8f1f9bf8 cc46c657e6075035f754c2ef52e5488f036c1aac M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.scss
+:100644 100644 d9c03a747917408d74fdb47b3c1c23c73d38b519 6f8a81e18298d40562d04f140b937db136d6dd56 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 3199d96a32b85c04db67886fc61fb4e906263d4d c169b29ac12e9f1878357e1fa46179608bcb87e7 M	apps/fusion/library/ws-widget/utils/src/lib/services/configurations.model.ts
+commit 74b1bc922ec48397d69f1f84a4905823d9ef3ab3
+tree bc8b00ed3514b732ca3ec86cc344766549e7125a
+parent fd1052da499156a56744ea0b16938ee3de2374eb
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-29 16:59:56 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-29 16:59:56 +0530
+
+    Banner and home json changes and added hubs json
+
+
+:100644 100644 30a69f8055adf269189bdc21b9cf030c0f6228ed cce23e3c3e2d502e60e67e9617702fbe0b53f0d5 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 8c78ee97d754d20b45f9a9211e243178c7f3d247 9bb73e3436b97b5640533b43ff23d6bd043fd49e M	apps/client-assets/assets/configurations/localhost_3000/site.config.json
+:100644 100644 1aa1b4e688a2d00beebee27607e2c4862b7bfbf7 ba57eed1db6b07c451668cb8072d713dc031b4f2 M	apps/client-assets/assets/instances/eagle/banners/home/1/l.png
+:100644 100644 194f53894ae15463f0e74d59a0cb10ab977c9117 e5525bc315fcaaff5ace568a5db813a98aaf002c M	apps/client-assets/assets/instances/eagle/banners/home/1/m.png
+:100644 100644 22d2b9a4fcf633f44471c02f7861e1998669d355 c1dafd1bb258646b37ebe95e9d25f628c19d00fc M	apps/client-assets/assets/instances/eagle/banners/home/1/s.png
+:100644 100644 72e95af9bc20999e206328db35283fadefb1f2d6 7f3711f1539a4cd64875cb3a26e782160bb8e928 M	apps/client-assets/assets/instances/eagle/banners/home/1/xl.png
+:100644 100644 8795032510d6e2c9c9ca0c5d1ea2323d8d9df72a 189968203244d77c46e01696c3a9941fac87eb57 M	apps/client-assets/assets/instances/eagle/banners/home/1/xs.png
+:100644 100644 72e95af9bc20999e206328db35283fadefb1f2d6 7f3711f1539a4cd64875cb3a26e782160bb8e928 M	apps/client-assets/assets/instances/eagle/banners/home/1/xxl.png
+commit 59affb9de5c56ec187f7019c878a15d7700710ef
+tree fb710a78b0ab1511a2aa1024b1ee4f68ada15670
+parent 3071c92dda8d0db2d02fec6083bc4daeefbe0e5b
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 16:58:05 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 16:58:05 +0530
+
+    card design is temporarily added into course page
+
+
+:100644 100644 f7e0827053e64d7ff8dba14aaef831b3942b780b 52e472ad843590ab07eab1dca25a4d519188b768 M	apps/fusion/library/ws-widget/collection/src/lib/card-course/card-course.component.html
+:100644 100644 400e87c45b70e8be60041e3f10b47fdaa0bda986 39433c14af66c4ca85f374f40df1ae0da6bb9eaf M	apps/fusion/library/ws-widget/collection/src/lib/card-course/card-course.component.ts
+:100644 100644 f0a1bcfa63096db0d0c26a65b594a98d0d7ef86d 9b22294e81ef157eadc46a2c199ae613a1ab96fd M	apps/fusion/library/ws-widget/collection/src/lib/card-course/card-course.module.ts
+:100644 100644 6eab14dc17b504430c76b7e198a688eea4717621 4029b9c6623381f50e6d2311288c246062c047e8 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.ts
+:100644 100644 e9840f9937a6daab27e6020293963cfd410fcf91 ca02e888319b0118d6290bd6863d3748e81cf005 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network.service.ts
+commit 3071c92dda8d0db2d02fec6083bc4daeefbe0e5b
+tree 29727475b4533aa41113cd240a0d864fa6eb8240
+parent 98d88b05d00b245e5da9b17bb3d0d01f0d396257
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 16:54:52 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 16:54:52 +0530
+
+    new dicuss card added for home page
+
+
+:000000 100644 0000000000000000000000000000000000000000 fb95e5e008c342b27015e4d18471bf5cd1d308d9 A	apps/fusion/library/ws-widget/collection/src/lib/card-discuss/card-discuss.component.html
+:000000 100644 0000000000000000000000000000000000000000 a51183b94b133c77879157f58b58f2fe13e3995a A	apps/fusion/library/ws-widget/collection/src/lib/card-discuss/card-discuss.component.scss
+:000000 100644 0000000000000000000000000000000000000000 aef581e94ff6ba49342d49d6001f35f93148553c A	apps/fusion/library/ws-widget/collection/src/lib/card-discuss/card-discuss.component.ts
+:000000 100644 0000000000000000000000000000000000000000 5e7687c137c6ffa0f29a5cab9c4068a66444bcee A	apps/fusion/library/ws-widget/collection/src/lib/card-discuss/card-discuss.module.ts
+:000000 100644 0000000000000000000000000000000000000000 ff49e6096a966a2499e49d4bc91f61bdf9e9223f A	apps/fusion/library/ws-widget/collection/src/lib/card-discuss/discuss.model.ts
+commit 98d88b05d00b245e5da9b17bb3d0d01f0d396257
+tree f771f0fa98d980bd7606414a9357ade300c410a9
+parent fd1052da499156a56744ea0b16938ee3de2374eb
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 16:53:41 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 16:53:41 +0530
+
+    hardcoded data issues fixed
+
+
+:100644 100644 5260d863dcb3c5599c2c7120d400063e3ff02bd8 86eb75068130f387422ca986a954a4c16dcaf5cc M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.html
+:100644 100644 4dc8591089b9d98d2b6e67bf1b5e11fc587fce8a 13192df2cab6ea4fee8ede3979f8c9c31e845d52 M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts
+commit fd1052da499156a56744ea0b16938ee3de2374eb
+tree 117af93314d93f53262a134adbbef81fbf0b4006
+parent c02c2d44ccaf21ed3de4a17a272fd0e2c2f180b6
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 13:11:52 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 13:11:52 +0530
+
+    banner changes and lint error fixes
+
+
+:100644 100644 0c9aea28adaaca900b4180ef488b30e257c1c6a1 30a69f8055adf269189bdc21b9cf030c0f6228ed M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 33a25ba351a5fede085e860d0246a0cf8c8b2d46 1794885882deb5d54839746123809239516691db M	apps/fusion/library/ws-widget/collection/src/lib/card-home-top/star-rating/star-rating.component.ts
+:100644 100644 45e418da8497bf683d204e54ca60ab788d6d7a78 cd2e7d69fa5a65845b5ecf429f58dd40865155b6 M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.scss
+commit c02c2d44ccaf21ed3de4a17a272fd0e2c2f180b6
+tree 1fe188cc8bae55330dded840a9f7671b36851f0f
+parent 649c977d6bdc2e4d4568a01402ac3ebcce82e89b
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 11:22:41 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-09-29 11:22:41 +0530
+
+    links created without error fixes
+
+
+:100644 100644 0db9e51a49da42c990d638230fe5f0f8a787a0af 2e87125b531889fd99bf1297ef36207d21aaa6b8 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 4ea84f623783fe4d4cdc24f5b4c516d72438d526 294d0705bbefb5d55c061e9938b9a42e8f1f9bf8 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.scss
+:100644 100644 af40d3d2de3541d28a71a8cc47c83f795eb3e808 d9c03a747917408d74fdb47b3c1c23c73d38b519 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 73ce976dc437c17e4a5e891471af65c77f3d2958 bab17eeda7b37145688bfee16cff7a24fd3d3b43 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.module.ts

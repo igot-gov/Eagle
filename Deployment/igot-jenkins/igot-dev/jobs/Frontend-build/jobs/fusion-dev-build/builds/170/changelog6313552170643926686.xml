@@ -1,0 +1,219 @@
+commit 183b29189740c0cb772f80232ccf1f78497c5126
+tree d561b0060872f7e1099eb21a883b8d32749035ec
+parent 2832226618912bce2a210a23f5248dd2ed9b8e77
+author usha <meetsamal.usha@gmail.com> 2020-11-01 21:09:22 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 21:09:22 +0530
+
+    badge social share dialog integration
+
+
+:100644 100644 dffdfb47b28372834cc3148a398fa424c494678b cc8aa3a24cecae476b857fa9b26ad841054ba82b M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/badges.module.ts
+:100644 100644 82b30c22993e587a490b1dadadf41798e6e4e9e2 f2af0ccaa0d556c800f13e15fbe747b7b678374c M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/components/badges-card/badges-card.component.html
+:100644 100644 6c1e15ea9236c6af58c31c339bf3b5292c28d828 589de7c0f9a951651dbb4aa821d967dc74dd5eb8 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/components/badges-card/badges-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 abfaac16e8ef6d11aef485783b602e2db73af108 A	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/components/badges-share-dialog/badges-share-dialog.component.html
+:000000 100644 0000000000000000000000000000000000000000 1c59cfc4fc722a21134a1fcb5dae871fb22a545a A	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/components/badges-share-dialog/badges-share-dialog.component.scss
+:000000 100644 0000000000000000000000000000000000000000 9b85bf87140d1a56e321d8c299c615d21f82ac3c A	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/components/badges-share-dialog/badges-share-dialog.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 614bfc6ed3f50cb82434ff4dff26a5a608da622b A	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/components/badges-share-dialog/badges-share-dialog.component.ts
+commit 64edcf16472402e5c872db7ede1e4786bd63059f
+tree 4c51d63dd44e844e954e8c1aa7d7d277771cbd52
+parent 797d26b41dd810c1668135b87e585edd382171c1
+author usha <meetsamal.usha@gmail.com> 2020-11-01 20:59:19 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 20:59:19 +0530
+
+    badge api changes
+
+
+:100644 100644 3a08b48995133ef24e0b6f66377d4ace03d67160 cc7647c1887a8f105fa72be4a35e574d32b05ed5 M	apps/social-share/api/badges.js
+commit 797d26b41dd810c1668135b87e585edd382171c1
+tree 8c7620745458e7da39a0280a7d877c705d023c21
+parent c4d4a306239fdc1b7fb92f0125cd9be701cce1dd
+author usha <meetsamal.usha@gmail.com> 2020-11-01 20:43:07 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 20:43:07 +0530
+
+    badge api changes
+
+
+:100644 100644 5a8e47033373e5033ecc0b31222fbae941c398c3 3a08b48995133ef24e0b6f66377d4ace03d67160 M	apps/social-share/api/badges.js
+commit c4d4a306239fdc1b7fb92f0125cd9be701cce1dd
+tree ca1f6c54d4852a323ee51a6197a46aa02b3c2134
+parent a7cc7790b8f0e9dd6e5ef52d30e50f18386c56c9
+author usha <meetsamal.usha@gmail.com> 2020-11-01 19:24:15 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 19:24:15 +0530
+
+    badge api changes
+
+
+:100644 100644 bdb16130e6f0c957454369144106a501a5643b90 5a8e47033373e5033ecc0b31222fbae941c398c3 M	apps/social-share/api/badges.js
+commit a7cc7790b8f0e9dd6e5ef52d30e50f18386c56c9
+tree f73c2c1dc6b4f14ee4161f57099321ec1ce0ec27
+parent de4458a93f30eedc5011a315d076596eb11d3081
+author usha <meetsamal.usha@gmail.com> 2020-11-01 19:23:38 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 19:23:38 +0530
+
+    badge api changes
+
+
+:100644 100644 c255930cc697a2830ece0acab99e6ba9c0432318 bdb16130e6f0c957454369144106a501a5643b90 M	apps/social-share/api/badges.js
+commit de4458a93f30eedc5011a315d076596eb11d3081
+tree cd43d6410a21c3db20e26c8a789815b6a934336d
+parent aface97f5b4bc1186b60465cdf08f5b3ff41b9b2
+author usha <meetsamal.usha@gmail.com> 2020-11-01 19:21:19 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 19:21:19 +0530
+
+    badge api changes
+
+
+:100644 100644 2e236d6f8cebc26963126ba088e603eb0bdd615f c255930cc697a2830ece0acab99e6ba9c0432318 M	apps/social-share/api/badges.js
+commit aface97f5b4bc1186b60465cdf08f5b3ff41b9b2
+tree 09f390cc0a44332493cfe8b77b44302afcebf5cd
+parent 318ae0f3884a94fa7558d5dd1a40694944862953
+author usha <meetsamal.usha@gmail.com> 2020-11-01 19:16:10 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 19:16:10 +0530
+
+    badge api changes
+
+
+:100644 100644 40196b874c425e3302fc4ce222e23caedddc3475 2e236d6f8cebc26963126ba088e603eb0bdd615f M	apps/social-share/api/badges.js
+commit 318ae0f3884a94fa7558d5dd1a40694944862953
+tree 94ec07f442e72bca0593278245cd978d528b8ea0
+parent b0ea201cb6ecad2f7513660259bae3af736536ba
+author usha <meetsamal.usha@gmail.com> 2020-11-01 18:14:25 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 18:14:25 +0530
+
+    badge api changes
+
+
+:100644 100644 2f7648f94414693bc8f3f1c07d21c73ed8da09fd 40196b874c425e3302fc4ce222e23caedddc3475 M	apps/social-share/api/badges.js
+commit b0ea201cb6ecad2f7513660259bae3af736536ba
+tree abbcdefd4b285f79f39eaf6212c7c7a247cbd4b2
+parent 721517f7ba630fc3a666f1249c6792a722c73c7f
+author usha <meetsamal.usha@gmail.com> 2020-11-01 18:06:34 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 18:06:34 +0530
+
+    badge api changes
+
+
+:100644 100644 fe91c63270e0d5f8fd074fabefe5f95c5e90d24e 2f7648f94414693bc8f3f1c07d21c73ed8da09fd M	apps/social-share/api/badges.js
+:000000 100644 0000000000000000000000000000000000000000 e710f04e2e865973238fdbdb8a2deb2183b2920d A	apps/social-share/package-lock.json
+commit 721517f7ba630fc3a666f1249c6792a722c73c7f
+tree 81d5455c50657b504e9ed834dc80abe554659c25
+parent 05e39ac1078464647aff9293cc78f9c19991603e
+author usha <meetsamal.usha@gmail.com> 2020-11-01 16:06:20 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 16:06:20 +0530
+
+    badge api changes
+
+
+:100644 100644 c665f9fabc4c3c90b812ea5dc4bb0e15f0057d4f fe91c63270e0d5f8fd074fabefe5f95c5e90d24e M	apps/social-share/api/badges.js
+commit 05e39ac1078464647aff9293cc78f9c19991603e
+tree fc457c41fb9176fb7b315f9a8fabf09703d9ab42
+parent 01e648a37fc52fe8571c3587f1874f82e9081436
+author usha <meetsamal.usha@gmail.com> 2020-11-01 16:04:22 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 16:04:22 +0530
+
+    badge api changes
+
+
+:100644 100644 8362f04f17c50548cca66d06adf31ab5c06a5954 c665f9fabc4c3c90b812ea5dc4bb0e15f0057d4f M	apps/social-share/api/badges.js
+commit 01e648a37fc52fe8571c3587f1874f82e9081436
+tree 8671588954db0ee8e18c83bd43ac0046723bf154
+parent f511a3f6c8142753c95840486879e29f2a19ae88
+author usha <meetsamal.usha@gmail.com> 2020-11-01 14:34:24 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 14:34:24 +0530
+
+    badge api changes
+
+
+:100644 100644 c62bd1b531e3d21fff897ff7d3e00038cc70baa2 8362f04f17c50548cca66d06adf31ab5c06a5954 M	apps/social-share/api/badges.js
+commit f511a3f6c8142753c95840486879e29f2a19ae88
+tree a3cf2ae70747a33a91c272a344aaa85a8b398979
+parent 7afa7070c24308c95fdb8a19eb6d7a6cfd65a1db
+author usha <meetsamal.usha@gmail.com> 2020-11-01 14:13:16 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 14:13:16 +0530
+
+    badge api changes
+
+
+:100644 100644 9f20f47689730224ce23f170dc2039d80f0a5560 c62bd1b531e3d21fff897ff7d3e00038cc70baa2 M	apps/social-share/api/badges.js
+commit 7afa7070c24308c95fdb8a19eb6d7a6cfd65a1db
+tree 54dd8a354fcb1caa49c06e7d0c80bca6cff9e52e
+parent edeb7d29a67eaae07bea6c8f8367cab2cca35952
+author usha <meetsamal.usha@gmail.com> 2020-11-01 13:20:46 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 13:20:46 +0530
+
+    testing badge api
+
+
+:100644 100644 6e1b091d65398fd30a1971b84823f6b3cd90b6b7 9f20f47689730224ce23f170dc2039d80f0a5560 M	apps/social-share/api/badges.js
+commit edeb7d29a67eaae07bea6c8f8367cab2cca35952
+tree a627b056fc07a3bab811faf3189d8776f206ab54
+parent 311a2ab898b24ab1aa3b23e7343d7108cc748bb6
+author usha <meetsamal.usha@gmail.com> 2020-11-01 13:19:49 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 13:19:49 +0530
+
+    testing badge api
+
+
+:100644 100644 53c2ed8f0c1df3b5fb68b25c7adf8c2fd669c3cd 6e1b091d65398fd30a1971b84823f6b3cd90b6b7 M	apps/social-share/api/badges.js
+commit 311a2ab898b24ab1aa3b23e7343d7108cc748bb6
+tree 96b8558a289c3ddf53c668aaa3cf8a83c09558df
+parent 0ca09e07e3358ffc78aa651af37b82238abe79d1
+author usha <meetsamal.usha@gmail.com> 2020-11-01 13:15:39 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-01 13:15:39 +0530
+
+    testing badge api
+
+
+:100644 100644 c362d2bbac30faefdfadf2e04fabcf4de988cc51 53c2ed8f0c1df3b5fb68b25c7adf8c2fd669c3cd M	apps/social-share/api/badges.js
+commit 0ca09e07e3358ffc78aa651af37b82238abe79d1
+tree 7d37aa6868973d42812fc2047979623cf44ba9b4
+parent 59d3f86261d475f6a9cbe422df4e30e5a2ff0d94
+author usha <meetsamal.usha@gmail.com> 2020-10-31 19:49:54 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-31 19:49:54 +0530
+
+    header added for badge
+
+
+:100644 100644 2e810a5d623e2fdbe1c6486122dadf9d8dccc5e2 1e4ba35963f1b4d4af92b8fede835cedef93c317 M	apps/social-share/api/content.js
+commit 59d3f86261d475f6a9cbe422df4e30e5a2ff0d94
+tree 2cba719bfc7742251d73fb72a0757ba2996f89af
+parent a949305fb1cf961049583c5d524b6326e5bafbb0
+author usha <meetsamal.usha@gmail.com> 2020-10-31 11:57:16 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-31 11:57:16 +0530
+
+    header added for badge
+
+
+:100644 100644 6c533d6c41600cd37a3e77c0f9c8d6c05a209f90 c362d2bbac30faefdfadf2e04fabcf4de988cc51 M	apps/social-share/api/badges.js
+commit a949305fb1cf961049583c5d524b6326e5bafbb0
+tree 525f8b534e2610b48d8c8adf011c327d53ccfbe7
+parent 99e4a9b505cb196f7cbf6a5cf6cfe6b14ed764c9
+author usha <meetsamal.usha@gmail.com> 2020-10-30 18:48:01 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-30 18:48:01 +0530
+
+    badges api integration
+
+
+:100644 100644 2dc2bce21202a10e173a6dbddd8b1a0fa954e96a 6c533d6c41600cd37a3e77c0f9c8d6c05a209f90 M	apps/social-share/api/badges.js
+:100644 100644 decbe52f1ad96646ae8452ea347e982d797ffbcc c175029ad27f9098b71d4fc674b3aa9c9cb9c9e3 M	apps/social-share/api/index.js
+:100644 100644 7f6d23307ff009480ee1ede5d1a507b5f9a0e93f f8788f6415a2bcab91bfd16a4342624c5d20bd9f M	apps/social-share/package.json
+commit 99e4a9b505cb196f7cbf6a5cf6cfe6b14ed764c9
+tree 04979571f39b0b046939923954cf70262e1a6528
+parent 0ee4976b29970a0c68461c92db09ae52316825b1
+author usha <meetsamal.usha@gmail.com> 2020-10-30 17:23:17 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-30 17:23:17 +0530
+
+    badges api integration
+
+
+:100644 100644 7f953ec3d01c02836172b3380ede54df8d576df0 2dc2bce21202a10e173a6dbddd8b1a0fa954e96a M	apps/social-share/api/badges.js
+commit 0ee4976b29970a0c68461c92db09ae52316825b1
+tree 92da34752488def0d013dc47670358e8e708a5d0
+parent 2d435500ff470ae94b1d2ecb1384857cb5d69029
+author usha <meetsamal.usha@gmail.com> 2020-10-30 17:10:23 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-30 17:10:23 +0530
+
+    og url changes
+
+
+:100644 100644 f4823027ae1515eda1cb7009624318108b823b2a 2e810a5d623e2fdbe1c6486122dadf9d8dccc5e2 M	apps/social-share/api/content.js

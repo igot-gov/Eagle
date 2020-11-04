@@ -1,0 +1,17 @@
+commit 7c2285a79002e86c3d14fe01fcc346f25a969056
+tree bbc29e7273d1e2aaf4a3de5d33395e3dc3357c06
+parent 915720b265e2d675ff6098a12f7bf860b5a2b8a8
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-31 10:26:26 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-31 10:26:26 +0530
+
+    Few changes in validating pdf content profanity
+
+:100644 100644 c00c62fe135359c4fd666a6fd996196e7b1a92c1 dc578e8c697056f5251707d91acfa6c5cbdb7843 M	src/main/java/com/eagle/contentvalidation/controller/ContentValidationController.java
+:000000 100644 0000000000000000000000000000000000000000 51b640536a3e3e542feaf342f255e86b3e2458ab A	src/main/java/com/eagle/contentvalidation/model/ContentPdfValidationResponse.java
+:100644 100644 1f2b0187fdd7816b3074ec1ebed488dddb03935a 53290373b4bf0a69b1c15e8f89ce17f5586b7553 M	src/main/java/com/eagle/contentvalidation/model/Profanity.java
+:000000 100644 0000000000000000000000000000000000000000 4aaa4b45c5f2e8ab0394382cf0236c559b8c03ea A	src/main/java/com/eagle/contentvalidation/model/ProfanityWordFrequency.java
+:100644 100644 2c2f85231c35b68cb43fff0cf2f2786bbf32dca8 4df11dc4044390d794697a4bcced7a450beeead0 M	src/main/java/com/eagle/contentvalidation/service/ContentValidationService.java
+:100644 100644 a4da35809e19b065a4bebda6fb48138d67428e3b f9262e626b68a9696c358b007f40aa4470ab6206 M	src/main/java/com/eagle/contentvalidation/service/impl/ContentProviderServiceImpl.java
+:100644 100644 377cf1c59ab5da90a53d05efc30ca8ef44eae97d 641aa93208e58ba5714e165699a24fc119ab9922 M	src/main/java/com/eagle/contentvalidation/service/impl/ContentValidationServiceImpl.java
+:100644 100644 8635d15b137d6b646139bd3def1ac24f72b1dd4d b95d11f918d6fd9453aec235f94c59d729e0eeeb M	src/main/java/com/eagle/contentvalidation/service/impl/OutboundRequestHandlerServiceImpl.java
+:100644 100644 a628b64505e2108a73e22cf2b5d7488f23bef01d bacbf5a40f2e5dfca1ff92ba1086578c43250f71 M	src/main/java/com/eagle/contentvalidation/util/CommonUtils.java

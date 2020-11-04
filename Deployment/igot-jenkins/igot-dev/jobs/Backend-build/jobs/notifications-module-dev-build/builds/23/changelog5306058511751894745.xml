@@ -1,0 +1,10 @@
+commit c64f6fe55dc114fb781a0376908e688c749e9116
+tree cf9f4c6202ee4b743d6bb53d0f19d67bc6e34226
+parent 6a0698663a37db0fce82a09141731528f9120025
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-27 19:10:57 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-27 19:10:57 +0530
+
+    Updated producer config and consumer partitions
+
+:100644 100644 eb2cde6fbba1c5a4e474df52dba77ff1627ad8ac 8a22b772c366645cff7ee70627ff389105b1fe74 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ProducerConfiguration.java
+:100644 100644 2d164fbc8ddd97abc3367f37b3538e344c907067 0e404880875caabc3e5c780a27ec82c7b1321a06 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/consumerImpl/EmailNotificationConsumerImpl.java

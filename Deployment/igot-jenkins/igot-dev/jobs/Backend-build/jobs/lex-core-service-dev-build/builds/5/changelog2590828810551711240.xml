@@ -1,0 +1,40 @@
+commit 5880cff797a0de1215b0bcecd51c4acb72bef026
+tree 4256c7fcd2de6d95fa15cc2ebd13d55ba40d198e
+parent 67272a66c6fe087b291e5e5c267400437decfa54
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-30 11:27:38 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-30 11:27:38 +0530
+
+    added log
+
+
+:100644 100644 d1ab639fa314dd663091cbf84eee7aa5d5c667e4 877b3e2e61a8283d0ec958ee1ba9b157218965a6 M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java
+commit 67272a66c6fe087b291e5e5c267400437decfa54
+tree cedc7e18bc1a6f73b257401669fc59f730502d6a
+parent a5aec43c38b0d257618676d1b05c0a522f47f7e9
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-30 11:23:59 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-30 11:23:59 +0530
+
+    Filter the progress content for goals
+
+
+:100644 100644 7f2fff424323d0723495943c2b10ef3a1beaece0 d1ab639fa314dd663091cbf84eee7aa5d5c667e4 M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java
+commit a5aec43c38b0d257618676d1b05c0a522f47f7e9
+tree f512ada8c59a640bf191c347cf4f7a9014d39e55
+parent df9a53b3bb1fd46007b1b4806a00092abf3d3800
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-30 10:31:40 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-30 10:31:40 +0530
+
+    Added compute goals
+
+
+:100644 100644 3d6c840226d5c54a615f1adbb624c9ab30ce80f5 7f2fff424323d0723495943c2b10ef3a1beaece0 M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java
+commit df9a53b3bb1fd46007b1b4806a00092abf3d3800
+tree 4523dc56a3ee281e3edc268db6e95bd1d10ece17
+parent 1630f749f65450ae65d7113cc69438eb9a25bc43
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-29 20:48:14 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-29 20:48:14 +0530
+
+    Goals api - Added all required metafields
+
+
+:100644 100644 448ddac252de32ee82f4f54e15bab683e1f14d5f 3d6c840226d5c54a615f1adbb624c9ab30ce80f5 M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java

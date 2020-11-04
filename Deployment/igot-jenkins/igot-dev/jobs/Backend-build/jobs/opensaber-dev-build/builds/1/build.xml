@@ -1,0 +1,68 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@2.36">
+  <actions>
+    <hudson.model.ParametersAction>
+      <safeParameters class="sorted-set"/>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>branch_name</name>
+          <description>github repo branch</description>
+          <value>master</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_server</name>
+          <description></description>
+          <value>10.0.1.129:5000</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_repo</name>
+          <description></description>
+          <value>opensaber</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>image_tag</name>
+          <description></description>
+          <value>bronze</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_file_path</name>
+          <description></description>
+          <value>./apps/opensaber/</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_pre_build</name>
+          <description></description>
+          <value>opensaber</value>
+        </hudson.model.StringParameterValue>
+      </parameters>
+      <parameterDefinitionNames>
+        <string>branch_name</string>
+        <string>docker_server</string>
+        <string>docker_repo</string>
+        <string>image_tag</string>
+        <string>docker_file_path</string>
+        <string>docker_pre_build</string>
+      </parameterDefinitionNames>
+    </hudson.model.ParametersAction>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>amritha</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.31"/>
+  </actions>
+  <queueId>6932</queueId>
+  <timestamp>1594963799139</timestamp>
+  <startTime>1594963799143</startTime>
+  <result>FAILURE</result>
+  <duration>257</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList"/>
+</flow-build>

@@ -1,0 +1,22 @@
+commit 90577e8df3d8a77fdee20c4a7a28be2eee0d5ca8
+tree 49f18999cbeeeed6c60fca6a15a75c9a63490c03
+parent 7ab2be3abd92195eef493ee72e138db732b2f21b
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 11:48:15 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 11:48:15 +0530
+
+    Task #51040: Added dept name in user profile
+
+
+:100644 100644 71bcfd70d732e4567229d1d164be5633377313e9 a9b136605b2eb128e58644f12ad4ae7375a96b3c M	java/registry/src/main/resources/public/_schemas/ProfesionalDetails.json
+commit 72d0a85fde49d4e30e9a3631d1cd52c47036f131
+tree b0f7f5ebd6b762df37b92d173711f8e3c78b1502
+parent 78e654828c9c9ac5b959edf6eac07794a33ab9a4
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-21 09:42:35 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-21 09:42:35 +0530
+
+    Fixed issue ES data not getting posted
+
+
+:100644 100644 8651398e6ab37e4c61b260affdc2fbc39f88e226 2e4615a6bfe6465acccfd6172c3e7275f24ab4ca M	java/elastic-search/src/main/java/io/opensaber/elastic/ElasticServiceImpl.java
+:100755 100755 5e9ae45c5964019ce02ff7c44fb51824eec674db f53691a15f29c233de58c465da2506d398c8785b M	java/registry/src/main/java/io/opensaber/registry/service/impl/RegistryServiceImpl.java
+:100755 100755 e4d9405d65c6d9761897dfa00e68a98c9a8b8f8c 877d8c7b822bf9b01de21ceb25d956df12cbc314 M	java/registry/src/main/resources/application.yml

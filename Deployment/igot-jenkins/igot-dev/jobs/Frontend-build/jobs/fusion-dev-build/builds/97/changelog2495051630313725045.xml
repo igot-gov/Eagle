@@ -1,0 +1,192 @@
+commit db8f1648ba8f8377e69d2388f2be4dfc300864ca
+tree 1cee99c2cdc44d1e3c075184ac7137db4ce44bae
+parent f95b3e0617932317b2d3a2ec45e14d30dd24b277
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 18:14:19 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 18:14:19 +0530
+
+    typography and other UI updates : init commit
+
+
+:100644 100644 418b52eac785c2f23a6588b345ecb836185295ed 1dd52f5cc21bff20398802841e7783b6c1605a80 M	apps/fusion/angular.json
+:100644 100644 7d3980c9314b4da6dd4a8c6036571164fbafdd0b ac0c649ebd0158195a0da6db2a7e1582317949da M	apps/fusion/library/ws-widget/collection/src/lib/_common/display-content-type/display-content-type.component.scss
+:100644 100644 426eae5205c4c2fc0437714204755eddf34ed035 3444159a954420a272c8915d2bf7acfc92051db2 M	apps/fusion/library/ws-widget/collection/src/lib/_common/user-content-rating/user-content-rating.component.scss
+:100644 100644 ac2ac06f9675440330c6681921d7195b1d1709b5 b4bda30a58c427a40965e4d53da63d20d1e2314f M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.scss
+:100644 100644 11144b7bb78868dd39addf86556fe55f9cb31dd8 5f459df386f42f4415926125a879d9e10a828f79 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.scss
+:100644 100644 7e0acae5d3a66b1eafd1de0d4d364d31ff5c90e8 78d183f6663357300e350569987106c71bcdcaab M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.scss
+:100644 100644 774debdb2f08ade7ca2da05ba86f921e4577777e af49de1af639f766fd2af35b9fd2ab2158375853 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.html
+:100644 100644 98cce41797333f0a6dc25062a9fca973bf384717 c86967bf4f97a855bfabe31f5905249d8448fda6 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.scss
+:100644 100644 7ea242dd7bfa8201f7c141206aa29615766ed2f3 d69656609568d6e63909017b28e547a5539ee5ba M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.scss
+:100644 100644 98cce41797333f0a6dc25062a9fca973bf384717 9d2e9edf92627f9e2162685cdde1d057f0782033 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-vertical/content-strip-vertical.component.scss
+:100644 100644 7ea242dd7bfa8201f7c141206aa29615766ed2f3 c3e6f13be9a914b7097b44b09c7f12b82b23bd4a M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.scss
+:100644 100644 9ba528625c5b90ee13d2796b2353026a0966889e 481eae3ef3dd900c08305f1148fe6d3b73d2771b M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.scss
+:100644 100644 16462ec3ab0ce3f40d6e90c9b7432bd32215be71 880ce2684de7f6f0fa06d9afbfd62c0c4d20b011 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.scss
+:100644 100644 1353c930c996e4a2fff204117e0081fbfa17ed8c e750f13ebcd1488fcbc5236f1004bc6f61e9ca6d M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.scss
+:100644 100644 8c145b3c015f62319c8dcc6784fff1db6f45a41c 6996a7a3c29dbec12daeb557df00e0e97f80eb73 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.scss
+:100644 100644 e05a57e39f4e7026ecd6ecf175e54dd03d46a102 c0945d5c270e2f07f0f9889640a5914275f48ab3 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss
+:100644 100644 a94c29eabdac072dc908675a4dddd58f0c168d2f fc3dd24e1a5df3c830cb192506bec18d3770e63f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-cohorts/app-toc-cohorts.component.scss
+:100644 100644 f4a9d1f9330b38a885a2fcde4ad346718456167e a5812cb6c107c3e474e06c42cb458bc9b2668aa4 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.scss
+:100644 100644 60bcdf22e73632e7310b95fabf538d9f060c0865 9e731fe12231f7a6c771df3034f03d4089a5fa3e M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-discussion/app-toc-discussion.component.scss
+:100644 100644 dc99c0991b1690e8afa5eec6cb691d87c351d61b fdf9590547e22ee0fb9d67266dca5fd47c9128cf M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.scss
+:100644 100644 2c2fdada5998a06cdc4efc9efbbd0d799ae34989 abb97793d08f9f9206b3718343ca26f732db6226 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.scss
+:100644 100644 6411df0ecff55b6af7f79f6021e258c92637eabb 8b680f1921472011c151f14a4f151b3d3bed947a M	apps/fusion/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.scss
+:100644 100644 4d08dbf007fec6ebe0c882b4010e462d082e2418 2ef7ea3ee76583b8b3992f9b26d3d83b4fd287d6 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/components/related-posts/related-posts.component.scss
+:100644 100644 ba376b4ba6197f075106b4c957d10456ad33f252 18f31fdc63f64ad3591bdfea9c1a5c76634ffd4b M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/career-detail/career-detail.component.scss
+:100644 100644 4d08dbf007fec6ebe0c882b4010e462d082e2418 2ef7ea3ee76583b8b3992f9b26d3d83b4fd287d6 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/related-discussion/related-discussion.component.scss
+:100644 100644 7e409c2431610fc50c72b81db5e44cd853e4967e dab4d6f423e8f76b04aedcde8d36a9be7288d954 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.scss
+:100644 100644 3b5d68aff10517ba3a2ace525a3c026c7037379b 15dda8002e0198a7ab0d534d59972df0e96bd391 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 6cb2501f956806b248e04efa25353a063f5a4b02 818c3b9534aa30f6a79d4a572f932c15c51fca66 M	apps/fusion/src/app/routes/signup-auto/signup-auto.component.scss
+:000000 100644 0000000000000000000000000000000000000000 51a0ce013ed2aa22137fd3cc52543795bc8091b3 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Black.woff
+:000000 100644 0000000000000000000000000000000000000000 e4826d542d879ee147a90e49c42a99a54fbe9a48 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Black.woff2
+:000000 100644 0000000000000000000000000000000000000000 53176668d0e538aa2ce7236d4a49d5a1fe1ab3ac A	apps/fusion/src/fusion-assets/fonts/lato/Lato-BlackItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 a0e66eac2e96bd0067881add45ee2c73893b45f3 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-BlackItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 d37d3b3a33162394dee076fbe411bcbede1a4689 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Bold.woff
+:000000 100644 0000000000000000000000000000000000000000 50274ad0c53304a52e02ef885e12107476a28d1d A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Bold.woff2
+:000000 100644 0000000000000000000000000000000000000000 7f6ea4e3fd6cc363f82beb55484ca1c5047253de A	apps/fusion/src/fusion-assets/fonts/lato/Lato-BoldItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 ccf622bf5c24ec67476e7b774ce24123ce7d57f3 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-BoldItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 876d5a660f361c7015278fac8ad8990cee82bdb0 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Hairline.woff
+:000000 100644 0000000000000000000000000000000000000000 61f7e7d7db3f0e2b14708061d550fb795bd7cd17 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Hairline.woff2
+:000000 100644 0000000000000000000000000000000000000000 6606fc357ab08a2bc06edfeaa30faef1ae03d5ba A	apps/fusion/src/fusion-assets/fonts/lato/Lato-HairlineItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 e0cc55d6a917fac225690191947933f10d7cfac6 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-HairlineItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 c612f2e20b88d5b2f2a21d1a362f5b6fd6fffec5 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Italic.woff
+:000000 100644 0000000000000000000000000000000000000000 f8e662209d96aab1151ad6ce8057a3627ebc16c0 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Italic.woff2
+:000000 100644 0000000000000000000000000000000000000000 3f53baba3a99f9350ede1706f518a41d43aff00c A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Light.woff
+:000000 100644 0000000000000000000000000000000000000000 3f01ef9e3edeb4c5588a179c10b7c4c197df1f3a A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Light.woff2
+:000000 100644 0000000000000000000000000000000000000000 602971e88b35d7a8d51acbf4e4b66531d1cdb952 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-LightItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 cedfaedae9811e9cdc4199b97f4987f5beb53688 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-LightItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 9fb190c51643601a1c52c9f287766c172a37df16 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Regular.woff
+:000000 100644 0000000000000000000000000000000000000000 aff3c2f7d0f3eb164f7372264afec656d97eadd7 A	apps/fusion/src/fusion-assets/fonts/lato/Lato-Regular.woff2
+:000000 100644 0000000000000000000000000000000000000000 dcd5a787211a27a38d17840b66b8e886b6ccbca6 A	apps/fusion/src/fusion-assets/fonts/lato/stylesheet.css
+:000000 100644 0000000000000000000000000000000000000000 0dc52fbeb60f798bee457b975a885f56011620c2 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Black.woff
+:000000 100644 0000000000000000000000000000000000000000 d896b53687c833fa6776b65ed38c910595f97801 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Black.woff2
+:000000 100644 0000000000000000000000000000000000000000 da0a9abf46666c0e59be3b5143da27c273766389 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-BlackItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 929daa40c74cdfb530fef16bb07b40162c67cee0 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-BlackItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 2831f4367f92e87ca4ca6f24b169ae194fc0c5bf A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Bold.woff
+:000000 100644 0000000000000000000000000000000000000000 9a55d0beb7cd3119ac388a5be914c845761478e1 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Bold.woff2
+:000000 100644 0000000000000000000000000000000000000000 97dcf0248d557a695024116723c7d13a78cb2359 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-BoldItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 a49920cca610a3f1ce512d6c7fe1ff0d743e81f4 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-BoldItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 e623971687e8f854d3bba39fd16895c8a19b48a0 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraBold.woff
+:000000 100644 0000000000000000000000000000000000000000 9e788ba23698139092bd456d0795081d2054681e A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraBold.woff2
+:000000 100644 0000000000000000000000000000000000000000 63335ce7b1a06a60ded9b4f6fab9038923136b45 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraBoldItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 11012c8361552ea313614482cf3f10985cf00a14 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraBoldItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 00105fa9670f334ba3355f5da261bb445bf39942 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraLight.woff
+:000000 100644 0000000000000000000000000000000000000000 467d5e7b4ba58c746254ac78c36e75f090b5379f A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraLight.woff2
+:000000 100644 0000000000000000000000000000000000000000 13707e5cf0cc18d0c94e19b3f625df2db852d6a5 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraLightItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 00eecf67233892bd2dba8d51afed9d6a5d99d799 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ExtraLightItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 3ffb13ce8d507192738b3a15d53ee948b4fd321a A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Italic.woff
+:000000 100644 0000000000000000000000000000000000000000 a799858c690a2f50406e37c441bfde1b2db672ef A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Italic.woff2
+:000000 100644 0000000000000000000000000000000000000000 d22588c301dead315238073fd3c55ac0c741ed23 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Light.woff
+:000000 100644 0000000000000000000000000000000000000000 2b24135ab123d34669d350093325a793aaf3a3fa A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Light.woff2
+:000000 100644 0000000000000000000000000000000000000000 4adcd92f95735776b9b17f5b3d0355d7d7a6df32 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-LightItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 7b038154b6695143054bf95a834c60e773fc3dae A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-LightItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 9144383682094db7696703f772773214ef47b914 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Medium.woff
+:000000 100644 0000000000000000000000000000000000000000 0992471384281e7134083826f395ed4b78e2a4a1 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Medium.woff2
+:000000 100644 0000000000000000000000000000000000000000 25534ea08791d52f4d06b47b53c560178bb0c6f3 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-MediumItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 b5e32bd6a34b447577ad459cbe732296e2ea63a4 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-MediumItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 f350b73860b11788c82485d0fbcc0b3c7423aecd A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Regular.woff
+:000000 100644 0000000000000000000000000000000000000000 33906e85e8b52a7b56c31685c5df14d673eb7914 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Regular.woff2
+:000000 100644 0000000000000000000000000000000000000000 b8f604789feb19f6009036212b49cf29eb51a8a5 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-SemiBold.woff
+:000000 100644 0000000000000000000000000000000000000000 d037f8f174e4053b1a43080444fabc3813a5d910 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-SemiBold.woff2
+:000000 100644 0000000000000000000000000000000000000000 ca0c78af0e3265f8af6d974f24736e78e0fc9df8 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-SemiBoldItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 7fcbaf0e81284a71be60ae8db7b476f424f0482f A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-SemiBoldItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 b8462712a90b087e37e9f88cc205164b6f607119 A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Thin.woff
+:000000 100644 0000000000000000000000000000000000000000 3a4a258ffc8627765fbd026bd49c35a42c93d26c A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-Thin.woff2
+:000000 100644 0000000000000000000000000000000000000000 b042b285aa9d255ae1c6229ee3fb4a5f440db62d A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ThinItalic.woff
+:000000 100644 0000000000000000000000000000000000000000 14bf8eae6f30f121bef1c94036ce447d7ff8b98e A	apps/fusion/src/fusion-assets/fonts/montserrat/Montserrat-ThinItalic.woff2
+:000000 100644 0000000000000000000000000000000000000000 9a17f5d47ed289eb212bdbfc9b767cd90263850d A	apps/fusion/src/fusion-assets/fonts/montserrat/stylesheet.css
+:100644 100644 0e08b306be290380acd1b4e02eaea314a6b50203 853590e7b90b1285abb370b09698ce6b837d57ca M	apps/fusion/src/styles.scss
+:100644 100644 b68cbc50f9973bcde7cccbb604c016fe2baee16a adfebbd0863b8cfed1c6c320137d290deaacf217 M	apps/fusion/src/styles/_ws-vars.scss
+:100644 100644 2d09233f1baf6b7216eda1fce857cc6eaf7fdb38 11e81faa2c12612f92680f89c1ec05d8b1e051c1 M	apps/fusion/src/styles/mat-typography.scss
+:100644 100644 c25c21d2706322c85d7d3ec054641fc9771048ae 7ff145df93c170e12ab76311777c0a55f0fa7a1f M	apps/fusion/src/styles/styles.scss
+commit f95b3e0617932317b2d3a2ec45e14d30dd24b277
+tree d7def3b001f76c16a144649dcc286de41777e8dd
+parent d7a1a41d541fead37a1e333783c817b18f5e7134
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 13:22:33 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 13:24:42 +0530
+
+    banner and other UI related fix
+
+
+:100644 100644 d152628692f4a9019ba6d18e228f9d5ae382af5e 9ea4add9ce7d831ea2c4cb7a2a14587f582d5db1 M	apps/client-assets/assets/configurations/localhost_3000/page/explore.json
+:100644 100644 4ff1efc5e02abe10d7ecd066d1abc020df0623e4 7a6bdf712e2009d4c3498062714638b00b1cf3fb M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 b4cbcb363cf7ea5eaa516c988201a307b3d9ea88 8bc0e82b1d7a713f88a9ad0b4ed654d312aad820 M	apps/client-assets/assets/configurations/localhost_3000/page/learn.json
+:100644 100644 3c77ecf0a443e0f8eb02c6e957741b91aae3519e b6d437d86c6aed4fec781dc5de83b7fb11d0201f M	apps/client-assets/assets/configurations/localhost_3000/page/network.json
+:100644 100644 db69f567a667d168011c6109026d79810f971b01 e5426075bfd9ef24278ae0c06f8af5dbd1fcc799 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+:100644 100644 669dcfcf5769f788b4e034b98720dd4bb2c77dc4 35fa926e709076d5fdb0614248206407ab14c623 M	apps/fusion/library/ws-widget/collection/src/lib/activity-card/activity-card.component.scss
+:100644 100644 7e9a46b7f4e97ebe304b4cb999b5aeec0f4a8dc8 17d10bdb44fb7ce1170e6951ccda136d90b86296 M	apps/fusion/library/ws-widget/collection/src/lib/btn-feature/btn-feature.component.html
+:100644 100644 d99042840324c136d9728051848ad1ef84a34a11 0ea641bca9c306ce540e0126a257367022fbda2d M	apps/fusion/library/ws-widget/collection/src/lib/btn-feature/btn-feature.component.scss
+:100644 100644 68a4013ca750d3f04f004fec94b6f1b267b354c4 8893f67d772aad892eae5a022d19d2a966b271e3 M	apps/fusion/library/ws-widget/collection/src/lib/card-learn/card-learn.component.html
+:100644 100644 6cc9f69af3dd2afe9b02e5f10f6e001e54760617 f99739c62efeb96d1262567c90f1b1fc3bc5324f M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html
+:100644 100644 4b410ebd749cb7c8d91451a5940ae738ae8f3d77 11144b7bb78868dd39addf86556fe55f9cb31dd8 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.scss
+:100644 100644 4517c265c4a923a843d26a388b888f55498887d9 774debdb2f08ade7ca2da05ba86f921e4577777e M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.html
+:100644 100644 631d1bfaa4a62697dbf66525f6db9b879df1fefc b0d10e7df7e7de73cf1058df997c5ce6aa4055e9 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 d35497b7d5d7e973ba51347b4464fbf6dda1c0e3 9899cc330e33dc6b10e242e6091129abb7a5c21c M	apps/fusion/project/ws/app/src/lib/routes/search/routes/home/home.component.html
+:100644 100644 ae4e43a01d71f2754f12f48575c2c6aee7d379a6 e9713b943da6d5a34f111b5f6534f9ce243ed87b M	apps/fusion/project/ws/app/src/lib/routes/search/routes/search-root/search-root.component.html
+:100644 100644 67b33408291dfa7a4e6e62b11b8144aad4913583 19050bd20ddc59f76bff681f4ead33ec9525af1b M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.html
+:100644 100644 5fe7ecdb11d031deef082a4d282b7fd125c4ee49 1b82a60bfc69d4d56f1e35591fc93ac6854a3cc6 M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.scss
+:100644 100644 c7317df0f9fa11f7d761cac144214414315515a4 3dcf651e4b8d64873999e9fbb67b697328b85329 M	apps/fusion/src/app/component/root/root.component.scss
+:100644 100644 23eeb62abf925df63cf56984ca2d9b766cc173ab 7211c527745b3f28b4c05d5ee7ed6792b4e1dfc0 M	apps/fusion/src/themes/_theme-mixins.scss
+commit d7a1a41d541fead37a1e333783c817b18f5e7134
+tree f1ad80994fe5b9fb11a0b547cbb9ed1ed1468e22
+parent 7db7562767f3583b6c70d3bea7b9649057f67ae0
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 12:57:09 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 12:57:09 +0530
+
+    home page overflow issues is fixed in page.json re arranged
+
+
+:100644 100644 6fcf988bcc5026a0e3344f637604f05a5eb80b74 4ff1efc5e02abe10d7ecd066d1abc020df0623e4 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 0654cd843b2d5d4bcd7cc4737756a22742db598c d2b356a19accaf581b4245e277acff85205da836 M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.scss
+:100644 100644 d4316edc1d7504e68b65b9432bacde9c745c1b8a 420326afaf5f12270ed6b1f8501dcfa0c40156e6 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.scss
+commit 7db7562767f3583b6c70d3bea7b9649057f67ae0
+tree 7a9b4b2076cc4197a75e4b404e1a9655d55fd186
+parent 68f61ac7d8d8e27ca73451926927108bf9feaaeb
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 12:28:53 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 12:28:53 +0530
+
+    page.json issue resolved
+
+
+:100644 100644 d932bee448cbfbddee42e230f3f65e700e8f7509 6fcf988bcc5026a0e3344f637604f05a5eb80b74 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+commit 68f61ac7d8d8e27ca73451926927108bf9feaaeb
+tree 520bcf19a9a9ed532187667deccc1d5747289600
+parent 5960fe3b2c881904b2e12655cf2e931f110bed3d
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 11:24:22 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 11:24:22 +0530
+
+    network button issue resolved
+
+
+:100644 100644 eabf7d3c2a97dccd0ce3bdd63cfc2394af3a9494 d09880137c4e521435d53009414f7dced0c7b05c M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.html
+commit 5960fe3b2c881904b2e12655cf2e931f110bed3d
+tree ff2c5251f4a00e263909b8c2e07cf4272dfad3c6
+parent 50677efc60a31aae9cff963339211b0b760082e4
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 11:10:45 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 11:10:45 +0530
+
+    Network user search api issues resolved
+
+
+:100644 100644 86eb75068130f387422ca986a954a4c16dcaf5cc eabf7d3c2a97dccd0ce3bdd63cfc2394af3a9494 M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.html
+:100644 100644 193596ed1e01d16e05737255712860bb5cf12c4c bdae60cf89382f79ec5ef0276c869f4b8d769dc3 M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts
+commit 50677efc60a31aae9cff963339211b0b760082e4
+tree 8d1e98f8253471591dc1b7479aeeb810adcde68a
+parent 67c25fdba9d08914a167a6fedcaa9908d4ec1210
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 09:50:24 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 09:50:24 +0530
+
+    discuss, carrier  card issues is fixed in home page
+
+
+:100644 100644 04a763232cf2039e919419051ff11e3afba95fc2 0654cd843b2d5d4bcd7cc4737756a22742db598c M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.scss
+:100644 100644 446e464a766fd1797e98ca0e7f25e3df8c8a2b96 d4316edc1d7504e68b65b9432bacde9c745c1b8a M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.scss
+commit 67c25fdba9d08914a167a6fedcaa9908d4ec1210
+tree 8b2df406bee1a6c8bb1b2cafb34979b19fc35648
+parent d876f004918717c64516a4b9cc579c274a9dbf4b
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 08:48:25 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 08:48:25 +0530
+
+    network card issues is fixed in home page
+
+
+:100644 100644 a11d7e0a31ce46ac0dbf3dc5600cdcda89ddab73 6cc9f69af3dd2afe9b02e5f10f6e001e54760617 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html
+:100644 100644 12eeea9751248ea11865100298a1f7ac39a8e39d 4b410ebd749cb7c8d91451a5940ae738ae8f3d77 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.scss

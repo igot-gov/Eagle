@@ -1,0 +1,65 @@
+commit 22af266ed3f1810d36ade9a9269ff9f5ae9f0148
+tree 1e3400f662584613ebb5bb2e2e71ca4c0fe8e579
+parent e1653a56b1d30cd2abab0f11c681d3b23ef66ec2
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:36:23 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:36:23 +0530
+
+    lint fix
+
+
+:100644 100644 112376a57d317b4bba45151072ce5d3c1ee2e1a4 bdd617b3512dc8c33c04e50045fcc880e11c4c34 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service.ts
+commit e1653a56b1d30cd2abab0f11c681d3b23ef66ec2
+tree 6d93650cb04e764d8aed6ed1bc660c413efe4893
+parent ea5e1cf997f31274235f943bf3aaac6c7b74e2e0
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:28:17 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:28:17 +0530
+
+    banner color and Autho logos
+
+
+:100644 100644 d5dc47e28e31cde15c457b75feb14ca00558d8a3 139ba9978ec75c666583c99eea2b674e206a2ed1 M	apps/fusion/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 da9c6fea8c83c279a020c444791d0d0c7ef67961 c4df7406d1c937ee21ea12a071091779695b6c72 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 7b5180300e2f1b24f9a438f2f9edccd2f72570c7 112376a57d317b4bba45151072ce5d3c1ee2e1a4 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service.ts
+:100644 100644 70774465116472d235392d572d12b1248437e172 c570d27f78e0308609f7c20af6c4ffb6722a255b M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.html
+:100644 100644 b605a2461dc4ca5874b1537d121628cefdcd1357 3284400baef003d4aa15fb890e26ed03db9fd006 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.scss
+:100644 100644 3ae2ccb29213883f1e68cba223323e973b769e8f e1c4fa4391d6ac5d39c9db44460396459a7cadd3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+commit ea5e1cf997f31274235f943bf3aaac6c7b74e2e0
+tree 5893b7649bcb1b3d12f8500820cc2e94be44e516
+parent cd53b84c671f5e7cbe1048c27b9e8d7072cae165
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 16:03:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 16:03:14 +0530
+
+    Poster image in minimal  fix
+
+
+:100644 100644 226e0a711ada99f7694b4420ee4aeac38b1e1afe 981c39de4e3d9f4fd6ea1c004dd97775d4c5ec19 M	apps/web-services/src/models/content.model.ts
+commit cd53b84c671f5e7cbe1048c27b9e8d7072cae165
+tree f30eecb4169de71a019339db403338f8390e3cf6
+parent cb013397dab28c99339e216c0809be246d364596
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:52:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:53:07 +0530
+
+    lint fix
+
+
+:100644 100644 4011093c7d79a96def2e29d320d38110e9f1afd0 4149e2ef3c11e36a6bb3558211cda3ce196b0492 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit cb013397dab28c99339e216c0809be246d364596
+tree 61d8cc2d050ef855fc31d9001a4c93bb95d3ec97
+parent 9a117f2d0d562b7b21f73a8df443599a486fe0eb
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:49:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:53:07 +0530
+
+    posterImage added to interface
+
+
+:100644 100644 6ef0805b56e5904bf49222ca8e2f5b46a186d623 226e0a711ada99f7694b4420ee4aeac38b1e1afe M	apps/web-services/src/models/content.model.ts
+commit 9a117f2d0d562b7b21f73a8df443599a486fe0eb
+tree e992afbe52283b511422be076a13c81e85567794
+parent 303740faa4a4335b80a57325771c2886c2776e90
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:49:08 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:53:07 +0530
+
+    posterImage added to interface
+
+
+:100644 100644 fee19726341787e4b0577ae9a0bdd9be3e54425b 6ef0805b56e5904bf49222ca8e2f5b46a186d623 M	apps/web-services/src/models/content.model.ts

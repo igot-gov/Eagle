@@ -1,0 +1,11 @@
+commit 995f4905d2d66ed3c2a5a9bc8a03f62c9c539f40
+tree b7f1dccd3e651d7ecbff150e3f147abea930c299
+parent fc2a9d2f5c4526e94da3918409063dcda1e01f0c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-26 20:08:17 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-26 20:08:17 +0530
+
+    Issue #51347 Changed search template for aggrs
+
+
+:100644 100644 5d464e34290855c75e0e548dea3e4034dbe1ef48 524dab573263239750b9b4dc607ddb390eb6e4ed M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java
+:100644 100644 10e20e0071209cfd23ab842a4875c61a92ab2225 8cd17291b0ddd4b17465016dcb9cc14d8dbcb3ca M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/util/SearchConstantsv6.java

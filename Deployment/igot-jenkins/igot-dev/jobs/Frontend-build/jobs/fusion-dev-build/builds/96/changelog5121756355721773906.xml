@@ -1,0 +1,53 @@
+commit be32fcd479fad941a881391fbc0ad3af3c56c486
+tree b5b43cb922a4fd9aeb520fd66673427d9e27c10e
+parent aab4eed8ef1b62cb34771fee58bf0f929c49830c
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 19:07:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 19:07:16 +0530
+
+    prexy reverted to localhost
+
+
+:100644 100644 1001f70ee951c8a51671b80160227fd8f7ed4a9d 6bfb6f67048864618fdfb8dc81abffce3b67e09b M	apps/fusion/proxy/localhost.proxy.json
+commit aab4eed8ef1b62cb34771fee58bf0f929c49830c
+tree f89a55505c77e5d0bde9ce8c8120d47890e5ba31
+parent f51dfb87e833254c030df4face4152629f235385
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 19:05:45 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 19:05:45 +0530
+
+    Banner Slider Update
+
+
+:000000 100644 0000000000000000000000000000000000000000 2e8cc548bfdda973bace51067c6040e04a315283 A	apps/client-assets/assets/instances/eagle/banners/hubs/career/xxl.png
+:000000 100644 0000000000000000000000000000000000000000 63fa28954b55f4e88fda467eac249523abd9e00a A	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/xxl.png
+:000000 100644 0000000000000000000000000000000000000000 2e59cc610ec6b3a282bb927efaa388eede36dae3 A	apps/client-assets/assets/instances/eagle/banners/hubs/learning/xxl.png
+:000000 100644 0000000000000000000000000000000000000000 b8f6ccd64aaaabfbbaae8dafde02deeb076b76fa A	apps/client-assets/assets/instances/eagle/banners/hubs/network/xxl.png
+:100644 100644 b25ac147b53ea2af57333fac69ed4064c464cddb 1f0ad598a6144d9afbcff482b04b83d1dd8d5f4a M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.html
+:100644 100644 17b3dc3faaf54e1f980156320274bf455c93e418 c7e81bfc05af0a0bd45b91c824f06a4c839248a8 M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.scss
+:100644 100644 ade84f3cbb3ae1b54a85085f42df1eae97added4 cd0bf8f73175854bb588b574d804bc57f035cb6a M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-home/discuss.component.html
+:100644 100644 6bfb6f67048864618fdfb8dc81abffce3b67e09b 1001f70ee951c8a51671b80160227fd8f7ed4a9d M	apps/fusion/proxy/localhost.proxy.json
+commit d876f004918717c64516a4b9cc579c274a9dbf4b
+tree 0905fe625f860898f747d4e8c49edf36e0506b54
+parent d8873155ab26b9a8cb34cd6c7620432d7435c524
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 17:55:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 17:55:54 +0530
+
+    other changes related to discussion and app-nav
+
+
+:100644 100644 cb0d90fadc2185e7c9abe2e9062a731fe4071ee8 8aa497dd6f00923c380f4f8cff3d56b3ce116a80 M	apps/fusion/project/ws/app/src/lib/routes/discuss/resolvers/discuss-unread-resolve.ts
+:100644 100644 717264ecf02a3a9f04f312efc033b24837f9f93d b2c716bb5fac5a9bf1921b21e7f52e17a896580d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 fd3138160b095f0918d1ef4265f0899545c2001b 631d1bfaa4a62697dbf66525f6db9b879df1fefc M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 bb8037ce065fe0581346d328e3a80dc1f2e6db88 62e21dedd5e2c644c609b82bf09db30db1268ee2 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.ts
+:100644 100644 de62695fa536019be51e6866deb88a94883d3aec b6a685a29afca3c8311a18d0443ad103983d80d4 M	apps/fusion/project/ws/app/src/lib/routes/discuss/services/discuss.service.ts
+:100644 100644 4e0d65dee3b0010ff718c39544c4011466477d23 67b33408291dfa7a4e6e62b11b8144aad4913583 M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.html
+commit d8873155ab26b9a8cb34cd6c7620432d7435c524
+tree a5d932de31622992e9c0f06781abecf619f8d68c
+parent 8085627f653c5178c18bac8cbb3409d53cdf765e
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 17:48:43 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 17:48:43 +0530
+
+    fix
+
+
+:100644 100644 26fce3b6f6b7fe914171dbcf0e88fcd6de803fdd 180a2a898001ab54cd3fbbda6da4374f56da1916 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 25eef8bc54a9f5af411b740406f48fa8ef6b889f a11d7e0a31ce46ac0dbf3dc5600cdcda89ddab73 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html

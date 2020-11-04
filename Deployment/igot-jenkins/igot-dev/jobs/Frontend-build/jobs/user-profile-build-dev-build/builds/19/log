@@ -1,0 +1,441 @@
+Started by user [8mha:////4EIe+lNeaSvqUA1DGa62VY6R20edkylToSd+GrviQgQXAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzREgZB/dLi1CL95IyizOKS/IKM1CIAAIIplMYAAAA=[0mchristopher.fernandes
+Checking out git git@git.idc.tarento.com:eagle-project/user-profile.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build@script to read Jenkinsfile
+using credential git-lab
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/pid-replica^{commit} # timeout=10
+Checking out Revision 267865b9f8dfda9135a3ff5e8ce506fa3e149b4f (origin/pid-replica)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 267865b9f8dfda9135a3ff5e8ce506fa3e149b4f # timeout=10
+Commit message: "Task #51611: added logs for testing"
+ > git rev-list --no-walk 39e3bff4cb0874c3951e2219dd608d76f6cc983f # timeout=10
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4CogtAq7rn74jxj7uLVCcsx+t/y35kGeqvPkPZObyMXKAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4M4HhYYw5g8Q/T69bF4Q03CXP5QrGLTB/3G02QXJo6U5AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4I8dzKCIF5MAVfX6mSSVw/7BBA8CLo8Y4KOcAQfTfDT/AAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
+[8mha:////4LB3xgJ5/i6rvwz3UzIGQskalXp7BJ5rM3CcuPAq8uCGAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4BIodQLml+s7Yz/VUwXw69YMXxgGKkA2g9ogG2rdJzvnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] ansiColor
+[8mha:////4I+DPNrJrY6nGXv0HKYd6twr+ClidgSYIrE439NWgujzAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E6ZFoOz08tWaQiXki4hIu1lr7b/L8x53DGJZd+Tu1RuAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4EOWAYBHBge05it7SsmJIpeBzlZnHLfW1vjcORdWPYclAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Checkout)
+[8mha:////4P8hajGSU1NmcDK7zr6c+qSTk1RCMgeBZweWlwN28t5yAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4O62hg3nuWQGYzJSRPAYJinD89yjNHB3k3WDfrzy132vAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYO0G2F+S7bfcBITL9lL0AAAA=[0m[Pipeline] checkout
+using credential git-lab
+Cloning the remote Git repository
+Cloning repository git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/pid-replica^{commit} # timeout=10
+Checking out Revision 267865b9f8dfda9135a3ff5e8ce506fa3e149b4f (origin/pid-replica)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 267865b9f8dfda9135a3ff5e8ce506fa3e149b4f # timeout=10
+Commit message: "Task #51611: added logs for testing"
+[8mha:////4PphThmGcYjzIXYO8baHSsc/I1mRgpU76NMkOh1sjp0sAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEzcQ4uTYsfkGFWgvNe9g+hMkv8tf8B4kkTt7pnrOc1xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8AHk6T5r0AAAA=[0m[Pipeline] }
+[8mha:////4N1Qgn8AATg0PJlfa+zx4/XZh3bPHqh2xDfBbhJgS8Y2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRNBSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsPXymMMb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EMnktzjW7yUEZ67srpVpNNd9ZDB2RgNDQ8SkV11xlyUAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5NudINt/AHkw63u9AAAA[0m[Pipeline] }
+[8mha:////4P0iBvoKjc4AyO3aqqUerJXSHuX/cs0cWTvuLSIHcSjvAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRElSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsP073CUL0AAAA=[0m[Pipeline] // ansiColor
+[8mha:////4CNnUvLMQQkxTLdb9/c6+Fx6wGWbU8RzyyrIP2Q7WnhBAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjJKgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvBXXnAcEAAAA=[0m[Pipeline] stage
+[8mha:////4CBaTsQr90lV5hpKm/1Gi+wkLJENS/ytk4SMdVNyA5vCAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] { (docker-pre-build)
+[8mha:////4HHuxzc+yx4ZPKmtro1JSpobF3oS2uHDg6qhlNjVyMk5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGigQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN27Iu42+AAAA[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
++ docker build -f ./Dockerfile.build -t user-profile.build .
+Sending build context to Docker daemon  739.8kB
+Step 1/6 : FROM node:12
+ ---> 1fa6026dd8bb
+Step 2/6 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> a96c4bcdf8d4
+Step 3/6 : COPY . .
+ ---> 9c9660afa65c
+Step 4/6 : RUN apt update && apt install -y zip
+ ---> Running in 4504a848c9c9
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mIgn:1 http://deb.debian.org/debian stretch InRelease
+Get:2 http://security.debian.org/debian-security stretch/updates InRelease [53.0 kB]
+Get:3 http://deb.debian.org/debian stretch-updates InRelease [93.6 kB]
+Get:4 http://deb.debian.org/debian stretch Release [118 kB]
+Get:5 http://deb.debian.org/debian stretch Release.gpg [2410 B]
+Get:6 http://security.debian.org/debian-security stretch/updates/main amd64 Packages [573 kB]
+Get:7 http://deb.debian.org/debian stretch-updates/main amd64 Packages [2596 B]
+Get:8 http://deb.debian.org/debian stretch/main amd64 Packages [7080 kB]
+Fetched 7923 kB in 2s (3916 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+67 packages can be upgraded. Run 'apt list --upgradable' to see them.
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  zip
+0 upgraded, 1 newly installed, 0 to remove and 67 not upgraded.
+Need to get 234 kB of archives.
+After this operation, 623 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian stretch/main amd64 zip amd64 3.0-11+b1 [234 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 234 kB in 0s (1268 kB/s)
+Selecting previously unselected package zip.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 29934 files and directories currently installed.)
+Preparing to unpack .../zip_3.0-11+b1_amd64.deb ...
+Unpacking zip (3.0-11+b1) ...
+Setting up zip (3.0-11+b1) ...
+Removing intermediate container 4504a848c9c9
+ ---> 683492c8a805
+Step 5/6 : RUN npm install && npm run build
+ ---> Running in c13d33b4e670
+
+> husky@2.3.0 install /usr/src/app/node_modules/husky
+> node husky install
+
+husky > Setting up git hooks
+husky > Done
+husky > Like husky? You can support the project on Patreon:
+husky > [4;36mhttps://www.patreon.com/typicode[0m ❤
+
+> nodemon@1.19.1 postinstall /usr/src/app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+[32mLove nodemon? You can now support the project via the open collective:[22m[39m
+ > [96m[1mhttps://opencollective.com/nodemon/donate[0m
+
+[91mnpm WARN ui_web-services-v8@1.0.0 No repository field.
+[0m[91mnpm WARN [0m[91moptional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules/fsevents):
+npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91m
+[0madded 840 packages from 562 contributors and audited 913 packages in 14.443s
+found 1168 vulnerabilities (1159 low, 1 moderate, 8 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+> ui_web-services-v8@1.0.0 prebuild /usr/src/app
+> npm run lint
+
+
+> ui_web-services-v8@1.0.0 lint /usr/src/app
+> tslint -c tslint.json -p tsconfig.json --fix
+
+
+> ui_web-services-v8@1.0.0 build /usr/src/app
+> gulp build
+
+[10:17:37] Requiring external module ts-node/register
+[10:17:39] Using gulpfile /usr/src/app/gulpfile.ts
+[10:17:39] Starting 'build'...
+[10:17:39] Starting 'del-dist'...
+[10:17:39] Finished 'del-dist' after 4.69 ms
+[10:17:39] Starting 'compile-project'...
+[10:17:42] Finished 'compile-project' after 3.7 s
+[10:17:42] Starting 'copy-package'...
+[10:17:42] Finished 'copy-package' after 19 ms
+[10:17:42] Starting 'copy-json'...
+[10:17:42] Finished 'copy-json' after 32 ms
+[10:17:42] Starting 'copy-assets'...
+[10:17:42] Finished 'copy-assets' after 3.74 ms
+[10:17:42] Finished 'build' after 3.76 s
+Removing intermediate container c13d33b4e670
+ ---> fc4749096e60
+Step 6/6 : RUN zip -r dist.zip dist
+ ---> Running in 2804e2b518cb
+  adding: dist/ (stored 0%)
+  adding: dist/models/ (stored 0%)
+  adding: dist/models/profile-details.model.js (stored 0%)
+  adding: dist/models/axios-request-config.model.js (stored 0%)
+  adding: dist/profileApi/ (stored 0%)
+  adding: dist/profileApi/user-data.js (deflated 80%)
+  adding: dist/profileApi/groups.js (deflated 59%)
+  adding: dist/profileApi/mater-groups.js (deflated 55%)
+  adding: dist/profileApi/profileApi.js (deflated 57%)
+  adding: dist/static-data/ (stored 0%)
+  adding: dist/static-data/nationality.json (deflated 88%)
+  adding: dist/static-data/degrees.json (deflated 84%)
+  adding: dist/static-data/industries.json (deflated 60%)
+  adding: dist/static-data/govtOrg.json (deflated 81%)
+  adding: dist/static-data/languages.json (deflated 70%)
+  adding: dist/static-data/designation.json (deflated 71%)
+  adding: dist/index.js (deflated 60%)
+  adding: dist/package.json (deflated 65%)
+  adding: dist/configs/ (stored 0%)
+  adding: dist/configs/cassandra.config.js (deflated 30%)
+  adding: dist/configs/request.config.js (deflated 38%)
+  adding: dist/utils/ (stored 0%)
+  adding: dist/utils/helpers.js (deflated 69%)
+  adding: dist/utils/requestExtract.js (deflated 65%)
+  adding: dist/utils/postgres.js (deflated 82%)
+  adding: dist/utils/logger.js (deflated 68%)
+  adding: dist/utils/message.js (deflated 3%)
+  adding: dist/utils/axios-retry.js (deflated 57%)
+  adding: dist/utils/env.js (deflated 57%)
+  adding: dist/utils/log.js (deflated 66%)
+  adding: dist/utils/loader.js (deflated 43%)
+  adding: dist/utils/error-codes.js (deflated 50%)
+  adding: dist/utils/util.js (deflated 50%)
+  adding: dist/middlewares/ (stored 0%)
+  adding: dist/middlewares/enable-compression.js (deflated 40%)
+  adding: dist/middlewares/user-route-filters.js (deflated 67%)
+  adding: dist/middlewares/add-cors.js (deflated 56%)
+  adding: dist/middlewares/add-middlewares.js (deflated 62%)
+  adding: dist/middlewares/app-logger.js (deflated 56%)
+  adding: dist/middlewares/add-favicon.js (deflated 52%)
+  adding: dist/middlewares/error-middleware.js (deflated 47%)
+  adding: dist/middlewares/auth-filter.js (deflated 65%)
+  adding: dist/middlewares/add-request-tracker.js (deflated 41%)
+  adding: dist/middlewares/helmet-security.js (deflated 65%)
+  adding: dist/middlewares/body-parser.js (deflated 39%)
+  adding: dist/middlewares/add-cache-disabler.js (deflated 45%)
+  adding: dist/service/ (stored 0%)
+  adding: dist/service/registry.js (deflated 82%)
+  adding: dist/server.js (deflated 65%)
+  adding: dist/publicApi_v8/ (stored 0%)
+  adding: dist/publicApi_v8/network-hub.js (deflated 70%)
+  adding: dist/publicApi_v8/publicApiV8.js (deflated 50%)
+  adding: dist/publicApi_v8/profile-details.js (deflated 84%)
+  adding: dist/protectedApi_v8/ (stored 0%)
+  adding: dist/protectedApi_v8/protectedApiV8.js (deflated 43%)
+  adding: dist/protectedApi_v8/user/ (stored 0%)
+  adding: dist/protectedApi_v8/user/user.js (deflated 20%)
+Removing intermediate container 2804e2b518cb
+ ---> 55f797156db5
+Successfully built 55f797156db5
+Successfully tagged user-profile.build:latest
++ docker run --name user-profile.build user-profile.build
++ docker cp user-profile.build:/usr/src/app/dist.zip .
++ sleep 30
++ unzip dist.zip
+Archive:  dist.zip
+   creating: dist/
+   creating: dist/models/
+ extracting: dist/models/profile-details.model.js  
+ extracting: dist/models/axios-request-config.model.js  
+   creating: dist/profileApi/
+  inflating: dist/profileApi/user-data.js  
+  inflating: dist/profileApi/groups.js  
+  inflating: dist/profileApi/mater-groups.js  
+  inflating: dist/profileApi/profileApi.js  
+   creating: dist/static-data/
+  inflating: dist/static-data/nationality.json  
+  inflating: dist/static-data/degrees.json  
+  inflating: dist/static-data/industries.json  
+  inflating: dist/static-data/govtOrg.json  
+  inflating: dist/static-data/languages.json  
+  inflating: dist/static-data/designation.json  
+  inflating: dist/index.js           
+  inflating: dist/package.json       
+   creating: dist/configs/
+  inflating: dist/configs/cassandra.config.js  
+  inflating: dist/configs/request.config.js  
+   creating: dist/utils/
+  inflating: dist/utils/helpers.js   
+  inflating: dist/utils/requestExtract.js  
+  inflating: dist/utils/postgres.js  
+  inflating: dist/utils/logger.js    
+  inflating: dist/utils/message.js   
+  inflating: dist/utils/axios-retry.js  
+  inflating: dist/utils/env.js       
+  inflating: dist/utils/log.js       
+  inflating: dist/utils/loader.js    
+  inflating: dist/utils/error-codes.js  
+  inflating: dist/utils/util.js      
+   creating: dist/middlewares/
+  inflating: dist/middlewares/enable-compression.js  
+  inflating: dist/middlewares/user-route-filters.js  
+  inflating: dist/middlewares/add-cors.js  
+  inflating: dist/middlewares/add-middlewares.js  
+  inflating: dist/middlewares/app-logger.js  
+  inflating: dist/middlewares/add-favicon.js  
+  inflating: dist/middlewares/error-middleware.js  
+  inflating: dist/middlewares/auth-filter.js  
+  inflating: dist/middlewares/add-request-tracker.js  
+  inflating: dist/middlewares/helmet-security.js  
+  inflating: dist/middlewares/body-parser.js  
+  inflating: dist/middlewares/add-cache-disabler.js  
+   creating: dist/service/
+  inflating: dist/service/registry.js  
+  inflating: dist/server.js          
+   creating: dist/publicApi_v8/
+  inflating: dist/publicApi_v8/network-hub.js  
+  inflating: dist/publicApi_v8/publicApiV8.js  
+  inflating: dist/publicApi_v8/profile-details.js  
+   creating: dist/protectedApi_v8/
+  inflating: dist/protectedApi_v8/protectedApiV8.js  
+   creating: dist/protectedApi_v8/user/
+  inflating: dist/protectedApi_v8/user/user.js  
++ docker rm -f user-profile.build
+user-profile.build
++ docker rmi -f user-profile.build
+Untagged: user-profile.build:latest
+Deleted: sha256:55f797156db505053cb0a1ef31cb88d2cf90ae5bb8bb3fe37aec4edd94cab98c
+Deleted: sha256:2df1dc97829f713ceba9580cc12a03ad0de4a9a3b6ce010106652f353a6076d8
+Deleted: sha256:fc4749096e60cb1639f6c5de56991162e9a379bf2ca9624e4ae78732713f69b8
+Deleted: sha256:70d782b436bd07de6a205da6c07d7222437a86280a12b63d47223b5bd525a4fb
+Deleted: sha256:683492c8a8058e23401ae6f3dcc248b44313e37b9f27e5d607994f8bba48225f
+Deleted: sha256:84e37f3d8805d3547e324db9e6f4c6d26701ca1e157ead175053eb4fa145c54f
+Deleted: sha256:9c9660afa65ce51949043a69e2fe2aa750dcf0bcc698ecbdbc0a6256d35195cb
+Deleted: sha256:4354dee21dbd99d6f80f668473bb7ce7d10848f5d81ab911dd53bb03bdfd09e1
+[8mha:////4DW9QfjIqkQjbk0As03mWXshjqakH9wcOztMVQanDcdGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGoSEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHhgNoTvgAAAA==[0m[Pipeline] }
+[8mha:////4EuThnuO/bxP/NWEHp5uhxRcX5RxIFZUATvKwJeb4b/6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCgqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQH+Ao9BvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AXU9pjXrV3DcNQ6Eb6d+G4sMdtRURTPJn5v5jBgzo08AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INK/7CYMEAAAA=[0m[Pipeline] stage
+[8mha:////4P8otm/db14WqDuVB8uFWYQY1DxABVDArZsA1CmUEBBgAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUWBFT1ygLJwhNCGmj/8tPSjtxIq7GHWipxIQHy7ZkvdcbishwInaisdh6jLUXXejdlMRA3F4DDaKhi6gJIwUrlB0UGVstVVGysCjLYSVhbbEOFD26BBvZ6Icug0ZXnhNP21FC7s0dnpDJiZw0p28ZGba33kTCH+cvAMYuQX7Yzbafn8UHbGnGmsIAAAA=[0m[Pipeline] { (docker-build)
+[8mha:////4I93nRfJXXHYqNQ9n8ZryBqCBI50TLJhruonpCB0f+KSAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi0iIqWisNLzCJMXasO8d2cCpexNf4A4FIVGyx2tlmni9YxwBHDhqtot5QbA16N+p5YebQXx1ntHzBlimyU9io3HCnTgs2nBQsKUpYCdgoah1HQzrBVlh5l5WTpKtzCvN3EFCaboAHFGI2JxnSF6YAu9vYRaaf568AJp+grPefqv0bH7uiub4AAAA=[0m[Pipeline] sh
++ git rev-parse --short HEAD
++ commit_id=267865b
++ echo 267865b
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
++ docker build -t 10.0.1.129:5000/user-profile:267865b .
+Sending build context to Docker daemon  991.7kB
+Step 1/7 : FROM node:12
+ ---> 1fa6026dd8bb
+Step 2/7 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> a96c4bcdf8d4
+Step 3/7 : COPY package*.json ./
+ ---> 5635c2f6b0b7
+Step 4/7 : RUN npm install --only=production
+ ---> Running in 15742cf3103f
+[91mnpm WARN ui_web-services-v8@1.0.0 No description
+[0m[91mnpm WARN ui_web-services-v8@1.0.0 No repository field.
+[0m[91m
+[0madded 231 packages from 221 contributors and audited 913 packages in 7.155s
+found 1168 vulnerabilities (1159 low, 1 moderate, 8 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 15742cf3103f
+ ---> 304192e98e11
+Step 5/7 : COPY dist/ .
+ ---> 28f8fad6d551
+Step 6/7 : EXPOSE 3008
+ ---> Running in 2544b8f11d37
+Removing intermediate container 2544b8f11d37
+ ---> 8bf29fd3dcbe
+Step 7/7 : CMD [ "node", "index.js" ]
+ ---> Running in 06aae2f78900
+Removing intermediate container 06aae2f78900
+ ---> 7c0de4ec71df
+Successfully built 7c0de4ec71df
+Successfully tagged 10.0.1.129:5000/user-profile:267865b
++ docker tag 10.0.1.129:5000/user-profile:267865b 10.0.1.129:5000/user-profile:bronze
+[8mha:////4MXsYXnb4p7FgiEOMp7sCWEPUy1bdW722lZ/PP4Z+CyxAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFkKHf7T23f36y8/b4AAAA=[0m[Pipeline] }
+[8mha:////4ADhGD/71LyTTCLwqIdrANDxNP6S4NTyh7Fc/Zz1XH+5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCEB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BvGsvpe+AAAA[0m[Pipeline] // stage
+[8mha:////4Pqex8SOPKqtieLNGiSe5v2zn7dUf74RpgAKszPrXCumAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjIagQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvmG8PMMEAAAA=[0m[Pipeline] stage
+[8mha:////4KwAK1j0yzGjwR2n9VRQvXqKilE+P7dTJFL12wkwFi//AAAAqB+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUQoIFMXWNsnCC0ISQNvq//KS0EyfiatyBlkpMeLBsS9Z7vaGIDCdiJxqLrcdYe9GF3k1JDMTtNdAgGrqImjBSsELZQZGx1VIVJQuLshxWEtYW60DRo0uwkY1+6DJodOU58bQdJeTe3OEJmZzISXP6lpFhe+tNJPxx/gJg7BLku/1sh/lZfACW9ZT2wgAAAA==[0m[Pipeline] { (docker-push)
+[8mha:////4KskLrn9k7rbG/w7PmiQkXYcdP4adTYJhEPSQYUEY7q5AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiUUCBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK7+9Q+vAHUcXIBvgAAAA==[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
++ git rev-parse --short HEAD
++ commit_id=267865b
++ docker push 10.0.1.129:5000/user-profile:267865b
+The push refers to repository [10.0.1.129:5000/user-profile]
+ec376bac8cc9: Preparing
+68b0fda717d4: Preparing
+a3bddbf26e98: Preparing
+f8fe2912f7d7: Preparing
+a0dec5cb284e: Preparing
+03d91b28d371: Preparing
+4d8e964e233a: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+03d91b28d371: Waiting
+4d8e964e233a: Waiting
+a0dec5cb284e: Layer already exists
+f8fe2912f7d7: Layer already exists
+03d91b28d371: Layer already exists
+4d8e964e233a: Layer already exists
+bc17cd405095: Layer already exists
+ee854067fbbd: Layer already exists
+740ffea5d5c3: Layer already exists
+eac9ead92b24: Layer already exists
+8354d5896557: Layer already exists
+23bca356262f: Layer already exists
+ec376bac8cc9: Pushed
+a3bddbf26e98: Pushed
+68b0fda717d4: Pushed
+267865b: digest: sha256:df2bcd9b4bd9fa866a0cc15b9022cbb57669cb57dba718abc6b09e8f4f152fb2 size: 3052
++ docker push 10.0.1.129:5000/user-profile:bronze
+The push refers to repository [10.0.1.129:5000/user-profile]
+ec376bac8cc9: Preparing
+68b0fda717d4: Preparing
+a3bddbf26e98: Preparing
+f8fe2912f7d7: Preparing
+a0dec5cb284e: Preparing
+03d91b28d371: Preparing
+4d8e964e233a: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+03d91b28d371: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+4d8e964e233a: Waiting
+ec376bac8cc9: Layer already exists
+f8fe2912f7d7: Layer already exists
+68b0fda717d4: Layer already exists
+a3bddbf26e98: Layer already exists
+03d91b28d371: Layer already exists
+a0dec5cb284e: Layer already exists
+4d8e964e233a: Layer already exists
+ee854067fbbd: Layer already exists
+bc17cd405095: Layer already exists
+23bca356262f: Layer already exists
+eac9ead92b24: Layer already exists
+740ffea5d5c3: Layer already exists
+8354d5896557: Layer already exists
+bronze: digest: sha256:df2bcd9b4bd9fa866a0cc15b9022cbb57669cb57dba718abc6b09e8f4f152fb2 size: 3052
++ docker rmi -f 10.0.1.129:5000/user-profile:267865b
+Untagged: 10.0.1.129:5000/user-profile:267865b
++ docker rmi -f 10.0.1.129:5000/user-profile:bronze
+Untagged: 10.0.1.129:5000/user-profile:bronze
+Untagged: 10.0.1.129:5000/user-profile@sha256:df2bcd9b4bd9fa866a0cc15b9022cbb57669cb57dba718abc6b09e8f4f152fb2
+Deleted: sha256:7c0de4ec71dffc75264c1dddbf5d3fc3a5bb7e285c52431b881a402546e5ff2a
+Deleted: sha256:8bf29fd3dcbec61bd608cc7cb6d53769529d92a1217ff787cc9d03e948b50503
+Deleted: sha256:28f8fad6d55148b8ae09f6392db95e68cc93a58495d4bb309cdbccae35ee3776
+Deleted: sha256:f9009ab4015a736711fa95b4c1a718a30fe1699d6861d1958200d7ffefc9e7f5
+Deleted: sha256:304192e98e110846d7960873c95d18f589e6061826afbe94f8f92596ecce757f
+Deleted: sha256:720bb8f46eeecb79224e0d84066c0cd73207c82b5cf484984817459e24b92402
+Deleted: sha256:5635c2f6b0b781bade0d8d3b028d776a1c6aec75444e7eeb8898c3a840be8ceb
+Deleted: sha256:44619113b2d2d58a7e03b2a1e8ebaa19e6c9809c95f01278f4818564293c8cfa
++ rm -rf dist
++ rm -rf dist.zip
+[8mha:////4HCp4RoOKOvjlatS+wt8jqbfj6Q+wmm53JWgnwi3Q3tnAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiUSAkRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g2/yR8JvgAAAA==[0m[Pipeline] }
+[8mha:////4IhYpdVhexcJWWOzYXO+Kkswi3/yRysznKdaSnQ5C1/HAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIVEgRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g2gS0pbvgAAAA==[0m[Pipeline] // stage
+[8mha:////4As1Luf+vmpIfGKYQjaSW3l8DsAUOBqPW0u58+IH5jFqAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMJBgg5R0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYu06Q77aCbP8BjoqNn70AAAA=[0m[Pipeline] }
+[8mha:////4BCsJ8dqwfnNxOPrd1lH90LsMi15EglykOdCKjIjQ23/AAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6LEMBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfk5V6QlR+dNok8vQAAAA==[0m[Pipeline] // node
+[8mha:////4Kurxp+vMIjq1vRNYxFDAy6bs2tctZaCIavpexChswjqAAAAoh+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkOBon14bFL6hQa6F5D9uHMPlF/pr/IJHEyTvdc5bzemOdIo4cnWotdZ5S7VUfBjc/NXLsroFH1fJF1UyJg1WVHStu7GnBisViWZZjpbGxVAdOnpxgq1vzMEUw5IqzxNkdNHLf3PFEpueymChfmCJ2t6FJTL/O3wCmvhfk+1KQlR/bfC4MvQAAAA==[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

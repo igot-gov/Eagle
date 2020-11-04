@@ -1,0 +1,22 @@
+commit 127cb4bed68ac76d90a6e6dd303141c3609818ae
+tree 44a40142f84c61479d2895d83049aefc6f20fa11
+parent 728ceb9334a97f554723072740c6dc5561c13e50
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-16 00:20:35 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-16 00:20:35 +0530
+
+    Task #50009: integrated cadre values
+
+
+:100644 100644 e7ed76b175a0e787289244e361b7411aad6caa31 3d6046bdf7a3376a39dcb4d3b5a9702ed57600e9 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 9ba5353cccc4ae7b802f1f116d0a6d45424c2821 4272e6077526a194022f9fd4f3ca9c5e8ae759b1 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+commit 728ceb9334a97f554723072740c6dc5561c13e50
+tree a86b0a499e5f837ff4172b1347d5d5de39c2bb67
+parent 355b36bb7b376eb985a96303ae47fb138399dfe7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-15 21:59:59 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-15 21:59:59 +0530
+
+    Task #50009: Added migration api in proxie
+
+
+:100644 100644 457cd7f040267b2d70efe9c93bb2957eaf85d1ac 592eca86e8c97654efcb7be7c0619ebb83408a9a M	apps/web-services/src/protectedApi_v8/user/profile-details.ts
+:000000 100644 0000000000000000000000000000000000000000 fa9c7d1a852d3917c936c75ad94c6cc27ef5fac6 A	apps/web-services/user_upload/migrateRegistry.json

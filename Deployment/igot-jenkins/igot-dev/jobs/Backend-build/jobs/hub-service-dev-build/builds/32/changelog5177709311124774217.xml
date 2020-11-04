@@ -1,0 +1,10 @@
+commit f0882dbd03ed1f8cb9d794fc463e44ec761ae5a6
+tree f496bcae31db6e0ca90bf629facd629bd60a4845
+parent e8de23048c4e495a37ccda260ef37d7f85f2b324
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 20:31:40 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 20:31:40 +0530
+
+    Defect #52193 excluded login user for recommended API
+
+
+:100644 100644 8efe7a4fcf0f529c2243707dc3b79a00256dfd91 ab6a73e2e5deabf5eb9fd34682a64c7d88467500 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java

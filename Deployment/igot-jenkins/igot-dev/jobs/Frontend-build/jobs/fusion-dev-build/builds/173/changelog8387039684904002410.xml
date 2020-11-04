@@ -1,0 +1,10 @@
+commit 0736f476dd1e01f8dd11face40ea292d60f043c3
+tree 493456f84b6fee178cbf328daa0284005fac9065
+parent 2b914f7441b73ffb5b85110010cb4c508619050c
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-02 20:45:35 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-02 20:45:35 +0530
+
+    Setting  Pages
+
+
+:100644 100644 91253597907ef45e0c6602a5f91729355a3add40 47a6ab6972e77b1fbd7831b98685ed65c80122be M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.html

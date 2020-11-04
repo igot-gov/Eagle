@@ -1,0 +1,105 @@
+commit a1d7624db6aeb43b5893d09c33348e8f163335ab
+tree 5b4beada888fe3729e08ddf7542d2ca9b33472d8
+parent b4c5db7830500895a293f3033e49c145b564cca5
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 21:44:51 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 21:45:05 +0530
+
+    transition added angular-animation
+
+
+:100644 100644 106c38ec3996a4d619ba3db270005739614b37dd 3f701fe4519eb9668844d443a9a36b6554e82135 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.ts
+:100644 100644 3482080fc7200a1d02457fa42f45f41f4577d27d beb31704f70c603e0ad4d4c0c4f6442d4770f761 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+commit b4c5db7830500895a293f3033e49c145b564cca5
+tree 9fd7c8fc047b2cdfed65973ad9edff1476bd1435
+parent 3f4701a528bae72da6099537d166629d8dc88745
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 19:21:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 21:45:05 +0530
+
+    Double hubs logo removed
+
+
+:100644 100644 2e13c7833496129770d11c63269a818fcf0b3305 381e5c5b175fb1a3a74f81761ed8acaf7a43494c M	apps/fusion/library/ws-widget/collection/src/lib/page/page.component.html
+commit 3f4701a528bae72da6099537d166629d8dc88745
+tree 3be78bd8e439c4bdb201ba7e1aa4ab4ba915b607
+parent 06d06823cf1ee49fb49299c38a730c72de8413db
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 19:00:00 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 21:45:05 +0530
+
+    Career landing page Logo updated
+
+
+:100644 100644 235f8056316f7cbdcedacdba4fef30888f8e8335 bdc63586b9984b98faecb17c17a51247e6cd1f59 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+commit 9a8d0052b5a95fe0f8043070d709e992a02fdd4a
+tree ddf804d15dbb7db9f994ff93e5cd2517d8d9b846
+parent 2be2344ab2085e964d41202928e4a784f37813fc
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 19:12:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 19:12:51 +0530
+
+    Task #52251, #52243, #52243: Fixed the issues
+
+
+:100644 100644 5b31d76cf8c702aff67069436c9e17d30c740af0 c4b20f7e575ac046b1756d73738f2bc57c192f45 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+commit 2be2344ab2085e964d41202928e4a784f37813fc
+tree 30706946bacb154daafc99d34cb29b49970a84ae
+parent cd0c4fb97a0de07f0ca7a42c48ecf94c40b80e98
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 19:12:22 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 19:12:22 +0530
+
+    Task #52251, #52243, #52243: Fixed the issues
+
+
+:100644 100644 666c57a0e3a225df162f7cd90fad1106914aa346 0014f9cb3ac78eaae930f1f2d656d9819e190a1d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.ts
+:100644 100644 6e58c8edfdd13bbcee1a2292d56e1cdb8cbdf4c9 52fa6ba45d2d58bb0eca5b9623dbc7fc6087ec47 M	apps/fusion/project/ws/app/src/lib/routes/discuss/services/discuss.service.ts
+:100644 100644 d5392b0f7a0243bb7951bc4811b0034e3f0bdb0f 73015f7e8c06b6c905eac32a67dd317890716d75 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.ts
+:100644 100644 e3d97daefd39fb256ba99f5cfd228949bd76b657 eadb1b3415aed26bfd135bf9843b7a2a741218d6 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+commit 2d7f842f886f8c32a1f555d674332e5f158a37e9
+tree 2bcdeccef9bf8c156607f09401d0c86fc3a44aa2
+parent a7dbf921df782b45eb4ca01e55eb533c91231f9c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 18:56:14 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 18:56:14 +0530
+
+    Task #52225: added api to get the established conenction by wid
+
+
+:100644 100644 a980b3fc35c65edefee0c5a695ba35778aa3d175 accde6f76908e35c1a4090b290754faafa2e3335 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 1ed613c5c350e870b65b2be38fefd6b162af9f7b
+tree e118a84cf5d4598c4961272d02415d960bf8c049
+parent cd0c4fb97a0de07f0ca7a42c48ecf94c40b80e98
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 15:57:34 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 15:57:34 +0530
+
+    animation in hub menu added
+
+
+:100644 100644 9b316cf2c07cf10d6dcde3fd9f22d4207caeb7cb 32b49af65f93e73d4480ffe8751f6e4fc90c3c9a M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 b2a733426dcd3255febc6bb6b3e193c0ea2dc9e6 6c1b8941acdfd188ddab29ab7e0dde58b57b7968 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.scss
+:100644 100644 bc8f15b62c63b368c7f94e06a51161c4cfb67b03 106c38ec3996a4d619ba3db270005739614b37dd M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.ts
+:100644 100644 8973f5e7e8b2d41f30e9bc97a81e5f86da46b6f7 284a3a99a88c4dc0b374648963b76d9f36b60c5f M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 b5b3ac077696545baeff572d5b2a4d6b65a1709a 3482080fc7200a1d02457fa42f45f41f4577d27d M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+commit 3ab78a2539c89b0f1a5faa5a87da8afa378278e6
+tree 6ae50627ad503589a800eb70cd39a18f61c44d35
+parent 0daa6f33b143d6cb83755724200cc1d30eeba8dc
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-23 15:21:38 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-23 15:21:38 +0530
+
+    bug fixes on Competency fixes
+
+
+:100644 100644 18c8997b97dee166d888e8cf46698a0d68069662 999f7e31b638e080257136a9b49176cfccce9a5f M	apps/fusion/project/ws/author/src/lib/constants/notificationMessage.ts
+:100644 100644 0dca02e47d4367662c3df9689f0ad3ca1496e64c 84111583d64bda41a40c158e84b8fe55b9e8f220 M	apps/fusion/project/ws/author/src/lib/modules/shared/components/notification/notification.component.html
+:100644 100644 487bd9d7f31c0f133876ded3b59703bf5a2bacfa f20a24ce47d45dd6aa20ec8c9be2e061d14fe7ef M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.html
+:100644 100644 8daacffa025c18d9c11a1b273fc7fa5207eda289 965f6190ae68d4d4db4eee91b0803458425fd224 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.ts
+:100644 100644 08c9f1ffbd9b6f841f0850ff7db2b6ea0519eb23 8c551bbedefd9ed21eecf2705f09bcd740f3b5e8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+commit 431a7dc324bc2b7e39c3b816dbfea1a653fbde97
+tree 025021fce188cc3ff3e596e7233f39faf0f06f2d
+parent 7c3b3b2c028b2075bdc29cb95a7f4a1fa74120e6
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-22 13:26:16 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-22 13:26:16 +0530
+
+    profanity API check
+
+
+:100644 100644 f3cfaaa81137cb67b48f433664fea4c46fbeab25 bee2e8ca0e45143c2eccaf99ad29a44ad3663fb8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 23b64cba92db372df329b302539e7b1d8ce1017b cc483e8580064373b973ea56f499412c0dee51ef M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:100644 100644 eb9c21461603276b646530839f523fed4f713f17 487bd9d7f31c0f133876ded3b59703bf5a2bacfa M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.html
+:100644 100644 269a325b5e146a96cd25f0327dd28df0f1d685d4 08c9f1ffbd9b6f841f0850ff7db2b6ea0519eb23 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html

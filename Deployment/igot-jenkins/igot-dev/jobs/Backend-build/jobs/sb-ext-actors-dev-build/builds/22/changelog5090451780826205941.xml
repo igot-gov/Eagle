@@ -1,0 +1,10 @@
+commit 88b376ffcb6b2636ff1f971551101169fcc0988b
+tree c8eb99406a30672efd66d4b4f9f327a18b51401d
+parent 2bd168aac727c9ed7116ec1f5f867fc2dbcc4748
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-13 18:01:05 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-13 18:01:05 +0530
+
+    Issue #51526 correct price filter
+
+
+:100644 100644 59f442e0a585b22ff5349eea06d76fdfc4d1763b e76ae9421f3348170283e9f92b9f847a9c5b92af M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java

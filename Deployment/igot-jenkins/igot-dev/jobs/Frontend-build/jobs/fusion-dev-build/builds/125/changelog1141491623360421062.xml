@@ -1,0 +1,21 @@
+commit 5d99e7a69258d010889090906f0eae9621b8cbad
+tree 22053adeee6d0755dfd1c37238f28148eed61a00
+parent ef82aa33665cd777e90092d9d6d5c53d2d62e2f4
+author usha <meetsamal.usha@gmail.com> 2020-10-20 17:15:13 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-20 17:15:13 +0530
+
+    twitter and linkedin url changes
+
+
+:100644 100644 81026a8f7ae7b9dc82543c3d766924109f62c672 54ec390534e4c9053a93223c5ba2e106273f8328 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+:100644 100644 00b3d454ccf5bcac80ef4fbcf4143228a1a60f04 8541b9bd760ffc331daae172cc9155390c2b5fef M	apps/fusion/library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share/btn-twitter-share.component.ts
+commit ef82aa33665cd777e90092d9d6d5c53d2d62e2f4
+tree 10dd8c89578f9c22526d12a3bf9a58b7c6a9ddbc
+parent 32a91d9b8d094064e6d5368b53c8714b0ebe6dec
+author usha <meetsamal.usha@gmail.com> 2020-10-20 16:52:16 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-20 16:52:16 +0530
+
+    meta tags added for twitter and facebook
+
+
+:100644 100644 a810492c10553382b1ce8a251941bc4907ccd83c 6462ccdc294419c86df4cd5741b82e8be01c5dfa M	apps/social-share/index.html

@@ -1,0 +1,20 @@
+commit 1b463778cebfb24fad163de84fe45db245dd5419
+tree 666a1a38224a7e956ea8ea5e70b49847d7b06b3f
+parent 20eec4af5659b58c9b101c1f0dd3b777b440ed8e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:08:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:08:48 +0530
+
+    Task #51400: Removed logs added for testing
+
+
+:100644 100644 8d19b8908e94e2520a16bae6522ef6fdc9e47a5c 19733d0827ee639511ad94766e40c36cff62260f M	apps/web-services/src/protectedApi_v8/user/roles.ts
+commit 20eec4af5659b58c9b101c1f0dd3b777b440ed8e
+tree 02f57cbfbe731cacd6e2e99718124129abe2cef0
+parent 5eb8143cd54e26bc3fa177c1b879dc53abe5ce1f
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:07:20 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:07:20 +0530
+
+    Task #51400: New sample file added with roles
+
+
+:100644 100644 9f709d22987838ce5430e1780e762d118f5f8f92 3277f4fa3c153b27f195c3c6e711fa63c96cd1ce M	apps/client-assets/assets/common/user-bulk-upload-sample.xlsx

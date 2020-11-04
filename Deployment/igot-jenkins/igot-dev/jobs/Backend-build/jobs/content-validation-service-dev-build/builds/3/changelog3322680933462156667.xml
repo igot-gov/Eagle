@@ -1,0 +1,21 @@
+commit dd23a2666a530f84d44a3e612f2dd154a726f068
+tree 42591ecbfddf9f9dea7723c2f5a176a78e2186cc
+parent 242efa1f34a3c40c7e8317e2cf86904a96555dbb
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-29 17:25:52 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-29 17:25:52 +0530
+
+    Fixed issues in properties file and method renamed properly
+
+:100644 100644 e71990faab5fe9fb21ebaf4700f6875847a4db31 4c4df6ff031b74226e754f14f2ce4ac5ddb2ecf4 M	src/main/java/com/eagle/contentvalidation/controller/ContentValidationController.java
+:100644 100644 3d6bed660e7148ee290565a101df15dfb5b08f94 4dd435798cf833927370e2a5a3b85cb9736248a0 M	src/main/resources/application.properties
+commit 599b2823b5c4797dcb15c71855a0dc26f133efd3
+tree 48ffb07580438337b188a7e1e15686f7c45c1072
+parent 8fadb04637fdc724d17e34655fe6d0d0ac151a9e
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-29 16:44:35 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-29 16:44:35 +0530
+
+    Reverting the Profanity model class
+
+
+:100644 100644 2ecde19a6276f4bab3f669b36d5a760bd8f2624b 7b32737805943927f05538c95c517c12d7579006 M	src/main/java/com/eagle/contentvalidation/model/Profanity.java
+:100644 100644 35d3c9f9f97b3c55785125e45100542fefd42bda a24a5aa4fa014c1fa705d070d14c3f45cb641f4c M	src/main/java/com/eagle/contentvalidation/service/impl/ContentValidationServiceImpl.java

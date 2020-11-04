@@ -1,0 +1,9 @@
+Started by timer
+Building in workspace /var/lib/jenkins/workspace/igot-dev/Test/test-schedule
+[test-schedule] $ /bin/bash /tmp/jenkins7615329320906223784.sh
+Wed Jul 29 11:30:00 UTC 2020
+total 8
+drwxr-xr-x 2 jenkins jenkins 4096 Jul 29 09:40 .
+drwxr-xr-x 3 jenkins jenkins 4096 Jul 29 09:40 ..
+/var/lib/jenkins/workspace/igot-dev/Test/test-schedule
+Finished: SUCCESS

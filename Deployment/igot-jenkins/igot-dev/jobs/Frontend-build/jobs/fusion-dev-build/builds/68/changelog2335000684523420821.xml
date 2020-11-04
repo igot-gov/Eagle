@@ -1,0 +1,10 @@
+commit 579dbb98645cb8c76ba77ce65e88c9d4cd10e7fb
+tree fd335cc6e06395564517414c5fe510d0a8d904dd
+parent 3ce4ed5b1ef809c3124bfee4730e6ec572be7ec9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 15:37:59 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 15:37:59 +0530
+
+    Task #51329: Added meta image to test in dev
+
+
+:100644 100644 779532f9386f1e7f5e72d490491702791ca1c189 76d422c236af7162bbc6d22059e49c956b00e79c M	apps/fusion/src/index.html

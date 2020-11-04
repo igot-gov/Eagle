@@ -1,0 +1,11 @@
+commit 361a9f8d1ebd8197352ece43ef691f707a4bc9d7
+tree fd218fbd2adb3906e30fef69467b37e5b655ca61
+parent fcbb9f328fb010a88649ff51d7459bb1a7103798
+author amit-kumaryadav <amtydv630@gmail.com> 2020-11-04 12:25:02 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-11-04 12:25:02 +0530
+
+     NPE resolved and uncommented the notification
+
+
+:100644 100644 eb2481edd00ff4ba8ddeaff3e284c0ac89e3a332 154b1bb2dfb6f903129ac44c8a6627e9d179d7fd M	src/main/java/com/eagle/hubnotifier/consumer/NotifyHookConsumer.java
+:100644 100644 16edbba42caeb6993bd5b172e9381fd9a24057ab d22fc5a7ae6417f98ac3505976f23dc6c6b3b44a M	src/main/java/com/eagle/hubnotifier/telemetry/service/impl/TelemetryServiceImpl.java

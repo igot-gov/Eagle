@@ -1,0 +1,20 @@
+commit 3ac81cad79ca5a9c88c780bee8c17296a547a491
+tree 30feed6aa6b1d6c4a5edf7c0bf060ee08a3c1218
+parent 77a94e96c11f73a02e128c996e0593d3a4538f2b
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 21:02:58 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 21:02:58 +0530
+
+    Defect #52123 removed login user
+
+
+:100644 100644 4420db3ed060c3178ca5d90f9b3e6a99b1f85cc2 c7b722e6630d75bfefe1b857289f015280faf693 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+commit 77a94e96c11f73a02e128c996e0593d3a4538f2b
+tree 401c296c2d3c4b9af570f685137513b1b1c24a8f
+parent f4463c7905aa4123532367fc378994ae1a75500f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 20:58:18 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 20:58:18 +0530
+
+    Defect #52124 Soring on updated date
+
+
+:100644 100644 b61142395a746ca9aea5cfb36ba0d3eaffff08f9 4420db3ed060c3178ca5d90f9b3e6a99b1f85cc2 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

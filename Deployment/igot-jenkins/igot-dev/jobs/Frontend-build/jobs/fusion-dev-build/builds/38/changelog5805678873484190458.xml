@@ -1,0 +1,48 @@
+commit 95212129aca4cf7151e40e35f2516ceb10048af9
+tree 0993d1231d99ffa1c0a02af3646e582fca236ffe
+parent 89def9fda0eabbf791fe62f4e73d6204f6968a4a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 18:30:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 18:50:32 +0530
+
+    bug Fixes with LMS API
+
+
+:100644 100644 9e2788e0f3555a834e22b0f0da8fd0ca58d08f90 609e54c57ec1350c8c4bf3d4b9893aaa89026688 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.ts
+:100644 100644 871bf9406764fd632a4cdeab257cdf208b004fbb 77dfdfd8d30fc46e322cb71f3e352a511d20c346 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 682a4dc31cce9b72347a6702c2235e20eb092492 f351d59dc8f9bc2b2f6e75dac59c28b2d4e877d4 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 9bf8ddb6d27b4468361fdaa588c718021908cf3e 1e335a0497c1dfde58f122bd3c1c06e35deff3d1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/catalog-select/catalog-select.component.scss
+:100644 100644 ef8327b420ff4ecea5bbbba45feaf7c75e9616fb 8566d7acc13ae33799ef8f0fbf512fb224021de7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 305dea31973f4c7223c1df9e7dd7719c5ab99d59 37e36747ff0645644c8f53a03941eb5830d92820 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.ts
+:000000 100644 0000000000000000000000000000000000000000 6ac360ee43d98bd381e797b0731b2c1e7d7d9ad8 A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/errors.ts
+:000000 100644 0000000000000000000000000000000000000000 d73897aeb2b26d8db83d02d5991dc92c7c7c06b6 A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/index_old.js
+:000000 100644 0000000000000000000000000000000000000000 52017300291bda88ef9aebd805aec573a8fc8b4a A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:000000 100644 0000000000000000000000000000000000000000 a1793af4563fbca4eb9a8171f10130a4b55287a9 A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts
+:100644 100644 f120082036bf504c9d4ac757c22a847526e27d3a b845158a0b01b127e7c296589acfcf840546495f M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 89def9fda0eabbf791fe62f4e73d6204f6968a4a
+tree f507e34ba86d238c7fb868e949c63693f72d2322
+parent f02bb5baa9b230a1b866787389190f1251e011eb
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-08-13 18:32:59 +0530
+committer GitHub <noreply@github.com> 2020-08-13 18:32:59 +0530
+
+    Update notification.component.html
+
+:100644 100644 aa42f7ae10a5be3b5ab1a2e9c15b60758a27cad0 71eb76d14b872061b7856ca2a8b80a3e29b1d62d M	apps/fusion/project/ws/author/src/lib/modules/shared/components/notification/notification.component.html
+commit f02bb5baa9b230a1b866787389190f1251e011eb
+tree 7b74c0c1adba7cd69c425ca3780e096d1dad91d0
+parent 45217e0bfd00ecf91ffdbe250f8b3de6a84de3ea
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-08-13 18:31:10 +0530
+committer GitHub <noreply@github.com> 2020-08-13 18:31:10 +0530
+
+    Update quiz-constants.ts
+
+:100644 100644 d15a378177018b08c8c23ce3f241a8e4c308dcb6 8cc44d992633ebbf1c72ecdee17961dee4a64fe7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+commit 45217e0bfd00ecf91ffdbe250f8b3de6a84de3ea
+tree 32d7691759bd6e2c7c617bd3306e9d4e2d4be73b
+parent 9ac78275d3088ff26678e8edee1088fcd0d6d438
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:52:18 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:52:18 +0530
+
+    Updated Min Quiz Questions
+
+
+:100644 100644 c3d300464b5bde9df85fb462df7d1f3fcda7eb32 d15a378177018b08c8c23ce3f241a8e4c308dcb6 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts

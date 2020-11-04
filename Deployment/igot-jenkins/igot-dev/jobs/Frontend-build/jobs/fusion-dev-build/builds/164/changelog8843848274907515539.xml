@@ -1,0 +1,11 @@
+commit b06df48a353fff735fb438ca9cc69f5f0f2bf628
+tree 5dd2f4981409fe2b900f502677ba682a2a047565
+parent f916771fd535820ab539c62c9f7b593509657c23
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 19:00:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 19:00:31 +0530
+
+    competence search fix
+
+
+:100644 100644 f85708099c3957f79ce8a13d1100b666a05644fd 00dc3fc72c61cf15d91b40d0db7064a298f7f97c M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 89b53d0af8586a4365643be483b12f3621d7fe36 a0e38b328cca56f25196d36a91bc6bccf19ec5c7 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts

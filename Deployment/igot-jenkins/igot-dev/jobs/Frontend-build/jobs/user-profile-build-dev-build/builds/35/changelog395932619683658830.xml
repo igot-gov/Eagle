@@ -1,0 +1,10 @@
+commit 88f6c5b3c65c39aec4ec84a2a842940df840b006
+tree 225c20925480ae7145315a5a4358fdcf2bf9d290
+parent acca0d5c7d346fbce680b4a5c9cf6540be3e5e38
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 14:36:48 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 14:36:48 +0530
+
+    Updated /getUserRegistry method
+
+
+:100644 100644 4862fd81cda1058cd75dacbf211a356e5b5aa80c 404896f0ce103f46b9cbda4b3cd871e9be6fd8f5 M	src/publicApi_v8/profile-details.ts

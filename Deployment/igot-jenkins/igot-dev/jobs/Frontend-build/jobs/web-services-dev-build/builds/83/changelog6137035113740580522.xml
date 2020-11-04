@@ -1,0 +1,11 @@
+commit fae32adeb940406d494e35675a515defae72669d
+tree f9eb408ec34757f5111329101d00f308c48d1241
+parent 8de2fd4069ecd95502aaf918fba6b37568ff7f30
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-12 16:56:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-12 16:56:51 +0530
+
+    Task #51919: Added sort query params in proxy
+
+
+:100644 100644 9e4a0615e283063ba7999ab92d17ffc208a66970 31e123762c8808eff23f679d4341b17d8fabcdcd M	apps/web-services/src/protectedApi_v8/discussionHub/categories.ts
+:100644 100644 7645972ca7f343d6c421e0a8ebcd2116a6f3fb79 621dda43f68281c5dc5aff5913834a80e20c711c M	apps/web-services/src/protectedApi_v8/discussionHub/topics.ts

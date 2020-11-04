@@ -1,0 +1,28 @@
+commit 5ad8bf28b24b12c5dcd3fb2b993dbb83cbf02c81
+tree f0bd40f8b9e882028e4009503b5e7db672781139
+parent ef4521ff23c0dceb6d130e3996588fb5784bf23c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-07 14:15:44 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-07 14:15:44 +0530
+
+    Task #51687: refactoring
+
+
+:100644 100644 6e9676f89e3805b8f9246ce18892957e9ec121e0 00c751670b3d02ece53e65995c96652f83df7360 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 f0ae8023252187c1378333059feb079349742bad 43f81d730341b8f3e070b39dcc6ca593a4b47be4 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionController.java
+:100644 100644 42d5c29a89ad2d8a2994dace8a4ef99e3d3a930d f9285d23c219ddfa7bf50294335f3bb0e2baaa4d M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 29ffd125a308fa98b2408b3c80c48a04b6e3e23f 6c97b006a3ce3b80c5f4953e8a7b3f923902739e M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 d212aae10998c130c86a5730c535ab08537fb535 1e521c7ed126b0127eeb115b705214d92ea80c2f M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+commit ef4521ff23c0dceb6d130e3996588fb5784bf23c
+tree d25f51fa43f80418b6d75420ad1cdaeb704c751f
+parent 383f18b9a38d7da7b74dd1496845650c867633a7
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-07 12:15:41 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-07 12:15:41 +0530
+
+    Task #51687: refactoring
+
+
+:100644 100644 e1873a997d18780f57e1059593d5d5ada33a6b44 6fffdf90b8a6d139d53c97bd57383859c4e4db78 R088	apps/hub-services/src/main/java/com/infosys/hubservices/exception/ApplicationServiceError.java	apps/hub-services/src/main/java/com/infosys/hubservices/exception/ApplicationException.java
+:100644 100644 ba798700f3ac91774f37a567cd3ef3f047f29c04 6e9676f89e3805b8f9246ce18892957e9ec121e0 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 4d18332da81f559313eaa49967057a381cc6fb89 29ffd125a308fa98b2408b3c80c48a04b6e3e23f M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 884308d48d36f9dea7c14d6cec86b31ff86cb17e 67ad365dc151e286249c9f5f1dbb61012f34b5c1 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 eda54e283a714ac34b002f3821cfd9b63078e9e1 d212aae10998c130c86a5730c535ab08537fb535 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java

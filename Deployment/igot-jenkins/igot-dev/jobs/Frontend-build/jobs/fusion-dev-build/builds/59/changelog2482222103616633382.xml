@@ -1,0 +1,55 @@
+commit 789d7d9139e7bd4ae81f0f623109c15da5d1b249
+tree cfddc63ea92b64cda75634ec3cbbcebb00857ca7
+parent 17db0b73763e600461c3c7c24117958fc91e58b7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-25 14:57:40 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-25 14:57:40 +0530
+
+    Task #51126: Name fields validation added in form
+
+
+:100644 100644 8a0dc2e1e829fc8cb78499d5dda0256812d477aa e3d806f2fa30c8bf12e32f703cd56fc4b937725a M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss
+:100644 100644 bd596b11eea81d73556348169102e60b12e1796f 09359ca4a5197b1e2466ffb980c786f9511f269d M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.scss
+:100644 100644 b713bf0416fd68066a66e7acda5ebc0d717db8a8 5f42b6d1ef7f33b4c4e310b53407af3b1e022a5e M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 eb94af775f2a0943b53e2e69a9c49408301f1be6 98a1dcdcf922c2064346c5c21aa09eb660e29aaa M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+commit 17db0b73763e600461c3c7c24117958fc91e58b7
+tree 2c2eeff4cda26bcb053616c49774b37d65dee1c9
+parent ee2600fc1d8058b1f8aba6dea23edd5dc5c8d021
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-25 14:50:31 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-25 14:50:31 +0530
+
+    Task #51126: validation for name in bulk upload
+
+
+:100644 100644 e5390447cac773521ffec1aab0838ea67d2a306b c639e73a7b0d782b968728780115e78585391f1c M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+:100644 100644 40badd44bcb79cdf781bc12f20deb2a8068bad3b 788dbc6efc85d3366ec49e20aaf6f74271534f71 M	apps/web-services/src/utils/helpers.ts
+commit ee2600fc1d8058b1f8aba6dea23edd5dc5c8d021
+tree 7ebba13d8148140b3020f1dafeeb733b939dbdb5
+parent ec63c5ad4f7329b97a93456935bf2a581332cbc7
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:57:36 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:57:36 +0530
+
+    sugned Cookies ;secure and httponly
+
+
+:100644 100644 ee62a369ab57379b3c094cdd1736a54bf7d2e722 c69f9f43de5240065c43c5c151c4daf6ffcac6fe M	apps/content-service/File_server/S3/util.js
+:000000 100644 0000000000000000000000000000000000000000 d117a82f6c69114e805532d43cd16b9d8934bf1b A	apps/content-service/File_server/yarn.lock
+commit ec63c5ad4f7329b97a93456935bf2a581332cbc7
+tree b11c72e195ba636d36a7f8a97f4b32fe66ec8cfe
+parent b49a90290422806f9cbf96debb6fdf556c454526
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:37:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:37:05 +0530
+
+    logs for cookie
+
+
+:100644 100644 3fdff5559df92dfec055e5aefcc822cca0b57b7c 92de046db6b280ed2169a1dace94c06605c585ad M	apps/web-services/src/protectedApi_v8/content.ts
+commit b49a90290422806f9cbf96debb6fdf556c454526
+tree 8b94146d605351032b596705fd34673de4eabd5b
+parent 06272f5f5e83a666f695eb8f10359e23e98acfbc
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:05:46 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:05:46 +0530
+
+    log for s3
+
+
+:100644 100644 ae67dab0429058d4ef6172ee2d3cffd0d40062ab ee62a369ab57379b3c094cdd1736a54bf7d2e722 M	apps/content-service/File_server/S3/util.js

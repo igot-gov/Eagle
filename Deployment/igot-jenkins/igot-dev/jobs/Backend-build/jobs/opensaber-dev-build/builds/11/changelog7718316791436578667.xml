@@ -1,0 +1,22 @@
+commit fa929c2412f23479e5c561d29483504a2db9c73e
+tree 01dd074348f1988e422397e12903145cef05e88e
+parent 3172181f6408301bdfaa0be8ae574baff5848976
+author NetOps <idcnetops@tarento.com> 2020-09-23 08:53:39 +0000
+committer NetOps <idcnetops@tarento.com> 2020-09-23 08:53:39 +0000
+
+    Sonar stage Updated in Jenkinsfile
+
+:100644 100644 dd5ec5f11734f21e090f05d1cbffab51baa92e71 51631f2171e8ded803f23eb2cef8cb76494e181b M	Jenkinsfile
+commit 3172181f6408301bdfaa0be8ae574baff5848976
+tree 2984043e72c55fa6459474c0c8dcfcd03dbe7247
+parent dd936da8086b88f7fca66b5dbf5df734b1737292
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-21 17:11:50 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-21 17:11:50 +0530
+
+    Task #51623 Enabled ES mapping using sources from schema_sources (resource folder)
+
+
+:100644 100644 082802c473d99f0923b30833eb7cee1fe8ec0e0c 48709258bd2737157ecd6515d7e499358723cc2f M	java/elastic-search/src/main/java/io/opensaber/elastic/ElasticServiceImpl.java
+:100644 100644 4ecf70c323e7995429fa8346f134837824807b03 5f67173b6f70f29a8272d9c1f0256a857366e56c M	java/registry/src/main/java/io/opensaber/registry/config/GenericConfiguration.java
+:100644 100644 3ac0f7c0406c1c13df6136cfbcdd82e6c25b29dc 8d747b71adfdb30e7e5ff2471de63e9cf95cd9a4 M	java/registry/src/main/java/io/opensaber/registry/util/DefinitionsManager.java
+:000000 100644 0000000000000000000000000000000000000000 8742e78f8b92a80d423580c362718c4e526723eb A	java/registry/src/main/resources/schema_sources/UserProfile.json

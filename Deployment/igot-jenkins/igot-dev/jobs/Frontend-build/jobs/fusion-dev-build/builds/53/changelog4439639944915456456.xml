@@ -1,0 +1,13 @@
+commit 91caa1026d80e492c2be8d461618f1153c9ab6f8
+tree af8cec80a496541c244daca95129dc020f93624b
+parent 4204684c02d377f58909b6658c9219875037e8e6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 13:28:32 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 13:28:32 +0530
+
+    Task #51289 : Email pop size fix and other
+
+
+:100644 100644 f6c8ca36f11afb53045e82ad3312af1a74cad759 c51f0e53bf1416bddefaaa3361b9ec187a44752d M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user.component.ts
+:100644 100644 520d95085950ea2fa59328a248338e93a09f0f14 cf7ba00901da980c64d9ac323dd52837ed1da584 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 41e093147a6e0aa3a2db553c78f027805f057ec0 f4a9d1f9330b38a885a2fcde4ad346718456167e M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.scss
+:100644 100644 43879879415d2d1598398e9a6e27c7e2f0cb1e67 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts

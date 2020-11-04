@@ -1,0 +1,47 @@
+commit 77e5ffdb1b92abb558e59e7ccbb8e27c99552927
+tree 116f73180acd38c8ca403438bd0c5eef4b9bbb82
+parent 85db9593e49cc594b33d53f3f4f2c5c1ce3f0680
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 00:50:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 00:50:49 +0530
+
+    fixes : lint and build
+
+
+:100644 100644 6d1790876d0774e0b35bde800bd8d179c76cebd0 1e8452c491f6f1d3ecfa4256d070004d6729cb05 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:100644 100644 55e1d21539b7500b230bfc86bed08dcf431b594e f79a09c4656a4907ad07a4f626672134627f638a M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 1261c0aa228a99c9cafe6493d6972e6239596872 944060a94d13627f559c3e79e550d1df4b860325 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.ts
+:100644 100644 f73179463c86b2eb87dfa057b2a77fe83fe6198d 25e07d050e5bf42aee596f75f45e5661f46aec00 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 f2373670ba5e23a476f0af21c6ccb632772e66ba deeb37ee271c03b8ce2aadfa10e17b3c6f27b228 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.ts
+:100644 100644 a70b027aa347ca9b90d8ed0469f4c1c831c8845f b7c87250cc2855dffd9687f894fefce0dbd52468 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+:100644 100644 83f92bd0261788f9ac0ea0b9ad6eca6a7794634e 8f6f89734876e464cc124b18a6caa67370592b83 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 9c76a9391c48addebf388faf47005e75842e61a4 4c41b01050cec5bc7b238189a9e5f264870dfbe8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 f6928bf34effb84ff37ab23247c3aa0242de7608 f0cd4822d888e5ec857cf8bba755ef602f0daa1a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 85db9593e49cc594b33d53f3f4f2c5c1ce3f0680
+tree 6bba713554c50f23ebe6a95fed20fc7f376499eb
+parent 4a88c81628a7397b71bcb795e65dea7e22f81ecb
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-26 23:43:40 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-26 23:46:52 +0530
+
+    All bugs FIx except comp validation
+
+
+:100644 100644 53751125fad2d54ce3647cbad08a79fb57133b47 ba3de2d0898d3f9c3976e0d9cc67e4ce8632f9e7 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:100644 100644 9777c9127e387f76900bea5359aacb263ee5ab4a df4128412a265949d4cff65b710837f9e803d660 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 87d523eeb935a796c582f133aeec1f9e19f0d12e 03e04ad233a73b007928435246063dc9dbcc1ba5 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html
+:100644 100644 482f75283e1e08496adbe419e0d0e32f611a4184 d90d6044af2e6ef827d460360785c3f1f6c4a462 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.scss
+:100644 100644 61432cf96008497fe0ec1a6969a8f6ed1a448b3c 9be6b2d6f48d2e67bf332d3b8461581eb973f8e8 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 3f3f2ad6f4d8a0c35c7a7b77c90d190256014049 6d1790876d0774e0b35bde800bd8d179c76cebd0 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:100644 100644 b5330725237a8fb03c68ff414ab509d668dc1fef 55e1d21539b7500b230bfc86bed08dcf431b594e M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 d1ff57bf818bf6e70d80ad779ad3ae5f3c2128a8 0e16ef45df3822544bb445da9eb8ccd76337cf08 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.scss
+:100644 100644 077c6c6af6110e07ea9fb43522cced20e62977a7 1261c0aa228a99c9cafe6493d6972e6239596872 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.ts
+:100644 100644 9ea25b689436235b792bdb41a81ed4c8add224a4 f48db966b7754faa15a0ea10590e98ec13b391eb M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 5452afc24db3274968bb2ee8d6a7f073db19f0b5 f73179463c86b2eb87dfa057b2a77fe83fe6198d M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 f56c233954e7a6cece8e421b84d795c43f3a6bab 045475f4990e70b8d4acc2594c42174c4fb65146 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 7d4683c2cc28c41b7e95a2caab1cf5163707be42 f2373670ba5e23a476f0af21c6ccb632772e66ba M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.ts
+:100644 100644 52fa6ba45d2d58bb0eca5b9623dbc7fc6087ec47 ee75bf24cea857440cc4cc0ed4e735c7beaf4ed6 M	apps/fusion/project/ws/app/src/lib/routes/discuss/services/discuss.service.ts
+:100644 100644 99c26b36bcbbdab85a75f8511230d5a4a1c09d46 589efebc7e942d4af9ee8ad0b405fcd18f6f2c43 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html
+:100644 100644 e505804fbd00f9fe0c70d2137dfb4f262442f598 fefdc2b5c23666e7e0750a21a5282d0f048fd16f M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 eadb1b3415aed26bfd135bf9843b7a2a741218d6 a70b027aa347ca9b90d8ed0469f4c1c831c8845f M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+:100644 100644 480a770459e90f913dbe88a8daa011b48ef55a98 83f92bd0261788f9ac0ea0b9ad6eca6a7794634e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 25dc8b522b285584d0ad52dd5e6c56dfb220d9b3 9c76a9391c48addebf388faf47005e75842e61a4 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 93685a570602f98c8eb0547a3e91bf060c185155 f6928bf34effb84ff37ab23247c3aa0242de7608 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

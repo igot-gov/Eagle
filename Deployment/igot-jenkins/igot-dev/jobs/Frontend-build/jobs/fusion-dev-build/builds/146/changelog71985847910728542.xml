@@ -1,0 +1,20 @@
+commit 7919ecf82d31e37a2a2714cc5f504fab60d6d4a4
+tree c6e1a4147a2c8f31c30d42a05f09b0f7b5427b72
+parent 57f9a3242f18d39a01d80c89124b065d15ca31e0
+author usha <meetsamal.usha@gmail.com> 2020-10-23 20:14:31 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 20:14:31 +0530
+
+    social btn link changes to node url build issue fixes
+
+
+:100644 100644 1edca71b6ff8f90f6df0966ed2a8e4552e30a284 5fc26b8663e74b7d837ca85b68074117b7e1deb9 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+commit 2d7f842f886f8c32a1f555d674332e5f158a37e9
+tree 2bcdeccef9bf8c156607f09401d0c86fc3a44aa2
+parent a7dbf921df782b45eb4ca01e55eb533c91231f9c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 18:56:14 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 18:56:14 +0530
+
+    Task #52225: added api to get the established conenction by wid
+
+
+:100644 100644 a980b3fc35c65edefee0c5a695ba35778aa3d175 accde6f76908e35c1a4090b290754faafa2e3335 M	apps/web-services/src/protectedApi_v8/network.ts

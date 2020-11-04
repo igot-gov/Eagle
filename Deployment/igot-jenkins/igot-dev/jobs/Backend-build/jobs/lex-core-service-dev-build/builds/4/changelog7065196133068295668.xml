@@ -1,0 +1,10 @@
+commit 1630f749f65450ae65d7113cc69438eb9a25bc43
+tree 48c039d60ea219e2ac8aa0c86871f2f34289e51b
+parent 9c5dd987fe311e95c853c3a0c7d65d3f3fe57289
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-29 20:13:57 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-29 20:13:57 +0530
+
+    Goals content Api- modified the response structure
+
+
+:100644 100644 889d7b61cbd6d7e9a0302faef64fbfadd555d806 448ddac252de32ee82f4f54e15bab683e1f14d5f M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java

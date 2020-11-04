@@ -1,0 +1,10 @@
+commit 5c0aeb9282a7d953ea28ec4bb44c521da8902998
+tree 122757184fadd7cf8a5afed1106e914dc65db0a4
+parent 171cec5b657ea3dc13cd9422314cf031504bbb7f
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-22 23:55:39 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-22 23:55:39 +0530
+
+    Task #51647: Added new wrapper to fetch post details
+
+
+:100644 100644 63cc2a80f8032e5209b151ba4970667aae0056c3 7d6af7181596814e8c77c564f62db21e7c21dde8 M	apps/web-services/src/protectedApi_v8/discussionHub/topics.ts

@@ -1,0 +1,12 @@
+commit 171cec5b657ea3dc13cd9422314cf031504bbb7f
+tree bbbaca614379709430b02fd818be3d341719883f
+parent 39cf653fd44c24bacd80596cee308a6762bdc2aa
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-21 18:05:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-21 18:05:56 +0530
+
+    Task #51559: Added usersId fetch helper method
+
+
+:100644 100644 b2ce523dddabb0660affa71867115ada6563a7bd 3afafdbdae813cccf539981612c416f509201205 M	apps/web-services/src/protectedApi_v8/discussionHub/users.ts
+:100644 100644 be8e6096c619c336d149b0dd357cea604a93858e c224440db5fbb52a66594387fb17573378a09c86 M	apps/web-services/src/protectedApi_v8/discussionHub/writeApi.ts
+:100644 100644 1188ed0a346e961ee7faebfe960a3490a858eced 87f48addb6970833513b33553975d8eaee43b190 M	apps/web-services/src/utils/discussionHub-helper.ts

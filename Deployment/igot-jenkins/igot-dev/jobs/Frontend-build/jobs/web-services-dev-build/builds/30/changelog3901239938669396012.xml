@@ -1,0 +1,102 @@
+commit ec63c5ad4f7329b97a93456935bf2a581332cbc7
+tree b11c72e195ba636d36a7f8a97f4b32fe66ec8cfe
+parent b49a90290422806f9cbf96debb6fdf556c454526
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:37:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:37:05 +0530
+
+    logs for cookie
+
+
+:100644 100644 3fdff5559df92dfec055e5aefcc822cca0b57b7c 92de046db6b280ed2169a1dace94c06605c585ad M	apps/web-services/src/protectedApi_v8/content.ts
+commit b49a90290422806f9cbf96debb6fdf556c454526
+tree 8b94146d605351032b596705fd34673de4eabd5b
+parent 06272f5f5e83a666f695eb8f10359e23e98acfbc
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:05:46 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 19:05:46 +0530
+
+    log for s3
+
+
+:100644 100644 ae67dab0429058d4ef6172ee2d3cffd0d40062ab ee62a369ab57379b3c094cdd1736a54bf7d2e722 M	apps/content-service/File_server/S3/util.js
+commit 06272f5f5e83a666f695eb8f10359e23e98acfbc
+tree 67268fe9f41832028892f36cba988d3da44a7053
+parent e347865a5050c3bce97da528957734ff66db14a8
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 18:44:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 18:44:05 +0530
+
+    debug LMS:SCROM APIs
+
+
+:100644 100644 8e303b998176fd291ebe802988c3aa57f9138234 baa1653f317bf902cbe0f86b38bbd8de65db0211 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit e347865a5050c3bce97da528957734ff66db14a8
+tree 98fe47089bcf9c4bcde44ad2ee356d41ccb6bc86
+parent b328ef714982418f37d6b90c2596fe00a697bc78
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 17:30:30 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 17:30:30 +0530
+
+    build fix
+
+
+:100644 100644 cc49777ba9c67b3fc08711bb09c89d4ed2c9177f 49349e0b1a3fa75c3bdc867ee7ce8eef23463a47 M	apps/fusion/library/ws-widget/collection/src/lib/registration.config.ts
+:100644 100644 363ab76d7fc3e00531c7e7476a0c798d0053a90c 793bab2affa676b48ffb2201c6e619b2e9c3f686 M	apps/fusion/src/fusion-assets/fonts/poppins/stylesheet.css
+:100644 100644 36a01a93e9ae1d1cf3c777f2bbe687b7a12509c1 8022880fa6ba0ce5f1e9fab6df0a347b403511fb M	apps/fusion/src/index.html
+commit b328ef714982418f37d6b90c2596fe00a697bc78
+tree ab084838b898cfbf405b73d86911c7a0a9472be5
+parent 2de71ac17dd07e9d67b78f79dc141f6d4b8f2941
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 17:15:28 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 17:15:28 +0530
+
+    Log for S3 Cookies in Content service
+
+
+:100644 100644 f88baae878c056bb5ec2c89f42526ed2842cee8e ae67dab0429058d4ef6172ee2d3cffd0d40062ab M	apps/content-service/File_server/S3/util.js
+commit 2de71ac17dd07e9d67b78f79dc141f6d4b8f2941
+tree f8523caf99832edfb04f90266a6b5e40ba8c09d9
+parent 416a098ac67cf2d3adeccb0a53f4ff515cb36a96
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-24 16:25:43 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-24 16:25:43 +0530
+
+    scrom API restructure
+
+
+:100644 100644 786babcc73249d7d7eb695d6ef3a3f6774d96651 f44e292661f6a6856f373027584c5bdc71b36c5b M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:100644 100644 95369086d2d9ac01402c7aac97ec26e354ad1cf9 8e303b998176fd291ebe802988c3aa57f9138234 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 416a098ac67cf2d3adeccb0a53f4ff515cb36a96
+tree cd0000a89049e0782e47de7478e436ad53587fa6
+parent a83210b55da4bac87c7928206b09ed5fbfa00ee3
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-08-24 14:16:07 +0530
+committer GitHub <noreply@github.com> 2020-08-24 14:16:07 +0530
+
+    Update for Learning Path
+
+:100644 100644 b7f636dc6fe8396600606b20e61fbb23d3cef058 d79d6156b9bf8f9320f8991eea2b39b4084a3e7c M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+commit a83210b55da4bac87c7928206b09ed5fbfa00ee3
+tree 6d43fd08eda6268e355d4fb1daea36f55f5fdfcf
+parent d77abdb95f843f6c3ce00bbf22299c41ac17a897
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-23 15:07:15 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-23 15:07:45 +0530
+
+    Auth Role Admin
+
+
+:100644 100644 0f739dd609776b7e4885244a66e81e65a52b92ca f9951fc4966c5f7bfbe89159be3d29e80cf0584d M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+commit d77abdb95f843f6c3ce00bbf22299c41ac17a897
+tree 5c3780f8069430b6d0cf7b5769336b72103eb306
+parent 4233fd0c260e1f8e2ff16dfdd223c60eabbe2e46
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 21:13:40 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 21:13:40 +0530
+
+    Task #51289: Reverted the icons color
+
+
+:100644 100644 dcdc73dc06acd658bea09c07c3d8c9bf1c47061f 8a0dc2e1e829fc8cb78499d5dda0256812d477aa M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss
+commit 8a802df3ca1235b777d2f34ab558300a5f592d5b
+tree be7ccf67a9ee3944eb0b7c25ea83da326240e8d8
+parent 49c01e1865b0bc2cf565923eef2bb00240afbdeb
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 21:06:52 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 21:06:52 +0530
+
+    Task #51289: Color changes fixed for icons
+
+
+:100644 100644 87b242c032c8a28c64b7bf3de632f8d15d041df3 dcdc73dc06acd658bea09c07c3d8c9bf1c47061f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss

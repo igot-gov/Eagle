@@ -1,0 +1,10 @@
+commit 5127d727b3c66a42e8b57d27db82c940ef4bb504
+tree 669ea98a70bfcd4d63e4d9d98cf52b7454769021
+parent a817659300ac57a979696407ab93a53dba78c8b1
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 10:18:29 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 10:18:29 +0530
+
+    Defect 52259
+
+
+:100644 100644 b011892a6b904743f24f64fc175cd1e0137ce0c5 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java

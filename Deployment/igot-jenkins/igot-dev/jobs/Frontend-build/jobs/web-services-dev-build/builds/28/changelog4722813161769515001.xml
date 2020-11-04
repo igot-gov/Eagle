@@ -1,0 +1,10 @@
+commit ea5e1cf997f31274235f943bf3aaac6c7b74e2e0
+tree 5893b7649bcb1b3d12f8500820cc2e94be44e516
+parent cd53b84c671f5e7cbe1048c27b9e8d7072cae165
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 16:03:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 16:03:14 +0530
+
+    Poster image in minimal  fix
+
+
+:100644 100644 226e0a711ada99f7694b4420ee4aeac38b1e1afe 981c39de4e3d9f4fd6ea1c004dd97775d4c5ec19 M	apps/web-services/src/models/content.model.ts

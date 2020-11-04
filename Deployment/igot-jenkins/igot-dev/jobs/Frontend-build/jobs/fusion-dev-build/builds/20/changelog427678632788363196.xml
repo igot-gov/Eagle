@@ -1,0 +1,10 @@
+commit d6c1870e89de1de66ae739501ca968da3e130ced
+tree bd6bbc56a253f3817b54bd547148b4eb38a89378
+parent e8e78bfcda6e50494120307a70b3293885b59746
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-03 15:45:58 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-03 15:45:58 +0530
+
+    Task #51000: disabled gradient color in banner
+
+
+:100644 100644 5a3440ac3cf06c82bf734d99c8cb23d6e5d4bb79 b1937459d3654db12f044e83f72b5f7d34cbf233 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss

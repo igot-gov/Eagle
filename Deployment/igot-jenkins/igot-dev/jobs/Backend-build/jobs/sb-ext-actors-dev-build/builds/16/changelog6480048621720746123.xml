@@ -1,0 +1,10 @@
+commit fc2a9d2f5c4526e94da3918409063dcda1e01f0c
+tree 8484d3cdd6d3bb8b9e9ce93805655fc593c5cbe3
+parent c335eb7508a67907f5f10834e808f70398759784
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-26 12:07:05 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-26 12:07:05 +0530
+
+    Issue #51347 query haandler modified:must set to true
+
+
+:100644 100644 524dab573263239750b9b4dc607ddb390eb6e4ed 5d464e34290855c75e0e548dea3e4034dbe1ef48 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java

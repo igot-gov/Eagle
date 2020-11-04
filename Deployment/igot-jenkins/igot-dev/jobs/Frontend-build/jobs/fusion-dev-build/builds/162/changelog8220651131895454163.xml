@@ -1,0 +1,154 @@
+commit 9239743eab5bdb361270eb33573f5c4a4320a9f8
+tree b652c6bc74235a91b36fa6c7916df6d929069034
+parent 025f12f0da516d38365bf4d794403b46638bcbef
+author usha <meetsamal.usha@gmail.com> 2020-10-29 10:53:03 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-29 10:53:03 +0530
+
+    linkedin share button design and component functionality change
+
+
+:100644 100644 c9fefdc4e1741f61f90109e6cfe4505772fafef3 e0a7769d0ee4b1eaa971a874c64c7ce3ca8ab077 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.html
+:100644 100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 f67f8e61b2f2a636235bcc0a37ef92b4aa0ff1b8 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.scss
+:100644 100644 1dff6d1b7e9832ce391cbed2b7767519becc9ac7 58d0eee5464cc222113b040733f62fd2e306b534 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+commit 025f12f0da516d38365bf4d794403b46638bcbef
+tree 534365e0f51ed244376aa06a0d205385f4f6bef8
+parent a3f08e9bea54837e012a2a87ab1dbfbfd583c3cb
+author usha <meetsamal.usha@gmail.com> 2020-10-28 09:58:20 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-28 09:58:20 +0530
+
+    meta tag desc added
+
+
+:100644 100644 c05bf178ca851a3a8d678ab55fc75cbd61c5e9be d45583fc2e2eb9fee3e4ab97ff4c5ebf005f091a M	apps/social-share/app.js
+commit a3f08e9bea54837e012a2a87ab1dbfbfd583c3cb
+tree c6d9d2af3a3e43706024ca3847fd9b199d9186ae
+parent 0836b71c34352dabf6082ab6c1eaa35d75b2dfd4
+author usha <meetsamal.usha@gmail.com> 2020-10-27 20:51:09 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-27 20:51:09 +0530
+
+    css changes
+
+
+:100644 100644 67e5a42915c51958a9054e7bd126eb1402cbbfb7 c05bf178ca851a3a8d678ab55fc75cbd61c5e9be M	apps/social-share/app.js
+:000000 100644 0000000000000000000000000000000000000000 fb6983cbd23ee0109755f8dd55e004a78b5de478 A	apps/social-share/image/favicon.png
+commit 0836b71c34352dabf6082ab6c1eaa35d75b2dfd4
+tree 1b3d85b20d1ecbe2d744d5ce4e5e407b578e68bb
+parent db270bfb304db9d5abc6ea39632ee28afef2a47d
+author usha <meetsamal.usha@gmail.com> 2020-10-27 19:35:48 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-27 19:35:48 +0530
+
+    adding link to body
+
+
+:100644 100644 02c82b076dd16ff4ba4542fdaed832a229eb9183 67e5a42915c51958a9054e7bd126eb1402cbbfb7 M	apps/social-share/app.js
+commit db270bfb304db9d5abc6ea39632ee28afef2a47d
+tree b927e7ef0e687fe7bc2935898258402928b91322
+parent 1711ad4d5e54ad9ba286765983b639f5ef8af1c6
+author usha <meetsamal.usha@gmail.com> 2020-10-27 15:38:35 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-27 15:38:35 +0530
+
+    conflict resolve
+
+
+:100644 100644 03b6a300d9eb38f4d733d66c027b4588b4dc503c 02c82b076dd16ff4ba4542fdaed832a229eb9183 M	apps/social-share/app.js
+commit f05cc38751575cdfcd55be273b9bdb39d339aecf
+tree d1457d83c90d1f02ff44917caa96223700738890
+parent 59416a353e58e64bb240d0af66c179ec3c6b8c54
+author usha <meetsamal.usha@gmail.com> 2020-10-27 12:48:37 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-27 12:48:37 +0530
+
+    added info to body of the html
+
+
+:100644 100644 a92112c74a37d44fcb36e2c9fa2174c54d23ef23 03b6a300d9eb38f4d733d66c027b4588b4dc503c M	apps/social-share/app.js
+commit 59416a353e58e64bb240d0af66c179ec3c6b8c54
+tree 49a438f5dcf2f7d3eb13639e4ea537bc17653c33
+parent 19c19763a3cd523f7f1f6ad531e83910fb404aa5
+author usha <meetsamal.usha@gmail.com> 2020-10-27 12:20:27 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-27 12:20:27 +0530
+
+    added info to body of the html
+
+
+:100644 100644 e9456cc3b9f16b65f90f30d02b13140d3de594eb a92112c74a37d44fcb36e2c9fa2174c54d23ef23 M	apps/social-share/app.js
+commit 19c19763a3cd523f7f1f6ad531e83910fb404aa5
+tree d409fea4d0268f748687d3faf1f74c3211b2268f
+parent 7919ecf82d31e37a2a2714cc5f504fab60d6d4a4
+author usha <meetsamal.usha@gmail.com> 2020-10-23 22:49:29 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 22:49:29 +0530
+
+    meta tags changes
+
+
+:100644 100644 153423438ae21a9ac6ec282298b3c25bf9c74219 e9456cc3b9f16b65f90f30d02b13140d3de594eb M	apps/social-share/app.js
+commit 7919ecf82d31e37a2a2714cc5f504fab60d6d4a4
+tree c6e1a4147a2c8f31c30d42a05f09b0f7b5427b72
+parent 57f9a3242f18d39a01d80c89124b065d15ca31e0
+author usha <meetsamal.usha@gmail.com> 2020-10-23 20:14:31 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 20:14:31 +0530
+
+    social btn link changes to node url build issue fixes
+
+
+:100644 100644 1edca71b6ff8f90f6df0966ed2a8e4552e30a284 5fc26b8663e74b7d837ca85b68074117b7e1deb9 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+commit c913fc160cab40039d3cd82b9e433e5d8533e7d8
+tree db607b4e7ea797d87d4aa4085c5aae48008c642c
+parent a7ef486ce98fedf0f10bbc6ed226c7a8c5fc1f7c
+author usha <meetsamal.usha@gmail.com> 2020-10-23 19:20:00 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 19:20:00 +0530
+
+    social btn link changes to node url build issue fixes
+
+
+:100644 100644 b42f9bd38894fa5f757dac65a38c70144ebebc50 1edca71b6ff8f90f6df0966ed2a8e4552e30a284 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+:100644 100644 b9c69d851a6297cb219a00ea14018eb7e1276e83 1dff6d1b7e9832ce391cbed2b7767519becc9ac7 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+commit a7ef486ce98fedf0f10bbc6ed226c7a8c5fc1f7c
+tree ed02bc9225978a7b26fe32d9fa326c7dbe76696e
+parent ddad170793d91e470dbcfaabcbfef37d975ad076
+author usha <meetsamal.usha@gmail.com> 2020-10-23 19:05:03 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 19:05:03 +0530
+
+    social btn link changes to node url
+
+
+:100644 100644 5ff4185ee94718558cf6f5526176f35976203af3 b42f9bd38894fa5f757dac65a38c70144ebebc50 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+:100644 100644 abf619622996143fe5bf0189452b5afdcfb1b366 b9c69d851a6297cb219a00ea14018eb7e1276e83 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+:100644 100644 11c858af3cb935a71618ac1679b6c4defb8fd1fb 2360ef17fc3291f6d474e1784325375158bb89a2 M	apps/fusion/library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share/btn-twitter-share.component.ts
+commit ddad170793d91e470dbcfaabcbfef37d975ad076
+tree 9caa10042424ba8945e433d290bb83d3d342daa5
+parent 13fe716bf9788a882ceb355aed97580c3021ecb9
+author usha <meetsamal.usha@gmail.com> 2020-10-23 18:36:56 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 18:36:56 +0530
+
+    social btn link changes to node url
+
+
+:100644 100644 c7f07d5b8562ec050823d29b8c7a9bc0038d32e6 abf619622996143fe5bf0189452b5afdcfb1b366 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+commit 13fe716bf9788a882ceb355aed97580c3021ecb9
+tree ed8cc7daf7c3fa93e54f99489831e3754a3987b7
+parent 5654b48399627c3617e88a3b9c56ddbf5346dec9
+author usha <meetsamal.usha@gmail.com> 2020-10-23 18:36:16 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 18:36:16 +0530
+
+    social btn link changes to node url
+
+
+:100644 100644 12eb1c6968c36936066fd6b1423a8212f3811e68 885dcdaf55e6abdd85851ad16d0130b57017549a M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 05d0a5142c8bb65fb41ea0468d1b03bbdaee8747 5ff4185ee94718558cf6f5526176f35976203af3 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+:100644 100644 81026a8f7ae7b9dc82543c3d766924109f62c672 c7f07d5b8562ec050823d29b8c7a9bc0038d32e6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+:100644 100644 00b3d454ccf5bcac80ef4fbcf4143228a1a60f04 11c858af3cb935a71618ac1679b6c4defb8fd1fb M	apps/fusion/library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share/btn-twitter-share.component.ts
+commit 5654b48399627c3617e88a3b9c56ddbf5346dec9
+tree 5a0f5903959c2182efc0cd2676a1884050a185ea
+parent a7dbf921df782b45eb4ca01e55eb533c91231f9c
+author usha <meetsamal.usha@gmail.com> 2020-10-23 17:28:29 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 17:28:29 +0530
+
+    node project for social share
+
+
+:000000 100644 0000000000000000000000000000000000000000 77f9d1bd5feff4d232aa764475175d8eebc4ff23 A	apps/social-share/.gitignore
+:000000 100644 0000000000000000000000000000000000000000 0be8744a42641dce32c4d4fb895f12c56146dc09 A	apps/social-share/apis/contentapi.js
+:000000 100644 0000000000000000000000000000000000000000 153423438ae21a9ac6ec282298b3c25bf9c74219 A	apps/social-share/app.js
+:000000 100644 0000000000000000000000000000000000000000 13808eaa782c5393ce156fc5e4f242e38a12084c A	apps/social-share/index.html
+:000000 100644 0000000000000000000000000000000000000000 7f6d23307ff009480ee1ede5d1a507b5f9a0e93f A	apps/social-share/package.json
+:000000 100644 0000000000000000000000000000000000000000 cf5fa8831f93779775be58ad2c9551dc33bfa25e A	apps/social-share/views/bot.jade

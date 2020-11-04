@@ -1,0 +1,10 @@
+commit 4b1b413743a2ceb8d3337ce209621806f92728dc
+tree f17aee3e6999895a84cac9e9c0778e8907565920
+parent 2bddd48af3515b8eb71ad59c30fbd1d981db5cc0
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 18:18:20 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 18:18:20 +0530
+
+    Defect #52187 Updated query
+
+
+:100644 100644 2737d057bdf9d5caf3201ea7d76098fa5b8ab4a4 6fcabfd5dc339c53480ae10a9f121dd1ee8cb744 M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java

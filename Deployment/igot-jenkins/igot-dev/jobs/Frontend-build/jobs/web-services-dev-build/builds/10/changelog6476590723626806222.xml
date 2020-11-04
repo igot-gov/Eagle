@@ -1,0 +1,189 @@
+commit 690a0d6a81fbd29eac967d939ed15f4c7ffd16cd
+tree 09322b50314901bcb8d0f06b2823053c2aac1fd7
+parent e7284f2c3a0cef82357806d1ecbe9f522f9dc58a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-17 18:43:13 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-17 18:43:13 +0530
+
+    URI updated: frac
+
+
+:100644 100644 c50985af7581ff133063771449636fea732726da bfdf131938d6c3195c37bd74d2fd36b311aa1ecc M	apps/client-assets/assets/configurations/localhost_3000/feature/frac.json
+commit e7284f2c3a0cef82357806d1ecbe9f522f9dc58a
+tree bb8abd6d59cc357f7db46085e5af3f4cea4f2f84
+parent 0a3839fff9d6f511dc7f2664a96634b14ba1a338
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-17 17:50:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-17 17:50:59 +0530
+
+    frac init commit
+
+
+:100644 100644 02bf092a44d4a56b9e7fcf08256402028dc76ee6 59f38d2d06f29bc01aeacdd4a06d2f5ec3591ab4 M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 0e7e7356982d9e0f551c6db2ae37c9a94178c84d 484f768995d18b51f0be80a10278d9bdcfb9d6b6 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:000000 100644 0000000000000000000000000000000000000000 c50985af7581ff133063771449636fea732726da A	apps/client-assets/assets/configurations/localhost_3000/feature/frac.json
+:000000 100644 0000000000000000000000000000000000000000 1b9d99157d848b9b2bb5c6037486af5e040717b5 A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.html
+:000000 100644 0000000000000000000000000000000000000000 8b137891791fe96927ad78e64b0aad7bded08bdc A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.scss
+:000000 100644 0000000000000000000000000000000000000000 e8aac709413e8474dce5f6fc3e9496cd723ec723 A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 42c6cc250188632e996606b9da164b0c817c49e1 A	apps/fusion/project/ws/app/src/lib/routes/frac/components/frac/frac.component.ts
+:000000 100644 0000000000000000000000000000000000000000 5998a96bd1ec1d1b511325ae509c9096ba42b7e8 A	apps/fusion/project/ws/app/src/lib/routes/frac/frac-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 77e04da6b5ca855acb3d39e703c2895e203583af A	apps/fusion/project/ws/app/src/lib/routes/frac/frac.module.ts
+:000000 100644 0000000000000000000000000000000000000000 9f13c7c14d38c0d4d05ad4e12018cd13b6718949 A	apps/fusion/project/ws/app/src/lib/routes/frac/interfaces/frac.model.ts
+:000000 100644 0000000000000000000000000000000000000000 2146aaeb8e13c1e040702de12bcf1d409b136852 A	apps/fusion/project/ws/app/src/lib/routes/frac/services/frac.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 cd8b8444f7e90ab48a8adb6e2876cea78dcad937 A	apps/fusion/project/ws/app/src/lib/routes/frac/services/frac.service.ts
+:100644 100644 165fd8687f6e26345de27b242750128d498296ed d7325d5b0a34f7b2328ce10b3c77696a253126aa M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/last-learnt/last-learnt.component.scss
+:100644 100644 83b7d2f2f45c1ef11c7e35261ea8dc2203e03653 d8d6d1ee0a4f32d3e50c00b2080d06e3eebcb1d5 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/person-profile/person-profile.component.scss
+:100644 100644 a995e2de92c4fb423e8bd60f73e48cc6ad1a50ef bc8df7f21634d965005eadf184041b5cfd43c7b5 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/user-details/user-details.component.scss
+:100644 100644 89947c4646aeeb2d1bfd1b9c378206ac26b4ce83 2957a08d22e23009bf08d2c13a3fd7c6f9eb3aa4 M	apps/fusion/project/ws/app/src/lib/routes/person-profile/components/userdetailall/userdetailall.component.scss
+:100644 100644 068a622157dc5dc99d544fe3cde1999705dad969 2aba2ec2afe285b14c79c1d9246897cce3857402 M	apps/fusion/project/ws/app/src/public-api.ts
+:100644 100644 526dddb8a87342c055aa797ef95c22143cf3f080 9166a3ec97a8bc35eed6929be818bf3c17a95a33 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 37dc33234069ec43b448fb1ef3b3dd39b31f4406 2802147e421bf9929c1408ec89716cfc24b53e1f M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/dashboard/dashboard.component.html
+:100644 100644 ec5a8369169bc6bb6bd08dfe091037c2cf9c242c 6eef80913a43511130c328353bfeb19aa082ae82 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/dashboard/dashboard.component.scss
+:100644 100644 ec7a06c4c0555cc55ddb95b3696db695613d0954 45fdcb3e463278e456a756be9393d6cc2ad0a56f M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.html
+:100644 100644 f0d5c999cb73908e7eb6ee630bf5786f7ad129da dbe173d2019e50880dcd4aa18d1073713ab239b0 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.scss
+:100644 100644 95ebf374a7c165c66fb4bc25a2db055236c19476 fe74890da94652e75416958d5cacf6a9175bbdd5 M	apps/fusion/src/app/app-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 2316d5dda4ace4c719fd2d7c987d1c1884a92c4a A	apps/fusion/src/app/routes/route-frac.module.ts
+:100644 100644 98d2a61ae2aec34ce2a8e98bd179f40e4189f9de e77a786cfde11fea2947bdfdeb05bdd20b697ca2 M	apps/fusion/src/styles/styles.scss
+:100644 100644 a2077dc02ebf157b5de523ff1eb0bee13e783d2e 04e2af41e263ce90c6ab15d6ce8b0585b87f0962 M	apps/fusion/src/styles/utility.scss
+commit 0a3839fff9d6f511dc7f2664a96634b14ba1a338
+tree da4d782779b0f5b19cc860fa4abb11f45143b4e5
+parent acf74c93a6d8ff772669d54fdf2e97bd4a3ed83a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 22:22:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 22:22:49 +0530
+
+    LMS API test 2:lint
+
+
+:100644 100644 7d5bbe0d35e4139ca7e36fa749bef5983fa917a4 1b31142cf3eea7a073fb7b2d530496ec0e58366a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts
+commit acf74c93a6d8ff772669d54fdf2e97bd4a3ed83a
+tree 000740845bf5bb26af4b364d324c7817ff16fac0
+parent 91a1a809119e6ff849672d2d7aeb05c7a50f7e1a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 22:22:08 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 22:22:08 +0530
+
+    LMS API test 2:lint
+
+
+:100644 100644 4065ed8733a3a1b2cc77541da6377a458e3c369a 6bad59864302d2e8f3170347c3bd89484768058c M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+commit 91a1a809119e6ff849672d2d7aeb05c7a50f7e1a
+tree 4e7eebabecea1ac2ad139f2a8fda95e2eceb4213
+parent aadb9af159d1c1c79c904621534114482eeee450
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 21:42:25 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 21:42:25 +0530
+
+    LMS API test 1:lint
+
+
+:100644 100644 9811f5865c7e5f9805a8bb238ba8bc6056449c4c 7d5bbe0d35e4139ca7e36fa749bef5983fa917a4 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts
+commit aadb9af159d1c1c79c904621534114482eeee450
+tree 01ff2f59d2972eabc3ddb9abae0da4c080ff8846
+parent e613ca6088656f0d2f3fb4315a6a1856910a172c
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 21:04:15 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 21:04:15 +0530
+
+    LMS API test 1
+
+
+:100644 100644 a1793af4563fbca4eb9a8171f10130a4b55287a9 9811f5865c7e5f9805a8bb238ba8bc6056449c4c M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts
+commit e613ca6088656f0d2f3fb4315a6a1856910a172c
+tree e8ea1e477851f9c146eb4d682958029b6df65ffd
+parent 95212129aca4cf7151e40e35f2516ceb10048af9
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 19:45:12 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 19:45:12 +0530
+
+    LMS API test
+
+
+:100644 100644 52017300291bda88ef9aebd805aec573a8fc8b4a 4065ed8733a3a1b2cc77541da6377a458e3c369a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+commit 95212129aca4cf7151e40e35f2516ceb10048af9
+tree 0993d1231d99ffa1c0a02af3646e582fca236ffe
+parent 89def9fda0eabbf791fe62f4e73d6204f6968a4a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 18:30:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 18:50:32 +0530
+
+    bug Fixes with LMS API
+
+
+:100644 100644 9e2788e0f3555a834e22b0f0da8fd0ca58d08f90 609e54c57ec1350c8c4bf3d4b9893aaa89026688 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.ts
+:100644 100644 871bf9406764fd632a4cdeab257cdf208b004fbb 77dfdfd8d30fc46e322cb71f3e352a511d20c346 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 682a4dc31cce9b72347a6702c2235e20eb092492 f351d59dc8f9bc2b2f6e75dac59c28b2d4e877d4 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 9bf8ddb6d27b4468361fdaa588c718021908cf3e 1e335a0497c1dfde58f122bd3c1c06e35deff3d1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/catalog-select/catalog-select.component.scss
+:100644 100644 ef8327b420ff4ecea5bbbba45feaf7c75e9616fb 8566d7acc13ae33799ef8f0fbf512fb224021de7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 305dea31973f4c7223c1df9e7dd7719c5ab99d59 37e36747ff0645644c8f53a03941eb5830d92820 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.ts
+:000000 100644 0000000000000000000000000000000000000000 6ac360ee43d98bd381e797b0731b2c1e7d7d9ad8 A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/errors.ts
+:000000 100644 0000000000000000000000000000000000000000 d73897aeb2b26d8db83d02d5991dc92c7c7c06b6 A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/index_old.js
+:000000 100644 0000000000000000000000000000000000000000 52017300291bda88ef9aebd805aec573a8fc8b4a A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:000000 100644 0000000000000000000000000000000000000000 a1793af4563fbca4eb9a8171f10130a4b55287a9 A	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts
+:100644 100644 f120082036bf504c9d4ac757c22a847526e27d3a b845158a0b01b127e7c296589acfcf840546495f M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 89def9fda0eabbf791fe62f4e73d6204f6968a4a
+tree f507e34ba86d238c7fb868e949c63693f72d2322
+parent f02bb5baa9b230a1b866787389190f1251e011eb
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-08-13 18:32:59 +0530
+committer GitHub <noreply@github.com> 2020-08-13 18:32:59 +0530
+
+    Update notification.component.html
+
+:100644 100644 aa42f7ae10a5be3b5ab1a2e9c15b60758a27cad0 71eb76d14b872061b7856ca2a8b80a3e29b1d62d M	apps/fusion/project/ws/author/src/lib/modules/shared/components/notification/notification.component.html
+commit f02bb5baa9b230a1b866787389190f1251e011eb
+tree 7b74c0c1adba7cd69c425ca3780e096d1dad91d0
+parent 45217e0bfd00ecf91ffdbe250f8b3de6a84de3ea
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-08-13 18:31:10 +0530
+committer GitHub <noreply@github.com> 2020-08-13 18:31:10 +0530
+
+    Update quiz-constants.ts
+
+:100644 100644 d15a378177018b08c8c23ce3f241a8e4c308dcb6 8cc44d992633ebbf1c72ecdee17961dee4a64fe7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+commit 45217e0bfd00ecf91ffdbe250f8b3de6a84de3ea
+tree 32d7691759bd6e2c7c617bd3306e9d4e2d4be73b
+parent 9ac78275d3088ff26678e8edee1088fcd0d6d438
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:52:18 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:52:18 +0530
+
+    Updated Min Quiz Questions
+
+
+:100644 100644 c3d300464b5bde9df85fb462df7d1f3fcda7eb32 d15a378177018b08c8c23ce3f241a8e4c308dcb6 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+commit 9ac78275d3088ff26678e8edee1088fcd0d6d438
+tree 8907ccab2a254de68b6e5239d79442d1a4ea81c5
+parent b25040a834f7edee2deadaebd7c36f60d9bef9d9
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:19:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:19:03 +0530
+
+    Learning date and latest published : fix
+
+
+:100644 100644 232db1e80d826d87134186d1b68dc67d43555cc3 6a4ae4821a49ef8463e71c22746514c0c235ba38 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.ts
+:100644 100644 34af31e2ee01151ff7dd8bce192a59a7b89c3663 9361e494f86e01a0459c39bad941fb9840f983a6 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/learning/components/learning-time/learning-time.component.html
+commit edd3659718b20592630ff5f7d5b01b6e7803ae50
+tree af7f5df014d53995f058ee07c09fdf8c6d3f400c
+parent 5c62b43ebadf1ccad53b8870b46f9e6af5cd211a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 20:04:20 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 20:04:20 +0530
+
+    Web and assist fix with UI updates
+
+
+:100644 100644 aeee5596f7f15097dfac0783a8086d56c06f8e77 0e7e7356982d9e0f551c6db2ae37c9a94178c84d M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:100644 100644 eb85e3a5f4410b537ff535811f5d1c375be618a6 526dddb8a87342c055aa797ef95c22143cf3f080 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 bb14a299782a37a276a3f7852aec646b6c4a2cd6 b1f9547982610ef7a5aea309fe68a7e903e69a32 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.scss
+:100644 100644 b335c0fa1d27f7780241aea1d3dedc1f7112ba61 0893b116b2a54611e6e578bcd6da5068370f0f66 M	apps/fusion/project/ws/author/src/lib/components/root/root.component.scss
+:100644 100644 84694bfa7517dceedef49839edf6fe7a7b779e64 f64fc14c6953d2bd3b329820f8431b1e4b481e81 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 480b6b3423fdab577532201049fe2d6c9049d157 48c00eaa02e137c77717dc53d03f1419e97fb342 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 aab1ed43a091fb79e78085c88155371221a9c43c c3d300464b5bde9df85fb462df7d1f3fcda7eb32 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+:100644 100644 fbb88399b0a5064f939c60d8a1f2f90fd3d52171 39c52cc03c5cbaa39ada7e661cec58c1347e242d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/services/resolver.service.ts
+:100644 100644 2a0a3b81526254a7d1ecc50dd60ad3228387251d ed55ed3f646b535887dcb9b486fcdd29498916c3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 882a664fec92ff58559cfa7412a4385b2f5e572c f7568f6bfb04f43249b4d427affd3e0d5764ff5d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:100644 100644 f18db629e0cd623d3de77e30847eb51afd3b689b ac633c31a9bff1b0dc34ec38419579e05e8b4269 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/services/store.service.ts
+:100644 100644 5b2391ac217e38854f328a24f2c2ea7454dbe7e3 b24fc606a2658149a1dcb900cee6c97d9e48724c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/auth-picker/auth-picker.component.html
+:100644 100644 e60d567240d6e9af451f5ab35879bb6068afd477 b64a40a4cb6db16f8646037691c32ed1b8f94fb2 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/auth-picker/auth-picker.component.scss
+:100644 100644 bb46df695fbb612d3086695173c07b434e1806f7 ef8327b420ff4ecea5bbbba45feaf7c75e9616fb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+commit 5c62b43ebadf1ccad53b8870b46f9e6af5cd211a
+tree 1c3d11d4125ac8a88be95dfde7ba22c47fbfeaa8
+parent 6125bac6282738cdd50bb105ca140c0ad8220a28
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 02:39:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 02:39:54 +0530
+
+    fix
+
+
+:100644 100644 3c2a708af36b6d7fb5f899ef63c38a1931d2e872 455761192daee9c65d00eab677a02ee53d18fe22 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts
+:100644 100644 604ed11863b2744958bfab61c0e595e82c5fd7a7 4cf87ce39ae32c3cc89741e23738aa1e590e8db6 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 c21f3d862bb47ddcfe8cea861a63c892ca8b5e0e 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss

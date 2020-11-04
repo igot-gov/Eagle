@@ -1,0 +1,76 @@
+commit fdd4ae2202764a142433366b93103a5daa42c761
+tree 6c4c319e83598aa6c5b00326a5fb1bee8a5a4f7b
+parent 1657cd20e344ef274ba0744c9648ef94114bd753
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 21:08:54 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 21:08:54 +0530
+
+    activity issues
+
+
+:100644 100644 84ef1fbcdb2ae04bbb256166c4a0df5cc8d9103c 797dcfdf12432707655c44575dbd21935e407a27 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-top/card-activity/card-activity.component.html
+:100644 100644 7b1f442d16c7ca53fbcb3054b9d40d02162fd515 ea172ad26f936184c50f979923bd61843a8fce06 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-top/card-activity/card-activity.component.scss
+:100644 100644 1dcfcec689f87f1db70a121e21226ffe701248b7 2290b65682b5d13c8bafece8ef52f14975065b8c M	apps/fusion/library/ws-widget/collection/src/lib/card-home-top/card-activity/card-activity.component.ts
+:100644 100644 853590e7b90b1285abb370b09698ce6b837d57ca 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss
+commit a66ccd13165ca0982e7c53beb49b433b93f6f689
+tree 74cab31996c0876cbe3506f14a29db7f1edaa335
+parent cc907990bf1f73f2f0b25806fb0a56b680b5e5fd
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 21:00:58 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 21:00:58 +0530
+
+    REsolve conflict
+
+
+:100644 100644 20ff29ca79d1482a17f3f4f77aa6f1652fcbd86c 2ddd8ecce9752bcbcd0e8a81c49cd2b001c754b7 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-home/discuss.component.html
+commit 7bd989fffe1820210b7ce5c9b69bdab27e31b6b5
+tree 8f7625b4697a1bca1223401bf3e28a9904e0eaec
+parent 992931d68575f3b36100bf8e2da21f49b309ae02
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:51:12 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:51:12 +0530
+
+    Json Updated for top margin
+
+
+:100644 100644 8bc0e82b1d7a713f88a9ad0b4ed654d312aad820 adfdaf55f9238419090d809892a9e37691b3796b M	apps/client-assets/assets/configurations/localhost_3000/page/learn.json
+:100644 100644 b6d437d86c6aed4fec781dc5de83b7fb11d0201f e1ce663f62af8f9c21e054ba08b18e9a859973a8 M	apps/client-assets/assets/configurations/localhost_3000/page/network.json
+commit 6b699840c1d59234296d872b91981ac83fb01883
+tree 6b9697a778410eaae36eac207e560ba0ef08d58a
+parent 82ab472726ece6343c0aaf8669f35157f136746f
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:49:36 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:49:36 +0530
+
+    CSS and Json Updated for top margin
+
+
+:100644 100644 853590e7b90b1285abb370b09698ce6b837d57ca 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss
+commit 992931d68575f3b36100bf8e2da21f49b309ae02
+tree 29305f4986088d0721555e47fdd8f61f08e94788
+parent 1ca9c7f96d5779c9d3e8d996a36f99de59ab1bc8
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-05 20:49:31 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-05 20:49:31 +0530
+
+    Task #51751: Fixed the margin issue
+
+
+:100644 100644 ade84f3cbb3ae1b54a85085f42df1eae97added4 2ddd8ecce9752bcbcd0e8a81c49cd2b001c754b7 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-home/discuss.component.html
+commit 82ab472726ece6343c0aaf8669f35157f136746f
+tree e52d652538623fae15c4a370d67ae42403c7f55b
+parent 9eabc916fb2cb2249513110ce8511045ffc88cdf
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:31:12 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:31:12 +0530
+
+    News removed from top menue
+
+
+:100644 100644 2b6a3fec319d8d6cd626db44d88458c7080a7467 a3a504a38f47f62bea573c6057ae203cffd42b38 M	apps/client-assets/assets/configurations/localhost_3000/site.config.json
+commit 053313c1347f20c44918fd7a5ecac08e0b21bccb
+tree a8745ccd00786eb6584fa984043f04c4a7f78a1a
+parent d7297974ae98b4b68633b7246b09d404719208cc
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-05 20:27:41 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-05 20:27:41 +0530
+
+    Task #51730: Added lables and enabled HTML view in career cards
+
+
+:100644 100644 d3e08297e802b2eb25a65842994419e2ca86a6a2 506c3e4f5bd42824156d61e35c18721646148eb8 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/career-detail/career-detail.component.html
+:100644 100644 eb951005301a1af3af6d357488763828523875c7 8bb2ea5a483d6a29e1bb6fbb14cc98e2a008c1e2 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component.html
+:100644 100644 0c7674e9ca1c063a098e57b28d6e9583eed7d2d2 1ce4ed76b9b38b154440578639c4a83c46eafbc2 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.html

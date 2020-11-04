@@ -1,0 +1,10 @@
+commit 5b6ce0875fd57030e666fe49de906535f4d0ee6c
+tree 35309983c112aeb49509d5f6eb7d42dad8489f1a
+parent dc8218f230852da1b1be7658e3b175ad78794e79
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-24 13:36:53 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-24 13:36:53 +0530
+
+    getuserslug
+
+
+:100644 100644 87f48addb6970833513b33553975d8eaee43b190 b88f3a9523a6745a3be4b1c91c028d41c25ceb7d M	apps/web-services/src/utils/discussionHub-helper.ts

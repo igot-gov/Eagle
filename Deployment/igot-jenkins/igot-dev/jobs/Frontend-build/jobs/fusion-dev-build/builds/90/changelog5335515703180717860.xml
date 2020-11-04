@@ -1,0 +1,10 @@
+commit 5f087a0df7f36a4e72d763add1b87d298db07ca0
+tree a0ee2d106cacb527d2724003eb5c9a8383d9acc8
+parent 70a1a64d4da17d562b85a9d2022695bbfe84deea
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-30 10:16:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-30 10:16:49 +0530
+
+    Updated banner height
+
+
+:100644 100644 cd2e7d69fa5a65845b5ecf429f58dd40865155b6 c8d974863d818e23e38f39e67f6151eef193f22a M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.scss

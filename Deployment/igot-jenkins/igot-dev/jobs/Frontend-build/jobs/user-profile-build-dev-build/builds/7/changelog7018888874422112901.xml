@@ -1,0 +1,9 @@
+commit 191697b22d728872c326f859dcb625cf84e9e43c
+tree f8dd2997b780482ca21bb302d6ba6fc55fea2acb
+parent 97368a9d4788979f114f1618be73fba9c4567a87
+author Amritha Devadiga <amritha.devadiga@tarento.com> 2020-07-20 11:50:28 +0000
+committer Amritha Devadiga <amritha.devadiga@tarento.com> 2020-07-20 11:50:28 +0000
+
+    Update Jenkinsfile
+
+:100644 100644 a919ddbf5f90ab751efa79c3b30c1b78eecb3dea 1ef53dceb8935b44bd0b61280c1608a569287875 M	Jenkinsfile

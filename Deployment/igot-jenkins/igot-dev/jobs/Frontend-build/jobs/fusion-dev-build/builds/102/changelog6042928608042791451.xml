@@ -1,0 +1,123 @@
+commit b09634f4fe44b088648171b4be1405c951748621
+tree 965ca3dd7f4449e415d089eb824885b2d2e3c351
+parent 9c0e9e384f621b6bfaa9a077b08de90452f52b9d
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-06 23:18:46 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-06 23:18:46 +0530
+
+    Task #51752: lint error fixes
+
+
+:100644 100644 e0c486c6eee18f458051841272acc3ee3a0b44d8 ce527bcc77af765ad04f5b85817958dd73911654 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+commit 6bff7558c2c1cd792d1df384e91077a156fa5d4b
+tree d3c03fc8333ecaa05724a81e1197b5f984581a59
+parent 628d7c865088d6e7bb2f083ac419a224baaebf9e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-06 23:05:39 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-06 23:05:39 +0530
+
+    Task #51721: Fixed the colors and spacing issues
+
+
+:100644 100644 3bd332e28975628b9e773df6169c50ea2d060eab bd793da1d6f5a10fd594ec8bdceaee035165ee22 M	apps/client-assets/assets/images/authoring/resource.svg
+:100644 100644 0d1f06b02aab75f79349d4e01e5b4e77ef56a633 f6c7b3b26404fd2c8ef1dd9ce1dd17f0f6988ae5 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/components/related-posts/related-posts.component.html
+:100644 100644 1a449dcc6522581919ea036556d2b9ab0ba06d5b b470f529fdb3b97164449ccb7ffa52425cda6764 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.html
+:100644 100644 36bce87be7005a6d0ae4e81ff8d5467a4b26e510 734761353123c189fa8e6bcfc1c3d9218aade3f0 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.scss
+:100644 100644 67b60cad811f065a92ec951e20784794feed7375 056dac0103ed1525a2e732ed60d13971217466f8 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/left-menu/left-menu.component.scss
+:100644 100644 7d968119c5b38df2d6e6586c6e0c342663da8a4e 6cf8bd2888c98fd4dd77cf3cff87fc81771b15d4 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.scss
+:100644 100644 d5749a850586d44440afe00f2f7b246770fe9986 084934bf88fc50716bec657d99c0471df7f07f52 M	apps/fusion/src/themes/theme-deep-blue.scss
+:100644 100644 0cf033df89728bfb2184b0769ce470a8fc038714 0cfccacbbeca8c318b07c1c53c59c035df4fcfbb M	apps/fusion/src/themes/theme-igot.scss
+commit b816cb583495184e7ceb788cfe0e17d4f1b1d5e8
+tree 3611d3f0fec154435deb1f9f4dd38365c0332970
+parent 1d7808a0d1440d27a69b6f9784e12017727f442a
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 22:47:01 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 22:47:01 +0530
+
+    home page fixes
+
+
+:100644 100644 f64191fbb42e14cfff5271c81b55da56db032680 3ee0c7c49061f3c78dc626698309de65f24f9aa4 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 1bdaf059b15939f3706d0cae61bf143856ffcee0 1fc4033cb64eddbfe2c18533306e2becd1c32a1a M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:100644 100644 c07a264c08148c7b4ddf35bf5f7ff468a16d4a9d be869415d7e4981ec005d1d558e8138e71284209 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.ts
+:100644 100644 ba3d78489c9a99984e5b50f6cab91cd88650ca24 a6eda043ac15d0733867777712befbf8c6947749 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html
+:100644 100644 4306db41f5d7e9820689510e221fc8766cc2479b 547ace8ff817d7d603ff5201b4563798453177d4 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.scss
+:100644 100644 34c6c93ebde04a9b95832afa9a7d2304c9b92db9 fd992cd9369becf52056adb75d2db5a77461933a M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.ts
+:100644 100644 4f085a0f4b3195c851a1ccf583dabccda6855a09 431ce1f24f759db86cbf1def561f82a00482acb5 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts
+:100644 100644 fa0686bcb44d17ada24f2bac950b994e649b92b5 5eeb0aafc798d4990d61d832aebbe1ffbf04f11c M	apps/fusion/library/ws-widget/collection/src/public-api.ts
+:100644 100644 7211c527745b3f28b4c05d5ee7ed6792b4e1dfc0 bf1a70c943b9a224c87a5bdb9eeff32cd4e54c5b M	apps/fusion/src/themes/_theme-mixins.scss
+:000000 100644 0000000000000000000000000000000000000000 6ecce71f7af5f022ca36c1412abdeafe3402b1e6 A	apps/web-services/src/protectedApi_v8/user/activity.ts
+:100644 100644 249e88dbee51492cd34d17ce8532d5eed0f20d74 003ec3f9be370cb86f65ef7c9fd34b4ee1c62a63 M	apps/web-services/src/protectedApi_v8/user/user.ts
+commit 1d7808a0d1440d27a69b6f9784e12017727f442a
+tree c6693d99f8a450c9c939d9fd2ca367e6c72e22c4
+parent 8e9fffcd774d4d4cf3bfa5e10f6fb3fe8ad60b5d
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 20:30:47 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 20:30:47 +0530
+
+    carrier card alignment is fixed
+
+
+:100644 100644 d1a939ab8c332d0e2730c931ba5cb11ea4f4fa79 1bdaf059b15939f3706d0cae61bf143856ffcee0 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:100644 100644 c3e6f13be9a914b7097b44b09c7f12b82b23bd4a 81786c9c9af00903703ad60372a17778fa985ca8 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.scss
+:100644 100644 69a4f51cd46480e5cb80695a0d2f627681bd9cb6 c07a264c08148c7b4ddf35bf5f7ff468a16d4a9d M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.ts
+:100644 100644 cf339f906eb65e65bcffefaa27f4af3fd13db10e 67bcc7599e4f8d69f31672be23d6b4726df1640d M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.model.ts
+:100644 100644 91e7258547e35bd608e99387059e701e0227d238 d056d89b879eca299f6b611d2a6c4e8a0e2ba3ea M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.service.ts
+:100644 100644 7f3bfcf244c45c58ed143f2f61629eb06299b82f ad137e6184a63350e518b1341efac3032da1a6d7 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-new-multiple.service.ts
+:100644 100644 797dcfdf12432707655c44575dbd21935e407a27 ba3d78489c9a99984e5b50f6cab91cd88650ca24 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html
+:100644 100644 ea172ad26f936184c50f979923bd61843a8fce06 4306db41f5d7e9820689510e221fc8766cc2479b M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.scss
+:100644 100644 9e429c1af689afc1798aa563d58d1610eb372746 34c6c93ebde04a9b95832afa9a7d2304c9b92db9 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.ts
+:100644 100644 0c22765cb3c69c03ebca7cbf4c1baaed11e356f4 d362e69dcca4070bc52b586d9cdee46e40dbe505 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.module.ts
+:100644 100644 d2b356a19accaf581b4245e277acff85205da836 cac196f6823dcbd863ae7d1b14f2b047679e404f M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.scss
+:100644 100644 420326afaf5f12270ed6b1f8501dcfa0c40156e6 ec38734d424f1496004f9da503e1e34dd412f83e M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.scss
+:100644 100644 2e6be247ae998f942ac465664335ace5921c3e4d 4f085a0f4b3195c851a1ccf583dabccda6855a09 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts
+commit e89a05af132bee1ffd19ca93613e2f10cabeb2de
+tree a8d6c03887cc8d77469fb9829445cd8125994597
+parent 628d7c865088d6e7bb2f083ac419a224baaebf9e
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-06 18:26:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-06 18:26:03 +0530
+
+    Excel fixes
+
+
+:100644 100644 813a35ae5cbbfbae560a7c756651a5763515a589 63434b3ff498053319c731e9e990cf9e10fbd423 M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 adfdaf55f9238419090d809892a9e37691b3796b 4628787e3384909a8e67580486fc9f1c7a5ba311 M	apps/client-assets/assets/configurations/localhost_3000/page/learn.json
+:100644 100644 7bfaf58ba359de7c760fa0eb597a705388ead901 27e2f68b44b3b51501076dd3aaf16076660f2a47 M	apps/fusion/library/ws-widget/collection/src/lib/card-learn/card-learn.component.html
+:100644 100644 39b0801fa623d62efa7173865e19f1249371236d 6a2b81c72dd76637942a07d2aa3fa0ef403af976 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/left-menu/left-menu.component.ts
+:100644 100644 527ec9988b62650ea6f9776382c2387ce36d0570 343c0ddb3bdd71b8dcbc3a95e1586afd55b32509 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.html
+:100644 100644 7d968119c5b38df2d6e6586c6e0c342663da8a4e 8ded50fcd7ff2b986935681cc7521e3ef5b0c443 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.scss
+:100644 100644 ba671891f7989477799aa5d71eb60f063c1da44e e0c486c6eee18f458051841272acc3ee3a0b44d8 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+commit 8e9fffcd774d4d4cf3bfa5e10f6fb3fe8ad60b5d
+tree 902f8c73fd70b73e9ec41afd9f3a40e38acc4aa5
+parent 67a0b1bdecaf49e9d34c7d4bd38384dc810adac0
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 14:58:27 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 14:58:27 +0530
+
+    networkheight issues fixed
+
+
+:100644 100644 36f70c68fc28dee330245e7efde9581716d0e2b3 f64191fbb42e14cfff5271c81b55da56db032680 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 6996a7a3c29dbec12daeb557df00e0e97f80eb73 42101add09614538ad83939da2128e9886b77758 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.scss
+commit 67a0b1bdecaf49e9d34c7d4bd38384dc810adac0
+tree 9ccf3e1c5ff70e69eed0ec81a9b0584d39b26118
+parent 628d7c865088d6e7bb2f083ac419a224baaebf9e
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 14:46:09 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-06 14:46:09 +0530
+
+    activity stripmultiple added
+
+
+:100644 100644 7a6bdf712e2009d4c3498062714638b00b1cf3fb 36f70c68fc28dee330245e7efde9581716d0e2b3 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:000000 100644 0000000000000000000000000000000000000000 d1a939ab8c332d0e2730c931ba5cb11ea4f4fa79 A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:000000 100644 0000000000000000000000000000000000000000 c3e6f13be9a914b7097b44b09c7f12b82b23bd4a A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.scss
+:000000 100644 0000000000000000000000000000000000000000 69a4f51cd46480e5cb80695a0d2f627681bd9cb6 A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.ts
+:000000 100644 0000000000000000000000000000000000000000 cf339f906eb65e65bcffefaa27f4af3fd13db10e A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.model.ts
+:000000 100644 0000000000000000000000000000000000000000 5dbc09d11e89b57301ec96ab8e4c9d161d45c219 A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.module.ts
+:000000 100644 0000000000000000000000000000000000000000 91e7258547e35bd608e99387059e701e0227d238 A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.service.ts
+:000000 100644 0000000000000000000000000000000000000000 7f3bfcf244c45c58ed143f2f61629eb06299b82f A	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-new-multiple.service.ts
+:000000 100644 0000000000000000000000000000000000000000 797dcfdf12432707655c44575dbd21935e407a27 A	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html
+:000000 100644 0000000000000000000000000000000000000000 ea172ad26f936184c50f979923bd61843a8fce06 A	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.scss
+:000000 100644 0000000000000000000000000000000000000000 9e429c1af689afc1798aa563d58d1610eb372746 A	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.ts
+:000000 100644 0000000000000000000000000000000000000000 0c22765cb3c69c03ebca7cbf4c1baaed11e356f4 A	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.module.ts
+:100644 100644 43a3fb00114155a4f1a1e709ead3f20db7e9c37c 2e6be247ae998f942ac465664335ace5921c3e4d M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts
+:100644 100644 2f26d9e5a072c9394ac65c67ffbc23f5a8d917b6 f3f6b625677817bcdfa7e45acb0f01478a27b267 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.scss
+:100644 100644 e7235f0c8dc88640df8056b9e4717bc2d55b5354 c73e65cf3e7205a1f4a722f0af8746f9da16a303 M	apps/fusion/library/ws-widget/collection/src/lib/collection.config.ts
+:100644 100644 af49de1af639f766fd2af35b9fd2ab2158375853 4517c265c4a923a843d26a388b888f55498887d9 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.html
+:100644 100644 be46326926634a1eb2f1ce208b54189403db0dca 4ac94aa056cae81f59c6de848ec451ff884c9718 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.scss
+:100644 100644 d83fa7a734e5fe65e13bda5dc4ed3e9fc8356402 a77fb41d0cf4532ec033c6b0e5e6a695c2b8e213 M	apps/fusion/library/ws-widget/collection/src/lib/registration.config.ts

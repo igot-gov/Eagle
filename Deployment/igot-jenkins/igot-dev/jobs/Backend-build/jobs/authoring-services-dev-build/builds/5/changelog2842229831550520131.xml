@@ -1,0 +1,13 @@
+commit 00f13af30c0ee33324ddb6b329f6a456defbf93c
+tree 5aee54cbc6d5c26e26df80c73e1a9f6b6fba1f29
+parent 3c3350c9cf02c51f6a3f6f4309cf5d7373234889
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-20 08:51:33 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-20 08:51:33 +0530
+
+    Minor refactoring: added logs and enabled validation
+
+
+:100644 100644 b71af3a2939964f8b02ea6139f56732777759d12 8a1a368be99ae4592ecb5deca68a3c18364482f0 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/ScromController.java
+:100644 100644 e5b512e7dde4846620d0274642f76f89b17ec980 c850c1173ed2108cc70f2cdc145cdd14dc1d63f3 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/ScromData.java
+:100644 100644 8269257ba6ba533d7687ede3723033253e989bde 3857c814c349fe010062a1a7502a6e3c4d35f4b1 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/service/ScromService.java
+:100644 100644 5a349ba4e836b58a99f3555ec3c3c1b432ee9eae a17943456b73d4a8c20e5e4f23c0a010ff744169 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java

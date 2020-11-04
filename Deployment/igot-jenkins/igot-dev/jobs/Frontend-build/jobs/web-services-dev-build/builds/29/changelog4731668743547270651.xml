@@ -1,0 +1,67 @@
+commit 464f14fc28dc328d4f94cb13f81535bc88533221
+tree 40bce8ed74c7bbcffc7726e4cb91ac0f6dc8e72d
+parent 49c01e1865b0bc2cf565923eef2bb00240afbdeb
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 20:06:23 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 20:06:42 +0530
+
+    Share this playlist with
+
+
+:100644 100644 90816c2d203442b4034f9feba953f39a88366668 5c5167c623fb3803b6e96b1f02cad232b232aad5 M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-share-dialog/playlist-share-dialog.component.html
+commit 928f693f845079d7a365966d8b4fd749fc1add9a
+tree 04773deef2f539d135a03bd126084ca875fd436f
+parent 303740faa4a4335b80a57325771c2886c2776e90
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 19:52:49 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 19:52:49 +0530
+
+    Task #51319: Fixed QR code signup blank rootorg & org
+
+
+:100644 100644 83b6047056656839af86765d3e01ffd29c78429e 75bf695c363efdec1e8ad5b57f3bd028dde03298 M	apps/web-services/src/protectedApi_v8/user/details.ts
+:100644 100644 c3bb5baa9e6bf3f3ae8866bf8e6bc2160ab60a48 78b522b5d4b7f174911e9478c9b0656a95a71ded M	apps/web-services/src/utils/env.ts
+commit 921d0b4f88b57f4c9df21d1942d2cd6f6a1f292e
+tree 24468e241cf2f8da43e7c0d51ec63812a3e26b8b
+parent c421221c181d36352c551c41bdb1d56824e634b6
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 19:17:27 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 19:17:27 +0530
+
+    Bannor default selected color
+
+
+:100644 100644 4cf87ce39ae32c3cc89741e23738aa1e590e8db6 80b7f5c3ab0042b6978e6cd42b31408fd75d7591 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit c421221c181d36352c551c41bdb1d56824e634b6
+tree bef12bddf34a82bc5a27f0cce60ec5b69e4696d7
+parent 22af266ed3f1810d36ade9a9269ff9f5ae9f0148
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 18:28:43 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 18:28:43 +0530
+
+    apend to last commit
+
+
+:100644 100644 59f38d2d06f29bc01aeacdd4a06d2f5ec3591ab4 0f739dd609776b7e4885244a66e81e65a52b92ca M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 d14c8fade8212a9d3a399f814dcf921dcd566832 d41fece7cc0a32163d9e055f7ac4340dbcd2f75d M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-create.json
+commit 22af266ed3f1810d36ade9a9269ff9f5ae9f0148
+tree 1e3400f662584613ebb5bb2e2e71ca4c0fe8e579
+parent e1653a56b1d30cd2abab0f11c681d3b23ef66ec2
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:36:23 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:36:23 +0530
+
+    lint fix
+
+
+:100644 100644 112376a57d317b4bba45151072ce5d3c1ee2e1a4 bdd617b3512dc8c33c04e50045fcc880e11c4c34 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service.ts
+commit e1653a56b1d30cd2abab0f11c681d3b23ef66ec2
+tree 6d93650cb04e764d8aed6ed1bc660c413efe4893
+parent ea5e1cf997f31274235f943bf3aaac6c7b74e2e0
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:28:17 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 17:28:17 +0530
+
+    banner color and Autho logos
+
+
+:100644 100644 d5dc47e28e31cde15c457b75feb14ca00558d8a3 139ba9978ec75c666583c99eea2b674e206a2ed1 M	apps/fusion/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 da9c6fea8c83c279a020c444791d0d0c7ef67961 c4df7406d1c937ee21ea12a071091779695b6c72 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 7b5180300e2f1b24f9a438f2f9edccd2f72570c7 112376a57d317b4bba45151072ce5d3c1ee2e1a4 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service.ts
+:100644 100644 70774465116472d235392d572d12b1248437e172 c570d27f78e0308609f7c20af6c4ffb6722a255b M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.html
+:100644 100644 b605a2461dc4ca5874b1537d121628cefdcd1357 3284400baef003d4aa15fb890e26ed03db9fd006 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/entity-card/entity-card.component.scss
+:100644 100644 3ae2ccb29213883f1e68cba223323e973b769e8f e1c4fa4391d6ac5d39c9db44460396459a7cadd3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html

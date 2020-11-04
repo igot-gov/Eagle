@@ -1,0 +1,10 @@
+commit a22b32a1939c454fe2a31f49f4ecbb2f2460c0af
+tree c545dd3911b6404ed6cc8ab9748eb5ff3c24e567
+parent e97c35242b3b867dce1c7ca320aa52650f114800
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 22:30:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 22:30:41 +0530
+
+    iframe updates
+
+
+:100644 100644 456d27e8c3d8a3d87204139dec7350f1378ce034 89247a7f6220a1ecae46a9c3c2ddf3c243ee75ea M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

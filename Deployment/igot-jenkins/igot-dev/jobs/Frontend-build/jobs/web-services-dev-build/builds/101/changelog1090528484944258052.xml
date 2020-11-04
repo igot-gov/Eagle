@@ -1,0 +1,179 @@
+commit 193f61ebb43beb1067e87a00e7bb74ddafc4e0ab
+tree 97242cdf9105d6a5b727f7b731ab2709a0ab4b3a
+parent b87092eddce7a99a3d90e9eeca98280199762060
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 17:46:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 17:46:16 +0530
+
+    get user profile by id
+
+
+:100644 100644 cc52b5c1b792f01115417aaaf479e9801496b6ee 8803dbb82bd581e7f919f3a5dad4a09866429b98 M	apps/web-services/src/protectedApi_v8/user/profile-details.ts
+commit 246c204713aada2a58b07b91a99afea37202c319
+tree 96b74e163334af5ebd8b071c08534cf9a11aee68
+parent 22f399766fc95f154893c3c6ce40dc89a5c8d594
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 15:06:53 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 15:06:53 +0530
+
+    fix1: build
+
+
+:100644 100644 92ff9a11c3d0b7e611851302295f378be43c00e7 cbeaa23fec220c604032e3a2170ba87867703be7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+commit 22f399766fc95f154893c3c6ce40dc89a5c8d594
+tree 04b11a2fd499e19a69ca72991eaeea98a8f8e03c
+parent d9f538b23c07387006ceab966fbbd4a39124ec78
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 14:40:52 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 14:40:52 +0530
+
+    MyActivity => dashboard and profile link updated for top right menu
+
+
+:100644 100644 bd51b713d53389af14cf63e58379e269c8f4bd0c e87b7eb816bac9d383f4dcb6ee1a0c32b3237232 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:100644 100644 368a11d6406f4a9715276139e43d860644e16ea0 2c2a001709961090532f0c69b6754bccb964455c M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.html
+:100644 100644 ca590e8bf023f7928812c4d81f42f89d3e43ec65 6be940760325a88e2458d97e7942249b762db540 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.ts
+:100644 100644 9f2c10b78d3c8fc7437610723a56a1094b942ad8 8120d47c10ea7a962755b995c36bd3377bdb09be M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/profile-v2.rounting.module.ts
+:100644 100644 46b9d9031b3edee495a8ded6ab3265a3e196e16c 8b8e3bea853e7b86415c0eae4156115317239fad M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 a7a6693d72b20ec8b761986be15377af7fdac624 dd7ded299d3b22f21ec55c4fec4b943edc56100a M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/resolvers/profile-v2-resolve.ts
+:100644 100644 cbeaa23fec220c604032e3a2170ba87867703be7 92ff9a11c3d0b7e611851302295f378be43c00e7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+commit d9f538b23c07387006ceab966fbbd4a39124ec78
+tree f274cdf7dee1a3af4dad722d727c301a49c28551
+parent 01e34c2067226c231aa89c3c03f68a4c0d03d278
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 13:30:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 13:30:19 +0530
+
+    competence hub final design
+
+
+:100644 100644 d7f0541ea84fd3f82846336121a723f2ec9d4100 f7907e97e6949cf098541133f6188f683a97e953 M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.module.ts
+:100644 100644 5dd3963fbc699fb932dcf0ba530a84aacd5c6dad 61432cf96008497fe0ec1a6969a8f6ed1a448b3c M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 ab372d46812577475bfe61164f476fd2929eecbe 3bafe04eabc3a324aab3c4af3a9e646521924392 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 b5330725237a8fb03c68ff414ab509d668dc1fef A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:000000 100644 0000000000000000000000000000000000000000 d1ff57bf818bf6e70d80ad779ad3ae5f3c2128a8 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.scss
+:000000 100644 0000000000000000000000000000000000000000 077c6c6af6110e07ea9fb43522cced20e62977a7 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.ts
+:100644 100644 6b3c48dc469e0cd8b626b83e0647e1c76b83dfa7 fbe187dcbdf2122d8ae1b55a090c01d94a493277 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 24d413b49db02b7ba8809f536ba8ad561f5ffe50 f2171004a88873a41c8abf6ce6269962cdbda540 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit 6042c219f80fea4628cbfe356dc094d6e13380cb
+tree 3da7276de38c66a76c058a4cf8568c626025a488
+parent 04056e3ae5266ba826f9646f40bb6db988ea95e6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-22 01:16:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-22 01:16:48 +0530
+
+    Task #52201, #52115, 352109, #52122, #52118, #52108 defect fixes
+
+
+:100644 100644 f10143faa80a9d4ebc873877385f27c940cf3bcd d517f1cb915178a7e4c3a05c45a35ee8e2a04949 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.html
+:100644 100644 4dd88bcd58cb6630c18001663216ccc968357729 c5dadf3ef45b13930b27e7425925af3865be8664 M	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.pipe.ts
+:100644 100644 ecd529e1d25b5d0ae1b2b02e3399ca43d15a5c92 7e9ce0440ee6852afff861a2f408c052f9b412f9 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/career-detail/career-detail.component.ts
+:100644 100644 8bb2ea5a483d6a29e1bb6fbb14cc98e2a008c1e2 81b4bec6e3805d834d57b6fd40edc2bb62551231 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component.html
+:100644 100644 21b13bf21d7494e8f22c1d5a291563436fbca7d9 f8e4ff560b1890ac1faa9640405d751734d2c4fe M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 5911451a32b9e677b1b70e5f415b834990b2eb78 3edfdf69ff69e3055d34b021efe65f318b53a3af M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 645eaab3eb517a37374b1c8766e749413fea9e48 c9230ca18c19aea5f4decd6838a6edc280e63ecc M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.scss
+:100644 100644 6879808a25bc8c7e0e7fb720dde28ba29b75b3a1 7148cc2d5bfdb9c1073f247e73432a36487dc423 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 28ca80a2d15e02b75058cf3570c467c7fa0b9ef0 a0a41ea5abebb6db97dd2492dc00e1c4b0be68a8 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.scss
+:100644 100644 522f930455b992e1971554b7d2206f7b1905b1cb cf4c558e94098dbcf1ec0fb16b92165519a3577c M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 645eaab3eb517a37374b1c8766e749413fea9e48 c9230ca18c19aea5f4decd6838a6edc280e63ecc M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.scss
+:100644 100644 958316fa185e246edd5ab95f3f12cf4f4293e092 f57b5d07a71e5dc68c6b8063f91b36c025dad568 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.html
+:100644 100644 28ca80a2d15e02b75058cf3570c467c7fa0b9ef0 a0a41ea5abebb6db97dd2492dc00e1c4b0be68a8 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.scss
+:100644 100644 542d53f403cfa7438fb7a7b430f14913cc84051e 629837fffa042f597741c45858388e0b32bc5964 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 8ba417c6e807e69b2ba4b401b115cca7dea7ebfd f3ab1eee3d3154c4004f25abd4be9ae5b679e258 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:100644 100644 d90a8abcdb2ae5ffb7c0ba0aa3d74074f57a8e2e f9128a4049f431fb85abb23ba2f8ab56c0eb2a65 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 59968617f09efaef724b1af332a66e23b514c07b 1f85f2a2eb6307aed41ebeb17161b502cc85d371 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:100644 100644 4d9741748527016e197718288dd7e22bcbe83e96 51e3715237c08eb625bc86ec566b0dc20c224298 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:100644 100644 62944fdabbf936b1808cf6e85abaa9595248c556 20dadfa94bd63ad0cda6a52b19d5f4711fd6d269 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 374208bce87213034ba6253d8158e46d1f02a9c0 7e612e6be5f390190ead510713cf56f1e988c549 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:100644 100644 8a50009174bf3c8103372e086889404003176ca2 de3ff11a42e48f032a41b798ae537c63d0a17513 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:100644 100644 3a0e4752b1e92ed5b9c0e4e35168305f74e73d66 888a1f0eaa07b30598535ff7b23fcae1fb4114ee M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.ts
+commit 7c3b3b2c028b2075bdc29cb95a7f4a1fa74120e6
+tree b333b0876d23117dd6289de81bf3c50a352fe00b
+parent 2a21488125ef165230a1660d7e2ed29fe0f81992
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 22:41:30 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 22:41:30 +0530
+
+    commit small bug fixes and changes
+
+
+:100644 100644 47e0365a2a8a1c2e79beaa8281af8ebf3eec4607 f0e847abfc966644cc7ea368ae4406d75c3e18e1 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin-routing.module.ts
+:100644 100644 bf9920783c0867290271c5b6bd03934b331511a4 23b64cba92db372df329b302539e7b1d8ce1017b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+commit 20b9105cfa75554b19621ebfb12e1c338f8395d9
+tree fb71cf6096f1c9034ab381e8dc6fb25d6952045e
+parent 6ccafbf0ea4a8a71d8ae0d223337d215c1d4cc63
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 20:57:15 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 20:57:15 +0530
+
+    profanity issues fixed
+
+
+:100644 100644 367820eee21f5ab81f29200154b5138b878619b8 f3cfaaa81137cb67b48f433664fea4c46fbeab25 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:000000 100644 0000000000000000000000000000000000000000 bf9920783c0867290271c5b6bd03934b331511a4 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:000000 100644 0000000000000000000000000000000000000000 8c77061d51f322fb8d5b0e32eb0c5856bc5e9c23 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.scss
+:000000 100644 0000000000000000000000000000000000000000 2f126fc38a9f0a6ca953e36a9ee0a6b64c3b8345 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.ts
+:100644 100644 b1e2ae510213238794682d48a12ab9fa04fe3a0f 46b557bef165b1ba0657b449fdea027cfc981600 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/upload.module.ts
+commit 431f30e4f903b642b727a2fa08fe18b669c02e92
+tree ea1c1500cf4e952b76386874e259f9204614a845
+parent 4bc7289b5a93fca338453ee296f155748c2a4584
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-21 18:46:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-21 18:46:32 +0530
+
+    nav Updates
+
+
+:100644 100644 887d81d8147622a254716820da247d4ff5066a03 47e0365a2a8a1c2e79beaa8281af8ebf3eec4607 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin-routing.module.ts
+:100644 100644 1c31a87d8112feeedfdb7641d4a238d5c1cf8037 837acb96fd1f71976060dc64007ebf05f4930082 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.component.html
+:100644 100644 8be1a7a46fe414b9d88e9d4cccdda3031141f38e 9c1409d2376562d41bce836e3b4d6bce597c641d M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.component.scss
+:100644 100644 15ddc5ecf33268704ec99fa462fc3f08dd84447a e2a86a2619103682c005540adeb892ade122ff1d M	apps/fusion/project/ws/analytics/src/lib/routes/learning-analytics/components/client-analytics/client-analytics.component.html
+:100644 100644 8856e755e8d32401ea77e3d651c6e9c877f80441 440e3efa464f9f5b58c6a61be262efb1201f0eeb M	apps/fusion/project/ws/analytics/src/lib/routes/learning-analytics/components/client-analytics/client-analytics.component.scss
+:100644 100644 53e19ea3e592f039c52f71c49d0a45c170a61f0d 630a467a91d6720dfe86d4cb3ca89193d98fd869 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 a652090d286b8b7cee033a5b703cb6b32bd96f46 217b8fa5c9d9a4b4d10a491f25492ef4f83fdeae M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/components/home/home.component.html
+:100644 100644 57f6f01ce93615440dbac86b88eee451de42ea60 92fffa5a7ce5c8949b933e603bcc4ba13aa5391f M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-home/goal-home.component.html
+:100644 100644 ff327a22c0846151195c57dd64edae494cdaed8e 88e0c70030516c18fac56cc8ebeddf813f478cf4 M	apps/fusion/project/ws/app/src/lib/routes/info/about/about.module.ts
+:100644 100644 25924d5e14c8643c1cf37e32fdbf0a6f5f91ce77 c005924273235f93e78932c86ae8b6ef7ee64a6c M	apps/fusion/project/ws/app/src/lib/routes/info/about/components/about-home.component.html
+:100644 100644 c2ef7bc3fbb486f39fd44c9ab233a468687075fb c28f6e3e9b7aea158547caaa2ab7c317af42ec59 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-home/playlist-home.component.html
+:100644 100644 8ed115839601e7aa2b1a60f6a057908e6779b8da 48d48b3b11fb51dde9836dad3c6974f2074afaa2 M	apps/fusion/project/ws/app/src/lib/routes/profile/profile.component.html
+:100644 100644 c3f1450cbc510ceb30e4095fe8efa83aaf9f25da 038b314a53126c0370bb7deb4f9d55f81f942319 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 15dda8002e0198a7ab0d534d59972df0e96bd391 8b6172d1ed6914d85ac85fd6dafd6861e915af69 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 57a8db06cb5b95ce0bdcc04ee2534bdf9375623a fd90f8e91ca297aaeb97c81ed015a869015255fb M	apps/fusion/project/ws/app/src/lib/routes/user-profile/user-profile.module.ts
+:100644 100644 7ff145df93c170e12ab76311777c0a55f0fa7a1f d199e1995d3e7b18c755ea0d4f525aa04e6efdbf M	apps/fusion/src/styles/styles.scss
+commit 4bc7289b5a93fca338453ee296f155748c2a4584
+tree 164760e93786d103ead6548516e1a3bd0866b08c
+parent 5b91e2e2c1717bcef4d2d475d523d010131bcc6b
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-21 16:26:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-21 16:26:09 +0530
+
+    lint fix
+
+
+:100644 100644 b0fe51b14c6dd70283bd15718ec585fb4bf81a18 8bb022a1994a80584cde700d578407815bc544a6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.module.ts
+commit 5b91e2e2c1717bcef4d2d475d523d010131bcc6b
+tree c13b6547b8aaa9bf105772d38bbda3a50e91396e
+parent 6ccafbf0ea4a8a71d8ae0d223337d215c1d4cc63
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-21 15:47:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-21 15:47:41 +0530
+
+    nav update incomplete
+
+
+:100644 100644 dd7d6e102ae25474c3e7343ae1696b29f85d9750 06656dde4cb295aa07290e4911c54e56457faa36 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 04d78c4e517fe2d4578902765e8816fcbb31b02a b2a733426dcd3255febc6bb6b3e193c0ea2dc9e6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.scss
+:100644 100644 9667fec867d263d263ee1309b6ef1c6af23b9ee6 bc8f15b62c63b368c7f94e06a51161c4cfb67b03 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.ts
+:100644 100644 8b6d68876871e068a8cc0baaa5a9addf6f2f006f b0fe51b14c6dd70283bd15718ec585fb4bf81a18 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.module.ts
+:100644 100644 fb35dc1da6a92012c619752b12e4e938b082ac95 ab372d46812577475bfe61164f476fd2929eecbe M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+commit 6ccafbf0ea4a8a71d8ae0d223337d215c1d4cc63
+tree 3558bd9bb277292e51ef44f21f6de0b517f061ab
+parent 04056e3ae5266ba826f9646f40bb6db988ea95e6
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 11:33:35 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 11:33:35 +0530
+
+    Error fixes on competency
+
+
+:100644 100644 6c87bbc6001644c37abd41e5bba4a9fc20237dc5 a5cdab941c787a0aec4560c01305f8507a3daad9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 76aa7f18f24f6819d9b2b40cf414e37b6bc3ee69
+tree 9d09d5ae2dcdfb3450cdcb24c066fdc6ea367144
+parent 3e7ffaa3e1182aa16f5407300e6c18c5b6a48104
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 08:51:02 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 08:51:02 +0530
+
+    button alignment fixed in competency
+
+
+:100644 100644 d46bfe1e4d16bcaddb8537defe8cf85b4c4c31ef f3de49c261124046eca1a2771c949fd29c8582ee M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 8420efa700d13f054edcfbef6ec9b28de6d082bd 4b537adf34d52a27d5e581bd4a25e7e513968b11 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss

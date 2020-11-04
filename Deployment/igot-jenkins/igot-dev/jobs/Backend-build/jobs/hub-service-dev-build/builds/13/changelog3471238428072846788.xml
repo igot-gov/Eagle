@@ -1,0 +1,65 @@
+commit 727f6dab3b598b151e6f7d83c2f616a16f60617f
+tree 27ccd91d00ec7a402ae5f4cf2097cd76a4d288d5
+parent 5440749f32d9ca887a9c013be4936095196443fc
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 20:41:07 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 20:41:07 +0530
+
+    Task #51585: Fix code smelles
+
+
+:100644 100644 806f671e48ea281208ba2484ed951db0643d41df b7632b58c5b10db40ddd06ed601dfdfb2bb19a2f R095	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/BodhiConfig.java	apps/hub-services/src/main/java/com/infosys/hubservices/config/BodhiConfig.java
+:100644 100644 6fedb78e5512a8801425a2c7016ae1c350d01c12 a3b4b856d2abe3ffaff3c72b18fb55009fd9a4af M	apps/hub-services/src/main/java/com/infosys/hubservices/config/EsConfig.java
+:100644 100644 9f27fa76df491dbb5ed436006f9c9574ba8dcb6e d2228d4d0be7ac4c5c6f4b3180602e4117ca9b31 R095	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/sunbird/SunbirdConfig.java	apps/hub-services/src/main/java/com/infosys/hubservices/config/SunbirdConfig.java
+:100644 100644 534fc650f0afc0d12c70819d61060225556bb89f e1873a997d18780f57e1059593d5d5ada33a6b44 M	apps/hub-services/src/main/java/com/infosys/hubservices/exception/ApplicationServiceError.java
+:100644 100644 11c89d8f346e53deb6118797c8193799c4245ae4 a0b22a9dea783bfe8141ae9970da6ab91c969b90 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/NotificationEvent.java
+:100644 100644 781a0eeb7c0944a0df043c914084ef73186c092c 439a555f46b26f72b16c9880a26536bb8b9cbcc5 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/Response.java
+:100644 100644 d4b8570acf047299be3dee4337ace0a7a88a79d3 4d18332da81f559313eaa49967057a381cc6fb89 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 c59c32dc5690458da009ce9b3b89b41325bb07ea c1e7f6da9bfc39a598dc92c362ec32f402c8c02f M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 b40131ba067e5cf6116c45ddb64084439e796329 d2883236ce22b719dc6a70656af4bb95793c1468 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 b3eb7e0893b1e945e3f733d13ad084e7bfcd9ff6 c700981c4f3b0c7acb3d38313971e1a14e3e08ef M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java
+commit 5440749f32d9ca887a9c013be4936095196443fc
+tree aecf66e8936e32985b47bf28f301032e5fd16662
+parent 5ceaffe6f4fcbc98f9df37c3b61c8a5040fa4691
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 12:37:07 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 12:37:07 +0530
+
+    Added Recommendation API
+
+
+:000000 100644 0000000000000000000000000000000000000000 1f561b914b65bb68b0e835a071108a87c969a1e8 A	apps/hub-services/src/main/java/com/infosys/hubservices/model/MultiSearch.java
+:000000 100644 0000000000000000000000000000000000000000 83b5e94a4292f7cb6a96c776dc4cad2ccc2d3ec9 A	apps/hub-services/src/main/java/com/infosys/hubservices/model/Search.java
+:100644 100644 eb91d925cc534374e2c092af511ea6bedaa50a1d 65e3df2a43f3f9bfe3c9bceaa92efe1889d5b7b4 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 361b286d34a16155c29c3724c0de9a711efaf256 1129a2ce132b185b6f1fa86adffe895c22d26981 M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IProfileService.java
+:100644 100644 3ede0d3fc71de00a7519d48281618c6d742b6bcd b40131ba067e5cf6116c45ddb64084439e796329 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:000000 100644 0000000000000000000000000000000000000000 45627f8ed10ab3a224f3ddf85a90f9013f0fa69c A	apps/scoring-engine/scoring-engine.iml
+:000000 100644 0000000000000000000000000000000000000000 b33c918da1fa5540f21b5da8d6c5687db6cd96b4 A	apps/scoring-engine/target/classes/ScoringSchema.json
+:000000 100644 0000000000000000000000000000000000000000 8f21ad779c56e59eae5959315c65a441f2fba69c A	apps/scoring-engine/target/classes/application.properties
+:000000 100644 0000000000000000000000000000000000000000 c1437f620c76a3e7ca985fbe2e74a036889cd17a A	apps/scoring-engine/target/classes/com/infosys/scoringengine/serviceimpl/ScoringEngineServiceImpl$2.class
+:000000 100644 0000000000000000000000000000000000000000 6961efa1b2faf838050bd2fe627d13e3a1d48e1f A	apps/scoring-engine/target/maven-archiver/pom.properties
+:000000 100644 0000000000000000000000000000000000000000 e71428434d9e374a79b32adedaf4ea3b75e41fb7 A	apps/scoring-engine/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+:000000 100644 0000000000000000000000000000000000000000 ad8bcb111273d5d7aefb2d58630de8b184e9064c A	apps/scoring-engine/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+:000000 100644 0000000000000000000000000000000000000000 3634b4718aed5e9e367e45284e11f3259e9d1e99 A	apps/scoring-engine/target/scoring-engine-0.0.1-SNAPSHOT.jar
+:000000 100644 0000000000000000000000000000000000000000 5d2caf47fe101555907a9ba991059b4d420de760 A	apps/scoring-engine/target/scoring-engine-0.0.1-SNAPSHOT.jar.original
+:000000 100644 0000000000000000000000000000000000000000 d857fc17bacdc85f583225ce0dda56d5216b7e2c A	apps/walletService/walletService.iml
+commit 5ceaffe6f4fcbc98f9df37c3b61c8a5040fa4691
+tree c0af63815d477421765927cddaff9c76f1871715
+parent 9052b67b40b927f33c42f01dfcc65cc745f5c9fd
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 17:05:54 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 17:05:54 +0530
+
+    Task #51689 added scripts
+
+
+:100644 100644 b137ebc9d129f053f36409ba322ef2869b8a513e 10fd8a02b07033d2ec5e758047e98ecd7aa93912 M	db_scripts/postgres/notification.sql
+commit 9052b67b40b927f33c42f01dfcc65cc745f5c9fd
+tree 0aa7c0061b403bc4ce699e9aa7491a02a227ae48
+parent b4f4124ec5a568cc7c976c94aeed8569158e42ec
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 16:53:04 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 16:53:04 +0530
+
+    Task 51686 added status value to notification template
+
+
+:100644 100644 05fa00c27b333e2ff5a0729e9525c077c033ffcd c59c32dc5690458da009ce9b3b89b41325bb07ea M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 7b3d11510cb089f1c09fbdb677f25d0453f2fef5 0838422ce3e69abfe7c232ead3f5aa2e1fd5dc6e M	apps/hub-services/src/main/java/com/infosys/hubservices/util/ConnectionProperties.java
+:100644 100644 e67330ce07ed54aff35a34a2e2fc82568d4b75b7 14aefb3309f076e75fada3ebc616fd636a20941a M	apps/hub-services/src/main/resources/application.properties

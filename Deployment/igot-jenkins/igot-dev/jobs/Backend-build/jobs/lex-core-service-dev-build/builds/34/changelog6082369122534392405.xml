@@ -1,0 +1,11 @@
+commit 78aa1b0b4c3c8231c6e4599ea051135e493f7f41
+tree 256d03a609a3e1b7788ecded4eaea4e60624bb7c
+parent dbdca7839caae8c0372d8573597991f72c7ee339
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 06:33:11 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 06:33:11 +0530
+
+    Defect #52083 fixes for daily time spent
+
+
+:100644 100644 31696c58d864329aec108e08471bf0e8ddeef958 48dcc0ec12001779830f7bf029e32ad887df5793 M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/bodhi/repo/UserBadgeRepository.java
+:100644 100644 7652b32269b21c9f7b9342cfd158261f2eca5ef1 6b8d8c50959d11c449fc0ddefb2e51cf9e7f420b M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java

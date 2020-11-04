@@ -1,0 +1,11 @@
+commit 30b7b0f2a8dd77ebbf3b6259b283e661a271e6f1
+tree 7d1b74e36ea1b1a040da0241d8c5e0bc3a6342f1
+parent e1af305f4a55a9d4275a8d1a4ac44ff36912c383
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 18:20:32 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 18:20:32 +0530
+
+    Removed partion dependency
+
+
+:100644 100644 32762556bec0c1c0cc78d0de3bb9380216f18d33 2d164fbc8ddd97abc3367f37b3538e344c907067 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/consumerImpl/EmailNotificationConsumerImpl.java
+:100644 100644 821a0741baa9d2dfa9fc63d07bba31270c92ec65 0238b7cf1090fae63ac7cf033eeb89c85726e20c M	apps/notifications-module/src/main/java/com/infosys/lex/notification/consumerImpl/MasterNotificationConsumerImpl.java

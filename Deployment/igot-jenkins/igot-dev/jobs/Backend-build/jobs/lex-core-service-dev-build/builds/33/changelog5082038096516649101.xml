@@ -1,0 +1,24 @@
+commit ee7c6baaa701827a879e5571f593ebe3d25911b9
+tree f62ba2685e238216cf0ca59960646c2c8313b641
+parent d40d95b9c906ca70680293e0a2ba07107d066f0e
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-09 21:52:20 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-09 21:52:20 +0530
+
+    Code review changes
+
+
+:100644 100644 b8ef282e4d076e0ebe6e4ad744aabf7983610a50 09b078723c10125b83db783339c3d793d657fd8f M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/MandatoryContentModel.java
+:100644 100644 4ed12ea0aa3250e523a9ea097ff6dff3ad8b6e19 b70065e5fc411252f6bc9cc4be45c0ebbdbae90a M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/MandatoryContentRepository.java
+:100644 100644 8ea8cc2cc7e04c5da4192fe01629cff484c2ba37 8d4d49b563f968924457290bf7d13fb6394ccb6e M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java
+:100644 100644 91fb1342756a7677239302809de3fd36e0ae76a2 d1e40c8f4f847a086703fa070783df9ec580ab6a M	db_scripts/cassandra/mandatory_user_content.cql
+commit d40d95b9c906ca70680293e0a2ba07107d066f0e
+tree 70819f2b726a01d4a72e3becde5dfd449924cb55
+parent 50ecc2f20a7b9659a1aa8cba5dc4c1c0114bb642
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-09 14:32:07 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-09 14:32:07 +0530
+
+    Script file added for the competency
+
+
+:000000 100644 0000000000000000000000000000000000000000 91fb1342756a7677239302809de3fd36e0ae76a2 A	db_scripts/cassandra/mandatory_user_content.cql
+:100644 100644 7a2b466f4a6b11f2c910751cc5199fca5a863640 c38b650eb08aad19ad4ed3ca4c82d1deadc745a6 M	db_scripts/neo4j/IGot Scripts.txt

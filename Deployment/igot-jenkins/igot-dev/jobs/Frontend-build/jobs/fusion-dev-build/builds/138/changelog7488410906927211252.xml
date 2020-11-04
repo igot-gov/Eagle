@@ -1,0 +1,11 @@
+commit 839c85a4dfa3dfe5cdd02ad7b0b23bc6da90078b
+tree b858a96883aee655cd25f17c7ba63702e1f290c1
+parent 173f44b6a0174851bdeb84a040d7882e7136d788
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 10:19:18 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 10:19:18 +0530
+
+    Fixed lint Errors
+
+
+:100644 100644 6e84b1e3a35b19325474a068611fc40093dbfe67 24683a10a3287f8f42d8c55a31677962891828ea M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 bde9ed4f86951df2ad34f9473510e9c40d649df2 8bea572d6bc312d4a348852cbc051727ab1fd7aa M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.service.ts

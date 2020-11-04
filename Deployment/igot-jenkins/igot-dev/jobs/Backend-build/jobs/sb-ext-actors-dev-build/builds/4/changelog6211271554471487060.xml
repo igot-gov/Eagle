@@ -1,0 +1,9 @@
+commit 86b97dba27821a0bcb5421187e281db698edf3cc
+tree d35a62c271249d922fdb3cc2e6caefe22e44987c
+parent 24204dab1395c992ee8af7f2365e980d3836ed60
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-28 09:19:44 +0530
+committer GitHub <noreply@github.com> 2020-07-28 09:19:44 +0530
+
+    Fix for recursive suggestion in search v6
+
+:100644 100644 5701c9bdd60085713bddcdba42e5de0785ddd923 524dab573263239750b9b4dc607ddb390eb6e4ed M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java

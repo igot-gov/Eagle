@@ -1,0 +1,10 @@
+commit 0c2dd14400c01d159471b98581cfc894e2eeea37
+tree 971cc7ae7a50e532deb35da63fece4d1bd62ac0d
+parent 322b478601a3e201ac6ef742a55d3e32d861e3b3
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:37:37 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:37:37 +0530
+
+    Task #52010: Fixed the apis for network
+
+
+:100644 100644 11d23c5d2a7ac9f0afd0c2d165b47f3e24e7a312 630b2ae919af91e1144cb44f0180cc2ac171e6f2 M	apps/web-services/src/protectedApi_v8/network.ts

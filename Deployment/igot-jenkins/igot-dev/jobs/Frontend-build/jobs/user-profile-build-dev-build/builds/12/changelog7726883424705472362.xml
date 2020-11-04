@@ -1,0 +1,22 @@
+commit 1a8fb15c86870a693cabea026dbcfb00d6f9c299
+tree 7251dd0abf21cdcb2bb2a63215fe176824ec6025
+parent fe6056a5b40cbd482cd821f7d8d1254706fcfd09
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-25 14:52:43 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-25 14:52:43 +0530
+
+    Task #51127: profile update changes also reflected in eagle_user table
+
+
+:100644 100644 cd41cb90c30553277f0be433498907d9f96c5a84 b6ebdc13529171cac4d2b029f336b5a7b8a1bb73 M	src/profileApi/user-data.ts
+:100644 100644 89c242614e833c282626ae7ef81aae4a34f09631 4862fd81cda1058cd75dacbf211a356e5b5aa80c M	src/publicApi_v8/profile-details.ts
+:100644 100644 aee3e56ea31536ba46d65795f127bfeac594b5bc ac18fb79ee4d2b4ae3db7925b03be36db6a26c1c M	src/utils/postgres.ts
+commit fe6056a5b40cbd482cd821f7d8d1254706fcfd09
+tree d921c568d5c3e4fa0805a27519b2d5669d1f5fda
+parent ecd1c647efc9a7fc20d9b07d5c5a3073f0837ed0
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 16:06:36 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 16:06:36 +0530
+
+    Task #0000: Default department name changed
+
+
+:100644 100644 d5c9c8b4326a0c2307ae92a6c6978dae022cb24f cef7699c2009ef128c1384e607dd18d24e7589d3 M	src/utils/env.ts

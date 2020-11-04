@@ -1,0 +1,13 @@
+commit 092b946e10c54718061914ce7a4c5ef84b6d32d4
+tree d9737d1ca92aa7781143da9405288525510cccc2
+parent 7e679354d17caa11d59536d9d5f6aa0a59b4ae54
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-04 09:24:45 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-04 09:24:45 +0530
+
+    fix1
+
+
+:100644 100644 af35b46d353249f78b934c0e1dbfc6c9af152040 e30863b4510c873a8deef0c03a51f9f13d4bfff2 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 84338ebb16de777717765f8c4602301228615c92 5004ab7440cb11ea21aa6ea46c79f542ac824a98 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.html
+:100644 100644 b52f9cba96a20483ba9d4e879c2a5b26b7ae601d 3c2a708af36b6d7fb5f899ef63c38a1931d2e872 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts
+:100644 100644 3e76c7b24e40d49f1c612bc201219ffcecdfce55 c8c8f7e32d684ea1fd7a2599c61303d18f3775d1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts

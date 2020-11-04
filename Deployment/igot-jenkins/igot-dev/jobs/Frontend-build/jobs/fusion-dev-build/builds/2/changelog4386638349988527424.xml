@@ -1,0 +1,12 @@
+commit a17bc36d047f74e8c03cf61076d5429fca3648d6
+tree 4dd9a85d2214f001a68ebbce6a48c6272e946c3e
+parent 6a04074427b267b35bf8efc3cd342857a502f7ac
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-15 15:41:37 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-15 15:41:37 +0530
+
+    Task #50949: Fixed date issue and responsiveness
+
+
+:100644 100644 adeb9ffd4baf5041bf0232885658df1c53156fdd 60a9ea60a7dc6d3a06a25017eac6075cb7b199f9 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 70c686edd4f95f88afb8d3d0eaf10bf72e60ab61 9ba5353cccc4ae7b802f1f116d0a6d45424c2821 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 1368282654081cbc54da025aa1540e9f64681ba1 f6de61bfd71a4daf07c21ef2cdc4db58200097ab M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts

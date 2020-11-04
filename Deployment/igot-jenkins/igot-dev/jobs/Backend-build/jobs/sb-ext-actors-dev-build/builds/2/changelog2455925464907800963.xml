@@ -1,0 +1,18 @@
+commit 92cb1518cd89dc3ffcc194313899d55c1dc9b15e
+tree 85d63d45fc579c73f599b4cac3158842e7feaa97
+parent 742155078f6129217680cba15df4bfce64ef4192
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-24 18:19:25 +0530
+committer GitHub <noreply@github.com> 2020-07-24 18:19:25 +0530
+
+    Update MultiLingualIntegratedSearchServicev6.java
+
+:100644 100644 e0ba3e94680788de1e74ac3b1b59994cae9f0c3a ad354eb5b0621c52afd5ee7003c71179ff088e50 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java
+commit 742155078f6129217680cba15df4bfce64ef4192
+tree 58b43ef304ed3f9b98dc60c16fbe512520ca20ed
+parent 937994848aa509498068e1e37168f15869b49e5d
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-24 18:18:46 +0530
+committer GitHub <noreply@github.com> 2020-07-24 18:18:46 +0530
+
+    Update MultiLingualIntegratedSearchServicev6.java
+
+:100644 100644 511f5a6ec1bc68870a12b41565522195d6b3f4fd e0ba3e94680788de1e74ac3b1b59994cae9f0c3a M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java

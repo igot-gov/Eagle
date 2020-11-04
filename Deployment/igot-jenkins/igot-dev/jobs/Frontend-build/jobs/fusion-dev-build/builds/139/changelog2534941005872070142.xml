@@ -1,0 +1,36 @@
+commit cd0c4fb97a0de07f0ca7a42c48ecf94c40b80e98
+tree 9036081947f15e90ad657a9d2373aa85aadfbfab
+parent 40f93e7b1bd285656d3bc24bd1a27db1fe47dee6
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 12:02:10 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 12:02:10 +0530
+
+    fixex
+
+
+:100644 100644 19add5ee7b7953659582d969203f1d5a012826ec bce4f60f2b59d6bbf5c97627ca50a642889cc50b M	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter/pipe-filter.pipe.ts
+:000000 100644 0000000000000000000000000000000000000000 e4aee348a0137fba8c870f7e9dc6f475f40db9d2 A	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-list-filter/pipe-list-filter.module.ts
+:000000 100644 0000000000000000000000000000000000000000 28ceb7185451e40ee88a587c07aaa3a3864f6981 A	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-list-filter/pipe-list-filter.pipe.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 3df4ca00d4e4abaea52d1d1295ac8dd895a744bb A	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-list-filter/pipe-list-filter.pipe.ts
+:100644 100644 22a80028b79d94685c54ecf4906f69a41ce0b197 5b5625e3bb984173ef35571b00ad98b3df3d3eeb M	apps/fusion/library/ws-widget/utils/src/public-api.ts
+:100644 100644 4598680778826732be9dc5a6ae4d69d35802d841 294d24eae71eb8c618c603f59387fc5a74459ffc M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.rounting.module.ts
+:100644 100644 e22de198634ca1f03992e926da7684d6db6f26ee b2e496e2d52b8f4b2b89d41e22de0af4690083e8 M	apps/fusion/project/ws/app/src/lib/routes/competencies/resolvers/profile-fetch.ts
+:100644 100644 5ced9423928ebf1878e2c049a5d25097b1f3574c 5452afc24db3274968bb2ee8d6a7f073db19f0b5 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 bb48ab6392b22e228567e0237823c9e285128abf 17cd4669592e649bd5b29ccea62747480580c1b8 M	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+:100644 100644 d61c3f51d6cfdd40ef0259aa9c6b072654c140de e72bb8589eccc565053d41a8bad965f7080b3745 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.html
+:100644 100644 2999fe824ae6d9b9bfac0992cacb2d744b718bec 66707cd5a43f196498da34311d1ca8c02c72910e M	apps/fusion/project/ws/app/src/lib/routes/discuss/discuss.module.ts
+:100644 100644 30c2228f40c50ab10b0b6afe7cc43ce7b527879b 84f81f327c9a4cd4520326191a978ce5ef24e231 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-tags/discuss-tags.component.html
+:100644 100644 61e19f1a5bc919b7f02c9325fea64ba0db020ef1 5928ae462c9114c4c2a6dbb20e8a33cbca5e6d33 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+commit 40f93e7b1bd285656d3bc24bd1a27db1fe47dee6
+tree 4ef51bdc5e59c7bf6d850122f26baea7320aed7c
+parent 839c85a4dfa3dfe5cdd02ad7b0b23bc6da90078b
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 11:02:27 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 11:02:27 +0530
+
+    bugs
+
+
+:100644 100644 beb6a88a60f45642fa7edb0638d61e98af6d8892 235f8056316f7cbdcedacdba4fef30888f8e8335 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 bce4f60f2b59d6bbf5c97627ca50a642889cc50b 19add5ee7b7953659582d969203f1d5a012826ec M	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter/pipe-filter.pipe.ts
+:100644 100644 96630b8b33eee78f4f7fa525c4a9f6bfc62d226c 91118f37b05e5748cfd58a8a45a7c34b8e7db620 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.scss
+:100644 100644 da3cddcabd46e12d7be0c50d2111bb1adb4c474e e22de198634ca1f03992e926da7684d6db6f26ee M	apps/fusion/project/ws/app/src/lib/routes/competencies/resolvers/profile-fetch.ts
+:100644 100644 fbe187dcbdf2122d8ae1b55a090c01d94a493277 9ea25b689436235b792bdb41a81ed4c8add224a4 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html

@@ -1,0 +1,11 @@
+commit 2bd381610ec4762844a1619ca37af4082b77f1e9
+tree ff21a054a5ce3e1c0d20b5aa75389aa5ab64de9f
+parent 49d319b4a284cd9d51287b0ccea43cdc196ad7b2
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 08:06:11 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 08:06:11 +0530
+
+    Defect #52171 fixed search query
+
+
+:100644 100644 a13e3bac90956ea0d9ac722ff6112582fb6a3430 33951a664637bd33eecd790ea75b9c2f41345cac M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 14aefb3309f076e75fada3ebc616fd636a20941a c50fcb68f5e1d40861318efdfece89e7cb44854b M	apps/hub-services/src/main/resources/application.properties

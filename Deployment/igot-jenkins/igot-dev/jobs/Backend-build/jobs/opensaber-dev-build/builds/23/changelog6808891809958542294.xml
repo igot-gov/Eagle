@@ -1,0 +1,10 @@
+commit 533e1884dc29eeeb8060b335876beb4a107b92fd
+tree c0003a2b7b7d08cda4a46766153d60d20efa86cd
+parent b89a77400082016fd030664bef27d515e9062d8e
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 15:57:19 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 15:57:19 +0530
+
+    Added logs
+
+
+:100644 100644 2a6f3da121133c578588e8dcf4a54669df3fa9d0 616bba0e6b96fc2bf702ad2c0b84584ff43c7d78 M	java/registry/src/main/java/io/opensaber/registry/helper/RegistryHelper.java

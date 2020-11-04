@@ -1,0 +1,10 @@
+commit b08dee11548371db962b613f344460a5a7409f96
+tree 6ec500ad894a3a96345c44c0b29e15a28647accf
+parent ff97f572ac4235cb023c7406ab1272ba824fcca1
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-13 09:25:13 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-13 09:25:13 +0530
+
+    Task #51993 removed coins and karmapoints
+
+
+:100644 100644 2bda593dd9a240436e296d934e88f9f8e9652a18 cd11296d03f5e6145ad308213e5494fec3218000 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/controller/MyActivitiesController.java

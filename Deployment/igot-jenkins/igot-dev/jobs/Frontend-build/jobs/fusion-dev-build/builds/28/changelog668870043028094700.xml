@@ -1,0 +1,28 @@
+commit 5158634ca62feb3cfeb91f99c4eb44882397937a
+tree b5d2046e56cf29845948e8288b217e4f83f8259c
+parent febcf44605388aec384e1b147c84e8d0b20b5d48
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 22:40:46 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 22:40:46 +0530
+
+    UI pre-final Updates
+
+
+:100644 100644 185cf8e462afc652bb0779f5021e077256387edd 17cbc7f597d33b833b0b139295921fc0850c0dff M	apps/fusion/package.json
+:100644 100644 eb4522d46d79a8c74440283c082c782e92c99d8b 84694bfa7517dceedef49839edf6fe7a7b779e64 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 729adc5fbd2ea0d3add4aa758efcfbfec6b974f0 b618de229632adf982287271e194486d2288df77 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/curate/curate.component.html
+:100644 100644 0a91e17afe197f89d8ca4a890642285230340051 30a32b28976290f0299b0d763a358baa3325dbfa M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/curate/curate.component.ts
+:100644 100644 7cbfc9c8aeafe715145b5ec53820632eda816a42 24203c797aebd1710b7a223a1b05304b844f4d05 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.html
+:100644 100644 c95a3b47c5f114a5f607cdbcd0d53cd24853e12f dffb46bacbe2fee1287ae5d0ebf1e7a41e777942 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:100644 100644 4ed93f507ea995ce055daa300589d3860c8ee3ca 63181e92c2d190938537b4441fc0d82288bc1584 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.html
+:100644 100644 b91e31eb51c5e8f3e1caba1f494d79236e0634dd 128dbdb29149dc05bb601ef6aa0dd744cf9504d3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 18a57108e35610463ed39b132cc50396e5cd5da3 682a4dc31cce9b72347a6702c2235e20eb092492 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 5480054f66471242ad94fa390327554f84c82e06 33d2f98081c35bd738b2f99de1a43b6d017f879e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.html
+:100644 100644 417e90b828b9010d5a626b51f35f9519d3e98a8d 97f4b8b638a1eb6d9fe0ef65e1bf854f19202728 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 ecde2e56be461cfe96697fbadb6d5ca8de0d6293 ac08125a8bea5f9f2e8bb7e5714c3b7a3d97ffc7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.html
+:100644 100644 e98b058296539475d5e1d1db7c415471bc0c586d da5e1dbd6316de07d8a224f068bc52100afd8c88 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 bdd14662f9cc902a2cfb1fa832d0fc47b0f3f843 9f9999c45956143b3045e81bdaf9acab2547c026 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:100644 100644 1b31804766a339c65ee99ddd27b821ae907f176c 3f84cde256ccd700c432a0a4974d4719321d2329 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 0fd16777eb698e4c713d49d234a3b475dfe7c7a1 768c1c7e0faec9662c7c901365278089add31a69 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:000000 100644 0000000000000000000000000000000000000000 27ee124095669435d16b3a09d21adf672988b25e A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/order-by-pipe.ts
+:100644 100644 9625892ed78ad943d2169561f11c5ecb90051621 9437996160f7862e704d4ceed5c4789bb768b1ed M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.scss
+:100644 100644 36948556ae313be2614653163312478809acdfec f68512bfc594acbbcb0fd44a6b41485ed1a80868 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts

@@ -1,0 +1,9 @@
+commit 66e9a804b1e8eb6a2c41d7e934365dde21fdb279
+tree c6c1dd1343790e61e4092bcde5fce88c8882e380
+parent dfa607571ad2eb7c853a2507a7079e92b2421892
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-07-22 22:41:46 +0530
+committer GitHub <noreply@github.com> 2020-07-22 22:41:46 +0530
+
+    revert changes by amit
+
+:100644 100644 c37daf6900005fa22aacecf99b84e1ca4d047058 8f7373830c380f218f1aa34ea4cb880e7979b4be M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html

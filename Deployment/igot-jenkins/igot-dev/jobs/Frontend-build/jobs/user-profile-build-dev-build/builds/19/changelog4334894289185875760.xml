@@ -1,0 +1,20 @@
+commit 267865b9f8dfda9135a3ff5e8ce506fa3e149b4f
+tree 8fddabb1e676b2fa71359ea371945fb0fcb901af
+parent 5f4958002aa99fd44d8620c6d936a46e9264fe21
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 15:36:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 15:36:51 +0530
+
+    Task #51611: added logs for testing
+
+
+:100644 100644 95345f9531a16c66fa794b7ab4ff640c3957334d 19adeb90af621c733968bf8e2e646b0a82afba51 M	src/service/registry.ts
+commit 5f4958002aa99fd44d8620c6d936a46e9264fe21
+tree 0f248025fd3423eafc439bea87b23cd9d2d1a6b2
+parent 39e3bff4cb0874c3951e2219dd608d76f6cc983f
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 15:01:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 15:01:38 +0530
+
+    Task #51611: modifie search query
+
+
+:100644 100644 1a91d017f372d3facc4320af9dbf3fd4b6165aa7 1fc1ea01b4f059bf7889706c5444a8b5f5a975b4 M	src/publicApi_v8/network-hub.ts

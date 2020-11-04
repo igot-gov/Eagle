@@ -1,0 +1,21 @@
+commit 4601d8bd156548dc86bd788b0a772345984766b0
+tree 1d27b92ab893358e387e19dc0fd8937dea092d62
+parent 716d403bd3a5431fa377f8f8e233cd6a343b3958
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 17:55:13 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 17:55:13 +0530
+
+    Task #51611: Added totalHits in case of pagination
+
+
+:100644 100644 0848ad755d111f98b512b69ae1cc6832ca24dda9 a29bc0df451fb817b0e5172c900e849885d5a583 M	src/publicApi_v8/network-hub.ts
+:100644 100644 19adeb90af621c733968bf8e2e646b0a82afba51 02e6eb8b1289145f7be8eb348b19eb9c2daf2088 M	src/service/registry.ts
+commit 716d403bd3a5431fa377f8f8e233cd6a343b3958
+tree 26ce0d1cecf44a463237e0a003a8afd3d5f99122
+parent 267865b9f8dfda9135a3ff5e8ce506fa3e149b4f
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 15:53:25 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 15:53:25 +0530
+
+    Task #51611: updated search query
+
+
+:100644 100644 1fc1ea01b4f059bf7889706c5444a8b5f5a975b4 0848ad755d111f98b512b69ae1cc6832ca24dda9 M	src/publicApi_v8/network-hub.ts

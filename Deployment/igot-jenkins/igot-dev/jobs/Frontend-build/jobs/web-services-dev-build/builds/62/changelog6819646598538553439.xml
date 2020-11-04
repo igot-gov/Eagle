@@ -1,0 +1,20 @@
+commit 3a916d12afb2362f7a78f55c70de7fd3bee0e155
+tree f9716809f1ab7030b5e171b001b73182dde3f11b
+parent c4e6ba920dbefea354d192d25713b85f9e99f3b7
+author Haritest <haridasksd@gmail.com> 2020-09-24 09:53:43 +0530
+committer GitHub <noreply@github.com> 2020-09-24 09:53:43 +0530
+
+    Update sonar-project.properties
+
+:100644 100644 cb2b0146f3f15ac508d835733f3fb562fd8a9319 cb1e9b5d0487a3c41ac46d24a5381350a25d98f4 M	apps/fusion/sonar-project.properties
+commit c4e6ba920dbefea354d192d25713b85f9e99f3b7
+tree 0a5ddb63d925e37c9a22440f4aa1f7c14caf4d27
+parent e357487589dc954f57b33dbc66ef72e41e9b2235
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 09:40:33 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 09:40:33 +0530
+
+    sonar stage added in jenkinsfile
+
+
+:100644 100644 c40efbec9a03973437164ae7d2ad72af3897e5d1 2c0382ebf18ad7497e74aae791ab7e0f8b116000 M	apps/fusion/Jenkinsfile
+:000000 100644 0000000000000000000000000000000000000000 cb2b0146f3f15ac508d835733f3fb562fd8a9319 A	apps/fusion/sonar-project.properties

@@ -1,0 +1,13 @@
+commit 57dc1ebae99ca81ac46e160822f3599378318bb7
+tree c4b04afb6c920f37faabc37ad0e82d1b36296198
+parent 4f33fa097509da097d2ee27451396a151d030a45
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 15:46:07 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 15:46:07 +0530
+
+    Task #51689 updated user profile name in notification template body
+
+
+:100644 100644 2e2c456e9e5b283b014c98d9490670bc54e1fada d4b8570acf047299be3dee4337ace0a7a88a79d3 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 a0ac0b2d7223a399c4f50fec6efa1806d25a77f8 19d12fad985f943218e310822e5526d64487b4eb M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 4e54bb2ad08d8fe1356ba64fa341ea35ec3131f8 3ede0d3fc71de00a7519d48281618c6d742b6bcd M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 41a713061080026d843084edf5392ae20c23800c b3eb7e0893b1e945e3f733d13ad084e7bfcd9ff6 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java

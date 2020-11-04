@@ -1,0 +1,67 @@
+commit 303740faa4a4335b80a57325771c2886c2776e90
+tree 16532114273ebadf4ac7b593d741d48cd7670919
+parent 91caa1026d80e492c2be8d461618f1153c9ab6f8
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 14:43:47 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 14:43:47 +0530
+
+    Task #51289: Fixed some responsiveness issues
+
+
+:100644 100644 cf7ba00901da980c64d9ac323dd52837ed1da584 227f595e7371985f67f247c74a25f174a7e38081 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+commit 91caa1026d80e492c2be8d461618f1153c9ab6f8
+tree af8cec80a496541c244daca95129dc020f93624b
+parent 4204684c02d377f58909b6658c9219875037e8e6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 13:28:32 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 13:28:32 +0530
+
+    Task #51289 : Email pop size fix and other
+
+
+:100644 100644 f6c8ca36f11afb53045e82ad3312af1a74cad759 c51f0e53bf1416bddefaaa3361b9ec187a44752d M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user.component.ts
+:100644 100644 520d95085950ea2fa59328a248338e93a09f0f14 cf7ba00901da980c64d9ac323dd52837ed1da584 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 41e093147a6e0aa3a2db553c78f027805f057ec0 f4a9d1f9330b38a885a2fcde4ad346718456167e M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.scss
+:100644 100644 43879879415d2d1598398e9a6e27c7e2f0cb1e67 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+commit 4204684c02d377f58909b6658c9219875037e8e6
+tree c4c1111057b61cf74b283afeb629b4f764ed43f0
+parent f531e1778b80ca02d29b24d12799c0ad6e5dcc75
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 12:29:58 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 12:29:58 +0530
+
+    Task #51289: Fixed flat button font boldness
+
+
+:100644 100644 e77a786cfde11fea2947bdfdeb05bdd20b697ca2 7a9561b6e4087bd670eaef33d70f81e6c038bdc4 M	apps/fusion/src/styles/styles.scss
+commit f531e1778b80ca02d29b24d12799c0ad6e5dcc75
+tree 02143ea59e60d89f928b4b4bfe90c6e2a66287a2
+parent 5a0d7c3d5b2b23c5524cbd4df6490c9627deaba0
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 11:38:14 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-21 11:38:14 +0530
+
+    Task #51289: Fixed the UI issues in overview page
+
+
+:100644 100644 a1b62acb09f8a535cf5bb10cb1a0ce6c394dbc68 83a65e957d0bc02e4f77bd938589c7155fbf5299 M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.html
+:100644 100644 b7e64f50b78fbe31307fbd98c1a35c0e56758c3e c653c125ac4adf7ff36768423786249cdb8e9028 M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.scss
+:100644 100644 d4d8788f4ddf43aedb567ee27ef765c5f2a58b1b cca4168298a295bfa70e873cd6ee4db44d7a2f96 M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.ts
+:100644 100644 ac9e4fd336532f80ddf7999c17389701e45c7e3d 1a8687bf7d5ebf20f3a641bf0cfaaa5774bdf3bd M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.html
+:100644 100644 0dbe8b77b75f536c75f27610dd904d0849415bc0 ac2ac06f9675440330c6681921d7195b1d1709b5 M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.scss
+:100644 100644 e89a708dbf8d75857b9bde1d08c4ec0fe9ca8597 9ba528625c5b90ee13d2796b2353026a0966889e M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.scss
+:100644 100644 d0c47b837c7e544aaa8684a449285e083ca7053f 11ea356645f786d32a31aea6ad64d6fd65cd44d0 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.html
+:100644 100644 6e50fbc1c3afdede63258f0c88d5d446579e3f7d 05c49ca3225434c1bb0cdf62f6af7bffa4385ff6 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.html
+:100644 100644 ddb2c3ea6d23f02af468e19b5b05f185ae3a5cc9 87b242c032c8a28c64b7bf3de632f8d15d041df3 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss
+:100644 100644 99048bb73d9036f4ade4527362232cdcb1db7829 520d95085950ea2fa59328a248338e93a09f0f14 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 9b6ba74ab62493786635488a2f9b4f98ebb7cb5a 41e093147a6e0aa3a2db553c78f027805f057ec0 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.scss
+:100644 100644 d65644e8a8acff314c2ee5e12c2b8fffe44dfe5f 37f71244bf1431745cc6ed62d0f8469a12316cce M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 b06316bc105ed93b53a36476e4b12d4715795538 43879879415d2d1598398e9a6e27c7e2f0cb1e67 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+commit 5a0d7c3d5b2b23c5524cbd4df6490c9627deaba0
+tree 5fad84e3ffda391444cb945df6d8a580d4a943ca
+parent f236f429305d2bab995a78342158cfd2e78a7ea5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 09:12:15 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 09:12:15 +0530
+
+    log removed
+
+
+:100644 000000 d73897aeb2b26d8db83d02d5991dc92c7c7c06b6 0000000000000000000000000000000000000000 D	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/index_old.js
+:100644 100644 4cbcd7a12fe164b2e3c655d03f4c1a3f32895a29 786babcc73249d7d7eb695d6ef3a3f6774d96651 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:100644 100644 f991ef6ccac6bb4da8bf5a27a9449ed1f867d95d 4011093c7d79a96def2e29d320d38110e9f1afd0 M	apps/web-services/src/protectedApi_v8/scrom.ts

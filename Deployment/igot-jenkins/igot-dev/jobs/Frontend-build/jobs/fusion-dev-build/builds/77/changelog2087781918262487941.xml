@@ -1,0 +1,11 @@
+commit a44f05a1fea9539b76cc46c31de5b3aff631e753
+tree c950f808f29f8972c1ab83f08b1716518b11ad76
+parent 6e43cb9dc7c7fde42e68dceb59e8a5fef86fe5a6
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-04 12:12:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-04 12:12:46 +0530
+
+    Web page Style and theme updated
+
+
+:100644 100644 66a97719ad45c598a09615fd738a055f1c8f1585 11339daa7680b089aa918c64b34c2373d9b9d708 M	apps/fusion/project/ws/viewer/src/lib/plugins/web-module/web-module.component.ts
+:100644 100644 e66127441733257c25a0a6e42a449d1fcad51fd9 86afc14dab1e7f24b2361242fd80d43f202c3d13 M	apps/fusion/src/themes/_theme-mixins.scss

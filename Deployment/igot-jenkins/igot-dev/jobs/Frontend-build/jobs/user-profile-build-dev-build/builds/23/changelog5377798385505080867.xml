@@ -1,0 +1,9 @@
+commit bb73e4426e644481bf6a673949f5d2c1f3245d83
+tree e2c38ae3054537c665cc68cd8fc675e1605e1af5
+parent ee8d6d200ad8120fed1344a13a680fb323f6ce7c
+author NetOps <idcnetops@tarento.com> 2020-09-24 07:21:40 +0000
+committer NetOps <idcnetops@tarento.com> 2020-09-24 07:21:40 +0000
+
+    Update sonar-project.properties
+
+:100644 100644 c0e9fc6f4711e42e9276941b3f6dd72c58114012 cc040a0eae1d34a3b1bb824dda47d6f6c6e8850b M	sonar-project.properties

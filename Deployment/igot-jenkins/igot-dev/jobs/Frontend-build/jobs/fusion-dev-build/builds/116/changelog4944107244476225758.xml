@@ -1,0 +1,226 @@
+commit 220ed410961e17cbed9d72e0005befb5e29a2b12
+tree ba95872661b1573510f5937fd9fb3a2359532b8f
+parent ef64af5da98dcd2e7b40581a0f75ca7f1b4e4327
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 12:53:34 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 12:53:34 +0530
+
+    build and lint fix
+
+
+:100644 100644 29c5c468115e678026bb3adafb3453d321a1137b 304381d58c54e1d577f44a9025501965c3f84307 M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.rounting.module.ts
+:100644 100644 272509eb999816fda69431448c1f6e27c99dddc4 7f3989239b4cee7de5b4a83dc312175e48b5ea8d M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.html
+:100644 100644 7bf54f9e754f159e0647ac7d7640a1aaa026b3a4 bf98e8adc44049ff0b0a1a6ad72cee81c7ee2407 M	apps/fusion/project/ws/app/src/lib/routes/competencies/resolvers/init-resolve.service.ts
+:100644 100644 175ddf2aabe8ec71afb6d9ce7bf84f4212d11699 37f5cb9e91351863f5d9e4e15cc7d2c7c3fad2dc M	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+:100644 100644 2fbc2912752a1e8ae293c334f0097f1830f75aca d57ce812089399bdaf3e8336597c0d9c9a8ecb8e M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.spec.ts
+:100644 100644 79c25b815c2a508ab5c18988d8250738aa10e33f 817b3ffc0bf83867a99939e945386715b064ae95 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 89ac5e0c49a539d98982e0620400ddca81b8bd26 144d4254e6c979662c45995258c27193f969b58f M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.spec.ts
+:100644 100644 45b9934bee26f3d4386cc356a5f4009d9a800d7c ec1436ba4fa38596b87211109fd03e12545372c3 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:100644 100644 88a9bee1f559b0f3b0e5253ad316f39052580579 d833a3b5338f5e5b3b9aa2e1bd9affa2fecabe1d M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.spec.ts
+:100644 100644 551117643f0aee5e41909d1a68f5da6ec754fc57 51fcf87167d615261399c92d9c460d2749b27113 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.spec.ts
+:100644 100644 ca8c61ab97f53c6fa0b97e3e20a0f1938f95b2d2 d093a1ec5444dbbd01a06db5a61e4209d9cbd7bd M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-requests-resolve.service.spec.ts
+:100644 100644 7d26ab3b4fd22c92c80447883c6775cfe3bb8a49 cca36a43fefd04473cc78c6d88d6174e09eda52f M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/init-resolve.service.spec.ts
+:100644 100644 74086cc7149fe2839016200bd166a0dbe4055b91 442cc4458ede6fc33fc32d20b27dbeeb619d7b48 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-connection-resolve.service.spec.ts
+:100644 100644 e724019a65be9b5b0a33decdd23729e31a1e4074 8d4ff5f8d3acb0ff6ae57a27b614add58b7724e7 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/network-v2-resolve.service.spec.ts
+:100644 100644 8d4c18434988d3f8720cdd1601e3220405f22547 742b568f1f63a0bef676873d3151f335bea60659 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/recommended-resolve.service.spec.ts
+:100644 100644 a7ee73cfbfd17be055580e851cdad5b9bd94ffbd 3ac8f4d3b421b76408aeb4b7b2a07f7cf6ab6417 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/recommended-resolve.service.ts
+:100644 100644 d473a79d35dfcb0a85069f694189db29d0acf868 e69c63676f41312a33eb547ad86e6bde0be6f423 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.spec.ts
+:100644 100644 590677ad887e92198a479335ef1830405fbdbd5c ae5624ee52c5f018432a843795f27844af81c62b M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.spec.ts
+:100644 100644 4f0a536726adc4d2fa5acea8dcbe320b0466d520 9804e6caf05658332598a16fb5d85f2d27defb64 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:100644 100644 df6d1297eb91fcf53ad13df29a38f3481b2f2a0e 78bbfd3447b1329d9e568704b3bd4b74fa914617 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.spec.ts
+:100644 100644 145d6fea20f97d407ee7fdc1a5eebf921b034825 5b2dea2b58092c428c82d850ea64284bfebf114b M	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.spec.ts
+commit 438470824d1167f561d85c13a6524b5b9c449db3
+tree 6f889a5c43c52799114268fa80adb803a182b940
+parent 1949bb49f46efb59e158f38a6a3d3425752033d5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 02:01:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 02:01:48 +0530
+
+    Task #52010: Fixed the status field in update connection api
+
+
+:100644 100644 630b2ae919af91e1144cb44f0180cc2ac171e6f2 1d6b3ee460b4777271f999a583e45d399bd77cc1 M	apps/web-services/src/protectedApi_v8/network.ts
+commit ef64af5da98dcd2e7b40581a0f75ca7f1b4e4327
+tree bfbed0750d8b2daef65980f4e8b108ba1ab9b619
+parent a15570e9ab55c8f48dddbc5072a18f2e61afd1a3
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-15 18:10:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-15 18:10:25 +0530
+
+    comp and home page css ussue fix
+
+
+:000000 100644 0000000000000000000000000000000000000000 7a1ab5bf0ddcd97c8abf11964df9bd471627a9ea A	apps/client-assets/assets/configurations/localhost_3000/feature/competencie.json
+:100644 100644 a3a504a38f47f62bea573c6057ae203cffd42b38 e4fbbb606b33505b5917806ee5b6853a6eb3b09d M	apps/client-assets/assets/configurations/localhost_3000/site.config.json
+:100644 100644 bcd26d797eafcc3f303d9dfbb3c77dc68e4f7cda 24e4ac6c23a020e191bb4f9e3273923ceadc94a3 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.html
+:100644 100644 f126eb938c36779a08ae2e19e7cd3bcc0497e571 a3cd9df3f457b430682ff46f5ffb16afeb9b4f80 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.scss
+:100644 100644 4517c265c4a923a843d26a388b888f55498887d9 17830594e382ca997fa14b28fd6c42087e988faa M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.html
+:100644 100644 5b20d5270618883aa0a1071329ee0f78da69e08e 90460c1ef97d05388af8127014cde875cad9ce25 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.html
+:100644 100644 012bcffbb2a795c7874c49c9768d1527228604cf a466d42a802cb801c9d33ee60665430891bb12c5 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.scss
+:100644 100644 bcd26d797eafcc3f303d9dfbb3c77dc68e4f7cda 24e4ac6c23a020e191bb4f9e3273923ceadc94a3 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.html
+:100644 100644 27c09bdec97c6bfb13b0dd5cea88e42778ad1002 8924a6d2a06123f4b602b8990e3510cd0d15d360 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.scss
+:100644 100644 bcd26d797eafcc3f303d9dfbb3c77dc68e4f7cda 24e4ac6c23a020e191bb4f9e3273923ceadc94a3 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.html
+:100644 100644 89759c7048e140ca4d84a4d2ac23719da854d339 a0e593c98d48e80f8d6c21d106738651718ca32f M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.scss
+:000000 100644 0000000000000000000000000000000000000000 252c97795120e20e96ef300d2d20ba86888ba570 A	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.module.ts
+:000000 100644 0000000000000000000000000000000000000000 29c5c468115e678026bb3adafb3453d321a1137b A	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.rounting.module.ts
+:000000 100644 0000000000000000000000000000000000000000 272509eb999816fda69431448c1f6e27c99dddc4 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 30969021d4f527ddf03d39e1e600ebcceb7fcc03 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 ae1c58f45f681ca00e0e1baa80bd8599f003de3c A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 ad51784a0ecd2c3863081dc4cc31c5787a1f89cd A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/left-menu/left-menu.component.html
+:000000 100644 0000000000000000000000000000000000000000 056dac0103ed1525a2e732ed60d13971217466f8 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/left-menu/left-menu.component.scss
+:000000 100644 0000000000000000000000000000000000000000 701c5e3ead031b37b6ae205f41c6c9b0773f9e99 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/left-menu/left-menu.component.ts
+:000000 100644 0000000000000000000000000000000000000000 34a33612f0e0536af6bf1877118b79842ed744b7 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/right-menu/right-menu.component.html
+:000000 100644 0000000000000000000000000000000000000000 02f55b3238085f9ff65a4d8b66d1b6e1b4643c3c A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/right-menu/right-menu.component.scss
+:000000 100644 0000000000000000000000000000000000000000 9fa01e86b70f58adfc74dd7adcf9d89aae5c4c83 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/right-menu/right-menu.component.ts
+:000000 100644 0000000000000000000000000000000000000000 b48a8703396fc93f9c2ac5296bf31d025a8df7ec A	apps/fusion/project/ws/app/src/lib/routes/competencies/models/competencies.model.ts
+:000000 100644 0000000000000000000000000000000000000000 7bf54f9e754f159e0647ac7d7640a1aaa026b3a4 A	apps/fusion/project/ws/app/src/lib/routes/competencies/resolvers/init-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 2c551e4b17937a7dea70fbcf63593b366ea6aebe A	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:000000 100644 0000000000000000000000000000000000000000 3e8cf8c64bc6f9df31986cac95ec49db275dd882 A	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.scss
+:000000 100644 0000000000000000000000000000000000000000 18e4f2786588ac8d1e11800dac543d650430725c A	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:000000 100644 0000000000000000000000000000000000000000 41d74a545373687f6ecfd1d58467a869c6ef8001 A	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-home/competence.component.html
+:000000 100644 0000000000000000000000000000000000000000 99adcf6d994f6858f623d302ab71cd6178f99771 A	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-home/competence.component.scss
+:000000 100644 0000000000000000000000000000000000000000 57c1c1d767a4613ce4f0906ff5dbf3e33ebb53e3 A	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-home/competence.component.ts
+:000000 100644 0000000000000000000000000000000000000000 f0b1330bad9bd16171e748e70760046c5756b976 A	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence-utils.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 6bb03c8bc0ee189278075fe0229d39021ee89456 A	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence-utils.service.ts
+:000000 100644 0000000000000000000000000000000000000000 7cdbe5471750aa26d57f5ea6ae818069646745d8 A	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 175ddf2aabe8ec71afb6d9ce7bf84f4212d11699 A	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+:100644 100644 205784d615ebdd9572c6332206facfe361b9ffbc e175d0e64f4af32e034ccba90078dfd7a3716dbd M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html
+:100644 100644 2519b9cf9ef5ff0c9373ad7bb70c03e7e047d3e9 35426eebe598c6a81f9b170933cf6e6fc14fba9a M	apps/fusion/project/ws/app/src/public-api.ts
+:100644 100644 100edf54a291de8e0a33b0e1962e1259fc100ee6 fa6ff5f4629fdd39062dd981b1f7c3ac7d12880d M	apps/fusion/src/app/app-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 8f4011ba04c5b88677711b970671808becc674e7 A	apps/fusion/src/app/routes/route-competencie.module.ts
+:100644 100644 316a904fe3d6bf0e553fc37aac62e130fde769dd 9819efd245b659c45f3d369d93803e01c9adae21 M	apps/fusion/src/styles/_ws-mixins.scss
+commit 1949bb49f46efb59e158f38a6a3d3425752033d5
+tree 5e1414a4ca3e191f745fe01f144ecb9c9f66f9c2
+parent f1987e167bd2381139f9066412aa017fe0cb014a
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-15 14:45:32 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-15 14:45:32 +0530
+
+    Added auth token to outgoing FRAC API call
+
+
+:100644 100644 286b7218beb11a7c08b04ff73b9236b0955f72e1 56fd4ba406b9c715ecb00c8b4e3f1762879c8061 M	apps/web-services/src/protectedApi_v8/competency.ts
+commit a15570e9ab55c8f48dddbc5072a18f2e61afd1a3
+tree ea8f8566a5bc43eb7bd4c4063332550461ca5290
+parent c78c28e1c5149f56bdb513cf263085744e04ae1e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 13:12:28 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 13:12:28 +0530
+
+    Task #52010: Fixed lint errors
+
+
+:100644 100644 2bc4eb0da81f73d3471c282b84d86195ebbebea5 0a0cdc5c2c5c416eef14dd68ac81b0d520c177ac M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-requests-resolve.service.ts
+:100644 100644 8493ff6ee720623f835f75d54a6480e7eaae3df2 f8c1feee6bb477b9b53ae140aa66aa1b5812843a M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/init-resolve.service.ts
+:100644 100644 af3269f982d952c43fc4a364f1be8ff3704cd072 c562e6e3b1de470bef79c35e0304af1432f3aa8e M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 77ba02d52c00b8d8dbb07110c389687b877df184 4f0a536726adc4d2fa5acea8dcbe320b0466d520 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+commit c78c28e1c5149f56bdb513cf263085744e04ae1e
+tree 8ca058f9e8c9d73cc9f560057f85183ebbc9b0bb
+parent 15ecc358f937880d2979b3d139f404ff39a68320
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 13:01:15 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 13:01:15 +0530
+
+    Task #52010: Added the netwok v2 json file configs
+
+
+:000000 100644 0000000000000000000000000000000000000000 513c35ff77f3781fdf4fbdb2f7207c565421767b A	apps/client-assets/assets/configurations/localhost_3000/feature/network-v2.json
+commit 15ecc358f937880d2979b3d139f404ff39a68320
+tree 1cdd80734e5911223158424bcbc0c4936dfaaa44
+parent 8bdf63ef069fbc004ac5956cc6522fd5a264bea4
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 13:00:21 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 13:00:21 +0530
+
+    Task #52010: added the routing for network v2
+
+
+:100644 100644 03b7b8da563542d03ee021ee8550acc7c5de89c3 2519b9cf9ef5ff0c9373ad7bb70c03e7e047d3e9 M	apps/fusion/project/ws/app/src/public-api.ts
+:100644 100644 6b157ec51e80bb8c8a87aad9ff3723db2ebe2da8 100edf54a291de8e0a33b0e1962e1259fc100ee6 M	apps/fusion/src/app/app-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 874229b1be84404c819be33ac72742016a7ccd3d A	apps/fusion/src/app/routes/route-network-v2.module.ts
+:100644 100644 a07cf5ad2d1c9cc03a64b7b135998b6d6050b5db 4c36a0b96c394821632ad88f58b22b09275f09ec M	apps/fusion/src/themes/_theme-mixins.scss
+commit 8bdf63ef069fbc004ac5956cc6522fd5a264bea4
+tree 21df59fc771d20e837bf9e5711ad26f0391eef92
+parent 722e8e9c7aa113733c6ef1f074254b0b61780502
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:57:11 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:57:11 +0530
+
+    Task #52010: Added the network v2 components and modules
+
+
+:000000 100644 0000000000000000000000000000000000000000 fd5c5dad715def97a93bf7fe690dc6bc92c26569 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 645eaab3eb517a37374b1c8766e749413fea9e48 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 2fbc2912752a1e8ae293c334f0097f1830f75aca A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 40733dd2078c0411b58126c3739722d40a208f1b A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 79c25b815c2a508ab5c18988d8250738aa10e33f A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 28ca80a2d15e02b75058cf3570c467c7fa0b9ef0 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 89ac5e0c49a539d98982e0620400ddca81b8bd26 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 45b9934bee26f3d4386cc356a5f4009d9a800d7c A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 4ccb8fce83b451ed8f0831c5abc19fbc3662e036 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.html
+:000000 100644 0000000000000000000000000000000000000000 df7c36ee705a4b4011ec43583fbb374b3c1d7c2a A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.scss
+:000000 100644 0000000000000000000000000000000000000000 88a9bee1f559b0f3b0e5253ad316f39052580579 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 bfb724abd2fbea1393ceac2c631c82b91f0ac4b3 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.ts
+:000000 100644 0000000000000000000000000000000000000000 f01f1c88e06d3f8c18e615315b2c705ac47a8b6f A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 28ca80a2d15e02b75058cf3570c467c7fa0b9ef0 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 551117643f0aee5e41909d1a68f5da6ec754fc57 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 a244036adca203d9deff84c9e3a0cfd1dbaba637 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 822512bb4ff6c74db8bc51a6763924cf72ed443d A	apps/fusion/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:000000 100644 0000000000000000000000000000000000000000 c1c054b71bcc0dd712be82be414cf1a1d1fb07a6 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 d3a6b099481b4d4931d505fd4fbe6d4878b3e17e A	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2.module.ts
+:000000 100644 0000000000000000000000000000000000000000 ca8c61ab97f53c6fa0b97e3e20a0f1938f95b2d2 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-requests-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 2bc4eb0da81f73d3471c282b84d86195ebbebea5 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-requests-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 7d26ab3b4fd22c92c80447883c6775cfe3bb8a49 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/init-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 8493ff6ee720623f835f75d54a6480e7eaae3df2 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/init-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 74086cc7149fe2839016200bd166a0dbe4055b91 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-connection-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 1a3f613ef2f1898e37a2a43932c52675f08f7f0b A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-connection-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 e724019a65be9b5b0a33decdd23729e31a1e4074 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/network-v2-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 6d575436b64d88da69d9bdf0ed637718d76b7fbb A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/network-v2-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 8d4c18434988d3f8720cdd1601e3220405f22547 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/recommended-resolve.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 a7ee73cfbfd17be055580e851cdad5b9bd94ffbd A	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/recommended-resolve.service.ts
+:000000 100644 0000000000000000000000000000000000000000 6c4fdca7a079de35ea6b1595ebb5aba724c95fa9 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:000000 100644 0000000000000000000000000000000000000000 c667dcabb306a23bcf4c10a081c86e8834a8dc7f A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.scss
+:000000 100644 0000000000000000000000000000000000000000 d473a79d35dfcb0a85069f694189db29d0acf868 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 af3269f982d952c43fc4a364f1be8ff3704cd072 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:000000 100644 0000000000000000000000000000000000000000 756b289233f9a6df67e419ba2ab9e4b9eca53ee7 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:000000 100644 0000000000000000000000000000000000000000 da80a9b276fee1a940e5d7c0ffadd55602821e93 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.scss
+:000000 100644 0000000000000000000000000000000000000000 590677ad887e92198a479335ef1830405fbdbd5c A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 77ba02d52c00b8d8dbb07110c389687b877df184 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:000000 100644 0000000000000000000000000000000000000000 2163eae0675472185d114a5e420d82cbbef99ed3 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.html
+:000000 100644 0000000000000000000000000000000000000000 bd2a10ae78afaa362c8f3ee6756c05c4539b9573 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.scss
+:000000 100644 0000000000000000000000000000000000000000 df6d1297eb91fcf53ad13df29a38f3481b2f2a0e A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 cf2f45be250b476b6ebb744c94b81efb465ffc6c A	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.ts
+:000000 100644 0000000000000000000000000000000000000000 145d6fea20f97d407ee7fdc1a5eebf921b034825 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 30a5b8f3b81d01257bb756d08be41782989719e0 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.ts
+commit ad4487bce966b63493b7de44f97b79fa3e251780
+tree 047467fb1b08db501b538f0cdf923bf40f0d27c9
+parent 7ae5fdab53301dbb2105a2f5845a0189c1b5478e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:49:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:49:56 +0530
+
+    Task #52010: Added random colors input for avatars
+
+
+:100644 100644 0d17dde164b19b509c06bfb2597ecf7c95eff8a5 6cf0b718a667e72c219eaab793c30d164e79430a M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+commit 0c2dd14400c01d159471b98581cfc894e2eeea37
+tree 971cc7ae7a50e532deb35da63fece4d1bd62ac0d
+parent 322b478601a3e201ac6ef742a55d3e32d861e3b3
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:37:37 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-15 12:37:37 +0530
+
+    Task #52010: Fixed the apis for network
+
+
+:100644 100644 11d23c5d2a7ac9f0afd0c2d165b47f3e24e7a312 630b2ae919af91e1144cb44f0180cc2ac171e6f2 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 5b76ffbada0e416fd7688e8ff5097f5eaa8af027
+tree fe35712c7bcb142c97d0f717eed9ffd3c0102b6c
+parent 7788662ac45139cc272d4c05cbb0cbc2fa0f4082
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-15 11:31:11 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-15 11:31:11 +0530
+
+    Fixed params order in Mandatory content progress check
+
+
+:100644 100644 0fae06f0f11004a01c6c9b6f99bd898a7286094e d6f9eb78c651fb68d7352bbafe1b7dae343782b0 M	apps/web-services/src/protectedApi_v8/user/mandatoryContent.ts
+commit aedd12fde16ae0662b4c15a4f251458288bdd07a
+tree db234ad3f938403abf876ecce7dfa28fa065e11a
+parent c499ac29b3d23ce9e85ac75ba15b48b28f01a3ec
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-15 09:49:45 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-15 09:49:45 +0530
+
+    minor UI fixes
+
+
+:100644 100644 9203e015c719f507a2317b64d738f72fc8a49fc8 7e39cb97b09189ffdbde97b8752fa93c72824819 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html

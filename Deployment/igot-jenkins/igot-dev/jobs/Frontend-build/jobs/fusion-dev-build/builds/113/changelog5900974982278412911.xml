@@ -1,0 +1,59 @@
+commit b246f0598f3a4009b1b5f56f945000ffb4bd9b31
+tree a7ee27fd46b79f695148927809199686e220df9c
+parent 322b478601a3e201ac6ef742a55d3e32d861e3b3
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-14 17:58:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-14 17:58:49 +0530
+
+    badges for other users
+
+
+:100644 100644 a3c8bd9db9ee2c4ee1632592a5a157cfc3bbe7ee 2fdc721afe1086d6344a70005a89c9c01b349271 M	apps/web-services/src/protectedApi_v8/user/badge.ts
+commit 322b478601a3e201ac6ef742a55d3e32d861e3b3
+tree 91ae9be1cb41e1db616d43a4c110b389c1706895
+parent 65b5f0ff8bf5f0886a22426b013ab9ea71dff149
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-14 17:10:21 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-14 17:10:21 +0530
+
+    Task #52010: Modified the userId extraction
+
+
+:100644 100644 5e64d038cdc79ec7639257e10c9b5759ebca8a10 11d23c5d2a7ac9f0afd0c2d165b47f3e24e7a312 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 646f8b2dca2ff5210373bb41e39c4074b7571a3b
+tree e9b02035492359708df4f9cdf3783594dc872dd1
+parent 48a4bdafa51f83eec02787dae96bdd05634d0315
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-14 15:42:52 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-14 15:42:52 +0530
+
+    Fixed mandatory content progress check for author
+
+
+:100644 100644 6ab66812a0a7f4206bfdf6022258f1e3c06d9ea7 0fae06f0f11004a01c6c9b6f99bd898a7286094e M	apps/web-services/src/protectedApi_v8/user/mandatoryContent.ts
+commit 7ae5fdab53301dbb2105a2f5845a0189c1b5478e
+tree 5e128b4d6414d35f5f92e0db1fa32b3ae2ecf9a5
+parent 48a4bdafa51f83eec02787dae96bdd05634d0315
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-14 14:13:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-14 14:13:23 +0530
+
+    discuss and profile uI fix
+
+
+:100644 100644 cfbe443beb9f130ff27d200188112b1a03018586 5f694de500ce79887b639e3aad675c3b6ec17312 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.scss
+:100644 100644 deb02de0f8f7ae51aaad2e953eba547259480cb0 f126eb938c36779a08ae2e19e7cd3bcc0497e571 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.scss
+:100644 100644 91b4c9fe832a41ce5eb93168f5bf202c89a823bd 012bcffbb2a795c7874c49c9768d1527228604cf M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.scss
+:100644 100644 f714724c09a47ce6d0394169a68626247adf442a 27c09bdec97c6bfb13b0dd5cea88e42778ad1002 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.scss
+:100644 100644 838801ee6692ec011f9a35e60ae1a0e2f9b94f86 89759c7048e140ca4d84a4d2ac23719da854d339 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.scss
+:100644 100644 1e3ecb40c3aac2695a3622f78d822b20e042987e aef229fed886ecbe140880e990c819213ea30890 M	apps/fusion/project/ws/app/src/lib/routes/discuss/dicuss.rounting.module.ts
+:100644 100644 c88e94faf2b384ffdeb31b98dcb08c69829645bc 49f1e2a3b64cbe5f98bb1beadd30a7459fcfd972 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 ad52e2f27235b2a4322ac915c6852caf2afd74e3 9be85849f326491b95c69463eddb17980c45c75a M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/profile-v2.rounting.module.ts
+:100644 100644 d5ff9471e6118537b9ea4ea111af8730acb65797 9c17ac5b69072bb38fe46b5338c8ee74f702fff8 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+commit 790483251d07ea3cf65275f5166f1d4a85f10645
+tree b7d4be2b7303308cd1da633da02f3616c5d807b6
+parent 5734baeb2e6bfbaa6d9c8eda91075279baa8cf4c
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-14 13:26:09 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-14 13:26:09 +0530
+
+    Added search competency API
+
+
+:100644 100644 c459badd492ed7f9bfc41419d86b099b3ebd59b7 286b7218beb11a7c08b04ff73b9236b0955f72e1 M	apps/web-services/src/protectedApi_v8/competency.ts
+:100644 100644 4d3370171f30894f9f8b16a946e3ac01a706714a 6ab66812a0a7f4206bfdf6022258f1e3c06d9ea7 M	apps/web-services/src/protectedApi_v8/user/mandatoryContent.ts

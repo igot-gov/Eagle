@@ -1,0 +1,10 @@
+commit d21bb6e11602000797a66a37caa69266c2b73d66
+tree 291f8a3d2273589da5dbc11f6efa78346b629c05
+parent 27ab307270189156ea434eb2c845e346114627d9
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 10:57:24 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 10:57:24 +0530
+
+    added sonar-project.properties file
+
+
+:100644 100644 cb2b0146f3f15ac508d835733f3fb562fd8a9319 10d5bade4a0d8a9bdb5a7d46ecea131e854bb9f5 M	apps/web-services/sonar-project.properties

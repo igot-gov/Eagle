@@ -1,0 +1,23 @@
+commit ca97160605e4fd18a3b67e7ca2f1a91dcce0690d
+tree 72af9d11934bdc5da2de00bab1eed3ac132290e3
+parent 45c8b482823cf45ea635f5ca8db35af7f30535c7
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-24 13:55:38 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-24 13:55:38 +0530
+
+    Minimal contend added source field: lint fix
+
+
+:100644 100644 52715a0e52a8d27f54a084d29d0824f6297b3098 6b3b18cdc472f1961653e70c60f7cf8179354164 M	apps/web-services/src/models/content.model.ts
+:100644 100644 beee08954a15ce65a10b463353f0905bc150b2e8 06c79b8e9855129dc67cfca482f52049a739d95d M	apps/web-services/src/protectedApi_v8/recommendation.ts
+:100644 100644 ab6592c05499ce6bb35d254a758c7fa754b5119a e21f011dc324673e207fdd03816bf88e6d501049 M	apps/web-services/src/protectedApi_v8/user/playlist.ts
+commit 45c8b482823cf45ea635f5ca8db35af7f30535c7
+tree 9325b6dcd0a32011014df4e06b0dc666b0c91702
+parent 5abedca179dd968b8e2f08c4b8c3c1eb613ce0dc
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-24 13:51:04 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-24 13:51:04 +0530
+
+    Minimal contend added source field
+
+
+:100644 100644 e50c77dc3b199895aecc551e4b69550d7ba35381 83423de41c71461b55ed79627617a61cc20de37e M	apps/web-services/src/protectedApi_v8/content.ts
+:100644 100644 97fc0802854bae52fd8ec2eb703c34bbf16f7632 ab6592c05499ce6bb35d254a758c7fa754b5119a M	apps/web-services/src/protectedApi_v8/user/playlist.ts

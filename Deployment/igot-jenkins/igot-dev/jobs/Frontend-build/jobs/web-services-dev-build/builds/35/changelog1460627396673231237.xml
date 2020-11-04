@@ -1,0 +1,10 @@
+commit e4f7450a5a7c5d44c1b05dcb6f633cb6c1edf26a
+tree 900192e4ac5dfd003f0c35a3c087368df229a9e8
+parent 1b463778cebfb24fad163de84fe45db245dd5419
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 12:27:45 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 12:27:45 +0530
+
+    Task #51455: Fix for handling empty cols in excel
+
+
+:100644 100644 68724ce325e43ce5144e953cf603b5475177659b f20781d8c1dcf9403d4f3732651adc6cfe04e494 M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts

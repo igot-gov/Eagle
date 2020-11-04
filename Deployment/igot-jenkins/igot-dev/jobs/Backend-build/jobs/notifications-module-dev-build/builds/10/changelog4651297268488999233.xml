@@ -1,0 +1,10 @@
+commit a6f3288185e493d0b423123c351e8d1a705583f6
+tree 615b99c50b17425bf751cb21bab5d5d431a8e8e9
+parent 789927f27fea0054f81476e2ad53ef50e25aa910
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 16:28:46 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 16:28:46 +0530
+
+    Changing the kafka properties kafka max poll records
+
+
+:100644 100644 82d144d483ea97eb7cc2f478fe08abf372d63ba0 4d7123a28bdf6c2fd766c5b7837636258dff4a2c M	apps/notifications-module/src/main/resources/application.properties

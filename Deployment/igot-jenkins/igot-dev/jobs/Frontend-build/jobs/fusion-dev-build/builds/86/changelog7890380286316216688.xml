@@ -1,0 +1,9 @@
+commit 3a916d12afb2362f7a78f55c70de7fd3bee0e155
+tree f9716809f1ab7030b5e171b001b73182dde3f11b
+parent c4e6ba920dbefea354d192d25713b85f9e99f3b7
+author Haritest <haridasksd@gmail.com> 2020-09-24 09:53:43 +0530
+committer GitHub <noreply@github.com> 2020-09-24 09:53:43 +0530
+
+    Update sonar-project.properties
+
+:100644 100644 cb2b0146f3f15ac508d835733f3fb562fd8a9319 cb1e9b5d0487a3c41ac46d24a5381350a25d98f4 M	apps/fusion/sonar-project.properties

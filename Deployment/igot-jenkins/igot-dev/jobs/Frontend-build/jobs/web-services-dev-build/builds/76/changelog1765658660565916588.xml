@@ -1,0 +1,12 @@
+commit 138605893e64cef419543ce2d8da7af162776e76
+tree 124c9a615053af16de4b6456a71215828eb7dd60
+parent b09634f4fe44b088648171b4be1405c951748621
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-08 13:17:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-08 13:17:38 +0530
+
+    Task #51919: pagination for proxy apis
+
+
+:100644 100644 2bc823fe5d8eda48902e9afe12af57a283f4b330 129183e286434dffdc1b8c392702045b10fe361f M	apps/web-services/src/protectedApi_v8/discussionHub/topics.ts
+:100644 100644 6ecce71f7af5f022ca36c1412abdeafe3402b1e6 87e3bcaec702a24a2a9718c8ee42960d3280527e M	apps/web-services/src/protectedApi_v8/user/activity.ts
+:100644 100644 003ec3f9be370cb86f65ef7c9fd34b4ee1c62a63 cdcf281cd38f4610f3f9c3a63daae7caa93c06ce M	apps/web-services/src/protectedApi_v8/user/user.ts

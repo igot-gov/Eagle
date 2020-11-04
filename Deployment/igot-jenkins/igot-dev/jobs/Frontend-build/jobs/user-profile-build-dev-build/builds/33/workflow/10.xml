@@ -1,0 +1,66 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.4">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.78">
+    <parentIds>
+      <string>9</string>
+    </parentIds>
+    <id>10</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.scm.GenericSCMStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.78">
+      <arguments>
+        <entry>
+          <string>scm</string>
+          <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable plugin="structs@1.20">
+            <arguments>
+              <entry>
+                <string>doGenerateSubmoduleConfigurations</string>
+                <boolean>false</boolean>
+              </entry>
+              <entry>
+                <string>extensions</string>
+                <list/>
+              </entry>
+              <entry>
+                <string>branches</string>
+                <list>
+                  <tree-map>
+                    <entry>
+                      <string>name</string>
+                      <string>${branch_name}</string>
+                    </entry>
+                  </tree-map>
+                </list>
+              </entry>
+              <entry>
+                <string>submoduleCfg</string>
+                <list/>
+              </entry>
+              <entry>
+                <string>userRemoteConfigs</string>
+                <list>
+                  <map>
+                    <entry>
+                      <string>url</string>
+                      <wf.a.ArgumentsAction_-NotStoredReason>MASKED_VALUE</wf.a.ArgumentsAction_-NotStoredReason>
+                    </entry>
+                    <entry>
+                      <string>credentialsId</string>
+                      <string>git-lab</string>
+                    </entry>
+                  </map>
+                </list>
+              </entry>
+            </arguments>
+          </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>false</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.38">
+      <startTime>1603546291411</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>

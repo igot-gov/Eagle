@@ -1,0 +1,306 @@
+commit 022de24916ac9aa58b6284095541db88b9d95cc9
+tree 7c6a9d412c5b208251c1953cc0995b127506ef4e
+parent 2dcd5a706f14afaaeb016c1023a2a6711205b64e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:19:46 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:19:46 +0530
+
+    Task #51400: Fixed lint errors
+
+
+:100644 100644 adde3c0ae067c66a1423164d9dc100046c2a696f 3fdff5559df92dfec055e5aefcc822cca0b57b7c M	apps/web-services/src/protectedApi_v8/content.ts
+:100644 100644 4149e2ef3c11e36a6bb3558211cda3ce196b0492 bc56ba9d20828471fc4bb4064a632b0865c8e3ce M	apps/web-services/src/protectedApi_v8/scrom.ts
+:100644 100644 788dbc6efc85d3366ec49e20aaf6f74271534f71 a1c5c688301467b47d8ebf773251206224c356d6 M	apps/web-services/src/utils/helpers.ts
+commit 2dcd5a706f14afaaeb016c1023a2a6711205b64e
+tree 2f6e2963ed6a770d5da0584396d44e3b7a185bfb
+parent 9416c05cf8c43b90b3b510ead53184d1c82dba6c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:15:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:15:48 +0530
+
+    Task #51400: bulk upload with roles Api changes
+
+
+:100644 100644 c639e73a7b0d782b968728780115e78585391f1c 68724ce325e43ce5144e953cf603b5475177659b M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+:100644 100644 0bd7340859c06b2e3673855c0ad396cb6f0010b0 fb10e3dd80bde6997c92238cd604b5d8bcbd9e52 M	apps/web-services/src/protectedApi_v8/user/roles.ts
+commit 9416c05cf8c43b90b3b510ead53184d1c82dba6c
+tree 0ae82f9e09f67e789cdb50552bb4336c4e781e78
+parent 4f99ce2c55aa9fda5cc8d558c9020d97989c3013
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:03:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:03:27 +0530
+
+    Task #514000: Fix for the table pagination
+
+
+:100644 100644 fe4ba7f628fdc99de3df7e618d5f668c9a4d32b1 6031c5567794f885b289b0905681fb4e5906b6f1 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.ts
+commit 4f99ce2c55aa9fda5cc8d558c9020d97989c3013
+tree 1dd503a304d9beebb2984af01704a8d8380f8ba7
+parent 251b17c4b873435670a36f9a5df3e435bc3f1308
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-01 00:03:17 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-01 00:03:17 +0530
+
+    Task #51329: Service added to update dynamin meta tags based on content details
+
+
+:100644 100644 14f00ae54e84c8d2a714d7af12e1673ed781fa30 c7bb1856462dd557796e590ad82f8c3eee240c3d M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 1906ac5860f5a3c5bc94ff53e6f8356d66bdf95c d3f7ed6fc3a8b09a33c55c3ac789a80abfaca616 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/app-toc-routing.module.ts
+:100644 100644 90f6276393dd2b6a36342fb40dba52392d640b02 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+:000000 100644 0000000000000000000000000000000000000000 71ca4ae67aa2e724e09869a3e57d15f60e556ddb A	apps/fusion/project/ws/app/src/lib/routes/app-toc/models/meta-tag.model.ts
+:000000 100644 0000000000000000000000000000000000000000 cc1b43ebb8ae676d4a59b9cd055bd00e09d9082a A	apps/fusion/project/ws/app/src/lib/routes/app-toc/services/title-tag.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 052f9b488a27f3a5e06ad2923db569eeba52b991 A	apps/fusion/project/ws/app/src/lib/routes/app-toc/services/title-tag.service.ts
+commit 251b17c4b873435670a36f9a5df3e435bc3f1308
+tree 6e34764fb76f06f0618bedcf85b192414b23d6aa
+parent 1ed13e16ba094d7584c55066385eec761946d620
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:55:07 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:55:07 +0530
+
+    Task #51399: Fixed the user profile issues and nationality dropdown fix
+
+
+:000000 100644 0000000000000000000000000000000000000000 6207c5c7a73fe491c8b75b7e28bf13655a0906f9 A	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/tab.directive.ts
+:100644 100644 5f42b6d1ef7f33b4c4e310b53407af3b1e022a5e c558ac5995739f145b54479c97f7ba5bf58f1a22 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 98a1dcdcf922c2064346c5c21aa09eb660e29aaa 5b5fb6bff6d5a1d907e66a1f94d2b035c165befe M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 9dc72752db1ccd56a4f9a04da45e0d1d4cb88a16 30d3384b8e027d2a77579bb35a69fa7c3eeffaf3 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/user-profile.module.ts
+commit 1ed13e16ba094d7584c55066385eec761946d620
+tree 8c0b5ce02024640be4c632a497ba0a5a0a87f015
+parent c81254db1bd8b69be3f93ca9aab896db5038e040
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:48:09 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:48:09 +0530
+
+    Task #51363: Refresh button to fetch latest status
+
+
+:100644 100644 d67f9021878836366c4a1049d91c9aaf6444bc3d 894f3673991ad4b6480af5f7fe0b7c88ba0bc895 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.html
+:100644 100644 f16a36404f541834e5d9fb95fd08cf15361ded56 fe4ba7f628fdc99de3df7e618d5f668c9a4d32b1 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.ts
+:100644 100644 03581ce8a906de18b39280b0e5ffb15a53a83f2b cfbd23fc3933f56dc81fec875d1dbb450ebb3bfb M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/components/edit-department-dialog/edit-department-dialog.component.ts
+commit c81254db1bd8b69be3f93ca9aab896db5038e040
+tree 61f745a7ae454806c3c3ddce7411b574144e00d5
+parent 68b462303be870ead5b831f59101ae8861bf3851
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-31 10:05:19 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-31 10:05:19 +0530
+
+    Quiz Message Update
+
+
+:100644 100644 71eb76d14b872061b7856ca2a8b80a3e29b1d62d 0dca02e47d4367662c3df9689f0ad3ca1496e64c M	apps/fusion/project/ws/author/src/lib/modules/shared/components/notification/notification.component.html
+commit 68b462303be870ead5b831f59101ae8861bf3851
+tree 05de1ad3784dc8cb6c12f64fe051f6782115f65c
+parent 091b5e563820ef56b25b7f73f7420118214178bf
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:50 +0530
+
+    lint fix
+
+
+:100644 100644 ce3b3ff25533792a6b5080f716a9aa3ff388fac7 ef2e757220523283a237164e90fae4214e0a3751 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.ts
+commit 091b5e563820ef56b25b7f73f7420118214178bf
+tree f2aef2e09aa20cfa8278b4632776422227acf1f1
+parent 636ae7aef0db23b974022079ebbdacb9df57cfe5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:13:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:50 +0530
+
+    tree selected Color
+
+
+:100644 100644 6e6098713df28b8f8387f0553c6bc49f07cd0475 e66127441733257c25a0a6e42a449d1fcad51fd9 M	apps/fusion/src/themes/_theme-mixins.scss
+commit 636ae7aef0db23b974022079ebbdacb9df57cfe5
+tree 89cb3f696ce406b3f03eae03651b3b120dbe4ee2
+parent 9c90242afd4e6a5270b16ef4d0fe3672c39a9671
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:11:48 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:50 +0530
+
+    51328,51130,51318,51338
+
+
+:100644 100644 e7eb5b38c8e1e7d7bafbb1797244c0d638d489eb 8e005c0bbc4b81fe6b46513daf8d4ea3395bd017 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.html
+:100644 100644 86e002cd9091538cd7b43851c8ebb43e697a5bcf bbe62c392aee417ee7dab1431cfe73839781c6c9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.scss
+:100644 100644 62a617aaa6fb94c94f2a8b8a0db93d850e1ca962 d103407c541538a149ced5256a907fed6c42d428 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.html
+:100644 100644 48041cea4ac62d40500456cd65bd947343995a7a 063e9ff4257b6fffa53526a78303af4d46658a65 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.scss
+:100644 100644 a92536112e1e581437b6c1f0c3d0a8564d657ac3 ce3b3ff25533792a6b5080f716a9aa3ff388fac7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.ts
+:100644 100644 e1c4fa4391d6ac5d39c9db44460396459a7cadd3 81582c5b74a51706920c5b1fb625d2169cfaaade M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 7945d5a64c335bbe59b612f8a9cb60521ac6b490 2ec4646ca33bbe294193c7ce7886351dbc2d7012 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 9c90242afd4e6a5270b16ef4d0fe3672c39a9671
+tree e6a645230b8164997d4014d0a3fc9d9360f2c3f8
+parent bb5510622369a9930a94ea92ebb6289344f86ea5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 19:51:20 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 19:51:20 +0530
+
+    Task #51329: Added meta tags update in toc
+
+
+:100644 100644 8c6219c8bb2c0c8974741ac09905ad7d6d04d762 14f00ae54e84c8d2a714d7af12e1673ed781fa30 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 90f6276393dd2b6a36342fb40dba52392d640b02 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+commit bb5510622369a9930a94ea92ebb6289344f86ea5
+tree fe21d89c503f18aacf24d4917bb6a79f18d5b473
+parent 579dbb98645cb8c76ba77ce65e88c9d4cd10e7fb
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 16:52:43 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 16:52:43 +0530
+
+    Task #51329: Dynamically added meta tags for testing in dev
+
+
+:100644 100644 4333d4a4d10148428793217c4f1e8c86cfeae650 8c6219c8bb2c0c8974741ac09905ad7d6d04d762 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 5f0ab11cf2d246b7809a274960f282389f784a8e 12eb1c6968c36936066fd6b1423a8212f3811e68 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 76d422c236af7162bbc6d22059e49c956b00e79c 7d43223e6f9431777b7b27ca65dc473d85ef4052 M	apps/fusion/src/index.html
+commit 579dbb98645cb8c76ba77ce65e88c9d4cd10e7fb
+tree fd335cc6e06395564517414c5fe510d0a8d904dd
+parent 3ce4ed5b1ef809c3124bfee4730e6ec572be7ec9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 15:37:59 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 15:37:59 +0530
+
+    Task #51329: Added meta image to test in dev
+
+
+:100644 100644 779532f9386f1e7f5e72d490491702791ca1c189 76d422c236af7162bbc6d22059e49c956b00e79c M	apps/fusion/src/index.html
+commit 107a055771f4f58dca1b6ecfe41d3686720802c0
+tree e151944a18d700e50ed9feff5f84a4418cc5a1f6
+parent 629897121590674c4df41fde3402c4fbcd7a33e5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 12:15:05 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 12:15:05 +0530
+
+    task #51329: Added meta tags to test in dev
+
+
+:100644 100644 41404059f0cfee1b75279b7552bd8235544e4918 5f0ab11cf2d246b7809a274960f282389f784a8e M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 8022880fa6ba0ce5f1e9fab6df0a347b403511fb 779532f9386f1e7f5e72d490491702791ca1c189 M	apps/fusion/src/index.html
+commit d0147338e686f3937f1f8c9bc3e51c5f3a9b01f2
+tree 69a7288fac4e801fc07bf3cd6da9ac1ec05d01b4
+parent ba97016230af635f4bf96a77aa7f17315769380c
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 20:57:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 20:57:29 +0530
+
+    message event fix
+
+
+:100644 100644 19e53e6cc0a1b3035ee50a7f0ff50bb408cdfe49 7945d5a64c335bbe59b612f8a9cb60521ac6b490 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit ba97016230af635f4bf96a77aa7f17315769380c
+tree 5c01002fca571571d34fbadfcd1108f5670793ab
+parent e68a665a310930c922a4aef1c6ceba6f0eb1fe22
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:56:28 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:56:28 +0530
+
+    lint fix
+
+
+:100644 100644 486f04930b166f2a5197e9ee6ad55408335feb13 19e53e6cc0a1b3035ee50a7f0ff50bb408cdfe49 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit e68a665a310930c922a4aef1c6ceba6f0eb1fe22
+tree bde8d2a7f2c6ba1bbd47ba5046ff130253e96a66
+parent b5809d7dbe4e354566b4c5d65ed535223e0b3a1b
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:19:19 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:19:19 +0530
+
+    commented Extra logs
+
+
+:100644 100644 0f22736c2db62e39720b94c2174049432ff3c89f 2adb857e964826fa384f0e6969bb0d623e1b0a11 M	apps/content-service/File_server/S3/analytics-frame.html
+commit b5809d7dbe4e354566b4c5d65ed535223e0b3a1b
+tree 0509b5b4769014b8b8ad67f057358cc569d529cb
+parent 629897121590674c4df41fde3402c4fbcd7a33e5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:17:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:17:21 +0530
+
+    scrom event to telemetry
+
+
+:100644 100644 f44e292661f6a6856f373027584c5bdc71b36c5b 140b008d2253414345fcea11b4d09798b4ec62af M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:100644 100644 c8ea2fe4bb1e3a50617bb5efc8f1bd8801ce4c66 486f04930b166f2a5197e9ee6ad55408335feb13 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 629897121590674c4df41fde3402c4fbcd7a33e5
+tree b5225d5eb40589c61163d0a8a3739bcfc24d6f72
+parent 0096960f57ae19ccf88f73ee4c487a77ce73bdaa
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 18:26:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 18:26:38 +0530
+
+    Task #51329: Uncommented old social media sharing code
+
+
+:100644 100644 c7d112df733dc45583f0fa579f35fa9bfb16f094 937aacefb59aeaf6c5d87de9fc4697317e8a47ca M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.html
+commit 0096960f57ae19ccf88f73ee4c487a77ce73bdaa
+tree 9425edb909bd3a93000d22b8bad351ece97afce8
+parent 5fd96acaf3d08cad2edfa8489bdb44fcfe6980e6
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 17:31:37 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 17:31:37 +0530
+
+    analytics-frame.html logs
+
+
+:100644 100644 2fc6af53d5870ce9d8efa997e7594f678635c31a 4233afaa46330315690b4c866d6b09fa2228aca5 M	apps/content-service/File_server/S3/util.js
+commit 5fd96acaf3d08cad2edfa8489bdb44fcfe6980e6
+tree 0cdd3f686d467b8323cd2f028bd5a5187a91ac66
+parent a251d5e40e4b324978ea5be872a66f790ab9b3cb
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 17:22:48 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 17:22:48 +0530
+
+    analytics-frame.html logs
+
+
+:100644 100644 687f30379aab11b35f972a52c48bccd3676c5b18 2fc6af53d5870ce9d8efa997e7594f678635c31a M	apps/content-service/File_server/S3/util.js
+commit a251d5e40e4b324978ea5be872a66f790ab9b3cb
+tree dcfe2e3e0879a210a983124189c701ead7cc100b
+parent ced5a8886053db0cbdee3a273b99548f7f6d50b5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 17:14:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 17:14:31 +0530
+
+    analytics-frame.html logs
+
+
+:000000 100644 0000000000000000000000000000000000000000 0f22736c2db62e39720b94c2174049432ff3c89f A	apps/content-service/File_server/S3/analytics-frame.html
+:100644 100644 c06595c6eb311ea1e72a76b5ff5013f9074477f5 254264cdac70a496e01f48175399e91424aaa6ee M	apps/content-service/File_server/S3/helper.js
+:100644 100644 c69f9f43de5240065c43c5c151c4daf6ffcac6fe 687f30379aab11b35f972a52c48bccd3676c5b18 M	apps/content-service/File_server/S3/util.js
+commit ced5a8886053db0cbdee3a273b99548f7f6d50b5
+tree 04e12057f71e5045f6a7d4c8de143dc01ded73a9
+parent 88a4cb5d007e304ab1ab6b81807a444391414904
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 14:10:40 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 14:10:40 +0530
+
+    UI Issues #51339 #51338 #51350 # 51137
+
+
+:100644 100644 b2e05b39bdc019475c11357f46a4825630db900b 367820eee21f5ab81f29200154b5138b878619b8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+commit 88a4cb5d007e304ab1ab6b81807a444391414904
+tree 281e311293cda958245de358b1062b22489663d5
+parent c54dfbd6945a1104b0ebea492d4a86866529a2b4
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:26:56 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:28:19 +0530
+
+    log added
+
+
+:100644 100644 2a588daf5f2147b85a99ec9a2704da9ece01087c c06595c6eb311ea1e72a76b5ff5013f9074477f5 M	apps/content-service/File_server/S3/helper.js
+:100644 100644 087c5014b6cd458d6288b2e7e2a71b1804c33c0e e7a32b3eda47c1f9a92a2a5110f58e423d831b0a M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/knowledge-artifact-details/knowledge-artifact-details.component.ts
+:100644 100644 fce8882be241e4ecf422eb96e107d3552e8bc6dc f37f35154e70d490b7b8360ee2104caa81378acb M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-notification/playlist-notification.component.html
+:100644 100644 2ed023c234c9e1c3bf9117c8c14fa783ba088ca8 3ee153a998f496d5dd7c8c13750475d664fb8807 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-collection-matmenu/auth-collection-matmenu.component.html
+:100644 100644 907b4422bbc42cd8f3f1012e8019a4ef113834f9 a44aef59be91f6a34ce1a52611a6631ba4f93db0 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-collection-matmenu/auth-collection-matmenu.component.scss
+:100644 100644 367820eee21f5ab81f29200154b5138b878619b8 b2e05b39bdc019475c11357f46a4825630db900b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 baa1653f317bf902cbe0f86b38bbd8de65db0211 c8ea2fe4bb1e3a50617bb5efc8f1bd8801ce4c66 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+:100644 100644 276d4c33e1ba73f0b47a68a0df612ecaae440b46 adde3c0ae067c66a1423164d9dc100046c2a696f M	apps/web-services/src/protectedApi_v8/content.ts
+commit c54dfbd6945a1104b0ebea492d4a86866529a2b4
+tree 0eafac1a03f572759b71ca449768205a40036226
+parent 88f02de88fd83752316fb595b015d9ce8a6a46e5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:20:58 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 12:28:19 +0530
+
+    log added
+
+
+:100644 100644 92de046db6b280ed2169a1dace94c06605c585ad 276d4c33e1ba73f0b47a68a0df612ecaae440b46 M	apps/web-services/src/protectedApi_v8/content.ts
+commit 88f02de88fd83752316fb595b015d9ce8a6a46e5
+tree b07eee51b3f637420424d14f5941c22e69484176
+parent 456c92f0a76ee7a1be861b64fe05798302972a02
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 12:05:01 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 12:05:01 +0530
+
+    Task #51354: Fixed the height issue if no progress
+
+
+:100644 100644 38e7722d3ad935e1692f17ea9170bc99630b0430 decb14e90018e7246acc274eb27fe6029fd85b48 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+commit 456c92f0a76ee7a1be861b64fe05798302972a02
+tree 4e1169b436bf1c04e016b543a7ad16fa2fa50e07
+parent 789d7d9139e7bd4ae81f0f623109c15da5d1b249
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 11:52:08 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 11:52:08 +0530
+
+    Task #51354: Fixed the progress bar not displaying in toc page
+
+
+:100644 100644 cca4168298a295bfa70e873cd6ee4db44d7a2f96 20f428ad36c074ad91545dc89b5a1d3d36add751 M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.ts
+:100644 100644 1bfa20cfaae278d2dfefd12be82de6dace3f64cb 952044c72203482553523a01fe28220260734554 M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.html
+:100644 100644 c4df7406d1c937ee21ea12a071091779695b6c72 99101374707bf09f4737ef31b2c25df5887d900f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 227f595e7371985f67f247c74a25f174a7e38081 38e7722d3ad935e1692f17ea9170bc99630b0430 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html

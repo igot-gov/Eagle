@@ -1,0 +1,12 @@
+commit 28dd91af15cd4519952810ed27b5889dc585a6f4
+tree b515df655d35eac92f9b0b2cfe443bb8aaf125f6
+parent 4fac4dc9e2ac13c1a9026887cd1123b130e4ae52
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-23 22:53:35 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-23 22:53:35 +0530
+
+    lint fix
+
+
+:100644 100644 52f3c9ce0846a175a8d8de631650294a31e6cf4f 9b238d4518ae2f6c121538c891a9333b2ae1ad3f M	apps/fusion/package.json
+:100644 100644 59aa96825d80ec8efc7ac1d66567f4e8ea0623aa b8345893d1a834f2add2552656559a329423eb2b M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 3973b162e940b9af841a7129ddd244cea416a3cf ce85e80e8229a4234e382a17692cd07ebc19255c M	apps/fusion/yarn.lock

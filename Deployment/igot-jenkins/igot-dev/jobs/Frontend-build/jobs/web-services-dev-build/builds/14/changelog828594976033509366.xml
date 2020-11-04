@@ -1,0 +1,76 @@
+commit e999bf61ba17d4a4c5ff4cb80d761b589589a110
+tree e43861300d2bbb27346677fdf459f11c04453326
+parent efbfce252658d99aaed5a25375751b6d66c793bd
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-19 11:45:37 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-19 11:45:37 +0530
+
+    Task #51171: Added some logs to check progress api
+
+
+:100644 100644 0d215ca0eae859ced3c46087d5c86abfda91f708 086a251931bb791e3e6a95afe25365f5e7683082 M	apps/web-services/src/protectedApi_v8/user/progress.ts
+commit efbfce252658d99aaed5a25375751b6d66c793bd
+tree 9e162e396ce542a1eda4581b0bbe0283351b83ee
+parent 98afa8203d52c6a1c5606e6417a83474c467a7f9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:52:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:52:48 +0530
+
+    Task #51173: Fixed lint errors
+
+
+:100644 100644 2be4ee501c6286c3b922691287a9bb6631ca9af8 f6c8ca36f11afb53045e82ad3312af1a74cad759 M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user.component.ts
+commit 98afa8203d52c6a1c5606e6417a83474c467a7f9
+tree e7083c1c928ddb4e8a4178e7a48e79e81c02e312
+parent b8aef6988fcd36feb5b99e31889ee5a2a6c734c6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:47:47 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:47:47 +0530
+
+    Task #51172: new design implemented for cohorts
+
+
+:100644 100644 e2e81849d65121ac2a5dd1506c2dca39dcbb2d65 1e5dedbe9bae52fc0cbaf9d5f5fc31c972a92544 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-cohorts/app-toc-cohorts.component.html
+:100644 100644 44728803160cd51fd391f0e08fa6231adc2adf64 a94c29eabdac072dc908675a4dddd58f0c168d2f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-cohorts/app-toc-cohorts.component.scss
+:100644 100644 b009d2c1b43bb8f91760f75c1dd2a3161e51c67b 306309864e2b1a549aae934e24b98b9e63c474ff M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-cohorts/app-toc-cohorts.component.ts
+:100644 100644 0fd8d51d16dab6b0d194664016f10b0ad996ad20 53e19ea3e592f039c52f71c49d0a45c170a61f0d M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 e4d8708d3b6538bb825602fdd755e1ae450862d1 bd596b11eea81d73556348169102e60b12e1796f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.scss
+:100644 100644 77e4fe5aefcf61727de5f877dc90c33b1de7a604 d65644e8a8acff314c2ee5e12c2b8fffe44dfe5f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 867bbec69a8ecd04a175789c329d0fb2503f072c bcea94b7f63f0495ed67b1eec82bd1da7c91eef6 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.scss
+:100644 100644 98c2b09d4ed3e14a0b63e08dc16dbe74ab1fe380 b06316bc105ed93b53a36476e4b12d4715795538 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+commit b8aef6988fcd36feb5b99e31889ee5a2a6c734c6
+tree e598d7ff0e5e5b92e83329d1beb7d111563ef37d
+parent ac7099ae8ef0a2476ea4bcff1555076d0b0dda89
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:44:36 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:44:36 +0530
+
+    task #51171: new design fixes wrt to design
+
+
+:100644 100644 1b64066a07bfbdda5666430ff7de267a27070840 7d3980c9314b4da6dd4a8c6036571164fbafdd0b M	apps/fusion/library/ws-widget/collection/src/lib/_common/display-content-type/display-content-type.component.scss
+:100644 100644 f78c5ccc0b46b16fd64de17d24bc6e935378dc31 d0c47b837c7e544aaa8684a449285e083ca7053f M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.html
+:100644 100644 109914a51dea60a38984cd598fa773b7a1039f0d 16462ec3ab0ce3f40d6e90c9b7432bd32215be71 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.scss
+:100644 100644 70544f459ce4989dbab32bcb27a611c932a1453a 6e50fbc1c3afdede63258f0c88d5d446579e3f7d M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.html
+:100644 100644 f0b57d8a848aa54974350c5c6657fff5286d0230 da9c6fea8c83c279a020c444791d0d0c7ef67961 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 cab4066121a2d158fe7e0b57711b6c8f279c2377 ddb2c3ea6d23f02af468e19b5b05f185ae3a5cc9 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.scss
+commit ac7099ae8ef0a2476ea4bcff1555076d0b0dda89
+tree a245a2f39a422a3734001d64e406cc9c8135b819
+parent fb7f32eee83934154b5114b1e98c9702cdc5fcea
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:40:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:40:56 +0530
+
+    Task #51173: New design implemented
+
+
+:100644 100644 1bb9c5822c673cfc4ab4c366ee95c23d903077bb ac9e4fd336532f80ddf7999c17389701e45c7e3d M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.html
+:100644 100644 7a4bf0b3b4cc3b3dda9ade25a87a19cbf0da638e 0dbe8b77b75f536c75f27610dd904d0849415bc0 M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.scss
+:100644 100644 06351b124fc7393b10d4fb2c56386f9403621444 167f141857b0eaf9b90a131083e896be94b07df1 M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.ts
+:100644 100644 1e1e6e34465f5eb4da51063e19548d223591403e 2be4ee501c6286c3b922691287a9bb6631ca9af8 M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user.component.ts
+:000000 100644 0000000000000000000000000000000000000000 3973b162e940b9af841a7129ddd244cea416a3cf A	apps/fusion/yarn.lock
+commit 0c13c302ffec87a3dd4f7736501754f926b16418
+tree 4f5bcfafd30bed4d83042d9bc76fe1c104d862b4
+parent 2b11914f7d3dc006f85b6dabaf43cf9ec28d3cf3
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:35:54 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-18 23:35:54 +0530
+
+    Task #51172: Added new styles
+
+
+:100644 100644 c21f3d862bb47ddcfe8cea861a63c892ca8b5e0e 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss

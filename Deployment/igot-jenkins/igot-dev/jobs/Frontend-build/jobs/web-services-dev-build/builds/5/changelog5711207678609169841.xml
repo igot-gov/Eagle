@@ -1,0 +1,10 @@
+commit 5abedca179dd968b8e2f08c4b8c3c1eb613ce0dc
+tree d28cea6b4a83d2b1394719c3d2be3d75b63c2512
+parent 915d88669ddac40cb41430f3cf66ce52dae764a9
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-24 13:28:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-24 13:28:06 +0530
+
+    source logo fix: lint
+
+
+:100644 100644 26302714f3c1edb0e2e495e8fdee824d835c407d beee08954a15ce65a10b463353f0905bc150b2e8 M	apps/web-services/src/protectedApi_v8/recommendation.ts

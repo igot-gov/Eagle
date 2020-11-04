@@ -1,0 +1,11 @@
+commit 7851f6c320e80ac9a40a72e729837d3977a1c97c
+tree c6b615a099fe85163b4df32df19528e68825daff
+parent c086afd619c7c29a8f08281e77c97e0857ca7dd7
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-30 08:57:02 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-30 08:57:02 +0530
+
+    Defect #52324 Fix for multiple org connects
+
+
+:100644 100644 65bf5c7ed8ec3601b44ed1adb499c9b7314edf93 42bd556873e34f18a564491f69a7cadd31065d78 M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+:100644 100644 7057724d358222495d64b7210d7c05cf0bbf293f 86a549e4a5f1c4ae97b5381a4df148f10758ed85 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

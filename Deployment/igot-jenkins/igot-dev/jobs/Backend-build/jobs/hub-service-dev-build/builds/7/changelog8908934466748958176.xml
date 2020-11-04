@@ -1,0 +1,10 @@
+commit 8fb8556b1e32be278edc2568dbc38b016744fb1a
+tree 908a93488dd8c9caa9866ceb928b9b16297cc573
+parent 8950bd5cde4ade472856c726fa9500ca0854ccd6
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 10:51:42 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 10:52:26 +0530
+
+    Task #51689 add logs to notifications
+
+
+:100644 100644 24320c78555e946ddb1276021bde39f7e169eca7 93139192d40cbb3a0e54ce9e478adc078fc168de M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java

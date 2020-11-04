@@ -1,0 +1,11 @@
+commit 87a4433aad5b59768f4e31078919962daa02137a
+tree 8b7dd8b788a140b836137a586f9e7683505daf12
+parent e3cf4754af08b6354d23c5bc77a218c7cea4d8df
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 14:51:19 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 14:51:19 +0530
+
+    Defect #52164 getting multiple notification for same event
+
+
+:100644 100644 762536ead7541a86fb0c7bc575a85cbd8fd520ce 1adc6aa733cdbca10fe873bdc2dc2d8fbc2fd9b3 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/consumerImpl/MasterNotificationConsumerImpl.java
+:100644 100644 da6fb1e2ef875f887b25d70252f5858906ee062e 2242825d4dab6acbded0f0f6753c408ea35c266b M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/ProducerServiceImpl.java

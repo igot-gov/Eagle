@@ -1,0 +1,10 @@
+commit 39533f1e48c095da6a92d35174870b9714aa868e
+tree 024bb522332021f94c20666448caf6205af81c27
+parent 3036582ea0b6d222adfd87819d2e3df63a6aebc6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-17 18:59:46 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-17 18:59:46 +0530
+
+    Task #51604: Fixed the endpoint, added department in response
+
+
+:100644 100644 95306419a692cee3d9f327b2cdb9e91044b5e8c5 a206fc10c6cff85c4e65d22dd15fa587c3ad9ba0 M	apps/web-services/src/protectedApi_v8/user/details.ts

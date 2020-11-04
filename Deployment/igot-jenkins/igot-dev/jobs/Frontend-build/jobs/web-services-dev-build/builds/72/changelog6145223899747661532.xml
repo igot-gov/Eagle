@@ -1,0 +1,49 @@
+commit 2d70cb723728114b8114d8568c77cf71314ffadf
+tree 6334cb703be5c19520659ed46e9ece19e2cddf5d
+parent 446138ee42a9b3b6f33e2a29c664a9b5237737d4
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-24 18:33:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-24 18:35:40 +0530
+
+    my discussion with tag data=> web proxy
+
+
+:100644 100644 540dc15afed6723fdd2e9637dfbf53c48ba5d733 7d54704348d5f6e0544128494171566bc9e6fe7f M	apps/web-services/src/protectedApi_v8/discussionHub/tags.ts
+commit 1578f552f249ed29e942cc474ed7ff96d76efd10
+tree fa13ead93bb6694fd3bf81fbaa75b73d1c47d371
+parent 28dd91af15cd4519952810ed27b5889dc585a6f4
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-24 18:35:02 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-24 18:35:02 +0530
+
+    my discussions updated
+
+
+:100644 100644 ef6b2c7a478332697877acc094c4cd7649431d8e 0689c8caa4c678d1b3d61f3b09617b2d5997fc35 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 c82d5724f2a7c01feb657ea40e2ef579a32cb499 A	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 0a7e14570576003a55842ab4130848ee5f7dfde1 A	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 0ccd395aec642c654107cd9b9f350eb4940f5656 A	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.ts
+:100644 100644 3cbdc247b5896d5646f6a20db862572e47b326da e732c00fb98cc6ed2f34b0f767b6b82790f6484f M	apps/fusion/project/ws/app/src/lib/routes/discuss/dicuss.rounting.module.ts
+:100644 100644 1fa02cdb7d7fe7f9cd755620dac4ca25fd8aecd7 d90d89e31c92f554938a8802566fb5eb996f400e M	apps/fusion/project/ws/app/src/lib/routes/discuss/discuss.module.ts
+:100644 100644 aa4b501c05831c85eaab0798fe86b7eac046a307 e99cec1fa2c6647503e8f82e39f4d4c6082cdd9d M	apps/fusion/project/ws/app/src/lib/routes/discuss/models/discuss.model.ts
+:000000 100644 0000000000000000000000000000000000000000 0a143f176ead6dfa0df39d1515cc84017e2441bc A	apps/fusion/project/ws/app/src/lib/routes/discuss/resolvers/discuss-profile-resolve.ts
+:100644 100644 5459de428e045225d6827fd4a5a4b14537214dc5 226f5c0be430040ed5fd27de022cede7f3440a33 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 241209d4d556f12b1425a2226831562bb711c199 da0ef19f216e54b138731de529bb024e450fbe43 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.scss
+:100644 100644 05cc1a107fc5af548252f42f94200372e25f0886 f90673931bf81cb3cbe6a9c4b2ae5c3c3e2a8074 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.ts
+:100644 100644 b434990d83a6182a58a758f27cef01765275f53e cd0e1dd4964ddb9cabae144a41a56bfd885ad389 M	apps/fusion/project/ws/app/src/lib/routes/discuss/services/discuss.service.ts
+commit 446138ee42a9b3b6f33e2a29c664a9b5237737d4
+tree bee2f368eada346d9f242dfba9430e2fafa12256
+parent aa40bd92caa03486864ed301faba4ef6bac73d78
+author Haritest <haridasksd@gmail.com> 2020-09-24 16:06:01 +0530
+committer GitHub <noreply@github.com> 2020-09-24 16:06:01 +0530
+
+    Update sonar-project.properties
+
+:100644 100644 e6537429ae3e8254c770fe273410026eedb75b88 d5ab9ea62992b9dc87cd8ea9e5835c7fd8ca3da2 M	apps/content-service/File_server/sonar-project.properties
+commit aa40bd92caa03486864ed301faba4ef6bac73d78
+tree 26db8014325757a9cec21da7244ddc6a7ff47f52
+parent 9f62e385b423777810e0ac9db3ecc88ab2e958d4
+author Haritest <haridasksd@gmail.com> 2020-09-24 15:59:25 +0530
+committer GitHub <noreply@github.com> 2020-09-24 15:59:25 +0530
+
+    Update sonar-project.properties
+
+:100644 100644 2ff5d9497914eda468954f867413a943bccd5e3d e6537429ae3e8254c770fe273410026eedb75b88 M	apps/content-service/File_server/sonar-project.properties

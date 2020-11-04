@@ -1,0 +1,90 @@
+commit 4a88c81628a7397b71bcb795e65dea7e22f81ecb
+tree 45fff79c37e9b84709b79517d1de5e15ae642332
+parent 530664e53f9f447581cd5bc364a20748aa5edc53
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 22:08:57 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 22:08:57 +0530
+
+    Task #52110: Fixed the lint error
+
+
+:100644 100644 beb31704f70c603e0ad4d4c0c4f6442d4770f761 f1e4114cdf2df805e6270e8ba43da5be62f272e4 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 0f35b029b626c9ba114e1387a71484017864f598 206573f243be186019a714bfe02c47ce084b4053 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.ts
+:100644 100644 aa01effab90be42d1947d509d0c5ea7513d46cee 93685a570602f98c8eb0547a3e91bf060c185155 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 31215d899d2135d2c826be3836e565e563a44c93
+tree 03fce20e0b685a8fda6896084ac2b385762c7595
+parent f94c840941681546642277daaac1239850d92683
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 21:18:24 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 21:18:24 +0530
+
+    Task #52110: integrated new api to get the rootorg and send that as department name
+
+
+:100644 100644 bdc63586b9984b98faecb17c17a51247e6cd1f59 a693cd9a42ac419044a5010205b7becdd7cac907 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 f63d6ccdba753eeb08a51fca16e8af629bb587e1 b3fa9f290199935f50258afa03ba4e3e8c901ad9 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html
+:100644 100644 40bd5959bf2b263793911b12478da76594af1d3c 0f35b029b626c9ba114e1387a71484017864f598 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.ts
+commit b7cce68538aee1a4a501989068251409b87d8ffe
+tree 555bdf93b5148c6d6dff4a1dccc9725d7f35d9c3
+parent 30f125b28ed094583a31feebfa601640898a7e6e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 21:14:59 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 21:14:59 +0530
+
+    Task #52110: Added limit 5 to api used in homepage ui
+
+
+:100644 100644 b6bf5ae130093ddbf60c89d59b4a10509ddbf149 c2b98943f76fa0d5a3554efd2e41bc35eb51b642 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 30f125b28ed094583a31feebfa601640898a7e6e
+tree 35e136dcd216dacc4fdc63b0a21d928787b65f16
+parent 9ce2675af6599134ac13e39dbe3117c07da31459
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:35:19 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:35:19 +0530
+
+    Task #52110: Changed the http method
+
+
+:100644 100644 3b79b79670f0c4da40e7ae56070b351f1a946a1d b6bf5ae130093ddbf60c89d59b4a10509ddbf149 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 9ce2675af6599134ac13e39dbe3117c07da31459
+tree 2aacaf1c09dfa3fd170fdd87bd8dfe66f4365be6
+parent a32f262b54f82107796ff2592efaa0f403dc1fdf
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:25:18 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:25:18 +0530
+
+    Task #52110: Changed the http method to get
+
+
+:100644 100644 b6bf5ae130093ddbf60c89d59b4a10509ddbf149 3b79b79670f0c4da40e7ae56070b351f1a946a1d M	apps/web-services/src/protectedApi_v8/network.ts
+commit 38d846160622af44a27de684f68efe1797abf6ac
+tree 7d87a47377b1baa207ec46c752a99813e2e251f4
+parent 2d7f842f886f8c32a1f555d674332e5f158a37e9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:22:03 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:22:03 +0530
+
+    Task #52110: added new api to fetch dept as rootorg
+
+
+:100644 100644 accde6f76908e35c1a4090b290754faafa2e3335 b6bf5ae130093ddbf60c89d59b4a10509ddbf149 M	apps/web-services/src/protectedApi_v8/network.ts
+commit b9bb013bc03dcf33eb50254b24a95257f3473713
+tree a4119168f23aad9fd4b016c9169b25f0786d2027
+parent b177e858388e2dd878232b376ab988732fe9327c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 19:12:58 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 19:12:58 +0530
+
+    Task #52190, #52183: Fixed the search responses
+
+
+:100644 100644 7148cc2d5bfdb9c1073f247e73432a36487dc423 1fbfa3349a826134100d2e5efabf2b695561f386 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 cf4c558e94098dbcf1ec0fb16b92165519a3577c 5859791b4a0a837ea22fc50308b1324ad1963ba3 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 629837fffa042f597741c45858388e0b32bc5964 47ff2746d38b896338ae2eb272d0dadc4c748b39 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 eea0dfe3084df682a9dbc93bfdefe50a8304fade 385b34e5ebd5ad1683f182edb066d49c3c755a65 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2-routing.module.ts
+:100644 100644 f9128a4049f431fb85abb23ba2f8ab56c0eb2a65 c1497d6da3e9d667dce8a7b40676f7e00af68561 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+commit f8873f02ae16f7d42530d8db22f3f97196d7ba1c
+tree cde6ffdddbc631b41fe93768352618c8ec92919f
+parent a1d7624db6aeb43b5893d09c33348e8f163335ab
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-26 18:05:59 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-26 18:05:59 +0530
+
+    Competency type added
+
+
+:100644 100644 2102db65093f7562cfa7f7536d809f7ca9e730e0 ad389c88654c3467c35c8a537197d916cd790136 M	apps/fusion/project/ws/author/src/lib/interface/content.ts
+:100644 100644 f20a24ce47d45dd6aa20ec8c9be2e061d14fe7ef 1a1fe50a6e3092c1d3142d5c402adc4387b22560 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.html
+:100644 100644 8c551bbedefd9ed21eecf2705f09bcd740f3b5e8 8695b49d7c5e8be8a8b448d1de870ba8473c5bb3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html

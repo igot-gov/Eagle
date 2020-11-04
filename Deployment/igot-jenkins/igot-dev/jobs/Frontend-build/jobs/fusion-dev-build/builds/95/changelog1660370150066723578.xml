@@ -1,0 +1,68 @@
+commit 8085627f653c5178c18bac8cbb3409d53cdf765e
+tree 1b6be5de51d693d8ee12bd548f318464716f4973
+parent abd239eeb718163781c97fd4281b9b93ae724481
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 16:24:28 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 16:24:28 +0530
+
+    uper text
+
+
+:100644 100644 e5d1a78066e4d530fa1b507a4b4613526bd4c271 8973f5e7e8b2d41f30e9bc97a81e5f86da46b6f7 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+commit abd239eeb718163781c97fd4281b9b93ae724481
+tree 3e96ca169cc6b5bc920c74c4df351ae1931129d7
+parent 6b3dfccc8c78cd2643ef4e927fc20db72ed3d8d6
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 16:09:13 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 16:09:13 +0530
+
+    discuss card issues is fixed in home page
+
+
+:100644 100644 00945ede796f363ed05a6137287241f7ac1140d2 d932bee448cbfbddee42e230f3f65e700e8f7509 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 24063471be42461e3fafa553204d263f85ee7463 26fce3b6f6b7fe914171dbcf0e88fcd6de803fdd M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 f423fca86bf66db3e8851ca87ff72426da29eb1c 446e464a766fd1797e98ca0e7f25e3df8c8a2b96 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.scss
+:100644 100644 d5e6f45a761d7ad9950ad36252b651fac7bdea50 193596ed1e01d16e05737255712860bb5cf12c4c M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts
+:100644 000000 de47b93c67bfcee5893c154cd30ecd05d32fe629 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple copy/carrier-strip-multiple.component.ts
+:100644 000000 869580acf09789b107ef660d80c01740f62a5230 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple copy/carrier-strip-multiple.model.ts
+:100644 000000 4a140e33db48ea657c6b0b0505bab60a19afa148 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple copy/carrier-strip-multiple.module.ts
+:100644 000000 9dba62abf8548eae056af79991cd3d66c0bcc8ad 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple copy/content-strip-new-multiple.service.ts
+:100644 100644 ee9c45ef1613b0f31203fd58ffdc1216aeab7d5e 8d1c68dce9fec5a10a2371ce1c5ea8b7af57a106 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.ts
+:100644 100644 5ab691f1b7c6f500ee13a5b290b2402c5232b116 b68cbc50f9973bcde7cccbb604c016fe2baee16a M	apps/fusion/src/styles/_ws-vars.scss
+commit 2a681b5109c644f8d3e8eb76c48e8f9c4c27fcf7
+tree a4966f26305074e8482fba8e330e20dea1083984
+parent 1a24eb6945d7e4f8c8737e68d77b40fd92eb6740
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 13:55:54 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 13:55:54 +0530
+
+    home page discuss issues fixed
+
+
+:100644 100644 7f539461400cc74a0a237a29c30e568f8b38e68e 3a893714c632d1c8097d17bb9b28ec151795652a M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.ts
+:100644 100644 077be2e9189f467edf542a860371c8a46c208313 24063471be42461e3fafa553204d263f85ee7463 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 cd5ee51bca214d2281d6bfc76833fcd78b1cfde0 6edf87c2e8eca230b4cf1ad461dbfe429440e4d8 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts
+:000000 100644 0000000000000000000000000000000000000000 d25e98b207f59e9ab7ba9484f522ca2636c69c62 A	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/discuss.model.ts
+:100644 000000 d5eee1930b5396b8bfa7236e704c20c11ccf5e82 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/carrier-strip-multiple.component.ts
+:100644 000000 303c546e8446fc04efa50a99cebf7ff22b2aea03 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/carrier-strip-multiple.module.ts
+:100644 000000 eb2af41374ea2e647330a40db4e3a06a2cc6f94d 0000000000000000000000000000000000000000 D	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/carrier-strip-multiple.service.spec.ts
+:100644 100644 b19d15129798d411ccd53e7ac83dc03a6c8b382d ee9c45ef1613b0f31203fd58ffdc1216aeab7d5e M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.ts
+:100644 100644 e31d8291d2c995977cc2fc180ba5f575dc5af5c5 af10e7536371edcf2f20778578e3fb936bc8584d M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.service.ts
+commit 1a24eb6945d7e4f8c8737e68d77b40fd92eb6740
+tree 3723d545c67249c06b0d34a5789a240a2f6b81eb
+parent 6c79ef7a4414c29f2eae3f6fcacf9b76d021f371
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 11:50:24 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 11:50:24 +0530
+
+    Career name changes and other library changes
+
+
+:100644 100644 14442b88e2e93542bf4f7a921c79bd1e0728f1f3 9f1f2834efbe56f5db4f154381b4939141baf480 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 9d215a8ccf35ec7819b1b292651e5b5b93c8cd68 bf9ce29ded740aa9240634fab21887fe6c609cd8 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.model.ts
+commit f7dfa146991fec4029a79aefe630b9d277ee3092
+tree 20c027d02a0832db62e4f27b87888ee67dc955c5
+parent 6fca22fcaf6f7ff22f3688153f22fa36d8f2b3ab
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 11:05:31 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-02 11:05:31 +0530
+
+    department issues is fixed in network
+
+
+:100644 100644 fe8f9a09916763097d975ae1adf05a695506e457 0278b8bd3b4bf7fe725b5e8214f1ecaaad6fd620 M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts

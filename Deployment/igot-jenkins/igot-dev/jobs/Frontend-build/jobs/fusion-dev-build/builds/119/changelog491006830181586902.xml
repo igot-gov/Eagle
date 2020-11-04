@@ -1,0 +1,22 @@
+commit 21fce13f2fec03744128f0f22862d7c86778d32e
+tree 2de0500190536ba3223668219cd27ff37cc86132
+parent 27bc59b2679fd3b4d4c54f0d258f7a063d7654c9
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 19:33:51 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 19:33:51 +0530
+
+    ng-deep removed from network card
+
+
+:100644 100644 e0115085c5c8160c55280e4f1a061fb2dafc4cfb 7906ea8c984389fca11c79de74c9aca05b1318f4 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 c667dcabb306a23bcf4c10a081c86e8834a8dc7f b2f990346a695bf20e7bae60306b3631f4e8d1cc M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.scss
+:100644 100644 7856b1d40bbcdb05d7f341ebb6268ec8ecbff764 3e8cf8c64bc6f9df31986cac95ec49db275dd882 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.scss
+commit 27bc59b2679fd3b4d4c54f0d258f7a063d7654c9
+tree 2fb613d198c9ed389fea57a5afe4b7c0cad033d8
+parent 9d3f5a3ab0b3d5a632be689ad597be8df8fdb3f2
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-16 19:00:36 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-16 19:00:51 +0530
+
+    profile view Fix
+
+
+:100644 100644 3e8cf8c64bc6f9df31986cac95ec49db275dd882 7856b1d40bbcdb05d7f341ebb6268ec8ecbff764 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.scss

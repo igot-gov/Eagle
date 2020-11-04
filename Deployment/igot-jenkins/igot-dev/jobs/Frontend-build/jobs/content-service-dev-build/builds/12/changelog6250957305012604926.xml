@@ -1,0 +1,9 @@
+commit 446138ee42a9b3b6f33e2a29c664a9b5237737d4
+tree bee2f368eada346d9f242dfba9430e2fafa12256
+parent aa40bd92caa03486864ed301faba4ef6bac73d78
+author Haritest <haridasksd@gmail.com> 2020-09-24 16:06:01 +0530
+committer GitHub <noreply@github.com> 2020-09-24 16:06:01 +0530
+
+    Update sonar-project.properties
+
+:100644 100644 e6537429ae3e8254c770fe273410026eedb75b88 d5ab9ea62992b9dc87cd8ea9e5835c7fd8ca3da2 M	apps/content-service/File_server/sonar-project.properties

@@ -1,0 +1,1274 @@
+Started by user [8mha:////4P9/O1WrER/MtNQKKq96BREYrbhT4uL0mdwJbsXrADsrAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgYu/dLi1CL9xNzMEgClaoqTvwAAAA==[0mamit.senger
+Checking out git https://github.com/igot-gov/Eagle.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/fusion-dev-build@script to read apps/fusion/Jenkinsfile
+No credentials specified
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/igot-dev^{commit} # timeout=10
+Checking out Revision e613ca6088656f0d2f3fb4315a6a1856910a172c (origin/igot-dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e613ca6088656f0d2f3fb4315a6a1856910a172c # timeout=10
+Commit message: "LMS API test"
+ > git rev-list --no-walk 95212129aca4cf7151e40e35f2516ceb10048af9 # timeout=10
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4CogtAq7rn74jxj7uLVCcsx+t/y35kGeqvPkPZObyMXKAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4M4HhYYw5g8Q/T69bF4Q03CXP5QrGLTB/3G02QXJo6U5AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4I8dzKCIF5MAVfX6mSSVw/7BBA8CLo8Y4KOcAQfTfDT/AAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/lib/jenkins/workspace/igot-dev/Frontend-build/fusion-dev-build
+[8mha:////4LB3xgJ5/i6rvwz3UzIGQskalXp7BJ5rM3CcuPAq8uCGAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4BIodQLml+s7Yz/VUwXw69YMXxgGKkA2g9ogG2rdJzvnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] ansiColor
+[8mha:////4I+DPNrJrY6nGXv0HKYd6twr+ClidgSYIrE439NWgujzAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E6ZFoOz08tWaQiXki4hIu1lr7b/L8x53DGJZd+Tu1RuAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4EOWAYBHBge05it7SsmJIpeBzlZnHLfW1vjcORdWPYclAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Checkout)
+[8mha:////4P8hajGSU1NmcDK7zr6c+qSTk1RCMgeBZweWlwN28t5yAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4O62hg3nuWQGYzJSRPAYJinD89yjNHB3k3WDfrzy132vAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYO0G2F+S7bfcBITL9lL0AAAA=[0m[Pipeline] checkout
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/igot-gov/Eagle.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/fusion-dev-build # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/igot-gov/Eagle.git # timeout=10
+Fetching upstream changes from https://github.com/igot-gov/Eagle.git
+ > git fetch --tags --progress https://github.com/igot-gov/Eagle.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/igot-dev^{commit} # timeout=10
+Checking out Revision e613ca6088656f0d2f3fb4315a6a1856910a172c (origin/igot-dev)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f e613ca6088656f0d2f3fb4315a6a1856910a172c # timeout=10
+Commit message: "LMS API test"
+[8mha:////4PphThmGcYjzIXYO8baHSsc/I1mRgpU76NMkOh1sjp0sAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEzcQ4uTYsfkGFWgvNe9g+hMkv8tf8B4kkTt7pnrOc1xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8AHk6T5r0AAAA=[0m[Pipeline] }
+[8mha:////4N1Qgn8AATg0PJlfa+zx4/XZh3bPHqh2xDfBbhJgS8Y2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRNBSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsPXymMMb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EMnktzjW7yUEZ67srpVpNNd9ZDB2RgNDQ8SkV11xlyUAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5NudINt/AHkw63u9AAAA[0m[Pipeline] }
+[8mha:////4P0iBvoKjc4AyO3aqqUerJXSHuX/cs0cWTvuLSIHcSjvAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRElSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsP073CUL0AAAA=[0m[Pipeline] // ansiColor
+[8mha:////4CNnUvLMQQkxTLdb9/c6+Fx6wGWbU8RzyyrIP2Q7WnhBAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjJKgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvBXXnAcEAAAA=[0m[Pipeline] stage
+[8mha:////4CBaTsQr90lV5hpKm/1Gi+wkLJENS/ytk4SMdVNyA5vCAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] { (docker-build)
+[8mha:////4HHuxzc+yx4ZPKmtro1JSpobF3oS2uHDg6qhlNjVyMk5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGigQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN27Iu42+AAAA[0m[Pipeline] sh
++ git rev-parse --short HEAD
++ commit_id=e613ca6
++ echo e613ca6
++ cd ./apps/fusion/
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/fusion-dev-build/apps/fusion
++ docker build -t 10.0.1.129:5000/ui-static:e613ca6 .
+Sending build context to Docker daemon  14.77MB
+Step 1/9 : FROM node:10
+ ---> e7671d9424c2
+Step 2/9 : WORKDIR /app
+ ---> Using cache
+ ---> 23533f912c46
+Step 3/9 : COPY . .
+ ---> 4a8a4c91a564
+Step 4/9 : RUN yarn && yarn add moment && yarn add vis-util && npm run build --prod --build-optimizer
+ ---> Running in 02d7a2b5b46d
+yarn install v1.22.4
+info No lockfile found.
+[1/4] Resolving packages...
+[91mwarning video.js > tsml@1.0.1: no longer maintained
+[0m[91mwarning videojs-hls-quality-selector > karma-safaritechpreview-launcher > fs-promise@0.5.0: Use mz or fs-extra^3.0 with Promise Support
+[0m[91mwarning vis-network > vis-util > vis-uuid@1.1.3: We don't use this library anymore so you shouldn't either. Use e.g. 'uuid' instead!
+[0m[91mwarning @angular-devkit/build-angular > less > request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+[0m[91mwarning @angular-devkit/build-angular > webpack-dev-server > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+[0m[91mwarning @angular-devkit/build-angular > less > request > har-validator@5.1.5: this library is no longer supported
+[0m[91mwarning @angular-devkit/build-angular > webpack-dev-server > chokidar > fsevents@1.2.13: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+[0m[91mwarning @angular-devkit/build-angular > webpack > watchpack > watchpack-chokidar2 > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+[0m[91mwarning @angular-devkit/build-angular > webpack > micromatch > snapdragon > source-map-resolve > resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+[0m[91mwarning @angular-devkit/build-angular > webpack > micromatch > snapdragon > source-map-resolve > urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+[0m[91mwarning @angular/cli > universal-analytics > request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+[0m[91mwarning @angular/compiler-cli > chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+[0m[91mwarning ng-packagr > rollup-plugin-json@4.0.0: This module has been deprecated and is no longer maintained. Please use @rollup/plugin-json.
+[0m[91mwarning ng-packagr > rollup-plugin-commonjs@10.1.0: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-commonjs.
+[0m[91mwarning ng-packagr > stylus > css-parse > css > urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+[0m[91mwarning ng-packagr > rollup-plugin-node-resolve@5.2.0: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-node-resolve.
+[0m[91mwarning protractor > webdriver-manager > request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+[0m[2/4] Fetching packages...
+info fsevents@2.1.3: The platform "linux" is incompatible with this module.
+info "fsevents@2.1.3" is an optional dependency and failed compatibility check. Excluding it from installation.
+info fsevents@1.2.13: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+[91mwarning " > @angular/core@8.2.14" has incorrect peer dependency "zone.js@~0.9.1".
+[0m[91mwarning " > @angular/material-moment-adapter@9.2.4" has incorrect peer dependency "@angular/material@9.2.4".
+[0m[91mwarning " > @angular/material-moment-adapter@9.2.4" has incorrect peer dependency "@angular/core@^9.0.0 || ^10.0.0-0".
+[0m[91mwarning " > keycloak-angular@6.1.0" has incorrect peer dependency "@angular/common@^7.0.0".
+[0m[91mwarning " > keycloak-angular@6.1.0" has incorrect peer dependency "@angular/core@^7.0.0".
+[0m[91mwarning " > ng2-ace-editor@0.3.9" has incorrect peer dependency "@angular/core@^7.0.0".
+[0m[91mwarning " > pdfjs-dist@2.1.266" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0".
+[0m[91mwarning "pdfjs-dist > worker-loader@2.0.0" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0".
+[0m[91mwarning "vis-network > vis-data@6.6.1" has incorrect peer dependency "vis-util@^4.0.0".
+[0m[91mwarning "vis-network > vis-data@6.6.1" has unmet peer dependency "uuid@^7.0.0 || ^8.0.0".
+[0m[91mwarning " > karma-jasmine-html-reporter@1.5.4" has incorrect peer dependency "jasmine-core@>=3.5".
+[0m[91mwarning " > tsickle@0.36.0" has incorrect peer dependency "typescript@~3.4.1".
+[0m[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 105.19s.
+yarn add v1.22.4
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[91mwarning Pattern ["moment@^2.27.0"] is trying to unpack in the same destination "/usr/local/share/.cache/yarn/v6/npm-moment-2.27.0-8bff4e3e26a236220dfe3e36de756b6ebaa0105d-integrity/node_modules/moment" as pattern ["moment@^2.10.2","moment@^2.24.0","moment@^2.10.2","moment@>=2.13.0"]. This could result in non-deterministic behavior, skipping.
+[0minfo fsevents@2.1.3: The platform "linux" is incompatible with this module.
+info "fsevents@2.1.3" is an optional dependency and failed compatibility check. Excluding it from installation.
+info fsevents@1.2.13: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+[91mwarning " > @angular/core@8.2.14" has incorrect peer dependency "zone.js@~0.9.1".
+[0m[91mwarning " > @angular/material-moment-adapter@9.2.4" has incorrect peer dependency "@angular/material@9.2.4".
+[0m[91mwarning " > @angular/material-moment-adapter@9.2.4" has incorrect peer dependency "@angular/core@^9.0.0 || ^10.0.0-0".
+[0m[91mwarning " > keycloak-angular@6.1.0" has incorrect peer dependency "@angular/common@^7.0.0".
+[0m[91mwarning " > keycloak-angular@6.1.0" has incorrect peer dependency "@angular/core@^7.0.0".
+[0m[91mwarning " > ng2-ace-editor@0.3.9" has incorrect peer dependency "@angular/core@^7.0.0".
+[0m[91mwarning " > pdfjs-dist@2.1.266" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0".
+[0m[91mwarning "pdfjs-dist > worker-loader@2.0.0" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0".
+[0m[91mwarning "vis-network > vis-data@6.6.1" has incorrect peer dependency "vis-util@^4.0.0".
+warning "vis-network > vis-data@6.6.1" has unmet peer dependency "uuid@^7.0.0 || ^8.0.0".
+[0m[91mwarning " > karma-jasmine-html-reporter@1.5.4" has incorrect peer dependency "jasmine-core@>=3.5".
+[0m[91mwarning " > tsickle@0.36.0" has incorrect peer dependency "typescript@~3.4.1".
+[0m[4/4] Building fresh packages...
+success Saved 1 new dependency.
+info Direct dependencies
+└─ moment@2.27.0
+info All dependencies
+└─ moment@2.27.0
+Done in 9.63s.
+yarn add v1.22.4
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@2.1.3: The platform "linux" is incompatible with this module.
+info "fsevents@2.1.3" is an optional dependency and failed compatibility check. Excluding it from installation.
+info fsevents@1.2.13: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.13" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+[91mwarning " > @angular/core@8.2.14" has incorrect peer dependency "zone.js@~0.9.1".
+[0m[91mwarning " > @angular/material-moment-adapter@9.2.4" has incorrect peer dependency "@angular/material@9.2.4".
+[0m[91mwarning " > @angular/material-moment-adapter@9.2.4" has incorrect peer dependency "@angular/core@^9.0.0 || ^10.0.0-0".
+[0m[91mwarning " > keycloak-angular@6.1.0" has incorrect peer dependency "@angular/common@^7.0.0".
+[0m[91mwarning " > keycloak-angular@6.1.0" has incorrect peer dependency "@angular/core@^7.0.0".
+[0m[91mwarning " > ng2-ace-editor@0.3.9" has incorrect peer dependency "@angular/core@^7.0.0".
+[0m[91mwarning " > pdfjs-dist@2.1.266" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0".
+[0m[91mwarning "pdfjs-dist > worker-loader@2.0.0" has unmet peer dependency "webpack@^3.0.0 || ^4.0.0-alpha.0 || ^4.0.0".
+[0m[91mwarning "vis-network > vis-data@6.6.1" has unmet peer dependency "uuid@^7.0.0 || ^8.0.0".
+[0m[91mwarning " > karma-jasmine-html-reporter@1.5.4" has incorrect peer dependency "jasmine-core@>=3.5".
+[0m[91mwarning " > tsickle@0.36.0" has incorrect peer dependency "typescript@~3.4.1".
+[0m[4/4] Building fresh packages...
+success Saved lockfile.
+success Saved 1 new dependency.
+info Direct dependencies
+└─ vis-util@4.3.4
+info All dependencies
+└─ vis-util@4.3.4
+Done in 10.05s.
+
+> fusion@0.0.1 prebuild /app
+> npm run lint:fix
+
+
+> fusion@0.0.1 lint:fix /app
+> ng lint --fix
+
+Linting "fusion"...
+All files pass linting.
+Linting "@ws-widget/resolver"...
+All files pass linting.
+Linting "@ws-widget/collection"...
+All files pass linting.
+Linting "@ws-widget/utils"...
+All files pass linting.
+Linting "@ws/app"...
+All files pass linting.
+Linting "@ws/author"...
+All files pass linting.
+Linting "@ws/admin"...
+All files pass linting.
+Linting "@ws/analytics"...
+All files pass linting.
+Linting "@ws/viewer"...
+All files pass linting.
+
+> fusion@0.0.1 build /app
+> node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --prod --outputPath=dist/www/en --baseHref=/ --i18nLocale=en
+
+Generating ES5 bundles for differential loading...
+ES5 bundle generation complete.
+
+chunk {2} runtime-es2015.cc5fdf172a6f946492c2.js (runtime) 4.62 kB [entry] [rendered]
+chunk {2} runtime-es5.cc5fdf172a6f946492c2.js (runtime) 4.62 kB [entry] [rendered]
+chunk {4} 4-es2015.5fe188f32e3523a2f165.js () 8.18 kB  [rendered]
+chunk {4} 4-es5.5fe188f32e3523a2f165.js () 12.3 kB  [rendered]
+chunk {15} 15-es2015.ae083140a95f5eea87ee.js () 9.48 kB  [rendered]
+chunk {15} 15-es5.ae083140a95f5eea87ee.js () 14.4 kB  [rendered]
+chunk {3} 3-es2015.562c3d94996fde8a2c65.js () 20 kB  [rendered]
+chunk {3} 3-es5.562c3d94996fde8a2c65.js () 30.3 kB  [rendered]
+chunk {16} 16-es2015.2bce5a2ab024b860c0a1.js () 12.6 kB  [rendered]
+chunk {16} 16-es5.2bce5a2ab024b860c0a1.js () 12.6 kB  [rendered]
+chunk {0} common-es2015.9138322fc0a555342f17.js (common) 40.5 kB  [rendered]
+chunk {0} common-es5.9138322fc0a555342f17.js (common) 43.9 kB  [rendered]
+chunk {1} 1-es2015.dde14f4516d0c1bbf890.js () 51.7 kB  [rendered]
+chunk {1} 1-es5.dde14f4516d0c1bbf890.js () 57.2 kB  [rendered]
+chunk {27} 27-es2015.b8216fb7340960908943.js () 7.89 kB  [rendered]
+chunk {27} 27-es5.b8216fb7340960908943.js () 8.02 kB  [rendered]
+chunk {21} 21-es2015.594059dfc674c8a4e068.js () 15.7 kB  [rendered]
+chunk {21} 21-es5.594059dfc674c8a4e068.js () 16.3 kB  [rendered]
+chunk {47} 47-es2015.a6fc978beb11b4b71387.js () 3.15 kB  [rendered]
+chunk {47} 47-es5.a6fc978beb11b4b71387.js () 3.74 kB  [rendered]
+chunk {6} 6-es2015.f31d9ef772d567867f91.js () 16.3 kB  [rendered]
+chunk {6} 6-es5.f31d9ef772d567867f91.js () 18.6 kB  [rendered]
+chunk {57} 57-es2015.775de996d2a39e800770.js () 6.74 kB  [rendered]
+chunk {57} 57-es5.775de996d2a39e800770.js () 6.87 kB  [rendered]
+chunk {61} 61-es2015.ac90f8a8d29b2bbea5a2.js () 2.89 kB  [rendered]
+chunk {61} 61-es5.ac90f8a8d29b2bbea5a2.js () 2.89 kB  [rendered]
+chunk {62} 62-es2015.9274ce2a585e9cecf9d0.js () 3.65 kB  [rendered]
+chunk {62} 62-es5.9274ce2a585e9cecf9d0.js () 3.65 kB  [rendered]
+chunk {5} 5-es2015.183d454f70c349c24206.js () 68.3 kB  [rendered]
+chunk {5} 5-es5.183d454f70c349c24206.js () 70.7 kB  [rendered]
+chunk {65} 65-es2015.ee73f1ed6755b85b3971.js () 19.5 kB  [rendered]
+chunk {65} 65-es5.ee73f1ed6755b85b3971.js () 20.3 kB  [rendered]
+chunk {68} 68-es2015.02d00230819b83a2bdee.js () 20.4 kB  [rendered]
+chunk {68} 68-es5.02d00230819b83a2bdee.js () 21.5 kB  [rendered]
+chunk {79} 79-es2015.27a957ac8343d6d30233.js () 1.02 kB  [rendered]
+chunk {79} 79-es5.27a957ac8343d6d30233.js () 1.53 kB  [rendered]
+chunk {69} 69-es2015.681f9325370dce4c9ed9.js () 23.8 kB  [rendered]
+chunk {69} 69-es5.681f9325370dce4c9ed9.js () 24.4 kB  [rendered]
+chunk {80} 80-es2015.d8a52d63c17227811ef2.js () 4.15 kB  [rendered]
+chunk {80} 80-es5.d8a52d63c17227811ef2.js () 5.21 kB  [rendered]
+chunk {84} 84-es2015.35e5c7f38db49bab9039.js () 1.26 kB  [rendered]
+chunk {84} 84-es5.35e5c7f38db49bab9039.js () 1.78 kB  [rendered]
+chunk {82} 82-es2015.dfe8ee66c7ef40772f14.js () 3.88 kB  [rendered]
+chunk {82} 82-es5.dfe8ee66c7ef40772f14.js () 5.41 kB  [rendered]
+chunk {87} 87-es2015.0029f5f6595fe9b6787e.js () 9.15 kB  [rendered]
+chunk {87} 87-es5.0029f5f6595fe9b6787e.js () 9.87 kB  [rendered]
+chunk {88} 88-es2015.67f77c4f008bc77af8ae.js () 781 bytes  [rendered]
+chunk {88} 88-es5.67f77c4f008bc77af8ae.js () 1010 bytes  [rendered]
+chunk {85} 85-es2015.cb4bb0fb8890e57dbeed.js () 17.4 kB  [rendered]
+chunk {85} 85-es5.cb4bb0fb8890e57dbeed.js () 19.2 kB  [rendered]
+chunk {89} 89-es2015.ed5b7962fd0107eebb44.js () 2.32 kB  [rendered]
+chunk {89} 89-es5.ed5b7962fd0107eebb44.js () 2.87 kB  [rendered]
+chunk {9} 9-es2015.60263de545aa7cf705ac.js () 34.2 kB  [rendered]
+chunk {9} 9-es5.60263de545aa7cf705ac.js () 39.3 kB  [rendered]
+chunk {94} 94-es2015.6f64b98762d92f751750.js () 3.25 kB  [rendered]
+chunk {94} 94-es5.6f64b98762d92f751750.js () 3.84 kB  [rendered]
+chunk {95} 95-es2015.cb622e3c530cff95e50e.js () 1.83 kB  [rendered]
+chunk {95} 95-es5.cb622e3c530cff95e50e.js () 2.14 kB  [rendered]
+chunk {93} 93-es2015.504d4d15b6473115e64b.js () 16.7 kB  [rendered]
+chunk {93} 93-es5.504d4d15b6473115e64b.js () 18.7 kB  [rendered]
+chunk {97} 97-es2015.7b9b74d5a2afa7f43d9c.js () 1.99 kB  [rendered]
+chunk {97} 97-es5.7b9b74d5a2afa7f43d9c.js () 2.81 kB  [rendered]
+chunk {98} 98-es2015.1d7c0a563984b059f237.js () 786 bytes  [rendered]
+chunk {98} 98-es5.1d7c0a563984b059f237.js () 1020 bytes  [rendered]
+chunk {99} 99-es2015.2b888e5a6f5955c45168.js () 3.25 kB  [rendered]
+chunk {99} 99-es5.2b888e5a6f5955c45168.js () 3.82 kB  [rendered]
+chunk {101} 101-es2015.272507e8d185dc2de16e.js () 3.25 kB  [rendered]
+chunk {101} 101-es5.272507e8d185dc2de16e.js () 3.81 kB  [rendered]
+chunk {105} 105-es2015.02d44239e2cf4ef69b36.js () 4.99 kB  [rendered]
+chunk {105} 105-es5.02d44239e2cf4ef69b36.js () 5.12 kB  [rendered]
+chunk {102} 102-es2015.68608a949c84e58d6239.js () 17.6 kB  [rendered]
+chunk {102} 102-es5.68608a949c84e58d6239.js () 18.6 kB  [rendered]
+chunk {107} 107-es2015.2a36b55309665d1b119b.js () 4.7 kB  [rendered]
+chunk {107} 107-es5.2a36b55309665d1b119b.js () 6.59 kB  [rendered]
+chunk {108} 108-es2015.4c3358c75abc22cf6516.js () 21.5 kB  [rendered]
+chunk {108} 108-es5.4c3358c75abc22cf6516.js () 22.2 kB  [rendered]
+chunk {7} 7-es2015.6238fd83ea8345995f7a.js () 295 kB  [rendered]
+chunk {7} 7-es5.6238fd83ea8345995f7a.js () 304 kB  [rendered]
+chunk {11} 11-es2015.f86002dd3d38c57914a5.js () 43.9 kB  [rendered]
+chunk {11} 11-es5.f86002dd3d38c57914a5.js () 47.9 kB  [rendered]
+chunk {8} 8-es2015.51140c717bc282f0e4ae.js () 368 kB  [rendered]
+chunk {8} 8-es5.51140c717bc282f0e4ae.js () 368 kB  [rendered]
+chunk {10} 10-es2015.61e1e3fe658eb907200a.js () 300 kB  [rendered]
+chunk {10} 10-es5.61e1e3fe658eb907200a.js () 307 kB  [rendered]
+chunk {13} 13-es2015.071c63d7d9d1bfde1a90.js () 193 kB  [rendered]
+chunk {13} 13-es5.071c63d7d9d1bfde1a90.js () 200 kB  [rendered]
+chunk {14} 14-es2015.00958e74449dddd3f686.js () 205 kB  [rendered]
+chunk {14} 14-es5.00958e74449dddd3f686.js () 218 kB  [rendered]
+chunk {12} 12-es2015.703c0c9b8a64f9d2dfbb.js () 382 kB  [rendered]
+chunk {12} 12-es5.703c0c9b8a64f9d2dfbb.js () 388 kB  [rendered]
+chunk {18} 18-es2015.4d45cd89d5406f99cb83.js () 101 kB  [rendered]
+chunk {18} 18-es5.4d45cd89d5406f99cb83.js () 108 kB  [rendered]
+chunk {19} 19-es2015.12221a57619628893fbb.js () 92.8 kB  [rendered]
+chunk {19} 19-es5.12221a57619628893fbb.js () 96 kB  [rendered]
+chunk {20} 20-es2015.bf71ef5ae84e2d880a6f.js () 705 kB  [rendered]
+chunk {20} 20-es5.bf71ef5ae84e2d880a6f.js () 706 kB  [rendered]
+chunk {22} 22-es2015.df9a5249183945863bfc.js () 46.4 kB  [rendered]
+chunk {22} 22-es5.df9a5249183945863bfc.js () 48.1 kB  [rendered]
+chunk {24} 24-es2015.a67d4acb6467d11f5161.js () 36.1 kB  [rendered]
+chunk {24} 24-es5.a67d4acb6467d11f5161.js () 37.2 kB  [rendered]
+chunk {23} 23-es2015.1abd2375e9dfe9780b6a.js () 59 kB  [rendered]
+chunk {23} 23-es5.1abd2375e9dfe9780b6a.js () 60.9 kB  [rendered]
+chunk {26} 26-es2015.48f448b79d74216f4b5b.js () 4.69 kB  [rendered]
+chunk {26} 26-es5.48f448b79d74216f4b5b.js () 4.69 kB  [rendered]
+chunk {25} 25-es2015.5b2794e4beab14890638.js () 206 kB  [rendered]
+chunk {25} 25-es5.5b2794e4beab14890638.js () 206 kB  [rendered]
+chunk {17} 17-es2015.b0f9931cd276db47183c.js () 572 kB  [rendered]
+chunk {17} 17-es5.b0f9931cd276db47183c.js () 586 kB  [rendered]
+chunk {31} polyfills-es2015.dc869cda37e011be5343.js (polyfills) 55.8 kB [initial] [rendered]
+chunk {32} polyfills-es5.fb81c3b9c967e426b341.js (polyfills-es5) 149 kB [initial] [rendered]
+chunk {43} 43-es2015.8cfda5808674d011b8a1.js () 954 kB  [rendered]
+chunk {43} 43-es5.8cfda5808674d011b8a1.js () 957 kB  [rendered]
+chunk {44} 44-es2015.cde4a62b19f9c1688fdd.js () 253 kB  [rendered]
+chunk {44} 44-es5.cde4a62b19f9c1688fdd.js () 259 kB  [rendered]
+chunk {30} pdfjsWorker-es2015.a0f44fafc1db6d69f9f1.js (pdfjsWorker) 752 kB  [rendered]
+chunk {30} pdfjsWorker-es5.a0f44fafc1db6d69f9f1.js (pdfjsWorker) 752 kB  [rendered]
+chunk {46} 46-es2015.20e42a8dd23d3adf20b0.js () 138 kB  [rendered]
+chunk {46} 46-es5.20e42a8dd23d3adf20b0.js () 140 kB  [rendered]
+chunk {48} 48-es2015.49b89682434735e45621.js () 182 kB  [rendered]
+chunk {48} 48-es5.49b89682434735e45621.js () 188 kB  [rendered]
+chunk {49} 49-es2015.c6f623cd9cf70d44d9d2.js () 80.9 kB  [rendered]
+chunk {49} 49-es5.c6f623cd9cf70d44d9d2.js () 83.2 kB  [rendered]
+chunk {50} 50-es2015.97d3b7b805f60ad2e9ac.js () 296 kB  [rendered]
+chunk {50} 50-es5.97d3b7b805f60ad2e9ac.js () 306 kB  [rendered]
+chunk {45} 45-es2015.fbdb3d0c11e141b9bc2a.js () 1.32 MB  [rendered]
+chunk {45} 45-es5.fbdb3d0c11e141b9bc2a.js () 1.32 MB  [rendered]
+chunk {52} 52-es2015.b87ba6ca41e2f2ce420f.js () 67.3 kB  [rendered]
+chunk {52} 52-es5.b87ba6ca41e2f2ce420f.js () 68.5 kB  [rendered]
+chunk {51} 51-es2015.adec472f9e854e259c0f.js () 255 kB  [rendered]
+chunk {51} 51-es5.adec472f9e854e259c0f.js () 264 kB  [rendered]
+chunk {53} 53-es2015.52f643b8608efb116dc3.js () 205 kB  [rendered]
+chunk {53} 53-es5.52f643b8608efb116dc3.js () 211 kB  [rendered]
+chunk {54} 54-es2015.62279c6c935d31a97c09.js () 80.4 kB  [rendered]
+chunk {54} 54-es5.62279c6c935d31a97c09.js () 85.4 kB  [rendered]
+chunk {55} 55-es2015.17e21db6ec711d014deb.js () 131 kB  [rendered]
+chunk {55} 55-es5.17e21db6ec711d014deb.js () 135 kB  [rendered]
+chunk {56} 56-es2015.a16928a8de65df079758.js () 52 kB  [rendered]
+chunk {56} 56-es5.a16928a8de65df079758.js () 54.5 kB  [rendered]
+chunk {59} 59-es2015.3d787355134828eb48a7.js () 176 kB  [rendered]
+chunk {59} 59-es5.3d787355134828eb48a7.js () 183 kB  [rendered]
+chunk {58} 58-es2015.72cae2cb6946ed2527e3.js () 197 kB  [rendered]
+chunk {58} 58-es5.72cae2cb6946ed2527e3.js () 201 kB  [rendered]
+chunk {63} 63-es2015.9e1b1ea88ffdf6c73e1a.js () 70.7 kB  [rendered]
+chunk {63} 63-es5.9e1b1ea88ffdf6c73e1a.js () 72.3 kB  [rendered]
+chunk {64} 64-es2015.d97d093f5ad0f9811958.js () 51.3 kB  [rendered]
+chunk {64} 64-es5.d97d093f5ad0f9811958.js () 52.4 kB  [rendered]
+chunk {60} 60-es2015.a2e4bf29f0dadd43e52e.js () 238 kB  [rendered]
+chunk {60} 60-es5.a2e4bf29f0dadd43e52e.js () 241 kB  [rendered]
+chunk {66} 66-es2015.16c4c756fac8445a7e83.js () 178 kB  [rendered]
+chunk {66} 66-es5.16c4c756fac8445a7e83.js () 178 kB  [rendered]
+chunk {67} 67-es2015.7bfd9534b17e579f65a1.js () 114 kB  [rendered]
+chunk {67} 67-es5.7bfd9534b17e579f65a1.js () 116 kB  [rendered]
+chunk {71} 71-es2015.f8fe5efef93673971db6.js () 24.3 kB  [rendered]
+chunk {71} 71-es5.f8fe5efef93673971db6.js () 25.1 kB  [rendered]
+chunk {70} 70-es2015.e2b14b2cb7ab3c6ac7fb.js () 69.5 kB  [rendered]
+chunk {70} 70-es5.e2b14b2cb7ab3c6ac7fb.js () 71 kB  [rendered]
+chunk {73} 73-es2015.91a61668671f03dac45f.js () 45.6 kB  [rendered]
+chunk {73} 73-es5.91a61668671f03dac45f.js () 47.6 kB  [rendered]
+chunk {72} 72-es2015.5489fca1c276ec561108.js () 84.6 kB  [rendered]
+chunk {72} 72-es5.5489fca1c276ec561108.js () 87.4 kB  [rendered]
+chunk {75} 75-es2015.23c55e44da7aea9601f8.js () 4.56 kB  [rendered]
+chunk {75} 75-es5.23c55e44da7aea9601f8.js () 4.56 kB  [rendered]
+chunk {76} 76-es2015.d565199001e0a263361f.js () 4.56 kB  [rendered]
+chunk {76} 76-es5.d565199001e0a263361f.js () 4.56 kB  [rendered]
+chunk {77} 77-es2015.b8a1b064d86f4c125352.js () 4.74 kB  [rendered]
+chunk {77} 77-es5.b8a1b064d86f4c125352.js () 4.74 kB  [rendered]
+chunk {74} 74-es2015.44249aa7003ddb9f6083.js () 83.3 kB  [rendered]
+chunk {74} 74-es5.44249aa7003ddb9f6083.js () 87.7 kB  [rendered]
+chunk {81} 81-es2015.8a24669f93843d2678b5.js () 57.4 kB  [rendered]
+chunk {81} 81-es5.8a24669f93843d2678b5.js () 59.8 kB  [rendered]
+chunk {78} 78-es2015.8772f7151cd9771a566b.js () 124 kB  [rendered]
+chunk {78} 78-es5.8772f7151cd9771a566b.js () 126 kB  [rendered]
+chunk {83} 83-es2015.08ec293dee9ccd961113.js () 22.4 kB  [rendered]
+chunk {83} 83-es5.08ec293dee9ccd961113.js () 24.4 kB  [rendered]
+chunk {86} 86-es2015.cb9269c4f2370c340679.js () 43.4 kB  [rendered]
+chunk {86} 86-es5.cb9269c4f2370c340679.js () 45.2 kB  [rendered]
+chunk {90} 90-es2015.7968c9a21b3e0a4826fa.js () 107 kB  [rendered]
+chunk {90} 90-es5.7968c9a21b3e0a4826fa.js () 109 kB  [rendered]
+chunk {91} 91-es2015.6573d7b90e017e313a33.js () 95.2 kB  [rendered]
+chunk {91} 91-es5.6573d7b90e017e313a33.js () 97.4 kB  [rendered]
+chunk {92} 92-es2015.c1aa07e2d8e2429ce24b.js () 82.9 kB  [rendered]
+chunk {92} 92-es5.c1aa07e2d8e2429ce24b.js () 84.4 kB  [rendered]
+chunk {96} 96-es2015.dc5e9a608cb8ee0018a0.js () 36.5 kB  [rendered]
+chunk {96} 96-es5.dc5e9a608cb8ee0018a0.js () 37.5 kB  [rendered]
+chunk {100} 100-es2015.072e9daf9eb65b94eb8c.js () 24.8 kB  [rendered]
+chunk {100} 100-es5.072e9daf9eb65b94eb8c.js () 25.6 kB  [rendered]
+chunk {103} 103-es2015.e6b96ef2e3e53d0987da.js () 152 kB  [rendered]
+chunk {103} 103-es5.e6b96ef2e3e53d0987da.js () 155 kB  [rendered]
+chunk {104} 104-es2015.5b6ebac2b4d8fbc017a9.js () 336 kB  [rendered]
+chunk {104} 104-es5.5b6ebac2b4d8fbc017a9.js () 343 kB  [rendered]
+chunk {106} 106-es2015.c52723f18d6d318db662.js () 320 kB  [rendered]
+chunk {106} 106-es5.c52723f18d6d318db662.js () 325 kB  [rendered]
+chunk {29} main-es2015.b2c5a376fee27807f330.js (main) 6.34 MB [initial] [rendered]
+chunk {29} main-es5.b2c5a376fee27807f330.js (main) 6.55 MB [initial] [rendered]
+chunk {28} libraries.caed9729f6ec38145fe3.css (libraries) 1.12 MB [initial] [rendered]
+chunk {33} styles.c3b3bb9ed1dd6a818746.css (styles) 164 kB [initial] [rendered]
+chunk {34} theme-blue.css (theme-blue) 136 kB [initial] [rendered]
+chunk {35} theme-deep-blue.css (theme-deep-blue) 143 kB [initial] [rendered]
+chunk {36} theme-deep-purple.css (theme-deep-purple) 146 kB [initial] [rendered]
+chunk {37} theme-grey.css (theme-grey) 149 kB [initial] [rendered]
+chunk {38} theme-igot.css (theme-igot) 136 kB [initial] [rendered]
+chunk {39} theme-indigo.css (theme-indigo) 139 kB [initial] [rendered]
+chunk {40} theme-lite-blue.css (theme-lite-blue) 143 kB [initial] [rendered]
+chunk {41} theme-orange.css (theme-orange) 139 kB [initial] [rendered]
+chunk {42} theme-teal.css (theme-teal) 132 kB [initial] [rendered]
+chunk {scripts} scripts.5e9e0657550a82831d46.js (scripts) 195 kB [entry] [rendered]
+Date: 2020-08-14T14:38:55.281Z - Hash: a8b44f5a058f535593eb - Time: 729293ms
+[91m
+WARNING in Empty property 'box-shadow' at 128:2. Ignoring.
+
+WARNING in budgets, maximum exceeded for initial. Budget 4 MB was exceeded by 7.95 MB.[0m[91m
+[0m
+> fusion@0.0.1 postbuild /app
+> npm run compress:gzip && npm run compress:brotli
+
+
+> fusion@0.0.1 compress:gzip /app
+> gzipper --verbose --gzip-level=9 ./dist/www
+
+[33mgzipper: GZIP -> gzipLevel: 9[0m
+[36mgzipper: Use default output file format [filename].[ext].[compressExt][0m
+[36mgzipper: File 1-es2015.dde14f4516d0c1bbf890.js has been compressed 51.7031Kb -> 10.6172Kb (10.025098ms)[0m
+[36mgzipper: File 1-es5.dde14f4516d0c1bbf890.js has been compressed 57.1592Kb -> 11.4639Kb (2.81399ms)[0m
+[36mgzipper: File 10-es2015.61e1e3fe658eb907200a.js has been compressed 299.6934Kb -> 38.9492Kb (8.182508ms)[0m
+[36mgzipper: File 10-es5.61e1e3fe658eb907200a.js has been compressed 306.8799Kb -> 40.2480Kb (8.212155ms)[0m
+[36mgzipper: File 100-es2015.072e9daf9eb65b94eb8c.js has been compressed 24.8486Kb -> 6.2305Kb (1.388602ms)[0m
+[36mgzipper: File 100-es5.072e9daf9eb65b94eb8c.js has been compressed 25.6299Kb -> 6.4473Kb (1.311148ms)[0m
+[36mgzipper: File 101-es2015.272507e8d185dc2de16e.js has been compressed 3.2480Kb -> 1.4629Kb (0.884368ms)[0m
+[36mgzipper: File 101-es5.272507e8d185dc2de16e.js has been compressed 3.8135Kb -> 1.6758Kb (0.734777ms)[0m
+[36mgzipper: File 102-es2015.68608a949c84e58d6239.js has been compressed 17.5723Kb -> 3.8652Kb (1.090473ms)[0m
+[36mgzipper: File 102-es5.68608a949c84e58d6239.js has been compressed 18.5742Kb -> 4.1445Kb (1.148092ms)[0m
+[36mgzipper: File 103-es2015.e6b96ef2e3e53d0987da.js has been compressed 151.5342Kb -> 26.4121Kb (4.950503ms)[0m
+[36mgzipper: File 103-es5.e6b96ef2e3e53d0987da.js has been compressed 155.1006Kb -> 27.1719Kb (5.026992ms)[0m
+[36mgzipper: File 104-es2015.5b6ebac2b4d8fbc017a9.js has been compressed 336.3262Kb -> 49.5986Kb (9.566917ms)[0m
+[36mgzipper: File 104-es5.5b6ebac2b4d8fbc017a9.js has been compressed 342.7559Kb -> 50.5352Kb (9.756084ms)[0m
+[36mgzipper: File 105-es2015.02d44239e2cf4ef69b36.js has been compressed 4.9922Kb -> 1.8184Kb (0.871638ms)[0m
+[36mgzipper: File 105-es5.02d44239e2cf4ef69b36.js has been compressed 5.1240Kb -> 1.9023Kb (0.789957ms)[0m
+[36mgzipper: File 106-es2015.c52723f18d6d318db662.js has been compressed 319.6982Kb -> 38.3828Kb (7.657415ms)[0m
+[36mgzipper: File 106-es5.c52723f18d6d318db662.js has been compressed 325.4014Kb -> 39.8535Kb (8.038806ms)[0m
+[36mgzipper: File 107-es2015.2a36b55309665d1b119b.js has been compressed 4.7031Kb -> 1.9082Kb (0.795557ms)[0m
+[36mgzipper: File 107-es5.2a36b55309665d1b119b.js has been compressed 6.5908Kb -> 2.6553Kb (0.792331ms)[0m
+[36mgzipper: File 108-es2015.4c3358c75abc22cf6516.js has been compressed 21.4990Kb -> 4.1748Kb (1.127321ms)[0m
+[36mgzipper: File 108-es5.4c3358c75abc22cf6516.js has been compressed 22.2295Kb -> 4.4180Kb (1.086926ms)[0m
+[36mgzipper: File 11-es2015.f86002dd3d38c57914a5.js has been compressed 43.9482Kb -> 8.6182Kb (1.655884ms)[0m
+[36mgzipper: File 11-es5.f86002dd3d38c57914a5.js has been compressed 47.8984Kb -> 10.0371Kb (3.554202ms)[0m
+[36mgzipper: File 12-es2015.703c0c9b8a64f9d2dfbb.js has been compressed 381.6221Kb -> 51.9580Kb (10.10981ms)[0m
+[36mgzipper: File 12-es5.703c0c9b8a64f9d2dfbb.js has been compressed 387.8438Kb -> 53.5566Kb (10.201481ms)[0m
+[36mgzipper: File 13-es2015.071c63d7d9d1bfde1a90.js has been compressed 192.8203Kb -> 30.6738Kb (5.367624ms)[0m
+[36mgzipper: File 13-es5.071c63d7d9d1bfde1a90.js has been compressed 199.5127Kb -> 32.2051Kb (5.633177ms)[0m
+[36mgzipper: File 14-es2015.00958e74449dddd3f686.js has been compressed 204.9775Kb -> 32.3496Kb (6.056354ms)[0m
+[36mgzipper: File 14-es5.00958e74449dddd3f686.js has been compressed 218.1035Kb -> 34.7529Kb (6.617707ms)[0m
+[36mgzipper: File 15-es2015.ae083140a95f5eea87ee.js has been compressed 9.4775Kb -> 2.5879Kb (0.836868ms)[0m
+[36mgzipper: File 15-es5.ae083140a95f5eea87ee.js has been compressed 14.4121Kb -> 3.8379Kb (0.976801ms)[0m
+[36mgzipper: File 16-es2015.2bce5a2ab024b860c0a1.js has been compressed 12.5918Kb -> 3.0283Kb (0.889298ms)[0m
+[36mgzipper: File 16-es5.2bce5a2ab024b860c0a1.js has been compressed 12.5918Kb -> 3.0283Kb (0.953427ms)[0m
+[36mgzipper: File 17-es2015.b0f9931cd276db47183c.js has been compressed 572.0781Kb -> 96.4570Kb (17.286091ms)[0m
+[36mgzipper: File 17-es5.b0f9931cd276db47183c.js has been compressed 585.8506Kb -> 98.9912Kb (18.376888ms)[0m
+[36mgzipper: File 18-es2015.4d45cd89d5406f99cb83.js has been compressed 101.2402Kb -> 20.3184Kb (3.757525ms)[0m
+[36mgzipper: File 18-es5.4d45cd89d5406f99cb83.js has been compressed 108.3652Kb -> 22.0000Kb (4.022555ms)[0m
+[36mgzipper: File 19-es2015.12221a57619628893fbb.js has been compressed 92.7656Kb -> 15.6338Kb (2.962933ms)[0m
+[36mgzipper: File 19-es5.12221a57619628893fbb.js has been compressed 96.0225Kb -> 16.3818Kb (3.261354ms)[0m
+[36mgzipper: File 20-es2015.bf71ef5ae84e2d880a6f.js has been compressed 705.3350Kb -> 165.7588Kb (31.367799ms)[0m
+[36mgzipper: File 20-es5.bf71ef5ae84e2d880a6f.js has been compressed 705.7305Kb -> 165.6689Kb (31.793033ms)[0m
+[36mgzipper: File 21-es2015.594059dfc674c8a4e068.js has been compressed 15.6836Kb -> 4.2393Kb (1.096202ms)[0m
+[36mgzipper: File 21-es5.594059dfc674c8a4e068.js has been compressed 16.2832Kb -> 4.4570Kb (1.04494ms)[0m
+[36mgzipper: File 22-es2015.df9a5249183945863bfc.js has been compressed 46.3789Kb -> 9.8115Kb (1.884276ms)[0m
+[36mgzipper: File 22-es5.df9a5249183945863bfc.js has been compressed 48.0713Kb -> 10.2891Kb (1.843618ms)[0m
+[36mgzipper: File 23-es2015.1abd2375e9dfe9780b6a.js has been compressed 58.9629Kb -> 11.6084Kb (2.005405ms)[0m
+[36mgzipper: File 23-es5.1abd2375e9dfe9780b6a.js has been compressed 60.9326Kb -> 12.1504Kb (2.050022ms)[0m
+[36mgzipper: File 24-es2015.a67d4acb6467d11f5161.js has been compressed 36.0781Kb -> 8.4316Kb (1.541674ms)[0m
+[36mgzipper: File 24-es5.a67d4acb6467d11f5161.js has been compressed 37.2363Kb -> 8.8184Kb (1.638348ms)[0m
+[36mgzipper: File 25-es2015.5b2794e4beab14890638.js has been compressed 206.2773Kb -> 57.3223Kb (10.597736ms)[0m
+[36mgzipper: File 25-es5.5b2794e4beab14890638.js has been compressed 206.2266Kb -> 57.3984Kb (10.530201ms)[0m
+[36mgzipper: File 26-es2015.48f448b79d74216f4b5b.js has been compressed 4.6924Kb -> 1.6973Kb (0.837311ms)[0m
+[36mgzipper: File 26-es5.48f448b79d74216f4b5b.js has been compressed 4.6924Kb -> 1.6973Kb (1.953726ms)[0m
+[36mgzipper: File 27-es2015.b8216fb7340960908943.js has been compressed 7.8887Kb -> 2.8662Kb (0.95923ms)[0m
+[36mgzipper: File 27-es5.b8216fb7340960908943.js has been compressed 8.0205Kb -> 2.9531Kb (0.945884ms)[0m
+[36mgzipper: File 2a1846ba7b55938e5d98.worker.js has been compressed 1033.4756Kb -> 250.1279Kb (47.467862ms)[0m
+[36mgzipper: File 3-es2015.562c3d94996fde8a2c65.js has been compressed 19.9844Kb -> 5.6162Kb (1.264306ms)[0m
+[36mgzipper: File 3-es5.562c3d94996fde8a2c65.js has been compressed 30.2861Kb -> 7.5029Kb (1.495258ms)[0m
+[36mgzipper: File 4-es2015.5fe188f32e3523a2f165.js has been compressed 8.1758Kb -> 2.6074Kb (0.837608ms)[0m
+[36mgzipper: File 4-es5.5fe188f32e3523a2f165.js has been compressed 12.2832Kb -> 3.4131Kb (0.926652ms)[0m
+[36mgzipper: File 43-es2015.8cfda5808674d011b8a1.js has been compressed 954.4570Kb -> 220.3574Kb (40.364765ms)[0m
+[36mgzipper: File 43-es5.8cfda5808674d011b8a1.js has been compressed 957.3428Kb -> 220.9170Kb (40.628213ms)[0m
+[36mgzipper: File 44-es2015.cde4a62b19f9c1688fdd.js has been compressed 253.0566Kb -> 42.1104Kb (7.733587ms)[0m
+[36mgzipper: File 44-es5.cde4a62b19f9c1688fdd.js has been compressed 258.8213Kb -> 43.5645Kb (8.152735ms)[0m
+[36mgzipper: File 45-es2015.fbdb3d0c11e141b9bc2a.js has been compressed 1349.1133Kb -> 358.0156Kb (78.231942ms)[0m
+[36mgzipper: File 45-es5.fbdb3d0c11e141b9bc2a.js has been compressed 1350.3730Kb -> 358.3193Kb (79.425363ms)[0m
+[36mgzipper: File 46-es2015.20e42a8dd23d3adf20b0.js has been compressed 138.1367Kb -> 37.2178Kb (5.993531ms)[0m
+[36mgzipper: File 46-es5.20e42a8dd23d3adf20b0.js has been compressed 140.0684Kb -> 37.7188Kb (5.905278ms)[0m
+[36mgzipper: File 47-es2015.a6fc978beb11b4b71387.js has been compressed 3.1533Kb -> 1.3223Kb (0.857999ms)[0m
+[36mgzipper: File 47-es5.a6fc978beb11b4b71387.js has been compressed 3.7422Kb -> 1.5361Kb (0.777994ms)[0m
+[36mgzipper: File 48-es2015.49b89682434735e45621.js has been compressed 182.3262Kb -> 29.1836Kb (5.515969ms)[0m
+[36mgzipper: File 48-es5.49b89682434735e45621.js has been compressed 187.6387Kb -> 30.6162Kb (5.646591ms)[0m
+[36mgzipper: File 49-es2015.c6f623cd9cf70d44d9d2.js has been compressed 80.9277Kb -> 14.8584Kb (2.945737ms)[0m
+[36mgzipper: File 49-es5.c6f623cd9cf70d44d9d2.js has been compressed 83.1582Kb -> 15.2080Kb (2.675579ms)[0m
+[36mgzipper: File 5-es2015.183d454f70c349c24206.js has been compressed 68.3164Kb -> 9.2129Kb (2.013932ms)[0m
+[36mgzipper: File 5-es5.183d454f70c349c24206.js has been compressed 70.6699Kb -> 10.0186Kb (2.235549ms)[0m
+[36mgzipper: File 50-es2015.97d3b7b805f60ad2e9ac.js has been compressed 295.6035Kb -> 44.3350Kb (8.377978ms)[0m
+[36mgzipper: File 50-es5.97d3b7b805f60ad2e9ac.js has been compressed 306.1641Kb -> 46.3389Kb (8.610599ms)[0m
+[36mgzipper: File 51-es2015.adec472f9e854e259c0f.js has been compressed 255.3047Kb -> 43.0801Kb (7.86187ms)[0m
+[36mgzipper: File 51-es5.adec472f9e854e259c0f.js has been compressed 264.2373Kb -> 44.8877Kb (8.435027ms)[0m
+[36mgzipper: File 52-es2015.b87ba6ca41e2f2ce420f.js has been compressed 67.2764Kb -> 11.6309Kb (2.448703ms)[0m
+[36mgzipper: File 52-es5.b87ba6ca41e2f2ce420f.js has been compressed 68.5479Kb -> 11.9023Kb (2.342954ms)[0m
+[36mgzipper: File 53-es2015.52f643b8608efb116dc3.js has been compressed 204.9795Kb -> 34.5996Kb (6.411566ms)[0m
+[36mgzipper: File 53-es5.52f643b8608efb116dc3.js has been compressed 210.5820Kb -> 35.5928Kb (6.490043ms)[0m
+[36mgzipper: File 54-es2015.62279c6c935d31a97c09.js has been compressed 80.3916Kb -> 17.1123Kb (3.09092ms)[0m
+[36mgzipper: File 54-es5.62279c6c935d31a97c09.js has been compressed 85.3701Kb -> 18.5029Kb (3.233188ms)[0m
+[36mgzipper: File 55-es2015.17e21db6ec711d014deb.js has been compressed 131.2314Kb -> 21.1553Kb (4.137809ms)[0m
+[36mgzipper: File 55-es5.17e21db6ec711d014deb.js has been compressed 135.0137Kb -> 21.9502Kb (4.317909ms)[0m
+[36mgzipper: File 56-es2015.a16928a8de65df079758.js has been compressed 51.9922Kb -> 12.3262Kb (2.153711ms)[0m
+[36mgzipper: File 56-es5.a16928a8de65df079758.js has been compressed 54.4824Kb -> 12.8682Kb (2.221158ms)[0m
+[36mgzipper: File 57-es2015.775de996d2a39e800770.js has been compressed 6.7373Kb -> 2.1143Kb (0.735193ms)[0m
+[36mgzipper: File 57-es5.775de996d2a39e800770.js has been compressed 6.8691Kb -> 2.1885Kb (0.753553ms)[0m
+[36mgzipper: File 58-es2015.72cae2cb6946ed2527e3.js has been compressed 197.2051Kb -> 32.2988Kb (6.165517ms)[0m
+[36mgzipper: File 58-es5.72cae2cb6946ed2527e3.js has been compressed 201.1055Kb -> 32.9277Kb (6.247412ms)[0m
+[36mgzipper: File 59-es2015.3d787355134828eb48a7.js has been compressed 176.1064Kb -> 24.2197Kb (4.843546ms)[0m
+[36mgzipper: File 59-es5.3d787355134828eb48a7.js has been compressed 182.6279Kb -> 25.5098Kb (7.10068ms)[0m
+[36mgzipper: File 6-es2015.f31d9ef772d567867f91.js has been compressed 16.3184Kb -> 3.9609Kb (1.007916ms)[0m
+[36mgzipper: File 6-es5.f31d9ef772d567867f91.js has been compressed 18.6016Kb -> 4.6260Kb (1.002043ms)[0m
+[36mgzipper: File 60-es2015.a2e4bf29f0dadd43e52e.js has been compressed 238.0801Kb -> 28.5098Kb (5.714015ms)[0m
+[36mgzipper: File 60-es5.a2e4bf29f0dadd43e52e.js has been compressed 240.7861Kb -> 29.0996Kb (5.789071ms)[0m
+[36mgzipper: File 61-es2015.ac90f8a8d29b2bbea5a2.js has been compressed 2.8896Kb -> 1.1729Kb (0.653039ms)[0m
+[36mgzipper: File 61-es5.ac90f8a8d29b2bbea5a2.js has been compressed 2.8896Kb -> 1.1729Kb (0.682305ms)[0m
+[36mgzipper: File 62-es2015.9274ce2a585e9cecf9d0.js has been compressed 3.6523Kb -> 1.3799Kb (0.667225ms)[0m
+[36mgzipper: File 62-es5.9274ce2a585e9cecf9d0.js has been compressed 3.6523Kb -> 1.3799Kb (0.725295ms)[0m
+[36mgzipper: File 63-es2015.9e1b1ea88ffdf6c73e1a.js has been compressed 70.6758Kb -> 12.5303Kb (2.392896ms)[0m
+[36mgzipper: File 63-es5.9e1b1ea88ffdf6c73e1a.js has been compressed 72.2773Kb -> 12.8125Kb (2.462478ms)[0m
+[36mgzipper: File 64-es2015.d97d093f5ad0f9811958.js has been compressed 51.2852Kb -> 7.9492Kb (1.552951ms)[0m
+[36mgzipper: File 64-es5.d97d093f5ad0f9811958.js has been compressed 52.4443Kb -> 8.2305Kb (1.674375ms)[0m
+[36mgzipper: File 65-es2015.ee73f1ed6755b85b3971.js has been compressed 19.5137Kb -> 4.2539Kb (1.012624ms)[0m
+[36mgzipper: File 65-es5.ee73f1ed6755b85b3971.js has been compressed 20.3408Kb -> 4.4971Kb (1.007589ms)[0m
+[36mgzipper: File 66-es2015.16c4c756fac8445a7e83.js has been compressed 177.7061Kb -> 8.7119Kb (2.730276ms)[0m
+[36mgzipper: File 66-es5.16c4c756fac8445a7e83.js has been compressed 178.2109Kb -> 8.9688Kb (2.795028ms)[0m
+[36mgzipper: File 67-es2015.7bfd9534b17e579f65a1.js has been compressed 113.7783Kb -> 16.2119Kb (5.64452ms)[0m
+[36mgzipper: File 67-es5.7bfd9534b17e579f65a1.js has been compressed 115.7256Kb -> 16.5225Kb (3.285686ms)[0m
+[36mgzipper: File 68-es2015.02d00230819b83a2bdee.js has been compressed 20.4492Kb -> 4.4033Kb (1.497355ms)[0m
+[36mgzipper: File 68-es5.02d00230819b83a2bdee.js has been compressed 21.5273Kb -> 4.6377Kb (1.106048ms)[0m
+[36mgzipper: File 69-es2015.681f9325370dce4c9ed9.js has been compressed 23.7900Kb -> 5.3965Kb (1.166172ms)[0m
+[36mgzipper: File 69-es5.681f9325370dce4c9ed9.js has been compressed 24.4463Kb -> 5.6172Kb (1.288702ms)[0m
+[36mgzipper: File 7-es2015.6238fd83ea8345995f7a.js has been compressed 294.6582Kb -> 50.2861Kb (8.995554ms)[0m
+[36mgzipper: File 7-es5.6238fd83ea8345995f7a.js has been compressed 304.0723Kb -> 52.1152Kb (9.472458ms)[0m
+[36mgzipper: File 70-es2015.e2b14b2cb7ab3c6ac7fb.js has been compressed 69.5010Kb -> 15.5654Kb (2.790533ms)[0m
+[36mgzipper: File 70-es5.e2b14b2cb7ab3c6ac7fb.js has been compressed 70.9512Kb -> 15.8691Kb (4.278986ms)[0m
+[36mgzipper: File 71-es2015.f8fe5efef93673971db6.js has been compressed 24.3418Kb -> 5.8555Kb (1.23362ms)[0m
+[36mgzipper: File 71-es5.f8fe5efef93673971db6.js has been compressed 25.0518Kb -> 6.0801Kb (1.320643ms)[0m
+[36mgzipper: File 72-es2015.5489fca1c276ec561108.js has been compressed 84.6025Kb -> 14.6563Kb (2.93271ms)[0m
+[36mgzipper: File 72-es5.5489fca1c276ec561108.js has been compressed 87.4395Kb -> 14.9814Kb (2.833344ms)[0m
+[36mgzipper: File 73-es2015.91a61668671f03dac45f.js has been compressed 45.6299Kb -> 10.7734Kb (1.896083ms)[0m
+[36mgzipper: File 73-es5.91a61668671f03dac45f.js has been compressed 47.6289Kb -> 11.4326Kb (1.907379ms)[0m
+[36mgzipper: File 74-es2015.44249aa7003ddb9f6083.js has been compressed 83.3350Kb -> 16.9541Kb (3.117505ms)[0m
+[36mgzipper: File 74-es5.44249aa7003ddb9f6083.js has been compressed 87.7168Kb -> 17.8545Kb (3.189559ms)[0m
+[36mgzipper: File 75-es2015.23c55e44da7aea9601f8.js has been compressed 4.5557Kb -> 1.6484Kb (0.733465ms)[0m
+[36mgzipper: File 75-es5.23c55e44da7aea9601f8.js has been compressed 4.5557Kb -> 1.6484Kb (0.718868ms)[0m
+[36mgzipper: File 76-es2015.d565199001e0a263361f.js has been compressed 4.5557Kb -> 1.6484Kb (0.775783ms)[0m
+[36mgzipper: File 76-es5.d565199001e0a263361f.js has been compressed 4.5557Kb -> 1.6484Kb (1.7356ms)[0m
+[36mgzipper: File 77-es2015.b8a1b064d86f4c125352.js has been compressed 4.7354Kb -> 1.7109Kb (0.709631ms)[0m
+[36mgzipper: File 77-es5.b8a1b064d86f4c125352.js has been compressed 4.7354Kb -> 1.7109Kb (0.755388ms)[0m
+[36mgzipper: File 78-es2015.8772f7151cd9771a566b.js has been compressed 123.8438Kb -> 19.7100Kb (3.640794ms)[0m
+[36mgzipper: File 78-es5.8772f7151cd9771a566b.js has been compressed 126.3506Kb -> 20.2637Kb (3.85441ms)[0m
+[36mgzipper: File 79-es2015.27a957ac8343d6d30233.js has been compressed 1.0176Kb -> 0.5391Kb (0.558201ms)[0m
+[36mgzipper: File 79-es5.27a957ac8343d6d30233.js has been compressed 1.5283Kb -> 0.7598Kb (0.572765ms)[0m
+[36mgzipper: File 8-es2015.51140c717bc282f0e4ae.js has been compressed 368.1074Kb -> 101.3496Kb (16.84421ms)[0m
+[36mgzipper: File 8-es5.51140c717bc282f0e4ae.js has been compressed 368.1055Kb -> 101.3652Kb (17.657215ms)[0m
+[36mgzipper: File 80-es2015.d8a52d63c17227811ef2.js has been compressed 4.1465Kb -> 1.5117Kb (0.755295ms)[0m
+[36mgzipper: File 80-es5.d8a52d63c17227811ef2.js has been compressed 5.2080Kb -> 1.8779Kb (0.709392ms)[0m
+[36mgzipper: File 81-es2015.8a24669f93843d2678b5.js has been compressed 57.4023Kb -> 10.9951Kb (2.145368ms)[0m
+[36mgzipper: File 81-es5.8a24669f93843d2678b5.js has been compressed 59.7529Kb -> 11.5928Kb (2.198985ms)[0m
+[36mgzipper: File 82-es2015.dfe8ee66c7ef40772f14.js has been compressed 3.8779Kb -> 1.4727Kb (0.64923ms)[0m
+[36mgzipper: File 82-es5.dfe8ee66c7ef40772f14.js has been compressed 5.4092Kb -> 1.9102Kb (0.693163ms)[0m
+[36mgzipper: File 83-es2015.08ec293dee9ccd961113.js has been compressed 22.3564Kb -> 6.3242Kb (1.286473ms)[0m
+[36mgzipper: File 83-es5.08ec293dee9ccd961113.js has been compressed 24.4355Kb -> 6.7813Kb (1.29306ms)[0m
+[36mgzipper: File 84-es2015.35e5c7f38db49bab9039.js has been compressed 1.2637Kb -> 0.6699Kb (0.557681ms)[0m
+[36mgzipper: File 84-es5.35e5c7f38db49bab9039.js has been compressed 1.7754Kb -> 0.8926Kb (0.576885ms)[0m
+[36mgzipper: File 85-es2015.cb4bb0fb8890e57dbeed.js has been compressed 17.4063Kb -> 5.1709Kb (1.070141ms)[0m
+[36mgzipper: File 85-es5.cb4bb0fb8890e57dbeed.js has been compressed 19.1523Kb -> 5.6602Kb (1.099903ms)[0m
+[36mgzipper: File 86-es2015.cb9269c4f2370c340679.js has been compressed 43.3857Kb -> 10.0088Kb (1.846885ms)[0m
+[36mgzipper: File 86-es5.cb9269c4f2370c340679.js has been compressed 45.1572Kb -> 10.3086Kb (1.869554ms)[0m
+[36mgzipper: File 87-es2015.0029f5f6595fe9b6787e.js has been compressed 9.1543Kb -> 2.7061Kb (0.7655ms)[0m
+[36mgzipper: File 87-es5.0029f5f6595fe9b6787e.js has been compressed 9.8672Kb -> 2.9463Kb (0.766079ms)[0m
+[36mgzipper: File 88-es2015.67f77c4f008bc77af8ae.js has been compressed 0.7627Kb -> 0.4453Kb (0.576749ms)[0m
+[36mgzipper: File 88-es5.67f77c4f008bc77af8ae.js has been compressed 0.9824Kb -> 0.5176Kb (0.570809ms)[0m
+[36mgzipper: File 89-es2015.ed5b7962fd0107eebb44.js has been compressed 2.3154Kb -> 1.0605Kb (0.783644ms)[0m
+[36mgzipper: File 89-es5.ed5b7962fd0107eebb44.js has been compressed 2.8691Kb -> 1.2666Kb (0.714421ms)[0m
+[36mgzipper: File 9-es2015.60263de545aa7cf705ac.js has been compressed 34.1943Kb -> 8.8457Kb (1.699967ms)[0m
+[36mgzipper: File 9-es5.60263de545aa7cf705ac.js has been compressed 39.3076Kb -> 9.8750Kb (1.845013ms)[0m
+[36mgzipper: File 90-es2015.7968c9a21b3e0a4826fa.js has been compressed 106.8789Kb -> 18.9209Kb (3.509543ms)[0m
+[36mgzipper: File 90-es5.7968c9a21b3e0a4826fa.js has been compressed 108.9668Kb -> 19.2471Kb (3.641664ms)[0m
+[36mgzipper: File 91-es2015.6573d7b90e017e313a33.js has been compressed 95.1641Kb -> 15.6777Kb (2.829987ms)[0m
+[36mgzipper: File 91-es5.6573d7b90e017e313a33.js has been compressed 97.3662Kb -> 16.1855Kb (3.062716ms)[0m
+[36mgzipper: File 92-es2015.c1aa07e2d8e2429ce24b.js has been compressed 82.8887Kb -> 15.9941Kb (2.743775ms)[0m
+[36mgzipper: File 92-es5.c1aa07e2d8e2429ce24b.js has been compressed 84.3779Kb -> 16.4014Kb (2.850258ms)[0m
+[36mgzipper: File 93-es2015.504d4d15b6473115e64b.js has been compressed 16.6943Kb -> 5.0713Kb (1.180785ms)[0m
+[36mgzipper: File 93-es5.504d4d15b6473115e64b.js has been compressed 18.7334Kb -> 5.7773Kb (1.314216ms)[0m
+[36mgzipper: File 94-es2015.6f64b98762d92f751750.js has been compressed 3.2490Kb -> 1.4111Kb (0.620786ms)[0m
+[36mgzipper: File 94-es5.6f64b98762d92f751750.js has been compressed 3.8428Kb -> 1.6211Kb (0.868882ms)[0m
+[36mgzipper: File 95-es2015.cb622e3c530cff95e50e.js has been compressed 1.8252Kb -> 0.7490Kb (0.599741ms)[0m
+[36mgzipper: File 95-es5.cb622e3c530cff95e50e.js has been compressed 2.1406Kb -> 0.8252Kb (0.569742ms)[0m
+[36mgzipper: File 96-es2015.dc5e9a608cb8ee0018a0.js has been compressed 36.5225Kb -> 8.1445Kb (1.699492ms)[0m
+[36mgzipper: File 96-es5.dc5e9a608cb8ee0018a0.js has been compressed 37.5156Kb -> 8.3945Kb (1.563342ms)[0m
+[36mgzipper: File 97-es2015.7b9b74d5a2afa7f43d9c.js has been compressed 1.9873Kb -> 0.8516Kb (0.627273ms)[0m
+[36mgzipper: File 97-es5.7b9b74d5a2afa7f43d9c.js has been compressed 2.8135Kb -> 1.0752Kb (0.631349ms)[0m
+[36mgzipper: File 98-es2015.1d7c0a563984b059f237.js has been compressed 0.7676Kb -> 0.4453Kb (0.56079ms)[0m
+[36mgzipper: File 98-es5.1d7c0a563984b059f237.js has been compressed 0.9990Kb -> 0.5098Kb (0.594724ms)[0m
+[36mgzipper: File 99-es2015.2b888e5a6f5955c45168.js has been compressed 3.2549Kb -> 1.4629Kb (0.705524ms)[0m
+[36mgzipper: File 99-es5.2b888e5a6f5955c45168.js has been compressed 3.8203Kb -> 1.6777Kb (0.6676ms)[0m
+[36mgzipper: File addNodeIcon.a1a2d01bcd034270a3bc.png has been compressed 20.5059Kb -> 5.6348Kb (0.87649ms)[0m
+[36mgzipper: File backIcon.dd0baa69a69937600dc3.png has been compressed 20.3145Kb -> 5.4355Kb (0.845176ms)[0m
+[36mgzipper: File common-es2015.9138322fc0a555342f17.js has been compressed 40.5098Kb -> 10.5586Kb (1.786045ms)[0m
+[36mgzipper: File common-es5.9138322fc0a555342f17.js has been compressed 43.8516Kb -> 10.9941Kb (1.760991ms)[0m
+[36mgzipper: File connectIcon.d5267b8db2498e44bd56.png has been compressed 20.2773Kb -> 5.4004Kb (0.845437ms)[0m
+[36mgzipper: File cross.260c9c6535065674bb5e.png has been compressed 17.8740Kb -> 4.0947Kb (0.871206ms)[0m
+[36mgzipper: File deleteIcon.02d321edc6e03aea1675.png has been compressed 20.4893Kb -> 5.6201Kb (0.79265ms)[0m
+[36mgzipper: File downArrow.bbfbf2e8eaa8ebbce852.png has been compressed 4.3555Kb -> 4.3779Kb (0.574658ms)[0m
+[36mgzipper: File editIcon.d5422321c4f6feed4081.png has been compressed 20.5234Kb -> 5.6543Kb (1.617642ms)[0m
+[36mgzipper: File favicon.png has been compressed 0.8096Kb -> 0.8320Kb (0.551305ms)[0m
+[36mgzipper: File stylesheet.css has been compressed 3.6182Kb -> 0.4072Kb (0.55703ms)[0m
+[36mgzipper: File 431861-spider-workers-siemens-corpora_original@2x.png has been compressed 157.0840Kb -> 157.1504Kb (6.237291ms)[0m
+[36mgzipper: File facebook.svg has been compressed 1.1172Kb -> 0.6230Kb (0.524378ms)[0m
+[36mgzipper: File linked-in.svg has been compressed 1.3330Kb -> 0.7168Kb (0.611359ms)[0m
+[36mgzipper: File pin.svg has been compressed 0.2578Kb -> 0.2041Kb (0.528314ms)[0m
+[36mgzipper: File twitter.svg has been compressed 1.3027Kb -> 0.7734Kb (0.564287ms)[0m
+[36mgzipper: File telemetry.min.js has been compressed 116.3203Kb -> 29.9033Kb (4.993359ms)[0m
+[36mgzipper: File index.html has been compressed 3.1318Kb -> 1.3486Kb (0.64917ms)[0m
+[36mgzipper: File leftArrow.8965662a4348c548189b.png has been compressed 4.4248Kb -> 4.4473Kb (0.611954ms)[0m
+[36mgzipper: File libraries.caed9729f6ec38145fe3.css has been compressed 1146.0996Kb -> 134.9912Kb (25.665382ms)[0m
+[36mgzipper: File main-es2015.b2c5a376fee27807f330.js has been compressed 6490.3652Kb -> 1635.7842Kb (279.705067ms)[0m
+[36mgzipper: File main-es5.b2c5a376fee27807f330.js has been compressed 6709.8105Kb -> 1662.6572Kb (280.154515ms)[0m
+[36mgzipper: File minus.5a379c46656d7a393c8f.png has been compressed 4.0498Kb -> 4.0723Kb (0.710351ms)[0m
+[36mgzipper: File pdfjsWorker-es2015.a0f44fafc1db6d69f9f1.js has been compressed 751.8174Kb -> 212.9043Kb (37.619607ms)[0m
+[36mgzipper: File pdfjsWorker-es5.a0f44fafc1db6d69f9f1.js has been compressed 751.7793Kb -> 212.8984Kb (38.553684ms)[0m
+[36mgzipper: File plus.4c4bf0a13eae5c7cdb10.png has been compressed 4.2393Kb -> 4.2617Kb (0.645071ms)[0m
+[36mgzipper: File polyfills-es2015.dc869cda37e011be5343.js has been compressed 55.8311Kb -> 18.5498Kb (3.038424ms)[0m
+[36mgzipper: File polyfills-es5.fb81c3b9c967e426b341.js has been compressed 148.8564Kb -> 50.5840Kb (7.975767ms)[0m
+[36mgzipper: File rightArrow.4f88ef172e7bc7e98e24.png has been compressed 4.4082Kb -> 4.4307Kb (0.610007ms)[0m
+[36mgzipper: File runtime-es2015.cc5fdf172a6f946492c2.js has been compressed 4.6240Kb -> 2.6309Kb (0.629711ms)[0m
+[36mgzipper: File runtime-es5.cc5fdf172a6f946492c2.js has been compressed 4.6211Kb -> 2.6289Kb (0.637622ms)[0m
+[36mgzipper: File scripts.5e9e0657550a82831d46.js has been compressed 194.7021Kb -> 65.3652Kb (9.780488ms)[0m
+[36mgzipper: File shadow.bf677598a57b95390558.png has been compressed 0.2832Kb -> 0.3057Kb (0.571028ms)[0m
+[36mgzipper: File styles.c3b3bb9ed1dd6a818746.css has been compressed 163.5684Kb -> 16.9395Kb (4.00446ms)[0m
+[36mgzipper: File theme-blue.css has been compressed 135.9160Kb -> 13.4668Kb (3.392112ms)[0m
+[36mgzipper: File theme-deep-blue.css has been compressed 143.2949Kb -> 13.6436Kb (3.371084ms)[0m
+[36mgzipper: File theme-deep-purple.css has been compressed 146.2988Kb -> 13.7334Kb (3.434713ms)[0m
+[36mgzipper: File theme-grey.css has been compressed 149.0586Kb -> 15.7314Kb (3.683082ms)[0m
+[36mgzipper: File theme-igot.css has been compressed 135.8643Kb -> 13.3867Kb (3.396789ms)[0m
+[36mgzipper: File theme-indigo.css has been compressed 138.8848Kb -> 13.5576Kb (3.335362ms)[0m
+[36mgzipper: File theme-lite-blue.css has been compressed 143.3203Kb -> 13.6436Kb (3.446135ms)[0m
+[36mgzipper: File theme-orange.css has been compressed 138.7988Kb -> 13.5605Kb (3.438907ms)[0m
+[36mgzipper: File theme-teal.css has been compressed 132.0137Kb -> 13.2402Kb (3.264539ms)[0m
+[36mgzipper: File upArrow.f0aa0566b9f39334bd88.png has been compressed 4.3564Kb -> 4.3789Kb (0.670235ms)[0m
+[36mgzipper: File zoomExtends.5f78e86f895f5a5cc147.png has been compressed 4.3594Kb -> 4.3818Kb (0.657555ms)[0m
+[32mgzipper: 230 files have been compressed.[0m
+
+> fusion@0.0.1 compress:brotli /app
+> gzipper --brotli --gzip-level=9 --verbose ./dist/www
+
+[33mgzipper: BROTLI -> [0m
+[36mgzipper: Use default output file format [filename].[ext].[compressExt][0m
+[36mgzipper: File 1-es2015.dde14f4516d0c1bbf890.js has been compressed 51.7031Kb -> 9.3594Kb (96.920379ms)[0m
+[36mgzipper: File 1-es5.dde14f4516d0c1bbf890.js has been compressed 57.1592Kb -> 9.9922Kb (95.831185ms)[0m
+[36mgzipper: File 10-es2015.61e1e3fe658eb907200a.js has been compressed 299.6934Kb -> 23.6650Kb (485.65212ms)[0m
+[36mgzipper: File 10-es5.61e1e3fe658eb907200a.js has been compressed 306.8799Kb -> 24.5361Kb (502.707884ms)[0m
+[36mgzipper: File 100-es2015.072e9daf9eb65b94eb8c.js has been compressed 24.8486Kb -> 5.1924Kb (43.69845ms)[0m
+[36mgzipper: File 100-es5.072e9daf9eb65b94eb8c.js has been compressed 25.6299Kb -> 5.4248Kb (45.862092ms)[0m
+[36mgzipper: File 101-es2015.272507e8d185dc2de16e.js has been compressed 3.2480Kb -> 1.3047Kb (7.359369ms)[0m
+[36mgzipper: File 101-es5.272507e8d185dc2de16e.js has been compressed 3.8135Kb -> 1.4980Kb (7.46593ms)[0m
+[36mgzipper: File 102-es2015.68608a949c84e58d6239.js has been compressed 17.5723Kb -> 3.3838Kb (30.456214ms)[0m
+[36mgzipper: File 102-es5.68608a949c84e58d6239.js has been compressed 18.5742Kb -> 3.6191Kb (31.755185ms)[0m
+[36mgzipper: File 103-es2015.e6b96ef2e3e53d0987da.js has been compressed 151.5342Kb -> 18.0684Kb (246.779214ms)[0m
+[36mgzipper: File 103-es5.e6b96ef2e3e53d0987da.js has been compressed 155.1006Kb -> 18.6875Kb (254.303361ms)[0m
+[36mgzipper: File 104-es2015.5b6ebac2b4d8fbc017a9.js has been compressed 336.3262Kb -> 34.6895Kb (616.021996ms)[0m
+[36mgzipper: File 104-es5.5b6ebac2b4d8fbc017a9.js has been compressed 342.7559Kb -> 35.1738Kb (623.190251ms)[0m
+[36mgzipper: File 105-es2015.02d44239e2cf4ef69b36.js has been compressed 4.9922Kb -> 1.4688Kb (9.069229ms)[0m
+[36mgzipper: File 105-es5.02d44239e2cf4ef69b36.js has been compressed 5.1240Kb -> 1.5215Kb (9.706052ms)[0m
+[36mgzipper: File 106-es2015.c52723f18d6d318db662.js has been compressed 319.6982Kb -> 23.1563Kb (499.987577ms)[0m
+[36mgzipper: File 106-es5.c52723f18d6d318db662.js has been compressed 325.4014Kb -> 24.4697Kb (507.439542ms)[0m
+[36mgzipper: File 107-es2015.2a36b55309665d1b119b.js has been compressed 4.7031Kb -> 1.6465Kb (9.395489ms)[0m
+[36mgzipper: File 107-es5.2a36b55309665d1b119b.js has been compressed 6.5908Kb -> 2.3174Kb (11.917773ms)[0m
+[36mgzipper: File 108-es2015.4c3358c75abc22cf6516.js has been compressed 21.4990Kb -> 3.2588Kb (34.836992ms)[0m
+[36mgzipper: File 108-es5.4c3358c75abc22cf6516.js has been compressed 22.2295Kb -> 3.4678Kb (36.101094ms)[0m
+[36mgzipper: File 11-es2015.f86002dd3d38c57914a5.js has been compressed 43.9482Kb -> 7.3818Kb (63.409595ms)[0m
+[36mgzipper: File 11-es5.f86002dd3d38c57914a5.js has been compressed 47.8984Kb -> 8.5605Kb (69.200852ms)[0m
+[36mgzipper: File 12-es2015.703c0c9b8a64f9d2dfbb.js has been compressed 381.6221Kb -> 32.1504Kb (630.958595ms)[0m
+[36mgzipper: File 12-es5.703c0c9b8a64f9d2dfbb.js has been compressed 387.8438Kb -> 33.2822Kb (641.616337ms)[0m
+[36mgzipper: File 13-es2015.071c63d7d9d1bfde1a90.js has been compressed 192.8203Kb -> 18.8174Kb (288.355793ms)[0m
+[36mgzipper: File 13-es5.071c63d7d9d1bfde1a90.js has been compressed 199.5127Kb -> 19.6855Kb (294.172431ms)[0m
+[36mgzipper: File 14-es2015.00958e74449dddd3f686.js has been compressed 204.9775Kb -> 23.8848Kb (359.163322ms)[0m
+[36mgzipper: File 14-es5.00958e74449dddd3f686.js has been compressed 218.1035Kb -> 25.3271Kb (377.75444ms)[0m
+[36mgzipper: File 15-es2015.ae083140a95f5eea87ee.js has been compressed 9.4775Kb -> 2.2861Kb (14.898748ms)[0m
+[36mgzipper: File 15-es5.ae083140a95f5eea87ee.js has been compressed 14.4121Kb -> 3.4043Kb (21.30832ms)[0m
+[36mgzipper: File 16-es2015.2bce5a2ab024b860c0a1.js has been compressed 12.5918Kb -> 2.6299Kb (21.844584ms)[0m
+[36mgzipper: File 16-es5.2bce5a2ab024b860c0a1.js has been compressed 12.5918Kb -> 2.6299Kb (21.051722ms)[0m
+[36mgzipper: File 17-es2015.b0f9931cd276db47183c.js has been compressed 572.0781Kb -> 68.5205Kb (941.827339ms)[0m
+[36mgzipper: File 17-es5.b0f9931cd276db47183c.js has been compressed 585.8506Kb -> 70.3398Kb (965.994069ms)[0m
+[36mgzipper: File 18-es2015.4d45cd89d5406f99cb83.js has been compressed 101.2402Kb -> 16.4453Kb (179.722056ms)[0m
+[36mgzipper: File 18-es5.4d45cd89d5406f99cb83.js has been compressed 108.3652Kb -> 17.8760Kb (194.843589ms)[0m
+[36mgzipper: File 19-es2015.12221a57619628893fbb.js has been compressed 92.7656Kb -> 12.1143Kb (137.321716ms)[0m
+[36mgzipper: File 19-es5.12221a57619628893fbb.js has been compressed 96.0225Kb -> 12.7734Kb (143.497517ms)[0m
+[36mgzipper: File 20-es2015.bf71ef5ae84e2d880a6f.js has been compressed 705.3350Kb -> 125.7441Kb (1s 322.632113ms)[0m
+[36mgzipper: File 20-es5.bf71ef5ae84e2d880a6f.js has been compressed 705.7305Kb -> 125.7754Kb (1s 287.853873ms)[0m
+[36mgzipper: File 21-es2015.594059dfc674c8a4e068.js has been compressed 15.6836Kb -> 3.6699Kb (28.10562ms)[0m
+[36mgzipper: File 21-es5.594059dfc674c8a4e068.js has been compressed 16.2832Kb -> 3.8604Kb (28.508081ms)[0m
+[36mgzipper: File 22-es2015.df9a5249183945863bfc.js has been compressed 46.3789Kb -> 8.5107Kb (76.038398ms)[0m
+[36mgzipper: File 22-es5.df9a5249183945863bfc.js has been compressed 48.0713Kb -> 8.8867Kb (81.628755ms)[0m
+[36mgzipper: File 23-es2015.1abd2375e9dfe9780b6a.js has been compressed 58.9629Kb -> 9.4697Kb (100.002265ms)[0m
+[36mgzipper: File 23-es5.1abd2375e9dfe9780b6a.js has been compressed 60.9326Kb -> 9.8691Kb (101.225925ms)[0m
+[36mgzipper: File 24-es2015.a67d4acb6467d11f5161.js has been compressed 36.0781Kb -> 7.2627Kb (53.16365ms)[0m
+[36mgzipper: File 24-es5.a67d4acb6467d11f5161.js has been compressed 37.2363Kb -> 7.5928Kb (54.950478ms)[0m
+[36mgzipper: File 25-es2015.5b2794e4beab14890638.js has been compressed 206.2773Kb -> 49.5586Kb (388.425239ms)[0m
+[36mgzipper: File 25-es5.5b2794e4beab14890638.js has been compressed 206.2266Kb -> 49.5635Kb (401.549422ms)[0m
+[36mgzipper: File 26-es2015.48f448b79d74216f4b5b.js has been compressed 4.6924Kb -> 1.3623Kb (9.030524ms)[0m
+[36mgzipper: File 26-es5.48f448b79d74216f4b5b.js has been compressed 4.6924Kb -> 1.3623Kb (9.077636ms)[0m
+[36mgzipper: File 27-es2015.b8216fb7340960908943.js has been compressed 7.8887Kb -> 2.1846Kb (13.023486ms)[0m
+[36mgzipper: File 27-es5.b8216fb7340960908943.js has been compressed 8.0205Kb -> 2.2412Kb (13.102598ms)[0m
+[36mgzipper: File 2a1846ba7b55938e5d98.worker.js has been compressed 1033.4756Kb -> 198.1982Kb (2s 188.505752ms)[0m
+[36mgzipper: File 3-es2015.562c3d94996fde8a2c65.js has been compressed 19.9844Kb -> 4.9199Kb (31.561004ms)[0m
+[36mgzipper: File 3-es5.562c3d94996fde8a2c65.js has been compressed 30.2861Kb -> 6.5977Kb (50.578511ms)[0m
+[36mgzipper: File 4-es2015.5fe188f32e3523a2f165.js has been compressed 8.1758Kb -> 2.2725Kb (13.73796ms)[0m
+[36mgzipper: File 4-es5.5fe188f32e3523a2f165.js has been compressed 12.2832Kb -> 2.9844Kb (20.719447ms)[0m
+[36mgzipper: File 43-es2015.8cfda5808674d011b8a1.js has been compressed 954.4570Kb -> 177.2578Kb (1s 957.208175ms)[0m
+[36mgzipper: File 43-es5.8cfda5808674d011b8a1.js has been compressed 957.3428Kb -> 177.6641Kb (1s 925.204893ms)[0m
+[36mgzipper: File 44-es2015.cde4a62b19f9c1688fdd.js has been compressed 253.0566Kb -> 26.7217Kb (439.357091ms)[0m
+[36mgzipper: File 44-es5.cde4a62b19f9c1688fdd.js has been compressed 258.8213Kb -> 27.3975Kb (453.05706ms)[0m
+[36mgzipper: File 45-es2015.fbdb3d0c11e141b9bc2a.js has been compressed 1349.1133Kb -> 217.1133Kb (2s 274.909026ms)[0m
+[36mgzipper: File 45-es5.fbdb3d0c11e141b9bc2a.js has been compressed 1350.3730Kb -> 217.2598Kb (2s 124.831249ms)[0m
+[36mgzipper: File 46-es2015.20e42a8dd23d3adf20b0.js has been compressed 138.1367Kb -> 27.4385Kb (222.891721ms)[0m
+[36mgzipper: File 46-es5.20e42a8dd23d3adf20b0.js has been compressed 140.0684Kb -> 27.7451Kb (221.784365ms)[0m
+[36mgzipper: File 47-es2015.a6fc978beb11b4b71387.js has been compressed 3.1533Kb -> 1.1768Kb (6.72738ms)[0m
+[36mgzipper: File 47-es5.a6fc978beb11b4b71387.js has been compressed 3.7422Kb -> 1.3594Kb (6.779706ms)[0m
+[36mgzipper: File 48-es2015.49b89682434735e45621.js has been compressed 182.3262Kb -> 19.6162Kb (314.108546ms)[0m
+[36mgzipper: File 48-es5.49b89682434735e45621.js has been compressed 187.6387Kb -> 20.7344Kb (320.825938ms)[0m
+[36mgzipper: File 49-es2015.c6f623cd9cf70d44d9d2.js has been compressed 80.9277Kb -> 12.3398Kb (141.940405ms)[0m
+[36mgzipper: File 49-es5.c6f623cd9cf70d44d9d2.js has been compressed 83.1582Kb -> 12.6016Kb (146.056755ms)[0m
+[36mgzipper: File 5-es2015.183d454f70c349c24206.js has been compressed 68.3164Kb -> 7.1758Kb (115.279761ms)[0m
+[36mgzipper: File 5-es5.183d454f70c349c24206.js has been compressed 70.6699Kb -> 7.8408Kb (118.119864ms)[0m
+[36mgzipper: File 50-es2015.97d3b7b805f60ad2e9ac.js has been compressed 295.6035Kb -> 30.3311Kb (526.594629ms)[0m
+[36mgzipper: File 50-es5.97d3b7b805f60ad2e9ac.js has been compressed 306.1641Kb -> 31.9141Kb (548.689337ms)[0m
+[36mgzipper: File 51-es2015.adec472f9e854e259c0f.js has been compressed 255.3047Kb -> 28.1357Kb (449.652601ms)[0m
+[36mgzipper: File 51-es5.adec472f9e854e259c0f.js has been compressed 264.2373Kb -> 29.4463Kb (468.332011ms)[0m
+[36mgzipper: File 52-es2015.b87ba6ca41e2f2ce420f.js has been compressed 67.2764Kb -> 9.2021Kb (108.949835ms)[0m
+[36mgzipper: File 52-es5.b87ba6ca41e2f2ce420f.js has been compressed 68.5479Kb -> 9.4404Kb (106.940576ms)[0m
+[36mgzipper: File 53-es2015.52f643b8608efb116dc3.js has been compressed 204.9795Kb -> 25.7637Kb (351.545522ms)[0m
+[36mgzipper: File 53-es5.52f643b8608efb116dc3.js has been compressed 210.5820Kb -> 26.4912Kb (360.739648ms)[0m
+[36mgzipper: File 54-es2015.62279c6c935d31a97c09.js has been compressed 80.3916Kb -> 14.2441Kb (141.639886ms)[0m
+[36mgzipper: File 54-es5.62279c6c935d31a97c09.js has been compressed 85.3701Kb -> 15.3203Kb (146.91541ms)[0m
+[36mgzipper: File 55-es2015.17e21db6ec711d014deb.js has been compressed 131.2314Kb -> 14.4580Kb (234.242771ms)[0m
+[36mgzipper: File 55-es5.17e21db6ec711d014deb.js has been compressed 135.0137Kb -> 15.0176Kb (239.273277ms)[0m
+[36mgzipper: File 56-es2015.a16928a8de65df079758.js has been compressed 51.9922Kb -> 10.2930Kb (91.178448ms)[0m
+[36mgzipper: File 56-es5.a16928a8de65df079758.js has been compressed 54.4824Kb -> 10.7471Kb (94.887926ms)[0m
+[36mgzipper: File 57-es2015.775de996d2a39e800770.js has been compressed 6.7373Kb -> 1.7598Kb (12.675288ms)[0m
+[36mgzipper: File 57-es5.775de996d2a39e800770.js has been compressed 6.8691Kb -> 1.8164Kb (12.664315ms)[0m
+[36mgzipper: File 58-es2015.72cae2cb6946ed2527e3.js has been compressed 197.2051Kb -> 22.5645Kb (357.039862ms)[0m
+[36mgzipper: File 58-es5.72cae2cb6946ed2527e3.js has been compressed 201.1055Kb -> 22.8379Kb (357.777485ms)[0m
+[36mgzipper: File 59-es2015.3d787355134828eb48a7.js has been compressed 176.1064Kb -> 17.8936Kb (301.220575ms)[0m
+[36mgzipper: File 59-es5.3d787355134828eb48a7.js has been compressed 182.6279Kb -> 19.0215Kb (314.064417ms)[0m
+[36mgzipper: File 6-es2015.f31d9ef772d567867f91.js has been compressed 16.3184Kb -> 3.4961Kb (27.002439ms)[0m
+[36mgzipper: File 6-es5.f31d9ef772d567867f91.js has been compressed 18.6016Kb -> 4.0781Kb (30.820119ms)[0m
+[36mgzipper: File 60-es2015.a2e4bf29f0dadd43e52e.js has been compressed 238.0801Kb -> 20.0859Kb (412.745437ms)[0m
+[36mgzipper: File 60-es5.a2e4bf29f0dadd43e52e.js has been compressed 240.7861Kb -> 20.4121Kb (419.321411ms)[0m
+[36mgzipper: File 61-es2015.ac90f8a8d29b2bbea5a2.js has been compressed 2.8896Kb -> 0.9746Kb (5.937438ms)[0m
+[36mgzipper: File 61-es5.ac90f8a8d29b2bbea5a2.js has been compressed 2.8896Kb -> 0.9746Kb (5.611262ms)[0m
+[36mgzipper: File 62-es2015.9274ce2a585e9cecf9d0.js has been compressed 3.6523Kb -> 1.1123Kb (6.622364ms)[0m
+[36mgzipper: File 62-es5.9274ce2a585e9cecf9d0.js has been compressed 3.6523Kb -> 1.1123Kb (6.654492ms)[0m
+[36mgzipper: File 63-es2015.9e1b1ea88ffdf6c73e1a.js has been compressed 70.6758Kb -> 10.1709Kb (109.66546ms)[0m
+[36mgzipper: File 63-es5.9e1b1ea88ffdf6c73e1a.js has been compressed 72.2773Kb -> 10.4336Kb (111.05517ms)[0m
+[36mgzipper: File 64-es2015.d97d093f5ad0f9811958.js has been compressed 51.2852Kb -> 6.3877Kb (73.807422ms)[0m
+[36mgzipper: File 64-es5.d97d093f5ad0f9811958.js has been compressed 52.4443Kb -> 6.6045Kb (77.104552ms)[0m
+[36mgzipper: File 65-es2015.ee73f1ed6755b85b3971.js has been compressed 19.5137Kb -> 3.6543Kb (31.699543ms)[0m
+[36mgzipper: File 65-es5.ee73f1ed6755b85b3971.js has been compressed 20.3408Kb -> 3.8623Kb (32.899207ms)[0m
+[36mgzipper: File 66-es2015.16c4c756fac8445a7e83.js has been compressed 177.7061Kb -> 5.3887Kb (177.796732ms)[0m
+[36mgzipper: File 66-es5.16c4c756fac8445a7e83.js has been compressed 178.2109Kb -> 5.5488Kb (178.872337ms)[0m
+[36mgzipper: File 67-es2015.7bfd9534b17e579f65a1.js has been compressed 113.7783Kb -> 11.8887Kb (189.291773ms)[0m
+[36mgzipper: File 67-es5.7bfd9534b17e579f65a1.js has been compressed 115.7256Kb -> 12.1406Kb (191.076526ms)[0m
+[36mgzipper: File 68-es2015.02d00230819b83a2bdee.js has been compressed 20.4492Kb -> 3.8672Kb (35.884161ms)[0m
+[36mgzipper: File 68-es5.02d00230819b83a2bdee.js has been compressed 21.5273Kb -> 4.0693Kb (36.398872ms)[0m
+[36mgzipper: File 69-es2015.681f9325370dce4c9ed9.js has been compressed 23.7900Kb -> 4.5762Kb (42.374246ms)[0m
+[36mgzipper: File 69-es5.681f9325370dce4c9ed9.js has been compressed 24.4463Kb -> 4.7676Kb (42.786071ms)[0m
+[36mgzipper: File 7-es2015.6238fd83ea8345995f7a.js has been compressed 294.6582Kb -> 31.6338Kb (446.845469ms)[0m
+[36mgzipper: File 7-es5.6238fd83ea8345995f7a.js has been compressed 304.0723Kb -> 33.0254Kb (470.165488ms)[0m
+[36mgzipper: File 70-es2015.e2b14b2cb7ab3c6ac7fb.js has been compressed 69.5010Kb -> 12.2432Kb (113.588733ms)[0m
+[36mgzipper: File 70-es5.e2b14b2cb7ab3c6ac7fb.js has been compressed 70.9512Kb -> 12.4746Kb (117.215939ms)[0m
+[36mgzipper: File 71-es2015.f8fe5efef93673971db6.js has been compressed 24.3418Kb -> 4.9746Kb (43.072734ms)[0m
+[36mgzipper: File 71-es5.f8fe5efef93673971db6.js has been compressed 25.0518Kb -> 5.1699Kb (41.553165ms)[0m
+[36mgzipper: File 72-es2015.5489fca1c276ec561108.js has been compressed 84.6025Kb -> 11.9199Kb (147.908723ms)[0m
+[36mgzipper: File 72-es5.5489fca1c276ec561108.js has been compressed 87.4395Kb -> 12.1729Kb (149.165961ms)[0m
+[36mgzipper: File 73-es2015.91a61668671f03dac45f.js has been compressed 45.6299Kb -> 9.3496Kb (76.817671ms)[0m
+[36mgzipper: File 73-es5.91a61668671f03dac45f.js has been compressed 47.6289Kb -> 9.9277Kb (83.151306ms)[0m
+[36mgzipper: File 74-es2015.44249aa7003ddb9f6083.js has been compressed 83.3350Kb -> 14.4580Kb (134.016143ms)[0m
+[36mgzipper: File 74-es5.44249aa7003ddb9f6083.js has been compressed 87.7168Kb -> 15.0732Kb (141.800676ms)[0m
+[36mgzipper: File 75-es2015.23c55e44da7aea9601f8.js has been compressed 4.5557Kb -> 1.3428Kb (8.589863ms)[0m
+[36mgzipper: File 75-es5.23c55e44da7aea9601f8.js has been compressed 4.5557Kb -> 1.3428Kb (8.240819ms)[0m
+[36mgzipper: File 76-es2015.d565199001e0a263361f.js has been compressed 4.5557Kb -> 1.3457Kb (7.968458ms)[0m
+[36mgzipper: File 76-es5.d565199001e0a263361f.js has been compressed 4.5557Kb -> 1.3457Kb (7.832261ms)[0m
+[36mgzipper: File 77-es2015.b8a1b064d86f4c125352.js has been compressed 4.7354Kb -> 1.3623Kb (10.657605ms)[0m
+[36mgzipper: File 77-es5.b8a1b064d86f4c125352.js has been compressed 4.7354Kb -> 1.3623Kb (8.705439ms)[0m
+[36mgzipper: File 78-es2015.8772f7151cd9771a566b.js has been compressed 123.8438Kb -> 15.3418Kb (198.5693ms)[0m
+[36mgzipper: File 78-es5.8772f7151cd9771a566b.js has been compressed 126.3506Kb -> 15.5439Kb (207.437366ms)[0m
+[36mgzipper: File 79-es2015.27a957ac8343d6d30233.js has been compressed 1.0176Kb -> 0.5000Kb (3.384935ms)[0m
+[36mgzipper: File 79-es5.27a957ac8343d6d30233.js has been compressed 1.5283Kb -> 0.6895Kb (3.936548ms)[0m
+[36mgzipper: File 8-es2015.51140c717bc282f0e4ae.js has been compressed 368.1074Kb -> 82.6777Kb (753.730488ms)[0m
+[36mgzipper: File 8-es5.51140c717bc282f0e4ae.js has been compressed 368.1055Kb -> 82.7539Kb (776.284387ms)[0m
+[36mgzipper: File 80-es2015.d8a52d63c17227811ef2.js has been compressed 4.1465Kb -> 1.3252Kb (8.632911ms)[0m
+[36mgzipper: File 80-es5.d8a52d63c17227811ef2.js has been compressed 5.2080Kb -> 1.6260Kb (9.417548ms)[0m
+[36mgzipper: File 81-es2015.8a24669f93843d2678b5.js has been compressed 57.4023Kb -> 9.1875Kb (116.133544ms)[0m
+[36mgzipper: File 81-es5.8a24669f93843d2678b5.js has been compressed 59.7529Kb -> 9.6191Kb (119.096465ms)[0m
+[36mgzipper: File 82-es2015.dfe8ee66c7ef40772f14.js has been compressed 3.8779Kb -> 1.3184Kb (9.564599ms)[0m
+[36mgzipper: File 82-es5.dfe8ee66c7ef40772f14.js has been compressed 5.4092Kb -> 1.7002Kb (9.439524ms)[0m
+[36mgzipper: File 83-es2015.08ec293dee9ccd961113.js has been compressed 22.3564Kb -> 5.3486Kb (35.911027ms)[0m
+[36mgzipper: File 83-es5.08ec293dee9ccd961113.js has been compressed 24.4355Kb -> 5.7021Kb (42.055711ms)[0m
+[36mgzipper: File 84-es2015.35e5c7f38db49bab9039.js has been compressed 1.2637Kb -> 0.5898Kb (3.998821ms)[0m
+[36mgzipper: File 84-es5.35e5c7f38db49bab9039.js has been compressed 1.7754Kb -> 0.7871Kb (4.366992ms)[0m
+[36mgzipper: File 85-es2015.cb4bb0fb8890e57dbeed.js has been compressed 17.4063Kb -> 4.2783Kb (28.471944ms)[0m
+[36mgzipper: File 85-es5.cb4bb0fb8890e57dbeed.js has been compressed 19.1523Kb -> 4.7354Kb (31.082014ms)[0m
+[36mgzipper: File 86-es2015.cb9269c4f2370c340679.js has been compressed 43.3857Kb -> 8.5293Kb (77.467517ms)[0m
+[36mgzipper: File 86-es5.cb9269c4f2370c340679.js has been compressed 45.1572Kb -> 8.7598Kb (80.642643ms)[0m
+[36mgzipper: File 87-es2015.0029f5f6595fe9b6787e.js has been compressed 9.1543Kb -> 2.4004Kb (15.674187ms)[0m
+[36mgzipper: File 87-es5.0029f5f6595fe9b6787e.js has been compressed 9.8672Kb -> 2.6025Kb (15.039554ms)[0m
+[36mgzipper: File 88-es2015.67f77c4f008bc77af8ae.js has been compressed 0.7627Kb -> 0.3994Kb (3.76676ms)[0m
+[36mgzipper: File 88-es5.67f77c4f008bc77af8ae.js has been compressed 0.9824Kb -> 0.4609Kb (3.071122ms)[0m
+[36mgzipper: File 89-es2015.ed5b7962fd0107eebb44.js has been compressed 2.3154Kb -> 0.9053Kb (4.941377ms)[0m
+[36mgzipper: File 89-es5.ed5b7962fd0107eebb44.js has been compressed 2.8691Kb -> 1.0928Kb (5.818871ms)[0m
+[36mgzipper: File 9-es2015.60263de545aa7cf705ac.js has been compressed 34.1943Kb -> 7.8633Kb (53.838842ms)[0m
+[36mgzipper: File 9-es5.60263de545aa7cf705ac.js has been compressed 39.3076Kb -> 8.7412Kb (60.706921ms)[0m
+[36mgzipper: File 90-es2015.7968c9a21b3e0a4826fa.js has been compressed 106.8789Kb -> 15.5342Kb (186.736036ms)[0m
+[36mgzipper: File 90-es5.7968c9a21b3e0a4826fa.js has been compressed 108.9668Kb -> 15.7725Kb (191.900531ms)[0m
+[36mgzipper: File 91-es2015.6573d7b90e017e313a33.js has been compressed 95.1641Kb -> 12.6328Kb (143.704154ms)[0m
+[36mgzipper: File 91-es5.6573d7b90e017e313a33.js has been compressed 97.3662Kb -> 12.9863Kb (148.645845ms)[0m
+[36mgzipper: File 92-es2015.c1aa07e2d8e2429ce24b.js has been compressed 82.8887Kb -> 12.8984Kb (142.718298ms)[0m
+[36mgzipper: File 92-es5.c1aa07e2d8e2429ce24b.js has been compressed 84.3779Kb -> 13.2217Kb (144.603338ms)[0m
+[36mgzipper: File 93-es2015.504d4d15b6473115e64b.js has been compressed 16.6943Kb -> 4.2715Kb (28.68293ms)[0m
+[36mgzipper: File 93-es5.504d4d15b6473115e64b.js has been compressed 18.7334Kb -> 4.8066Kb (30.37135ms)[0m
+[36mgzipper: File 94-es2015.6f64b98762d92f751750.js has been compressed 3.2490Kb -> 1.2500Kb (6.506231ms)[0m
+[36mgzipper: File 94-es5.6f64b98762d92f751750.js has been compressed 3.8428Kb -> 1.4375Kb (7.074955ms)[0m
+[36mgzipper: File 95-es2015.cb622e3c530cff95e50e.js has been compressed 1.8252Kb -> 0.6494Kb (4.380748ms)[0m
+[36mgzipper: File 95-es5.cb622e3c530cff95e50e.js has been compressed 2.1406Kb -> 0.7305Kb (4.564375ms)[0m
+[36mgzipper: File 96-es2015.dc5e9a608cb8ee0018a0.js has been compressed 36.5225Kb -> 6.9648Kb (60.645576ms)[0m
+[36mgzipper: File 96-es5.dc5e9a608cb8ee0018a0.js has been compressed 37.5156Kb -> 7.1787Kb (61.761755ms)[0m
+[36mgzipper: File 97-es2015.7b9b74d5a2afa7f43d9c.js has been compressed 1.9873Kb -> 0.7617Kb (4.860032ms)[0m
+[36mgzipper: File 97-es5.7b9b74d5a2afa7f43d9c.js has been compressed 2.8135Kb -> 0.9473Kb (5.600681ms)[0m
+[36mgzipper: File 98-es2015.1d7c0a563984b059f237.js has been compressed 0.7676Kb -> 0.4023Kb (3.063469ms)[0m
+[36mgzipper: File 98-es5.1d7c0a563984b059f237.js has been compressed 0.9990Kb -> 0.4531Kb (2.887217ms)[0m
+[36mgzipper: File 99-es2015.2b888e5a6f5955c45168.js has been compressed 3.2549Kb -> 1.3076Kb (6.678896ms)[0m
+[36mgzipper: File 99-es5.2b888e5a6f5955c45168.js has been compressed 3.8203Kb -> 1.5010Kb (7.830234ms)[0m
+[36mgzipper: File addNodeIcon.a1a2d01bcd034270a3bc.png has been compressed 20.5059Kb -> 5.2139Kb (22.354465ms)[0m
+[36mgzipper: File backIcon.dd0baa69a69937600dc3.png has been compressed 20.3145Kb -> 5.0215Kb (22.559026ms)[0m
+[36mgzipper: File common-es2015.9138322fc0a555342f17.js has been compressed 40.5098Kb -> 9.2803Kb (66.285472ms)[0m
+[36mgzipper: File common-es5.9138322fc0a555342f17.js has been compressed 43.8516Kb -> 9.6475Kb (70.412703ms)[0m
+[36mgzipper: File connectIcon.d5267b8db2498e44bd56.png has been compressed 20.2773Kb -> 4.9844Kb (22.125614ms)[0m
+[36mgzipper: File cross.260c9c6535065674bb5e.png has been compressed 17.8740Kb -> 3.7188Kb (17.217096ms)[0m
+[36mgzipper: File deleteIcon.02d321edc6e03aea1675.png has been compressed 20.4893Kb -> 5.2227Kb (23.162788ms)[0m
+[36mgzipper: File downArrow.bbfbf2e8eaa8ebbce852.png has been compressed 4.3555Kb -> 4.3594Kb (12.450441ms)[0m
+[36mgzipper: File editIcon.d5422321c4f6feed4081.png has been compressed 20.5234Kb -> 5.2383Kb (24.43923ms)[0m
+[36mgzipper: File favicon.png has been compressed 0.8096Kb -> 0.8135Kb (4.554792ms)[0m
+[36mgzipper: File stylesheet.css has been compressed 3.6182Kb -> 0.3428Kb (8.166447ms)[0m
+[36mgzipper: File 431861-spider-workers-siemens-corpora_original@2x.png has been compressed 157.0840Kb -> 157.0889Kb (117.566968ms)[0m
+[36mgzipper: File facebook.svg has been compressed 1.1172Kb -> 0.5430Kb (3.430959ms)[0m
+[36mgzipper: File linked-in.svg has been compressed 1.3330Kb -> 0.6221Kb (3.477971ms)[0m
+[36mgzipper: File pin.svg has been compressed 0.2578Kb -> 0.1768Kb (1.921955ms)[0m
+[36mgzipper: File twitter.svg has been compressed 1.3027Kb -> 0.6875Kb (4.188905ms)[0m
+[36mgzipper: File telemetry.min.js has been compressed 116.3203Kb -> 25.4844Kb (213.258969ms)[0m
+[36mgzipper: File index.html has been compressed 3.1318Kb -> 0.9805Kb (7.545705ms)[0m
+[36mgzipper: File leftArrow.8965662a4348c548189b.png has been compressed 4.4248Kb -> 4.4287Kb (12.538461ms)[0m
+[36mgzipper: File libraries.caed9729f6ec38145fe3.css has been compressed 1146.0996Kb -> 43.7959Kb (3s 111.377344ms)[0m
+[36mgzipper: File main-es2015.b2c5a376fee27807f330.js has been compressed 6490.3652Kb -> 863.7256Kb (13s 446.803774ms)[0m
+[36mgzipper: File main-es5.b2c5a376fee27807f330.js has been compressed 6709.8105Kb -> 875.8428Kb (14s 14.005892ms)[0m
+[36mgzipper: File minus.5a379c46656d7a393c8f.png has been compressed 4.0498Kb -> 4.0537Kb (12.303625ms)[0m
+[36mgzipper: File pdfjsWorker-es2015.a0f44fafc1db6d69f9f1.js has been compressed 751.8174Kb -> 169.8555Kb (1s 734.965529ms)[0m
+[36mgzipper: File pdfjsWorker-es5.a0f44fafc1db6d69f9f1.js has been compressed 751.7793Kb -> 169.8018Kb (1s 736.546886ms)[0m
+[36mgzipper: File plus.4c4bf0a13eae5c7cdb10.png has been compressed 4.2393Kb -> 4.2432Kb (12.553691ms)[0m
+[36mgzipper: File polyfills-es2015.dc869cda37e011be5343.js has been compressed 55.8311Kb -> 16.7939Kb (94.223656ms)[0m
+[36mgzipper: File polyfills-es5.fb81c3b9c967e426b341.js has been compressed 148.8564Kb -> 43.7070Kb (302.482061ms)[0m
+[36mgzipper: File rightArrow.4f88ef172e7bc7e98e24.png has been compressed 4.4082Kb -> 4.4121Kb (12.632854ms)[0m
+[36mgzipper: File runtime-es2015.cc5fdf172a6f946492c2.js has been compressed 4.6240Kb -> 2.1543Kb (8.721518ms)[0m
+[36mgzipper: File runtime-es5.cc5fdf172a6f946492c2.js has been compressed 4.6211Kb -> 2.1514Kb (8.530825ms)[0m
+[36mgzipper: File scripts.5e9e0657550a82831d46.js has been compressed 194.7021Kb -> 58.0137Kb (406.849443ms)[0m
+[36mgzipper: File shadow.bf677598a57b95390558.png has been compressed 0.2832Kb -> 0.2871Kb (3.261066ms)[0m
+[36mgzipper: File styles.c3b3bb9ed1dd6a818746.css has been compressed 163.5684Kb -> 12.1035Kb (398.132468ms)[0m
+[36mgzipper: File theme-blue.css has been compressed 135.9160Kb -> 8.5674Kb (342.794753ms)[0m
+[36mgzipper: File theme-deep-blue.css has been compressed 143.2949Kb -> 8.6338Kb (372.736165ms)[0m
+[36mgzipper: File theme-deep-purple.css has been compressed 146.2988Kb -> 8.6592Kb (381.860845ms)[0m
+[36mgzipper: File theme-grey.css has been compressed 149.0586Kb -> 10.4385Kb (365.369151ms)[0m
+[36mgzipper: File theme-igot.css has been compressed 135.8643Kb -> 8.5293Kb (343.219698ms)[0m
+[36mgzipper: File theme-indigo.css has been compressed 138.8848Kb -> 8.5840Kb (353.817943ms)[0m
+[36mgzipper: File theme-lite-blue.css has been compressed 143.3203Kb -> 8.6406Kb (372.42148ms)[0m
+[36mgzipper: File theme-orange.css has been compressed 138.7988Kb -> 8.5889Kb (353.872676ms)[0m
+[36mgzipper: File theme-teal.css has been compressed 132.0137Kb -> 8.4854Kb (330.968569ms)[0m
+[36mgzipper: File upArrow.f0aa0566b9f39334bd88.png has been compressed 4.3564Kb -> 4.3604Kb (12.691431ms)[0m
+[36mgzipper: File zoomExtends.5f78e86f895f5a5cc147.png has been compressed 4.3594Kb -> 4.3623Kb (12.584398ms)[0m
+[32mgzipper: 230 files have been compressed.[0m
+Removing intermediate container 02d7a2b5b46d
+ ---> 5535521f3ae5
+Step 5/9 : RUN npm run compress:brotli
+ ---> Running in 3a46ddec8e18
+
+> fusion@0.0.1 compress:brotli /app
+> gzipper --brotli --gzip-level=9 --verbose ./dist/www
+
+[33mgzipper: BROTLI -> [0m
+[36mgzipper: Use default output file format [filename].[ext].[compressExt][0m
+[36mgzipper: File 1-es2015.dde14f4516d0c1bbf890.js has been compressed 51.7031Kb -> 9.3594Kb (95.45607ms)[0m
+[36mgzipper: File 1-es5.dde14f4516d0c1bbf890.js has been compressed 57.1592Kb -> 9.9922Kb (96.964562ms)[0m
+[36mgzipper: File 10-es2015.61e1e3fe658eb907200a.js has been compressed 299.6934Kb -> 23.6650Kb (484.24075ms)[0m
+[36mgzipper: File 10-es5.61e1e3fe658eb907200a.js has been compressed 306.8799Kb -> 24.5361Kb (499.48602ms)[0m
+[36mgzipper: File 100-es2015.072e9daf9eb65b94eb8c.js has been compressed 24.8486Kb -> 5.1924Kb (44.003328ms)[0m
+[36mgzipper: File 100-es5.072e9daf9eb65b94eb8c.js has been compressed 25.6299Kb -> 5.4248Kb (45.630989ms)[0m
+[36mgzipper: File 101-es2015.272507e8d185dc2de16e.js has been compressed 3.2480Kb -> 1.3047Kb (7.176836ms)[0m
+[36mgzipper: File 101-es5.272507e8d185dc2de16e.js has been compressed 3.8135Kb -> 1.4980Kb (7.64003ms)[0m
+[36mgzipper: File 102-es2015.68608a949c84e58d6239.js has been compressed 17.5723Kb -> 3.3838Kb (30.297836ms)[0m
+[36mgzipper: File 102-es5.68608a949c84e58d6239.js has been compressed 18.5742Kb -> 3.6191Kb (32.255366ms)[0m
+[36mgzipper: File 103-es2015.e6b96ef2e3e53d0987da.js has been compressed 151.5342Kb -> 18.0684Kb (246.956357ms)[0m
+[36mgzipper: File 103-es5.e6b96ef2e3e53d0987da.js has been compressed 155.1006Kb -> 18.6875Kb (248.926457ms)[0m
+[36mgzipper: File 104-es2015.5b6ebac2b4d8fbc017a9.js has been compressed 336.3262Kb -> 34.6895Kb (614.757818ms)[0m
+[36mgzipper: File 104-es5.5b6ebac2b4d8fbc017a9.js has been compressed 342.7559Kb -> 35.1738Kb (621.118853ms)[0m
+[36mgzipper: File 105-es2015.02d44239e2cf4ef69b36.js has been compressed 4.9922Kb -> 1.4688Kb (9.480709ms)[0m
+[36mgzipper: File 105-es5.02d44239e2cf4ef69b36.js has been compressed 5.1240Kb -> 1.5215Kb (9.192981ms)[0m
+[36mgzipper: File 106-es2015.c52723f18d6d318db662.js has been compressed 319.6982Kb -> 23.1563Kb (497.511741ms)[0m
+[36mgzipper: File 106-es5.c52723f18d6d318db662.js has been compressed 325.4014Kb -> 24.4697Kb (505.719299ms)[0m
+[36mgzipper: File 107-es2015.2a36b55309665d1b119b.js has been compressed 4.7031Kb -> 1.6465Kb (9.242303ms)[0m
+[36mgzipper: File 107-es5.2a36b55309665d1b119b.js has been compressed 6.5908Kb -> 2.3174Kb (12.277638ms)[0m
+[36mgzipper: File 108-es2015.4c3358c75abc22cf6516.js has been compressed 21.4990Kb -> 3.2588Kb (34.165229ms)[0m
+[36mgzipper: File 108-es5.4c3358c75abc22cf6516.js has been compressed 22.2295Kb -> 3.4678Kb (35.663785ms)[0m
+[36mgzipper: File 11-es2015.f86002dd3d38c57914a5.js has been compressed 43.9482Kb -> 7.3818Kb (64.139704ms)[0m
+[36mgzipper: File 11-es5.f86002dd3d38c57914a5.js has been compressed 47.8984Kb -> 8.5605Kb (68.970121ms)[0m
+[36mgzipper: File 12-es2015.703c0c9b8a64f9d2dfbb.js has been compressed 381.6221Kb -> 32.1504Kb (622.882468ms)[0m
+[36mgzipper: File 12-es5.703c0c9b8a64f9d2dfbb.js has been compressed 387.8438Kb -> 33.2822Kb (642.573827ms)[0m
+[36mgzipper: File 13-es2015.071c63d7d9d1bfde1a90.js has been compressed 192.8203Kb -> 18.8174Kb (286.490102ms)[0m
+[36mgzipper: File 13-es5.071c63d7d9d1bfde1a90.js has been compressed 199.5127Kb -> 19.6855Kb (297.29804ms)[0m
+[36mgzipper: File 14-es2015.00958e74449dddd3f686.js has been compressed 204.9775Kb -> 23.8848Kb (357.700142ms)[0m
+[36mgzipper: File 14-es5.00958e74449dddd3f686.js has been compressed 218.1035Kb -> 25.3271Kb (370.461025ms)[0m
+[36mgzipper: File 15-es2015.ae083140a95f5eea87ee.js has been compressed 9.4775Kb -> 2.2861Kb (15.086861ms)[0m
+[36mgzipper: File 15-es5.ae083140a95f5eea87ee.js has been compressed 14.4121Kb -> 3.4043Kb (20.864179ms)[0m
+[36mgzipper: File 16-es2015.2bce5a2ab024b860c0a1.js has been compressed 12.5918Kb -> 2.6299Kb (22.036238ms)[0m
+[36mgzipper: File 16-es5.2bce5a2ab024b860c0a1.js has been compressed 12.5918Kb -> 2.6299Kb (21.362791ms)[0m
+[36mgzipper: File 17-es2015.b0f9931cd276db47183c.js has been compressed 572.0781Kb -> 68.5205Kb (937.259856ms)[0m
+[36mgzipper: File 17-es5.b0f9931cd276db47183c.js has been compressed 585.8506Kb -> 70.3398Kb (993.575293ms)[0m
+[36mgzipper: File 18-es2015.4d45cd89d5406f99cb83.js has been compressed 101.2402Kb -> 16.4453Kb (181.707669ms)[0m
+[36mgzipper: File 18-es5.4d45cd89d5406f99cb83.js has been compressed 108.3652Kb -> 17.8760Kb (196.366995ms)[0m
+[36mgzipper: File 19-es2015.12221a57619628893fbb.js has been compressed 92.7656Kb -> 12.1143Kb (136.68025ms)[0m
+[36mgzipper: File 19-es5.12221a57619628893fbb.js has been compressed 96.0225Kb -> 12.7734Kb (143.06303ms)[0m
+[36mgzipper: File 20-es2015.bf71ef5ae84e2d880a6f.js has been compressed 705.3350Kb -> 125.7441Kb (1s 322.514301ms)[0m
+[36mgzipper: File 20-es5.bf71ef5ae84e2d880a6f.js has been compressed 705.7305Kb -> 125.7754Kb (1s 279.958449ms)[0m
+[36mgzipper: File 21-es2015.594059dfc674c8a4e068.js has been compressed 15.6836Kb -> 3.6699Kb (28.563671ms)[0m
+[36mgzipper: File 21-es5.594059dfc674c8a4e068.js has been compressed 16.2832Kb -> 3.8604Kb (28.264571ms)[0m
+[36mgzipper: File 22-es2015.df9a5249183945863bfc.js has been compressed 46.3789Kb -> 8.5107Kb (75.13205ms)[0m
+[36mgzipper: File 22-es5.df9a5249183945863bfc.js has been compressed 48.0713Kb -> 8.8867Kb (79.573345ms)[0m
+[36mgzipper: File 23-es2015.1abd2375e9dfe9780b6a.js has been compressed 58.9629Kb -> 9.4697Kb (99.38306ms)[0m
+[36mgzipper: File 23-es5.1abd2375e9dfe9780b6a.js has been compressed 60.9326Kb -> 9.8691Kb (100.367734ms)[0m
+[36mgzipper: File 24-es2015.a67d4acb6467d11f5161.js has been compressed 36.0781Kb -> 7.2627Kb (53.287144ms)[0m
+[36mgzipper: File 24-es5.a67d4acb6467d11f5161.js has been compressed 37.2363Kb -> 7.5928Kb (54.057732ms)[0m
+[36mgzipper: File 25-es2015.5b2794e4beab14890638.js has been compressed 206.2773Kb -> 49.5586Kb (388.383449ms)[0m
+[36mgzipper: File 25-es5.5b2794e4beab14890638.js has been compressed 206.2266Kb -> 49.5635Kb (404.615943ms)[0m
+[36mgzipper: File 26-es2015.48f448b79d74216f4b5b.js has been compressed 4.6924Kb -> 1.3623Kb (9.238741ms)[0m
+[36mgzipper: File 26-es5.48f448b79d74216f4b5b.js has been compressed 4.6924Kb -> 1.3623Kb (9.137639ms)[0m
+[36mgzipper: File 27-es2015.b8216fb7340960908943.js has been compressed 7.8887Kb -> 2.1846Kb (13.720022ms)[0m
+[36mgzipper: File 27-es5.b8216fb7340960908943.js has been compressed 8.0205Kb -> 2.2412Kb (13.21843ms)[0m
+[36mgzipper: File 2a1846ba7b55938e5d98.worker.js has been compressed 1033.4756Kb -> 198.1982Kb (2s 182.160202ms)[0m
+[36mgzipper: File 3-es2015.562c3d94996fde8a2c65.js has been compressed 19.9844Kb -> 4.9199Kb (31.834024ms)[0m
+[36mgzipper: File 3-es5.562c3d94996fde8a2c65.js has been compressed 30.2861Kb -> 6.5977Kb (51.148977ms)[0m
+[36mgzipper: File 4-es2015.5fe188f32e3523a2f165.js has been compressed 8.1758Kb -> 2.2725Kb (14.234162ms)[0m
+[36mgzipper: File 4-es5.5fe188f32e3523a2f165.js has been compressed 12.2832Kb -> 2.9844Kb (22.12955ms)[0m
+[36mgzipper: File 43-es2015.8cfda5808674d011b8a1.js has been compressed 954.4570Kb -> 177.2578Kb (1s 963.829848ms)[0m
+[36mgzipper: File 43-es5.8cfda5808674d011b8a1.js has been compressed 957.3428Kb -> 177.6641Kb (1s 920.642801ms)[0m
+[36mgzipper: File 44-es2015.cde4a62b19f9c1688fdd.js has been compressed 253.0566Kb -> 26.7217Kb (441.745124ms)[0m
+[36mgzipper: File 44-es5.cde4a62b19f9c1688fdd.js has been compressed 258.8213Kb -> 27.3975Kb (448.046196ms)[0m
+[36mgzipper: File 45-es2015.fbdb3d0c11e141b9bc2a.js has been compressed 1349.1133Kb -> 217.1133Kb (2s 256.643919ms)[0m
+[36mgzipper: File 45-es5.fbdb3d0c11e141b9bc2a.js has been compressed 1350.3730Kb -> 217.2598Kb (2s 122.7929ms)[0m
+[36mgzipper: File 46-es2015.20e42a8dd23d3adf20b0.js has been compressed 138.1367Kb -> 27.4385Kb (221.49628ms)[0m
+[36mgzipper: File 46-es5.20e42a8dd23d3adf20b0.js has been compressed 140.0684Kb -> 27.7451Kb (220.52656ms)[0m
+[36mgzipper: File 47-es2015.a6fc978beb11b4b71387.js has been compressed 3.1533Kb -> 1.1768Kb (6.546442ms)[0m
+[36mgzipper: File 47-es5.a6fc978beb11b4b71387.js has been compressed 3.7422Kb -> 1.3594Kb (7.218381ms)[0m
+[36mgzipper: File 48-es2015.49b89682434735e45621.js has been compressed 182.3262Kb -> 19.6162Kb (312.388891ms)[0m
+[36mgzipper: File 48-es5.49b89682434735e45621.js has been compressed 187.6387Kb -> 20.7344Kb (319.318037ms)[0m
+[36mgzipper: File 49-es2015.c6f623cd9cf70d44d9d2.js has been compressed 80.9277Kb -> 12.3398Kb (145.387997ms)[0m
+[36mgzipper: File 49-es5.c6f623cd9cf70d44d9d2.js has been compressed 83.1582Kb -> 12.6016Kb (146.588625ms)[0m
+[36mgzipper: File 5-es2015.183d454f70c349c24206.js has been compressed 68.3164Kb -> 7.1758Kb (112.855ms)[0m
+[36mgzipper: File 5-es5.183d454f70c349c24206.js has been compressed 70.6699Kb -> 7.8408Kb (117.267795ms)[0m
+[36mgzipper: File 50-es2015.97d3b7b805f60ad2e9ac.js has been compressed 295.6035Kb -> 30.3311Kb (527.653664ms)[0m
+[36mgzipper: File 50-es5.97d3b7b805f60ad2e9ac.js has been compressed 306.1641Kb -> 31.9141Kb (544.903148ms)[0m
+[36mgzipper: File 51-es2015.adec472f9e854e259c0f.js has been compressed 255.3047Kb -> 28.1357Kb (449.446083ms)[0m
+[36mgzipper: File 51-es5.adec472f9e854e259c0f.js has been compressed 264.2373Kb -> 29.4463Kb (472.516776ms)[0m
+[36mgzipper: File 52-es2015.b87ba6ca41e2f2ce420f.js has been compressed 67.2764Kb -> 9.2021Kb (105.285867ms)[0m
+[36mgzipper: File 52-es5.b87ba6ca41e2f2ce420f.js has been compressed 68.5479Kb -> 9.4404Kb (105.090433ms)[0m
+[36mgzipper: File 53-es2015.52f643b8608efb116dc3.js has been compressed 204.9795Kb -> 25.7637Kb (352.749361ms)[0m
+[36mgzipper: File 53-es5.52f643b8608efb116dc3.js has been compressed 210.5820Kb -> 26.4912Kb (357.921419ms)[0m
+[36mgzipper: File 54-es2015.62279c6c935d31a97c09.js has been compressed 80.3916Kb -> 14.2441Kb (141.190622ms)[0m
+[36mgzipper: File 54-es5.62279c6c935d31a97c09.js has been compressed 85.3701Kb -> 15.3203Kb (185.090238ms)[0m
+[36mgzipper: File 55-es2015.17e21db6ec711d014deb.js has been compressed 131.2314Kb -> 14.4580Kb (234.650509ms)[0m
+[36mgzipper: File 55-es5.17e21db6ec711d014deb.js has been compressed 135.0137Kb -> 15.0176Kb (238.770849ms)[0m
+[36mgzipper: File 56-es2015.a16928a8de65df079758.js has been compressed 51.9922Kb -> 10.2930Kb (90.202669ms)[0m
+[36mgzipper: File 56-es5.a16928a8de65df079758.js has been compressed 54.4824Kb -> 10.7471Kb (94.645303ms)[0m
+[36mgzipper: File 57-es2015.775de996d2a39e800770.js has been compressed 6.7373Kb -> 1.7598Kb (12.956762ms)[0m
+[36mgzipper: File 57-es5.775de996d2a39e800770.js has been compressed 6.8691Kb -> 1.8164Kb (12.664765ms)[0m
+[36mgzipper: File 58-es2015.72cae2cb6946ed2527e3.js has been compressed 197.2051Kb -> 22.5645Kb (354.203021ms)[0m
+[36mgzipper: File 58-es5.72cae2cb6946ed2527e3.js has been compressed 201.1055Kb -> 22.8379Kb (362.495706ms)[0m
+[36mgzipper: File 59-es2015.3d787355134828eb48a7.js has been compressed 176.1064Kb -> 17.8936Kb (300.8438ms)[0m
+[36mgzipper: File 59-es5.3d787355134828eb48a7.js has been compressed 182.6279Kb -> 19.0215Kb (311.826142ms)[0m
+[36mgzipper: File 6-es2015.f31d9ef772d567867f91.js has been compressed 16.3184Kb -> 3.4961Kb (27.186952ms)[0m
+[36mgzipper: File 6-es5.f31d9ef772d567867f91.js has been compressed 18.6016Kb -> 4.0781Kb (30.766657ms)[0m
+[36mgzipper: File 60-es2015.a2e4bf29f0dadd43e52e.js has been compressed 238.0801Kb -> 20.0859Kb (410.976339ms)[0m
+[36mgzipper: File 60-es5.a2e4bf29f0dadd43e52e.js has been compressed 240.7861Kb -> 20.4121Kb (421.870133ms)[0m
+[36mgzipper: File 61-es2015.ac90f8a8d29b2bbea5a2.js has been compressed 2.8896Kb -> 0.9746Kb (6.001913ms)[0m
+[36mgzipper: File 61-es5.ac90f8a8d29b2bbea5a2.js has been compressed 2.8896Kb -> 0.9746Kb (6.058112ms)[0m
+[36mgzipper: File 62-es2015.9274ce2a585e9cecf9d0.js has been compressed 3.6523Kb -> 1.1123Kb (7.083055ms)[0m
+[36mgzipper: File 62-es5.9274ce2a585e9cecf9d0.js has been compressed 3.6523Kb -> 1.1123Kb (6.950437ms)[0m
+[36mgzipper: File 63-es2015.9e1b1ea88ffdf6c73e1a.js has been compressed 70.6758Kb -> 10.1709Kb (112.848553ms)[0m
+[36mgzipper: File 63-es5.9e1b1ea88ffdf6c73e1a.js has been compressed 72.2773Kb -> 10.4336Kb (110.83034ms)[0m
+[36mgzipper: File 64-es2015.d97d093f5ad0f9811958.js has been compressed 51.2852Kb -> 6.3877Kb (73.469202ms)[0m
+[36mgzipper: File 64-es5.d97d093f5ad0f9811958.js has been compressed 52.4443Kb -> 6.6045Kb (74.48965ms)[0m
+[36mgzipper: File 65-es2015.ee73f1ed6755b85b3971.js has been compressed 19.5137Kb -> 3.6543Kb (32.25098ms)[0m
+[36mgzipper: File 65-es5.ee73f1ed6755b85b3971.js has been compressed 20.3408Kb -> 3.8623Kb (32.200697ms)[0m
+[36mgzipper: File 66-es2015.16c4c756fac8445a7e83.js has been compressed 177.7061Kb -> 5.3887Kb (177.59779ms)[0m
+[36mgzipper: File 66-es5.16c4c756fac8445a7e83.js has been compressed 178.2109Kb -> 5.5488Kb (179.714528ms)[0m
+[36mgzipper: File 67-es2015.7bfd9534b17e579f65a1.js has been compressed 113.7783Kb -> 11.8887Kb (189.884ms)[0m
+[36mgzipper: File 67-es5.7bfd9534b17e579f65a1.js has been compressed 115.7256Kb -> 12.1406Kb (190.940089ms)[0m
+[36mgzipper: File 68-es2015.02d00230819b83a2bdee.js has been compressed 20.4492Kb -> 3.8672Kb (35.513877ms)[0m
+[36mgzipper: File 68-es5.02d00230819b83a2bdee.js has been compressed 21.5273Kb -> 4.0693Kb (37.25943ms)[0m
+[36mgzipper: File 69-es2015.681f9325370dce4c9ed9.js has been compressed 23.7900Kb -> 4.5762Kb (42.269539ms)[0m
+[36mgzipper: File 69-es5.681f9325370dce4c9ed9.js has been compressed 24.4463Kb -> 4.7676Kb (43.335778ms)[0m
+[36mgzipper: File 7-es2015.6238fd83ea8345995f7a.js has been compressed 294.6582Kb -> 31.6338Kb (443.268555ms)[0m
+[36mgzipper: File 7-es5.6238fd83ea8345995f7a.js has been compressed 304.0723Kb -> 33.0254Kb (468.636135ms)[0m
+[36mgzipper: File 70-es2015.e2b14b2cb7ab3c6ac7fb.js has been compressed 69.5010Kb -> 12.2432Kb (114.337053ms)[0m
+[36mgzipper: File 70-es5.e2b14b2cb7ab3c6ac7fb.js has been compressed 70.9512Kb -> 12.4746Kb (116.581809ms)[0m
+[36mgzipper: File 71-es2015.f8fe5efef93673971db6.js has been compressed 24.3418Kb -> 4.9746Kb (41.602495ms)[0m
+[36mgzipper: File 71-es5.f8fe5efef93673971db6.js has been compressed 25.0518Kb -> 5.1699Kb (42.280747ms)[0m
+[36mgzipper: File 72-es2015.5489fca1c276ec561108.js has been compressed 84.6025Kb -> 11.9199Kb (147.050928ms)[0m
+[36mgzipper: File 72-es5.5489fca1c276ec561108.js has been compressed 87.4395Kb -> 12.1729Kb (148.871698ms)[0m
+[36mgzipper: File 73-es2015.91a61668671f03dac45f.js has been compressed 45.6299Kb -> 9.3496Kb (77.440748ms)[0m
+[36mgzipper: File 73-es5.91a61668671f03dac45f.js has been compressed 47.6289Kb -> 9.9277Kb (83.444367ms)[0m
+[36mgzipper: File 74-es2015.44249aa7003ddb9f6083.js has been compressed 83.3350Kb -> 14.4580Kb (136.402153ms)[0m
+[36mgzipper: File 74-es5.44249aa7003ddb9f6083.js has been compressed 87.7168Kb -> 15.0732Kb (144.218865ms)[0m
+[36mgzipper: File 75-es2015.23c55e44da7aea9601f8.js has been compressed 4.5557Kb -> 1.3428Kb (8.669496ms)[0m
+[36mgzipper: File 75-es5.23c55e44da7aea9601f8.js has been compressed 4.5557Kb -> 1.3428Kb (8.35382ms)[0m
+[36mgzipper: File 76-es2015.d565199001e0a263361f.js has been compressed 4.5557Kb -> 1.3457Kb (10.217566ms)[0m
+[36mgzipper: File 76-es5.d565199001e0a263361f.js has been compressed 4.5557Kb -> 1.3457Kb (7.934476ms)[0m
+[36mgzipper: File 77-es2015.b8a1b064d86f4c125352.js has been compressed 4.7354Kb -> 1.3623Kb (8.751899ms)[0m
+[36mgzipper: File 77-es5.b8a1b064d86f4c125352.js has been compressed 4.7354Kb -> 1.3623Kb (8.631303ms)[0m
+[36mgzipper: File 78-es2015.8772f7151cd9771a566b.js has been compressed 123.8438Kb -> 15.3418Kb (202.491679ms)[0m
+[36mgzipper: File 78-es5.8772f7151cd9771a566b.js has been compressed 126.3506Kb -> 15.5439Kb (204.723087ms)[0m
+[36mgzipper: File 79-es2015.27a957ac8343d6d30233.js has been compressed 1.0176Kb -> 0.5000Kb (3.878538ms)[0m
+[36mgzipper: File 79-es5.27a957ac8343d6d30233.js has been compressed 1.5283Kb -> 0.6895Kb (4.84786ms)[0m
+[36mgzipper: File 8-es2015.51140c717bc282f0e4ae.js has been compressed 368.1074Kb -> 82.6777Kb (756.589782ms)[0m
+[36mgzipper: File 8-es5.51140c717bc282f0e4ae.js has been compressed 368.1055Kb -> 82.7539Kb (776.017386ms)[0m
+[36mgzipper: File 80-es2015.d8a52d63c17227811ef2.js has been compressed 4.1465Kb -> 1.3252Kb (8.891785ms)[0m
+[36mgzipper: File 80-es5.d8a52d63c17227811ef2.js has been compressed 5.2080Kb -> 1.6260Kb (9.474228ms)[0m
+[36mgzipper: File 81-es2015.8a24669f93843d2678b5.js has been compressed 57.4023Kb -> 9.1875Kb (115.900178ms)[0m
+[36mgzipper: File 81-es5.8a24669f93843d2678b5.js has been compressed 59.7529Kb -> 9.6191Kb (118.914659ms)[0m
+[36mgzipper: File 82-es2015.dfe8ee66c7ef40772f14.js has been compressed 3.8779Kb -> 1.3184Kb (7.746412ms)[0m
+[36mgzipper: File 82-es5.dfe8ee66c7ef40772f14.js has been compressed 5.4092Kb -> 1.7002Kb (9.644249ms)[0m
+[36mgzipper: File 83-es2015.08ec293dee9ccd961113.js has been compressed 22.3564Kb -> 5.3486Kb (36.131204ms)[0m
+[36mgzipper: File 83-es5.08ec293dee9ccd961113.js has been compressed 24.4355Kb -> 5.7021Kb (41.437056ms)[0m
+[36mgzipper: File 84-es2015.35e5c7f38db49bab9039.js has been compressed 1.2637Kb -> 0.5898Kb (4.062912ms)[0m
+[36mgzipper: File 84-es5.35e5c7f38db49bab9039.js has been compressed 1.7754Kb -> 0.7871Kb (5.464341ms)[0m
+[36mgzipper: File 85-es2015.cb4bb0fb8890e57dbeed.js has been compressed 17.4063Kb -> 4.2783Kb (28.332603ms)[0m
+[36mgzipper: File 85-es5.cb4bb0fb8890e57dbeed.js has been compressed 19.1523Kb -> 4.7354Kb (30.623435ms)[0m
+[36mgzipper: File 86-es2015.cb9269c4f2370c340679.js has been compressed 43.3857Kb -> 8.5293Kb (77.962568ms)[0m
+[36mgzipper: File 86-es5.cb9269c4f2370c340679.js has been compressed 45.1572Kb -> 8.7598Kb (79.52769ms)[0m
+[36mgzipper: File 87-es2015.0029f5f6595fe9b6787e.js has been compressed 9.1543Kb -> 2.4004Kb (14.76107ms)[0m
+[36mgzipper: File 87-es5.0029f5f6595fe9b6787e.js has been compressed 9.8672Kb -> 2.6025Kb (15.122337ms)[0m
+[36mgzipper: File 88-es2015.67f77c4f008bc77af8ae.js has been compressed 0.7627Kb -> 0.3994Kb (2.789612ms)[0m
+[36mgzipper: File 88-es5.67f77c4f008bc77af8ae.js has been compressed 0.9824Kb -> 0.4609Kb (3.088453ms)[0m
+[36mgzipper: File 89-es2015.ed5b7962fd0107eebb44.js has been compressed 2.3154Kb -> 0.9053Kb (5.00634ms)[0m
+[36mgzipper: File 89-es5.ed5b7962fd0107eebb44.js has been compressed 2.8691Kb -> 1.0928Kb (6.480193ms)[0m
+[36mgzipper: File 9-es2015.60263de545aa7cf705ac.js has been compressed 34.1943Kb -> 7.8633Kb (53.900205ms)[0m
+[36mgzipper: File 9-es5.60263de545aa7cf705ac.js has been compressed 39.3076Kb -> 8.7412Kb (60.729028ms)[0m
+[36mgzipper: File 90-es2015.7968c9a21b3e0a4826fa.js has been compressed 106.8789Kb -> 15.5342Kb (189.031711ms)[0m
+[36mgzipper: File 90-es5.7968c9a21b3e0a4826fa.js has been compressed 108.9668Kb -> 15.7725Kb (192.018868ms)[0m
+[36mgzipper: File 91-es2015.6573d7b90e017e313a33.js has been compressed 95.1641Kb -> 12.6328Kb (142.231719ms)[0m
+[36mgzipper: File 91-es5.6573d7b90e017e313a33.js has been compressed 97.3662Kb -> 12.9863Kb (149.452198ms)[0m
+[36mgzipper: File 92-es2015.c1aa07e2d8e2429ce24b.js has been compressed 82.8887Kb -> 12.8984Kb (143.295885ms)[0m
+[36mgzipper: File 92-es5.c1aa07e2d8e2429ce24b.js has been compressed 84.3779Kb -> 13.2217Kb (144.251027ms)[0m
+[36mgzipper: File 93-es2015.504d4d15b6473115e64b.js has been compressed 16.6943Kb -> 4.2715Kb (28.525591ms)[0m
+[36mgzipper: File 93-es5.504d4d15b6473115e64b.js has been compressed 18.7334Kb -> 4.8066Kb (30.62607ms)[0m
+[36mgzipper: File 94-es2015.6f64b98762d92f751750.js has been compressed 3.2490Kb -> 1.2500Kb (6.555158ms)[0m
+[36mgzipper: File 94-es5.6f64b98762d92f751750.js has been compressed 3.8428Kb -> 1.4375Kb (7.064097ms)[0m
+[36mgzipper: File 95-es2015.cb622e3c530cff95e50e.js has been compressed 1.8252Kb -> 0.6494Kb (4.454633ms)[0m
+[36mgzipper: File 95-es5.cb622e3c530cff95e50e.js has been compressed 2.1406Kb -> 0.7305Kb (4.671393ms)[0m
+[36mgzipper: File 96-es2015.dc5e9a608cb8ee0018a0.js has been compressed 36.5225Kb -> 6.9648Kb (61.494775ms)[0m
+[36mgzipper: File 96-es5.dc5e9a608cb8ee0018a0.js has been compressed 37.5156Kb -> 7.1787Kb (63.757943ms)[0m
+[36mgzipper: File 97-es2015.7b9b74d5a2afa7f43d9c.js has been compressed 1.9873Kb -> 0.7617Kb (4.831858ms)[0m
+[36mgzipper: File 97-es5.7b9b74d5a2afa7f43d9c.js has been compressed 2.8135Kb -> 0.9473Kb (5.520385ms)[0m
+[36mgzipper: File 98-es2015.1d7c0a563984b059f237.js has been compressed 0.7676Kb -> 0.4023Kb (2.732117ms)[0m
+[36mgzipper: File 98-es5.1d7c0a563984b059f237.js has been compressed 0.9990Kb -> 0.4531Kb (3.035685ms)[0m
+[36mgzipper: File 99-es2015.2b888e5a6f5955c45168.js has been compressed 3.2549Kb -> 1.3076Kb (6.723041ms)[0m
+[36mgzipper: File 99-es5.2b888e5a6f5955c45168.js has been compressed 3.8203Kb -> 1.5010Kb (7.342213ms)[0m
+[36mgzipper: File addNodeIcon.a1a2d01bcd034270a3bc.png has been compressed 20.5059Kb -> 5.2139Kb (21.692316ms)[0m
+[36mgzipper: File backIcon.dd0baa69a69937600dc3.png has been compressed 20.3145Kb -> 5.0215Kb (22.386697ms)[0m
+[36mgzipper: File common-es2015.9138322fc0a555342f17.js has been compressed 40.5098Kb -> 9.2803Kb (66.049396ms)[0m
+[36mgzipper: File common-es5.9138322fc0a555342f17.js has been compressed 43.8516Kb -> 9.6475Kb (70.521338ms)[0m
+[36mgzipper: File connectIcon.d5267b8db2498e44bd56.png has been compressed 20.2773Kb -> 4.9844Kb (22.277719ms)[0m
+[36mgzipper: File cross.260c9c6535065674bb5e.png has been compressed 17.8740Kb -> 3.7188Kb (17.142609ms)[0m
+[36mgzipper: File deleteIcon.02d321edc6e03aea1675.png has been compressed 20.4893Kb -> 5.2227Kb (23.216166ms)[0m
+[36mgzipper: File downArrow.bbfbf2e8eaa8ebbce852.png has been compressed 4.3555Kb -> 4.3594Kb (12.405478ms)[0m
+[36mgzipper: File editIcon.d5422321c4f6feed4081.png has been compressed 20.5234Kb -> 5.2383Kb (24.770824ms)[0m
+[36mgzipper: File favicon.png has been compressed 0.8096Kb -> 0.8135Kb (4.639451ms)[0m
+[36mgzipper: File stylesheet.css has been compressed 3.6182Kb -> 0.3428Kb (8.212441ms)[0m
+[36mgzipper: File 431861-spider-workers-siemens-corpora_original@2x.png has been compressed 157.0840Kb -> 157.0889Kb (118.167276ms)[0m
+[36mgzipper: File facebook.svg has been compressed 1.1172Kb -> 0.5430Kb (3.61529ms)[0m
+[36mgzipper: File linked-in.svg has been compressed 1.3330Kb -> 0.6221Kb (3.984588ms)[0m
+[36mgzipper: File pin.svg has been compressed 0.2578Kb -> 0.1768Kb (2.044914ms)[0m
+[36mgzipper: File twitter.svg has been compressed 1.3027Kb -> 0.6875Kb (4.296013ms)[0m
+[36mgzipper: File telemetry.min.js has been compressed 116.3203Kb -> 25.4844Kb (215.624427ms)[0m
+[36mgzipper: File index.html has been compressed 3.1318Kb -> 0.9805Kb (7.167246ms)[0m
+[36mgzipper: File leftArrow.8965662a4348c548189b.png has been compressed 4.4248Kb -> 4.4287Kb (12.631799ms)[0m
+[36mgzipper: File libraries.caed9729f6ec38145fe3.css has been compressed 1146.0996Kb -> 43.7959Kb (3s 112.465284ms)[0m
+[36mgzipper: File main-es2015.b2c5a376fee27807f330.js has been compressed 6490.3652Kb -> 863.7256Kb (13s 450.20093ms)[0m
+[36mgzipper: File main-es5.b2c5a376fee27807f330.js has been compressed 6709.8105Kb -> 875.8428Kb (13s 955.263114ms)[0m
+[36mgzipper: File minus.5a379c46656d7a393c8f.png has been compressed 4.0498Kb -> 4.0537Kb (11.810442ms)[0m
+[36mgzipper: File pdfjsWorker-es2015.a0f44fafc1db6d69f9f1.js has been compressed 751.8174Kb -> 169.8555Kb (1s 720.538155ms)[0m
+[36mgzipper: File pdfjsWorker-es5.a0f44fafc1db6d69f9f1.js has been compressed 751.7793Kb -> 169.8018Kb (1s 737.177589ms)[0m
+[36mgzipper: File plus.4c4bf0a13eae5c7cdb10.png has been compressed 4.2393Kb -> 4.2432Kb (12.372285ms)[0m
+[36mgzipper: File polyfills-es2015.dc869cda37e011be5343.js has been compressed 55.8311Kb -> 16.7939Kb (94.377162ms)[0m
+[36mgzipper: File polyfills-es5.fb81c3b9c967e426b341.js has been compressed 148.8564Kb -> 43.7070Kb (303.317964ms)[0m
+[36mgzipper: File rightArrow.4f88ef172e7bc7e98e24.png has been compressed 4.4082Kb -> 4.4121Kb (12.585516ms)[0m
+[36mgzipper: File runtime-es2015.cc5fdf172a6f946492c2.js has been compressed 4.6240Kb -> 2.1543Kb (8.708568ms)[0m
+[36mgzipper: File runtime-es5.cc5fdf172a6f946492c2.js has been compressed 4.6211Kb -> 2.1514Kb (8.444846ms)[0m
+[36mgzipper: File scripts.5e9e0657550a82831d46.js has been compressed 194.7021Kb -> 58.0137Kb (409.030003ms)[0m
+[36mgzipper: File shadow.bf677598a57b95390558.png has been compressed 0.2832Kb -> 0.2871Kb (3.084854ms)[0m
+[36mgzipper: File styles.c3b3bb9ed1dd6a818746.css has been compressed 163.5684Kb -> 12.1035Kb (395.509214ms)[0m
+[36mgzipper: File theme-blue.css has been compressed 135.9160Kb -> 8.5674Kb (344.733275ms)[0m
+[36mgzipper: File theme-deep-blue.css has been compressed 143.2949Kb -> 8.6338Kb (370.519355ms)[0m
+[36mgzipper: File theme-deep-purple.css has been compressed 146.2988Kb -> 8.6592Kb (382.027166ms)[0m
+[36mgzipper: File theme-grey.css has been compressed 149.0586Kb -> 10.4385Kb (364.965111ms)[0m
+[36mgzipper: File theme-igot.css has been compressed 135.8643Kb -> 8.5293Kb (340.610057ms)[0m
+[36mgzipper: File theme-indigo.css has been compressed 138.8848Kb -> 8.5840Kb (354.63067ms)[0m
+[36mgzipper: File theme-lite-blue.css has been compressed 143.3203Kb -> 8.6406Kb (373.972368ms)[0m
+[36mgzipper: File theme-orange.css has been compressed 138.7988Kb -> 8.5889Kb (351.837535ms)[0m
+[36mgzipper: File theme-teal.css has been compressed 132.0137Kb -> 8.4854Kb (332.074679ms)[0m
+[36mgzipper: File upArrow.f0aa0566b9f39334bd88.png has been compressed 4.3564Kb -> 4.3604Kb (12.61068ms)[0m
+[36mgzipper: File zoomExtends.5f78e86f895f5a5cc147.png has been compressed 4.3594Kb -> 4.3623Kb (12.605296ms)[0m
+[32mgzipper: 230 files have been compressed.[0m
+Removing intermediate container 3a46ddec8e18
+ ---> 311a0ec75aa0
+Step 6/9 : WORKDIR /app/dist
+ ---> Running in 92dd08dfc71a
+Removing intermediate container 92dd08dfc71a
+ ---> b16db68c99d1
+Step 7/9 : RUN npm install --production
+ ---> Running in 51a8494743ee
+[91mnpm notice created a lockfile as package-lock.json. You should commit this file.
+[0m[91mnpm WARN fusion-dist@1.0.0 No description
+[0m[91mnpm WARN[0m[91m fusion-dist@1.0.0 No repository field.
+[0m[91m
+[0madded 85 packages from 52 contributors and audited 85 packages in 3.324s
+
+1 package is looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Removing intermediate container 51a8494743ee
+ ---> b0e2dea8b230
+Step 8/9 : EXPOSE 3004
+ ---> Running in c9bc3401a273
+Removing intermediate container c9bc3401a273
+ ---> e6203c32f5df
+Step 9/9 : CMD [ "npm", "run", "serve:prod" ]
+ ---> Running in a0ac2dcb597e
+Removing intermediate container a0ac2dcb597e
+ ---> 80e808c887b2
+Successfully built 80e808c887b2
+Successfully tagged 10.0.1.129:5000/ui-static:e613ca6
++ docker tag 10.0.1.129:5000/ui-static:e613ca6 10.0.1.129:5000/ui-static:bronze
++ echo docker build is completed !!!! Starting docker push
+docker build is completed !!!! Starting docker push
+[8mha:////4DW9QfjIqkQjbk0As03mWXshjqakH9wcOztMVQanDcdGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGoSEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHhgNoTvgAAAA==[0m[Pipeline] }
+[8mha:////4EuThnuO/bxP/NWEHp5uhxRcX5RxIFZUATvKwJeb4b/6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCgqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQH+Ao9BvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AXU9pjXrV3DcNQ6Eb6d+G4sMdtRURTPJn5v5jBgzo08AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INK/7CYMEAAAA=[0m[Pipeline] stage
+[8mha:////4P8otm/db14WqDuVB8uFWYQY1DxABVDArZsA1CmUEBBgAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUWBFT1ygLJwhNCGmj/8tPSjtxIq7GHWipxIQHy7ZkvdcbishwInaisdh6jLUXXejdlMRA3F4DDaKhi6gJIwUrlB0UGVstVVGysCjLYSVhbbEOFD26BBvZ6Icug0ZXnhNP21FC7s0dnpDJiZw0p28ZGba33kTCH+cvAMYuQX7Yzbafn8UHbGnGmsIAAAA=[0m[Pipeline] { (docker-push)
+[8mha:////4I93nRfJXXHYqNQ9n8ZryBqCBI50TLJhruonpCB0f+KSAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi0iIqWisNLzCJMXasO8d2cCpexNf4A4FIVGyx2tlmni9YxwBHDhqtot5QbA16N+p5YebQXx1ntHzBlimyU9io3HCnTgs2nBQsKUpYCdgoah1HQzrBVlh5l5WTpKtzCvN3EFCaboAHFGI2JxnSF6YAu9vYRaaf568AJp+grPefqv0bH7uiub4AAAA=[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/fusion-dev-build
++ git rev-parse --short HEAD
++ commit_id=e613ca6
++ docker push 10.0.1.129:5000/ui-static:e613ca6
+The push refers to repository [10.0.1.129:5000/ui-static]
+1e6167e0fbab: Preparing
+268d840f6d57: Preparing
+5f6ab92e6696: Preparing
+9be56b000408: Preparing
+9cbe602bbb13: Preparing
+d1e551c519b5: Preparing
+70a3a00c2b44: Preparing
+918a6facd6de: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+918a6facd6de: Waiting
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+d1e551c519b5: Waiting
+70a3a00c2b44: Waiting
+9cbe602bbb13: Layer already exists
+d1e551c519b5: Layer already exists
+70a3a00c2b44: Layer already exists
+918a6facd6de: Layer already exists
+bc17cd405095: Layer already exists
+ee854067fbbd: Layer already exists
+740ffea5d5c3: Layer already exists
+eac9ead92b24: Layer already exists
+23bca356262f: Layer already exists
+8354d5896557: Layer already exists
+268d840f6d57: Pushed
+1e6167e0fbab: Pushed
+9be56b000408: Pushed
+5f6ab92e6696: Pushed
+e613ca6: digest: sha256:34b6d42cbd992e1c505f4503587215f3992b937c7a95c4d6360d93dfc57ae391 size: 3267
++ docker push 10.0.1.129:5000/ui-static:bronze
+The push refers to repository [10.0.1.129:5000/ui-static]
+1e6167e0fbab: Preparing
+268d840f6d57: Preparing
+5f6ab92e6696: Preparing
+9be56b000408: Preparing
+9cbe602bbb13: Preparing
+d1e551c519b5: Preparing
+70a3a00c2b44: Preparing
+918a6facd6de: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+918a6facd6de: Waiting
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+d1e551c519b5: Waiting
+70a3a00c2b44: Waiting
+9be56b000408: Layer already exists
+5f6ab92e6696: Layer already exists
+268d840f6d57: Layer already exists
+1e6167e0fbab: Layer already exists
+9cbe602bbb13: Layer already exists
+918a6facd6de: Layer already exists
+70a3a00c2b44: Layer already exists
+bc17cd405095: Layer already exists
+d1e551c519b5: Layer already exists
+ee854067fbbd: Layer already exists
+740ffea5d5c3: Layer already exists
+8354d5896557: Layer already exists
+eac9ead92b24: Layer already exists
+23bca356262f: Layer already exists
+bronze: digest: sha256:34b6d42cbd992e1c505f4503587215f3992b937c7a95c4d6360d93dfc57ae391 size: 3267
++ docker rmi -f 10.0.1.129:5000/ui-static:e613ca6
+Untagged: 10.0.1.129:5000/ui-static:e613ca6
++ docker rmi -f 10.0.1.129:5000/ui-static:bronze
+Untagged: 10.0.1.129:5000/ui-static:bronze
+Untagged: 10.0.1.129:5000/ui-static@sha256:34b6d42cbd992e1c505f4503587215f3992b937c7a95c4d6360d93dfc57ae391
+Deleted: sha256:80e808c887b2a1de3f2beeb11fb3e07e6042d611ac6fb90789c3861e3bde7582
+Deleted: sha256:e6203c32f5df63941b681d176fb8632edda91a45ae1b849446d329ebb4b98938
+Deleted: sha256:b0e2dea8b230350795dc06d9fb5b416dfd96a0e0622b6fb1f6f6d376f9723ce5
+Deleted: sha256:5e79cd64974596269eb6cf507a6a203f3d020aee293ec7c292b27fadc82ff173
+Deleted: sha256:b16db68c99d1b81bf4cae8c3ac7cbecf3bb2ae9205e24ba2f75d636559b880aa
+Deleted: sha256:311a0ec75aa0bb7737ebdc28e0cbef1a148de53de64ff5409b72e19fb2689c31
+Deleted: sha256:a441eab64eda50f7b7cfb53051508cd3e889385eae62ae97fdb43df5f49ec438
+Deleted: sha256:5535521f3ae5f6e775c7d5b99be021e2f903134d536c3ed00e423f5365951c41
+Deleted: sha256:f8ab90259142e7d84e9da86d488b7ec851955bc71a25a7ede2d27b214a24e053
+Deleted: sha256:4a8a4c91a5643516b8d78713dfa525eaaad9ac55a29627896f9d6656ee9ac8c1
+Deleted: sha256:4fdd975d0b04d751e6917a5d0e8a5be779d13c9051d2771201b535a65ee38f04
+[8mha:////4MXsYXnb4p7FgiEOMp7sCWEPUy1bdW722lZ/PP4Z+CyxAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFkKHf7T23f36y8/b4AAAA=[0m[Pipeline] }
+[8mha:////4ADhGD/71LyTTCLwqIdrANDxNP6S4NTyh7Fc/Zz1XH+5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCEB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BvGsvpe+AAAA[0m[Pipeline] // stage
+[8mha:////4CW/ezPvyc8QUPh/3zWEQ8IUWegke4QKdGw/DPOOEip2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKREFSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsXZLsPW9YxnL0AAAA=[0m[Pipeline] }
+[8mha:////4MIz47fr/8W2ok/wdLyXevLEobhhFUrq2v7hzRttFCPmAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKRQKJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5Nu9INt9ACg59UW9AAAA[0m[Pipeline] // node
+[8mha:////4FaMOl5AMjox+QrCVKyAXLPFK/PyL7vtBCCK2UbaBmuZAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkLA7GybVh8Qsq1Fpo3sP2IUx+kb/mP0gkcfJO95zlvN5Yp4gjR6daS52nVHvVh8HNT40cu2vgUbV8UTVT4mBVZceKG3tasGKxWJblWGlsLNWBkycn2OrWPEwRDLniLHF2B43cN3c8kem5LCbKF6aI3W1oEtOv8zeAqe8FebkXZOUHDiCSD70AAAA=[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

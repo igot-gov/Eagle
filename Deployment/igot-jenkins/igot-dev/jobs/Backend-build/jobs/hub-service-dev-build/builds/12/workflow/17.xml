@@ -1,0 +1,32 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.4">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.78">
+    <parentIds>
+      <string>16</string>
+    </parentIds>
+    <id>17</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.durable_task.ShellStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.78">
+      <arguments>
+        <entry>
+          <string>script</string>
+          <string>
+              cd $docker_file_path
+              pwd
+              docker build -f ./Dockerfile.build -t $docker_pre_build .
+              docker run --name $docker_pre_build $docker_pre_build:latest &amp;&amp; docker cp $docker_pre_build:/opt/target/hub-services-0.0.1-SNAPSHOT.jar .
+	      docker rm -f $docker_pre_build
+	      docker rmi -f $docker_pre_build
+                </string>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.38">
+      <startTime>1601809381758</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>

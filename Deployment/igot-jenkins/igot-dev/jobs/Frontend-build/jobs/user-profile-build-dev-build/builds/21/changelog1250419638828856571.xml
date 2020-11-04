@@ -1,0 +1,18 @@
+commit ac10b53e89db290bd387388958f6067cd8abb8ea
+tree b45424485f25fd92e1c00f75d8c3c8e88a8ffe95
+parent ff1a4c412b7d181fb69b7fe7baa491dfc074b95d
+author NetOps <idcnetops@tarento.com> 2020-09-24 04:16:25 +0000
+committer NetOps <idcnetops@tarento.com> 2020-09-24 04:16:25 +0000
+
+    sonar stage Updated in Jenkinsfile
+
+:100644 100644 183215bf525f5dff8550f9475d666c92189ad8b2 da24f1ba029a6d95b88dcea002b2578e16733a59 M	Jenkinsfile
+commit ff1a4c412b7d181fb69b7fe7baa491dfc074b95d
+tree c1568cf583aa5cef8742cdbd3d25b72e9b21a90d
+parent 4601d8bd156548dc86bd788b0a772345984766b0
+author NetOps <idcnetops@tarento.com> 2020-09-24 04:13:28 +0000
+committer NetOps <idcnetops@tarento.com> 2020-09-24 04:13:28 +0000
+
+    Add new file
+
+:000000 100644 0000000000000000000000000000000000000000 109e7633a3302443e0c3920a25b9010eab7c8284 A	sonar-project.properties

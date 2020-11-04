@@ -1,0 +1,30 @@
+commit 535d07a63973b5149ba0c9fe1f4e1718c82dabb4
+tree 2e087d95afdfbb90756eab0b52f5bb0dce95c90e
+parent 52d489a749ce67d36d6a54933a104a24dcb88479
+author usha <meetsamal.usha@gmail.com> 2020-10-20 19:23:00 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-20 19:23:00 +0530
+
+    meta tags added
+
+
+:100644 100644 a89a08ebd863ea4fe157865c85a41e8a4a2c1f52 deb34876eea6f1b36a8f368c5f0972f5dc2bb3b7 M	apps/social-share/index.html
+commit 52d489a749ce67d36d6a54933a104a24dcb88479
+tree 00d862055de71709527875c6280d615b5964b573
+parent 77be77f6869e4b80165058e4fd70938dcbf9d11a
+author usha <meetsamal.usha@gmail.com> 2020-10-20 18:38:44 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-20 18:38:44 +0530
+
+    og:type change
+
+
+:100644 100644 5c08c10d290aee80beb683bc74b4133991247f2f a89a08ebd863ea4fe157865c85a41e8a4a2c1f52 M	apps/social-share/index.html
+commit 77be77f6869e4b80165058e4fd70938dcbf9d11a
+tree f0ca8055b1e80d026c04a6313eb435fd077c4041
+parent 5d99e7a69258d010889090906f0eae9621b8cbad
+author usha <meetsamal.usha@gmail.com> 2020-10-20 18:24:21 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-20 18:24:21 +0530
+
+    og:type change
+
+
+:100644 100644 6462ccdc294419c86df4cd5741b82e8be01c5dfa 5c08c10d290aee80beb683bc74b4133991247f2f M	apps/social-share/index.html

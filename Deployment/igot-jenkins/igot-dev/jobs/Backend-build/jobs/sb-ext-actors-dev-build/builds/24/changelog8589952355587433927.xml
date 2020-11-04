@@ -1,0 +1,62 @@
+commit 6bf7bba16f7e38645dcff4f073fbd88f5096054c
+tree e715dd9b5cd727fe87ea5987a0999fd6b73d5732
+parent 11f6c6053bb0b92bd4f265b7306fc021dd3ec0ad
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2020-10-14 18:24:15 +0530
+committer GitHub <noreply@github.com> 2020-10-14 18:24:15 +0530
+
+    Updated the competency fields
+
+:100644 100644 195fdac57edefccfc274b19fb67493dc0057bb16 c5eeef34ab1b9c2a4daf0cd09908064ff1e15427 M	db_scripts/elasticsearch/index/search/search_mappings_settings.py
+commit 11f6c6053bb0b92bd4f265b7306fc021dd3ec0ad
+tree b1ff7461a9a9c7b35a6c35073738c3729a9afe05
+parent e566573dce287d85ca262ed05cd3e21ba7f485d9
+author Haridas <haridas.kakunje@tarento.com> 2020-10-14 12:49:06 +0000
+committer Haridas <haridas.kakunje@tarento.com> 2020-10-14 12:49:06 +0000
+
+    search_mappings_settings.py updated
+
+
+:100644 100644 999fa90d8c2082c70b5e261e82cbfb1f92ca6eb2 195fdac57edefccfc274b19fb67493dc0057bb16 M	db_scripts/elasticsearch/index/search/search_mappings_settings.py
+commit e566573dce287d85ca262ed05cd3e21ba7f485d9
+tree 616cd46dab5262a61e3a99686e8b942bc5bc2063
+parent 0cd030816778553460b2122c86866e6284e30acb
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2020-10-14 13:13:58 +0530
+committer GitHub <noreply@github.com> 2020-10-14 13:13:58 +0530
+
+    Update search_mappings_settings.py
+    
+    Added the competency fields
+
+:100644 100644 36f1e3eaa59df3f1d8228cd66c931bdbe8b38ae9 999fa90d8c2082c70b5e261e82cbfb1f92ca6eb2 M	db_scripts/elasticsearch/index/search/search_mappings_settings.py
+commit 3061719b77b142e7cd7a27141e574909410b4b2e
+tree 291ae718b9c1fcb0c9ff9ad7467d11ad8d1239cc
+parent 42ed9263e8a0903a33851236c7aa71154baf63f8
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 14:40:24 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 14:40:24 +0530
+
+    Task #51983 review comments
+
+
+:100644 100644 4fe34dce064dbcf9c98b99793a9c9088fa2b40f5 ffae08205971aa2f2d0b639ab761350140b1687b M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/CompetencySearchServiceImp.java
+commit 42ed9263e8a0903a33851236c7aa71154baf63f8
+tree e92cd466a06940bd5344a6874d2bb53ad039ea32
+parent da42568d04de5a7db9ecafe9235a0477b92b8995
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 11:38:07 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 11:38:07 +0530
+
+    Task no #51983 webhook API for competency update
+
+
+:000000 100644 0000000000000000000000000000000000000000 b3ea6d10aee696eb1a00f17bfb997f262e9cb8f1 A	apps/sb-ext-actors/src/main/java/com/infosys/controller/CompetencySearchController.java
+:000000 100644 0000000000000000000000000000000000000000 c9d90d6fca50df609d0351cb9767f5bd63cc93d8 A	apps/sb-ext-actors/src/main/java/com/infosys/service/CompetencySearchService.java
+:000000 100644 0000000000000000000000000000000000000000 4fe34dce064dbcf9c98b99793a9c9088fa2b40f5 A	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/CompetencySearchServiceImp.java
+commit 8bd9753c3f0030418403d0a84947480988af0daa
+tree ec48a9ef265931fa356cae8b5837491acb0b2136
+parent da42568d04de5a7db9ecafe9235a0477b92b8995
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-08 10:50:24 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-08 10:50:24 +0530
+
+    Task #51844 And filter for competency
+
+
+:100644 100644 4158939c33fc2f7aabdbde315a9b7ce32a1e2fd1 d0fd911306a23186c3dd26e80851a9dacf723933 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/validations/model/AndFilters.java

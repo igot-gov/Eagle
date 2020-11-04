@@ -1,0 +1,10 @@
+commit a817659300ac57a979696407ab93a53dba78c8b1
+tree 8f3b546d505b9a794d92f49a2565882aaa5822c9
+parent b8d93eca25b750d196c23e00bf85d5051fed15e4
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 17:38:59 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 17:38:59 +0530
+
+    Changing the session timeout for kafka
+
+
+:100644 100644 43fa80c76fbe5ebecfaba9e55335b3758114104d b011892a6b904743f24f64fc175cd1e0137ce0c5 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java

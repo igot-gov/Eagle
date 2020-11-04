@@ -1,0 +1,144 @@
+commit ff97f572ac4235cb023c7406ab1272ba824fcca1
+tree f087961e098cb46f3bb98bbf82005051cfcc4b37
+parent 54af710989f11b3459c15b2315a3789e42916e0e
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-12 16:46:53 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-12 16:46:53 +0530
+
+    Task #51993 Activity Api For UI usability change in response structure
+
+
+:100644 100644 cccee29baaa77c2e2ae9c0e31c2ce46082a92022 2bda593dd9a240436e296d934e88f9f8e9652a18 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/controller/MyActivitiesController.java
+commit 50ecc2f20a7b9659a1aa8cba5dc4c1c0114bb642
+tree 0ab244a8337041032e92fcff994c5e8fffce45b4
+parent 79084d4c75426e148ab04e8503d0126ba3e9bae0
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-07 22:39:15 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-07 22:39:15 +0530
+
+    Implementation of mandatory check for CBP
+
+
+:100644 100644 9888b11b174dd24bfe845cdeabd3063f02e12aeb 8ea8cc2cc7e04c5da4192fe01629cff484c2ba37 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java
+commit 79084d4c75426e148ab04e8503d0126ba3e9bae0
+tree b4c003a50fc517a371862f5157e170c7b9b84960
+parent 82d996ce1fd7b8293c7df78008f74f25398cd445
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-07 22:32:12 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-07 22:32:12 +0530
+
+    Implementation of mandatory check for CBP
+
+
+:000000 100644 0000000000000000000000000000000000000000 b8ef282e4d076e0ebe6e4ad744aabf7983610a50 A	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/MandatoryContentModel.java
+:000000 100644 0000000000000000000000000000000000000000 d5ffb0c60a5f396acb45f50a4626cb970f45739b A	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/MandatoryContentPrimaryKeyModel.java
+:000000 100644 0000000000000000000000000000000000000000 4ed12ea0aa3250e523a9ea097ff6dff3ad8b6e19 A	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/MandatoryContentRepository.java
+:100644 100644 01e4a30d10027926e067a4bf58d36c10f2862f14 96122bce1d2967084ec01f6479127841a1368f5a M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/controller/ContentProgressController.java
+:100644 100644 ecfd7d1ddf16453c3b1dd76909a7dc2524ae08c0 94370472987b083373a42260a1d51fe6dfe7cc36 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressService.java
+:100644 100644 112fb0f482469bc14765adf39f579d3ecf646e02 9888b11b174dd24bfe845cdeabd3063f02e12aeb M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java
+commit 7d2edb5a8921540bd1969b3ed126bc0df5038f70
+tree a51ca3efbd2b0184e1809ad52bb0b21e22133bdf
+parent 15f5b55b6d95b698b43d8a7c0cc504a93c77b5c8
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 10:53:46 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 10:53:46 +0530
+
+    Task #51907 Added structure for karma, coins
+
+
+:100644 100644 c0b65dec792f5742a007a5010d7bb8b82e0c0c00 df1855dcd08154a52898e296b5ccc50e1f17e934 M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/controller/BadgeController.java
+:100644 100644 b0d2ae8d5512beab3580dc8fddafb3e65ac1d241 1de66e0e6915b5b10a52feac345a30393e9133ce M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/service/BadgeServiceImpl.java
+:100644 100644 ec1a80c7f93d606f9f224d26274f8ed5ec284fcb cccee29baaa77c2e2ae9c0e31c2ce46082a92022 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/controller/MyActivitiesController.java
+:100644 100644 f7743050ee413655ad7d962f5f6a94942af98d1d f57f77bf8419980f4c76829b0c67616ae8ddf017 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/IMyActivities.java
+:100644 100644 111143118954a32dad66ec331e9775873100852e 7652b32269b21c9f7b9342cfd158261f2eca5ef1 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 66acbe707e03ef65a35ee3015788d344f4b24326 28eab948ffd332ae9466b8deb6113fe3793adf9d M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/utils/Constants.java
+commit 15f5b55b6d95b698b43d8a7c0cc504a93c77b5c8
+tree 432752dcac44cfc1eed8f839806d9b93d5eb78a7
+parent 719277182aa8c8b6825e9c319e3a1d06ac2a053b
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 10:07:44 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 10:07:44 +0530
+
+    Task #51907 Modified response structure
+
+
+:100644 100644 49ac661abb7d98d12e4baa0d5b5c7291257ec5ea f7743050ee413655ad7d962f5f6a94942af98d1d M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/IMyActivities.java
+:100644 100644 f77033d3cc446269a32ae656de66c2c458293048 111143118954a32dad66ec331e9775873100852e M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:000000 100644 0000000000000000000000000000000000000000 e33df48f8b99f35465330dd07693855166c0d3bd A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/utils/Activity.java
+:100644 100644 8cca00f0f483a48de7b3ce076ce0cb56ec913444 66acbe707e03ef65a35ee3015788d344f4b24326 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/utils/Constants.java
+commit 719277182aa8c8b6825e9c319e3a1d06ac2a053b
+tree f90750e0e2fc7a5d956c64365148375ae9b9984a
+parent 746083d4f754deb1d1336673354a988cf572761d
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 00:41:54 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 00:41:54 +0530
+
+    Task #51908 Modified progress data on continue learning
+
+
+:100644 100644 0946c630281e091b5dd17c9b65cae8b27434da0e f77033d3cc446269a32ae656de66c2c458293048 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 130e63cffddf924615a3e68b0267f2188ca9e7ae 4d68a82d355debf3ef6b7bab2271b66f4b1ab9d5 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/ContentProgressRepository.java
+commit 746083d4f754deb1d1336673354a988cf572761d
+tree 4446f91f7ee7067f11cb6437519814abb21edf8c
+parent 3c0ea8da9a4e67bd1545866b235b17e643d16a7a
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 23:25:00 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 23:25:00 +0530
+
+    Task #51908 Fixed query for progress
+
+
+:100644 100644 774a33748a37cd9a8afce8f89f3ab3e1eb9fffb7 0946c630281e091b5dd17c9b65cae8b27434da0e M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 8fbba701a5cd9dc8ddd2cd89902b260c47c07b97 130e63cffddf924615a3e68b0267f2188ca9e7ae M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/ContentProgressRepository.java
+:100644 100644 4fea913ffe1582ab28f27873627d8a87257c7f4c 6108d4a47bd2d031fb3de24f41ed786df5d9aca0 M	apps/lex-core-service/src/main/resources/application.properties
+commit 3c0ea8da9a4e67bd1545866b235b17e643d16a7a
+tree 047d254ce07218b1887f91642c3216280e3b8edc
+parent 10233d0790a0d388d0775da0f2abdd8978a6dd5a
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 22:55:01 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 22:55:01 +0530
+
+    Task #51908: Refactoring
+
+
+:100644 100644 faaeb606d58a950b9ef69f4e52d020843ee0d39e 19a5d28b2f81cba6acab914810048052e592323d R057	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentModel.java	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/bodhi/repo/UserTimeSpentModel.java
+:100644 100644 46ffd74703fd34ca199c5242f6da2947793456f0 05f76dd3c597994dce454cbc7faf90e431fdb2aa R075	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentPrimaryKey.java	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/bodhi/repo/UserTimeSpentPrimaryKey.java
+:100644 100644 31fd535ec47942509441429d4f700c8e57d64e43 f1b90ddcd3374146bfcf95d2c5eb531e962491eb R090	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentRepository.java	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/bodhi/repo/UserTimeSpentRepository.java
+:100644 100644 caf0236df5e0a48fb75dadd1067566266b56784e 774a33748a37cd9a8afce8f89f3ab3e1eb9fffb7 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 6108d4a47bd2d031fb3de24f41ed786df5d9aca0 4fea913ffe1582ab28f27873627d8a87257c7f4c M	apps/lex-core-service/src/main/resources/application.properties
+commit 10233d0790a0d388d0775da0f2abdd8978a6dd5a
+tree bd1470aca47461f5bf6ad50ac398988d34ba8f87
+parent fd89de3a17f6218117d5f8bc19144f9e61e8d891
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 22:04:57 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 22:04:57 +0530
+
+    Task #51908: Refactoring rest endpoint
+
+
+:100644 100644 47d6555382e92a540f96e3346a0632985c6be3ad ec1a80c7f93d606f9f224d26274f8ed5ec284fcb M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/controller/MyActivitiesController.java
+:100644 100644 475c88fa70d1aa2ed6a57f8ce0c415cb6939ef0c 46ffd74703fd34ca199c5242f6da2947793456f0 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentPrimaryKey.java
+:100644 100644 14ffb68f2af1a28bf7c5a6759f85cd69fa164907 caf0236df5e0a48fb75dadd1067566266b56784e M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+commit fd89de3a17f6218117d5f8bc19144f9e61e8d891
+tree f316432e168a231f2bb965342ded0c711adc406b
+parent c251cedeeb6e6cc8157451346fe770a5d8d6b6e3
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 20:59:40 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 20:59:40 +0530
+
+    Task #51908 Impl Myactivity rest end point
+
+
+:100644 100644 eea96a8e2f3c3900cea5fedb40a283c7ff9fa30d 31696c58d864329aec108e08471bf0e8ddeef958 M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/bodhi/repo/UserBadgeRepository.java
+:000000 100644 0000000000000000000000000000000000000000 47d6555382e92a540f96e3346a0632985c6be3ad A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/controller/MyActivitiesController.java
+:100644 100644 c488773570bff84f6c55e56216e58e0879ab9a19 31fd535ec47942509441429d4f700c8e57d64e43 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentRepository.java
+:100644 100644 e93b38287277e72c04a7a8e8ba3ae25d0221ed2e 49ac661abb7d98d12e4baa0d5b5c7291257ec5ea M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/IMyActivities.java
+:100644 100644 1f2e3d0f7548813147b949eba34a31f383de4746 14ffb68f2af1a28bf7c5a6759f85cd69fa164907 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:000000 100644 0000000000000000000000000000000000000000 8cca00f0f483a48de7b3ce076ce0cb56ec913444 A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/utils/Constants.java
+:100644 100644 c49d33bd0b45a1cd1db38d5a80e83aeebedb2961 8fbba701a5cd9dc8ddd2cd89902b260c47c07b97 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/ContentProgressRepository.java
+commit c251cedeeb6e6cc8157451346fe770a5d8d6b6e3
+tree 04f1b6ca8641dfdbea4e3820846be061406b1285
+parent 22823e0925c02a422fa91e06c9be727828b12dc7
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 20:04:45 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 20:04:45 +0530
+
+    Task #51907 Created interface service and repo layers
+
+
+:100644 100644 c6c8c6fe4f1434edf1380eba67f651c04175cf76 eea96a8e2f3c3900cea5fedb40a283c7ff9fa30d M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/bodhi/repo/UserBadgeRepository.java
+:100644 100644 d79f9b9c01d988ccb7c1778ab75cb203f5c189ee d64ec088fbe16cddfdf940b12115ef1246d2e3c3 M	apps/lex-core-service/src/main/java/com/infosys/lex/continuelearning/bodhi/repo/ContinueLearningMVRepository.java
+:000000 100644 0000000000000000000000000000000000000000 faaeb606d58a950b9ef69f4e52d020843ee0d39e A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentModel.java
+:000000 100644 0000000000000000000000000000000000000000 475c88fa70d1aa2ed6a57f8ce0c415cb6939ef0c A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentPrimaryKey.java
+:000000 100644 0000000000000000000000000000000000000000 c488773570bff84f6c55e56216e58e0879ab9a19 A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/repo/UserTimeSpentRepository.java
+:000000 100644 0000000000000000000000000000000000000000 e93b38287277e72c04a7a8e8ba3ae25d0221ed2e A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/IMyActivities.java
+:000000 100644 0000000000000000000000000000000000000000 1f2e3d0f7548813147b949eba34a31f383de4746 A	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java

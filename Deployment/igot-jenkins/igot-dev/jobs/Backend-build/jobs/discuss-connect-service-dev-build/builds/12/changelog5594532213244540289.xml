@@ -1,0 +1,9 @@
+commit 89aafb3289234c2e05a0233647c748c579661fef
+tree 2eb1ce7a059cfdb2d9dbb4e2e359c6f79d16789d
+parent 97841223560e57498293c485e7a53580d84e10cf
+author karthik-tarento <70887864+karthik-tarento@users.noreply.github.com> 2020-10-28 09:37:32 +0530
+committer GitHub <noreply@github.com> 2020-10-28 09:37:32 +0530
+
+    Fixed target URL issue
+
+:100644 100644 23f7a418a41b5e16eeebcd99de4347706b0365dd 5f5f1cb445a3fbd856e7b234e3fa79b8cdf499e9 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHandlerServiceImpl.java

@@ -1,0 +1,302 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@2.36">
+  <actions>
+    <hudson.model.ParametersAction>
+      <safeParameters class="sorted-set"/>
+      <parameters>
+        <hudson.model.StringParameterValue>
+          <name>branch_name</name>
+          <description>github repo branch</description>
+          <value>hub-service-dev</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_server</name>
+          <description></description>
+          <value>10.0.1.129:5000</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_repo</name>
+          <description></description>
+          <value>sb-hub-service</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>image_tag</name>
+          <description></description>
+          <value>bronze</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_file_path</name>
+          <description></description>
+          <value>./apps/hub-services/</value>
+        </hudson.model.StringParameterValue>
+        <hudson.model.StringParameterValue>
+          <name>docker_pre_build</name>
+          <description></description>
+          <value>hub-service-build</value>
+        </hudson.model.StringParameterValue>
+      </parameters>
+      <parameterDefinitionNames>
+        <string>branch_name</string>
+        <string>docker_server</string>
+        <string>docker_repo</string>
+        <string>image_tag</string>
+        <string>docker_file_path</string>
+        <string>docker_pre_build</string>
+      </parameterDefinitionNames>
+    </hudson.model.ParametersAction>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>pritha</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <hudson.plugins.git.util.BuildData plugin="git@4.1.1">
+      <buildsByBranchName>
+        <entry>
+          <string>origin/feature-pritha-51683-hubservice</string>
+          <hudson.plugins.git.util.Build>
+            <marked plugin="git-client@3.1.1">
+              <sha1>dd11b70f6ccb82efeec20631ed19eee9ba64f921</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/feature-pritha-51683-hubservice</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </marked>
+            <revision plugin="git-client@3.1.1">
+              <sha1 reference="../../marked/sha1"/>
+              <branches class="list">
+                <hudson.plugins.git.Branch reference="../../../marked/branches/hudson.plugins.git.Branch"/>
+              </branches>
+            </revision>
+            <hudsonBuildNumber>19</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+        <entry>
+          <string>origin/hub-service-dev</string>
+          <hudson.plugins.git.util.Build>
+            <marked plugin="git-client@3.1.1">
+              <sha1>edd748f1d67d7b06f1894f1be76335685c29d266</sha1>
+              <branches class="list">
+                <hudson.plugins.git.Branch>
+                  <sha1 reference="../../../sha1"/>
+                  <name>origin/hub-service-dev</name>
+                </hudson.plugins.git.Branch>
+              </branches>
+            </marked>
+            <revision reference="../marked"/>
+            <hudsonBuildNumber>21</hudsonBuildNumber>
+          </hudson.plugins.git.util.Build>
+        </entry>
+      </buildsByBranchName>
+      <lastBuild reference="../buildsByBranchName/entry[2]/hudson.plugins.git.util.Build"/>
+      <remoteUrls>
+        <string>https://github.com/igot-gov/Eagle.git</string>
+      </remoteUrls>
+    </hudson.plugins.git.util.BuildData>
+    <hudson.plugins.git.GitTagAction plugin="git@4.1.1">
+      <tags class="hudson.util.CopyOnWriteMap$Tree">
+        <entry>
+          <string>origin/hub-service-dev</string>
+          <list/>
+        </entry>
+      </tags>
+      <ws>/var/lib/jenkins/workspace/igot-dev/Backend-build/hub-service-dev-build@script</ws>
+    </hudson.plugins.git.GitTagAction>
+    <org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState plugin="workflow-scm-step@2.10">
+      <revisionStates>
+        <entry>
+          <string>git https://github.com/igot-gov/Eagle.git</string>
+          <hudson.scm.SCMRevisionState_-None/>
+        </entry>
+      </revisionStates>
+    </org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="workflow-cps-global-lib@2.15">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <hudson.plugins.ansicolor.ColorizedAction plugin="ansicolor@0.6.2">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.ColorizedAction>
+    <com.cloudbees.plugins.credentials.builds.CredentialsParameterBinder plugin="credentials@2.3.1">
+      <boundCredentials class="concurrent-hash-map"/>
+    </com.cloudbees.plugins.credentials.builds.CredentialsParameterBinder>
+    <hudson.plugins.sonar.action.SonarMarkerAction plugin="sonar@2.12"/>
+    <hudson.plugins.sonar.action.SonarAnalysisAction plugin="sonar@2.12">
+      <installationName>sonarqube</installationName>
+      <installationUrl>https://sonarqube.idc.tarento.com</installationUrl>
+      <ceTaskId>AXUHABg7M17063k6zmAN</ceTaskId>
+      <url>https://sonarqube.idc.tarento.com/dashboard?id=com.infosys%3Ahub-services</url>
+      <serverUrl>https://sonarqube.idc.tarento.com</serverUrl>
+      <isNew>true</isNew>
+      <isSkipped>false</isSkipped>
+    </hudson.plugins.sonar.action.SonarAnalysisAction>
+    <com.sonyericsson.rebuild.RebuildAction plugin="rebuild@1.31"/>
+    <hudson.plugins.sonar.action.SonarCacheAction plugin="sonar@2.12">
+      <infoByTaskId>
+        <entry>
+          <string>AXUHABg7M17063k6zmAN</string>
+          <hudson.plugins.sonar.client.ProjectInformation>
+            <created>1602140259196</created>
+            <name>hub-services</name>
+            <url>https://sonarqube.idc.tarento.com/dashboard?id=com.infosys%3Ahub-services</url>
+            <status>OK</status>
+            <ceStatus>success</ceStatus>
+            <ceUrl>https://sonarqube.idc.tarento.com/api/ce/task?id=AXUHABg7M17063k6zmAN</ceUrl>
+          </hudson.plugins.sonar.client.ProjectInformation>
+        </entry>
+      </infoByTaskId>
+      <lastRequest>1602140259570</lastRequest>
+      <lastProjInfo>
+        <hudson.plugins.sonar.client.ProjectInformation reference="../../infoByTaskId/entry/hudson.plugins.sonar.client.ProjectInformation"/>
+      </lastProjInfo>
+    </hudson.plugins.sonar.action.SonarCacheAction>
+  </actions>
+  <queueId>10742</queueId>
+  <timestamp>1602140058201</timestamp>
+  <startTime>1602140058204</startTime>
+  <result>SUCCESS</result>
+  <duration>200991</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>SUCCESS</result>
+    <script>node() {
+    try {
+        String ANSI_GREEN = &quot;\u001B[32m&quot;
+        String ANSI_NORMAL = &quot;\u001B[0m&quot;
+        String ANSI_BOLD = &quot;\u001B[1m&quot;
+        String ANSI_RED = &quot;\u001B[31m&quot;
+        String ANSI_YELLOW = &quot;\u001B[33m&quot;
+        
+        ansiColor(&apos;xterm&apos;) {
+            stage(&apos;Checkout&apos;) {
+                cleanWs()
+		checkout scm
+		}
+	}
+           stage(&apos;docker-pre-build&apos;) {
+             sh &apos;&apos;&apos;
+              cd $docker_file_path
+              pwd
+              docker build -f ./Dockerfile.build -t $docker_pre_build .
+              docker run --name $docker_pre_build $docker_pre_build:latest &amp;&amp; docker cp $docker_pre_build:/opt/target/hub-services-0.0.1-SNAPSHOT.jar .
+	      docker rm -f $docker_pre_build
+	      docker rmi -f $docker_pre_build
+                &apos;&apos;&apos;
+        }
+	   
+		stage(&apos;SonarQube analysis&apos;) {
+   		 // requires SonarQube Scanner 2.8+
+   		def scannerHome = tool &apos;sonar_scanner&apos;;
+   		withSonarQubeEnv(&apos;sonarqube&apos;) {
+    		sh &apos;cd $docker_file_path &amp;&amp; mvn clean package sonar:sonar&apos;
+    			 }
+  	}
+  	stage(&quot;Quality Gate&quot;) {
+  			timeout(time: 1, unit: &apos;HOURS&apos;) { // Just in case something goes wrong, pipeline will be killed after a timeout
+  			def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+   			if (qg.status != &apos;OK&apos;) {
+    			 error &quot;Pipeline aborted due to quality gate failure: ${qg.status}&quot;
+   				}
+ 		   }
+		}
+
+	    
+           stage(&apos;docker-build&apos;) {
+		sh &apos;&apos;&apos;
+		   commit_id=$(git rev-parse --short HEAD)
+		   echo $commit_id&gt; commit_id.txt
+		   cd $docker_file_path
+		   pwd
+		   docker build -t $docker_server/$docker_repo:$commit_id .
+		   docker tag $docker_server/$docker_repo:$commit_id $docker_server/$docker_repo:$image_tag
+		   &apos;&apos;&apos;
+	}
+         stage(&apos;docker-push&apos;) {
+
+	       sh &apos;&apos;&apos;
+		  pwd
+		  commit_id=$(git rev-parse --short HEAD)
+		  docker push $docker_server/$docker_repo:$commit_id
+		  docker push $docker_server/$docker_repo:$image_tag
+		  docker rmi -f $docker_server/$docker_repo:$commit_id
+		  docker rmi -f $docker_server/$docker_repo:$image_tag
+		  &apos;&apos;&apos;
+       }
+
+}
+    catch (err) {
+        currentBuild.result = &quot;FAILURE&quot;
+        throw err
+    }
+}
+
+
+</script>
+    <loadedScripts class="map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>219372528</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>102136026</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>1419032796</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>63409223</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>658198323</long>
+      </entry>
+    </timings>
+    <sandbox>true</sandbox>
+    <iota>51</iota>
+    <head>1:51</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList">
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" plugin="git@4.1.1">
+        <configVersion>2</configVersion>
+        <userRemoteConfigs>
+          <hudson.plugins.git.UserRemoteConfig>
+            <url>https://github.com/igot-gov/Eagle.git</url>
+          </hudson.plugins.git.UserRemoteConfig>
+        </userRemoteConfigs>
+        <branches>
+          <hudson.plugins.git.BranchSpec>
+            <name>${branch_name}</name>
+          </hudson.plugins.git.BranchSpec>
+        </branches>
+        <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+        <submoduleCfg class="list"/>
+        <extensions/>
+      </scm>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/igot-dev/Backend-build/hub-service-dev-build@script</workspace>
+      <changelogFile>/var/lib/jenkins/jobs/igot-dev/jobs/Backend-build/jobs/hub-service-dev-build/builds/21/changelog2173273230312651209.xml</changelogFile>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+    <org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+      <scm class="hudson.plugins.git.GitSCM" reference="../../org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout/scm"/>
+      <node></node>
+      <workspace>/var/lib/jenkins/workspace/igot-dev/Backend-build/hub-service-dev-build</workspace>
+      <pollingBaseline class="hudson.scm.SCMRevisionState$None" reference="../../../actions/org.jenkinsci.plugins.workflow.steps.scm.MultiSCMRevisionState/revisionStates/entry/hudson.scm.SCMRevisionState_-None"/>
+    </org.jenkinsci.plugins.workflow.job.WorkflowRun_-SCMCheckout>
+  </checkouts>
+</flow-build>

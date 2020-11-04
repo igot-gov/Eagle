@@ -1,0 +1,42 @@
+commit 44eae9f2477e85f5caa9bd323b31ae116cb23f7a
+tree aed9841f94e64633ce1f376f8d6c6e3afddaca9a
+parent 0119bd99bb44e83a22f0145bf82db852757bc781
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-31 20:01:58 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-31 20:01:58 +0530
+
+    Task #51000: Disabled Ask in authors
+
+
+:100644 100644 9c65e62905157510e72ca4d99a34e9149a992613 f78c5ccc0b46b16fd64de17d24bc6e935378dc31 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.html
+:100644 100644 c43d703ead09ce8393d742fe763bd8c975b4a6f8 51e1e1b02b38a5dcd3718ee3656e59f7159ec77d M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.ts
+:100644 100644 ae3e5f1a2d0ee6385ca99f1f14c2740d9e804636 77e4fe5aefcf61727de5f877dc90c33b1de7a604 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+commit 0119bd99bb44e83a22f0145bf82db852757bc781
+tree e463b45671b15579ae40e1407229b190b63eb271
+parent 3024091e1f929b8b21b189507ed8116ff9d5bee6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-31 19:07:53 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-31 19:07:53 +0530
+
+    Task #51000: Fragment scroll navigation and active link highlight
+
+
+:100644 100644 f2f87023601c65c1f357a71e3fa7c44220105531 0fd8d51d16dab6b0d194664016f10b0ad996ad20 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 28ebe0302671b49961c72b4b9b1713808ae12fbd 633cac2aa6ac050fe4e94a0bae4b118d8399c376 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.scss
+:100644 100644 133cd50272d9fa36c15758a7dfd71d5ef4a5c291 77badef6184e6235fccf0812b04b60247215cfb4 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.ts
+:100644 100644 3a45f25706e2cb585d0a260d4b2b4bbe6731a557 ae3e5f1a2d0ee6385ca99f1f14c2740d9e804636 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 05ed573e38a3dc5493dfe80d5f6c8a5540191e84 c1349608799dd7dcad190e6360bae79eba979124 M	apps/fusion/src/app/app-routing.module.ts
+:100644 100644 37bd941815bf9332744e0615672509622d8eef50 363ab76d7fc3e00531c7e7476a0c798d0053a90c M	apps/fusion/src/fusion-assets/fonts/poppins/stylesheet.css
+commit 3024091e1f929b8b21b189507ed8116ff9d5bee6
+tree 1e942ec4d5765826606a9dd2b88dd37c302fe4d3
+parent de42c74dcf2788a32f1a7b09c325d4a5c8577464
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-31 18:04:13 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-31 18:04:13 +0530
+
+    Task #51000: Discussion forum styles redesigned
+
+
+:100644 100644 cc2d9c84e2abe6e8df215b0a7889eba7fa712534 23aebfe92ec0d8dc27b3d483e03243a4c420f69f M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.html
+:100644 100644 8f8fe402a7c9cf483408ecdf4dce9853fd87be7e e89a708dbf8d75857b9bde1d08c4ec0fe9ca8597 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.scss
+:100644 100644 8c55e6eae2d87162ca75d780865199fb56ea64e2 9c65e62905157510e72ca4d99a34e9149a992613 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.html
+:100644 100644 6749efe0ba9abe8e9c67296dec2e8d8463393a87 109914a51dea60a38984cd598fa773b7a1039f0d M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.scss
+:100644 100644 d900650d4f43ccfa6217700407fddf20bfc24f04 70544f459ce4989dbab32bcb27a611c932a1453a M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.html
+:100644 100644 d09a451988d94509406ed510323cdc60f70c6430 1353c930c996e4a2fff204117e0081fbfa17ed8c M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.scss

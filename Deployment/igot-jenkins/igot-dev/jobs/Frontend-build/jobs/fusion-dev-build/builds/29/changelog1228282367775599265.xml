@@ -1,0 +1,10 @@
+commit edfeb6669c53adf7de9affbe292041aa8d3b2475
+tree e2cf9decd66637c7fc4ec8481a3c3cfc181bfed3
+parent 5158634ca62feb3cfeb91f99c4eb44882397937a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 23:51:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 23:51:06 +0530
+
+    option small fix
+
+
+:100644 100644 3f84cde256ccd700c432a0a4974d4719321d2329 003f0a08d2255011a3bff2d08226421e0ac56279 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html

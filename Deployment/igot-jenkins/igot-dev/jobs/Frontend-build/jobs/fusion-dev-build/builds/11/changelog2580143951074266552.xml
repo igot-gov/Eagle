@@ -1,0 +1,53 @@
+commit 0dd81721ed44729fc6bfc49bf7cd507d821eb7a8
+tree da942a43c464b0ca3e89427a89e7206137e86648
+parent 94ed36fdf5de28f998b272348322f4af54466886
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 20:12:01 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 20:12:01 +0530
+
+    Task #50723: Fixed the expty rows in excel and mailto for email
+
+
+:100644 100644 60081930a02bd6d5f21abda6b1b14c10dcba0fbe f89e9fd135d898b213ed918e0d84250b10274b62 M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+commit ccc9b9a522a4efb94f9157b78978fb2218338334
+tree 667d34e9079057d46e144ad84db9378055d89ad9
+parent 94ed36fdf5de28f998b272348322f4af54466886
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-22 20:08:55 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-22 20:09:15 +0530
+
+    last mun UI CSS update
+
+
+:100644 100644 90ccfd9e32a064b11d984893e9848103f2a0df61 7f5e062a9e102c777c5d2cf0f6292e701fa04ccf M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.scss
+:100644 100644 59ab3a7a8289ab7a7cc8391c09c32491ac476832 7b6cc1e03e69ee07b82de5b554dcc723cf935539 M	apps/fusion/project/ws/viewer/src/lib/components/viewer-top-bar/viewer-top-bar.component.scss
+commit 94ed36fdf5de28f998b272348322f4af54466886
+tree f2527c0eea3465409b8a541421286fc9ab1e7122
+parent 8705d139c2db01a72883620c7fc03c6fc63c3630
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 17:47:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 17:47:38 +0530
+
+    Task #50990: Fixed console error in analytics home page and configuration added in client assets
+
+
+:100644 100644 d9bd3c42a23b5c02e51b6d555a4a247e9073a720 dcc6d178f4c73634e79d15620d4022ba6c7525e9 M	apps/client-assets/assets/configurations/localhost_3000/feature/analytics.json
+:100644 100644 84bc4bd7aec1fbd4ef7bba4be164b6951ab3b5dc d2975ac5dfb4b780eaade11a6a9f43e49bf2e200 M	apps/fusion/project/ws/analytics/src/lib/routes/learning-analytics/components/home/home.component.ts
+commit 8705d139c2db01a72883620c7fc03c6fc63c3630
+tree efd2cc372b6d9e79055a4b29db52edd747eab11f
+parent 299aed7623a8b72027276b22da176f2ee5d0fd24
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 12:20:40 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 12:20:40 +0530
+
+    Task #49768: max length validation on textarea
+
+
+:100644 100644 4251f95c7591d5e85ae407f7f96d2ababcd68756 d2de3cd13d07264056cf35480eab69e594d63af4 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+commit 299aed7623a8b72027276b22da176f2ee5d0fd24
+tree 4c3e62bec6cda3e775df88d1517c504eba3f011e
+parent 6b013abd23897f312fd94d1816a1cd1cfb8a42fc
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 09:26:43 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-22 09:26:43 +0530
+
+    Task #50974: Fixed login page display before KC loads
+
+
+:100644 100644 4ebb06e7757e813c7623d3142a66922be647c591 542b0ae8a3c16b2f86974cf66103c85810b418eb M	apps/fusion/src/app/guards/empty-route.guard.ts
+:100644 100644 d320f72192ff355ea3e4b044ba5a6d7af3824179 38e3e7d594ceac1bbce167a3cef75e184d220ec7 M	apps/fusion/src/app/guards/general.guard.ts
