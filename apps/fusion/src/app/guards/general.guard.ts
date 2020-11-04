@@ -48,9 +48,13 @@ export class GeneralGuard implements CanActivate {
       } else {
         redirectUrl = document.baseURI
       }
-      Promise.resolve(this.authSvc.login('S', redirectUrl))
-      return false
 
+      try {
+        Promise.resolve(this.authSvc.login('S', redirectUrl))
+        return true
+      } catch (e) {
+        return false
+      }
     }
     // If invalid user
     if (
