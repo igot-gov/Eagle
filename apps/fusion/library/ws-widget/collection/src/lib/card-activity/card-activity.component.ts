@@ -18,7 +18,7 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
       if (this.widgetData.content.hasOwnProperty('totalDuration')) {
-        this.item = { name: 'Total Duration', icon: 'av_timer', count: this.widgetData.content.totalDuration.value }
+        this.item = { name: 'Training Hours', icon: 'stars', count: this.widgetData.content.totalDuration.value }
       } else if (this.widgetData.content.hasOwnProperty('contentCount')) {
         this.item = { name: 'Contents', icon: 'shop_two', count: this.widgetData.content.contentCount.value }
       } else if (this.widgetData.content.hasOwnProperty('coins')) {

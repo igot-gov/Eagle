@@ -2,11 +2,22 @@
   <ng-container *ngIf="showTabNavBar()">
     <mat-tab-group mat-align-tabs="center" [selectedIndex]="currentTabIndex"
       (selectedIndexChange)="navigateToTab($event)">
-      <mat-tab label="Learner" *ngIf="showTab(feedbackRoles.User)" i18n-label></mat-tab>
-      <mat-tab label="Author" *ngIf="showTab(feedbackRoles.Author)" i18n-label></mat-tab>
-      <mat-tab label="Platform" *ngIf="showTab(feedbackRoles.Platform)" i18n-label></mat-tab>
-      <mat-tab label="Content Requests" *ngIf="showTab(feedbackRoles.Content)" i18n-label></mat-tab>
-      <mat-tab label="Service Requests" *ngIf="showTab(feedbackRoles.Service)" i18n-label></mat-tab>
+      <a href="javascript:void(0)" role="link">
+        <mat-tab label="Learner" *ngIf="showTab(feedbackRoles.User)" i18n-label></mat-tab>
+      </a>
+
+      <a href="javascript:void(0)" role="link">
+        <mat-tab label="Author" *ngIf="showTab(feedbackRoles.Author)" i18n-label></mat-tab>
+      </a>
+      <a href="javascript:void(0)" role="link">
+        <mat-tab label="Platform" *ngIf="showTab(feedbackRoles.Platform)" i18n-label></mat-tab>
+      </a>
+      <a href="javascript:void(0)" role="link">
+        <mat-tab label="Content Requests" *ngIf="showTab(feedbackRoles.Content)" i18n-label></mat-tab>
+      </a>
+      <a href="javascript:void(0)" role="link">
+        <mat-tab label="Service Requests" *ngIf="showTab(feedbackRoles.Service)" i18n-label></mat-tab>
+      </a>
     </mat-tab-group>
   </ng-container>
 

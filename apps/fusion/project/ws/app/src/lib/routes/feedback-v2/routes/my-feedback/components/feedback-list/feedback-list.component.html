@@ -46,11 +46,14 @@
 <ng-container *ngIf="feedbackFetchStatus === 'done' && feedbackData">
   <ng-container *ngIf="feedbackData.result.length">
     <mat-list>
+
       <ng-container *ngFor="let feedback of feedbackData.result">
-        <ng-container [ngTemplateOutlet]="listItemDefault" [ngTemplateOutletContext]="{ $implicit: feedback }"
-          *ngIf="viewedBy !== feedbackRoles.User"></ng-container>
-        <ng-container [ngTemplateOutlet]="listItemUser" [ngTemplateOutletContext]="{ $implicit: feedback }"
-          *ngIf="viewedBy === feedbackRoles.User"></ng-container>
+        <a href="javascript:void(0)" role="link">
+          <ng-container [ngTemplateOutlet]="listItemDefault" [ngTemplateOutletContext]="{ $implicit: feedback }"
+            *ngIf="viewedBy !== feedbackRoles.User"></ng-container>
+          <ng-container [ngTemplateOutlet]="listItemUser" [ngTemplateOutletContext]="{ $implicit: feedback }"
+            *ngIf="viewedBy === feedbackRoles.User"></ng-container>
+        </a>
         <mat-divider></mat-divider>
       </ng-container>
     </mat-list>
