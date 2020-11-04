@@ -24,10 +24,10 @@ router.get("/playlist/:userId/:id", function (req, res) {
         console.log("api successful");       
         if (typeof body == "string") {
           let playlist = JSON.parse(body)
-          data = playlist ? playlist.resource_ids[0] : null
+          data = playlist.resource_ids[0]
         } else {
           let playlist = body
-          data = playlist ? playlist.resource_ids[0] : null  
+          data = playlist.resource_ids[0] 
         }
         if (data) {
           var html = `<!DOCTYPE html>
