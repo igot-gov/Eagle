@@ -18,7 +18,7 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
   ngOnInit(): void {
     if (this.widgetData && this.widgetData.content) {
       if (this.widgetData.content.hasOwnProperty('totalDuration')) {
-        this.item = { name: 'Training Hours', icon: 'stars', count: this.widgetData.content.totalDuration.value }
+        this.item = { name: 'Training Hours', icon: 'av_timer', count: this.widgetData.content.totalDuration.value }
       } else if (this.widgetData.content.hasOwnProperty('contentCount')) {
         this.item = { name: 'Contents', icon: 'shop_two', count: this.widgetData.content.contentCount.value }
       } else if (this.widgetData.content.hasOwnProperty('coins')) {
@@ -28,7 +28,7 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
       } else if (this.widgetData.content.hasOwnProperty('karmaPoints')) {
         this.item = { name: 'Karma', icon: 'loop', count: this.widgetData.content.karmaPoints.value }
       } else if (this.widgetData.content.hasOwnProperty('certificateCount')) {
-        this.item = { name: 'Certificates', icon: 'turned_in_not', count: this.widgetData.content.certificateCount.value }
+        this.item = { name: 'Certificates', icon: 'stars', count: this.widgetData.content.certificateCount.value }
       } else {
         this.item = this.widgetData.content
       }
