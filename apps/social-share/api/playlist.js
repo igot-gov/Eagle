@@ -22,9 +22,9 @@ router.get("/playlist/:userId/:id", function (req, res) {
       } else {
         console.log("api successful"); 
         if (typeof body == "string") {
-          data = JSON.parse(body);
+          data = (JSON.parse(body)).resource_ids[0];
         } else {
-          data = body;
+          data = body.resource_ids[0];
         }
       
         if (data) {
@@ -33,20 +33,27 @@ router.get("/playlist/:userId/:id", function (req, res) {
               <head>             
                 <meta charset="utf-8" />
                 <title>"${data.name}"</title>
+                <meta id="id-social-description" name="description"  content="${
+                  data.description
+                }"> 
                 <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
                 " />                      
                 <meta property="og:type" content="website">
                 <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/playlist/${req.params.userId}/${req.params.id}`}" />
-                <meta property="og:title" content="${data.name}" />              
-                <meta property="og:image" content="${data.icon}" />  
+                <meta property="og:title" content="${data.name}" /> 
+                <meta property="og:description" content="${data.description}" />             
+                <meta property="og:image" content="${data.appIcon}" />  
                 <meta property="og:image:secure_url" content="${
-                  data.icon
+                  data.appIcon
                 }" />        
             
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/playlist/${req.params.userId}/${req.params.id}`}" />
                 <meta property="twitter:title" content="${data.name}" />
-                <meta property="twitter:image" content="${data.icon}" />
+                <meta property="twitter:description" content="${
+                  data.description
+                }" />
+                <meta property="twitter:image" content="${data.appIcon}" />
                 <style>
                   .social-card {
                     box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
@@ -87,9 +94,10 @@ router.get("/playlist/:userId/:id", function (req, res) {
               <body>
                 <div class="social-card">
                   <a href="https://d136953gtttd92.cloudfront.net/app/playlist/me/${req.params.id}">
-                    <img src="${data.icon}" alt="${data.name}"  class="social-card-img" />
+                    <img src="${data.appIcon}" alt="${data.name}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${data.name}</p>
+                      <p class="desc">${data.description}</p>
                     </div>  
                   </a>   
                 </div>                       
