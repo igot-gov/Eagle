@@ -5,12 +5,12 @@
       <div class="mat-body">
         <mat-form-field class="w-full">
           <textarea matInput [matTextareaAutosize] [matAutosizeMaxRows]="10" [matAutosizeMinRows]="3"
-            formControlName="contentRequest" placeholder="Type your request here" i18n-placeholder></textarea>
+            formControlName="contentRequest" placeholder="Type your request here" i18n-placeholder required></textarea>
           <mat-hint i18n>
             Limit to 2000 characters.
           </mat-hint>
           <mat-error i18n>
-            You have exceeded 2000 characters.
+            This field cannot be blank.
           </mat-error>
         </mat-form-field>
       </div>
