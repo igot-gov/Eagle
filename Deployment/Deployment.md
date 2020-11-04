@@ -1459,7 +1459,7 @@ location /nodebb/ {
    }
    
    --------------
-   -   Set up private docker registry
+   -  Set up private docker registry
        
       - Login to jenkin server
  
