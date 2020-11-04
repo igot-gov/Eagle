@@ -40,7 +40,7 @@
       </button>
     </div>
     <div class="margin-bottom-m">
-      <mat-chip-list aria-label="Filter selection">
+      <mat-chip-list aria-label="Filter selection" role="none">
         <span *ngFor="let filter of filtersResponse">
           <span *ngFor="let content of filter?.content">
             <span *ngIf="content?.checked">

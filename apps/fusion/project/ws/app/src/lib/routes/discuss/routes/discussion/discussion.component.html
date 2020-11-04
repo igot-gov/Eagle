@@ -31,48 +31,45 @@
           <div class="flex flex-1 flex-wrap custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs margin-right-xs">
               <span class="flex margin-right-l mobile">
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="upvote(post)"
+                <a href="javascript:void(0)" i18n-aria-label role="link" *ngIf="!post.upvoted" (click)="upvote(post)"
                   aria-label="upvote the post">
-
-                  <mat-icon *ngIf="!post.upvoted" class="cursor-pointer">arrow_upward</mat-icon>
+                  <mat-icon class="cursor-pointer">arrow_upward</mat-icon>
                 </a>
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="delteVote(post)"
+                <a href="javascript:void(0)" i18n-aria-label *ngIf="post.upvoted" role="link" (click)="delteVote(post)"
                   aria-label="remove upvote">
-
-                  <mat-icon *ngIf="post.upvoted" class="cursor-pointer upvoted">arrow_upward
+                  <mat-icon class="cursor-pointer upvoted">arrow_upward
                   </mat-icon>
                 </a>
-                <span class="pad-4">{{data.upvotes}}</span>
+                <span class="pad-4" role="text"
+                  [attr.aria-label]="'total upvoat is' + data.upvotes">{{data.upvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="downvote(post)"
-                  aria-label="remove upvote">
-
-                  <mat-icon *ngIf="!post.downvoted" class="cursor-pointer">arrow_downward
+                <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
+                  (click)="downvote(post)" aria-label="downvote post">
+                  <mat-icon class="cursor-pointer">arrow_downward
                   </mat-icon>
                 </a>
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="delteVote(post)"
-                  aria-label="remove upvote">
-
-                  <mat-icon *ngIf="post.downvoted" class="cursor-pointer downvoted">
+                <a href="javascript:void(0)" *ngIf="post.downvoted" i18n-aria-label role="link"
+                  (click)="delteVote(post)" aria-label="remove down vote">
+                  <mat-icon class="cursor-pointer downvoted">
                     arrow_downward</mat-icon>
                 </a>
-                <span class="pad-4">{{data.downvotes}}</span>
+                <span class="pad-4" role="text"
+                  [attr.aria-label]="'total upvoat is' + data.upvotes">{{data.downvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
                 <mat-icon>trending_up</mat-icon>
                 <span class="pad-4" i18n-aria-label aria-label="views count">{{data.viewcount}} views</span>
               </span>
               <span class="flex mobile">
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="bookmark(post)"
-                  aria-label="Bookmark post">
-                  <mat-icon *ngIf="!data.posts[0].bookmarked" class="cursor-pointer">
+                <a href="javascript:void(0)" *ngIf="!data.posts[0].bookmarked" i18n-aria-label role="link"
+                  (click)="bookmark(post)" aria-label="Bookmark post">
+                  <mat-icon class="cursor-pointer">
                     bookmark_border</mat-icon>
                 </a>
-                <a href="javascript:void(0)" i18n-aria-label role="link" (click)="unBookMark(post)"
-                  aria-label="unBookmark post">
-
-                  <mat-icon *ngIf="data.posts[0].bookmarked" class="cursor-pointer ws-mat-accent-text">bookmark
+                <a href="javascript:void(0)" *ngIf="data.posts[0].bookmarked" i18n-aria-label role="link"
+                  (click)="unBookMark(post)" aria-label="unBookmark post">
+                  <mat-icon class="cursor-pointer ws-mat-accent-text">bookmark
                   </mat-icon>
                 </a>
               </span>
@@ -152,7 +149,7 @@
 
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
-              <span class="flex margin-right-l mobile">
+              <span class="flex mobile">
                 <a href="javascript:void(0)" *ngIf="!post.upvoted" i18n-aria-label role="link" (click)="upvote(post)"
                   aria-label="upvote comment">
                   <mat-icon *ngIf="!post.upvoted" class="cursor-pointer">arrow_upward</mat-icon>
@@ -166,7 +163,7 @@
                 </a>
                 <span class="pad-4">{{post.upvotes}}</span>
               </span>
-              <span class="flex margin-right-l mobile">
+              <span class="flex mobile">
                 <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
                   (click)="downvote(post)" aria-label="downvote comment">
                   <mat-icon *ngIf="!post.downvoted" class="cursor-pointer">arrow_downward
@@ -228,7 +225,8 @@
                 </div>
               </div>
               <div class="">
-                <span>Last reply {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
+                <span *ngIf="!post.replyCountToggle">Last reply
+                  {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">
@@ -267,7 +265,8 @@
                 </div>
               </div>
               <div class="">
-                <span>Last reply1 {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
+                <span *ngIf="!post.replyCountToggle">Last reply
+                  {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
             <div class="w-full" *ngIf="post.replyCountToggle">
