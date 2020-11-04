@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 import { IProfileCareer } from './profile-career.model'
 import moment from 'moment'
@@ -13,6 +13,8 @@ import moment from 'moment'
 })
 export class ProfileCareerComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: IProfileCareer
+  @HostBinding('id')
+  public id = 'profile-career'
   ngOnInit(): void {
     // console.log(this.widgetData)
   }

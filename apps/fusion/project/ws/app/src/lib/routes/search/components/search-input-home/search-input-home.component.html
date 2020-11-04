@@ -13,9 +13,9 @@
       <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
         <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
         <!-- <mat-label>Search</mat-label> -->
-        <input type="search" role="complementary" #searchInput [attr.title]="placeHolder" class="ml-2 margin-top-xs"
-          i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label aria-label="Search" matInput
-          [formControl]="queryControl" [matAutocomplete]="auto" />
+        <input type="text" role="combobox" accesskey="S" #searchInput [attr.title]="placeHolder"
+          class="ml-2 margin-top-xs" i18n-placeholder="search content" [placeholder]="placeHolder" i18-aria-label
+          aria-label="search content" matInput [formControl]="queryControl" [matAutocomplete]="auto" />
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
           (optionSelected)="updateQuery($event.option.value)">
           <mat-option *ngIf="queryControl.value" [value]="queryControl.value">{{ queryControl.value }}
