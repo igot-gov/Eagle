@@ -22,9 +22,11 @@ router.get("/playlist/:userId/:id", function (req, res) {
       } else {
         console.log("api successful");
         if (typeof body == "string") {
-          data = JSON.parse(body).resource_ids[0];
+          let playlist = JSON.parse(body)
+          data=playlist?playlist.resource_ids[0]:{}
         } else {
-          data = body.resource_ids[0];
+          let playlist = body
+          data=playlist?playlist.resource_ids[0]:{}
         }
 
         if (data) {
