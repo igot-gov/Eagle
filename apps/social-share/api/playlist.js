@@ -21,13 +21,15 @@ router.get("/playlist/:userId/:id", function (req, res) {
         console.log("error:", err);
         res.send(err);
       } else {
+        let playlist;
         console.log("api successful");       
         if (typeof body == "string") {
-          let playlist = JSON.parse(body)
-          data = playlist.resource_ids[0]
+          playlist = JSON.parse(body)         
         } else {
-          let playlist = body
-          data = playlist.resource_ids[0] 
+          playlist = body        
+        }
+        if (playlist.resource_ids && playlist.resource_ids.length > 0) {
+          data = playlist.resource_ids[0]
         }
         if (data) {
           var html = `<!DOCTYPE html>
