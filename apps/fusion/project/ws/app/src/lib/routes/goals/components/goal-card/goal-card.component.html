@@ -80,8 +80,8 @@
       </ng-container>
       <ng-container i18n>achieved</ng-container>
     </div>
-    <mat-progress-bar class="goal-progress" mode="determinate"
-      value="{{ (goal?.progress || 0) * 100 | number: '1.0-0' }}">
+    <mat-progress-bar id="goal-progress-id" class="goal-progress" mode="determinate" aria-labelledby="goal-progress-id"
+      value="{{ (goal?.progress || 0) * 100 | number: '1.0-0' }}" aria-expanded="false">
     </mat-progress-bar>
   </ng-container>
 </mat-card>

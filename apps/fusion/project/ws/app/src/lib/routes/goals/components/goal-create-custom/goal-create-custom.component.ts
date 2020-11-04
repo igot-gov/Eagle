@@ -25,6 +25,7 @@ export class GoalCreateCustomComponent implements OnInit {
   suggestedDuration = 0
   EGoalTypes = NsGoal.EGoalTypes
   showShareGoalStep = false
+  showContentError = false
 
   createGoalForm: FormGroup
   createGoalStatus: TFetchStatus = 'none'
@@ -113,6 +114,7 @@ export class GoalCreateCustomComponent implements OnInit {
   }
 
   contentChanged(content: Partial<NsContent.IContentMinimal>, checked: boolean) {
+    this.showContentError = false
     if (content && content.identifier) {
       if (checked) {
         this.selectedContentIds.add(content.identifier)
@@ -125,7 +127,7 @@ export class GoalCreateCustomComponent implements OnInit {
   scroll(shareGoalStep: HTMLElement) {
     setTimeout(() => {
       shareGoalStep.scrollIntoView({ behavior: 'smooth' })
-    },         100)
+    }, 100)
   }
 
   createGoal() {
@@ -136,7 +138,8 @@ export class GoalCreateCustomComponent implements OnInit {
     }
 
     if (!this.selectedContentIds.size) {
-      this.snackbar.open(this.selectContentMessage.nativeElement.value)
+      // this.snackbar.open(this.selectContentMessage.nativeElement.value)
+      this.showContentError = true
       return
     }
 

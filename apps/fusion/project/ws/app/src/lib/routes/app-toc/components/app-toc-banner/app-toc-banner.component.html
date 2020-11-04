@@ -3,6 +3,7 @@
     <div class="pt-10 header-actions top">
       <div class="action-btns">
         <div class="hidden-block-xs">
+          <!-- <h3>Actions</h3> -->
           <ng-container [ngTemplateOutlet]="actions"></ng-container>
         </div>
         <button mat-icon-button class="visible-block-xs" [matMenuTriggerFor]="actionMenu">
@@ -10,7 +11,7 @@
         </button>
       </div>
     </div>
-    <div class="flex flex-row mb-10">
+    <div class="flex flex-row">
       <!-- <div *ngIf="content?.appIcon" class="apIcon">
         <img [src]="content?.creatorLogo" [id]="'source_' + content.identifier"
                 class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
@@ -22,7 +23,7 @@
             <img [src]="content?.creatorLogo" [id]="'source_' + content.identifier" class="source-icon"
               [wsUtilsDefaultThumbnail]="defaultSLogo" [alt]="content.sourceName || iGOT" />
           </div>
-          <div class="sm:ml-5 flex flex-auto">
+          <div class="sm:ml-5 flex flex-auto" [id]="'m-c-'+ content.identifier">
             <h1 class="mat-display-2 margin-remove-bottom padding-bottom-xs hidden sm:block" [title]="content?.name">
               {{ content?.name }}
             </h1>

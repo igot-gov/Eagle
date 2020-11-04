@@ -23,10 +23,10 @@
   <div class="mb-8" *ngIf="actionNotifications.length">
     <h3 class="mat-h3" i18n>For your action</h3>
 
-    <ul class="list-none p-0 mb-4 mat-toolbar">
+    <ul class="list-none p-0 mb-4 mat-toolbar" role="list">
       <ng-container *ngFor="let notification of actionNotifications">
-        <li matRipple class="p-4 cursor-pointer" (click)="onClickNotification(notification)">
-          <div class="flex flex-between">
+        <li matRipple class="p-4 cursor-pointer" (click)="onClickNotification(notification)" role="listitem">
+          <a href="javascript:void(0)" role="link" class="flex flex-between">
             <div class="flex flex-col flex-center w-1/10">
               <ws-app-notification-event [notificationEvent]="notification.eventId"></ws-app-notification-event>
             </div>
@@ -42,7 +42,7 @@
                 {{ notification.receivedOn | date: 'dd MMM' }}
               </span>
             </div>
-          </div>
+          </a>
         </li>
         <mat-divider></mat-divider>
       </ng-container>
@@ -59,10 +59,10 @@
   <div *ngIf="infoNotifications.length">
     <h3 class="mat-h3" i18n>For Your Information</h3>
 
-    <ul class="list-none p-0 mat-toolbar">
+    <ul class="list-none p-0 mat-toolbar" role="list">
       <ng-container *ngFor="let notification of infoNotifications">
-        <li matRipple class="p-4 cursor-pointer" (click)="onClickNotification(notification)">
-          <div class="flex flex-between">
+        <li matRipple class="p-4 cursor-pointer" (click)="onClickNotification(notification)" role="listitem">
+          <a href="javascript:void(0)" role="link" class="flex flex-between">
             <div class="flex flex-col flex-center">
               <ws-app-notification-event [notificationEvent]="notification.eventId"></ws-app-notification-event>
             </div>
@@ -78,7 +78,7 @@
                 {{ notification.receivedOn | date: 'dd MMM' }}
               </span>
             </div>
-          </div>
+          </a>
         </li>
         <mat-divider></mat-divider>
       </ng-container>

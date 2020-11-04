@@ -1,13 +1,13 @@
 <div class="contents-container">
   <div class="main-container">
     <ng-container *ngIf="content?.children?.length; else noChildren">
-      <div class="toc-section">
+      <div class="toc-section" role="contentinfo">
         <h2 class="heading margin-remove">Content </h2>
-        <button type="button" class="expandButton" *ngIf="!contextPath || contextPath !== 'Collection'" color="primary"
-          (click)="expandAll = !expandAll" mat-button>
+        <a href="javascript:void(0)" role="button" class="expandButton"
+          *ngIf="!contextPath || contextPath !== 'Collection'" (click)="expandAll = !expandAll" mat-button>
           <ng-container *ngIf="!expandAll" i18n>Expand All</ng-container>
           <ng-container *ngIf="expandAll" i18n>Collapse All</ng-container>
-        </button>
+        </a>
       </div>
       <div class="content-card" *ngFor="let card of content?.children; trackBy: contentTrackBy">
         <ws-app-toc-content-card [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="contextId"
@@ -16,7 +16,8 @@
     </ng-container>
     <ng-template #noChildren>
       <div *ngIf="!isPlayable"
-        class="ws-mat-primary-default-text ws-mat-primary-lite-background px-6 py-8 font-normal text-base noChildren" i18n>
+        class="ws-mat-primary-default-text ws-mat-primary-lite-background px-6 py-8 font-normal text-base noChildren"
+        i18n>
         The preview for this type of content is unavailable. Please click on Start button above to view.
       </div>
       <ng-container *ngIf="isPlayable" [wsResolverWidget]="contentPlayWidgetConfig"></ng-container>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 import { IProfileAcademic } from './profile-academics.model'
 @Component({
@@ -11,6 +11,8 @@ import { IProfileAcademic } from './profile-academics.model'
 })
 export class ProfileAcademicsComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: IProfileAcademic
+  @HostBinding('id')
+  public id = 'profile-academic'
   ngOnInit(): void {
   }
 

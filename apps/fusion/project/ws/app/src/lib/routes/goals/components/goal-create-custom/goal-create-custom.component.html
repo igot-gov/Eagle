@@ -57,6 +57,7 @@
             }" (suggestedDurationChange)="suggestedDuration = $event"
             (change)="contentChanged($event?.content, $event?.checked)">
           </ws-widget-picker-content>
+          <mat-error i18n *ngIf="showContentError">Select atleast one content to create goal</mat-error>
         </div>
       </div>
     </section>
@@ -105,30 +106,6 @@
         </div>
       </div>
     </section>
-    <!-- <section #shareGoalStep class="flex" [hidden]="!showShareGoalStep">
-      <div class="flex flex-column items-center">
-        <div class="w-8 h-8 rounded-full bg-blue text-center ws-mat-primary-background text-white line-height-2" i18n>
-          4
-        </div>
-        <span class="h-full border border-solid text-gray-500 my-1"></span>
-      </div>
-      <div class="flex-1 min-w-0 ml-4 mb-8">
-        <h3 class="mat-subheading-2" i18n>Share this Goal</h3>
-        <p>
-          <ws-widget-user-autocomplete (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
-        </p>
-        <h3 class="mat-subheading-2" i18n>Give them a message</h3>
-        <p>
-          <mat-form-field appearance="fill" class="w-full" floatLabel="never">
-            <textarea rows="3" matInput placeholder="For eg: I hope this will help you expand your skillset"
-              i18n-placeholder autocomplete="off" class="resize-none"></textarea>
-          </mat-form-field>
-        </p>
-      </div>
-    </section>
-    <div [hidden]="!showShareGoalStep" class="flex flex-row-reverse">
-      <button mat-raised-button color="primary" type="submit" i18n>CREATE</button>
-    </div> -->
   </form>
 </main>
 <ng-template #fetchingSection>

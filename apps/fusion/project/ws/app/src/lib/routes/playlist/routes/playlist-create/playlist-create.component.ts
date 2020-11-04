@@ -22,6 +22,7 @@ export class PlaylistCreateComponent implements OnInit {
 
   createPlaylistForm: FormGroup
   createPlaylistStatus: TFetchStatus = 'none'
+  showContentPlayListError = false
 
   pickerContentData: IPickerContentData = {
     availableFilters: ['contentType'],
@@ -57,6 +58,7 @@ export class PlaylistCreateComponent implements OnInit {
   }
 
   onContentSelectionChanged(content: Partial<NsContent.IContent>, checked: boolean) {
+    this.showContentPlayListError = false
     if (content && content.identifier) {
       checked ? this.selectedContentIds.add(content.identifier) : this.selectedContentIds.delete(content.identifier)
     }
@@ -79,7 +81,8 @@ export class PlaylistCreateComponent implements OnInit {
     }
 
     if (!this.selectedContentIds.size) {
-      this.snackBar.open(this.selectContentMessage.nativeElement.value, 'X')
+      this.showContentPlayListError = true
+      // this.snackBar.open(this.selectContentMessage.nativeElement.value, 'X')
       return
     }
 

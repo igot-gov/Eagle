@@ -3,7 +3,7 @@
 @import 'ws-mixins';
 
 .mat-card-header-text {
-    width: 100%;
+  width: 100%;
 }
 
 .buton {
@@ -66,29 +66,29 @@
 }
 
 .w-fix {
-    width: calc(100% - 20px);
+  width: calc(100% - 20px);
 }
 
 .filter {
-    .filter-option {
-      margin: 0 $size-m $size-l;
-      /* border-bottom: darkslateblue; */
-      border-radius: 0;
-      border-bottom-width: 2px;
-      border-top-width: 0;
-      border-left-width: 0;
-      border-right-width: 0;
-      height: 48px;
-      font-size: 14px;
-      line-height: 21px;
-      display: flex;
-      align-items: center;
-    }
-  
-    .filter-option:first-child {
-      margin-left: 0;
-    }
+  .filter-option {
+    margin: 0 $size-m $size-l;
+    /* border-bottom: darkslateblue; */
+    border-radius: 0;
+    border-bottom-width: 2px;
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    height: 48px;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
   }
+
+  .filter-option:first-child {
+    margin-left: 0;
+  }
+}
 
 .max-height-60 {
   max-height: 60px;
@@ -99,15 +99,15 @@
 }
 
 .search {
-    // border-radius: 4px;
-    // border: 1px solid #DEDFE0;
-    flex: 1;
-    // max-width: 320px;
-    height: 48px;
-    margin-top: auto;
-    // margin-bottom: auto;
-    // background: #FFF;
-    margin-bottom: 8px;
+  // border-radius: 4px;
+  // border: 1px solid #DEDFE0;
+  flex: 1;
+  // max-width: 320px;
+  height: 48px;
+  margin-top: auto;
+  // margin-bottom: auto;
+  // background: #FFF;
+  margin-bottom: 8px;
 }
 
 .search .autocomplete-form {
@@ -115,11 +115,12 @@
   font-size: 1em;
   display: block;
   margin: auto;
-  ::ng-deep .mat-form-field-infix {
-      border-top-width: 10px !important;
-      padding: 0px;
-      padding-bottom: 5px;
-  }
+
+  // ::ng-deep .mat-form-field-infix {
+  //     border-top-width: 10px !important;
+  //     padding: 0px;
+  //     padding-bottom: 5px;
+  // }
   ::ng-deep.mat-form-field-wrapper .mat-form-field-flex {
     align-items: center;
     padding: 0 .75rem 0 .25rem;
@@ -178,7 +179,7 @@
   @extend %height-mat-toolbar-sibling;
 }
 
-.pagination-container{
+.pagination-container {
   margin-top: $size-l;
- 
+
 }
