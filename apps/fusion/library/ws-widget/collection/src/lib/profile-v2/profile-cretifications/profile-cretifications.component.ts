@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
 import { IProCert } from './profile-cretifications.model'
 
@@ -14,6 +14,8 @@ import { IProCert } from './profile-cretifications.model'
 // developing for old skill+certifications
 export class ProfileCretificationsComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any> {
   @Input() widgetData!: IProCert
+  @HostBinding('id')
+  public id = 'profile-cert'
   ngOnInit(): void {
   }
 
