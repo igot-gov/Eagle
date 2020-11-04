@@ -1457,3 +1457,31 @@ location /nodebb/ {
    proxy_pass $target;
 
    }
+   
+   --------------
+   -   Set up private docker registry
+       
+      - Login to jenkin server
+ 
+      - Execute the below command to create private docker repo
+ 
+      - Docker run -d -p 5000:5000 --restart=always --name registry-test -v /data/registry:/var/lib/registry registry:2
+ 
+      - Next <jenkinserver_ip> :5000 will be the docker server
+     
+ 
+-   Generate docker images from the github code
+
+      - Login to jenkin server
+ 
+      - Clone the build jobs repo of igot https://github.com/igot-gov/Eagle/tree/igot-devops/Deployment/igot-jenkins/igot-dev  with brach igot-devops
+ 
+      - Copy the igot-dev folder to path /var/lib/jenkin/job of jenkin server
+ 
+      - Restart the jenkin server
+ 
+      - Update the changes required in the job configuration
+ 
+      - For build jobs update docker-server ,branch default values
+ 
+      - In the deployment jobs update the path of ansible script in execute shell section
