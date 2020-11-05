@@ -78,11 +78,11 @@ public class MyActivities implements IMyActivities {
 
     @Override
     public Activity userTimeSpentOnTraning(String rootOrg, String userId) {
-        List<String> learningCourseIds = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
-        //List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getResourceId()).collect(Collectors.toList());
-        System.out.println("userTimeSpentOnTraning contentIds :: "+learningCourseIds);
+        List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
+        List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getContextPathId()).collect(Collectors.toList());
+        System.out.println("userTimeSpentOnTraning contentIds :: "+contentIds);
 
-        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, learningCourseIds);
+        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, contentIds);
         System.out.println("userTimeSpentOnTraning progress size:: "+progress.size());
 
         Long totalDuration = new Long(0);

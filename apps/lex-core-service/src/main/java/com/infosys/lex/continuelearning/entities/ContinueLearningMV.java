@@ -29,8 +29,21 @@ public class ContinueLearningMV {
 
 	private String data;
 
+	public String getContextPathId() {
+		return contextPathId;
+	}
+
+	public void setContextPathId(String contextPathId) {
+		this.contextPathId = contextPathId;
+	}
+
 	@Column("resource_id")
 	private String resourceId;
+
+	@Column("context_path_id")
+	private String contextPathId;
+
+
 
 	public String getData() {
 		return data;

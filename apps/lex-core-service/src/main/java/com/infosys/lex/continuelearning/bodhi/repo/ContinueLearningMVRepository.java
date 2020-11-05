@@ -36,7 +36,7 @@ public interface ContinueLearningMVRepository extends CassandraRepository<Contin
      * @return
      */
     @Query("select context_path_id from mv_continue_learning where root_org=?0 and user_id=?1 ;")
-    public List<String> findByRootOrgAndUserId(String rootOrg, String userId);
+    public List<ContinueLearningMV> findByRootOrgAndUserId(String rootOrg, String userId);
 
     /*@Query("select resource_id from mv_continue_learning where root_org=?0 and user_id=?1  allow filtering;")
     public List<ContinueLearningMV> findByRootOrgAndUserId(String rootOrg, String userId);
