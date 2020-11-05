@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit, EventEmitter, Input, Outpu
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { EditorContentService } from '@ws/author/src/lib/routing/modules/editor/services/editor-content.service'
 import { NSContent } from '@ws/author/src/lib/interface/content'
+import { NsContent } from '../../../../../../../../../../../library/ws-widget/collection/src/public-api'
 
 @Component({
   selector: 'ws-auth-options',
@@ -41,6 +42,9 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
       ['Draft', 'Live'].includes(this.contentService.originalContent[this.currentContent].status) &&
       this.isPublisherSame()
     )
+  }
+  getPreview() {
+    return this.contentService.originalContent[this.currentContent].category === NsContent.EContentTypes.RESOURCE
   }
 
   getAction(): string {
