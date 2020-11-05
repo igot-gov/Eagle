@@ -338,7 +338,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
             ? 1
             : -1,
       }
-
+      const currentContentStatus = this.contentService.upDatedContent[this.currentContent].status
       const needSave =
         Object.keys(this.contentService.upDatedContent[this.currentContent] || {}).length ||
         Object.keys(this.storeService.updatedContent[this.currentContent] || {}).length
@@ -348,7 +348,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
           this.currentContent,
         )
         : of({} as any)
-      ).pipe(mergeMap(() => this.editorService.forwardBackward(body, this.currentContent)))
+      ).pipe(mergeMap(() => this.editorService.forwardBackward(body, this.currentContent, currentContentStatus)))
       this.loaderService.changeLoad.next(true)
       saveCall.subscribe(
         () => {
@@ -445,10 +445,10 @@ export class ChannelComponent implements OnInit, OnDestroy {
         if (v.artifactURL) {
           meta.artifactUrl = v.artifactURL
           meta.lastUpdatedOn = `${new Date()
-              .toISOString()
-              .replace(/-/g, '')
-              .replace(/:/g, '')
-              .split('.')[0]
+            .toISOString()
+            .replace(/-/g, '')
+            .replace(/:/g, '')
+            .split('.')[0]
             }+0000`
         }
         return this.triggerSave(meta, id)
