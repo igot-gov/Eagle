@@ -5,9 +5,8 @@ request.gzip = true;
 
 router.get("/playlist/:userId/:id", function (req, res) {
   console.log("api service started"); 
-  let URL = `http://lex-core:7001/v1/users/${req.params.userId}/playlist/${req.params.id}`;
+  let URL = `http://lex-core:7001/v1/users/${req.params.userId}/playlists/${req.params.id}`;
   let data;
-
   request(
     {
       headers: {       
