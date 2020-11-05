@@ -44,7 +44,7 @@
           <mat-icon *ngIf="!checkNoAccess(goal)">edit</mat-icon>
           <span>Edit</span>
         </button>
-        <button name="share-button-goal-card" mat-menu-item *ngIf="isShareEnabled && goal?.goalFor === 'others'"
+        <button name="share-button-goal-card" mat-menu-item *ngIf="isShareEnabled && goal?.goalFor === 'me'"
           (click)="openShareGoalDialog(goal)">
           <mat-icon>share</mat-icon>
           <span>Share</span>
