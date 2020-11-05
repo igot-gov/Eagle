@@ -18,6 +18,7 @@ export class PlaylistCreateComponent implements OnInit {
 
   @ViewChild('selectContent', { static: true }) selectContentMessage!: ElementRef<any>
   @ViewChild('createPlaylistError', { static: true }) createPlaylistErrorMessage!: ElementRef<any>
+  @ViewChild('createPlaylistSuccessMessage', { static: true }) createPlaylistSuccessMessage!: ElementRef<any>
   @ViewChild('playlistForm', { static: true }) playlistForm!: ElementRef<any>
 
   createPlaylistForm: FormGroup
@@ -82,7 +83,7 @@ export class PlaylistCreateComponent implements OnInit {
 
     if (!this.selectedContentIds.size) {
       this.showContentPlayListError = true
-      // this.snackBar.open(this.selectContentMessage.nativeElement.value, 'X')
+      this.snackBar.open(this.selectContentMessage.nativeElement.value, 'X')
       return
     }
 
@@ -99,6 +100,7 @@ export class PlaylistCreateComponent implements OnInit {
       visibility: formValues.visibility as NsPlaylist.EPlaylistVisibilityTypes,
     }).subscribe(
       () => {
+        this.snackBar.open(this.createPlaylistSuccessMessage.nativeElement.value, 'X')
         this.router.navigate(['/app/playlist/me'])
       },
       () => {
