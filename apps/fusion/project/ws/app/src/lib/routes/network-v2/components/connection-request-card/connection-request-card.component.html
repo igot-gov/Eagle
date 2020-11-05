@@ -1,13 +1,11 @@
 <div class="flex flex-1 items-center card-container ws-mat-primary-tags">
-    <div class="mr-3 cursor-pointer" (click)="goToUserProfile(user)">
-        <a href="javascript:void(0)" class="" i18n-aria-label role="link"
-            aria-label="click on it to visit user profile">
+    <a href="javascript:void(0)" class="flex flex-1" i18n-aria-label role="link">
+        <div class="mr-3 cursor-pointer" (click)="goToUserProfile(user)">
             <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
             </ws-widget-avatar-photo>
-        </a>
-    </div>
-    <div class="flex flex-col flex-1 cursor-pointer" (click)="goToUserProfile(user)">
-        <a href="javascript:void(0)" class="" i18n-aria-label role="link">
+        </div>
+        <div class="flex flex-col flex-1 cursor-pointer" (click)="goToUserProfile(user)">
+            <!-- <a href="javascript:void(0)" class="" i18n-aria-label role="link"> -->
             <div class="name truncate ws-mat-black-text ">
                 {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}
                 {{user?.personalDetails?.surname}}
@@ -15,8 +13,10 @@
             <div class="designation truncate ws-mat-black60-text">
                 {{user?.employmentDetails?.departmentName}}
             </div>
-        </a>
-    </div>
+            <!-- </a> -->
+        </div>
+    </a>
+
     <div class="text-right">
         <button mat-button color="default" type="button" class="flex-auto-display margin-right-m"
             (click)="rejectConnection()">
