@@ -28,7 +28,7 @@ export class CardActivityComponent extends WidgetBaseComponent implements OnInit
       } else if (this.widgetData.content.hasOwnProperty('karmaPoints')) {
         this.item = { name: 'Karma', icon: 'loop', count: this.widgetData.content.karmaPoints.value }
       } else if (this.widgetData.content.hasOwnProperty('certificateCount')) {
-        this.item = { name: 'Certificates', icon: 'beenhere', count: this.widgetData.content.certificateCount.value }
+        this.item = { name: 'Badges', icon: 'beenhere', count: this.widgetData.content.certificateCount.value }
       } else {
         this.item = this.widgetData.content
       }
