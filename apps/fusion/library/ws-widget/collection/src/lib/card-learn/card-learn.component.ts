@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService } from '@ws-widget/utils'
@@ -23,6 +23,8 @@ export class CardLearnComponent extends WidgetBaseComponent
   isNewUser = false
   showActivities = false
   keyTag: string[] = []
+  @HostBinding('id')
+  public id = 'w-card-learn'
   constructor(
     private configSvc: ConfigurationsService,
     private router: Router,

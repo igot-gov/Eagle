@@ -46,9 +46,9 @@
 }
 
 .btn-container .discussion-forum-action-button {
-  background: #00A9F4 0% 0% no-repeat padding-box;
+  // background: #00A9F4 0% 0% no-repeat padding-box;
   border-radius: 6px;
-  background-color: #00A9F4 !important;
+  // background-color: #00A9F4 !important;
   color: #fff !important;
   height: 36px;
   line-height: 22px;
@@ -87,7 +87,7 @@
 .post-date {
   // font: 12px/20px Poppins;
   letter-spacing: 0px;
-  color: #00A9F4;
+  // color: #00A9F4;
 }
 
 .reply-toggler {
@@ -112,7 +112,7 @@
 }
 
 ::ng-deep.ql-container {
-  border: 1px solid #0074b6;
+  // border: 1px solid #0074b6;
   border-radius: 8px;
 }
 
@@ -127,7 +127,7 @@
   text-align: left;
   // font: 12px/14px Poppins-regular;
   letter-spacing: 0px;
-  color: #00A9F4;
+  // color: #00A9F4;
   opacity: 0.5;
   bottom: 15px;
   top: 22px;
