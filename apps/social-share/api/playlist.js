@@ -35,12 +35,12 @@ router.get("/playlist/:userId/:id", function (req, res) {
             <html lang="en">
               <head>             
                 <meta charset="utf-8" />
-                <title>"${data.name}"</title>
+                <title>"${playlist.playlistTitle}"</title>
                 <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
                 " />                          
                 <meta property="og:type" content="website">
                 <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/playlist/${req.params.userId}/${req.params.id}`}" />
-                <meta property="og:title" content="${data.playlistTitle}" />               
+                <meta property="og:title" content="${playlist.playlistTitle}" />               
                 <meta property="og:image" content="${data.appIcon}" />  
                 <meta property="og:image:secure_url" content="${
                   data.appIcon
@@ -48,7 +48,7 @@ router.get("/playlist/:userId/:id", function (req, res) {
             
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/playlist/${req.params.userId}/${req.params.id}`}" />
-                <meta property="twitter:title" content="${data.playlistTitle}" />               
+                <meta property="twitter:title" content="${playlist.playlistTitle}" />               
                 <meta property="twitter:image" content="${data.appIcon}" />
                 <style>
                   .social-card {
@@ -90,9 +90,9 @@ router.get("/playlist/:userId/:id", function (req, res) {
               <body>
                 <div class="social-card">
                   <a href="https://d136953gtttd92.cloudfront.net/app/playlist/me/${req.params.id}">
-                    <img src="${data.appIcon}" alt="${data.playlistTitle}"  class="social-card-img" />
+                    <img src="${data.appIcon}" alt="${playlist.playlistTitle}"  class="social-card-img" />
                     <div class="sub-card">
-                      <p class="title">${data.playlistTitle}</p>                     
+                      <p class="title">${playlist.playlistTitle}</p>                     
                     </div>  
                   </a>   
                 </div>                       
