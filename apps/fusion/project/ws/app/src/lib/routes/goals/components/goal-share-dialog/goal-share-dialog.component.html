@@ -42,9 +42,9 @@
     <h3 class="mat-h3 margin-remove py-2" i18n>Share on Social Media</h3>
   
     <div class="flex flex-wrap items-center">
-      <ws-widget-btn-facebook-share [url]="detailUrl" [contentId]="goal.id" class="pr-4 pb-3"></ws-widget-btn-facebook-share>
-      <ws-widget-btn-twitter-share [url]="detailUrl" [message]="message"  [contentId]="goal.id" class="pr-4 pb-3"></ws-widget-btn-twitter-share>
-      <ws-widget-btn-linkedin-share [url]="detailUrl"  [contentId]="goal.id" class="pr-4 pb-3"></ws-widget-btn-linkedin-share>
+      <ws-widget-btn-facebook-share shareType="goal" [contentId]="goal.id" class="pr-4 pb-3"></ws-widget-btn-facebook-share>
+      <ws-widget-btn-twitter-share shareType="goal" [contentId]="goal.id" class="pr-4 pb-3"></ws-widget-btn-twitter-share>
+      <ws-widget-btn-linkedin-share shareType="goal" [contentId]="goal.id" class="pr-4 pb-3"></ws-widget-btn-linkedin-share>
     </div>
   </div>
 </ng-container>
