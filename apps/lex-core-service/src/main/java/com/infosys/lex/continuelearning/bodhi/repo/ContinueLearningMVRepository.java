@@ -35,9 +35,12 @@ public interface ContinueLearningMVRepository extends CassandraRepository<Contin
      * @param userId
      * @return
      */
-    @Query("select resource_id from mv_continue_learning where root_org=?0 and user_id=?1  allow filtering;")
-    public List<ContinueLearningMV> findByRootOrgAndUserId(String rootOrg, String userId);
+    @Query("select context_path_id from mv_continue_learning where root_org=?0 and user_id=?1 ;")
+    public List<String> findByRootOrgAndUserId(String rootOrg, String userId);
 
+    /*@Query("select resource_id from mv_continue_learning where root_org=?0 and user_id=?1  allow filtering;")
+    public List<ContinueLearningMV> findByRootOrgAndUserId(String rootOrg, String userId);
+*/
     /**
      * get count of resources of a user's learning history
      *
@@ -47,5 +50,6 @@ public interface ContinueLearningMVRepository extends CassandraRepository<Contin
      */
     @Query("select count(resource_id) from mv_continue_learning where root_org=?0 and user_id=?1  allow filtering;")
     public int countByRootOrgAndUserId(String rootOrg, String userId);
+
 
 }
