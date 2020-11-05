@@ -35,12 +35,12 @@
     accesskey=">">
     <span *ngIf="logo" class="finish">FINISH</span>
   </a>
-  <a mat-icon-button>
-    <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
-      [widgetData]="{ fsContainer: frameReference }"></ws-widget-btn-fullscreen>
-  </a>
-  <a mat-icon-button *ngIf="isTypeOfCollection" class="width-auto" [ngClass]="{'xsmall': !logo}"
-    (click)="toggleSideBar()" accesskey="M">
+  <!-- <a mat-icon-button> -->
+  <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
+    [widgetData]="{ fsContainer: frameReference }"></ws-widget-btn-fullscreen>
+  <!-- </a> -->
+  <a href="javascript:void(0)" mat-icon-button *ngIf="isTypeOfCollection" role="link" class="width-auto"
+    [ngClass]="{'xsmall': !logo}" (click)="toggleSideBar()" accesskey="M">
     <mat-icon>menu</mat-icon>
   </a>
 </mat-toolbar>

@@ -8,6 +8,7 @@ import { CompetenceService } from '../../services/competence.service'
 import _ from 'lodash'
 import { FormControl } from '@angular/forms'
 import { CompetenceViewComponent } from '../../components/competencies-view/competencies-view.component'
+import { MatSnackBar } from '@angular/material'
 /* tslint:enable */
 
 @Component({
@@ -20,6 +21,9 @@ import { CompetenceViewComponent } from '../../components/competencies-view/comp
 })
 export class CompetenceAllComponent implements OnInit {
   @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  @ViewChild('successMsg', { static: true }) successMsg!: ElementRef
+  @ViewChild('failMsg', { static: true }) failureMsg!: ElementRef
+  @ViewChild('successRemoveMsg', { static: true }) successRemoveMsg!: ElementRef
   sticky = false
   elementPosition: any
   currentFilter = 'recent'
@@ -35,7 +39,8 @@ export class CompetenceAllComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
-    private competencySvc: CompetenceService
+    private competencySvc: CompetenceService,
+    private snackBar: MatSnackBar
   ) {
     this.tabsData = this.route.parent && this.route.parent.snapshot.data.pageData.data.tabs || []
     if (this.route.snapshot.data &&
@@ -43,8 +48,10 @@ export class CompetenceAllComponent implements OnInit {
       this.route.snapshot.data.profile.data &&
       this.route.snapshot.data.profile.data[0]
     ) {
-      if (this.route.snapshot.data.profile.data[0].competencies) {
-        this.myCompetencies = this.route.snapshot.data.profile.data[0].competencies
+      if (this.route.snapshot.data.profile.data[0].competencies && this.route.snapshot.data.profile.data[0].competencies.length > 0) {
+        this.myCompetencies = this.route.snapshot.data.profile.data[0].competencies || []
+      } else {
+        this.myCompetencies = []
       }
       this.currentProfile = this.route.snapshot.data.profile.data[0]
     }
@@ -119,7 +126,7 @@ export class CompetenceAllComponent implements OnInit {
         competencyType: item.additionalProperties.competencyType,
       }
       const updatedProfile = { ...this.currentProfile }
-      if (_.get(this, 'currentProfile.competencies')) {
+      if (_.get(this, 'currentProfile.competencies') && (_.get(this, 'currentProfile.competencies')).length > 0) {
         _.remove(updatedProfile.competencies, itm => _.get(itm, 'id') === item.id)
         updatedProfile.competencies.push(newCompetence)
       } else {
@@ -130,9 +137,12 @@ export class CompetenceAllComponent implements OnInit {
         if (response) {
           // success
           // this.myCompetencies.push(item)
-
+          this.snackBar.open(this.successMsg.nativeElement.value, 'X')
         }
-      })
+      },
+      /* tslint:disable */() => {
+          this.snackBar.open(this.failureMsg.nativeElement.value, 'X')
+        }/* tslint:disable */)
     }
   }
   removeFromProfile(item: NSCompetencie.ICompetencie) {
@@ -146,8 +156,12 @@ export class CompetenceAllComponent implements OnInit {
       this.competencySvc.updateProfile(updatedProfile).subscribe(response => {
         if (response) {
           // success => removed
+          this.snackBar.open(this.successRemoveMsg.nativeElement.value, 'X')
         }
-      })
+
+      }, /* tslint:disable */() => {
+        this.snackBar.open(this.failureMsg.nativeElement.value, 'X')
+      }/* tslint:disable */)
     }
   }
   resetcomp() {
