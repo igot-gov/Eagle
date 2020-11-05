@@ -97,7 +97,7 @@ export class CompetenceAllComponent implements OnInit {
       }).first().value()
       this.myCompetencies.push(vc)
       this.addToProfile(vc)
-      this.resetcomp()
+      this.reset()
     }
   }
   deleteCompetency(id: string) {
@@ -110,7 +110,7 @@ export class CompetenceAllComponent implements OnInit {
       // this.myCompetencies.push(vc)
       if (vc && vc[0]) {
         this.removeFromProfile(vc[0])
-        this.resetcomp()
+        this.reset()
       }
     }
   }

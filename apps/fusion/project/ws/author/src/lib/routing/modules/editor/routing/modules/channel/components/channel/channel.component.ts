@@ -444,8 +444,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
       mergeMap(v => {
         if (v.artifactURL) {
           meta.artifactUrl = v.artifactURL
-          meta.lastUpdatedOn = `${
-            new Date()
+          meta.lastUpdatedOn = `${new Date()
               .toISOString()
               .replace(/-/g, '')
               .replace(/:/g, '')
