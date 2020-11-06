@@ -252,25 +252,25 @@
                   </div>
                 </div>
                 <!-- {{contentForm?.controls?.subTitles?.value}} -->
-                  <div class="my-2 pr-8" *ngIf="contentForm.controls.subTitles.value.length">
-                    <!-- {{file?.name}} -->
-                    <!-- <div *ngFor="let subTitle of contentForm?.controls?.subTitles?.value">
+                <div class="my-2 pr-8" *ngIf="contentForm.controls.subTitles.value.length">
+                  <!-- {{file?.name}} -->
+                  <!-- <div *ngFor="let subTitle of contentForm?.controls?.subTitles?.value">
                       {{subTitle.url}}
                     </div> -->
-                    <ng-container *ngIf="file; else elseBlock">
-                      <span class="flex-wrap"> {{ file?.name }}</span>
-                    </ng-container>
-                    <ng-template #elseBlock>
-                      {{ contentForm.controls?.subTitles?.value[0]?.url.split('/').pop() }}
-                      <ng-container> </ng-container>
-                    </ng-template>
-                    <button *ngIf="file || contentForm.controls.subTitles.value.length" mat-icon-button
-                      class="close-button padding-remove ws-mat-primary-background-op30"
-                      (click)="clearUploadedFile(); $event.stopPropagation()">
-                      <mat-icon class="rotate">add_circle_outline</mat-icon>
-                    </button>
-                  </div>
-                
+                  <ng-container *ngIf="file; else elseBlock">
+                    <span class="flex-wrap"> {{ file?.name }}</span>
+                  </ng-container>
+                  <ng-template #elseBlock>
+                    {{ contentForm.controls?.subTitles?.value[0]?.url.split('/').pop() }}
+                    <ng-container> </ng-container>
+                  </ng-template>
+                  <button *ngIf="file || contentForm.controls.subTitles.value.length" mat-icon-button
+                    class="close-button padding-remove ws-mat-primary-background-op30"
+                    (click)="clearUploadedFile(); $event.stopPropagation()">
+                    <mat-icon class="rotate">add_circle_outline</mat-icon>
+                  </button>
+                </div>
+
               </div>
 
 
@@ -678,6 +678,7 @@
                   </div>
                 </div>
                 <div class="margin-top-xs margin-right-xs margin-left-xs flex-1"
+                  *ngIf="checkCondition('competencies', 'show')"
                   [ngClass]="{ disable: checkCondition('competencies', 'disabled') }">
                   <label>
                     <div class="flex flex-middle">
