@@ -51,8 +51,6 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   @HostBinding('id')
   public id = `activity-multiple_${Math.random()}`
   @ViewChild('userManual', { static: true }) userManual!: TemplateRef<any>
-
-
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true
@@ -93,27 +91,26 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     }
   }
   download() {
-    const filename = "Igot User Manual.pdf"
+    const filename = 'Igot User Manual.pdf'
     this.closeSnackBar()
-    var oReq = new XMLHttpRequest()
+    const oReq = new XMLHttpRequest()
     // The Endpoint of your server
-    var URLToPDF = `/assets/common/user-manual/${filename}`
+    const uRLToPdf = `/assets/common/user-manual/${filename}`
 
     // Configure XMLHttpRequest
-    oReq.open("GET", URLToPDF, true)
+    oReq.open('GET', uRLToPdf, true)
 
     // Important to use the blob response type
-    oReq.responseType = "blob"
+    oReq.responseType = 'blob'
 
     // When the file request finishes
     // Is up to you, the configuration for error events etc.
     oReq.onload = function () {
       // Once the file is downloaded, open a new window with the PDF
       // Remember to allow the POP-UPS in your browser
-      var file = new Blob([oReq.response], {
-        type: 'application/pdf'
+      const file = new Blob([oReq.response], {
+        type: 'application/pdf',
       })
-
       // Generate file download directly in the browser !
       saveAs(file, filename)
     }
@@ -124,7 +121,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     this.snackBar.dismiss()
   }
   openUserManualDialogue() {
-    this.snackBar.openFromTemplate(this.userManual, { duration: 20000, verticalPosition: "bottom", horizontalPosition: "left" })
+    this.snackBar.openFromTemplate(this.userManual, { duration: 20000, verticalPosition: 'bottom', horizontalPosition: 'left' })
   }
 
   private initData() {
