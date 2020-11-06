@@ -92,10 +92,11 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   }
   download() {
     const filename = 'Igot User Manual.pdf'
+    const serverFilename = 'manual.pdf'
     this.closeSnackBar()
     const oReq = new XMLHttpRequest()
     // The Endpoint of your server
-    const uRLToPdf = `/assets/common/user-manual/${filename}`
+    const uRLToPdf = `/assets/common/user-manual/${serverFilename}`
 
     // Configure XMLHttpRequest
     oReq.open('GET', uRLToPdf, true)
