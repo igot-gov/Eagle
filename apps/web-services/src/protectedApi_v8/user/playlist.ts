@@ -416,6 +416,7 @@ playlistApi.patch('/:playlistId', async (req, res) => {
     })
     res.status(response.status).send()
   } catch (err) {
+    logError(err)
     res
       .status((err && err.response && err.response.status) || 500)
       .send((err && err.response && err.response.data) || {
