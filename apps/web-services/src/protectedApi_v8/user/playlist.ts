@@ -405,7 +405,7 @@ playlistApi.patch('/:playlistId', async (req, res) => {
       return
     }
     const playlistId = req.params.playlistId
-    const url = API_END_POINTS.playlistV1(userId)
+    const url = `${API_END_POINTS.playlistV1(userId)}`
     const response = await axios({
       ...axiosRequestConfig,
       data: transformToSbExtUpdateRequest(request),
