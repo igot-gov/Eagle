@@ -105,7 +105,7 @@ export interface IPlayListContentResource {
 
 export interface IPlayListUpdateRequest {
   playlist_title: string
-  content_ids: IPlayListContentResource[]
+  contentIds: IPlayListContentResource[]
 }
 
 export interface IPlaylist {

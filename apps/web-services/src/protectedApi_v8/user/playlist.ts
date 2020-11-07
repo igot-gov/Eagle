@@ -17,6 +17,7 @@ import {
   transformToPlaylistV3,
   transformToSbExtCreateRequest,
   transformToSbExtDeleteRequest,
+  transformToSbExtPatchRequest,
   transformToSbExtSyncRequest,
   transformToSbExtUpsertRequest
 } from '../../service/playlist'
@@ -407,7 +408,7 @@ playlistApi.patch('/:playlistId', async (req, res) => {
     const url = `${API_END_POINTS.playlistV1(userId)}`
     const response = await axios({
       ...axiosRequestConfig,
-      data: request,
+      data: transformToSbExtPatchRequest(request),
       headers: {
         rootOrg,
       },
