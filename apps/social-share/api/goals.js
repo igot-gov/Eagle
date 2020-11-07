@@ -3,14 +3,15 @@ const router = express.Router();
 var request = require("request");
 request.gzip = true;
 
-router.get("/playlist/:userId/:id", function (req, res) {
+router.get("/goal/:userId/:id", function (req, res) {
   console.log("api service started"); 
-  let URL = `http://lex-core:7001/v1/users/${req.params.userId}/playlists/${req.params.id}`;
-  let data,playlist;
+  let URL = `http://lex-core:7001/v5/users/${req.params.userId}/goals?goal_type=user&sourceFields=isInIntranet`;
+  let goals;
   request(
     {
-      headers: {       
-        rootorg: "igot"       
+      headers: {        
+        rootorg: "igot",  
+        local: "en",      
       },
       uri: URL,
       method: "GET"     
@@ -20,36 +21,46 @@ router.get("/playlist/:userId/:id", function (req, res) {
         console.log("error:", err);
         res.send(err);
       } else {
-       
-        console.log("api successful");       
         if (typeof body == "string") {
-          playlist = JSON.parse(body)         
+            goals = JSON.parse(body);
         } else {
-          playlist = body        
+            goals = body;
         }
-        if (playlist.resource_ids && playlist.resource_ids.length > 0) {
-          data = playlist.resource_ids[0]
+        let goalArray = [];
+        let goal;
+        if (goals.goals_in_progress && goals.goals_in_progress.length > 0) {
+            goalArray = goals.goals_in_progress.filter(function (goal) {
+              return goal.goal_id == req.params.id;
+            });
+            goal = goalArray.length > 0 ? goalArray[0] : null;
         }
-        if (data) {
+        if (goal) {
           var html = `<!DOCTYPE html>
             <html lang="en">
               <head>             
                 <meta charset="utf-8" />
-                <title>"${playlist.playlistTitle}"</title>
+                <title>"${goal.goal_title}"</title>
                 <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
-                " />                          
+                " />
+                <meta id="id-social-description" name="description"  content="${
+                  goal.goal_desc
+                }">             
                 <meta property="og:type" content="website">
-                <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/playlist/${req.params.userId}/${req.params.id}`}" />
-                <meta property="og:title" content="${playlist.playlistTitle}" />               
-                <meta property="og:image" content="${data.appIcon}" />  
+                <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/goal/${req.params.userId}/${req.params.id}`}" />
+                <meta property="og:title" content="${goal.goal_title}" />
+                <meta property="og:description" content="${goal.goal_desc}" />
+                <meta property="og:image" content="${goal.resource_progress[0].appIcon}" />  
                 <meta property="og:image:secure_url" content="${
-                  data.appIcon
-                }" />      
+                   goal.resource_progress[0].appIcon
+                }" />        
             
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/playlist/${req.params.userId}/${req.params.id}`}" />
-                <meta property="twitter:title" content="${playlist.playlistTitle}" />               
-                <meta property="twitter:image" content="${data.appIcon}" />
+                <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/goal/${req.params.userId}/${req.params.id}`}" />
+                <meta property="twitter:title" content="${goal.goal_title}" />
+                <meta property="twitter:description" content="${
+                  goal.goal_desc
+                }" />
+                <meta property="twitter:image" content="${goal.resource_progress[0].appIcon}" />
                 <style>
                   .social-card {
                     box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
@@ -89,10 +100,11 @@ router.get("/playlist/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://d136953gtttd92.cloudfront.net/app/playlist/me/${req.params.id}">
-                    <img src="${data.appIcon}" alt="${playlist.playlistTitle}"  class="social-card-img" />
+                  <a href="https://d136953gtttd92.cloudfront.net/app/goals/me/all">
+                    <img src="${goal.resource_progress[0].appIcon}" alt="${goal.goal_title}"  class="social-card-img" />
                     <div class="sub-card">
-                      <p class="title">${playlist.playlistTitle}</p>                     
+                      <p class="title">${goal.goal_title}</p>
+                      <p class="desc">${goal.goal_desc}</p>
                     </div>  
                   </a>   
                 </div>                       
