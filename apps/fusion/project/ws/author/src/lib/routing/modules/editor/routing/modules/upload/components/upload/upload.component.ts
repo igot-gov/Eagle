@@ -569,6 +569,9 @@ export class UploadComponent implements OnInit, OnDestroy {
     if (!elm) {
       elm = doc.getElementById('edit-meta')
     }
+    if (!elm) {
+      elm = doc.getElementById('auth-root')
+    }
     if (elm.requestFullscreen) {
       !doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen()
     } else if (elm.mozRequestFullScreen) {

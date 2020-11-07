@@ -12,7 +12,7 @@
               <span class="flex-1 mat-h3 font-medium"> {{career.designation}}
               </span>
               <span class="mat-subtitle" *ngIf="career.doj && (paDate(career.doj) !== 'Invalid Date')">
-                Joined {{paDate(career.doj) | pipeRelativeTime}}</span>
+                Joined {{paDate(career.doj)}}</span>
               <span class="mat-subtitle" *ngIf=" career.doj && (paDate(career.doj) === 'Invalid Date')">
                 Joined {{career.doj}}</span>
             </div>
