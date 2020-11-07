@@ -99,6 +99,15 @@ export interface IPlaylistUpdateTitleRequest {
   visibility?: string
 }
 
+export interface IPlayListContentResource {
+  identifier: string
+}
+
+export interface IPlayListUpdateRequest {
+  playlist_title: string
+  content_ids: IPlayListContentResource[]
+}
+
 export interface IPlaylist {
   contents: IContent[]
   createdOn: string
