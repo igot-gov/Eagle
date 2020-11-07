@@ -27,7 +27,7 @@ export class BtnLinkedinShareComponent implements OnInit {
   }
 
   get sanitizeFbUrl() {
-    const url = `https://d136953gtttd92.cloudfront.net/share/${this.shareType}/${this.userId}/${this.contentId}`
+    const url = `https://${window.location.hostname}/share/${this.shareType}/${this.userId}/${this.contentId}`
     return this.sanitizer.bypassSecurityTrustResourceUrl(
     `https://www.linkedin.com/shareArticle?mini=true&url=${url}&source=LinkedIn`,
   )
