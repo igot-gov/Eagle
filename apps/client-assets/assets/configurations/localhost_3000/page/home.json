@@ -208,6 +208,11 @@
                         "pageSize": 12,
                         "query": "all",
                         "didYouMean": true,
+                        "sort": [
+                            {
+                                "lastUpdatedOn":"desc"
+                            }
+                        ],
                         "filters": [
                           {
                             "andFilters": [
