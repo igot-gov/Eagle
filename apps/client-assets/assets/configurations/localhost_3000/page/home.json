@@ -145,14 +145,33 @@
                     },
                     "filters": [],
                     "request": {
-                      "api": {
-                        "path": "/apis/protected/v8/user/history",
-                        "queryParams": {
-                          "pageSize": 50,
-                          "sourceFields": [
-                            "creatorLogo"
-                          ]
-                        }
+                      "searchV6": {
+                        "locale": [
+                          "en"
+                        ],
+                        "pageSize": 12,
+                        "query": "all",
+                        "didYouMean": true,
+                        "filters": [
+                          {
+                            "andFilters": [
+                              {
+                                "lastUpdatedOn": [
+                                  "month"
+                                ]
+                              },
+                              {
+                                "contentType": [
+                                  "Course",
+                                  "Learning Path"
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "includeSourceFields": [
+                          "creatorLogo"
+                        ]
                       }
                     }
                   }
@@ -209,9 +228,9 @@
                         "query": "all",
                         "didYouMean": true,
                         "sort": [
-                            {
-                                "lastUpdatedOn":"desc"
-                            }
+                          {
+                            "lastUpdatedOn": "desc"
+                          }
                         ],
                         "filters": [
                           {
