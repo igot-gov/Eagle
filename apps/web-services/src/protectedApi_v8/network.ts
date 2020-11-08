@@ -2,12 +2,13 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../configs/request.config'
 import { CONSTANTS } from '../utils/env'
-import { logError } from '../utils/logger'
+import { logError, logInfo } from '../utils/logger'
 import { ERROR } from '../utils/message'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
 
 const unknown = 'Network Apis:- Failed due to unknown reason'
 const apiEndpoints = {
+  detail: `${CONSTANTS.USER_PROFILE_API_BASE}/user/multi-fetch/wid`,
   getConnectionEstablishedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/established`,
   getConnectionRequestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requested`,
   getConnectionRequestsReceivedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requests/received`,
@@ -301,11 +302,13 @@ networkConnectionApi.post('/connections/recommended', async (req, res) => {
   }
 })
 
-networkConnectionApi.post('/connections/recommended/rootOrg', async (req, res) => {
+networkConnectionApi.post('/connections/recommended/userDepartment', async (req, res) => {
   try {
     let usrDept = ''
+    let userDepartment = ''
     const rootOrg = req.header('rootorg')
     const userId = extractUserIdFromRequest(req)
+    const url = `${apiEndpoints.detail}`
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
@@ -314,7 +317,25 @@ networkConnectionApi.post('/connections/recommended/rootOrg', async (req, res) =
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    usrDept = rootOrg || 'igot'
+    const responseDetails = await axios.post(
+      url,
+      {
+        conditions: {
+          root_org: rootOrg,
+        },
+        source_fields: ['wid', 'email', 'first_name', 'last_name', 'department_name'],
+        values: [userId],
+      },
+      {
+        ...axiosRequestConfig,
+        headers: { rootOrg },
+      }
+      )
+    logInfo('responseDetails from /detailsv1 : ', responseDetails.data)
+    if (responseDetails && responseDetails.data && responseDetails.data.length) {
+      userDepartment =  responseDetails.data[0].department_name
+    }
+    usrDept = userDepartment || 'igot'
 
     const reqtoApi = {
       offset: 0,

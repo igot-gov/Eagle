@@ -295,7 +295,7 @@
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/network/connections/recommended/rootOrg",
+                        "path": "/apis/protected/v8/network/connections/recommended/userDepartment",
                         "queryParams": {}
                       }
                     }
