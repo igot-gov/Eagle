@@ -148,7 +148,10 @@
                       "api": {
                         "path": "/apis/protected/v8/user/history",
                         "queryParams": {
-                          "pageSize": 50
+                          "pageSize": 50,
+                          "sourceFields": [
+                            "creatorLogo"
+                          ]
                         }
                       }
                     }
