@@ -36,7 +36,7 @@ public interface ContentProgressRepository extends
 	 * @return
 	 */
 
-	@Query("select content_id,progress,last_ts from user_content_progress where root_org=?0 and user_id=?1 and content_type in ?2 and content_id in ?3")
+	@Query("select content_id,progress, time_spent, last_ts from user_content_progress where root_org=?0 and user_id=?1 and content_type in ?2 and content_id in ?3")
 	public List<ContentProgressModel> getProgress(String rootOrg, String userId, List<String> contentTypes,
 			List<String> contentIds);
 

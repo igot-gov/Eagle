@@ -156,7 +156,7 @@ public class ContentProgressModel {
 	}
 
 	public void setTimespent(Float timespent) {
-		this.timespent = timespent;
+		this.timespent = (timespent==null ? 0 : timespent);
 	}
 
 	public void setChildrenList(List<String> childrenList) {
