@@ -6,7 +6,7 @@ var config = require('../utils/environment');
 
 router.get("/goal/:userId/:id", function (req, res) {
   console.log("api service started"); 
-  let URL = `http://${config.API_HOST}/v5/users/${req.params.userId}/goals?goal_type=user&sourceFields=isInIntranet`;
+  let URL = `${config.API_HOST}/v5/users/${req.params.userId}/goals?goal_type=user&sourceFields=isInIntranet`;
   let goals;
   request(
     {
@@ -47,7 +47,7 @@ router.get("/goal/:userId/:id", function (req, res) {
                   goal.goal_desc
                 }">             
                 <meta property="og:type" content="website">
-                <meta property="og:url" content="${`https://${config.HTTPS_HOST}/share/goal/${req.params.userId}/${req.params.id}`}" />
+                <meta property="og:url" content="${`${config.HTTPS_HOST}/share/goal/${req.params.userId}/${req.params.id}`}" />
                 <meta property="og:title" content="${goal.goal_title}" />
                 <meta property="og:description" content="${goal.goal_desc}" />
                 <meta property="og:image" content="${goal.resource_progress[0].appIcon}" />  
@@ -56,7 +56,7 @@ router.get("/goal/:userId/:id", function (req, res) {
                 }" />        
             
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="${`https://${config.HTTPS_HOST}/share/goal/${req.params.userId}/${req.params.id}`}" />
+                <meta property="twitter:url" content="${`${config.HTTPS_HOST}/share/goal/${req.params.userId}/${req.params.id}`}" />
                 <meta property="twitter:title" content="${goal.goal_title}" />
                 <meta property="twitter:description" content="${
                   goal.goal_desc
@@ -101,7 +101,7 @@ router.get("/goal/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://${config.HTTPS_HOST}/app/goals/me/all">
+                  <a href="${config.HTTPS_HOST}/app/goals/me/all">
                     <img src="${goal.resource_progress[0].appIcon}" alt="${goal.goal_title}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${goal.goal_title}</p>

@@ -6,7 +6,7 @@ var config = require("../utils/environment");
 
 router.get("/playlist/:userId/:id", function (req, res) {
   console.log("api service started"); 
-  let URL = `http://${config.API_HOST}/v1/users/${req.params.userId}/playlists/${req.params.id}`;
+  let URL = `${config.API_HOST}/v1/users/${req.params.userId}/playlists/${req.params.id}`;
   let data,playlist;
   request(
     {
@@ -40,7 +40,7 @@ router.get("/playlist/:userId/:id", function (req, res) {
                 <link id="id-app-fav-icon" rel="icon" type="image/png" href="/image/favicon.png")
                 " />                          
                 <meta property="og:type" content="website">
-                <meta property="og:url" content="${`https://${config.HTTPS_HOST}/share/playlist/${req.params.userId}/${req.params.id}`}" />
+                <meta property="og:url" content="${`${config.HTTPS_HOST}/share/playlist/${req.params.userId}/${req.params.id}`}" />
                 <meta property="og:title" content="${playlist.playlistTitle}" />               
                 <meta property="og:image" content="${data.appIcon}" />  
                 <meta property="og:image:secure_url" content="${
@@ -48,7 +48,7 @@ router.get("/playlist/:userId/:id", function (req, res) {
                 }" />      
             
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="${`https://${config.HTTPS_HOST}/share/playlist/${req.params.userId}/${req.params.id}`}" />
+                <meta property="twitter:url" content="${`${config.HTTPS_HOST}/share/playlist/${req.params.userId}/${req.params.id}`}" />
                 <meta property="twitter:title" content="${playlist.playlistTitle}" />               
                 <meta property="twitter:image" content="${data.appIcon}" />
                 <style>

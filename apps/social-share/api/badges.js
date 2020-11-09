@@ -5,7 +5,7 @@ request.gzip = true;
 var config = require('../utils/environment');
 
 router.get("/badge/:userId/:id", function (req, res) {
-  let URL = `http://${config.API_HOST}/v3/users/${req.params.userId}/badges`;
+  let URL = `${config.API_HOST}/v3/users/${req.params.userId}/badges`;
   console.log("api service started");
   let badges;
   request(
@@ -36,7 +36,7 @@ router.get("/badge/:userId/:id", function (req, res) {
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
           let badgeImage= badge?badge.image:null;
           let imageName = (badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
-          imagePath=`https://${config.HTTPS_HOST}t/assets/instances/eagle/Achievements/Badges/assets/`+ imageName
+          imagePath=`${config.HTTPS_HOST}t/assets/instances/eagle/Achievements/Badges/assets/`+ imageName
         }
         //badge = _.where(badges.earned, {badge_id: req.params.id});
         if (badge) {
@@ -51,7 +51,7 @@ router.get("/badge/:userId/:id", function (req, res) {
                 badge.message
               }">             
               <meta property="og:type" content="website">
-              <meta property="og:url" content="${`https://${config.HTTPS_HOST}/share/badge/${req.params.userId}/${req.params.id}`}" />
+              <meta property="og:url" content="${`${config.HTTPS_HOST}/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="og:title" content="${badge.badge_name}" />
               <meta property="og:description" content="${badge.message}" />
               <meta property="og:image" content="${imagePath}" />  
@@ -60,7 +60,7 @@ router.get("/badge/:userId/:id", function (req, res) {
               }" />        
           
               <meta property="twitter:card" content="summary_large_image" />
-              <meta property="twitter:url" content="${`https://${config.HTTPS_HOST}/share/badge/${req.params.userId}/${req.params.id}`}" />
+              <meta property="twitter:url" content="${`${config.HTTPS_HOST}/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="twitter:title" content="${badge.badge_name}" />
               <meta property="twitter:description" content="${badge.message}" />
               <meta property="twitter:image" content="${imagePath}" />
@@ -109,7 +109,7 @@ router.get("/badge/:userId/:id", function (req, res) {
             </head>
             <body>
               <div class="card-container">
-                <a href="https://${config.HTTPS_HOST}/app/profile/competency/badges">
+                <a href="${config.HTTPS_HOST}/app/profile/competency/badges">
                   <div class="image-container">
                     <img
                       class="badge-img"
