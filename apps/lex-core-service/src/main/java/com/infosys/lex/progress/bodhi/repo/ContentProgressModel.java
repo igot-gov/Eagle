@@ -180,7 +180,7 @@ public class ContentProgressModel {
 		this.visitedSet = visitedSet;
 		this.parentList = parentList;
 		this.childrenList = childrenList;
-		this.timespent = timespent;
+		this.timespent =  (timespent==null ? 0 : timespent);
 	}
 
 	public ContentProgressModel(ContentProgressPrimaryKeyModel primaryKey) {
