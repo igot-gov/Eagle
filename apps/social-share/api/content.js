@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 var request = require("request");
 request.gzip = true;
+var config = require('../utils/environment');
 
 router.get("/toc/:userId/:id", function (req, res) { 
   console.log("api service started"); 
-  let URL = `http://lex-core:7001/v1/content/hierarchy/${req.params.id}?hierarchyType=minimal`;
+  let URL = `http://${config.API_HOST}/v1/content/hierarchy/${req.params.id}?hierarchyType=minimal`;
   let data;
 
   request(
@@ -46,7 +47,7 @@ router.get("/toc/:userId/:id", function (req, res) {
                   data.description
                 }">             
                 <meta property="og:type" content="website">
-                <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/toc/${req.params.userId}/${req.params.id}`}" />
+                <meta property="og:url" content="${`https://${config.HTTPS_HOST}/share/toc/${req.params.userId}/${req.params.id}`}" />
                 <meta property="og:title" content="${data.name}" />
                 <meta property="og:description" content="${data.description}" />
                 <meta property="og:image" content="${data.appIcon}" />  
@@ -55,7 +56,7 @@ router.get("/toc/:userId/:id", function (req, res) {
                 }" />        
             
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/toc/${req.params.userId}/${req.params.id}`}" />
+                <meta property="twitter:url" content="${`https://${config.HTTPS_HOST}/share/toc/${req.params.userId}/${req.params.id}`}" />
                 <meta property="twitter:title" content="${data.name}" />
                 <meta property="twitter:description" content="${
                   data.description
@@ -100,11 +101,12 @@ router.get("/toc/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://${req.get('host')}/app/toc/${req.params.id}/overview">
+                  <a href="https://${config.HTTPS_HOST}/app/toc/${req.params.id}/overview">
                     <img src="${data.appIcon}" alt="${data.name}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${data.name}</p>
-                      <p class="desc">${data.description}</p>                  
+                      <p class="desc">${data.description}</p>   
+                      <p>ssss</p>               
                      </div>  
                   </a>   
                 </div>                       

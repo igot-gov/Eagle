@@ -2,8 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 app.use(cors());
-var compress = require("compression");
+let compress = require("compression");
 app.use(compress({ threshold: 0 }));
+let  env = require('./utils/environment')
 
 
 const routes = require("./api/index");
@@ -21,7 +22,7 @@ router.get("/", function (req, res) {
 });
 
 //add the router
-app.listen(process.env.port || 3009);
-console.log("Running at Port 3009");
+app.listen(env.PORT || 3009);
+console.log("Running at Port : ",env.PORT);
 
 module.exports = app;
