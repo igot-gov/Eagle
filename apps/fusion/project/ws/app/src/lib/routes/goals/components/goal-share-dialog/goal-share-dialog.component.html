@@ -1,6 +1,6 @@
 <ng-container *ngIf="shareGoalStatus !== 'fetching'; else fetchingSection">
-  <h2 class="mat-title margin-bottom-xs" i18n>Share this goal with</h2>
-  <div mat-dialog-content>
+  <h2 class="mat-title margin-bottom-xs" i18n *ngIf="goal?.goalFor === 'others'">Share this goal with</h2>
+  <div mat-dialog-content *ngIf="goal?.goalFor === 'others'">
     <ws-widget-user-autocomplete (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
     <h2 class="mat-title margin-bottom-xs" i18n>Give them a message</h2>
     <p>
@@ -12,7 +12,7 @@
     </p>
   </div>
 
-  <div class="mat-caption ws-mat-warn-text" *ngIf="showPartiallySharedMessage">
+  <div class="mat-caption ws-mat-warn-text" *ngIf="showPartiallySharedMessage && goal?.goalFor === 'others'">
     <ng-container i18n>Goal not shared with the following users: </ng-container>
     <div *ngIf="apiResponse.unauthorized_users?.length">
       <ng-container i18n> Unauthorized users : </ng-container>
@@ -28,17 +28,17 @@
     </div>
   </div>
 
-  <div mat-dialog-actions class="flex flex-row-reverse">
+  <div mat-dialog-actions class="flex flex-row-reverse" *ngIf="goal?.goalFor === 'others'">
     <button name="done-button-goal-share-dialog"  [disabled]="!shareWithEmailIds?.length" mat-button i18n (click)="shareGoal()">
       Done
     </button>
   </div>
 
-  <div *ngIf="isSocialMediaShareEnabled" class="pt-6">
-    <h2 class="mat-h2 margin-remove" i18n>
+  <div *ngIf="isSocialMediaShareEnabled && goal.goalFor === 'me'" class="pt-6">
+    <!-- <h2 class="mat-h2 margin-remove" i18n>
       OR
     </h2>
-  
+   -->
     <h3 class="mat-h3 margin-remove py-2" i18n>Share on Social Media</h3>
   
     <div class="flex flex-wrap items-center">

@@ -18,6 +18,7 @@ import { CustomKeycloak } from './utils/custom-keycloak'
 import { CONSTANTS } from './utils/env'
 import { logInfo, logSuccess } from './utils/logger'
 const cookieParser = require('cookie-parser')
+const healthcheck = require('express-healthcheck')
 
 function haltOnTimedOut(req: Express.Request, _: Express.Response, next: NextFunction) {
   if (!req.timedout) {
@@ -70,6 +71,11 @@ export class Server {
     this.app.use(express.urlencoded({ extended: false, limit: '50mb' }))
     this.app.use(express.json({ limit: '50mb' }))
     this.app.use(fileUpload())
+    this.app.use('/healthcheck', healthcheck({
+      healthy() {
+        return { everything: 'is ok' }
+      },
+    }))
     this.app.use(
       helmet({
         contentSecurityPolicy: {
