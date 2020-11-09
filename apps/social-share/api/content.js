@@ -107,6 +107,8 @@ router.get("/toc/:userId/:id", function (req, res) {
                     <div class="sub-card">
                       <p class="title">${data.name}</p>
                       <p class="desc">${data.description}</p>
+                      <p>${req.get('host')}</p>
+                      <p>${req.get('origin')}</p>
                     </div>  
                   </a>   
                 </div>                       
