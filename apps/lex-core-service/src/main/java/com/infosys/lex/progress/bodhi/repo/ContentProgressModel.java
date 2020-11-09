@@ -151,7 +151,7 @@ public class ContentProgressModel {
 		return childrenList;
 	}
 
-	public float getTimespent() {
+	public Float getTimespent() {
 		return timespent;
 	}
 
