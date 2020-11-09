@@ -770,7 +770,14 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
   fullScreenToggle() {
     const doc: any = document
-    const elm: any = doc.getElementById('auth-quiz')
+    // const elm: any = doc.getElementById('auth-quiz')
+    let elm: any = doc.getElementById('auth-quiz')
+    if (!elm) {
+      elm = doc.getElementById('edit-meta')
+    }
+    if (!elm) {
+      elm = doc.getElementById('auth-root')
+    }
     if (elm.requestFullscreen) {
       !doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen()
     } else if (elm.mozRequestFullScreen) {

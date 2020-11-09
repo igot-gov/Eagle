@@ -432,25 +432,20 @@
     },
     "disabledFor": {},
     "mandatoryFor": {
-      "Channel": [],
-      "Collection": [],
-      "Course": [],
-      "Knowledge Artifact": [],
-      "Knowledge Board": [],
-      "Learning Path": [],
-      "Resource": []
+      "Course": []
     },
     "notDisabledFor": {},
     "notMandatoryFor": {},
-    "notShowFor": {},
-    "showFor": {
+    "notShowFor": {
+      "Resource": [],
       "Channel": [],
       "Collection": [],
-      "Course": [],
       "Knowledge Artifact": [],
       "Knowledge Board": [],
-      "Learning Path": [],
-      "Resource": []
+      "Learning Path": []
+    },
+    "showFor": {
+      "Course": []
     },
     "type": "array"
   },
@@ -6035,6 +6030,9 @@
     },
     "showFor": {
       "Channel": [],
+      "Collection": [],
+      "Learning Path": [],
+      "Course": [],
       "Knowledge Board": [],
       "Resource": []
     },

@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, OnDestroy, HostBinding } from '@angular/core'
+import { Component, OnInit, Input, OnDestroy, HostBinding, ViewChild, TemplateRef } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { NsNetworkStripNewMultiple } from './activity-strip-multiple.model'
 import { ActivityStripNewMultipleService } from './activity-strip-multiple.service'
 import { WidgetContentService } from '../_services/widget-content.service'
 import { NsContent } from '../_services/widget-content.model'
+import { saveAs } from 'file-saver'
 import {
   TFetchStatus,
   LoggerService,
@@ -12,6 +13,7 @@ import {
   UtilityService,
 } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
+import { MatSnackBar } from '@angular/material'
 // import { filter } from 'rxjs/operators'
 // import { SearchServService } from '@ws/app/src/lib/routes/search/services/search-serv.service'
 
@@ -48,6 +50,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   @Input() widgetData!: NsNetworkStripNewMultiple.INetworkStripMultiple
   @HostBinding('id')
   public id = `activity-multiple_${Math.random()}`
+  @ViewChild('userManual', { static: true }) userManual!: TemplateRef<any>
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {}
   stripsKeyOrder: string[] = []
   showAccordionData = true
@@ -70,6 +73,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     private loggerSvc: LoggerService,
     // private eventSvc: EventService,
     // private configSvc: ConfigurationsService,
+    private snackBar: MatSnackBar,
     protected utilitySvc: UtilityService,
     // private searchServSvc: SearchServService,
   ) {
@@ -77,6 +81,7 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
+    this.openUserManualDialogue()
     this.initData()
   }
 
@@ -84,6 +89,40 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     if (this.changeEventSubscription) {
       this.changeEventSubscription.unsubscribe()
     }
+  }
+  download() {
+    const filename = 'Igot User Manual.pdf'
+    const serverFilename = 'manual.pdf'
+    this.closeSnackBar()
+    const oReq = new XMLHttpRequest()
+    // The Endpoint of your server
+    const uRLToPdf = `/assets/common/user-manual/${serverFilename}`
+
+    // Configure XMLHttpRequest
+    oReq.open('GET', uRLToPdf, true)
+
+    // Important to use the blob response type
+    oReq.responseType = 'blob'
+
+    // When the file request finishes
+    // Is up to you, the configuration for error events etc.
+    oReq.onload = function () {
+      // Once the file is downloaded, open a new window with the PDF
+      // Remember to allow the POP-UPS in your browser
+      const file = new Blob([oReq.response], {
+        type: 'application/pdf',
+      })
+      // Generate file download directly in the browser !
+      saveAs(file, filename)
+    }
+
+    oReq.send()
+  }
+  closeSnackBar() {
+    this.snackBar.dismiss()
+  }
+  openUserManualDialogue() {
+    this.snackBar.openFromTemplate(this.userManual, { duration: 20000, verticalPosition: 'bottom', horizontalPosition: 'left' })
   }
 
   private initData() {

@@ -95,3 +95,30 @@
     </div>
   </mat-card>
 </ng-template>
+
+
+<ng-template #userManual>
+  <mat-card class="temp-class">
+    <mat-card-content>
+      <a role="button" class="close-x" mat-icon-button i18n (click)="closeSnackBar()">
+        <mat-icon>close</mat-icon>
+      </a>
+      <div class="custom-margin">
+        <div class="">
+          <a role="button" mat-button i18n (click)="download()">See what is new in the latest version of iGot Karmayogi.
+            Click Here <mat-icon>file_download</mat-icon></a>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+  <!-- <div class="flex" role="none">
+    <a role="button" mat-icon-button i18n (click)="download()">
+      <mat-icon>download</mat-icon>
+      <span i18n>Download User Manual</span>
+    </a>
+    <a role="button" mat-icon-button i18n (click)="closeSnackBar()">
+      <mat-icon>close</mat-icon>
+    </a>
+  </div> -->
+</ng-template>

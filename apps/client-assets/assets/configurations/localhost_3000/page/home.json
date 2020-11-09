@@ -148,7 +148,10 @@
                       "api": {
                         "path": "/apis/protected/v8/user/history",
                         "queryParams": {
-                          "pageSize": 50
+                          "pageSize": 50,
+                          "sourceFields": [
+                            "creatorLogo"
+                          ]
                         }
                       }
                     }
@@ -205,6 +208,11 @@
                         "pageSize": 12,
                         "query": "all",
                         "didYouMean": true,
+                        "sort": [
+                          {
+                            "lastUpdatedOn": "desc"
+                          }
+                        ],
                         "filters": [
                           {
                             "andFilters": [
@@ -295,7 +303,7 @@
                     "filters": [],
                     "request": {
                       "api": {
-                        "path": "/apis/protected/v8/network/connections/recommended/rootOrg",
+                        "path": "/apis/protected/v8/network/connections/recommended/userDepartment",
                         "queryParams": {}
                       }
                     }

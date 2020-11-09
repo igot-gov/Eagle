@@ -507,7 +507,14 @@ export class IapAssessmentComponent implements OnInit {
 
   fullScreenToggle = () => {
     const doc: any = document
-    const elm: any = doc.getElementById('whole-container')
+    // const elm: any = doc.getElementById('whole-container')
+    let elm: any = doc.getElementById('whole-container')
+    if (!elm) {
+      elm = doc.getElementById('edit-meta')
+    }
+    if (!elm) {
+      elm = doc.getElementById('auth-root')
+    }
     if (elm.requestFullscreen) {
       !doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen()
     } else if (elm.mozRequestFullScreen) {

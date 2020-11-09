@@ -19,17 +19,18 @@
                       <div class="profile-img-wrapper mt-10">
                         <mat-icon class="person" *ngIf="!photoUrl">person</mat-icon>
                         <img class="photo" *ngIf="photoUrl" [src]="photoUrl" [alt]="Avatar">
-                        <div class="camera-wrapper cursor-pointer"
-                          (click)="uploadProfilePic.click(); $event.stopPropagation()">
-                          <a href="javascript:void(0)" i18n-aria-label>
-                            <label class="cursor-pointer" (click)="$event.stopPropagation()">
-                              <mat-icon class="camera">photo_camera</mat-icon>
-                            </label>
-                          </a>
+                        <div tabindex="0" class="camera-wrapper cursor-pointer" role="link" i18n-aria-label
+                          (click)="uploadProfilePic.click(); $event.stopPropagation()"
+                          (keydown.enter)="uploadProfilePic.click(); $event.stopPropagation()">
+                          <!-- <a href="javascript:void(0)" i18n-aria-label> -->
+                          <label class="cursor-pointer">
+                            <mat-icon class="camera">photo_camera</mat-icon>
+                          </label>
                           <input id="uploadProfile" name="uploadProfileName" type="file" #uploadProfilePic
                             class="hidden"
                             (change)="uploadProfileImg($event.target.files[0]); uploadProfilePic.value = null"
                             style="display: none;" [accept]="imageTypes.toString()" />
+                          <!-- </a> -->
                         </div>
                       </div>
                     </div>

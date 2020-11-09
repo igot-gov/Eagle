@@ -28,7 +28,7 @@ export class BtnTwitterShareComponent implements OnInit {
   }
 
   get sanitizeTwitterUrl() {
-    const url = `https://d136953gtttd92.cloudfront.net/share/${this.shareType}/${this.userId}/${this.contentId}`
+    const url = `https://${window.location.hostname}/share/${this.shareType}/${this.userId}/${this.contentId}`
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       // tslint:disable-next-line: max-line-length
       `https://platform.twitter.com/widgets/tweet_button.c63890edc4243ee77048d507b181eeec.en.html#dnt=false&id=twitter-widget-2&lang=en&original_referer=${url}&size=l&type=share&url=${url}`,

@@ -47,6 +47,24 @@
   }
 }
 
+.temp-class {
+  background: #323232 !important;
+  color: white !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0px !important;
+}
+
+.custom-margin {
+  margin: 0rem 2rem 0rem 0rem;
+}
+
+.close-x {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .rotate-t-90 {
   transform: rotate(90deg);
 }

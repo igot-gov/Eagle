@@ -1,11 +1,12 @@
 <div class="flex flex-1 flex-column margin-top-xs margin-left-xs margin-right-xs">
   <mat-card class="flex-custom" [attr.id]='widgetData.key'>
     <mat-card-content>
-      <span class="mat-h3 font-medium flex-4 mobile-margin">
+      <span class="mat-h3 font-medium flex-4 mobile-margin" role="link" tabindex="0">
         {{widgetData.name}}
       </span>
       <!-- <ng-container *ngFor="let career of widgetData.data"> -->
-      <mat-card class="mt-2 mat-list-item dark-card" *ngIf="widgetData.data && widgetData.data.additionalSkills">
+      <mat-card role="link" tabindex="0" class="mt-2 mat-list-item dark-card"
+        *ngIf="widgetData.data && widgetData.data.additionalSkills">
         <div class="flex flex-1 mobile-margin margin-f">
           <span class="flex-1 mat-h3 font-medium"> {{widgetData?.data?.additionalSkills}}
           </span>
@@ -14,7 +15,8 @@
           {{widgetData?.data?.certificateDetails}}
         </div>
       </mat-card>
-      <mat-card class="no-shadow mt-2 mat-list-item dark-card" *ngIf="!widgetData?.data?.additionalSkills">
+      <mat-card role="link" tabindex="0" class="no-shadow mt-2 mat-list-item dark-card"
+        *ngIf="!widgetData?.data?.additionalSkills">
         <div class="flex flex-1 mobile-margin margin-f">
           <span class="flex-1 mat-h3 font-medium"> No Information Available </span>
         </div>

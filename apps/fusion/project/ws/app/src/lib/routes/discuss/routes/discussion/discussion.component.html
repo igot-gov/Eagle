@@ -1,15 +1,15 @@
 <div class="flex flex-1 related-discussion margin-fix">
   <div class="flex flex-3 flex-column pb-10">
     <mat-card class="flex-1 remove-botton-radius">
-      <mat-card-header>
+      <mat-card-header role="link" tabindex="0">
         <mat-card-title class="margin-l-0 f-medium" [innerHTML]="data.title"></mat-card-title>
         <!-- <mat-card-subtitle>{{'General discussion'}}</mat-card-subtitle> -->
       </mat-card-header>
       <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'">
         <mat-card-content class="margin-left-m mb-0-imp">
           <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
-          <p>{{ post.content | pipeHtmlTagRemoval}}</p>
-          <div class="flex flex-1">
+          <p role="link" tabindex="0">{{ post.content | pipeHtmlTagRemoval}}</p>
+          <div class="flex flex-1" role="link" tabindex="0">
             <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
             <ws-widget-avatar-photo [name]="post.user.fullname || 'Anonymous'" size="s"></ws-widget-avatar-photo>
             <span class="margin-left-s">{{'Asked by '}}</span>
@@ -21,9 +21,10 @@
           </div>
 
 
-          <div class="flex flex-1 margin-top-m">
+          <div class="flex flex-1 margin-top-m" role="link" tabindex="0" aria-label="tags">
             <ng-container *ngIf="data && data.tags && data.tags.length > 0">
-              <span *ngFor="let tag of data.tags" class="tag" [ngStyle]="getBgColor(tag.value)">
+              <span *ngFor="let tag of data.tags" class="tag" [ngStyle]="getBgColor(tag.value)" role="link" tabindex="0"
+                i18n-aria-label>
                 {{tag.value}}
               </span>
             </ng-container>
@@ -57,7 +58,7 @@
                 <span class="pad-4" role="text"
                   [attr.aria-label]="'total upvoat is' + data.upvotes">{{data.downvotes}}</span>
               </span>
-              <span class="flex margin-right-l mobile">
+              <span class="flex margin-right-l mobile" role="link" tabindex="0">
                 <mat-icon>trending_up</mat-icon>
                 <span class="pad-4" i18n-aria-label aria-label="views count">{{data.viewcount}} views</span>
               </span>
@@ -135,7 +136,7 @@
     </ng-container>
     <ng-container *ngFor="let post of data.posts | orderBy: currentFilter :'desc'">
       <mat-card *ngIf="post.index != 0" class="post-card">
-        <mat-card-header class="mb-5 comment-section align-center">
+        <mat-card-header class="mb-5 comment-section align-center" role="link" tabindex="0">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
           <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
@@ -145,7 +146,7 @@
           <span class="posttime">{{ post.timestamp | date: 'dd MMM yyyy hh:mm a'}}</span>
         </mat-card-header>
         <mat-card-content>
-          <p [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+          <p role="link" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
 
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
@@ -224,7 +225,7 @@
                   </a>
                 </div>
               </div>
-              <div class="">
+              <div class="" role="link" tabindex="0">
                 <span *ngIf="!post.replyCountToggle">Last reply
                   {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
@@ -322,7 +323,7 @@
   <div class="mt-2 flex flex-col">
     <ng-container *ngFor="let post of posts | pipeFilter:'toPid': postId; index as index; last as last">
       <mat-card class="ml-4 post-card">
-        <mat-card-header class="mb-5 comment-section align-center">
+        <mat-card-header class="mb-5 comment-section align-center" role="link" tabindex="0">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
           <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
@@ -332,7 +333,7 @@
           <span class="posttime">{{ post.timestamp | date}}</span>
         </mat-card-header>
         <mat-card-content>
-          <p [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+          <p role="link" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">

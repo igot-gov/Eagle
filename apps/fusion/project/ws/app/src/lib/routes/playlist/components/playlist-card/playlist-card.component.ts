@@ -24,6 +24,8 @@ export class PlaylistCardComponent implements OnInit {
   playlist: NsPlaylist.IPlaylist | null = null
   @ViewChild('playlistDeleteFailed', { static: true }) playlistDeleteFailedMessage!: ElementRef<any>
   @ViewChild('playlistEditFailed', { static: true }) playlistEditFailedMessage!: ElementRef<any>
+  @ViewChild('playlistDeleteSuccessMessage', { static: true }) playlistDeleteSuccessMessage!: ElementRef<any>
+
   type: NsPlaylist.EPlaylistTypes = this.route.snapshot.data.type
   isShareEnabled = false
   defaultThumbnail = ''
@@ -33,11 +35,11 @@ export class PlaylistCardComponent implements OnInit {
   isListExpanded: { [playlistId: string]: boolean } = {}
 
   constructor(private route: ActivatedRoute,
-              private snackBar: MatSnackBar,
-              public dialog: MatDialog,
-              private playlistSvc: BtnPlaylistService,
-              public router: Router,
-              public configSvc: ConfigurationsService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private playlistSvc: BtnPlaylistService,
+    public router: Router,
+    public configSvc: ConfigurationsService,
 
   ) {
     if (this.route.snapshot.data.pageData.data) {
@@ -78,6 +80,7 @@ export class PlaylistCardComponent implements OnInit {
         this.playlistSvc.deletePlaylist(this.playlist.id, this.type).subscribe(
           () => {
             this.deletePlaylistStatus = 'done'
+            this.snackBar.open(this.playlistDeleteSuccessMessage.nativeElement.value, 'X')
             this.router.navigate([`/app/playlist/${routeTo}`])
           },
           _err => {
