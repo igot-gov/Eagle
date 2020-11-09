@@ -35,9 +35,9 @@ router.get("/badge/:userId/:id", function (req, res) {
           });
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
           let badgeImage= badge?badge.image:null;          
-          badge.imagePath=`${config.HTTPS_HOST}/assets/instances/eagle/Achievements/Badges/assets/`+  (badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
+          imagePath=`${config.HTTPS_HOST}/assets/instances/eagle/Achievements/Badges/assets/`+(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
         }
-       res.send(badge)
+       
         if (badge) {
           let html = `<!DOCTYPE html>
           <html lang="en">
