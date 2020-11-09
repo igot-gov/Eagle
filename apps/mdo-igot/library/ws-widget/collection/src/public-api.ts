@@ -95,6 +95,8 @@ export * from './lib/intranet-selector/intranet-selector.module'
 export * from './lib/layout-linear/layout-linear.module'
 export * from './lib/layout-tab/layout-tab.model'
 export * from './lib/layout-tab/layout-tab.module'
+export * from './lib/left-menu/left-menu.model'
+export * from './lib/left-menu/left-menu.module'
 // Components
 export * from './lib/page/page.component'
 export * from './lib/page/page.module'
