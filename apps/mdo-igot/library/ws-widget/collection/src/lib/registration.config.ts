@@ -41,23 +41,14 @@ import { BtnSettingsComponent } from './btn-settings/btn-settings.component'
 import { BtnSettingsModule } from './btn-settings/btn-settings.module'
 import { CardBreadcrumbComponent } from './card-breadcrumb/card-breadcrumb.component'
 import { CardBreadcrumbModule } from './card-breadcrumb/card-breadcrumb.module'
-import { CardChannelComponent } from './card-channel/card-channel.component'
-import { CardChannelModule } from './card-channel/card-channel.module'
 import { CardContentComponent } from './card-content/card-content.component'
 import { CardContentModule } from './card-content/card-content.module'
 // import { CardLearnComponent } from './card-learn/card-learn.component'
 // import { CardLearnModule } from './card-learn/card-learn.module'
 // import { CardWelcomeComponent } from './card-welcome/card-welcome.component'
 // import { CardNetworkComponent } from './card-network/card-network.component'
-import { CardHubsListComponent } from './card-hubs-list/card-hubs-list.component'
-// import { CardWelcomeModule } from './card-welcome/card-welcome.module'
-// import { CardNetworkModule } from './card-network/card-network.module'
-import { CardHomeNetworkModule } from './card-home-network/card-home-network.module'
-import { CardHomeTopModule } from './card-home-top/card-home-top.module'
 // import { CardBrowseCourseModule } from './card-browse-course/card-browse-course.module'
 // import { CardHomeDiscussModule } from './card-home-discuss/card-home-discuss.module'
-import { ChannelHubComponent } from './channel-hub/channel-hub.component'
-import { ChannelHubModule } from './channel-hub/channel-hub.module'
 import { ROOT_WIDGET_CONFIG } from './collection.config'
 import { ContentStripMultipleComponent } from './content-strip-multiple/content-strip-multiple.component'
 import { ContentStripNewMultipleComponent } from './content-strip-new-multiple/content-strip-new-multiple.component'
@@ -88,7 +79,6 @@ import { LayoutLinearModule } from './layout-linear/layout-linear.module'
 import { LayoutTabComponent } from './layout-tab/layout-tab.component'
 import { LayoutTabModule } from './layout-tab/layout-tab.module'
 import { NetworkStripMultipleModule } from './network-strip-multiple/network-strip-multiple.module'
-import { CarrierStripMultipleModule } from './carrier-strip-multiple/carrier-strip-multiple.module'
 import { ActivityStripMultipleModule } from './activity-strip-multiple/activity-strip-multiple.module'
 import { NetworkStripMultipleComponent } from './network-strip-multiple/network-strip-multiple.component'
 import { ActivityStripMultipleComponent } from './activity-strip-multiple/activity-strip-multiple.component'
@@ -140,13 +130,8 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 // import { CardNetworkHomeComponent } from './card-network-home/card-network-home.component'
 // import { CardHomeDiscussComponent } from './card-home-discuss/card-home-discuss.component'
 // import { CardBrowseCourseComponent } from './card-browse-course/card-browse-course.component'
-import { CardHubsListModule } from './card-hubs-list/card-hubs-list.module'
+
 // import { CardNetworkHomeModule } from './card-network-home/card-network-home.module'
-import { CardCourseComponent } from './card-course/card-course.component'
-import { CardCourseModule } from './card-course/card-course.module'
-import { CardCarrierHomeComponent } from './card-carrier-home/card-carrier-home.component'
-import { CardCarrierHomeModule } from './card-carrier-home/card-carrier-home.module'
-import { CarrierStripMultipleComponent } from './carrier-strip-multiple/carrier-strip-multiple.component'
 import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-strip-multiple.component'
 import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
 import { CardActivityComponent } from './card-activity/card-activity.component'
@@ -174,13 +159,10 @@ export const WIDGET_REGISTERED_MODULES = [
   BtnSettingsModule,
   CardBreadcrumbModule,
   CardContentModule,
-  CardChannelModule,
   // CardLearnModule,
   // CardWelcomeModule,
   // CardNetworkModule,
-  ChannelHubModule,
-  CardHomeNetworkModule,
-  CardHomeTopModule,
+
   // CardBrowseCourseModule,
   // CardHomeDiscussModule,
   ContentStripMultipleModule,
@@ -222,11 +204,6 @@ export const WIDGET_REGISTERED_MODULES = [
   IntranetSelectorModule,
   VideoWrapperModule,
   SlidersMobModule,
-  CardHubsListModule,
-  // CardNetworkHomeModule,
-  CardCourseModule,
-  CardCarrierHomeModule,
-  CarrierStripMultipleModule,
   DiscussStripMultipleModule,
   CardActivityModule,
   ActivityStripMultipleModule,
@@ -326,11 +303,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.card._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.card.channel,
-    component: CardChannelComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.content,
     component: CardContentComponent,
   },
@@ -369,11 +341,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   //   widgetSubType: ROOT_WIDGET_CONFIG.card.home_discuss,
   //   component: CardHomeDiscussComponent,
   // },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.channelHub._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.channelHub.channelHub,
-    component: ChannelHubComponent,
-  },
   {
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
@@ -418,11 +385,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.activityStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.activityStrip.multipleStrip,
     component: ActivityStripMultipleComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.carrierStrip._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.carrierStrip.multipleStrip,
-    component: CarrierStripMultipleComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.discussStrip._type,
@@ -579,20 +541,5 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.wrapper._type,
     widgetSubType: ROOT_WIDGET_CONFIG.wrapper.videoWrapper,
     component: VideoWrapperComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.card._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.card.home_hubs,
-    component: CardHubsListComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.card._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.card.home_course,
-    component: CardCourseComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.card._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.card.home_carrier,
-    component: CardCarrierHomeComponent,
   },
 ]
