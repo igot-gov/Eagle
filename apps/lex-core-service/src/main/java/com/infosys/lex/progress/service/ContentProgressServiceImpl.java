@@ -209,6 +209,9 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		// get meta for the resource
 		Map<String, Boolean> ret = new HashMap<>();
 		Map<String, Object> temp = this.getMetaForResource(rootOrg, contentId, userUUID);
+		System.out.println("temp:: "+temp);
+		System.out.println("rootOrg:: "+rootOrg+" userUUID:: "+userUUID +" resourceInfo.getContent_type():: "+resourceInfo.getContent_type() +" contentId::"+contentId);
+
 
 		// get the progress of the resource
 		ContentProgressModel resourceProgress = contentProgressRepo.findById(
