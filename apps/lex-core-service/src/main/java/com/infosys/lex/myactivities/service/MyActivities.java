@@ -78,9 +78,8 @@ public class MyActivities implements IMyActivities {
 
     @Override
     public Activity userTimeSpentOnTraning(String rootOrg, String userId) {
-        List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
-        List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getContextPathId()).collect(Collectors.toList());
-        System.out.println("userTimeSpentOnTraning contentIds :: "+contentIds);
+//        List<ContinueLearningMV> continueLearningMVS = continueLearningMVRepository.findByRootOrgAndUserId(rootOrg, userId);
+//        List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getContextPathId()).collect(Collectors.toList());
 
         List<ContentProgressModel> progress = contentProgressRepository.findTime(rootOrg, userId);
         System.out.println("userTimeSpentOnTraning progress size:: "+progress.size());
@@ -92,7 +91,7 @@ public class MyActivities implements IMyActivities {
 
             long diff = model.getLastAccessedOn().getTime() - model.getFirstAccessedOn().getTime();
             System.out.println("userTimeSpentOnTraning diff :: "+diff);*/
-            System.out.println("user TimeSpent for content: "+ model.getPrimaryKey().getContentId() + " :: "+model.getTimespent());
+            //System.out.println("user TimeSpent for content: "+ model.getPrimaryKey().getContentId() + " :: "+model.getTimespent());
 
             totalDuration = totalDuration + TimeUnit.SECONDS.toHours(model.getTimespent().longValue());
 
