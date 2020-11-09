@@ -100,7 +100,7 @@ router.get("/goal/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://d136953gtttd92.cloudfront.net/app/goals/me/all">
+                  <a href="https://${req.get('host')}/app/goals/me/all">
                     <img src="${goal.resource_progress[0].appIcon}" alt="${goal.goal_title}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${goal.goal_title}</p>

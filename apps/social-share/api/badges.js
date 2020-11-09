@@ -107,7 +107,7 @@ router.get("/badge/:userId/:id", function (req, res) {
             </head>
             <body>
               <div class="card-container">
-                <a href="https://d136953gtttd92.cloudfront.net/app/profile/competency/badges">
+                <a href="https://${req.get('host')}/app/profile/competency/badges">
                   <div class="image-container">
                     <img
                       class="badge-img"

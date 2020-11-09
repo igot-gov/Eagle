@@ -3,9 +3,7 @@ const router = express.Router();
 var request = require("request");
 request.gzip = true;
 
-router.get("/toc/:userId/:id", function (req, res) {
-  console.log(req.get('host'))
-  console.log(req.get('origin'))
+router.get("/toc/:userId/:id", function (req, res) { 
   console.log("api service started"); 
   let URL = `http://lex-core:7001/v1/content/hierarchy/${req.params.id}?hierarchyType=minimal`;
   let data;
@@ -102,14 +100,12 @@ router.get("/toc/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://d136953gtttd92.cloudfront.net/app/toc/${req.params.id}/overview">
+                  <a href="https://${req.get('host')}/app/toc/${req.params.id}/overview">
                     <img src="${data.appIcon}" alt="${data.name}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${data.name}</p>
-                      <p class="desc">${data.description}</p>
-                      <p>${req.get('host')}</p>
-                      <p>${req.get('origin')}</p>
-                    </div>  
+                      <p class="desc">${data.description}</p>                  
+                     </div>  
                   </a>   
                 </div>                       
               </body>

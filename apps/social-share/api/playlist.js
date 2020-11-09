@@ -89,7 +89,7 @@ router.get("/playlist/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://d136953gtttd92.cloudfront.net/app/playlist/me/${req.params.id}">
+                  <a href="https://${req.get('host')}/app/playlist/me/${req.params.id}">
                     <img src="${data.appIcon}" alt="${playlist.playlistTitle}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${playlist.playlistTitle}</p>                     
