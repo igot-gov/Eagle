@@ -1,0 +1,5 @@
+<button name="add-to-goals-icon-button" *ngIf="isGoalsEnabled && isValidContent" mat-icon-button i18n-aria-label
+  class="ws-mat-primary-text" aria-label="Goal" (click)="openDialog()"
+  [disabled]="widgetData?.isDisabled || status==='Deleted'">
+  <mat-icon>adjust</mat-icon>
+</button>

@@ -28,7 +28,7 @@
   "defaultLocale": "",
   "defaultThemeClass": "theme-igot",
   "details": {
-    "appName": "iGoT"
+    "appName": "MDO-iGOT"
   },
   "disablePidCheck": true,
   "isContentDownloadAvailable": false,
@@ -226,26 +226,6 @@
   "themes": [
     {
       "color": {
-        "accent": "#607d8b",
-        "primary": "#9e9e9e",
-        "warn": "#f44336"
-      },
-      "themeFile": "theme-grey",
-      "themeClass": "theme-grey",
-      "themeName": "Grey Theme"
-    },
-    {
-      "color": {
-        "accent": "#607d8b",
-        "primary": "#673ab7",
-        "warn": "#f44336"
-      },
-      "themeFile": "theme-deep-purple",
-      "themeClass": "theme-deep-purple",
-      "themeName": "Deep Purple Theme"
-    },
-    {
-      "color": {
         "accent": "#00A9F4",
         "primary": "#ffffff",
         "warn": "#f44336"
@@ -253,46 +233,6 @@
       "themeFile": "theme-igot",
       "themeClass": "theme-igot",
       "themeName": "iGOT Theme"
-    },
-    {
-      "color": {
-        "accent": "#607d8b",
-        "primary": "#3f51b5",
-        "warn": "#f44336"
-      },
-      "themeFile": "theme-indigo",
-      "themeClass": "theme-indigo",
-      "themeName": "Indigo Theme"
-    },
-    {
-      "color": {
-        "accent": "#607d8b",
-        "primary": "#03a9f4",
-        "warn": "#f44336"
-      },
-      "themeFile": "theme-lite-blue",
-      "themeClass": "theme-lite-blue",
-      "themeName": "Lite Blue Theme"
-    },
-    {
-      "color": {
-        "accent": "#009688",
-        "primary": "#ff9800",
-        "warn": "#f44336"
-      },
-      "themeFile": "theme-orange",
-      "themeClass": "theme-orange",
-      "themeName": "Orange Theme"
-    },
-    {
-      "color": {
-        "accent": "#af235f",
-        "primary": "#005f87",
-        "warn": "#f44336"
-      },
-      "themeFile": "theme-teal",
-      "themeClass": "theme-teal",
-      "themeName": "Teal Theme"
     }
   ],
   "validMailIdExtensionsForMailMe": [
@@ -318,6 +258,19 @@
             "className": "fixtopMargin",
             "config": {
               "actionBtnId": "feature_home",
+              "type": "card-mini",
+              "hideTitle": true
+            }
+          }
+        },
+        {
+          "type": "featureButton",
+          "config": {
+            "actionBtnId": "feature_dashboard_v2",
+            "toolTip": "Dashboard",
+            "className": "fixtopMargin",
+            "config": {
+              "actionBtnId": "feature_dashboard_v2",
               "type": "card-mini",
               "hideTitle": true
             }

@@ -1,0 +1,24 @@
+<video crossorigin="Anonymous" #videoTag *ngIf="widgetData?.isVideojs"
+  class="video-js vjs-default-skin vjs-big-play-centered">
+
+  <source [src]="widgetData.url" />
+  <source [src]="widgetData.url" type="video/mp4" />
+  <source [src]="widgetData.url" type="application/x-mpegURL" />
+
+  <!-- <track kind="captions"
+    src="/apis/authContent/content-store/igot/dopt/Public/lex_auth_013114377081208832249/assets/sample1600885058308.vtt"
+    srclang="en" label="English" default> -->
+  <track kind="captions" *ngIf="widgetData.subtitles" [src]="widgetData?.subtitles[0]?.url" srclang="en" label="English"
+    default>
+</video>
+
+<video crossorigin="Anonymous" [poster]="widgetData?.posterImage" #realvideoTag class="video-js"
+  *ngIf="!widgetData?.isVideojs" controls>
+  <source [src]="widgetData.url" type="video/mp4" />
+  <source [src]="widgetData.url" type="application/x-mpegURL" />
+  <!-- <track kind="captions"
+    src="/apis/authContent/content-store/igot/dopt/Public/lex_auth_013114377081208832249/assets/sample1600885058308.vtt"
+    srclang="en" label="English" default> -->
+  <track kind="captions" *ngIf="widgetData.subtitles" [src]="widgetData?.subtitles[0]?.url" srclang="en" label="English"
+    default>
+</video>

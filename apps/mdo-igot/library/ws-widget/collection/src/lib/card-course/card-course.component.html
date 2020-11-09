@@ -1,0 +1,33 @@
+<!-- <app-discuss-tags></app-discuss-tags> -->
+<!-- <mat-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
+          (ratingUpdated)="onRatingChanged($event)"></mat-star-rating> -->
+<!-- <star-rating-comp [starType]="'svg'" [rating]="2.63"></star-rating-comp> -->
+<section class="base-layout">
+  <h2>Learn | Continue Learning</h2>
+  <div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 sm:grid-cols-3 col-gap-4">
+      <div *ngFor="let item of items">
+        <mat-card class="example-card">
+          <img mat-card-image
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSgawpDbN71GWFMCgAW35s-C6CCptCPnolJDQ&usqp=CAU"
+            alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <h4><b>Basic of Admnistrative Law</b></h4>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            </p>
+          </mat-card-content>
+          <mat-chip-list>
+            <mat-chip>Chip 1</mat-chip>
+            <mat-chip>Chip 2</mat-chip>
+          </mat-chip-list>
+
+          <mat-card-actions>
+            <mat-progress-bar value="40"></mat-progress-bar>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</section>

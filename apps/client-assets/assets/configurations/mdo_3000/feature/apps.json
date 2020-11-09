@@ -149,6 +149,25 @@
       "url": "/app/network-v2",
       "shortName": "Network"
     },
+    "feature_dashboard_v2": {
+      "accessKey": "D",
+      "icon": "bar_chart",
+      "iconType": "mat-icon",
+      "id": "feature_dashboard_v2",
+      "keywords": [
+        "home",
+        "dashboard"
+      ],
+      "name": "Home",
+      "permission": [
+        "DASHBOARD"
+      ],
+      "show": true,
+      "status": "live",
+      "toolTip": "Dashboard",
+      "url": "/page/home",
+      "shortName": "Home"
+    },
     "feature_frac": {
       "accessKey": "A",
       "icon": "airplay",

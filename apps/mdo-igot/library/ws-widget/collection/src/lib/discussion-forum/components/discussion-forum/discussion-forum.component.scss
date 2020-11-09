@@ -1,0 +1,71 @@
+@import 'ws-vars';
+
+.discussion-header {
+  padding: $size-s;
+  background: #fff !important;
+
+  .question-container {
+    display: flex;
+    justify-content: space-between;
+
+    .user-image {
+      $size: 55px;
+      width: $size;
+      height: $size;
+      margin-right: 5px;
+    }
+
+    .editor {
+      min-height: 50px;
+      // padding: $size-s;
+      // padding-bottom: $size-s;
+    }
+  }
+
+  .btn-container .discussion-forum-action-button {
+    background: #00A9F4 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    background-color: #00A9F4 !important;
+    color: #fff !important;
+    height: 30px;
+    line-height: 22px;
+    padding: 5px 15px;
+    width: auto;
+    box-shadow: none !important;
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+}
+
+.discussion-body {
+  margin-top: $size-m;
+
+  .no-conversation {
+    font-size: 1.2em;
+    padding: $size-s;
+    text-align: center;
+  }
+}
+
+::ng-deep.ql-container {
+  border: 1px solid #0074b6;
+  border-radius: 8px;
+}
+
+::ng-deep.ql-editor {
+  background: #fff;
+  border-radius: 8px;
+}
+
+::ng-deep.ql-editor.ql-blank::before {
+  font-style: normal;
+  text-align: left;
+  // font: 12px/14px Poppins-regular;
+  letter-spacing: 0px;
+  color: #00A9F4;
+  opacity: 0.5;
+  bottom: 15px;
+  top: 15px;
+}

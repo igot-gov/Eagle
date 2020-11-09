@@ -1,0 +1,27 @@
+<ng-container [ngSwitch]="displayContentType">
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.VIDEO">play_circle_outline
+  </mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.AUDIO">music_video</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.PDF">picture_as_pdf</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.QUIZ">help_outline</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.ASSESSMENT">help</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.YOUTUBE">play_circle_outline
+  </mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.INTERACTIVE_VIDEO">
+    featured_video</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.WEB_MODULE">book</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.HANDS_ON">code</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.IAP">code</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.INSTRUCTOR_LED">class
+  </mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.CERTIFICATION">school
+  </mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.MODULE">folder</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.COURSE">folder</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.PROGRAM">folder</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.CLASS_DIAGRAM">folder
+  </mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.EXTERNAL_CERTIFICATION">school</mat-icon>
+  <mat-icon *ngSwitchCase="displayContentTypeEnum.WEB_PAGE">web</mat-icon>
+  <mat-icon *ngSwitchDefault>web_asset</mat-icon>
+</ng-container>

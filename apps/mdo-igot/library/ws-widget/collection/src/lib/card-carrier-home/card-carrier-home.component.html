@@ -1,0 +1,35 @@
+<mat-card class="carrier-card cursor-pointer mr-6" (click)="getCareer(carrier)">
+  <mat-card-header>
+    <mat-card-title>
+      <a href="javascript:void(0)" role="link" i18n-aria-label>
+        <h2 class="cursor-pointer f-medium">{{carrier.title}}</h2>
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle class="responsive">
+      <span class="flex ws-mat-default-text">
+        <mat-icon svgIcon="category_xs"></mat-icon>{{carrier?.category}}
+      </span>
+      <span class="dot" *ngIf="carrier?.timeinfo">{{carrier?.timeinfo | pipeRelativeTime}}</span>
+      <span class="dot" *ngIf="!(carrier?.timeinfo)">{{'Time Info Not Available'}}</span>
+      <!-- <span class="margin-left-l">{{carrier.timestamp | pipeRelativeTime}}</span> -->
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="flex flex-1 flex-row margin-left-xs">
+      <span class="flex mobile">
+        {{carrier?.description}}
+      </span>
+    </div>
+  </mat-card-content>
+  <mat-card-footer class="flex flex-1 custom margin-0">
+    <div class="flex flex-1 flex-row margin-left-xs">
+      <span class="flex mobile">
+        <mat-icon>trending_up</mat-icon>
+        <span class="pad-4">{{carrier.count || 0}}&nbsp;views</span>
+      </span>
+    </div>
+    <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+      <span class="noocoments ws-mat-default-text">Read More</span>
+    </div>
+  </mat-card-footer>
+</mat-card>

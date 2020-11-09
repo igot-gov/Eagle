@@ -1,0 +1,148 @@
+<div class="flex flex-4 flex-column">
+  <mat-card class="flex-custom" [attr.id]='tabsData && tabsData[0] && tabsData[0].key'>
+    <mat-card-header class="flex-custom-m" *ngIf="portalProfile && portalProfile.personalDetails">
+      <div mat-card-avatar class="example-header-image">
+        <ws-widget-avatar-photo [photoUrl]="portalProfile.photo || null"
+          [name]="(portalProfile.personalDetails.firstname +' ' + portalProfile.personalDetails.surname)" size="xxl-s">
+        </ws-widget-avatar-photo>
+      </div>
+      <div class="flex-1">
+        <div class="flex flex-1">
+          <mat-card-title role="link" tabindex="0" class="flex-4 mobile-margin text-capitalize mat-h2"
+            [innerHTML]="portalProfile.personalDetails.firstname + ' '+ portalProfile.personalDetails.middlename + ' ' + portalProfile.personalDetails.surname">
+          </mat-card-title>
+          <div class="flex flex-1 flex-row-reverse">
+            <div *ngIf="portalProfile.id === currentUser"
+              class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
+              <a mat-button [routerLink]="'/app/user-profile/details'">
+                <mat-icon class="margin-right-xs">edit</mat-icon>
+                <span i18n>{{'Edit Profile'}}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <mat-card-subtitle role="link" tabindex="0" i18n-aria-label>
+          {{portalProfile?.employmentDetails?.departmentName}}
+        </mat-card-subtitle>
+        <mat-card-subtitle role="link" tabindex="0" i18n-aria-label>
+          {{portalProfile?.employmentDetails?.officialPostalAddress}}
+        </mat-card-subtitle>
+        <!-- <mat-card-subtitle>{{discussProfileData.email}}</mat-card-subtitle> -->
+        <ng-container>
+          <div class="flex flex-1 custom margin-0 margin-top-m bottom-fix mob" role="link" tabindex="0">
+            <div class="flex flex-1">
+              <span class="flex margin-right-l mobile">
+                <span class="ws-mat-default-text">{{connectionRequests?.length}}</span>
+                <span class="pad-4">Connections</span>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <!-- {{discussProfileData | json}} -->
+                <span class="ws-mat-default-text">{{Math.abs(discussProfileData?.topiccount || 0) }}</span>
+                <span class="pad-4">Discussions</span>
+              </span>
+            </div>
+            <!-- <div class="flex flex-1" class="text-right mobile2">
+
+                <span class="noocoments" mat-card-subtitle>Last online
+                  {{discussProfileData.lastonline | pipeRelativeTime}}</span>
+              </div> -->
+          </div>
+        </ng-container>
+      </div>
+    </mat-card-header>
+    <mat-card-header class="flex-custom-m" *ngIf="!portalProfile || !portalProfile.personalDetails">
+      <div class="flex-1" role="link" tabindex="0">
+        <div class="flex flex-1">
+          <mat-card-title class="flex-4 mobile-margin text-capitalize mat-h2">
+            No Information Available
+          </mat-card-title>
+        </div>
+      </div>
+    </mat-card-header>
+  </mat-card>
+
+  <div class="flex flex-1 custom">
+    <div class="flex-1" style="position: relative;">
+      <div #stickyMenu [class.sticky]="sticky">
+        <app-profile-v2-left-menu [tabsData]="tabsData" class="flex flex-1"></app-profile-v2-left-menu>
+      </div>
+    </div>
+    <div class="flex-3">
+      <ng-container *ngFor="let tab of tabsData">
+        <!-- <ws-widget-profile-v2-academics *ngIf="pdfData" [widgetData]="tab"></ws-widget-profile-v2-academics> -->
+        <ng-container *ngIf="tab && tab.render && tab.enabled" [wsResolverWidget]="{
+                'widgetType': tab.widget.widgetType,
+                'widgetSubType': tab.widget.widgetSubType,
+                'widgetHostClass': tab.widget.widgetHostClass,
+                'widgetData': {
+                  name: tab.name,
+                  key: tab.key,
+                  data: portalProfile[tab.dataKey]
+                }
+          }"></ng-container>
+      </ng-container>
+      <ng-container *ngIf="discussionList">
+        <mat-card [attr.id]='discussions' class="margin-left-xs margin-top-xs margin-botton-xs dark-card"
+          style="box-shadow: none;">
+          <!-- <mat-card-header> -->
+
+          <!-- </mat-card-header> -->
+          <mat-card-content>
+            <div class="flex flex-1">
+              <span class="mat-h3 font-medium flex-1">{{'Discussions'}}</span>
+              <!-- <div
+                class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
+                <a mat-button [routerLink]="'/app/discuss/my-discussions'">
+                   <span i18n>{{'Go to discussion profile'}}</span>
+                </a>
+              </div> -->
+            </div>
+            <ng-container>
+              <mat-card class="recent-tabs">
+                <div class="flex flex-1 flex-column">
+                  <div class="flex flex-1 filter flex-wrap">
+                    <a href="javascript:void(0)" class="filter-option font-normal" i18n-aria-label role="button"
+                      [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                                                'ws-mat-accent-border font-medium':currentFilter !== 'timestamp'}"
+                      mat-button (click)="filter('timestamp')">
+                      Recent posts </a>
+                    <a href="javascript:void(0)" class="filter-option" i18n-aria-label role="button" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
+                                                'ws-mat-accent-border font-medium':currentFilter !== 'best'}"
+                      mat-button (click)="filter('best')">
+                      Best posts </a>
+                    <a href="javascript:void(0)" class="filter-option" i18n-aria-label role="button"
+                      [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
+                                                            'ws-mat-accent-border font-medium':currentFilter !== 'saved'}" mat-button (click)="filter('saved')"
+                      *ngIf="portalProfile.id === currentUser">
+                      Saved posts </a>
+                  </div>
+                </div>
+              </mat-card>
+            </ng-container>
+            <ng-container *ngIf="discussionList && discussionList.length > 0">
+              <ng-container *ngFor="let data of discussionList">
+                <app-dicuss-post-card [discuss]="data"></app-dicuss-post-card>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!(discussionList && discussionList.length > 0)">
+              <mat-card class="no-shadow mat-card margin-bottom-l">
+                <mat-card-header>
+                  <mat-card-title>No Data</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                  <span>&nbsp;</span>
+                </mat-card-content>
+              </mat-card>
+            </ng-container>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div class="flex flex-1 custom">
+      <div class="flex-1" style="position: relative;">
+        <div #stickyMenu [class.sticky]="sticky">
+          <app-profile-v2-right-menu class="flex flex-1"></app-profile-v2-right-menu>
+        </div>
+      </div>
+    </div>
+  </div>
