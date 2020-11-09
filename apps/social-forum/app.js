@@ -6,6 +6,8 @@ var helmet = require('helmet') // Helmet includes HSTS as a built-in header
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var healthcheck = require('express-healthcheck')
+
 
 var followRouter = require('./routes/follow/index');
 var authToolRouter = require('./routes/authTool/index')
@@ -27,6 +29,11 @@ app.use(function(req,res,next){
     next();
 })
 
+app.use('/healthcheck', healthcheck({
+    healthy() {
+      return { everything: 'is ok' }
+    },
+  }))
 app.use('/', followRouter);
 app.use('/authtool',authToolRouter)
 app.use('/useractivity',userActivityRouter)

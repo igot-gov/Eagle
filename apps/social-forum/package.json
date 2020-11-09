@@ -16,6 +16,7 @@
     "debug": "~2.6.9",
     "elasticsearch": "^15.3.1",
     "express": "~4.16.0",
+    "express-healthcheck": "^0.1.0",
     "helmet": "^3.18.0",
     "http-errors": "~1.6.2",
     "kafka-node": "^4.1.3",
