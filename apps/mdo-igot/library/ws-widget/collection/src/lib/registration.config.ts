@@ -10,10 +10,6 @@ import { BtnCatalogComponent } from './btn-catalog/btn-catalog.component'
 import { BtnCatalogModule } from './btn-catalog/btn-catalog.module'
 import { BtnChannelAnalyticsComponent } from './btn-channel-analytics/btn-channel-analytics.component'
 import { BtnChannelAnalyticsModule } from './btn-channel-analytics/btn-channel-analytics.module'
-import { BtnContentDownloadComponent } from './btn-content-download/btn-content-download.component'
-import { BtnContentDownloadModule } from './btn-content-download/btn-content-download.module'
-import { BtnContentFeedbackComponent } from './btn-content-feedback/btn-content-feedback.component'
-import { BtnContentFeedbackModule } from './btn-content-feedback/btn-content-feedback.module'
 import { BtnContentLikeComponent } from './btn-content-like/btn-content-like.component'
 import { BtnContentLikeModule } from './btn-content-like/btn-content-like.module'
 import { BtnContentMailMeComponent } from './btn-content-mail-me/btn-content-mail-me.component'
@@ -24,8 +20,6 @@ import { BtnFeatureComponent } from './btn-feature/btn-feature.component'
 import { BtnFeatureModule } from './btn-feature/btn-feature.module'
 import { BtnFullscreenComponent } from './btn-fullscreen/btn-fullscreen.component'
 import { BtnFullscreenModule } from './btn-fullscreen/btn-fullscreen.module'
-import { BtnGoalsComponent } from './btn-goals/btn-goals.component'
-import { BtnGoalsModule } from './btn-goals/btn-goals.module'
 import { BtnMailUserComponent } from './btn-mail-user/btn-mail-user.component'
 import { BtnMailUserModule } from './btn-mail-user/btn-mail-user.module'
 import { BtnPageBackComponent } from './btn-page-back/btn-page-back.component'
@@ -56,8 +50,6 @@ import { ContentStripMultipleModule } from './content-strip-multiple/content-str
 import { ContentStripNewMultipleModule } from './content-strip-new-multiple/content-strip-new-multiple.module'
 import { ContentStripSingleComponent } from './content-strip-single/content-strip-single.component'
 import { ContentStripSingleModule } from './content-strip-single/content-strip-single.module'
-import { DiscussionForumComponent } from './discussion-forum/components/discussion-forum/discussion-forum.component'
-import { DiscussionForumModule } from './discussion-forum/discussion-forum.module'
 import { ElementHtmlComponent } from './element-html/element-html.component'
 import { ElementHtmlModule } from './element-html/element-html.module'
 import { EmbeddedPageComponent } from './embedded-page/embedded-page.component'
@@ -123,8 +115,7 @@ import { TreeCatalogComponent } from './tree-catalog/tree-catalog.component'
 import { TreeCatalogModule } from './tree-catalog/tree-catalog.module'
 import { TreeComponent } from './tree/tree.component'
 import { TreeModule } from './tree/tree.module'
-import { VideoWrapperComponent } from './video-wrapper/video-wrapper.component'
-import { VideoWrapperModule } from './video-wrapper/video-wrapper.module'
+
 import { ContentStripVerticalModule } from './content-strip-vertical/content-strip-vertical.module'
 import { ContentStripVerticalComponent } from './content-strip-vertical/content-strip-vertical.component'
 // import { CardNetworkHomeComponent } from './card-network-home/card-network-home.component'
@@ -132,10 +123,6 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 // import { CardBrowseCourseComponent } from './card-browse-course/card-browse-course.component'
 
 // import { CardNetworkHomeModule } from './card-network-home/card-network-home.module'
-import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-strip-multiple.component'
-import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
-import { CardActivityComponent } from './card-activity/card-activity.component'
-import { CardActivityModule } from './card-activity/card-activity.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -143,13 +130,11 @@ export const WIDGET_REGISTERED_MODULES = [
   BtnCallModule,
   BtnCatalogModule,
   BtnChannelAnalyticsModule,
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+
   BtnContentLikeModule,
   BtnContentMailMeModule,
   // BtnContentShareModule,
   BtnFullscreenModule,
-  BtnGoalsModule,
   BtnMailUserModule,
   BtnPageBackNavModule,
   BtnPageBackModule,
@@ -195,17 +180,14 @@ export const WIDGET_REGISTERED_MODULES = [
   ProfileHobbiesModule,
   EmbeddedPageModule,
   SelectorResponsiveModule,
-  DiscussionForumModule,
   GridLayoutModule,
   ErrorResolverModule,
   BtnFeatureModule,
   GalleryViewModule,
   ImageMapResponsiveModule,
   IntranetSelectorModule,
-  VideoWrapperModule,
   SlidersMobModule,
-  DiscussStripMultipleModule,
-  CardActivityModule,
+
   ActivityStripMultipleModule,
 ]
 
@@ -232,16 +214,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.actionButton.contentDownload,
-    component: BtnContentDownloadComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.actionButton.contentFeedback,
-    component: BtnContentFeedbackComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
     widgetSubType: ROOT_WIDGET_CONFIG.actionButton.contentLike,
     component: BtnContentLikeComponent,
   },
@@ -259,11 +231,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
     widgetSubType: ROOT_WIDGET_CONFIG.actionButton.fullscreen,
     component: BtnFullscreenComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.actionButton.goals,
-    component: BtnGoalsComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
@@ -306,41 +273,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetSubType: ROOT_WIDGET_CONFIG.card.content,
     component: CardContentComponent,
   },
-  // {
-  //   widgetType: ROOT_WIDGET_CONFIG.card._type,
-  //   widgetSubType: ROOT_WIDGET_CONFIG.card.learning,
-  //   component: CardLearnComponent,
-  // },
-  // {
-  //   widgetType: ROOT_WIDGET_CONFIG.card._type,
-  //   widgetSubType: ROOT_WIDGET_CONFIG.card.welcome,
-  //   component: CardWelcomeComponent,
-  // },
-  // {
-  //   widgetType: ROOT_WIDGET_CONFIG.card._type,
-  //   widgetSubType: ROOT_WIDGET_CONFIG.card.network,
-  //   component: CardNetworkComponent,
-  // },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.card._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.card.home_activity,
-    component: CardActivityComponent,
-  },
-  // {
-  //   widgetType: ROOT_WIDGET_CONFIG.card._type,
-  //   widgetSubType: ROOT_WIDGET_CONFIG.card.browse_course,
-  //   component: CardBrowseCourseComponent,
-  // },
-  // {
-  //   widgetType: ROOT_WIDGET_CONFIG.card._type,
-  //   widgetSubType: ROOT_WIDGET_CONFIG.card.home_network,
-  //   component: CardNetworkHomeComponent,
-  // },
-  // {
-  //   widgetType: ROOT_WIDGET_CONFIG.card._type,
-  //   widgetSubType: ROOT_WIDGET_CONFIG.card.home_discuss,
-  //   component: CardHomeDiscussComponent,
-  // },
   {
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.contentStrip.multiStrip,
@@ -385,11 +317,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.activityStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.activityStrip.multipleStrip,
     component: ActivityStripMultipleComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.discussStrip._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.discussStrip.multipleStrip,
-    component: DiscussStripMultipleComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.player._type,
@@ -503,11 +430,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     component: SelectorResponsiveComponent,
   },
   {
-    widgetType: ROOT_WIDGET_CONFIG.discussionForum._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.discussionForum.discussionForum,
-    component: DiscussionForumComponent,
-  },
-  {
     widgetType: ROOT_WIDGET_CONFIG.layout._type,
     widgetSubType: ROOT_WIDGET_CONFIG.layout.grid,
     component: GridLayoutComponent,
@@ -536,10 +458,5 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.selector._type,
     widgetSubType: ROOT_WIDGET_CONFIG.selector.intranet,
     component: IntranetSelectorComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.wrapper._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.wrapper.videoWrapper,
-    component: VideoWrapperComponent,
   },
 ]
