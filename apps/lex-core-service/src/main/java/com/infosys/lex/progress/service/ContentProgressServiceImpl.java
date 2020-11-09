@@ -414,6 +414,7 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		
 //		System.out.println(contentProgressMap);
 		// content progress
+		System.out.println("##rootOrg:: "+rootOrg+" userUUID:: "+userUUID +" Content_type():: "+hierarchy.get("content_type_set") +" contentId::"+contentIds);
 		List<ContentProgressModel> contentProgressList = contentProgressRepo.getProgress(rootOrg, userUUID,
 				new ArrayList<String>((Set<String>) hierarchy.get("content_type_set")), contentIds);
 //		System.out.println(contentProgressList);
