@@ -166,7 +166,7 @@ public class ContentProgressModel {
 
 
 	public ContentProgressModel(ContentProgressPrimaryKeyModel primaryKey, Float progress, Date lastTS,
-			Date dateUpdated, Date lastAccessedOn, Date firstCompletedOn, Date firstAccessedOn, Set<Float> visitedSet,
+			Date dateUpdated, Date lastAccessedOn, Date firstCompletedOn, Date firstAccessedOn, float timespent, Set<Float> visitedSet,
 			List<String> parentList, List<String> childrenList) {
 		super();
 		this.primaryKey = primaryKey;
@@ -180,6 +180,7 @@ public class ContentProgressModel {
 		this.visitedSet = visitedSet;
 		this.parentList = parentList;
 		this.childrenList = childrenList;
+		this.timespent = timespent;
 	}
 
 	public ContentProgressModel(ContentProgressPrimaryKeyModel primaryKey) {
