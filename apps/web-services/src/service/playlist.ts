@@ -8,8 +8,10 @@ import {
   IPlaylistSbExtSyncRequest,
   IPlaylistSbUpdateRequest,
   IPlaylistSyncRequest,
+  IPlayListUpdateRequest,
   IPlaylistUpdateTitleRequest,
-  IPlaylistUpsertRequest
+  IPlaylistUpsertRequest,
+
 } from '../models/playlist.model'
 
 function transformToPlaylistBase(playlistSbExt: IPlaylistSbExtBase): IPlaylist {
@@ -87,5 +89,13 @@ export function transformToSbExtUpdateRequest(updateRequest: IPlaylistUpdateTitl
     content_ids: updateRequest.content_ids.map((content) => content.identifier),
     playlist_title: updateRequest.playlist_title,
     visibility: updateRequest.visibility,
+  }
+}
+
+export function transformToSbExtPatchRequest(updateRequest: IPlayListUpdateRequest): IPlaylistSbUpdateRequest {
+  /* for Patch request to change playlist title */
+  return {
+    content_ids: updateRequest.contentIds.map((content) => content.identifier),
+    playlist_title: updateRequest.playlist_title,
   }
 }

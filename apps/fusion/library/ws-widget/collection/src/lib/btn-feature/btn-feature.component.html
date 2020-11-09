@@ -106,9 +106,12 @@
   <a role="link" matRipple routerLink={{actionBtn.url}} active [wsWidgetUrlResolver]="actionBtn.isExternal"
     [attr.aria-label]="actionBtn.name" role="link" routerLinkActive="ws-mat-selected-home-menu"
     class="flex items-center flex-col px-4 box-sizing-box rem">
-    <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon>
-    <span *ngIf="!config.hideTitle" [ngClass]="instanceVal === 'RootOrg' && showFixedLength ? 'title font-sans' :
-      'mat-caption'">{{ actionBtn.name }}</span>
+    <!-- <mat-icon *ngIf="!config.hideIcon">{{ actionBtn.icon }}</mat-icon> -->
+    <!-- <span *ngIf="!config.hideTitle" Class="mat-caption">{{ actionBtn.name }}</span> -->
+    <ng-container [ngTemplateOutlet]="icon" [ngTemplateOutletContext]="{
+              iconType: widgetData.actionBtn.iconType,
+              icon: widgetData.actionBtn.icon
+            }"></ng-container>
   </a>
 </ng-template>
 <ng-template #featureItem let-actionBtn="actionBtn" let-config="config">
@@ -153,9 +156,9 @@
     </mat-icon>
   </ng-container>
   <ng-container *ngIf="badgeCount.length">
-    <mat-icon matBadge="{{ badgeCount }}" matBadgeColor="accent" aria-hidden="false" role="img" [attr.aria-label]="icon"
-      [attr.aria-labelledby]="icon" class="badge-notify" matBadgeSize="small" *ngIf="iconType === 'mat-icon'"
-      [color]="color" [ngStyle]="
+    <mat-icon matBadge="{{ badgeCount }}" matBadgeColor="warn" class="ws-mat-primary-default-text" aria-hidden="false"
+      role="img" [attr.aria-label]="icon" [attr.aria-labelledby]="icon" class="badge-notify" matBadgeSize="small"
+      *ngIf="iconType === 'mat-icon'" [color]="color" [ngStyle]="
         scale
           ? {
               'font-size': scale * defaultIconSize + 'px',

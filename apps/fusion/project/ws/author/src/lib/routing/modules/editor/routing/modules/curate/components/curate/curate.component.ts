@@ -452,6 +452,11 @@ export class CurateComponent implements OnInit, OnDestroy {
         this.currentStep += 1
         break
 
+      case 'fullscreen':
+      case 'fulls':
+        this.fullScreenToggle()
+        break
+
       case 'preview':
         this.preview()
         break
@@ -576,7 +581,13 @@ export class CurateComponent implements OnInit, OnDestroy {
 
   fullScreenToggle = () => {
     const doc: any = document
-    const elm: any = doc.getElementById('curate-container')
+    let elm: any = doc.getElementById('curate-container')
+    if (!elm) {
+      elm = doc.getElementById('edit-meta')
+    }
+    if (!elm) {
+      elm = doc.getElementById('auth-root')
+    }
     if (elm.requestFullscreen) {
       !doc.fullscreenElement ? elm.requestFullscreen() : doc.exitFullscreen()
     } else if (elm.mozRequestFullScreen) {

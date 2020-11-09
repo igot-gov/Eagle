@@ -9,7 +9,7 @@ import {
   IPlaylistParams,
   IPlaylistSbExtResponse,
   IPlaylistShareRequest,
-  IPlaylistUpdateTitleRequest,
+  IPlayListUpdateRequest,
   IPlaylistUpsertRequest
 } from '../../models/playlist.model'
 import {
@@ -17,8 +17,8 @@ import {
   transformToPlaylistV3,
   transformToSbExtCreateRequest,
   transformToSbExtDeleteRequest,
+  transformToSbExtPatchRequest,
   transformToSbExtSyncRequest,
-  transformToSbExtUpdateRequest,
   transformToSbExtUpsertRequest
 } from '../../service/playlist'
 import { CONSTANTS } from '../../utils/env'
@@ -398,17 +398,17 @@ playlistApi.patch('/:playlistId', async (req, res) => {
   /* Patch request to update the title of a playlist */
   const userId = extractUserIdFromRequest(req)
   try {
-    const request: IPlaylistUpdateTitleRequest = req.body
+    const request: IPlayListUpdateRequest = req.body
     const rootOrg = req.header('rootOrg')
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
     const playlistId = req.params.playlistId
-    const url = API_END_POINTS.playlistV1(userId)
+    const url = `${API_END_POINTS.playlistV1(userId)}`
     const response = await axios({
       ...axiosRequestConfig,
-      data: transformToSbExtUpdateRequest(request),
+      data: transformToSbExtPatchRequest(request),
       headers: {
         rootOrg,
       },
@@ -417,6 +417,7 @@ playlistApi.patch('/:playlistId', async (req, res) => {
     })
     res.status(response.status).send()
   } catch (err) {
+    logError(err)
     res
       .status((err && err.response && err.response.status) || 500)
       .send((err && err.response && err.response.data) || {
