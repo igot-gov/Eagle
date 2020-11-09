@@ -55,6 +55,9 @@ public class ContentProgressModel {
 	@Column("updated_by")
 	private String updatedBy;
 
+	@Column("time_spent")
+	private float timespent;
+
 	@Column("visited_set")
 	private Set<Float> visitedSet;
 
@@ -148,9 +151,19 @@ public class ContentProgressModel {
 		return childrenList;
 	}
 
+	public float getTimespent() {
+		return timespent;
+	}
+
+	public void setTimespent(float timespent) {
+		this.timespent = timespent;
+	}
+
 	public void setChildrenList(List<String> childrenList) {
 		this.childrenList = childrenList;
 	}
+
+
 
 	public ContentProgressModel(ContentProgressPrimaryKeyModel primaryKey, Float progress, Date lastTS,
 			Date dateUpdated, Date lastAccessedOn, Date firstCompletedOn, Date firstAccessedOn, Set<Float> visitedSet,

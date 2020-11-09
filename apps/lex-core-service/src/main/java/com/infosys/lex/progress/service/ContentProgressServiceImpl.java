@@ -155,6 +155,21 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 					new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(resourceInfo)));
 		}
 
+		try{
+			System.out.println("-----for content id-------::  "+contentId);
+			System.out.println("meta ::  "+new ObjectMapper().writeValueAsString(meta.get(contentId)));
+			System.out.println("contentProgressMap :: "+new ObjectMapper().writeValueAsString(contentProgressMap.get(contentId)));
+
+			ContentProgress cProgress = (ContentProgress)contentProgressMap.get(contentId);
+			ContentProgressModel cpm = (ContentProgressModel)meta.get(contentId);
+
+			cpm.setTimespent(cProgress.getDuration() * cProgress.getProgress());
+
+		}catch (Exception e){
+			e.printStackTrace();
+			System.out.println("-----Error stack on computing ts on progress -------::  "+contentId);
+		}
+
 		// updating in the db
 		contentProgressRepo.updateProgress(meta.values());
 		return "Success";
