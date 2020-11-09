@@ -82,7 +82,7 @@ public class MyActivities implements IMyActivities {
         List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getContextPathId()).collect(Collectors.toList());
         System.out.println("userTimeSpentOnTraning contentIds :: "+contentIds);
 
-        List<ContentProgressModel> progress = contentProgressRepository.findTime(rootOrg, userId, contentIds);
+        List<ContentProgressModel> progress = contentProgressRepository.findTime(rootOrg, userId);
         System.out.println("userTimeSpentOnTraning progress size:: "+progress.size());
 
         Long totalDuration = new Long(0);
