@@ -82,19 +82,19 @@ public class MyActivities implements IMyActivities {
         List<String> contentIds = continueLearningMVS.stream().map(mv -> mv.getContextPathId()).collect(Collectors.toList());
         System.out.println("userTimeSpentOnTraning contentIds :: "+contentIds);
 
-        List<ContentProgressModel> progress = contentProgressRepository.findProgress(rootOrg, userId, contentIds);
+        List<ContentProgressModel> progress = contentProgressRepository.findTime(rootOrg, userId, contentIds);
         System.out.println("userTimeSpentOnTraning progress size:: "+progress.size());
 
         Long totalDuration = new Long(0);
 
         for (ContentProgressModel model : progress) {
-            System.out.println("userTimeSpentOnTraning last :: "+model.getLastAccessedOn().getTime()+ "first::"+model.getFirstAccessedOn().getTime());
+            /*System.out.println("userTimeSpentOnTraning last :: "+model.getLastAccessedOn().getTime()+ "first::"+model.getFirstAccessedOn().getTime());
 
             long diff = model.getLastAccessedOn().getTime() - model.getFirstAccessedOn().getTime();
-            System.out.println("userTimeSpentOnTraning diff :: "+diff);
-            System.out.println("userTimeSpentOnTraning diff in hrs :: "+TimeUnit.MILLISECONDS.toHours(diff));
+            System.out.println("userTimeSpentOnTraning diff :: "+diff);*/
+            System.out.println("user TimeSpent for content: "+ model.getPrimaryKey().getContentId() + " :: "+model.getTimespent());
 
-            totalDuration = totalDuration + TimeUnit.MILLISECONDS.toHours(diff);
+            totalDuration = totalDuration + TimeUnit.SECONDS.toHours(model.getTimespent().longValue());
 
         }
 
