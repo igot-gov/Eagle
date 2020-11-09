@@ -81,6 +81,10 @@ export const ROOT_WIDGET_CONFIG = {
     tab: 'tabLayout',
     grid: 'gridLayout',
   },
+  menus: {
+    _type: 'menus',
+    leftMenu: 'leftMenu'
+  },
   player: {
     _type: 'player',
     amp: 'playerAmp',
