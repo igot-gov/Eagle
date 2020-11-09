@@ -36,7 +36,7 @@ router.get("/badge/:userId/:id", function (req, res) {
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
           let badgeImage= badge?badge.image:null;
           let imageName = (badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
-          imagePath=`${config.HTTPS_HOST}t/assets/instances/eagle/Achievements/Badges/assets/`+ imageName
+          imagePath=`${config.HTTPS_HOST}/assets/instances/eagle/Achievements/Badges/assets/`+ imageName
         }
         //badge = _.where(badges.earned, {badge_id: req.params.id});
         if (badge) {
