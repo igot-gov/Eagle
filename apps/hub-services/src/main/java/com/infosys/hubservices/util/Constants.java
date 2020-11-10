@@ -9,6 +9,18 @@ package com.infosys.hubservices.util;
 
 public class Constants {
 
+    public static enum Graph {
+        NODE("n"), NODEID("nodeId"), IDENTIFIER("identifier"), LEVEL("level"), TYPE("type")
+        , NAME("name"),RELATION_LABEL("IS_PARENT_OF");
+
+        private String value;
+
+        private Graph(String value) { this.value = value; }
+        public String getValue() {
+            return this.value;
+        }
+    }
+
     private static final String UTIL_CLASS = "Utility class";
 
     public enum STATUS { APPROVED, REJECTED, PENDING }

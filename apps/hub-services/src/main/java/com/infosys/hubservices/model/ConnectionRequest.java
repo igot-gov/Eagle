@@ -16,9 +16,69 @@ public class ConnectionRequest {
     private String userId;
     @NotNull
     private String connectionId;
+    // name - department = label
+    private String userName;
+    //
+    private String userDepartment;
+
+    public Integer getUserNodeId() {
+        return userNodeId;
+    }
+
+    public void setUserNodeId(Integer userNodeId) {
+        this.userNodeId = userNodeId;
+    }
+
+    public Integer getConnectionNodeId() {
+        return connectionNodeId;
+    }
+
+    public void setConnectionNodeId(Integer connectionNodeId) {
+        this.connectionNodeId = connectionNodeId;
+    }
+
+    // name - department = label
+    private String connectionName;
+    //
+    private String connectionDepartment;
     private String status;
     private String type;
     private Date endDate;
+    private Integer userNodeId;
+    private Integer connectionNodeId;
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserDepartment() {
+        return userDepartment;
+    }
+
+    public void setUserDepartment(String userDepartment) {
+        this.userDepartment = userDepartment;
+    }
+
+    public String getConnectionName() {
+        return connectionName;
+    }
+
+    public void setConnectionName(String connectionName) {
+        this.connectionName = connectionName;
+    }
+
+    public String getConnectionDepartment() {
+        return connectionDepartment;
+    }
+
+    public void setConnectionDepartment(String connectionDepartment) {
+        this.connectionDepartment = connectionDepartment;
+    }
 
     public Date getEndDate() {
         return endDate;

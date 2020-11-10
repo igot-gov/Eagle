@@ -17,8 +17,10 @@ import com.infosys.hubservices.model.cassandra.UserConnection;
 import com.infosys.hubservices.model.cassandra.UserConnectionPrimarykey;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
+import com.infosys.hubservices.service.IGraphService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
+import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import com.infosys.hubservices.model.Node;
 
 @Service
 public class ConnectionService implements IConnectionService {
@@ -48,58 +51,65 @@ public class ConnectionService implements IConnectionService {
     @Autowired
     private ConnectionProperties connectionProperties;
 
+    @Autowired
+    IGraphService graphService;
+
+
     @Override
-    public Response add(String rootOrg, ConnectionRequest request){
+    public Response add(String rootOrg, ConnectionRequest request) throws Exception{
+
         Response response = new Response();
         try {
 
-            logger.info("Add request: {}", mapper.writeValueAsString(request));
-            UserConnectionPrimarykey pk = new UserConnectionPrimarykey(rootOrg, request.getUserId(), request.getConnectionId());
-            UserConnection userConnection = new UserConnection(pk, Constants.Status.PENDING, "", new Date());
-            userConnectionRepository.save(userConnection);
+            Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+            Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+
+            graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
+
+//            if(connectionProperties.isNotificationEnabled())
+//                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
+
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
-            if(connectionProperties.isNotificationEnabled())
-                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
-
-
-
-        } catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
+
         return response;
 
     }
 
     @Override
-    public Response update(String rootOrg, ConnectionRequest request) {
+    public Response update(String rootOrg, ConnectionRequest request) throws Exception{
         Response response = new Response();
+
         try {
-            logger.info("update request: {}", mapper.writeValueAsString(request));
 
-            UserConnection userConnection = userConnectionRepository.findByUsersAndConnection(rootOrg, request.getUserId(), request.getConnectionId());
-            userConnection.setConnectionStatus(request.getStatus());
-            //as updated date
-            userConnection.setEndOn(request.getEndDate()==null? new Date() : request.getEndDate());
+            Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+            Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
 
-            userConnectionRepository.save(userConnection);
+            graphService.createNodeWithRelation(to, from, request.getStatus());
+            graphService.deleteRelation(from, to, Constants.Status.PENDING);
+
+//            if(connectionProperties.isNotificationEnabled())
+//                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
-            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
-            if(connectionProperties.isNotificationEnabled())
-                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
-
-        } catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
 
         }
 
         return response;
     }
+
 
     @Override
     public Response delete(String rootOrg, String userId, String connectionId) {
