@@ -13,7 +13,7 @@ import { ITableData, IColums } from '../../interface/interfaces'
 })
 export class UiTableComponent implements OnInit, AfterViewInit {
 
-  @Input() tableData: ITableData | undefined
+  @Input() tableData!: ITableData | undefined
   // @Input() columns?: IColums[]
   // @Input() columns?: IColums[];
   @Input() data?: []
@@ -24,21 +24,22 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   // @Input() actions: IAction[]
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
-  dataSource = new MatTableDataSource<any>()
+  dataSource!: any
 
   selection = new SelectionModel<any>(true, [])
-  @ViewChild(MatPaginator) paginator?: MatPaginator
-  @ViewChild(MatSort) sort?: MatSort
+  @ViewChild(MatPaginator, { static: true }) paginator?: MatPaginator
+  @ViewChild(MatSort, { static: true }) sort?: MatSort
 
   constructor() {
     // console.log('ui table', this.data)
+    this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
 
   }
 
   ngOnInit() {
-    this.displayedColumns = this.tableData.columns
+    this.displayedColumns = this.tableData?.columns
     this.dataSource.data = this.data
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
@@ -65,8 +66,8 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   buttonClick(action: string, row: any) {
     // console.log(action, row);
     /** debugger; */
-    const isDisabled = _.get(_.find(this.tableData.actions, ac => ac.name === action), 'disabled') || false
-    if (!isDisabled) {
+    const isDisabled = _.get(_.find(this.tableData?.actions, ac => ac.name === action), 'disabled') || false
+    if (!isDisabled && this.actionsClick) {
       this.actionsClick.emit({ action, row })
     }
   }
@@ -104,7 +105,7 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   masterToggle() {
     this.isAllSelected() ?
       this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row))
+      this.dataSource.data.forEach((row: any) => this.selection.select(row))
   }
 
   /** The label for the checkbox on the passed row */
