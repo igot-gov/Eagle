@@ -5,10 +5,17 @@ app.use(cors());
 let compress = require("compression");
 app.use(compress({ threshold: 0 }));
 let  env = require('./utils/environment')
+const healthcheck = require('express-healthcheck')
 
 
 const routes = require("./api/index");
 app.use("/", routes);
+app.use('/healthcheck', healthcheck({
+  healthy() {
+    return { everything: 'is ok' }
+  },
+}))
+
 
 const path = require("path");
 //const { stringify } = require("querystring");
