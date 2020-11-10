@@ -5,13 +5,12 @@ import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 import { MatPaginator } from '@angular/material'
 import { ITableData, IColums } from '../../interface/interfaces'
-
 @Component({
   selector: 'ws-widget-ui-table',
   templateUrl: './ui-table.component.html',
   styleUrls: ['./ui-table.component.scss'],
 })
-export class UiTableComponent implements OnInit, AfterViewInit {
+export class UITableComponent implements OnInit, AfterViewInit {
 
   @Input() tableData!: ITableData | undefined
   // @Input() columns?: IColums[]

@@ -70,6 +70,10 @@ export const ROOT_WIDGET_CONFIG = {
     _type: 'discussionForum',
     discussionForum: 'discussionForum',
   },
+  userDetailsForum: {
+    _type: 'userDetailsForum',
+    userDetailsForum: 'userDetailsForum',
+  },
   graph: {
     _type: 'graph',
     graphGeneral: 'graphGeneral',

@@ -1,22 +1,16 @@
 <div class="example-container mat-elevation-z8">
     <div class="example-loading-shade">
-        <!-- <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-        <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
-            Please Wait
-        </div> -->
-        <!-- {{dataSource}} -->
+
     </div>
     <!-- <div>{{JSON.stringfy(dataSource)}}</div> -->
     <div class="example-table-container">
-        <!-- *ngIf="dataSource" -->
-        <!-- <mat-form-field> -->
+
         <div class="search">
             <div class="lsearch">
                 <span class="searchText">Search:</span>
             </div>
             <div class=rsearch>
-                <app-input class="sinput" type="Standard" label="" (onChange)="applyFilter($event)">
-                </app-input>
+                <input class="sinput" type="Standard" label="" (onChange)="applyFilter($event)">
             </div>
         </div>
 
@@ -49,8 +43,8 @@
                     <!-- <span *ngIf="col.isList"
                         [matTooltip]="element[col.displayName]">{{filterList(element[col.key],col.prop) }}</span> -->
                     <span *ngIf="col.isList" class="textclass"
-                        [matTooltip]="(element[col.key] | listPipe: col.prop).split('<br />').join(', ')">
-                        <div innerHTML="{{element[col.key] | listPipe: col.prop }}"></div>
+                        [matTooltip]="(element[col.key]).split('<br />').join(', ')">
+                        <div innerHTML="{{element[col.key]}}"></div>
                     </span>
                     <span *ngIf="!col.isList" class="textclass" [matTooltip]="element[col.key]">
                         {{element[col.key]}} {{col.isList}}
@@ -63,13 +57,13 @@
                 <mat-cell *matCellDef="let row" class="action-cell">
                     <div *ngFor="let ac of tableData.actions">
                         <div *ngIf="ac.optional">
-                            <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
+                            <!-- <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
                                 [icon]="ac.icon" [disabled]="ac.disabled || false" [label]="ac.label"
-                                (click)="buttonClick(ac.name,row)"></app-button>
+                                (click)="buttonClick(ac.name,row)"></app-button> -->
                         </div>
                         <div *ngIf="!ac.optional">
-                            <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
-                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)"></app-button>
+                            <!-- <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
+                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)"></app-button> -->
                         </div>
                     </div>
                 </mat-cell>

@@ -131,9 +131,8 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 // import { CardActivityModule } from './card-activity/card-activity.module'
 import { LeftMenuModule } from './left-menu/left-menu.module'
 import { LeftMenuComponent } from './left-menu/left-menu.component'
-
-
-
+import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
+import { UITableModule } from './ui-table/ui-table.module'
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
   BtnAppsModule,
@@ -160,6 +159,7 @@ export const WIDGET_REGISTERED_MODULES = [
 
   // CardBrowseCourseModule,
   // CardHomeDiscussModule,
+  UITableModule,
   ContentStripMultipleModule,
   ContentStripNewMultipleModule,
   ContentStripSingleModule,
@@ -438,9 +438,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   {
     widgetType: ROOT_WIDGET_CONFIG.element._type,
     widgetSubType: ROOT_WIDGET_CONFIG.element.html,
-    //ent- feedback / btn - content - feedback.model'
-    // export * from './lib/btn-content-feedback/btn-content-feedback.module'
-    // export * from './lib/btn-content-fe
     component: ElementHtmlComponent,
   },
 
@@ -483,5 +480,10 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.selector._type,
     widgetSubType: ROOT_WIDGET_CONFIG.selector.intranet,
     component: IntranetSelectorComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.selector._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.selector.intranet,
+    component: UserListDisplayComponent,
   },
 ]
