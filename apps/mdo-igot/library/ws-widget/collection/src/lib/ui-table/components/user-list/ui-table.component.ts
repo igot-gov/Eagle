@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material'
 import { ITableData, IColums } from '../../interface/interfaces'
 
 @Component({
-  selector: 'app-ui-table',
+  selector: 'ws-widget-ui-table',
   templateUrl: './ui-table.component.html',
   styleUrls: ['./ui-table.component.scss'],
 })
@@ -39,7 +39,7 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    if (this.tableData !== undefined && this.tableData != null) {
+    if (this.tableData) {
       this.displayedColumns = this.tableData.columns
     }
     this.dataSource.data = this.data
@@ -68,7 +68,7 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   buttonClick(action: string, row: any) {
     // console.log(action, row);
     /** debugger; */
-    if (this.tableData !== undefined && this.tableData != null) {
+    if (this.tableData) {
       const isDisabled = _.get(_.find(this.tableData.actions, ac => ac.name === action), 'disabled') || false
       if (!isDisabled && this.actionsClick) {
         this.actionsClick.emit({ action, row })
