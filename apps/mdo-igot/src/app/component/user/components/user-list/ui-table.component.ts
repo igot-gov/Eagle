@@ -39,7 +39,9 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.displayedColumns = this.tableData?.columns
+    if (this.tableData) {
+      this.displayedColumns = this.tableData.columns
+    }
     this.dataSource.data = this.data
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
@@ -66,10 +68,13 @@ export class UiTableComponent implements OnInit, AfterViewInit {
   buttonClick(action: string, row: any) {
     // console.log(action, row);
     /** debugger; */
-    const isDisabled = _.get(_.find(this.tableData?.actions, ac => ac.name === action), 'disabled') || false
-    if (!isDisabled && this.actionsClick) {
-      this.actionsClick.emit({ action, row })
+    if (this.tableData) {
+      const isDisabled = _.get(_.find(this.tableData.actions, ac => ac.name === action), 'disabled') || false
+      if (!isDisabled && this.actionsClick) {
+        this.actionsClick.emit({ action, row })
+      }
     }
+
   }
   getFinalColumns() {
     if (this.tableData !== undefined) {
