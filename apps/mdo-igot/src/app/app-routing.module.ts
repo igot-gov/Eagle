@@ -246,12 +246,12 @@ const routes: Routes = [
     },
     canActivate: [GeneralGuard],
   },
-  {
-    path: 'app/social',
-    loadChildren: () =>
-      import('./routes/route-social-app.module').then(u => u.RouteSocialAppModule),
-    canActivate: [GeneralGuard],
-  },
+  // {
+  //   path: 'app/social',
+  //   loadChildren: () =>
+  //     import('./routes/route-social-app.module').then(u => u.RouteSocialAppModule),
+  //   canActivate: [GeneralGuard],
+  // },
   {
     path: 'app/signup',
     loadChildren: () =>
@@ -419,14 +419,14 @@ const routes: Routes = [
     component: PageComponent,
     canActivate: [GeneralGuard],
   },
-  {
-    path: 'page-leaders',
-    loadChildren: () =>
-      import('./routes/page-leader-renderer/page-leader-renderer.module').then(
-        u => u.PageLeaderRendererModule,
-      ),
-    canActivate: [GeneralGuard],
-  },
+  // {
+  //   path: 'page-leaders',
+  //   loadChildren: () =>
+  //     import('./routes/page-leader-renderer/page-leader-renderer.module').then(
+  //       u => u.PageLeaderRendererModule,
+  //     ),
+  //   canActivate: [GeneralGuard],
+  // },
   {
     path: 'public/about',
     component: PublicAboutComponent,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { IUserNotification } from '../../models/notifications.model'
-import { NsGoal, NsPlaylist, BtnPlaylistService, BtnGoalsService } from '@ws-widget/collection'
+import { NsPlaylist, BtnPlaylistService } from '@ws-widget/collection'
 import { TFetchStatus, NsPage, ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
@@ -11,13 +11,13 @@ import { TFetchStatus, NsPage, ConfigurationsService } from '@ws-widget/utils'
 export class NotificationComponent implements OnInit {
   recentBadge: IUserNotification | null = null
   sharedPlaylists: NsPlaylist.IPlaylist[] = []
-  sharedGoals: NsGoal.IGoal[] = []
-  sharedNotificationGoals: NsGoal.IGoal[] = []
+  // sharedGoals: NsGoal.IGoal[] = []
+  // sharedNotificationGoals: NsGoal.IGoal[] = []
   fetchStatus: TFetchStatus | null = null
   statusCount: number | null = null
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   constructor(
-    private goalsSvc: BtnGoalsService,
+    // private goalsSvc: BtnGoalsService,
     private playlistSvc: BtnPlaylistService,
     private configSvc: ConfigurationsService,
   ) { }
@@ -48,21 +48,21 @@ export class NotificationComponent implements OnInit {
     )
   }
   fetchSharedGoals() {
-    this.goalsSvc.getActionRequiredGoals('isInIntranet').subscribe(
-      data => {
-        this.sharedNotificationGoals = data
-        this.sharedNotificationGoals.forEach(goal => {
-          if (goal.sharedBy) {
-            goal.sharedBy.email = goal.sharedBy ? (goal.sharedBy.email || '').split('@')[0] : ''
-          }
-        })
-        this.sharedGoals = this.sharedNotificationGoals
-        this.checkContentStatus()
-      },
-      _err => {
-        this.checkContentStatus()
-      },
-    )
+    // this.goalsSvc.getActionRequiredGoals('isInIntranet').subscribe(
+    //   data => {
+    //     this.sharedNotificationGoals = data
+    //     this.sharedNotificationGoals.forEach(goal => {
+    //       if (goal.sharedBy) {
+    //         goal.sharedBy.email = goal.sharedBy ? (goal.sharedBy.email || '').split('@')[0] : ''
+    //       }
+    //     })
+    //     this.sharedGoals = this.sharedNotificationGoals
+    //     this.checkContentStatus()
+    //   },
+    //   _err => {
+    //     this.checkContentStatus()
+    //   },
+    // )
   }
   checkContentStatus() {
     this.fetchStatus = 'done'
@@ -72,7 +72,7 @@ export class NotificationComponent implements OnInit {
     if (
       this.statusCount === 3 &&
       !this.recentBadge &&
-      !this.sharedGoals.length &&
+      // !this.sharedGoals.length &&
       !this.sharedPlaylists.length
     ) {
       this.fetchStatus = 'none'
@@ -81,7 +81,7 @@ export class NotificationComponent implements OnInit {
   playlistTrackBy(playlist: NsPlaylist.IPlaylist) {
     return playlist.id
   }
-  goalTrackBy(goal: NsGoal.IGoal) {
-    return goal.id
-  }
+  // goalTrackBy(goal: NsGoal.IGoal) {
+  //   return goal.id
+  // }
 }

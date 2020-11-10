@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
 import { ConfigurationsService, EventService, UtilityService, NsInstanceConfig } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
-import { NsGoal } from '../btn-goals/btn-goals.model'
+// import { NsGoal } from '../btn-goals/btn-goals.model'
 import { NsPlaylist } from '../btn-playlist/btn-playlist.model'
 import { NsContent } from '../_services/widget-content.model'
 import { NsCardContent } from './card-content.model'
@@ -26,7 +26,7 @@ export class CardContentComponent extends WidgetBaseComponent
   showContentTag = false
 
   btnPlaylistConfig: NsPlaylist.IBtnPlaylist | null = null
-  btnGoalsConfig: NsGoal.IBtnGoal | null = null
+  // btnGoalsConfig: NsGoal.IBtnGoal | null = null
   prefChangeSubscription: Subscription | null = null
   sourceLogos: NsInstanceConfig.ISourceLogo[] | undefined
 
@@ -61,11 +61,11 @@ export class CardContentComponent extends WidgetBaseComponent
         contentType: this.widgetData.content.contentType,
         mode: 'dialog',
       }
-      this.btnGoalsConfig = {
-        contentId: this.widgetData.content.identifier,
-        contentName: this.widgetData.content.name,
-        contentType: this.widgetData.content.contentType,
-      }
+      // this.btnGoalsConfig = {
+      //   contentId: this.widgetData.content.identifier,
+      //   contentName: this.widgetData.content.name,
+      //   contentType: this.widgetData.content.contentType,
+      // }
       this.modifySensibleContentRating()
     }
 
