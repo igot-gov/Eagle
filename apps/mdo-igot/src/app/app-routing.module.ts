@@ -48,101 +48,15 @@ const routes: Routes = [
     loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
     canActivate: [GeneralGuard],
   },
-  // {
-  //   path: 'admin',
-  //   data: {
-  //     requiredRoles: ['register-admin', 'admin', 'content-assignment-admin'],
-  //   },
-  //   loadChildren: () => import('./routes/route-admin.module').then(u => u.RouteAdminModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'analytics',
-  //   loadChildren: () => import('./routes/route-analytics.module').then(u => u.RouteAnalyticsModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'app/careers',
-  //   loadChildren: () =>
-  //     import('./routes/route-careers.module').then(u => u.RouteCareerHubModule),
-  //   canActivate: [GeneralGuard],
-  //   data: {
-  //     pageType: 'feature',
-  //     pageKey: 'career',
-  //   },
-  //   resolve: {
-  //     pageData: PageResolve,
-  //   },
-  // },
-  // {
-  //   path: 'app/channels',
-  //   loadChildren: () => import('./routes/route-channels.module').then(u => u.RouteChannelsModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'app/competencies',
-  //   loadChildren: () =>
-  //     import('./routes/route-competencie.module').then(u => u.RouteCompetenciesModule),
-  //   canActivate: [GeneralGuard],
-  //   data: {
-  //     pageType: 'feature',
-  //     pageKey: 'competencie',
-  //   },
-  //   resolve: {
-  //     pageData: PageResolve,
-  //   },
-  // },
-  // {
-  //   path: 'app/content-assignment',
-  //   loadChildren: () =>
-  //     import('./routes/route-content-assignment.module').then(u => u.RouteContentAssignmentModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'app/discuss',
-  //   loadChildren: () =>
-  //     import('./routes/route-discuss.module').then(u => u.RouteDiscussModule),
-  //   canActivate: [GeneralGuard],
-  //   data: {
-  //     pageType: 'feature',
-  //     pageKey: 'discuss',
-  //   },
-  //   resolve: {
-  //     pageData: PageResolve,
-  //   },
-  // },
-  // {
-  //   path: 'app/gamification',
-  //   loadChildren: () =>
-  //     import('./routes/route-gamification.module').then(u => u.RouteGamificationModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/setup',
     loadChildren: () => import('./routes/route-app-setup.module').then(u => u.RouteAppSetupModule),
   },
-  // {
-  //   path: 'app/feedback',
-  //   loadChildren: () =>
-  //     import('./routes/route-feedback-v2.module').then(u => u.RouteFeedbackV2Module),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/features',
     component: FeaturesComponent,
     canActivate: [GeneralGuard],
   },
-
-  // {
-  //   path: 'app/goals',
-  //   loadChildren: () => import('./routes/route-goals-app.module').then(u => u.RouteGoalsAppModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'app/infy',
-  //   loadChildren: () => import('./routes/route-infy-app.module').then(u => u.RouteInfyAppModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/info',
     loadChildren: () => import('./routes/route-info-app.module').then(u => u.RouteInfoAppModule),
@@ -159,56 +73,18 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-
-  // {
-  //   path: 'app/my-learning',
-  //   loadChildren: () =>
-  //     import('./routes/route-my-learning.module').then(u => u.RouteMyLearningModule),
-  //   canActivate: [GeneralGuard, LearningGuard],
-  // },
   {
     path: 'app/my-dashboard',
     loadChildren: () =>
       import('./routes/route-my-dashboard.module').then(u => u.RouteMyDashboardModule),
     // canActivate: [GeneralGuard, LearningGuard],
   },
-  // {
-  //   path: 'app/my-rewards',
-  //   loadChildren: () =>
-  //     import('./routes/route-my-rewards.module').then(u => u.RouteMyRewarddModule),
-  //   canActivate: [GeneralGuard, LearningGuard],
-  // },
-  // {
-  //   path: 'app/network-v2',
-  //   loadChildren: () =>
-  //     import('./routes/route-network-v2.module').then(u => u.RouteNetworkV2Module),
-  //   canActivate: [GeneralGuard],
-  //   data: {
-  //     pageType: 'feature',
-  //     pageKey: 'network-v2',
-  //   },
-  //   resolve: {
-  //     pageData: PageResolve,
-  //   },
-  // },
   {
     path: 'app/notifications',
     loadChildren: () =>
       import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
     canActivate: [GeneralGuard],
   },
-  // {
-  //   path: 'app/playlist',
-  //   loadChildren: () =>
-  //     import('./routes/route-playlist-app.module').then(u => u.RoutePlaylistAppModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'app/profile',
-  //   loadChildren: () =>
-  //     import('./routes/route-profile-app.module').then(u => u.RouteProfileAppModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/person-profile',
     loadChildren: () =>
@@ -222,12 +98,6 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-  // {
-  //   path: 'app/person-profile2',
-  //   loadChildren: () =>
-  //     import('./routes/route-person-profile.module').then(u => u.RoutePersonProfileModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/events',
     loadChildren: () => import('./routes/route-app-event.module').then(m => m.AppEventsModule),
@@ -246,12 +116,6 @@ const routes: Routes = [
     },
     canActivate: [GeneralGuard],
   },
-  // {
-  //   path: 'app/social',
-  //   loadChildren: () =>
-  //     import('./routes/route-social-app.module').then(u => u.RouteSocialAppModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/signup',
     loadChildren: () =>
@@ -262,16 +126,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./routes/signup-auto/signup-auto.module').then(u => u.SignupAutoModule),
   },
-  // {
-  //   path: 'app/toc',
-  //   loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'author/toc',
-  //   loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'app/tnc',
     component: TncComponent,
@@ -279,29 +133,6 @@ const routes: Routes = [
       tnc: TncAppResolverService,
     },
   },
-  // {
-  //   path: 'app/user-profile',
-  //   loadChildren: () =>
-  //     import('./routes/route-user-profile-app.module').then(u => u.RouteUserProfileAppModule),
-  // },
-  // {
-  //   path: 'author',
-  //   data: {
-  //     requiredRoles: [
-  //       'content-creator',
-  //       'ka-creator',
-  //       'kb-creator',
-  //       'channel-creator',
-  //       'reviewer',
-  //       'publisher',
-  //       'editor',
-  //       'admin',
-  //     ],
-  //   },
-  //   canActivate: [GeneralGuard],
-  //   loadChildren: () =>
-  //     import('./routes/route-authoring-app.module').then(u => u.AuthoringAppModule),
-  // },
   {
     path: 'error-access-forbidden',
     component: ErrorResolverComponent,
@@ -357,12 +188,6 @@ const routes: Routes = [
     component: ErrorResolverComponent,
   },
   { path: 'home', redirectTo: 'page/home', pathMatch: 'full' },
-  // {
-  //   path: 'learning-hub',
-  //   loadChildren: () =>
-  //     import('./routes/route-learning-hub-app.module').then(u => u.LearningHubAppModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'login',
     canActivate: [LoginGuard],
@@ -381,20 +206,6 @@ const routes: Routes = [
     redirectTo: '/',
     pathMatch: 'full',
   },
-  // {
-  //   path: 'page/toc/:id',
-  //   data: {
-  //     pageType: 'page',
-  //     pageKey: 'toc',
-  //   },
-  //   resolve: {
-  //     pageData: PageResolve,
-  //     content: AppTocResolverService,
-  //   },
-  //   runGuardsAndResolvers: 'paramsChange',
-  //   component: PageComponent,
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'page/:id',
     component: PageComponent,
@@ -419,14 +230,6 @@ const routes: Routes = [
     component: PageComponent,
     canActivate: [GeneralGuard],
   },
-  // {
-  //   path: 'page-leaders',
-  //   loadChildren: () =>
-  //     import('./routes/page-leader-renderer/page-leader-renderer.module').then(
-  //       u => u.PageLeaderRendererModule,
-  //     ),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: 'public/about',
     component: PublicAboutComponent,
@@ -474,27 +277,6 @@ const routes: Routes = [
     path: 'public/faq/:tab',
     component: PublicFaqComponent,
   },
-  // {
-  //   path: 'viewer',
-  //   data: {
-  //     topBar: ETopBar.NONE,
-  //   },
-  //   loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'author/viewer',
-  //   loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
-  //   canActivate: [GeneralGuard],
-  // },
-  // {
-  //   path: 'embed',
-  //   data: {
-  //     topBar: ETopBar.NONE,
-  //   },
-  //   loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
-  //   canActivate: [GeneralGuard],
-  // },
   {
     path: '**',
     component: ErrorResolverComponent,
