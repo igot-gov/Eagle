@@ -90,7 +90,7 @@ router.get("/playlist/:userId/:id", function (req, res) {
               </head>
               <body>
                 <div class="social-card">
-                  <a href="https://${config.HTTPS_HOST}/app/playlist/me/${req.params.id}">
+                  <a href="${config.HTTPS_HOST}/app/playlist/me/${req.params.id}">
                     <img src="${data.appIcon}" alt="${playlist.playlistTitle}"  class="social-card-img" />
                     <div class="sub-card">
                       <p class="title">${playlist.playlistTitle}</p>                     
