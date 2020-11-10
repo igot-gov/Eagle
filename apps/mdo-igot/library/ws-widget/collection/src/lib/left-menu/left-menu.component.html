@@ -1,5 +1,5 @@
 <mat-nav-list class="margin-left-xs margin-right-s margin-top-m flex-1">
-  <ng-container *ngFor="let tab of tabsData">
+  <ng-container *ngFor="let tab of widgetData">
     <a mat-list-item *ngIf="tab?.enabled" matRipple [class.ws-active-discuss-route]="isLinkActive(tab.key)"
       [routerLink]="tab.routerLink" [fragment]="tab.key" [queryParamsHandling]="preserve">
       <span class="padding-left-xs">{{tab?.name}}</span>

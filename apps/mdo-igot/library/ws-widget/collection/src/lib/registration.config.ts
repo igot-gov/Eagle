@@ -78,6 +78,8 @@ import { LayoutLinearComponent } from './layout-linear/layout-linear.component'
 import { LayoutLinearModule } from './layout-linear/layout-linear.module'
 import { LayoutTabComponent } from './layout-tab/layout-tab.component'
 import { LayoutTabModule } from './layout-tab/layout-tab.module'
+import { NewGridLayoutComponent } from './new-grid-layout/new-grid-layout.component'
+import { NewGridLayoutModule } from './new-grid-layout/new-grid-layout.module'
 import { NetworkStripMultipleModule } from './network-strip-multiple/network-strip-multiple.module'
 import { ActivityStripMultipleModule } from './activity-strip-multiple/activity-strip-multiple.module'
 import { NetworkStripMultipleComponent } from './network-strip-multiple/network-strip-multiple.component'
@@ -136,6 +138,10 @@ import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-
 import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
 import { CardActivityComponent } from './card-activity/card-activity.component'
 import { CardActivityModule } from './card-activity/card-activity.module'
+import { LeftMenuModule } from './left-menu/left-menu.module'
+import { LeftMenuComponent } from './left-menu/left-menu.component'
+
+
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -172,6 +178,8 @@ export const WIDGET_REGISTERED_MODULES = [
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
+  LeftMenuModule,
+  NewGridLayoutModule,
   NetworkStripMultipleModule,
   PickerContentModule,
   PlayerAmpModule,
@@ -377,6 +385,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     component: LayoutTabComponent,
   },
   {
+    widgetType: ROOT_WIDGET_CONFIG.menus._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.menus.leftMenu,
+    component: LeftMenuComponent,
+  },
+  {
     widgetType: ROOT_WIDGET_CONFIG.networkStrip._type,
     widgetSubType: ROOT_WIDGET_CONFIG.networkStrip.multipleStrip,
     component: NetworkStripMultipleComponent,
@@ -511,6 +524,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.layout._type,
     widgetSubType: ROOT_WIDGET_CONFIG.layout.grid,
     component: GridLayoutComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.layout._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.layout.newgrid,
+    component: NewGridLayoutComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.errorResolver._type,

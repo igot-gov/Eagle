@@ -10,6 +10,8 @@ import {
   MatProgressSpinnerModule,
   MatChipsModule,
   MatCardModule,
+  MatSidenavModule,
+  MatListModule,
 } from '@angular/material'
 
 @NgModule({
@@ -22,8 +24,10 @@ import {
     MatIconModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatSidenavModule,
     MatChipsModule,
     MatCardModule,
+    MatListModule,
   ],
   entryComponents: [LeftMenuComponent],
 })

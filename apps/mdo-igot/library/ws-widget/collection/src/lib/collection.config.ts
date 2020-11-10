@@ -80,10 +80,11 @@ export const ROOT_WIDGET_CONFIG = {
     linear: 'linearLayout',
     tab: 'tabLayout',
     grid: 'gridLayout',
+    newgrid: 'newGridLayout'
   },
   menus: {
     _type: 'menus',
-    leftMenu: 'leftMenu'
+    leftMenu: 'leftMenu',
   },
   player: {
     _type: 'player',
