@@ -80,7 +80,7 @@ export const ROOT_WIDGET_CONFIG = {
     linear: 'linearLayout',
     tab: 'tabLayout',
     grid: 'gridLayout',
-    newgrid: 'newGridLayout'
+    newgrid: 'newGridLayout',
   },
   menus: {
     _type: 'menus',
