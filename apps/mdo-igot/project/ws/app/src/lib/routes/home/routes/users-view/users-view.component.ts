@@ -3,14 +3,9 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
-// import { DiscussService } from '../../../discuss/services/discuss.service'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
-// import { ProfileV2Service } from '../../services/profile-v2.servive'
 /* tslint:disable */
 import _ from 'lodash'
-// import { NetworkV2Service } from '../../../network-v2/services/network-v2.service'
-// import { NSNetworkDataV2 } from '../../../network-v2/models/network-v2.model'
-/* tslint:enable */
 
 @Component({
   selector: 'ws-app-users-view',
@@ -35,7 +30,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   currentUser!: string | null
   connectionRequests!: any[]
 
-
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
@@ -56,16 +50,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   decideAPICall() {
-    // if (this.portalProfile && this.portalProfile.id) {
-    //   this.fetchUserDetails(this.portalProfile.id)
-    //   this.fetchConnectionDetails(this.portalProfile.id)
-    // } else {
-    //   const me = this.configSvc.userProfile && this.configSvc.userProfile.userId || null
-    //   if (me) {
-    //     this.fetchUserDetails(me)
-    //     this.fetchConnectionDetails(me)
-    //   }
-    // }
   }
   ngOnDestroy() {
     if (this.tabs) {
@@ -109,17 +93,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
           this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
           break
         case 'saved':
-          // this.discussService.fetchSaved().subscribe((response: any) => {
-          //   if (response) {
-          //     this.discussionList = _.uniqBy(response.posts, 'tid')
-          //   } else {
-          //     this.discussionList = []
-          //   }
-          // },
-          //   // tslint:disable-next-line
-          //   () => {
-          //     this.discussionList = []
-          //   })
           break
         default:
           this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')

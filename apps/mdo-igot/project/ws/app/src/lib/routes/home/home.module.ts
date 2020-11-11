@@ -25,14 +25,14 @@ import { RouterModule } from '@angular/router'
 import { HomeRoutingModule } from './home.rounting.module'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
-import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule } from '@ws-widget/collection'
+import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule } from '@ws-widget/collection'
 import { AboutComponent } from './routes/about/about.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
     UsersViewComponent,
-    AboutComponent
+    AboutComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +68,7 @@ import { AboutComponent } from './routes/about/about.component'
     PipeOrderByModule,
     BtnPageBackModule,
     WidgetResolverModule,
+    UITableModule,
   ],
   entryComponents: [
   ],
