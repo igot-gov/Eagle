@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 import { MatPaginator } from '@angular/material'
-import { ITableData, IColums } from '../../interface/interfaces'
+import { ITableData, IColums } from '../interface/interfaces'
 @Component({
   selector: 'ws-widget-ui-table',
   templateUrl: './ui-table.component.html',
