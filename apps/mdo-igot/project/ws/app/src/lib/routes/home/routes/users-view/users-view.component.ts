@@ -61,29 +61,35 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // int left blank
     this.tabledata = {
-      columns: [{
-        displayName: 'Full Name',
-        key: 'col1key',
-        isList: false,
-        prop: 'testprop1',
-      }, {
-        displayName: 'Email',
-        key: 'col2key',
-        isList: false,
-        prop: 'testprop2',
-      }, {
-        displayName: 'Type',
-        key: 'col3key',
-        isList: false,
-        prop: 'testprop3',
-      }],
+      columns: [
+        {
+          displayName: 'Full Name',
+          key: 'col1key',
+          isList: false,
+          prop: 'testprop1',
+        }, {
+          displayName: 'Email',
+          key: 'col2key',
+          isList: false,
+          prop: 'testprop2',
+        }, {
+          displayName: 'Type',
+          key: 'col3key',
+          isList: false,
+          prop: 'testprop3',
+        }
+      ],
       actions: ['act1', 'act2', 'act3'],
       needHash: false,
       needCheckBox: false,
       sortState: 'asc',
-      sortColumn: 'col1',
+      sortColumn: 'col1key',
     }
-    this.data = ['data1', 'data2', 'data3']
+    this.data = [{
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }]
   }
   ngAfterViewInit() {
     // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
