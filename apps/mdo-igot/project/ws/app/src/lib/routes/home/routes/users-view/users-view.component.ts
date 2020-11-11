@@ -89,6 +89,58 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       col1key: "User 1",
       col2key: "a@gmail.com",
       col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
+    }, {
+      col1key: "User 1",
+      col2key: "a@gmail.com",
+      col3key: "permanent",
     }]
   }
   ngAfterViewInit() {

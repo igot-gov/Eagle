@@ -1,13 +1,7 @@
 @import 'ws-vars';
 
 
-.sticky {
-  position: sticky;
-  top: calc(#{$mat-toolbar-gt-xs});
-  overflow: hidden;
-  // z-index: 10;
-  // width: 100%;
-}
+
 
 .outline-1 {
   outline: unset !important;
@@ -19,5 +13,5 @@
 }
 
 .pad-l-4r {
-  padding-left: 4rem;
+  padding-left: 2.75rem;
 }

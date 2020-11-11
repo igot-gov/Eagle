@@ -1,5 +1,5 @@
 
-import { Component, OnInit, OnDestroy } from '@angular/core'
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener, ViewChild } from '@angular/core'
 import { Router, Event, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { map } from 'rxjs/operators'
@@ -17,7 +17,7 @@ import { ILeftMenu } from '@ws-widget/collection'
   host: { class: 'margin-top-l' },
   /* tslint:enable */
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
   titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
@@ -30,7 +30,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   isLtMedium$ = this.valueSvc.isLtMedium$
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   userRouteName = ''
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  elementPosition: any
+  sticky = false
   private defaultSideNavBarOpenedSubscription: any
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset
+    if (windowScroll >= this.elementPosition) {
+      this.sticky = true
+    } else {
+      this.sticky = false
+    }
+  }
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -56,7 +68,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.screenSizeIsLtMedium = isLtMedium
     })
   }
-
+  ngAfterViewInit() {
+    this.elementPosition = this.menuElement.nativeElement.offsetTop
+  }
   bindUrl(path: string) {
     if (path) {
       this.currentRoute = path
