@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-var request = require("request");
+let request = require("request");
 request.gzip = true;
-var config = require('../utils/environment');
+let config = require('../utils/environment');
 
 router.get("/badge/:userId/:id", function (req, res) {
   let URL = `${config.API_HOST}/v3/users/${req.params.userId}/badges`;
@@ -34,11 +34,10 @@ router.get("/badge/:userId/:id", function (req, res) {
             return badge.badge_id == req.params.id;
           });
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
-          let badgeImage= badge?badge.image:null;
-          let imageName = (badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
-          imagePath=`${config.HTTPS_HOST}/assets/instances/eagle/Achievements/Badges/assets/`+ imageName
+          let badgeImage= badge?badge.image:null;          
+          imagePath=`${config.HTTPS_HOST}/assets/instances/eagle/Achievements/Badges/assets/`+(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
         }
-        //badge = _.where(badges.earned, {badge_id: req.params.id});
+       
         if (badge) {
           let html = `<!DOCTYPE html>
           <html lang="en">
