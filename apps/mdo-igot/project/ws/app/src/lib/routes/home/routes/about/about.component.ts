@@ -1,7 +1,5 @@
 
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
-
-
 @Component({
   selector: 'ws-app-about',
   templateUrl: './about.component.html',
@@ -11,9 +9,6 @@ import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
   /* tslint:enable */
 })
 export class AboutComponent implements OnInit, AfterViewInit, OnDestroy {
-
-
-
   constructor() {
   }
 

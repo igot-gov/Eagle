@@ -36,6 +36,7 @@ import { AboutComponent } from './routes/about/about.component'
   ],
   imports: [
     CommonModule,
+    UITableModule,
     WidgetResolverModule,
     ReactiveFormsModule,
     HomeRoutingModule,
@@ -68,7 +69,6 @@ import { AboutComponent } from './routes/about/about.component'
     PipeOrderByModule,
     BtnPageBackModule,
     WidgetResolverModule,
-    UITableModule,
   ],
   entryComponents: [
   ],
