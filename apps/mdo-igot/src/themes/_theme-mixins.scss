@@ -33,6 +33,7 @@
   $colorBlack: rgba(0, 0, 0, 0.87);
   $colorBlack60: rgba(0, 0, 0, 0.60);
   $colorBlack40: rgba(0, 0, 0, 0.40);
+  $colorBlack040: rgba(0, 0, 0, 0.040);
   $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
@@ -213,15 +214,20 @@
       background: rgba(mat-color($primary, default), 0.1);
     }
 
-    .ws-active-discuss-route {
-      background: rgba(mat-color($primary, default), 0.1);
+    .mat-drawer-side {
+      background: rgb(240, 243, 244);
+    }
 
-      &:before {
+    .ws-active-route-menu {
+      background: $colorBlack040;
+
+      &::after {
         content: '';
         position: absolute;
         border-color: $colorAccentDark;
         border-style: solid;
         border-width: 0 0 0 2px;
+        right: 0;
         height: inherit;
       }
     }
@@ -356,16 +362,21 @@
       border-top-width: 2px !important;
     }
 
-    .ws-active-discuss-route {
-      background-color: #eeeeee !important;
+    .mat-drawer-side {
+      background: rgb(240, 243, 244);
+    }
+
+    .ws-active-route-menu {
+      background-color: $colorBlack040 !important;
       // font-weight: 700;
 
-      &:before {
+      &::after {
         content: '';
         position: absolute;
         border-color: #347bb6;
         border-style: solid;
         border-width: 0 0 0 2px;
+        right: 0;
         height: inherit;
       }
     }

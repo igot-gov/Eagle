@@ -83,7 +83,7 @@ $theme-background: mat-palette($mat-blue);
     &.day-mode {
         $theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
         // -or- Can set colour by hex value too
-        $custom-background-color: #F5F6FA;
+        $custom-background-color: #FFFFFF;
 
         $background: map-get($theme, background);
         $background: map_merge($background, (background: $custom-background-color));

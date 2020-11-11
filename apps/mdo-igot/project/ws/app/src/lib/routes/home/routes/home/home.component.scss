@@ -5,12 +5,22 @@
 .container-balanced {
   @extend %page-center;
   height: auto;
-  min-height: 400px;
+  min-height: 75vh;
 }
 
 .container-balanced-banner {
   @extend %page-center;
   height: auto;
+}
+
+.left-nav {
+  min-width: 240px;
+  max-width: 240px;
+
+  @include breakpoint-xs {
+    min-width: 100%;
+    max-width: none;
+  }
 }
 
 .flex-3 {
@@ -21,10 +31,10 @@
   flex: 5;
 }
 
-.border-0 {
-  border-right: none !important;
-  background: inherit !important;
-}
+// .border-0 {
+//   border-right: none !important;
+//   background: inherit !important;
+// }
 
 .flex-update {
   flex-direction: row;

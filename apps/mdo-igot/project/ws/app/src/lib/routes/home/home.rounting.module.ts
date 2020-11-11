@@ -8,15 +8,24 @@ import { UsersViewComponent } from './routes/users-view/users-view.component'
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
+    redirectTo: 'users',
+  },
+  {
+    path: '',
     component: HomeComponent,
-    redirectTo: '',
+    // redirectTo: '',
+    // resolve: {
+    // profile: HomeResolve,
+    // },
     children: [
       {
-        path: '',
+        path: 'users',
         component: UsersViewComponent,
         resolve: {
-          profile: HomeResolve,
+          // profile: HomeResolve,
         },
+        children: []
       },
       {
         path: 'about',

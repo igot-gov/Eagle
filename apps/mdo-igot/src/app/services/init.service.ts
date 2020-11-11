@@ -79,12 +79,8 @@ export class InitService {
       domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/twitter.svg'),
     )
     iconRegistry.addSvgIcon(
-      'category_xs',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/category_xs.svg'),
-    )
-    iconRegistry.addSvgIcon(
-      'category_m',
-      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/category_m.svg'),
+      'goi',
+      domSanitizer.bypassSecurityTrustResourceUrl('mdo-assets/icons/emblem-dark.png'),
     )
     iconRegistry.addSvgIcon(
       'hubs',
