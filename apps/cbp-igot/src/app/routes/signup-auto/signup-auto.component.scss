@@ -1,0 +1,20 @@
+@import 'ws-common';
+@import 'ws-mixins';
+
+.signup-container {
+    box-sizing: border-box;
+    padding: $size-m;
+    @extend %page-center;
+    @extend %height-mat-toolbar-sibling;
+    box-sizing: border-box;
+
+    .msg {
+        // font: 16px/28px Poppins-regular;
+        color: #222222;
+        border: 1px solid #ededed;
+        padding: 15px;
+        box-shadow: 0px 7px 14px -4px rgba(0, 0, 0, 0.3);
+        background: #fff;
+
+    }
+}

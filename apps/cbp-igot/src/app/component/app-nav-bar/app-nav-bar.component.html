@@ -1,0 +1,114 @@
+<mat-toolbar [color]="primaryNavbarBackground?.color" [ngStyle]="primaryNavbarBackground?.styles"
+  class="mat-elevation-z3 custom mobile">
+  <div class="fix-ww" id="root-tool-bar" title="toolbar" i18n-aria-label role="toolbar">
+    <ng-container *ngIf="mode === 'top'">
+      <a routerLink="/app/home" class="logo-dim" role="link" title="Home" i18n-aria-title i18n-aria-label>
+        <img [src]="appIcon" alt="Application Logo" class="app-logo" />
+      </a>
+      <!-- <span class="spacer"></span> -->
+      <ng-container *ngIf="primaryNavbarConfig?.mediumScreen">
+        <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+          *ngFor="let item of primaryNavbarConfig?.mediumScreen?.left">
+        </ng-container>
+
+        <!-- <ws-app-search-input-home placeHolder="Search" class="my-search flex-1" [ref]="'home'">
+        </ws-app-search-input-home> -->
+        <span class="spacer"></span>
+        <div ngClass="search-small-logo">
+          <ng-container [wsResolverWidget]="{
+        'widgetType': 'actionButton',
+        'widgetSubType': 'buttonFeature',
+        'widgetData': {
+          'toolTop': 'Search',
+          'actionBtnId': 'feature_search',
+          'config': {
+            'type': 'mat-icon-button'
+          }
+        }
+      }"></ng-container>
+        </div>
+        <!-- <button class="home-help" mat-icon-button id='helper' [matMenuTriggerFor]="helpMenu" *ngIf="!isHelpMenuRestricted"
+        >
+        <mat-icon>help_outline</mat-icon>
+      </button> -->
+        <!-- {{primaryNavbarConfig?.mediumScreen?.right | json}} -->
+        <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+          *ngFor="let item of primaryNavbarConfig?.mediumScreen?.right">
+        </ng-container>
+        <!-- <div class="mat-icon-button pipe-icon">
+        |
+      </div> -->
+        <!-- <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container> -->
+      </ng-container>
+
+    </ng-container>
+    <div class="flex justify-between items-center w-full" *ngIf="mode === 'bottom'">
+      <ng-container *ngIf="primaryNavbarConfig?.smallScreen">
+        <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+          *ngFor="let item of primaryNavbarConfig?.smallScreen?.left">
+        </ng-container>
+      </ng-container>
+      <a role="button" matRipple class="flex items-center flex-col px-2 box-sizing-box" routerLink="/app/home" active
+        routerLinkActive="ws-mat-accent-text">
+        <ng-container *ngIf="!appBottomIcon">
+          <mat-icon>home</mat-icon>
+
+          <span [ngClass]="instanceVal === 'Ford' ? 'title font-sans' : 'mat-caption'">Home</span>
+        </ng-container>
+        <ng-container *ngIf="appBottomIcon">
+          <img width="40px" height="40px" [src]="appBottomIcon" i18n-alt alt="Home" />
+        </ng-container>
+      </a>
+      <ng-container *ngIf="primaryNavbarConfig?.smallScreen">
+        <ng-container [ngTemplateOutlet]="navbarSide" [ngTemplateOutletContext]="{ item: item }"
+          *ngFor="let item of primaryNavbarConfig?.smallScreen?.right">
+        </ng-container>
+      </ng-container>
+      <ng-container [wsResolverWidget]="btnAppsConfig"></ng-container>
+    </div>
+  </div>
+  <!-- <div class="fix-ww" *ngIf="mode === 'top'">
+    <ng-container [wsResolverWidget]="{ 'widgetType': 'card',
+      'widgetSubType': 'cardHomeHubs',
+      widgetData: {}}">
+    </ng-container>
+  </div> -->
+</mat-toolbar>
+
+<ng-template #navbarSide let-item="item">
+  <ng-container *ngIf="item.type === 'widgetButton'" [wsResolverWidget]="item.config"></ng-container>
+  <ws-widget-btn-feature *ngIf="item.type === 'featureButton'" [id]="item.config.actionBtnId" [widgetData]="item.config"
+    [showFixedLength]="true"></ws-widget-btn-feature>
+</ng-template>
+
+<mat-menu #helpMenu="matMenu">
+  <ws-widget-btn-feature [widgetData]="{
+      actionBtnId: 'feature_aboutUs',
+      config: {
+        type: 'mat-menu-item'
+      }
+    }"></ws-widget-btn-feature>
+  <ws-widget-btn-feature [widgetData]="{
+      actionBtnId: 'channel_how_to',
+      config: {
+        type: 'mat-menu-item'
+      }
+    }"></ws-widget-btn-feature>
+  <ws-widget-btn-feature [widgetData]="{
+      actionBtnId: 'feature_FAQs',
+      config: {
+        type: 'mat-menu-item'
+      }
+    }"></ws-widget-btn-feature>
+  <ws-widget-btn-feature [widgetData]="{
+      actionBtnId: 'feature_quickTour',
+      config: {
+        type: 'mat-menu-item'
+      }
+    }"></ws-widget-btn-feature>
+  <div mat-menu-item *ngIf="isTourGuideAvailable" (click)="startTour()">
+    <mat-icon>help</mat-icon>
+    <span class="ml-2">Tour Guide</span>
+  </div>
+
+</mat-menu>

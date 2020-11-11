@@ -1,0 +1,5 @@
+<button mat-icon-button i18n-aria-label aria-label="Open Call Dialog" *ngIf="isCallEnabled && widgetData"
+  (click)="showCallDialog()">
+  <mat-icon *ngIf="!widgetData?.replaceIconWithLabel">call</mat-icon>
+  <span *ngIf="widgetData?.replaceIconWithLabel" i18n>Call</span>
+</button>

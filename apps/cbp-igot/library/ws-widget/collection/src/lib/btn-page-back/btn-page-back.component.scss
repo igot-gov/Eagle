@@ -1,0 +1,132 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  // min-height: 400px;
+}
+
+.show {
+  display: flex !important;
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 1s;
+  transition: visibility 0s linear 0.33s,
+    opacity 0.33s linear;
+}
+
+.hide {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.33s,
+    opacity 0.33s linear;
+}
+
+.base-layout {
+  // margin-top: 10px;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0;
+  margin: auto;
+  // background: inherit !important;
+}
+
+.fix-ww {
+  margin-left: auto;
+  margin-right: auto;
+  // max-width: $max-width;
+  max-width: $max-screen;
+  display: flex;
+  flex: 1;
+}
+
+.next-b {
+  width: $size-s;
+  height: $size-m;
+  transform: matrix(0, 1, -1, 0, 0, 0);
+  background: #00A9F4 0% 0% no-repeat padding-box;
+}
+
+.icon-margin {
+  margin: 0 0.5rem 0 0.1rem;
+}
+
+.m-t-b {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.home-icon {
+  margin: auto 20px auto 20px;
+}
+
+// .main-back {
+//   font-size: $size-xl;
+// }
+
+/** No CSS for this example */
+.mat-y-icon {
+
+  color: yellowgreen;
+
+  svg {
+    path {
+      // d {
+      fill: red;
+      // }
+    }
+  }
+}
+
+.top-fixed-menu {
+  position: fixed;
+  width: 100%;
+  z-index: 99;
+}
+
+.simple-hubs-link {
+  margin: auto $size-s;
+}
+
+.center {
+  text-align: center;
+  // color: #187bcd;
+  padding-top: $size-s;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-grid-list {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.margin-0 {
+  margin: 0 !important;
+}
+
+.icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.base-header {
+  margin-left: 5px;
+}
+
+.mat-grid-tile {
+  display: inline;
+  position: absolute;
+}
+
+.mat-icon1 {
+  padding: 16px;
+  color: #347bb6;
+}

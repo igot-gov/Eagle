@@ -1,0 +1,68 @@
+{
+    "menus": {
+        "widgetType": "menus",
+        "widgetSubType": "leftMenu",
+        "widgetData": [
+            {
+                "name": "All CBPs",
+                "key": "cbp",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/users"
+            },
+            {
+                "name": "Users",
+                "key": "users",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/person-profile"
+            },
+            {
+                "name": "Competencies",
+                "key": "competencies",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/notifications"
+            },
+            {
+                "name": "Policies",
+                "key": "policies",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/notifications"
+            },
+            {
+                "name": "About",
+                "key": "about",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/about"
+            }
+        ]
+    }
+}

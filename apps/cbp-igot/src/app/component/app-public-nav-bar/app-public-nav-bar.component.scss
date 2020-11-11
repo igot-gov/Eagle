@@ -1,0 +1,30 @@
+@import 'ws-mixins';
+
+.app-logo {
+  max-width: 100px;
+  max-height: 30px;
+  min-width: 32px;
+
+  @include breakpoint-xs {
+    max-width: 80px;
+  }
+
+
+  }
+.title-app{
+    @include breakpoint-xs {
+    visibility: hidden;
+  }}
+
+  .small-font-size{
+    @include breakpoint-xs {
+    font-size: smaller !important;
+  }
+  }
+
+  .padding-remove-small{
+    @include breakpoint-xs {
+
+    padding: 0 !important;
+    }
+  }
