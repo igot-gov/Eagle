@@ -62,14 +62,7 @@ public class ProfileService implements IProfileService {
     public Response findCommonProfile(String rootOrg, String userId, int offset, int limit) {
 
         Response responseConnections = connectionService.findSuggestedConnections(rootOrg, userId, offset, limit);
-//        Response profileRes = getProfiles(responseConnections, null);
-//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-//            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
-//
-//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-//            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
-
-        return responseConnections;
+       return responseConnections;
 
 
     }
@@ -80,18 +73,6 @@ public class ProfileService implements IProfileService {
         Response responseConnections = connectionService.findAllConnectionsIdsByStatus(rootOrg, userId, Constants.Status.APPROVED, offset, limit);
         return responseConnections;
 
-//        List<String> userConnectionIds = (List<String>)responseConnections.get(Constants.ResponseStatus.DATA);
-//
-//        Response response = findProfiles(userConnectionIds,null);
-//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-//            response.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
-//
-//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-//            response.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
-//
-//        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
-//            response.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
-
     }
 
 
@@ -100,76 +81,21 @@ public class ProfileService implements IProfileService {
     public Response findProfileRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction) {
         Response responseConnections = connectionService.findConnectionsRequested(rootOrg, userId, offset, limit, direction);
         return  responseConnections;
-//        Response profileRes = getProfiles(responseConnections, direction);
-//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-//            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
-//
-//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-//            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
-//
-//        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
-//            profileRes.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
-//
-//        return profileRes;
 
     }
 
 
-    @Override
-    public Response findProfiles(List<String> userIds, String[] sourceFields) {
-
-        Response response = new Response();
-        try{
-
-            SearchHits searchResponse = restHighLevelClient.search(build(userIds, sourceFields), RequestOptions.DEFAULT).getHits();
-            logger.info("ids: {} and user profiles searched : {}", userIds, searchResponse.getHits().length );
-            List<Object> results = new ArrayList<>();
-            for (SearchHit hit : searchResponse.getHits()) {
-                results.add(hit.getSourceAsMap());
-            }
-
-            response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
-            response.put(Constants.ResponseStatus.DATA, results);
-            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
-        } catch (IOException e){
-            throw new ApplicationException(Constants.Message.FAILED_CONNECTION + e.getMessage());
-
-        }
-
-        return response;
-    }
-
-    private SearchRequest build(List<String> userIds, String[] sourceFields){
-        SearchRequest searchRequest = new SearchRequest();
-        searchRequest.indices(connectionProperties.getEsProfileIndex());
-        searchRequest.types(connectionProperties.getEsProfileIndexType());
-
-        BoolQueryBuilder query = QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("id.keyword", userIds));
-
-        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(query);
-        if (sourceFields != null && sourceFields.length>0) {
-            String[] mergedSource = (String[])Stream.of(connectionProperties.getEsProfileSourceFields(), sourceFields).flatMap(Stream::of).toArray();
-            searchSourceBuilder.fetchSource(mergedSource, new String[] {});
-
-        } else {
-            searchSourceBuilder.fetchSource(connectionProperties.getEsProfileSourceFields(), new String[] {});
-
-        }
-        searchSourceBuilder.size(userIds.size());
-        searchRequest.source(searchSourceBuilder);
-        return searchRequest;
-    }
-
+    //TODO: user wrapper layer to connect opensaber
     @Override
     public Response multiSearchProfiles(String rootOrg, String userId, MultiSearch mSearchRequest, String[] sourceFields) {
 
-        List<String> connectionIdsToExclude = connectionService.findUserConnections(rootOrg, userId);
-        connectionIdsToExclude.add(userId);
 
-        logger.info("connectionIdsToExclude ->"+connectionIdsToExclude);
         Response response = new Response();
         try{
+            List<String> connectionIdsToExclude = connectionService.findUserConnections(rootOrg, userId);
+            connectionIdsToExclude.add(userId);
+            logger.info("connectionIdsToExclude ->"+connectionIdsToExclude);
+
             logger.info("multisearch request -> "+mapper.writeValueAsString(mSearchRequest));
 
             List<String> tags = new ArrayList<>();
@@ -229,7 +155,7 @@ public class ProfileService implements IProfileService {
 
 
 
-        } catch (IOException e){
+        } catch (Exception e){
             logger.error(Constants.Message.CONNECTION_EXCEPTION_OCCURED, e);
             throw new ApplicationException(Constants.Message.FAILED_CONNECTION );
 
@@ -238,21 +164,4 @@ public class ProfileService implements IProfileService {
         return response;
     }
 
-    private Response getProfiles(Response connections,Constants.DIRECTION direction){
-
-        List<UserConnection> userConnections = (List<UserConnection>)connections.get(Constants.ResponseStatus.DATA);
-        if(userConnections.isEmpty()){
-            return connections;
-        }
-        List<String> connectionIds = Collections.emptyList();
-        if(direction!=null && direction.equals(Constants.DIRECTION.IN)){
-            connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getUserId()).collect(Collectors.toList());
-        } else {
-            connectionIds = userConnections.stream().map(uc -> uc.getUserConnectionPrimarykey().getConnectionId()).collect(Collectors.toList());
-        }
-        logger.debug("con ids "+connectionIds);
-
-        return findProfiles(connectionIds,null);
-
-    }
 }

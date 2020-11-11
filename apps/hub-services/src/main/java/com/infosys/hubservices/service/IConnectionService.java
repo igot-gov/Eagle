@@ -33,17 +33,6 @@ public interface IConnectionService {
     Response update(String rootOrg, List<ConnectionRequest> requests) throws Exception;
 
     /**
-     * Marked as rejected - deletes the connection
-     * @param userId
-     * @param connectionId
-     * @return
-     */
-    Response delete(String rootOrg, String userId, String connectionId);
-
-
-    Response findRecommendedConnection(ConnectionRequest request);
-
-    /**
      * Find related connections from existing connections
      * @param userId
      * @param offset
@@ -52,13 +41,6 @@ public interface IConnectionService {
      */
     Response findSuggestedConnections(String rootOrg, String userId, int offset, int limit);
 
-    /**
-     * Find connections which are established
-     * Accepted connection
-     * @param userId
-     * @return
-     */
-    Response findConnections(String rootOrg, String userId, int offset, int limit);
 
     public Response findAllConnectionsIdsByStatus(String rootOrg, String userId, String status, int offset, int limit);
 
@@ -79,7 +61,7 @@ public interface IConnectionService {
      */
     void sendNotification(String rootOrg, String eventId, String sender, String reciepient, String status);
 
-    List<String> findUserConnections(String rootOrg, String userId);
+    List<String> findUserConnections(String rootOrg, String userId) throws Exception;
 
 
 

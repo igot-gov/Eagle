@@ -15,14 +15,6 @@ import java.util.List;
 
 public interface IProfileService {
 
-    /**
-     * Find user profile for given source fields
-     * @param userId
-     * @param sourceFields
-     * @return
-     */
-    Response findProfiles(List<String> userId, String[] sourceFields);
-
 
     /**
      * Find related profile from existing connections
