@@ -40,14 +40,17 @@ public class GraphService implements IGraphService {
         try {
 
             params.put("data", mapper.convertValue(from, Map.class));
+            ((Map)params.get("data")).put("status",relation);
             params.put("childData", mapper.convertValue(to, Map.class));
 
             String parentProperties = "{identifier:{data}.identifier, name:{data}.name, department:{data}.department}";
             String childProperties = "{identifier:{childData}.identifier, name:{childData}.name, department:{childData}.department}";
+            String relProperties = "{updatedAt:{data}.updatedAt, status:{data}.status}";
+
 
             String text1 = "merge (n: user" + parentProperties + ") ";
             String text01 = "merge (n1: user" + childProperties + ") ";
-            String text2 = "merge (n)-[r:" + relation + "]->(n1) return n";
+            String text2 = "merge (n)-[r:" + relation + relProperties + "]->(n1) return n";
             Statement statement = new Statement(text1 + text01 + text2, params);
             logger.info("Merge Cypher query:: " + statement.text());
 
@@ -85,7 +88,7 @@ public class GraphService implements IGraphService {
             params.put("data", mapper.convertValue(from, Map.class));
             params.put("childData", mapper.convertValue(to, Map.class));
 
-            String text02 = "MATCH (:user {name:{data}.name})-[r:"+relation+"]-(:user {name:{childData}.name}) DELETE r ";
+            String text02 = "MATCH (:user {name:{data}.name})-[r]-(:user {name:{childData}.name}) DELETE r ";
             Statement statement1 = new Statement(text02, params);
             transaction.run(statement1);
             transaction.commitAsync().toCompletableFuture().get();
@@ -113,7 +116,7 @@ public class GraphService implements IGraphService {
         try {
 
             //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
-            String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY r.updatedAt DESC Skip "+offset+ " limit " +size;
             logger.info("text:: {}", text);
             Statement statement = new Statement(text);
 
@@ -143,7 +146,7 @@ public class GraphService implements IGraphService {
         try {
 
             //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
-            String text = "MATCH (n)-[r:"+relation+"]->(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            String text = "MATCH (n)-[r:"+relation+"]->(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY r.updatedAt DESC Skip "+offset+ " limit " +size;
             logger.info("text:: {}", text);
             Statement statement = new Statement(text);
 
@@ -172,7 +175,7 @@ public class GraphService implements IGraphService {
         try {
 
             //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
-            String text = "MATCH (n)-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            String text = "MATCH (n)-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY r.updatedAt DESC Skip "+offset+ " limit " +size;
             logger.info("text:: {}", text);
             Statement statement = new Statement(text);
 
@@ -201,8 +204,8 @@ public class GraphService implements IGraphService {
         try {
 
             //TODO generic for any level
-            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
-            String text = "MATCH (n)-[:"+relation+"]-(n0)-[:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY r1.updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)-[r:"+relation+"]-(n0)-[r1:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1  Skip "+offset+ " limit " +size;
             logger.info("text:: {}", text);
             Statement statement = new Statement(text);
 
@@ -278,6 +281,35 @@ public class GraphService implements IGraphService {
         }
 
         return count;
+    }
+
+    @Override
+    public List<Node> getAllNodes(String identifier) throws Exception {
+        Session session = neo4jDriver.session();
+        Transaction transaction = session.beginTransaction();
+        List<Node> nodes =new ArrayList<>();
+
+        try {
+
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)-[r]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ";
+            logger.info("text:: {}", text);
+            Statement statement = new Statement(text);
+
+            StatementResult result = transaction.run(statement);
+            List<Record> records = result.list();
+
+            nodes =getNodes(records);
+        } catch (Exception e) {
+            transaction.rollbackAsync().toCompletableFuture().get();
+            logger.error("Fetching user node failed : " ,e);
+
+        } finally {
+            transaction.close();
+            session.close();
+        }
+
+        return nodes;
     }
 
 }

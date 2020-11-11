@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/connections")
@@ -25,16 +27,16 @@ public class UserConnectionCrudController {
 
     @PostMapping("/add")
     public ResponseEntity<Response> add(@RequestHeader String rootOrg,
-                                        @RequestBody ConnectionRequest request) throws Exception{
-        Response response = connectionService.add(rootOrg, request);
+                                        @RequestBody List<ConnectionRequest> requests) throws Exception{
+        Response response = connectionService.add(rootOrg, requests);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }
 
     @PostMapping("/update")
     public ResponseEntity<Response> update(@RequestHeader String rootOrg,
-                                           @RequestBody ConnectionRequest request) throws Exception{
-        Response response = connectionService.update(rootOrg, request);
+                                           @RequestBody List<ConnectionRequest> requests) throws Exception{
+        Response response = connectionService.update(rootOrg, requests);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }

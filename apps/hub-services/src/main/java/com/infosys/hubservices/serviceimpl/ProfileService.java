@@ -99,17 +99,18 @@ public class ProfileService implements IProfileService {
     @Override
     public Response findProfileRequested(String rootOrg, String userId, int offset, int limit, Constants.DIRECTION direction) {
         Response responseConnections = connectionService.findConnectionsRequested(rootOrg, userId, offset, limit, direction);
-        Response profileRes = getProfiles(responseConnections, direction);
-        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
-
-        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
-
-        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
-            profileRes.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
-
-        return profileRes;
+        return  responseConnections;
+//        Response profileRes = getProfiles(responseConnections, direction);
+//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+//            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+//
+//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+//            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
+//
+//        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
+//            profileRes.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
+//
+//        return profileRes;
 
     }
 

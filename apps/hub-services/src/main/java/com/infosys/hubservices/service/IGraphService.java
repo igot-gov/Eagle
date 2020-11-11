@@ -26,8 +26,10 @@ public interface IGraphService {
     public List<Node> getNodesNextLevel(String identifier, String relation, int offset, int size) throws Exception;
 
     public int getAllNodeCount(String identifier, String relation) throws Exception;
+    public List<Node> getAllNodes(String identifier) throws Exception;
 
 
 
 
-}
+
+    }

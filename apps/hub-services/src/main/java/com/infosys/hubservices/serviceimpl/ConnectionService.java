@@ -30,6 +30,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import com.infosys.hubservices.model.Node;
 
@@ -54,24 +55,25 @@ public class ConnectionService implements IConnectionService {
 
 
     @Override
-    public Response add(String rootOrg, ConnectionRequest request) throws Exception{
+    public Response add(String rootOrg, List<ConnectionRequest> requests) throws Exception{
 
         Response response = new Response();
         try {
 
-            Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
-            from.setCreatedAt(new Date());
-            from.setUpdatedAt(from.getCreatedAt());
+            for(ConnectionRequest request :requests){
+                Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+                //from.setCreatedAt(new Date());
+                from.setUpdatedAt(new Date());
 
-            Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
-            to.setCreatedAt(new Date());
-            to.setUpdatedAt(to.getCreatedAt());
+                Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+                to.setCreatedAt(new Date());
+                //to.setUpdatedAt(to.getCreatedAt());
 
-
-            graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
-
-//            if(connectionProperties.isNotificationEnabled())
+                graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
+//              if(connectionProperties.isNotificationEnabled())
 //                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
+
+            }
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
@@ -87,22 +89,24 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response update(String rootOrg, ConnectionRequest request) throws Exception{
+    public Response update(String rootOrg, List<ConnectionRequest> requests) throws Exception{
         Response response = new Response();
 
         try {
 
-            Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
-            from.setUpdatedAt(new Date());
-            Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
-            to.setUpdatedAt(new Date());
+            for(ConnectionRequest request: requests){
+                Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+                from.setUpdatedAt(new Date());
+                Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+                to.setUpdatedAt(new Date());
 
-            graphService.createNodeWithRelation(to, from, request.getStatus());
-            graphService.deleteRelation(from, to, Constants.Status.PENDING);
+                graphService.deleteRelation(from, to, null);
+                graphService.createNodeWithRelation(to, from, request.getStatus());
 
 //            if(connectionProperties.isNotificationEnabled())
 //                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
 
+            }
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
 
@@ -180,14 +184,17 @@ public class ConnectionService implements IConnectionService {
 
             List<Node> nodes = graphService.getNodesNextLevel(userId, Constants.Status.APPROVED, offset, limit );
 
+            List<String> allNodesIds = graphService.getAllNodes(userId).stream().map(node -> node.getIdentifier()).collect(Collectors.toList());
+            List<Node> detachedNodes = nodes.stream().filter(node -> !allNodesIds.contains(node.getIdentifier())).collect(Collectors.toList());
+
             //System.out.println("commons ->"+new ObjectMapper().writeValueAsString(commonConnections));
-            if(nodes.isEmpty()){
+            if(detachedNodes.isEmpty()){
                 response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.FAILED);
-                response.put(Constants.ResponseStatus.DATA, nodes);
+                response.put(Constants.ResponseStatus.DATA, detachedNodes);
                 response.put(Constants.ResponseStatus.STATUS, HttpStatus.NO_CONTENT);
             }
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
-            response.put(Constants.ResponseStatus.DATA, nodes);
+            response.put(Constants.ResponseStatus.DATA, detachedNodes);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         }catch (Exception e){

@@ -7,6 +7,9 @@
 
 package com.infosys.hubservices.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Date;
 
 public class Node {
@@ -52,10 +55,12 @@ public class Node {
         return createdAt;
     }
 
+    @JsonIgnore
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
+    //@JsonIgnore
     public Date getUpdatedAt() {
         return updatedAt;
     }

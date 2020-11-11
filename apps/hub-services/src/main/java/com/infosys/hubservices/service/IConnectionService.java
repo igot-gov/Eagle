@@ -22,7 +22,7 @@ public interface IConnectionService {
      * @param request
      * @return
      */
-    Response add(String rootOrg, ConnectionRequest request) throws Exception;
+    Response add(String rootOrg, List<ConnectionRequest> requests) throws Exception;
 
     /**
      * To update the status and dates of connection
@@ -30,7 +30,7 @@ public interface IConnectionService {
      * @param request
      * @return
      */
-    Response update(String rootOrg, ConnectionRequest request) throws Exception;
+    Response update(String rootOrg, List<ConnectionRequest> requests) throws Exception;
 
     /**
      * Marked as rejected - deletes the connection

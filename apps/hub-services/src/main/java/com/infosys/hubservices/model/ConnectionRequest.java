@@ -7,16 +7,22 @@
 
 package com.infosys.hubservices.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class ConnectionRequest {
 
     @NotNull
+    //@JsonProperty("userIdTo")
     private String userId;
     @NotNull
+    //@JsonProperty("userIdFrom")
     private String connectionId;
     // name - department = label
+    //@JsonProperty("userNameTo")
     private String userName;
     //
     private String userDepartment;
