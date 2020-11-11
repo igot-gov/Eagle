@@ -22,7 +22,11 @@ const path = require("path");
 const router = express.Router();
 
 app.use(express.static("public"));
-
+app.use('/healthcheck', healthcheck({
+  healthy() {
+    return { everything: 'is ok' }
+  },
+}))
 
 router.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
