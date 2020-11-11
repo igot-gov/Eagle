@@ -16,9 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.ZoneId;
+import java.util.*;
 
 @Service
 public class GraphService implements IGraphService {
@@ -86,7 +85,6 @@ public class GraphService implements IGraphService {
             params.put("data", mapper.convertValue(from, Map.class));
             params.put("childData", mapper.convertValue(to, Map.class));
 
-            //TODO: run in single transaction
             String text02 = "MATCH (:user {name:{data}.name})-[r:"+relation+"]-(:user {name:{childData}.name}) DELETE r ";
             Statement statement1 = new Statement(text02, params);
             transaction.run(statement1);
@@ -104,4 +102,182 @@ public class GraphService implements IGraphService {
         }
         return Boolean.TRUE;
     }
+
+    @Override
+    public List<Node> getNodesInEdge(String identifier, String relation, int offset, int size) throws Exception {
+
+        Session session = neo4jDriver.session();
+        Transaction transaction = session.beginTransaction();
+
+        List<Node> nodes = new ArrayList<>();
+        try {
+
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            logger.info("text:: {}", text);
+            Statement statement = new Statement(text);
+
+            StatementResult result = transaction.run(statement);
+            List<Record> records = result.list();
+            nodes = getNodes(records);
+
+        } catch (Exception e) {
+            transaction.rollbackAsync().toCompletableFuture().get();
+            logger.error("Fetching user node failed : " ,e);
+
+        } finally {
+            transaction.close();
+            session.close();
+        }
+        return nodes;
+    }
+
+
+    @Override
+    public List<Node> getNodesOutEdge(String identifier, String relation, int offset, int size) throws Exception {
+
+        Session session = neo4jDriver.session();
+        Transaction transaction = session.beginTransaction();
+
+        List<Node> nodes = new ArrayList<>();
+        try {
+
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)-[r:"+relation+"]->(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            logger.info("text:: {}", text);
+            Statement statement = new Statement(text);
+
+            StatementResult result = transaction.run(statement);
+            List<Record> records = result.list();
+
+            nodes = getNodes(records);
+
+        } catch (Exception e) {
+            transaction.rollbackAsync().toCompletableFuture().get();
+            logger.error("Fetching user node failed : " ,e);
+
+        } finally {
+            transaction.close();
+            session.close();
+        }
+        return nodes;
+    }
+
+    @Override
+    public List<Node> getNodesInAndOutEdge(String identifier, String relation, int offset, int size) throws Exception{
+        Session session = neo4jDriver.session();
+        Transaction transaction = session.beginTransaction();
+
+        List<Node> nodes = new ArrayList<>();
+        try {
+
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            logger.info("text:: {}", text);
+            Statement statement = new Statement(text);
+
+            StatementResult result = transaction.run(statement);
+            List<Record> records = result.list();
+
+            nodes = getNodes(records);
+
+        } catch (Exception e) {
+            transaction.rollbackAsync().toCompletableFuture().get();
+            logger.error("Fetching user node failed : " ,e);
+
+        } finally {
+            transaction.close();
+            session.close();
+        }
+        return nodes;
+    }
+
+    @Override
+    public List<Node> getNodesNextLevel(String identifier, String relation, int offset, int size) throws Exception{
+        Session session = neo4jDriver.session();
+        Transaction transaction = session.beginTransaction();
+
+        List<Node> nodes = new ArrayList<>();
+        try {
+
+            //TODO generic for any level
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)-[:"+relation+"]-(n0)-[:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 Skip "+offset+ " limit " +size;
+            logger.info("text:: {}", text);
+            Statement statement = new Statement(text);
+
+            StatementResult result = transaction.run(statement);
+            List<Record> records = result.list();
+
+            nodes = getNodes(records);
+
+        } catch (Exception e) {
+            transaction.rollbackAsync().toCompletableFuture().get();
+            logger.error("Fetching user node failed : " ,e);
+
+        } finally {
+            transaction.close();
+            session.close();
+        }
+        return nodes;
+    }
+
+    private List<Node> getNodes(List<Record> records){
+
+        List<Node> nodes = new ArrayList<>();
+
+        if (records.size() > 0) {
+            logger.info("{} User node fetched.",records.size());
+            for (Record record : records) {
+                org.neo4j.driver.v1.types.Node node = record.get("n1").asNode();
+                //TODO: optimise
+                Node nodePojo = new Node(node.get("identifier").asString(), node.get("name").asString(), node.get("department").asString());
+                //Date d = Date.from(node.get("updatedAt").asLocalDate().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+                //nodePojo.setUpdatedAt(d);
+                logger.info("########### nodePojo fetched {}",nodePojo);
+
+                nodes.add(nodePojo);
+
+            }
+        }
+        return nodes;
+    }
+
+    @Override
+    public int getAllNodeCount(String identifier, String relation) throws Exception {
+        Session session = neo4jDriver.session();
+        Transaction transaction = session.beginTransaction();
+        int count =0;
+
+        try {
+
+            //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
+            String text = "MATCH (n)-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN count(r) ";
+            logger.info("text:: {}", text);
+            Statement statement = new Statement(text);
+
+            StatementResult result = transaction.run(statement);
+            List<Record> records = result.list();
+
+            if (records.size() > 0) {
+                logger.info("{} User node fetched.",records.size());
+                for (Record record : records) {
+                    count = record.get("count(r)").asInt();
+
+
+                }
+            }
+
+        } catch (Exception e) {
+            transaction.rollbackAsync().toCompletableFuture().get();
+            logger.error("Fetching user node failed : " ,e);
+
+        } finally {
+            transaction.close();
+            session.close();
+        }
+
+        return count;
+    }
+
 }

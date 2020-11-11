@@ -39,25 +39,5 @@ public class UserConnectionCrudController {
 
     }
 
-    @GetMapping("/delete")
-    public ResponseEntity<Response> delete(@RequestHeader String rootOrg,
-                                           @RequestHeader String userId, @RequestHeader String connectionId) {
-
-        //mark status as rejected
-        Response response = connectionService.delete(rootOrg, userId, connectionId);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-    }
-
-
-    @GetMapping("/fetch/all")
-    public ResponseEntity<Response> getAll(@RequestHeader(required = true) String rootOrg, @RequestHeader String userId,
-                                           @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                           @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
-
-        Response response = connectionService.findConnections(rootOrg, userId, pageNo, pageSize);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-    }
 
 }

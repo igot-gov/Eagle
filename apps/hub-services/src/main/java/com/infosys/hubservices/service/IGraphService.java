@@ -9,11 +9,25 @@ package com.infosys.hubservices.service;
 
 import com.infosys.hubservices.model.Node;
 
+import java.util.List;
+
 public interface IGraphService {
 
     public Boolean createNodeWithRelation(Node from, Node to, String relation) throws Exception;
 
     public Boolean deleteRelation(Node from, Node to, String relation) throws Exception;
+
+    public List<Node> getNodesInEdge(String identifier, String relation, int offset, int size) throws Exception;
+
+    public List<Node> getNodesOutEdge(String identifier, String relation, int offset, int size) throws Exception;
+
+    public List<Node> getNodesInAndOutEdge(String identifier, String relation, int offset, int size) throws Exception;
+
+    public List<Node> getNodesNextLevel(String identifier, String relation, int offset, int size) throws Exception;
+
+    public int getAllNodeCount(String identifier, String relation) throws Exception;
+
+
 
 
 }

@@ -62,14 +62,14 @@ public class ProfileService implements IProfileService {
     public Response findCommonProfile(String rootOrg, String userId, int offset, int limit) {
 
         Response responseConnections = connectionService.findSuggestedConnections(rootOrg, userId, offset, limit);
-        Response profileRes = getProfiles(responseConnections, null);
-        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+//        Response profileRes = getProfiles(responseConnections, null);
+//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+//            profileRes.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+//
+//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+//            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
 
-        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            profileRes.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
-
-        return profileRes;
+        return responseConnections;
 
 
     }
@@ -78,18 +78,19 @@ public class ProfileService implements IProfileService {
     public Response findProfiles(String rootOrg, String userId, int offset, int limit) {
 
         Response responseConnections = connectionService.findAllConnectionsIdsByStatus(rootOrg, userId, Constants.Status.APPROVED, offset, limit);
-        List<String> userConnectionIds = (List<String>)responseConnections.get(Constants.ResponseStatus.DATA);
+        return responseConnections;
 
-        Response response = findProfiles(userConnectionIds,null);
-        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            response.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
-
-        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
-            response.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
-
-        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
-            response.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
-        return response;
+//        List<String> userConnectionIds = (List<String>)responseConnections.get(Constants.ResponseStatus.DATA);
+//
+//        Response response = findProfiles(userConnectionIds,null);
+//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+//            response.put(Constants.ResponseStatus.PAGENO, responseConnections.get(Constants.ResponseStatus.PAGENO));
+//
+//        if(responseConnections.containsKey(Constants.ResponseStatus.PAGENO))
+//            response.put(Constants.ResponseStatus.HASPAGENEXT, responseConnections.get(Constants.ResponseStatus.HASPAGENEXT));
+//
+//        if(responseConnections.containsKey(Constants.ResponseStatus.TOTALHIT))
+//            response.put(Constants.ResponseStatus.TOTALHIT, responseConnections.get(Constants.ResponseStatus.TOTALHIT));
 
     }
 
