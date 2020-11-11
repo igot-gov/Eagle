@@ -61,7 +61,7 @@
                     "uri": ""
                   },
                   "enabled": true,
-                  "routerLink": "/app/notifications"
+                  "routerLink": "/app/home"
                 },
                 {
                   "name": "Roles and access",
@@ -72,7 +72,7 @@
                     "uri": ""
                   },
                   "enabled": true,
-                  "routerLink": "/app/notifications"
+                  "routerLink": "/app/person-profile"
                 },
                 {
                   "name": "Approvals",
@@ -120,54 +120,7 @@
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultipleNew",
               "widgetData": {
-                "strips": [
-                  {
-                    "key": "continueLearning",
-                    "logo": "school",
-                    "title": "learn",
-                    "stripBackground": "assets/instances/eagle/background/learn.svg",
-                    "titleDescription": "Continue Learning",
-                    "stripConfig": {
-                      "cardSubType": "standard"
-                    },
-                    "viewMoreUrl": {
-                      "path": "/page/learn",
-                      "viewMoreText": "Learn",
-                      "queryParams": {}
-                    },
-                    "filters": [],
-                    "request": {
-                      "searchV6": {
-                        "locale": [
-                          "en"
-                        ],
-                        "pageSize": 12,
-                        "query": "all",
-                        "didYouMean": true,
-                        "filters": [
-                          {
-                            "andFilters": [
-                              {
-                                "lastUpdatedOn": [
-                                  "month"
-                                ]
-                              },
-                              {
-                                "contentType": [
-                                  "Course",
-                                  "Learning Path"
-                                ]
-                              }
-                            ]
-                          }
-                        ],
-                        "includeSourceFields": [
-                          "creatorLogo"
-                        ]
-                      }
-                    }
-                  }
-                ]
+                "strips": []
               }
             }
           }

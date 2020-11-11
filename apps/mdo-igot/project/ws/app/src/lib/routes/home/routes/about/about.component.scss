@@ -60,13 +60,7 @@
   border-radius: 8px;
 }
 
-.sticky {
-  position: sticky;
-  top: calc(#{$mat-toolbar-gt-xs});
-  overflow: hidden;
-  // z-index: 10;
-  // width: 100%;
-}
+
 
 .text-box {
   display: flex;

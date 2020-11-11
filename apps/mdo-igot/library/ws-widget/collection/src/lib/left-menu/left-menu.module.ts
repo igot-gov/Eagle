@@ -30,5 +30,8 @@ import {
     MatListModule,
   ],
   entryComponents: [LeftMenuComponent],
+  exports: [
+    LeftMenuComponent,
+  ]
 })
 export class LeftMenuModule { }

@@ -87,10 +87,10 @@ export class GeneralGuard implements CanActivate {
     /**
        * Test IF User updated the profile details
        */
-    if (!this.configSvc.profileDetailsStatus) {
-      // return this.router.parseUrl('/app/user-profile/details')
-      return this.router.navigate(['/app/user-profile/details', { isForcedUpdate: true }])
-    }
+    // if (!this.configSvc.profileDetailsStatus) {
+    //   // return this.router.parseUrl('/app/user-profile/details')
+    //   return this.router.navigate(['/app/user-profile/details', { isForcedUpdate: true }])
+    // }
 
     /**
      * Test IF User has requried role to access the page
@@ -101,7 +101,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (!requiredRolePreset) {
-        return this.router.parseUrl('/page/home')
+        return this.router.parseUrl('/app/home')
       }
     }
 
@@ -112,7 +112,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (requiredFeaturesMissing) {
-        return this.router.parseUrl('/page/home')
+        return this.router.parseUrl('/app/home')
       }
     }
 

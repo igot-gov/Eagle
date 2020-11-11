@@ -29,13 +29,13 @@ export class BtnPageBackNavComponent extends WidgetBaseComponent
     if (this.presentUrl === '/page/explore') {
       return {
         queryParams: undefined,
-        routeUrl: '/page/home',
+        routeUrl: '/app/home',
       }
     }
     if (this.widgetData.url === 'home') {
       return {
         queryParams: undefined,
-        routeUrl: '/page/home',
+        routeUrl: '/app/home',
       }
     }
 

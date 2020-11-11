@@ -25,7 +25,7 @@
       <mat-icon>chevron_left</mat-icon>
       <span class="padding-left-xs" i18n>Prev</span>
     </button>
-    <a mat-raised-button type="button" color="primary" *ngIf="currentIndex !== 2" [routerLink]="'/page/home'"
+    <a mat-raised-button type="button" color="primary" *ngIf="currentIndex !== 2" [routerLink]="'/app/home'"
       i18n>Skip</a>
     <button mat-raised-button type="button" color="primary" *ngIf="currentIndex == 2" (click)="applyChanges(confirm)"
       i18n>

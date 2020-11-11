@@ -6,20 +6,22 @@ import { map } from 'rxjs/operators'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
+import { ILeftMenu } from '@ws-widget/collection'
 /* tslint:enable */
 
 @Component({
-  selector: 'app-profile-v2',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: 'ws-app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
   /* tslint:disable */
   host: { class: 'margin-top-l' },
   /* tslint:enable */
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
   titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
+  WidgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   unread = 0
   currentRoute = 'home'
   banner!: NsWidgetResolver.IWidgetData<any>
@@ -34,7 +36,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (event instanceof NavigationEnd) {
         // Hide loading indicator
         // console.log(event.url)
-        this.bindUrl(event.urlAfterRedirects.replace('/app/discuss/', ''))
+        this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
+        this.WidgetData = this.activeRoute.snapshot.data &&
+          this.activeRoute.snapshot.data.pageData.data.menus || []
       }
 
       if (event instanceof NavigationError) {
@@ -44,20 +48,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         // console.log(event.error)
       }
     })
-    if (this.activeRoute.firstChild) {
-      this.activeRoute.firstChild.data.subscribe(response => {
-        this.userRouteName = response && response.profile && response.profile.data && response.profile.data[0]
-          && response.profile.data[0].personalDetails &&
-          `${(response.profile.data[0].personalDetails.firstname || '')} ${(response.profile.data[0].personalDetails.surname)}`
-      })
-      if (this.userRouteName && this.userRouteName.trim()) {
-        this.titles.push({
-          icon: '',
-          title: `${this.userRouteName}\'profile`,
-          url: 'none',
-        })
-      }
-    }
+
   }
   ngOnInit() {
     this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {

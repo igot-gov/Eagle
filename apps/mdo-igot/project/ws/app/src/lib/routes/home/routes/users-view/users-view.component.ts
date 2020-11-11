@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
 import { ActivatedRoute } from '@angular/router'
@@ -13,20 +13,17 @@ import _ from 'lodash'
 /* tslint:enable */
 
 @Component({
-  selector: 'app-profile-view',
-  templateUrl: './profile-view.component.html',
-  styleUrls: ['./profile-view.component.scss'],
+  selector: 'ws-app-users-view',
+  templateUrl: './users-view.component.html',
+  styleUrls: ['./users-view.component.scss'],
   /* tslint:disable */
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
-  sticky = false
+export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   /* tslint:disable */
   Math: any
   /* tslint:enable */
-  elementPosition: any
   currentFilter = 'timestamp'
   discussionList!: any
   discussProfileData!: any
@@ -37,15 +34,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
   tabsData: NSProfileDataV2.IProfileTab[]
   currentUser!: string | null
   connectionRequests!: any[]
-  @HostListener('window:scroll', ['$event'])
-  handleScroll() {
-    const windowScroll = window.pageYOffset
-    if (windowScroll >= this.elementPosition) {
-      this.sticky = true
-    } else {
-      this.sticky = false
-    }
-  }
+
 
   constructor(
     public dialog: MatDialog,
@@ -87,7 +76,7 @@ export class ProfileViewComponent implements OnInit, AfterViewInit, OnDestroy {
     // int left blank
   }
   ngAfterViewInit() {
-    this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
+    // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
   }
   fetchUserDetails() {
     // if (wid) {

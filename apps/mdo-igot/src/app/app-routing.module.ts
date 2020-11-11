@@ -38,11 +38,18 @@ const routes: Routes = [
     redirectTo: 'page/embed-behavioural-skills',
     canActivate: [GeneralGuard],
   },
-  // {
-  //   path: 'app/activities',
-  //   loadChildren: () => import('./routes/route-activities.module').then(u => u.RouteActivitiesModule),
-  //   canActivate: [GeneralGuard],
-  // },
+  {
+    path: 'app/home',
+    loadChildren: () => import('./routes/route-home.module').then(u => u.RouteHomeAppModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'home',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
   {
     path: 'app/frac',
     loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
@@ -85,19 +92,19 @@ const routes: Routes = [
       import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
     canActivate: [GeneralGuard],
   },
-  {
-    path: 'app/person-profile',
-    loadChildren: () =>
-      import('./routes/route-profile-v2.module').then(u => u.RouteProfileV2Module),
-    canActivate: [GeneralGuard],
-    data: {
-      pageType: 'feature',
-      pageKey: 'profile-v2',
-    },
-    resolve: {
-      pageData: PageResolve,
-    },
-  },
+  // {
+  //   path: 'app/person-profile',
+  //   loadChildren: () =>
+  //     import('./routes/route-profile-v2.module').then(u => u.RouteProfileV2Module),
+  //   canActivate: [GeneralGuard],
+  //   data: {
+  //     pageType: 'feature',
+  //     pageKey: 'profile-v2',
+  //   },
+  //   resolve: {
+  //     pageData: PageResolve,
+  //   },
+  // },
   {
     path: 'app/events',
     loadChildren: () => import('./routes/route-app-event.module').then(m => m.AppEventsModule),

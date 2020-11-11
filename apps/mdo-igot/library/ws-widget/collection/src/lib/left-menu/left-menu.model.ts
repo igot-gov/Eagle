@@ -1,14 +1,12 @@
 
-export namespace NsLeftMenu {
-  export interface IleftMenu {
-    name: string
-    key: string
-    render: boolean
-    badges: {
-      enabled: boolean
-      uri?: string
-    }
+export interface ILeftMenu {
+  name: string
+  key: string
+  render: boolean
+  badges: {
     enabled: boolean
-    routerLink: string
+    uri?: string
   }
+  enabled: boolean
+  routerLink: string
 }

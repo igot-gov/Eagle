@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
-import { LeftMenuComponent } from './components/left-menu/left-menu.component'
-import { RightMenuComponent } from './components/right-menu/right-menu.component'
-// import { BasicCKEditorComponent } from './components/basic-ckeditor/basic-ckeditor.component'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
@@ -23,31 +20,26 @@ import {
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { AvatarPhotoModule, BtnPageBackModule } from '@ws-widget/collection'
-// import { EditorSharedModule } from '@ws/author/src/lib/routing/modules/editor/shared/shared.module'
-// import { CkEditorModule } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.module'
-// import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { InitResolver } from './resolvers/init-resolve.service'
-// import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
 import { RouterModule } from '@angular/router'
-import { ProfileV2RoutingModule } from './profile-v2.rounting.module'
-import { ProfileComponent } from './routes/profile/profile.component'
-import { ProfileViewComponent } from './routes/profile-view/profile-view.component'
-// import { DiscussModule } from '../discuss/discuss.module'
+import { HomeRoutingModule } from './home.rounting.module'
+import { HomeComponent } from './routes/home/home.component'
+import { UsersViewComponent } from './routes/users-view/users-view.component'
+import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule } from '@ws-widget/collection'
+import { AboutComponent } from './routes/about/about.component'
 
 @NgModule({
   declarations: [
-    ProfileComponent,
-    ProfileViewComponent,
-    LeftMenuComponent,
-    RightMenuComponent,
+    HomeComponent,
+    UsersViewComponent,
+    AboutComponent
   ],
   imports: [
     CommonModule,
     WidgetResolverModule,
     ReactiveFormsModule,
-    ProfileV2RoutingModule,
-    // DiscussModule,
+    HomeRoutingModule,
+    LeftMenuModule,
     FormsModule,
     RouterModule,
     MatGridListModule,
@@ -85,6 +77,6 @@ import { ProfileViewComponent } from './routes/profile-view/profile-view.compone
     InitResolver,
   ],
 })
-export class ProfileV2Module {
+export class HomeModule {
 
 }

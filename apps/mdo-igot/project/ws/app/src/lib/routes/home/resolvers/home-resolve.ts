@@ -4,19 +4,19 @@ import { Observable, of } from 'rxjs'
 import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
 import { ConfigurationsService, IResolveResponse } from '@ws-widget/utils'
-import { ProfileV2UtillService } from '../services/profile-v2-utill.service'
+import { ProfileV2Service } from '../services/home.servive'
 import { NSProfileDataV2 } from '../models/profile-v2.model'
 
 @Injectable()
-export class Profilev2BadgesResolve
+export class HomeResolve
   implements
-  Resolve<Observable<IResolveResponse<NSProfileDataV2.IBadgeResponse>> | IResolveResponse<NSProfileDataV2.IBadgeResponse>> {
-  constructor(private profileV2Svc: ProfileV2UtillService, private configSvc: ConfigurationsService) { }
+  Resolve<Observable<IResolveResponse<NSProfileDataV2.IProfile>> | IResolveResponse<NSProfileDataV2.IProfile>> {
+  constructor(private profileV2Svc: ProfileV2Service, private configSvc: ConfigurationsService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
-  ): Observable<IResolveResponse<NSProfileDataV2.IBadgeResponse>> {
+  ): Observable<IResolveResponse<NSProfileDataV2.IProfile>> {
     const path = _route.routeConfig && _route.routeConfig.path
     let userId = ''
     if (path !== 'me') {
@@ -30,7 +30,7 @@ export class Profilev2BadgesResolve
     } else {
       userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
     }
-    return this.profileV2Svc.fetchBadges(userId).pipe(
+    return this.profileV2Svc.fetchProfile(userId).pipe(
       map(data => ({ data, error: null })),
       catchError(error => of({ error, data: null })),
     )
