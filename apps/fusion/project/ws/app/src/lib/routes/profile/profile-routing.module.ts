@@ -43,6 +43,7 @@ const routes: Routes = [
   {
     path: 'competency',
     component: CompetencyHomeComponent,
+    canActivate: [GeneralGuard],
     children: [
       {
         path: '',
