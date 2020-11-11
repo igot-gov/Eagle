@@ -80,17 +80,4 @@ public class ConnectionProfileController {
 
     }
 
-    @GetMapping("/fetch/all")
-    public ResponseEntity<Response> findAll(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
-                                            @RequestHeader String userId,
-                                            @RequestParam(defaultValue = "10", required = false, name = "pageSize") int pageSize,
-                                            @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo,
-                                            @RequestParam(required = true, name = "connectionIds") List<String> connectionIds,
-                                            @RequestParam(required = false, name = "includeSources") String[] includeSources) {
-
-        Response response = profileService.findProfiles(connectionIds, includeSources);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-    }
-
 }

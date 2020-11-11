@@ -7,11 +7,16 @@
 
 package com.infosys.hubservices.model;
 
+import java.util.Date;
+
 public class Node {
 
     private String identifier;
     private String name;
     private String department;
+    private Date createdAt;
+    private Date updatedAt;
+
 
     public Node(String identifier, String name, String department){
         this.identifier = identifier;
@@ -41,5 +46,21 @@ public class Node {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

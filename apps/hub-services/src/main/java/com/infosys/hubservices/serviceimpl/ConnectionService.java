@@ -20,7 +20,6 @@ import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.service.IGraphService;
 import com.infosys.hubservices.util.ConnectionProperties;
 import com.infosys.hubservices.util.Constants;
-import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import com.infosys.hubservices.model.Node;
 
@@ -62,13 +60,14 @@ public class ConnectionService implements IConnectionService {
         try {
 
             Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+            from.setCreatedAt(new Date());
             Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+            to.setCreatedAt(new Date());
 
             graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
 
 //            if(connectionProperties.isNotificationEnabled())
 //                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
-
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
@@ -90,7 +89,9 @@ public class ConnectionService implements IConnectionService {
         try {
 
             Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+            from.setUpdatedAt(new Date());
             Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+            to.setUpdatedAt(new Date());
 
             graphService.createNodeWithRelation(to, from, request.getStatus());
             graphService.deleteRelation(from, to, Constants.Status.PENDING);
