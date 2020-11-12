@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { UITableComponent } from './user-list/ui-table.component'
+import { UIUserTableComponent } from './user-list/ui-user-table.component'
 import { MatTableModule } from '@angular/material/table'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatSortModule } from '@angular/material/sort'
 
 @NgModule({
-  declarations: [UITableComponent],
+  declarations: [UIUserTableComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -14,6 +14,6 @@ import { MatSortModule } from '@angular/material/sort'
     MatSortModule,
   ],
 
-  exports: [UITableComponent],
+  exports: [UIUserTableComponent],
 })
 export class UITableModule { }
