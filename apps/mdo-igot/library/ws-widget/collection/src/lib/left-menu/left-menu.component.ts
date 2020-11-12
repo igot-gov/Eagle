@@ -12,8 +12,6 @@ export class LeftMenuComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<ILeftMenu[]>  {
   @Input() widgetData!: ILeftMenu[]
 
-
-
   constructor(private activatedRoute: ActivatedRoute) {
     super()
   }

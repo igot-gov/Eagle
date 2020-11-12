@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     })
   }
   ngAfterViewInit() {
-    this.elementPosition = this.menuElement.nativeElement.offsetTop
+    // this.elementPosition = this.menuElement.nativeElement.offsetTop
   }
   bindUrl(path: string) {
     if (path) {
