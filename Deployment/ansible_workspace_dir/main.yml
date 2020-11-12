@@ -80,6 +80,8 @@
       tags: [deploy-sb-hub-service]
     - role: deploy-content-validation-service
       tags: [deploy-content-validation-service]
+    - role: deploy-social-share-service
+      tags: [deploy-social-share-service]
 
  
   tasks:
