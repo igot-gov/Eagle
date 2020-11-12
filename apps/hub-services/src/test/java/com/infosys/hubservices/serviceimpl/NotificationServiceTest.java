@@ -59,7 +59,7 @@ class NotificationServiceTest {
         Response response = new Response();
         response.put(Constants.ResponseStatus.DATA, mockProfiles);
 
-        when(profileService.findProfiles(Arrays.asList(id),null)).thenReturn(response);
+        //when(profileService.findProfiles(Arrays.asList(id),null)).thenReturn(response);
 
         when(connectionProperties.getNotificationTemplateSender()).thenReturn(sender);
         when(connectionProperties.getNotificationTemplateTargetUrl()).thenReturn(targetUrl);

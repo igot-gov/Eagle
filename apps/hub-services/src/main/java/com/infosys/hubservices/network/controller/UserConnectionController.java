@@ -57,15 +57,15 @@ public class UserConnectionController {
 
     }*/
 
-    @GetMapping("/fetch/established")
-    public ResponseEntity<Response> findConnectionsEstablished(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
-                                                               @RequestHeader String userId,
-                                                               @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
-                                                               @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
-
-        Response response = connectionService.findConnections(rootOrg, userId, pageNo, pageSize);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-
-    }
+//    @GetMapping("/fetch/established")
+//    public ResponseEntity<Response> findConnectionsEstablished(@RequestHeader(required = true) String rootOrg, @RequestHeader(required = false) String org,
+//                                                               @RequestHeader String userId,
+//                                                               @RequestParam(defaultValue = "5", required = false, name = "pageSize") int pageSize,
+//                                                               @RequestParam(defaultValue = "0", required = false, name = "pageNo") int pageNo) {
+//
+//        Response response = connectionService.findConnections(rootOrg, userId, pageNo, pageSize);
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//
+//    }
 
 }

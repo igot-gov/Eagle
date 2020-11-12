@@ -74,7 +74,7 @@ public class NotificationService implements INotificationService {
 
         String fromName = null;
         try{
-            Response res = profileService.findProfiles(Arrays.asList(uuid),null);
+            Response res = null;//profileService.findProfiles(Arrays.asList(uuid),null);
             Map<String, Object> profiles = res.getResult();
             if(profiles.size()>0){
 
