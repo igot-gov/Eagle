@@ -73,6 +73,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       sortState: 'asc',
     }
     this.data = [{
+
       fullname: 'Ibrahim Sha',
       email: 'ibrahimsha@gmail.com',
       type: 'Transfer',

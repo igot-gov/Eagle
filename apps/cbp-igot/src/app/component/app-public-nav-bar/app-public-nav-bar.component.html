@@ -1,0 +1,16 @@
+<mat-toolbar *ngIf="showPublicNavbar" [color]="navBar?.color" [ngStyle]="navBar?.styles">
+  <a name="application-logo" class="padding-remove-small" mat-button routerLink=".">
+    <img [src]="appIcon" i18n-alt alt="Application Logo" class="app-logo" />
+    <!-- <span class="title-app mx-2" *ngIf="appName">| {{appName}}</span> -->
+  </a>
+
+  <span class="spacer"></span>
+  <a name="about_btn" class="padding-remove-small" mat-button routerLink="/public/about">
+    <!-- <span i18n class="small-font-size">About Us</span> -->
+    <mat-icon>info</mat-icon>
+    <span class="mx-2" i18n>About Us</span>
+  </a>
+  <!-- <a name="help_btn" class="padding-remove-small" mat-button routerLink="/public/contact">
+    <span class="pr-4 small-font-size" i18n>Help and Contact</span>
+  </a> -->
+</mat-toolbar>
