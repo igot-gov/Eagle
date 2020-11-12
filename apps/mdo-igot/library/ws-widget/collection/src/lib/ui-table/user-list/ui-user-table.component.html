@@ -1,4 +1,4 @@
-<div class="example-container mat-elevation-z8">
+<div class="example-container">
     <div class="example-loading-shade">
 
     </div>
@@ -18,35 +18,15 @@
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData.sortColumn"
             [matSortDirection]="tableData.sortState" [dataSource]="dataSource"
             class="example-table table1 responsiveTable">
-            <!-- Checkbox Column -->
-            <!-- <ng-container *ngIf="tableData.needCheckBox === true" matColumnDef="select">
-                <mat-header-cell *matHeaderCellDef>
-                    <mat-checkbox (change)="$event ? masterToggle() : null"
-                        [checked]="selection.hasValue() && isAllSelected()"
-                        [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                    </mat-checkbox>
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-                    </mat-checkbox>
-                </mat-cell>
-            </ng-container>
-            <ng-container *ngIf="tableData.needHash" matColumnDef="SR">
-                <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
-                <mat-cell *matCellDef="let element;let i = index"> {{i+1}}</mat-cell>
-            </ng-container> -->
 
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData.columns">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <!-- <span *ngIf="col.isList"
-                        [matTooltip]="element[col.displayName]">{{filterList(element[col.key],col.prop) }}</span> -->
                     <span *ngIf="col.isList" class="textclass"
                         [matTooltip]="(element[col.key]).split('<br />').join(', ')">
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
-                    <span *ngIf="!col.isList" class="textclass" [matTooltip]="element[col.key]">
+                    <span *ngIf="!col.isList" class="textclass">
                         {{element[col.key]}} {{col.isList}}
                     </span>
                 </mat-cell>
