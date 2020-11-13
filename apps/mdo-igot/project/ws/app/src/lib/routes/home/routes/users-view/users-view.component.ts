@@ -122,10 +122,27 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
         case 'timestamp':
           this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
           break
-        case 'best':
-          this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
+        case 'active':
+          // this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
+          this.data = [{
+            fullname: 'Jenifer Ramsingh',
+            email: 'jeniferramsingh@gamil.com',
+            type: 'Transfer',
+          }]
           break
-        case 'saved':
+        case 'inactive':
+          this.data = [{
+            fullname: 'Siva Teju',
+            email: 'sivateajuh@gamil.com',
+            type: 'Transfer',
+          }]
+          break
+        case 'blocked':
+          this.data = [{
+            fullname: 'Jenifer',
+            email: 'jenifer@gamil.com',
+            type: 'Transfer',
+          }]
           break
         default:
           this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
