@@ -3,6 +3,7 @@ import { CONSTANTS } from '../utils/env'
 import {
   ilpProxyCreatorRoute,
   proxyCreatorRoute,
+  proxyCreatorSunbird,
   scormProxyCreatorRoute,
 } from '../utils/proxyCreator'
 
@@ -49,4 +50,9 @@ proxiesV8.use(
 proxiesV8.use(
   '/web-hosted',
   proxyCreatorRoute(express.Router(), CONSTANTS.WEB_HOST_PROXY + '/web-hosted')
+)
+
+proxiesV8.use('/sunbird/*',
+  // tslint:disable-next-line: max-line-length
+  proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/action/content/v3/read/do_11314967009903411214`)
 )
