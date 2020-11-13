@@ -102,7 +102,7 @@ public class ConnectionService implements IConnectionService {
 
             }
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
-            response.put(Constants.ResponseStatus.STATUS, HttpStatus.CREATED);
+            response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
 
         } catch (Exception e) {
             e.printStackTrace();

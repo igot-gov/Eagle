@@ -16,15 +16,15 @@ import java.util.Date;
 public class ConnectionRequest {
 
     @NotNull
-    //@JsonProperty("userIdTo")
+    @JsonProperty("userIdFrom")
     private String userId;
     @NotNull
-    //@JsonProperty("userIdFrom")
+    @JsonProperty("userIdTo")
     private String connectionId;
     // name - department = label
-    //@JsonProperty("userNameTo")
+    @JsonProperty("userNameFrom")
     private String userName;
-    //
+    @JsonProperty("userDepartmentFrom")
     private String userDepartment;
 
     public Integer getUserNodeId() {
@@ -43,9 +43,9 @@ public class ConnectionRequest {
         this.connectionNodeId = connectionNodeId;
     }
 
-    // name - department = label
+    @JsonProperty("userNameTo")
     private String connectionName;
-    //
+    @JsonProperty("userDepartmentTo")
     private String connectionDepartment;
     private String status;
     private String type;
