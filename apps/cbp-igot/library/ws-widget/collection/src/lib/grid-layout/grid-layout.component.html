@@ -1,6 +1,0 @@
-<div class="flex flex-wrap fix-w" *ngFor="let row of processed" role="none"
-  [ngClass]="{'px-6 pb-12 sm:px-8 md:px-10': widgetData.fromBasicEditor}" [ngClass]="containerClass">
-  <div class="box" *ngFor="let col of row" [ngClass]="col.className" [ngStyle]="col?.styles" role="none">
-    <ng-container [wsResolverWidget]="col.widget"></ng-container>
-  </div>
-</div>
