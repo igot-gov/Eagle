@@ -5,6 +5,7 @@ import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 import { MatPaginator } from '@angular/material'
 import { ITableData, IColums } from '../interface/interfaces'
+
 @Component({
   selector: 'ws-widget-ui-user-table',
   templateUrl: './ui-user-table.component.html',
