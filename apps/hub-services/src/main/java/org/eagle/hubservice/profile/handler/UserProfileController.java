@@ -19,7 +19,7 @@ public class UserProfileController {
     @Autowired
     RestTemplate restTemplate;
 
-    @Value(value = "${registry.base.url}")
+    @Value(value = "${user.registry.ip}")
     String baseUrl;
 
 
