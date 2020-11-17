@@ -9,6 +9,8 @@ public class WfStatus {
 
     private String state;
 
+    private Boolean isStartState;
+
     private Boolean islastState;
 
     private List<WfAction> actions;
@@ -35,5 +37,13 @@ public class WfStatus {
 
     public void setActions(List<WfAction> actions) {
         this.actions = actions;
+    }
+
+    public Boolean getStartState() {
+        return isStartState;
+    }
+
+    public void setStartState(Boolean startState) {
+        isStartState = startState;
     }
 }

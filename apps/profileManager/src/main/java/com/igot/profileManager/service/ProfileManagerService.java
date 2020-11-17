@@ -8,7 +8,10 @@ import com.igot.profileManager.models.WfAction;
 import com.igot.profileManager.models.WfStatus;
 import com.igot.profileManager.models.WorkFlowModel;
 import com.igot.profileManager.models.cassandra.ProfileWf;
+import com.igot.profileManager.models.cassandra.ProfileWfStatus;
+import com.igot.profileManager.models.cassandra.ProfileWfStatusPrimarykey;
 import com.igot.profileManager.repository.cassandra.bodhi.ProfileWfRepo;
+import com.igot.profileManager.repository.cassandra.bodhi.ProfileWfStatusRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -17,6 +20,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -26,18 +30,45 @@ public class ProfileManagerService {
     private ProfileWfRepo profileWfRepo;
 
     @Autowired
+    private ProfileWfStatusRepo profileWfStatusRepo;
+
+    @Autowired
     private ObjectMapper mapper;
 
 
     public Boolean statusChange(ProfileWfRequest wfRequest) {
         try {
             validateWfRequest(wfRequest);
+            ProfileWfStatus userStatus = profileWfStatusRepo.getUserProfileStatus(Constants.ROOT_ORG, Constants.ORG, wfRequest.getState(), wfRequest.getUserId());
             ProfileWf workFlow = profileWfRepo.getWorkFlowForService(Constants.ROOT_ORG, Constants.ORG, Constants.WF_SERVICE_NAME);
             WorkFlowModel workFlowModel = mapper.readValue(workFlow.getConfiguration(), WorkFlowModel.class);
             WfStatus wfStatus = getWfStatus(wfRequest.getState(), workFlowModel);
+//            if (ObjectUtils.isEmpty(userStatus) && !wfStatus.getStartState()) {
+//                throw new ApplicationException("Workflow is not initiated!");
+//            }
+            if (!ObjectUtils.isEmpty(userStatus)) {
+                if (!wfRequest.getState().equalsIgnoreCase(userStatus.getProfileWfStatusPrimarykey().getCurrentStatus())) {
+                    throw new ApplicationException("User profile is in " + userStatus.getNext_actions() + " State!");
+                }
+            }
             WfAction wfAction = getWfAction(wfRequest.getAction(), wfStatus);
+            //TODO get the actor roles and call the validateRoles method to check that actor has proper role to take the workflow action
             String nextState = wfAction.getNextState();
             List<WfAction> nextActions = getWfStatus(nextState, workFlowModel).getIslastState() ? Collections.EMPTY_LIST : getWfStatus(nextState, workFlowModel).getActions();
+            if (ObjectUtils.isEmpty(userStatus)) {
+                userStatus = new ProfileWfStatus();
+                ProfileWfStatusPrimarykey wfStatusPrimarykey = new ProfileWfStatusPrimarykey(Constants.ROOT_ORG, Constants.ORG, wfRequest.getUserId(), nextState);
+                userStatus.setProfileWfStatusPrimarykey(wfStatusPrimarykey);
+                userStatus.setStartedOn(new Date());
+            }
+            userStatus.setLastUpdateOn(new Date());
+            userStatus.getProfileWfStatusPrimarykey().setCurrentStatus(nextState);
+            userStatus.setActor_uuid(wfRequest.getActorUserId());
+            String applicableAction = mapper.writeValueAsString(nextActions);
+            userStatus.setNext_actions(applicableAction);
+            profileWfStatusRepo.save(userStatus);
+            //TODO get user profile and update the status in that
+            // TODO maintain the history of user profile workflow steps.
         } catch (IOException e) {
             throw new ApplicationException("Workflow parsing error occurred!");
         }

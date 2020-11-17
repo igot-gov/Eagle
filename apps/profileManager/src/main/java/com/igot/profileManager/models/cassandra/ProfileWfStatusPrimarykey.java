@@ -25,8 +25,9 @@ public class ProfileWfStatusPrimarykey {
     private String userId;
 
 
-    public ProfileWfStatusPrimarykey(String rootOrg, String userId, String currentStatus) {
+    public ProfileWfStatusPrimarykey(String rootOrg, String org, String userId, String currentStatus) {
         this.rootOrg = rootOrg;
+        this.org = org;
         this.userId = userId;
         this.currentStatus = currentStatus;
     }
