@@ -13,9 +13,6 @@ public class ProfileWfStatus {
     @PrimaryKey
     private ProfileWfStatusPrimarykey profileWfStatusPrimarykey;
 
-    @Column("current_status")
-    private String currentStatus;
-
     @Column("actor_uuid")
     private String actor_uuid;
 
@@ -34,14 +31,6 @@ public class ProfileWfStatus {
 
     public void setProfileWfStatusPrimarykey(ProfileWfStatusPrimarykey profileWfStatusPrimarykey) {
         this.profileWfStatusPrimarykey = profileWfStatusPrimarykey;
-    }
-
-    public String getCurrentStatus() {
-        return currentStatus;
-    }
-
-    public void setCurrentStatus(String currentStatus) {
-        this.currentStatus = currentStatus;
     }
 
     public String getActor_uuid() {

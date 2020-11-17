@@ -1,6 +1,7 @@
 package com.igot.profileManager.models.cassandra;
 
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 
@@ -17,12 +18,17 @@ public class ProfileWfStatusPrimarykey {
     @PrimaryKeyColumn(name = "org", type = PrimaryKeyType.PARTITIONED)
     private String org;
 
+    @PrimaryKeyColumn("current_status")
+    private String currentStatus;
+
     @PrimaryKeyColumn(name = "user_id")
     private String userId;
 
-    public ProfileWfStatusPrimarykey(String rootOrg, String userId) {
+
+    public ProfileWfStatusPrimarykey(String rootOrg, String userId, String currentStatus) {
         this.rootOrg = rootOrg;
         this.userId = userId;
+        this.currentStatus = currentStatus;
     }
 
     public void setRootOrg(String rootOrg) {
@@ -48,4 +54,13 @@ public class ProfileWfStatusPrimarykey {
     public void setOrg(String org) {
         this.org = org;
     }
+
+    public String getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(String currentStatus) {
+        this.currentStatus = currentStatus;
+    }
 }
+
