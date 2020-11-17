@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-var request = require("request");
+let request = require("request");
 request.gzip = true;
+let config = require('../utils/environment');
 
 router.get("/badge/:userId/:id", function (req, res) {
-  let URL = `http://lex-core:7001/v3/users/${req.params.userId}/badges`;
+  let URL = `${config.API_HOST}/v3/users/${req.params.userId}/badges`;
   console.log("api service started");
   let badges;
   request(
@@ -33,10 +34,10 @@ router.get("/badge/:userId/:id", function (req, res) {
             return badge.badge_id == req.params.id;
           });
           badge = badgeArray.length > 0 ? badgeArray[0] : null;
-          let badgeImage= badge?badge.image:null;
-          imagePath='https://d136953gtttd92.cloudfront.net/assets/instances/eagle/Achievements/Badges/assets/'+(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
+          let badgeImage= badge?badge.image:null;          
+          imagePath=`${config.HTTPS_HOST}/assets/instances/eagle/Achievements/Badges/assets/`+(badgeImage.split("/").pop()).split('?').slice(0, -1).join('.')
         }
-        //badge = _.where(badges.earned, {badge_id: req.params.id});
+       
         if (badge) {
           let html = `<!DOCTYPE html>
           <html lang="en">
@@ -49,7 +50,7 @@ router.get("/badge/:userId/:id", function (req, res) {
                 badge.message
               }">             
               <meta property="og:type" content="website">
-              <meta property="og:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
+              <meta property="og:url" content="${`${config.HTTPS_HOST}/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="og:title" content="${badge.badge_name}" />
               <meta property="og:description" content="${badge.message}" />
               <meta property="og:image" content="${imagePath}" />  
@@ -58,7 +59,7 @@ router.get("/badge/:userId/:id", function (req, res) {
               }" />        
           
               <meta property="twitter:card" content="summary_large_image" />
-              <meta property="twitter:url" content="${`https://d136953gtttd92.cloudfront.net/share/badge/${req.params.userId}/${req.params.id}`}" />
+              <meta property="twitter:url" content="${`${config.HTTPS_HOST}/share/badge/${req.params.userId}/${req.params.id}`}" />
               <meta property="twitter:title" content="${badge.badge_name}" />
               <meta property="twitter:description" content="${badge.message}" />
               <meta property="twitter:image" content="${imagePath}" />
@@ -107,7 +108,7 @@ router.get("/badge/:userId/:id", function (req, res) {
             </head>
             <body>
               <div class="card-container">
-                <a href="https://d136953gtttd92.cloudfront.net/app/profile/competency/badges">
+                <a href="${config.HTTPS_HOST}/app/profile/competency/badges">
                   <div class="image-container">
                     <img
                       class="badge-img"

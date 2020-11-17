@@ -6030,6 +6030,9 @@
     },
     "showFor": {
       "Channel": [],
+      "Collection": [],
+      "Learning Path": [],
+      "Course": [],
       "Knowledge Board": [],
       "Resource": []
     },

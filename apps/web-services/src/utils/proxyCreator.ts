@@ -4,6 +4,7 @@ import { createProxyServer } from 'http-proxy'
 const proxyCreator = (timeout = 10000) => createProxyServer({
   timeout,
 })
+
 export function proxyCreatorRoute(route: Router, targetUrl: string, timeout = 10000): Router {
   route.all('/*', (req, res) => {
     const downloadKeyword = '/download/'
