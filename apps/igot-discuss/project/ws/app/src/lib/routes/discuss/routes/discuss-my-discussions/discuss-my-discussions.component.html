@@ -1,0 +1,90 @@
+<div class="flex flex-1 flex-column">
+  <mat-card class="flex-custom">
+    <mat-card-header class="flex-custom-m">
+      <div mat-card-avatar class="example-header-image">
+        <ws-widget-avatar-photo *ngIf="profilePhoto" [photoUrl]="profilePhoto" [name]="data.fullname || 'User'"
+          size="xl-s">
+        </ws-widget-avatar-photo>
+        <ws-widget-avatar-photo *ngIf="!profilePhoto" [photoUrl]="profilePhoto" [name]="data.fullname || 'User'"
+          size="xl-s">
+        </ws-widget-avatar-photo>
+      </div>
+      <div class="flex-1">
+        <mat-card-title class="mobile-margin text-capitalize" [innerHTML]="data.fullname"></mat-card-title>
+        <mat-card-subtitle>{{department}}</mat-card-subtitle>
+        <mat-card-subtitle>{{location}} </mat-card-subtitle>
+        <mat-card-subtitle>{{data.email}}</mat-card-subtitle>
+        <ng-container>
+          <div class="flex flex-1 custom margin-0 margin-top-xl">
+            <div class="flex flex-1 flex-custom-m">
+              <span class="flex margin-right-l mobile">
+                <span class="ws-mat-default-text">{{data.topiccount || 0 }}</span>
+                <span class="pad-4">Discussions</span>
+
+              </span>
+              <span class="flex margin-right-l mobile">
+                <span class="ws-mat-default-text">{{data.postcount || 0 }}</span>
+                <span class="pad-4">Posts</span>
+              </span>
+            </div>
+            <div class="flex flex-1" class="text-right mobile2">
+              <!-- Enable lated when other user can visit your profile -->
+              <!-- <span class="noocoments" mat-card-subtitle>Last online {{data.lastonline | pipeRelativeTime}}</span> -->
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+
+    </mat-card-content>
+  </mat-card>
+
+  <ng-container>
+    <mat-card class="recent-tabs">
+      <div class="flex flex-1 flex-column">
+        <div class="flex flex-1 filter flex-wrap">
+          <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                              'ws-mat-accent-border font-medium':currentFilter !== 'timestamp'}" mat-button
+            (click)="filter('timestamp')">
+            Recent posts </a>
+          <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
+                              'ws-mat-accent-border font-medium':currentFilter !== 'best'}" mat-button
+            (click)="filter('best')">
+            Best posts </a>
+          <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
+                                          'ws-mat-accent-border font-medium':currentFilter !== 'saved'}" mat-button
+            (click)="filter('saved')">
+            Saved posts </a>
+          <!-- <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
+                                            'ws-mat-accent-border font-medium':currentFilter !== 'watched'}" mat-button
+            (click)="filter('watched')">
+            Watched </a> -->
+          <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvoted',
+                                              'ws-mat-accent-border font-medium':currentFilter !== 'upvoted'}"
+            mat-button (click)="filter('upvoted')">
+            Upvoted </a>
+          <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'downvoted',
+                                                'ws-mat-accent-border font-medium':currentFilter !== 'downvoted'}"
+            mat-button (click)="filter('downvoted')">
+            Downvoted </a>
+        </div>
+      </div>
+    </mat-card>
+  </ng-container>
+  <ng-container *ngIf="discussionList && discussionList.length > 0">
+    <ng-container *ngFor="let data of discussionList">
+      <app-dicuss-post-card [discuss]="data"></app-dicuss-post-card>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="!(discussionList && discussionList.length > 0)">
+    <mat-card class="mat-card margin-bottom-l">
+      <mat-card-header>
+        <mat-card-title>No Data</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <span>&nbsp;</span>
+      </mat-card-content>
+    </mat-card>
+  </ng-container>
+</div>

@@ -1,0 +1,43 @@
+<mat-card class="discuss-card cursor-pointer" (click)="getDiscussion()">
+  <mat-card-header>
+    <mat-card-title>
+      <a href="javascript:void(0)" i18n-aria-label role="link">
+        <h2 class="cursor-pointer f-medium" [innerHTML]="discuss.title"></h2>
+      </a>
+    </mat-card-title>
+    <mat-card-subtitle class="responsive">
+      <span class="flex ws-mat-default-text">
+        <mat-icon svgIcon="category_xs"></mat-icon>{{discuss.category.name}}
+      </span>
+      <span class="dot" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span>
+      <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Anonymous'}}</span>
+      <span class="margin-left-l">{{discuss.timestamp | pipeRelativeTime}}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="flex flex-1">
+    <ng-container *ngIf="discuss && discuss.tags && discuss.tags.length > 0">
+      <span *ngFor="let tag of discuss.tags" class="tag" [ngStyle]="getBgColor(tag.value)">
+        {{tag.value}}
+      </span>
+    </ng-container>
+  </mat-card-content>
+  <!-- <mat-card-actions>
+
+  </mat-card-actions> -->
+  <mat-card-footer class="flex flex-1 custom margin-0">
+    <div class="flex flex-1 flex-row margin-left-xs">
+      <span class="flex margin-right-l mobile">
+        <mat-icon (click)="upvote(discuss)" class="cursor-pointer">import_export</mat-icon>
+        <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }} Votes</span>
+      </span>
+      <span class="flex mobile">
+        <mat-icon>trending_up</mat-icon>
+        <span class="pad-4">{{discuss.viewcount || 0}} Views</span>
+      </span>
+    </div>
+    <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+      <span class="noocoments ws-mat-default-text">{{((discuss.postcount || 1) -1) }}
+        comments</span>
+    </div>
+  </mat-card-footer>
+</mat-card>

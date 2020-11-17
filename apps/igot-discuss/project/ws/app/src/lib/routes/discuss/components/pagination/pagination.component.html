@@ -1,0 +1,23 @@
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+        <a href="javascript:void(0)" i18n-aria-label aria-label="First" (click)="setPage(1)" class="page-link">First</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+        <a href="javascript:void(0)" i18n-aria-label aria-label="Previous" (click)="setPage(pager.currentPage - 1)"
+            class="page-link">Previous</a>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page.page}"
+        class="page-item number-item">
+        <a href="javascript:void(0)" i18n-aria-label (click)="setPage(page.page)" class="page-link"
+            *ngIf="!page.separator">{{page.page}}</a>
+        <a class="page-link separator" *ngIf="page.separator">...</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPage}" class="page-item next-item">
+        <a href="javascript:void(0)" i18n-aria-label aria-label="Next" (click)="setPage(pager.currentPage + 1)"
+            class="page-link">Next</a>
+    </li>
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPage}" class="page-item last-item">
+        <a href="javascript:void(0)" i18n-aria-label aria-label="Last" (click)="setPage(pager.totalPage)"
+            class="page-link">Last</a>
+    </li>
+</ul>

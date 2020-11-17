@@ -1,0 +1,59 @@
+<div class="example-container">
+    <div class="example-loading-shade">
+
+    </div>
+    <!-- <div>{{JSON.stringfy(dataSource)}}</div> -->
+    <div class="example-table-container">
+
+        <div class="search">
+            <div class="lsearch">
+                <span class="searchText">Search:</span>
+            </div>
+            <div class=rsearch>
+                <input class="sinput" type="Standard" label="" (onChange)="applyFilter($event)">
+            </div>
+        </div>
+
+        <!-- </mat-form-field> -->
+        <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData.sortColumn"
+            [matSortDirection]="tableData.sortState" [dataSource]="dataSource"
+            class="example-table table1 responsiveTable">
+
+            <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData.columns">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span *ngIf="col.isList" class="textclass"
+                        [matTooltip]="(element[col.key]).split('<br />').join(', ')">
+                        <div innerHTML="{{element[col.key]}}"></div>
+                    </span>
+                    <span *ngIf="!col.isList" class="textclass">
+                        {{element[col.key]}} {{col.isList}}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Actions" *ngIf="tableData.actions && tableData.actions.length > 0">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <div *ngFor="let ac of tableData.actions">
+                        <div *ngIf="ac.optional">
+                            <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
+                                [icon]="ac.icon" [disabled]="ac.disabled || false" [label]="ac.label"
+                                (click)="buttonClick(ac.name,row)"></app-button>
+                        </div>
+                        <div *ngIf="!ac.optional">
+                            <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
+                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)"></app-button>
+                        </div>
+                    </div>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row)">
+            </mat-row>
+        </mat-table>
+    </div>
+    <!-- <mat-paginator [length]="5" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]">
+    </mat-paginator> -->
+</div>

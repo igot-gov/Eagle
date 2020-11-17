@@ -1,0 +1,65 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.container-balanced {
+  @extend %page-center;
+  height: auto;
+  min-height: 75vh;
+}
+
+.container2 {
+  position: relative;
+}
+
+.container-balanced-banner {
+  @extend %page-center;
+  height: auto;
+}
+
+.left-nav {
+  min-width: 240px;
+  max-width: 240px;
+
+  // ::ng-deep.mat-drawer-inner-container {
+  //   overflow: visible;
+  // }
+
+  @include breakpoint-xs {
+    min-width: 100%;
+    max-width: none;
+  }
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.sticky {
+  // position: sticky;
+  // top: calc(#{$mat-toolbar-gt-xs});
+  // overflow: hidden;
+  // // z-index: 10;
+  // // width: 100%;
+  // position: absolute;
+  // top: 56;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+}
+
+.flex-update {
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+}

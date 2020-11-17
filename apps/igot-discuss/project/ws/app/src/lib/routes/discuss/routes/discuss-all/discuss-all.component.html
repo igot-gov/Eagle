@@ -1,0 +1,49 @@
+<div class="flex flex-1 custom">
+  <div class="flex flex-3 flex-column">
+    <div class="flex flex-1 cursor-pointer margin-fix height-48" (click)="start()">
+      <a href="javascript:void(0)" class="flex flex-1 cursor-pointer margin-fix height-48" i18n-aria-label role="link">
+        <div
+          class="flex flex-1 items-center border discuss border-solid discuss-border ws-mat-primary-background-op100 ">
+          <div class="w-full discuss truncate">
+            <span class="overflow ml-4">Ask a question or post an idea</span>
+          </div>
+          <div class="discuss-home text-white flex items-center justify-center cursor-pointer">
+            Start discussion
+          </div>
+        </div>
+        <!-- <div class="text-box">Ask a question or post an idea</div>
+    <div class="buton">start discussion</div> -->
+      </a>
+    </div>
+    <div class="flex flex-1 flex-column margin-fix">
+      <div class="flex flex-1 filter max-height-60">
+        <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'recent',
+        'ws-mat-accent-border font-medium':currentFilter !== 'recent'}" mat-button (click)="filter('recent')"
+          role="button">Recent</a>
+        <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'popular',
+        'ws-mat-accent-border font-medium':currentFilter !== 'popular'}" mat-button (click)="filter('popular')"
+          role="button">Popular</a>
+        <!-- <a class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
+        'ws-mat-accent-border':currentFilter !== 'watched'}" mat-button (click)="filter('watched')">Watched</a> -->
+      </div>
+      <ng-container *ngIf="discussionList">
+        <ng-container *ngFor="let data of discussionList">
+          <app-dicuss-card [discuss]="data"></app-dicuss-card>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="!(discussionList)">
+        <mat-card class="mat-card margin-bottom-l">
+          <mat-card-content>
+            <span>loading</span>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+    </div>
+    <div class="flex flex-1 flex-column margin-fix pagination-container">
+      <ws-app-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-pagination>
+    </div>
+  </div>
+  <div class="flex flex-1" #stickyMenu [class.sticky]="sticky">
+    <app-discuss-right-menu [tags]="trendingTags"></app-discuss-right-menu>
+  </div>
+</div>

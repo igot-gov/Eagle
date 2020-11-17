@@ -1,0 +1,364 @@
+<div class="flex flex-1 related-discussion margin-fix">
+  <div class="flex flex-3 flex-column pb-10">
+    <mat-card class="flex-1 remove-botton-radius">
+      <mat-card-header role="link" tabindex="0">
+        <mat-card-title class="margin-l-0 f-medium" [innerHTML]="data.title"></mat-card-title>
+        <!-- <mat-card-subtitle>{{'General discussion'}}</mat-card-subtitle> -->
+      </mat-card-header>
+      <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'">
+        <mat-card-content class="margin-left-m mb-0-imp">
+          <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
+          <p role="link" tabindex="0">{{ post.content | pipeHtmlTagRemoval}}</p>
+          <div class="flex flex-1" role="link" tabindex="0">
+            <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
+            <ws-widget-avatar-photo [name]="post.user.fullname || 'Anonymous'" size="s"></ws-widget-avatar-photo>
+            <span class="margin-left-s">{{'Asked by '}}</span>
+            <span class="margin-left-s capitalize f-medium" *ngIf="post.user.fullname"
+              [innerHTML]="post.user.fullname"></span>
+            <span class="margin-left-s capitalize f-medium" *ngIf="!post.user.fullname"
+              [innerHTML]="post.user.username"></span>
+            <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
+          </div>
+
+
+          <div class="flex flex-1 margin-top-m" role="link" tabindex="0" aria-label="tags">
+            <ng-container *ngIf="data && data.tags && data.tags.length > 0">
+              <span *ngFor="let tag of data.tags" class="tag" [ngStyle]="getBgColor(tag.value)" role="link" tabindex="0"
+                i18n-aria-label>
+                {{tag.value}}
+              </span>
+            </ng-container>
+          </div>
+          <div class="flex flex-1 flex-wrap custom margin-0 margin-top-xl">
+            <div class="flex flex-1 flex-row margin-left-xs margin-right-xs">
+              <span class="flex margin-right-l mobile">
+                <a href="javascript:void(0)" i18n-aria-label role="link" *ngIf="!post.upvoted" (click)="upvote(post)"
+                  aria-label="upvote the post">
+                  <mat-icon class="cursor-pointer">arrow_upward</mat-icon>
+                </a>
+                <a href="javascript:void(0)" i18n-aria-label *ngIf="post.upvoted" role="link" (click)="delteVote(post)"
+                  aria-label="remove upvote">
+                  <mat-icon class="cursor-pointer upvoted">arrow_upward
+                  </mat-icon>
+                </a>
+                <span class="pad-4" role="text"
+                  [attr.aria-label]="'total upvoat is' + data.upvotes">{{data.upvotes}}</span>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
+                  (click)="downvote(post)" aria-label="downvote post">
+                  <mat-icon class="cursor-pointer">arrow_downward
+                  </mat-icon>
+                </a>
+                <a href="javascript:void(0)" *ngIf="post.downvoted" i18n-aria-label role="link"
+                  (click)="delteVote(post)" aria-label="remove down vote">
+                  <mat-icon class="cursor-pointer downvoted">
+                    arrow_downward</mat-icon>
+                </a>
+                <span class="pad-4" role="text"
+                  [attr.aria-label]="'total upvoat is' + data.upvotes">{{data.downvotes}}</span>
+              </span>
+              <span class="flex margin-right-l mobile" role="link" tabindex="0">
+                <mat-icon>trending_up</mat-icon>
+                <span class="pad-4" i18n-aria-label aria-label="views count">{{data.viewcount}} views</span>
+              </span>
+              <span class="flex mobile">
+                <a href="javascript:void(0)" *ngIf="!data.posts[0].bookmarked" i18n-aria-label role="link"
+                  (click)="bookmark(post)" aria-label="Bookmark post">
+                  <mat-icon class="cursor-pointer">
+                    bookmark_border</mat-icon>
+                </a>
+                <a href="javascript:void(0)" *ngIf="data.posts[0].bookmarked" i18n-aria-label role="link"
+                  (click)="unBookMark(post)" aria-label="unBookmark post">
+                  <mat-icon class="cursor-pointer ws-mat-accent-text">bookmark
+                  </mat-icon>
+                </a>
+              </span>
+            </div>
+            <div class="flex flex-1" class="cursor-pointer  mobile2">
+              <span class="noocoments ws-mat-default-text" *ngIf="data.postcount-1 > 0" i18n-aria-label
+                aria-label="comments count">
+                {{data.postcount-1}}
+                comments
+              </span>
+              <span class="noocoments ws-mat-default-text" *ngIf="data.postcount-1 <=0" i18n-aria-label
+                aria-label="comments count">
+                0
+                comments</span>
+            </div>
+          </div>
+
+          <div class="flex flex-1 flex-column margin-top-xl">
+            <h3 class="f-medium"> Your answer here </h3>
+            <form [formGroup]=" postAnswerForm">
+              <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
+                [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
+              </ws-widget-ck-editor> -->
+              <mat-form-field appearance="outline" class="flex-1 w-full"
+                [ngClass]="{ 'mat-form-field-invalid': showError('answer') }">
+                <textarea matInput formControlName="answer" #answer cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
+                <mat-error *ngIf="showError('answer')" i18n="answer Error|Explains answer is required">
+                  This is mandatory
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button type="button" (click)="postReply(post)" [disabled]="answer.value.length < 3"
+            class="text-white ws-mat-primary-background flex-auto-display margin-right-xs">
+            <span class="text-white" i18n>Post reply</span>
+          </button>
+          <!-- <button mat-raised-button type="button" [mat-dialog-close]="true"
+                    class="ws-mat-accent-border flex-auto-display">
+                    <span class="ws-mat-default-text" i18n>Discard</span>
+                  </button> -->
+        </mat-card-actions>
+      </ng-container>
+    </mat-card>
+    <ng-container *ngIf="data.posts && data.postcount > 1">
+      <mat-card class="recent-most">
+        <div class="flex flex-1 flex-column">
+          <div class="flex flex-1 filter">
+            <a href="javascript:void(0)" class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
+                            'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+              (click)="filter('timestamp')">
+              Recent </a>
+            <a href="javascript:void(0)" class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvotes',
+                            'ws-mat-accent-border':currentFilter !== 'upvotes'}" mat-button
+              (click)="filter('upvotes')">
+              Most upvoted </a>
+          </div>
+        </div>
+      </mat-card>
+    </ng-container>
+    <ng-container *ngFor="let post of data.posts | orderBy: currentFilter :'desc'">
+      <mat-card *ngIf="post.index != 0" class="post-card">
+        <mat-card-header class="mb-5 comment-section align-center" role="link" tabindex="0">
+          <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
+          </ws-widget-avatar-photo>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
+            [innerHTML]="post.user.fullname"></span>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
+            [innerHTML]="post.user.username"></span>
+          <span class="posttime">{{ post.timestamp | date: 'dd MMM yyyy hh:mm a'}}</span>
+        </mat-card-header>
+        <mat-card-content>
+          <p role="link" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+
+          <div class="flex flex-1 custom margin-0 margin-top-xl">
+            <div class="flex flex-1 flex-row margin-left-xs">
+              <span class="flex mobile">
+                <a href="javascript:void(0)" *ngIf="!post.upvoted" i18n-aria-label role="link" (click)="upvote(post)"
+                  aria-label="upvote comment">
+                  <mat-icon *ngIf="!post.upvoted" class="cursor-pointer">arrow_upward</mat-icon>
+                </a>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <a href="javascript:void(0)" *ngIf="post.upvoted" i18n-aria-label role="link" (click)="delteVote(post)"
+                  aria-label="delete upvote on comment">
+                  <mat-icon *ngIf="post.upvoted" class="cursor-pointer upvoted">arrow_upward
+                  </mat-icon>
+                </a>
+                <span class="pad-4">{{post.upvotes}}</span>
+              </span>
+              <span class="flex mobile">
+                <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
+                  (click)="downvote(post)" aria-label="downvote comment">
+                  <mat-icon *ngIf="!post.downvoted" class="cursor-pointer">arrow_downward
+                  </mat-icon>
+                </a>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <a href="javascript:void(0)" *ngIf="post.downvoted" i18n-aria-label role="link"
+                  (click)="delteVote(post)" aria-label="delete downvote on comment">
+                  <mat-icon *ngIf="post.downvoted" class="cursor-pointer downvoted">
+                    arrow_downward</mat-icon>
+                </a>
+                <span class="pad-4">{{post.downvotes}}</span>
+              </span>
+              <!-- <span class="flex margin-right-l mobile">
+                <mat-icon>trending_up</mat-icon>
+                <span class="pad-4">{{post.viewcount}} views</span>
+              </span> -->
+              <!-- <span class="flex mobile">
+                <mat-icon [ngClass]="{'ws-mat-accent-text': !!post.bookmarked }">bookmark</mat-icon
+              </span> -->
+            </div>
+            <div class="flex flex-1" class="cursor-pointer text-right mobile2">
+              <button mat-button (click)="post.toggle=!post.toggle; post.comment=''">
+                <span class="noocoments"> Reply</span>
+              </button>
+            </div>
+          </div>
+          <div class="w-full" *ngIf="post.toggle">
+            <ng-container [ngTemplateOutlet]="reply" [ngTemplateOutletContext]="{post:post}">
+            </ng-container>
+          </div>
+          <ng-container *ngIf="post.replies.count == 1">
+            <div class="flex flex-1 custom margin-0 margin-top-xl">
+              <div class="width-expand flex align-center">
+                <!-- Disabled the user display of users avatars who replied -->
+                <!-- <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
+                  <ng-container *ngFor="let user of post?.replies?.users">
+                    <ws-widget-avatar-photo [name]="user.fullname || user.username" size="s">
+                    </ws-widget-avatar-photo>
+                  </ng-container>
+                </div> -->
+                <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
+                  <a href="javascript:void(0)" class="flex align-center" i18n-aria-label role="link"
+                    aria-label="reply toggle">
+                    <span class="cursor-pointer"> 1 reply </span>
+                    <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="post.replyCountToggle"
+                      aria-label="reply toggle upwards">
+                      <mat-icon>keyboard_arrow_up</mat-icon>
+                    </span>
+                  </a>
+                  <a href="javascript:void(0)" class="flex align-center" i18n-aria-label role="link"
+                    aria-label="reply toggle">
+                    <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="!post.replyCountToggle"
+                      aria-label="reply toggle downwards">
+                      <mat-icon>keyboard_arrow_down</mat-icon>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="" role="link" tabindex="0">
+                <span *ngIf="!post.replyCountToggle">Last reply
+                  {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
+              </div>
+            </div>
+            <div class="w-full" *ngIf="post.replyCountToggle">
+              <ng-container [ngTemplateOutlet]="replies"
+                [ngTemplateOutletContext]="{posts:data.posts, postId:post.pid}">
+              </ng-container>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="post.replies.count > 1">
+            <div class="flex flex-1 custom margin-0 margin-top-xl">
+              <div class="width-expand flex align-center">
+                <!-- Disabled the user display of users avatars who replied -->
+                <!-- <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
+                  <ng-container *ngFor="let user of post?.replies?.users">
+                    <ws-widget-avatar-photo [name]="user.fullname || user.username" size="s" class="mr-2">
+                    </ws-widget-avatar-photo>
+                  </ng-container>
+                </div> -->
+                <div class="ml-2 flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
+                  <span class="cursor-pointer"> {{post.replies.count}} replies </span>
+                  <a href="javascript:void(0)" class="flex align-center" *ngIf="post.replyCountToggle" i18n-aria-label
+                    role="link" aria-label="reply toggle">
+                    <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="post.replyCountToggle"
+                      aria-label="reply toggle upwards">
+                      <mat-icon>keyboard_arrow_up</mat-icon>
+                    </span>
+                  </a>
+                  <a href="javascript:void(0)" *ngIf="!post.replyCountToggle" class="flex align-center" i18n-aria-label
+                    role="link" aria-label="reply toggle">
+                    <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="!post.replyCountToggle"
+                      aria-label="reply toggle downwards">
+                      <mat-icon>keyboard_arrow_down</mat-icon>
+                    </span>
+                  </a>
+                </div>
+              </div>
+              <div class="">
+                <span *ngIf="!post.replyCountToggle">Last reply
+                  {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
+              </div>
+            </div>
+            <div class="w-full" *ngIf="post.replyCountToggle">
+              <ng-container [ngTemplateOutlet]="replies"
+                [ngTemplateOutletContext]="{posts:data.posts, postId:post.pid}">
+              </ng-container>
+            </div>
+          </ng-container>
+        </mat-card-content>
+      </mat-card>
+      <mat-divider *ngIf="post.index != 0"></mat-divider>
+    </ng-container>
+    <div class="flex flex-1 flex-column margin-fix pagination-container">
+      <ws-app-pagination [pager]="pager" (changePage)="navigateWithPage($event)"></ws-app-pagination>
+    </div>
+  </div>
+  <div class="flex flex-1 display-hide hidden-imp">
+    <div *ngIf="fetchSingleCategoryLoader" class="pr-4 flex items-center justify-center">
+      <mat-spinner [diameter]="30"></mat-spinner>
+    </div>
+    <app-discuss-related-discussion *ngIf="!fetchSingleCategoryLoader" [relatedDiscussions]="similarPosts">
+    </app-discuss-related-discussion>
+  </div>
+</div>
+
+
+<ng-template #reply let-post="post">
+  <div class="mt-2 flex flex-col">
+    <div class="flex-1">
+      <form name="replyForm">
+        <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
+          [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
+        </ws-widget-ck-editor> -->
+        <mat-form-field appearance="outline" class="flex-1 w-full">
+          <textarea matInput [(ngModel)]="post.comment" cdkTextareaAutosize name="comment"
+            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6" cdkAutosizeMaxRows="30"></textarea>
+        </mat-form-field>
+      </form>
+    </div>
+    <div class="flex flex-1 justify-end">
+      <button mat-button class="mr-2" (click)="post.toggle=!post.toggle; post.comment=''">
+        <span class="noocoments"> Cancel</span>
+      </button>
+      <button mat-raised-button type="button" (click)="postCommentsReply(post, post.comment )"
+        [disabled]="post.comment?.length < 3" class="text-white ws-mat-primary-background flex-auto-display">
+        <span class="text-white" i18n>Post reply</span>
+      </button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #replies let-posts="posts" let-postId="postId">
+  <div class="mt-2 flex flex-col">
+    <ng-container *ngFor="let post of posts | pipeFilter:'toPid': postId; index as index; last as last">
+      <mat-card class="ml-4 post-card">
+        <mat-card-header class="mb-5 comment-section align-center" role="link" tabindex="0">
+          <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
+          </ws-widget-avatar-photo>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
+            [innerHTML]="post.user.fullname"></span>
+          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
+            [innerHTML]="post.user.username"></span>
+          <span class="posttime">{{ post.timestamp | date}}</span>
+        </mat-card-header>
+        <mat-card-content>
+          <p role="link" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+          <div class="flex flex-1 custom margin-0 margin-top-xl">
+            <div class="flex flex-1 flex-row margin-left-xs">
+              <span class="flex margin-right-l mobile">
+                <mat-icon *ngIf="!post.upvoted" (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
+                <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward
+                </mat-icon>
+                <span class="pad-4">{{post.upvotes}}</span>
+              </span>
+              <span class="flex margin-right-l mobile">
+                <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward
+                </mat-icon>
+                <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">
+                  arrow_downward</mat-icon>
+                <span class="pad-4">{{post.downvotes}}</span>
+              </span>
+            </div>
+          </div>
+          <mat-divider class="mt-2" *ngIf="!last"></mat-divider>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
+  </div>
+</ng-template>
+
+<input type="hidden" i18-value i18-aria-value aria-value="Thank you for voting!" value="Thank you for voting!!"
+  #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="Something went wrong, please try again later!"
+  value="Something went wrong, please try again later!" #toastError />

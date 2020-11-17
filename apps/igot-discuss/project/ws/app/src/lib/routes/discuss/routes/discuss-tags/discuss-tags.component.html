@@ -1,0 +1,23 @@
+<div class="flex flex-1 margin-top-m flex-column">
+  <ng-container>
+    <mat-form-field appearance="outline" class="margin-top-m max-width">
+      <mat-label>{{ 'Search' }}</mat-label>
+      <input matInput #question autocomplete="off" maxlength="20" [(ngModel)]="query" i18n-placeholder
+        placeholder="Search by name" [required]="false" />
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container *ngIf="tags && tags.length > 0">
+    <div class="flex flex-1 flex-row flex-wrap">
+      <div *ngFor="let tag of filteredTags | pipeListFilter:'score,value':query" class="tag "
+        [ngStyle]="getBgColor(tag.value)">
+        <!-- Can enable random colors from below commented code -->
+        <!-- <div *ngFor="let tag of filteredTags | pipeFilter:'score,value':query"
+        class="tag text-capitalize" [ngStyle]="getBgColor(tag.value)"> -->
+        <span class="margin-left-m">{{tag.value}}</span>
+        <span class="ws-mat-default-text count">{{tag.score}}</span>
+      </div>
+    </div>
+  </ng-container>
+</div>

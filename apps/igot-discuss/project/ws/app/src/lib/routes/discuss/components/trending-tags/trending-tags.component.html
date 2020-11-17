@@ -1,0 +1,11 @@
+<div class="margin-right-s">
+  <h3 role="link" tabindex="0" aria-label="Trending tags">Trending tags</h3>
+  <ng-container *ngIf="trandingTags && trandingTags.length > 0">
+    <div *ngFor="let tag of trandingTags" class="tag ws-mat-primary-lite-background-important" role="link" tabindex="0"
+      [attr.aria-label]="tag.value"
+      [ngStyle]="{'background-image':'linear-gradient(to right, #ECECEC, #ECECEC ' + ((tag.score / max) *100 ) + '%, #FFF 24px)'}">
+      <span class="margin-left-m">{{tag.value}}</span>
+      <span class="ws-mat-default-text margin-right-m">{{tag.score}}</span>
+    </div>
+  </ng-container>
+</div>
