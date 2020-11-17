@@ -51,10 +51,13 @@ public class ProfileConstants {
         private Profile() {
             throw new IllegalStateException(UTIL_CLASS);
         }
-        public static final String FIRST_NAME = "firstname";
-        public static final String SUR_NAME = "surname";
-        public static final String PERSONAL_DETAILS = "personalDetails";
-        public static final String HUB_MEMBER = "Hub member";
+        public static final String USER_PROFILE = "UserProfile";
+        public static final String ID = "id";
+        public static final String AT_ID = "@id";
+        public static final String USER_ID = "userId";
+        public static final String OSID = "osid";
+        public static final String FILTERs = "filters";
+        public static final String ENTITY_TYPE = "entityType";
 
     }
 

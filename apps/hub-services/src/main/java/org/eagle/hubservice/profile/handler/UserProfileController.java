@@ -28,12 +28,14 @@ public class UserProfileController {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-        request.put("userId", userId);
-        request.put("id", userId);
+        request.put(ProfileConstants.Profile.USER_ID, userId);
+        request.put(ProfileConstants.Profile.ID, userId);
+        request.put(ProfileConstants.Profile.AT_ID, userId);
 
-         RegistryRequest registryRequest = new RegistryRequest();
+
+        RegistryRequest registryRequest = new RegistryRequest();
          registryRequest.setId(ProfileConstants.API.CREATE.getValue());
-         registryRequest.getRequest().put("UserProfile", request);
+         registryRequest.getRequest().put(ProfileConstants.Profile.USER_PROFILE, request);
         //request entity is created with request headers
         HttpEntity<RegistryRequest> requestEntity = new HttpEntity<>(registryRequest, requestHeaders);
 
@@ -56,7 +58,7 @@ public class UserProfileController {
 
         RegistryRequest registryRequest = new RegistryRequest();
         registryRequest.setId(ProfileConstants.API.UPDATE.getValue());
-        registryRequest.getRequest().put("UserProfile", request);
+        registryRequest.getRequest().put(ProfileConstants.Profile.USER_PROFILE, request);
         HttpEntity<Map<String,Object>> requestEntity = new HttpEntity<>(request, requestHeaders);
 
         ResponseEntity responseEntity = restTemplate.exchange(
@@ -74,15 +76,15 @@ public class UserProfileController {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-        List types = Arrays.asList("UserProfile");
+        List types = Arrays.asList(ProfileConstants.Profile.USER_PROFILE);
         Map<String, Map<String, Object>> filters = new HashMap<>();
-        filters.put("id", Stream.of(new AbstractMap.SimpleEntry<>("eq", userId)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+        filters.put(ProfileConstants.Profile.ID, Stream.of(new AbstractMap.SimpleEntry<>("eq", userId)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
 
 
         RegistryRequest registryRequest = new RegistryRequest();
         registryRequest.setId(ProfileConstants.API.SEARCH.getValue());
-        registryRequest.getRequest().put("entityType", types);
-        registryRequest.getRequest().put("filters", filters);
+        registryRequest.getRequest().put(ProfileConstants.Profile.ENTITY_TYPE, types);
+        registryRequest.getRequest().put(ProfileConstants.Profile.FILTERs, filters);
 
         HttpEntity<RegistryRequest> requestEntity = new HttpEntity<>(registryRequest, requestHeaders);
 
@@ -101,16 +103,16 @@ public class UserProfileController {
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 
-        Map<String, Object> params = Stream.of(new AbstractMap.SimpleEntry<>("osid", osid)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Map<String, Object> params = Stream.of(new AbstractMap.SimpleEntry<>(ProfileConstants.Profile.OSID, osid)).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         RegistryRequest registryRequest = new RegistryRequest();
         registryRequest.setId(ProfileConstants.API.READ.getValue());
-        registryRequest.getRequest().put("UserProfile", params);
+        registryRequest.getRequest().put(ProfileConstants.Profile.USER_PROFILE, params);
 
         HttpEntity<RegistryRequest> requestEntity = new HttpEntity<>(registryRequest, requestHeaders);
 
         ResponseEntity responseEntity = restTemplate.exchange(
-                ProfileConstants.URL.READ.getValue(),
+                baseUrl + ProfileConstants.URL.READ.getValue(),
                 HttpMethod.POST,
                 requestEntity,
                 String.class
