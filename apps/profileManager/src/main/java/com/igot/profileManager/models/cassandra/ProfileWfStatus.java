@@ -16,6 +16,9 @@ public class ProfileWfStatus {
     @Column("actor_uuid")
     private String actor_uuid;
 
+    @Column("current_status")
+    private String currentStatus;
+
     @Column("next_actions")
     private String next_actions;
 
@@ -63,5 +66,13 @@ public class ProfileWfStatus {
 
     public void setLastUpdateOn(Date lastUpdateOn) {
         this.lastUpdateOn = lastUpdateOn;
+    }
+
+    public String getCurrentStatus() {
+        return currentStatus;
+    }
+
+    public void setCurrentStatus(String currentStatus) {
+        this.currentStatus = currentStatus;
     }
 }

@@ -11,7 +11,7 @@ public class WfStatus {
 
     private Boolean isStartState;
 
-    private Boolean islastState;
+    private Boolean isLastState;
 
     private List<WfAction> actions;
 
@@ -23,12 +23,12 @@ public class WfStatus {
         this.state = state;
     }
 
-    public Boolean getIslastState() {
-        return islastState;
+    public Boolean getIsLastState() {
+        return isLastState;
     }
 
-    public void setIslastState(Boolean islastState) {
-        this.islastState = islastState;
+    public void setIsLastState(Boolean isLastState) {
+        this.isLastState = isLastState;
     }
 
     public List<WfAction> getActions() {

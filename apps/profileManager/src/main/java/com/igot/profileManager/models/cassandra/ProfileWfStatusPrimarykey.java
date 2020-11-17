@@ -18,18 +18,15 @@ public class ProfileWfStatusPrimarykey {
     @PrimaryKeyColumn(name = "org", type = PrimaryKeyType.PARTITIONED)
     private String org;
 
-    @PrimaryKeyColumn("current_status")
-    private String currentStatus;
 
     @PrimaryKeyColumn(name = "user_id")
     private String userId;
 
 
-    public ProfileWfStatusPrimarykey(String rootOrg, String org, String userId, String currentStatus) {
+    public ProfileWfStatusPrimarykey(String rootOrg, String org, String userId) {
         this.rootOrg = rootOrg;
         this.org = org;
         this.userId = userId;
-        this.currentStatus = currentStatus;
     }
 
     public void setRootOrg(String rootOrg) {
@@ -54,14 +51,6 @@ public class ProfileWfStatusPrimarykey {
 
     public void setOrg(String org) {
         this.org = org;
-    }
-
-    public String getCurrentStatus() {
-        return currentStatus;
-    }
-
-    public void setCurrentStatus(String currentStatus) {
-        this.currentStatus = currentStatus;
     }
 }
 
