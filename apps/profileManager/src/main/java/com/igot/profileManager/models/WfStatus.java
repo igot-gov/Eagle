@@ -1,6 +1,7 @@
 package com.igot.profileManager.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class WfStatus {
 
     private String state;
 
+    @JsonProperty(value = "isStartState")
     private Boolean isStartState;
 
     private Boolean isLastState;

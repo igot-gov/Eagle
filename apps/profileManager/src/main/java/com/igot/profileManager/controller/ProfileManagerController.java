@@ -17,9 +17,9 @@ public class ProfileManagerController {
     private ProfileManagerService profileManagerService;
 
     @PostMapping("workflow/transition")
-    public ResponseEntity<Boolean> profileWfTransition(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody ProfileWfRequest profileWfRequest) {
-        Boolean status = profileManagerService.statusChange(profileWfRequest);
-        return new ResponseEntity<>(status, HttpStatus.OK);
+    public ResponseEntity<Response> profileWfTransition(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody ProfileWfRequest profileWfRequest) {
+        Response response = profileManagerService.statusChange(rootOrg, org, profileWfRequest);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(path = "workflow/{userId}/status", produces = MediaType.APPLICATION_JSON_VALUE)
