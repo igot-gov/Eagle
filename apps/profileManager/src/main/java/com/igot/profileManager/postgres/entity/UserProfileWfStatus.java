@@ -4,10 +4,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "userprofile_wf_status", schema = "wingspan")
+@Table(name = "user_profile_wf_status", schema = "wingspan")
 public class UserProfileWfStatus {
 
     @Id
+    @Column(name = "wf_id", nullable = false)
+    private String wfId;
+
     @Column(name = "userid", nullable = false)
     private String userId;
 
@@ -22,9 +25,6 @@ public class UserProfileWfStatus {
 
     @Column(name = "current_status")
     private String currentStatus;
-
-    @Column(name = "next_actions")
-    private String nextActions;
 
     @Column(name = "created_on")
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,14 +74,6 @@ public class UserProfileWfStatus {
         this.currentStatus = currentStatus;
     }
 
-    public String getNextActions() {
-        return nextActions;
-    }
-
-    public void setNextActions(String nextActions) {
-        this.nextActions = nextActions;
-    }
-
     public Date getCreatedOn() {
         return createdOn;
     }
@@ -96,5 +88,13 @@ public class UserProfileWfStatus {
 
     public void setLastUpdatedOn(Date lastUpdatedOn) {
         this.lastUpdatedOn = lastUpdatedOn;
+    }
+
+    public String getWfId() {
+        return wfId;
+    }
+
+    public void setWfId(String wfId) {
+        this.wfId = wfId;
     }
 }

@@ -38,7 +38,11 @@ public class Constants {
 
     public static final String ACTION_VALIDATION_ERROR = "Work flow action can not be empty!";
 
+    public static final String FIELD_VALUE_VALIDATION_ERROR = "Field value can not be empty!";
+
     public static final String JSON_PARSING_ERROR = "Json parsing error occured!";
+
+    public static final String WORKFLOW_ID_ERROR_MESSAGE = "Workflow id can not be empty!";
 
     public static final String ACTION_CONSTANT = "action";
 

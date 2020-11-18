@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface UserProfileWfStatusRepo extends JpaRepository<UserProfileWfStatus, String> {
 
-    UserProfileWfStatus findByRootOrgAndOrgAndUserId(String rootOrg, String org, String userId);
+    UserProfileWfStatus findByRootOrgAndOrgAndUserIdAndWfId(String rootOrg, String org, String userId, String wfId);
 
     List<UserProfileWfStatus> findByRootOrgAndOrgAndCurrentStatus(String rootOrg, String org, String status);
 

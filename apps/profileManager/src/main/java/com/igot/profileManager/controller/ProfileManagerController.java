@@ -22,15 +22,21 @@ public class ProfileManagerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(path = "workflow/{userId}/status", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> getWfUserProfile(@RequestHeader String rootOrg, @RequestHeader String org, @PathVariable("userId") String userId) {
-        Response response = profileManagerService.getWfUserProfile(rootOrg, org, userId);
+    @GetMapping(path = "workflow/{wfId}/{userId}/status", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> getWfUserProfile(@RequestHeader String rootOrg, @RequestHeader String org, @PathVariable("wfId") String wfId, @PathVariable("userId") String userId) {
+        Response response = profileManagerService.getWfUserProfile(rootOrg, org, wfId, userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping(path = "workflow/{profileStatus}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Response> getWfUserProfiles(@RequestHeader String rootOrg, @RequestHeader String org, @PathVariable("profileStatus") String status) {
         Response response = profileManagerService.getWfUserProfileBasedOnStatus(rootOrg, org, status);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "workflow/{wfId}/{userId}/history", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> getUserProfileWfHistoryOnWfId(@RequestHeader String rootOrg, @PathVariable("wfId") String wfId, @PathVariable("userId") String userId) {
+        Response response = profileManagerService.getUserProfileWfHistoryOnWfId(rootOrg, wfId, userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

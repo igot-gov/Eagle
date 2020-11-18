@@ -1,5 +1,8 @@
 package com.igot.profileManager.models;
 
+import java.util.HashMap;
+import java.util.List;
+
 public class ProfileWfRequest {
 
     private String state;
@@ -9,6 +12,10 @@ public class ProfileWfRequest {
     private String userId;
 
     private String actorUserId;
+
+    private String wfId;
+
+    private List<HashMap<String, Object>> updateFieldValues;
 
     private String comment;
 
@@ -50,5 +57,21 @@ public class ProfileWfRequest {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getWfId() {
+        return wfId;
+    }
+
+    public void setWfId(String wfId) {
+        this.wfId = wfId;
+    }
+
+    public List<HashMap<String, Object>> getUpdateFieldValues() {
+        return updateFieldValues;
+    }
+
+    public void setUpdateFieldValues(List<HashMap<String, Object>> updateFieldValues) {
+        this.updateFieldValues = updateFieldValues;
     }
 }
