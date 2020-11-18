@@ -39,4 +39,10 @@ public class ProfileManagerController {
         Response response = profileManagerService.getUserProfileWfHistoryOnWfId(rootOrg, wfId, userId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping(path = "workflow/nextAction/{state}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> getNextActionForState(@RequestHeader String rootOrg, @RequestHeader String org, @PathVariable("state") String state) {
+        Response response = profileManagerService.getNextActionForState(rootOrg, org, state);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

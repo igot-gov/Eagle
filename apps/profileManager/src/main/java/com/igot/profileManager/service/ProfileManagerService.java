@@ -311,4 +311,36 @@ public class ProfileManagerService {
 		response.put(Constants.STATUS, HttpStatus.OK);
 		return response;
 	}
+
+	/**
+	 *
+	 * @param rootOrg
+	 * @param org
+	 * @param status
+	 * @return
+	 */
+	public Response getNextActionForState(String rootOrg, String org, String status) {
+		Response response = new Response();
+		try {
+			ProfileWf workFlow = profileWfRepo.getWorkFlowForService(rootOrg, org, Constants.WF_SERVICE_NAME);
+			WorkFlowModel workFlowModel = mapper.readValue(workFlow.getConfiguration(), WorkFlowModel.class);
+			WfStatus wfStatus = getWfStatus(status, workFlowModel);
+			List<HashMap<String, Object>> nextActionArray = new ArrayList<>();
+			HashMap<String, Object> actionMap = null;
+			if (!CollectionUtils.isEmpty(wfStatus.getActions())) {
+				for (WfAction action : wfStatus.getActions()) {
+					actionMap = new HashMap<>();
+					actionMap.put(Constants.ACTION_CONSTANT, action.getAction());
+					actionMap.put(Constants.ROLES_CONSTANT, action.getRoles());
+					nextActionArray.add(actionMap);
+				}
+			}
+			response.put(Constants.MESSAGE, Constants.SUCCESSFUL);
+			response.put(Constants.DATA, nextActionArray);
+			response.put(Constants.STATUS, HttpStatus.OK);
+		} catch (IOException e) {
+			throw new ApplicationException(Constants.JSON_PARSING_ERROR + e.toString());
+		}
+		return response;
+	}
 }
