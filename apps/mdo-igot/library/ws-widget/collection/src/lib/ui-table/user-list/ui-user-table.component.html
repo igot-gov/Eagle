@@ -37,13 +37,13 @@
                 <mat-cell *matCellDef="let row" class="action-cell">
                     <div *ngFor="let ac of tableData.actions">
                         <div *ngIf="ac.optional">
-                            <!-- <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
+                            <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
                                 [icon]="ac.icon" [disabled]="ac.disabled || false" [label]="ac.label"
-                                (click)="buttonClick(ac.name,row)"></app-button> -->
+                                (click)="buttonClick(ac.name,row)"></app-button>
                         </div>
                         <div *ngIf="!ac.optional">
-                            <!-- <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
-                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)"></app-button> -->
+                            <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
+                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)"></app-button>
                         </div>
                     </div>
                 </mat-cell>
