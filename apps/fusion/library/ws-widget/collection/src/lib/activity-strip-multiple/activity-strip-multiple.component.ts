@@ -125,7 +125,8 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
   openUserManualDialogue() {
     const status = localStorage.getItem('dManual')
     if (!status || status !== 'true') {
-      this.snackBar.openFromTemplate(this.userManual, { duration: 20000, verticalPosition: 'bottom', horizontalPosition: 'left', panelClass: 'temp-m' })
+      this.snackBar.openFromTemplate(this.userManual,
+        { duration: 20000, verticalPosition: 'bottom', horizontalPosition: 'left', panelClass: 'temp-m' })
     }
   }
 
