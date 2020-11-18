@@ -5,7 +5,7 @@
  *
  */
 
-package org.eagle.hubservice.profile.handler;
+package com.infosys.hubservices.profile.handler;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;

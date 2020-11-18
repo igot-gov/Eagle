@@ -1,3 +1,4 @@
+
 /*
  *                "Copyright 2020 Infosys Ltd.
  *                Use of this source code is governed by GPL v3 license that can be found in the LICENSE file or at https://opensource.org/licenses/GPL-3.0
@@ -5,15 +6,13 @@
  *
  */
 
-package org.eagle.hubservice.profile.handler;
+package com.infosys.hubservices.profile.handler;
 
-public interface IProducerService {
+public interface IConsumerService {
 
-    /**
-     * Produces any kafka event
-     * @param topic     name of topic
-     * @param message   message to push into the topic
-     */
+    public void consumeCreateProfile(Object message);
 
-    public void sendMessage(String topic, Object message);
+    public void consumeUpdateProfile(Object message);
+
+
 }

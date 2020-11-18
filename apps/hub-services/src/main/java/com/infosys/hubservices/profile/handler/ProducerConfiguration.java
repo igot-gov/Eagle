@@ -5,7 +5,7 @@
  *
  */
 
-package org.eagle.hubservice.profile.handler;
+package com.infosys.hubservices.profile.handler;
 
 import com.fasterxml.jackson.databind.ser.std.StringSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
