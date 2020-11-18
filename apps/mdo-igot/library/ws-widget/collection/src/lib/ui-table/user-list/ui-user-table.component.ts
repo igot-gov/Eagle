@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewIni
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
 import { MatSort } from '@angular/material/sort'
-import { MatPaginator } from '@angular/material'
 import * as _ from 'lodash'
 
 import { ITableData, IColums } from '../interface/interfaces'
@@ -26,9 +25,10 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
   dataSource!: any
+  widgetData: any
 
   selection = new SelectionModel<any>(true, [])
-  @ViewChild(MatPaginator, { static: true }) paginator?: MatPaginator
+  // @ViewChild(MatPaginator, { static: true }) paginator?: MatPaginator
   @ViewChild(MatSort, { static: true }) sort?: MatSort
 
   constructor() {
@@ -44,7 +44,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
       this.displayedColumns = this.tableData.columns
     }
     this.dataSource.data = this.data
-    this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
   }
   // tslint:disable-next-line:use-lifecycle-interface
@@ -88,6 +88,9 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
       }
       if (this.tableData.actions && this.tableData.actions.length > 0) {
         columns.push('Actions')
+      }
+      if (this.tableData.actions && this.tableData.actions.length > 0) {
+        columns.push('Menu')
       }
       return columns
     }

@@ -575,54 +575,15 @@
     <span>{{ widgetData.content.averageRating | number: '1.1-1' }}</span>
   </div>
 </ng-template>
-
+<!--
 <mat-menu #cardMenu="matMenu">
   <ng-template matMenuContent>
     <div mat-menu-item>
-      <!-- <ws-widget-btn-content-download [widgetData]="
-          widgetData.content
-            | pipePartialContent
-              : [
-                  'identifier',
-                  'contentType',
-                  'resourceType',
-                  'mimeType',
-                  'downloadUrl',
-                  'isExternal',
-                  'artifactUrl'
-                ]
-        "></ws-widget-btn-content-download> -->
       <ws-widget-btn-content-like [widgetData]="widgetData.content | pipePartialContent: ['identifier']">
       </ws-widget-btn-content-like>
-      <!-- <ws-widget-btn-content-mail-me [widgetData]="widgetData.content"></ws-widget-btn-content-mail-me> -->
-      <!-- <ws-widget-btn-content-share [widgetData]="widgetData.content"></ws-widget-btn-content-share> -->
-      <!-- <ws-widget-btn-channel-analytics [widgetData]="widgetData.content"></ws-widget-btn-channel-analytics> -->
-      <!-- <ws-widget-btn-kb [contentId]="widgetData?.content?.identifier" [forPreview]="false"
-        [contentName]="widgetData?.content?.name" [contentType]="widgetData?.content?.contentType">
-      </ws-widget-btn-kb> -->
-      <!-- <ws-widget-btn-follow [widgetData]="{
-          targetId: widgetData?.content?.identifier,
-          type: widgetData?.content?.contentType
-        }" *ngIf="isKnowledgeBoard"></ws-widget-btn-follow> -->
-      <!-- <ws-widget-btn-goals *ngIf="btnGoalsConfig" [widgetData]="btnGoalsConfig"></ws-widget-btn-goals> -->
-      <!-- <ws-widget-btn-playlist *ngIf="btnPlaylistConfig" [widgetData]="btnPlaylistConfig">
-      </ws-widget-btn-playlist> -->
-      <!-- <ws-widget-btn-kb-analytics [widgetData]="
-          widgetData.content
-            | pipePartialContent
-              : [
-                  'identifier',
-                  'contentType',
-                  'resourceType',
-                  'mimeType',
-                  'downloadUrl',
-                  'isExternal',
-                  'artifactUrl'
-                ]
-        "></ws-widget-btn-kb-analytics> -->
     </div>
   </ng-template>
-</mat-menu>
+</mat-menu> -->
 
 <ng-template #cardBasicDetails>
   <mat-card [attr.name]="'widget-card-content ' + widgetData.content.name" class="card-standard-container mr-6"

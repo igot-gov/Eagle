@@ -61,7 +61,8 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // int left blank
     this.tabledata = {
-      actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
+      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
+      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
@@ -83,6 +84,27 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       email: 'amitsengar@yahoo.com',
       type: 'New User',
     },
+    {
+      fullname: 'Thillai Rajan',
+      email: 'thillairajan@gmail.com',
+      type: 'New User',
+    },
+    {
+      fullname: 'Thillai Rajan',
+      email: 'thillairajan@gmail.com',
+      type: 'New User',
+    },
+    {
+      fullname: 'Thillai Rajan',
+      email: 'thillairajan@gmail.com',
+      type: 'New User',
+    }
+      , {
+      fullname: 'Thillai Rajan',
+      email: 'thillairajan@gmail.com',
+      type: 'New User',
+    }
+      ,
     {
       fullname: 'Thillai Rajan',
       email: 'thillairajan@gmail.com',
@@ -119,8 +141,24 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     if (key) {
       this.currentFilter = key
       switch (key) {
-        case 'timestamp':
-          this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
+        case 'underreview':
+          // this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
+          this.data = [{
+
+            fullname: 'Ibrahim Sha',
+            email: 'ibrahimsha@gmail.com',
+            type: 'Transfer',
+          },
+          {
+            fullname: 'Amit Sengar',
+            email: 'amitsengar@yahoo.com',
+            type: 'New User',
+          },
+          {
+            fullname: 'Thillai Rajan',
+            email: 'thillairajan@gmail.com',
+            type: 'New User',
+          }]
           break
         case 'active':
           // this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
