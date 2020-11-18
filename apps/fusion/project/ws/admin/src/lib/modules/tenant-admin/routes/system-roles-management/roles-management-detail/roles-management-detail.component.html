@@ -27,7 +27,7 @@
     <mat-tab-group #tabGroup [(selectedIndex)]="currentTabIndex" dynamicHeight (selectedTabChange)="tabChange()">
       <mat-tab>
         <ng-template mat-tab-label>
-          <span i18n class="mat-body-2 font-weight-bold" i18n>Add Role</span>
+          <span i18n class="mat-body-2 font-bold font-weight-bold" i18n>Add Role</span>
         </ng-template>
         <!-- No user Message -->
         <h2 *ngIf="!addTable.length && !isAdding" class="text-center nouser" i18n>No User Selected</h2>
@@ -53,7 +53,7 @@
       </mat-tab>
       <mat-tab>
         <ng-template mat-tab-label>
-          <span i18n class="mat-body-2 font-weight-bold" i18n>Remove Role</span>
+          <span i18n class="mat-body-2 font-bold font-weight-bold" i18n>Remove Role</span>
         </ng-template>
         <!-- No user Message -->
         <h2 *ngIf="!removeTable.length && !isAdding" class="text-center nouser" i18n>

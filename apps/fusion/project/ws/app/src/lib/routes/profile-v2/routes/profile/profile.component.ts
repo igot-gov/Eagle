@@ -53,7 +53,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
       if (this.userRouteName && this.userRouteName.trim()) {
         this.titles.push({
           icon: '',
-          title: `${this.userRouteName}\'profile`,
+          // title: `${this.userRouteName}\'profile`,
+          title: `${this.userRouteName}`,
           url: 'none',
         })
       }

@@ -44,19 +44,19 @@
 
   <div class="margin-bottom-s">
     <div>
-      <span class="mat-body-2" i18n>Start Date: </span>
+      <span class="mat-body-2 font-bold" i18n>Start Date: </span>
       <span class="mat-body">{{ jitRequest.start_date }}</span>
     </div>
 
     <div>
-      <span class="mat-body-2" i18n>Participants: </span>
+      <span class="mat-body-2 font-bold" i18n>Participants: </span>
       <span class="mat-body">{{ jitRequest.no_of_participants }}</span>
     </div>
   </div>
 
   <div class="margin-bottom-s" *ngIf="jitRequest.track_name || jitRequest.track_code">
     <div>
-      <span class="mat-body-2" i18n>Track: </span>
+      <span class="mat-body-2 font-bold" i18n>Track: </span>
       <span class="mat-body text-truncate">{{
         jitRequest.track_name ? jitRequest.track_name : jitRequest.track_code
       }}</span>
@@ -64,7 +64,7 @@
   </div>
 
   <div>
-    <span class="mat-body-2" i18n>Status: </span>
+    <span class="mat-body-2 font-bold" i18n>Status: </span>
     <div class="mat-body text-truncate width-1-1">{{ jitRequest.status }}</div>
   </div>
 </mat-card>

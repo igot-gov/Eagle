@@ -21,6 +21,14 @@
   }
 }
 
+.text-white {
+  color: white !important;
+}
+
+.text-red {
+  color: red !important;
+}
+
 .view-all {
   display: flex;
   margin: 0 auto;
@@ -60,7 +68,7 @@
 }
 
 .close-x {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
 }

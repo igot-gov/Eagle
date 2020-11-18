@@ -18,21 +18,21 @@
         <section class="pt-2">
           <section class="sm:hidden">
             <div class="my-1">
-              <span class="mat-body-2" i18n>Date: </span>
+              <span class="mat-body-2 font-bold" i18n>Date: </span>
               <span class="ml-1 mat-body">{{
                   certification?.booking?.date | pipeDateConcat
                 }}</span>
             </div>
             <div class="my-1">
-              <span class="mat-body-2" i18n>Slot: </span>
+              <span class="mat-body-2 font-bold" i18n>Slot: </span>
               <span class="ml-1 mat-body">{{ certification?.booking?.slot }}</span>
             </div>
             <div class="my-1">
-              <span class="mat-body-2" i18n>Location: </span>
+              <span class="mat-body-2 font-bold" i18n>Location: </span>
               <span class="ml-1 mat-body">{{ certification?.booking?.dc }}</span>
             </div>
             <div class="my-1">
-              <span class="mat-body-2" i18n>Venue: </span>
+              <span class="mat-body-2 font-bold" i18n>Venue: </span>
               <span class="ml-1 mat-body">{{ certification?.booking?.testcenter }}</span>
             </div>
           </section>
@@ -40,14 +40,14 @@
           <section class="hidden sm:block">
             <div class="flex">
               <div class="w-1/2">
-                <div class="mat-body-2 text-truncate" i18n>Date and Slot</div>
+                <div class="mat-body-2 font-bold text-truncate" i18n>Date and Slot</div>
                 <div class="mat-body text-truncate">
                   {{ certification?.booking.date | pipeDateConcat }}
                 </div>
                 <div class="mat-body text-truncate">({{ certification?.booking.slot }})</div>
               </div>
               <div class="w-1/2">
-                <div class="mat-body-2 text-truncate" i18n>Location</div>
+                <div class="mat-body-2 font-bold text-truncate" i18n>Location</div>
                 <div class="mat-body text-truncate">
                   {{ certification?.booking.dc }}, {{ certification?.booking.testcenter }}
                 </div>

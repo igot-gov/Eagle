@@ -54,7 +54,7 @@
       <div class="flex-1" role="link" tabindex="0">
         <div class="flex flex-1">
           <mat-card-title class="flex-4 mobile-margin text-capitalize mat-h2">
-            No Information Available
+            No information available
           </mat-card-title>
         </div>
       </div>
@@ -126,9 +126,9 @@
             </ng-container>
             <ng-container *ngIf="!(discussionList && discussionList.length > 0)">
               <mat-card class="no-shadow mat-card margin-bottom-l">
-                <mat-card-header>
-                  <mat-card-title>No Data</mat-card-title>
-                </mat-card-header>
+                <!-- <mat-card-header> -->
+                <span class="mat-subtitle">No data available</span>
+                <!-- </mat-card-header> -->
                 <mat-card-content>
                   <span>&nbsp;</span>
                 </mat-card-content>

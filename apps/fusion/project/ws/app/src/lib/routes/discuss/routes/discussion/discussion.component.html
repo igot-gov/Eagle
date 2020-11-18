@@ -1,14 +1,14 @@
 <div class="flex flex-1 related-discussion margin-fix">
   <div class="flex flex-3 flex-column pb-10">
     <mat-card class="flex-1 remove-botton-radius">
-      <mat-card-header role="link" tabindex="0">
-        <mat-card-title class="margin-l-0 f-medium" [innerHTML]="data.title"></mat-card-title>
-        <!-- <mat-card-subtitle>{{'General discussion'}}</mat-card-subtitle> -->
-      </mat-card-header>
+      <!-- <mat-card-header role="link" tabindex="0"> -->
+      <div class="margin-l-0 mat-subheading-1" role="link" tabindex="0" [innerHTML]="data.title"></div>
+      <!-- <mat-card-subtitle>{{'General discussion'}}</mat-card-subtitle> -->
+      <!-- </mat-card-header> -->
       <ng-container *ngFor="let post of data.posts | pipeFilter:'index': '0'">
         <mat-card-content class="margin-left-m mb-0-imp">
           <!-- <div [innerHTML]="post.content | safeHtml"></div> -->
-          <p role="link" tabindex="0">{{ post.content | pipeHtmlTagRemoval}}</p>
+          <p role="link" class="mat-body-2" tabindex="0">{{ post.content | pipeHtmlTagRemoval}}</p>
           <div class="flex flex-1" role="link" tabindex="0">
             <!-- <span class="ws-mat-default-text">{{'Asked by'}}</span> -->
             <ws-widget-avatar-photo [name]="post.user.fullname || 'Anonymous'" size="s"></ws-widget-avatar-photo>
@@ -17,7 +17,7 @@
               [innerHTML]="post.user.fullname"></span>
             <span class="margin-left-s capitalize f-medium" *ngIf="!post.user.fullname"
               [innerHTML]="post.user.username"></span>
-            <span class="margin-left-s">{{ post.timestamp | pipeRelativeTime}}</span>
+            <span class="margin-left-s ws-mat-black60-text">{{ post.timestamp | pipeRelativeTime}}</span>
           </div>
 
 
@@ -89,7 +89,7 @@
           </div>
 
           <div class="flex flex-1 flex-column margin-top-xl">
-            <h3 class="f-medium"> Your answer here </h3>
+            <h3> Your answer here </h3>
             <form [formGroup]=" postAnswerForm">
               <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
                 [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
@@ -139,14 +139,14 @@
         <mat-card-header class="mb-5 comment-section align-center" role="link" tabindex="0">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
+          <span class="margin-left-s capitalize mat-body-2 font-bold width-expand" *ngIf="post.user.fullname"
             [innerHTML]="post.user.fullname"></span>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
+          <span class="margin-left-s capitalize mat-body-2 font-bold width-expand" *ngIf="!post.user.fullname"
             [innerHTML]="post.user.username"></span>
-          <span class="posttime">{{ post.timestamp | date: 'dd MMM yyyy hh:mm a'}}</span>
+          <span class="posttime ws-mat-black60-text">{{ post.timestamp | date: 'dd MMM yyyy hh:mm a'}}</span>
         </mat-card-header>
         <mat-card-content>
-          <p role="link" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+          <p role="link" class="mat-body-2" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
 
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
@@ -162,7 +162,7 @@
                   <mat-icon *ngIf="post.upvoted" class="cursor-pointer upvoted">arrow_upward
                   </mat-icon>
                 </a>
-                <span class="pad-4">{{post.upvotes}}</span>
+                <span class="pad-4 ws-mat-black60-text">{{post.upvotes}}</span>
               </span>
               <span class="flex mobile">
                 <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
@@ -177,7 +177,7 @@
                   <mat-icon *ngIf="post.downvoted" class="cursor-pointer downvoted">
                     arrow_downward</mat-icon>
                 </a>
-                <span class="pad-4">{{post.downvotes}}</span>
+                <span class="pad-4 ws-mat-black60-text">{{post.downvotes}}</span>
               </span>
               <!-- <span class="flex margin-right-l mobile">
                 <mat-icon>trending_up</mat-icon>
@@ -189,7 +189,7 @@
             </div>
             <div class="flex flex-1" class="cursor-pointer text-right mobile2">
               <button mat-button (click)="post.toggle=!post.toggle; post.comment=''">
-                <span class="noocoments"> Reply</span>
+                <span class="noocoments ws-mat-black60-text"> Reply</span>
               </button>
             </div>
           </div>
@@ -326,14 +326,14 @@
         <mat-card-header class="mb-5 comment-section align-center" role="link" tabindex="0">
           <ws-widget-avatar-photo [name]="post.user.fullname || post.user.username" size="s">
           </ws-widget-avatar-photo>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="post.user.fullname"
+          <span class="margin-left-s capitalize mat-body-2 font-bold width-expand" *ngIf="post.user.fullname"
             [innerHTML]="post.user.fullname"></span>
-          <span class="margin-left-s capitalize f-medium width-expand" *ngIf="!post.user.fullname"
+          <span class="margin-left-s capitalize mat-body-2 font-bold width-expand" *ngIf="!post.user.fullname"
             [innerHTML]="post.user.username"></span>
           <span class="posttime">{{ post.timestamp | date}}</span>
         </mat-card-header>
         <mat-card-content>
-          <p role="link" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+          <p role="link" class="mat-body-2" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">

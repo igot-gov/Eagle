@@ -4,7 +4,7 @@
       <h2 class="mat-title content-name">{{ threadHead.contentTitle }}</h2>
     </a>
   </div>
-  <div class="mat-body-2 uppercase my-auto">
+  <div class="mat-body-2 font-bold uppercase my-auto">
     <ng-container [ngSwitch]="threadHead.contentType">
       <ng-container *ngSwitchCase="contentTypes.PROGRAM" i18n>Program</ng-container>
       <ng-container *ngSwitchCase="contentTypes.COURSE" i18n>Course</ng-container>

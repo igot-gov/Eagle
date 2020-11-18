@@ -2,7 +2,7 @@
   <h1 class="mat-headline text-truncate">{{ content.name }}</h1>
 
   <div class="text-truncate">
-    <span class="mat-body-2 uppercase">
+    <span class="mat-body-2 font-bold uppercase">
       <ng-container [ngSwitch]="content.contentType">
         <ng-container *ngSwitchCase="contentTypes.PROGRAM" i18n>Program</ng-container>
         <ng-container *ngSwitchCase="contentTypes.COURSE" i18n>Course</ng-container>
@@ -11,7 +11,7 @@
         <ng-container *ngSwitchDefault i18n>Content</ng-container>
       </ng-container>
     </span>
-    <span class="mat-body-2" *ngIf="trainingCount">
+    <span class="mat-body-2 font-bold" *ngIf="trainingCount">
       | {{ trainingCount }}
       <ng-container *ngIf="trainingCount !== 1" i18n="<x> trainings available">
         trainings available

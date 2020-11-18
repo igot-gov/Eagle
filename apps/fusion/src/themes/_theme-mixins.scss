@@ -41,6 +41,10 @@
     fill: $iconColor;
   }
 
+  .mat-icon {
+    color: $colorBlack60;
+  }
+
   .ws-mat-primary-lite-background {
     // background-color: $colorPrimaryLight;
     background-color: transparent;
@@ -215,6 +219,7 @@
 
     .ws-active-discuss-route {
       background: rgba(mat-color($primary, default), 0.1);
+      font-weight: bold;
 
       &:before {
         content: '';
@@ -359,6 +364,7 @@
     .ws-active-discuss-route {
       background-color: #eeeeee !important;
       // font-weight: 700;
+      font-weight: bold;
 
       &:before {
         content: '';

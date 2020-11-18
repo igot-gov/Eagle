@@ -12,13 +12,13 @@
   <div class="flex flex-wrap flex-between">
     <div>
       <div class="margin-top-s">
-        <span class="mat-body-2" i18n>
+        <span class="mat-body-2 font-bold" i18n>
           Widget Type :
         </span>
         {{ widgetType }}
       </div>
       <div class="margin-top-s">
-        <span class="mat-body-2" i18n>
+        <span class="mat-body-2 font-bold" i18n>
           Widget Sub Type :
         </span>
         {{ widgetSubType }}
@@ -26,23 +26,11 @@
     </div>
     <div>
       <ng-container *ngIf="widgetData">
-        <button
-          mat-raised-button
-          class="margin-top-m"
-          color="primary"
-          *ngIf="!showData"
-          (click)="showData = true"
-        >
+        <button mat-raised-button class="margin-top-m" color="primary" *ngIf="!showData" (click)="showData = true">
           <ng-container i18n>See Details</ng-container>
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
-        <button
-          mat-raised-button
-          class="margin-top-m"
-          color="primary"
-          *ngIf="showData"
-          (click)="showData = false"
-        >
+        <button mat-raised-button class="margin-top-m" color="primary" *ngIf="showData" (click)="showData = false">
           <ng-container i18n>Hide Details</ng-container>
           <mat-icon>arrow_drop_up</mat-icon>
         </button>
@@ -50,7 +38,7 @@
     </div>
   </div>
   <ng-container *ngIf="widgetData">
-    <pre *ngIf="showData" class="margin-top-s "><span i18n class="mat-body-2">Widget Data :</span>
+    <pre *ngIf="showData" class="margin-top-s "><span i18n class="mat-body-2 font-bold">Widget Data :</span>
 {{ widgetData | json }}
     </pre>
   </ng-container>

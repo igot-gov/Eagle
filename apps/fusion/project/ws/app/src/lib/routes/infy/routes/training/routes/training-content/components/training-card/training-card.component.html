@@ -1,7 +1,7 @@
 <mat-card class="training-card flex flex-column flex-between h-full">
   <section class="training-details">
     <div class="flex flex-between">
-      <div class="mat-body-2 text-uppercase text-truncate flex-grow-1 padding-right-m">
+      <div class="mat-body-2 font-bold text-uppercase text-truncate flex-grow-1 padding-right-m">
         <ws-app-training-type [trainingType]="training.deliveryType"></ws-app-training-type>
       </div>
 
@@ -39,7 +39,7 @@
           <mat-icon>calendar_today</mat-icon>
         </div>
         <div class="margin-left-xs width-9-10 flex">
-          <div class="mat-body-2 text-truncate">
+          <div class="mat-body-2 font-bold text-truncate">
             {{
               {
                 fromDate: training.start_dt,
@@ -47,7 +47,7 @@
               } | pipeConciseDateRange
             }}
           </div>
-          <div class="margin-left-xs mat-body-2 text-truncate">
+          <div class="margin-left-xs mat-body-2 font-bold text-truncate">
             {{training.sessions[0].start_time}}-{{training.sessions[0].end_time}}
 
           </div>
@@ -60,7 +60,7 @@
           <mat-icon>access_time</mat-icon>
         </div>
         <div class="margin-left-xs">
-          <span class="mat-body-2" i18n="time zone">Time Zone: </span>
+          <span class="mat-body-2 font-bold" i18n="time zone">Time Zone: </span>
           <span class="mat-body"> {{ training.time_zone }}</span>
         </div>
       </div>
@@ -71,7 +71,7 @@
         </div>
         <div class="margin-left-xs">
 
-          <span class="mat-body-2" i18n>Location: </span>
+          <span class="mat-body-2 font-bold" i18n>Location: </span>
           <span
             class="mat-body">{{training.sessions[0].classroom + ' , ' +training.sessions[0].building + ' , ' + training.location}}</span>
 
@@ -86,7 +86,7 @@
         </div>
         <div class="margin-left-xs width-9-10 flex flex-column flex-center">
           <div class="text-truncate">
-            <span class="mat-body-2" i18n="assessment; exam">Assessment: </span>
+            <span class="mat-body-2 font-bold" i18n="assessment; exam">Assessment: </span>
             <span class="mat-body">
               <ng-container *ngIf="training.hasAssessment" i18n>Yes</ng-container>
               <ng-container *ngIf="!training.hasAssessment" i18n>No</ng-container>
@@ -102,7 +102,7 @@
         <div class="margin-left-xs width-9-10 flex flex-column flex-center text-truncate">
           <div class="text-truncate">
             <ng-container *ngIf="training.slots_available; else noSeats">
-              <span class="mat-body-2" i18n="seats available">Seats Available: </span>
+              <span class="mat-body-2 font-bold" i18n="seats available">Seats Available: </span>
             </ng-container>
             <ng-container *ngIf="training.slots_available">{{
               training.slots_available + ' '

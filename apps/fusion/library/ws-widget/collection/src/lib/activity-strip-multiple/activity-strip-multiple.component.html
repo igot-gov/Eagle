@@ -101,12 +101,14 @@
   <mat-card class="temp-class">
     <mat-card-content>
       <a role="button" class="close-x" mat-icon-button i18n (click)="closeSnackBar()">
-        <mat-icon>close</mat-icon>
+        <mat-icon class="text-red">close</mat-icon>
       </a>
       <div class="custom-margin">
-        <div class="">
-          <a role="button" mat-button i18n (click)="download()">See what is new in the latest version of iGot Karmayogi.
-            Click Here <mat-icon>file_download</mat-icon></a>
+        <div class="flex">
+          <div role="button" class="flex cursor-pointer" mat-button i18n (click)="download()">
+            <mat-icon class="text-white">file_download</mat-icon>
+            See what is new in the latest version of iGot Karmayogi.<b>Click Here</b>
+          </div>
         </div>
       </div>
 

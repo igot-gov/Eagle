@@ -108,7 +108,7 @@
         [
           {
             "dimensions": {},
-            "className": "new-box",
+            "className": "new-box margin-top-m",
             "widget": {
               "widgetType": "contentStrip",
               "widgetSubType": "contentStripMultiple",

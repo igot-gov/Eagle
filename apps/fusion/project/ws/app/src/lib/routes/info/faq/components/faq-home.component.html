@@ -37,7 +37,7 @@
       </h2>
     </div> -->
     <section class="padding-m" *ngFor="let selectedTabDatum of selectedTabData">
-      <p class="mat-body-2">
+      <p class="mat-body-2 font-bold">
         {{ selectedTabDatum.heading }}
       </p>
       <p *ngIf="selectedTabDatum.value" class="mat-body-1"
@@ -47,7 +47,7 @@
     </section>
     <!-- <section class="padding-m" [ngSwitch]="currentTab">
       <mat-card *ngSwitchCase="'login'">
-        <p class="mat-body-2" i18n="faq page panel one question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question one">
           Q1. Unable to login to Wingspan
         </p>
         <p class="mat-body-1">
@@ -79,7 +79,7 @@
           </ng-container>
         </p>
         <mat-divider></mat-divider>
-        <p class="mat-body-2" i18n="faq page panel one question two">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question two">
           Q2. Unable to logon to Wingspan, enclosed blue screen error
         </p>
         <p class="mat-body-1" i18n="faq page panel one answer two">
@@ -91,7 +91,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel one question three">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question three">
           Q3. Login credentials for Wingspan
         </p>
         <p class="mat-body-1">
@@ -125,7 +125,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel one question four">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question four">
           Q4. Unable to logon to Wingspan , getting Microsoft Login page
         </p>
         <p class="mat-body-1" i18n="faq page panel one answer four">
@@ -140,7 +140,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel one question five">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question five">
           Q5. Account Already Exists
         </p>
         <p class="mat-body-1" i18n="faq page panel one answer five">
@@ -149,7 +149,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel one question six">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question six">
           Q6. I am not able to get my PIN to enter with password in Wingspan application. Would you
           please help me with this?
         </p>
@@ -166,7 +166,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel one question seven">
+        <p class="mat-body-2 font-bold" i18n="faq page panel one question seven">
           Q7. Downtime
         </p>
         <p class="mat-body-1" i18n="faq page panel one answer seven">
@@ -176,7 +176,7 @@
         </p>
       </mat-card>
       <mat-card *ngSwitchCase="'odcAccess'">
-        <p class="mat-body-2" i18n="faq page panel two question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel two question one">
           Q1. ODC Connectivity
         </p>
         <p class="mat-body-1" i18n="faq page panel two answer one">
@@ -187,7 +187,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel two question two">
+        <p class="mat-body-2 font-bold" i18n="faq page panel two question two">
           Q2. Browser Issue
         </p>
         <p class="mat-body-1" i18n="faq page panel two answer two">
@@ -197,7 +197,7 @@
         </p>
       </mat-card>
       <mat-card *ngSwitchCase="'compatibility'">
-        <p class="mat-body-2" i18n="faq page panel three question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel three question one">
           Q1. Compatibility
         </p>
         <p class="mat-body-1">
@@ -213,7 +213,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel three question two">
+        <p class="mat-body-2 font-bold" i18n="faq page panel three question two">
           Q2. Browser Issue
         </p>
         <p class="mat-body-1" i18n="faq page panel three answer two">
@@ -222,7 +222,7 @@
         </p>
       </mat-card>
       <mat-card *ngSwitchCase="'installation'">
-        <p class="mat-body-2" i18n="faq page panel four question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel four question one">
           Q1. Regarding Wingspan installation on Smart Phone
         </p>
         <p class="mat-body-1">
@@ -261,7 +261,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel four question two">
+        <p class="mat-body-2 font-bold" i18n="faq page panel four question two">
           Q2. IOS - To Install IOS App
         </p>
         <p class="mat-body-1">
@@ -298,7 +298,7 @@
         </p>
       </mat-card>
       <mat-card *ngSwitchCase="'progressCompletion'">
-        <p class="mat-body-2" i18n="faq page panel five question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel five question one">
           Q1. I recently completed a course in Wingspan (Introduction to data science )and I passed the
           assessment exam also. But it is not reflecting in my dashboard. Can you please look into
           this?
@@ -309,7 +309,7 @@
         </p>
       </mat-card>
       <mat-card *ngSwitchCase="'video'">
-        <p class="mat-body-2" i18n="faq page panel six question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel six question one">
           Q1. Issues playing the video content.
         </p>
         <p class="mat-body-1" i18n="faq page panel six answer one">
@@ -318,7 +318,7 @@
         </p>
       </mat-card>
       <mat-card *ngSwitchCase="'authoring'">
-        <p class="mat-body-2" i18n="faq page panel seven question one">
+        <p class="mat-body-2 font-bold" i18n="faq page panel seven question one">
           Q1. Upload a content in Wingspan
         </p>
         <p class="mat-body-1">
@@ -340,7 +340,7 @@
 
         <mat-divider></mat-divider>
 
-        <p class="mat-body-2" i18n="faq page panel seven question two">
+        <p class="mat-body-2 font-bold" i18n="faq page panel seven question two">
           Q2. Could you please guide me on how to record a video in Wingspan with real time voice over.
         </p>
         <p class="mat-body-1" i18n="faq page panel seven answer two">

@@ -1,5 +1,5 @@
 <div class="margin-right-s">
-  <h3 i18n-aria-label aria-label="Related discussions">Related discussions</h3>
+  <span class="mat-body-1 font-bold" i18n-aria-label aria-label="Related discussions">Related discussions</span>
   <ng-container *ngIf="relatedDiscussions && relatedDiscussions.length > 0">
     <div *ngFor="let discussion of relatedDiscussions | slice:0:5;"
       class="tag ws-mat-primary-lite-background-important">
@@ -7,7 +7,7 @@
         <!-- <mat-card-header> -->
         <a href="javascript:void(0)" i18n-aria-label role="link" aria-label="related discussion post">
 
-          <mat-card-subtitle class="title f-medium" [innerHTML]="discussion?.title"></mat-card-subtitle>
+          <mat-card-subtitle class="title font-bold" [innerHTML]="discussion?.title"></mat-card-subtitle>
         </a>
         <!-- </mat-card-header> -->
         <mat-card-content>

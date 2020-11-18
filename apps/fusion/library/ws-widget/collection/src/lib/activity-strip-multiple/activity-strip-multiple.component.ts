@@ -119,10 +119,14 @@ export class ActivityStripMultipleComponent extends WidgetBaseComponent
     oReq.send()
   }
   closeSnackBar() {
+    localStorage.setItem('dManual', 'true')
     this.snackBar.dismiss()
   }
   openUserManualDialogue() {
-    this.snackBar.openFromTemplate(this.userManual, { duration: 20000, verticalPosition: 'bottom', horizontalPosition: 'left' })
+    const status = localStorage.getItem('dManual')
+    if (!status || status !== 'true') {
+      this.snackBar.openFromTemplate(this.userManual, { duration: 20000, verticalPosition: 'bottom', horizontalPosition: 'left', panelClass: 'temp-m' })
+    }
   }
 
   private initData() {

@@ -1,4 +1,4 @@
-<mat-toolbar class = "ws-mat-light-background" [ngStyle]="configSvc?.pageNavBar?.styles">
+<mat-toolbar class="ws-mat-light-background" [ngStyle]="configSvc?.pageNavBar?.styles">
   <ws-widget-btn-page-back [widgetData]="{ url: '/app/infy/channels/leadership' }"></ws-widget-btn-page-back>
   <span class="margin-left-s" i18n>Leadership</span>
 </mat-toolbar>
@@ -67,7 +67,7 @@
           (selectedIndexChange)="onIndexChange($event)">
           <mat-tab *ngFor="let tab of tabs; let i = index">
             <ng-template mat-tab-label>
-              <span [ngClass]="{ 'mat-body-2': currentIndex === i }" accesskey="i">{{
+              <span [ngClass]="{ 'mat-body-2 font-bold': currentIndex === i }" accesskey="i">{{
                 tab | titlecase
               }}</span>
             </ng-template>

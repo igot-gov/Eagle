@@ -42,7 +42,7 @@
         certification?.budget_Request?.status === 'Rejected'
       ">
       <section>
-        <p class="mat-body-2" i18n>
+        <p class="mat-body-2 font-bold" i18n>
           The Approval is required only for reimbursement.
         </p>
 
@@ -57,7 +57,7 @@
               rejected your previous request.
             </ng-container>
           </p>
-          <div class="mat-body-2" i18n>Reason:</div>
+          <div class="mat-body-2 font-bold" i18n>Reason:</div>
           <div class="mat-body">
             {{ certification?.budget_Request?.reject_reason }}
           </div>
@@ -77,7 +77,7 @@
       ">
       <section>
         <div>
-          <span class="mat-body-2" i18n>Amount</span>
+          <span class="mat-body-2 font-bold" i18n>Amount</span>
           <span class="mat-body margin-left-xs">
             {{
               certification?.budget_Request?.currency + ' ' + certification?.budget_Request?.amount
@@ -85,7 +85,7 @@
           </span>
         </div>
         <div>
-          <span class="mat-body-2" i18n>Approver</span>
+          <span class="mat-body-2 font-bold" i18n>Approver</span>
           <span class="mat-body margin-left-xs">
             {{certification?.budget_Request?.manager_id}}
           </span>

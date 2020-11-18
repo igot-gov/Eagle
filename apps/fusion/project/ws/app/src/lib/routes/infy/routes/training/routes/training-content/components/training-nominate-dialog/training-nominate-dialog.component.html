@@ -6,7 +6,7 @@
     </div>
     <div class="margin-left-xs width-9-10 flex flex-column flex-center">
       <div class="text-truncate">
-        <span class="mat-body-2" i18n>Duration: </span>
+        <span class="mat-body-2 font-bold" i18n>Duration: </span>
         <span class="mat-body">{{
           {
             fromDate: training.start_dt,
@@ -23,7 +23,7 @@
     </div>
     <div class="margin-left-xs width-9-10 flex flex-column flex-center">
       <div class="text-truncate">
-        <span class="mat-body-2" i18n>Location: </span>
+        <span class="mat-body-2 font-bold" i18n>Location: </span>
         <span class="mat-body">{{ training.location + ' ' }}</span>
       </div>
     </div>
@@ -32,12 +32,7 @@
 
 <ws-widget-user-autocomplete (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
 
-<button
-  mat-raised-button
-  color="primary"
-  [disabled]="sendStatus === 'sending' || !users.length"
-  (click)="onBtnNominateClick()"
-  i18n
->
+<button mat-raised-button color="primary" [disabled]="sendStatus === 'sending' || !users.length"
+  (click)="onBtnNominateClick()" i18n>
   Nominate
 </button>
