@@ -23,7 +23,7 @@ import { WsAuthorHomeRoutingModule } from './home.routing.module'
     WidgetResolverModule,
     FormsModule,
     RouterModule,
-    LeftMenuModule
+    LeftMenuModule,
   ],
   providers: [
     DashBoardService,

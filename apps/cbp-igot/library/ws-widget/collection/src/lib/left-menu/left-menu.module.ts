@@ -32,6 +32,6 @@ import {
   entryComponents: [LeftMenuComponent],
   exports: [
     LeftMenuComponent,
-  ]
+  ],
 })
 export class LeftMenuModule { }

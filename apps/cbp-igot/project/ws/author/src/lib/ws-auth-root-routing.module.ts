@@ -17,7 +17,7 @@ const routes: Routes = [
     resolve: {
       script: InitResolver,
     },
-    redirectTo: 'my-content'
+    redirectTo: 'my-content',
   },
   {
     path: 'home',
@@ -25,7 +25,7 @@ const routes: Routes = [
     resolve: {
       script: InitResolver,
     },
-    redirectTo: 'my-content'
+    redirectTo: 'my-content',
   },
   // {
   //   path: 'my-content',

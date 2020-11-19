@@ -26,8 +26,6 @@ import { map } from 'rxjs/operators'
 /* tslint:disable */
 import _ from 'lodash'
 /* tslint:enable */
-
-
 @Component({
   selector: 'ws-auth-my-content',
   templateUrl: './my-content.component.html',
@@ -65,6 +63,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   >
 
   public filterMenuItems: any = []
+  /* tslint:disable */
 
   dataSource: any
   hasChild = (_: number, node: IMenuFlatNode) => node.expandable
@@ -79,6 +78,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
       levels: level,
     }
   }
+  /* tslint:enable */
 
   constructor(
     private myContSvc: MyContentService,

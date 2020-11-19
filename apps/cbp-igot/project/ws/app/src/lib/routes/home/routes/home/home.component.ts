@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
   titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
-  WidgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
+  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   unread = 0
   currentRoute = 'home'
   banner!: NsWidgetResolver.IWidgetData<any>
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         // Hide loading indicator
         // console.log(event.url)
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
-        this.WidgetData = this.activeRoute.snapshot.data &&
+        this.widgetData = this.activeRoute.snapshot.data &&
           this.activeRoute.snapshot.data.pageData.data.menus || []
       }
 

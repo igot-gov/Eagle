@@ -36,5 +36,4 @@ export class CardTableComponent extends WidgetBaseComponent
   ngAfterViewInit() {
     // this.assignThumbnail()
   }
-
 }
