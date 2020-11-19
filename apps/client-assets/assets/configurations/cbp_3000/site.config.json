@@ -28,7 +28,7 @@
   "defaultLocale": "",
   "defaultThemeClass": "theme-igot",
   "details": {
-    "appName": "MDO-iGOT"
+    "appName": "CBP-iGOT"
   },
   "disablePidCheck": true,
   "isContentDownloadAvailable": false,
@@ -366,48 +366,6 @@
       "right": []
     }
   },
-  "hubs": [
-    {
-      "path": "/page/learn",
-      "active": true,
-      "hubname": "Learn",
-      "desc": "Shape your Skills with hunderds-of online course",
-      "icon": "school",
-      "accessKey": "L"
-    },
-    {
-      "path": "/app/discuss/home",
-      "active": true,
-      "hubname": "Discuss",
-      "desc": "Have a question? Have an Idea? discuss with your peers",
-      "icon": "forum",
-      "accessKey": "D"
-    },
-    {
-      "path": "/app/network-v2",
-      "active": true,
-      "hubname": "Network",
-      "desc": "Connect with Interesting people, see what they are upto.",
-      "icon": "group",
-      "accessKey": "N"
-    },
-    {
-      "path": "/app/careers/home",
-      "active": true,
-      "hubname": "Career",
-      "desc": "Explore the carrier option grow into the path you are",
-      "icon": "work",
-      "accessKey": "C"
-    },
-    {
-      "path": "/app/competencies",
-      "active": true,
-      "hubname": "Competencies",
-      "desc": "Add your competencies, see what others are adding",
-      "icon": "extension",
-      "accessKey": "O"
-    }
-  ],
   "featuredApps": [
     "feature_playlist",
     "feature_goals",

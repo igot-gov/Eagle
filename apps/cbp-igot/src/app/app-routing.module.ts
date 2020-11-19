@@ -38,18 +38,18 @@ const routes: Routes = [
     redirectTo: 'page/embed-behavioural-skills',
     canActivate: [GeneralGuard],
   },
-  {
-    path: 'app/home',
-    loadChildren: () => import('./routes/route-home.module').then(u => u.RouteHomeAppModule),
-    canActivate: [GeneralGuard],
-    data: {
-      pageType: 'feature',
-      pageKey: 'home',
-    },
-    resolve: {
-      pageData: PageResolve,
-    },
-  },
+  // {
+  //   path: 'app/home',
+  //   loadChildren: () => import('./routes/route-home.module').then(u => u.RouteHomeAppModule),
+  //   canActivate: [GeneralGuard],
+  //   data: {
+  //     pageType: 'feature',
+  //     pageKey: 'home',
+  //   },
+  //   resolve: {
+  //     pageData: PageResolve,
+  //   },
+  // },
   {
     path: 'app/frac',
     loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
@@ -139,6 +139,24 @@ const routes: Routes = [
     resolve: {
       tnc: TncAppResolverService,
     },
+  },
+  {
+    path: 'author',
+    data: {
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
+    },
+    canActivate: [GeneralGuard],
+    loadChildren: () =>
+      import('./routes/route-authoring-app.module').then(u => u.AuthoringAppModule),
   },
   {
     path: 'error-access-forbidden',

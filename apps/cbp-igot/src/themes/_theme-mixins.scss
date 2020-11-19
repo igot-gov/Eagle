@@ -12,10 +12,10 @@
 
   $colorPrimaryDark: mat-color($primary, darker);
   $colorPrimaryLight: mat-color($primary, lighter);
-  $colorPrimary: mat-color($primary, default);
-
-  $colorAccentDark: mat-color($accent, darker);
+  $colorPrimary: mat-color($primary, lighter);
   $colorAccentLight: mat-color($accent, lighter);
+  $colorAccentDark: mat-color($accent, default);
+
   $colorAccent: mat-color($accent, default);
 
   $colorWarnDark: mat-color($warn, darker);
@@ -37,6 +37,10 @@
   $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
+
+  .mat-icon {
+    color: $colorBlack60;
+  }
 
   .icon-svg {
     fill: $iconColor;

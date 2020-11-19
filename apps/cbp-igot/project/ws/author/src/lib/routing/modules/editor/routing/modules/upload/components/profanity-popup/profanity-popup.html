@@ -1,0 +1,108 @@
+<mat-dialog-content class="mat-typography pad-fix">
+  <div class="flex flex-1 custom">
+    <div class="flex flex-4 flex-column margin-right-l">
+
+
+      <div class="flex new-mobile">
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-3">
+          <h3>Overall Offensive score: {{profanityData.score}}%</h3>
+          <p>{{profanityData.pdfFileName}}</p>
+          <p>Total Pages Uploaded: {{profanityData.total_pages}}</p>
+          <p>Profanity word count: {{profanityData.profanity_word_count}}</p>
+          <p>Pages with images: {{profanityData.pagesWithImages}}</p>
+          <p>Image Occurrence on Page No: {{profanityData.total_page_images}}</p>
+        </div>
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+          <p class="margin-remove-bottom">
+            <span class="circle-orange">
+            </span>&nbsp;Lightly offensive
+          </p>
+        </div>
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+          <p class="margin-remove-bottom">
+            <span class="circle-brown">
+            </span>&nbsp;offensive
+          </p>
+
+        </div>
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+          <p class="margin-remove-bottom">
+            <span class="circle-red">
+            </span>&nbsp;Extremely offensive
+          </p>
+        </div>
+      </div>
+
+    </div>
+    <div class="flex flex-2 flex-column mat-app-background similar">
+      <div class="margin-l">
+        <h2>Similar discussions</h2>
+        <h3>We will display similar discussions here as you type</h3>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-1 custom">
+    <div class="flex flex-4 flex-column margin-right-l">
+
+
+      <div class="flex new-mobile">
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+          <div>
+            <p><b>Profanity Word</b></p>
+          </div>
+          <div *ngFor="let profanity of profanityData.profanityWordList">
+            <p><span [ngClass]="{'circle-orange':profanity.category ==='lightlyOffensive',
+            'circle-red':profanity.category ==='Offensive',
+            'circle-brown':profanity.category ==='extreamlyOffensive'}">
+              </span>&nbsp;{{profanity.word}}&nbsp;{{profanity.no_of_occurrence}}</p>
+
+          </div>
+          <!-- <p><span class="circle-orange">
+            </span>&nbsp;lorem (5)</p>
+          <p><span class="circle-red">
+            </span>&nbsp;Ipsem (5)</p> -->
+        </div>
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+          <p>
+            <b>Offence Category</b>
+          </p>
+          <p *ngFor="let cat of profanityData.profanityWordList">
+            {{cat.category}}
+          </p>
+        </div>
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+          <p>
+            <b>Occurance on Page</b>
+          </p>
+          <p *ngFor="let occ of profanityData.profanityWordList">
+            {{occ.pageOccurred}}
+          </p>
+        </div>
+        <div class="margin-top-xs margin-right-xs margin-left-xs flex-2">
+
+        </div>
+      </div>
+
+      <div *ngIf="showErrorMsg">
+        <mat-error>
+          {{createErrorMsg}}
+        </mat-error>
+      </div>
+      <mat-dialog-actions align="end" class="mb-0-imp">
+        <button mat-raised-button type="button" [mat-dialog-close]="true"
+          class="ws-mat-accent-border flex-auto-display">
+          <span class="ws-mat-default-text" i18n>Close</span>
+        </button>
+        <span *ngIf="uploadSaveData" class="px-4 flex items-center justify-center">
+          <mat-spinner [diameter]="30"></mat-spinner>
+        </span>
+      </mat-dialog-actions>
+    </div>
+    <div class="flex flex-2 flex-column mat-app-background similar">
+      <div class="margin-l">
+        <h2>Similar discussions</h2>
+        <h3>We will display similar discussions here as you type</h3>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

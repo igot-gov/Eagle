@@ -1,0 +1,30 @@
+<div class="type-container">
+  <!-- <mat-icon class="ws-mat-default-text node-icon" [class.ws-mat-warn-text]="isInvalid"
+    [class.ws-mat-default-text]="!isInvalid" aria-hidden="false" i18n-aria-label aria-label="icon">{{ icon }}</mat-icon> -->
+  <!-- ==={{resourceTyp}}=== -->
+  <mat-icon *ngIf="resourceTyp === 'Resource'" class="mr-1 custom-icon resource rotate-90"
+    [class.ws-mat-warn-text]="isInvalid" [class.ws-mat-default-text]="!isInvalid" aria-hidden="false" i18n-aria-label
+    aria-label="icon">
+    {{ icon }}
+  </mat-icon>
+  <mat-icon *ngIf="resourceTyp === 'Collection'" class="mr-1 custom-icon module rotate-90"
+    [class.ws-mat-warn-text]="isInvalid" [class.ws-mat-default-text]="!isInvalid" aria-hidden="false" i18n-aria-label
+    aria-label="icon">{{ icon }}
+  </mat-icon>
+  <mat-icon *ngIf="resourceTyp === 'Course'" class="mr-1 custom-icon course rotate-90"
+    [class.ws-mat-warn-text]="isInvalid" [class.ws-mat-default-text]="!isInvalid" aria-hidden="false" i18n-aria-label
+    aria-label="icon">{{ icon }}
+  </mat-icon>
+  <mat-icon *ngIf="resourceTyp === 'Learning Path'" class="mr-1 custom-icon program rotate-90"
+    [class.ws-mat-warn-text]="isInvalid" [class.ws-mat-default-text]="!isInvalid" aria-hidden="false" i18n-aria-label
+    aria-label="icon">{{ icon }}
+  </mat-icon>
+
+  <!-- [matTooltipDisabled]="name?.length < 25 || isDragging" -->
+  <span class="node-name">
+    <ng-container *ngIf="name">{{
+      name.length > 25 ? name.slice(0, 22) + '...' : name
+    }}</ng-container>
+    <ng-container i18n *ngIf="!name">Untitled Content</ng-container>
+  </span>
+</div>

@@ -72,7 +72,7 @@ export class GeneralGuard implements CanActivate {
       //   state.url &&
       //   !state.url.includes('/app/setup/') &&
       //   !state.url.includes('/app/tnc') &&
-      //   !state.url.includes('/page/home')
+      //   !state.url.includes('/author')
       // ) {
       //   this.configSvc.userUrl = state.url
       // }
@@ -101,7 +101,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (!requiredRolePreset) {
-        return this.router.parseUrl('/app/home')
+        return this.router.parseUrl('/author')
       }
     }
 
@@ -112,7 +112,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (requiredFeaturesMissing) {
-        return this.router.parseUrl('/app/home')
+        return this.router.parseUrl('/author')
       }
     }
 

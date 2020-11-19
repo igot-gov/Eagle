@@ -1,0 +1,31 @@
+<mat-card class="card-container">
+  <div class="info">
+    <span class="date mat-body">{{ badge.last_received_date | date }}</span>
+    <button mat-mini-fab color="primary" [ngClass]="{ hidden: badge.badge_type !== 'R' }">
+      {{ badge.received_count }}x
+    </button>
+  </div>
+  <div class="flex">
+    <div class="width-auto badge-container">
+      <!-- [matTooltip]="badge.how_to_earn" -->
+      <img class="small-badge" [src]="badge.image" [alt]="badge.badge_name" />
+    </div>
+    <div class=" badge-data">
+      <div class="mat-title margin-remove title">
+        {{ badge.badge_name }}
+      </div>
+      <div class="mat-body margin-top-s">{{ badge.message }}</div>
+    </div>
+    <ng-container>
+      <button mat-icon-button (click)="$event.stopPropagation()" [matMenuTriggerFor]="badgesMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #badgesMenu="matMenu" overlapTrigger="true">     
+        <button name="share-button-goal-card" mat-menu-item (click)="openShareBadgesDialog()">
+          <mat-icon>share</mat-icon>
+          <span>Share</span>
+        </button>    
+      </mat-menu>
+    </ng-container>
+  </div> 
+</mat-card>

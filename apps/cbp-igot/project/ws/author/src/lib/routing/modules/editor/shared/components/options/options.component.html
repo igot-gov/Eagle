@@ -1,0 +1,86 @@
+<div class="buttons">
+  <!-- new-style-grid  -->
+  <div class="cursor-pointer" (click)="toggleSettingButtons()">
+    <button mat-button class="padding-remove ws-mat-auth-tool-option mat-app-background setting_btn">
+      <mat-icon *ngIf="showSettingButtons">close</mat-icon>
+      <mat-icon *ngIf="!showSettingButtons">menu</mat-icon>
+      <!-- <span> {{!showSettingButtons?'Options' :'Close'}}</span> -->
+    </button>
+    <!-- <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons">
+          Close
+        </p> -->
+  </div>
+  <ng-container *ngIf="showSettingButtons">
+    <div class="new-style-grid cursor-pointer ws-primary-background" *ngIf="getPreview()"
+      (click)="action.emit('preview')">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-l mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">remove_red_eye</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Preview
+      </p>
+    </div>
+    <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('save')">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">save</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Save
+      </p>
+    </div>
+    <div class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('push'); isSubmitPressed = true" *ngIf="getAction() === 'sendForReview'">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Send For Review
+      </p>
+    </div>
+    <div class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('push'); isSubmitPressed = true" *ngIf="getAction() === 'review'">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Review
+      </p>
+    </div>
+    <div class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('push'); isSubmitPressed = true" *ngIf="getAction() === 'publish'">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">rate_review</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Publish
+      </p>
+    </div>
+    <div *ngIf="canDelete()" class="new-style-grid cursor-pointer ws-primary-background"
+      (click)="action.emit('delete')">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">delete</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text" i18n>
+        Delete
+      </p>
+    </div>
+    <div class="new-style-grid cursor-pointer ws-primary-background" (click)="action.emit('fulls')">
+      <button mat-icon-button
+        class="ws-primary-background mat-elevation-z5 small-button ws-mat-auth-tool-option margin-top-m mat-app-background settings">
+        <mat-icon class="text-white small-icon ws-mat-primary-text">fullscreen</mat-icon>
+      </button>
+      <p class="mat-h5 margin-remove button-text">
+        Fullscreen
+      </p>
+    </div>
+    <!-- <button mat-icon-button class=" mat-elevation-z5 small-button ws-mat-auth-tool-option  margin-top-m mat-app-background settings">
+              <mat-icon class="text-white small-icon ws-mat-primary-text">crop_portrait</mat-icon>
+            </button> -->
+  </ng-container>
+</div>

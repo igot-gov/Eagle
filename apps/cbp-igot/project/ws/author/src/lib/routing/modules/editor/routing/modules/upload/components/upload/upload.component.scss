@@ -1,0 +1,235 @@
+// Colours -----------------------------------------
+$grey: #777;
+$grey2: #dfe3e4;
+$blue: #2183dd;
+$green: #009900;
+$white: #fff;
+
+
+
+// Progress Bar ------------------------------------
+.progress {
+  position: relative;
+  display: flex;
+
+  // Each Step on the Progress Bar
+  .progress-step {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+
+    // Hide the final step's progress bar
+    &:last-child:after {
+      display: none;
+    }
+
+    // Step's circle in default state
+    &:before {
+      content: '';
+      display: flex;
+      margin: 0 auto;
+      margin-bottom: 10px;
+      line-height: 10px;
+      width: 10px;
+      height: 10px;
+      background: $white;
+      border: 4px solid $grey2;
+      border-radius: 100%;
+      color: $white;
+    }
+
+    // Step's progress bar in default state
+    &:after {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      width: 100%;
+      transition: width 1s ease-in;
+      height: 5px;
+      background: $grey2;
+      margin: 0px 9px;
+    }
+
+    // Step's active state
+    &.active {
+      &:before {
+        content: '';
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+        -moz-animation: glow 1s ease-in-out infinite alternate;
+        animation: glow 1s ease-in-out infinite alternate;
+      }
+    }
+
+    // Step's complete state
+    &.complete {
+
+      // Step's circle in complete state
+      &:before {
+        content: '\2713';
+        color: $white;
+        background: $green;
+        border: 4px solid transparent;
+      }
+
+      // Step's progress bar in complete state
+      &:after {
+        background: $green;
+        animation: nextStep 1s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+@keyframes glow {
+  from {
+    border: 4px solid $blue;
+  }
+
+  to {
+    border: 4px solid $blue;
+    background-color: $blue;
+  }
+}
+
+.cursor-disable {
+  cursor: not-allowed;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 65%;
+}
+
+#upload-container {
+  overflow: auto;
+}
+
+.settings {
+  border-radius: 8px;
+  border: 1px solid;
+  padding: 0 10px 0 10px !important;
+}
+
+.margin-left {
+  margin-left: 120px;
+
+  @media only screen and(max-width: 930px) {
+    // margin-top: 24px;
+    margin-left: 80px;
+  }
+
+  @media only screen and(max-width: 824px) {
+    margin-left: 40px;
+  }
+
+  @media only screen and(max-width: 699px) {
+    padding-top: 24px;
+  }
+
+  @media only screen and(max-width: 585px) {
+    margin-left: 0px;
+  }
+}
+
+.stepper-container {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.stepper-grid {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.2fr auto 1fr;
+}
+
+.op100 {
+  opacity: 1;
+}
+
+.text-white {
+  color: #fff;
+}
+
+ul li {
+  margin: 20px 0;
+}
+
+.op30 {
+  opacity: 0.3;
+}
+
+.op100 {
+  opacity: 1;
+}
+
+.fullView {
+  height: 100vh;
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+}
+
+.close-preview {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 110px;
+  right: 0px;
+  z-index: 50;
+}
+
+.small-button {
+  height: 32px;
+  width: 32px;
+  transition: 0.5s;
+  margin-right: 4px;
+}
+
+.small-icon {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  width: auto;
+  transition: 0.5s;
+}
+
+.button-grid {
+  display: grid;
+  width: 160px;
+  grid-template-columns: 0.2fr 0.95fr;
+}
+
+.button-text {
+  align-self: center;
+  padding-top: 17px;
+  padding-left: 4px;
+}
+
+.margin-right-xxs {
+  margin-right: 4px;
+}

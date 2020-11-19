@@ -1,0 +1,152 @@
+<div class="margin-l-l margin-r-l" [hidden]="previewMode">
+  <!-- <div class="flex margin-left-xl flex-middle margin-bottom-xl flex-wrap">
+    <div class="flex flex-middle">
+      <p class="ws-mat-primary-text font-weight-bold title margin-right-xs" i18n>
+        CONTENT CREATION
+      </p>
+      <mat-icon class="ws-mat-primary-text margin-bottom-xxs">create</mat-icon>
+    </div>
+    <div class="margin-left grid" *ngIf="currentStep >= 0">
+      <div class="stepper-grid" [ngClass]="{ 'cursor-disable': disableCursor === true }">
+        <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer" [ngClass]="{
+            'ws-mat-primary-background cursor-disable': currentStep >= 1
+          }" (click)="customStepper(1)" i18n>
+          1
+        </div>
+        <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer"
+          [ngClass]="{ 'ws-mat-primary-text op100': currentStep >= 1 }" i18n>
+          Choose Type
+        </p>
+        <span class="border border-solid text-gray-500 mx-3"
+          [ngClass]="{ 'ws-mat-primary-text': currentStep >= 2 }"></span>
+      </div>
+      <div class="stepper-grid">
+        <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer"
+          [ngClass]="{ 'ws-mat-primary-background': currentStep >= 2 }" (click)="customStepper(2)" i18n>
+          2
+        </div>
+        <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer" [ngClass]="{
+            'ws-mat-primary-text op100': currentStep >= 2,
+            'ws-mat-primary-border-bottom-bolder': currentStep === 2
+          }" (click)="customStepper(2)" i18n>
+          Content
+        </p>
+        <span class="border border-solid text-gray-500 mx-3"
+          [ngClass]="{ 'ws-mat-primary-text': currentStep === 3 }"></span>
+      </div>
+      <div class="flex flex-middle">
+        <div class="ws-mat-primary-background-op30 stepper-container text-white cursor-pointer"
+          [ngClass]="{ 'ws-mat-primary-background': currentStep === 3 }" (click)="customStepper(3)" i18n>
+          3
+        </div>
+        <p class="margin-left-xs margin-remove-bottom font-weight-500 op30 cursor-pointer" [ngClass]="{
+            'ws-mat-primary-text op100': currentStep === 3,
+            'ws-mat-primary-border-bottom-bolder': currentStep === 3
+          }" (click)="customStepper(3)" i18n>
+          Details
+        </p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class="margin-left-xl margin-top-s margin-bottom-xs">
+    <div class="flex flex-middle">
+      <p class="margin-remove-bottom mat-h3 font-weight-bold" i18n>Language</p>
+    </div>
+    <div class="flex flex-middle">
+      <p class="margin-left-s margin-top-xs font-weight-500 margin-top-s cursor-pointer"
+        *ngFor="let content of contents" [ngClass]="{
+          'ws-mat-primary-border-bottom-bolder': currentContent === content.identifier
+        }" (click)="changeContent(content)">
+        {{ content.locale | uppercase }}
+      </p>
+      <button mat-icon-button
+        class="small-button padding-remove ws-mat-primary-background mat-elevation-z6 margin-left-s">
+        <mat-icon class="text-white small-icon" [matMenuTriggerFor]="menu">
+          add</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let lang of allLanguages" (click)="createInAnotherLanguage(lang.srclang)">
+          {{ lang.label | uppercase }}
+        </button>
+      </mat-menu>
+    </div>
+  </div> -->
+  <!-- <div id="upload-container" class="mat-app-background">
+    <div class="margin-top-xl margin-left-xl margin-right-xl" *ngIf="currentStep === 2">
+      <ws-auth-file-upload [canTransCode]="canTransCode" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-file-upload>
+    </div>
+    <div class="margin-top-xl margin-left-xl margin-right-xl" *ngIf="currentStep === 3">
+      <ws-auth-edit-meta [nextAction]="getAction()" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-edit-meta>
+    </div>
+  </div> -->
+
+  <!-- <mat-horizontal-stepper labelPosition="bottom" #stepper id="upload-container">
+    <mat-step state="phone">
+      <ng-template matStepLabel>
+        <span class="ws-mat-default-text">Upload Content</span>
+      </ng-template>
+      <ng-container [ngTemplateOutlet]="top"></ng-container> -->
+
+  <!-- <div class="progress">
+    <div class="progress-step" [class.active]="state.isActive" [class.complete]="state.isCompleted"
+      *ngFor="let state of workFlow; let i = index" (click)="customStepper(state.step)">
+      <ws-auth-status-display [needStyle]="false" [status]="state.processName"></ws-auth-status-display>
+      <div class="info" *ngIf="state.name">
+        {{ state.name }}
+      </div>
+    </div>
+  </div> -->
+  <!-- {{currentStep === 1}} -->
+
+  <ws-auth-file-upload *ngIf="currentStep === 1" [canTransCode]="canTransCode" [isSubmitPressed]="isSubmitPressed"
+    (data)="action($event)">
+  </ws-auth-file-upload>
+  <!-- </mat-step>
+    <mat-step state="create1">
+      <ng-template matStepLabel><span class="ws-mat-default-text">Basic Details</span>
+      </ng-template> -->
+  <ws-auth-edit-meta *ngIf="currentStep > 1" type="UPLOAD" [stage]="currentStep" [nextAction]="'done'"
+    [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+  </ws-auth-edit-meta>
+  <!-- </mat-step>
+    <mat-step state="create1">
+      <ng-template matStepLabel><span class="ws-mat-default-text">Classification</span>
+      </ng-template>
+      <ws-auth-edit-meta [stage]="2" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-edit-meta>
+    </mat-step>
+    <mat-step state="create1">
+      <ng-template matStepLabel><span class="ws-mat-default-text">Collaborators</span>
+      </ng-template>
+      <ws-auth-edit-meta [stage]="3" [nextAction]="'done'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+      </ws-auth-edit-meta>
+    </mat-step> -->
+  <!-- Icon overrides. -->
+  <!-- check_circle -->
+  <!-- <ng-template matStepperIcon="phone">
+      <mat-icon class="ws-mat-default-text">radio_button_checked</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="create1">
+      <mat-icon class="ws-mat-default-text">radio_button_unchecked</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="edit">
+      <mat-icon class="ws-mat-default-text">radio_button_checked</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="done">
+      <mat-icon class="ws-mat-default-text">check_circle</mat-icon>
+    </ng-template>
+  </mat-horizontal-stepper> -->
+
+
+
+
+</div>
+
+<div *ngIf="previewMode">
+  <mat-icon (click)="closePreview()" class="close-preview">
+    arrow_back</mat-icon>
+  <ws-auth-viewer [identifier]="currentContent" [mimeTypeRoute]="mimeTypeRoute"></ws-auth-viewer>
+</div>

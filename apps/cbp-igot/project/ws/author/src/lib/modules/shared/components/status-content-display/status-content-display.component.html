@@ -1,0 +1,9 @@
+<div class="progress" *ngIf="workFlow && workFlow.length > 0">
+  <div class="progress-step" [class.active]="state.isActive" [class.complete]="state.isCompleted"
+    *ngFor="let state of workFlow | orderBy: 'step': 'asc' ; let i=index" (click)="customStepper(state.step)">
+    <div class="info" *ngIf="state.name">
+      <span *ngIf="state.isActive" class="ws-mat-default-text font-bold">{{ state.name }}</span>
+      <span *ngIf="!state.isActive" class="ws-mat-default-text">{{ state.name }}</span>
+    </div>
+  </div>
+</div>

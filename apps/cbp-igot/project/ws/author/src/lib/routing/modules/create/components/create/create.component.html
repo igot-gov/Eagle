@@ -1,0 +1,45 @@
+<div class="margin-l-l margin-r-l new-box" *ngIf="!error">
+  <div class="res-margin">
+    <div class="flex flex-col md:flex-row margin-top-xl padding-top-l justify-between margin-right-m">
+      <h2 class="mat-h3 ml-14">
+        Choose your starting point from the below available options
+      </h2>
+      <div class="mat-h3 flex items-center select-lang ws-mat-default-text">
+        <!-- {{allLanguages | json}} -->
+        <!-- <span class="mr-1 text-center" i18n>Select Language: </span> -->
+        <button class="lang-btn" *ngIf="allLanguages?.length" mat-button [matMenuTriggerFor]="sortLang">
+          {{ languageName }}
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="card-holder margin-top-l">
+      <div class="flex flex-1 flex-wrap flex-col md:flex-row">
+        <!-- <div class="flex-1"> -->
+        <ws-auth-entity-card [entity]="resourceEntity" [expanded]="true" (step)="contentClicked($event)">
+        </ws-auth-entity-card>
+        <!-- </div> -->
+        <!-- <div class="flex-3"> -->
+        <ng-container *ngFor="let createEntity of entity; let i = index">
+          <ws-auth-entity-card [entity]="createEntity" (step)="contentClicked($event)"></ws-auth-entity-card>
+          <mat-divider *ngIf="i % 2 !== 0"></mat-divider>
+        </ng-container>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<h2 *ngIf="error" class="mat-error margin-top-m text-center" i18n>
+  Unable to load the page. Reload or try again after some time.
+</h2>
+<mat-menu #sortLang="matMenu">
+  <ng-template matMenuContent>
+    <button mat-menu-item class="flex flex-between ws-mat-default-text" *ngFor="let lang of allLanguages"
+      (click)="setCurrentLanguage(lang.srclang,lang.label)">
+      <span class="flex items-center w-full">
+        <span>{{ lang.label | uppercase }}</span>
+        <mat-icon class="ml-2" *ngIf="lang.srclang === language">check</mat-icon>
+      </span>
+    </button>
+  </ng-template>
+</mat-menu>

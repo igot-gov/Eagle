@@ -1,0 +1,84 @@
+<mat-card class="margin-top-xl" id="auth-quiz">
+  <mat-card-title class="m-auto ws-mat-default-text">
+    <span>Assessment</span>
+    <ng-container [ngTemplateOutlet]="top"></ng-container>
+  </mat-card-title>
+  <mat-card-content class="card-contan">
+    <div class="flex flex-1 mat-app-background mb-10 br-8">
+      <div class="flex flex-1 margin-top-xl margin-right-xl">
+        <ng-container *ngIf="contentLoaded">
+          <div class="flex justify-between">
+            <button (click)="sideNavBar.toggle()" *ngIf="mediumScreenSize" mat-icon-button>
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+          <mat-sidenav-container autosize="true" class="flex flex-1 nav-container quiz-list mr-8">
+            <mat-sidenav #sideNavBar class="h-full custom-scroll" [mode]="mode$ | async" [(opened)]="sideNavBarOpened">
+              <ws-auth-question-editor-sidebar [showContent]="showContent" [type]="'assessment'" [(data)]="questionsArr"
+                [canEdit]="canEditJson"></ws-auth-question-editor-sidebar>
+            </mat-sidenav>
+            <mat-sidenav-content>
+              <div *ngIf="questionsArr.length">
+                <mat-card-title
+                  class="w-full h-6 text-center ws-mat-primary-background text-white h-12 rounded flex items-center justify-center"
+                  *ngIf="selectedQuizIndex !== undefined && canEditJson">
+                  <span i18n>Quiz-</span>{{selectedQuizIndex + 1}}
+                </mat-card-title>
+                <ws-auth-question-editor *ngIf="questionsArr.length && canEditJson" [submitPressed]="canValidate">
+                </ws-auth-question-editor>
+                <div class="flex justify-between px-1 pt-6 pb-6" *ngIf="questionsArr && canEditJson">
+                  <button class=" ws-mat-primary-background mat-elevation-z6 margin-left-s" (click)="changeQuiz(-1)"
+                    [disabled]="selectedQuizIndex === 0"
+                    [ngClass]="{'opacity-25 cursor-disable':selectedQuizIndex === (0)}" mat-button i18n-aria-label
+                    aria-label="navigate to next quiz">
+                    <span class="text-white small-operators" i18n>Previous</span>
+                  </button>
+                  <button class=" ws-mat-primary-background mat-elevation-z6 margin-left-s"
+                    [disabled]="selectedQuizIndex === (questionsArr.length-1)" mat-button
+                    [ngClass]="{'opacity-25 cursor-disable':selectedQuizIndex === (questionsArr.length-1)}"
+                    (click)="changeQuiz(1)" i18n-aria-label aria-label="navigate to previous quiz">
+                    <span class="text-white small-operators" i18n>Next</span>
+                  </button>
+                </div>
+              </div>
+              <div class="flex items-center justify-center h-64" *ngIf="!questionsArr.length || !canEditJson">
+                <div class="p-1">
+                  <span i18n *ngIf="!questionsArr.length && canEditJson">No quiz found, Kindly add</span>
+                  <span i18n *ngIf="!canEditJson">Reviewer or Publisher cannot add or edit Quiz</span>
+                  <!-- <mat-icon class="align-middle">error</mat-icon> -->
+                </div>
+              </div>
+            </mat-sidenav-content>
+          </mat-sidenav-container>
+        </ng-container>
+      </div>
+      <!-- <div class="margin-top-xl margin-left-xl margin-right-xl" *ngIf="currentStep === 3">
+          <ws-auth-edit-meta [nextAction]="'publish'" [isSubmitPressed]="submitPressed" (data)="action($event)">
+          </ws-auth-edit-meta>
+        </div> -->
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="flex flex-end  margin-bottom-xl margin-right-s">
+      <!-- matStepperNext -->
+      <button type="button" mat-button class="ws-mat-primary-background margin-top-m m-auto"
+        (click)="action('saveAndNext')">
+        <!-- <mat-icon class="text-white">file_upload</mat-icon> -->
+        <b class="text-white" i18n>Save and Proceed</b>
+      </button>
+    </div>
+  </mat-card-actions>
+  <mat-card-footer></mat-card-footer>
+
+
+  <ng-template #top>
+    <ws-auth-options [currentContent]="currentId" (action)="action($event)"></ws-auth-options>
+  </ng-template>
+
+
+  <div *ngIf="previewMode">
+    <mat-icon (click)="closePreview()" class="close-preview" matTooltip="Back"
+      i18n-matTooltip="Back button to go to previous page">
+      arrow_back</mat-icon>
+    <ws-auth-viewer [identifier]="currentId" [mimeTypeRoute]="mimeTypeRoute"></ws-auth-viewer>
+  </div>

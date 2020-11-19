@@ -324,6 +324,76 @@
           }
         }
       }
+    },
+    "@ws/author": {
+      "projectType": "library",
+      "root": "project/ws/author",
+      "sourceRoot": "project/ws/author/src",
+      "prefix": "ws-author",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "project/ws/author/tsconfig.lib.json",
+            "project": "project/ws/author/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "project/ws/author/src/test.ts",
+            "tsConfig": "project/ws/author/tsconfig.spec.json",
+            "karmaConfig": "project/ws/author/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "project/ws/author/tsconfig.lib.json",
+              "project/ws/author/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@ws/viewer": {
+      "projectType": "library",
+      "root": "project/ws/viewer",
+      "sourceRoot": "project/ws/viewer/src",
+      "prefix": "viewer",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "project/ws/viewer/tsconfig.lib.json",
+            "project": "project/ws/viewer/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "project/ws/viewer/src/test.ts",
+            "tsConfig": "project/ws/viewer/tsconfig.spec.json",
+            "karmaConfig": "project/ws/viewer/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "project/ws/viewer/tsconfig.lib.json",
+              "project/ws/viewer/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "cbp",

@@ -26,7 +26,11 @@
       "@ws-widget/utils": ["library/ws-widget/utils"],
       "@ws-widget/utils/*": ["library/ws-widget/utils/*"],
       "@ws/app": ["project/ws/app"],
-      "@ws/app/*": ["project/ws/app/*"]
+      "@ws/app/*": ["project/ws/app/*"],
+      "@ws/author": ["project/ws/author"],
+      "@ws/author/*": ["project/ws/author/*"],
+          "@ws/viewer": ["project/ws/viewer"],
+      "@ws/viewer/*": ["project/ws/viewer/*"]
     },
     "removeComments": true,
     "sourceMap": true,

@@ -2,7 +2,7 @@
   class="mat-elevation-z3 custom mobile">
   <div class="fix-ww" id="root-tool-bar" title="toolbar" i18n-aria-label role="toolbar">
     <ng-container *ngIf="mode === 'top'">
-      <a routerLink="/app/home" class="logo-dim" role="link" title="Home" i18n-aria-title i18n-aria-label>
+      <a routerLink="/author" class="logo-dim" role="link" title="Home" i18n-aria-title i18n-aria-label>
         <img [src]="appIcon" alt="Application Logo" class="app-logo" />
       </a>
       <!-- <span class="spacer"></span> -->
@@ -48,7 +48,7 @@
           *ngFor="let item of primaryNavbarConfig?.smallScreen?.left">
         </ng-container>
       </ng-container>
-      <a role="button" matRipple class="flex items-center flex-col px-2 box-sizing-box" routerLink="/app/home" active
+      <a role="button" matRipple class="flex items-center flex-col px-2 box-sizing-box" routerLink="/author" active
         routerLinkActive="ws-mat-accent-text">
         <ng-container *ngIf="!appBottomIcon">
           <mat-icon>home</mat-icon>

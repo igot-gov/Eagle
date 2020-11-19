@@ -1,0 +1,127 @@
+@import 'ws-mixins';
+@import 'ws-vars';
+@import 'ws-common';
+
+.op100 {
+  opacity: 1;
+}
+
+.upload-box {
+  border: 2px dashed rgba(28, 28, 28, 0.6);
+  border-radius: 2%;
+  width: 235px;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.min-w {
+  width: 650px;
+
+  @include breakpoint-xs {
+    width: auto;
+  }
+
+  @include breakpoint-s {
+    width: auto;
+  }
+}
+
+.mobile-break {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  margin: 0 5px 0 5px;
+  flex: 1;
+  // background: bisque;
+}
+
+.t-45 {
+  transform: rotate(45deg);
+  // margin: 0 0 0 -37px;
+
+  @include breakpoint-xs {
+    display: none;
+    margin: 0;
+  }
+}
+
+.c-footer {
+  display: flex;
+  margin: auto;
+  width: fit-content;
+}
+
+.marginleftxl {
+  margin-left: $size-xl;
+
+  @include breakpoint-xs {
+    margin-left: 0
+  }
+}
+
+.card-contan {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+
+  @include breakpoint-s {
+    flex-direction: column;
+  }
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+ul li {
+  margin: 20px 0;
+}
+
+input {
+  line-height: 1px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile+label {
+  font-size: 1.25em;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.close-button {
+  top: -70px;
+  left: 60px;
+}
+
+
+.padding-remove-bottom {
+  padding: 0;
+}
+
+.flex-grow60 {
+  flex-grow: 0.6;
+}
+
+
+.input {
+  font-size: 16px;
+}
+
+.margin-left15 {
+  margin-left: 15rem;
+}
+
+.margin-left5 {
+  margin-left: 5rem;
+}

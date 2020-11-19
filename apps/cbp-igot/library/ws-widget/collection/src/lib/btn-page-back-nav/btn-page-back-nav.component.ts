@@ -29,13 +29,13 @@ export class BtnPageBackNavComponent extends WidgetBaseComponent
     if (this.presentUrl === '/page/explore') {
       return {
         queryParams: undefined,
-        routeUrl: '/app/home',
+        routeUrl: '/author',
       }
     }
     if (this.widgetData.url === 'home') {
       return {
         queryParams: undefined,
-        routeUrl: '/app/home',
+        routeUrl: '/author',
       }
     }
 
@@ -60,7 +60,7 @@ export class BtnPageBackNavComponent extends WidgetBaseComponent
 
     return {
       queryParams: undefined,
-      routeUrl: this.widgetData.url ? this.widgetData.url : '/app/home',
+      routeUrl: this.widgetData.url ? this.widgetData.url : '/author',
     }
   }
 

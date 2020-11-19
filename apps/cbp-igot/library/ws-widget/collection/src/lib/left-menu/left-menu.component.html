@@ -1,6 +1,6 @@
 <div class="pad-l-4r">
   <div class="margin-top-xs flex flex-column">
-    <a [routerLink]="['/app/home/users']" role="link" i18n class="flex flex-column margin-top-l">
+    <a href="javascript:void(0)" role="link" i18n class="flex flex-column margin-top-l">
       <img src="cbp-assets/icons/jpal.svg" alt="Department of Personnel and Training" class="goi" />
       <span i18n class="mat-body-2 margin-top-m padding-right-m">
         <!-- this will be dynamic -->
@@ -12,6 +12,7 @@
     <ng-container *ngFor="let tab of widgetData">
       <a mat-list-item class="flex outline-1" *ngIf="tab?.enabled" matRipple [routerLink]="tab.routerLink"
         routerLinkActive="ws-active-route-menu">
+        <!-- [queryParams]="tab.queryParams" -->
         <!--  [class.ws-active-route-menu]="isLinkActive(tab.key)" [fragment]="tab.fragment? tab.key : ''" [queryParamsHandling]="preserve" -->
         <span class="padding-left-xs">{{tab?.name}}</span>
       </a>

@@ -1,0 +1,24 @@
+<ng-container [ngSwitch]="status">
+  <span class="w-100 overflow-prevent font-medium px-2" [class.draft]="needStyle" *ngSwitchCase="'Draft'"
+    wsAuthShowHideToolTip i18n>Draft</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.review]="needStyle" *ngSwitchCase="'InReview'"
+    wsAuthShowHideToolTip i18n>In Review</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.review]="needStyle" *ngSwitchCase="'QualityReview'"
+    wsAuthShowHideToolTip i18n>Quality Review</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.live]="needStyle" *ngSwitchCase="'Live'"
+    wsAuthShowHideToolTip i18n>Live</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.review]="needStyle" *ngSwitchCase="'Reviewed'"
+    wsAuthShowHideToolTip i18n>Reviewed</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.deleted]="needStyle" *ngSwitchCase="'Deleted'"
+    wsAuthShowHideToolTip i18n>Deleted</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.expired]="needStyle" *ngSwitchCase="'Unpublished'"
+    wsAuthShowHideToolTip i18n>Unpublished</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.expired]="needStyle" *ngSwitchCase="'Expired'"
+    wsAuthShowHideToolTip i18n>Expired</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.expired]="needStyle" *ngSwitchCase="'MarkedForDeletion'"
+    wsAuthShowHideToolTip i18n>Marked For Deletion</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.processing]="needStyle" *ngSwitchCase="'Processing'"
+    wsAuthShowHideToolTip i18n>In Transit</span>
+  <span class="w-100 overflow-prevent font-medium px-2" [class.expired]="needStyle" *ngSwitchDefault
+    wsAuthShowHideToolTip>{{ status }}</span>
+</ng-container>

@@ -1,0 +1,40 @@
+@import 'ws-common';
+@import 'ws-mixins';
+
+.width-expand {
+  flex: 1;
+  min-width: 1px;
+}
+
+.viewer-sidenav-container {
+  height: calc(100vh - 56px);
+}
+
+.viewer-sidenav {
+  width: 100%;
+
+  @include breakpoint-gt-xs {
+    width: 25%;
+    min-width: 400px;
+    max-width: 600px;
+  }
+}
+
+.viewer-sidenav-standalone {
+  width: 100%;
+
+  @include breakpoint-gt-xs {
+    width: 25%;
+    min-width: 300px;
+    max-width: 400px;
+  }
+}
+
+.full-height-width-iframe {
+  height: 100vh;
+  width: 100vw;
+}
+
+.sidenavContent::-webkit-scrollbar {
+  width: 5px !important
+}

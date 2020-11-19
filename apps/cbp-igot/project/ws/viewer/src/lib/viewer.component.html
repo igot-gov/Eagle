@@ -1,0 +1,74 @@
+<section *ngIf="isNotEmbed">
+  <viewer-viewer-top-bar *ngIf="fullScreenContainer" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
+    (toggle)="toggleSideBar()">
+  </viewer-viewer-top-bar>
+  <viewer-viewer-top-bar *ngIf="!fullScreenContainer" [forPreview]="forPreview" [frameReference]="fullScreenContainer"
+    (toggle)="toggleSideBar()">
+  </viewer-viewer-top-bar>
+  <mat-sidenav-container autosize class="viewer-sidenav-container">
+    <mat-sidenav [ngClass]="isTypeOfCollection?'viewer-sidenav':'viewer-sidenav-standalone'" position="end"
+      [opened]="sideNavBarOpened" [mode]="mode">
+      <mat-tab-group>
+        <mat-tab *ngIf="isTypeOfCollection" i18n-label label="Contents">
+          <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()">
+          </viewer-viewer-toc>
+        </mat-tab>
+        <mat-tab i18n-label label="Details">
+          <ws-widget-player-brief [forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="sidenavContent" #scrollableContent>
+      <section *ngIf="status === 'error'">
+        <div *ngIf="errorWidgetData?.widgetData?.errorType" [wsResolverWidget]="errorWidgetData"></div>
+        <div *ngIf="error.errorType === errorType.mimeTypeMismatch">
+          <mat-card>
+            <mat-card-title i18n>Looks like we are having some issues in our content.</mat-card-title>
+            <mat-card-content>
+              <div class="mat-caption">
+                <ng-container i18n>
+                  Debug Message: This content is of a different mimeType (
+                </ng-container>
+                <ng-container>
+                  {{ error?.mimeType }}
+                </ng-container>
+                <ng-container i18n>
+                  )
+                </ng-container>
+              </div>
+              <div>
+                <strong i18n>Possible Link: </strong>
+                <a [routerLink]="error.probableUrl">
+                  {{ error.probableUrl }}
+                </a>
+              </div>
+              <div class="margin-top-m text-center">
+                <a class="ws-mat-primary-text" [routerLink]="'/feedback/bug'" i18n>Report to us</a>
+                <span i18n> and we will make it work</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div *ngIf="error.errorType === errorType.previewUnAuthorised">
+          <mat-card class="margin-m">
+            <mat-card-title i18n>Looks like you are not authorized to preview this content.</mat-card-title>
+            <mat-card-content>
+              <div>
+                <a class="ws-mat-primary-text" [routerLink]="'/feedback/bug'" i18n>Report to us</a>
+                <span i18n> and we will make it work</span>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
+      <section *ngIf="status === 'pending'">
+        <mat-spinner></mat-spinner>
+      </section>
+      <router-outlet (activate)="getContentData($event)"></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</section>
+<div class="full-height-width-iframe" *ngIf="!isNotEmbed">
+  <router-outlet></router-outlet>
+</div>

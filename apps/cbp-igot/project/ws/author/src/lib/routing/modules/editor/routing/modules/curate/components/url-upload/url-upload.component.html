@@ -1,0 +1,91 @@
+<mat-card class="">
+  <mat-card-title class="m-auto ws-mat-default-text">
+    <span>Attach a Link</span>
+    <ng-container [ngTemplateOutlet]="top"></ng-container>
+  </mat-card-title>
+  <mat-card-content class="mt-5 card-contan">
+    <div class="mobile-break mat-app-background">
+      <form class="flex flex-1 flex-column" [formGroup]="urlUploadForm">
+        <div class="flex-middle marginleftxl p-5">
+          <!-- margin-left15<div class="flex margin-top-xl margin-bottom-m   flex-middle">
+            <p class="mat-h2  font-weight-500 margin-right-s" i18n>Link</p>
+            <mat-form-field appearance="outline" class=" margin-left5 flex-grow60 padding-remove-bottom">
+              <input type="url" matInput autoComplete="false" i18n-placeholder formControlName="artifactUrl" placeholder="Enter or paste URL here"
+                class="input ws-mat-primary-text" />
+              <mat-error *ngIf="showError(urlUploadForm.controls.artifactUrl)" i18n="Name Error|Explains name is required">
+                URL is mandatory
+              </mat-error>
+            </mat-form-field>
+          </div> -->
+          <div class="flex-1">
+            <p class="font-weight-bold margin-remove-bottom" i18n>
+              Link
+            </p>
+            <mat-form-field appearance="outline" class="flex-1 margin-top-xs" style="display: contents;">
+              <mat-icon matPrefix class="ws-mat-default-text t-45">link</mat-icon>
+              <input type="url" matInput formControlName="artifactUrl" i18n-placeholder
+                placeholder="Enter or paste URL here" />
+              <mat-error *ngIf="showError(urlUploadForm.controls.artifactUrl)" i18n>
+                URL is mandatory
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- <div class="margin-top-xs">
+            <p class="font-weight-bold margin-remove-bottom" i18n>
+              Is It Available on internet ?
+            </p>
+            <mat-form-field appearance="outline" class="margin-top-xs">
+              <mat-select formControlName="isInIntranet" placeholder="e.g. Yes">
+                <mat-option [value]="false" i18n>Yes</mat-option>
+                <mat-option [value]="true" i18n>No</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+          <!-- <div class="flex flx-1 flex-middle margin-top-xs">
+            <p class="font-weight-bold margin-remove-bottom" i18n>
+              Opens in a new tab?
+            </p>
+            <mat-form-field appearance="outline" class="margin-top-xs">
+              <mat-select formControlName="isIframeSupported" placeholder="e.g. Yes">
+                <mat-option [value]="'Yes'" i18n>No</mat-option>
+                <mat-option [value]="'No'" i18n>Yes</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+          <div class="flex flx-1 flex-middle margin-top-xs padding-top-l">
+            <mat-checkbox [checked]="iprAccepted" (change)="iprChecked()"></mat-checkbox>
+            <p class="margin-left-xs margin-remove-bottom">
+              I have read and agree to the
+              <span class="ws-mat-default-text font-weight-bold cursor-pointer" (click)="showIpr()">IPR
+                Declaration</span>
+            </p>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="flex flex-center margin-bottom-xl">
+      <!-- matStepperNext -->
+      <button type="button" mat-button class="ws-mat-primary-background margin-top-m m-auto" (click)="submit()">
+        <mat-icon class="text-white">file_upload</mat-icon>
+        <b class="text-white" i18n>Save and Proceed</b>
+      </button>
+    </div>
+  </mat-card-actions>
+  <mat-card-footer>
+    <!-- <div class="c-footer">
+      <button mat-icon-button matStepperPrevious disabled>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-icon-button matStepperNext>
+        <mat-icon> arrow_forward</mat-icon>
+      </button>
+    </div> -->
+  </mat-card-footer>
+</mat-card>
+
+<ng-template #top>
+  <ws-auth-options [currentContent]="currentContent" (action)="data.emit($event)"></ws-auth-options>
+</ng-template>

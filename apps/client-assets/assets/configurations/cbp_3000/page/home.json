@@ -61,7 +61,7 @@
                     "uri": ""
                   },
                   "enabled": true,
-                  "routerLink": "/app/home"
+                  "routerLink": "/author/home"
                 },
                 {
                   "name": "Roles and access",

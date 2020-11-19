@@ -1,0 +1,26 @@
+@import 'ws-mixins';
+
+.app-logo {
+  max-width: 100px;
+  max-height: 30px;
+
+  @include breakpoint-xs {
+    max-width: 80px;
+    max-height: 30px;
+  }
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.xsmall {
+  position: absolute;
+  display: block;
+  right: 0;
+}
+
+.finish {
+  font-weight: bold;
+  opacity: 0.7;
+}

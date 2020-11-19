@@ -1,0 +1,57 @@
+<section>
+  <h1 mat-dialog-title i18n>Share this badges with</h1>
+  <!-- <div mat-dialog-content>
+    <ws-widget-user-autocomplete class="block" (usersList)="updateUsers($event)"></ws-widget-user-autocomplete>
+    <mat-form-field class="text-area w-full">
+      <textarea name="share-message-input-playlist-share" class="mat-input-element" matInput #playlistShareComment
+        i18n-placeholder placeholder="Add Notes..." rows="5" #txtBody></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="flex flex-row-reverse">
+    <button type="button" name="share-button-playlist-share" mat-flat-button
+      class="text-white ws-mat-primary-background" [disabled]="!users?.length"
+      (click)="sharePlaylist(playlistShareComment.value, successMsg.value)" i18n>
+      Share
+    </button>
+  </div> -->
+
+  <div *ngIf="isSocialMediaShareEnabled" class="pt-6">
+    <h2 class="mat-h2 margin-remove" i18n>
+      OR
+    </h2>
+  
+    <h3 class="mat-h3 margin-remove py-2" i18n>Share on Social Media</h3>
+  
+    <div class="flex flex-wrap items-center">
+      <ws-widget-btn-facebook-share shareType="badge" [contentId]="badge.badge_id" class="pr-4 pb-3"></ws-widget-btn-facebook-share>
+      <ws-widget-btn-twitter-share  shareType="badge" [contentId]="badge.badge_id" class="pr-4 pb-3"></ws-widget-btn-twitter-share>
+      <ws-widget-btn-linkedin-share shareType="badge" [contentId]="badge.badge_id" class="pr-4 pb-3"></ws-widget-btn-linkedin-share>
+    </div>
+  </div>
+</section>
+<!-- <ng-template #sharingInProgress>
+  <div class="flex flex-middle width-420">
+    <mat-spinner></mat-spinner>
+    <span class="mat-body ml-4">
+      <ng-container i18n>Sharing with </ng-container>
+      <span class="mat-body-strong">{{ users[0].email }}</span>
+      <ng-container *ngIf="users?.length > 1">
+        <ng-container i18n>and </ng-container>
+        {{ users?.length - 1 }}
+        <ng-container i18n> others</ng-container>
+      </ng-container>
+    </span>
+  </div>
+</ng-template> -->
+
+<!-- <input #successMsg type="hidden" i18n-value value="Playlist Shared" />
+<input #shareError type="hidden" i18n-value value="Error Sharing Playlist" />
+<ng-template #contentDeletedError type="hidden">
+  The following contents have been deleted:<br /><br />
+  <div *ngFor="let name of data?.deleted">
+    {{ data.deleted.indexOf(name) + 1 }}. {{ name }}<br />
+  </div>
+  <br />
+  Please delete the above contents to continue sharing the playlist
+  <ng-template> </ng-template>
+</ng-template> -->

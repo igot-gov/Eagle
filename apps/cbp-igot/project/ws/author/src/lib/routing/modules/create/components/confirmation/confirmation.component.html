@@ -1,0 +1,49 @@
+<p class="para">Please complete the below course before proceeding to create content on the IGOT platform.</p>
+<!-- <mat-card class="card-align">
+    <mat-card-content class="content-margin">
+      <h1>
+        Creating and Running an Online Course
+      </h1>
+      <h2>
+        Based on the Webinar series hosted by J-PAL South Asia
+      </h2>
+    </mat-card-content>
+  </mat-card> -->
+<div class="flex-container">
+  <div class="container">
+    <div _ngcontent-jmt-c42="" class="source-div">
+      <span class="title">
+        <img _ngcontent-jmt-c42="" class="source-icon"
+          ng-reflect-ws-utils-default-thumbnail="/assets/instances/eagle/app_lo"
+          id="source_lex_auth_013064126678122496519" alt="undefined" src="/assets/instances/eagle/app_logos/source.png">
+
+        <span class="title_text">Creating and Running an Online Course</span>
+      </span>
+    </div>
+
+    <span class="title_2">
+      Based on the Webinar series hosted by J-PAL South Asia
+    </span>
+  </div>
+</div>
+
+
+<mat-grid-list cols="2" rowHeight="8:1" class="first-grid">
+  <mat-grid-tile>
+    <div class="inside-grid-right">
+      <mat-checkbox (change)="setAll($event.checked)">
+        I confirm that I have taken the above course
+      </mat-checkbox>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="inside-grid-left">
+      <button class="btn-create margin-remove-bottom mat-h3 font-white ws-mat-primary-border"
+        [routerLink]="'/author/create'" [class.disabled_class]="!isChecked" id="ws-auth-root-home-btn-create"
+        name="ws-auth-root-home-btn-create" [disabled]="!isChecked">
+        <ng-container><span class="font-white">Next</span></ng-container>
+      </button>
+    </div>
+
+  </mat-grid-tile>
+</mat-grid-list>

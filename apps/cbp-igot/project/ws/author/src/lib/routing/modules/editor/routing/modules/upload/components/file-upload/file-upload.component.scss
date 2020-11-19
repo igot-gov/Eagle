@@ -1,0 +1,179 @@
+@import 'ws-mixins';
+
+.op100 {
+  opacity: 1;
+}
+
+.upload-box {
+  border: 2px dashed rgba(28, 28, 28, 0.6);
+  border-radius: 4px;
+  // flex: 1;
+  margin: auto;
+  width: 400px;
+  height: 230px;
+  max-width: 400px;
+  position: relative;
+
+  @include breakpoint-xs {
+    width: auto;
+  }
+
+}
+
+.rotate {
+  transform: rotate(45deg);
+}
+
+.break {
+  word-break: break-all;
+}
+
+.underline {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.instruction {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: auto;
+  width: 400px;
+  max-width: 400px;
+  position: relative;
+
+  @include breakpoint-xs {
+    margin: 0.5rem;
+    width: auto;
+  }
+
+}
+
+.flex-Update {
+  flex-direction: column;
+
+  // @media only screen and(max-width: 769px) {
+  //   flex-direction: column-reverse;
+  // }
+}
+
+.mw {
+  max-width: 180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.upload_cloud {
+  // font-size: 10em;
+  height: auto;
+  width: auto;
+  margin: 0 5px 0 0;
+}
+
+.new-text-upload {
+  font-size: 12px;
+}
+
+.title {
+  display: flex;
+  width: 650px;
+  margin: auto;
+  text-align: start;
+
+  @include breakpoint-xs {
+    width: 100%;
+  }
+}
+
+.or {
+  color: #F58634;
+  margin: -10px 0 9px 0;
+}
+
+.new-inner-div {
+  margin-left: auto;
+  background: antiquewhite;
+  margin-right: auto;
+  margin-top: 2rem;
+  padding-top: 3rem;
+  width: 650px;
+  border-radius: 8px;
+
+  @include breakpoint-xs {
+    width: 100%;
+  }
+}
+
+.up-lbl {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.text-white {
+  color: #fff;
+}
+
+.p-custom-20 {
+  padding: 7rem 7rem 2rem 7rem;
+}
+
+.new-text {
+  flex-direction: column;
+  display: flex;
+  width: 100%;
+
+}
+
+ul li {
+  margin: 4px 0;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile+label {
+  font-size: 1.25em;
+  color: white;
+  display: inline-block;
+  cursor: pointer;
+  // margin-top: 5rem;
+  // margin-bottom: 2rem;
+}
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.top-heading {
+  position: relative;
+}
+
+.information {
+  // margin-left: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 769px) {
+  .top-heading {
+    flex-direction: column;
+  }
+
+  .information {
+    margin-left: 0rem;
+    margin-top: 1rem;
+  }
+}

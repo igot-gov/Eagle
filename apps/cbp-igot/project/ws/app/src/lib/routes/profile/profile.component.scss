@@ -1,0 +1,18 @@
+@import 'ws-common';
+
+.container-balanced {
+  @extend %page-center;
+}
+
+.sidenav-content-min-height {
+  min-height: calc(100vh - 168px);
+
+  @include breakpoint-s {
+    min-height: calc(100vh - 182px);
+  }
+}
+
+
+.sidenav-content {
+  overflow-x: hidden !important;
+}
