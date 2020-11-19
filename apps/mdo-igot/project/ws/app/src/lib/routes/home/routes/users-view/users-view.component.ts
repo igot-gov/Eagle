@@ -88,27 +88,6 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       fullname: 'Thillai Rajan',
       email: 'thillairajan@gmail.com',
       type: 'New User',
-    },
-    {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
-    },
-    {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
-    }
-      , {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
-    }
-      ,
-    {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
     }]
   }
   ngAfterViewInit() {
