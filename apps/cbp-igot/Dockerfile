@@ -13,7 +13,7 @@ RUN npm run compress:brotli
 
 WORKDIR /app/dist
 RUN npm install --production
-EXPOSE 3004
+EXPOSE 3024
 
 CMD [ "npm", "run", "serve:prod" ]
 
