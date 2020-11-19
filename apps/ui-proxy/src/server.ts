@@ -1,6 +1,5 @@
 import compression from 'compression'
 import connectTimeout from 'connect-timeout'
-import cors from 'cors'
 import express, { NextFunction } from 'express'
 import fileUpload from 'express-fileupload'
 import expressSession from 'express-session'
@@ -72,7 +71,6 @@ export class Server {
     this.app.use(express.urlencoded({ extended: false, limit: '50mb' }))
     this.app.use(express.json({ limit: '50mb' }))
     this.app.use(fileUpload())
-    this.app.use(cors())
     this.app.use('/healthcheck', healthcheck({
       healthy() {
         return { everything: 'is ok' }
