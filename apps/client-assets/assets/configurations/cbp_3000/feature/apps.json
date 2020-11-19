@@ -165,7 +165,7 @@
       "show": true,
       "status": "live",
       "toolTip": "Dashboard",
-      "url": "/author/home",
+      "url": "/author",
       "shortName": "Home"
     },
     "feature_frac": {
@@ -222,7 +222,7 @@
       "show": true,
       "status": "live",
       "toolTip": "Dashboard",
-      "url": "/author/home",
+      "url": "/author",
       "shortName": "Home"
     },
     "feature_badges": {
@@ -286,7 +286,7 @@
       "status": "live",
       "toolTip": "Author",
       "shortName": "Author",
-      "url": "/author/home"
+      "url": "/author"
     },
     "feature_create": {
       "accessKey": "",
