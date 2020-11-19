@@ -3,14 +3,15 @@
   <mat-card-header>
     <mat-card-title>
       <a href="javascript:void(0)" role="link" i18n-aria-label>
-        <h2 class="cursor-pointer f-medium" [innerHTML]="discuss?.title"></h2>
+        <span class="cursor-pointer mat-subheading-1" [innerHTML]="discuss?.title"></span>
       </a></mat-card-title>
     <mat-card-subtitle class="responsive">
       <span class="flex ws-mat-default-text">
         <mat-icon svgIcon="category_xs"></mat-icon>{{discuss.category.name}}
       </span>
-      <span class="dot ws-mat-black40-text" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span>
-      <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Anonymous'}}</span>
+      <span class="dot ws-mat-black40-text"
+        *ngIf="discuss?.user?.fullname">{{'Asked by ' + discuss?.user?.fullname}}</span>
+      <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Asked by Anonymous'}}</span>
       <!-- <span class="margin-left-l">{{discuss.timestamp | pipeRelativeTime}}</span> -->
     </mat-card-subtitle>
   </mat-card-header>
@@ -28,15 +29,15 @@
     <div class="flex flex-1 flex-row margin-left-l ws-mat-black60-text">
       <span class="flex margin-right-l mobile">
         <mat-icon class="cursor-pointer">import_export</mat-icon>
-        <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }}&nbsp;votes</span>
+        <span class="pad-4 mat-subheading-2">{{(discuss.upvotes + discuss.downvotes) || 0 }}&nbsp;votes</span>
       </span>
       <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
-        <span class="pad-4">{{discuss.count || 0}}&nbsp;views</span>
+        <span class="pad-4 mat-subheading-2">{{discuss.count || 0}}&nbsp;views</span>
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2 margin-right-s">
-      <span class="noocoments ws-mat-default-text">{{((discuss.postcount || 1) -1) }}
+      <span class="noocoments ws-mat-default-text mat-subheading-2">{{((discuss.postcount || 1) -1) }}
         comments</span>
     </div>
   </mat-card-footer>

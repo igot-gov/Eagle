@@ -1,11 +1,11 @@
 <div class="margin-right-s">
-  <span class="mat-body-1 font-bold" role="link" tabindex="0" aria-label="Trending tags">Trending tags</span>
+  <span class="subheading-2" role="link" tabindex="0" aria-label="Trending tags">Trending tags</span>
   <ng-container *ngIf="trandingTags && trandingTags.length > 0">
     <div *ngFor="let tag of trandingTags" class="tag ws-mat-primary-lite-background-important" role="link" tabindex="0"
       [attr.aria-label]="tag.value"
       [ngStyle]="{'background-image':'linear-gradient(to right, #ECECEC, #ECECEC ' + ((tag.score / max) *100 ) + '%, #FFF 24px)'}">
       <span class="margin-left-m mat-caption">{{tag.value}}</span>
-      <span class="ws-mat-default-text margin-right-m mat-body-1 font-bold">{{tag.score}}</span>
+      <span class="custom-margin margin-right-m mat-subheading-2">{{tag.score}}</span>
     </div>
   </ng-container>
 </div>

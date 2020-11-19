@@ -28,9 +28,9 @@
                         : ''
                     ">
               <div class="flex items-center flex-1">
-                <h1 class="mat-h1 margin-remove inline-block" *ngIf="stripsResultDataMap[key]?.stripTitle">
+                <span class="mat-title margin-remove inline-block" *ngIf="stripsResultDataMap[key]?.stripTitle">
                   {{ stripsResultDataMap[key]?.stripTitle }}
-                </h1>
+                </span>
 
                 <!-- <button *ngIf="stripsResultDataMap[key]?.stripInfo?.icon" type="button" mat-icon-button
                   (click)="toggleInfo(stripsResultDataMap[key])" i18n-matTooltip matTooltip="info"

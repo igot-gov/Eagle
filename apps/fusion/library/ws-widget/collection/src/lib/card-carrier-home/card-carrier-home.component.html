@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>
       <a href="javascript:void(0)" role="link" i18n-aria-label>
-        <h2 class="cursor-pointer f-medium">{{carrier.title}}</h2>
+        <span class="cursor-pointer mat-subheading-1">{{carrier.title}}</span>
       </a>
     </mat-card-title>
     <mat-card-subtitle class="responsive">
@@ -25,11 +25,11 @@
     <div class="flex flex-1 flex-row margin-left-xs">
       <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
-        <span class="pad-4">{{carrier.count || 0}}&nbsp;views</span>
+        <span class="pad-4 mat-subheading-2">{{carrier.count || 0}}&nbsp;views</span>
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2">
-      <span class="noocoments ws-mat-default-text">Read More</span>
+      <span class="noocoments ws-mat-default-text mat-subheading-2">Read More</span>
     </div>
   </mat-card-footer>
 </mat-card>

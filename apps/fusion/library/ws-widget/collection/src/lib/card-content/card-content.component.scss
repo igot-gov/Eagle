@@ -313,7 +313,7 @@
   }
 
   $title-line-count: 2;
-  $title-line-height: 1.89em;
+  $title-line-height: 24px;
 
   .title-text {
     // font-size: 18px;
@@ -321,18 +321,18 @@
     position: relative;
     overflow: hidden;
     height: $title-line-count * $title-line-height;
-    line-height: $title-line-height;
+    // line-height: $title-line-height;
   }
 
   $description-line-count: 3;
-  $description-line-height: 1.9em;
+  $description-line-height: 21px;
 
   .description-text {
     // font-size: 15px;
     position: relative;
     overflow: hidden;
     height: $description-line-count * $description-line-height;
-    line-height: $description-line-height;
+    // line-height: $description-line-height;
   }
 }
 

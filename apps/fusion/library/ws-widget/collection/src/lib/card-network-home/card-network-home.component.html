@@ -13,9 +13,10 @@
       </ws-widget-avatar-photo>
       <mat-card-title class="text-capitalize">
         <a href="javascript:void(0)" role="link" i18n-aria-label>
-          {{
+          <span class="mat-subheading-2"> {{
              { firstName: user.personalDetails.firstname, lastName: user.personalDetails.surname, email: user.personalDetails.primaryEmail} | pipeNameTransform
-          }}</a>
+          }}
+          </span></a>
       </mat-card-title>
       <mat-card-subtitle>
         <span class="text-capitalize">{{ user.employmentDetails.departmentName || 'iGOT' }}</span>
