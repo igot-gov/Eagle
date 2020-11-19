@@ -1,7 +1,7 @@
 <div class="flex flex-1 flex-column margin-top-xs margin-left-s">
   <mat-card class="no-border" *ngIf="portalProfile && portalProfile.id === currentUser">
     <mat-card-content role="link" tabindex="0">
-      <div id="profile-comp-text" class="mat-h3 font-medium flex-4 mobile-margin">
+      <div id="profile-comp-text" class="mat-subheading-2 flex-4 mobile-margin">
         Your profile is {{completedPercent}}% complete
       </div>
       <mat-progress-bar class="margin-top-m margin-bottom-l profile-progress" aria-labelledby="profile-comp-text"
@@ -19,9 +19,9 @@
     </mat-card-content>
   </mat-card>
   <mat-card class="margin-top-m margin-botton-xs dark-card padding-0 no-border">
-    <span class="mat-h3 font-medium" role="link" tabindex="0">Badges</span>
+    <span class="mat-subheading-2" role="link" tabindex="0">Badges</span>
     <mat-card-content *ngIf="badges.earned && badges.earned.length > 0">
-      <span class="mat-h4 font-bold" role="link" tabindex="0">Badges</span>
+      <!-- <span class="mat-subheading-2" role="link" tabindex="0">Badges</span> -->
       <div class="flex flex-wrap" role="link" tabindex="0">
         <ng-container *ngFor="let badge of badges.earned;let idx = index">
           <img *ngIf="idx<= 2" [src]="badge.image" role="link" tabindex="0" [alt]="badge.badge_name"
@@ -33,7 +33,7 @@
       </div>
     </mat-card-content>
     <mat-card-content *ngIf="portalProfile && badges.recent && badges.recent.length > 0">
-      <span role="link" tabindex="0" class="mat-h4 font-bold">Recently Earned</span>
+      <span role="link" tabindex="0" class="mat-subheading-2">Recently Earned</span>
       <div class="flex flex-wrap" role="link" tabindex="0">
         <ng-container *ngFor="let badge of badges.recent;let idx = index">
           <img *ngIf="idx<= 2" role="link" tabindex="0" [src]="badge.image" [alt]="badge.badge_name"
@@ -46,7 +46,7 @@
     </mat-card-content>
     <mat-card-content
       *ngIf="portalProfile && portalProfile.id === currentUser && badges.canEarn && badges.canEarn.length > 0">
-      <span class="mat-h4 font-bold" role="link" tabindex="0">Can Earn</span>
+      <span class="mat-subheading-2" role="link" tabindex="0">Can Earn</span>
       <div class="flex flex-wrap">
         <ng-container *ngFor="let badge of badges.canEarn;let idx = index">
           <img *ngIf="idx<= 2" role="link" tabindex="0" [src]="badge.image" [alt]="badge.badge_name"
