@@ -14,7 +14,7 @@
     class="btn p3-btn no-shadow" [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
 
   <button mat-raised-button color="primary" *ngSwitchCase="'Approve'" [disabled]="disabled" [ngStyle]="styles"
-    class="btn p1-btn no-shadow text-white" [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
+    class="btn p1-btn no-shadow" [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>
 
   <button mat-raised-button color="primary" *ngSwitchCase="'Reject'" [disabled]="disabled" [ngStyle]="styles"
     class='btn p2-btn no-shadow' [ngClass]="classes" (click)="onClickbutton($event)">{{label}}</button>

@@ -23,11 +23,5 @@ export class AppButtonComponent implements OnInit {
     }
   }
   ngOnInit() {
-    // console.log(this.disabled);
-    this.id = 'txt'
-    this.label = 'Submit'
-    this.disabled = false
-    this.type = 'Default'
-
   }
 }
