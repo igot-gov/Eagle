@@ -137,8 +137,10 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked,
 
   private initData(data: Data) {
     const initData = this.tocSvc.initData(data)
+    console.log('initData',initData)
     this.content = initData.content
     this.errorCode = initData.errorCode
+    console.log('this.errorCode', this.errorCode)
     switch (this.errorCode) {
       case NsAppToc.EWsTocErrorCode.API_FAILURE: {
         this.errorWidgetData.widgetData.errorType = ErrorType.internalServer

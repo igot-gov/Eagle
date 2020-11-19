@@ -50,10 +50,18 @@ export class WidgetContentService {
     hierarchyType: 'all' | 'minimal' | 'detail' = 'detail',
     additionalFields: string[] = [],
   ): Observable<NsContent.IContent> {
-    const url = `${API_END_POINTS.CONTENT}/${contentId}?hierarchyType=${hierarchyType}`
-    return this.http
-      .post<NsContent.IContent>(url, { additionalFields })
+    // const url = `${API_END_POINTS.CONTENT}/${contentId}?hierarchyType=${hierarchyType}`
+    const url = `http://localhost:3003/proxies/v8/sunbird/${contentId}?hierarchyType=${hierarchyType}`
+    // return this.http
+    //   .post<NsContent.IContent>(url, { additionalFields })
+    //   .pipe(retry(1))
+    const apiData =  this.http
+      .get<NsContent.IContentResponse>(url)
       .pipe(retry(1))
+    if (apiData && apiData.result) {
+      return apiData.result.content
+    }
+      return apiData
   }
   fetchAuthoringContent(contentId: string): Observable<NsContent.IContent> {
     const url = `${API_END_POINTS.AUTHORING_CONTENT}/${contentId}`

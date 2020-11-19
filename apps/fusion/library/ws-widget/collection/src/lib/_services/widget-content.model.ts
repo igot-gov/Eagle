@@ -126,6 +126,17 @@ export namespace NsContent {
     [key: string]: any
   }
 
+  export interface IContentResponse {
+    id: string,
+    params: any,
+    responseCode: string,
+    result: {
+      content: IContent
+    },
+    ts: string,
+    ver: string
+  }
+
   export interface IContentMinimal {
     appIcon: string
     artifactUrl: string

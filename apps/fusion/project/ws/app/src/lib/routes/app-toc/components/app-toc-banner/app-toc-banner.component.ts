@@ -116,16 +116,16 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       )
     }
 
-    if (this.authAccessService.hasAccess(this.content as any) && !this.isInIFrame) {
-      const status: string = (this.content as any).status
-      if (!this.forPreview) {
-        this.editButton = true
-      } else if (['Draft', 'Live'].includes(status)) {
-        this.editButton = true
-      } else if (['InReview', 'Reviewed', 'QualityReview'].includes(status)) {
-        this.reviewButton = true
-      }
-    }
+    // if (this.authAccessService.hasAccess(this.content as any) && !this.isInIFrame) {
+    //   const status: string = (this.content as any).status
+    //   if (!this.forPreview) {
+    //     this.editButton = true
+    //   } else if (['Draft', 'Live'].includes(status)) {
+    //     this.editButton = true
+    //   } else if (['InReview', 'Reviewed', 'QualityReview'].includes(status)) {
+    //     this.reviewButton = true
+    //   }
+    // }
     this.checkRegistrationStatus()
     this.routerParamSubscription = this.router.events.subscribe((routerEvent: Event) => {
       if (routerEvent instanceof NavigationEnd) {

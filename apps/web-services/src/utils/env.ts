@@ -45,7 +45,7 @@ export const CONSTANTS = {
   KEYCLOAK_ADMIN_USERNAME: env.KEYCLOAK_ADMIN_USERNAME || '',
   // tslint:disable-next-line: object-literal-sort-keys
   KC_NEW_USER_DEFAULT_PWD: env.KC_NEW_USER_DEFAULT_PWD || 'User@123',
-  KEYCLOAK_REALM: env.KEYCLOAK_REALM || 'wingsapn',
+  KEYCLOAK_REALM: env.KEYCLOAK_REALM || 'sunbird',
   KHUB_CLIENT_SECRET: env.KHUB_CLIENT_SECRET || 'axc123',
   KHUB_GRAPH_DATA: env.KHUB_GRAPH_DATA || 'http://10.177.157.30:3016',
   KHUB_SEARCH_BASE: env.KHUB_SEARCH_BASE || 'http://10.177.157.30:3014',

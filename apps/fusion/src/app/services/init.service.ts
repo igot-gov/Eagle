@@ -34,7 +34,7 @@ interface IFeaturePermissionConfigs {
 }
 
 const endpoint = {
-  profilePid: '/apis/protected/v8/user/details/wtoken',
+  profilePid: 'http://localhost:3003/protected/v8/user/details/wtoken',
   details: `/apis/protected/v8/user/details?ts=${Date.now()}`,
 }
 
@@ -115,21 +115,20 @@ export class InitService {
     }
     try {
       // this.logger.info('User Authenticated', authenticated)
-      const userPrefPromise = await this.userPreference.fetchUserPreference() // pref: depends on rootOrg
-      this.configSvc.userPreference = userPrefPromise
-      this.reloadAccordingToLocale()
-      if (this.configSvc.userPreference.pinnedApps) {
-        const pinnedApps = this.configSvc.userPreference.pinnedApps.split(',')
-        this.configSvc.pinnedApps.next(new Set(pinnedApps))
-      }
-      if (this.configSvc.userPreference.profileSettings) {
-        this.configSvc.profileSettings = this.configSvc.userPreference.profileSettings
-      }
+      // const userPrefPromise = await this.userPreference.fetchUserPreference() // pref: depends on rootOrg
+      // this.configSvc.userPreference = userPrefPromise
+      // this.reloadAccordingToLocale()
+      // if (this.configSvc.userPreference.pinnedApps) {
+      //   const pinnedApps = this.configSvc.userPreference.pinnedApps.split(',')
+      //   this.configSvc.pinnedApps.next(new Set(pinnedApps))
+      // }
+      // if (this.configSvc.userPreference.profileSettings) {
+      //   this.configSvc.profileSettings = this.configSvc.userPreference.profileSettings
+      // }
       const appsConfigPromise = this.fetchAppsConfig()
       const instanceConfigPromise = this.fetchInstanceConfig() // config: depends only on details
       const widgetStatusPromise = this.fetchWidgetStatus() // widget: depends only on details & feature
       await this.fetchFeaturesStatus() // feature: depends only on details
-
       /**
        * Wait for the widgets and get the list of restricted widgets
        */
@@ -273,14 +272,16 @@ export class InitService {
         }
       }
     }
-    const details: IDetailsResponse = await this.http
-      .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
-      .toPromise()
-    this.configSvc.userGroups = new Set(details.group)
-    this.configSvc.userRoles = new Set(details.roles)
-    if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
-      this.configSvc.userRoles.add('is_manager')
-    }
+    // const details: IDetailsResponse = await this.http
+    //   .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
+    //   .toPromise()
+    // this.configSvc.userGroups = new Set(details.group)
+    // this.configSvc.userRoles = new Set(details.roles)
+    // if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
+    //   this.configSvc.userRoles.add('is_manager')
+    // }
+    // tslint:disable-next-line: max-line-length
+    const details = { group: [], profileDetailsStatus: true, roles: ['author', 'admin', 'reviewer', 'content-creator', 'editor', 'publisher'], tncStatus: true }
     this.configSvc.hasAcceptedTnc = details.tncStatus
     this.configSvc.profileDetailsStatus = details.profileDetailsStatus
     return details
