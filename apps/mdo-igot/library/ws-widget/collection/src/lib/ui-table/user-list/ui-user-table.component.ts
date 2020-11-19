@@ -22,6 +22,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
   // @Input() needHash?: boolean
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
+  @Output() eOnRowClick = new EventEmitter<any>()
+
   // @Input() actions: IAction[]
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
@@ -122,4 +124,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`
   }
 
+  onRowClick(e: any) {
+    this.eOnRowClick.emit(e)
+  }
 }
