@@ -132,7 +132,7 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 import { LeftMenuModule } from './left-menu/left-menu.module'
 import { LeftMenuComponent } from './left-menu/left-menu.component'
 // import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
-import { UITableModule } from './ui-table/ui-table.module'
+
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
   BtnAppsModule,
@@ -159,7 +159,7 @@ export const WIDGET_REGISTERED_MODULES = [
 
   // CardBrowseCourseModule,
   // CardHomeDiscussModule,
-  UITableModule,
+  // UITableModule,
   ContentStripMultipleModule,
   ContentStripNewMultipleModule,
   ContentStripSingleModule,
