@@ -219,7 +219,11 @@
 
     .ws-active-discuss-route {
       background: rgba(mat-color($primary, default), 0.1);
-      font-weight: bold;
+      font-weight: bold !important;
+
+      // .ac {
+      //   font-weight: bold !important;
+      // }
 
       &:before {
         content: '';
