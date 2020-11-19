@@ -93,14 +93,10 @@ import { ProfileHobbiesComponent } from './profile-v2/profile-hobbies/profile-ho
 import { PickerContentModule } from './picker-content/picker-content.module'
 import { PlayerAmpComponent } from './player-amp/player-amp.component'
 import { PlayerAmpModule } from './player-amp/player-amp.module'
-import { PlayerAudioComponent } from './player-audio/player-audio.component'
-import { PlayerAudioModule } from './player-audio/player-audio.module'
 import { PlayerPdfComponent } from './player-pdf/player-pdf.component'
 import { PlayerPdfModule } from './player-pdf/player-pdf.module'
 import { PlayerSlidesComponent } from './player-slides/player-slides.component'
 import { PlayerSlidesModule } from './player-slides/player-slides.module'
-import { PlayerVideoComponent } from './player-video/player-video.component'
-import { PlayerVideoModule } from './player-video/player-video.module'
 import { PlayerWebPagesComponent } from './player-web-pages/player-web-pages.component'
 import { PlayerWebPagesModule } from './player-web-pages/player-web-pages.module'
 // import { PlayerYoutubeComponent } from './player-youtube/player-youtube.component'
@@ -172,10 +168,9 @@ export const WIDGET_REGISTERED_MODULES = [
   NetworkStripMultipleModule,
   PickerContentModule,
   PlayerAmpModule,
-  PlayerAudioModule,
+
   PlayerPdfModule,
   PlayerSlidesModule,
-  PlayerVideoModule,
   PlayerWebPagesModule,
   // PlayerYoutubeModule,
   ReleaseNotesModule,
@@ -342,11 +337,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.player._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.player.audio,
-    component: PlayerAudioComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.player._type,
     widgetSubType: ROOT_WIDGET_CONFIG.player.pdf,
     component: PlayerPdfComponent,
   },
@@ -354,11 +344,6 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.player._type,
     widgetSubType: ROOT_WIDGET_CONFIG.player.slides,
     component: PlayerSlidesComponent,
-  },
-  {
-    widgetType: ROOT_WIDGET_CONFIG.player._type,
-    widgetSubType: ROOT_WIDGET_CONFIG.player.video,
-    component: PlayerVideoComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.player._type,

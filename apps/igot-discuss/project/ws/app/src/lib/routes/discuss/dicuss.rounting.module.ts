@@ -23,12 +23,12 @@ const routes: Routes = [
     component: DiscussComponent,
     children: [
       {
-        path: '',
+        path: 'users',
         pathMatch: 'full',
         redirectTo: 'home',
       },
       {
-        path: 'users',
+        path: '',
         component: DiscussAllComponent,
         resolve: {
           availCategories: DiscussCategoriesResolve,
