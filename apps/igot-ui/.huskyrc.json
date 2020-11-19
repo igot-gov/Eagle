@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "pre-push": "",
+    "pre-commit": "",
+    "post-commit": "git status"
+  }
+}
