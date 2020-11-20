@@ -1,0 +1,10 @@
+commit 5734baeb2e6bfbaa6d9c8eda91075279baa8cf4c
+tree 8b7f98479abb049618f8f0134413e9bc758e542a
+parent f3316beaa6f8e730c8c274aa5acb0805988bcd7c
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-13 18:26:26 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-13 18:26:26 +0530
+
+    Added competencies tag for get hierarchy query
+
+
+:100644 100644 3b385fdf274056271b9e3871a14cd3e88cc28837 a7ab6a6616154ec50a4919072b0c6f77c255ba55 M	apps/web-services/src/authoring/constants/default-meta.ts

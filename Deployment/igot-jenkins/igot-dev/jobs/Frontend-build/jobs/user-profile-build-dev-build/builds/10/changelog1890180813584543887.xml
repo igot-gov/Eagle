@@ -1,0 +1,21 @@
+commit 32dec7b8494122530a0ba781478f73f8daa01d6d
+tree 8ec2f22365f99994c5febc518a3abf087252785c
+parent 4f04b9d4fbdbdd8255a97b8473ce6ca62b6a0dea
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-20 20:08:52 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-20 20:08:52 +0530
+
+    Task #0000: Fixed lint issues
+
+
+:100644 100644 13ed40e795ca803cc7b2f797bff192609717e4cc 65c70c2de97883f28a809b36b87998c92438e86e M	src/publicApi_v8/profile-details.ts
+:100644 100644 47d634b9642f2c80b43e66087dd85c5a904dd0cb 1ae96a05b47035b57f277c7eb3b02dd292f92ee6 M	src/service/registry.ts
+commit 553a4e96deb579faee782c9c66d7df7824af00a8
+tree 6bc9bb98ef7135025d40bdc09e8f50963fc761f3
+parent 97368a9d4788979f114f1618be73fba9c4567a87
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-20 20:05:50 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-20 20:05:50 +0530
+
+    Task #48768: Added profile photo for request
+
+
+:100644 100644 0aed73cd2b3ebb889ac3f09d75e1b577ead69d6d 47d634b9642f2c80b43e66087dd85c5a904dd0cb M	src/service/registry.ts

@@ -1,0 +1,25 @@
+commit 10782847a55ed050f5bfc25e548bc160755e6ecc
+tree 095e516450db7da3873ec44fd703490d79876ecd
+parent 239450e206095b4595d1ea250155a79567082e7a
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 23:13:24 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 23:13:24 +0530
+
+    access label and other fix
+
+
+:100644 100644 43fdf38e99f414a553a6dbb32893cfeba6d2fed9 10738c57a007dd9bcc336df37b2ce209e508d5d6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-channel-analytics/btn-channel-analytics.component.html
+:100644 100644 32142c251324091703814881e6f08dc9b3cd1ace 76b135b052118ca56f33b0dd8ab43515e89e7f77 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-download/btn-content-download.component.html
+:100644 100644 718a602cbf5085c8b98e27f0f4b4a196967e1228 8b8c88dce95695bfd3739fa34e19e03ef8a0b1c8 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback-v2/components/btn-content-feedback-v2/btn-content-feedback-v2.component.html
+:100644 100644 eda2ad487f78433df32af43070f4cc1f38959210 cf345e425e814f9534ad305800e5c4c6f8fac56e M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback/btn-content-feedback.component.html
+:100644 100644 d1051db21815409fe022ea1b87f9e2ab2cdd6456 de5dfe48ec081a5a37a23e2ee12a57673f9b4b6c M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-like/btn-content-like.component.html
+:100644 100644 0797ee9a13cb571c31cd7f792dc98e4c4d3c0ef7 1398f276276a47a740279cf283ce8db9a9e0e492 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share.component.html
+:100644 100644 3b1d3c9080b0b2a0d7511e298f88f0b7629d945e 0f31ad9a9894ee514434eb914f041097b1b04e94 M	apps/fusion/library/ws-widget/collection/src/lib/btn-goals/btn-goals.component.html
+:100644 100644 9cf0502f4bb42cb771c395b4b61f3cf8670d4f81 17c36b7fa79ba48ef2e7d3dbdaaf1e6613d7ba32 M	apps/fusion/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.component.html
+:100644 100644 244abace28b1b858a855bda832a820c9f9f99e04 e2d1f83dc6a9e777bc3266f4b8247955220d8648 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.ts
+:100644 100644 59ed31233801116cbf86a0c9ffa61f7e7c131b40 8390a06bbf4cea627552314613bb515da525ce11 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 5e83d13a5ff5258e98b05e13b116152c455fe963 e170a9c45ce1cde603af7651d0df607e125af3e5 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-competencies/profile-competencies.component.ts
+:100644 100644 61fd838a4a091ee60a94981a5ec1812e8dfd3449 9d30d7d5a91ad66bca6d162254aca6fdb35ff57d M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.ts
+:100644 100644 5de36cb870db9d1fb785087d28f205af523060c3 40300b8d8e93835681455a67f284c375b355dea0 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-departments/profile-departments.component.ts
+:100644 100644 6d04ae04872d3a553eee058dd78a1cee95c39c51 ea16986c83bf5da388352c921562c0946cca4af2 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.ts
+:100644 100644 abf6973d38acc87f3d022bc1e0617f648f254ff9 fab80b4630f6bf85a7e69c19d691f3175a731349 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 589efebc7e942d4af9ee8ad0b405fcd18f6f2c43 9cca5ff3c23f0ea7cd39ab8166302d71b191ae4a M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html

@@ -1,0 +1,48 @@
+commit fcbb9f328fb010a88649ff51d7459bb1a7103798
+tree f0f3bfef83e859d6ed0d470382cd0d0da48920f7
+parent acc47afba6eff29526c4d20fab94b86267c4864f
+author amit-kumaryadav <amtydv630@gmail.com> 2020-11-03 14:59:10 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-11-03 14:59:10 +0530
+
+    Added the telemetry event fro topic view
+
+
+:100644 100644 5d4bdc06b99f263bfcf99546d8536f59c2834260 2f384cedf18d3022b9ba916beddbcf846f30354b M	src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 b8fc8945b83d34483bae184a9ccb61be55445933 16edbba42caeb6993bd5b172e9381fd9a24057ab M	src/main/java/com/eagle/hubnotifier/telemetry/service/impl/TelemetryServiceImpl.java
+commit acc47afba6eff29526c4d20fab94b86267c4864f
+tree d48b3137e56d4af029c3e52a92ab1d4a38de9f82
+parent a8dcd81b9d0fb3d03cf3bd675513672d21ce55b2
+author amit-kumaryadav <amtydv630@gmail.com> 2020-11-03 11:48:13 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-11-03 11:48:13 +0530
+
+    Added telemetry for reply event
+
+
+:100644 100644 79278491d799bb7d65afa77ab77905cba4035b12 b8fc8945b83d34483bae184a9ccb61be55445933 M	src/main/java/com/eagle/hubnotifier/telemetry/service/impl/TelemetryServiceImpl.java
+commit a8dcd81b9d0fb3d03cf3bd675513672d21ce55b2
+tree 3d80251ad378feb12050f991bca7107cb642d078
+parent 5d49e47f4a946f7a4c13bebcaf659ac4b3df3f25
+author amit-kumaryadav <amtydv630@gmail.com> 2020-11-02 17:48:20 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-11-02 17:48:20 +0530
+
+     Added telemetry for upvote and downvote event
+
+
+:100644 100644 2a1ac71c42754623b9a646eea54bdb4cc1d7dbfe 5cf7c923959469a5b17f9049b3270dc1b54711e9 M	src/main/java/com/eagle/hubnotifier/config/Configuration.java
+:100644 100644 a48262e77a6a1496befdef623e39b7aaf92f693a dc5fe111311d428ec4bf89f247bd4eb6045f424a M	src/main/java/com/eagle/hubnotifier/telemetry/model/EData.java
+:100644 100644 5769965661844c9e97428bd8385564013703d0d2 79278491d799bb7d65afa77ab77905cba4035b12 M	src/main/java/com/eagle/hubnotifier/telemetry/service/impl/TelemetryServiceImpl.java
+:100644 100644 b6f74004bbaa2f151eade099c2e215412a6fd10a d38e6d84fcb2ea4c567df80789512f5b980452fc M	src/main/resources/application.properties
+commit 5d49e47f4a946f7a4c13bebcaf659ac4b3df3f25
+tree af87e99708d6f4cf6e0067346a89a5446f4409b9
+parent e3a0eaa47a06472a2936efd89d3ba87ce695f6a9
+author amit-kumaryadav <amtydv630@gmail.com> 2020-11-02 15:52:09 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-11-02 15:52:09 +0530
+
+    Added Tag telemetry event in discuss-connect service
+
+
+:100644 100644 6adb023ee89027cf7d11087fc1aefece82e94c49 22e4b6e885c89c9a4547cf3726c778a0b0968189 M	src/main/java/com/eagle/hubnotifier/HubNotificationHandlerApplication.java
+:100644 100644 00137ed38114e428da976158982f0aa9b67e0449 2a1ac71c42754623b9a646eea54bdb4cc1d7dbfe M	src/main/java/com/eagle/hubnotifier/config/Configuration.java
+:100644 100644 155c2d2d7850063d808da6bffa2f0e9841b20435 5d4bdc06b99f263bfcf99546d8536f59c2834260 M	src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 9a3435a8d8c804d1c19409ea9fe43d299080f8aa 5769965661844c9e97428bd8385564013703d0d2 M	src/main/java/com/eagle/hubnotifier/telemetry/service/impl/TelemetryServiceImpl.java
+:100644 100644 314a10223172ca5211dfcf820cde5064402a7f96 b6f74004bbaa2f151eade099c2e215412a6fd10a M	src/main/resources/application.properties

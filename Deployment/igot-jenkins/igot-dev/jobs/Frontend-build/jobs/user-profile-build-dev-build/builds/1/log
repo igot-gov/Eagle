@@ -1,0 +1,24 @@
+Started by user [8mha:////4OpahwKlB4tn/RxSio5ikv4dXg/imn81eBssZYdItFirAAAAmR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZe/dLi1CL9xNyizJKMRAC0NHIzwgAAAA==[0mAmritha
+Checking out git git@git.idc.tarento.com:eagle-project/user-profile.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build@script to read apps/user-profile/Jenkinsfile
+using credential git-lab
+Cloning the remote Git repository
+Cloning repository git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build@script # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/pid-replica^{commit} # timeout=10
+Checking out Revision 97368a9d4788979f114f1618be73fba9c4567a87 (origin/pid-replica)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 97368a9d4788979f114f1618be73fba9c4567a87 # timeout=10
+Commit message: "Response data added"
+First time build. Skipping changelog.
+ERROR: /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build@script/apps/user-profile/Jenkinsfile not found
+Finished: FAILURE

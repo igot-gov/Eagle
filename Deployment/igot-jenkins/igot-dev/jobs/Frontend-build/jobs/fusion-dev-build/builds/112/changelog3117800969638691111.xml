@@ -1,0 +1,10 @@
+commit 77cda668d3889a2e035643b1f18425239fbafa56
+tree 6c0b4517691355efe2910e5a2ce07ccfacad6f96
+parent 5c6eb35dfbbc3261bf98179aa189273042c038bc
+author usha <meetsamal.usha@gmail.com> 2020-10-13 20:20:39 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-13 20:20:39 +0530
+
+    setting dynamic meta data for a single toc
+
+
+:100644 100644 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 bb90248396de0264c75d6f4e71e09fc223d65b2a M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts

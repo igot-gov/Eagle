@@ -1,0 +1,10 @@
+commit b62fa089aa2a02847bafc33940a8e2f6dd0b82e5
+tree 749e17fbcfd593d928d1f5e511dd7c2ee08307f7
+parent d33defe765b48a4b4cd053a4b4a455d5ded0a94e
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 22:30:53 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 22:30:53 +0530
+
+    Fix: shard value trim
+
+
+:100644 100644 b7a0757a82f761917b2889173cb320e299061743 ea9d3fed3c5b2bc4f083ec15afe258837e90d85f M	java/middleware-commons/src/main/java/io/opensaber/registry/middleware/util/JSONUtil.java

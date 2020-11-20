@@ -1,0 +1,10 @@
+commit e3cf4754af08b6354d23c5bc77a218c7cea4d8df
+tree 65f5ca88ee69b5484f9c1268ee2766fbc31378d3
+parent f358bb957404c66a7ead4c043eb109e4c3d1a649
+author Haridas <haridas.kakunje@tarento.com> 2020-10-21 08:11:01 +0000
+committer Haridas <haridas.kakunje@tarento.com> 2020-10-21 08:11:01 +0000
+
+    added jenkinsfile
+
+
+:000000 100644 0000000000000000000000000000000000000000 77c8594ebccaef9da08781ee7e4854c7aa452b12 A	apps/notifications-module/Jenkinsfile

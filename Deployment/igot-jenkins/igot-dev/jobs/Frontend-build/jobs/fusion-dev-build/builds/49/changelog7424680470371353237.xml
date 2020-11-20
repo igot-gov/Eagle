@@ -1,0 +1,90 @@
+commit f52145ea9cc900f0c9c23c33a22a7ce4070e4ec1
+tree 7e792dd02ed91792f63eae1cdc494a785d8706fb
+parent cb438269022a6d88c557f8f88da2d38da86936ee
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:43:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:43:14 +0530
+
+    removed any from scrom POST API
+
+
+:100644 100644 ab3402417e66e12bef44d246938a513d6066c9af 6e6adaac04d9bcd924603775378b1090bb65103a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+commit cb438269022a6d88c557f8f88da2d38da86936ee
+tree a140f83426edfb5f380d4aa85337cba03ecf58f4
+parent 7075b4987778f7eb8c51f50d4d4d2cc0e3ebb0d2
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:25:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:25:41 +0530
+
+    added Log
+
+
+:100644 100644 f66fe3a1f66977e6cb68b4b4e995844fa8ed403a a0e5ab49af910a974e854707bb6fb93d6588f22b M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit 7075b4987778f7eb8c51f50d4d4d2cc0e3ebb0d2
+tree bfb1ea7a5b1ebf0cbe2a7174c60682022306df80
+parent 7c522e1b572157888979865eb0626a060dbf6e6e
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:20:00 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:20:00 +0530
+
+    added Log
+
+
+:100644 100644 15262136afb591b8713d6a1f57f80cb46b4c3b42 f66fe3a1f66977e6cb68b4b4e995844fa8ed403a M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit 7c522e1b572157888979865eb0626a060dbf6e6e
+tree a3820c5ca18927a9e8486e7bd1887d9b60190447
+parent c8ddfb4410adb866f0d4b2923f3db248a8a82614
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:13:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:13:49 +0530
+
+    added Log
+
+
+:100644 100644 b973184584f1b2cc4c1c3e23b9f3c0333f9d3a35 15262136afb591b8713d6a1f57f80cb46b4c3b42 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit c8ddfb4410adb866f0d4b2923f3db248a8a82614
+tree 052463432c9ce8531259019b713b2d24c48745a5
+parent ec57246fdb35ad3672377d2eda5793fad59ef422
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:08:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:08:32 +0530
+
+    added Log
+
+
+:100644 100644 d8d9b14861f5e1fb20683e315956be18624021c7 b973184584f1b2cc4c1c3e23b9f3c0333f9d3a35 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit ec57246fdb35ad3672377d2eda5793fad59ef422
+tree 3fbf60bb0d2831761f55b3dbfc1c84fcfd51c1da
+parent dd38534a6d92ef3909231025accd634baa4bd173
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 17:51:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 17:51:03 +0530
+
+    added Log
+
+
+:100644 100644 60aedde7a88089463177e2d499096792f150a4da d8d9b14861f5e1fb20683e315956be18624021c7 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit dd38534a6d92ef3909231025accd634baa4bd173
+tree feae13f38f54789c53c5c2b824eaabc80abec586
+parent 2278d8000b492f916349a63225e8df99198f9f46
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 17:11:35 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 17:11:35 +0530
+
+    added Log
+
+
+:100644 100644 d135898f2d2822cc33e1d35fb94a766ed7eea491 60aedde7a88089463177e2d499096792f150a4da M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit 2278d8000b492f916349a63225e8df99198f9f46
+tree 4cf17c92a717ff00d77f6e94a4d44970d97ace24
+parent 72751a2e8a58eda4cb04f1439cdf9b49192d72ac
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 16:57:04 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 16:57:04 +0530
+
+    added Log
+
+
+:100644 100644 0a49296d36ab1f9c570a4301953736e87729f98e d135898f2d2822cc33e1d35fb94a766ed7eea491 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit 72751a2e8a58eda4cb04f1439cdf9b49192d72ac
+tree 70c360385e0450e8669a6d56689e276c2b98b11d
+parent 24283fad5307ec20c2b50af5a4199c6da62dcfaa
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 16:42:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 16:42:59 +0530
+
+    added Log
+
+
+:100644 100644 9ed2ed59437bec78d7fc52dac99c5630ffabd1ac 0a49296d36ab1f9c570a4301953736e87729f98e M	apps/web-services/src/protectedApi_v8/scrom.ts

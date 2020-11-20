@@ -1,0 +1,13 @@
+commit 352b06763989e3534890b279d1dde75b0750ad61
+tree 538a26a350d17bf570a09f40630645cd8aaaf507
+parent 77e5ffdb1b92abb558e59e7ccbb8e27c99552927
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-27 19:36:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-27 19:36:38 +0530
+
+    Task #52159, #52154: Fixed the subtitle issue and restricted it only for audio and video
+
+
+:100644 100644 ba3de2d0898d3f9c3976e0d9cc67e4ce8632f9e7 d294c72c56f9db8bab00e92d5e919dd965686178 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:100644 100644 c91e8d590316c2df19322e565bfbc322128ca7a0 f97c298deb4fd94be2621a455264e03cb8a303a7 M	apps/fusion/library/ws-widget/collection/src/lib/player-audio/player-audio.component.html
+:100644 100644 0568070efff1d280e413c3052a0553c8d286fc65 f50b4f35eb8c245d067fbf2c7260485de8108e13 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.html
+:100644 100644 8f6f89734876e464cc124b18a6caa67370592b83 4fee00a2970035a08a34e3d18d792883dc5bd04e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html

@@ -78,6 +78,11 @@
       tags: [deploy-sb-discuss-connect-service]
     - role: deploy-sb-hub-service
       tags: [deploy-sb-hub-service]
+    - role: deploy-content-validation-service
+      tags: [deploy-content-validation-service]
+    - role: deploy-social-share-service
+      tags: [deploy-social-share-service]
+
  
   tasks:
     - name: Remove the env directory

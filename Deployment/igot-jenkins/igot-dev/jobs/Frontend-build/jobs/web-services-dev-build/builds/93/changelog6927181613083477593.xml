@@ -1,0 +1,10 @@
+commit 1949bb49f46efb59e158f38a6a3d3425752033d5
+tree 5e1414a4ca3e191f745fe01f144ecb9c9f66f9c2
+parent f1987e167bd2381139f9066412aa017fe0cb014a
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-15 14:45:32 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-15 14:45:32 +0530
+
+    Added auth token to outgoing FRAC API call
+
+
+:100644 100644 286b7218beb11a7c08b04ff73b9236b0955f72e1 56fd4ba406b9c715ecb00c8b4e3f1762879c8061 M	apps/web-services/src/protectedApi_v8/competency.ts

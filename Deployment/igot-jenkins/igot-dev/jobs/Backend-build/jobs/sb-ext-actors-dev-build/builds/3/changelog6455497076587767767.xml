@@ -1,0 +1,36 @@
+commit 24204dab1395c992ee8af7f2365e980d3836ed60
+tree cbf6a73d7aeaca6dc70a240a276e0c553244f467
+parent 7fcf070632765c22ba7f3d1fd816c3880085dc00
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-24 18:38:24 +0530
+committer GitHub <noreply@github.com> 2020-07-24 18:38:24 +0530
+
+    Update MultiLingualIntegratedSearchServicev6.java
+
+:100644 100644 ae42bd1322d0ab11a12431398f057c4daa8c1453 5701c9bdd60085713bddcdba42e5de0785ddd923 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java
+commit 7fcf070632765c22ba7f3d1fd816c3880085dc00
+tree 87eae4635b947a3d44d7e62978fcc08774f0b6b5
+parent d505a703280be6ee56284348c1d67087dfa3a32c
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-24 18:37:33 +0530
+committer GitHub <noreply@github.com> 2020-07-24 18:37:33 +0530
+
+    Update MultiLingualIntegratedSearchServicev6.java
+
+:100644 100644 029e23576fab49c3fcb86684f09595b152c46771 ae42bd1322d0ab11a12431398f057c4daa8c1453 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java
+commit d505a703280be6ee56284348c1d67087dfa3a32c
+tree 233ec162bba35c82a0267dd32c4ce1baeb2e5ac7
+parent ef512fe9b84de3d96ec604d5109583674d51b139
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-24 18:27:45 +0530
+committer GitHub <noreply@github.com> 2020-07-24 18:27:45 +0530
+
+    Update MultiLingualIntegratedSearchServicev6.java
+
+:100644 100644 ad354eb5b0621c52afd5ee7003c71179ff088e50 029e23576fab49c3fcb86684f09595b152c46771 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java
+commit ef512fe9b84de3d96ec604d5109583674d51b139
+tree d8eafc4b6a2de30a21eef24dc19c620fb62d12e2
+parent 92cb1518cd89dc3ffcc194313899d55c1dc9b15e
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-07-24 18:25:47 +0530
+committer GitHub <noreply@github.com> 2020-07-24 18:25:47 +0530
+
+    Update application.properties
+
+:100644 100644 f2ab70f8679273653149ab2bf7f346a8a025dc04 65103f86c7ca7da71273a4f34f78195909447221 M	apps/sb-ext-actors/src/main/resources/application.properties

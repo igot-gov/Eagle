@@ -1,0 +1,12 @@
+commit 628d7c865088d6e7bb2f083ac419a224baaebf9e
+tree 08d6852ddc6029d4b21463e56db9c688341dc80e
+parent 59bfad7a705bcd91a8a6ba13bda53a3da5f92ec1
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-05 23:05:00 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-05 23:05:00 +0530
+
+    Task #51801: Typograhy fixes
+
+
+:100644 100644 c98b2797bf7043fe5d6d751fe79aff59a153305e a3dd6ac6a8a8191f88f09b0437984dfff5ffa941 M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.html
+:100644 100644 af411cab44a7c6794df4a91896d7a0c45d63c90e 08aac4c4bf35394034d0df221e23b94211b24918 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 722ef3600b32acdc58def15f305c024700063fe5 c723957d2d1993f37e761d4243c4a7be819df3b2 M	apps/fusion/src/styles/mat-typography.scss

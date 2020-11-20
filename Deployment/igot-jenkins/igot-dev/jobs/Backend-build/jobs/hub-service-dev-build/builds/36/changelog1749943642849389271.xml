@@ -1,0 +1,44 @@
+commit 53204bee81642efba08a0a6d86486afd93bf069c
+tree 8c3b8614924bfd9b09a786a9d2dca45f836e6742
+parent 4d68d391f33356625c034dfcafaf75a4bfb3cd8c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 20:31:10 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 20:37:23 +0530
+
+    Defect #52123 fixed suggests api
+
+
+:100644 100644 c7375453db83e1109ecaae24cc849bc63071b8b8 b61142395a746ca9aea5cfb36ba0d3eaffff08f9 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+commit bdc22562489f38177ab8126d75c4af9830ba12d7
+tree 8c3b8614924bfd9b09a786a9d2dca45f836e6742
+parent 4d68d391f33356625c034dfcafaf75a4bfb3cd8c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 20:31:10 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 20:31:10 +0530
+
+    Defect #52123 fixed  suggests api
+
+
+:100644 100644 c7375453db83e1109ecaae24cc849bc63071b8b8 b61142395a746ca9aea5cfb36ba0d3eaffff08f9 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+commit 4d68d391f33356625c034dfcafaf75a4bfb3cd8c
+tree 7f72f2a9ccf0ee44cf05a66e240ec1a1addbd6fe
+parent b9f76817c5376fa8d8d54c2d5e2bde3bbc6b97af
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 17:48:27 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 17:48:27 +0530
+
+    Defect #52124 sorting added
+
+
+:100644 100644 4a9ff0c97fb2090294a701f4f152390aed287a1d c7375453db83e1109ecaae24cc849bc63071b8b8 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+commit b9f76817c5376fa8d8d54c2d5e2bde3bbc6b97af
+tree 43def0fd4525885e8a171db4b3ff616c343ec7b8
+parent 3fd2f10e973066ad8e7d55365b00b9dc573adc2a
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 17:03:10 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 17:03:10 +0530
+
+    Defect #52242 fixed the sender and reciever
+
+
+:100644 100644 670c2a6b755c80a25ba3dc5afba379d74e119ced 82b96ab3f3d07dd66afe5037dbde90cb30c4ae22 M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 dcbcbe5edce692efa3cccee0a1cd3201d03be00e 97a394fcca21dcd8b834ad5f3f2177510d28abcf M	apps/hub-services/src/main/java/com/infosys/hubservices/service/INotificationService.java
+:100644 100644 a10622485bb61cc171960736862602fda2339866 4a9ff0c97fb2090294a701f4f152390aed287a1d M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 67df17b57ad22f6192b43784dc521b09186af2a2 6e087b92ba38683a5491be0d309f56344c8203de M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 b3c88981d4e3aec03bce78f9739d379b12e936d7 97f60bfdd5bba9850e2701cfd6315523003e804c M	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/NotificationServiceTest.java

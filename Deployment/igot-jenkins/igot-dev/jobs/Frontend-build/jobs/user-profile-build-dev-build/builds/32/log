@@ -1,0 +1,1522 @@
+Started by user [8mha:////4B7vapR27/mbGCGrOKkuPypGIu2DCakv3tq5FJce0XqWAAAAnR+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzREgZB/dLi1CL97MSikozM7NTKxDwAZeQeEMYAAAA=[0mKarthikeyan Rajendran
+Checking out git git@git.idc.tarento.com:eagle-project/user-profile.git into /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build@script to read Jenkinsfile
+using credential git-lab
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/pid-replica^{commit} # timeout=10
+Checking out Revision d58a55db2919178d9b4a6775649c5480ddb6f09d (origin/pid-replica)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d58a55db2919178d9b4a6775649c5480ddb6f09d # timeout=10
+Commit message: "Using query params instead of headers to avoid CORS issue"
+ > git rev-list --no-walk d70c19d697c9cc104efec27b3331bbc751214973 # timeout=10
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4CogtAq7rn74jxj7uLVCcsx+t/y35kGeqvPkPZObyMXKAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4M4HhYYw5g8Q/T69bF4Q03CXP5QrGLTB/3G02QXJo6U5AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4I8dzKCIF5MAVfX6mSSVw/7BBA8CLo8Y4KOcAQfTfDT/AAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
+[8mha:////4LB3xgJ5/i6rvwz3UzIGQskalXp7BJ5rM3CcuPAq8uCGAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4BIodQLml+s7Yz/VUwXw69YMXxgGKkA2g9ogG2rdJzvnAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] ansiColor
+[8mha:////4I+DPNrJrY6nGXv0HKYd6twr+ClidgSYIrE439NWgujzAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] {
+[8mha:////4E6ZFoOz08tWaQiXki4hIu1lr7b/L8x53DGJZd+Tu1RuAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gwExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jcChmMxwAAAAA==[0m[Pipeline] stage
+[8mha:////4EOWAYBHBge05it7SsmJIpeBzlZnHLfW1vjcORdWPYclAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0BAkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfpX/cvwAAAAA==[0m[Pipeline] { (Checkout)
+[8mha:////4P8hajGSU1NmcDK7zr6c+qSTk1RCMgeBZweWlwN28t5yAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaoyVLaHxBMgiwpL/WWDdrTyRV/MOEjexcpJJ5k3zXm9Y5wQnSpZ7g73DrB2PYbR18YlSfws0cU9XrgkzBcOlmSR15rygpGJgCWtgJWBjUAfKDm2BrfDqodqg0LaXkup3FNC4boAnMFHNRaXyhTnB7j52mfDn+SuAORZg+9pD/AAeoCAqvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4O62hg3nuWQGYzJSRPAYJinD89yjNHB3k3WDfrzy132vAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKBDglR0VppeIFJjHFi3QX7QlLxIr7GH4iIRMVWO9PM641lijhydKqx1HpKlVdd6N301MCxvQYeVMMXVTElDlaVdii5tqcZSxaLeVmOhcbKUhU4eXKCtW7MwxTBkCvOEid30Mh9fccTmZ7KYqJ8YYzY3Po6Mf06fwMYO0G2F+S7bfcBITL9lL0AAAA=[0m[Pipeline] checkout
+using credential git-lab
+Cloning the remote Git repository
+Cloning repository git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git init /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+ > git --version # timeout=10
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url git@git.idc.tarento.com:eagle-project/user-profile.git # timeout=10
+Fetching upstream changes from git@git.idc.tarento.com:eagle-project/user-profile.git
+using GIT_SSH to set credentials Git Lab
+ > git fetch --tags --progress git@git.idc.tarento.com:eagle-project/user-profile.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse origin/pid-replica^{commit} # timeout=10
+Checking out Revision d58a55db2919178d9b4a6775649c5480ddb6f09d (origin/pid-replica)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d58a55db2919178d9b4a6775649c5480ddb6f09d # timeout=10
+Commit message: "Using query params instead of headers to avoid CORS issue"
+[8mha:////4PphThmGcYjzIXYO8baHSsc/I1mRgpU76NMkOh1sjp0sAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6KEzcQ4uTYsfkGFWgvNe9g+hMkv8tf8B4kkTt7pnrOc1xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL0tBtv8AHk6T5r0AAAA=[0m[Pipeline] }
+[8mha:////4N1Qgn8AATg0PJlfa+zx4/XZh3bPHqh2xDfBbhJgS8Y2AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRNBSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsPXymMMb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EMnktzjW7yUEZ67srpVpNNd9ZDB2RgNDQ8SkV11xlyUAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5NudINt/AHkw63u9AAAA[0m[Pipeline] }
+[8mha:////4P0iBvoKjc4AyO3aqqUerJXSHuX/cs0cWTvuLSIHcSjvAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRElSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfLsTZPsP073CUL0AAAA=[0m[Pipeline] // ansiColor
+[8mha:////4CNnUvLMQQkxTLdb9/c6+Fx6wGWbU8RzyyrIP2Q7WnhBAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjJKgQFa3lhheY2Bgn1l2wLyQVL+Jr/IFAJCq22llpNc8XlDnBgZKXjcM2YK6D7GLvpyYHSu0l0iAbOsuaMFN0UrtBk3XHGTWxgzmigIWCpcM6Ug7oGVaqMXdTRYO+OnGatr2CItgbPECoycwm8RfGBOtrbzPhz/NXAGPHILYMxWb3OZZvBXXnAcEAAAA=[0m[Pipeline] stage
+[8mha:////4CBaTsQr90lV5hpKm/1Gi+wkLJENS/ytk4SMdVNyA5vCAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUDLAgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/s94rDCAAAA[0m[Pipeline] { (docker-pre-build)
+[8mha:////4HHuxzc+yx4ZPKmtro1JSpobF3oS2uHDg6qhlNjVyMk5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGigQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN27Iu42+AAAA[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
++ docker build -f ./Dockerfile.build -t user-profile.build .
+Sending build context to Docker daemon  760.3kB
+Step 1/6 : FROM node:12
+ ---> 1fa6026dd8bb
+Step 2/6 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> 0ec5aebd08eb
+Step 3/6 : COPY . .
+ ---> 44b84aaf2656
+Step 4/6 : RUN apt update && apt install -y zip
+ ---> Running in 25649388a59d
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mGet:1 http://security.debian.org/debian-security stretch/updates InRelease [53.0 kB]
+Ign:2 http://deb.debian.org/debian stretch InRelease
+Get:3 http://security.debian.org/debian-security stretch/updates/main amd64 Packages [604 kB]
+Get:4 http://deb.debian.org/debian stretch-updates InRelease [93.6 kB]
+Get:5 http://deb.debian.org/debian stretch Release [118 kB]
+Get:6 http://deb.debian.org/debian stretch-updates/main amd64 Packages [2596 B]
+Get:7 http://deb.debian.org/debian stretch Release.gpg [2410 B]
+Get:8 http://deb.debian.org/debian stretch/main amd64 Packages [7080 kB]
+Fetched 7953 kB in 3s (2159 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+68 packages can be upgraded. Run 'apt list --upgradable' to see them.
+[91m
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+[0mReading package lists...
+Building dependency tree...
+Reading state information...
+The following NEW packages will be installed:
+  zip
+0 upgraded, 1 newly installed, 0 to remove and 68 not upgraded.
+Need to get 234 kB of archives.
+After this operation, 623 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian stretch/main amd64 zip amd64 3.0-11+b1 [234 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 234 kB in 0s (1728 kB/s)
+Selecting previously unselected package zip.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 29934 files and directories currently installed.)
+Preparing to unpack .../zip_3.0-11+b1_amd64.deb ...
+Unpacking zip (3.0-11+b1) ...
+Setting up zip (3.0-11+b1) ...
+Removing intermediate container 25649388a59d
+ ---> f4a5616f1222
+Step 5/6 : RUN npm install && npm run build
+ ---> Running in 3e8f1c2365cc
+
+> husky@2.3.0 install /usr/src/app/node_modules/husky
+> node husky install
+
+husky > Setting up git hooks
+husky > Done
+husky > Like husky? You can support the project on Patreon:
+husky > [4;36mhttps://www.patreon.com/typicode[0m ❤
+
+> nodemon@1.19.1 postinstall /usr/src/app/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+[32mLove nodemon? You can now support the project via the open collective:[22m[39m
+ > [96m[1mhttps://opencollective.com/nodemon/donate[0m
+
+[91mnpm WARN ui_web-services-v8@1.0.0 No repository field.
+[0m[91mnpm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@1.2.9 (node_modules/fsevents):
+[0m[91mnpm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@1.2.9: wanted {"os":"darwin","arch":"any"} (current: {"os":"linux","arch":"x64"})
+[0m[91m
+[0madded 840 packages from 562 contributors and audited 913 packages in 14.951s
+found 1168 vulnerabilities (1159 low, 1 moderate, 8 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+
+> ui_web-services-v8@1.0.0 prebuild /usr/src/app
+> npm run lint
+
+
+> ui_web-services-v8@1.0.0 lint /usr/src/app
+> tslint -c tslint.json -p tsconfig.json --fix
+
+
+> ui_web-services-v8@1.0.0 build /usr/src/app
+> gulp build
+
+[03:11:34] Requiring external module ts-node/register
+[03:11:36] Using gulpfile /usr/src/app/gulpfile.ts
+[03:11:36] Starting 'build'...
+[03:11:36] Starting 'del-dist'...
+[03:11:36] Finished 'del-dist' after 4.49 ms
+[03:11:36] Starting 'compile-project'...
+[03:11:39] Finished 'compile-project' after 3.86 s
+[03:11:39] Starting 'copy-package'...
+[03:11:39] Finished 'copy-package' after 13 ms
+[03:11:39] Starting 'copy-json'...
+[03:11:39] Finished 'copy-json' after 42 ms
+[03:11:39] Starting 'copy-assets'...
+[03:11:39] Finished 'copy-assets' after 4.79 ms
+[03:11:39] Finished 'build' after 3.93 s
+Removing intermediate container 3e8f1c2365cc
+ ---> 7a3f8cf0559b
+Step 6/6 : RUN zip -r dist.zip dist
+ ---> Running in 1ab0b8942969
+  adding: dist/ (stored 0%)
+  adding: dist/models/ (stored 0%)
+  adding: dist/models/profile-details.model.js (stored 0%)
+  adding: dist/models/axios-request-config.model.js (stored 0%)
+  adding: dist/profileApi/ (stored 0%)
+  adding: dist/profileApi/user-data.js (deflated 80%)
+  adding: dist/profileApi/departments.js (deflated 65%)
+  adding: dist/profileApi/groups.js (deflated 59%)
+  adding: dist/profileApi/mater-groups.js (deflated 55%)
+  adding: dist/profileApi/profileApi.js (deflated 58%)
+  adding: dist/static-data/ (stored 0%)
+  adding: dist/static-data/nationality.json (deflated 88%)
+  adding: dist/static-data/degrees.json (deflated 84%)
+  adding: dist/static-data/industries.json (deflated 60%)
+  adding: dist/static-data/govtOrg.json (deflated 81%)
+  adding: dist/static-data/languages.json (deflated 70%)
+  adding: dist/static-data/designation.json (deflated 71%)
+  adding: dist/index.js (deflated 60%)
+  adding: dist/package.json (deflated 65%)
+  adding: dist/configs/ (stored 0%)
+  adding: dist/configs/cassandra.config.js (deflated 30%)
+  adding: dist/configs/request.config.js (deflated 38%)
+  adding: dist/utils/ (stored 0%)
+  adding: dist/utils/helpers.js (deflated 69%)
+  adding: dist/utils/requestExtract.js (deflated 65%)
+  adding: dist/utils/postgres.js (deflated 83%)
+  adding: dist/utils/logger.js (deflated 68%)
+  adding: dist/utils/message.js (deflated 3%)
+  adding: dist/utils/axios-retry.js (deflated 57%)
+  adding: dist/utils/env.js (deflated 57%)
+  adding: dist/utils/log.js (deflated 66%)
+  adding: dist/utils/loader.js (deflated 43%)
+  adding: dist/utils/error-codes.js (deflated 50%)
+  adding: dist/utils/util.js (deflated 50%)
+  adding: dist/middlewares/ (stored 0%)
+  adding: dist/middlewares/enable-compression.js (deflated 40%)
+  adding: dist/middlewares/user-route-filters.js (deflated 67%)
+  adding: dist/middlewares/add-cors.js (deflated 56%)
+  adding: dist/middlewares/add-middlewares.js (deflated 62%)
+  adding: dist/middlewares/app-logger.js (deflated 56%)
+  adding: dist/middlewares/add-favicon.js (deflated 52%)
+  adding: dist/middlewares/error-middleware.js (deflated 47%)
+  adding: dist/middlewares/auth-filter.js (deflated 65%)
+  adding: dist/middlewares/add-request-tracker.js (deflated 41%)
+  adding: dist/middlewares/helmet-security.js (deflated 65%)
+  adding: dist/middlewares/body-parser.js (deflated 39%)
+  adding: dist/middlewares/add-cache-disabler.js (deflated 45%)
+  adding: dist/service/ (stored 0%)
+  adding: dist/service/registry.js (deflated 82%)
+  adding: dist/server.js (deflated 65%)
+  adding: dist/publicApi_v8/ (stored 0%)
+  adding: dist/publicApi_v8/network-hub.js (deflated 74%)
+  adding: dist/publicApi_v8/publicApiV8.js (deflated 50%)
+  adding: dist/publicApi_v8/profile-details.js (deflated 84%)
+  adding: dist/protectedApi_v8/ (stored 0%)
+  adding: dist/protectedApi_v8/protectedApiV8.js (deflated 43%)
+  adding: dist/protectedApi_v8/user/ (stored 0%)
+  adding: dist/protectedApi_v8/user/user.js (deflated 20%)
+Removing intermediate container 1ab0b8942969
+ ---> c4d079061894
+Successfully built c4d079061894
+Successfully tagged user-profile.build:latest
++ docker run --name user-profile.build user-profile.build
++ docker cp user-profile.build:/usr/src/app/dist.zip .
++ sleep 30
++ unzip dist.zip
+Archive:  dist.zip
+   creating: dist/
+   creating: dist/models/
+ extracting: dist/models/profile-details.model.js  
+ extracting: dist/models/axios-request-config.model.js  
+   creating: dist/profileApi/
+  inflating: dist/profileApi/user-data.js  
+  inflating: dist/profileApi/departments.js  
+  inflating: dist/profileApi/groups.js  
+  inflating: dist/profileApi/mater-groups.js  
+  inflating: dist/profileApi/profileApi.js  
+   creating: dist/static-data/
+  inflating: dist/static-data/nationality.json  
+  inflating: dist/static-data/degrees.json  
+  inflating: dist/static-data/industries.json  
+  inflating: dist/static-data/govtOrg.json  
+  inflating: dist/static-data/languages.json  
+  inflating: dist/static-data/designation.json  
+  inflating: dist/index.js           
+  inflating: dist/package.json       
+   creating: dist/configs/
+  inflating: dist/configs/cassandra.config.js  
+  inflating: dist/configs/request.config.js  
+   creating: dist/utils/
+  inflating: dist/utils/helpers.js   
+  inflating: dist/utils/requestExtract.js  
+  inflating: dist/utils/postgres.js  
+  inflating: dist/utils/logger.js    
+  inflating: dist/utils/message.js   
+  inflating: dist/utils/axios-retry.js  
+  inflating: dist/utils/env.js       
+  inflating: dist/utils/log.js       
+  inflating: dist/utils/loader.js    
+  inflating: dist/utils/error-codes.js  
+  inflating: dist/utils/util.js      
+   creating: dist/middlewares/
+  inflating: dist/middlewares/enable-compression.js  
+  inflating: dist/middlewares/user-route-filters.js  
+  inflating: dist/middlewares/add-cors.js  
+  inflating: dist/middlewares/add-middlewares.js  
+  inflating: dist/middlewares/app-logger.js  
+  inflating: dist/middlewares/add-favicon.js  
+  inflating: dist/middlewares/error-middleware.js  
+  inflating: dist/middlewares/auth-filter.js  
+  inflating: dist/middlewares/add-request-tracker.js  
+  inflating: dist/middlewares/helmet-security.js  
+  inflating: dist/middlewares/body-parser.js  
+  inflating: dist/middlewares/add-cache-disabler.js  
+   creating: dist/service/
+  inflating: dist/service/registry.js  
+  inflating: dist/server.js          
+   creating: dist/publicApi_v8/
+  inflating: dist/publicApi_v8/network-hub.js  
+  inflating: dist/publicApi_v8/publicApiV8.js  
+  inflating: dist/publicApi_v8/profile-details.js  
+   creating: dist/protectedApi_v8/
+  inflating: dist/protectedApi_v8/protectedApiV8.js  
+   creating: dist/protectedApi_v8/user/
+  inflating: dist/protectedApi_v8/user/user.js  
++ docker rm -f user-profile.build
+user-profile.build
++ docker rmi -f user-profile.build
+Untagged: user-profile.build:latest
+Deleted: sha256:c4d079061894d9f3fb419e58b0ba18b392d5270fc81ab20be903d7144421666b
+Deleted: sha256:d0dac7b13867e7c2dc15e52ee9067b5144affc93d7ce31deefc439b5fd81f68a
+Deleted: sha256:7a3f8cf0559b65284d74468377e7fadaee9d41452607b84adf45b52ca6b4a5f5
+Deleted: sha256:412ca354ce9186fdffa0c230a5a99b403d65b3b506bba678108c2a717bb3e0de
+Deleted: sha256:f4a5616f122237a3b0914feed263173d29375185f21dc4d8637d9383a2df1673
+Deleted: sha256:3a2c6926e31e2757517af2b476cc7c03ef404380d143b056785184f7f0003dfd
+Deleted: sha256:44b84aaf265616f0bd2b16a2445c61b5278ce0f7380b9c6e8daf42332ed54f2f
+Deleted: sha256:96e39dd5c11b2757bd4c6f4d825f6395e95d661427302983bd9ac96859b97455
+[8mha:////4DW9QfjIqkQjbk0As03mWXshjqakH9wcOztMVQanDcdGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiGoSEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHhgNoTvgAAAA==[0m[Pipeline] }
+[8mha:////4EuThnuO/bxP/NWEHp5uhxRcX5RxIFZUATvKwJeb4b/6AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCgqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQH+Ao9BvgAAAA==[0m[Pipeline] // stage
+[8mha:////4AXU9pjXrV3DcNQ6Eb6d+G4sMdtRURTPJn5v5jBgzo08AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INK/7CYMEAAAA=[0m[Pipeline] stage
+[8mha:////4P8otm/db14WqDuVB8uFWYQY1DxABVDArZsA1CmUEBBgAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUWBFT1ygLJwhNCGmj/8tPSjtxIq7GHWipxIQHy7ZkvdcbishwInaisdh6jLUXXejdlMRA3F4DDaKhi6gJIwUrlB0UGVstVVGysCjLYSVhbbEOFD26BBvZ6Icug0ZXnhNP21FC7s0dnpDJiZw0p28ZGba33kTCH+cvAMYuQX7Yzbafn8UHbGnGmsIAAAA=[0m[Pipeline] { (SonarQube analysis)
+[8mha:////4I93nRfJXXHYqNQ9n8ZryBqCBI50TLJhruonpCB0f+KSAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi0iIqWisNLzCJMXasO8d2cCpexNf4A4FIVGyx2tlmni9YxwBHDhqtot5QbA16N+p5YebQXx1ntHzBlimyU9io3HCnTgs2nBQsKUpYCdgoah1HQzrBVlh5l5WTpKtzCvN3EFCaboAHFGI2JxnSF6YAu9vYRaaf568AJp+grPefqv0bH7uiub4AAAA=[0m[Pipeline] sh
++ npm install
+npm WARN deprecated request@2.88.2: request has been deprecated, see https://github.com/request/request/issues/3142
+npm WARN deprecated har-validator@5.1.5: this library is no longer supported
+npm WARN deprecated tslint-sonarts@1.9.0: Package no longer supported. Consider using eslint-plugin-sonarjs.
+npm WARN deprecated @types/cassandra-driver@4.2.0: This is a stub types definition. cassandra-driver provides its own type definitions, so you do not need this installed.
+npm WARN deprecated @types/axios@0.14.0: This is a stub types definition for axios (https://github.com/mzabriskie/axios). axios provides its own type definitions, so you don't need @types/axios installed!
+npm WARN deprecated chokidar@2.1.8: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+npm WARN deprecated urix@0.1.0: Please see https://github.com/lydell/urix#deprecated
+npm WARN deprecated resolve-url@0.2.1: https://github.com/lydell/resolve-url#deprecated
+
+> husky@2.7.0 install /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build/node_modules/husky
+> node husky install
+
+Husky requires Node 8, skipping Git hooks installation.
+
+> nodemon@2.0.6 postinstall /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build/node_modules/gulp-nodemon/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+[32mLove nodemon? You can now support the project via the open collective:[22m[39m
+ > [96m[1mhttps://opencollective.com/nodemon/donate[0m
+
+
+> nodemon@1.19.4 postinstall /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build/node_modules/nodemon
+> node bin/postinstall || exit 0
+
+ui_web-services-v8@1.0.0 /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
+├── @types/axios@0.14.0 
+├── @types/bcryptjs@2.4.2 
+├── @types/cassandra-driver@4.2.0 
+├── @types/compression@0.0.36 
+├── @types/connect-timeout@0.0.34 
+├── @types/cors@2.8.8 
+├─┬ @types/express@4.17.8 
+│ ├─┬ @types/body-parser@1.19.0 
+│ │ └── @types/connect@3.4.33 
+│ ├─┬ @types/express-serve-static-core@4.17.13 
+│ │ └── @types/range-parser@1.2.3 
+│ ├── @types/qs@6.9.5 
+│ └─┬ @types/serve-static@1.13.6 
+│   └── @types/mime@2.0.3 
+├── @types/express-fileupload@1.1.5 
+├── @types/express-session@1.17.0 
+├── @types/helmet@0.0.43 
+├── @types/http-proxy@1.17.4 
+├── @types/jwt-decode@2.2.1 
+├── @types/keycloak-connect@4.5.4 
+├── @types/morgan@1.9.1 
+├── @types/node@12.12.69 
+├─┬ @types/pg@7.14.5 
+│ └── @types/pg-types@1.11.5 
+├─┬ @types/request@2.48.5 
+│ ├── @types/caseless@0.12.2 
+│ ├── @types/tough-cookie@4.0.0 
+│ └── form-data@2.5.1 
+├── @types/uuid@3.4.9 
+├── @types/validator@13.1.0 
+├─┬ axios@0.19.2 
+│ └─┬ follow-redirects@1.5.10 
+│   └── debug@3.1.0 
+├── bcryptjs@2.4.3 
+├─┬ cassandra-driver@4.6.0 
+│ ├── @types/long@4.0.1 
+│ ├── adm-zip@0.4.16 
+│ └── long@2.4.0 
+├─┬ cassandra-store@5.0.0 
+│ ├── cassandra-driver@3.5.0 
+│ └─┬ express-session@1.15.6 
+│   ├── cookie@0.3.1 
+│   ├── crc@3.4.4 
+│   └── debug@2.6.9 
+├─┬ chalk@2.4.2 
+│ ├─┬ ansi-styles@3.2.1 
+│ │ └─┬ color-convert@1.9.3 
+│ │   └── color-name@1.1.3 
+│ ├── escape-string-regexp@1.0.5 
+│ └─┬ supports-color@5.5.0 
+│   └── has-flag@3.0.0 
+├─┬ cls-hooked@4.2.2 
+│ ├─┬ async-hook-jl@1.7.6 
+│ │ └── stack-chain@1.3.7 
+│ ├─┬ emitter-listener@1.1.2 
+│ │ └── shimmer@1.2.1 
+│ └── semver@5.7.1 
+├─┬ cls-rtracer@1.4.1 
+│ └── uuid@3.3.3 
+├── composable-middleware@0.3.0 
+├─┬ compression@1.7.4 
+│ ├─┬ accepts@1.3.7 
+│ │ └── negotiator@0.6.2 
+│ ├── bytes@3.0.0 
+│ ├─┬ compressible@2.0.18 
+│ │ └── mime-db@1.44.0 
+│ ├── debug@2.6.9 
+│ ├── on-headers@1.0.2 
+│ ├── safe-buffer@5.1.2 
+│ └── vary@1.1.2 
+├─┬ connect-timeout@1.9.0 
+│ ├─┬ http-errors@1.6.3 
+│ │ ├── inherits@2.0.3 
+│ │ └── setprototypeof@1.1.0 
+│ ├── ms@2.0.0 
+│ └─┬ on-finished@2.3.0 
+│   └── ee-first@1.1.1 
+├─┬ cookie-parser@1.4.5 
+│ ├── cookie@0.4.0 
+│ └── cookie-signature@1.0.6 
+├── date-fns@2.16.1 
+├─┬ del@4.1.1 
+│ ├─┬ @types/glob@7.1.3 
+│ │ └── @types/minimatch@3.0.3 
+│ ├─┬ globby@6.1.0 
+│ │ ├─┬ array-union@1.0.2 
+│ │ │ └── array-uniq@1.0.3 
+│ │ ├── object-assign@4.1.1 
+│ │ ├── pify@2.3.0 
+│ │ └─┬ pinkie-promise@2.0.1 
+│ │   └── pinkie@2.0.4 
+│ ├── is-path-cwd@2.2.0 
+│ ├─┬ is-path-in-cwd@2.1.0 
+│ │ └─┬ is-path-inside@2.1.0 
+│ │   └── path-is-inside@1.0.2 
+│ ├── p-map@2.1.0 
+│ ├── pify@4.0.1 
+│ └── rimraf@2.7.1 
+├── dotenv@8.2.0 
+├─┬ express@4.17.1 
+│ ├── array-flatten@1.1.1 
+│ ├─┬ body-parser@1.19.0 
+│ │ ├── bytes@3.1.0 
+│ │ ├── debug@2.6.9 
+│ │ ├─┬ http-errors@1.7.2 
+│ │ │ ├── setprototypeof@1.1.1 
+│ │ │ └── toidentifier@1.0.0 
+│ │ ├─┬ iconv-lite@0.4.24 
+│ │ │ └── safer-buffer@2.1.2 
+│ │ └─┬ raw-body@2.4.0 
+│ │   ├── bytes@3.1.0 
+│ │   └─┬ http-errors@1.7.2 
+│ │     └── setprototypeof@1.1.1 
+│ ├── content-disposition@0.5.3 
+│ ├── content-type@1.0.4 
+│ ├── cookie@0.4.0 
+│ ├── debug@2.6.9 
+│ ├── depd@1.1.2 
+│ ├── encodeurl@1.0.2 
+│ ├── escape-html@1.0.3 
+│ ├── etag@1.8.1 
+│ ├─┬ finalhandler@1.1.2 
+│ │ ├── debug@2.6.9 
+│ │ └── unpipe@1.0.0 
+│ ├── fresh@0.5.2 
+│ ├── merge-descriptors@1.0.1 
+│ ├── methods@1.1.2 
+│ ├── parseurl@1.3.3 
+│ ├── path-to-regexp@0.1.7 
+│ ├─┬ proxy-addr@2.0.6 
+│ │ ├── forwarded@0.1.2 
+│ │ └── ipaddr.js@1.9.1 
+│ ├── qs@6.7.0 
+│ ├── range-parser@1.2.1 
+│ ├─┬ send@0.17.1 
+│ │ ├─┬ debug@2.6.9 
+│ │ │ └── ms@2.0.0 
+│ │ ├── destroy@1.0.4 
+│ │ ├─┬ http-errors@1.7.3 
+│ │ │ ├── inherits@2.0.4 
+│ │ │ └── setprototypeof@1.1.1 
+│ │ ├── mime@1.6.0 
+│ │ └── ms@2.1.1 
+│ ├── serve-static@1.14.1 
+│ ├── setprototypeof@1.1.1 
+│ ├── statuses@1.5.0 
+│ ├─┬ type-is@1.6.18 
+│ │ └── media-typer@0.3.0 
+│ └── utils-merge@1.0.1 
+├── express-favicon@2.0.1 
+├─┬ express-fileupload@1.2.0 
+│ └─┬ busboy@0.3.1 
+│   └─┬ dicer@0.3.0 
+│     └── streamsearch@0.1.2 
+├─┬ express-session@1.17.1 
+│ ├── cookie@0.4.0 
+│ ├── debug@2.6.9 
+│ ├── depd@2.0.0 
+│ ├── safe-buffer@5.2.0 
+│ └─┬ uid-safe@2.1.5 
+│   └── random-bytes@1.0.0 
+├─┬ form-data@3.0.0 
+│ ├── asynckit@0.4.0 
+│ ├─┬ combined-stream@1.0.8 
+│ │ └── delayed-stream@1.0.0 
+│ └── mime-types@2.1.27 
+├─┬ gulp@4.0.2 
+│ ├─┬ glob-watcher@5.0.5 
+│ │ ├─┬ anymatch@2.0.0 
+│ │ │ ├─┬ micromatch@3.1.10 
+│ │ │ │ ├─┬ define-property@2.0.2 
+│ │ │ │ │ └─┬ is-descriptor@1.0.2 
+│ │ │ │ │   ├── is-accessor-descriptor@1.0.0 
+│ │ │ │ │   └── is-data-descriptor@1.0.0 
+│ │ │ │ ├─┬ extglob@2.0.4 
+│ │ │ │ │ ├─┬ define-property@1.0.0 
+│ │ │ │ │ │ └─┬ is-descriptor@1.0.2 
+│ │ │ │ │ │   ├── is-accessor-descriptor@1.0.0 
+│ │ │ │ │ │   └── is-data-descriptor@1.0.0 
+│ │ │ │ │ ├─┬ expand-brackets@2.1.4 
+│ │ │ │ │ │ ├── debug@2.6.9 
+│ │ │ │ │ │ ├── define-property@0.2.5 
+│ │ │ │ │ │ ├── extend-shallow@2.0.1 
+│ │ │ │ │ │ └── posix-character-classes@0.1.1 
+│ │ │ │ │ └── extend-shallow@2.0.1 
+│ │ │ │ ├── fragment-cache@0.2.1 
+│ │ │ │ ├── kind-of@6.0.3 
+│ │ │ │ ├── nanomatch@1.2.13 
+│ │ │ │ ├── object.pick@1.3.0 
+│ │ │ │ └── regex-not@1.0.2 
+│ │ │ └── normalize-path@2.1.1 
+│ │ ├─┬ async-done@1.3.2 
+│ │ │ ├── end-of-stream@1.4.4 
+│ │ │ ├── process-nextick-args@2.0.1 
+│ │ │ └── stream-exhaust@1.0.2 
+│ │ ├── is-negated-glob@1.0.0 
+│ │ ├── just-debounce@1.0.0 
+│ │ ├── normalize-path@3.0.0 
+│ │ └─┬ object.defaults@1.1.0 
+│ │   ├── array-each@1.0.1 
+│ │   ├── array-slice@1.1.0 
+│ │   └─┬ for-own@1.0.0 
+│ │     └── for-in@1.0.2 
+│ ├─┬ gulp-cli@2.3.0 
+│ │ ├─┬ ansi-colors@1.1.0 
+│ │ │ └── ansi-wrap@0.1.0 
+│ │ ├── archy@1.0.0 
+│ │ ├─┬ array-sort@1.0.0 
+│ │ │ ├─┬ default-compare@1.0.0 
+│ │ │ │ └── kind-of@5.1.0 
+│ │ │ ├── get-value@2.0.6 
+│ │ │ └── kind-of@5.1.0 
+│ │ ├── color-support@1.1.3 
+│ │ ├─┬ concat-stream@1.6.2 
+│ │ │ └── typedarray@0.0.6 
+│ │ ├─┬ copy-props@2.0.4 
+│ │ │ ├── each-props@1.3.2 
+│ │ │ └── is-plain-object@2.0.4 
+│ │ ├─┬ gulplog@1.0.0 
+│ │ │ └─┬ glogg@1.0.2 
+│ │ │   └── sparkles@1.0.1 
+│ │ ├── interpret@1.4.0 
+│ │ ├── isobject@3.0.1 
+│ │ ├─┬ liftoff@3.1.0 
+│ │ │ ├─┬ findup-sync@3.0.0 
+│ │ │ │ ├── detect-file@1.0.0 
+│ │ │ │ └─┬ resolve-dir@1.0.1 
+│ │ │ │   └─┬ global-modules@1.0.0 
+│ │ │ │     └── global-prefix@1.0.2 
+│ │ │ ├─┬ fined@1.2.0 
+│ │ │ │ ├── expand-tilde@2.0.2 
+│ │ │ │ └─┬ parse-filepath@1.0.2 
+│ │ │ │   └─┬ path-root@0.1.1 
+│ │ │ │     └── path-root-regex@0.1.2 
+│ │ │ ├── flagged-respawn@1.0.1 
+│ │ │ ├── object.map@1.0.1 
+│ │ │ └── rechoir@0.6.2 
+│ │ ├─┬ matchdep@2.0.0 
+│ │ │ └─┬ findup-sync@2.0.0 
+│ │ │   └── is-glob@3.1.0 
+│ │ ├── mute-stdout@1.0.1 
+│ │ ├── pretty-hrtime@1.0.3 
+│ │ ├─┬ replace-homedir@1.0.0 
+│ │ │ ├─┬ homedir-polyfill@1.0.3 
+│ │ │ │ └── parse-passwd@1.0.0 
+│ │ │ └─┬ is-absolute@1.0.0 
+│ │ │   ├─┬ is-relative@1.0.0 
+│ │ │   │ └─┬ is-unc-path@1.0.0 
+│ │ │   │   └── unc-path-regex@0.1.2 
+│ │ │   └── is-windows@1.0.2 
+│ │ ├─┬ semver-greatest-satisfied-range@1.1.0 
+│ │ │ └── sver-compat@1.5.0 
+│ │ ├── v8flags@3.2.0 
+│ │ └─┬ yargs@7.1.1 
+│ │   ├── camelcase@3.0.0 
+│ │   ├─┬ cliui@3.2.0 
+│ │   │ ├─┬ strip-ansi@3.0.1 
+│ │   │ │ └── ansi-regex@2.1.1 
+│ │   │ └── wrap-ansi@2.1.0 
+│ │   ├── decamelize@1.2.0 
+│ │   ├── get-caller-file@1.0.3 
+│ │   ├─┬ os-locale@1.4.0 
+│ │   │ └─┬ lcid@1.0.0 
+│ │   │   └── invert-kv@1.0.0 
+│ │   ├─┬ read-pkg-up@1.0.1 
+│ │   │ ├─┬ find-up@1.1.2 
+│ │   │ │ └── path-exists@2.1.0 
+│ │   │ └─┬ read-pkg@1.1.0 
+│ │   │   ├─┬ load-json-file@1.1.0 
+│ │   │   │ ├── pify@2.3.0 
+│ │   │   │ └── strip-bom@2.0.0 
+│ │   │   └─┬ path-type@1.1.0 
+│ │   │     └── pify@2.3.0 
+│ │   ├── require-directory@2.1.1 
+│ │   ├── require-main-filename@1.0.1 
+│ │   ├── set-blocking@2.0.0 
+│ │   ├─┬ string-width@1.0.2 
+│ │   │ ├── code-point-at@1.1.0 
+│ │   │ └─┬ is-fullwidth-code-point@1.0.0 
+│ │   │   └── number-is-nan@1.0.1 
+│ │   ├── which-module@1.0.0 
+│ │   ├── y18n@3.2.1 
+│ │   └── yargs-parser@5.0.0-security.0 
+│ ├─┬ undertaker@1.3.0 
+│ │ ├── arr-flatten@1.1.0 
+│ │ ├─┬ arr-map@2.0.2 
+│ │ │ └── make-iterator@1.0.1 
+│ │ ├─┬ bach@1.2.0 
+│ │ │ ├── arr-filter@1.1.2 
+│ │ │ ├─┬ array-initial@1.1.0 
+│ │ │ │ └── is-number@4.0.0 
+│ │ │ ├─┬ array-last@1.3.0 
+│ │ │ │ └── is-number@4.0.0 
+│ │ │ ├── async-settle@1.0.0 
+│ │ │ └── now-and-later@2.0.1 
+│ │ ├── collection-map@1.0.0 
+│ │ ├─┬ es6-weak-map@2.0.3 
+│ │ │ ├─┬ d@1.0.1 
+│ │ │ │ └── type@1.2.0 
+│ │ │ ├─┬ es5-ext@0.10.53 
+│ │ │ │ └── next-tick@1.0.0 
+│ │ │ ├── es6-iterator@2.0.3 
+│ │ │ └─┬ es6-symbol@3.1.3 
+│ │ │   └─┬ ext@1.4.0 
+│ │ │     └── type@2.1.0 
+│ │ ├── fast-levenshtein@1.1.4 
+│ │ ├─┬ last-run@1.1.1 
+│ │ │ └── default-resolution@2.0.0 
+│ │ ├── object.reduce@1.0.1 
+│ │ └── undertaker-registry@1.0.1 
+│ └─┬ vinyl-fs@3.0.3 
+│   ├── fs-mkdirp-stream@1.0.0 
+│   ├─┬ glob-stream@6.1.0 
+│   │ ├── ordered-read-streams@1.0.1 
+│   │ ├── to-absolute-glob@2.0.2 
+│   │ └─┬ unique-stream@2.3.1 
+│   │   ├── json-stable-stringify-without-jsonify@1.0.1 
+│   │   └── through2-filter@3.0.0 
+│   ├── graceful-fs@4.2.4 
+│   ├── is-valid-glob@1.0.0 
+│   ├── lazystream@1.0.0 
+│   ├─┬ lead@1.0.0 
+│   │ └── flush-write-stream@1.1.1 
+│   ├─┬ object.assign@4.1.1 
+│   │ ├── define-properties@1.1.3 
+│   │ ├─┬ es-abstract@1.18.0-next.1 
+│   │ │ ├─┬ es-to-primitive@1.2.1 
+│   │ │ │ ├── is-date-object@1.0.2 
+│   │ │ │ └── is-symbol@1.0.3 
+│   │ │ ├── function-bind@1.1.1 
+│   │ │ ├── is-callable@1.2.2 
+│   │ │ ├── is-negative-zero@2.0.0 
+│   │ │ ├── is-regex@1.1.1 
+│   │ │ ├── object-inspect@1.8.0 
+│   │ │ ├── string.prototype.trimend@1.0.2 
+│   │ │ └── string.prototype.trimstart@1.0.2 
+│   │ ├── has-symbols@1.0.1 
+│   │ └── object-keys@1.1.1 
+│   ├─┬ pumpify@1.5.1 
+│   │ ├─┬ duplexify@3.7.1 
+│   │ │ └── stream-shift@1.0.1 
+│   │ └── pump@2.0.1 
+│   ├─┬ readable-stream@2.3.7 
+│   │ ├── core-util-is@1.0.2 
+│   │ ├── isarray@1.0.0 
+│   │ ├── string_decoder@1.1.1 
+│   │ └── util-deprecate@1.0.2 
+│   ├─┬ remove-bom-buffer@3.0.0 
+│   │ ├── is-buffer@1.1.6 
+│   │ └── is-utf8@0.2.1 
+│   ├── remove-bom-stream@1.2.0 
+│   ├── resolve-options@1.1.0 
+│   ├─┬ through2@2.0.5 
+│   │ └── xtend@4.0.2 
+│   ├── to-through@2.0.0 
+│   ├── value-or-function@3.0.0 
+│   └─┬ vinyl-sourcemap@1.1.0 
+│     ├─┬ append-buffer@1.0.2 
+│     │ └── buffer-equal@1.0.0 
+│     ├── convert-source-map@1.7.0 
+│     └── normalize-path@2.1.1 
+├─┬ gulp-nodemon@2.5.0 
+│ ├── colors@1.4.0 
+│ └─┬ nodemon@2.0.6 
+│   ├─┬ chokidar@3.4.3 
+│   │ ├─┬ anymatch@3.1.1 
+│   │ │ └── picomatch@2.2.2 
+│   │ ├─┬ braces@3.0.2 
+│   │ │ └─┬ fill-range@7.0.1 
+│   │ │   └─┬ to-regex-range@5.0.1 
+│   │ │     └── is-number@7.0.0 
+│   │ ├── glob-parent@5.1.1 
+│   │ ├─┬ is-binary-path@2.1.0 
+│   │ │ └── binary-extensions@2.1.0 
+│   │ └── readdirp@3.5.0 
+│   ├─┬ debug@3.2.6 
+│   │ └── ms@2.1.2 
+│   └─┬ update-notifier@4.1.3 
+│     ├─┬ boxen@4.2.0 
+│     │ ├─┬ ansi-align@3.0.0 
+│     │ │ └─┬ string-width@3.1.0 
+│     │ │   ├── emoji-regex@7.0.3 
+│     │ │   ├── is-fullwidth-code-point@2.0.0 
+│     │ │   └─┬ strip-ansi@5.2.0 
+│     │ │     └── ansi-regex@4.1.0 
+│     │ ├── camelcase@5.3.1 
+│     │ ├─┬ chalk@3.0.0 
+│     │ │ ├─┬ ansi-styles@4.3.0 
+│     │ │ │ └─┬ color-convert@2.0.1 
+│     │ │ │   └── color-name@1.1.4 
+│     │ │ └─┬ supports-color@7.2.0 
+│     │ │   └── has-flag@4.0.0 
+│     │ ├── cli-boxes@2.2.1 
+│     │ ├─┬ string-width@4.2.0 
+│     │ │ ├── emoji-regex@8.0.0 
+│     │ │ ├── is-fullwidth-code-point@3.0.0 
+│     │ │ └─┬ strip-ansi@6.0.0 
+│     │ │   └── ansi-regex@5.0.0 
+│     │ ├── term-size@2.2.0 
+│     │ ├── type-fest@0.8.1 
+│     │ └─┬ widest-line@3.1.0 
+│     │   └─┬ string-width@4.2.0 
+│     │     ├── emoji-regex@8.0.0 
+│     │     ├── is-fullwidth-code-point@3.0.0 
+│     │     └─┬ strip-ansi@6.0.0 
+│     │       └── ansi-regex@5.0.0 
+│     ├─┬ chalk@3.0.0 
+│     │ ├─┬ ansi-styles@4.3.0 
+│     │ │ └─┬ color-convert@2.0.1 
+│     │ │   └── color-name@1.1.4 
+│     │ └─┬ supports-color@7.2.0 
+│     │   └── has-flag@4.0.0 
+│     ├─┬ configstore@5.0.1 
+│     │ ├─┬ dot-prop@5.3.0 
+│     │ │ └── is-obj@2.0.0 
+│     │ ├─┬ make-dir@3.1.0 
+│     │ │ └── semver@6.3.0 
+│     │ ├─┬ unique-string@2.0.0 
+│     │ │ └── crypto-random-string@2.0.0 
+│     │ └─┬ write-file-atomic@3.0.3 
+│     │   └── typedarray-to-buffer@3.1.5 
+│     ├── has-yarn@2.1.0 
+│     ├─┬ is-installed-globally@0.3.2 
+│     │ ├── global-dirs@2.0.1 
+│     │ └── is-path-inside@3.0.2 
+│     ├── is-npm@4.0.0 
+│     ├── is-yarn-global@0.3.0 
+│     ├─┬ latest-version@5.1.0 
+│     │ └─┬ package-json@6.5.0 
+│     │   ├─┬ got@9.6.0 
+│     │   │ ├── @sindresorhus/is@0.14.0 
+│     │   │ ├─┬ @szmarczak/http-timer@1.1.2 
+│     │   │ │ └── defer-to-connect@1.1.3 
+│     │   │ ├─┬ cacheable-request@6.1.0 
+│     │   │ │ ├─┬ get-stream@5.2.0 
+│     │   │ │ │ └── pump@3.0.0 
+│     │   │ │ ├── http-cache-semantics@4.1.0 
+│     │   │ │ ├── keyv@3.1.0 
+│     │   │ │ ├── lowercase-keys@2.0.0 
+│     │   │ │ └── normalize-url@4.5.0 
+│     │   │ ├── p-cancelable@1.1.0 
+│     │   │ └── to-readable-stream@1.0.0 
+│     │   ├── registry-auth-token@4.2.0 
+│     │   ├── registry-url@5.1.0 
+│     │   └── semver@6.3.0 
+│     ├─┬ pupa@2.0.1 
+│     │ └── escape-goat@2.1.1 
+│     ├─┬ semver-diff@3.1.1 
+│     │ └── semver@6.3.0 
+│     └── xdg-basedir@4.0.0 
+├─┬ gulp-typescript@5.0.1 
+│ ├── ansi-colors@3.2.4 
+│ ├─┬ plugin-error@1.0.1 
+│ │ ├── arr-diff@4.0.0 
+│ │ ├── arr-union@3.1.0 
+│ │ └─┬ extend-shallow@3.0.2 
+│ │   ├── assign-symbols@1.0.0 
+│ │   └── is-extendable@1.0.1 
+│ ├── source-map@0.7.3 
+│ ├─┬ through2@3.0.2 
+│ │ └── inherits@2.0.4 
+│ └─┬ vinyl@2.2.1 
+│   ├── clone@2.1.2 
+│   ├── clone-buffer@1.0.0 
+│   ├── clone-stats@1.0.0 
+│   ├── cloneable-readable@1.1.3 
+│   ├── remove-trailing-separator@1.1.0 
+│   └── replace-ext@1.0.1 
+├─┬ gulpclass@0.2.0 
+│ ├─┬ @types/gulp@4.0.7 
+│ │ ├─┬ @types/undertaker@1.2.3 
+│ │ │ └── @types/undertaker-registry@1.0.1 
+│ │ ├─┬ @types/vinyl-fs@2.4.11 
+│ │ │ ├── @types/glob-stream@6.1.0 
+│ │ │ └─┬ @types/vinyl@2.0.4 
+│ │ │   └── @types/expect@1.20.4 
+│ │ └─┬ chokidar@3.4.3 
+│ │   ├── anymatch@3.1.1 
+│ │   ├─┬ braces@3.0.2 
+│ │   │ └─┬ fill-range@7.0.1 
+│ │   │   └─┬ to-regex-range@5.0.1 
+│ │   │     └── is-number@7.0.0 
+│ │   ├── glob-parent@5.1.1 
+│ │   ├─┬ is-binary-path@2.1.0 
+│ │   │ └── binary-extensions@2.1.0 
+│ │   └── readdirp@3.5.0 
+│ ├── @types/merge2@1.3.0 
+│ └── merge2@1.4.1 
+├─┬ helmet@3.23.3 
+│ ├── depd@2.0.0 
+│ ├── dont-sniff-mimetype@1.1.0 
+│ ├── feature-policy@0.3.0 
+│ ├── helmet-crossdomain@0.4.0 
+│ ├── hide-powered-by@1.1.0 
+│ ├── hpkp@2.0.0 
+│ ├─┬ hsts@2.2.0 
+│ │ └── depd@2.0.0 
+│ ├── nocache@2.1.0 
+│ ├── referrer-policy@1.2.0 
+│ └── x-xss-protection@1.3.0 
+├─┬ helmet-csp@2.10.0 
+│ ├── bowser@2.9.0 
+│ ├── camelize@1.0.0 
+│ ├── content-security-policy-builder@2.1.0 
+│ └── dasherize@2.0.0 
+├─┬ http-proxy@1.18.1 
+│ ├── eventemitter3@4.0.7 
+│ └── requires-port@1.0.0 
+├─┬ husky@2.7.0 
+│ ├─┬ cosmiconfig@5.2.1 
+│ │ ├─┬ import-fresh@2.0.0 
+│ │ │ ├─┬ caller-path@2.0.0 
+│ │ │ │ └─┬ caller-callsite@2.0.0 
+│ │ │ │   └── callsites@2.0.0 
+│ │ │ └── resolve-from@3.0.0 
+│ │ ├── is-directory@0.3.1 
+│ │ └─┬ parse-json@4.0.0 
+│ │   ├─┬ error-ex@1.3.2 
+│ │   │ └── is-arrayish@0.2.1 
+│ │   └── json-parse-better-errors@1.0.2 
+│ ├─┬ execa@1.0.0 
+│ │ ├─┬ cross-spawn@6.0.5 
+│ │ │ ├── nice-try@1.0.5 
+│ │ │ ├── path-key@2.0.1 
+│ │ │ ├─┬ shebang-command@1.2.0 
+│ │ │ │ └── shebang-regex@1.0.0 
+│ │ │ └─┬ which@1.3.1 
+│ │ │   └── isexe@2.0.0 
+│ │ ├─┬ get-stream@4.1.0 
+│ │ │ └── pump@3.0.0 
+│ │ ├── is-stream@1.1.0 
+│ │ ├── npm-run-path@2.0.2 
+│ │ ├── p-finally@1.0.0 
+│ │ ├── signal-exit@3.0.3 
+│ │ └── strip-eof@1.0.0 
+│ ├─┬ find-up@3.0.0 
+│ │ └─┬ locate-path@3.0.0 
+│ │   ├─┬ p-locate@3.0.0 
+│ │   │ └─┬ p-limit@2.3.0 
+│ │   │   └── p-try@2.2.0 
+│ │   └── path-exists@3.0.0 
+│ ├── get-stdin@7.0.0 
+│ ├─┬ is-ci@2.0.0 
+│ │ └── ci-info@2.0.0 
+│ ├─┬ pkg-dir@4.2.0 
+│ │ └─┬ find-up@4.1.0 
+│ │   ├─┬ locate-path@5.0.0 
+│ │   │ └── p-locate@4.1.0 
+│ │   └── path-exists@4.0.0 
+│ ├─┬ please-upgrade-node@3.2.0 
+│ │ └── semver-compare@1.0.0 
+│ ├─┬ read-pkg@5.2.0 
+│ │ ├── @types/normalize-package-data@2.4.0 
+│ │ ├─┬ normalize-package-data@2.5.0 
+│ │ │ ├── hosted-git-info@2.8.8 
+│ │ │ └─┬ validate-npm-package-license@3.0.4 
+│ │ │   ├─┬ spdx-correct@3.1.1 
+│ │ │   │ └── spdx-license-ids@3.0.6 
+│ │ │   └─┬ spdx-expression-parse@3.0.1 
+│ │ │     └── spdx-exceptions@2.3.0 
+│ │ ├─┬ parse-json@5.1.0 
+│ │ │ ├── json-parse-even-better-errors@2.3.1 
+│ │ │ └── lines-and-columns@1.1.6 
+│ │ └── type-fest@0.6.0 
+│ ├── run-node@1.0.0 
+│ └── slash@3.0.0 
+├── jwt-decode@2.2.0 
+├─┬ keycloak-connect@3.4.3 
+│ └─┬ jwk-to-pem@1.2.6 
+│   ├─┬ asn1.js@4.10.1 
+│   │ ├── bn.js@4.11.9 
+│   │ └── minimalistic-assert@1.0.1 
+│   └─┬ elliptic@6.5.3 
+│     ├── brorand@1.1.0 
+│     ├── hash.js@1.1.7 
+│     ├── hmac-drbg@1.0.1 
+│     └── minimalistic-crypto-utils@1.0.1 
+├─┬ morgan@1.10.0 
+│ ├── basic-auth@2.0.1 
+│ ├── debug@2.6.9 
+│ └── depd@2.0.0 
+├─┬ nodemon@1.19.4 
+│ ├─┬ chokidar@2.1.8 
+│ │ ├── async-each@1.0.3 
+│ │ ├─┬ braces@2.3.2 
+│ │ │ ├── array-unique@0.3.2 
+│ │ │ ├─┬ extend-shallow@2.0.1 
+│ │ │ │ └── is-extendable@0.1.1 
+│ │ │ ├─┬ fill-range@4.0.0 
+│ │ │ │ ├── extend-shallow@2.0.1 
+│ │ │ │ ├─┬ is-number@3.0.0 
+│ │ │ │ │ └── kind-of@3.2.2 
+│ │ │ │ ├── repeat-string@1.6.1 
+│ │ │ │ └── to-regex-range@2.1.1 
+│ │ │ ├── repeat-element@1.1.3 
+│ │ │ ├─┬ snapdragon@0.8.2 
+│ │ │ │ ├─┬ base@0.11.2 
+│ │ │ │ │ ├─┬ cache-base@1.0.1 
+│ │ │ │ │ │ ├─┬ collection-visit@1.0.0 
+│ │ │ │ │ │ │ ├── map-visit@1.0.0 
+│ │ │ │ │ │ │ └── object-visit@1.0.1 
+│ │ │ │ │ │ ├─┬ has-value@1.0.0 
+│ │ │ │ │ │ │ └─┬ has-values@1.0.0 
+│ │ │ │ │ │ │   └── kind-of@4.0.0 
+│ │ │ │ │ │ ├─┬ set-value@2.0.1 
+│ │ │ │ │ │ │ └── extend-shallow@2.0.1 
+│ │ │ │ │ │ ├─┬ to-object-path@0.3.0 
+│ │ │ │ │ │ │ └── kind-of@3.2.2 
+│ │ │ │ │ │ ├── union-value@1.0.1 
+│ │ │ │ │ │ └─┬ unset-value@1.0.0 
+│ │ │ │ │ │   └─┬ has-value@0.3.1 
+│ │ │ │ │ │     ├── has-values@0.1.4 
+│ │ │ │ │ │     └── isobject@2.1.0 
+│ │ │ │ │ ├─┬ class-utils@0.3.6 
+│ │ │ │ │ │ ├── define-property@0.2.5 
+│ │ │ │ │ │ └─┬ static-extend@0.1.2 
+│ │ │ │ │ │   ├── define-property@0.2.5 
+│ │ │ │ │ │   └─┬ object-copy@0.1.0 
+│ │ │ │ │ │     ├── copy-descriptor@0.1.1 
+│ │ │ │ │ │     ├── define-property@0.2.5 
+│ │ │ │ │ │     └── kind-of@3.2.2 
+│ │ │ │ │ ├── component-emitter@1.3.0 
+│ │ │ │ │ ├─┬ define-property@1.0.0 
+│ │ │ │ │ │ └─┬ is-descriptor@1.0.2 
+│ │ │ │ │ │   ├── is-accessor-descriptor@1.0.0 
+│ │ │ │ │ │   └── is-data-descriptor@1.0.0 
+│ │ │ │ │ ├─┬ mixin-deep@1.3.2 
+│ │ │ │ │ │ └── is-extendable@1.0.1 
+│ │ │ │ │ └── pascalcase@0.1.1 
+│ │ │ │ ├── debug@2.6.9 
+│ │ │ │ ├─┬ define-property@0.2.5 
+│ │ │ │ │ └─┬ is-descriptor@0.1.6 
+│ │ │ │ │   ├─┬ is-accessor-descriptor@0.1.6 
+│ │ │ │ │   │ └── kind-of@3.2.2 
+│ │ │ │ │   ├─┬ is-data-descriptor@0.1.4 
+│ │ │ │ │   │ └── kind-of@3.2.2 
+│ │ │ │ │   └── kind-of@5.1.0 
+│ │ │ │ ├── extend-shallow@2.0.1 
+│ │ │ │ ├── map-cache@0.2.2 
+│ │ │ │ ├── source-map@0.5.7 
+│ │ │ │ ├─┬ source-map-resolve@0.5.3 
+│ │ │ │ │ ├── atob@2.1.2 
+│ │ │ │ │ ├── decode-uri-component@0.2.0 
+│ │ │ │ │ ├── resolve-url@0.2.1 
+│ │ │ │ │ ├── source-map-url@0.4.0 
+│ │ │ │ │ └── urix@0.1.0 
+│ │ │ │ └── use@3.1.1 
+│ │ │ ├─┬ snapdragon-node@2.1.1 
+│ │ │ │ ├─┬ define-property@1.0.0 
+│ │ │ │ │ └─┬ is-descriptor@1.0.2 
+│ │ │ │ │   ├── is-accessor-descriptor@1.0.0 
+│ │ │ │ │   └── is-data-descriptor@1.0.0 
+│ │ │ │ └─┬ snapdragon-util@3.0.1 
+│ │ │ │   └── kind-of@3.2.2 
+│ │ │ ├── split-string@3.1.0 
+│ │ │ └─┬ to-regex@3.0.2 
+│ │ │   └─┬ safe-regex@1.1.0 
+│ │ │     └── ret@0.1.15 
+│ │ ├─┬ glob-parent@3.1.0 
+│ │ │ ├── is-glob@3.1.0 
+│ │ │ └── path-dirname@1.0.2 
+│ │ ├─┬ is-binary-path@1.0.1 
+│ │ │ └── binary-extensions@1.13.1 
+│ │ ├─┬ is-glob@4.0.1 
+│ │ │ └── is-extglob@2.1.1 
+│ │ ├── path-is-absolute@1.0.1 
+│ │ ├── readdirp@2.2.1 
+│ │ └── upath@1.2.0 
+│ ├─┬ debug@3.2.6 
+│ │ └── ms@2.1.2 
+│ ├── ignore-by-default@1.0.1 
+│ ├─┬ minimatch@3.0.4 
+│ │ └─┬ brace-expansion@1.1.11 
+│ │   ├── balanced-match@1.0.0 
+│ │   └── concat-map@0.0.1 
+│ ├── pstree.remy@1.1.8 
+│ ├─┬ touch@3.1.0 
+│ │ └─┬ nopt@1.0.10 
+│ │   └── abbrev@1.1.1 
+│ ├─┬ undefsafe@2.0.3 
+│ │ └── debug@2.6.9 
+│ └─┬ update-notifier@2.5.0 
+│   ├─┬ boxen@1.3.0 
+│   │ ├── ansi-align@2.0.0 
+│   │ ├── camelcase@4.1.0 
+│   │ ├── cli-boxes@1.0.0 
+│   │ ├─┬ string-width@2.1.1 
+│   │ │ ├── is-fullwidth-code-point@2.0.0 
+│   │ │ └─┬ strip-ansi@4.0.0 
+│   │ │   └── ansi-regex@3.0.0 
+│   │ ├─┬ term-size@1.2.0 
+│   │ │ └─┬ execa@0.7.0 
+│   │ │   ├─┬ cross-spawn@5.1.0 
+│   │ │   │ └─┬ lru-cache@4.1.5 
+│   │ │   │   ├── pseudomap@1.0.2 
+│   │ │   │   └── yallist@2.1.2 
+│   │ │   └── get-stream@3.0.0 
+│   │ └── widest-line@2.0.1 
+│   ├─┬ configstore@3.1.5 
+│   │ ├─┬ dot-prop@4.2.1 
+│   │ │ └── is-obj@1.0.1 
+│   │ ├─┬ make-dir@1.3.0 
+│   │ │ └── pify@3.0.0 
+│   │ ├─┬ unique-string@1.0.0 
+│   │ │ └── crypto-random-string@1.0.0 
+│   │ └─┬ write-file-atomic@2.4.3 
+│   │   └── imurmurhash@0.1.4 
+│   ├── import-lazy@2.1.0 
+│   ├─┬ is-ci@1.2.1 
+│   │ └── ci-info@1.6.0 
+│   ├─┬ is-installed-globally@0.1.0 
+│   │ ├─┬ global-dirs@0.1.1 
+│   │ │ └── ini@1.3.5 
+│   │ └── is-path-inside@1.0.1 
+│   ├── is-npm@1.0.0 
+│   ├─┬ latest-version@3.1.0 
+│   │ └─┬ package-json@4.0.1 
+│   │   ├─┬ got@6.7.1 
+│   │   │ ├─┬ create-error-class@3.0.2 
+│   │   │ │ └── capture-stack-trace@1.0.1 
+│   │   │ ├── is-redirect@1.0.0 
+│   │   │ ├── unzip-response@2.0.1 
+│   │   │ └─┬ url-parse-lax@1.0.0 
+│   │   │   └── prepend-http@1.0.4 
+│   │   ├─┬ registry-auth-token@3.4.0 
+│   │   │ └─┬ rc@1.2.8 
+│   │   │   ├── deep-extend@0.6.0 
+│   │   │   └── strip-json-comments@2.0.1 
+│   │   └── registry-url@3.1.0 
+│   ├── semver-diff@2.1.0 
+│   └── xdg-basedir@3.0.0 
+├─┬ pg@7.18.2 
+│ ├── buffer-writer@2.0.0 
+│ ├── packet-reader@1.0.0 
+│ ├── pg-connection-string@0.1.3 
+│ ├── pg-packet-stream@1.1.0 
+│ ├── pg-pool@2.0.10 
+│ ├─┬ pg-types@2.2.0 
+│ │ ├── pg-int8@1.0.1 
+│ │ ├── postgres-array@2.0.0 
+│ │ ├── postgres-bytea@1.0.0 
+│ │ ├── postgres-date@1.0.7 
+│ │ └── postgres-interval@1.2.0 
+│ ├─┬ pgpass@1.0.2 
+│ │ └─┬ split@1.0.1 
+│ │   └── through@2.3.8 
+│ └── semver@4.3.2 
+├─┬ request@2.88.2 
+│ ├── aws-sign2@0.7.0 
+│ ├── aws4@1.10.1 
+│ ├── caseless@0.12.0 
+│ ├── extend@3.0.2 
+│ ├── forever-agent@0.6.1 
+│ ├── form-data@2.3.3 
+│ ├─┬ har-validator@5.1.5 
+│ │ ├─┬ ajv@6.12.6 
+│ │ │ ├── fast-deep-equal@3.1.3 
+│ │ │ ├── fast-json-stable-stringify@2.1.0 
+│ │ │ ├── json-schema-traverse@0.4.1 
+│ │ │ └── uri-js@4.4.0 
+│ │ └── har-schema@2.0.0 
+│ ├─┬ http-signature@1.2.0 
+│ │ ├── assert-plus@1.0.0 
+│ │ ├─┬ jsprim@1.4.1 
+│ │ │ ├── extsprintf@1.3.0 
+│ │ │ ├── json-schema@0.2.3 
+│ │ │ └── verror@1.10.0 
+│ │ └─┬ sshpk@1.16.1 
+│ │   ├── asn1@0.2.4 
+│ │   ├── bcrypt-pbkdf@1.0.2 
+│ │   ├── dashdash@1.14.1 
+│ │   ├── ecc-jsbn@0.1.2 
+│ │   ├── getpass@0.1.7 
+│ │   ├── jsbn@0.1.1 
+│ │   └── tweetnacl@0.14.5 
+│ ├── is-typedarray@1.0.0 
+│ ├── isstream@0.1.2 
+│ ├── json-stringify-safe@5.0.1 
+│ ├── oauth-sign@0.9.0 
+│ ├── performance-now@2.1.0 
+│ ├── qs@6.5.2 
+│ ├─┬ tough-cookie@2.5.0 
+│ │ ├── psl@1.8.0 
+│ │ └── punycode@2.1.1 
+│ └── tunnel-agent@0.6.0 
+├─┬ sonarqube-scanner@2.7.0 
+│ ├─┬ download@7.1.0 
+│ │ ├─┬ archive-type@4.0.0 
+│ │ │ └── file-type@4.4.0 
+│ │ ├─┬ caw@2.0.1 
+│ │ │ ├─┬ get-proxy@2.1.0 
+│ │ │ │ └─┬ npm-conf@1.1.3 
+│ │ │ │   ├─┬ config-chain@1.1.12 
+│ │ │ │   │ └── proto-list@1.2.4 
+│ │ │ │   └── pify@3.0.0 
+│ │ │ ├─┬ isurl@1.0.0 
+│ │ │ │ ├─┬ has-to-string-tag-x@1.4.1 
+│ │ │ │ │ └── has-symbol-support-x@1.4.2 
+│ │ │ │ └── is-object@1.0.1 
+│ │ │ └── url-to-options@1.0.1 
+│ │ ├─┬ decompress@4.2.1 
+│ │ │ ├─┬ decompress-tar@4.1.1 
+│ │ │ │ ├── file-type@5.2.0 
+│ │ │ │ └─┬ tar-stream@1.6.2 
+│ │ │ │   ├── bl@1.2.3 
+│ │ │ │   ├─┬ buffer-alloc@1.2.0 
+│ │ │ │   │ ├── buffer-alloc-unsafe@1.1.0 
+│ │ │ │   │ └── buffer-fill@1.0.0 
+│ │ │ │   ├── fs-constants@1.0.0 
+│ │ │ │   └── to-buffer@1.1.1 
+│ │ │ ├─┬ decompress-tarbz2@4.1.1 
+│ │ │ │ ├── file-type@6.2.0 
+│ │ │ │ ├── seek-bzip@1.0.6 
+│ │ │ │ └─┬ unbzip2-stream@1.4.3 
+│ │ │ │   └─┬ buffer@5.6.0 
+│ │ │ │     ├── base64-js@1.3.1 
+│ │ │ │     └── ieee754@1.1.13 
+│ │ │ ├─┬ decompress-targz@4.1.1 
+│ │ │ │ └── file-type@5.2.0 
+│ │ │ ├─┬ decompress-unzip@4.0.1 
+│ │ │ │ ├── file-type@3.9.0 
+│ │ │ │ ├── get-stream@2.3.1 
+│ │ │ │ ├── pify@2.3.0 
+│ │ │ │ └─┬ yauzl@2.10.0 
+│ │ │ │   ├── buffer-crc32@0.2.13 
+│ │ │ │   └─┬ fd-slicer@1.1.0 
+│ │ │ │     └── pend@1.2.0 
+│ │ │ ├─┬ make-dir@1.3.0 
+│ │ │ │ └── pify@3.0.0 
+│ │ │ ├── pify@2.3.0 
+│ │ │ └─┬ strip-dirs@2.1.0 
+│ │ │   └── is-natural-number@4.0.1 
+│ │ ├─┬ ext-name@5.0.0 
+│ │ │ ├── ext-list@2.2.2 
+│ │ │ └─┬ sort-keys-length@1.0.1 
+│ │ │   └─┬ sort-keys@1.1.2 
+│ │ │     └── is-plain-obj@1.1.0 
+│ │ ├── file-type@8.1.0 
+│ │ ├─┬ filenamify@2.1.0 
+│ │ │ ├── filename-reserved-regex@2.0.0 
+│ │ │ ├── strip-outer@1.0.1 
+│ │ │ └── trim-repeated@1.0.0 
+│ │ ├── get-stream@3.0.0 
+│ │ ├─┬ got@8.3.2 
+│ │ │ ├── @sindresorhus/is@0.7.0 
+│ │ │ ├─┬ cacheable-request@2.1.4 
+│ │ │ │ ├── clone-response@1.0.2 
+│ │ │ │ ├── http-cache-semantics@3.8.1 
+│ │ │ │ ├─┬ keyv@3.0.0 
+│ │ │ │ │ └── json-buffer@3.0.0 
+│ │ │ │ ├── lowercase-keys@1.0.0 
+│ │ │ │ ├─┬ normalize-url@2.0.1 
+│ │ │ │ │ ├─┬ query-string@5.1.1 
+│ │ │ │ │ │ └── strict-uri-encode@1.1.0 
+│ │ │ │ │ └── sort-keys@2.0.0 
+│ │ │ │ └── responselike@1.0.2 
+│ │ │ ├── decompress-response@3.3.0 
+│ │ │ ├── duplexer3@0.1.4 
+│ │ │ ├─┬ into-stream@3.1.0 
+│ │ │ │ ├── from2@2.3.0 
+│ │ │ │ └── p-is-promise@1.1.0 
+│ │ │ ├── is-retry-allowed@1.2.0 
+│ │ │ ├── lowercase-keys@1.0.1 
+│ │ │ ├── mimic-response@1.0.1 
+│ │ │ ├── p-cancelable@0.4.1 
+│ │ │ ├── p-timeout@2.0.1 
+│ │ │ ├── timed-out@4.0.1 
+│ │ │ └─┬ url-parse-lax@3.0.0 
+│ │ │   └── prepend-http@2.0.0 
+│ │ ├── make-dir@1.3.0 
+│ │ ├── p-event@2.3.1 
+│ │ └── pify@3.0.0 
+│ ├─┬ fancy-log@1.3.3 
+│ │ ├── ansi-gray@0.1.1 
+│ │ ├── parse-node-version@1.0.1 
+│ │ └── time-stamp@1.1.0 
+│ ├── lodash.get@4.4.2 
+│ ├── lodash.uniq@4.5.0 
+│ ├── mkdirp@1.0.4 
+│ ├── progress@2.0.3 
+│ ├─┬ read-pkg@2.0.0 
+│ │ ├─┬ load-json-file@2.0.0 
+│ │ │ ├── parse-json@2.2.0 
+│ │ │ ├── pify@2.3.0 
+│ │ │ └── strip-bom@3.0.0 
+│ │ └── path-type@2.0.0 
+│ └── slugify@1.4.5 
+├─┬ ts-node@8.10.2 
+│ ├── arg@4.1.3 
+│ ├── diff@4.0.2 
+│ ├── make-error@1.3.6 
+│ ├─┬ source-map-support@0.5.19 
+│ │ ├── buffer-from@1.1.1 
+│ │ └── source-map@0.6.1 
+│ └── yn@3.1.1 
+├─┬ tslint@5.20.1 
+│ ├─┬ @babel/code-frame@7.10.4 
+│ │ └─┬ @babel/highlight@7.10.4 
+│ │   ├── @babel/helper-validator-identifier@7.10.4 
+│ │   └── js-tokens@4.0.0 
+│ ├── builtin-modules@1.1.1 
+│ ├── commander@2.20.3 
+│ ├─┬ glob@7.1.6 
+│ │ ├── fs.realpath@1.0.0 
+│ │ ├─┬ inflight@1.0.6 
+│ │ │ └── wrappy@1.0.2 
+│ │ └── once@1.4.0 
+│ ├─┬ js-yaml@3.14.0 
+│ │ ├─┬ argparse@1.0.10 
+│ │ │ └── sprintf-js@1.0.3 
+│ │ └── esprima@4.0.1 
+│ ├─┬ mkdirp@0.5.5 
+│ │ └── minimist@1.2.5 
+│ ├─┬ resolve@1.18.1 
+│ │ ├─┬ is-core-module@2.0.0 
+│ │ │ └── has@1.0.3 
+│ │ └── path-parse@1.0.6 
+│ ├── tslib@1.14.1 
+│ └── tsutils@2.29.0 
+├─┬ tslint-config-airbnb@5.11.2 
+│ ├─┬ tslint-consistent-codestyle@1.16.0 
+│ │ └─┬ @fimbul/bifrost@0.21.0 
+│ │   ├─┬ @fimbul/ymir@0.21.0 
+│ │   │ ├── inversify@5.0.1 
+│ │   │ └── reflect-metadata@0.1.13 
+│ │   ├── get-caller-file@2.0.5 
+│ │   └── tsutils@3.17.1 
+│ ├─┬ tslint-eslint-rules@5.4.0 
+│ │ ├─┬ doctrine@0.7.2 
+│ │ │ ├── esutils@1.1.6 
+│ │ │ └── isarray@0.0.1 
+│ │ ├── tslib@1.9.0 
+│ │ └── tsutils@3.17.1 
+│ └─┬ tslint-microsoft-contrib@5.2.1 
+│   └── tsutils@2.28.0 
+├─┬ tslint-sonarts@1.9.0 
+│ └── immutable@3.8.2 
+├── typescript@3.9.7 
+├── uuid@3.4.0 
+├── validator@11.1.0 
+└─┬ winston@2.4.5 
+  ├── async@1.0.0 
+  ├── colors@1.0.3 
+  ├── cycle@1.0.3 
+  ├── eyes@0.1.8 
+  └── stack-trace@0.0.10 
+
+npm WARN optional Skipping failed optional dependency /chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@1.2.13
+npm WARN optional Skipping failed optional dependency /gulp-nodemon/chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@2.1.3
+npm WARN optional Skipping failed optional dependency /@types/gulp/chokidar/fsevents:
+npm WARN notsup Not compatible with your operating system or architecture: fsevents@2.1.3
+npm WARN ui_web-services-v8@1.0.0 No repository field.
+[8mha:////4EFneDCPOxAcZ9Fi8cL5alXsu8Rar52P7WknpP7ZWDdNAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIioERUaS03vMDExjix7oztkFS8iK/xBwKRqNhitbPNPF+wTBGOHC22hjpHqXEYfG+nhQPH7uJ5wJbP2DAl9galGSRrU88oORuYU5SwELAy1HhOjmyGtWjVXVVeka1OOU7fQUDp9A0eUIjJnFXMXxgjbK69Tkw/z18BjCFDudt+ah/eXoq5oL4AAAA=[0m[Pipeline] tool
+[8mha:////4BVr7vrT07KKlbkeb9uHJW1zhog3Cme0zAOIxVaHNkFbAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dvd7Md5mfxAR8nhQvCAAAA[0m[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: sonarqube
+[8mha:////4Gy71fZp39Cpp216gajqDsMMDw5RrkUViKZ3CPjMzk0vAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUQjAhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYJ8t5/tMD+LD/hYjrHCAAAA[0m[Pipeline] {
+[8mha:////4D86bF9c7JcdBb3dOTPFqXJF29n0AZv9epQjgqlsPyklAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIUGDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK7+9Q+vAEIWoEpvgAAAA==[0m[Pipeline] sh
++ /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/bin/sonar-scanner
+INFO: Scanner configuration file: /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar_scanner/conf/sonar-scanner.properties
+INFO: Project root configuration file: /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build/sonar-project.properties
+INFO: SonarQube Scanner 3.3.0.1492
+INFO: Java 1.8.0_265 Private Build (64-bit)
+INFO: Linux 4.4.0-1101-aws amd64
+INFO: User cache: /var/lib/jenkins/.sonar/cache
+INFO: SonarQube server 7.7.0
+INFO: Default locale: "en_US", source code encoding: "UTF-8" (analysis is platform dependent)
+INFO: Load global settings
+INFO: Load global settings (done) | time=333ms
+INFO: Server id: 8029A542-AWrUyyBX3AK0G6oTC4tb
+INFO: User cache: /var/lib/jenkins/.sonar/cache
+INFO: Load/download plugins
+INFO: Load plugins index
+INFO: Load plugins index (done) | time=77ms
+INFO: Load/download plugins (done) | time=108ms
+INFO: Process project properties
+INFO: Execute project builders
+INFO: Execute project builders (done) | time=4ms
+INFO: Project key: user-profile
+INFO: Base dir: /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
+INFO: Working dir: /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build/.scannerwork
+INFO: Load project settings for component key: 'user-profile'
+INFO: Load project settings for component key: 'user-profile' (done) | time=47ms
+INFO: Load project repositories
+INFO: Load project repositories (done) | time=83ms
+INFO: Load quality profiles
+INFO: Load quality profiles (done) | time=53ms
+INFO: Load active rules
+INFO: Load active rules (done) | time=988ms
+INFO: Indexing files...
+INFO: Project configuration:
+INFO:   Excluded sources: **/node_modules/**, **/*.spec.ts, **/dist/**, **/docs/**, **/coverage/**
+INFO: 46 files indexed
+INFO: 0 files ignored because of inclusion/exclusion patterns
+INFO: 0 files ignored because of scm ignore settings
+INFO: Quality profile for ts: Sonar way
+INFO: ------------- Run sensors on module user-profile
+INFO: Load metrics repository
+INFO: Load metrics repository (done) | time=69ms
+INFO: Sensor JaCoCo XML Report Importer [jacoco]
+INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=13ms
+INFO: Sensor JavaXmlSensor [java]
+INFO: Sensor JavaXmlSensor [java] (done) | time=2ms
+INFO: Sensor HTML [web]
+INFO: Sensor HTML [web] (done) | time=17ms
+INFO: Sensor SonarTS [typescript]
+INFO: Analyzing 40 typescript file(s) with the following configuration file /var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build/tsconfig.json
+INFO: 40 files analyzed out of 40
+INFO: Sensor SonarTS [typescript] (done) | time=7819ms
+INFO: ------------- Run sensors on project
+INFO: Sensor Zero Coverage Sensor
+INFO: Sensor Zero Coverage Sensor (done) | time=31ms
+INFO: SCM provider for this project is: git
+INFO: 2 files to be analyzed
+INFO: 2/2 files analyzed
+INFO: 7 files had no CPD blocks
+INFO: Calculating CPD for 33 files
+INFO: CPD calculation finished
+INFO: Analysis report generated in 85ms, dir size=306 KB
+INFO: Analysis report compressed in 83ms, zip size=129 KB
+INFO: Analysis report uploaded in 167ms
+INFO: ANALYSIS SUCCESSFUL, you can browse https://sonarqube.idc.tarento.com/dashboard?id=user-profile
+INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+INFO: More about the report processing at https://sonarqube.idc.tarento.com/api/ce/task?id=AXVJJlhJSw5EImG0DR-L
+INFO: Analysis total time: 12.938 s
+INFO: ------------------------------------------------------------------------
+INFO: EXECUTION SUCCESS
+INFO: ------------------------------------------------------------------------
+INFO: Total time: 14.531s
+INFO: Final Memory: 19M/316M
+INFO: ------------------------------------------------------------------------
+[8mha:////4Nk9wXsUQXUK181J6igEPIDA/DERoF1a5UjfPXPgZUZeAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiISEKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g3QKkBhvgAAAA==[0m[Pipeline] }
+[8mha:////4GdnYkv8H+68o4Of6wYLzklSXpe1jF5uZJpR1/0baCIcAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIQokRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g2TqBHnvgAAAA==[0m[Pipeline] // withSonarQubeEnv
+[8mha:////4JzmPs6VadqBa0WMPe6sWLK01XfRAkIK/FuMsKufwWAPAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BrmPJ1y+AAAA[0m[Pipeline] }
+[8mha:////4DV5RRe2s1yRNh09WmTMA43NMW36sKJjltoNu0KSsROqAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOISQYmo0lppeIGJjXFi3RnbIal4EV/jD1hEomKL1c4283rDOgY4cTDYaxosxc6id6PJCycOw9XxhD1fsGOK7DS2empZ6WbBlpOGJUUJKwEbTZ3jaMkk2IpePmTlJJnqnEL+jgJKq+7whEJkc5IhfWEOsLuNKjL9PH8FMHufoDzUufb1B1PlWKq+AAAA[0m[Pipeline] // stage
+[8mha:////4CIvXO/r5+k0/Y6qxmIuJ4ZzcCEqds4KbOPjqGRguxRQAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjBB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INOibpDcEAAAA=[0m[Pipeline] stage
+[8mha:////4GZQVwkws1ghaZLQJAGFcShJJYU+1ozCXkE/7gCRcgfiAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+2YMO4MIAAAA=[0m[Pipeline] { (Quality Gate)
+[8mha:////4IC2+nitWYsjXQYza1n+R4gg1E4EKUDAjY4ppY+PbgqMAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUoiNiYo26cILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMYAJwqGO42dxdha3vvRzIlnCt3NU+aOrrwljOQ1b3RuSOnzWhtKGlYVDDYCthpbT9GiSbATTj5k5SWa6pLCvB0FMKsGeEIhZnKSIX3LFGB/H1Uk/HH+AmDqE7D6sFi9PMsPfTawssIAAAA=[0m[Pipeline] timeout
+Timeout set to expire in 1 hr 0 min
+[8mha:////4P9aAsmYMpm/fUHqnp6iJvWV3yYdCOnWTx7I5WNQXN5AAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycoh0KBtiYo2ycILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMUAJwqGOY2dxdha1vvRzIllCt3NU2aOrqwljOQ1EzoLUvq8VkFJw6qihA2HrcbWU7RoEuy4kw9Ze4mmvqQwb0cOpVUDPKHgMznJkL5lCrC/jyoS/jh/ATD1CcqmWeywPKsPBdk7bsIAAAA=[0m[Pipeline] {
+[8mha:////4Jfjd50NOBXTF3UCZ6y0+isk2qY5RGg4KO7O3biaJ/YbAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSABWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyu3uU/vwBtZos2m+AAAA[0m[Pipeline] waitForQualityGate
+Checking status of SonarQube task 'AXVJJlhJSw5EImG0DR-L' on server 'sonarqube'
+SonarQube task 'AXVJJlhJSw5EImG0DR-L' status is 'PENDING'
+SonarQube task 'AXVJJlhJSw5EImG0DR-L' status is 'SUCCESS'
+SonarQube task 'AXVJJlhJSw5EImG0DR-L' completed. Quality gate is 'OK'
+[8mha:////4I/gIaJdha7mvRwJCih6N+OP063IzWhB9zJRSbi6o0IFAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSgGgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrt/lO7Nxbzd2K+AAAA[0m[Pipeline] }
+[8mha:////4JyepvB22oIDzr7Qc1dDiJkXVAHBApUrODvOrTmh0WIJAAAApB+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSpLBwrGwZGk+ACSKE+Z8AkVSeyKt5B9HMWLnFzr5t3vMF6xjgSEEzq3AwGDvDvJt0WSxTGK6OMrN0YR1hJKeYUFlQr04LCkoKllQ1rDhsFHaOokGdYMutvMvGSdTNOYXyHTjUph/hARUv5iRD+sIcYHeb+kj48/wVwOx9grrdf6p9AxC1Tze+AAAA[0m[Pipeline] // timeout
+[8mha:////4MzYRXW7dUivH1lHhRiYAIjO8r3qmxjCtElrd23TvZZZAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQYOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgFTNx6xvgAAAA==[0m[Pipeline] }
+[8mha:////4GChBB4lK9+f43funrcK0g6jT4QVV+8JzhOEyRffIpBkAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIUQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN0y1S+O+AAAA[0m[Pipeline] // stage
+[8mha:////4FF97g9NkOsGyHxuEnWXqGxSHqASgDbj+ZyAk1TTeBC7AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYRDkQ5R0VpueIFJjHFi3QX7QlLxIr7GHzBEomKrnZVW83xBmSIcKDrZWew9psbLIYwuNzlR7C+BJtnRWTaEiYKV2k6aWntcUBNbWCIKWClYW2wCJY+OYaM6czdVMOiqE8e87RUUvr3BA4TKZjaRvzBH2F7HNhH+PH8FMA8MomYo6t3nWL4BEcsSA8EAAAA=[0m[Pipeline] stage
+[8mha:////4Moytm30QUSpfLb5PVwDTpc4kYxDzY//Yl7H494wbrRvAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUJDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAbb5KxbCAAAA[0m[Pipeline] { (docker-build)
+[8mha:////4M+MyD8k7aRq3tTOLHy7lzjcMgn9Ztuu9CdwJT0qOwPSAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiEB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyv32U7vwBirOQHu+AAAA[0m[Pipeline] sh
++ git rev-parse --short HEAD
++ commit_id=d58a55d
++ echo d58a55d
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
++ docker build -t 10.0.1.129:5000/user-profile:d58a55d .
+Sending build context to Docker daemon  7.182MB
+Step 1/7 : FROM node:12
+ ---> 1fa6026dd8bb
+Step 2/7 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> 0ec5aebd08eb
+Step 3/7 : COPY package*.json ./
+ ---> 79006a2eb702
+Step 4/7 : RUN npm install --only=production
+ ---> Running in 02455c20f940
+[91mnpm WARN ui_web-services-v8@1.0.0 No description
+[0m[91mnpm WARN ui_web-services-v8@1.0.0 No repository field.
+[0m[91m
+[0madded 231 packages from 221 contributors and audited 913 packages in 7.439s
+found 1168 vulnerabilities (1159 low, 1 moderate, 8 high)
+  run `npm audit fix` to fix them, or `npm audit` for details
+Removing intermediate container 02455c20f940
+ ---> 3a71532f1a8d
+Step 5/7 : COPY dist/ .
+ ---> 5665729c004e
+Step 6/7 : EXPOSE 3008
+ ---> Running in 1a3b8097fdfb
+Removing intermediate container 1a3b8097fdfb
+ ---> d61e0dc88b54
+Step 7/7 : CMD [ "node", "index.js" ]
+ ---> Running in 6697d5f0fed1
+Removing intermediate container 6697d5f0fed1
+ ---> 3ddba7023d51
+Successfully built 3ddba7023d51
+Successfully tagged 10.0.1.129:5000/user-profile:d58a55d
++ docker tag 10.0.1.129:5000/user-profile:d58a55d 10.0.1.129:5000/user-profile:bronze
+[8mha:////4IqoSWPBdmB7kB4oAkvlHiJ0MtOuFO4hFoVtPsNv7FBpAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiBB2iSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nffWr7BmM+Nsi+AAAA[0m[Pipeline] }
+[8mha:////4IosmAt57enR5uXrgNfVNEVM+VpuFTUiD0MBbhGSKqZUAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJCkQ5R0VppeIFJjLFj3Tm2g1PxIr7GHwhEomKL1c4283zBOgY4ctBoFfWGYmvQu1HPCzOH/uo4o+ULtkyRncJG5YY7dVqw4aRgSVHCSsBGUes4GtIJtsLKu6ycJF2dU5i/g4DSdAM8oBCzOcmQvjAF2N3GLjL9PH8FMHmfoKzrT+3fTT40or4AAAA=[0m[Pipeline] // stage
+[8mha:////4OBfbkELnp1jOr4Qu7rHbpdMNHby+uOtinn4rWKhlO82AAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYTThApR0VpueIGJjXFi3QX7QlLxIr7GHzBEomKrnZVW83xBlSIcKDrRWew9ptaLIYwuNzFR7C+BJtHRWbSEiYIVyk6KjD0uqIgtLClKWElYW2wDJY+OYSM7fdd10OjqE8e87SWU3tzgAYXMZtaRvzBH2F5Hkwh/nr8CmAeGomEom93nWL0BolrfU8EAAAA=[0m[Pipeline] stage
+[8mha:////4PlfJbmi3tIrMUwJrH2c02FTB/3Q069m7NA+uPh6+C6nAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycoh0ARbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAUxleXrCAAAA[0m[Pipeline] { (docker-push)
+[8mha:////4M51onjeUVO+20NSyOY5f41rUtFXrI31aNK1f4/3IZ6hAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOLSICgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN+EEkMO+AAAA[0m[Pipeline] sh
++ pwd
+/var/lib/jenkins/workspace/igot-dev/Frontend-build/user-profile-build-dev-build
++ git rev-parse --short HEAD
++ commit_id=d58a55d
++ docker push 10.0.1.129:5000/user-profile:d58a55d
+The push refers to repository [10.0.1.129:5000/user-profile]
+b86199fd538f: Preparing
+9d5508589067: Preparing
+0c3d218fcd0c: Preparing
+31147a399746: Preparing
+a0dec5cb284e: Preparing
+03d91b28d371: Preparing
+4d8e964e233a: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+03d91b28d371: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+4d8e964e233a: Waiting
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+8354d5896557: Waiting
+a0dec5cb284e: Layer already exists
+31147a399746: Layer already exists
+03d91b28d371: Layer already exists
+4d8e964e233a: Layer already exists
+bc17cd405095: Layer already exists
+ee854067fbbd: Layer already exists
+eac9ead92b24: Layer already exists
+740ffea5d5c3: Layer already exists
+8354d5896557: Layer already exists
+23bca356262f: Layer already exists
+b86199fd538f: Pushed
+0c3d218fcd0c: Pushed
+9d5508589067: Pushed
+d58a55d: digest: sha256:73b423cec4198f1f801e571900306f1241ca25437e16bc0fe085f108bd183979 size: 3052
++ docker push 10.0.1.129:5000/user-profile:bronze
+The push refers to repository [10.0.1.129:5000/user-profile]
+b86199fd538f: Preparing
+9d5508589067: Preparing
+0c3d218fcd0c: Preparing
+31147a399746: Preparing
+a0dec5cb284e: Preparing
+03d91b28d371: Preparing
+4d8e964e233a: Preparing
+bc17cd405095: Preparing
+ee854067fbbd: Preparing
+740ffea5d5c3: Preparing
+eac9ead92b24: Preparing
+23bca356262f: Preparing
+8354d5896557: Preparing
+bc17cd405095: Waiting
+ee854067fbbd: Waiting
+740ffea5d5c3: Waiting
+eac9ead92b24: Waiting
+23bca356262f: Waiting
+8354d5896557: Waiting
+03d91b28d371: Waiting
+4d8e964e233a: Waiting
+31147a399746: Layer already exists
+a0dec5cb284e: Layer already exists
+0c3d218fcd0c: Layer already exists
+b86199fd538f: Layer already exists
+9d5508589067: Layer already exists
+03d91b28d371: Layer already exists
+740ffea5d5c3: Layer already exists
+bc17cd405095: Layer already exists
+ee854067fbbd: Layer already exists
+eac9ead92b24: Layer already exists
+4d8e964e233a: Layer already exists
+8354d5896557: Layer already exists
+23bca356262f: Layer already exists
+bronze: digest: sha256:73b423cec4198f1f801e571900306f1241ca25437e16bc0fe085f108bd183979 size: 3052
++ docker rmi -f 10.0.1.129:5000/user-profile:d58a55d
+Untagged: 10.0.1.129:5000/user-profile:d58a55d
++ docker rmi -f 10.0.1.129:5000/user-profile:bronze
+Untagged: 10.0.1.129:5000/user-profile:bronze
+Untagged: 10.0.1.129:5000/user-profile@sha256:73b423cec4198f1f801e571900306f1241ca25437e16bc0fe085f108bd183979
+Deleted: sha256:3ddba7023d51db99c81fa4b03aa439926ca644b3156735318ad682157b2cdfde
+Deleted: sha256:d61e0dc88b5440557603245e464920095a2ef452d16e44847fca367cb248107d
+Deleted: sha256:5665729c004e481a17f12e0ba6a95c20cc77f3800dbb5c85a67354173f2b2b2a
+Deleted: sha256:3ab67d13e2bc09627c0238a76d1db84508a3025c8c79f11547919e70ef05846f
+Deleted: sha256:3a71532f1a8d6c04eb1bcb85101a177a577fefbe0aa8bfb4fb71e28b9e88a958
+Deleted: sha256:8988998281a7dc4ebbfc681cf0ef4d3d6eb4e57b10e1c2d5fc5ee6960f882766
+Deleted: sha256:79006a2eb70205431b8d28412a78add9d0a001bdc848dd1083a3787820797ae2
+Deleted: sha256:e72fb709a703a394a3007715fbcf7a378b7652c761cc1d45421c23103b5538dc
++ rm -rf dist
++ rm -rf dist.zip
+[8mha:////4Jv3sn7wMg7RHkY8eGcU25TeKLGI1krMXicUDKVrNcIEAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOLSIISEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQEDW5U8vgAAAA==[0m[Pipeline] }
+[8mha:////4IFOjC7tMeXNQJfVhkZO5eFxcpJuzLrISjKyf38NQZsDAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOLSQIEQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrt/lO7NxzZwG6+AAAA[0m[Pipeline] // stage
+[8mha:////4Jp3fIpRHchXHpdl2sat+umXWAyaE9mlJJSr1tSnheWXAAAAox+LCAAAAAAAAP9tjTESgjAQRT84FraWHiJYaOVY2WZoPEGEGAOZXUwWofJEXs07yMiMlb/67zXv9cYyRRw5OtVYaj2lyqsu9G56auDYXgMPquGLqpgSB6tKO5Rc29OMJYvFvCzHQmNlqQqcPDnBWjfmYYpgyBVniZM7aOS+vuOJTE9lMVG+MEZsbn2dmH6dvwGMXSfI91tBtvsAk2nUSb0AAAA=[0m[Pipeline] }
+[8mha:////4A5MyKGw1Dv1Hb1QlO007u3hk6CwAXFWXYLS3iX6GAjBAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQlSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfL8VZLsPgNXQ6r0AAAA=[0m[Pipeline] // node
+[8mha:////4LP6sHjs/R2pJRRUVdZUuMm477cKSuZWJDc+jcuDEOZNAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkJE7GybVh8Qsq1Fpo3sP2IUx+kb/mP0gkcfJO95zlvN5Yp4gjR6daS52nVHvVh8HNT40cu2vgUbV8UTVT4mBVZceKG3tasGKxWJblWGlsLNWBkycn2OrWPEwRDLniLHF2B43cN3c8kem5LCbKF6aI3W1oEtOv8zeAqe8F+b4UZOUHxp932r0AAAA=[0m[Pipeline] End of Pipeline
+Finished: SUCCESS

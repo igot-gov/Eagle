@@ -1,0 +1,9 @@
+commit ad38257f3e11d61f5accefee18a608ec992dc84e
+tree a9c794ff66e32bd2553ac83d8700d864a163c97c
+parent 8335ad6b1bf01ec1c0178299fa14f8a54c81e0c1
+author Rangabashyam P K <rangabashyam.krishnamachari@tarento.com> 2020-10-27 11:22:21 +0000
+committer Rangabashyam P K <rangabashyam.krishnamachari@tarento.com> 2020-10-27 11:22:21 +0000
+
+    Update for competency 
+
+:100644 100644 02e6eb8b1289145f7be8eb348b19eb9c2daf2088 5976c042f8c6aad59d020daec3e88f18b1437dea M	src/service/registry.ts

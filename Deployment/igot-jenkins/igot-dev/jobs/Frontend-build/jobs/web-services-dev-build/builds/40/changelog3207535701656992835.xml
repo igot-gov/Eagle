@@ -1,0 +1,53 @@
+commit 44fba209d3cdafdfff8e095e396784d6af507708
+tree bb93c5453d260671a45733edb525782becf56b61
+parent 3ce753b5860709b986688f82430c588eb9a32617
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 18:33:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 18:33:56 +0530
+
+    Task #51559: Fixed lint error from discussion hub
+
+
+:100644 100644 75a7175881eb7e99ab8fb587728afaedc17981d3 80ec505d1112396745fb061908bee8b5f8fee11b M	apps/web-services/src/protectedApi_v8/discussionHub/writeApi.ts
+commit 3ce753b5860709b986688f82430c588eb9a32617
+tree 5fca4b8183f8ebe6cf9d7446c50541df643645db
+parent 998cc17f69a37f102e14ff4c99e1e5119b7787d9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 18:26:00 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 18:26:00 +0530
+
+    Task #51560: Added create user api flow in wtoken api, renamed all endpoints to reneame nodebb to discussionHub
+
+
+:100644 100644 95b09082cc1a8e9fe53bef04d30a6ac9999331c3 e56239310993b39e10d1f6371b1384faf03b2527 R093	apps/web-services/src/protectedApi_v8/nodebb/categories.ts	apps/web-services/src/protectedApi_v8/discussionHub/categories.ts
+:000000 100644 0000000000000000000000000000000000000000 242ed8cd3e775cbc11642fc492b2155269c70580 A	apps/web-services/src/protectedApi_v8/discussionHub/discussionHub.ts
+:100644 100644 87d35f882e56cfa989928afc376676208b91ccb6 33010e5921ee206c00bfb3336d77c704a2ebdece R093	apps/web-services/src/protectedApi_v8/nodebb/notifications.ts	apps/web-services/src/protectedApi_v8/discussionHub/notifications.ts
+:100644 100644 62e80127e167b3aaeb2719e270efe1fb2463a191 dbcf6d0ba51d3b00466241dd2624d32c7783acfa R091	apps/web-services/src/protectedApi_v8/nodebb/posts.ts	apps/web-services/src/protectedApi_v8/discussionHub/posts.ts
+:100644 100644 c1619a39566bdf851b8d379d14f9c35531795878 540dc15afed6723fdd2e9637dfbf53c48ba5d733 R094	apps/web-services/src/protectedApi_v8/nodebb/tags.ts	apps/web-services/src/protectedApi_v8/discussionHub/tags.ts
+:100644 100644 d3b509aa7d7d7ff11e79e878e76d247fd4da7112 b6d788cec8097cacbbf3c5300479cb3c863513c4 R090	apps/web-services/src/protectedApi_v8/nodebb/topics.ts	apps/web-services/src/protectedApi_v8/discussionHub/topics.ts
+:100644 100644 150357770968301062aa19598fec62cb4d047746 b2ce523dddabb0660affa71867115ada6563a7bd R070	apps/web-services/src/protectedApi_v8/nodebb/users.ts	apps/web-services/src/protectedApi_v8/discussionHub/users.ts
+:000000 100644 0000000000000000000000000000000000000000 75a7175881eb7e99ab8fb587728afaedc17981d3 A	apps/web-services/src/protectedApi_v8/discussionHub/writeApi.ts
+:100644 000000 6c6bc70707930e39afa413602c5465aafe9ed10e 0000000000000000000000000000000000000000 D	apps/web-services/src/protectedApi_v8/nodebb/nodebb.ts
+:100644 000000 64f8529d6c25ff262a2f4b928553aa630394972c 0000000000000000000000000000000000000000 D	apps/web-services/src/protectedApi_v8/nodebb/writeApi.ts
+:100644 100644 aeeca07a94a64c3515621095fb8fa25a70636106 a8fe5c8c7bcd8c5a251460a0b8539a165d3e2c83 M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts
+:100644 100644 75bf695c363efdec1e8ad5b57f3bd028dde03298 e47e4fad1c23f31ffe82fdab5c316bba1c626b7c M	apps/web-services/src/protectedApi_v8/user/details.ts
+:100644 100644 8bda29bc0c77f2043a04134e3420b6008a8e5623 1188ed0a346e961ee7faebfe960a3490a858eced R066	apps/web-services/src/utils/nodebb-helper.ts	apps/web-services/src/utils/discussionHub-helper.ts
+:100644 100644 ef914166564c7565a4a2002ff0693ee4c24816f7 f21e18c73f76dc6c7c3a51d3605745d4d6e5c552 M	apps/web-services/src/utils/env.ts
+commit 998cc17f69a37f102e14ff4c99e1e5119b7787d9
+tree c737f459941f26b959a461efe2f00416f9100814
+parent 12772219d0a2acbf3f8d81a7b61e8d95744f60e3
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 00:46:36 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 00:46:36 +0530
+
+    Task #51559: Added proxy api wrapper for nodebb apis
+
+
+:000000 100644 0000000000000000000000000000000000000000 95b09082cc1a8e9fe53bef04d30a6ac9999331c3 A	apps/web-services/src/protectedApi_v8/nodebb/categories.ts
+:000000 100644 0000000000000000000000000000000000000000 6c6bc70707930e39afa413602c5465aafe9ed10e A	apps/web-services/src/protectedApi_v8/nodebb/nodebb.ts
+:000000 100644 0000000000000000000000000000000000000000 87d35f882e56cfa989928afc376676208b91ccb6 A	apps/web-services/src/protectedApi_v8/nodebb/notifications.ts
+:000000 100644 0000000000000000000000000000000000000000 62e80127e167b3aaeb2719e270efe1fb2463a191 A	apps/web-services/src/protectedApi_v8/nodebb/posts.ts
+:000000 100644 0000000000000000000000000000000000000000 c1619a39566bdf851b8d379d14f9c35531795878 A	apps/web-services/src/protectedApi_v8/nodebb/tags.ts
+:000000 100644 0000000000000000000000000000000000000000 d3b509aa7d7d7ff11e79e878e76d247fd4da7112 A	apps/web-services/src/protectedApi_v8/nodebb/topics.ts
+:000000 100644 0000000000000000000000000000000000000000 150357770968301062aa19598fec62cb4d047746 A	apps/web-services/src/protectedApi_v8/nodebb/users.ts
+:000000 100644 0000000000000000000000000000000000000000 64f8529d6c25ff262a2f4b928553aa630394972c A	apps/web-services/src/protectedApi_v8/nodebb/writeApi.ts
+:100644 100644 e4c3254664a21e495089adf069f0539374b637a8 aeeca07a94a64c3515621095fb8fa25a70636106 M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts
+:100644 100644 78b522b5d4b7f174911e9478c9b0656a95a71ded ef914166564c7565a4a2002ff0693ee4c24816f7 M	apps/web-services/src/utils/env.ts
+:000000 100644 0000000000000000000000000000000000000000 8bda29bc0c77f2043a04134e3420b6008a8e5623 A	apps/web-services/src/utils/nodebb-helper.ts

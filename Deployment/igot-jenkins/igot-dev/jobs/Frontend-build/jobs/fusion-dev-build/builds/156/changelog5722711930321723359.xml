@@ -1,0 +1,68 @@
+commit e97c35242b3b867dce1c7ca320aa52650f114800
+tree 0d42867a806879c8eca647640fc9480098044fa4
+parent d1fd407a8a548fc62bffc5c083858f905ae96647
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:37:07 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:37:07 +0530
+
+    Style updated
+
+
+:100644 100644 0e08b306be290380acd1b4e02eaea314a6b50203 afc96b7fa58254c1a637c079f1fea4d39e460da6 M	apps/fusion/src/styles.scss
+commit d1fd407a8a548fc62bffc5c083858f905ae96647
+tree 36d1bb80a1005bb34ac8a5f862034a630d8c0a67
+parent 466cb69adedeb49de111e6b1dca14acd91a451c0
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:12:44 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:13:08 +0530
+
+    lint fix
+
+
+:100644 100644 24a6b8dea92e8f76367253bcbc366de227421475 456d27e8c3d8a3d87204139dec7350f1378ce034 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 466cb69adedeb49de111e6b1dca14acd91a451c0
+tree 1a43e81252c39d7602292f9ba17464dcac9d5d0b
+parent cac9c25a40da1bdaf23a0f93bfcf787e8e21de79
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:03:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:13:08 +0530
+
+    competence fixes
+
+
+:100644 100644 7fb5645ff70f8f787d27514ded2200c099c37b8f ee9c25876cb657a9f4581ecf0be613ec0c936775 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.html
+commit cac9c25a40da1bdaf23a0f93bfcf787e8e21de79
+tree b7a0cc6c0eafe44d27214eb5936eba478c17e293
+parent ba78c687d227a43a6c0556ff52402fbeb58d2e15
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:02:47 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:13:08 +0530
+
+    competence fixes
+
+
+:100644 100644 b4cbe2ce9c724952dc0b10b39df888d8e763d438 3a0fcc51321a008868652172e9684ffad5f24c03 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 f79a09c4656a4907ad07a4f626672134627f638a 882e29f0cdf90acd9ec91504ef3d24c9b55793d0 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 0e16ef45df3822544bb445da9eb8ccd76337cf08 840d777237ef15b1d233d44471a720c624c4e612 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.scss
+:100644 100644 97db6c47fe090ef158a46b637de249f2d2dfbe70 e8130fae4fe219152456534126367fc56404f388 M	apps/fusion/project/ws/app/src/lib/routes/competencies/models/competencies.model.ts
+:100644 100644 e5c734853d0569669d36559d0357d282bc0f9c9e 4ef2527d90abe684b25e1434f3714903178a7143 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 767607761cac8e24f4ae67f1471f6b568c7b822a c78b8923f1845b7915127140986e5d4743157d92 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.scss
+commit ba78c687d227a43a6c0556ff52402fbeb58d2e15
+tree 65ede2f25aa9a288e7bcd4d0a2769b2e63f2e271
+parent 352b06763989e3534890b279d1dde75b0750ad61
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-27 20:28:47 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-27 21:13:08 +0530
+
+    bugs with NAv and scrom player Update
+
+
+:100644 100644 24aba8220dc4018ab2bdc10efe428da994d4e9c8 7fb5645ff70f8f787d27514ded2200c099c37b8f M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.html
+:100644 100644 24683a10a3287f8f42d8c55a31677962891828ea b4cbe2ce9c724952dc0b10b39df888d8e763d438 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 f48db966b7754faa15a0ea10590e98ec13b391eb e5c734853d0569669d36559d0357d282bc0f9c9e M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 25e07d050e5bf42aee596f75f45e5661f46aec00 89b53d0af8586a4365643be483b12f3621d7fe36 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 deeb37ee271c03b8ce2aadfa10e17b3c6f27b228 6664d4c446fb38ab2df3306a0ec20ec1bcd32765 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.ts
+:100644 100644 5deb0c8b77880826025459c4e67edf249cda56f4 fe2d6d4c1a15ddef4ba5d8a8ee75672a4fa9c84c M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-create/goal-create.component.html
+:100644 100644 2fae497ea2cf7b338977960fa46e945f98f67052 cb41bfa0720f4a1640f8dac68e9183b281f6b0d0 M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-notification/goal-notification.component.html
+:100644 100644 593dc47537616eb437d14743b3f0d0f6e23e14c5 f50baf9f30040160568dfbfef89d7d966cc0381f M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-track/goal-track.component.html
+:100644 100644 da70fcdb774162a3a66ffba4d55f67371795013c 682b82275ee38ee9dec37028b98dfd7243c31e9d M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-create/playlist-create.component.html
+:100644 100644 a588a454984b0464e03aaa632886505bfd5eabff 91f106993a39c679b8981aaba83265e95c5af839 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 f7d1a4bbdf244f7d4862035327cf8a354dcc8ac3 95c5fcb77192ce0803e8486e3abbd03741ecc2fd M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.html
+:100644 100644 fefdc2b5c23666e7e0750a21a5282d0f048fd16f 94672c089e7457085d2ec0101aa6555f6b7aaadf M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 b7c87250cc2855dffd9687f894fefce0dbd52468 46ac05a0ba5f751fe05cdc28edaad124f52d19db M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+:100644 100644 f0cd4822d888e5ec857cf8bba755ef602f0daa1a 24a6b8dea92e8f76367253bcbc366de227421475 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

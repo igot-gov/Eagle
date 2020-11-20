@@ -1,0 +1,11 @@
+commit fe6f4cf1ac49731e2585275f7ea749a8bfbdbc5f
+tree a13f22e130e6afc9f0e082ee5c788e215a6fd21d
+parent b62fa089aa2a02847bafc33940a8e2f6dd0b82e5
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 13:11:20 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 13:11:20 +0530
+
+    Task #52174: Added competency schema
+
+
+:000000 100644 0000000000000000000000000000000000000000 ce0d3d1091bd3731b1417320db797baa4c91366d A	java/registry/src/main/resources/public/_schemas/Competency.json
+:100644 100644 22fa4cdc715c223087973e3aac948972bf1d10dd dd72baba828d5e33a6505996703bef0b135be4cf M	java/registry/src/main/resources/public/_schemas/UserProfile.json

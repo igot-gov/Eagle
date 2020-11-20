@@ -1,0 +1,82 @@
+commit f9a302e30813e326ee758a5df15b4cf1c5184dea
+tree 42bdb48b01ef6666de3e2278e5c10b2d69a0b3cb
+parent eb08ad65305922ac3f0c0ec1b3ea73ff3022bd9c
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-24 11:36:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-24 11:36:54 +0530
+
+    API Request Updated
+
+
+:100644 100644 d3f86044cc40aeb070c4be5e237a3b35509c9a0b 5119fa6553a5321333c692dec2d5b90fe701bd89 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+commit eb08ad65305922ac3f0c0ec1b3ea73ff3022bd9c
+tree 888c57784373fdcc0129edea432ae77e2ab99dc0
+parent df7a970fce021f19ac8eb40b5638610aa26ad0c1
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-23 16:57:26 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-23 16:57:26 +0530
+
+    Result => pass, fail removed from quiz
+
+
+:100644 100644 6cfd9a2eede21121ab703b39fce18bb8cc0b5976 9c76e2830f07b1d5871488dc35647b19a7be1f86 M	apps/fusion/project/ws/viewer/src/lib/plugins/quiz/quiz.component.html
+commit df7a970fce021f19ac8eb40b5638610aa26ad0c1
+tree a4df990c1ea9160cac26514c4659e2010609af0a
+parent 8a155983b2f557db3b0b8a1db180500590086d5b
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-23 15:14:47 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-23 15:14:47 +0530
+
+    LMS APIS
+
+
+:100644 100644 4a055a1b3436f5d42ee51e941493541ae419332e 185cf8e462afc652bb0779f5021e077256387edd M	apps/fusion/package.json
+:100644 100644 a65df69692bce59e134b20d3186013ec90eae044 f120082036bf504c9d4ac757c22a847526e27d3a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 8a155983b2f557db3b0b8a1db180500590086d5b
+tree f70ed1ec1852cb000c654e35dc2d7af5a8ba8873
+parent 5ee6fbb8ee737e37b12d775fef32df504fb3080a
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:21:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:21:49 +0530
+
+    build fix
+
+
+:100644 100644 b11ef3f9662600094c9e3c736365a94391e6baf6 a588a454984b0464e03aaa632886505bfd5eabff M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+commit 5ee6fbb8ee737e37b12d775fef32df504fb3080a
+tree 5924d6a78de1f4790ea82153c5de64e51db21bb7
+parent 66e9a804b1e8eb6a2c41d7e934365dde21fdb279
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:00:18 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-22 23:07:23 +0530
+
+    lint fix
+
+
+:100644 100644 8f7373830c380f218f1aa34ea4cb880e7979b4be b11ef3f9662600094c9e3c736365a94391e6baf6 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 1dcaf3d717cf1d2f775bee6bb8c69139ce577722 e0d17e6a435e59949993919f24b2de13f80c13c5 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.ts
+:000000 100644 0000000000000000000000000000000000000000 369bf2cf28ec7868a22694f69323cbe8c007876c A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/live-html-editor/live-html-editor.component.ts
+commit 66e9a804b1e8eb6a2c41d7e934365dde21fdb279
+tree c6c1dd1343790e61e4092bcde5fce88c8882e380
+parent dfa607571ad2eb7c853a2507a7079e92b2421892
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-07-22 22:41:46 +0530
+committer GitHub <noreply@github.com> 2020-07-22 22:41:46 +0530
+
+    revert changes by amit
+
+:100644 100644 c37daf6900005fa22aacecf99b84e1ca4d047058 8f7373830c380f218f1aa34ea4cb880e7979b4be M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+commit dfa607571ad2eb7c853a2507a7079e92b2421892
+tree 67723b9a5dbf74aeb870181523330686fdc074d5
+parent e5efe1a75b51dea6a70b593f5aa227fca6e2a446
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-22 21:48:22 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-22 21:48:36 +0530
+
+    fixes including course Finish Button
+
+
+:100644 100644 41dd64ad0c3a71f51368aa2b72dea75ea89031a9 5deb0c8b77880826025459c4e67edf249cda56f4 M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-create/goal-create.component.html
+:100644 100644 994d427f3f684eca75ba2b5468f02bb370b0b152 da70fcdb774162a3a66ffba4d55f67371795013c M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-create/playlist-create.component.html
+:100644 100644 3a5e06c09a53b2a3fd6c58f027b2d7515c12397c c37daf6900005fa22aacecf99b84e1ca4d047058 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.html
+:100644 100644 c533bbcac9b3124d5a1ec0004bd8eadc18402b50 f7d1a4bbdf244f7d4862035327cf8a354dcc8ac3 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.html
+:100644 100644 febd3d5bdff96c7654092a091d276756acd5d2f6 1dcaf3d717cf1d2f775bee6bb8c69139ce577722 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.ts
+:100644 100644 299cca681fb5f5660fd349333b9f9c2c10fbc8f6 bb4ad728c2bb021ec33ce3c55a807f3314c0cb3a M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 3a637cf3f9b89664bce5c61b82b718682b20d33f bb14a299782a37a276a3f7852aec646b6c4a2cd6 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.scss
+:100644 100644 50f88fa0ce7da2f80dcd1e58e777e892dd09a0a0 55a064ff4086769ce576e6899b794678e0495019 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/create/create.component.html
+:100644 100644 074ac99bdc135b2a1216c32d31bb9e44c7a9c2b3 b812b6d3c7bfa2daa07e46b99eb4ed51199f1b99 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/channel/channel.module.ts
+:100644 100644 c61560be25a404b8fdc42c9d7b35b9d059323b53 dc828a5303ad88dc44af49d54d99e703ebb2f57d M	apps/fusion/project/ws/viewer/src/lib/components/viewer-top-bar/viewer-top-bar.component.html
+:100644 100644 f6f66b0a09d6e51081b99a214bf3dbe8b3e25747 33145f4c19154f09ec96e17672f59247d362d8bb M	apps/fusion/src/themes/_theme-mixins.scss

@@ -1,0 +1,11 @@
+commit 6a0698663a37db0fce82a09141731528f9120025
+tree ddbc20a8cc98cd264dba9333a1c6ee63b6cb7383
+parent 30b7b0f2a8dd77ebbf3b6259b283e661a271e6f1
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-27 18:48:30 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-27 18:48:30 +0530
+
+    Updated configuration values for producer & consumer
+
+:100644 100644 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 3cbb1d959aee30a29ffafc15269012a18e6ecfae M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 9c42193bef11a63e401973d65d7be9552ac6de30 eb2cde6fbba1c5a4e474df52dba77ff1627ad8ac M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ProducerConfiguration.java
+:100644 100644 9da68b51be8cb34ce013e6a56ddfe97571f51952 081a0a1b19b8f378e11222c78cfe842c398dcd14 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/ProducerServiceImpl.java

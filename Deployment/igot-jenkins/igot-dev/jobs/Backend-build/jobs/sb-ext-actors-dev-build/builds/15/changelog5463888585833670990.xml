@@ -1,0 +1,11 @@
+commit c335eb7508a67907f5f10834e808f70398759784
+tree 87af01be42d1fad1da1d8671d264a918ecf49a35
+parent 9cf2c911feebe0f3ec14787dd318d465706be098
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-26 11:25:29 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-26 11:25:29 +0530
+
+    Issue #51347 enabling search template v6
+
+
+:100644 100644 cb99dc82575bebd98b1d40d60c456f6724d5a7e4 7a097e28b0d29d92fe6244231ffdac2e8502ab1e M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchControllerv6.java
+:100644 100644 33b765cc69693cb1f1d01252d7ebacfedeb0b7fc 10e20e0071209cfd23ab842a4875c61a92ab2225 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/util/SearchConstantsv6.java

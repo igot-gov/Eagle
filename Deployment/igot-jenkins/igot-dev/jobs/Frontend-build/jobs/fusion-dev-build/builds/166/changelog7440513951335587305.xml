@@ -1,0 +1,71 @@
+commit 45828865fba24fb56c982d426e7ea78a8ad4505e
+tree 2ecf111efd5df1885276544a73cf6f896c2899f4
+parent be8e46b521925339e8888e9f557dfc9d12f4bd10
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-30 17:55:01 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-30 17:55:01 +0530
+
+    access id update
+
+
+:100644 100644 a693cd9a42ac419044a5010205b7becdd7cac907 091728418632db40b8728350907a51a50adba779 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+:100644 100644 1f77756a984d60b25e9ab9bf8b67e8601aa09d48 4e2e4c86bd2842da6b5f576746678389891820c8 M	apps/client-assets/assets/configurations/localhost_3000/site.config.json
+commit be8e46b521925339e8888e9f557dfc9d12f4bd10
+tree 079bcc5a0911247f291876a31473bac40ee5c889
+parent 9303b63cfdb828ceced23047eca72eefff2281f7
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-30 17:52:50 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-30 17:53:34 +0530
+
+    access fix 2
+
+
+:100644 100644 83a65e957d0bc02e4f77bd938589c7155fbf5299 2f6269047c3fb55d35403b98530607d2d03199cd M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.html
+:100644 100644 20f428ad36c074ad91545dc89b5a1d3d36add751 f1c9fb725d9a647b9055b2cc16b5b8c85a9fc798 M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.ts
+:100644 100644 85d8270903b8358d0c3644b2d434ab0755713c21 91fde7d7d062e9a6c02a8cc84e822f40e8384571 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.ts
+:100644 100644 17d10bdb44fb7ce1170e6951ccda136d90b86296 f6faed70ee9ba3994faf9f83984b2cd362609d6d M	apps/fusion/library/ws-widget/collection/src/lib/btn-feature/btn-feature.component.html
+:100644 100644 897f28305b1b9a39980e5969af83e50f8c113f04 1e145914cfb1e05e46c151b7319241030b53727b M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 3f701fe4519eb9668844d443a9a36b6554e82135 4ecb374d493fbb479531afbd637366daa9704f86 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.ts
+:100644 100644 5247a23696b2d78013a0db1e60db69624344c2f1 fd7425a08626252d5ce9d385d41e9b9379c2ab0d M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.ts
+:100644 100644 4888852612b65049e3543f217695a3fa61117475 5fa07d0b1d2ce10b81ab52bbc9a6d9c9cdf7551a M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.ts
+:100644 100644 2c3d29f58a4ab239e637faf2ffc5cc5f3be7e332 91253597907ef45e0c6602a5f91729355a3add40 M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.html
+:100644 100644 74857d7961378e97e5c7a32d7805b9e1a33cd9e6 3a28fb142a2f54950df166bd7876c9a50f7f08ff M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.ts
+:100644 100644 9931819367cb2736b2d18db07c70854151fdd589 e7c4788af8c186b5336952af9ba660fc08650eb4 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-top/card-home-top.component.ts
+:100644 100644 dedbfc141be92516944ee3bdefba45d6a16b43d5 3ac8433a2ae01fceef41c940099c2eea1d25ad18 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 f1e4114cdf2df805e6270e8ba43da5be62f272e4 e59e57863955610684a1fdb73df3de465af3f81d M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 2de27f54472491533f1a40980ea1cca660cec76b 68e3296d1633dad16a001675e3ad6aa5b3f05b4f M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.ts
+:100644 100644 69d8bd5db2c86f1afb82a87ec6faf27aa00a84b1 7e90e8f856a3e796563c6fd3985d97d08c3160af M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.ts
+:100644 100644 232db1e80d826d87134186d1b68dc67d43555cc3 84525924f91cfbd5a3c13076b4d8923d67384ea5 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.ts
+:100644 100644 993d3db8653add6ac52b5dc00eb4730fc741fe9c 1f51c4d1467c98b2c9e06ab9385435b8d585bc68 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.ts
+:100644 100644 7c3c7023271c88a465a71805f90d6f47b05bf0ca 5f27a294a61d1542841a879b55913431020aa624 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.ts
+:100644 100644 894965c8c7210d8f0c7899f2a103b680a893f75c e54fee5a14a0bb5939906a5a42723807d4f6e66b M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.html
+:100644 100644 83059a483bdf1df8d560cb6228eb81c65999bd44 c9df59b6a06b43e75e8674153006415d91ae3a7e M	apps/fusion/library/ws-widget/collection/src/lib/page/page.component.ts
+:100644 100644 86a5ea4660c4e7fce5c4163f8b1085a90e8cd08a 010eedb53d690534312e47247f85043ceab407dc M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.ts
+:100644 100644 5861d9cfaa8d95206c7847568fee7e4451c5b758 ff82226a7f4974c8dccf428c7054f03e6338704a M	apps/fusion/library/ws-widget/utils/src/lib/helpers/horizontal-scroller/horizontal-scroller.component.html
+:100644 100644 9089629fd4230d5b611faf1aa598d2a8497bb552 37cfceb9a0c26f5f03afc619809c0d9e628c8703 M	apps/fusion/library/ws-widget/utils/src/lib/helpers/horizontal-scroller/horizontal-scroller.component.ts
+:100644 100644 4ca759b300e7f978742e5f308d53fb0a8c8dde44 74a1d03c22343049939d0a055d3d5df9d439d942 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 ca7d13813f28533b6355d21c41be0c325d7a8bbc 642aaa89082c90964ddc4508944b5bfd0dd17b35 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 840d777237ef15b1d233d44471a720c624c4e612 6ad3ed057a0dfcdaa833af976cdabb827419179d M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.scss
+:100644 100644 e5704ea2bb13585a23a3ff59257b81397e16d0fb 11fc0af9596facb05156680033ff390dbbeb9db3 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 e72bb8589eccc565053d41a8bad965f7080b3745 897e0e55dd31fc76db9ff7c5dd425ed9b18bbd63 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.html
+:100644 100644 55cba3e88e92cd3f2685d760d6d2a96ea004e9a7 d0bafdde074bff2d92babcaefe10b64fd60ec59a M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 7907a5c4ac89ef2289fba7ddcd1747d464d33388 216642a15afc850168810e57a2c9fe319b365d2a M	apps/fusion/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.html
+commit 8968c0e08cf5f0673d0d6ff7b8d3048f9b28db6a
+tree 6c572c6a0597efdf7037362102cdda8e81d3cc6c
+parent 26a16dc46210218d6d432fffeeb3b82a767c6362
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:17:37 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:17:37 +0530
+
+    Updated checkPdfProfanity API - using POST
+
+
+:100644 100644 884a0ff526bc8510d9f6255ef23d45c6c6310030 603818c95400b047d123fad4db119a89553eb030 M	apps/web-services/src/protectedApi_v8/contentValidation.ts
+commit 26a16dc46210218d6d432fffeeb3b82a767c6362
+tree cad8ff11897f6b6883462cb05690ed6494ae288a
+parent af368af9380d328945c78216071d96c8314ef21f
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:02:26 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 17:02:26 +0530
+
+    Added an API to check PDF file profanity
+
+
+:100644 100644 87226c8fc0bd61ad730fa8784cb6e2f7f1e257fb 884a0ff526bc8510d9f6255ef23d45c6c6310030 M	apps/web-services/src/protectedApi_v8/contentValidation.ts
+:100644 100644 ed0e1cd81e42eb932b168a93a80177c98cd532d0 7829809cd5bd90e732098c5cd7f518901c233dbd M	apps/web-services/src/utils/env.ts

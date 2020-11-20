@@ -1,0 +1,33 @@
+commit 71a94ac4c3d48983c75cfaf5be22de1808fbaf9d
+tree d61a6bef33bc2c98a7eb90046a4cea91ed5b23c0
+parent a44f05a1fea9539b76cc46c31de5b3aff631e753
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-09 12:01:03 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-09 12:01:03 +0530
+
+    Task #51483: Network-hub apis added
+
+
+:000000 100644 0000000000000000000000000000000000000000 381a12321bdc59c2ccbde4bf7e98dfa45a27ea22 A	apps/web-services/src/protectedApi_v8/network-hub.ts
+:100644 100644 cd74c85140dc8d33ce46774b103df3df5078b88f e4c3254664a21e495089adf069f0539374b637a8 M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts
+commit a44f05a1fea9539b76cc46c31de5b3aff631e753
+tree c950f808f29f8972c1ab83f08b1716518b11ad76
+parent 6e43cb9dc7c7fde42e68dceb59e8a5fef86fe5a6
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-04 12:12:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-04 12:12:46 +0530
+
+    Web page Style and theme updated
+
+
+:100644 100644 66a97719ad45c598a09615fd738a055f1c8f1585 11339daa7680b089aa918c64b34c2373d9b9d708 M	apps/fusion/project/ws/viewer/src/lib/plugins/web-module/web-module.component.ts
+:100644 100644 e66127441733257c25a0a6e42a449d1fcad51fd9 86afc14dab1e7f24b2361242fd80d43f202c3d13 M	apps/fusion/src/themes/_theme-mixins.scss
+commit 6e43cb9dc7c7fde42e68dceb59e8a5fef86fe5a6
+tree 676003f10fe738fc506683bcbcd20c9f26da5c49
+parent 4449207233ad4e722678333ef6e983c3641417ed
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 19:42:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 19:42:51 +0530
+
+    Task #51435,#51438: Fixed issues in the user profile
+
+
+:100644 100644 c558ac5995739f145b54479c97f7ba5bf58f1a22 912c85fc81dc89eebc5fcb2dd40b55446ee5b6a4 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 5b5fb6bff6d5a1d907e66a1f94d2b035c165befe 115f9f89ff28a282894a1f2cf6b0d52cbc970371 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts

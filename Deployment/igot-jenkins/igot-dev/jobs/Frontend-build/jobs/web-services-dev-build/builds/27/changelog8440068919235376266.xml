@@ -1,0 +1,30 @@
+commit cd53b84c671f5e7cbe1048c27b9e8d7072cae165
+tree f30eecb4169de71a019339db403338f8390e3cf6
+parent cb013397dab28c99339e216c0809be246d364596
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:52:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:53:07 +0530
+
+    lint fix
+
+
+:100644 100644 4011093c7d79a96def2e29d320d38110e9f1afd0 4149e2ef3c11e36a6bb3558211cda3ce196b0492 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit cb013397dab28c99339e216c0809be246d364596
+tree 61d8cc2d050ef855fc31d9001a4c93bb95d3ec97
+parent 9a117f2d0d562b7b21f73a8df443599a486fe0eb
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:49:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:53:07 +0530
+
+    posterImage added to interface
+
+
+:100644 100644 6ef0805b56e5904bf49222ca8e2f5b46a186d623 226e0a711ada99f7694b4420ee4aeac38b1e1afe M	apps/web-services/src/models/content.model.ts
+commit 9a117f2d0d562b7b21f73a8df443599a486fe0eb
+tree e992afbe52283b511422be076a13c81e85567794
+parent 303740faa4a4335b80a57325771c2886c2776e90
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:49:08 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-21 15:53:07 +0530
+
+    posterImage added to interface
+
+
+:100644 100644 fee19726341787e4b0577ae9a0bdd9be3e54425b 6ef0805b56e5904bf49222ca8e2f5b46a186d623 M	apps/web-services/src/models/content.model.ts

@@ -1,0 +1,121 @@
+commit 3dcd107a37a73d3d29e6188cea03a635838e6e74
+tree c9affe52efd723f3043e948ad82b3824ea8ed1f2
+parent 0acbf8ce64aecd4a62f49c3258b0778f80d15582
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 12:36:53 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 12:36:53 +0530
+
+    lint fix
+
+
+:100644 100644 714555a0e5856b49ffeed197d862228d6a97e984 a174bcb0285d58be37af85f1ec894d1915c474f2 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/career-hub.module.ts
+commit 0acbf8ce64aecd4a62f49c3258b0778f80d15582
+tree 48cddbb0b89859716f9d1d3ac8cf05957a56927b
+parent 0d41f1aa1365c5eb6525b69072b18f85caa77268
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 12:24:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 12:24:29 +0530
+
+    Banner added to hubs
+
+
+:100644 100644 917a2a3ecb0fe22bfcf0c7fdcabc121860ac5a3d 36a9f28da0aed2adc7e931965468e5f62804c263 M	apps/client-assets/assets/configurations/localhost_3000/feature/career.json
+:100644 100644 c61b177dacedfdd88355ddbc16270e6fcaab8c3e 20779152933c71629cf0d50a49c9577799012b0d M	apps/client-assets/assets/configurations/localhost_3000/feature/discuss.json
+:100644 100644 1156277f785eceec2a66c26003e915d186ee286f b4cbcb363cf7ea5eaa516c988201a307b3d9ea88 M	apps/client-assets/assets/configurations/localhost_3000/page/learn.json
+:100644 100644 649c4845caeec0f9192c34d6416e3a0cb9bb4662 3c77ecf0a443e0f8eb02c6e957741b91aae3519e M	apps/client-assets/assets/configurations/localhost_3000/page/network.json
+:000000 100644 0000000000000000000000000000000000000000 6fa82bc9073e46c0ed88a4bb2d6514389444d9e1 A	apps/client-assets/assets/instances/eagle/banners/hubs/career/l.png
+:000000 100644 0000000000000000000000000000000000000000 0f86ca1df69a0d049cfe93d43fd2a523abbca24d A	apps/client-assets/assets/instances/eagle/banners/hubs/career/m.png
+:000000 100644 0000000000000000000000000000000000000000 ed59b7db878ea8d53e87a32d23e7fbe4c9568868 A	apps/client-assets/assets/instances/eagle/banners/hubs/career/s.png
+:000000 100644 0000000000000000000000000000000000000000 2e8cc548bfdda973bace51067c6040e04a315283 A	apps/client-assets/assets/instances/eagle/banners/hubs/career/xl.png
+:000000 100644 0000000000000000000000000000000000000000 d25238321081994ba4ce03ab398a47e3bcdc2372 A	apps/client-assets/assets/instances/eagle/banners/hubs/career/xs.png
+:000000 100644 0000000000000000000000000000000000000000 a88153c62c6029225c409051bd342d19cb25c96e A	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/l.png
+:000000 100644 0000000000000000000000000000000000000000 5ac7a4744d4c7c01c72ca36557635858ffb8ec65 A	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/m.png
+:000000 100644 0000000000000000000000000000000000000000 596acc68180332e981ab49d0b90a98198e42268e A	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/s.png
+:000000 100644 0000000000000000000000000000000000000000 63fa28954b55f4e88fda467eac249523abd9e00a A	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/xl.png
+:000000 100644 0000000000000000000000000000000000000000 babb6fe9f8a5325343407c1fe3c341887be56d62 A	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/xs.png
+:000000 100644 0000000000000000000000000000000000000000 d5c2c02f26a6318d0b346219af4f0d6172e6e79a A	apps/client-assets/assets/instances/eagle/banners/hubs/learning/l.png
+:000000 100644 0000000000000000000000000000000000000000 ce6b0c4d7ff424cc24f22763b663cce6dbcac577 A	apps/client-assets/assets/instances/eagle/banners/hubs/learning/m.png
+:000000 100644 0000000000000000000000000000000000000000 1eac4da40bf568eaaa9f0141278f10c42314658e A	apps/client-assets/assets/instances/eagle/banners/hubs/learning/s.png
+:000000 100644 0000000000000000000000000000000000000000 2e59cc610ec6b3a282bb927efaa388eede36dae3 A	apps/client-assets/assets/instances/eagle/banners/hubs/learning/xl.png
+:000000 100644 0000000000000000000000000000000000000000 f366b8846f719c3c4711e64772a2c085531e8486 A	apps/client-assets/assets/instances/eagle/banners/hubs/learning/xs.png
+:000000 100644 0000000000000000000000000000000000000000 372db4c4416626238322372d317502c4b4044d28 A	apps/client-assets/assets/instances/eagle/banners/hubs/network/l.png
+:000000 100644 0000000000000000000000000000000000000000 11480b884b06282e06da62275e40c29bc69628c8 A	apps/client-assets/assets/instances/eagle/banners/hubs/network/m.png
+:000000 100644 0000000000000000000000000000000000000000 60dd93ffa4e08caa6f95bdc5589c9c4184c217c2 A	apps/client-assets/assets/instances/eagle/banners/hubs/network/s.png
+:000000 100644 0000000000000000000000000000000000000000 b8f6ccd64aaaabfbbaae8dafde02deeb076b76fa A	apps/client-assets/assets/instances/eagle/banners/hubs/network/xl.png
+:000000 100644 0000000000000000000000000000000000000000 db1358b89774fb66b595a1883d99cb1cf1286c14 A	apps/client-assets/assets/instances/eagle/banners/hubs/network/xs.png
+:100644 100644 8d1e60014dea664e235bcb018fab4ec7416fa65f 714555a0e5856b49ffeed197d862228d6a97e984 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/career-hub.module.ts
+:100644 100644 80448aa2df313f94d01835686bc61009088bdfc2 d9d2454314b78af409c8429425d133b1aa265fc8 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers-home/careers-home.component.html
+:100644 100644 44d1a3f365a3611fa214c8ab540f20f02788ee45 a2975ee2c15a51e1fb479d42a26f0d6f983d9d0d M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers-home/careers-home.component.ts
+:100644 100644 bac87c1aa5a3d260de1e147f8a8eaf8d785beb15 fbbbeef2ac03030ac93ea96d32027e9d5c95482c M	apps/fusion/project/ws/app/src/lib/routes/discuss/discuss.module.ts
+:100644 100644 11bf5c41c7abe22e72a71d37ca67c52ef795a953 717264ecf02a3a9f04f312efc033b24837f9f93d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 cf06b053e24a37e42c435a08335998363e75e504 ade84f3cbb3ae1b54a85085f42df1eae97added4 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-home/discuss.component.html
+:100644 100644 cf7e22a70b8e486364b406b6c132b6ea8c0036fd 99adcf6d994f6858f623d302ab71cd6178f99771 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-home/discuss.component.scss
+:100644 100644 0ab7b8d9463b3d4a69b9ebf45cbfe1e94404ee62 a826d14af2327977b7d66f96a3e1d910c53d1cec M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-home/discuss.component.ts
+commit 0d41f1aa1365c5eb6525b69072b18f85caa77268
+tree a17e86a0c9e06da9c44d587a1331f838f6d859b0
+parent 807eddd1167a2ae51fd0b4d751003a45e6bc0df0
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-02 11:08:45 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-02 11:08:53 +0530
+
+    banner fix
+
+
+:100644 100644 b8c66c103a7813b48b10d06710ecf2cd4378e99b c61b177dacedfdd88355ddbc16270e6fcaab8c3e M	apps/client-assets/assets/configurations/localhost_3000/feature/discuss.json
+:100644 100644 a5518cd06679efb073702677dd924039978f2ef1 04a763232cf2039e919419051ff11e3afba95fc2 M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.scss
+:100644 100644 56c15b27d07d5b1c4f1b43d456ca018a36c8c15f 12eeea9751248ea11865100298a1f7ac39a8e39d M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.scss
+:100644 100644 3dab1eba12625b55bf3577c619cc190bef8f42af 2f26d9e5a072c9394ac65c67ffbc23f5a8d917b6 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.scss
+:100644 100644 b0bdee8041ab6483757d49e626431b8a697266c6 7ea242dd7bfa8201f7c141206aa29615766ed2f3 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.scss
+:100644 100644 b0bdee8041ab6483757d49e626431b8a697266c6 7ea242dd7bfa8201f7c141206aa29615766ed2f3 M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.scss
+:100644 100644 842794d53792c367321adff58cc563f2c67f073c 8c145b3c015f62319c8dcc6784fff1db6f45a41c M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.scss
+:100644 100644 c8d974863d818e23e38f39e67f6151eef193f22a 17b3dc3faaf54e1f980156320274bf455c93e418 M	apps/fusion/library/ws-widget/collection/src/lib/sliders/sliders.component.scss
+:100644 100644 37cfceb9a0c26f5f03afc619809c0d9e628c8703 9089629fd4230d5b611faf1aa598d2a8497bb552 M	apps/fusion/library/ws-widget/utils/src/lib/helpers/horizontal-scroller/horizontal-scroller.component.ts
+:100644 100644 226f5c0be430040ed5fd27de022cede7f3440a33 fd3138160b095f0918d1ef4265f0899545c2001b M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+commit 807eddd1167a2ae51fd0b4d751003a45e6bc0df0
+tree 1b1edef26b87f5a4aed81b823251cc93755ba679
+parent 87d3ec3c0f2ea2c4fa73ebc2dc33ec52981e5a34
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-02 01:15:55 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-02 01:15:55 +0530
+
+    Task #51647: click on related posts fixed and handled redirection data reload
+
+
+:100644 100644 88b0589349acce937d0663c0df82731f6ab9ae67 a9287cb2b1b466dc36150dc9f1322a0a57dc2c76 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/related-discussion/related-discussion.component.html
+:100644 100644 05b973578c66bb1437322586cc578fdd3383f8fb bb964a1216853fa7701ec1f1957a659bdbd53944 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.html
+:100644 100644 acdedc937a208084a42f95d326e9d07c57b5b5a8 7e409c2431610fc50c72b81db5e44cd853e4967e M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.scss
+:100644 100644 16adc42adbaecbc7cef93579aea4a3befd7641a8 97cf4ae45ceb5e360bcbddcb2928b7ff8d4612bb M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.ts
+commit 87d3ec3c0f2ea2c4fa73ebc2dc33ec52981e5a34
+tree f88ea5f88b7573beaee5766c5eb145145c64f22c
+parent 46fca1ce3dad98f5ca5dd6e0b9ec0bc25c648136
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-02 01:13:25 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-02 01:13:25 +0530
+
+    Task #51801: Search feature added in career hub
+
+
+:100644 100644 cabb6710a340527f4b84b1abc5296c427cc49fbd d3e08297e802b2eb25a65842994419e2ca86a6a2 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/career-detail/career-detail.component.html
+:100644 100644 ec5088e2caf7b8aefbd33f61d63ea58a44f87bc1 1a449dcc6522581919ea036556d2b9ab0ba06d5b M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.html
+commit 46fca1ce3dad98f5ca5dd6e0b9ec0bc25c648136
+tree 17670646412b94391a426664b7691393ae938b01
+parent 0d69855a9a2a502c9d97ddf5f531faf817f55513
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-02 01:11:41 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-02 01:11:41 +0530
+
+    Task #51801: Added new filter pipe for career hub search
+
+
+:000000 100644 0000000000000000000000000000000000000000 7ea4e9b054b5c5d1eb21a3075d0a5a48f210dce7 A	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.module.ts
+:000000 100644 0000000000000000000000000000000000000000 ad40b66045f13f1d69723e4250286b4fb907fab9 A	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.pipe.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 66b1c36580eb59c950abd03e9f8882e07026582f A	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.pipe.ts
+:100644 100644 e336670b474a5a1706ffda8ff47938bc173af82d 8d1e60014dea664e235bcb018fab4ec7416fa65f M	apps/fusion/project/ws/app/src/lib/routes/career-hub/career-hub.module.ts
+commit 35eab15b94a3514ff558be9736872e7cef1332c3
+tree 1cc28cb336b15358969e0c93263383f824fcbb7f
+parent 74d6abaa23cbfe4d51bf98c8bb9c6d4174f95bd6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-01 19:16:01 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-01 19:16:01 +0530
+
+    Task #51801:  careerhub changes
+
+
+:100644 100644 869dadbd3c254c0929e9d08debd059ac44c5ce19 bdce6eb9ec531a1c4a812deb36cfa4cbf02ea967 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/career-detail/career-detail.component.ts
+:100644 100644 f58c1f8bc7e46f7c525daf870c3dd86a1bd8bcf8 44d1a3f365a3611fa214c8ab540f20f02788ee45 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers-home/careers-home.component.ts
+:100644 100644 c5d35d9872671b412f44214aaed5efe3f87a9ef2 ec5088e2caf7b8aefbd33f61d63ea58a44f87bc1 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.html
+:100644 100644 9295d0d6ea8564cf1c96453b02e29b1a57ff7752 36bce87be7005a6d0ae4e81ff8d5467a4b26e510 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.scss
+:100644 100644 0fba0070f992aee66e4a80acaf9f2061fd744375 df638683823f8e25f8c19c37e6cad99e747ce0a5 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.ts

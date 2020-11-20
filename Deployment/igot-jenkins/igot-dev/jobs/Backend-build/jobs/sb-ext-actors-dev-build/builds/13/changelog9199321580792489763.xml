@@ -1,0 +1,11 @@
+commit e00cd6c81791a771e468059579b264c9344345fa
+tree 4e7296d790cba666a5f42f4a16d589d338801e0b
+parent 38e418dbd9958625c5a6b03fa5b0144b2d3c7596
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 18:31:57 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 18:31:57 +0530
+
+    Issue #51322 Added smtp props
+
+
+:100644 100644 c3280cc084fa35fc9d8c34722c89ca0904be708d 857d4d40306a77cea55f0f91bf769d851c9688ba M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java
+:100644 100644 b5797b9ea153fdb230a97761f2e523226492b3f6 47732ddf6fc77a4534f6684e097ca052d7e1ec84 M	apps/sb-ext-actors/src/main/java/com/infosys/util/LexJsonKey.java

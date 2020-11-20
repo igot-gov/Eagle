@@ -1,0 +1,19 @@
+commit 412c70ccd20de7518e714cabaec8cced0906c234
+tree 90306987666ce52f925e22d946e9ae30637b45aa
+parent e5d14b9e3fd094dd87035b1229c999431c89fb01
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 12:24:07 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 12:24:07 +0530
+
+    Logger object is updated.
+
+:100644 100644 93fc54ee5885ed78d3b1a29bbb5593ebf9ee253a 07abd5f31d9fb4dce97a5483b5be94f6509836cf M	apps/notifications-module/src/main/java/com/infosys/lex/notification/util/NotificationTemplateUtil.java
+commit 80f3d4b5ed69fe981fba4974e6d98c0405ebfd69
+tree 0f0108733ea9a0ba864a781e09316ade7aaed7d0
+parent f46c96acfb6436d1560d535766f9af57cd845021
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 12:11:11 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 12:11:11 +0530
+
+     BCC list issue is fixed
+
+
+:100644 100644 8b06886accf6738a546a453dadf633de899382b3 bfd3e696d39c019090d80fef7e97c8b661bd91d0 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/EmailServiceImpl.java

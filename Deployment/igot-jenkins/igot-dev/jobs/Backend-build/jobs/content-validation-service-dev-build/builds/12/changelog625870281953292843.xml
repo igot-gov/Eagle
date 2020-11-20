@@ -1,0 +1,10 @@
+commit 0be19e8cd0b3946cd217086b80e33dec267619b8
+tree ea197b56c0baab410016f19c51b5db2b48795c3a
+parent 7c2285a79002e86c3d14fe01fcc346f25a969056
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-31 12:08:00 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-31 12:08:00 +0530
+
+    Corrected spelling of param and time calculation
+
+:100644 100644 4aaa4b45c5f2e8ab0394382cf0236c559b8c03ea 936d203a5d849e70099c18981987087dd5ae2a7e M	src/main/java/com/eagle/contentvalidation/model/ProfanityWordFrequency.java
+:100644 100644 641aa93208e58ba5714e165699a24fc119ab9922 f28261a5d1e0d61cc09c9eabba3c1b80212d5daa M	src/main/java/com/eagle/contentvalidation/service/impl/ContentValidationServiceImpl.java

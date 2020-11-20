@@ -1,0 +1,87 @@
+commit 37ed00b172c60b0f3c7bd121626ace04fa48be24
+tree 902cb5c6a939a483b0efce85ea170504972ae0ec
+parent e4f7450a5a7c5d44c1b05dcb6f633cb6c1edf26a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 14:33:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 14:33:27 +0530
+
+    Task #51455: Fixed the invald character in excel issue
+
+
+:100644 100644 f20781d8c1dcf9403d4f3732651adc6cfe04e494 ceef9e04e3ca3f3c347617f43010be6ff49bfb5b M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+commit 691d7c194bd5bcb6f244c709fc62020869cff739
+tree 07979558db64d68f8bf6a49eb518ce51749fd69a
+parent e4f7450a5a7c5d44c1b05dcb6f633cb6c1edf26a
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-03 14:27:33 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-03 14:27:55 +0530
+
+    quiz quick
+
+
+:100644 100644 6633294f9895da6cb4cab30af9752f9b8700e60b 11f2c65d2c83adcfee709043d2a7d9abd9a14722 M	apps/fusion/project/ws/author/src/lib/modules/viewer/viewer.component.ts
+:100644 100644 dffb46bacbe2fee1287ae5d0ebf1e7a41e777942 912d48d0d7be426e41153e9eb5b63896ea07eb4c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:100644 100644 bc4004c7af995de1757ef3629b20d5cc7798804c bc33b9501504794def6d8cd6bd9285576edc68d5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 5f0ed165a830784713180624e4456d6656ba4386 7c227e434c13807776c278c202e541c8c271a207 M	apps/fusion/project/ws/viewer/src/lib/routes/quiz/quiz.component.ts
+:100644 100644 4898a7bd4378d58ada4f1a3c96636f4c629a9dcf be4055f06b8345195bce7b2e1c623a6ba625f8be M	apps/fusion/project/ws/viewer/src/lib/viewer.resolve.ts
+commit e4f7450a5a7c5d44c1b05dcb6f633cb6c1edf26a
+tree 900192e4ac5dfd003f0c35a3c087368df229a9e8
+parent 1b463778cebfb24fad163de84fe45db245dd5419
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 12:27:45 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 12:27:45 +0530
+
+    Task #51455: Fix for handling empty cols in excel
+
+
+:100644 100644 68724ce325e43ce5144e953cf603b5475177659b f20781d8c1dcf9403d4f3732651adc6cfe04e494 M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+commit 1b463778cebfb24fad163de84fe45db245dd5419
+tree 666a1a38224a7e956ea8ea5e70b49847d7b06b3f
+parent 20eec4af5659b58c9b101c1f0dd3b777b440ed8e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:08:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:08:48 +0530
+
+    Task #51400: Removed logs added for testing
+
+
+:100644 100644 8d19b8908e94e2520a16bae6522ef6fdc9e47a5c 19733d0827ee639511ad94766e40c36cff62260f M	apps/web-services/src/protectedApi_v8/user/roles.ts
+commit 20eec4af5659b58c9b101c1f0dd3b777b440ed8e
+tree 02f57cbfbe731cacd6e2e99718124129abe2cef0
+parent 5eb8143cd54e26bc3fa177c1b879dc53abe5ce1f
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:07:20 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 21:07:20 +0530
+
+    Task #51400: New sample file added with roles
+
+
+:100644 100644 9f709d22987838ce5430e1780e762d118f5f8f92 3277f4fa3c153b27f195c3c6e711fa63c96cd1ce M	apps/client-assets/assets/common/user-bulk-upload-sample.xlsx
+commit 5eb8143cd54e26bc3fa177c1b879dc53abe5ce1f
+tree 6b33d3e2d72dc7b4c1d415ad296232e98c153a2c
+parent 022de24916ac9aa58b6284095541db88b9d95cc9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 20:44:13 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 20:44:13 +0530
+
+    Task #51400:  Added logs for testing
+
+
+:100644 100644 fb10e3dd80bde6997c92238cd604b5d8bcbd9e52 8d19b8908e94e2520a16bae6522ef6fdc9e47a5c M	apps/web-services/src/protectedApi_v8/user/roles.ts
+commit 022de24916ac9aa58b6284095541db88b9d95cc9
+tree 7c6a9d412c5b208251c1953cc0995b127506ef4e
+parent 2dcd5a706f14afaaeb016c1023a2a6711205b64e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:19:46 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:19:46 +0530
+
+    Task #51400: Fixed lint errors
+
+
+:100644 100644 adde3c0ae067c66a1423164d9dc100046c2a696f 3fdff5559df92dfec055e5aefcc822cca0b57b7c M	apps/web-services/src/protectedApi_v8/content.ts
+:100644 100644 4149e2ef3c11e36a6bb3558211cda3ce196b0492 bc56ba9d20828471fc4bb4064a632b0865c8e3ce M	apps/web-services/src/protectedApi_v8/scrom.ts
+:100644 100644 788dbc6efc85d3366ec49e20aaf6f74271534f71 a1c5c688301467b47d8ebf773251206224c356d6 M	apps/web-services/src/utils/helpers.ts
+commit 2dcd5a706f14afaaeb016c1023a2a6711205b64e
+tree 2f6e2963ed6a770d5da0584396d44e3b7a185bfb
+parent 9416c05cf8c43b90b3b510ead53184d1c82dba6c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:15:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-02 19:15:48 +0530
+
+    Task #51400: bulk upload with roles Api changes
+
+
+:100644 100644 c639e73a7b0d782b968728780115e78585391f1c 68724ce325e43ce5144e953cf603b5475177659b M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+:100644 100644 0bd7340859c06b2e3673855c0ad396cb6f0010b0 fb10e3dd80bde6997c92238cd604b5d8bcbd9e52 M	apps/web-services/src/protectedApi_v8/user/roles.ts

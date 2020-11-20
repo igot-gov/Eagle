@@ -1,0 +1,10 @@
+commit 47ad84b1edf8a00355845fac0798254a0f806a81
+tree d3a5260e0333fc4cdcd7919eda892c90645281c2
+parent dc085f716b25f41e8d66047c5d66797a7548f6f8
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-07 14:45:23 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-07 14:45:23 +0530
+
+    console removed
+
+
+:100644 100644 cb73e29c5a81b26a0d519952ba76de7974643d9b 63ab5d87a6acd42a48b1c0e1f755a2631aaa45d8 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts

@@ -1,0 +1,10 @@
+commit 12772219d0a2acbf3f8d81a7b61e8d95744f60e3
+tree fd246a16f8e04347069554642bc75d0e8d39d337
+parent 515a4dfbdc139733745ced08d5e895817fb260ef
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-14 18:28:09 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-14 18:28:09 +0530
+
+    Task #51514: Added meta fields in the req
+
+
+:100644 100644 a7e48ae6a81990cc9aac5125bd7ddf246727ae19 3b385fdf274056271b9e3871a14cd3e88cc28837 M	apps/web-services/src/authoring/constants/default-meta.ts

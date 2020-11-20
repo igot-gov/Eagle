@@ -1,0 +1,10 @@
+commit d0147338e686f3937f1f8c9bc3e51c5f3a9b01f2
+tree 69a7288fac4e801fc07bf3cd6da9ac1ec05d01b4
+parent ba97016230af635f4bf96a77aa7f17315769380c
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 20:57:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 20:57:29 +0530
+
+    message event fix
+
+
+:100644 100644 19e53e6cc0a1b3035ee50a7f0ff50bb408cdfe49 7945d5a64c335bbe59b612f8a9cb60521ac6b490 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

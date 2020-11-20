@@ -1,0 +1,11 @@
+commit 02e7347786067b0987069882fa8d9a4845c7b64e
+tree 7eff914804a69de1a0347fe144606c2eab10d65c
+parent ab83244f2825dec2757577f8c735398b8cb87e68
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 14:37:23 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 14:37:23 +0530
+
+    Task #51611: Network hub api now fetching data from open saber
+
+
+:100644 100644 941c695ed68b275e97ebc87ec40b6d72dcd29485 1a91d017f372d3facc4320af9dbf3fd4b6165aa7 M	src/publicApi_v8/network-hub.ts
+:100644 100644 a147138945399512045a7705d0c3bf58c29471e1 95345f9531a16c66fa794b7ab4ff640c3957334d M	src/service/registry.ts

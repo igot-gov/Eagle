@@ -1,0 +1,10 @@
+commit 1ebf0008014bf2b866fd9835a71fbfa277f49377
+tree 25dae388441108cf39245c9a2c71f8fe2e7d30c6
+parent 3ac81cad79ca5a9c88c780bee8c17296a547a491
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 21:52:17 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-27 21:52:17 +0530
+
+    Defect #52124 sort null check
+
+
+:100644 100644 c7b722e6630d75bfefe1b857289f015280faf693 b85950fe3c8334c438e7c3584ae70a543329d098 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

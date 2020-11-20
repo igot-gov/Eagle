@@ -1,0 +1,69 @@
+commit af368af9380d328945c78216071d96c8314ef21f
+tree a793daf94a840a9d9ab3f53967d9705d0c736cb8
+parent 71e79b09cbb264a2a9082b1481e88b56e2b67c4f
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 11:53:38 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 11:53:38 +0530
+
+    Added an API to check the profanity directly
+
+
+:100644 100644 9ad7e7f31e55424fcbbc3688469df904e4119694 87226c8fc0bd61ad730fa8784cb6e2f7f1e257fb M	apps/web-services/src/protectedApi_v8/contentValidation.ts
+:100644 100644 f0e0224aaa21d87b48bcbf8d3e9267b9a9dc6b74 ed0e1cd81e42eb932b168a93a80177c98cd532d0 M	apps/web-services/src/utils/env.ts
+commit b06df48a353fff735fb438ca9cc69f5f0f2bf628
+tree 5dd2f4981409fe2b900f502677ba682a2a047565
+parent f916771fd535820ab539c62c9f7b593509657c23
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 19:00:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 19:00:31 +0530
+
+    competence search fix
+
+
+:100644 100644 f85708099c3957f79ce8a13d1100b666a05644fd 00dc3fc72c61cf15d91b40d0db7064a298f7f97c M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 89b53d0af8586a4365643be483b12f3621d7fe36 a0e38b328cca56f25196d36a91bc6bccf19ec5c7 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit f916771fd535820ab539c62c9f7b593509657c23
+tree 8bdcb9cca93ae361e09a2b944dacb428f31a21aa
+parent 074a367d0f1ad8c30bd0fa7f9038a4cee45e4f01
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 18:22:56 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 18:22:56 +0530
+
+    web and axe fix
+
+
+:100644 100644 1a8687bf7d5ebf20f3a641bf0cfaaa5774bdf3bd 6ce751c33d33582858638718b413759ed646f5ad M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.html
+:100644 100644 fcd469849e38b8ffeacf5a51236fcb86e9884b39 897f28305b1b9a39980e5969af83e50f8c113f04 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 028f0d926edb357a53655ee2d0ed3be94bcb1ba7 c6839518a1e2292dc966a25aaf1fcb909dd98a7b M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 19f26a1a879bae4980e986d3ce5fa763fcc37661 915dd2607cef66fc4335789f53b41cee229b6517 M	apps/fusion/library/ws-widget/collection/src/lib/picker-content/picker-content.component.html
+:100644 100644 28dc70d73c179a7d32f14603a31b9b13fa7ac1ec 6c84ed32489e8544fb3515763bcdbbc020eb509f M	apps/fusion/library/ws-widget/collection/src/lib/picker-content/picker-content.component.scss
+:100644 100644 84f81f327c9a4cd4520326191a978ce5ef24e231 0b5838f0afa6f4b0203d9a664c13f92d6a3ee7a5 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-tags/discuss-tags.component.html
+:100644 100644 09ac0a0be02592eeb009abe05e2a98c307188c46 5b8f8191e44ffca6edee76aceabd6cee7eed2fd1 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.html
+commit 074a367d0f1ad8c30bd0fa7f9038a4cee45e4f01
+tree 6efb296ae5d1cb3b6efe6c8e7507db45817b0806
+parent ca8bdf8d22863ec63c774bc7fb6d11dc2ab35eda
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 16:59:26 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 16:59:26 +0530
+
+    wave and access updates
+
+
+:100644 100644 5fbd40bb2a19536b7835652bade647a1825822e0 028f0d926edb357a53655ee2d0ed3be94bcb1ba7 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 ccacfd83d0d4374a5b18a2c1a937e55930805966 894965c8c7210d8f0c7899f2a103b680a893f75c M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.html
+:100644 100644 d521ba54f83485012856dc020b002b46d529d34a d3d7d41bda3d9e90b27c0dc43ff4916a98d5f21e M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 8b6172d1ed6914d85ac85fd6dafd6861e915af69 65efc4a88e9af00127b8d6fc519b6ac057450f1d M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 4431a8bad6660b8df7ad918f385fe1c2526ade76 297d4b7e07b4fea4ea7099d57908708eb42f580d M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.html
+:100644 100644 6bcfc647c8db7a347cbac1091e1fef3062e2c983 678f7a0dec7ee74cd25cc083a04c1aae1ec44a7e M	apps/fusion/src/index.html
+:100644 100644 98b5d3dfd934ea57a59c72a44c23fe494c8ccf33 35ff280f3edc79137e4ad4b5767afc24b556ff8f M	apps/fusion/src/styles/styles.scss
+:100644 100644 f367195f60ccc973b93364c460edf1255cd2e622 9bc360f8db9f6a295ca91f0b5b8f3259dd3e0506 M	apps/fusion/src/themes/_theme-mixins.scss
+commit ca8bdf8d22863ec63c774bc7fb6d11dc2ab35eda
+tree de221f22e00a47ca3b9b46a555b339d0f3874d13
+parent 06ef03b822654d4c88c754863e69f2c6961f75fd
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:42:00 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:42:00 +0530
+
+    access fix 1
+
+
+:100644 100644 0846f0bdf2375113ce466e4d4aa2b6671c1ca246 718a602cbf5085c8b98e27f0f4b4a196967e1228 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback-v2/components/btn-content-feedback-v2/btn-content-feedback-v2.component.html
+:100644 100644 9df6a8ef195a7434cc8e618da51552c20ff7fe0c f9c5c8a4905bc635c4a50939a40d77cc968ac2c4 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-like/btn-content-like.component.html
+:100644 100644 575f16fb56a20aa3ce15f18a52a2e33fb5075f19 0797ee9a13cb571c31cd7f792dc98e4c4d3c0ef7 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share.component.html
+:100644 100644 3d8d59eb16b477eb838a829f13bffddefa8b4550 3b1d3c9080b0b2a0d7511e298f88f0b7629d945e M	apps/fusion/library/ws-widget/collection/src/lib/btn-goals/btn-goals.component.html
+:100644 100644 21768e6579f9fb980a51faa86159393aad3c794e 9cf0502f4bb42cb771c395b4b61f3cf8670d4f81 M	apps/fusion/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.component.html

@@ -1,0 +1,45 @@
+commit 95f49b385ed54872c962125d9bb3a806e3ba75fe
+tree bb615147aaa040d3200c056eaa3c92c53a02b423
+parent b06df48a353fff735fb438ca9cc69f5f0f2bf628
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-30 20:13:24 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-30 20:13:24 +0530
+
+    Task #0000: Accessibility issues fix
+
+
+:100644 100644 d3d7d41bda3d9e90b27c0dc43ff4916a98d5f21e 5680db94a3e5d0c18eeb6f7b628029240b09d10d M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+commit 4be13316d71721d51366248ac9ee13f4732bf1eb
+tree a48252b21d7c2025a77205d817343f7268bfb636
+parent 1e7a1f6b4dd75d8f2aa31e1312b60c3c6f1c7bc6
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-30 19:04:42 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-30 19:04:42 +0530
+
+    dark theme fix : competence
+
+
+:100644 100644 11fc0af9596facb05156680033ff390dbbeb9db3 69b7357bfb16cc848ed63a3b128cf8543ae84906 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 9bc360f8db9f6a295ca91f0b5b8f3259dd3e0506 e03bad0e5347c5b7d6e626d45d61adf0e65d308d M	apps/fusion/src/themes/_theme-mixins.scss
+commit 1e7a1f6b4dd75d8f2aa31e1312b60c3c6f1c7bc6
+tree e61aa547af47a51440e63b09b3c630e34a35180b
+parent a0b2e146587cf9218311b97f94cdcf101528c193
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-30 18:26:04 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-30 18:26:20 +0530
+
+    tab fix in home page
+
+
+:100644 100644 f6faed70ee9ba3994faf9f83984b2cd362609d6d eab0e9aa47cf3671a0d45b18dd0b2321b55423e5 M	apps/fusion/library/ws-widget/collection/src/lib/btn-feature/btn-feature.component.html
+:100644 100644 a3dd6ac6a8a8191f88f09b0437984dfff5ffa941 4f4f68b25ecf9213101472bb9ac06946b24ff354 M	apps/fusion/library/ws-widget/collection/src/lib/card-carrier-home/card-carrier-home.component.html
+:100644 100644 568ce0011f562fc1afc71d04136f0b4d6b95d1a2 f089d471112c9b1b230a2d47838ab32322400580 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 544154bdf30989c396fb38b33e38a1ed3867874e 100b9cf00af98633699008c62960b2cb38befe05 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.html
+:100644 100644 557773e32559ba7b83b816875feb0fab48d82d91 fbfb9bc0d609d0ddad094e058f93a7ee03c1267c M	apps/fusion/src/app/routes/features/features.component.html
+commit 9f64ed41933303289f93c4d60e73bb6a8d82f68f
+tree 9358634b4b0b0688533d1e3e7eaf20cfa321635c
+parent 9303b63cfdb828ceced23047eca72eefff2281f7
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 18:14:21 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-30 18:14:21 +0530
+
+    Trying with new API name to avoid cloudfront error
+
+
+:100644 100644 603818c95400b047d123fad4db119a89553eb030 4b8c3df668b8c22a035a07ccd36130693060c16a M	apps/web-services/src/protectedApi_v8/contentValidation.ts

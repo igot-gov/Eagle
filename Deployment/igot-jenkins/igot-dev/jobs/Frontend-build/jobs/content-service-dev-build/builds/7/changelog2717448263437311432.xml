@@ -1,0 +1,31 @@
+commit e68a665a310930c922a4aef1c6ceba6f0eb1fe22
+tree bde8d2a7f2c6ba1bbd47ba5046ff130253e96a66
+parent b5809d7dbe4e354566b4c5d65ed535223e0b3a1b
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:19:19 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:19:19 +0530
+
+    commented Extra logs
+
+
+:100644 100644 0f22736c2db62e39720b94c2174049432ff3c89f 2adb857e964826fa384f0e6969bb0d623e1b0a11 M	apps/content-service/File_server/S3/analytics-frame.html
+commit b5809d7dbe4e354566b4c5d65ed535223e0b3a1b
+tree 0509b5b4769014b8b8ad67f057358cc569d529cb
+parent 629897121590674c4df41fde3402c4fbcd7a33e5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:17:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:17:21 +0530
+
+    scrom event to telemetry
+
+
+:100644 100644 f44e292661f6a6856f373027584c5bdc71b36c5b 140b008d2253414345fcea11b4d09798b4ec62af M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:100644 100644 c8ea2fe4bb1e3a50617bb5efc8f1bd8801ce4c66 486f04930b166f2a5197e9ee6ad55408335feb13 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit 629897121590674c4df41fde3402c4fbcd7a33e5
+tree b5225d5eb40589c61163d0a8a3739bcfc24d6f72
+parent 0096960f57ae19ccf88f73ee4c487a77ce73bdaa
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 18:26:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 18:26:38 +0530
+
+    Task #51329: Uncommented old social media sharing code
+
+
+:100644 100644 c7d112df733dc45583f0fa579f35fa9bfb16f094 937aacefb59aeaf6c5d87de9fc4697317e8a47ca M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.html

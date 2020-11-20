@@ -1,0 +1,10 @@
+commit 78f2065e069d91fd0d71ba1b06100a1463bff2a4
+tree 907f30029259d8ee3c1a37e6c7cc42c458fe70e9
+parent 388e968dfc585f41ba563f614aba61c7abcc1470
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-21 18:03:53 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-21 18:03:53 +0530
+
+    Added correct org in userservice
+
+
+:100644 100644 be11f7cec6eb1f16d21b811c046db516acdcd9aa 11a158b4cf3b9e18ac24d4ba2e8a5c6b3d57aa17 M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/UserUtilityServiceImpl.java

@@ -1,0 +1,12 @@
+commit dff976c4cfd8cf02602a064099e44ffa57d1d7d4
+tree f0b0604f54eb80bc988539aad84a39581fbf948b
+parent 27d816666fa5eca2e39e52f6264e2ade6fea0368
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 16:54:12 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 16:54:12 +0530
+
+    Added logger
+
+
+:100644 100644 78e0f9425b231d0057e0aac2dffcd5203ac7ac50 511a3f0070e13d64182630d757166f8d640f78ee M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 da6fb1e2ef875f887b25d70252f5858906ee062e 9da68b51be8cb34ce013e6a56ddfe97571f51952 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/ProducerServiceImpl.java
+:100644 100644 ac0b5f7ab8d9f30ce318f05273e2207d3e91dbbe f97804b21ec5bd80c4fa469ec01eaab78b38fc84 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/util/NotificationTemplateUtil.java

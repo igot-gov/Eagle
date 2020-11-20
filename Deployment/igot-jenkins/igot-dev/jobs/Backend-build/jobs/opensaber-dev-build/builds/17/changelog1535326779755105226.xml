@@ -1,0 +1,10 @@
+commit f9b9720d196bb3fd69576e1b3a0ac71348e0fa10
+tree 77651e60f0e173676daa033f33ffb3d3024affd9
+parent 8e6166823a25e0b8e1cbf9daf75d4546b9b1d796
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 19:57:55 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 19:57:55 +0530
+
+    Read set to Elastic
+
+
+:100755 100755 d0c823dd0da7d8ca106023b9af8fc9dc83a0f57e 3e53a9935fb8c0256b459ff67d0d2b13d308ee2a M	java/registry/src/main/resources/application.yml

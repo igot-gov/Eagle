@@ -1,0 +1,83 @@
+commit 5235b1373c23701359d54361654e9a0cf2c1d5ac
+tree 4e366f0a220acee765e7461982bd141f5ae3e1f7
+parent 08e2463884f07f66c84e685bcd4856cae2ff6cca
+author usha <meetsamal.usha@gmail.com> 2020-10-30 15:12:54 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-30 15:12:54 +0530
+
+    toc page node url changes
+
+
+:100644 100644 d89fdabce3105b19263a94379025924f0c9c0f47 f4823027ae1515eda1cb7009624318108b823b2a M	apps/social-share/api/content.js
+commit 2832226618912bce2a210a23f5248dd2ed9b8e77
+tree 05de536daa2d5c77a88bc324c3b4d7279f8d30e2
+parent 1169ee6f6aa82bd504d1c00dd5b139f2e02c0684
+author usha <meetsamal.usha@gmail.com> 2020-10-30 14:04:28 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-30 14:04:28 +0530
+
+    social share button with generic params and toc dialog changes
+
+
+:100644 100644 6f6f2ed3b16f6fe4ec3289a18fd323eb814575ea 0aa6bef6d81bfff0f4a1bc623d03868270153df6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.html
+:100644 100644 c42bb3f6f7dd848b11b8fb6e8cc15a229a01a88b 7ff733290eb929fa8dcac0e9dec67d94db182086 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+:100644 100644 9a1ac65a6eae364c2a814ee02e5a79309c999d53 51c10f167a38a34faf78a8bf72cec4c3fa526076 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+:100644 100644 eef7ca91fe5ad41b711529e3b9f6dbc135644559 3cf4e16722a4f07cb39677b105952809bfdd8298 M	apps/fusion/library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share/btn-twitter-share.component.ts
+commit 08e2463884f07f66c84e685bcd4856cae2ff6cca
+tree 614398a137ccd1ad850ed399fc68daeb209faae3
+parent e83d8245fb852b3c8637a0f29fe003920bb30a60
+author usha <meetsamal.usha@gmail.com> 2020-10-30 10:51:59 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-30 10:51:59 +0530
+
+    badges api integration
+
+
+:000000 100644 0000000000000000000000000000000000000000 7f953ec3d01c02836172b3380ede54df8d576df0 A	apps/social-share/api/badges.js
+:100644 100644 f5a26f73641c909acdd96c87f41ed3ddda5b91e5 d89fdabce3105b19263a94379025924f0c9c0f47 M	apps/social-share/api/content.js
+:100644 100644 b829a076fc10770a1988db20445ff22d19d0ac0f 5d7e6d75d22f8375721a1f054dce7d5ab6ce43ca M	apps/social-share/api/playlist.js
+commit 1169ee6f6aa82bd504d1c00dd5b139f2e02c0684
+tree ef7332f1e47b00b3612a27a6d3fe53110a2dba62
+parent 1b21bc0f69d67474addeb7aa9756c51999c53fa0
+author usha <meetsamal.usha@gmail.com> 2020-10-29 21:57:39 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-29 21:57:39 +0530
+
+    social share dialog for playlist , goals and btn component id changes
+
+
+:100644 100644 937aacefb59aeaf6c5d87de9fc4697317e8a47ca 6f6f2ed3b16f6fe4ec3289a18fd323eb814575ea M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.html
+:100644 100644 5fc26b8663e74b7d837ca85b68074117b7e1deb9 c42bb3f6f7dd848b11b8fb6e8cc15a229a01a88b M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+:100644 100644 58d0eee5464cc222113b040733f62fd2e306b534 9a1ac65a6eae364c2a814ee02e5a79309c999d53 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts
+:100644 100644 f85708099c3957f79ce8a13d1100b666a05644fd 00dc3fc72c61cf15d91b40d0db7064a298f7f97c M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 2360ef17fc3291f6d474e1784325375158bb89a2 eef7ca91fe5ad41b711529e3b9f6dbc135644559 M	apps/fusion/library/ws-widget/collection/src/lib/btn-twitter-share/btn-twitter-share/btn-twitter-share.component.ts
+:100644 100644 5c6f660363dfcdb5aca2f01225e1e9bc2e39417a 22872b1bc4d6bf82e9a58b9e46ad5b0b3a203ef9 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-share-dialog/goal-share-dialog.component.html
+:100644 100644 82500e29eebfe8ec85d1cb409a2780cc3b34a290 d6b494e747363f9da7722d4b5ad02db5d57ff44f M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-share-dialog/goal-share-dialog.component.ts
+:100644 100644 eb7f363e1ee4024fcb862a8da2991aa9f663f113 53408f7420bd5eee6d584cc97079d44377682354 M	apps/fusion/project/ws/app/src/lib/routes/goals/goals.module.ts
+:100644 100644 5c5167c623fb3803b6e96b1f02cad232b232aad5 422e6321dba33141baae7112ee2dbaf0118b359f M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-share-dialog/playlist-share-dialog.component.html
+:100644 100644 54d3aca5409822157f19e581d77e812ed2140812 8bbfe4d036b4d5a2039956d3c6d63ba5d3ec51de M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-share-dialog/playlist-share-dialog.component.ts
+:100644 100644 f01fe3ffae7e37f9cd76ec6896e5169938180062 13674317570053b6926e5b159cec650079811e44 M	apps/fusion/project/ws/app/src/lib/routes/playlist/playlist.module.ts
+commit c17fdc4789e4742c9df75c5c0312889e131351f2
+tree 185b7fb98fef15e57e04688d942ddd44c8a48ced
+parent 5102267b953228f07dffa033ef87d11e92c88e8e
+author usha <meetsamal.usha@gmail.com> 2020-10-29 17:38:13 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-29 17:38:13 +0530
+
+    content route change
+
+
+:100644 100644 4515611bbe0feb058de16fdd6c9a85deb0090a2c f5a26f73641c909acdd96c87f41ed3ddda5b91e5 M	apps/social-share/api/content.js
+:100644 100644 5bea5bb035617c429a9290ae53bd2227698c10aa decbe52f1ad96646ae8452ea347e982d797ffbcc M	apps/social-share/api/index.js
+:100644 100644 2a48ff82dc17c9dfd9c6fafbf8efc685476e2e68 b829a076fc10770a1988db20445ff22d19d0ac0f M	apps/social-share/api/playlist.js
+commit 1b21bc0f69d67474addeb7aa9756c51999c53fa0
+tree 2bfd4536838425b63b036b8c994418e70b82e7bc
+parent 0eeb63523de7794425f82d288a7036c80c202077
+author usha <meetsamal.usha@gmail.com> 2020-10-29 17:23:34 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-29 17:23:34 +0530
+
+    social share changes for different api
+
+
+:000000 100644 0000000000000000000000000000000000000000 4515611bbe0feb058de16fdd6c9a85deb0090a2c A	apps/social-share/api/content.js
+:000000 100644 0000000000000000000000000000000000000000 5bea5bb035617c429a9290ae53bd2227698c10aa A	apps/social-share/api/index.js
+:000000 100644 0000000000000000000000000000000000000000 2a48ff82dc17c9dfd9c6fafbf8efc685476e2e68 A	apps/social-share/api/playlist.js
+:100644 000000 0be8744a42641dce32c4d4fb895f12c56146dc09 0000000000000000000000000000000000000000 D	apps/social-share/apis/contentapi.js
+:100644 100644 d45583fc2e2eb9fee3e4ab97ff4c5ebf005f091a facb92c5ed50ed35ea70a122bf91d0c8c7db4a6c M	apps/social-share/app.js
+:100644 100644 fb6983cbd23ee0109755f8dd55e004a78b5de478 fb6983cbd23ee0109755f8dd55e004a78b5de478 R100	apps/social-share/image/favicon.png	apps/social-share/public/image/favicon.png
+:100644 000000 cf5fa8831f93779775be58ad2c9551dc33bfa25e 0000000000000000000000000000000000000000 D	apps/social-share/views/bot.jade

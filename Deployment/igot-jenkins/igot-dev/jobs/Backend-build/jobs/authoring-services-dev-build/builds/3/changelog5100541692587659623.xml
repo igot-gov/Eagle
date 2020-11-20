@@ -1,0 +1,10 @@
+commit 5efcd49c77b5d03c90c6c1771c308929bf252a9b
+tree 55b627e2dc2348fe8c3deae50bd6271d209eca67
+parent f054ee2aec216367650d1e7f0172bda82e814103
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-19 12:31:29 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-19 12:31:29 +0530
+
+    Refactored the response key for scrom
+
+
+:100644 100644 3c1661bcd5b696a20f54c11086e36008f2d1b4a5 1a2dd212fd192e3ffc637a0f41b0a8a4e6a52f6f M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java

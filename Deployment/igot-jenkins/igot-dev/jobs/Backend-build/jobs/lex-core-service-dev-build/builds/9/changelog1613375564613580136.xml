@@ -1,0 +1,12 @@
+commit f103726b4dec0fe8c96ee95d31943206153b6e2b
+tree b6bea2f188e19f130f3adb8088ad234615f9af4b
+parent 5bc3bb497888e9019c8ba50ef001289ec2705161
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-18 18:46:29 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-18 18:46:29 +0530
+
+    Added creatorDetails for emails
+
+
+:100644 100644 a48904ef7601176f4006b444bea0059d73a8bb91 cc7af02b879a5d146b0c8c922b46e9b27d28c061 M	apps/lex-core-service/src/main/java/com/infosys/lex/hierarchy/service/HierarchyServiceImpl.java
+:100644 100644 6f6a15609f4750aa7f07d6f6687a9e302c174459 a33eca16a8d43822f654f5db14ae0ba4b56499d7 M	apps/lex-core-service/src/main/java/com/infosys/lex/learninghistory/service/LearningHistoryServiceImpl.java
+:100644 100644 3bb30a07bcb0ebd2b2ce30e574deabab61e2a8fa 8a7dab23714a8b2ef53819c022ed7cd1398b4383 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java

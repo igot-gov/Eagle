@@ -1,0 +1,12 @@
+commit 7e49dc7aca90a9f5418fbb0f0aecfdc29e208b03
+tree 641f907165c4e1c15d109840f32a31690ee6a204
+parent 15884719bbbf20f8c6fe40c158b015976c33cd87
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-30 12:09:01 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-30 12:09:01 +0530
+
+    Added profane word frequency
+
+
+:100644 100644 ee5791c79ecd816e2a238c474fe905f83a7d641b af3af4d603fddb27a5f4726c978049f52ebadb54 M	src/main/java/com/eagle/contentvalidation/config/Constants.java
+:100644 100644 7b32737805943927f05538c95c517c12d7579006 1f2b0187fdd7816b3074ec1ebed488dddb03935a M	src/main/java/com/eagle/contentvalidation/model/Profanity.java
+:100644 100644 a24a5aa4fa014c1fa705d070d14c3f45cb641f4c a1377dba0c96e915bfa7a65b2d802778065100d0 M	src/main/java/com/eagle/contentvalidation/service/impl/ContentValidationServiceImpl.java

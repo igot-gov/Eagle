@@ -1,0 +1,101 @@
+commit 2c81202792bdf1bc25be0803ae56dde841ba3879
+tree 54feb7dc1235a76f61d4193a71e67db6daae3841
+parent 1c4235ddee2697ff46c1b0d1c7204d3a6244a16c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 14:57:18 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 14:57:18 +0530
+
+    Task #52010: Fixed the heading text
+
+
+:100644 100644 7adfaa8f83541dbaee75c4ab720ec9d76bccf956 8bd3fb7545f69ef25a7fd364c8c46c20ddf11e70 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+commit 91628b6c549fbdccc51a65e8f152debe7787f496
+tree c700f1efb91e004cc9fb8e8bb419c28112701f46
+parent 1714f53bcf92f5e03df8231f8f3e383ea36208d6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 14:37:13 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 14:37:13 +0530
+
+    Task #52010: api integration of the network v2 module
+
+
+:100644 100644 4bfba90b3f1aef0b204af112266a958f6b6efc59 06fbadd51bb8fdc89f3ca9a509a36284e5655582 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.ts
+:100644 100644 7f1c1802e1598a0987f7aac565eaea3a5ce7329a 6879808a25bc8c7e0e7fb720dde28ba29b75b3a1 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 8c9a90e4517666c7db71d3cb5121d086b294a5cb 1c511e21c771801bcf3702b1d2b33ba556c45215 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.ts
+:100644 100644 116c4de78a96cb0c9031852752f004dd90da0b8a d44f92e2571084b0cae9f8210bbd0ffd3843f600 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-request-resolve.service.ts
+:100644 100644 3c260213a30ceb438f4b74e4e9570d92982e1759 8ba417c6e807e69b2ba4b401b115cca7dea7ebfd M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:100644 100644 1dc66f2c5b56079b3d25e8041eb28f49d8b58532 2bb01d38d130fc353e5c592cef0c0939cd2bcb73 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.ts
+:100644 100644 7906ea8c984389fca11c79de74c9aca05b1318f4 7adfaa8f83541dbaee75c4ab720ec9d76bccf956 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 5be994d05827f1baf0eb83348ac3613efe68940b 9640e90137c9fc6c23b963b92511754fee82b2ab M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 2971f885c138d25480c9013b9bd8109dd6306dfc 62944fdabbf936b1808cf6e85abaa9595248c556 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 178d1b2be1987442a653426ac095660bb0c53679 374208bce87213034ba6253d8158e46d1f02a9c0 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:100644 100644 6fe77aba792dcc286b96e5034de7772ee87d31ba 8a50009174bf3c8103372e086889404003176ca2 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:100644 100644 a51359a67e1f9131db967392d568bf866e0ce933 3a0e4752b1e92ed5b9c0e4e35168305f74e73d66 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.ts
+:100644 100644 fb1d38fb7182f99b1ef9f026efa5b1df1e2c0028 e801e23b7d1821272a9a672216ae3384f5af95dd M	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.ts
+commit f8148545d9cc51c02f8785cbab5e646fd680578a
+tree 2d4b520051bf77125b42f891244a007562a283a8
+parent 045fa0643a534229a22d8d15553cec3429769228
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 13:50:04 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 13:50:04 +0530
+
+    Task #52010: Fixed the connection update api
+
+
+:100644 100644 6011ca5642353eb0a03d1bf6a37e3f4182e57064 a980b3fc35c65edefee0c5a695ba35778aa3d175 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 045fa0643a534229a22d8d15553cec3429769228
+tree 3620e7dd6f938ec94e9cda66e47bee0053bb93f3
+parent 321fdecc0cf8e309aa40501c082d0d7e5f62417a
+author pritha-tarento <42533384+pritha-tarento@users.noreply.github.com> 2020-10-19 12:22:08 +0530
+committer GitHub <noreply@github.com> 2020-10-19 12:22:08 +0530
+
+    Update network.ts
+
+:100644 100644 59aed9bb9eff25282484930afa6180d95b06a75f 6011ca5642353eb0a03d1bf6a37e3f4182e57064 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 1714f53bcf92f5e03df8231f8f3e383ea36208d6
+tree 1a1d227fa0cb60329cfe7db2d2019af4a4d4e712
+parent 72b1d750df155f4e73792adef0e451eccd0dce52
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-19 10:43:50 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-19 10:43:50 +0530
+
+    css fixes on confirmation
+
+
+:100644 100644 e5931769a7a6a49f105a15f95c708cef1f358cd8 2e1e8014577cd39bd872092bca8ea5354f658714 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.html
+:100644 100644 03e87d98961595089f4ad30a8d28d3c6d52cbe9c 4780d16fe0eed9302ff77d3c3756ca576189141e M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.scss
+commit ccbbe0e8efbbe0b8bda1762ac68dfb3cc4ab6ffc
+tree 97ebf9d5bfcf12c3a09c713112b9a75335a159fc
+parent 2c04bd2e5de1dbae97249f88ac39b6702f04316c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:15:05 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:15:05 +0530
+
+    Task #52094 minor modifications
+
+
+:100644 100644 45de5b7da62bb5bd75d3c73cf692a7d989223d89 6bb916fdc72c388393e9cddc89d8c482a94bf584 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 2c04bd2e5de1dbae97249f88ac39b6702f04316c
+tree df29925c1eaa369d1f47d9afdc20428ac3a9c428
+parent d056d45f35b9237c8f719ce6570be90bbabc6c6f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:10:58 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:10:58 +0530
+
+    Task #52094 UI proxy changes on New Apis and request headers
+
+
+:100644 100644 5e64d038cdc79ec7639257e10c9b5759ebca8a10 45de5b7da62bb5bd75d3c73cf692a7d989223d89 M	apps/web-services/src/protectedApi_v8/network.ts
+commit 089663e28f74fb6867c114ee962244ec99ceb2b1
+tree 252f86535db1d617a6698096b8d3b56a9e8a5ddc
+parent a15570e9ab55c8f48dddbc5072a18f2e61afd1a3
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-18 20:35:59 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-18 20:35:59 +0530
+
+    added confirmation page
+
+
+:100644 100644 63434b3ff498053319c731e9e990cf9e10fbd423 503e9c653411ba8a38de4ca19b4186493c9bb1fc M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 48a3db266f6da4a617f811f35467a8997edf0e7a 5247a23696b2d78013a0db1e60db69624344c2f1 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.ts
+:000000 100644 0000000000000000000000000000000000000000 e5931769a7a6a49f105a15f95c708cef1f358cd8 A	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.html
+:000000 100644 0000000000000000000000000000000000000000 03e87d98961595089f4ad30a8d28d3c6d52cbe9c A	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.scss
+:000000 100644 0000000000000000000000000000000000000000 7b428bee7e7e60b8906234174ff0edb08abaf997 A	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.ts
+:100644 100644 c6514a482400a3cdcaed734a3e39c7eb1049ad67 1d37a384f7f8e706f84ca0162d8d2715deed9ef2 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/create.module.ts
+:100644 100644 1c0dd28880e971d7ca03578428411f639a4810af 4b7734861ffe5675473d0599e884155b8e53f0bf M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 45fdcb3e463278e456a756be9393d6cc2ad0a56f 541937063bb8301d77bfa598e5654661f17564b6 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.html
+:100644 100644 f850076f6653202d1801a96107ac57ae61f1c46b 7776330b29f1ebe6adce07a4b096059f5c0f55e3 M	apps/fusion/project/ws/author/src/lib/ws-auth-root-routing.module.ts
+:100644 100644 e4fa2f33c55e5cd9eb1798d0521bb3547beacef0 1b19dec80556205058de3980191e5e3d43cb09dd M	apps/fusion/src/app/routes/features/features.component.ts

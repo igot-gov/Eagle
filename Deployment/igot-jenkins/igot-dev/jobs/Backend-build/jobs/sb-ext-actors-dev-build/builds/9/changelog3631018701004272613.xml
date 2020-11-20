@@ -1,0 +1,10 @@
+commit b4f54c5a44bece1485ebe5e14ad34e18a9b38afb
+tree 74e4dfe338766004879cb6beb22d9ba306b85a76
+parent 92a9b1fb8116aa1937b5ed32b646e0d0a54fa853
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 19:48:18 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 19:48:18 +0530
+
+    Issue #51322 Added hibernate dialect
+
+
+:100644 100644 df497f55481c5acaab2ab96c6c78175cde054295 8c420134b47d2d9f1293ebf6a56eabc4a5429398 M	apps/sb-ext-actors/src/main/resources/application.properties

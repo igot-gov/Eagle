@@ -1,0 +1,10 @@
+commit 3036582ea0b6d222adfd87819d2e3df63a6aebc6
+tree c602460645dfca47cfbb7d4189e71179f95d660a
+parent 2ce2b6bfd8e6bfec253d077350773a65d59c12ce
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 23:42:57 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-16 23:42:57 +0530
+
+    Task #51560: Added extra error handler for nodeBB create
+
+
+:100644 100644 e47e4fad1c23f31ffe82fdab5c316bba1c626b7c 95306419a692cee3d9f327b2cdb9e91044b5e8c5 M	apps/web-services/src/protectedApi_v8/user/details.ts

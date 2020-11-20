@@ -1,0 +1,10 @@
+commit 551c2791009cc82c19923c58135f25d1739e7996
+tree 5490fb1e0a870955d95873b342cbc78ad5d5d861
+parent 63b57c961bc4c9d47f13432164140af3654d5d92
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-20 18:50:08 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-20 18:50:08 +0530
+
+    Added logs to multi search
+
+
+:100644 100644 4c69046b69d157efb31ffd55a0557b9d13a90b6a a13e3bac90956ea0d9ac722ff6112582fb6a3430 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java

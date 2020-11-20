@@ -1,0 +1,16 @@
+commit 45a6a2ff12519703a0fbea7cdd625cb333708ec1
+tree b2805c1b7f1f9f48074c7a9630499db3174023d6
+parent 9bbf5ca15f965020f4229be1231a6b5879429d71
+author amit-kumaryadav <amtydv630@gmail.com> 2020-09-30 20:22:31 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-09-30 20:22:31 +0530
+
+    Task #51692 MongoDB invocation issue
+
+
+:100644 100644 41c5e7b993b77412749f4df223d498d71074c10f 040f96076ec06307e6f9b5fd4a930e5d5ac2da8d M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/ProducerConfiguration.java
+:100644 100644 9c763c083ad84425135778ad9480fa8454b283bd d56dd7188aea177245cda52147b0828c6b64d344 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/consumer/NotifyHookConsumer.java
+:100644 000000 d09bbee0c27430b03b8438b6b150e2b8cafaff1e 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/consumer/NotifyHookConsumerConfig.java
+:100644 000000 50d3051bce6d5aac4ab041043e39a0c9acb20424 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/HashMapSerializer.java
+:100644 100644 bb85028a252f7d090bb9d7f4fd8a5576d75be8e0 cb2efffdf6d9062f0a4dae7570a0508d042ee931 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/NotifyHookProducer.java
+:100644 000000 9759419b552e34f5963bc80f6eaec2f6742295ea 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/producer/NotifyHookProducerConfig.java
+:100644 100644 80cdf6e498dd211c019f97b2a00620fb14cf76c5 d0c18a0c857dfce63cca5a432dbcc67cc3ab5234 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/NotifyHookServiceImpl.java

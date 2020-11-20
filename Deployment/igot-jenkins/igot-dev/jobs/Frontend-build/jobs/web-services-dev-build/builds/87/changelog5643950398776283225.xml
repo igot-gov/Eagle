@@ -1,0 +1,97 @@
+commit 790483251d07ea3cf65275f5166f1d4a85f10645
+tree b7d4be2b7303308cd1da633da02f3616c5d807b6
+parent 5734baeb2e6bfbaa6d9c8eda91075279baa8cf4c
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-14 13:26:09 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-14 13:26:09 +0530
+
+    Added search competency API
+
+
+:100644 100644 c459badd492ed7f9bfc41419d86b099b3ebd59b7 286b7218beb11a7c08b04ff73b9236b0955f72e1 M	apps/web-services/src/protectedApi_v8/competency.ts
+:100644 100644 4d3370171f30894f9f8b16a946e3ac01a706714a 6ab66812a0a7f4206bfdf6022258f1e3c06d9ea7 M	apps/web-services/src/protectedApi_v8/user/mandatoryContent.ts
+commit 40dc349a32fc39cdde4b3ef714428129baced792
+tree e9be49bacfa8815a403117d53f5a82523d7935fd
+parent 9a2e1fd80084a8f99a55d00b3d2bf5a847baa5e4
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-13 23:43:42 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-13 23:43:42 +0530
+
+    Updated nav for profile
+
+
+:100644 100644 f37a76fbac3eecea760a4c4ecfa489fe4c25c60b b5b3ac077696545baeff572d5b2a4d6b65a1709a M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 fd6b2598bb0af3df36f5b8ed664ff50e249c07f6 2de27f54472491533f1a40980ea1cca660cec76b M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.ts
+:100644 100644 3d0e911019bab55e99f495d24b1a29cc92f6503b 129db1d80e357a13e61706866590d62d799ca61f M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts
+:100644 100644 306309864e2b1a549aae934e24b98b9e63c474ff db80d7e7bf2014943c9e6b530c06777eae09259e M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-cohorts/app-toc-cohorts.component.ts
+:100644 100644 245b01c3637d2b10242f599804b3bf3f8af20db6 f343bf599c9f489c018891b007df700070250b96 M	apps/fusion/project/ws/app/src/lib/routes/search/routes/people/people.component.ts
+commit 9a2e1fd80084a8f99a55d00b3d2bf5a847baa5e4
+tree c7fca25684cc980fb2874b4e3c495870f163697f
+parent 7c3a5cb5f77d7bc55a215f32490990f8354056eb
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-13 23:03:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-13 23:03:59 +0530
+
+    build fix
+
+
+:100644 100644 d9ab893546db26217707da305b139a5a2f3b322b 8c31ea92d5ad4669149a04e20732ac01fbfedf3a M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.model.ts
+:100644 100644 4b43c50f6e278c1288b86aba5ace11e6a28ffe28 eaea70c726da91de917f6feea8d5afb4ea331471 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.html
+:100644 100644 795f7e325ab3f0eceb2b3b0d7c8d5a0a6efc79b9 85bf256628176ecc1cbfe0ad3208982b3f00ebcb M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.model.ts
+commit 77cda668d3889a2e035643b1f18425239fbafa56
+tree 6c0b4517691355efe2910e5a2ce07ccfacad6f96
+parent 5c6eb35dfbbc3261bf98179aa189273042c038bc
+author usha <meetsamal.usha@gmail.com> 2020-10-13 20:20:39 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-13 20:20:39 +0530
+
+    setting dynamic meta data for a single toc
+
+
+:100644 100644 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 bb90248396de0264c75d6f4e71e09fc223d65b2a M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+commit d83cbe649e24296f27ef97d5d54ab8a515651ca4
+tree acefc70b0d0886984ec51aee6159e4962c11c1fa
+parent f091ea289b3e8e2d62e981acedc4cf30ba79d5bd
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-13 20:01:21 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-13 20:01:21 +0530
+
+    Competency tagging initial commit
+
+
+:100644 100644 fd7496b34d35f1e48cfb453acc5823370adffc32 f7ba0b1eda9b1d55ff9464bae5bd06d2aa4e3b1b M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/interest/services/interest.service.ts
+:100644 100644 81582c5b74a51706920c5b1fb625d2169cfaaade 4cc470b39327b7886e3b0fedfa765f22ba0270b1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 80b7f5c3ab0042b6978e6cd42b31408fd75d7591 4e60486705ca5c7c68d55881b6b34120a1364f24 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 5cefad294f434165b30d1313396172cf22f768ef
+tree a1e8e52c436b5008f972cb4c93ba455c076fee41
+parent cce0c9fed73c5406e722392e07a9cb5cda9cfea6
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-13 19:56:11 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-13 19:56:11 +0530
+
+    person profile
+
+
+:100644 100644 2bf78f58faa7288ae7b56cfdf54bc80f421f9d5c 45dd1b8e520d4aa8a353d0266e1b2bfeabd2b899 M	apps/client-assets/assets/configurations/localhost_3000/feature/profile-v2.json
+:100644 100644 82fc6bf9860904a26ab499d3d3e9449ea49972ad ede95ecb5f4e44696c4694065ff25136f55571c5 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.scss
+:100644 100644 b4e9e018f5c53980a31eaba333e8b447c3602a77 f6a48ea480908aae5192a46433c9d8848133ca25 M	apps/fusion/library/ws-widget/collection/src/lib/collection.config.ts
+:100644 100644 0e361f6abacd9d1e2b8e6e64e6c8e1a655b1b581 3104d2e0358af4b30d4a8597a5a5398e5e4f9e41 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.html
+:100644 100644 cd0776b09790aa146a05abfb25bfd5f923276594 1e97dcff9b2c2d32e5062c5a88482c34c0e07734 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.scss
+:100644 100644 2df4cfc68e6f47887316cc081933b08d54126251 244abace28b1b858a855bda832a820c9f9f99e04 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.ts
+:000000 100644 0000000000000000000000000000000000000000 e4d538be1f816529d43b4969f17393ef14d05301 A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.model.ts
+:100644 100644 e072b883571ccdd335c1bf8d216b3172783d0123 7f840b9a155b0d79098416577988f66dea7022d5 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.module.ts
+:100644 100644 8dfb27cd187057033fc80720a85d3d2aded41b70 0c721aee3f223bb4da24455e30db1f24fee5a268 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.html
+:100644 100644 cd0776b09790aa146a05abfb25bfd5f923276594 1e97dcff9b2c2d32e5062c5a88482c34c0e07734 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.scss
+:100644 100644 25dc485c39fd561cfd90717b449b5f36c7c6eca4 79d7f820899713a007bb9cdb48aec39372b2e140 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.module.ts
+:100644 100644 831615405b9eaa5f712e0d63d98be80dd9a269e6 bf87beae8e4f6893c788c84081d4d38bc87a4c6d M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.html
+:100644 100644 cd0776b09790aa146a05abfb25bfd5f923276594 1e97dcff9b2c2d32e5062c5a88482c34c0e07734 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.scss
+:100644 100644 bc679dcb9d1bcd7ed3c73f6823a3e87cc62a8903 61fd838a4a091ee60a94981a5ec1812e8dfd3449 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.ts
+:000000 100644 0000000000000000000000000000000000000000 d9ab893546db26217707da305b139a5a2f3b322b A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.model.ts
+:000000 100644 0000000000000000000000000000000000000000 4b43c50f6e278c1288b86aba5ace11e6a28ffe28 A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.html
+:000000 100644 0000000000000000000000000000000000000000 e565f3df3e6dcd4944cd21f725afe7801fd3e7a2 A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.scss
+:000000 100644 0000000000000000000000000000000000000000 6d04ae04872d3a553eee058dd78a1cee95c39c51 A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.ts
+:000000 100644 0000000000000000000000000000000000000000 795f7e325ab3f0eceb2b3b0d7c8d5a0a6efc79b9 A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.model.ts
+:000000 100644 0000000000000000000000000000000000000000 f778c1186f37abc64de810b74db9d344a77b75bf A	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.module.ts
+:100644 100644 395107419ba9f2c7030be567c5aaedcd2ec7feec 7276e87e59933c7819c1670d0888f41853323866 M	apps/fusion/library/ws-widget/collection/src/lib/registration.config.ts
+:100644 100644 b6893cd224ccdff2705781110743f2886a12162d 37c5ccdda07ee809b929ae6b1ca8fa42ce50fd85 M	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-relative-time/pipe-relative-time.pipe.ts
+:100644 100644 ea834b1996b50e532c9c7a34fe125c5bca623bdb ad51784a0ecd2c3863081dc4cc31c5787a1f89cd M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/left-menu/left-menu.component.html
+:100644 100644 9ed2c0564b64e45c51eb4a2dc8aba2c8cbc71566 4ae2064763cff4c944b96af5b39bdfd092c9ee9b M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/left-menu/left-menu.component.ts
+:100644 100644 679f218e63b562f87356910067c486444633fc84 d5ff9471e6118537b9ea4ea111af8730acb65797 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 ded498e1d899025b67cd5ba4260914e5d30958f2 3e8cf8c64bc6f9df31986cac95ec49db275dd882 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.scss
+:100644 100644 538fbf881ced4f85f38b33c0958b24dd100acfac 6b157ec51e80bb8c8a87aad9ff3723db2ebe2da8 M	apps/fusion/src/app/app-routing.module.ts
+:100644 100644 bb09cbc1f414f4eca0c0948cf9277221b70caee6 d424f40443d803775e875d3c7fce232b5a1dc059 M	apps/fusion/src/styles/mat-typography.scss
+:100644 100644 ecf6ecad9a368910600d48705065ae8e03292c66 a07cf5ad2d1c9cc03a64b7b135998b6d6050b5db M	apps/fusion/src/themes/_theme-mixins.scss

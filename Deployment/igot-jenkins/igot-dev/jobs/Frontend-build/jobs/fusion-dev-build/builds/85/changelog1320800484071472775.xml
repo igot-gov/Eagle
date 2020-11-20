@@ -1,0 +1,32 @@
+commit c4e6ba920dbefea354d192d25713b85f9e99f3b7
+tree 0a5ddb63d925e37c9a22440f4aa1f7c14caf4d27
+parent e357487589dc954f57b33dbc66ef72e41e9b2235
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 09:40:33 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-24 09:40:33 +0530
+
+    sonar stage added in jenkinsfile
+
+
+:100644 100644 c40efbec9a03973437164ae7d2ad72af3897e5d1 2c0382ebf18ad7497e74aae791ab7e0f8b116000 M	apps/fusion/Jenkinsfile
+:000000 100644 0000000000000000000000000000000000000000 cb2b0146f3f15ac508d835733f3fb562fd8a9319 A	apps/fusion/sonar-project.properties
+commit fe4ba7f51f9d92bc8e4af207af37d37b97936194
+tree f542955ecc2dbe92840ff1702875428849c108fb
+parent 61f55985cc9d1a5e0ac43ae2fa41c408b5db6de3
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-24 00:38:07 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-24 00:38:07 +0530
+
+    Task #51559: added delete vote api
+
+
+:100644 100644 32fc8c5b7c27ba1bbd77f8f3652d11dfec6c5771 2bc823fe5d8eda48902e9afe12af57a283f4b330 M	apps/web-services/src/protectedApi_v8/discussionHub/topics.ts
+:100644 100644 c224440db5fbb52a66594387fb17573378a09c86 567a0f2a73f70fdcf4b71a90bfa036d53f1bddbe M	apps/web-services/src/protectedApi_v8/discussionHub/writeApi.ts
+commit 41417e58bc293de73412de91bacff7eda2218094
+tree 4e6ce3e834199519a3240fa7f89d53c430ad2769
+parent 7841bd87cefd8a55f58557869d7d0822c4bc26dd
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-23 23:32:52 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-23 23:32:52 +0530
+
+    host updated
+
+
+:100644 100644 12906eb159fb5be30fb86d57ec6949f7bcf89b1b 450ed76289c36dd8244aa5d4c8a60febf580fbf9 M	apps/client-assets/assets/configurations/localhost_3000/site.config.json

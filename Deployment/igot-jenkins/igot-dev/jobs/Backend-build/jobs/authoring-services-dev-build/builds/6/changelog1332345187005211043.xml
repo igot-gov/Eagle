@@ -1,0 +1,12 @@
+commit 3ebb627250b543b9ceadb7cd7d3d53f06c34e370
+tree 54cafb85be36b60ae5264cd3a02f5eb3736c490e
+parent 00f13af30c0ee33324ddb6b329f6a456defbf93c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-20 13:43:28 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-20 13:43:39 +0530
+
+    Removed Errors field
+
+
+:100644 100644 c850c1173ed2108cc70f2cdc145cdd14dc1d63f3 4144d94ff390cb1c2db9d8ec3a91b7bd215c29c9 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/ScromData.java
+:100644 100644 1e1ba2282859b23aef1b0bec4d851e1524f3bdc9 f44de41436ec62726bdefe1a50078620d352f86a M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/cassandra/ScromModel.java
+:100644 100644 a17943456b73d4a8c20e5e4f23c0a010ff744169 917e6300e6f65cc85f83b2c008b369b8b1609231 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/ScromServiceImpl.java

@@ -13,6 +13,7 @@ sunbird_cassandra_port: cassandra_host_port #9042
 sunbird_cassandra_username: username
 sunbird_cassandra_password: password
 
+frac_api_base: https://frac_url
 
 # Cassandra configuration
 enable_password_for_cassandra: "false"  #can be true or false
@@ -69,6 +70,11 @@ mongodb_host: mongodb_host_ip #10.0.1.2
 mongodb_port: mongodb_host_port #27017
 mongodb_user: username #username
 mongodb_password: username #password
+mongodb_nodebb_database: nodebb
+mongodb_nodebb_user: nodeusername
+mongodb_nodebb_password: password
+nodebb_url: nodebb_url
+
 
 # Neo4j
 enable_password_for_neo4j: "true" # can be true or false
@@ -180,6 +186,8 @@ tags_sb_hub_service: "{{ master_tag }}"
 tags_profanity_filter_service: "{{ master_tag }}"
 tags_ui_cbp_igot: "{{ master_tag }}"
 tags_ui_mdo_igot: "{{ master_tag }}"
+tags_content_validation_service: "{{ master_tag }}"
+tags_social_share_service: "{{ master_tag }}"
 
 # Service scale levels
 service_replicas_content_service: 1
@@ -220,6 +228,8 @@ service_replicas_sb_hub_service: 1
 service_replicas_profanity_filter_service: 1
 service_replicas_ui_cbp_igot_service: 1
 service_replicas_ui_mdo_igot_service: 1
+service_replicas_content_validation_service: 1
+service_replicas_social_share_service: 1
 
 # Memory reserves for each service
 service_mem_reserved_content_service: "{{ memory_m }}"
@@ -260,6 +270,8 @@ service_mem_reserved_sb_hub_service: "{{ memory_s }}"
 service_mem_reserved_profanity_filter_service: "{{ memory_s }}"
 service_mem_reserved_ui_cbp_igot_service: "{{ memory_s }}"
 service_mem_reserved_ui_mdo_igot_service: "{{ memory_s }}"
+service_mem_reserved_content_validation_service: "{{ memory_s }}"
+service_mem_reserved_social_share_service: "{{ memory_s }}"
 
 # Memory limits
 service_mem_limit_content_service: "{{ memory_l }}"
@@ -300,6 +312,8 @@ service_mem_limit_sb_hub_service: "{{ memory_m }}"
 service_mem_limit_profanity_filter_service: "{{ memory_m }}"
 service_mem_limit_ui_cbp_igot_service: "{{ memory_m }}"
 service_mem_limit_ui_mdo_igot_service: "{{ memory_m }}"
+service_mem_limit_content_validation_service: "{{ memory_m }}"
+service_mem_limit_social_share_service: "{{ memory_m }}"
 
 # Force reload for app variables
 force_reload_content_service: true
@@ -342,6 +356,8 @@ force_reload_sb_hub_service: true
 force_reload_profanity_filter_service: true
 force_reload_ui_cbp_igot_service: true
 force_reload_ui_mdo_igot_service: true
+force_reload_content_validation_service: true
+force_reload_social_share_service: true
 
 publish_ports: false
 

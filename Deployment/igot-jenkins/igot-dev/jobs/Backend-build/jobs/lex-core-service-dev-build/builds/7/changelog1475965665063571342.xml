@@ -1,0 +1,11 @@
+commit 5bc3bb497888e9019c8ba50ef001289ec2705161
+tree 1535333af00c2fa43659a6a9e652d1278173fda5
+parent d8ac199a9299ba85244fbf9ae482c70be1b66ea1
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-18 17:25:00 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-18 17:25:00 +0530
+
+    Added logs for progress data
+
+
+:100644 100644 88ffe8ada604ce309b1806caba09c347c696807f 6f6a15609f4750aa7f07d6f6687a9e302c174459 M	apps/lex-core-service/src/main/java/com/infosys/lex/learninghistory/service/LearningHistoryServiceImpl.java
+:100644 100644 648ee9f1ca28a1ac75db71638a7ede4e6d0e1020 3bb30a07bcb0ebd2b2ce30e574deabab61e2a8fa M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java

@@ -1,0 +1,20 @@
+commit 1f8610b9100fddef0858327a9a1ff6ab2adfe067
+tree 12f8db65373456409e25d81b196159461dc69e3f
+parent b9132f68b3a3c936bb976e4b9ae715d0654fbeaa
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 20:21:40 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 20:21:40 +0530
+
+    Reviewer text fiels css update
+
+
+:100644 100644 8d99b2ea5afed1e52ed5ec0371a9432f6b2dae8f c8ae76e28ab901c65e8171cc87469acebefd909b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+commit b9132f68b3a3c936bb976e4b9ae715d0654fbeaa
+tree 4d5462e463f6c14d0f6042f4b83d2bfe5f8c0d97
+parent f3aaf1ca84f2c0cf849a49adcb2e22f6fc1dfd82
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 20:06:12 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 20:06:12 +0530
+
+    removed FAQ from => Mobille UI
+
+
+:100644 100644 51c0eb745695a5f166b6b3584380f18ac790aa87 2e13c7833496129770d11c63269a818fcf0b3305 M	apps/fusion/library/ws-widget/collection/src/lib/page/page.component.html

@@ -1,0 +1,114 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.4">
+  <node class="cps.n.StepEndNode" plugin="workflow-cps@2.78">
+    <parentIds>
+      <string>37</string>
+    </parentIds>
+    <id>38</id>
+    <startId>30</startId>
+  </node>
+  <actions>
+    <wf.a.TimingAction plugin="workflow-api@2.38">
+      <startTime>1603972207259</startTime>
+    </wf.a.TimingAction>
+    <wf.a.ErrorAction plugin="workflow-api@2.38">
+      <error class="java.lang.IllegalStateException">
+        <detailMessage>SonarQube analysis &apos;AXV0MXockVpYYmXopzrl&apos; failed: FAILED</detailMessage>
+        <stackTrace>
+          <trace>org.sonarsource.scanner.jenkins.pipeline.WaitForQualityGateStep$Execution.checkQualityGate(WaitForQualityGateStep.java:294)</trace>
+          <trace>org.sonarsource.scanner.jenkins.pipeline.WaitForQualityGateStep$Execution.validateWebhookAndCheckQualityGateIfValid(WaitForQualityGateStep.java:280)</trace>
+          <trace>org.sonarsource.scanner.jenkins.pipeline.WaitForQualityGateStep$Execution.accept(WaitForQualityGateStep.java:268)</trace>
+          <trace>org.sonarsource.scanner.jenkins.pipeline.WaitForQualityGateStep$Execution.accept(WaitForQualityGateStep.java:154)</trace>
+          <trace>org.sonarsource.scanner.jenkins.pipeline.SonarQubeWebHook.doIndex(SonarQubeWebHook.java:84)</trace>
+          <trace>java.lang.invoke.MethodHandle.invokeWithArguments(MethodHandle.java:627)</trace>
+          <trace>org.kohsuke.stapler.Function$MethodFunction.invoke(Function.java:396)</trace>
+          <trace>org.kohsuke.stapler.Function$InstanceFunction.invoke(Function.java:408)</trace>
+          <trace>org.kohsuke.stapler.interceptor.RequirePOST$Processor.invoke(RequirePOST.java:77)</trace>
+          <trace>org.kohsuke.stapler.PreInvokeInterceptedFunction.invoke(PreInvokeInterceptedFunction.java:26)</trace>
+          <trace>org.kohsuke.stapler.Function.bindAndInvoke(Function.java:212)</trace>
+          <trace>org.kohsuke.stapler.Function.bindAndInvokeAndServeResponse(Function.java:145)</trace>
+          <trace>org.kohsuke.stapler.IndexDispatcher.dispatch(IndexDispatcher.java:27)</trace>
+          <trace>org.kohsuke.stapler.Stapler.tryInvoke(Stapler.java:739)</trace>
+          <trace>org.kohsuke.stapler.Stapler.invoke(Stapler.java:870)</trace>
+          <trace>org.kohsuke.stapler.MetaClass$9.dispatch(MetaClass.java:458)</trace>
+          <trace>org.kohsuke.stapler.Stapler.tryInvoke(Stapler.java:739)</trace>
+          <trace>org.kohsuke.stapler.Stapler.invoke(Stapler.java:870)</trace>
+          <trace>org.kohsuke.stapler.Stapler.invoke(Stapler.java:668)</trace>
+          <trace>org.kohsuke.stapler.Stapler.service(Stapler.java:238)</trace>
+          <trace>javax.servlet.http.HttpServlet.service(HttpServlet.java:790)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHolder.handle(ServletHolder.java:865)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1655)</trace>
+          <trace>hudson.util.PluginServletFilter$1.doFilter(PluginServletFilter.java:154)</trace>
+          <trace>hudson.plugins.audit_trail.AuditTrailFilter.doFilter(AuditTrailFilter.java:109)</trace>
+          <trace>hudson.util.PluginServletFilter$1.doFilter(PluginServletFilter.java:151)</trace>
+          <trace>hudson.plugins.greenballs.GreenBallFilter.doFilter(GreenBallFilter.java:59)</trace>
+          <trace>hudson.util.PluginServletFilter$1.doFilter(PluginServletFilter.java:151)</trace>
+          <trace>jenkins.telemetry.impl.UserLanguages$AcceptLanguageFilter.doFilter(UserLanguages.java:128)</trace>
+          <trace>hudson.util.PluginServletFilter$1.doFilter(PluginServletFilter.java:151)</trace>
+          <trace>hudson.util.PluginServletFilter.doFilter(PluginServletFilter.java:157)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1642)</trace>
+          <trace>hudson.security.csrf.CrumbFilter.doFilter(CrumbFilter.java:64)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1642)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:84)</trace>
+          <trace>hudson.security.UnwrapSecurityExceptionFilter.doFilter(UnwrapSecurityExceptionFilter.java:51)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>jenkins.security.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:117)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>org.acegisecurity.providers.anonymous.AnonymousProcessingFilter.doFilter(AnonymousProcessingFilter.java:125)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>org.acegisecurity.ui.rememberme.RememberMeProcessingFilter.doFilter(RememberMeProcessingFilter.java:135)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>org.acegisecurity.ui.AbstractProcessingFilter.doFilter(AbstractProcessingFilter.java:271)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>jenkins.security.BasicHeaderProcessor.doFilter(BasicHeaderProcessor.java:93)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>org.acegisecurity.context.HttpSessionContextIntegrationFilter.doFilter(HttpSessionContextIntegrationFilter.java:249)</trace>
+          <trace>hudson.security.HttpSessionContextIntegrationFilter2.doFilter(HttpSessionContextIntegrationFilter2.java:67)</trace>
+          <trace>hudson.security.ChainedServletFilter$1.doFilter(ChainedServletFilter.java:87)</trace>
+          <trace>hudson.security.ChainedServletFilter.doFilter(ChainedServletFilter.java:90)</trace>
+          <trace>hudson.security.HudsonFilter.doFilter(HudsonFilter.java:171)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1642)</trace>
+          <trace>org.kohsuke.stapler.compression.CompressionFilter.doFilter(CompressionFilter.java:49)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1642)</trace>
+          <trace>hudson.util.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:82)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1642)</trace>
+          <trace>org.kohsuke.stapler.DiagnosticThreadNameFilter.doFilter(DiagnosticThreadNameFilter.java:30)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1642)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:533)</trace>
+          <trace>org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:146)</trace>
+          <trace>org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:524)</trace>
+          <trace>org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)</trace>
+          <trace>org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:257)</trace>
+          <trace>org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:1595)</trace>
+          <trace>org.eclipse.jetty.server.handler.ScopedHandler.nextHandle(ScopedHandler.java:255)</trace>
+          <trace>org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1340)</trace>
+          <trace>org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:203)</trace>
+          <trace>org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:473)</trace>
+          <trace>org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:1564)</trace>
+          <trace>org.eclipse.jetty.server.handler.ScopedHandler.nextScope(ScopedHandler.java:201)</trace>
+          <trace>org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1242)</trace>
+          <trace>org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:144)</trace>
+          <trace>org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:132)</trace>
+          <trace>org.eclipse.jetty.server.Server.handle(Server.java:503)</trace>
+          <trace>org.eclipse.jetty.server.HttpChannel.handle(HttpChannel.java:364)</trace>
+          <trace>org.eclipse.jetty.server.HttpConnection.onFillable(HttpConnection.java:260)</trace>
+          <trace>org.eclipse.jetty.io.AbstractConnection$ReadCallback.succeeded(AbstractConnection.java:305)</trace>
+          <trace>org.eclipse.jetty.io.FillInterest.fillable(FillInterest.java:103)</trace>
+          <trace>org.eclipse.jetty.io.ChannelEndPoint$2.run(ChannelEndPoint.java:118)</trace>
+          <trace>org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.runTask(EatWhatYouKill.java:333)</trace>
+          <trace>org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.doProduce(EatWhatYouKill.java:310)</trace>
+          <trace>org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.tryProduce(EatWhatYouKill.java:168)</trace>
+          <trace>org.eclipse.jetty.util.thread.strategy.EatWhatYouKill.run(EatWhatYouKill.java:126)</trace>
+          <trace>org.eclipse.jetty.util.thread.ReservedThreadExecutor$ReservedThread.run(ReservedThreadExecutor.java:366)</trace>
+          <trace>org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:765)</trace>
+          <trace>org.eclipse.jetty.util.thread.QueuedThreadPool$2.run(QueuedThreadPool.java:683)</trace>
+          <trace>java.lang.Thread.run(Thread.java:748)</trace>
+        </stackTrace>
+        <suppressedExceptions class="java.util.Collections$UnmodifiableRandomAccessList" resolves-to="java.util.Collections$UnmodifiableList">
+          <c class="list"/>
+          <list reference="../c"/>
+        </suppressedExceptions>
+      </error>
+    </wf.a.ErrorAction>
+  </actions>
+</Tag>

@@ -1,0 +1,10 @@
+commit f236f429305d2bab995a78342158cfd2e78a7ea5
+tree db376c99c0e637aba0eb6c931b42f188b78920b0
+parent a4dcc7c713729534b0f28b20fc80d22df6c0a780
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:57:30 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:57:30 +0530
+
+    added Log==> verified Changes for Resume
+
+
+:100644 100644 5727a687a404ea1fa920967a89bb55d0ebd1f1b3 f991ef6ccac6bb4da8bf5a27a9449ed1f867d95d M	apps/web-services/src/protectedApi_v8/scrom.ts

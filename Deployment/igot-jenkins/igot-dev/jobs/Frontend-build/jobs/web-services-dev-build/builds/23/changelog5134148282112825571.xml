@@ -1,0 +1,30 @@
+commit 52fa56f42f3c5e874f2e4fb83ff82969edfcf210
+tree 0872165e1eb63da46262b8740a592e9f0a1c2cd7
+parent 1667a6a0c963c32f9cc684d467e47f4fa21ce6a6
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:42:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:42:29 +0530
+
+    added Log
+
+
+:100644 100644 a0e5ab49af910a974e854707bb6fb93d6588f22b 5c51a9a3b55bb4aaefaa4dd68261a00a9c0a5155 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit 1667a6a0c963c32f9cc684d467e47f4fa21ce6a6
+tree c9b8828494a3b9fcebd6888202dca6f94b663841
+parent f52145ea9cc900f0c9c23c33a22a7ce4070e4ec1
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:33:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:33:49 +0530
+
+    removed any from scrom POST API:fix 1
+
+
+:100644 100644 6e6adaac04d9bcd924603775378b1090bb65103a 4cbcd7a12fe164b2e3c655d03f4c1a3f32895a29 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+commit f52145ea9cc900f0c9c23c33a22a7ce4070e4ec1
+tree 7e792dd02ed91792f63eae1cdc494a785d8706fb
+parent cb438269022a6d88c557f8f88da2d38da86936ee
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:43:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:43:14 +0530
+
+    removed any from scrom POST API
+
+
+:100644 100644 ab3402417e66e12bef44d246938a513d6066c9af 6e6adaac04d9bcd924603775378b1090bb65103a M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts

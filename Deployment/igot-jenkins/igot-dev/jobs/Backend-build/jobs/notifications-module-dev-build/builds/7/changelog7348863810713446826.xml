@@ -1,0 +1,11 @@
+commit 1defc304c103bd600174d391a6ddfbb79806c063
+tree 7e3d357307190b3f14ddc977102977369219dd9a
+parent 9e4f2bfd221397daadb61199ac01e32ec2369210
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 15:33:46 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 15:33:46 +0530
+
+    Changing the kafka properties
+
+
+:100644 100644 43fa80c76fbe5ebecfaba9e55335b3758114104d 92ab39347f72417108721320b2088c60b59fd259 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/configuration/ConsumerConfiguration.java
+:100644 100644 013ff574b7f5495b929a1a7374f713ec64c4d10e 3a2b1a7fcabc6473710014262f9749c7345031ad M	apps/notifications-module/src/main/resources/application.properties

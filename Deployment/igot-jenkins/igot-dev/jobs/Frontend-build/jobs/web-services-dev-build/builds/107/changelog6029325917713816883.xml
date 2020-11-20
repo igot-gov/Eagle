@@ -1,0 +1,31 @@
+commit 1ffbd049f8073f6643a71e703984ee0041d25fa9
+tree 2fd5320ce32eddf725ef4a1cfb8eb7e259e49c80
+parent 00d476001a06a6df383fe1ec253777853a95a86d
+author karthik-tarento <70887864+karthik-tarento@users.noreply.github.com> 2020-10-29 14:57:55 +0530
+committer GitHub <noreply@github.com> 2020-10-29 14:57:55 +0530
+
+    removed hardcoded env variable
+
+:100644 100644 7d1726ccc62b330a7bc5565ed8f2fff3edd5a2c8 4eed736d28a1eb6a46e69758f07871502e95b415 M	apps/web-services/nodemon/nodemon-eagle-stage.json
+commit a3ebaacad3b8946e977b32ccd8171eb0e156a204
+tree c4de6296795b466483da85dcbce4990d94ac0811
+parent 9d5dffe3eefaa87e05c0e84c738d642cf6fde17a
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:24:22 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:24:22 +0530
+
+    UI css Updates
+
+
+:100644 100644 b83b7b3e8df295cdd7f95d15b0c0aa4318c09fd2 324b884f6e4b1db0375efd49628f4f4e183b4020 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.scss
+:100644 100644 f85708099c3957f79ce8a13d1100b666a05644fd aa171bebd42a4fda6bb7647abc2ecd41b21fa969 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 03e04ad233a73b007928435246063dc9dbcc1ba5 4502594da1c33efecc040ed681db85d12f247489 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html
+:100644 100644 d90d6044af2e6ef827d460360785c3f1f6c4a462 87c624c8b005579e8eb70a9d47704e5e88ac79de M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.scss
+:100644 100644 5fbd40bb2a19536b7835652bade647a1825822e0 69013b46a5e56ad1b04b10c4c7dbe9e667a83c26 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 3a0fcc51321a008868652172e9684ffad5f24c03 59ed31233801116cbf86a0c9ffa61f7e7c131b40 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 a3bf8d1776fa8ee9c487f385e193e11c953b6da6 ca7d13813f28533b6355d21c41be0c325d7a8bbc M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 cdbf07f8e0ba6dc6edd71ad7bae0f38ff8554120 e757ce24eb592d5536aa74feb90a0fd4e5568fde M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.html
+:100644 100644 98c7a3dbdb082fa625456dcf1db96807143d9641 c3aa23a5cbcbad7fa019ed2f4f3ee505fc65a56a M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.scss
+:100644 100644 045475f4990e70b8d4acc2594c42174c4fb65146 506424dc7328b2d7ec37965042118eef86bc548d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 da0ef19f216e54b138731de529bb024e450fbe43 92c58c089db827bd848383853ed3b882a03b5924 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.scss
+:100644 100644 94672c089e7457085d2ec0101aa6555f6b7aaadf 55cba3e88e92cd3f2685d760d6d2a96ea004e9a7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 98b5d3dfd934ea57a59c72a44c23fe494c8ccf33 c11e370c7515b9daea826a5b468158d0fa97edfe M	apps/fusion/src/styles/styles.scss

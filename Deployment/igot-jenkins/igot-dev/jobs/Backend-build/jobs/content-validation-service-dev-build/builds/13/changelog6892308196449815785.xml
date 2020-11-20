@@ -1,0 +1,18 @@
+commit ed51bcb9056fe4dd9cddf42125ffb041b0d4d094
+tree 736956ba603989dc300f10584251fb225f202164
+parent 0be19e8cd0b3946cd217086b80e33dec267619b8
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-31 17:40:11 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-31 17:40:11 +0530
+
+    Added one more param in response and updated logger configs.
+
+:100644 100644 209cb5dfb3649ab5b943425e58b4ee76f273f222 9d1ac6d8a3a94caae3581e6fe0574cc33aae06e1 M	pom.xml
+:100644 100644 af3af4d603fddb27a5f4726c978049f52ebadb54 a8dd439bb3e7ff82368f23acbeb0ba7c9633a702 M	src/main/java/com/eagle/contentvalidation/config/Constants.java
+:100644 100644 dc578e8c697056f5251707d91acfa6c5cbdb7843 2950c382d97b171aa24fda088b4dd661d944a40e M	src/main/java/com/eagle/contentvalidation/controller/ContentValidationController.java
+:100644 100644 51b640536a3e3e542feaf342f255e86b3e2458ab 44db13f3834a03e118a6a231f496241e04f47fcd M	src/main/java/com/eagle/contentvalidation/model/ContentPdfValidationResponse.java
+:000000 100644 0000000000000000000000000000000000000000 ac3bc1546e274ae9220aa0102ae9e0b4d3f8c592 A	src/main/java/com/eagle/contentvalidation/model/ProfanityLevelClassification.java
+:100644 100644 4df11dc4044390d794697a4bcced7a450beeead0 514bd70e433ac9609b2eec418aa3bc6f2fd6e3d9 M	src/main/java/com/eagle/contentvalidation/service/ContentValidationService.java
+:100644 100644 f28261a5d1e0d61cc09c9eabba3c1b80212d5daa 6753092d2dd0cb1d3c72b9348f478fa7923b8da8 M	src/main/java/com/eagle/contentvalidation/service/impl/ContentValidationServiceImpl.java
+:100644 100644 b95d11f918d6fd9453aec235f94c59d729e0eeeb 5c383ea366012b6b094fe4782d40f74c2e4f2225 M	src/main/java/com/eagle/contentvalidation/service/impl/OutboundRequestHandlerServiceImpl.java
+:100644 100644 bacbf5a40f2e5dfca1ff92ba1086578c43250f71 6e92b87683b18b6f02ccfe1099e77e2dad784bf6 M	src/main/java/com/eagle/contentvalidation/util/CommonUtils.java
+:000000 100644 0000000000000000000000000000000000000000 077b284c36826292c708addf37534d2ad8ce3993 A	src/main/resources/log4j2.xml

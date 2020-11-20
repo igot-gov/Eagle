@@ -1,0 +1,9 @@
+commit 8b8b933726e047f4a9cb93b4d46f339484e92428
+tree f9d14e17cc205779eaad5c79bc299f8379a5a602
+parent 402d8bfed52103a0f510c5c97218319a74f3794f
+author NetOps <idcnetops@tarento.com> 2020-09-23 11:29:12 +0000
+committer NetOps <idcnetops@tarento.com> 2020-09-23 11:29:12 +0000
+
+    Update Jenkinsfile
+
+:100644 100644 aef27095b62f54c4e1296b0fd50a1a4395070d84 9c0abfbae88141bbaa3951a5905adf4ad9e92244 M	Jenkinsfile

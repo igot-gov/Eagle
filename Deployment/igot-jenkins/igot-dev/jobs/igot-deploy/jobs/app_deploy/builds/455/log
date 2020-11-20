@@ -1,0 +1,37 @@
+Started by user [8mha:////4P9/O1WrER/MtNQKKq96BREYrbhT4uL0mdwJbsXrADsrAAAAlh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzuEgYu/dLi1CL9xNzMEgClaoqTvwAAAA==[0mamit.senger
+Building in workspace /var/lib/jenkins/workspace/igot-dev/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins3103890954676416674.sh
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-ui-static : include_vars] *****************************************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Ensure env directory exists] **************************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Create and save env template] *************************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Ensure compose files directory exists] ****************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Create and move UI Static service template] ***********
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Removing the existing service] ************************
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Deploy UI Static service] *****************************
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-ui-static : Remove the compose file from the location] ************
+[0;33mchanged: [10.0.1.111][0m
+
+PLAY RECAP *********************************************************************
+[0;33m10.0.1.111[0m                 : [0;32mok=9   [0m [0;33mchanged=4   [0m unreachable=0    failed=0   
+
+Finished: SUCCESS

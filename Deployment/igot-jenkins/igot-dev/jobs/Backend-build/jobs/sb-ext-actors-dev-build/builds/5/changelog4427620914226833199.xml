@@ -1,0 +1,10 @@
+commit 388e968dfc585f41ba563f614aba61c7abcc1470
+tree a5bfb16127305feee1aa1ea47c74fa22b12cb1d7
+parent 86b97dba27821a0bcb5421187e281db698edf3cc
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-21 16:14:53 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-21 16:14:53 +0530
+
+    Fix on email notification: Added correct org data
+
+
+:100644 100644 518ea408a50864226ca522ce0774912ed30b5736 be11f7cec6eb1f16d21b811c046db516acdcd9aa M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/UserUtilityServiceImpl.java

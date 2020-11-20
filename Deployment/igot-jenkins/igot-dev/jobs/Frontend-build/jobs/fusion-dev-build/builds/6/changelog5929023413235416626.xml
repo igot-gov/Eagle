@@ -1,0 +1,11 @@
+commit 3a5bff5f6373239d18155e3b22b701b921ab29fc
+tree 92a4000f765ae5590652bb492f662939e6cec6e3
+parent 1e7b6e4aef3f068bdfaf331388e260dddc720e28
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-17 13:27:08 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-17 13:27:08 +0530
+
+    Task #0000: Disabled login page and directly redirecting to keycloack authentication page
+
+
+:100644 100644 dfb9da79519fea62c06f79b426affb015b13afca 4ebb06e7757e813c7623d3142a66922be647c591 M	apps/fusion/src/app/guards/empty-route.guard.ts
+:100644 100644 7bb36995d07175a706a7dabdb0bea6d97ece012c d320f72192ff355ea3e4b044ba5a6d7af3824179 M	apps/fusion/src/app/guards/general.guard.ts

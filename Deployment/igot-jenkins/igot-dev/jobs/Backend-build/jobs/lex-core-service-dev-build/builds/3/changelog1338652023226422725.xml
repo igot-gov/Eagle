@@ -1,0 +1,12 @@
+commit 9c5dd987fe311e95c853c3a0c7d65d3f3fe57289
+tree 445d7756a37f3595b8f5755a8e3e6efd292839f6
+parent 142f268c063c12df4bb520c7e56bf991f529a23f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-29 19:03:54 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-07-29 19:03:54 +0530
+
+    New Api: get user goals contents
+
+
+:100644 100644 e8e8c5639172b19f1dfe68a433216275bbf85f4b 65066083e628b38051c28e2e682c912743a12cf1 M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/controller/GoalsController.java
+:100644 100644 8b33566d42963f7769b4413c0323b034efc11347 c56590b9c1f8d83d6bfa07743caad10c77039e5c M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsService.java
+:100644 100644 91173e36d3388167b495841492592bfba63835b0 889d7b61cbd6d7e9a0302faef64fbfadd555d806 M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java

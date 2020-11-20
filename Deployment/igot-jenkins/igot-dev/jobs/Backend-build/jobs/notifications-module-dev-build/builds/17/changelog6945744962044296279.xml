@@ -1,0 +1,10 @@
+commit 27d816666fa5eca2e39e52f6264e2ade6fea0368
+tree 9dc198a98dc5bdde831f0bd3c514afdd6a04d0ec
+parent 4f26c9c588e7db0e755ab79727298ed14d247c2b
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 15:16:19 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-27 15:16:19 +0530
+
+    Defect fixing
+
+
+:100644 100644 9874abd0178d74e719e7c97249e2d2fae9c95a3a c0e870508eb69a367bba1a004958562e34ff4e45 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/EmailServiceImpl.java

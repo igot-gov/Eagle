@@ -1,0 +1,14 @@
+commit 92a9b1fb8116aa1937b5ed32b646e0d0a54fa853
+tree 96f090cfd70b001ce40cd1486443462b1ec48632
+parent 7158173156ead6e6c246eaa341881d397198903e
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 16:30:35 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 16:30:35 +0530
+
+    Issue #51322 added the postgres datasource
+
+
+:000000 100644 0000000000000000000000000000000000000000 c6e05e47032abd038996af1a1b930eca056e37c3 A	apps/sb-ext-actors/src/main/java/com/infosys/configurations/PostgresDataSourceConfig.java
+:100644 100644 7125b8de71d79bcd914a23f01c513176c832ebaf 98cc054a9fb8e0cbfebd3c6578d0e7f5f726be36 R089	apps/sb-ext-actors/src/main/java/com/infosys/model/com/infosys/model/postgres/EagleUser.java	apps/sb-ext-actors/src/main/java/com/infosys/model/postgres/EagleUser.java
+:100644 100644 05928d8d750c75c8128a745492a3144e266e4399 7ac3f39ebd0addb1748b1f2d44a827744901774f M	apps/sb-ext-actors/src/main/java/com/infosys/repository/EagleUserRepo.java
+:100644 100644 4fb5edba592104587eb2f0249b6677bb488558fa 12c0bd7f821e38acbb708b6bcd5109025f2c3f4b M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/UserUtilityServiceImpl.java
+:100644 100644 a81c877bb24b143dd91de9bbfaabcea4027b2f5d df497f55481c5acaab2ab96c6c78175cde054295 M	apps/sb-ext-actors/src/main/resources/application.properties

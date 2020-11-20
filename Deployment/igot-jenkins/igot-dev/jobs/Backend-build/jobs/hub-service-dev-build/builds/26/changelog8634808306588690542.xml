@@ -1,0 +1,10 @@
+commit 49d319b4a284cd9d51287b0ccea43cdc196ad7b2
+tree 37296ec83e1a72aac65616a17c61dd27f35ce8a5
+parent 551c2791009cc82c19923c58135f25d1739e7996
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-20 19:17:51 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-20 19:17:51 +0530
+
+    Defect#52105 fixed the paging
+
+
+:100644 100644 be5585d5897c02f025598c678f8e55f5cb0ef9da d36cf88477ecc9f3ae3e48d86cdc994332e0a50e M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

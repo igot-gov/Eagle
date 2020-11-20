@@ -1,0 +1,83 @@
+commit 157e088623c1455fd68c79e0052bd7483c2fea24
+tree cb834e20ffffa91ce0576a9cfd60f45ff1c53ea1
+parent 99a0e1cfbe097be7a00262251cbf7bbc5cf66084
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-02 19:20:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-02 19:20:49 +0530
+
+    acces fix :2
+
+
+:100644 100644 db1902f80d2543a7e66b58704f2904ece79979da bbcb650dfbe776b947d2035db8b74990d3f069c1 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.html
+:100644 100644 c3abab84bef3c7b20236655c3e61ce31eafcfac2 f6b6debbfda9dd1465c5aa9f8ab410d21e0cdede M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/left-menu/left-menu.component.html
+:100644 100644 db7cfcd6a9660ed60c0aa343ecaa0e5bad1b96a7 1c3213aeaeb1d9b87aa91f899812da5b338293ee M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.html
+:100644 100644 506424dc7328b2d7ec37965042118eef86bc548d d772ce892761a137eed6540a8112ed25d1223d24 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+commit 99a0e1cfbe097be7a00262251cbf7bbc5cf66084
+tree cfc1c5a1c8c9f80aaf7d7826cbac381f72d4bb3f
+parent 11da3a2984dbec895454f11963c7f65fcf095243
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-02 18:03:21 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-02 18:03:21 +0530
+
+    access issue Fix :2
+
+
+:100644 100644 2f6269047c3fb55d35403b98530607d2d03199cd b111210a0b91804f8beec440cc6c9fa228b06aae M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.html
+:100644 100644 477f873339d965371ac0635608df9680f2b1687b 5ec52f33d167ed3ecd49d3e8e378156091b87042 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback/btn-content-feedback.component.ts
+:100644 100644 a9a9a1e276c87d16639c00240fd6cbfeccbe0085 f89c5bb71b9dadbc0506a9ab29a13387af0b4ee2 M	apps/fusion/library/ws-widget/collection/src/lib/btn-fullscreen/btn-fullscreen.component.ts
+:100644 100644 d38c64fe4b4a1c7e855ecb503c4ea01c8a5121a2 f3e545410d1d36e3985d694eb543c7d194ab8e04 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.html
+:100644 100644 91253597907ef45e0c6602a5f91729355a3add40 ee01e76421a6dcfc3cb8b8cee0f565a5c8ea485e M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.html
+:100644 100644 ae7b7670393d91a16ed8bf909325dc1d871f063b ee5abd3c9d239702b3f789dd3289bc918735fa74 M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts
+:100644 100644 481eae3ef3dd900c08305f1148fe6d3b73d2771b feea131f025f2f83d4591519af7acc9319438a92 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.scss
+:100644 100644 b631d1bf694c29f96b20f5167ab8720bcdd02793 5eee0064447dd317df498cd8650745503305c439 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.ts
+:100644 100644 880ce2684de7f6f0fa06d9afbfd62c0c4d20b011 d3ba4a2dcd451592f1d00c0577e5ad8e9d3da0e2 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.scss
+:100644 100644 e750f13ebcd1488fcbc5236f1004bc6f61e9ca6d dba7a0fa16af7f55ec859401485800174475b670 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.scss
+:100644 100644 206573f243be186019a714bfe02c47ce084b4053 1c5283812d7c7fd47b7f569c4db217b95e2e9e6a M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.ts
+:100644 100644 1408a61069477587c0c1d2655ddb3faff2aad516 94388c1a51fd876e2c28d2f935a30cafa36b093c M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 3650a8cba4d2ff861cb0a69076d9a2a7b53defc6 8cbeefe03ca8f54a734210570560ad1e05f25ceb M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+commit 11da3a2984dbec895454f11963c7f65fcf095243
+tree fc167bc6c4005a3f66efc68a1bf72603243e40b6
+parent 2b914f7441b73ffb5b85110010cb4c508619050c
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-02 15:03:39 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-02 15:03:52 +0530
+
+    acce fix  content view page
+
+
+:100644 100644 f0e3e975ed0df718cb5ccf7c2d990d1f02ba8ebf eb2cfb2e7cedc255004960d559a14a6687ec74f1 M	apps/fusion/library/ws-widget/collection/src/lib/_common/user-content-rating/user-content-rating.component.html
+:100644 100644 6ca54e49549c3ad9c1fd93c5f627be6a3c6a03ca 820e9f4cd3fba4aaf6be08354ff49a673fbd6b74 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-download/btn-content-download.component.ts
+:100644 100644 3e64cd1b001ae6ba427e6b21a3701bf4827e2c55 20934ddcb324d4ba232becc4fe777bcd6315e73f M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback-v2/components/btn-content-feedback-v2/btn-content-feedback-v2.component.ts
+:100644 100644 f9c5c8a4905bc635c4a50939a40d77cc968ac2c4 d1051db21815409fe022ea1b87f9e2ab2cdd6456 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-like/btn-content-like.component.html
+:100644 100644 be8659b0a3e4868a434b3137d23afb46d455c1cb 432c7592b96bb7e4fc3efa9b7ebd0bea28518dfc M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-like/btn-content-like.component.ts
+:100644 100644 c73375f2b4e71f8b4ae088d38e18bd785564b03e 771917d86ed4f473f0f081d1e6016551c73cbaa1 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share.component.ts
+:100644 100644 161b7e462bc81d420d33ced1dc4154aa26c90649 e82c76d907fd5f8f9273f9238c774543302b9842 M	apps/fusion/library/ws-widget/collection/src/lib/btn-goals/btn-goals.component.ts
+:100644 100644 5fc63576d897d5fe9692e4db38bc449cc50ff8bb 9c764bbe84fc3853d0c625eac1912636760e0139 M	apps/fusion/library/ws-widget/collection/src/lib/btn-kb/btn-kb.component.ts
+:100644 100644 1e145914cfb1e05e46c151b7319241030b53727b bde8e92fe2aed74c204e72c8ef39e93d4ec49d5f M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 b715097657b6fd22f44e7263aef02cc8ffa0da04 606457a8b5d8739d8f59d86d9224b88a5349d418 M	apps/fusion/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.component.ts
+:100644 100644 e54fee5a14a0bb5939906a5a42723807d4f6e66b ec1571ef6302c59f99bd0f78b633bfbc428f050e M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.html
+:100644 100644 99101374707bf09f4737ef31b2c25df5887d900f f01483f3bcce190e338cd7e6847e24d2b3467968 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 d8296b69c0bd11ed470b4c04b81e23293edc8f79 3650a8cba4d2ff861cb0a69076d9a2a7b53defc6 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 216642a15afc850168810e57a2c9fe319b365d2a 83702a5279c978f369959987bc74eb84f353d109 M	apps/fusion/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.html
+:100644 100644 297d4b7e07b4fea4ea7099d57908708eb42f580d 8a768a68e1e3682be0680b6c987ebc45dc307a3c M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.html
+commit 2b914f7441b73ffb5b85110010cb4c508619050c
+tree 5a4dd718dd73cb1b978c1bab67286f3bfe2deab6
+parent 6e3541e56a9a24ae38b92290f607b2d051ca2811
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-02 14:48:53 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-02 14:48:53 +0530
+
+    discuss home page 34 reduced to 10
+
+
+:100644 100644 f193d4d248e45e333c7807157b13db95e63cec5b 96212a0bd715de9ef23a96e81b995d2a9739d611 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/components/careers-card/careers-card.component.html
+:100644 100644 89c2d8fe3573f3ad66003c163bde52e6536ab5e6 75285b3f7a2a461401d88e218c6c3a02c6f2fb7a M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/pagination/pagination.component.html
+:100644 100644 cd22173d7412b870007c084396691b0aaeabdbd6 9172397519e9803cb739626e8ce098aa8f2fb76e M	apps/fusion/src/fusion-assets/icons/category_m.svg
+:100644 100644 6dd07d5d2b80e82aa2f6d611edf396e2b588af1b 93be2c5c49fb46dd64fb5bfbb8e20b147a0aba4f M	apps/fusion/src/fusion-assets/icons/category_xs.svg
+commit 42e4e26a2d05516aa0ac4d2c2ef9faf3a94e77a4
+tree 72142f552a40275f7a5d1e59c24aabe455deded4
+parent 961ee36504f1144f7e48c2509318dcc152b67df2
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-02 09:36:04 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-02 09:36:04 +0530
+
+     profanity work final changes
+
+
+:100644 100644 967d050bb689db621d25bb83d7b56be3c42a22f6 e40ceeeac52b41aed94ac6b0c182a7f3f8a13652 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:100644 100644 8287c4ff4538524c2f12e199060a79b042c255c9 4f085e5e3c782affb6813e677b5c96524c3397f8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.ts

@@ -1,0 +1,11 @@
+commit 6e43cb9dc7c7fde42e68dceb59e8a5fef86fe5a6
+tree 676003f10fe738fc506683bcbcd20c9f26da5c49
+parent 4449207233ad4e722678333ef6e983c3641417ed
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 19:42:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 19:42:51 +0530
+
+    Task #51435,#51438: Fixed issues in the user profile
+
+
+:100644 100644 c558ac5995739f145b54479c97f7ba5bf58f1a22 912c85fc81dc89eebc5fcb2dd40b55446ee5b6a4 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 5b5fb6bff6d5a1d907e66a1f94d2b035c165befe 115f9f89ff28a282894a1f2cf6b0d52cbc970371 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts

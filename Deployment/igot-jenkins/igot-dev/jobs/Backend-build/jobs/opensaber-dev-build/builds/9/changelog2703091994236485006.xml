@@ -1,0 +1,11 @@
+commit dfa74cfd76e6bc4e8b8b46d14c3d8d1875868202
+tree baf3d2a1709976a8cb52830eec2136149705f024
+parent a602fb294e1c15d87bf87c71dd80ea1b4c573836
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-18 17:25:50 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-18 17:25:50 +0530
+
+    Added totalHits for search request
+
+
+:100644 100644 03d5c48afaabba76cbae9cac0a998622663ca523 6c93c1186345b0fc650059fe3cdee2380035fe61 M	java/registry/src/main/java/io/opensaber/registry/dao/SearchDaoImpl.java
+:100644 100644 2ae33aeae93f06d9e6b91a80d5e83c760bb1e9e7 08f5b91101672ea1ecbc656e35fe86cf44227abd M	java/registry/src/main/java/io/opensaber/registry/service/ElasticSearchService.java

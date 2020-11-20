@@ -1,0 +1,10 @@
+commit add74237e154246ae3d68076bf6a58c84cc15e5e
+tree 757820a68df3f171e8f35b8818d52a4701ce87c2
+parent 78aa1b0b4c3c8231c6e4599ea051135e493f7f41
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 07:21:41 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 07:21:41 +0530
+
+    Defect #52083 update
+
+
+:100644 100644 6b8d8c50959d11c449fc0ddefb2e51cf9e7f420b ef26fafd08daba1ac2b72f2575d1652cdc570970 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java

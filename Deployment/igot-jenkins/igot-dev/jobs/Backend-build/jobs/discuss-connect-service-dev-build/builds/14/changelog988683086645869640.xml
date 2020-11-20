@@ -1,0 +1,10 @@
+commit e2505271e3cc3b59a63fb110d9a21c3ad9dd5eae
+tree d05709c5ba35b3f1716f34368c0cebaa3787f0bb
+parent 66ad52b0cbe90dafa63acb8cf4d008f078f4c157
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 14:38:10 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 14:38:10 +0530
+
+    Fix for WID issue in subject
+
+:100644 100644 5fac6c4352732ae1ab7054954a622b650877d5dc fb6643afa467e531b107fb3f47bbc87baa1eee56 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 6868fc3046762f427d772a8857e73fb7efe7b289 d21bf7f64f54f0aa7e602fe7e0cfd859e35b72e7 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java

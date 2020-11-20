@@ -1,0 +1,11 @@
+commit 9ac78275d3088ff26678e8edee1088fcd0d6d438
+tree 8907ccab2a254de68b6e5239d79442d1a4ea81c5
+parent b25040a834f7edee2deadaebd7c36f60d9bef9d9
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:19:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 21:19:03 +0530
+
+    Learning date and latest published : fix
+
+
+:100644 100644 232db1e80d826d87134186d1b68dc67d43555cc3 6a4ae4821a49ef8463e71c22746514c0c235ba38 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.ts
+:100644 100644 34af31e2ee01151ff7dd8bce192a59a7b89c3663 9361e494f86e01a0459c39bad941fb9840f983a6 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/learning/components/learning-time/learning-time.component.html

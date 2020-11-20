@@ -1,0 +1,11 @@
+commit b4f4124ec5a568cc7c976c94aeed8569158e42ec
+tree 39f12709e40013a09509048d06cba8fb5c0bd3d4
+parent 57dc1ebae99ca81ac46e160822f3599378318bb7
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 16:29:29 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 16:29:29 +0530
+
+    Task #51689 Fix extracting profile name
+
+
+:100644 100644 19d12fad985f943218e310822e5526d64487b4eb 05fa00c27b333e2ff5a0729e9525c077c033ffcd M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 e4f6ddae96b18bcf60bcdaf2ba6be209ce98f372 e67330ce07ed54aff35a34a2e2fc82568d4b75b7 M	apps/hub-services/src/main/resources/application.properties

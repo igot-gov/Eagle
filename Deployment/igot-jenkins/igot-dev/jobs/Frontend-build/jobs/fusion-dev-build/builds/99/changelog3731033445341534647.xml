@@ -1,0 +1,32 @@
+commit 317718ac06b37bfb2623cd6961d82745ae8b90b8
+tree 0011c42dffcfe997b7194d5f078c05d7aedb8905
+parent 1657cd20e344ef274ba0744c9648ef94114bd753
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:11:58 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 20:12:12 +0530
+
+    Network card height removed
+
+
+:100644 100644 5f459df386f42f4415926125a879d9e10a828f79 8511e8e784ad21bff27861210c7ba0352e969990 M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.scss
+commit 1657cd20e344ef274ba0744c9648ef94114bd753
+tree e7154d58fc99108ca2f2d762a0156f5665b8c35f
+parent a962e8f87357350af497dd61102b20e93c60bb48
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 19:58:40 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-05 19:58:40 +0530
+
+    tages removed from discuss  page
+
+
+:100644 100644 730c53a0a4220df40c3285778e750ee0fb7d8e06 af411cab44a7c6794df4a91896d7a0c45d63c90e M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 486445ae1abbdc8afcb2ffe9ce1b1ca1ff6c04fc ba671891f7989477799aa5d71eb60f063c1da44e M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 1f9c007ae1354d904eff002dfce04eda51afe246 6244700fa573f4bbb3515e48cfded8c1d285e857 M	apps/fusion/project/ws/app/src/lib/routes/discuss/services/discuss-utils.service.spec.ts
+commit 0d0cb4883991961d603923d6cb53c6e4d0a38740
+tree 8ec28abc6ce7695c1d95f5f5498ed5215acff5ca
+parent 2ee8873cc5f122f41dd6ef0661ec0abfb7421e2c
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-05 19:57:33 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-05 19:57:33 +0530
+
+    fixed Welcome text
+
+
+:100644 100644 8893f67d772aad892eae5a022d19d2a966b271e3 7bfaf58ba359de7c760fa0eb597a705388ead901 M	apps/fusion/library/ws-widget/collection/src/lib/card-learn/card-learn.component.html

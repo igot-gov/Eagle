@@ -1,0 +1,18 @@
+commit ab819bfebc8d2a2f0c8bb890f6baea32eb48adb0
+tree ad8634c092874e97b066a928e2276157dfe1789a
+parent a8af5ba14709644e2a9c7caf4a11473aaaa4454a
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2020-10-08 11:17:33 +0530
+committer GitHub <noreply@github.com> 2020-10-08 11:17:33 +0530
+
+    Update ProjectConstants.java
+
+:100644 100644 1d8ceac9a30a93415df96e7daa7e9fa3e2046d26 52734c894356ce8423fc112eed4c7eea285e9e02 M	apps/authoring-kafka-consumers/src/main/java/com/infosys/wingspan/authoringkafkaconsumers/utils/ProjectConstants.java
+commit a8af5ba14709644e2a9c7caf4a11473aaaa4454a
+tree 973d4cf51e106d0bf0f6c204cb4654098ad375e5
+parent dcb78a561ec6eca0d3b6ae1f267343970a77c4c5
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2020-10-08 11:17:04 +0530
+committer GitHub <noreply@github.com> 2020-10-08 11:17:04 +0530
+
+    Update Neo4jQueryHelpers.java
+
+:100644 100644 df6e5f4ea954bea170b5d6fc2599ac617f3bebe4 c4afe97b68e8aa132fda5298dba997e7f2ff3c51 M	apps/authoring-kafka-consumers/src/main/java/com/infosys/wingspan/authoringkafkaconsumers/utils/Neo4jQueryHelpers.java

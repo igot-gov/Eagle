@@ -1,0 +1,14 @@
+commit 40dc349a32fc39cdde4b3ef714428129baced792
+tree e9be49bacfa8815a403117d53f5a82523d7935fd
+parent 9a2e1fd80084a8f99a55d00b3d2bf5a847baa5e4
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-13 23:43:42 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-13 23:43:42 +0530
+
+    Updated nav for profile
+
+
+:100644 100644 f37a76fbac3eecea760a4c4ecfa489fe4c25c60b b5b3ac077696545baeff572d5b2a4d6b65a1709a M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.ts
+:100644 100644 fd6b2598bb0af3df36f5b8ed664ff50e249c07f6 2de27f54472491533f1a40980ea1cca660cec76b M	apps/fusion/library/ws-widget/collection/src/lib/card-network-home/card-network-home.component.ts
+:100644 100644 3d0e911019bab55e99f495d24b1a29cc92f6503b 129db1d80e357a13e61706866590d62d799ca61f M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts
+:100644 100644 306309864e2b1a549aae934e24b98b9e63c474ff db80d7e7bf2014943c9e6b530c06777eae09259e M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-cohorts/app-toc-cohorts.component.ts
+:100644 100644 245b01c3637d2b10242f599804b3bf3f8af20db6 f343bf599c9f489c018891b007df700070250b96 M	apps/fusion/project/ws/app/src/lib/routes/search/routes/people/people.component.ts

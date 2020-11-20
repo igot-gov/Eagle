@@ -1,0 +1,12 @@
+commit 24283fad5307ec20c2b50af5a4199c6da62dcfaa
+tree e1503c08730b3b59ebe666b563e2d10305c66c0b
+parent f1b2db0582164508cad1b0af8e00db3f10ae04ec
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 11:14:37 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 11:14:37 +0530
+
+    UI fixes
+
+
+:100644 100644 6e071ff14a9d064eff1af246e3ea849e12b5245e 3ae2ccb29213883f1e68cba223323e973b769e8f M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 22ebdd22f951f6f6abc775de125d1500261b645a 8420efa700d13f054edcfbef6ec9b28de6d082bd M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 b7382f78d737397f855b14ccc712d2db6b474837 ab3402417e66e12bef44d246938a513d6066c9af M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts

@@ -1,0 +1,23 @@
+commit 6125bac6282738cdd50bb105ca140c0ad8220a28
+tree 2f5f52dffb78ccc1297792a0388a8879154ac4eb
+parent f78a6716bfc4b4fd23d368e93051889072268234
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-11 15:46:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-11 15:46:24 +0530
+
+    ng2-ckeditor@1.2.6 at angular cdk 8.1.2 : Max budget in now 15MB
+
+
+:100644 100644 3dfd5cbc8f34f5b46fd5fce2fce38359d2ce5e9f 418b52eac785c2f23a6588b345ecb836185295ed M	apps/fusion/angular.json
+:100644 100644 a18ab7b111463fad057924b3b3a0700e9e297754 d51666710ae599f74b2ee68692e397f5900ef653 M	apps/fusion/package.json
+:100644 100644 32e698400794b1bef267d11469a8ab1eb26e7c16 1a713c0f7b532eb59036cca457c3e13057e5bff6 M	apps/fusion/tsconfig.json
+commit d888dc26e0b8f316ee3edb2b2099851d577abd5f
+tree db4f75cd7b47aa02633a1804ec315a4450b4d315
+parent 4076317e42023c0ad60291b98736b78559f45e7a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-11 15:31:18 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-11 15:31:18 +0530
+
+    Task #51035: Fixed the query and added more logs
+
+
+:100644 100644 a444efe1aed2f1e60b248a0daa74d725c343db8e 1fe7abd40e27d23dafe34cb63516a5ed03bf4a19 M	apps/web-services/src/publicApi_v8/signup.ts
+:100644 100644 f2f38f924997c8fe8b7f1a2423da8dc9aac0355e 1483d67c91a537ad38092f919d0645094f41f1e7 M	apps/web-services/src/utils/keycloak-user-creation.ts

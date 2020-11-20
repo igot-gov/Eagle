@@ -1,0 +1,11 @@
+commit 355b36bb7b376eb985a96303ae47fb138399dfe7
+tree 76d894ab8506aac1248e3ae0dd2ab5425815be08
+parent 24440c253983a3b84495cbee7523112a0eb844b9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-15 18:49:14 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-15 18:49:14 +0530
+
+    Task #50949: Label text changes and delete grad details issue fixed
+
+
+:100644 100644 60a9ea60a7dc6d3a06a25017eac6075cb7b199f9 e7ed76b175a0e787289244e361b7411aad6caa31 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 f6de61bfd71a4daf07c21ef2cdc4db58200097ab 5b8e67e546f108db7520c315c0491302aaf161d1 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts

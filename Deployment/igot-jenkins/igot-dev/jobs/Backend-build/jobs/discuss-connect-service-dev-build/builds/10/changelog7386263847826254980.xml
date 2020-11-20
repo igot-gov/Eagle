@@ -1,0 +1,29 @@
+commit 35ef16cbcf102489a00aa1a5aefc92fbba8bdd69
+tree fdadbf518650dc0192cf2fd0560742d144842a04
+parent b8504db649de36c135919ff777b04486407bbfa3
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-17 16:21:04 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-17 16:21:04 +0530
+
+    Code review comment for the Task #52076
+
+
+:100644 000000 70d8359332c0fc652f1f6ef6be20c5b72785defb 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubFollowers.java
+:100644 100644 75a25a4e5070d08979ec78446cef284ad8b0dc40 557ebf77d04452309ef242fbc1d2f9d36ba71c16 R095	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubPosters.java	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/TopicPoster.java
+:100644 000000 e5df079c15da5058b8a7cfb9d73990851f8a36c7 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/HubFollowersRepository.java
+:100644 100644 76bd5c82a09a7bdc3cde48b1738b6d816aaf7625 4ae22470f4571ee7fad243cbb004c58a4dc98e16 R051	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/HubPostersRepositoy.java	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/TopicPostersRepositoy.java
+:100644 100644 a6d6667c1d05573b8866f7b5bbfc297d569cf90e 6ecd88a9fbd9b63bf64e21550c4581e4bf559640 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java
+commit b8504db649de36c135919ff777b04486407bbfa3
+tree be544e563a8b13db365d7020700aa11b2f714495
+parent 70fa3ad94c8c64051baf842ce034c2ba011a39dd
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-16 16:26:55 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-16 16:26:55 +0530
+
+    Task #52076
+
+
+:100644 100644 7e9d7d412c09285f2af896b9a8b7d07c97fac0b3 16d5d02d3c3529e90e26ae4d8b4c733c304795e3 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:000000 100644 0000000000000000000000000000000000000000 70d8359332c0fc652f1f6ef6be20c5b72785defb A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubFollowers.java
+:000000 100644 0000000000000000000000000000000000000000 75a25a4e5070d08979ec78446cef284ad8b0dc40 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubPosters.java
+:000000 100644 0000000000000000000000000000000000000000 e5df079c15da5058b8a7cfb9d73990851f8a36c7 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/HubFollowersRepository.java
+:000000 100644 0000000000000000000000000000000000000000 76bd5c82a09a7bdc3cde48b1738b6d816aaf7625 A	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/repository/HubPostersRepositoy.java
+:100644 100644 51f009f61e019544665e41ab27952df28a733f20 a6d6667c1d05573b8866f7b5bbfc297d569cf90e M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java

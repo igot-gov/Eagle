@@ -1,0 +1,47 @@
+commit 8643275e26b6c9fd8fd38148cc1192a6bf62a81e
+tree c3748ef2033148ee0fb4f1d0dc05527cffe18049
+parent e850db7bf06f021c4a623b30e662064ebf642661
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:39:39 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:39:39 +0530
+
+    Task #52094 Changed query
+
+
+:100644 100644 a5b44c748833c4d8ebeb669190be1e8dbe57299d 0c319f42229cd420af7fa9e4b8a5cc0dbdf2ceb5 M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+commit e850db7bf06f021c4a623b30e662064ebf642661
+tree ad17d5ebfb7daea2efd74cdf54bb44472163abd1
+parent 35988fde4eb3c9ca8752bb37c984f0134961cd23
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:07:05 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-19 10:07:05 +0530
+
+    Task # 52094 Changes on network hub service
+
+
+:100644 100644 41150770baa19d4bca711f6b6af122c75c57be21 4c8dd53252910382141e02483231c4023b52e10e M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 b616866c75aa3a837532d1262c622a7190c754ec 0eb342a21caa2b18559bdbea0d3805e2d45c2b13 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionController.java
+:100644 100644 639ab4b2b50666388838fdbf5ceaa350612bae85 a5b44c748833c4d8ebeb669190be1e8dbe57299d M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+:100644 100644 9819bfeb65b2e0a40a7309c8522d6e671000baad 9330204eba306ab0bd4c5f8f5f83465058092676 M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 82ddc17940faab2286bbbca3f2a6e362502a0853 96ddf6699511f6fcbfd8bdbf910d12429bda3dcd M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IProfileService.java
+:100644 100644 96423c7d3cd8fb1585bfc0f03dd56bab7bc06601 9ae20a160f4712c486c90102b5d6cce3ca2cc77a M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 762a72e8b8f5ebfa6b0083e8d6b871e3a8e12354 d02c68c3386f0cf3f6d50e046f019230e6cc1cc3 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 42b5b237505871529c8e6ba333d1e63b7232fad3 a374a6fc5f9927963b74fbe7e36ba9432d106ec8 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java
+commit 35988fde4eb3c9ca8752bb37c984f0134961cd23
+tree 5fcd17a267b2641e11336ee972dc38726855d706
+parent edd748f1d67d7b06f1894f1be76335685c29d266
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-16 08:06:42 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-16 08:06:42 +0530
+
+    Task #52074 Added Total hit and paging for read APIs
+
+
+:100644 100644 00c751670b3d02ece53e65995c96652f83df7360 41150770baa19d4bca711f6b6af122c75c57be21 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 43f81d730341b8f3e070b39dcc6ca593a4b47be4 b616866c75aa3a837532d1262c622a7190c754ec M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionController.java
+:100644 100644 43cb16e0ff1cd931563fa196841fd7aefac02f2d 02ff2b373ec978cf5b3627906423f32481e973f0 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/UserConnectionCrudController.java
+:100644 100644 d98ee5fd46cb03f0e7e26a0a850d91761b77c7ac 639ab4b2b50666388838fdbf5ceaa350612bae85 M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+:100644 100644 f9285d23c219ddfa7bf50294335f3bb0e2baaa4d 9819bfeb65b2e0a40a7309c8522d6e671000baad M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IConnectionService.java
+:100644 100644 1129a2ce132b185b6f1fa86adffe895c22d26981 82ddc17940faab2286bbbca3f2a6e362502a0853 M	apps/hub-services/src/main/java/com/infosys/hubservices/service/IProfileService.java
+:100644 100644 6c97b006a3ce3b80c5f4953e8a7b3f923902739e 96423c7d3cd8fb1585bfc0f03dd56bab7bc06601 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 3349e44733410c30fe521cafec38ee93321b530b 762a72e8b8f5ebfa6b0083e8d6b871e3a8e12354 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 b658f8049e3ccc2a607b65c9eb71997cde65e0ff 42b5b237505871529c8e6ba333d1e63b7232fad3 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java
+:100644 100644 8b198c9354bcd159cdb066763bf47977464a1aea 23b3fb452b441df8cc5b521f94414e05879e9741 M	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/ConnectionServiceTest.java
+:100644 100644 7355230198a74f6c55a75d9e1c50c3640f04a990 9f187cec8a93a49c2f113f206861ab13bf8a4072 M	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/ProfileServiceTest.java

@@ -1,0 +1,36 @@
+commit 68b462303be870ead5b831f59101ae8861bf3851
+tree 05de1ad3784dc8cb6c12f64fe051f6782115f65c
+parent 091b5e563820ef56b25b7f73f7420118214178bf
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:50 +0530
+
+    lint fix
+
+
+:100644 100644 ce3b3ff25533792a6b5080f716a9aa3ff388fac7 ef2e757220523283a237164e90fae4214e0a3751 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.ts
+commit 091b5e563820ef56b25b7f73f7420118214178bf
+tree f2aef2e09aa20cfa8278b4632776422227acf1f1
+parent 636ae7aef0db23b974022079ebbdacb9df57cfe5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:13:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:50 +0530
+
+    tree selected Color
+
+
+:100644 100644 6e6098713df28b8f8387f0553c6bc49f07cd0475 e66127441733257c25a0a6e42a449d1fcad51fd9 M	apps/fusion/src/themes/_theme-mixins.scss
+commit 636ae7aef0db23b974022079ebbdacb9df57cfe5
+tree 89cb3f696ce406b3f03eae03651b3b120dbe4ee2
+parent 9c90242afd4e6a5270b16ef4d0fe3672c39a9671
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:11:48 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-28 09:14:50 +0530
+
+    51328,51130,51318,51338
+
+
+:100644 100644 e7eb5b38c8e1e7d7bafbb1797244c0d638d489eb 8e005c0bbc4b81fe6b46513daf8d4ea3395bd017 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.html
+:100644 100644 86e002cd9091538cd7b43851c8ebb43e697a5bcf bbe62c392aee417ee7dab1431cfe73839781c6c9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-of-contents/auth-table-of-contents.component.scss
+:100644 100644 62a617aaa6fb94c94f2a8b8a0db93d850e1ca962 d103407c541538a149ced5256a907fed6c42d428 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.html
+:100644 100644 48041cea4ac62d40500456cd65bd947343995a7a 063e9ff4257b6fffa53526a78303af4d46658a65 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.scss
+:100644 100644 a92536112e1e581437b6c1f0c3d0a8564d657ac3 ce3b3ff25533792a6b5080f716a9aa3ff388fac7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-table-tree-label/auth-table-tree-label.component.ts
+:100644 100644 e1c4fa4391d6ac5d39c9db44460396459a7cadd3 81582c5b74a51706920c5b1fb625d2169cfaaade M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 7945d5a64c335bbe59b612f8a9cb60521ac6b490 2ec4646ca33bbe294193c7ce7886351dbc2d7012 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

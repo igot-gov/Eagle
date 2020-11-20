@@ -1,0 +1,23 @@
+commit 88f02de88fd83752316fb595b015d9ce8a6a46e5
+tree b07eee51b3f637420424d14f5941c22e69484176
+parent 456c92f0a76ee7a1be861b64fe05798302972a02
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 12:05:01 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 12:05:01 +0530
+
+    Task #51354: Fixed the height issue if no progress
+
+
+:100644 100644 38e7722d3ad935e1692f17ea9170bc99630b0430 decb14e90018e7246acc274eb27fe6029fd85b48 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+commit 456c92f0a76ee7a1be861b64fe05798302972a02
+tree 4e1169b436bf1c04e016b543a7ad16fa2fa50e07
+parent 789d7d9139e7bd4ae81f0f623109c15da5d1b249
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 11:52:08 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-26 11:52:08 +0530
+
+    Task #51354: Fixed the progress bar not displaying in toc page
+
+
+:100644 100644 cca4168298a295bfa70e873cd6ee4db44d7a2f96 20f428ad36c074ad91545dc89b5a1d3d36add751 M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.ts
+:100644 100644 1bfa20cfaae278d2dfefd12be82de6dace3f64cb 952044c72203482553523a01fe28220260734554 M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.html
+:100644 100644 c4df7406d1c937ee21ea12a071091779695b6c72 99101374707bf09f4737ef31b2c25df5887d900f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 227f595e7371985f67f247c74a25f174a7e38081 38e7722d3ad935e1692f17ea9170bc99630b0430 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html

@@ -1,0 +1,101 @@
+commit f916771fd535820ab539c62c9f7b593509657c23
+tree 8bdcb9cca93ae361e09a2b944dacb428f31a21aa
+parent 074a367d0f1ad8c30bd0fa7f9038a4cee45e4f01
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 18:22:56 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 18:22:56 +0530
+
+    web and axe fix
+
+
+:100644 100644 1a8687bf7d5ebf20f3a641bf0cfaaa5774bdf3bd 6ce751c33d33582858638718b413759ed646f5ad M	apps/fusion/library/ws-widget/collection/src/lib/btn-mail-user/btn-mail-user-dialog/btn-mail-user-dialog.component.html
+:100644 100644 fcd469849e38b8ffeacf5a51236fcb86e9884b39 897f28305b1b9a39980e5969af83e50f8c113f04 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 028f0d926edb357a53655ee2d0ed3be94bcb1ba7 c6839518a1e2292dc966a25aaf1fcb909dd98a7b M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 19f26a1a879bae4980e986d3ce5fa763fcc37661 915dd2607cef66fc4335789f53b41cee229b6517 M	apps/fusion/library/ws-widget/collection/src/lib/picker-content/picker-content.component.html
+:100644 100644 28dc70d73c179a7d32f14603a31b9b13fa7ac1ec 6c84ed32489e8544fb3515763bcdbbc020eb509f M	apps/fusion/library/ws-widget/collection/src/lib/picker-content/picker-content.component.scss
+:100644 100644 84f81f327c9a4cd4520326191a978ce5ef24e231 0b5838f0afa6f4b0203d9a664c13f92d6a3ee7a5 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-tags/discuss-tags.component.html
+:100644 100644 09ac0a0be02592eeb009abe05e2a98c307188c46 5b8f8191e44ffca6edee76aceabd6cee7eed2fd1 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.html
+commit 074a367d0f1ad8c30bd0fa7f9038a4cee45e4f01
+tree 6efb296ae5d1cb3b6efe6c8e7507db45817b0806
+parent ca8bdf8d22863ec63c774bc7fb6d11dc2ab35eda
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 16:59:26 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 16:59:26 +0530
+
+    wave and access updates
+
+
+:100644 100644 5fbd40bb2a19536b7835652bade647a1825822e0 028f0d926edb357a53655ee2d0ed3be94bcb1ba7 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 ccacfd83d0d4374a5b18a2c1a937e55930805966 894965c8c7210d8f0c7899f2a103b680a893f75c M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.html
+:100644 100644 d521ba54f83485012856dc020b002b46d529d34a d3d7d41bda3d9e90b27c0dc43ff4916a98d5f21e M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 8b6172d1ed6914d85ac85fd6dafd6861e915af69 65efc4a88e9af00127b8d6fc519b6ac057450f1d M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 4431a8bad6660b8df7ad918f385fe1c2526ade76 297d4b7e07b4fea4ea7099d57908708eb42f580d M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.html
+:100644 100644 6bcfc647c8db7a347cbac1091e1fef3062e2c983 678f7a0dec7ee74cd25cc083a04c1aae1ec44a7e M	apps/fusion/src/index.html
+:100644 100644 98b5d3dfd934ea57a59c72a44c23fe494c8ccf33 35ff280f3edc79137e4ad4b5767afc24b556ff8f M	apps/fusion/src/styles/styles.scss
+:100644 100644 f367195f60ccc973b93364c460edf1255cd2e622 9bc360f8db9f6a295ca91f0b5b8f3259dd3e0506 M	apps/fusion/src/themes/_theme-mixins.scss
+commit 1ffbd049f8073f6643a71e703984ee0041d25fa9
+tree 2fd5320ce32eddf725ef4a1cfb8eb7e259e49c80
+parent 00d476001a06a6df383fe1ec253777853a95a86d
+author karthik-tarento <70887864+karthik-tarento@users.noreply.github.com> 2020-10-29 14:57:55 +0530
+committer GitHub <noreply@github.com> 2020-10-29 14:57:55 +0530
+
+    removed hardcoded env variable
+
+:100644 100644 7d1726ccc62b330a7bc5565ed8f2fff3edd5a2c8 4eed736d28a1eb6a46e69758f07871502e95b415 M	apps/web-services/nodemon/nodemon-eagle-stage.json
+commit ca8bdf8d22863ec63c774bc7fb6d11dc2ab35eda
+tree de221f22e00a47ca3b9b46a555b339d0f3874d13
+parent 06ef03b822654d4c88c754863e69f2c6961f75fd
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:42:00 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:42:00 +0530
+
+    access fix 1
+
+
+:100644 100644 0846f0bdf2375113ce466e4d4aa2b6671c1ca246 718a602cbf5085c8b98e27f0f4b4a196967e1228 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback-v2/components/btn-content-feedback-v2/btn-content-feedback-v2.component.html
+:100644 100644 9df6a8ef195a7434cc8e618da51552c20ff7fe0c f9c5c8a4905bc635c4a50939a40d77cc968ac2c4 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-like/btn-content-like.component.html
+:100644 100644 575f16fb56a20aa3ce15f18a52a2e33fb5075f19 0797ee9a13cb571c31cd7f792dc98e4c4d3c0ef7 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share.component.html
+:100644 100644 3d8d59eb16b477eb838a829f13bffddefa8b4550 3b1d3c9080b0b2a0d7511e298f88f0b7629d945e M	apps/fusion/library/ws-widget/collection/src/lib/btn-goals/btn-goals.component.html
+:100644 100644 21768e6579f9fb980a51faa86159393aad3c794e 9cf0502f4bb42cb771c395b4b61f3cf8670d4f81 M	apps/fusion/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist.component.html
+commit a3ebaacad3b8946e977b32ccd8171eb0e156a204
+tree c4de6296795b466483da85dcbce4990d94ac0811
+parent 9d5dffe3eefaa87e05c0e84c738d642cf6fde17a
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:24:22 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 14:24:22 +0530
+
+    UI css Updates
+
+
+:100644 100644 b83b7b3e8df295cdd7f95d15b0c0aa4318c09fd2 324b884f6e4b1db0375efd49628f4f4e183b4020 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.scss
+:100644 100644 f85708099c3957f79ce8a13d1100b666a05644fd aa171bebd42a4fda6bb7647abc2ecd41b21fa969 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 03e04ad233a73b007928435246063dc9dbcc1ba5 4502594da1c33efecc040ed681db85d12f247489 M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html
+:100644 100644 d90d6044af2e6ef827d460360785c3f1f6c4a462 87c624c8b005579e8eb70a9d47704e5e88ac79de M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.scss
+:100644 100644 5fbd40bb2a19536b7835652bade647a1825822e0 69013b46a5e56ad1b04b10c4c7dbe9e667a83c26 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 3a0fcc51321a008868652172e9684ffad5f24c03 59ed31233801116cbf86a0c9ffa61f7e7c131b40 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 a3bf8d1776fa8ee9c487f385e193e11c953b6da6 ca7d13813f28533b6355d21c41be0c325d7a8bbc M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 cdbf07f8e0ba6dc6edd71ad7bae0f38ff8554120 e757ce24eb592d5536aa74feb90a0fd4e5568fde M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.html
+:100644 100644 98c7a3dbdb082fa625456dcf1db96807143d9641 c3aa23a5cbcbad7fa019ed2f4f3ee505fc65a56a M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.scss
+:100644 100644 045475f4990e70b8d4acc2594c42174c4fb65146 506424dc7328b2d7ec37965042118eef86bc548d M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 da0ef19f216e54b138731de529bb024e450fbe43 92c58c089db827bd848383853ed3b882a03b5924 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.scss
+:100644 100644 94672c089e7457085d2ec0101aa6555f6b7aaadf 55cba3e88e92cd3f2685d760d6d2a96ea004e9a7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 98b5d3dfd934ea57a59c72a44c23fe494c8ccf33 c11e370c7515b9daea826a5b468158d0fa97edfe M	apps/fusion/src/styles/styles.scss
+commit 12b042742d2eb8c47990eee569115c2db8c64d17
+tree a69f5261b7b1cb304ef58b6afa30edf92e741194
+parent 751522b7ef71d456dab7ffc88b5d92b66ccc5db1
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-29 14:14:42 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-29 14:14:42 +0530
+
+    Updated the REST path and added params
+
+
+:100644 100644 052770de8ebac7e201d64a05146e956266143bcd 9ad7e7f31e55424fcbbc3688469df904e4119694 M	apps/web-services/src/protectedApi_v8/contentValidation.ts
+commit 751522b7ef71d456dab7ffc88b5d92b66ccc5db1
+tree 463417fa41b2c3388600768d23af85b6e90f2e6b
+parent 4c8942770f97f58bb6cc644890d1c0487b7a5ed1
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-29 09:58:44 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-29 09:58:44 +0530
+
+    Added API mapping for content validation
+
+
+:100644 100644 c41a6106dd5bd8ab37d5ebbe9af3b9ca05f20f97 7d1726ccc62b330a7bc5565ed8f2fff3edd5a2c8 M	apps/web-services/nodemon/nodemon-eagle-stage.json
+:000000 100644 0000000000000000000000000000000000000000 052770de8ebac7e201d64a05146e956266143bcd A	apps/web-services/src/protectedApi_v8/contentValidation.ts
+:100644 100644 4e19da7bd8dea93984d89aefc334af1304f042a2 def4fca6599bfa33d7ea3fb207b17e72dd76d95e M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts
+:100644 100644 8ed003e71eb4e94b5dd56841955efba1348debc5 f0e0224aaa21d87b48bcbf8d3e9267b9a9dc6b74 M	apps/web-services/src/utils/env.ts

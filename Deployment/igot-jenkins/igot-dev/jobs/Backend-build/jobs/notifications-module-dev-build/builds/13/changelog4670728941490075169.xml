@@ -1,0 +1,10 @@
+commit b8d93eca25b750d196c23e00bf85d5051fed15e4
+tree 65f5ca88ee69b5484f9c1268ee2766fbc31378d3
+parent 5695c56e5d3a93045fb5e4c6e7577eee2f748d6b
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 17:02:48 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-21 17:02:48 +0530
+
+    Chaning max poll interval ms
+
+
+:100644 100644 bb67b4969a089f278b2f34e668129dc1bedaa7b8 013ff574b7f5495b929a1a7374f713ec64c4d10e M	apps/notifications-module/src/main/resources/application.properties

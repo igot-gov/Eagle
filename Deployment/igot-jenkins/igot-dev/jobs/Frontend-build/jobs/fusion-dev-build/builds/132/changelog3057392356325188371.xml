@@ -1,0 +1,70 @@
+commit 431f30e4f903b642b727a2fa08fe18b669c02e92
+tree ea1c1500cf4e952b76386874e259f9204614a845
+parent 4bc7289b5a93fca338453ee296f155748c2a4584
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-21 18:46:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-21 18:46:32 +0530
+
+    nav Updates
+
+
+:100644 100644 887d81d8147622a254716820da247d4ff5066a03 47e0365a2a8a1c2e79beaa8281af8ebf3eec4607 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin-routing.module.ts
+:100644 100644 1c31a87d8112feeedfdb7641d4a238d5c1cf8037 837acb96fd1f71976060dc64007ebf05f4930082 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.component.html
+:100644 100644 8be1a7a46fe414b9d88e9d4cccdda3031141f38e 9c1409d2376562d41bce836e3b4d6bce597c641d M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.component.scss
+:100644 100644 15ddc5ecf33268704ec99fa462fc3f08dd84447a e2a86a2619103682c005540adeb892ade122ff1d M	apps/fusion/project/ws/analytics/src/lib/routes/learning-analytics/components/client-analytics/client-analytics.component.html
+:100644 100644 8856e755e8d32401ea77e3d651c6e9c877f80441 440e3efa464f9f5b58c6a61be262efb1201f0eeb M	apps/fusion/project/ws/analytics/src/lib/routes/learning-analytics/components/client-analytics/client-analytics.component.scss
+:100644 100644 53e19ea3e592f039c52f71c49d0a45c170a61f0d 630a467a91d6720dfe86d4cb3ca89193d98fd869 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 a652090d286b8b7cee033a5b703cb6b32bd96f46 217b8fa5c9d9a4b4d10a491f25492ef4f83fdeae M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/components/home/home.component.html
+:100644 100644 57f6f01ce93615440dbac86b88eee451de42ea60 92fffa5a7ce5c8949b933e603bcc4ba13aa5391f M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-home/goal-home.component.html
+:100644 100644 ff327a22c0846151195c57dd64edae494cdaed8e 88e0c70030516c18fac56cc8ebeddf813f478cf4 M	apps/fusion/project/ws/app/src/lib/routes/info/about/about.module.ts
+:100644 100644 25924d5e14c8643c1cf37e32fdbf0a6f5f91ce77 c005924273235f93e78932c86ae8b6ef7ee64a6c M	apps/fusion/project/ws/app/src/lib/routes/info/about/components/about-home.component.html
+:100644 100644 c2ef7bc3fbb486f39fd44c9ab233a468687075fb c28f6e3e9b7aea158547caaa2ab7c317af42ec59 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-home/playlist-home.component.html
+:100644 100644 8ed115839601e7aa2b1a60f6a057908e6779b8da 48d48b3b11fb51dde9836dad3c6974f2074afaa2 M	apps/fusion/project/ws/app/src/lib/routes/profile/profile.component.html
+:100644 100644 c3f1450cbc510ceb30e4095fe8efa83aaf9f25da 038b314a53126c0370bb7deb4f9d55f81f942319 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 15dda8002e0198a7ab0d534d59972df0e96bd391 8b6172d1ed6914d85ac85fd6dafd6861e915af69 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 57a8db06cb5b95ce0bdcc04ee2534bdf9375623a fd90f8e91ca297aaeb97c81ed015a869015255fb M	apps/fusion/project/ws/app/src/lib/routes/user-profile/user-profile.module.ts
+:100644 100644 7ff145df93c170e12ab76311777c0a55f0fa7a1f d199e1995d3e7b18c755ea0d4f525aa04e6efdbf M	apps/fusion/src/styles/styles.scss
+commit 4bc7289b5a93fca338453ee296f155748c2a4584
+tree 164760e93786d103ead6548516e1a3bd0866b08c
+parent 5b91e2e2c1717bcef4d2d475d523d010131bcc6b
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-21 16:26:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-21 16:26:09 +0530
+
+    lint fix
+
+
+:100644 100644 b0fe51b14c6dd70283bd15718ec585fb4bf81a18 8bb022a1994a80584cde700d578407815bc544a6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.module.ts
+commit 5b91e2e2c1717bcef4d2d475d523d010131bcc6b
+tree c13b6547b8aaa9bf105772d38bbda3a50e91396e
+parent 6ccafbf0ea4a8a71d8ae0d223337d215c1d4cc63
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-21 15:47:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-21 15:47:41 +0530
+
+    nav update incomplete
+
+
+:100644 100644 dd7d6e102ae25474c3e7343ae1696b29f85d9750 06656dde4cb295aa07290e4911c54e56457faa36 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 04d78c4e517fe2d4578902765e8816fcbb31b02a b2a733426dcd3255febc6bb6b3e193c0ea2dc9e6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.scss
+:100644 100644 9667fec867d263d263ee1309b6ef1c6af23b9ee6 bc8f15b62c63b368c7f94e06a51161c4cfb67b03 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.ts
+:100644 100644 8b6d68876871e068a8cc0baaa5a9addf6f2f006f b0fe51b14c6dd70283bd15718ec585fb4bf81a18 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.module.ts
+:100644 100644 fb35dc1da6a92012c619752b12e4e938b082ac95 ab372d46812577475bfe61164f476fd2929eecbe M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+commit 6ccafbf0ea4a8a71d8ae0d223337d215c1d4cc63
+tree 3558bd9bb277292e51ef44f21f6de0b517f061ab
+parent 04056e3ae5266ba826f9646f40bb6db988ea95e6
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 11:33:35 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 11:33:35 +0530
+
+    Error fixes on competency
+
+
+:100644 100644 6c87bbc6001644c37abd41e5bba4a9fc20237dc5 a5cdab941c787a0aec4560c01305f8507a3daad9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 76aa7f18f24f6819d9b2b40cf414e37b6bc3ee69
+tree 9d09d5ae2dcdfb3450cdcb24c066fdc6ea367144
+parent 3e7ffaa3e1182aa16f5407300e6c18c5b6a48104
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 08:51:02 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 08:51:02 +0530
+
+    button alignment fixed in competency
+
+
+:100644 100644 d46bfe1e4d16bcaddb8537defe8cf85b4c4c31ef f3de49c261124046eca1a2771c949fd29c8582ee M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 8420efa700d13f054edcfbef6ec9b28de6d082bd 4b537adf34d52a27d5e581bd4a25e7e513968b11 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss

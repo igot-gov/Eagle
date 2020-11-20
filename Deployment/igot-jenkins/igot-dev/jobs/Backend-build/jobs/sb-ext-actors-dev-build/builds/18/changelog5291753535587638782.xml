@@ -1,0 +1,21 @@
+commit 2e4a5599893c8c69a45d7836e66e25c024a496eb
+tree 2a593f5d0cfbb85f6e3fce7d0dc5fa93063b1532
+parent 5d72b810052badc0390e368346ca76444b7888bf
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-27 11:58:56 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-27 11:58:56 +0530
+
+    Issue #51374 Rmv email template footer
+
+
+:100644 100644 9cfa1ac1d7f34e52bd6808c111ecf636dcb13d6e 9d7d98f08e0327284f5d0e4d91bddc473b698743 M	apps/sb-ext-actors/src/main/java/com/infosys/util/Templates.java
+commit 5d72b810052badc0390e368346ca76444b7888bf
+tree b4ff44b4ad1af06d91a38d9ecad84beda01b66f2
+parent 995f4905d2d66ed3c2a5a9bc8a03f62c9c539f40
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-27 11:52:30 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-27 11:52:30 +0530
+
+    Issue #51374 Addressed email template w.r.t iGOT
+
+
+:100644 100644 f3a87d99867e94d8d78a020f42f02cc9ca73630a 961e78239b921c45a6666e8c56116b8ac27aafca M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java
+:100644 100644 f9a857fa5a22b694e476f9ad91e9a8180429179b 9cfa1ac1d7f34e52bd6808c111ecf636dcb13d6e M	apps/sb-ext-actors/src/main/java/com/infosys/util/Templates.java

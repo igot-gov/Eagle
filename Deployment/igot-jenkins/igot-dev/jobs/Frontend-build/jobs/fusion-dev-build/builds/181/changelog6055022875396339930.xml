@@ -1,0 +1,72 @@
+commit c95e9754e2dc70151bfec9c84ba7036481c5d92c
+tree 8ea4b2e4192bcf52263d9915b5187e4947bb4a23
+parent e022bccf641e873ee38b67ee19925688f38233c6
+author usha <meetsamal.usha@gmail.com> 2020-11-03 20:18:21 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 20:18:21 +0530
+
+    redirection issue fix
+
+
+:100644 100644 f020321b180ae2dabdda73160c1d52d61d3fea71 f8f76aab0b14a495e9476e3a71357a7e60fc2351 M	apps/fusion/src/app/guards/general.guard.ts
+commit e022bccf641e873ee38b67ee19925688f38233c6
+tree 35729a1b1c8f0bbfedc6e7d81143cb540ad9727c
+parent 3d816bd2e4dcc691969dddcca0240d7605c75004
+author usha <meetsamal.usha@gmail.com> 2020-11-03 19:40:55 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 19:40:55 +0530
+
+    redirection issue fix
+
+
+:100644 100644 856561295d4b12dbe69b42d1d5d7a79e335255e6 f020321b180ae2dabdda73160c1d52d61d3fea71 M	apps/fusion/src/app/guards/general.guard.ts
+commit a855b3bfb277cab6a150370ddb1ad87ef806d5f3
+tree c3f597785a5ac2256d54093ea846e8047326f182
+parent 8a97a97b2d15e827f4b4418110e9b7410d58e87a
+author usha <meetsamal.usha@gmail.com> 2020-11-03 16:36:10 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 16:36:10 +0530
+
+    header added for playlist api
+
+
+:100644 100644 2561c1a08e6048f1bab24ed8c83ed2de1995a4f5 9fbcc761f941a8c25eff299aad9246c80d7c2c50 M	apps/social-share/api/playlist.js
+commit 8a97a97b2d15e827f4b4418110e9b7410d58e87a
+tree ceb4cc1775361bb98d81134caa98eb3effbc1d93
+parent 76447d076adf40d7e9acdea88de035b6359b80d3
+author usha <meetsamal.usha@gmail.com> 2020-11-03 15:08:11 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 15:08:11 +0530
+
+    image url changes
+
+
+:100644 100644 279faccf9b939639fb05875dff1070ad402ff4ea bc5ea8920054225b75a4a13078c4fb8d145a66a0 M	apps/social-share/api/badges.js
+commit 76447d076adf40d7e9acdea88de035b6359b80d3
+tree bf86797ace1d9bb1221e33e6d5ba80a17d1e1bc9
+parent 80fca59a0b194439d8ad00c175325cf4732676a3
+author usha <meetsamal.usha@gmail.com> 2020-11-03 14:21:26 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 14:21:26 +0530
+
+    image url changes
+
+
+:100644 100644 36cf531ba3dc253c8a7a61a79d2804a6f2b9dd2a 279faccf9b939639fb05875dff1070ad402ff4ea M	apps/social-share/api/badges.js
+commit 80fca59a0b194439d8ad00c175325cf4732676a3
+tree 32b23c7b43569610aed752ddf4a75639fbc0eb80
+parent 8a06bb1596215368fbe745c3c4a8410230f3a81e
+author usha <meetsamal.usha@gmail.com> 2020-11-03 12:04:07 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 12:04:07 +0530
+
+    playlist api integration
+
+
+:100644 100644 adcb20ca4d5bb2a337f3c13c4f4d346e24212b30 36cf531ba3dc253c8a7a61a79d2804a6f2b9dd2a M	apps/social-share/api/badges.js
+:100644 100644 1e4ba35963f1b4d4af92b8fede835cedef93c317 4f8a995c0b538ef5c1799826c0e2fac5088726f5 M	apps/social-share/api/content.js
+:100644 100644 5d7e6d75d22f8375721a1f054dce7d5ab6ce43ca 2561c1a08e6048f1bab24ed8c83ed2de1995a4f5 M	apps/social-share/api/playlist.js
+commit 8a06bb1596215368fbe745c3c4a8410230f3a81e
+tree da9eb795bf2a7b2702732ea5e571193482ed55f3
+parent 3d816bd2e4dcc691969dddcca0240d7605c75004
+author usha <meetsamal.usha@gmail.com> 2020-11-03 11:45:41 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-11-03 11:45:41 +0530
+
+    badge image url changes
+
+
+:100644 100644 cc7647c1887a8f105fa72be4a35e574d32b05ed5 adcb20ca4d5bb2a337f3c13c4f4d346e24212b30 M	apps/social-share/api/badges.js

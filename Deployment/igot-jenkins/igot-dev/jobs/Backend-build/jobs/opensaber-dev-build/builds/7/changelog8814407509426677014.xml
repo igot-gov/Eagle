@@ -1,0 +1,11 @@
+commit 5223063cb922e76478d0d68c11bf8a404313a784
+tree 752b7e1875593a14a59f979fa842c30ce6564bf2
+parent 26e5273a8259d16eedb877f9ab0d5b79c6d26654
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-16 12:23:12 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-16 12:23:12 +0530
+
+    Issue #51574 Enabled elastic search and rmd logs
+
+
+:100644 100644 ab17a172a33883793ec618ff89528f99e16be2b0 a544f2327987e0c31df0ca05df0236f4ee12361b M	java/registry/src/main/java/io/opensaber/registry/controller/RegistryController.java
+:100755 100755 af4f7fcb12ca05ee00590f0a7b2cab1d82c6b29c d0c823dd0da7d8ca106023b9af8fc9dc83a0f57e M	java/registry/src/main/resources/application.yml

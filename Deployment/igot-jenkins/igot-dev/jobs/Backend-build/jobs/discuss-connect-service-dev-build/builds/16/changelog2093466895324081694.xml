@@ -1,0 +1,52 @@
+commit 4a4e88d2e3f5e55e2101a6c0283ea8d937790f0e
+tree 034a7cba8134a8376f3047efea51fc227fa4092b
+parent e2505271e3cc3b59a63fb110d9a21c3ad9dd5eae
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 14:57:00 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 14:57:00 +0530
+
+    Fix for WID replace issue
+
+:100644 100644 fb6643afa467e531b107fb3f47bbc87baa1eee56 644fb8a6bf92f391638ac2fa857ace6fe8692118 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+commit e2505271e3cc3b59a63fb110d9a21c3ad9dd5eae
+tree d05709c5ba35b3f1716f34368c0cebaa3787f0bb
+parent 66ad52b0cbe90dafa63acb8cf4d008f078f4c157
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 14:38:10 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 14:38:10 +0530
+
+    Fix for WID issue in subject
+
+:100644 100644 5fac6c4352732ae1ab7054954a622b650877d5dc fb6643afa467e531b107fb3f47bbc87baa1eee56 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 6868fc3046762f427d772a8857e73fb7efe7b289 d21bf7f64f54f0aa7e602fe7e0cfd859e35b72e7 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java
+commit 66ad52b0cbe90dafa63acb8cf4d008f078f4c157
+tree 58360e584d13232d55a04e0b1ea07ba5517ccdcd
+parent 89aafb3289234c2e05a0233647c748c579661fef
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 13:56:42 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 13:56:42 +0530
+
+    Updated tag keywords and trimming data
+
+:100644 100644 14c571c45cf59699fe46c70687e8fe15fc74d1dc 416f268577819a1d43a6c4aa90d0dc10f6be190f M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/Configuration.java
+:100644 100644 db4d236fa3c14fb86ec6d0ad417210860c7550bf 5fac6c4352732ae1ab7054954a622b650877d5dc M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 30184a7b854f732e88b8ec48f5ac55af36e21c2b 6868fc3046762f427d772a8857e73fb7efe7b289 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java
+:100644 100644 a60db5d906a27d00b2399ea13a5b9a374703a72b f507268b8bb7ea9e11a24ffdbc2a4271b2223cfa M	HubNotificationHandler/src/main/resources/application.properties
+commit 89aafb3289234c2e05a0233647c748c579661fef
+tree 2eb1ce7a059cfdb2d9dbb4e2e359c6f79d16789d
+parent 97841223560e57498293c485e7a53580d84e10cf
+author karthik-tarento <70887864+karthik-tarento@users.noreply.github.com> 2020-10-28 09:37:32 +0530
+committer GitHub <noreply@github.com> 2020-10-28 09:37:32 +0530
+
+    Fixed target URL issue
+
+:100644 100644 23f7a418a41b5e16eeebcd99de4347706b0365dd 5f5f1cb445a3fbd856e7b234e3fa79b8cdf499e9 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHandlerServiceImpl.java
+commit 97841223560e57498293c485e7a53580d84e10cf
+tree 04fd2934b458de917b67d24bab8616274d43519d
+parent df628358957563e5cbf4d13a11911e98a5f0ffd2
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 08:38:42 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 08:38:42 +0530
+
+    Defect #51959 fix
+
+:100644 100644 16d5d02d3c3529e90e26ae4d8b4c733c304795e3 db4d236fa3c14fb86ec6d0ad417210860c7550bf M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 138af92c68ed64bf2027fc651b30460254dd63e1 23f7a418a41b5e16eeebcd99de4347706b0365dd M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHandlerServiceImpl.java
+:100644 100644 6ecd88a9fbd9b63bf64e21550c4581e4bf559640 30184a7b854f732e88b8ec48f5ac55af36e21c2b M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java
+:100644 100644 65967e9a21bb08089bcc1d81b0df9db38fbb5ce7 a5ab83f451a9ffa1b199f60a3436ed8a1d3c06e8 M	HubNotificationHandler/src/main/resources/log4j2.xml

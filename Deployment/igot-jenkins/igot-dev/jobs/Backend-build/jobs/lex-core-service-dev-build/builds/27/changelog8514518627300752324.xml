@@ -1,0 +1,12 @@
+commit 746083d4f754deb1d1336673354a988cf572761d
+tree 4446f91f7ee7067f11cb6437519814abb21edf8c
+parent 3c0ea8da9a4e67bd1545866b235b17e643d16a7a
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 23:25:00 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-05 23:25:00 +0530
+
+    Task #51908 Fixed query for progress
+
+
+:100644 100644 774a33748a37cd9a8afce8f89f3ab3e1eb9fffb7 0946c630281e091b5dd17c9b65cae8b27434da0e M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 8fbba701a5cd9dc8ddd2cd89902b260c47c07b97 130e63cffddf924615a3e68b0267f2188ca9e7ae M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/bodhi/repo/ContentProgressRepository.java
+:100644 100644 4fea913ffe1582ab28f27873627d8a87257c7f4c 6108d4a47bd2d031fb3de24f41ed786df5d9aca0 M	apps/lex-core-service/src/main/resources/application.properties

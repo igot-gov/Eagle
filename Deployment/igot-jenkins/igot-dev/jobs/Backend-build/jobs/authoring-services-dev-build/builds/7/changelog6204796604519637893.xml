@@ -1,0 +1,19 @@
+commit 32e7f4fc7828eae34977f9822eab14e368d756c0
+tree 839c7540f1494da24764cd2952ab3057b8d4c754
+parent c543f8eec92a22bd53a2379bce81582cd4663d25
+author Haritest <haridasksd@gmail.com> 2020-09-23 14:21:22 +0530
+committer GitHub <noreply@github.com> 2020-09-23 14:21:22 +0530
+
+    sonar stage added in jenkinsfile
+
+:100644 100644 6db2cdcab786830f05ef8dbc01bfd85f110c1121 69942ac758c83dc434f1ce298b531162ba60ab58 M	apps/authoring-services/Jenkinsfile
+commit c543f8eec92a22bd53a2379bce81582cd4663d25
+tree 792dfe05c2a0c30e357fe9f5f786fafd45379533
+parent 3ebb627250b543b9ceadb7cd7d3d53f06c34e370
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-23 10:37:06 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-23 10:37:06 +0530
+
+    Added scrom.cql
+
+
+:000000 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 A	db_scripts/cassandra/scrom.cql

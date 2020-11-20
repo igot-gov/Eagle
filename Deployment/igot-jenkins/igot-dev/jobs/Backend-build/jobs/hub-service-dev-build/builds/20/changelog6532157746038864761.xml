@@ -1,0 +1,35 @@
+commit 5e5111da567fb4f8e6875cf9989de53a4a59e32d
+tree 2207b12538478b0ca32fa08361c5b56dc727e74b
+parent dd11b70f6ccb82efeec20631ed19eee9ba64f921
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-08 11:14:59 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-08 11:14:59 +0530
+
+    Task #51688 - Resolved PR comments
+
+
+:100644 100644 3285b41bdccbee76a6416a38902245d39fead31f 8b198c9354bcd159cdb066763bf47977464a1aea M	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/ConnectionServiceTest.java
+:100644 100644 f051bea83d28c66609c4c2223af328a4bdaac599 b3c88981d4e3aec03bce78f9739d379b12e936d7 M	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/NotificationServiceTest.java
+:100644 100644 bcb0fada14b3252c973690cd1af90dd44d6d2b6c 7355230198a74f6c55a75d9e1c50c3640f04a990 M	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/ProfileServiceTest.java
+commit dd11b70f6ccb82efeec20631ed19eee9ba64f921
+tree 3038acee58aca657cfafaf225ee923245bc295b6
+parent 5ad8bf28b24b12c5dcd3fb2b993dbb83cbf02c81
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-08 00:11:17 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-08 00:11:17 +0530
+
+    Task #51688 Service unit test cases
+
+
+:100644 100644 f5b28f751d52f9179de193d9d71824cf1f55c9f2 920b7e56ac73750f1ee4de5fec51c0d6b6159f12 M	apps/hub-services/pom.xml
+:100644 100644 6c97b006a3ce3b80c5f4953e8a7b3f923902739e 4880d11f0a497d6839331c57f28418ae82d78821 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 67ad365dc151e286249c9f5f1dbb61012f34b5c1 7394ac980ed433a120d6b145ee28f52b0c22c12f M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 1e521c7ed126b0127eeb115b705214d92ea80c2f 3349e44733410c30fe521cafec38ee93321b530b M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:000000 100644 0000000000000000000000000000000000000000 3285b41bdccbee76a6416a38902245d39fead31f A	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/ConnectionServiceTest.java
+:000000 100644 0000000000000000000000000000000000000000 f051bea83d28c66609c4c2223af328a4bdaac599 A	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/NotificationServiceTest.java
+:000000 100644 0000000000000000000000000000000000000000 bcb0fada14b3252c973690cd1af90dd44d6d2b6c A	apps/hub-services/src/test/java/com/infosys/hubservices/serviceimpl/ProfileServiceTest.java
+:100644 100644 5e9fd4d87b867bd69aed684820ef5048fb5b5ce7 5ff5f5e0cc6c15e106c6c3126c7a09fecc6605f5 R050	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsHelper.java	apps/lex-core-service/src/main/java/com/infosys/hubservices/serviceImpl/GoalsHelper.java
+:100644 100644 30f2f0299932cac233f025a86a40068d5a7883c6 86c14258a4b6ae81d85951ac842aed5355fd374e R066	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsHelperImpl.java	apps/lex-core-service/src/main/java/com/infosys/hubservices/serviceImpl/GoalsHelperImpl.java
+:100644 100644 8b33566d42963f7769b4413c0323b034efc11347 75c74de2bfba3fb7adc73af652fad953090827f6 R090	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsService.java	apps/lex-core-service/src/main/java/com/infosys/hubservices/serviceImpl/GoalsService.java
+:100644 100644 91173e36d3388167b495841492592bfba63835b0 87cbf38bc5f6dddde3bd76d6028cc76cdd94d316 R099	apps/lex-core-service/src/main/java/com/infosys/lex/goal/service/GoalsServiceImpl.java	apps/lex-core-service/src/main/java/com/infosys/hubservices/serviceImpl/GoalsServiceImpl.java
+:100644 100644 e8e8c5639172b19f1dfe68a433216275bbf85f4b 2f5a65dcba2171d4bd1e874ac36fa7991ebb1b6d M	apps/lex-core-service/src/main/java/com/infosys/lex/goal/controller/GoalsController.java
+:100644 100644 daf558ad988435a1a68307b1434a0bb17dbb37dc 885f61a941accf1d5eca35c0c9fa311f6f6dde61 R076	apps/lex-core-service/src/test/java/com/infosys/lex/goal/service/GoalsHelperServiceTest.java	apps/lex-core-service/src/test/java/com/infosys/hubservices/serviceImpl/GoalsHelperServiceTest.java
+:100644 100644 5585bc62ce23871893242a6b4e20e36330b06989 5585bc62ce23871893242a6b4e20e36330b06989 R100	apps/lex-core-service/src/test/java/com/infosys/lex/goal/service/GoalsServiceTest.java	apps/lex-core-service/src/test/java/com/infosys/hubservices/serviceImpl/GoalsServiceTest.java

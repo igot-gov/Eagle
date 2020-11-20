@@ -1,0 +1,10 @@
+commit 30f125b28ed094583a31feebfa601640898a7e6e
+tree 35e136dcd216dacc4fdc63b0a21d928787b65f16
+parent 9ce2675af6599134ac13e39dbe3117c07da31459
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:35:19 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-26 20:35:19 +0530
+
+    Task #52110: Changed the http method
+
+
+:100644 100644 3b79b79670f0c4da40e7ae56070b351f1a946a1d b6bf5ae130093ddbf60c89d59b4a10509ddbf149 M	apps/web-services/src/protectedApi_v8/network.ts

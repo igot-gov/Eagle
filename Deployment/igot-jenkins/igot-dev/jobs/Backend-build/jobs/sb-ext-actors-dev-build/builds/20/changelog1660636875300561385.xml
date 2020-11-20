@@ -1,0 +1,12 @@
+commit 8f4c98cdde32686340a839646f85d38527f95273
+tree 0afa63b051d26c24af9a772ee16a8cbf693e81e9
+parent 08e9885036b3c8196458bc0b752230c1c0ab250f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-13 15:49:28 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-13 15:49:28 +0530
+
+    Issue #51526 Added price range for search
+
+
+:100644 100644 524dab573263239750b9b4dc607ddb390eb6e4ed 635ed3b08bd489a4e034111889dcdb40a9cf0388 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java
+:100644 100644 8cd17291b0ddd4b17465016dcb9cc14d8dbcb3ca 78c2434233fb71c58b1fb3e9544907fa4b54a5de M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/util/SearchConstantsv6.java
+:100644 100644 33503c29df28ad7ed4a67fd4751d0aa9d34515cf 4158939c33fc2f7aabdbde315a9b7ce32a1e2fd1 M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/validations/model/AndFilters.java

@@ -1,0 +1,10 @@
+commit f8148545d9cc51c02f8785cbab5e646fd680578a
+tree 2d4b520051bf77125b42f891244a007562a283a8
+parent 045fa0643a534229a22d8d15553cec3429769228
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 13:50:04 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 13:50:04 +0530
+
+    Task #52010: Fixed the connection update api
+
+
+:100644 100644 6011ca5642353eb0a03d1bf6a37e3f4182e57064 a980b3fc35c65edefee0c5a695ba35778aa3d175 M	apps/web-services/src/protectedApi_v8/network.ts

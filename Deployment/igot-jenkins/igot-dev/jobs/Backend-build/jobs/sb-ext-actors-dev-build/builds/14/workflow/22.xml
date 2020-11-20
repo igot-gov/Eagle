@@ -1,0 +1,32 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.4">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.78">
+    <parentIds>
+      <string>21</string>
+    </parentIds>
+    <id>22</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.durable_task.ShellStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.78">
+      <arguments>
+        <entry>
+          <string>script</string>
+          <string>
+                   commit_id=$(git rev-parse --short HEAD)
+                   echo $commit_id&gt; commit_id.txt
+                   cd $docker_file_path
+                   pwd
+                   docker build --no-cache -t $docker_server/$docker_repo:$commit_id .
+                   docker tag $docker_server/$docker_repo:$commit_id $docker_server/$docker_repo:$image_tag
+                   </string>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.38">
+      <startTime>1598364533429</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>

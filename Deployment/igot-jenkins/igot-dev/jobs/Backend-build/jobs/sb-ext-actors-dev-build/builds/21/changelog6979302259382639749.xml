@@ -1,0 +1,10 @@
+commit 2bd168aac727c9ed7116ec1f5f867fc2dbcc4748
+tree e9ddccc86d9b3dbbf9f79416b7fac991de874869
+parent 8f4c98cdde32686340a839646f85d38527f95273
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-13 16:28:30 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-13 16:28:30 +0530
+
+    Issue #51526 refactored the price filter case
+
+
+:100644 100644 635ed3b08bd489a4e034111889dcdb40a9cf0388 59f442e0a585b22ff5349eea06d76fdfc4d1763b M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/MultiLingualIntegratedSearchServicev6.java

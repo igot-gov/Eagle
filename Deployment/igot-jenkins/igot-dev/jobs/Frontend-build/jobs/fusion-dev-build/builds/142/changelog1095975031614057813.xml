@@ -1,0 +1,11 @@
+commit c913fc160cab40039d3cd82b9e433e5d8533e7d8
+tree db607b4e7ea797d87d4aa4085c5aae48008c642c
+parent a7ef486ce98fedf0f10bbc6ed226c7a8c5fc1f7c
+author usha <meetsamal.usha@gmail.com> 2020-10-23 19:20:00 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-23 19:20:00 +0530
+
+    social btn link changes to node url build issue fixes
+
+
+:100644 100644 b42f9bd38894fa5f757dac65a38c70144ebebc50 1edca71b6ff8f90f6df0966ed2a8e4552e30a284 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+:100644 100644 b9c69d851a6297cb219a00ea14018eb7e1276e83 1dff6d1b7e9832ce391cbed2b7767519becc9ac7 M	apps/fusion/library/ws-widget/collection/src/lib/btn-linkedin-share/btn-linkedin-share/btn-linkedin-share.component.ts

@@ -1,0 +1,38 @@
+commit bf291f4c5edef1d80f10fa16beeec815e0b6de94
+tree c9b3582e1dc39416016aa86cc5cdfc980d2249a2
+parent e62f9343426ded917999bd76eb79d841f02f6507
+author usha <meetsamal.usha@gmail.com> 2020-10-20 10:13:33 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-20 10:13:33 +0530
+
+    btn facebook link changes
+
+
+:100644 100644 2673fcef7c403575e1cfb8f5339f32484784c513 12eb1c6968c36936066fd6b1423a8212f3811e68 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 05d0a5142c8bb65fb41ea0468d1b03bbdaee8747 c7943fec3cb2306b398be943c705cabf1cedb610 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.ts
+commit e62f9343426ded917999bd76eb79d841f02f6507
+tree b81409b800f5df029857dff8f54b253e215ac912
+parent 34403f6f1b9993b2916baeee0bef0acc8ea9949f
+author usha <meetsamal.usha@gmail.com> 2020-10-19 19:14:15 +0530
+committer usha <meetsamal.usha@gmail.com> 2020-10-19 19:14:15 +0530
+
+    social share changes
+
+
+:100644 100644 12eb1c6968c36936066fd6b1423a8212f3811e68 2673fcef7c403575e1cfb8f5339f32484784c513 M	apps/fusion/library/ws-widget/collection/src/lib/btn-facebook-share/btn-facebook-share/btn-facebook-share.component.html
+:100644 100644 d11dee71a2e94d80814fc27ce13611ba56715b1d b5ca98e43e5390435dc99b6a66b62007f0edda7e M	apps/fusion/project/ws/app/src/lib/routes/app-toc/app-toc.module.ts
+:100644 100644 2b95540177d2b2dd1dca1cdf900ca37bb2b37fb7 449bf3462ddbc63cc45de4862575fa8cda50a9c8 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-social-share/app-toc-social-share.component.html
+:100644 100644 37abaf5e5e0f2939a6927feaa8b3479fcc763458 c597887998eec739623056526cefed8b30f9e52b M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-social-share/app-toc-social-share.component.spec.ts
+:100644 100644 fb5b9b328a78a5093ae04cd466fcad29ef8f3ae3 9caf9bd720644c07f0f3498d65149e30e4e9dd89 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-social-share/app-toc-social-share.component.ts
+:100644 100644 bf99c497e05e5332e5c50c47518c395a9e976423 9c8b610af93390bb2f65883e62a87c238d34514e M	apps/social-share/app.js
+:000000 100644 0000000000000000000000000000000000000000 a810492c10553382b1ce8a251941bc4907ccd83c A	apps/social-share/index.html
+commit 3e14de887bf3220f8d35a6b5459dd237e670211e
+tree 4d23f9d005df300aa60470f67cc784dd5a972fd2
+parent 2c81202792bdf1bc25be0803ae56dde841ba3879
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-19 18:06:52 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-19 18:06:52 +0530
+
+    Added API mappings to access department details
+
+
+:000000 100644 0000000000000000000000000000000000000000 a1895f3fbfcf04959c91c2c86a24a5ed49ae1a3b A	apps/web-services/src/protectedApi_v8/departments.ts
+:100644 100644 6fd2c828cabce10698243b91e57fa159fa069407 4e19da7bd8dea93984d89aefc334af1304f042a2 M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts

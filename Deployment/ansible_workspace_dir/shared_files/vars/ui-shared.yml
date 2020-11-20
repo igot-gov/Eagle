@@ -29,6 +29,8 @@ dbms_api_base: "http://{{network_alias_dbms_api_service}}:{{service_dbms_api_por
 cassandra_contact_points: "{{ cassandra_host }}:{{ cassandra_port }}"
 telemetry_sb_api_base: "http://{{ network_alias_sb_telemetry_service }}:{{ service_sb_telemetry_port }}"
 
+content_validation_api_base: "http://{{ network_alias_content_validation_service }}:{{ service_content_validation_port }}"
+
 authoring_tool_backend_base: "http://{{ network_alias_sb_ext_authoring_service }}:{{ service_sb_ext_auth_tool_port }}"
 
 pid_api_base: "http://{{ network_alias_pid_service }}:{{ service_pid_service_port }}"
@@ -38,3 +40,4 @@ lms_core_critical_api_base: "http://{{ network_alias_lex_core_critical_service }
 lms_core_high_api_base: "http://{{ network_alias_lex_core_high_service }}:{{ service_lex_core_high_port }}"
 lms_core_lhub_api_base: "http://{{ network_alias_lex_core_lhub_service }}:{{ service_lex_core_lhub_port }}"
 lms_core_cassandra_api_base: "http://{{ network_alias_lex_core_cassandra_service }}:{{ service_lex_core_cassandra_port }}"
+network_hub_service: "http://{{ service_sb_hub_service }}:{{ service_sb_hub_port }}"

@@ -1,0 +1,10 @@
+commit 8e6166823a25e0b8e1cbf9daf75d4546b9b1d796
+tree d6274185f969340bcd4057d78273c51639b0f00b
+parent 5e3eeee879f90951d043210c0586df268772922f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 06:19:34 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 06:19:34 +0530
+
+    Task #51980 Fixed  writing node issue
+
+
+:100644 100644 2724179a9963116d68e80dbb446cbca9f6b46e8f 98ce7237d8138c6d29dbb16310e295e262c016e1 M	java/registry/src/main/java/io/opensaber/registry/dao/VertexWriter.java

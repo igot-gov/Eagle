@@ -1,0 +1,61 @@
+Started by user [8mha:////4IC/XGvaJgDWPDkzydBhNmQZQV0m+OlPLzVeSdGBpAbTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzOEgZu/dLi1CL9xJTczDwAawhpaMAAAAA=[0midc-eagle
+Building in workspace /var/lib/jenkins/workspace/igot-dev/igot-deploy/app_deploy
+[app_deploy] $ /bin/bash /tmp/jenkins846915051567476821.sh
+
+PLAY [dev] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-content-service : Ensure env directory exists] ********************
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-content-service : Create and save env template] *******************
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-content-service : Ensure compose files directory exists] **********
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-content-service : Ensure if the host mount directory exists] ******
+[0;32mok: [10.0.1.111][0m
+
+TASK [deploy-content-service : Creating the secret from the location] **********
+[0;31mfatal: [10.0.1.111]: FAILED! => {[0m
+[0;31m    "changed": true, [0m
+[0;31m    "cmd": "docker secret create S3_PEM /wingspan_docker_secret_location/content_service_s3_pem", [0m
+[0;31m    "delta": "0:00:00.052454", [0m
+[0;31m    "end": "2020-08-24 12:05:07.504508", [0m
+[0;31m    "rc": 1, [0m
+[0;31m    "start": "2020-08-24 12:05:07.452054"[0m
+[0;31m}[0m
+[0;31m[0m
+[0;31mSTDERR:[0m
+[0;31m[0m
+[0;31mError response from daemon: rpc error: code = AlreadyExists desc = secret S3_PEM already exists[0m
+[0;31m[0m
+[0;31m[0m
+[0;31mMSG:[0m
+[0;31m[0m
+[0;31mnon-zero return code[0m
+[0;31m[0m
+[0;36m...ignoring[0m
+
+TASK [deploy-content-service : Create and move Content service template] *******
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-content-service : Removing the existing service] ******************
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-content-service : Deploy Content service] *************************
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-content-service : Remove the compose file from the location] ******
+[0;33mchanged: [10.0.1.111][0m
+
+TASK [deploy-content-service : Remove the env file] ****************************
+[0;33mchanged: [10.0.1.111][0m
+
+PLAY RECAP *********************************************************************
+[0;33m10.0.1.111[0m                 : [0;32mok=11  [0m [0;33mchanged=7   [0m unreachable=0    failed=0   
+
+Finished: SUCCESS

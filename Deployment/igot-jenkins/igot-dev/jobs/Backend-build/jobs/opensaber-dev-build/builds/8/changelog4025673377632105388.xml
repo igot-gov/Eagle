@@ -1,0 +1,12 @@
+commit a602fb294e1c15d87bf87c71dd80ea1b4c573836
+tree 42dd9f757f7e12d96a959b13b30fb53c1728ba19
+parent 5223063cb922e76478d0d68c11bf8a404313a784
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-18 16:07:46 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-18 16:07:46 +0530
+
+    departmentName added in employeeDetails, added pagination in ES impl
+
+
+:100644 100644 6e43b1390fa1df6a72f547b42715de44a180fa4b 2ae33aeae93f06d9e6b91a80d5e83c760bb1e9e7 M	java/registry/src/main/java/io/opensaber/registry/service/ElasticSearchService.java
+:100644 100644 607b04f044b2e49bd6e122adc13af7add40c7b48 cd89efa7bb32945f7dcd6c3902a68eebce35dd45 M	java/registry/src/main/resources/public/_schemas/EmploymentDetails.json
+:100644 100644 a9b136605b2eb128e58644f12ad4ae7375a96b3c b42345d64f520cc8c09e551f1f4ad1cad457e469 M	java/registry/src/main/resources/public/_schemas/ProfesionalDetails.json

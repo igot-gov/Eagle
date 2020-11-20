@@ -1,0 +1,22 @@
+commit 2bddd48af3515b8eb71ad59c30fbd1d981db5cc0
+tree 7eaed088ec77f835c4455beb1fbc139137926082
+parent 36753896c846a97e092ef3f9837c9efc97529aea
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 18:03:07 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 18:03:07 +0530
+
+    Defect #52187 Fixed excluded ids for all IN/OUT connecitions
+
+
+:100644 100644 50998cea964da5fa634df74ed923fb86e57e35f8 2737d057bdf9d5caf3201ea7d76098fa5b8ab4a4 M	apps/hub-services/src/main/java/com/infosys/hubservices/repository/cassandra/bodhi/UserConnectionRepository.java
+:100644 100644 b8cddf3164b849b1dd116b7042473ed7925abdca 7277bab2b6de288c8078690cb230c33a1336a61b M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+commit 36753896c846a97e092ef3f9837c9efc97529aea
+tree b817d6546e386197e27c3c6bdb5489c92e8117ff
+parent d5406ca573e8659bd360a00f4197dc04309a5da2
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 17:28:55 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 17:28:55 +0530
+
+    Defect #52124 - Added sorting by created date
+
+
+:100644 100644 d36cf88477ecc9f3ae3e48d86cdc994332e0a50e b8cddf3164b849b1dd116b7042473ed7925abdca M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java
+:100644 100644 33951a664637bd33eecd790ea75b9c2f41345cac 8efe7a4fcf0f529c2243707dc3b79a00256dfd91 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java

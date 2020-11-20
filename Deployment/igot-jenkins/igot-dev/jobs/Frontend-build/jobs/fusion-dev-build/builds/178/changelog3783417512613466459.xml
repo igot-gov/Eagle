@@ -1,0 +1,10 @@
+commit 9d4e5648f3b26862e2ae1cb2ae551622d6956f05
+tree 1f93f510ad403610c925b0f0a91d51eb026c11b0
+parent 10782847a55ed050f5bfc25e548bc160755e6ecc
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 23:52:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 23:52:59 +0530
+
+    discussion Fix
+
+
+:100644 100644 434907befdd852d30181e08061305bc86bc71518 5639547f9a82f107dba42316f52ef86eb1ce5405 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.html

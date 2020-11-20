@@ -1,0 +1,55 @@
+commit b929730a36e88e2ee42fa9aac745f0006611ddeb
+tree ae2c96be05d0349407b02881d2ecd8b314fb6217
+parent 390c86c7aa4fdcfee51cc14c17b17294a1d8aea7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 21:03:31 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 21:03:31 +0530
+
+    Task #51035: Fixed the linting errors
+
+
+:100644 100644 2bc57f2af7cc5c7eca318e8ebdb0f216ff9d2f6a 70a198189cce29ac4b2579650653ac54bc3a4d9d M	apps/fusion/src/app/routes/signup-auto/signup-auto.component.spec.ts
+:100644 100644 250010d102de6b7c094199f0ff057f5472565894 8d1c843b07fd53e0a930444d0f245d355dd4e48c M	apps/fusion/src/app/routes/signup-auto/signup-auto.module.ts
+:100644 100644 0a90f761cd1e49bac8352725b7fc20e15b48b940 4a87b07be9fdbe9251de5d67d2202f63c6d3f2e9 M	apps/fusion/src/app/routes/signup-auto/signup-auto.service.spec.ts
+commit 390c86c7aa4fdcfee51cc14c17b17294a1d8aea7
+tree 193d3b06f1ea91b7628d2c2e08556eb5002c9fb6
+parent 181785add3f02704dff48e12fe5cdd3640d456c9
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 20:58:09 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 20:58:09 +0530
+
+    Task #51035: Public api for signup with token
+
+
+:100644 100644 6a7baca3dace3d602ff838f8452b690af5d7fa4f 0d74219c1a55fb819db584b021e025ab512723f5 M	apps/web-services/nodemon/nodemon-eagle-stage.json
+:100644 100644 e89289250b2197af6371f7ea6f84633cf9e87856 75d4f147b02af1b961fd4cf5a25c2dc7d6438c5b M	apps/web-services/src/publicApi_v8/publicApiV8.ts
+:100644 100644 2e258e2966b6108dd612e428b40bc774c27211a3 a444efe1aed2f1e60b248a0daa74d725c343db8e M	apps/web-services/src/publicApi_v8/signup.ts
+:100644 100644 c2dac1bbf48db723b330536cd38a5f492fa4c292 c3bb5baa9e6bf3f3ae8866bf8e6bc2160ab60a48 M	apps/web-services/src/utils/env.ts
+:100644 100644 3de50f64e544f413a63f6b108bffbf69b14cb964 f2f38f924997c8fe8b7f1a2423da8dc9aac0355e M	apps/web-services/src/utils/keycloak-user-creation.ts
+commit e7a2a430b1565333002184a29439186286ca278f
+tree c784c5dfdb598d6b1e7103611e23d1cb62d4213f
+parent c5c79998354d4a597523cc2ab2c3317872b5d681
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 20:27:38 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 20:27:38 +0530
+
+    Task #51035: UI open page added and integrated
+
+
+:100644 100644 c1349608799dd7dcad190e6360bae79eba979124 95ebf374a7c165c66fb4bc25a2db055236c19476 M	apps/fusion/src/app/app-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 4864bc5b63230d2df5dfb90bff65baf9a7446733 A	apps/fusion/src/app/routes/signup-auto/signup-auto-routing.module.ts
+:000000 100644 0000000000000000000000000000000000000000 dc72fcbd0e65cb153dba7555901186b10611fda9 A	apps/fusion/src/app/routes/signup-auto/signup-auto.component.html
+:000000 100644 0000000000000000000000000000000000000000 6cb2501f956806b248e04efa25353a063f5a4b02 A	apps/fusion/src/app/routes/signup-auto/signup-auto.component.scss
+:000000 100644 0000000000000000000000000000000000000000 2bc57f2af7cc5c7eca318e8ebdb0f216ff9d2f6a A	apps/fusion/src/app/routes/signup-auto/signup-auto.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 5736b86e919d046570e093bda341be8566339be8 A	apps/fusion/src/app/routes/signup-auto/signup-auto.component.ts
+:000000 100644 0000000000000000000000000000000000000000 250010d102de6b7c094199f0ff057f5472565894 A	apps/fusion/src/app/routes/signup-auto/signup-auto.module.ts
+:000000 100644 0000000000000000000000000000000000000000 0a90f761cd1e49bac8352725b7fc20e15b48b940 A	apps/fusion/src/app/routes/signup-auto/signup-auto.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 dc29bf336c142b13125663b23b42b757c3dc6a76 A	apps/fusion/src/app/routes/signup-auto/signup-auto.service.ts
+commit c5c79998354d4a597523cc2ab2c3317872b5d681
+tree d48a3febb6d972746470b51c28c3e9f13871f86a
+parent b1c4b02cd8cdff82bdc666d9c6fe3228c57d4a6c
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 20:23:26 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-05 20:23:26 +0530
+
+    Task #51000: posterImage property added for content
+
+
+:100644 100644 1089c5a7d97a4758439fd54cca2e535ea604d21e d5dc47e28e31cde15c457b75feb14ca00558d8a3 M	apps/fusion/library/ws-widget/collection/src/lib/_services/widget-content.model.ts
+:100644 100644 0217ce5ae8b0588d390a6aa3007283a14b2eac81 f0b57d8a848aa54974350c5c6657fff5286d0230 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html

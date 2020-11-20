@@ -1,0 +1,10 @@
+commit d4bc9e7c10811d81ab5704b47d397408c42fc3eb
+tree 47d893e3dbf585e0f93561c4fe19231ab62dd660
+parent e0cd2027a5f9f8aba7e770db44785350da81a545
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-09 01:00:37 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-09 01:00:37 +0530
+
+    Task #51919: Fixed the api params issue
+
+
+:100644 100644 5c81a945cc7f54da0489e35de58e332673416fa8 7645972ca7f343d6c421e0a8ebcd2116a6f3fb79 M	apps/web-services/src/protectedApi_v8/discussionHub/topics.ts

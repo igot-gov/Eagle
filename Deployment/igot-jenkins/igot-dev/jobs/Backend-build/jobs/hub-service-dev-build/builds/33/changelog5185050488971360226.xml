@@ -1,0 +1,10 @@
+commit 1c9f361a0466e9ffa8f20a9fc587a97575d587c4
+tree fa484ac77299b090254f7c9c7afe69e7de040395
+parent f0882dbd03ed1f8cb9d794fc463e44ec761ae5a6
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-22 07:08:09 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-22 07:08:09 +0530
+
+    Defect #52123 Fixed suggests for IN requests
+
+
+:100644 100644 2f68fa561a3c7e9f84a88f80315b2fe44e36de5f 92ac585adce5ac934f343c4ce693b0cdcc8f5f4a M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

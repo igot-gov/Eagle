@@ -1,0 +1,12 @@
+commit 40778df9a3b90829e542bc71e6fcdce8c2c40aaa
+tree d0e0b26d021d696e506aafdedcdc27a8b5121a20
+parent 56712789250a798a497305be4d8c54cbf18a2c9f
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-11 14:12:25 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-11 14:12:25 +0530
+
+    temp build fix
+
+
+:100644 100644 17cbc7f597d33b833b0b139295921fc0850c0dff a18ab7b111463fad057924b3b3a0700e9e297754 M	apps/fusion/package.json
+:100644 100644 36948556ae313be2614653163312478809acdfec 0d740ee5cd8cf6cd4ab6c46d820c7c34a2b41e90 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+:100644 100644 0bfd9bee4f1f170e22bc5166f1e1a880ef77dae4 32e698400794b1bef267d11469a8ab1eb26e7c16 M	apps/fusion/tsconfig.json

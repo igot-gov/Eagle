@@ -1,0 +1,24 @@
+commit 37ed00b172c60b0f3c7bd121626ace04fa48be24
+tree 902cb5c6a939a483b0efce85ea170504972ae0ec
+parent e4f7450a5a7c5d44c1b05dcb6f633cb6c1edf26a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 14:33:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 14:33:27 +0530
+
+    Task #51455: Fixed the invald character in excel issue
+
+
+:100644 100644 f20781d8c1dcf9403d4f3732651adc6cfe04e494 ceef9e04e3ca3f3c347617f43010be6ff49bfb5b M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+commit 691d7c194bd5bcb6f244c709fc62020869cff739
+tree 07979558db64d68f8bf6a49eb518ce51749fd69a
+parent e4f7450a5a7c5d44c1b05dcb6f633cb6c1edf26a
+author Amit Kumar <amit.sengar@tarento.com> 2020-09-03 14:27:33 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-09-03 14:27:55 +0530
+
+    quiz quick
+
+
+:100644 100644 6633294f9895da6cb4cab30af9752f9b8700e60b 11f2c65d2c83adcfee709043d2a7d9abd9a14722 M	apps/fusion/project/ws/author/src/lib/modules/viewer/viewer.component.ts
+:100644 100644 dffb46bacbe2fee1287ae5d0ebf1e7a41e777942 912d48d0d7be426e41153e9eb5b63896ea07eb4c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:100644 100644 bc4004c7af995de1757ef3629b20d5cc7798804c bc33b9501504794def6d8cd6bd9285576edc68d5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 5f0ed165a830784713180624e4456d6656ba4386 7c227e434c13807776c278c202e541c8c271a207 M	apps/fusion/project/ws/viewer/src/lib/routes/quiz/quiz.component.ts
+:100644 100644 4898a7bd4378d58ada4f1a3c96636f4c629a9dcf be4055f06b8345195bce7b2e1c623a6ba625f8be M	apps/fusion/project/ws/viewer/src/lib/viewer.resolve.ts

@@ -1,0 +1,105 @@
+commit 6b023fa9f617c42db87d71af3a0144caea3d2fba
+tree 3aebe41855fce17313a9ebd0081a05a9aceb1e9f
+parent 59223210322d7a4ca3a04d8a5f809166653ad0f1
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 14:52:41 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 14:52:41 +0530
+
+    Auth tool in featurs URI update
+
+
+:100644 100644 691e5528cabfd8d24793e854f23d1aeab4edaad4 02bf092a44d4a56b9e7fcf08256402028dc76ee6 M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+commit 59223210322d7a4ca3a04d8a5f809166653ad0f1
+tree 9d3b169460cc167f6bd0989b74b72ef328386368
+parent 20bf9bf61ef9eec4c67e1c674e748b63b2abd31e
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 14:19:07 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 14:20:10 +0530
+
+    lint fix
+
+
+:100644 100644 aa64c4bac4219cc221c6bfa5d02d2929515da9dd de97c70bbeee5a49c2eea3aa5c554a3675c31a32 M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.ts
+:100644 100644 a881f74b59c73f81439ae33dec7b5d1b1d21d350 8147b2ba3cfd75d4eb55596a2a7b9f3f556e1091 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.ts
+:100644 100644 6bb2e13a3849b441c245b340de4b2bb3e851e18a 82bb5db2f60ffc095e71d589104db05e69ac2535 M	apps/fusion/project/ws/app/src/lib/routes/social/routes/forums/widgets/buttons/btn-flag/btn-flag.component.ts
+:100644 100644 6be87c7e2ef66623247f7924463e7369dc8b94d3 6f8689a34804c34b6b7060df013b2523a6e4eba7 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 37133090c9b61bf1f6a9c8976da6be0c74c5d1ab f9385423b92f7e9f1c1b73f96773f9629f69ae3c M	apps/fusion/project/ws/viewer/src/lib/plugins/rdbms-hands-on/components/dbms-concept-dropdown/dbms-concept-dropdown.component.ts
+:100644 100644 d2aae2525a014f30d10860742609a846b351f218 52aa5ac26009c775e471f9e84508ef136d3f91cb M	apps/fusion/project/ws/viewer/src/lib/plugins/rdbms-hands-on/components/dbms-exercise/dbms-exercise.component.ts
+commit 20bf9bf61ef9eec4c67e1c674e748b63b2abd31e
+tree 3775363569a1fb8f6a1d5e0492da09a8666ad759
+parent 70733eb684ff69423f347df401cec31220f8b916
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 14:10:51 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 14:20:10 +0530
+
+    Tost Message and Authoring Tool Images
+
+
+:100644 100644 ebff1f492cd3d3a815c04a1fcdcb0fb7243ca40f 7247c2af0f82e2c7e200324e9992b524b431b868 M	apps/fusion/library/ws-widget/collection/src/lib/activity-card/activity-card.component.ts
+:100644 100644 6f02b81fcd9c4afe3950cac18c7662b621817016 7050c5b7ef95f5e7247e4e394bc91d58be475e59 M	apps/fusion/library/ws-widget/collection/src/lib/btn-call/btn-call-dialog/btn-call-dialog.component.ts
+:100644 100644 1d4cd234b24eb1d4ec591a3fcaaf9be60341e049 da79ee9da835bc2e6e68a3c0a437ba37da697a77 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-feedback/btn-content-feedback-dialog/btn-content-feedback-dialog.component.ts
+:100644 100644 2042508588bb7927f81cfa3d541d9d1e03a9eb03 8a68b11ded3afe186169a203e5eaca3e1dcb8ab8 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-mail-me/btn-content-mail-me.component.ts
+:100644 100644 3c4217d1933b3cf9aba4efb59ec2c7b12250ae79 4333d4a4d10148428793217c4f1e8c86cfeae650 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 497dfaf33b49054d009d0721f1c142257c678a30 81a04447595e1df9549688773b507e0150f52999 M	apps/fusion/library/ws-widget/collection/src/lib/btn-goals/btn-goals-selection/btn-goals-selection.component.ts
+:100644 100644 38e965a77a67862bfc8c860d5043c5f28da11810 4dd217c7665de73f5ee2cffb77afc90a90b5df5b M	apps/fusion/library/ws-widget/collection/src/lib/btn-playlist/btn-playlist-selection/btn-playlist-selection.component.ts
+:100644 100644 da6a8171f0cdb523b8e17a3ae1b0471f8b1ebcd6 74857d7961378e97e5c7a32d7805b9e1a33cd9e6 M	apps/fusion/library/ws-widget/collection/src/lib/card-content/card-content.component.ts
+:100644 100644 eacaba57e8d5507b92ba07a4acbf0ef86ce9b1a2 7397ca1c909dac96f322264c6db3433b678b7faa M	apps/fusion/library/ws-widget/collection/src/lib/card-welcome/card-welcome.component.ts
+:100644 100644 65da74fb353d4f9a9938e3b47dd614ae147412b7 4e8536f51f5668ac4f2b49a458f7679e7ffcef82 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-like/btn-social-like.component.ts
+:100644 100644 2b9c409fa3bd962e666826bcb6a9b9a097091ab9 908e62a364439ae252a5e6e1a323b60005d4ed82 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/actionBtn/btn-social-vote/btn-social-vote.component.ts
+:100644 100644 0223ce575c3d107ce028f4616881f863d3be5ee2 b631d1bf694c29f96b20f5167ab8720bcdd02793 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-forum/discussion-forum.component.ts
+:100644 100644 0212f1066761afbeadfeb1cba9161026e51c5488 c43d703ead09ce8393d742fe763bd8c975b4a6f8 M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-post/discussion-post.component.ts
+:100644 100644 8005924c2cb712bb5d9efbb92231a9497692f5a2 6b4069a4b34be7545863adb1db481d725a63efed M	apps/fusion/library/ws-widget/collection/src/lib/discussion-forum/components/discussion-reply/discussion-reply.component.ts
+:100644 100644 3b7dc055e7f5c57743626778e7fa223f56ad5212 575f0f738c5dca8fa6209a2c6cff2d9d3b444bf3 M	apps/fusion/library/ws-widget/collection/src/lib/picker-content/picker-content.component.ts
+:100644 100644 13925d6634d18641ba380082f02f455182e53fe4 6bc99ec15613e12744af66847569497d8c89fb56 M	apps/fusion/library/ws-widget/utils/src/lib/components/image-crop/image-crop.component.ts
+:100644 100644 0f162cbea3fe5a9e40760d86faca9ce1ed301a98 3c2b395d98adc50b7f4b900dee21989a6448a951 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/registered-users/registered-users.component.ts
+:100644 100644 1a840adaf9fa51f15915ff35d1711ccc384d8598 563676538aed41b62153b419e5db7cefad13c129 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/system-roles-management/roles-management-detail/roles-management-detail.component.ts
+:100644 100644 28268c9ff491e504d906ef28fc15e16d4737a344 d256a28991e39c62e1084a3bfc6cf8d1291470da M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-access-path/user-access-path.component.ts
+:100644 100644 699c9091b0510ce355b6497d6d578723871d8e91 eed2f4867c9857138a2136039e78f87349794a85 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.ts
+:100644 100644 e1f92918cad91596a74c2b2c6a36d270a2fe4b32 021e8e669cad8087e413f136753f52c2add7bad7 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-registration/user-registration.component.ts
+:100644 100644 b309623b4814c0ca4d43e06777a8fd8620b51a5a e80479d9d2f039f3891764b015df746a6605bc0b M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/create-user/create-user.component.ts
+:100644 100644 446e0cd9e480c1815f2d7a0ebb7c21c81e3cca01 6e6f1c912e3d9f94d74e9d1414c1ff29c4f11b72 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/create-userV2/create-userV2.component.ts
+:100644 100644 24648327c4743fe964f724bc226af37da6af4d9e 5ea42515ff51a366898d01711bf6e5a95e3d0dba M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/users.component.ts
+:100644 100644 07331c576e1db07783c18dcf001c700d21b257ee ac9f47c5cb126b1cdde9d41e11a3933927e75b73 M	apps/fusion/project/ws/app/src/lib/routes/activities/components/activities/activities.component.ts
+:100644 100644 eb883a56db613cc749b54d92f87c52b88f8a0404 5461da1f1c5964ab1abc857f3e54220ca7d086c2 M	apps/fusion/project/ws/app/src/lib/routes/activities/components/challenge-strip/challenge-strip.component.ts
+:100644 100644 055caa48448709903fae237aef473ad76b755573 3e00aa0fa093b9a90b7342efdc4d792da9fd9ff3 M	apps/fusion/project/ws/app/src/lib/routes/feedback/components/feedback/feedback.component.ts
+:100644 100644 99d3c9eb352ce451b10579e820c7640cf2a6eb4c 8fc520801b77178d3d79fc1e736d1166a0a979d8 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-common-card/goal-common-card.component.ts
+:100644 100644 50b17b8785548cfaa3f487688965b004a2a710da 1c726a8584f494b29161f4415f8b155b8aaf6447 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-delete-dialog/goal-delete-dialog.component.ts
+:100644 100644 0ad7fceca4225de82656705948ac185cee869f7b 82500e29eebfe8ec85d1cb409a2780cc3b34a290 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-share-dialog/goal-share-dialog.component.ts
+:100644 100644 7342685b394668eafa8b647520ef77b14d31d7d9 eadf06c7675bf7e78f978cc26a5ac44a93941e1e M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-track-pending/goal-track-pending.component.ts
+:100644 100644 5e7089ccd0fb4e2444eda8173b41ba644d7d6966 9ddbb7df1538187b9d3d923fd93a3040227b7ca1 M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-track-reject/goal-track-reject.component.ts
+:100644 100644 19b44930afe2c569bd59b93a2beb371caa04f7f0 ea574fdf90655f7a93bd17be2f4e3fd9ab403f2a M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-home/goal-home.component.html
+:100644 100644 28593ba23818d75e6a333dbe0ee739ca83fe0cca 9ac620f369d744ca3b1e96bc68bde00739a8a133 M	apps/fusion/project/ws/app/src/lib/routes/infy/routes/navigator/routes/learning-path/components/result/result.component.ts
+:100644 100644 7b369ade26031eb39e509ab50f747a038607e6a0 f60a54d6c2bd9243b954f3d630bba2286afb293b M	apps/fusion/project/ws/app/src/lib/routes/infy/routes/navigator/routes/role/role.component.ts
+:100644 100644 b2158a0231af137f7710748c791f51a8b3f5c191 8a220b922c51b37beb9236af4e056c83d40f7c91 M	apps/fusion/project/ws/app/src/lib/routes/infy/routes/ocm/routes/feedback/feedback.component.ts
+:100644 100644 8b4ddbb58aa565575ea346773c11f319843ec937 aa64c4bac4219cc221c6bfa5d02d2929515da9dd M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-card/playlist-card.component.ts
+:100644 100644 f5ddbfdfbb3483d48eb9a3d467c0888de4427889 54d3aca5409822157f19e581d77e812ed2140812 M	apps/fusion/project/ws/app/src/lib/routes/playlist/components/playlist-share-dialog/playlist-share-dialog.component.ts
+:100644 100644 c5b296280fabc6c15f6c96daa071f3689508b2ff 1e6f9824fca54b2748363f60b23432774aff4866 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-create/playlist-create.component.ts
+:100644 100644 f887796f48d7ab7aadcca2782270a967b796aa02 a881f74b59c73f81439ae33dec7b5d1b1d21d350 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-detail/playlist-detail.component.ts
+:100644 100644 434834d4812e85ebafefe0915e0c5adc073991f2 febd3d5bdff96c7654092a091d276756acd5d2f6 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-edit/playlist-edit.component.ts
+:100644 100644 3e79da4aac0345e53c35d2411bd6eb962b89b29c a1a5b3070717dd9cd7a2e994e5878cad225ee0b9 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-notification/playlist-notification.component.ts
+:100644 100644 6f9310559abbcc0ab5f4509ee0c84cdcf429a0e2 a6866d917c2cdbc9822a7030accf555e2c5d6a39 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/badges/badges.component.ts
+:100644 100644 40fba356f8ccf2af6546cbcd60d588be20e48fcd cdbf21141a316030aa39d3767a99379d4efefe9c M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/interest/components/interest/interest.component.ts
+:100644 100644 655343c50a3166cb1ce85770d3ba0ad3e096fa44 8cb7bf32c611c940decf3e6ee198a14c5a8be05d M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/settings/components/notification-settings/notification-settings.component.ts
+:100644 100644 c055f79c153640101f3f6e443b6c1813aa9fe94d 5eb34c6473a31eb31451d52f2684d37dde959977 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/settings/settings.component.ts
+:100644 100644 514962e1160a5fcc362303372a76caa8b9646ee2 9cd3b13a254b88559822b03abcbe7b05d6f6bf1a M	apps/fusion/project/ws/app/src/lib/routes/social/routes/blogs/blogs-reply/components/blog-reply.component.ts
+:100644 100644 7a2dc76410744faa4673f355a6fd3d5dc71fa9c6 0cb03f440bc15b8484ad5d2be3480bab60d15aff M	apps/fusion/project/ws/app/src/lib/routes/social/routes/blogs/blogs-result/components/blog-result.component.ts
+:100644 100644 07bf53a9030ccfccf5f3c748712b847fd1f07c26 8c633d0987a6c88822d83470121453196807fb70 M	apps/fusion/project/ws/app/src/lib/routes/social/routes/blogs/blogs-view/components/blog-view.component.ts
+:100644 100644 bdc8fe4688f54e078e877da7cfa3013722b0dfc1 70940070549ea6e9a898391792949c5672d4f650 M	apps/fusion/project/ws/app/src/lib/routes/social/routes/forums/post-view/post-view.component.ts
+:100644 100644 5b8336e5bdb8a5c4ceb8626ee8ac108a0a8d9cf1 6bb2e13a3849b441c245b340de4b2bb3e851e18a M	apps/fusion/project/ws/app/src/lib/routes/social/routes/forums/widgets/buttons/btn-flag/btn-flag.component.ts
+:100644 100644 258d682f8b4375670524792f560d10406826eae7 34585f267bc12e59cd24cb209ab9a95530c3d8be M	apps/fusion/project/ws/app/src/lib/routes/social/routes/qna/qna-home/components/qna-item/qna-item.component.ts
+:100644 100644 cd26d43273bf450d13ab50479aa8f991c8821b16 06a6a68eb8d8e63a8f2caf623186f204055215a0 M	apps/fusion/project/ws/app/src/lib/routes/social/routes/qna/qna-view/components/qna-reply/qna-reply.component.ts
+:100644 100644 e22a0bfaa5585ec4fc3db8648f7dee86b837e91c 354949237f5ae7b6851dce4c0403ef3ed800c153 M	apps/fusion/project/ws/app/src/lib/routes/social/routes/qna/qna-view/components/qna-view/qna-view.component.ts
+:100644 100644 5b8e67e546f108db7520c315c0491302aaf161d1 6be87c7e2ef66623247f7924463e7369dc8b94d3 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 4cfa460ebcd36ae0b26db63f59d1cb767eda0893 ff95f9b331686f1a221a0b27ca5b06db67cde520 M	apps/fusion/project/ws/author/src/lib/constants/icons.ts
+:100644 100644 58e3741217926c931ccd6e418b0cb8c2d020560e 2ed023c234c9e1c3bf9117c8c14fa783ba088ca8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-collection-matmenu/auth-collection-matmenu.component.html
+:100644 100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 907b4422bbc42cd8f3f1012e8019a4ef113834f9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-collection-matmenu/auth-collection-matmenu.component.scss
+:100644 100644 08650d8e426ab71268647da7fa3a8a0c90377f76 b417cabca2e2c4bf43ed7e1d5221047abdc2d505 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.html
+:100644 100644 6f77978d9afc7ae7290986c61c944d28f2202e98 9270a269e8afdb4c43b74790ccc96ee474bc7d68 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/services/resolver.service.ts
+:100644 100644 41912947dc446b35c78f6a8432206020116fa7c0 e022ba26717c2878bb7811d4446bbbc75946266a M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/iap-assessment/components/general-details/general-details.component.ts
+:100644 100644 151bd6cc08ccfe7530ccecd9d4445e69387c2075 d0489b59aaf91b8c92b013b4f58256c0af09469e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/iap-assessment/components/iap-assessment/iap-assessment.component.ts
+:100644 100644 9b21af9d5769cc17b9b3619de7025c1f9684f30b a65df69692bce59e134b20d3186013ec90eae044 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+:100644 100644 bcf0d27acb47222cf59757e381d4b71bde7b0ec3 411ec912357fd3521a57037475bb5e0e5412f26c M	apps/fusion/project/ws/viewer/src/lib/plugins/rdbms-hands-on/components/dbms-best-practice/dbms-best-practice.component.ts
+:100644 100644 9ce5e01454e8f91c9c55d85d5bd1c0e9ec404e82 dad56a98a7011239dc5dc934eda4f3b307e5a625 M	apps/fusion/project/ws/viewer/src/lib/plugins/rdbms-hands-on/components/dbms-concept-create/dbms-concept-create.component.ts
+:100644 100644 431c46fd1533f764aafcbfb1ec412bf4598b763a 37133090c9b61bf1f6a9c8976da6be0c74c5d1ab M	apps/fusion/project/ws/viewer/src/lib/plugins/rdbms-hands-on/components/dbms-concept-dropdown/dbms-concept-dropdown.component.ts
+:100644 100644 807c0e5a1d1c50d8dc894a1d649169cc4276860f d2aae2525a014f30d10860742609a846b351f218 M	apps/fusion/project/ws/viewer/src/lib/plugins/rdbms-hands-on/components/dbms-exercise/dbms-exercise.component.ts
+:100644 100644 01a6b383c228548c6fdcba2c709038012abd89de 2a6d054ef3a6e1b89c2b92fcb73fe9a41aff54f8 M	apps/fusion/project/ws/viewer/src/lib/plugins/resource-collection/components/view-submission/view-submission.component.ts
+:100644 100644 df314b3a9b007a0bcf00abb308cb842cd410120e 1d77208198d7d3e6e1ef3681dedec30560c0b3ae M	apps/fusion/project/ws/viewer/src/lib/plugins/resource-collection/resource-collection.component.ts
+:100644 100644 ccc88d125667f76057c6b794e36494e1d0d823c4 956c3141ed88bd1f1278dc4672a008483006e08b M	apps/fusion/src/app/routes/page-leader-renderer/components/landing/landing.component.ts
+:100644 100644 7b6a17ef17e03978cf8e12f76202f278680e3d37 e3e1f2165050caa49d82e4bcc771bd9134d57dc3 M	apps/fusion/src/app/routes/signup/signup.component.ts

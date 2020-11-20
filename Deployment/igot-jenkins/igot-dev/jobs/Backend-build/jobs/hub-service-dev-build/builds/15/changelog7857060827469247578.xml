@@ -1,0 +1,12 @@
+commit 12d526f0c51e39799eebb2417b8f56fd6fb034e9
+tree c1382cc9548094c30dd2d2922e1ea39e0abc4bdb
+parent 6c589944eda9f74b8177fdabc3b78e9d306828d2
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 21:15:01 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 21:15:01 +0530
+
+    Task #51585: Fix code smelles
+
+
+:100644 100644 cb6662fe837224a5ecacc681ae2975fc92946cf9 296c9e0de77cfe73628616482686cfffb48002a5 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/NotificationEvent.java
+:100644 100644 b6b2e9f543b59cac0a8358a128b257849ca5d714 03046741cdff28be4e24d0f1a0a3462677e5bdd3 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/Response.java
+:100644 100644 f0619bf4a38f2f3d807445bb5c479f4bf4617908 884308d48d36f9dea7c14d6cec86b31ff86cb17e M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java

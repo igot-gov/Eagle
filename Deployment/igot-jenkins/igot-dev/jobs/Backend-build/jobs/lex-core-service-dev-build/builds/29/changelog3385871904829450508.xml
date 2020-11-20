@@ -1,0 +1,15 @@
+commit 7d2edb5a8921540bd1969b3ed126bc0df5038f70
+tree a51ca3efbd2b0184e1809ad52bb0b21e22133bdf
+parent 15f5b55b6d95b698b43d8a7c0cc504a93c77b5c8
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 10:53:46 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 10:53:46 +0530
+
+    Task #51907 Added structure for karma, coins
+
+
+:100644 100644 c0b65dec792f5742a007a5010d7bb8b82e0c0c00 df1855dcd08154a52898e296b5ccc50e1f17e934 M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/controller/BadgeController.java
+:100644 100644 b0d2ae8d5512beab3580dc8fddafb3e65ac1d241 1de66e0e6915b5b10a52feac345a30393e9133ce M	apps/lex-core-service/src/main/java/com/infosys/lex/badge/service/BadgeServiceImpl.java
+:100644 100644 ec1a80c7f93d606f9f224d26274f8ed5ec284fcb cccee29baaa77c2e2ae9c0e31c2ce46082a92022 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/controller/MyActivitiesController.java
+:100644 100644 f7743050ee413655ad7d962f5f6a94942af98d1d f57f77bf8419980f4c76829b0c67616ae8ddf017 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/IMyActivities.java
+:100644 100644 111143118954a32dad66ec331e9775873100852e 7652b32269b21c9f7b9342cfd158261f2eca5ef1 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java
+:100644 100644 66acbe707e03ef65a35ee3015788d344f4b24326 28eab948ffd332ae9466b8deb6113fe3793adf9d M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/utils/Constants.java

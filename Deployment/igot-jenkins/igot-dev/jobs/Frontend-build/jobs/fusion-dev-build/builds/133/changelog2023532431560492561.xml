@@ -1,0 +1,73 @@
+commit d9f538b23c07387006ceab966fbbd4a39124ec78
+tree f274cdf7dee1a3af4dad722d727c301a49c28551
+parent 01e34c2067226c231aa89c3c03f68a4c0d03d278
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 13:30:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 13:30:19 +0530
+
+    competence hub final design
+
+
+:100644 100644 d7f0541ea84fd3f82846336121a723f2ec9d4100 f7907e97e6949cf098541133f6188f683a97e953 M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.module.ts
+:100644 100644 5dd3963fbc699fb932dcf0ba530a84aacd5c6dad 61432cf96008497fe0ec1a6969a8f6ed1a448b3c M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 ab372d46812577475bfe61164f476fd2929eecbe 3bafe04eabc3a324aab3c4af3a9e646521924392 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:000000 100644 0000000000000000000000000000000000000000 b5330725237a8fb03c68ff414ab509d668dc1fef A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:000000 100644 0000000000000000000000000000000000000000 d1ff57bf818bf6e70d80ad779ad3ae5f3c2128a8 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.scss
+:000000 100644 0000000000000000000000000000000000000000 077c6c6af6110e07ea9fb43522cced20e62977a7 A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.ts
+:100644 100644 6b3c48dc469e0cd8b626b83e0647e1c76b83dfa7 fbe187dcbdf2122d8ae1b55a090c01d94a493277 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 24d413b49db02b7ba8809f536ba8ad561f5ffe50 f2171004a88873a41c8abf6ce6269962cdbda540 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit 6042c219f80fea4628cbfe356dc094d6e13380cb
+tree 3da7276de38c66a76c058a4cf8568c626025a488
+parent 04056e3ae5266ba826f9646f40bb6db988ea95e6
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-22 01:16:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-22 01:16:48 +0530
+
+    Task #52201, #52115, 352109, #52122, #52118, #52108 defect fixes
+
+
+:100644 100644 f10143faa80a9d4ebc873877385f27c940cf3bcd d517f1cb915178a7e4c3a05c45a35ee8e2a04949 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.html
+:100644 100644 4dd88bcd58cb6630c18001663216ccc968357729 c5dadf3ef45b13930b27e7425925af3865be8664 M	apps/fusion/library/ws-widget/utils/src/lib/pipes/pipe-filter-search/pipe-filter-search.pipe.ts
+:100644 100644 ecd529e1d25b5d0ae1b2b02e3399ca43d15a5c92 7e9ce0440ee6852afff861a2f408c052f9b412f9 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/career-detail/career-detail.component.ts
+:100644 100644 8bb2ea5a483d6a29e1bb6fbb14cc98e2a008c1e2 81b4bec6e3805d834d57b6fd40edc2bb62551231 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component.html
+:100644 100644 21b13bf21d7494e8f22c1d5a291563436fbca7d9 f8e4ff560b1890ac1faa9640405d751734d2c4fe M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 5911451a32b9e677b1b70e5f415b834990b2eb78 3edfdf69ff69e3055d34b021efe65f318b53a3af M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 645eaab3eb517a37374b1c8766e749413fea9e48 c9230ca18c19aea5f4decd6838a6edc280e63ecc M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.scss
+:100644 100644 6879808a25bc8c7e0e7fb720dde28ba29b75b3a1 7148cc2d5bfdb9c1073f247e73432a36487dc423 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 28ca80a2d15e02b75058cf3570c467c7fa0b9ef0 a0a41ea5abebb6db97dd2492dc00e1c4b0be68a8 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.scss
+:100644 100644 522f930455b992e1971554b7d2206f7b1905b1cb cf4c558e94098dbcf1ec0fb16b92165519a3577c M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 645eaab3eb517a37374b1c8766e749413fea9e48 c9230ca18c19aea5f4decd6838a6edc280e63ecc M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.scss
+:100644 100644 958316fa185e246edd5ab95f3f12cf4f4293e092 f57b5d07a71e5dc68c6b8063f91b36c025dad568 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.html
+:100644 100644 28ca80a2d15e02b75058cf3570c467c7fa0b9ef0 a0a41ea5abebb6db97dd2492dc00e1c4b0be68a8 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.scss
+:100644 100644 542d53f403cfa7438fb7a7b430f14913cc84051e 629837fffa042f597741c45858388e0b32bc5964 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 8ba417c6e807e69b2ba4b401b115cca7dea7ebfd f3ab1eee3d3154c4004f25abd4be9ae5b679e258 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:100644 100644 d90a8abcdb2ae5ffb7c0ba0aa3d74074f57a8e2e f9128a4049f431fb85abb23ba2f8ab56c0eb2a65 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 59968617f09efaef724b1af332a66e23b514c07b 1f85f2a2eb6307aed41ebeb17161b502cc85d371 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:100644 100644 4d9741748527016e197718288dd7e22bcbe83e96 51e3715237c08eb625bc86ec566b0dc20c224298 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.ts
+:100644 100644 62944fdabbf936b1808cf6e85abaa9595248c556 20dadfa94bd63ad0cda6a52b19d5f4711fd6d269 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 374208bce87213034ba6253d8158e46d1f02a9c0 7e612e6be5f390190ead510713cf56f1e988c549 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.ts
+:100644 100644 8a50009174bf3c8103372e086889404003176ca2 de3ff11a42e48f032a41b798ae537c63d0a17513 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:100644 100644 3a0e4752b1e92ed5b9c0e4e35168305f74e73d66 888a1f0eaa07b30598535ff7b23fcae1fb4114ee M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.ts
+commit 7c3b3b2c028b2075bdc29cb95a7f4a1fa74120e6
+tree b333b0876d23117dd6289de81bf3c50a352fe00b
+parent 2a21488125ef165230a1660d7e2ed29fe0f81992
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 22:41:30 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 22:41:30 +0530
+
+    commit small bug fixes and changes
+
+
+:100644 100644 47e0365a2a8a1c2e79beaa8281af8ebf3eec4607 f0e847abfc966644cc7ea368ae4406d75c3e18e1 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin-routing.module.ts
+:100644 100644 bf9920783c0867290271c5b6bd03934b331511a4 23b64cba92db372df329b302539e7b1d8ce1017b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+commit 20b9105cfa75554b19621ebfb12e1c338f8395d9
+tree fb71cf6096f1c9034ab381e8dc6fb25d6952045e
+parent 6ccafbf0ea4a8a71d8ae0d223337d215c1d4cc63
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 20:57:15 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-21 20:57:15 +0530
+
+    profanity issues fixed
+
+
+:100644 100644 367820eee21f5ab81f29200154b5138b878619b8 f3cfaaa81137cb67b48f433664fea4c46fbeab25 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:000000 100644 0000000000000000000000000000000000000000 bf9920783c0867290271c5b6bd03934b331511a4 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:000000 100644 0000000000000000000000000000000000000000 8c77061d51f322fb8d5b0e32eb0c5856bc5e9c23 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.scss
+:000000 100644 0000000000000000000000000000000000000000 2f126fc38a9f0a6ca953e36a9ee0a6b64c3b8345 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.ts
+:100644 100644 b1e2ae510213238794682d48a12ab9fa04fe3a0f 46b557bef165b1ba0657b449fdea027cfc981600 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/upload.module.ts

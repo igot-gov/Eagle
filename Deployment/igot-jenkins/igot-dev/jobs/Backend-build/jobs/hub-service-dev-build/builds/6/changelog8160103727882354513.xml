@@ -1,0 +1,11 @@
+commit 8950bd5cde4ade472856c726fa9500ca0854ccd6
+tree c833f548e02796a06ebd3589badfd08844996609
+parent 5073c8c27fc5eab857f391fc77aa838ef3d8bfa9
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 10:24:27 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 10:24:27 +0530
+
+    Task #51689: refactored messages
+
+
+:100644 100644 1a98e736cc47bb6e2f0a7d836ee43c412e189551 41e35cceccb244eb6c71d99b0bb73b83933193e3 M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java
+:100644 100644 abc75892266ecd2e3806bf830a739478f6cd312b dc9ed1a67967e7f92c3b509c372ca040c8433192 M	apps/hub-services/src/main/resources/application.properties

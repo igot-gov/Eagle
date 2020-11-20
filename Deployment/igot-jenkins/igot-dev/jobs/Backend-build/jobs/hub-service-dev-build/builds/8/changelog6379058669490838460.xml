@@ -1,0 +1,10 @@
+commit 2fc42e7da45b5163c028f2d72deb1e1892176867
+tree 104582f499494307503420eb51df00935754eebb
+parent 8fb8556b1e32be278edc2568dbc38b016744fb1a
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 11:11:55 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-04 11:11:55 +0530
+
+    Task #51689 Target url added
+
+
+:100644 100644 dc9ed1a67967e7f92c3b509c372ca040c8433192 e4f6ddae96b18bcf60bcdaf2ba6be209ce98f372 M	apps/hub-services/src/main/resources/application.properties

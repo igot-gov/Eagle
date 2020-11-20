@@ -1,0 +1,10 @@
+commit f4821d625392be3e2aa62df071e34f679f1f50f4
+tree ce5138a35092d7a6c7e893d0a69e580c72701d60
+parent 005eff84385e578e7a12bc27b4889c2db891afcf
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-28 20:59:44 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-28 20:59:44 +0530
+
+    scrom player Revert
+
+
+:100644 100644 82a942cb96c3825d2840d014077a401824fdff0c a3f82ce849191c5229b514f43c7748a4078b87fd M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

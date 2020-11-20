@@ -1,0 +1,11 @@
+commit 9c90242afd4e6a5270b16ef4d0fe3672c39a9671
+tree e6a645230b8164997d4014d0a3fc9d9360f2c3f8
+parent bb5510622369a9930a94ea92ebb6289344f86ea5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 19:51:20 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-27 19:51:20 +0530
+
+    Task #51329: Added meta tags update in toc
+
+
+:100644 100644 8c6219c8bb2c0c8974741ac09905ad7d6d04d762 14f00ae54e84c8d2a714d7af12e1673ed781fa30 M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 90f6276393dd2b6a36342fb40dba52392d640b02 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts

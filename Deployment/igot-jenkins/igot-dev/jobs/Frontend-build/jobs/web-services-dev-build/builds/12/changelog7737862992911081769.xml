@@ -1,0 +1,10 @@
+commit c2126340312fa211dd1d0b74f876f827ebb6dc12
+tree b258c19f51a22f41c2cb2703566176d90c6fb0ea
+parent 854b3dc5c5205672ad11c103cff89f5be59f7f88
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-19 10:32:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-19 10:32:14 +0530
+
+    fix 1: scrom API
+
+
+:100644 100644 7412dd0f3c7a0eae853826f51f53f24ec3ba9306 09cf20485debd301e0f10eb664193148ade87350 M	apps/web-services/src/protectedApi_v8/scrom.ts

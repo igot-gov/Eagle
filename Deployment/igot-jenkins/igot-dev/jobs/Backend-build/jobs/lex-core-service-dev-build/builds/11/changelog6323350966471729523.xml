@@ -1,0 +1,21 @@
+commit efe95e0d1b26f8a4d4970d390d8a71c41177a67c
+tree caa42d724132a8a211fb14225a41b7b1e3d3e8fe
+parent ebc66722319803db207fa2ec457155da220103cb
+author vjtarento <65936695+vjtarento@users.noreply.github.com> 2020-09-11 15:58:58 +0530
+committer GitHub <noreply@github.com> 2020-09-11 15:58:58 +0530
+
+    Update Dockerfile
+    
+    Added health check code
+
+:100644 100644 709122c831ce4075b19b0e57181d42756d241921 368489be9ff27d442fb97dff888ac872fb274c82 M	apps/lex-core-service/Dockerfile
+commit ebc66722319803db207fa2ec457155da220103cb
+tree 3f904c763ff0f89d95962a7fb02776751691d21f
+parent 57ee4f62a81523150efd4c0238882efddbcbb26f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 12:11:10 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 12:11:10 +0530
+
+    Issue #51284 Rmv logs
+
+
+:100644 100644 14d74af6305f657ba0208ab391526c5802e0a899 112fb0f482469bc14765adf39f579d3ecf646e02 M	apps/lex-core-service/src/main/java/com/infosys/lex/progress/service/ContentProgressServiceImpl.java

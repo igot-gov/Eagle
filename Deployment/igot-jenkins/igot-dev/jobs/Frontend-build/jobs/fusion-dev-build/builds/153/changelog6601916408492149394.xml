@@ -1,0 +1,10 @@
+commit 3a8e835c16934f6efe3cd56e123392e2acdb3ecd
+tree 155f2df666a825ba6aef28b6430ebae39cf08a44
+parent f6b51b6a22829e2e8553d16b4ff2a608cc608330
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-27 12:27:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-27 12:27:27 +0530
+
+    Task #0000: Fixed the lint errors
+
+
+:100644 100644 bb6b9561fb1b9a908e68f6f5f2ea7a8893122cfe 506836cab984d071be9388d23cf783d93706d1ff M	apps/fusion/project/ws/viewer/src/lib/routes/audio/audio.component.ts

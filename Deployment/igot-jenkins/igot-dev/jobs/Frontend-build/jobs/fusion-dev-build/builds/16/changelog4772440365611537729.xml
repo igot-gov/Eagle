@@ -1,0 +1,10 @@
+commit eb08ad65305922ac3f0c0ec1b3ea73ff3022bd9c
+tree 888c57784373fdcc0129edea432ae77e2ab99dc0
+parent df7a970fce021f19ac8eb40b5638610aa26ad0c1
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-23 16:57:26 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-23 16:57:26 +0530
+
+    Result => pass, fail removed from quiz
+
+
+:100644 100644 6cfd9a2eede21121ab703b39fce18bb8cc0b5976 9c76e2830f07b1d5871488dc35647b19a7be1f86 M	apps/fusion/project/ws/viewer/src/lib/plugins/quiz/quiz.component.html

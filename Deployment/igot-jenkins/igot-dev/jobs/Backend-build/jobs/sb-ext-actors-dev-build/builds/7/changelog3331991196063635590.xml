@@ -1,0 +1,44 @@
+commit 7158173156ead6e6c246eaa341881d397198903e
+tree d22506fe479d6149c080aeb5b814ace4abffd2e7
+parent 7c62857f35dc6a31fd2e2fe1908fd031375f4550
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 14:57:59 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 14:57:59 +0530
+
+    Issue #51322: Fix for user invalid email id
+
+
+:100644 100644 232111185f6298dfeeb6c7758dbb17b494eb7bac 05928d8d750c75c8128a745492a3144e266e4399 M	apps/sb-ext-actors/src/main/java/com/infosys/repository/EagleUserRepo.java
+:100644 100644 11a158b4cf3b9e18ac24d4ba2e8a5c6b3d57aa17 4fb5edba592104587eb2f0249b6677bb488558fa M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/UserUtilityServiceImpl.java
+commit 7c62857f35dc6a31fd2e2fe1908fd031375f4550
+tree 2bf7fd3683a976820b3c068418041040fb1cc544
+parent 282d08bfb3d462c5f08b57cd839abfffc0b9b4aa
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 13:39:55 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-24 13:40:25 +0530
+
+    Issue #51322: Added postgres configuation and repository for eagle user
+
+
+:100644 100644 701c1bf953f36b5594151499465ff1fd4396065b 6cfd1f4e12e90f32615c58a8c0be611d06f0dbc3 M	apps/sb-ext-actors/pom.xml
+:000000 100644 0000000000000000000000000000000000000000 7125b8de71d79bcd914a23f01c513176c832ebaf A	apps/sb-ext-actors/src/main/java/com/infosys/model/com/infosys/model/postgres/EagleUser.java
+:000000 100644 0000000000000000000000000000000000000000 232111185f6298dfeeb6c7758dbb17b494eb7bac A	apps/sb-ext-actors/src/main/java/com/infosys/repository/EagleUserRepo.java
+:100644 100644 65103f86c7ca7da71273a4f34f78195909447221 a81c877bb24b143dd91de9bbfaabcea4027b2f5d M	apps/sb-ext-actors/src/main/resources/application.properties
+commit 282d08bfb3d462c5f08b57cd839abfffc0b9b4aa
+tree 907f30029259d8ee3c1a37e6c7cc42c458fe70e9
+parent 254b22bb834fdc5b7443d8b0d98d3e6715fe012e
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-23 10:21:16 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-23 10:21:16 +0530
+
+    Uncommented user email validation
+
+
+:100644 100644 0eee9692899b25ae3f149d4ae7d3eea174a9b4a0 29725f84c08b351dce702bd38d6bbe9a5e8050d6 M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java
+commit 254b22bb834fdc5b7443d8b0d98d3e6715fe012e
+tree 918b3b61e421d4d4171e302f08c696a33666906a
+parent 78f2065e069d91fd0d71ba1b06100a1463bff2a4
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-21 18:35:33 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-21 18:35:33 +0530
+
+    updated EmailNotificationServiceImpl
+
+
+:100644 100644 29725f84c08b351dce702bd38d6bbe9a5e8050d6 0eee9692899b25ae3f149d4ae7d3eea174a9b4a0 M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java

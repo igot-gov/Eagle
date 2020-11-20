@@ -1,0 +1,10 @@
+commit 1667a6a0c963c32f9cc684d467e47f4fa21ce6a6
+tree c9b8828494a3b9fcebd6888202dca6f94b663841
+parent f52145ea9cc900f0c9c23c33a22a7ce4070e4ec1
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:33:49 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 19:33:49 +0530
+
+    removed any from scrom POST API:fix 1
+
+
+:100644 100644 6e6adaac04d9bcd924603775378b1090bb65103a 4cbcd7a12fe164b2e3c655d03f4c1a3f32895a29 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts

@@ -1,0 +1,10 @@
+commit 438470824d1167f561d85c13a6524b5b9c449db3
+tree 6f889a5c43c52799114268fa80adb803a182b940
+parent 1949bb49f46efb59e158f38a6a3d3425752033d5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 02:01:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 02:01:48 +0530
+
+    Task #52010: Fixed the status field in update connection api
+
+
+:100644 100644 630b2ae919af91e1144cb44f0180cc2ac171e6f2 1d6b3ee460b4777271f999a583e45d399bd77cc1 M	apps/web-services/src/protectedApi_v8/network.ts

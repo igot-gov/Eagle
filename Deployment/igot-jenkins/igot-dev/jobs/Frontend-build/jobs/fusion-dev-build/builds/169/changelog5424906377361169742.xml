@@ -1,0 +1,22 @@
+commit 4d4b7064ba629e90c2977c86af1e2e927376234f
+tree ee2a5c21f7cf1a08a440d95c03bda46b875da4c3
+parent 961ee36504f1144f7e48c2509318dcc152b67df2
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-11-01 20:43:03 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-11-01 20:43:03 +0530
+
+    Task #0000: Fixed the tab navigation and redirects
+
+
+:100644 100644 881d60948c070e68db0d174a5be5ab6e766f320f f193d4d248e45e333c7807157b13db95e63cec5b M	apps/fusion/project/ws/app/src/lib/routes/career-hub/components/careers-card/careers-card.component.html
+:100644 100644 dd0fdaf7f750a4be19b6fc72e0598d20415286db 89c2d8fe3573f3ad66003c163bde52e6536ab5e6 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/components/careers-pagination/careers-pagination.component.html
+:100644 100644 f6c7b3b26404fd2c8ef1dd9ce1dd17f0f6988ae5 1ad2822eae51b23522b80469311fc4f41b771246 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/components/related-posts/related-posts.component.html
+:100644 100644 81b4bec6e3805d834d57b6fd40edc2bb62551231 f7f6b097b85f355913c6376221f5b83c7995f58f M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/discuss-card/discuss-card.component.html
+:100644 100644 dd0fdaf7f750a4be19b6fc72e0598d20415286db 89c2d8fe3573f3ad66003c163bde52e6536ab5e6 M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/pagination/pagination.component.html
+:100644 100644 fcb6e1b4578eb52346ed0de43ba47087fbe6c2bd 204a84f92b447db07d2db068c9512a788519964b M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/related-discussion/related-discussion.component.html
+:100644 100644 e757ce24eb592d5536aa74feb90a0fd4e5568fde db7cfcd6a9660ed60c0aa343ecaa0e5bad1b96a7 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.html
+:100644 100644 02c04e76c97dacde1bc009743d43451939f32d47 434907befdd852d30181e08061305bc86bc71518 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.html
+:100644 100644 0014f9cb3ac78eaae930f1f2d656d9819e190a1d e32c2731491b893790b565c7ab07a97adfaef2f0 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.ts
+:100644 100644 3edfdf69ff69e3055d34b021efe65f318b53a3af 5a192ccda69be6295175ed8617b1c1bdff97ae28 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 1fbfa3349a826134100d2e5efabf2b695561f386 f4a1ef73b4e4fbf6d84a445ddbee9d0d63de818a M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 3f51ce10a39884ec6f0ff2f594f3d5e3e4354064 868d70974b387dbcf7564a32c171db5a5bab8ac1 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 f57b5d07a71e5dc68c6b8063f91b36c025dad568 df6e43953bfbd2f49587c27fd9471aec5625e314 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/my-connection-card/my-connection-card.component.html

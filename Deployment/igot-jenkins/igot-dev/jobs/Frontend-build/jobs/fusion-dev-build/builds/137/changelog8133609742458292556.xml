@@ -1,0 +1,41 @@
+commit 173f44b6a0174851bdeb84a040d7882e7136d788
+tree 0df1ec4f6a3e3bd17a07daae24ad073b07468b26
+parent af7f6aec14a9ac269a9a4525793330479ee20334
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-23 10:00:14 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-23 10:01:00 +0530
+
+    BUg fix and competence API added
+
+
+:100644 100644 81e5a2d9e482b20416e7bf5ee47c65c14f9c72cd 539f0f2c36afb425502b7364348c6efdcf85fbc5 M	apps/client-assets/assets/configurations/localhost_3000/feature/apps.json
+:100644 100644 06656dde4cb295aa07290e4911c54e56457faa36 9b316cf2c07cf10d6dcde3fd9f22d4207caeb7cb M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 2c2a001709961090532f0c69b6754bccb964455c 6bbd1afff4c1de355a3970048c600f50289c8f54 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.html
+:100644 100644 6c5947d52deaffa14570a3891517f70a853e4365 9777c9127e387f76900bea5359aacb263ee5ab4a M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 2e0b022c6010c9f8674a469a13402a41225584e9 e1d622e38b0395787a9f16c2e641e7db25bbd6f5 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.html
+:100644 100644 e55081d4ef252f1635f8391b094ea03efb206e1c 24aba8220dc4018ab2bdc10efe428da994d4e9c8 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.html
+:100644 100644 110dedf07a39646efd82400f2ac7395f6ded3532 6e84b1e3a35b19325474a068611fc40093dbfe67 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.ts
+:100644 100644 fdc708ecbf62035899412224ae9fdf7f83855ff8 80982d290cbcb6e633af6907c0f3a562ba3e4482 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-competencies/profile-competencies.component.html
+:100644 100644 48033360fde3ea9a20920ee4698c1038c714ea2a 27b922ce9e9661dc892fe718b7593fa64af44024 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.html
+:100644 100644 e2702976981ad8dd6dad0e872216452908ab5384 2e14f7f170ad741034667b30519bbddbe6ec5696 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-departments/profile-departments.component.html
+:100644 100644 676ece64bf731bd47c3c0266d75dc321df8dc9c4 a50dd747252c44bf402bef35630b0722630017e4 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.html
+:100644 100644 304381d58c54e1d577f44a9025501965c3f84307 4598680778826732be9dc5a6ae4d69d35802d841 M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.rounting.module.ts
+:000000 100644 0000000000000000000000000000000000000000 da3cddcabd46e12d7be0c50d2111bb1adb4c474e A	apps/fusion/project/ws/app/src/lib/routes/competencies/resolvers/profile-fetch.ts
+:100644 100644 27c8f0975ad7f6dafc7709b1f30956eacded3fd3 5ced9423928ebf1878e2c049a5d25097b1f3574c M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 57c1c1d767a4613ce4f0906ff5dbf3e33ebb53e3 aab39814e36649df8798c1b5e2916da31fb4fddf M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-home/competence.component.ts
+:100644 100644 b5d099556c68410a5bc47f9e23fb4b2e1d3d48e8 bb48ab6392b22e228567e0237823c9e285128abf M	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+:100644 100644 fe4c119ef5179e8d55091d4f9f57820d2dd88612 f56c233954e7a6cece8e421b84d795c43f3a6bab M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-my-discussions/discuss-my-discussions.component.html
+:100644 100644 6be940760325a88e2458d97e7942249b762db540 9fdc0a5a929ad9e78a0690f1b5855705da532165 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.ts
+:100644 100644 8310dadd1ea9367089312a16b93a1e2e5e14c810 921c69bf04396e160adb54ef4b9226eccb0a42ae M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/models/profile-v2.model.ts
+:100644 100644 85e636a363987f0bbc8d4b211ba92b5eed54801c e430ae00004b6484569cce7255f842be30911a99 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 495e6f26481e5afb14367ec1cb33a3166ca06095 ec485ab024b6b9e67d661b7e70397f5aa3048f9d M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.scss
+:100644 100644 115f9f89ff28a282894a1f2cf6b0d52cbc970371 61e19f1a5bc919b7f02c9325fea64ba0db020ef1 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+commit af7f6aec14a9ac269a9a4525793330479ee20334
+tree 91f07d8da31fbb8c6292acfac5b804ff4de79d50
+parent 7c7378cd969759dbbc6b2ef8d1e20b4d3cfbd025
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 01:17:27 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 01:17:27 +0530
+
+    Task #52210: Fixed the connection string
+
+
+:100644 100644 1f85f2a2eb6307aed41ebeb17161b502cc85d371 0e69ed6a12e06b8ee59a3bb9a1f907563858db9c M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html

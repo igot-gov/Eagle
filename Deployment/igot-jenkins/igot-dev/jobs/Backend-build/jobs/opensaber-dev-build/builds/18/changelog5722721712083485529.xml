@@ -1,0 +1,10 @@
+commit d33defe765b48a4b4cd053a4b4a455d5ded0a94e
+tree d6274185f969340bcd4057d78273c51639b0f00b
+parent f9b9720d196bb3fd69576e1b3a0ac71348e0fa10
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 21:20:33 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-14 21:20:33 +0530
+
+    Read set to Native
+
+
+:100755 100755 3e53a9935fb8c0256b459ff67d0d2b13d308ee2a d0c823dd0da7d8ca106023b9af8fc9dc83a0f57e M	java/registry/src/main/resources/application.yml

@@ -1,0 +1,75 @@
+commit 005eff84385e578e7a12bc27b4889c2db891afcf
+tree 17f405c2b069451f9f5786b93bf525338ca32dc5
+parent c6d27c7bb62b7611030c7a7bb6f74d869403e939
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-28 20:41:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-28 20:42:19 +0530
+
+    mimeType quick Fix
+
+
+:100644 100644 c0e2ba0074c0216abf29a6a9059c402bd32e17b0 a3bf8d1776fa8ee9c487f385e193e11c953b6da6 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-view/competencies-view.component.html
+:100644 100644 556fdfb0b2bb808efc8c8812625b0d9617510eda 070722bb782bf124c69865f0848a3f6aa9dd09da M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit c6d27c7bb62b7611030c7a7bb6f74d869403e939
+tree cbe75f5d37862859c0be32e4f388f57d223a6c47
+parent 39b8fe861ddaca7592d8cc9fd7ad3174aced2cb0
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 20:05:51 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 20:05:51 +0530
+
+    Task #52149: Fixed lint errors
+
+
+:100644 100644 b6d958875c5cfbd6b9945846f2425b49c374bf24 1c0bb3eac2e15051acedc127455f6ca86538d3af M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+commit 75d2cb8eb69cfe618d8e7f9a6ccd1009d87caff7
+tree b0971fbedc93a17f34c2fac9b172403de5476029
+parent e33d05125c908abc9d2275b73a6e730fa1546596
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:40:46 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:40:46 +0530
+
+    Task #52149: Fixed lint errors
+
+
+:100644 100644 89247a7f6220a1ecae46a9c3c2ddf3c243ee75ea 82a942cb96c3825d2840d014077a401824fdff0c M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit e33d05125c908abc9d2275b73a6e730fa1546596
+tree 10d3770ac9060cac88f3e9c66bf2dcc2a2d33b72
+parent 842ed0abee11ad3e9f811e5f755da4ff8568c66e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:35:03 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:35:03 +0530
+
+    Task #52149: Fixed the vtt upload display issue
+
+
+:100644 100644 4fee00a2970035a08a34e3d18d792883dc5bd04e 7dae6f6a1743d49f165e1bd70a54cc1c3356308f M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 4b537adf34d52a27d5e581bd4a25e7e513968b11 6cd0d84cfb1e1c0486e5f225f080a1f7beeef619 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 4c41b01050cec5bc7b238189a9e5f264870dfbe8 556fdfb0b2bb808efc8c8812625b0d9617510eda M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 842ed0abee11ad3e9f811e5f755da4ff8568c66e
+tree c5cab67567ed2cc6dc7f62ba9aac174c7aec4417
+parent 0f857e9b9f47fb72f0aa03f5530a312d52603622
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:32:19 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:32:19 +0530
+
+    Task #0000: Fixed the network v2 search issues
+
+
+:100644 100644 5859791b4a0a837ea22fc50308b1324ad1963ba3 3f51ce10a39884ec6f0ff2f594f3d5e3e4354064 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 c1497d6da3e9d667dce8a7b40676f7e00af68561 bf6e2580f22c06dff44470c924ff237852c0c74d M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+commit 0f857e9b9f47fb72f0aa03f5530a312d52603622
+tree acefe93a06e5b55173659f7f63139fde31dc7e46
+parent 18d8fa7b20d4a6626c17d765965304b9a5e0dab4
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:28:52 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 19:28:52 +0530
+
+    Task #0000: Fixed the avatar background color contrast
+
+
+:100644 100644 31206b86e384dc5cdbf5ec74b197e79745257561 1404c0aa6ec0899bba803eac20c48355bdede7a9 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+commit 18d8fa7b20d4a6626c17d765965304b9a5e0dab4
+tree c94a9030fd09c28f4f7e769feef92ae4d91d02a4
+parent a22b32a1939c454fe2a31f49f4ecbb2f2460c0af
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 12:25:56 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-28 12:25:56 +0530
+
+    Task #51801: Fixed the cards in responsive mode
+
+
+:100644 100644 cb6279276103e49137207ce47e7a9971a6c72603 db1902f80d2543a7e66b58704f2904ece79979da M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.html
+:100644 100644 8f76653c1ad4939bb7773adeefe011ce5f8aa446 09ff25ffd7dfaf683e26ddcfea02b3730e5f1f51 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.scss

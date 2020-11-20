@@ -1,0 +1,10 @@
+commit edd748f1d67d7b06f1894f1be76335685c29d266
+tree d18732f0decd3d39dc4369368c5d2b3b8ea3b1f6
+parent 2a1ac8b3fd9df899a9576a9ba2663769b23e89a8
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-08 12:23:32 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-08 12:23:32 +0530
+
+    Task #51935: fix code issues
+
+
+:100644 100644 4880d11f0a497d6839331c57f28418ae82d78821 6c97b006a3ce3b80c5f4953e8a7b3f923902739e M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

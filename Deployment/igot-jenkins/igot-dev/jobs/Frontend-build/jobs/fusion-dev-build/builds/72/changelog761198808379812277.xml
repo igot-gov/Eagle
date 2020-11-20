@@ -1,0 +1,50 @@
+commit 4f99ce2c55aa9fda5cc8d558c9020d97989c3013
+tree 1dd503a304d9beebb2984af01704a8d8380f8ba7
+parent 251b17c4b873435670a36f9a5df3e435bc3f1308
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-01 00:03:17 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-01 00:03:17 +0530
+
+    Task #51329: Service added to update dynamin meta tags based on content details
+
+
+:100644 100644 14f00ae54e84c8d2a714d7af12e1673ed781fa30 c7bb1856462dd557796e590ad82f8c3eee240c3d M	apps/fusion/library/ws-widget/collection/src/lib/btn-content-share/btn-content-share-dialog/btn-content-share-dialog.component.ts
+:100644 100644 1906ac5860f5a3c5bc94ff53e6f8356d66bdf95c d3f7ed6fc3a8b09a33c55c3ac789a80abfaca616 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/app-toc-routing.module.ts
+:100644 100644 90f6276393dd2b6a36342fb40dba52392d640b02 8c25a52468dd98248ffc2a3fd77d7a1ead1bea90 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.ts
+:000000 100644 0000000000000000000000000000000000000000 71ca4ae67aa2e724e09869a3e57d15f60e556ddb A	apps/fusion/project/ws/app/src/lib/routes/app-toc/models/meta-tag.model.ts
+:000000 100644 0000000000000000000000000000000000000000 cc1b43ebb8ae676d4a59b9cd055bd00e09d9082a A	apps/fusion/project/ws/app/src/lib/routes/app-toc/services/title-tag.service.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 052f9b488a27f3a5e06ad2923db569eeba52b991 A	apps/fusion/project/ws/app/src/lib/routes/app-toc/services/title-tag.service.ts
+commit 251b17c4b873435670a36f9a5df3e435bc3f1308
+tree 6e34764fb76f06f0618bedcf85b192414b23d6aa
+parent 1ed13e16ba094d7584c55066385eec761946d620
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:55:07 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:55:07 +0530
+
+    Task #51399: Fixed the user profile issues and nationality dropdown fix
+
+
+:000000 100644 0000000000000000000000000000000000000000 6207c5c7a73fe491c8b75b7e28bf13655a0906f9 A	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/tab.directive.ts
+:100644 100644 5f42b6d1ef7f33b4c4e310b53407af3b1e022a5e c558ac5995739f145b54479c97f7ba5bf58f1a22 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 98a1dcdcf922c2064346c5c21aa09eb660e29aaa 5b5fb6bff6d5a1d907e66a1f94d2b035c165befe M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 9dc72752db1ccd56a4f9a04da45e0d1d4cb88a16 30d3384b8e027d2a77579bb35a69fa7c3eeffaf3 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/user-profile.module.ts
+commit 1ed13e16ba094d7584c55066385eec761946d620
+tree 8c0b5ce02024640be4c632a497ba0a5a0a87f015
+parent c81254db1bd8b69be3f93ca9aab896db5038e040
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:48:09 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-31 23:48:09 +0530
+
+    Task #51363: Refresh button to fetch latest status
+
+
+:100644 100644 d67f9021878836366c4a1049d91c9aaf6444bc3d 894f3673991ad4b6480af5f7fe0b7c88ba0bc895 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.html
+:100644 100644 f16a36404f541834e5d9fb95fd08cf15361ded56 fe4ba7f628fdc99de3df7e618d5f668c9a4d32b1 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.ts
+:100644 100644 03581ce8a906de18b39280b0e5ffb15a53a83f2b cfbd23fc3933f56dc81fec875d1dbb450ebb3bfb M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/components/edit-department-dialog/edit-department-dialog.component.ts
+commit c81254db1bd8b69be3f93ca9aab896db5038e040
+tree 61f745a7ae454806c3c3ddce7411b574144e00d5
+parent 68b462303be870ead5b831f59101ae8861bf3851
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-31 10:05:19 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-31 10:05:19 +0530
+
+    Quiz Message Update
+
+
+:100644 100644 71eb76d14b872061b7856ca2a8b80a3e29b1d62d 0dca02e47d4367662c3df9689f0ad3ca1496e64c M	apps/fusion/project/ws/author/src/lib/modules/shared/components/notification/notification.component.html

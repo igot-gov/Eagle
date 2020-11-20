@@ -1,0 +1,47 @@
+commit 75db0af5ad3ebf86ceda68b2fa5778f0d48bc844
+tree efcfba8b4e43acf9c5b8efa710d802df86684acf
+parent 7c3a5cb5f77d7bc55a215f32490990f8354056eb
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-14 20:23:14 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-14 20:23:14 +0530
+
+    competency tagging is finished
+
+
+:100644 100644 f7ba0b1eda9b1d55ff9464bae5bd06d2aa4e3b1b 017cb534bce8bbb8139bb3491be74002240b1441 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/interest/services/interest.service.ts
+:100644 100644 4cc470b39327b7886e3b0fedfa765f22ba0270b1 9203e015c719f507a2317b64d738f72fc8a49fc8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 4e60486705ca5c7c68d55881b6b34120a1364f24 1c0dd28880e971d7ca03578428411f639a4810af M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 0717ae9806dfce0ce86af8fb6b68c9e1027fc778
+tree 79f3efb89be5fb6a0eb0f1473079765232da4bd6
+parent a5513472c74d7a740bebfcf5f019ef6195e7467b
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-14 20:15:43 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-14 20:15:43 +0530
+
+    build fix
+
+
+:100644 100644 bd3c0886ae843cfbf1962d5c1ba007bccfedd417 15966afe182e42f1441e4340f13592490daba34e M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+:100644 100644 4df0463c49332b8959ac0407d860e76e6bc63da7 ca590e8bf023f7928812c4d81f42f89d3e43ec65 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.ts
+:100644 100644 e04b35f800f2217bc3de74032338053c11ebb6e0 c93891f2a137cf7c5ebd544435d175b1ba4f208c M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/profile-v2.module.ts
+:100644 100644 e84856ef26d55156b9fd9db011a750c1b54803ca 67f0ef8b9f6019d6730a3db4985b40f18fd1586b M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile/profile.component.ts
+commit a5513472c74d7a740bebfcf5f019ef6195e7467b
+tree c6536e466b416ff4b2bee8ebcad4fb25d9876006
+parent 7ae5fdab53301dbb2105a2f5845a0189c1b5478e
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-14 18:31:30 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-14 18:31:30 +0530
+
+    profile Completed
+
+
+:100644 100644 0d17dde164b19b509c06bfb2597ecf7c95eff8a5 bd3c0886ae843cfbf1962d5c1ba007bccfedd417 M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.ts
+:100644 100644 c653c125ac4adf7ff36768423786249cdb8e9028 78aaf0f37bdbe3650c0ea4175d43bf329eb5f49d M	apps/fusion/library/ws-widget/collection/src/lib/_common/content-progress/content-progress.component.scss
+:100644 100644 129db1d80e357a13e61706866590d62d799ca61f fc9e38912a7ad08898c0b36dffc0a943f55db094 M	apps/fusion/library/ws-widget/collection/src/lib/card-network/card-network.component.ts
+:100644 100644 1270d27627f64fea99eaae7799dae89f1d0ccd79 205784d615ebdd9572c6332206facfe361b9ffbc M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html
+:100644 100644 cd0776b09790aa146a05abfb25bfd5f923276594 02f55b3238085f9ff65a4d8b66d1b6e1b4643c3c M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.scss
+:100644 100644 6035d5e93debded59d709e6806e8629352f45439 4df0463c49332b8959ac0407d860e76e6bc63da7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.ts
+:100644 100644 5c782b22794add95fbf9c73fe2325a6c652b93f7 8310dadd1ea9367089312a16b93a1e2e5e14c810 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/models/profile-v2.model.ts
+:100644 100644 863b6b853229ecfc4f8592cdfc4c567e12d1f7f4 e04b35f800f2217bc3de74032338053c11ebb6e0 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/profile-v2.module.ts
+:100644 100644 9be85849f326491b95c69463eddb17980c45c75a 9f2c10b78d3c8fc7437610723a56a1094b942ad8 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/profile-v2.rounting.module.ts
+:000000 100644 0000000000000000000000000000000000000000 46b9d9031b3edee495a8ded6ab3265a3e196e16c A	apps/fusion/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 9c17ac5b69072bb38fe46b5338c8ee74f702fff8 a7e028a8d62eadfbd5d1203c47487a8b7479ed9c M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 98cbe8d764bbb98b2655d0ec49411db4444b9b96 e84856ef26d55156b9fd9db011a750c1b54803ca M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile/profile.component.ts
+:100644 100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 41110c04e438e9892d1c453406aecefc1cdafc0b M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/services/profile-v2-utill.service.ts

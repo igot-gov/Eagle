@@ -1,0 +1,10 @@
+commit cd1a6c19e367c76592a671b902c9d32a2d092fe8
+tree fbd9a3065ead8005dc5605471118c62ec9530607
+parent 927f297533fa594f18af258536eb68725b5af1ba
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-19 14:32:14 +0530
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-09-19 14:32:14 +0530
+
+    jenkinsfile updated
+
+
+:100644 100644 9809447b3be7dda5c5b782bd9237db9e7e120f6e 5f92c4f6d7bbdcaf768a6b06bd7bef196ef3edd2 M	apps/web-services/Jenkinsfile

@@ -1,0 +1,11 @@
+commit 928463f3c1481ae3ad8165c1c91fcbb8b1798c39
+tree 81829a3791847255b1c73f571b0832fe19b092d3
+parent 522a6b2262ec19db5951cb713872f1b3daf3b2b7
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 14:08:12 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-08-25 14:08:12 +0530
+
+    Issue #51322: Disbled the domain validation
+
+
+:100644 100644 5cff56861bd471355a12e8230cb795d73022d39b c3280cc084fa35fc9d8c34722c89ca0904be708d M	apps/sb-ext-actors/src/main/java/com/infosys/serviceImpl/EmailNotificationServiceImpl.java
+:100644 100644 8c420134b47d2d9f1293ebf6a56eabc4a5429398 7ec0de97c4653360f3aa02a2d35c332324dd6dc0 M	apps/sb-ext-actors/src/main/resources/application.properties

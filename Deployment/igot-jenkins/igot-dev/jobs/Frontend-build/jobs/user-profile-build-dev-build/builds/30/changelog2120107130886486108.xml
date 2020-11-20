@@ -1,0 +1,21 @@
+commit ba18e21f3bcf7abdb13d6b73c3d6e9ea31d2c118
+tree 97429a93061cade44c443bf9d931d50f470ef15b
+parent 15f97b8481e1adf85250b8113d13a36fa9ac3b80
+author Karthikeyan R <karthikeyan.rajendran@tarento.com> 2020-10-19 11:24:39 +0000
+committer Karthikeyan R <karthikeyan.rajendran@tarento.com> 2020-10-19 11:24:39 +0000
+
+    Update README.md
+
+:100644 100644 100b93820ade4c16225673b4ca62bb3ade63c313 7d1fd40acf4827bbec0bff6215c0a8d511805da0 M	README.md
+commit 8ee50368989312ebde447522cb2139dbe63e406e
+tree 4c0fff48d080f5494f030098f046af61c85260e0
+parent 15f97b8481e1adf85250b8113d13a36fa9ac3b80
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-19 16:31:56 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-19 16:31:56 +0530
+
+    Added APIs to add, get and search departments
+
+
+:000000 100644 0000000000000000000000000000000000000000 efb14dd24c85631dc2d0535e6de9ee70be106d47 A	src/profileApi/departments.ts
+:100644 100644 cc35074349e54e4e0cc5161d13d01609ace60685 a538fed433a4eb67446e374377f3174b1eb101b6 M	src/profileApi/profileApi.ts
+:100644 100644 5ce8f5b0a6e49a2aea3ffc5a2ccddc8351640acb 68d7089c7e9c7ed8d3db1e9765f55541f9f0a555 M	src/utils/postgres.ts

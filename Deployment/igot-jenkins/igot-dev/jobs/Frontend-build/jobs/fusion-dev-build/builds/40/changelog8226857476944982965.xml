@@ -1,0 +1,10 @@
+commit aadb9af159d1c1c79c904621534114482eeee450
+tree 01ff2f59d2972eabc3ddb9abae0da4c080ff8846
+parent e613ca6088656f0d2f3fb4315a6a1856910a172c
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-14 21:04:15 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-14 21:04:15 +0530
+
+    LMS API test 1
+
+
+:100644 100644 a1793af4563fbca4eb9a8171f10130a4b55287a9 9811f5865c7e5f9805a8bb238ba8bc6056449c4c M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/storage.ts

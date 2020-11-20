@@ -1,0 +1,10 @@
+commit c8ddfb4410adb866f0d4b2923f3db248a8a82614
+tree 052463432c9ce8531259019b713b2d24c48745a5
+parent ec57246fdb35ad3672377d2eda5793fad59ef422
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:08:32 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-20 18:08:32 +0530
+
+    added Log
+
+
+:100644 100644 d8d9b14861f5e1fb20683e315956be18624021c7 b973184584f1b2cc4c1c3e23b9f3c0333f9d3a35 M	apps/web-services/src/protectedApi_v8/scrom.ts

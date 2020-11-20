@@ -1,0 +1,59 @@
+commit b4963346b7869bc873e471edd5bdef6f2564d3f4
+tree 85d2212fc0579d79aae077e96e69335a2b2a6872
+parent 508fd6a409a83ec4f4fda9adace662ae27dad81c
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 15:52:04 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 15:52:20 +0530
+
+    content detail page tab and sticky menu fix
+
+
+:100644 100644 f01483f3bcce190e338cd7e6847e24d2b3467968 abf6973d38acc87f3d022bc1e0617f648f254ff9 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-banner/app-toc-banner.component.html
+:100644 100644 0dcf15aebc5fb91f7fdc869557a116120ff2e5ed e6a9f484ff23d5b4fc61073c49470051cf984db3 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.html
+:100644 100644 35935d18ff995d7a2b5d73ed4462b305b419e8ec c972077d1d0f716081d2e74e21feb9207bf016e9 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-content-card/app-toc-content-card.component.scss
+:100644 100644 8cbeefe03ca8f54a734210570560ad1e05f25ceb eaa8f8f1a6b70d668b0701a35b13039b07909336 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.html
+:100644 100644 fdf9590547e22ee0fb9d67266dca5fd47c9128cf fef259d465de1846783db031c3cbc9475f888e7b M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.scss
+:100644 100644 c6c2dd9df330007879ee57ad619c954ef4ce96c8 650572362d4300c58f39fbce6127213547cf8e63 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-home/app-toc-home.component.ts
+:100644 100644 248c57141fc2b71e4f83bf0f8b1421bb07be0ffa d30eda465b6b340185ce77327dbac53306983006 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 f7b17f4ca58bd0c36b5730b40e32e85bdbd65469 6fb8865c32677f72411e4383998c8d6a7da1d196 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.html
+:100644 100644 8b680f1921472011c151f14a4f151b3d3bed947a e89d14a047519d3e252db1330a9e5cc6d61dab6b M	apps/fusion/project/ws/app/src/lib/routes/app-toc/routes/app-toc-contents/app-toc-contents.component.scss
+commit 508fd6a409a83ec4f4fda9adace662ae27dad81c
+tree a1db1d0b92e5dc62c426d488916da5492564929d
+parent cdca53d09f2b4e534e9e1e9242f6b4f889b7b414
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 14:36:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 15:52:20 +0530
+
+    network tab fixex
+
+
+:100644 100644 f3ab1eee3d3154c4004f25abd4be9ae5b679e258 18824b9fde6f0b7b22db38d1d84f204d30f347e5 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:100644 100644 0e69ed6a12e06b8ee59a3bb9a1f907563858db9c 0c94bc9b6e54c419fe2b3116989d5b7007112d2d M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:100644 100644 20dadfa94bd63ad0cda6a52b19d5f4711fd6d269 82c79ad6e0aae84911b9811bc46d368ce6103143 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 de3ff11a42e48f032a41b798ae537c63d0a17513 ccf7287e23377b95b3d5aea2bc41684db962cbe3 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+commit cdca53d09f2b4e534e9e1e9242f6b4f889b7b414
+tree fb697371a87596511fa215d5f09ee57750798710
+parent 3d816bd2e4dcc691969dddcca0240d7605c75004
+author Rangabashyam <rangabashyam.pk@gmail.com> 2020-11-03 15:16:45 +0530
+committer Rangabashyam <rangabashyam.pk@gmail.com> 2020-11-03 15:16:45 +0530
+
+    
+    
+    Badges images
+
+:000000 100644 0000000000000000000000000000000000000000 3a1828ca462d2fe224a74242794882cc6dc141cf A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Ace.png
+:000000 100644 0000000000000000000000000000000000000000 7b0f0a7f21373d384266aceeb7288383740888d2 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Certificate.png
+:000000 100644 0000000000000000000000000000000000000000 3d987150c4cf30a58e99a35c887f62891761ca21 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Champion.png
+:000000 100644 0000000000000000000000000000000000000000 dfe9dc8a1c42f21243cf1160507c91bac2e70a4e A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Duelist.png
+:000000 100644 0000000000000000000000000000000000000000 de05486fb9d52d38fd1f5bcc607002b7021b9395 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Eilte.png
+:000000 100644 0000000000000000000000000000000000000000 a9f0643474ed843ed01371bf4b68f58d0744a5cb A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Exploring Elf.png
+:000000 100644 0000000000000000000000000000000000000000 035345415cd074d3b964113cc4ded9a8c67be17b A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Fledgling.png
+:000000 100644 0000000000000000000000000000000000000000 a0614370395361a1803a62983f5d36fd6f16a181 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Genie.png
+:000000 100644 0000000000000000000000000000000000000000 3f5ae5fa66d7c2775752c36bcfeeed1c1e970f79 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Knight.png
+:000000 100644 0000000000000000000000000000000000000000 4ed0fad3b8da7bc7f7e122ce4c5f7f73805a495c A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Lightning Deer.png
+:000000 100644 0000000000000000000000000000000000000000 45c1b8aba300141f50bd40061e42905171254852 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Power Tiger.png
+:000000 100644 0000000000000000000000000000000000000000 58a70fe09fdfbba627f38d7f16bfa55533232029 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Quizzard.PNG
+:000000 100644 0000000000000000000000000000000000000000 a2b1fef3333f7d98b75d1a6efb175c5f7071a669 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Santa.png
+:000000 100644 0000000000000000000000000000000000000000 5908fb628df82b43cfc7cfcec5f707d0f92602a3 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Sensei.png
+:000000 100644 0000000000000000000000000000000000000000 31ceb51dd245e2062894c3689ebcb72828cff400 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Soaring Eagle.png
+:000000 100644 0000000000000000000000000000000000000000 1cb53c27e57a040ca4514d71711db0f4812fa3df A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Studious Bee.png
+:000000 100644 0000000000000000000000000000000000000000 f0826c6b8e7934ac2451d57f51b8868c193d3c88 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Warrior.png
+:000000 100644 0000000000000000000000000000000000000000 bb77757dfbde34a4df5ee2ebedaaa15f6ae16b62 A	apps/client-assets/assets/instances/eagle/Achievements/Badges/assets/Wizard.png

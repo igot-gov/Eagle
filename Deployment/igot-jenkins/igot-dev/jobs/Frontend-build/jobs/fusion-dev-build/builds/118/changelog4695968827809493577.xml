@@ -1,0 +1,65 @@
+commit 9d3f5a3ab0b3d5a632be689ad597be8df8fdb3f2
+tree b2e917ec4b2606e44b5be2f23afba75b01e75053
+parent 70a38d0af7b2725d269317b7d24b71a05a63b509
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 18:52:21 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 18:52:21 +0530
+
+    Task #52010: removed flex justify to fit layout
+
+
+:100644 100644 b72775db9adb7112e869f0d3b9951c0652fc9897 e0115085c5c8160c55280e4f1a061fb2dafc4cfb M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+commit b5224ba32fe86640858abdc9789688275a247528
+tree 82e62a005e83cbd599392c2c631e41e4cbc5ea85
+parent caa2a79e6f7f501accb90e000e86870886824f3e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 18:10:53 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-16 18:10:53 +0530
+
+    Task #52010: Fixed the lint errors
+
+
+:100644 100644 4a0523a892d775ce0ee901107d2ebf8f2bb3e5c8 c8e4a2709c7f57caf28a1987af4d6556107aa9a6 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/connection-request-resolve.service.spec.ts
+:100644 100644 05d099d3438697db6fee9b46f6bc4baf881ade22 4231e08dc73a55d6c28c735c7cca958a03c0a0b0 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/resolvers/my-mdo-resolve.service.spec.ts
+:100644 100644 7f11ac269cb22f1636040f514d8f16ab1966cfdb 52bb41e79fcfe195f2f10182d844204ef42d57ac M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.spec.ts
+:100644 100644 8ad69282b88bf65987c2b2d607b3dc51d6d85182 833aab6263cb3d3c4ef864c4a3d4a981f4e815ef M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.spec.ts
+:100644 100644 f37329024214a7f579c654466eb00b287d7f4cac c42c5845894b97bdee2e80eb96a989db63fc1da3 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.spec.ts
+commit c0e6fb0e3ed481033c5c3c8921976a8a7ae9b0f8
+tree 4952e3eca11d4fb16da511f4146c652800a9aa39
+parent a09d82cc4b86f706e7b36a2c03c489e70a9919db
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-08 13:42:32 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-08 13:42:32 +0530
+
+    accessibility changes
+
+
+:100644 100644 8af3f0fb999732626d5de2fe1b09fe89a562b9b2 1408a61069477587c0c1d2655ddb3faff2aad516 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 74c9d95da5f9b573417f4983bf94dcc401877492 1f8a7327615ff57021e765c96e2a95efc36ba949 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:000000 100644 0000000000000000000000000000000000000000 48e341a0954d5f8c2accf3a6731be28e5bb9c0de A	package-lock.json
+commit a09d82cc4b86f706e7b36a2c03c489e70a9919db
+tree 35918f67b56b67ee550da900368406681fa4b209
+parent ba188f989d6b30032c1332378a3415092bf54b37
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-08 11:44:31 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-10-08 11:44:31 +0530
+
+    accessibility changes
+
+
+:100644 100644 2ee106a1f75c8f726531bbb19f39823d29ef458c c91e8d590316c2df19322e565bfbc322128ca7a0 M	apps/fusion/library/ws-widget/collection/src/lib/player-audio/player-audio.component.html
+:100644 100644 48e6e02bf8d022e060fb708ce0cf99b62408a375 8af3f0fb999732626d5de2fe1b09fe89a562b9b2 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 351bf940421b784f5fc8d5d645efbeda120642a5 74c9d95da5f9b573417f4983bf94dcc401877492 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 01d726cd9ea2afb620817971c8145cf5a2602600 4349e519772c6ffa217cc16aee1d96ed5a8c54d1 M	apps/fusion/project/ws/viewer/src/lib/routes/audio/audio.component.ts
+:100644 100644 7c1e4a63c0ce486c07a982dd8d1220a2d5a4a8e1 8633845d3277d78a29b2e00ad2101196ace52863 M	apps/fusion/project/ws/viewer/src/lib/routes/video/video.component.ts
+commit ba188f989d6b30032c1332378a3415092bf54b37
+tree a6a2d3260b8b10169cf3d8e0ffc09985504dba9f
+parent d21bb6e11602000797a66a37caa69266c2b73d66
+author Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-09-24 12:12:15 +0530
+committer Jithin Radhakrishnan <jithin.radhakrishnan@tarento.com> 2020-09-24 12:12:15 +0530
+
+    synchronous caption level AA
+
+
+:100644 100644 bda9d29476ccccfcec9dcd61d13e23ae3300825f 0568070efff1d280e413c3052a0553c8d286fc65 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.html
+:100644 100644 36c6ecf7a3de0a848e231b7b81af5237278798fe 48e6e02bf8d022e060fb708ce0cf99b62408a375 M	apps/fusion/library/ws-widget/collection/src/lib/player-video/player-video.component.ts
+:100644 100644 0933845d2f64db2cf63c795406bd92d1f1091d8d 82f947aa4a3e1fc8ab5d0eb59c6e6b4fcbb02bce M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 81582c5b74a51706920c5b1fb625d2169cfaaade ee9820a911c368784cfb21bfdfdb2a5b5f3d65f2 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 80b7f5c3ab0042b6978e6cd42b31408fd75d7591 351bf940421b784f5fc8d5d645efbeda120642a5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 c6857fec75ff509a415fec13db8b79d9b877b772 7c1e4a63c0ce486c07a982dd8d1220a2d5a4a8e1 M	apps/fusion/project/ws/viewer/src/lib/routes/video/video.component.ts

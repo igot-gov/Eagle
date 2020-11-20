@@ -1,0 +1,10 @@
+commit a2ba80207348f4eedf5e0c58e42cec8e2329e8b7
+tree a7e5266fd013c90785d2912bf33f6e5b24fc2e3d
+parent c499ac29b3d23ce9e85ac75ba15b48b28f01a3ec
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-14 21:18:56 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-14 21:18:56 +0530
+
+    Go to discussion profile Added
+
+
+:100644 100644 a7e028a8d62eadfbd5d1203c47487a8b7479ed9c df12a8146ab12bef972b5788f7715b8ec2ca49d4 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html

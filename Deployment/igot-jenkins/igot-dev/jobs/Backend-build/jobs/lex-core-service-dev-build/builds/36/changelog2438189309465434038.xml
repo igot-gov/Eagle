@@ -1,0 +1,10 @@
+commit d5778dacf3bd4f1cc35e5f873893bbd5e91e4020
+tree e3594c3b56e46b183fffb62f0ef23127eba6a788
+parent add74237e154246ae3d68076bf6a58c84cc15e5e
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 07:58:24 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 07:58:24 +0530
+
+    Defect #52083 fixes badges
+
+
+:100644 100644 ef26fafd08daba1ac2b72f2575d1652cdc570970 650dc88ef5a9fc4ce6926a54ded71836394fa532 M	apps/lex-core-service/src/main/java/com/infosys/lex/myactivities/service/MyActivities.java

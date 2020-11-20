@@ -1,0 +1,10 @@
+commit 39e3bff4cb0874c3951e2219dd608d76f6cc983f
+tree c96f2f86f27e11f577cffa8ccc364aae710ba7cf
+parent 02e7347786067b0987069882fa8d9a4845c7b64e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 14:45:12 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-18 14:45:12 +0530
+
+    Task #51611: Added new fields in the model
+
+
+:100644 100644 e034b4a1788a847bfbf886616270b87ed584e83c 7a20969fa2fb046fb47d646c4fef5c9fd8e39dd9 M	src/models/profile-details.model.ts

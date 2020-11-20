@@ -1,0 +1,10 @@
+commit 22e3b1f198fc58a114cb3b1e23399dd2085b3cff
+tree b3ed2694a93367afd74f6a8d7ef39542c65afa79
+parent c854e951cb5b9d6d6f74330cfdd96df5ec675522
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-21 08:39:29 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-21 08:39:29 +0530
+
+    Using query parameter instead of header to avoid CORS issue
+
+
+:100644 100644 a1895f3fbfcf04959c91c2c86a24a5ed49ae1a3b 51556da33b9f68fe2512c304792e56d70313c5e4 M	apps/web-services/src/protectedApi_v8/departments.ts

@@ -1,0 +1,28 @@
+commit 7e679354d17caa11d59536d9d5f6aa0a59b4ae54
+tree 863f4b1864cf13c49d3b2aefad1e08f2d3f68546
+parent 21eb883e87da661340f1839c91b0d01c4d22005c
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-03 20:34:02 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-03 20:34:02 +0530
+
+    course fixes
+
+
+:100644 100644 478863c24a036bacc21f3352d6d97b2a8ae8726f d14c8fade8212a9d3a399f814dcf921dcd566832 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-create.json
+:100644 100644 25bd606c6aa935dcdf5ba3a7e9fc7ba3259d8f90 aeee5596f7f15097dfac0783a8086d56c06f8e77 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:100644 100644 b417cabca2e2c4bf43ed7e1d5221047abdc2d505 96e7c99bd0423e618e2efac7df80e9fe28b9fee9 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.html
+:100644 100644 92dd7dbfb0a12f7ff1e4515f26539bddb7010007 ea9708b74c6ad75c2c70fd529b3af925b657e630 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 f619ea07bf736e43632b4366a824d5922212aa51 432a22c21626453f984f91b5bbafe9107742db40 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.html
+:100644 100644 6ad261efe1881348b7c85350ec28540a2ba92f7a 07d3c64d207f016811f74de307d17104fa712ceb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 7a790acc27577a4770997f709b4eb4d033d824a6 3e76c7b24e40d49f1c612bc201219ffcecdfce55 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit b1c4b02cd8cdff82bdc666d9c6fe3228c57d4a6c
+tree 53cc6cd04da2f16e104451a6a83cb5e093c6e9bf
+parent d6a1b13c322bcdced5aa9c02816011ef73a042e2
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-03 20:31:44 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-03 20:31:44 +0530
+
+    Task #51035: Disabled other tabs for first login
+
+
+:100644 100644 d2de3cd13d07264056cf35480eab69e594d63af4 b713bf0416fd68066a66e7acda5ebc0d717db8a8 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 93d108f23e45e7f74dc5283a550eeb33f150f1ea 7e9a303aabcd5c38e03050f965c2cd7bef3c82aa M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 38e3e7d594ceac1bbce167a3cef75e184d220ec7 856561295d4b12dbe69b42d1d5d7a79e335255e6 M	apps/fusion/src/app/guards/general.guard.ts

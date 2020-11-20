@@ -1,0 +1,55 @@
+commit febcf44605388aec384e1b147c84e8d0b20b5d48
+tree 2b501763ec9ab4b37cdf447b8c0302982fbd9468
+parent 5a1eaadde83701f906da57ffb52272062f7139a2
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:26:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:26:54 +0530
+
+    Build Fix
+
+
+:100644 100644 47be493f8b6d1740370445c116f96ccfb6e93e78 18a57108e35610463ed39b132cc50396e5cd5da3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+commit 5a1eaadde83701f906da57ffb52272062f7139a2
+tree 265177f82e055764e213d263b8d05ee2ecc14086
+parent a88c18f2d9cab52dd563ddff7a354764315cf26a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:22:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:22:09 +0530
+
+    lint fix
+
+
+:100644 100644 30e9e65382522619755bd5b7135178e82b6434aa 417e90b828b9010d5a626b51f35f9519d3e98a8d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 9b92893518f0c3fe496a74ef3a598b45ca25dbcb 0fd16777eb698e4c713d49d234a3b475dfe7c7a1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit a88c18f2d9cab52dd563ddff7a354764315cf26a
+tree 7616aeb8670290e6d6beec12bae42724f16a87e3
+parent e078d8ceb05a946ae90c515dfc9a32d8060ac84f
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:14:07 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:14:07 +0530
+
+    Updated new Fixes : design Upgraded
+
+
+:100644 100644 7eb061683af0b397568c0c92e376880da810eeaf f6aaac064d053578389b0effda12c6eeef3de89c M	apps/fusion/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+:100644 100644 96e7c99bd0423e618e2efac7df80e9fe28b9fee9 b417cabca2e2c4bf43ed7e1d5221047abdc2d505 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.html
+:100644 100644 431b4349d3a4be1306f679378c98458c9f4c6330 eb4522d46d79a8c74440283c082c782e92c99d8b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 ac023ff17c2ba14d332345bb4e9aac8d9e2522c5 871bf9406764fd632a4cdeab257cdf208b004fbb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 ba8596fcc32063bd977012a00638edc5e5a40bfa 7cbfc9c8aeafe715145b5ec53820632eda816a42 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.html
+:100644 100644 d413af5bcd96a5b0d9af2a1a33155302a30bcc93 c95a3b47c5f114a5f607cdbcd0d53cd24853e12f M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:100644 100644 db8a32f7c62fe8e75efa86cfa34f1a4ca7fbc585 15c50d512191f55bb3c8ecbbfad81b05de3501ff M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 8172a0401b38a39f0abf5a035ec29e42abdcdf53 4ed93f507ea995ce055daa300589d3860c8ee3ca M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.html
+:100644 100644 fdd463d8ebb4766230d7e20fecc2616134480147 b91e31eb51c5e8f3e1caba1f494d79236e0634dd M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 d15a378177018b08c8c23ce3f241a8e4c308dcb6 cade1ae0a09553df98dd0f7dabcb5b78a22f1227 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+:100644 100644 3218459c922c05a48ba6822dc963898d60319593 fbb88399b0a5064f939c60d8a1f2f90fd3d52171 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/services/resolver.service.ts
+:100644 100644 7c71361be0b42249d302ec2628f59667e1e48282 47be493f8b6d1740370445c116f96ccfb6e93e78 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 72750df6e5bfd6748c0273ad9718ace0ec766354 367820eee21f5ab81f29200154b5138b878619b8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 0d680a3ed2f38ad257d587ce066c2f04420a5996 5480054f66471242ad94fa390327554f84c82e06 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.html
+:100644 100644 db7f6684300cf08946571a3055968162ee9ff017 3108b1f18bee8e1a1db6f59d3f7d97d8045129b5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.scss
+:100644 100644 20a8ef9f2294e42a4671ef6adb5b9b1672c35b0c 30e9e65382522619755bd5b7135178e82b6434aa M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 14d0667091de3a97be2efa882a162f8c17fbe8ce ecde2e56be461cfe96697fbadb6d5ca8de0d6293 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.html
+:100644 100644 fbf9f736ac1dc2c8a0b1d61dc7a765ab4101a03d 9fc7533e12d185fb5894aba812dbdd5907c73ea1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 3738764154fb442819374e90231c4e2cdfbad279 e98b058296539475d5e1d1db7c415471bc0c586d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 5677ed9df45580f6b4ba40877e11f446d692a9c5 bdd14662f9cc902a2cfb1fa832d0fc47b0f3f843 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:100644 100644 c238380fd7aa1bbe07aeba8a523c2a5113ea097c 1b31804766a339c65ee99ddd27b821ae907f176c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 afe2318ccac4ec935f2a5efed9821ff6b7d9b2a8 c630ba60e9532b9b421452863813dfad5bf25fb1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 76e5ea8684db14e771e39f0532a9948b063b72a4 9b92893518f0c3fe496a74ef3a598b45ca25dbcb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 c8e13612acc6c04ad4eb11f35ef0f8731a685c75 b27c08cb120b699e14a687bf29bf66779fc8dfff M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.html
+:100644 100644 f95928cf7d22a31d08806d9248fc83cc7265e34e f7f309819a013767541f4f4d2d992ab1c2b07922 M	apps/fusion/src/styles/styles.scss

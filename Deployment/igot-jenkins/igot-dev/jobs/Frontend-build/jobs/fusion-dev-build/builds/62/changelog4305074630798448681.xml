@@ -1,0 +1,10 @@
+commit ced5a8886053db0cbdee3a273b99548f7f6d50b5
+tree 04e12057f71e5045f6a7d4c8de143dc01ded73a9
+parent 88a4cb5d007e304ab1ab6b81807a444391414904
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 14:10:40 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 14:10:40 +0530
+
+    UI Issues #51339 #51338 #51350 # 51137
+
+
+:100644 100644 b2e05b39bdc019475c11357f46a4825630db900b 367820eee21f5ab81f29200154b5138b878619b8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts

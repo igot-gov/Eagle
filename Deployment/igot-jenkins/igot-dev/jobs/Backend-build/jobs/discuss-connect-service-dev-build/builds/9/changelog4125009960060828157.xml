@@ -1,0 +1,20 @@
+commit 70fa3ad94c8c64051baf842ce034c2ba011a39dd
+tree 50359950cf845d98ae9c5ada54f9e3e4519842c2
+parent 9ea0accfe5dad746fbe54a363a5e7cb9b90e9d98
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-07 11:04:14 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-07 11:04:14 +0530
+
+    Code smells resloved
+
+
+:100644 100644 d6074ac3c527a9da5edfe844d4410578add3f677 3bed5c3c1ccddf613b8e2789c4398bb3251be1ed M	HubNotificationHandler/pom.xml
+:100644 100644 6c9ed9eb87d8e0dad258186d35c277f1c7afb671 14c571c45cf59699fe46c70687e8fe15fc74d1dc M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/Configuration.java
+:100644 100644 14dedb7b22db0197e96900d9b1bd19ff118b1d7e 45992a0c104c7811340b7775751c62a74b8c6f74 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/ConsumerConfiguration.java
+:100644 100644 1fe889a9893b5c2a6667e958e4edb24ae9298621 7307118b6dc00e2aea197bbebb725a1667d20c42 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/config/ProducerConfiguration.java
+:100644 100644 c4e6e0c03337993156aa529b7b937c6a8b19b594 5c7bda36677b73dc86eff2da24a2910609b1d788 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/controller/HubNotificationController.java
+:100644 100644 9ce0b2d69eb839fdc1388bb81fff12eb3c2d64f0 f500671bc3fb3d7f550f097014e631c222b6012c M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubPost.java
+:100644 100644 7fa18ef9b7141762758886cb44cbf6e74ae535e4 e23c009ff0db8906f280b34dd80dd57bd74fd7d8 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubTopic.java
+:100644 100644 b47f3e7027cd4bc019a126d20f4125014c5a6303 10a008473963980c89228f79007b8edfdeec66c8 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/HubUser.java
+:100644 100644 47734c57441a05b46ad3d388359537fd116a9187 3bfa6fe4bb8ee307a748055d439e6fe619b46af7 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/model/NotificationEvent.java
+:100644 100644 9c91761d95f00d3005ede8808bcb5480c17e65df fa9a3466dfccfba5feab8c148cd6c771ad40ecdf M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/OutboundRequestHandlerServiceImpl.java
+:100644 000000 3a6a7f97d071e3bc8765204e6ae761ecc4a70c3f 0000000000000000000000000000000000000000 D	HubNotificationHandler/src/test/java/com/eagle/hubnotifier/HubNotificationHandlerApplicationTests.java

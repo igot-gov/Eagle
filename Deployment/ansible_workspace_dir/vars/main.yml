@@ -46,6 +46,8 @@ service_sb_hub_service: sb-hub-service
 service_profanity_filter_service: profanity-filter
 service_ui_cbp_igot_service: ui-cbp-igot
 service_ui_mdo_igot_service: ui-mdo-igot
+service_content_validation_service: content_validation_service
+service_social_share: social-share
 
 # Ports
 service_antivirus_port: 3310
@@ -96,6 +98,8 @@ service_sb_hub_port: 3013
 service_profanity_filter_port: 5000
 service_ui_cbp_igot_port: 3024
 service_ui_mdo_igot_port: 3034
+service_content_validation_port: 6590
+service_social_share_port: 3009
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -147,6 +151,8 @@ network_alias_user_profile: user-profile
 network_alias_sb_recommendation_service: recommendation_service
 network_alias_sb_discuss_connect_service: discuss-connect-service
 network_alias_sb_hub_service: hub-service
+network_alias_content_validation_service: content-validation-service
+network_alias_social_share_service: social_share
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -194,6 +200,8 @@ image_sb_hub_service: sb-hub-service
 image_profanity_filter_service: profanity-filter
 image_ui_cbp_igot: ui-cbp-igot
 image_ui_mdo_igot: ui-mdo-igot
+image_content_validation_service: content-validation-service
+image_social_share_service: social-share
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"

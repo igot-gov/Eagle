@@ -1,0 +1,10 @@
+commit b4915da82243d34c2fd2e6f87a008d0aa46bee61
+tree 0b42da149ef6c379eb504cd3405cc364d33627ee
+parent fe6f4cf1ac49731e2585275f7ea749a8bfbdbc5f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 20:26:05 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-21 20:26:05 +0530
+
+    Task #52175 : update schema for competencies
+
+
+:100644 100644 ce0d3d1091bd3731b1417320db797baa4c91366d bedf1c1135b295b960bc1f69e239582bba6201ca M	java/registry/src/main/resources/public/_schemas/Competency.json

@@ -1,0 +1,126 @@
+commit 239450e206095b4595d1ea250155a79567082e7a
+tree 6bf2405cd09c07b731f298018313330ffacf7e6c
+parent 78c729e9dde3d8cf734e8e65d51eb08a0e8b0ae2
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:46:17 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:46:17 +0530
+
+    4.1.2 fixed
+
+
+:100644 100644 83702a5279c978f369959987bc74eb84f353d109 9fda77834fb9e9f1f2f51086690a5701e0fea916 M	apps/fusion/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.html
+commit 78c729e9dde3d8cf734e8e65d51eb08a0e8b0ae2
+tree c414f5fc942cdb63e063763d7e76aaf73df3b620
+parent 88551f40ac48aec98f79363764fcf3d8363d6ad3
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:34:11 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:34:11 +0530
+
+    compentence 2.5.3
+
+
+:100644 100644 69b7357bfb16cc848ed63a3b128cf8543ae84906 2ed7a292b0364246e971aa82961ef7af5e73242c M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+commit 88551f40ac48aec98f79363764fcf3d8363d6ad3
+tree c8ea8cc1066d65baf0e9b4b7ce2ead718cd17365
+parent 543649ab6424cfbd7e757acc8eca4dd3c9eb4818
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:18:51 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:19:12 +0530
+
+    banner updated
+
+
+:100644 100644 cee9905173029ca87ee67452a3e8512054a4676e 5bc90aec9c5bcdd1a171426fafab325d9ee74980 M	apps/client-assets/assets/instances/eagle/banners/home/1/l.jpg
+:100644 100644 a98a3d8ecbd38dffdded15d8b3aafd0f7a783be2 5f9d3974315c7c4d72bff2a7d35dd06517db6272 M	apps/client-assets/assets/instances/eagle/banners/home/1/m.jpg
+:100644 100644 9f0e5b878f6fc4fa485f5529e04f6febc37f4328 82743067e213fdb4b317f2aed901fc4ff9cdb715 M	apps/client-assets/assets/instances/eagle/banners/home/1/s.jpg
+:100644 100644 1a090968b87cbf3a6155e9b62cb41556655a7093 463b8c037fe9537ff1f997a6fcf62fe4d6f653f8 M	apps/client-assets/assets/instances/eagle/banners/home/1/xl.jpg
+:100644 100644 6f101c8272d15702e655eb6338f06cf20238fb0b 8b9b13cd640d8394d7e0799771e67f26eabcbd2e M	apps/client-assets/assets/instances/eagle/banners/home/1/xs.jpg
+:100644 100644 1a090968b87cbf3a6155e9b62cb41556655a7093 463b8c037fe9537ff1f997a6fcf62fe4d6f653f8 M	apps/client-assets/assets/instances/eagle/banners/home/1/xxl.jpg
+:100644 100644 032c899bd1acab2d0ed7bc68b2a3d6684dd39e59 a61f79c6d76caf7ab7b09f61fedb74fda7905873 M	apps/client-assets/assets/instances/eagle/banners/hubs/career/l.jpg
+:100644 100644 2ea8f584f01a8c353c9d1c3f483c9e69bce9d246 7f109ecf97cb3b435eb6128f8e4c4229d300db4d M	apps/client-assets/assets/instances/eagle/banners/hubs/career/m.jpg
+:100644 100644 48be73a65ce428d1ed696b39ee7f821e572eb643 c2c70b42495fbac385a037fe01795ca0eab02649 M	apps/client-assets/assets/instances/eagle/banners/hubs/career/s.jpg
+:100644 100644 b8556174ea5695247791f16589d0a2547bdb1f70 48ac14d67b9ac7d76bcd197895f0fae29740d19a M	apps/client-assets/assets/instances/eagle/banners/hubs/career/xl.jpg
+:100644 100644 c64edeeb1bb018b48c5a2a1aa9d7236cae2203a4 c1593fd71d3217fa04adc5f3d82ee8b25b921cc7 M	apps/client-assets/assets/instances/eagle/banners/hubs/career/xs.jpg
+:100644 100644 b8556174ea5695247791f16589d0a2547bdb1f70 48ac14d67b9ac7d76bcd197895f0fae29740d19a M	apps/client-assets/assets/instances/eagle/banners/hubs/career/xxl.jpg
+:100644 100644 20eb2c1f710c73ffb292ca12dcecc2ea929d1172 ff12af5d2b46a35e14d3267a199e702b00f51526 M	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/l.jpg
+:100644 100644 b8c42292c25576ab2a17b4667ddb37d5477f9acb af722adeb4e55c634b5c8459d91a9697bfbc5b44 M	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/m.jpg
+:100644 100644 7a5797347d58f3966b9df726a9b8f9be996ab7f6 3566fd72757481ff90f9119ff1d9c7266281d237 M	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/s.jpg
+:100644 100644 0e3b995d11f07b1484909b4b0da71656d6196dcc e9e8d0452f094bb23652d2fc9a79de404e1792cd M	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/xl.jpg
+:100644 100644 271e0132aba2fd8d005eef141e1dcc0754bb9446 e29f07650fbd3fc420f71887124dffa7040864df M	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/xs.jpg
+:100644 100644 0e3b995d11f07b1484909b4b0da71656d6196dcc e9e8d0452f094bb23652d2fc9a79de404e1792cd M	apps/client-assets/assets/instances/eagle/banners/hubs/competencies/xxl.jpg
+:100644 100644 09d5184fb929bcb817578444ae0999ed427a33c1 7eb5ed2879046364d63c4c0515a2a556751ca193 M	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/l.jpg
+:100644 100644 eae2904baaa9d7c778b32c1721ecde818c0e890d 7f7ea6ed7216fad9a1ce78a8a49d188dac58dbac M	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/m.jpg
+:100644 100644 d5ccce377b262a2a922d05f24e88a6d74c0f250b 86529383ef19a53052e567c6f7fe90b0fda34d62 M	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/s.jpg
+:100644 100644 8086efb441b75d251dc78d3589170a1444c255f7 699f367a802719936d8608f6e81ba322efc16de4 M	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/xl.jpg
+:100644 100644 f6d9acaf16dc2f82691e8fdc3cd8360334b5a21e 3f2b07e5b524cb2563adcab7a7b52d1255a5b950 M	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/xs.jpg
+:100644 100644 8086efb441b75d251dc78d3589170a1444c255f7 699f367a802719936d8608f6e81ba322efc16de4 M	apps/client-assets/assets/instances/eagle/banners/hubs/discuss/xxl.jpg
+:100644 100644 c1b2cdb97f89aa4eb63ce5150dab7830d4035438 6289f9704e27df4e11ca5c87a695525f4a087e3e M	apps/client-assets/assets/instances/eagle/banners/hubs/network/l.jpg
+:100644 100644 224c352c1a596b39b03015d6f8d76c638019b375 0d0e5d988a821f8e8554eabeefcac01f80d2f53c M	apps/client-assets/assets/instances/eagle/banners/hubs/network/m.jpg
+:100644 100644 c4d0790cc984a59d3c025d8c283fdb5dcd908886 4c720265587f4959add8b04435bd113c694e917d M	apps/client-assets/assets/instances/eagle/banners/hubs/network/s.jpg
+:100644 100644 9bf0891f415213f897b952d7a4864c5d8f9af744 0d8f9abc995ab721fcf904612d8ca76a3e713d87 M	apps/client-assets/assets/instances/eagle/banners/hubs/network/xl.jpg
+:100644 100644 9547e20d6598c9e2cfe5c15f01c4c44067cfb7d7 a1619cd3937d8c0b46d54e2d92cadc01c72927ab M	apps/client-assets/assets/instances/eagle/banners/hubs/network/xs.jpg
+:100644 100644 9bf0891f415213f897b952d7a4864c5d8f9af744 0d8f9abc995ab721fcf904612d8ca76a3e713d87 M	apps/client-assets/assets/instances/eagle/banners/hubs/network/xxl.jpg
+commit 543649ab6424cfbd7e757acc8eca4dd3c9eb4818
+tree f9d2fe84d07cc1ea51712b644076d51eaece5038
+parent 2d2d511bb6d4a588e8470542555f3ace1b2d6498
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:18:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:19:12 +0530
+
+    network hub ALl exec fixed
+
+
+:100644 100644 fdd003a0bd64ab4311a71555fb9caebe4e0b1a04 a2b7e509466712f46acf26395d7bb4535affda3d M	apps/fusion/library/ws-widget/collection/src/lib/_common/avatar-photo/avatar-photo.component.html
+:100644 100644 5a192ccda69be6295175ed8617b1c1bdff97ae28 7c74fa489ba26a86b5447b38cb3a9db70abad3b1 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-people-card/connection-people-card.component.html
+:100644 100644 f4a1ef73b4e4fbf6d84a445ddbee9d0d63de818a d6dc41a3b030a95849bee8b03cf05f3225ce35f0 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-request-card/connection-request-card.component.html
+:100644 100644 868d70974b387dbcf7564a32c171db5a5bab8ac1 54edd3bc6ea78a17bc5f656828aef200966ee75e M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:100644 100644 513f0654620a6b3ead80fd3c556e7ce317e11d51 b6e62ca5bd226d9597554648a82e829591e5e766 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/left-menu/left-menu.component.html
+commit 2d2d511bb6d4a588e8470542555f3ace1b2d6498
+tree b805453742100f99db5050be82297cd41fa81bdf
+parent 29043859b5375f6db41b305b5545270725f6b125
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:06:15 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-03 20:19:12 +0530
+
+    network 1.1.1 and top right menue tab and notification tab fix
+
+
+:100644 100644 f3e545410d1d36e3985d694eb543c7d194ab8e04 b3aafff9694a3a0ed1fdfd3f69661e9d679fc639 M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.html
+:100644 100644 324b884f6e4b1db0375efd49628f4f4e183b4020 a7c841d4d68b53452a2c71a35e6c36453da3187e M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.scss
+:100644 100644 18824b9fde6f0b7b22db38d1d84f204d30f347e5 1d71c6543e58dc9e7012d12c65061f4114db3a51 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.html
+:100644 100644 da80a9b276fee1a940e5d7c0ffadd55602821e93 eb72f3bd92500a55e01ff40ad8ee14ce673ce824 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.scss
+:100644 100644 a523a2ecdf230e2428d4d72413fcf90c21cc6d76 6a6e9862378014f689a6b853e061906df7728427 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 63f7bc3ed981b66102ccc5de3b040773ea668100 1420b993c06d1401b42428a5cf2f5dceace8f05c M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.scss
+:100644 100644 0c94bc9b6e54c419fe2b3116989d5b7007112d2d 05b0b0e7a2de67445c0653606cb9a67b9201ee44 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.html
+:100644 100644 b4bfc97e479d1f453e3e6e7b976a911fc9b788ec bc7eb0e6e871997fd74203940024060151ffe576 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-connection/network-my-connection.component.scss
+:100644 100644 82c79ad6e0aae84911b9811bc46d368ce6103143 969d90eb3199830e1a1c8ea65c68cf425b0fcedf M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.html
+:100644 100644 da80a9b276fee1a940e5d7c0ffadd55602821e93 eb72f3bd92500a55e01ff40ad8ee14ce673ce824 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-my-mdo/network-my-mdo.component.scss
+:100644 100644 ccf7287e23377b95b3d5aea2bc41684db962cbe3 57ef93f2543bfcfb1557cd068a4b321d688e82d1 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.html
+:100644 100644 da80a9b276fee1a940e5d7c0ffadd55602821e93 eb72f3bd92500a55e01ff40ad8ee14ce673ce824 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-recommended/network-recommended.component.scss
+:100644 100644 eb84a7a572f398b12f8a405968438cf1036f10c2 55f04467a7642bd888a7e5b686f675c273807574 M	apps/fusion/project/ws/app/src/lib/routes/notification-v2/components/home/home.component.html
+:100644 100644 88957acceae5e1582929534c3ee350f8795d9699 a1fd2adb59b93c0f338e7a82a57fde905c576688 M	apps/fusion/src/app/guards/empty-route.guard.spec.ts
+:100644 100644 703f788382df74fdd9ef1937f0431fdf7c697b4b eb2d1a5fa7f97955c615fd94176328f2d721c532 M	apps/fusion/src/app/guards/general.guard.spec.ts
+:100644 100644 ce0df8e37cc11ca0cce39e0d7b7bb069ac8fab0f 10dd2dd77c202c3c8378ca433fd555ad3dd196de M	apps/fusion/src/app/guards/login.guard.spec.ts
+commit 29043859b5375f6db41b305b5545270725f6b125
+tree 03868d60787a46cceb0c3dda73ad976d26fbc914
+parent 1b25ab29da14cebc1ccdf9efbde6f07f4474c6d7
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-03 19:43:52 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-03 19:43:52 +0530
+
+    feedback changes fixed
+
+
+:100644 100644 1eb29be2772a02d6fc48ef9cf6e8f8c5b683c470 f7681513a43ddd737f21a919f4d3bde822c6122b M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/routes/provide-feedback/components/feedback/feedback.component.html
+:100644 100644 1f37bc883f2510f1b09a816e4fe71f4e1f19243c 6b6827bcff3f01099b26e83e70acd8d49c7ed985 M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/routes/provide-feedback/components/feedback/feedback.component.ts
+commit 709d3a24f074e06279e0a486ba4ef6e7c53c3eab
+tree c855c187903de31d4bc4e8b2e0b6b95e6e4d5d03
+parent 3d816bd2e4dcc691969dddcca0240d7605c75004
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-03 19:07:31 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-11-03 19:07:31 +0530
+
+    Accessibility Fixes in Playlist and Goals
+
+
+:100644 100644 915dd2607cef66fc4335789f53b41cee229b6517 fa2b94ab9468dd3692e1183c96e6be1e09b556ba M	apps/fusion/library/ws-widget/collection/src/lib/picker-content/picker-content.component.html
+:100644 100644 5a5e9560faa8cc89c6bc9ae9c4aef19833c331e8 1eb29be2772a02d6fc48ef9cf6e8f8c5b683c470 M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/routes/provide-feedback/components/feedback/feedback.component.html
+:100644 100644 0f2ad32898e3259e88201cc4ad15b66855e5f20a 1f37bc883f2510f1b09a816e4fe71f4e1f19243c M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/routes/provide-feedback/components/feedback/feedback.component.ts
+:100644 100644 73a0cf7c11f413f32e12c561c21b8e65087edd0f f9e26492f94d9427b4d101f56b90a5e69ff84daf M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-card/goal-card.component.html
+:100644 100644 5b8f8191e44ffca6edee76aceabd6cee7eed2fd1 f1eb309076e5352873e118dc820802680509c84a M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.html
+:100644 100644 bc5b455f8a80cca1be1e7ae7743aae85411c7242 732e2a551d9f98c4fcd987a2c94dcaaec236a20d M	apps/fusion/project/ws/app/src/lib/routes/goals/components/goal-create-custom/goal-create-custom.component.ts
+:100644 100644 682b82275ee38ee9dec37028b98dfd7243c31e9d ce2ad29b2791870cfedfb0572b81cb20932976ec M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-create/playlist-create.component.html
+:100644 100644 1e6f9824fca54b2748363f60b23432774aff4866 0e77d7419f6bfdd9bcea0ebffb04c5334a065381 M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-create/playlist-create.component.ts

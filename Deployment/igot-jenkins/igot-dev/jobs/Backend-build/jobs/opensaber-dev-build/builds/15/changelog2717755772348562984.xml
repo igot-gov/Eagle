@@ -1,0 +1,28 @@
+commit 8c291698bb445d3bbd37f9a41fe22868c0cb3266
+tree e738e99978fc730b6f11946d9cd94bdbe7491a41
+parent 3172181f6408301bdfaa0be8ae574baff5848976
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 19:02:49 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 19:02:49 +0530
+
+    Fixed update APi issue
+
+
+:100644 100644 016748c3a778f3a531c6f572fa5cc8dda0d94344 2724179a9963116d68e80dbb446cbca9f6b46e8f M	java/registry/src/main/java/io/opensaber/registry/dao/VertexWriter.java
+commit 1f8da4f9519f8fe1050485cf0c423270ef2489b9
+tree f9d14e17cc205779eaad5c79bc299f8379a5a602
+parent 0ab4a5ba017cdb48a39300a0d64209f557cf5955
+author Vikas Jain <vikas.jain@tarento.com> 2020-09-23 17:23:12 +0530
+committer Vikas Jain <vikas.jain@tarento.com> 2020-09-23 17:23:12 +0530
+
+    Reverted back my last change.
+
+:100644 100644 0a7fea8fc014edc7d20f12704db98729b3340221 9b5f4b1f29ff6a2706cd7721dee3fbcd293903a4 M	java/registry/src/test/java/io/opensaber/registry/util/DefinitionsManagerTest.java
+commit 0ab4a5ba017cdb48a39300a0d64209f557cf5955
+tree 3d77c169f7ed6c0a844064aaa9b40dee0fd373f9
+parent 8b8b933726e047f4a9cb93b4d46f339484e92428
+author Vikas Jain <vikas.jain@tarento.com> 2020-09-23 17:08:51 +0530
+committer Vikas Jain <vikas.jain@tarento.com> 2020-09-23 17:08:51 +0530
+
+    Commented a assert statement as it is failing. Need to fix it later.
+
+:100644 100644 9b5f4b1f29ff6a2706cd7721dee3fbcd293903a4 0a7fea8fc014edc7d20f12704db98729b3340221 M	java/registry/src/test/java/io/opensaber/registry/util/DefinitionsManagerTest.java

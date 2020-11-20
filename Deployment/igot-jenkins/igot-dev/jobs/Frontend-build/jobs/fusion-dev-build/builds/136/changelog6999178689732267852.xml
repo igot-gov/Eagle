@@ -1,0 +1,46 @@
+commit 7c7378cd969759dbbc6b2ef8d1e20b4d3cfbd025
+tree 5fe0b4e62967a3718949430462eb9ac02479908d
+parent f46533f10ac5b23f08238958ceb1c63fe844b3e5
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 00:50:05 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 00:50:05 +0530
+
+    Task #52225: Fixed lint errors
+
+
+:100644 100644 3bafe04eabc3a324aab3c4af3a9e646521924392 3f3f2ad6f4d8a0c35c7a7b77c90d190256014049 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:100644 100644 f2171004a88873a41c8abf6ce6269962cdbda540 27c8f0975ad7f6dafc7709b1f30956eacded3fd3 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit f46533f10ac5b23f08238958ceb1c63fe844b3e5
+tree 225ff9c283966df612ce5061e89c74778a32f74a
+parent a0103689bacaf8f9d6bd278c032abdb68e4489a7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 00:28:21 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-23 00:28:21 +0530
+
+    Task #52114: Added the connection count in profile v2
+
+
+:100644 100644 a9287cb2b1b466dc36150dc9f1322a0a57dc2c76 fcb6e1b4578eb52346ed0de43ba47087fbe6c2bd M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/related-discussion/related-discussion.component.html
+:100644 100644 66bc46698ff42078e68a8ddae14d03f2ac6d2b39 85e636a363987f0bbc8d4b211ba92b5eed54801c M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 cbeaa23fec220c604032e3a2170ba87867703be7 e3d97daefd39fb256ba99f5cfd228949bd76b657 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts
+commit a0103689bacaf8f9d6bd278c032abdb68e4489a7
+tree 3d8806361cb3425786db1eaa2358096ed9d4c4af
+parent 246c204713aada2a58b07b91a99afea37202c319
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-22 21:27:03 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-22 21:27:03 +0530
+
+    Task #52113, #52118, #52126: Defect fixes
+
+
+:100644 100644 c0d6487b27f064f1d006c37dc6fd1c51621bdd66 8e9e00bcc5640508365309ac8374eee830b8af6d M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.html
+:100644 100644 1ce4ed76b9b38b154440578639c4a83c46eafbc2 d61c3f51d6cfdd40ef0259aa9c6b072654c140de M	apps/fusion/project/ws/app/src/lib/routes/discuss/components/post-card/post-card.component.html
+:100644 100644 2bb01d38d130fc353e5c592cef0c0939cd2bcb73 589569c4c392b93c666f273c0d653314d478d987 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-connection-requests/network-connection-requests.component.ts
+:100644 100644 bd2a10ae78afaa362c8f3ee6756c05c4539b9573 a6e5b2a9ab203f6c196221c2d2071f59d936b0a8 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.scss
+commit 193f61ebb43beb1067e87a00e7bb74ddafc4e0ab
+tree 97242cdf9105d6a5b727f7b731ab2709a0ab4b3a
+parent b87092eddce7a99a3d90e9eeca98280199762060
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 17:46:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 17:46:16 +0530
+
+    get user profile by id
+
+
+:100644 100644 cc52b5c1b792f01115417aaaf479e9801496b6ee 8803dbb82bd581e7f919f3a5dad4a09866429b98 M	apps/web-services/src/protectedApi_v8/user/profile-details.ts

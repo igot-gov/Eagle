@@ -1,0 +1,10 @@
+commit 08e9885036b3c8196458bc0b752230c1c0ab250f
+tree 874dabaea5fd6c866aff862bbbdae784adf3662f
+parent 2e4a5599893c8c69a45d7836e66e25c024a496eb
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-11 17:51:25 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-11 17:51:25 +0530
+
+    Issue #51523 And filter enhanced for price, licence
+
+
+:100644 100644 0635f30f7f56ffc8903a8f8e2009b318794679b9 33503c29df28ad7ed4a67fd4751d0aa9d34515cf M	apps/sb-ext-actors/src/main/java/com/infosys/searchv6/validations/model/AndFilters.java

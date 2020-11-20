@@ -1,0 +1,11 @@
+commit d58a55db2919178d9b4a6775649c5480ddb6f09d
+tree 51c2309151a1f94ca316042e8f02a8ae08d62990
+parent d70c19d697c9cc104efec27b3331bbc751214973
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-21 08:37:12 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-21 08:37:12 +0530
+
+    Using query params instead of headers to avoid CORS issue
+
+
+:100644 100644 16e5555e6b81c852016afde26b71418dd538ea3d b30d3329043fd2a50debdeb2cdb85177aaaade8b M	src/profileApi/departments.ts
+:100644 100644 68d7089c7e9c7ed8d3db1e9765f55541f9f0a555 6a8541cbe3476a46d11de203133f76c728af2462 M	src/utils/postgres.ts

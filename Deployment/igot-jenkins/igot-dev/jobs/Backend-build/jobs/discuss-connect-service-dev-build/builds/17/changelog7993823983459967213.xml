@@ -1,0 +1,10 @@
+commit 9c3873a7eb2825786d094edd262e6c138cd84e5a
+tree 21872b33976db3dd5871c07d8f60ff51684b6f5a
+parent 15695d44fc4c5afb32b85df17fab37126895722d
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 15:51:43 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-28 15:51:43 +0530
+
+    fix for #comment tag in upVote and downVote
+
+:100644 100644 644fb8a6bf92f391638ac2fa857ace6fe8692118 cce860729ae7e3d6b4f773f7d0d79127c4555ed9 M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/constants/Constants.java
+:100644 100644 d21bf7f64f54f0aa7e602fe7e0cfd859e35b72e7 ccf55fc0bcb653e0a543565a16f2f0566664e93a M	HubNotificationHandler/src/main/java/com/eagle/hubnotifier/service/impl/NotifyHookServiceImpl.java

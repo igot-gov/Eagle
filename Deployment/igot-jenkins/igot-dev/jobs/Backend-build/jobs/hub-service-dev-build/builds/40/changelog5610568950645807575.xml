@@ -1,0 +1,10 @@
+commit 6dee929fdc32b45ed4462aad8502e6c17996301f
+tree 51ae9327448a5c3cb5038c4338bd2e5f5923e2a9
+parent 21ae7de081ad57bf599f70ee97477426c309cea7
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 06:28:02 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-28 06:28:02 +0530
+
+    Removed userid for connections
+
+
+:100644 100644 a66ea00a8170f9e981bde6660173bf148c64454e 082c3fac6bae3e78b1a3739d911ca233f0c1e3bc M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ConnectionService.java

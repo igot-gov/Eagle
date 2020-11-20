@@ -1,0 +1,23 @@
+commit ecd1c647efc9a7fc20d9b07d5c5a3073f0837ed0
+tree 41b1694efa5947a71d63d9942dc141232a18d7a8
+parent dcf64bb8454033caf1a10649f69b9b5ddf03ebd7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 01:25:02 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 01:25:02 +0530
+
+    Task #51040: User role mapping with dept apis, get & update dept for user apis
+
+
+:100644 100644 3deab727e7229abd8711be5b011e50de920f6c16 cd41cb90c30553277f0be433498907d9f96c5a84 M	src/profileApi/user-data.ts
+:100644 100644 65c70c2de97883f28a809b36b87998c92438e86e 89c242614e833c282626ae7ef81aae4a34f09631 M	src/publicApi_v8/profile-details.ts
+:100644 100644 3ad0548df4e80dac14eda492690058b82cab2715 d5c9c8b4326a0c2307ae92a6c6978dae022cb24f M	src/utils/env.ts
+:100644 100644 9c49e78e4d0721122ad6033a6ec5404ade9b7508 aee3e56ea31536ba46d65795f127bfeac594b5bc M	src/utils/postgres.ts
+commit dcf64bb8454033caf1a10649f69b9b5ddf03ebd7
+tree 53b9028281eaee8422d1521d4c8643e0ac8d796a
+parent 32dec7b8494122530a0ba781478f73f8daa01d6d
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-03 20:46:16 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-03 20:46:16 +0530
+
+    Task #51035: Added logs for open saber req
+
+
+:100644 100644 1ae96a05b47035b57f277c7eb3b02dd292f92ee6 a147138945399512045a7705d0c3bf58c29471e1 M	src/service/registry.ts

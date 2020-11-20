@@ -1,0 +1,17 @@
+commit 6c589944eda9f74b8177fdabc3b78e9d306828d2
+tree fda059e096fd4acdf89b7c876090376e114d2367
+parent 727f6dab3b598b151e6f7d83c2f616a16f60617f
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 21:04:14 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-10-06 21:04:14 +0530
+
+    Task #51585: Fix code smelles
+
+
+:100644 100644 89ad21a9e1ece627ebbeb1a8450538008c55d13a 4f87f74d0af36b7c8429d2de0bc52570308faf45 M	apps/hub-services/src/main/java/com/infosys/hubservices/exception/BadRequestException.java
+:100644 100644 a0b22a9dea783bfe8141ae9970da6ab91c969b90 cb6662fe837224a5ecacc681ae2975fc92946cf9 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/NotificationEvent.java
+:100644 100644 439a555f46b26f72b16c9880a26536bb8b9cbcc5 b6b2e9f543b59cac0a8358a128b257849ca5d714 M	apps/hub-services/src/main/java/com/infosys/hubservices/model/Response.java
+:100644 100644 83b5e94a4292f7cb6a96c776dc4cad2ccc2d3ec9 053e93ac981209800c7e0a639ce79554c739f7ab M	apps/hub-services/src/main/java/com/infosys/hubservices/model/Search.java
+:100644 100644 65e3df2a43f3f9bfe3c9bceaa92efe1889d5b7b4 ba798700f3ac91774f37a567cd3ef3f047f29c04 M	apps/hub-services/src/main/java/com/infosys/hubservices/network/controller/ConnectionProfileController.java
+:100644 100644 c1e7f6da9bfc39a598dc92c362ec32f402c8c02f f0619bf4a38f2f3d807445bb5c479f4bf4617908 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/NotificationService.java
+:100644 100644 d2883236ce22b719dc6a70656af4bb95793c1468 eda54e283a714ac34b002f3821cfd9b63078e9e1 M	apps/hub-services/src/main/java/com/infosys/hubservices/serviceimpl/ProfileService.java
+:100644 100644 c700981c4f3b0c7acb3d38313971e1a14e3e08ef b658f8049e3ccc2a607b65c9eb71997cde65e0ff M	apps/hub-services/src/main/java/com/infosys/hubservices/util/Constants.java

@@ -1,0 +1,10 @@
+commit 5d2ed0f86b243a2017cc297a01c301443a4c3929
+tree 6b639fbb61e11827bf1b17fb96d26a599e14c31a
+parent e83dd9eda2d6f81b54a29df1e5a23487979d99ba
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 09:01:13 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-28 09:01:13 +0530
+
+    Reverting the changes
+
+
+:100644 100644 05a986fbbd84d959988f6704295c91e7c00aea22 adf47abd40f0ae5e4e3ff1ee3dc8615c5f0ce528 M	apps/notifications-module/src/main/java/com/infosys/lex/notification/serviceImpl/NotificationConsumerServiceImpl.java

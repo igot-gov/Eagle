@@ -1,0 +1,10 @@
+commit 5cdd2d3b4b4999e4fba66e3fa0ba651f16364e78
+tree 5b014b6af651443b171e05ccd28f1499a8a5018f
+parent 1a8fb15c86870a693cabea026dbcfb00d6f9c299
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 19:28:05 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-09-03 19:28:05 +0530
+
+    Task #51439: Updated all country codes
+
+
+:100644 100644 00409b7028c5883492725f680425cdf8c2d21f02 a13ef62be8b5e8b848e35182eafbd7552a4b530c M	src/static-data/nationality.json

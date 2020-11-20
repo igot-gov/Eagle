@@ -1,0 +1,21 @@
+commit cce0c9fed73c5406e722392e07a9cb5cda9cfea6
+tree 4b2ca1c72422889a96b1177337e5fd61347f0b47
+parent f091ea289b3e8e2d62e981acedc4cf30ba79d5bd
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-12 22:17:52 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-12 22:17:52 +0530
+
+    remover user image from learn card
+
+
+:100644 100644 7bfaf58ba359de7c760fa0eb597a705388ead901 27e2f68b44b3b51501076dd3aaf16076660f2a47 M	apps/fusion/library/ws-widget/collection/src/lib/card-learn/card-learn.component.html
+commit f091ea289b3e8e2d62e981acedc4cf30ba79d5bd
+tree 4d09f8c73be6a6e2823a4013cf3526a0e767c94e
+parent 6ccdff637c767abefdd08930d84a5b94fa7545db
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-12 21:56:34 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-12 21:56:34 +0530
+
+    activity card issues moved to assets
+
+
+:100644 100644 dc60249d6c088b9531d9eaf999cbb90858e4b81a dc60249d6c088b9531d9eaf999cbb90858e4b81a R100	apps/fusion/library/ws-widget/collection/src/lib/card-activity/activity_card.svg	apps/client-assets/assets/images/card/activity_card.svg
+:100644 100644 5f25c187b4e3639b217da70358d52ef6753b5f42 87d523eeb935a796c582f133aeec1f9e19f0d12e M	apps/fusion/library/ws-widget/collection/src/lib/card-activity/card-activity.component.html

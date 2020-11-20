@@ -1,0 +1,13 @@
+commit 4f9ce13338ef163c763c87f6ca09f369cb6a5394
+tree d87732fbbb93e940c24ea87f26a5b994ad1bb7d8
+parent 23086cd6eb8e181e7c8ae3cbe40f480097b93409
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-13 10:05:23 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-13 10:05:23 +0530
+
+    css for landing page l and XL
+
+
+:100644 100644 7fd55ad35f05fe97521b00dcf1e4de27a9b35838 deb02de0f8f7ae51aaad2e953eba547259480cb0 M	apps/fusion/library/ws-widget/collection/src/lib/carrier-strip-multiple/carrier-strip-multiple.component.scss
+:100644 100644 ac30de7aa96edb6adf3c66d55d0b25b8cdc706aa 91b4c9fe832a41ce5eb93168f5bf202c89a823bd M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.scss
+:100644 100644 5106dbcbc0859a020fcf13e342633f39c8457ca0 f714724c09a47ce6d0394169a68626247adf442a M	apps/fusion/library/ws-widget/collection/src/lib/discuss-strip-multiple/discuss-strip-multiple.component.scss
+:100644 100644 3c81b81db22ff89121ad82481f1ae06b7d436b73 838801ee6692ec011f9a35e60ae1a0e2f9b94f86 M	apps/fusion/library/ws-widget/collection/src/lib/network-strip-multiple/network-strip-multiple.component.scss

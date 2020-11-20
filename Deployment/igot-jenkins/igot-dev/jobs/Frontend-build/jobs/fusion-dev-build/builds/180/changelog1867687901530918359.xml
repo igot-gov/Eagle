@@ -1,0 +1,10 @@
+commit 3b0286fdef15652186d366d05990e43b4cb13724
+tree 98b322265362dd46a7f0ab5b86e35d2db1b00dcf
+parent 9d4e5648f3b26862e2ae1cb2ae551622d6956f05
+author Amit Kumar <amit.sengar@tarento.com> 2020-11-04 10:33:59 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-11-04 10:33:59 +0530
+
+    word-spacing revert
+
+
+:100644 100644 c91ff8f6eeaa0fba15ad6af63a5edb927b8db187 c6bc432e3cfab465f16e18794d4ef957f39d2dff M	apps/fusion/src/styles/styles.scss

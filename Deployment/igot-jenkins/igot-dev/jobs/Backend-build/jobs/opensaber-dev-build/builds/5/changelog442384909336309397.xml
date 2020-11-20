@@ -1,0 +1,21 @@
+commit b3d3f1511b125750ab5651de386bb5af81fe8434
+tree 8133e1378d179bb9d1e579ef0357a215fd6370aa
+parent 15d670a4a3dd12591927e1649c18c1af7a144f80
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-08 19:13:24 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-08 19:13:24 +0530
+
+    Issue #51500 Fixed audit fields issues
+
+
+:100755 100755 d5e4b27f9e46aa881cfe23163502ae86c5591e3a b67438f46eb92c3df19b8bb1aa08caa6772dfca5 M	java/registry/src/main/resources/application.yml
+:100644 100644 ae4815c024cbdce433fb7b22e6dc05f6e29d2c98 22fa4cdc715c223087973e3aac948972bf1d10dd M	java/registry/src/main/resources/public/_schemas/UserProfile.json
+commit 15d670a4a3dd12591927e1649c18c1af7a144f80
+tree f985285c596b8dbfb15f9b92777aad9c63ed689a
+parent 61da2a1652e03ef7e35a5cf93296f0d24c8c945c
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-08 06:04:59 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-08 06:04:59 +0530
+
+    Added Nested search request sample
+
+
+:100644 100644 80394d7867df01aebeefdce05fa3fe401a87ee18 07da3abf8b0202a3a52ca5984bf59e541667ff9f M	java/registry/src/main/resources/UserProfileRequest.json.sample

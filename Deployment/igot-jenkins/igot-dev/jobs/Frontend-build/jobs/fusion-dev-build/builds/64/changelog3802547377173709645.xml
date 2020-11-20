@@ -1,0 +1,11 @@
+commit b5809d7dbe4e354566b4c5d65ed535223e0b3a1b
+tree 0509b5b4769014b8b8ad67f057358cc569d529cb
+parent 629897121590674c4df41fde3402c4fbcd7a33e5
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:17:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-26 19:17:21 +0530
+
+    scrom event to telemetry
+
+
+:100644 100644 f44e292661f6a6856f373027584c5bdc71b36c5b 140b008d2253414345fcea11b4d09798b4ec62af M	apps/fusion/project/ws/viewer/src/lib/plugins/html/SCORMAdapter/scormAdapter.ts
+:100644 100644 c8ea2fe4bb1e3a50617bb5efc8f1bd8801ce4c66 486f04930b166f2a5197e9ee6ad55408335feb13 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts

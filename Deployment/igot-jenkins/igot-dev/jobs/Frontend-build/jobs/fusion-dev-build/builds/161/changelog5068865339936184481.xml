@@ -1,0 +1,80 @@
+commit 06ef03b822654d4c88c754863e69f2c6961f75fd
+tree 766d5f21f521edf281323691c22e046142092faa
+parent 370ae6a0e7461dffb6ba0ec1c1cd45f2daa997af
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 11:40:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 11:40:06 +0530
+
+    removed letter spacing and iframe default shown
+
+
+:100644 100644 35b72a0441ee00cd938dba67d4d7396e404d243f c5a532c611ec4c3cf10d05531d42dd2097336996 M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.html
+:100644 100644 e258037e52cf74a8d5b84dccc6a7f8bf231e99c5 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss
+:100644 100644 5ce894af14e8a85d53e72bfa22d05998544debd7 98b5d3dfd934ea57a59c72a44c23fe494c8ccf33 M	apps/fusion/src/styles/styles.scss
+commit 370ae6a0e7461dffb6ba0ec1c1cd45f2daa997af
+tree 0c5899f4c7174a045b4edf3fb78e16f8bdea6cc2
+parent d2dd545092e44f1562b3eb05c4430aa790fcb36a
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 10:17:03 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 10:17:03 +0530
+
+    site config update
+
+
+:100644 100644 f8e041738374bdc4fcc225a02f7249aa213af66c 1f77756a984d60b25e9ab9bf8b67e8601aa09d48 M	apps/client-assets/assets/configurations/localhost_3000/site.config.json
+commit d2dd545092e44f1562b3eb05c4430aa790fcb36a
+tree 5c4b1fa4b90cf9caa603a46cc79e04a07e50576f
+parent eb5d8662c3ee322a7213c43df876f16b1022fb6c
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-29 10:16:17 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-29 10:16:17 +0530
+
+    acc fixes
+
+
+:100644 100644 73d0f485b58dce420a9b3e0513a23c7a03443d21 cadb61d4d0170d2a945822d8e28bef71a4b47d41 M	apps/fusion/library/ws-widget/collection/src/lib/btn-feature/btn-feature.component.ts
+:100644 100644 575a9b1de3d0dee110b7ba2d337363ae52e870d7 fcd469849e38b8ffeacf5a51236fcb86e9884b39 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 6c1b8941acdfd188ddab29ab7e0dde58b57b7968 4fadb2daef6d2f0c64e337c06cb710637952fcc1 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.scss
+:100644 100644 df4128412a265949d4cff65b710837f9e803d660 f85708099c3957f79ce8a13d1100b666a05644fd M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.ts
+:100644 100644 8cf15eebc6f2d94305a23e3ee3772724150a40a0 5fbd40bb2a19536b7835652bade647a1825822e0 M	apps/fusion/library/ws-widget/collection/src/lib/card-hubs-list/card-hubs-list.component.html
+:100644 100644 65d6c614504bc44aa1ed278d8facb23c238d971e ccacfd83d0d4374a5b18a2c1a937e55930805966 M	apps/fusion/library/ws-widget/collection/src/lib/grid-layout/grid-layout.component.html
+:100644 100644 a55c4365815198eb9f3b7fe3c38ed2d32afac302 83059a483bdf1df8d560cb6228eb81c65999bd44 M	apps/fusion/library/ws-widget/collection/src/lib/page/page.component.ts
+:100644 100644 35e9c20db808829e734fd98e62979e493820dddb a1b660441fa35a98603a567044409ce3af60a820 M	apps/fusion/project/ws/viewer/src/lib/routes/channel/channel.component.html
+:100644 100644 19050bd20ddc59f76bff681f4ead33ec9525af1b 4431a8bad6660b8df7ad918f385fe1c2526ade76 M	apps/fusion/src/app/component/app-nav-bar/app-nav-bar.component.html
+:100644 100644 84c597c627a72f31774970737fe6b9f208f8fee8 6bcfc647c8db7a347cbac1091e1fef3062e2c983 M	apps/fusion/src/index.html
+commit 5f0f4f1e75f7167f51b9546733a403588d6cada3
+tree 536dd7c88c3e856c7cbeb44d5973e8c87c6dbeb8
+parent 18ac26e626f9a4f9a044ebfda8792c5a5f6abd7a
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-28 21:02:04 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-28 21:02:04 +0530
+
+    profanity popup works
+
+
+:100644 100644 a3f7dcdef9104955c1c5a6217fb5ae70ddb7c905 ca1ddea51c23a6ec0e1f4ff51ba49a4767691cdf M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:100644 100644 ce91577f2f0025d4e4d3b8836902aa364775122c 4011af07f39177e9db85fd0839a4280e9e051132 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.scss
+commit c3be0501af1f4ddfc6b5254fa19fc24adc3d65b1
+tree 4c79afa4ae88c02c898d88774cc96935134d7259
+parent 966f81c92bc54c38350448afd4999c6dc771209d
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-28 20:26:08 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-28 20:26:08 +0530
+
+    changes done
+
+
+:100644 100644 2e1e8014577cd39bd872092bca8ea5354f658714 84f2c92ac662b3ef6cb1618af096b26b705c0b77 M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.html
+:100644 100644 4780d16fe0eed9302ff77d3c3756ca576189141e ac5674360429517ef36cdd701996fc50a60e760d M	apps/fusion/project/ws/author/src/lib/routing/modules/create/components/confirmation/confirmation.component.scss
+:100644 100644 cc483e8580064373b973ea56f499412c0dee51ef a3f7dcdef9104955c1c5a6217fb5ae70ddb7c905 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.html
+:100644 100644 8c77061d51f322fb8d5b0e32eb0c5856bc5e9c23 ce91577f2f0025d4e4d3b8836902aa364775122c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/profanity-popup/profanity-popup.scss
+:100644 100644 89247a7f6220a1ecae46a9c3c2ddf3c243ee75ea 82a942cb96c3825d2840d014077a401824fdff0c M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.ts
+commit d22e7ea39514d4d4af5e3ada57d15ca8cfacf223
+tree ef2894cf8189f72730c2171a0220edad8da16292
+parent 77e5ffdb1b92abb558e59e7ccbb8e27c99552927
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-28 15:47:09 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-28 15:47:09 +0530
+
+    for changes added two variables and other bug fixes
+
+
+:100644 100644 bdcf965fc216c655d15b37be8b9862f56dd60a73 ae7b7670393d91a16ed8bf909325dc1d871f063b M	apps/fusion/library/ws-widget/collection/src/lib/card-home-discuss/card-home-discuss.component.ts
+:100644 100644 91ed0e41af4a4f2dc4805c1fb2ce2024b94b6bbe 435a9518b6b3027d9443b7e316a11af121b2cf2f M	apps/fusion/library/ws-widget/collection/src/lib/card-home-network/card-home-network.component.ts
+:100644 100644 c1eaf2569579b644ad88eb2afb0e5ebbd100f382 a5df62338b89fd4db46469f0110d69e2249e5c3c M	apps/fusion/src/styles/_ws-vars.scss
+:100644 100644 d424f40443d803775e875d3c7fce232b5a1dc059 3ceb25d697acad7fa41b3c1074362dc666170075 M	apps/fusion/src/styles/mat-typography.scss
+:100644 100644 d199e1995d3e7b18c755ea0d4f525aa04e6efdbf 5ce894af14e8a85d53e72bfa22d05998544debd7 M	apps/fusion/src/styles/styles.scss

@@ -1,0 +1,21 @@
+commit 854b3dc5c5205672ad11c103cff89f5be59f7f88
+tree 16e1a5a9dd81f639f184ec38d9a01eeb80bce959
+parent b2846e35b8796d790e597d7b8e5312537dc04731
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-18 20:13:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-18 20:13:16 +0530
+
+    scrom Updated: Proxy1
+
+
+:100644 100644 c166011330a440c26aefcd2c0c5d17a27e11d7c3 7412dd0f3c7a0eae853826f51f53f24ec3ba9306 M	apps/web-services/src/protectedApi_v8/scrom.ts
+commit b2846e35b8796d790e597d7b8e5312537dc04731
+tree 1ec9a71dc0b2c497e2da2f6178d4767d4d90ac3e
+parent 690a0d6a81fbd29eac967d939ed15f4c7ffd16cd
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-18 20:09:29 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-18 20:09:29 +0530
+
+    scrom Updated: Proxy
+
+
+:100644 100644 5f8b02fd67b781b6df45a89890a81bab80dace79 cd74c85140dc8d33ce46774b103df3df5078b88f M	apps/web-services/src/protectedApi_v8/protectedApiV8.ts
+:000000 100644 0000000000000000000000000000000000000000 c166011330a440c26aefcd2c0c5d17a27e11d7c3 A	apps/web-services/src/protectedApi_v8/scrom.ts

@@ -1,0 +1,51 @@
+commit 0ef19b5b47240e60d73c7e1e7cf7d3d9e966beec
+tree 6eb6f12c3032c5d02375a195078dd965a113a2fd
+parent 9250bfcb2102016c9ccb87849b461e132f0d4698
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 14:38:21 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 14:38:21 +0530
+
+    Task #51983 review comments
+
+
+:100644 100644 0f262b17928f0d0bde72fd419b86f0010e77328f e62405feee4df3f44059ced2293b9c5a24c5c88d M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/consumer/CompetencyDataConsumer.java
+:100644 100644 930265fc503cf2f938ac730b8aca77d5532850ac c78761b33e27ff256629fae5fd8ce0a169738a68 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/CompetencyController.java
+:100644 100644 352875483e97d2c3bf40e75e8212a7aa649d5ccd 7e4c474255d8ebefbdb996d0adda5e94e07ac34f M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/producer/Producer.java
+:000000 100644 0000000000000000000000000000000000000000 5da792e1cfe5f2f37e0c711006e73f6932ff7008 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/service/OutBoundRequestService.java
+:100644 100644 e2584b1e81991d4ee92ad650e1affabe15d825dc 043f3a815da2313aaf2a9a3911927a0170fa0457 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/CompetencyServiceImp.java
+:000000 100644 0000000000000000000000000000000000000000 6e56fa03853f78be8270ee4a6c25f1571cd47afa A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/OutBoundRequestServiceImpl.java
+:100644 100644 0ab252e434090c3a0af1233e1d053b6e0134e03b e97f984a8929c0bb23a4f66bebd27946da0ebda9 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/util/LexConstants.java
+commit 9250bfcb2102016c9ccb87849b461e132f0d4698
+tree 3fbe69a40dd007bd637834ade8d76aaa5d29ef3f
+parent fdaa19aabe17ca5afe8338f2b04cc97cac4ab73b
+author amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 11:45:00 +0530
+committer amit-kumaryadav <amtydv630@gmail.com> 2020-10-13 11:45:00 +0530
+
+    Task #51983 webhook API event
+
+
+:000000 100644 0000000000000000000000000000000000000000 0f262b17928f0d0bde72fd419b86f0010e77328f A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/consumer/CompetencyDataConsumer.java
+:000000 100644 0000000000000000000000000000000000000000 930265fc503cf2f938ac730b8aca77d5532850ac A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/controller/CompetencyController.java
+:000000 100644 0000000000000000000000000000000000000000 357d04db698747ca42cf3f9ed78067b39e66b706 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/Competency.java
+:000000 100644 0000000000000000000000000000000000000000 346250aea5f4f6d4a88e873b31ef03440bb764b7 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/model/CompetencyWebHookResponse.java
+:000000 100644 0000000000000000000000000000000000000000 352875483e97d2c3bf40e75e8212a7aa649d5ccd A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/producer/Producer.java
+:000000 100644 0000000000000000000000000000000000000000 313e432f547fdf2acec113c87b03ad87a6682190 A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/service/CompetencyService.java
+:000000 100644 0000000000000000000000000000000000000000 e2584b1e81991d4ee92ad650e1affabe15d825dc A	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/serviceimpl/CompetencyServiceImp.java
+:100644 100644 8c638e2ddd0fd9b8cd54057afa3093ad59b9c9c3 5fbaf00a501f24da3cff662c6f263ed3fb98c80b M	apps/authoring-services/src/main/resources/application.properties
+commit 9aff2263d281061939814fe58e42b75b89649726
+tree c3efc2c7935c38a8f2b014cc5d025d9cadae2a23
+parent 004f6a1ece9e968025bd530e2bfa345fcc313eb4
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2020-10-08 11:13:09 +0530
+committer GitHub <noreply@github.com> 2020-10-08 11:13:09 +0530
+
+    Added competency field in constant file
+
+:100644 100644 56774067fa941aa68e6de457ca2772006d3d5b8f 0ab252e434090c3a0af1233e1d053b6e0134e03b M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/util/LexConstants.java
+commit 004f6a1ece9e968025bd530e2bfa345fcc313eb4
+tree 4baac12050b96f3da3be8b7dfbb746a67509047e
+parent 32e7f4fc7828eae34977f9822eab14e368d756c0
+author Amit Kumar Yadav <36166686+amit-kumaryadav@users.noreply.github.com> 2020-10-08 11:11:31 +0530
+committer GitHub <noreply@github.com> 2020-10-08 11:11:31 +0530
+
+    Added competency field
+
+:100644 100644 988a839e285c45a74884d6d45a2ba31ff125fe00 1d2d869c112822fe3c6fc6300d1d609290be6d25 M	apps/authoring-services/src/main/java/com/infosys/lexauthoringservices/util/GraphUtil.java

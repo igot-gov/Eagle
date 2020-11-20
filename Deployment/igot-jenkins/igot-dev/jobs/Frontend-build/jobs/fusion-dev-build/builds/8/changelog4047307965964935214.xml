@@ -1,0 +1,56 @@
+commit f3aaf1ca84f2c0cf849a49adcb2e22f6fc1dfd82
+tree 11493db3299e1a2123fbe270f97c39ca07491301
+parent 04fd4b0a3360dcdc9b0c0dde6f6f09b679426c5e
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 18:21:35 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 18:21:35 +0530
+
+    Home Page Title Chenged
+
+
+:100644 100644 1fb92d2ad05cc7ec76f57c9d0ef6c15080bc04fd 17af4efc8f2a98a9a78008763de86b6777e15213 M	apps/client-assets/assets/configurations/localhost_3000/page/home.json
+commit 04fd4b0a3360dcdc9b0c0dde6f6f09b679426c5e
+tree fd2549dbf8f205dc9290ffe4bd9ba4f6aa5fcf15
+parent ac064c929267efc2276137a5a0609ac68c72cc9c
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 18:05:57 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 18:05:57 +0530
+
+    New changes and nav changes
+
+
+:100644 100644 750c47f9589f286c849a96b58c962d9d052e1dfe b1deb99d82e96b2ad93241436f72daf8d219a442 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.html
+:100644 100644 83da6ee15cb7f89a33e1dd86c5c50db405057085 9667fec867d263d263ee1309b6ef1c6af23b9ee6 M	apps/fusion/library/ws-widget/collection/src/lib/btn-page-back/btn-page-back.component.ts
+:100644 100644 bb0b4563abb0f02e6850212a0fa536091b7eb710 694bdaab85855cd52498f02f1c65dd6845c6c229 M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-multiple/content-strip-multiple.component.html
+:100644 100644 29afa72675bd936d8c931de7e8d3518dfb57dadf 1c31a87d8112feeedfdb7641d4a238d5c1cf8037 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.component.html
+:100644 100644 a64c5537c0f425b5d7403786ec2970d8ba61f565 15ddc5ecf33268704ec99fa462fc3f08dd84447a M	apps/fusion/project/ws/analytics/src/lib/routes/learning-analytics/components/client-analytics/client-analytics.component.html
+:100644 100644 bc4c30491ab89d061536f46aa6058f379a7ffd12 a652090d286b8b7cee033a5b703cb6b32bd96f46 M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/components/home/home.component.html
+:100644 100644 61ba4bf8bf6fbd73be2a55472f8dc49b72aa15c9 5a5e9560faa8cc89c6bc9ae9c4aef19833c331e8 M	apps/fusion/project/ws/app/src/lib/routes/feedback-v2/routes/provide-feedback/components/feedback/feedback.component.html
+:100644 100644 ea574fdf90655f7a93bd17be2f4e3fd9ab403f2a 57f6f01ce93615440dbac86b88eee451de42ea60 M	apps/fusion/project/ws/app/src/lib/routes/goals/routes/goal-home/goal-home.component.html
+:100644 100644 73087f156bc34cb2665a2b907b73a95e2d7c9c42 25924d5e14c8643c1cf37e32fdbf0a6f5f91ce77 M	apps/fusion/project/ws/app/src/lib/routes/info/about/components/about-home.component.html
+:100644 100644 2a7ab6638d52d08c2cf62a9455fffc3fc97a48f3 dbd8d059b21f3c5cda7f4ee24856fc4959fe5c4f M	apps/fusion/project/ws/app/src/lib/routes/notification-v2/components/home/home.component.html
+:100644 100644 90c11c38cf92a9b04da65f358b42077a774dbefb c2ef7bc3fbb486f39fd44c9ab233a468687075fb M	apps/fusion/project/ws/app/src/lib/routes/playlist/routes/playlist-home/playlist-home.component.html
+:100644 100644 3c9607bfa5e1b3fcaf3b460d27f96085df1096ed 5bdf242eb3ca1ed8f2674f2676b340d6a1360021 M	apps/fusion/project/ws/app/src/lib/routes/profile/profile.component.html
+:100644 100644 82ca029af9b34ac1efa1679d11d19e9ee1368645 bf4430bc151a021452c2e2cfa3889db3a3334661 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/interest/components/interest/interest.component.html
+:100644 100644 4050ae4c977141823d0b9095ed95a606f6f87cd4 34af31e2ee01151ff7dd8bce192a59a7b89c3663 M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/learning/components/learning-time/learning-time.component.html
+:100644 100644 745c35916a90bc0cdb3382ffaf58f13ea3c20fc3 299cca681fb5f5660fd349333b9f9c2c10fbc8f6 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 21e7aea69b54550fb2b3a7e7524a774130af9b11 8d99b2ea5afed1e52ed5ec0371a9432f6b2dae8f M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 aa38eb6867f7ee46ac3781810700c18dca7d0751 db381f038200695d033ef221830f44ab46237b35 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+commit ac064c929267efc2276137a5a0609ac68c72cc9c
+tree d2a64082dec9bbf082b84bcd246ea4d8bcd47638
+parent 9a77298f8a604f776e5ab98d84b08203115487ce
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 16:18:16 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 16:18:16 +0530
+
+    hover in review and in in publish => removed
+
+
+:100644 100644 40f1b4bfebeec95ffb82fb927008ea4e77522970 544b1bff0dfe2262af618ec35862896987907fd8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+commit 9a77298f8a604f776e5ab98d84b08203115487ce
+tree 50756052fb1c567117b6a57f1bd723c4882a64d0
+parent 6b023fa9f617c42db87d71af3a0144caea3d2fba
+author Amit Kumar <amit.sengar@tarento.com> 2020-07-17 16:00:25 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-07-17 16:00:25 +0530
+
+    files=> file in Upload content
+
+
+:100644 100644 4c34c64c04d309a3893c656c30cb43769662ef3c ff72c4ca2685a7f845ca5b209bb595bdd49936f4 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html

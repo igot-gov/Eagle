@@ -1,0 +1,25 @@
+commit 26e5273a8259d16eedb877f9ab0d5b79c6d26654
+tree 923532ae8cd4d5572940380a4950eb0ded44dc4c
+parent bb2283be037ae5f43883365aa3646214f2e69132
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-16 11:11:40 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-16 11:11:40 +0530
+
+    Issue #51548 Added logs
+
+
+:100644 100644 afd223574e9bc0218530a5c757a645b602cd3374 ab17a172a33883793ec618ff89528f99e16be2b0 M	java/registry/src/main/java/io/opensaber/registry/controller/RegistryController.java
+commit bb2283be037ae5f43883365aa3646214f2e69132
+tree 88a5d2605119f2bc6ddbcbe2de5086be2374784f
+parent b3d3f1511b125750ab5651de386bb5af81fe8434
+author pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-15 22:53:30 +0530
+committer pritha-tarento <pritha.chattopadhyay@tarento.com> 2020-09-15 22:53:30 +0530
+
+    Issue #51574 Migration API: developed to post data to ES from primary DB
+
+
+:100644 100644 c8f6787f9ab5727d79e6721dd70a4ce9d694db98 4ecf70c323e7995429fa8346f134837824807b03 M	java/registry/src/main/java/io/opensaber/registry/config/GenericConfiguration.java
+:100644 100644 3e3649a6fec7054812dff9aa47e49f3c2fa9d20c afd223574e9bc0218530a5c757a645b602cd3374 M	java/registry/src/main/java/io/opensaber/registry/controller/RegistryController.java
+:100644 100644 1178df25b07ee2ba50e3a0b9e4844e503414b77b 2a6f3da121133c578588e8dcf4a54669df3fa9d0 M	java/registry/src/main/java/io/opensaber/registry/helper/RegistryHelper.java
+:100644 100644 f1fa71838318514d15f4110530f9dae42c62abda f60c231f597983efc4e76d6a3f56ba40eb7fda87 M	java/registry/src/main/java/io/opensaber/registry/service/NativeSearchService.java
+:100755 100755 f53691a15f29c233de58c465da2506d398c8785b 80e4eef2a18b2a1d1b4aada4e7cfa20375015db9 M	java/registry/src/main/java/io/opensaber/registry/service/impl/RegistryServiceImpl.java
+:100755 100755 b67438f46eb92c3df19b8bb1aa08caa6772dfca5 af4f7fcb12ca05ee00590f0a7b2cab1d82c6b29c M	java/registry/src/main/resources/application.yml

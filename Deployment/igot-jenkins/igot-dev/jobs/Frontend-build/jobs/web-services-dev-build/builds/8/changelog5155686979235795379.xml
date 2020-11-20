@@ -1,0 +1,219 @@
+commit d888dc26e0b8f316ee3edb2b2099851d577abd5f
+tree db4f75cd7b47aa02633a1804ec315a4450b4d315
+parent 4076317e42023c0ad60291b98736b78559f45e7a
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-11 15:31:18 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-11 15:31:18 +0530
+
+    Task #51035: Fixed the query and added more logs
+
+
+:100644 100644 a444efe1aed2f1e60b248a0daa74d725c343db8e 1fe7abd40e27d23dafe34cb63516a5ed03bf4a19 M	apps/web-services/src/publicApi_v8/signup.ts
+:100644 100644 f2f38f924997c8fe8b7f1a2423da8dc9aac0355e 1483d67c91a537ad38092f919d0645094f41f1e7 M	apps/web-services/src/utils/keycloak-user-creation.ts
+commit 40778df9a3b90829e542bc71e6fcdce8c2c40aaa
+tree d0e0b26d021d696e506aafdedcdc27a8b5121a20
+parent 56712789250a798a497305be4d8c54cbf18a2c9f
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-11 14:12:25 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-11 14:12:25 +0530
+
+    temp build fix
+
+
+:100644 100644 17cbc7f597d33b833b0b139295921fc0850c0dff a18ab7b111463fad057924b3b3a0700e9e297754 M	apps/fusion/package.json
+:100644 100644 36948556ae313be2614653163312478809acdfec 0d740ee5cd8cf6cd4ab6c46d820c7c34a2b41e90 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+:100644 100644 0bfd9bee4f1f170e22bc5166f1e1a880ef77dae4 32e698400794b1bef267d11469a8ab1eb26e7c16 M	apps/fusion/tsconfig.json
+commit a5796c1e7ff8ebd25912f6cb51812bb8ab269949
+tree c501d76220cb62278d18b6f7fe0e6afef59b6761
+parent 44a6de114a13216d2babacb96143f9ee7779f5cc
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-11 12:13:31 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-11 12:13:31 +0530
+
+     Web page and assisment : updated : need refactor
+
+
+:100644 100644 15c50d512191f55bb3c8ecbbfad81b05de3501ff 480b6b3423fdab577532201049fe2d6c9049d157 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 128dbdb29149dc05bb601ef6aa0dd744cf9504d3 bc4004c7af995de1757ef3629b20d5cc7798804c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 cade1ae0a09553df98dd0f7dabcb5b78a22f1227 aab1ed43a091fb79e78085c88155371221a9c43c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+:100644 100644 9fc7533e12d185fb5894aba812dbdd5907c73ea1 2a0a3b81526254a7d1ecc50dd60ad3228387251d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 da5e1dbd6316de07d8a224f068bc52100afd8c88 600fb1a004d86b70e9b129709f3b41069070a1cb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 9f9999c45956143b3045e81bdaf9acab2547c026 882a664fec92ff58559cfa7412a4385b2f5e572c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:000000 100644 0000000000000000000000000000000000000000 f18db629e0cd623d3de77e30847eb51afd3b689b A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/services/store.service.ts
+:100644 100644 6118e9bd2d626614fd7964a5351dcc7d345e7faf 497d33a205b27ee523d541076d3ef3960f5a53ab M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/web-page.module.ts
+:100644 100644 af17bbb473a97bee8132831715dcf8241762da45 9ba43f25fe28acdd51af4d345f5b2708614941ea M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 206f9e65637e3bd08453acd1e93d911707e0b21e 604ed11863b2744958bfab61c0e595e82c5fd7a7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 4f929614c7920daab6fc7aa6a0199ff68c441044 6bfb6f67048864618fdfb8dc81abffce3b67e09b M	apps/fusion/proxy/localhost.proxy.json
+:100644 100644 88c74085539a610b541840de528de177869da66d 9d387d0aed22ac95307bd36cc19fd8d991872859 M	apps/fusion/yarn.lock
+commit 44a6de114a13216d2babacb96143f9ee7779f5cc
+tree ee9127c768ca22320a8caec133f5b89f40fe4487
+parent edfeb6669c53adf7de9affbe292041aa8d3b2475
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-10 16:09:20 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-10 16:09:20 +0530
+
+    UI changes
+
+
+:000000 100644 0000000000000000000000000000000000000000 d842ab9643be1816eb161112f07c40f9ba6ab5c2 A	apps/client-assets/assets/images/authoring/Unpublished.svg
+:000000 100644 0000000000000000000000000000000000000000 bb137aa4e930b12139ee5b87f626d91d1867f04f A	apps/client-assets/assets/images/authoring/send4Review.svg
+:100644 100644 521fbd0af17ad06aff914b39057fa5513d52d102 eb85e3a5f4410b537ff535811f5d1c375be618a6 M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.html
+:100644 100644 2a0fb4473570c8d59069dca66f6baf57c364b1d1 35a34c692eb539272f18c8db70fe33a50264bccd M	apps/fusion/project/ws/author/src/lib/components/auth-navigation/auth-navigation.component.ts
+:100644 100644 27ee124095669435d16b3a09d21adf672988b25e 27ee124095669435d16b3a09d21adf672988b25e R100	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/order-by-pipe.ts	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/order-by-pipe.ts
+:000000 100644 0000000000000000000000000000000000000000 d1d3da33167b46f59c2bca38d719560d2a45bfc9 A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.html
+:000000 100644 0000000000000000000000000000000000000000 56892a64b4bd0e21ec419528ad5cc06025ff5d54 A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.scss
+:000000 100644 0000000000000000000000000000000000000000 0c23377357f5ff4fe1c4528dd846370f0809a94f A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 84fd90fb38ffcb4dd3b78c407b32bfbd8f4ed8fc A	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-content-display/status-content-display.component.ts
+:100644 100644 b0648ce51c5fad189cc1da3725a0a5218a3883b0 0a8ff378e742af3b3e4b7e75902d2519b6126c10 M	apps/fusion/project/ws/author/src/lib/modules/shared/components/status-display/status-display.component.ts
+:100644 100644 68d2573ae589acf711fd7f58c7d01f9724e2c726 5ea1f8d133c9a6e29aef0f5bca2ad147e1eb7be6 M	apps/fusion/project/ws/author/src/lib/modules/shared/shared.module.ts
+:100644 100644 003f0a08d2255011a3bff2d08226421e0ac56279 bb46df695fbb612d3086695173c07b434e1806f7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 c630ba60e9532b9b421452863813dfad5bf25fb1 af17bbb473a97bee8132831715dcf8241762da45 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 768c1c7e0faec9662c7c901365278089add31a69 206f9e65637e3bd08453acd1e93d911707e0b21e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 f68512bfc594acbbcb0fd44a6b41485ed1a80868 36948556ae313be2614653163312478809acdfec M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+:100644 100644 be9a06b36d6c623ab423b179493c907b87b6290a ec7a06c4c0555cc55ddb95b3696db695613d0954 M	apps/fusion/project/ws/author/src/lib/routing/modules/home/components/home/home.component.html
+commit edfeb6669c53adf7de9affbe292041aa8d3b2475
+tree e2cf9decd66637c7fc4ec8481a3c3cfc181bfed3
+parent 5158634ca62feb3cfeb91f99c4eb44882397937a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 23:51:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 23:51:06 +0530
+
+    option small fix
+
+
+:100644 100644 3f84cde256ccd700c432a0a4974d4719321d2329 003f0a08d2255011a3bff2d08226421e0ac56279 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+commit 5158634ca62feb3cfeb91f99c4eb44882397937a
+tree b5d2046e56cf29845948e8288b217e4f83f8259c
+parent febcf44605388aec384e1b147c84e8d0b20b5d48
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 22:40:46 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 22:40:46 +0530
+
+    UI pre-final Updates
+
+
+:100644 100644 185cf8e462afc652bb0779f5021e077256387edd 17cbc7f597d33b833b0b139295921fc0850c0dff M	apps/fusion/package.json
+:100644 100644 eb4522d46d79a8c74440283c082c782e92c99d8b 84694bfa7517dceedef49839edf6fe7a7b779e64 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 729adc5fbd2ea0d3add4aa758efcfbfec6b974f0 b618de229632adf982287271e194486d2288df77 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/curate/curate.component.html
+:100644 100644 0a91e17afe197f89d8ca4a890642285230340051 30a32b28976290f0299b0d763a358baa3325dbfa M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/curate/curate.component.ts
+:100644 100644 7cbfc9c8aeafe715145b5ec53820632eda816a42 24203c797aebd1710b7a223a1b05304b844f4d05 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.html
+:100644 100644 c95a3b47c5f114a5f607cdbcd0d53cd24853e12f dffb46bacbe2fee1287ae5d0ebf1e7a41e777942 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:100644 100644 4ed93f507ea995ce055daa300589d3860c8ee3ca 63181e92c2d190938537b4441fc0d82288bc1584 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.html
+:100644 100644 b91e31eb51c5e8f3e1caba1f494d79236e0634dd 128dbdb29149dc05bb601ef6aa0dd744cf9504d3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 18a57108e35610463ed39b132cc50396e5cd5da3 682a4dc31cce9b72347a6702c2235e20eb092492 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 5480054f66471242ad94fa390327554f84c82e06 33d2f98081c35bd738b2f99de1a43b6d017f879e M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.html
+:100644 100644 417e90b828b9010d5a626b51f35f9519d3e98a8d 97f4b8b638a1eb6d9fe0ef65e1bf854f19202728 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 ecde2e56be461cfe96697fbadb6d5ca8de0d6293 ac08125a8bea5f9f2e8bb7e5714c3b7a3d97ffc7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.html
+:100644 100644 e98b058296539475d5e1d1db7c415471bc0c586d da5e1dbd6316de07d8a224f068bc52100afd8c88 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 bdd14662f9cc902a2cfb1fa832d0fc47b0f3f843 9f9999c45956143b3045e81bdaf9acab2547c026 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:100644 100644 1b31804766a339c65ee99ddd27b821ae907f176c 3f84cde256ccd700c432a0a4974d4719321d2329 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 0fd16777eb698e4c713d49d234a3b475dfe7c7a1 768c1c7e0faec9662c7c901365278089add31a69 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:000000 100644 0000000000000000000000000000000000000000 27ee124095669435d16b3a09d21adf672988b25e A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/order-by-pipe.ts
+:100644 100644 9625892ed78ad943d2169561f11c5ecb90051621 9437996160f7862e704d4ceed5c4789bb768b1ed M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.scss
+:100644 100644 36948556ae313be2614653163312478809acdfec f68512bfc594acbbcb0fd44a6b41485ed1a80868 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+commit febcf44605388aec384e1b147c84e8d0b20b5d48
+tree 2b501763ec9ab4b37cdf447b8c0302982fbd9468
+parent 5a1eaadde83701f906da57ffb52272062f7139a2
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:26:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:26:54 +0530
+
+    Build Fix
+
+
+:100644 100644 47be493f8b6d1740370445c116f96ccfb6e93e78 18a57108e35610463ed39b132cc50396e5cd5da3 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+commit 5a1eaadde83701f906da57ffb52272062f7139a2
+tree 265177f82e055764e213d263b8d05ee2ecc14086
+parent a88c18f2d9cab52dd563ddff7a354764315cf26a
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:22:09 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:22:09 +0530
+
+    lint fix
+
+
+:100644 100644 30e9e65382522619755bd5b7135178e82b6434aa 417e90b828b9010d5a626b51f35f9519d3e98a8d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 9b92893518f0c3fe496a74ef3a598b45ca25dbcb 0fd16777eb698e4c713d49d234a3b475dfe7c7a1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit a88c18f2d9cab52dd563ddff7a354764315cf26a
+tree 7616aeb8670290e6d6beec12bae42724f16a87e3
+parent e078d8ceb05a946ae90c515dfc9a32d8060ac84f
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:14:07 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-07 19:14:07 +0530
+
+    Updated new Fixes : design Upgraded
+
+
+:100644 100644 7eb061683af0b397568c0c92e376880da810eeaf f6aaac064d053578389b0effda12c6eeef3de89c M	apps/fusion/project/ws/app/src/lib/routes/search/routes/learning/learning.component.ts
+:100644 100644 96e7c99bd0423e618e2efac7df80e9fe28b9fee9 b417cabca2e2c4bf43ed7e1d5221047abdc2d505 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/auth-editor-options/auth-editor-options.component.html
+:100644 100644 431b4349d3a4be1306f679378c98458c9f4c6330 eb4522d46d79a8c74440283c082c782e92c99d8b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 ac023ff17c2ba14d332345bb4e9aac8d9e2522c5 871bf9406764fd632a4cdeab257cdf208b004fbb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 ba8596fcc32063bd977012a00638edc5e5a40bfa 7cbfc9c8aeafe715145b5ec53820632eda816a42 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.html
+:100644 100644 d413af5bcd96a5b0d9af2a1a33155302a30bcc93 c95a3b47c5f114a5f607cdbcd0d53cd24853e12f M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:100644 100644 db8a32f7c62fe8e75efa86cfa34f1a4ca7fbc585 15c50d512191f55bb3c8ecbbfad81b05de3501ff M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:100644 100644 8172a0401b38a39f0abf5a035ec29e42abdcdf53 4ed93f507ea995ce055daa300589d3860c8ee3ca M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.html
+:100644 100644 fdd463d8ebb4766230d7e20fecc2616134480147 b91e31eb51c5e8f3e1caba1f494d79236e0634dd M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 d15a378177018b08c8c23ce3f241a8e4c308dcb6 cade1ae0a09553df98dd0f7dabcb5b78a22f1227 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/constants/quiz-constants.ts
+:100644 100644 3218459c922c05a48ba6822dc963898d60319593 fbb88399b0a5064f939c60d8a1f2f90fd3d52171 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/services/resolver.service.ts
+:100644 100644 7c71361be0b42249d302ec2628f59667e1e48282 47be493f8b6d1740370445c116f96ccfb6e93e78 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 72750df6e5bfd6748c0273ad9718ace0ec766354 367820eee21f5ab81f29200154b5138b878619b8 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.ts
+:100644 100644 0d680a3ed2f38ad257d587ce066c2f04420a5996 5480054f66471242ad94fa390327554f84c82e06 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.html
+:100644 100644 db7f6684300cf08946571a3055968162ee9ff017 3108b1f18bee8e1a1db6f59d3f7d97d8045129b5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.scss
+:100644 100644 20a8ef9f2294e42a4671ef6adb5b9b1672c35b0c 30e9e65382522619755bd5b7135178e82b6434aa M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 14d0667091de3a97be2efa882a162f8c17fbe8ce ecde2e56be461cfe96697fbadb6d5ca8de0d6293 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.html
+:100644 100644 fbf9f736ac1dc2c8a0b1d61dc7a765ab4101a03d 9fc7533e12d185fb5894aba812dbdd5907c73ea1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 3738764154fb442819374e90231c4e2cdfbad279 e98b058296539475d5e1d1db7c415471bc0c586d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 5677ed9df45580f6b4ba40877e11f446d692a9c5 bdd14662f9cc902a2cfb1fa832d0fc47b0f3f843 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:100644 100644 c238380fd7aa1bbe07aeba8a523c2a5113ea097c 1b31804766a339c65ee99ddd27b821ae907f176c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 afe2318ccac4ec935f2a5efed9821ff6b7d9b2a8 c630ba60e9532b9b421452863813dfad5bf25fb1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.scss
+:100644 100644 76e5ea8684db14e771e39f0532a9948b063b72a4 9b92893518f0c3fe496a74ef3a598b45ca25dbcb M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 c8e13612acc6c04ad4eb11f35ef0f8731a685c75 b27c08cb120b699e14a687bf29bf66779fc8dfff M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.html
+:100644 100644 f95928cf7d22a31d08806d9248fc83cc7265e34e f7f309819a013767541f4f4d2d992ab1c2b07922 M	apps/fusion/src/styles/styles.scss
+commit e078d8ceb05a946ae90c515dfc9a32d8060ac84f
+tree 519c99f5c93a7abe4e10f4dd770063c83cc91dc2
+parent bb589b130629f1e1a032a54422147610566fd4ef
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-05 22:54:43 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-05 22:54:43 +0530
+
+    Options added
+
+
+:100644 100644 c950af517973038430fcdcd48cacd8254e64621c 431b4349d3a4be1306f679378c98458c9f4c6330 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 e30863b4510c873a8deef0c03a51f9f13d4bfff2 ac023ff17c2ba14d332345bb4e9aac8d9e2522c5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.ts
+:100644 100644 5004ab7440cb11ea21aa6ea46c79f542ac824a98 ba8596fcc32063bd977012a00638edc5e5a40bfa M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.html
+:000000 100644 0000000000000000000000000000000000000000 d413af5bcd96a5b0d9af2a1a33155302a30bcc93 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.html
+:000000 100644 0000000000000000000000000000000000000000 8fb8383ac506c4b9cd80ef90a104ca037ee291e7 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.scss
+:000000 100644 0000000000000000000000000000000000000000 db8a32f7c62fe8e75efa86cfa34f1a4ca7fbc585 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.component.ts
+:000000 100644 0000000000000000000000000000000000000000 bd91fd01b70f134ec38c1c6631805fb5a28537d8 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz-questions/quiz-questions.spec.ts
+:100644 100644 432a22c21626453f984f91b5bbafe9107742db40 8172a0401b38a39f0abf5a035ec29e42abdcdf53 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.html
+:100644 100644 f1c27f8d8ca0217ecc19ec0e9c250b31879b186a fdd463d8ebb4766230d7e20fecc2616134480147 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/components/quiz/quiz.component.ts
+:100644 100644 dadccbb3efe023db0ab5b4a488ac50053202b212 d954e892cee934b98deed1925af25770d99bbb44 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/quiz.module.ts
+:100644 100644 ed2c296659c4869490732dfeb79a0318db6fa2ad 7c71361be0b42249d302ec2628f59667e1e48282 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 02afe5fcd713f411d8f9ef7780d2480e30768090 0d680a3ed2f38ad257d587ce066c2f04420a5996 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.html
+:100644 100644 512e0d8f3a94cae614bf22d21d07d606c3f31419 20a8ef9f2294e42a4671ef6adb5b9b1672c35b0c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/upload/upload.component.ts
+:100644 100644 7aa078d01488dac43150b9f007aab985e5d08e1b 14d0667091de3a97be2efa882a162f8c17fbe8ce M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.html
+:100644 100644 9df783986f9fc855265337e7d2d86aa1a817c8ae fbf9f736ac1dc2c8a0b1d61dc7a765ab4101a03d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/add-web-pages/add-web-pages.component.ts
+:100644 100644 8ed93357a46066f3860621698880986e54732376 3738764154fb442819374e90231c4e2cdfbad279 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.html
+:100644 100644 2a56adf4451424a76d76dc3788e678920f901426 5677ed9df45580f6b4ba40877e11f446d692a9c5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/web-page/components/web-module-editor/web-module-editor.component.ts
+:100644 100644 cc72e6a599d6e64a223a937e86639d897989962b c238380fd7aa1bbe07aeba8a523c2a5113ea097c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:000000 100644 0000000000000000000000000000000000000000 c8e13612acc6c04ad4eb11f35ef0f8731a685c75 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.html
+:000000 100644 0000000000000000000000000000000000000000 9625892ed78ad943d2169561f11c5ecb90051621 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.scss
+:000000 100644 0000000000000000000000000000000000000000 8faab34ff22f85cddc6debb9aeaf3a485abc6456 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 305dea31973f4c7223c1df9e7dd7719c5ab99d59 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/options/options.component.ts
+:100644 100644 fb3eb14a3216f7906e7eda81997c15cbd55e38fc 36948556ae313be2614653163312478809acdfec M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts
+commit bb589b130629f1e1a032a54422147610566fd4ef
+tree 5e57cd5074b98f5819cd4318b7288d7ff1fbfcd0
+parent c7f1287f832318b252f326180253b2d0246a6a1d
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-04 20:55:33 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-04 20:55:33 +0530
+
+    fix2
+
+
+:100644 100644 02ecc9b89cd6dab70e46124f590335e1b36e4571 844326fb7a2f4b330416510198c40d9a1383a7b1 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/collection.module.ts
+:100644 100644 ea9708b74c6ad75c2c70fd529b3af925b657e630 c950af517973038430fcdcd48cacd8254e64621c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/collection/components/collection/collection.component.html
+:100644 100644 d9a146360cb8a32d6b527e911f08d383c18d3a9c dadccbb3efe023db0ab5b4a488ac50053202b212 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/quiz/quiz.module.ts
+:100644 100644 1da5f70c5787b2d5d3be1982581a889ab4402cb6 ed2c296659c4869490732dfeb79a0318db6fa2ad M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/upload/components/file-upload/file-upload.component.html
+:100644 100644 07d3c64d207f016811f74de307d17104fa712ceb cc72e6a599d6e64a223a937e86639d897989962b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 c8c8f7e32d684ea1fd7a2599c61303d18f3775d1 76e5ea8684db14e771e39f0532a9948b063b72a4 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit c7f1287f832318b252f326180253b2d0246a6a1d
+tree 1783f027a919b8039247e6393c43e268bcfb88ad
+parent 092b946e10c54718061914ce7a4c5ef84b6d32d4
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-04 09:39:24 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-04 09:39:24 +0530
+
+    Display name Updated in client assist
+
+
+:100644 100644 69dfa3305106d4dced9a78417dd5327db4c0b3c8 93346a1027b8f188fbfe4a7c30fbaeaaeebd4971 M	apps/client-assets/assets/configurations/localhost_3000/feature/toc.json

@@ -1,0 +1,255 @@
+commit 22e3b1f198fc58a114cb3b1e23399dd2085b3cff
+tree b3ed2694a93367afd74f6a8d7ef39542c65afa79
+parent c854e951cb5b9d6d6f74330cfdd96df5ec675522
+author karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-21 08:39:29 +0530
+committer karthik-tarento <karthikeyan.rajendran@tarento.com> 2020-10-21 08:39:29 +0530
+
+    Using query parameter instead of header to avoid CORS issue
+
+
+:100644 100644 a1895f3fbfcf04959c91c2c86a24a5ed49ae1a3b 51556da33b9f68fe2512c304792e56d70313c5e4 M	apps/web-services/src/protectedApi_v8/departments.ts
+commit 1510d94c06554c789c94396c72202adf42230bc4
+tree 404ebc96a28b89a785db1376b58a7b13adddaf60
+parent 70b2a2d03d4e026fb3b6946e323c974ed8013a8b
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 23:03:23 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 23:03:23 +0530
+
+    Task #51514: added the license field in the auth tool
+
+
+:100644 100644 484f768995d18b51f0be80a10278d9bdcfb9d6b6 53751125fad2d54ce3647cbad08a79fb57133b47 M	apps/client-assets/assets/configurations/localhost_3000/feature/auth-meta-form.json
+:100644 100644 93346a1027b8f188fbfe4a7c30fbaeaaeebd4971 a42b18941e10207e243f2c002a9d2515f4e7c5ee M	apps/client-assets/assets/configurations/localhost_3000/feature/toc.json
+:100644 100644 37f71244bf1431745cc6ed62d0f8469a12316cce 511949b233690f2b9e76264dd77163b8b0c4051f M	apps/fusion/project/ws/app/src/lib/routes/app-toc/components/app-toc-single-page/app-toc-single-page.component.html
+:100644 100644 bdd617b3512dc8c33c04e50045fcc880e11c4c34 0d250ceef997b3d05f694c71ab4d2f111c712155 M	apps/fusion/project/ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service.ts
+:100644 100644 d46bfe1e4d16bcaddb8537defe8cf85b4c4c31ef bc28877c3632deaf0a2f8ff7d88adaa6f9a78c7c M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 fef5af5f2e2c2acd4b7fe1c47250978647b5e5c2 6c87bbc6001644c37abd41e5bba4a9fc20237dc5 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 70b2a2d03d4e026fb3b6946e323c974ed8013a8b
+tree f685c55c9dceb256570186df4ca0b588a0c17fe2
+parent 4142a985a1bb0c8d56fbaa5c5ac4383fb3cae381
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 22:57:49 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 22:57:49 +0530
+
+    Task #0000: Fixed the search bar in header styling
+
+
+:100644 100644 6034bee3695bd34ca30bc857528d1c888bfa2f52 542d53f403cfa7438fb7a7b430f14913cc84051e M	apps/fusion/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 7f7026dbbedfdada1866c2b6162e00d5dc2ff5ee 152fbf10c1023836f34789c967e4082f384c4f59 M	apps/fusion/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.html
+:100644 100644 6f5e541f8d07326fe9bf93e34a557f5660947f0c 5c7233cfe796719f33a7c071405d9210c4081a48 M	apps/fusion/project/ws/app/src/lib/routes/search/components/search-input-home/search-input-home.component.scss
+commit 4142a985a1bb0c8d56fbaa5c5ac4383fb3cae381
+tree e8da0e222d658c3370797f40aa78c671ceb97567
+parent e47fa0e032b23aa7b5253376195c1b87fcb312aa
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-20 19:30:05 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-20 19:30:05 +0530
+
+    fix
+
+
+:100644 100644 9e3f4feb3edd021a22419cee72a3e0c1022f1bbe 24d413b49db02b7ba8809f536ba8ad561f5ffe50 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit e47fa0e032b23aa7b5253376195c1b87fcb312aa
+tree 77018bbf771500224727a2b3d1f95342a8369f12
+parent 74c1804b16f23679ba5fa6cddbb201045cf8b259
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-20 18:37:35 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-20 18:37:35 +0530
+
+    fix
+
+
+:100644 100644 c9d948eb735284d0a0c2592ea304cee92255a799 9e3f4feb3edd021a22419cee72a3e0c1022f1bbe M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit 74c1804b16f23679ba5fa6cddbb201045cf8b259
+tree 5ad31cf5b8be23f778956cb7b1d4344bafda000d
+parent a3ca7353d5899b6a32178cab6286dd4ac6edf884
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-20 18:37:07 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-20 18:37:07 +0530
+
+    pulled and resolved conflict
+
+
+:100644 100644 509272e4cd0f035c9be49b81ab9484596bd6ca14 c9d948eb735284d0a0c2592ea304cee92255a799 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+commit fc401b098a4215caa1126b1f3b78f45d7fee6774
+tree 08b0cf407dd9bd3b71cd2fff8651351686ab85a7
+parent 22bf0370520737573c7c08ed831835aa87660c2d
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-20 18:35:06 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-20 18:35:06 +0530
+
+    copmetence and index.html meta tags added
+
+
+:100644 100644 febedfe715b0109a2d45f1f2ccaed404f8030a6d 5dd3963fbc699fb932dcf0ba530a84aacd5c6dad M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 d0b627e7f20f87c9b5e2f83df329b7217a9fb58c 96630b8b33eee78f4f7fa525c4a9f6bfc62d226c M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.scss
+:100644 100644 910fe8bb32f149688df9726320949310d6592d0a fb35dc1da6a92012c619752b12e4e938b082ac95 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:100644 100644 701c5e3ead031b37b6ae205f41c6c9b0773f9e99 dadf9034f14b021cb1534a3dffe53cfde90f3877 M	apps/fusion/project/ws/app/src/lib/routes/competencies/components/left-menu/left-menu.component.ts
+:100644 100644 05c74139c7210b3c0a198515b343d021cfdd6d89 6b3c48dc469e0cd8b626b83e0647e1c76b83dfa7 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 154864c997871e8ced1213280e695453ff30decb 767607761cac8e24f4ae67f1471f6b568c7b822a M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.scss
+:100644 100644 2597a1a150331f4dd077f5d6ba23f758fbd63fd2 001bc4cd59afa434c4cf37666c37324562b1b8e5 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 1dfd2063100f0f313b9bcde7852167b70fb428cd 84c597c627a72f31774970737fe6b9f208f8fee8 M	apps/fusion/src/index.html
+:100644 100644 4c36a0b96c394821632ad88f58b22b09275f09ec 42475e0f0671dad92767d4d2e163914877b78851 M	apps/fusion/src/themes/_theme-mixins.scss
+commit 4c5a3dcf729029281397876bee0fb51ee055b2c6
+tree f14d6217e2ddbd7616e8999f4411c9c46f19f44d
+parent 8ce7ae0f9dbfcba48ddcf075543ccd50452482bb
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 16:37:34 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 16:37:34 +0530
+
+    Task #52010: Fixed linting issues
+
+
+:100644 100644 363eafff1ed145425dfdd7fb6853358217a28445 97db6c47fe090ef158a46b637de249f2d2dfbe70 M	apps/fusion/project/ws/app/src/lib/routes/competencies/models/competencies.model.ts
+commit 8ce7ae0f9dbfcba48ddcf075543ccd50452482bb
+tree 4e0b74bd6b497a05dc4cf40def92645e1cb8f9e1
+parent 22bf0370520737573c7c08ed831835aa87660c2d
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 16:28:08 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 16:28:08 +0530
+
+    Task #52010: Added global search for network home
+
+
+:100644 100644 3e186f9e4d24ef3d19e6d0cbe245e8f525ad1cc4 363eafff1ed145425dfdd7fb6853358217a28445 M	apps/fusion/project/ws/app/src/lib/routes/competencies/models/competencies.model.ts
+:100644 100644 2597a1a150331f4dd077f5d6ba23f758fbd63fd2 6d32ca4baefcc4bdff54d040c0c9c7b22d4f5463 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:000000 100644 0000000000000000000000000000000000000000 522f930455b992e1971554b7d2206f7b1905b1cb A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 645eaab3eb517a37374b1c8766e749413fea9e48 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.scss
+:000000 100644 0000000000000000000000000000000000000000 f9150def3e4041cba9d124704157c1e6e4c3c9e9 A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 58dfff92374e8de4f53a82980447092b360accea A	apps/fusion/project/ws/app/src/lib/routes/network-v2/components/connection-search-card/connection-search-card.component.ts
+:100644 100644 822512bb4ff6c74db8bc51a6763924cf72ed443d 6034bee3695bd34ca30bc857528d1c888bfa2f52 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/models/network-v2.model.ts
+:100644 100644 78e4b5331d1d475ce19f7eed30ba606f00dc770d 2ed74326d62e700e8fc982cfb0f84a84c11b7321 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/network-v2.module.ts
+:100644 100644 7adfaa8f83541dbaee75c4ab720ec9d76bccf956 5b31d76cf8c702aff67069436c9e17d30c740af0 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.html
+:100644 100644 b2f990346a695bf20e7bae60306b3631f4e8d1cc 63f7bc3ed981b66102ccc5de3b040773ea668100 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.scss
+:100644 100644 9640e90137c9fc6c23b963b92511754fee82b2ab d90a8abcdb2ae5ffb7c0ba0aa3d74074f57a8e2e M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network-home/network-home.component.ts
+:100644 100644 5cbd12f19e83f0d96da98729e37bf37815f35fe1 31d86c6f7ec4720a4f09f89ba6b3062fdf25b417 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.ts
+:100644 100644 e801e23b7d1821272a9a672216ae3384f5af95dd d5392b0f7a0243bb7951bc4811b0034e3f0bdb0f M	apps/fusion/project/ws/app/src/lib/routes/network-v2/services/network-v2.service.ts
+commit 22bf0370520737573c7c08ed831835aa87660c2d
+tree 89699cb485496794bff62cb3cf54c2957f13b984
+parent 3e7ffaa3e1182aa16f5407300e6c18c5b6a48104
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-20 15:25:50 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-20 15:26:06 +0530
+
+    comp added list
+
+
+:100644 100644 252c97795120e20e96ef300d2d20ba86888ba570 d7f0541ea84fd3f82846336121a723f2ec9d4100 M	apps/fusion/project/ws/app/src/lib/routes/competencies/competence.module.ts
+:100644 000000 7f3989239b4cee7de5b4a83dc312175e48b5ea8d 0000000000000000000000000000000000000000 D	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.html
+:000000 100644 0000000000000000000000000000000000000000 febedfe715b0109a2d45f1f2ccaed404f8030a6d A	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.html
+:100644 100644 30969021d4f527ddf03d39e1e600ebcceb7fcc03 d0b627e7f20f87c9b5e2f83df329b7217a9fb58c R085	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.scss	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.scss
+:100644 100644 ae1c58f45f681ca00e0e1baa80bd8599f003de3c 910fe8bb32f149688df9726320949310d6592d0a R056	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/category-card.component.ts	apps/fusion/project/ws/app/src/lib/routes/competencies/components/competencies-card/competencies-card.component.ts
+:100644 100644 b48a8703396fc93f9c2ac5296bf31d025a8df7ec 3e186f9e4d24ef3d19e6d0cbe245e8f525ad1cc4 M	apps/fusion/project/ws/app/src/lib/routes/competencies/models/competencies.model.ts
+:100644 100644 bcf8cc3d44b0edc6bc9f4ec9af08ce3918b3d995 05c74139c7210b3c0a198515b343d021cfdd6d89 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.html
+:100644 100644 3e8cf8c64bc6f9df31986cac95ec49db275dd882 154864c997871e8ced1213280e695453ff30decb M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.scss
+:100644 100644 60c156828f456d6b4d41209146d003c8b6c89321 2597a1a150331f4dd077f5d6ba23f758fbd63fd2 M	apps/fusion/project/ws/app/src/lib/routes/competencies/routes/competence-all/competence-all.component.ts
+:100644 100644 37f5cb9e91351863f5d9e4e15cc7d2c7c3fad2dc b5d099556c68410a5bc47f9e23fb4b2e1d3d48e8 M	apps/fusion/project/ws/app/src/lib/routes/competencies/services/competence.service.ts
+commit 3e7ffaa3e1182aa16f5407300e6c18c5b6a48104
+tree 4fb64ee0574e1198e05fc57f728357c97788d3a5
+parent ce62bc01541f6f6c9ede1d14946eff8801c79f25
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-20 14:55:40 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-20 14:55:40 +0530
+
+    console.log removed
+
+
+:100644 100644 1b19dec80556205058de3980191e5e3d43cb09dd e4fa2f33c55e5cd9eb1798d0521bb3547beacef0 M	apps/fusion/src/app/routes/features/features.component.ts
+commit ce62bc01541f6f6c9ede1d14946eff8801c79f25
+tree b996d95694239a50e4366373ce2c4661bea8d9d1
+parent 681119a80602c3277ba4ab5151c97ebbd4d87480
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-20 13:51:15 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-20 13:51:15 +0530
+
+    latest commit
+
+
+:100644 100644 f40bfec2293c149cb077a29a355d0c696c26f068 d46bfe1e4d16bcaddb8537defe8cf85b4c4c31ef M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+commit f7ff29c8e2dd8d424291a8cdce46209170e87cb1
+tree 52f2b6db4ebbfa77206dea849c4643e44a25111b
+parent 6f630fca2b19da6c0482769f69657d80fbd0ea8b
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-20 13:46:31 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-20 13:46:31 +0530
+
+    Mandatory check fields
+
+
+:100644 100644 4494ef9bd8e9c6aa748fde2b51436733e7989362 9b654cad14d3d02c083537169e20c8058358d973 M	apps/client-assets/assets/configurations/common/feature/auth-meta-form.json
+:100644 100644 d480cbce5624ceec05b1d4e489ee744699fcf697 8daacffa025c18d9c11a1b273fc7fa5207eda289 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.ts
+:100644 100644 e845b515981209feb3e3c0656e3682af3c45e21b f40bfec2293c149cb077a29a355d0c696c26f068 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 df2be5339443138e439ecb6188181a5ef3ee94c7 fef5af5f2e2c2acd4b7fe1c47250978647b5e5c2 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+commit 8b4df1321d1eda3092e3beb287aa61e89fa078ab
+tree 7217d039cbfb14c77ce4cf64608b75f1f8a48180
+parent 6f630fca2b19da6c0482769f69657d80fbd0ea8b
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-20 11:11:50 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-20 11:11:50 +0530
+
+    UI Fixes
+
+
+:100644 100644 90460c1ef97d05388af8127014cde875cad9ce25 6ad1e887c3d1461256ff85d5e047cd21bcbb9a1f M	apps/fusion/library/ws-widget/collection/src/lib/content-strip-new-multiple/content-strip-new-multiple.component.html
+:100644 100644 3104d2e0358af4b30d4a8597a5a5398e5e4f9e41 2e0b022c6010c9f8674a469a13402a41225584e9 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.html
+:100644 100644 1e97dcff9b2c2d32e5062c5a88482c34c0e07734 d47d205b14d05a32a173f4fff0d3b813b2bd92fe M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-academics/profile-academics.component.scss
+:100644 100644 0c721aee3f223bb4da24455e30db1f24fee5a268 e55081d4ef252f1635f8391b094ea03efb206e1c M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.html
+:100644 100644 1e97dcff9b2c2d32e5062c5a88482c34c0e07734 d47d205b14d05a32a173f4fff0d3b813b2bd92fe M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-career/profile-career.component.scss
+:100644 100644 f3e9fde22567e91b164c8390a9e91271db6a0446 fdc708ecbf62035899412224ae9fdf7f83855ff8 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-competencies/profile-competencies.component.html
+:100644 100644 cd0776b09790aa146a05abfb25bfd5f923276594 244ec0aca3439401239f0ea18819180e37f269b1 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-competencies/profile-competencies.component.scss
+:100644 100644 bf87beae8e4f6893c788c84081d4d38bc87a4c6d 48033360fde3ea9a20920ee4698c1038c714ea2a M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.html
+:100644 100644 1e97dcff9b2c2d32e5062c5a88482c34c0e07734 d47d205b14d05a32a173f4fff0d3b813b2bd92fe M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-cretifications/profile-cretifications.component.scss
+:100644 100644 d8c09677b29a4dabf044cbae82011c4c88992fc4 e2702976981ad8dd6dad0e872216452908ab5384 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-departments/profile-departments.component.html
+:100644 100644 cd0776b09790aa146a05abfb25bfd5f923276594 244ec0aca3439401239f0ea18819180e37f269b1 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-departments/profile-departments.component.scss
+:100644 100644 eaea70c726da91de917f6feea8d5afb4ea331471 676ece64bf731bd47c3c0266d75dc321df8dc9c4 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.html
+:100644 100644 e565f3df3e6dcd4944cd21f725afe7801fd3e7a2 780745a0975e100d8ea090020e3a95ebe830c088 M	apps/fusion/library/ws-widget/collection/src/lib/profile-v2/profile-hobbies/profile-hobbies.component.scss
+:100644 100644 e175d0e64f4af32e034ccba90078dfd7a3716dbd 99c26b36bcbbdab85a75f8511230d5a4a1c09d46 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.html
+:100644 100644 02f55b3238085f9ff65a4d8b66d1b6e1b4643c3c 92a2f51b09ae4726f1de70cf5d2a37fa5e060bff M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.scss
+:100644 100644 df12a8146ab12bef972b5788f7715b8ec2ca49d4 66bc46698ff42078e68a8ddae14d03f2ac6d2b39 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.html
+:100644 100644 3e8cf8c64bc6f9df31986cac95ec49db275dd882 495e6f26481e5afb14367ec1cb33a3166ca06095 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.scss
+:100644 100644 5f5b14686dac5df5361532e44fcea474d197628f 7c0d63e9e6e191de7726588d969bc4e303b7199e M	apps/fusion/project/ws/viewer/src/lib/plugins/html/html.component.scss
+commit 6f630fca2b19da6c0482769f69657d80fbd0ea8b
+tree 6d910ad5fc85795337a5e6dd1d54710f5181c145
+parent c3cd5e661b1191874a15bfb719c4cefac4825c5e
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 00:23:48 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 00:23:48 +0530
+
+    Task #52010: Fixed the lint error
+
+
+:100644 100644 098c8b6a1243b8b00cb68021d5887589a2ad71f2 55d5df1f7f2c7790d148c262169045d902a0cb94 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.ts
+commit c3cd5e661b1191874a15bfb719c4cefac4825c5e
+tree c51bb917e9aed2fb3e6093f8c2a4c8118503c351
+parent 1ec272a4c19243bac49dfaeb45f2ce78f0d30972
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 00:00:44 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-20 00:00:44 +0530
+
+    Task #52023: Fixed the count twice increment issue
+
+
+:100644 100644 d5ab788b9ed1c2ce97822d94b84c037a5766b109 098c8b6a1243b8b00cb68021d5887589a2ad71f2 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.ts
+:100644 100644 49f1e2a3b64cbe5f98bb1beadd30a7459fcfd972 21b13bf21d7494e8f22c1d5a291563436fbca7d9 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discuss-all/discuss-all.component.ts
+:100644 100644 7c52d5e5af1d3113e76127c95c2a8beae058c7c5 666c57a0e3a225df162f7cd90fad1106914aa346 M	apps/fusion/project/ws/app/src/lib/routes/discuss/routes/discussion/discussion.component.ts
+:100644 100644 583a6bb42b59e1ec3eeb2a0644562eb8637bf76b 5cbd12f19e83f0d96da98729e37bf37815f35fe1 M	apps/fusion/project/ws/app/src/lib/routes/network-v2/routes/network/network.component.ts
+commit 1ec272a4c19243bac49dfaeb45f2ce78f0d30972
+tree 9785f4e4ab626f290789e1a6bb98418e1227a9ed
+parent 8bcbcb65aa0b287cd9ff11e71120153eb0892e85
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 23:59:16 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 23:59:16 +0530
+
+    Task #51721: Fixed the file selector twice triggered issue
+
+
+:100644 100644 0933845d2f64db2cf63c795406bd92d1f1091d8d c3f1450cbc510ceb30e4095fe8efa83aaf9f25da M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+commit 8bcbcb65aa0b287cd9ff11e71120153eb0892e85
+tree 48c3bb8275117ebcbd3d85081e8e05c45ca80658
+parent 6275c6f3860c2e35021ffaf3bf028af463d18110
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 16:31:35 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-10-19 16:31:35 +0530
+
+    Task #52010: Fixed the recent career posts
+
+
+:100644 100644 21f735361e51a24a349bd980a24a49013b2e76a9 d5ab788b9ed1c2ce97822d94b84c037a5766b109 M	apps/fusion/project/ws/app/src/lib/routes/career-hub/routes/careers/careers.component.ts
+commit 9cb37411215c3dd82a06f4416407836b47ebedb0
+tree b161cea7dda5015292c13a5c6412f603f7777fae
+parent 1714f53bcf92f5e03df8231f8f3e383ea36208d6
+author Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-19 15:53:54 +0530
+committer Jenifer Ramsingh <jeniferramsingh@gmail.com> 2020-10-19 15:53:54 +0530
+
+    add competency fixes
+
+
+:100644 100644 017cb534bce8bbb8139bb3491be74002240b1441 8f791984f3caf6b94b980175e015f2a4e29bd6ba M	apps/fusion/project/ws/app/src/lib/routes/profile/routes/interest/services/interest.service.ts
+:000000 100644 0000000000000000000000000000000000000000 eb9c21461603276b646530839f523fed4f713f17 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.html
+:000000 100644 0000000000000000000000000000000000000000 8c77061d51f322fb8d5b0e32eb0c5856bc5e9c23 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.scss
+:000000 100644 0000000000000000000000000000000000000000 d480cbce5624ceec05b1d4e489ee744699fcf697 A	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/competency-add-popup/competency-add-popup.ts
+:100644 100644 7e39cb97b09189ffdbde97b8752fa93c72824819 e845b515981209feb3e3c0656e3682af3c45e21b M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.html
+:100644 100644 4b7734861ffe5675473d0599e884155b8e53f0bf df2be5339443138e439ecb6188181a5ef3ee94c7 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 0d740ee5cd8cf6cd4ab6c46d820c7c34a2b41e90 3001cfa09dcc559cbef02a569dda6d698dcdc27d M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/shared.module.ts

@@ -1,0 +1,32 @@
+commit bb0063aaf50f0bc59798781ef2b3cd699390ae48
+tree 72dd08e1346cc5f2ac3dedd140ee07124469d271
+parent 70733eb684ff69423f347df401cec31220f8b916
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-07-20 20:39:17 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-07-20 20:39:17 +0530
+
+    Task #49768: profile photo feature added
+
+
+:100644 100644 3d6046bdf7a3376a39dcb4d3b5a9702ed57600e9 4251f95c7591d5e85ae407f7f96d2ababcd68756 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.html
+:100644 100644 4272e6077526a194022f9fd4f3ca9c5e8ae759b1 103b7a4350cf1f0f09c082fffa8e759136c7c0da M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.scss
+:100644 100644 5b8e67e546f108db7520c315c0491302aaf161d1 ab72483961946fd88e9e64ce7218e63758847701 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 b7cd4818ec4ae9fa00976920e7b6e3bebfa4234b 9dc72752db1ccd56a4f9a04da45e0d1d4cb88a16 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/user-profile.module.ts
+commit fd1bfeaddd604f0c14056cdc2b0e2eb4e2e315a9
+tree d4ca00ecec364fdb2f9a77591d8bb584e9655d4c
+parent 1f8610b9100fddef0858327a9a1ff6ab2adfe067
+author haridas.kakunje <haridas.kakunje@tarento.com> 2020-07-19 13:30:58 +0000
+committer haridas.kakunje <haridas.kakunje@tarento.com> 2020-07-19 13:30:58 +0000
+
+    banners/playlist.jpg updated
+
+
+:100644 100644 a8a2f7b46baf6888ec6210c17e20bae041276eba c7ae2c49bdcddd7d4c39f5fdef15ba20a6cf7c42 M	apps/client-assets/assets/images/banners/playlist.jpg
+commit abe82f5c3e011064a3488eb431e20cce2ea29510
+tree 1ea47deb74561917130aa9cba276bbb38252a46c
+parent 1f8610b9100fddef0858327a9a1ff6ab2adfe067
+author pkranga <46988344+pkranga@users.noreply.github.com> 2020-07-19 17:44:16 +0530
+committer GitHub <noreply@github.com> 2020-07-19 17:44:16 +0530
+
+    Update home.json
+
+:100644 100644 17af4efc8f2a98a9a78008763de86b6777e15213 d3f86044cc40aeb070c4be5e237a3b35509c9a0b M	apps/client-assets/assets/configurations/localhost_3000/page/home.json

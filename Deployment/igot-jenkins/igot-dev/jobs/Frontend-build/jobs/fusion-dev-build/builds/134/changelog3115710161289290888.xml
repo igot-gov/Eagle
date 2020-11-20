@@ -1,0 +1,16 @@
+commit 22f399766fc95f154893c3c6ce40dc89a5c8d594
+tree 04b11a2fd499e19a69ca72991eaeea98a8f8e03c
+parent d9f538b23c07387006ceab966fbbd4a39124ec78
+author Amit Kumar <amit.sengar@tarento.com> 2020-10-22 14:40:52 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-10-22 14:40:52 +0530
+
+    MyActivity => dashboard and profile link updated for top right menu
+
+
+:100644 100644 bd51b713d53389af14cf63e58379e269c8f4bd0c e87b7eb816bac9d383f4dcb6ee1a0c32b3237232 M	apps/fusion/library/ws-widget/collection/src/lib/activity-strip-multiple/activity-strip-multiple.component.html
+:100644 100644 368a11d6406f4a9715276139e43d860644e16ea0 2c2a001709961090532f0c69b6754bccb964455c M	apps/fusion/library/ws-widget/collection/src/lib/btn-profile/btn-profile.component.html
+:100644 100644 ca590e8bf023f7928812c4d81f42f89d3e43ec65 6be940760325a88e2458d97e7942249b762db540 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/components/right-menu/right-menu.component.ts
+:100644 100644 9f2c10b78d3c8fc7437610723a56a1094b942ad8 8120d47c10ea7a962755b995c36bd3377bdb09be M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/profile-v2.rounting.module.ts
+:100644 100644 46b9d9031b3edee495a8ded6ab3265a3e196e16c 8b8e3bea853e7b86415c0eae4156115317239fad M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/resolvers/badges-resolve.ts
+:100644 100644 a7a6693d72b20ec8b761986be15377af7fdac624 dd7ded299d3b22f21ec55c4fec4b943edc56100a M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/resolvers/profile-v2-resolve.ts
+:100644 100644 cbeaa23fec220c604032e3a2170ba87867703be7 92ff9a11c3d0b7e611851302295f378be43c00e7 M	apps/fusion/project/ws/app/src/lib/routes/profile-v2/routes/profile-view/profile-view.component.ts

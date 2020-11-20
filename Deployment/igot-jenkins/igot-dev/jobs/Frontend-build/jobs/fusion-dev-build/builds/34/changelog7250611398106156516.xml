@@ -1,0 +1,98 @@
+commit e6d92a20bef5891ff45035782cf55a982b4550d3
+tree 23c803dc1c29882ff4a519bed0352e98582a6981
+parent 2b11914f7d3dc006f85b6dabaf43cf9ec28d3cf3
+author Amit Kumar <amit.sengar@tarento.com> 2020-08-12 02:39:54 +0530
+committer Amit Kumar <amit.sengar@tarento.com> 2020-08-12 02:40:52 +0530
+
+    fix
+
+
+:100644 100644 3c2a708af36b6d7fb5f899ef63c38a1931d2e872 455761192daee9c65d00eab677a02ee53d18fe22 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/routing/modules/curate/components/url-upload/url-upload.component.ts
+:100644 100644 604ed11863b2744958bfab61c0e595e82c5fd7a7 4cf87ce39ae32c3cc89741e23738aa1e590e8db6 M	apps/fusion/project/ws/author/src/lib/routing/modules/editor/shared/components/edit-meta/edit-meta.component.ts
+:100644 100644 c21f3d862bb47ddcfe8cea861a63c892ca8b5e0e 0e08b306be290380acd1b4e02eaea314a6b50203 M	apps/fusion/src/styles.scss
+commit 2b11914f7d3dc006f85b6dabaf43cf9ec28d3cf3
+tree 926cf70d1988204765edbc1e66b6ba3dbda4af79
+parent 579031f313badbcc46b10cdb463c16fd98f4ed7d
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 01:10:33 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 01:10:33 +0530
+
+    Task #51040: Added autocomplete filter by dept api, apis for managing dept mapping to user
+
+
+:100644 100644 f89e9fd135d898b213ed918e0d84250b10274b62 e5390447cac773521ffec1aab0838ea67d2a306b M	apps/web-services/src/protectedApi_v8/admin/userRegistration.ts
+:100644 100644 219b82230273b95217cc67fd0757218e51307e54 d91278a3111b8bb92baf8ad535aa3a90c5fbcfe1 M	apps/web-services/src/protectedApi_v8/user/auto-complete.ts
+:100644 100644 786f9772bc69948b5dcd35149e840d3174baab64 83b6047056656839af86765d3e01ffd29c78429e M	apps/web-services/src/protectedApi_v8/user/details.ts
+:100644 100644 1fe7abd40e27d23dafe34cb63516a5ed03bf4a19 959e0b36952fd345f617e1c51cadaff0a4a1ff8b M	apps/web-services/src/publicApi_v8/signup.ts
+:100644 100644 1483d67c91a537ad38092f919d0645094f41f1e7 08f6c615bc342877338751538513cb171f2a20df M	apps/web-services/src/utils/keycloak-user-creation.ts
+commit 35a893be2b04ba004131177cfbc397d16a909145
+tree 0486c74db3ca41cdbe9fe6d7d76b2631d8e6e8cb
+parent cec4c343837de0598b7b94f4905b4444dd689cd1
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:40:26 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:40:26 +0530
+
+    Task #51040: integrated dept name in user-profile
+
+
+:100644 100644 7e9a303aabcd5c38e03050f965c2cd7bef3c82aa eb94af775f2a0943b53e2e69a9c49408301f1be6 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/components/user-profile/user-profile.component.ts
+:100644 100644 e1d9f8326ef6cb2e70d9bc295b214f0e9893bec1 3598f9fefa95800880fc81ff08939f080aea4ec6 M	apps/fusion/project/ws/app/src/lib/routes/user-profile/models/user-profile.model.ts
+commit cec4c343837de0598b7b94f4905b4444dd689cd1
+tree ec410bdebcc7d8f1a74cb3e9ac185bbdb8d07c26
+parent 8ab43cf33eb686ffddd820c759f91de6f478a863
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:38:12 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:38:12 +0530
+
+    Task #51040: dept apis and components integrated
+
+
+:100644 100644 caee72b1ec617c8a813d746bf83076ed78c5a251 d5a4bf2f4b0d6a26bb02989df9b97d93e376272f M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.module.ts
+:100644 100644 b5ffb51a4751990f62154eb15fc8127f88fe5cd8 bde9ed4f86951df2ad34f9473510e9c40d649df2 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/tenant-admin.service.ts
+commit 8ab43cf33eb686ffddd820c759f91de6f478a863
+tree 971fb3a940f2369b3df86086bee231f0da1aa173
+parent d3f2a3379339b02a9cf3303f6cbb3a05d161e043
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:35:45 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:35:45 +0530
+
+    Task #51040: dept name added for creating new user
+
+
+:100644 100644 6592aa778b0bddfe6faa480eaced36bb93cdb831 cfe11900c8838dc8e8ad65ca269ddf8fd4ea1588 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/create-userV2/create-userV2.component.html
+:100644 100644 6e6f1c912e3d9f94d74e9d1414c1ff29c4f11b72 1d4d782899da6d5d5be1516cfa01390d11694c94 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/create-userV2/create-userV2.component.ts
+commit d3f2a3379339b02a9cf3303f6cbb3a05d161e043
+tree 628c41b718eebeda088b76f763ffb066e634e13d
+parent af693277ea9b588c3e002a2d2296311e7ec9ec2d
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:31:59 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:34:02 +0530
+
+    Task #51040: Added dept name for bulk upload users
+
+
+:100644 100644 0b3e14db05a178bfdda9066eaf6b76abc7408435 d67f9021878836366c4a1049d91c9aaf6444bc3d M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.html
+:100644 100644 eed2f4867c9857138a2136039e78f87349794a85 f16a36404f541834e5d9fb95fd08cf15361ded56 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/user-bulk-upload/user-bulk-upload.component.ts
+:100644 100644 716ed0c88f75d3dd793cafbb78243281d6f39212 3d396ea03e570d5aa781fc6461db2171f5e458c5 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/upload.service.ts
+commit af693277ea9b588c3e002a2d2296311e7ec9ec2d
+tree cd1d22158732deddf21ec59be78f64f39c019133
+parent a91c53af3fa5f6ca9817573a660573b60376add7
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:27:07 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:27:07 +0530
+
+    Task #51040: Added new component for edit dept
+
+
+:000000 100644 0000000000000000000000000000000000000000 23f052345f8f4b93e1959894fc98bc58f442932a A	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/components/edit-department-dialog/edit-department-dialog.component.html
+:000000 100644 0000000000000000000000000000000000000000 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 A	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/components/edit-department-dialog/edit-department-dialog.component.scss
+:000000 100644 0000000000000000000000000000000000000000 4d2f70e712c84ec7be7c58570f161659b1cc5c88 A	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/components/edit-department-dialog/edit-department-dialog.component.spec.ts
+:000000 100644 0000000000000000000000000000000000000000 03581ce8a906de18b39280b0e5ffb15a53a83f2b A	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/components/edit-department-dialog/edit-department-dialog.component.ts
+:100644 100644 5ba5dad970bf42a574a01f2bf87ad968db283f6f ddc2e83bd1fd87f35022e4150720549d37b477e4 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/users.component.ts
+commit a91c53af3fa5f6ca9817573a660573b60376add7
+tree 4124c343e67f246159beec5930259374655b94fc
+parent f78a6716bfc4b4fd23d368e93051889072268234
+author christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:24:59 +0530
+committer christopher.fernandes <christyabcd.05@gmail.com> 2020-08-12 00:24:59 +0530
+
+    Task #51040: Added autocomplete filter by department name of logged in user
+
+
+:100644 100644 39a245a2eace2c6321a8285aff6dbc793cba95b5 cbde0c1943e3fc99d1b3c5e978509d368a6ea431 M	apps/fusion/library/ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.component.ts
+:100644 100644 774c42e845c791cf694994a96d2d19d318e4b8d6 fd21337cc2d38b6e7ca21ada5d63adaa0b7db4a5 M	apps/fusion/library/ws-widget/collection/src/lib/_common/user-autocomplete/user-autocomplete.service.ts
+:100644 100644 7e1d0a88bb2034c68508618098698b45a70dc26e 965676bf2d1eb5fed826447fe88ef90986cb12e7 M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/users.component.html
+:100644 100644 5ea42515ff51a366898d01711bf6e5a95e3d0dba 5ba5dad970bf42a574a01f2bf87ad968db283f6f M	apps/fusion/project/ws/admin/src/lib/modules/tenant-admin/routes/users/users.component.ts
