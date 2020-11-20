@@ -223,7 +223,7 @@ export async function updateRolesV2Mock(actionByWid: any, updateRolesReq: any, r
   })
 }
 
-rolesApi.get('/rolesUserCount', async (req, res) => {
+rolesApi.get('/rolesv2/usercount', async (req, res) => {
   try {
     const rootOrg = req.headers.rootorg
     if (!rootOrg) {
