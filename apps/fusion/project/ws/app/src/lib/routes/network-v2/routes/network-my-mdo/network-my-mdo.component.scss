@@ -65,6 +65,10 @@
   width: calc(100% - 20px);
 }
 
+.font-normal {
+  font-weight: 400 !important;
+}
+
 .filter {
   .filter-option {
     margin: 0 $size-m $size-l;
@@ -74,9 +78,9 @@
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
-    height: 48px;
-    font-size: 14px;
-    line-height: 21px;
+    // height: 48px;
+    // font-size: 14px;
+    // line-height: 21px;
     display: flex;
     align-items: center;
   }

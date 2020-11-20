@@ -1,20 +1,21 @@
 <mat-card class="career-card cursor-pointer" (click)="getCareer()">
     <mat-card-header>
         <mat-card-title>
-            <a href="javascript:void(0)" class="" i18n-aria-label role="link">
-                <h2 class="cursor-pointer f-medium">{{discuss?.title}}</h2>
-            </a>
+            <!-- <a href="javascript:void(0)" class="" i18n-aria-label role="link"> -->
+            <span role="link" i18n-aria-label tabindex="0"
+                class="cursor-pointer mat-subheading-1">{{discuss?.title}}</span>
+            <!-- </a> -->
         </mat-card-title>
         <mat-card-subtitle class="responsive">
-            <div>
-                <span class="">{{discuss?.timestamp | pipeRelativeTime}}</span>
-            </div>
+            <!-- <div> -->
+            <span class="mat-body-2">{{discuss?.timestamp | pipeRelativeTime}}</span>
+            <!-- </div> -->
 
 
         </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="flex flex-1">
-        <div>
+        <div class="mat-body-2">
             <p>{{ discuss.content | pipeHtmlTagRemoval}}</p>
         </div>
         <ng-container *ngIf="discuss && discuss.tags && discuss.tags.length > 0">
@@ -30,12 +31,12 @@
         <div class="flex flex-1 flex-row margin-left-xs">
             <span class="flex mobile">
                 <mat-icon>trending_up</mat-icon>
-                <span class="pad-4">{{discuss.viewcount || 0}}</span>
+                <span class="pad-4 mat-subheading-2 ws-mat-black60-text">{{discuss.viewcount || 0}}</span>
             </span>
         </div>
         <div class="flex flex-1" class="cursor-pointer text-right mobile2">
             <a href="javascript:void(0)" class="" i18n-aria-label role="link">
-                <span class="noocoments ws-mat-default-text">Read more</span>
+                <span class="noocoments ws-mat-default-text mat-subheading-2">Read more</span>
             </a>
         </div>
     </mat-card-footer>

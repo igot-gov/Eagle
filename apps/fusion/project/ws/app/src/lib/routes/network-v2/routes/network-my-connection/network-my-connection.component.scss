@@ -71,23 +71,22 @@
 
 .filter {
   .filter-option {
-    margin: 0 $size-m $size-l;
+    margin: $size-xs $size-m;
     /* border-bottom: darkslateblue; */
     border-radius: 0;
     border-bottom-width: 2px;
     border-top-width: 0;
     border-left-width: 0;
     border-right-width: 0;
-    height: 48px;
-    font-size: 14px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
   }
 
   .filter-option:first-child {
     margin-left: 0;
   }
+}
+
+.font-normal {
+  font-weight: 400 !important;
 }
 
 .max-height-60 {

@@ -18,6 +18,10 @@
   }
 }
 
+.custom-margin {
+  margin: 2px 0 0 0;
+}
+
 .responsive {
   @include breakpoint-xs {
     flex-direction: column-reverse;

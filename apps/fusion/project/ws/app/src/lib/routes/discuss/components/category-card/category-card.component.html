@@ -5,10 +5,10 @@
       <mat-icon style="width: auto; height: auto;" svgIcon="category_m"></mat-icon>
     </div>
     <mat-card-title>
-      <h2 [innerHTML]="category.name"></h2>
+      <span class="mat-subheading-1" [innerHTML]="category.name"></span>
     </mat-card-title>
     <mat-card-subtitle>
-      <span class="ws-mat-primary-text">{{category.description}}</span>
+      <span class="ws-mat-primary-text mat-body-2">{{category.description}}</span>
       <!-- <span class="dot">{{category.user.username}}</span> -->
       <!-- <span class="margin-left-s">{{category.timestamp | date}}</span> -->
     </mat-card-subtitle>
@@ -19,10 +19,10 @@
         <span class="pad-4">{{category.upvotes}} viwes</span>
       </span> -->
       <span class="flex margin-right-l mobile">
-        <span class="pad-4">{{category.totalTopicCount}} discussions</span>
+        <span class="pad-4 mat-subheading-2 ws-mat-black60-text">{{category.totalTopicCount}} discussions</span>
       </span>
       <span class="flex mobile">
-        <span class="pad-4">{{category.totalPostCount}} posts</span>
+        <span class="pad-4 mat-subheading-2 ws-mat-black60-text">{{category.totalPostCount}} posts</span>
       </span>
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2">

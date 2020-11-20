@@ -1,24 +1,25 @@
 <mat-card class="competency-view-card">
   <mat-card-content class="flex flex-1 custom">
-    <span class="mat-h2 font-medium">{{dData.name}}</span>
-    <h3 class="mat-h3">{{dData.description}}</h3>
+    <span class="mat-title">{{dData.name}}</span>
+    <span class="mat-body-1 ws-mat-black60-text">{{dData.description}}</span>
     <div class="flex">
-      <h3 class="mat-h3">Competency type: &nbsp;</h3>
-      <span class="mat-h3 font-medium">{{dData?.additionalProperties?.competencyType || dData?.competencyType}}</span>
+      <span class="mat-body-1">Competency type: &nbsp;</span>
+      <span
+        class="mat-subheading-1 custom-margin">{{dData?.additionalProperties?.competencyType || dData?.competencyType}}</span>
     </div>
   </mat-card-content>
   <mat-card-actions class="flex flex-row-reverse responsive">
     <div class="mb-2 ml-2 mr-2 flex view-more text-white others">
       <a href="javascript:void(0)" mat-button mat-dialog-close i18n-aria-label class="flex">
-        <span i18n>{{'Ok'}}</span>
+        <span i18n class="mat-subheading-2">{{'Ok'}}</span>
       </a>
     </div>
     <div class="mb-2 ws-mat-accent-text view-all ws-mat-primary-lite-background-important wid-auro">
       <a href="javascript:void(0)" mat-button i18n-aria-label *ngIf="isUpdate" (click)="remove()">
-        <span i18n>{{'Remove from my list'}}</span>
+        <span i18n class="mat-subheading-2">{{'Remove from my list'}}</span>
       </a>
       <a href="javascript:void(0)" mat-button i18n-aria-label *ngIf="!isUpdate" (click)="add()">
-        <span i18n>{{'Add to my competencies'}}</span>
+        <span i18n class="mat-subheading-2">{{'Add to my competencies'}}</span>
       </a>
     </div>
   </mat-card-actions>

@@ -6,7 +6,7 @@
         <div class="flex flex-1 custom">
           <div class="flex flex-1 flex-column">
             <mat-form-field appearance="fill" class="margin-top-l">
-              <mat-label>Select category</mat-label>
+              <mat-label class="mat-body-2">Select category</mat-label>
               <mat-select formControlName="category" #category [required]="true">
                 <mat-option [value]="c.cid" *ngFor="let c of allCategories" [innerHTML]="c.name"></mat-option>
               </mat-select>
@@ -21,11 +21,12 @@
             </p> -->
             <mat-form-field appearance="outline" class="margin-top-m"
               [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
-              <mat-label>Ask a question or post an idea</mat-label>
-              <input matInput formControlName="question" #question maxlength="1000" i18n-placeholder
-                placeholder="" [required]="true" />
+              <mat-label class="mat-body-1">Ask a question or post an idea</mat-label>
+              <input matInput formControlName="question" #question maxlength="1000" i18n-placeholder placeholder=""
+                [required]="true" />
               <!-- <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint> -->
-              <mat-error *ngIf="showError('question')" i18n="question Error|Explains question is required">
+              <mat-error class="mat-body-2" *ngIf="showError('question')"
+                i18n="question Error|Explains question is required">
                 Question is mandatory
               </mat-error>
             </mat-form-field>
@@ -33,17 +34,18 @@
         </div>
         <div class="flex flex-1">
           <mat-form-field appearance="outline" class="flex-1">
-            <mat-label>Please elabourate your question or idea here</mat-label>
+            <mat-label class="mat-body-2">Please elabourate your question or idea here</mat-label>
             <textarea matInput formControlName="description" #description cdkTextareaAutosize
               #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="10" cdkAutosizeMaxRows="30"
               [required]="true"></textarea>
-            <mat-error *ngIf="showError('description')" i18n="description Error|Explains description is required">
+            <mat-error class="mat-body-2" *ngIf="showError('description')"
+              i18n="description Error|Explains description is required">
               Description is mandatory
             </mat-error>
           </mat-form-field>
         </div>
         <div class="flex flex-1 flex-column">
-          <p class="margin-remove-bottom">
+          <p class="margin-remove-bottom mat-subheading-2">
             Tags
           </p>
           <!-- <mat-form-field appearance="outline" class="margin-top-xs"
@@ -51,9 +53,10 @@
             <input matInput formControlName="tags" #tags maxlength="1000" i18n-placeholder
               placeholder="Enter tags here between 3 to 24 characters each " [required]="false" />
           </mat-form-field> -->
-          <mat-form-field appearance="outline" class="margin-top-xs" [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
+          <mat-form-field appearance="outline" class="margin-top-xs"
+            [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
             <mat-chip-list #postTags>
-              <mat-chip *ngFor="let tag of postTagsArray" [selectable]="true" [removable]="true"
+              <mat-chip *ngFor="let tag of postTagsArray" class="mat-caption" [selectable]="true" [removable]="true"
                 (removed)="removePersonalInterests(tag)">
                 {{ tag }}
                 <mat-icon matChipRemove>cancel</mat-icon>
@@ -61,9 +64,9 @@
             </mat-chip-list>
             <input matInput i18n-placeholder="Enter tags here between 3 to 24 characters each"
               placeholder="Enter tags here between 3 to 24 characters each" formControlName="tags" i18n-aria-label
-              aria-label="Enter tags" [matChipInputFor]="postTags"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" maxlength="24"
-              (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp" [required]="false"/>
+              aria-label="Enter tags" [matChipInputFor]="postTags" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              maxlength="24" (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp"
+              [required]="false" />
           </mat-form-field>
         </div>
         <!-- <div class="flex flex-1 flex-column">
@@ -89,8 +92,7 @@
           <span *ngIf="uploadSaveData" class="px-4 flex items-center justify-center">
             <mat-spinner [diameter]="30"></mat-spinner>
           </span>
-          <button mat-raised-button type="submit"
-            class="text-white ws-mat-primary-background flex-auto-display" 
+          <button mat-raised-button type="submit" class="text-white ws-mat-primary-background flex-auto-display"
             [disabled]="uploadSaveData || startForm?.invalid" (click)="submitPost(startForm)">
             <span class="text-white" i18n>Submit post</span>
           </button>
@@ -107,7 +109,7 @@
 
 </form>
 
-<input type="hidden" i18-value i18-aria-value aria-value="Post created successful"
-  value="Post created successfully!" #toastSuccess />
-<input type="hidden" i18-value i18-aria-value aria-value="unable to create post"
-  value="Error in creating new post!" #toastError />
+<input type="hidden" i18-value i18-aria-value aria-value="Post created successful" value="Post created successfully!"
+  #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="unable to create post" value="Error in creating new post!"
+  #toastError />

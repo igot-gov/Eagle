@@ -1,10 +1,10 @@
 <div class="flex width-expand flex-column">
   <div class="flex flex-1 mb-4 search">
-    <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
+    <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary" [floatLabel]="'never'">
       <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
       <!-- <mat-placeholder>Search user</mat-placeholder> -->
       <!-- <input [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput type="search"> -->
-      <mat-label>Search user</mat-label>
+      <mat-label class="mat-body-2">Search user</mat-label>
       <input type="search" #searchInput class="ml-2" [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput
         type="search" [placeholder]="'Search user'" />
     </mat-form-field>

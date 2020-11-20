@@ -1,13 +1,14 @@
 <mat-card class="discuss-card cursor-pointer" (click)="getDiscussion()">
   <mat-card-header>
     <mat-card-title>
-      <h2 role="link" tabindex="0" class="cursor-pointer" [innerHTML]="discuss?.topic?.title"></h2>
+      <span role="link" tabindex="0" class="cursor-pointer mat-subheading-1" [innerHTML]="discuss?.topic?.title"></span>
     </mat-card-title>
-    <mat-card-subtitle role="link" tabindex="0">
-      <span class="ws-mat-default-text" aria-label="category name">{{discuss?.category?.name}}</span>
+    <mat-card-subtitle class="flex" role="link" tabindex="0">
+      <mat-icon svgIcon="category_xs"></mat-icon>
+      <span class="ws-mat-default-text mat-body-2" aria-label="category name">{{discuss?.category?.name}}</span>
       <!-- <span class="dot" *ngIf="discuss?.user?.fullname">{{discuss?.user?.fullname}}</span> -->
-      <span class="dot" *ngIf="!(discuss?.user?.fullname)">Asked</span>
-      <span class="margin-left-s" aria-label="asked at">{{discuss.timestamp | pipeRelativeTime}}</span>
+      <span class="dot mat-body-2" *ngIf="!(discuss?.user?.fullname)">Asked</span>
+      <span class="margin-left-s mat-body-2" aria-label="asked at">{{discuss.timestamp | pipeRelativeTime}}</span>
     </mat-card-subtitle>
   </mat-card-header>
   <!-- <mat-card-content class="flex flex-1">
@@ -32,7 +33,8 @@
       </span> -->
       <span class="flex margin-right-l mobile" role="link" tabindex="0" aria-label="total votes">
         <mat-icon class="cursor-pointer">import_export</mat-icon>
-        <span class="pad-4">{{(discuss.upvotes + discuss.downvotes) || 0 }} Votes</span>
+        <span class="pad-4 mat-subheading-2 ws-mat-black60-text">{{(discuss.upvotes + discuss.downvotes) || 0 }}
+          Votes</span>
       </span>
       <!-- <span class="flex mobile">
         <mat-icon>trending_up</mat-icon>
@@ -41,7 +43,7 @@
     </div>
     <div class="flex flex-1" class="cursor-pointer text-right mobile2" role="link" tabindex="0"
       aria-label="total comments">
-      <span class="noocoments ws-mat-default-text">{{((discuss?.topic?.postcount || 1) -1) }}
+      <span class="noocoments ws-mat-default-text mat-subheading-2">{{((discuss?.topic?.postcount || 1) -1) }}
         comments</span>
     </div>
   </mat-card-footer>

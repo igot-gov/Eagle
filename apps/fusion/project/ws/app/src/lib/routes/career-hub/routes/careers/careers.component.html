@@ -5,11 +5,12 @@
 
 <div class="w-full pt-10  px-2">
     <div class="flex flex-1 flex-column margin-fix mb-2">
-        <span class="f-medium mat-body-1">All openings </span>
+        <span class="f-medium mat-title">All openings </span>
     </div>
     <div class="flex flex-1 flex-column margin-fix search">
         <form (submit)="updateQuery(queryControl.value)">
-            <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
+            <mat-form-field appearance="outline" class="autocomplete-form mat-body-2" color="primary"
+                [floatLabel]="'never'">
                 <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
                 <input type="search" #searchInput class="ml-2" i18n-placeholder="search content"
                     [placeholder]="'Search'" i18-aria-label aria-label="Query" matInput [formControl]="queryControl"
@@ -20,11 +21,11 @@
     <div class="flex flex-1 flex-column margin-fix mt-5">
         <div class="flex flex-1 filter">
             <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                            'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+                            'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button
                 (click)="filter('timestamp')">
                 Recent </a>
             <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'viewcount',
-                            'ws-mat-accent-border':currentFilter !== 'viewcount'}" mat-button
+                            'ws-mat-accent-border font-normal':currentFilter !== 'viewcount'}" mat-button
                 (click)="filter('viewcount')">
                 Most Viewed </a>
         </div>

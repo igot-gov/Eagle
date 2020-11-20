@@ -15,6 +15,10 @@
   line-height: normal;
 }
 
+.font-normal {
+  font-weight: 400 !important;
+}
+
 .related-discussion {
   justify-content: space-between;
 }
@@ -24,14 +28,15 @@
 // }
 
 .tag {
-    display: flex;
-    margin: 0 10px;
-    padding: 3px 15px;
-    font-size: 12px;
-    min-width: 50px;
-    justify-content: center;
-    border-radius: 20px 5px 5px 20px;
-  &:first-child{
+  display: flex;
+  margin: 0 10px;
+  padding: 3px 15px;
+  font-size: 12px;
+  min-width: 50px;
+  justify-content: center;
+  border-radius: 20px 5px 5px 20px;
+
+  &:first-child {
     margin-left: 0;
   }
 
@@ -139,7 +144,8 @@ mat-icon.downvoted {
     margin: 0 $size-l 0 $size-l;
   }
 }
-.pagination-container{
+
+.pagination-container {
   margin-top: $size-l;
- 
+
 }

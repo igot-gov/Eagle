@@ -90,7 +90,7 @@
           </div>
 
           <div class="flex flex-1 flex-column margin-top-xl">
-            <h3> Your answer here </h3>
+            <span class="mat-subheading-1"> Your answer here </span>
             <form [formGroup]=" postAnswerForm">
               <!-- <ws-widget-ck-editor [location]="location" [basic]="true" [id]="data.tid"
                 [content]="postAnswerForm.controls.answer.value || ''" (value)="updatedata('answer', $event)">
@@ -110,7 +110,7 @@
         <mat-card-actions align="end">
           <button mat-raised-button type="button" (click)="postReply(post)" [disabled]="answer.value.length < 3"
             class="text-white ws-mat-primary-background flex-auto-display margin-right-xs">
-            <span class="text-white mat-subheading-1" i18n>Post reply</span>
+            <span class="text-white mat-subheading-2" i18n>Post reply</span>
           </button>
           <!-- <button mat-raised-button type="button" [mat-dialog-close]="true"
                     class="ws-mat-accent-border flex-auto-display">
@@ -124,11 +124,11 @@
         <div class="flex flex-1 flex-column">
           <div class="flex flex-1 filter">
             <a href="javascript:void(0)" class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                            'ws-mat-accent-border':currentFilter !== 'timestamp'}" mat-button
+                            'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button
               (click)="filter('timestamp')">
               Recent </a>
             <a href="javascript:void(0)" class="filter-option" role="link" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvotes',
-                            'ws-mat-accent-border':currentFilter !== 'upvotes'}" mat-button
+                            'ws-mat-accent-border font-normal':currentFilter !== 'upvotes'}" mat-button
               (click)="filter('upvotes')">
               Most upvoted </a>
           </div>
@@ -163,7 +163,7 @@
                   <mat-icon *ngIf="post.upvoted" class="cursor-pointer upvoted">arrow_upward
                   </mat-icon>
                 </a>
-                <span class="pad-4 ws-mat-black60-text">{{post.upvotes}}</span>
+                <span class="pad-4 ws-mat-black60-text mat-subheading-2">{{post.upvotes}}</span>
               </span>
               <span class="flex mobile">
                 <a href="javascript:void(0)" *ngIf="!post.downvoted" i18n-aria-label role="link"
@@ -178,7 +178,7 @@
                   <mat-icon *ngIf="post.downvoted" class="cursor-pointer downvoted">
                     arrow_downward</mat-icon>
                 </a>
-                <span class="pad-4 ws-mat-black60-text">{{post.downvotes}}</span>
+                <span class="pad-4 ws-mat-black60-text mat-subheading-2">{{post.downvotes}}</span>
               </span>
               <!-- <span class="flex margin-right-l mobile">
                 <mat-icon>trending_up</mat-icon>
@@ -190,7 +190,7 @@
             </div>
             <div class="flex flex-1" class="cursor-pointer text-right mobile2">
               <button mat-button (click)="post.toggle=!post.toggle; post.comment=''">
-                <span class="noocoments ws-mat-black60-text"> Reply</span>
+                <span class="noocoments ws-mat-black60-text mat-body-2"> Reply</span>
               </button>
             </div>
           </div>
@@ -211,7 +211,7 @@
                 <div class="flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
                   <a href="javascript:void(0)" class="flex align-center" i18n-aria-label role="link"
                     aria-label="reply toggle">
-                    <span class="cursor-pointer"> 1 reply </span>
+                    <span class="cursor-pointer mat-body-2"> 1 reply </span>
                     <span class="pl-2 pr-1 sm:pr-2 cursor-pointer ws-mat-accent-text" *ngIf="post.replyCountToggle"
                       aria-label="reply toggle upwards">
                       <mat-icon>keyboard_arrow_up</mat-icon>
@@ -227,7 +227,7 @@
                 </div>
               </div>
               <div class="" role="link" tabindex="0">
-                <span *ngIf="!post.replyCountToggle">Last reply
+                <span *ngIf="!post.replyCountToggle" class="mat-subheading-2 ws-mat-black60-text">Last reply
                   {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
@@ -249,7 +249,7 @@
                   </ng-container>
                 </div> -->
                 <div class="ml-2 flex align-center" (click)="post.replyCountToggle = !post.replyCountToggle">
-                  <span class="cursor-pointer"> {{post.replies.count}} replies </span>
+                  <span class="cursor-pointer mat-body-2"> {{post.replies.count}} replies </span>
                   <a href="javascript:void(0)" class="flex align-center" *ngIf="post.replyCountToggle" i18n-aria-label
                     role="link" aria-label="reply toggle">
                     <span class="pl-2 pr-1 sm:pr-2 cursor-pointer" *ngIf="post.replyCountToggle"
@@ -267,7 +267,7 @@
                 </div>
               </div>
               <div class="">
-                <span *ngIf="!post.replyCountToggle">Last reply
+                <span *ngIf="!post.replyCountToggle" class="mat-subheading-2 ws-mat-black60-text">Last reply
                   {{ post.replies.timestampISO | date: 'dd MMM yyyy hh:mm a' }} </span>
               </div>
             </div>
@@ -331,24 +331,24 @@
             [innerHTML]="post.user.fullname"></span>
           <span class="margin-left-s capitalize mat-body-2 font-bold width-expand" *ngIf="!post.user.fullname"
             [innerHTML]="post.user.username"></span>
-          <span class="posttime">{{ post.timestamp | date}}</span>
+          <span class="posttime mat-subheading-2 ws-mat-black60-text">{{ post.timestamp | date}}</span>
         </mat-card-header>
         <mat-card-content>
-          <p role="link" class="mat-body-2" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
+          <p role="link" class="mat-body-1" tabindex="0" [innerHTML]="post.content | pipeHtmlTagRemoval"></p>
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-row margin-left-xs">
               <span class="flex margin-right-l mobile">
                 <mat-icon *ngIf="!post.upvoted" (click)="upvote(post)" class="cursor-pointer">arrow_upward</mat-icon>
                 <mat-icon *ngIf="post.upvoted" (click)="delteVote(post)" class="cursor-pointer upvoted">arrow_upward
                 </mat-icon>
-                <span class="pad-4">{{post.upvotes}}</span>
+                <span class="pad-4 mat-subheading-2 ws-mat-black60-text">{{post.upvotes}}</span>
               </span>
               <span class="flex margin-right-l mobile">
                 <mat-icon *ngIf="!post.downvoted" (click)="downvote(post)" class="cursor-pointer">arrow_downward
                 </mat-icon>
                 <mat-icon *ngIf="post.downvoted" (click)="delteVote(post)" class="cursor-pointer downvoted">
                   arrow_downward</mat-icon>
-                <span class="pad-4">{{post.downvotes}}</span>
+                <span class="pad-4 mat-subheading-2">{{post.downvotes}}</span>
               </span>
             </div>
           </div>

@@ -241,6 +241,7 @@
 
     .ws-mat-accent-border-active {
       border: 1px solid $colorAccent;
+      font-weight: 700;
 
       .mat-caption {
         color: $colorText;
@@ -551,6 +552,7 @@
 
     .ws-mat-accent-border-active {
       border: 1px solid $colorAccent;
+      font-weight: 700;
     }
 
     .ws-mat-text-block-fade-gradient {

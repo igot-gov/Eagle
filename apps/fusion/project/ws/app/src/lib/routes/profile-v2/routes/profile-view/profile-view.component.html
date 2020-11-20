@@ -21,12 +21,12 @@
             </div>
           </div>
         </div>
-        <mat-card-subtitle role="link" tabindex="0" i18n-aria-label>
+        <span class="flex mat-body-2" role="link" tabindex="0" i18n-aria-label>
           {{portalProfile?.employmentDetails?.departmentName}}
-        </mat-card-subtitle>
-        <mat-card-subtitle role="link" tabindex="0" i18n-aria-label>
+        </span>
+        <span class="flex mat-body-2 ws-mat-black60-text" role="link" tabindex="0" i18n-aria-label>
           {{portalProfile?.employmentDetails?.officialPostalAddress}}
-        </mat-card-subtitle>
+        </span>
         <!-- <mat-card-subtitle>{{discussProfileData.email}}</mat-card-subtitle> -->
         <ng-container>
           <div class="flex flex-1 custom margin-0 margin-top-m bottom-fix mob" role="link" tabindex="0">
@@ -89,7 +89,7 @@
           <!-- </mat-card-header> -->
           <mat-card-content>
             <div class="flex flex-1">
-              <span class="mat-subheading-1 flex-1">{{'Discussions'}}</span>
+              <span class="mat-title flex-1">{{'Discussions'}}</span>
               <!-- <div
                 class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important">
                 <a mat-button [routerLink]="'/app/discuss/my-discussions'">
@@ -103,16 +103,16 @@
                   <div class="flex flex-1 filter flex-wrap">
                     <a href="javascript:void(0)" class="filter-option font-normal" i18n-aria-label role="button"
                       [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                                                'ws-mat-accent-border font-medium':currentFilter !== 'timestamp'}"
+                                                'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}"
                       mat-button (click)="filter('timestamp')">
                       Recent posts </a>
                     <a href="javascript:void(0)" class="filter-option" i18n-aria-label role="button" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
-                                                'ws-mat-accent-border font-medium':currentFilter !== 'best'}"
+                                                'ws-mat-accent-border font-normal':currentFilter !== 'best'}"
                       mat-button (click)="filter('best')">
                       Best posts </a>
                     <a href="javascript:void(0)" class="filter-option" i18n-aria-label role="button"
                       [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
-                                                            'ws-mat-accent-border font-medium':currentFilter !== 'saved'}" mat-button (click)="filter('saved')"
+                                                            'ws-mat-accent-border font-normal':currentFilter !== 'saved'}" mat-button (click)="filter('saved')"
                       *ngIf="portalProfile.id === currentUser">
                       Saved posts </a>
                   </div>

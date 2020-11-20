@@ -65,6 +65,10 @@
   width: calc(100% - 20px);
 }
 
+.font-normal {
+  font-weight: 400 !important;
+}
+
 .filter {
   .filter-option {
     margin: 0 $size-m $size-l;

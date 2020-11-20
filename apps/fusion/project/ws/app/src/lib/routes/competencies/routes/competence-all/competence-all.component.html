@@ -11,15 +11,16 @@
           <mat-card-header>
             <mat-card-title>
               <!-- <h2 [innerHTML]="category.name"></h2> -->
-              You have’t added any competencies yet!
+              <span class="mat-title"> You have’t added any competencies yet!</span>
             </mat-card-title>
           </mat-card-header>
           <mat-card-content class="flex flex-1 custom-content">
-            <h5>What do you think are your competencies? Are you not sure how to write your competencies? </h5>
-            <h5>It is not a bad idea to learn from what others did.</h5>
+            <span class="mat-body-1">What do you think are your competencies? Are you not sure how to write your
+              competencies? </span>
+            <span class="mat-body-1">It is not a bad idea to learn from what others did.</span>
             <div class="mb-2 view-more text-white others">
-              <a mat-button>
-                <span i18n>{{'Explore what others have added'}}</span>
+              <a mat-button class="custom-margin">
+                <span i18n class="mat-subheading-2">{{'Explore what others have added'}}</span>
               </a>
             </div>
           </mat-card-content>
@@ -30,7 +31,7 @@
         <mat-card id="competency-card" class="competency-card" *ngIf="myCompetencies && myCompetencies.length > 0">
           <mat-card-header>
             <mat-card-title>
-              <span class="mat-subheading-1">
+              <span class="mat-title">
                 My competencies
               </span>
             </mat-card-title>
@@ -47,15 +48,15 @@
       </div>
       <div class="w-full pt-10">
         <div class="flex flex-1 flex-column margin-fix mb-2" role="link" tabindex="0">
-          <span class="mat-subheading-1">
+          <span class="mat-title">
             Popular competencies
           </span>
         </div>
         <div class="flex flex-1 flex-row margin-fix search">
-          <form (submit)="updateQuery(queryControl.value)" class="flex-1">
+          <form (submit)="updateQuery(queryControl.value)" class="flex-1 mat-body-2">
             <mat-form-field appearance="outline" class="autocomplete-form" color="primary" [floatLabel]="'never'">
               <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
-              <mat-label>Search</mat-label>
+              <mat-label class="mat-body-2">Search</mat-label>
               <input type="search" #searchInput class="ml-2 flex-1" i18n-placeholder="search" [placeholder]="'Search'"
                 i18-aria-label aria-label="Search" matInput [formControl]="queryControl" />
             </mat-form-field>

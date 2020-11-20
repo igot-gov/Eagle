@@ -10,21 +10,24 @@
         </ws-widget-avatar-photo>
       </div>
       <div class="flex-1">
-        <mat-card-title class="mobile-margin text-capitalize" [innerHTML]="data.fullname"></mat-card-title>
-        <mat-card-subtitle>{{department}}</mat-card-subtitle>
-        <mat-card-subtitle>{{location}} </mat-card-subtitle>
-        <mat-card-subtitle>{{data.email}}</mat-card-subtitle>
+        <mat-card-title class="mobile-margin text-capitalize">
+          <span class="mat-title" [innerHTML]="data.fullname"></span>
+        </mat-card-title>
+        <mat-card-subtitle>
+          <span class="mat-body-2">{{department}}</span> </mat-card-subtitle>
+        <mat-card-subtitle><span class="mat-body-2 ws-mat-black60-text">{{location}}</span> </mat-card-subtitle>
+        <mat-card-subtitle><span class="mat-body-2">{{data.email}}</span></mat-card-subtitle>
         <ng-container>
           <div class="flex flex-1 custom margin-0 margin-top-xl">
             <div class="flex flex-1 flex-custom-m">
               <span class="flex margin-right-l mobile">
-                <span class="ws-mat-default-text">{{data.topiccount || 0 }}</span>
-                <span class="pad-4">Discussions</span>
+                <span class="ws-mat-default-text mat-subheading-2">{{data.topiccount || 0 }}</span>
+                <span class="pad-4 mat-subheading-2">Discussions</span>
 
               </span>
               <span class="flex margin-right-l mobile">
-                <span class="ws-mat-default-text">{{data.postcount || 0 }}</span>
-                <span class="pad-4">Posts</span>
+                <span class="ws-mat-default-text mat-subheading-2">{{data.postcount || 0 }}</span>
+                <span class="pad-4 mat-subheading-2">Posts</span>
               </span>
             </div>
             <div class="flex flex-1" class="text-right mobile2">
@@ -45,27 +48,27 @@
       <div class="flex flex-1 flex-column">
         <div class="flex flex-1 filter flex-wrap">
           <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'timestamp',
-                              'ws-mat-accent-border font-medium':currentFilter !== 'timestamp'}" mat-button
+                              'ws-mat-accent-border font-normal':currentFilter !== 'timestamp'}" mat-button
             (click)="filter('timestamp')">
             Recent posts </a>
           <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'best',
-                              'ws-mat-accent-border font-medium':currentFilter !== 'best'}" mat-button
+                              'ws-mat-accent-border font-normal':currentFilter !== 'best'}" mat-button
             (click)="filter('best')">
             Best posts </a>
           <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'saved',
-                                          'ws-mat-accent-border font-medium':currentFilter !== 'saved'}" mat-button
+                                          'ws-mat-accent-border font-normal':currentFilter !== 'saved'}" mat-button
             (click)="filter('saved')">
             Saved posts </a>
           <!-- <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'watched',
-                                            'ws-mat-accent-border font-medium':currentFilter !== 'watched'}" mat-button
+                                            'ws-mat-accent-border font-normal':currentFilter !== 'watched'}" mat-button
             (click)="filter('watched')">
             Watched </a> -->
           <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'upvoted',
-                                              'ws-mat-accent-border font-medium':currentFilter !== 'upvoted'}"
+                                              'ws-mat-accent-border font-normal':currentFilter !== 'upvoted'}"
             mat-button (click)="filter('upvoted')">
             Upvoted </a>
           <a href="javascript:void(0)" role="button" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'downvoted',
-                                                'ws-mat-accent-border font-medium':currentFilter !== 'downvoted'}"
+                                                'ws-mat-accent-border font-normal':currentFilter !== 'downvoted'}"
             mat-button (click)="filter('downvoted')">
             Downvoted </a>
         </div>

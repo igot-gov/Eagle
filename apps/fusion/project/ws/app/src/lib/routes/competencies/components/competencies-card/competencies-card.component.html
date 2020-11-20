@@ -4,7 +4,7 @@
   <a href="javascript:void(0)" role="button">
     <mat-card-content class="flex flex-1 custom" *ngIf="!isSelected">
       <span class="mat-subheading-1">{{data.name}}</span>
-      <span class="mat-body-1">{{data.description}}</span>
+      <span class="mat-body-2">{{data.description}}</span>
     </mat-card-content>
     <mat-card-content class="flex flex-1 custom-reverse" *ngIf="isSelected">
       <a href="javascript:void(0)" role="link" class="add-comp cursor-pointer"
@@ -12,7 +12,7 @@
         <mat-icon class="m-auto">add</mat-icon>
       </a>
       <span class="mat-subheading-1">{{data.name}}</span>
-      <span class="mat-body-1" (click)="view()">{{data.description}}</span>
+      <span class="mat-body-2" (click)="view()">{{data.description}}</span>
     </mat-card-content>
   </a>
 </mat-card>
