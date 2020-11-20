@@ -1,5 +1,6 @@
 package com.infosys.lex.userroles.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -122,6 +123,15 @@ public class UserRoleController {
 		userRolesService.addOrDeleteUserRoles(rootOrg, userId, role, userRoleMap);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
+
+	@GetMapping("/v1/roles/count")
+	public ResponseEntity<HashMap<String, Object>> getRolesAndCount(@RequestHeader("rootOrg") String rootOrg) {
+		HashMap<String, Object> roleResponse = userRolesService.getRolesCountForUserIds(rootOrg);
+		return new ResponseEntity<>(roleResponse, HttpStatus.OK);
+	}
+
+
+
 
 //	/**
 //	 * delete roles of a user

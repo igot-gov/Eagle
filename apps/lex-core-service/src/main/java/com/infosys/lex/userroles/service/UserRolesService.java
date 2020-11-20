@@ -1,5 +1,8 @@
 package com.infosys.lex.userroles.service;
 
+import com.infosys.lex.userroles.models.RoleCountInterface;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -51,4 +54,6 @@ public interface UserRolesService {
 	 * @throws Exception
 	 */
 	public void addOrDeleteUserRoles(String rootOrg, String userId, String role, Map<String, Object> userRoleMap);
+
+	public HashMap<String, Object> getRolesCountForUserIds(String rootOrg);
 }

@@ -12,10 +12,12 @@ import java.util.Set;
 
 import javax.transaction.Transactional;
 
+import com.infosys.lex.userroles.models.RoleCountInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.infosys.lex.common.service.UserUtilityService;
@@ -51,6 +53,14 @@ public class UserRolesServiceImpl implements UserRolesService {
 	public static final String DEFAULT_USER = "defaultuser";
 
 	public static final String MASTER_USER = "masteruser";
+
+	public static final String MESSAGE = "message";
+
+	public static final String STATUS = "status";
+
+	public static final String DATA = "data";
+
+	public static final String SUCCESSFUL = "successful";
 
 	@Override
 	public Set<String> getUserRoles(String rootOrg, String userId) {
@@ -539,5 +549,15 @@ public class UserRolesServiceImpl implements UserRolesService {
 		}
 
 	}
+
+	@Override
+	public HashMap<String, Object> getRolesCountForUserIds(String rootOrg) {
+		HashMap<String, Object> response = new HashMap<>();
+		response.put(MESSAGE, SUCCESSFUL);
+		response.put(DATA, userRolesRepo.countRolesForUserIds(Arrays.asList(MASTER_USER, DEFAULT_USER)));
+		response.put(STATUS, HttpStatus.OK);
+		return response;
+	}
+
 
 }
