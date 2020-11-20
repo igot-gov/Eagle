@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { createProxyServer } from 'http-proxy'
-import { extractUserToken } from '../utils/requestExtract'
+import { extractUserIdFromRequest, extractUserToken } from '../utils/requestExtract'
 import { logInfo } from './logger'
 
 const proxyCreator = (timeout = 10000) => createProxyServer({
@@ -67,7 +67,35 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
     console.log('REQ_URL', req.url)
     proxy.web(req, res, {
       changeOrigin: true,
+      ignorePath: true,
       target: targetUrl,
+    })
+  })
+  return route
+}
+
+export function proxyCreatorToAppentUserId(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+    const userId = extractUserIdFromRequest(req).split(':')
+    // if (userId.length > 0) {
+    //   targetUrl = targetUrl + userId[userId.length - 1]
+    // }
+    // logInfo('************************************************************************')
+    // logInfo('targetUrl = ' + targetUrl)
+    // logInfo('************************************************************************')
+    logInfo('proxyCreatorSunbird ---')
+    // tslint:disable-next-line: no-console
+    console.log('req headers', req.headers)
+    // tslint:disable-next-line: no-console
+    console.log('req header', req.header)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL', req.originalUrl)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL', req.url)
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl + userId[userId.length - 1],
     })
   })
   return route
