@@ -9,7 +9,7 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 const GENERAL_ERR_MSG = 'Failed due to unknown reason'
 const apiEndpoints = {
   role: `${CONSTANTS.ROLES_API_BASE}/v1/user/roles`,
-  roleCountV1: `${CONSTANTS.ROLES_API_BASE}/v1/roles/count`,
+  roleCountV1: `${CONSTANTS.ROLES_API_BASE}/v2/roles/count`,
   rolesV2: `${CONSTANTS.ROLES_API_BASE}/v2/roles`,
   updateRoles: `${CONSTANTS.ROLES_API_BASE}/v1/update/roles`
 }
