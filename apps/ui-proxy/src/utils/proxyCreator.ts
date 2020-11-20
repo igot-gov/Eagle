@@ -77,12 +77,6 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
 export function proxyCreatorToAppentUserId(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
     const userId = extractUserIdFromRequest(req).split(':')
-    // if (userId.length > 0) {
-    //   targetUrl = targetUrl + userId[userId.length - 1]
-    // }
-    // logInfo('************************************************************************')
-    // logInfo('targetUrl = ' + targetUrl)
-    // logInfo('************************************************************************')
     logInfo('proxyCreatorSunbird ---')
     // tslint:disable-next-line: no-console
     console.log('req headers', req.headers)
