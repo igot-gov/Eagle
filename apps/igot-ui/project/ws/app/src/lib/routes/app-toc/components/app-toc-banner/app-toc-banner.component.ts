@@ -76,7 +76,7 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     private contentSvc: WidgetContentService,
     private utilitySvc: UtilityService,
     private mobileAppsSvc: MobileAppsService,
-    private authAccessService: AccessControlService,
+    // private authAccessService: AccessControlService,
   ) { }
 
   ngOnInit() {
