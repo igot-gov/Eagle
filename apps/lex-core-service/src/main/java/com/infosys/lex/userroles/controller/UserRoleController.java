@@ -124,7 +124,7 @@ public class UserRoleController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@GetMapping("/v1/roles/count")
+	@GetMapping("/v2/roles/count")
 	public ResponseEntity<HashMap<String, Object>> getRolesAndCount(@RequestHeader("rootOrg") String rootOrg) {
 		HashMap<String, Object> roleResponse = userRolesService.getRolesCountForUserIds(rootOrg);
 		return new ResponseEntity<>(roleResponse, HttpStatus.OK);
