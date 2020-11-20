@@ -11,6 +11,7 @@ const apiEndpoints = {
   role: `${CONSTANTS.ROLES_API_BASE}/v1/user/roles`,
   rolesV2: `${CONSTANTS.ROLES_API_BASE}/v2/roles`,
   updateRoles: `${CONSTANTS.ROLES_API_BASE}/v1/update/roles`,
+  roleCountV1: `${CONSTANTS.ROLES_API_BASE}/v1/roles/count`
 }
 
 export async function getUserRoles(userId: string, rootOrg: string) {
@@ -221,3 +222,27 @@ export async function updateRolesV2Mock(actionByWid: any, updateRolesReq: any, r
     resolve(response)
   })
 }
+
+rolesApi.get('/rolesUserCount', async (req, res) => {
+  try {
+    const rootOrg = req.headers.rootorg
+    if (!rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios.get(apiEndpoints.roleCountV1, {
+      ...axiosRequestConfig,
+      headers: {
+        rootOrg: rootOrg
+      },
+    })
+    res.status(response.status).send(response.data)
+  } catch (err) {
+    logError('ERROR WHILE FETCHING THE ROLES ->', err)
+    res.status((err && err.response && err.response.status) || 500)
+      .send((err && err.response && err.data) || {
+        error: GENERAL_ERR_MSG,
+      })
+  }
+})
+
