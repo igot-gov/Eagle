@@ -9,9 +9,9 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 const GENERAL_ERR_MSG = 'Failed due to unknown reason'
 const apiEndpoints = {
   role: `${CONSTANTS.ROLES_API_BASE}/v1/user/roles`,
-  roleCountV1: `${CONSTANTS.ROLES_API_BASE}/v2/roles/count`,
+  roleCountV2: `${CONSTANTS.SB_EXT_API_BASE_2}/v2/roles/count`,
   rolesV2: `${CONSTANTS.ROLES_API_BASE}/v2/roles`,
-  updateRoles: `${CONSTANTS.ROLES_API_BASE}/v1/update/roles`
+  updateRoles: `${CONSTANTS.ROLES_API_BASE}/v1/update/roles`,
 }
 
 export async function getUserRoles(userId: string, rootOrg: string) {
@@ -230,10 +230,10 @@ rolesApi.get('/rolesUserCount', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const response = await axios.get(apiEndpoints.roleCountV1, {
+    const response = await axios.get(apiEndpoints.roleCountV2, {
       ...axiosRequestConfig,
       headers: {
-        rootOrg: rootOrg
+        rootOrg,
       },
     })
     res.status(response.status).send(response.data)
@@ -245,4 +245,3 @@ rolesApi.get('/rolesUserCount', async (req, res) => {
       })
   }
 })
-
