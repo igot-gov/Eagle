@@ -74,7 +74,6 @@ detailsApi.get('/wtoken', async (req, res) => {
         token: kcToken,
       },
     }
-    console.log(url, options)
     // tslint:disable-next-line: no-commented-code
     // const bodyWithConfigRequestOptions = { ...body, options }
     logInfoHeading('==========WToken API Request===============')
