@@ -51,6 +51,7 @@ export class ViewerResolve
       )
     ).pipe(
       tap(content => {
+        content = content.result.content
         if (content.status === 'Deleted' || content.status === 'Expired') {
           this.router.navigate([
             `${forPreview ? '/author' : '/app'}/toc/${content.identifier}/overview`,
@@ -81,6 +82,7 @@ export class ViewerResolve
         }
       }),
       map(data => {
+        data = data.result.content
         if (resourceType === 'unknown') {
           this.router.navigate([
             `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(data.mimeType)}/${
