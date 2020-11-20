@@ -5,7 +5,7 @@ import { axiosRequestConfig } from '../../configs/request.config'
 import { CONSTANTS } from '../../utils/env'
 import { logError, logInfo, logInfoHeading } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
-import { extractUserIdFromRequest, extractUserToken } from '../../utils/requestExtract'
+import { extractUserIdFromRequest } from '../../utils/requestExtract'
 import { getUserByEmail } from '../discussionHub/users'
 import { createDiscussionHubUser } from '../discussionHub/writeApi'
 import { getUserProfile } from './profile'
@@ -56,25 +56,25 @@ detailsApi.get('/wtoken', async (req, res) => {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const kcToken = extractUserToken(req)
-    const url = API_END_POINTS.pidProfile
+    // const kcToken = extractUserToken(req)
+    // const url = API_END_POINTS.pidProfile
     // tslint:disable-next-line: no-commented-code
     // const body = {
     //   json: {
     //     token: kcToken,
     //   },
     // }
-    const options: request.CoreOptions = {
-      headers: {
-        org,
-        rootOrg,
-      },
-      ...axiosRequestConfig,
-      json: {
-        token: kcToken,
-      },
-    }
-    console.log(url, options)
+    // const options: request.CoreOptions = {
+    //   headers: {
+    //     org,
+    //     rootOrg,
+    //   },
+    //   ...axiosRequestConfig,
+    //   json: {
+    //     token: kcToken,
+    //   },
+    // }
+    // console.log(url, options)
     // tslint:disable-next-line: no-commented-code
     // const bodyWithConfigRequestOptions = { ...body, options }
     logInfoHeading('==========WToken API Request===============')

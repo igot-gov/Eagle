@@ -4,8 +4,8 @@ import {
   ilpProxyCreatorRoute,
   proxyCreatorRoute,
   proxyCreatorSunbird,
-  scormProxyCreatorRoute,
   proxyCreatorToAppentUserId,
+  scormProxyCreatorRoute,
 } from '../utils/proxyCreator'
 
 export const proxiesV8 = express.Router()
