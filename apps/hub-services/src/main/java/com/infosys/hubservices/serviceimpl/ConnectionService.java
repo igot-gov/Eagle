@@ -13,6 +13,9 @@ import com.infosys.hubservices.exception.BadRequestException;
 import com.infosys.hubservices.model.ConnectionRequest;
 import com.infosys.hubservices.model.NotificationEvent;
 import com.infosys.hubservices.model.Response;
+import com.infosys.hubservices.profile.handler.IProfileRequestHandler;
+import com.infosys.hubservices.profile.handler.ProfileUtils;
+import com.infosys.hubservices.profile.handler.RegistryRequest;
 import com.infosys.hubservices.repository.cassandra.bodhi.UserConnectionRepository;
 import com.infosys.hubservices.service.IConnectionService;
 import com.infosys.hubservices.service.IGraphService;
@@ -22,6 +25,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -47,6 +52,12 @@ public class ConnectionService implements IConnectionService {
     @Autowired
     IGraphService graphService;
 
+    @Autowired
+    IProfileRequestHandler profileRequestHandler;
+
+    @Autowired
+    ProfileUtils profileUtils;
+
 
     @Override
     public Response add(String rootOrg, List<ConnectionRequest> requests) throws Exception{
@@ -63,10 +74,14 @@ public class ConnectionService implements IConnectionService {
                 to.setCreatedAt(new Date());
                 //to.setUpdatedAt(to.getCreatedAt());
 
-                graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
-//              if(connectionProperties.isNotificationEnabled())
-//                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
+                boolean created = graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
+                if(connectionProperties.isNotificationEnabled() && created)
+                    sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
 
+                if(created){
+                    logger.info("On add, updating connections into profile for {}", request.getUserId());
+                    updateProfileConnections(request.getUserId(),Constants.Status.PENDING,null,"initiatedConnections");
+                }
             }
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
@@ -79,6 +94,26 @@ public class ConnectionService implements IConnectionService {
         }
 
         return response;
+
+    }
+
+    @Async("connectionExecutor")
+    public void updateProfileConnections(String userId, String status, Constants.DIRECTION direction, String key){
+        try{
+            int count = graphService.getAllNodeCount(userId, status, direction);
+            List<Node> nodes = graphService.getNodesInEdge(userId, status, 0, count);
+            Map<String, Object> profileRequest = new HashMap<>();
+            profileRequest.put(key, nodes);
+
+            RegistryRequest registryRequest = profileRequestHandler.updateRequest(userId, profileRequest);
+            ResponseEntity responseEntity = profileUtils.getResponseEntity(ProfileUtils.URL.UPDATE.getValue(), registryRequest);
+            logger.info("Updating profile for {}: {}", userId, responseEntity.getBody());
+
+        } catch (Exception e){
+            e.printStackTrace();
+            logger.error("Updating profile for {}: {}", userId, e);
+
+        }
 
     }
 
@@ -95,11 +130,16 @@ public class ConnectionService implements IConnectionService {
                 to.setUpdatedAt(new Date());
 
                 graphService.deleteRelation(from, to, null);
-                graphService.createNodeWithRelation(to, from, request.getStatus());
+                Boolean updated = graphService.createNodeWithRelation(to, from, request.getStatus());
 
-//            if(connectionProperties.isNotificationEnabled())
-//                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
+                if(connectionProperties.isNotificationEnabled() && updated)
+                    sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
 
+                if(updated){
+                    logger.info("On update, updating connections into profile for {}", request.getUserId());
+                    updateProfileConnections(request.getUserId(),request.getStatus(), Constants.DIRECTION.IN,request.getStatus()+"Connections");
+
+                }
             }
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);
@@ -162,7 +202,7 @@ public class ConnectionService implements IConnectionService {
             }
 
             List<Node> nodes = graphService.getNodesInAndOutEdge(userId, status, offset, limit);
-            int count = graphService.getAllNodeCount(userId, status);
+            int count = graphService.getAllNodeCount(userId, status, null);
 
             response.put(Constants.ResponseStatus.PAGENO, offset);
             //response.put(Constants.ResponseStatus.HASPAGENEXT, sliceUserConnections.hasNext());

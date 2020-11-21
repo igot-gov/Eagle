@@ -10,6 +10,7 @@ package com.infosys.hubservices.serviceimpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.hubservices.model.Node;
 import com.infosys.hubservices.service.IGraphService;
+import com.infosys.hubservices.util.Constants;
 import org.neo4j.driver.v1.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -247,15 +248,24 @@ public class GraphService implements IGraphService {
     }
 
     @Override
-    public int getAllNodeCount(String identifier, String relation) throws Exception {
+    public int getAllNodeCount(String identifier, String relation, Constants.DIRECTION direction) throws Exception {
         Session session = neo4jDriver.session();
         Transaction transaction = session.beginTransaction();
         int count =0;
-
+        String text = null;
         try {
 
+            if(direction == null) {
+             text = "MATCH (n)-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN count(r) ";
+
+            } else if(direction.equals(Constants.DIRECTION.IN)){
+                text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN count(r) ";
+
+            } else if(direction.equals(Constants.DIRECTION.OUT)){
+                text = "MATCH (n)-[r:"+relation+"]->(n1) WHERE n.identifier = '"+identifier+"' RETURN count(r) ";
+
+            }
             //String text = "MATCH (n)<-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN n1 ORDER BY updatedAt DESC Skip "+offset+ " LIMIT " +size;
-            String text = "MATCH (n)-[r:"+relation+"]-(n1) WHERE n.identifier = '"+identifier+"' RETURN count(r) ";
             logger.info("text:: {}", text);
             Statement statement = new Statement(text);
 

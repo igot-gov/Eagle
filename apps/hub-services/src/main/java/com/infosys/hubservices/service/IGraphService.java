@@ -8,6 +8,7 @@
 package com.infosys.hubservices.service;
 
 import com.infosys.hubservices.model.Node;
+import com.infosys.hubservices.util.Constants;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface IGraphService {
 
     public List<Node> getNodesNextLevel(String identifier, String relation, int offset, int size) throws Exception;
 
-    public int getAllNodeCount(String identifier, String relation) throws Exception;
+    public int getAllNodeCount(String identifier, String relation, Constants.DIRECTION direction) throws Exception;
     public List<Node> getAllNodes(String identifier) throws Exception;
 
 
