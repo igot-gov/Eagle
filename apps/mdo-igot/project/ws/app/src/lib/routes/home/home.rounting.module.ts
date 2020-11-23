@@ -5,6 +5,7 @@ import { HomeResolve } from './resolvers/home-resolve'
 import { AboutComponent } from './routes/about/about.component'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
+import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 const routes: Routes = [
   {
     path: '',
@@ -34,7 +35,10 @@ const routes: Routes = [
         //   profile: HomeResolve,
         // },
       },
-
+      {
+        path: 'roles-access',
+        component: RolesAccessComponent,
+      },
     ],
   },
 ]

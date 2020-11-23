@@ -6,7 +6,7 @@
   @extend %page-center;
   height: auto;
   min-height: 75vh;
-  padding: 15px;
+  padding:12px;
 }
 
 .container2 {
@@ -21,6 +21,9 @@
 .left-nav {
   min-width: 240px;
   max-width: 240px;
+  background:none !important;
+  border-right:0 !important;
+
 
   // ::ng-deep.mat-drawer-inner-container {
   //   overflow: visible;
@@ -38,19 +41,6 @@
 
 .flex-5 {
   flex: 5;
-}
-
-.sticky {
-  // position: sticky;
-  // top: calc(#{$mat-toolbar-gt-xs});
-  // overflow: hidden;
-  // // z-index: 10;
-  // // width: 100%;
-  // position: absolute;
-  // top: 56;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
 }
 
 .flex-update {

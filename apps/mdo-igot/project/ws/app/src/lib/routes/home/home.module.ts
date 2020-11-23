@@ -27,12 +27,14 @@ import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
 import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule } from '@ws-widget/collection'
 import { AboutComponent } from './routes/about/about.component'
+import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 
 @NgModule({
   declarations: [
     HomeComponent,
     UsersViewComponent,
     AboutComponent,
+    RolesAccessComponent,
   ],
   imports: [
     CommonModule,

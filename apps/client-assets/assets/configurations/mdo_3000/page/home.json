@@ -64,15 +64,15 @@
                   "routerLink": "/app/home"
                 },
                 {
-                  "name": "Roles and access",
-                  "key": "randa",
+                  "name": "Roles and Access",
+                  "key": "roles-access",
                   "render": true,
                   "badges": {
                     "enabled": false,
                     "uri": ""
                   },
                   "enabled": true,
-                  "routerLink": "/app/person-profile"
+                  "routerLink": "/app/home/roles-access"
                 },
                 {
                   "name": "Approvals",

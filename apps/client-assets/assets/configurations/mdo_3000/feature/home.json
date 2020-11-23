@@ -16,8 +16,8 @@
                 "routerLink": "/app/home/users"
             },
             {
-                "name": "Roles and access",
-                "key": "randa",
+                "name": "Roles and Access",
+                "key": "roles-access",
                 "fragment": false,
                 "render": true,
                 "badges": {
@@ -25,7 +25,7 @@
                     "uri": ""
                 },
                 "enabled": true,
-                "routerLink": "/app/person-profile"
+                "routerLink": "/app/home/roles-access"
             },
             {
                 "name": "Approvals",

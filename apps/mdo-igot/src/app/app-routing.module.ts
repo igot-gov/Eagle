@@ -51,6 +51,18 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/roles-access',
+    loadChildren: () => import('./routes/route-roles-access-module').then(u => u.RouteAccessAppModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'roles-access',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/frac',
     loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
     canActivate: [GeneralGuard],

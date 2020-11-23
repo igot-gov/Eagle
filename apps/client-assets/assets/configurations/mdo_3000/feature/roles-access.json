@@ -1,0 +1,32 @@
+{
+  "menus": {
+    "widgetType": "menus",
+    "widgetSubType": "leftMenu",
+    "widgetData": [
+      {
+        "name": "Privileges",
+        "key": "privileges",
+        "fragment": false,
+        "render": true,
+        "badges": {
+          "enabled": false,
+          "uri": ""
+        },
+        "enabled": true,
+        "routerLink": "/app/roles-access/privileges"
+      },
+      {
+        "name": "Users",
+        "key": "users",
+        "fragment": false,
+        "render": true,
+        "badges": {
+          "enabled": false,
+          "uri": ""
+        },
+        "enabled": true,
+        "routerLink": "/app/home/users"
+      }
+    ]
+  }
+}
