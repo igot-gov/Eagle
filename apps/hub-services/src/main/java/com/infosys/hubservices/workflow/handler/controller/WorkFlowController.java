@@ -1,6 +1,7 @@
 package com.infosys.hubservices.workflow.handler.controller;
 
 import com.infosys.hubservices.workflow.handler.models.Response;
+import com.infosys.hubservices.workflow.handler.models.SearchCriteria;
 import com.infosys.hubservices.workflow.handler.models.WfRequest;
 import com.infosys.hubservices.workflow.handler.service.WorkflowService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class WorkFlowController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/applications/{applicationStatus}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Response> getWfApplicationBasedOnStatus(@RequestHeader String rootOrg, @RequestHeader String org, @PathVariable("applicationStatus") String status) {
-        Response response = workflowService.getWfApplicationsBasedOnStatus(rootOrg, org, status);
+    @PostMapping(path = "/applications/search", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Response> wfApplicationSearch(@RequestHeader String rootOrg, @RequestHeader String org, @RequestBody SearchCriteria searchCriteria) {
+        Response response = workflowService.wfApplicationSearch(rootOrg, org, searchCriteria);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

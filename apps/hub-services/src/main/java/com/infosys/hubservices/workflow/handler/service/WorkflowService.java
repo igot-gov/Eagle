@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.hubservices.exception.ApplicationException;
 import com.infosys.hubservices.workflow.handler.bodhi.WfRepo;
+import com.infosys.hubservices.workflow.handler.config.Configuration;
 import com.infosys.hubservices.workflow.handler.constants.Constants;
 import com.infosys.hubservices.workflow.handler.models.*;
 import com.infosys.hubservices.workflow.handler.models.cassandra.Workflow;
@@ -12,6 +13,9 @@ import com.infosys.hubservices.workflow.handler.postgres.entity.WfStatusEntity;
 import com.infosys.hubservices.workflow.handler.postgres.repo.WfAuditRepo;
 import com.infosys.hubservices.workflow.handler.postgres.repo.WfStatusRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -35,6 +39,9 @@ public class WorkflowService {
 
 	@Autowired
 	private ObjectMapper mapper;
+
+	@Autowired
+	private Configuration configuration;
 
 	/**
 	 * Change the status of workflow application
@@ -265,15 +272,30 @@ public class WorkflowService {
 	 *
 	 * @param rootOrg
 	 * @param org
-	 * @param status
+	 * @param criteria
 	 * @return workflow applications
 	 */
-	public Response getWfApplicationsBasedOnStatus(String rootOrg, String org, String status) {
-		List<WfStatusEntity> applications = wfStatusRepo.findByRootOrgAndOrgAndCurrentStatus(rootOrg,
-				org, status);
+	public Response wfApplicationSearch(String rootOrg, String org, SearchCriteria criteria) {
+		if (criteria.isEmpty()) {
+			throw new ApplicationException(Constants.SEARCH_CRITERIA_VALIDATION);
+		}
+		Integer limit = configuration.getDefaultLimit();
+		Integer offset = configuration.getDefaultOffset();
+		if (criteria.getLimit() == null && criteria.getOffset() == null)
+			limit = configuration.getMaxLimit();
+		if (criteria.getLimit() != null && criteria.getLimit() <= configuration.getDefaultLimit())
+			limit = criteria.getLimit();
+		if (criteria.getLimit() != null && criteria.getLimit() > configuration.getDefaultOffset())
+			limit = configuration.getDefaultLimit();
+		if (criteria.getOffset() != null)
+			offset = criteria.getOffset();
+		Pageable pageable = PageRequest.of(offset, limit + offset);
+
+		Page<WfStatusEntity> statePage = wfStatusRepo.findByRootOrgAndOrgAndServiceNameAndCurrentStatus(rootOrg,
+				org, criteria.getServiceName(), criteria.getApplicationStatus(), pageable);
 		Response response = new Response();
 		response.put(Constants.MESSAGE, Constants.SUCCESSFUL);
-		response.put(Constants.DATA, applications);
+		response.put(Constants.DATA, statePage.getContent());
 		response.put(Constants.STATUS, HttpStatus.OK);
 		return response;
 	}

@@ -51,4 +51,6 @@ public class Constants {
     public static final String ACTION_CONSTANT = "action";
 
     public static final String ROLES_CONSTANT = "roles";
+
+    public static final String SEARCH_CRITERIA_VALIDATION = "Provide the mandatory fields for search!";
 }
