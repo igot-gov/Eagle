@@ -13,3 +13,26 @@ lexcore.hierarchy.searchpath=v1/content/hierarchy/{contentId}
 
 #content-service
 content.service.host={{ content_service_url }}
+
+#Kafka Topics
+kafka.topics.incoming.rest.validation=startContentValidationTopic
+
+#Kafka Server
+spring.kafka.bootstrap.servers={{ kafka_servers_list }}
+
+#kafka properties
+kakfa.offset.reset.value=latest
+kafka.max.poll.interval.ms=5000
+kafka.max.poll.records=100
+
+
+#spring data cassandra application properties
+spring.data.cassandra.startupTimeoutInSeconds=100000
+spring.data.cassandra.contact-points={{ cassandra_host }}
+spring.data.cassandra.port={{ cassandra_port }}
+spring.data.cassandra.keyspace-name={{ keyspace_bodhi }}
+
+#common for both the cassandra keyspaces, hence does not require a getter setter in the config
+spring.data.cassandra.username={{ cassandra_username }}
+spring.data.cassandra.password={{ cassandra_password }}
+
