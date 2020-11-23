@@ -343,4 +343,30 @@ public class ProfileManagerService {
 		}
 		return response;
 	}
+
+	/**
+	 *
+	 * @param rootOrg
+	 * @param userId
+	 * @return
+	 */
+	public Response getUserProfileWfHistory(String rootOrg, String userId) {
+		Response response = new Response();
+		List<UserProfileWfAudit> userProfileWfAuditList = userProfileWfAuditRepo.findByRootOrgAndUserId(rootOrg,
+				userId);
+		HashMap<String, List<UserProfileWfAudit>> history = new HashMap<>();
+
+		for(UserProfileWfAudit audit : userProfileWfAuditList){
+			if(StringUtils.isEmpty(history.get(audit.getWfId()))){
+				List<UserProfileWfAudit> userProfileWfAudits = new ArrayList<>(Arrays.asList(audit));
+				history.put(audit.getWfId(), userProfileWfAudits);
+			}else{
+				history.get(audit.getWfId()).add(audit);
+			}
+		}
+		response.put(Constants.MESSAGE, Constants.SUCCESSFUL);
+		response.put(Constants.DATA, history);
+		response.put(Constants.STATUS, HttpStatus.OK);
+		return response;
+	}
 }

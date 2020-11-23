@@ -9,4 +9,6 @@ public interface UserProfileWfAuditRepo extends JpaRepository<UserProfileWfAudit
 
     List<UserProfileWfAudit> findByRootOrgAndUserIdAndWfId(String rootOrg, String userId, String wfId);
 
+    List<UserProfileWfAudit> findByRootOrgAndUserId(String rootOrg, String userId);
+
 }
