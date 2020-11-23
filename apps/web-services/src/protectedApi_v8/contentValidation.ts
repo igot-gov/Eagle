@@ -11,6 +11,8 @@ const API_END_POINTS = {
     checkProfanity: (contentId: string, userId: string) =>
         `${CONSTANTS.CONTENT_VALIDATION_API_BASE}/contentValidation/v1/checkProfanity/${contentId}/${userId}`,
     checkTextProfanity: `${CONSTANTS.PROFANITY_SERVICE_API_BASE}/checkProfanity`,
+    getPdfProfanity: `${CONSTANTS.CONTENT_VALIDATION_API_BASE}/contentValidation/v1/getLocalPdfProfanity`,
+    startPdfProfanity: `${CONSTANTS.CONTENT_VALIDATION_API_BASE}/contentValidation/v1/startLocalPdfProfanity`,
 }
 
 export const contentValidationApi = Router()
@@ -65,6 +67,34 @@ contentValidationApi.post('/checkTextProfanity', async (req, res) => {
 contentValidationApi.post('/validatePdfContent', async (req, res) => {
     try {
         const response = await axios.post(API_END_POINTS.checkPdfProfanity, req.body, axiosRequestConfig)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+contentValidationApi.post('/startPdfProfanity', async (req, res) => {
+    try {
+        const response = await axios.post(API_END_POINTS.startPdfProfanity, req.body, axiosRequestConfig)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+contentValidationApi.get('/getPdfProfanity', async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.getPdfProfanity, req.body)
         res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + err)
