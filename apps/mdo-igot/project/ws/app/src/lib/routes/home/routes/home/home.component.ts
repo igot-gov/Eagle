@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         // Hide loading indicator
         // console.log(event.url)
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
-        this.WidgetData = this.activeRoute.snapshot.data &&
+        this.widgetData = this.activeRoute.snapshot.data &&
           this.activeRoute.snapshot.data.pageData.data.menus || []
       }
 

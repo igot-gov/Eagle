@@ -4,10 +4,10 @@
       <ws-app-about-video></ws-app-about-video>
     </mat-step>
     <mat-step i18n-label label="Interests" state="interest">
-      <ws-app-interest #userInterest></ws-app-interest>
+      <ws-app-interests #userInterest></ws-app-interests>
     </mat-step>
     <mat-step i18n-label label="Settings" state="setting">
-      <ws-app-settings #userSettings [mode]="'setup'" (langChangedEvent)="langChanged($event)"></ws-app-settings>
+      <!-- <ws-app-settings #userSettings [mode]="'setup'" (langChangedEvent)="langChanged($event)"></ws-app-settings> -->
     </mat-step>
 
     <ng-template matStepperIcon="about">
