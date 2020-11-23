@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs'
 import { FilterDisplayComponent } from '../../components/filter-display/filter-display.component'
 import { IFilterUnitResponse, ISearchRequest, ISearchTab } from '../../models/search.model'
 import { SearchServService } from '../../services/search-serv.service'
-interface Thing {
+interface IThing {
   prop?: string
 }
 @Component({
@@ -292,7 +292,7 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.searchRequestObject.filters &&
         !Object.keys(this.searchRequestObject.filters).length
       ) {
-        this.f(this.searchRequestObject.filters)
+        this.ft(this.searchRequestObject.filters)
         // delete this.searchRequestObject.filters
       }
       if (this.searchRequestObject && this.searchRequestObject.pageNo) {
@@ -315,8 +315,7 @@ export class LearningComponent implements OnInit, OnDestroy {
     // }
   }
 
-
-  f(x: Thing) {
+  ft(x: IThing) {
     delete x.prop
   }
   ngOnDestroy() {

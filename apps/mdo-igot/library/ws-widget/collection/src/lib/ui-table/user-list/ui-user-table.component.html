@@ -15,11 +15,11 @@
         </div>
 
         <!-- </mat-form-field> -->
-        <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData.sortColumn"
-            [matSortDirection]="tableData.sortState" [dataSource]="dataSource"
+        <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
+            [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
             class="example-table table1 responsiveTable">
 
-            <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData.columns">
+            <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <span *ngIf="col.isList" class="textclass"
@@ -32,18 +32,19 @@
                 </mat-cell>
             </ng-container>
 
-            <ng-container matColumnDef="Actions" *ngIf="tableData.actions && tableData.actions.length > 0">
+            <ng-container matColumnDef="Actions" *ngIf="tableData!.actions && tableData!.actions.length > 0">
                 <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
                 <mat-cell *matCellDef="let row" class="action-cell">
                     <div *ngFor="let ac of tableData.actions">
                         <div *ngIf="ac.optional">
-                            <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
+                            <ws-widget-app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type"
                                 [icon]="ac.icon" [disabled]="ac.disabled || false" [label]="ac.label"
-                                (click)="buttonClick(ac.name,row)"></app-button>
+                                (click)="buttonClick(ac.name,row)"></ws-widget-app-button>
                         </div>
                         <div *ngIf="!ac.optional">
-                            <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
-                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)"></app-button>
+                            <ws-widget-app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label"
+                                [disabled]="ac.disabled || false" (click)="buttonClick(ac.name,row)">
+                            </ws-widget-app-button>
                         </div>
                     </div>
                 </mat-cell>

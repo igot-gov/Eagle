@@ -25,7 +25,7 @@ const routes: Routes = [
         resolve: {
           // profile: HomeResolve,
         },
-        children: []
+        children: [],
       },
       {
         path: 'about',
