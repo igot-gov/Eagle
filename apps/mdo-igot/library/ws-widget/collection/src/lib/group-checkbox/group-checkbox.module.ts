@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon'
     MatCheckboxModule,
     MatCardModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
   ],
   exports: [GroupCheckboxComponent],
 })

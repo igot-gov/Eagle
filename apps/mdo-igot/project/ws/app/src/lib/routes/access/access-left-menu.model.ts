@@ -6,4 +6,3 @@ export interface IAccessLeftMenu {
     enabled: boolean
     routerLink: string
   }
-

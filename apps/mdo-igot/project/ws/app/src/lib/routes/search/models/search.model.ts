@@ -247,6 +247,3 @@ export interface ISuggestedFilters {
   url: string
   queryParams?: any
 }
-
-
-

@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators'
 @Component({
   selector: 'ws-app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
   currentRoute = 'roles-access'
@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   public screenSizeIsLtMedium = false
   sideNavBarOpened = true
 
-
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -29,7 +28,7 @@ export class HomeComponent implements OnInit {
       }
 
       if (event instanceof NavigationError) {
-        
+
       }
     })
   }
@@ -44,7 +43,7 @@ export class HomeComponent implements OnInit {
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
       this.defaultSideNavBarOpenedSubscription.unsubscribe()
-    }   
+    }
   }
 
   bindUrl(path: string) {

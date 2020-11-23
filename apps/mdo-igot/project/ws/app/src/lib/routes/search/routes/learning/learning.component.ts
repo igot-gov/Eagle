@@ -315,7 +315,6 @@ export class LearningComponent implements OnInit, OnDestroy {
     // }
   }
 
-
   f(x: Thing) {
     delete x.prop
   }
