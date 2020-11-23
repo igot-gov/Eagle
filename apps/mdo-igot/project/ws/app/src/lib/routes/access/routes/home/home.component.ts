@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private defaultSideNavBarOpenedSubscription: any
   public screenSizeIsLtMedium = false
   sideNavBarOpened = true
+  role: any
 
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
@@ -38,6 +39,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.sideNavBarOpened = !isLtMedium
       this.screenSizeIsLtMedium = isLtMedium
     })
+
+    if (this.activeRoute.snapshot.queryParams.role) {
+      this.role = this.activeRoute.snapshot.queryParams.role
+    }
   }
 
   ngOnDestroy() {

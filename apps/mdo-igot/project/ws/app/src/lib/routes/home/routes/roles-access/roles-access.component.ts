@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
+import { RolesAccessService } from '../../services/roles-access.service'
 @Component({
   selector: 'ws-app-roles-access',
   templateUrl: './roles-access.component.html',
@@ -9,44 +10,22 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private roleSvc: RolesAccessService) { }
 
-  ngOnDestroy() {
-    // if (this.tabs) {
-    //   this.tabs.unsubscribe()
-    // }
-  }
   ngOnInit() {
     // int left blank
     this.tabledata = {
       actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
         { displayName: 'Role', key: 'role' },
-        { displayName: 'Number of users', key: 'noOfUsers' },
+        { displayName: 'Number of users', key: 'count' },
       ],
       needCheckBox: false,
       needHash: false,
       sortColumn: '',
       sortState: 'asc',
     }
-    this.data = [
-      {
-        role: 'MDO Admin',
-        noOfUsers: '5',
-      },
-      {
-        role: 'Moderator',
-        noOfUsers: '4',
-      },
-      {
-        role: 'IFU Member',
-        noOfUsers: '5',
-      },
-      {
-        role: 'Member',
-        noOfUsers: '10',
-      },
-    ]
+    this.fetchRoles()
   }
   ngAfterViewInit() {
     // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
@@ -60,4 +39,13 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
       },
     })
   }
+
+  /* API call to get all roles*/
+  fetchRoles() {
+    this.roleSvc.getRoles().subscribe(roles => {
+      this.data = roles.data
+    })
+  }
+
+  ngOnDestroy() { }
 }
