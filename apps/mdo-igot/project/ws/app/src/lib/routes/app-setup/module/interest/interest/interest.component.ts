@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs'
 // import { InterestService } from '../../../../profile/routes/interest/services/interest.service'
 
 @Component({
-  selector: 'ws-app-interest',
+  selector: 'ws-app-interests',
   templateUrl: './interest.component.html',
   styleUrls: ['./interest.component.scss'],
 })
