@@ -24,7 +24,7 @@ import com.datastax.driver.core.PlainTextAuthProvider;
 
 @Configuration
 @ConfigurationProperties("spring.data.cassandra.bodhi")
-@EnableCassandraRepositories(basePackages = "com.infosys.hubservices.repository.cassandra.bodhi", cassandraTemplateRef = "bodhiTemplate")
+@EnableCassandraRepositories(basePackages = {"com.infosys.hubservices.repository.cassandra.bodhi", "com.infosys.hubservices.workflow.handler.repository.cassandra.bodhi"}, cassandraTemplateRef = "bodhiTemplate")
 public class BodhiConfig extends CassandraConfig {
 
 	private Logger logger = LoggerFactory.getLogger(BodhiConfig.class);
