@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   sideNavBarOpened = true
   panelOpenState = false
   titles = [{ title: 'NETWORK', url: '/app/network-v2', icon: 'group' }]
-  WidgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
+  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   unread = 0
   currentRoute = 'home'
   banner!: NsWidgetResolver.IWidgetData<any>

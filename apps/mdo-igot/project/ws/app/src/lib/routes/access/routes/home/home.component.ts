@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router, Event, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router'
 import { ILeftMenu } from '@ws-widget/collection'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   currentRoute = 'roles-access'
-  WidgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
+  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   isLtMedium$ = this.valueSvc.isLtMedium$
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   private defaultSideNavBarOpenedSubscription: any
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
-        this.WidgetData = this.activeRoute.snapshot.data &&
+        this.widgetData = this.activeRoute.snapshot.data &&
           this.activeRoute.snapshot.data.pageData.data.menus || []
       }
 

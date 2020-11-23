@@ -4,7 +4,8 @@ import { NSSearch } from '@ws-widget/collection'
 import { ConfigurationsService, EventService, WsEvents } from '@ws-widget/utils'
 import { Observable, of } from 'rxjs'
 // import { KnowledgeHubApiService } from '../../infy/routes/knowledge-hub/apis/knowledge-hub-api.service'
-// import { IKhubAutoMation, IKhubFilterObj, IKhubItemTile, IKhubKshop, IKhubProject, IKhubViewResultDocs, IKhubViewResultProject, ISearchObjForSearch } from '../../infy/routes/knowledge-hub/models/knowledgeHub.model'
+// import { IKhubAutoMation, IKhubFilterObj, IKhubItemTile, IKhubKshop,
+//IKhubProject, IKhubViewResultDocs, IKhubViewResultProject, ISearchObjForSearch } from '../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { SearchApiService } from '../apis/search-api.service'
 import { IFilterUnitItem, IFilterUnitResponse, ISearchAutoComplete, ISearchQuery, ISearchRequest, ISearchSocialSearchPartialRequest, ISocialSearchRequest } from '../models/search.model'
 
