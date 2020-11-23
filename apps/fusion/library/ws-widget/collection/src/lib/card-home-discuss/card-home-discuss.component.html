@@ -9,9 +9,9 @@
       <span class="flex ws-mat-default-text mat-body-2">
         <mat-icon svgIcon="category_xs"></mat-icon>{{discuss.category.name}}
       </span>
-      <span class="dot ws-mat-black40-text"
+      <span class="dot ws-mat-black40-text mat-body-2"
         *ngIf="discuss?.user?.fullname">{{'Asked by ' + discuss?.user?.fullname}}</span>
-      <span class="dot" *ngIf="!(discuss?.user?.fullname)">{{'Asked by Anonymous'}}</span>
+      <span class="dot mat-body-2" *ngIf="!(discuss?.user?.fullname)">{{'Asked by Anonymous'}}</span>
       <!-- <span class="margin-left-l">{{discuss.timestamp | pipeRelativeTime}}</span> -->
     </mat-card-subtitle>
   </mat-card-header>

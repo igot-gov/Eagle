@@ -62,11 +62,10 @@
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
             </mat-chip-list>
-            <input matInput i18n-placeholder="Enter tags here between 3 to 24 characters each"
-              placeholder="Enter tags here between 3 to 24 characters each" formControlName="tags" i18n-aria-label
-              aria-label="Enter tags" [matChipInputFor]="postTags" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              maxlength="24" (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp"
-              [required]="false" />
+            <mat-label class="mat-body-2">Please elabourate your question or idea here</mat-label>
+            <input matInput formControlName="tags" i18n-aria-label aria-label="Enter tags" [matChipInputFor]="postTags"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes" maxlength="24"
+              (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp" [required]="false" />
           </mat-form-field>
         </div>
         <!-- <div class="flex flex-1 flex-column">
