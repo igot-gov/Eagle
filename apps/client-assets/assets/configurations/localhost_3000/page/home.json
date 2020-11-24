@@ -167,61 +167,63 @@
                     "filters": [],
                     "request": {
                       "searchV6": {
-                        "filters": {
-                          "primaryCategory": [
-                            "Collection",
-                            "Resource",
-                            "Content Playlist",
-                            "Course",
-                            "Course Assessment",
-                            "Digital Textbook",
-                            "eTextbook",
-                            "Explanation Content",
-                            "Learning Resource",
-                            "Lesson Plan Unit",
-                            "Practice Question Set",
-                            "Teacher Resource",
-                            "Textbook Unit",
-                            "LessonPlan",
-                            "FocusSpot",
-                            "Learning Outcome Definition",
-                            "Curiosity Questions",
-                            "MarkingSchemeRubric",
-                            "ExplanationResource",
-                            "ExperientialResource",
-                            "Practice Resource",
-                            "TVLesson"
+                        "request": {
+                          "filters": {
+                            "primaryCategory": [
+                              "Collection",
+                              "Resource",
+                              "Content Playlist",
+                              "Course",
+                              "Course Assessment",
+                              "Digital Textbook",
+                              "eTextbook",
+                              "Explanation Content",
+                              "Learning Resource",
+                              "Lesson Plan Unit",
+                              "Practice Question Set",
+                              "Teacher Resource",
+                              "Textbook Unit",
+                              "LessonPlan",
+                              "FocusSpot",
+                              "Learning Outcome Definition",
+                              "Curiosity Questions",
+                              "MarkingSchemeRubric",
+                              "ExplanationResource",
+                              "ExperientialResource",
+                              "Practice Resource",
+                              "TVLesson"
+                            ]
+                          },
+                          "query": "learn",
+                          "sort_by": {
+                            "lastUpdatedOn": "desc"
+                          },
+                          "fields": [
+                            "name",
+                            "appIcon",
+                            "mimeType",
+                            "gradeLevel",
+                            "identifier",
+                            "medium",
+                            "pkgVersion",
+                            "board",
+                            "subject",
+                            "resourceType",
+                            "primaryCategory",
+                            "contentType",
+                            "channel",
+                            "organisation",
+                            "trackable"
+                          ],
+                          "facets": [
+                            "board",
+                            "gradeLevel",
+                            "subject",
+                            "medium",
+                            "primaryCategory",
+                            "mimeType"
                           ]
-                        },
-                        "query": "learn",
-                        "sort_by": {
-                          "lastUpdatedOn": "desc"
-                        },
-                        "fields": [
-                          "name",
-                          "appIcon",
-                          "mimeType",
-                          "gradeLevel",
-                          "identifier",
-                          "medium",
-                          "pkgVersion",
-                          "board",
-                          "subject",
-                          "resourceType",
-                          "primaryCategory",
-                          "contentType",
-                          "channel",
-                          "organisation",
-                          "trackable"
-                        ],
-                        "facets": [
-                          "board",
-                          "gradeLevel",
-                          "subject",
-                          "medium",
-                          "primaryCategory",
-                          "mimeType"
-                        ]
+                        }
                       }
                     }
                   }
