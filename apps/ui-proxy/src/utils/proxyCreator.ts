@@ -65,10 +65,13 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
     console.log('REQ_URL_ORIGINAL', req.originalUrl)
     // tslint:disable-next-line: no-console
     console.log('REQ_URL', req.url)
+    const lastSlug = req.originalUrl.split('/')
+    const lastSlugId = lastSlug.pop() || ''
+    const contentId = lastSlugId.split('?')[0]
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
-      target: targetUrl,
+      target: targetUrl + contentId,
     })
   })
   return route
