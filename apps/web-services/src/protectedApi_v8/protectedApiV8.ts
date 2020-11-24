@@ -7,6 +7,7 @@ import { certificationApi } from './certifications'
 import { cohortsApi } from './cohorts'
 import { competencyApi } from './competency'
 import { conceptGraphApi } from './concept'
+import { connectionsApi } from './connections'
 import { contentApi } from './content'
 import { contentValidationApi } from './contentValidation'
 import { counterApi } from './counter'
@@ -19,6 +20,7 @@ import { knowledgeHubApi } from './khub'
 import { leaderBoardApi } from './leaderboard'
 import { navigatorApi } from './navigator'
 import { networkConnectionApi } from './network'
+
 import { networkHubApi } from './network-hub'
 import { recommendationApi } from './recommendation'
 import { scromApi } from './scrom'
@@ -60,5 +62,6 @@ protectedApiV8.use('/translate', translateApi)
 protectedApiV8.use('/attended-content', attendedContentApi)
 protectedApiV8.use('/event-external', externalEventsApi)
 protectedApiV8.use('/network', networkConnectionApi)
+protectedApiV8.use('/connections', connectionsApi)
 protectedApiV8.use('/competency', competencyApi)
 protectedApiV8.use('/dept', deptApi)
