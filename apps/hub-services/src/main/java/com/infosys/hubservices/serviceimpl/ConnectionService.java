@@ -24,6 +24,7 @@ import com.infosys.hubservices.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
@@ -58,6 +59,9 @@ public class ConnectionService implements IConnectionService {
     @Autowired
     ProfileUtils profileUtils;
 
+    @Value("${update.profile.connections}")
+    private boolean updateProfileConnections;
+
 
     @Override
     public Response add(String rootOrg, ConnectionRequest request) throws Exception{
@@ -77,7 +81,7 @@ public class ConnectionService implements IConnectionService {
             if(connectionProperties.isNotificationEnabled() && created)
                 sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
 
-            if(created){
+            if(created && updateProfileConnections){
                 logger.info("On add, updating connections into profile for {}", request.getUserId());
                 updateProfileConnections(request.getUserId(),Constants.Status.PENDING,null,"initiatedConnections");
             }
@@ -95,7 +99,7 @@ public class ConnectionService implements IConnectionService {
 
     }
 
-    @Async("connectionExecutor")
+    //@Async("connectionExecutor")
     public void updateProfileConnections(String userId, String status, Constants.DIRECTION direction, String key){
         try{
             int count = graphService.getAllNodeCount(userId, status, direction);
@@ -132,7 +136,7 @@ public class ConnectionService implements IConnectionService {
             if(connectionProperties.isNotificationEnabled() && updated)
                 sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
 
-            if(updated){
+            if(updated && updateProfileConnections){
                 logger.info("On update, updating connections into profile for {}", request.getUserId());
                 updateProfileConnections(request.getUserId(),request.getStatus(), Constants.DIRECTION.IN,request.getStatus()+"Connections");
 
