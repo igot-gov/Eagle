@@ -60,28 +60,26 @@ public class ConnectionService implements IConnectionService {
 
 
     @Override
-    public Response add(String rootOrg, List<ConnectionRequest> requests) throws Exception{
+    public Response add(String rootOrg, ConnectionRequest request) throws Exception{
 
         Response response = new Response();
         try {
 
-            for(ConnectionRequest request :requests){
-                Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
-                //from.setCreatedAt(new Date());
-                from.setUpdatedAt(new Date());
+            Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+            //from.setCreatedAt(new Date());
+            from.setUpdatedAt(new Date());
 
-                Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
-                to.setCreatedAt(new Date());
-                //to.setUpdatedAt(to.getCreatedAt());
+            Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+            to.setCreatedAt(new Date());
+            //to.setUpdatedAt(to.getCreatedAt());
 
-                boolean created = graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
-                if(connectionProperties.isNotificationEnabled() && created)
-                    sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
+            boolean created = graphService.createNodeWithRelation(from, to, Constants.Status.PENDING);
+            if(connectionProperties.isNotificationEnabled() && created)
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateRequest(),request.getUserId(), request.getConnectionId(),Constants.Status.PENDING);
 
-                if(created){
-                    logger.info("On add, updating connections into profile for {}", request.getUserId());
-                    updateProfileConnections(request.getUserId(),Constants.Status.PENDING,null,"initiatedConnections");
-                }
+            if(created){
+                logger.info("On add, updating connections into profile for {}", request.getUserId());
+                updateProfileConnections(request.getUserId(),Constants.Status.PENDING,null,"initiatedConnections");
             }
 
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
@@ -118,28 +116,26 @@ public class ConnectionService implements IConnectionService {
     }
 
     @Override
-    public Response update(String rootOrg, List<ConnectionRequest> requests) throws Exception{
+    public Response update(String rootOrg, ConnectionRequest request) throws Exception{
         Response response = new Response();
 
         try {
 
-            for(ConnectionRequest request: requests){
-                Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
-                from.setUpdatedAt(new Date());
-                Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
-                to.setUpdatedAt(new Date());
+            Node from = new Node(request.getUserId(), request.getUserName(), request.getUserDepartment());
+            from.setUpdatedAt(new Date());
+            Node to = new Node(request.getConnectionId(), request.getConnectionName(), request.getConnectionDepartment());
+            to.setUpdatedAt(new Date());
 
-                graphService.deleteRelation(from, to, null);
-                Boolean updated = graphService.createNodeWithRelation(to, from, request.getStatus());
+            graphService.deleteRelation(from, to, null);
+            Boolean updated = graphService.createNodeWithRelation(to, from, request.getStatus());
 
-                if(connectionProperties.isNotificationEnabled() && updated)
-                    sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
+            if(connectionProperties.isNotificationEnabled() && updated)
+                sendNotification(rootOrg, connectionProperties.getNotificationTemplateResponse(), request.getConnectionId(), request.getUserId(),request.getStatus());
 
-                if(updated){
-                    logger.info("On update, updating connections into profile for {}", request.getUserId());
-                    updateProfileConnections(request.getUserId(),request.getStatus(), Constants.DIRECTION.IN,request.getStatus()+"Connections");
+            if(updated){
+                logger.info("On update, updating connections into profile for {}", request.getUserId());
+                updateProfileConnections(request.getUserId(),request.getStatus(), Constants.DIRECTION.IN,request.getStatus()+"Connections");
 
-                }
             }
             response.put(Constants.ResponseStatus.MESSAGE, Constants.ResponseStatus.SUCCESSFUL);
             response.put(Constants.ResponseStatus.STATUS, HttpStatus.OK);

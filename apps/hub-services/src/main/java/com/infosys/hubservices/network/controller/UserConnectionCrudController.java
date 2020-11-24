@@ -27,16 +27,16 @@ public class UserConnectionCrudController {
 
     @PostMapping("/add")
     public ResponseEntity<Response> add(@RequestHeader String rootOrg,
-                                        @RequestBody List<ConnectionRequest> requests) throws Exception{
-        Response response = connectionService.add(rootOrg, requests);
+                                        @RequestBody ConnectionRequest request) throws Exception{
+        Response response = connectionService.add(rootOrg, request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
     }
 
     @PostMapping("/update")
     public ResponseEntity<Response> update(@RequestHeader String rootOrg,
-                                           @RequestBody List<ConnectionRequest> requests) throws Exception{
-        Response response = connectionService.update(rootOrg, requests);
+                                           @RequestBody ConnectionRequest request) throws Exception{
+        Response response = connectionService.update(rootOrg, request);
         return new ResponseEntity<>(response, HttpStatus.OK);
 
     }
