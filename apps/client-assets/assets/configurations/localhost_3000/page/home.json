@@ -167,36 +167,60 @@
                     "filters": [],
                     "request": {
                       "searchV6": {
-                        "locale": [
-                          "en"
+                        "filters": {
+                          "primaryCategory": [
+                            "Collection",
+                            "Resource",
+                            "Content Playlist",
+                            "Course",
+                            "Course Assessment",
+                            "Digital Textbook",
+                            "eTextbook",
+                            "Explanation Content",
+                            "Learning Resource",
+                            "Lesson Plan Unit",
+                            "Practice Question Set",
+                            "Teacher Resource",
+                            "Textbook Unit",
+                            "LessonPlan",
+                            "FocusSpot",
+                            "Learning Outcome Definition",
+                            "Curiosity Questions",
+                            "MarkingSchemeRubric",
+                            "ExplanationResource",
+                            "ExperientialResource",
+                            "Practice Resource",
+                            "TVLesson"
+                          ]
+                        },
+                        "query": "learn",
+                        "sort_by": {
+                          "lastUpdatedOn": "desc"
+                        },
+                        "fields": [
+                          "name",
+                          "appIcon",
+                          "mimeType",
+                          "gradeLevel",
+                          "identifier",
+                          "medium",
+                          "pkgVersion",
+                          "board",
+                          "subject",
+                          "resourceType",
+                          "primaryCategory",
+                          "contentType",
+                          "channel",
+                          "organisation",
+                          "trackable"
                         ],
-                        "pageSize": 12,
-                        "query": "all",
-                        "didYouMean": true,
-                        "sort": [
-                          {
-                            "lastUpdatedOn": "desc"
-                          }
-                        ],
-                        "filters": [
-                          {
-                            "andFilters": [
-                              {
-                                "lastUpdatedOn": [
-                                  "month"
-                                ]
-                              },
-                              {
-                                "contentType": [
-                                  "Course",
-                                  "Learning Path"
-                                ]
-                              }
-                            ]
-                          }
-                        ],
-                        "includeSourceFields": [
-                          "creatorLogo"
+                        "facets": [
+                          "board",
+                          "gradeLevel",
+                          "subject",
+                          "medium",
+                          "primaryCategory",
+                          "mimeType"
                         ]
                       }
                     }
