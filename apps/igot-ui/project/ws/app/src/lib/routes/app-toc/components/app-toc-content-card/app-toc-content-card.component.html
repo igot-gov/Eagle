@@ -121,8 +121,7 @@
       </div>
     </div>
 
-
-    <div class="children-container" *ngIf="viewChildren">
+    <div class="children-container" [hidden]="!viewChildren">
       <ws-app-toc-content-card [content]="child" [expandAll]="expandAll" [rootId]="rootId"
         [rootContentType]="rootContentType" *ngFor="let child of content?.children; trackBy: contentTrackBy">
       </ws-app-toc-content-card>
@@ -150,7 +149,7 @@
             </h2>
           </div>
           <div>
-            <span class="mat-body-strong content-type ws-mat-default-text">{{ content?.displayContentType }}</span>
+            <span class="mat-body-strong content-type ws-mat-default-text">{{ content?.contentType }}</span>
             <span class="ml-5">
               <!-- <ng-container *ngIf="content?.displayContentType">&nbsp;&nbsp;|&nbsp;&nbsp;</ng-container> -->
               <mat-icon class="time-icon">schedule</mat-icon>
@@ -160,15 +159,15 @@
         </div>
       </a>
       <div class="flex flex-wrap items-center justify-start sm:justify-end">
-        <div class="type-container resource" *ngIf="content?.category === 'Resource'">
+        <div class="type-container resource" *ngIf="content?.contentType === 'Resource'">
           <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Resource</span>
         </div>
-        <div class="type-container module" *ngIf="content?.category === 'Collection'">
+        <div class="type-container module" *ngIf="content?.contentType === 'Collection'">
           <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Module</span>
         </div>
-        <div class="type-container course" *ngIf="content?.category === 'Course'">
+        <div class="type-container course" *ngIf="content?.contentType === 'Course'">
           <mat-icon class="mr-1 custom-icon rotate-90">call_to_action</mat-icon>
           <span>Course</span>
         </div>
