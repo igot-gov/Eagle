@@ -1,13 +1,54 @@
-.card-deck-container {
+.table1 {
   width: 100%;
-  max-width: 1200px;
-  position: relative;
-  border-radius: 2px;
-  padding: 10px 10px 30px;
-  margin: 10px 10px 10px 10px;
-  background-color: #f5f5f5;
+  display: flex;
+  // flex: 1;
+  flex-direction: column;
 }
 
-.card-item {
-  padding: 3px 3px 3px 3px;
+.textclass {
+  word-break: break-word;
+  margin: 5px;
+  // word-break: break-all;
+}
+
+.search {
+  display: flex;
+  flex: 1;
+}
+
+.lsearch {
+  display: flex;
+  flex: 3
+}
+
+.rsearch {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.sinput {
+  width: 96%;
+  margin: 14px 0 0 0;
+}
+
+.searchText {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 23px 0 0 auto;
+}
+
+.small-list-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.new-mat-table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+}
+
+.new-row {
+  padding: 0.65em 0 0.65em 0;
 }

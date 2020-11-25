@@ -86,6 +86,10 @@ export const ROOT_WIDGET_CONFIG = {
     grid: 'gridLayout',
     newgrid: 'newGridLayout',
   },
+  table: {
+    _type: 'table',
+    cardTable: 'cardTable'
+  },
   menus: {
     _type: 'menus',
     leftMenu: 'leftMenu',

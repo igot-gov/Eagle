@@ -1,128 +1,137 @@
-<div fxLayout="row" fxFlex.md="70" fxLayoutWrap class="card-deck-container mat-elevation-z4">
-  <div fxFlex *ngFor="let metadata of widgetData" class="card-item">
-    <ws-widget-card-content [ngStyle]="{'width':'300' + 'px'}" [widgetData]="{
-                  content: content,
-                  cardSubType: 'cardStandard'
-                }"></ws-widget-card-content>
+<div class="example-container mat-elevation-z8">
+  <div class="example-table-container">
+    <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="widgetData.sortColumn"
+      [matSortDirection]="widgetData.sortState" [dataSource]="dataSource" class="example-table table1 responsiveTable">
+      <!-- Checkbox Column -->
+      <!-- <ng-container *ngIf="widgetData.needCheckBox === true" matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+            <ng-container *ngIf="widgetData.needHash" matColumnDef="SR">
+                <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+                <mat-cell *matCellDef="let element;let i = index"> {{i+1}}</mat-cell>
+            </ng-container> -->
+
+      <ng-container matColumnDef="{{col.key}}" *ngFor="let col of widgetData.columns">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <!-- <span *ngIf="col.isList"
+                        [matTooltip]="element[col.displayName]">{{filterList(element[col.key],col.prop) }}</span> -->
+          <span *ngIf="col.isList" class="textclass"
+            [matTooltip]="(element[col.key] | listPipe: col.prop).split('<br />').join(', ')">
+            <div innerHTML="{{element[col.key] | listPipe: col.prop }}"></div>
+          </span>
+          <img mat-card-image class="small-list-logo" *ngIf="col.image && element[col.image]" [src]="element[col.image]"
+            (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
+
+          <span *ngIf="!col.isList && !col.link" class="textclass">
+            {{element[col.key] || col.defaultValue}}
+          </span>
+
+          <a *ngIf="col.link" [routerLink]="col.link.path+element[col.link.dParams]"
+            routerLinkActive="router-link-active" class="textclass">
+            {{element[col.key] || col.defaultValue}}
+            <!-- {{col.appIcon}} -->
+          </a>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions" *ngIf="widgetData.actions && widgetData.actions.length > 0">
+        <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="action-cell">
+          <div *ngFor="let ac of widgetData.actions">
+            {{ac | json}}
+            <!-- <div *ngIf="ac.optional">
+              <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type" [icon]="ac.icon"
+                [disabled]="ac.disabled || false" [label]="ac.label" (click)="buttonClick(ac.name,row)"></app-button>
+            </div>
+            <div *ngIf="!ac.optional">
+              <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label" [disabled]="ac.disabled || false"
+                (click)="buttonClick(ac.name,row)"></app-button>
+            </div> -->
+          </div>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ActionsMenu" *ngIf="widgetData.actionsMenu">
+        <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
+          <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
+            {{widgetData.actionsMenu.headIcon}}</mat-icon>
+          <span *ngIf="!widgetData.actionsMenu.headIcon">Actions</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="action-cell">
+          <div class="flex">
+            <button mat-icon-button [matMenuTriggerFor]="moreMenu" [matMenuTriggerData]="{'data':row}">
+              <mat-icon>{{widgetData.actionsMenu.rowIcon}}</mat-icon>
+            </button>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row)">
+      </mat-row>
+    </mat-table>
   </div>
-  <!-- <div class="paginator mat-elevation-z4" *ngIf="productsDisplayed.length !== 0">
-    <md-paginator [length]="paginatorSize" [pageSize]="numberOfProductsDisplayedInPage" [pageSizeOptions]="[12, 24]"
-      (page)="updateProductsDisplayedInPage($event)">
-    </md-paginator>
-  </div> -->
+  <!-- <mat-paginator [length]="5" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]">
+    </mat-paginator> -->
 </div>
 
-
-<ng-template #cardStandard>
-  <mat-card class="card-standard-container mr-6" [ngClass]="{
-      greyOut:
-        widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
-          ? true
-          : widgetData?.intranetMode === 'greyOut' && showIntranetContent
-    }" (click)="(showIntranetContent || !isLiveOrMarkForDeletion) && showSnackbar()">
-    <!-- <ws-widget-content-progress
-      class="progress-bar"
-      *ngIf="widgetData.content?.identifier"
-      [contentId]="widgetData.content?.identifier"
-    ></ws-widget-content-progress> -->
-    <div class="display-contents" [ngClass]="{
-        disableClick:
-          widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
-            ? true
-            : widgetData?.intranetMode === 'greyOut' && showIntranetContent
-      }">
-      <ng-container *ngIf="!isCardFlipped">
-        <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted" i18n-matTooltip
-          matTooltip="Content may be expired or deleted" *ngIf="!isLiveOrMarkForDeletion"></div>
-        <div class="status-danger" role="note" i18n-aria-label aria-label="Intranet content" i18n-matTooltip
-          matTooltip="Available only in Company's network"
-          *ngIf="widgetData?.intranetMode === 'greyOut' && showIntranetContent"></div>
-        <!-- <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
-          [queryParams]="(widgetData.content | pipeContentRoute).queryParams" class="rounded-t" role="link"
-          aria-label="Content" i18n-aria-label="Content | Click to view"> -->
-        <div style="position: relative; z-index: 1;">
-          <img mat-card-image style="position: absolute; z-index: 2;" [src]="widgetData.content.appIcon"
-            class="card-img ws-mat-primary-lite-background" [wsUtilsDefaultThumbnail]="defaultThumbnail"
-            [alt]="widgetData.content.name" />
-          <div class="source-div">
-            <!-- [src]="sourseIcon(widgetData.content.sourceName)" -->
-            <img [src]="widgetData.content.creatorLogo" class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-              [alt]="(widgetData.content.sourceName + '_' + widgetData.content.identifier)" />
-            <!-- [title]="widgetData.content.sourceName" -->
-          </div>
-        </div>
-        <!-- </a> -->
-        <button *ngIf="showFlip" class="detail-button ws-mat-primary-lite-background-op30" mat-icon-button
-          (click)="isCardFlipped = true" aria-label="Details" i18n-aria-label="Details | Click to see details">
-          <mat-icon>flip_to_back</mat-icon>
-        </button>
-        <ws-widget-content-progress class="progress-bar" *ngIf="widgetData.content?.identifier"
-          [contentId]="widgetData.content?.identifier" [progress]="widgetData.content?.progress">
-        </ws-widget-content-progress>
-
-        <mat-card-content>
-          <a (click)="raiseTelemetry()" [routerLink]="(widgetData.content | pipeContentRoute).url"
-            [queryParams]="(widgetData.content | pipeContentRoute).queryParams" role="link" i18n-aria-label>
-
-            <div class="text-gray-time complexity flex-between flex-center">
-              <!-- <div *ngIf="widgetData.content.complexityLevel" i18n-title title="Complexity Level">
-                {{ widgetData.content.complexityLevel }}
-              </div> -->
-              <div *ngIf="showIsMode" i18n i18n-title title="Newly Added"
-                class="mode-tag px-2 ws-mat-accent-background">
-                Newly Added
-              </div>
-
-              <div *ngIf="widgetData.content.duration" class="duration">
-                <mat-icon>access_time</mat-icon>
-                <span class="time-text">{{ widgetData.content.duration | pipeDurationTransform: 'hms' }}</span>
-              </div>
-            </div>
-
-            <div [id]="'m-c-'+ widgetData.content?.identifier"
-              class="mat-title title-text ws-mat-text-block-fade-gradient">
-              {{ widgetData.content.name }}
-            </div>
-            <div class="ws-mat-primary-text description-text ws-mat-text-block-fade-gradient mb-10">
-              {{ widgetData.content.description | pipeHtmlTagRemoval }}
-              <!-- {{widgetData.content | json}} -->
-              <!-- {{widgetData.content.sourceName}} -->
-            </div>
-          </a>
-          <div class="mt-4 flex justify-between items-center absolute bottom-0 left-0 right-0 px-3 py-2">
-            <!-- <ws-widget-display-content-type
-              i18n-title
-              title="Content Type"
-              *ngIf="widgetData.content?.displayContentType"
-              class="ws-mat-primary-text font-normal"
-              [displayContentType]="widgetData.content?.displayContentType"
-            >
-            </ws-widget-display-content-type> -->
-            <ws-widget-display-content-type i18n-title title="Content Type" *ngIf="widgetData.content?.contentType"
-              class="ws-mat-primary-text font-normal" [displayContentType]="widgetData.content?.contentType==='Collection'
-              ?'Module'
-              :(widgetData.content?.contentType==='Learning Path'?'Program':widgetData.content?.contentType)">
-            </ws-widget-display-content-type>
-            <div class="flex items-center">
-              <ng-container [ngTemplateOutlet]="rating"></ng-container>
-              <button type="button" mat-icon-button i18n-aria-label [matMenuTriggerFor]="cardMenu">
-                <mat-icon>more_vertical</mat-icon>
-              </button>
-            </div>
-          </div>
-        </mat-card-content>
-      </ng-container>
-      <ng-container *ngIf="isCardFlipped">
-        <div class="flex items-center">
-          <h2 class="mat-subheading-2 flex-1 min-w-0 margin-remove-bottom" i18n>Reason</h2>
-          <button mat-icon-button (click)="isCardFlipped = false">
-            <mat-icon>close</mat-icon>
-          </button>
-        </div>
-        <p class="text-justify mat-body-1">
-          {{ widgetData.content.reason }}
-        </p>
-      </ng-container>
-    </div>
-  </mat-card>
-</ng-template>
+<mat-menu #moreMenu="matMenu">
+  <ng-template matMenuContent let-rowData="data">
+    <ng-container *ngFor="let menu of widgetData.actionsMenu.menus">
+      <a mat-menu-item (click)="actionsClick.emit({'action':menu.action,data:rowData})">
+        <!-- (click)="takeAction('edit')" -->
+        <mat-icon>{{menu.icon}}</mat-icon>
+        <span i18n>{{menu.name}}</span>
+        <!-- {{menuItems | json}} -->
+      </a>
+    </ng-container>
+  </ng-template>
+  <!-- <a *ngIf="showMenuItem('edit')" mat-menu-item (click)="takeAction('edit')">
+    <mat-icon>edit</mat-icon>
+    <span i18n>Edit </span>
+  </a>
+  <a *ngIf="showMenuItem('delete')" mat-menu-item (click)="takeAction('delete')">
+    <mat-icon>delete</mat-icon>
+    <span i18n>Delete </span>
+  </a>
+  <a *ngIf="showMenuItem('comments')" mat-menu-item (click)="viewComments()">
+    <mat-icon>comment</mat-icon>
+    <span i18n>View comments</span>
+  </a>
+  <a *ngIf="showMenuItem('publish')" mat-menu-item (click)="takeAction('publish')">
+    <mat-icon>publish</mat-icon>
+    <span i18n>Publish</span>
+  </a>
+  <a *ngIf="showMenuItem('unpublish')" mat-menu-item (click)="takeAction('unpublish')">
+    <mat-icon>reply</mat-icon>
+    <span i18n>Unpublish content</span>
+  </a>
+  <a *ngIf="showMenuItem('review')" mat-menu-item (click)="takeAction('review')">
+    <mat-icon>rate_review</mat-icon>
+    <span i18n>Review</span>
+  </a>
+  <a *ngIf="showMenuItem('moveToDraft')" mat-menu-item (click)="takeAction('moveToDraft')">
+    <mat-icon>reply</mat-icon>
+    <span i18n>Recall content to draft</span>
+  </a>
+  <a *ngIf="showMenuItem('moveToInReview')" mat-menu-item (click)="takeAction('moveToInReview')">
+    <mat-icon>reply</mat-icon>
+    <span i18n>Send content to previous state</span>
+  </a>
+  <ng-container>
+    <a *ngIf="showMenuItem('lang')" mat-menu-item [matMenuTriggerFor]="langMenu">
+      <mat-icon>translate</mat-icon>
+      <span i18n>Languages</span>
+    </a>
+  </ng-container> -->
+</mat-menu>

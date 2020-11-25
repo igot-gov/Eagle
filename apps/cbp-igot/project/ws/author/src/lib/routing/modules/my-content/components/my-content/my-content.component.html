@@ -107,7 +107,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="cardContent" class="flex flex-wrapped flex-dynamic margin-xs">
+    <div *ngIf="cardContent" class="flex flex-wrapped flex-dynamic margin-s">
       <ng-template #oldDesign>
         <div class="margin-s" *ngFor="let content of cardContent">
           <ws-auth-root-content-card [data]="content" [forExpiry]="status === 'expiry'"

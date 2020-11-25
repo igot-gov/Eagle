@@ -14,8 +14,26 @@
   margin-top: 2rem !important;
 }
 
+
+
 .text-white {
   color: white !important;
+}
+
+.small-list-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.new-mat-table {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+}
+
+.new-row {
+  padding: 0.65em 0 0.65em 0;
 }
 
 .filter {

@@ -131,6 +131,8 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 // import { CardActivityModule } from './card-activity/card-activity.module'
 import { LeftMenuModule } from './left-menu/left-menu.module'
 import { LeftMenuComponent } from './left-menu/left-menu.component'
+import { CardTableModule } from './card-table/card-table.module'
+import { CardTableComponent } from './card-table/card-table.component'
 // import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
 
 export const WIDGET_REGISTERED_MODULES = [
@@ -153,6 +155,7 @@ export const WIDGET_REGISTERED_MODULES = [
   BtnSettingsModule,
   CardBreadcrumbModule,
   CardContentModule,
+  CardTableModule,
   // CardLearnModule,
   // CardWelcomeModule,
   // CardNetworkModule,
@@ -284,6 +287,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.card._type,
     widgetSubType: ROOT_WIDGET_CONFIG.card.content,
     component: CardContentComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.card._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.table.cardTable,
+    component: CardTableComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.contentStrip._type,

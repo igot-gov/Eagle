@@ -1,37 +1,52 @@
-import { NsContent } from '../_services/widget-content.model'
-
-export namespace NsTableCard {
-  export interface ITableCard {
-    content: NsContent.IContent
-    cardSubType: TCardSubType
-    context: { pageSection: string; position?: number }
-    intranetMode?: 'greyOut' | 'hide'
-    deletedMode?: 'greyOut' | 'hide'
-    likes?: number
-    contentTags?: IContentTags
-
+export interface IColums {
+  displayName: String
+  key: String
+  image?: string
+  isList?: boolean
+  prop?: string
+  link?: {
+    path: string
+    dParams?: string
+    sParams?: string
   }
-  export interface IContentTags {
-    daysSpan?: number
-    excludeContentType?: NsContent.EContentTypes[]
-    excludeMimeType?: string[]
-    tag: string
-    criteriaField?: string
-  }
-  export type TCardSubType =
-    | 'standard'
-    | 'minimal'
-    | 'space-saving'
-    | 'card-user-details'
-    | 'basic-info'
-    | 'basic-details'
-    | 'card-description-back'
-    | 'network-card'
-
-  export enum EContentStatus {
-    LIVE = 'Live',
-    EXPIRED = 'Expired',
-    DELETED = 'Deleted',
-    MARK_FOR_DELETION = 'MarkedForDeletion',
-  }
+  defaultValue: any
 }
+export interface IAction {
+  name: String
+  icon: String
+  type: string
+  disabled?: boolean
+  label: string
+  condition?: string
+  optional?: boolean
+  optional_key?: string
+  optional_Value?: string
+}
+
+export interface ITableMenu {
+  action: string
+  disabled: boolean
+  icon: string
+  name: string
+}
+export interface IActionsMenu {
+  headIcon: String
+  rowIcon: string
+  menus: ITableMenu[]
+}
+export interface ITable {
+  // data: any[]
+  columns: IColums[]
+  actions: IAction[]
+  actionsMenu?: IActionsMenu
+  needHash: boolean
+  needCheckBox: boolean
+  sortState?: string
+  sortColumn?: string
+}
+
+// export interface ITable {
+//   data: any[]
+//   actions: IAction[]
+//   columns: IColums[]
+// }

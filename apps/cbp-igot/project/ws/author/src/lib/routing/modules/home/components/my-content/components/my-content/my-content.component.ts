@@ -25,6 +25,7 @@ import { MyContentService } from '../../services/my-content.service'
 import { map } from 'rxjs/operators'
 /* tslint:disable */
 import _ from 'lodash'
+import { ITable } from '@ws-widget/collection'
 /* tslint:enable */
 @Component({
   selector: 'ws-auth-my-content',
@@ -34,13 +35,14 @@ import _ from 'lodash'
 export class MyContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
   newDesign = true
+  tableData!: ITable
   // currentFilter = 'publish'
   filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
   filterMenuTreeFlattener: any
   public cardContent!: any[]
   public filters: any[] = []
   // public status = 'draft'
-  public status = 'publish'
+  public status = 'published'
   public fetchError = false
   contentType: string[] = []
   complexityLevel: string[] = []
@@ -107,8 +109,36 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.dataSource.data = this.filterMenuItems
     this.userId = this.accessService.userId
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
+    this.initCardTable()
   }
-
+  initCardTable() {
+    this.tableData = {
+      columns: [
+        {
+          displayName: 'Course Name', key: 'name', isList: false, prop: '',
+          link: { path: '/author/editor/', dParams: 'identifier' },
+          defaultValue: 'Untitled Content',
+          image: 'appIcon'
+        },
+        { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA' },
+        { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
+        { displayName: 'Duration', key: 'duration', isList: false, prop: '', defaultValue: 0 },
+      ],//  :> this will load from json
+      actions: [], // :> this will load from json
+      needCheckBox: false,
+      needHash: false,
+      sortColumn: 'name',
+      sortState: 'asc',
+      actionsMenu: {
+        headIcon: 'apps',
+        menus: [
+          { name: 'Edit', action: 'edit', disabled: false, icon: 'edit' },
+          { name: 'Delete', action: 'delete', disabled: false, icon: 'delete' }
+        ],
+        rowIcon: 'more_vert'
+      }
+    }
+  }
   ngOnDestroy() {
     if (this.routerSubscription.unsubscribe) {
       this.routerSubscription.unsubscribe()
@@ -125,7 +155,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.ordinals = this.authInitService.ordinals
     this.allLanguages = this.authInitService.ordinals.subTitles || []
     this.activatedRoute.queryParams.subscribe(params => {
-      this.status = params.status
+      this.status = params.status || 'published'
       this.setAction()
       this.fetchContent(false)
     })
@@ -173,7 +203,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
         break
     }
   }
-
+  actionClick(event: any) {
+    if (event) {
+      console.log(event)
+    }
+  }
   fetchContent(loadMoreFlag: boolean, changeFilter = true) {
     const searchV6Data = this.myContSvc.getSearchBody(
       this.status,

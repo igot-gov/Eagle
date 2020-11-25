@@ -40,10 +40,15 @@
     <span class="flex mat-h1 mt-1"> All CBPs</span>
     <div class="flex flex-1 flex-column margin-fix">
       <div class="flex flex-1 filter max-height-60">
+        <a [routerLink]="['/author/my-content']" [queryParams]="{ status: 'published' }"
+          routerLinkActive=" router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'published',
+'ws-mat-accent-border font-medium':status !== 'published'}" mat-button role="button">
+          Live {{this.count && this.count['published']? '('+this.count['published']+')': null }}</a>
+
         <a [routerLink]="['/author/my-content']" [queryParams]="{ status: 'publish' }"
           routerLinkActive=" router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'publish',
-'ws-mat-accent-border font-medium':status !== 'publish'}" mat-button role="button">
-          Published {{this.count && this.count['publish']? '('+this.count['publish']+')': null }}</a>
+  'ws-mat-accent-border font-medium':status !== 'publish'}" mat-button role="button">
+          Publish {{this.count && this.count['publish']? '('+this.count['publish']+')': null }}</a>
 
         <a [routerLink]="['/author/my-content']" [queryParams]="{ status: 'inreview' }"
           routerLinkActive="router-link-active" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : status === 'inreview',
@@ -94,7 +99,7 @@
       </div>
     </nav> -->
     <div class="flex flex-wrapped flex-between margin-horizontal-s margin-top-xs">
-      <!-- <div>
+      <div>
         <h4 *ngIf="filterMenuItems.length" class="ws-mat-primary-text font-size-m font-weight-bold">
           <span i18n> Apply Filters</span>
           <button mat-icon-button color="primary" class="text-middle" (click)="sideNavBarOpened = true">
@@ -112,7 +117,7 @@
             <mat-icon [color]="'primary'" matChipRemove>cancel</mat-icon>
           </mat-chip>
         </mat-chip-list>
-      </div> -->
+      </div>
       <div class="flex items-center search border border-solid search-border">
         <div class="border-right flex items-center" *ngIf="allLanguages?.length && allLanguages?.length >1">
           <button mat-button [matMenuTriggerFor]="sortLang">
@@ -132,21 +137,27 @@
           <mat-icon>search</mat-icon>
         </div> -->
       </div>
-      <button mat-button class="text-white ws-mat-primary-background">Create</button>
+      <button mat-button class="text-white ws-mat-primary-background" (click)="layout=!layout">Create</button>
     </div>
-    <div *ngIf="cardContent" class="flex flex-wrapped flex-dynamic margin-xs">
-      <ng-template #oldDesign>
+    <div *ngIf="cardContent && layout" class="flex flex-wrapped flex-dynamic margin-xs">
+      <!-- <ng-template #oldDesign>
         <div class="margin-s" *ngFor="let content of cardContent">
           <ws-auth-root-content-card [data]="content" [forExpiry]="status === 'expiry'"
             [forDelete]="status === 'deleted'" [ordinals]="ordinals" (action)="action($event)">
           </ws-auth-root-content-card>
         </div>
-      </ng-template>
-      <ng-container *ngIf="newDesign; else oldDesign">
-        <ws-auth-content-card-v2 (action)="action({ type: $event.action, data: $event.content })"
-          [perspective]="currentAction" *ngFor="let content of cardContent" [content]="content">
-        </ws-auth-content-card-v2>
-      </ng-container>
+      </ng-template> -->
+      <!-- <ng-container *ngIf="newDesign; else oldDesign"> -->
+      <ws-auth-content-card-v2 (action)="action({ type: $event.action, data: $event.content })"
+        [perspective]="currentAction" *ngFor="let content of cardContent" [content]="content">
+      </ws-auth-content-card-v2>
+      <!-- </ng-container> -->
+    </div>
+    <div *ngIf="cardContent && !layout" class="flex flex-wrapped flex-dynamic margin-xs">
+      <ws-widget-table-card-content class="flex-1" [widgetData]="tableData" [data]="cardContent"
+        (actionsClick)="actionClick($event)">
+      </ws-widget-table-card-content>
+
     </div>
     <div class="text-right margin-right-xxl margin-bottom-m" *ngIf="showLoadMore">
       <button mat-raised-button [color]="'primary'" (click)="loadMore()" i18n>Load More...</button>
