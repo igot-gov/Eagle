@@ -58,6 +58,12 @@ proxiesV8.use('/sunbird/*',
   proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/action/content/v3/read/do_11314967009903411214`)
 )
 
+proxiesV8.use('/sunbirdigot/*',
+  // tslint:disable-next-line: max-line-length
+  proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/api/content/v1/search`)
+)
+
+
 proxiesV8.use('/api/user/v2/read',
   // tslint:disable-next-line: max-line-length
   proxyCreatorToAppentUserId(express.Router(), `https://igot-sunbird.idc.tarento.com/api/user/v2/read/`)

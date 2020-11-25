@@ -16,6 +16,11 @@ proxy.on('proxyReq', (proxyReq: any, req: any, _res: any, _options: any) => {
   proxyReq.setHeader('x-authenticated-user-token', extractUserToken(req))
   // tslint:disable-next-line: no-console
   console.log('proxyReq.headers:', proxyReq.header)
+  if (req.body) {
+    var bodyData = JSON.stringify(req.body);
+    proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData))
+    proxyReq.write(bodyData)
+    }
 })
 
 export function proxyCreatorRoute(route: Router, targetUrl: string, timeout = 10000): Router {
