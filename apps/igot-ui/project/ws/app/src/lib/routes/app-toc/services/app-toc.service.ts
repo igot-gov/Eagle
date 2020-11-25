@@ -57,7 +57,7 @@ export class AppTocService {
     }
     if (content) {
       if (
-        content.artifactUrl.match(/youtu(.)?be/gi) &&
+        content.artifactUrl && content.artifactUrl.match(/youtu(.)?be/gi) &&
         this.configSvc.userProfile &&
         this.configSvc.userProfile.country === 'China'
       ) {

@@ -60,9 +60,9 @@ detailsApi.get('/wtoken', async (req, res) => {
     // const url = API_END_POINTS.pidProfile
     // tslint:disable-next-line: no-commented-code
     // const body = {
-    //   json: {
-    //     token: kcToken,
-    //   },
+    // json: {
+    // token: kcToken,
+    // },
     // }
     // const options: request.CoreOptions = {
     //   headers: {
@@ -80,37 +80,37 @@ detailsApi.get('/wtoken', async (req, res) => {
     logInfoHeading('==========WToken API Request===============')
     // tslint:disable-next-line: no-commented-code
     // request.post(url, options).pipe(res)
-    // request.post(url, options, async (error, _res, body) => {
-    //   if (error) {
-    //     logError(`Error on wtoken api call to user profile service: `, error)
-    //   }
-    //   if (body.user) {
-    //     const user = body.user
-    //     // Check if user is present in NodeBB NodeBB DiscussionHub
-    //     // tslint:disable-next-line: no-any
-    //     const userPresent = await getUserByEmail(user.email).catch(async (err: any) => {
-    //       if (err.response && (err.response.status === 404)) {
-    //         // If user is not already present in nodeBB NodeBB DiscussionHub
-    //         // then create the user
-    //         const reqToDiscussionHub = {
-    //           email: user.email,
-    //           fullname: `${user.first_name} ${user.last_name}`,
-    //           password: CONSTANTS.DISCUSSION_HUB_DEFAULT_PASSWORD,
-    //           username: user.wid,
-    //         }
-    //         // tslint:disable-next-line: no-any
-    //         await createDiscussionHubUser(reqToDiscussionHub).catch((createDiscussionHubUserErr: any) => {
-    //           logError(`Creatin of User failed..!:`, createDiscussionHubUserErr)
-    //           res.send(body)
-    //         })
-    //       }
-    //     })
-    //     if (userPresent) {
-    //       logInfo('User already present in NodeBB DiscussionHub. Skiping create')
-    //     }
-    //   }
-    //   res.send(body)
-    // })
+    request.post(url, options, async (error, _res, body) => {
+      if (error) {
+        logError(`Error on wtoken api call to user profile service: `, error)
+      }
+      if (body.user) {
+        const user = body.user
+        // Check if user is present in NodeBB NodeBB DiscussionHub
+        // tslint:disable-next-line: no-any
+        const userPresent = await getUserByEmail(user.email).catch(async (err: any) => {
+          if (err.response && (err.response.status === 404)) {
+            // If user is not already present in nodeBB NodeBB DiscussionHub
+            // then create the user
+            const reqToDiscussionHub = {
+              email: user.email,
+              fullname: `${user.first_name} ${user.last_name}`,
+              password: CONSTANTS.DISCUSSION_HUB_DEFAULT_PASSWORD,
+              username: user.wid,
+            }
+            // tslint:disable-next-line: no-any
+            await createDiscussionHubUser(reqToDiscussionHub).catch((createDiscussionHubUserErr: any) => {
+              logError(`Creatin of User failed..!:`, createDiscussionHubUserErr)
+              res.send(body)
+            })
+          }
+        })
+        if (userPresent) {
+          logInfo('User already present in NodeBB DiscussionHub. Skiping create')
+        }
+      }
+      res.send(body)
+    })
     // tslint:disable-next-line: max-line-length
     res.json({ kid_updated: false, user: { wid: '9cdd9f76-2584-4ae5-940d-3f51dce020dc', root_org: 'igot', org: 'dopt', is_active: null, account_expiry_date: null, kid: 'f593ca95-d435-4d95-82f5-e02d2827ecea', imported_source_name: null, source_id: null, username: null, first_name: 'Christopher', last_name: "F'des", middle_name: 'B', known_as: null, salutation: null, email: 'christopher.fernandes@tarento.com', gender: null, dob: null, languages_known: null, preferred_language: null, source_profile_picture: null, residence_country: null, residence_state: null, residence_city: null, contact_phone_number_office: null, contact_phone_number_home: null, contact_phone_number_personal: null, employment_status: null, contract_type: null, job_title: null, job_role: null, department_name: 'igot', sub_department_name: null, unit_name: null, organization_location_country: null, organization_location_state: null, organization_location_city: null, time_inserted: '2020-06-13T15:45:04.200Z', time_updated: '2020-10-27T09:39:03.924Z', json_unmapped_fields: null, source_data: null, manager_id: null, user_properties: null, time_zone: null, social_media_profiles: null, autocomplete_filters: null } })
   } catch (err) {

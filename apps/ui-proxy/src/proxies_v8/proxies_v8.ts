@@ -4,8 +4,8 @@ import {
   ilpProxyCreatorRoute,
   proxyCreatorRoute,
   proxyCreatorSunbird,
-  proxyCreatorToAppentUserId,
-  scormProxyCreatorRoute,
+  proxyCreatorSunbirdSearch,
+  proxyCreatorToAppentUserId, scormProxyCreatorRoute
 } from '../utils/proxyCreator'
 
 export const proxiesV8 = express.Router()
@@ -53,9 +53,14 @@ proxiesV8.use(
   proxyCreatorRoute(express.Router(), CONSTANTS.WEB_HOST_PROXY + '/web-hosted')
 )
 
+proxiesV8.use('/sunbirdigot/*',
+  // tslint:disable-next-line: max-line-length
+  proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/content/v1/search`)
+)
+
 proxiesV8.use('/sunbird/*',
   // tslint:disable-next-line: max-line-length
-  proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/action/content/v3/read/do_11314967009903411214`)
+  proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/action/content/v3/read/`)
 )
 
 proxiesV8.use('/api/user/v2/read',

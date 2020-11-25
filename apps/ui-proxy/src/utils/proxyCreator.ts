@@ -1,7 +1,6 @@
 import { Router } from 'express'
 import { createProxyServer } from 'http-proxy'
 import { extractUserIdFromRequest, extractUserToken } from '../utils/requestExtract'
-import { logInfo } from './logger'
 
 const proxyCreator = (timeout = 10000) => createProxyServer({
   timeout,
@@ -16,6 +15,11 @@ proxy.on('proxyReq', (proxyReq: any, req: any, _res: any, _options: any) => {
   proxyReq.setHeader('x-authenticated-user-token', extractUserToken(req))
   // tslint:disable-next-line: no-console
   console.log('proxyReq.headers:', proxyReq.header)
+  if (req.body) {
+    const bodyData = JSON.stringify(req.body)
+    proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData))
+    proxyReq.write(bodyData)
+  }
 })
 
 export function proxyCreatorRoute(route: Router, targetUrl: string, timeout = 10000): Router {
@@ -56,15 +60,28 @@ export function scormProxyCreatorRoute(route: Router, baseUrl: string): Router {
 
 export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
-    logInfo('proxyCreatorSunbird ---')
+
     // tslint:disable-next-line: no-console
-    console.log('req headers', req.headers)
+    console.log('REQ_URL_ORIGINAL proxyCreatorSunbird', req.originalUrl)
+
+    const lastSlug = req.originalUrl.split('/')
+    const lastSlugId = lastSlug.pop() || ''
+    const contentId = lastSlugId.split('?')[0]
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl + contentId,
+    })
+  })
+  return route
+}
+
+export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+
     // tslint:disable-next-line: no-console
-    console.log('req header', req.header)
-    // tslint:disable-next-line: no-console
-    console.log('REQ_URL_ORIGINAL', req.originalUrl)
-    // tslint:disable-next-line: no-console
-    console.log('REQ_URL', req.url)
+    console.log('REQ_URL_ORIGINAL proxyCreatorSunbirdSearch', req.originalUrl)
+
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
@@ -77,15 +94,10 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
 export function proxyCreatorToAppentUserId(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
     const userId = extractUserIdFromRequest(req).split(':')
-    logInfo('proxyCreatorSunbird ---')
+
     // tslint:disable-next-line: no-console
-    console.log('req headers', req.headers)
-    // tslint:disable-next-line: no-console
-    console.log('req header', req.header)
-    // tslint:disable-next-line: no-console
-    console.log('REQ_URL_ORIGINAL', req.originalUrl)
-    // tslint:disable-next-line: no-console
-    console.log('REQ_URL', req.url)
+    console.log('REQ_URL_ORIGINAL proxyCreatorToAppentUserId', req.originalUrl)
+
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
