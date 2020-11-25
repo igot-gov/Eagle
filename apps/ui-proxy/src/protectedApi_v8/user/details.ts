@@ -60,9 +60,9 @@ detailsApi.get('/wtoken', async (req, res) => {
     const url = API_END_POINTS.pidProfile
     // tslint:disable-next-line: no-commented-code
     // const body = {
-    //   json: {
-    //     token: kcToken,
-    //   },
+    // json: {
+    // token: kcToken,
+    // },
     // }
     const options: request.CoreOptions = {
       headers: {
