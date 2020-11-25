@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './routes/home/home.component'
 import { PrivilegesComponent } from './routes/privileges/privileges.component'
-import { UsersViewComponent } from '../../routes/home/routes/users-view/users-view.component'
+import { UsersComponent } from './routes/users/users.component'
 
 const routes: Routes = [
   {
@@ -19,8 +19,8 @@ const routes: Routes = [
         component: PrivilegesComponent,
       },
       {
-        path: 'home/users',
-        component: UsersViewComponent,
+        path: 'users',
+        component: UsersComponent,
       },
     ],
   },

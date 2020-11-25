@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
+        this.bindUrl(event.urlAfterRedirects.replace('/app/roles-access/', ''))
         this.widgetData = this.activeRoute.snapshot.data &&
           this.activeRoute.snapshot.data.pageData.data.menus || []
       }
