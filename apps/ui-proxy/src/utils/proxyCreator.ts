@@ -17,7 +17,7 @@ proxy.on('proxyReq', (proxyReq: any, req: any, _res: any, _options: any) => {
   // tslint:disable-next-line: no-console
   console.log('proxyReq.headers:', proxyReq.header)
   if (req.body) {
-    var bodyData = JSON.stringify(req.body);
+    const bodyData = JSON.stringify(req.body)
     proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData))
     proxyReq.write(bodyData)
   }
@@ -61,7 +61,6 @@ export function scormProxyCreatorRoute(route: Router, baseUrl: string): Router {
 
 export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
-    logInfo('proxyCreatorSunbird ---')
     // tslint:disable-next-line: no-console
     console.log('req headers', req.headers)
     // tslint:disable-next-line: no-console
@@ -84,7 +83,6 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
 
 export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
-    logInfo('proxyCreatorSunbird ---')
     // tslint:disable-next-line: no-console
     console.log('req headers', req.headers)
     // tslint:disable-next-line: no-console
@@ -93,13 +91,10 @@ export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _tim
     console.log('REQ_URL_ORIGINAL', req.originalUrl)
     // tslint:disable-next-line: no-console
     console.log('REQ_URL', req.url)
-    // const lastSlug = req.originalUrl.split('/')
-    // const lastSlugId = lastSlug.pop() || ''
-    // const contentId = lastSlugId.split('?')[0]
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
-      target: targetUrl
+      target: targetUrl,
     })
   })
   return route
@@ -108,7 +103,6 @@ export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _tim
 export function proxyCreatorToAppentUserId(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
     const userId = extractUserIdFromRequest(req).split(':')
-    logInfo('proxyCreatorSunbird ---')
     // tslint:disable-next-line: no-console
     console.log('req headers', req.headers)
     // tslint:disable-next-line: no-console
