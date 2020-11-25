@@ -4,10 +4,10 @@
 
       <div class="flex flex-1 flex-column">
         <div class="flex flex-1 flex-wrap margin-bottom-xs margin-top-xs" role="menubar">
-          <a class="flex cursor-pointer simple-hubs-link margin-left-0" (click)="toggleVisibility()"
-            href="javascript:void(0)" role="menuitem" accesskey="H" i18n-aria-label i18n-aria-label>
-            <mat-icon class="margin-right-xs ws-mat-default-text">apps</mat-icon>
-            <span class="margin-auto ws-mat-default-text font-bold">HUBS</span>
+          <a class="flex cursor-pointer simple-hubs-link margin-left-0" [routerLink]="['/app/home/users']"
+            href=" javascript:void(0)" role="menuitem" accesskey="H" i18n-aria-label i18n-aria-label>
+            <mat-icon class="margin-right-xs ws-mat-default-text">home</mat-icon>
+            <span class="margin-auto ws-mat-default-text font-bold">Home</span>
           </a>
 
           <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">

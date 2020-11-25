@@ -51,7 +51,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'app/roles-access',
+    path: 'app/roles',
     loadChildren: () => import('./routes/route-roles-access-module').then(u => u.RouteAccessAppModule),
     canActivate: [GeneralGuard],
     data: {

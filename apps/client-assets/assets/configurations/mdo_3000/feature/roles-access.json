@@ -13,7 +13,9 @@
           "uri": ""
         },
         "enabled": true,
-        "routerLink": "/app/roles-access/privileges"
+        "paramaterName":"role",
+        "routerLink": "/app/roles/<param>/privileges",
+        "customRouting": true
       },
       {
         "name": "Users",
@@ -25,7 +27,9 @@
           "uri": ""
         },
         "enabled": true,
-        "routerLink": "/app/roles-access/users"
+        "paramaterName":"role",
+        "routerLink": "/app/roles/<param>/users",
+        "customRouting": true
       }
     ]
   }

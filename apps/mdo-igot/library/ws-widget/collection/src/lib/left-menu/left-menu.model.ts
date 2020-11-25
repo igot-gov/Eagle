@@ -9,4 +9,6 @@ export interface ILeftMenu {
   }
   enabled: boolean
   routerLink: string
+  paramaterName?: string
+  customRouting: boolean
 }

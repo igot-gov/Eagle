@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public screenSizeIsLtMedium = false
   sideNavBarOpened = true
   role: any
-
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {

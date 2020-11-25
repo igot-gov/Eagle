@@ -19,7 +19,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   /* tslint:disable */
   Math: any
   /* tslint:enable */
-  currentFilter = 'timestamp'
+  currentFilter = 'underreview'
   discussionList!: any
   discussProfileData!: any
   portalProfile!: NSProfileDataV2.IProfile

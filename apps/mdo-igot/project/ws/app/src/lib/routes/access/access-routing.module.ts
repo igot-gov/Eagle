@@ -5,21 +5,21 @@ import { PrivilegesComponent } from './routes/privileges/privileges.component'
 import { UsersComponent } from './routes/users/users.component'
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'privileges',
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: 'privileges',
+  // },
   {
     path: '',
     component: HomeComponent,
     children: [
       {
-        path: 'privileges',
+        path: ':role/privileges',
         component: PrivilegesComponent,
       },
       {
-        path: 'users',
+        path: ':role/users',
         component: UsersComponent,
       },
     ],
