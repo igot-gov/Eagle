@@ -127,7 +127,7 @@ export class GoalCreateCustomComponent implements OnInit {
   scroll(shareGoalStep: HTMLElement) {
     setTimeout(() => {
       shareGoalStep.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
+    },         100)
   }
 
   createGoal() {

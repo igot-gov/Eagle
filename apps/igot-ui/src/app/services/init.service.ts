@@ -233,7 +233,7 @@ export class InitService {
   }
 
   private async fetchStartUpDetails(): Promise<IDetailsResponse> {
-    let roles: string[] = []
+    let userRoles: string[] = []
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
       let userPidProfile: NsUser.IUserPidProfileV2 | null = null
       try {
@@ -246,7 +246,8 @@ export class InitService {
       }
       if (userPidProfile) {
         if (userPidProfile.result.response.organisations.length > 0) {
-          roles = (userPidProfile.result.response.organisations[0].roles.length > 0) ? userPidProfile.result.response.organisations[0].roles : []
+          const organisationData = userPidProfile.result.response.organisations
+          userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
         }
         this.configSvc.unMappedUser = userPidProfile.result.response
         this.configSvc.userProfile = {
@@ -254,8 +255,9 @@ export class InitService {
           email: userPidProfile.result.response.email,
           givenName: userPidProfile.result.response.firstName,
           userId: userPidProfile.result.response.userId,
-          
-          userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '} ${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '
+
+          userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}
+          ${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '
             }`,
           dealerCode: null,
           isManager: false,
@@ -288,10 +290,10 @@ export class InitService {
     //   this.configSvc.userRoles.add('is_manager')
     // }
     // tslint:disable-next-line: max-line-length
-    const details = { group: [], profileDetailsStatus: true, roles: roles, tncStatus: true }
+    const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
     this.configSvc.hasAcceptedTnc = details.tncStatus
     this.configSvc.profileDetailsStatus = details.profileDetailsStatus
-    this.configSvc.userRoles = new Set(roles)
+    this.configSvc.userRoles = new Set(userRoles)
     return details
   }
 

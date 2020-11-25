@@ -51,6 +51,7 @@ export class ViewerResolve
       )
     ).pipe(
       tap(content => {
+        // tslint:disable-next-line: no-parameter-reassignment
         content = content.result.content
         if (content.status === 'Deleted' || content.status === 'Expired') {
           this.router.navigate([
@@ -65,8 +66,7 @@ export class ViewerResolve
 
         if (resourceType === 'unknown') {
           this.router.navigate([
-            `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(content.mimeType)}/${
-            content.identifier
+            `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(content.mimeType)}/${content.identifier
             }`,
           ])
         } else if (resourceType === VIEWER_ROUTE_FROM_MIME(content.mimeType)) {
@@ -82,11 +82,11 @@ export class ViewerResolve
         }
       }),
       map(data => {
+        // tslint:disable-next-line: no-parameter-reassignment
         data = data.result.content
         if (resourceType === 'unknown') {
           this.router.navigate([
-            `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(data.mimeType)}/${
-            data.identifier
+            `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(data.mimeType)}/${data.identifier
             }`,
           ])
         } else if (resourceType === VIEWER_ROUTE_FROM_MIME(data.mimeType)) {

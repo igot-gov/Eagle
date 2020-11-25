@@ -20,6 +20,20 @@ export interface ISearchRequest {
   didYouMean?: boolean
 }
 
+export interface ISearchRequestV2 {
+  request: {
+    filters: {
+      primaryCategory: string[]
+    },
+    query: string,
+    sort_by: { lastUpdatedOn: string },
+    fields: [
+    ],
+    facets: [
+    ]
+  }
+}
+
 export interface IFilterUnitResponse {
   id?: string
   type: string

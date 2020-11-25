@@ -15,8 +15,8 @@ export class TrainingService {
     private configSvc: ConfigurationsService,
   ) { }
 
-  getTrainingCountsForSearchResults(searchResults: NSSearch.ISearchApiResult) {
-    const identifiers: string[] = searchResults.result
+  getTrainingCountsForSearchResults(searchResults: NSSearch.ISearchV6ApiResultV2) {
+    const identifiers: string[] = searchResults.result.content
       .filter(content => this.isValidTrainingContent(content))
       .map<string>(course => course.identifier)
 
@@ -26,7 +26,7 @@ export class TrainingService {
 
     this.trainingApi.getTrainingCountsMultiple(identifiers).subscribe(
       (trainingCounts: { [type: string]: number }) => {
-        searchResults.result.forEach(content => {
+        searchResults.result.content.forEach(content => {
           if (trainingCounts[content.identifier]) {
             content.trainingLHubCount = trainingCounts[content.identifier]
           }
