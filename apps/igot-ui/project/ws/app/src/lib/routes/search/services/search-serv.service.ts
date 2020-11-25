@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs'
 import { KnowledgeHubApiService } from '../../infy/routes/knowledge-hub/apis/knowledge-hub-api.service'
 import { IKhubAutoMation, IKhubFilterObj, IKhubItemTile, IKhubKshop, IKhubProject, IKhubViewResultDocs, IKhubViewResultProject, ISearchObjForSearch } from '../../infy/routes/knowledge-hub/models/knowledgeHub.model'
 import { SearchApiService } from '../apis/search-api.service'
-import { IFilterUnitItem, IFilterUnitResponse, ISearchAutoComplete, ISearchQuery, ISearchRequest, ISearchSocialSearchPartialRequest, ISocialSearchRequest } from '../models/search.model'
+import { IFilterUnitItem, IFilterUnitResponse, ISearchAutoComplete, ISearchQuery, ISearchRequestV2, ISearchSocialSearchPartialRequest, ISocialSearchRequest } from '../models/search.model'
 
 const API_END_POINTS = {
   translateFiltersBase: '/apis/protected/v8/translate/filterdata',
@@ -60,34 +60,25 @@ export class SearchServService {
     return Promise.resolve([])
   }
 
-  getLearning(request: ISearchRequest): Observable<NSSearch.ISearchV6ApiResult> {
-    request.locale = (request.locale && request.locale.length && request.locale[0] !== 'all') ? request.locale : []
+  getLearning(request: ISearchRequestV2): Observable<NSSearch.ISearchV6ApiResultV2> {
+    // request.locale = (request.locale && request.locale.length && request.locale[0] !== 'all') ? request.locale : []
     return this.searchV6Wrapper(request)
   }
 
-  searchV6Wrapper(request: ISearchRequest): Observable<NSSearch.ISearchV6ApiResult> {
-    const v6Request: NSSearch.ISearchV6Request = {
-      locale: request.locale,
-      pageNo: request.pageNo || undefined,
-      pageSize: request.pageSize || undefined,
-      query: request.query,
-      didYouMean: request.didYouMean,
-      filters: [
-        {
-          andFilters: Object.keys(request.filters || {}).map(key => {
-            return { [key]: request.filters[key] }
-          }),
+  searchV6Wrapper(request: ISearchRequestV2): Observable<NSSearch.ISearchV6ApiResultV2> {
+    const v6Request: NSSearch.ISearchV6RequestV2 = {
+      request: {
+        query: request.request.query,
+        filters: {
+          primaryCategory: request.request.filters.primaryCategory,
         },
-      ],
-      visibleFilters: {},
-      includeSourceFields: ['creatorLogo'],
-      isStandAlone: request.hasOwnProperty('isStandAlone') ? request.isStandAlone : undefined,
-      sort: request.hasOwnProperty('sort') ? request.sort && request.sort.length ? request.sort : undefined : undefined,
+        sort_by: {
+          lastUpdatedOn: request.request.sort_by.lastUpdatedOn,
+        },
+        facets: [],
+        fields: [],
+      },
     }
-    this.getSearchConfig().then(config => {
-      v6Request.visibleFilters = config.search.visibleFilters
-      v6Request.excludeSourceFields = config.search.excludeSourceFields
-    }).catch(_err => { })
     return this.searchApi.getSearchV6Results(v6Request)
   }
   fetchSocialSearchUsers(request: ISearchSocialSearchPartialRequest) {

@@ -45,6 +45,18 @@ export namespace NSSearch {
     didYouMean?: boolean
   }
 
+  export interface ISearchV6RequestV2 {
+    request: {
+      filters: {
+        primaryCategory: string[]
+      },
+      query: string,
+      sort_by: { lastUpdatedOn: string },
+      fields: string[],
+      facets: string[]
+    }
+  }
+
   export interface ISearchSort {
     [key: string]: 'asc' | 'desc'
   }
@@ -110,4 +122,87 @@ export namespace NSSearch {
     type: string
     count: string
   }
+  export interface ISearchV6ApiResultV2 {
+    id: string
+    ver: string
+    ts: string
+    params: IParamsContent
+    responseCode: string
+    result: ISearchData
+    filters: IFilterUnitResponse[]
+  }
+  export interface ISearchData {
+    count: number
+    content: NsContent.IContent[]
+  }
+  export interface ISearchContentData {
+    ownershipType: string[]
+    parent: string
+    code: string
+    credentials: {
+      enabled: string
+    }
+    channel: string
+    downloadUrl: string
+    language: string[]
+    mimeType: string
+    variants: IVariantsData
+    idealScreenSize: string
+    leafNodes: string[]
+    createdOn: string
+    objectType: string
+    primaryCategory: string
+    children: string[]
+    contentDisposition: string
+    lastUpdatedOn: string
+    contentEncoding: string
+    contentType: string
+    dialcodeRequired: string
+    trackable: {
+      enabled: string
+      autoBatch: string
+    }
+    identifier: string
+    lastStatusChangedOn: string
+    audience: string[]
+    os: string[]
+    visibility: string
+    index: number
+    mediaType: string
+    osId: string
+    languageCode: string[]
+    graph_id: string
+    nodeType: string
+    version: number
+    pkgVersion: number
+    versionKey: string
+    license: string
+    idealScreenDensity: string
+    depth: number
+    lastPublishedOn: string
+    compatibilityLevel: number
+    leafNodesCount: number
+    name: string
+    status: string
+    node_id: number
+
+  }
+  export interface IVariantsData {
+    online: {
+      ecarUrl: string
+      size: number
+    },
+    spine: {
+      ecarUrl: string
+      size: number
+    }
+  }
+  export interface IParamsContent {
+    resmsgid: string
+    msgid: string
+    status: string
+    err: string
+    errmsg: string
+  }
+
 }

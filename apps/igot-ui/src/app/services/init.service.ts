@@ -254,7 +254,7 @@ export class InitService {
           email: userPidProfile.result.response.email,
           givenName: userPidProfile.result.response.firstName,
           userId: userPidProfile.result.response.userId,
-          
+
           userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '} ${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '
             }`,
           dealerCode: null,
@@ -288,7 +288,7 @@ export class InitService {
     //   this.configSvc.userRoles.add('is_manager')
     // }
     // tslint:disable-next-line: max-line-length
-    const details = { group: [], profileDetailsStatus: true, roles: roles, tncStatus: true }
+    const details = { group: [], profileDetailsStatus: true, roles, tncStatus: true }
     this.configSvc.hasAcceptedTnc = details.tncStatus
     this.configSvc.profileDetailsStatus = details.profileDetailsStatus
     this.configSvc.userRoles = new Set(roles)
