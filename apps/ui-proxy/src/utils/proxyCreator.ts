@@ -20,7 +20,7 @@ proxy.on('proxyReq', (proxyReq: any, req: any, _res: any, _options: any) => {
     var bodyData = JSON.stringify(req.body);
     proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData))
     proxyReq.write(bodyData)
-    }
+  }
 })
 
 export function proxyCreatorRoute(route: Router, targetUrl: string, timeout = 10000): Router {
@@ -77,6 +77,29 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
       changeOrigin: true,
       ignorePath: true,
       target: targetUrl + contentId,
+    })
+  })
+  return route
+}
+
+export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+    logInfo('proxyCreatorSunbird ---')
+    // tslint:disable-next-line: no-console
+    console.log('req headers', req.headers)
+    // tslint:disable-next-line: no-console
+    console.log('req header', req.header)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL', req.originalUrl)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL', req.url)
+    // const lastSlug = req.originalUrl.split('/')
+    // const lastSlugId = lastSlug.pop() || ''
+    // const contentId = lastSlugId.split('?')[0]
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl
     })
   })
   return route

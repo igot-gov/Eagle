@@ -254,7 +254,7 @@ export class ContentStripMultipleComponent extends WidgetBaseComponent
             : null
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.result, strip),
+            this.transformContentsToWidgets(results.result.content, strip),
             'done',
             calculateParentStatus,
             viewMoreUrl,
