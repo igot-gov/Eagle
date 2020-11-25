@@ -118,7 +118,7 @@ export class VideoComponent implements OnInit, OnDestroy {
             : ''
           this.widgetResolverVideoData.widgetData.mimeType = data.content.data.mimeType
 
-          if (data.content.data.subTitles[0]) {
+          if (data.content.data.length > 0 && data.content.data.subTitles[0]) {
 
             let subTitlesUrl = ''
             if (data.content.data.subTitles[0].url.indexOf('/content-store/') > -1) {
