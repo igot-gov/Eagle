@@ -64,7 +64,7 @@ export interface IUsersData {
 })
 export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   contentMeta!: NSContent.IContentMeta
-  @Output() data = new EventEmitter<string>()
+  @Output() data = new EventEmitter<any>()
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
   @Input() stage = 1
@@ -433,7 +433,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     } else {
-      this.data.emit('back')
+      const obj = { actions: 'back' }
+      this.data.emit(obj)
     }
   }
   private set content(contentMeta: NSContent.IContentMeta) {

@@ -31,8 +31,8 @@ import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/compon
 import { mergeMap, tap } from 'rxjs/operators'
 import { IFormMeta } from './../../../../../../../../interface/form'
 import { AuthInitService } from './../../../../../../../../services/init.service'
-import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
-// import { ProfanityService } from '../../services/profanity.service'
+// import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
+import { ProfanityService } from '../../services/profanity.service'
 
 @Component({
   selector: 'ws-auth-file-upload',
@@ -62,6 +62,7 @@ export class FileUploadComponent implements OnInit {
     preview: false,
     url: '',
   }
+  profanityDataForUpload: any
   errorFileList: string[] = []
   fileList: string[] = []
   @Input() isCollectionEditor = false
@@ -69,6 +70,7 @@ export class FileUploadComponent implements OnInit {
   @Input() canTransCode = false
   isMobile = false
   @Output() data = new EventEmitter<any>()
+  nextProcess: any
 
   constructor(
     private formBuilder: FormBuilder,
@@ -80,7 +82,7 @@ export class FileUploadComponent implements OnInit {
     private authInitService: AuthInitService,
     private valueSvc: ValueService,
     private accessService: AccessControlService,
-    // private profanityService: ProfanityService,
+    private profanityService: ProfanityService,
   ) { }
 
   ngOnInit() {
@@ -91,29 +93,8 @@ export class FileUploadComponent implements OnInit {
       this.currentContent = data
       this.triggerDataChange()
     })
-    // this.profanityData = {
-    //   overAllOffensivescore: 0.996727610651836,
-    //   fileName: 'FINAL_14_03_2020_ENg1602233642821.pdf',
-    //   totalPageUploaded: 1,
-    //   profanityWordCount: 0,
-    //   pagesWithImages: 1,
-    //   profanityClassifications: {
-    //     bastard: {
-    //       offenceCategory: 'Offensive',
-    //       occurenceOnPage: [1, 2, 3],
-    //       totalWordCount: 3,
-    //     },
-    //     fuck: {
-    //       offenceCategory: 'Offensive',
-    //       occurenceOnPage: [1, 2, 3],
-    //       totalWordCount: 3,
-    //     },
-    //   },
-    //   imagesOccurrenceOnPageNo: [
-    //     1, 3, 5, 5,
-    //   ],
-    // }
-
+    this.nextProcess = { actions: 'next' }
+    this.data.emit(this.nextProcess)
   }
   triggerDataChange() {
     const updatedMeta = this.contentService.getUpdatedMeta(this.currentContent)
@@ -296,6 +277,8 @@ export class FileUploadComponent implements OnInit {
       this.file as Blob,
       (this.file as File).name.replace(/[^A-Za-z0-9_.]/g, ''),
     )
+    // tslint:disable-next-line:no-console
+    // console.log((this.file as File).name.replace(/[^A-Za-z0-9_.]/g, ''))
     this.loaderService.changeLoad.next(true)
     this.uploadService
       .upload(
@@ -343,7 +326,7 @@ export class FileUploadComponent implements OnInit {
           //     .pipe(map(() => v))
           // }
           if (this.mimeType === 'application/pdf') {
-            // this.profanityCheckAPICall(v.downloadURL)
+            this.profanityCheckAPICall(v.downloadURL)
           }
           return of(v)
         }),
@@ -351,14 +334,15 @@ export class FileUploadComponent implements OnInit {
       .subscribe(
         _ => {
           this.storeData()
-          this.snackBar.openFromComponent(NotificationComponent, {
-            data: {
-              type: Notify.UPLOAD_SUCCESS,
-            },
-            duration: NOTIFICATION_TIME * 1000,
-          })
+          // this.snackBar.openFromComponent(NotificationComponent, {
+          //   data: {
+          //     type: Notify.UPLOAD_SUCCESS,
+          //   },
+          //   duration: NOTIFICATION_TIME * 1000,
+          // })
           // if (this.mimeType !== 'application/pdf') {
-          this.data.emit('saveAndNext')
+          const profanity = { profanity: this.profanityDataForUpload, actions: 'saveAndNext' }
+          this.data.emit(profanity)
           // }
         },
         () => {
@@ -372,30 +356,45 @@ export class FileUploadComponent implements OnInit {
         },
       )
   }
-  // profanityCheckAPICall(url: string) {
-  //   this.profanityService.featchProfanity(this.currentContent, url).subscribe(data => {
-  //     this.profanityData = data
-  //     if (this.profanityData !== null && this.profanityData !== undefined) {
-  //       this.startProfanityPopup()
+  profanityCheckAPICall(url: string) {
+    const nameArr = (url.match(new RegExp('%2Fartifacts%2F' + '(.*)' + '?type=main')))
+    if (nameArr && nameArr[0]) {
+      let finalFileName = nameArr[0].replace('%2Fartifacts%2F', '')
+      finalFileName = finalFileName.replace('?type=main', '')
+      this.profanityDataForUpload = {
+        pdfDownloadUrl: url,
+        contentId: this.currentContent,
+        fileName: finalFileName,
+      }
+      this.profanityService.startProfanity(this.currentContent, url, finalFileName).subscribe(data => {
+        // tslint:disable-next-line:no-console
+        console.log(data)
+        // this.snackBar.openFromComponent(NotificationComponent, {
+        //   data: {
+        //     type: Notify.PROFANITY_SUCCESS,
+        //   },
+        //   duration: NOTIFICATION_TIME * 1000,
+        // })
+      })
+    }
+  }
+  // startProfanityPopup() {
+  //   this.loaderService.changeLoad.next(false)
+  //   const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
+  //     minHeight: 'auto',
+  //     width: '80%',
+  //     panelClass: 'remove-pad',
+  //     data: this.profanityData,
+  //   })
+  //   dialogRef.afterClosed().subscribe((response: any) => {
+  //     if (response === 'postCreated') {
+  //       // this.refreshData(this.currentActivePage)
+
   //     }
+  //     const profanityData = { actions: 'saveAndNext' }
+  //     this.data.emit(profanityData)
   //   })
   // }
-  startProfanityPopup() {
-    this.loaderService.changeLoad.next(false)
-    const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
-      minHeight: 'auto',
-      width: '80%',
-      panelClass: 'remove-pad',
-      data: this.profanityData,
-    })
-    dialogRef.afterClosed().subscribe((response: any) => {
-      if (response === 'postCreated') {
-        // this.refreshData(this.currentActivePage)
-
-      }
-      this.data.emit('saveAndNext')
-    })
-  }
   storeData() {
     const originalMeta = this.contentService.getOriginalMeta(this.currentContent)
     const currentMeta = this.fileUploadForm.value

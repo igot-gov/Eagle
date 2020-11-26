@@ -260,3 +260,7 @@
   <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">notification_important</mat-icon>
   <span i18n>Your Competency Request Success!. please wait the reviewer to approve it</span>
 </p>
+<p *ngIf="type === notify.PROFANITY_SUCCESS">
+  <mat-icon class="icon" aria-hidden="false" i18n-aria-label aria-label="Notification">thumb_up</mat-icon>
+  <span i18n>Profanity check initiated Successfully for uploaded PDF</span>
+</p>
