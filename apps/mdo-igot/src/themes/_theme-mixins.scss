@@ -220,6 +220,7 @@
 
     .ws-active-route-menu {
       background: $colorBlack040;
+      font-weight: 700;
 
       &::after {
         content: '';
@@ -368,7 +369,7 @@
 
     .ws-active-route-menu {
       background-color: $colorBlack040 !important;
-      // font-weight: 700;
+      font-weight: 700;
 
       &::after {
         content: '';
