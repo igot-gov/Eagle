@@ -5,11 +5,6 @@ import { PrivilegesComponent } from './routes/privileges/privileges.component'
 import { UsersComponent } from './routes/users/users.component'
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'privileges',
-  // },
   {
     path: '',
     component: HomeComponent,

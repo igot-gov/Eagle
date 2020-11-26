@@ -34,11 +34,6 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   /* Click event to navigate to a particular role */
   onRoleClick(role: any) {
     this.router.navigate([`/app/roles/${role.role}/privileges`])
-    //   , {
-    //   queryParams: {
-    //     role: role.role,
-    //   },
-    // }
   }
 
   /* API call to get all roles*/

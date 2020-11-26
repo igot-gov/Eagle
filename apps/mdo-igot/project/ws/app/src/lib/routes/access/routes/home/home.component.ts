@@ -39,9 +39,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.screenSizeIsLtMedium = isLtMedium
     })
 
-    if (this.activeRoute.snapshot.queryParams.role) {
-      this.role = this.activeRoute.snapshot.queryParams.role
-    }
+    const url = this.router.url.split('/')
+    this.role = url[url.length - 2]
   }
 
   ngOnDestroy() {
