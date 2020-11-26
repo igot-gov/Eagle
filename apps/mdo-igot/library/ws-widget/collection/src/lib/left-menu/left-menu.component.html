@@ -6,16 +6,16 @@
       </span>
     </a>
   </div>
-  <mat-nav-list class="margin-top-m flex-1">
+  <mat-nav-list class="margin-top-m flex-1" aria-label="left menu">
     <ng-container *ngFor="let tab of widgetData">
-      <a mat-list-item class="flex outline-1" *ngIf="tab?.enabled && !tab.customRouting" matRipple
-        [routerLink]="[tab.routerLink]" [queryParamsHandling]="preserve" routerLinkActive="ws-active-route-menu">
-        <!--  [class.ws-active-route-menu]="isLinkActive(tab.key)" [fragment]="tab.fragment? tab.key : ''" [queryParamsHandling]="preserve" -->
+      <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && !tab.customRouting" matRipple
+        active i18n-aria-label [routerLink]="[tab.routerLink]" [queryParamsHandling]="preserve"
+        routerLinkActive="ws-active-route-menu">
         <span class="padding-left-xs">{{tab?.name}}</span>
       </a>
-      <a mat-list-item class="flex outline-1" *ngIf="tab?.enabled && tab.customRouting" matRipple
-        [routerLink]="getLink(tab)" [queryParamsHandling]="preserve" routerLinkActive="ws-active-route-menu">
-        <!--  [class.ws-active-route-menu]="isLinkActive(tab.key)" [fragment]="tab.fragment? tab.key : ''" [queryParamsHandling]="preserve" -->
+      <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && tab.customRouting" matRipple
+        active i18n-aria-label [routerLink]="getLink(tab)" [queryParamsHandling]="preserve"
+        routerLinkActive="ws-active-route-menu">
         <span class="padding-left-xs">{{tab?.name}}</span>
       </a>
     </ng-container>
