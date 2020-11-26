@@ -137,23 +137,23 @@
           <mat-icon>search</mat-icon>
         </div> -->
       </div>
-      <button mat-button class="text-white ws-mat-primary-background" (click)="layout=!layout">Create</button>
+      <button mat-button class="text-white ws-mat-primary-background">Create</button>
     </div>
-    <div *ngIf="cardContent && layout" class="flex flex-wrapped flex-dynamic margin-xs">
-      <!-- <ng-template #oldDesign>
+    <!-- <div *ngIf="cardContent && !layout" class="flex flex-wrapped flex-dynamic margin-xs"> -->
+    <!-- <ng-template #oldDesign>
         <div class="margin-s" *ngFor="let content of cardContent">
           <ws-auth-root-content-card [data]="content" [forExpiry]="status === 'expiry'"
             [forDelete]="status === 'deleted'" [ordinals]="ordinals" (action)="action($event)">
           </ws-auth-root-content-card>
         </div>
       </ng-template> -->
-      <!-- <ng-container *ngIf="newDesign; else oldDesign"> -->
-      <ws-auth-content-card-v2 (action)="action({ type: $event.action, data: $event.content })"
+    <!-- <ng-container *ngIf="newDesign; else oldDesign"> -->
+    <!-- <ws-auth-content-card-v2 (action)="action({ type: $event.action, data: $event.content })"
         [perspective]="currentAction" *ngFor="let content of cardContent" [content]="content">
-      </ws-auth-content-card-v2>
-      <!-- </ng-container> -->
-    </div>
-    <div *ngIf="cardContent && !layout" class="flex flex-wrapped flex-dynamic margin-xs">
+      </ws-auth-content-card-v2> -->
+    <!-- </ng-container> -->
+    <!-- </div> -->
+    <div *ngIf="cardContent" class="flex flex-wrapped flex-dynamic margin-xs">
       <ws-widget-table-card-content class="flex-1" [widgetData]="tableData" [data]="cardContent"
         (actionsClick)="actionClick($event)">
       </ws-widget-table-card-content>
