@@ -8,6 +8,7 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
 import { HomeModule } from '../home/home.module'
 import { RouterModule } from '@angular/router'
 import { UsersComponent } from './routes/users/users.component'
+import { UsersService } from './services/users.service'
 import {
   MatSidenavModule,
   MatIconModule,
@@ -18,5 +19,7 @@ import { MatCardModule } from '@angular/material/card'
   declarations: [HomeComponent, PrivilegesComponent, UsersComponent],
   imports: [CommonModule, AccessRoutingModule, BtnPageBackModule, LeftMenuModule, WidgetResolverModule,
     MatSidenavModule, MatIconModule, GroupCheckboxModule, HomeModule, RouterModule, UITableModule, MatCardModule],
+  exports: [UsersComponent],
+  providers: [UsersService],
 })
 export class AccessModule { }
