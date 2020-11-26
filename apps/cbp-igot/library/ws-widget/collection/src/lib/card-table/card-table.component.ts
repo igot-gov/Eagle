@@ -9,7 +9,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  SimpleChange,
+  // SimpleChange,
   // SimpleChange,
   ViewChild,
 } from '@angular/core'
