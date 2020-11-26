@@ -5,9 +5,11 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  SimpleChange,
   // SimpleChange,
   ViewChild,
 } from '@angular/core'
@@ -23,7 +25,7 @@ import _ from 'lodash'
   styleUrls: ['./card-table.component.scss'],
 })
 export class CardTableComponent extends WidgetBaseComponent
-  implements OnInit, OnDestroy, AfterViewInit, NsWidgetResolver.IWidgetData<ITable> {
+  implements OnInit, OnDestroy, AfterViewInit, OnChanges, NsWidgetResolver.IWidgetData<ITable> {
   @Input() widgetData!: ITable
   @HostBinding('id')
   public id = `ws-card_${Math.random()}`
@@ -66,10 +68,10 @@ export class CardTableComponent extends WidgetBaseComponent
     }
   }
 
-  // ngOnChanges(data: SimpleChange): void {
-  //   // console.log(data);
-  //   this.dataSource.data = _.get(data, 'data.currentValue')
-  // }
+  ngOnChanges(data: any) {
+    // console.log(data);
+    this.dataSource.data = _.get(data, 'data.currentValue')
+  }
 
   ngAfterViewInit() {
     // this.cd.detectChanges();

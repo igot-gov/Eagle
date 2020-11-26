@@ -1,6 +1,6 @@
 <div class="example-container mat-elevation-z8">
   <div class="example-table-container">
-    <ng-container *ngIf="display==='table'; else card">
+    <ng-container *ngIf="display === 'table'; else card">
       <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="widgetData.sortColumn"
         [matSortDirection]="widgetData.sortState" [dataSource]="dataSource"
         class="example-table table1 responsiveTable">
@@ -96,14 +96,12 @@
 
 <ng-template #card>
   <mat-card class="example-card padding-0">
-    <!-- <mat-card-header> -->
     <div class="flex flex-1 ws-mat-background-04 padding-m" mat-header-row>
       <span class="mat-body-2 ws-mat-black60-text">Course name</span>
       <span class="flex flex-1"></span>
       <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
         {{widgetData.actionsMenu.headIcon}}</mat-icon>
     </div>
-    <!-- </mat-card-header> -->
     <mat-card-content>
       <div class="flex flex-wrap margin-l">
         <div class="card-container" *ngFor="let cardData of data">
@@ -132,24 +130,10 @@
                   {{ cardData.name || 'Untitled Content' }}
                 </h3>
               </a>
-              <!-- <span class="background-color">Last updated on {{ cardData.lastPublishedOn }}</span> -->
+              <span class="background-color">Last updated on {{ cardData.lastPublishedOn }}</span>
             </mat-card-content>
             <mat-card-actions>
-              <!-- <span class="ws-mat-primary-text uppercase font-weight-500">{{ cardData.contentType }}</span>
-              <p class="mat-h5 margin-remove font-weight-bold">
-                {{ cardData.locale | uppercase }}
-              </p>
-              <button *ngIf="!forExpiry && !forDelete" mat-icon-button [matMenuTriggerFor]="moreMenu">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <button *ngIf="forExpiry" (click)="takeAction('expiryExtend')" i18n-matTooltip matTooltip="Take Action"
-                mat-icon-button>
-                <mat-icon>date_range</mat-icon>
-              </button>
-              <button *ngIf="forDelete" (click)="takeAction('restoreDeleted')" i18n-matTooltip matTooltip="Take Action"
-                mat-icon-button>
-                <mat-icon>restore_from_trash</mat-icon>
-              </button> -->
+
             </mat-card-actions>
           </mat-card>
         </div>
