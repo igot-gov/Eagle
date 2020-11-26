@@ -31,6 +31,13 @@
   margin: 14px 0 0 0;
 }
 
+.card-container {
+  position: relative;
+  margin: 16px;
+  width: 265px;
+  height: 100%;
+}
+
 .searchText {
   display: flex;
   flex-direction: row-reverse;
@@ -51,4 +58,12 @@
 
 .new-row {
   padding: 0.65em 0 0.65em 0;
+}
+
+.action-header {
+  font-weight: 700;
+}
+
+.padding-0 {
+  padding: 0;
 }

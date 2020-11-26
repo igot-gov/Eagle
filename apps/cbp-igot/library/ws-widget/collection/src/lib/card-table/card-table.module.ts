@@ -12,10 +12,9 @@ import {
   MatTableModule,
   MatSortModule,
   MatMenuModule,
+  MatCardModule,
 } from '@angular/material'
 import { RouterModule } from '@angular/router'
-
-
 @NgModule({
   declarations: [CardTableComponent],
   imports: [
@@ -30,9 +29,12 @@ import { RouterModule } from '@angular/router'
     MatMenuModule,
     MatSortModule,
     PipeTableListModule,
-    RouterModule
+    RouterModule,
+    MatCardModule,
   ],
-  exports: [CardTableComponent]
+  exports: [
+    CardTableComponent,
+  ],
   // entryComponents: [CardTableComponent],
 })
 export class CardTableModule { }

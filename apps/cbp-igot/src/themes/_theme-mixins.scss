@@ -214,6 +214,18 @@
       background: rgba(mat-color($primary, default), 0.1);
     }
 
+    .ws-mat-black60-text {
+      color: $colorBlack60;
+    }
+
+    .ws-mat-background-04 {
+      background-color: $colorBlack040
+    }
+
+    .ws-mat-black40-text {
+      color: $colorBlack40;
+    }
+
     .ws-mat-primary-tags-list {
       background: rgba(mat-color($primary, default), 0.1);
     }
@@ -224,6 +236,7 @@
 
     .ws-active-route-menu {
       background: $colorBlack040;
+      font-weight: 700;
 
       &::after {
         content: '';
@@ -372,7 +385,7 @@
 
     .ws-active-route-menu {
       background-color: $colorBlack040 !important;
-      // font-weight: 700;
+      font-weight: 700;
 
       &::after {
         content: '';
@@ -500,6 +513,10 @@
 
     .ws-mat-black60-text {
       color: $colorBlack60;
+    }
+
+    .ws-mat-background-04 {
+      background-color: $colorBlack040
     }
 
     .ws-mat-black40-text {

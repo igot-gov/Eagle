@@ -118,12 +118,12 @@ export class MyContentComponent implements OnInit, OnDestroy {
           displayName: 'Course Name', key: 'name', isList: false, prop: '',
           link: { path: '/author/editor/', dParams: 'identifier' },
           defaultValue: 'Untitled Content',
-          image: 'appIcon'
+          image: 'appIcon',
         },
         { displayName: 'Kind', key: 'contentType', isList: false, prop: '', defaultValue: 'NA' },
         { displayName: 'Active users', key: 'uniqueUsersCount', isList: false, prop: '', defaultValue: 0 },
         { displayName: 'Duration', key: 'duration', isList: false, prop: '', defaultValue: 0 },
-      ],//  :> this will load from json
+      ], //  :> this will load from json
       actions: [], // :> this will load from json
       needCheckBox: false,
       needHash: false,
@@ -133,10 +133,10 @@ export class MyContentComponent implements OnInit, OnDestroy {
         headIcon: 'apps',
         menus: [
           { name: 'Edit', action: 'edit', disabled: false, icon: 'edit' },
-          { name: 'Delete', action: 'delete', disabled: false, icon: 'delete' }
+          { name: 'Delete', action: 'delete', disabled: false, icon: 'delete' },
         ],
-        rowIcon: 'more_vert'
-      }
+        rowIcon: 'more_vert',
+      },
     }
   }
   ngOnDestroy() {
@@ -205,7 +205,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
   actionClick(event: any) {
     if (event) {
-      console.log(event)
+      // console.log(event)
     }
   }
   fetchContent(loadMoreFlag: boolean, changeFilter = true) {

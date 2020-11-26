@@ -1,9 +1,11 @@
 <div class="example-container mat-elevation-z8">
   <div class="example-table-container">
-    <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="widgetData.sortColumn"
-      [matSortDirection]="widgetData.sortState" [dataSource]="dataSource" class="example-table table1 responsiveTable">
-      <!-- Checkbox Column -->
-      <!-- <ng-container *ngIf="widgetData.needCheckBox === true" matColumnDef="select">
+    <ng-container *ngIf="display==='table'; else card">
+      <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="widgetData.sortColumn"
+        [matSortDirection]="widgetData.sortState" [dataSource]="dataSource"
+        class="example-table table1 responsiveTable">
+        <!-- Checkbox Column -->
+        <!-- <ng-container *ngIf="widgetData.needCheckBox === true" matColumnDef="select">
                 <mat-header-cell *matHeaderCellDef>
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                         [checked]="selection.hasValue() && isAllSelected()"
@@ -21,36 +23,41 @@
                 <mat-cell *matCellDef="let element;let i = index"> {{i+1}}</mat-cell>
             </ng-container> -->
 
-      <ng-container matColumnDef="{{col.key}}" *ngFor="let col of widgetData.columns">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <!-- <span *ngIf="col.isList"
+        <ng-container matColumnDef="{{col.key}}" *ngFor="let col of widgetData.columns">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <span class="mat-body-2 ws-mat-black60-text">{{col.displayName}}</span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <!-- <span *ngIf="col.isList"
                         [matTooltip]="element[col.displayName]">{{filterList(element[col.key],col.prop) }}</span> -->
-          <span *ngIf="col.isList" class="textclass"
-            [matTooltip]="(element[col.key] | listPipe: col.prop).split('<br />').join(', ')">
-            <div innerHTML="{{element[col.key] | listPipe: col.prop }}"></div>
-          </span>
-          <img mat-card-image class="small-list-logo" *ngIf="col.image && element[col.image]" [src]="element[col.image]"
-            (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
+            <span *ngIf="col.isList" class="textclass mat-body-2"
+              [matTooltip]="(element[col.key] | listPipe: col.prop).split('<br />').join(', ')">
+              <div innerHTML="{{element[col.key] | listPipe: col.prop }}"></div>
+            </span>
+            <img class="small-list-logo margin-xs" *ngIf="col.image && element[col.image]" [src]="element[col.image]"
+              (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
 
-          <span *ngIf="!col.isList && !col.link" class="textclass">
-            {{element[col.key] || col.defaultValue}}
-          </span>
+            <span *ngIf="!col.isList && !col.link" class="textclass mat-body-2">
+              {{element[col.key] || col.defaultValue}}
+            </span>
 
-          <a *ngIf="col.link" [routerLink]="col.link.path+element[col.link.dParams]"
-            routerLinkActive="router-link-active" class="textclass">
-            {{element[col.key] || col.defaultValue}}
-            <!-- {{col.appIcon}} -->
-          </a>
-        </mat-cell>
-      </ng-container>
+            <a *ngIf="col.link" [routerLink]="col.link.path+element[col.link.dParams]"
+              routerLinkActive="router-link-active" class="textclass mat-body-2">
+              {{element[col.key] || col.defaultValue}}
+              <!-- {{col.appIcon}} -->
+            </a>
+          </mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="Actions" *ngIf="widgetData.actions && widgetData.actions.length > 0">
-        <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
-        <mat-cell *matCellDef="let row" class="action-cell">
-          <div *ngFor="let ac of widgetData.actions">
-            {{ac | json}}
-            <!-- <div *ngIf="ac.optional">
+        <ng-container matColumnDef="Actions" *ngIf="widgetData.actions && widgetData.actions.length > 0">
+          <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header mat-body-2">
+            <span class="mat-body-2 ws-mat-black60-text">{{'Actions'}}</span>
+
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="action-cell mat-body-2">
+            <div *ngFor="let ac of widgetData.actions">
+              {{ac | json}}
+              <!-- <div *ngIf="ac.optional">
               <app-button *ngIf="row[ac.optional_key] === ac.optional_Value" [type]="ac.type" [icon]="ac.icon"
                 [disabled]="ac.disabled || false" [label]="ac.label" (click)="buttonClick(ac.name,row)"></app-button>
             </div>
@@ -58,32 +65,98 @@
               <app-button [type]="ac.type" [icon]="ac.icon" [label]="ac.label" [disabled]="ac.disabled || false"
                 (click)="buttonClick(ac.name,row)"></app-button>
             </div> -->
-          </div>
-        </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="ActionsMenu" *ngIf="widgetData.actionsMenu">
-        <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
-          <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
-            {{widgetData.actionsMenu.headIcon}}</mat-icon>
-          <span *ngIf="!widgetData.actionsMenu.headIcon">Actions</span>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row" class="action-cell">
-          <div class="flex">
-            <button mat-icon-button [matMenuTriggerFor]="moreMenu" [matMenuTriggerData]="{'data':row}">
-              <mat-icon>{{widgetData.actionsMenu.rowIcon}}</mat-icon>
-            </button>
-          </div>
-        </mat-cell>
-      </ng-container>
+            </div>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="ActionsMenu" *ngIf="widgetData.actionsMenu">
+          <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header mat-body-2 flex-row-reverse">
+            <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
+              {{widgetData.actionsMenu.headIcon}}</mat-icon>
+            <span *ngIf="!widgetData.actionsMenu.headIcon">Actions</span>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row" class="action-cell">
+            <div class="flex">
+              <button mat-icon-button [matMenuTriggerFor]="moreMenu" [matMenuTriggerData]="{'data':row}">
+                <mat-icon>{{widgetData.actionsMenu.rowIcon}}</mat-icon>
+              </button>
+            </div>
+          </mat-cell>
+        </ng-container>
 
-      <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row)">
-      </mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="getFinalColumns()" class="ws-mat-background-04"></mat-header-row>
+        <mat-row class="new-row" *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row)">
+        </mat-row>
+      </mat-table>
+    </ng-container>
   </div>
   <!-- <mat-paginator [length]="5" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]">
     </mat-paginator> -->
 </div>
+
+
+<ng-template #card>
+  <mat-card class="example-card padding-0">
+    <!-- <mat-card-header> -->
+    <div class="flex flex-1 ws-mat-background-04 padding-m" mat-header-row>
+      <span class="mat-body-2 ws-mat-black60-text">Course name</span>
+      <span class="flex flex-1"></span>
+      <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
+        {{widgetData.actionsMenu.headIcon}}</mat-icon>
+    </div>
+    <!-- </mat-card-header> -->
+    <mat-card-content>
+      <div class="flex flex-wrap margin-l">
+        <div class="card-container" *ngFor="let cardData of data">
+          <mat-card>
+            <a *ngIf="cardData.contentType === 'Resource'" [ngClass]="{
+                pointer: cardData.contentType !== 'Knowledge Board',
+                cursor: cardData.contentType === 'Knowledge Board'
+              }" [routerLink]="
+                cardData.contentType !== 'Knowledge Board' ? ['/author/viewer/' + cardData.identifier] : []
+              " [queryParamsHandling]="cardData.contentType === 'Knowledge Board' ? 'preserve' : ''">
+              <img mat-card-image class="card-img mat-lite-background" role="link" [src]="cardData.appIcon "
+                (error)="changeToDefaultImg($event)" [alt]="cardData.name" class="card-img" />
+            </a>
+            <img *ngIf="cardData.contentType !== 'Resource'" mat-card-image class="card-img mat-lite-background"
+              role="link" [src]="cardData.appIcon" (error)="changeToDefaultImg($event)" [alt]="cardData.name"
+              class="card-img" />
+            <mat-card-content [ngClass]="{
+                pointer: cardData.contentType !== 'Knowledge Board',
+                cursor: cardData.contentType === 'Knowledge Board'
+              }">
+              <a [ngClass]="{
+                  pointer: cardData.contentType !== 'Knowledge Board',
+                  cursor: cardData.contentType === 'Knowledge Board'
+                }" [title]="cardData.name" aria-label="Content" i18n-aria-label="Content | Click to view">
+                <h3 class="ws-mat-primary-text mat-title text-truncate font-weight-bold">
+                  {{ cardData.name || 'Untitled Content' }}
+                </h3>
+              </a>
+              <!-- <span class="background-color">Last updated on {{ cardData.lastPublishedOn }}</span> -->
+            </mat-card-content>
+            <mat-card-actions>
+              <!-- <span class="ws-mat-primary-text uppercase font-weight-500">{{ cardData.contentType }}</span>
+              <p class="mat-h5 margin-remove font-weight-bold">
+                {{ cardData.locale | uppercase }}
+              </p>
+              <button *ngIf="!forExpiry && !forDelete" mat-icon-button [matMenuTriggerFor]="moreMenu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <button *ngIf="forExpiry" (click)="takeAction('expiryExtend')" i18n-matTooltip matTooltip="Take Action"
+                mat-icon-button>
+                <mat-icon>date_range</mat-icon>
+              </button>
+              <button *ngIf="forDelete" (click)="takeAction('restoreDeleted')" i18n-matTooltip matTooltip="Take Action"
+                mat-icon-button>
+                <mat-icon>restore_from_trash</mat-icon>
+              </button> -->
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-template>
 
 <mat-menu #moreMenu="matMenu">
   <ng-template matMenuContent let-rowData="data">

@@ -88,7 +88,7 @@ export const ROOT_WIDGET_CONFIG = {
   },
   table: {
     _type: 'table',
-    cardTable: 'cardTable'
+    cardTable: 'cardTable',
   },
   menus: {
     _type: 'menus',

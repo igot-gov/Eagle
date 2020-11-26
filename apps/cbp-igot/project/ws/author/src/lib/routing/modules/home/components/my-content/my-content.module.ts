@@ -18,7 +18,7 @@ import { MatSortModule, MatTableModule } from '@angular/material'
     PipeContentRouteModule,
     MatTableModule,
     MatSortModule,
-    CardTableModule
+    CardTableModule,
   ],
   providers: [MyContentService],
 })
