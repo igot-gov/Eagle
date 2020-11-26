@@ -1,4 +1,5 @@
-<div class="example-container mat-elevation-z8">
+<div class="example-container">
+  <!-- [ngClass]="{'mat-elevation-z8': display === 'table'}" -->
   <div class="example-table-container">
     <ng-container *ngIf="display === 'table'; else card">
       <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="widgetData.sortColumn"
@@ -70,11 +71,11 @@
         </ng-container>
         <ng-container matColumnDef="ActionsMenu" *ngIf="widgetData.actionsMenu">
           <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header mat-body-2 flex-row-reverse">
-            <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
+            <mat-icon *ngIf="widgetData.actionsMenu.headIcon" class="cursor-pointer" (click)="updatedisplay()">
               {{widgetData.actionsMenu.headIcon}}</mat-icon>
             <span *ngIf="!widgetData.actionsMenu.headIcon">Actions</span>
           </mat-header-cell>
-          <mat-cell *matCellDef="let row" class="action-cell">
+          <mat-cell *matCellDef="let row" class="action-cell flex-row-reverse">
             <div class="flex">
               <button mat-icon-button [matMenuTriggerFor]="moreMenu" [matMenuTriggerData]="{'data':row}">
                 <mat-icon>{{widgetData.actionsMenu.rowIcon}}</mat-icon>
@@ -95,46 +96,64 @@
 
 
 <ng-template #card>
-  <mat-card class="example-card padding-0">
+  <mat-card class="example-card padding-0 no-box-shadow">
     <div class="flex flex-1 ws-mat-background-04 padding-m" mat-header-row>
       <span class="mat-body-2 ws-mat-black60-text">Course name</span>
       <span class="flex flex-1"></span>
-      <mat-icon *ngIf="widgetData.actionsMenu.headIcon" (click)="updatedisplay()">
+      <mat-icon *ngIf="widgetData.actionsMenu.headIcon" class="cursor-pointer" (click)="updatedisplay()">
         {{widgetData.actionsMenu.headIcon}}</mat-icon>
     </div>
     <mat-card-content>
-      <div class="flex flex-wrap margin-l">
+      <div class="flex flex-wrap margin-xs">
         <div class="card-container" *ngFor="let cardData of data">
-          <mat-card>
-            <a *ngIf="cardData.contentType === 'Resource'" [ngClass]="{
-                pointer: cardData.contentType !== 'Knowledge Board',
-                cursor: cardData.contentType === 'Knowledge Board'
-              }" [routerLink]="
-                cardData.contentType !== 'Knowledge Board' ? ['/author/viewer/' + cardData.identifier] : []
-              " [queryParamsHandling]="cardData.contentType === 'Knowledge Board' ? 'preserve' : ''">
+          <mat-card class="no-box-shadow custom-border">
+            <div style="position: relative; z-index: 1;">
               <img mat-card-image class="card-img mat-lite-background" role="link" [src]="cardData.appIcon "
                 (error)="changeToDefaultImg($event)" [alt]="cardData.name" class="card-img" />
-            </a>
-            <img *ngIf="cardData.contentType !== 'Resource'" mat-card-image class="card-img mat-lite-background"
-              role="link" [src]="cardData.appIcon" (error)="changeToDefaultImg($event)" [alt]="cardData.name"
-              class="card-img" />
+              <div class="source-div">
+                <img [src]="cardData.creatorLogo" class="source-icon" (error)="changeToDefaultSourceImg($event)"
+                  [alt]="(cardData.sourceName + '_' + cardData.identifier)" />
+              </div>
+            </div>
+
             <mat-card-content [ngClass]="{
-                pointer: cardData.contentType !== 'Knowledge Board',
-                cursor: cardData.contentType === 'Knowledge Board'
+                pointer: cardData.contentType === 'Resource',
+                cursor: cardData.contentType !== 'Resource'
               }">
               <a [ngClass]="{
-                  pointer: cardData.contentType !== 'Knowledge Board',
-                  cursor: cardData.contentType === 'Knowledge Board'
-                }" [title]="cardData.name" aria-label="Content" i18n-aria-label="Content | Click to view">
-                <h3 class="ws-mat-primary-text mat-title text-truncate font-weight-bold">
-                  {{ cardData.name || 'Untitled Content' }}
-                </h3>
+                              pointer: cardData.contentType === 'Resource',
+                              cursor: cardData.contentType !== 'Resource'
+                            }" [routerLink]="['/author/editor/' + cardData.identifier]" [title]="cardData.name"
+                aria-label="Content" i18n-aria-label="Content | Click to view">
+                <div class="flex flex-1 flex-column">
+                  <span class="mat-subheading-1 text-truncate margin-0">
+                    {{ cardData.name || 'Untitled Content' }}
+                  </span>
+                  <span class="mat-body-2 ws-mat-black60-text">{{cardData.resourceType}}</span>
+                  <!-- <div class="flex">TAG</div> -->
+                  <div class="flex flex-1 flex-row">
+                    <!-- rating -->
+                    <div *ngIf="cardData?.averageRating" class="flex items-center my-1 rating mt-5">
+                      <span class="mr-2 rating-number">{{ cardData?.averageRating }}&nbsp;</span>
+                      <mat-icon class="mr-2 star" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                        {{ getRatingIcon(cardData,rating) }}
+                      </mat-icon>
+                    </div>
+                    <div *ngIf="!content?.averageRating" class="flex items-center my-1 rating mt-5">
+                      <span class="mr-2 rating-number"> 0.0 &nbsp;</span>
+                      <mat-icon class="mr-2 star" *ngFor="let rating of [1, 2, 3, 4, 5]">
+                        {{ getRatingIcon(cardData,rating) }}
+                      </mat-icon>
+                    </div>
+                    <span class="flex-1"></span>
+                    <span class="flex items-center my-1 rating mat-subheading-2 ws-mat-black60-text mb-0 margin-top-xs">
+                      {{cardData.duration | pipeDurationTransform: 'hms'}}
+                    </span>
+                  </div>
+                </div>
               </a>
-              <span class="background-color">Last updated on {{ cardData.lastPublishedOn }}</span>
+              <!-- <span class="background-color">Last updated on {{ cardData.lastPublishedOn }}</span> -->
             </mat-card-content>
-            <mat-card-actions>
-
-            </mat-card-actions>
           </mat-card>
         </div>
       </div>

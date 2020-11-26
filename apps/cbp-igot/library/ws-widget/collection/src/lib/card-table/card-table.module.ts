@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { CardTableComponent } from './card-table.component'
-import { HorizontalScrollerModule } from '@ws-widget/utils'
+import { HorizontalScrollerModule, PipeCountTransformModule, PipeDurationTransformModule } from '@ws-widget/utils'
 import { WidgetResolverModule } from '@ws-widget/resolver'
 import { PipeTableListModule } from './pipe-table-list/pipe-table-list.module'
 import {
@@ -31,6 +31,8 @@ import { RouterModule } from '@angular/router'
     PipeTableListModule,
     RouterModule,
     MatCardModule,
+    PipeDurationTransformModule,
+    PipeCountTransformModule,
   ],
   exports: [
     CardTableComponent,

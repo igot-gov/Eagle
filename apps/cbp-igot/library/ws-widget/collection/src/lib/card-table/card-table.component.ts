@@ -79,6 +79,22 @@ export class CardTableComponent extends WidgetBaseComponent
   changeToDefaultImg($event: any) {
     $event.target.src = '/assets/instances/eagle/app_logos/default.png'
   }
+  changeToDefaultSourceImg($event: any) {
+    $event.target.src = '/assets/instances/eagle/app_logos/sourcenew.png'
+  }
+  getRatingIcon(content: any, ratingIndex: number): 'star' | 'star_border' | 'star_half' {
+    if (content && content.averageRating) {
+      const avgRating = content.averageRating
+      const ratingFloor = Math.floor(avgRating)
+      if (ratingIndex <= ratingFloor) {
+        return 'star'
+      }
+      if (ratingFloor === ratingIndex - 1 && avgRating % 1 > 0) {
+        return 'star_half'
+      }
+    }
+    return 'star_border'
+  }
   applyFilter(filterValue: any) {
     if (filterValue && filterValue.value) {
       let fValue = filterValue.value.trim()
