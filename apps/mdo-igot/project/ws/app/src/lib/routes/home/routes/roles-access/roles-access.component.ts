@@ -13,7 +13,6 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private router: Router, private roleSvc: RolesAccessService) { }
 
   ngOnInit() {
-    // int left blank
     this.tabledata = {
       actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
       columns: [
@@ -27,6 +26,7 @@ export class RolesAccessComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.fetchRoles()
   }
+
   ngAfterViewInit() {
     // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
   }

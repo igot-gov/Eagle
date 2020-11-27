@@ -4,6 +4,7 @@ import {
 } from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
+import { MatPaginator } from '@angular/material'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 
@@ -15,32 +16,32 @@ import { ITableData, IColums } from '../interface/interfaces'
   styleUrls: ['./ui-user-table.component.scss'],
 })
 export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
-
   @Input() tableData!: ITableData | undefined
-  // @Input() columns?: IColums[]
-  // @Input() columns?: IColums[];
   @Input() data?: []
+
+  // @Input() columns?: IColums[]
   // @Input() needCheckBox?: Boolean
   // @Input() needHash?: boolean
+  // @Input() actions: IAction[]
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
-
-  // @Input() actions: IAction[]
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
   dataSource!: any
   widgetData: any
-
-  selection = new SelectionModel<any>(true, [])
-  // @ViewChild(MatPaginator, { static: true }) paginator?: MatPaginator
+  length!: number
+  pageSize: number = 5;
+  pageSizeOptions = [5, 10, 20];
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: true }) sort?: MatSort
+  selection = new SelectionModel<any>(true, [])
 
   constructor() {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
-
+    this.dataSource.paginator = this.paginator
   }
 
   ngOnInit() {
@@ -48,17 +49,16 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.displayedColumns = this.tableData.columns
     }
     this.dataSource.data = this.data
-    // this.dataSource.paginator = this.paginator
+    this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
   }
 
   ngOnChanges(data: SimpleChanges) {
     this.dataSource.data = _.get(data, 'data.currentValue')
+    this.length = this.dataSource.data.length
   }
 
-  ngAfterViewInit() {
-    // this.cd.detectChanges();
-  }
+  ngAfterViewInit() { }
 
   applyFilter(filterValue: any) {
     if (filterValue) {
@@ -69,9 +69,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       this.dataSource.filter = ''
     }
   }
+
   buttonClick(action: string, row: any) {
-    // console.log(action, row);
-    /** debugger; */
     if (this.tableData) {
       const isDisabled = _.get(_.find(this.tableData.actions, ac => ac.name === action), 'disabled') || false
       if (!isDisabled && this.actionsClick) {
@@ -80,6 +79,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
 
   }
+
   getFinalColumns() {
     if (this.tableData !== undefined) {
       const columns = _.map(this.tableData.columns, c => c.key)
@@ -97,9 +97,6 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       }
       return columns
     }
-
-    // console.log(columns);
-
     return ''
   }
 
@@ -109,6 +106,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     const numRows = this.dataSource.data.length
     return numSelected === numRows
   }
+
   filterList(list: any[], key: string) {
     return list.map(lst => lst[key])
   }
