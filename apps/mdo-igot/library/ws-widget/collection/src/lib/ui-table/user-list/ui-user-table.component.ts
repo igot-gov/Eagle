@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, SimpleChange } from '@angular/core'
+import {
+  Component, OnInit, Input, Output, EventEmitter, ViewChild,
+  AfterViewInit, OnChanges, SimpleChanges,
+} from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
 import { MatSort } from '@angular/material/sort'
@@ -11,7 +14,7 @@ import { ITableData, IColums } from '../interface/interfaces'
   templateUrl: './ui-user-table.component.html',
   styleUrls: ['./ui-user-table.component.scss'],
 })
-export class UIUserTableComponent implements OnInit, AfterViewInit {
+export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() tableData!: ITableData | undefined
   // @Input() columns?: IColums[]
@@ -34,7 +37,6 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true }) sort?: MatSort
 
   constructor() {
-    // console.log('ui table', this.data)
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
@@ -49,9 +51,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
     // this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
   }
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngOnChanges(data: SimpleChange) {
-    // console.log(data);
+
+  ngOnChanges(data: SimpleChanges) {
     this.dataSource.data = _.get(data, 'data.currentValue')
   }
 
@@ -60,9 +61,9 @@ export class UIUserTableComponent implements OnInit, AfterViewInit {
   }
 
   applyFilter(filterValue: any) {
-    if (filterValue && filterValue.value) {
-      let fValue = filterValue.value.trim()
-      fValue = filterValue.value.toLowerCase()
+    if (filterValue) {
+      let fValue = filterValue.trim()
+      fValue = filterValue.toLowerCase()
       this.dataSource.filter = fValue
     } else {
       this.dataSource.filter = ''

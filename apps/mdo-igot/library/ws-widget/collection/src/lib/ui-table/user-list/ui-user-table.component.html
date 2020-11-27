@@ -6,11 +6,12 @@
     <div class="example-table-container">
 
         <div class="search">
-            <div class="lsearch">
+            <!-- <div class="lsearch">
                 <span class="searchText">Search:</span>
-            </div>
+            </div> -->
             <div class=rsearch>
-                <input class="sinput" type="Standard" label="" (onChange)="applyFilter($event)">
+                <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
+                    placeholder="Search">
             </div>
         </div>
 

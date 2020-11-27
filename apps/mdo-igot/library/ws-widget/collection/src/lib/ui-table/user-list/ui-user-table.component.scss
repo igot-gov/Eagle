@@ -628,8 +628,12 @@ $title-line-count: 2;
 }
 
 .sinput {
-  width: 96%;
-  margin: 14px 0 0 0;
+  width: 29%;
+  border-radius: 4px;
+  border: 1px solid #d5d0d0;
+  padding: 9px;
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .searchText {
@@ -641,4 +645,12 @@ $title-line-count: 2;
 .action-btn{
   border: none;
   background: transparent;
+}
+
+mat-header-row{
+  min-height: 40px;
+}
+
+.mat-header-cell{
+  background-color: #F5F5F5;
 }
