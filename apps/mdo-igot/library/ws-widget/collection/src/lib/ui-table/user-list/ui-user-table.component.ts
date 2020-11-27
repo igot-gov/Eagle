@@ -31,8 +31,8 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   dataSource!: any
   widgetData: any
   length!: number
-  pageSize: number = 5;
-  pageSizeOptions = [5, 10, 20];
+  pageSize = 5
+  pageSizeOptions = [5, 10, 20]
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])
