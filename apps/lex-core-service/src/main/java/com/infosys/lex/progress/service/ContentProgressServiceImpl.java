@@ -17,6 +17,7 @@ Highly Confidential
 */
 package com.infosys.lex.progress.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.service.UserUtilityService;
@@ -33,11 +34,15 @@ import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
 import com.infosys.lex.progress.dto.ContentProgressDTO;
 import com.infosys.lex.progress.dto.ExternalProgressDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -72,6 +77,44 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 	private LexLogger logger = new LexLogger(getClass().getName());
 
 	public static final String PROGRESS_CONSTANT = "progress";
+
+	static final String SUNBIRD_HIERARCHY_URI = "https://igot-sunbird.idc.tarento.com/action/content/v3/hierarchy";
+
+	final private RestTemplate restTemplate = new RestTemplate();
+
+	private List<Map<String, Object>> getContent(List<String> contentIds){
+		List<Map<String,Object>> hits = new ArrayList<>();
+
+		for(String contentId : contentIds){
+			ResponseEntity responseEntity = restTemplate.getForEntity(SUNBIRD_HIERARCHY_URI+ "/" +contentId, Map.class);
+			Object finalResponse = ((Map<String,Object>)((Map<String,Object>)responseEntity.getBody()).get("result")).get("content");
+			Map<String,Object> response = new HashMap<>();
+
+			response.put("identifier",((Map<String, Object>) finalResponse).get("identifier"));
+			response.put("contentType",((Map<String, Object>) finalResponse).get("contentType"));
+			response.put("primaryCategory",((Map<String, Object>) finalResponse).get("primaryCategory"));
+			if(((Map<String, Object>) finalResponse).containsKey("parent"))
+				response.put("parent",((Map<String, Object>) finalResponse).get("parent"));
+			if(((Map<String, Object>) finalResponse).containsKey("children"))
+				response.put("children",((Map<String, Object>) finalResponse).get("children"));
+			if(((Map<String, Object>) finalResponse).containsKey("duration"))
+				response.put("duration",getDurationInMins(((Map<String, Object>) finalResponse).get("duration").toString()));
+			else
+				response.put("duration",getDurationInMins("00:00"));
+
+
+			hits.add(response);
+		}
+
+		return hits;
+	}
+
+	private Long getDurationInMins(String durationString){
+		LocalTime lt = LocalTime.parse ( durationString );
+		Duration duration = Duration.between ( LocalTime.MIN , lt );
+		return duration.toMinutes();
+
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -331,48 +374,35 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		parentContentType.add("Collection");
 		parentContentType.add("Course");
 		parentContentType.add("Learning Path");
-//		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandSource(
-//				Arrays.asList(new String[] { contentId }),
-//				new String[] { "identifier", "collections.identifier", "resourceType", "contentType", "duration" },
-//				"Live");
-		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandStatusList(
-				Arrays.asList(new String[] { contentId }),
-				new String[] { "identifier", "collections.identifier", "resourceType", "contentType", "duration"},
-				(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));
+		parentContentType.add("CourseUnit");
+
+		List<Map<String, Object>> searchHits = getContent(Arrays.asList(contentId));
+
 		if (searchHits.size() != 0) {
 			Map<String, Object> source = searchHits.get(0);
 			ContentProgressPrimaryKeyModel primaryKey = new ContentProgressPrimaryKeyModel(rootOrg, userUUID,
 					source.get("contentType").toString(), source.get("identifier").toString());
 			ContentProgressModel contentData = new ContentProgressModel(primaryKey);
 			List<String> parentList = new ArrayList<>();
-			if (source.containsKey("collections")) {
+			if (source.containsKey("parent")) {
 
-				Set<String> idMetaList = new HashSet<String>();
 				List<String> liveIdList = new ArrayList<>();
-				for (Map<String, Object> parent : ((List<Map<String, Object>>) source.get("collections"))) {
-					idMetaList.add(parent.get("identifier").toString());
-				}
-//				List<Map<String, Object>> metaHits = contentService.getMetaByIDListandSource(
-//						new ArrayList<String>(idMetaList), new String[] { "identifier", "contentType" }, "Live");
-				List<Map<String, Object>> metaHits = contentService.getMetaByIDListandStatusList(
-						new ArrayList<String>(idMetaList), new String[] { "identifier", "contentType" }, 
-						(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));
+				List<Map<String, Object>> metaHits = getContent(Arrays.asList((String) source.get("parent")));
+
 				for (Map<String, Object> sourceData : metaHits) {
 					if (parentContentType.contains(sourceData.get("contentType").toString())) {
 						liveIdList.add(sourceData.get("identifier").toString());
-//						System.out.println(sourceData.get("identifier").toString());
 					}
 				}
 
-				for (Map<String, Object> parent : ((List<Map<String, Object>>) source.get("collections"))) {
-					if (liveIdList.contains(parent.get("identifier").toString()))
-						parentList.add(parent.get("identifier").toString());
-				}
+				if (liveIdList.contains(source.get("parent")))
+					parentList.add((String) source.get("parent"));
+
 			}
 			contentData.setParentList(parentList);
 			contentDataMap.put(source.get("identifier").toString(), contentData);
-			ret.put("duration", source.get("duration").toString());
-			ret.put("resource_type", source.getOrDefault("resourceType", "").toString());
+			ret.put("duration", source.get("duration"));
+			ret.put("resource_type", source.getOrDefault("primaryCategory", "").toString());
 		} else
 			throw new InvalidDataInputException("invalid.resource");
 		ret.put("meta", contentDataMap);
@@ -392,10 +422,10 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		List<String> contentIds = new ArrayList<String>((Set<String>) hierarchy.get("progress_id_set"));
 //		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandSource(contentIds,
 //				new String[] { "identifier", "resourceType", "duration" }, "Live");
-		List<Map<String, Object>> searchHits = contentService.getMetaByIDListandStatusList(
+		List<Map<String, Object>> searchHits = getContent(contentIds);/*contentService.getMetaByIDListandStatusList(
 				contentIds, 
 				new String[] { "identifier", "resourceType", "duration" }, 
-				(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));
+				(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));*/
 		for (Map<String, Object> source : searchHits) {
 			if (!contentProgressMap.containsKey(source.get("identifier").toString()))
 				contentProgressMap.put(source.get("identifier").toString(),
@@ -447,6 +477,8 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		allContentType.add("Learning Path");
 		allContentType.add("Resource");
 		allContentType.add("Knowledge Artifact");
+		allContentType.add("CourseUnit");
+
 
 		// adding parents for the resource
 		searchSet.addAll(contentParentList);
@@ -455,38 +487,22 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 
 		while (!searchSet.isEmpty()) {
 			Set<String> nextSearchSet = new HashSet<String>();
-//			List<Map<String, Object>> searchHits = contentService.getMetaByIDListandSource(
-//					new ArrayList<String>(searchSet),
-//					new String[] { "identifier", "collections.identifier", "children.identifier", "contentType" },
-//					"Live");
-			List<Map<String, Object>> searchHits = contentService.getMetaByIDListandStatusList(
-					new ArrayList<String>(searchSet), 
-					new String[] { "identifier", "collections.identifier", "children.identifier", "contentType"},
-					(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));
+			List<Map<String, Object>> searchHits = getContent(new ArrayList<>(searchSet));
 
 			Set<String> idMetaList = new HashSet<String>();
 			List<String> liveIdList = new ArrayList<>();
 			for (Map<String, Object> source : searchHits) {
 
-				if (source.containsKey("collections")) {
-					for (Map<String, Object> parent : ((List<Map<String, Object>>) source.get("collections"))) {
-						idMetaList.add(parent.get("identifier").toString());
-
-					}
+				if (source.containsKey("parent")) {
+					idMetaList.add(source.get("parent").toString());
 				}
 				if (source.containsKey("children")) {
-
 					for (Map<String, Object> child : ((List<Map<String, Object>>) source.get("children"))) {
 						idMetaList.add(child.get("identifier").toString());
 					}
 				}
 			}
-//			List<Map<String, Object>> metaHits = contentService.getMetaByIDListandSource(
-//					new ArrayList<String>(idMetaList), new String[] { "identifier", "contentType" }, "Live");
-			List<Map<String, Object>> metaHits = contentService.getMetaByIDListandStatusList(
-					new ArrayList<String>(idMetaList), 
-					new String[] { "identifier", "contentType" }, 
-					(new String[] { "Live", "Marked For Deletion", "Deleted", "Expired", "Unpublished" }));
+			List<Map<String, Object>> metaHits = getContent(new ArrayList<>(idMetaList));
 			for (Map<String, Object> sourceData : metaHits) {
 				if (allContentType.contains(sourceData.get("contentType").toString()))
 					liveIdList.add(sourceData.get("identifier").toString());
@@ -514,13 +530,11 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 
 				List<String> parentList = new ArrayList<>();
 //				List<String> parentListTemp = new ArrayList<>();
-				if (source.containsKey("collections")) {
-					for (Map<String, Object> parent : ((List<Map<String, Object>>) source.get("collections"))) {
-						if (liveIdList.contains(parent.get("identifier"))) {
-							parentList.add(parent.get("identifier").toString());
-							if (!parentIDSet.contains(parent.get("identifier").toString()))
-								nextSearchSet.add(parent.get("identifier").toString());
-						}
+				if (source.containsKey("parent")) {
+					if (liveIdList.contains(source.get("parent").toString())) {
+						parentList.add(source.get("parent").toString());
+						if (!parentIDSet.contains(source.get("parent").toString()))
+							nextSearchSet.add(source.get("parent").toString());
 					}
 
 				}
@@ -532,7 +546,8 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 					if (!ret.containsKey("parent"))
 						ret.put("parent", source.get("contentType").toString());
 					if (ret.get("parent").toString().toLowerCase().equals("collection")
-							&& source.get("contentType").toString().toLowerCase().equals("course"))
+							&& source.get("contentType").toString().toLowerCase().equals("course")
+							&&  source.get("contentType").toString().toLowerCase().equals("CourseUnit"))
 						ret.put("parent", source.get("contentType").toString());
 				}
 				// added meta
@@ -716,6 +731,19 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 				new String[] { "identifier", "children.identifier", "mimeType", "contentType", "resourceType",
 						"sourceShortName", "learningMode", "isExternal" },
 				"Live");
+
+
+		// add mock data here from ml_search and debug
+		//  vs
+		// add mock data from sunbird hierarchy response of a course
+
+		String sb_json = "[{\"childrenDescription\":[],\"isMetaEditingDisabled\":false,\"creatorContacts\":[{\"name\":\"admin admin\",\"id\":\"c3aee1c8-99d5-456f-89d1-1a8a73dbc99c\"}],\"mimeType\":\"application/vnd.ekstep.content-collection\",\"locale\":\"en\",\"isContentEditingDisabled\":false,\"authoringDisabled\":false,\"learningMode\":\"Self-Paced\",\"objectType\":\"\",\"expiryDate\":\"99991231T235959+0000\",\"duration\":0,\"collections\":[],\"children\":[],\"hasAssessment\":\"no\",\"lastUpdatedOn\":\"20200416T054117+0000\",\"isSearchable\":true,\"contentType\":\"Learning Path\",\"rootOrg\":\"igot\",\"identifier\":\"lex_auth_01300083878313984012\",\"creator\":\"c3aee1c8-99d5-456f-89d1-1a8a73dbc99c\",\"isExternal\":false,\"childrenTitle\":[],\"org\":[{\"validTill\":\"20700416T054117+0000\",\"org\":\"dopt\"}],\"nodeType\":\"LEARNING_CONTENT\",\"versionDate\":\"20200416T054117+0000\",\"accessPaths\":[\"igot/dopt\"],\"size\":0,\"name\":\"Untitled Content\",\"isStandAlone\":true,\"category\":\"Learning Path\",\"nodeId\":261,\"fileType\":\"Document\",\"transcoding\":{\"lastTranscodedOn\":null,\"retryCount\":0,\"status\":null},\"status\":\"Draft\"},{\"childrenDescription\":[],\"isMetaEditingDisabled\":false,\"creatorContacts\":[{\"name\":\"admin admin\",\"id\":\"c3aee1c8-99d5-456f-89d1-1a8a73dbc99c\"}],\"mimeType\":\"application/pdf\",\"locale\":\"en\",\"isContentEditingDisabled\":false,\"authoringDisabled\":false,\"learningMode\":\"Self-Paced\",\"objectType\":\"\",\"expiryDate\":\"99991231T235959+0000\",\"duration\":0,\"collections\":[],\"children\":[],\"hasAssessment\":\"no\",\"lastUpdatedOn\":\"20200416T083526+0000\",\"isSearchable\":true,\"contentType\":\"Resource\",\"rootOrg\":\"igot\",\"identifier\":\"lex_auth_01300092212217446413\",\"creator\":\"c3aee1c8-99d5-456f-89d1-1a8a73dbc99c\",\"isExternal\":false,\"childrenTitle\":[],\"org\":[{\"validTill\":\"20700416T083526+0000\",\"org\":\"dopt\"}],\"nodeType\":\"LEARNING_CONTENT\",\"versionDate\":\"20200416T083526+0000\",\"accessPaths\":[\"igot/dopt\"],\"size\":0,\"name\":\"Untitled Content\",\"isStandAlone\":true,\"category\":\"Resource\",\"nodeId\":255,\"fileType\":\"Document\",\"transcoding\":{\"lastTranscodedOn\":null,\"retryCount\":0,\"status\":null},\"status\":\"Draft\"}]";
+
+		searchHits = new ObjectMapper().readValue(sb_json, new TypeReference<List<Map<String, Object>>>(){});
+
+		System.out.println("search hits >>>> "+searchHits);
+
+
 		List<ContentProgressModel> contentProgressList = contentProgressRepo.getProgress(rootOrg, userUUID, contentList,
 				idsList);
 		//System.out.println("ContentProgressModel data  "+new ObjectMapper().writeValueAsString(contentProgressList));
