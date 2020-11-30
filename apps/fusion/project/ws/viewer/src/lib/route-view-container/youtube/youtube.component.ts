@@ -24,6 +24,7 @@ export class YoutubeComponent implements OnInit {
   @Input() isPreviewMode = false
   isTypeOfCollection = false
   isRestricted = false
+  openDiscuuss = false
   constructor(private activatedRoute: ActivatedRoute, private configSvc: ConfigurationsService) { }
 
   ngOnInit() {

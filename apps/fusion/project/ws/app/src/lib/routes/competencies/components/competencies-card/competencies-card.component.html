@@ -1,7 +1,7 @@
 <mat-card class="competency-card cursor-pointer" [ngClass]="{'mat-copmetence': isSelected}" (click)="view()">
   <!-- (click)="!isSelected ? setSelectedCompetency(): view()"> -->
 
-  <a href="javascript:void(0)" role="button">
+  <a href="javascript:void(0)" tabindex="0">
     <mat-card-content class="flex flex-1 custom" *ngIf="!isSelected">
       <span class="mat-subheading-1">{{data.name}}</span>
       <span class="mat-body-2">{{data.description}}</span>
