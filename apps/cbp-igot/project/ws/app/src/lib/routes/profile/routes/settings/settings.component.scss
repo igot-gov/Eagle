@@ -13,6 +13,7 @@
 
   .width-content-lang {
     width: 240px;
+
     @include breakpoint-xs {
       width: 100%;
     }
@@ -21,6 +22,7 @@
 
 .theme-mode {
   width: 45%;
+
   @include breakpoint-xs {
     width: 100%;
   }
@@ -28,6 +30,7 @@
 
 .mode-toggle {
   width: 45%;
+
   @include breakpoint-xs {
     width: 100%;
   }
@@ -40,6 +43,7 @@
   margin-bottom: $size-l;
   list-style: none;
   cursor: pointer;
+
   @include breakpoint-xs {
     width: 100%;
   }
@@ -74,23 +78,26 @@
   @extend %common-typography;
   font-size: 12px;
 }
+
 .content-v-center {
   display: flex;
   align-items: center;
 }
+
 .typography-font-normal {
   @extend %common-typography;
   font-size: 14px;
 }
+
 .typography-font-large {
   @extend %common-typography;
   font-size: 16px;
 }
 
-.language-drop-down-width {
-  width: 150px;
-}
+// .language-drop-down-width {
+//   width: 150px;
+// }
 
-.domain-drop-down-width {
-  width: 200px;
-}
+// .domain-drop-down-width {
+//   width: 200px;
+// }

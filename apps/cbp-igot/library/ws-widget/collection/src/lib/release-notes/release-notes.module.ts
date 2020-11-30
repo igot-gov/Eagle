@@ -32,5 +32,6 @@ import { ReleaseNotesComponent } from './release-notes.component'
     BtnPageBackModule,
   ],
   entryComponents: [ReleaseNotesComponent],
+  exports: [ReleaseNotesComponent],
 })
 export class ReleaseNotesModule { }

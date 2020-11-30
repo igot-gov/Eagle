@@ -1,8 +1,8 @@
 {
   "enabledTabs": {
     "dashboard": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Dashboard",
       "subFeatures": {
         "pendingCourses": false,
@@ -13,8 +13,8 @@
       }
     },
     "learning": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Learning",
       "subTabs": {
         "learningTime": {
@@ -45,8 +45,8 @@
       }
     },
     "achievements": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Achievements",
       "subTabs": {
         "badges": {
@@ -64,8 +64,8 @@
       }
     },
     "skills": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Skills",
       "subTabs": {
         "skills": {
@@ -111,8 +111,8 @@
       }
     },
     "interests": {
-      "enabled": true,
-      "available": true,
+      "enabled": false,
+      "available": false,
       "displayName": "Interests"
     },
     "plans": {

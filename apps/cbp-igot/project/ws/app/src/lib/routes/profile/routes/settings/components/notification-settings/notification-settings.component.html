@@ -8,10 +8,11 @@
 </h2>
 <div *ngIf="notificationsFetchStatus === 'done'" class="notifications-container mat-card">
   <ng-container *ngFor="let group of notificationSettings; let groupIndex = index; let end = last">
-    <div class="group-name-container" [hidden]="group.group_id === 'Authoring' && !userRoles.has('author')" matRipple
+    <div *ngIf="group.group_id === 'Authoring'" class="group-name-container"
+      [hidden]="group.group_id === 'Authoring' && !userRoles.has('author')" matRipple
       [ngClass]="{ 'ws-mat-primary-background': group.show }" role="button"
       (click)="group.show ? (group.show = false) : (group.show = true)">
-      <h2 class="group-name">{{ group.group_name }}</h2>
+      <h2 class="group-name" tabindex="0">{{ group.group_name }}</h2>
       <button mat-icon-button>
         <mat-icon *ngIf="!group.show">arrow_drop_down</mat-icon>
         <mat-icon *ngIf="group.show">arrow_drop_up</mat-icon>
@@ -20,17 +21,17 @@
     <ng-container *ngIf="group.show">
       <div class="ws-mat-primary-lite-border-bottom px-8 py-3"
         *ngFor="let event of group.events; let eventIndex = index">
-        <h3 class="event-name">
+        <h3 class="event-name" tabindex="0">
           {{ event.event_name }}
         </h3>
         <!-- <p class="font-normal" i18n>Where you receive these notifications</p> -->
         <div class="flex flex-column justify-between ml-6">
           <ng-container *ngFor="let mode of getSupportedModes(event); let endMode = last">
             <div class="flex flex-1 justify-between">
-              <div class="text-base">{{ mode.mode_name | titlecase }}</div>
+              <div class="text-base" tabindex="0">{{ mode.mode_name | titlecase }}</div>
               <span class="flex flex-1"></span>
               <mat-slide-toggle [labelPosition]="'before'" [checked]="mode.status"
-                [disabled]="notificationsUpdateStatus === 'fetching'" [color]="'primary'" (change)="
+                [disabled]="notificationsUpdateStatus === 'fetching'" [color]="'warn'" (change)="
                 updateMode(groupIndex, eventIndex, successUpdating.value, errorUpdating.value)
               ">
                 <ng-container i18n *ngIf="mode.status">On</ng-container>

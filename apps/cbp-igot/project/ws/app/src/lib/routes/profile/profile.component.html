@@ -14,13 +14,13 @@
   </button> -->
 <!-- </mat-toolbar> -->
 <div class="container-balanced">
-  <div class="flex flex-1">
+  <!-- <div class="flex flex-1">
     <button aria-label="showText? 'Hide side panel' : 'Show side panel'" mat-icon-button
       (click)="!screenSizeIsLtMedium ? (showText = !showText) : sideNavBar.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-  </div>
-  <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
+  </div> -->
+  <!-- <mat-sidenav-container autosize="true" class="sidenav-content-min-height">
     <mat-sidenav #sideNavBar [opened]="!screenSizeIsLtMedium" [mode]="screenSizeIsLtMedium ? 'over' : 'side'">
       <mat-nav-list class="margin-left-s margin-right-xs">
         <a mat-list-item *ngIf="enabledTabs?.dashboard?.enabled" routerLinkActive="mat-toolbar"
@@ -80,10 +80,10 @@
             {{enabledTabs?.settings?.displayName}}</span>
         </a>
       </mat-nav-list>
-    </mat-sidenav>
+    </mat-sidenav> -->
 
-    <mat-sidenav-content class="sidenav-content">
-      <router-outlet></router-outlet>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <!-- <mat-sidenav-content class="sidenav-content"> -->
+  <router-outlet></router-outlet>
+  <!-- </mat-sidenav-content> -->
+  <!-- </mat-sidenav-container> -->
 </div>

@@ -16,6 +16,7 @@ import { MobileAppHomeComponent } from './routes/public/mobile-app/components/mo
 import { PublicAboutComponent } from './routes/public/public-about/public-about.component'
 import { PublicContactComponent } from './routes/public/public-contact/public-contact.component'
 import { PublicFaqComponent } from './routes/public/public-faq/public-faq.component'
+import { PublicReleaseComponent } from './routes/public/public-release/public-release.component'
 import { TncComponent } from './routes/tnc/tnc.component'
 import { TncAppResolverService } from './services/tnc-app-resolver.service'
 import { TncPublicResolverService } from './services/tnc-public-resolver.service'
@@ -90,6 +91,12 @@ const routes: Routes = [
     path: 'app/notifications',
     loadChildren: () =>
       import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'app/profile',
+    loadChildren: () =>
+      import('./routes/route-profile-app.module').then(u => u.RouteProfileAppModule),
     canActivate: [GeneralGuard],
   },
   // {
@@ -283,6 +290,17 @@ const routes: Routes = [
     data: {
       pageType: 'feature',
       pageKey: 'mobile-app',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
+    path: 'public/release',
+    component: PublicReleaseComponent,
+    data: {
+      pageType: 'feature',
+      pageKey: 'public-releases',
     },
     resolve: {
       pageData: PageResolve,

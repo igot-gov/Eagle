@@ -1,13 +1,8 @@
 <mat-toolbar>
-  <ws-widget-btn-page-back [widgetData]="{ url: 'back' }"></ws-widget-btn-page-back>
-  <span i18n="page title: release notes" class="margin-left-xs">Release Notes</span>
+  <ws-widget-btn-page-back [widgetData]="{ url: 'back',titles:[{title:'Release Notes',url:'none'}] }">
+  </ws-widget-btn-page-back>
+  <span i18n="page title: release notes" class="margin-left-xs"></span>
 </mat-toolbar>
-<!-- <div *ngIf="fetchStatus === 'fetching'" class="margin-top-m flex flex-center"> -->
-<!-- <mat-spinner></mat-spinner> -->
-<!-- <h2 class="h2-title">
-          Loading...
-        </h2> -->
-<!-- </div> -->
 <section class="release-notes-container">
 
   <!-- <mat-card class="release-notes-card" *ngFor="let releaseUnit of releaseNotes.releaseList"> -->

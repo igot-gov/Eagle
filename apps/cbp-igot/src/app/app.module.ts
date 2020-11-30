@@ -57,6 +57,7 @@ import { AppRetryInterceptorService } from './services/app-retry-interceptor.ser
 import { TncAppResolverService } from './services/tnc-app-resolver.service'
 import { TncPublicResolverService } from './services/tnc-public-resolver.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { PublicReleaseModule } from './routes/public/public-release/public-about.module'
 // import { ServiceWorkerModule } from '@angular/service-worker'
 // import { environment } from '../environments/environment'
 
@@ -126,6 +127,7 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     PublicAboutModule,
     PublicContactModule,
     PublicFaqModule,
+    PublicReleaseModule,
     MobileAppModule,
     PipeSafeSanitizerModule,
     TourModule,
