@@ -1,11 +1,4 @@
 <div class="pad-l-4r">
-  <div class="margin-top-xs flex flex-column">
-    <a [routerLink]="['/app/home/users']" role="link" i18n class="flex flex-column margin-top-l">
-      <img src="mdo-assets/icons/goi.png" alt="" class="goi" />
-      <span i18n class="mat-body-2 margin-top-m padding-right-m">Department of Personnel and Training
-      </span>
-    </a>
-  </div>
   <mat-nav-list class="margin-top-m flex-1" aria-label="left menu">
     <ng-container *ngFor="let tab of widgetData">
       <a mat-list-item class="mat-body-2 flex flex-1 outline-1" *ngIf="tab?.enabled && !tab.customRouting" matRipple

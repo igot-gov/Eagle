@@ -89,6 +89,7 @@ export const ROOT_WIDGET_CONFIG = {
   menus: {
     _type: 'menus',
     leftMenu: 'leftMenu',
+    leftMenuWithoutLogo: 'leftMenuWithoutLogo',
   },
   player: {
     _type: 'player',

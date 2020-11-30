@@ -68,6 +68,9 @@ export * from './lib/layout-tab/layout-tab.model'
 export * from './lib/layout-tab/layout-tab.module'
 export * from './lib/left-menu/left-menu.model'
 export * from './lib/left-menu/left-menu.module'
+
+export * from './lib/left-menu-without-logo/left-menu-without-logo.module'
+export * from './lib/left-menu-without-logo/left-menu-without-logo.model'
 export * from './lib/group-checkbox/group-checkbox.module'
 // Components
 export * from './lib/page/page.component'

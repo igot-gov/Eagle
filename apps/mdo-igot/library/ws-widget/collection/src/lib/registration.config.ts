@@ -130,7 +130,9 @@ import { ContentStripVerticalComponent } from './content-strip-vertical/content-
 // import { CardActivityComponent } from './card-activity/card-activity.component'
 // import { CardActivityModule } from './card-activity/card-activity.module'
 import { LeftMenuModule } from './left-menu/left-menu.module'
+import { LeftMenuWithoutLogoModule } from './left-menu-without-logo/left-menu-without-logo.module'
 import { LeftMenuComponent } from './left-menu/left-menu.component'
+import { LeftMenuWithoutLogoComponent } from './left-menu-without-logo/left-menu-without-logo.component'
 // import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
 import { UITableModule } from './ui-table/ui-table.module'
 export const WIDGET_REGISTERED_MODULES = [
@@ -168,6 +170,7 @@ export const WIDGET_REGISTERED_MODULES = [
   LayoutLinearModule,
   LayoutTabModule,
   LeftMenuModule,
+  LeftMenuWithoutLogoModule,
   NewGridLayoutModule,
   NetworkStripMultipleModule,
   PickerContentModule,
@@ -324,6 +327,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.menus._type,
     widgetSubType: ROOT_WIDGET_CONFIG.menus.leftMenu,
     component: LeftMenuComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.menus._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.menus.leftMenuWithoutLogo,
+    component: LeftMenuWithoutLogoComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.networkStrip._type,

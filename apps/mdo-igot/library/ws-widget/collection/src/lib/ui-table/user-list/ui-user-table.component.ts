@@ -89,9 +89,9 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.tableData.needHash) {
         columns.splice(0, 0, 'SR')
       }
-      if (this.tableData.actions && this.tableData.actions.length > 0) {
-        columns.push('Actions')
-      }
+      // if (this.tableData.actions && this.tableData.actions.length > 0) {
+      //   columns.push('Actions')
+      // }
       if (this.tableData.actions && this.tableData.actions.length > 0) {
         columns.push('Menu')
       }

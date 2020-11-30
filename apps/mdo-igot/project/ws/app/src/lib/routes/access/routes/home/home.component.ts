@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Router, Event, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router'
-import { ILeftMenu } from '@ws-widget/collection'
+import { ILeftMenuWithoutLogo } from '@ws-widget/collection'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { map } from 'rxjs/operators'
@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators'
 })
 export class HomeComponent implements OnInit, OnDestroy {
   currentRoute = 'roles-access'
-  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
+  widgetData!: NsWidgetResolver.IWidgetData<ILeftMenuWithoutLogo>
   isLtMedium$ = this.valueSvc.isLtMedium$
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   private defaultSideNavBarOpenedSubscription: any
