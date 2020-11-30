@@ -34,19 +34,14 @@ export class ProfanityService {
         contentId: content,
         fileName: filename,
       }
-      // tslint:disable-next-line:no-console
-      console.log(requestData)
+
     }
-    // tslint:disable-next-line:no-console
-    console.log(requestData)
-    // const userId = this.configSvc.userProfile && this.configSvc.userProfile.userId
     return this.apiService.post<any>(
       `${START_VALIDATE_PDF_CONTENT}`, requestData
     )
   }
   getProfanity(finalData: any) {
     let requestData = null
-
     if (finalData && finalData != null && finalData !== undefined) {
       const finalUrl = finalData.pdfDownloadUrl.replace('?type=main', '')
       requestData = {
@@ -54,11 +49,7 @@ export class ProfanityService {
         contentId: finalData.contentId,
         fileName: finalData.fileName,
       }
-      // tslint:disable-next-line:no-console
-      console.log(requestData)
     }
-    // tslint:disable-next-line:no-console
-    console.log(requestData)
     return this.apiService.post<any>(
       `${GET_VALIDATE_PDF_CONTENT}`, requestData
     )
