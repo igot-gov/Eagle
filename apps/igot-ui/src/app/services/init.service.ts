@@ -34,7 +34,7 @@ interface IFeaturePermissionConfigs {
 }
 
 const endpoint = {
-  profilePid: 'http://localhost:3003/proxies/v8/api/user/v2/read',
+  profilePid: '/apis/proxies/v8/api/user/v2/read',
   details: `/apis/protected/v8/user/details?ts=${Date.now()}`,
 }
 
@@ -166,12 +166,12 @@ export class InitService {
       this.settingsSvc.initializePrefChanges(environment.production)
     }
     this.updateNavConfig()
-    await this.widgetContentSvc
-      .setS3ImageCookie()
-      .toPromise()
-      .catch(() => {
-        // throw new DataResponseError('COOKIE_SET_FAILURE')
-      })
+    // await this.widgetContentSvc
+    //   .setS3ImageCookie()
+    //   .toPromise()
+    //   .catch(() => {
+    //     // throw new DataResponseError('COOKIE_SET_FAILURE')
+    //   })
     return true
   }
 
