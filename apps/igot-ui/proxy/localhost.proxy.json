@@ -1,6 +1,6 @@
 {
   "/apis/*": {
-    "target": "https://d136953gtttd92.cloudfront.net",
+    "target": "https://igot-sunbird.idc.tarento.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
@@ -54,7 +54,7 @@
     }
   },
   "/assets/*": {
-    "target": "http://127.0.0.1:8080",
+    "target": "http://127.0.0.1:8086",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
