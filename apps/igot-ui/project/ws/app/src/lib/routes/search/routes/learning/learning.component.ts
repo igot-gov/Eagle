@@ -237,15 +237,15 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.routeComp = this.activated.snapshot.data.pageroute
         this.activated.snapshot.data.pageData.data.search.tabs.map((cur: ISearchTab) => {
           if (cur.titleKey === this.activated.snapshot.data.pageroute) {
-            this.searchRequestObject.request.filters.primaryCategory = []
+            this.searchRequestObject.request.filters = {}
           }
         })
       } else {
         this.routeComp = this.activated.snapshot.data.pageroute
-        this.searchRequestObject.request.filters.primaryCategory = []
+        this.searchRequestObject.request.filters = {}
       }
       if (this.utilitySvc.isMobile && !this.isIntranetAllowedSettings) {
-        this.searchRequestObject.request.filters.primaryCategory = []
+        this.searchRequestObject.request.filters = {}
       }
       // query
       if (queryParams.has('q')) {
@@ -264,7 +264,7 @@ export class LearningComponent implements OnInit, OnDestroy {
         this.searchRequest.filters = filters
         for (const key of Object.keys(this.searchRequest.filters)) {
           if (key) {
-            this.searchRequestObject.request.filters.primaryCategory = this.searchRequest.filters[key]
+            this.searchRequestObject.request.filters = this.searchRequest.filters
           }
         }
       }
@@ -300,7 +300,7 @@ export class LearningComponent implements OnInit, OnDestroy {
       this.noContent = false
       if (
         this.searchRequestObject.request.filters &&
-        !Object.keys(this.searchRequestObject.request.filters.primaryCategory).length
+        !Object.keys(this.searchRequestObject.request.filters).length
       ) {
         // if (this.searchRequestObject && this.searchRequestObject.pageNo) {
         //   this.searchRequestObject.pageNo = 0
@@ -393,7 +393,8 @@ export class LearningComponent implements OnInit, OnDestroy {
           this.searchResults.filters = data.filters
           // this.searchResults.queryUsed = data.queryUsed
           // this.searchResults.type = data.type
-          this.searchResults.result.content = [...this.searchResults.result.content, ...(data.result.content ? data.result.content : [])]
+          this.searchResults.result.content = (data.result.content) ? data.result.content : []
+          // [...this.searchResults.result.content, ...(data.result.content ? data.result.content : [])]
           // this.searchResults.doYouMean = data.doYouMean
           // this.searchResults.queryUsed = data.queryUsed
           // this.handleFilters(this.searchResults.filters)

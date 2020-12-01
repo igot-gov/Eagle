@@ -22,9 +22,7 @@ export interface ISearchRequest {
 
 export interface ISearchRequestV2 {
   request: {
-    filters: {
-      primaryCategory: string[]
-    },
+    filters: {},
     query: string,
     sort_by: { lastUpdatedOn: string },
     fields: [

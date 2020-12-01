@@ -69,9 +69,7 @@ export class SearchServService {
     const v6Request: NSSearch.ISearchV6RequestV2 = {
       request: {
         query: request.request.query,
-        filters: {
-          primaryCategory: request.request.filters.primaryCategory,
-        },
+        filters: request.request.filters,
         sort_by: {
           lastUpdatedOn: request.request.sort_by.lastUpdatedOn,
         },
