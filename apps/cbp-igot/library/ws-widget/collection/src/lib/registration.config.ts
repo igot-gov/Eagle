@@ -2,6 +2,9 @@ import { NsWidgetResolver } from '@ws-widget/resolver'
 // Components
 import { BtnAppsComponent } from './btn-apps/btn-apps.component'
 // Modules
+import { AtGlanceModule } from './at-glance/at-glance.module'
+import { AtGlanceComponent } from './at-glance/at-glance.component'
+
 import { AvatarPhotoModule } from './_common/avatar-photo/avatar-photo.module'
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
 import { BtnCallComponent } from './btn-call/btn-call.component'
@@ -136,6 +139,7 @@ import { CardTableComponent } from './card-table/card-table.component'
 // import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
 
 export const WIDGET_REGISTERED_MODULES = [
+  AtGlanceModule,
   AvatarPhotoModule,
   BtnAppsModule,
   BtnCallModule,
@@ -207,6 +211,11 @@ export const WIDGET_REGISTERED_MODULES = [
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
+  {
+    widgetType: ROOT_WIDGET_CONFIG.atGlance._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.atGlance.default,
+    component: AtGlanceComponent,
+  },
   {
     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
     widgetSubType: ROOT_WIDGET_CONFIG.actionButton.apps,

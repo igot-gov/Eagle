@@ -1,4 +1,8 @@
 export const ROOT_WIDGET_CONFIG = {
+  atGlance: {
+    _type: 'atGlance',
+    default: 'default'
+  },
   actionButton: {
     _type: 'actionButton',
     apps: 'actionButtonApps',

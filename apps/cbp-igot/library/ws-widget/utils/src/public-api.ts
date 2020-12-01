@@ -21,6 +21,7 @@ export * from './lib/pipes/pipe-concise-date-range/pipe-concise-date-range.modul
 export * from './lib/pipes/pipe-count-transform/pipe-count-transform.module'
 export * from './lib/pipes/pipe-date-concat/pipe-date-concat.module'
 export * from './lib/pipes/pipe-duration-transform/pipe-duration-transform.module'
+export * from './lib/pipes/pipe-duration-transform/pipe-duration-transform.pipe'
 export * from './lib/pipes/pipe-html-tag-removal/pipe-html-tag-removal.module'
 export * from './lib/pipes/pipe-filter/pipe-filter.module'
 export * from './lib/pipes/pipe-list-filter/pipe-list-filter.module'

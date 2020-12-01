@@ -7,7 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component'
 import { RouterModule } from '@angular/router'
 import { DashBoardService } from './components/dashboard/dashboard.service'
 import { LeftMenuModule } from '@ws-widget/collection'
-import { WidgetResolverModule } from '@ws-widget/resolver'
+// import { WidgetResolverModule } from '@ws-widget/resolver'
 import { WsAuthorHomeRoutingModule } from './home.routing.module'
 
 @NgModule({
@@ -20,7 +20,7 @@ import { WsAuthorHomeRoutingModule } from './home.routing.module'
     SharedModule,
     ReactiveFormsModule,
     WsAuthorHomeRoutingModule,
-    WidgetResolverModule,
+    // WidgetResolverModule,
     FormsModule,
     RouterModule,
     LeftMenuModule,

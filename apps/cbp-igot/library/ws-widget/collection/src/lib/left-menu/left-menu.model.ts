@@ -1,5 +1,9 @@
 
 export interface ILeftMenu {
+  logo?: boolean
+  menus: IMenu[]
+}
+export interface IMenu {
   name: string
   key: string
   render: boolean
@@ -8,5 +12,7 @@ export interface ILeftMenu {
     uri?: string
   }
   enabled: boolean
-  routerLink: string
+  routerLink: string,
+  customRouting?: boolean
+  paramaterName?: string
 }

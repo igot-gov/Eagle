@@ -1,0 +1,24 @@
+<div class="flex flex-1 padding-xs margin-left-l">
+  <a class="mat-title ws-mat-black60-text" [routerLink]="'/author/my-content'"><span>All CBPs</span></a>
+  <mat-icon>chevron_right</mat-icon>
+  <span class="mat-title">{{'Overview of Administrative Law'}}</span>
+</div>
+<mat-sidenav-container class="nav-container" autosize name="auth-tool-exp">
+  <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="border-0 min-width-4">
+    <div class="contain">
+      <ng-container [wsResolverWidget]="leftmenues"></ng-container>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div *ngIf="screenSizeIsLtMedium">
+      <button type="button" mat-icon-button (click)="sideNavBarOpened = !sideNavBarOpened"
+        id="ws-auth-content-detail-home-btn" name="ws-auth-content-detail-home-menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <!-- <ws-auth-root-dashboard></ws-auth-root-dashboard> -->
+    <div class="container-balanced">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -21,6 +21,15 @@ const routes: Routes = [
       script: InitResolver,
     },
   },
+  {
+    path: 'content-detail',
+    loadChildren: () =>
+      import('./components/content-detail/content-detail.module').then(u => u.ContentDetailModule),
+    data: { load: ['ordinals', 'ckeditor', 'meta'] },
+    resolve: {
+      script: InitResolver,
+    },
+  },
 ]
 @NgModule({
   imports: [

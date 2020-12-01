@@ -14,7 +14,9 @@
   margin-top: 2rem !important;
 }
 
-
+.flex-3 {
+  flex: 3;
+}
 
 .text-white {
   color: white !important;
@@ -192,14 +194,6 @@
   max-width: 500px;
   box-sizing: border-box;
   max-height: 40px;
-}
-
-.border-0 {
-  border: 0;
-}
-
-.min-width-4 {
-  min-width: 400px;
 }
 
 ws-auth-content-card-v2 {

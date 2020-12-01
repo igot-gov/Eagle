@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { GridLayoutComponent } from './grid-layout.component'
+import { AtGlanceComponent } from './at-glance.component'
 
-describe('GridLayoutComponent', () => {
-  let component: GridLayoutComponent
-  let fixture: ComponentFixture<GridLayoutComponent>
+describe('AtGlanceComponent', () => {
+  let component: AtGlanceComponent
+  let fixture: ComponentFixture<AtGlanceComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GridLayoutComponent],
+      declarations: [AtGlanceComponent],
     })
       .compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GridLayoutComponent)
+    fixture = TestBed.createComponent(AtGlanceComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

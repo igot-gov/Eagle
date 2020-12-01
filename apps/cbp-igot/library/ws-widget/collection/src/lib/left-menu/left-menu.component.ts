@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
 import { NsWidgetResolver, WidgetBaseComponent } from '@ws-widget/resolver'
-import { ILeftMenu } from './left-menu.model'
+import { ILeftMenu, IMenu } from './left-menu.model'
 
 @Component({
   selector: 'ws-widget-left-menu',
@@ -22,6 +22,12 @@ export class LeftMenuComponent extends WidgetBaseComponent
 
   public isLinkActive(url: string): boolean {
     return (this.activatedRoute.snapshot.fragment === url)
+  }
+  getLink(tab: IMenu) {
+    if (tab && tab.customRouting && this.activatedRoute.snapshot && this.activatedRoute.snapshot.firstChild && tab.paramaterName) {
+      return (tab.routerLink.replace('<param>', this.activatedRoute.snapshot.firstChild.params[tab.paramaterName]))
+    }
+    return
   }
   ngOnDestroy() {
 

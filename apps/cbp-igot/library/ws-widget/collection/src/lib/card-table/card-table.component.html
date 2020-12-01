@@ -39,7 +39,7 @@
               (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
 
             <span *ngIf="!col.isList && !col.link" class="textclass mat-body-2">
-              {{element[col.key] || col.defaultValue}}
+              {{element[col.key]}}
             </span>
 
             <a *ngIf="col.link" [routerLink]="col.link.path+element[col.link.dParams]"

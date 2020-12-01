@@ -1,16 +1,17 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { CardTableModule, PipeContentRouteModule } from '@ws-widget/collection'
+import { AtGlanceModule, CardTableModule, LeftMenuModule, PipeContentRouteModule } from '@ws-widget/collection'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
-import { MyContentComponent } from './components/my-content/my-content.component'
-import { MyContentRoutingModule } from './my-content-routing.module'
-import { MyContentService } from './services/my-content.service'
+import { ContentDetailComponent } from './components/content-detail/content-detail.component'
+import { MyContentRoutingModule } from './content-detail-routing.module'
+import { MyContentService } from './services/content-detail.service'
 import { MatSortModule, MatTableModule } from '@angular/material'
 import { PipeDurationTransformModule } from '@ws-widget/utils'
 import { WidgetResolverModule } from '@ws-widget/resolver'
+import { ContentDetailHomeComponent } from './components/content-detail-home/content-detail-home.component'
 
 @NgModule({
-  declarations: [MyContentComponent],
+  declarations: [ContentDetailHomeComponent, ContentDetailComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -20,8 +21,10 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
     MatTableModule,
     MatSortModule,
     CardTableModule,
+    LeftMenuModule,
     WidgetResolverModule,
+    AtGlanceModule,
   ],
   providers: [MyContentService],
 })
-export class MyContentModule { }
+export class ContentDetailModule { }
