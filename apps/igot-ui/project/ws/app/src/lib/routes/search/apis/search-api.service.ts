@@ -9,7 +9,7 @@ const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 const API_END_POINTS = {
   SOCIAL_VIEW_SEARCH_RESULT: `${PROTECTED_SLAG_V8}/social/post/search`,
   SEARCH_AUTO_COMPLETE: `${PROTECTED_SLAG_V8}/content/searchAutoComplete`,
-  SEARCH_V6: `http://localhost:3003/proxies/v8/sunbirdigot/search`,
+  SEARCH_V6: `/apis/proxies/v8/sunbirdigot/search`,
 }
 @Injectable({
   providedIn: 'root',

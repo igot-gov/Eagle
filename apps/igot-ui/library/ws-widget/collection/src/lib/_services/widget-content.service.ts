@@ -48,10 +48,10 @@ export class WidgetContentService {
   fetchContent(
     contentId: string,
     hierarchyType: 'all' | 'minimal' | 'detail' = 'detail',
-    additionalFields: string[] = [],
+    _additionalFields: string[] = [],
   ): Observable<NsContent.IContent> {
     // const url = `${API_END_POINTS.CONTENT}/${contentId}?hierarchyType=${hierarchyType}`
-    const url = `http://localhost:3003/proxies/v8/sunbird/${contentId}?hierarchyType=${hierarchyType}`
+    const url = `/apis/proxies/v8/sunbird/${contentId}?hierarchyType=${hierarchyType}`
     // return this.http
     //   .post<NsContent.IContent>(url, { additionalFields })
     //   .pipe(retry(1))
