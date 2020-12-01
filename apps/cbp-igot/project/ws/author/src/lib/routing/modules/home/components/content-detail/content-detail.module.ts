@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { AtGlanceModule, CardTableModule, LeftMenuModule, PipeContentRouteModule } from '@ws-widget/collection'
+import { AtGlanceModule, AuthorCardModule, CardTableModule, LeftMenuModule, PipeContentRouteModule, UserContentDetailedRatingModule, UserContentRatingModule } from '@ws-widget/collection'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { ContentDetailComponent } from './components/content-detail/content-detail.component'
 import { MyContentRoutingModule } from './content-detail-routing.module'
@@ -24,6 +24,9 @@ import { ContentDetailHomeComponent } from './components/content-detail-home/con
     LeftMenuModule,
     WidgetResolverModule,
     AtGlanceModule,
+    AuthorCardModule,
+    UserContentRatingModule,
+    UserContentDetailedRatingModule,
   ],
   providers: [MyContentService],
 })

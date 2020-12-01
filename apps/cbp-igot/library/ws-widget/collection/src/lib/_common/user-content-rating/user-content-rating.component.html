@@ -1,7 +1,7 @@
 <ng-container *ngIf="enableFeature && contentId">
   <!-- <mat-card> -->
-  <div>
-    <h2 class="rate-heading" id="rate-heading" i18n>Rate content</h2>
+  <div class="flex">
+    <!-- <h2 class="rate-heading" id="rate-heading" i18n>Rate content</h2> -->
     <div class="flex">
       <button i18n-aria-label aria-label="Rating" aria-labelledby="rate-heading" name="user-content-rating-star-{{i+1}}"
         [disabled]="isRequesting || isDisabled" class="rating-button" mat-icon-button
@@ -10,6 +10,7 @@
           {{ (userRating || -1) > i ? 'star' : 'star_border' }}</mat-icon>
       </button>
     </div>
+    <span class="mat-body-1" tabindex="0" i18n-aria-label aria-label="Rating">5 of {{userRating || '0'}}</span>
   </div>
   <!-- </mat-card> -->
 </ng-container>

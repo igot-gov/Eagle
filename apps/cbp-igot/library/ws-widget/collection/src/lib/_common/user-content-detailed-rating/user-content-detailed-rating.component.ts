@@ -3,11 +3,11 @@ import { ConfigurationsService, EventService } from '@ws-widget/utils'
 import { WidgetContentService } from '../../_services/widget-content.service'
 
 @Component({
-  selector: 'ws-widget-user-content-rating',
-  templateUrl: './user-content-rating.component.html',
-  styleUrls: ['./user-content-rating.component.scss'],
+  selector: 'ws-widget-user-content-detailed-rating',
+  templateUrl: './user-content-detailed-rating.component.html',
+  styleUrls: ['./user-content-detailed-rating.component.scss'],
 })
-export class UserContentRatingComponent implements OnInit {
+export class UserContentDetailedRatingComponent implements OnInit {
   @Input() contentId!: string
   @Input() isDisabled = true
   isRequesting = true

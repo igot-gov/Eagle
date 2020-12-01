@@ -3,6 +3,9 @@ export * from './lib/btn-apps/btn-apps.model'
 // modules
 export * from './lib/at-glance/at-glance.module'
 export * from './lib/at-glance/at-glance.model'
+export * from './lib/author-card/author-card.module'
+export * from './lib/author-card/author-card.model'
+
 export * from './lib/_common/avatar-photo/avatar-photo.module'
 export * from './lib/btn-apps/btn-apps.module'
 export * from './lib/btn-call/btn-call.module'
@@ -117,6 +120,8 @@ export * from './lib/_common/user-autocomplete/user-autocomplete.module'
 export * from './lib/_common/user-autocomplete/user-autocomplete.service'
 // common modules
 export * from './lib/_common/user-content-rating/user-content-rating.module'
+export * from './lib/_common/user-content-detailed-rating/user-content-detailed-rating.module'
+
 export * from './lib/_common/user-image/user-image.module'
 export * from './lib/_common/avatar-photo/avatar-photo.module'
 export * from './lib/_common/content-picker-v2/content-picker-v2.module'

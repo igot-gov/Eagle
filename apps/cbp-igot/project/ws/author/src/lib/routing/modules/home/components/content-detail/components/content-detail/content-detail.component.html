@@ -1,14 +1,42 @@
 <div class="nav-container" autosize name="auth-tool-detail">
   <div class="flex mt-10">
-    <div class="flex flex-3">
+    <div class="flex flex-3 flex-column">
       <div class="flex flex-1">
-        <img src="/assets/images/authoring/BannerImage.svg" alt="" />
+        <div class="flex">
+          <img src="/assets/images/authoring/BannerImage.svg" alt="" />
+        </div>
+        <div class="flex flex-column">
+          <span class="mat-headline">Overview of Administrative Law</span>
+          <span class="mat-body-1">Overview of Administrative Law,
+            Subordinate Legislation and Principles of Natural Justice
+          </span>
+        </div>
       </div>
-      <div class="flex flex-3 flex-column">
-        <span class="mat-headline">Overview of Administrative Law</span>
-        <span class="mat-body-1">Overview of Administrative Law,
-          Subordinate Legislation and Principles of Natural Justice
+      <div class="flex flex-1">
+        <span class="mat-body-1">
+          Curabitur labourites id lorem id . Ut id consectetur magna. Quick volutpat augue enim,
+          pulvinar lobortis nibh lacinia at. Vestibulum nec erat ut mi sollicitudin porttitor id sit amet risus. Nam
+          tempus vel odio vitae aliquam. In
+          imperdiet eros id lacus vestibulum vestibulum. Suspendisse fermentum sem sagittis ante venenatis egestas quis
+          vel justo.
+          Maecenas semper suscipit nunc, sed aliquam sapien convallis eu. Nulla ut turpis in diam dapibus consequat.
         </span>
+      </div>
+      <div class="flex flex-1 flex-column mt-16">
+        <span class="mat-title">Authors and curators</span>
+        <div class="flex flex-1 flex-wrap margin-top-m">
+          <ng-container *ngFor="let a of [1,1,2,2,2]">
+            <ws-widget-author-card class="flex"></ws-widget-author-card>
+          </ng-container>
+        </div>
+      </div>
+      <div class="flex flex-1 flex-column mt-16">
+        <span class="mat-title">Reviews</span>
+        <div class="flex flex-1 flex-wrap margin-top-m flex-column">
+          <ws-widget-user-content-rating [contentId]="'lex_auth_013140304175865856293'"></ws-widget-user-content-rating>
+          <ws-widget-user-content-detailed-rating [contentId]="'lex_auth_013140304175865856293'">
+          </ws-widget-user-content-detailed-rating>
+        </div>
       </div>
     </div>
     <div class="flex flex-1">

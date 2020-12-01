@@ -1,0 +1,47 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.rate-heading {
+  letter-spacing: 0px;
+  color: #353535;
+}
+
+.rating-icon {
+  transform: scale(1.5);
+}
+
+.rating-button {
+  margin-right: 10px;
+  line-height: 20px;
+  height: 24px;
+  width: 24px;
+}
+
+.orange {
+  color: #F58634 !important;
+  font-size: 24px;
+}
+
+.progress {
+  height: 8px;
+  border-radius: 8px;
+  color: #F58634 !important;
+
+}
+
+.width-custom {
+  max-width: 40%;
+
+  @include breakpoint-lt-s {
+    margin-left: $size-xs;
+    margin-right: $size-xs;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.star-text {
+  display: flex;
+  flex: none;
+  margin: -$size-xs $size-s $size-s 0px;
+}

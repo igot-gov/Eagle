@@ -1,0 +1,21 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+
+
+.author-card {
+  width: 330px;
+  height: 62px;
+  box-shadow: none !important;
+  border: 0;
+
+  @include breakpoint-lt-s {
+    margin-left: $size-xs;
+    margin-right: $size-xs;
+    width: auto;
+  }
+}
+
+.width-0 {
+  width: 0;
+}

@@ -4,6 +4,8 @@ import { BtnAppsComponent } from './btn-apps/btn-apps.component'
 // Modules
 import { AtGlanceModule } from './at-glance/at-glance.module'
 import { AtGlanceComponent } from './at-glance/at-glance.component'
+import { AuthorCardModule } from './author-card/author-card.module'
+import { AuthorCardComponent } from './author-card/author-card.component'
 
 import { AvatarPhotoModule } from './_common/avatar-photo/avatar-photo.module'
 import { BtnAppsModule } from './btn-apps/btn-apps.module'
@@ -140,6 +142,7 @@ import { CardTableComponent } from './card-table/card-table.component'
 
 export const WIDGET_REGISTERED_MODULES = [
   AtGlanceModule,
+  AuthorCardModule,
   AvatarPhotoModule,
   BtnAppsModule,
   BtnCallModule,
@@ -215,6 +218,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.atGlance._type,
     widgetSubType: ROOT_WIDGET_CONFIG.atGlance.default,
     component: AtGlanceComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.authorCard._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.authorCard.default,
+    component: AuthorCardComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,

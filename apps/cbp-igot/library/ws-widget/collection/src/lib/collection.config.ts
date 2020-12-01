@@ -27,6 +27,10 @@ export const ROOT_WIDGET_CONFIG = {
     setting: 'actionButtonSetting',
     standard: 'actionButtonStandard',
   },
+  authorCard: {
+    _type: 'authorCard',
+    default: 'default'
+  },
   card: {
     _type: 'card',
     breadcrumb: 'cardBreadcrumb',
