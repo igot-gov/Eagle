@@ -75,8 +75,8 @@ export class SearchServService {
         sort_by: {
           lastUpdatedOn: request.request.sort_by.lastUpdatedOn,
         },
-        facets: [],
-        fields: [],
+        facets: ['primaryCategory', 'mimeType'],
+        fields: request.request.fields,
       },
     }
     return this.searchApi.getSearchV6Results(v6Request)

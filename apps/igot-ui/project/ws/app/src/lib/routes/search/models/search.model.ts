@@ -29,8 +29,7 @@ export interface ISearchRequestV2 {
     sort_by: { lastUpdatedOn: string },
     fields: [
     ],
-    facets: [
-    ]
+    facets: string[]
   }
 }
 

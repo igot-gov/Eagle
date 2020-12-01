@@ -41,6 +41,7 @@ export class LearningComponent implements OnInit, OnDestroy {
     result: {
       count: 0,
       content: [],
+      facets: [],
     },
   }
   searchRequestObject: ISearchRequestV2 = {
@@ -320,10 +321,11 @@ export class LearningComponent implements OnInit, OnDestroy {
           result: {
             count: 0,
             content: [],
+            facets: [],
           },
         }
       }
-      const updatedFilterSet = this.searchServ.updateSelectedFiltersSet(this.searchRequest.filters)
+      const updatedFilterSet = this.searchServ.updateSelectedFiltersSet(this.searchRequestObject.request.filters)
       this.selectedFilterSet = updatedFilterSet.filterSet
 
       this.filtersResetAble = updatedFilterSet.filterReset
@@ -391,7 +393,7 @@ export class LearningComponent implements OnInit, OnDestroy {
           this.searchResults.filters = data.filters
           // this.searchResults.queryUsed = data.queryUsed
           // this.searchResults.type = data.type
-          this.searchResults.result.content = [...this.searchResults.result.content, ...data.result.content]
+          this.searchResults.result.content = [...this.searchResults.result.content, ...(data.result.content ? data.result.content : [])]
           // this.searchResults.doYouMean = data.doYouMean
           // this.searchResults.queryUsed = data.queryUsed
           // this.handleFilters(this.searchResults.filters)

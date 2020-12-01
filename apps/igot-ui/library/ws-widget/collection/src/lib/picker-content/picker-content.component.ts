@@ -132,11 +132,11 @@ export class PickerContentComponent extends WidgetBaseComponent
       )
       .subscribe(
         search => {
-          if (phraseSearch && search.totalHits === 0 && phraseSearchConfig) {
+          if (phraseSearch && search.result.count === 0 && phraseSearchConfig) {
             return this.initializeSearchSubject(false)
           }
           this.searchFetchStatus = 'done'
-          this.searchResults = search.result
+          this.searchResults = search.result.content
           this.searchResults.forEach(content => {
             if (this.widgetData.chipNamesHash) {
               this.widgetData.chipNamesHash[content.identifier] = content.name
