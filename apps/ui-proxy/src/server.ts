@@ -1,5 +1,6 @@
 import compression from 'compression'
 import connectTimeout from 'connect-timeout'
+import cors from 'cors'
 import express, { NextFunction } from 'express'
 import fileUpload from 'express-fileupload'
 import expressSession from 'express-session'
@@ -17,7 +18,6 @@ import { publicApiV8 } from './publicApi_v8/publicApiV8'
 import { CustomKeycloak } from './utils/custom-keycloak'
 import { CONSTANTS } from './utils/env'
 import { logInfo, logSuccess } from './utils/logger'
-import cors from 'cors'
 const cookieParser = require('cookie-parser')
 const healthcheck = require('express-healthcheck')
 
@@ -72,7 +72,7 @@ export class Server {
     this.app.use(express.urlencoded({ extended: false, limit: '50mb' }))
     this.app.use(express.json({ limit: '50mb' }))
     this.app.use(fileUpload())
-        this.app.use(cors())
+    this.app.use(cors())
     this.app.use('/healthcheck', healthcheck({
       healthy() {
         return { everything: 'is ok' }

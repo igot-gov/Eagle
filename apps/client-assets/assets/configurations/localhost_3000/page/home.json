@@ -281,7 +281,80 @@
               }
             }
           }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "",
+            "widget": {
+              "widgetType": "discussStrip",
+              "widgetSubType": "DiscussStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "discuss",
+                    "logo": "forum",
+                    "title": "discuss",
+                    "stripBackground": "assets/instances/eagle/background/discuss.svg",
+                    "titleDescription": "Trending discussions",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeDiscuss"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/discuss/home",
+                      "viewMoreText": "Discuss",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/discussionHub/topics/recent",
+                        "queryParams": {}
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        [
+          {
+            "dimensions": {},
+            "className": "",
+            "widget": {
+              "widgetType": "networkStrip",
+              "widgetSubType": "NetworkStripMultiple",
+              "widgetData": {
+                "strips": [
+                  {
+                    "key": "network",
+                    "logo": "group",
+                    "title": "network",
+                    "stripBackground": "assets/instances/eagle/background/network.svg",
+                    "titleDescription": "Connect with people you may know",
+                    "stripConfig": {
+                      "cardSubType": "cardHomeNetwork"
+                    },
+                    "viewMoreUrl": {
+                      "path": "/app/network-v2",
+                      "viewMoreText": "Network",
+                      "queryParams": {}
+                    },
+                    "filters": [],
+                    "request": {
+                      "api": {
+                        "path": "/apis/protected/v8/network/connections/recommended/userDepartment",
+                        "queryParams": {}
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
         ]
+      
       ]
     }
   }
