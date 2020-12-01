@@ -134,6 +134,15 @@ export namespace NSSearch {
   export interface ISearchData {
     count: number
     content: NsContent.IContent[]
+    facets: IFacetsData[]
+  }
+  export interface IFacetsData {
+    values: IFacetsValues[]
+    name: string
+  }
+  export interface IFacetsValues {
+    name: string
+    count: number
   }
   export interface ISearchContentData {
     ownershipType: string[]
