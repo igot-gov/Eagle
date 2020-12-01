@@ -47,9 +47,7 @@ export namespace NSSearch {
 
   export interface ISearchV6RequestV2 {
     request: {
-      filters: {
-        primaryCategory: string[]
-      },
+      filters: {},
       query: string,
       sort_by: { lastUpdatedOn: string },
       fields: string[],
