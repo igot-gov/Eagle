@@ -33,7 +33,6 @@ import { KeycloakAngularModule } from 'keycloak-angular'
 import { AppRoutingModule } from './app-routing.module'
 import { InitService } from './services/init.service'
 import { GlobalErrorHandlingService } from './services/global-error-handling.service'
-// import { AppTocResolverService } from '@ws/app/src/lib/routes/app-toc/resolvers/app-toc-resolver.service'
 
 import { RootComponent } from './component/root/root.component'
 import { LoginComponent } from './component/login/login.component'
@@ -58,6 +57,7 @@ import { TncAppResolverService } from './services/tnc-app-resolver.service'
 import { TncPublicResolverService } from './services/tnc-public-resolver.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { PublicReleaseModule } from './routes/public/public-release/public-about.module'
+import { AppTocResolverService } from '@ws/author'
 // import { ServiceWorkerModule } from '@angular/service-worker'
 // import { environment } from '../environments/environment'
 
@@ -164,7 +164,7 @@ const getBaseHref = (platformLocation: PlatformLocation): string => {
     TncAppResolverService,
     TncPublicResolverService,
     PipeContentRoutePipe,
-    // AppTocResolverService,
+    AppTocResolverService,
     {
       provide: APP_BASE_HREF,
       useFactory: getBaseHref,

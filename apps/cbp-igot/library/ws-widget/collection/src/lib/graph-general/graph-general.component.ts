@@ -21,11 +21,11 @@ import { GraphGeneralService } from './graph-general.service'
 })
 export class GraphGeneralComponent extends WidgetBaseComponent
   implements
-    OnInit,
-    OnDestroy,
-    AfterViewInit,
-    OnChanges,
-    NsWidgetResolver.IWidgetData<IWidgetGraphData> {
+  OnInit,
+  OnDestroy,
+  AfterViewInit,
+  OnChanges,
+  NsWidgetResolver.IWidgetData<IWidgetGraphData> {
   @Input() widgetData!: IWidgetGraphData
   @ViewChild('chartContainer', { static: true }) chartContainer!: ElementRef<HTMLDivElement>
   generalChart: Chart | null = null
@@ -94,7 +94,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               type: 'category',
               ticks: {
                 display: widgetData.graphTicksXAxisDisplay,
-                fontFamily: '\'Open Sans Bold\', sans-serif',
+                fontFamily: '\'Lato\', Montserrat',
                 fontSize: widgetData.graphTicksFontSize,
                 max: widgetData.graphXAxisMax,
                 stepSize: widgetData.graphXAxisStepSize,
@@ -110,9 +110,9 @@ export class GraphGeneralComponent extends WidgetBaseComponent
                 display: widgetData.graphGridLinesDisplay,
               },
               scaleLabel: {
-              display: widgetData.graphIsXAxisLabel,
-              labelString: widgetData.graphXAxisLabel,
-            },
+                display: widgetData.graphIsXAxisLabel,
+                labelString: widgetData.graphXAxisLabel,
+              },
               stacked: true,
             },
           ],
@@ -124,7 +124,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
               },
               ticks: {
                 display: widgetData.graphTicksYAxisDisplay,
-                fontFamily: '\'Open Sans Bold\', sans-serif',
+                fontFamily: '\'Lato\', Montserrat',
                 fontSize: widgetData.graphTicksFontSize,
                 max: widgetData.graphYAxisMax,
                 stepSize: widgetData.graphYAxisStepSize,
@@ -177,7 +177,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
             type: 'category',
             ticks: {
               display: widgetData.graphTicksXAxisDisplay,
-              fontFamily: '\'Open Sans Bold\', sans-serif',
+              fontFamily: '\'Lato\', Montserrat',
               fontSize: widgetData.graphTicksFontSize,
               fontcolor: 'gray',
               max: widgetData.graphXAxisMax,
@@ -213,7 +213,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
             },
             ticks: {
               display: widgetData.graphTicksYAxisDisplay,
-              fontFamily: '\'Open Sans Bold\', sans-serif',
+              fontFamily: '\'Lato\', Montserrat',
               fontSize: widgetData.graphTicksFontSize,
               fontcolor: 'gray',
               max: widgetData.graphYAxisMax,
@@ -239,7 +239,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
             // type: 'category',
             ticks: {
               display: widgetData.graphTicksXAxisDisplay,
-              fontFamily: '\'Open Sans Bold\', sans-serif',
+              fontFamily: '\'Lato\', Montserrat',
               fontSize: widgetData.graphTicksFontSize,
               fontcolor: 'gray',
               beginAtZero: true,
@@ -274,7 +274,7 @@ export class GraphGeneralComponent extends WidgetBaseComponent
             },
             ticks: {
               display: widgetData.graphTicksYAxisDisplay,
-              fontFamily: '\'Open Sans Bold\', sans-serif',
+              fontFamily: '\'Lato\', Montserrat',
               fontSize: widgetData.graphTicksFontSize,
               fontcolor: 'gray',
               beginAtZero: true,

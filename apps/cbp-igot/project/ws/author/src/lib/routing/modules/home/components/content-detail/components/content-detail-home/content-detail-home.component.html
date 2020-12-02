@@ -1,7 +1,7 @@
 <div class="flex flex-1 padding-xs margin-left-l">
   <a class="mat-title ws-mat-black60-text" [routerLink]="'/author/my-content'"><span>All CBPs</span></a>
   <mat-icon>chevron_right</mat-icon>
-  <span class="mat-title">{{'Overview of Administrative Law'}}</span>
+  <span class="mat-title">{{toc.contentTitle | async}}</span>
 </div>
 <mat-sidenav-container class="nav-container" autosize name="auth-tool-exp">
   <mat-sidenav [mode]="mode$ | async" [(opened)]="sideNavBarOpened" class="border-0 min-width-4">

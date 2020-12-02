@@ -4,22 +4,24 @@
     <a class="preview mat-subheading-2 margin-0" [routerLink]="getPreviewLink()">Preview CBP</a>
   </div>
   <span class="mat-subheading-1 margin-top-s">At a glance</span>
-  <div class="flex flex-1 flex-column">
+  <div class="flex flex-1 flex-column" *ngIf="widgetData">
     <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">timer</mat-icon>12 Hours
+      <mat-icon class="ws-mat-black40-text margin-right-s">timer</mat-icon>
+      {{widgetData.duration | pipeDurationTransform:'HMS'}}
     </span>
     <span class="flex margin-top-xs margin-bottom-xs">
       <mat-icon class="ws-mat-black40-text margin-right-s" style="transform: rotate(90deg)">horizontal_split</mat-icon>
-      4 Modules
+      {{widgetData.moduleCount}} Modules
     </span>
     <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">play_circle_filled</mat-icon>3 Videos
+      <mat-icon class="ws-mat-black40-text margin-right-s">play_circle_filled</mat-icon>{{widgetData.videoCount}} Videos
     </span>
     <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">picture_as_pdf</mat-icon>4 PDFs
+      <mat-icon class="ws-mat-black40-text margin-right-s">picture_as_pdf</mat-icon>{{widgetData.PdfCount}} PDFs
     </span>
     <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">insert_drive_file</mat-icon>3 Assessments
+      <mat-icon class="ws-mat-black40-text margin-right-s">insert_drive_file</mat-icon>{{widgetData.assessmentCount}}
+      Assessments
     </span>
   </div>
   <div class="container margin-top-xs margin-bottom-xs">
@@ -30,9 +32,10 @@
 
   <div class="flex flex-1 flex-column margin-top-s">
     <span class="mat-body-2 ws-mat-default-text">Content Type </span>
-    <span class="mat-subheading-2">Offering </span>
+    <span class="mat-subheading-2" *ngIf="widgetData && widgetData.contentType">{{widgetData.contentType}}</span>
     <span class="mat-body-2 ws-mat-default-text">Cost </span>
-    <span class="mat-subheading-2">Free</span>
-    <span class="mat-subheading-2 ws-mat-black60-text">Last updated on June 11, 2020 </span>
+    <span class="mat-subheading-2" *ngIf="widgetData && widgetData.cost">{{widgetData.cost}}</span>
+    <span class="mat-subheading-2 ws-mat-black60-text" *ngIf="widgetData && widgetData.lastUpdate">Last updated on
+      {{widgetData.lastUpdate | date}} </span>
   </div>
 </mat-card>

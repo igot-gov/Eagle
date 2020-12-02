@@ -1,3 +1,11 @@
+@import 'ws-mixins';
+@import 'ws-common';
+
+.container-balanced {
+  @extend %page-center;
+  margin-left: 2rem !important;
+}
+
 .font-size {
   font-size: 16px;
 }
@@ -20,7 +28,7 @@
 }
 
 .min-width-4 {
-  min-width: 300px;
+  min-width: 260px;
 }
 
 .txt {
@@ -55,7 +63,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  // height: calc(100vh - 165px);
+  min-height: calc(100vh - 165px);
 }
 
 // .mat-accordion {

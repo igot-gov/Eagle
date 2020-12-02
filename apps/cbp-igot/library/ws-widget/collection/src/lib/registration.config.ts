@@ -138,6 +138,8 @@ import { LeftMenuModule } from './left-menu/left-menu.module'
 import { LeftMenuComponent } from './left-menu/left-menu.component'
 import { CardTableModule } from './card-table/card-table.module'
 import { CardTableComponent } from './card-table/card-table.component'
+import { DiscussionForumModule } from './discussion-forum/discussion-forum.module'
+import { DiscussionForumComponent } from './discussion-forum/components/discussion-forum/discussion-forum.component'
 // import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
 
 export const WIDGET_REGISTERED_MODULES = [
@@ -174,6 +176,7 @@ export const WIDGET_REGISTERED_MODULES = [
   ContentStripNewMultipleModule,
   ContentStripSingleModule,
   ContentStripVerticalModule,
+  DiscussionForumModule,
   GraphGeneralModule,
   LayoutLinearModule,
   LayoutTabModule,
@@ -470,6 +473,11 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetType: ROOT_WIDGET_CONFIG.selector._type,
     widgetSubType: ROOT_WIDGET_CONFIG.selector.responsive,
     component: SelectorResponsiveComponent,
+  },
+  {
+    widgetType: ROOT_WIDGET_CONFIG.discussionForum._type,
+    widgetSubType: ROOT_WIDGET_CONFIG.discussionForum.discussionForum,
+    component: DiscussionForumComponent,
   },
   {
     widgetType: ROOT_WIDGET_CONFIG.layout._type,

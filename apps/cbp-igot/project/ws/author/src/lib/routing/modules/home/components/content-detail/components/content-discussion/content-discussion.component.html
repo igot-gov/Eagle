@@ -1,0 +1,12 @@
+<!-- <div [hidden]="isRestricted">
+  <div class="flex flex-middle py-4 cursor-pointer mat-toolbar discussion-head"
+    (click)="showDiscussionForum = !showDiscussionForum">
+    <h2 class="heading">Discussion Forum</h2>
+    <mat-icon *ngIf="showDiscussionForum">keyboard_arrow_down</mat-icon>
+    <mat-icon *ngIf="!showDiscussionForum">chevron_right</mat-icon>
+
+  </div>
+  <ng-container *ngIf="showDiscussionForum"> -->
+<div [wsResolverWidget]="discussionForumWidget"></div>
+<!-- </ng-container>
+</div> -->

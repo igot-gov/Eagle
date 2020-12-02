@@ -1,0 +1,182 @@
+<mat-card class="margin-top-s ws-mat-accent-border">
+  <div class="flex postSection">
+    <div class="flex self-start">
+      <ws-widget-user-image class="main-post-user-image" [userId]="userId" [userName]="post.postCreator.name"
+        [imageType]="'user-photo'" [imageSize]="'small'" [email]="post.postCreator.emailId"></ws-widget-user-image>
+      <!-- <div class="sm:hidden"> -->
+      <div class="flex flex-col sm:flex-row flex-column">
+        <span *ngIf="post.postCreator.name"
+          class="mat-subheading-1 leading-normal margin-left-l margin-bottom-xs">{{ post.postCreator.name }}</span>
+        <span *ngIf="!post.postCreator.name && post.postCreator.emailId"
+          class="mat-subheading-2 leading-normal margin-left-l margin-botton-xs">{{ post.postCreator.emailId }}
+        </span>
+        <div class="margin-left-l width-expand flex datePost margin-bottom-xs">
+          <div class="mat-subheading-2 ws-mat-black60-text" *ngIf="!post?.lastEdited?.dtLastEdited?.length">
+            {{ post?.dtLastModified | pipeRelativeTime }}
+            <!-- <ng-container i18n> at </ng-container>
+            <ng-container>{{ post?.dtLastModified | pipeRelativeTime }}</ng-container> -->
+          </div>
+          <div class="mat-subheading-2 ws-mat-black60-text" *ngIf="post?.lastEdited?.dtLastEdited?.length">
+            {{ post?.lastEdited.dtLastEdited | pipeRelativeTime }}
+            <!-- <ng-container i18n> at </ng-container>
+            <ng-container>{{ post?.lastEdited.dtLastEdited | pipeRelativeTime }}</ng-container> -->
+          </div>
+          <!-- <div>
+            <button type="button" mat-icon-button [matMenuTriggerFor]="editMenu"
+              name="discussion-post-more-options-button" *ngIf="userId === post.postCreator.postCreatorId">
+              <mat-icon>more_vertical</mat-icon>
+            </button>
+          </div> -->
+        </div>
+        <div class="flex mt-2">
+          <div class="margin-left-l mat-body-1 margin-auto post-msg width-expand"
+            *ngIf="!editMode && post.postContent.title.length" [innerHTML]="post.postContent.title"></div>
+          <!-- <mat-chip-list>
+                  <mat-chip *ngFor="let tag of qnaConversation.mainPost.tags" i18n-matTooltip matTooltip="Associated Tag">
+                    {{ tag.name }}
+                  </mat-chip>
+                </mat-chip-list> -->
+        </div>
+      </div>
+      <!-- </div> -->
+    </div>
+    <!-- <div class="flex flex-col width-expand pl-0">
+      <div class="hidden sm:block">
+        <div class="flex flex-col flex-middle sm:flex-row flex-wrap">
+          <span *ngIf="post.postCreator.name"
+            class="mat-subheading-1 leading-normal margin-left-l">{{ post.postCreator.name }}</span>
+          <span *ngIf="!post.postCreator.name && post.postCreator.emailId"
+            class="mat-subheading-2 leading-normal margin-left-l">{{ post.postCreator.emailId }}
+          </span>
+          <div class="padding-left-l width-expand flex flex-end datePost">
+            <div class="mat-subheading-2" *ngIf="!post?.lastEdited?.dtLastEdited?.length">
+              {{ post?.dtLastModified | date }}
+              <ng-container i18n> at </ng-container>
+              <ng-container>{{ post?.dtLastModified | date: 'shortTime' }}</ng-container>
+            </div>
+            <div class="mat-subheading-2" *ngIf="post?.lastEdited?.dtLastEdited?.length">
+              {{ post?.lastEdited.dtLastEdited | date }}
+              <ng-container i18n> at </ng-container>
+              <ng-container>{{ post?.lastEdited.dtLastEdited | date: 'shortTime' }}</ng-container>
+            </div>
+            <div>
+              <button type="button" mat-icon-button [matMenuTriggerFor]="editMenu"
+                name="discussion-post-more-options-button" *ngIf="userId === post.postCreator.postCreatorId">
+                <mat-icon>more_vertical</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>-->
+  </div>
+  <!-- <div class="flex width-expand justify-between margin-top-s pl-4">
+        <div class=" flex flex-middle width-expand">
+          <div *ngIf="post.activity && post.status === 'Active'">
+            <ws-widget-btn-social-vote [postId]="post.id" [activity]="post.activity" [voteType]="'upVote'"
+              [postCreatorId]="post?.postCreator?.postCreatorId"></ws-widget-btn-social-vote>
+          </div>
+          <div class="pl-4 flex flex-middle self-end reply-editor-toggler" [hidden]="replyPlaceholderToggler"
+            (click)="replyPlaceholderToggler = !replyPlaceholderToggler">
+            <span class="pr-1 sm:pr-2" *ngIf="replyPlaceholderToggler">
+              <mat-icon class="flip-180">mode_comment</mat-icon>
+            </span>
+            <span class="pr-1 sm:pr-2" *ngIf="!replyPlaceholderToggler">
+              <mat-icon class="flip-180">mode_comment</mat-icon>
+            </span>
+            <span>Reply</span>
+          </div>
+        </div>
+        <div class="flex flex-middle self-end reply-toggler" *ngIf="postReplies && postReplies.length"
+          (click)="replyToggle = !replyToggle">
+          <span class="pr-1 sm:pr-2" *ngIf="replyToggle">
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          </span>
+          <span class="pr-1 sm:pr-2" *ngIf="!replyToggle">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </span>
+          <span>View {{postReplies.length}} </span>
+          <span *ngIf="postReplies.length === 1">&nbsp; reply</span>
+          <span *ngIf="postReplies.length > 1"> &nbsp; replies</span>
+        </div>
+      </div> -->
+  <div *ngIf="editMode" class="margin-top-s padding-s mat-primary-border">
+    <!-- [minLength]="'10'" -->
+    <ws-widget-editor-quill [htmlText]="post.postContent.title" (textData)="onTextChange($event)">
+    </ws-widget-editor-quill>
+    <div class="btn-container text-right">
+      <button type="button" name="discussion-post-update-button" class="margin-top-s discussion-forum-action-button"
+        [disabled]="!postPublishEnabled" mat-raised-button color="primary" i18n (click)="editPost(editFailMsg.value)">
+        Update
+      </button>
+      <button type="button" name="discussion-post-cancel-button" class="margin-top-s margin-left-s" mat-stroked-button
+        color="primary" i18n (click)="editMode = false">
+        Cancel
+      </button>
+    </div>
+  </div>
+  <!-- </div> -->
+  <!-- </div> -->
+
+  <ng-container *ngIf="replyToggle">
+    <ws-widget-discussion-reply *ngFor="let reply of postReplies; let i = index" [reply]="reply"
+      (deleteSuccess)="onDeleteReply(i)"></ws-widget-discussion-reply>
+    <div *ngIf="replyFetchStatus === 'fetching'" class="margin-top-s text-center">
+      <mat-spinner class="display-inline-block" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+      <div class="mat-caption" class="margin-top-xs">Fetching replies</div>
+    </div>
+    <div *ngIf="replyFetchStatus === 'hasMore' || isNewRepliesAvailable"
+      class="text-center margin-top-xs margin-bottom-s flex flex-around">
+      <button name="discussion-post-load-previous-replies-button" type="button" mat-stroked-button color="primary"
+        *ngIf="replyFetchStatus === 'hasMore'" (click)="fetchPostReplies()" i18n>
+        Load Previous Replies
+      </button>
+      <button name="discussion-post-load-new-replies-button" type="button" mat-stroked-button color="primary"
+        *ngIf="isNewRepliesAvailable" (click)="fetchPostReplies(true)" i18n>
+        Load New Replies
+      </button>
+    </div>
+  </ng-container>
+  <div class="write-reply-container mat-app-background flex flex-middle" [hidden]="!replyPlaceholderToggler">
+
+    <div class="padding-left-m width-expand">
+      <h4 class="reply-heading">Respond to this thread</h4>
+      <div class="flex ">
+        <ws-widget-user-image class="write-reply-user-image mt-3" [userName]="userName" [imageType]="'user-photo'"
+          [imageSize]="'small'" [email]="userEmail" [userId]="userId"></ws-widget-user-image>
+        <div class="width-expand">
+          <ws-widget-editor-quill class="write-reply-editor" (textData)="onReplyTextChange($event)"
+            #discussionReplyEditor></ws-widget-editor-quill>
+          <div class="text-right padding-top-s mat-app-background btn-container">
+            <button name="discussion-post-reply-button" class="discussion-forum-action-button"
+              [disabled]="!isValidReply || isPostingReply" (click)="publishReply(editFailMsg.value)" type="button"
+              mat-raised-button color="primary" i18n>
+              Reply
+            </button>
+            <button name="discussion-post-cancel-reply-button" type="button" class="margin-left-xs" mat-stroked-button
+              (click)="replyPlaceholderToggler = !replyPlaceholderToggler" i18n>
+              Cancel
+            </button>
+            <div *ngIf="isPostingReply" class="text-center">
+              <mat-spinner class="display-inline-block" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+<mat-menu #editMenu="matMenu">
+  <ng-template matMenuContent>
+
+    <button name="discussion-post-edit-button" type="button" (click)="editMode = true" mat-menu-item i18n>Edit
+      Post</button>
+    <button name="discussion-post-delete-button" type="button" (click)="deletePost(deleteFailMsg.value)" mat-menu-item
+      i18n>
+      Delete Post
+    </button>
+  </ng-template>
+</mat-menu>
+
+<input type="hidden" i8n-value value="Something went wrong! Unable to delete." #deleteFailMsg />
+<input type="hidden" i8n-value value="Something went wrong! Unable to post." #editFailMsg />

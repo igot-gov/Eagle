@@ -3,9 +3,9 @@ import { map } from 'rxjs/operators'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { REVIEW_ROLE, PUBLISH_ROLE, CREATE_ROLE } from '@ws/author/src/lib/constants/content-role'
-import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { ILeftMenu } from '@ws-widget/collection'
 import { ActivatedRoute } from '@angular/router'
+import { LocalDataService } from '../../services/local-data.service'
 
 @Component({
   selector: 'ws-auth-content-detail-home',
@@ -27,7 +27,7 @@ export class ContentDetailHomeComponent implements OnInit, OnDestroy {
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   public screenSizeIsLtMedium = false
   leftmenues!: ILeftMenu[]
-  constructor(private valueSvc: ValueService, private accessService: AccessControlService, private initSvc: AuthInitService,
+  constructor(private valueSvc: ValueService, private accessService: AccessControlService, private toc: LocalDataService,
     private activeRoute: ActivatedRoute
   ) { }
 

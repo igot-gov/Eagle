@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class PipeDurationTransformPipe implements PipeTransform {
 
-  transform(data: number, type: 'time24' | 'hms' | 'hour'): any {
+  transform(data: number, type: 'time24' | 'hms' | 'hour' | 'HMS'): any {
     if (data <= 0) {
       return ''
     }
@@ -33,6 +33,23 @@ export class PipeDurationTransformPipe implements PipeTransform {
             space = ' '
           }
           duration += type === 'hms' ? `${space}${s}s` : `${space}${s} sec`
+        }
+        return duration
+      case 'HMS':
+        if (h > 0) {
+          duration += type === 'HMS' ? `${h}Hour(s)` : `${h} Hour(s)`
+        }
+        if (m > 0) {
+          if (h > 0) {
+            space = ' '
+          }
+          duration += type === 'HMS' ? `${space}${m}Minutes` : `${space}${m} Minutes`
+        }
+        if (s > 0 && h === 0) {
+          if (m > 0) {
+            space = ' '
+          }
+          duration += type === 'HMS' ? `${space}${s}Seconds` : `${space}${s} Seconds`
         }
         return duration
       case 'hour':

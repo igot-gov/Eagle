@@ -27,7 +27,8 @@ import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 
 /* tslint:disable */
 import _ from 'lodash'
-import { ITable } from '@ws-widget/collection'
+import { IAtGlanceComponentData, IAuthorData, ITable } from '@ws-widget/collection'
+import { LocalDataService } from '../../services/local-data.service'
 /* tslint:enable */
 
 @Component({
@@ -44,6 +45,8 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
   // filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
   filterMenuTreeFlattener: any
   public cardContent!: any[]
+  public contentId: string | null = null
+  public content!: NSContent.IContentMeta
   public filters: any[] = []
   // public status = 'draft'
   public status = 'published'
@@ -83,7 +86,8 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private authInitService: AuthInitService,
     // private durationPipe: PipeDurationTransformPipe,
-    private valueSvc: ValueService
+    private valueSvc: ValueService,
+    private dataService: LocalDataService
   ) {
     // this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
     //   node => node.levels,
@@ -128,7 +132,9 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
       this.fetchContent()
     })
   }
-
+  changeToDefaultImg($event: any) {
+    $event.target.src = '/assets/instances/eagle/app_logos/default.png'
+  }
   fetchStatus() {
     switch (this.status) {
       case 'draft':
@@ -152,7 +158,47 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     }
     return ['Draft']
   }
+  getGlanceData(): IAtGlanceComponentData | null {
+    if (this.contentId && this.content) {
+      return {
+        contentId: this.contentId,
+        contentType: this.content.contentType,
+        cost: this.content.courseType,
+        duration: this.content.duration.toString(),
+        lastUpdate: this.content.lastUpdatedOn,
+        moduleCount: 1,
+        PdfCount: 2,
+        assessmentCount: 2,
+        audioCount: 2,
+        scromCount: 3,
+        videoCount: 2,
+        webCount: 22,
+        youtubeCount: 33
 
+      }
+    } else return null
+  }
+  getAuthors(): IAuthorData[] {
+    if (this.content) {
+      const lst = []
+      const curators = _.map(_.get(this.content, 'creatorContacts'), i => {
+        return {
+          name: i.name,
+          authorType: 'Curator'
+        }
+      })
+      const authors = _.map(_.get(this.content, 'creatorDetails'), i => {
+        return {
+          name: i.name,
+          authorType: 'Author'
+        }
+      })
+      lst.push(...authors)
+      lst.push(...curators)
+      return lst
+    }
+    return []
+  }
   setAction() {
     switch (this.status) {
       case 'draft':
@@ -177,9 +223,13 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     }
   }
   fetchContent() {
-    this.myContSvc.readContent('lex_auth_013138885867036672226').subscribe((s) => {
-      console.log(s)
-    })
+    this.contentId = this.activatedRoute.snapshot.paramMap.get('contentId') || null
+    if (this.contentId) {
+      this.myContSvc.readContent(this.contentId).subscribe((s) => {
+        this.content = s
+        this.dataService.initData(s)
+      })
+    }
   }
 
   // search() {
