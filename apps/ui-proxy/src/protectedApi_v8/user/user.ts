@@ -32,6 +32,7 @@ import { playlistApi } from './playlist'
 import { protectedPreference } from './preference'
 import { profileApi } from './profile'
 import { profileDeatailsApi } from './profile-details'
+import { profileRegistryApi } from './profile-registry'
 import { progressApi } from './progress'
 import { ratingApi } from './rating'
 import { rdbmsApi } from './rdbms'
@@ -95,3 +96,4 @@ user.use('/realTimeProgress', realTimeProgressApi)
 user.use('/exercise', exerciseApi)
 user.use('/users', usersApi)
 user.use('/mandatoryContent', mandatoryContent)
+user.use('/profileRegistry', profileRegistryApi)

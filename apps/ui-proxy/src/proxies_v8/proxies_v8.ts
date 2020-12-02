@@ -67,3 +67,8 @@ proxiesV8.use('/api/user/v2/read',
   // tslint:disable-next-line: max-line-length
   proxyCreatorToAppentUserId(express.Router(), `https://igot-sunbird.idc.tarento.com/api/user/v2/read/`)
 )
+
+proxiesV8.use('/content-progres/*',
+  // tslint:disable-next-line: max-line-length
+  proxyCreatorSunbirdSearch(express.Router(), `http://kong:8000/content/course/v1/content/state/read`)
+)
