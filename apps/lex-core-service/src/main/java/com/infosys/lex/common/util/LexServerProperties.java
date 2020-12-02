@@ -150,8 +150,8 @@ public class LexServerProperties {
 	@Value("${java.eval.endpoint}")
 	private String javaEvalEndpoint;
 	
-	
-	
+	@Value("${pid.service.url}")
+	private String pidUrl;
 
 	public Integer getCertificationRetryGapInDays() {
 		return certificationRetryGapInDays;
@@ -563,8 +563,13 @@ public class LexServerProperties {
 		this.javaEvalEndpoint = javaEvalEndpoint;
 	}
 	
+	public String getPidUrl() {
+		return pidUrl;
+	}
 	
-	
+	public void setPidUrl(String pidUrl) {
+		this.pidUrl = pidUrl;
+	}
 
 
 	@Override
