@@ -8,6 +8,7 @@
  */
 
 package com.infosys.hubservices.profile.handler;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +42,18 @@ public class UserProfileController {
     @PostMapping("/update/profile")
     public ResponseEntity updateProfile(@RequestParam String userId, @RequestBody Map<String,Object> request) {
 
-        RegistryRequest registryRequest = profileRequestHandler.updateRequest(userId, request);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                profileRequestHandler.updateRequest(userId, request);
+        RegistryRequest registryRequest = profileRequestHandler.updateRequest(userId, request);
         return profileUtils.getResponseEntity(ProfileUtils.URL.UPDATE.getValue(), registryRequest);
+    }
+
+    @PostMapping("/update/workflow/profile")
+    public ResponseEntity updateProfileWithWF(@RequestParam String userId, @RequestBody List<Map<String,Object>> requests) throws Exception{
+
+        ResponseEntity response = null;
+        RegistryRequest registryRequest = profileRequestHandler.updateRequestWithWF(userId, requests);
+        System.out.println("request:; "+new ObjectMapper().writeValueAsString(registryRequest));
+        response = profileUtils.getResponseEntity(ProfileUtils.URL.UPDATE.getValue(), registryRequest);
+        return response;
     }
 
 

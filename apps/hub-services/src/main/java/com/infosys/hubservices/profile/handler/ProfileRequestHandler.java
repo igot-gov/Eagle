@@ -64,6 +64,65 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
     }
 
     @Override
+    public RegistryRequest updateRequestWithWF(String uuid, List<Map<String, Object>> requests) {
+//        HttpHeaders requestHeaders = new HttpHeaders();
+//        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+//
+//
+//        List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
+//        Map<String, Map<String, Map<String, Object>>> filters = new HashMap<>();
+//
+//        Map<String, Object> filterItem = new HashMap<>();
+//        filterItem.put("eq",  request.get("osid"));
+//        filters.put((String)request.get("fieldKey"), Stream.of(new AbstractMap.SimpleEntry<>("osid", filterItem))
+//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
+//
+//
+//        RegistryRequest registryRequest = new RegistryRequest();
+//        registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
+//        registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
+//        registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
+
+        //search with user id
+        ResponseEntity responseEntity = profileUtils.getResponseEntity(ProfileUtils.URL.SEARCH.getValue(), searchRequest(uuid));
+
+        Object searchResult = ((Map<String,Object>)((Map<String,Object>)responseEntity.getBody()).get("result")).get(ProfileUtils.Profile.USER_PROFILE);
+
+        Map<String,Object> search = ((Map<String,Object>)((List)searchResult).get(0));
+        //merge request and search to add osid(s)
+        for(Map<String,Object> request: requests){
+
+            Map<String, Object> toChange = new HashMap<>();
+            Object sf = search.get(request.get("fieldKey"));
+
+            if(sf instanceof ArrayList){
+                List <Map<String, Object>> searchFields = (ArrayList)search.get((String)request.get("fieldKey"));
+                for (Map<String, Object> obj :searchFields){
+                    if( obj.get("osid").toString().equalsIgnoreCase(request.get("osid").toString()))
+                        toChange.putAll(obj);
+                }
+            }
+            if(sf instanceof HashMap){
+                Map<String, Object> searchFields = (Map<String, Object>)search.get((String)request.get("fieldKey"));
+                toChange.putAll(searchFields);
+
+            }
+
+            Map<String, Object> objectMap = (Map<String, Object>) request.get("toValue");
+            for (Map.Entry entry: objectMap.entrySet())
+                toChange.put((String) entry.getKey(), entry.getValue());
+
+            profileUtils.mergeLeaf(search, toChange, request.get("fieldKey").toString(), request.get("osid").toString());
+        }
+
+        RegistryRequest registryRequest = new RegistryRequest();
+        registryRequest.setId(ProfileUtils.API.UPDATE.getValue());
+        registryRequest.getRequest().put(ProfileUtils.Profile.USER_PROFILE, search);
+
+        return registryRequest;
+    }
+
+    @Override
     public RegistryRequest searchRequest(String uuid) {
         List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
         Map<String, Map<String, Object>> filters = new HashMap<>();

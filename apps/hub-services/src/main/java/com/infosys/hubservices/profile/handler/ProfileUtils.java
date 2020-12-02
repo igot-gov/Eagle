@@ -13,8 +13,11 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class ProfileUtils {
@@ -92,6 +95,26 @@ public class ProfileUtils {
                 // otherwise just add the map under that key
                 mapLeft.put(key, mapRight.get(key));
             }
+        }
+    }
+
+
+    public static void mergeLeaf(Map<String,Object> mapLeft, Map<String,Object> mapRight, String leafKey, String id) {
+        // go over all the keys of the right map
+
+        for (String key : mapLeft.keySet()) {
+
+            if(key.equalsIgnoreCase(leafKey) && (mapLeft.get(key) instanceof ArrayList)){
+
+                ((ArrayList)mapLeft.get(key)).removeIf(o -> ((Map)o).get("osid").toString().equalsIgnoreCase(id));
+                ((ArrayList)mapLeft.get(key)).add(mapRight);
+
+            }
+            if(key.equalsIgnoreCase(leafKey) && (mapLeft.get(key) instanceof HashMap)){
+                mapLeft.put(key, mapRight);
+
+            }
+
         }
     }
 
