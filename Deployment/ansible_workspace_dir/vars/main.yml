@@ -48,6 +48,8 @@ service_ui_cbp_igot_service: ui-cbp-igot
 service_ui_mdo_igot_service: ui-mdo-igot
 service_content_validation_service: content_validation_service
 service_social_share: social-share
+service_sb_hub_graph_service: sb-hub-graph-service
+service_workflow_handler_service: workflow-handler-service
 
 # Ports
 service_antivirus_port: 3310
@@ -100,6 +102,8 @@ service_ui_cbp_igot_port: 3024
 service_ui_mdo_igot_port: 3034
 service_content_validation_port: 6590
 service_social_share_port: 3009
+service_sb_hub_graph_port: 4013
+service_workflow_handler_port: 5099
 
 # Network alias names, so that one service can talk to another
 network_alias_content_service: private-content-service
@@ -153,6 +157,8 @@ network_alias_sb_discuss_connect_service: discuss-connect-service
 network_alias_sb_hub_service: hub-service
 network_alias_content_validation_service: content-validation-service
 network_alias_social_share_service: social_share
+network_alias_sb_hub_graph_service: hub-graph-service
+network_alias_workflow_handler_service: workflow-handler-service
 
 # Image names, this is used by the service alone, but since we want to have all the images in one place, we are oncfiguring the images here
 image_ui_static: ui-static
@@ -202,6 +208,8 @@ image_ui_cbp_igot: ui-cbp-igot
 image_ui_mdo_igot: ui-mdo-igot
 image_content_validation_service: content-validation-service
 image_social_share_service: social-share
+image_sb_hub_graph_service: sb-hub-graph-service
+image_workflow_handler_service: workflow-handler-service
 
 health_end_point_sb_ext_service: "http://localhost:{{ service_sb_ext_port }}/v1/latest/terms/user"
 elasticsearch_hosts_list: "{{ elasticsearch_http_hosts_list | map('regex_replace','^(?P<host>.+):(?P<port>\\d+)$', '\\g<host>') | list | join (',') }}"

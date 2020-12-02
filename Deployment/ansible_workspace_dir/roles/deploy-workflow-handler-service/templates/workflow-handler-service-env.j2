@@ -1,0 +1,35 @@
+server.port={{ application_port }}
+
+spring.data.cassandra.bodhi.contact-points={{ cassandra_host }}
+spring.data.cassandra.bodhi.port={{ cassandra_port }}
+spring.data.cassandra.bodhi.keyspace-name={{ keyspace_bodhi }}
+spring.data.cassandra.bodhi.username={{ cassandra_username }}
+spring.data.cassandra.bodhi.password={{ cassandra_password }}
+
+#spring data jpa for postgres
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url={{ spring_datasource_jdbc_url }}
+spring.datasource.username={{ postgresql_username_wingspan }}
+spring.datasource.password={{ postgresql_password_wingspan }}
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.show-sql=false
+#spring.jpa.hibernate.ddl-auto=update
+
+
+#offset and limit configuration
+workflow.pagination.max.limit=50
+workflow.pagination.default.limit=20
+workflow.pagination.default.offset=0
+
+#profile service url
+hub.service.host=http://{{ network_alias_sb_hub_service }}:{{ service_sb_hub_port }}/
+hub.profile.update=v1/user/update/profile?userId=userIdValue
+
+#pid service url
+pid.service.host=http://{{ network_alias_pid_service }}:{{ service_pid_service_port }}/
+pid.multiplesearch.endpoint=user/multi-fetch/wid
+
+#lex-core service url
+lexcore.service.host={{ infosys_lex_core_ip }}/
+userrole.search.endpoint=v2/users/{user_id}/roles
