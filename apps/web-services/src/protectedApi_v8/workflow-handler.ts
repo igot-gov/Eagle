@@ -8,7 +8,7 @@ import { ERROR } from '../utils/message'
 
 const API_END_POINTS = {
     applicationTransition: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/transition`,
-    applicationsSearch: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/transition/applications/search`,
+    applicationsSearch: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/applications/search`,
     historyBasedOnWfId: (workflowId: string, applicationId: string) =>
         `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/${workflowId}/${applicationId}/history`,
     nextActionSearch: (serviceName: string, state: string) =>
