@@ -65,7 +65,7 @@ profileRegistryApi.get('/getUserRegistryById', async (req, res) => {
     const userId = extractUserIdFromRequest(req)
     logInfo('Get user registry for', userId)
 
-    const response = await axios.post(API_END_POINTS.getUserRegistryById(userId), { userId }, {
+    const response = await axios.get(API_END_POINTS.getUserRegistryById(userId), {
       ...axiosRequestConfig,
     })
     res.status(response.status).send(response.data)
