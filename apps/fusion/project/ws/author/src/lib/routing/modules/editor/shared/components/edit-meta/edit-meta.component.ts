@@ -37,6 +37,7 @@ import { AccessControlService } from './../../../../../../modules/shared/service
 import { AuthInitService } from './../../../../../../services/init.service'
 import { LoaderService } from './../../../../../../services/loader.service'
 import { CompetencyAddPopUpComponent } from '../competency-add-popup/competency-add-popup'
+import { ContentQualityCheckPopupComponent } from '../content-quality-popup/content-quality-popup'
 import {
   debounceTime,
   distinctUntilChanged,
@@ -348,6 +349,18 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   start() {
     const dialogRef = this.dialog.open(CompetencyAddPopUpComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
+  }
+  openContenQualityPopup() {
+    const dialogRef = this.dialog.open(ContentQualityCheckPopupComponent, {
       minHeight: 'auto',
       width: '80%',
       panelClass: 'remove-pad',

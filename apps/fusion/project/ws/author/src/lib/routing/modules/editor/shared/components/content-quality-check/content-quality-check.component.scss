@@ -1,0 +1,10 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+table.mat-table {
+  display: table;
+}
+th{
+  min-width: 300px;
+}

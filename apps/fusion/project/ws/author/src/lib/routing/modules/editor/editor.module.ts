@@ -8,10 +8,13 @@ import { EditorRoutingModule } from './editor-routing.module'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { EditorSharedModule } from './shared/shared.module'
 import { WebPageModule } from './routing/modules/web-page/web-page.module'
+import { ContentQualityCheckPopupComponent } from './shared/components/content-quality-popup/content-quality-popup'
+import{ContentQualityCheckModule} from './shared/components/content-quality-check/content-quality-check.module'
 
 @NgModule({
   declarations: [
     EditorComponent,
+    ContentQualityCheckPopupComponent,
   ],
   imports: [
     AuthViewerModule,
@@ -20,10 +23,12 @@ import { WebPageModule } from './routing/modules/web-page/web-page.module'
     EditorSharedModule,
     SharedModule,
     WebPageModule,
+    ContentQualityCheckModule,
   ],
   providers: [
     EditorService,
     CreateContentResolverService,
   ],
+  entryComponents:[ContentQualityCheckPopupComponent]
 })
 export class EditorModule { }
