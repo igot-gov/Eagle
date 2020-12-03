@@ -9,6 +9,7 @@ import {
   MatTabsModule,
   MatFormFieldModule,
   MatInputModule,
+  MatIconModule
 } from '@angular/material'
 import { ResourceCollectionRoutingModule } from './resource-collection-routing.module'
 import { ResourceCollectionComponent } from './resource-collection.component'
@@ -50,6 +51,7 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     PluginResourceCollectionModule,
     PluginWebModuleModule,
     BtnContentDownloadModule,

@@ -9,11 +9,11 @@
     <mat-sidenav [ngClass]="isTypeOfCollection?'viewer-sidenav':'viewer-sidenav-standalone'" position="end"
       [opened]="sideNavBarOpened" [mode]="mode">
       <mat-tab-group>
-        <mat-tab *ngIf="isTypeOfCollection" i18n-label label="Contents">
+        <mat-tab *ngIf="isTypeOfCollection" tabindex="0" i18n-label label="Contents">
           <viewer-viewer-toc [forPreview]="forPreview" (hidenav)="minimizeBar()">
           </viewer-viewer-toc>
         </mat-tab>
-        <mat-tab i18n-label label="Details">
+        <mat-tab i18n-label label="Details" tabindex="0">
           <ws-widget-player-brief [forPreview]="forPreview" [content]="content"></ws-widget-player-brief>
         </mat-tab>
       </mat-tab-group>

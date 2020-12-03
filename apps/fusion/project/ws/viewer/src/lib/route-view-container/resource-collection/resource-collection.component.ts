@@ -22,6 +22,7 @@ export class ResourceCollectionComponent implements OnInit {
   isTypeOfCollection = false
   collectionId: string | null = null
   isRestricted = false
+  openDiscuuss = false
   constructor(private activatedRoute: ActivatedRoute, private configSvc: ConfigurationsService) { }
   ngOnInit() {
     if (this.configSvc.restrictedFeatures) {

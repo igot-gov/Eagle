@@ -19,7 +19,8 @@
     <img [src]="appIcon" alt="Application Logo" class="app-logo" />
   </a>
   <a mat-icon-button class="width-auto" [routerLink]="prevResourceUrl" *ngIf="isTypeOfCollection"
-    [disabled]="!prevResourceUrl" queryParamsHandling="preserve" accesskey="<">
+    [disabled]="!prevResourceUrl" i18n-aria-label aria-label="previous module" queryParamsHandling="preserve"
+    accesskey="<">
     <mat-icon>skip_previous</mat-icon><span *ngIf="logo">PREV</span>
   </a>
   <h1 *ngIf="logo" class="width-expand text-center text-truncate">
@@ -27,7 +28,8 @@
   </h1>
   <!-- [disabled]="!nextResourceUrl" -->
   <a mat-icon-button class="width-auto mr-10" [routerLink]="nextResourceUrl"
-    *ngIf="isTypeOfCollection && nextResourceUrl" queryParamsHandling="preserve" accesskey=">">
+    *ngIf="isTypeOfCollection && nextResourceUrl" i18n-aria-label aria-label="next module"
+    queryParamsHandling="preserve" accesskey=">">
     <span *ngIf="logo">NEXT</span>
     <mat-icon>skip_next</mat-icon>
   </a>
@@ -39,8 +41,9 @@
   <ws-widget-btn-fullscreen [widgetType]="'actionButton'" [widgetSubType]="'actionButtonFullscreen'"
     [widgetData]="{ fsContainer: frameReference }"></ws-widget-btn-fullscreen>
   <!-- </a> -->
-  <a href="javascript:void(0)" mat-icon-button *ngIf="isTypeOfCollection" role="link" class="width-auto"
-    [ngClass]="{'xsmall': !logo}" (click)="toggleSideBar()" accesskey="M">
+  <a href="javascript:void(0)" i18n-aria-label aria-label="module detail toggle" mat-icon-button
+    *ngIf="isTypeOfCollection" role="link" class="width-auto" [ngClass]="{'xsmall': !logo}" (click)="toggleSideBar()"
+    module accesskey="M">
     <mat-icon>menu</mat-icon>
   </a>
 </mat-toolbar>
