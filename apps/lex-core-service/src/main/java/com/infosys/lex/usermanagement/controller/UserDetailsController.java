@@ -46,4 +46,10 @@ public class UserDetailsController {
             return new ResponseEntity<>(Collections.singletonMap("message",e.getMessage()), HttpStatus.NO_CONTENT);
         }
     }
+    
+	@GetMapping("/validateUser/{rootOrg}/{userId}")
+	public ResponseEntity<Boolean> validateUserDetails(@PathVariable("rootOrg") String rootOrg,
+			@PathVariable("userId") String userId) {
+		return new ResponseEntity<>(userDetailsService.validateUserDetails(rootOrg, userId), HttpStatus.OK);
+	}
 }

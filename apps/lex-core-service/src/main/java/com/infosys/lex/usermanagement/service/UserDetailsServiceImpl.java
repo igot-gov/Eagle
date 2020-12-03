@@ -16,23 +16,27 @@
  */
 package com.infosys.lex.usermanagement.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.infosys.lex.common.service.UserUtilityService;
-import com.infosys.lex.core.exception.ResourceNotFoundException;
-import com.infosys.lex.usermanagement.entity.LexUserEntity;
-import com.infosys.lex.usermanagement.repository.LexUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.infosys.lex.common.service.UserUtilityService;
+import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.core.logger.LexLogger;
+import com.infosys.lex.usermanagement.entity.LexUserEntity;
+import com.infosys.lex.usermanagement.repository.LexUserRepository;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final ObjectMapper mapper = new ObjectMapper();
+    
+    private LexLogger logger = new LexLogger(getClass().getName());
 
     @Autowired
     private LexUserRepository lexUserRepository;
@@ -48,6 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String userRepositoryData;
         try {
             userRepositoryData = userUtilService.getUserEmailFromUserId("Infosys", userId);
+            
         } catch (Exception e) {
             throw new ResourceNotFoundException("Data not found for " + userId);
         }
@@ -73,5 +78,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new ResourceNotFoundException("Data not found for " + userId);
         }
         return response;
+    }
+    
+    public boolean validateUserDetails(String rootOrg, String userId) {
+    	return userUtilService.validateUser(rootOrg, userId);
     }
 }

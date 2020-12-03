@@ -52,6 +52,7 @@ import com.infosys.lex.core.exception.ApplicationLogicError;
 import com.infosys.lex.core.exception.BadRequestException;
 import com.infosys.lex.core.exception.InvalidDataInputException;
 import com.infosys.lex.core.exception.ResourceNotFoundException;
+import com.infosys.lex.core.logger.LexLogger;
 import com.infosys.lex.tnc.bodhi.repo.UserTermsAndConditionsRepository;
 import com.infosys.lex.userroles.bodhi.repo.UserRolesRepository;
 import com.infosys.lex.userroles.entities.UserRoles;
@@ -91,6 +92,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	@Autowired
 	UserRolesRepository userRoleRepo;
+
+	private LexLogger logger = new LexLogger(getClass().getName());
 
 	/*
 	 * this method checks whether the list of users with whom goals/playlist is
@@ -391,7 +394,6 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	// Utility With PID Support
 	// <==============================================================
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean validateUser(String rootOrg, String userId) throws ApplicationLogicError {
 
@@ -406,29 +408,33 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			}
 
 		} else {
-			Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org"));
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
-			conditions.put("wid", userId);
-			pidRequestMap.put("conditions", conditions);
+			Map<String, Object> pidRequestMap = new HashMap<>();
+			Map<String, Object> request = new HashMap<String, Object>();
+
+			Map<String, String> filters = new HashMap<String, String>();
+			filters.put(PIDConstants.ROOT_ORG, rootOrg);
+			filters.put(PIDConstants.USER_ID, userId);
+			request.put(PIDConstants.FILTERS, filters);
+
+			pidRequestMap.put("request", request);
 
 			try {
 
-				List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
-						pidRequestMap, List.class);
+				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
+						pidRequestMap, SunbirdApiResp.class);
 
-				if (pidResponse.isEmpty() || pidResponse == null) {
-					return false;
+				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
+						&& pidResponse.getResult().getResponse().getCount() >= 1) {
+					SunbirdApiRespContent content = pidResponse.getResult().getResponse().getContent().get(0);
+					logger.info("validateUser: rootOrg: " + rootOrg + ", userId: " + userId + ", returns: "
+							+ (content.getId().equalsIgnoreCase(userId)));
+					return content.getId().equalsIgnoreCase(userId);
 				} else {
-					return (pidResponse.get(0).get("wid").equals(userId));
+					return false;
 				}
-
 			} catch (Exception e) {
 				throw new ApplicationLogicError("PID ERROR: ", e);
 			}
-
 		}
 	}
 
@@ -586,6 +592,9 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			}
 
 		}
+		StringBuilder str = new StringBuilder("getUserDataFromUserId: rootOrg: ");
+		str.append(rootOrg).append(", UserId: ").append(userId).append(", returns: ").append(result);
+		logger.info(str.toString());
 		return result;
 	}
 
@@ -634,7 +643,12 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			} catch (Exception e) {
 				throw new ApplicationLogicError("PID ERROR: ", e);
 			}
+
+			StringBuilder str = new StringBuilder("getUserDataFromUserId: rootOrg: ");
+			str.append(rootOrg).append(", UserId: ").append(userId).append(", returns: ").append(result);
+			logger.info(str.toString());
 		}
+
 		return result;
 	}
 
@@ -662,7 +676,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			request.put(PIDConstants.FILTERS, filters);
 
 			pidRequestMap.put("request", request);
-			
+
 			try {
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
@@ -670,6 +684,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					SunbirdApiRespContent content = pidResponse.getResult().getResponse().getContent().get(0);
+					logger.info("getUserEmailFromUserId: rootOrg: " + rootOrg + ", userId: " + userId + ", returns: "
+							+ content.getEmail());
 					return content.getEmail();
 				}
 			} catch (Exception e) {
