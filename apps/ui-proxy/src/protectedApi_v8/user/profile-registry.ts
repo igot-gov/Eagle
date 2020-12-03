@@ -8,7 +8,7 @@ import { extractUserIdFromRequest } from '../../utils/requestExtract'
 const API_END_POINTS = {
   createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/create/profile?userId=${userId}`,
   getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/get/profile`,
-  getUserRegistryById: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile`,
+  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
   updateUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/profile`,
 
 }
@@ -65,7 +65,7 @@ profileRegistryApi.get('/getUserRegistryById', async (req, res) => {
     const userId = extractUserIdFromRequest(req)
     logInfo('Get user registry for', userId)
 
-    const response = await axios.post(API_END_POINTS.getUserRegistryById, { userId }, {
+    const response = await axios.post(API_END_POINTS.getUserRegistryById(userId), { userId }, {
       ...axiosRequestConfig,
     })
     res.status(response.status).send(response.data)
