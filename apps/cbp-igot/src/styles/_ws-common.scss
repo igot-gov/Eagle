@@ -9,8 +9,8 @@
 
 %page-center {
   max-width: $page-center;
-  // max-width: $max-screen;
-  margin-left: 0 !important;
+  max-width: $max-screen;
+  margin-left: auto !important;
   margin-right: auto !important;
 }
 

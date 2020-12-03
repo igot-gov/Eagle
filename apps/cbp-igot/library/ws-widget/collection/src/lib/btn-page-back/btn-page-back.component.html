@@ -1,7 +1,6 @@
 <mat-card class="base-layout" role="navigation" id="back-nav" aria-label="navigation">
   <mat-card-content class="container-balanced">
     <div class="flex flex-1 flex-column">
-
       <div class="flex flex-1 flex-column">
         <div class="flex flex-1 flex-wrap margin-bottom-xs margin-top-xs" role="menubar">
           <a class="flex cursor-pointer simple-hubs-link margin-left-0" [routerLink]="['/']" role="menuitem"
@@ -9,7 +8,6 @@
             <mat-icon class="margin-right-xs ws-mat-default-text">home</mat-icon>
             <span class="margin-auto ws-mat-default-text font-bold">Home</span>
           </a>
-
           <ng-container *ngIf="widgetData.titles && widgetData.titles.length>0">
             <div class="flex" *ngFor="let title of widgetData.titles">
               <mat-icon class="main-back m-auto">keyboard_arrow_right</mat-icon>

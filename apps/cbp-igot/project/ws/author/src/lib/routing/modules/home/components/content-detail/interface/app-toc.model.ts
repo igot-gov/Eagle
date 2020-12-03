@@ -38,22 +38,7 @@ export namespace NsAppToc {
     status: string
   }
 
-  export interface ITocStructure {
-    assessment: number
-    course: number
-    handsOn: number
-    interactiveVideo: number
-    learningModule: number
-    other: number
-    pdf: number
-    podcast: number
-    quiz: number
-    video: number
-    webModule: number
-    webPage: number
-    youtube: number
-    [key: string]: number
-  }
+
 }
 
 export namespace NsCohorts {

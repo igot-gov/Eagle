@@ -3,24 +3,47 @@
     *ngIf="!(widgetData &&  widgetData.previewURL)">
     <a class="preview mat-subheading-2 margin-0" [routerLink]="getPreviewLink()">Preview CBP</a>
   </div>
-  <span class="mat-subheading-1 margin-top-s">At a glance</span>
+  <span class="mat-subheading-1 margin-top-s">{{widgetData.displayName}}</span>
   <div class="flex flex-1 flex-column" *ngIf="widgetData">
     <span class="flex margin-top-xs margin-bottom-xs">
       <mat-icon class="ws-mat-black40-text margin-right-s">timer</mat-icon>
       {{widgetData.duration | pipeDurationTransform:'HMS'}}
     </span>
-    <span class="flex margin-top-xs margin-bottom-xs">
+    <span *ngIf="widgetData.counts.course > 0" class="flex margin-top-xs margin-bottom-xs">
       <mat-icon class="ws-mat-black40-text margin-right-s" style="transform: rotate(90deg)">horizontal_split</mat-icon>
-      {{widgetData.moduleCount}} Modules
+      {{widgetData.counts.course}} Modules
     </span>
-    <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">play_circle_filled</mat-icon>{{widgetData.videoCount}} Videos
+    <span *ngIf="widgetData.counts.learningModule > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s" style="transform: rotate(0deg)">horizontal_split</mat-icon>
+      {{widgetData.counts.learningModule}}
+      Learning Module
     </span>
-    <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">picture_as_pdf</mat-icon>{{widgetData.PdfCount}} PDFs
+    <span *ngIf="widgetData.counts.webPage > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s" style="transform: rotate(0deg)">web</mat-icon>
+      {{widgetData.counts.webPage}}
+      Web Pages
     </span>
-    <span class="flex margin-top-xs margin-bottom-xs">
-      <mat-icon class="ws-mat-black40-text margin-right-s">insert_drive_file</mat-icon>{{widgetData.assessmentCount}}
+    <span *ngIf="widgetData.counts.quizs > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s" style="transform: rotate(0deg)">assignment</mat-icon>
+      {{widgetData.counts.quizs}}
+      Quizs
+    </span>
+    <span *ngIf="widgetData.counts.youtube > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s" style="transform: rotate(0deg)">play_circle_outline
+      </mat-icon>
+      {{widgetData.counts.youtube}}
+      youtube
+    </span>
+
+    <span *ngIf="widgetData.counts.video > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s">play_circle_filled</mat-icon>{{widgetData.counts.video}}
+      Videos
+    </span>
+    <span *ngIf="widgetData.counts.pdf > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s">picture_as_pdf</mat-icon>{{widgetData.counts.pdf}} PDFs
+    </span>
+    <span *ngIf="widgetData.counts.assessment > 0" class="flex margin-top-xs margin-bottom-xs">
+      <mat-icon class="ws-mat-black40-text margin-right-s">insert_drive_file</mat-icon>{{widgetData.counts.assessment}}
       Assessments
     </span>
   </div>

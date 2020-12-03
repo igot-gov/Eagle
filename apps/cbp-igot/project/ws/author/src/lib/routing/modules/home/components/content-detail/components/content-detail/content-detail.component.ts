@@ -27,8 +27,10 @@ import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 
 /* tslint:disable */
 import _ from 'lodash'
-import { IAtGlanceComponentData, IAuthorData, ITable } from '@ws-widget/collection'
+import { IAtGlanceComponentData, IAuthorData, ITable, NsContent } from '@ws-widget/collection'
 import { LocalDataService } from '../../services/local-data.service'
+// import { NsAppToc } from '../../interface/app-toc.model'
+import { MyTocService } from '../../services/my-toc.service'
 /* tslint:enable */
 
 @Component({
@@ -43,10 +45,11 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
   tableData!: ITable
   // currentFilter = 'publish'
   // filterMenuTreeControl: FlatTreeControl<IMenuFlatNode>
+  tocStructure: IAtGlanceComponentData.ICounts | null = null
   filterMenuTreeFlattener: any
   public cardContent!: any[]
   public contentId: string | null = null
-  public content!: NSContent.IContentMeta
+  public content!: NsContent.IContent
   public filters: any[] = []
   // public status = 'draft'
   public status = 'published'
@@ -87,7 +90,8 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     private authInitService: AuthInitService,
     // private durationPipe: PipeDurationTransformPipe,
     private valueSvc: ValueService,
-    private dataService: LocalDataService
+    private dataService: LocalDataService,
+    private myTocService: MyTocService
   ) {
     // this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
     //   node => node.levels,
@@ -158,23 +162,44 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     }
     return ['Draft']
   }
-  getGlanceData(): IAtGlanceComponentData | null {
-    if (this.contentId && this.content) {
+  resetAndFetchTocStructure() {
+    this.tocStructure = {
+      assessment: 0,
+      course: 0,
+      handsOn: 0,
+      interactiveVideo: 0,
+      learningModule: 0,
+      other: 0,
+      pdf: 0,
+      podcast: 0,
+      quiz: 0,
+      video: 0,
+      webModule: 0,
+      webPage: 0,
+      youtube: 0,
+    }
+    if (this.content) {
+      this.tocStructure.learningModule = this.content.contentType === 'Collection' ? -1 : 0
+      this.tocStructure.course = this.content.contentType === 'Course' ? -1 : 0
+      this.tocStructure = this.myTocService.getTocStructure(this.content, this.tocStructure)
+      // for (const progType in this.tocStructure) {
+      //   if (this.tocStructure[progType] > 0) {
+      //     break
+      //   }
+      // }
+    }
+  }
+
+  getGlanceData(): IAtGlanceComponentData.IData | null {
+    if (this.contentId && this.content && this.tocStructure) {
       return {
+        displayName: "At a glance", // now not using JSON
         contentId: this.contentId,
-        contentType: this.content.contentType,
-        cost: this.content.courseType,
+        contentType: this.content.categoryType,
+        cost: this.content.exclusiveContent ? 'Paid' : 'Free',
         duration: this.content.duration.toString(),
         lastUpdate: this.content.lastUpdatedOn,
-        moduleCount: 1,
-        PdfCount: 2,
-        assessmentCount: 2,
-        audioCount: 2,
-        scromCount: 3,
-        videoCount: 2,
-        webCount: 22,
-        youtubeCount: 33
-
+        counts: this.tocStructure
       }
     } else return null
   }
@@ -226,8 +251,9 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
     this.contentId = this.activatedRoute.snapshot.paramMap.get('contentId') || null
     if (this.contentId) {
       this.myContSvc.readContent(this.contentId).subscribe((s) => {
-        this.content = s
+        _.set(this, 'content', s)
         this.dataService.initData(s)
+        this.resetAndFetchTocStructure()
       })
     }
   }

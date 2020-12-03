@@ -20,7 +20,7 @@ export class CommentsDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<CommentsDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: NSContent.IContentMeta,
     private authInitService: AuthInitService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.showNewFlow = this.authInitService.authAdditionalConfig.allowActionHistory

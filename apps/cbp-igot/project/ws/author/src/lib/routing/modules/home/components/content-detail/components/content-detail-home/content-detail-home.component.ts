@@ -29,7 +29,11 @@ export class ContentDetailHomeComponent implements OnInit, OnDestroy {
   leftmenues!: ILeftMenu[]
   constructor(private valueSvc: ValueService, private accessService: AccessControlService, private toc: LocalDataService,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {
+    if (this.toc) {
+
+    }
+  }
 
   ngOnInit() {
     this.allowAuthor = this.canShow('author')

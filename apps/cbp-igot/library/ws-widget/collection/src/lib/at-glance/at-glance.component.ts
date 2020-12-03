@@ -7,8 +7,8 @@ import { IAtGlanceComponentData } from './at-glance.model'
   styleUrls: ['./at-glance.component.scss'],
 })
 export class AtGlanceComponent extends WidgetBaseComponent
-  implements OnInit, NsWidgetResolver.IWidgetData<IAtGlanceComponentData> {
-  @Input() widgetData!: IAtGlanceComponentData
+  implements OnInit, NsWidgetResolver.IWidgetData<IAtGlanceComponentData.IData> {
+  @Input() widgetData!: IAtGlanceComponentData.IData
   containerClass = ''
 
   ngOnInit() {
