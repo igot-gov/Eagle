@@ -9,20 +9,17 @@ export interface IQuestionList {
   position: number
   ans: IAnswers[]
 }
-
 export interface IAnswers {
   name: string,
   weight: number
 }
-
- 
 export interface IMyObj {
-instructionalMethods: number[] ,
-assessmentDesign:number[],
-competencyandSkills:number[], 
-learnerEngagement:number[],
-learnerSupport:number[],
-accessibility:number[],
+  instructionalMethods: number[],
+  assessmentDesign: number[],
+  competencyandSkills: number[],
+  learnerEngagement: number[],
+  learnerSupport: number[],
+  accessibility: number[],
 }
 
 @Component({
@@ -31,27 +28,23 @@ accessibility:number[],
   styleUrls: ['./content-quality-check.component.scss'],
 
 })
-
 export class ContentQualityCheckComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any>  {
-
-  
   @Input()
   widgetData!: any
   displayedColumns: string[] = ['QuestionNo', 'Question', 'Answers']
   @Input()
   dataSource!: any
   @Output() finalDataEmit = new EventEmitter<any>()
-  constructor(private contentQualtityService: ContentQualityService){
+  constructor(private contentQualtityService: ContentQualityService) {
     super()
-    // this.myObject= new 
+    // this.myObject= new
   }
   ngOnInit() {
   }
- 
   getContentQualityCheckValue(event: any, element: any) {
-    const type=element.type +''
+    const type = element.type + ''
     this.contentQualtityService.myObject[type].push(event.weight)
     this.finalDataEmit.emit(this.contentQualtityService.myObject)
-    }
+  }
 
 }
