@@ -21,11 +21,25 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UTF-8
+		</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.uuid</groupId>
@@ -72,7 +86,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
-			<!--<optional>true</optional>-->
+			<!--<optional>true</optional> -->
 		</dependency>
 
 		<dependency>
@@ -163,19 +177,19 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
+
 		<!-- http-url-url-url-urls://mvnrepository.com/artifact/org.apache.commons/commons-text -->
 		<dependency>
-		    <groupId>org.apache.commons</groupId>
-		    <artifactId>commons-text</artifactId>
-		    <version>1.8</version>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.8</version>
 		</dependency>
-		
+
 
 
 	</dependencies>
@@ -187,7 +201,8 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>2.20.1</version>
 				<configuration>
-					<outputDirectory>${basedir}/target/surefire-reports</outputDirectory>
+					<outputDirectory>${basedir}/target/surefire-reports
+					</outputDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -195,7 +210,8 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>2.1</version>
 				<configuration>
-					<outputDirectory>${basedir}/target/surefire-reports</outputDirectory>
+					<outputDirectory>${basedir}/target/surefire-reports
+					</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -232,7 +248,7 @@
 						<artifactId>junit-jupiter-engine</artifactId>
 						<version>5.2.0-M1</version>
 					</dependency>
-				
+
 				</dependencies>
 			</plugin>
 		</plugins>

@@ -8,9 +8,9 @@ public class PIDConstants {
 	public static final String UUID = "wid";
 	public static final String KID = "kid";
 	public static final String SOURCE_ID = "source_id";
-	public static final String FIRST_NAME = "first_name";
-	public static final String LAST_NAME = "last_name";
-	public static final String MIDDLE_NAME = "middle_name";
+	public static final String FIRST_NAME = "firstName";
+	public static final String LAST_NAME = "lastName";
+	public static final String MIDDLE_NAME = "middleName";
 	public static final String CONTACT_PHONE_NUMBER_OFFICE = "contact_phone_number_office";
 	public static final String CONTACT_PHONE_NUMBER_HOME = "contact_phone_number_home";
 	public static final String CONTACT_PHONE_NUMBER_PERSONAL = "contact_phone_number_personal";
@@ -20,7 +20,7 @@ public class PIDConstants {
 	public static final String SALUTATION = "salutation";
 	public static final String EMAIL = "email";
 	public static final String SOURCE_PROFILE_PICTURE = "source_profile_picture";
-	public static final String ROOT_ORG = "root_org";
+	public static final String ROOT_ORG = "rootOrgName";
 	public static final String ORG = "org";
 	public static final String EMPLOYEMENT_STATUS = "employement_status";
 	public static final String CONTRACT_TYPE = "contract_type";
@@ -41,5 +41,6 @@ public class PIDConstants {
 	public static final String IS_ACTIVE = "is_active";
 	public static final String ACCOUNT_EXPIRY_DATE = "account_expiry_date";
 	public static final String SOURCE_DATA = "source_data";
-	
+	public static final String USER_ID = "userId";
+	public static final String FILTERS = "filters";
 }

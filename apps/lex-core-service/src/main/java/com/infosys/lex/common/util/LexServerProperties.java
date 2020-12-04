@@ -150,7 +150,8 @@ public class LexServerProperties {
 	@Value("${java.eval.endpoint}")
 	private String javaEvalEndpoint;
 	
-	
+	@Value("${pid.service.url}")
+	private String pidUrl;
 	
 
 	public Integer getCertificationRetryGapInDays() {
@@ -563,9 +564,14 @@ public class LexServerProperties {
 		this.javaEvalEndpoint = javaEvalEndpoint;
 	}
 	
-	
-	
+	public String getPidUrl() {
+		return pidUrl;
+	}
 
+
+	public void setPidUrl(String pidUrl) {
+		this.pidUrl = pidUrl;
+	}
 
 	@Override
 	public String toString() {
@@ -579,8 +585,35 @@ public class LexServerProperties {
 				+ ", clientId=" + clientId + ", clientSecret=" + clientSecret + ", lhubUrl=" + lhubUrl
 				+ ", lhubCertificationUrl=" + lhubCertificationUrl + ", iapSubmissonsUrl=" + iapSubmissonsUrl
 				+ ", iapSubmissonsClientId=" + iapSubmissonsClientId + ", iapSubmissonsClientSecret="
-				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + "]";
+				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + ", contentServiceHost="
+				+ contentServiceHost + ", lhubAthClientId=" + lhubAthClientId + ", iapCertificationClientId="
+				+ iapCertificationClientId + ", iapCertificationUrl=" + iapCertificationUrl
+				+ ", iapCertificationClientSecret=" + iapCertificationClientSecret + ", defAccessPathRootOrg="
+				+ defAccessPathRootOrg + ", defAccessPathOrg=" + defAccessPathOrg + ", selfReplyAllow=" + selfReplyAllow
+				+ ", pidIp=" + pidIp + ", pidPort=" + pidPort + ", authServiceHost=" + authServiceHost
+				+ ", authServicePort=" + authServicePort + ", certificationRetryGapInDays="
+				+ certificationRetryGapInDays + ", javaEvalServerHost=" + javaEvalServerHost + ", javaEvalServerPort="
+				+ javaEvalServerPort + ", javaEvalEndpoint=" + javaEvalEndpoint + ", pidUrl=" + pidUrl + ", notifIp="
+				+ notifIp + ", notifPort=" + notifPort + ", sbextServiceHost=" + sbextServiceHost + "]";
 	}
+	
 
+
+/*	@Override
+	public String toString() {
+		return "LexServerProperties [serverPort=" + serverPort + ", maxFileSize=" + maxFileSize + ", maxRequestSize="
+				+ maxRequestSize + ", connectionTimeout=" + connectionTimeout + ", maxThreads=" + maxThreads
+				+ ", minSpareThreads=" + minSpareThreads + ", sbextPort=" + sbextPort + ", smtpHost=" + smtpHost
+				+ ", smtpPort=" + smtpPort + ", contentServicePort=" + contentServicePort + ", pyeValServiceIp="
+				+ pyeValServiceIp + ", pyeValServicePort=" + pyeValServicePort + ", pyeValServiceName="
+				+ pyeValServiceName + ", iapServiceIp=" + iapServiceIp + ", iapServicePort=" + iapServicePort
+				+ ", iapVerificationService=" + iapVerificationService + ", logAccessKey=" + logAccessKey
+				+ ", clientId=" + clientId + ", clientSecret=" + clientSecret + ", lhubUrl=" + lhubUrl
+				+ ", lhubCertificationUrl=" + lhubCertificationUrl + ", iapSubmissonsUrl=" + iapSubmissonsUrl
+				+ ", iapSubmissonsClientId=" + iapSubmissonsClientId + ", iapSubmissonsClientSecret="
+				+ iapSubmissonsClientSecret + ", enableRealTime=" + enableRealTime + "]";
+	}*/
+
+	
 
 }
