@@ -361,7 +361,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   openContenQualityPopup() {
     const dialogRef = this.dialog.open(ContentQualityCheckPopupComponent, {
-      minHeight: 'auto',
+      maxHeight: 'auto',
+      height:'80%',
       width: '80%',
       panelClass: 'remove-pad',
     })

@@ -1,20 +1,31 @@
 import { Component, Input, OnInit, Output } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
-import { EventEmitter } from 'protractor';
-export interface QuestionList {
-  type:string
-  question: string;
-  position: number;
-  ans: Answers[];
+import { EventEmitter } from '@angular/core'
+import _ from 'lodash'
+export interface IQuestionList {
+  type: string
+  question: string
+  position: number
+  ans: IAnswers[]
 }
 
-export interface Answers{
+export interface IAnswers {
   name: string,
-  weight:number
+  weight: number
+}
+
+ 
+export interface IMyObj {
+instructionalMethods: number[] ,
+assessmentDesign:number[],
+competencyandSkills:number[], 
+learnerEngagement:number[],
+learnerSupport:number[],
+accessibility:number[],
 }
 
 @Component({
-  selector: 'ws-widget-content-quality',
+  selector: 'ws-auth-content-quality',
   templateUrl: './content-quality-check.component.html',
   styleUrls: ['./content-quality-check.component.scss'],
 
@@ -22,56 +33,67 @@ export interface Answers{
 
 export class ContentQualityCheckComponent extends WidgetBaseComponent implements OnInit, NsWidgetResolver.IWidgetData<any>  {
 
+  
   @Input()
   widgetData!: any
-  displayedColumns: string[] = ['QuestionNo', 'Question', 'Answers'];
-  InstructionalMethods:any=[]
-  AssessmentDesign:any=[]
-  CompetencyandSkills:any=[]
-  LearnerEngagement:any=[]
-  LearnerSupport:any=[]
-  Accessibility:any=[]
-  @Input()
-  dataSource!:any;
   
-  @Output() finalDataEmit= new EventEmitter<>();
-  ngOnInit(){
+  displayedColumns: string[] = ['QuestionNo', 'Question', 'Answers']
+  @Input()
+  dataSource!: any
+  @Output() finalDataEmit = new EventEmitter<any>()
+  myObject!: IMyObj
+
+  constructor(){
+    super()
+    // this.myObject= new 
   }
-  selectValue(event: Event, element: any){
-    switch(element.type){
-    case "InstructionalMethods":
-      this.InstructionalMethods[element.position-1] =event.weight
-      this.InstructionalMethods = Array.from(this.InstructionalMethods, item => item || 0);
-      break;
-    case "AssessmentDesign":
-      this.AssessmentDesign[element.position-1] =event.weight
-      this.AssessmentDesign = Array.from(this.AssessmentDesign, item => item || 0);
-    break;
-    case "CompetencyandSkills":
-      this.CompetencyandSkills[element.position-1] =event.weight
-      this.CompetencyandSkills = Array.from(this.CompetencyandSkills, item => item || 0);
-    break;
-    case "LearnerEngagement":
-      this.LearnerEngagement[element.position-1] =event.weight
-      this.LearnerEngagement = Array.from(this.LearnerEngagement, item => item || 0);
-    break;
-    case "LearnerSupport":
-      this.LearnerSupport[element.position-1] =event.weight
-      this.LearnerSupport = Array.from(this.LearnerSupport, item => item || 0);
-    break;
-    case "Accessibility":
-      this.Accessibility[element.position-1] =event.weight
-      this.Accessibility = Array.from(this.Accessibility, item => item || 0);
-    break;
+  ngOnInit() {
+  }
+ 
+  selectValue(event: any, element: any) {
+    const type=element.type +''
+    console.log(this.myObject)
+    let myvar=_.get(this.myObject,type)|| []
+    console.log(myvar)
+    myvar.push(event.weight)
+    console.log(myvar)
+
+    // switch (type) {
+    // case 'instructionalMethods':
+    //   let myvar=this.myObject[type]
+    //   this.myObject[type[element.position  - 1]].push(event.weight)
+
+    //   this.instructionalMethods = Array.from(this.instructionalMethods, item => item || 0)
+    //   break
+    // case 'AssessmentDesign':
+    //   this.assessmentDesign[element.position - 1] = event.weight
+    //   this.assessmentDesign = Array.from(this.assessmentDesign, item => item || 0)
+    // break
+    // case 'CompetencyandSkills':
+    //   this.competencyandSkills[element.position - 1] = event.weight
+    //   this.competencyandSkills = Array.from(this.competencyandSkills, item => item || 0)
+    // break
+    // case 'LearnerEngagement':
+    //   this.learnerEngagement[element.position - 1] = event.weight
+    //   this.learnerEngagement = Array.from(this.learnerEngagement, item => item || 0)
+    // break
+    // case 'LearnerSupport':
+    //   this.learnerSupport[element.position - 1] = event.weight
+    //   this.learnerSupport = Array.from(this.learnerSupport, item => item || 0)
+    // break
+    // case 'Accessibility':
+    //   this.accessibility[element.position - 1] = event.weight
+    //   this.accessibility = Array.from(this.accessibility, item => item || 0)
+    // break
     }
     // const Obj={
-    //   InstructionalMethods: this.InstructionalMethods,
-    //   AssessmentDesign: this.AssessmentDesign,
-    //   CompetencyandSkills: this.CompetencyandSkills,
-    //   LearnerEngagement: this.LearnerEngagement,
-    //   LearnerSupport: this.LearnerSupport,
-    //   Accessibility: this.Accessibility
+    //   InstructionalMethods: this.instructionalMethods,
+    //   AssessmentDesign: this.assessmentDesign,
+    //   CompetencyandSkills: this.competencyandSkills,
+    //   LearnerEngagement: this.learnerEngagement,
+    //   LearnerSupport: this.learnerSupport,
+    //   Accessibility: this.accessibility
     // }
     // this.finalDataEmit.emit(Obj);
-  }
+  // }
 }
