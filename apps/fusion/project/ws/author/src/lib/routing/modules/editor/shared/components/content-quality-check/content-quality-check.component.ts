@@ -1,7 +1,5 @@
-import { Component, Input, OnInit, Output } from '@angular/core'
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
-import { EventEmitter } from '@angular/core'
-import _ from 'lodash'
 import { ContentQualityService } from './content-quality-check.service'
 export interface IQuestionList {
   type: string
@@ -42,7 +40,7 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
   ngOnInit() {
   }
   getContentQualityCheckValue(event: any, element: any) {
-    const type = element.type + ''
+    const type = element.type
     this.contentQualtityService.myObject[type].push(event.weight)
     this.finalDataEmit.emit(this.contentQualtityService.myObject)
   }

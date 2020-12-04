@@ -112,8 +112,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   canExpiry = true
   showMoreGlance = false
   complexityLevelList: string[] = []
-  pushAction:any = { actions: 'push' }
-  saveAction:any={ actions: 'save'}
+  pushAction: any = { actions: 'push' }
+  saveAction: any = { actions: 'save' }
   isEditEnabled = false
   banners = [{ color: '#003F5C', isDefault: true }, { color: '#59468B', isDefault: false },
   { color: '#185F49', isDefault: false }, { color: '#126489', isDefault: false }]
@@ -364,7 +364,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   openContenQualityPopup() {
     const dialogRef = this.dialog.open(ContentQualityCheckPopupComponent, {
       maxHeight: 'auto',
-      height:'80%',
+      height: '80%',
       width: '80%',
       panelClass: 'remove-pad',
     })

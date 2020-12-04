@@ -455,12 +455,14 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
 
   action(type: any) {
-    // tslint:disable-next-line:no-console
-    console.log(type)
+    let finalValue = type
+    if (finalValue.action === undefined) {
+      finalValue = { actions:  type }
+    }
     if (type && type.profanity) {
       this.profanityAPIData = type.profanity
     }
-    switch (type.actions) {
+    switch (finalValue.actions) {
       case 'back':
         this.currentStep = 1
         break
@@ -468,11 +470,10 @@ export class UploadComponent implements OnInit, OnDestroy {
       case 'next':
         if (this.profanityAPIData && this.profanityAPIData !== undefined) {
           this.startProfanityMessagePopup()
-        } else if(this.currentStep ==1) {
-          console.log(this.currentStep)
-          this.currentStep=1;
-         
-        }else{
+        } else if (this.currentStep === 1) {
+          this.currentStep = 1
+
+        } else {
           this.currentStep += 1
         }
         // this.currentStep += 1

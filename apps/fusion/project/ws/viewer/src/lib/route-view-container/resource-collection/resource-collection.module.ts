@@ -9,7 +9,7 @@ import {
   MatTabsModule,
   MatFormFieldModule,
   MatInputModule,
-  MatIconModule
+  MatIconModule,
 } from '@angular/material'
 import { ResourceCollectionRoutingModule } from './resource-collection-routing.module'
 import { ResourceCollectionComponent } from './resource-collection.component'
