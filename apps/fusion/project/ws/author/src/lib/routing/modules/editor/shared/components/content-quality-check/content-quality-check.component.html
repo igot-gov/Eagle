@@ -17,7 +17,7 @@
     <th mat-header-cell *matHeaderCellDef> Answers </th>
     <td mat-cell *matCellDef="let element"> <mat-form-field appearance="fill">
       <mat-label>Select an option</mat-label>
-      <mat-select (selectionChange)="selectValue($event.value, element)">
+      <mat-select (selectionChange)="getContentQualityCheckValue($event.value, element)">
         <mat-option value="default"> None</mat-option>
         <mat-option *ngFor="let ans of element.ans" [value]="ans"> {{ans.name}}</mat-option>
       </mat-select>

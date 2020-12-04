@@ -1,10 +1,15 @@
-<div  *ngFor="let item of dataSources">
-  <ws-auth-content-quality [dataSource]="item" (finalDataEmit)="dataHandler($event)">
-  </ws-auth-content-quality>
+<div *ngIf="showTable">
+    <div  *ngFor="let item of dataSources">
+      <ws-auth-content-quality [dataSource]="item" (finalDataEmit)="dataHandler($event)">
+      </ws-auth-content-quality>
+    </div>
+  </div>
+<div *ngIf="!showTable"  style="height: 20%">
+  <h2>Content Quality Score: {{score}}</h2>
 </div>
 <mat-dialog-actions align="end" class="mb-0-imp">
-  <button i18n mat-raised-button color="primary" (click)="markAsComplete()">Wait</button>
+  <button *ngIf="showTable" i18n mat-raised-button color="primary" (click)="markAsComplete()">Submit</button>
   <button mat-raised-button type="button" [mat-dialog-close]="true" class="ws-mat-accent-border flex-auto-display">
-    <span class="ws-mat-default-text" i18n>Skip Profanity</span>
+    <span class="ws-mat-default-text" i18n>Close</span>
   </button>
 </mat-dialog-actions>

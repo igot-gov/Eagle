@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { ContentQualityService } from '../../components/content-quality-check/content-quality-check.service'
 // tslint:disable-next-line:import-spacing
 // import  *  as  contentQuality  from  './content-quality.json'
 export interface IDialogData {
@@ -16,8 +17,12 @@ export interface IDialogData {
 export class ContentQualityCheckPopupComponent implements OnInit {
 
   dataSources :any
+  finalArray = []
+  showTable =true
+  score:any
   constructor(
     public dialogRef: MatDialogRef<ContentQualityCheckPopupComponent>,
+    private contentQualityService: ContentQualityService,
     @Inject(MAT_DIALOG_DATA) public data: IDialogData,
   ) {
   }
@@ -64,8 +69,15 @@ export class ContentQualityCheckPopupComponent implements OnInit {
     this.dialogRef.close()
   }
   markAsComplete() {
+    console.log(this.finalArray)
+
+    this.contentQualityService.getContentQualityScore(this.finalArray).subscribe(data => {
+      this.score=data.compositeScore
+      this.showTable =false
+    })
   }
   dataHandler($event: any) {
+    this.finalArray = $event
     console.log($event)
   }
 }
