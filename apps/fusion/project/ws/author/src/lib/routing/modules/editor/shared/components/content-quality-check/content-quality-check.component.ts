@@ -1,10 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, OnInit, Output } from '@angular/core'
 import { WidgetBaseComponent, NsWidgetResolver } from '@ws-widget/resolver'
-
-export interface FinalObject{
-  key : QuestionList;
-}
+import { EventEmitter } from 'protractor';
 export interface QuestionList {
+  type:string
   question: string;
   position: number;
   ans: Answers[];
@@ -15,14 +13,6 @@ export interface Answers{
   weight:number
 }
 
-
-const ELEMENT_DATA: QuestionList[] = [
-  {position: 1, question: 'The course puts the learner at the centre of the learning experience.', ans: [{name:'Not Agree', weight:100}, {name:'Agree', weight:100} ]},
-  {position: 2, question: 'The course is designed according to the Watch-Think-Do-Explore-Test content framework and all the elements have been incorporated in the course', ans: [{name:'Not Agree', weight:100}, {name:'Agree', weight:100} ] },
-  {position: 3, question: 'The course is not heavily reliant on the traditional lecture/didactic approach and engages the learner on a more interactive journey through use of animations and simulations', ans: [{name:'Not Agree', weight:100}, {name:'Agree', weight:100} ]},
-  {position: 4, question: 'The course taps into learner motivations, emotions, and needs.', ans: [{name:'Not Agree', weight:100}, {name:'Agree', weight:100} ] },
-  {position: 5, question: 'Learners are encouraged to engage in higher-order thinking / build upon prior learning through scenario based questionnaire at end of each module', ans: [{name:'Not Agree', weight:100}, {name:'Agree', weight:100} ] },
-];
 @Component({
   selector: 'ws-widget-content-quality',
   templateUrl: './content-quality-check.component.html',
@@ -35,8 +25,53 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
   @Input()
   widgetData!: any
   displayedColumns: string[] = ['QuestionNo', 'Question', 'Answers'];
-  dataSource = ELEMENT_DATA;
+  InstructionalMethods:any=[]
+  AssessmentDesign:any=[]
+  CompetencyandSkills:any=[]
+  LearnerEngagement:any=[]
+  LearnerSupport:any=[]
+  Accessibility:any=[]
+  @Input()
+  dataSource!:any;
+  
+  @Output() finalDataEmit= new EventEmitter<>();
   ngOnInit(){
   }
-
+  selectValue(event: Event, element: any){
+    switch(element.type){
+    case "InstructionalMethods":
+      this.InstructionalMethods[element.position-1] =event.weight
+      this.InstructionalMethods = Array.from(this.InstructionalMethods, item => item || 0);
+      break;
+    case "AssessmentDesign":
+      this.AssessmentDesign[element.position-1] =event.weight
+      this.AssessmentDesign = Array.from(this.AssessmentDesign, item => item || 0);
+    break;
+    case "CompetencyandSkills":
+      this.CompetencyandSkills[element.position-1] =event.weight
+      this.CompetencyandSkills = Array.from(this.CompetencyandSkills, item => item || 0);
+    break;
+    case "LearnerEngagement":
+      this.LearnerEngagement[element.position-1] =event.weight
+      this.LearnerEngagement = Array.from(this.LearnerEngagement, item => item || 0);
+    break;
+    case "LearnerSupport":
+      this.LearnerSupport[element.position-1] =event.weight
+      this.LearnerSupport = Array.from(this.LearnerSupport, item => item || 0);
+    break;
+    case "Accessibility":
+      this.Accessibility[element.position-1] =event.weight
+      this.Accessibility = Array.from(this.Accessibility, item => item || 0);
+    break;
+    }
+    // const Obj={
+    //   InstructionalMethods: this.InstructionalMethods,
+    //   AssessmentDesign: this.AssessmentDesign,
+    //   CompetencyandSkills: this.CompetencyandSkills,
+    //   LearnerEngagement: this.LearnerEngagement,
+    //   LearnerSupport: this.LearnerSupport,
+    //   Accessibility: this.Accessibility
+    // }
+    // this.finalDataEmit.emit(Obj);
+  }
 }
