@@ -83,7 +83,7 @@
               </div>
             </button>
             <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
-              *ngIf="(fileUploadForm.controls.artifactUrl.value)" (click)="data.emit('next')">
+              *ngIf="(fileUploadForm.controls.artifactUrl.value)" (click)="data.emit(nextProcess)">
               <div class="flex flex-middle justify-center">
                 <mat-icon class="text-white">fast_forward</mat-icon>
                 <p class="text-white margin-left-s margin-remove-bottom">

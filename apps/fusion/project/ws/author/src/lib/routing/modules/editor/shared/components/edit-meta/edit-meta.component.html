@@ -19,7 +19,7 @@
       <mat-tab>
         <mat-card class="margin-top-m">
           <mat-card-title class="ml-1 ws-mat-default-text">
-            <span>Basic Details</span>
+            <span>Basic Detail</span>
             <ng-container [ngTemplateOutlet]="top"></ng-container>
           </mat-card-title>
           <mat-card-content>
@@ -1291,6 +1291,10 @@
               <div class="margin-top-xl margin-right-l">
                 <div class="grid"></div>
                 <div class="flex flex-end margin-top-l margin-bottom-l margin-right-l">
+                  <button mat-raised-button type="button"
+                  class="text-white ws-mat-primary-background text-white margin-right-m" (click)="openContenQualityPopup()">
+                  <b class="text-white" i18n>Content Quality</b>
+                </button>
                   <button mat-raised-button type="button"
                     class="text-white ws-mat-primary-background text-white margin-right-m" (click)="data.emit('save')">
                     <b class="text-white" i18n>Save</b>

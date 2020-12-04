@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core'
 import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
 // tslint:disable-next-line:max-line-length
 const VALIDATE_PDF_CONTENT = '/apis/protected/v8/profanity/validatePdfContent'
+const START_VALIDATE_PDF_CONTENT = '/apis/protected/v8/profanity/startPdfProfanity'
+const GET_VALIDATE_PDF_CONTENT = '/apis/protected/v8/profanity/getPdfProfanity'
 // const backwordSlash = '/'
 
 @Injectable()
@@ -12,13 +14,9 @@ export class ProfanityService {
     private apiService: ApiService,
   ) { }
 
-  featchProfanity(content: string, url: string) {
-    // tslint:disable-next-line:no-console
-    console.log(content)
-    // tslint:disable-next-line:no-console
-    const finalUrl = url.replace('type=main', '')
-    // tslint:disable-next-line:no-console
-    console.log(finalUrl)
+  featchProfanity(url: string) {
+    const finalUrl = url.replace('?type=main', '')
+
     const requestData = {
       pdfDownloadUrl: finalUrl,
     }
@@ -26,5 +24,35 @@ export class ProfanityService {
     return this.apiService.post<any>(
       `${VALIDATE_PDF_CONTENT}`, requestData
     )
+  }
+  startProfanity(content: string, url: string, filename: string) {
+    let requestData = null
+    if (url && url != null && url !== undefined) {
+      const finalUrl = url.replace('?type=main', '')
+      requestData = {
+        pdfDownloadUrl: finalUrl,
+        contentId: content,
+        fileName: filename,
+      }
+
+    }
+    return this.apiService.post<any>(
+      `${START_VALIDATE_PDF_CONTENT}`, requestData
+    )
+  }
+  getProfanity(finalData: any) {
+    let requestData = null
+    if (finalData && finalData != null && finalData !== undefined) {
+      const finalUrl = finalData.pdfDownloadUrl.replace('?type=main', '')
+      requestData = {
+        pdfDownloadUrl: finalUrl,
+        contentId: finalData.contentId,
+        fileName: finalData.fileName,
+      }
+    }
+    return this.apiService.post<any>(
+      `${GET_VALIDATE_PDF_CONTENT}`, requestData
+    )
+
   }
 }

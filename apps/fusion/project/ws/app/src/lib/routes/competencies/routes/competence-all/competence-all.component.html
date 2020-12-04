@@ -6,7 +6,7 @@
       </div>
     </div> -->
     <div class="flex-3">
-      <div class="w-full pt-10" role="link" tabindex="0">
+      <div class="w-full pt-10" tabindex="0">
         <mat-card class="no-competency-card margin-right-s" *ngIf="myCompetencies && myCompetencies.length === 0">
           <mat-card-header>
             <mat-card-title>
@@ -40,14 +40,15 @@
             <span>&nbsp;</span>
             <div class="tag mat-copmetence cursor-pointer mat-app-background" role="listitem" (click)=view(item)
               *ngFor="let item of myCompetencies">
-              <a href="javascript:void(0)" [attr.id]="item.name" class="mat-body-1 margin-xs" i18n-aria-label
-                role="link">{{item.name}}</a>
+              <a href="javascript:void(0)" [attr.id]="item.name" class="mat-body-1 margin-xs" i18n-aria-label>
+                {{item.name}}
+              </a>
             </div>
           </mat-card-content>
         </mat-card>
       </div>
       <div class="w-full pt-10">
-        <div class="flex flex-1 flex-column margin-fix mb-2" role="link" tabindex="0">
+        <div class="flex flex-1 flex-column margin-fix mb-2" tabindex="0">
           <span class="mat-title">
             Popular competencies
           </span>
@@ -62,7 +63,7 @@
             </mat-form-field>
           </form>
           <!-- <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important"> -->
-          <button class="margin-top-s" mat-icon-button (click)="resetSearch()">
+          <button class="margin-top-s" i18-aria-label aria-label="refresh" mat-icon-button (click)="resetSearch()">
             <mat-icon>refresh</mat-icon>
           </button>
           <!-- </div> -->

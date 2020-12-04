@@ -35,11 +35,11 @@ export class PlaylistCardComponent implements OnInit {
   isListExpanded: { [playlistId: string]: boolean } = {}
 
   constructor(private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    public dialog: MatDialog,
-    private playlistSvc: BtnPlaylistService,
-    public router: Router,
-    public configSvc: ConfigurationsService,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog,
+              private playlistSvc: BtnPlaylistService,
+              public router: Router,
+              public configSvc: ConfigurationsService,
 
   ) {
     if (this.route.snapshot.data.pageData.data) {

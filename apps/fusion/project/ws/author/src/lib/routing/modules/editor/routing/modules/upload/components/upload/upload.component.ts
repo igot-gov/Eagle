@@ -21,6 +21,9 @@ import { mergeMap, tap, catchError } from 'rxjs/operators'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
+import { ProfanityPopUpComponent } from '../profanity-popup/profanity-popup'
+import { ProfanityService } from '../../services/profanity.service'
+import { ProfanityMessagePopUpComponent } from '../profanity-message-popup/profanity-message-popup'
 
 @Component({
   selector: 'ws-auth-upload',
@@ -42,6 +45,8 @@ export class UploadComponent implements OnInit, OnDestroy {
   isSubmitPressed = false
   mimeTypeRoute = ''
   isMobile = false
+  profanityData: any
+  profanityAPIData: any
   workFlow = [{ isActive: false, isCompleted: true, name: 'Upload', step: 1 },
   { isActive: true, isCompleted: false, name: 'Basic Details', step: 2 },
   { isActive: false, isCompleted: true, name: 'Classification', step: 3 },
@@ -57,6 +62,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
     private accessService: AccessControlService,
     private notificationSvc: NotificationService,
+    private profanityService: ProfanityService,
   ) { }
 
   ngOnInit() {
@@ -171,7 +177,8 @@ export class UploadComponent implements OnInit, OnDestroy {
       this.triggerSave(updatedContent, this.currentContent).subscribe(
         () => {
           if (nextAction) {
-            this.action(nextAction)
+            const nextAct = { actions: nextAction }
+            this.action(nextAct)
           }
           this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
@@ -447,17 +454,28 @@ export class UploadComponent implements OnInit, OnDestroy {
     }
   }
 
-  action(type: string) {
-    switch (type) {
+  action(type: any) {
+    // tslint:disable-next-line:no-console
+    console.log(type)
+    if (type && type.profanity) {
+      this.profanityAPIData = type.profanity
+    }
+    switch (type.actions) {
       case 'back':
         this.currentStep = 1
         break
 
       case 'next':
-        this.currentStep += 1
+        // tslint:disable-next-line:no-console
+        console.log(this.profanityAPIData)
+        if (this.profanityAPIData && this.profanityAPIData !== undefined) {
+          this.startProfanityMessagePopup()
+        } else {
+          this.currentStep = 1
+        }
+        // this.currentStep += 1
         // this.goForward()
         break
-
       case 'preview':
         this.preview()
         break
@@ -513,7 +531,66 @@ export class UploadComponent implements OnInit, OnDestroy {
         break
     }
   }
+  startProfanityMessagePopup() {
+    this.loaderService.changeLoad.next(false)
+    const dialogRef = this.dialog.open(ProfanityMessagePopUpComponent, {
+      minHeight: 'auto',
+      width: '60%',
+      panelClass: 'remove-pad',
+      data: this.profanityData,
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response && response.data === 'wait') {
+        this.startgetProfanityAPI()
+      } else {
+        this.profanityAPIData = undefined
+        this.currentStep += 1
+      }
+    })
+  }
+  startgetProfanityAPI() {
+    this.profanityService.getProfanity(this.profanityAPIData).subscribe(data => {
+      // tslint:disable-next-line:no-console
+      console.log(data)
+      this.profanityData = data
+      if (this.profanityData !== null && this.profanityData !== undefined) {
+        // tslint:disable-next-line:no-console
+        console.log(this.profanityData.completed)
+        if (this.profanityData.completed) {
+          this.startProfanityPopup()
+          this.profanityAPIData = undefined
+          this.snackBar.openFromComponent(NotificationComponent, {
+            data: {
+              type: Notify.PROFANITY_SUCCESS,
+            },
+            duration: NOTIFICATION_TIME * 1000,
+          })
+        } else {
+          this.startgetProfanityAPI()
+        }
+      }
+    })
 
+  }
+
+  startProfanityPopup() {
+    this.loaderService.changeLoad.next(false)
+    const dialogRef = this.dialog.open(ProfanityPopUpComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+      data: this.profanityData,
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+
+        // this.refreshData(this.currentActivePage)
+      }
+      // const profanityData = { actions: 'saveAndNext' }
+      // this.data.emit(profanityData)
+      this.currentStep += 1
+    })
+  }
   isDirectPublish(): boolean {
     return (
       ['Draft', 'Live'].includes(this.contentService.originalContent[this.currentContent].status) &&

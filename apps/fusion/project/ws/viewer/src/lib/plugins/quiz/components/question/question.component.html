@@ -12,9 +12,11 @@
     </button>
   </div>
 
-  <h3 *ngIf="question.questionType !== 'fitb'" class="mat-h3" [innerHTML]="question?.question" class="quiz-question">
+  <h3 *ngIf="question.questionType !== 'fitb'" tabindex="0" class="mat-h3" [innerHTML]="question?.question"
+    class="quiz-question">
   </h3>
-  <h3 *ngIf="question.questionType === 'fitb'" class="mat-h3" [innerHTML]="safeQuestion" class="quiz-question"></h3>
+  <h3 *ngIf="question.questionType === 'fitb'" class="mat-h3" tabindex="0" [innerHTML]="safeQuestion"
+    class="quiz-question"></h3>
 
   <div *ngIf="question.questionType === 'fitb'">
 

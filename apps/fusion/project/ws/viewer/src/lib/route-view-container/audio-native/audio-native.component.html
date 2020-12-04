@@ -80,8 +80,14 @@
   </div>
   <div class="padding-m" *ngIf="discussionForumWidget && isRestricted">
     <div class="video-discussion-forum-in margin-bottom-m">
-      <h2 class="mat-toolbar discussion-head">Discussion Forum</h2>
-      <ng-container [wsResolverWidget]="discussionForumWidget"></ng-container>
+      <div class="flex" i18n-aria-label aria-label="open discussion form">
+        <a href="javascript:void(0)" role="link" i18n-aria-label aria-label="open discussion form"
+          class="mat-toolbar discussion-head" (click)="openDiscuuss=!openDiscuuss">Discussion Forum
+        </a>
+        <mat-icon *ngIf="!openDiscuuss" class="mt-1">arrow_right</mat-icon>
+        <mat-icon *ngIf="openDiscuuss" class="mt-1">arrow_drop_down</mat-icon>
+      </div>
+      <ng-container *ngIf="openDiscuuss" [wsResolverWidget]="discussionForumWidget"></ng-container>
     </div>
   </div>
 </div>

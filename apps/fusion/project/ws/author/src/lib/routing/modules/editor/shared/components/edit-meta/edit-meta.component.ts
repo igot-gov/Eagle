@@ -37,6 +37,7 @@ import { AccessControlService } from './../../../../../../modules/shared/service
 import { AuthInitService } from './../../../../../../services/init.service'
 import { LoaderService } from './../../../../../../services/loader.service'
 import { CompetencyAddPopUpComponent } from '../competency-add-popup/competency-add-popup'
+import { ContentQualityCheckPopupComponent } from '../content-quality-popup/content-quality-popup'
 import {
   debounceTime,
   distinctUntilChanged,
@@ -64,7 +65,7 @@ export interface IUsersData {
 })
 export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   contentMeta!: NSContent.IContentMeta
-  @Output() data = new EventEmitter<string>()
+  @Output() data = new EventEmitter<any>()
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
   @Input() stage = 1
@@ -358,6 +359,18 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     })
   }
+  openContenQualityPopup() {
+    const dialogRef = this.dialog.open(ContentQualityCheckPopupComponent, {
+      minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
+  }
   typeCheck() {
     if (this.type) {
       let dataName = ''
@@ -433,7 +446,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       }
     } else {
-      this.data.emit('back')
+      const obj = { actions: 'back' }
+      this.data.emit(obj)
     }
   }
   private set content(contentMeta: NSContent.IContentMeta) {

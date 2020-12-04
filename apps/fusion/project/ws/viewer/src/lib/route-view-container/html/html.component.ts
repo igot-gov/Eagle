@@ -26,6 +26,7 @@ export class HtmlComponent implements OnInit, OnChanges {
   isLtMedium = false
   isScormContent = false
   isRestricted = false
+  openDiscuuss = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private domSanitizer: DomSanitizer,
