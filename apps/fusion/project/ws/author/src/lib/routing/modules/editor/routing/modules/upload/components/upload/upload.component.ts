@@ -456,7 +456,6 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   action(type: any) {
     let finalValue = type
-    console.log(finalValue.actions)
     if (finalValue.actions === undefined) {
       finalValue = { actions:  type }
     }
