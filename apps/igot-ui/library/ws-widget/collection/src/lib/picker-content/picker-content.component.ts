@@ -131,7 +131,7 @@ export class PickerContentComponent extends WidgetBaseComponent
         }),
       )
       .subscribe(
-        search => {
+        (search: any) => {
           if (phraseSearch && search.result.count === 0 && phraseSearchConfig) {
             return this.initializeSearchSubject(false)
           }
@@ -144,14 +144,16 @@ export class PickerContentComponent extends WidgetBaseComponent
           })
           const availableFilters = this.widgetData.availableFilters || ['contentType']
           if (!this.displayFilters && availableFilters) {
-            this.displayFilters = search.filters.filter(filter =>
+            this.displayFilters = search.filters.filter((filter: any) =>
               availableFilters.includes(filter.type),
             )
-            const contentTypes = this.displayFilters.find(filter => filter.type === 'contentType')
-            if (contentTypes) {
-              contentTypes.content = contentTypes.content.filter(type =>
-                this.allowContentTypes.includes(type.type || ''),
-              )
+            if (this.displayFilters) {
+              const contentTypes = this.displayFilters.find((filter: any)  => filter.type === 'contentType')
+              if (contentTypes) {
+                contentTypes.content = contentTypes.content.filter(type =>
+                  this.allowContentTypes.includes(type.type || ''),
+                )
+              }
             }
           }
           return

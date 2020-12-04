@@ -233,7 +233,7 @@ export class ContentStripVerticalComponent extends WidgetBaseComponent
       this.contentSvc.searchV6(strip.request.searchV6).subscribe(
         results => {
           const showViewMore = Boolean(
-            results.result.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
+            results.result.content.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
           )
           const viewMoreUrl = showViewMore
             ? {
@@ -253,7 +253,7 @@ export class ContentStripVerticalComponent extends WidgetBaseComponent
             : null
           this.processStrip(
             strip,
-            this.transformContentsToWidgets(results.result, strip),
+            this.transformContentsToWidgets(results.result.content, strip),
             'done',
             calculateParentStatus,
             viewMoreUrl,

@@ -115,8 +115,8 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
     ) {
       this.checkParentStatus('fetching', 0)
       this.contentSvc.searchV6(this.widgetData.request.searchV6).subscribe(results => {
-          this.convertToStrip(results.result || [])
-          this.checkParentStatus('done', results.result.length)
+          this.convertToStrip(results.result.content || [])
+          this.checkParentStatus('done', results.result.content.length)
         },
                                                                            () => {
           this.checkParentStatus('error', 0)

@@ -37,11 +37,12 @@ export class SearchApiService {
       const tempArray = Array()
       if (res.result.facets.length > 0) {
         res.result.facets.forEach(ele => {
-          const temp = {
+          const temp: NSSearch.IFacet = {
             displayName: '',
             type: '',
             content: [],
           }
+
           temp.displayName = ele.name
           temp.type = ele.name
           if (ele.values.length > 0) {
