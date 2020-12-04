@@ -57,7 +57,7 @@ import { CardHomeTopModule } from './card-home-top/card-home-top.module'
 import { CardBrowseCourseModule } from './card-browse-course/card-browse-course.module'
 import { CardHomeDiscussModule } from './card-home-discuss/card-home-discuss.module'
 import { ChannelHubComponent } from './channel-hub/channel-hub.component'
-import { ChannelHubModule } from './channel-hub/channel-hub.module' 
+import { ChannelHubModule } from './channel-hub/channel-hub.module'
 import { ROOT_WIDGET_CONFIG } from './collection.config'
 import { ContentStripMultipleComponent } from './content-strip-multiple/content-strip-multiple.component'
 import { ContentStripNewMultipleComponent } from './content-strip-new-multiple/content-strip-new-multiple.component'
@@ -151,7 +151,7 @@ import { DiscussStripMultipleComponent } from './discuss-strip-multiple/discuss-
 import { DiscussStripMultipleModule } from './discuss-strip-multiple/discuss-strip-multiple.module'
 import { CardActivityComponent } from './card-activity/card-activity.component'
 import { CardActivityModule } from './card-activity/card-activity.module'
-import { ContentQualityCheckModule } from './content-quality-check/content-quality-check.module'
+// import { ContentQualityCheckModule } from './content-quality-check/content-quality-check.module'
 
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
@@ -231,7 +231,6 @@ export const WIDGET_REGISTERED_MODULES = [
   DiscussStripMultipleModule,
   CardActivityModule,
   ActivityStripMultipleModule,
-  ContentQualityCheckModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [
@@ -597,5 +596,4 @@ export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] 
     widgetSubType: ROOT_WIDGET_CONFIG.card.home_carrier,
     component: CardCarrierHomeComponent,
   },
-  
 ]
