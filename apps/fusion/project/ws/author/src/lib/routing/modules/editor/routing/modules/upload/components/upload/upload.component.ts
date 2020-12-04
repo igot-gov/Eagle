@@ -456,12 +456,14 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   action(type: any) {
     let finalValue = type
-    if (finalValue.action === undefined) {
+    console.log(finalValue.actions)
+    if (finalValue.actions === undefined) {
       finalValue = { actions:  type }
     }
     if (type && type.profanity) {
       this.profanityAPIData = type.profanity
     }
+    // console.log(finalValue.actions)
     switch (finalValue.actions) {
       case 'back':
         this.currentStep = 1
