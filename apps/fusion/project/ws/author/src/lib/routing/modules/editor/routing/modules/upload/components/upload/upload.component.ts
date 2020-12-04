@@ -466,12 +466,14 @@ export class UploadComponent implements OnInit, OnDestroy {
         break
 
       case 'next':
-        // tslint:disable-next-line:no-console
-        console.log(this.profanityAPIData)
         if (this.profanityAPIData && this.profanityAPIData !== undefined) {
           this.startProfanityMessagePopup()
-        } else {
-          this.currentStep = 1
+        } else if(this.currentStep ==1) {
+          console.log(this.currentStep)
+          this.currentStep=1;
+         
+        }else{
+          this.currentStep += 1
         }
         // this.currentStep += 1
         // this.goForward()
@@ -485,6 +487,7 @@ export class UploadComponent implements OnInit, OnDestroy {
         break
 
       case 'saveAndNext':
+        this.currentStep += 1
         this.save('next')
         break
 
