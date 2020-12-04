@@ -1,0 +1,94 @@
+<!-- <mat-toolbar role="navigation" i18n-aria-label aria-label="Toolbar" *ngIf="!(isInIframe && forPreview)"
+  class="detailBar fixed-width" [color]="pageNavbar.color" [ngStyle]="pageNavbar?.styles"> -->
+<ws-widget-btn-page-back [widgetData]="{ url: 'home',titles:[{title:'Details',url:'none'}] }">
+</ws-widget-btn-page-back>
+<!-- <span class="margin-left-xs text-truncate">
+    <span i18n>Details</span>
+  </span> -->
+<!-- <span class="spacer"></span>
+TODO: edit option while preview Mode
+<a *ngIf="isAuthor && !forPreview" [routerLink]="'/author/editor/' + content?.identifier" mat-button>
+  <mat-icon>create</mat-icon>
+  <span i18n class="ml-2">Edit</span>
+</a> -->
+<!-- <ng-container *ngIf="isAuthor" [wsResolverWidget]="authorBtnWidget"></ng-container> -->
+<!-- </mat-toolbar> -->
+
+<ws-app-toc-banner role="banner" [banners]="banners" [forPreview]="forPreview" [content]="content"
+  [analytics]="analytics" [resumeData]="resumeData">
+</ws-app-toc-banner>
+<ng-container>
+  <div class="toc-container">
+    <div role="none" class="toc-body">
+      <div class="flex mat-app-background" #stickyMenu [class.sticky]="sticky">
+        <nav mat-tab-nav-bar class="toc-links fixed-width" aria-label="content navigation">
+          <a mat-tab-link [routerLink]='"./single-page-view"' fragment="overview" i18n-aria-label aria-label="overview"
+            class="tab" [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n>
+            <span i18n class="margin-top-m mat-title">Overview</span>
+          </a>
+          <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'" class="tab"
+            i18n-aria-label aria-label="certification" [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="ws-mat-primary-text link-active">
+            <ng-container *ngIf="content?.isExternal === true" i18n>
+              <span i18n class="margin-top-m mat-title">Certification</span>
+            </ng-container>
+            <ng-container *ngIf="content?.isExternal === false" i18n>
+              <span i18n class="margin-top-m mat-title">Take Certification</span>
+            </ng-container>
+          </a>
+
+          <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
+            class="tab" fragment="content"
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'content'}" i18n>
+            <span i18n class="margin-top-m mat-title">Content</span>
+          </a>
+
+          <a *ngIf="content?.children?.length && content?.creatorDetails && content?.creatorDetails.length" class="tab"
+            i18n-aria-label mat-tab-link [routerLink]='"./single-page-view"' fragment="authors"
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'authors'}" i18n>
+            <span i18n class="margin-top-m mat-title">Authors</span>
+          </a>
+
+          <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
+            class="tab" fragment="cohorts"
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'cohorts'}" i18n>
+            <span i18n class="margin-top-m mat-title">Cohorts</span>
+          </a>
+          <!-- <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' fragment="cohorts"
+          [ngClass]="{'ws-mat-primary-text link-active' : fragment ==='cohorts'}" [routerLinkActiveOptions]="{ exact: true }"
+            i18n>Cohorts</a> -->
+
+          <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
+            class="tab" fragment="discussion-forum"
+            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'discussion-forum'}" i18n>
+            <span i18n class="margin-top-m mat-title">Discussion</span>
+
+          </a>
+
+          <a *ngIf="enableAnalytics" class="rounded-icon justify-center" [disabled]="forPreview" i18n-aria-label
+            class="tab" mat-tab-link [routerLink]="'./analytics'" [routerLinkActiveOptions]="{ exact: true }"
+            aria-label="analytics" routerLinkActive="ws-mat-primary-text link-active" i18n>
+            <mat-icon>bar_chart</mat-icon>
+          </a>
+        </nav>
+      </div>
+
+      <mat-divider class="fluid-width margin-bottom-m"></mat-divider>
+      <section>
+        <div class="" *ngIf="!errorCode; else tocError">
+          <router-outlet #routerRef></router-outlet>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</ng-container>
+
+<ng-template #tocError>
+  <div [wsResolverWidget]="errorWidgetData"></div>
+</ng-template>
+
+<!--Scroll to top-->
+<button mat-fab color="accent" [ngClass]="{'show-scroll': showScroll}" (click)="scrollToTop()" class="scroll-to-top">
+  <mat-icon color="primary">keyboard_arrow_up</mat-icon>
+</button>

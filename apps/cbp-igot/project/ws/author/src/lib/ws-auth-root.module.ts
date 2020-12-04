@@ -23,6 +23,7 @@ import { ApiService } from './modules/shared/services/api.service'
 import { CKEditorResolverService } from './services/ckeditor-resolve.service'
 import { AuthNavBarToggleService } from './services/auth-nav-bar-toggle.service'
 import { WorkFlowService } from './services/work-flow.service'
+import { CreateContentModule } from './routing/modules/create-content/create-component.module'
 
 /**
  * This function is used internal to get a string instance of the `<base href="" />` value from `index.html`.
@@ -45,6 +46,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
     CommonModule,
     SharedModule,
     CreateModule,
+    CreateContentModule,
     HomeModule,
     WsAuthorRootRoutingModule,
     PipeSafeSanitizerModule,

@@ -307,6 +307,11 @@ const routes: Routes = [
     },
   },
   {
+    path: 'author/toc',
+    loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
+    canActivate: [GeneralGuard],
+  },
+  {
     path: 'public/tnc',
     component: TncComponent,
     data: {

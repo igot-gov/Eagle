@@ -4,6 +4,7 @@
 
 // module exports
 export * from './lib/routes/app-setup/app-setup.module'
+export * from './lib/routes/app-toc/app-toc.module'
 export * from './lib/routes/frac/frac.module'
 export * from './lib/routes/info/info.module'
 export * from './lib/routes/my-dashboard/my-dashboard.module'

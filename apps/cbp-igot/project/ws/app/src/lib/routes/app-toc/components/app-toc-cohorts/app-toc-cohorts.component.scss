@@ -1,0 +1,53 @@
+@import 'ws-vars';
+
+.cohorts-head {
+  padding: $size-xs $size-l;
+  margin: 0;
+  background: #fff !important;
+  border-radius: 8px 8px 0 0;
+  color: #222222 !important;
+  // font: 18px/30px Poppins-Medium;
+}
+
+.unit-cohort {
+  display: inline-flex;
+  // align-items: center;
+  margin-bottom: $size-l;
+
+  .cohort-image {
+    $user-image-size: 32px;
+    width: $user-image-size;
+    height: $user-image-size;
+    font-size: $user-image-size;
+  }
+}
+
+.cohorts-name {
+  letter-spacing: 0px;
+  color: #5F5F5F;
+  font-size: 0.9rem;
+  font-weight: normal;
+  // font-family: Poppins-regular;
+}
+
+.cohortSection {
+  margin: 50px auto;
+  width: 70%;
+}
+
+.flex {
+  display: flex;
+}
+
+.chorotsBlock {
+  background: #ffffff;
+}
+
+.mat-accordion .mat-expansion-panel:last-of-type {
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.user-action-container {
+  color: #ADADAE;
+}

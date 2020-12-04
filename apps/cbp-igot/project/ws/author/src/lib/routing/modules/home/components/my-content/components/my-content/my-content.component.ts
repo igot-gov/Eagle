@@ -178,7 +178,9 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.fetchContent(false)
     })
   }
-
+  CreateNewComponent() {
+    this.router.navigate(['author', 'create-content'])
+  }
   fetchStatus() {
     switch (this.status) {
       case 'draft':

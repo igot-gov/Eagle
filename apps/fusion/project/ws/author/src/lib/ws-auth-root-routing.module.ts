@@ -47,6 +47,18 @@ const routes: Routes = [
     },
   },
   {
+    path: 'create-content',
+    data: {
+      load: ['create', 'ordinals'],
+      requiredFeatures: ['authoring'],
+    },
+    canActivate: [GeneralGuard],
+    component: CreateComponent,
+    resolve: {
+      script: InitResolver,
+    },
+  },
+  {
     path: 'create',
     data: {
       load: ['create', 'ordinals'],
