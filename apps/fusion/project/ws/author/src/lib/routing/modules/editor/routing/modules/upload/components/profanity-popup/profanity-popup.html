@@ -51,10 +51,11 @@
             <p><b>Profanity Word</b></p>
           </div>
           <div *ngFor="let profanity of profanityData.profanityWordList">
+
             <p><span [ngClass]="{'circle-orange':profanity.category ==='lightlyOffensive',
             'circle-red':profanity.category ==='Offensive',
             'circle-brown':profanity.category ==='extreamlyOffensive'}">
-              </span>&nbsp;{{profanity.word}}&nbsp;{{profanity.no_of_occurrence}}</p>
+              </span>&nbsp;{{profanity.word}}&nbsp;({{profanity.no_of_occurrence}})</p>
 
           </div>
           <!-- <p><span class="circle-orange">

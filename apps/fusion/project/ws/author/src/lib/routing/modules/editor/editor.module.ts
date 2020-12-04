@@ -30,6 +30,6 @@ import { ContentQualityService } from './shared/components/content-quality-check
     CreateContentResolverService,
     ContentQualityService,
   ],
-  entryComponents: [ContentQualityCheckPopupComponent]
+  entryComponents: [ContentQualityCheckPopupComponent],
 })
 export class EditorModule { }
