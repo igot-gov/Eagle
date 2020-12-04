@@ -457,7 +457,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   action(type: any) {
     let finalValue = type
     if (finalValue.actions === undefined) {
-      finalValue = { actions:  type }
+      finalValue = { actions: type }
     }
     if (type && type.profanity) {
       this.profanityAPIData = type.profanity
