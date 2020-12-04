@@ -288,53 +288,53 @@ contentApi.post('/evaluation', async (req, res) => {
   try {
     const { body } = req
     const { InstructionalMethods, AssessmentDesign,
-      CompetencyandSkills, LearnerEngagement, LearnerSupport, Accessibility } = body;
+      CompetencyandSkills, LearnerEngagement, LearnerSupport, Accessibility } = body
 
-    let InstructionalMethodsTotal = InstructionalMethods.reduce((a: any, b: any) => { return a + b })
-    let AssessmentDesignTotal = AssessmentDesign.reduce((a: any, b: any) => { return a + b })
-    let CompetencyandSkillsTotal = CompetencyandSkills.reduce((a: any, b: any) => { return a + b })
-    let LearnerEngagementTotal = LearnerEngagement.reduce((a: any, b: any) => { return a + b })
-    let LearnerSupportTotal = LearnerSupport.reduce((a: any, b: any) => { return a + b })
-    let AccessibilityTotal = Accessibility.reduce((a: any, b: any) => { return a + b })
+    const instructionalMethodsTotal = InstructionalMethods.reduce((a: number, b: number) => a + b)
+    const assessmentDesignTotal = AssessmentDesign.reduce((a: number, b: number) => a + b)
+    const competencyandSkillsTotal = CompetencyandSkills.reduce((a: number, b: number) => a + b)
+    const learnerEngagementTotal = LearnerEngagement.reduce((a: number, b: number) => a + b)
+    const learnerSupportTotal = LearnerSupport.reduce((a: number, b: number) => a + b)
+    const accessibilityTotal = Accessibility.reduce((a: number, b: number) => a + b)
 
-    let instructionalMethodsMaxScore = InstructionalMethods.length * 5
-    let AssessmentDesignMaxScore = AssessmentDesign.length * 5
-    let CompetencyandSkillsMaxScore = CompetencyandSkills.length * 5
-    let LearnerEngagementMaxScore = LearnerEngagement.length * 5
-    let LearnerSupportMaxScore = LearnerSupport.length * 5
-    let AccessibilityMaxScore = Accessibility.length * 5
+    const instructionalMethodsMaxScore = InstructionalMethods.length * 5
+    const assessmentDesignMaxScore = AssessmentDesign.length * 5
+    const competencyandSkillsMaxScore = CompetencyandSkills.length * 5
+    const learnerEngagementMaxScore = LearnerEngagement.length * 5
+    const learnerSupportMaxScore = LearnerSupport.length * 5
+    const accessibilityMaxScore = Accessibility.length * 5
 
-    let instructionalMethodsWeightage = 30
-    let AssessmentDesignWeightage = 25
-    let CompetencyandSkillsWeightage = 20
-    let LearnerEngagementWeightage = 15
-    let LearnerSupportWeightage = 5
-    let AccessibilityWeightage = 5
+    const instructionalMethodsWeightage = 30
+    const assessmentDesignWeightage = 25
+    const competencyandSkillsWeightage = 20
+    const learnerEngagementWeightage = 15
+    const learnerSupportWeightage = 5
+    const accessibilityWeightage = 5
 
-    let instructionalMethodsWeightedAvg = InstructionalMethodsTotal * (instructionalMethodsWeightage / 100)
-    let AssessmentDesignWeightedAvg = AssessmentDesignTotal * (AssessmentDesignWeightage / 100)
-    let CompetencyandSkillsWeightedAvg = CompetencyandSkillsTotal * (CompetencyandSkillsWeightage / 100)
-    let LearnerEngagementWeightedAvg = LearnerEngagementTotal * (LearnerEngagementWeightage / 100)
-    let LearnerSupportWeightedAvg = LearnerSupportTotal * (LearnerSupportWeightage / 100)
-    let AccessibilityWeightedAvg = AccessibilityTotal * (AccessibilityWeightage / 100)
+    const instructionalMethodsWeightedAvg = instructionalMethodsTotal * (instructionalMethodsWeightage / 100)
+    const assessmentDesignWeightedAvg = assessmentDesignTotal * (assessmentDesignWeightage / 100)
+    const competencyandSkillsWeightedAvg = competencyandSkillsTotal * (competencyandSkillsWeightage / 100)
+    const learnerEngagementWeightedAvg = learnerEngagementTotal * (learnerEngagementWeightage / 100)
+    const learnerSupportWeightedAvg = learnerSupportTotal * (learnerSupportWeightage / 100)
+    const accessibilityWeightedAvg = accessibilityTotal * (accessibilityWeightage / 100)
 
-    let instructionalMethodsMaxWeightedAvg = instructionalMethodsMaxScore * (instructionalMethodsWeightage / 100)
-    let AssessmentDesignMaxWeightedAvg = AssessmentDesignMaxScore * (AssessmentDesignWeightage / 100)
-    let CompetencyandSkillsMaxWeightedAvg = CompetencyandSkillsMaxScore * (CompetencyandSkillsWeightage / 100)
-    let LearnerEngagementMaxWeightedAvg = LearnerEngagementMaxScore * (LearnerEngagementWeightage / 100)
-    let LearnerSupportMaxWeightedAvg = LearnerSupportMaxScore * (LearnerSupportWeightage / 100)
-    let AccessibilityMaxWeightedAvg = AccessibilityMaxScore * (AccessibilityWeightage / 100)
+    const instructionalMethodsMaxWeightedAvg = instructionalMethodsMaxScore * (instructionalMethodsWeightage / 100)
+    const assessmentDesignMaxWeightedAvg = assessmentDesignMaxScore * (assessmentDesignWeightage / 100)
+    const competencyandSkillsMaxWeightedAvg = competencyandSkillsMaxScore * (competencyandSkillsWeightage / 100)
+    const learnerEngagementMaxWeightedAvg = learnerEngagementMaxScore * (learnerEngagementWeightage / 100)
+    const learnerSupportMaxWeightedAvg = learnerSupportMaxScore * (learnerSupportWeightage / 100)
+    const accessibilityMaxWeightedAvg = accessibilityMaxScore * (accessibilityWeightage / 100)
 
-    let totalMaxWeightdAvg = instructionalMethodsMaxWeightedAvg + AssessmentDesignMaxWeightedAvg + CompetencyandSkillsMaxWeightedAvg +
-      LearnerEngagementMaxWeightedAvg + LearnerSupportMaxWeightedAvg + AccessibilityMaxWeightedAvg
+    const totalMaxWeightdAvg = instructionalMethodsMaxWeightedAvg + assessmentDesignMaxWeightedAvg + competencyandSkillsMaxWeightedAvg +
+      learnerEngagementMaxWeightedAvg + learnerSupportMaxWeightedAvg + accessibilityMaxWeightedAvg
 
-    let totalWeightedAvg = instructionalMethodsWeightedAvg + AssessmentDesignWeightedAvg + CompetencyandSkillsWeightedAvg +
-      LearnerEngagementWeightedAvg + LearnerSupportWeightedAvg + AccessibilityWeightedAvg
+    const totalWeightedAvg = instructionalMethodsWeightedAvg + assessmentDesignWeightedAvg + competencyandSkillsWeightedAvg +
+      learnerEngagementWeightedAvg + learnerSupportWeightedAvg + accessibilityWeightedAvg
 
-    let compositeScore = totalWeightedAvg / (totalMaxWeightdAvg / 100)
+    const compositeScore = totalWeightedAvg / (totalMaxWeightdAvg / 100)
 
     res.status(200)
-      .send(JSON.stringify({ "compositeScore": compositeScore }))
+      .send(JSON.stringify({ compositeScore }))
   } catch (err) {
     logError('ERROR FETCHING LIKE COUNT -> ', err)
     res
@@ -344,7 +344,6 @@ contentApi.post('/evaluation', async (req, res) => {
       })
   }
 })
-
 
 contentApi.get('/searchAutoComplete', async (req, res) => {
   try {
