@@ -499,20 +499,21 @@ export class ChannelComponent implements OnInit, OnDestroy {
     }
   }
 
-  action(type: string) {
-    switch (type) {
+  action(type: any) {
+    let finalValue = type
+    if (finalValue.actions === undefined) {
+      finalValue = { actions: type }
+    }
+    switch (finalValue.actions) {
       case 'next':
         this.currentStep += 1
         break
-
       case 'preview':
         this.preview()
         break
-
       case 'save':
         this.save()
         break
-
       case 'push':
         if (this.getAction() === 'publish') {
           const dialogRefForPublish = this.dialog.open(ConfirmDialogComponent, {

@@ -442,8 +442,12 @@ export class CurateComponent implements OnInit, OnDestroy {
     }
   }
 
-  action(type: string) {
-    switch (type) {
+  action(type: any) {
+    let finalValue = type
+    if (finalValue.actions === undefined) {
+      finalValue = { actions: type }
+    }
+    switch (finalValue.actions) {
       case 'back':
         this.currentStep = 1
         break

@@ -442,8 +442,13 @@ export class AddWebPagesComponent implements OnInit, OnDestroy {
       .pipe(tap(() => this.metaContentService.resetOriginalMeta(meta, id)))
   }
 
-  action(type: string) {
-    switch (type) {
+  action(type: any) {
+    let finalValue = type
+    if (finalValue.actions === undefined) {
+      finalValue = { actions: type }
+    }
+
+    switch (finalValue.actions) {
       case 'next':
         this.currentStep += 1
         this.pageCount.emit(JSON.stringify(this.userData))
