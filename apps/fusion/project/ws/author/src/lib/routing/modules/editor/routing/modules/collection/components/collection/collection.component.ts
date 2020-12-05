@@ -165,7 +165,8 @@ export class CollectionComponent implements OnInit, OnDestroy {
       this.triggerSave().subscribe(
         () => {
           if (nextAction) {
-            this.action(nextAction)
+            const nextAct = { actions: nextAction }
+            this.action(nextAct)
           }
           this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
@@ -532,8 +533,13 @@ export class CollectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  action(type: string) {
-    switch (type) {
+  action(type: any) {
+    let finalValue = type
+    if (finalValue.actions === undefined) {
+      finalValue = { actions:  type }
+    }
+    switch (finalValue.actions) {
+      case 'skip':
       case 'next':
         this.viewMode = 'meta'
         break

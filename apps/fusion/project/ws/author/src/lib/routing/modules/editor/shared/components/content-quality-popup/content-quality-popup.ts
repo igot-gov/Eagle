@@ -52,8 +52,7 @@ export class ContentQualityCheckPopupComponent implements OnInit {
       { position: 8, type: 'InstructionalMethods', question: 'Learning activities cater for a variety of learning styles (Visual, Auditory, Kinesthetic).', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
       // tslint:disable-next-line:max-line-length
       { position: 9, type: 'InstructionalMethods', question: 'Readability levels are appropriate for the target audience.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
-      ]
-      ,
+      ],
       [
          // tslint:disable-next-line:max-line-length
       { position: 1, type: 'AssessmentDesign', question: 'The course features a post-assessment.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
@@ -78,8 +77,7 @@ export class ContentQualityCheckPopupComponent implements OnInit {
        // tslint:disable-next-line:max-line-length
       { position: 4, type: 'CompetencyandSkills', question: 'Target competencies are relevant to learners needs.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
        // tslint:disable-next-line:max-line-length
-      ]
-      ,
+      ],
       // tslint:disable-next-line:max-line-length
       [{ position: 1, type: 'LearnerEngagement', question: 'The course can be completed in a self-paced manner over several short sessions.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
        // tslint:disable-next-line:max-line-length
@@ -94,8 +92,6 @@ export class ContentQualityCheckPopupComponent implements OnInit {
       { position: 6, type: 'LearnerEngagement', question: 'The course features frequent reinforcement activities.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
        // tslint:disable-next-line:max-line-length
       { position: 7, type: 'LearnerEngagement', question: 'Real-life examples, scenarios and/or case studies are used in the course to increase engagement with learning.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] }],
-       // tslint:disable-next-line:max-line-length
-       ,
        // tslint:disable-next-line:max-line-length
       [{ position: 1, type: 'LearnerSupport', question: 'Learners are able to download courses and complete in offline mode (e.g. Course avoids using YouTube links/ external to videos).', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
        // tslint:disable-next-line:max-line-length

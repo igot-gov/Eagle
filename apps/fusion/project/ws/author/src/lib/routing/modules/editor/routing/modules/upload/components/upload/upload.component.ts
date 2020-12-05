@@ -480,6 +480,9 @@ export class UploadComponent implements OnInit, OnDestroy {
         // this.currentStep += 1
         // this.goForward()
         break
+        case 'skip':
+          this.currentStep += 1
+          break
       case 'preview':
         this.preview()
         break
@@ -540,7 +543,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     this.loaderService.changeLoad.next(false)
     const dialogRef = this.dialog.open(ProfanityMessagePopUpComponent, {
       minHeight: 'auto',
-      width: '60%',
+      width: '27%',
       panelClass: 'remove-pad',
       data: this.profanityData,
     })
