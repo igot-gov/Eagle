@@ -421,6 +421,8 @@ export class FileUploadComponent implements OnInit {
         this.startgetProfanityAPI()
       } else {
         this.profanityAPIData = undefined
+        const profanityData = { actions: 'saveAndNext' }
+        this.data.emit(profanityData)
       }
     })
   }

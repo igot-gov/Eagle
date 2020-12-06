@@ -38,15 +38,20 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
     // this.myObject= new
   }
   ngOnInit() {
+    this.contentQualtityService.myObject= {
+      InstructionalMethods: [0],
+      AssessmentDesign: [0],
+      CompetencyandSkills: [0],
+      LearnerEngagement: [0],
+      LearnerSupport: [0],
+      Accessibility: [0],
+    }
   }
   getContentQualityCheckValue(event: any, element: any) {
     const type = element.type
-    if(this.contentQualtityService.myObject[type][0]===0){
-      this.contentQualtityService.myObject[type][0]=event.weight
-    }else{
-      this.contentQualtityService.myObject[type].push(event.weight)
-    }
+    this.contentQualtityService.myObject[type][element.position-1]=event.weight
     this.finalDataEmit.emit(this.contentQualtityService.myObject)
+    this.contentQualtityService.myObject[type]= Array.from(this.contentQualtityService.myObject[type], item => item || 0);
   }
 
 }
