@@ -47,7 +47,6 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
       this.contentQualtityService.myObject[type].push(event.weight)
     }
     this.finalDataEmit.emit(this.contentQualtityService.myObject)
-    console.log(this.contentQualtityService.myObject)
   }
 
 }
