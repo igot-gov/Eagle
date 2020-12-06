@@ -41,8 +41,13 @@ export class ContentQualityCheckComponent extends WidgetBaseComponent implements
   }
   getContentQualityCheckValue(event: any, element: any) {
     const type = element.type
-    this.contentQualtityService.myObject[type].push(event.weight)
+    if(this.contentQualtityService.myObject[type][0]===0){
+      this.contentQualtityService.myObject[type][0]=event.weight
+    }else{
+      this.contentQualtityService.myObject[type].push(event.weight)
+    }
     this.finalDataEmit.emit(this.contentQualtityService.myObject)
+    console.log(this.contentQualtityService.myObject)
   }
 
 }
