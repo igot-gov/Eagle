@@ -109,7 +109,7 @@ export class ContentQualityCheckPopupComponent implements OnInit {
        // tslint:disable-next-line:max-line-length
       { position: 2, type: 'Accessibility', question: 'Images include descriptive alt tags.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
        // tslint:disable-next-line:max-line-length
-      { position: 3, type: 'Accessibility', question: 'The course uses both colour and symbols to convey messages or status changes.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 0}, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
+      { position: 3, type: 'Accessibility', question: 'The course uses both colour and symbols to convey messages or status changes.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
        // tslint:disable-next-line:max-line-length
       { position: 4, type: 'Accessibility', question: 'The course uses patterns and textures as opposed to only contrasting colours for elements that require emphasis.', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
       ],
