@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.infosys.lex.rating.dto.RatingSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -111,4 +112,15 @@ public class RatingController {
 		return new ResponseEntity<>(ratingServ.getRatingsInfoForContents(rootOrg, req),HttpStatus.OK);
 	}
 
+	@GetMapping("v1/content/average-rating/{content_id}")
+	public ResponseEntity<?> getContentRatingInfo(@RequestHeader("rootOrg") String rootOrg, @PathVariable("content_id") String contentId)
+	{
+		return new ResponseEntity<>(ratingServ.getRatingsInfoForContents(rootOrg, contentId),HttpStatus.OK);
+	}
+
+	@PostMapping("v1/content/ratings")
+	public ResponseEntity<?> getAllRatingsForContent(@RequestHeader("rootOrg") String rootOrg, @Valid @RequestBody RatingSearchDTO ratingSearchDTO)
+	{
+		return new ResponseEntity<>(ratingServ.getAllRatingsForContent(rootOrg, ratingSearchDTO),HttpStatus.OK);
+	}
 }

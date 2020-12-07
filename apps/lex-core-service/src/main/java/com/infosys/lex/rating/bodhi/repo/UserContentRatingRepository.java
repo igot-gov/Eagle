@@ -19,6 +19,11 @@ public interface UserContentRatingRepository extends CassandraRepository<UserCon
 	
 	@Query("Select content_id, avg(rating) as \"averageRating\",count(rating) as \"ratingCount\" from user_content_rating where root_org = ?0 and content_id in ?1 group by content_id")
 	public List<Map<String,Object>> getAvgRatingAndRatingCountForContentIds(String rootOrg,List<String> contentId );
-	
-	
+
+	@Query("Select rating from user_content_rating where root_org = ?0 and content_id = ?1")
+	public List<Float> getRatingsForContent(String rootOrg, String  contentId );
+
+	@Query("Select user_id, rating, last_updated_on from user_content_rating where root_org = ?0 and content_id = ?1 limit ?2")
+	public List<Map<String, Object>> getRatingInfoForContent(String rootOrg, String  contentId, Integer limit);
+
 }
