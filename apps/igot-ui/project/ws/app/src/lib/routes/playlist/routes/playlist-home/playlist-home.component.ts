@@ -16,7 +16,7 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
   userName: string | undefined
 
   EPlaylistTypes = NsPlaylist.EPlaylistTypes
-  playlists: NsPlaylist.IPlaylist[] = this.route.snapshot.data.playlists.data
+  playlists: any = this.route.snapshot.data.playlists.data
   type: NsPlaylist.EPlaylistTypes = this.route.snapshot.data.type
   error = this.route.snapshot.data.playlists.error
 
@@ -62,14 +62,14 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
     }
 
     this.playlistsSubscription = this.playlistSvc
-      .getPlaylists(this.type)
+      .getPlaylists()
       .subscribe(
         playlists => {
           this.playlists = playlists
         })
-    this.notificationsSubscription = this.playlistSvc
-      .getPlaylists(NsPlaylist.EPlaylistTypes.PENDING)
-      .subscribe(pending => this.numNotifications = pending.length)
+    // this.notificationsSubscription = this.playlistSvc
+    //   .getPlaylists()
+    //   .subscribe(pending => this.numNotifications = pending.length)
   }
 
   // ngAfterViewInit() {

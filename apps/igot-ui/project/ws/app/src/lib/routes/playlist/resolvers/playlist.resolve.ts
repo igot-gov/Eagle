@@ -21,7 +21,7 @@ export class PlaylistResolve
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NsPlaylist.IPlaylist>> {
     return this.playlistSvc
-      .getPlaylist(route.params.id, route.data.type, route.queryParams.sourceFields)
+      .getPlaylist(route.params.id)
       .pipe(
         first(),
         map(data => ({ data, error: null })),

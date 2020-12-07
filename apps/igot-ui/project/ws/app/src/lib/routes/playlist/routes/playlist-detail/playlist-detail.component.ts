@@ -34,7 +34,7 @@ import {
 export class PlaylistDetailComponent implements OnInit, OnDestroy {
   @ViewChild('playlistDeleteFailed', { static: true }) playlistDeleteFailedMessage!: ElementRef<any>
 
-  playlist: NsPlaylist.IPlaylist | null = this.route.snapshot.data.playlist.data
+  playlist: any | null = this.route.snapshot.data.playlist.data
   type: NsPlaylist.EPlaylistTypes = this.route.snapshot.data.type
   error = this.route.snapshot.data.playlist.error
 
@@ -81,7 +81,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     }
     this.editPlaylistForm = fb.group({
       title: [
-        this.playlist ? this.playlist.name : null,
+        this.playlist ? this.playlist.result.content.name : null,
         [
           Validators.required,
           Validators.minLength(PLAYLIST_TITLE_MIN_LENGTH),
@@ -176,7 +176,7 @@ export class PlaylistDetailComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(shouldDelete => {
       if (shouldDelete && this.playlist) {
         this.playlist.contents = this.playlist.contents.filter(
-          item => item.identifier !== identifier,
+          (item: { identifier: string }) => item.identifier !== identifier,
         )
         this.playlistSvc.deletePlaylistContent(this.playlist, [identifier]).subscribe()
       }
