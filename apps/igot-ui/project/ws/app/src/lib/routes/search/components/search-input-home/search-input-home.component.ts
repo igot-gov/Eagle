@@ -40,7 +40,6 @@ export class SearchInputHomeComponent implements OnInit, OnChanges {
 
   ) {
     // if (!this.activated.snapshot.data.searchPageData) {
-    //   // debugger;
     //   this.searchServSvc.getSearchConfig().then(data => {
     //     this.activated.snapshot.data.searchPageData = {
     //       data
@@ -71,7 +70,7 @@ export class SearchInputHomeComponent implements OnInit, OnChanges {
     }
     this.activated.queryParamMap.subscribe(queryParam => {
       if (queryParam.has('q')) {
-        this.queryControl.setValue(queryParam.get('q') || 'all')
+        this.queryControl.setValue(queryParam.get('q') || '')
       } else {
         // this.updateQuery('all')
       }
@@ -100,14 +99,14 @@ export class SearchInputHomeComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     // if (!this.activated.snapshot.data.searchPageData) {
-      this.searchServSvc.getSearchConfig().then(data => {
-        this.activated.snapshot.data = {
-          searchPageData: { data },
-        }
-      }).then(() => {
-        this.autoFilter()
-        this.init()
-      })
+    this.searchServSvc.getSearchConfig().then(data => {
+      this.activated.snapshot.data = {
+        searchPageData: { data },
+      }
+    }).then(() => {
+      this.autoFilter()
+      this.init()
+    })
     // } else {
     //   this.autoFilter();
     //   this.init();

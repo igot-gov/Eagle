@@ -404,7 +404,16 @@ export class LearningComponent implements OnInit, OnDestroy {
             this.searchRequest.filters,
             this.activated.snapshot.data.pageroute !== 'learning' ? true : false,
           )
-          this.filtersResponse = filteR.filtersRes
+          this.searchServ.getSearchConfig().then(searchData => {
+            if (filteR.filtersRes && filteR.filtersRes.length > 0) {
+              filteR.filtersRes.forEach(ele => {
+                if (searchData.search.visibleFiltersV2.hasOwnProperty(ele.displayName)) {
+                  ele.displayName = searchData.search.visibleFiltersV2[ele.displayName].displayName
+                }
+              })
+              this.filtersResponse = filteR.filtersRes
+            }
+          })
           if (
             this.searchResults.result.count === 0 && this.isDefaultFilterApplied
           ) {

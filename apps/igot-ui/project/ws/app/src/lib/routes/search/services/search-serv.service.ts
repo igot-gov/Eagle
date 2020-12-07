@@ -73,7 +73,7 @@ export class SearchServService {
         sort_by: {
           lastUpdatedOn: request.request.sort_by.lastUpdatedOn,
         },
-        facets: ['primaryCategory', 'mimeType'],
+        facets: Object.keys(this.searchConfig.search.visibleFiltersV2),
         fields: request.request.fields,
       },
     }
