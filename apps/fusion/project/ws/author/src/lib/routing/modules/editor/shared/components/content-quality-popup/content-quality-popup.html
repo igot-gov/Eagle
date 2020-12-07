@@ -1,9 +1,10 @@
-<div *ngIf="showTable">
+
+<mat-dialog-content *ngIf="showTable">
     <div  *ngFor="let item of dataSources">
       <ws-auth-content-quality [dataSource]="item" (finalDataEmit)="dataHandler($event)">
       </ws-auth-content-quality>
     </div>
-  </div>
+  </mat-dialog-content>
 <div *ngIf="!showTable"  style="height: 20%">
   <h2>Content Quality Score: {{score}}</h2>
 </div>

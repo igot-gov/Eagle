@@ -12,7 +12,9 @@
     margin-top: 20px;
   }
 }
-
+.mat-dialog-actions{
+  padding: 26px 0;
+}
 .flex-auto-display {
   @include breakpoint-xs {
     flex: auto;
