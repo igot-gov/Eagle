@@ -1,0 +1,171 @@
+@import 'ws-mixins';
+
+.tourGuideBtn {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.fix-ww {
+  margin-left: auto;
+  margin-right: auto;
+  // max-width: $max-width;
+  max-width: $max-screen;
+  display: flex;
+  flex: 1;
+}
+
+// .custom {
+// height: 72px;
+// }
+
+.tourGuideBtn:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.tourGuideBtn mat-icon {
+  width: 28%;
+  // color: rgba(0, 0, 0, 0.54);
+}
+
+.logo-dim {
+  min-width: 70px;
+  max-width: 174px;
+  /* margin-right: 10rem; */
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 174px;
+  margin-right: 2rem;
+}
+
+.app-logo {
+  max-width: 100px;
+  max-height: 30px;
+  min-width: 30px;
+  padding: 8px 0 0 8px;
+
+  @include breakpoint-xs {
+    max-width: 80px;
+  }
+}
+
+.title {
+  font-size: 12px !important;
+  line-height: 26px !important;
+  font-weight: 300 !important;
+}
+
+.search-card-view {
+  position: absolute;
+  width: 280px;
+  z-index: 992;
+  top: 10px;
+  right: 50px;
+  padding: 10px 0px 0px 0px;
+
+  @include breakpoint-l {
+    top: 20px;
+    left: 980px;
+  }
+
+  @include breakpoint-m {
+    top: 20px;
+    left: 980px;
+  }
+
+  @include breakpoint-xs {
+    top: 0px;
+    right: 50px;
+  }
+
+  @include breakpoint-s {
+    top: 20px;
+    left: 450px;
+  }
+}
+
+@import 'ws-vars';
+
+.menu-section {
+  padding: 8px;
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-around;
+}
+
+.btn-feature {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.75em;
+  margin: 0.25em;
+  width: 4em;
+
+  .btn-feature-icon {
+    font-size: 2em;
+    height: 2em;
+    width: 2em;
+    text-align: center;
+    line-height: 2em;
+  }
+
+  .btn-feature-name {
+    text-align: center;
+    margin-top: 0.15em;
+  }
+}
+
+.margin-bottom-xs {
+  margin-bottom: $size-xs;
+}
+
+.pipe-icon {
+  width: $size-l;
+  transform: scaleY(2);
+}
+
+.search-small-logo {
+  display: none;
+}
+
+.new-align-center {
+  flex: 1;
+  text-align: right;
+}
+
+.my-search {
+  display: flex;
+  margin-left: 0;
+  /* margin-right: 0; */
+  text-align: center;
+  // <<<<<<< HEAD flex: 3;
+  // max-width: 500px;
+  flex: 10;
+  max-width: 690px;
+  margin-right: 4.88rem;
+  // >>>>>>>hubs
+}
+
+.mobile {
+  @include breakpoint-xs {
+    padding: $size-xs;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .my-search {
+    display: none;
+  }
+
+  .search-small-logo {
+    display: flex;
+  }
+}
+
+// @media
+// 760px

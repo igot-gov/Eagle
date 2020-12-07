@@ -1,0 +1,41 @@
+<div class="login-container mat-elevation-z4">
+  <div class="oval-container ws-mat-primary-lite-background">
+    <img i18n-alt [src]="appIcon" name="application_logo" alt="Application Logo" class="app-logo" />
+  </div>
+
+  <div class="mat-toolbar mat-primary intro-section">
+    <h3 class="font-bold title-text text-intro" i18n="welcome heading">Welcome Aboard</h3>
+    <span class="mat-body p-4 bottom-section" i18n="powered by: wingspan limited">&copy; Copyright 2020 -2021
+    </span>
+  </div>
+
+  <div class="login-section ws-mat-primary-text text-center">
+    <h1 *ngIf="title.length"
+      class="zero-margin-bottom font-bold title-text py-2 ws-mat-primary-text text-center mat-display-1">
+      {{ title }}
+    </h1>
+
+    <h3 *ngIf="subTitle?.length" class="px-4 my-0 ws-mat-primary-text text-center">
+      {{ subTitle }}
+    </h3>
+
+    <div class="flex justify-center flex-col login-btn">
+      <div *ngIf="loginConfig && loginConfig?.loginButtons">
+        <button name="login_btn_{{ (loginConfig?.loginButtons)[key] }}"
+          *ngFor="let key of objectKeys(loginConfig?.loginButtons)" color="primary" mat-raised-button
+          (click)="login((loginConfig?.loginButtons)[key])" class="log-btn">
+          <span class="mat-title">{{ key }}</span>
+        </button>
+      </div>
+
+      <button *ngIf="isClientLogin" name="login_client_button" color="primary" mat-raised-button i18n="login: client"
+        (click)="login('S')" class="log-btn">
+        <span class="mat-title">Login</span>
+      </button>
+    </div>
+    <div class="buttons-public ws-mat-primary-text">
+      <a mat-button name="terms_btn" i18n="terms and conditions" routerLink="/public/tnc">Terms of Use</a>
+      <!-- <a mat-button name="contact_btn" i18n="contact us" routerLink="/public/contact">Help and Contact</a> -->
+    </div>
+  </div>
+</div>
