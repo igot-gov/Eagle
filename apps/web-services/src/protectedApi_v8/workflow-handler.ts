@@ -13,6 +13,7 @@ const API_END_POINTS = {
         `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/${workflowId}/${applicationId}/history`,
     nextActionSearch: (serviceName: string, state: string) =>
         `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/nextAction/${serviceName}/${state}`,
+    workflowProcess: (wfId: string) => `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/workflowProcess/${wfId}`,
 
 }
 
@@ -116,6 +117,27 @@ workflowHandlerApi.get('/applicationHistory/:wfId/:applicationId', async (req, r
             ...axiosRequestConfig,
             headers: {
                 org: orgValue,
+                rootOrg: rootOrgValue,
+            },
+        })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+workflowHandlerApi.get('/workflowProcess/:wfId', async (req, res) => {
+    try {
+        const wfId = req.params.wfId
+        const rootOrgValue = req.headers.rootorg
+        const response = await axios.get(API_END_POINTS.workflowProcess(wfId), {
+            ...axiosRequestConfig,
+            headers: {
                 rootOrg: rootOrgValue,
             },
         })
