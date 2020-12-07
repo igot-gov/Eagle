@@ -36,13 +36,13 @@ export class PlaylistNotificationComponent implements OnInit {
   }
 
   reFetchPlaylists() {
-    this.playlistSvc
-      .getPlaylists(NsPlaylist.EPlaylistTypes.PENDING)
-      .subscribe(
-        (sharedPlaylist: NsPlaylist.IPlaylist[]) => {
-          this.playlists = sharedPlaylist
-        },
-      )
+    // this.playlistSvc
+    //   .getPlaylists(NsPlaylist.EPlaylistTypes.PENDING)
+    //   .subscribe(
+    //     (sharedPlaylist: NsPlaylist.IPlaylist[]) => {
+    //       this.playlists = sharedPlaylist
+    //     },
+    //   )
   }
 
   get isFetchingPlaylists() {

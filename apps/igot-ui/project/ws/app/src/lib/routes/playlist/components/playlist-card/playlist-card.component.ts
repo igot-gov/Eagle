@@ -54,12 +54,12 @@ export class PlaylistCardComponent implements OnInit {
     }
   }
   getDuration(playlist: NsPlaylist.IPlaylist) {
-    let totalDuration = 0
+    const totalDuration = 0
     if (playlist) {
-      const contents = playlist.contents
-      contents.forEach(r => {
-        totalDuration += r.duration
-      })
+      // const contents = playlist.contents
+      // contents.forEach(r => {
+      //   totalDuration += r.duration
+      // })
     }
     return totalDuration
   }

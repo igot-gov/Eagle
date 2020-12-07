@@ -33,7 +33,7 @@
           <div class="flex items-center mb-4" *ngIf="!changeName">
             <h1 [ngClass]="{'mat-display-2': !screenSizeIsLtMedium, 'mat-display-1': screenSizeIsLtMedium }"
               class="margin-bottom-s playlist-name inline-block">
-              {{ playlist?.name }}
+              {{ playlist?.result.content.name }}
             </h1>
             <button name="edit-playlist-name-playlist-detail" class="margin-left-s" mat-icon-button
               (click)="editName(true)">
@@ -98,7 +98,7 @@
     </div>
     <div cdkDropList class="page-container padding-top-s padding-bottom-s mt-12 margin-bottom-xl drop-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let content of playlist?.contents" cdkDrag>
+      <div *ngFor="let content of playlist?.result.content.children" cdkDrag>
         <span class="resource-item ping mx-2">
           <mat-icon cdkDragHandle>unfold_more</mat-icon>
         </span>
