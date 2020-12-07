@@ -60,7 +60,7 @@ proxiesV8.use('/sunbirdigot/*',
 
 proxiesV8.use('/sunbird/*',
   // tslint:disable-next-line: max-line-length
-  proxyCreatorSunbird(express.Router(), `http://player:3000/action/content/v3/hierarchy/`)
+  proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/api/course/v1/hierarchy/`)
 )
 
 proxiesV8.use('/api/user/v2/read',
