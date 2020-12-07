@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "project",
   "projects": {
-    "mdo": {
+    "svp": {
       "projectType": "application",
       "root": "",
       "sourceRoot": "src",
@@ -12,7 +12,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/www/mdo",
+            "outputPath": "dist/www/svp",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -20,7 +20,7 @@
             "assets": [
               "src/favicon.ico",
               "src/favicon.png",
-              "src/mdo-assets"
+              "src/svp-assets"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -82,12 +82,12 @@
                 "lazy": true
               },
               "node_modules/pdfjs-dist/web/pdf_viewer.css",
-              "src/mdo-assets/fonts/lato/stylesheet.css",
-              "src/mdo-assets/fonts/montserrat/stylesheet.css"
+              "src/svp-assets/fonts/lato/stylesheet.css",
+              "src/svp-assets/fonts/montserrat/stylesheet.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "src/mdo-assets/telemetry.min.js",
+              "src/svp-assets/telemetry.min.js",
               "node_modules/shepherd.js/dist/js/shepherd.min.js"
             ]
           },
@@ -124,21 +124,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "port": 3000,
-            "browserTarget": "mdo:build"
+            "browserTarget": "svp:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mdo:build:production"
+              "browserTarget": "svp:build:production"
             },
             "de": {
-              "browserTarget": "mdo:build:de"
+              "browserTarget": "svp:build:de"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mdo:build"
+            "browserTarget": "svp:build"
           }
         },
         "test": {
@@ -150,7 +150,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
-              "src/mdo-assets"
+              "src/svp-assets"
             ],
             "styles": [
               "src/styles.scss"
@@ -175,11 +175,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mdo:serve"
+            "devServerTarget": "svp:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "mdo:serve:production"
+              "devServerTarget": "svp:serve:production"
             }
           }
         }
@@ -326,7 +326,7 @@
       }
     }
   },
-  "defaultProject": "mdo",
+  "defaultProject": "svp",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"
