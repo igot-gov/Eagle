@@ -47,7 +47,9 @@ export namespace NSSearch {
 
   export interface ISearchV6RequestV2 {
     request: {
-      filters: {},
+      filters: {
+        primaryCategory: any
+      },
       query: string,
       sort_by: { lastUpdatedOn: string },
       fields: string[],
@@ -128,6 +130,18 @@ export namespace NSSearch {
     responseCode: string
     result: ISearchData
     filters: IFilterUnitResponse[]
+  }
+
+  export interface IFacet {
+    displayName: string,
+    type: string,
+    content: IContentFilter[],
+  }
+  export interface IContentFilter {
+    displayName: string,
+    type: string,
+    count: number,
+    id: string
   }
   export interface ISearchData {
     count: number

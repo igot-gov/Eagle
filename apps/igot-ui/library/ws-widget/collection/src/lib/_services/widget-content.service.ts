@@ -56,12 +56,12 @@ export class WidgetContentService {
     //   .post<NsContent.IContent>(url, { additionalFields })
     //   .pipe(retry(1))
     const apiData =  this.http
-      .get<NsContent.IContentResponse>(url)
+      .get<NsContent.IContent>(url)
       .pipe(retry(1))
-    if (apiData && apiData.result) {
-      return apiData.result.content
-    }
-      return apiData
+    // if (apiData && apiData.result) {
+    //   return apiData.result.content
+    // }
+    return apiData
   }
   fetchAuthoringContent(contentId: string): Observable<NsContent.IContent> {
     const url = `${API_END_POINTS.AUTHORING_CONTENT}/${contentId}`
@@ -175,9 +175,9 @@ export class WidgetContentService {
       { request: req },
     )
   }
-  searchV6(req: NSSearch.ISearchV6Request): Observable<NSSearch.ISearchV6ApiResult> {
+  searchV6(req: NSSearch.ISearchV6Request): Observable<NSSearch.ISearchV6ApiResultV2> {
     req.query = req.query || ''
-    return this.http.post<NSSearch.ISearchV6ApiResult>(API_END_POINTS.CONTENT_SEARCH_V6, req)
+    return this.http.post<NSSearch.ISearchV6ApiResultV2>(API_END_POINTS.CONTENT_SEARCH_V6, req)
   }
 
   fetchContentRating(contentId: string): Observable<{ rating: number }> {

@@ -65,7 +65,7 @@ export class SearchServService {
     return this.searchV6Wrapper(request)
   }
 
-  searchV6Wrapper(request: ISearchRequestV2): Observable<NSSearch.ISearchV6ApiResultV2> {
+  searchV6Wrapper(request: any): Observable<NSSearch.ISearchV6ApiResultV2> {
     const v6Request: NSSearch.ISearchV6RequestV2 = {
       request: {
         query: request.request.query,

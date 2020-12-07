@@ -51,8 +51,8 @@ export class TrainingService {
       })
       .pipe(
         catchError(() => []),
-        map((searchResult: NSSearch.ISearchApiResult) =>
-          searchResult.result.filter(content => this.isValidTrainingContent(content)),
+        map((searchResult: NSSearch.ISearchV6ApiResultV2) =>
+          searchResult.result.content.filter((content: any) => this.isValidTrainingContent(content)),
         ),
       )
   }
