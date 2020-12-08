@@ -233,7 +233,7 @@ rolesApi.get('/rolesv2/usercount', async (req, res) => {
     const response = await axios.get(apiEndpoints.roleCountV2, {
       ...axiosRequestConfig,
       headers: {
-        rootOrg: rootOrg
+        rootOrg,
       },
     })
     res.status(response.status).send(response.data)
