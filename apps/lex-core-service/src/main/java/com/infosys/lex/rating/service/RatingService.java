@@ -3,6 +3,7 @@
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.lex.rating.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,6 @@ public interface RatingService {
 
 	Map<String, Object> getRatingsInfoForContents(String rootOrg, String contentId);
 
-	List<Object> getAllRatingsForContent(String rootOrg, RatingSearchDTO ratingSearchDTO);
+	HashMap<String, Object> getAllRatingsForContent(String rootOrg, RatingSearchDTO ratingSearchDTO);
 
 }
