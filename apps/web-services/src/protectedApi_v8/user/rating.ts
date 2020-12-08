@@ -126,7 +126,7 @@ ratingApi.delete('/:id', async (req, res) => {
 
 ratingApi.get('/content/average-ratingInfo/:contentId', async (req, res) => {
   try {
-    const contentId = req.params.id
+    const contentId = req.params.contentId
     const rootOrg = req.header('rootOrg')
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
