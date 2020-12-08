@@ -6,10 +6,10 @@ import { logError, logInfo } from '../../utils/logger'
 import { extractUserIdFromRequest } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
-  createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/create/profile?userId=${userId}`,
-  getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/get/profile`,
-  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
-  updateUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/profile`,
+  createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/create/profile?userId=${userId}`,
+  getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/get/profile`,
+  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/search/profile?userId=${userId}`,
+  updateUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND_V2}/v1/user/update/profile`,
 
 }
 
