@@ -13,7 +13,7 @@
   }
 }
 .mat-dialog-actions{
-  padding: 26px 0;
+  padding: 9px 0;
 }
 .flex-auto-display {
   @include breakpoint-xs {
@@ -82,4 +82,15 @@
 
 .w-full-imp {
   width: 100% !important;
+}
+.score-red{
+    color: red;
+}
+.score-green{
+  color: green;
+}
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -20,6 +20,8 @@ export class ContentQualityCheckPopupComponent implements OnInit {
   finalArray = []
   showTable = true
   score: any
+  currentSelection=false
+  first = true
   constructor(
     public dialogRef: MatDialogRef<ContentQualityCheckPopupComponent>,
     private contentQualityService: ContentQualityService,
@@ -120,8 +122,12 @@ export class ContentQualityCheckPopupComponent implements OnInit {
     this.dialogRef.close()
   }
   markAsComplete() {
-    // console.log(this.finalArray)
-
+  
+    if(!this.currentSelection === true && this.first === true){
+      this.currentSelection = true
+      this.first = false
+    }
+   
     this.contentQualityService.getContentQualityScore(this.finalArray).subscribe(data => {
       this.score = (data.compositeScore || 0).toFixed('2')
       this.showTable = false
@@ -130,7 +136,8 @@ export class ContentQualityCheckPopupComponent implements OnInit {
   }
   dataHandler($event: any) {
     this.finalArray = $event
-    // console.log($event)
+    this.currentSelection = false
+    this.first =false
   }
   updateSize() {
     this.dialogRef.updateSize('auto', 'auto')
