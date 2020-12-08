@@ -23,7 +23,7 @@ profileRegistryApi.post('/createUserRegistry', async (req, res) => {
     const getUserIdExistresponse = await axios.get(API_END_POINTS.getUserRegistryById(userId), {
       ...axiosRequestConfig,
     })
-    if (getUserIdExistresponse.data) {
+    if (getUserIdExistresponse.data.result.UserProfile.length > 0) {
       const response = await axios.post(API_END_POINTS.updateUserRegistry(userId), { ...req.body, userId }, {
         ...axiosRequestConfigLong,
       })
