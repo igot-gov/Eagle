@@ -130,7 +130,7 @@
   <div class="flex flex-middle padding-top-s padding-bottom-xs play2 ws-primary-background">
     <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted"
       *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
-    <div class="width-expand md:mx-4 flex" [ngClass]="{ greyOut: greyOut(content) }">
+    <div class="width-expand md:mx-4 flex">
       <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
         <img (load)="isDeletedOrExpired(content)" class="image-section" [src]="content?.appIcon"
           [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
