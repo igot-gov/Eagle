@@ -13,6 +13,8 @@ public class RatingSearchDTO {
 
     private Integer pageSize;
 
+    private Integer pageNo;
+
     public String getContentId() {
         return contentId;
     }
@@ -27,5 +29,13 @@ public class RatingSearchDTO {
 
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
+    }
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
     }
 }
