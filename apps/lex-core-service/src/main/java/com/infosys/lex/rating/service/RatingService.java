@@ -3,9 +3,12 @@
                This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3" */
 package com.infosys.lex.rating.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.infosys.lex.rating.dto.ContentIdsDto;
+import com.infosys.lex.rating.dto.RatingSearchDTO;
 import com.infosys.lex.rating.dto.UserContentRatingDTO;
 
 public interface RatingService {
@@ -20,5 +23,9 @@ public interface RatingService {
 	Map<String, Object> deleteUserRating(String rootOrg, String contentId, String userId) throws Exception;
 
 	Map<String, Object> getRatingsInfoForContents(String rootOrg, ContentIdsDto contentIdsMap);
+
+	Map<String, Object> getRatingsInfoForContents(String rootOrg, String contentId);
+
+	HashMap<String, Object> getAllRatingsForContent(String rootOrg, RatingSearchDTO ratingSearchDTO);
 
 }

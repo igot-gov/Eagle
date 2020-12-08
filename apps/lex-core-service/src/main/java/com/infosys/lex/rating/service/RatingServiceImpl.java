@@ -4,18 +4,18 @@
 package com.infosys.lex.rating.service;
 
 import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
+import com.infosys.lex.common.util.PIDConstants;
+import com.infosys.lex.rating.dto.RatingSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.service.UserUtilityService;
-import com.infosys.lex.common.util.ContentMetaConstants;
-import com.infosys.lex.core.exception.ApplicationLogicError;
 import com.infosys.lex.core.exception.BadRequestException;
 import com.infosys.lex.core.exception.InvalidDataInputException;
 import com.infosys.lex.rating.bodhi.repo.UserContentRatingModel;
@@ -23,6 +23,7 @@ import com.infosys.lex.rating.bodhi.repo.UserContentRatingPrimaryKeyModel;
 import com.infosys.lex.rating.bodhi.repo.UserContentRatingRepository;
 import com.infosys.lex.rating.dto.ContentIdsDto;
 import com.infosys.lex.rating.dto.UserContentRatingDTO;
+import org.springframework.util.CollectionUtils;
 
 @Service
 public class RatingServiceImpl implements RatingService {
@@ -37,6 +38,8 @@ public class RatingServiceImpl implements RatingService {
 	private ContentService contentServ;
 
 	private static final DecimalFormat df = new DecimalFormat("0.0");
+
+
 
 	/*
 	 * returns rating for user for the given contentId and returns null id doesnt
@@ -134,23 +137,99 @@ public class RatingServiceImpl implements RatingService {
 	}
 	
 	@Override
-	public Map<String,Object> getRatingsInfoForContents(String rootOrg,ContentIdsDto contentIdsMap)
-	{
-		Map<String,Object> resp = new HashMap<>();
+	public Map<String,Object> getRatingsInfoForContents(String rootOrg,ContentIdsDto contentIdsMap) {
+		Map<String, Object> resp = new HashMap<>();
 		String contentId;
-		
 		List<String> contentIds = contentIdsMap.getContentIds();
-		List<Map<String,Object>> ratingsInfoList = userResourceRatingRepo.getAvgRatingAndRatingCountForContentIds(rootOrg, contentIds);
-		
-		for(Map<String,Object> ratingsInfo : ratingsInfoList)
-		{
+		List<Map<String, Object>> ratingsInfoList = userResourceRatingRepo.getAvgRatingAndRatingCountForContentIds(rootOrg, contentIds);
+		for (Map<String, Object> ratingsInfo : ratingsInfoList) {
 			contentId = ratingsInfo.get("content_id").toString();
-			ratingsInfo.remove("content_id");
-			ratingsInfo.put("averageRating",df.format((float)ratingsInfo.get("averageRating") ));
-			resp.put(contentId, ratingsInfo);
+			resp.put(contentId, getRatingsInfo(rootOrg, contentId, ratingsInfo));
 		}
 		return resp;
-		
+
+	}
+
+	/**
+	 *
+	 * @param rootOrg root org
+	 * @param contentId content Id
+	 * @return return rating info for a content Id
+	 */
+	@Override
+	public Map<String, Object> getRatingsInfoForContents(String rootOrg, String contentId) {
+		List<String> contentIds = new ArrayList<>(Collections.singletonList(contentId));
+		List<Map<String, Object>> ratingsInfoList = userResourceRatingRepo.getAvgRatingAndRatingCountForContentIds(rootOrg, contentIds);
+		Map<String, Object> resp = null;
+		if (!CollectionUtils.isEmpty(ratingsInfoList)) {
+			resp = getRatingsInfo(rootOrg, contentId, ratingsInfoList.get(0));
+		}
+		return resp;
+	}
+
+	/**
+	 *
+	 * @param rootOrg
+	 * @param ratingSearchDTO
+	 * @return
+	 */
+	@Override
+	public HashMap<String, Object> getAllRatingsForContent(String rootOrg, RatingSearchDTO ratingSearchDTO) {
+		Integer pageSize = ratingSearchDTO.getPageSize() == null ? 0 : ratingSearchDTO.getPageSize();
+		Integer pageNo = ratingSearchDTO.getPageNo() == null ? 0 : ratingSearchDTO.getPageNo();
+		Integer limit  =  pageSize * (pageNo + 1);
+		Integer offset =  pageNo * pageSize;
+		HashMap<String, Object> responseMap = new HashMap<>();
+		List<Object> responseArray = new ArrayList<>();
+		int totalSize;
+		HashMap<String, Object> response;
+		List<Map<String, Object>> ratings = userResourceRatingRepo.getRatingInfoForContent(rootOrg, ratingSearchDTO.getContentId());
+		totalSize = ratings.size();
+		List<Map<String, Object>> subListOfRatings = ratings;
+		if(limit != 0 && limit <= totalSize)
+			subListOfRatings = ratings.subList(offset, limit);
+		if(limit > totalSize)
+			subListOfRatings = Collections.emptyList();
+		Map<String, Object> pidResponse = new HashMap<>();
+        if(!CollectionUtils.isEmpty(subListOfRatings)){
+			List<String> uuids = subListOfRatings.stream().map(rating -> (String) rating.get("user_id")).collect(Collectors.toList());
+			pidResponse = userUtilService.getUsersDataFromUserIds(rootOrg, uuids,
+					new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME, PIDConstants.EMAIL)));
+		}
+		for (Map<String, Object> rating : subListOfRatings) {
+			response = new HashMap<>();
+			response.put("ratingInfo", rating);
+			response.put("userInfo", pidResponse.get((String) rating.get("user_id")));
+			responseArray.add(response);
+		}
+		responseMap.put("ratings", responseArray);
+		responseMap.put("totalSize", totalSize);
+		return responseMap;
+	}
+
+	/**
+	 *
+	 * @param rootOrg rootOrg
+	 * @param contentId contentId
+	 * @return return rating list
+	 */
+	private Map<String, Object> getRatingsInfo(String rootOrg, String contentId, Map<String, Object> ratingsInfo) {
+		Map<String, Object> resp = new HashMap<>();
+		ArrayList<Object> ratingInfo = new ArrayList<>();
+		HashMap<String, Object> ratingValue;
+		List<Integer> defaultRating = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+		List<Float> ratings = userResourceRatingRepo.getRatingsForContent(rootOrg, contentId);
+		resp.put("averageRating", df.format((float) ratingsInfo.get("averageRating")));
+		resp.put("ratingCount", ratingsInfo.get("ratingCount"));
+		Map<Float, Long> streamResult = ratings.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		for (Integer defaultValue : defaultRating) {
+			ratingValue = new HashMap<>(2);
+			ratingValue.put("rating", defaultValue);
+			ratingValue.put("count", streamResult.getOrDefault(Float.valueOf(defaultValue), 0L));
+			ratingInfo.add(ratingValue);
+		}
+		resp.put("ratingInfo", ratingInfo);
+		return resp;
 	}
 
 }
