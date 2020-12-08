@@ -21,7 +21,7 @@ export class ProfileV2Service {
     return this.http.get<any>(`${API_END_POINTS.DISCUSS_PROFILE}/${wid}`)
   }
   fetchProfile(userId: string): Observable<NSProfileDataV2.IProfile> {
-    return this.http.get<NSProfileDataV2.IProfile>(`${API_END_POINTS.getUserdetailsV2FromRegistry}/${userId}`)
+    return this.http.get<NSProfileDataV2.IProfile>(`${API_END_POINTS.getUserdetailsV2FromRegistry}`)
 
   }
   fetchPost(request: any): Observable<any> {

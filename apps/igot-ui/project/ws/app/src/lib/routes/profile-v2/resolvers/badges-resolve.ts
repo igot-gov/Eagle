@@ -30,9 +30,9 @@ export class Profilev2BadgesResolve
     } else {
       userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
     }
-    return this.profileV2Svc.fetchBadges(userId).pipe(
-      map(data => ({ data, error: null })),
-      catchError(error => of({ error, data: null })),
-    )
+    // return this.profileV2Svc.fetchBadges(userId).pipe(
+    //   map(data => ({ data, error: null })),
+    //   catchError(error => of({ error, data: null })),
+    // )
   }
 }
