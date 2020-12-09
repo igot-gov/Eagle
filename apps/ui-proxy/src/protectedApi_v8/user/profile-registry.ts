@@ -10,6 +10,7 @@ const API_END_POINTS = {
   createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/create/profile?userId=${userId}`,
   getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/get/profile`,
   getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
+  getUserRegistryByUser: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
   updateUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/profile?userId=${userId}`,
   updateUserWorkflowRegistry: (userId: string) =>
     `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/workflow/profile?userId=${userId}`,
@@ -33,6 +34,8 @@ profileRegistryApi.post('/createUserRegistry', async (req, res) => {
       })
       res.status(response.status).json(response.data)
     } else {
+      // const data = req.body;
+      // const deptName = req.body.
       const response = await axios.post(API_END_POINTS.createUserRegistry(userId), { ...req.body, userId }, {
         ...axiosRequestConfigLong,
       })
@@ -91,6 +94,24 @@ profileRegistryApi.get('/getUserRegistry/:osid', async (req, res) => {
 profileRegistryApi.get('/getUserRegistryById', async (req, res) => {
   try {
     const userId = extractUserIdFromRequest(req)
+    logInfo('Get user registry for', userId)
+
+    const response = await axios.get(API_END_POINTS.getUserRegistryById(userId), {
+      ...axiosRequestConfig,
+    })
+    res.status(response.status).send(response.data)
+  } catch (err) {
+    logError('ERROR FETCHING USER REGISTRY >', err)
+    res.status((err && err.response && err.response.status) || 500).send(err)
+  }
+})
+
+profileRegistryApi.get('/getUserRegistryByUser/:id', async (req, res) => {
+  try {
+    let userId = req.params.id
+    if (!userId) {
+      userId = extractUserIdFromRequest(req)
+    }
     logInfo('Get user registry for', userId)
 
     const response = await axios.get(API_END_POINTS.getUserRegistryById(userId), {
