@@ -106,7 +106,7 @@ profileRegistryApi.get('/getUserRegistryById', async (req, res) => {
 profileRegistryApi.get('/getMasterNationalities', async (_req, res) => {
   try {
     // tslint:disable-next-line: no-identical-functions
-    fs.readFile(__dirname + '/../static-data/nationality.json', (err: Error, json: string) => {
+    fs.readFile(__dirname + '/../../static-data/nationality.json', (err: Error, json: string) => {
       if (!err) {
         const obj = JSON.parse(json)
         res.json(obj)
@@ -119,7 +119,7 @@ profileRegistryApi.get('/getMasterNationalities', async (_req, res) => {
 
 profileRegistryApi.get('/getMasterLanguages', async (_req, res) => {
   try {
-    fs.readFile(__dirname + '/../static-data/languages.json', (err: Error, json: string) => {
+    fs.readFile(__dirname + '/../../static-data/languages.json', (err: Error, json: string) => {
       if (!err) {
         const obj = JSON.parse(json)
         res.json({
@@ -166,7 +166,7 @@ profileRegistryApi.get('/getProfilePageMeta', async (_req, res) => {
 export async function govtOrgMeta() {
   return new Promise(async (resolve, reject) => {
     try {
-      await fs.readFile(__dirname + '/../static-data/govtOrg.json', (err: Error, json: string) => {
+      await fs.readFile(__dirname + '/../../static-data/govtOrg.json', (err: Error, json: string) => {
         if (!err) {
           const obj = JSON.parse(json)
           const result = {
@@ -196,7 +196,7 @@ export async function govtOrgMeta() {
 export async function industreisMeta() {
   return new Promise(async (resolve, reject) => {
     try {
-      await fs.readFile(__dirname + '/../static-data/industries.json', (err: Error, json: string) => {
+      await fs.readFile(__dirname + '/../../static-data/industries.json', (err: Error, json: string) => {
         if (!err) {
           const obj = JSON.parse(json)
           resolve(
@@ -219,7 +219,7 @@ export async function industreisMeta() {
 export async function degreesMeta() {
   return new Promise(async (resolve, reject) => {
     try {
-      await fs.readFile(__dirname + '/../static-data/degrees.json', (err: Error, json: string) => {
+      await fs.readFile(__dirname + '/../../static-data/degrees.json', (err: Error, json: string) => {
         if (!err) {
           const obj = JSON.parse(json)
           const result = {
@@ -246,7 +246,7 @@ export async function degreesMeta() {
 export async function designationMeta() {
   return new Promise(async (resolve, reject) => {
     try {
-      await fs.readFile(__dirname + '/../static-data/designation.json', (err: Error, json: string) => {
+      await fs.readFile(__dirname + '/../../static-data/designation.json', (err: Error, json: string) => {
         if (!err) {
           const obj = JSON.parse(json)
           const result = {
