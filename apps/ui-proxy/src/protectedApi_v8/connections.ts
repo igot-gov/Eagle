@@ -9,15 +9,14 @@ import { extractUserIdFromRequest } from '../utils/requestExtract'
 const unknown = 'Connections Apis:- Failed due to unknown reason'
 const apiEndpoints = {
   detail: `${CONSTANTS.USER_PROFILE_API_BASE}/user/multi-fetch/wid`,
-  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
   getConnectionEstablishedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/established`,
   getConnectionRequestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requested`,
   getConnectionRequestsReceivedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requests/received`,
   getConnectionSuggestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/suggests`,
+  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
   postConnectionAddData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/add`,
   postConnectionRecommendationData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/recommended`,
   postConnectionUpdateData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/update`,
-
 }
 
 export const connectionsApi = Router()
@@ -340,20 +339,6 @@ connectionsApi.post('/connections/recommended/userDepartment', async (req, res) 
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    // const responseDetails = await axios.post(
-    //   url,
-    //   {
-    //     conditions: {
-    //       root_org: rootOrg,
-    //     },
-    //     source_fields: ['wid', 'email', 'first_name', 'last_name', 'department_name'],
-    //     values: [userId],
-    //   },
-    //   {
-    //     ...axiosRequestConfig,
-    //     headers: { rootOrg },
-    //   }
-    // )
     const responseDetails = await axios.get(
       url,
       {
