@@ -177,26 +177,23 @@ public class RatingServiceImpl implements RatingService {
 	public HashMap<String, Object> getAllRatingsForContent(String rootOrg, RatingSearchDTO ratingSearchDTO) {
 		Integer pageSize = ratingSearchDTO.getPageSize() == null ? 0 : ratingSearchDTO.getPageSize();
 		Integer pageNo = ratingSearchDTO.getPageNo() == null ? 0 : ratingSearchDTO.getPageNo();
-		Integer limit  =  pageSize * (pageNo + 1);
 		Integer offset =  pageNo * pageSize;
 		HashMap<String, Object> responseMap = new HashMap<>();
 		List<Object> responseArray = new ArrayList<>();
-		int totalSize;
 		HashMap<String, Object> response;
 		List<Map<String, Object>> ratings = userResourceRatingRepo.getRatingInfoForContent(rootOrg, ratingSearchDTO.getContentId());
-		totalSize = ratings.size();
-		List<Map<String, Object>> subListOfRatings = ratings;
-		if(limit != 0 && limit <= totalSize)
-			subListOfRatings = ratings.subList(offset, limit);
-		if(limit > totalSize)
-			subListOfRatings = Collections.emptyList();
+		int totalSize = ratings.size();
+		if(CollectionUtils.isEmpty(ratings) || ratings.size() <= offset){
+			ratings = Collections.emptyList();
+		}
 		Map<String, Object> pidResponse = new HashMap<>();
-        if(!CollectionUtils.isEmpty(subListOfRatings)){
-			List<String> uuids = subListOfRatings.stream().map(rating -> (String) rating.get("user_id")).collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(ratings)){
+			ratings = ratings.subList(offset, Math.min(offset + pageSize, ratings.size()));
+			List<String> uuids = ratings.stream().map(rating -> (String) rating.get("user_id")).collect(Collectors.toList());
 			pidResponse = userUtilService.getUsersDataFromUserIds(rootOrg, uuids,
 					new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME, PIDConstants.EMAIL)));
 		}
-		for (Map<String, Object> rating : subListOfRatings) {
+		for (Map<String, Object> rating : ratings) {
 			response = new HashMap<>();
 			response.put("ratingInfo", rating);
 			response.put("userInfo", pidResponse.get((String) rating.get("user_id")));
