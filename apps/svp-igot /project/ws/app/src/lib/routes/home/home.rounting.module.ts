@@ -6,12 +6,13 @@ import { AboutComponent } from './routes/about/about.component'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
 import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
+import { DirectoryViewComponent } from './routes/directory/directroy.component'
 // import { PageResolve } from '@ws-widget/utils'
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'users',
+    redirectTo: 'directory',
   },
   {
     path: '',
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'roles-access',
         component: RolesAccessComponent,
+      },
+      {
+        path: 'directory',
+        component: DirectoryViewComponent,
       },
     ],
   },

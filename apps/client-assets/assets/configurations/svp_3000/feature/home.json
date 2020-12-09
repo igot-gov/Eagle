@@ -4,6 +4,18 @@
         "widgetSubType": "leftMenu",
         "widgetData": [
             {
+                "name": "Directory",
+                "key": "directory",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/directory"
+            },
+            {
                 "name": "Users",
                 "key": "users",
                 "fragment": false,

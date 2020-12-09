@@ -4,7 +4,7 @@
 
 export const environment: IEnvironment = {
   production: false,
-  sitePath: 'mdo_3000',
+  sitePath: 'svp_3000',
 }
 interface IEnvironment {
   production: boolean

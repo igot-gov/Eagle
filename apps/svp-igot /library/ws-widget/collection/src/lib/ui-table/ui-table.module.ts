@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { UIUserTableComponent } from './user-list/ui-user-table.component'
+import { UIDirectoryTableComponent } from './directory-list/directory-table.component'
 import { MatTableModule } from '@angular/material/table'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatSortModule } from '@angular/material/sort'
@@ -14,7 +15,7 @@ import { BtnContentLikeModule } from '../btn-content-like/btn-content-like.modul
 import { BtnContentMailMeModule } from '../btn-content-mail-me/btn-content-mail-me.module'
 import { MatPaginatorModule } from '@angular/material/paginator'
 @NgModule({
-  declarations: [UIUserTableComponent, AppButtonComponent],
+  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -32,6 +33,6 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     MatPaginatorModule,
   ],
 
-  exports: [UIUserTableComponent],
+  exports: [UIUserTableComponent, UIDirectoryTableComponent],
 })
 export class UITableModule { }
