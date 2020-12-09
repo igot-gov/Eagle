@@ -7,9 +7,12 @@
 
 package com.infosys.scoringengine.schema.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ScoringSchema {
 
     private String id;
