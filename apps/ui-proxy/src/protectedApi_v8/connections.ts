@@ -13,10 +13,10 @@ const apiEndpoints = {
   getConnectionRequestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requested`,
   getConnectionRequestsReceivedData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/fetch/requests/received`,
   getConnectionSuggestsData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/suggests`,
+  getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
   postConnectionAddData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/add`,
   postConnectionRecommendationData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/profile/find/recommended`,
   postConnectionUpdateData: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/connections/update`,
-
 }
 
 export const connectionsApi = Router()
@@ -330,7 +330,7 @@ connectionsApi.post('/connections/recommended/userDepartment', async (req, res) 
     let userDepartment = ''
     const rootOrg = req.header('rootorg')
     const userId = extractUserIdFromRequest(req)
-    const url = `${apiEndpoints.detail}`
+    const url = `${apiEndpoints.getUserRegistryById(userId)}`
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
@@ -339,23 +339,19 @@ connectionsApi.post('/connections/recommended/userDepartment', async (req, res) 
       res.status(400).send(ERROR.GENERAL_ERR_MSG)
       return
     }
-    const responseDetails = await axios.post(
+    const responseDetails = await axios.get(
       url,
-      {
-        conditions: {
-          root_org: rootOrg,
-        },
-        source_fields: ['wid', 'email', 'first_name', 'last_name', 'department_name'],
-        values: [userId],
-      },
       {
         ...axiosRequestConfig,
         headers: { rootOrg },
       }
     )
-    logInfo('responseDetails from /detailsv1 : ', responseDetails.data)
-    if (responseDetails && responseDetails.data && responseDetails.data.length) {
-      userDepartment = responseDetails.data[0].department_name
+    logInfo('responseDetails from /search/profile : ', responseDetails.data)
+    if (responseDetails && responseDetails.data && responseDetails.data.result
+      && responseDetails.data.result.UserProfile
+      && responseDetails.data.result.UserProfile.length) {
+
+      userDepartment = responseDetails.data.result.UserProfile[0].employmentDetails.departmentName
     }
     usrDept = userDepartment || 'igot'
 
