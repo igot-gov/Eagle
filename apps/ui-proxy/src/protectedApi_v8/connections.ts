@@ -350,7 +350,6 @@ connectionsApi.post('/connections/recommended/userDepartment', async (req, res) 
     if (responseDetails && responseDetails.data && responseDetails.data.result
       && responseDetails.data.result.UserProfile
       && responseDetails.data.result.UserProfile.length) {
-
       userDepartment = responseDetails.data.result.UserProfile[0].employmentDetails.departmentName
     }
     usrDept = userDepartment || 'igot'
