@@ -7,7 +7,7 @@ import {
   LeftMenuModule,
   PipeContentRouteModule,
   UserContentDetailedRatingModule,
-  UserContentRatingModule
+  UserContentRatingModule,
 } from '@ws-widget/collection'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { ContentDetailComponent } from './components/content-detail/content-detail.component'
@@ -50,6 +50,6 @@ import { LocalDataService } from './services/local-data.service'
     LocalDataService,
 
   ],
-  entryComponents: []
+  entryComponents: [],
 })
 export class ContentDetailModule { }

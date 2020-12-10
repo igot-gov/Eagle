@@ -22,6 +22,10 @@ import { LiveHtmlEditorComponent } from './components/live-html-editor/live-html
 import { OptionsComponent } from './components/options/options.component'
 import { FormsModule } from '@angular/forms'
 import { CompetencyAddPopUpComponent } from './components/competency-add-popup/competency-add-popup'
+import { WidgetResolverModule } from '@ws-widget/resolver'
+import { MatRadioModule, MatTableModule } from '@angular/material'
+import { ContentQualityComponent } from './components/content-quality/content-quality.component'
+import { RouterModule } from '@angular/router'
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { CompetencyAddPopUpComponent } from './components/competency-add-popup/c
     LiveHtmlEditorComponent,
     OptionsComponent,
     CompetencyAddPopUpComponent,
+    ContentQualityComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +55,10 @@ import { CompetencyAddPopUpComponent } from './components/competency-add-popup/c
     SharedModule,
     AceEditorModule,
     CatalogSelectModule,
+    WidgetResolverModule,
+    MatRadioModule,
+    RouterModule,
+    MatTableModule,
   ],
   exports: [
     MatQuillComponent,
@@ -63,6 +72,7 @@ import { CompetencyAddPopUpComponent } from './components/competency-add-popup/c
     LiveHtmlEditorComponent,
     OptionsComponent,
     CompetencyAddPopUpComponent,
+    ContentQualityComponent,
   ],
   entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent],
   providers: [UploadService],

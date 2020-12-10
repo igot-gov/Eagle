@@ -43,7 +43,8 @@ export class AuthNavigationComponent implements OnInit {
         } else if (event.url.indexOf('publish') >= 0) {
           this.currentRout = 'Publish'
         } else {
-          this.currentRout = 'Content'
+          // this.currentRout = 'Content'
+          this.currentRout = 'New CBP'
         }
         // author/my-content?status=draft
       }

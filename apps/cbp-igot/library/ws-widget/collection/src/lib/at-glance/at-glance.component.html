@@ -1,6 +1,5 @@
 <mat-card class="flex flex-wrap flex-column at-glance ws-mat-accent-border" tabindex="0">
-  <div class="flex flex-center text-white ws-mat-primary-background cursor-pointer preview-div"
-    *ngIf="!(widgetData &&  widgetData.previewURL)">
+  <div class="flex flex-center text-white ws-mat-primary-background cursor-pointer preview-div" *ngIf="!(widgetData)">
     <a class="preview mat-subheading-2 margin-0" [routerLink]="getPreviewLink()">Preview CBP</a>
   </div>
   <span class="mat-subheading-1 margin-top-s">{{widgetData.displayName}}</span>

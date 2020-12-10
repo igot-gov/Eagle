@@ -37,8 +37,6 @@ export namespace NsAppToc {
     contentType: string,
     status: string
   }
-
-
 }
 
 export namespace NsCohorts {

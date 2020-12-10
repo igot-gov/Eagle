@@ -11,6 +11,7 @@ import {
   Output,
   ViewChild,
   Inject,
+  HostListener,
 } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { MatAutocompleteSelectedEvent } from '@angular/material'
@@ -18,7 +19,7 @@ import { MatChipInputEvent } from '@angular/material/chips'
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
-import { ConfigurationsService } from '@ws-widget/utils'
+import { ConfigurationsService, ValueService } from '@ws-widget/utils'
 import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
 import { CONTENT_BASE_STATIC, CONTENT_BASE_STREAM } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
@@ -45,6 +46,7 @@ import {
   switchMap,
   map,
 } from 'rxjs/operators'
+// import { NsWidgetResolver } from '@ws-widget/resolver'
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
 
 export interface IUsersData {
@@ -69,6 +71,14 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() nextAction = 'done'
   @Input() stage = 1
   @Input() type = ''
+  /**for side nav */
+  sideNavBarOpened = true
+  widgetDataa!: any
+  private defaultSideNavBarOpenedSubscription: any
+  public screenSizeIsLtMedium = false
+  isLtMedium$ = this.valueSvc.isLtMedium$
+  mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
+  /**for side nav: END */
   location = CONTENT_BASE_STATIC
   selectable = true
   removable = true
@@ -139,8 +149,20 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   filteredOptions$: Observable<string[]> = of([])
   competencyOptions$: Observable<any[]> = of([])
-
+  @ViewChild('stickyMenu', { static: true }) menuElement!: ElementRef
+  elementPosition: any
+  sticky = false
+  @HostListener('window:scroll', ['$event'])
+  handleScroll() {
+    const windowScroll = window.pageYOffset
+    if (windowScroll >= this.elementPosition - 100) {
+      this.sticky = true
+    } else {
+      this.sticky = false
+    }
+  }
   constructor(
+    private valueSvc: ValueService,
     private formBuilder: FormBuilder,
     private uploadService: UploadService,
     private snackBar: MatSnackBar,
@@ -156,11 +178,68 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     @Inject(MAT_DIALOG_DATA) public data1: IUsersData,
   ) {
     // console.log("Parent component", this.parentContent)
-
+    this.updateLeftMenus()
+  }
+  updateLeftMenus() {
+    this.widgetDataa = {
+      widgetType: 'menus',
+      widgetSubType: 'leftMenu',
+      widgetData: {
+        logo: false,
+        menus: [
+          {
+            name: 'Overview',
+            key: 'basic-information',
+            fragment: true,
+            render: true,
+            enabled: true,
+            customRouting: false,
+            routerLink: 'basic-information',
+          },
+          {
+            name: 'Classification',
+            key: 'classification',
+            fragment: true,
+            render: true,
+            enabled: true,
+            customRouting: false,
+            routerLink: 'classification',
+          },
+          {
+            name: 'Competencies',
+            key: 'competencies',
+            fragment: true,
+            render: true,
+            enabled: true,
+            customRouting: false,
+            routerLink: 'competencies',
+          },
+          {
+            name: 'Intended for',
+            key: 'intended-for',
+            fragment: true,
+            render: true,
+            enabled: true,
+            customRouting: false,
+            routerLink: 'intended-for',
+          },
+          {
+            name: 'Stakeholders',
+            key: 'stakeholders',
+            fragment: true,
+            render: true,
+            enabled: true,
+            customRouting: false,
+            routerLink: 'stakeholders',
+          },
+        ],
+      },
+    }
   }
 
   ngAfterViewInit() {
     this.ref.detach()
+    // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
     this.timer = setInterval(() => {
       this.ref.detectChanges()
       // tslint:disable-next-line: align
@@ -168,6 +247,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    this.sidenavSubscribe()
     this.typeCheck()
     this.ordinals = this.authInitService.ordinals
     this.audienceList = this.ordinals.audience
@@ -345,6 +425,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.allLanguages = this.data1.languages
   }
+  sidenavSubscribe() {
+    this.defaultSideNavBarOpenedSubscription = this.isLtMedium$.subscribe(isLtMedium => {
+      this.sideNavBarOpened = !isLtMedium
+      this.screenSizeIsLtMedium = isLtMedium
+    })
+  }
   start() {
     const dialogRef = this.dialog.open(CompetencyAddPopUpComponent, {
       minHeight: 'auto',
@@ -413,6 +499,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe()
+    }
+    if (this.defaultSideNavBarOpenedSubscription) {
+      this.defaultSideNavBarOpenedSubscription.unsubscribe()
     }
     this.loader.changeLoad.next(false)
     this.ref.detach()

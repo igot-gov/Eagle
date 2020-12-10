@@ -13,7 +13,7 @@ export class AuthorCardComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IAuthorData> {
   @Input() widgetData!: IAuthorData
   @HostBinding('id')
-  public id = 'auth-card-' + Math.random()
+  public id = `auth-card-${Math.random()}`
   @HostBinding('class')
   public class = 'flex flex-1 mr-8 mb-4'
 
@@ -22,7 +22,7 @@ export class AuthorCardComponent extends WidgetBaseComponent
   }
   getProfileLink() {
     if (this.widgetData && this.widgetData.profileLink) {
-      return `${'/app/profile/' + this.widgetData.profileLink}`
+      return `/app/profile/${this.widgetData.profileLink}`
     }
     return null
   }

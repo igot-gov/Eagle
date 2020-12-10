@@ -45,7 +45,7 @@ import { PipeRelativeTimeModule } from '@ws-widget/utils'
     UserImageModule,
     DialogSocialActivityUserModule,
     DialogSocialDeletePostModule,
-    PipeRelativeTimeModule
+    PipeRelativeTimeModule,
   ],
   exports: [DiscussionForumComponent],
   entryComponents: [DiscussionForumComponent],

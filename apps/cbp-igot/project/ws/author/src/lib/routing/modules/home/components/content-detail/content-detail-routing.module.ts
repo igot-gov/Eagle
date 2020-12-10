@@ -25,7 +25,7 @@ const routes: Routes = [
         path: ':contentId',
         component: ContentDetailComponent,
         pathMatch: 'full',
-        redirectTo: ':contentId/overview'
+        redirectTo: ':contentId/overview',
       },
       {
         path: ':contentId/overview',
@@ -33,7 +33,7 @@ const routes: Routes = [
         resolve: {
           // content: AppTocResolverService,
 
-        }
+        },
       },
       {
         path: ':contentId/insights',
@@ -52,10 +52,10 @@ const routes: Routes = [
       },
       {
         path: ':contentId/notifications',
-        component: ContentDetailComponent
-      }
-    ]
-  }
+        component: ContentDetailComponent,
+      },
+    ],
+  },
 ]
 
 @NgModule({

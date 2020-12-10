@@ -1,0 +1,84 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.mat-sidenav-container {
+  min-height: 650px;
+  overflow: unset;
+}
+
+.flex-075 {
+  width: 55%;
+}
+
+.mat-sidenav {
+  overflow: unset;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.mar-b-0 {
+  margin-bottom: 0 !important;
+}
+
+.mat-drawer-content {
+  padding-left: 3px;
+}
+
+.mat-progress-bar-buffer {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+
+.mat-progress-bar-fill::after {
+  background: #1D8923 !important;
+  border-radius: 6px;
+}
+
+.quality-progress {
+  height: $size-s;
+  border-radius: 6px;
+}
+
+.see-repo {
+  margin: 0 !important;
+  padding: $size-s;
+}
+
+.itm-center {
+  align-items: center;
+  padding: $size-m;
+  margin: $size-s 0;
+  min-width: fit-content;
+  width: fit-content;
+}
+
+.active-page {
+  background: black;
+  color: #fff;
+}
+
+.pag {
+  margin: 0 $size-xs;
+  width: 48px;
+  height: 48px;
+}
+
+.tgl-group {
+  flex-direction: column;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.sticky {
+  position: sticky;
+  top: 50px;
+}
+
+.new-color {
+  background-color: #FDECDE;
+}
+
+.text-white {
+  color: #fff !important;
+}

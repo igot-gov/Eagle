@@ -10,6 +10,34 @@
   justify-content: space-around;
 }
 
+.sticky {
+  // position: fixed;
+  top: 56px;
+  overflow: hidden;
+  z-index: 10;
+  width: 100%;
+}
+
+.itm-center {
+  align-items: center;
+  padding: $size-m;
+}
+
+.tgl-group {
+  flex-direction: row;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.toggle-btn {
+  margin: $size-xs;
+  margin-left: 0;
+}
+
+.margin-0 {
+  margin-bottom: 0 !important;
+}
+
 // .tabs{
 //   display: flex;
 //   // justify-content: space-around;
@@ -56,6 +84,7 @@ input {
     content: ' *';
   }
 }
+
 .floatright {
   float: right;
 }
@@ -257,7 +286,7 @@ ul li {
   z-index: -1;
 }
 
-.inputfile + label {
+.inputfile+label {
   font-size: 1.25em;
   color: white;
   display: inline-block;
@@ -341,15 +370,16 @@ ul li {
 .mobile-break {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  margin: 0 5px 0 5px;
+  padding: 0;
+  margin: 0 $size-m 0 0;
   flex: 1;
-  background: bisque;
+  // background: bisque;
 }
 
 .new-mobile {
   display: flex;
   flex-direction: row;
+  // margin-top: $size-l;
 
   @include breakpoint-s {
     flex-direction: column;
@@ -358,6 +388,15 @@ ul li {
   @include breakpoint-xs {
     flex-direction: column;
   }
+}
+
+.m-auto-width {
+  margin: auto;
+  width: fit-content;
+}
+
+.flex-column-imp {
+  flex-direction: column !important;
 }
 
 .logos {

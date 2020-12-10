@@ -21,7 +21,7 @@ const routes: Routes = [
       {
         path: 'collection',
         data: {
-          load: ['collection', 'create'],
+          load: ['collection', 'create', 'content-quality'],
         },
         resolve: {
           script: InitResolver,

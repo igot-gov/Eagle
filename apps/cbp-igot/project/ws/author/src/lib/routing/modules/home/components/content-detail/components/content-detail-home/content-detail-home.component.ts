@@ -27,7 +27,10 @@ export class ContentDetailHomeComponent implements OnInit, OnDestroy {
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   public screenSizeIsLtMedium = false
   leftmenues!: ILeftMenu[]
-  constructor(private valueSvc: ValueService, private accessService: AccessControlService, private toc: LocalDataService,
+  constructor(
+    private valueSvc: ValueService,
+    private accessService: AccessControlService,
+    public toc: LocalDataService,
     private activeRoute: ActivatedRoute
   ) {
     if (this.toc) {

@@ -6,9 +6,8 @@ const routes: Routes = [
   {
     path: '',
     component: MyContentComponent,
-  }
+  },
 ]
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],

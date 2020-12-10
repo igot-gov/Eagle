@@ -37,7 +37,7 @@ import { MyTocService } from '../../services/my-toc.service'
   selector: 'ws-auth-content-detail',
   templateUrl: './content-detail.component.html',
   styleUrls: ['./content-detail.component.scss'],
-  providers: [PipeDurationTransformPipe]
+  providers: [PipeDurationTransformPipe],
 })
 export class ContentDetailComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = true
@@ -193,15 +193,16 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
   getGlanceData(): IAtGlanceComponentData.IData | null {
     if (this.contentId && this.content && this.tocStructure) {
       return {
-        displayName: "At a glance", // now not using JSON
+        displayName: 'At a glance', // now not using JSON
         contentId: this.contentId,
         contentType: this.content.categoryType,
         cost: this.content.exclusiveContent ? 'Paid' : 'Free',
         duration: this.content.duration.toString(),
         lastUpdate: this.content.lastUpdatedOn,
-        counts: this.tocStructure
+        counts: this.tocStructure,
       }
-    } else return null
+    }
+    return null
   }
   getAuthors(): IAuthorData[] {
     if (this.content) {
@@ -209,13 +210,13 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
       const curators = _.map(_.get(this.content, 'creatorContacts'), i => {
         return {
           name: i.name,
-          authorType: 'Curator'
+          authorType: 'Curator',
         }
       })
       const authors = _.map(_.get(this.content, 'creatorDetails'), i => {
         return {
           name: i.name,
-          authorType: 'Author'
+          authorType: 'Author',
         }
       })
       lst.push(...authors)
@@ -244,13 +245,15 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
   }
   actionClick(event: any) {
     if (event) {
-      // console.log(event)
+      /* tslint:disable */
+      console.log(event)
+      /* tslint:enable */
     }
   }
   fetchContent() {
     this.contentId = this.activatedRoute.snapshot.paramMap.get('contentId') || null
     if (this.contentId) {
-      this.myContSvc.readContent(this.contentId).subscribe((s) => {
+      this.myContSvc.readContent(this.contentId).subscribe(s => {
         _.set(this, 'content', s)
         this.dataService.initData(s)
         this.resetAndFetchTocStructure()

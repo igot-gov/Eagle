@@ -44,15 +44,21 @@ $action-btn-size: 2.5 * $size-m; // 40px
 
 .source-div {
   position: absolute;
-  top: 0;
-  right: 0;
+  // top: 0;
+  // right: 0;
+  top: 100px;
+  left: 0;
   background: white;
   z-index: 3;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  min-width: 98px;
-  min-height: 32px;
-  max-width: 98px;
-  max-height: 32px;
+  // min-width: 98px;
+  // min-height: 32px;
+  // max-width: 98px;
+  // max-height: 32px;
+  min-width: 72px;
+  min-height: 72px;
+  max-width: 72px;
+  max-height: 72px;
   display: flex;
   border-radius: 16px;
 

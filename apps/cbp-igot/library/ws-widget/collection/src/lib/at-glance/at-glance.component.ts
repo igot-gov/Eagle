@@ -16,7 +16,7 @@ export class AtGlanceComponent extends WidgetBaseComponent
   }
   getPreviewLink() {
     if (this.widgetData && this.widgetData.contentId) {
-      return `${'/author/toc/' + this.widgetData.contentId + '/single-page-view'}`
+      return `/author/toc/${this.widgetData.contentId}/single-page-view`
     }
     return null
   }

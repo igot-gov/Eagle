@@ -1,5 +1,5 @@
 import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/components/delete-dialog/delete-dialog.component'
-import { Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormGroup } from '@angular/forms'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -41,6 +41,9 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
   selector: 'ws-auth-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss'],
+  /* tslint:disable */
+  encapsulation: ViewEncapsulation.None,
+  /* tslint:enable */
   providers: [CollectionStoreService, CollectionResolverService],
 })
 export class CollectionComponent implements OnInit, OnDestroy {

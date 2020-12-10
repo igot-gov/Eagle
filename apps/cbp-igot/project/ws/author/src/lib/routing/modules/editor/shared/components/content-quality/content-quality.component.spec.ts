@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { CreateHomeComponent } from './create-home.component'
+import { ContentQualityComponent } from './content-quality.component'
 
-describe('CreateHomeComponent', () => {
-  let component: CreateHomeComponent
-  let fixture: ComponentFixture<CreateHomeComponent>
+describe('ContentQualityComponent', () => {
+  let component: ContentQualityComponent
+  let fixture: ComponentFixture<ContentQualityComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CreateHomeComponent],
+      declarations: [ContentQualityComponent],
     })
       .compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateHomeComponent)
+    fixture = TestBed.createComponent(ContentQualityComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

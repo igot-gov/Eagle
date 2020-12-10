@@ -32,9 +32,11 @@
 .hidden {
   display: none;
 }
+
 .transitionD {
   transition: all 0.5s;
 }
+
 .ui {
   border: 1px solid rgb(26, 25, 25);
   border-top-left-radius: 0px;
@@ -48,4 +50,84 @@
 
 .toHide {
   visibility: hidden;
+}
+
+
+
+.mat-ink-bar {
+  display: none;
+}
+
+
+
+.mat-tab-label {
+  flex: 1;
+  color: black;
+  opacity: 1 !important;
+
+  .mat-tab-label-content {
+    background-color: #F5F5F5;
+    color: black;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mat-tab-label::after {
+  content: " ";
+  position: absolute;
+  width: 0px;
+  height: 0;
+  left: auto;
+  right: -24px;
+  top: 0;
+  border: 24px solid;
+  border-color: transparent transparent transparent #F5F5F5;
+}
+
+.mat-tab-label::before {
+  content: " ";
+  position: absolute;
+  width: 0px;
+  height: 0;
+  left: -0;
+  top: 0;
+  border: 24px solid;
+  border-color: #F5F5F5 #F5F5F5 #F5F5F5 transparent;
+}
+
+
+.mat-tab-label-active {
+  flex: 1;
+  opacity: 1 !important;
+
+  .mat-tab-label-content {
+    background-color: #373434;
+    color: white;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mat-tab-label-active::after {
+  content: " ";
+  position: absolute;
+  width: 0px;
+  height: 0;
+  left: auto;
+  right: -24px;
+  top: 0;
+  border: 24px solid;
+  border-color: transparent transparent transparent #373434;
+}
+
+.mat-tab-label-active::before {
+  content: " ";
+  position: absolute;
+  width: 0px;
+  height: 0;
+  left: -0;
+  top: 0;
+  border: 24px solid;
+  border-color: #373434 #373434 #373434 transparent;
 }

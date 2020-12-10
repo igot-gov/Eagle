@@ -33,7 +33,7 @@ import { ILeftMenu, ITable } from '@ws-widget/collection'
   selector: 'ws-auth-my-content',
   templateUrl: './my-content.component.html',
   styleUrls: ['./my-content.component.scss'],
-  providers: [PipeDurationTransformPipe]
+  providers: [PipeDurationTransformPipe],
 })
 export class MyContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
@@ -178,9 +178,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.fetchContent(false)
     })
   }
-  CreateNewComponent() {
+
+  createNewComponent() {
     this.router.navigate(['author', 'create-content'])
   }
+
   fetchStatus() {
     switch (this.status) {
       case 'draft':

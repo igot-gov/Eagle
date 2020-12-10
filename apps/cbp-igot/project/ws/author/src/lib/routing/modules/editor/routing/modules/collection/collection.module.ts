@@ -16,6 +16,7 @@ import { CollectionComponent } from './components/collection/collection.componen
 import { WebPageModule } from '../web-page/web-page.module'
 // import { IapAssessmentModule } from '../iap-assessment/iap-assessment.module'
 import { QuizModule } from '../quiz/quiz.module'
+import { MatTabsModule } from '@angular/material'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { QuizModule } from '../quiz/quiz.module'
     AuthViewerModule,
     UploadModule,
     CurateModule,
+    MatTabsModule,
     WebPageModule,
     QuizModule,
   ],

@@ -6,12 +6,9 @@ import { TFetchStatus, ConfigurationsService } from '@ws-widget/utils'
 import { NsAppToc } from '../interface/app-toc.model'
 import { NsContent } from '@ws-widget/collection/src/lib/_services/widget-content.model'
 import { IAtGlanceComponentData } from '../../../../../../../../../../../library/ws-widget/collection/src/public-api'
-
-
 // TODO: move this in some common place
 // const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 const PROXY_SLAG_V8 = '/apis/proxies/v8'
-
 // const API_END_POINTS = {
 //   CONTENT_PARENTS: `${PROTECTED_SLAG_V8}/content/parents`,
 //   CONTENT_NEXT: `${PROTECTED_SLAG_V8}/content/next`,
@@ -37,9 +34,12 @@ export class MyTocService {
   private showSubtitleOnBanners = false
   private canShowDescription = false
 
-  constructor(private http: HttpClient,
-    private configSvc: ConfigurationsService) {
+  constructor(
+    private http: HttpClient,
+    private configSvc: ConfigurationsService
+  ) {
   }
+
   get subtitleOnBanners(): boolean {
     return this.showSubtitleOnBanners
   }

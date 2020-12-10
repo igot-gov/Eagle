@@ -7,7 +7,8 @@ export interface IMenu {
   name: string
   key: string
   render: boolean
-  badges: {
+  fragment?: boolean
+  badges?: {
     enabled: boolean
     uri?: string
   }
@@ -15,4 +16,5 @@ export interface IMenu {
   routerLink: string,
   customRouting?: boolean
   paramaterName?: string
+  queryParams?: string
 }

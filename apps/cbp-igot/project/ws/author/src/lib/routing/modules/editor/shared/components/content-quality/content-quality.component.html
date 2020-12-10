@@ -1,0 +1,238 @@
+<mat-sidenav-container autosize="true" id="content-quality-side-nav" class="margin-top-m">
+  <mat-sidenav #sidenav [mode]="mode$ | async" [(opened)]="sideBarOpened" class="no-border"
+    (closedStart)="sidenavClose()">
+    <div class="sticky">
+      <div class="contain">
+        <div class="pad-l-4r">
+          <mat-nav-list *ngIf="questionData && questionData.length>0" class="margin-top-m flex-1">
+            <ng-container *ngFor="let _menu of questionData; let i = index">
+              <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i" [routerLink]="'.'"
+                (click)="selectMenu(_menu.type,i)" [class.ws-active-route-menu]="isLinkActive(_menu.type, i)">
+                <span class="padding-left-xs">{{_menu?.name}}</span>
+              </a>
+            </ng-container>
+          </mat-nav-list>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="pl-6 pr-6 ml-6">
+    <form [formGroup]="qualityForm" (ngSubmit)="submitResult(qualityForm.value)">
+      <ng-container *ngIf="!displayResult">
+        <ng-container *ngFor="let quesParent of questionData; let idx=index">
+          <ng-container *ngIf="idx === 0 && selectedIndex === 0" [ngTemplateOutlet]="instruction"
+            [ngTemplateOutletContext]="quesParent">
+          </ng-container>
+          <ng-container *ngIf="idx !== 0 && selectedIndex === idx">
+            <ng-container [ngTemplateOutlet]="qLayout" [ngTemplateOutletContext]="{qp:quesParent}"></ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+      <ng-container *ngIf="displayResult" [ngTemplateOutlet]="result" [ngTemplateOutletContext]="{result:{}}">
+      </ng-container>
+    </form>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #instruction let-name="name">
+  <mat-card class="ws-mat-accent-border">
+    <mat-card-title class="m-auto">
+      <span class="mat-title">{{name}}</span>
+    </mat-card-title>
+    <mat-card-content class="margin-top-m mobile-break mat-app-background">
+      <span class="mat-body-1">All courses on the iGOT platform will be scored on six categories: i. Instructional
+        Methods ii. Assessment
+        Design iii.
+        Competency and Skills iv. Learner Engagement v. Learner Support vi. Accessibility
+        Please mark your answers from the drop down menu across the given range : Strongly Agree, Agree, Disagree,
+        Strongly
+        Disagree. Once you have filled your questionnaire, please click on submit button and you will see the category
+        of your
+        course.</span>
+      <div class="flex flex-column new-color padding-s margin-s">
+        <span class="mat-body-1">
+          We trust you to complete the content quality assessment honestly. Content you submit for review will go
+          through another
+          round of quality
+          assessment by the experts, and the disparities might lead to reduction in your trust score. You could to
+          retake the test
+          to ensure accuracy.
+        </span>
+        <a class="ws-mat-default-text" href="#">Read more about trust score</a>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
+        <button mat-raised-button type="button" style="line-height: 48px;" (click)="start()"
+          class="text-white ws-mat-primary-background margin-left-s">
+          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Start content quality
+            assessment
+          </span>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+
+<ng-template #qLayout let-qp="qp">
+  <mat-card class="ws-mat-accent-border">
+    <mat-card-title class="m-auto">
+      <span class="mat-title">{{qp.name}}</span>
+    </mat-card-title>
+    <span class="mat-body-1">{{qp.desc}}</span>
+    <mat-card-content class="margin-top-m mobile-break mat-app-background">
+      <ng-container *ngFor="let question of qp.questions; let qIdx = index">
+        <ng-container *ngIf="selectedQIndex === qIdx" [ngTemplateOutlet]="q" [ngTemplateOutletContext]="{q:question}">
+        </ng-container>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
+        <button mat-raised-button type="button" class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s"
+          (click)="previousQ()">
+          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Previous question
+          </span>
+        </button>
+        <!-- <ng-container *ngFor="let question of qp.questions"> -->
+        <ng-container [ngTemplateOutlet]="count" [ngTemplateOutletContext]="{data:qp.questions}"></ng-container>
+        <!-- </ng-container> -->
+
+        <button *ngIf="!lastQ" mat-raised-button type="button"
+          class="text-white ws-mat-primary-background margin-left-s" (click)="nextQ()">
+          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next question
+          </span>
+        </button>
+        <button *ngIf="lastQ" mat-raised-button type="submit"
+          class="text-white ws-mat-primary-background margin-left-s">
+          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Submit
+          </span>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+
+
+<ng-template #q let-qp="q">
+  <div class="flex flex-1 flex-column">
+    <div class="flex flex-1">
+      <span class="mat-subheading-1">{{qp.question}}</span>
+    </div>
+    <div class="flex flex-column">
+      <!-- <ng-container [formGroup]="contentForm"> -->
+      <!-- formControlName="selected" -->
+      <mat-radio-group [name]="'group-' + qp.position" class="flex tgl-group margin-top-s"
+        aria-label="Select an option">
+        <!-- formControlName="complexityLevel"> -->
+        <mat-radio-button [name]="'radio-' + _option.name"
+          class="flex flex-row itm-center ws-mat-accent-border margin-right-s" *ngFor="let _option of qp.options"
+          [value]="_option.weight">
+          <span class="mat-body-2">{{_option.name}}</span>
+        </mat-radio-button>
+      </mat-radio-group>
+      <!-- </ng-container> -->
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #count let-data="data">
+  <div class="flex flex-1 flex-center ">
+    <div *ngFor="let d of data; let indx=index" class="flex  pag" [ngClass]="{
+        'ws-mat-black040-background' : indx!=selectedQIndex,
+        'active-page' : indx==selectedQIndex
+
+       }">
+      <span class="margin-auto mat-subheading-2">{{indx+1}}</span>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #result let-data="data">
+  <mat-card class="ws-mat-accent-border">
+    <mat-card-title class="m-auto">
+      <span class="mat-title" id="content-result">{{'Content quality report'}}</span>
+    </mat-card-title>
+    <mat-card-content class="margin-top-xs mobile-break mat-app-background">
+      <div class="flex flex-1 flex-column">
+        <div class="flex flex-1">
+          <span class="mat-title">{{79}}%</span>
+        </div>
+        <div class="flex flex-075">
+          <mat-progress-bar class="margin-bottom-m quality-progress" aria-labelledby="content-result" mode="determinate"
+            [value]="79">
+          </mat-progress-bar>
+        </div>
+        <div class="flex flex-1">
+          <button mat-button type="button" class="margin-top-s margin-bottom-s ws-mat-accent-border margin-left-s"
+            (click)="nextQ()">
+            <mat-icon>cloud_download</mat-icon>
+            <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>
+              download
+            </span>
+          </button>
+        </div>
+        <div class="flex flex-1 margin-top-m flex-column">
+          <ng-container *ngIf="isResultExpend">
+            <ng-container *ngFor="let a of [1,2,3,4,5,6,7]">
+              <ng-container [ngTemplateOutlet]="resultReport" [ngTemplateOutletContext]="{data:{}}">
+              </ng-container>
+            </ng-container>
+          </ng-container>
+          <div class="flex flex-1 flex-center ws-mat-background-04 ws-mat-accent-text cursor-pointer"
+            (click)="showHideResult()">
+            <span class="flex mat-subheading-2 see-repo"> {{!isResultExpend?'See full report':'Collapse'}}
+              <mat-icon *ngIf="!isResultExpend" class="ws-mat-accent-text">expand_more</mat-icon>
+              <mat-icon *ngIf="isResultExpend" class="ws-mat-accent-text">expand_less</mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
+    <button mat-raised-button type="button" (click)="takeAgain()"
+      class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s">
+      <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Take test again
+      </span>
+    </button>
+    <button mat-raised-button type="button" class="text-white ws-mat-primary-background margin-left-s">
+      <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Self curation
+      </span>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #resultReport let-data="data">
+  <mat-table [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Instructional Methods</span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.name}}</span> </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="response">
+      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Response</span> </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.response}}</span> </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="score">
+      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Score</span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.score}}</span> </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="help">
+      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Help</span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.help}}</span> </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns" class="ws-mat-background-04"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</ng-template>

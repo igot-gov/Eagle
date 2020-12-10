@@ -9,7 +9,7 @@ import { NsAnalytics, NsCourseAnalytics } from '../../interface/app-toc-analytic
 import { MyTocService } from '../../services/my-toc.service'
 
 @Component({
-  selector: 'ws-app-content-Insights',
+  selector: 'ws-auth-content-insights',
   templateUrl: './content-Insights.component.html',
   styleUrls: ['./content-Insights.component.scss'],
   // providers: [AppTocService]

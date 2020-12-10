@@ -27,6 +27,8 @@
   $iconColor: mat-color($foreground, icon);
   $colorGreen: #5fa800;
   $colorRed: #ff0000;
+  $colorTogglebtn: #F3F8FB;
+  $colorTogglebtnBorder: rgb(0, 116, 182);
   $footerColor: #373434;
   $footerTextColor: #dedfe0;
   $colorWhite: #ffffff;
@@ -226,6 +228,10 @@
       color: $colorBlack40;
     }
 
+    .ws-mat-black040-background {
+      background: $colorBlack040;
+    }
+
     .ws-mat-primary-tags-list {
       background: rgba(mat-color($primary, default), 0.1);
     }
@@ -315,6 +321,10 @@
 
     .mat-form-field.mat-focused .mat-form-field-label {
       color: $colorPrimaryDark !important;
+    }
+
+    .ws-mat-black040-background {
+      background: $colorBlack040;
     }
 
     .mat-form-field-outline-thick {
@@ -527,6 +537,10 @@
       color: $colorLighterGrey;
     }
 
+    .ws-mat-lighter-grey-background {
+      background-color: $colorLighterGrey;
+    }
+
     .ws-mat-default-text {
       color: $colorAccent;
     }
@@ -616,8 +630,9 @@
 
     .mat-button-toggle-checked {
       // background-color: mat-color($primary);
-      color: $colorPrimary !important;
-      background-color: $colorAccentDark;
+      color: $colorTogglebtnBorder !important;
+      border-color: $colorTogglebtnBorder !important;
+      background-color: $colorTogglebtn !important;
     }
 
     .ws-mat-button-theme {

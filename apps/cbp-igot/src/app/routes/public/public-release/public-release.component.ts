@@ -15,8 +15,6 @@ export class PublicReleaseComponent implements OnInit, OnDestroy {
   // isSmallScreen$ = this.breakpointObserver
   //   .observe(Breakpoints.XSmall)
   //   .pipe(map(breakPointState => breakPointState.matches))
-
-
   constructor(
     // private breakpointObserver: BreakpointObserver,
     // private domSanitizer: DomSanitizer,
@@ -28,8 +26,6 @@ export class PublicReleaseComponent implements OnInit, OnDestroy {
     this.subscriptionRelease = this.activateRoute.data.subscribe(data => {
       this.releasePage = data.pageData.data
     })
-
-
   }
 
   ngOnDestroy() {

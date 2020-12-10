@@ -1,7 +1,7 @@
 export const ROOT_WIDGET_CONFIG = {
   atGlance: {
     _type: 'atGlance',
-    default: 'default'
+    default: 'default',
   },
   actionButton: {
     _type: 'actionButton',
@@ -29,7 +29,7 @@ export const ROOT_WIDGET_CONFIG = {
   },
   authorCard: {
     _type: 'authorCard',
-    default: 'default'
+    default: 'default',
   },
   card: {
     _type: 'card',

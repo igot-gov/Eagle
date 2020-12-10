@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
-  selector: 'ws-content-discussion',
+  selector: 'ws-auth-content-discussion',
   templateUrl: './content-discussion.component.html',
   styleUrls: ['./content-discussion.component.scss'],
 })

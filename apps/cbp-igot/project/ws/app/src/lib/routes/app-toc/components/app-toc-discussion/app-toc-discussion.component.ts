@@ -20,7 +20,7 @@ export class AppTocDiscussionComponent implements OnChanges, OnInit {
   constructor(private activatedRoute: ActivatedRoute, private configSvc: ConfigurationsService) { }
 
   ngOnChanges() {
-    this.forPreview = false //window.location.href.includes('/author/')
+    this.forPreview = false //  window.location.href.includes('/author/')
     if (this.content) {
       this.discussionForumWidget = {
         widgetData: {

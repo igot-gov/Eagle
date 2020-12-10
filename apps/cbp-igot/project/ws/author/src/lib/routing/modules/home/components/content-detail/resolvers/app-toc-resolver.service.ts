@@ -87,7 +87,9 @@ export class AppTocResolverService
   //           // currentRoute = currentRoute[currentRoute.length - 1]
   //           // if (forPreview && currentRoute !== 'contents' && currentRoute !== 'overview') {
   //           //   this.router.navigate([
-  //           //     `${forPreview ? '/author' : '/app'}/toc/${resolveData.data.identifier}/${resolveData.data.children.length ? 'contents' : 'overview'
+  //           //     `${forPreview ? '/author' :
+  //            '/app'}/toc/${resolveData.data.identifier}/${resolveData.data.children.length ?
+  //                        'contents' : 'overview'
   //           //     }`,
   //           //   ])
   //           // } else if (
