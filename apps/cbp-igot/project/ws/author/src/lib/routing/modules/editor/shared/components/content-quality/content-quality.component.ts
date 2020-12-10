@@ -104,7 +104,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     const newControl = this.formBuilder.group({
       question: [questionObj.question || '', [Validators.required, Validators.pattern(noWhiteSpace)]],
       position: [questionObj.position || 0],
-      options: this.createOptionControl(questionObj.options)
+      options: this.createOptionControl(questionObj.options),
     })
     const optionsArr = this.qualityForm.controls['questions'] as FormArray
     optionsArr.push(newControl)
@@ -114,7 +114,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       return this.formBuilder.group({
         name: [v.name],
         weight: [v.weight],
-        selected: [v.selected || false, [Validators.required]]
+        selected: [v.selected || false, [Validators.required]],
       })
     })
   }
