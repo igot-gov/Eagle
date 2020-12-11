@@ -43,6 +43,7 @@ export class GoalCardComponent implements OnInit {
   updatedGoalDuration = 1
   isGoalContentViewMore: { [goalId: string]: boolean } = {}
   isShareEnabled = false
+  goalData: any
 
   goalProgressBarStyle: { left: string } = { left: '0%' }
 
@@ -69,6 +70,7 @@ export class GoalCardComponent implements OnInit {
         left: `${Math.min(85, progress + 1)}%`,
       }
     }
+    this.loadGoalData()
   }
 
   checkNoAccess(goal: NsGoal.IGoal) {
@@ -83,6 +85,19 @@ export class GoalCardComponent implements OnInit {
       hasAccess = goal.contentProgress.map(content => (!content.hasAccess ? false : true))
     }
     return hasAccess.includes(false)
+  }
+
+  loadGoalData() {
+    if (this.goal) {
+      this.goalSvc
+        .getGoalContent(this.goal.identifier)
+        .subscribe(
+          (data) => {
+            this.goalData = data
+          },
+
+        )
+    }
   }
 
   editGoal() {

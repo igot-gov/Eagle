@@ -10,12 +10,12 @@ import { TFetchStatus } from '@ws-widget/utils'
 })
 export class GoalMeComponent implements OnInit {
   fetchGoalsStatus: TFetchStatus = 'none'
-  userGoals: NsGoal.IUserGoals = this.route.snapshot.data.userGoals.data
+  userGoals: NsGoal.IUserGoals = this.route.snapshot.data.userGoals.data.result
   error = this.route.snapshot.data.userGoals.error
 
   type = this.route.snapshot.data.type || 'all'
 
-  constructor(private route: ActivatedRoute, private goalsSvc: BtnGoalsService) {}
+  constructor(private route: ActivatedRoute, private goalsSvc: BtnGoalsService) { }
 
   ngOnInit() {
     // TODO: remove hardcoding of goal progress

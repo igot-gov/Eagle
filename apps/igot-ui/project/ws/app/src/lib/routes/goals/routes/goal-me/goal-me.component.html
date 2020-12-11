@@ -18,7 +18,7 @@
   </div>
   <ng-container *ngIf="fetchGoalsStatus !== 'fetching'">
     <section *ngIf="type === 'all'" class="margin-top-m margin-bottom-xl">
-      <ng-container *ngIf="!(userGoals?.goalsInProgress?.length || userGoals?.completedGoals?.length)">
+      <!-- <ng-container *ngIf="!(userGoals?.goalsInProgress?.length || userGoals?.completedGoals?.length)">
         <h2 class="mat-title">You have not added any Goals.</h2>
         <div class="flex items-center">
           <h3 class="mat-subheading-2 margin-remove-bottom" i18n>Click on</h3>
@@ -27,9 +27,9 @@
           </a>
           <h3 class="mat-subheading-2 margin-remove-bottom" i18n>to get started</h3>
         </div>
-      </ng-container>
-      <div *ngFor="let goal of userGoals?.goalsInProgress.concat(userGoals?.completedGoals)" class="margin-bottom-m">
-        <ws-app-goal-card type="me" [goal]="goal" (updateGoals)="updateGoals()" (deletedGoal)="deletedGoal(goal?.id)">
+      </ng-container> -->
+      <div *ngFor="let goal of userGoals.content" class="margin-bottom-m">
+        <ws-app-goal-card type="me" [goal]="goal" (updateGoals)="updateGoals()" (deletedGoal)="deletedGoal()">
         </ws-app-goal-card>
       </div>
     </section>
