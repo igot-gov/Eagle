@@ -30,6 +30,7 @@ export namespace NSProfileDataV2 {
     personalDetails: IPersonalDetails
     professionalDetails: IProfessionalDetails[]
     skills: ISkills
+    result: any
 
   }
   export interface IAcademics {
