@@ -65,7 +65,7 @@ proxiesV8.use('/sunbird/*',
 
 proxiesV8.use('/action/*',
   // tslint:disable-next-line: max-line-length
-  proxyCreatorSunbird(express.Router(), `http://knowledge-mw-service:5000/course/v1/hierarchy/`)
+  proxyCreatorSunbird(express.Router(), `http://knowledge-mw-service:5000/action/course/v1/hierarchy/`)
 )
 
 proxiesV8.use('/api/user/v2/read',
