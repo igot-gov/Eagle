@@ -246,6 +246,8 @@ export namespace NsUser {
     source_profile_picture?: null | string
     dealerCode?: null | string
     isManager?: boolean
+    lastName?: string
+    firstName?: string
   }
   export interface IUserPidProfile {
     kid_updated: boolean
