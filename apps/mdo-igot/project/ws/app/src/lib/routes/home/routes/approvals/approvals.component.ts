@@ -84,7 +84,7 @@ export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   onApprovalClick(approval: any) {
     this.router.navigate([`/app/approvals/${approval.fullname}/to-approve`],
-      {
+                         {
         queryParams: { updatedFileds: JSON.stringify(approval.updatedFileds) },
       }
     )
