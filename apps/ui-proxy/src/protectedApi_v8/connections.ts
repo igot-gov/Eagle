@@ -188,8 +188,8 @@ connectionsApi.post('/add/connection', async (req, res) => {
     const userNameFrom = req.body.userNameFrom
     const userDepartmentFrom = req.body.userDepartmentFrom
     const userIdTo = req.body.userIdTo
-    const userNameTo = req.body.userIdTo
-    const userDepartmentTo = req.body.userIdTo
+    const userNameTo = req.body.userNameTo
+    const userDepartmentTo = req.body.userDepartmentTo
 
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
@@ -239,8 +239,8 @@ connectionsApi.post('/update/connection', async (req, res) => {
     const userDepartmentFrom = req.body.userDepartmentFrom
     const userIdFrom = extractUserIdFromRequest(req)
 
-    const userNameTo = req.body.userIdTo
-    const userDepartmentTo = req.body.userIdTo
+    const userNameTo = req.body.userNameTo
+    const userDepartmentTo = req.body.userDepartmentTo
     const userIdTo = req.body.userIdTo
 
     const status = req.body.status
