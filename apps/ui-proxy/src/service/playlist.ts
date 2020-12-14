@@ -99,3 +99,43 @@ export function transformToSbExtPatchRequest(updateRequest: IPlayListUpdateReque
     playlist_title: updateRequest.playlist_title,
   }
 }
+
+export function formPlaylistRequestObj(request: IPlaylistCreateRequest, userId: string) {
+  /* for Patch request to change playlist title */
+  return {
+    request: {
+      content: {
+        code: 'org.ekstep0.29884945860157064123',
+        contentType: 'Collection',
+        createdBy: userId,
+        creator: 'Rangabashyam',
+        license: 'CC BY 4.0',
+        mimeType: 'application/vnd.ekstep.content-collection',
+        name: request.playlist_title,
+        primaryCategory: 'Playlist',
+      },
+    },
+  }
+}
+
+export function formContentRequestObj(req: { content_ids: string[] }, res: { result: { identifier: string } }, _userId: string) {
+  /* for Patch request to change playlist title */
+  const id = res.result.identifier
+  const hierarchy = {}
+
+  hierarchy[id] = {
+    children: req.content_ids,
+    contentType: 'Collection',
+    root: true,
+  }
+
+  return {
+    request: {
+      data: {
+        hierarchy,
+        nodesModified: {},
+      },
+    },
+  }
+
+}

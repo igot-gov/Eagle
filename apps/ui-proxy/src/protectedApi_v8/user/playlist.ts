@@ -13,9 +13,10 @@ import {
   IPlaylistUpsertRequest
 } from '../../models/playlist.model'
 import {
+  formContentRequestObj,
+  formPlaylistRequestObj,
   transformToPlaylistV2,
   transformToPlaylistV3,
-  transformToSbExtCreateRequest,
   transformToSbExtDeleteRequest,
   transformToSbExtPatchRequest,
   transformToSbExtSyncRequest,
@@ -433,20 +434,38 @@ playlistApi.post('/create', async (req, res) => {
   try {
     const request: IPlaylistCreateRequest = req.body
     const rootOrg = req.header('rootOrg')
+    const auth = req.header('Authorization')
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
-    const url = `${API_END_POINTS.playlistV1(userId)}/playlists`
+    const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/create`
     const response = await axios({
       ...axiosRequestConfig,
-      data: transformToSbExtCreateRequest(request),
+      data: formPlaylistRequestObj(request, userId),
       headers: {
-        rootOrg,
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
       },
       method: 'POST',
       url,
     })
+
+    const urll = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/update`
+
+    const response1 = await axios({
+      ...axiosRequestConfig,
+      data: formContentRequestObj(request, response.data, userId),
+      headers: {
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
+      },
+      method: 'PATCH',
+      url: urll,
+    })
+
     const userResponse = await getPlaylistsAllTypes(userId, rootOrg, null)
     if (userResponse.data) {
       const createdPlaylistId = userResponse.data.user[0].id
@@ -463,8 +482,9 @@ playlistApi.post('/create', async (req, res) => {
         res.status(shareResponse.status).send()
       }
     }
-    res.status(response.status).send()
+    res.status(response1.status).send()
   } catch (err) {
+    // console.log(err)
     res
       .status((err && err.response && err.response.status) || 500)
       .send((err && err.response && err.response.data) || {

@@ -104,9 +104,9 @@ export class PickerContentComponent extends WidgetBaseComponent
     const phraseSearchConfig = await this.searchServSvc.getApplyPhraseSearch()
     const searchConfig = await this.searchServSvc.getSearchConfig()
     const isStandAlone = searchConfig.search.tabs[0].isStandAlone
-    let applyIsStandAlone = false
+    // let applyIsStandAlone = false
     if (isStandAlone || isStandAlone === undefined) {
-      applyIsStandAlone = true
+      // applyIsStandAlone = true
     }
     this.debounceSubscription = this.debounceSubject
       .pipe(
@@ -118,16 +118,8 @@ export class PickerContentComponent extends WidgetBaseComponent
           if (phraseSearch && query.indexOf(' ') > -1 && phraseSearchConfig) {
             query = `"${query}"`
           }
-          return this.searchServSvc.searchV6Wrapper({
-            query,
-            locale: [this.language || 'en'],
-            filters:
-              this.customSearchFilters ?
-                this.customSearchFilters :
-                { contentType: this.selectedContentTypes },
-            isStandAlone: applyIsStandAlone ? applyIsStandAlone : undefined,
-            didYouMean: false,
-          })
+          // tslint:disable-next-line: max-line-length
+          return this.searchServSvc.searchV6Wrapper({ request: { filters: { visibility: ['Default'] }, query: '', sort_by: { lastUpdatedOn: 'desc' }, fields: [], facets: [] } })
         }),
       )
       .subscribe(
@@ -148,7 +140,7 @@ export class PickerContentComponent extends WidgetBaseComponent
               availableFilters.includes(filter.type),
             )
             if (this.displayFilters) {
-              const contentTypes = this.displayFilters.find((filter: any)  => filter.type === 'contentType')
+              const contentTypes = this.displayFilters.find((filter: any) => filter.type === 'contentType')
               if (contentTypes) {
                 contentTypes.content = contentTypes.content.filter(type =>
                   this.allowContentTypes.includes(type.type || ''),

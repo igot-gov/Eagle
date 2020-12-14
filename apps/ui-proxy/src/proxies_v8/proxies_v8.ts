@@ -56,7 +56,7 @@ proxiesV8.use(
 
 proxiesV8.use('/sunbirdigot/*',
   // tslint:disable-next-line: max-line-length
-  proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/content/v1/search`)
+  proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/composite/v1/search`)
 )
 
 proxiesV8.use('/sunbird/*',
