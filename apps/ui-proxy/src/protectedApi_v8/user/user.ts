@@ -38,6 +38,7 @@ import { ratingApi } from './rating'
 import { rdbmsApi } from './rdbms'
 import { realTimeProgressApi } from './realTimeProgress'
 import { rolesApi } from './roles'
+import { sbProfileApi } from './sbProfile'
 import { shareApi } from './share'
 import { skillsApi } from './skills'
 import { telemetryApi } from './telemetry'
@@ -78,6 +79,7 @@ user.use('/ocm', ocmApi)
 user.use('/playlist', playlistApi)
 user.use('/preference', protectedPreference)
 user.use('/profile', profileApi)
+user.use('/sbProfile', sbProfileApi)
 user.use('/profileDetails', profileDeatailsApi)
 user.use('/progress', progressApi)
 user.use('/rating', ratingApi)

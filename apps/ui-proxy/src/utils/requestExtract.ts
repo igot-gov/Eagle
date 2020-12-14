@@ -25,6 +25,28 @@ export const extractUserIdFromRequest = (req: IAuthorizedRequest): string => {
   }
   return (req.kauth && req.kauth.grant.access_token.content.sub) as string
 }
+
+export const extractAuthorizationFromRequest = (req: IAuthorizedRequest): string => {
+  const authorization = req.header('Authorization')
+  if (authorization) {
+    return authorization
+  }
+  return (req.kauth && req.kauth.grant.access_token.content.sub) as string
+}
+export const extractUserTokenFromRequest = (req: IAuthorizedRequest): string => {
+  const xAuthorization = req.header('X-Authenticated-User-Token')
+
+  return xAuthorization as string
+
+}
+
+export const extractRootOrgNameFromRequest = (req: IAuthorizedRequest): string => {
+  const rootOrgName = req.header('rootOrgName')
+
+  return rootOrgName as string
+
+}
+
 export const extractUserNameFromRequest = (req: IAuthorizedRequest) =>
   (req.kauth && req.kauth.grant.access_token.content.name) as string
 

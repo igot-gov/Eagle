@@ -7,7 +7,7 @@ let sessionConfig: expressSession.SessionOptions
 
 const cassandraClientOptions: cassandraDriver.ClientOptions = {
   contactPoints: [CONSTANTS.CASSANDRA_IP],
-  keyspace: 'portal',
+  keyspace: 'bodhi',
   queryOptions: {
     prepare: true,
   },
