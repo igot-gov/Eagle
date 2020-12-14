@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core'
   templateUrl: './create-mdo.component.html',
   styleUrls: ['./create-mdo.component.scss'],
 })
-export class CreateMdoComponentTest implements OnInit {
+export class CreateMdoComponent implements OnInit {
   userMgmtData: any = []
   fracData: any = []
   constructor() { }

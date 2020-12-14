@@ -29,6 +29,7 @@ import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule } f
 import { AboutComponent } from './routes/about/about.component'
 import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 import { DirectoryViewComponent } from './routes/directory/directroy.component'
+import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DirectoryViewComponent } from './routes/directory/directroy.component'
     AboutComponent,
     RolesAccessComponent,
     DirectoryViewComponent,
+    CreateMdoComponent,
   ],
   imports: [
     CommonModule,
