@@ -2,6 +2,7 @@ import express from 'express'
 import { CONSTANTS } from '../utils/env'
 import {
   ilpProxyCreatorRoute,
+  proxyCreatorKnowledge,
   proxyCreatorRoute,
   proxyCreatorSunbird,
   proxyCreatorSunbirdSearch,
@@ -65,7 +66,7 @@ proxiesV8.use('/sunbird/*',
 
 proxiesV8.use('/action/*',
   // tslint:disable-next-line: max-line-length
-  proxyCreatorSunbird(express.Router(), `http://knowledge-mw-service:5000/action/content/v3/hierarchy/`)
+  proxyCreatorKnowledge(express.Router(), `http://knowledge-mw-service:5000`)
 )
 
 proxiesV8.use('/api/user/v2/read',
