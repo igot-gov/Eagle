@@ -78,14 +78,9 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
 
 export function proxyCreatorKnowledge(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
-
+    const url = removePrefix('/proxies/v8', req.originalUrl)
     // tslint:disable-next-line: no-console
-
-    let url = removePrefix('/proxies/v8', req.originalUrl)
     console.log('REQ_URL_ORIGINAL proxyCreatorKnowledge', targetUrl + url)
-    // const lastSlug = req.originalUrl.split('/')
-    // const lastSlugId = lastSlug.pop() || ''
-    // const contentId = lastSlugId.split('?')[0]
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
@@ -95,10 +90,9 @@ export function proxyCreatorKnowledge(route: Router, targetUrl: string, _timeout
   return route
 }
 
-function removePrefix(prefix: string | any[], s: string) {
+function removePrefix(prefix: string, s: string) {
   return s.substr(prefix.length)
 }
-
 
 export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
