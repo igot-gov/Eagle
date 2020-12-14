@@ -1,7 +1,6 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
-import { ActivatedRoute } from '@angular/router'
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { debounceTime, map } from 'rxjs/operators'
 import { LoaderService } from '../../../../../../services/loader.service'
@@ -9,7 +8,8 @@ import { EditorContentService } from '../../../services/editor-content.service'
 /* tslint:disable */
 import _ from 'lodash'
 import { AuthInitService } from '../../../../../../services/init.service'
-import { IQualityQuestion, IQualityQuestionOption, IQuestionConfig } from '../../../../../../interface/content-quality'
+import { NSIQuality } from '../../../../../../interface/content-quality'
+// import { ValueService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 /* tslint:enable */
 const ELEMENT_DATA: any[] = [
   { response: 1, name: 'Hydrogen', score: 1.0079, help: 'H' },
@@ -45,25 +45,28 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   mimeTypeRoute = ''
   isResultExpend = false
   selectedKey = ''
-  questionData!: IQuestionConfig[]
+  questionData!: NSIQuality.IQuestionConfig[]
   selectedIndex = 0
   lastQ = false
   displayResult = false
   selectedQIndex = 0
+  /**for side nav */
   mediumScreen = false
-  sideBarOpened = true
+  sideBarOpened = false
   mediumSizeBreakpoint$ = this.breakpointObserver
     .observe([Breakpoints.XSmall, Breakpoints.Small])
     .pipe(map((res: BreakpointState) => res.matches))
   mode$ = this.mediumSizeBreakpoint$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   leftArrow = true
+  /**for side nav: END */
   menus!: any
   wData: any
   displayedColumns: string[] = ['name', 'response', 'score', 'help']
   dataSource = ELEMENT_DATA
   constructor(
+    // private valueSvc: ValueService,
     private contentService: EditorContentService,
-    private activateRoute: ActivatedRoute,
+    // private activateRoute: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
     private loaderService: LoaderService,
     private authInitService: AuthInitService,
@@ -72,23 +75,35 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     this.fillData()
   }
   ngOnInit(): void {
+    this.sidenavSubscribe()
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
       if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
         this.viewMode = 'meta'
       }
     })
-    if (this.activateRoute.parent && this.activateRoute.parent.parent) {
-      // this.leftmenues = _.get(this.activateRoute.parent.snapshot.data, 'questions')
-      this.createForm()
-    }
+    this.qualityForm = new FormGroup({})
+    this.createForm()
+    // if (this.activateRoute.parent && this.activateRoute.parent.parent) {
+    // this.leftmenues = _.get(this.activateRoute.parent.snapshot.data, 'questions')
+
+    // }
+  }
+  sidenavSubscribe() {
+    this.mediumSizeBreakpoint$.subscribe(isLtMedium => {
+      this.mediumScreen = isLtMedium
+      this.sideBarOpened = !isLtMedium
+    })
+  }
+  logs(val: any) {
+    console.log(val)
   }
   createForm() {
     this.qualityForm = this.formBuilder.group({
-      questions: this.formBuilder.array([]),
+      questionsArray: this.formBuilder.array([]),
     })
-    if (this.questionData && this.questionData[this.selectedIndex] && this.questionData[this.selectedIndex].questions.length) {
-      this.questionData[this.selectedIndex].questions.forEach((v: IQualityQuestion) => {
+    if (this.questionData && this.questionData.length) {
+      this.questionData.forEach((v: NSIQuality.IQuestionConfig) => {
         if (v) {
           this.createQuestionControl(v)
         }
@@ -99,28 +114,38 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     })
   }
 
-  createQuestionControl(questionObj: IQualityQuestion) {
-    const noWhiteSpace = new RegExp('\\S')
+  createQuestionControl(questionObj: NSIQuality.IQuestionConfig) {
+    // const noWhiteSpace = new RegExp('\\S')
     const newControl = this.formBuilder.group({
-      question: [questionObj.question || '', [Validators.required, Validators.pattern(noWhiteSpace)]],
-      position: [questionObj.position || 0],
-      options: this.createOptionControl(questionObj.options),
+      name: new FormControl(questionObj.name),
+      type: new FormControl(questionObj.type),
+      desc: new FormControl(questionObj.desc),
+      ques: new FormArray(this.createQuesControl(questionObj.questions)),
     })
-    const optionsArr = this.qualityForm.controls['questions'] as FormArray
+    const optionsArr = this.qualityForm.controls['questionsArray'] as FormArray
     optionsArr.push(newControl)
   }
-  createOptionControl(optionObj: IQualityQuestionOption[]) {
+  createQuesControl(optionObj: NSIQuality.IQualityQuestion[]) {
     return optionObj.map(v => {
       return this.formBuilder.group({
-        name: [v.name],
-        weight: [v.weight],
-        selected: [v.selected || false, [Validators.required]],
+        questionText: [v.question],
+        questionPosition: [v.position],
+        options: new FormControl(),
       })
     })
   }
+  // createOptionControl(optionObj: IQualityQuestionOption[]) {
+  //   return optionObj.map(v => {
+  //     return this.formBuilder.group({
+  //       optionName: [v.name],
+  //       OptionValue: [v.weight],
+  //       optionSelected: [v.selected || false],
+  //     })
+  //   })
+  // }
+
   ngOnDestroy(): void {
     this.loaderService.changeLoad.next(false)
-
   }
   ngAfterViewInit(): void {
   }
@@ -160,6 +185,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     if (this.questionData && this.questionData[1] && this.questionData[1].type) {
       this.selectedIndex = 1
       this.selectedKey = this.questionData[1].type
+      // this.createForm()
     }
   }
   nextQ() {
@@ -194,9 +220,33 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       }
     }
   }
+  get getCurrentQuestions() {
+    return this.questionData[this.selectedIndex].questions
+  }
+  isTouched(key: string, index: number) {
+    // let data = this.qualityForm.value
+    if (key === 'menu') {
+      if (this.displayResult) {
+        return true
+      } else if (this.selectedIndex != 0 && index === 0) {
+        return true
+      } else if (this.selectedIndex > index) {
+        return true
+      }
+    } else {
+      if (this.selectedQIndex != 0 && index === 0) {
+        return true
+      } else if (this.selectedQIndex > index) {
+        return true
+      }
+    }
+    return false
+  }
   submitResult(qualityForm: any) {
     if (qualityForm) {
-
+      /* tslint:disable */
+      console.log(qualityForm)
+      /* tslint:disable */
     }
     this.displayResult = true
   }
@@ -205,6 +255,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
   takeAgain() {
     this.displayResult = false
+    this.lastQ = false
     this.selectedIndex = 0
     this.selectedQIndex = 0
     this.selectedKey = this.questionData[0].type

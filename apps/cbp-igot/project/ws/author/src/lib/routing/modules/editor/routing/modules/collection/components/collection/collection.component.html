@@ -60,7 +60,8 @@
         <span>4. Self curation</span>
       </ng-template>
       <ng-template matTabContent>
-        Content 4 -
+        <ws-auth-content-self-curation [parentContent]="currentParentId" [class.hidden]="viewMode !== 'meta'"
+          [isSubmitPressed]="isSubmitPressed" type="" (data)="action($event)"></ws-auth-content-self-curation>
       </ng-template>
     </mat-tab>
     <mat-tab>

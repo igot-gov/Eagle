@@ -36,6 +36,8 @@
   $colorBlack60: rgba(0, 0, 0, 0.60);
   $colorBlack40: rgba(0, 0, 0, 0.40);
   $colorBlack040: rgba(0, 0, 0, 0.040);
+  $colorGray016: rgba(0, 0, 0, 0.16);
+
   $colorLighterGrey: #bbbcbc;
 
   outline-color: mat-color($accent, lighter);
@@ -91,6 +93,10 @@
       // color: $colorAccentLight !important;
       color: $colorPrimary;
       opacity: 0.8;
+    }
+
+    .mat-gray-016 {
+      background: $colorGray016;
     }
 
     // .mat-button{}
@@ -295,6 +301,10 @@
 
     .mat-primary {
       color: $colorText !important;
+    }
+
+    .mat-gray-016 {
+      background: $colorGray016;
     }
 
     .mat-ink-bar {

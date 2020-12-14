@@ -1,5 +1,13 @@
+<div *ngIf="mediumScreen">
+  <div class="ui" [ngClass]="{ toHide: !leftArrow }">
+    <button class="p-1" mat-icon-button (click)="sidenav.toggle(); leftArrow = !leftArrow" i18n-aria-label
+      aria-label="Open side panel" i18n-matTooltip matTooltipPosition="right" matTooltip="Open side panel">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</div>
 <mat-sidenav-container autosize="true" id="content-quality-side-nav" class="margin-top-m">
-  <mat-sidenav #sidenav [mode]="mode$ | async" [(opened)]="sideBarOpened" class="no-border"
+  <mat-sidenav #sidenav [mode]="mode$ | async" [(opened)]="sideBarOpened" class="no-border-sidenev"
     (closedStart)="sidenavClose()">
     <div class="sticky">
       <div class="contain">
@@ -8,6 +16,7 @@
             <ng-container *ngFor="let _menu of questionData; let i = index">
               <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i" [routerLink]="'.'"
                 (click)="selectMenu(_menu.type,i)" [class.ws-active-route-menu]="isLinkActive(_menu.type, i)">
+                <mat-icon *ngIf="isTouched('menu',i)">done</mat-icon>
                 <span class="padding-left-xs">{{_menu?.name}}</span>
               </a>
             </ng-container>
@@ -18,14 +27,68 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="pl-6 pr-6 ml-6">
+
     <form [formGroup]="qualityForm" (ngSubmit)="submitResult(qualityForm.value)">
-      <ng-container *ngIf="!displayResult">
-        <ng-container *ngFor="let quesParent of questionData; let idx=index">
+      <ng-container *ngIf="!displayResult" formArrayName="questionsArray">
+        <ng-container *ngFor="let quesParent of qualityForm.get('questionsArray').controls; index as idx">
           <ng-container *ngIf="idx === 0 && selectedIndex === 0" [ngTemplateOutlet]="instruction"
             [ngTemplateOutletContext]="quesParent">
           </ng-container>
           <ng-container *ngIf="idx !== 0 && selectedIndex === idx">
-            <ng-container [ngTemplateOutlet]="qLayout" [ngTemplateOutletContext]="{qp:quesParent}"></ng-container>
+            <mat-card class="ws-mat-accent-border" [formGroupName]="idx">
+              <mat-card-title class="m-auto">
+                <input name="sectionName" type="text" readonly class="mat-title no-border" formControlName="name">
+              </mat-card-title>
+              <input name="sectionDescription" type="text" readonly class="mat-body-1 no-border" formControlName="desc">
+              <mat-card-content class="margin-top-m mobile-break mat-app-background">
+                <ng-container *ngIf="qualityForm.get('questionsArray').controls
+                  && qualityForm.get('questionsArray').controls[idx]
+                  && qualityForm.get('questionsArray').controls[idx].get('ques')" formArrayName="ques">
+                  <ng-container
+                    *ngFor="let question of qualityForm.get('questionsArray').controls[idx].get('ques').controls; let qIdx = index"
+                    [formGroupName]="qIdx">
+                    <div class="flex flex-1 flex-column" *ngIf="selectedQIndex === qIdx">
+                      <div class="flex flex-1">
+                        <span class="mat-subheading-1 width-100">
+                          {{questionData[idx].questions[qIdx].question}}
+                        </span>
+                      </div>
+                      <div class="flex flex-column">
+                        <mat-radio-group form [name]="'group-' + question.position" class="flex tgl-group margin-top-s"
+                          aria-label="Select an option" formControlName="options">
+                          <mat-radio-button [name]="'radio-' + _option.name"
+                            class="flex flex-row itm-center ws-mat-accent-border margin-right-s"
+                            *ngFor="let _option of questionData[idx].questions[qIdx].options" [value]="_option.weight">
+                            <span class="mat-body-2">{{_option.name}}</span>
+                          </mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+              </mat-card-content>
+              <mat-card-actions>
+                <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
+                  <button mat-raised-button type="button"
+                    class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s" (click)="previousQ()">
+                    <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Previous question
+                    </span>
+                  </button>
+                  <ng-container [ngTemplateOutlet]="count">
+                  </ng-container>
+                  <button *ngIf="!lastQ" mat-raised-button type="button"
+                    class="text-white ws-mat-primary-background margin-left-s" (click)="nextQ()">
+                    <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next question
+                    </span>
+                  </button>
+                  <button *ngIf="lastQ" mat-raised-button type="submit"
+                    class="text-white ws-mat-primary-background margin-left-s">
+                    <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Submit
+                    </span>
+                  </button>
+                </div>
+              </mat-card-actions>
+            </mat-card>
           </ng-container>
         </ng-container>
       </ng-container>
@@ -75,76 +138,29 @@
   </mat-card>
 </ng-template>
 
-<ng-template #qLayout let-qp="qp">
-  <mat-card class="ws-mat-accent-border">
-    <mat-card-title class="m-auto">
-      <span class="mat-title">{{qp.name}}</span>
-    </mat-card-title>
-    <span class="mat-body-1">{{qp.desc}}</span>
-    <mat-card-content class="margin-top-m mobile-break mat-app-background">
-      <ng-container *ngFor="let question of qp.questions; let qIdx = index">
-        <ng-container *ngIf="selectedQIndex === qIdx" [ngTemplateOutlet]="q" [ngTemplateOutletContext]="{q:question}">
-        </ng-container>
-      </ng-container>
-    </mat-card-content>
-    <mat-card-actions>
-      <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
-        <button mat-raised-button type="button" class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s"
-          (click)="previousQ()">
-          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Previous question
-          </span>
-        </button>
-        <!-- <ng-container *ngFor="let question of qp.questions"> -->
-        <ng-container [ngTemplateOutlet]="count" [ngTemplateOutletContext]="{data:qp.questions}"></ng-container>
-        <!-- </ng-container> -->
-
-        <button *ngIf="!lastQ" mat-raised-button type="button"
-          class="text-white ws-mat-primary-background margin-left-s" (click)="nextQ()">
-          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next question
-          </span>
-        </button>
-        <button *ngIf="lastQ" mat-raised-button type="submit"
-          class="text-white ws-mat-primary-background margin-left-s">
-          <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Submit
-          </span>
-        </button>
-      </div>
-    </mat-card-actions>
-  </mat-card>
-</ng-template>
-
-
-<ng-template #q let-qp="q">
-  <div class="flex flex-1 flex-column">
-    <div class="flex flex-1">
-      <span class="mat-subheading-1">{{qp.question}}</span>
-    </div>
-    <div class="flex flex-column">
-      <!-- <ng-container [formGroup]="contentForm"> -->
-      <!-- formControlName="selected" -->
-      <mat-radio-group [name]="'group-' + qp.position" class="flex tgl-group margin-top-s"
-        aria-label="Select an option">
-        <!-- formControlName="complexityLevel"> -->
-        <mat-radio-button [name]="'radio-' + _option.name"
-          class="flex flex-row itm-center ws-mat-accent-border margin-right-s" *ngFor="let _option of qp.options"
-          [value]="_option.weight">
-          <span class="mat-body-2">{{_option.name}}</span>
-        </mat-radio-button>
-      </mat-radio-group>
-      <!-- </ng-container> -->
-    </div>
-  </div>
-</ng-template>
-
 <ng-template #count let-data="data">
   <div class="flex flex-1 flex-center ">
-    <div *ngFor="let d of data; let indx=index" class="flex  pag" [ngClass]="{
+    <ng-container *ngFor="let d of getCurrentQuestions; let indx=index">
+      <ng-container *ngIf="!isTouched('page',indx)">
+        <div class="flex  pag" [ngClass]="{
         'ws-mat-black040-background' : indx!=selectedQIndex,
         'active-page' : indx==selectedQIndex
-
        }">
-      <span class="margin-auto mat-subheading-2">{{indx+1}}</span>
-    </div>
+          <span class="margin-auto mat-subheading-2">
+            {{indx+1}}
+          </span>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="isTouched('page',indx)">
+        <div class="flex  pag">
+          <span class="completed-page">
+            <mat-icon class="ws-mat-accent-text">check_circle</mat-icon>
+          </span>
+        </div>
+      </ng-container>
+
+    </ng-container>
+
   </div>
 </ng-template>
 

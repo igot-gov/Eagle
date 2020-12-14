@@ -26,6 +26,9 @@ import { WidgetResolverModule } from '@ws-widget/resolver'
 import { MatRadioModule, MatTableModule } from '@angular/material'
 import { ContentQualityComponent } from './components/content-quality/content-quality.component'
 import { RouterModule } from '@angular/router'
+import { ContentSelfCurationComponent } from './components/content-self-curation/content-self-curation.component'
+import { CurationProgressCardComponent } from './components/content-self-curation/curation-progress-card/curation-progress-card.component'
+import { SelfCurationService } from './services/self-curation.service'
 
 @NgModule({
   declarations: [
@@ -44,6 +47,8 @@ import { RouterModule } from '@angular/router'
     OptionsComponent,
     CompetencyAddPopUpComponent,
     ContentQualityComponent,
+    ContentSelfCurationComponent,
+    CurationProgressCardComponent,
   ],
   imports: [
     CommonModule,
@@ -73,8 +78,9 @@ import { RouterModule } from '@angular/router'
     OptionsComponent,
     CompetencyAddPopUpComponent,
     ContentQualityComponent,
+    ContentSelfCurationComponent,
   ],
   entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent],
-  providers: [UploadService],
+  providers: [UploadService, SelfCurationService],
 })
 export class EditorSharedModule { }

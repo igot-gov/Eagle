@@ -4,7 +4,7 @@ import { ICreateEntity } from './../interface/create-entity'
 import { IFormMeta } from './../interface/form'
 import { IConditionsV2 } from '../interface/conditions-v2'
 import { IMetaUnit } from '../routing/modules/editor/interface/meta'
-import { IContentQualityConfig } from '../interface/content-quality'
+import { NSIQuality } from '../interface/content-quality'
 
 interface IPermission {
   conditions: IConditionsV2
@@ -23,7 +23,7 @@ export class AuthInitService {
   authConfig!: IFormMeta
   authMetaV2!: { [key: string]: IMetaUnit<any> }
   ordinals: any
-  contentQuality!: IContentQualityConfig
+  contentQuality!: NSIQuality.IContentQualityConfig
   authAdditionalConfig!: any
   collectionConfig!: ICollectionEditorConfig
   creationEntity = new Map<string, ICreateEntity>()

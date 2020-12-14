@@ -1,0 +1,77 @@
+<div *ngIf="mediumScreen">
+  <div class="ui" [ngClass]="{ toHide: !leftArrow }">
+    <button class="p-1" mat-icon-button (click)="sidenav.toggle(); leftArrow = !leftArrow" i18n-aria-label
+      aria-label="Open side panel" i18n-matTooltip matTooltipPosition="right" matTooltip="Open side panel">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</div>
+<mat-sidenav-container autosize="true" id="content-quality-side-nav" class="margin-top-m">
+  <mat-sidenav #sidenav [mode]="mode$ | async" [(opened)]="sideBarOpened" class="no-border-sidenev"
+    (closedStart)="sidenavClose()">
+    <div class="sticky1">
+      <div class="contain">
+        <div class="pad-l-4r flex-column">
+          <div class="flex flex-1 status-div flex-center center text-white mat-gray-016">
+            <span class="mat-subheading-2">{{'Curation in progress'}}</span>
+          </div>
+          <div class="flex flex-1 flex-column margin-top-l">
+            <span class="flex mat-body-2">Results</span>
+            <div class="flex flex-1 flex-column clean-div">
+              <span class="mat-title margin-left-m margin-top-m">0</span>
+              <span class="mat-subheading-2 margin-left-m">Clean</span>
+            </div>
+          </div>
+          {{leftmenudata | json }}
+          <ng-container *ngIf="leftmenudata && leftmenudata.length>0">
+            <ng-container *ngFor="let ld of leftmenudata">
+              <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
+            count:ld,
+            critical: true,
+            name:'Critical Issues'
+          }}">
+              </ng-container>
+              <!-- <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
+             count:1,
+            potential: true,
+            name: 'Potential issues'
+          }}">
+          </ng-container> -->
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="pl-6 pr-6 ml-6">
+    <div class="flex flex-1 flex-column">
+      <div class="flex flex-1 flex-column">
+        <span class="flex flex-1 mat-subheading-1">Curation in progress (25%)</span>
+        <mat-progress-bar class="margin-bottom-m quality-progress" aria-labelledby="content-result" mode="determinate"
+          [value]="79">
+        </mat-progress-bar>
+      </div>
+      <div class="flex flex-1 flex-column">
+        <span class="flex flex-1 mat-subheading-1"> In progress</span>
+        <ng-container *ngFor="let chield of contentMeta.children">
+          <ws-auth-curation-progress-card [contentMeta]="chield" [parentId]="contentMeta.identifier"
+            [parentName]="contentMeta.name">
+          </ws-auth-curation-progress-card>
+        </ng-container>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ng-template #leftIssues let-data="data">
+  <div class="flex flex-1 flex-column left-issue-div margin-top-m ws-mat-accent-border">
+    <span class="mat-title margin-left-m margin-top-m">{{data.count}}</span>
+    <span class="flex flex-1 margin-left-m">
+      <mat-icon class="critical" *ngIf="data.critical">error</mat-icon>
+      <mat-icon class="warn" *ngIf="data.potential">warning</mat-icon>
+      <span class="mat-subheading-2 margin-left-xs">{{data.name}}</span>
+    </span>
+  </div>
+</ng-template>

@@ -23,6 +23,34 @@
   border: none !important;
 }
 
+.critical {
+  color: #D13924 !important;
+}
+
+.warn {
+  color: #FF8268 !important;
+}
+
+.clean-div {
+  background: #CEE4F0;
+  border-radius: 4px;
+}
+
+.left-issue-div {
+  border-radius: 4px;
+}
+
+.status-div {
+  min-width: 184px;
+  min-height: 48px;
+  border-radius: 4px;
+
+  span {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}
+
 .width-100 {
   width: 100%;
 }
@@ -106,4 +134,13 @@
 
 .text-white {
   color: #fff !important;
+}
+
+.sticky1 {
+  margin-right: $size-m;
+}
+
+.fill-red {
+  color: #CB5641 !important;
+
 }

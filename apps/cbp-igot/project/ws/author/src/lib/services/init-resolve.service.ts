@@ -14,7 +14,7 @@ import { AVAILABLE_LOCALES } from './../constants/constant'
 import { AccessControlService } from './../modules/shared/services/access-control.service'
 import { CKEditorResolverService } from './ckeditor-resolve.service'
 import { AuthInitService } from './init.service'
-import { IContentQualityConfig } from '../interface/content-quality'
+import { NSIQuality } from '../interface/content-quality'
 
 @Injectable()
 export class InitResolver implements Resolve<NSContent.IContentMeta> {
@@ -73,7 +73,7 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
     }
     if (data.includes('content-quality') && !this.authInitService.collectionConfig) {
       forkProcess.push(
-        this.apiService.get<IContentQualityConfig>(
+        this.apiService.get<NSIQuality.IContentQualityConfig>(
           `${this.configurationsService.baseUrl}/feature/auth-content-quality.json`,
         ),
       )
