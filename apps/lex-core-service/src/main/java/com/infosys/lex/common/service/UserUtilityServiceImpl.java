@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -257,7 +258,7 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> getUsersFromActiveDirectory(List<String> emails){
+	public List<Map<String, Object>> getUsersFromActiveDirectory(List<String> emails) {
 		List<Map<String, Object>> ret = new ArrayList<>();
 		String sbExtHost = props.getSbextServiceHost();
 		String sbExtPort = props.getSbextPort();
@@ -407,53 +408,54 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			}
 
 		} else {
-			
+
 			/*
 			 * New impl
 			 */
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
-			
-			/*Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org"));
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
-			conditions.put("wid", userId);
-			pidRequestMap.put("conditions", conditions);*/
+
+			/*
+			 * Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+			 * pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org"));
+			 * Map<String, String> conditions = new HashMap<String, String>();
+			 * conditions.put("root_org", rootOrg); conditions.put("wid", userId);
+			 * pidRequestMap.put("conditions", conditions);
+			 */
 			Map<String, String> filters = new HashMap<String, String>();
 			filters.put(PIDConstants.ROOT_ORG, rootOrg);
 			filters.put(PIDConstants.USER_ID, userId);
 			request.put(PIDConstants.FILTERS, filters);
-			
+
 			pidRequestMap.put("request", request);
 
 			try {
 
-				/*List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
-						pidRequestMap, List.class);*/
-				
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject( "http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user", pidRequestMap, List.class);
+				 */
+
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
 
-				/*if (pidResponse.isEmpty() || pidResponse == null) {
-					return false;
-				} else {
-					return (pidResponse.get(0).get("wid").equals(userId));
-				}*/
+				/*
+				 * if (pidResponse.isEmpty() || pidResponse == null) { return false; } else {
+				 * return (pidResponse.get(0).get("wid").equals(userId)); }
+				 */
 				SunbirdApiRespContent content = null;
-				
+
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					content = pidResponse.getResult().getResponse().getContent().get(0);
-					
+
 				}
 				if (content == null) {
 					return false;
 				} else {
 					return (content.getId().equals(userId));
 				}
-				
 
 			} catch (Exception e) {
 				throw new ApplicationLogicError("PID ERROR: ", e);
@@ -482,29 +484,29 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			result.put("invalid_users", userIds);
 
 		} else {
-			
+
 			/*
 			 * New Impl
 			 */
-			
-			
-			//Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			
+
+			// Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+
 			String userId = "[";
 			for (String uId : userIds) {
-				userId+=uId+",";
+				userId += uId + ",";
 			}
 			userId = userId.substring(0, userId.length() - 1);
 			userId = userId + "]";
-			
-			
-		/*	pidRequestMap.put("source_fields", Arrays.asList("wid"));
-			pidRequestMap.put("values", userIds);
 
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
-
-			pidRequestMap.put("conditions", conditions);*/
+			/*
+			 * pidRequestMap.put("source_fields", Arrays.asList("wid"));
+			 * pidRequestMap.put("values", userIds);
+			 * 
+			 * Map<String, String> conditions = new HashMap<String, String>();
+			 * conditions.put("root_org", rootOrg);
+			 * 
+			 * pidRequestMap.put("conditions", conditions);
+			 */
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
 
@@ -517,28 +519,28 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 			try {
 
-				/*List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
-						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
-						List.class);*/
-				
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user/multi-fetch/wid", pidRequestMap, List.class);
+				 */
+
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
 
-			/*	for (Map<String, Object> map : pidResponse) {
-					if (map.get("wid") != null) {
-						validUuids.add(map.get("wid").toString());
-						userIds.remove(map.get("wid"));
-					}
-				}*/
-				
+				/*
+				 * for (Map<String, Object> map : pidResponse) { if (map.get("wid") != null) {
+				 * validUuids.add(map.get("wid").toString()); userIds.remove(map.get("wid")); }
+				 * }
+				 */
+
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					for (SunbirdApiRespContent content : pidResponse.getResult().getResponse().getContent()) {
-							validUuids.add(content.getId().toString());
-							userIds.remove(content.getId());
+						validUuids.add(content.getId().toString());
+						userIds.remove(content.getId());
 					}
 				}
-				
 
 				result.put("valid_users", validUuids);
 				result.put("invalid_users", userIds);
@@ -571,13 +573,13 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			}
 
 		} else {
-			
+
 			/*
 			 * New Impl
 			 */
 
-			//List<String> sources = new ArrayList<>(source);
-			
+			// List<String> sources = new ArrayList<>(source);
+
 			String userId = "[";
 			for (String uId : userIds) {
 				userId = userId + "," + uId;
@@ -585,16 +587,17 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			userId = userId.substring(0, userId.length() - 1);
 			userId = userId + "]";
 
-			/*if (!sources.contains("wid")) {
-				sources.add("wid");
-			}*/
-			/*Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			pidRequestMap.put("source_fields", sources);
-			pidRequestMap.put("values", userIds);
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
-			pidRequestMap.put("conditions", conditions);*/
-			
+			/*
+			 * if (!sources.contains("wid")) { sources.add("wid"); }
+			 */
+			/*
+			 * Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+			 * pidRequestMap.put("source_fields", sources); pidRequestMap.put("values",
+			 * userIds); Map<String, String> conditions = new HashMap<String, String>();
+			 * conditions.put("root_org", rootOrg); pidRequestMap.put("conditions",
+			 * conditions);
+			 */
+
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
 
@@ -609,27 +612,27 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 			{
 
-			/*	List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
-						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
-						List.class);*/
-				
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user/multi-fetch/wid", pidRequestMap, List.class);
+				 */
+
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
-				
 
-				/*for (Map<String, Object> record : pidResponse) {
-					if (record.get("wid") != null && userIds.contains(record.get("wid"))) {
-						result.put(record.get("wid").toString(), record);
-					}
-				}*/
-				
+				/*
+				 * for (Map<String, Object> record : pidResponse) { if (record.get("wid") !=
+				 * null && userIds.contains(record.get("wid"))) {
+				 * result.put(record.get("wid").toString(), record); } }
+				 */
+
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					for (SunbirdApiRespContent content : pidResponse.getResult().getResponse().getContent()) {
 						result.put(content.getId(), content);
 					}
 				}
-				
 
 			} catch (Exception e) {
 				throw new ApplicationLogicError("PID ERROR: ", e);
@@ -660,54 +663,51 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		} else {
 
-			//List<String> sources = new ArrayList<>(source);
-			
+			// List<String> sources = new ArrayList<>(source);
+
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
-			
 
-			/*if (!sources.contains("wid")) {
-				sources.add("wid");
-			}*/
+			/*
+			 * if (!sources.contains("wid")) { sources.add("wid"); }
+			 */
 			Map<String, String> filters = new HashMap<String, String>();
 			filters.put(PIDConstants.ROOT_ORG, rootOrg);
 			filters.put(PIDConstants.USER_ID, userId);
 			request.put(PIDConstants.FILTERS, filters);
-			
-			
-			
 
-			/*Map<String, Object> pidRequestMap = new HashMap<>();
-			pidRequestMap.put("source_fields", sources);
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
-			conditions.put("wid", userId);
-			pidRequestMap.put("conditions", conditions);*/
-			
+			/*
+			 * Map<String, Object> pidRequestMap = new HashMap<>();
+			 * pidRequestMap.put("source_fields", sources); Map<String, String> conditions =
+			 * new HashMap<String, String>(); conditions.put("root_org", rootOrg);
+			 * conditions.put("wid", userId); pidRequestMap.put("conditions", conditions);
+			 */
+
 			pidRequestMap.put("request", request);
 
 			try {
-				/*List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
-						pidRequestMap, List.class);*/
-				
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject( "http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user", pidRequestMap, List.class);
+				 */
+
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
-				
 
-				/*if (!pidResponse.isEmpty()) {
-					Map<String, Object> record = pidResponse.get(0);
-					if (record.get("wid") != null && record.get("wid").equals(userId)) {
-						result.put(record.get("wid").toString(), record);
-
-					}
-				}*/
+				/*
+				 * if (!pidResponse.isEmpty()) { Map<String, Object> record =
+				 * pidResponse.get(0); if (record.get("wid") != null &&
+				 * record.get("wid").equals(userId)) { result.put(record.get("wid").toString(),
+				 * record);
+				 * 
+				 * } }
+				 */
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					SunbirdApiRespContent content = pidResponse.getResult().getResponse().getContent().get(0);
 					result.put(content.getId(), content);
 				}
-				
 
 			} catch (Exception e) {
 				throw new ApplicationLogicError("PID ERROR: ", e);
@@ -731,8 +731,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			}
 
 		} else {
-			//Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			
+			// Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+
 			String userId = "[";
 			for (String uId : userIds) {
 				userId = userId + "," + uId;
@@ -740,11 +740,12 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			userId = userId.substring(0, userId.length() - 1);
 			userId = userId + "]";
 
-			/*pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org", "email"));
-			pidRequestMap.put("values", userIds);
-			Map<String, String> conditions = new HashMap<>();
-			conditions.put("root_org", rootOrg);
-			pidRequestMap.put("conditions", conditions);*/
+			/*
+			 * pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org",
+			 * "email")); pidRequestMap.put("values", userIds); Map<String, String>
+			 * conditions = new HashMap<>(); conditions.put("root_org", rootOrg);
+			 * pidRequestMap.put("conditions", conditions);
+			 */
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
 
@@ -754,19 +755,22 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			request.put(PIDConstants.FILTERS, filters);
 
 			pidRequestMap.put("request", request);
-			
+
 			try {
 
-				/*List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
-						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
-						List.class);*/
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user/multi-fetch/wid", pidRequestMap, List.class);
+				 */
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
-				
 
-			/*	for (Map<String, Object> record : pidResponse) {
-					if (record.get("wid") != null && userIds.contains(record.get("wid"))) {
-						result.put(record.get("wid").toString(), record.get("email"));*/
+				/*
+				 * for (Map<String, Object> record : pidResponse) { if (record.get("wid") !=
+				 * null && userIds.contains(record.get("wid"))) {
+				 * result.put(record.get("wid").toString(), record.get("email"));
+				 */
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					for (SunbirdApiRespContent content : pidResponse.getResult().getResponse().getContent()) {
@@ -782,7 +786,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getUserEmailFromUserId(String rootOrg, String userId) {
+	public String getUserEmailFromUserId(String rootOrg, String userId, String authorization,
+			String xAuthenticatedUserToken) {
 
 		String dataSource = getUserDataSource(rootOrg);
 		if ("su".equalsIgnoreCase(dataSource)) {
@@ -796,12 +801,13 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		} else {
 
 			Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			/*pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org", "email"));
-			Map<String, Object> conditions = new HashMap<>();
-			conditions.put("root_org", rootOrg);
-			conditions.put("wid", userId);
-			pidRequestMap.put("conditions", conditions);*/
-			
+			/*
+			 * pidRequestMap.put("source_fields", Arrays.asList("wid", "root_org",
+			 * "email")); Map<String, Object> conditions = new HashMap<>();
+			 * conditions.put("root_org", rootOrg); conditions.put("wid", userId);
+			 * pidRequestMap.put("conditions", conditions);
+			 */
+
 			Map<String, Object> request = new HashMap<String, Object>();
 
 			Map<String, String> filters = new HashMap<String, String>();
@@ -810,24 +816,26 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			request.put(PIDConstants.FILTERS, filters);
 
 			pidRequestMap.put("request", request);
-
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization", authorization);
+			headers.add("X-Authenticated-User-Token", xAuthenticatedUserToken);
+			headers.setContentType(MediaType.APPLICATION_JSON);
 			try {
-			/*	List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-						"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user",
-						pidRequestMap, List.class);
-				if (pidResponse.isEmpty()) {
-					return null;
-				} else {
-					Map<String, Object> record = pidResponse.get(0);
-					if (record.get("wid").equals(userId)) {
-						return record.get("email").toString();
-					} else {
-						return null;
-					}
-				}*/
-				
-				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
-						pidRequestMap, SunbirdApiResp.class);
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject( "http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user", pidRequestMap, List.class); if (pidResponse.isEmpty()) { return
+				 * null; } else { Map<String, Object> record = pidResponse.get(0); if
+				 * (record.get("wid").equals(userId)) { return record.get("email").toString(); }
+				 * else { return null; } }
+				 */
+				String reqBodyData = new ObjectMapper().writeValueAsString(pidRequestMap);
+
+				HttpEntity<String> requestEnty = new HttpEntity<>(reqBodyData, headers);
+
+				String serverUrl = serverConfig.getPidUrl() + "api/user/v1/search";
+
+				SunbirdApiResp pidResponse = restTemplate.postForObject(serverUrl, requestEnty, SunbirdApiResp.class);
 
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
@@ -1035,27 +1043,29 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			result.put("invalid_users", userIds);
 
 		} else {
-			
+
 			/*
 			 * New Impl
 			 */
-			
-			//Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+
+			// Map<String, Object> pidRequestMap = new HashMap<String, Object>();
 			String userId = "[";
 			for (String uId : userIds) {
 				userId = userId + "," + uId;
 			}
 			userId = userId.substring(0, userId.length() - 1);
 			userId = userId + "]";
-			
-			/*pidRequestMap.put("source_fields", Arrays.asList("wid", "kid"));
-			pidRequestMap.put("values", userIds);
 
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
+			/*
+			 * pidRequestMap.put("source_fields", Arrays.asList("wid", "kid"));
+			 * pidRequestMap.put("values", userIds);
+			 * 
+			 * Map<String, String> conditions = new HashMap<String, String>();
+			 * conditions.put("root_org", rootOrg);
+			 * 
+			 * pidRequestMap.put("conditions", conditions);
+			 */
 
-			pidRequestMap.put("conditions", conditions);*/
-			
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
 
@@ -1068,25 +1078,24 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 			try {
 
-				/*List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
-						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
-						List.class);*/
-				
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user/multi-fetch/wid", pidRequestMap, List.class);
+				 */
+
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
-				
 
-				/*for (Map<String, Object> map : pidResponse) {
-					if (map.get("wid") != null && map.get("kid") != null && !map.get("kid").toString().isEmpty()) {
-						validUuids.add(map.get("wid").toString());
-						userIds.remove(map.get("wid"));
-					} else if (map.get("wid") != null && map.get("kid") == null
-							|| map.get("kid").toString().isEmpty()) {
-						newUsers.add(map.get("wid").toString());
-						userIds.remove(map.get("wid"));
-					}
-				}*/
-				
+				/*
+				 * for (Map<String, Object> map : pidResponse) { if (map.get("wid") != null &&
+				 * map.get("kid") != null && !map.get("kid").toString().isEmpty()) {
+				 * validUuids.add(map.get("wid").toString()); userIds.remove(map.get("wid")); }
+				 * else if (map.get("wid") != null && map.get("kid") == null ||
+				 * map.get("kid").toString().isEmpty()) {
+				 * newUsers.add(map.get("wid").toString()); userIds.remove(map.get("wid")); } }
+				 */
+
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					for (SunbirdApiRespContent content : pidResponse.getResult().getResponse().getContent()) {
@@ -1094,8 +1103,6 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 						userIds.remove(content.getId());
 					}
 				}
-				
-				
 
 				result.put("valid_users", validUuids);
 				result.put("invalid_users", userIds);
@@ -1131,24 +1138,25 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			result.put("invalid_users", userIds);
 
 		} else {
-			//Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-			
+			// Map<String, Object> pidRequestMap = new HashMap<String, Object>();
+
 			String userId = "[";
 			for (String uId : userIds) {
 				userId = userId + "," + uId;
 			}
 			userId = userId.substring(0, userId.length() - 1);
 			userId = userId + "]";
-			
-			
-			/*pidRequestMap.put("source_fields", Arrays.asList("wid", "kid"));
-			pidRequestMap.put("values", userIds);
 
-			Map<String, String> conditions = new HashMap<String, String>();
-			conditions.put("root_org", rootOrg);
+			/*
+			 * pidRequestMap.put("source_fields", Arrays.asList("wid", "kid"));
+			 * pidRequestMap.put("values", userIds);
+			 * 
+			 * Map<String, String> conditions = new HashMap<String, String>();
+			 * conditions.put("root_org", rootOrg);
+			 * 
+			 * pidRequestMap.put("conditions", conditions);
+			 */
 
-			pidRequestMap.put("conditions", conditions);*/
-			
 			Map<String, Object> pidRequestMap = new HashMap<>();
 			Map<String, Object> request = new HashMap<String, Object>();
 
@@ -1161,29 +1169,29 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 			try {
 
-				/*List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp()
-						+ ":" + serverConfig.getPidPort().toString() + "/user/multi-fetch/wid", pidRequestMap,
-						List.class);*/
-				
+				/*
+				 * List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://"
+				 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+				 * "/user/multi-fetch/wid", pidRequestMap, List.class);
+				 */
+
 				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 						pidRequestMap, SunbirdApiResp.class);
 
-				/*for (Map<String, Object> map : pidResponse) {
-					if (map.get("wid") != null && map.get("kid") != null && !map.get("kid").toString().isEmpty()) {
-						validUuids.add(map.get("wid").toString());
-					} else if (map.get("wid") != null && map.get("kid") == null
-							|| map.get("kid").toString().isEmpty()) {
-						newUsers.add(map.get("wid").toString());
-					}
-				}*/
-				
+				/*
+				 * for (Map<String, Object> map : pidResponse) { if (map.get("wid") != null &&
+				 * map.get("kid") != null && !map.get("kid").toString().isEmpty()) {
+				 * validUuids.add(map.get("wid").toString()); } else if (map.get("wid") != null
+				 * && map.get("kid") == null || map.get("kid").toString().isEmpty()) {
+				 * newUsers.add(map.get("wid").toString()); } }
+				 */
+
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {
 					for (SunbirdApiRespContent content : pidResponse.getResult().getResponse().getContent()) {
 						newUsers.add(content.getId());
 					}
 				}
-				
 
 				for (String userIdItr : userIds) {
 					if (!validUuids.contains(userIdItr) && !newUsers.contains(userIdItr))
@@ -1215,23 +1223,23 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> fetchUsersDataByUserProperty(String rootOrg, String userPropertyName,
 			List<String> propertyValues, List<String> sources, Map<String, Object> conditions) {
-		
-	/*
-	 * New Impl	
-	 */
-/*		Map<String, Object> result = new HashMap<>();
-		Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-		if (sources == null || sources.isEmpty())
-			sources = Arrays.asList("wid");
-		pidRequestMap.put("source_fields", sources);
-		pidRequestMap.put("values", propertyValues);
 
-		if (conditions == null)
-			conditions = new HashMap<>();
-
-		conditions.put("root_org", rootOrg);
-
-		pidRequestMap.put("conditions", conditions);*/
+		/*
+		 * New Impl
+		 */
+		/*
+		 * Map<String, Object> result = new HashMap<>(); Map<String, Object>
+		 * pidRequestMap = new HashMap<String, Object>(); if (sources == null ||
+		 * sources.isEmpty()) sources = Arrays.asList("wid");
+		 * pidRequestMap.put("source_fields", sources); pidRequestMap.put("values",
+		 * propertyValues);
+		 * 
+		 * if (conditions == null) conditions = new HashMap<>();
+		 * 
+		 * conditions.put("root_org", rootOrg);
+		 * 
+		 * pidRequestMap.put("conditions", conditions);
+		 */
 		Map<String, Object> result = new HashMap<>();
 		Map<String, Object> pidRequestMap = new HashMap<>();
 		Map<String, Object> request = new HashMap<String, Object>();
@@ -1241,16 +1249,16 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 		request.put(PIDConstants.FILTERS, filters);
 
 		pidRequestMap.put("request", request);
-		
 
 		try {
 
-			/*List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://" + serverConfig.getPidIp() + ":"
-					+ serverConfig.getPidPort().toString() + "/user/multi-fetch/" + userPropertyName, pidRequestMap,
-					List.class);*/
+			/*
+			 * List<Map<String, Object>> pidResponse = restTemplate.postForObject("http://"
+			 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+			 * "/user/multi-fetch/" + userPropertyName, pidRequestMap, List.class);
+			 */
 			SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 					pidRequestMap, SunbirdApiResp.class);
-			
 
 			result.put("usersDetail", pidResponse);
 		} catch (Exception e) {
@@ -1261,8 +1269,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	/**
 	 * This method fetches the list of users from PID based on the conditions
-	 * provided. Return Map with key "userDetail" which will be null if 
-	 * list is empty and the userdetailmap if not
+	 * provided. Return Map with key "userDetail" which will be null if list is
+	 * empty and the userdetailmap if not
 	 * 
 	 * @param rootOrg
 	 * @param conditions
@@ -1273,23 +1281,23 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> fetchUserDataByUserProperty(String rootOrg, Map<String, Object> conditions,
 			List<String> sources) {
-		
+
 		/*
-		 * New Impl	
+		 * New Impl
 		 */
 		Map<String, Object> result = new HashMap<>();
-	/*	Map<String, Object> pidRequestMap = new HashMap<String, Object>();
-		if (sources == null || sources.isEmpty())
-			sources = Arrays.asList("wid");
-		pidRequestMap.put("source_fields", sources);
+		/*
+		 * Map<String, Object> pidRequestMap = new HashMap<String, Object>(); if
+		 * (sources == null || sources.isEmpty()) sources = Arrays.asList("wid");
+		 * pidRequestMap.put("source_fields", sources);
+		 * 
+		 * if (conditions == null) conditions = new HashMap<>();
+		 * 
+		 * conditions.put("root_org", rootOrg);
+		 * 
+		 * pidRequestMap.put("conditions", conditions);
+		 */
 
-		if (conditions == null)
-			conditions = new HashMap<>();
-
-		conditions.put("root_org", rootOrg);
-
-		pidRequestMap.put("conditions", conditions);*/
-		
 		Map<String, Object> pidRequestMap = new HashMap<>();
 		Map<String, Object> request = new HashMap<String, Object>();
 
@@ -1301,10 +1309,12 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 		try {
 
-			/*List<Map<String, Object>> pidResponse = restTemplate.postForObject(
-					"http://" + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() + "/user/",
-					pidRequestMap, List.class);*/
-			
+			/*
+			 * List<Map<String, Object>> pidResponse = restTemplate.postForObject( "http://"
+			 * + serverConfig.getPidIp() + ":" + serverConfig.getPidPort().toString() +
+			 * "/user/", pidRequestMap, List.class);
+			 */
+
 			SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
 					pidRequestMap, SunbirdApiResp.class);
 

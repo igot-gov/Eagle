@@ -121,7 +121,10 @@ public interface UserUtilityService {
 
 	Map<String, Object> getUserEmailsFromUserIds(String rootOrg, List<String> userIds);
 
-	String getUserEmailFromUserId(String rootOrg, String userId);
+	/*
+	 * NewImpl
+	 */
+	String getUserEmailFromUserId(String rootOrg, String userId,String authorization,String xAuthenticatedUserToken);
 
 	boolean validatePreviewUser(String rootOrg, String org, String userId, Map<String, Object> contentMeta);
 
