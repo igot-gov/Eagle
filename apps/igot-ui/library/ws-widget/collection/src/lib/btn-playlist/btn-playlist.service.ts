@@ -84,19 +84,19 @@ export class BtnPlaylistService {
     // return this.playlistSubject[type].asObservable()
     return this.http
       .post(API_END_POINTS.getSearchData, {
-        "request": {
-          "filters": {
-            "primaryCategory": "Playlist",
-            "visibility": "Private",
-            "status": ["Draft", "Live"]
+        request: {
+          filters: {
+            primaryCategory: 'Playlist',
+            visibility: 'Private',
+            status: ['Draft', 'Live'],
 
           },
-          "fields": [],
-          "limit": 100,
-          "facets": [
+          fields: [],
+          limit: 100,
+          facets: [
 
-          ]
-        }
+          ],
+        },
       }
 
       )

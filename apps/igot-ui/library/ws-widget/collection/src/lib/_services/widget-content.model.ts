@@ -3,6 +3,15 @@ export namespace NsContent {
     continueData: any
   }
 
+  export interface IContinueLearningDataReq {
+    request: {
+      userId: string | undefined,
+      courseId: string,
+      contentIds: string[],
+      batchId: string
+    }
+  }
+
   export interface IContent {
     platform?: any
     addedOn: string
