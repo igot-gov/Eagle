@@ -37,7 +37,7 @@
                     "uri": ""
                 },
                 "enabled": true,
-                "routerLink": "/app/notifications"
+                "routerLink": "/app/home/approvals"
             },
             {
                 "name": "Competencies",

@@ -1,0 +1,35 @@
+<div class="flex flex-1 flex-column margin-top-m margin-left-xs margin-right-xs" id="basicinfo">
+  <mat-card class="flex-custom">
+    <mat-card-content>
+      <span class="mat-subheading-1 flex-4 mobile-margin" role="link" tabindex="0">
+        Basic Information
+      </span>
+      <div class="margin-top-xl new-mobile" *ngIf="basicDetails">
+        <div class="flex flex-wrap mobile-break">
+          <div class="w-full profile-cols-full bg-grey">
+            <ng-container>
+              <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">First Name</label>
+                  <input type="text" [disabled]="true" [(ngModel)]="basicDetails.firstname" class="appr-text-field">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Middle Name</label>
+                  <input type="text" [disabled]="true" [(ngModel)]="basicDetails.middlename" class="appr-text-field">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
+                  <label class="appr-text-label">Last Name</label>
+                  <input type="text" [disabled]="true" [(ngModel)]="basicDetails.surname" class="appr-text-field">
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <label class="appr-text-label">Profile Picture</label>
+                  <input type="text" class="appr-text-field">
+                </mat-grid-tile>
+              </mat-grid-list>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

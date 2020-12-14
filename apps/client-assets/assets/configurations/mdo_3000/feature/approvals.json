@@ -1,0 +1,22 @@
+{
+    "menus": {
+      "widgetType": "menus",
+      "widgetSubType": "leftMenu",
+      "widgetData": [
+        {
+          "name": "to-approve",
+          "key": "to-approve",
+          "fragment": false,
+          "render": true,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
+          "enabled": true,
+          "paramaterName":"approval",
+          "routerLink": "/app/approvals/<param>/to-approve",
+          "customRouting": true
+        }      
+      ]
+    }
+  }

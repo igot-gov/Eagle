@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
-import { Router, Event, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router'
+import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router'
 import { ILeftMenuWithoutLogo } from '@ws-widget/collection'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
 import { ValueService } from '@ws-widget/utils/src/public-api'
@@ -26,10 +26,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.widgetData = this.activeRoute.snapshot.data &&
           this.activeRoute.snapshot.data.pageData.data.menus || []
       }
-
-      if (event instanceof NavigationError) {
-
-      }
     })
   }
 
@@ -38,7 +34,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.sideNavBarOpened = !isLtMedium
       this.screenSizeIsLtMedium = isLtMedium
     })
-
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
   }

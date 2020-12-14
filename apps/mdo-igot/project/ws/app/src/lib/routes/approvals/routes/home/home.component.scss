@@ -1,6 +1,13 @@
+
 @import 'ws-common';
 @import 'ws-vars';
 @import 'ws-mixins';
+
+.container-balanced{
+  max-width: 99%;
+  margin-left: auto!important;
+  margin-right: auto!important;
+}
 
 .buton {
   display: flex;
@@ -276,4 +283,14 @@ a:not([href]):not([tabindex]) {
   .filter-option:first-child {
     margin-left: 0;
   }
+}
+
+.recent-tabs {
+  box-shadow: none !important;
+  border-radius: unset;
+  background: inherit !important;
+}
+
+.no-shadow {
+  box-shadow: none !important;
 }

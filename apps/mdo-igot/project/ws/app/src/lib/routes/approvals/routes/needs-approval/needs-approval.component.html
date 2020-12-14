@@ -1,0 +1,30 @@
+<div class="flex flex-1 flex-column margin-top-xs margin-left-xs margin-right-xs" id="needsapproval">
+  <mat-card class="flex-custom">
+    <mat-card-content>
+      <span class="mat-subheading-1 flex-4 mobile-margin" role="link" tabindex="0">
+        Needs approval
+      </span>
+      <span class="needs-appr-count-text">
+        Needs approval <span class="count">{{approvalList.length}}</span>
+      </span>
+      <div class="new-mobile">
+        <div class="flex flex-wrap mobile-break">
+          <div class="w-full profile-cols-full bg-grey">
+            <ng-container *ngFor="let field of approvalList">
+              <div><label class="appr-text-label">{{field.label}}</label><span class="dot"></span></div>
+              <div>
+                <input type="text" class="appr-text-field" [value]="field.value">
+                <button mat-icon-button aria-label="Reject">
+                  <mat-icon class="reject">cancel_presentation</mat-icon>
+                </button>
+                <button mat-icon-button aria-label="Accept">
+                  <mat-icon class="accept">check_box</mat-icon>
+                </button>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

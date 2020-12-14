@@ -1,0 +1,32 @@
+<div class="container-balanced">
+  <ws-widget-btn-page-back
+    [widgetData]="{titles:[{title:'Approvals', url:'/app/home/approvals'},{title:'To Approve', url:'none'},{title:approval,url:'none'}] }">
+  </ws-widget-btn-page-back>
+  <router-outlet></router-outlet>
+</div>
+
+<div class="flex flex-4 flex-column">
+  <div class="flex flex-1 custom">
+    <div class="flex-1" style="position: relative;">
+      <div #stickyMenu [class.sticky]="sticky">
+        <ws-widget-scrollspy-left-menu [currentTab]="currentTab" [tabsData]="tabsData" class="flex flex-1"
+          (eSideNavClick)="onSideNavTabClick($event)">
+        </ws-widget-scrollspy-left-menu>
+      </div>
+    </div>
+    <div class="flex-4">
+      <div class="flex flex-1 flex-column margin-left-xs margin-right-xs">
+        <!-- Needs approval card -->
+        <ws-app-needs-approval></ws-app-needs-approval>
+        <!-- Basic Info card -->
+        <ws-app-basic-info></ws-app-basic-info>
+        <!-- Position card -->
+        <ws-app-position></ws-app-position>
+        <!-- Education card -->
+        <ws-app-education></ws-app-education>
+        <!-- Role card -->
+        <ws-app-role></ws-app-role>
+      </div>
+    </div>
+  </div>
+</div>

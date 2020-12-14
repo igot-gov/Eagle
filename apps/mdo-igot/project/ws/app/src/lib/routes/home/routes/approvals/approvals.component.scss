@@ -60,13 +60,7 @@
   border-radius: 8px;
 }
 
-.sticky {
-  position: sticky;
-  top: calc(#{$mat-toolbar-gt-xs});
-  overflow: hidden;
-  // z-index: 10;
-  // width: 100%;
-}
+
 
 .text-box {
   display: flex;
@@ -277,3 +271,18 @@ a:not([href]):not([tabindex]) {
     margin-left: 0;
   }
 }
+
+.recent-tabs {
+  box-shadow: none !important;
+  border-radius: unset;
+  background: inherit !important;
+}
+
+.no-shadow {
+  box-shadow: none !important;
+}
+
+.mat-card-title{
+  margin-left: -31px !important;
+}
+

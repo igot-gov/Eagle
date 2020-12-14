@@ -52,11 +52,23 @@ const routes: Routes = [
   },
   {
     path: 'app/roles',
-    loadChildren: () => import('./routes/route-roles-access-module').then(u => u.RouteAccessAppModule),
+    loadChildren: () => import('./routes/route-roles-access.module').then(u => u.RouteAccessAppModule),
     canActivate: [GeneralGuard],
     data: {
       pageType: 'feature',
       pageKey: 'roles-access',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
+    path: 'app/approvals',
+    loadChildren: () => import('./routes/route-approvals.module').then(u => u.RouteApprovalsAppModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'approvals',
     },
     resolve: {
       pageData: PageResolve,
