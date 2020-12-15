@@ -110,7 +110,7 @@ export class BtnPlaylistService {
   getPlaylist(playlistId: string): Observable<NsPlaylist.IPlaylist | null> {
     // const params = new HttpParams().set('sourceFields', sourceFields)
     return this.http
-      .get<NsPlaylist.IPlaylist>(`/apis/proxies/v8/sunbird/${playlistId}?hierarchyType=detail&rootOrg&org`)
+      .get<NsPlaylist.IPlaylist>(`https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`)
   }
 
   deletePlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes) {
