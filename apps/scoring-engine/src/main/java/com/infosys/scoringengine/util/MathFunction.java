@@ -62,6 +62,12 @@ public class MathFunction {
         return  (maxValue.getAsDouble() * count) * weigtage;
     }
 
+    public static Double weightedScore(double totalValue, double maxvalue, double weigtage) {
+        if (maxvalue == 0)
+            return 0.0;
+        return (totalValue / maxvalue) * weigtage * 100;
+    }
+
 
 
 

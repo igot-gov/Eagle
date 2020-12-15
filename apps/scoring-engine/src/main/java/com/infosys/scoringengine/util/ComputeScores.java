@@ -19,6 +19,7 @@ import com.infosys.scoringengine.schema.model.Range;
 import com.infosys.scoringengine.schema.model.ScoringTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -36,6 +37,7 @@ public class ComputeScores {
     private static String identifierPrefix = "lex_score_";
 
     private ScoreCriteriaRepository scoreCriteriaRepository;
+
     private ScoreQualifierRepository scoreQualifierRepository;
     private ScoringTemplate scoringTemplate;
 
@@ -54,12 +56,12 @@ public class ComputeScores {
      * @param evaluatorModel
      * @throws Exception
      */
-    public void computeV2(EvaluatorModel evaluatorModel) throws Exception{
+    public void computeV2(EvaluatorModel evaluatorModel) throws Exception {
 
-        for (CriteriaModel cm : evaluatorModel.getCriteriaModels()){
+        for (CriteriaModel cm : evaluatorModel.getCriteriaModels()) {
 
             //to get maxscore , minacceptablescore
-            Map<String, Criteria> criteriaMap = scoringTemplate.getCriteria().stream().collect(Collectors.toMap(c->c.getCriteria(), c->c));
+            Map<String, Criteria> criteriaMap = scoringTemplate.getCriteria().stream().collect(Collectors.toMap(c -> c.getCriteria(), c -> c));
             Criteria criteria = criteriaMap.get(cm.getCriteria());
             evaluatorModel.setTemplateId(scoringTemplate.getTemplate_id());
             evaluatorModel.setTempleteName(scoringTemplate.getTemplateName());
@@ -67,7 +69,7 @@ public class ComputeScores {
             evaluatorModel.setOrg(scoringTemplate.getOrg());
             //EvaluationCriteria criteria = scoreCriteriaRepository.findCriteriaByName(evaluatorModel.getRootOrg(), evaluatorModel.getOrg(), cm.getCriteria());
 
-            logger.info("EvaluationCriteria: ",mapper.writeValueAsString(criteria));
+            logger.info("EvaluationCriteria: ", mapper.writeValueAsString(criteria));
             double maxScore = criteria.getMax_score();
             cm.setMaxScore(maxScore);
             double minScore = criteria.getMin_acceptable_score();
@@ -76,15 +78,17 @@ public class ComputeScores {
             cm.setWeightage(weightage);
 
 
+            Map<String, Qualifier> qualifierMap = criteria.getQualifiers().stream().collect(Collectors.toMap(Qualifier::getQualifier, qualifier -> qualifier));
+
             Map<String, Map<String, Integer>> qualifierFixedScores = criteria.getQualifiers().stream().collect(Collectors.toMap(Qualifier::getQualifier, Qualifier::getFixed_score));
 //            List<ScoreQualifier> scoreQualifiers = scoreQualifierRepository.findQualifiersByCriteria(evaluatorModel.getRootOrg(), evaluatorModel.getOrg(), criteria.getCriteriaId());
 //            logger.info("scoreQualifiers: ",mapper.writeValueAsString(scoreQualifiers));
 //            Map<String, Map<String, Integer>> qualifierFixedScores = scoreQualifiers.stream().collect(
 //                    Collectors.toMap(ScoreQualifier::getQualifier, ScoreQualifier::getFixedScore));
             Map<String, Map<String, Range>> qualifierRangeScores = criteria.getQualifiers().stream().collect(Collectors.toMap(Qualifier::getQualifier, Qualifier::getRange_score));
-
-            for(QualifierModel qm : cm.getQualifiers()){
-                if(qm.getEvaluated()!=null){
+            int maxScoreExcludedValue = 0;
+            for (QualifierModel qm : cm.getQualifiers()) {
+                if (qm.getEvaluated() != null) {
 
                     int score = qualifierFixedScores.get(qm.getName()).get(qm.getEvaluated());
                     qm.setScoreValue(score);
@@ -96,13 +100,19 @@ public class ComputeScores {
 
                 }
 
+                if (Boolean.TRUE == qualifierMap.get(qm.getName()).getModify_max_score() &&
+                        qualifierMap.get(qm.getName()).getMax_score_modify_value().containsKey(qm.getEvaluated())) {
+                    maxScoreExcludedValue += qualifierMap.get(qm.getName()).getMax_score_modify_value().get(qm.getEvaluated());
+                }
+                qm.setDescription(qualifierMap.get(qm.getName()).getDescription());
             }
-
+            cm.setMaxScore(cm.getMaxScore() - maxScoreExcludedValue);
             List<Double> scoreVals = cm.getQualifiers().stream().map(q -> q.getScoreValue()).collect(Collectors.toList());
             cm.setTotalScore(MathFunction.sum(scoreVals));
-            cm.setWeightedAvg(MathFunction.weightedAvg(scoreVals ,weightage));
-            cm.setMaxWeightedAvg(MathFunction.maxWeightedAvg(maxScore, weightage));
+            cm.setWeightedAvg(MathFunction.weightedAvg(scoreVals, weightage));
+            cm.setMaxWeightedAvg(MathFunction.maxWeightedAvg(cm.getMaxScore(), weightage));
             cm.setMinWeightedAvg(MathFunction.minWeightedAvg(minScore, weightage));
+            cm.setWeightedScore(MathFunction.weightedScore(cm.getTotalScore(), cm.getMaxScore(), weightage));
 
         }
 
@@ -124,6 +134,9 @@ public class ComputeScores {
 
         List<Double> criteriaMinWeightedAvgVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getMinWeightedAvg).collect(Collectors.toList());
         evaluatorModel.setFinalMinWeightedAvg(MathFunction.sum(criteriaMinWeightedAvgVals));
+
+        List<Double> criteriaWeightsVals = evaluatorModel.getCriteriaModels().stream().map(CriteriaModel::getWeightedScore).collect(Collectors.toList());
+        evaluatorModel.setFinalWeightedScore(MathFunction.sum(criteriaWeightsVals));
 
 
         String timeStamp = formatterDateTime.format(Calendar.getInstance().getTime());

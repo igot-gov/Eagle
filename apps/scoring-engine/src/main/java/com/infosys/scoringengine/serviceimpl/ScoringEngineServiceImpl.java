@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
@@ -38,7 +39,8 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 
 
 	@Autowired
-	ScoringSchema scoringSchema;
+	private ScoringSchemaLoader schemaLoader;
+
 	@Autowired
 	ScoreCriteriaRepository scoreCriteriaRepository;
 
@@ -91,22 +93,21 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 	}
 
 	@Override
-	public Response addV3(EvaluatorModel evaluatorModel) throws Exception{
+	public Response addV3(EvaluatorModel evaluatorModel) throws Exception {
 		Response response = new Response();
-		try{
+		try {
+			String templateId = (evaluatorModel.getTemplateId() == null || evaluatorModel.getTemplateId().isEmpty()) == true ? scoringTemplateId
+			: evaluatorModel.getTemplateId();
 
-			// doComputations of all fields
-			ScoringTemplate scoringTemplate = null;
-			if (evaluatorModel.getTemplateId() == null || evaluatorModel.getTemplateId().isEmpty()){
-				scoringTemplate = scoringSchema.getScoringTemplates().stream().filter(t -> t.getTemplate_id().equals(scoringTemplateId)).findFirst().get();
-			}
+			ScoringTemplate scoringTemplate = schemaLoader.getScoringSchema().getScoringTemplates().stream().filter(t -> t.getTemplate_id().equals(templateId)).findFirst().get();
 			ComputeScores computeScores = new ComputeScores(scoringTemplate);
-			computeScores.compute(evaluatorModel);
-			logger.info("evaluatorModel : {}",mapper.writeValueAsString(evaluatorModel));
+			computeScores.computeV2(evaluatorModel);
+			logger.info("evaluatorModel : {}", mapper.writeValueAsString(evaluatorModel));
 
 			// post the data into ES index
-			if(esScoringEnabled){
-				Map<String, Object> indexDocument = mapper.convertValue(evaluatorModel, new TypeReference<Map<String, Object>>() {});
+			if (esScoringEnabled) {
+				Map<String, Object> indexDocument = mapper.convertValue(evaluatorModel, new TypeReference<Map<String, Object>>() {
+				});
 				RestStatus status = indexerService.addEntity(esIndex, esIndexType, evaluatorModel.getIdentifier(), indexDocument);
 				response.put("status", status);
 				response.put("id", evaluatorModel.getIdentifier());
@@ -117,7 +118,7 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 
 			response.put("Message", "Successfully operation");
 
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception(e);
 		}
@@ -140,7 +141,9 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 			Map<String, Object> searchQuery = new HashMap<>();
 			searchQuery.put("userId", evaluatorModel.getUserId());
 			searchQuery.put("resourceId", evaluatorModel.getResourceId());
-
+            if(!StringUtils.isEmpty(evaluatorModel.getIdentifier())){
+				searchQuery.put("identifier", evaluatorModel.getIdentifier());
+			}
 			JsonNode searchResponse= indexerService.search(esIndex, searchQuery);
 
 			response.put("resources", searchResponse);
