@@ -38,6 +38,8 @@ public class EvaluatorModel {
 
     private double finalMaxWeightedAvg;
     private double finalMinWeightedAvg;
+
+    private double finalWeightedScore;
     @Size(min = 1)
     private List<CriteriaModel> criteriaModels = new ArrayList<>();
 
@@ -185,5 +187,13 @@ public class EvaluatorModel {
 
     public void setTempleteName(String templeteName) {
         this.templeteName = templeteName;
+    }
+
+    public double getFinalWeightedScore() {
+        return finalWeightedScore;
+    }
+
+    public void setFinalWeightedScore(double finalWeightedScore) {
+        this.finalWeightedScore = finalWeightedScore;
     }
 }

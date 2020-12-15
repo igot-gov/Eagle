@@ -15,12 +15,17 @@ import java.util.Map;
 public class Qualifier {
 
     private String qualifier;
+    private String description;
     private Double weightage;
     private Double max_score;
     private Double min_acceptable_score;
     private Map<String, Integer> fixed_score = new HashMap<>();
     //@JsonIgnoreProperties
     private Map<String, Range> range_score = new HashMap<>();
+
+    private Boolean modify_max_score;
+
+    private Map<String, Integer> max_score_modify_value = new HashMap<>();
 
     public String getQualifier() {
         return qualifier;
@@ -68,5 +73,29 @@ public class Qualifier {
 
     public void setRange_score(Map<String, Range> range_score) {
         this.range_score = range_score;
+    }
+
+    public Boolean getModify_max_score() {
+        return modify_max_score;
+    }
+
+    public void setModify_max_score(Boolean modify_max_score) {
+        this.modify_max_score = modify_max_score;
+    }
+
+    public Map<String, Integer> getMax_score_modify_value() {
+        return max_score_modify_value;
+    }
+
+    public void setMax_score_modify_value(Map<String, Integer> max_score_modify_value) {
+        this.max_score_modify_value = max_score_modify_value;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
