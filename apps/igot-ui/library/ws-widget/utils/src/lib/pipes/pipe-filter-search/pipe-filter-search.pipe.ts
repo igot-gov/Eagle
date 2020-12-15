@@ -11,7 +11,7 @@ export class PipeFilterSearchPipe implements PipeTransform {
     const searchTextLowerCase = searchText.toLowerCase()
     if (keys && keys.length) {
       const result =  items.filter(it => {
-        return it['personalDetails'][keys[0]].toLowerCase().includes(searchTextLowerCase)
+        return it[keys[0]].toLowerCase().includes(searchTextLowerCase)
         // keys.map((key: any) => {
         //   console.log('key:', key)
         //   console.log(`it['personalDetails'][key]`, it['personalDetails'][key])
