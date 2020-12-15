@@ -18,7 +18,7 @@ const API_END_POINTS = {
   sharePlaylist: '/apis/protected/v8/user/playlist/share',
   updatePlaylists: (playlistId: string) => `/apis/protected/v8/user/playlist/${playlistId}`,
   getSearchData: `/apis/proxies/v8/sunbirdigot/search`,
-  getPlaylistData: (playlistId: string) => `/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`
+  getPlaylistData: (playlistId: string) => `/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`,
 }
 
 @Injectable({
