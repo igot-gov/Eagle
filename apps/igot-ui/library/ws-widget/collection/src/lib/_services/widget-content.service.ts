@@ -23,6 +23,7 @@ const API_END_POINTS = {
   CONTENT_SEARCH_V6: `/apis/proxies/v8/sunbirdigot/read`,
   CONTENT_SEARCH_REGION_RECOMMENDATION: `${PROTECTED_SLAG_V8}/content/searchRegionRecommendation`,
   CONTENT_HISTORY: `${PROTECTED_SLAG_V8}/user/history`,
+  CONTENT_HISTORYV2: `/apis/proxies/v8/read/content-progres`,
   USER_CONTINUE_LEARNING: `${PROTECTED_SLAG_V8}/user/history/continue`,
   CONTENT_RATING: `${PROTECTED_SLAG_V8}/user/rating`,
   COLLECTION_HIERARCHY: (type: string, id: string) =>
@@ -95,6 +96,12 @@ export class WidgetContentService {
   fetchContentHistory(contentId: string): Observable<NsContent.IContinueLearningData> {
     return this.http.get<NsContent.IContinueLearningData>(
       `${API_END_POINTS.CONTENT_HISTORY}/${contentId}`,
+    )
+  }
+
+  fetchContentHistoryV2(req: NsContent.IContinueLearningDataReq): Observable<NsContent.IContinueLearningData> {
+    return this.http.post<NsContent.IContinueLearningData>(
+      `${API_END_POINTS.CONTENT_HISTORYV2}/${req.request.courseId}`, req
     )
   }
 

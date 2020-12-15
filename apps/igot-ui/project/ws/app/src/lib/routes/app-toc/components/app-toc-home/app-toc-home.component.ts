@@ -135,6 +135,15 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked,
     return false
   }
 
+  get isResource() {
+    if (this.content) {
+      const isResource = this.content.contentType === NsContent.EContentTypes.KNOWLEDGE_ARTIFACT ||
+        this.content.contentType === NsContent.EContentTypes.RESOURCE || !this.content.children.length
+      return isResource
+    }
+    return false
+  }
+
   private initData(data: Data) {
     const initData = this.tocSvc.initData(data)
     this.content = initData.content
@@ -158,6 +167,7 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked,
       }
     }
     if (this.content && this.content.identifier && !this.forPreview) {
+      // const collectionId = this.isResource ? '' : this.content.identifier
       this.getContinueLearningData(this.content.identifier)
     }
     this.body = this.domSanitizer.bypassSecurityTrustHtml(
@@ -170,11 +180,27 @@ export class AppTocHomeComponent implements OnInit, OnDestroy, AfterViewChecked,
     this.contentParents = {}
   }
 
-  private getContinueLearningData(contentId: string) {
+  private getContinueLearningData(contentId: string, _collectionId?: string) {
     this.resumeData = null
-    this.contentSvc.fetchContentHistory(contentId).subscribe(
+    let userId
+    if (this.configSvc.userProfile) {
+      userId = this.configSvc.userProfile.userId || ''
+    }
+    const req: NsContent.IContinueLearningDataReq = {
+      request: {
+        userId,
+        courseId: contentId || '',
+        contentIds: [],
+        batchId: '0131595783960084483',
+      },
+    }
+    this.contentSvc.fetchContentHistoryV2(req).subscribe(
       data => {
-        this.resumeData = data
+        if (data && data.result && data.result.contentList && data.result.contentList.length) {
+          this.resumeData = data.result.contentList
+        } else {
+          this.resumeData = null
+        }
       },
       (error: any) => {
         this.loggerSvc.error('CONTENT HISTORY FETCH ERROR >', error)

@@ -10,7 +10,8 @@ import { NsContent } from '@ws-widget/collection'
 export class ViewerUtilService {
   API_ENDPOINTS = {
     setS3Cookie: `/apis/v8/protected/content/setCookie`,
-    PROGRESS_UPDATE: `/apis/protected/v8/user/realTimeProgress/update`,
+    // PROGRESS_UPDATE: `/apis/protected/v8/user/realTimeProgress/update`,
+    PROGRESS_UPDATE: `/apis/proxies/v8/content-progres`,
   }
   downloadRegex = new RegExp(`(/content-store/.*?)(\\\)?\\\\?['"])`, 'gm')
   authoringBase = '/apis/authContent/'
@@ -33,10 +34,33 @@ export class ViewerUtilService {
     return
   }
 
-  realTimeProgressUpdate(contentId: string, request: any) {
-    // console.log('realtime', contentId, request)
+  realTimeProgressUpdate(contentId: string, request: any, collectionId?: string) {
+    let req: any
+    if (this.configservice.userProfile) {
+      req = {
+        request: {
+          userId: this.configservice.userProfile.userId || '',
+          contents: [
+            {
+              contentId,
+              batchId: '0131595783960084483',
+              status: 2,
+              courseId: collectionId,
+              lastAccessTime: '2020-11-26 22:58:50:499+0530',
+              progressDetails: {
+                max_size: request.max_size,
+                current: request.current,
+                mimeType: request.mime_type,
+              },
+            },
+          ],
+        },
+      }
+    } else {
+      req = {}
+    }
     this.http
-      .post(`${this.API_ENDPOINTS.PROGRESS_UPDATE}/${contentId}`, request)
+      .patch(`${this.API_ENDPOINTS.PROGRESS_UPDATE}/${contentId}`, req)
       .subscribe(noop, noop)
   }
 

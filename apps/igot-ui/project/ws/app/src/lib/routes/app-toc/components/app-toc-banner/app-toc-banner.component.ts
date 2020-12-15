@@ -194,9 +194,10 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
       this.getLearningUrls()
     }
     if (this.resumeData && this.content) {
+      const resumeDataV2 = this.getResumeDataFromList()
       this.resumeDataLink = viewerRouteGenerator(
-        this.resumeData.identifier,
-        this.resumeData.mimeType,
+        resumeDataV2.identifier,
+        resumeDataV2.mimeType,
         this.isResource ? undefined : this.content.identifier,
         this.isResource ? undefined : this.content.contentType,
         this.forPreview,
@@ -263,6 +264,15 @@ export class AppTocBannerComponent implements OnInit, OnChanges, OnDestroy {
     }
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe()
+    }
+  }
+
+  private getResumeDataFromList() {
+    const lastItem = this.resumeData && this.resumeData.pop()
+    return {
+      identifier: lastItem.contentId,
+      mimeType: lastItem.progressDetails && lastItem.progressDetails.mimetype,
+
     }
   }
   private modifySensibleContentRating() {
