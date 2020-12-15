@@ -15,6 +15,7 @@ public class QualifierModel {
     private String name;
     @NotBlank
     private String evaluated;
+    private String description;
     private double scoreValue;
     private String scoreRange;
     private String scoringType;
@@ -60,7 +61,13 @@ public class QualifierModel {
         this.scoringType = scoringType;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
 
 

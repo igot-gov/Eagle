@@ -31,6 +31,8 @@ public class CriteriaModel {
 
     private double minWeightedAvg;
 
+    private double weightedScore;
+
     @Size(min =1)
     private List<QualifierModel> qualifiers = new ArrayList<>();
 
@@ -104,5 +106,13 @@ public class CriteriaModel {
 
     public void setMinWeightedAvg(double minWeightedAvg) {
         this.minWeightedAvg = minWeightedAvg;
+    }
+
+    public double getWeightedScore() {
+        return weightedScore;
+    }
+
+    public void setWeightedScore(double weightedScore) {
+        this.weightedScore = weightedScore;
     }
 }
