@@ -18,6 +18,7 @@ const API_END_POINTS = {
   sharePlaylist: '/apis/protected/v8/user/playlist/share',
   updatePlaylists: (playlistId: string) => `/apis/protected/v8/user/playlist/${playlistId}`,
   getSearchData: `/apis/proxies/v8/sunbirdigot/search`,
+  getPlaylistData: (playlistId: string) => `/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`
 }
 
 @Injectable({
@@ -110,7 +111,7 @@ export class BtnPlaylistService {
   getPlaylist(playlistId: string): Observable<NsPlaylist.IPlaylist | null> {
     // const params = new HttpParams().set('sourceFields', sourceFields)
     return this.http
-      .get<NsPlaylist.IPlaylist>(`https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`)
+      .get<NsPlaylist.IPlaylist>(`${API_END_POINTS.getPlaylistData(playlistId)}`)
   }
 
   deletePlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes) {
