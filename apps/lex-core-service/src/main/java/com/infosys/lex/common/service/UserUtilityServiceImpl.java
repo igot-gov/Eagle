@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
@@ -654,7 +655,8 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public String getUserEmailFromUserId(String rootOrg, String userId) {
+	public String getUserEmailFromUserId(String rootOrg, String userId, String authorization,
+			String xAuthenticatedUserToken) {
 
 		String dataSource = getUserDataSource(rootOrg);
 		if ("su".equalsIgnoreCase(dataSource)) {
@@ -676,10 +678,19 @@ public class UserUtilityServiceImpl implements UserUtilityService {
 			request.put(PIDConstants.FILTERS, filters);
 
 			pidRequestMap.put("request", request);
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Authorization", authorization);
+			headers.add("X-Authenticated-User-Token", xAuthenticatedUserToken);
+			headers.setContentType(MediaType.APPLICATION_JSON);
 
 			try {
-				SunbirdApiResp pidResponse = restTemplate.postForObject(serverConfig.getPidUrl() + "api/user/v1/search",
-						pidRequestMap, SunbirdApiResp.class);
+				String reqBodyData = new ObjectMapper().writeValueAsString(pidRequestMap);
+
+				HttpEntity<String> requestEnty = new HttpEntity<>(reqBodyData, headers);
+
+				String serverUrl = serverConfig.getPidUrl() + "api/user/v1/search";
+
+				SunbirdApiResp pidResponse = restTemplate.postForObject(serverUrl, requestEnty, SunbirdApiResp.class);
 
 				if (pidResponse != null && "OK".equalsIgnoreCase(pidResponse.getResponseCode())
 						&& pidResponse.getResult().getResponse().getCount() >= 1) {

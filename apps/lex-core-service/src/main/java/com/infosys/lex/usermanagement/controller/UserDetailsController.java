@@ -24,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,19 +35,24 @@ import java.util.Map;
 @RestController
 public class UserDetailsController {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<Map<String, Object>> getUserDetails(@PathVariable("userId") String userId, @RequestParam(value = "requiredFields", required = false) ArrayList<String> requiredFields) {
-        try {
-            Map<String, Object> serviceData = userDetailsService.getUserDetails(userId, requiredFields);
-            return new ResponseEntity<>(serviceData, HttpStatus.OK);
-        }catch (NoContentException e){
-            return new ResponseEntity<>(Collections.singletonMap("message",e.getMessage()), HttpStatus.NO_CONTENT);
-        }
-    }
-    
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<Map<String, Object>> getUserDetails(@PathVariable("userId") String userId,
+			@RequestParam(value = "requiredFields", required = false) ArrayList<String> requiredFields,
+			@RequestHeader("Authorization") String authorization,
+			@RequestHeader("X-Authenticated-User-Token") String xAuthenticatedUserToken,
+			@RequestHeader("rootOrgName") String rootOrgName) {
+		try {
+			Map<String, Object> serviceData = userDetailsService.getUserDetails(userId, requiredFields, authorization,
+					xAuthenticatedUserToken, rootOrgName);
+			return new ResponseEntity<>(serviceData, HttpStatus.OK);
+		} catch (NoContentException e) {
+			return new ResponseEntity<>(Collections.singletonMap("message", e.getMessage()), HttpStatus.NO_CONTENT);
+		}
+	}
+
 	@GetMapping("/validateUser/{rootOrg}/{userId}")
 	public ResponseEntity<Boolean> validateUserDetails(@PathVariable("rootOrg") String rootOrg,
 			@PathVariable("userId") String userId) {

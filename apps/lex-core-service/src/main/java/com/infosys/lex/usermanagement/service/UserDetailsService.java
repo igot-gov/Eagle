@@ -21,6 +21,6 @@ import java.util.Map;
 
 public interface UserDetailsService {
 
-    Map<String,Object> getUserDetails(String userId, ArrayList<String> requiredFields);
+    Map<String,Object> getUserDetails(String userId, ArrayList<String> requiredFields,String authorization,String xAuthenticatedUserToken,String rootOrgName);
     boolean validateUserDetails(String rootOrg, String userId);
 }

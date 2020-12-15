@@ -45,13 +45,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserUtilityService userUtilService;
 
     @Override
-    public Map<String, Object> getUserDetails(String userId, ArrayList<String> requiredFields) {
+    public Map<String, Object> getUserDetails(String userId, ArrayList<String> requiredFields,String authorization,String xAuthenticatedUserToken,String rootOrgName) {
 
         Map<String, Object> response = new HashMap<>();
 
         String userRepositoryData;
         try {
-            userRepositoryData = userUtilService.getUserEmailFromUserId("Infosys", userId);
+            userRepositoryData = userUtilService.getUserEmailFromUserId(rootOrgName, userId,authorization,xAuthenticatedUserToken);
             
         } catch (Exception e) {
             throw new ResourceNotFoundException("Data not found for " + userId);
