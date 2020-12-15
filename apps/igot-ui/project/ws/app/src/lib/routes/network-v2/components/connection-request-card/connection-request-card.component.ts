@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { NetworkV2Service } from '../../services/network-v2.service'
 import { MatSnackBar } from '@angular/material'
+import { ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-connection-request-card',
@@ -18,6 +19,7 @@ export class ConnectionRequestCardComponent implements OnInit {
   constructor(
     private router: Router,
     private networkV2Service: NetworkV2Service,
+    private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
   ) { }
 
@@ -38,7 +40,18 @@ export class ConnectionRequestCardComponent implements OnInit {
   }
 
   connetToUser(action: string | 'Approved' | 'Rejected') {
-    const req = { connectionId: this.user.id, status: action }
+    // const req = { connectionId: this.user.id, status: action }
+
+    const req = {
+      connectionId: this.user.id,
+      userNameFrom: this.configSvc.userProfile ? this.configSvc.userProfile.userName : '',
+      userDepartmentFrom: 'iGOT',
+      userIdTo: this.user.identifier,
+      userNameTo: `${this.user.name}`,
+      userDepartmentTo: this.user.department,
+      status: action,
+    }
+
     this.networkV2Service.updateConnection(req).subscribe(
       () => {
         if (action === 'Approved') {
@@ -61,7 +74,8 @@ export class ConnectionRequestCardComponent implements OnInit {
 
   getUseravatarName() {
     if (this.user) {
-      return `${this.user.personalDetails.firstname} ${this.user.personalDetails.surname}`
+      return `${this.user.name}`
+      // return `${this.user.personalDetails.firstname} ${this.user.personalDetails.surname}`
     }
       return ''
   }
