@@ -114,12 +114,12 @@ export class PickerContentComponent extends WidgetBaseComponent
         mergeMap(() => {
           this.searchFetchStatus = 'fetching'
           this.searchResults = []
-          let query = this.query || '*'
+          let query = this.query || ''
           if (phraseSearch && query.indexOf(' ') > -1 && phraseSearchConfig) {
-            query = `"${query}"`
+            query = `${query}`
           }
           // tslint:disable-next-line: max-line-length
-          return this.searchServSvc.searchV6Wrapper({ request: { filters: { visibility: ['Default'] }, query: '', sort_by: { lastUpdatedOn: 'desc' }, fields: [], facets: [] } })
+          return this.searchServSvc.searchV6Wrapper({ request: { filters: { visibility: ['Default'] }, query: query, sort_by: { lastUpdatedOn: 'desc' }, fields: [], facets: [] } })
         }),
       )
       .subscribe(
