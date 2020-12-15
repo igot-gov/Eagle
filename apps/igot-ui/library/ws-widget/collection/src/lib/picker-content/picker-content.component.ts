@@ -119,7 +119,7 @@ export class PickerContentComponent extends WidgetBaseComponent
             query = `${query}`
           }
           // tslint:disable-next-line: max-line-length
-          return this.searchServSvc.searchV6Wrapper({ request: { filters: { visibility: ['Default'] }, query: query, sort_by: { lastUpdatedOn: 'desc' }, fields: [], facets: [] } })
+          return this.searchServSvc.searchV6Wrapper({ request: { query, filters: { visibility: ['Default'] }, sort_by: { lastUpdatedOn: 'desc' }, fields: [], facets: [] } })
         }),
       )
       .subscribe(
