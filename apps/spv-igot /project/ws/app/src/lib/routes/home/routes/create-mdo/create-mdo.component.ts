@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core'
+import { FormGroup, FormControl } from '@angular/forms'
 
 @Component({
   selector: 'ws-app-create-mdo',
@@ -8,9 +9,29 @@ import { Component, OnInit } from '@angular/core'
 export class CreateMdoComponent implements OnInit {
   userMgmtData: any = []
   fracData: any = []
+  contentForm: any
+  data: any = []
+  imageTypes = ['.png', '.jpg', '.jpeg', '.jtif', '.tiff']
+  tabledata: any = []
   constructor() { }
 
   ngOnInit() {
+
+    this.tabledata = {
+      columns: [
+        { displayName: 'Full name', key: 'fullName' },
+        { displayName: 'Email', key: 'email' },
+        { displayName: 'Mobile number', key: 'position' },
+      ],
+      needCheckBox: false,
+      needHash: false,
+      sortColumn: '',
+      sortState: 'asc',
+    }
+    this.contentForm = new FormGroup({
+      name: new FormControl(),
+      subTitle: new FormControl(),
+    })
     this.userMgmtData = [{
       name: 'Create Users',
       key: 'Create Users',
@@ -73,5 +94,16 @@ export class CreateMdoComponent implements OnInit {
       enabled: true,
     }]
   }
+  checkCondition() {
+    return true
+  }
+  showError() {
 
+  }
+  uploadAppIcon() {
+
+  }
+  openPopup() {
+
+  }
 }

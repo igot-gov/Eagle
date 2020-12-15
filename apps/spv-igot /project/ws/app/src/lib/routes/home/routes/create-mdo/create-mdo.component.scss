@@ -1,0 +1,13 @@
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.flex-container > .flex-container-div {
+  width: 100%;
+  margin: 10px;
+}
+
+.checkbox-card {
+  margin: 15px;
+}
