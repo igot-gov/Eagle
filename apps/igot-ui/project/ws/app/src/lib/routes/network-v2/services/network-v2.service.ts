@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http'
 import { NSNetworkDataV2 } from '../models/network-v2.model'
 
 const API_ENDPOINTS = {
-  getRecommendedUsers: '/apis/protected/v8/network/connections/recommended',
-  createConnection: `/apis/protected/v8/network/add/connection`,
-  updateConnection: `/apis/protected/v8/network/update/connection`,
-  connectionRequests : `/apis/protected/v8/network/connections/requested`,
-  connectionRequestsReceived : `/apis/protected/v8/network/connections/requests/received`,
-  connectionEstablished: `/apis/protected/v8/network/connections/established`,
-  getSuggestedUsers: `/apis/protected/v8/network/connections/suggests`,
+  getRecommendedUsers: '/apis/protected/v8/connections/connections/recommended',
+  createConnection: `/apis/protected/v8/connections/add/connection`,
+  updateConnection: `/apis/protected/v8/connections/update/connection`,
+  connectionRequests : `/apis/protected/v8/connections/connections/requested`,
+  connectionRequestsReceived : `/apis/protected/v8/connections/connections/requests/received`,
+  connectionEstablished: `/apis/protected/v8/connections/connections/established`,
+  getSuggestedUsers: `/apis/protected/v8/connections/connections/suggests`,
 }
 
 @Injectable({

@@ -7,11 +7,10 @@
         <div class="flex flex-col flex-1 cursor-pointer" (click)="goToUserProfile(user)">
             <!-- <a href="javascript:void(0)" class="" i18n-aria-label role="link"> -->
             <div class="name truncate ws-mat-black-text ">
-                {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}
-                {{user?.personalDetails?.surname}}
+                {{user?.name}}
             </div>
             <div class="designation truncate ws-mat-black60-text">
-                {{user?.employmentDetails?.departmentName}}
+                {{user?.department}}
             </div>
             <!-- </a> -->
         </div>

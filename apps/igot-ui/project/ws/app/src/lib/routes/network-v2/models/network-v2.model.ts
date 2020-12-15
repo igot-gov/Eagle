@@ -20,8 +20,8 @@ export namespace NSNetworkDataV2 {
         offset: number,
         search: [
             {
-            field: string,
-            values: string[] | undefined
+                field: string,
+                values: string[] | undefined
             }
         ]
     }
@@ -45,7 +45,11 @@ export namespace NSNetworkDataV2 {
         employmentDetails: IEmploymentDetails,
         personalDetails: IPersonalDetails,
         id: string,
-        photo: string | null | undefined
+        photo: string | null | undefined,
+        identifier: string,
+        name: string,
+        departmentName: string,
+        department: string
     }
 
     export interface IAutocompleteUser {
