@@ -41,12 +41,12 @@ export async function getUserDetailsFromApi(userId: string): Promise<IUserDetail
     }
 }
 
-export async function getSbUserDetailsFromApi(userId: string, authorization: string, userToken: string, rootOrgName: string): Promise<IUserDetailsResponse | null> {
-    const xAuthenticatedUserToken = authorization.split(' ')
+export async function getSbUserDetailsFromApi(userId: string, auth: string, xT: string, org: string): Promise<IUserDetailsResponse | null> {
+    const xAuth = auth.split(' ')
     try {
         const res = await axios.get<IUserDetailsResponse>(
             `${apiEndpoints.details}/${userId}`,
-            { headers: { 'X-Authenticated-User-Token': xAuthenticatedUserToken[1], Authorization: xAuthenticatedUserToken[0] + ' ' + userToken, rootOrgName } }
+            { headers: { 'X-Authenticated-User-Token': xAuth[1], Authorization: xAuth[0] + ' ' + xT, org } }
         )
         return res.data || {}
     } catch (err) {
