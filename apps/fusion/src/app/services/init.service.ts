@@ -214,9 +214,12 @@ export class InitService {
     this.configSvc.instanceConfig = publicConfig
     this.configSvc.rootOrg = publicConfig.rootOrg
     this.configSvc.org = publicConfig.org
+    this.configSvc.courseContentPath = publicConfig.courseContentPath
     // TODO: set one org as default org :: use user preference
     this.configSvc.activeOrg = publicConfig.org[0]
     this.configSvc.appSetup = publicConfig.appSetup
+    console.log(publicConfig)
+    console.log(publicConfig.courseContentPath)
     return publicConfig
   }
 

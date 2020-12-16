@@ -35,6 +35,7 @@ export class ConfigurationsService {
   instanceConfig: NsInstanceConfig.IConfig | null = null
   appsConfig: NsAppsConfig.IAppsConfig | null = null
   rootOrg: string | null = null
+  courseContentPath?: string
   org: string[] | null = null
   activeOrg: string | null = ''
   isProduction = false

@@ -161,5 +161,6 @@
     },
     "tourVideo": {
         "en": "/assets/instances/eagle/videos/Eagle_New_AppTour_Final.mp4"
-    }
+    },
+    "courseContentPath": "/app/toc/lex_auth_013097863207362560115/overview"
 }

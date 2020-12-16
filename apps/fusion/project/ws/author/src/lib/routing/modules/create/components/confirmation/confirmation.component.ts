@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
+import { ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-auth-confirm',
@@ -8,8 +9,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 })
 export class ConfirmationComponent implements OnInit, OnDestroy {
   isChecked = false
-  ngOnInit(): void {
+  contentQualityCourse: string | undefined
+  ngOnInit() {
+    this.contentQualityCourse = this.configService.courseContentPath
+  }
+  constructor(private configService: ConfigurationsService, ) {
 
+  }
+  myFunction() {
+    console.log("Comming")
   }
   ngOnDestroy(): void {
 
