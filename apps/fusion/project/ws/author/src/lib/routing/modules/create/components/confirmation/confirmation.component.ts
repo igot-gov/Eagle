@@ -16,9 +16,7 @@ export class ConfirmationComponent implements OnInit, OnDestroy {
   constructor(private configService: ConfigurationsService, ) {
 
   }
-  myFunction() {
-    console.log("Comming")
-  }
+
   ngOnDestroy(): void {
 
   }
