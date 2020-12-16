@@ -63,7 +63,7 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
 
     // tslint:disable-next-line: no-console
     console.log('REQ_URL_ORIGINAL proxyCreatorSunbird', req.originalUrl)
-    const url = removePrefix('/proxies/v8', req.originalUrl)
+    const url = removePrefix('/proxies/v8/api', req.originalUrl)
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
