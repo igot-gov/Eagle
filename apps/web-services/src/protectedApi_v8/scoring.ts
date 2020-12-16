@@ -76,7 +76,7 @@ scoringApi.post('/fetch', async (req, res) => {
     }
 })
 
-scoringApi.post('/getTemplate/:templateId', async (req, res) => {
+scoringApi.get('/getTemplate/:templateId', async (req, res) => {
     try {
         const templateId = req.params.templateId
         const rootOrgValue = req.headers.rootorg
@@ -85,17 +85,13 @@ scoringApi.post('/getTemplate/:templateId', async (req, res) => {
             res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
             return
         }
-        const response = await axios.post(
-            API_END_POINTS.fetchTemplate(templateId),
-            req.body,
-            {
-                ...axiosRequestConfig,
-                headers: {
-                    org: orgValue,
-                    rootOrg: rootOrgValue,
-                },
-            }
-        )
+        const response = await axios.get(API_END_POINTS.fetchTemplate(templateId), {
+            ...axiosRequestConfig,
+            headers: {
+                org: orgValue,
+                rootOrg: rootOrgValue,
+            },
+        })
         res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + err)
