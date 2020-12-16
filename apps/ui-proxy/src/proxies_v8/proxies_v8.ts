@@ -62,7 +62,7 @@ proxiesV8.use('/sunbirdigot/*',
 )
 
 proxiesV8.use('/action/content/v3/upload/*',
-  proxyCreatorUpload(express.Router(), `http://content-service:9000/content/v3/uploadurl`)
+  proxyCreatorUpload(express.Router(), `http://content-service:9000/content/v3/upload/url`)
 )
 
 proxiesV8.use('/action/*',
