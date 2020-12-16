@@ -7,11 +7,13 @@
 
 package com.infosys.scoringengine.schema.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 public class Qualifier {
 
     private String qualifier;
@@ -26,6 +28,8 @@ public class Qualifier {
     private Boolean modify_max_score;
 
     private Map<String, Integer> max_score_modify_value = new HashMap<>();
+
+    private List<HashMap<String, Object>> options = new ArrayList<>();
 
     public String getQualifier() {
         return qualifier;
@@ -97,5 +101,13 @@ public class Qualifier {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<HashMap<String, Object>> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<HashMap<String, Object>> options) {
+        this.options = options;
     }
 }

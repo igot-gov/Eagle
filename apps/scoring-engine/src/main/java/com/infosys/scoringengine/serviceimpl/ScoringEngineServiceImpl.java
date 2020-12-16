@@ -10,13 +10,16 @@ package com.infosys.scoringengine.serviceimpl;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.infosys.scoringengine.exception.BadRequestException;
 import com.infosys.scoringengine.models.EvaluatorModel;
+import com.infosys.scoringengine.models.PropertyFilterMixIn;
 import com.infosys.scoringengine.models.Response;
 import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreCriteriaRepository;
 import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreQualifierRepository;
-import com.infosys.scoringengine.repository.cassandra.bodhi.ScoreTemplate;
-import com.infosys.scoringengine.schema.model.ScoringSchema;
 import com.infosys.scoringengine.schema.model.ScoringTemplate;
 import com.infosys.scoringengine.service.ScoringEngineService;
 import com.infosys.scoringengine.util.ComputeScores;
@@ -27,12 +30,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class ScoringEngineServiceImpl implements ScoringEngineService {
@@ -65,6 +69,8 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 	
 	public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private Logger logger = LoggerFactory.getLogger(ScoringEngineServiceImpl.class);
+
+	private static final String[] ignorableFields = {"rootOrg", "org", "version", "weightage", "max_score", "min_acceptable_score", "fixed_score", "range_score", "modify_max_score", "10-20", "20-30", "30-40", "modify_max_score", "max_score_modify_value"};
 
 	@Override
 	public Response addV2(EvaluatorModel evaluatorModel) throws Exception{
@@ -157,6 +163,22 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 		return response;
 	}
 
+	@Override
+	public Response getTemplate(String templateId, String rootOrg, String org) throws Exception {
+		Response response = new Response();
+		if (StringUtils.isEmpty(templateId)) {
+			throw new BadRequestException("Template Id is required!");
+		}
+		ScoringTemplate scoringTemplate = schemaLoader.getScoringSchema().getScoringTemplates().stream().filter(t -> t.getTemplate_id().equals(templateId)).findFirst().get();
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.addMixIn(Object.class, PropertyFilterMixIn.class);
+		FilterProvider filters = new SimpleFilterProvider().addFilter("filter properties by name",SimpleBeanPropertyFilter.serializeAllExcept(ignorableFields));
+		ObjectWriter writer = mapper.writer(filters);
+		response.put("result", mapper.readValue(writer.writeValueAsString(scoringTemplate), Object.class));
+		response.put("Message", "Successfully operation");
+		response.put("resources", HttpStatus.OK);
+		return response;
+	}
 
-	
+
 }

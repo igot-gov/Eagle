@@ -8,6 +8,9 @@
 package com.infosys.scoringengine.models;
 
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class QualifierModel {
 
@@ -19,6 +22,7 @@ public class QualifierModel {
     private double scoreValue;
     private String scoreRange;
     private String scoringType;
+    private List<HashMap<String, Object>> options = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -67,6 +71,14 @@ public class QualifierModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<HashMap<String, Object>> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<HashMap<String, Object>> options) {
+        this.options = options;
     }
 }
 

@@ -40,4 +40,10 @@ public class ScoringController {
         return new ResponseEntity<>(scoringEngineService.searchV2(evaluatorModel), HttpStatus.OK);
     }
 
+    @GetMapping("/getTemplate/{templateId}")
+    public ResponseEntity<Response> getTemplateConfiguration(@RequestHeader String rootOrg,
+                                           @RequestHeader String org, @PathVariable("templateId") String templateId) throws Exception {
+        return new ResponseEntity<>(scoringEngineService.getTemplate(templateId, rootOrg, org), HttpStatus.OK);
+    }
+
 }
