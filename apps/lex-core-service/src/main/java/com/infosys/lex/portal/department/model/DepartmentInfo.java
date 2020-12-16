@@ -160,6 +160,13 @@ public class DepartmentInfo {
 		}
 		this.blocked_users.add(pUserInfo);
 	}
+	
+	public void addAdminUser(UserDepartmentRole pUserInfo) {
+		if(this.adminUserList == null) {
+			this.adminUserList = new ArrayList<UserDepartmentRole>();
+		}
+		this.adminUserList.add(pUserInfo);
+	}
 
 	public String toString() {
 		StringBuilder str = new StringBuilder("DepartmentInfo:");

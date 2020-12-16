@@ -25,4 +25,6 @@ public interface PortalService {
 	Boolean checkMdoAdminPrivilage(String deptKey, String userId) throws Exception;
 
 	DepartmentInfo getMyDepartmentDetails(String userId, boolean isUserInfoRequired) throws Exception;
+
+	DepartmentInfo updateDepartment(DepartmentInfo deptInfo) throws Exception;
 }

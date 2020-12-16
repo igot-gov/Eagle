@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,11 @@ public class PortalController {
 	@PostMapping("/portal/department")
 	public ResponseEntity<DepartmentInfo> addDepartment(@RequestBody DepartmentInfo deptInfo) throws Exception {
 		return new ResponseEntity<DepartmentInfo>(portalService.addDepartment(deptInfo), HttpStatus.OK);
+	}
+	
+	@PatchMapping("/portal/department")
+	public ResponseEntity<DepartmentInfo> updateDepartment(@RequestBody DepartmentInfo deptInfo) throws Exception {
+		return new ResponseEntity<DepartmentInfo>(portalService.updateDepartment(deptInfo), HttpStatus.OK);
 	}
 
 	@PostMapping("/portal/userrole")

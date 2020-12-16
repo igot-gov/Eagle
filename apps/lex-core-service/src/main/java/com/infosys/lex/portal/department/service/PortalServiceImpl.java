@@ -135,6 +135,21 @@ public class PortalServiceImpl implements PortalService {
 	}
 
 	@Override
+	public DepartmentInfo updateDepartment(DepartmentInfo deptInfo) throws Exception {
+		Department existingDept = deptRepo.findById(deptInfo.getId()).get();
+		if (existingDept != null) {
+			existingDept.setDescription(deptInfo.getDescription());
+			existingDept.setHeadquarters(deptInfo.getHeadquarters());
+			existingDept.setLogo(deptInfo.getLogo());
+			
+			existingDept = deptRepo.save(existingDept);
+			return enrichDepartmentInfo(existingDept, false, true);
+		} else {
+			throw new Exception("Failed to find Department for Id: " + deptInfo.getId());
+		}
+	}
+
+	@Override
 	public List<UserDepartmentInfo> getUserDepartments(String userId) {
 		return enrichUserDepartments(userDepartmentRoleRepo.findByUserId(userId));
 	}
@@ -229,6 +244,8 @@ public class PortalServiceImpl implements PortalService {
 			deptInfo.setId(dept.getDeptId());
 			deptInfo.setRootOrg(dept.getRootOrg());
 			deptInfo.setDeptTypeId(dept.getDeptTypeId());
+			deptInfo.setHeadquarters(dept.getHeadquarters());
+			deptInfo.setLogo(dept.getLogo());
 
 			// Get Dept Type Infomation
 			deptInfo.setDeptTypeInfo(enrichDepartmentTypeInfo(dept.getDeptTypeId()));
@@ -278,8 +295,12 @@ public class PortalServiceImpl implements PortalService {
 						}
 
 						// Assign RoleInfo
-						pUserInfo.setRoleInfo(deptRoleMap.get(userDeptRole.getDeptRoleId()));
-
+						DeptRoleInfo userDeptRoleInfo = deptRoleMap.get(userDeptRole.getDeptRoleId());
+						pUserInfo.setRoleInfo(userDeptRoleInfo);
+						if("ADMIN".equalsIgnoreCase(userDeptRoleInfo.getRoleName())) {
+							deptInfo.addAdminUser(userDeptRole);
+						}
+						
 						if (userDeptRole.getIsBlocked()) {
 							deptInfo.addBlockedUser(pUserInfo);
 						} else if (userDeptRole.getIsActive()) {

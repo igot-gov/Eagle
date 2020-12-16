@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "roles", schema = "public")
+@Table(name = "roles", schema = "wingspan")
 public class Role {
 	@Id
 	@Column(name = "id")

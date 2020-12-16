@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import com.infosys.lex.portal.department.model.DepartmentInfo;
 
 @Entity
-@Table(name = "departments", schema = "public")
+@Table(name = "departments", schema = "wingspan")
 public class Department {
 
 	@Id
