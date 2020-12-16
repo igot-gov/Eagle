@@ -218,8 +218,6 @@ export class InitService {
     // TODO: set one org as default org :: use user preference
     this.configSvc.activeOrg = publicConfig.org[0]
     this.configSvc.appSetup = publicConfig.appSetup
-    console.log(publicConfig)
-    console.log(publicConfig.courseContentPath)
     return publicConfig
   }
 
