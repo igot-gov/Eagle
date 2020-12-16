@@ -89,12 +89,13 @@ export function proxyCreatorKnowledge(route: Router, targetUrl: string, _timeout
 
 export function proxyCreatorUpload(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
+    const url = removePrefix('/proxies/v8/action', req.originalUrl)
     // tslint:disable-next-line: no-console
     console.log('REQ_URL_ORIGINAL proxyCreatorUpload', targetUrl)
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
-      target: targetUrl,
+      target: targetUrl + url,
     })
   })
   return route
