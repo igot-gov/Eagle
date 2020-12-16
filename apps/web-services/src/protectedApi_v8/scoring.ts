@@ -8,6 +8,7 @@ import { ERROR } from '../utils/message'
 const API_END_POINTS = {
     calculateScoreEndPoint: `${CONSTANTS.SCORING_SERVICE_API_BASE}/action/scoring/add`,
     fetchScore: `${CONSTANTS.SCORING_SERVICE_API_BASE}/action/scoring/fetch`,
+    fetchTemplate: (templateId: string) => `${CONSTANTS.SCORING_SERVICE_API_BASE}/action/scoring/getTemplate/${templateId}`,
 }
 
 export const scoringApi = Router()
@@ -55,6 +56,37 @@ scoringApi.post('/fetch', async (req, res) => {
         }
         const response = await axios.post(
             API_END_POINTS.fetchScore,
+            req.body,
+            {
+                ...axiosRequestConfig,
+                headers: {
+                    org: orgValue,
+                    rootOrg: rootOrgValue,
+                },
+            }
+        )
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+scoringApi.post('/getTemplate/:templateId', async (req, res) => {
+    try {
+        const templateId = req.params.templateId
+        const rootOrgValue = req.headers.rootorg
+        const orgValue = req.headers.org
+        if (!rootOrgValue || !orgValue) {
+            res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+            return
+        }
+        const response = await axios.post(
+            API_END_POINTS.fetchTemplate(templateId),
             req.body,
             {
                 ...axiosRequestConfig,
