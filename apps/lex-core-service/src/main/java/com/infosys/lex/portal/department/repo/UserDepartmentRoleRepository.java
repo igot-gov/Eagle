@@ -11,8 +11,12 @@ public interface UserDepartmentRoleRepository extends CrudRepository<UserDepartm
 	List<UserDepartmentRole> findByUserId(String userId);
 
 	List<UserDepartmentRole> findByDeptId(Integer deptId);
+	
+	List<UserDepartmentRole> findByDeptRoleId(List<String> userDeptIds);
 
 	UserDepartmentRole findByUserIdAndDeptIdAndDeptRoleId(String userId, Integer deptId, Integer deptRoleId);
 	
 	List<UserDepartmentRole> findByUserIdAndDeptId(String userId, Integer deptId);
+	
+	List<UserDepartmentRole> findAllByUserIdAndDeptRoleIdIn(String userId, List<Integer> deptRoleIds);
 }

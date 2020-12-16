@@ -1,6 +1,7 @@
 package com.infosys.lex.portal.department.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infosys.lex.common.service.UserUtilityService;
 import com.infosys.lex.common.util.DataValidator;
+import com.infosys.lex.common.util.PIDConstants;
 import com.infosys.lex.core.logger.LexLogger;
 import com.infosys.lex.portal.department.dto.Department;
 import com.infosys.lex.portal.department.dto.DepartmentRole;
@@ -48,6 +51,9 @@ public class PortalServiceImpl implements PortalService {
 
 	@Autowired
 	RoleRepository roleRepo;
+
+	@Autowired
+	UserUtilityService userUtilService;
 
 	@Override
 	public List<DepartmentInfo> getAllDepartments() {
@@ -159,6 +165,53 @@ public class PortalServiceImpl implements PortalService {
 		return false;
 	}
 
+	@Override
+	public Boolean checkMdoAdminPrivilage(String deptKey, String userId) throws Exception {
+		boolean retValue = false;
+		try {
+			logger.info("checkMdoAdminPrivilage... userId: " + userId + ", deptKey: " + deptKey);
+			// Find MDO Departments
+			List<DepartmentType> deptTypes = deptTypeRepo.findByDeptTypeIgnoreCase(deptKey);
+
+			List<Integer> deptTypeIds = new ArrayList<Integer>();
+			if (!DataValidator.isCollectionEmpty(deptTypes)) {
+				deptTypeIds = deptTypes.stream().map(i -> i.getId()).collect(Collectors.toList());
+			}
+
+			List<Department> depts = deptRepo.findAllByDeptTypeIdIn(deptTypeIds);
+			List<Integer> deptIds = new ArrayList<Integer>();
+			if (!DataValidator.isCollectionEmpty(depts)) {
+				deptIds = depts.stream().map(i -> i.getDeptId()).collect(Collectors.toList());
+			}
+
+			Role role = roleRepo.findRoleByRoleName("ADMIN");
+			List<DepartmentRole> deptRoles = deptRoleRepo.findAllByRoleIdAndDeptIdIn(role.getId(), deptIds);
+			List<Integer> deptRoleIds = new ArrayList<Integer>();
+			if (!DataValidator.isCollectionEmpty(deptRoles)) {
+				deptRoleIds = deptRoles.stream().map(i -> i.getId()).collect(Collectors.toList());
+			}
+
+			List<UserDepartmentRole> userDeptRoles = userDepartmentRoleRepo.findAllByUserIdAndDeptRoleIdIn(userId,
+					deptRoleIds);
+			retValue = !DataValidator.isCollectionEmpty(userDeptRoles);
+
+			logger.info("checkMdoAdminPrivilage... returns : " + retValue);
+		} catch (Exception e) {
+			logger.error(e);
+			throw e;
+		}
+		return retValue;
+	}
+
+	@Override
+	public DepartmentInfo getMyDepartmentDetails(String userId, boolean isUserInfoRequired) throws Exception {
+		List<UserDepartmentRole> userDepts = userDepartmentRoleRepo.findByUserId(userId);
+		if (DataValidator.isCollectionEmpty(userDepts)) {
+			throw new Exception("Failed to find department details for given userId: " + userId);
+		}
+		return getDepartmentById(userDepts.get(0).getDeptId(), isUserInfoRequired);
+	}
+
 	private DepartmentInfo enrichDepartmentInfo(Integer deptId, boolean isUserInfoRequired, boolean enrichData) {
 		Optional<Department> dept = deptRepo.findById(deptId);
 		if (dept.isPresent()) {
@@ -207,12 +260,22 @@ public class PortalServiceImpl implements PortalService {
 						.collect(Collectors.toMap(DeptRoleInfo::getDeptRoleId, deptRoleInfo -> deptRoleInfo));
 
 				if (isUserInfoRequired) {
+					List<String> userIds = userDeptList.stream().map(i -> i.getUserId()).collect(Collectors.toList());
+					Map<String, Object> result = userUtilService.getUsersDataFromUserIds("igot", userIds,
+							new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME,
+									PIDConstants.EMAIL, PIDConstants.DEPARTMENT_NAME)));
 					for (UserDepartmentRole userDeptRole : userDeptList) {
 						PortalUserInfo pUserInfo = new PortalUserInfo();
 						pUserInfo.setUserId(userDeptRole.getUserId());
 						pUserInfo.setActive(userDeptRole.getIsActive());
 						pUserInfo.setBlocked(userDeptRole.getIsBlocked());
-						// TODO -- Fetch User Data
+						// Fetch User Data
+						if (result != null && result.containsKey(userDeptRole.getUserId())) {
+							Map<String, String> userData = (Map<String, String>) result.get(userDeptRole.getUserId());
+							pUserInfo.setEmailId(userData.get("email"));
+							pUserInfo.setFirstName(userData.get("first_name"));
+							pUserInfo.setLastName(userData.get("last_name"));
+						}
 
 						// Assign RoleInfo
 						pUserInfo.setRoleInfo(deptRoleMap.get(userDeptRole.getDeptRoleId()));
