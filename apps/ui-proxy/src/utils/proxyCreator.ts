@@ -63,14 +63,11 @@ export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout =
 
     // tslint:disable-next-line: no-console
     console.log('REQ_URL_ORIGINAL proxyCreatorSunbird', req.originalUrl)
-
-    const lastSlug = req.originalUrl.split('/')
-    const lastSlugId = lastSlug.pop() || ''
-    const contentId = lastSlugId.split('?')[0]
+    const url = removePrefix('/proxies/v8', req.originalUrl)
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
-      target: targetUrl + contentId,
+      target: targetUrl + url,
     })
   })
   return route
@@ -85,6 +82,19 @@ export function proxyCreatorKnowledge(route: Router, targetUrl: string, _timeout
       changeOrigin: true,
       ignorePath: true,
       target: targetUrl + url,
+    })
+  })
+  return route
+}
+
+export function proxyCreatorUpload(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL proxyCreatorUpload', targetUrl)
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl,
     })
   })
   return route

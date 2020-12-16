@@ -6,7 +6,9 @@ import {
   proxyCreatorRoute,
   proxyCreatorSunbird,
   proxyCreatorSunbirdSearch,
-  proxyCreatorToAppentUserId, scormProxyCreatorRoute
+  proxyCreatorToAppentUserId,
+  proxyCreatorUpload,
+  scormProxyCreatorRoute
 } from '../utils/proxyCreator'
 
 export const proxiesV8 = express.Router()
@@ -59,18 +61,15 @@ proxiesV8.use('/sunbirdigot/*',
   proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/composite/v1/search`)
 )
 
-proxiesV8.use('/sunbird/*',
-  // tslint:disable-next-line: max-line-length
-  proxyCreatorSunbird(express.Router(), `https://igot-sunbird.idc.tarento.com/api/course/v1/hierarchy/`)
+proxiesV8.use('/action/content/v3/upload/*',
+  proxyCreatorUpload(express.Router(), `http://content-service:9000/v3/uploadurl`)
 )
 
 proxiesV8.use('/action/*',
-  // tslint:disable-next-line: max-line-length
   proxyCreatorKnowledge(express.Router(), `http://knowledge-mw-service:5000`)
 )
 
 proxiesV8.use('/api/user/v2/read',
-  // tslint:disable-next-line: max-line-length
   proxyCreatorToAppentUserId(express.Router(), `https://igot-sunbird.idc.tarento.com/api/user/v2/read/`)
 )
 
@@ -81,4 +80,9 @@ proxiesV8.use('/content-progres/*',
 proxiesV8.use('/read/content-progres/*',
   // tslint:disable-next-line: max-line-length
   proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/course/v1/content/state/read`)
+)
+
+proxiesV8.use('/api/*',
+  // tslint:disable-next-line: max-line-length
+  proxyCreatorSunbird(express.Router(), `http://kong:8000`)
 )
