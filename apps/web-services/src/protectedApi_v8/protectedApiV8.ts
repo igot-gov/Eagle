@@ -22,6 +22,7 @@ import { navigatorApi } from './navigator'
 import { networkConnectionApi } from './network'
 
 import { networkHubApi } from './network-hub'
+import { portalApi } from './portal'
 import { recommendationApi } from './recommendation'
 import { scromApi } from './scrom'
 import { socialApi } from './social'
@@ -67,3 +68,4 @@ protectedApiV8.use('/connections', connectionsApi)
 protectedApiV8.use('/competency', competencyApi)
 protectedApiV8.use('/dept', deptApi)
 protectedApiV8.use('/workflowhandler', workflowHandlerApi)
+protectedApiV8.use('/portal', portalApi)
