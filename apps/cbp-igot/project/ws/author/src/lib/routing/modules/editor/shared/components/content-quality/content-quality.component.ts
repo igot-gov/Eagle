@@ -9,6 +9,10 @@ import { EditorContentService } from '../../../services/editor-content.service'
 import _ from 'lodash'
 import { AuthInitService } from '../../../../../../services/init.service'
 import { NSIQuality } from '../../../../../../interface/content-quality'
+import { SelfCurationService } from '../../services/self-curation.service'
+import { ContentQualityService } from '../../services/content-quality.service'
+import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
+import { ActivatedRoute } from '@angular/router'
 // import { ValueService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 /* tslint:enable */
 const ELEMENT_DATA: any[] = [
@@ -66,13 +70,16 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   constructor(
     // private valueSvc: ValueService,
     private contentService: EditorContentService,
-    // private activateRoute: ActivatedRoute,
+    private activateRoute: ActivatedRoute,
+    private _configurationsService: ConfigurationsService,
     private breakpointObserver: BreakpointObserver,
     private loaderService: LoaderService,
     private authInitService: AuthInitService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _qualityService: ContentQualityService
   ) {
-    this.fillData()
+    this.getJSON()
+    this.fillResponseData()
   }
   ngOnInit(): void {
     this.sidenavSubscribe()
@@ -94,6 +101,31 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       this.mediumScreen = isLtMedium
       this.sideBarOpened = !isLtMedium
     })
+  }
+  getJSON() {
+    if (this.activateRoute.parent && this.activateRoute.parent.parent
+      && this.activateRoute.parent.parent.snapshot && this.activateRoute.parent.parent.snapshot.data) {
+      this.questionData = _.map(this.activateRoute.parent.parent.snapshot.data.qualityJSON.criteria, cr => {
+        return {
+          type: (cr.criteria || '').replace(' ', ''),
+          name: cr.criteria,
+          desc: '',
+          questions: _.map(cr.qualifiers, (q, idx1: number) => {
+            return {
+              question: q.description,
+              position: idx1,
+              options: _.map(q.options, op => {
+                return {
+                  name: op.name,
+                  weight: op.name,
+                  selected: false
+                }
+              }),
+            }
+          })
+        }
+      })
+    }
   }
   logs(val: any) {
     console.log(val)
@@ -152,16 +184,19 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   sidenavClose() {
     setTimeout(() => (this.leftArrow = true), 500)
   }
-  fillData() {
-    if (this.authInitService.contentQuality && this.authInitService.contentQuality.questionsData) {
-      this.questionData = this.authInitService.contentQuality.questionsData
-      // this.menus = _.map(this.authInitService.contentQuality.questionsData, q => {
-      //   return {
-      //     name: q.name,
-      //     desc: q.desc,
-      //     key: q.type
-      //   }
-      // })
+  fillResponseData() {
+    if (this._configurationsService.userProfile) {
+      let reqObj = {
+        resourceId: this.currentContent,
+        resourceType: 'content',
+        userId: this._configurationsService.userProfile.userId,
+        identifier: 'lex_score_1608039795785'
+      }
+      this._qualityService.fetchresult(reqObj).subscribe(result => {
+        if (result) {
+
+        }
+      })
     }
   }
   selectMenu(key: string, index: number) {
@@ -242,13 +277,52 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     }
     return false
   }
+  getCount(index: number): string {
+    if (index <= 9) {
+      return `_00${index}`
+    } else if (index > 9 && index <= 99) {
+      return `_0${index}`
+    } else if (index > 99 && index <= 999) {
+      return `_${index}`
+    }
+    return `_000`
+  }
   submitResult(qualityForm: any) {
-    if (qualityForm) {
+    if (qualityForm && this._configurationsService.userProfile) {
       /* tslint:disable */
       console.log(qualityForm)
       /* tslint:disable */
+      let responses = _.map(_.get(qualityForm, 'questionsArray'), (p: NSIQuality.IQuestionConfig) => {
+        return {
+          criteria: p.name,
+          qualifiers: _.map(_.get(p, 'ques'), (q: NSIQuality.IQualityQuestion, qid: number) => {
+            return {
+              name: p.name.replace(/&/, '').replace(/  /g, '_').replace(/ /g, '_') + this.getCount(qid + 1),
+              evaluated: q.options
+            }
+          })
+        }
+      })
+
+      const data = {
+        resourceId: this.currentContent,
+        templateId: 'content_scoring_template',
+        resourceType: 'content',
+        userId: this._configurationsService.userProfile.userId,
+        criteriaModels: responses
+      }
+      console.log(data)
+
+      // this._qualityService.postResponse(data).subscribe(response => {
+      //   if (response) {
+      //     this.displayResult = true
+      //   } else {
+      //     // need to check
+      //     this.displayResult = true
+      //   }
+      // })
     }
-    this.displayResult = true
+
   }
   showHideResult() {
     this.isResultExpend = !this.isResultExpend

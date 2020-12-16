@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { DisplayContentTypeModule } from '@ws-widget/collection'
+import { AtGlanceModule, DisplayContentTypeModule } from '@ws-widget/collection'
 import { DefaultThumbnailModule, PipeDurationTransformModule } from '@ws-widget/utils'
 import { SharedModule } from '@ws/author/src/lib/modules/shared/shared.module'
 import { AceEditorModule } from 'ng2-ace-editor'
@@ -29,6 +29,8 @@ import { RouterModule } from '@angular/router'
 import { ContentSelfCurationComponent } from './components/content-self-curation/content-self-curation.component'
 import { CurationProgressCardComponent } from './components/content-self-curation/curation-progress-card/curation-progress-card.component'
 import { SelfCurationService } from './services/self-curation.service'
+import { ContentSummaryComponent } from './components/content-summary/content-summary.component'
+import { ContentQualityService } from './services/content-quality.service'
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { SelfCurationService } from './services/self-curation.service'
     ContentQualityComponent,
     ContentSelfCurationComponent,
     CurationProgressCardComponent,
+    ContentSummaryComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ import { SelfCurationService } from './services/self-curation.service'
     MatRadioModule,
     RouterModule,
     MatTableModule,
+    AtGlanceModule,
   ],
   exports: [
     MatQuillComponent,
@@ -79,8 +83,9 @@ import { SelfCurationService } from './services/self-curation.service'
     CompetencyAddPopUpComponent,
     ContentQualityComponent,
     ContentSelfCurationComponent,
+    ContentSummaryComponent,
   ],
   entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent],
-  providers: [UploadService, SelfCurationService],
+  providers: [UploadService, SelfCurationService, ContentQualityService],
 })
 export class EditorSharedModule { }

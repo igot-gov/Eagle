@@ -70,7 +70,8 @@
         <span>5. Summary</span>
       </ng-template>
       <ng-template matTabContent>
-        Content 5 -
+        <ws-auth-content-summary [parentContent]="currentParentId" [class.hidden]="viewMode !== 'meta'"
+          [isSubmitPressed]="isSubmitPressed" type="" (data)="action($event)"></ws-auth-content-summary>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

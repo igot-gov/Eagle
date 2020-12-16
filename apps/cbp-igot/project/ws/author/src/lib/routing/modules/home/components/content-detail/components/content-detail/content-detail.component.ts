@@ -49,7 +49,7 @@ export class ContentDetailComponent implements OnInit, OnDestroy {
   filterMenuTreeFlattener: any
   public cardContent!: any[]
   public contentId: string | null = null
-  public content!: NsContent.IContent
+  public content!: NSContent.IContentMeta
   public filters: any[] = []
   // public status = 'draft'
   public status = 'published'

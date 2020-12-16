@@ -24,7 +24,7 @@ export namespace NSIQuality {
 
 
 
-  export interface qualityResponse {
+  export interface IQualityResponse {
     identifier: string
     rootOrg: string
     org: string

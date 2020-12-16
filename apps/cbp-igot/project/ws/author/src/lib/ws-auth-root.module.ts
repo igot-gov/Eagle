@@ -24,6 +24,7 @@ import { CKEditorResolverService } from './services/ckeditor-resolve.service'
 import { AuthNavBarToggleService } from './services/auth-nav-bar-toggle.service'
 import { WorkFlowService } from './services/work-flow.service'
 import { CreateContentModule } from './routing/modules/create-content/create-component.module'
+import { QualityJSONResolver } from './services/quality-json-resolver.service'
 
 /**
  * This function is used internal to get a string instance of the `<base href="" />` value from `index.html`.
@@ -70,6 +71,7 @@ export function getBaseHref(platformLocation: PlatformLocation): string {
       deps: [PlatformLocation],
     },
     AuthNavBarToggleService,
+    QualityJSONResolver,
   ],
 })
 export class WsAuthorRootModule { }

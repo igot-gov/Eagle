@@ -1,0 +1,48 @@
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.root {
+  display: flex;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-95 {
+  flex: 0.95;
+}
+
+.content-image {
+  width: auto;
+  height: 180px;
+  max-width: 750px;
+}
+
+.clean-div {
+  background: #CEE4F0;
+  border-radius: 4px;
+  max-width: 212px;
+}
+
+.left-issue-div {
+  border-radius: 4px;
+  max-width: 212px;
+  width: 212px;
+}
+
+.critical {
+  color: #D13924 !important;
+}
+
+.warn {
+  color: #FF8268 !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+.custom-line-h {
+  line-height: 48px;
+}

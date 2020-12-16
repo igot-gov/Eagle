@@ -1,0 +1,112 @@
+<div class="flex flex-row margin-top-m">
+  <div class="flex-3 flex-column">
+    <div class="flex flex-1 flex-column">
+      <div class="mt-10">
+        <img mat-card-image class="content-image" [src]="contentMeta?.appIcon" alt="Content Image"
+          (error)="changeToDefaultImg($event)" />
+      </div>
+      <div class="flex flex-column margin-top-m">
+        <span class="mat-headline">{{contentMeta?.name}}</span>
+        <span class="mat-body-1 margin-top-m">{{contentMeta?.description}}
+        </span>
+      </div>
+    </div>
+    <div class="flex flex-1 margin-top-m">
+      <span class="mat-body-1" [innerHTML]="contentMeta?.body">
+      </span>
+    </div>
+
+
+    <mat-card class="ws-mat-accent-border">
+      <mat-card-title class="m-auto">
+        <span class="mat-title" id="content-result">{{'Content quality report'}}</span>
+      </mat-card-title>
+      <mat-card-content class="margin-top-xs mobile-break mat-app-background">
+        <div class="flex flex-1 flex-column">
+          <div class="flex flex-1">
+            <span class="mat-title">{{79}}%</span>
+          </div>
+          <div class="flex flex-075">
+            <mat-progress-bar class="margin-bottom-m quality-progress" aria-labelledby="content-result"
+              mode="determinate" [value]="79">
+            </mat-progress-bar>
+          </div>
+          <div class="flex flex-1">
+            <button mat-button type="button" class="margin-top-s margin-bottom-s ws-mat-accent-border margin-left-s"
+              (click)="nextQ()">
+              <mat-icon>cloud_download</mat-icon>
+              <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>
+                download
+              </span>
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="ws-mat-accent-border margin-top-l">
+      <mat-card-title class="m-auto">
+        <span class="mat-title">{{'Self curation results'}}</span>
+      </mat-card-title>
+
+      <mat-card-content class="flex flex-1 margin-top-xs mobile-break mat-app-background">
+        <div class="flex flex-1 flex-column clean-div">
+          <span class="mat-title margin-left-m margin-top-m">0</span>
+          <span class="mat-subheading-2 margin-left-m">Clean</span>
+        </div>
+        <ng-container *ngIf="progressData?.length>0">
+          <ng-container *ngFor="let ld of getSelfCurationProgress">
+            <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
+                    count:ld,
+                    critical: true,
+                    name:'Critical Issues'
+                  }}">
+            </ng-container>
+            <!-- <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{
+                     count:1,
+                    potential: true,
+                    name: 'Potential issues'
+                  }}">
+                  </ng-container> -->
+          </ng-container>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+    <!-- <mat-card-actions> -->
+    <div class="flex flex-start margin-top-l margin-bottom-s">
+      <button mat-raised-button type="button" class="ws-mat-accent-text ws-mat-accent-border-active">
+        <span class="mat-subheading-2 padding-xs custom-line-h" style="vertical-align: unset;" i18n>
+          Back: Self Curation
+        </span>
+      </button>
+      <ng-container [ngTemplateOutlet]="count">
+      </ng-container>
+      <button *ngIf="!lastQ" mat-raised-button type="button" class="text-white ws-mat-primary-background margin-left-s">
+        <span class="mat-subheading-2 padding-xs custom-line-h" style="vertical-align: unset;" i18n>
+          Submit for review
+        </span>
+      </button>
+
+    </div>
+    <!-- </mat-card-actions> -->
+
+
+  </div>
+
+  <div class="flex flex-1 margin-left-m">
+    <ws-widget-at-glance *ngIf="contentMeta && tocStructure" [widgetData]="getGlanceData()"></ws-widget-at-glance>
+  </div>
+</div>
+
+
+<ng-template #leftIssues let-data="data">
+  <div class="flex flex-column left-issue-div margin-left-m ws-mat-accent-border">
+    <span class="mat-title margin-left-m margin-top-m">{{data.count}}</span>
+    <span class="flex flex-1 margin-left-m">
+      <mat-icon class="critical" *ngIf="data.critical">error</mat-icon>
+      <mat-icon class="warn" *ngIf="data.potential">warning</mat-icon>
+      <span class="mat-subheading-2 margin-left-xs">{{data.name}}</span>
+    </span>
+  </div>
+</ng-template>
