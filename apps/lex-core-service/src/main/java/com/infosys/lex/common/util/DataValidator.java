@@ -12,6 +12,6 @@ public class DataValidator {
 	}
 
 	public static boolean isCollectionEmpty(Iterable<?> list) {
-		return list == null || list.iterator().hasNext();
+		return list == null || !list.iterator().hasNext();
 	}
 }
