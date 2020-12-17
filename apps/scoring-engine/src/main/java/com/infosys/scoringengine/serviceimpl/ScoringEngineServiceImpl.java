@@ -147,6 +147,7 @@ public class ScoringEngineServiceImpl implements ScoringEngineService {
 			Map<String, Object> searchQuery = new HashMap<>();
 			searchQuery.put("userId", evaluatorModel.getUserId());
 			searchQuery.put("resourceId", evaluatorModel.getResourceId());
+			searchQuery.put("isGetLatestRecordEnabled", evaluatorModel.isGetLatestRecordEnabled());
             if(!StringUtils.isEmpty(evaluatorModel.getIdentifier())){
 				searchQuery.put("identifier", evaluatorModel.getIdentifier());
 			}

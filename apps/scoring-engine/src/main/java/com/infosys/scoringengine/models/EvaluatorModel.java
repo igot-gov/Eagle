@@ -40,6 +40,9 @@ public class EvaluatorModel {
     private double finalMinWeightedAvg;
 
     private double finalWeightedScore;
+
+    private boolean getLatestRecordEnabled;
+
     @Size(min = 1)
     private List<CriteriaModel> criteriaModels = new ArrayList<>();
 
@@ -195,5 +198,13 @@ public class EvaluatorModel {
 
     public void setFinalWeightedScore(double finalWeightedScore) {
         this.finalWeightedScore = finalWeightedScore;
+    }
+
+    public boolean isGetLatestRecordEnabled() {
+        return getLatestRecordEnabled;
+    }
+
+    public void setGetLatestRecordEnabled(boolean getLatestRecordEnabled) {
+        this.getLatestRecordEnabled = getLatestRecordEnabled;
     }
 }

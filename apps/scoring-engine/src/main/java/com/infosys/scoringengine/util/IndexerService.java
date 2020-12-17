@@ -33,6 +33,9 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -97,11 +100,15 @@ public class IndexerService {
     }
 
     public JsonNode search(String index, Map<String, Object> searchQuery) throws IOException {
+        boolean getLatestRecord = (boolean)searchQuery.get("isGetLatestRecordEnabled");
+        searchQuery.remove("isGetLatestRecordEnabled");
         BoolQueryBuilder query = buildQuery(searchQuery);
         logger.info("Search query " + new ObjectMapper().writeValueAsString(query));
-
-
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().query(query);
+        if(getLatestRecord){
+            sourceBuilder.sort(SortBuilders.fieldSort("timeStamp.keyword").order(SortOrder.DESC));
+            sourceBuilder.size(1);
+        }
         SearchRequest searchRequest = new SearchRequest(index).source(sourceBuilder);
 
         ArrayNode resultArray = JsonNodeFactory.instance.arrayNode();
