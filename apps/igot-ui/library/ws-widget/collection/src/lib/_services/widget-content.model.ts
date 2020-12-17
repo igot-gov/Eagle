@@ -83,6 +83,7 @@ export namespace NsContent {
       currency: string
       value: number
     }
+    primaryCategory: string,
     proctorUrl?: string
     progress?: IMarkAsCompleteProgress
     publishedOn: string
@@ -269,6 +270,11 @@ export namespace NsContent {
     MODULE = 'Collection',
     RESOURCE = 'Resource',
   }
+
+  export enum EResourcePrimaryCategories {
+    LEARNING_RESOURCE = 'Learning Resource',
+  }
+
   export enum EMiscPlayerSupportedCollectionTypes {
     PLAYLIST = 'Playlist',
   }

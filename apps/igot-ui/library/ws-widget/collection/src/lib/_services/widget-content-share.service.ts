@@ -67,7 +67,7 @@ export class WidgetContentShareService {
           thumbnailUrl: content.appIcon,
           title: content.name,
           track: (content.track || []).map(t => t.name).join(';'),
-          url: `${document.baseURI}app/toc/${content.identifier}/overview`,
+          url: `${document.baseURI}app/toc/${content.identifier}/overview?primaryCategory=${content.primaryCategory}`,
         },
       ],
       body: {

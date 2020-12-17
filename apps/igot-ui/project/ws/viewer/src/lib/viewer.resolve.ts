@@ -29,7 +29,7 @@ export class ViewerResolve
 
   resolve(route: ActivatedRouteSnapshot): Observable<IResolveResponse<NsContent.IContent>> | null {
     const resourceType = route.data.resourceType
-    this.viewerDataSvc.reset(route.paramMap.get('resourceId'))
+    this.viewerDataSvc.reset(route.paramMap.get('resourceId'), 'none', route.queryParams['primaryCategory'])
     if (!this.viewerDataSvc.resourceId) {
       return null
     }
@@ -48,6 +48,7 @@ export class ViewerResolve
         this.viewerDataSvc.resourceId,
         'detail',
         ADDITIONAL_FIELDS_IN_CONTENT,
+        this.viewerDataSvc.primaryCategory,
       )
     ).pipe(
       tap(content => {
@@ -55,7 +56,7 @@ export class ViewerResolve
         content = content.result.content
         if (content.status === 'Deleted' || content.status === 'Expired') {
           this.router.navigate([
-            `${forPreview ? '/author' : '/app'}/toc/${content.identifier}/overview`,
+            `${forPreview ? '/author' : '/app'}/toc/${content.identifier}/overview?primaryCategory=${content.primaryCategory}`,
           ])
         }
         if (content.ssoEnabled) {

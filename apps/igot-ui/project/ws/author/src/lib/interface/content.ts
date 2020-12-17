@@ -164,6 +164,7 @@ export namespace NSContent {
     creatorLogo: string
     creatorPosterImage: string
     creatorThumbnail: string
+    primaryCategory: string
   }
 
   export interface IClient {

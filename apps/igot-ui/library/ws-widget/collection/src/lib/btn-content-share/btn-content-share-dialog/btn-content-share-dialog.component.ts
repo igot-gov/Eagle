@@ -141,9 +141,9 @@ export class BtnContentShareDialogComponent implements OnInit {
         return `${locationOrigin}/app/knowledge-board/${this.data.content.identifier}`
       case NsContent.EContentTypes.KNOWLEDGE_ARTIFACT:
 
-        return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview`
+        return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview?primaryCategory=${this.data.content.primaryCategory}`
       default:
-        return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview`
+        return `${locationOrigin}/app/toc/${this.data.content.identifier}/overview?primaryCategory=${this.data.content.primaryCategory}`
     }
   }
 

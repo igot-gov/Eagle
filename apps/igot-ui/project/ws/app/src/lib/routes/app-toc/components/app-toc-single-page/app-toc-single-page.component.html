@@ -48,7 +48,8 @@ content?.registrationInstructions?.length
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + preContent.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + preContent.identifier"
+                        [queryParams]="{primaryCategory: preContent?.primaryCategory}">
                             <p class="section-content margin-remove-bottom mat-subheading-1">{{ preContent.name }}</p>
                         </a>
                     </div>
@@ -62,7 +63,7 @@ content?.registrationInstructions?.length
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + postContent.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + postContent.identifier + '?primaryCategory='+ item.primaryCategory">
                             <p class="section-content margin-remove-bottom mat-subheading-1">{{ postContent.name }}</p>
                         </a>
                     </div>
@@ -76,7 +77,7 @@ content?.registrationInstructions?.length
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + certification.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + certification.identifier + '?primaryCategory='+ item.primaryCategory">
                             <p class="section-content margin-remove-bottom mat-subheading-1">{{ certification.name }}
                             </p>
                         </a>
@@ -91,7 +92,7 @@ content?.registrationInstructions?.length
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + studyitem.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + studyitem.identifier + '?primaryCategory='+ item.primaryCategory">
                             <p class="section-content margin-remove-bottom mat-subheading-1">{{ studyitem.name }}</p>
                         </a>
                     </div>
@@ -106,7 +107,7 @@ tocConfig?.overview?.playgroundResources?.enabled && content?.playgroundResource
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + playgroundResource.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + playgroundResource.identifier + '?primaryCategory='+ item.primaryCategory">
                             <p class="section-content margin-remove-bottom mat-subheading-1">
                                 {{ playgroundResource.name }}</p>
                         </a>
@@ -121,7 +122,7 @@ tocConfig?.overview?.playgroundResources?.enabled && content?.playgroundResource
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + kArtifact.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + kArtifact.identifier + '?primaryCategory='+ item.primaryCategory">
                             <p class="section-content margin-remove-bottom mat-subheading-1">{{ kArtifact.name }}</p>
                         </a>
                     </div>
@@ -137,7 +138,7 @@ content?.equivalentCertifications?.length
                         <span class="mr-1">
                             <mat-icon class="align-bottom">web_asset</mat-icon>
                         </span>
-                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + equivalentCertification.identifier">
+                        <a class="ws-mat-primary-text" [routerLink]="'/app/toc/' + equivalentCertification.identifier +'?primaryCategory='+ item.primaryCategory">
                             <p class="section-content margin-remove-bottom mat-subheading-1">
                                 {{ equivalentCertification.name }}</p>
                         </a>
@@ -259,8 +260,8 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                                 </span>
                                 <a class="ws-mat-primary-text" [routerLink]="
       content.status !== 'Live'
-        ? '/author' + '/toc/' + content.identifier
-        : '/app' + '/toc/' + content.identifier
+        ? '/author' + '/toc/' + content.identifier +'?primaryCategory='+ item.primaryCategory
+        : '/app' + '/toc/' + content.identifier + '?primaryCategory='+ item.primaryCategory
     ">
                                     <p class="margin-remove-bottom mat-subheading-1">{{ content.name }}</p>
                                 </a>
@@ -519,7 +520,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
                                         <h3 class="item-value width-expand">
                                             <ng-container
                                                 *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
-                                                <a [href]="'/app/toc/' + item.identifier + '/overview'"> {{ item.name }}
+                                                <a [href]="'/app/toc/' + item.identifier + '/overview?primaryCategory='+ item.primaryCategory"> {{ item.name }}
                                                 </a>
                                             </ng-container>
                                         </h3>

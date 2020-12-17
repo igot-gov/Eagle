@@ -160,9 +160,9 @@ export class HtmlComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   backToDetailsPage() {
-    this.router.navigate([
-      `/app/toc/${this.htmlContent ? this.htmlContent.identifier : ''}/overview`,
-    ])
+    this.router.navigate(
+      [`/app/toc/${this.htmlContent ? this.htmlContent.identifier : ''}/overview`],
+      { queryParams: { primaryCategory: this.htmlContent ? this.htmlContent.primaryCategory : '' } })
   }
   receiveMessage(msg: any) {
     // /* tslint:disable-next-line */

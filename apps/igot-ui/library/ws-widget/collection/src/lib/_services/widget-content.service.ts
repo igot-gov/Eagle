@@ -41,6 +41,14 @@ export class WidgetContentService {
     private configSvc: ConfigurationsService
   ) { }
 
+  isResource(primaryCategory: string) {
+    if (primaryCategory) {
+      const isResource = primaryCategory === NsContent.EResourcePrimaryCategories.LEARNING_RESOURCE
+      return isResource
+    }
+    return false
+  }
+
   fetchMarkAsCompleteMeta(identifier: string): Promise<any> {
     const url = API_END_POINTS.MARK_AS_COMPLETE_META(identifier)
     return this.http.get(url).toPromise()
@@ -50,9 +58,15 @@ export class WidgetContentService {
     contentId: string,
     hierarchyType: 'all' | 'minimal' | 'detail' = 'detail',
     _additionalFields: string[] = [],
+    primaryCategory?: string | null ,
   ): Observable<NsContent.IContent> {
     // const url = `${API_END_POINTS.CONTENT}/${contentId}?hierarchyType=${hierarchyType}`
-    const url = `/apis/proxies/v8/sunbird/${contentId}?hierarchyType=${hierarchyType}`
+    let url = ''
+    if (primaryCategory && this.isResource(primaryCategory)) {
+      url = `/apis/proxies/v8/action/content/v3/read/${contentId}`
+    } else {
+      url = `/apis/proxies/v8/action/content/v3/hierarchy/${contentId}?hierarchyType=${hierarchyType}`
+    }
     // return this.http
     //   .post<NsContent.IContent>(url, { additionalFields })
     //   .pipe(retry(1))
@@ -227,4 +241,5 @@ export class WidgetContentService {
   fetchConfig(url: string) {
     return this.http.get<any>(url)
   }
+
 }

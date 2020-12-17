@@ -71,6 +71,7 @@ export class AppTocContentCardComponent implements OnInit, OnChanges {
         this.rootId,
         this.rootContentType,
         this.forPreview,
+        this.content.primaryCategory
       )
     }
     return { url: '', queryParams: {} }
