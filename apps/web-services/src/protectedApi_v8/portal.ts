@@ -4,13 +4,18 @@ import { NextFunction, Request, Response } from 'express'
 import { CONSTANTS } from '../utils/env'
 import { logError, logInfo } from '../utils/logger'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
-import { getUserRoles } from './user/roles'
 
 export const portalApi = express.Router()
 
 const API_END_POINTS = {
     accessValidator: (keyWord: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/${keyWord}/isAdmin`,
     deptApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department`,
+    deptByIdApi: (deptId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}`,
+    deptType: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType`,
+    deptTypeByName: (deptType: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType/${deptType}`,
+    deptTypeByTypeId: (deptTypeId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeById/${deptTypeId}`,
+    getDeptTypeName: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeName`,
+    myDeptApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/mydepartment`,
 }
 
 const portalValidator = async function validatePortalAccess(req: Request, res: Response, next: NextFunction) {
@@ -55,6 +60,7 @@ const unknownError = 'Failed due to unknown reason'
 const failedToProcess = 'Failed to process the request.'
 const badRequest = 'Bad request. UserId is a mandatory header'
 const department = '/department'
+const departmentType = '/departmentType'
 
 portalApi.get('/isAdmin/:deptType', async (req, res) => {
     const userId = req.headers.wid as string
@@ -71,15 +77,76 @@ portalApi.get('/isAdmin/:deptType', async (req, res) => {
     res.status(resp.status).send(resp.data)
 })
 
+portalApi.get(departmentType, async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.deptType)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get(departmentType + '/:deptType', async (req, res) => {
+    try {
+        const deptType = req.params.deptType as string
+        const response = await axios.get(API_END_POINTS.deptTypeByName(deptType))
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get('/departmentTypeById/:deptTypeId', async (req, res) => {
+    try {
+        const deptTypeId = req.params.deptTypeId as string
+        const response = await axios.get(API_END_POINTS.deptTypeByTypeId(deptTypeId))
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get('/departmentTypeName', async (req, res) => {
+    try {
+        const response = await axios.get(API_END_POINTS.getDeptTypeName)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
 portalApi.use('/mdo', portalValidator, mdoPortalApi)
 portalApi.use('/spv', portalValidator, spvPortalApi)
 
-portalApi.all('/', async (req, res) => {
+spvPortalApi.get(department, async (req, res) => {
     try {
         const userId = req.headers.wid as string
-        const rootOrg = req.headers.rootOrg as string
-        const roles = await getUserRoles(userId, rootOrg)
-        logInfo(roles)
+        if (!userId) {
+            res.status(400).send(badRequest)
+            return
+        }
+        const response = await axios.get(API_END_POINTS.deptApi)
+        res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + err)
         res.status((err && err.response && err.response.status) || 500).send(
@@ -90,14 +157,15 @@ portalApi.all('/', async (req, res) => {
     }
 })
 
-spvPortalApi.get(department, async (req, res) => {
+spvPortalApi.get(department + '/:deptId', async (req, res) => {
     try {
         const userId = req.headers.wid as string
-        if (!userId) {
+        const deptId = req.params.deptId as string
+        if (!userId || !deptId) {
             res.status(400).send(badRequest)
             return
         }
-        const response = await axios.get(API_END_POINTS.deptApi)
+        const response = await axios.get(API_END_POINTS.deptByIdApi(deptId))
         res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + err)
