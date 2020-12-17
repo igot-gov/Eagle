@@ -17,6 +17,7 @@ public class Criteria {
     private Double weightage;
     private Double max_score;
     private Double min_acceptable_score;
+    private String description;
     private List<Qualifier> qualifiers = new ArrayList<>();
 
     public String getCriteria() {
@@ -57,5 +58,13 @@ public class Criteria {
 
     public void setQualifiers(List<Qualifier> qualifiers) {
         this.qualifiers = qualifiers;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -95,6 +95,7 @@
       "criteria": [
         {
           "criteria": "Instructional Methods",
+          "description" : "Instructional methods determine how effectively the stated competencies and skills are acquired",
           "weightage": 0.25,
           "max_score": 65,
           "min_acceptable_score": 33.75,
@@ -675,6 +676,7 @@
         },
         {
           "criteria": "Assessment Design",
+          "description" : "Assessment Design Description",
           "weightage": 0.2,
           "max_score": 45,
           "min_acceptable_score": 22.5,
@@ -1079,6 +1081,7 @@
         },
         {
           "criteria": "Competency and Skills",
+          "description" : "Competency and Skills Description",
           "weightage": 0.2,
           "max_score": 15,
           "min_acceptable_score": 7.5,
@@ -1219,6 +1222,7 @@
         },
         {
           "criteria": "Learner Engagement",
+          "description" : "Learner Engagement Description",
           "weightage": 0.15,
           "max_score": 30,
           "min_acceptable_score": 15,
@@ -1491,6 +1495,7 @@
         },
         {
           "criteria": "Diversity & Inclusion",
+          "description" : "Diversity & Inclusion Description",
           "weightage": 0.15,
           "max_score": 100,
           "min_acceptable_score": 50,
@@ -2379,6 +2384,7 @@
         },
         {
           "criteria": "Learner Support",
+          "description" : "Learner Support Description",
           "weightage": 0.05,
           "max_score": 25,
           "min_acceptable_score": 12.5,

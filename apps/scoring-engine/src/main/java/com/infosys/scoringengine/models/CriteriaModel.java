@@ -33,6 +33,8 @@ public class CriteriaModel {
 
     private double weightedScore;
 
+    private String description;
+
     @Size(min =1)
     private List<QualifierModel> qualifiers = new ArrayList<>();
 
@@ -114,5 +116,13 @@ public class CriteriaModel {
 
     public void setWeightedScore(double weightedScore) {
         this.weightedScore = weightedScore;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
