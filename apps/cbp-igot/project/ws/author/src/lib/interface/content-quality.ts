@@ -11,6 +11,7 @@ export namespace NSIQuality {
     questions: IQualityQuestion[]
   }
   export interface IQualityQuestion {
+    type: string
     position: Number
     question: String,
     options: IQualityQuestionOption[]
@@ -21,15 +22,12 @@ export namespace NSIQuality {
     weight: Number
     selected?: boolean
   }
-
-
-
   export interface IQualityResponse {
     identifier: string
     rootOrg: string
     org: string
     resourceId: string
-    resourceType: string //content
+    resourceType: string // content
     userId: string
     templateId: string
     templeteName: string

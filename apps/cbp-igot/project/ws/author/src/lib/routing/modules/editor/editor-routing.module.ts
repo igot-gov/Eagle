@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '',
     component: EditorComponent,
     resolve: {
-      qualityJSON: QualityJSONResolver
+      qualityJSON: QualityJSONResolver,
     },
     children: [
       {

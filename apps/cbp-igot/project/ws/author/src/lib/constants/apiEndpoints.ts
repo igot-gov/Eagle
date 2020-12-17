@@ -34,8 +34,6 @@ export const EMPLOYEE_LIST = `${AUTHORING_SEARCH_BASE}v1/autoComplete/`
 // to get JSON File
 export const GET_JSON = `${PROTECTED_SLAG_V8}scroing/getTemplate/`
 
-
-
 // File Base
 export const CONTENT_BASE = `${AUTHORING_CONTENT_BASE}upload/`
 export const CONTENT_BASE_ENCODE = `${AUTHORING_BASE}encode`

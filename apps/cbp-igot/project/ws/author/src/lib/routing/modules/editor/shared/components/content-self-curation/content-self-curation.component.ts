@@ -96,18 +96,20 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
       this.sideBarOpened = !isLtMedium
     })
   }
-  logs(val: any) {
-    console.log(val)
-  }
+  // logs(val: any) {
+  //   console.log(val)
+  // }
   getMeta() {
     this.contentService.changeActiveCont.subscribe(data => {
       // if (this.contentMeta && this.canUpdate) {
       //   this.storeData()
       // }
       this.contentMeta = this.contentService.getUpdatedMeta(data)
-      setTimeout(() => {
-        this.getProgress()
-      }, 2000)
+      setTimeout(
+        () => {
+          this.getProgress()
+        },
+        2000)
     })
   }
   getProgress() {
@@ -119,7 +121,7 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
       })
     }
     if (response.length > 0) {
-      this.leftmenudata = _.map(response, i => i.profanityWordList.length)
+      // this.leftmenudata = _.map(response, (i: NSISelfCuration.ISelfCurationData[]) => _.first(i.).profanityWordList.length)
     }
   }
   ngOnDestroy(): void {

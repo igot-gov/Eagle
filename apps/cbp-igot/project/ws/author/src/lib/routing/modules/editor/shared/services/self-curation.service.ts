@@ -22,7 +22,6 @@ const API_END_POINTS = {
   GET_PROFANITY: `${PROTECTED_SLAG_V8}/profanity/getPdfProfanity`,
 }
 
-
 @Injectable()
 export class SelfCurationService {
   curationData: { [key: string]: NSISelfCuration.ISelfCurationData } = {}
@@ -34,17 +33,18 @@ export class SelfCurationService {
     // private configSvc: ConfigurationsService,
   ) { }
 
-
   getOriginalData(id: string): NSISelfCuration.ISelfCurationData {
     return this.curationData[id]
   }
 
-  setcurationData(meta: NSISelfCuration.ISelfCurationData) {
-    this.curationData[meta.primaryKey.contentId] = JSON.parse(JSON.stringify(meta))
+  setcurationData(meta: NSISelfCuration.ISelfCurationData[]) {
+    for (let i = 0; i < meta.length; i += 1) {
+      this.curationData[meta[i].primaryKey.contentId] = JSON.parse(JSON.stringify(meta))
+    }
   }
 
-  fetchresult(data: any): Observable<NSISelfCuration.ISelfCurationData> {
-    return this.http.post<NSISelfCuration.ISelfCurationData>(`${API_END_POINTS.GET_PROFANITY}`, data)
+  fetchresult(data: any): Observable<NSISelfCuration.ISelfCurationData[]> {
+    return this.http.post<NSISelfCuration.ISelfCurationData[]>(`${API_END_POINTS.GET_PROFANITY}`, data)
       .pipe(tap(v => this.setcurationData(v)))
   }
 

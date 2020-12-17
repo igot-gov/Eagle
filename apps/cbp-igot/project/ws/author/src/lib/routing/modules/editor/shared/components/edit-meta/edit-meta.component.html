@@ -639,9 +639,10 @@
                       </div>
                       <span i18n *ngIf="infoType === 'license'">Assign license for the content</span>
                     </label>
-                    <div class="margin-top-s" [ngClass]="{ 'mat-form-field-invalid': showError('license') }">
+                    <div class="flex flex-1 margin-top-s"
+                      [ngClass]="{ 'mat-form-field-invalid': showError('license') }">
                       <ng-container [formGroup]="contentForm">
-                        <mat-radio-group name="license" class="flex tgl-group margin-top-s"
+                        <mat-radio-group name="license" class="flex tgl-group margin-top-s flex-wrap"
                           aria-label="Select an option" formControlName="license">
                           <mat-radio-button matInput [name]="'radio-' + license"
                             class="flex flex-row itm-center ws-mat-accent-border margin-right-s"

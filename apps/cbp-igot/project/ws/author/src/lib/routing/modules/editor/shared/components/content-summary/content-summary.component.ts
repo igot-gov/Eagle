@@ -8,8 +8,6 @@ import { SelfCurationService } from '../../services/self-curation.service'
 import { EditorContentService } from '../../../services/editor-content.service'
 import { MyTocService } from '../../../../home/components/content-detail/services/my-toc.service'
 /* tslint:enable */
-
-
 @Component({
   selector: 'ws-auth-content-summary',
   templateUrl: './content-summary.component.html',
@@ -55,7 +53,7 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
     if (path) {
       return _.last(path.split('/'))
     }
-    return ""
+    return ''
   }
 
   resetAndFetchTocStructure() {
@@ -102,18 +100,18 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
   fetchSelfCurationProgress() {
     if (this.contentMeta.children) {
       _.each(this.contentMeta.children, (element: NSContent.IContentMeta) => {
-        let data = {
+        const data = {
           contentId: element.identifier,
           fileName: this.getFileName(element.artifactUrl),
         }
         this.curationService.fetchresult(data).subscribe(result => {
-          this.progressData.push(result)
+          this.progressData.push(...result)
         })
       })
     }
   }
   get getSelfCurationProgress() {
-    let response: NSISelfCuration.ISelfCurationData[] = []
+    const response: NSISelfCuration.ISelfCurationData[] = []
     if (this.contentMeta.children) {
       _.each(this.contentMeta.children, (element: NSContent.IContentMeta) => {
         response.push(this.curationService.getOriginalData(element.identifier))
@@ -121,8 +119,9 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
     } else if (this.contentMeta.artifactUrl) {
       response.push(this.curationService.getOriginalData(this.contentMeta.identifier))
     }
-    response = _.compact(response)
-    return _.map(response, i => i.profanityWordList.length) || []
+    // response = _.compact(response)
+    // return _.map(response, i => i.profanityWordList.length) || []
+    return 0
 
   }
   changeToDefaultImg($event: any) {

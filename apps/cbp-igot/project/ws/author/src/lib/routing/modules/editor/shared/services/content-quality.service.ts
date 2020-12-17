@@ -14,8 +14,8 @@ import { tap } from 'rxjs/operators'
 // import { FIXED_FILE_NAME } from '../../../../../constants/upload'
 import { HttpClient } from '@angular/common/http'
 import { NSIQuality } from '../../../../../interface/content-quality'
-import { ConfigurationsService } from '@ws-widget/utils'
-import { ApiService } from '../../../../../modules/shared/services/api.service'
+// import { ConfigurationsService } from '@ws-widget/utils'
+// import { ApiService } from '../../../../../modules/shared/services/api.service'
 // import { ConfigurationsService } from '@ws-widget/utils'
 
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
@@ -25,18 +25,16 @@ const API_END_POINTS = {
   GET_CALC: `${PROTECTED_SLAG_V8}/scroing/calculate`,
   GET_JSON: `${PROTECTED_SLAG_V8}/scroing/struct`,
 }
-
-
 @Injectable()
 export class ContentQualityService {
   curationData: { [key: string]: NSIQuality.IQualityResponse } = {}
   currentContent!: string
-  JSONStructure!: any
+  jSONStructure!: any
   constructor(
-    private apiService: ApiService,
+    // private apiService: ApiService,
     // private accessService: AccessControlService,
     private http: HttpClient,
-    private configSvc: ConfigurationsService,
+    // private configSvc: ConfigurationsService,
   ) {
     // this.fetchJSON().subscribe()
   }
@@ -49,28 +47,28 @@ export class ContentQualityService {
   }
 
   setJSONStruct(data: any) {
-    this.JSONStructure = JSON.parse(JSON.stringify(data))
+    this.jSONStructure = JSON.parse(JSON.stringify(data))
   }
 
-  fetchJSON() {
-    debugger
-    // this.http.post<NSIQuality.IContentQualityConfig>(`${API_END_POINTS.GET_JSON}`, {}).pipe(tap(v => this.setJSONStruct(v)))
-    return this.apiService.get<NSIQuality.IContentQualityConfig>(
-      `${this.configSvc.baseUrl}/feature/auth-content-quality.json`,
-    ).pipe(tap(v => this.setJSONStruct(v)))
-  }
+  // fetchJSON() {
+  //   debugger
+  //   // // this.http.post<NSIQuality.IContentQualityConfig>(`${API_END_POINTS.GET_JSON}`, {}).pipe(tap(v => this.setJSONStruct(v)))
+  //   // return this.apiService.get<NSIQuality.IContentQualityConfig>(
+  //   //   `${this.configSvc.baseUrl}/feature/auth-content-quality.json`,
+  //   // ).pipe(tap(v => this.setJSONStruct(v)))
+  // }
 
-  getJSONStruct() {
-    if (this.JSONStructure) {
-      return this.JSONStructure
-    } else {
-      return this.fetchJSON().subscribe(response => {
-        return response
-      }, () => {
-        return null
-      })
-    }
-  }
+  // getJSONStruct() {
+  //   if (this.JSONStructure) {
+  //     return this.JSONStructure
+  //   } else {
+  //     return this.fetchJSON().subscribe(response => {
+  //       return response
+  //     }, () => {
+  //       return null
+  //     })
+  //   }
+  // }
 
   fetchresult(data: any): Observable<NSIQuality.IQualityResponse> {
     return this.http.post<NSIQuality.IQualityResponse>(`${API_END_POINTS.GET_SCORE}`, data)
@@ -78,7 +76,7 @@ export class ContentQualityService {
   }
 
   postResponse(data: any) {
-    return this.http.post<NSIQuality.IQualityResponse>(`${API_END_POINTS.GET_SCORE}`, data)
+    return this.http.post<NSIQuality.IQualityResponse>(`${API_END_POINTS.GET_CALC}`, data)
     // .pipe(tap(v => this.calculateScore(v)))
   }
 

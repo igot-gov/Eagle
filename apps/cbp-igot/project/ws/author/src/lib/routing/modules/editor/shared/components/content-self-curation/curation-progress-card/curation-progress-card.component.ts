@@ -5,8 +5,6 @@ import _ from 'lodash'
 import { NSISelfCuration } from '../../../../../../../interface/self-curation'
 import { SelfCurationService } from '../../../services/self-curation.service'
 /* tslint:enable */
-
-
 @Component({
   selector: 'ws-auth-curation-progress-card',
   templateUrl: './curation-progress-card.component.html',
@@ -14,9 +12,9 @@ import { SelfCurationService } from '../../../services/self-curation.service'
 })
 export class CurationProgressCardComponent implements OnInit, OnDestroy {
   @Input() contentMeta!: NSContent.IContentMeta
-  @Input() parentName: string = "CBP"
+  @Input() parentName = 'CBP'
   @Input() parentId = ''
-  progressData!: NSISelfCuration.ISelfCurationData
+  progressData!: NSISelfCuration.ISelfCurationData[]
   constructor(
     private curationService: SelfCurationService
 
@@ -33,10 +31,10 @@ export class CurationProgressCardComponent implements OnInit, OnDestroy {
     if (this.contentMeta.artifactUrl) {
       return _.last(this.contentMeta.artifactUrl.split('/'))
     }
-    return ""
+    return ''
   }
   fetchProgress() {
-    let data = {
+    const data = {
       contentId: this.contentMeta.identifier,
       fileName: this.getFileName,
     }

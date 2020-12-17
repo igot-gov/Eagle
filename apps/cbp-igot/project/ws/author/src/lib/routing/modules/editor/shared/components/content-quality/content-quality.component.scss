@@ -74,7 +74,7 @@
   align-items: center;
   padding: $size-m;
   margin: $size-s 0;
-  min-width: fit-content;
+  min-width: 200px !important;
   width: fit-content;
 }
 
@@ -83,10 +83,17 @@
   color: #fff;
 }
 
+.btn-n {
+  margin: auto !important;
+  min-height: 48px;
+  max-height: 48px;
+}
+
 .pag {
   margin: 0 $size-xs;
   width: 48px;
   height: 48px;
+  margin-bottom: 8px;
 }
 
 .tgl-group {
@@ -106,4 +113,17 @@
 
 .text-white {
   color: #fff !important;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.desc-text {
+  width: 100%;
+}
+
+.width-200 {
+  max-width: 200px;
 }

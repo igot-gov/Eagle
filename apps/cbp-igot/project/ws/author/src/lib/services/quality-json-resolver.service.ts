@@ -3,7 +3,7 @@ import { Resolve, Router } from '@angular/router'
 import { Observable, of } from 'rxjs'
 import { ApiService } from '../modules/shared/services/api.service'
 import { GET_JSON } from '../constants/apiEndpoints'
-import { catchError, map, mergeMap } from 'rxjs/operators'
+import { catchError, map } from 'rxjs/operators'
 import { NSIQuality } from '../interface/content-quality'
 // import { ConfigurationsService } from '@ws-widget/utils'
 

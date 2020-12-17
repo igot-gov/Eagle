@@ -27,7 +27,7 @@ import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 
 /* tslint:disable */
 import _ from 'lodash'
-import { IAtGlanceComponentData, IAuthorData, ITable, NsContent } from '@ws-widget/collection'
+import { IAtGlanceComponentData, IAuthorData, ITable } from '@ws-widget/collection'
 import { LocalDataService } from '../../services/local-data.service'
 // import { NsAppToc } from '../../interface/app-toc.model'
 import { MyTocService } from '../../services/my-toc.service'

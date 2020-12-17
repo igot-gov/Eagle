@@ -227,7 +227,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
   actionClick(event: any) {
     if (event) {
-      // console.log(event)
+      switch (event.action) {
+        case 'edit':
+        case 'delete':
+          this.action({ type: event.action, data: event.data })
+          break
+        default:
+          break
+      }
     }
   }
   fetchContent(loadMoreFlag: boolean, changeFilter = true) {

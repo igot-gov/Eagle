@@ -14,7 +14,7 @@ import { AVAILABLE_LOCALES } from './../constants/constant'
 import { AccessControlService } from './../modules/shared/services/access-control.service'
 import { CKEditorResolverService } from './ckeditor-resolve.service'
 import { AuthInitService } from './init.service'
-import { NSIQuality } from '../interface/content-quality'
+// import { NSIQuality } from '../interface/content-quality'
 
 @Injectable()
 export class InitResolver implements Resolve<NSContent.IContentMeta> {
@@ -71,14 +71,14 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
       )
       pushedJobs.push('collection')
     }
-    if (data.includes('content-quality') && !this.authInitService.collectionConfig) {
-      forkProcess.push(
-        this.apiService.get<NSIQuality.IContentQualityConfig>(
-          `${this.configurationsService.baseUrl}/feature/auth-content-quality.json`,
-        ),
-      )
-      pushedJobs.push('content-quality')
-    }
+    // if (data.includes('content-quality') && !this.authInitService.collectionConfig) {
+    //   forkProcess.push(
+    //     this.apiService.get<NSIQuality.IContentQualityConfig>(
+    //       `${this.configurationsService.baseUrl}/feature/auth-content-quality.json`,
+    //     ),
+    //   )
+    //   pushedJobs.push('content-quality')
+    // }
 
     if (data.includes('ckeditor')) {
       forkProcess.push(this.ckEditorInject.inject())
@@ -118,9 +118,9 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
         if (pushedJobs.includes('collection')) {
           this.authInitService.collectionConfig = v[pushedJobs.indexOf('collection')]
         }
-        if (pushedJobs.includes('content-quality')) {
-          this.authInitService.contentQuality = v[pushedJobs.indexOf('content-quality')]
-        }
+        // if (pushedJobs.includes('content-quality')) {
+        //   this.authInitService.contentQuality = v[pushedJobs.indexOf('content-quality')]
+        // }
       }),
       catchError((v: any) => {
         this.router.navigateByUrl('/error-somethings-wrong')

@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core'
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { debounceTime, map } from 'rxjs/operators'
@@ -7,26 +7,26 @@ import { LoaderService } from '../../../../../../services/loader.service'
 import { EditorContentService } from '../../../services/editor-content.service'
 /* tslint:disable */
 import _ from 'lodash'
-import { AuthInitService } from '../../../../../../services/init.service'
+// import { AuthInitService } from '../../../../../../services/init.service'
 import { NSIQuality } from '../../../../../../interface/content-quality'
-import { SelfCurationService } from '../../services/self-curation.service'
+// import { SelfCurationService } from '../../services/self-curation.service'
 import { ContentQualityService } from '../../services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { ActivatedRoute } from '@angular/router'
 // import { ValueService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 /* tslint:enable */
-const ELEMENT_DATA: any[] = [
-  { response: 1, name: 'Hydrogen', score: 1.0079, help: 'H' },
-  { response: 2, name: 'Helium', score: 4.0026, help: 'He' },
-  { response: 3, name: 'Lithium', score: 6.941, help: 'Li' },
-  { response: 4, name: 'Beryllium', score: 9.0122, help: 'Be' },
-  { response: 5, name: 'Boron', score: 10.811, help: 'B' },
-  { response: 6, name: 'Carbon', score: 12.0107, help: 'C' },
-  { response: 7, name: 'Nitrogen', score: 14.0067, help: 'N' },
-  { response: 8, name: 'Oxygen', score: 15.9994, help: 'O' },
-  { response: 9, name: 'Fluorine', score: 18.9984, help: 'F' },
-  { response: 10, name: 'Neon', score: 20.1797, help: 'Ne' },
-]
+// const ELEMENT_DATA: any[] = [
+//   { response: 1, name: 'Hydrogen', score: 1.0079, help: 'H' },
+//   { response: 2, name: 'Helium', score: 4.0026, help: 'He' },
+//   { response: 3, name: 'Lithium', score: 6.941, help: 'Li' },
+//   { response: 4, name: 'Beryllium', score: 9.0122, help: 'Be' },
+//   { response: 5, name: 'Boron', score: 10.811, help: 'B' },
+//   { response: 6, name: 'Carbon', score: 12.0107, help: 'C' },
+//   { response: 7, name: 'Nitrogen', score: 14.0067, help: 'N' },
+//   { response: 8, name: 'Oxygen', score: 15.9994, help: 'O' },
+//   { response: 9, name: 'Fluorine', score: 18.9984, help: 'F' },
+//   { response: 10, name: 'Neon', score: 20.1797, help: 'Ne' },
+// ]
 @Component({
   selector: 'ws-auth-content-quality',
   templateUrl: './content-quality.component.html',
@@ -50,6 +50,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   isResultExpend = false
   selectedKey = ''
   questionData!: NSIQuality.IQuestionConfig[]
+  qualityResponse!: NSIQuality.IQualityResponse
   selectedIndex = 0
   lastQ = false
   displayResult = false
@@ -66,29 +67,31 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   menus!: any
   wData: any
   displayedColumns: string[] = ['name', 'response', 'score', 'help']
-  dataSource = ELEMENT_DATA
+  // dataSource = ELEMENT_DATA
   constructor(
     // private valueSvc: ValueService,
+    private changeDetector: ChangeDetectorRef,
     private contentService: EditorContentService,
     private activateRoute: ActivatedRoute,
     private _configurationsService: ConfigurationsService,
     private breakpointObserver: BreakpointObserver,
     private loaderService: LoaderService,
-    private authInitService: AuthInitService,
+    // private authInitService: AuthInitService,
     private formBuilder: FormBuilder,
     private _qualityService: ContentQualityService
   ) {
     this.getJSON()
-    this.fillResponseData()
+    this.contentService.changeActiveCont.subscribe(data => {
+      this.currentContent = data.replace('.img', '')
+      if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
+        this.viewMode = 'meta'
+        this.fillResponseData()
+      }
+    })
   }
   ngOnInit(): void {
     this.sidenavSubscribe()
-    this.contentService.changeActiveCont.subscribe(data => {
-      this.currentContent = data
-      if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
-        this.viewMode = 'meta'
-      }
-    })
+
     this.qualityForm = new FormGroup({})
     this.createForm()
     // if (this.activateRoute.parent && this.activateRoute.parent.parent) {
@@ -105,31 +108,39 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   getJSON() {
     if (this.activateRoute.parent && this.activateRoute.parent.parent
       && this.activateRoute.parent.parent.snapshot && this.activateRoute.parent.parent.snapshot.data) {
-      this.questionData = _.map(this.activateRoute.parent.parent.snapshot.data.qualityJSON.criteria, cr => {
+      const qData = _.map(this.activateRoute.parent.parent.snapshot.data.qualityJSON.criteria, cr => {
         return {
           type: (cr.criteria || '').replace(' ', ''),
           name: cr.criteria,
-          desc: '',
+          desc: cr.description || 'desc',
           questions: _.map(cr.qualifiers, (q, idx1: number) => {
             return {
               question: q.description,
+              type: q.qualifier,
               position: idx1,
               options: _.map(q.options, op => {
                 return {
                   name: op.name,
                   weight: op.name,
-                  selected: false
+                  selected: false,
                 }
               }),
             }
-          })
+          }),
         }
       })
+      qData.splice(0, 0, {
+        name: 'Instructions',
+        desc: 'Instructions',
+        questions: [],
+        type: 'instructions',
+      })
+      this.questionData = qData
     }
   }
-  logs(val: any) {
-    console.log(val)
-  }
+  // logs(val: any) {
+  //   console.log(val)
+  // }
   createForm() {
     this.qualityForm = this.formBuilder.group({
       questionsArray: this.formBuilder.array([]),
@@ -160,6 +171,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   createQuesControl(optionObj: NSIQuality.IQualityQuestion[]) {
     return optionObj.map(v => {
       return this.formBuilder.group({
+        type: v.type,
         questionText: [v.question],
         questionPosition: [v.position],
         options: new FormControl(),
@@ -186,28 +198,46 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
   fillResponseData() {
     if (this._configurationsService.userProfile) {
-      let reqObj = {
+      const reqObj = {
         resourceId: this.currentContent,
         resourceType: 'content',
         userId: this._configurationsService.userProfile.userId,
-        identifier: 'lex_score_1608039795785'
+        getLatestRecordEnabled: true,
       }
-      this._qualityService.fetchresult(reqObj).subscribe(result => {
-        if (result) {
-
+      this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
+        if (result && result.result && result.result.resources) {
+          const rse = result.result.resources || []
+          if (rse.length === 1) {
+            this.qualityResponse = rse[0]
+            this.displayResult = true
+            this.changeDetector.detectChanges()
+          }
         }
       })
     }
   }
+  get getQualityPercent() {
+    const score = (this.qualityResponse.finalTotalScore / this.qualityResponse.finalMaxScore) * 100
+    return score.toFixed(2)
+  }
+  getFirstHeadingName(idx: number) {
+    return this.qualityResponse.criteriaModels[idx || 0].criteria
+  }
+  getTableData(idx: number) {
+    return _.map(this.qualityResponse.criteriaModels[idx].qualifiers, row => {
+      return row
+    })
+  }
+
   selectMenu(key: string, index: number) {
     this.selectedKey = key
     this.selectedIndex = index
     this.selectedQIndex = 0
   }
   isLinkActive(key: string, index: number) {
-    // if (!this.selectedKey && index === 0) {
-    //   return true
-    // }
+    if (!this.selectedIndex && this.selectedQIndex === 0 && index === 0) {
+      return true
+    }
     if (key && index >= 0) {
       if (this.selectedKey === key) {
         return true
@@ -260,49 +290,54 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   }
   isTouched(key: string, index: number) {
     // let data = this.qualityForm.value
+    let returnValue = false
     if (key === 'menu') {
       if (this.displayResult) {
-        return true
-      } else if (this.selectedIndex != 0 && index === 0) {
-        return true
+        returnValue = true
+      } else if (this.selectedIndex !== 0 && index === 0) {
+        returnValue = true
       } else if (this.selectedIndex > index) {
-        return true
+        returnValue = true
       }
-    } else {
-      if (this.selectedQIndex != 0 && index === 0) {
-        return true
-      } else if (this.selectedQIndex > index) {
-        return true
-      }
+    } else if (this.selectedQIndex !== 0 && index === 0) {
+      returnValue = true
+    } else if (this.selectedQIndex > index) {
+      returnValue = true
     }
-    return false
+    return returnValue
   }
   getCount(index: number): string {
+    let res = '_000'
     if (index <= 9) {
-      return `_00${index}`
+      res = `_00${index}`
     } else if (index > 9 && index <= 99) {
-      return `_0${index}`
+      res = `_0${index}`
     } else if (index > 99 && index <= 999) {
-      return `_${index}`
+      res = `_${index}`
     }
-    return `_000`
+    return res
   }
   submitResult(qualityForm: any) {
     if (qualityForm && this._configurationsService.userProfile) {
+      // todo:  start loader
       /* tslint:disable */
       console.log(qualityForm)
       /* tslint:disable */
-      let responses = _.map(_.get(qualityForm, 'questionsArray'), (p: NSIQuality.IQuestionConfig) => {
+      let responses = _.map(_.get(qualityForm, 'questionsArray'), (p: NSIQuality.IQuestionConfig, cid: number) => {
         return {
           criteria: p.name,
           qualifiers: _.map(_.get(p, 'ques'), (q: NSIQuality.IQualityQuestion, qid: number) => {
+            const defaultOp = this.questionData[cid].questions[qid].options
+            const index = defaultOp.length <= 3 ? 1 : defaultOp.length - 2
+            const defaultNo = this.questionData[cid].questions[qid].options[index].weight
             return {
-              name: p.name.replace(/&/, '').replace(/  /g, '_').replace(/ /g, '_') + this.getCount(qid + 1),
-              evaluated: q.options
+              name: q.type,
+              evaluated: q.options || defaultNo
             }
           })
         }
       })
+      responses.splice(0, 1)
 
       const data = {
         resourceId: this.currentContent,
@@ -313,14 +348,19 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
       }
       console.log(data)
 
-      // this._qualityService.postResponse(data).subscribe(response => {
-      //   if (response) {
-      //     this.displayResult = true
-      //   } else {
-      //     // need to check
-      //     this.displayResult = true
-      //   }
-      // })
+      this._qualityService.postResponse(data).subscribe(response => {
+        if (response) {
+          setTimeout(() => {
+            this.fillResponseData()
+          },
+            1500
+          )
+
+        } else {
+          // need to check tost
+          // this.displayResult = true
+        }
+      })
     }
 
   }

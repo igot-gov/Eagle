@@ -37,9 +37,11 @@
           <ng-container *ngIf="idx !== 0 && selectedIndex === idx">
             <mat-card class="ws-mat-accent-border" [formGroupName]="idx">
               <mat-card-title class="m-auto">
-                <input name="sectionName" type="text" readonly class="mat-title no-border" formControlName="name">
+                <!-- <input name="sectionName" type="text" readonly class="mat-title no-border" formControlName="name"> -->
+                <span *ngIf="questionData[idx].desc" tabindex="0" class="mat-title">{{questionData[idx].name}}</span>
               </mat-card-title>
-              <input name="sectionDescription" type="text" readonly class="mat-body-1 no-border" formControlName="desc">
+              <!-- <input name="sectionDescription" type="text" readonly class="mat-body-1 no-border" formControlName="desc"> -->
+              <span *ngIf="questionData[idx].desc" tabindex="0" class="mat-body-1">{{questionData[idx].desc}}</span>
               <mat-card-content class="margin-top-m mobile-break mat-app-background">
                 <ng-container *ngIf="qualityForm.get('questionsArray').controls
                   && qualityForm.get('questionsArray').controls[idx]
@@ -49,7 +51,7 @@
                     [formGroupName]="qIdx">
                     <div class="flex flex-1 flex-column" *ngIf="selectedQIndex === qIdx">
                       <div class="flex flex-1">
-                        <span class="mat-subheading-1 width-100">
+                        <span class="mat-subheading-1 width-100" tabindex="0">
                           {{questionData[idx].questions[qIdx].question}}
                         </span>
                       </div>
@@ -70,19 +72,19 @@
               <mat-card-actions>
                 <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
                   <button mat-raised-button type="button"
-                    class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s" (click)="previousQ()">
+                    class="btn-n ws-mat-accent-text ws-mat-accent-border-active margin-left-s" (click)="previousQ()">
                     <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Previous question
                     </span>
                   </button>
                   <ng-container [ngTemplateOutlet]="count">
                   </ng-container>
                   <button *ngIf="!lastQ" mat-raised-button type="button"
-                    class="text-white ws-mat-primary-background margin-left-s" (click)="nextQ()">
+                    class="btn-n text-white ws-mat-primary-background margin-left-s" (click)="nextQ()">
                     <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Next question
                     </span>
                   </button>
                   <button *ngIf="lastQ" mat-raised-button type="submit"
-                    class="text-white ws-mat-primary-background margin-left-s">
+                    class="btn-n text-white ws-mat-primary-background margin-left-s">
                     <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Submit
                     </span>
                   </button>
@@ -139,7 +141,7 @@
 </ng-template>
 
 <ng-template #count let-data="data">
-  <div class="flex flex-1 flex-center ">
+  <div class="flex flex-1 flex-center flex-wrap">
     <ng-container *ngFor="let d of getCurrentQuestions; let indx=index">
       <ng-container *ngIf="!isTouched('page',indx)">
         <div class="flex  pag" [ngClass]="{
@@ -166,17 +168,18 @@
 
 <ng-template #result let-data="data">
   <mat-card class="ws-mat-accent-border">
+    <!-- {{qualityResponse | json}} -->
     <mat-card-title class="m-auto">
       <span class="mat-title" id="content-result">{{'Content quality report'}}</span>
     </mat-card-title>
     <mat-card-content class="margin-top-xs mobile-break mat-app-background">
       <div class="flex flex-1 flex-column">
         <div class="flex flex-1">
-          <span class="mat-title">{{79}}%</span>
+          <span class="mat-title">{{getQualityPercent}}%</span>
         </div>
         <div class="flex flex-075">
           <mat-progress-bar class="margin-bottom-m quality-progress" aria-labelledby="content-result" mode="determinate"
-            [value]="79">
+            [value]="getQualityPercent">
           </mat-progress-bar>
         </div>
         <div class="flex flex-1">
@@ -190,8 +193,8 @@
         </div>
         <div class="flex flex-1 margin-top-m flex-column">
           <ng-container *ngIf="isResultExpend">
-            <ng-container *ngFor="let a of [1,2,3,4,5,6,7]">
-              <ng-container [ngTemplateOutlet]="resultReport" [ngTemplateOutletContext]="{data:{}}">
+            <ng-container *ngFor="let modell of qualityResponse.criteriaModels; let idx = index">
+              <ng-container [ngTemplateOutlet]="resultReport" [ngTemplateOutletContext]="{idx:idx}">
               </ng-container>
             </ng-container>
           </ng-container>
@@ -219,33 +222,40 @@
   </div>
 </ng-template>
 
-<ng-template #resultReport let-data="data">
-  <mat-table [dataSource]="dataSource">
+<ng-template #resultReport let-idx="idx">
+  <mat-table [dataSource]="getTableData(idx)" class="table margin-bottom-l">
     <!-- Position Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Instructional Methods</span>
+      <mat-header-cell *matHeaderCellDef class="desc-text"> <span
+          class="mat-subheading-2 mar-b-0">{{getFirstHeadingName(idx)}}</span>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.name}}</span> </mat-cell>
+      <mat-cell *matCellDef="let element" class="desc-text padding-m"> <span
+          class="mat-body-2">{{element.description}}</span>
+      </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="response">
-      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Response</span> </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.response}}</span> </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="width-200"> <span class="mat-subheading-2 mar-b-0">Response</span>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="width-200"> <span class="mat-body-2">{{element.evaluated}}</span>
+      </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="score">
-      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Score</span>
+      <mat-header-cell *matHeaderCellDef class="width-200"> <span class="mat-subheading-2 mar-b-0">Score</span>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.score}}</span> </mat-cell>
+      <mat-cell *matCellDef="let element" class="width-200"> <span class="mat-body-2">{{element.scoreValue}}</span>
+      </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="help">
-      <mat-header-cell *matHeaderCellDef> <span class="mat-subheading-2 mar-b-0">Help</span>
+      <mat-header-cell *matHeaderCellDef class="width-200"> <span class="mat-subheading-2 mar-b-0">Help</span>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> <span class="mat-body-2">{{element.help}}</span> </mat-cell>
+      <mat-cell *matCellDef="let element" class="width-200"> <span class="mat-body-2">{{element.help}}</span>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns" class="ws-mat-background-04"></mat-header-row>
