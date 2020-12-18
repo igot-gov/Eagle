@@ -825,8 +825,8 @@ You can access keycloak via `localhost:8080`
 |------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | 1 | Login to Keycloak using the user name **admin** and password as given in the private **secrets.yml** file. Or, login to keycloak using &#60;localhost:8080&#62;/auth |
 | 2 | Navigate to Sunbird Realm > Realm Settings > Keys. Click `Public Key`. Copy the key value that you see and update the variable core_vault_sso_public_key |
-| 3 | Creating keycloak federation [Deployment Steps for Keycloak User Federation](developer-docs/server-installation/keycloak_user_federation) |
-| 4 | Creating keycloak lms client [Creation Steps for Keycloak lms client](developer-docs/server-installation/keycloak_lms_configuration) |
+| 3 | Creating keycloak federation - Deployment Steps for Keycloak User Federation Section  |
+| 4 | Creating keycloak lms client - Creation Steps for Keycloak lms client Section |
 | 5 | Create Keycloak Password policy: navigate to Authentication > Password Policy > from add policy drop down select `Hashing Iterations, Minimum Length, Special Characters, Uppercase Characters, Lowercase Characters`
 | 6 | get the value for variable adminutil_refresh_token_public_key_kid [STeps to get the value for variable](developer-docs/server-installation/adminutil_refresh_token) |
 
@@ -1075,8 +1075,56 @@ To create a Keycloak user federation, ensure to take a backup of the Keycloak da
     `core_vault_sunbird_keycloak_user_federation_provider_id`
 
 
+---
+## 15. Keycloak lms Creation
 
-## 15. Post Installation Configurations
+
+## Overview
+
+After you create or remove folders for jenkins job, create a Keycloak User Federation.
+ 
+
+## Deployment Steps for Keycloak User Federation
+
+To create a Keycloak lms client follow the following steps:
+
+1.Login to admin console
+
+<img src='images/keycloak_login_.png'>
+
+2.Select the Realm
+
+<img src='images/keycloak_realm_setting.png'>
+
+3.Go to Clients tab on left side of admin console 
+
+<img src='images/keycloak_admin_console.png'>
+
+4.Click create button on left hand side of screen
+
+<img src='images/keycloak_admin_console.png'>
+
+5.Fill the given details eg: client id and root url and save
+
+<img src='images/keycloak_client_create.png'>
+
+6.Fill the given details As shown in screen
+
+<img src='images/keycloak_lms_setting.png'>
+
+7.Go to service Account Roles tab  and add admin role in Realm Role Box as shown 
+
+<img src='images/keycloak_role_setting.png'>
+
+8.In client role drop down , select realm-management and add manage-users role as shown
+
+<img src='images/keycloak_manage-users_setting.png'>
+
+9.In client role drop down , select admin-cli and add admin role as shown
+
+<img src='images/keycloak_admincli_role_setting.png'>
+
+## 16. Post Installation Configurations
 
 
 
