@@ -4,8 +4,8 @@
     "widgetSubType": "leftMenu",
     "widgetData": [
       {
-        "name": "Privileges",
-        "key": "privileges",
+        "name": "Basic Info",
+        "key": "basicinfo",
         "fragment": false,
         "render": true,
         "badges": {
@@ -13,13 +13,13 @@
           "uri": ""
         },
         "enabled": true,
-        "paramaterName":"role",
-        "routerLink": "/app/roles/<param>/privileges",
+        "paramaterName": "role",
+        "routerLink": "/app/roles/<param>/basicinfo",
         "customRouting": true
       },
       {
-        "name": "Users",
-        "key": "users",
+        "name": "MDO Admin",
+        "key": "mdoadmin",
         "fragment": false,
         "render": true,
         "badges": {
@@ -27,7 +27,7 @@
           "uri": ""
         },
         "enabled": true,
-        "paramaterName":"role",
+        "paramaterName": "role",
         "routerLink": "/app/roles/<param>/users",
         "customRouting": true
       }

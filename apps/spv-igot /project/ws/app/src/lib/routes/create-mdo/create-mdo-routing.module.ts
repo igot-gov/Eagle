@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersComponent } from './routes/users/users.component'
+import { CreateMdoComponent } from '../home/routes/create-mdo/create-mdo.component'
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
       {
         path: ':role/users',
         component: UsersComponent,
+      },
+      {
+        path: ':role/basicinfo',
+        component: CreateMdoComponent,
       },
     ],
   },
