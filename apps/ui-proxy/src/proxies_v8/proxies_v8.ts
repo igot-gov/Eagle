@@ -3,6 +3,7 @@ import { CONSTANTS } from '../utils/env'
 import {
   ilpProxyCreatorRoute,
   proxyCreatorKnowledge,
+  proxyCreatorLearner,
   proxyCreatorRoute,
   proxyCreatorSunbird,
   proxyCreatorSunbirdSearch,
@@ -80,6 +81,11 @@ proxiesV8.use('/content-progres/*',
 proxiesV8.use('/read/content-progres/*',
   // tslint:disable-next-line: max-line-length
   proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/course/v1/content/state/read`)
+)
+
+proxiesV8.use('/learner/*',
+  // tslint:disable-next-line: max-line-length
+  proxyCreatorLearner(express.Router(), `http://kong:8000`)
 )
 
 proxiesV8.use('/api/*',
