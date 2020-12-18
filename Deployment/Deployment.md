@@ -426,7 +426,7 @@ This page provides you with step-by-step instructions to set up the Jenkins serv
 
 > Note: 
 > Open any of the config files from the **Deploy** directory and save it. Without this, some of the parameters will not be visible 
-> After completing the Jenkins setup, follow instructions provided in the [Running Builds, Artifact Uploads and Deployment](developer-docs/server-installation/running-build-artifact-uploads-and-deployments) page to create inventory, secrets and Ansible hosts in the private repository        
+> After completing the Jenkins setup, follow instructions provided in the Running Builds, Artifact Uploads and Deployment section to create inventory, secrets and Ansible hosts in the private repository        
 
 ## 6. Understanding Jenkins Scripts
 
@@ -496,7 +496,7 @@ The following environment variables are used for Jenkins setup.
 |artifact_source| In deploy jobs, the artifact is downloaded or pulled from the option specified. This is the opposite of the behaviour in ArtifactUpload jobs.|
 |artifact_version|If you leave this value empty, by default it will take the version specified in the **metadata.json** file and deploy that version. In case you want to deploy some other version, you can provide the version value here.This is useful when you want to roll back to a previous version from current version.|
 |private_branch|In this parameter you can specify the private branch. Specifying a value in this parameter allows you to override the global value set in the global variable **private_repo_branch**, thus allowing you to check out the inventory and variables from the branch specified here. By default it shows the value which is in the global variable **private_repo_branch**. 
-|branch_or_tag|In this parameter you can specify the branch or tag of a repository. The public code like Ansible playbooks will be checked out from this branch or tag. Since each repository can have a different tag or branch, you need to specify this value. Refer to [Current Release Tags and Jenkins Jobs Reference](/developer-docs/server-installation/current_release_tags_n_jenkins_jobs){:target="_blank"} for details on the latest tags.
+|branch_or_tag|In this parameter you can specify the branch or tag of a repository. The public code like Ansible playbooks will be checked out from this branch or tag. Since each repository can have a different tag or branch, you need to specify this value.
 
 ### Summary Jobs
 
@@ -523,31 +523,31 @@ By default, the Jenkins configuration for log rotation for build jobs is set to 
 
 After completing the Jenkins setup, you need to build and deploy Sunbird services to bring up the Sunbird instance. Sunbird services are deployed through build jobs. Most of the build jobs create artifacts either as zip files or docker images.
 
-> **Note**:To understand the scripts, jobs, job parameters and the associated environment variables, refer to the [Understanding Jenkins Scripts](developer-docs/server-installation/understanding-jenkins-scripts-jobs-parameters-and-variables){:target="_blank"} page. 
+> **Note**:To understand the scripts, jobs, job parameters and the associated environment variables, refer to the Understanding Jenkins Scripts Section 
 
 Adhere to the following sequence to create the build:
 
-1. [Knowledge Platform](developer-docs/server-installation/knowledge-platform){:target="_blank"}
-2. [DataPipeline](developer-docs/server-installation/data-pipeline){:target="_blank"}
-3. [Plugins](developer-docs/server-installation/plugins){:target="_blank"}
-4. [Core Services](developer-docs/server-installation/artifactupload-job/core-services){:target="_blank"}
+1. Knowledge Platform
+2. DataPipeline
+3. Plugins
+4. Core Services
 
 
 Adhere to the following sequence to Provisioning the infra:
 
-1. [Knowledge Platform](developer-docs/server-installation/knowledge-platform){:target="_blank"}
-2. [DataPipeline](developer-docs/server-installation/data-pipeline){:target="_blank"}
-3. [Plugins](developer-docs/server-installation/plugins){:target="_blank"}
-4. [Core Services](developer-docs/server-installation/artifactupload-job/core-services){:target="_blank"}
+1. Knowledge Platform
+2. DataPipeline
+3. Plugins
+4. Core Services
 
 
 
 Adhere to the following sequence to deploy the services: 
 
-1. [Knowledge Platform](developer-docs/server-installation/knowledge-platform){:target="_blank"}
-2. [DataPipeline](developer-docs/server-installation/data-pipeline){:target="_blank"}
-3. [Plugins](developer-docs/server-installation/plugins){:target="_blank"}
-4. [Core Services](developer-docs/server-installation/artifactupload-job/core-services){:target="_blank"}
+1. Knowledge Platform
+2. DataPipeline
+3. Plugins
+4. Core Services
 
 Do find the below stracture for the same:
 
@@ -584,7 +584,8 @@ This page explains the jobs to be run to bring up the Knowledge Platform service
 
 ## Build
 
-Switch to the `Build` folder and run all jobs in the below sequence. For the value of the **github_release_tag**, refer to [Current Release Tags and Jenkins Jobs Reference](developer-docs/server-installation/current_release_tags_n_jenkins_jobs){:target="_blank"}
+Switch to the `Build` folder and run all jobs in the below sequence. For the value of the **github_release_tag**, refer to Current Release Tags and Jenkins Jobs Reference
+
 
 |Operation Name    | Function              | CURRENT RELEASE TAG |
 | --------------   | --------------------- | -------------------
@@ -663,7 +664,7 @@ The URL for this path will look like this - https://{{storage_account_name}}.blo
 
  ```   
 
-Refer [How to Create Framework](developer-docs/how-to-guide/how_to_create_framework_in_sunbird){:target="_blank"}, [How to Create Schemas for Knowledge Platform Objects](developer-docs/server-installation/knowledge-platform-object-schema){:target="_blank"}
+Refer How to Create Framework section  and How to Create Schemas for Knowledge Platform Objects section
 
 ## 10. Data Pipeline
 
@@ -674,7 +675,7 @@ This page explains the jobs to be run to bring up the Data Pipeline services. In
 
 ## Build
 
-Switch to the `Build` folder and run all jobs. For the value of the **github_release_tag**, refer to [Current Release Tags and Jenkins Jobs Reference](developer-docs/server-installation/current_release_tags_n_jenkins_jobs){:target="_blank"}
+Switch to the `Build` folder and run all jobs. For the value of the **github_release_tag**, refer to Current Release Tags and Jenkins Jobs Reference
 
 
 | Operation Name | Function  |Description | CURRENT RELEASE TAG |
@@ -735,7 +736,7 @@ This page explains the jobs to be run to bring up the Core services.
 
 1.Create a container in the Azure blob and make it public to publish content. The container name must be the same as the variable **sunbird_content_azure_storage_container** specified in the **common.yml** file present in the core inventory.
 
-2.Switch to the `Build` folder and run all jobs. Set the value for **github_release_tag** according to the details mentioned in this page - [Current Release Tags and Jenkins Jobs Reference](developer-docs/server-installation/current_release_tags_n_jenkins_jobs){:target="_blank"}
+2.Switch to the `Build` folder and run all jobs. Set the value for **github_release_tag** according to the details mentioned in this page - Current Release Tags and Jenkins Jobs Reference
 
 ## Running the Jobs
     
