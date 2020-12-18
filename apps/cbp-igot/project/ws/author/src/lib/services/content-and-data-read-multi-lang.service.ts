@@ -7,7 +7,7 @@ import { CONTENT_READ_HIERARCHY_AND_DATA } from '../constants/apiEndpoints'
 import { catchError } from 'rxjs/operators'
 
 @Injectable()
-export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content: NSContent.IContentMeta, data: any }[]> {
+export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content: NSContent.IContentMeta, data: any }[] | null> {
 
   constructor(
     private apiService: ApiService,
@@ -17,15 +17,18 @@ export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content
 
   resolve(
     route: ActivatedRouteSnapshot,
-  ): Observable<{ content: NSContent.IContentMeta, data: any }[]> {
+  ): Observable<{ content: NSContent.IContentMeta, data: any }[]> | null {
     const id = route.params['id']
-    return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
-      `${CONTENT_READ_HIERARCHY_AND_DATA}${id}`,
-    ).pipe(
-      catchError((v: any) => {
-        this.router.navigateByUrl('/error-somethings-wrong')
-        return of(v)
-      }),
-    )
+    if (id !== 'new') {
+      return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
+        `${CONTENT_READ_HIERARCHY_AND_DATA}${id}`,
+      ).pipe(
+        catchError((v: any) => {
+          this.router.navigateByUrl('/error-somethings-wrong')
+          return of(v)
+        }),
+      )
+    }
+    return null
   }
 }

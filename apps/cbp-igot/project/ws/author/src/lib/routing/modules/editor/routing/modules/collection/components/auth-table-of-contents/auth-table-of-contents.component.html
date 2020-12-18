@@ -23,8 +23,8 @@
       </button>
       <hr />
     </mat-card>
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList cdkDropListSortingDisabled
-      (cdkDropListDropped)="drop()" class="px-2">
+    <mat-tree *ngIf="treeControl" [dataSource]="dataSource" [treeControl]="treeControl" cdkDropList
+      cdkDropListSortingDisabled (cdkDropListDropped)="drop()" class="px-2">
       <mat-tree-node class="auth-tree-node" [class.selected]="node.id === selectedNode"
         [class.ws-mat-warn-text]="invalidIds.includes(node.id)" [matTreeNodePaddingIndent]="20"
         *matTreeNodeDef="let node" matTreeNodePadding cdkDrag="node.parent?.length && node.editable"

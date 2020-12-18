@@ -18,6 +18,7 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
     SharedModule,
     RouterModule,
   ],
+  exports: [CreateComponent],
   providers: [CreateService],
 })
 

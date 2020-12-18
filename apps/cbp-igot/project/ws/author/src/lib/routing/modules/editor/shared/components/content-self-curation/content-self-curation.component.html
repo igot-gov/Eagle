@@ -22,7 +22,7 @@
               <span class="mat-subheading-2 margin-left-m">Clean</span>
             </div>
           </div>
-          {{leftmenudata | json }}
+          <!-- {{leftmenudata | json }} -->
           <ng-container *ngIf="leftmenudata && leftmenudata.length>0">
             <ng-container *ngFor="let ld of leftmenudata">
               <ng-container [ngTemplateOutlet]="leftIssues" [ngTemplateOutletContext]="{data:{

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core'
 import { NsAutoComplete, UserAutocompleteService } from '@ws-widget/collection'
-import { ConfigurationsService } from '@ws-widget/utils'
+// import { ConfigurationsService } from '@ws-widget/utils'
 import {
   AUTHORING_CONTENT_BASE,
   CONTENT_BASE_COPY,
@@ -31,7 +31,7 @@ export class EditorService {
     private apiService: ApiService,
     private accessService: AccessControlService,
     private userAutoComplete: UserAutocompleteService,
-    private configSvc: ConfigurationsService,
+    // private configSvc: ConfigurationsService,
   ) { }
 
   create(meta: NSApiRequest.ICreateMetaRequestGeneral): Observable<string> {
@@ -47,18 +47,7 @@ export class EditorService {
         createdBy: this.accessService.userId,
       },
     }
-    if (this.accessService.rootOrg === 'client2') {
-      if (meta.contentType === 'Knowledge Artifact') {
-        try {
-          const userPath = `client2/Australia/dealer_code-${this.configSvc.unMappedUser.json_unmapped_fields.dealer_group_code}`
-          requestBody.content.accessPaths = userPath
-        } catch {
-          requestBody.content.accessPaths = 'client2'
-        }
-      } else {
-        requestBody.content.accessPaths = 'client2'
-      }
-    }
+
     return this.apiService
       .post<NSApiRequest.ICreateMetaRequest>(
         // tslint:disable-next-line:max-line-length

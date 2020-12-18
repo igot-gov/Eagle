@@ -1,13 +1,14 @@
-<div class="margin-l-l margin-r-l new-box" *ngIf="!error">
+<div class="margin-l-l margin-r-l new-box" *ngIf="!error && !currentContent">
   <div class="res-margin">
     <div class="flex flex-col md:flex-row margin-top-xl padding-top-l justify-between margin-right-m">
       <h2 class="mat-h3 ml-14">
         Choose your starting point from the below available options
       </h2>
-      <div class="mat-h3 flex items-center select-lang ws-mat-default-text">
+      <div *ngIf="allLanguages?.length && allLanguages?.length > 1"
+        class="mat-h3 flex items-center select-lang ws-mat-default-text">
         <!-- {{allLanguages | json}} -->
         <!-- <span class="mr-1 text-center" i18n>Select Language: </span> -->
-        <button class="lang-btn" *ngIf="allLanguages?.length" mat-button [matMenuTriggerFor]="sortLang">
+        <button class="lang-btn" mat-button [matMenuTriggerFor]="sortLang">
           {{ languageName }}
           <mat-icon>arrow_drop_down</mat-icon>
         </button>
@@ -16,22 +17,76 @@
     <div class="card-holder margin-top-l">
       <div class="flex flex-1 flex-wrap flex-col md:flex-row">
         <!-- <div class="flex-1"> -->
-        <ws-auth-entity-card [entity]="resourceEntity" [expanded]="true" (step)="contentClicked($event)">
-        </ws-auth-entity-card>
         <!-- </div> -->
         <!-- <div class="flex-3"> -->
         <ng-container *ngFor="let createEntity of entity; let i = index">
           <ws-auth-entity-card [entity]="createEntity" (step)="contentClicked($event)"></ws-auth-entity-card>
           <mat-divider *ngIf="i % 2 !== 0"></mat-divider>
         </ng-container>
+        <ws-auth-entity-card [entity]="resourceEntity" [expanded]="true" (step)="contentClicked($event)">
+        </ws-auth-entity-card>
         <!-- </div> -->
       </div>
     </div>
   </div>
 </div>
+
 <h2 *ngIf="error" class="mat-error margin-top-m text-center" i18n>
   Unable to load the page. Reload or try again after some time.
 </h2>
+
+<ng-container *ngIf="currentContent">
+  <form [formGroup]="createCourseForm" (ngSubmit)="createContent()">
+    <mat-card class="ws-mat-accent-border flex-1">
+      <mat-card-header>
+        <mat-card-title>
+          <span class="mat-title">Course</span>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="margin-top-s margin-left-m">
+          <div class="margin-top-xs flex flex-column ">
+            <span class="mat-subheading-2 margin-0" i18n="Title label|Label which explains the user to enter title"
+              [ngClass]="{ required: true }">
+              Title
+            </span>
+            <mat-form-field appearance="outline" class="margin-top-xs" [ngClass]="{ 'mat-form-field-invalid': (createCourseForm.controls['name'].hasError('minlength')
+                               &&   !createCourseForm.controls['name'].hasError('required')) }">
+              <input matInput #name formControlName="name" maxlength="500" i18n-placeholder placeholder="Type here"
+                [required]="'true'" />
+              <!-- <mat-hint align="end">{{ name.value.length }} / 500</mat-hint> -->
+              <mat-error *ngIf="!createCourseForm.controls['name'].hasError('required')"
+                i18n="name Error|Explains name is required">
+                Title is mandatory
+              </mat-error>
+              <mat-error *ngIf="createCourseForm.controls['name'].hasError('minlength')"
+                i18n="name Error|Explains name is required">
+                Minimum 10 Charactors requires to create
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="flex flex-start margin-top-l margin-bottom-s margin-left-s">
+          <button mat-raised-button type="submit" class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s">
+            <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Save
+            </span>
+          </button>
+          <!-- <button mat-button type="button" class="margin-left-s ws-mat-accent-border">
+            <mat-icon>delete</mat-icon>
+            <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Delete
+            </span>
+          </button> -->
+          <button mat-button type="button" class="margin-left-s ws-mat-accent-border" (click)="cancel()">
+            <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Cancel
+            </span>
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</ng-container>
 <mat-menu #sortLang="matMenu">
   <ng-template matMenuContent>
     <button mat-menu-item class="flex flex-between ws-mat-default-text" *ngFor="let lang of allLanguages"

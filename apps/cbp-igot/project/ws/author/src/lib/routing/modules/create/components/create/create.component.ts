@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatDialog } from '@angular/material/dialog'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { Router } from '@angular/router'
@@ -26,7 +27,8 @@ export class CreateComponent implements OnInit, OnDestroy {
   language = ''
   languageName = ''
   error = false
-
+  currentContent!: ICreateEntity | null
+  createCourseForm!: FormGroup
   constructor(
     private snackBar: MatSnackBar,
     private svc: CreateService,
@@ -35,7 +37,10 @@ export class CreateComponent implements OnInit, OnDestroy {
     private accessControlSvc: AccessControlService,
     private authInitService: AuthInitService,
     private dialog: MatDialog,
-  ) { }
+    private formBuilder: FormBuilder,
+  ) {
+    this.createForm()
+  }
 
   ngOnInit() {
     this.authInitService.creationEntity.forEach(v => {
@@ -47,6 +52,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         }
       }
     })
+    this.entity = this.entity.reverse()
     this.loaderService.changeLoadState(false)
     this.allLanguages = this.authInitService.ordinals.subTitles || []
     this.language = this.accessControlSvc.locale
@@ -62,46 +68,62 @@ export class CreateComponent implements OnInit, OnDestroy {
   }
 
   contentClicked(content: ICreateEntity) {
-    this.loaderService.changeLoad.next(true)
-    this.svc
-      .create({
-        contentType: content.contentType,
-        mimeType: content.mimeType,
-        locale: this.language,
-        ...(content.additionalMeta || {}),
-      })
-      .subscribe(
-        (id: string) => {
-          this.loaderService.changeLoad.next(false)
-          this.snackBar.openFromComponent(NotificationComponent, {
-            data: {
-              type: Notify.CONTENT_CREATE_SUCCESS,
-            },
-            duration: NOTIFICATION_TIME * 1000,
-          })
-          this.router.navigateByUrl(`/author/editor/${id}`)
-        },
-        error => {
-          if (error.status === 409) {
-            this.dialog.open(ErrorParserComponent, {
-              width: '80vw',
-              height: '90vh',
-              data: {
-                errorFromBackendData: error.error,
-              },
-            })
-          }
-          this.loaderService.changeLoad.next(false)
-          this.snackBar.openFromComponent(NotificationComponent, {
-            data: {
-              type: Notify.CONTENT_FAIL,
-            },
-            duration: NOTIFICATION_TIME * 1000,
-          })
-        },
-      )
-  }
+    this.currentContent = content
 
+  }
+  createContent() {
+    this.loaderService.changeLoad.next(true)
+    const _name = this.createCourseForm.get('name')
+    if (this.currentContent && _name && _name.value) {
+      this.svc
+        .create({
+          name: _name.value,
+          contentType: this.currentContent.contentType,
+          mimeType: this.currentContent.mimeType,
+          locale: this.language,
+          ...(this.currentContent.additionalMeta || {}),
+        })
+        .subscribe(
+          (id: string) => {
+            this.loaderService.changeLoad.next(false)
+            this.snackBar.openFromComponent(NotificationComponent, {
+              data: {
+                type: Notify.CONTENT_CREATE_SUCCESS,
+              },
+              duration: NOTIFICATION_TIME * 1000,
+            })
+            this.router.navigateByUrl(`/author/editor/${id}`)
+          },
+          error => {
+            if (error.status === 409) {
+              this.dialog.open(ErrorParserComponent, {
+                width: '80vw',
+                height: '90vh',
+                data: {
+                  errorFromBackendData: error.error,
+                },
+              })
+            }
+            this.loaderService.changeLoad.next(false)
+            this.snackBar.openFromComponent(NotificationComponent, {
+              data: {
+                type: Notify.CONTENT_FAIL,
+              },
+              duration: NOTIFICATION_TIME * 1000,
+            })
+          },
+        )
+    }
+  }
+  createForm() {
+    this.createCourseForm = this.formBuilder.group({
+      name: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    })
+  }
+  cancel() {
+    this.createCourseForm.reset()
+    this.currentContent = null
+  }
   setCurrentLanguage(lang: string, label: string) {
     this.languageName = label
     this.language = lang

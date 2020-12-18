@@ -94,7 +94,7 @@
           </ng-container>
         </ng-container>
       </ng-container>
-      <ng-container *ngIf="displayResult" [ngTemplateOutlet]="result" [ngTemplateOutletContext]="{result:{}}">
+      <ng-container *ngIf="displayResult" [ngTemplateOutlet]="result">
       </ng-container>
     </form>
   </mat-sidenav-content>
@@ -166,7 +166,7 @@
   </div>
 </ng-template>
 
-<ng-template #result let-data="data">
+<ng-template #result>
   <mat-card class="ws-mat-accent-border">
     <!-- {{qualityResponse | json}} -->
     <mat-card-title class="m-auto">
@@ -215,7 +215,8 @@
       <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Take test again
       </span>
     </button>
-    <button mat-raised-button type="button" class="text-white ws-mat-primary-background margin-left-s">
+    <button mat-raised-button type="button" (click)="data.emit('next')"
+      class="text-white ws-mat-primary-background margin-left-s">
       <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Self curation
       </span>
     </button>

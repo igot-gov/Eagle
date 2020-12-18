@@ -17,6 +17,7 @@ import { WebPageModule } from '../web-page/web-page.module'
 // import { IapAssessmentModule } from '../iap-assessment/iap-assessment.module'
 import { QuizModule } from '../quiz/quiz.module'
 import { MatTabsModule } from '@angular/material'
+import { CreateModule } from '../../../../create/create.module'
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { MatTabsModule } from '@angular/material'
     MatTabsModule,
     WebPageModule,
     QuizModule,
+    CreateModule,
   ],
 })
 export class CollectionModule { }

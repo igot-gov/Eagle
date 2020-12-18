@@ -59,7 +59,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
     private loaderService: LoaderService,
     private authInitService: AuthInitService,
     private breakpointObserver: BreakpointObserver,
-  ) {}
+  ) { }
 
   private _transformer = (node: IContentNode, level: number): IContentTreeNode => {
     return {
@@ -77,49 +77,52 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.parentNodeId = this.store.currentParentNode
-    this.treeControl = new FlatTreeControl<IContentTreeNode>(
-      node => node.level,
-      node => node.expandable,
-    )
+    if (this.parentNodeId) {
+      this.treeControl = new FlatTreeControl<IContentTreeNode>(
+        node => node.level,
+        node => node.expandable,
+      )
 
-    this.treeFlattener = new MatTreeFlattener(
-      this._transformer,
-      node => node.level,
-      node => node.expandable,
-      node => node.children,
-    )
+      this.treeFlattener = new MatTreeFlattener(
+        this._transformer,
+        node => node.level,
+        node => node.expandable,
+        node => node.children,
+      )
 
-    this.store.onInvalidNodeChange.subscribe(v => {
-      this.invalidIds = v
-      this.expandNodesById(v)
-    })
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener)
+      this.store.onInvalidNodeChange.subscribe(v => {
+        this.invalidIds = v
+        this.expandNodesById(v)
+      })
+      this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener)
 
-    this.store.treeStructureChange.subscribe(data => {
-      this.dataSource.data = [data as IContentNode]
-      if (this.parentNodeId === this.store.currentParentNode) {
-        this.expandNodesById()
-        if (this.selectedNode && !this.store.flatNodeMap.get(this.selectedNode)) {
-          this.parentHierarchy.forEach(v => {
-            if (this.store.flatNodeMap.get(v)) {
-              const identifier = this.store.uniqueIdMap.get(v) as string
-              this.selectedNode = v
-              this.editorStore.currentContent = identifier
-              this.store.currentSelectedNode = v
-              this.editorStore.changeActiveCont.next(identifier)
-              return
-            }
-          })
+      this.store.treeStructureChange.subscribe(data => {
+        this.dataSource.data = [data as IContentNode]
+        if (this.parentNodeId === this.store.currentParentNode) {
+          this.expandNodesById()
+          if (this.selectedNode && !this.store.flatNodeMap.get(this.selectedNode)) {
+            this.parentHierarchy.forEach(v => {
+              if (this.store.flatNodeMap.get(v)) {
+                const identifier = this.store.uniqueIdMap.get(v) as string
+                this.selectedNode = v
+                this.editorStore.currentContent = identifier
+                this.store.currentSelectedNode = v
+                this.editorStore.changeActiveCont.next(identifier)
+                return
+              }
+            })
+          }
+        } else {
+          this.parentNodeId = this.store.currentParentNode
         }
-      } else {
-        this.parentNodeId = this.store.currentParentNode
-      }
-    })
-    this.store.selectedNodeChange.subscribe(data => {
-      if (data) {
-        this.selectedNode = data
-      }
-    })
+      })
+      this.store.selectedNodeChange.subscribe(data => {
+        if (data) {
+          this.selectedNode = data
+        }
+      })
+    }
+
     this.mediumSizeBreakpoint$.subscribe(isLtMedium => {
       this.mediumScreen = isLtMedium
       if (isLtMedium) {
@@ -143,6 +146,7 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
       this.editorStore.currentContent = node.identifier
       this.store.currentSelectedNode = node.id
       this.editorStore.changeActiveCont.next(node.identifier)
+      this.action.emit({ type: 'editContent', identifier: node.identifier })
     }
   }
 
@@ -202,9 +206,9 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         this.isDropDisabled = !parentNode
           ? true
           : !this.store.allowDrop(
-              this.dragContainer as IContentTreeNode,
-              parentNode as IContentTreeNode,
-            )
+            this.dragContainer as IContentTreeNode,
+            parentNode as IContentTreeNode,
+          )
       } else {
         this.isDropDisabled = !this.store.allowDrop(
           this.dragContainer as IContentTreeNode,

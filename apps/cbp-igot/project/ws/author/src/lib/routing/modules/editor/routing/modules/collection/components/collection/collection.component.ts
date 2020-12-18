@@ -1,13 +1,13 @@
 import { DeleteDialogComponent } from '@ws/author/src/lib/modules/shared/components/delete-dialog/delete-dialog.component'
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnDestroy, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core'
 import { FormGroup } from '@angular/forms'
-import { MatDialog, MatSnackBar } from '@angular/material'
+import { MatDialog, MatSnackBar, MatTab, MatTabGroup, MatTabHeader } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { NOTIFICATION_TIME } from '@ws/author/src/lib/constants/constant'
 import { Notify } from '@ws/author/src/lib/constants/notificationMessage'
 import { IActionButton, IActionButtonConfig } from '@ws/author/src/lib/interface/action-button'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
-import { IAuthSteps } from '@ws/author/src/lib/interface/auth-stepper'
+// import { IAuthSteps } from '@ws/author/src/lib/interface/auth-stepper'
 import { NSContent } from '@ws/author/src/lib/interface/content'
 import { CommentsDialogComponent } from '@ws/author/src/lib/modules/shared/components/comments-dialog/comments-dialog.component'
 import { ConfirmDialogComponent } from '@ws/author/src/lib/modules/shared/components/confirm-dialog/confirm-dialog.component'
@@ -46,14 +46,15 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
   /* tslint:enable */
   providers: [CollectionStoreService, CollectionResolverService],
 })
-export class CollectionComponent implements OnInit, OnDestroy {
+export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   contents: NSContent.IContentMeta[] = []
   currentParentId!: string
-  stepper: IAuthSteps[] = [
-    { title: 'Choose Type', disabled: true },
-    { title: 'Content', disabled: false },
-    { title: 'Details', disabled: false },
-  ]
+  // stepper: IAuthSteps[] = [
+  //   { title: 'Choose Type', disabled: true },
+  //   { title: 'Content', disabled: false },
+  //   { title: 'Details', disabled: false },
+  // ]
+  selectedIndex: number | null  // for tabs
   isSubmitPressed = false
   showLanguageBar = false
   actionButton: IActionButtonConfig | null = null
@@ -73,7 +74,7 @@ export class CollectionComponent implements OnInit, OnDestroy {
     .pipe(map((res: BreakpointState) => res.matches))
   mode$ = this.mediumSizeBreakpoint$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   leftArrow = true
-
+  @ViewChild('tabGroup', { static: false }) tabGroup!: MatTabGroup
   constructor(
     private contentService: EditorContentService,
     private activateRoute: ActivatedRoute,
@@ -88,40 +89,45 @@ export class CollectionComponent implements OnInit, OnDestroy {
     private notificationSvc: NotificationService,
     private accessControlSvc: AccessControlService,
     private breakpointObserver: BreakpointObserver,
-  ) { }
+  ) {
+    this.selectedIndex = 0
+  }
 
   ngOnInit() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
       if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
         this.viewMode = 'meta'
+
       }
     })
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.routerSubscription = this.activateRoute.parent.parent.data.subscribe(data => {
-        const contentDataMap = new Map<string, NSContent.IContentMeta>()
-        data.contents.map((v: { content: NSContent.IContentMeta; data: any }) => {
-          this.storeService.parentNode.push(v.content.identifier)
-          this.resolverService.buildTreeAndMap(
-            v.content,
-            contentDataMap,
-            this.storeService.flatNodeMap,
-            this.storeService.uniqueIdMap,
-            this.storeService.lexIdMap,
+        if (data && data.contents) {
+          const contentDataMap = new Map<string, NSContent.IContentMeta>()
+          data.contents.map((v: { content: NSContent.IContentMeta; data: any }) => {
+            this.storeService.parentNode.push(v.content.identifier)
+            this.resolverService.buildTreeAndMap(
+              v.content,
+              contentDataMap,
+              this.storeService.flatNodeMap,
+              this.storeService.uniqueIdMap,
+              this.storeService.lexIdMap,
+            )
+          })
+          contentDataMap.forEach(content => this.contentService.setOriginalMeta(content))
+          const currentNode = (this.storeService.lexIdMap.get(this.currentContent) as number[])[0]
+          this.currentParentId = this.currentContent
+          this.storeService.treeStructureChange.next(
+            this.storeService.flatNodeMap.get(currentNode) as IContentNode,
           )
-        })
-        contentDataMap.forEach(content => this.contentService.setOriginalMeta(content))
-        const currentNode = (this.storeService.lexIdMap.get(this.currentContent) as number[])[0]
-        this.currentParentId = this.currentContent
-        this.storeService.treeStructureChange.next(
-          this.storeService.flatNodeMap.get(currentNode) as IContentNode,
-        )
-        this.storeService.currentParentNode = currentNode
-        this.storeService.currentSelectedNode = currentNode
-        this.storeService.selectedNodeChange.next(currentNode)
+          this.storeService.currentParentNode = currentNode
+          this.storeService.currentSelectedNode = currentNode
+          this.storeService.selectedNodeChange.next(currentNode)
+        }
       })
     }
-    this.stepper = this.initService.collectionConfig.stepper
+    // this.stepper = this.initService.collectionConfig.stepper
     this.showLanguageBar = this.initService.collectionConfig.languageBar
     const actionButton: IActionButton[] = []
     this.initService.collectionConfig.actionButtons.buttons.forEach(action => {
@@ -148,11 +154,36 @@ export class CollectionComponent implements OnInit, OnDestroy {
       this.sideBarOpened = !isLtMedium
     })
   }
-
+  ngAfterViewInit(): void {
+    if (this.tabGroup) {
+      this.tabGroup._handleClick = this.myTabChange.bind(this)
+    }
+  }
   ngOnDestroy() {
     this.loaderService.changeLoad.next(false)
   }
+  // tabClick(event: MatTabChangeEvent) {
+  //   // if (this.currentContent || this.currentParentId) {
+  //   //   this.selectedIndex = event.tab.position
+  //   // } else {
+  //   //   this.selectedIndex = 0
+  //   // }
+  //   // will do something if required
+  // }
+  myTabChange(tab: MatTab, tabHeader: MatTabHeader, idx: number) {
+    let result = false
+    // here I added all checks/conditions ; if everything is Ok result is changed to true
+    // ==> this way the tab change is allowed.
 
+    if (tab && tabHeader && idx >= 1 && (this.currentContent || this.currentParentId)) {
+      result = true
+      this.selectedIndex = idx
+    } else if (idx === 0) {
+      this.selectedIndex = idx
+      result = true
+    }
+    return result
+  }
   sidenavClose() {
     setTimeout(() => (this.leftArrow = true), 500)
   }
@@ -527,6 +558,8 @@ export class CollectionComponent implements OnInit, OnDestroy {
           this.viewMode = 'quiz'
         } else if (content.mimeType === 'application/web-module') {
           this.viewMode = 'web'
+        } else {
+          this.viewMode = 'meta'
         }
         break
       case 'preview':
@@ -539,8 +572,20 @@ export class CollectionComponent implements OnInit, OnDestroy {
     switch (type) {
       case 'next':
         this.viewMode = 'meta'
+        if (this.selectedIndex) {
+          this.selectedIndex += 1
+        } else {
+          this.selectedIndex = 0
+        }
         break
-
+      case 'back':
+        this.viewMode = 'meta'
+        if (this.selectedIndex) {
+          this.selectedIndex -= 1
+        } else {
+          this.selectedIndex = 0
+        }
+        break
       case 'save':
         this.save()
         break

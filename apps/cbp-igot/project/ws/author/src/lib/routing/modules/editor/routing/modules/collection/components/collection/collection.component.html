@@ -3,7 +3,8 @@
   </ws-auth-editor-action-buttons> -->
   <!-- <ws-auth-editor-steps [steps]="stepper" [currentStep]="currentStep" (change)="currentStep = $event">
   </ws-auth-editor-steps> -->
-  <mat-tab-group [disableRipple]=true>
+  <!-- (selectedTabChange)="tabClick($event)" -->
+  <mat-tab-group #tabGroup [disableRipple]=true [selectedIndex]="selectedIndex">
     <mat-tab>
       <ng-template mat-tab-label>
         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
@@ -28,7 +29,42 @@
           </mat-sidenav>
 
           <mat-sidenav-content class="pl-6 pr-6 ml-6">
-
+            <ng-container *ngIf="viewMode==='upload'">
+              <ws-auth-file-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
+                (data)="action($event)">
+              </ws-auth-file-upload>
+            </ng-container>
+            <ng-container *ngIf="viewMode==='curate'">
+              <ws-auth-url-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
+                (data)="action($event)"></ws-auth-url-upload>
+            </ng-container>
+            <ng-container *ngIf="viewMode==='quiz'">
+              <ws-auth-quiz-questions [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+              </ws-auth-quiz-questions>
+            </ng-container>
+            <!-- <ng-container *ngIf="viewMode==='web'">
+              <ws-auth-web-module-editor [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+              </ws-auth-web-module-editor>
+            </ng-container> -->
+            <!-- <ws-auth-quiz-questions *ngIf="viewMode === 'quiz'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
+        </ws-auth-quiz-questions> -->
+            <!-- <div *ngIf="viewMode === 'quiz'">
+              Please go to drafts to edit Web Pages or Click
+              <a class="m-auto" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label
+                aria-label="Back">
+                here
+              </a>
+            </div>-->
+            <ng-container *ngIf="viewMode === 'web'">
+              Please go to drafts to edit Web Pages or Click
+              <a class="m-auto" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label
+                aria-label="Back">
+                here
+              </a>
+            </ng-container>
+            <ng-container *ngIf="viewMode === 'meta' && (!currentContent || !currentParentId)">
+              <ws-auth-generic></ws-auth-generic>
+            </ng-container>
           </mat-sidenav-content>
         </mat-sidenav-container>
       </ng-template>
@@ -40,8 +76,9 @@
         </span>
       </ng-template>
       <ng-template matTabContent>
-        <ws-auth-edit-meta [parentContent]="currentParentId" [class.hidden]="viewMode !== 'meta'"
-          [isSubmitPressed]="isSubmitPressed" type="" (data)="action($event)"></ws-auth-edit-meta>
+        <!-- [class.hidden]="viewMode !== 'meta'" -->
+        <ws-auth-edit-meta [parentContent]="currentParentId" [isSubmitPressed]="isSubmitPressed" type=""
+          (data)="action($event)"></ws-auth-edit-meta>
       </ng-template>
     </mat-tab>
     <mat-tab>
@@ -50,8 +87,9 @@
         <span>3. Content quality</span>
       </ng-template>
       <ng-template matTabContent>
-        <ws-auth-content-quality [parentContent]="currentParentId" [class.hidden]="viewMode !== 'meta'"
-          [isSubmitPressed]="isSubmitPressed" type="" (data)="action($event)"></ws-auth-content-quality>
+        <!-- [class.hidden]="viewMode !== 'meta'" -->
+        <ws-auth-content-quality [parentContent]="currentParentId" [isSubmitPressed]="isSubmitPressed" type=""
+          (data)="action($event)"></ws-auth-content-quality>
       </ng-template>
     </mat-tab>
     <mat-tab>
@@ -60,8 +98,9 @@
         <span>4. Self curation</span>
       </ng-template>
       <ng-template matTabContent>
-        <ws-auth-content-self-curation [parentContent]="currentParentId" [class.hidden]="viewMode !== 'meta'"
-          [isSubmitPressed]="isSubmitPressed" type="" (data)="action($event)"></ws-auth-content-self-curation>
+        <!-- [class.hidden]="viewMode !== 'meta'" -->
+        <ws-auth-content-self-curation [parentContent]="currentParentId" [isSubmitPressed]="isSubmitPressed" type=""
+          (data)="action($event)"></ws-auth-content-self-curation>
       </ng-template>
     </mat-tab>
     <mat-tab>
@@ -70,8 +109,9 @@
         <span>5. Summary</span>
       </ng-template>
       <ng-template matTabContent>
-        <ws-auth-content-summary [parentContent]="currentParentId" [class.hidden]="viewMode !== 'meta'"
-          [isSubmitPressed]="isSubmitPressed" type="" (data)="action($event)"></ws-auth-content-summary>
+        <!-- [class.hidden]="viewMode !== 'meta'" -->
+        <ws-auth-content-summary [parentContent]="currentParentId" [isSubmitPressed]="isSubmitPressed" type=""
+          (data)="action($event)"></ws-auth-content-summary>
       </ng-template>
     </mat-tab>
   </mat-tab-group>

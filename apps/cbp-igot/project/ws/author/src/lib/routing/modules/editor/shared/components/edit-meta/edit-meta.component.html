@@ -1036,8 +1036,8 @@
                             </span>
                           </mat-select-trigger>
                           <mat-option *ngFor="let org of ordinals.org" [value]="org">{{
-                      org
-                    }}</mat-option>
+                            org
+                            }}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="showError('org')" i18n>Organisation is mandatory </mat-error>
                       </mat-form-field>
@@ -1363,7 +1363,7 @@
               <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Save</span>
             </button>
             <button mat-raised-button type="button" style="line-height: 48px;"
-              class="text-white ws-mat-primary-background margin-left-s" (click)="formNext(4)">
+              class="text-white ws-mat-primary-background margin-left-s" (click)="data.emit('next')">
               <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Next: Content quality</span>
             </button>
           </div>

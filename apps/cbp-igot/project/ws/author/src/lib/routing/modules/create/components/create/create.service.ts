@@ -16,11 +16,11 @@ export class CreateService {
     private accessService: AccessControlService,
   ) { }
 
-  create(meta: { mimeType: string; contentType: string; locale: string }): Observable<string> {
+  create(meta: { mimeType: string; contentType: string; locale: string, name: string }): Observable<string> {
     const requestBody: NSApiRequest.ICreateMetaRequest = {
       content: {
         ...meta,
-        name: 'Untitled Content',
+        name: meta.name,
         description: '',
         category: meta.contentType,
         createdBy: this.accessService.userId,

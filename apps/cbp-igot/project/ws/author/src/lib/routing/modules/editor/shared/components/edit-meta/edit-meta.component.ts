@@ -507,23 +507,24 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ref.detach()
     clearInterval(this.timer)
   }
-  customStepper(step: number) {
-    if (step >= 0) {
-      if (this.selectedIndex !== step) {
-        this.selectedIndex = step
-        const oldStrip = this.workFlow.find(i => i.isActive)
+  // customStepper() {
+  //   this.data.emit("next")
+  // if (step >= 0) {
+  //   if (this.selectedIndex !== step) {
+  //     this.selectedIndex = step
+  //     const oldStrip = this.workFlow.find(i => i.isActive)
 
-        this.workFlow[step].isActive = true
-        this.workFlow[step].isCompleted = false
-        if (oldStrip && oldStrip.step >= 0) {
-          this.workFlow[oldStrip.step].isActive = false
-          this.workFlow[oldStrip.step].isCompleted = true
-        }
-      }
-    } else {
-      this.data.emit('back')
-    }
-  }
+  //     this.workFlow[step].isActive = true
+  //     this.workFlow[step].isCompleted = false
+  //     if (oldStrip && oldStrip.step >= 0) {
+  //       this.workFlow[oldStrip.step].isActive = false
+  //       this.workFlow[oldStrip.step].isCompleted = true
+  //     }
+  //   }
+  // } else {
+  //   this.data.emit('back')
+  // }
+  // }
   private set content(contentMeta: NSContent.IContentMeta) {
     this.contentMeta = contentMeta
     this.isEditEnabled = this.contentService.hasAccess(
@@ -531,7 +532,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       false,
       this.parentContent ? this.contentService.getUpdatedMeta(this.parentContent) : undefined,
     )
-    this.contentMeta.name = contentMeta.name === 'Untitled Content' ? '' : contentMeta.name
+    // this.contentMeta.name = contentMeta.name === 'Untitled Content' ? '' : contentMeta.name
+    // this.contentMeta.name = contentMeta.name
     if (!this.contentMeta.posterImage) {
       this.contentMeta.posterImage = this.banners[0].color
     }
@@ -817,10 +819,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentService.setUpdatedMeta({ [meta]: value } as any, this.contentMeta.identifier)
   }
 
-  formNext(index: number) {
-    // this.selectedIndex = index
-    this.customStepper(index)
-  }
+  // formNext() {
+  //   // this.selectedIndex = index
+  //   this.customStepper()
+  // }
 
   addKeyword(event: MatChipInputEvent): void {
     const input = event.input

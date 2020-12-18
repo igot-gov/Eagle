@@ -180,7 +180,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   }
 
   createNewComponent() {
-    this.router.navigate(['author', 'create-content'])
+    this.router.navigate(['author', 'editor', 'new', 'collection'])
   }
 
   fetchStatus() {
