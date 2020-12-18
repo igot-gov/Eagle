@@ -551,7 +551,7 @@ Adhere to the following sequence to deploy the services:
 
 Do find the below stracture for the same:
 
-<img src='developer-docs/server-installation/images/deployment_complete-sheet_all.png'>
+<img src='/images/deployment_complete-sheet_all.png'>
 
 ## 8.  Artifact Upload Jobs
 
@@ -1060,15 +1060,15 @@ To create a Keycloak user federation, ensure to take a backup of the Keycloak da
 
 2.Click the User Federation tab in the left navigation pane as shown here. The User Federation page opens
 
-<img src='developer-docs/server-installation/images/keycloak_user_federation.png'>
+<img src='/images/keycloak_user_federation.png'>
 
 2.Select the cassandra-storage-provider option from the Add provider drop-down list and the **Add user storage provider** page is displayed 
 
-<img src='developer-docs/server-installation/images/keycloak_user_storage_provider.png'>
+<img src='/images/keycloak_user_storage_provider.png'>
 
 3.Click the **Save** button to generate a **Provider ID** 
 
-<img src='developer-docs/server-installation/images/keycloak_cassandra_storage_provider.png'>
+<img src='/images/keycloak_cassandra_storage_provider.png'>
 
 4.Copy the **provider ID** 
 5.Update the private repository inventory under **Core/secrets.yml** for the variable.   
