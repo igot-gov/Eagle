@@ -41,11 +41,11 @@ export class ConnectionRequestCardComponent implements OnInit {
 
   connetToUser(action: string | 'Approved' | 'Rejected') {
     // const req = { connectionId: this.user.id, status: action }
-
     const req = {
       connectionId: this.user.id,
-      userNameFrom: this.configSvc.userProfile ? this.configSvc.userProfile.userName : '',
-      userDepartmentFrom: 'iGOT',
+      userIdFrom: this.configSvc.userProfileV2 ? this.configSvc.userProfileV2.userId : '',
+      userNameFrom: this.configSvc.userProfileV2 ? this.configSvc.userProfileV2.userName : '',
+      userDepartmentFrom: this.configSvc.userProfileV2 ? this.configSvc.userProfileV2.departmentName : 'iGOT',
       userIdTo: this.user.identifier,
       userNameTo: `${this.user.name}`,
       userDepartmentTo: this.user.department,

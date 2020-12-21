@@ -41,6 +41,7 @@ export class NetworkHomeComponent implements OnInit {
       return v
     })
     this.connectionRequests = this.route.snapshot.data.connectionRequests.data.result.data
+
   }
 
   ngOnInit() {
