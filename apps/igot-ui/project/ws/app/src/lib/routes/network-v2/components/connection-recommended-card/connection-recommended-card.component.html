@@ -1,0 +1,36 @@
+<div class="flex flex-col item-center">
+    <div class="flex flex-col card-container">
+        <div class="photo-container flex items-center justify-center cursor-pointer" (click)="goToUserProfile(user)">
+            <a *ngIf="user?.photo" href="javascript:void(0)" class="" i18n-aria-label role="link"
+                aria-label="click on it to visit user profile">
+                <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
+                </ws-widget-avatar-photo>
+            </a>
+            <a *ngIf="!user?.photo" href="javascript:void(0)" class="" i18n-aria-label role="link">
+                <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
+                </ws-widget-avatar-photo>
+            </a>
+        </div>
+        <div class="name-container flex flex-col width-expand">
+            <a href="javascript:void(0)" class="" i18n-aria-label role="link" (click)="goToUserProfile(user)">
+                <div class="name ws-mat-black-text cursor-pointer">
+                    {{user?.name}}
+                </div>
+                <div class="designation ws-mat-black60-text">
+                    {{user?.department}}
+                </div>
+            </a>
+        </div>
+        <div class="action-container flex items-center justify-center">
+            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
+                (click)="connetToUser()">
+                <span class="" i18n>Connect</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" i18-value i18-aria-value aria-value="Connection sent" value="Connection sent successfully!"
+    #toastSuccess />
+<input type="hidden" i18-value i18-aria-value aria-value="Connection failed"
+    value="Something went wrong, please try again later!" #toastError />
