@@ -63,8 +63,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
     let hasAccess = false
     this.routerSubscription = await this.router.data.subscribe(data => {
-      if (data.contents && data.contents.length) {
-        const contents: { content: NSContent.IContentMeta; data: any }[] = data.contents
+      if (data.contents && data.contents.result && Object.keys(data.contents.result).length > 0) {
+        const contents: { content: NSContent.IContentMeta; data: any }[] = [data.contents.result]
         hasAccess = this.contentService.hasAccess(contents[0].content)
         if (
           ['Deleted', 'Unpublished', 'Expired', 'MarkedForDeletion'].includes(
@@ -80,21 +80,20 @@ export class EditorComponent implements OnInit, OnDestroy {
           this.route.navigateByUrl('/author/home')
           return
         }
-        if (!hasAccess || contents[0].content.isMetaEditingDisabled) {
-          this.snackBar.openFromComponent(NotificationComponent, {
-            data: {
-              type: Notify.NO_ACCESS,
-            },
-            duration: NOTIFICATION_TIME * 1000,
-          })
-          this.route.navigateByUrl('/author/home')
-          return
-        }
+        // if (!hasAccess || contents[0].content.isMetaEditingDisabled) {
+        //   this.snackBar.openFromComponent(NotificationComponent, {
+        //     data: {
+        //       type: Notify.NO_ACCESS,
+        //     },
+        //     duration: NOTIFICATION_TIME * 1000,
+        //   })
+        //   this.route.navigateByUrl('/author/home')
+        //   return
+        // }
         contents.map(v => {
           if (
             this.contentService.hasAccess(v.content) &&
-            !v.content.isMetaEditingDisabled &&
-            !['Deleted', 'Unpublished', 'Expired'].includes(v.content.status)
+            !['Deleted', 'Unpublished', 'Expired'].includes(v.content.status) // && !v.content.isMetaEditingDisabled
           ) {
             this.contentService.setOriginalMeta(v.content)
             this.contentV2Service.contentMetaMap.set(v.content.identifier, v.content)

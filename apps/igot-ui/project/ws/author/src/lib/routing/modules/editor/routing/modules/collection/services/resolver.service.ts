@@ -211,8 +211,8 @@ export class CollectionResolverService {
    * @param { NSContent.IContentMeta } content - The content for which we need to get category
    * @returns { boolean } The mat icon to be displayed
    */
-  hasAccess(content: NSContent.IContentMeta, parentMeta?: NSContent.IContentMeta): boolean {
-    return this.contentService.hasAccess(content, false, parentMeta) &&
+  hasAccess(content: NSContent.IContentMeta): boolean { // , parentMeta?: NSContent.IContentMeta
+    return this.contentService.hasAccess(content, false) &&
       content.status === 'InReview'
       ? this.authInitService.collectionConfig.enabledRole.includes('reviewer')
       : content.status === 'Reviewed'

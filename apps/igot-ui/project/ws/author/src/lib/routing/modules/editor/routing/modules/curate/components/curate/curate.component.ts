@@ -58,7 +58,7 @@ export class CurateComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.showSettingButtons = this.accessService.rootOrg === 'client1'
-    this.allLanguages = this.authInitService.ordinals.subTitles
+    this.allLanguages = (this.authInitService.ordinals) ? this.authInitService.ordinals.subTitles : []
     Object.keys(this.contentService.originalContent).map(v =>
       this.contents.push(this.contentService.originalContent[v]),
     )
@@ -144,7 +144,8 @@ export class CurateComponent implements OnInit, OnDestroy {
   }
 
   save(next?: string) {
-    const updatedContent = this.contentService.upDatedContent[this.currentContent] || {}
+    let updatedContent = this.contentService.upDatedContent[this.currentContent] || {}
+    updatedContent = this.contentService.cleanProperties(updatedContent)
     if (Object.keys(updatedContent).length) {
       this.isChanged = true
       this.loaderService.changeLoad.next(true)
@@ -400,18 +401,13 @@ export class CurateComponent implements OnInit, OnDestroy {
   }
 
   triggerSave(meta: NSContent.IContentMeta, id: string) {
-    const requestBody: NSApiRequest.IContentUpdate = {
-      hierarchy: {},
-      nodesModified: {
-        [id]: {
-          isNew: false,
-          root: true,
-          metadata: meta,
-        },
+    const requestBody: NSApiRequest.IContentUpdateV2 = {
+      request: {
+        content: meta,
       },
     }
     return this.editorService
-      .updateContent(requestBody)
+      .updateContentV3(requestBody, id)
       .pipe(tap(() => this.contentService.resetOriginalMeta(meta, id)))
   }
 

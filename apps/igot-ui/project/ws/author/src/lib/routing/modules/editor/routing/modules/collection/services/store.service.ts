@@ -48,7 +48,7 @@ export class CollectionStoreService {
     private resolver: CollectionResolverService,
     private authInitService: AuthInitService,
     private logger: LoggerService,
-  ) {}
+  ) { }
 
   treeStructureChange = new BehaviorSubject<IContentNode | null>(null)
   selectedNodeChange = new BehaviorSubject<number | null>(null)
@@ -65,11 +65,11 @@ export class CollectionStoreService {
     } else if (
       !this.resolver.hasAccess(
         this.contentService.getUpdatedMeta(dropNode.identifier),
-        dropNode.parentId
-          ? this.contentService.getUpdatedMeta(
-              (this.flatNodeMap.get(dropNode.parentId) as IContentNode).identifier,
-            )
-          : undefined,
+        // dropNode.parentId
+        //   ? this.contentService.getUpdatedMeta(
+        //     (this.flatNodeMap.get(dropNode.parentId) as IContentNode).identifier,
+        //   )
+        //   : undefined,
       )
     ) {
       allow = false
@@ -196,10 +196,10 @@ export class CollectionStoreService {
         ...(meta.additionalMeta || {}),
       }
       const content = await this.editorService.createAndReadContent(requestBody).toPromise()
-      this.contentService.setOriginalMeta(content)
+      this.contentService.setOriginalMeta(content.result.content)
       const contentDataMap = new Map<string, NSContent.IContentMeta>()
       const treeStructure = this.resolver.buildTreeAndMap(
-        content,
+        content.result.content,
         contentDataMap,
         this.flatNodeMap,
         this.uniqueIdMap,
@@ -337,8 +337,7 @@ export class CollectionStoreService {
         const children = contentNode.children || []
         if (childConfig.minChildren && children.length < childConfig.minChildren) {
           errorMsg.push(
-            `Minimum ${childConfig.minChildren} children is required. But ${
-              children.length ? children.length : 'nothing'
+            `Minimum ${childConfig.minChildren} children is required. But ${children.length ? children.length : 'nothing'
             } present`,
           )
         }
@@ -404,9 +403,8 @@ export class CollectionStoreService {
     if (condition.fit) {
       condition.fit.forEach((subCondition: any, majorIndex: number) => {
         Object.keys(subCondition).forEach((v: any, index: number) => {
-          returnValue = `${returnValue}${majorIndex > 0 ? ' or ' : ''}${
-            index > 0 ? ' ' : ''
-          }${v} in ${subCondition[v].join(' or ')}`
+          returnValue = `${returnValue}${majorIndex > 0 ? ' or ' : ''}${index > 0 ? ' ' : ''
+            }${v} in ${subCondition[v].join(' or ')}`
         })
       })
     }
@@ -446,7 +444,7 @@ export class CollectionStoreService {
       errorId.add(id)
       if (errorMap.has(id)) {
         // tslint:disable-next-line: semicolon    // tslint:disable-next-line: whitespace
-        ;(errorMap.get(id) as IProcessedError).message = (errorMap.get(
+        ; (errorMap.get(id) as IProcessedError).message = (errorMap.get(
           id,
         ) as IProcessedError).message.concat(errorMsg)
       } else {

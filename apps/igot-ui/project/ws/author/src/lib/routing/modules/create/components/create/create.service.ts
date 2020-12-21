@@ -7,6 +7,7 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
+import { environment } from '../../../../../../../../../../src/environments/environment'
 
 @Injectable()
 export class CreateService {
@@ -50,6 +51,48 @@ export class CreateService {
       .pipe(
         map((data: NSApiResponse.IContentCreateResponse) => {
           return data.identifier
+        }),
+      )
+  }
+
+  createV2(
+    meta: {
+      mimeType: string
+      contentType: string
+      locale: string
+      primaryCategory: string
+    }): Observable<NSApiResponse.IContentCreateResponseV2> {
+    let randomNumber = ''
+    // tslint:disable-next-line: no-increment-decrement
+    for (let i = 0; i < 16; i++) {
+      randomNumber += Math.floor(Math.random() * 10)
+    }
+    const requestBody: NSApiRequest.ICreateMetaRequestV2 = {
+      request: {
+        content: {
+          code: randomNumber,
+          contentType: meta.contentType,
+          createdBy: this.accessService.userId,
+          createdFor: [environment.channelId],
+          creator: (this.configSvc.userProfile) ? this.configSvc.userProfile.userName : '',
+          description: '',
+          framework: environment.framework,
+          mimeType: meta.mimeType,
+          name: 'Untitled Content',
+          organisation: [environment.organisation],
+          isExternal: meta.mimeType === 'application/html',
+          primaryCategory: meta.primaryCategory,
+        },
+      },
+    }
+    return this.apiService
+      .post<NSApiRequest.ICreateMetaRequestV2>(
+        `http://localhost:3003/authApi/content/v3/create`,
+        requestBody,
+      )
+      .pipe(
+        map((data: NSApiResponse.IContentCreateResponseV2) => {
+          return data
         }),
       )
   }

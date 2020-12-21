@@ -169,11 +169,14 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.typeCheck()
-    this.ordinals = this.authInitService.ordinals
-    this.audienceList = this.ordinals.audience
-    this.jobProfileList = this.ordinals.jobProfile
-    this.complexityLevelList = this.ordinals.audience
-
+    // tslint:disable-next-line: max-line-length
+    this.ordinals = { categoryType: ['Article', 'Lecture', 'Quiz', 'Exercise', 'Prelude', 'Tryout', 'Assessment', 'Offering', 'Webinar-Recording', 'Case-Study', 'Insights', 'How-To', 'Brochure', 'Lesson', 'Research-Study', 'Livestream', 'Elevator-Pitch', 'Primer', 'Capstone-Project', 'Client-Deck', 'Podcast', 'Body-of-Knowledge', 'Code-Component', 'Analyst-Report', 'Point-of-View', 'Infographics', 'HandsOnAssessment', 'Competitive-Insights', 'References', 'Concepts', 'Facts', 'Processes', 'Procedures', 'Principles'], skills: [{ identifier: '1', name: 'Computer Science', skill: 'Computer Science', category: 'Computer Science' }, { identifier: '2', name: 'Robotics', skill: 'Robotics', category: 'Robotics' }], accessPaths: ['igot', 'igot/dopt', 'igot/istm', 'igot/npa'], complexityLevel: ['Beginner', 'Intermediate', 'Advanced', 'Expert'], audience: ['All', 'Developers', 'Managers', 'Sales', 'Onboarding'], licenses: ['CC BY (Attribution)', 'CC BY-SA (Attribution-Share-Alike)', 'CC BY-ND (Attribution-NoDerivs)', 'CC BY-NC (Attribution-NonCommercial)', 'CC BY-NC-SA (Attribution-NonCommercial-ShareAlike)', 'CC BY-NC-ND (Attribution-NonCommercial-NoDerivs )'], subTitles: [{ label: 'Abkhazian', srclang: 'ab' }, { label: 'Afar', srclang: 'aa' }, { label: 'Afrikaans', srclang: 'af' }, { label: 'Akan', srclang: 'ak' }, { label: 'Albanian', srclang: 'sq' }, { label: 'Amharic', srclang: 'am' }, { label: 'Arabic', srclang: 'ar' }, { label: 'Aragonese', srclang: 'an' }, { label: 'Armenian', srclang: 'hy' }, { label: 'Assamese', srclang: 'as' }, { label: 'Avaric', srclang: 'av' }, { label: 'Avestan', srclang: 'ae' }, { label: 'Aymara', srclang: 'ay' }, { label: 'Azerbaijani', srclang: 'az' }, { label: 'Bambara', srclang: 'bm' }, { label: 'Bashkir', srclang: 'ba' }, { label: 'Basque', srclang: 'eu' }, { label: 'Belarusian', srclang: 'be' }, { label: 'Bengali (Bangla)', srclang: 'bn' }, { label: 'Bihari', srclang: 'bh' }, { label: 'Bislama', srclang: 'bi' }, { label: 'Bosnian', srclang: 'bs' }, { label: 'Breton', srclang: 'br' }, { label: 'Bulgarian', srclang: 'bg' }, { label: 'Burmese', srclang: 'my' }, { label: 'Catalan', srclang: 'ca' }, { label: 'Chamorro', srclang: 'ch' }, { label: 'Chechen', srclang: 'ce' }, { label: 'Chichewa', srclang: ' ny' }, { label: 'Chewa', srclang: 'ny' }, { label: 'Nyanja', srclang: 'ny' }, { label: 'Chinese', srclang: 'zh' }, { label: 'Chinese (Simplified)', srclang: 'zh-Hans' }, { label: 'Chinese (Traditional)', srclang: 'zh-Hant' }, { label: 'Chuvash', srclang: 'cv' }, { label: 'Cornish', srclang: 'kw' }, { label: 'Corsican', srclang: 'co' }, { label: 'Cree', srclang: 'cr' }, { label: 'Croatian', srclang: 'hr' }, { label: 'Czech', srclang: 'cs' }, { label: 'Danish', srclang: 'da' }, { label: 'Divehi', srclang: 'dv' }, { label: 'Dhivehi', srclang: 'dv' }, { label: 'Maldivian', srclang: 'dv' }, { label: 'Dutch', srclang: 'nl' }, { label: 'Dzongkha', srclang: 'dz' }, { label: 'English', srclang: 'en' }, { label: 'Esperanto', srclang: 'eo' }, { label: 'Estonian', srclang: 'et' }, { label: 'Ewe', srclang: 'ee' }, { label: 'Faroese', srclang: 'fo' }, { label: 'Fijian', srclang: 'fj' }, { label: 'Finnish', srclang: 'fi' }, { label: 'French', srclang: 'fr' }, { label: 'Fula', srclang: 'ff' }, { label: 'Fulah', srclang: 'ff' }, { label: 'Pulaar', srclang: 'ff' }, { label: 'Pular', srclang: 'ff' }, { label: 'Galician', srclang: 'gl' }, { label: 'Gaelic (Scottish)', srclang: 'gd' }, { label: 'Gaelic (Manx)', srclang: 'gv' }, { label: 'Georgian', srclang: 'ka' }, { label: 'German', srclang: 'de' }, { label: 'Greek', srclang: 'el' }, { label: 'Greenlandickl' }, { label: 'Guarani', srclang: 'gn' }, { label: 'Gujarati', srclang: 'gu' }, { label: 'Haitian Creole', srclang: 'ht' }, { label: 'Hausa', srclang: 'ha' }, { label: 'Hebrew', srclang: 'he' }, { label: 'Herero', srclang: 'hz' }, { label: 'Hindi', srclang: 'hi' }, { label: 'Hiri Motu', srclang: 'ho' }, { label: 'Hungarian', srclang: 'hu' }, { label: 'Icelandic', srclang: 'is' }, { label: 'Ido', srclang: 'io' }, { label: 'Igbo', srclang: 'ig' }, { label: 'Indonesian', srclang: 'id' }, { label: 'Interlingua', srclang: 'ia' }, { label: 'Interlingue', srclang: 'ie' }, { label: 'Inuktitut', srclang: 'iu' }, { label: 'Inupiak', srclang: 'ik' }, { label: 'Irish', srclang: 'ga' }, { label: 'Italian', srclang: 'it' }, { label: 'Japanese', srclang: 'ja' }, { label: 'Javanese', srclang: 'jv' }, { label: 'Kalaallisut', srclang: 'kl' }, { label: 'Greenlandic', srclang: 'kl' }, { label: 'Kannada', srclang: 'kn' }, { label: 'Kanuri', srclang: 'kr' }, { label: 'Kashmiri', srclang: 'ks' }, { label: 'Kazakh', srclang: 'kk' }, { label: 'Khmer', srclang: 'km' }, { label: 'Kikuyu', srclang: 'ki' }, { label: 'Kinyarwanda (Rwanda)', srclang: 'rw' }, { label: 'Kirundi', srclang: 'rn' }, { label: 'Kyrgyz', srclang: 'ky' }, { label: 'Komi', srclang: 'kv' }, { label: 'Kongo', srclang: 'kg' }, { label: 'Korean', srclang: 'ko' }, { label: 'Kurdish', srclang: 'ku' }, { label: 'Kwanyama', srclang: 'kj' }, { label: 'Lao', srclang: 'lo' }, { label: 'Latin', srclang: 'la' }, { label: 'Latvian (Lettish)', srclang: 'lv' }, { label: 'Limburgish ( Limburger)', srclang: 'li' }, { label: 'Lingala', srclang: 'ln' }, { label: 'Lithuanian', srclang: 'lt' }, { label: 'Luga-Katanga', srclang: 'lu' }, { label: 'Luganda, Ganda', srclang: 'lg' }, { label: 'Luxembourgish', srclang: 'lb' }, { label: 'Manx', srclang: 'gv' }, { label: 'Macedonian', srclang: 'mk' }, { label: 'Malagasy', srclang: 'mg' }, { label: 'Malay', srclang: 'ms' }, { label: 'Malayalam', srclang: 'ml' }, { label: 'Maltese', srclang: 'mt' }, { label: 'Maori', srclang: 'mi' }, { label: 'Marathi', srclang: 'mr' }, { label: 'Marshallese', srclang: 'mh' }, { label: 'Moldavian', srclang: 'mo' }, { label: 'Mongolian', srclang: 'mn' }, { label: 'Nauru', srclang: 'na' }, { label: 'Navajo', srclang: 'nv' }, { label: 'Ndonga', srclang: 'ng' }, { label: 'Northern Ndebele', srclang: 'nd' }, { label: 'Nepali', srclang: 'ne' }, { label: 'Norwegian', srclang: 'no' }, { label: 'Norwegian bokmÃ¥l', srclang: 'nb' }, { label: 'Norwegian nynorsk', srclang: 'nn' }, { label: 'Nuosu', srclang: 'ii' }, { label: 'Occitan', srclang: 'oc' }, { label: 'Ojibwe', srclang: 'oj' }, { label: 'Old Church Slavonic', srclang: 'cu' }, { label: 'Old Bulgarian', srclang: 'cu' }, { label: 'Oriya', srclang: 'or' }, { label: 'Oromo (Afaan Oromo)', srclang: 'om' }, { label: 'Ossetian', srclang: 'os' }, { label: 'PÄ�li', srclang: 'pi' }, { label: 'Pashto', srclang: 'ps' }, { label: 'Pushto', srclang: 'ps' }, { label: 'Persian', srclang: ' (Farsi)fa' }, { label: 'Polish', srclang: 'pl' }, { label: 'Portuguese', srclang: 'pt' }, { label: 'Punjabi (Eastern)', srclang: 'pa' }, { label: 'Quechua', srclang: 'qu' }, { label: 'Romansh', srclang: 'rm' }, { label: 'Romanian', srclang: 'ro' }, { label: 'Russian', srclang: 'ru' }, { label: 'Sami', srclang: 'se' }, { label: 'Samoan', srclang: 'sm' }, { label: 'Sango', srclang: 'sg' }, { label: 'Sanskrit', srclang: 'sa' }, { label: 'Serbian', srclang: 'sr' }, { label: 'Serbo-Croatian', srclang: 'sh' }, { label: 'Sesotho', srclang: 'st' }, { label: 'Setswana', srclang: 'tn' }, { label: 'Shona', srclang: 'sn' }, { label: 'Sichuan Yi', srclang: 'ii' }, { label: 'Sindhi', srclang: 'sd' }, { label: 'Sinhalese', srclang: 'si' }, { label: 'Siswati', srclang: 'ss' }, { label: 'Slovak', srclang: 'sk' }, { label: 'Slovenian', srclang: 'sl' }, { label: 'Somali', srclang: 'so' }, { label: 'Southern Ndebele', srclang: 'nr' }, { label: 'Spanish', srclang: 'es' }, { label: 'Sundanese', srclang: 'su' }, { label: 'Swahili (Kiswahili)', srclang: 'sw' }, { label: 'Swati', srclang: 'ss' }, { label: 'Swedish', srclang: 'sv' }, { label: 'Tagalog', srclang: 'tl' }, { label: 'Tahitian', srclang: 'ty' }, { label: 'Tajik', srclang: 'tg' }, { label: 'Tamil', srclang: 'ta' }, { label: 'Tatar', srclang: 'tt' }, { label: 'Telugu', srclang: 'te' }, { label: 'Thai', srclang: 'th' }, { label: 'Tibetan', srclang: 'bo' }, { label: 'Tigrinya', srclang: 'ti' }, { label: 'Tonga', srclang: 'to' }, { label: 'Tsonga', srclang: 'ts' }, { label: 'Turkish', srclang: 'tr' }, { label: 'Turkmen', srclang: 'tk' }, { label: 'Twi', srclang: 'tw' }, { label: 'Uyghur', srclang: 'ug' }, { label: 'Ukrainian', srclang: 'uk' }, { label: 'Urdu', srclang: 'ur' }, { label: 'Uzbek', srclang: 'uz' }, { label: 'Venda', srclang: 've' }, { label: 'Vietnamese', srclang: 'vi' }, { label: 'VolapÃ¼k', srclang: 'vo' }, { label: 'Wallon', srclang: 'wa' }, { label: 'Welsh', srclang: 'cy' }, { label: 'Wolof', srclang: 'wo' }, { label: 'Western Frisian', srclang: 'fy' }, { label: 'Xhosa', srclang: 'xh' }, { label: 'Yiddish', srclang: 'yi' }, { label: 'Yoruba', srclang: 'yo' }, { label: 'Zhuang', srclang: 'za' }, { label: ' Chuang', srclang: 'za' }, { label: 'Zulu', srclang: 'zu' }], currency: ['INR'], sourceName: ['ISTM (Institute of Secretariat Training and Management)', 'DoPT(Department of Personnel and Training', 'LBSNNA', 'SVPNPA', 'Enthralltech', 'Wadhwani Foundation', 'Harappa Education', 'J-PAL SA'], contentType: ['Channel', 'Course', 'Knowledge Artifact', 'Knowledge Board', 'Module', 'Program', 'Resource'], learningMode: ['Self-Paced', 'Instructor-Led'], resourceType: ['Article', 'Lecture', 'Quiz', 'Exercise', 'Prelude', 'Tryout', 'Assessment', 'Offering', 'Webinar-Recording', 'Case-Study', 'Insights', 'How-To', 'Brochure', 'Lesson', 'Research-Study', 'Livestream', 'Elevator-Pitch', 'Primer', 'Capstone-Project', 'Client-Deck', 'Podcast', 'Body-of-Knowledge', 'Code-Component', 'Analyst-Report', 'Point-of-View', 'Infographics', 'HandsOnAssessment', 'Competitive-Insights', 'References', 'Concepts', 'Facts', 'Processes', 'Procedures', 'Principles'] }
+    // this.authInitService.ordinals
+    if (this.ordinals && Object.keys(this.ordinals).length > 0) {
+      this.audienceList = this.ordinals.audience
+      this.jobProfileList = this.ordinals.jobProfile
+      this.complexityLevelList = this.ordinals.audience
+    }
     this.creatorContactsCtrl = new FormControl()
     this.trackContactsCtrl = new FormControl()
     this.publisherDetailsCtrl = new FormControl()
@@ -441,7 +444,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.isEditEnabled = this.contentService.hasAccess(
       contentMeta,
       false,
-      this.parentContent ? this.contentService.getUpdatedMeta(this.parentContent) : undefined,
+      // this.parentContent ? this.contentService.getUpdatedMeta(this.parentContent) : undefined,
     )
     this.contentMeta.name = contentMeta.name === 'Untitled Content' ? '' : contentMeta.name
     if (!this.contentMeta.posterImage) {
@@ -463,56 +466,58 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   filterOrdinals() {
     this.complexityLevelList = []
-    this.ordinals.complexityLevel.map((v: any) => {
-      if (v.condition) {
-        let canAdd = false
-          // tslint:disable-next-line: whitespace
-          ; (v.condition.showFor || []).map((con: any) => {
-            let innerCondition = false
-            Object.keys(con).map(meta => {
-              if (
-                con[meta].indexOf(
-                  (this.contentForm.controls[meta] && this.contentForm.controls[meta].value) ||
-                  this.contentMeta[meta as keyof NSContent.IContentMeta],
-                ) > -1
-              ) {
-                innerCondition = true
+    if (this.ordinals) {
+      this.ordinals.complexityLevel.map((v: any) => {
+        if (v.condition) {
+          let canAdd = false
+            // tslint:disable-next-line: whitespace
+            ; (v.condition.showFor || []).map((con: any) => {
+              let innerCondition = false
+              Object.keys(con).map(meta => {
+                if (
+                  con[meta].indexOf(
+                    (this.contentForm.controls[meta] && this.contentForm.controls[meta].value) ||
+                    this.contentMeta[meta as keyof NSContent.IContentMeta],
+                  ) > -1
+                ) {
+                  innerCondition = true
+                }
+              })
+              if (innerCondition) {
+                canAdd = true
               }
             })
-            if (innerCondition) {
-              canAdd = true
-            }
-          })
-        if (canAdd) {
-          // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
-          ; (v.condition.nowShowFor || []).map((con: any) => {
-            let innerCondition = false
-            Object.keys(con).map(meta => {
-              if (
-                con[meta].indexOf(
-                  (this.contentForm.controls[meta] && this.contentForm.controls[meta].value) ||
-                  this.contentMeta[meta as keyof NSContent.IContentMeta],
-                ) < 0
-              ) {
-                innerCondition = true
+          if (canAdd) {
+            // tslint:disable-next-line: semicolon // tslint:disable-next-line: whitespace
+            ; (v.condition.nowShowFor || []).map((con: any) => {
+              let innerCondition = false
+              Object.keys(con).map(meta => {
+                if (
+                  con[meta].indexOf(
+                    (this.contentForm.controls[meta] && this.contentForm.controls[meta].value) ||
+                    this.contentMeta[meta as keyof NSContent.IContentMeta],
+                  ) < 0
+                ) {
+                  innerCondition = true
+                }
+              })
+              if (innerCondition) {
+                canAdd = false
               }
             })
-            if (innerCondition) {
-              canAdd = false
-            }
-          })
-        }
-        if (canAdd) {
-          this.complexityLevelList.push(v.value)
-        }
-      } else {
-        if (typeof v === 'string') {
-          this.complexityLevelList.push(v)
+          }
+          if (canAdd) {
+            this.complexityLevelList.push(v.value)
+          }
         } else {
-          this.complexityLevelList.push(v.value)
+          if (typeof v === 'string') {
+            this.complexityLevelList.push(v)
+          } else {
+            this.complexityLevelList.push(v.value)
+          }
         }
-      }
-    })
+      })
+    }
   }
 
   assignExpiryDate() {
@@ -609,9 +614,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
   changeResourceType() {
     if (this.contentForm.controls.contentType.value === 'Resource') {
-      this.resourceTypes = this.ordinals.resourceType || this.ordinals.categoryType || []
+      this.resourceTypes = (this.ordinals) ? (this.ordinals.resourceType || this.ordinals.categoryType || []) : []
     } else {
-      this.resourceTypes = this.ordinals['Offering Mode'] || this.ordinals.categoryType || []
+      this.resourceTypes = (this.ordinals) ? (this.ordinals['Offering Mode'] || this.ordinals.categoryType || []) : []
     }
 
     if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
@@ -659,6 +664,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         }
         Object.keys(currentMeta).map(v => {
           if (
+            v !== 'versionKey' &&
             JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
             JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
           ) {
@@ -678,22 +684,24 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
                 ),
               )
             }
+          } else if (v === 'versionKey') {
+            meta[v as keyof NSContent.IContentMeta] = originalMeta[v as keyof NSContent.IContentMeta]
           }
         })
         // Quick FIX
-        if (this.stage >= 1 && !this.type) {
-          delete meta.artifactUrl
-          //   delete meta.size
-          //   if (meta.creatorDetails && meta.creatorDetails.length === 0)
-          //     delete meta.creatorDetails
-          //   if (meta.trackContacts && meta.trackContacts.length === 0)
-          //     delete meta.trackContacts
-          //   if (meta.creatorContacts && meta.creatorContacts.length === 0)
-          //     delete meta.creatorContacts
-          //   if (meta.publisherDetails && meta.publisherDetails.length === 0)
-          //     delete meta.publisherDetails
-          // delete meta.duration
-        }
+        // if (this.stage >= 1 && !this.type) {
+        //   delete meta.artifactUrl
+        //   delete meta.size
+        //   if (meta.creatorDetails && meta.creatorDetails.length === 0)
+        //     delete meta.creatorDetails
+        //   if (meta.trackContacts && meta.trackContacts.length === 0)
+        //     delete meta.trackContacts
+        //   if (meta.creatorContacts && meta.creatorContacts.length === 0)
+        //     delete meta.creatorContacts
+        //   if (meta.publisherDetails && meta.publisherDetails.length === 0)
+        //     delete meta.publisherDetails
+        //   delete meta.duration
+        // }
         // if (this.stage >= 2) {
         //   delete meta.name
         //   delete meta.body
@@ -716,7 +724,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
         //   delete meta.keywords
         //   delete meta.catalogPaths
         // }
-
         this.contentService.setUpdatedMeta(meta, this.contentMeta.identifier)
       }
     } catch (ex) {
@@ -1235,7 +1242,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       unit: [],
       verifiers: [],
       visibility: [],
-
+      versionKey: '',
     })
 
     this.contentForm.valueChanges.pipe(debounceTime(700)).subscribe(() => {

@@ -72,8 +72,8 @@ export class EditorService {
       )
   }
 
-  readContent(id: string): Observable<NSContent.IContentMeta> {
-    return this.apiService.get<NSContent.IContentMeta>(
+  readContent(id: string): Observable<NSContent.IContentMetaV2> {
+    return this.apiService.get<NSContent.IContentMetaV2>(
       `${CONTENT_READ}${id}${this.accessService.orgRootOrgAsQuery}`,
     )
   }
@@ -86,7 +86,7 @@ export class EditorService {
 
   createAndReadContent(
     meta: NSApiRequest.ICreateMetaRequestGeneral,
-  ): Observable<NSContent.IContentMeta> {
+  ): Observable<NSContent.IContentMetaV2> {
     return this.create(meta).pipe(mergeMap(data => this.readContent(data)))
   }
 
@@ -100,6 +100,13 @@ export class EditorService {
   updateContentV2(meta: NSApiRequest.IContentUpdate): Observable<null> {
     return this.apiService.post<null>(
       `${CONTENT_SAVE_V2}${this.accessService.orgRootOrgAsQuery}`,
+      meta,
+    )
+  }
+
+  updateContentV3(meta: NSApiRequest.IContentUpdateV2, id: string): Observable<null> {
+    return this.apiService.patch<null>(
+      `http://localhost:3003/authApi/content/v3/update/${id}`,
       meta,
     )
   }

@@ -5,10 +5,16 @@
 export const environment: IEnvironment = {
   production: false,
   sitePath: 'localhost_3000',
+  organisation: 'igot-karmayogi',
+  framework: 'igot',
+  channelId: '0131397178949058560',
 }
 interface IEnvironment {
   production: boolean
   sitePath: null | string
+  organisation: string
+  framework: string
+  channelId: string
 }
 
 /*

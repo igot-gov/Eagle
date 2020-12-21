@@ -1,5 +1,5 @@
 import {
-  CONTENT_BASE,
+  // CONTENT_BASE,
   CONTENT_VIDEO_ENCODE,
   CONTENT_BASE_ENCODE,
   CONTENT_BASE_ZIP,
@@ -32,7 +32,7 @@ export class UploadService {
     data: FormData,
     contentData: NSApiRequest.IContentData,
     options?: any,
-    isZip = false,
+    isZip = false
   ): Observable<NSApiResponse.IFileApiResponse> {
     if (isZip) {
       return this.zipUpload(data, contentData, options)
@@ -44,9 +44,10 @@ export class UploadService {
     }
     const newFormData = new FormData()
     newFormData.append('content', file, fileName)
+    const id = contentData.contentId
     return this.apiService.post<NSApiResponse.IFileApiResponse>(
       // tslint:disable-next-line:max-line-length
-      `${CONTENT_BASE}${this.accessService.rootOrg.replace(/ /g, '_')}/${this.accessService.org.replace(/ /g, '_')}/Public/${contentData.contentId.replace('.img', '')}${contentData.contentType}`,
+      `/apis/proxies/v8/action/content/v3/upload/${id}`,
       newFormData,
       false,
       options,

@@ -8,6 +8,7 @@ import { IFormMeta } from './../../../../interface/form'
 import { AuthInitService } from './../../../../services/init.service'
 import { EditorService } from './editor.service'
 import { IAssessmentDetails } from '../routing/modules/iap-assessment/interface/iap-assessment.interface'
+import { isArray } from 'lodash'
 @Injectable()
 export class EditorContentService {
   originalContent: { [key: string]: NSContent.IContentMeta } = {}
@@ -72,6 +73,21 @@ export class EditorContentService {
     this.originalContent[meta.identifier] = JSON.parse(JSON.stringify(meta))
   }
 
+  cleanProperties(objParam: any) {
+    const propertiesTobeExcluded: any = []
+    const obj = { ...objParam }
+    let propNames = Object.getOwnPropertyNames(obj)
+    propNames = propNames.filter(el => !propertiesTobeExcluded.includes(el))
+    for (const prop of propNames) {
+      const propName = prop
+      // tslint:disable-next-line: max-line-length
+      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === '' || (isArray(obj[propName]) && obj[propName].length === 0)) {
+        delete obj[propName]
+      }
+    }
+    return obj
+  }
+
   resetOriginalMeta(meta: NSContent.IContentMeta, id: string) {
     this.originalContent[id] = { ...this.originalContent[id], ...JSON.parse(JSON.stringify(meta)) }
     delete this.upDatedContent[id]
@@ -106,9 +122,9 @@ export class EditorContentService {
   hasAccess(
     meta: NSContent.IContentMeta,
     forPreview = false,
-    parentMeta?: NSContent.IContentMeta,
+    // parentMeta?: NSContent.IContentMeta,
   ): boolean {
-    return this.accessService.hasAccess(meta, forPreview, parentMeta)
+    return this.accessService.hasAccess(meta, forPreview) // parentMeta
   }
 
   isLangPresent(lang: string): boolean {
@@ -142,7 +158,7 @@ export class EditorContentService {
   createInAnotherLanguage(
     language: string,
     meta = {},
-  ): Observable<NSContent.IContentMeta | boolean> {
+  ): Observable<NSContent.IContentMetaV2 | boolean> {
     const parentContent = this.getParentUpdatedMeta()
     if (this.isLangPresent(language)) {
       return of(true)
@@ -166,7 +182,7 @@ export class EditorContentService {
     delete requestBody.accessPaths
     return this.editorService
       .createAndReadContent(requestBody)
-      .pipe(tap(v => this.setOriginalMeta(v)))
+      .pipe(tap(v => this.setOriginalMeta(v.result.content)))
   }
 
   isValid(id: string): boolean {
