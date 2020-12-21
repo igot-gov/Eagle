@@ -10,7 +10,7 @@
 <div class="playlists-collection custom-scroll" *ngIf="!createPlaylistMode">
   <mat-selection-list *ngIf="fetchPlaylistStatus !== 'fetching'" (selectionChange)="selectionChange($event?.option)">
     <mat-list-option name="playlist-name-playlist-selection" *ngFor="let playlist of playlists"
-      [selected]="selectedPlaylists.has(playlist?.id)" [value]="playlist?.id" checkboxPosition="before">
+      [selected]="selectedPlaylists.has(playlist?.id)" [value]="playlist?.identifier" checkboxPosition="before">
       {{ playlist?.name }}
     </mat-list-option>
   </mat-selection-list>
