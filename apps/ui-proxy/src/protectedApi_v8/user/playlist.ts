@@ -20,13 +20,13 @@ import {
   transformToSbExtDeleteRequest,
   transformToSbExtPatchRequest,
   transformToSbExtSyncRequest,
-  transformToSbExtUpsertRequest
+  // transformToSbExtUpsertRequest
 } from '../../service/playlist'
 import { CONSTANTS } from '../../utils/env'
 import { getStringifiedQueryParams } from '../../utils/helpers'
 import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
-import { extractUserIdFromRequest } from '../../utils/requestExtract'
+import { extractUserIdFromRequest, extractUserNameFromRequest } from '../../utils/requestExtract'
 
 const API_END_POINTS = {
   playlist: (userId: string, playlistId: string) =>
@@ -431,6 +431,7 @@ playlistApi.post('/create', async (req, res) => {
   /*Post request to create a playlist */
 
   const userId = extractUserIdFromRequest(req)
+  const userName = extractUserNameFromRequest(req)
   try {
     const request: IPlaylistCreateRequest = req.body
     const rootOrg = req.header('rootOrg')
@@ -442,7 +443,7 @@ playlistApi.post('/create', async (req, res) => {
     const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/create`
     const response = await axios({
       ...axiosRequestConfig,
-      data: formPlaylistRequestObj(request, userId),
+      data: formPlaylistRequestObj(request, userId, userName),
       headers: {
         Authorization: auth,
         org: 'dopt',
@@ -484,7 +485,6 @@ playlistApi.post('/create', async (req, res) => {
     }
     res.status(response1.status).send()
   } catch (err) {
-    // console.log(err)
     res
       .status((err && err.response && err.response.status) || 500)
       .send((err && err.response && err.response.data) || {
@@ -496,6 +496,7 @@ playlistApi.post('/create', async (req, res) => {
 playlistApi.post('/:playlistId/:type', async (req, res) => {
   /*Post request add content or delete content from a playlist */
   const userId = extractUserIdFromRequest(req)
+  const auth = req.header('Authorization')
   try {
     const request: IPlaylistUpsertRequest = req.body
     const rootOrg = req.header('rootOrg')
@@ -506,21 +507,57 @@ playlistApi.post('/:playlistId/:type', async (req, res) => {
     /* axios request to add/delete playlist content is done*/
     const type = req.params.type
     const playlistId = req.params.playlistId
-    const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/contents`
+
     if (type === EPlaylistUpsertTypes.add) {
-      const response = await axios({
+      const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`
+      const response1 = await axios({
         ...axiosRequestConfig,
-        data: transformToSbExtUpsertRequest(request),
         headers: {
-          rootOrg,
+          Authorization: auth,
+          org: 'dopt',
+          rootOrg: 'igot',
         },
-        method: 'POST',
+        method: 'GET',
         url,
       })
-      res.status(response.status).send()
+
+      const urll = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/update`
+
+      const hierarchy = {}
+      const childern = response1.data.result.content.childNodes
+      childern.push(req.body.contentIds[0])
+
+      hierarchy[playlistId] = {
+        children: childern,
+        contentType: 'Collection',
+        root: true,
+      }
+
+      const obj = {
+        request: {
+          data: {
+            hierarchy,
+            nodesModified: {},
+          },
+        },
+      }
+
+      const response = await axios({
+        ...axiosRequestConfig,
+        data: obj,
+        headers: {
+          Authorization: auth,
+          org: 'dopt',
+          rootOrg: 'igot',
+        },
+        method: 'PATCH',
+        url: urll,
+      })
+      res.status(response.status).send(response.data)
 
       return
     } else if (type === EPlaylistUpsertTypes.delete) {
+      const url = `${API_END_POINTS.playlistV1(userId)}/playlists/${playlistId}/contents`
       const response = await axios({
         ...axiosRequestConfig,
         data: transformToSbExtDeleteRequest(request),

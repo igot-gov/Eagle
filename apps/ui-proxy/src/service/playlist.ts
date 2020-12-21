@@ -100,7 +100,7 @@ export function transformToSbExtPatchRequest(updateRequest: IPlayListUpdateReque
   }
 }
 
-export function formPlaylistRequestObj(request: IPlaylistCreateRequest, userId: string) {
+export function formPlaylistRequestObj(request: IPlaylistCreateRequest, userId: string, _userName: string) {
   /* for Patch request to change playlist title */
   return {
     request: {
@@ -108,7 +108,7 @@ export function formPlaylistRequestObj(request: IPlaylistCreateRequest, userId: 
         code: 'org.ekstep0.29884945860157064123',
         contentType: 'Collection',
         createdBy: userId,
-        creator: 'Rangabashyam',
+        creator: request.createdBy,
         license: 'CC BY 4.0',
         mimeType: 'application/vnd.ekstep.content-collection',
         name: request.playlist_title,

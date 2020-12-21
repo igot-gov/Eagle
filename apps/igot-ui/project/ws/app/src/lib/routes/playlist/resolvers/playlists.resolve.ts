@@ -17,12 +17,11 @@ export class PlaylistsResolve
   constructor(private playlistSvc: BtnPlaylistService) { }
 
   resolve(
-    _route: ActivatedRouteSnapshot,
+    route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<any>> {
-
     return this.playlistSvc
-      .getPlaylists()
+      .getPlaylists(route.data.type)
       .pipe(
         first(),
         map(data => ({ data, error: null })),

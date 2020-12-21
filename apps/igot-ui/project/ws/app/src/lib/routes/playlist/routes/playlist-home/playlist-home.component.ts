@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { BtnPlaylistService, NsError, NsPlaylist, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
+import { NsError, NsPlaylist, ROOT_WIDGET_CONFIG } from '@ws-widget/collection'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ConfigurationsService, NsPage } from '@ws-widget/utils'
 import { Subscription } from 'rxjs'
@@ -41,7 +41,7 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
-    private playlistSvc: BtnPlaylistService,
+    // private playlistSvc: BtnPlaylistService,
     private configSvc: ConfigurationsService,
     private router: Router,
 
@@ -61,12 +61,12 @@ export class PlaylistHomeComponent implements OnInit, OnDestroy {
       this.isShareEnabled = !this.configSvc.restrictedFeatures.has('share')
     }
 
-    this.playlistsSubscription = this.playlistSvc
-      .getPlaylists()
-      .subscribe(
-        playlists => {
-          this.playlists = playlists
-        })
+    // this.playlistsSubscription = this.playlistSvc
+    //   .getPlaylists()
+    //   .subscribe(
+    //     playlists => {
+    //       this.playlists = playlists
+    //     })
     // this.notificationsSubscription = this.playlistSvc
     //   .getPlaylists()
     //   .subscribe(pending => this.numNotifications = pending.length)

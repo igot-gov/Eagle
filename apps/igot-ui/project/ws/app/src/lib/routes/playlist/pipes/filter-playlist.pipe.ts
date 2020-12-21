@@ -8,6 +8,6 @@ export class FilterPlaylistPipe implements PipeTransform {
   transform(playlists: any): NsPlaylist.IPlaylist[] | undefined {
     const filteredPlaylists = playlists.result.content
 
-    return filteredPlaylists.length ? filteredPlaylists : undefined
+    return filteredPlaylists ? filteredPlaylists : undefined
   }
 }
