@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
-import { Observable, of } from 'rxjs'
-import { map, catchError } from 'rxjs/operators'
+import { Observable } from 'rxjs'
+// import { map, catchError } from 'rxjs/operators'
 import { } from '@ws-widget/collection'
 import { ConfigurationsService, IResolveResponse } from '@ws-widget/utils'
-import { ProfileV2UtillService } from '../services/profile-v2-utill.service'
+// import { ProfileV2UtillService } from '../services/profile-v2-utill.service'
 import { NSProfileDataV2 } from '../models/profile-v2.model'
 
 @Injectable()
 export class Profilev2BadgesResolve
   implements
   Resolve<Observable<IResolveResponse<NSProfileDataV2.IBadgeResponse>> | IResolveResponse<NSProfileDataV2.IBadgeResponse>> {
-  constructor(private profileV2Svc: ProfileV2UtillService, private configSvc: ConfigurationsService) { }
+  constructor(private configSvc: ConfigurationsService) { }
 
   resolve(
     _route: ActivatedRouteSnapshot,
@@ -24,15 +24,18 @@ export class Profilev2BadgesResolve
       if (!userId) {
         userId = _route.queryParams.userId
       }
+
       if (!userId) {
         userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
       }
     } else {
       userId = this.configSvc.userProfile && this.configSvc.userProfile.userId || ''
     }
-    return this.profileV2Svc.fetchBadges(userId).pipe(
-      map(data => ({ data, error: null })),
-      catchError(error => of({ error, data: null })),
-    )
+    const data: any = ''
+    return data
+    // return this.profileV2Svc.fetchBadges(userId).pipe(
+    //   map(data => ({ data, error: null })),
+    //   catchError(error => of({ error, data: null })),
+    // )
   }
 }

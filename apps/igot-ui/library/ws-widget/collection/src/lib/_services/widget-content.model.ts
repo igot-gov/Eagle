@@ -3,6 +3,15 @@ export namespace NsContent {
     continueData: any
   }
 
+  export interface IContinueLearningDataReq {
+    request: {
+      userId: string | undefined,
+      courseId: string,
+      contentIds: string[],
+      batchId: string
+    }
+  }
+
   export interface IContent {
     platform?: any
     addedOn: string
@@ -74,6 +83,7 @@ export namespace NsContent {
       currency: string
       value: number
     }
+    primaryCategory: string,
     proctorUrl?: string
     progress?: IMarkAsCompleteProgress
     publishedOn: string
@@ -260,6 +270,11 @@ export namespace NsContent {
     MODULE = 'Collection',
     RESOURCE = 'Resource',
   }
+
+  export enum EResourcePrimaryCategories {
+    LEARNING_RESOURCE = 'Learning Resource',
+  }
+
   export enum EMiscPlayerSupportedCollectionTypes {
     PLAYLIST = 'Playlist',
   }

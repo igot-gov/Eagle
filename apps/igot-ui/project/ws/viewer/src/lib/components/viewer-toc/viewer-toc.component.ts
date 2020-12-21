@@ -174,12 +174,13 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
     _collectionType: string,
   ): Promise<IViewerTocCard | null> {
     try {
-      const content: NsContent.IContent = await (this.forPreview
+      const content: NsContent.IContentResponse | NsContent.IContent = await (this.forPreview
         ? this.contentSvc.fetchAuthoringContent(collectionId)
         : this.contentSvc.fetchContent(collectionId, 'detail')
       ).toPromise()
-      this.collectionCard = this.createCollectionCard(content)
-      const viewerTocCardContent = this.convertContentToIViewerTocCard(content)
+      const contentData = content.result.content
+      this.collectionCard = this.createCollectionCard(contentData)
+      const viewerTocCardContent = this.convertContentToIViewerTocCard(contentData)
       this.isFetching = false
       return viewerTocCardContent
     } catch (err) {
@@ -332,20 +333,29 @@ export class ViewerTocComponent implements OnInit, OnDestroy {
 
   private getCollectionTypeRedirectUrl(
     identifier: string,
+    contentType: string = '',
     displayContentType?: NsContent.EDisplayContentTypes,
   ): string | null {
+    let url: string | null
     switch (displayContentType) {
       case NsContent.EDisplayContentTypes.PROGRAM:
       case NsContent.EDisplayContentTypes.COURSE:
       case NsContent.EDisplayContentTypes.MODULE:
-        return `${this.forPreview ? '/author' : '/app'}/toc/${identifier}/overview`
+        url =  `${this.forPreview ? '/author' : '/app'}/toc/${identifier}/overview`
+        break
       case NsContent.EDisplayContentTypes.GOALS:
-        return `/app/goals/${identifier}`
+        url =  `/app/goals/${identifier}`
+        break
       case NsContent.EDisplayContentTypes.PLAYLIST:
-        return `/app/playlist/${identifier}`
+        url =  `/app/playlist/${identifier}`
+        break
       default:
-        return null
+        url =  null
     }
+    if (contentType) {
+      url = `${url}?primaryCategory=${contentType}`
+    }
+    return url
   }
 
   private processCollectionForTree() {

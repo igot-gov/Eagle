@@ -16,7 +16,7 @@ export class PipeContentRoutePipe implements PipeTransform {
     if (content.contentType === 'Knowledge Board') {
       return {
         url: forPreview
-          ? `${location}/toc/${content.identifier}/overview`
+          ? `${location}/toc/${content.identifier}/overview?primaryCategory=${content.primaryCategory}`
           : `${location}/knowledge-board/${content.identifier}`,
         queryParams: this.getQueryParams(),
       }
@@ -49,11 +49,15 @@ export class PipeContentRoutePipe implements PipeTransform {
     }
     return {
       url: `${location}/toc/${content.identifier}/overview`,
-      queryParams: this.getQueryParams(),
+      queryParams: this.getQueryParams({
+        primaryCategory: content.primaryCategory,
+      }),
     }
   }
 
-  private getQueryParams() {
-    return {}
+  private getQueryParams(queryParams?: any) {
+    return {
+      ...queryParams,
+    }
   }
 }

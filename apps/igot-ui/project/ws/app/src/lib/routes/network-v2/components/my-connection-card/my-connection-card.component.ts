@@ -24,7 +24,7 @@ export class MyConnectionCardComponent implements OnInit {
 
   getUseravatarName() {
     if (this.user) {
-      return `${this.user.personalDetails.firstname} ${this.user.personalDetails.surname}`
+      return `${this.user.name}`
     }
       return ''
   }

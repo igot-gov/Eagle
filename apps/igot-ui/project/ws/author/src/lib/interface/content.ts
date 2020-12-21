@@ -212,6 +212,7 @@ export namespace NSContent {
     createdBy: string
     location: string
     tncAcceptedVersion: string
+    primaryCategory: string
   }
 
   export interface IClient {

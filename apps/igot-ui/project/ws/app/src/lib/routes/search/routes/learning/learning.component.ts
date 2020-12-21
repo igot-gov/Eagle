@@ -47,7 +47,7 @@ export class LearningComponent implements OnInit, OnDestroy {
   searchRequestObject: ISearchRequestV2 = {
     request: {
       filters: {
-        primaryCategory: [],
+        visibility: ['Default'],
       },
       query: '',
       sort_by: { lastUpdatedOn: 'desc' },
@@ -65,7 +65,9 @@ export class LearningComponent implements OnInit, OnDestroy {
     lang?: string | null
   } = {
       query: '',
-      filters: {},
+      filters: {
+        visibility: ['Default'],
+      },
       sort: '',
       lang: this.getActiveLocale() || '',
     }
@@ -242,7 +244,7 @@ export class LearningComponent implements OnInit, OnDestroy {
         })
       } else {
         this.routeComp = this.activated.snapshot.data.pageroute
-        this.searchRequestObject.request.filters = {}
+        // this.searchRequestObject.request.filters = {}
       }
       if (this.utilitySvc.isMobile && !this.isIntranetAllowedSettings) {
         this.searchRequestObject.request.filters = {}
@@ -261,11 +263,15 @@ export class LearningComponent implements OnInit, OnDestroy {
         if (this.searchRequest.filters !== filters) {
           this.expandToPrefLang = true
         }
-        this.searchRequest.filters = filters
-        for (const key of Object.keys(this.searchRequest.filters)) {
-          if (key) {
-            this.searchRequestObject.request.filters = this.searchRequest.filters
+        if (Object.keys(filters).length > 0) {
+          this.searchRequest.filters = filters
+          for (const key of Object.keys(this.searchRequest.filters)) {
+            if (key) {
+              this.searchRequestObject.request.filters = this.searchRequest.filters
+            }
           }
+        } else {
+          this.searchRequestObject.request.filters = { visibility: ['Default'] }
         }
       }
       if (queryParams.has('sort') && this.searchRequestObject.request.sort_by.lastUpdatedOn) {

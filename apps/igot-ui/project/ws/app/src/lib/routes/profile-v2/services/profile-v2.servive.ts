@@ -9,7 +9,7 @@ const API_END_POINTS = {
   DISCUSS_PROFILE: '/apis/protected/v8/discussionHub/users',
   PROFILE_DETAIL: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
-  getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistryById',
+  getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileRegistry/getUserRegistryByUser',
 }
 
 @Injectable({

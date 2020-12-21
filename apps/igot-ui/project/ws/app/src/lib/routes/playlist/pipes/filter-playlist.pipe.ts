@@ -5,11 +5,8 @@ import { NsPlaylist } from '@ws-widget/collection'
   name: 'filterPlaylist',
 })
 export class FilterPlaylistPipe implements PipeTransform {
-  transform(playlists: NsPlaylist.IPlaylist[], searchPlaylistQuery: string): NsPlaylist.IPlaylist[] | undefined {
-    const filteredPlaylists = playlists.filter(
-      (playlist: NsPlaylist.IPlaylist) =>
-        playlist.name.toLowerCase().includes((searchPlaylistQuery || '').toLowerCase()),
-    )
+  transform(playlists: any): NsPlaylist.IPlaylist[] | undefined {
+    const filteredPlaylists = playlists.result.content
 
     return filteredPlaylists.length ? filteredPlaylists : undefined
   }

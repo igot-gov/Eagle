@@ -1,7 +1,7 @@
 <section class="px-2 flex flex-1 flex-column">
   <div class="playlist-data ws-mat-primary-lite-background-important">
     <div class="card relative">
-      <a name="content-link-playlist-card" class="flex-1" [routerLink]="playlist?.id" *ngIf="playlist">
+      <a name="content-link-playlist-card" class="flex-1" [routerLink]="playlist?.identifier" *ngIf="playlist">
         <img [src]="playlist?.icon" [wsUtilsDefaultThumbnail]="defaultThumbnail"
           class="thumbnail ws-mat-primary-lite-background" alt="Playlist Icon" i18n-alt />
         <div class="overlay flex flex-middle flex-center">
@@ -106,13 +106,15 @@
     <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted"
       *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
     <div class="width-expand md:mx-4 flex" [ngClass]="{ greyOut: greyOut(content) }">
-      <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
+      <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'"
+      [queryParams]="{primaryCategory: content?.primaryCategory}">
         <img (load)="isDeletedOrExpired(content)" class="image-section" [src]="content?.appIcon"
           [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
       </a>
       <div class="width-expand mx-2 md:mx-4">
         <div class="flex flex-middle text-truncate">
-          <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
+          <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'"
+          [queryParams]="{primaryCategory: content?.primaryCategory}">
             <h2 class="mat-h2 playlist-name margin-left-xxs margin-remove-bottom">
               {{ content?.name }}
             </h2>

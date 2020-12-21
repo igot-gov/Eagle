@@ -1,7 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable, ReplaySubject, throwError } from 'rxjs'
-import { first, map, mergeMap, tap } from 'rxjs/operators'
+import { first, tap } from 'rxjs/operators'
+// map, mergeMap,
 import { NsContent } from '../_services/widget-content.model'
 import { NsPlaylist } from './btn-playlist.model'
 
@@ -16,6 +17,8 @@ const API_END_POINTS = {
   rejectPlaylist: (playlistId: string) => `/apis/protected/v8/user/playlist/reject/${playlistId}`,
   sharePlaylist: '/apis/protected/v8/user/playlist/share',
   updatePlaylists: (playlistId: string) => `/apis/protected/v8/user/playlist/${playlistId}`,
+  getSearchData: `/apis/proxies/v8/sunbirdigot/search`,
+  getPlaylistData: (playlistId: string) => `/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`,
 }
 
 @Injectable({
@@ -74,26 +77,41 @@ export class BtnPlaylistService {
       .get<NsPlaylist.IPlaylistResponse>(API_END_POINTS.getAllPlaylists, { params })
   }
 
-  getPlaylists(type: NsPlaylist.EPlaylistTypes) {
-    if (!this.playlistSubject[type]) {
-      this.initSubjects()
-    }
-    this.updatePlaylists()
-    return this.playlistSubject[type].asObservable()
+  getPlaylists() {
+    // if (!this.playlistSubject[type]) {
+    //   this.initSubjects()
+    // }
+    // this.updatePlaylists()
+    // return this.playlistSubject[type].asObservable()
+    return this.http
+      .post(API_END_POINTS.getSearchData, {
+        request: {
+          filters: {
+            primaryCategory: 'Playlist',
+            visibility: 'Private',
+            status: ['Draft', 'Live'],
+
+          },
+          fields: [],
+          limit: 100,
+          facets: [
+
+          ],
+        },
+      }
+
+      )
+
   }
 
   getAllPlaylists() {
-    return this.getPlaylists(NsPlaylist.EPlaylistTypes.ME).pipe(
-      mergeMap((my: NsPlaylist.IPlaylist[]) => this.getPlaylists(NsPlaylist.EPlaylistTypes.SHARED).pipe(
-        map((shared: NsPlaylist.IPlaylist[]) => my.concat(shared)),
-      )),
-    )
+    return this.playlistSubject['type'].asObservable()
   }
 
-  getPlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes, sourceFields: string): Observable<NsPlaylist.IPlaylist | null> {
-    const params = new HttpParams().set('sourceFields', sourceFields)
+  getPlaylist(playlistId: string): Observable<NsPlaylist.IPlaylist | null> {
+    // const params = new HttpParams().set('sourceFields', sourceFields)
     return this.http
-      .get<NsPlaylist.IPlaylist>(`${API_END_POINTS.playlist(type)}/${playlistId}`, { params })
+      .get<NsPlaylist.IPlaylist>(`${API_END_POINTS.getPlaylistData(playlistId)}`)
   }
 
   deletePlaylist(playlistId: string, type: NsPlaylist.EPlaylistTypes) {

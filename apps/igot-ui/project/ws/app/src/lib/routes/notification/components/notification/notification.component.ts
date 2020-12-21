@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { IUserNotification } from '../../models/notifications.model'
-import { NsGoal, NsPlaylist, BtnPlaylistService, BtnGoalsService } from '@ws-widget/collection'
+import { NsGoal, NsPlaylist, BtnGoalsService } from '@ws-widget/collection'
 import { TFetchStatus, NsPage, ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
@@ -18,7 +18,7 @@ export class NotificationComponent implements OnInit {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   constructor(
     private goalsSvc: BtnGoalsService,
-    private playlistSvc: BtnPlaylistService,
+    // private playlistSvc: BtnPlaylistService,
     private configSvc: ConfigurationsService,
   ) { }
 
@@ -34,18 +34,18 @@ export class NotificationComponent implements OnInit {
   }
 
   fetchSharedPlaylist() {
-    this.playlistSvc.getPlaylists(NsPlaylist.EPlaylistTypes.PENDING).subscribe(
-      data => {
-        data.forEach(playlist => {
-          playlist.sharedBy = (playlist.sharedBy || '').split('@')[0]
-        })
-        this.sharedPlaylists = data
-        this.checkContentStatus()
-      },
-      _err => {
-        this.checkContentStatus()
-      },
-    )
+    // this.playlistSvc.getPlaylists().subscribe(
+    //   data => {
+    //     data.forEach((playlist: { sharedBy: any }) => {
+    //       playlist.sharedBy = (playlist.sharedBy || '').split('@')[0]
+    //     })
+    //     this.sharedPlaylists = data
+    //     this.checkContentStatus()
+    //   },
+    //   _err => {
+    //     this.checkContentStatus()
+    //   },
+    // )
   }
   fetchSharedGoals() {
     this.goalsSvc.getActionRequiredGoals('isInIntranet').subscribe(

@@ -85,9 +85,9 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
         return `${locationOrigin}/app/knowledge-board/${data.identifier}`
       case NsContent.EContentTypes.KNOWLEDGE_ARTIFACT:
 
-        return `${locationOrigin}/app/toc/${data.identifier}/overview`
+        return `${locationOrigin}/app/toc/${data.identifier}/overview?primaryCategory=${data.primaryCategory}`
       default:
-        return `${locationOrigin}/app/toc/${data.identifier}/overview`
+        return `${locationOrigin}/app/toc/${data.identifier}/overview?primaryCategory=${data.primaryCategory}`
     }
   }
 

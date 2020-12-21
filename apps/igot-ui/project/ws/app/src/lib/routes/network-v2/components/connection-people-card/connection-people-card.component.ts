@@ -3,6 +3,7 @@ import { NSNetworkDataV2 } from '../../models/network-v2.model'
 import { NetworkV2Service } from '../../services/network-v2.service'
 import { MatSnackBar } from '@angular/material'
 import { Router } from '@angular/router'
+import { ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
   selector: 'ws-app-connection-people-card',
@@ -15,7 +16,7 @@ export class ConnectionPeopleCardComponent implements OnInit {
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
   @ViewChild('toastError', { static: true }) toastError!: ElementRef<any>
   constructor(
-    private networkV2Service: NetworkV2Service,
+    private networkV2Service: NetworkV2Service, private configSvc: ConfigurationsService,
     private snackBar: MatSnackBar,
     private router: Router
   ) { }
@@ -25,12 +26,20 @@ export class ConnectionPeopleCardComponent implements OnInit {
 
   getUseravatarName() {
     if (this.user) {
-      return `${this.user.personalDetails.firstname} ${this.user.personalDetails.surname}`
+      return `${this.user.name}`
     }
-      return ''
+    return ''
   }
   connetToUser() {
-    const req = { connectionId: this.user.id }
+    const req = {
+      connectionId: this.user.id,
+      userNameFrom: this.configSvc.userProfile ? this.configSvc.userProfile.userName : '',
+      userDepartmentFrom: 'iGOT',
+      userIdTo: this.user.id,
+      userNameTo: `${this.user.personalDetails.firstname}${this.user.personalDetails.lasttname}`,
+      userDepartmentTo: this.user.employmentDetails.departmentName,
+    }
+
     this.networkV2Service.createConnection(req).subscribe(
       () => {
         this.openSnackbar(this.toastSuccess.nativeElement.value)

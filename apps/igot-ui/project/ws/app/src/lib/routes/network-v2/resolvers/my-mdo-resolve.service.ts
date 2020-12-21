@@ -19,9 +19,9 @@ export class MyMdoResolveService implements
     _route: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
   ): Observable<IResolveResponse<NSNetworkDataV2.IRecommendedUserResponse>> {
-    let usrDept = 'igot'
+    let usrDept = 'iGOT'
     if (this.configSvc.userProfile) {
-      usrDept = this.configSvc.userProfile.departmentName || 'igot'
+      usrDept = this.configSvc.userProfile.departmentName || 'iGOT'
     }
     let req: NSNetworkDataV2.IRecommendedUserReq
     req = {

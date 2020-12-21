@@ -33,7 +33,7 @@
           <div class="flex items-center mb-4" *ngIf="!changeName">
             <h1 [ngClass]="{'mat-display-2': !screenSizeIsLtMedium, 'mat-display-1': screenSizeIsLtMedium }"
               class="margin-bottom-s playlist-name inline-block">
-              {{ playlist?.name }}
+              {{ playlist?.result.content.name }}
             </h1>
             <button name="edit-playlist-name-playlist-detail" class="margin-left-s" mat-icon-button
               (click)="editName(true)">
@@ -98,7 +98,7 @@
     </div>
     <div cdkDropList class="page-container padding-top-s padding-bottom-s mt-12 margin-bottom-xl drop-list"
       (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let content of playlist?.contents" cdkDrag>
+      <div *ngFor="let content of playlist?.result.content.children" cdkDrag>
         <span class="resource-item ping mx-2">
           <mat-icon cdkDragHandle>unfold_more</mat-icon>
         </span>
@@ -130,14 +130,16 @@
   <div class="flex flex-middle padding-top-s padding-bottom-xs play2 ws-primary-background">
     <div class="status-danger" role="note" i18n-aria-label aria-label="Content expired or deleted"
       *ngIf="content.status === 'Deleted' || content.status === 'Expired'"></div>
-    <div class="width-expand md:mx-4 flex" [ngClass]="{ greyOut: greyOut(content) }">
-      <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
+    <div class="width-expand md:mx-4 flex">
+      <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'"
+      [queryParams]="{primaryCategory: content?.primaryCategory}">
         <img (load)="isDeletedOrExpired(content)" class="image-section" [src]="content?.appIcon"
           [wsUtilsDefaultThumbnail]="defaultThumbnail" alt="Content Icon" i18n-alt />
       </a>
       <div class="width-expand mx-2 md:mx-4">
         <div class="flex flex-middle text-truncate">
-          <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'">
+          <a [routerLink]="'/app/toc/' + content?.identifier + '/overview'"
+          [queryParams]="{primaryCategory: content?.primaryCategory}">
             <h2 class="mat-h2 playlist-name margin-left-xxs margin-remove-bottom">
               {{ content?.name }}
             </h2>

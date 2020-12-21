@@ -108,7 +108,8 @@
 <mat-menu #langMenu="matMenu">
   <ng-container *ngIf="translationArray && translationArray.length">
     <a mat-menu-item *ngFor="let item of translationArray"
-      [routerLink]="'/author/toc/' + item.identifier + '/overview'">
+      [routerLink]="'/author/toc/' + item.identifier + '/overview'"
+      [queryParams]="{primaryCategory: item?.primaryCategory}">
       <span class="flex items-center">
         <img class="img" (error)="changeToGlobalSymbol($event)" [src]="'/assets/common/flags/' +item.locale+'.png'">
         <span>{{item.locale | uppercase}}</span>

@@ -20,9 +20,10 @@ const API_END_POINTS = {
   FETCH_WEB_MODULE_FILES: `${PROTECTED_SLAG_V8}/content/getWebModuleFiles`,
   MULTIPLE_CONTENT: `${PROTECTED_SLAG_V8}/content/multiple`,
   CONTENT_SEARCH_V5: `${PROTECTED_SLAG_V8}/content/searchV5`,
-  CONTENT_SEARCH_V6: `http://localhost:3003/proxies/v8/sunbirdigot/read`,
+  CONTENT_SEARCH_V6: `/apis/proxies/v8/sunbirdigot/read`,
   CONTENT_SEARCH_REGION_RECOMMENDATION: `${PROTECTED_SLAG_V8}/content/searchRegionRecommendation`,
   CONTENT_HISTORY: `${PROTECTED_SLAG_V8}/user/history`,
+  CONTENT_HISTORYV2: `/apis/proxies/v8/read/content-progres`,
   USER_CONTINUE_LEARNING: `${PROTECTED_SLAG_V8}/user/history/continue`,
   CONTENT_RATING: `${PROTECTED_SLAG_V8}/user/rating`,
   COLLECTION_HIERARCHY: (type: string, id: string) =>
@@ -40,6 +41,14 @@ export class WidgetContentService {
     private configSvc: ConfigurationsService
   ) { }
 
+  isResource(primaryCategory: string) {
+    if (primaryCategory) {
+      const isResource = primaryCategory === NsContent.EResourcePrimaryCategories.LEARNING_RESOURCE
+      return isResource
+    }
+    return false
+  }
+
   fetchMarkAsCompleteMeta(identifier: string): Promise<any> {
     const url = API_END_POINTS.MARK_AS_COMPLETE_META(identifier)
     return this.http.get(url).toPromise()
@@ -49,13 +58,19 @@ export class WidgetContentService {
     contentId: string,
     hierarchyType: 'all' | 'minimal' | 'detail' = 'detail',
     _additionalFields: string[] = [],
+    primaryCategory?: string | null ,
   ): Observable<NsContent.IContent> {
     // const url = `${API_END_POINTS.CONTENT}/${contentId}?hierarchyType=${hierarchyType}`
-    const url = `/apis/proxies/v8/sunbird/${contentId}?hierarchyType=${hierarchyType}`
+    let url = ''
+    if (primaryCategory && this.isResource(primaryCategory)) {
+      url = `/apis/proxies/v8/action/content/v3/read/${contentId}`
+    } else {
+      url = `/apis/proxies/v8/action/content/v3/hierarchy/${contentId}?hierarchyType=${hierarchyType}`
+    }
     // return this.http
     //   .post<NsContent.IContent>(url, { additionalFields })
     //   .pipe(retry(1))
-    const apiData =  this.http
+    const apiData = this.http
       .get<NsContent.IContent>(url)
       .pipe(retry(1))
     // if (apiData && apiData.result) {
@@ -95,6 +110,12 @@ export class WidgetContentService {
   fetchContentHistory(contentId: string): Observable<NsContent.IContinueLearningData> {
     return this.http.get<NsContent.IContinueLearningData>(
       `${API_END_POINTS.CONTENT_HISTORY}/${contentId}`,
+    )
+  }
+
+  fetchContentHistoryV2(req: NsContent.IContinueLearningDataReq): Observable<NsContent.IContinueLearningData> {
+    return this.http.post<NsContent.IContinueLearningData>(
+      `${API_END_POINTS.CONTENT_HISTORYV2}/${req.request.courseId}`, req
     )
   }
 
@@ -220,4 +241,5 @@ export class WidgetContentService {
   fetchConfig(url: string) {
     return this.http.get<any>(url)
   }
+
 }

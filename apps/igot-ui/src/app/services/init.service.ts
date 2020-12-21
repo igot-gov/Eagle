@@ -255,6 +255,8 @@ export class InitService {
           email: userPidProfile.result.response.email,
           givenName: userPidProfile.result.response.firstName,
           userId: userPidProfile.result.response.userId,
+          firstName: userPidProfile.result.response.firstName,
+          lastName: userPidProfile.result.response.lastName,
 
           userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}
           ${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '

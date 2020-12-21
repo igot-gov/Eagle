@@ -10,7 +10,8 @@ export interface IWidgetsPlayerMediaData {
   markers?: string[]
   resumePoint?: number
   passThroughData?: any
-  posterImage?: string
+  posterImage?: string,
+  primaryCategory?: string,
   setCookie?: boolean
   disableTelemetry?: boolean
   isVideojs?: boolean

@@ -457,15 +457,27 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (this.configSvc.profileDetailsStatus) {
       if (this.configSvc.userProfile) {
         this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
-          data => {
-            if (data && data.length) {
-              const academics = this.populateAcademics(data[0])
+          (data: any) => {
+            const userData = data.result.UserProfile
+            if (data && data.result && data.result.UserProfile && userData.length) {
+              const academics = this.populateAcademics(userData[0])
               this.setDegreeValuesArray(academics)
               this.setPostDegreeValuesArray(academics)
-              const organisations = this.populateOrganisationDetails(data[0])
-              this.constructFormFromRegistry(data[0], academics, organisations)
-              this.populateChips(data[0])
-              this.userProfileData = data[0]
+              const organisations = this.populateOrganisationDetails(userData[0])
+              this.constructFormFromRegistry(userData[0], academics, organisations)
+              this.populateChips(userData[0])
+              // this.userProfileData = data[0]
+              this.userProfileData = userData[0]
+            } else {
+              if (this.configSvc.userProfile) {
+                this.createUserForm.patchValue({
+                  firstname: this.configSvc.userProfile.firstName,
+                  surname: this.configSvc.userProfile.lastName,
+                  primaryEmail: this.configSvc.userProfile.email,
+                  // departmentName: data[0].department_name,
+                })
+              }
+
             }
             // this.handleFormData(data[0])
           },
@@ -611,6 +623,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private constructFormFromRegistry(data: any, academics: NsUserProfileDetails.IAcademics, organisation: any) {
     /* tslint:disable */
+
+    console.log('------------- data --------------', data)
     this.createUserForm.patchValue({
       firstname: data.personalDetails.firstname,
       middlename: data.personalDetails.middlename,
@@ -730,7 +744,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         employeeCode: form.value.employeeCode,
         officialPostalAddress: form.value.otherDetailsOfficeAddress,
         pinCode: form.value.otherDetailsOfficePinCode,
-        departmentName: form.value.departmentName,
+        departmentName: form.value.departmentName || 'iGOT',
       },
       professionalDetails: [
         ...this.getOrganisationsHistory(form),
@@ -861,7 +875,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.configSvc.profileDetailsStatus = true
         this.openSnackbar(this.toastSuccess.nativeElement.value)
         if (!this.isForcedUpdate && this.userProfileData) {
-            this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
+          this.router.navigate(['/app/person-profile', (this.userProfileData.userId || this.userProfileData.id)])
         } else {
           this.router.navigate(['page', 'home'])
         }

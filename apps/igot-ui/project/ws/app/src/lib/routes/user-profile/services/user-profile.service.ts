@@ -10,12 +10,12 @@ import {
 } from '../models/user-profile.model'
 
 const API_ENDPOINTS = {
-  updateProfileDetails: '/apis/protected/v8/user/profileDetails/createUserRegistry',
-  getUserdetailsFromRegistry: '/apis/protected/v8/user/profileDetails/getUserRegistry',
+  updateProfileDetails: '/apis/protected/v8/user/profileRegistry/createUserRegistry',
+  getUserdetailsFromRegistry: '/apis/protected/v8/user/profileRegistry/getUserRegistryById',
   getUserdetails: '/apis/protected/v8/user/details/detailV1',
-  getMasterNationlity: '/apis/protected/v8/user/profileDetails/getMasterNationalities',
-  getMasterLanguages: '/apis/protected/v8/user/profileDetails/getMasterLanguages',
-  getProfilePageMeta: '/apis/protected/v8/user/profileDetails/getProfilePageMeta',
+  getMasterNationlity: '/apis/protected/v8/user/profileRegistry/getMasterNationalities',
+  getMasterLanguages: '/apis/protected/v8/user/profileRegistry/getMasterLanguages',
+  getProfilePageMeta: '/apis/protected/v8/user/profileRegistry/getProfilePageMeta',
 }
 
 @Injectable()
