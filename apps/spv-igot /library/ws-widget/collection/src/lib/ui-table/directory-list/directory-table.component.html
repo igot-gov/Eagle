@@ -13,7 +13,15 @@
                 <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
                     placeholder="Search">
             </div>
+            <button mat-raised-button type="button"
+                class="text-white ws-mat-primary-background text-white margin-right-m" (click)="openPopup()">
+                <b class="text-white" i18n>Create New</b>
+            </button>
         </div>
+
+
+
+
 
         <!-- </mat-form-field> -->
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"

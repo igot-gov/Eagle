@@ -14,8 +14,10 @@ import { BtnContentFeedbackV2Module } from '../btn-content-feedback-v2/btn-conte
 import { BtnContentLikeModule } from '../btn-content-like/btn-content-like.module'
 import { BtnContentMailMeModule } from '../btn-content-mail-me/btn-content-mail-me.module'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { UserPopupComponent } from './user-popup/user-popup'
+import { MatDialogModule, MatButtonModule } from '@angular/material'
 @NgModule({
-  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent],
+  declarations: [UIUserTableComponent, AppButtonComponent, UIDirectoryTableComponent, UserPopupComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -31,8 +33,9 @@ import { MatPaginatorModule } from '@angular/material/paginator'
     BtnContentMailMeModule,
     BtnContentLikeModule,
     MatPaginatorModule,
+    MatDialogModule, MatButtonModule
   ],
-
+  entryComponents: [UserPopupComponent],
   exports: [UIUserTableComponent, UIDirectoryTableComponent],
 })
 export class UITableModule { }

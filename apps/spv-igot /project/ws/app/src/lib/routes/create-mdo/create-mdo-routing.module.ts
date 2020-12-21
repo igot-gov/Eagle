@@ -10,11 +10,11 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-        path: ':role/users',
+        path: 'users',
         component: UsersComponent,
       },
       {
-        path: ':role/basicinfo',
+        path: 'basicinfo',
         component: CreateMdoComponent,
       },
     ],

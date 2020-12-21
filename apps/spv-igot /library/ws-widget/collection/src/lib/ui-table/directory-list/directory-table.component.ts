@@ -4,11 +4,12 @@ import {
 } from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
-import { MatPaginator } from '@angular/material'
+import { MatPaginator, MatDialog } from '@angular/material'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 
 import { ITableData, IColums } from '../interface/interfaces'
+import { UserPopupComponent } from '../user-popup/user-popup'
 
 @Component({
   selector: 'ws-widget-directory-table',
@@ -37,11 +38,12 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])
 
-  constructor() {
+  constructor(private dialog: MatDialog, ) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
     this.dataSource.paginator = this.paginator
+
   }
 
   ngOnInit() {
@@ -128,5 +130,18 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
 
   onRowClick(e: any) {
     this.eOnRowClick.emit(e)
+  }
+  openPopup() {
+    const dialogRef = this.dialog.open(UserPopupComponent, {
+      maxHeight: 'auto',
+      height: '80%',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
   }
 }
