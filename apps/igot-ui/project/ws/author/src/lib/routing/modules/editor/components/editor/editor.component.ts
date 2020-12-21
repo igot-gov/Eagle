@@ -61,11 +61,11 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.valueSvc.isXSmall$.subscribe(isMobile => (this.isMobile = isMobile))
-    let hasAccess = false
+    // let hasAccess = false
     this.routerSubscription = await this.router.data.subscribe(data => {
       if (data.contents && data.contents.result && Object.keys(data.contents.result).length > 0) {
         const contents: { content: NSContent.IContentMeta; data: any }[] = [data.contents.result]
-        hasAccess = this.contentService.hasAccess(contents[0].content)
+        // hasAccess = this.contentService.hasAccess(contents[0].content)
         if (
           ['Deleted', 'Unpublished', 'Expired', 'MarkedForDeletion'].includes(
             contents[0].content.status,

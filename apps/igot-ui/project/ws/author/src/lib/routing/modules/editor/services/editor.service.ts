@@ -72,7 +72,7 @@ export class EditorService {
       )
   }
 
-  readContent(id: string): Observable<NSContent.IContentMetaV2> {
+  readContent(id: string): Observable<NSContent.IContentMeta> {
     return this.apiService.get<NSContent.IContentMetaV2>(
       `${CONTENT_READ}${id}${this.accessService.orgRootOrgAsQuery}`,
     )
@@ -86,7 +86,7 @@ export class EditorService {
 
   createAndReadContent(
     meta: NSApiRequest.ICreateMetaRequestGeneral,
-  ): Observable<NSContent.IContentMetaV2> {
+  ): Observable<NSContent.IContentMeta> {
     return this.create(meta).pipe(mergeMap(data => this.readContent(data)))
   }
 

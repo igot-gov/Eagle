@@ -158,7 +158,7 @@ export class EditorContentService {
   createInAnotherLanguage(
     language: string,
     meta = {},
-  ): Observable<NSContent.IContentMetaV2 | boolean> {
+  ): Observable<NSContent.IContentMeta | boolean> {
     const parentContent = this.getParentUpdatedMeta()
     if (this.isLangPresent(language)) {
       return of(true)
@@ -182,7 +182,7 @@ export class EditorContentService {
     delete requestBody.accessPaths
     return this.editorService
       .createAndReadContent(requestBody)
-      .pipe(tap(v => this.setOriginalMeta(v.result.content)))
+      .pipe(tap(v => this.setOriginalMeta(v)))
   }
 
   isValid(id: string): boolean {

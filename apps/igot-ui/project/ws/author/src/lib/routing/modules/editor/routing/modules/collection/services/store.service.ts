@@ -196,10 +196,10 @@ export class CollectionStoreService {
         ...(meta.additionalMeta || {}),
       }
       const content = await this.editorService.createAndReadContent(requestBody).toPromise()
-      this.contentService.setOriginalMeta(content.result.content)
+      this.contentService.setOriginalMeta(content)
       const contentDataMap = new Map<string, NSContent.IContentMeta>()
       const treeStructure = this.resolver.buildTreeAndMap(
-        content.result.content,
+        content,
         contentDataMap,
         this.flatNodeMap,
         this.uniqueIdMap,
