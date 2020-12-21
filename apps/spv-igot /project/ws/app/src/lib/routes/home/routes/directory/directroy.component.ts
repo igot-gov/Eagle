@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
+import { DirectoryService } from './directory.services'
 
 @Component({
   selector: 'ws-app-directory',
@@ -36,6 +37,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private configSvc: ConfigurationsService,
+    private directoryService: DirectoryService,
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
@@ -55,8 +57,11 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.tabs.unsubscribe()
     }
   }
+
   ngOnInit() {
     // int left blank
+
+    this.getAllDepartmentsAPI()
     this.tabledata = {
       actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
       { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
@@ -70,33 +75,18 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       sortColumn: '',
       sortState: 'asc',
     }
-    this.data = [{
-
-      mdo: 'Ministry of Education',
-      type: 'Ministry',
-      user: '121',
-    },
-    {
-      mdo: 'Coffee Board',
-      type: 'Board',
-      user: '225',
-    },
-    {
-
-      mdo: 'Ministry of Civil Aviation',
-      type: 'Ministry',
-      user: '652',
-    },
-    {
-      mdo: 'Department of Defence',
-      type: 'Department',
-      user: '231',
-    },
-    {
-      mdo: 'Indian Council for Agricultural Research',
-      type: 'Department',
-      user: '231',
-    },]
+  }
+  getAllDepartmentsAPI() {
+    this.directoryService.getAllDepartments().subscribe(res => {
+      this.data = res.map((dept: any) => {
+        console.log(dept)
+        return {
+          mdo: dept.deptName,
+          type: dept.deptTypeInfo.deptType,
+          user: dept.noOfUsers,
+        }
+      })
+    })
   }
   ngAfterViewInit() {
   }
@@ -113,88 +103,24 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       this.currentFilter = key
       switch (key) {
         case 'mdo':
-          this.data = [{
-
-            mdo: 'Ministry of Education',
-            type: 'Ministry',
-            user: '121',
-          },
-          {
-            mdo: 'Coffee Board',
-            type: 'Board',
-            user: '225',
-          },
-          {
-
-            mdo: 'Ministry of Civil Aviation',
-            type: 'Ministry',
-            user: '652',
-          },
-          {
-            mdo: 'Department of Defence',
-            type: 'Department',
-            user: '231',
-          },
-          {
-            mdo: 'Indian Council for Agricultural Research',
-            type: 'Department',
-            user: '231',
-          },]
+          this.getAllDepartmentsAPI()
           break
         case 'cbp':
-          this.data = [{
-
-            mdo: 'Ministry of Education',
-            type: 'Ministry',
-            user: '121',
-          },
-          {
-            mdo: 'Coffee Board',
-            type: 'Board',
-            user: '225',
-          },
-          {
-            mdo: 'Indian Council for Agricultural Research',
-            type: 'Department',
-            user: '231',
-          },]
+          this.getAllDepartmentsAPI()
           break
         case 'csp':
-          this.data = [{
-
-            mdo: 'Ministry of Education',
-            type: 'Ministry',
-            user: '121',
-          },
-          {
-            mdo: 'Indian Council for Agricultural Research',
-            type: 'Department',
-            user: '231',
-          },]
+          this.getAllDepartmentsAPI()
           break
         case 'frac':
-          this.data = [
-            {
-              mdo: 'Indian Council for Agricultural Research',
-              type: 'Department',
-              user: '231',
-            },]
+          this.getAllDepartmentsAPI()
           break
         case 'fraccr':
-          this.data = [{
-
-            mdo: 'Ministry of Education',
-            type: 'Ministry',
-            user: '121',
-          }]
+          this.getAllDepartmentsAPI()
           break
         default:
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
+          this.getAllDepartmentsAPI()
           break
       }
     }
   }
-
-  // need to enhance
-
 }
