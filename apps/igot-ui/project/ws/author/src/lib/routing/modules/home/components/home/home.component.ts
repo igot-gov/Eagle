@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core'
 import { map } from 'rxjs/operators'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
-import { REVIEW_ROLE, PUBLISH_ROLE, CREATE_ROLE } from '@ws/author/src/lib/constants/content-role'
+// import { REVIEW_ROLE, PUBLISH_ROLE, CREATE_ROLE } from '@ws/author/src/lib/constants/content-role'
 
 @Component({
   selector: 'ws-auth-root-home',
@@ -46,14 +46,14 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
 
   canShow(role: string): boolean {
     switch (role) {
-      case 'review':
-        return this.accessService.hasRole(REVIEW_ROLE)
-      case 'publish':
-        return this.accessService.hasRole(PUBLISH_ROLE)
-      case 'author':
-        return this.accessService.hasRole(CREATE_ROLE)
+      // case 'review':
+      //   return this.accessService.hasRole(REVIEW_ROLE)
+      // case 'publish':
+      //   return this.accessService.hasRole(PUBLISH_ROLE)
+      // case 'author':
+      //   return this.accessService.hasRole(CREATE_ROLE)
       default:
-        return false
+        return true
     }
   }
 }

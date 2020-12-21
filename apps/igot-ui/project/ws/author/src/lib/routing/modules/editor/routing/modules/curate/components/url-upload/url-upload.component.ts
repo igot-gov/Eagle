@@ -59,8 +59,9 @@ export class UrlUploadComponent implements OnInit {
       artifactUrl: [''],
       isIframeSupported: [{ value: 'No', disabled: true }, Validators.required],
       mimeType: [],
-      isInIntranet: ['', Validators.required],
+      // isInIntranet: ['', Validators.required],
       isExternal: [],
+      versionKey: '',
     })
     this.urlUploadForm.valueChanges.subscribe(() => {
       if (this.canUpdate) {
@@ -83,8 +84,9 @@ export class UrlUploadComponent implements OnInit {
     this.urlUploadForm.controls.artifactUrl.setValue(meta.artifactUrl || '')
     this.urlUploadForm.controls.mimeType.setValue(meta.mimeType || 'application/html')
     this.urlUploadForm.controls.isIframeSupported.setValue(meta.isIframeSupported || 'No')
-    this.urlUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
+    // this.urlUploadForm.controls.isInIntranet.setValue(meta.isInIntranet || false)
     this.urlUploadForm.controls.isExternal.setValue(true)
+    this.urlUploadForm.controls.versionKey.setValue(meta.versionKey)
     this.canUpdate = true
     if (meta.artifactUrl) {
       this.iprAccepted = true
@@ -146,6 +148,7 @@ export class UrlUploadComponent implements OnInit {
             meta[v] === false)
         ) {
           meta[v] = currentMeta[v]
+          meta['versionKey'] = currentMeta['versionKey']
         } else {
           meta[v] = JSON.parse(
             JSON.stringify(

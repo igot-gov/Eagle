@@ -99,49 +99,49 @@ export class AccessControlService {
   hasAccess(
     meta: NSContent.IContentMeta,
     forPreview = false,
-    parentMeta?: NSContent.IContentMeta,
+    // parentMeta?: NSContent.IContentMeta,
   ): boolean {
     if (this.hasRole(['editor', 'admin'])) {
       return true
     }
-    let returnValue = false
-    if (['Draft', 'Live'].indexOf(meta.status) > -1) {
-      if (meta.creatorContacts && meta.creatorContacts.length) {
-        meta.creatorContacts.forEach(v => {
-          if (v.id === this.userId) {
-            returnValue = true
-          }
-        })
-      }
-    }
-    if (meta.status === 'InReview' && this.hasRole(['reviewer'])) {
-      if (meta.trackContacts && meta.trackContacts.length) {
-        meta.trackContacts.forEach(v => {
-          if (v.id === this.userId) {
-            returnValue = true
-          }
-        })
-      }
-      if (!returnValue && parentMeta && parentMeta.creatorContacts && meta.creatorContacts) {
-        returnValue = parentMeta.creatorContacts.some(v =>
-          meta.creatorContacts.find(cv => cv.id === v.id),
-        )
-      }
-    }
-    if (['Reviewed'].indexOf(meta.status) > -1 && this.hasRole(['publisher'])) {
-      if (meta.publisherDetails && meta.publisherDetails.length) {
-        meta.publisherDetails.forEach(v => {
-          if (v.id === this.userId) {
-            returnValue = true
-          }
-        })
-      }
-      if (!returnValue && parentMeta && parentMeta.creatorContacts && meta.creatorContacts) {
-        returnValue = parentMeta.creatorContacts.some(v =>
-          meta.creatorContacts.find(cv => cv.id === v.id),
-        )
-      }
-    }
+    let returnValue = true // false
+    // if (['Draft', 'Live'].indexOf(meta.result.content.status) > -1) {
+    //   if (meta.creatorContacts && meta.creatorContacts.length) {
+    //     meta.creatorContacts.forEach(v => {
+    //       if (v.id === this.userId) {
+    //         returnValue = true
+    //       }
+    //     })
+    //   }
+    // }
+    // if (meta.result.content.status === 'InReview' && this.hasRole(['reviewer'])) {
+    //   if (meta.trackContacts && meta.trackContacts.length) {
+    //     meta.trackContacts.forEach(v => {
+    //       if (v.id === this.userId) {
+    //         returnValue = true
+    //       }
+    //     })
+    //   }
+    //   if (!returnValue && parentMeta && parentMeta.creatorContacts && meta.creatorContacts) {
+    //     returnValue = parentMeta.creatorContacts.some(v =>
+    //       meta.creatorContacts.find(cv => cv.id === v.id),
+    //     )
+    //   }
+    // }
+    // if (['Reviewed'].indexOf(meta.result.content.status) > -1 && this.hasRole(['publisher'])) {
+    //   if (meta.publisherDetails && meta.publisherDetails.length) {
+    //     meta.publisherDetails.forEach(v => {
+    //       if (v.id === this.userId) {
+    //         returnValue = true
+    //       }
+    //     })
+    //   }
+    //   if (!returnValue && parentMeta && parentMeta.creatorContacts && meta.creatorContacts) {
+    //     returnValue = parentMeta.creatorContacts.some(v =>
+    //       meta.creatorContacts.find(cv => cv.id === v.id),
+    //     )
+    //   }
+    // }
     if (forPreview && meta.visibility === 'Public') {
       returnValue = true
     }

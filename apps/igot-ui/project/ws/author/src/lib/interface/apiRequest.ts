@@ -37,6 +37,25 @@ export namespace NSApiRequest {
     }
   }
 
+  export interface ICreateMetaRequestV2 {
+    request: {
+      content: {
+        name: string
+        code: string
+        description: string
+        createdBy: string
+        organisation: string[]
+        createdFor: string[]
+        contentType: string
+        framework: string
+        mimeType: string
+        creator?: string
+        primaryCategory: string
+        isExternal: boolean
+      }
+    }
+  }
+
   export interface IForwardBackwardActionGeneral {
     comment: string
     operation: 1 | 0 | -1 | 100000
@@ -65,12 +84,18 @@ export namespace NSApiRequest {
     hierarchy: {} | { [key: string]: { root: boolean; children: string[] } }
   }
 
+  export interface IContentUpdateV2 {
+    request: {
+      content: NSContent.IContentMeta
+    }
+  }
+
   export interface IContentData {
     contentId: string
     contentType:
-      | typeof CONTENT_BASE_STATIC
-      | typeof CONTENT_BASE_STREAM
-      | typeof CONTENT_BASE_WEBHOST
-      | typeof CONTENT_BASE_WEBHOST_ASSETS
+    | typeof CONTENT_BASE_STATIC
+    | typeof CONTENT_BASE_STREAM
+    | typeof CONTENT_BASE_WEBHOST
+    | typeof CONTENT_BASE_WEBHOST_ASSETS
   }
 }

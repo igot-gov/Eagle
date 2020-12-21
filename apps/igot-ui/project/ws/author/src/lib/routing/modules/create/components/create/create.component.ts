@@ -11,6 +11,7 @@ import { AccessControlService } from '@ws/author/src/lib/modules/shared/services
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { Subscription } from 'rxjs'
+import { NSApiResponse } from '../../../../../interface/apiResponse'
 import { CreateService } from './create.service'
 
 @Component({
@@ -41,6 +42,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.authInitService.creationEntity.forEach(v => {
       if (!v.parent && v.available) {
         if (v.id === 'resource') {
+          v.enabled = true
           this.resourceEntity = v
         } else {
           this.entity.push(v)
@@ -48,7 +50,7 @@ export class CreateComponent implements OnInit, OnDestroy {
       }
     })
     this.loaderService.changeLoadState(false)
-    this.allLanguages = this.authInitService.ordinals.subTitles || []
+    this.allLanguages = [] // this.authInitService.ordinals.subTitles ||
     this.language = this.accessControlSvc.locale
 
     const selectedLang = this.allLanguages.find((i: any) => i.srclang === this.language)
@@ -64,14 +66,15 @@ export class CreateComponent implements OnInit, OnDestroy {
   contentClicked(content: ICreateEntity) {
     this.loaderService.changeLoad.next(true)
     this.svc
-      .create({
+      .createV2({
         contentType: content.contentType,
         mimeType: content.mimeType,
         locale: this.language,
+        primaryCategory: content.primaryCategory,
         ...(content.additionalMeta || {}),
       })
       .subscribe(
-        (id: string) => {
+        (responseData: NSApiResponse.IContentCreateResponseV2) => {
           this.loaderService.changeLoad.next(false)
           this.snackBar.openFromComponent(NotificationComponent, {
             data: {
@@ -79,7 +82,7 @@ export class CreateComponent implements OnInit, OnDestroy {
             },
             duration: NOTIFICATION_TIME * 1000,
           })
-          this.router.navigateByUrl(`/author/editor/${id}`)
+          this.router.navigateByUrl(`/author/editor/${responseData.result.identifier}`)
         },
         error => {
           if (error.status === 409) {
