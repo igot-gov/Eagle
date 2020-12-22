@@ -9,6 +9,7 @@ const fs = require('fs')
 const API_END_POINTS = {
   createUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/create/profile?userId=${userId}`,
   getUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/get/profile`,
+  searchUserRegistry: `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile`,
   getUserRegistryById: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/search/profile?userId=${userId}`,
   updateUserRegistry: (userId: string) => `${CONSTANTS.NETWORK_HUB_SERVICE_BACKEND}/v1/user/update/profile?userId=${userId}`,
   updateUserWorkflowRegistry: (userId: string) =>
@@ -99,6 +100,21 @@ profileRegistryApi.get('/getUserRegistryById', async (req, res) => {
       ...axiosRequestConfig,
     })
     res.status(response.status).send(response.data)
+  } catch (err) {
+    logError('ERROR FETCHING USER REGISTRY by id >', err)
+    res.status((err && err.response && err.response.status) || 500).send(err)
+  }
+})
+
+profileRegistryApi.post('/searchUserRegistry', async (req, res) => {
+  try {
+    const userId = extractUserIdFromRequest(req)
+    logInfo('Search user registry', userId)
+
+    const response = await axios.post(API_END_POINTS.searchUserRegistry, { ...req.body }, {
+      ...axiosRequestConfig,
+    })
+    res.status(response.status).json(response.data)
   } catch (err) {
     logError('ERROR FETCHING USER REGISTRY by id >', err)
     res.status((err && err.response && err.response.status) || 500).send(err)
