@@ -32,6 +32,7 @@ export class ViewerComponent implements OnInit, OnDestroy, AfterViewChecked {
   forPreview = window.location.href.includes('/author/')
   isTypeOfCollection = true
   collectionId = this.activatedRoute.snapshot.queryParamMap.get('collectionId')
+  batchId = this.activatedRoute.snapshot.queryParamMap.get('batchId')
   status: TStatus = 'none'
   error: any | null = null
   isNotEmbed = true

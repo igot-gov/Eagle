@@ -10,7 +10,7 @@
         </a>
       </div>
       <div class="content-card" *ngFor="let card of content?.children; trackBy: contentTrackBy">
-        <ws-app-toc-content-card [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="contextId"
+        <ws-app-toc-content-card [forPreview]="forPreview" [expandAll]="expandAll" [rootId]="contextId" [batchId]="batchId"
           [rootContentType]="contextPath" [content]="card"></ws-app-toc-content-card>
       </div>
     </ng-container>

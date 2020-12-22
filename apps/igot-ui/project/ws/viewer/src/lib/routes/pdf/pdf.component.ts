@@ -2,7 +2,7 @@ import { AccessControlService } from '@ws/author'
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Subscription } from 'rxjs'
 import { NsContent, NsDiscussionForum, WidgetContentService } from '@ws-widget/collection'
-import { WsEvents, EventService } from '@ws-widget/utils'
+import { WsEvents, EventService, ConfigurationsService } from '@ws-widget/utils'
 import { NsWidgetResolver } from '@ws-widget/resolver'
 import { ActivatedRoute } from '@angular/router'
 import { ViewerUtilService } from '../../viewer-util.service'
@@ -35,12 +35,14 @@ export class PdfComponent implements OnInit, OnDestroy {
   discussionForumWidget: NsWidgetResolver.IRenderConfigWithTypedData<
     NsDiscussionForum.IDiscussionForumInput
   > | null = null
+  batchId = this.activatedRoute.snapshot.queryParamMap.get('batchId')
   constructor(
     private activatedRoute: ActivatedRoute,
     private contentSvc: WidgetContentService,
     private viewerSvc: ViewerUtilService,
     private eventSvc: EventService,
     private accessControlSvc: AccessControlService,
+    private configSvc: ConfigurationsService,
   ) {}
 
   ngOnInit() {
@@ -149,11 +151,36 @@ export class PdfComponent implements OnInit, OnDestroy {
 
   async fetchContinueLearning(collectionId: string, pdfId: string): Promise<boolean> {
     return new Promise(resolve => {
-      this.contentSvc.fetchContentHistory(collectionId).subscribe(
+      // this.contentSvc.fetchContentHistory(collectionId).subscribe(
+      //   data => {
+      //     if (data) {
+      //       if (data.identifier === pdfId && data.continueData && data.continueData.progress) {
+      //         this.widgetResolverPdfData.widgetData.resumePage = Number(data.continueData.progress)
+      //       }
+      //     }
+      //     resolve(true)
+      //   },
+      //   () => resolve(true),
+      // )
+      let userId
+      if (this.configSvc.userProfile) {
+        userId = this.configSvc.userProfile.userId || ''
+      }
+      const req: NsContent.IContinueLearningDataReq = {
+        request: {
+          userId,
+          batchId: this.batchId,
+          courseId: collectionId || '',
+          contentIds: [],
+        },
+      }
+      this.contentSvc.fetchContentHistoryV2(req).subscribe(
         data => {
-          if (data) {
-            if (data.identifier === pdfId && data.continueData && data.continueData.progress) {
-              this.widgetResolverPdfData.widgetData.resumePage = Number(data.continueData.progress)
+          if (data && data.result && data.result.contentList.length) {
+            for (const content of data.result.contentList) {
+              if (content.contentId === pdfId && content.progressDetails && content.progressDetails.current) {
+                this.widgetResolverPdfData.widgetData.resumePage = Number(content.progressDetails.current.pop())
+              }
             }
           }
           resolve(true)

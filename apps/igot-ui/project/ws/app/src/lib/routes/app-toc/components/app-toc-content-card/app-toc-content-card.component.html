@@ -122,7 +122,7 @@
     </div>
 
     <div class="children-container" [hidden]="!viewChildren">
-      <ws-app-toc-content-card [content]="child" [expandAll]="expandAll" [rootId]="rootId"
+      <ws-app-toc-content-card [content]="child" [expandAll]="expandAll" [rootId]="rootId" [batchId]="batchId"
         [rootContentType]="rootContentType" *ngFor="let child of content?.children; trackBy: contentTrackBy">
       </ws-app-toc-content-card>
     </div>

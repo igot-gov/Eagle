@@ -274,7 +274,9 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       }
       const collectionId = this.activatedRoute.snapshot.queryParams.collectionId ?
               this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier
-      this.viewerSvc.realTimeProgressUpdate(id, realTimeProgressRequest, collectionId)
+      const batchId = this.activatedRoute.snapshot.queryParams.batchId ?
+              this.activatedRoute.snapshot.queryParams.batchId : this.widgetData.identifier
+      this.viewerSvc.realTimeProgressUpdate(id, realTimeProgressRequest, collectionId, batchId)
     }
     return
   }
