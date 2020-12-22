@@ -148,6 +148,11 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
         RegistryRequest registryRequest = new RegistryRequest();
         registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
         registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
+        if(null!=params.get("offset") && null!=params.get("limit")){
+            registryRequest.getRequest().put("offset", params.get("offset"));
+            registryRequest.getRequest().put("limit", params.get("limit"));
+        }
+
         Map<String, Map<String, Object>> filters = (Map<String, Map<String, Object>>)params.get(ProfileUtils.Profile.FILTERs);
         registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
         return registryRequest;
