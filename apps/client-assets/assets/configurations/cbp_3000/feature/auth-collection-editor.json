@@ -118,10 +118,11 @@
       "allowCreation": true,
       "allowedCreationType": [
         "resource",
-        "web",
+        "link",
         "upload",
         "assessment",
-        "collection"
+        "collection",
+        "webModule"
       ],
       "searchFilter": {
         "contentType": [
@@ -152,9 +153,10 @@
       "allowCreation": true,
       "allowedCreationType": [
         "resource",
-        "web",
+        "link",
         "upload",
-        "assessment"
+        "assessment",
+        "webModule"
       ],
       "searchFilter": {
         "contentType": [

@@ -16,7 +16,7 @@
       "upload",
       "link",
       "assessment",
-      "web",
+      "webModule",
       "activities"
     ],
     "enabled": true
@@ -37,7 +37,7 @@
     ]
   },
   {
-    "id": "web",
+    "id": "link",
     "parent": "resource",
     "name": "Attach link",
     "icon": "link",
@@ -82,6 +82,9 @@
     "enabled": true,
     "contentType": "Resource",
     "mimeType": "application/web-module",
+    "additionalMeta": {
+
+    },
     "hasRole": [
       "content-creator",
       "editor",
