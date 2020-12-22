@@ -268,3 +268,25 @@ detailsApi.get('/detailV2', async (req, res) => {
     res.status(500).send(err.response.data)
   }
 })
+
+detailsApi.post('/detailV3', async (req, res) => {
+  const _rootOrg = req.header('rootOrg')
+  const url = `${API_END_POINTS.detail}`
+  try {
+    if (!_rootOrg) {
+      res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
+      return
+    }
+    const response = await axios.post(
+      url,
+      req.body,
+      {
+        ...axiosRequestConfig,
+        headers: { _rootOrg },
+      }
+    )
+    res.json(response.data)
+  } catch (err) {
+    res.status(500).send(err.response.data)
+  }
+})

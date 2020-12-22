@@ -10,7 +10,8 @@ export const portalApi = express.Router()
 const API_END_POINTS = {
     accessValidator: (keyWord: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/${keyWord}/isAdmin`,
     deptApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department`,
-    deptByIdApi: (deptId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}`,
+    deptByIdApi: (deptId: string, isUserInfoRequired: boolean) =>
+        `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}/?allUsers=${isUserInfoRequired}`,
     deptType: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType`,
     deptTypeByName: (deptType: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType/${deptType}`,
     deptTypeByTypeId: (deptTypeId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeById/${deptTypeId}`,
@@ -161,11 +162,15 @@ spvPortalApi.get(department + '/:deptId', async (req, res) => {
     try {
         const userId = req.headers.wid as string
         const deptId = req.params.deptId as string
+        let isUserInfoRequired = req.query.allUsers as boolean
+        if (!isUserInfoRequired) {
+            isUserInfoRequired = false
+        }
         if (!userId || !deptId) {
             res.status(400).send(badRequest)
             return
         }
-        const response = await axios.get(API_END_POINTS.deptByIdApi(deptId))
+        const response = await axios.get(API_END_POINTS.deptByIdApi(deptId, isUserInfoRequired))
         res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + err)
