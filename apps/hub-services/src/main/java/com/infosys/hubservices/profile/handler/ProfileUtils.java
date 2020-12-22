@@ -75,6 +75,7 @@ public class ProfileUtils {
         public static final String USER_ID = "userId";
         public static final String OSID = "osid";
         public static final String FILTERs = "filters";
+        public static final String REQUEST = "request";
         public static final String ENTITY_TYPE = "entityType";
 
     }

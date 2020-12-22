@@ -20,5 +20,8 @@ public interface IProfileRequestHandler {
     public RegistryRequest searchRequest(String uuid);
     public RegistryRequest readRequest(String id);
 
+    public RegistryRequest searchRequest(Map params);
+
+
 
 }

@@ -8,6 +8,8 @@
 package com.infosys.hubservices.profile.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,6 +22,8 @@ import java.util.stream.Stream;
 
 @Service
 public class ProfileRequestHandler implements IProfileRequestHandler {
+
+    private Logger logger = LoggerFactory.getLogger(ProfileRequestHandler.class);
 
     @Autowired
     private ProfileUtils profileUtils;
@@ -132,6 +136,19 @@ public class ProfileRequestHandler implements IProfileRequestHandler {
         RegistryRequest registryRequest = new RegistryRequest();
         registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
         registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
+        registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
+        return registryRequest;
+    }
+
+    @Override
+    public RegistryRequest searchRequest(Map params) {
+        List types = Arrays.asList(ProfileUtils.Profile.USER_PROFILE);
+        logger.info("search params -> {}", params);
+
+        RegistryRequest registryRequest = new RegistryRequest();
+        registryRequest.setId(ProfileUtils.API.SEARCH.getValue());
+        registryRequest.getRequest().put(ProfileUtils.Profile.ENTITY_TYPE, types);
+        Map<String, Map<String, Object>> filters = (Map<String, Map<String, Object>>)params.get(ProfileUtils.Profile.FILTERs);
         registryRequest.getRequest().put(ProfileUtils.Profile.FILTERs, filters);
         return registryRequest;
     }

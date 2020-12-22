@@ -51,16 +51,21 @@ public class UserProfileController {
 
         ResponseEntity response = null;
         RegistryRequest registryRequest = profileRequestHandler.updateRequestWithWF(userId, requests);
-        System.out.println("request:; "+new ObjectMapper().writeValueAsString(registryRequest));
         response = profileUtils.getResponseEntity(ProfileUtils.URL.UPDATE.getValue(), registryRequest);
         return response;
     }
 
 
     @GetMapping("/search/profile")
-    public ResponseEntity searchProfile(@RequestParam String userId) {
+    public ResponseEntity searchProfileById(@RequestParam String userId) {
 
         RegistryRequest registryRequest = profileRequestHandler.searchRequest(userId);
+        return profileUtils.getResponseEntity(ProfileUtils.URL.SEARCH.getValue(), registryRequest);
+    }
+
+    @PostMapping ("/search/profile")
+    public ResponseEntity searchProfile(@RequestBody Map request) {
+        RegistryRequest registryRequest = profileRequestHandler.searchRequest(request);
         return profileUtils.getResponseEntity(ProfileUtils.URL.SEARCH.getValue(), registryRequest);
     }
 
