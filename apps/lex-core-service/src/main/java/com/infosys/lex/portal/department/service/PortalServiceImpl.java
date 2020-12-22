@@ -281,6 +281,7 @@ public class PortalServiceImpl implements PortalService {
 					Map<String, Object> result = userUtilService.getUsersDataFromUserIds("igot", userIds,
 							new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME,
 									PIDConstants.EMAIL, PIDConstants.DEPARTMENT_NAME)));
+					logger.info("enrichDepartmentInfo UserIds -> " + userIds.toString() + ", fetched Information -> " + result.size());
 					for (UserDepartmentRole userDeptRole : userDeptList) {
 						PortalUserInfo pUserInfo = new PortalUserInfo();
 						pUserInfo.setUserId(userDeptRole.getUserId());
