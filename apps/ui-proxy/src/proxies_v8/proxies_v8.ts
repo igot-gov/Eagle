@@ -62,10 +62,6 @@ proxiesV8.use('/sunbirdigot/*',
   proxyCreatorSunbirdSearch(express.Router(), `https://igot-sunbird.idc.tarento.com/api/composite/v1/search`)
 )
 
-proxiesV8.use('/action/content/v3/upload/*',
-  proxyCreatorUpload(express.Router(), `http://knowledge-mw-service:5000`)
-)
-
 proxiesV8.use('/action/*',
   proxyCreatorKnowledge(express.Router(), `http://knowledge-mw-service:5000`)
 )
