@@ -9,6 +9,8 @@ import { ERROR } from '../utils/message'
 const API_END_POINTS = {
     applicationTransition: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/transition`,
     applicationsSearch: `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/applications/search`,
+    historyBasedOnApplicationId: (applicationId: string) =>
+        `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/${applicationId}/history`,
     historyBasedOnWfId: (workflowId: string, applicationId: string) =>
         `${CONSTANTS.WORKFLOW_HANDLER_SERVICE_API_BASE}/v1/workflow/${workflowId}/${applicationId}/history`,
     nextActionSearch: (serviceName: string, state: string) =>
@@ -107,7 +109,7 @@ workflowHandlerApi.get('/nextActionSearch/:serviceName/:state', async (req, res)
     }
 })
 
-workflowHandlerApi.get('/applicationHistory/:wfId/:applicationId', async (req, res) => {
+workflowHandlerApi.get('/historyByApplicationIdAndWfId/:applicationId/:wfId', async (req, res) => {
     try {
         const wfId = req.params.wfId
         const applicationId = req.params.applicationId
@@ -138,6 +140,29 @@ workflowHandlerApi.get('/workflowProcess/:wfId', async (req, res) => {
         const response = await axios.get(API_END_POINTS.workflowProcess(wfId), {
             ...axiosRequestConfig,
             headers: {
+                rootOrg: rootOrgValue,
+            },
+        })
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+workflowHandlerApi.get('/historyByApplicationId/:applicationId', async (req, res) => {
+    try {
+        const applicationId = req.params.applicationId
+        const rootOrgValue = req.headers.rootorg
+        const orgValue = req.headers.org
+        const response = await axios.get(API_END_POINTS.historyBasedOnApplicationId(applicationId), {
+            ...axiosRequestConfig,
+            headers: {
+                org: orgValue,
                 rootOrg: rootOrgValue,
             },
         })
