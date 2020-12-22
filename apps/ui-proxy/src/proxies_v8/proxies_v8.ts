@@ -8,7 +8,6 @@ import {
   proxyCreatorSunbird,
   proxyCreatorSunbirdSearch,
   proxyCreatorToAppentUserId,
-  proxyCreatorUpload,
   scormProxyCreatorRoute
 } from '../utils/proxyCreator'
 
