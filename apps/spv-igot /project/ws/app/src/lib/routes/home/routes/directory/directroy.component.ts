@@ -79,7 +79,6 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   getAllDepartmentsAPI() {
     this.directoryService.getAllDepartments().subscribe(res => {
       this.data = res.map((dept: any) => {
-        console.log(dept)
         return {
           mdo: dept.deptName,
           type: dept.deptTypeInfo.deptType,
