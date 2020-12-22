@@ -30,7 +30,7 @@
         </div>
       </div>
       <ng-container>
-        <ws-widget-directory-table [tableData]='tabledata' [data]='data'>
+        <ws-widget-directory-table [tableData]='tabledata' [data]='data' (eOnRowClick)="onRoleClick($event)">
         </ws-widget-directory-table>
       </ng-container>
     </mat-card-content>

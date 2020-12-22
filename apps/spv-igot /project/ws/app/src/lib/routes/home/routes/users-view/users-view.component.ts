@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
+import { UserViewService } from './user-view.services'
+interface IUser{ fullname: string; email: string; type: string}
 
 @Component({
   selector: 'ws-app-users-view',
@@ -15,7 +17,10 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
+
+
 export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
+  
   /* tslint:disable */
   Math: any
   /* tslint:enable */
@@ -31,14 +36,14 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   connectionRequests!: any[]
   tabledata: any = []
   data: any = []
+  fullUserData: any=[]
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
     // private discussService: DiscussService,
     private configSvc: ConfigurationsService,
-    // private networkV2Service: NetworkV2Service,
-    // private profileV2Svc: ProfileV2Service
+    private userViewServcie: UserViewService,
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
@@ -73,23 +78,15 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       sortColumn: '',
       sortState: 'asc',
     }
-    this.data = [{
-
-      fullname: 'Ibrahim Sha',
-      email: 'ibrahimsha@gmail.com',
-      type: 'Transfer',
-    },
-    {
-      fullname: 'Amit Sengar',
-      email: 'amitsengar@yahoo.com',
-      type: 'New User',
-    },
-    {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
-    }]
+    this.getAllActiveUsersAPI() 
   }
+
+  getAllActiveUsersAPI() {
+    this.userViewServcie.getAllDepartments().subscribe(res => {
+      this.fullUserData = res
+    })
+  }
+
   ngAfterViewInit() {
     // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
   }
@@ -97,23 +94,9 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
   fetchUserDetails() {
-    // if (wid) {
-    //   this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
-    //     if (response) {
-    //       this.discussProfileData = response
-    //       this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid') || []
-    //     }
-    //   })
-    // }
   }
   fetchConnectionDetails() {
-    // this.networkV2Service.fetchAllConnectionEstablishedById(wid).subscribe(
-    //   (data: any) => {
-    //     this.connectionRequests = data.result.data
-    //   },
-    //   (_err: any) => {
-    //     // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-    //   })
+  
   }
 
   filter(key: string | 'timestamp' | 'best' | 'saved') {
@@ -121,51 +104,38 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.currentFilter = key
       switch (key) {
         case 'underreview':
-          // this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
-          this.data = [{
-
-            fullname: 'Ibrahim Sha',
-            email: 'ibrahimsha@gmail.com',
-            type: 'Transfer',
-          },
-          {
-            fullname: 'Amit Sengar',
-            email: 'amitsengar@yahoo.com',
-            type: 'New User',
-          },
-          {
-            fullname: 'Thillai Rajan',
-            email: 'thillairajan@gmail.com',
-            type: 'New User',
-          }]
+          this.data = this.getAllUserByKey(this.fullUserData.user_review)
           break
         case 'active':
-          // this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
-          this.data = [{
-            fullname: 'Jenifer Ramsingh',
-            email: 'jeniferramsingh@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = this.getAllUserByKey(this.fullUserData.active_users)
           break
         case 'inactive':
-          this.data = [{
-            fullname: 'Siva Teju',
-            email: 'sivateajuh@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = this.getAllUserByKey(this.fullUserData.inActive_users)
           break
         case 'blocked':
-          this.data = [{
-            fullname: 'Jenifer',
-            email: 'jenifer@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = this.getAllUserByKey(this.fullUserData.blocked_users)
           break
         default:
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
+         this.getAllActiveUsersAPI();
           break
       }
     }
+  }
+  getAllUserByKey(userObj: any) {
+    if (userObj && userObj!=null && userObj!=undefined){
+      var tempArray: IUser[] = []
+      userObj.forEach((users: any) => {
+        var obj:IUser ={
+          fullname: users.firstName+' '+users.lastName,
+          email: users.emailId,
+          type: users.roleInfo.roleName,
+        }
+        tempArray.push(obj)
+      });
+      return tempArray
+    }
+    return []
+   
   }
 
   // need to enhance

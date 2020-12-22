@@ -38,42 +38,6 @@
                 },
                 "enabled": true,
                 "routerLink": "/app/home/roles-access"
-            },
-            {
-                "name": "Approvals",
-                "key": "approvals",
-                "fragment": false,
-                "render": true,
-                "badges": {
-                    "enabled": false,
-                    "uri": ""
-                },
-                "enabled": true,
-                "routerLink": "/app/notifications"
-            },
-            {
-                "name": "Competencies",
-                "key": "competencies",
-                "fragment": false,
-                "render": true,
-                "badges": {
-                    "enabled": false,
-                    "uri": ""
-                },
-                "enabled": true,
-                "routerLink": "/app/notifications"
-            },
-            {
-                "name": "About",
-                "key": "about",
-                "fragment": false,
-                "render": true,
-                "badges": {
-                    "enabled": false,
-                    "uri": ""
-                },
-                "enabled": true,
-                "routerLink": "/app/home/about"
             }
         ]
     }

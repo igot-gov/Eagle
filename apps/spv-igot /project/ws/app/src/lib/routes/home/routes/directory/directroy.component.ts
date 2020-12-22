@@ -2,7 +2,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
@@ -38,6 +38,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     private route: ActivatedRoute,
     private configSvc: ConfigurationsService,
     private directoryService: DirectoryService,
+    private router: Router
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
@@ -80,6 +81,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     this.directoryService.getAllDepartments().subscribe(res => {
       this.data = res.map((dept: any) => {
         return {
+          id:dept.id,
           mdo: dept.deptName,
           type: dept.deptTypeInfo.deptType,
           user: dept.noOfUsers,
@@ -96,7 +98,10 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   fetchConnectionDetails() {
   }
-
+  onRoleClick(role: any) {
+    console.log(role.id)
+    this.router.navigate([`/app/roles/${role.id}/users`])
+  }
   filter(key: string | 'timestamp' | 'best' | 'saved') {
     if (key) {
       this.currentFilter = key
