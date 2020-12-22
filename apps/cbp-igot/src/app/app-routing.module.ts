@@ -5,6 +5,7 @@ import { ExploreDetailResolve, PageResolve } from '@ws-widget/utils'
 // import { LearningGuard } from '../../project/ws/app/src/lib/routes/my-learning/guards/my-learning.guard'
 import { InvalidUserComponent } from './component/invalid-user/invalid-user.component'
 import { LoginRootComponent } from './component/login-root/login-root.component'
+import { ETopBar } from './constants/topBar.constants'
 // import { ETopBar } from './constants/topBar.constants'
 import { EmptyRouteGuard } from './guards/empty-route.guard'
 import { ExternalUrlResolverService } from './guards/external-url-resolver.service'
@@ -324,6 +325,27 @@ const routes: Routes = [
   {
     path: 'public/faq/:tab',
     component: PublicFaqComponent,
+  },
+  {
+    path: 'viewer',
+    data: {
+      topBar: ETopBar.NONE,
+    },
+    loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'author/viewer',
+    loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
+    canActivate: [GeneralGuard],
+  },
+  {
+    path: 'embed',
+    data: {
+      topBar: ETopBar.NONE,
+    },
+    loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
+    canActivate: [GeneralGuard],
   },
   {
     path: '**',

@@ -4,13 +4,25 @@
   <!-- <ws-auth-editor-steps [steps]="stepper" [currentStep]="currentStep" (change)="currentStep = $event">
   </ws-auth-editor-steps> -->
   <!-- (selectedTabChange)="tabClick($event)" -->
-  <mat-tab-group #tabGroup [disableRipple]=true [selectedIndex]="selectedIndex">
+  <div class="flex flex-1">
+    <span class="spacer"></span>
+    <div class="flex relative">
+      <ng-container [ngTemplateOutlet]="top"></ng-container>
+      <!-- <button mat-raised-button class="ws-mat-accent-text ws-mat-accent-border-active margin-left-s"
+        (click)="action('save')">
+        <span class="mat-subheading-2 padding-xs" style="vertical-align: unset;" i18n>Save
+        </span>
+      </button> -->
+    </div>
+  </div>
+  <mat-tab-group #tabGroup [disableRipple]=true [selectedIndex]="selectedIndex" class="margin-top-m">
     <mat-tab>
       <ng-template mat-tab-label>
         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
         <span>1. Content</span>
       </ng-template>
       <ng-template matTabContent>
+        <!-- {{viewMode}}====== {{viewMode}} -->
         <div *ngIf="mediumScreen">
           <div class="ui" [ngClass]="{ toHide: !leftArrow }">
             <button class="p-1" mat-icon-button (click)="sidenav.toggle(); leftArrow = !leftArrow" i18n-aria-label
@@ -38,24 +50,25 @@
               <ws-auth-url-upload [isCollectionEditor]="true" [isSubmitPressed]="isSubmitPressed"
                 (data)="action($event)"></ws-auth-url-upload>
             </ng-container>
-            <ng-container *ngIf="viewMode==='quiz'">
+            <!-- <ng-container *ngIf="viewMode==='quiz'">
               <ws-auth-quiz-questions [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
               </ws-auth-quiz-questions>
             </ng-container>
-            <!-- <ng-container *ngIf="viewMode==='web'">
+            <ng-container *ngIf="viewMode==='web'">
               <ws-auth-web-module-editor [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
               </ws-auth-web-module-editor>
             </ng-container> -->
             <!-- <ws-auth-quiz-questions *ngIf="viewMode === 'quiz'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
         </ws-auth-quiz-questions> -->
-            <!-- <div *ngIf="viewMode === 'quiz'">
+            <div *ngIf="viewMode === 'quiz'">
               Please go to drafts to edit Web Pages or Click
               <a class="m-auto" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label
                 aria-label="Back">
                 here
               </a>
-            </div>-->
+            </div>
             <ng-container *ngIf="viewMode === 'web'">
+
               Please go to drafts to edit Web Pages or Click
               <a class="m-auto" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label
                 aria-label="Back">
@@ -126,17 +139,17 @@
   <!-- <ws-auth-quiz-questions *ngIf="viewMode === 'quiz'" [isSubmitPressed]="isSubmitPressed" (data)="action($event)">
         </ws-auth-quiz-questions> -->
   <!-- <div *ngIf="viewMode === 'quiz'">
-          Please go to drafts to edit Web Pages or Click
-          <a class="m-auto" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label aria-label="Back">
-            here
-          </a>
-        </div>
-        <div *ngIf="viewMode === 'web'">
-          Please go to drafts to edit Web Pages or Click
-          <a class="m-auto" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label aria-label="Back">
-            here
-          </a>
-        </div> -->
+    Please go to drafts to edit Web Pages or Click
+    <a class="m-auto" routerLink="/author/editor/{{currentContent}}/assessment" i18n-aria-label aria-label="Back">
+      here
+    </a>
+  </div>
+  <div *ngIf="viewMode === 'web'">
+    Please go to drafts to edit Web Pages or Click
+    <a class="m-auto" routerLink="/author/editor/{{currentContent}}/web-module" i18n-aria-label aria-label="Back">
+      here
+    </a>
+  </div> -->
   <!-- </div> -->
   <!-- </mat-sidenav-content>
   </mat-sidenav-container> -->
@@ -147,3 +160,9 @@
     arrow_back</mat-icon>
   <ws-auth-viewer [identifier]="previewIdentifier" [mimeTypeRoute]="mimeTypeRoute"></ws-auth-viewer>
 </div>
+
+
+<ng-template #top>
+  <ws-auth-options *ngIf="currentContent" [currentContent]="currentContent" (action)="action($event)">
+  </ws-auth-options>
+</ng-template>

@@ -8,10 +8,10 @@
     </div>
   </ng-container>
   <div *ngIf="drawer" class="transitionD">
-    <mat-card class="flex items-center mat-card custom-card">
-      <h2 class="flex mat-h w-full justify-center pt-5" i18n>
+    <mat-card class="flex items-center mat-card custom-card ws-mat-accent-border">
+      <span class="flex mat-title w-full justify-center margin-0" i18n>
         TABLE OF CONTENTS
-      </h2>
+      </span>
 
       <button *ngIf="!mediumScreen" mat-icon-button (click)="drawer = !drawer; menubtn = !menubtn" i18n-aria-label
         aria-label="Open side panel" i18n-matTooltip matTooltipPosition="right" matTooltip="Minimize side panel">
@@ -41,8 +41,8 @@
           </mat-icon>
         </button>
         <button *ngIf="!node.expandable" mat-icon-button disabled></button>
-        <ws-auth-table-tree-label [isInvalid]="invalidIds.includes(node.id)" [identifier]="node.identifier"
-          [isDragging]="isDragging" [id]="node.id"></ws-auth-table-tree-label>
+        <ws-auth-table-tree-label [isInvalid]="invalidIds.includes(node.id)" class="mat-subheading-2 margin-0"
+          [identifier]="node.identifier" [isDragging]="isDragging" [id]="node.id"></ws-auth-table-tree-label>
         <ws-auth-editor-options *ngIf="node.editable" [isInvalid]="invalidIds.includes(node.id)"
           (action)="takeAction($event.action, node, $event.type)" [node]="node"></ws-auth-editor-options>
         <div *cdkDragPreview>

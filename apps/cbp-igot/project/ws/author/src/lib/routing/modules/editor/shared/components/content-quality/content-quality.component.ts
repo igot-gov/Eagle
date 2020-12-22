@@ -13,20 +13,7 @@ import { NSIQuality } from '../../../../../../interface/content-quality'
 import { ContentQualityService } from '../../services/content-quality.service'
 import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 import { ActivatedRoute } from '@angular/router'
-// import { ValueService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
-/* tslint:enable */
-// const ELEMENT_DATA: any[] = [
-//   { response: 1, name: 'Hydrogen', score: 1.0079, help: 'H' },
-//   { response: 2, name: 'Helium', score: 4.0026, help: 'He' },
-//   { response: 3, name: 'Lithium', score: 6.941, help: 'Li' },
-//   { response: 4, name: 'Beryllium', score: 9.0122, help: 'Be' },
-//   { response: 5, name: 'Boron', score: 10.811, help: 'B' },
-//   { response: 6, name: 'Carbon', score: 12.0107, help: 'C' },
-//   { response: 7, name: 'Nitrogen', score: 14.0067, help: 'N' },
-//   { response: 8, name: 'Oxygen', score: 15.9994, help: 'O' },
-//   { response: 9, name: 'Fluorine', score: 18.9984, help: 'F' },
-//   { response: 10, name: 'Neon', score: 20.1797, help: 'Ne' },
-// ]
+
 @Component({
   selector: 'ws-auth-content-quality',
   templateUrl: './content-quality.component.html',
@@ -82,9 +69,9 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
   ) {
     this.getJSON()
     this.contentService.changeActiveCont.subscribe(data => {
-      this.currentContent = data.replace('.img', '')
-      if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
-        this.viewMode = 'meta'
+      // this.currentContent = data.replace('.img', '')
+      if (data) {
+        this.currentContent = data
         this.fillResponseData()
       }
     })
@@ -321,7 +308,7 @@ export class ContentQualityComponent implements OnInit, OnDestroy, AfterViewInit
     if (qualityForm && this._configurationsService.userProfile) {
       // todo:  start loader
       /* tslint:disable */
-      console.log(qualityForm)
+      // console.log(qualityForm)
       /* tslint:disable */
       let responses = _.map(_.get(qualityForm, 'questionsArray'), (p: NSIQuality.IQuestionConfig, cid: number) => {
         return {

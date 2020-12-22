@@ -10,11 +10,11 @@ import {
 } from '@angular/material'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
@@ -38,11 +38,11 @@ import { YoutubeModule as YoutubeViewContainerModule } from '../../route-view-co
   declarations: [YoutubeComponent],
   imports: [
     RouterModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     CommonModule,
     DisplayContentTypeModule,

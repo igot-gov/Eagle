@@ -1,15 +1,18 @@
 import { AuthNavBarToggleService } from '@ws/author/src/lib/services/auth-nav-bar-toggle.service'
 import { NsPage, ConfigurationsService } from '@ws-widget/utils'
-import { Component, OnInit } from '@angular/core'
+import { AfterViewInit, Component, OnInit } from '@angular/core'
 import { SafeUrl, DomSanitizer } from '@angular/platform-browser'
 import { Router, NavigationEnd } from '@angular/router'
+import { EditorContentService } from '../../routing/modules/editor/services/editor-content.service'
+import { NSContent } from '../../interface/content'
 
 @Component({
   selector: 'ws-auth-root-navigation',
   templateUrl: './auth-navigation.component.html',
   styleUrls: ['./auth-navigation.component.scss'],
+  providers: [EditorContentService,],
 })
-export class AuthNavigationComponent implements OnInit {
+export class AuthNavigationComponent implements OnInit, AfterViewInit {
 
   appIcon: SafeUrl | null = null
   search = false
@@ -17,6 +20,9 @@ export class AuthNavigationComponent implements OnInit {
   pageNavbar: Partial<NsPage.INavBackground> | null = null
   backData: any = { url: 'back' }
   canShow = true
+  currentContentId = ''
+  currentContentData!: NSContent.IContentMeta
+
   currentRout = 'Home'
   constructor(
     private domSanitizer: DomSanitizer,
@@ -24,6 +30,7 @@ export class AuthNavigationComponent implements OnInit {
     private authNavBarSvc: AuthNavBarToggleService,
     private router: Router,
   ) {
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.url.indexOf('home') >= 0) {
@@ -50,8 +57,12 @@ export class AuthNavigationComponent implements OnInit {
       }
     })
   }
+  ngAfterViewInit(): void {
+    // this.getCurrentId()
+  }
 
   ngOnInit() {
+
     this.authNavBarSvc.toggleNavBar.subscribe(
       data => this.canShow = data,
     )
@@ -63,7 +74,6 @@ export class AuthNavigationComponent implements OnInit {
       this.pageNavbar = this.configSvc.pageNavBar
     }
   }
-
   back() {
     window.history.back()
   }

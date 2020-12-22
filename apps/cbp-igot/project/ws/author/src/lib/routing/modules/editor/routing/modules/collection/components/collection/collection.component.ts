@@ -96,10 +96,10 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
-      if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
-        this.viewMode = 'meta'
-
-      }
+      this.setVeiwMetaByType(this.contentService.getUpdatedMeta(data))
+      // if (this.contentService.getUpdatedMeta(data).contentType !== 'Resource') {
+      //   this.viewMode = 'meta'
+      // }
     })
     if (this.activateRoute.parent && this.activateRoute.parent.parent) {
       this.routerSubscription = this.activateRoute.parent.parent.data.subscribe(data => {
@@ -548,19 +548,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         break
       case 'editContent':
         const content = this.contentService.getUpdatedMeta(event.identifier)
-        if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
-          this.viewMode = 'upload'
-        } else if (content.mimeType === 'application/html' && !content.isExternal) {
-          this.viewMode = 'upload'
-        } else if (content.mimeType === 'application/html') {
-          this.viewMode = 'curate'
-        } else if (content.mimeType === 'application/quiz') {
-          this.viewMode = 'quiz'
-        } else if (content.mimeType === 'application/web-module') {
-          this.viewMode = 'web'
-        } else {
-          this.viewMode = 'meta'
-        }
+        this.setVeiwMetaByType(content)
         break
       case 'preview':
         this.preview(event.identifier)
@@ -568,18 +556,34 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  setVeiwMetaByType(content: NSContent.IContentMeta) {
+    if (['application/pdf', 'application/x-mpegURL'].includes(content.mimeType)) {
+      this.viewMode = 'upload'
+    } else if (content.mimeType === 'application/html' && !content.isExternal) {
+      this.viewMode = 'upload'
+    } else if (content.mimeType === 'application/html') {
+      this.viewMode = 'curate'
+    } else if (content.mimeType === 'application/quiz') {
+      this.viewMode = 'quiz'
+    } else if (content.mimeType === 'application/web-module') {
+      this.viewMode = 'web'
+    } else {
+      this.viewMode = 'meta'
+    }
+  }
+
   action(type: string) {
     switch (type) {
       case 'next':
-        this.viewMode = 'meta'
-        if (this.selectedIndex) {
+        // this.viewMode = ''
+        if (this.selectedIndex != null) {
           this.selectedIndex += 1
         } else {
           this.selectedIndex = 0
         }
         break
       case 'back':
-        this.viewMode = 'meta'
+        // this.viewMode = 'meta'
         if (this.selectedIndex) {
           this.selectedIndex -= 1
         } else {

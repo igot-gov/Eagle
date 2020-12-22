@@ -1,11 +1,11 @@
 <!-- <div class="margin-top-m margin-left-xl"> -->
 <mat-card class="flex flex-1 flex-column">
   <ng-container>
-    <div class="flex mt-8 margin-bottom-xl top-heading flex-Update ws-mat-default-text">
-      <div class="flex flex-1">
+    <div class="flex margin-bottom-xl top-heading flex-Update ws-mat-default-text">
+      <!-- <div class="flex flex-1">
         <h1 class="margin-remove-bottom title"><span i18n>Upload Content </span></h1>
         <ng-container [ngTemplateOutlet]="top"></ng-container>
-      </div>
+      </div> -->
       <div class="margin-top-s new-inner-div mat-app-background">
         <h3 class="ws-mat-default-text text-center">File Type : PDF, MP3, MP4, ZIP (Upto 200 mb)</h3>
         <div class="upload-box flex flex-middle flex-col justify-center cursor-pointer mat-card"
@@ -82,15 +82,15 @@
                 </p>
               </div>
             </button>
-            <!-- <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
+            <button type="button" mat-raised-button class="ws-mat-primary-background margin-top-xl mw"
               *ngIf="(fileUploadForm.controls.artifactUrl.value)" (click)="data.emit('next')">
-              <div class="flex flex-middle justify-center">
+              <div class="flex flex-middle justify-center padding-m">
                 <mat-icon class="text-white">fast_forward</mat-icon>
                 <p class="text-white margin-left-s margin-remove-bottom">
-                  <span i18n>Skip</span>
+                  <span i18n>Skip to content settings</span>
                 </p>
               </div>
-            </button> -->
+            </button>
           </div>
         </div>
       </div>

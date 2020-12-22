@@ -1,0 +1,17 @@
+<mat-card class="competency-card cursor-pointer" [ngClass]="{'mat-copmetence': isSelected}"
+  (click)="!isSelected ? setSelectedCompetency(): view()">
+  <a href="javascript:void(0)" role="button">
+    <mat-card-content class="flex flex-1 custom" *ngIf="!isSelected">
+      <span class="mat-h2">{{data.name}}</span>
+      <span class="mat-body-1">{{data.description}}</span>
+    </mat-card-content>
+    <mat-card-content class="flex flex-1 custom-reverse" *ngIf="isSelected">
+      <a href="javascript:void(0)" role="link" class="add-comp cursor-pointer"
+        (click)="add() ;$event.stopPropagation()">
+        <mat-icon class="m-auto">add</mat-icon>
+      </a>
+      <span class="mat-h2">{{data.name}}</span>
+      <span class="mat-body-1" (click)="view()">{{data.description}}</span>
+    </mat-card-content>
+  </a>
+</mat-card>

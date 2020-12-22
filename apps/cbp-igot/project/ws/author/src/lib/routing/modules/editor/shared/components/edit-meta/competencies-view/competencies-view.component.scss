@@ -1,0 +1,137 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.competency-view-card {
+  flex: 1;
+  height: auto;
+  min-width: 346px;
+  min-width: 346px;
+  box-shadow: none !important;
+  height: fit-content;
+  min-height: -webkit-fill-available;
+
+  // width: max-content;
+  @include breakpoint-xs {
+    width: auto;
+    min-width: auto;
+  }
+}
+
+.responsive {
+  @include breakpoint-xs {
+    flex-direction: column-reverse;
+  }
+}
+
+.wid-auro {
+  width: fit-content;
+
+  @include breakpoint-xs {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+.others {
+  background: #0074B6 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+
+  @include breakpoint-xs {
+    margin: auto !important;
+    margin-left: 1rem;
+  }
+}
+
+.font-medium {
+  font-weight: 500 !important;
+}
+
+.dot:before {
+  content: '•';
+  margin: 1rem;
+}
+
+.mobile {
+  @include breakpoint-xs {
+    flex: 1;
+  }
+
+  @include breakpoint-s {
+    flex: 1;
+  }
+}
+
+.mobile2 {
+  @include breakpoint-xs {
+    margin-top: $size-s;
+  }
+
+  // @include breakpoint-s {
+  //   margin-top: $size-s;
+  // }
+}
+
+.tag {
+  display: flex;
+  margin: 0 10px;
+  padding: 3px 15px;
+  font-size: 12px;
+  min-width: 50px;
+  justify-content: center;
+  border-radius: 20px 5px 5px 20px;
+}
+
+.noocoments {
+  flex: 1;
+  text-align: right;
+  margin-right: $size-m;
+}
+
+.custom {
+  flex-direction: column;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.custom-reverse {
+  flex-direction: column;
+
+  @include breakpoint-xs {
+    flex-direction: column;
+  }
+}
+
+.view-all {
+  display: flex;
+  // margin: 0 auto;
+  border: 1px solid;
+  box-shadow: 0px 10px 30p;
+  border-radius: 4px;
+  // border-color: lightgrey;
+}
+
+.add-comp {
+  right: 0;
+  display: flex;
+  position: absolute;
+  top: 0;
+  height: 48px;
+  width: 48px;
+  background: rgb(29, 137, 35) !important;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+.pad-4 {
+  padding: 4px;
+}
+
+.example-header-image {
+  // background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}

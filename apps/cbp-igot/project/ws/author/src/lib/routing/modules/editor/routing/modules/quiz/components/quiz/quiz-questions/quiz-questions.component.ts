@@ -41,7 +41,9 @@ import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection/src/public-api'
 import { FormGroup } from '@angular/forms'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 @Component({
   selector: 'ws-auth-quiz-questions',
   templateUrl: './quiz-questions.component.html',
@@ -109,63 +111,66 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showSettingButtons = this.accessControl.rootOrg === 'client1'
-    if (this.activateRoute.parent && this.activateRoute.parent.parent) {
-      this.activateRoute.parent.parent.data.subscribe(v => {
-        this.quizResolverSvc.getUpdatedData(v.contents[0].content.identifier).subscribe(newData => {
-
-          if (v.contents && v.contents.length) {
-            this.allContents.push(v.contents[0].content)
-            if (v.contents[0].data) {
-              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = v.contents[0].data.questions
-            } else if (newData[0] && newData[0].data && newData[0].data.questions) {
-              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = newData[0].data.questions
-
-            } else {
-              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = []
-            }
-            // this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = v.contents[0].data
-            //   ? v.contents[0].data.questions
-            //   : []
-
-            this.canEditJson = this.quizResolverSvc.canEdit(v.contents[0].content)
-            this.resourceType = v.contents[0].content.categoryType || 'Quiz'
-            this.quizDuration = v.contents[0].content.duration || 300
-            this.questionsArr =
-              this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] || []
-            this.contentLoaded = true
-          }
-          if (!this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier]) {
-            this.quizStoreSvc.collectiveQuiz[v.contents[0].content.identifier] = []
-          }
-        })
-      })
-    }
-    this.allLanguages = this.authInitService.ordinals.subTitles
-    this.loaderService.changeLoadState(true)
-    this.quizConfig = this.quizStoreSvc.getQuizConfig('ques')
-    this.mediumSizeBreakpoint$.subscribe(isLtMedium => {
-      this.sideNavBarOpened = !isLtMedium
-      this.mediumScreenSize = isLtMedium
-      if (isLtMedium) {
-        this.showContent = false
-      } else {
-        this.showContent = true
-      }
-    })
-    // selected quiz index
-    this.activeIndexSubscription = this.quizStoreSvc.selectedQuizIndex.subscribe(index => {
-      this.selectedQuizIndex = index
-    })
-    // active lex id
+    this.showSettingButtons = true
     this.activeContentSubscription = this.metaContentService.changeActiveCont.subscribe(id => {
-      if (!this.quizStoreSvc.collectiveQuiz[id]) {
-        this.quizStoreSvc.collectiveQuiz[id] = []
+
+      this.allLanguages = this.authInitService.ordinals.subTitles
+      this.loaderService.changeLoadState(true)
+      this.quizConfig = this.quizStoreSvc.getQuizConfig('ques')
+      this.mediumSizeBreakpoint$.subscribe(isLtMedium => {
+        this.sideNavBarOpened = !isLtMedium
+        this.mediumScreenSize = isLtMedium
+        if (isLtMedium) {
+          this.showContent = false
+        } else {
+          this.showContent = true
+        }
+      })
+
+      if (this.activateRoute.parent && this.activateRoute.parent.parent) {
+        this.activateRoute.parent.parent.data.subscribe(v => {
+          this.quizResolverSvc.getUpdatedData(v.contents[0].content.identifier).subscribe(newData => {
+            const quizContent = _.find(_.get(v.contents[0].content, 'children'), i => i.identifier === id) || {}
+            if (v.contents && v.contents.length) {
+              this.allContents.push(v.contents[0].content)
+              if (v.contents[0].data) {
+                this.quizStoreSvc.collectiveQuiz[id] = v.contents[0].data.questions
+              } else if (newData[0] && newData[0].data && newData[0].data.questions) {
+                this.quizStoreSvc.collectiveQuiz[id] = newData[0].data.questions
+
+              } else {
+                this.quizStoreSvc.collectiveQuiz[id] = []
+              }
+              // this.quizStoreSvc.collectiveQuiz[id] = v.contents[0].data
+              //   ? v.contents[0].data.questions
+              //   : []
+
+              this.canEditJson = this.quizResolverSvc.canEdit(quizContent)
+              this.resourceType = quizContent.categoryType || 'Quiz'
+              this.quizDuration = quizContent.duration || 300
+              this.questionsArr =
+                this.quizStoreSvc.collectiveQuiz[id] || []
+              this.contentLoaded = true
+            }
+            if (!this.quizStoreSvc.collectiveQuiz[id]) {
+              this.quizStoreSvc.collectiveQuiz[id] = []
+            }
+          })
+        })
+
+        // selected quiz index
+        this.activeIndexSubscription = this.quizStoreSvc.selectedQuizIndex.subscribe(index => {
+          this.selectedQuizIndex = index
+        })
+        // active lex id
+        if (!this.quizStoreSvc.collectiveQuiz[id]) {
+          this.quizStoreSvc.collectiveQuiz[id] = []
+        }
+        this.questionsArr = this.quizStoreSvc.collectiveQuiz[id]
+        this.currentId = id
+        this.quizStoreSvc.currentId = id
+        this.quizStoreSvc.changeQuiz(0)
       }
-      this.questionsArr = this.quizStoreSvc.collectiveQuiz[id]
-      this.currentId = id
-      this.quizStoreSvc.currentId = id
-      this.quizStoreSvc.changeQuiz(0)
     })
   }
 
@@ -420,7 +425,7 @@ export class QuizQusetionsComponent implements OnInit, OnDestroy {
   action(type: string) {
     switch (type) {
       case 'next':
-        this.currentStep += 1
+        // this.currentStep += 1
         this.data.emit('next')
         break
       case 'preview':

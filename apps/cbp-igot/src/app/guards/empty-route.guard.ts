@@ -26,7 +26,7 @@ export class EmptyRouteGuard implements CanActivate {
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.configSvc.isAuthenticated) {
       // logger.log('Redirecting to application home page');
-      return this.router.parseUrl('/author')
+      return this.router.parseUrl('/author/home')
     }
     // logger.log('redirecting to login page as the user is not loggedIn');
     // return this.router.parseUrl('/login')

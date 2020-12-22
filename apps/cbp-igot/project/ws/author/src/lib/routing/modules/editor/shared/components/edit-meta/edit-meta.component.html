@@ -849,20 +849,22 @@
         </div>
       </mat-card-footer> -->
           </mat-card>
+          <!---->
           <mat-card class="margin-top-m ws-mat-accent-border" *ngIf="checkCondition('competencies', 'show')">
             <mat-card-title class="m-auto">
               <span id="competencies" class="mat-title">Competencies</span>
+              <a href="javascript:void(0)" role="dialog"
+                class="mat-subheading-2 flex-end ws-mat-default-text margin-right-m floatright" (click)="start()">
+                <span i18n>Can’t find the competency you are looking for?</span>
+              </a>
             </mat-card-title>
             <mat-card-content class="mobile-break mat-app-background">
               <div class="flex new-mobile">
-                <div class="flex-1" *ngIf="checkCondition('competencies', 'show')"
-                  [ngClass]="{ disable: checkCondition('competencies', 'disabled') }">
-                  <label>
+                <div class="flex-1" [ngClass]="{ disable: checkCondition('competencies', 'disabled') }">
+                  <!-- <label>
                     <div class="flex flex-middle">
                       <span [ngClass]="{ required: checkCondition('competencies', 'required') }"
                         i18n>Competencies</span>
-                      <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('keyword')">info
-                                                </mat-icon> -->
                       <mat-icon class="float-right margin-left-xs cursor-pointer" *ngIf="
                                                     contentForm.controls.competencies.value &&
                                                     contentForm.controls.competencies.value.length
@@ -875,9 +877,64 @@
                       keyword.
                     </span>
 
-                  </label>
+                  </label> -->
                   <div class="flex flex-1">
-                    <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
+                    <!-- {{logs(contentForm?.controls?.competencies?.value)}} -->
+                    <div id="competency-card" class="competency-card">
+
+                      <div class="flex flex-1 flex-wrap" role="list"
+                        *ngIf="contentForm?.controls?.competencies?.value?.length > 0">
+                        <span>&nbsp;</span>
+                        <div class="tag mat-copmetence cursor-pointer mat-app-background" role="listitem"
+                          (click)=view(item) *ngFor="let item of contentForm?.controls?.competencies?.value">
+                          <span [attr.id]="item.name" class="mat-body-1 margin-xs" i18n-aria-label
+                            role="link">{{item.competencyType}}-{{item.name}}</span>
+                        </div>
+                      </div>
+                      <div class="w-full pt-10">
+                        <div class="flex flex-1 flex-column margin-fix mb-2" role="link" tabindex="0">
+                          <span class="mat-subheading-1">
+                            Popular competencies
+                          </span>
+                        </div>
+                        <div class="flex flex-1 flex-row margin-fix search">
+                          <form (submit)="updateQuery(queryControl.value)" class="flex-1">
+                            <mat-form-field appearance="outline" class="autocomplete-form" color="primary"
+                              [floatLabel]="'never'">
+                              <mat-icon matPrefix class="search-home flex items-center justify-center">search</mat-icon>
+                              <mat-label>Search</mat-label>
+                              <input type="search" #searchInput class="ml-2 flex-1" i18n-placeholder="search"
+                                [placeholder]="'Search'" i18-aria-label aria-label="Search" matInput
+                                [formControl]="queryControl" />
+                            </mat-form-field>
+                          </form>
+                          <!-- <div class="ml-4 mr-6 mb-2 view-more ws-mat-accent-text view-all ws-mat-primary-lite-background-important"> -->
+                          <button class="margin-top-s" mat-icon-button (click)="resetSearch()">
+                            <mat-icon>refresh</mat-icon>
+                          </button>
+                          <!-- </div> -->
+                        </div>
+
+                        <div class="flex flex-1 flex-wrap margin-fix">
+                          <ng-container *ngFor="let comp of filteredCompetencies">
+                            <!-- <div class="flex sm:w-full md:w-1/3 mb-5" [ngClass]="{ 'justify-end': odd, 'justify-start':even}"> -->
+                            <!-- <ws-app-careers-card class="w-fix" [discuss]="discuss"></ws-app-careers-card> -->
+                            <div class="flex sm:w-full md:w-1/3">
+                              <app-competence-card [data]="comp" [isSelected]="comp.id === selectedId"
+                                (setSelected)="setSelectedCompetency($event)" (addComp)="addCompetency($event)"
+                                (delComp)="deleteCompetency($event)">
+                              </app-competence-card>
+                            </div>
+                          </ng-container>
+                          <!-- <app-competence-card></app-competence-card> -->
+                        </div>
+                        <div class="flex flex-1 flex-column margin-fix pagination-container">
+                          <!-- <ws-app-careers-pagination [pager]="pager" (changePage)="navigateWithPage($event)">
+                                  </ws-app-careers-pagination> -->
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <mat-form-field class="keywords-chip-list margin-top-xs flex-1" appearance="outline"
                       [ngClass]="{ 'mat-form-field-invalid': showError('competencies') }">
                       <mat-chip-list #keywords aria-label="Keyword selection">
                         <mat-chip *ngFor="let key of contentForm.controls.competencies.value" [selectable]="selectable"
@@ -892,8 +949,8 @@
                       </mat-chip-list>
                       <mat-error *ngIf="showError('competencies')" i18n>Competence is mandatory
                       </mat-error>
-                    </mat-form-field>
-                    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
+                    </mat-form-field> -->
+                    <!-- <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption
                       (optionSelected)="optionSelectedCompetency($event.option.value);">
                       <mat-option *ngIf="!checkCondition('competencies', 'required')" i18n [value]="null">None
                       </mat-option>
@@ -904,12 +961,9 @@
                         {{option.additionalProperties.competencyType }}
                         - {{option.name }}
                       </mat-option>
-                    </mat-autocomplete>
+                    </mat-autocomplete> -->
                   </div>
-                  <button mat-raised-button type="button"
-                    class="text-white ws-mat-primary-background text-white margin-right-m floatright" (click)="start()">
-                    <b class="text-white" i18n>Request Competency</b>
-                  </button>
+
                 </div>
               </div>
             </mat-card-content>
@@ -1353,7 +1407,6 @@
              <button mat-icon-button disabled>
               <mat-icon> arrow_forward</mat-icon>
             </button>
-
           </div>
         </mat-card-footer> -->
           </mat-card>
@@ -1363,7 +1416,7 @@
               <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Save</span>
             </button>
             <button mat-raised-button type="button" style="line-height: 48px;"
-              class="text-white ws-mat-primary-background margin-left-s" (click)="data.emit('next')">
+              class="text-white ws-mat-primary-background margin-left-s" (click)="data.emit('saveAndNext')">
               <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Next: Content quality</span>
             </button>
           </div>

@@ -10,17 +10,17 @@ import {
 } from '@angular/material'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
   UserContentRatingModule,
   BtnContentFeedbackV2Module,
-  PlayerBriefModule,
+  // PlayerBriefModule,
 } from '@ws-widget/collection'
 
 import {
@@ -50,11 +50,11 @@ import { WebModuleComponent } from './web-module.component'
     WebModuleRoutingModule,
     PluginWebModuleModule,
     WidgetResolverModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     DisplayContentTypeModule,
     UserImageModule,
@@ -63,7 +63,7 @@ import { WebModuleComponent } from './web-module.component'
     PipePartialContentModule,
     UserContentRatingModule,
     BtnContentFeedbackV2Module,
-    PlayerBriefModule,
+    // PlayerBriefModule,
   ],
   exports: [
     WebModuleComponent,

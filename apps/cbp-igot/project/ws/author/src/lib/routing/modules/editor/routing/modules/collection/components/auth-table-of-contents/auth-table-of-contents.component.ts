@@ -15,6 +15,7 @@ import { IContentTreeNode } from './../../interface/icontent-tree'
 import { CollectionStoreService } from './../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map } from 'rxjs/operators'
+import { PickNameComponent } from './pick-name/pick-name.component'
 @Component({
   selector: 'ws-auth-table-of-contents',
   templateUrl: './auth-table-of-contents.component.html',
@@ -355,23 +356,33 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
   }
 
   async createNewChildOrSibling(type: string, node: IContentTreeNode, asSibling = false) {
-    const parentNode = (asSibling ? this.getParentNode(node) : node) as IContentTreeNode
-    this.loaderService.changeLoad.next(true)
-    this.preserveExpandedNodes()
-    this.expandedNodes.add(parentNode.id)
-    const isDone = await this.store.createChildOrSibling(
-      type,
-      parentNode,
-      asSibling ? node.id : undefined,
-      'below',
-    )
-    this.snackBar.openFromComponent(NotificationComponent, {
-      data: {
-        type: isDone ? Notify.SUCCESS : Notify.FAIL,
-      },
-      duration: NOTIFICATION_TIME * 1000,
+    const dialog = this.dialog.open(PickNameComponent, {
+      width: 'auto',
+      height: 'auto',
+      data: {},
     })
-    this.loaderService.changeLoad.next(false)
+    dialog.afterClosed().subscribe(async v => {
+      if (v && v.action === 'YES' && v.name) {
+        const parentNode = (asSibling ? this.getParentNode(node) : node) as IContentTreeNode
+        this.loaderService.changeLoad.next(true)
+        this.preserveExpandedNodes()
+        this.expandedNodes.add(parentNode.id)
+        const isDone = await this.store.createChildOrSibling(
+          type,
+          parentNode,
+          asSibling ? node.id : undefined,
+          'below',
+          v.name
+        )
+        this.snackBar.openFromComponent(NotificationComponent, {
+          data: {
+            type: isDone ? Notify.SUCCESS : Notify.FAIL,
+          },
+          duration: NOTIFICATION_TIME * 1000,
+        })
+        this.loaderService.changeLoad.next(false)
+      }
+    })
   }
 
   takeAction(action: string, node: IContentTreeNode, type?: string) {

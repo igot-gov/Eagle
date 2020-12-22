@@ -1,0 +1,25 @@
+<mat-card class="competency-view-card">
+  <mat-card-content class="flex flex-1 custom">
+    <span class="mat-h2 font-medium">{{dData.name}}</span>
+    <h3 class="mat-h3">{{dData.description}}</h3>
+    <div class="flex">
+      <h3 class="mat-h3">Competency type: &nbsp;</h3>
+      <span class="mat-h3 font-medium">{{dData?.additionalProperties?.competencyType || dData?.competencyType}}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="flex flex-row-reverse responsive">
+    <div class="mb-2 ml-2 mr-2 flex view-more text-white others">
+      <a href="javascript:void(0)" mat-button mat-dialog-close i18n-aria-label class="flex">
+        <span i18n>{{'Ok'}}</span>
+      </a>
+    </div>
+    <div class="mb-2 ws-mat-accent-text view-all ws-mat-primary-lite-background-important wid-auro">
+      <a href="javascript:void(0)" mat-button i18n-aria-label *ngIf="isUpdate" (click)="remove()">
+        <span i18n>{{'Remove'}}</span>
+      </a>
+      <a href="javascript:void(0)" mat-button i18n-aria-label *ngIf="!isUpdate" (click)="add()">
+        <span i18n>{{'Add'}}</span>
+      </a>
+    </div>
+  </mat-card-actions>
+</mat-card>

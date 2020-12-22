@@ -23,8 +23,8 @@
           <ws-auth-entity-card [entity]="createEntity" (step)="contentClicked($event)"></ws-auth-entity-card>
           <mat-divider *ngIf="i % 2 !== 0"></mat-divider>
         </ng-container>
-        <ws-auth-entity-card [entity]="resourceEntity" [expanded]="true" (step)="contentClicked($event)">
-        </ws-auth-entity-card>
+        <!-- <ws-auth-entity-card [entity]="resourceEntity" [expanded]="true" (step)="contentClicked($event)">
+        </ws-auth-entity-card> -->
         <!-- </div> -->
       </div>
     </div>
@@ -40,7 +40,7 @@
     <mat-card class="ws-mat-accent-border flex-1">
       <mat-card-header>
         <mat-card-title>
-          <span class="mat-title">Course</span>
+          <span class="mat-title">{{currentContent?.name}}</span>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content>

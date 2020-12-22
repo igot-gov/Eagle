@@ -7,7 +7,7 @@ import { AuthHomeComponent } from './components/home/home.component'
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     component: AuthHomeComponent,
     pathMatch: 'full',
     redirectTo: 'my-content',

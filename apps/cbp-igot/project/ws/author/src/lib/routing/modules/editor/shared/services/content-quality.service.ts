@@ -14,6 +14,7 @@ import { tap } from 'rxjs/operators'
 // import { FIXED_FILE_NAME } from '../../../../../constants/upload'
 import { HttpClient } from '@angular/common/http'
 import { NSIQuality } from '../../../../../interface/content-quality'
+import _ from 'lodash'
 // import { ConfigurationsService } from '@ws-widget/utils'
 // import { ApiService } from '../../../../../modules/shared/services/api.service'
 // import { ConfigurationsService } from '@ws-widget/utils'
@@ -39,11 +40,20 @@ export class ContentQualityService {
     // this.fetchJSON().subscribe()
   }
   getScore(id: string): NSIQuality.IQualityResponse {
-    return this.curationData[id]
+    if (this.curationData[id]) {
+      return this.curationData[id]
+    } else { // backend responding wrong
+      return this.curationData[id.replace('.img', '')]
+    }
+
   }
 
-  calculateScore(meta: NSIQuality.IQualityResponse) {
-    this.curationData[meta.identifier] = JSON.parse(JSON.stringify(meta))
+  calculateScore(meta: any) {
+    const result = _.get(meta, 'result.resources')
+    _.each(result, (r: NSIQuality.IQualityResponse) => {
+      this.curationData[r.resourceId] = JSON.parse(JSON.stringify(r))
+    })
+
   }
 
   setJSONStruct(data: any) {

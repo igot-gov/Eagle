@@ -45,10 +45,16 @@ import {
   // startWith,
   switchMap,
   map,
+  startWith,
 } from 'rxjs/operators'
+import { CompetenceService } from '../../services/competence.service'
+import { NSCompetencie } from '../../../../../../interface/competencies.model'
+import { CompetenceViewComponent } from './competencies-view/competencies-view.component'
 // import { NsWidgetResolver } from '@ws-widget/resolver'
 // import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 export interface IUsersData {
   name?: string
   id: string
@@ -171,7 +177,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     private contentService: EditorContentService,
     private configSvc: ConfigurationsService,
     private ref: ChangeDetectorRef,
-    // private interestSvc: InterestService,
+    private comptncySvc: CompetenceService,
     private loader: LoaderService,
     private authInitService: AuthInitService,
     private accessService: AccessControlService,
@@ -247,6 +253,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
+    this.refreshData()
     this.sidenavSubscribe()
     this.typeCheck()
     this.ordinals = this.authInitService.ordinals
@@ -416,12 +423,12 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     //   distinctUntilChanged(),
     //   switchMap(value => this.interestSvc.fetchAutocompleteInterestsV2(value)),
     // )
-    // this.competencyOptions$ = this.competencyCtrl.valueChanges.pipe(
-    //   startWith(this.competencyCtrl.value),
-    //   debounceTime(500),
-    //   distinctUntilChanged(),
-    //   switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
-    // )
+    this.competencyOptions$ = this.competencyCtrl.valueChanges.pipe(
+      startWith(this.competencyCtrl.value),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(value => this.comptncySvc.fetchAutocompleteCompetencyV2(value)),
+    )
 
     this.allLanguages = this.data1.languages
   }
@@ -856,11 +863,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentForm.controls.keywords.setValue(this.contentForm.controls.keywords.value)
   }
 
-  removeCompetency(competencies: any): void {
-    const index = this.contentForm.controls.competencies.value.indexOf(competencies)
-    this.contentForm.controls.competencies.value.splice(index, 1)
-    this.contentForm.controls.competencies.setValue(this.contentForm.controls.competencies.value)
-  }
+
 
   removeReferences(index: number): void {
     this.contentForm.controls.references.value.splice(index, 1)
@@ -1114,26 +1117,10 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentForm.controls[field].value.splice(index, 1)
     this.contentForm.controls[field].setValue(this.contentForm.controls[field].value)
   }
-  optionSelectedCompetency(competencies: any) {
-    this.competencyCtrl.setValue(' ')
-    // this.competencySearch.nativeElement.blur()
 
-    if (competencies) {
-      const value = this.contentForm.controls.competencies.value || []
-      const tempObj = {
-        id: competencies.id,
-        name: competencies.name,
-        description: competencies.description,
-        competencyType: competencies.additionalProperties.competencyType,
-      }
-      if (this.canPush(value, tempObj)) {
-        value.push(tempObj)
-        this.contentForm.controls.competencies.setValue(value)
-      }
-
-    }
+  logs(avl: any) {
+    console.log(avl)
   }
-
   addEmployee(event: MatAutocompleteSelectedEvent, field: string) {
     if (event.option.value && event.option.value.id) {
       this.loader.changeLoad.next(true)
@@ -1481,5 +1468,101 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
 
       })
   }
+  addCompetency(id: any) {
+    if (id) {
+      // API is not available
+      const vc = _.chain(this.allCompetencies).filter(i => {
+        return i.id === id
+      }).first().value()
 
+      if (vc) {
+        const value = this.contentForm.controls.competencies.value || []
+        const tempObj = {
+          id: vc.id,
+          name: vc.name,
+          description: vc.description,
+          competencyType: vc.additionalProperties.competencyType,
+        }
+        if (this.canPush(value, tempObj)) {
+          value.push(tempObj)
+          this.contentForm.controls.competencies.setValue(value)
+          this.refreshData()
+        }
+      }
+    }
+  }
+  removeCompetency(id: any): void {
+    const index = _.findIndex(this.contentForm.controls.competencies.value, { id: id })
+    this.contentForm.controls.competencies.value.splice(index, 1)
+    this.contentForm.controls.competencies.setValue(this.contentForm.controls.competencies.value)
+    this.refreshData()
+  }
+  view(item?: NSCompetencie.ICompetencie) {
+    const dialogRef = this.dialog.open(CompetenceViewComponent, {
+      // minHeight: 'auto',
+      width: '80%',
+      panelClass: 'remove-pad',
+      data: item,
+    })
+    const instance = dialogRef.componentInstance
+    instance.isUpdate = true
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response && response.action === 'ADD') {
+        this.addCompetency(response.id)
+        // this.refreshData(this.currentActivePage)
+      } else if (response && response.action === 'DELETE') {
+        this.removeCompetency(response.id)
+      }
+    })
+  }
+  searchKey = ''
+  selectedId = ''
+  filteredCompetencies!: NSCompetencie.ICompetencie[]
+  queryControl = new FormControl('')
+  allCompetencies!: NSCompetencie.ICompetencie[]
+  updateQuery(key: string) {
+    this.searchKey = key
+    this.refreshData()
+  }
+
+  reset() {
+    this.searchKey = ''
+    this.queryControl.setValue('')
+    this.selectedId = ''
+    this.refreshData()
+  }
+
+  resetSearch() {
+    this.reset()
+    // this.refreshData()
+  }
+  setSelectedCompetency(id: string) {
+    this.selectedId = id
+  }
+  refreshData() {
+    const searchJson = [
+      { type: 'COMPETENCY', field: 'name', keyword: this.searchKey },
+      { type: 'COMPETENCY', field: 'status', keyword: 'VERIFIED' },
+    ]
+    const searchObj = {
+      searches: searchJson,
+    }
+    this.comptncySvc.fetchCompetency(searchObj).subscribe((reponse: NSCompetencie.ICompetencieResponse) => {
+      if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
+        let data = reponse.responseData
+        this.allCompetencies = reponse.responseData
+        const comp = this.contentForm.get("competencies")
+        if (comp && comp.value && comp.value.length > 0) {
+          data = _.flatten(_.map(comp.value, item => {
+            return _.filter(reponse.responseData, i => i.id === item.id)
+          }))
+          this.filteredCompetencies = reponse.responseData.filter(obj => {
+            return data.indexOf(obj) === -1
+          })
+        } else {
+          this.filteredCompetencies = reponse.responseData
+        }
+      }
+    })
+  }
 }

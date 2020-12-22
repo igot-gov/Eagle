@@ -3,7 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
 import { FormGroup, FormBuilder } from '@angular/forms'
 import { MatChipInputEvent, MatSnackBar } from '@angular/material'
-// import { InterestService } from '../../../../../../../../../app/src/lib/routes/profile/routes/interest/services/interest.service'
+import { CompetenceService } from '../../services/competence.service'
+
 export interface IDialogData {
   animal: string
   name: string
@@ -28,7 +29,7 @@ export class CompetencyAddPopUpComponent implements OnInit {
     public dialogRef: MatDialogRef<CompetencyAddPopUpComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IDialogData,
     private formBuilder: FormBuilder,
-    // private interestService: InterestService,
+    private interestService: CompetenceService,
     private snackBar: MatSnackBar,
   ) {
   }
@@ -38,7 +39,7 @@ export class CompetencyAddPopUpComponent implements OnInit {
       category: [],
       question: [],
       description: [],
-      tags: [],
+      // tags: [],
     })
   }
 
@@ -85,33 +86,33 @@ export class CompetencyAddPopUpComponent implements OnInit {
     }
     this.uploadSaveData = true
     this.showErrorMsg = false
-    // const postCreateReq = {
-    //   type: 'COMPETENCY',
-    //   name: form.value.question,
-    //   description: form.value.description,
-    //   additionalProperties: {
-    //     competencyType: form.value.category,
-    //   },
-    //   source: form.value.tags,
-    // }
-    // this.interestService.createPost(postCreateReq).subscribe(
-    //   () => {
-    //     form.reset()
-    //     this.uploadSaveData = false
-    //     // this.openSnackbar(this.toastSuccess.nativeElement.value)
-    this.openSnackbar('Competency Request created succesfully! Please wait for reviewer to approve it')
-    //     this.dialogRef.close('postCreated')
-    //   },
-    //   err => {
-    //     this.openSnackbar(this.toastError.nativeElement.value)
-    //     this.uploadSaveData = false
-    //     if (err) {
-    //       if (err.error && err.error.message) {
-    //         this.showErrorMsg = true
-    //         this.createErrorMsg = err.error.message.split('|')[1] || this.defaultError
-    //       }
-    //     }
-    //   })
+    const postCreateReq = {
+      type: 'COMPETENCY',
+      name: form.value.question,
+      description: form.value.description,
+      additionalProperties: {
+        competencyType: form.value.category,
+      },
+    }
+    // source: form.value.tags,
+    this.interestService.createPost(postCreateReq).subscribe(
+      () => {
+        form.reset()
+        this.uploadSaveData = false
+        // this.openSnackbar(this.toastSuccess.nativeElement.value)
+        this.openSnackbar('Competency Request created succesfully! Please wait for reviewer to approve it')
+        this.dialogRef.close('postCreated')
+      },
+      err => {
+        this.openSnackbar(this.toastError.nativeElement.value)
+        this.uploadSaveData = false
+        if (err) {
+          if (err.error && err.error.message) {
+            this.showErrorMsg = true
+            this.createErrorMsg = err.error.message.split('|')[1] || this.defaultError
+          }
+        }
+      })
   }
 
   private openSnackbar(primaryMsg: string, duration: number = 5000) {

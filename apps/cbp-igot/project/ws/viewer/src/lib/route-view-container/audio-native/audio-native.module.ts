@@ -13,17 +13,17 @@ import {
 import { WidgetResolverModule } from '@ws-widget/resolver'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
   UserContentRatingModule,
   BtnContentFeedbackV2Module,
-  PlayerBriefModule,
+  // PlayerBriefModule,
 } from '@ws-widget/collection'
 
 import {
@@ -42,12 +42,12 @@ import { AudioNativeComponent } from './audio-native.component'
   declarations: [AudioNativeComponent],
   imports: [
     AudioNativePluginModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentFeedbackV2Module,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     CommonModule,
     DefaultThumbnailModule,
@@ -66,7 +66,7 @@ import { AudioNativeComponent } from './audio-native.component'
     UserImageModule,
     WidgetResolverModule,
     PipeSafeSanitizerModule,
-    PlayerBriefModule,
+    // PlayerBriefModule,
   ],
   exports: [AudioNativeComponent],
 })

@@ -15,7 +15,7 @@
       </mat-icon>
       <img [src]="option.icon" *ngIf="option.icon.length > 15" [id]="'content_' + option.name"
         class="new-img ws-mat-primary-text" [alt]="option.name" [title]="option.name" />
-      <ng-container>{{ option.name }}</ng-container>
+      <ng-container><span class="mat-subheading-2 margin-0">{{ option.name }}</span></ng-container>
       <ws-auth-collection-matmenu [type]="type" [childType]="option.children"
         (action)="click($event.action, $event.type)" #child></ws-auth-collection-matmenu>
     </button>
@@ -28,7 +28,7 @@
         *ngIf="!(option.name === 'Resource' || option.name === 'Module' || option.name === 'Course' || option.name === 'Program')"
         aria-hidden="false" class="node-icon ws-mat-primary-text">{{
         option.icon
-      }}</mat-icon>
+        }}</mat-icon>
       <mat-icon *ngIf="option.name === 'Resource'" class="mr-1 custom-icon resource rotate-90">{{ option.icon }}
       </mat-icon>
       <mat-icon *ngIf="option.name === 'Module'" class="mr-1 custom-icon module rotate-90">{{ option.icon }}
@@ -39,7 +39,7 @@
       </mat-icon>
       <!-- <img [src]="option.icon" *ngIf="option.icon.length > 15" [id]="'content_' + option.name"
         class="new-img ws-mat-primary-text" [alt]="option.name" [title]="option.name" /> -->
-      <ng-container>{{ option.name }}</ng-container>
+      <ng-container><span class="mat-subheading-2 margin-0">{{ option.name }}</span></ng-container>
     </button>
   </ng-container>
 </mat-menu>

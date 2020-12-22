@@ -12,17 +12,17 @@ import {
 } from '@angular/material'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
   UserContentRatingModule,
   BtnContentFeedbackV2Module,
-  PlayerBriefModule,
+  // PlayerBriefModule,
 } from '@ws-widget/collection'
 
 import {
@@ -39,11 +39,11 @@ import { YoutubeComponent } from './youtube.component'
   declarations: [YoutubeComponent],
   imports: [
     RouterModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     CommonModule,
     DisplayContentTypeModule,
@@ -60,7 +60,7 @@ import { YoutubeComponent } from './youtube.component'
     WidgetResolverModule,
     UserContentRatingModule,
     BtnContentFeedbackV2Module,
-    PlayerBriefModule,
+    // PlayerBriefModule,
   ],
   exports: [
     YoutubeComponent,

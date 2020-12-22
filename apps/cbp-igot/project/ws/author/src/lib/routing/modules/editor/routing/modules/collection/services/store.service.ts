@@ -48,7 +48,7 @@ export class CollectionStoreService {
     private resolver: CollectionResolverService,
     private authInitService: AuthInitService,
     private logger: LoggerService,
-  ) {}
+  ) { }
 
   treeStructureChange = new BehaviorSubject<IContentNode | null>(null)
   selectedNodeChange = new BehaviorSubject<number | null>(null)
@@ -67,8 +67,8 @@ export class CollectionStoreService {
         this.contentService.getUpdatedMeta(dropNode.identifier),
         dropNode.parentId
           ? this.contentService.getUpdatedMeta(
-              (this.flatNodeMap.get(dropNode.parentId) as IContentNode).identifier,
-            )
+            (this.flatNodeMap.get(dropNode.parentId) as IContentNode).identifier,
+          )
           : undefined,
       )
     ) {
@@ -178,11 +178,12 @@ export class CollectionStoreService {
     dropNode: IContentTreeNode,
     adjacentId?: number,
     dropLocation: 'above' | 'below' = 'below',
+    name: string = 'Untitled Content'
   ): Promise<boolean> {
     try {
       const meta = this.authInitService.creationEntity.get(type) as ICreateEntity
       const requestBody = {
-        name: 'Untitled Content',
+        name: name,
         description: '',
         mimeType: meta.mimeType,
         contentType: meta.contentType,
@@ -337,8 +338,7 @@ export class CollectionStoreService {
         const children = contentNode.children || []
         if (childConfig.minChildren && children.length < childConfig.minChildren) {
           errorMsg.push(
-            `Minimum ${childConfig.minChildren} children is required. But ${
-              children.length ? children.length : 'nothing'
+            `Minimum ${childConfig.minChildren} children is required. But ${children.length ? children.length : 'nothing'
             } present`,
           )
         }
@@ -404,9 +404,8 @@ export class CollectionStoreService {
     if (condition.fit) {
       condition.fit.forEach((subCondition: any, majorIndex: number) => {
         Object.keys(subCondition).forEach((v: any, index: number) => {
-          returnValue = `${returnValue}${majorIndex > 0 ? ' or ' : ''}${
-            index > 0 ? ' ' : ''
-          }${v} in ${subCondition[v].join(' or ')}`
+          returnValue = `${returnValue}${majorIndex > 0 ? ' or ' : ''}${index > 0 ? ' ' : ''
+            }${v} in ${subCondition[v].join(' or ')}`
         })
       })
     }
@@ -446,7 +445,7 @@ export class CollectionStoreService {
       errorId.add(id)
       if (errorMap.has(id)) {
         // tslint:disable-next-line: semicolon    // tslint:disable-next-line: whitespace
-        ;(errorMap.get(id) as IProcessedError).message = (errorMap.get(
+        ; (errorMap.get(id) as IProcessedError).message = (errorMap.get(
           id,
         ) as IProcessedError).message.concat(errorMsg)
       } else {

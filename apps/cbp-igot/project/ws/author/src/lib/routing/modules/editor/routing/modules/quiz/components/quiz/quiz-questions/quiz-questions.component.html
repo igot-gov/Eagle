@@ -1,23 +1,23 @@
-<mat-card class="margin-top-xl" id="auth-quiz">
-  <mat-card-title class="m-auto ws-mat-default-text">
+<mat-card class="" id="auth-quiz">
+  <!-- <mat-card-title class="m-auto ws-mat-default-text">
     <span>Assessment</span>
     <ng-container [ngTemplateOutlet]="top"></ng-container>
-  </mat-card-title>
+  </mat-card-title> -->
   <mat-card-content class="card-contan">
     <div class="flex flex-1 mat-app-background mb-10 br-8">
-      <div class="flex flex-1 margin-top-xl margin-right-xl">
+      <div class="flex flex-1  margin-right-xl">
         <ng-container *ngIf="contentLoaded">
           <div class="flex justify-between">
             <button (click)="sideNavBar.toggle()" *ngIf="mediumScreenSize" mat-icon-button>
               <mat-icon>menu</mat-icon>
             </button>
           </div>
-          <mat-sidenav-container autosize="true" class="flex flex-1 nav-container quiz-list mr-8">
+          <mat-sidenav-container autosize="true" class="flex flex-1 nav-container quiz-list">
             <mat-sidenav #sideNavBar class="h-full custom-scroll" [mode]="mode$ | async" [(opened)]="sideNavBarOpened">
               <ws-auth-question-editor-sidebar [showContent]="showContent" [type]="'assessment'" [(data)]="questionsArr"
                 [canEdit]="canEditJson"></ws-auth-question-editor-sidebar>
             </mat-sidenav>
-            <mat-sidenav-content>
+            <mat-sidenav-content class="flex-1">
               <div *ngIf="questionsArr.length">
                 <mat-card-title
                   class="w-full h-6 text-center ws-mat-primary-background text-white h-12 rounded flex items-center justify-center"
@@ -59,12 +59,15 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <div class="flex flex-end  margin-bottom-xl margin-right-s">
+    <div class="flex margin-bottom-xl margin-right-s">
       <!-- matStepperNext -->
-      <button type="button" mat-button class="ws-mat-primary-background margin-top-m m-auto"
+      <!-- <button type="button" mat-button class="ws-mat-primary-background margin-top-m m-auto"
         (click)="action('saveAndNext')">
-        <!-- <mat-icon class="text-white">file_upload</mat-icon> -->
-        <b class="text-white" i18n>Save and Proceed</b>
+         <b class="text-white" i18n>Save and Proceed</b>
+      </button> -->
+      <button mat-raised-button type="button" style="line-height: 48px;"
+        class="text-white ws-mat-primary-background margin-left-s" (click)="action('saveAndNext')">
+        <span class="mat-subheading-2 padding-xs" i18n style="vertical-align: unset;">Next: Content settings</span>
       </button>
     </div>
   </mat-card-actions>

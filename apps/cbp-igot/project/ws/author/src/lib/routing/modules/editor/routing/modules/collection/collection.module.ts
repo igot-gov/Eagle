@@ -18,6 +18,7 @@ import { WebPageModule } from '../web-page/web-page.module'
 import { QuizModule } from '../quiz/quiz.module'
 import { MatTabsModule } from '@angular/material'
 import { CreateModule } from '../../../../create/create.module'
+import { PickNameComponent } from './components/auth-table-of-contents/pick-name/pick-name.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CreateModule } from '../../../../create/create.module'
     AuthEditorOptionsComponent,
     AuthTableTreeLabelComponent,
     AuthCollectionMatmenuComponent,
+    PickNameComponent,
   ],
   imports: [
     CommonModule,
@@ -42,5 +44,6 @@ import { CreateModule } from '../../../../create/create.module'
     QuizModule,
     CreateModule,
   ],
+  entryComponents: [PickNameComponent]
 })
 export class CollectionModule { }

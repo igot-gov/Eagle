@@ -15,17 +15,17 @@ import {
 } from '@angular/material'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
   UserContentRatingModule,
   BtnContentFeedbackV2Module,
-  PlayerBriefModule,
+  // PlayerBriefModule,
 } from '@ws-widget/collection'
 
 import {
@@ -43,11 +43,11 @@ import {
     PipeDurationTransformModule,
     PipeLimitToModule,
     PipePartialContentModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     DisplayContentTypeModule,
     UserImageModule,
@@ -59,7 +59,7 @@ import {
     MatChipsModule,
     UserContentRatingModule,
     BtnContentFeedbackV2Module,
-    PlayerBriefModule,
+    // PlayerBriefModule,
   ],
   exports: [IapComponent],
 })

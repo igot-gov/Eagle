@@ -1,10 +1,10 @@
 <div class="buttons">
   <!-- new-style-grid  -->
   <div class="cursor-pointer" (click)="toggleSettingButtons()">
-    <button mat-button class="padding-remove ws-mat-auth-tool-option mat-app-background setting_btn">
+    <button mat-button class="flex padding-remove ws-mat-auth-tool-option mat-app-background setting_btn">
       <mat-icon *ngIf="showSettingButtons">close</mat-icon>
       <mat-icon *ngIf="!showSettingButtons">menu</mat-icon>
-      <!-- <span> {{!showSettingButtons?'Options' :'Close'}}</span> -->
+      <span class="mat-subheading-2 margin-left-xs">Options</span>
     </button>
     <!-- <p class="mat-h5 margin-remove button-text padding-remove-top" *ngIf="showSettingButtons">
           Close

@@ -14,9 +14,20 @@
   padding-left: 3px;
 }
 
+.relative {
+  /* min-height: auto; */
+  position: absolute;
+  display: block !important;
+  top: 70px;
+  right: 32px;
+  /* background: red; */
+  /* border: 24px solid black; */
+
+}
+
 .sticky {
   position: sticky;
-  top: 50px;
+  // top: 50px;
 }
 
 .close-preview {

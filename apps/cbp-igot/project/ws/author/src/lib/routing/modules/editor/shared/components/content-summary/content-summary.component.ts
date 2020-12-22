@@ -7,6 +7,9 @@ import { NSISelfCuration } from '../../../../../../interface/self-curation'
 import { SelfCurationService } from '../../services/self-curation.service'
 import { EditorContentService } from '../../../services/editor-content.service'
 import { MyTocService } from '../../../../home/components/content-detail/services/my-toc.service'
+import { ContentQualityService } from '../../services/content-quality.service'
+import { NSIQuality } from '../../../../../../interface/content-quality'
+import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
 /* tslint:enable */
 @Component({
   selector: 'ws-auth-content-summary',
@@ -21,6 +24,8 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
   @Input() stage = 1
   @Input() type = ''
   @Input() parentContent: string | null = null
+  contentQualityPercent = '0'
+  contentQualityData!: NSIQuality.IQualityResponse
   tocStructure: IAtGlanceComponentData.ICounts | null = null
   // qualityForm!: FormGroup
   currentContent!: string
@@ -28,7 +33,9 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
   constructor(
     private contentService: EditorContentService,
     private curationService: SelfCurationService,
-    private myTocService: MyTocService
+    private myTocService: MyTocService,
+    private cqs: ContentQualityService,
+    private _configurationsService: ConfigurationsService,
 
   ) {
     this.fetchContentMeta()
@@ -38,10 +45,29 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
     this.resetAndFetchTocStructure()
   }
 
+
   fetchContentMeta() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
       this.contentMeta = this.contentService.getUpdatedMeta(data)
+      this.contentQualityData = this.cqs.getScore(data)
+      if (this.contentQualityData) {
+        this.contentQualityPercent = ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+      } else if (this._configurationsService.userProfile) {
+        this.contentQualityPercent = "0"
+        const params = {
+          getLatestRecordEnabled: true,
+          resourceId: data,
+          resourceType: 'content',
+          userId: this._configurationsService.userProfile.userId,
+        }
+        this.cqs.fetchresult(params).subscribe(response => {
+          if (response && _.get(response, 'result')) {
+            this.contentQualityData = this.cqs.getScore(data)
+            this.contentQualityPercent = ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+          }
+        })
+      }
       this.fetchSelfCurationProgress()
     })
   }

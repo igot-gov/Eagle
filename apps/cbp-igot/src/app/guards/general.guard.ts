@@ -101,7 +101,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (!requiredRolePreset) {
-        return this.router.parseUrl('/author')
+        return this.router.parseUrl('/author/home')
       }
     }
 
@@ -112,7 +112,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (requiredFeaturesMissing) {
-        return this.router.parseUrl('/author')
+        return this.router.parseUrl('/author/home')
       }
     }
 

@@ -58,51 +58,24 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <div class="flex flex-1 flex-column">
+        <!-- <div class="flex flex-1 flex-column">
           <p class="margin-remove-bottom">
             Source
-          </p>
-          <!-- <mat-form-field appearance="outline" class="margin-top-xs"
-            [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
-            <input matInput formControlName="tags" #tags maxlength="1000" i18n-placeholder
-              placeholder="Enter tags here between 3 to 24 characters each " [required]="false" />
-          </mat-form-field> -->
-          <!-- <mat-form-field appearance="outline" class="margin-top-xs"
-            [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
-            <mat-chip-list #postTags>
-              <mat-chip *ngFor="let tag of postTagsArray" [selectable]="true" [removable]="true"
-                (removed)="removePersonalInterests(tag)">
-                {{ tag }}
-                <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip>
-            </mat-chip-list>
-            <input matInput i18n-placeholder="Enter tags here between 3 to 24 characters each"
-              placeholder="Enter tags here between 3 to 24 characters each" formControlName="tags" i18n-aria-label
-              aria-label="Enter tags" [matChipInputFor]="postTags" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              maxlength="24" (matChipInputTokenEnd)="addPersonalInterests($event)" class="w-full-imp"
-              [required]="false" />
-          </mat-form-field> -->
-          <mat-form-field appearance="outline" class="margin-top-l"
+          </p> -->
+
+
+        <!-- <mat-form-field appearance="outline" class="margin-top-l"
             [ngClass]="{ 'mat-form-field-invalid': showError('tags') }">
             <mat-label>Compentency Source</mat-label>
             <input matInput formControlName="tags" #tags maxlength="1000" i18n-placeholder placeholder=""
-              [required]="true" />
-            <!-- <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint> -->
-            <mat-error *ngIf="showError('tags')" i18n="question Error|Explains question is required">
+              [required]="true" /> -->
+        <!-- <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint> -->
+        <!-- <mat-error *ngIf="showError('tags')" i18n="question Error|Explains question is required">
               Compentency Source is Mandatory
             </mat-error>
-          </mat-form-field>
-        </div>
-        <!-- <div class="flex flex-1 flex-column">
-          <p class="margin-remove-bottom">
-            Suggested tags
-          </p>
-          <div class="margin-top-xs">
-            <span *ngFor="let t of allTags">
-              {{t.value}}
-            </span>
-          </div>
-        </div> -->
+          </mat-form-field> -->
+        <!-- </div> -->
+
         <div *ngIf="showErrorMsg">
           <mat-error>
             {{createErrorMsg}}

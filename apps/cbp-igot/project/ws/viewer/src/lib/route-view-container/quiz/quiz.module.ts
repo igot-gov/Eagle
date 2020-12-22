@@ -13,18 +13,18 @@ import {
 } from '@angular/material'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
   UserContentRatingModule,
   BtnContentFeedbackV2Module,
   BtnPageBackModule,
-  PlayerBriefModule,
+  // PlayerBriefModule,
 } from '@ws-widget/collection'
 
 import {
@@ -53,11 +53,11 @@ import { QuizModule as QuizPluginModule } from '../../plugins/quiz/quiz.module'
     MatChipsModule,
     MatIconModule,
     MatSnackBarModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     DisplayContentTypeModule,
     UserImageModule,
@@ -68,7 +68,7 @@ import { QuizModule as QuizPluginModule } from '../../plugins/quiz/quiz.module'
     UserContentRatingModule,
     BtnContentFeedbackV2Module,
     BtnPageBackModule,
-    PlayerBriefModule,
+    // PlayerBriefModule,
   ],
   exports: [
     QuizComponent,

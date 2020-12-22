@@ -11,11 +11,11 @@ import {
 import { WidgetResolverModule } from '@ws-widget/resolver'
 
 import {
-  BtnContentDownloadModule,
-  BtnContentFeedbackModule,
+  // BtnContentDownloadModule,
+  // BtnContentFeedbackModule,
   BtnContentLikeModule,
-  BtnContentShareModule,
-  BtnGoalsModule,
+  // BtnContentShareModule,
+  // BtnGoalsModule,
   BtnPlaylistModule,
   DisplayContentTypeModule,
   UserImageModule,
@@ -39,12 +39,12 @@ import { AudioNativeComponent } from './audio-native.component'
   declarations: [AudioNativeComponent],
   imports: [
     AudioNativeViewContainerModule,
-    BtnContentDownloadModule,
-    BtnContentFeedbackModule,
+    // BtnContentDownloadModule,
+    // BtnContentFeedbackModule,
     BtnContentFeedbackV2Module,
     BtnContentLikeModule,
-    BtnContentShareModule,
-    BtnGoalsModule,
+    // BtnContentShareModule,
+    // BtnGoalsModule,
     BtnPlaylistModule,
     CommonModule,
     DefaultThumbnailModule,

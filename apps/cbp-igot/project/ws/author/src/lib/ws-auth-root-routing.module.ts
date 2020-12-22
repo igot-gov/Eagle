@@ -12,31 +12,12 @@ import { InitResolver } from './services/init-resolve.service'
 
 const routes: Routes = [
   {
-    path: '',
-    component: AuthHomeComponent,
-    resolve: {
-      script: InitResolver,
-    },
-    redirectTo: 'my-content',
-  },
-  {
     path: 'home',
     component: AuthHomeComponent,
     resolve: {
       script: InitResolver,
     },
-    redirectTo: 'my-content',
   },
-  // {
-  //   path: 'my-content',
-  //   loadChildren: () => import('./routing/modules/home/home.module').then(u => u.HomeModule),
-  //   data: {
-  //     load: ['ordinals', 'ckeditor', 'meta'],
-  //   },
-  //   resolve: {
-  //     script: InitResolver,
-  //   },
-  // },
   {
     path: 'editor',
     loadChildren: () => import('./routing/modules/editor/editor.module').then(u => u.EditorModule),
@@ -56,15 +37,27 @@ const routes: Routes = [
       contents: ContentAndDataReadMultiLangTOCResolver,
     },
   },
-  // {
-  //   path: 'my-content',
-  //   loadChildren: () =>
-  //     import('./routing/modules/my-content/my-content.module').then(u => u.MyContentModule),
-  //   data: { load: ['ordinals', 'meta'] },
-  //   resolve: {
-  //     script: InitResolver,
-  //   },
-  // },
+  {
+    path: 'my-content',
+    loadChildren: () =>
+      import('./routing/modules/my-content/my-content.module').then(u => u.MyContentModule),
+    data: { load: ['ordinals', 'meta'] },
+    resolve: {
+      script: InitResolver,
+    },
+  },
+  {
+    path: 'create-content',
+    data: {
+      load: ['create', 'ordinals'],
+      requiredFeatures: ['authoring'],
+    },
+    canActivate: [GeneralGuard],
+    component: CreateComponent,
+    resolve: {
+      script: InitResolver,
+    },
+  },
   {
     path: 'create',
     data: {

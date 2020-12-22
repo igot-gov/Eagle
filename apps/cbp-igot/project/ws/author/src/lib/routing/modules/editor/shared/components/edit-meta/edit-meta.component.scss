@@ -23,6 +23,19 @@
   padding: $size-m;
 }
 
+.tag {
+  display: flex;
+  width: auto;
+  min-width: max-content;
+  min-height: 56px;
+  justify-content: space-between;
+  margin: $size-l $size-m;
+  align-items: center;
+  text-transform: capitalize;
+  padding: 5px 15px;
+  // border-radius: 20px 5px 5px 20px;
+}
+
 .tgl-group {
   flex-direction: row;
   border: none !important;
