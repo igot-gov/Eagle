@@ -63,7 +63,7 @@ proxiesV8.use('/sunbirdigot/*',
 )
 
 proxiesV8.use('/action/content/v3/upload/*',
-  proxyCreatorUpload(express.Router(), `http://content-service:9000`)
+  proxyCreatorUpload(express.Router(), `http://knowledge-mw-service:5000`)
 )
 
 proxiesV8.use('/action/*',
