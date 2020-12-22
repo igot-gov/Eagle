@@ -1,6 +1,7 @@
 import axios from 'axios'
 import express from 'express'
 import { NextFunction, Request, Response } from 'express'
+import { axiosRequestConfig } from '../configs/request.config'
 import { CONSTANTS } from '../utils/env'
 import { logError, logInfo } from '../utils/logger'
 import { extractUserIdFromRequest } from '../utils/requestExtract'
@@ -9,14 +10,18 @@ export const portalApi = express.Router()
 
 const API_END_POINTS = {
     accessValidator: (keyWord: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/${keyWord}/isAdmin`,
+    addUserInDept: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/userrole`,
     deptApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department`,
     deptByIdApi: (deptId: string, isUserInfoRequired: boolean) =>
-        `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}/?allUsers=${isUserInfoRequired}`,
+        `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}?allUsers=${isUserInfoRequired}`,
     deptType: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType`,
     deptTypeByName: (deptType: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentType/${deptType}`,
     deptTypeByTypeId: (deptTypeId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeById/${deptTypeId}`,
     getDeptTypeName: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/departmentTypeName`,
-    myDeptApi: `${CONSTANTS.SB_EXT_API_BASE_2}/portal/mydepartment`,
+    isDeptAdmin: (userId: string, deptId: string) =>
+        `${CONSTANTS.SB_EXT_API_BASE_2}/portal/department/${deptId}/user/${userId}/isAdmin`,
+    myDeptApi: (isUserInfoRequired: boolean) =>
+        `${CONSTANTS.SB_EXT_API_BASE_2}/portal/mydepartment?allUsers=${isUserInfoRequired}`,
 }
 
 const portalValidator = async function validatePortalAccess(req: Request, res: Response, next: NextFunction) {
@@ -62,6 +67,29 @@ const failedToProcess = 'Failed to process the request.'
 const badRequest = 'Bad request. UserId is a mandatory header'
 const department = '/department'
 const departmentType = '/departmentType'
+
+portalApi.post('/deptAction/:deptId/userrole', async (req, res) => {
+    const userId = req.headers.wid as string
+    const deptId = req.params.deptId
+    try {
+        const resp = await axios.get(API_END_POINTS.isDeptAdmin(userId, deptId))
+        const hasAccess = JSON.parse(resp.data)
+        if (hasAccess) {
+            const response = await axios.post(API_END_POINTS.addUserInDept, req.body)
+            res.status(response.status).send(response.data)
+        } else {
+            logInfo('Need to throw 403 error')
+            res.status(400).send('Access Denied')
+        }
+    } catch (err) {
+        logError(failedToProcess + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
 
 portalApi.get('/isAdmin/:deptType', async (req, res) => {
     const userId = req.headers.wid as string
@@ -125,6 +153,27 @@ portalApi.get('/departmentTypeById/:deptTypeId', async (req, res) => {
 portalApi.get('/departmentTypeName', async (req, res) => {
     try {
         const response = await axios.get(API_END_POINTS.getDeptTypeName)
+        res.status(response.status).send(response.data)
+    } catch (err) {
+        logError(failedToProcess + req.originalUrl + err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: unknownError,
+            }
+        )
+    }
+})
+
+portalApi.get('/mydepartment', async (req, res) => {
+    try {
+        let isUserInfoRequired = req.query.allUsers as boolean
+        if (!isUserInfoRequired) {
+            isUserInfoRequired = false
+        }
+        const response = await axios.get(API_END_POINTS.myDeptApi(isUserInfoRequired), {
+            ...axiosRequestConfig,
+            headers: req.headers,
+        })
         res.status(response.status).send(response.data)
     } catch (err) {
         logError(failedToProcess + req.originalUrl + err)
