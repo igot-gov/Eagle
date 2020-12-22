@@ -429,12 +429,8 @@ export class FileUploadComponent implements OnInit {
 
   startgetProfanityAPI() {
     this.profanityService.getProfanity(this.profanityAPIData).subscribe(data => {
-      // tslint:disable-next-line:no-console
-      console.log(data)
-      this.profanityData = data
+      this.profanityData = data[(data.length)-1]
       if (this.profanityData !== null && this.profanityData !== undefined) {
-        // tslint:disable-next-line:no-console
-        console.log(this.profanityData.completed)
         if (this.profanityData.completed) {
           this.loaderService.changeLoad.next(false)
           this.startProfanityPopup()
