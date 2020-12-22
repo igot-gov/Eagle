@@ -18,9 +18,9 @@ public interface PortalService {
 
 	List<UserDepartmentInfo> getUserDepartments(String userId);
 
-	UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole);
+	UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole) throws Exception;
 
-	Boolean checkAdminPrivilage(Integer deptId, String userId);
+	Boolean checkAdminPrivilage(Integer deptId, String userId) throws Exception;
 
 	Boolean checkMdoAdminPrivilage(String deptKey, String userId) throws Exception;
 

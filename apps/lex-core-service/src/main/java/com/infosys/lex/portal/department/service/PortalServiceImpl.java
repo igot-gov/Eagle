@@ -142,7 +142,7 @@ public class PortalServiceImpl implements PortalService {
 			existingDept.setDescription(deptInfo.getDescription());
 			existingDept.setHeadquarters(deptInfo.getHeadquarters());
 			existingDept.setLogo(deptInfo.getLogo());
-			
+
 			existingDept = deptRepo.save(existingDept);
 			return enrichDepartmentInfo(existingDept, false, true);
 		} else {
@@ -156,7 +156,8 @@ public class PortalServiceImpl implements PortalService {
 	}
 
 	@Override
-	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole) {
+	public UserDepartmentInfo updateUserRoleInDepartment(UserDepartmentRole userDeptRole) throws Exception {
+		validateUserDepartmentRole(userDeptRole);
 		UserDepartmentRole existingRecord = userDepartmentRoleRepo.findByUserIdAndDeptIdAndDeptRoleId(
 				userDeptRole.getUserId(), userDeptRole.getDeptId(), userDeptRole.getDeptRoleId());
 		if (existingRecord != null) {
@@ -170,7 +171,7 @@ public class PortalServiceImpl implements PortalService {
 	}
 
 	@Override
-	public Boolean checkAdminPrivilage(Integer deptId, String userId) {
+	public Boolean checkAdminPrivilage(Integer deptId, String userId) throws Exception {
 		List<UserDepartmentInfo> userDeptInfoList = enrichUserDepartments(
 				userDepartmentRoleRepo.findByUserIdAndDeptId(userId, deptId));
 		for (UserDepartmentInfo userDeptInfo : userDeptInfoList) {
@@ -178,7 +179,8 @@ public class PortalServiceImpl implements PortalService {
 				return true;
 			}
 		}
-		return false;
+		// If User is not ADMIN of given dept, then check for SPV admin.
+		return checkMdoAdminPrivilage("SPV", userId);
 	}
 
 	@Override
@@ -209,7 +211,12 @@ public class PortalServiceImpl implements PortalService {
 
 			List<UserDepartmentRole> userDeptRoles = userDepartmentRoleRepo.findAllByUserIdAndDeptRoleIdIn(userId,
 					deptRoleIds);
-			retValue = !DataValidator.isCollectionEmpty(userDeptRoles);
+			for (UserDepartmentRole userDeptRole : userDeptRoles) {
+				if (userDeptRole.getUserId().equalsIgnoreCase(userId)) {
+					retValue = userDeptRole.getIsActive() && !userDeptRole.getIsBlocked();
+					break;
+				}
+			}
 
 			logger.info("checkMdoAdminPrivilage... returns : " + retValue);
 		} catch (Exception e) {
@@ -280,11 +287,12 @@ public class PortalServiceImpl implements PortalService {
 				if (isUserInfoRequired) {
 					Set<String> userIdSet = userDeptList.stream().map(i -> i.getUserId()).collect(Collectors.toSet());
 					List<String> userIds = userIdSet.stream().collect(Collectors.toList());
-					
+
 					Map<String, Object> result = userUtilService.getUsersDataFromUserIds("igot", userIds,
 							new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME,
 									PIDConstants.EMAIL, PIDConstants.DEPARTMENT_NAME)));
-					logger.info("enrichDepartmentInfo UserIds -> " + userIds.toString() + ", fetched Information -> " + result.size());
+					logger.info("enrichDepartmentInfo UserIds -> " + userIds.toString() + ", fetched Information -> "
+							+ result.size());
 					for (UserDepartmentRole userDeptRole : userDeptList) {
 						PortalUserInfo pUserInfo = new PortalUserInfo();
 						pUserInfo.setUserId(userDeptRole.getUserId());
@@ -301,10 +309,10 @@ public class PortalServiceImpl implements PortalService {
 						// Assign RoleInfo
 						DeptRoleInfo userDeptRoleInfo = deptRoleMap.get(userDeptRole.getDeptRoleId());
 						pUserInfo.setRoleInfo(userDeptRoleInfo);
-						if("ADMIN".equalsIgnoreCase(userDeptRoleInfo.getRoleName())) {
+						if ("ADMIN".equalsIgnoreCase(userDeptRoleInfo.getRoleName())) {
 							deptInfo.addAdminUser(userDeptRole);
 						}
-						
+
 						if (userDeptRole.getIsBlocked()) {
 							deptInfo.addBlockedUser(pUserInfo);
 						} else if (userDeptRole.getIsActive()) {
@@ -410,5 +418,27 @@ public class PortalServiceImpl implements PortalService {
 	private boolean validateDepartmentTypeInfo(DeptTypeInfo deptTypeInfo) {
 		return (deptTypeInfo != null) && !DataValidator.isStringEmpty(deptTypeInfo.getDeptType())
 				&& !DataValidator.isStringEmpty(deptTypeInfo.getDeptSubType());
+	}
+
+	private void validateUserDepartmentRole(UserDepartmentRole userDeptRole) throws Exception {
+		// Check User exists
+		if (!userUtilService.validateUser("igot", userDeptRole.getUserId())) {
+			throw new Exception("Invalid UserId.");
+		}
+
+		// Check department exist
+		if (!deptRepo.findById(userDeptRole.getDeptId()).isPresent()) {
+			throw new Exception("Invalid Department");
+		}
+
+		// Check DeptRole exist
+		DepartmentRole deptRole = deptRoleRepo.findById(userDeptRole.getDeptRoleId()).get();
+		if (deptRole != null) {
+			if (deptRole.getDeptId() != userDeptRole.getDeptId()) {
+				throw new Exception("Invalid Request. Department and DepartmentRoleId doesn't match.");
+			}
+		} else {
+			throw new Exception("Invalid Department Role Id");
+		}
 	}
 }

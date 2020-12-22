@@ -49,7 +49,7 @@ public class PortalController {
 	public ResponseEntity<DepartmentInfo> addDepartment(@RequestBody DepartmentInfo deptInfo) throws Exception {
 		return new ResponseEntity<DepartmentInfo>(portalService.addDepartment(deptInfo), HttpStatus.OK);
 	}
-	
+
 	@PatchMapping("/portal/department")
 	public ResponseEntity<DepartmentInfo> updateDepartment(@RequestBody DepartmentInfo deptInfo) throws Exception {
 		return new ResponseEntity<DepartmentInfo>(portalService.updateDepartment(deptInfo), HttpStatus.OK);
@@ -69,7 +69,7 @@ public class PortalController {
 
 	@GetMapping("/portal/department/{dept_id}/user/{user_id}/isAdmin")
 	public ResponseEntity<Boolean> checkAdminPrivilage(@PathVariable("dept_id") Integer deptId,
-			@PathVariable("user_id") String userId) {
+			@PathVariable("user_id") String userId) throws Exception {
 		return new ResponseEntity<Boolean>(portalService.checkAdminPrivilage(deptId, userId), HttpStatus.OK);
 	}
 
