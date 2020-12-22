@@ -269,7 +269,7 @@ detailsApi.get('/detailV2', async (req, res) => {
   }
 })
 
-detailsApi.get('/detailV3', async (req, res) => {
+detailsApi.post('/detailV3', async (req, res) => {
   const _rootOrg = req.header('rootOrg')
   const url = `${API_END_POINTS.detail}`
   try {
