@@ -740,7 +740,7 @@ export class ContentComponent implements OnInit, OnDestroy {
                 legend: i === 0 ? true : false,
                 contentUrl: cur.is_external
                   ? cur.content_url
-                  : `https://${history.domain}/app/toc/${cur.content_id}`,
+                  : `https://${history.domain}/app/toc/${cur.content_id}?primaryCategory=${cur.primaryCategory}`,
                 data: [
                   {
                     key: '0.0-0.25',

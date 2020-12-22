@@ -187,7 +187,7 @@ export class ContentStripSingleComponent extends WidgetBaseComponent
     data.forEach(v => {
       this.stripsResultDataMap.push({
         title: v.name,
-        url: `/app/toc/${v.identifier}/overview`,
+        url: `/app/toc/${v.identifier}/overview?primaryCategory=${v.primaryCategory}`,
         lastUpdatedOn: this.convertToISODate(v.lastUpdatedOn),
         target: '_self',
       })

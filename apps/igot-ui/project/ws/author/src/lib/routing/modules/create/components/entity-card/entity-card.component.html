@@ -1,6 +1,4 @@
-<div class="card-container" [ngClass]="{
-    op60: notEnabled === true
-  }">
+<div class="card-container">
   <mat-card class="mat-elevation-z6 flex flex-1 flex-column" [ngClass]="{'expanded': childEntity.length>0}">
     <div class="entity-container" [id]="entity.id" [attr.name]='entity.id' (click)="entityClicked(entity)">
       <!--  -->
@@ -28,8 +26,8 @@
       <ng-container *ngFor="let option of childEntity; let idx = index">
         <ng-container *ngIf="option.available">
           <!-- margin-left-s margin-bottom-s padding-top-s -->
-          <div class="flex flex-middle pointer mw-110" (click)="entityClicked(option)"
-            [ngClass]="{ op60: !option.enabled }" [id]="option.id" [attr.name]="option.id">
+          <div class="flex flex-middle pointer mw-110" (click)="entityClicked(option)" [id]="option.id"
+            [attr.name]="option.id">
             <mat-icon class="ws-mat-accent-text">{{ option.icon }}</mat-icon>
             <p class="ws-mat-accent-text new-font margin-left-xs margin-remove-bottom">{{ option.name }}</p>
           </div>

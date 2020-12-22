@@ -1,0 +1,29 @@
+@import 'ws-common';
+@import 'ws-vars';
+@import 'ws-mixins';
+
+.card-container {
+    height: 231px;
+    width:  268px;
+    border: 1px solid rgba(0,0,0,8%);
+}
+
+.photo-container{
+    background: #F8F4F9;
+    padding: $size-m 0;
+}
+
+.name-container{
+    padding: $size-m $size-l;
+}
+.name{
+    font-size: 16px;
+    line-height: 24px;
+    text-transform: capitalize;
+}
+.designation{
+    line-height: 21px;
+}
+.action-container{
+    padding: $size-m 0;
+}

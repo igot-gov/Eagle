@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import { createProxyServer } from 'http-proxy'
 import { extractUserIdFromRequest, extractUserToken } from '../utils/requestExtract'
+import { logInfo } from './logger'
 
 const proxyCreator = (timeout = 10000) => createProxyServer({
   timeout,
@@ -58,22 +59,67 @@ export function scormProxyCreatorRoute(route: Router, baseUrl: string): Router {
   return route
 }
 
+export function proxyCreatorLearner(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL proxyCreatorLearner', req.originalUrl)
+    const url = removePrefix('/proxies/v8/learner', req.originalUrl)
+    logInfo('Final URL: ', targetUrl + url)
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl + url,
+    })
+  })
+  return route
+}
+
 export function proxyCreatorSunbird(route: Router, targetUrl: string, _timeout = 10000): Router {
   route.all('/*', (req, res) => {
 
     // tslint:disable-next-line: no-console
     console.log('REQ_URL_ORIGINAL proxyCreatorSunbird', req.originalUrl)
-
-    const lastSlug = req.originalUrl.split('/')
-    const lastSlugId = lastSlug.pop() || ''
-    const contentId = lastSlugId.split('?')[0]
+    const url = removePrefix('/proxies/v8', req.originalUrl)
     proxy.web(req, res, {
       changeOrigin: true,
       ignorePath: true,
-      target: targetUrl + contentId,
+      target: targetUrl + url,
     })
   })
   return route
+}
+
+export function proxyCreatorKnowledge(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+    const url = removePrefix('/proxies/v8', req.originalUrl)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL proxyCreatorKnowledge', targetUrl + url)
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl + url,
+    })
+  })
+  return route
+}
+
+export function proxyCreatorUpload(route: Router, targetUrl: string, _timeout = 10000): Router {
+  route.all('/*', (req, res) => {
+    const url = removePrefix('/proxies/v8/action', req.originalUrl)
+    // tslint:disable-next-line: no-console
+    console.log('REQ_URL_ORIGINAL proxyCreatorUpload', targetUrl)
+    proxy.web(req, res, {
+      changeOrigin: true,
+      ignorePath: true,
+      target: targetUrl + url,
+    })
+  })
+  return route
+}
+
+function removePrefix(prefix: string, s: string) {
+  return s.substr(prefix.length)
 }
 
 export function proxyCreatorSunbirdSearch(route: Router, targetUrl: string, _timeout = 10000): Router {

@@ -1,39 +1,30 @@
 <div class="flex flex-col item-center">
     <div class="flex flex-col card-container">
         <div class="photo-container flex items-center justify-center cursor-pointer" (click)="goToUserProfile(user)">
-            <a href="javascript:void(0)" class="" i18n-aria-label role="link"
+            <a *ngIf="user?.photo" href="javascript:void(0)" class="" i18n-aria-label role="link"
                 aria-label="click on it to visit user profile">
+                <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
+                </ws-widget-avatar-photo>
+            </a>
+            <a *ngIf="!user?.photo" href="javascript:void(0)" class="" i18n-aria-label role="link">
                 <ws-widget-avatar-photo [name]="getUseravatarName()" [photoUrl]="user?.photo" size="m">
                 </ws-widget-avatar-photo>
             </a>
         </div>
         <div class="name-container flex flex-col width-expand">
             <a href="javascript:void(0)" class="" i18n-aria-label role="link" (click)="goToUserProfile(user)">
-                <div class="name ws-mat-black-text cursor-pointer" (click)="goToUserProfile(user)">
-                    {{user?.first_name}} {{user?.last_name}}
+                <div class="name ws-mat-black-text cursor-pointer">
+                    {{user?.name}}
                 </div>
                 <div class="designation ws-mat-black60-text">
-                    {{user?.department_name}}
+                    {{user?.department}}
                 </div>
             </a>
         </div>
         <div class="action-container flex items-center justify-center">
             <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()"
-                *ngIf="!user?.requestSent && !user?.requestRecieved && !user?.connectionEstablished">
+                (click)="connetToUser()">
                 <span class="" i18n>Connect</span>
-            </button>
-            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()" disabled *ngIf="user?.requestSent && !user?.connectionEstablished">
-                <span class="" i18n>Connection sent</span>
-            </button>
-            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()" disabled *ngIf="user?.requestRecieved && !user?.connectionEstablished">
-                <span class="" i18n>Connection received</span>
-            </button>
-            <button mat-stroked-button color="accent" type="button" class=" mat-accent-border flex-auto-display"
-                (click)="connetToUser()" disabled *ngIf="user?.connectionEstablished">
-                <span class="" i18n>Connected</span>
             </button>
         </div>
     </div>

@@ -9,7 +9,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   public base64(url: string, body: any): any {
-    if (url.startsWith(AUTHORING_BASE)) {
+    if (url.startsWith(AUTHORING_BASE) || url.startsWith('http://localhost:3003/authApi/content/v3')) {
       const sString = JSON.stringify(body)
       const aUTF16CodeUnits = new Uint16Array(sString.length)
       Array.prototype.forEach.call(aUTF16CodeUnits, (_el, idx, arr) => arr[idx] = sString.charCodeAt(idx))

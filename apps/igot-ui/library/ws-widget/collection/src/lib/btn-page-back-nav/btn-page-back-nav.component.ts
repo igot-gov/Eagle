@@ -10,7 +10,7 @@ type TUrl = undefined | 'none' | 'back' | string
 })
 export class BtnPageBackNavComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<{ url: TUrl }> {
-  @Input() widgetData: { url: TUrl, titles?: NsWidgetResolver.ITitle[] } = { url: 'none', titles: [] }
+  @Input() widgetData: { url: TUrl, titles?: NsWidgetResolver.ITitle[], queryParams?: any } = { url: 'none', titles: [], queryParams: {} }
   presentUrl = ''
   constructor(
     private btnBackSvc: BtnPageBackNavService,
@@ -59,7 +59,7 @@ export class BtnPageBackNavComponent extends WidgetBaseComponent
     }
 
     return {
-      queryParams: undefined,
+      queryParams: this.widgetData.queryParams || undefined,
       routeUrl: this.widgetData.url ? this.widgetData.url : '/app/home',
     }
   }

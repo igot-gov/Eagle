@@ -457,9 +457,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (this.configSvc.profileDetailsStatus) {
       if (this.configSvc.userProfile) {
         this.userProfileSvc.getUserdetailsFromRegistry().subscribe(
-          data => {
-            let userData = data.result.UserProfile;
-            if (data && userData.length) {
+          (data: any) => {
+            const userData = data.result.UserProfile
+            if (data && data.result && data.result.UserProfile && userData.length) {
               const academics = this.populateAcademics(userData[0])
               this.setDegreeValuesArray(academics)
               this.setPostDegreeValuesArray(academics)
@@ -468,6 +468,16 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               this.populateChips(userData[0])
               // this.userProfileData = data[0]
               this.userProfileData = userData[0]
+            } else {
+              if (this.configSvc.userProfile) {
+                this.createUserForm.patchValue({
+                  firstname: this.configSvc.userProfile.firstName,
+                  surname: this.configSvc.userProfile.lastName,
+                  primaryEmail: this.configSvc.userProfile.email,
+                  // departmentName: data[0].department_name,
+                })
+              }
+
             }
             // this.handleFormData(data[0])
           },
@@ -734,7 +744,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         employeeCode: form.value.employeeCode,
         officialPostalAddress: form.value.otherDetailsOfficeAddress,
         pinCode: form.value.otherDetailsOfficePinCode,
-        departmentName: form.value.departmentName,
+        departmentName: form.value.departmentName || 'iGOT',
       },
       professionalDetails: [
         ...this.getOrganisationsHistory(form),

@@ -42,6 +42,7 @@ import { NetworkRecommendedComponent } from './routes/network-recommended/networ
 import { NetworkConnectionRequestsComponent } from './routes/network-connection-requests/network-connection-requests.component'
 import { ConnectionRequestResolveService } from './resolvers/connection-request-resolve.service'
 import { ConnectionSearchCardComponent } from './components/connection-search-card/connection-search-card.component'
+import { ConnectionRecommendedCardComponent } from './components/connection-recommended-card/connection-recommended-card.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ConnectionSearchCardComponent } from './components/connection-search-ca
     NetworkRecommendedComponent,
     NetworkConnectionRequestsComponent,
     ConnectionSearchCardComponent,
+    ConnectionRecommendedCardComponent,
   ],
   imports: [
     CommonModule,

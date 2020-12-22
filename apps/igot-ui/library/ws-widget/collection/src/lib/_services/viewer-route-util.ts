@@ -53,6 +53,7 @@ export function viewerRouteGenerator(
   collectionId?: string,
   collectionType?: string,
   forPreview = false,
+  primaryCategory?: string
 ): { url: string; queryParams: { [key: string]: any } } {
   let collId = collectionId
   let collType = collectionType
@@ -62,8 +63,13 @@ export function viewerRouteGenerator(
   }
   const url = `${forPreview ? '/author' : ''}/viewer/${VIEWER_ROUTE_FROM_MIME(mimeType)}/${id}`
   let queryParams = {}
+  if (primaryCategory) {
+    queryParams = {
+      primaryCategory,
+    }
+  }
   if (collectionId && collectionType) {
-    queryParams = { collectionId: collId, collectionType: collType }
+    queryParams = { ...queryParams, collectionId: collId, collectionType: collType }
   }
   return {
     queryParams,

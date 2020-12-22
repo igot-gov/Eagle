@@ -1,6 +1,6 @@
 import { APP_BASE_HREF } from '@angular/common'
 // import { retry } from 'rxjs/operators'
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { MatIconRegistry } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
@@ -35,6 +35,7 @@ interface IFeaturePermissionConfigs {
 
 const endpoint = {
   profilePid: '/apis/proxies/v8/api/user/v2/read',
+  profileV2: '/apis/protected/v8/user/profileRegistry/getUserRegistryById',
   details: `/apis/protected/v8/user/details?ts=${Date.now()}`,
 }
 
@@ -43,6 +44,13 @@ const endpoint = {
 })
 export class InitService {
   private baseUrl = this.configSvc.baseUrl
+
+  httpOptions = {
+    headers: new HttpHeaders({
+      wid: 'cc0c1749-4c47-49c8-9f46-2bbdd42ef877',
+    }),
+  }
+
   constructor(
     private logger: LoggerService,
     private configSvc: ConfigurationsService,
@@ -125,6 +133,7 @@ export class InitService {
       // if (this.configSvc.userPreference.profileSettings) {
       //   this.configSvc.profileSettings = this.configSvc.userPreference.profileSettings
       // }
+      await this.fetchUserProfileV2()
       const appsConfigPromise = this.fetchAppsConfig()
       const instanceConfigPromise = this.fetchInstanceConfig() // config: depends only on details
       const widgetStatusPromise = this.fetchWidgetStatus() // widget: depends only on details & feature
@@ -255,10 +264,11 @@ export class InitService {
           email: userPidProfile.result.response.email,
           givenName: userPidProfile.result.response.firstName,
           userId: userPidProfile.result.response.userId,
+          firstName: userPidProfile.result.response.firstName,
+          lastName: userPidProfile.result.response.lastName,
 
-          userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}
-          ${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '
-            }`,
+          // tslint:disable-next-line: max-line-length
+          userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '}`,
           dealerCode: null,
           isManager: false,
           // departmentName: userPidProfile.user.department_name || '',
@@ -278,6 +288,50 @@ export class InitService {
           //     ? userPidProfile.user.json_unmapped_fields.is_manager
           //     : false,
           // userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
+        }
+      }
+    }
+    // const details: IDetailsResponse = await this.http
+    //   .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
+    //   .toPromise()
+    // this.configSvc.userGroups = new Set(details.group)
+    // this.configSvc.userRoles = new Set(details.roles)
+    // if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
+    //   this.configSvc.userRoles.add('is_manager')
+    // }
+    // tslint:disable-next-line: max-line-length
+    const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
+    this.configSvc.hasAcceptedTnc = details.tncStatus
+    this.configSvc.profileDetailsStatus = details.profileDetailsStatus
+    this.configSvc.userRoles = new Set(userRoles)
+    return details
+  }
+
+  private async fetchUserProfileV2(): Promise<IDetailsResponse> {
+    const userRoles: string[] = []
+    if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
+      let userPidProfileV2: NsUser.IUserPidProfileVer2 | null = null
+      try {
+        userPidProfileV2 = await this.http
+          .get<NsUser.IUserPidProfileVer2>(endpoint.profileV2)
+          .toPromise()
+      } catch (e) {
+        this.configSvc.userProfileV2 = null
+        throw new Error('Invalid user')
+      }
+      if (userPidProfileV2) {
+        const userData: any = userPidProfileV2.result.UserProfile
+        this.configSvc.userProfileV2 = {
+          userId: userData[0].userId,
+          firstName: userData[0].personalDetails.firstname,
+          surName: userData[0].personalDetails.surname,
+          middleName: userData[0].personalDetails.middlename,
+          departmentName: userData[0].employmentDetails.departmentName,
+          // tslint:disable-next-line: max-line-length
+          userName: `${userData[0].personalDetails.firstname ? userData[0].personalDetails.firstname : ''}${userData[0].personalDetails.surname ? userData[0].personalDetails.surname : ''}`,
+
+          dealerCode: null,
+          isManager: false,
         }
       }
     }

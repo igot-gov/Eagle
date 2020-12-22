@@ -86,6 +86,7 @@ export interface IPlaylistUpsertRequest {
 }
 
 export interface IPlaylistCreateRequest {
+  createdBy: string
   playlist_title: string
   content_ids: string[]
   shareWith?: string[]

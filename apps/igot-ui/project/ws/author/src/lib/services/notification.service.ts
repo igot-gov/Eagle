@@ -137,7 +137,7 @@ export class NotificationService {
       'tag-value-pair': {
         '#contentType': content.category,
         '#contentTitle': content.name,
-        '#targetUrl': `${document.baseURI}app/toc/${content.identifier}/overview`,
+        '#targetUrl': `${document.baseURI}app/toc/${content.identifier}/overview?primaryCategory=${content.primaryCategory}`,
         '#comment': comment,
         '#publisher': this.accessService.userId,
       },

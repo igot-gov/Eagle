@@ -9,7 +9,7 @@ const API_END_POINTS = {
   DISCUSS_PROFILE: '/apis/protected/v8/discussionHub/users',
   PROFILE_DETAIL: `${PROTECTED_SLAG_V8}/social/post/timeline`,
   SOCIAL_VIEW_CONVERSATION: `${PROTECTED_SLAG_V8}/social/post/viewConversation`,
-  getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileRegistry/getUserRegistryById',
+  getUserdetailsV2FromRegistry: '/apis/protected/v8/user/profileRegistry/getUserRegistryByUser',
 }
 
 @Injectable({
@@ -21,7 +21,7 @@ export class ProfileV2Service {
     return this.http.get<any>(`${API_END_POINTS.DISCUSS_PROFILE}/${wid}`)
   }
   fetchProfile(userId: string): Observable<NSProfileDataV2.IProfile> {
-    return this.http.get<NSProfileDataV2.IProfile>(`${API_END_POINTS.getUserdetailsV2FromRegistry}`)
+    return this.http.get<NSProfileDataV2.IProfile>(`${API_END_POINTS.getUserdetailsV2FromRegistry}/${userId}`)
 
   }
   fetchPost(request: any): Observable<any> {

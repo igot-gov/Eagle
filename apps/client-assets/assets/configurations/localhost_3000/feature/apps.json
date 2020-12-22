@@ -259,9 +259,6 @@
       ],
       "name": "Author",
       "permission": [
-        "editor",
-        "admin",
-        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -281,9 +278,6 @@
       ],
       "name": "Create",
       "permission": [
-        "editor",
-        "admin",
-        "publisher"
       ],
       "show": true,
       "status": "live",
@@ -495,11 +489,7 @@
         "review"
       ],
       "name": "Review",
-      "permission": [
-        "editor",
-        "admin",
-        "publisher"
-      ],
+      "permission": [],
       "show": true,
       "status": "live",
       "toolTip": "Review",
@@ -588,14 +578,6 @@
       "name": "Contribution",
       "toolTip": "Contribution",
       "hasRole": [
-        "content-creator",
-        "channel-creator",
-        "ka-creator",
-        "kb-creator",
-        "editor",
-        "reviewer",
-        "publisher",
-        "admin"
       ]
     },
     {

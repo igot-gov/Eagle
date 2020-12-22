@@ -41,6 +41,7 @@ export class NetworkHomeComponent implements OnInit {
       return v
     })
     this.connectionRequests = this.route.snapshot.data.connectionRequests.data.result.data
+
   }
 
   ngOnInit() {
@@ -74,9 +75,9 @@ export class NetworkHomeComponent implements OnInit {
 
   connectionUpdatePeopleCard(event: any) {
     if (event === 'connection-updated') {
-      let usrDept = 'igot'
+      let usrDept = 'iGOT'
       if (this.configSvc.userProfile) {
-        usrDept = this.configSvc.userProfile.departmentName || 'igot'
+        usrDept = this.configSvc.userProfile.departmentName || 'iGOT'
       }
       let req: NSNetworkDataV2.IRecommendedUserReq
       req = {

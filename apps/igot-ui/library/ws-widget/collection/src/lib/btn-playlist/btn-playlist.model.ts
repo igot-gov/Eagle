@@ -30,6 +30,7 @@ export namespace NsPlaylist {
   }
 
   export interface IPlaylist {
+    identifier: any
     id: string
     name: string
     contents: NsContent.IContentMinimal[]
@@ -44,6 +45,7 @@ export namespace NsPlaylist {
   }
 
   export interface IPlaylistCreateRequest {
+    createdBy: string
     playlist_title: string
     content_ids: string[]
     shareWith?: string[]

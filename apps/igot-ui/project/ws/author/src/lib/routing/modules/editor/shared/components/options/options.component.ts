@@ -76,6 +76,7 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
   canDelete() {
     return this.accessService.hasRole(['editor', 'admin']) ||
       (['Draft', 'Live'].includes(this.contentService.originalContent[this.currentContent].status) &&
+        this.contentService.originalContent[this.currentContent].creatorContacts &&
         this.contentService.originalContent[this.currentContent].creatorContacts.find(v => v.id === this.accessService.userId)
       )
   }

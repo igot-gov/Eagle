@@ -25,6 +25,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
   pageNavbar: Partial<NsPage.INavBackground> = this.configSvc.pageNavBar
   resourceId: string = (this.viewerDataSvc.resourceId as string) || ''
   resourceName: string | null = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
+  resourcePrimaryCategory: string | null = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.primaryCategory : ''
   collectionId = ''
   logo = true
   isPreview = false
@@ -62,6 +63,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
       if (this.resourceId !== this.viewerDataSvc.resourceId) {
         this.resourceId = this.viewerDataSvc.resourceId as string
         this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
+        this.resourcePrimaryCategory = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.primaryCategory : ''
       }
     })
     this.paramSubscription = this.activatedRoute.queryParamMap.subscribe(async params => {
@@ -72,6 +74,7 @@ export class ViewerTopBarComponent implements OnInit, OnDestroy {
       _data => {
         this.resourceId = this.viewerDataSvc.resourceId as string
         this.resourceName = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.name : ''
+        this.resourcePrimaryCategory = this.viewerDataSvc.resource ? this.viewerDataSvc.resource.primaryCategory : ''
       },
     )
   }

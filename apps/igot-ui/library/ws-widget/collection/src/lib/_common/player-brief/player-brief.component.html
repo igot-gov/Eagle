@@ -197,7 +197,7 @@
             <mat-chip>
               <h3 class="ws-mat-accent-text width-expand">
                 <ng-container *ngIf="item.contentType === 'Knowledge Board' && item.status === 'Live'">
-                  <a [href]="'/app/toc/' + item.identifier + '/overview'"> {{ item.name }} </a>
+                  <a [href]="'/app/toc/' + item.identifier + '/overview?primaryCategory='+ item.primaryCategory "> {{ item.name }} </a>
                 </ng-container>
               </h3>
             </mat-chip>
