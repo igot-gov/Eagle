@@ -429,7 +429,8 @@ export class FileUploadComponent implements OnInit {
 
   startgetProfanityAPI() {
     this.profanityService.getProfanity(this.profanityAPIData).subscribe(data => {
-      this.profanityData = data[(data.length)-1]
+      this.profanityData = data[0]
+      console.log(data)
       if (this.profanityData !== null && this.profanityData !== undefined) {
         if (this.profanityData.completed) {
           this.loaderService.changeLoad.next(false)

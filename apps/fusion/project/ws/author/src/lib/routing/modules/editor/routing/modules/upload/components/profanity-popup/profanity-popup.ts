@@ -45,6 +45,8 @@ export class ProfanityPopUpComponent implements OnInit {
       description: [],
       tags: [],
     })
+
+    console.log(this.profanityData)
   }
   onNoClick(): void {
     this.dialogRef.close()
