@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -277,7 +278,9 @@ public class PortalServiceImpl implements PortalService {
 						.collect(Collectors.toMap(DeptRoleInfo::getDeptRoleId, deptRoleInfo -> deptRoleInfo));
 
 				if (isUserInfoRequired) {
-					List<String> userIds = userDeptList.stream().map(i -> i.getUserId()).collect(Collectors.toList());
+					Set<String> userIdSet = userDeptList.stream().map(i -> i.getUserId()).collect(Collectors.toSet());
+					List<String> userIds = userIdSet.stream().collect(Collectors.toList());
+					
 					Map<String, Object> result = userUtilService.getUsersDataFromUserIds("igot", userIds,
 							new ArrayList<>(Arrays.asList(PIDConstants.FIRST_NAME, PIDConstants.LAST_NAME,
 									PIDConstants.EMAIL, PIDConstants.DEPARTMENT_NAME)));
