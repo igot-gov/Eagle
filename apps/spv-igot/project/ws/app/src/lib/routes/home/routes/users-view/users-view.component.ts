@@ -125,7 +125,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       const tempArray: IUser[] = []
       userObj.forEach((users: any) => {
         const obj: IUser = {
-          fullname: `${users.firstName} + ' ' + ${users.lastName}`,
+          fullname: `${users.firstName} ${users.lastName}`,
           email: users.emailId,
           type: users.roleInfo.roleName,
         }
