@@ -169,7 +169,7 @@ export class BtnPlaylistService {
   deletePlaylistContent(playlist: any | undefined, contentIds: string[]) {
     if (playlist) {
       return this.deleteContent(
-        playlist[0].id,
+        playlist[0].identifier,
         {
           contentIds,
         },

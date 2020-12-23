@@ -35,11 +35,11 @@ export class PlaylistCardComponent implements OnInit {
   isListExpanded: { [playlistId: string]: boolean } = {}
 
   constructor(private route: ActivatedRoute,
-              private snackBar: MatSnackBar,
-              public dialog: MatDialog,
-              private playlistSvc: BtnPlaylistService,
-              public router: Router,
-              public configSvc: ConfigurationsService,
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private playlistSvc: BtnPlaylistService,
+    public router: Router,
+    public configSvc: ConfigurationsService,
 
   ) {
     if (this.route.snapshot.data.pageData.data) {
@@ -77,7 +77,7 @@ export class PlaylistCardComponent implements OnInit {
     dialogRef.afterClosed().subscribe(shouldDelete => {
       if (shouldDelete && this.playlist) {
         this.deletePlaylistStatus = 'fetching'
-        this.playlistSvc.deletePlaylist(this.playlist.id, this.type).subscribe(
+        this.playlistSvc.deletePlaylist(this.playlist.identifier, this.type).subscribe(
           () => {
             this.deletePlaylistStatus = 'done'
             this.snackBar.open(this.playlistDeleteSuccessMessage.nativeElement.value, 'X')
