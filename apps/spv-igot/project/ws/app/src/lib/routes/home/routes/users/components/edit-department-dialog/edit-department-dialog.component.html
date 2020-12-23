@@ -1,0 +1,45 @@
+<div class="flex flex-between items-center">
+    <h2 mat-dialog-title class="heading font-weight-500" i18n>
+        Edit Department
+    </h2>
+    <button mat-dialog-close mat-icon-button class="cursor-pointer" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>
+<form class="example-form" [formGroup]="editForm">
+    <div mat-dialog-content class="custom-scroll-small">
+
+        <mat-form-field appearance="outline" class="w-full margin-top-xs">
+            <mat-select formControlName="department" i18n-placeholder placeholder="--Select Department Name--">
+                <mat-option [value]="dept.department_name" *ngFor="let dept of departments">{{dept.department_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions class="flex flex-end pt-4 pr-4">
+        <div class="pr-4">
+            <mat-progress-spinner mode="indeterminate" *ngIf="processing" diameter="30"></mat-progress-spinner>
+        </div>
+        <button mat-raised-button class="pt-4" type="button" color="primary" (click)="changeDepartment(editForm)">
+            <span i18n>Save Changes</span>
+        </button>
+    </div>
+</form>
+
+<input
+type="hidden"
+i18-value
+i18-aria-value
+aria-value="Update department name  successful"
+value="User's department name updated successfully!"
+#toastSuccess
+/>
+<input
+type="hidden"
+i18-value
+i18-aria-value
+aria-value="unable to update department name!"
+value="Error updating the users's department name!"
+#toastError
+/>
