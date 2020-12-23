@@ -74,7 +74,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   leftmenues!: ILeftMenu[]
   public filterMenuItems: any = []
   /* tslint:disable */
-
+  courseTaken = true  // this.activatedRoute.snapshot.data.courseTaken.data
   dataSource: any
   hasChild = (_: number, node: IMenuFlatNode) => node.expandable
 
@@ -100,8 +100,9 @@ export class MyContentComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private authInitService: AuthInitService,
     // private durationPipe: PipeDurationTransformPipe,
-    private valueSvc: ValueService
+    private valueSvc: ValueService,
   ) {
+
     this.filterMenuTreeControl = new FlatTreeControl<IMenuFlatNode>(
       node => node.levels,
       node => node.expandable,
@@ -120,8 +121,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
     this.userId = this.accessService.userId
     this.leftmenues = this.authInitService.authAdditionalConfig.menus
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
-    this.initCardTable()
+    if (this.courseTaken) {
+      this.initCardTable()
+    }
   }
+
   initCardTable() {
     this.tableData = {
       columns: [

@@ -28,7 +28,7 @@ export class BtnProfileComponent extends WidgetBaseComponent
     widgetSubType: 'actionButtonSetting',
     widgetData: { allListingUrl: '/app/features' },
   }
-  isPinFeatureAvailable = true
+  isPinFeatureAvailable = false
   pinnedApps: NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink>[] = []
 
   btnAppsConfig!: NsWidgetResolver.IRenderConfigWithTypedData<IBtnAppsConfig>

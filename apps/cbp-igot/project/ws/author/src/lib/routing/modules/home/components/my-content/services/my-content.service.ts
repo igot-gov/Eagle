@@ -24,6 +24,13 @@ import { map, mergeMap } from 'rxjs/operators'
 import { IFormMeta } from '@ws/author/src/lib/interface/form'
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 
+
+
+const PROTECTED_SLAG_V8 = '/apis/protected/v8'
+const API_END_POINTS = {
+  // https://d136953gtttd92.cloudfront.net/apis/protected/v8/user/mandatoryContent/checkStatus/60840612-6d85-4fe9-8c91-649ea093ea95
+  MANDATORY_CONTENT: (userId: string) => `${PROTECTED_SLAG_V8}/user/mandatoryContent/checkStatus/${userId}`,
+}
 @Injectable()
 export class MyContentService {
   constructor(
@@ -76,16 +83,16 @@ export class MyContentService {
         let requestObj: any = {}
         Object.keys(this.authInitService.authConfig).map(
           v =>
-            (requestObj[v as any] = content[v as keyof NSContent.IContentMeta]
-              ? content[v as keyof NSContent.IContentMeta]
-              : JSON.parse(
-                JSON.stringify(
-                  this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
-                    content.contentType
-                    // tslint:disable-next-line: ter-computed-property-spacing
-                  ][0].value,
-                ),
-              )),
+          (requestObj[v as any] = content[v as keyof NSContent.IContentMeta]
+            ? content[v as keyof NSContent.IContentMeta]
+            : JSON.parse(
+              JSON.stringify(
+                this.authInitService.authConfig[v as keyof IFormMeta].defaultValue[
+                  content.contentType
+                  // tslint:disable-next-line: ter-computed-property-spacing
+                ][0].value,
+              ),
+            )),
         )
         requestObj = {
           ...requestObj,
@@ -332,4 +339,11 @@ export class MyContentService {
     }
     return searchV6Body
   }
+
+  getUserCourseDetail(userId: string) {
+    return this.apiService.get<any>(
+      API_END_POINTS.MANDATORY_CONTENT(userId)
+    )
+  }
+
 }

@@ -71,7 +71,11 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
       this.fetchSelfCurationProgress()
     })
   }
-
+  // getTableData(idx: number) {
+  //   return _.map(this.contentQualityData.criteriaModels[idx].qualifiers, row => {
+  //     return row
+  //   })
+  // }
   ngOnDestroy(): void {
 
   }

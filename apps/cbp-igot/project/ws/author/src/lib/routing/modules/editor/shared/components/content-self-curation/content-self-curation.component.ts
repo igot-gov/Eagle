@@ -11,19 +11,6 @@ import { NSISelfCuration } from '../../../../../../interface/self-curation'
 import { SelfCurationService } from '../../services/self-curation.service'
 /* tslint:enable */
 // import { AuthInitService } from '../../../../../../services/init.service'
-
-const ELEMENT_DATA: any[] = [
-  { response: 1, name: 'Hydrogen', score: 1.0079, help: 'H' },
-  { response: 2, name: 'Helium', score: 4.0026, help: 'He' },
-  { response: 3, name: 'Lithium', score: 6.941, help: 'Li' },
-  { response: 4, name: 'Beryllium', score: 9.0122, help: 'Be' },
-  { response: 5, name: 'Boron', score: 10.811, help: 'B' },
-  { response: 6, name: 'Carbon', score: 12.0107, help: 'C' },
-  { response: 7, name: 'Nitrogen', score: 14.0067, help: 'N' },
-  { response: 8, name: 'Oxygen', score: 15.9994, help: 'O' },
-  { response: 9, name: 'Fluorine', score: 18.9984, help: 'F' },
-  { response: 10, name: 'Neon', score: 20.1797, help: 'Ne' },
-]
 @Component({
   selector: 'ws-auth-content-self-curation',
   templateUrl: './content-self-curation.component.html',
@@ -62,8 +49,6 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
   /**for side nav: END */
   menus!: any
   wData: any
-  displayedColumns: string[] = ['name', 'response', 'score', 'help']
-  dataSource = ELEMENT_DATA
   constructor(
     private contentService: EditorContentService,
     // private activateRoute: ActivatedRoute,

@@ -191,6 +191,12 @@
       }
     }
   ],
+  "mandatoryCourses": [
+    {
+      "roles": ["author"],
+      "courseId": "lex_auth_013064126678122496519"
+    }
+  ],
   "menus": {
     "widgetType": "menus",
     "widgetSubType": "leftMenu",
@@ -256,7 +262,7 @@
             "uri": ""
           },
           "enabled": true,
-          "routerLink": "/app/home/about"
+          "routerLink": "/app/info/about"
         }
       ]
     }

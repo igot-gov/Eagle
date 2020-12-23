@@ -200,7 +200,7 @@
       "permission": [
         "ABOUT_US"
       ],
-      "show": true,
+      "show": false,
       "status": "live",
       "toolTip": "My goals",
       "url": "/app/goals",
@@ -414,7 +414,7 @@
       "permission": [
         "PLAYLIST"
       ],
-      "show": true,
+      "show": false,
       "status": "live",
       "toolTip": "Playlists",
       "url": "/app/playlist",
@@ -435,7 +435,7 @@
       "permission": [
         "PROFILE"
       ],
-      "show": true,
+      "show": false,
       "status": "live",
       "toolTip": "Profile",
       "url": "/app/person-profile/me",
@@ -454,7 +454,7 @@
       ],
       "name": "Update Profile",
       "permission": [],
-      "show": true,
+      "show": false,
       "status": "live",
       "toolTip": "Profile Update",
       "url": "/app/user-profile/details",
@@ -572,12 +572,7 @@
       "featureIds": [
         "feature_feedback",
         "feature_badges",
-        "feature_notification",
-        "feature_goals",
-        "feature_interests",
-        "feature_playlist",
-        "feature_profile",
-        "feature_profile_update"
+        "feature_notification"
       ],
       "icon": "",
       "iconType": "none",
@@ -593,7 +588,6 @@
     },
     {
       "featureIds": [
-        "feature_authoring",
         "feature_create",
         "feature_publish",
         "feature_review"
@@ -619,24 +613,7 @@
     },
     {
       "featureIds": [
-        "feature_admin"
-      ],
-      "icon": "",
-      "iconType": "none",
-      "id": "group_admin",
-      "keywords": [
-        "admin"
-      ],
-      "name": "Admin",
-      "toolTip": "Admin",
-      "hasRole": [
-        "admin"
-      ]
-    },
-    {
-      "featureIds": [
         "feature_aboutUs",
-        "feature_learningAnalytics",
         "feature_mobileApps",
         "feature_Terms&Condition",
         "feature_quickTour"
