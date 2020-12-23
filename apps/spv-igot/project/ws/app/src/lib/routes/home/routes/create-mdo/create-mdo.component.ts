@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl } from '@angular/forms'
+import { MatDialog} from '@angular/material'
+import { UserPopupComponent } from '../user-popup/user-popup'
 
 @Component({
   selector: 'ws-app-create-mdo',
@@ -13,7 +15,7 @@ export class CreateMdoComponent implements OnInit {
   data: any = []
   imageTypes = ['.png', '.jpg', '.jpeg', '.jtif', '.tiff']
   tabledata: any = []
-  constructor() { }
+  constructor( public dialog: MatDialog,) { }
 
   ngOnInit() {
 
@@ -107,6 +109,16 @@ export class CreateMdoComponent implements OnInit {
 
   }
   openPopup() {
-
+    const dialogRef = this.dialog.open(UserPopupComponent, {
+      maxHeight: 'auto',
+      height: '80%',
+      width: '80%',
+      panelClass: 'remove-pad',
+    })
+    dialogRef.afterClosed().subscribe((response: any) => {
+      if (response === 'postCreated') {
+        // this.refreshData(this.currentActivePage)
+      }
+    })
   }
 }

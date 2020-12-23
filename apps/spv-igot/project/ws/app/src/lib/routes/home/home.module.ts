@@ -25,11 +25,13 @@ import { RouterModule } from '@angular/router'
 import { HomeRoutingModule } from './home.rounting.module'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
-import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule } from '@ws-widget/collection'
+import { AvatarPhotoModule, BtnPageBackModule, LeftMenuModule, UITableModule, UserAutocompleteModule } from '@ws-widget/collection'
 import { AboutComponent } from './routes/about/about.component'
 import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 import { DirectoryViewComponent } from './routes/directory/directroy.component'
 import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
+import { UserPopupComponent } from './routes/user-popup/user-popup'
+import { UsersComponent } from './routes/users/users.component'
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
     RolesAccessComponent,
     DirectoryViewComponent,
     CreateMdoComponent,
+    UserPopupComponent,
+    UsersComponent
   ],
   imports: [
     CommonModule,
@@ -75,9 +79,9 @@ import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
     PipeOrderByModule,
     BtnPageBackModule,
     WidgetResolverModule,
+    UserAutocompleteModule,
   ],
-  entryComponents: [
-  ],
+  entryComponents: [UserPopupComponent],
   providers: [
     // CKEditorService,
     // LoaderService,
