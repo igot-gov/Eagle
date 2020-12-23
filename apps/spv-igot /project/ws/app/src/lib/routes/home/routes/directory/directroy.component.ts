@@ -31,7 +31,10 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   currentUser!: string | null
   connectionRequests!: any[]
   tabledata: any = []
+  currentDepartment!: string
   data: any = []
+  wholeData: any = []
+  departmentHearders: any = []
 
   constructor(
     public dialog: MatDialog,
@@ -76,17 +79,24 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
       sortColumn: '',
       sortState: 'asc',
     }
+
+  }
+  getDepartmentHeader() {
+    this.wholeData.forEach((head: { deptTypeInfo: { deptType: void } }) => {
+      if (this.departmentHearders.indexOf(head.deptTypeInfo.deptType) == -1) {
+        this.departmentHearders.push(head.deptTypeInfo.deptType)
+      }
+    })
+    const index = this.departmentHearders.indexOf("SPV")
+    if (index > -1) {
+      this.departmentHearders.splice(index, 1)
+    }
+    this.getDepartDataByKey(this.departmentHearders[0])
   }
   getAllDepartmentsAPI() {
     this.directoryService.getAllDepartments().subscribe(res => {
-      this.data = res.map((dept: any) => {
-        return {
-          id:dept.id,
-          mdo: dept.deptName,
-          type: dept.deptTypeInfo.deptType,
-          user: dept.noOfUsers,
-        }
-      })
+      this.wholeData = res
+      this.getDepartmentHeader()
     })
   }
   ngAfterViewInit() {
@@ -99,32 +109,29 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   fetchConnectionDetails() {
   }
   onRoleClick(role: any) {
-    console.log(role.id)
     this.router.navigate([`/app/roles/${role.id}/users`])
   }
   filter(key: string | 'timestamp' | 'best' | 'saved') {
+    this.getDepartDataByKey(key)
+  }
+  getDepartDataByKey(key: string) {
     if (key) {
       this.currentFilter = key
-      switch (key) {
-        case 'mdo':
-          this.getAllDepartmentsAPI()
-          break
-        case 'cbp':
-          this.getAllDepartmentsAPI()
-          break
-        case 'csp':
-          this.getAllDepartmentsAPI()
-          break
-        case 'frac':
-          this.getAllDepartmentsAPI()
-          break
-        case 'fraccr':
-          this.getAllDepartmentsAPI()
-          break
-        default:
-          this.getAllDepartmentsAPI()
-          break
-      }
+      this.currentDepartment = key
+      var filteredData: any[] = []
+      this.wholeData.map((dept: any) => {
+        if (dept.deptTypeInfo.deptType === this.currentFilter) {
+          filteredData.push(dept)
+        }
+      })
+      this.data = filteredData.map((dept: any) => {
+        return {
+          id: dept.id,
+          mdo: dept.deptName,
+          type: dept.deptTypeInfo.deptType,
+          user: dept.noOfUsers,
+        }
+      })
     }
   }
 }

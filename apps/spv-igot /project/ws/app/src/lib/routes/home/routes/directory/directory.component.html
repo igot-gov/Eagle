@@ -4,7 +4,7 @@
       <div class="flex-1" role="link" tabindex="0">
         <div class="flex flex-1">
           <mat-card-title class="flex-4 mobile-margin text-capitalize">
-            <span class="mat-subheading-1">Users</span>
+            <span class="mat-subheading-1">Departments</span>
           </mat-card-title>
         </div>
       </div>
@@ -12,25 +12,14 @@
     <mat-card-content>
       <div class="flex flex-1 flex-column margin-fix">
         <div class="flex flex-1 filter max-height-60">
-          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'mdos',
-              'ws-mat-accent-border font-medium':currentFilter !== 'underreview'}" mat-button (click)="filter('mdos')"
-            role="button">MDOs</a>
-          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'cbp',
-                          'ws-mat-accent-border font-medium':currentFilter !== 'inactive'}" mat-button
-            (click)="filter('cbp')" role="button">CBP providers</a>
-          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'csp',
-                          'ws-mat-accent-border font-medium':currentFilter !== 'blocked'}" mat-button
-            (click)="filter('csp')" role="button">CSPs</a>
-          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'frac',
-                                      'ws-mat-accent-border font-medium':currentFilter !== 'blocked'}" mat-button
-            (click)="filter('frac')" role="button">FRAC trainers</a>
-          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'fraccr',
-                                                      'ws-mat-accent-border font-medium':currentFilter !== 'blocked'}"
-            mat-button (click)="filter('fraccr')" role="button">FRAC certified officers</a>
+          <a *ngFor="let department of departmentHearders" href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter ===department,
+              'ws-mat-accent-border font-medium':currentFilter !== 'underreview'}" mat-button
+            (click)="filter(department)" role="button">{{department}}</a>
         </div>
       </div>
       <ng-container>
-        <ws-widget-directory-table [tableData]='tabledata' [data]='data' (eOnRowClick)="onRoleClick($event)">
+        <ws-widget-directory-table [selectedDepartment]='currentDepartment' [tableData]='tabledata' [data]='data'
+          (eOnRowClick)="onRoleClick($event)">
         </ws-widget-directory-table>
       </ng-container>
     </mat-card-content>

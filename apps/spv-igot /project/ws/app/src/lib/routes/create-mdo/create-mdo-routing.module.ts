@@ -14,7 +14,7 @@ const routes: Routes = [
         component: UsersComponent,
       },
       {
-        path: 'basicinfo',
+        path: ':department/basicinfo',
         component: CreateMdoComponent,
       },
     ],

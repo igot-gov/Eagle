@@ -19,6 +19,7 @@ import { Router } from '@angular/router'
 export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
+  @Input() selectedDepartment!: string
 
   // @Input() columns?: IColums[]
   // @Input() needCheckBox?: Boolean
@@ -48,6 +49,7 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
   }
 
   ngOnInit() {
+
     if (this.tableData) {
       this.displayedColumns = this.tableData.columns
     }
@@ -133,6 +135,6 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
     this.eOnRowClick.emit(e)
   }
   gotoCreateNew() {
-    this.router.navigate(['/app/roles/basicinfo'])
+    this.router.navigate([`/app/roles/${this.selectedDepartment}/basicinfo`])
   }
 }

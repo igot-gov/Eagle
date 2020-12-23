@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators'
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  currentRoute = 'roles-access'
+  currentRoute = 'users'
   widgetData!: NsWidgetResolver.IWidgetData<ILeftMenu>
   isLtMedium$ = this.valueSvc.isLtMedium$
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
