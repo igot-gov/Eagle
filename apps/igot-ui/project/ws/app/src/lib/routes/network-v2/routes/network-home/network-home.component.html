@@ -5,7 +5,7 @@
       <!-- <mat-placeholder>Search user</mat-placeholder> -->
       <!-- <input [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput type="search"> -->
       <mat-label>Search user</mat-label>
-      <input type="search" #searchInput class="ml-2" [(ngModel)]="nameFilter" (ngModelChange)="searchUser()" matInput
+      <input type="search" #searchInput class="ml-2" [(ngModel)]="nameFilter" (keyup.enter)="searchUser()" matInput
         type="search" [placeholder]="'Search user'" />
     </mat-form-field>
   </div>

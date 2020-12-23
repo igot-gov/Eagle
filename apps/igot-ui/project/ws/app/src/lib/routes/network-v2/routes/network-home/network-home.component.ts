@@ -102,7 +102,6 @@ export class NetworkHomeComponent implements OnInit {
   }
 
   searchUser() {
-
     if (this.nameFilter.length === 0) {
       this.enableFeature = true
     } else {
@@ -115,7 +114,7 @@ export class NetworkHomeComponent implements OnInit {
 
   getSearchResult() {
     this.cardNetworkService.fetchSearchUserInfo(this.nameFilter.trim()).subscribe(data => {
-      this.searchResultUserArray = data
+      this.searchResultUserArray = data.result.UserProfile
       this.networkV2Service.fetchAllConnectionRequests().subscribe(
         requests => {
           // Filter all the connection requests sent

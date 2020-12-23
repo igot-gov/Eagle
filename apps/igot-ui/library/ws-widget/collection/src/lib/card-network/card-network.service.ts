@@ -8,7 +8,7 @@ import { of } from 'rxjs'
 
 const API_END_POINTS = {
   GET_ALL_ACTIVE_USER: `/apis/protected/v8/networkHub/users`,
-  GET_ALL_SEARCH_USER: `/apis/protected/v8/user/autocomplete/`,
+  GET_ALL_SEARCH_USER: `/apis/protected/v8/user/profileRegistry/searchUserRegistry`,
 }
 
 @Injectable({
@@ -28,13 +28,34 @@ export class CardNetWorkService {
       }),
     )
   }
+  // fetchSearchUserInfo(searchKey: string) {
+  //   return this.http.post<any>(API_END_POINTS.GET_ALL_SEARCH_USER).pipe(
+  //     map(response => {
+  //       return response
+  //     }),
+  //   )
+  // }
   fetchSearchUserInfo(searchKey: string) {
-    return this.http.get<any>(API_END_POINTS.GET_ALL_SEARCH_USER + searchKey).pipe(
+
+    let req: NSNetworkDataV2.ISearchUserReq
+    req = {
+      limit: 50,
+      offset: 0,
+      filters: {
+        personalDetails: {
+          firstname: {
+            startsWith: searchKey,
+          },
+        },
+      },
+    }
+    return this.http.post<any>(API_END_POINTS.GET_ALL_SEARCH_USER, req).pipe(
       map(response => {
         return response
       }),
     )
   }
+
   fetchMyMdoUsers() {
     let usrDept = 'iGOT'
     if (this.configSvc.userProfile) {
