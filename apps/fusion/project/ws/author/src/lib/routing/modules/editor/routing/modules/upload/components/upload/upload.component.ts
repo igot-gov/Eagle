@@ -558,12 +558,8 @@ export class UploadComponent implements OnInit, OnDestroy {
   }
   startgetProfanityAPI() {
     this.profanityService.getProfanity(this.profanityAPIData).subscribe(data => {
-      // tslint:disable-next-line:no-console
-      console.log(data)
-      this.profanityData = data
+      this.profanityData = data[0]
       if (this.profanityData !== null && this.profanityData !== undefined) {
-        // tslint:disable-next-line:no-console
-        console.log(this.profanityData.completed)
         if (this.profanityData.completed) {
           this.startProfanityPopup()
           this.profanityAPIData = undefined
