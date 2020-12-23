@@ -20,7 +20,7 @@ export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content
   ): Observable<{ content: NSContent.IContentMetaV2, data: any }[]> {
     const id = route.params['id']
     return this.apiService.get<{ content: NSContent.IContentMetaV2, data: any }[]>(
-      `http://localhost:3003/authApi/content/v3/read/${id}?mode=edit`,
+      `/apis/authApi/content/v3/read/${id}?mode=edit`,
     ).pipe(
       catchError((v: any) => {
         this.router.navigateByUrl('/error-somethings-wrong')
