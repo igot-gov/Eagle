@@ -39,6 +39,8 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
   @Input() forPreview = false
   tocConfig: any = null
   loggedInUserId!: any
+  private routeQuerySubscription: Subscription | null = null
+  batchId!: string
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +72,12 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
     if (this.configSvc && this.configSvc.userProfile &&  this.configSvc.userProfile.userId) {
       this.loggedInUserId = this.configSvc.userProfile.userId
     }
+    this.routeQuerySubscription = this.route.queryParamMap.subscribe(qParamsMap => {
+      const batchId = qParamsMap.get('batchId')
+      if (batchId) {
+        this.batchId = batchId
+      }
+    })
   }
 
   detailUrl(data: any) {
@@ -94,6 +102,9 @@ export class AppTocSinglePageComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe()
+    }
+    if (this.routeQuerySubscription) {
+      this.routeQuerySubscription.unsubscribe()
     }
   }
 

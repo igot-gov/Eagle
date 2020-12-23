@@ -575,7 +575,7 @@ tocConfig?.overview?.softwareRequirements?.enabled && content?.softwareRequireme
 </section>
 <section id="content">
     <div class="fixed-width" *ngIf="content?.children?.length">
-        <ws-app-app-toc-contents></ws-app-app-toc-contents>
+        <ws-app-app-toc-contents [batchId]="batchId"></ws-app-app-toc-contents>
     </div>
 </section>
 <mat-divider class="fluid-width mtb-xl"></mat-divider>

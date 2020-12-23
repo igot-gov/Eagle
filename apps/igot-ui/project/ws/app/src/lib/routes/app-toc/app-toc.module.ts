@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms'
 import { AppTocRoutingModule } from './app-toc-routing.module'
 
 import {
@@ -20,8 +21,10 @@ import {
   MatExpansionModule,
   MatProgressSpinnerModule,
   MatCheckboxModule,
-  MatFormFieldModule,
   MatInputModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatSnackBarModule,
 
 } from '@angular/material'
 
@@ -89,7 +92,6 @@ import { AppTocOverviewComponent as AppTocOverviewRootComponent } from './routes
 import { AppTocHomeDirective } from './routes/app-toc-home/app-toc-home.directive'
 import { AppTocCohortsDirective } from './routes/app-toc-cohorts/app-toc-cohorts.directive'
 import { AppTocCohortsComponent as AppTocCohortsRootComponent } from './routes/app-toc-cohorts/app-toc-cohorts.component'
-import { FormsModule } from '@angular/forms'
 import { AppTocAnalyticsTilesComponent } from './components/app-toc-analytics-tiles/app-toc-analytics-tiles.component'
 import { KnowledgeArtifactDetailsComponent } from './components/knowledge-artifact-details/knowledge-artifact-details.component'
 import { ProfileImageModule } from '../../../../../../../library/ws-widget/collection/src/lib/_common/profile-image/profile-image.module'
@@ -124,6 +126,8 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
   imports: [
     CommonModule,
     RouterModule,
+    ReactiveFormsModule,
+    FormsModule,
     AppTocRoutingModule,
     MatToolbarModule,
     MatCheckboxModule,
@@ -144,6 +148,8 @@ import { AppTocSinglePageDirective } from './routes/app-toc-single-page/app-toc-
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    MatSelectModule,
+    MatSnackBarModule,
     MatExpansionModule,
     DisplayContentTypeModule,
     DisplayContentTypeIconModule,
