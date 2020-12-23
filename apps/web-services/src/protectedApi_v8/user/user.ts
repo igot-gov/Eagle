@@ -45,6 +45,7 @@ import { protectedTnc } from './tnc'
 import { userTokenApi } from './token'
 import { topicApi } from './topic'
 import { topicsApi } from './topics'
+import { userSearchApi } from './user-search'
 import { validateApi } from './validate'
 import { viewProfileApi } from './viewprofile'
 
@@ -97,3 +98,4 @@ user.use('/exercise', exerciseApi)
 user.use('/users', usersApi)
 user.use('/mandatoryContent', mandatoryContent)
 user.use('/profileRegistry', profileRegistryApi)
+user.use('/search', userSearchApi)
