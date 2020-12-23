@@ -26,6 +26,18 @@ export namespace NSNetworkDataV2 {
         ]
     }
 
+    export interface ISearchUserReq {
+        limit?: number,
+        offset: number,
+        filters: {
+            personalDetails: {
+                firstname: {
+                    startsWith: string
+                }
+            }
+        }
+    }
+
     export interface IConnectionRequestResponse {
         size?: number,
         offset: number,
@@ -53,6 +65,13 @@ export namespace NSNetworkDataV2 {
     }
 
     export interface IAutocompleteUser {
+        employmentDetails: IEmploymentDetails,
+        personalDetails: IPersonalDetails,
+        id: string,
+        identifier: string,
+        name: string,
+        departmentName: string,
+        department: string
         department_name: string,
         email: string,
         first_name: string,
