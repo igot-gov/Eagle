@@ -10,7 +10,7 @@ import { NSContent } from '../../interface/content'
   selector: 'ws-auth-root-navigation',
   templateUrl: './auth-navigation.component.html',
   styleUrls: ['./auth-navigation.component.scss'],
-  providers: [EditorContentService,],
+  providers: [EditorContentService],
 })
 export class AuthNavigationComponent implements OnInit, AfterViewInit {
 

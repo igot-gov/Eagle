@@ -27,7 +27,8 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
   public screenSizeIsLtMedium = false
   leftmenues!: ILeftMenu[]
   constructor(private valueSvc: ValueService, private accessService: AccessControlService, private initSvc: AuthInitService
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.allowAuthor = this.canShow('author')

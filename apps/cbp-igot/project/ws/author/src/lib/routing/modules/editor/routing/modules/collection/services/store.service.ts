@@ -183,7 +183,7 @@ export class CollectionStoreService {
     try {
       const meta = this.authInitService.creationEntity.get(type) as ICreateEntity
       const requestBody = {
-        name: name,
+        name,
         description: '',
         mimeType: meta.mimeType,
         contentType: meta.contentType,

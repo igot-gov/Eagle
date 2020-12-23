@@ -4,7 +4,7 @@ import { NSCompetencie } from '../../../../../../../interface/competencies.model
 import { CompetenceViewComponent } from '../competencies-view/competencies-view.component'
 // import { Router } from '@angular/router'
 @Component({
-  selector: 'app-competence-card',
+  selector: 'ws-auth-competence-card',
   templateUrl: './competencies-card.component.html',
   styleUrls: ['./competencies-card.component.scss'],
   /* tslint:disable */

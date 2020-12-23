@@ -6,8 +6,7 @@ import { map } from 'rxjs/operators'
 const PROTECTED_SLAG_V8 = `/apis/protected/v8`
 const API_ENDPOINTS = {
   searchCompetency: `${PROTECTED_SLAG_V8}/competency/searchCompetency`,
-  addCompetency: `${PROTECTED_SLAG_V8}/competency/addCompetency`
-
+  addCompetency: `${PROTECTED_SLAG_V8}/competency/addCompetency`,
 }
 /* this page needs refactor*/
 @Injectable({

@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { NSContent } from '@ws/author/src/lib/interface/content'
 /* tslint:disable */
 import _ from 'lodash'
+/* tslint:enable */
+
 import { IAtGlanceComponentData } from '@ws-widget/collection'
 import { NSISelfCuration } from '../../../../../../interface/self-curation'
 import { SelfCurationService } from '../../services/self-curation.service'
@@ -9,8 +11,7 @@ import { EditorContentService } from '../../../services/editor-content.service'
 import { MyTocService } from '../../../../home/components/content-detail/services/my-toc.service'
 import { ContentQualityService } from '../../services/content-quality.service'
 import { NSIQuality } from '../../../../../../interface/content-quality'
-import { ConfigurationsService } from '../../../../../../../../../../../library/ws-widget/utils/src/public-api'
-/* tslint:enable */
+import { ConfigurationsService } from '@ws-widget/utils'
 @Component({
   selector: 'ws-auth-content-summary',
   templateUrl: './content-summary.component.html',
@@ -44,8 +45,6 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
     // this.fetchProgress()
     this.resetAndFetchTocStructure()
   }
-
-
   fetchContentMeta() {
     this.contentService.changeActiveCont.subscribe(data => {
       this.currentContent = data
@@ -54,7 +53,7 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
       if (this.contentQualityData) {
         this.contentQualityPercent = ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
       } else if (this._configurationsService.userProfile) {
-        this.contentQualityPercent = "0"
+        this.contentQualityPercent = '0'
         const params = {
           getLatestRecordEnabled: true,
           resourceId: data,
@@ -64,7 +63,8 @@ export class ContentSummaryComponent implements OnInit, OnDestroy {
         this.cqs.fetchresult(params).subscribe(response => {
           if (response && _.get(response, 'result')) {
             this.contentQualityData = this.cqs.getScore(data)
-            this.contentQualityPercent = ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
+            this.contentQualityPercent =
+              ((this.contentQualityData.finalTotalScore / this.contentQualityData.finalMaxScore) * 100).toFixed(2)
           }
         })
       }
