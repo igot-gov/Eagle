@@ -35,13 +35,13 @@ export class UserPopupComponent implements OnInit {
         position: 1, type: 'InstructionalMethods',
         question: 'The course puts the learner at the centre of the learning experience.',
         ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 },
-        { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }]
+        { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }],
       },
       // tslint:disable-next-line:max-line-length
       {
         position: 2, type: 'InstructionalMethods',
         // tslint:disable-next-line:max-line-length
-        question: 'The course is designed according to the Watch-Think-Do-Explore-Test content framework and all the elements have been incorporated in the course', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }]
+        question: 'The course is designed according to the Watch-Think-Do-Explore-Test content framework and all the elements have been incorporated in the course', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }],
       },
       // tslint:disable-next-line:max-line-length
       { position: 3, type: 'InstructionalMethods', question: 'The course is not heavily reliant on the traditional lecture/didactic approach and engages the learner on a more interactive journey through use of animations and simulations', ans: [{ name: 'Strongly Agree', weight: 5 }, { name: 'Agree', weight: 3 }, { name: 'Disagree', weight: 1 }, { name: 'Strongly Disagree', weight: 0 }] },
@@ -126,7 +126,7 @@ export class UserPopupComponent implements OnInit {
   }
   markAsComplete() {
 
-    if (!this.currentSelection === true && this.first === true) {
+    if (!this.currentSelection && this.first) {
       this.currentSelection = true
       this.first = false
     }

@@ -33,7 +33,7 @@ import { MatDialogModule, MatButtonModule } from '@angular/material'
     BtnContentMailMeModule,
     BtnContentLikeModule,
     MatPaginatorModule,
-    MatDialogModule, MatButtonModule
+    MatDialogModule, MatButtonModule,
   ],
   entryComponents: [UserPopupComponent],
   exports: [UIUserTableComponent, UIDirectoryTableComponent],

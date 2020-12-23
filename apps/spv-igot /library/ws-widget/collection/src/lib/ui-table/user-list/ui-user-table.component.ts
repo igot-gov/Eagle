@@ -127,7 +127,6 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onRowClick(e: any) {
-    console.log(e)
     this.eOnRowClick.emit(e)
 
   }

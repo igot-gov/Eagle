@@ -94,7 +94,10 @@ export class CreateMdoComponent implements OnInit {
       enabled: true,
     }]
   }
-  checkCondition() {
+  checkCondition(first: string, seconnd: string) {
+    if (first && seconnd) {
+
+    }
     return true
   }
   showError() {

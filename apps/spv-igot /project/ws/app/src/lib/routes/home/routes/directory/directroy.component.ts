@@ -83,11 +83,11 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
   }
   getDepartmentHeader() {
     this.wholeData.forEach((head: { deptTypeInfo: { deptType: void } }) => {
-      if (this.departmentHearders.indexOf(head.deptTypeInfo.deptType) == -1) {
+      if (this.departmentHearders.indexOf(head.deptTypeInfo.deptType) === -1) {
         this.departmentHearders.push(head.deptTypeInfo.deptType)
       }
     })
-    const index = this.departmentHearders.indexOf("SPV")
+    const index = this.departmentHearders.indexOf('SPV')
     if (index > -1) {
       this.departmentHearders.splice(index, 1)
     }
@@ -118,7 +118,7 @@ export class DirectoryViewComponent implements OnInit, AfterViewInit, OnDestroy 
     if (key) {
       this.currentFilter = key
       this.currentDepartment = key
-      var filteredData: any[] = []
+      const filteredData: any[] = []
       this.wholeData.map((dept: any) => {
         if (dept.deptTypeInfo.deptType === this.currentFilter) {
           filteredData.push(dept)

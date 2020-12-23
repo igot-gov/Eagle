@@ -40,7 +40,7 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
   selection = new SelectionModel<any>(true, [])
 
   constructor(
-    private router: Router, ) {
+    private router: Router) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()

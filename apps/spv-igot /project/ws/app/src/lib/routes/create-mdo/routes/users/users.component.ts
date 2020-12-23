@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, OnDestroy } from '@angular/core'
-import { Router } from '@angular/router'
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { UsersService } from '../../services/users.service'
 
 @Component({
@@ -13,18 +12,18 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   tabledata: any = []
   data: any = []
   role: any
-  id!: string 
+  id!: string
   private defaultSideNavBarOpenedSubscription: any
 
-  constructor(private usersSvc: UsersService, private router: Router,  private route: ActivatedRoute) { }
+  constructor(private usersSvc: UsersService, private router: Router, private route: ActivatedRoute) { }
   ngOnInit() {
     const url = this.router.url.split('/')
     this.role = url[url.length - 2]
     this.fetchUsersWithRole()
     this.route.params.subscribe(params => {
-      this.id = params['id'];
+      this.id = params['id']
       this.getAllActiveUsersByDepartmentId(this.id)
-      });
+    })
     // int left blank
     this.tabledata = {
       actions: [{ name: 'Details', label: 'Details', icon: 'remove_red_eye', type: 'link' }],
@@ -46,11 +45,10 @@ export class UsersComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   /* API call to get all roles*/
-  getAllActiveUsersByDepartmentId(id: string){
+  getAllActiveUsersByDepartmentId(id: string) {
     this.usersSvc.getUsersByDepartment(id).subscribe(res => {
-   
+
       this.data = res.active_users.map((user: any) => {
-        console.log(user)
         return {
           fullName: `${user.firstName} ${user.lastName}`,
           email: user.emailId,

@@ -7,7 +7,7 @@ import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 /* tslint:disable */
 import _ from 'lodash'
 import { UserViewService } from './user-view.services'
-interface IUser{ fullname: string; email: string; type: string}
+interface IUser { fullname: string; email: string; type: string }
 
 @Component({
   selector: 'ws-app-users-view',
@@ -18,9 +18,8 @@ interface IUser{ fullname: string; email: string; type: string}
   /* tslint:enable */
 })
 
-
 export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
-  
+
   /* tslint:disable */
   Math: any
   /* tslint:enable */
@@ -36,7 +35,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   connectionRequests!: any[]
   tabledata: any = []
   data: any = []
-  fullUserData: any=[]
+  fullUserData: any = []
 
   constructor(
     public dialog: MatDialog,
@@ -78,7 +77,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       sortColumn: '',
       sortState: 'asc',
     }
-    this.getAllActiveUsersAPI() 
+    this.getAllActiveUsersAPI()
   }
 
   getAllActiveUsersAPI() {
@@ -96,7 +95,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   fetchUserDetails() {
   }
   fetchConnectionDetails() {
-  
+
   }
 
   filter(key: string | 'timestamp' | 'best' | 'saved') {
@@ -116,26 +115,26 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
           this.data = this.getAllUserByKey(this.fullUserData.blocked_users)
           break
         default:
-         this.getAllActiveUsersAPI();
+          this.getAllActiveUsersAPI()
           break
       }
     }
   }
   getAllUserByKey(userObj: any) {
-    if (userObj && userObj!=null && userObj!=undefined){
-      var tempArray: IUser[] = []
+    if (userObj && userObj !== null && userObj !== undefined) {
+      const tempArray: IUser[] = []
       userObj.forEach((users: any) => {
-        var obj:IUser ={
-          fullname: users.firstName+' '+users.lastName,
+        const obj: IUser = {
+          fullname: `${users.firstName} + ' ' + ${users.lastName}`,
           email: users.emailId,
           type: users.roleInfo.roleName,
         }
         tempArray.push(obj)
-      });
+      })
       return tempArray
     }
     return []
-   
+
   }
 
   // need to enhance
