@@ -1231,6 +1231,12 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			return response;
 		}
 
+		try {
+			logger.info("getMandatoryContentStatusForUser: Ret Value is: " + new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(response));
+		} catch (JsonProcessingException e) {
+			logger.error(e);
+		}
+		
 		// Update the response object for course completion
 		Iterator<MandatoryContentInfo> entries = response.getContentDetails().values().iterator();
 		boolean isCompleted = false;
@@ -1249,11 +1255,6 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			response.setMandatoryCourseCompleted(true);
 		}
 
-		try {
-			logger.info("getMandatoryContentStatusForUser: Ret Value is: " + new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(response));
-		} catch (JsonProcessingException e) {
-			logger.error(e);
-		}
 		return response;
 	}
 }
