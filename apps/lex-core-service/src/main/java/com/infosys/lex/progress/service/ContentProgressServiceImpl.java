@@ -26,7 +26,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +34,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.service.UserUtilityService;
@@ -52,8 +52,8 @@ import com.infosys.lex.progress.bodhi.repo.ContentProgressPrimaryKeyModel;
 import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
 import com.infosys.lex.progress.bodhi.repo.MandatoryContentInfo;
 import com.infosys.lex.progress.bodhi.repo.MandatoryContentModel;
-import com.infosys.lex.progress.bodhi.repo.MandatoryContentResponse;
 import com.infosys.lex.progress.bodhi.repo.MandatoryContentRepository;
+import com.infosys.lex.progress.bodhi.repo.MandatoryContentResponse;
 import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
 import com.infosys.lex.progress.dto.ContentProgressDTO;
 import com.infosys.lex.progress.dto.ExternalProgressDTO;
@@ -1205,11 +1205,12 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		MandatoryContentResponse response = new MandatoryContentResponse();
 		List<MandatoryContentModel> contentList = mandatoryContentRepository.getMandatoryContentsInfo(rootOrg, org);
 		if (CollectionUtils.isEmpty(contentList)) {
+			logger.info("getMandatoryContentStatusForUser: There are no mandatory Content set in DB.");
 			return response;
 		}
 		for (MandatoryContentModel content : contentList) {
-			MandatoryContentInfo info = MandatoryContentInfo.builder().rootOrg(content.getPrimaryKey().getRootOrg())
-					.org(content.getPrimaryKey().getOrg()).contentType(content.getContentType())
+			MandatoryContentInfo info = MandatoryContentInfo.builder().rootOrg(rootOrg)
+					.org(org).contentType(content.getContentType())
 					.minProgressForCompletion(content.getMinProgressCheck()).build();
 			response.addContentInfo(content.getPrimaryKey().getContent_id(), info);
 		}
@@ -1222,9 +1223,6 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			}
 			Map<String, Object> resultMap = new HashMap<>();
 			for (String contentId : contentIds) {
-				if (!progressMap.containsKey(contentId)) {
-					return response;
-				}
 				resultMap = (Map<String, Object>) progressMap.get(contentId);
 				response.getContentDetails().get(contentId).setUserProgress((Float) resultMap.get(PROGRESS_CONSTANT));
 			}
@@ -1251,6 +1249,11 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 			response.setMandatoryCourseCompleted(true);
 		}
 
+		try {
+			logger.info("getMandatoryContentStatusForUser: Ret Value is: " + new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(response));
+		} catch (JsonProcessingException e) {
+			logger.error(e);
+		}
 		return response;
 	}
 }

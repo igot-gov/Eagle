@@ -11,7 +11,8 @@ public class MandatoryContentInfo {
 	private String rootOrg;
 	private String org;
 	private String contentType;
-	private Float minProgressForCompletion;
+	@Builder.Default
+	private Float minProgressForCompletion = 0.0f;
 	@Builder.Default
 	private Float userProgress = 0.0f;
 }
