@@ -17,6 +17,7 @@ import {
   MatChipsModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
+  MatCheckboxModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
@@ -32,6 +33,8 @@ import { DirectoryViewComponent } from './routes/directory/directroy.component'
 import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
 import { UserPopupComponent } from './routes/user-popup/user-popup'
 import { UsersComponent } from './routes/users/users.component'
+import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
+import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
 
 @NgModule({
   declarations: [
@@ -42,7 +45,9 @@ import { UsersComponent } from './routes/users/users.component'
     DirectoryViewComponent,
     CreateMdoComponent,
     UserPopupComponent,
-    UsersComponent
+    UsersComponent,
+    OpenRolesDialogComponent,
+    EditDepartmentDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +73,7 @@ import { UsersComponent } from './routes/users/users.component'
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
+    MatCheckboxModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     PipeFilterModule,
@@ -81,7 +87,7 @@ import { UsersComponent } from './routes/users/users.component'
     WidgetResolverModule,
     UserAutocompleteModule,
   ],
-  entryComponents: [UserPopupComponent],
+  entryComponents: [UserPopupComponent, OpenRolesDialogComponent, EditDepartmentDialogComponent],
   providers: [
     // CKEditorService,
     // LoaderService,
