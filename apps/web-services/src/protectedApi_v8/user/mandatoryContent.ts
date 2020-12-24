@@ -6,23 +6,22 @@ import { logError } from '../../utils/logger'
 import { ERROR } from '../../utils/message'
 
 const API_END_POINTS = {
-    mandatoryContentStatus: (userId: string) => `${CONSTANTS.SB_EXT_API_BASE_2}/v1/check/mandatoryContentStatus/${userId}`,
+    mandatoryContentStatus: `${CONSTANTS.SB_EXT_API_BASE_2}/v1/check/mandatoryContentStatus`,
 }
 
 export const mandatoryContent = Router()
 
-mandatoryContent.get('/checkStatus/:userId', async (req, res) => {
+mandatoryContent.get('/checkStatus', async (req, res) => {
     try {
         const rootOrgValue = req.headers.rootorg
         const orgValue = req.headers.org
         const widValue = req.headers.wid
-        const userId = req.params.userId
-        if (!rootOrgValue || !orgValue || !widValue || !userId) {
+        if (!rootOrgValue || !orgValue || !widValue) {
             res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
             return
         }
 
-        const response = await axios.get(API_END_POINTS.mandatoryContentStatus(userId), {
+        const response = await axios.get(API_END_POINTS.mandatoryContentStatus, {
             ...axiosRequestConfig,
             headers: {
                 org: orgValue,
