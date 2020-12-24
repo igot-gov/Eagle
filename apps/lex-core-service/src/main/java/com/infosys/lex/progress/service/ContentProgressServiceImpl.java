@@ -1217,14 +1217,19 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 		List<String> contentIds = contentList.stream().map(content -> content.getPrimaryKey().getContent_id())
 				.collect(Collectors.toList());
 		try {
+			logger.info("getMandatoryContentStatusForUser: MandatoryCourse Details : " + new ObjectMapper().writer().withDefaultPrettyPrinter().writeValueAsString(response));
+		} catch (JsonProcessingException e) {
+			logger.error(e);
+		}
+		
+		try {
 			Map<String, Object> progressMap = this.metaForProgress(rootOrg, userId, contentIds);
-			if (CollectionUtils.isEmpty(progressMap)) {
-				return response;
-			}
-			Map<String, Object> resultMap = new HashMap<>();
 			for (String contentId : contentIds) {
-				resultMap = (Map<String, Object>) progressMap.get(contentId);
-				response.getContentDetails().get(contentId).setUserProgress((Float) resultMap.get(PROGRESS_CONSTANT));
+				Map<String, Object> resultMap = (Map<String, Object>) progressMap.get(contentId);
+				if (resultMap != null && resultMap.get(PROGRESS_CONSTANT) != null) {
+					response.getContentDetails().get(contentId)
+							.setUserProgress((Float) resultMap.get(PROGRESS_CONSTANT));
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
