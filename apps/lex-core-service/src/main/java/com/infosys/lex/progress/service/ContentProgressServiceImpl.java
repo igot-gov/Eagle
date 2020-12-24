@@ -17,6 +17,24 @@ Highly Confidential
 */
 package com.infosys.lex.progress.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infosys.lex.common.service.ContentService;
 import com.infosys.lex.common.service.UserUtilityService;
@@ -28,18 +46,17 @@ import com.infosys.lex.core.exception.ApplicationLogicError;
 import com.infosys.lex.core.exception.BadRequestException;
 import com.infosys.lex.core.exception.InvalidDataInputException;
 import com.infosys.lex.core.logger.LexLogger;
-import com.infosys.lex.progress.bodhi.repo.*;
+import com.infosys.lex.progress.bodhi.repo.ContentProgress;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressModel;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressPrimaryKeyModel;
+import com.infosys.lex.progress.bodhi.repo.ContentProgressRepository;
+import com.infosys.lex.progress.bodhi.repo.MandatoryContentInfo;
+import com.infosys.lex.progress.bodhi.repo.MandatoryContentModel;
+import com.infosys.lex.progress.bodhi.repo.MandatoryContentResponse;
+import com.infosys.lex.progress.bodhi.repo.MandatoryContentRepository;
 import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
 import com.infosys.lex.progress.dto.ContentProgressDTO;
 import com.infosys.lex.progress.dto.ExternalProgressDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class ContentProgressServiceImpl implements ContentProgressService {
@@ -1184,35 +1201,56 @@ public class ContentProgressServiceImpl implements ContentProgressService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Boolean getMandatoryContentStatusForUser(String rootOrg, String org, String userId) {
+	public MandatoryContentResponse getMandatoryContentStatusForUser(String rootOrg, String org, String userId) {
+		MandatoryContentResponse response = new MandatoryContentResponse();
 		List<MandatoryContentModel> contentList = mandatoryContentRepository.getMandatoryContentsInfo(rootOrg, org);
 		if (CollectionUtils.isEmpty(contentList)) {
-			return Boolean.TRUE;
+			return response;
+		}
+		for (MandatoryContentModel content : contentList) {
+			MandatoryContentInfo info = MandatoryContentInfo.builder().rootOrg(content.getPrimaryKey().getRootOrg())
+					.org(content.getPrimaryKey().getOrg()).contentType(content.getContentType())
+					.minProgressForCompletion(content.getMinProgressCheck()).build();
+			response.addContentInfo(content.getPrimaryKey().getContent_id(), info);
 		}
 		List<String> contentIds = contentList.stream().map(content -> content.getPrimaryKey().getContent_id())
 				.collect(Collectors.toList());
-		Map<String, MandatoryContentModel> contentModelMap = contentList.stream().collect(Collectors.toMap(content -> content.getPrimaryKey().getContent_id(), content -> content, (e1, e2) -> e1));
 		try {
 			Map<String, Object> progressMap = this.metaForProgress(rootOrg, userId, contentIds);
 			if (CollectionUtils.isEmpty(progressMap)) {
-				return Boolean.FALSE;
+				return response;
 			}
 			Map<String, Object> resultMap = new HashMap<>();
 			for (String contentId : contentIds) {
 				if (!progressMap.containsKey(contentId)) {
-					return Boolean.FALSE;
+					return response;
 				}
 				resultMap = (Map<String, Object>) progressMap.get(contentId);
-				Float progress = (Float) resultMap.get(PROGRESS_CONSTANT);
-				Float minimumCriteria = contentModelMap.get(contentId).getMinProgressCheck();
-				if (progress < minimumCriteria)
-					return Boolean.FALSE;
+				response.getContentDetails().get(contentId).setUserProgress((Float) resultMap.get(PROGRESS_CONSTANT));
 			}
 		} catch (Exception e) {
 			logger.error(e);
-			return Boolean.FALSE;
+			return response;
 		}
-		return Boolean.TRUE;
-	}
 
+		// Update the response object for course completion
+		Iterator<MandatoryContentInfo> entries = response.getContentDetails().values().iterator();
+		boolean isCompleted = false;
+		while (entries.hasNext()) {
+			MandatoryContentInfo entry = entries.next();
+			if (entry.getUserProgress() < entry.getMinProgressForCompletion()) {
+				response.setMandatoryCourseCompleted(false);
+				isCompleted = false;
+				break;
+			} else {
+				isCompleted = true;
+			}
+		}
+
+		if (isCompleted) {
+			response.setMandatoryCourseCompleted(true);
+		}
+
+		return response;
+	}
 }

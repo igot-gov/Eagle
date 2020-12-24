@@ -147,11 +147,11 @@ public class ContentProgressController {
 	 * @return Status of mandatory content
 	 * @throws Exception
 	 */
-	@GetMapping("/v1/check/mandatoryContentStatus/{user_id}")
+	@GetMapping("/v1/check/mandatoryContentStatus")
 	public ResponseEntity<?> getMandatoryContentStatus(
 			@RequestHeader("rootOrg") String rootOrg,
 			@RequestHeader("org") String org,
-			@PathVariable("user_id") String userId) throws Exception {
+			@RequestHeader("wid") String userId) throws Exception {
 		return new ResponseEntity<>(service.getMandatoryContentStatusForUser(rootOrg, org, userId),HttpStatus.OK);
 	}
 }

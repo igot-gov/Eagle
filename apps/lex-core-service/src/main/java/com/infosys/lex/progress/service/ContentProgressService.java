@@ -22,6 +22,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import com.infosys.lex.progress.bodhi.repo.MandatoryContentResponse;
 import com.infosys.lex.progress.dto.AssessmentRecalculateDTO;
 import com.infosys.lex.progress.dto.ContentProgressDTO;
 import com.infosys.lex.progress.dto.ExternalProgressDTO;
@@ -61,6 +62,6 @@ public interface ContentProgressService {
 
 	String updateExternalProgress(ExternalProgressDTO externalInfo) throws Exception;
 
-	public Boolean getMandatoryContentStatusForUser(String rootOrg, String org, String userId);
+	public MandatoryContentResponse getMandatoryContentStatusForUser(String rootOrg, String org, String userId);
 
 }
