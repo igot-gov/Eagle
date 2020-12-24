@@ -4,7 +4,9 @@ import { Observable } from 'rxjs'
 
 const API_END_POINTS = {
   WORKFLOW_TO_APPROVE: '/apis/protected/v8/workflowhandler/applicationsSearch',
-  PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryById',
+  PROFILE_REGISTRY: 'apis/protected/v8/user/profileRegistry/getUserRegistryByUser/',
+  WORKFLOW_HANDLER: 'apis/protected/v8/workflowhandler/transition',
+  WF_HISTORY_BY_APPID: 'apis/protected/v8/workflowhandler/historyByApplicationId/',
 }
 
 @Injectable({
@@ -16,7 +18,15 @@ export class NeedApprovalsService {
     return this.http.post<any>(API_END_POINTS.WORKFLOW_TO_APPROVE, request)
   }
 
-  fetchProfileDeatils(): Observable<any> {
-    return this.http.get<any>(API_END_POINTS.PROFILE_REGISTRY)
+  fetchProfileDeatils(userid: string): Observable<any> {
+    return this.http.get<any>(API_END_POINTS.PROFILE_REGISTRY + userid)
+  }
+
+  handleWorkflow(request: any): Observable<any> {
+    return this.http.post<any>(API_END_POINTS.WORKFLOW_HANDLER, request)
+  }
+
+  getWfHistoryByAppId(appid: string): Observable<any> {
+    return this.http.get<any>(API_END_POINTS.WF_HISTORY_BY_APPID + appid)
   }
 }

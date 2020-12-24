@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { NeedApprovalsService } from '../../services/need-approvals.service'
+import { ActivatedRoute, Router, NavigationEnd, Event } from '@angular/router'
 
 @Component({
   selector: 'ws-app-position',
@@ -7,17 +7,17 @@ import { NeedApprovalsService } from '../../services/need-approvals.service'
   styleUrls: ['./position.component.scss'],
 })
 export class PositionComponent implements OnInit {
-  positionDetails: any
-  constructor(private needApprService: NeedApprovalsService) { }
-
-  ngOnInit() {
-    this.fetchProfileDetails()
-  }
-
-  fetchProfileDetails() {
-    this.needApprService.fetchProfileDeatils().subscribe(res => {
-      this.positionDetails = res.result.UserProfile[0].professionalDetails[0]
+  professionalDetails: any
+  employmentDetails: any
+  constructor(private activeRoute: ActivatedRoute, private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        const profileData = this.activeRoute.snapshot.data.profileData.data.result.UserProfile[0] || {}
+        this.professionalDetails = profileData.professionalDetails[0]
+        this.employmentDetails = profileData.employmentDetails
+      }
     })
   }
 
+  ngOnInit() { }
 }

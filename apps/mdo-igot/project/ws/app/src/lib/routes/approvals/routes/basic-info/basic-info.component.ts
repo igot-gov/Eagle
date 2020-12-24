@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { NeedApprovalsService } from '../../services/need-approvals.service'
+import { ActivatedRoute, Router, NavigationEnd, Event } from '@angular/router'
 
 @Component({
   selector: 'ws-app-basic-info',
@@ -7,16 +7,15 @@ import { NeedApprovalsService } from '../../services/need-approvals.service'
   styleUrls: ['./basic-info.component.scss'],
 })
 export class BasicInfoComponent implements OnInit {
-  basicDetails: any
-  constructor(private needApprService: NeedApprovalsService) { }
-
-  ngOnInit() {
-    this.fetchProfileDetails()
-  }
-
-  fetchProfileDetails() {
-    this.needApprService.fetchProfileDeatils().subscribe(res => {
-      this.basicDetails = res.result.UserProfile[0].personalDetails
+  basicInfo: any
+  constructor(private activeRoute: ActivatedRoute, private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        const profileData = this.activeRoute.snapshot.data.profileData.data.result.UserProfile[0] || {}
+        this.basicInfo = profileData.personalDetails
+      }
     })
   }
+
+  ngOnInit() { }
 }

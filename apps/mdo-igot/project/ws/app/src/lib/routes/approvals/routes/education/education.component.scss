@@ -1,8 +1,12 @@
+.appr-section-heading{
+  font-size:20px
+}
+
 .appr-text-field{
   width: 272px;
-  border: 1px solid grey;
+  border: 1px solid #DDDDDD;
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 9px;
 }
 
 .appr-text-label{
@@ -12,9 +16,19 @@
   font-size: 14px;
   color: #000000;
   font-weight: bold;
+  display: block;
 }
 
+.header-text{
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+}
 
+#academics{
+  background: #F5F5F5;
+}
 
 ::ng-deep .mat-grid-tile .mat-figure {
   display:block !important; /* or whichever you need */

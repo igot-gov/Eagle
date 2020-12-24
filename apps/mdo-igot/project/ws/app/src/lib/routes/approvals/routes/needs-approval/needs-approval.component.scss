@@ -1,24 +1,19 @@
 .appr-text-field{
   width: 272px;
-  border: 1px solid grey;
+  border: 1px solid #DDDDDD;
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 9px;
 }
 
 .appr-text-label{
-  margin-top: 15px;
-  margin-bottom: 0;
   font-size: 14px;
   color: #000000;
   font-weight: bold;
 }
 
 .accept {
-    color: green;
-    font-size: 47px;
-    position: absolute;
-    left: 40px;
-    top: 2px;
+  color: green;
+  font-size: 49px;
 }
 /* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
 .accept svg {
@@ -26,22 +21,18 @@
 }
 
 .reject {
-    color: red;
-    font-size: 47px;
-    position: absolute;
-    top:2px
+  color: red;
+  font-size: 49px;
 }
 /* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
 .reject svg {
-    fill: red;
+  fill: red;
 }
 
 .needs-appr-count-text{
   border-radius: 100px 4px 4px 100px;
-  background: #8C5741;
   padding: 0 12px;
-  font-size: 12px;
-  color: white;
+  font-size: 18px;
   float: right;
 }
 
@@ -54,6 +45,43 @@
   margin-left: 6px;
 }
 
-.count{
-  padding-left:12px;
+.appr-label{
+  padding:15px 0;
+}
+
+.pending-icon{
+  position: absolute;
+  right: 170px;
+}
+
+.appr-section-heading{
+  font-size:20px
+}
+
+.accept-btn{
+  margin-left: 15px;
+}
+
+
+.accept-dialog-btn{
+  color: white !important;
+  font-weight: 500;
+  margin-left: 15px;
+  background-color:  #0074b6 !important;
+}
+
+.goback-dialog-btn{
+  color: #0074b6 !important;
+  border: 1px solid #0074b6;
+}
+
+.dialog-title{
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.no-request-text{
+  font-size: 15px;
+  color: #847A72;
+  font-weight: bold;
 }

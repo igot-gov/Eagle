@@ -1,63 +1,42 @@
 
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
-// import { NSProfileDataV2 } from '../../models/profile-v2.model'
-// import { MatDialog } from '@angular/material/dialog'
 import { Router } from '@angular/router'
-// import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
 import { ApprovalsService } from '../../services/approvals.service'
-import lodash from 'lodash'
 import moment from 'moment'
+import { ITableData } from '@ws-widget/collection'
 @Component({
   selector: 'ws-app-approvals',
   templateUrl: './approvals.component.html',
   styleUrls: ['./approvals.component.scss'],
 })
 export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
-  data: any = []
-  tabledata: any = []
+  data: any[] = []
   currentFilter = 'toapprove'
   discussionList!: any
   discussProfileData!: any
 
-  constructor(private router: Router, private apprService: ApprovalsService) { }
+  tabledata: ITableData = {
+    actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
+    { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+    columns: [
+      { displayName: 'Full Name', key: 'fullname' },
+      { displayName: 'Requested on', key: 'requestedon' },
+      { displayName: 'Fields', key: 'fields', isList: true },
+    ],
+    needCheckBox: false,
+    needHash: false,
+    sortColumn: 'fullname',
+    sortState: 'asc',
+  }
 
-  ngOnDestroy(): void {
-    // throw new Error('Method not implemented.')
+  constructor(private router: Router, private apprService: ApprovalsService) {
+    this.fetchApprovals()
   }
   ngAfterViewInit(): void {
-    // throw new Error('Method not implemented.')
+    throw new Error('Method not implemented.')
   }
-  ngOnInit() {
-    this.tabledata = {
-      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
-      columns: [
-        { displayName: 'Full Name', key: 'fullname' },
-        { displayName: 'Requested on', key: 'requestedon' },
-        { displayName: 'Fields', key: 'fields' },
-      ],
-      needCheckBox: false,
-      needHash: false,
-      sortColumn: '',
-      sortState: 'asc',
-    }
-    // this.data = [{
-    //   fullname: 'DevaPrathap Nagendra',
-    //   requestedon: new Date(),
-    //   fields: 'MDo,Period,Position',
-    // },
-    // {
-    //   fullname: 'Nancy Jimenez',
-    //   requestedon: new Date(),
-    //   fields: 'Period,Position',
-    // },
-    // {
-    //   fullname: 'Madison Tran',
-    //   requestedon: new Date(),
-    //   fields: 'Period,Position',
-    // }]
 
-    this.fetchApprovals()
+  ngOnInit() {
   }
 
   filter(key: string | 'timestamp' | 'best' | 'saved') {
@@ -76,18 +55,15 @@ export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
           break
 
         default:
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
           break
       }
     }
   }
 
   onApprovalClick(approval: any) {
-    this.router.navigate([`/app/approvals/${approval.fullname}/to-approve`],
-                         {
-        queryParams: { updatedFileds: JSON.stringify(approval.updatedFileds) },
-      }
-    )
+    if (approval) {
+      this.router.navigate([`/app/approvals/${approval.userWorkflow.userInfo.wid}/to-approve`])
+    }
   }
 
   fetchApprovals() {
@@ -95,27 +71,42 @@ export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
       serviceName: 'profile',
       applicationStatus: 'SEND_FOR_APPROVAL',
       offset: 0,
-      limit: 10,
+      limit: 100,
     }
     this.apprService.getApprovals(req).subscribe(res => {
-      this.data = res.result.data.map((approval: any) => {
-        const currentdate = new Date(approval.wfInfo.createdOn)
-        const fileds = JSON.parse(approval.wfInfo.updateFieldValues).map((field: any) => {
-          return field.fieldKey
+      let currentdate: Date
+      res.result.data.forEach((approval: any) => {
+        let keys = ''
+        approval.wfInfo.forEach((wf: any) => {
+          currentdate = new Date(wf.createdOn)
+          if (typeof wf.updateFieldValues === 'string') {
+            const fields = JSON.parse(wf.updateFieldValues)
+            if (fields.length > 0) {
+              fields.forEach((field: any) => {
+                keys += `${field.fieldKey}, `
+              })
+            }
+          }
         })
-        const fullName = approval.userInfo ? `${approval.userInfo.first_name} ${approval.userInfo.last_name}` : null
-        return {
-          fullname: fullName,
+
+        this.data.push({
+          fullname: `${approval.userInfo.first_name} ${approval.userInfo.last_name}`,
           requestedon: `${currentdate.getDate()}
-            ${moment(currentdate.getMonth() + 1, 'MM').format('MMM')}
-            ${currentdate.getFullYear()}
-            ${currentdate.getHours()} :
-             ${currentdate.getMinutes()} :
-             ${currentdate.getSeconds()}`,
-          fields: fileds,
-          updatedFileds: JSON.parse(approval.wfInfo.updateFieldValues),
-        }
+          ${moment(currentdate.getMonth() + 1, 'MM').format('MMM')}
+          ${currentdate.getFullYear()}
+          ${currentdate.getHours()} :
+          ${currentdate.getMinutes()} :
+          ${currentdate.getSeconds()}`,
+          fields: keys.slice(0, -1),
+          userWorkflow: approval,
+        })
       })
     })
   }
+
+  get getTableData() {
+    return this.data
+  }
+
+  ngOnDestroy(): void { }
 }

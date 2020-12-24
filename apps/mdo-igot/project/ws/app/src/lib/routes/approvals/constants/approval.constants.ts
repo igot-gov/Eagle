@@ -1,1 +1,20 @@
-export const firstname = 'First Name'
+export const APPROVALCONSTANT = {
+  firstname: 'First Name',
+  middlename: 'Middle Name',
+  lastname: 'Surname',
+  pincode: 'Pin Code',
+  gender: 'Gender',
+  domicileMedium: 'Domicile Medium (Mother Tongue)',
+  mobile: 'Mobile Number',
+  telephone: 'Telephone Number (e.g., 0123-26104183 or 012327204281)',
+  knownLanguages: 'Languages Known',
+  personalEmail: 'Personal Email',
+  postalAddress: 'Postal Address',
+  nationality: 'Nationality',
+  countryCode: 'Country Code',
+  dob: 'Date of Birth (dd-mm-yyyy)',
+  category: 'Category',
+  primaryEmail: 'Primary Email',
+  officialEmail: 'Secondary Email',
+  maritalStatus: 'Marital Status',
+}

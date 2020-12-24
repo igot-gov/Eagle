@@ -15,13 +15,13 @@
           <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'toapprove',
               'ws-mat-accent-border font-medium':currentFilter !== 'toapprove'}" mat-button
             (click)="filter('toapprove')" role="button">To Approve</a>
-          <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'userflags',
+          <!-- <a href="javascript:void(0)" class="filter-option" [ngClass]="{'ws-mat-accent-border-active' : currentFilter === 'userflags',
               'ws-mat-accent-border font-medium':currentFilter !== 'userflags'}" mat-button
-            (click)="filter('userflags')" role="button">User flags</a>
+            (click)="filter('userflags')" role="button">User flags</a> -->
         </div>
       </div>
-      <ng-container>
-        <ws-widget-ui-user-table [tableData]='tabledata' [data]='data' (eOnRowClick)="onApprovalClick($event)">
+      <ng-container *ngIf="getTableData && getTableData.length>0">
+        <ws-widget-ui-user-table [tableData]='tabledata' [data]='getTableData' (eOnRowClick)="onApprovalClick($event)">
         </ws-widget-ui-user-table>
       </ng-container>
     </mat-card-content>
