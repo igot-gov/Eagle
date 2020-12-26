@@ -6,7 +6,7 @@
 
         <div class="mobile-break mat-app-background">
           <div class="margin-top-s">
-            <div class="margin-top-xs" *ngIf="checkCondition('name', 'show')"
+            <div class="margin-top-xs"
               [ngClass]="{ disable: checkCondition('name', 'disabled') }">
               <p class="margin-remove-bottom" i18n="Title label|Label which explains the user to enter title"
                 [ngClass]="{ required: checkCondition('name', 'required') }">
@@ -23,7 +23,7 @@
             </div>
 
           </div>
-          <div class="margin-top-s" *ngIf="checkCondition('subTitle', 'show')"
+          <div class="margin-top-s"
             [ngClass]="{ disable: checkCondition('subTitle', 'disabled') }">
             <p class="margin-remove-bottom" [ngClass]="{ required: checkCondition('subTitle', 'required') }">
               Head Quaters
@@ -42,7 +42,7 @@
       </form>
     </div>
     <div class="flex-container-div">
-      <div class="margin-top-xs" *ngIf="checkCondition('appIcon', 'show')"
+      <div class="margin-top-xs" 
         [ngClass]="{ disable: checkCondition('appIcon', 'disabled') }">
         <label>
           <div class="margin-top-xs flex flex-middle thumb-text"

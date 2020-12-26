@@ -12,7 +12,7 @@ import {
   SEARCH,
   STATUS_CHANGE,
   SEARCH_V6_ADMIN,
-  SEARCH_V6_AUTH,
+  SEARCH_V6_AUTH, CONTENT_READ_MULTIPLE_HIERARCHY,
 } from '../routes/author-kid/apiEndpoints'
 import { NSApiResponse } from '../interface/apiResponse'
 import { NSApiRequest } from '../interface/apiRequest'
@@ -20,7 +20,6 @@ import { NSContent } from '../interface/content'
 import { AccessControlService } from './access-control.service'
 import { Observable, of } from 'rxjs'
 import { map, mergeMap, catchError } from 'rxjs/operators'
-import { CONTENT_READ_MULTIPLE_HIERARCHY } from '../routes/author-kid/apiEndpoints'
 import { ISearchContent, ISearchResult } from '../interface/search'
 import { ApiService } from './api.service'
 

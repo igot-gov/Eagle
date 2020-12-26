@@ -8,7 +8,7 @@ interface IData {
 }
 
 @Component({
-  selector: 'ws-auth-root-notification',
+  selector: 'ws-widget-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.scss'],
 })

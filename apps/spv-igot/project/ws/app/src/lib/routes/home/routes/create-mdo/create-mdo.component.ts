@@ -17,10 +17,12 @@ import { ImageCropComponent } from '@ws-widget/utils/src/public-api'
 import { ApiService } from '../../services/api.service'
 import { AccessControlService } from '../../services/access-control.service'
 import { EditorService } from '../../services/editor.service'
+import { startWith, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
+import { of } from 'rxjs'
 
 @Component({
   selector: 'ws-app-create-mdo',
-  providers:[UploadService, ApiService, AccessControlService, EditorContentService, EditorService, AuthInitService, LoaderService],
+  providers: [UploadService, ApiService, AccessControlService, EditorContentService, EditorService, AuthInitService, LoaderService],
   templateUrl: './create-mdo.component.html',
   styleUrls: ['./create-mdo.component.scss'],
 })
@@ -31,7 +33,6 @@ export class CreateMdoComponent implements OnInit {
   @Input() stage = 1
   @Input() type = ''
   contentMeta!: NSContent.IContentMeta
-  userMgmtData: any = []
   fracData: any = []
   contentForm!: FormGroup
   imageTypes = ['.png', '.jpg', '.jpeg', '.jtif', '.tiff']
@@ -39,14 +40,68 @@ export class CreateMdoComponent implements OnInit {
   canUpdate = true
   isEditEnabled = false
   canExpiry = true
+  creatorContactsCtrl!: FormControl
+  trackContactsCtrl!: FormControl
+  publisherDetailsCtrl!: FormControl
+  editorsCtrl!: FormControl
+  creatorDetailsCtrl!: FormControl
+  audienceCtrl!: FormControl
+  jobProfileCtrl!: FormControl
+  regionCtrl!: FormControl
+  accessPathsCtrl!: FormControl
+  keywordsCtrl!: FormControl
+  competencyCtrl!: FormControl
+  selectedSkills: string[] = []
+  ordinals!: any
+  resourceTypes: string[] = []
+  employeeList: any[] = []
+  audienceList: any[] = []
+  jobProfileList: any[] = []
+  regionList: any[] = []
+  accessPathList: any[] = []
+  competencyValue: any[] = []
+  fetchTagsStatus: 'done' | 'fetching' | null = null
+  complexityLevelList: any
+  editorService: any
+  content!: NSContent.IContentMeta
+  filteredOptions$: any
+  interestSvc: any
+  competencyOptions$: any
+  allLanguages: any
+  data1: any
+  workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
+  { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
+  { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,) { }
-
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService) {}
   ngOnInit() {
+    this.typeCheck()
+    this.contentForm = new FormGroup({
+      name: new FormControl(),
+      subTitle: new FormControl(),
+    })
+    this.ordinals = this.authInitService.ordinals
+    this.audienceList = this.ordinals.audience
+    this.jobProfileList = this.ordinals.jobProfile
+    this.complexityLevelList = this.ordinals.audience
+
+    this.creatorContactsCtrl = new FormControl()
+    this.trackContactsCtrl = new FormControl()
+    this.publisherDetailsCtrl = new FormControl()
+    this.editorsCtrl = new FormControl()
+    this.creatorDetailsCtrl = new FormControl()
+    this.keywordsCtrl = new FormControl('')
+    this.competencyCtrl = new FormControl('')
+
+    this.audienceCtrl = new FormControl()
+    this.jobProfileCtrl = new FormControl()
+    this.regionCtrl = new FormControl()
+    this.accessPathsCtrl = new FormControl()
+    this.accessPathsCtrl.disable()
 
     this.tabledata = {
       columns: [
@@ -59,81 +114,242 @@ export class CreateMdoComponent implements OnInit {
       sortColumn: '',
       sortState: 'asc',
     }
-    this.contentForm = new FormGroup({
-      name: new FormControl(),
-      subTitle: new FormControl(),
-    })
-    this.userMgmtData = [{
-      name: 'Create Users',
-      key: 'Create Users',
-      checked: false,
-      enabled: true,
-    },
-    {
-      name: 'Activate Users',
-      key: 'Activate Users',
-      checked: true,
-      enabled: true,
-    },
-    {
-      name: 'Add/Remove Users',
-      key: 'Add/Remove Users',
-      checked: true,
-      enabled: true,
-    },
-    {
-      name: 'Block Users',
-      key: 'Block Users',
-      checked: false,
-      enabled: true,
-    },
-    {
-      name: 'Approve fields',
-      key: 'Approve fields',
-      checked: true,
-      enabled: true,
-    }]
 
-    this.fracData = [{
-      name: 'Competencies',
-      key: 'competencies',
-      checked: true,
-      enabled: true,
-    },
-    {
-      name: 'Postions',
-      key: 'postions',
-      checked: false,
-      enabled: true,
-    },
-    {
-      name: 'Roles',
-      key: 'roles',
-      checked: true,
-      enabled: true,
-    },
-    {
-      name: 'Knowledge resources',
-      key: 'knowledge resources',
-      checked: false,
-      enabled: true,
-    },
-    {
-      name: 'Question bank',
-      key: 'question bank',
-      checked: true,
-      enabled: true,
-    }]
+    this.creatorContactsCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        filter(val => typeof val === 'string'),
+        switchMap((value: string) => {
+          if (typeof value === 'string' && value) {
+            this.employeeList = <any[]>[]
+            this.fetchTagsStatus = 'fetching'
+            return this.editorService.fetchEmployeeList(value)
+          }
+          return of([])
+        }),
+      )
+      // .subscribe(
+      //   users => {
+      //     // this.employeeList = users || <string[]>[]
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      //   () => {
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      // )
+
+    this.trackContactsCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        filter(val => typeof val === 'string'),
+        switchMap((value: string) => {
+          if (typeof value === 'string' && value) {
+            this.employeeList = <any[]>[]
+            this.fetchTagsStatus = 'fetching'
+            return this.editorService.fetchEmployeeList(value)
+          }
+          return of([])
+        }),
+      )
+      // .subscribe(
+      //   users => {
+      //     // this.employeeList = users || <string[]>[]
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      //   () => {
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      // )
+
+    this.publisherDetailsCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        filter(val => typeof val === 'string'),
+        switchMap((value: string) => {
+          if (typeof value === 'string' && value) {
+            this.employeeList = <any[]>[]
+            this.fetchTagsStatus = 'fetching'
+            return this.editorService.fetchEmployeeList(value)
+          }
+          return of([])
+        }),
+      )
+      // .subscribe(
+      //   users => {
+      //     // this.employeeList = users || <string[]>[]
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      //   () => {
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      // )
+
+    this.editorsCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        filter(val => typeof val === 'string'),
+        switchMap((value: string) => {
+          if (typeof value === 'string' && value) {
+            this.employeeList = <any[]>[]
+            this.fetchTagsStatus = 'fetching'
+            return this.editorService.fetchEmployeeList(value)
+          }
+          return of([])
+        }),
+      )
+      // .subscribe(
+      //   users => {
+      //     this.employeeList = users || <string[]>[]
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      //   () => {
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      // )
+
+    this.creatorDetailsCtrl.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        filter(val => typeof val === 'string'),
+        switchMap((value: string) => {
+          if (typeof value === 'string' && value) {
+            this.employeeList = <any[]>[]
+            this.fetchTagsStatus = 'fetching'
+            return this.editorService.fetchEmployeeList(value)
+          }
+          return of([])
+        }),
+      )
+      // .subscribe(
+      //   users => {
+      //     this.employeeList = users || <string[]>[]
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      //   () => {
+      //     this.fetchTagsStatus = 'done'
+      //   },
+      // )
+
+    this.audienceCtrl.valueChanges.subscribe(() => this.fetchAudience())
+
+    this.jobProfileCtrl.valueChanges.subscribe(() => this.fetchJobProfile())
+
+    this.regionCtrl.valueChanges
+      .pipe(
+        debounceTime(400),
+        filter(v => v),
+      )
+      .subscribe(() => this.fetchRegion())
+
+    this.accessPathsCtrl.valueChanges.pipe(
+      debounceTime(400),
+      filter(v => v),
+    ).subscribe(() => this.fetchAccessRestrictions())
+
+    this.contentService.changeActiveCont.subscribe(data => {
+      if (this.contentMeta && this.canUpdate) {
+        this.storeData()
+      }
+      this.content = this.contentService.getUpdatedMeta(data)
+    })
+
+    this.filteredOptions$ = this.keywordsCtrl.valueChanges.pipe(
+      startWith(this.keywordsCtrl.value),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(value => this.interestSvc.fetchAutocompleteInterestsV2(value)),
+    )
+    this.competencyOptions$ = this.competencyCtrl.valueChanges.pipe(
+      startWith(this.competencyCtrl.value),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
+    )
+
+    this.allLanguages = this.data1.languages
+  }
+  typeCheck() {
+    if (this.type) {
+      let dataName = ''
+      switch (this.type) {
+        case 'URL':
+          dataName = 'Attach Link'
+          break
+        case 'UPLOAD':
+          dataName = 'Upload'
+          break
+        case 'ASSE':
+          dataName = 'Assessment'
+          break
+        case 'WEB':
+          dataName = 'Web Pages'
+          break
+
+        default:
+          break
+      }
+      if (dataName) {
+        this.workFlow.push({
+          isActive: false,
+          isCompleted: true,
+          name: dataName,
+          step: -1,
+        })
+      }
+    }
+  }
+  fetchAudience(): void {
+    if ((this.audienceCtrl.value || '').trim()) {
+      this.audienceList = this.ordinals.audience.filter(
+        (v: any) => v.toLowerCase().indexOf(this.audienceCtrl.value.toLowerCase()) > -1,
+      )
+    } else {
+      this.audienceList = this.ordinals.audience.slice()
+    }
   }
   checkCondition(first: string, seconnd: string) {
     if (first && seconnd) {
 
     }
-    return true
+    return false
   }
   showError() {
 
   }
+  private fetchJobProfile() {
+    if ((this.jobProfileCtrl.value || '').trim()) {
+      this.jobProfileList = this.ordinals.jobProfile.filter(
+        (v: any) => v.toLowerCase().indexOf(this.jobProfileCtrl.value.toLowerCase()) > -1,
+      )
+    } else {
+      this.jobProfileList = this.ordinals.jobProfile.slice()
+    }
+  }
+
+  private fetchRegion() {
+    if ((this.regionCtrl.value || '').trim()) {
+      this.regionList = this.ordinals.region.filter(
+        (v: any) => v.toLowerCase().indexOf(this.regionCtrl.value.toLowerCase()) > -1,
+      )
+    } else {
+      this.regionList = []
+    }
+  }
+
+  private fetchAccessRestrictions() {
+    if (this.accessPathsCtrl.value.trim()) {
+      this.accessPathList = this.ordinals.accessPaths.filter((v: any) => v.toLowerCase().
+        indexOf(this.accessPathsCtrl.value.toLowerCase()) === 0)
+    } else {
+      this.accessPathList = this.ordinals.accessPaths.slice()
+    }
+  }
+
   uploadAppIcon(file: File) {
     const formdata = new FormData()
     const fileName = file.name.replace(/[^A-Za-z0-9.]/g, '')
