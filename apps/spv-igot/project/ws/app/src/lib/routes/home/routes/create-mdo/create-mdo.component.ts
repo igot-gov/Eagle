@@ -111,7 +111,7 @@ export class CreateMdoComponent implements OnInit {
   openPopup() {
     const dialogRef = this.dialog.open(UserPopupComponent, {
       maxHeight: 'auto',
-      height: '80%',
+      height: '70%',
       width: '80%',
       panelClass: 'remove-pad',
     })

@@ -5,6 +5,7 @@ import { TenantAdminService } from '../../../../services/tenant-admin.service'
 
 @Component({
   selector: 'ws-admin-edit-department-dialog',
+  providers: [TenantAdminService],
   templateUrl: './edit-department-dialog.component.html',
   styleUrls: ['./edit-department-dialog.component.scss'],
 })

@@ -65,8 +65,8 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     // int left blank
     this.tabledata = {
-      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+      // actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
+      // { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },

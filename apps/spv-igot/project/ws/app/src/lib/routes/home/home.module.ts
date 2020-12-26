@@ -32,6 +32,9 @@ import { DirectoryViewComponent } from './routes/directory/directroy.component'
 import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
 import { UserPopupComponent } from './routes/user-popup/user-popup'
 import { UsersComponent } from './routes/users/users.component'
+import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
+import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { UsersComponent } from './routes/users/users.component'
     DirectoryViewComponent,
     CreateMdoComponent,
     UserPopupComponent,
-    UsersComponent
+    UsersComponent,
+    EditDepartmentDialogComponent, OpenRolesDialogComponent
   ],
   imports: [
     CommonModule,
@@ -80,8 +84,9 @@ import { UsersComponent } from './routes/users/users.component'
     BtnPageBackModule,
     WidgetResolverModule,
     UserAutocompleteModule,
+    MatCheckboxModule,
   ],
-  entryComponents: [UserPopupComponent],
+  entryComponents: [UserPopupComponent, EditDepartmentDialogComponent, OpenRolesDialogComponent],
   providers: [
     // CKEditorService,
     // LoaderService,
