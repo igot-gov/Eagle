@@ -5,8 +5,9 @@ import { MatSnackBar } from '@angular/material'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { IUserForm } from '../users.model'
 import { CreateUserService } from './create-user.service'
-import { SystemRolesManagementService } from '../../system-roles-management/system-roles-management.service'
-import { IManageUser } from '../../system-roles-management/system-roles-management.model'
+import { SystemRolesManagementService } from '../../../services/system-roles-management.service'
+import { IManageUser } from '../../../services/system-roles-management.model'
+
 @Component({
   selector: 'ws-admin-create-user',
   templateUrl: './create-user.component.html',

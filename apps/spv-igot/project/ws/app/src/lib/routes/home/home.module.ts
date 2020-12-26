@@ -17,6 +17,7 @@ import {
   MatChipsModule,
   MatProgressSpinnerModule,
   MatProgressBarModule,
+  MatCheckboxModule,
 } from '@angular/material'
 import { MatCardModule } from '@angular/material/card'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
@@ -32,9 +33,8 @@ import { DirectoryViewComponent } from './routes/directory/directroy.component'
 import { CreateMdoComponent } from './routes/create-mdo/create-mdo.component'
 import { UserPopupComponent } from './routes/user-popup/user-popup'
 import { UsersComponent } from './routes/users/users.component'
-import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
 import { OpenRolesDialogComponent } from './routes/users/components/open-roles-dialog/open-roles-dialog.component'
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { EditDepartmentDialogComponent } from './routes/users/components/edit-department-dialog/edit-department-dialog.component'
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CreateMdoComponent,
     UserPopupComponent,
     UsersComponent,
-    EditDepartmentDialogComponent, OpenRolesDialogComponent
+    OpenRolesDialogComponent,
+    EditDepartmentDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -72,6 +73,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatDialogModule,
     MatButtonModule,
     MatSidenavModule,
+    MatCheckboxModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     PipeFilterModule,
@@ -87,6 +89,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatCheckboxModule,
   ],
   entryComponents: [UserPopupComponent, EditDepartmentDialogComponent, OpenRolesDialogComponent],
+
   providers: [
     // CKEditorService,
     // LoaderService,

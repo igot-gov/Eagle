@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormControl } from '@angular/forms'
-import { MatDialog} from '@angular/material'
+import { MatDialog } from '@angular/material'
 import { UserPopupComponent } from '../user-popup/user-popup'
 
 @Component({
@@ -15,7 +15,7 @@ export class CreateMdoComponent implements OnInit {
   data: any = []
   imageTypes = ['.png', '.jpg', '.jpeg', '.jtif', '.tiff']
   tabledata: any = []
-  constructor( public dialog: MatDialog,) { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
 

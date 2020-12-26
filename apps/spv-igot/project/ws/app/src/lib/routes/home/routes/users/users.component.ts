@@ -13,7 +13,7 @@ import { TenantAdminService } from '../../services/tenant-admin.service'
   providers: [TenantAdminService],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
- 
+
 })
 export class UsersComponent implements OnInit {
 
