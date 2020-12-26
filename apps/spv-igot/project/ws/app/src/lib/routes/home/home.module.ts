@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule } from '@ws-widget/utils'
+import { PipeFilterModule, PipeHtmlTagRemovalModule, PipeOrderByModule, PipeRelativeTimeModule, ImageCropComponent, ImageCropModule } from '@ws-widget/utils'
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDividerModule } from '@angular/material/divider'
@@ -87,9 +87,9 @@ import { EditDepartmentDialogComponent } from './routes/users/components/edit-de
     WidgetResolverModule,
     UserAutocompleteModule,
     MatCheckboxModule,
+    ImageCropModule,
   ],
-  entryComponents: [UserPopupComponent, EditDepartmentDialogComponent, OpenRolesDialogComponent],
-
+  entryComponents: [UserPopupComponent,OpenRolesDialogComponent, EditDepartmentDialogComponent],
   providers: [
     // CKEditorService,
     // LoaderService,

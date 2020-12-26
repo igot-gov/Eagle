@@ -3,14 +3,14 @@ import {
   CONTENT_VIDEO_ENCODE,
   CONTENT_BASE_ENCODE,
   CONTENT_BASE_ZIP,
-} from '@ws/author/src/lib/constants/apiEndpoints'
-import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
+} from '../routes/author-kid/apiEndpoints'
+import { NSApiRequest } from '../interface/apiRequest'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { ApiService } from '@ws/author/src/lib/modules/shared/services/api.service'
-import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
-import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
-import { FIXED_FILE_NAME } from '../../../../../constants/upload'
+import { ApiService } from './api.service'
+import { NSApiResponse } from '../interface/apiResponse'
+import { AccessControlService } from './access-control.service'
+import { FIXED_FILE_NAME } from '../routes/author-kid/upload'
 import { HttpClient } from '@angular/common/http'
 import { ConfigurationsService } from '@ws-widget/utils'
 

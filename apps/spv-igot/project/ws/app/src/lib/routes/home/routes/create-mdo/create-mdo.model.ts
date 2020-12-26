@@ -1,4 +1,3 @@
-
 export interface IAccessLeftMenu {
   name: string
   key: string
