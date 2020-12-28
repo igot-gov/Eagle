@@ -23,6 +23,7 @@ export class NeedsApprovalComponent implements OnInit {
   wfHistory: any[] = []
   profile!: NSProfileDataV2.IProfile
   profileData: any[] = []
+  comment = ''
 
   constructor(
     private needApprService: NeedApprovalsService,
@@ -66,7 +67,9 @@ export class NeedsApprovalComponent implements OnInit {
 
   onClickHandleWorkflow(field: any, action: string) {
     if (action === 'APPROVE') {
-      const dialogRef = this.dialog.open(this.approveDialog)
+      const dialogRef = this.dialog.open(this.approveDialog, {
+        width: '600px',
+      })
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.onApproveOrRejectClick(req)
@@ -75,7 +78,9 @@ export class NeedsApprovalComponent implements OnInit {
         }
       })
     } else {
-      const dialogRef = this.dialog.open(this.rejectDialog)
+      const dialogRef = this.dialog.open(this.rejectDialog, {
+        width: '600px',
+      })
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.onApproveOrRejectClick(req)
@@ -92,15 +97,16 @@ export class NeedsApprovalComponent implements OnInit {
       actorUserId: this.userwfData.userInfo.wid,
       wfId: field.wf.wfId,
       serviceName: 'profile',
-      comment: 'Looks okay!',
       updateFieldValues: JSON.parse(field.wf.updateFieldValues),
     }
   }
 
   onApproveOrRejectClick(req: any) {
+    req.comment = this.comment
     this.needApprService.handleWorkflow(req).subscribe(res => {
       if (res.result.data) {
         this.openSnackBar('Request Approved')
+        this.comment = ''
         this.needApprovalList = this.needApprovalList.filter(wf => wf.wfId !== res.result.data.wfIds[0]
         )
       }

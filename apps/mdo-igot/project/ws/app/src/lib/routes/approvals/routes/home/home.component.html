@@ -38,7 +38,10 @@
           <div class="change-log-wrapper" *ngFor="let wfh of wfHistory">
             <label class=" field-key">{{wfh.fieldKey}}</label>
             <label class="field-name">{{wfh.fieldName}}</label>
-            <label class="field-change">Changed from {{'"'+ wfh.fromValue +'"'}} to {{'"'+ wfh.toValue +'"'}}</label>
+            <label *ngIf="wfh.action === 'APPROVE'" class="field-change">Changed from {{'"'+ wfh.fromValue +'"'}} to
+              {{'"'+ wfh.toValue +'"'}}</label>
+            <label *ngIf="wfh.action === 'REJECT'" class="field-change">{{wfh.fieldName}} was rejected with
+              {{wfh.comment}}</label>
             <label class="field-date">{{wfh.requestedon}}</label>
           </div>
         </div>

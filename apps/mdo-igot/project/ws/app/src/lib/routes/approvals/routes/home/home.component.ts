@@ -56,6 +56,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
                 toValue: pendingwfh.toValue ? pendingwfh.toValue[Object.keys(pendingwfh.toValue)[0]] : null,
                 fromValue: pendingwfh.fromValue ? pendingwfh.fromValue[Object.keys(pendingwfh.fromValue)[0]] : null,
                 fieldName: pendingwfh.fromValue ? Object.keys(pendingwfh.fromValue)[0] : null,
+                comment: wfh.comment ? wfh.comment : null,
+                action: wfh.action ? wfh.action : null,
               })
             }
           }

@@ -16,8 +16,9 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
   discussProfileData!: any
 
   tabledata: ITableData = {
-    actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-    { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+    // actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
+    // { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+    actions: [],
     columns: [
       { displayName: 'Full Name', key: 'fullname' },
       { displayName: 'Requested on', key: 'requestedon' },
@@ -58,7 +59,7 @@ export class ApprovalsComponent implements OnInit, OnDestroy {
   }
 
   onApprovalClick(approval: any) {
-    if (approval) {
+    if (approval && approval.userWorkflow.userInfo) {
       this.router.navigate([`/app/approvals/${approval.userWorkflow.userInfo.wid}/to-approve`])
     }
   }

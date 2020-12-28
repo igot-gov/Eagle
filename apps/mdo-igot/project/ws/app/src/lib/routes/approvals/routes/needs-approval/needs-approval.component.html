@@ -59,13 +59,16 @@
 </ng-template>
 
 <ng-template #rejectDialog>
-  <p mat-dialog-title class="dialog-title">Reject request?</p>
-  <mat-dialog-content>
-    <p>Once you reject, the feilds will not get updated in user's profile.<br />
-      You can make changes to any field at any point.</p>
-  </mat-dialog-content>
-  <mat-dialog-actions class="flex flex-wrap justify-end">
-    <button mat-button class="goback-dialog-btn" matDialogClose>Go Back</button>
-    <button mat-button class="accept-dialog-btn" [mat-dialog-close]="true">Reject</button>
-  </mat-dialog-actions>
+  <form>
+    <p mat-dialog-title class="dialog-title">Reject request?</p>
+    <mat-dialog-content>
+      <p>Please specify the reason for rejection</p>
+      <textarea rows="4" [(ngModel)]="comment" placeholder="Type here" name="comment"
+        class="reject-reason-text"></textarea>
+    </mat-dialog-content>
+    <mat-dialog-actions class="flex flex-wrap justify-end">
+      <button mat-button class="goback-dialog-btn" matDialogClose>Go Back</button>
+      <button mat-button class="reject-dialog-btn" [mat-dialog-close]="true">Reject</button>
+    </mat-dialog-actions>
+  </form>
 </ng-template>
