@@ -1,5 +1,5 @@
 
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { ApprovalsService } from '../../services/approvals.service'
 import moment from 'moment'
@@ -9,7 +9,7 @@ import { ITableData } from '@ws-widget/collection'
   templateUrl: './approvals.component.html',
   styleUrls: ['./approvals.component.scss'],
 })
-export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ApprovalsComponent implements OnInit, OnDestroy {
   data: any[] = []
   currentFilter = 'toapprove'
   discussionList!: any
@@ -31,9 +31,6 @@ export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private router: Router, private apprService: ApprovalsService) {
     this.fetchApprovals()
-  }
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.')
   }
 
   ngOnInit() {
@@ -90,7 +87,7 @@ export class ApprovalsComponent implements OnInit, AfterViewInit, OnDestroy {
         })
 
         this.data.push({
-          fullname: `${approval.userInfo.first_name} ${approval.userInfo.last_name}`,
+          fullname: approval.userInfo ? `${approval.userInfo.first_name} ${approval.userInfo.last_name}` : null,
           requestedon: `${currentdate.getDate()}
           ${moment(currentdate.getMonth() + 1, 'MM').format('MMM')}
           ${currentdate.getFullYear()}
