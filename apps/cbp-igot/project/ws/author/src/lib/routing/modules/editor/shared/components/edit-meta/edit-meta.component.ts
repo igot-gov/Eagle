@@ -85,6 +85,13 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
   isLtMedium$ = this.valueSvc.isLtMedium$
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   /**for side nav: END */
+  /**for side competency */
+  searchKey = ''
+  selectedId = ''
+  filteredCompetencies!: NSCompetencie.ICompetencie[]
+  queryControl = new FormControl('')
+  allCompetencies!: NSCompetencie.ICompetencie[]
+  /**for side competency: END */
   location = CONTENT_BASE_STATIC
   selectable = true
   removable = true
@@ -862,9 +869,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentForm.controls.keywords.value.splice(index, 1)
     this.contentForm.controls.keywords.setValue(this.contentForm.controls.keywords.value)
   }
-
-
-
   removeReferences(index: number): void {
     this.contentForm.controls.references.value.splice(index, 1)
     this.contentForm.controls.references.setValue(this.contentForm.controls.references.value)
@@ -1118,9 +1122,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.contentForm.controls[field].setValue(this.contentForm.controls[field].value)
   }
 
-  logs(avl: any) {
-    console.log(avl)
-  }
+  // logs(avl: any) {
+  //   // console.log(avl)
+  // }
   addEmployee(event: MatAutocompleteSelectedEvent, field: string) {
     if (event.option.value && event.option.value.id) {
       this.loader.changeLoad.next(true)
@@ -1492,7 +1496,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
   removeCompetency(id: any): void {
-    const index = _.findIndex(this.contentForm.controls.competencies.value, { id: id })
+    const index = _.findIndex(this.contentForm.controls.competencies.value, { id })
     this.contentForm.controls.competencies.value.splice(index, 1)
     this.contentForm.controls.competencies.setValue(this.contentForm.controls.competencies.value)
     this.refreshData()
@@ -1515,11 +1519,6 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       }
     })
   }
-  searchKey = ''
-  selectedId = ''
-  filteredCompetencies!: NSCompetencie.ICompetencie[]
-  queryControl = new FormControl('')
-  allCompetencies!: NSCompetencie.ICompetencie[]
   updateQuery(key: string) {
     this.searchKey = key
     this.refreshData()
@@ -1551,7 +1550,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       if (reponse.statusInfo && reponse.statusInfo.statusCode === 200) {
         let data = reponse.responseData
         this.allCompetencies = reponse.responseData
-        const comp = this.contentForm.get("competencies")
+        const comp = this.contentForm.get('competencies')
         if (comp && comp.value && comp.value.length > 0) {
           data = _.flatten(_.map(comp.value, item => {
             return _.filter(reponse.responseData, i => i.id === item.id)

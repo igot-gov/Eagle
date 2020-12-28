@@ -88,6 +88,7 @@ import { CompetenceCardComponent } from './components/edit-meta/competencies-car
     ContentQualityComponent,
     ContentSelfCurationComponent,
     ContentSummaryComponent,
+    CompetenceCardComponent,
   ],
   entryComponents: [AuthPickerComponent, CompetencyAddPopUpComponent, CompetenceViewComponent],
   providers: [UploadService, SelfCurationService, ContentQualityService],

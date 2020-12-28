@@ -570,7 +570,6 @@
   "groups": [
     {
       "featureIds": [
-        "feature_feedback",
         "feature_badges",
         "feature_notification"
       ],
@@ -588,7 +587,6 @@
     },
     {
       "featureIds": [
-        "feature_create",
         "feature_publish",
         "feature_review"
       ],

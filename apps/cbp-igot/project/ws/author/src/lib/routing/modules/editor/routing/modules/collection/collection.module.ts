@@ -44,6 +44,6 @@ import { PickNameComponent } from './components/auth-table-of-contents/pick-name
     QuizModule,
     CreateModule,
   ],
-  entryComponents: [PickNameComponent]
+  entryComponents: [PickNameComponent],
 })
 export class CollectionModule { }

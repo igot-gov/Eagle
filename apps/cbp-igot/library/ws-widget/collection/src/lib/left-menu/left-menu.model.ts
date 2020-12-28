@@ -1,6 +1,8 @@
 
 export interface ILeftMenu {
   logo?: boolean
+  logoPath?: string
+  name: string
   menus: IMenu[]
 }
 export interface IMenu {

@@ -8,13 +8,13 @@ const routes: Routes = [
     path: '',
     component: MyContentComponent,
     resolve: {
-      courseTaken: MandatoryContentResolverService
-    }
+      courseTaken: MandatoryContentResolverService,
+    },
   },
 ]
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [MandatoryContentResolverService]
+  providers: [MandatoryContentResolverService],
 })
 export class MyContentRoutingModule { }

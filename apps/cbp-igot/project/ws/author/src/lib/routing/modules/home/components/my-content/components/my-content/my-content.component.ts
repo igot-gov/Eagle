@@ -71,7 +71,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
   private defaultSideNavBarOpenedSubscription: any
   mode$ = this.isLtMedium$.pipe(map(isMedium => (isMedium ? 'over' : 'side')))
   public screenSizeIsLtMedium = false
-  leftmenues!: ILeftMenu[]
+  leftmenues!: ILeftMenu
   public filterMenuItems: any = []
   /* tslint:disable */
   courseTaken = true  // this.activatedRoute.snapshot.data.courseTaken.data
@@ -119,7 +119,16 @@ export class MyContentComponent implements OnInit, OnDestroy {
     )
     this.dataSource.data = this.filterMenuItems
     this.userId = this.accessService.userId
-    this.leftmenues = this.authInitService.authAdditionalConfig.menus
+
+    if (this.activatedRoute.snapshot.data.departmentData) {
+      const leftData = this.authInitService.authAdditionalConfig.menus
+      _.set(leftData, 'widgetData.logo', true)
+      _.set(leftData, 'widgetData.logoPath', _.get(this.activatedRoute, 'snapshot.data.departmentData.logo'))
+      _.set(leftData, 'widgetData.name', _.get(this.activatedRoute, 'snapshot.data.departmentData.description'))
+      this.leftmenues = leftData
+    } else {
+      this.leftmenues = this.authInitService.authAdditionalConfig.menus
+    }
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
     if (this.courseTaken) {
       this.initCardTable()

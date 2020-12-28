@@ -5,8 +5,6 @@ import { catchError, map } from 'rxjs/operators'
 import { ConfigurationsService } from '@ws-widget/utils'
 import { MyContentService } from '../services/my-content.service'
 
-
-
 @Injectable()
 export class MandatoryContentResolverService
   implements

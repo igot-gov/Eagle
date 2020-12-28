@@ -45,6 +45,7 @@ const routes: Routes = [
     resolve: {
       script: InitResolver,
     },
+    canActivate: [GeneralGuard],
   },
   {
     path: 'create-content',

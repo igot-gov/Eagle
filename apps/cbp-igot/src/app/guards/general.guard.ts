@@ -101,7 +101,7 @@ export class GeneralGuard implements CanActivate {
       )
 
       if (!requiredRolePreset) {
-        return this.router.parseUrl('/author/home')
+        return this.router.navigateByUrl('/error-access-forbidden')
       }
     }
 

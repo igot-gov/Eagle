@@ -23,9 +23,6 @@ import { Observable } from 'rxjs'
 import { map, mergeMap } from 'rxjs/operators'
 import { IFormMeta } from '@ws/author/src/lib/interface/form'
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
-
-
-
 const PROTECTED_SLAG_V8 = '/apis/protected/v8'
 const API_END_POINTS = {
   // https://d136953gtttd92.cloudfront.net/apis/protected/v8/user/mandatoryContent/checkStatus/60840612-6d85-4fe9-8c91-649ea093ea95

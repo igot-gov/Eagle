@@ -51,8 +51,4 @@ export class PickNameComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // this.loaderService.changeLoad.next(false)
   }
-
-
-
-
 }

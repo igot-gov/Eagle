@@ -64,6 +64,18 @@ const routes: Routes = [
   {
     path: 'app/features',
     component: FeaturesComponent,
+    data: {
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
+    },
     canActivate: [GeneralGuard],
   },
   {
@@ -92,12 +104,36 @@ const routes: Routes = [
     path: 'app/notifications',
     loadChildren: () =>
       import('./routes/route-notification-app.module').then(u => u.RouteNotificationAppModule),
+    data: {
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
+    },
     canActivate: [GeneralGuard],
   },
   {
     path: 'app/profile',
     loadChildren: () =>
       import('./routes/route-profile-app.module').then(u => u.RouteProfileAppModule),
+    data: {
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
+    },
     canActivate: [GeneralGuard],
   },
   // {
@@ -125,6 +161,16 @@ const routes: Routes = [
     data: {
       pageType: 'feature',
       pageKey: 'search',
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
     },
     resolve: {
       searchPageData: PageResolve,
@@ -233,7 +279,6 @@ const routes: Routes = [
       pageData: PageResolve,
     },
   },
-  { path: 'network', redirectTo: 'page/network', pathMatch: 'full' },
   {
     path: 'page/toc',
     redirectTo: '/',
@@ -245,6 +290,16 @@ const routes: Routes = [
     data: {
       pageType: 'page',
       pageKey: 'id',
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
     },
     resolve: {
       pageData: PageResolve,
@@ -310,6 +365,18 @@ const routes: Routes = [
   {
     path: 'author/toc',
     loadChildren: () => import('./routes/route-app-toc.module').then(u => u.RouteAppTocModule),
+    data: {
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
+    },
     canActivate: [GeneralGuard],
   },
   {
@@ -330,12 +397,34 @@ const routes: Routes = [
     path: 'viewer',
     data: {
       topBar: ETopBar.NONE,
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
     },
     loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
     canActivate: [GeneralGuard],
   },
   {
     path: 'author/viewer',
+    data: {
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
+    },
     loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
     canActivate: [GeneralGuard],
   },
@@ -343,6 +432,16 @@ const routes: Routes = [
     path: 'embed',
     data: {
       topBar: ETopBar.NONE,
+      requiredRoles: [
+        'content-creator',
+        'ka-creator',
+        'kb-creator',
+        'channel-creator',
+        'reviewer',
+        'publisher',
+        'editor',
+        'admin',
+      ],
     },
     loadChildren: () => import('./routes/route-viewer.module').then(u => u.RouteViewerModule),
     canActivate: [GeneralGuard],
