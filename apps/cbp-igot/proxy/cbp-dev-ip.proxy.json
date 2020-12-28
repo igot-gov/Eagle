@@ -1,6 +1,6 @@
 {
   "/apis/*": {
-    "target": "https://d136953gtttd92.cloudfront.net",
+    "target": "https://igot-sunbird.idc.tarento.com",
     "secure": false,
     "logLevel": "debug",
     "changeOrigin": true,
