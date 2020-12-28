@@ -15,6 +15,7 @@ import { IWebModuleRequest } from './../models/response/custom-s3-upload'
 import { getHierarchy, getMultipleHierarchyV2 } from './hierarchy'
 import { getHierarchyV2WithContent, getMultipleHierarchyV2WithContent } from './hierarchy-and-content'
 import { searchForOtherLanguage } from './language-search'
+const fs = require('fs')
 
 export const authApi = Router()
 
@@ -36,6 +37,19 @@ authApi.get('/hierarchy/:id', async (req: Request, res: Response) => {
     res.status(400).send({
       msg: ERROR.GENERAL,
     })
+  }
+})
+
+authApi.get('/action/meta/v2/ordinals/list', async (_req, res) => {
+  try {
+    fs.readFile(__dirname + '/../../static-data/metadata.json', (err: Error, json: string) => {
+      if (!err) {
+        const obj = JSON.parse(json)
+        res.json(obj)
+      }
+    })
+  } catch (err) {
+    res.status((err && err.response && err.response.status) || 500).send(err)
   }
 })
 
