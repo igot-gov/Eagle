@@ -1,10 +1,10 @@
 import { APP_BASE_HREF } from '@angular/common'
-import { retry } from 'rxjs/operators'
+// import { retry } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { MatIconRegistry } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
-import { BtnSettingsService, WidgetContentService } from '@ws-widget/collection'
+import { BtnSettingsService } from '@ws-widget/collection'
 import {
   hasPermissions,
   hasUnitPermission,
@@ -35,6 +35,7 @@ interface IFeaturePermissionConfigs {
 
 const endpoint = {
   profilePid: '/apis/protected/v8/user/details/wtoken',
+  profilePidV2: '/apis/proxies/v8/api/user/v2/read',
   details: `/apis/protected/v8/user/details?ts=${Date.now()}`,
 }
 
@@ -51,7 +52,7 @@ export class InitService {
     private settingsSvc: BtnSettingsService,
     private userPreference: UserPreferenceService,
     private http: HttpClient,
-    private widgetContentSvc: WidgetContentService,
+    // private widgetContentSvc: WidgetContentService,
 
     @Inject(APP_BASE_HREF) private baseHref: string,
     // private router: Router,
@@ -163,12 +164,12 @@ export class InitService {
       this.settingsSvc.initializePrefChanges(environment.production)
     }
     this.updateNavConfig()
-    await this.widgetContentSvc
-      .setS3ImageCookie()
-      .toPromise()
-      .catch(() => {
-        // throw new DataResponseError('COOKIE_SET_FAILURE')
-      })
+    // await this.widgetContentSvc
+    //   .setS3ImageCookie()
+    //   .toPromise()
+    //   .catch(() => {
+    //     // throw new DataResponseError('COOKIE_SET_FAILURE')
+    //   })
     return true
   }
 
@@ -230,55 +231,70 @@ export class InitService {
   }
 
   private async fetchStartUpDetails(): Promise<IDetailsResponse> {
+    let userRoles: string[] = []
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
-      let userPidProfile: NsUser.IUserPidProfile | null = null
+      let userPidProfile: NsUser.IUserPidProfileV2 | null = null
       try {
         userPidProfile = await this.http
-          .get<NsUser.IUserPidProfile>(endpoint.profilePid)
+          .get<NsUser.IUserPidProfileV2>(endpoint.profilePidV2)
           .toPromise()
       } catch (e) {
         this.configSvc.userProfile = null
         throw new Error('Invalid user')
       }
       if (userPidProfile) {
-        this.configSvc.unMappedUser = userPidProfile.user
+        if (userPidProfile.result.response.organisations.length > 0) {
+          const organisationData = userPidProfile.result.response.organisations
+          userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
+        }
+        this.configSvc.unMappedUser = userPidProfile.result.response
         this.configSvc.userProfile = {
-          country: userPidProfile.user.organization_location_country || null,
-          departmentName: userPidProfile.user.department_name || '',
-          email: userPidProfile.user.email,
-          givenName: userPidProfile.user.first_name,
-          userId: userPidProfile.user.wid,
-          unit: userPidProfile.user.unit_name,
+          country: userPidProfile.result.response.countryCode || null,
+          email: userPidProfile.result.response.email,
+          givenName: userPidProfile.result.response.firstName,
+          userId: userPidProfile.result.response.userId,
+          firstName: userPidProfile.result.response.firstName,
+          lastName: userPidProfile.result.response.lastName,
+
+          // tslint:disable-next-line: max-line-length
+          userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '}`,
+          dealerCode: null,
+          isManager: false,
+          // departmentName: userPidProfile.user.department_name || '',
+          // unit: userPidProfile.user.unit_name,
           // tslint:disable-next-line:max-line-length
-          userName: `${userPidProfile.user.first_name ? userPidProfile.user.first_name : ' '} ${userPidProfile.user.last_name ? userPidProfile.user.last_name : ' '
-            }`,
-          source_profile_picture: userPidProfile.user.source_profile_picture || '',
-          dealerCode:
-            userPidProfile &&
-              userPidProfile.user.json_unmapped_fields &&
-              userPidProfile.user.json_unmapped_fields.dealer_code
-              ? userPidProfile.user.json_unmapped_fields.dealer_code
-              : null,
-          isManager:
-            userPidProfile &&
-              userPidProfile.user.json_unmapped_fields &&
-              userPidProfile.user.json_unmapped_fields.is_manager
-              ? userPidProfile.user.json_unmapped_fields.is_manager
-              : false,
+          // source_profile_picture: userPidProfile.result.response.source_profile_picture || '',
+          // dealerCode:
+          //   userPidProfile &&
+          //     userPidProfile.user.json_unmapped_fields &&
+          //     userPidProfile.user.json_unmapped_fields.dealer_code
+          //     ? userPidProfile.user.json_unmapped_fields.dealer_code
+          //     : null,
+          // isManager:
+          //   userPidProfile &&
+          //     userPidProfile.user.json_unmapped_fields &&
+          //     userPidProfile.user.json_unmapped_fields.is_manager
+          //     ? userPidProfile.user.json_unmapped_fields.is_manager
+          //     : false,
           // userName: `${userPidProfile.user.first_name} ${userPidProfile.user.last_name}`,
         }
       }
     }
-    const details: IDetailsResponse = await this.http
-      .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
-      .toPromise()
-    this.configSvc.userGroups = new Set(details.group)
-    this.configSvc.userRoles = new Set(details.roles)
-    if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
-      this.configSvc.userRoles.add('is_manager')
-    }
+    // const details: IDetailsResponse = await this.http
+    //   .get<IDetailsResponse>(endpoint.details).pipe(retry(3))
+    //   .toPromise()
+    // this.configSvc.userGroups = new Set(details.group)
+    // this.configSvc.userRoles = new Set(details.roles)
+    // if (this.configSvc.userProfile && this.configSvc.userProfile.isManager) {
+    //   this.configSvc.userRoles.add('is_manager')
+    // }
+    // this.configSvc.hasAcceptedTnc = details.tncStatus
+    // this.configSvc.profileDetailsStatus = details.profileDetailsStatus
+    // return details
+    const details = { group: [], profileDetailsStatus: true, roles: userRoles, tncStatus: true }
     this.configSvc.hasAcceptedTnc = details.tncStatus
     this.configSvc.profileDetailsStatus = details.profileDetailsStatus
+    this.configSvc.userRoles = new Set(userRoles)
     return details
   }
 
@@ -352,6 +368,7 @@ export class InitService {
     return { features, groups, tourGuide }
   }
   private updateNavConfig() {
+    debugger
     if (this.configSvc.instanceConfig) {
       const background = this.configSvc.instanceConfig.backgrounds
       if (background.primaryNavBar) {
