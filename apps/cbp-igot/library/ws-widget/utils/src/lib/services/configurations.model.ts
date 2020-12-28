@@ -251,9 +251,23 @@ export namespace NsUser {
     surName?: string
     middleName?: string
   }
+
   export interface IUserPidProfile {
     kid_updated: boolean
     user: IUser
+  }
+
+  export interface IUserPidProfileV2 {
+    kid_updated: boolean
+    result: {
+      response: IUserV2
+    }
+  }
+
+  export interface IUserPidProfileVer2 {
+    result: {
+      UserProfile: IUserVer2
+    }
   }
   interface ISourceData {
     GID: string
@@ -321,12 +335,34 @@ export namespace NsUser {
     json_unmapped_fields?: any
     source_data: ISourceData
   }
-  export interface IUserPidProfileV2 {
-    kid_updated: boolean
-    result: {
-      response: IUserV2
-    }
+
+  interface IUserVer2 {
+    'firstname': string,
+  'motherTongue': string,
+  'secondaryEmail': string,
+  'gender': string,
+  '@type': string,
+  'mobile': number,
+  'middlename': string,
+  'telephone': number,
+  'osid': string,
+  'primaryEmailType': string,
+  'knownLanguages': ILanguages[],
+  'wid': string,
+  'nationality': string,
+  'surname': string,
+  'dob': string,
+  'category': string,
+  'primaryEmail': string,
+  'maritalStatus': string,
+  'residenceAddress': string,
+  'result': any
   }
+
+  export interface ILanguages {
+    name: string
+  }
+
   interface IUserV2 {
     surName: any
     maskedPhone: string
@@ -382,27 +418,6 @@ export namespace NsUser {
     location: string
     tncAcceptedVersion: string
   }
-  interface IOrg {
-    updatedBy: string
-    organisationId: string
-    orgName: string
-    addedByName: string
-    addedBy: string
-    roles: string[]
-    approvedBy: string
-    updatedDate: string
-    userId: string
-    approvaldate: string
-    isDeleted: boolean
-    parentOrgId: string
-    hashTagId: string
-    isRejected: boolean
-    position: string
-    id: string
-    orgjoindate: string
-    isApproved: boolean
-    orgLeftDate: string
-  }
   interface IRootOrg {
     dateTime: string
     preferredLanguage: string
@@ -443,4 +458,27 @@ export namespace NsUser {
     noOfMembers: string
     status: number
   }
+
+  interface IOrg {
+    updatedBy: string
+    organisationId: string
+    orgName: string
+    addedByName: string
+    addedBy: string
+    roles: string[]
+    approvedBy: string
+    updatedDate: string
+    userId: string
+    approvaldate: string
+    isDeleted: boolean
+    parentOrgId: string
+    hashTagId: string
+    isRejected: boolean
+    position: string
+    id: string
+    orgjoindate: string
+    isApproved: boolean
+    orgLeftDate: string
+  }
+
 }

@@ -135,9 +135,9 @@ export class WidgetContentService {
       .pipe(catchError(_err => of(true)))
   }
 
-  setS3ImageCookie(): Observable<any> {
-    return this.http.post(API_END_POINTS.SET_S3_IMAGE_COOKIE, {}).pipe(catchError(_err => of(true)))
-  }
+  // setS3ImageCookie(): Observable<any> {
+  //   return this.http.post(API_END_POINTS.SET_S3_IMAGE_COOKIE, {}).pipe(catchError(_err => of(true)))
+  // }
 
   fetchManifest(url: string): Observable<any> {
     return this.http.post(API_END_POINTS.FETCH_MANIFEST, { url })

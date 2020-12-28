@@ -1,0 +1,24 @@
+{
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    }
+  },
+  "cSpell.words": [
+    "Keycloak",
+    "accesscontrol",
+    "authsearch",
+    "infosys"
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "prettier.semi": false,
+  "prettier.printWidth": 100,
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.useEditorConfig": false,
+  "prettier.arrowParens": "always"
+}
