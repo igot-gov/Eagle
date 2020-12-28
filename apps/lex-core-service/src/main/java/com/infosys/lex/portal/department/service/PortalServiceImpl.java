@@ -293,7 +293,7 @@ public class PortalServiceImpl implements PortalService {
 				Map<Integer, DeptRoleInfo> deptRoleMap = deptInfo.getRolesInfo().stream()
 						.collect(Collectors.toMap(DeptRoleInfo::getDeptRoleId, deptRoleInfo -> deptRoleInfo));
 
-				if (isUserInfoRequired) {
+				if (isUserInfoRequired && userDeptList != null && userDeptList.size() > 0) {
 					Set<String> userIdSet = userDeptList.stream().map(i -> i.getUserId()).collect(Collectors.toSet());
 					List<String> userIds = userIdSet.stream().collect(Collectors.toList());
 
