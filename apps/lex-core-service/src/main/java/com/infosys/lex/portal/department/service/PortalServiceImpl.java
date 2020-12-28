@@ -109,14 +109,23 @@ public class PortalServiceImpl implements PortalService {
 
 		// Department is Valid -- add this Department
 		Department dept = deptRepo.save(Department.clone(deptInfo));
-
+		
+		//Let's add Default roles for this Department
+		Role adminRole = roleRepo.findRoleByRoleName("ADMIN");
+		DepartmentRole deptAdminRole = new DepartmentRole();
+		deptAdminRole.setRoleId(adminRole.getId());
+		deptAdminRole.setDeptId(dept.getDeptId());
+		deptRoleRepo.save(deptAdminRole);
+		
+		Role memberRole = roleRepo.findRoleByRoleName("MEMBER");
+		DepartmentRole deptMemberRole = new DepartmentRole();
+		deptMemberRole.setRoleId(memberRole.getId());
+		deptMemberRole.setDeptId(dept.getDeptId());
+		deptRoleRepo.save(deptMemberRole);
+		
 		if (!DataValidator.isCollectionEmpty(deptInfo.getAdminUserList())) {
 			// Need to assign AdminRole for this Department
-			Role role = roleRepo.findRoleByRoleName("ADMIN");
-			DepartmentRole deptRole = new DepartmentRole();
-			deptRole.setRoleId(role.getId());
-			deptRole.setDeptId(dept.getDeptId());
-			deptRole = deptRoleRepo.save(deptRole);
+			DepartmentRole deptRole = deptRoleRepo.findByRoleIdAndDeptId(adminRole.getId(), dept.getDeptId());
 
 			// We have Few admin Users to assign to this dept
 			for (UserDepartmentRole userDeptRole : deptInfo.getAdminUserList()) {
