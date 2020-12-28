@@ -86,6 +86,12 @@ export const CONSTANTS = {
   ROLES_API_BASE: env.ROLES_API_BASE || env.SB_EXT_API_BASE_2,
   SB_EXT_API_BASE: env.SBEXT_API_BASE || 'http://10.177.22.26:5902',
   SB_EXT_API_BASE_2: env.SBEXT_API_BASE_2 || 'http://10.177.22.26:7001',
+  X_AUTH_USER: 'X-Authenticated-User-Token',
+  CONTENT_TYPE: 'Content-Type',
+  CONTENT_TYPE_VALUE: 'application/json',
+  AUTHORIZATION: 'Authorization',
+  X_APP_ID: 'X-App-Id',
+  X_APP_ID_VALUE: 'sunbird.portal',
   // SB_EXT_API_BASE_2: env.SB_EXT_API_BASE_2,
   SB_EXT_API_BASE_3: env.SBEXT_API_BASE_3 || env.SBEXT_API_BASE_2 || 'http://10.177.61.54:7001',
   SB_EXT_API_BASE_4:

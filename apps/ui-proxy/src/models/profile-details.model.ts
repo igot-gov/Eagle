@@ -60,7 +60,7 @@ export interface IUserRegistryUpdateRequest {
     },
     request: {
         // tslint:disable-next-line: no-any
-        UserProfile: any
+        PersonalDetails: any
     }
 }
 
@@ -69,4 +69,27 @@ export interface IUserRegistry {
     surname: string,
     mobile: number,
     primaryEmail: string
+    userId: string
+}
+export interface IUpdateUserRegistry {
+    firstname: string,
+    motherTongue: string,
+    secondaryEmail: string,
+    gender: string,
+    '@type': string,
+    mobile: number,
+    middlename: string,
+    telephone: number,
+    osid: 'string',
+    primaryEmailType: string,
+    language: string[],
+    nationality: string,
+    surname: string,
+    dob: string,
+    id: string,
+    '@id': string,
+    category: string,
+    primaryEmail: string,
+    maritalStatus: string,
+    residenceAddress: string
 }

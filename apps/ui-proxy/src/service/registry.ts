@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { axiosRequestConfig, axiosRequestConfigLong } from '../configs/request.config'
 import {
+    IUpdateUserRegistry,
     IUserRegistry,
     IUserRegistryReadRequest,
     IUserRegistryRequest,
@@ -51,7 +52,6 @@ export async function createUserRegistry(
             method: 'POST',
             url: apiEndpoints.create,
         })
-        process.stdout.write('hello: ' + myJSON)
         return res.data || {}
     } catch (err) {
         logError('Request to open saber /add failed')
@@ -77,10 +77,10 @@ export async function getUserRegistry(
             },
             request: {
 
-                entityType: ['UserProfile'],
+                entityType: ['PersonalDetails'],
                 filters: {
                     // tslint:disable-next-line: object-literal-key-quotes
-                    id: { 'eq': userId },
+                    userId: { 'eq': userId },
                 },
             },
         }
@@ -93,6 +93,7 @@ export async function getUserRegistry(
             method: 'POST',
             url: apiEndpoints.search,
         })
+        logInfo('-------Update for Registry-----' + res.data.result.PersonalDetails[0].firstname)
         return res.data || {}
     } catch (err) {
         logError('Request to open saber /search failed')
@@ -141,44 +142,10 @@ export async function readUserRegistry(
 
 export async function updateUserRegistry(
     // tslint:disable-next-line: no-any
-    data: any, userId: any, userProfileObj: any
+    userProfileObj: IUpdateUserRegistry
     // tslint:disable-next-line: no-any
 ): Promise<any> {
     try {
-        const dataWithOsid = {
-            photo: data.photo,
-            // tslint:disable-next-line: object-literal-sort-keys
-            personalDetails: {
-                // tslint:disable-next-line: object-literal-sort-keys
-                osid: userProfileObj.personalDetails.osid,
-                ...data.personalDetails,
-            },
-            // tslint:disable-next-line: object-literal-sort-keys
-            employmentDetails: {
-                osid: userProfileObj.employmentDetails.osid,
-                ...data.employmentDetails,
-            },
-            skills: {
-                osid: userProfileObj.skills.osid,
-                ...data.skills,
-            },
-            // tslint:disable-next-line: object-literal-sort-keys
-            interests: {
-                osid: userProfileObj.interests.osid,
-                ...data.interests,
-            },
-            academics: data.academics,
-            competencies: data.competencies,
-            // academics: {
-            //     osid: userProfileObj.academics.osid,
-            //     ...data.academics,
-            // },
-            professionalDetails: data.professionalDetails,
-            // professionalDetails: {
-            //     osid: userProfileObj.professionalDetails.osid,
-            //     ...data.professionalDetails,
-            // },
-        }
 
         const requestToUserRegistry: IUserRegistryUpdateRequest = {
             id: 'open-saber.registry.update',
@@ -193,13 +160,8 @@ export async function updateUserRegistry(
             request: {
                 // tslint:disable-next-line: max-line-length
 
-                UserProfile: {
-                    id: userId,
-                    // tslint:disable-next-line: object-literal-sort-keys
-                    '@id': userId,
-                    '@type': 'UserProfile',
-                    ...dataWithOsid,
-                    osid: userProfileObj.osid,
+                PersonalDetails: {
+                    ...userProfileObj,
                 },
             },
         }

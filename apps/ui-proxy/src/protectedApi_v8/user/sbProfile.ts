@@ -2,14 +2,14 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import {
-    IUserRegistry,
+    IUpdateUserRegistry, IUserRegistry
 } from '../../models/profile-details.model'
 import {
     IUserDetailsResponse,
     IUserGraphProfile,
     IUserGraphProfileResponse,
 } from '../../models/user.model'
-import { createUserRegistry } from '../../service/registry'
+import { createUserRegistry, getUserRegistry, updateUserRegistry } from '../../service/registry'
 import { CONSTANTS } from '../../utils/env'
 import { logError } from '../../utils/logger'
 
@@ -23,10 +23,10 @@ import {
     IAuthorizedRequest,
 } from '../../utils/requestExtract'
 
+import { logInfo } from '../../utils/logger'
 import {
     extractSbUserTokenContent,
 } from '../../utils/sbRequestExtract'
-
 const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 
 // Update the v1 to v2
@@ -36,7 +36,15 @@ const apiEndpoints = {
     details: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/user`,
     graph: `${CONSTANTS.SB_EXT_API_BASE}/v1/Users`,
     graphV2: `${CONSTANTS.SB_EXT_API_BASE}/v2/Users`,
+    searchSb: `${CONSTANTS.CREATE_USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/search`,
+    updatSb: `${CONSTANTS.CREATE_USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/update`,
 }
+const xAuthUser = `${CONSTANTS.X_AUTH_USER}`
+const contentType = `${CONSTANTS.CONTENT_TYPE}`
+const contentTypeValue = `${CONSTANTS.CONTENT_TYPE_VALUE}`
+const authorizationHeader = `${CONSTANTS.AUTHORIZATION}`
+const xAppId = `${CONSTANTS.X_APP_ID}`
+const xAppIdVAlue = `${CONSTANTS.X_APP_ID_VALUE}`
 
 export async function getUserDetailsFromApi(userId: string): Promise<IUserDetailsResponse | null> {
     try {
@@ -53,9 +61,11 @@ export async function getUserDetailsFromApi(userId: string): Promise<IUserDetail
 export async function getSbUserDetailsFromApi(userId: string, auth: string, xT: string, org: string): Promise<IUserDetailsResponse | null> {
     const xAuth = auth.split(' ')
     try {
+
+        axios.defaults.headers.common[xAuthUser] = xAuth[1]
         const res = await axios.get<IUserDetailsResponse>(
             `${apiEndpoints.details}/${userId}`,
-            { headers: { 'X-Authenticated-User-Token': xAuth[1], Authorization: xAuth[0] + ' ' + xT, rootOrgName: org } }
+            { headers: { Authorization: xAuth[0] + ' ' + xT, rootOrgName: org } }
         )
         return res.data || {}
     } catch (err) {
@@ -229,7 +239,7 @@ sbProfileApi.get('/', async (req, res) => {
     }
 })
 
-sbProfileApi.patch('/', async (req, res) => {
+sbProfileApi.post('/search', async (req, res) => {
 
     try {
         const tokenContent = extractSbUserTokenContent(req)
@@ -237,32 +247,99 @@ sbProfileApi.patch('/', async (req, res) => {
         const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
         const xAuth = authorization.split(' ')
         if (tokenContent) {
+            axios.defaults.headers.common[xAuthUser] = xAuth[1]
+            axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+            axios.defaults.headers.common[contentType] = contentTypeValue
+            axios.defaults.headers.common[xAppId] = xAppIdVAlue
+            const getuserName: string = req.body.userName
 
+            const searchresponse = await axios({
+                ...axiosRequestConfig,
+                data: { request: { query: '', filters: { userName: getuserName } } },
+                method: 'POST',
+                url: apiEndpoints.searchSb,
+            })
+            let id = null
+            if (searchresponse.data.result.response.content.length > 0) {
+                id = searchresponse.data.result.response.content[0].id
+            }
+
+            res.send(id)
+            return
+        }
+        res.status(404).send('')
+    } catch (err) {
+        logError('err in new user acceptance search >', err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: GENERAL_ERROR_MSG,
+            }
+        )
+    }
+})
+
+sbProfileApi.post('/', async (req, res) => {
+
+    try {
+        const tokenContent = extractSbUserTokenContent(req)
+        const authorization = extractAuthorizationFromRequest(req)
+        const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
+        const xAuth = authorization.split(' ')
+
+        axios.defaults.headers.common[xAuthUser] = xAuth[1]
+        axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+        axios.defaults.headers.common[contentType] = contentTypeValue
+        axios.defaults.headers.common[xAppId] = xAppIdVAlue
+        if (tokenContent) {
             const response = await axios({
                 ...axiosRequestConfig,
                 data: { request: req.body },
-                headers: {
-                    Authorization: xAuth[0] + ' ' + xAuthenticatedUserToken,
-                    'Content-Type': 'application/json',
-                    'X-App-Id': 'sunbird.portal',
-                    'X-Authenticated-User-Token': xAuth[1],
-                },
                 method: 'POST',
                 url: apiEndpoints.createSb,
             })
             const responseData = response.data
-            const contact = JSON.parse(JSON.stringify(responseData))
+            const createSbResponseData = JSON.parse(JSON.stringify(responseData))
             let reqresponse
-            if (contact.result.response === 'SUCCESS') {
+            if (createSbResponseData.result.response === 'SUCCESS') {
+
+                const getuserName: string = req.body.userName
+
+                const searchresponse = await axios({
+                    ...axiosRequestConfig,
+                    data: { request: { query: '', filters: { userName: getuserName } } },
+                    method: 'POST',
+                    url: apiEndpoints.searchSb,
+                })
+
                 const firstName: string = req.body.firstName
                 const lastName: string = req.body.lastName
                 const email: string = req.body.email
                 const sphone: string = req.body.phone
                 const phone: number = Number(sphone)
-                const reqToRegistry: IUserRegistry = { firstname: firstName, surname: lastName, mobile: phone, primaryEmail: email }
-                reqresponse = await Promise.all([
-                    createUserRegistry(reqToRegistry),
-                ])
+                if (searchresponse.data.result.response.content.length > 0) {
+                    const id: string = searchresponse.data.result.response.content[0].id
+                    logInfo('-------AfterData for Registry-----' + id)
+                    const reqToRegistry: IUserRegistry = {
+                        firstname: firstName,
+                        mobile: phone, primaryEmail: email, surname: lastName,
+                        userId: id,
+                    }
+                    reqresponse = await Promise.all([
+                        createUserRegistry(reqToRegistry),
+                    ])
+                } else {
+                    const id: string = null || ''
+                    logInfo('-------AfterData for Registry-----' + id)
+                    const reqToRegistry: IUserRegistry = {
+                        firstname: firstName,
+                        mobile: phone, primaryEmail: email, surname: lastName,
+                        userId: id,
+                    }
+                    reqresponse = await Promise.all([
+                        createUserRegistry(reqToRegistry),
+                    ])
+                }
+
             }
 
             res.send(reqresponse)
@@ -278,3 +355,81 @@ sbProfileApi.patch('/', async (req, res) => {
         )
     }
 })
+
+sbProfileApi.patch('/', async (req, res) => {
+    try {
+        const tokenContent = extractSbUserTokenContent(req)
+        const authorization = extractAuthorizationFromRequest(req)
+        const xAuthenticatedUserToken = extractUserTokenFromRequest(req)
+        const xAuth = authorization.split(' ')
+        let response
+        let updatSbResponse
+        let updateresponse
+        if (tokenContent) {
+
+            response = await axios({
+                ...axiosRequestConfig,
+                data: { request: req.body },
+                headers: {
+                    Authorization: xAuth[0] + ' ' + xAuthenticatedUserToken,
+                    'Content-Type': 'application/json',
+                    'X-App-Id': 'sunbird.portal',
+                    'X-Authenticated-User-Token': xAuth[1],
+                },
+                method: 'PATCH',
+                url: apiEndpoints.updatSb,
+            })
+            updatSbResponse = JSON.parse(JSON.stringify(response.data))
+            const userId = req.body.userId
+
+            if (updatSbResponse.result.response === 'SUCCESS') {
+                const responseRegistryData: IUpdateUserRegistry[] = await CheckUserRegistryExists(userId)
+                let userProfileObj
+                if (responseRegistryData && responseRegistryData.length > 0) {
+                    userProfileObj = responseRegistryData[0]
+
+                    const updatereqToRegistry = JSON.parse(JSON.stringify(req.body))
+                    logInfo('-------Data for Registry-----' + updatereqToRegistry.firstName)
+
+                    userProfileObj.firstname = updatereqToRegistry.firstName
+                    userProfileObj.surname = updatereqToRegistry.lastName
+                    userProfileObj.gender = updatereqToRegistry.gender
+                    userProfileObj.dob = updatereqToRegistry.dob
+                    userProfileObj.language = updatereqToRegistry.language
+
+                    updateresponse = await updateUserRegistry(userProfileObj)
+                }
+            }
+        }
+
+        res.status(200).send(updateresponse)
+    } catch (err) {
+        logError('err in new user acceptance >', err)
+        res.status((err && err.response && err.response.status) || 500).send(
+            (err && err.response && err.response.data) || {
+                error: GENERAL_ERROR_MSG,
+            }
+        )
+    }
+})
+
+// tslint:disable-next-line: no-any
+export async function CheckUserRegistryExists(userId: string): Promise<IUpdateUserRegistry[]> {
+    return new Promise(async (resolve, reject) => {
+        logInfo(`CheckUserRegistryExists: ${userId}`)
+        const response = await getUserRegistry(userId)
+        const jsonResponse = JSON.parse(JSON.stringify(response))
+        if (response && response.params.status === 'UNSUCCESSFUL') {
+            logError(' CheckUserRegistryExists: Response from open saber is UNSUCCESSFUL')
+            reject(response)
+        } else {
+            logInfo('Reponse from open saber /serch : ', jsonResponse.result.PersonalDetails[0].firstname)
+            if (response && response.result.PersonalDetails && response.result.PersonalDetails.length) {
+                resolve(response.result.PersonalDetails)
+            } else {
+                logInfo(' CheckUserRegistryExists: user registry not yet present')
+                resolve(response.result.PersonalDetails)
+            }
+        }
+    })
+}
