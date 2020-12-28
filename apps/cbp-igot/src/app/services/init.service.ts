@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http'
 import { Inject, Injectable } from '@angular/core'
 import { MatIconRegistry } from '@angular/material'
 import { DomSanitizer } from '@angular/platform-browser'
-import { BtnSettingsService, WidgetContentService } from '@ws-widget/collection'
+import { BtnSettingsService } from '@ws-widget/collection'
 import {
   hasPermissions,
   hasUnitPermission,
@@ -52,7 +52,7 @@ export class InitService {
     private settingsSvc: BtnSettingsService,
     private userPreference: UserPreferenceService,
     private http: HttpClient,
-    private widgetContentSvc: WidgetContentService,
+    // private widgetContentSvc: WidgetContentService,
 
     @Inject(APP_BASE_HREF) private baseHref: string,
     // private router: Router,
@@ -235,7 +235,6 @@ export class InitService {
 
   private async fetchStartUpDetails(): Promise<IDetailsResponse> {
     let userRoles: string[] = []
-
     if (this.configSvc.instanceConfig && !Boolean(this.configSvc.instanceConfig.disablePidCheck)) {
       let userPidProfile: NsUser.IUserPidProfileV2 | null = null
       try {
@@ -266,18 +265,10 @@ export class InitService {
           userName: `${userPidProfile.result.response.firstName ? userPidProfile.result.response.firstName : ' '}${userPidProfile.result.response.lastName ? userPidProfile.result.response.lastName : ' '}`,
           dealerCode: null,
           isManager: false,
-
-
-          // country: userPidProfile.user.organization_location_country || null,
           // departmentName: userPidProfile.user.department_name || '',
-          // email: userPidProfile.user.email,
-          // givenName: userPidProfile.user.first_name,
-          // userId: userPidProfile.user.wid,
           // unit: userPidProfile.user.unit_name,
-          // // tslint:disable-next-line:max-line-length
-          // userName: `${userPidProfile.user.first_name ? userPidProfile.user.first_name : ' '} ${userPidProfile.user.last_name ? userPidProfile.user.last_name : ' '
-          //   }`,
-          // source_profile_picture: userPidProfile.user.source_profile_picture || '',
+          // tslint:disable-next-line:max-line-length
+          // source_profile_picture: userPidProfile.result.response.source_profile_picture || '',
           // dealerCode:
           //   userPidProfile &&
           //     userPidProfile.user.json_unmapped_fields &&
@@ -427,6 +418,7 @@ export class InitService {
     return { features, groups, tourGuide }
   }
   private updateNavConfig() {
+    debugger
     if (this.configSvc.instanceConfig) {
       const background = this.configSvc.instanceConfig.backgrounds
       if (background.primaryNavBar) {

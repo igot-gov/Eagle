@@ -418,7 +418,6 @@ export namespace NsUser {
     location: string
     tncAcceptedVersion: string
   }
-
   interface IRootOrg {
     dateTime: string
     preferredLanguage: string
