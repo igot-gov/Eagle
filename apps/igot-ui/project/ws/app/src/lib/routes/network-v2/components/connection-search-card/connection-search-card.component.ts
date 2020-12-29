@@ -28,15 +28,26 @@ export class ConnectionSearchCardComponent implements OnInit {
 
   getUseravatarName() {
     if (this.user) {
-      return `${this.user.first_name} ${this.user.last_name}`
+      return `${this.user.personalDetails.firstname} ${this.user.personalDetails.surname}`
     }
       return ''
   }
+
   connetToUser() {
     if (this.configSvc.userProfile && this.configSvc.userProfile.userId === this.user.wid) {
       this.openSnackbar('Cannot send request to yourself')
     } else {
-      const req = { connectionId: this.user.wid }
+      // const req = { connectionId: this.user.wid }
+
+      const req = {
+        connectionId: this.user.id,
+        userNameFrom: this.configSvc.userProfileV2 ? this.configSvc.userProfileV2.userName : '',
+        userDepartmentFrom: this.configSvc.userProfileV2 ? this.configSvc.userProfileV2.departmentName : 'iGOT',
+        userIdTo: this.user.id,
+        userNameTo: `${this.user.personalDetails.firstname}${this.user.personalDetails.surname}`,
+        userDepartmentTo: this.user.employmentDetails.departmentName,
+      }
+
       this.networkV2Service.createConnection(req).subscribe(
         () => {
           this.openSnackbar(this.toastSuccess.nativeElement.value)

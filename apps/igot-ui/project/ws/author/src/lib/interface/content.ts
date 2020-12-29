@@ -115,7 +115,7 @@ export namespace NSContent {
     domain: string
     versionCreatedBy: string
     versionDate: string
-    versionKey: number
+    versionKey: string
     lastUpdatedOn: string
     lastUpdatedBy: string
     status: string
@@ -164,6 +164,54 @@ export namespace NSContent {
     creatorLogo: string
     creatorPosterImage: string
     creatorThumbnail: string
+    maskedPhone: string
+    rootOrgName: string
+    subject: string[]
+    channel: string
+    updatedDate: string
+    managedBy: string
+    flagsValue: number
+    id: string
+    recoveryEmail: string
+    profileVisibility: string
+    updatedBy: string
+    accesscode: string
+    locationIds: string[]
+    externalIds: string[]
+    registryId: string
+    rootOrgId: string
+    prevUsedEmail: string
+    firstName: string
+    tncAcceptedOn: string
+    phone: string
+    dob: string
+    grade: string[]
+    currentLoginTime: string
+    userType: string
+    lastName: string
+    gender: string
+    roles: string[]
+    prevUsedPhone: string
+    stateValidated: boolean
+    isDeleted: boolean
+    organisations: IOrganisations[]
+    countryCode: string
+    maskedEmail: string
+    tempPassword: string
+    email: string
+    rootOrg: IRootOrg
+    profileSummary: string
+    phoneVerified: boolean
+    recoveryPhone: string
+    userName: string
+    userId: string
+    lastLoginTime: string
+    emailVerified: boolean
+    framework: {}
+    createdDate: string
+    createdBy: string
+    location: string
+    tncAcceptedVersion: string
     primaryCategory: string
   }
 
@@ -252,4 +300,84 @@ export namespace NSContent {
     visibility: string
     compatibilityLevel: string
   }
+
+  export interface IContentMetaV2 {
+    id: string
+    ver: string
+    ts: string
+    params: {
+      resmsgid: string
+      msgid: string
+      status: string
+      err?: string
+      errmsg?: string
+    },
+    responseCode: string
+    result: {
+      content: IContentMeta
+    }
+  }
+
+  export interface IOrganisations {
+    updatedBy: string
+    organisationId: string
+    orgName: string
+    addedByName: string
+    addedBy: string
+    roles: string[]
+    approvedBy: string
+    updatedDate: string
+    approvaldate: string
+    isDeleted: boolean
+    parentOrgId: string
+    hashTagId: string
+    isRejected: boolean
+    position: string
+    id: string
+    orgjoindate: string
+    isApproved: boolean
+    orgLeftDate: string
+  }
+
+  export interface IRootOrg {
+    dateTime: string
+    preferredLanguage: string
+    keys: {}
+    channel: string
+    approvedBy: string
+    description: string
+    updatedDate: string
+    addressId: string
+    orgType: string
+    provider: string
+    orgCode: string
+    locationId: string
+    theme: string
+    id: string
+    isApproved: boolean
+    communityId: string
+    slug: string
+    email: string
+    isSSOEnabled: boolean
+    thumbnail: string
+    updatedBy: string
+    orgName: string
+    locationIds: string[]
+    externalId: string
+    isRootOrg: boolean
+    rootOrgId: string
+    imgUrl: string
+    approvedDate: string
+    orgTypeId: string
+    homeUrl: string
+    isDefault: boolean
+    createdDate: string
+    contactDetail: string
+    parentOrgId: string
+    createdBy: string
+    hashTagId: string
+    noOfMembers: string
+    status: number
+  }
+
 }

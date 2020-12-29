@@ -6,11 +6,12 @@ import { Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils'
 
 @Component({
-  selector: 'ws-app-connection-people-card',
-  templateUrl: './connection-people-card.component.html',
-  styleUrls: ['./connection-people-card.component.scss'],
+  selector: 'ws-app-connection-recommended-card',
+  templateUrl: './connection-recommended-card.component.html',
+  styleUrls: ['./connection-recommended-card.component.scss'],
 })
-export class ConnectionPeopleCardComponent implements OnInit {
+export class ConnectionRecommendedCardComponent implements OnInit {
+
   @Input() user!: NSNetworkDataV2.INetworkUser
   @Output() connection = new EventEmitter<string>()
   @ViewChild('toastSuccess', { static: true }) toastSuccess!: ElementRef<any>
@@ -39,6 +40,7 @@ export class ConnectionPeopleCardComponent implements OnInit {
       userNameTo: `${this.user.personalDetails.firstname}${this.user.personalDetails.surname}`,
       userDepartmentTo: this.user.employmentDetails.departmentName,
     }
+
     this.networkV2Service.createConnection(req).subscribe(
       () => {
         this.openSnackbar(this.toastSuccess.nativeElement.value)

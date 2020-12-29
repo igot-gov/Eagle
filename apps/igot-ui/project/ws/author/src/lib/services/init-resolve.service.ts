@@ -9,7 +9,7 @@ import { ICollectionEditorConfig } from '../interface/collection-editor'
 import { NSContent } from '../interface/content'
 import { IFormMeta } from '../interface/form'
 import { ApiService } from '../modules/shared/services/api.service'
-import { ORDINALS } from './../constants/apiEndpoints'
+// import { ORDINALS } from './../constants/apiEndpoints'
 import { AVAILABLE_LOCALES } from './../constants/constant'
 import { AccessControlService } from './../modules/shared/services/access-control.service'
 import { CKEditorResolverService } from './ckeditor-resolve.service'
@@ -25,7 +25,7 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
     private accessService: AccessControlService,
     private authInitService: AuthInitService,
     private zipJSInject: ZipJSResolverService,
-  ) {}
+  ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const forkProcess: Observable<any>[] = [of(undefined)]
@@ -48,12 +48,12 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
       )
       pushedJobs.push('meta')
     }
-    if (data.includes('ordinals') && !this.authInitService.ordinals) {
-      forkProcess.push(
-        this.apiService.get<IFormMeta>(`${ORDINALS}${this.accessService.orgRootOrgAsQuery}`),
-      )
-      pushedJobs.push('ordinals')
-    }
+    // if (data.includes('ordinals') && !this.authInitService.ordinals) {
+    //   forkProcess.push(
+    //     this.apiService.get<IFormMeta>(`${ORDINALS}${this.accessService.orgRootOrgAsQuery}`),
+    //   )
+    //   pushedJobs.push('ordinals')
+    // }
     if (data.includes('create') && !this.authInitService.creationEntity.size) {
       forkProcess.push(
         this.apiService.get<ICreateEntity[]>(
@@ -81,7 +81,7 @@ export class InitResolver implements Resolve<NSContent.IContentMeta> {
           this.authInitService.optimizedWorkFlow = v[pushedJobs.indexOf('config')].optimizedWorkFlow
           this.authInitService.workFlowTable = v[pushedJobs.indexOf('config')].workFlowTable
           this.authInitService.ownerDetails = v[pushedJobs.indexOf('config')].ownerDetails
-          this.authInitService.permissionDetails = v[pushedJobs.indexOf('config')].permissionDetails
+          // this.authInitService.permissionDetails = v[pushedJobs.indexOf('config')].permissionDetails
         }
         if (pushedJobs.includes('meta')) {
           this.authInitService.authConfig = v[pushedJobs.indexOf('meta')]

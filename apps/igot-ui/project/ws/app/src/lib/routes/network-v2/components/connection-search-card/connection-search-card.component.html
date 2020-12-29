@@ -10,10 +10,10 @@
         <div class="name-container flex flex-col width-expand">
             <a href="javascript:void(0)" class="" i18n-aria-label role="link" (click)="goToUserProfile(user)">
                 <div class="name ws-mat-black-text cursor-pointer" (click)="goToUserProfile(user)">
-                    {{user?.first_name}} {{user?.last_name}}
-                </div>
+                    {{user?.personalDetails?.firstname}} {{user?.personalDetails?.middlename}}
+                    {{user?.personalDetails?.surname}} </div>
                 <div class="designation ws-mat-black60-text">
-                    {{user?.department_name}}
+                    {{user?.employmentDetails?.departmentName}}
                 </div>
             </a>
         </div>

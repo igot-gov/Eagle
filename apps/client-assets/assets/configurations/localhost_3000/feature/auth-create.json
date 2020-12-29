@@ -52,7 +52,8 @@
       "content-creator",
       "editor",
       "admin"
-    ]
+    ],
+    "primaryCategory": "Learning Resource"
   },
   {
     "id": "assessment",

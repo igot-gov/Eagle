@@ -15,7 +15,7 @@ TODO: edit option while preview Mode
 <!-- </mat-toolbar> -->
 
 <ws-app-toc-banner role="banner" [banners]="banners" [forPreview]="forPreview" [content]="content"
-  [analytics]="analytics" [resumeData]="resumeData">
+  [analytics]="analytics" [resumeData]="resumeData" [batchData]="batchData">
 </ws-app-toc-banner>
 <ng-container>
   <div class="toc-container">
@@ -23,7 +23,8 @@ TODO: edit option while preview Mode
       <div class="flex mat-app-background" #stickyMenu [class.sticky]="sticky">
         <nav mat-tab-nav-bar class="toc-links fixed-width" aria-label="content navigation">
           <a mat-tab-link [routerLink]='"./single-page-view"' fragment="overview" i18n-aria-label aria-label="overview"
-            class="tab" [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" i18n>
+            class="tab" [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'overview'}" 
+            [queryParams]="{batchId: getBatchId()}" i18n>
             <span i18n class="margin-top-m mat-title">Overview</span>
           </a>
           <a mat-tab-link *ngIf="content?.resourceType === 'Certification'" [routerLink]="'./certification'" class="tab"
@@ -38,8 +39,8 @@ TODO: edit option while preview Mode
           </a>
 
           <a *ngIf="content?.children?.length" mat-tab-link [routerLink]='"./single-page-view"' i18n-aria-label
-            class="tab" fragment="content"
-            [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'content'}" i18n>
+            class="tab" fragment="content"  [ngClass]="{'ws-mat-primary-text link-active': currentFragment === 'content'}" 
+            [queryParams]="{batchId: getBatchId()}" i18n>
             <span i18n class="margin-top-m mat-title">Content</span>
           </a>
 

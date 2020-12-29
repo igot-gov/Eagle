@@ -137,8 +137,10 @@ export class PlayerVideoComponent extends WidgetBaseComponent
       if (this.widgetData.identifier) {
         const collectionId = this.activatedRoute.snapshot.queryParams.collectionId ?
               this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier
+        const batchId = this.activatedRoute.snapshot.queryParams.batchId ?
+          this.activatedRoute.snapshot.queryParams.batchId : this.widgetData.identifier
         this.viewerSvc
-          .realTimeProgressUpdate(identifier, data, collectionId)
+          .realTimeProgressUpdate(identifier, data, collectionId, batchId)
       }
     }
     if (this.widgetData.resumePoint && this.widgetData.resumePoint !== 0) {
@@ -209,8 +211,12 @@ export class PlayerVideoComponent extends WidgetBaseComponent
     }
     const fireRProgress: fireRealTimeProgressFunction = (identifier, data) => {
       if (this.widgetData.identifier) {
+        const collectionId = this.activatedRoute.snapshot.queryParams.collectionId ?
+          this.activatedRoute.snapshot.queryParams.collectionId : this.widgetData.identifier
+        const batchId = this.activatedRoute.snapshot.queryParams.batchId ?
+          this.activatedRoute.snapshot.queryParams.batchId : this.widgetData.identifier
         this.viewerSvc
-          .realTimeProgressUpdate(identifier, data)
+          .realTimeProgressUpdate(identifier, data, collectionId, batchId)
       }
     }
     let enableTelemetry = false

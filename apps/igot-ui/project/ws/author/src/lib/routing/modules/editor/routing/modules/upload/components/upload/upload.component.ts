@@ -60,11 +60,11 @@ export class UploadComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.allLanguages = this.authInitService.ordinals.subTitles
+    this.allLanguages = (this.authInitService.ordinals) ? this.authInitService.ordinals.subTitles : []
     this.canTransCode =
-      this.authInitService.ordinals.canTransCode &&
+      this.authInitService.ordinals && (this.authInitService.ordinals.canTransCode &&
         this.authInitService.ordinals.canTransCode.length &&
-        this.authInitService.ordinals.canTransCode[0]
+        this.authInitService.ordinals.canTransCode[0])
         ? this.authInitService.ordinals.canTransCode[0]
         : false
     Object.keys(this.contentService.originalContent).map(v =>

@@ -34,8 +34,8 @@ export class AuthEditorOptionsComponent implements OnInit {
     const childrenConfig = this.authInitService.collectionConfig.childrenConfig
     const contentTypeConfig = childrenConfig[this.node.category]
     const content = this.accessService.getUpdatedMeta(this.node.identifier)
-    this.contentEditDisabled = content.isContentEditingDisabled
-    this.metaEditDisabled = content.isMetaEditingDisabled
+    // this.contentEditDisabled = content.isContentEditingDisabled
+    // this.metaEditDisabled = content.isMetaEditingDisabled
     this.canEdit = this.accessService.hasAccess(content)
     if (
       contentTypeConfig &&
@@ -52,7 +52,7 @@ export class AuthEditorOptionsComponent implements OnInit {
         parentType &&
         childrenConfig[parentType.category] &&
         this.node.editable &&
-        !parentContent.isContentEditingDisabled &&
+        // !parentContent.isContentEditingDisabled &&
         this.accessService.hasAccess(parentContent) &&
         childrenConfig[parentType.category].allowCreation
       ) {

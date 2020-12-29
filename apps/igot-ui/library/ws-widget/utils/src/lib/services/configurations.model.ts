@@ -248,6 +248,8 @@ export namespace NsUser {
     isManager?: boolean
     lastName?: string
     firstName?: string
+    surName?: string
+    middleName?: string
   }
   export interface IUserPidProfile {
     kid_updated: boolean
@@ -258,6 +260,12 @@ export namespace NsUser {
     kid_updated: boolean
     result: {
       response: IUserV2
+    }
+  }
+
+  export interface IUserPidProfileVer2 {
+    result: {
+      UserProfile: IUserVer2
     }
   }
   interface ISourceData {
@@ -326,7 +334,34 @@ export namespace NsUser {
     json_unmapped_fields?: any
     source_data: ISourceData
   }
+  interface IUserVer2 {
+    'firstname': string,
+  'motherTongue': string,
+  'secondaryEmail': string,
+  'gender': string,
+  '@type': string,
+  'mobile': number,
+  'middlename': string,
+  'telephone': number,
+  'osid': string,
+  'primaryEmailType': string,
+  'knownLanguages': ILanguages[],
+  'wid': string,
+  'nationality': string,
+  'surname': string,
+  'dob': string,
+  'category': string,
+  'primaryEmail': string,
+  'maritalStatus': string,
+  'residenceAddress': string,
+  'result': any
+  }
+
+  export interface ILanguages {
+    name: string
+  }
   interface IUserV2 {
+    surName: any
     maskedPhone: string
     rootOrgName: string
     subject: []

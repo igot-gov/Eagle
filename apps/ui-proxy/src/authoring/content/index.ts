@@ -167,6 +167,50 @@ authApi.post('/download/s3', async (req: Request, res: Response) => {
   res.status(200).send(finalResult)
 })
 
+authApi.post('/content/v3/create', async (request: Request, res: Response) => {
+  axios({
+    data: request.body,
+    headers: request.headers,
+    method: request.method,
+    url: CONSTANTS.SUNBIRD_PROXY_URL + request.url,
+  } as AxiosRequestConfig)
+    .then((response) => {
+      res.status(response.status).send(response.data)
+    })
+    .catch((error) => {
+      res.status(error.response.status).send(error.response.data)
+    })
+})
+
+authApi.get('/content/v3/read/:id', async (req: Request, res: Response) => {
+  axios({
+    headers: req.headers,
+    method: req.method,
+    url: CONSTANTS.SUNBIRD_PROXY_URL + req.url,
+  } as AxiosRequestConfig)
+    .then((response) => {
+      res.status(response.status).send(response.data)
+    })
+    .catch((error) => {
+      res.status(error.response.status).send(error.response.data)
+    })
+})
+
+authApi.patch('/content/v3/update/:id', async (req: Request, res: Response) => {
+  axios({
+    data: req.body,
+    headers: req.headers,
+    method: req.method,
+    url: CONSTANTS.SUNBIRD_PROXY_URL + req.url,
+  } as AxiosRequestConfig)
+    .then((response) => {
+      res.status(response.status).send(response.data)
+    })
+    .catch((error) => {
+      res.status(error.response.status).send(error.response.data)
+    })
+})
+
 authApi.all('*', (req: Request, res: Response) => {
   axios({
     data: req.body,

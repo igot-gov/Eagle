@@ -8,7 +8,7 @@ export namespace NsContent {
       userId: string | undefined,
       courseId: string,
       contentIds: string[],
-      batchId: string
+      batchId: string | undefined | null
     }
   }
 
@@ -145,6 +145,61 @@ export namespace NsContent {
     },
     ts: string,
     ver: string
+  }
+
+  export interface IBatch {
+    batchId: string,
+    createdBy: string,
+    endDate: string | null,
+    enrollmentType: string,
+    identifier: string,
+    name: string,
+    startDate: string,
+    status: number
+    cert_templates: null
+    collectionId: string
+    courseId: string
+    createdDate: string
+    createdFor: string[]
+    description: null
+    enrollmentEndDate: string | null
+    id: string
+    mentors: string[] | null
+    tandc: null
+    updatedDate: string | null
+  }
+
+  export interface IBatchListResponse {
+    content?: IBatch[]
+    count?: number,
+    enrolled?: boolean,
+  }
+
+  export interface ICourse {
+    active: true
+    addedBy: string
+    batch: IBatch
+    batchId: string
+    certificates: []
+    collectionId: string
+    completedOn: string | null
+    completionPercentage: number | null
+    content: IContent
+    contentId: string
+    contentStatus: any
+    courseId: string
+    courseLogoUrl: string
+    courseName: string
+    dateTime: number
+    description: string
+    enrolledDate: string
+    issuedCertificates: []
+    lastReadContentId: string | null
+    lastReadContentStatus: string | null
+    leafNodesCount: number
+    progress: number
+    status: number
+    userId: string
   }
 
   export interface IContentMinimal {
