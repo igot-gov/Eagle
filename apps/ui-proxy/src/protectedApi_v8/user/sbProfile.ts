@@ -2,8 +2,11 @@ import axios from 'axios'
 import { Router } from 'express'
 import { axiosRequestConfig } from '../../configs/request.config'
 import {
-    IUpdateUserRegistry, IUserRegistry
+    IUpdateUserRegistry, IUserRegistry,
 } from '../../models/profile-details.model'
+import {
+    ISbUserResponse,
+} from '../../models/user.model'
 import {
     IUserDetailsResponse,
     IUserGraphProfile,
@@ -32,12 +35,13 @@ const GENERAL_ERROR_MSG = 'Failed due to unknown reason'
 // Update the v1 to v2
 const apiEndpoints = {
     create: `${CONSTANTS.SB_EXT_API_BASE}/v1/user/createUser`,
-    createSb: `${CONSTANTS.CREATE_USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/create`,
-    details: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/user`,
+    createSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/create`,
+    details: `${CONSTANTS.USER_LOCAL_SUNBIRD_DETAILS_API_BASE}/user`,
+    detailsSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/read`,
     graph: `${CONSTANTS.SB_EXT_API_BASE}/v1/Users`,
     graphV2: `${CONSTANTS.SB_EXT_API_BASE}/v2/Users`,
-    searchSb: `${CONSTANTS.CREATE_USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/search`,
-    updatSb: `${CONSTANTS.CREATE_USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/update`,
+    searchSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/search`,
+    updatSb: `${CONSTANTS.USER_SUNBIRD_DETAILS_API_BASE}/api/user/v1/update`,
 }
 const xAuthUser = `${CONSTANTS.X_AUTH_USER}`
 const contentType = `${CONSTANTS.CONTENT_TYPE}`
@@ -58,13 +62,13 @@ export async function getUserDetailsFromApi(userId: string): Promise<IUserDetail
     }
 }
 
-export async function getSbUserDetailsFromApi(userId: string, auth: string, xT: string, org: string): Promise<IUserDetailsResponse | null> {
+export async function getSbUserDetailsFromApi(userId: string, auth: string, xT: string, org: string): Promise<ISbUserResponse | null> {
     const xAuth = auth.split(' ')
     try {
-
+        logInfo('-------getSbUserDetailsFromApi-----')
         axios.defaults.headers.common[xAuthUser] = xAuth[1]
-        const res = await axios.get<IUserDetailsResponse>(
-            `${apiEndpoints.details}/${userId}`,
+        const res = await axios.get<ISbUserResponse>(
+            `${apiEndpoints.detailsSb}/${userId}`,
             { headers: { Authorization: xAuth[0] + ' ' + xT, rootOrgName: org } }
         )
         return res.data || {}
@@ -117,13 +121,13 @@ function manipulateResult(
 }
 
 function manipulateResultV1(
-    detailsResponse: IUserDetailsResponse | null,
+    detailsResponse: ISbUserResponse | null,
     defaultEmail: string
 ) {
-    let empNumber = (detailsResponse && detailsResponse.empNumber) || 0
+    let empNumber = (detailsResponse && detailsResponse.result.response.id) || 0
     try {
         if (detailsResponse != null) {
-            empNumber = detailsResponse.empNumber
+            empNumber = detailsResponse.result.response.id
         }
         // tslint:disable-next-line:ban
 
@@ -133,14 +137,14 @@ function manipulateResultV1(
 
     return {
         email:
-            (detailsResponse && detailsResponse.email) ||
+            (detailsResponse && detailsResponse.result.response.email) ||
             defaultEmail,
         miscellaneous: {
             ...detailsResponse,
             empNumber,
         },
         name:
-            (detailsResponse && detailsResponse.name),
+            (detailsResponse && detailsResponse.result.response.firstName + ' ' + detailsResponse.result.response.lastName),
     }
 }
 
@@ -255,16 +259,12 @@ sbProfileApi.post('/search', async (req, res) => {
 
             const searchresponse = await axios({
                 ...axiosRequestConfig,
-                data: { request: { query: '', filters: { userName: getuserName } } },
+                data: { request: { query: '', filters: { userName: getuserName.toLowerCase() } } },
                 method: 'POST',
                 url: apiEndpoints.searchSb,
             })
-            let id = null
-            if (searchresponse.data.result.response.content.length > 0) {
-                id = searchresponse.data.result.response.content[0].id
-            }
 
-            res.send(id)
+            res.send(searchresponse.data)
             return
         }
         res.status(404).send('')
@@ -301,24 +301,32 @@ sbProfileApi.post('/', async (req, res) => {
             const createSbResponseData = JSON.parse(JSON.stringify(responseData))
             let reqresponse
             if (createSbResponseData.result.response === 'SUCCESS') {
-
+                axios.defaults.headers.common[xAuthUser] = xAuth[1]
+                axios.defaults.headers.common[authorizationHeader] = xAuth[0] + ' ' + xAuthenticatedUserToken
+                axios.defaults.headers.common[contentType] = contentTypeValue
+                axios.defaults.headers.common[xAppId] = xAppIdVAlue
                 const getuserName: string = req.body.userName
 
                 const searchresponse = await axios({
                     ...axiosRequestConfig,
-                    data: { request: { query: '', filters: { userName: getuserName } } },
+                    data: { request: { query: '', filters: { userName: getuserName.toLowerCase() } } },
                     method: 'POST',
                     url: apiEndpoints.searchSb,
                 })
-
-                const firstName: string = req.body.firstName
-                const lastName: string = req.body.lastName
-                const email: string = req.body.email
-                const sphone: string = req.body.phone
-                const phone: number = Number(sphone)
-                if (searchresponse.data.result.response.content.length > 0) {
-                    const id: string = searchresponse.data.result.response.content[0].id
-                    logInfo('-------AfterData for Registry-----' + id)
+                logInfo('-------Registry-----' + searchresponse.data.result.count)
+                let id = ''
+                let firstName = ''
+                let lastName = ''
+                let email = ''
+                let phone = 0
+                if (searchresponse.data.result.response.count > 0) {
+                    id = searchresponse.data.result.response.content[0].id
+                    firstName = searchresponse.data.result.response.content[0].firstName
+                    lastName = searchresponse.data.result.response.content[0].lastName
+                    email = searchresponse.data.result.response.content[0].email
+                    const sphone = req.body.phone
+                    phone = Number(sphone)
+                    logInfo('-------If AfterData for Registry-----' + id + '   ' + phone)
                     const reqToRegistry: IUserRegistry = {
                         firstname: firstName,
                         mobile: phone, primaryEmail: email, surname: lastName,
@@ -328,12 +336,12 @@ sbProfileApi.post('/', async (req, res) => {
                         createUserRegistry(reqToRegistry),
                     ])
                 } else {
-                    const id: string = null || ''
+                    const userId: string = null || ''
                     logInfo('-------AfterData for Registry-----' + id)
                     const reqToRegistry: IUserRegistry = {
                         firstname: firstName,
                         mobile: phone, primaryEmail: email, surname: lastName,
-                        userId: id,
+                        userId,
                     }
                     reqresponse = await Promise.all([
                         createUserRegistry(reqToRegistry),
