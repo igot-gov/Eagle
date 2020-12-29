@@ -77,13 +77,13 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,
-    private createMdoService: CreateMDOService,
-    private activatedRoute: ActivatedRoute) {
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService,
+              private createMdoService: CreateMDOService,
+              private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe(params => {
       this.department = params['department']
     })
@@ -335,8 +335,11 @@ export class CreateMdoComponent implements OnInit {
     }
     return false
   }
-  showError() {
+  showError(error: string) {
+    if (error) {
 
+    }
+    return false
   }
   private fetchJobProfile() {
     if ((this.jobProfileCtrl.value || '').trim()) {
@@ -516,6 +519,8 @@ export class CreateMdoComponent implements OnInit {
     })
   }
   onSubmit() {
-    console.log(this.contentForm.value)
+    // this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
+    //   console.log(res)
+    // })
   }
 }

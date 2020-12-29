@@ -133,6 +133,7 @@ import { LeftMenuModule } from './left-menu/left-menu.module'
 import { LeftMenuComponent } from './left-menu/left-menu.component'
 // import { UserListDisplayComponent } from './ui-table/components/user-list-display/user-list-display.component'
 import { UITableModule } from './ui-table/ui-table.module'
+import { NotificationModule } from './notification/notification.module'
 export const WIDGET_REGISTERED_MODULES = [
   AvatarPhotoModule,
   BtnAppsModule,
@@ -201,6 +202,7 @@ export const WIDGET_REGISTERED_MODULES = [
   SlidersMobModule,
 
   ActivityStripMultipleModule,
+  NotificationModule,
 ]
 
 export const WIDGET_REGISTRATION_CONFIG: NsWidgetResolver.IRegistrationConfig[] = [

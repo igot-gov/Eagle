@@ -1,131 +1,44 @@
 {
-  "contentType": "Page",
-  "navigationBar": {
-    "pageTitle": "",
-    "pageBackLink": "none",
-    "background": {
-      "color": "default",
-      "styles": {
-        "background-color": "white",
-        "color": "#333"
-      }
-    },
-    "xsmallNonMenuLinks": [
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "toolTop": "Search",
-          "actionBtnId": "feature_search",
-          "config": {
-            "type": "mat-icon-button"
-          }
-        }
-      },
-      {
-        "widgetType": "actionButton",
-        "widgetSubType": "buttonFeature",
-        "widgetData": {
-          "toolTop": "feature_notification",
-          "actionBtnId": "feature_notification",
-          "config": {
-            "type": "mat-icon-button"
-          }
-        }
-      }
-    ],
-    "links": []
-  },
-  "pageLayout": {
-    "widgetSubType": "newGridLayout",
-    "widgetType": "layout",
-    "widgetData": {
-      "widgets": [
-        [
-          {
-            "dimensions": {
-              "small": 12,
-              "medium": 2
+    "menus": {
+        "widgetType": "menus",
+        "widgetSubType": "leftMenu",
+        "widgetData": [
+            {
+                "name": "Directory",
+                "key": "directory",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/directory"
             },
-            "className": "",
-            "widget": {
-              "widgetType": "menus",
-              "widgetSubType": "leftMenu",
-              "widgetData": [
-                {
-                  "name": "Users",
-                  "key": "users",
-                  "render": true,
-                  "badges": {
+            {
+                "name": "Users",
+                "key": "users",
+                "fragment": false,
+                "render": true,
+                "badges": {
                     "enabled": false,
                     "uri": ""
-                  },
-                  "enabled": true,
-                  "routerLink": "/app/home"
                 },
-                {
-                  "name": "Roles and Access",
-                  "key": "roles-access",
-                  "render": true,
-                  "badges": {
-                    "enabled": false,
-                    "uri": ""
-                  },
-                  "enabled": true,
-                  "routerLink": "/app/home/roles-access"
-                },
-                {
-                  "name": "Approvals",
-                  "key": "approvals",
-                  "render": true,
-                  "badges": {
-                    "enabled": false,
-                    "uri": ""
-                  },
-                  "enabled": true,
-                  "routerLink": "/app/notifications"
-                },
-                {
-                  "name": "Competencies",
-                  "key": "competencies",
-                  "render": true,
-                  "badges": {
-                    "enabled": false,
-                    "uri": ""
-                  },
-                  "enabled": true,
-                  "routerLink": "/app/notifications"
-                },
-                {
-                  "name": "About",
-                  "key": "about",
-                  "render": true,
-                  "badges": {
-                    "enabled": false,
-                    "uri": ""
-                  },
-                  "enabled": true,
-                  "routerLink": "/app/notifications"
-                }
-              ]
-            }
-          },
-          {
-            "dimensions": {
-              "small": 12,
-              "medium": 10
+                "enabled": true,
+                "routerLink": "/app/home/users"
             },
-            "className": "",
-            "widget": {
-              "widgetType": "contentStrip",
-              "widgetSubType": "contentStripMultipleNew",
-              "widgetData": {
-                "strips": []
-              }
+            {
+                "name": "Roles and Access",
+                "key": "roles-access",
+                "fragment": false,
+                "render": true,
+                "badges": {
+                    "enabled": false,
+                    "uri": ""
+                },
+                "enabled": true,
+                "routerLink": "/app/home/roles-access"
             }
-          }
         ]
-      ]
     }
-  }
 }
