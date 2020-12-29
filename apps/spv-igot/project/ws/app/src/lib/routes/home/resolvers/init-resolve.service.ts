@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router'
 
 // import { CKEditorService } from 'library/ws-widget/collection/src/lib/_common/ck-editor/ck-editor.service'
 import { Observable, forkJoin, of } from 'rxjs'
+// import { AuthInitService } from '../services/init.service'
 // import { tap } from 'rxjs/operators'
 // import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 

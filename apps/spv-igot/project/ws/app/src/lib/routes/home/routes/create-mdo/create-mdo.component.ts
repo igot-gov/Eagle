@@ -19,6 +19,8 @@ import { AccessControlService } from '../../services/access-control.service'
 import { EditorService } from '../../services/editor.service'
 import { startWith, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
 import { of } from 'rxjs'
+import { ActivatedRoute } from '@angular/router'
+import { CreateMDOService } from './create-mdo.services'
 
 @Component({
   selector: 'ws-app-create-mdo',
@@ -69,25 +71,35 @@ export class CreateMdoComponent implements OnInit {
   competencyOptions$: any
   allLanguages: any
   data1: any
+  department!: string
+  subDepartments!: any
   workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private contentService: EditorContentService,
-              private loader: LoaderService,
-              private authInitService: AuthInitService) {}
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private contentService: EditorContentService,
+    private loader: LoaderService,
+    private authInitService: AuthInitService,
+    private createMdoService: CreateMDOService,
+    private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.department = params['department']
+    })
+  }
   ngOnInit() {
     this.typeCheck()
     this.contentForm = new FormGroup({
       name: new FormControl(),
-      subTitle: new FormControl(),
+      head: new FormControl(),
+      deptSubTypeId: new FormControl(),
+      fileUpload: new FormControl(),
     })
-    this.ordinals = this.authInitService.ordinals
-    this.audienceList = this.ordinals.audience
-    this.jobProfileList = this.ordinals.jobProfile
-    this.complexityLevelList = this.ordinals.audience
+    // this.ordinals = this.authInitService.ordinals
+    // this.audienceList = this.ordinals.audience
+    // this.jobProfileList = this.ordinals.jobProfile
+    // this.complexityLevelList = this.ordinals.audience
 
     this.creatorContactsCtrl = new FormControl()
     this.trackContactsCtrl = new FormControl()
@@ -114,7 +126,7 @@ export class CreateMdoComponent implements OnInit {
       sortColumn: '',
       sortState: 'asc',
     }
-
+    this.getAllDepartmentsAPI()
     this.creatorContactsCtrl.valueChanges
       .pipe(
         debounceTime(500),
@@ -129,15 +141,15 @@ export class CreateMdoComponent implements OnInit {
           return of([])
         }),
       )
-      // .subscribe(
-      //   users => {
-      //     // this.employeeList = users || <string[]>[]
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      //   () => {
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      // )
+    // .subscribe(
+    //   users => {
+    //     // this.employeeList = users || <string[]>[]
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    //   () => {
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    // )
 
     this.trackContactsCtrl.valueChanges
       .pipe(
@@ -153,15 +165,15 @@ export class CreateMdoComponent implements OnInit {
           return of([])
         }),
       )
-      // .subscribe(
-      //   users => {
-      //     // this.employeeList = users || <string[]>[]
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      //   () => {
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      // )
+    // .subscribe(
+    //   users => {
+    //     // this.employeeList = users || <string[]>[]
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    //   () => {
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    // )
 
     this.publisherDetailsCtrl.valueChanges
       .pipe(
@@ -177,15 +189,15 @@ export class CreateMdoComponent implements OnInit {
           return of([])
         }),
       )
-      // .subscribe(
-      //   users => {
-      //     // this.employeeList = users || <string[]>[]
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      //   () => {
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      // )
+    // .subscribe(
+    //   users => {
+    //     // this.employeeList = users || <string[]>[]
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    //   () => {
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    // )
 
     this.editorsCtrl.valueChanges
       .pipe(
@@ -201,15 +213,15 @@ export class CreateMdoComponent implements OnInit {
           return of([])
         }),
       )
-      // .subscribe(
-      //   users => {
-      //     this.employeeList = users || <string[]>[]
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      //   () => {
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      // )
+    // .subscribe(
+    //   users => {
+    //     this.employeeList = users || <string[]>[]
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    //   () => {
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    // )
 
     this.creatorDetailsCtrl.valueChanges
       .pipe(
@@ -225,15 +237,15 @@ export class CreateMdoComponent implements OnInit {
           return of([])
         }),
       )
-      // .subscribe(
-      //   users => {
-      //     this.employeeList = users || <string[]>[]
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      //   () => {
-      //     this.fetchTagsStatus = 'done'
-      //   },
-      // )
+    // .subscribe(
+    //   users => {
+    //     this.employeeList = users || <string[]>[]
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    //   () => {
+    //     this.fetchTagsStatus = 'done'
+    //   },
+    // )
 
     this.audienceCtrl.valueChanges.subscribe(() => this.fetchAudience())
 
@@ -271,7 +283,12 @@ export class CreateMdoComponent implements OnInit {
       switchMap(value => this.interestSvc.fetchAutocompleteCompetencyV2(value)),
     )
 
-    this.allLanguages = this.data1.languages
+    // this.allLanguages = this.data1.languages
+  }
+  getAllDepartmentsAPI() {
+    this.createMdoService.getAllSubDepartments(this.department).subscribe(res => {
+      this.subDepartments = res
+    })
   }
   typeCheck() {
     if (this.type) {
@@ -497,5 +514,8 @@ export class CreateMdoComponent implements OnInit {
         // this.refreshData(this.currentActivePage)
       }
     })
+  }
+  onSubmit() {
+    console.log(this.contentForm.value)
   }
 }
