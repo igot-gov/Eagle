@@ -3,12 +3,12 @@
   border: 1px solid #DDDDDD;
   border-radius: 4px;
   padding: 9px;
+  font: 400 14px Lato;
 }
 
 .appr-text-label{
-  font-size: 14px;
+  font: 700 14px Lato;
   color: #000000;
-  font-weight: bold;
 }
 
 .accept {
@@ -32,7 +32,7 @@
 .needs-appr-count-text{
   border-radius: 100px 4px 4px 100px;
   padding: 0 12px;
-  font-size: 18px;
+  font:400 16px Lato;
   float: right;
 }
 
@@ -51,11 +51,12 @@
 
 .pending-icon{
   position: absolute;
-  right: 170px;
+  right: 172px;
+  top: 30px;
 }
 
 .appr-section-heading{
-  font-size:20px
+  font: 600 20px Montserrat;
 }
 
 .accept-btn{
@@ -65,14 +66,18 @@
 
 .accept-dialog-btn{
   color: white !important;
-  font-weight: 500;
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
   margin-left: 15px;
   background-color:  #0074b6 !important;
 }
 
 .reject-dialog-btn{
   color: white !important;
-  font-weight: 500;
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
   margin-left: 15px;
   background-color:  red !important;
 }
@@ -83,8 +88,7 @@
 }
 
 .dialog-title{
-  font-size: 19px;
-  font-weight: 600;
+ font:600 20px Montserrat;
 }
 
 .no-request-text{
@@ -99,4 +103,15 @@
     padding: 10px;
     border-radius: 4px;
     border: 1px solid lightgray;
+}
+
+
+::ng-deep .mat-radio-label-content{
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.appr-text{
+  font: 400 16px Lato;
 }

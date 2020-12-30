@@ -8,6 +8,7 @@ import { UsersViewComponent } from './routes/users-view/users-view.component'
 import { RolesAccessComponent } from './routes/roles-access/roles-access.component'
 // import { PageResolve } from '@ws-widget/utils'
 import { ApprovalsComponent } from './routes/approvals/approvals.component'
+
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +22,6 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersViewComponent,
-        children: [],
       },
       {
         path: 'about',

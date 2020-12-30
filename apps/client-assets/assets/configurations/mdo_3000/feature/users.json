@@ -1,0 +1,36 @@
+{
+    "menus": {
+      "widgetType": "menus",
+      "widgetSubType": "leftMenu",
+      "widgetData": [
+        {
+          "name": "User Deatils",
+          "key": "details",
+          "fragment": false,
+          "render": true,
+          "badges": {
+            "enabled": false,
+            "uri": ""
+          },
+          "enabled": true,
+          "paramaterName": "approval",
+          "routerLink": "/app/users/<param>/details",
+          "customRouting": true
+        },
+        {
+            "name": "Create User",
+            "key": "create-user",
+            "fragment": false,
+            "render": true,
+            "badges": {
+              "enabled": false,
+              "uri": ""
+            },
+            "enabled": true,
+            "paramaterName": "approval",
+            "routerLink": "/app/users/create-user",
+            "customRouting": true
+          }
+      ]
+    }  
+  }

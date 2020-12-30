@@ -1,9 +1,10 @@
 
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core'
+import { Component, OnDestroy, OnInit } from '@angular/core'
 import { NSProfileDataV2 } from '../../models/profile-v2.model'
 import { MatDialog } from '@angular/material/dialog'
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ConfigurationsService } from '@ws-widget/utils/src/public-api'
+import { UsersService } from '../../../users/services/users.service'
 /* tslint:disable */
 import _ from 'lodash'
 
@@ -15,7 +16,7 @@ import _ from 'lodash'
   host: { class: 'flex flex-1 margin-top-l' },
   /* tslint:enable */
 })
-export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UsersViewComponent implements OnInit, OnDestroy {
   /* tslint:disable */
   Math: any
   /* tslint:enable */
@@ -31,14 +32,17 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
   connectionRequests!: any[]
   tabledata: any = []
   data: any = []
+  usersData!: any
 
   constructor(
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private router: Router,
     // private discussService: DiscussService,
     private configSvc: ConfigurationsService,
     // private networkV2Service: NetworkV2Service,
     // private profileV2Svc: ProfileV2Service
+    private usersService: UsersService
   ) {
     this.Math = Math
     this.currentUser = this.configSvc.userProfile && this.configSvc.userProfile.userId
@@ -51,6 +55,7 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
       this.decideAPICall()
     })
   }
+
   decideAPICall() {
   }
   ngOnDestroy() {
@@ -59,115 +64,91 @@ export class UsersViewComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
   ngOnInit() {
-    // int left blank
     this.tabledata = {
-      actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
-      { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
+      // actions: [{ name: 'Approve', label: 'Approve', icon: 'remove_red_eye', type: 'Approve' },
+      // { name: 'Reject', label: 'Reject', icon: 'remove_red_eye', type: 'Reject' }],
       columns: [
         { displayName: 'Full Name', key: 'fullname' },
         { displayName: 'Email', key: 'email' },
-        { displayName: 'Type', key: 'type' },
+        { displayName: 'Position', key: 'position' },
+        { displayName: 'Role', key: 'role' },
       ],
       needCheckBox: false,
       needHash: false,
       sortColumn: '',
       sortState: 'asc',
     }
-    this.data = [{
 
-      fullname: 'Ibrahim Sha',
-      email: 'ibrahimsha@gmail.com',
-      type: 'Transfer',
-    },
-    {
-      fullname: 'Amit Sengar',
-      email: 'amitsengar@yahoo.com',
-      type: 'New User',
-    },
-    {
-      fullname: 'Thillai Rajan',
-      email: 'thillairajan@gmail.com',
-      type: 'New User',
-    }]
-  }
-  ngAfterViewInit() {
-    // this.elementPosition = this.menuElement.nativeElement.parentElement.offsetTop
-  }
-  tEIDTableTableAction() {
-
-  }
-  fetchUserDetails() {
-    // if (wid) {
-    //   this.discussService.fetchProfileInfo(wid).subscribe((response: any) => {
-    //     if (response) {
-    //       this.discussProfileData = response
-    //       this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid') || []
-    //     }
-    //   })
-    // }
-  }
-  fetchConnectionDetails() {
-    // this.networkV2Service.fetchAllConnectionEstablishedById(wid).subscribe(
-    //   (data: any) => {
-    //     this.connectionRequests = data.result.data
-    //   },
-    //   (_err: any) => {
-    //     // this.openSnackbar(err.error.message.split('|')[1] || this.defaultError)
-    //   })
+    this.getAllUsers()
   }
 
   filter(key: string | 'timestamp' | 'best' | 'saved') {
+    const activeUsersData: any[] = []
+    const blockedUsersData: any[] = []
+    const inactiveUsersData: any[] = []
+    if (this.usersData.active_users && this.usersData.active_users.length > 0) {
+      this.usersData.active_users.forEach((user: any) => {
+        activeUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+        })
+      })
+    }
+
+    if (this.usersData.blocked_users && this.usersData.blocked_users.length > 0) {
+      this.usersData.blocked_users.forEach((user: any) => {
+        blockedUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+        })
+      })
+    }
+    if (this.usersData.inActive_users && this.usersData.inActive_users.length > 0) {
+      this.usersData.inActive_users.forEach((user: any) => {
+        inactiveUsersData.push({
+          fullname: user ? `${user.firstName} ${user.lastName}` : null,
+          email: user.emailId,
+          role: user.roleInfo.roleName,
+          userId: user.userId,
+        })
+      })
+    }
+
     if (key) {
       this.currentFilter = key
       switch (key) {
-        case 'underreview':
-          // this.discussionList = _.uniqBy(_.filter(this.discussProfileData.posts, p => _.get(p, 'isMainPost') === true), 'tid')
-          this.data = [{
-
-            fullname: 'Ibrahim Sha',
-            email: 'ibrahimsha@gmail.com',
-            type: 'Transfer',
-          },
-          {
-            fullname: 'Amit Sengar',
-            email: 'amitsengar@yahoo.com',
-            type: 'New User',
-          },
-          {
-            fullname: 'Thillai Rajan',
-            email: 'thillairajan@gmail.com',
-            type: 'New User',
-          }]
-          break
         case 'active':
-          // this.discussionList = _.uniqBy(this.discussProfileData.bestPosts, 'tid')
-          this.data = [{
-            fullname: 'Jenifer Ramsingh',
-            email: 'jeniferramsingh@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = activeUsersData
           break
         case 'inactive':
-          this.data = [{
-            fullname: 'Siva Teju',
-            email: 'sivateajuh@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = inactiveUsersData
           break
         case 'blocked':
-          this.data = [{
-            fullname: 'Jenifer',
-            email: 'jenifer@gamil.com',
-            type: 'Transfer',
-          }]
+          this.data = blockedUsersData
           break
         default:
-          this.discussionList = _.uniqBy(this.discussProfileData.latestPosts, 'tid')
+          this.data = activeUsersData
           break
       }
     }
   }
 
-  // need to enhance
+  getAllUsers() {
+    this.usersService.getAllUsers().subscribe(data => {
+      this.usersData = data
+      this.filter('active')
+    })
+  }
 
+  onCreateClick() {
+    this.router.navigate([`/app/users/create-user`])
+  }
+
+  onRoleClick(user: any) {
+    this.router.navigate([`/app/users/${user.userId}/details`])
+  }
 }

@@ -7,6 +7,7 @@
   border: 1px solid #DDDDDD;
   border-radius: 4px;
   padding: 9px;
+  font: 400 14px Lato;
 }
 
 .appr-text-label{
@@ -36,4 +37,16 @@ textarea {
 
 #profdetails{
   background: #F5F5F5;
+}
+
+::ng-deep .mat-radio-label-content{
+  font-family: 'Lato';
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.middle-heading{
+  font-weight: 600;
+  font-family: "Montserrat";
+  font-size:16px
 }

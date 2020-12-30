@@ -68,7 +68,7 @@ export class NeedsApprovalComponent implements OnInit {
   onClickHandleWorkflow(field: any, action: string) {
     if (action === 'APPROVE') {
       const dialogRef = this.dialog.open(this.approveDialog, {
-        width: '600px',
+        width: '770px',
       })
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
@@ -79,7 +79,7 @@ export class NeedsApprovalComponent implements OnInit {
       })
     } else {
       const dialogRef = this.dialog.open(this.rejectDialog, {
-        width: '600px',
+        width: '770px',
       })
       dialogRef.afterClosed().subscribe(result => {
         if (result) {

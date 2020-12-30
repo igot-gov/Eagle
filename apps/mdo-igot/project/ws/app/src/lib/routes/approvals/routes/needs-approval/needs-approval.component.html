@@ -1,6 +1,8 @@
-<div class="flex flex-1 flex-column margin-left-xs margin-right-xs">
-  <mat-card class="flex-custom ws-mat-accent-border" id="needsapproval" style="background : #FDECDE">
-    <mat-card-content>
+<mat-card id="needsapproval"
+  class="flex flex-1 flex-column margin-left-m margin-bottom-m margin-right-m ws-mat-accent-border"
+  style="background: #FDECDE;">
+  <div class="flex-custom">
+    <mat-card-content class="margin-top-m margin-bottom-m margin-left-m margin-right-m">
       <span class="mat-subheading-1 flex-4 mobile-margin appr-section-heading" role="link" tabindex="0"
         *ngIf="needApprovalList.length>0">
         Needs approval
@@ -8,7 +10,7 @@
       <span class="needs-appr-count-text" *ngIf="needApprovalList.length>0">
         <mat-icon class="pending-icon">hourglass_empty</mat-icon> Pending approval
       </span>
-      <div class="new-mobile">
+      <div class="new-mobile margin-top-l">
         <div class="flex flex-wrap mobile-break">
           <div class="w-full profile-cols-full bg-grey" *ngIf="needApprovalList.length>0">
             <ng-container *ngFor="let field of needApprovalList">
@@ -43,13 +45,14 @@
         </div>
       </div>
     </mat-card-content>
-  </mat-card>
-</div>
+  </div>
+</mat-card>
+
 
 <ng-template #approveDialog>
   <p mat-dialog-title class="dialog-title">Accept request?</p>
   <mat-dialog-content>
-    <p>Once you accept, the feilds will get updated in user's profile.<br />
+    <p class="appr-text margin-top-l">Once you accept, the feilds will get updated in user's profile.<br />
       You can make changes to any field at any point.</p>
   </mat-dialog-content>
   <mat-dialog-actions class="flex flex-wrap justify-end">
@@ -62,7 +65,7 @@
   <form>
     <p mat-dialog-title class="dialog-title">Reject request?</p>
     <mat-dialog-content>
-      <p>Please specify the reason for rejection</p>
+      <p class="appr-text margin-top-l">Please specify the reason for rejection</p>
       <textarea rows="4" [(ngModel)]="comment" placeholder="Type here" name="comment"
         class="reject-reason-text"></textarea>
     </mat-dialog-content>

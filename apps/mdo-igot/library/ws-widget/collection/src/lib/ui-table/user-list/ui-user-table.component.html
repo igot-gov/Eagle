@@ -1,38 +1,49 @@
 <div class="example-container">
-    <div class="example-loading-shade">
+    <div class="example-loading-shade"></div>
 
-    </div>
-    <!-- <div>{{JSON.stringfy(dataSource)}}</div> -->
     <div class="example-table-container">
-
-        <div class="search">
-            <!-- <div class="lsearch">
-                <span class="searchText">Search:</span>
-            </div> -->
-            <div class=rsearch>
-                <input class="sinput" type="Standard" label="" (input)="applyFilter($event.target.value)"
-                    placeholder="Search">
+        <div class="container-balanced">
+            <div class="flex flex-1 custom">
+                <div class="flex-3">
+                    <div class="search">
+                        <div class=rsearch>
+                            <mat-icon class="color-60 search-icon">search</mat-icon>
+                            <input class="sinput color-60" type="Standard" label=""
+                                (input)="applyFilter($event.target.value)" placeholder="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 right-align">
+                    <button type="button" mat-button class="upload-btn" *ngIf="isUpload">
+                        <mat-icon>vertical_align_top</mat-icon> Bulk upload
+                    </button>
+                    <button type="button" mat-button class="create-btn" *ngIf="isCreate" (click)="onCreateClick()">
+                        Create new
+                    </button>
+                </div>
             </div>
         </div>
 
         <!-- </mat-form-field> -->
         <mat-table #table matSort [ngStyle]="{'height': bodyHeight}" [matSortActive]="tableData!.sortColumn"
             [matSortDirection]="tableData!.sortState" [dataSource]="dataSource"
-            class="example-table table1 responsiveTable">
+            class="example-table table1 responsiveTable" *ngIf="dataSource.filteredData.length > 0">
 
             <ng-container matColumnDef="{{col.key}}" *ngFor="let col of tableData!.columns">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> {{col.displayName}} </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header class=".h-400-r-14-l color-60"> {{col.displayName}}
+                </mat-header-cell>
                 <mat-cell *matCellDef="let element">
-                    <span *ngIf="col.isList" class="textclass">
+                    <span *ngIf="col.isList" class="h-400-r-14-l color-87 textclass">
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
-                    <span *ngIf="!col.isList" class="textclass">
+                    <span *ngIf="!col.isList" class="h-400-r-14-l color-87 textclass">
                         {{element[col.key]}} {{col.isList}}
                     </span>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="Actions" *ngIf="tableData!.actions && tableData!.actions.length > 0">
-                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header"> Actions
+                </mat-header-cell>
                 <mat-cell *matCellDef="let row" class="action-cell">
                     <div *ngFor="let ac of tableData.actions">
                         <div *ngIf="ac.optional">
@@ -64,9 +75,11 @@
             <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
             </mat-row>
         </mat-table>
+        <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found</div>
     </div>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    <mat-paginator *ngIf="dataSource.filteredData.length > 0" [length]="length" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions">
     </mat-paginator>
 </div>
 

@@ -255,5 +255,31 @@
       "key": "hobbies",
       "enabled": true
     }
+  ],
+  "profileDataKey": [
+    {
+      "name": "Personal Details",
+      "key": "personalDetails"    
+    },
+    {
+      "name": "Academics",
+      "key": "academics"    
+    },
+    {
+      "name": "Employment Details",
+      "key": "employmentDetails"    
+    },
+    {
+      "name": "Professional Details",
+      "key": "professionalDetails"    
+    },
+    {
+      "name": "Skills",
+      "key": "skills"    
+    },
+    {
+      "name": "Interests",
+      "key": "interests"    
+    }  
   ]
 }

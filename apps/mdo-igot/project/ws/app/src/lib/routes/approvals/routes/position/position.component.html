@@ -1,6 +1,7 @@
-<div class="flex flex-1 flex-column margin-top-m margin-left-xs margin-right-xs">
-  <mat-card class="flex-custom ws-mat-accent-border" id="profdetails">
-    <mat-card-content>
+<mat-card id="profdetails"
+  class="flex flex-1 flex-column margin-left-m margin-bottom-m margin-right-m ws-mat-accent-border">
+  <div class="flex-custom">
+    <mat-card-content class="margin-top-m margin-bottom-m margin-left-m margin-right-m">
       <span class="mat-subheading-1 flex-4 mobile-margin appr-section-heading" role="link" tabindex="0">
         Professional details
       </span>
@@ -44,9 +45,10 @@
                 </mat-grid-tile>
               </mat-grid-list>
 
-              <mat-grid-list cols="1" rowHeight="50px">
+              <mat-grid-list cols="1" rowHeight="50px" class="margin-top-xl">
                 <mat-grid-tile [colspan]="1" [rowspan]="1" class="input-wrapper">
-                  <label class="appr-text-label">Other details for government employess (If applicable)</label>
+                  <label class="appr-text-label middle-heading">Other details for government employess (If
+                    applicable)</label>
                 </mat-grid-tile>
               </mat-grid-list>
 
@@ -98,5 +100,5 @@
         </div>
       </div>
     </mat-card-content>
-  </mat-card>
-</div>
+  </div>
+</mat-card>

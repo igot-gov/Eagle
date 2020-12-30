@@ -75,6 +75,18 @@ const routes: Routes = [
     },
   },
   {
+    path: 'app/users',
+    loadChildren: () => import('./routes/route-users.module').then(u => u.RouteUsersAppModule),
+    canActivate: [GeneralGuard],
+    data: {
+      pageType: 'feature',
+      pageKey: 'users',
+    },
+    resolve: {
+      pageData: PageResolve,
+    },
+  },
+  {
     path: 'app/frac',
     loadChildren: () => import('./routes/route-frac.module').then(u => u.RouteFracModule),
     canActivate: [GeneralGuard],
