@@ -498,7 +498,6 @@ playlistApi.post('/:playlistId/:type', async (req, res) => {
   // const userId = extractUserIdFromRequest(req)
   const auth = req.header('Authorization')
   try {
-    // const request: IPlaylistUpsertRequest = req.body
     const rootOrg = req.header('rootOrg')
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
@@ -507,7 +506,6 @@ playlistApi.post('/:playlistId/:type', async (req, res) => {
     /* axios request to add/delete playlist content is done*/
     const type = req.params.type
     const playlistId = req.params.playlistId
-
 
     const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/${playlistId}?mode=edit`
     const response1 = await axios({
@@ -528,9 +526,9 @@ playlistApi.post('/:playlistId/:type', async (req, res) => {
     if (type === EPlaylistUpsertTypes.add) {
       childern.push(req.body.contentIds[0])
     } else if (type === EPlaylistUpsertTypes.delete) {
-      const index = childern.indexOf(req.body.contentIds[0]);
+      const index = childern.indexOf(req.body.contentIds[0])
       if (index > -1) {
-        childern.splice(index, 1);
+        childern.splice(index, 1)
       }
     }
 
