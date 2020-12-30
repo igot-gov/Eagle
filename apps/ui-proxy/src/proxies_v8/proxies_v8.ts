@@ -12,7 +12,7 @@ import {
   proxyCreatorToAppentUserId,
   scormProxyCreatorRoute
 } from '../utils/proxyCreator'
-import { extractUserToken } from '../utils/requestExtract'
+import { extractUserIdFromRequest, extractUserToken } from '../utils/requestExtract'
 
 export const proxiesV8 = express.Router()
 
@@ -39,6 +39,7 @@ proxiesV8.post('/upload/*', (req, res) => {
           org: 'dopt',
           rootorg: 'igot',
           'x-authenticated-user-token': extractUserToken(req),
+          'x-authenticated-userid': extractUserIdFromRequest(req),
         },
         host: 'knowledge-mw-service',
         path: url,
