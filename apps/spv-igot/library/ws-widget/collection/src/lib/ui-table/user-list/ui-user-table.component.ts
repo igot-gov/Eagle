@@ -18,16 +18,12 @@ import { ITableData, IColums } from '../interface/interfaces'
 export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
-
-  // @Input() columns?: IColums[]
-  // @Input() needCheckBox?: Boolean
-  // @Input() needHash?: boolean
-  // @Input() actions: IAction[]
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
+  viewPaginator = false
   dataSource!: any
   widgetData: any
   length!: number
@@ -51,6 +47,7 @@ export class UIUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.dataSource.data = this.data
     this.dataSource.paginator = this.paginator
     this.dataSource.sort = this.sort
+    this.viewPaginator = true
   }
 
   ngOnChanges(data: SimpleChanges) {

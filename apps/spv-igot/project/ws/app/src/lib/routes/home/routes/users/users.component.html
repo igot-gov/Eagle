@@ -9,7 +9,8 @@
   </div>
   <mat-card class="mat-elevation-z6 main-card">
     <div class="flex flex-between">
-      <ws-widget-user-autocomplete class="w-full" [autocompleteByDepartment]="true" [departments]="departments" (addedUser)="addUser($event)" (removedUser)="removeUser($event)">
+      <ws-widget-user-autocomplete class="w-full" [autocompleteByDepartment]="true" [departments]="departments"
+        (addedUser)="addUser($event)" (removedUser)="removeUser($event)">
       </ws-widget-user-autocomplete>
       <div class="pt-4 pl-4">
         <mat-progress-spinner *ngIf="isAdding" mode="indeterminate" diameter="30"></mat-progress-spinner>
@@ -26,7 +27,8 @@
           <div class="ml-10">
             <h2 class="font-weight-500 break-all user-h2 ws-mat-primary-text">
               {{userDetails[id].first_name}}&nbsp;{{userDetails[id].last_name}}</h2>
-            <h2 class="user-h2 ws-mat-primary-text" *ngIf="userDetails[id].department_name">{{userDetails[id].department_name}}</h2>
+            <h2 class="user-h2 ws-mat-primary-text" *ngIf="userDetails[id].department_name">
+              {{userDetails[id].department_name}}</h2>
           </div>
         </div>
         <div class="pl-1 pt-4">
@@ -45,9 +47,11 @@
         </div>
         <div class="pl-1 pt-4" *ngIf="userDetails[id].department_name">
           <div class="flex flex-between">
-            <h3 class="break-all"><span class="font-weight-500">Department:&nbsp;</span>{{userDetails[id].department_name}}</h3>
+            <h3 class="break-all"><span
+                class="font-weight-500">Department:&nbsp;</span>{{userDetails[id].department_name}}</h3>
             <div>
-              <button mat-stroked-button type="button" (click)="openDepartmentDialog(id, userDetails[id].department_name)">
+              <button mat-stroked-button type="button"
+                (click)="openDepartmentDialog(id, userDetails[id].department_name)">
                 <span i18n>
                   Edit</span></button>
             </div>

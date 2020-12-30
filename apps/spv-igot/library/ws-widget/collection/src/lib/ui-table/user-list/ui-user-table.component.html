@@ -68,7 +68,7 @@
         </mat-table>
     </div>
 
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" *ngIf="viewPaginator">
     </mat-paginator>
 </div>
 

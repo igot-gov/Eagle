@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { FormGroup, FormControl } from '@angular/forms'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { UserPopupComponent } from '../user-popup/user-popup'
@@ -29,7 +29,6 @@ import { CreateMDOService } from './create-mdo.services'
   styleUrls: ['./create-mdo.component.scss'],
 })
 export class CreateMdoComponent implements OnInit {
-  @Output() data = new EventEmitter<string>()
   @Input() isSubmitPressed = false
   @Input() nextAction = 'done'
   @Input() stage = 1
@@ -39,6 +38,7 @@ export class CreateMdoComponent implements OnInit {
   contentForm!: FormGroup
   imageTypes = ['.png', '.jpg', '.jpeg', '.jtif', '.tiff']
   tabledata: any = []
+  data: any = []
   canUpdate = true
   isEditEnabled = false
   canExpiry = true
@@ -77,13 +77,13 @@ export class CreateMdoComponent implements OnInit {
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
   { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-              private uploadService: UploadService,
-              private snackBar: MatSnackBar,
-              private contentService: EditorContentService,
-              private loader: LoaderService,
-              private authInitService: AuthInitService,
-              private createMdoService: CreateMDOService,
-              private activatedRoute: ActivatedRoute) {
+    private uploadService: UploadService,
+    private snackBar: MatSnackBar,
+    private contentService: EditorContentService,
+    private loader: LoaderService,
+    private authInitService: AuthInitService,
+    private createMdoService: CreateMDOService,
+    private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe(params => {
       this.department = params['department']
     })
@@ -119,13 +119,14 @@ export class CreateMdoComponent implements OnInit {
       columns: [
         { displayName: 'Full name', key: 'fullName' },
         { displayName: 'Email', key: 'email' },
-        { displayName: 'Mobile number', key: 'position' },
+        { displayName: 'Role', key: 'role' },
       ],
       needCheckBox: false,
       needHash: false,
       sortColumn: '',
       sortState: 'asc',
     }
+
     this.getAllDepartmentsAPI()
     this.creatorContactsCtrl.valueChanges
       .pipe(
@@ -513,9 +514,7 @@ export class CreateMdoComponent implements OnInit {
       panelClass: 'remove-pad',
     })
     dialogRef.afterClosed().subscribe((response: any) => {
-      if (response === 'postCreated') {
-        // this.refreshData(this.currentActivePage)
-      }
+      this.data = [{ fullName: `${response.data.first_name} ${response.data.last_name}`, email: response.data.email, role: response.data.department_name },]
     })
   }
   onSubmit() {

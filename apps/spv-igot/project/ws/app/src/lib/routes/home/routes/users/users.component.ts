@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Output, EventEmitter } from '@angular/core'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { ActivatedRoute } from '@angular/router'
 import { NsAutoComplete } from '@ws-widget/collection'
@@ -16,7 +16,7 @@ import { TenantAdminService } from '../../services/tenant-admin.service'
 
 })
 export class UsersComponent implements OnInit {
-
+  @Output() selectedUser: EventEmitter<any> = new EventEmitter<any>();
   roleList: string[] = []
   rolesHash: { [key: string]: IUserRoleDetail } = {}
   isAdding = false
@@ -62,6 +62,7 @@ export class UsersComponent implements OnInit {
       _err => {
         this.isAdding = false
       })
+    this.seletedUserFun(user)
   }
   removeUser(user: NsAutoComplete.IUserAutoComplete) {
     if (this.userDetails[user.wid]) {
@@ -128,9 +129,12 @@ export class UsersComponent implements OnInit {
       }
     })
       .catch(() => {
-       })
+      })
       .finally(() => {
       })
+  }
+  public seletedUserFun(data: any): void {
+    this.selectedUser.emit(data)
   }
 
 }

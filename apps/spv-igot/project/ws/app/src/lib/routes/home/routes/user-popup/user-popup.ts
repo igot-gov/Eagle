@@ -15,18 +15,16 @@ export interface IDialogData {
 })
 export class UserPopupComponent implements OnInit {
 
+  selectedUser!: any
   dataSources: any
   finalArray = []
   showTable = true
   score: any
   currentSelection = false
-  first = true
   constructor(
     public dialogRef: MatDialogRef<UserPopupComponent>,
 
-    @Inject(MAT_DIALOG_DATA) public data: IDialogData,
-  ) {
-  }
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData, ) { }
 
   ngOnInit() {
   }
@@ -34,19 +32,21 @@ export class UserPopupComponent implements OnInit {
     this.dialogRef.close()
   }
   markAsComplete() {
-
-    if (!this.currentSelection && this.first) {
+    if (!this.currentSelection) {
+      this.dialogRef.close({ event: 'close', data: this.selectedUser })
       this.currentSelection = true
-      this.first = false
+      this.dialogRef = this.selectedUser
     }
 
   }
   dataHandler($event: any) {
     this.finalArray = $event
     this.currentSelection = false
-    this.first = false
   }
   updateSize() {
     this.dialogRef.updateSize('auto', 'auto')
+  }
+  public getSelectedUserData(date: any): void {
+    this.selectedUser = date
   }
 }
