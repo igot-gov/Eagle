@@ -14,6 +14,7 @@ proxy.on('proxyReq', (proxyReq: any, req: any, _res: any, _options: any) => {
   // tslint:disable-next-line: max-line-length
   proxyReq.setHeader('Authorization', 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJRekw4VVA1dUtqUFdaZVpMd1ZtTFJvNHdqWTg2a2FrcSJ9.TPjV0xLacSbp3FbJ7XeqHoKFN35Rl4YHx3DZNN9pm0o')
   proxyReq.setHeader('x-authenticated-user-token', extractUserToken(req))
+  proxyReq.setHeader('x-authenticated-userid', extractUserIdFromRequest(req))
   // tslint:disable-next-line: no-console
   console.log('proxyReq.headers:', proxyReq.header)
   if (req.body) {
