@@ -17,8 +17,8 @@ export class CreateUserComponent implements OnInit {
   toastSuccess: any
 
   constructor(private router: Router, private activeRoute: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    private usersSvc: UsersService) {
+              private snackBar: MatSnackBar,
+              private usersSvc: UsersService) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         this.department = this.activeRoute.snapshot.data.department.data
@@ -40,7 +40,7 @@ export class CreateUserComponent implements OnInit {
     this.usersSvc.createUser(form.value).subscribe(res => {
       this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName })
       this.openSnackbar(res.data)
-    }, (err: { error: string }) => {
+    },                                             (err: { error: string }) => {
       this.openSnackbar(err.error.split(':')[1])
     })
   }
