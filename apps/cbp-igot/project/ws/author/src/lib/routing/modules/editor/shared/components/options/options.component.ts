@@ -48,7 +48,9 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getAction(): string {
-    if (
+    if (this.contentService.originalContent[this.currentContent].contentType === 'Resource') {
+      return ''
+    } else if (
       ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
         !this.accessService.authoringConfig.isMultiStepFlow) &&
       this.accessService.rootOrg.toLowerCase() === 'client1'

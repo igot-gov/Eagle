@@ -89,12 +89,30 @@
         </span>
       </ng-template>
       <ng-template matTabContent>
-        <!-- [class.hidden]="viewMode !== 'meta'" -->
-        <ws-auth-edit-meta [parentContent]="currentParentId" [isSubmitPressed]="isSubmitPressed" type=""
-          (data)="action($event)"></ws-auth-edit-meta>
+        <div *ngIf="mediumScreen">
+          <div class="ui" [ngClass]="{ toHide: !leftArrow }">
+            <button class="p-1" mat-icon-button (click)="sidenav.toggle(); leftArrow = !leftArrow" i18n-aria-label
+              aria-label="Open side panel" i18n-matTooltip matTooltipPosition="right" matTooltip="Open side panel">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-sidenav-container autosize="true" id="auth-toc" class="example-container">
+          <mat-sidenav #sidenav [mode]="mode$ | async" [(opened)]="sideBarOpened" (closedStart)="sidenavClose()">
+            <div class="sticky">
+              <ws-auth-table-of-contents (action)="subAction($event)"
+                (closeEvent)="sidenav.toggle(); leftArrow = !leftArrow">
+              </ws-auth-table-of-contents>
+            </div>
+          </mat-sidenav>
+          <mat-sidenav-content class="pl-6 pr-6 ml-6">
+            <ws-auth-edit-meta [parentContent]="currentParentId" [isSubmitPressed]="isSubmitPressed" type=""
+              (data)="action($event)"></ws-auth-edit-meta>
+          </mat-sidenav-content>
+        </mat-sidenav-container>
       </ng-template>
     </mat-tab>
-    <mat-tab>
+    <mat-tab *ngIf="currentContent === currentParentId">
       <ng-template mat-tab-label>
         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
         <span>3. Content quality</span>
@@ -105,7 +123,7 @@
           (data)="action($event)"></ws-auth-content-quality>
       </ng-template>
     </mat-tab>
-    <mat-tab>
+    <mat-tab *ngIf="currentContent === currentParentId">
       <ng-template mat-tab-label>
         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
         <span>4. Self curation</span>
@@ -116,7 +134,7 @@
           (data)="action($event)"></ws-auth-content-self-curation>
       </ng-template>
     </mat-tab>
-    <mat-tab>
+    <mat-tab *ngIf="currentContent === currentParentId">
       <ng-template mat-tab-label>
         <!-- <mat-icon class="example-tab-icon">thumb_up</mat-icon> -->
         <span>5. Summary</span>

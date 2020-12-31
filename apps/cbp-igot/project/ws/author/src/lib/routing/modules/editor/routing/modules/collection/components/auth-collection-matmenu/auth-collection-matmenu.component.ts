@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
-import { ICustomCreateEntity } from './../../interface/create-menu'
+import { ICustomCreateEntity } from '../../../routing/modules/collection/interface/create-menu'
 
 @Component({
   selector: 'ws-auth-collection-matmenu',
@@ -12,9 +12,9 @@ export class AuthCollectionMatmenuComponent implements OnInit {
   @Input() childType!: ICustomCreateEntity[]
   @ViewChild('childMenu', { static: true }) public childMenu!: any
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   click(action: string, type?: string) {
     this.action.emit({ action, type })

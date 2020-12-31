@@ -74,7 +74,7 @@ export class EditorService {
   }
 
   createAndReadContent(
-    meta: NSApiRequest.ICreateMetaRequestGeneral,
+    meta: any, // NSApiRequest.ICreateMetaRequestGeneral to enable top-bottom Aproach
   ): Observable<NSContent.IContentMeta> {
     return this.create(meta).pipe(mergeMap(data => this.readContent(data)))
   }

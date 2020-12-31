@@ -10,7 +10,9 @@ import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { BehaviorSubject, ReplaySubject } from 'rxjs'
 import { IContentNode, IContentTreeNode } from './../interface/icontent-tree'
 import { CollectionResolverService } from './resolver.service'
-
+/* tslint:disable */
+import _ from 'lodash'
+/* tslint:enable */
 interface IProcessedError {
   id: string | number
   name: string
@@ -41,7 +43,7 @@ export class CollectionStoreService {
 
   currentParentNode!: number
   currentSelectedNode!: number
-
+  ExpendedNode = new Set<number>()
   constructor(
     private contentService: EditorContentService,
     private editorService: EditorService,
@@ -181,21 +183,41 @@ export class CollectionStoreService {
     name: string = 'Untitled Content'
   ): Promise<boolean> {
     try {
+      /* tslint:disable */
+      const parentMeta = this.contentService.originalContent[
+        (this.flatNodeMap.get(this.currentParentNode) as IContentNode).identifier]
+      /* tslint:disable */
       const meta = this.authInitService.creationEntity.get(type) as ICreateEntity
-      const requestBody = {
+      let requestBody = {}
+      // if (parentMeta) {
+      //   requestBody = {
+      //     ...parentMeta,
+      //     name,
+      //     description: '',
+      //     mimeType: meta.mimeType,
+      //     contentType: meta.contentType,
+      //     resourceType: meta.resourceType,
+      //     locale:
+      //       // tslint:disable-next-line: ter-computed-property-spacing
+      //       parentMeta.locale || 'en',
+      //     ...(meta.additionalMeta || {}),
+      //   }
+      //   _.set(requestBody, "identifier", undefined)
+      //   _.set(requestBody, "status", undefined)
+      //   _.set(requestBody, "children", undefined)
+      //   _.set(requestBody, "duration", undefined)
+      //   // children,identifier
+      // } else {
+      requestBody = {
         name,
         description: '',
         mimeType: meta.mimeType,
         contentType: meta.contentType,
         resourceType: meta.resourceType,
-        locale:
-          // tslint:disable-next-line: ter-computed-property-spacing
-          this.contentService.originalContent[
-            (this.flatNodeMap.get(this.currentParentNode) as IContentNode).identifier
-            // tslint:disable-next-line: ter-computed-property-spacing
-          ].locale || 'en',
+        locale: parentMeta.locale || 'en',
         ...(meta.additionalMeta || {}),
       }
+      // }
       const content = await this.editorService.createAndReadContent(requestBody).toPromise()
       this.contentService.setOriginalMeta(content)
       const contentDataMap = new Map<string, NSContent.IContentMeta>()

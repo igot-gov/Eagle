@@ -153,6 +153,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mediumScreen = isLtMedium
       this.sideBarOpened = !isLtMedium
     })
+    this.currentParentId
   }
   ngAfterViewInit(): void {
     if (this.tabGroup) {
@@ -295,16 +296,16 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
 
   takeAction() {
     this.isSubmitPressed = true
-    const needSave = Object.keys(this.contentService.upDatedContent || {}).length
-    if (!needSave && !this.isChanged) {
-      this.snackBar.openFromComponent(NotificationComponent, {
-        data: {
-          type: Notify.UP_TO_DATE,
-        },
-        duration: NOTIFICATION_TIME * 1000,
-      })
-      return
-    }
+    // const needSave = Object.keys(this.contentService.upDatedContent || {}).length
+    // if (!needSave && !this.isChanged) {
+    //   this.snackBar.openFromComponent(NotificationComponent, {
+    //     data: {
+    //       type: Notify.UP_TO_DATE,
+    //     },
+    //     duration: NOTIFICATION_TIME * 1000,
+    //   })
+    //   return
+    // }
     if (this.validationCheck) {
       const dialogRef = this.dialog.open(CommentsDialogComponent, {
         width: '750px',
