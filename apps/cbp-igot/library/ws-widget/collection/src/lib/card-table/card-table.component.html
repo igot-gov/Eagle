@@ -38,8 +38,11 @@
             <img class="small-list-logo margin-xs" *ngIf="col.image && element[col.image]" [src]="element[col.image]"
               (error)="changeToDefaultImg($event)" [alt]="element[col.key]" />
 
-            <span *ngIf="!col.isList && !col.link" class="textclass mat-body-2">
+            <span *ngIf="!col.isList && !col.link && !col.pipe" class="textclass mat-body-2">
               {{element[col.key]}}
+            </span>
+            <span *ngIf="!col.isList && !col.link && col.pipe" class="textclass mat-body-2">
+              {{element[col.key] | metaPipe:[col.pipe] }}
             </span>
 
             <a *ngIf="col.link" [routerLink]="col.link.path+element[col.link.dParams]"

@@ -19,4 +19,5 @@ export interface IMenu {
   customRouting?: boolean
   paramaterName?: string
   queryParams?: string
+  requiredRoles?: any[]
 }

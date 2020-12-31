@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
-import { ICustomCreateEntity } from '../../../routing/modules/collection/interface/create-menu'
+import { ICustomCreateEntity } from '../../interface/create-menu'
 
 @Component({
   selector: 'ws-auth-collection-matmenu',

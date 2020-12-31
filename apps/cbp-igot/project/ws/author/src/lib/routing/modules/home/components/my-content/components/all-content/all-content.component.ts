@@ -28,7 +28,7 @@ import { PipeDurationTransformPipe, ValueService } from '@ws-widget/utils'
 /* tslint:disable */
 import _ from 'lodash'
 import { ILeftMenu, ITable } from '@ws-widget/collection'
-import { PipeContentTypePipe } from '../../../../../../../../../../../../library/ws-widget/utils/src/lib/pipes/pipe-content-type/pipe-content-type.pipe'
+import { PipeContentTypePipe } from '@ws-widget/utils'
 /* tslint:enable */
 
 const defaultFilter = [
@@ -40,12 +40,12 @@ const defaultFilter = [
   }
 ]
 @Component({
-  selector: 'ws-auth-my-content',
-  templateUrl: './my-content.component.html',
-  styleUrls: ['./my-content.component.scss'],
+  selector: 'ws-auth-all-content',
+  templateUrl: './all-content.component.html',
+  styleUrls: ['./all-content.component.scss'],
   providers: [PipeDurationTransformPipe],
 })
-export class MyContentComponent implements OnInit, OnDestroy {
+export class AllContentComponent implements OnInit, OnDestroy {
   public sideNavBarOpened = false
   public sideNavBarOpenedMain = true
   newDesign = true
@@ -289,7 +289,7 @@ export class MyContentComponent implements OnInit, OnDestroy {
         uuid: this.userId,
         rootOrg: this.accessService.rootOrg,
         // this is for Author Only
-        isUserRecordEnabled: true,
+        isUserRecordEnabled: !this.isAdmin,
       },
     }
     if (this.finalFilters.length) {

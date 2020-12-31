@@ -193,7 +193,9 @@
   ],
   "mandatoryCourses": [
     {
-      "roles": ["author"],
+      "roles": [
+        "author"
+      ],
       "courseId": "lex_auth_013064126678122496519"
     }
   ],
@@ -213,12 +215,16 @@
             "uri": ""
           },
           "enabled": true,
-          "routerLink": "/author/my-content",
-          "queryParams": "status=publish"
+          "routerLink": "/author/cbp",
+          "queryParams": "draft",
+          "requiredRoles": [
+            "editor",
+            "admin"
+          ]
         },
         {
-          "name": "Users",
-          "key": "users",
+          "name": "My CBPs",
+          "key": "mycbp",
           "fragment": false,
           "render": true,
           "badges": {
@@ -226,7 +232,15 @@
             "uri": ""
           },
           "enabled": true,
-          "routerLink": "/app/person-profile"
+          "routerLink": "/author/cbp/me",
+          "queryParams": "draft",
+          "requiredRoles": [
+            "reviewer",
+            "content-creator",
+            "publisher",
+            "editor",
+            "admin"
+          ]
         },
         {
           "name": "Competencies",

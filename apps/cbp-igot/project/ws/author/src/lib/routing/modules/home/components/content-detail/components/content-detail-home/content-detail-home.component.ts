@@ -71,4 +71,15 @@ export class ContentDetailHomeComponent implements OnInit, OnDestroy {
         return false
     }
   }
+  back() {
+    try {
+      if (window.self !== window.top) {
+        return
+      }
+      window.history.back()
+    } catch (_ex) {
+      window.history.back()
+    }
+
+  }
 }

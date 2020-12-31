@@ -22,7 +22,7 @@
 
   <!-- [matTooltipDisabled]="name?.length < 25 || isDragging" -->
   <span class="node-name">
-    <ng-container *ngIf="name">{{id}}{{
+    <ng-container *ngIf="name">{{
       name.length > 25 ? name.slice(0, 22) + '...' : name
       }}</ng-container>
     <ng-container i18n *ngIf="!name">Untitled Content</ng-container>

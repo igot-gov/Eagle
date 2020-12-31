@@ -11,10 +11,10 @@ const routes: Routes = [
     path: 'home',
     component: AuthHomeComponent,
     pathMatch: 'full',
-    redirectTo: 'my-content',
+    redirectTo: 'cbp',
   },
   {
-    path: 'my-content',
+    path: 'cbp',
     loadChildren: () =>
       import('./components/my-content/my-content.module').then(u => u.MyContentModule),
     data: { load: ['ordinals', 'ckeditor', 'meta'] },

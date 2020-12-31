@@ -119,7 +119,7 @@ export class EditorContentService {
     return isPresent
   }
 
-  private getParentUpdatedMeta(): NSContent.IContentMeta {
+  getParentUpdatedMeta(): NSContent.IContentMeta {
     const meta = {} as any
     const parentMeta = this.getUpdatedMeta(this.parentContent)
     Object.keys(this.authInitService.authConfig).map(v => {
@@ -164,6 +164,7 @@ export class EditorContentService {
     delete requestBody.status
     delete requestBody.categoryType
     delete requestBody.accessPaths
+
     return this.editorService
       .createAndReadContent(requestBody)
       .pipe(tap(v => this.setOriginalMeta(v)))

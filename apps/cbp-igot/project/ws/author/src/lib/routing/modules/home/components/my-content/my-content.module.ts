@@ -8,9 +8,10 @@ import { MyContentService } from './services/my-content.service'
 import { MatSortModule, MatTableModule } from '@angular/material'
 import { PipeDurationTransformModule } from '@ws-widget/utils'
 import { WidgetResolverModule } from '@ws-widget/resolver'
+import { AllContentComponent } from './components/all-content/all-content.component'
 
 @NgModule({
-  declarations: [MyContentComponent],
+  declarations: [MyContentComponent, AllContentComponent],
   imports: [
     CommonModule,
     SharedModule,
