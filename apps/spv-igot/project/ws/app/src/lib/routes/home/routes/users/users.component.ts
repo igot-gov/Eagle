@@ -16,7 +16,7 @@ import { TenantAdminService } from '../../services/tenant-admin.service'
 
 })
 export class UsersComponent implements OnInit {
-  @Output() selectedUser: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectedUser: EventEmitter<any> = new EventEmitter<any>()
   roleList: string[] = []
   rolesHash: { [key: string]: IUserRoleDetail } = {}
   isAdding = false

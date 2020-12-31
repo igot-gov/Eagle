@@ -20,6 +20,7 @@ export class UIDirectoryTableComponent implements OnInit, AfterViewInit, OnChang
   @Input() tableData!: ITableData | undefined
   @Input() data?: []
   @Input() selectedDepartment!: string
+  @Input() departmentID!: string
 
   // @Input() columns?: IColums[]
   // @Input() needCheckBox?: Boolean

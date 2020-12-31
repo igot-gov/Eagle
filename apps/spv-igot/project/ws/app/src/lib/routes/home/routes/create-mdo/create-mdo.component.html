@@ -1,4 +1,4 @@
-<mat-card class="checkbox-card">
+<mat-card class="checkbox-card" *ngIf="submittedForm">
   <h2 class="cb-title">Basic Information</h2>
   <div class="flex-container">
     <div class="flex-container-div">
@@ -82,7 +82,7 @@
   </div>
 </mat-card>
 
-<ng-container class="cb-group-warpper">
+<ng-container class="cb-group-warpper" *ngIf="!submittedForm">
   <mat-card class="checkbox-card">
     <h2 class="cb-title">{{department}} admin</h2>
     <p>Admins will be able to add users and assign roles inside the {{department}}. Add Minimum one user as Admin</p>

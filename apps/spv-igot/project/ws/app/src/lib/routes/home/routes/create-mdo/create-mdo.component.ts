@@ -19,7 +19,7 @@ import { AccessControlService } from '../../services/access-control.service'
 import { EditorService } from '../../services/editor.service'
 import { startWith, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs/operators'
 import { of } from 'rxjs'
-import { ActivatedRoute } from '@angular/router'
+import { Router, ActivatedRoute } from '@angular/router'
 import { CreateMDOService } from './create-mdo.services'
 
 @Component({
@@ -65,25 +65,30 @@ export class CreateMdoComponent implements OnInit {
   fetchTagsStatus: 'done' | 'fetching' | null = null
   complexityLevelList: any
   editorService: any
+  submittedForm = true
   content!: NSContent.IContentMeta
   filteredOptions$: any
   interestSvc: any
   competencyOptions$: any
   allLanguages: any
+  userId!: string
+  departmentId!: string
+  departmentRoleId!: string
   data1: any
   department!: string
   subDepartments!: any
   workFlow = [{ isActive: true, isCompleted: false, name: 'Basic Details', step: 0 },
   { isActive: false, isCompleted: false, name: 'Classification', step: 1 },
-  { isActive: false, isCompleted: false, name: 'Intended for', step: 2 }]
+  { isActive: false, isCompleded: false, name: 'Intended for', step: 2 }]
   constructor(public dialog: MatDialog,
-    private uploadService: UploadService,
-    private snackBar: MatSnackBar,
-    private contentService: EditorContentService,
-    private loader: LoaderService,
-    private authInitService: AuthInitService,
-    private createMdoService: CreateMDOService,
-    private activatedRoute: ActivatedRoute) {
+              private uploadService: UploadService,
+              private snackBar: MatSnackBar,
+              private contentService: EditorContentService,
+              private loader: LoaderService,
+              private authInitService: AuthInitService,
+              private createMdoService: CreateMDOService,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
     this.activatedRoute.params.subscribe(params => {
       this.department = params['department']
     })
@@ -514,12 +519,24 @@ export class CreateMdoComponent implements OnInit {
       panelClass: 'remove-pad',
     })
     dialogRef.afterClosed().subscribe((response: any) => {
-      this.data = [{ fullName: `${response.data.first_name} ${response.data.last_name}`, email: response.data.email, role: response.data.department_name },]
+      this.data = [{
+        fullName: `${response.data.first_name} ${response.data.last_name}`,
+        email: response.data.email, role: response.data.department_name,
+      }]
+      this.userId = response.data.wid
+      this.createMdoService.assignAdminToDepartment(this.userId, this.departmentId, this.departmentRoleId).subscribe(res => {
+        if (res !== null && res !== undefined) {
+          this.router.navigate(['/app/home/directory'])
+        }
+
+      })
     })
   }
   onSubmit() {
-    // this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
-    //   console.log(res)
-    // })
+    this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
+      this.departmentId = res.id
+      this.departmentRoleId = res.rolesInfo[0].roleId
+    })
+    this.submittedForm = false
   }
 }

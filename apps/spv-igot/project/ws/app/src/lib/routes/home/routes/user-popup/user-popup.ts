@@ -24,7 +24,7 @@ export class UserPopupComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<UserPopupComponent>,
 
-    @Inject(MAT_DIALOG_DATA) public data: IDialogData, ) { }
+    @Inject(MAT_DIALOG_DATA) public data: IDialogData) { }
 
   ngOnInit() {
   }

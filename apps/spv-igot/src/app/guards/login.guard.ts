@@ -18,7 +18,7 @@ export class LoginGuard implements CanActivate {
     private router: Router,
     private configSvc: ConfigurationsService,
     private authSvc: AuthKeycloakService,
-  ) {}
+  ) { }
   canActivate(
     next: ActivatedRouteSnapshot,
     _state: RouterStateSnapshot,
@@ -40,6 +40,6 @@ export class LoginGuard implements CanActivate {
       const ref = decodeURIComponent(next.queryParamMap.get('ref') || '')
       return this.router.parseUrl(ref || '')
     }
-    return this.router.parseUrl('page/home')
+    return this.router.parseUrl('app/home')
   }
 }
