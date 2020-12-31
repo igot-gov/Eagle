@@ -1,5 +1,4 @@
 <div class="container-balanced">
-
   <div class="flex flex-1 custom">
     <div class="flex-3">
       <ws-widget-btn-page-back
@@ -432,6 +431,29 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex-1" style="border-left: 1px solid #0000000f;">
+      <ng-container id="changelog">
+        <div>
+          <label class="change-log-text margin-top-l margin-bottom-l margin-left-m margin-right-m">Change log</label>
+          <div class="w-full profile-cols-full bg-grey" *ngIf="wfHistory && wfHistory.length > 0">
+            <div class="change-log-wrapper" *ngFor="let wfh of wfHistory">
+              <div class="margin-top-l margin-bottom-l margin-left-m margin-right-m">
+                <label class=" field-key">{{wfh.fieldKey}}</label>
+                <label class="field-name">{{wfh.fieldName}}</label>
+                <label *ngIf="wfh.action === 'APPROVE'" class="field-change">Changed from {{'"'+ wfh.fromValue +'"'}} to
+                  {{'"'+ wfh.toValue +'"'}}</label>
+                <label *ngIf="wfh.action === 'REJECT'" class="field-change">{{wfh.fieldName}} was rejected with
+                  {{wfh.comment}}</label>
+                <label class="field-date">{{wfh.requestedon}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="appr-label" *ngIf="wfHistory && wfHistory.length <= 0">
+            <label class="no-request-text">No updates yet</label>
+          </div>
+        </div>
+      </ng-container>
     </div>
     <!-- <div class="flex-1" style="border-left: 1px solid #0000000f;">
       <ng-container id="changelog">

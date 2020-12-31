@@ -1,6 +1,6 @@
 
 import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, HostListener, ViewChild } from '@angular/core'
-import { Router, Event, NavigationEnd, NavigationError, ActivatedRoute } from '@angular/router'
+import { Router, Event, NavigationEnd, ActivatedRoute } from '@angular/router'
 import { ValueService } from '@ws-widget/utils/src/public-api'
 import { map } from 'rxjs/operators'
 import { NsWidgetResolver } from 'library/ws-widget/resolver/src/public-api'
@@ -34,6 +34,9 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   elementPosition: any
   sticky = false
   private defaultSideNavBarOpenedSubscription: any
+  department: any = {}
+  departmentName = ''
+
   @HostListener('window:scroll', ['$event'])
   handleScroll() {
     const windowScroll = window.pageYOffset
@@ -46,18 +49,11 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private valueSvc: ValueService, private router: Router, private activeRoute: ActivatedRoute) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        // Hide loading indicator
-        // console.log(event.url)
         this.bindUrl(event.urlAfterRedirects.replace('/app/home/', ''))
         this.widgetData = this.activeRoute.snapshot.data &&
           this.activeRoute.snapshot.data.pageData.data.menus || []
-      }
-
-      if (event instanceof NavigationError) {
-        // Hide loading indicator
-
-        // Present error to user
-        // console.log(event.error)
+        this.department = this.activeRoute.snapshot.data.department.data
+        this.departmentName = this.department ? this.department.deptName : ''
       }
     })
 

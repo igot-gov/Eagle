@@ -72,14 +72,22 @@
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
+
             <mat-row *matRowDef="let row; columns: getFinalColumns();" (click)="selection.toggle(row); onRowClick(row)">
             </mat-row>
-        </mat-table>
-        <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found</div>
-    </div>
 
-    <mat-paginator *ngIf="dataSource.filteredData.length > 0" [length]="length" [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions">
+            <!-- <div *ngIf="dataSource.filteredData.length <= 0">
+                <mat-row *matRowDef="let row; columns: getFinalColumns();"
+                    (click)="selection.toggle(row); onRowClick(row)">
+                    ssss
+                </mat-row>
+            </div> -->
+        </mat-table>
+
+    </div>
+    <!-- <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found
+    </div> -->
+    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
     </mat-paginator>
 </div>
 

@@ -37,9 +37,40 @@ export class CreateUserComponent implements OnInit {
   }
 
   onSubmit(form: any) {
+
     this.usersSvc.createUser(form.value).subscribe(res => {
-      this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName })
+      let user
+      const deptRole = this.department.rolesInfo.filter((role: { roleName: string }) => role.roleName === 'MEMBER')[0]
       this.openSnackbar(res.data)
+      if (res) {
+        const req = {
+          departments: [
+            'igot',
+            'istm',
+            'iGOT',
+            'NPA',
+            'NACIN',
+            'LSNAA',
+            'ISTM',
+          ],
+        }
+        this.usersSvc.onSearchUserByEmail(form.value.email, req).subscribe(data => {
+          user = data[0]
+
+          const dreq = {
+            userId: user ? user.wid : null,
+            deptId: this.department ? this.department.id : null,
+            deptRoleId: deptRole ? deptRole.deptRoleId : null,
+            isActive: true,
+            isBlocked: false,
+          }
+          this.usersSvc.addUserToDepartment(dreq).subscribe(dres => {
+            if (dres) {
+              this.createUserForm.reset({ fname: '', lname: '', email: '', department: this.departmentName })
+            }
+          })
+        })
+      }
     },                                             (err: { error: string }) => {
       this.openSnackbar(err.error.split(':')[1])
     })

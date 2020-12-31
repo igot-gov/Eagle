@@ -4,6 +4,7 @@ import { ViewUserComponent } from './routes/view-user/view-user.component'
 import { CreateUserComponent } from './routes/create-user/create-user.component'
 import { DepartmentResolve } from '../users/resolvers/department-resolve'
 import { UserResolve } from '../users/resolvers/user-resolve'
+import { WorkflowHistoryResolve } from '../users/resolvers/workflow-history-resolve'
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     component: ViewUserComponent,
     resolve: {
       profileData: UserResolve,
+      workflowHistoryData: WorkflowHistoryResolve,
     },
   },
   {
@@ -28,6 +30,7 @@ const routes: Routes = [
   providers: [
     UserResolve,
     DepartmentResolve,
+    WorkflowHistoryResolve,
   ],
 })
 export class UsersRoutingModule { }

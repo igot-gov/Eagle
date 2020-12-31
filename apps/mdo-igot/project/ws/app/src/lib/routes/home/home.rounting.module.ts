@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
 // import { InitResolver } from './resol./routes/profile-v2/discuss-all.component'
 import { HomeResolve } from './resolvers/home-resolve'
+import { DepartmentResolve } from './resolvers/department-resolve'
 import { AboutComponent } from './routes/about/about.component'
 import { HomeComponent } from './routes/home/home.component'
 import { UsersViewComponent } from './routes/users-view/users-view.component'
@@ -18,6 +19,9 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    resolve: {
+      department: DepartmentResolve,
+    },
     children: [
       {
         path: 'users',
@@ -44,6 +48,7 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [
     HomeResolve,
+    DepartmentResolve,
   ],
 })
 export class HomeRoutingModule { }
