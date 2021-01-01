@@ -66,11 +66,6 @@
     "three": "^0.113.2",
     "tslib": "^1.10.0",
     "typeface-roboto": "0.0.75",
-    "video.js": "^7.10.2",
-    "videojs-contrib-quality-levels": "^2.0.9",
-    "videojs-hls-quality-selector": "^1.1.4",
-    "videojs-vr": "^1.7.1",
-    "videojs-youtube": "^2.6.1",
     "vis-network": "^5.2.4",
     "xlsx": "^0.16.1",
     "zone.js": "~0.10.1"

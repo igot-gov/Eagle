@@ -1,8 +1,8 @@
-import videoJs from 'video.js'
-import 'videojs-youtube'
-import 'videojs-contrib-quality-levels'
-import 'videojs-hls-quality-selector'
-import 'videojs-vr'
+// import videoJs from 'video.js'
+// import 'videojs-youtube'
+// import 'videojs-contrib-quality-levels'
+// import 'videojs-hls-quality-selector'
+// import 'videojs-vr'
 
 import { Subscription, interval, fromEvent } from 'rxjs'
 import { WsEvents } from '@ws-widget/utils'
@@ -174,95 +174,95 @@ function fireRealTimeProgress(
   }
 }
 
-export function videoJsInitializer(
-  elem: HTMLVideoElement | HTMLAudioElement,
-  config: videoJs.PlayerOptions,
-  dispatcher: telemetryEventDispatcherFunction,
-  saveCLearning: saveContinueLearningFunction,
-  fireRProgress: fireRealTimeProgressFunction,
-  passThroughData: any,
-  widgetSubType: string,
-  resumePoint: number = 0,
-  enableTelemetry: boolean,
-  widgetData: IWidgetsPlayerMediaData,
-  mimeType: NsContent.EMimeTypes,
-): { player: videoJs.Player; dispose: () => void } {
-  const player = videoJs(elem, config)
-  const eventDispatcher = enableTelemetry
-    ? generateEventDispatcherHelper(passThroughData, dispatcher, widgetSubType)
-    : () => undefined
-  let heartBeatSubscription: Subscription
-  let currentTimeInterval: Subscription
-  let loaded = false
-  let readyToRaise = false
-  let currTime = 0
-  if (enableTelemetry) {
-    player.on(videojsEventNames.loadeddata, () => {
-      try {
-        if (resumePoint) {
-          const start = Number(resumePoint)
-          if (start > 10 && player.duration() - start > 20) {
-            player.currentTime(start - 10)
-          }
-        }
-      } catch (err) { }
-    })
-    player.on(videojsEventNames.ended, () => {
-      if (loaded) {
-        eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded, widgetData, WsEvents.EnumTelemetryMediaActivity.ENDED, mimeType)
-        loaded = false
-        heartBeatSubscription.unsubscribe()
-        currentTimeInterval.unsubscribe()
-      }
-    })
-    player.on(videojsEventNames.play, () => {
-      if (!loaded) {
-        eventDispatcher(WsEvents.EnumTelemetrySubType.Loaded, widgetData, WsEvents.EnumTelemetryMediaActivity.PLAYED, mimeType)
-        heartBeatSubscription = interval(2 * 60000).subscribe(_ => {
-          eventDispatcher(WsEvents.EnumTelemetrySubType.HeartBeat, widgetData, WsEvents.EnumTelemetryMediaActivity.PLAYED, mimeType)
-        })
-        loaded = true
-      }
-      currentTimeInterval = interval(500).subscribe(_ => {
-        if (player.currentTime() >= player.duration() * 5 / 100 && player.currentTime() < player.duration() * 95 / 100
-          && !readyToRaise) {
-          readyToRaise = true
-        }
-        if (player.currentTime() >= player.duration() * 95 / 100 && readyToRaise) {
-          fireRealTimeProgress(mimeType, widgetData, fireRProgress, player.currentTime(), player.duration())
-          readyToRaise = false
-        }
-        currTime = player.currentTime()
-      })
+// export function videoJsInitializer(
+//   elem: HTMLVideoElement | HTMLAudioElement,
+//   config: videoJs.PlayerOptions,
+//   dispatcher: telemetryEventDispatcherFunction,
+//   saveCLearning: saveContinueLearningFunction,
+//   fireRProgress: fireRealTimeProgressFunction,
+//   passThroughData: any,
+//   widgetSubType: string,
+//   resumePoint: number = 0,
+//   enableTelemetry: boolean,
+//   widgetData: IWidgetsPlayerMediaData,
+//   mimeType: NsContent.EMimeTypes,
+// ): { player: videoJs.Player; dispose: () => void } {
+//   const player = videoJs(elem, config)
+//   const eventDispatcher = enableTelemetry
+//     ? generateEventDispatcherHelper(passThroughData, dispatcher, widgetSubType)
+//     : () => undefined
+//   let heartBeatSubscription: Subscription
+//   let currentTimeInterval: Subscription
+//   let loaded = false
+//   let readyToRaise = false
+//   let currTime = 0
+//   if (enableTelemetry) {
+//     player.on(videojsEventNames.loadeddata, () => {
+//       try {
+//         if (resumePoint) {
+//           const start = Number(resumePoint)
+//           if (start > 10 && player.duration() - start > 20) {
+//             player.currentTime(start - 10)
+//           }
+//         }
+//       } catch (err) { }
+//     })
+//     player.on(videojsEventNames.ended, () => {
+//       if (loaded) {
+//         eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded, widgetData, WsEvents.EnumTelemetryMediaActivity.ENDED, mimeType)
+//         loaded = false
+//         heartBeatSubscription.unsubscribe()
+//         currentTimeInterval.unsubscribe()
+//       }
+//     })
+//     player.on(videojsEventNames.play, () => {
+//       if (!loaded) {
+//         eventDispatcher(WsEvents.EnumTelemetrySubType.Loaded, widgetData, WsEvents.EnumTelemetryMediaActivity.PLAYED, mimeType)
+//         heartBeatSubscription = interval(2 * 60000).subscribe(_ => {
+//           eventDispatcher(WsEvents.EnumTelemetrySubType.HeartBeat, widgetData, WsEvents.EnumTelemetryMediaActivity.PLAYED, mimeType)
+//         })
+//         loaded = true
+//       }
+//       currentTimeInterval = interval(500).subscribe(_ => {
+//         if (player.currentTime() >= player.duration() * 5 / 100 && player.currentTime() < player.duration() * 95 / 100
+//           && !readyToRaise) {
+//           readyToRaise = true
+//         }
+//         if (player.currentTime() >= player.duration() * 95 / 100 && readyToRaise) {
+//           fireRealTimeProgress(mimeType, widgetData, fireRProgress, player.currentTime(), player.duration())
+//           readyToRaise = false
+//         }
+//         currTime = player.currentTime()
+//       })
 
-    })
-    player.on(videojsEventNames.pause, () => {
-      if (loaded) {
-        eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded, widgetData, WsEvents.EnumTelemetryMediaActivity.PAUSED, mimeType)
-        loaded = false
-        heartBeatSubscription.unsubscribe()
-        currentTimeInterval.unsubscribe()
-      }
-      currTime = player.currentTime()
-    })
-  }
-  const dispose = () => {
-    saveContinueLearning(widgetData, saveCLearning, currTime)
-    if (heartBeatSubscription) {
-      heartBeatSubscription.unsubscribe()
-    }
-    if (currentTimeInterval) {
-      currentTimeInterval.unsubscribe()
-    }
-    if (loaded) {
-      eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded, widgetData, WsEvents.EnumTelemetryMediaActivity.ENDED, mimeType)
-    }
-    if (readyToRaise) {
-      fireRealTimeProgress(mimeType, widgetData, fireRProgress, currTime, player.duration())
-    }
-  }
-  return { player, dispose }
-}
+//     })
+//     player.on(videojsEventNames.pause, () => {
+//       if (loaded) {
+//         eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded, widgetData, WsEvents.EnumTelemetryMediaActivity.PAUSED, mimeType)
+//         loaded = false
+//         heartBeatSubscription.unsubscribe()
+//         currentTimeInterval.unsubscribe()
+//       }
+//       currTime = player.currentTime()
+//     })
+//   }
+//   const dispose = () => {
+//     saveContinueLearning(widgetData, saveCLearning, currTime)
+//     if (heartBeatSubscription) {
+//       heartBeatSubscription.unsubscribe()
+//     }
+//     if (currentTimeInterval) {
+//       currentTimeInterval.unsubscribe()
+//     }
+//     if (loaded) {
+//       eventDispatcher(WsEvents.EnumTelemetrySubType.Unloaded, widgetData, WsEvents.EnumTelemetryMediaActivity.ENDED, mimeType)
+//     }
+//     if (readyToRaise) {
+//       fireRealTimeProgress(mimeType, widgetData, fireRProgress, currTime, player.duration())
+//     }
+//   }
+//   return { player, dispose }
+// }
 export function videoInitializer(
   elem: HTMLVideoElement,
   dispatcher: telemetryEventDispatcherFunction,
