@@ -5,7 +5,7 @@
 export const environment: IEnvironment = {
   production: false,
   sitePath: 'cbp_3000',
-  karmYogi: 'https://d136953gtttd92.cloudfront.net/'
+  karmYogi: 'https://d136953gtttd92.cloudfront.net/',
 }
 interface IEnvironment {
   production: boolean

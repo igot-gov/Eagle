@@ -6,8 +6,6 @@ import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { ICustomCreateEntity } from '../../interface/create-menu'
 import { IContentNode, IContentTreeNode } from '../../interface/icontent-tree'
 import { CollectionStoreService } from '../../services/store.service'
-
-
 @Component({
   selector: 'ws-auth-editor-options',
   templateUrl: './auth-editor-options.component.html',

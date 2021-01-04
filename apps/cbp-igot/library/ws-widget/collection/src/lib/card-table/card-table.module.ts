@@ -34,7 +34,7 @@ import { PipeTableMetaModule } from './pipe-table-meta/pipe-table-meta.module'
     MatCardModule,
     PipeDurationTransformModule,
     PipeCountTransformModule,
-    PipeTableMetaModule
+    PipeTableMetaModule,
   ],
   exports: [
     CardTableComponent,

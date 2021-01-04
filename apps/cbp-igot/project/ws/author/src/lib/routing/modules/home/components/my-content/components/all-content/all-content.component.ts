@@ -33,11 +33,11 @@ import { PipeContentTypePipe } from '@ws-widget/utils'
 
 const defaultFilter = [
   {
-    "key": "contentType",
-    "value": [
-      "Collection", "Course", "Learning Path"
-    ]
-  }
+    key: 'contentType',
+    value: [
+      'Collection', 'Course', 'Learning Path',
+    ],
+  },
 ]
 @Component({
   selector: 'ws-auth-all-content',
@@ -144,7 +144,9 @@ export class AllContentComponent implements OnInit, OnDestroy {
     if (this.courseTaken.mandatoryCourseCompleted) {
       this.initCardTable()
     } else {
-      this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => { return { key: k, ...v } })
+      this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => {
+        return { key: k, ...v }
+      })
     }
   }
 

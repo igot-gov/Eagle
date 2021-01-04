@@ -40,7 +40,7 @@ export class LeftMenuComponent extends WidgetBaseComponent
   public isLinkActive2(url?: string): boolean {
     let returnval = false
     if (url) {
-      let st = this.router.url.split('?')
+      const st = this.router.url.split('?')
       if (st && st[0] && st[0] === (url)) {
         returnval = true
       }

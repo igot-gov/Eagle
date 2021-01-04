@@ -9,9 +9,8 @@ import { NotificationComponent } from '@ws/author/src/lib/modules/shared/compone
 import { AuthInitService } from '@ws/author/src/lib/services/init.service'
 import { LoaderService } from '@ws/author/src/lib/services/loader.service'
 import { EditorContentService } from '../../../../../services/editor-content.service'
-import { IContentNode } from '../../interface/icontent-tree'
+import { IContentNode, IContentTreeNode } from '../../interface/icontent-tree'
 import { AuthPickerComponent } from '../../../../../shared/components/auth-picker/auth-picker.component'
-import { IContentTreeNode } from '../../interface/icontent-tree'
 import { CollectionStoreService } from '../../services/store.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
 import { map } from 'rxjs/operators'
@@ -260,13 +259,13 @@ export class AuthTableOfContentsComponent implements OnInit, OnDestroy {
         this.expandedNodes.add(v.id)
       }
     })
-    this.store.ExpendedNode = this.expandedNodes
+    this.store.expendedNode = this.expandedNodes
   }
 
   expandNodesById(ids?: number[]) {
     let idSet = ids ? new Set(ids) : this.expandedNodes
-    if (!idSet || idSet.size == 0) {
-      idSet = this.store.ExpendedNode
+    if (!idSet || idSet.size === 0) {
+      idSet = this.store.expendedNode
     }
     if (this.treeControl.dataNodes && this.treeControl.dataNodes.length > 0) {
       this.treeControl.dataNodes.forEach(node => {

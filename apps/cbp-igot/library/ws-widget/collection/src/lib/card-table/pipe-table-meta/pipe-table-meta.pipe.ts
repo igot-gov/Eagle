@@ -5,8 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core'
 })
 export class PipeMetaPipe implements PipeTransform {
   transform(val: any, pipes: any[]) {
-    var result = val
-    for (var pipe of pipes) {
+    let result = val
+    for (const pipe of pipes) {
       result = (new pipe()).transform(result)
     }
     return result

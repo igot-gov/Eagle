@@ -48,32 +48,33 @@ export class OptionsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   getAction(): string {
-    if (this.contentService.getParentUpdatedMeta().identifier !== this.currentContent) {
-      return ''
-    } else if (
-      ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
-        !this.accessService.authoringConfig.isMultiStepFlow) &&
-      this.accessService.rootOrg.toLowerCase() === 'client1'
-    ) {
-      return 'publish'
-    }
-    if (this.contentService.originalContent &&
-      this.contentService.originalContent[this.currentContent] &&
-      this.contentService.originalContent[this.currentContent].contentType === 'Knowledge Artifact'
-    ) {
-      return 'publish'
-    }
-    switch (this.contentService.originalContent[this.currentContent].status) {
-      case 'Draft':
-      case 'Live':
-        return 'sendForReview'
-      case 'InReview':
-        return 'review'
-      case 'Reviewed':
+    if (this.contentService.getParentUpdatedMeta().identifier === this.currentContent) {
+      if (
+        ((this.accessService.authoringConfig.isMultiStepFlow && this.isDirectPublish()) ||
+          !this.accessService.authoringConfig.isMultiStepFlow) &&
+        this.accessService.rootOrg.toLowerCase() === 'client1'
+      ) {
         return 'publish'
-      default:
-        return 'sendForReview'
+      }
+      if (this.contentService.originalContent &&
+        this.contentService.originalContent[this.currentContent] &&
+        this.contentService.originalContent[this.currentContent].contentType === 'Knowledge Artifact'
+      ) {
+        return 'publish'
+      }
+      switch (this.contentService.originalContent[this.currentContent].status) {
+        case 'Draft':
+        case 'Live':
+          return 'sendForReview'
+        case 'InReview':
+          return 'review'
+        case 'Reviewed':
+          return 'publish'
+        default:
+          return 'sendForReview'
+      }
     }
+    return ''
   }
   canDelete() {
     return this.accessService.hasRole(['editor', 'admin']) ||

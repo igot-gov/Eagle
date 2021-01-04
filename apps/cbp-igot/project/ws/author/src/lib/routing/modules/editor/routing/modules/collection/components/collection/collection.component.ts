@@ -153,7 +153,7 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       this.mediumScreen = isLtMedium
       this.sideBarOpened = !isLtMedium
     })
-    this.currentParentId
+    // this.currentParentId
   }
   ngAfterViewInit(): void {
     if (this.tabGroup) {

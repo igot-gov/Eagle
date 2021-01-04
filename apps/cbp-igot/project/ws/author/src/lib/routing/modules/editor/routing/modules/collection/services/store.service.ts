@@ -43,7 +43,7 @@ export class CollectionStoreService {
 
   currentParentNode!: number
   currentSelectedNode!: number
-  ExpendedNode = new Set<number>()
+  expendedNode = new Set<number>()
   constructor(
     private contentService: EditorContentService,
     private editorService: EditorService,
