@@ -21,7 +21,7 @@ export class PlaylistEditComponent implements OnInit {
   editPlaylistForm: FormGroup
   createPlaylistStatus: TFetchStatus = 'none'
 
-  playlist: NsPlaylist.IPlaylist = this.route.snapshot.data.playlist.data
+  playlist: NsPlaylist.IPlaylist = this.route.snapshot.data.playlist.data.result.content
   error = this.route.snapshot.data.playlist.error
   type = this.route.snapshot.data.type
   upsertPlaylistStatus: TFetchStatus = 'none'
@@ -46,9 +46,17 @@ export class PlaylistEditComponent implements OnInit {
       visibility: [NsPlaylist.EPlaylistVisibilityTypes.PRIVATE],
       message: '',
     })
+
+    const children = this.playlist.children
+    // let selectedIds = []
+    // children.forEach((item: { identifier: string }) => {
+    //   selectedIds.push(item.identifier)
+    // });
+
     this.selectedContentIds = new Set<string>(
-      (this.playlist && this.playlist.contents || []).map(content => content.identifier),
+      (children).map((content: { identifier: string }) => content.identifier),
     )
+
   }
   ngOnInit(): void {
     this.editPlaylistForm = this.fb.group({

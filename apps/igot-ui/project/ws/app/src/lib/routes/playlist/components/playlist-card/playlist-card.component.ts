@@ -35,11 +35,11 @@ export class PlaylistCardComponent implements OnInit {
   isListExpanded: { [playlistId: string]: boolean } = {}
 
   constructor(private route: ActivatedRoute,
-    private snackBar: MatSnackBar,
-    public dialog: MatDialog,
-    private playlistSvc: BtnPlaylistService,
-    public router: Router,
-    public configSvc: ConfigurationsService,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog,
+              private playlistSvc: BtnPlaylistService,
+              public router: Router,
+              public configSvc: ConfigurationsService,
 
   ) {
     if (this.route.snapshot.data.pageData.data) {
@@ -115,7 +115,7 @@ export class PlaylistCardComponent implements OnInit {
     let routeTo: string
     this.type === 'user' ? (routeTo = 'me') : (routeTo = 'shared')
     if (this.playlist) {
-      this.router.navigate([`/app/playlist/${routeTo}/${this.playlist.id}/edit`])
+      this.router.navigate([`/app/playlist/${routeTo}/${this.playlist.identifier}/edit`])
     } else {
       this.snackBar.open(this.playlistEditFailedMessage.nativeElement.value, 'X')
     }

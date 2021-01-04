@@ -7,6 +7,7 @@ export namespace NsAutoComplete {
     DEPARTMENT_NAME = 'department_name',
   }
   export interface IUserAutoComplete {
+    userId: string
     department_name: string
     email: string
     first_name: string
