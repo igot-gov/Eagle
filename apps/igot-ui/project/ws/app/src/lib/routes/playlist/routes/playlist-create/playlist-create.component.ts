@@ -95,7 +95,7 @@ export class PlaylistCreateComponent implements OnInit {
     this.playlistSvc.upsertPlaylist({
       playlist_title: formValues.title,
       content_ids: Array.from(this.selectedContentIds),
-      shareWith: this.sharedWithUsers.map(user => user.wid),
+      shareWith: this.sharedWithUsers.map(user => user.userId),
       shareMsg: formValues.message,
       visibility: formValues.visibility as NsPlaylist.EPlaylistVisibilityTypes,
     }).subscribe(

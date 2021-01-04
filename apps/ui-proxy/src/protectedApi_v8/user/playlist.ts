@@ -9,12 +9,13 @@ import {
   IPlaylistParams,
   IPlaylistSbExtResponse,
   IPlaylistShareRequest,
-  IPlayListUpdateRequest,
+  // IPlayListUpdateRequest,
   // IPlaylistUpsertRequest
 } from '../../models/playlist.model'
 import {
   formContentRequestObj,
   formPlaylistRequestObj,
+  formPlaylistupdateObj,
   transformToPlaylistV2,
   transformToPlaylistV3,
   // transformToSbExtDeleteRequest,
@@ -397,26 +398,42 @@ playlistApi.get('/', async (req, res) => {
 
 playlistApi.patch('/:playlistId', async (req, res) => {
   /* Patch request to update the title of a playlist */
-  const userId = extractUserIdFromRequest(req)
   try {
-    const request: IPlayListUpdateRequest = req.body
+    const request = req.body
     const rootOrg = req.header('rootOrg')
+    const auth = req.header('Authorization')
     if (!rootOrg) {
       res.status(400).send(ERROR.ERROR_NO_ORG_DATA)
       return
     }
     const playlistId = req.params.playlistId
-    const url = `${API_END_POINTS.playlistV1(userId)}`
+    const url = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/update/${playlistId}`
     const response = await axios({
       ...axiosRequestConfig,
-      data: transformToSbExtPatchRequest(request),
+      data: formPlaylistupdateObj(request),
       headers: {
-        rootOrg,
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
       },
       method: 'PATCH',
-      url: `${url}/playlists/${playlistId}`,
+      url,
     })
-    res.status(response.status).send()
+
+    const urll = `https://igot-sunbird.idc.tarento.com/apis/proxies/v8/action/content/v3/hierarchy/update`
+
+    const response1 = await axios({
+      ...axiosRequestConfig,
+      data: transformToSbExtPatchRequest(request, playlistId),
+      headers: {
+        Authorization: auth,
+        org: 'dopt',
+        rootOrg: 'igot',
+      },
+      method: 'PATCH',
+      url: urll,
+    })
+    res.status(response.status || response1.status).send()
   } catch (err) {
     logError(err)
     res
