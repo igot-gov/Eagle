@@ -49,10 +49,8 @@
       "isExternal": true
     },
     "hasRole": [
-      "content-creator",
-      "editor",
-      "admin"
-    ]
+    ],
+    "primaryCategory": "Learning Resource"
   },
   {
     "id": "assessment",
@@ -101,9 +99,6 @@
     "contentType": "Resource",
     "mimeType": "application/html",
     "hasRole": [
-      "content-creator",
-      "editor",
-      "admin"
     ]
   },
   {
@@ -163,9 +158,6 @@
     "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
     "hasRole": [
-      "content-creator",
-      "editor",
-      "admin"
     ]
   },
   {
@@ -179,9 +171,6 @@
     "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
     "hasRole": [
-      "content-creator",
-      "editor",
-      "admin"
     ]
   },
   {
@@ -195,9 +184,6 @@
     "enabled": true,
     "mimeType": "application/vnd.ekstep.content-collection",
     "hasRole": [
-      "content-creator",
-      "editor",
-      "admin"
     ]
   }
 ]

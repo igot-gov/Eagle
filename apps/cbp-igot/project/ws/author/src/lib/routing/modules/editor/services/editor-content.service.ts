@@ -8,6 +8,7 @@ import { IFormMeta } from './../../../../interface/form'
 import { AuthInitService } from './../../../../services/init.service'
 import { EditorService } from './editor.service'
 import { IAssessmentDetails } from '../routing/modules/iap-assessment/interface/iap-assessment.interface'
+import { isArray } from 'lodash'
 @Injectable()
 export class EditorContentService {
   originalContent: { [key: string]: NSContent.IContentMeta } = {}
@@ -350,5 +351,20 @@ export class EditorContentService {
       // console.log(ex)
       return false
     }
+  }
+
+  cleanProperties(objParam: any) {
+    const propertiesTobeExcluded: any = []
+    const obj = { ...objParam }
+    let propNames = Object.getOwnPropertyNames(obj)
+    propNames = propNames.filter(el => !propertiesTobeExcluded.includes(el))
+    for (const prop of propNames) {
+      const propName = prop
+      // tslint:disable-next-line: max-line-length
+      if (obj[propName] === null || obj[propName] === undefined || obj[propName] === '' || (isArray(obj[propName]) && obj[propName].length === 0)) {
+        delete obj[propName]
+      }
+    }
+    return obj
   }
 }

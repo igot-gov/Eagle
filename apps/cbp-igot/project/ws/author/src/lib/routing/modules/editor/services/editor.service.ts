@@ -13,6 +13,7 @@ import {
   STATUS_CHANGE,
   SEARCH_V6_ADMIN,
   SEARCH_V6_AUTH,
+  AUTHORING_BASE,
 } from '@ws/author/src/lib/constants/apiEndpoints'
 import { NSApiResponse } from '@ws/author/src/lib/interface//apiResponse'
 import { NSApiRequest } from '@ws/author/src/lib/interface/apiRequest'
@@ -23,6 +24,8 @@ import { Observable, of } from 'rxjs'
 import { map, mergeMap, catchError } from 'rxjs/operators'
 import { CONTENT_READ_MULTIPLE_HIERARCHY } from './../../../../constants/apiEndpoints'
 import { ISearchContent, ISearchResult } from '../../../../interface/search'
+import { environment } from '../../../../../../../../../src/environments/environment'
+
 
 @Injectable()
 export class EditorService {
@@ -31,7 +34,6 @@ export class EditorService {
     private apiService: ApiService,
     private accessService: AccessControlService,
     private userAutoComplete: UserAutocompleteService,
-    // private configSvc: ConfigurationsService,
   ) { }
 
   create(meta: NSApiRequest.ICreateMetaRequestGeneral): Observable<string> {
@@ -61,9 +63,58 @@ export class EditorService {
       )
   }
 
+  createV2(meta: NSApiRequest.ICreateMetaRequestGeneralV2): Observable<string> {
+    let randomNumber = ''
+    // tslint:disable-next-line: no-increment-decrement
+    for (let i = 0; i < 16; i++) {
+      randomNumber += Math.floor(Math.random() * 10)
+    }
+    const requestBody: NSApiRequest.ICreateMetaRequestV2 = {
+      request: {
+        content: {
+          code: randomNumber,
+          contentType: meta.contentType,
+          createdBy: this.accessService.userId,
+          createdFor: [environment.channelId],
+          creator: this.accessService.userName,
+          description: '',
+          framework: environment.framework,
+          mimeType: meta.mimeType,
+          name: meta.name,
+          organisation: [environment.organisation],
+          isExternal: meta.mimeType === 'application/html',
+          primaryCategory: meta.primaryCategory,
+        },
+      }
+    }
+
+    return this.apiService
+      .post<NSApiRequest.ICreateMetaRequestV2>(
+        // tslint:disable-next-line:max-line-length
+        `${AUTHORING_BASE}content/v3/create`,
+        requestBody,
+      )
+      .pipe(
+        map((data: NSApiResponse.IContentCreateResponseV2) => {
+          return data.result.identifier
+        }),
+      )
+  }
+
   readContent(id: string): Observable<NSContent.IContentMeta> {
     return this.apiService.get<NSContent.IContentMeta>(
-      `${CONTENT_READ}${id}${this.accessService.orgRootOrgAsQuery}`,
+      `${AUTHORING_BASE}${id}${this.accessService.orgRootOrgAsQuery}`,
+    )
+  }
+
+
+  readContentV2(id: string): Observable<NSContent.IContentMeta> {
+    return this.apiService.get<NSContent.IContentMeta>(
+      `${AUTHORING_BASE}content/v3/read/${id}?mode=edit`,
+    ).pipe(
+      map((data: any) => {
+        return data.result.content
+      })
     )
   }
 
@@ -79,6 +130,12 @@ export class EditorService {
     return this.create(meta).pipe(mergeMap(data => this.readContent(data)))
   }
 
+  createAndReadContentV2(
+    meta: NSApiRequest.ICreateMetaRequestGeneralV2,
+  ): Observable<NSContent.IContentMeta> {
+    return this.createV2(meta).pipe(mergeMap(data => this.readContentV2(data)))
+  }
+
   updateContent(meta: NSApiRequest.IContentUpdate): Observable<null> {
     return this.apiService.post<null>(
       `${CONTENT_SAVE}${this.accessService.orgRootOrgAsQuery}`,
@@ -89,6 +146,13 @@ export class EditorService {
   updateContentV2(meta: NSApiRequest.IContentUpdate): Observable<null> {
     return this.apiService.post<null>(
       `${CONTENT_SAVE_V2}${this.accessService.orgRootOrgAsQuery}`,
+      meta,
+    )
+  }
+
+  updateContentV3(meta: NSApiRequest.IContentUpdateV2, id: string): Observable<null> {
+    return this.apiService.patch<null>(
+      `${AUTHORING_BASE}content/v3/update/${id}`,
       meta,
     )
   }

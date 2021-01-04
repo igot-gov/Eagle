@@ -48,6 +48,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         if (v.id === 'resource') {
           this.resourceEntity = v
         } else {
+          v.enabled = true
           this.entity.push(v)
         }
       }
@@ -75,12 +76,14 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.loaderService.changeLoad.next(true)
     const _name = this.createCourseForm.get('name')
     if (this.currentContent && _name && _name.value) {
+
       this.svc
-        .create({
+        .createV2({
           name: _name.value,
           contentType: this.currentContent.contentType,
           mimeType: this.currentContent.mimeType,
           locale: this.language,
+          primaryCategory: this.currentContent.primaryCategory,
           ...(this.currentContent.additionalMeta || {}),
         })
         .subscribe(

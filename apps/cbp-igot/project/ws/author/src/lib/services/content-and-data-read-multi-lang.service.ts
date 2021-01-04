@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core'
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router'
-import { Observable, of } from 'rxjs'
+import { Observable, of, } from 'rxjs'
 import { ApiService } from '../modules/shared/services/api.service'
 import { NSContent } from '../interface/content'
-import { CONTENT_READ_HIERARCHY_AND_DATA } from '../constants/apiEndpoints'
-import { catchError } from 'rxjs/operators'
+import { AUTHORING_BASE } from '../constants/apiEndpoints'
+import { catchError, map } from 'rxjs/operators'
 
 @Injectable()
 export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content: NSContent.IContentMeta, data: any }[] | null> {
@@ -21,8 +21,11 @@ export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content
     const id = route.params['id']
     if (id !== 'new') {
       return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
-        `${CONTENT_READ_HIERARCHY_AND_DATA}${id}?mode=edit`,
+        `${AUTHORING_BASE}content/v3/read/${id}?mode=edit`,
       ).pipe(
+        map((data: any) => {
+          return [data.result]
+        }),
         catchError((v: any) => {
           this.router.navigateByUrl('/error-somethings-wrong')
           return of(v)
@@ -31,4 +34,21 @@ export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content
     }
     return null
   }
+
+  // resolve(
+  //   route: ActivatedRouteSnapshot,
+  // ): Observable<{ content: NSContent.IContentMeta, data: any }[]> | null {
+  //   const id = route.params['id']
+  //   if (id !== 'new') {
+  //     return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
+  //       `${AUTHORING_BASE}${id}`,
+  //     ).pipe(
+  //       catchError((v: any) => {
+  //         this.router.navigateByUrl('/error-somethings-wrong')
+  //         return of(v)
+  //       }),
+  //     )
+  //   }
+  //   return null
+  // }
 }

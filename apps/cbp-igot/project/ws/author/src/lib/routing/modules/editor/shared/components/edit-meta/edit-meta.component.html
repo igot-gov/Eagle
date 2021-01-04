@@ -436,7 +436,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex new-mobile">
+                <!-- <div class="flex new-mobile">
                   <div class="flex-05 margin-top-l" *ngIf="checkCondition('resourceType', 'show')"
                     [ngClass]="{ disable: checkCondition('resourceType', 'disabled') }">
                     <label [ngClass]="{ required: checkCondition('resourceType', 'required') }">
@@ -458,7 +458,7 @@
                       </mat-form-field>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="flex new-mobile">
                   <div class="flex-1 margin-top-l" *ngIf="checkCondition('idealScreenSize', 'show')"
                     [ngClass]="{ disable: checkCondition('idealScreenSize', 'disabled') }">
@@ -478,21 +478,21 @@
                         <mat-button-toggle-group class="tgl-group" formControlName="idealScreenSize"
                           [value]="idealScreenSize" aria-label="Best viewed in">
                           <mat-button-toggle class="toggle-btn ws-mat-accent-border" [attr.aria-label]="'Desktop'"
-                            value="'13'">
+                            value="large">
                             <span class="flex flex-column itm-center">
                               <mat-icon>computer</mat-icon>
                               <span class="mat-body-2"> Desktop </span>
                             </span>
                           </mat-button-toggle>
                           <mat-button-toggle class="toggle-btn ws-mat-accent-border" [attr.aria-label]="'Tablet'"
-                            value="'10'">
+                            value="normal">
                             <span class="flex flex-column itm-center">
                               <mat-icon>tablet</mat-icon>
                               <span class="mat-body-2"> Tablet </span>
                             </span>
                           </mat-button-toggle>
                           <mat-button-toggle class="toggle-btn ws-mat-accent-border" [attr.aria-label]="'Mobile'"
-                            value="'7'">
+                            value="small">
                             <span class="flex flex-column itm-center">
                               <mat-icon>phone_android</mat-icon>
                               <span class="mat-body-2"> Mobile </span>
@@ -590,8 +590,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="flex new-mobile">
-                  <div class="flex-1 margin-top-l" *ngIf="checkCondition('exclusiveContent', 'show')"
+                <!-- <div class="flex new-mobile">
+                   <div class="flex-1 margin-top-l" *ngIf="checkCondition('exclusiveContent', 'show')"
                     [ngClass]="{ disable: checkCondition('exclusiveContent', 'disabled') }">
                     <label>
                       <div class="flex flex-middle">
@@ -599,7 +599,7 @@
                           class="mat-subheading-2 margin-0">Cost</span>
                         <!-- <mat-icon class="ws-mat-primary-text margin-left-xs pointer" (click)="showInfo('exclusiveContent')">
                                       info
-                                    </mat-icon> -->
+                                    </mat-icon>
                       </div>
                       <span i18n *ngIf="infoType === 'exclusiveContent'">Is Paid Content?</span>
                     </label>
@@ -623,12 +623,12 @@
                           #exclusiveContent>
                           <mat-option [value]="true" i18n> Paid</mat-option>
                           <mat-option [value]="false" i18n> Free </mat-option>
-                        </mat-select> -->
+                        </mat-select>
                       <mat-error *ngIf="showError('exclusiveContent')" i18n>Cost is mandatory
                       </mat-error>
                     </div>
                   </div>
-                </div>
+                </div>-->
                 <div class="flex new-mobile">
                   <div class="flex-1 margin-top-l" *ngIf="checkCondition('license', 'show')"
                     [ngClass]="{ disable: checkCondition('license', 'disabled') }">
@@ -693,6 +693,10 @@
                           <mat-radio-button matInput [name]="'radio-Public'"
                             class="flex flex-row itm-center ws-mat-accent-border margin-right-s" [value]="'Public'">
                             {{'Public'}}
+                          </mat-radio-button>
+                          <mat-radio-button matInput [name]="'radio-Default'"
+                            class="flex flex-row itm-center ws-mat-accent-border margin-right-s" [value]="'Default'">
+                            {{'Default'}}
                           </mat-radio-button>
                         </mat-radio-group>
                       </ng-container>

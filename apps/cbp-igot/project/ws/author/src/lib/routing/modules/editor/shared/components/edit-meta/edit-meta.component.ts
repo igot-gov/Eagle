@@ -264,6 +264,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     this.sidenavSubscribe()
     this.typeCheck()
     this.ordinals = this.authInitService.ordinals
+    this.ordinals.licenses = ['CC BY-NC-SA 4.0', 'Standard YouTube License', 'CC BY-NC 4.0', 'CC BY-SA 4.0', 'CC BY 4.0']
     this.audienceList = this.ordinals.audience
     this.jobProfileList = this.ordinals.jobProfile
     this.complexityLevelList = this.ordinals.audience
@@ -718,9 +719,9 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.resourceTypes = this.ordinals['Offering Mode'] || this.ordinals.categoryType || []
     }
 
-    if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
-      this.contentForm.controls.resourceType.setValue('')
-    }
+    // if (this.resourceTypes.indexOf(this.contentForm.controls.categoryType.value) < 0) {
+    //   this.contentForm.controls.resourceType.setValue('')
+    // }
   }
 
   private setDuration(seconds: any) {
@@ -747,22 +748,23 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     try {
       const originalMeta = this.contentService.getOriginalMeta(this.contentMeta.identifier)
       if (originalMeta && this.isEditEnabled) {
-        const expiryDate = this.contentForm.value.expiryDate
+        // const expiryDate = this.contentForm.value.expiryDate
         const currentMeta: NSContent.IContentMeta = JSON.parse(JSON.stringify(this.contentForm.value))
         if (originalMeta.mimeType) {
           currentMeta.mimeType = originalMeta.mimeType
         }
         const meta = <any>{}
-        if (this.canExpiry) {
-          currentMeta.expiryDate = `${expiryDate
-            .toISOString()
-            .replace(/-/g, '')
-            .replace(/:/g, '')
-            .split('.')[0]
-            }+0000`
-        }
+        // if (this.canExpiry) {
+        //   currentMeta.expiryDate = `${expiryDate
+        //     .toISOString()
+        //     .replace(/-/g, '')
+        //     .replace(/:/g, '')
+        //     .split('.')[0]
+        //     }+0000`
+        // }
         Object.keys(currentMeta).map(v => {
           if (
+            v !== 'versionKey' &&
             JSON.stringify(currentMeta[v as keyof NSContent.IContentMeta]) !==
             JSON.stringify(originalMeta[v as keyof NSContent.IContentMeta])
           ) {
@@ -782,6 +784,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
                 ),
               )
             }
+          } else if (v === 'versionKey') {
+            meta[v as keyof NSContent.IContentMeta] = originalMeta[v as keyof NSContent.IContentMeta]
           }
         })
         // Quick FIX
@@ -1241,8 +1245,8 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       audience: [],
       body: [],
       catalogPaths: [],
-      category: [],
-      categoryType: [],
+      // category: [],
+      // categoryType: [],
       certificationList: [],
       certificationUrl: [],
       clients: [],
@@ -1257,15 +1261,15 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       duration: [],
       editors: [],
       equivalentCertifications: [],
-      expiryDate: [],
-      exclusiveContent: [],
+      // expiryDate: [],
+      // exclusiveContent: [],
       idealScreenSize: [],
       identifier: [],
       introductoryVideo: [],
       introductoryVideoIcon: [],
       isExternal: [],
-      isIframeSupported: [],
-      isRejected: [],
+      // isIframeSupported: [],
+      // isRejected: [],
       fileType: [],
       jobProfile: [],
       kArtifacts: [],
@@ -1281,7 +1285,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       nodeType: [],
       org: [],
       creatorDetails: [],
-      passPercentage: [],
+      // passPercentage: [],
       plagScan: [],
       playgroundInstructions: [],
       playgroundResources: [],
@@ -1305,7 +1309,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       creatorPosterImage: [],
       creatorThumbnail: [],
       status: [],
-      studyDuration: [],
+      // studyDuration: [],
       studyMaterials: [],
       subTitle: [],
       subTitles: [],
@@ -1316,7 +1320,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       unit: [],
       verifiers: [],
       visibility: [],
-
+      versionKey: '',
     })
 
     this.contentForm.valueChanges.pipe(debounceTime(700)).subscribe(() => {
@@ -1329,7 +1333,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
       this.changeResourceType()
       this.filterOrdinals()
       this.changeMimeType()
-      this.contentForm.controls.category.setValue(this.contentForm.controls.contentType.value)
+      // this.contentForm.controls.category.setValue(this.contentForm.controls.contentType.value)
     })
 
     if (this.stage === 1) {
@@ -1341,7 +1345,7 @@ export class EditMetaComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     // resourceType
     this.contentForm.controls.resourceType.valueChanges.subscribe(() => {
-      this.contentForm.controls.categoryType.setValue(this.contentForm.controls.resourceType.value)
+      // this.contentForm.controls.categoryType.setValue(this.contentForm.controls.resourceType.value)
     })
 
     this.contentForm.controls.resourceCategory.valueChanges.subscribe(() => {

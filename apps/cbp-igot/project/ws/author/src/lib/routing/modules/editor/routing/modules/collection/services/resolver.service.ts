@@ -79,9 +79,11 @@ export class CollectionResolverService {
       const haveAccessToChangeStructure = this.hasAccess(currContent)
       if (treeStructure.childLoaded && treeStructure.children) {
         const children: IContentNode[] = []
-        currContent.children.forEach(v =>
-          children.push(recursiveFn(v, treeStructure.id, haveAccessToChangeStructure)),
-        )
+        if (currContent.children) {
+          currContent.children.forEach(v =>
+            children.push(recursiveFn(v, treeStructure.id, haveAccessToChangeStructure)),
+          )
+        }
         treeStructure.children = children
       }
       flatNodeMap.set(treeStructure.id, treeStructure)
