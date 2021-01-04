@@ -22,6 +22,7 @@ export class LeftMenuComponent extends WidgetBaseComponent
   ngOnInit(): void {
 
   }
+
   changeToDefaultImg($event: any) {
     $event.target.src = '/assets/instances/eagle/app_logos/default.png'
   }

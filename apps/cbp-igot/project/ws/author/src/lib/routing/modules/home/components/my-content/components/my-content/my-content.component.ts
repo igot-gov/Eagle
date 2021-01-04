@@ -141,11 +141,11 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.leftmenues = this.authInitService.authAdditionalConfig.menus
     }
     this.isAdmin = this.accessService.hasRole(['admin', 'super-admin', 'content-admin', 'editor'])
-    // if (this.courseTaken.mandatoryCourseCompleted) {
-    this.initCardTable()
-    // } else {
-    // this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => { return { Key: k, value: v } })
-    // }
+    if (this.courseTaken.mandatoryCourseCompleted) {
+      this.initCardTable()
+    } else {
+      this.resourses = _.map(this.courseTaken.contentDetails, (v, k) => { return { key: k, ...v } })
+    }
   }
 
   initCardTable() {

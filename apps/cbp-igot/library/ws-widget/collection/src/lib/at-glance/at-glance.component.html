@@ -1,6 +1,14 @@
 <mat-card class="flex flex-wrap flex-column at-glance ws-mat-accent-border" tabindex="0">
-  <div class="flex flex-center text-white ws-mat-primary-background cursor-pointer preview-div" *ngIf="widgetData">
-    <a class="preview mat-subheading-2 margin-0" [routerLink]="getPreviewLink()">Preview CBP</a>
+  <div class="flex flex-center cursor-pointer preview-div" *ngIf="widgetData">
+    <a class="preview mat-subheading-2 margin-0 ws-mat-primary-background flex-1" *ngIf="!this.widgetData.customLink"
+      [routerLink]="getPreviewLink">
+      <span class="text-white m-auto"> {{ widgetData.buttonName ? widgetData.buttonName :'Preview CBP'}}</span>
+    </a>
+    <a class="preview mat-subheading-2 margin-0 text-white ws-mat-primary-background flex-1"
+      *ngIf="this.widgetData.customLink" target="_blank" [href]="getCourseLink">
+      <span class="text-white m-auto"> {{ widgetData.buttonName ? widgetData.buttonName :'Start now'}}
+      </span>
+    </a>
   </div>
   <span class="mat-subheading-1 margin-top-s">{{widgetData.displayName}}</span>
   <div class="flex flex-1 flex-column" *ngIf="widgetData">

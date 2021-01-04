@@ -60,11 +60,13 @@ export class CardTableComponent extends WidgetBaseComponent
     this.display = this.display === 'table' ? 'card' : 'table'
   }
   ngOnInit() {
-    this.displayedColumns = this.widgetData.columns
-    if (this.data && this.sort) {
-      this.dataSource.data = this.data
-      this.dataSource.paginator = this.paginator
-      this.dataSource.sort = this.sort
+    if (this.widgetData) {
+      this.displayedColumns = this.widgetData.columns || []
+      if (this.data && this.sort) {
+        this.dataSource.data = this.data
+        this.dataSource.paginator = this.paginator
+        this.dataSource.sort = this.sort
+      }
     }
   }
 
@@ -127,7 +129,7 @@ export class CardTableComponent extends WidgetBaseComponent
     }
     // console.log(columns);
 
-    return columns
+    return columns || []
   }
 
   getCardHeadRows() {

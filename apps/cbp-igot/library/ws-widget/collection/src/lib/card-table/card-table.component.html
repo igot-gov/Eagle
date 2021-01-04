@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="example-container" *ngIf="widgetData">
   <!-- [ngClass]="{'mat-elevation-z8': display === 'table'}" -->
   <div class="example-table-container">
     <ng-container *ngIf="display === 'table'; else card">
@@ -96,7 +96,9 @@
   <!-- <mat-paginator [length]="5" [pageSize]="10" [pageSizeOptions]="[5, 10, 25]">
     </mat-paginator> -->
 </div>
-
+<div class="example-container" *ngIf="!widgetData">
+  <h3>No data</h3>
+</div>
 
 <ng-template #card>
   <mat-card class="example-card padding-0 no-box-shadow">
