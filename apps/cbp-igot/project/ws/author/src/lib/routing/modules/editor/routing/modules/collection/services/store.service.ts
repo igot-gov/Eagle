@@ -195,8 +195,9 @@ export class CollectionStoreService {
             // tslint:disable-next-line: ter-computed-property-spacing
           ].locale || 'en',
         ...(meta.additionalMeta || {}),
+        primaryCategory: meta.primaryCategory
       }
-      const content = await this.editorService.createAndReadContent(requestBody).toPromise()
+      const content = await this.editorService.createAndReadContentV2(requestBody).toPromise()
       this.contentService.setOriginalMeta(content)
       const contentDataMap = new Map<string, NSContent.IContentMeta>()
       const treeStructure = this.resolver.buildTreeAndMap(

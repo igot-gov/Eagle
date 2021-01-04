@@ -26,6 +26,7 @@ import { VIEWER_ROUTE_FROM_MIME } from '@ws-widget/collection'
 import { NotificationService } from '@ws/author/src/lib/services/notification.service'
 import { AccessControlService } from '@ws/author/src/lib/modules/shared/services/access-control.service'
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout'
+import { isNumber } from 'lodash'
 
 /**
  * @description
@@ -498,11 +499,30 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         metadata: {},
       }
     }
-    const requestBody: NSApiRequest.IContentUpdate = {
-      nodesModified,
-      hierarchy: this.storeService.changedHierarchy,
+    let requestBody: NSApiRequest.IContentUpdateV2 = {
+      request: {
+        content: nodesModified[Object.keys(this.contentService.upDatedContent)[0]].metadata
+      }
     }
-    return this.editorService.updateContentV2(requestBody).pipe(
+    requestBody.request.content = this.contentService.cleanProperties(requestBody.request.content)
+    if (requestBody.request.content.duration) {
+      requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
+    }
+    if (requestBody.request.content.subTitle) {
+      delete requestBody.request.content.subTitle
+    }
+    if (requestBody.request.content.sourceName) {
+      requestBody.request.content.source = requestBody.request.content.sourceName
+      delete requestBody.request.content.sourceName
+    }
+    if (requestBody.request.content.complexityLevel) {
+      requestBody.request.content.difficultyLevel = requestBody.request.content.complexityLevel
+      delete requestBody.request.content.complexityLevel
+    }
+    if (requestBody.request.content.learningMode) {
+      requestBody.request.content.learningMode = requestBody.request.content.learningMode.split('-').join(' ')
+    }
+    return this.editorService.updateContentV3(requestBody, Object.keys(this.contentService.upDatedContent)[0]).pipe(
       tap(() => {
         this.storeService.changedHierarchy = {}
         Object.keys(this.contentService.upDatedContent).forEach(id => {
@@ -511,6 +531,19 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
         this.contentService.upDatedContent = {}
       }),
     )
+    // const requestBody: NSApiRequest.IContentUpdate = {
+    //   nodesModified,
+    //   hierarchy: this.storeService.changedHierarchy,
+    // }
+    // return this.editorService.updateContentV2(requestBody).pipe(
+    //   tap(() => {
+    //     this.storeService.changedHierarchy = {}
+    //     Object.keys(this.contentService.upDatedContent).forEach(id => {
+    //       this.contentService.resetOriginalMeta(this.contentService.upDatedContent[id], id)
+    //     })
+    //     this.contentService.upDatedContent = {}
+    //   }),
+    // )
   }
 
   getMessage(type: 'success' | 'failure') {

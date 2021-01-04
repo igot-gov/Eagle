@@ -18,6 +18,18 @@ export namespace NSApiRequest {
     isExternal?: boolean
   }
 
+  export interface ICreateMetaRequestGeneralV2 {
+    name: string
+    description: string
+    mimeType: string
+    contentType: string
+    resourceType?: string
+    isTranslationOf?: string
+    locale?: string
+    isExternal?: boolean
+    primaryCategory: string
+  }
+
   export interface ICreateMetaRequest {
     content: {
       name: string
@@ -34,6 +46,25 @@ export namespace NSApiRequest {
       categoryType?: string
       accessPaths?: string
       category?: string
+    }
+  }
+
+  export interface ICreateMetaRequestV2 {
+    request: {
+      content: {
+        name: string
+        code: string
+        description: string
+        createdBy: string
+        organisation: string[]
+        createdFor: string[]
+        contentType: string
+        framework: string
+        mimeType: string
+        creator?: string
+        primaryCategory: string
+        isExternal: boolean
+      }
     }
   }
 
@@ -63,6 +94,12 @@ export namespace NSApiRequest {
       }
     }
     hierarchy: {} | { [key: string]: { root: boolean; children: string[] } }
+  }
+
+  export interface IContentUpdateV2 {
+    request: {
+      content: NSContent.IContentMeta
+    }
   }
 
   export interface IContentData {

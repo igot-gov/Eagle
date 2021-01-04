@@ -93,7 +93,6 @@ export class InitService {
     // this.logger.removeConsoleAccess()
     await this.fetchDefaultConfig()
     const authenticated = await this.authSvc.initAuth()
-    console.log('----------authenticated--------------', authenticated)
     if (!authenticated) {
       this.settingsSvc.initializePrefChanges(environment.production)
       this.updateNavConfig()
@@ -250,7 +249,6 @@ export class InitService {
           const organisationData = userPidProfile.result.response.organisations
           userRoles = (organisationData[0].roles.length > 0) ? organisationData[0].roles : []
         }
-        console.log('--------------userPidProfile-------------', userPidProfile)
         this.configSvc.unMappedUser = userPidProfile.result.response
         this.configSvc.userProfile = {
 
@@ -330,6 +328,10 @@ export class InitService {
           dealerCode: null,
           isManager: false,
         }
+        if (this.configSvc.userProfile) {
+          this.configSvc.userProfile.departmentName = (userData[0].employmentDetails.departmentName) ? userData[0].employmentDetails.departmentName : null
+        }
+
       }
     }
     // const details: IDetailsResponse = await this.http
@@ -418,7 +420,6 @@ export class InitService {
     return { features, groups, tourGuide }
   }
   private updateNavConfig() {
-    debugger
     if (this.configSvc.instanceConfig) {
       const background = this.configSvc.instanceConfig.backgrounds
       if (background.primaryNavBar) {

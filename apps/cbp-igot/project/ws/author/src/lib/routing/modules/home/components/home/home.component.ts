@@ -42,7 +42,7 @@ export class AuthHomeComponent implements OnInit, OnDestroy {
       this.screenSizeIsLtMedium = isLtMedium
     })
     this.isNewDesign = this.accessService.authoringConfig.newDesign
-    this.leftmenues = this.initSvc.authAdditionalConfig.menus
+    // this.leftmenues = this.initSvc.authAdditionalConfig.menus
   }
   ngOnDestroy() {
     if (this.defaultSideNavBarOpenedSubscription) {
