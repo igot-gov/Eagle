@@ -27,6 +27,7 @@ import { socialApi } from './social'
 import { trainingApi } from './training'
 import { translateApi } from './translate'
 import { user } from './user/user'
+import { scoringTemplateApi } from './scoring'
 
 export const protectedApiV8 = express.Router()
 
@@ -64,3 +65,4 @@ protectedApiV8.use('/network', networkConnectionApi)
 protectedApiV8.use('/connections', connectionsApi)
 protectedApiV8.use('/competency', competencyApi)
 protectedApiV8.use('/dept', deptApi)
+protectedApiV8.use('/scoring', scoringTemplateApi)

@@ -17,6 +17,8 @@ export interface IMenuFlatNode {
 }
 
 export interface IFilterMenuNode {
+  values: any;
+  name: any;
   displayName: string
   content?: IFilterMenuNode[]
   type?: string

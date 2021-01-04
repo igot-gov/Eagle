@@ -418,7 +418,6 @@ export class InitService {
     return { features, groups, tourGuide }
   }
   private updateNavConfig() {
-    debugger
     if (this.configSvc.instanceConfig) {
       const background = this.configSvc.instanceConfig.backgrounds
       if (background.primaryNavBar) {

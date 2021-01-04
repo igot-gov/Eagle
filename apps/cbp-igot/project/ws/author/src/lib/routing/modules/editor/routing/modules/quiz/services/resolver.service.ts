@@ -45,7 +45,7 @@ export class QuizResolverService {
 
   getUpdatedData(id: string): Observable<{ content: NSContent.IContentMeta, data: any }[]> {
     return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
-      `${CONTENT_READ_HIERARCHY_AND_DATA}${id}`,
+      `${CONTENT_READ_HIERARCHY_AND_DATA}${id}?mode=edit`,
     ).pipe(
       catchError((v: any) => {
         this.router.navigateByUrl('/error-somethings-wrong')

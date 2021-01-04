@@ -21,7 +21,7 @@ export class ContentAndDataReadMultiLangTOCResolver implements Resolve<{ content
     const id = route.params['id']
     if (id !== 'new') {
       return this.apiService.get<{ content: NSContent.IContentMeta, data: any }[]>(
-        `${CONTENT_READ_HIERARCHY_AND_DATA}${id}`,
+        `${CONTENT_READ_HIERARCHY_AND_DATA}${id}?mode=edit`,
       ).pipe(
         catchError((v: any) => {
           this.router.navigateByUrl('/error-somethings-wrong')

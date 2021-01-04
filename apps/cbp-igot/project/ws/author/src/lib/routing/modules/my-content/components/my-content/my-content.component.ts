@@ -175,9 +175,14 @@ export class MyContentComponent implements OnInit, OnDestroy {
       this.queryFilter,
       this.isAdmin,
     )
+
+
+
+
     const requestData = {
+      locale: this.searchLanguage ? [this.searchLanguage] : ["en"],
+      query: this.queryFilter,
       request: {
-        locale: this.searchLanguage ? [this.searchLanguage] : [],
         query: this.queryFilter,
         filters: {
           status: this.fetchStatus(),
@@ -186,30 +191,75 @@ export class MyContentComponent implements OnInit, OnDestroy {
           publisherDetails: <string[]>[],
           isMetaEditingDisabled: [false],
           isContentEditingDisabled: [false],
+          primaryCategory: [
+            "Collection",
+            "Resource",
+            "Content Playlist",
+            "Course",
+            "Course Assessment",
+            "Digital Textbook",
+            "eTextbook",
+            "Explanation Content",
+            "Learning Resource",
+            "Lesson Plan Unit",
+            "Practice Question Set",
+            "Teacher Resource",
+            "Textbook Unit",
+            "LessonPlan",
+            "FocusSpot",
+            "Learning Outcome Definition",
+            "Curiosity Questions",
+            "MarkingSchemeRubric",
+            "ExplanationResource",
+            "ExperientialResource",
+            "Practice Resource",
+            "TVLesson"
+          ]
         },
         pageNo: loadMoreFlag ? this.pagination.offset : 0,
-        sort: [{ lastUpdatedOn: 'desc' }],
+        sort_by: [{ lastUpdatedOn: 'desc' }],
         pageSize: this.pagination.limit,
-        uuid: this.userId,
-        rootOrg: this.accessService.rootOrg,
-        // this is for Author Only
-        isUserRecordEnabled: !this.isAdmin,
+        "fields": [
+          "name",
+          "appIcon",
+          "mimeType",
+          "gradeLevel",
+          "identifier",
+          "medium",
+          "pkgVersion",
+          "board",
+          "subject",
+          "resourceType",
+          "primaryCategory",
+          "contentType",
+          "channel",
+          "organisation",
+          "trackable"
+        ],
+        "facets": [
+          "board",
+          "gradeLevel",
+          "subject",
+          "medium",
+          "primaryCategory",
+          "mimeType"
+        ]
       },
     }
-    if (this.finalFilters.length) {
-      this.finalFilters.forEach((v: any) => {
-        searchV6Data.filters.forEach((filter: any) => {
-          filter.andFilters[0] = {
-            ...filter.andFilters[0],
-            [v.key]: v.value,
-          }
-        })
-        requestData.request.filters = { ...requestData.request.filters, [v.key]: v.value }
-      })
-    }
-    if (this.queryFilter) {
-      delete requestData.request.sort
-    }
+    // if (this.finalFilters.length) {
+    //   this.finalFilters.forEach((v: any) => {
+    //     searchV6Data.filters.forEach((filter: any) => {
+    //       filter.andFilters[0] = {
+    //         ...filter.andFilters[0],
+    //         [v.key]: v.value,
+    //       }
+    //     })
+    //     requestData.request.filters = { ...requestData.request.filters, [v.key]: v.value }
+    //   })
+    // }
+    // if (this.queryFilter) {
+    //   delete requestData.request.sort_by
+    // }
     if (
       [
         'draft',
@@ -230,7 +280,6 @@ export class MyContentComponent implements OnInit, OnDestroy {
     if (this.status === 'publish' && !this.isAdmin) {
       requestData.request.filters.publisherDetails.push(this.userId)
     }
-
     this.loadService.changeLoad.next(true)
     const observable =
       this.status === 'expiry' || this.newDesign
