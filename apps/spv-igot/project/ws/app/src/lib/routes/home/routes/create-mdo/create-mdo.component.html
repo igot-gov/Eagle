@@ -5,7 +5,7 @@
       <form [formGroup]="contentForm" (ngSubmit)="onSubmit()">
         <div class="mobile-break mat-app-background">
           <div class="margin-top-s">
-            <div class="margin-top-xs" [ngClass]="{ disable: checkCondition('name', 'disabled') }">
+            <div class="margin-top-xs">
               <p class="margin-remove-bottom" i18n="Title label|Label which explains the user to enter title"
                 [ngClass]="{ required: checkCondition('name', 'required') }">
                 {{department}} Name
@@ -15,13 +15,13 @@
                 <input matInput #name formControlName="name" maxlength="500" i18n-placeholder placeholder="Type here"
                   [required]="checkCondition('name', 'required') ? true : null" />
                 <mat-error *ngIf="showError('name')" i18n="Name Error|Explains name is required">
-                  Title is mandatory
+                  Department name is mandatory
                 </mat-error>
               </mat-form-field>
             </div>
 
           </div>
-          <div class="margin-top-s" [ngClass]="{ disable: checkCondition('subTitle', 'disabled') }">
+          <div class="margin-top-s">
             <p class="margin-remove-bottom" [ngClass]="{ required: checkCondition('subTitle', 'required') }">
               Head Quaters
             </p>
@@ -30,11 +30,11 @@
               <input matInput formControlName="head" #subTitle maxlength="1000" i18n-placeholder placeholder="Type here"
                 [required]="checkCondition('subTitle', 'required') ? true : null" />
               <mat-error *ngIf="showError('subTitle')" i18n="Subtitle Error|Explains Subtitle is required">
-                Subtitle is mandatory
+                Head Quaters is mandatory
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="margin-top-s" [ngClass]="{ disable: checkCondition('deptSubTypeId', 'disabled') }">
+          <div class="margin-top-s">
             <label>
               <div class="margin-top-s flex flex-middle">
                 <span [ngClass]="{ required: checkCondition('deptSubTypeId', 'required') }" i18n>Department
@@ -43,27 +43,25 @@
             </label>
             <div class="margin-top-s">
               <mat-form-field appearance="outline" class="margin-top-xs"
-                [ngClass]="{ 'mat-form-field-invalid': showError('deptSubTypeId') }">
-                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--">
+                [ngClass]="{ 'mat-form-field-invalid': showError('depatmentType') }">
+                <mat-select formControlName="deptSubTypeId" i18n-placeholder placeholder="--Select--"
+                  [required]="checkCondition('subTitle', 'required') ? true : null">
                   <mat-option *ngFor="let subDepartment of subDepartments" [value]="subDepartment.id" i18n>
                     {{subDepartment.deptSubType}}</mat-option>
                 </mat-select>
-                <mat-error *ngIf="showError('deptSubTypeId')" i18n>Best viewed in is mandatory
+                <mat-error *ngIf="showError('deptSubTypeId')" i18n>Department type is mandatory
                 </mat-error>
               </mat-form-field>
             </div>
           </div>
         </div>
-        <div class="margin-top-s" [ngClass]="{ disable: checkCondition('appIcon', 'disabled') }">
+        <div class="margin-top-s">
           <span i18n>Thumbnail</span> <span class="ws-mat-default-text"> &nbsp; 256 X 150 (pixel)</span>
           <div class="margin-top-s">
             <div [ngClass]="{'cursor-pointer': true,
                                   'thumbnail-logo': true}"
               (click)="contentForm.controls.appIcon.value || true ? false : uploadThumbnail.click()">
-              <img class="image max-width" [ngClass]="{
-                              'image-border': showError('appIcon'),
-                              'ws-mat-warn-text': showError('appIcon')
-                            }" height="150" width="100%" [src]="" />
+              <img class="image max-width" height="150" width="100%" [src]="" />
             </div>
             <div class="photo mat-elevation-z4 ws-mat-primary-background" (click)="uploadThumbnail.click()">
               <mat-icon class="photo-icon text-white">photo_camera</mat-icon>

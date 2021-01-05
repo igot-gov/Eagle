@@ -339,13 +339,14 @@ export class CreateMdoComponent implements OnInit {
     if (first && seconnd) {
 
     }
-    return false
+    return true
   }
   showError(error: string) {
+    console.log(error)
     if (error) {
 
     }
-    return false
+    return true
   }
   private fetchJobProfile() {
     if ((this.jobProfileCtrl.value || '').trim()) {
@@ -533,10 +534,16 @@ export class CreateMdoComponent implements OnInit {
     })
   }
   onSubmit() {
-    this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
-      this.departmentId = res.id
-      this.departmentRoleId = res.rolesInfo[0].deptRoleId
-    })
-    this.submittedForm = false
+    if (this.contentForm.value.name !== null && this.contentForm.value.head !== null
+      && this.contentForm.value.deptSubTypeId !== null) {
+      this.createMdoService.createDepartment(this.contentForm.value).subscribe(res => {
+        this.departmentId = res.id
+        this.departmentRoleId = res.rolesInfo[0].deptRoleId
+      })
+      this.submittedForm = false
+    } else {
+      this.contentForm.touched
+    }
+
   }
 }
