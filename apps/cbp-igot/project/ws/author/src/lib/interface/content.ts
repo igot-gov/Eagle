@@ -215,6 +215,8 @@ export namespace NSContent {
     primaryCategory: string
     source: string
     difficultyLevel: string
+    instructions: string
+    purpose: string
   }
 
   export interface IClient {

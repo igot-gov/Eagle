@@ -84,6 +84,7 @@ export class EditorService {
           organisation: [environment.organisation],
           isExternal: meta.mimeType === 'application/html',
           primaryCategory: meta.primaryCategory,
+          license: 'CC BY 4.0'
         },
       }
     }
@@ -111,6 +112,16 @@ export class EditorService {
   readContentV2(id: string): Observable<NSContent.IContentMeta> {
     return this.apiService.get<NSContent.IContentMeta>(
       `${AUTHORING_BASE}content/v3/read/${id}?mode=edit`,
+    ).pipe(
+      map((data: any) => {
+        return data.result.content
+      })
+    )
+  }
+
+  readcontentV3(id: string): Observable<NSContent.IContentMeta> {
+    return this.apiService.get<NSContent.IContentMeta>(
+      `/apis/proxies/v8/action/content/v3/hierarchy/${id}?mode=edit`
     ).pipe(
       map((data: any) => {
         return data.result.content

@@ -62,12 +62,12 @@
                       Subtitle
                     </span>
                     <mat-form-field appearance="outline" class="margin-top-xs"
-                      [ngClass]="{ 'mat-form-field-invalid': showError('subTitle') }">
-                      <input matInput formControlName="subTitle" #subTitle maxlength="1000" i18n-placeholder
+                      [ngClass]="{ 'mat-form-field-invalid': showError('purpose') }">
+                      <input matInput formControlName="purpose" #purpose maxlength="1000" i18n-placeholder
                         placeholder="Enter subtitle here"
                         [required]="checkCondition('subTitle', 'required') ? true : null" />
-                      <mat-hint align="end">{{ subTitle.value.length }} / 1000</mat-hint>
-                      <mat-error *ngIf="showError('subTitle')" i18n="Subtitle Error|Explains Subtitle is required">
+                      <mat-hint align="end">{{ purpose.value.length }} / 1000</mat-hint>
+                      <mat-error *ngIf="showError('purpose')" i18n="Subtitle Error|Explains Subtitle is required">
                         Subtitle is mandatory
                       </mat-error>
                     </mat-form-field>
@@ -126,9 +126,8 @@
                   }" height="150" width="100%" [src]="contentForm.controls.appIcon.value | relativeUrl" />
                             <!-- (error)="changeToDefaultImg($event)" -->
                           </div>
-                          <div class="photo mat-elevation-z4 ws-mat-primary-background"
-                            (click)="addImage()">
-                              <mat-icon class="photo-icon text-white" >photo_camera</mat-icon>
+                          <div class="photo mat-elevation-z4 ws-mat-primary-background" (click)="addImage()">
+                            <mat-icon class="photo-icon text-white">photo_camera</mat-icon>
                             <!-- <input type="file" #uploadThumbnail
                               (change)="uploadAppIcon($event.target.files[0]); uploadThumbnail.value = null"
                               style="display: none;" [accept]="imageTypes.toString()" /> -->
@@ -326,9 +325,11 @@
                     HTML supported Editor in case you'd like to provide more descriptive details
                   </span>
                 </label>
-                <div class="margin-top-s margin-bottom-l" [ngClass]="{ 'mat-form-field-invalid': showError('body') }">
+                <div class="margin-top-s margin-bottom-l"
+                  [ngClass]="{ 'mat-form-field-invalid': showError('instructions') }">
                   <ws-auth-plain-ckeditor [location]="location" [id]="contentMeta.identifier"
-                    [content]="contentForm.controls.body.value || ''" (value)="updateContentService('body', $event)">
+                    [content]="contentForm.controls.instructions.value || ''"
+                    (value)="updateContentService('instructions', $event)">
                   </ws-auth-plain-ckeditor>
                 </div>
               </div>

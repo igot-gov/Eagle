@@ -524,9 +524,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       if (requestBody.request.content.duration) {
         requestBody.request.content.duration = (isNumber(requestBody.request.content.duration) ? `${requestBody.request.content.duration}` : requestBody.request.content.duration)
       }
-      if (requestBody.request.content.subTitle) {
-        delete requestBody.request.content.subTitle
-      }
       if (requestBody.request.content.sourceName) {
         requestBody.request.content.source = requestBody.request.content.sourceName
         delete requestBody.request.content.sourceName
