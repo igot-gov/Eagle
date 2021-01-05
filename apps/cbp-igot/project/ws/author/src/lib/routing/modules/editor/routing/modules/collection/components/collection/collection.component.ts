@@ -93,8 +93,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
     private breakpointObserver: BreakpointObserver,
     private _qualityService: ContentQualityService,
     private _configurationsService: ConfigurationsService,
-
-
   ) {
     this.selectedIndex = 0
   }
@@ -356,38 +354,6 @@ export class CollectionComponent implements OnInit, AfterViewInit, OnDestroy {
       })
     }
   }
-
-  isQualityScorePassed(): boolean | undefined {
-    if (this._configurationsService.userProfile) {
-      const reqObj = {
-        resourceId: this.currentContent,
-        resourceType: 'content',
-        userId: this._configurationsService.userProfile.userId,
-        getLatestRecordEnabled: true,
-      }
-      this._qualityService.fetchresult(reqObj).subscribe((result: any) => {
-        if (result && result.result && result.result.resources) {
-          const rse = result.result.resources || []
-          if (rse.length === 1) {
-            const qualityScore = rse[0]
-            if (qualityScore) {
-              const score = (qualityScore.finalTotalScore / qualityScore.finalMaxScore) * 100
-              return score >= 70
-            } else {
-              return false
-            }
-          } else {
-            return false
-          }
-        } else {
-          return false
-        }
-      })
-    } else {
-      return false
-    }
-  }
-
   finalCall(commentsForm: FormGroup) {
     if (commentsForm) {
       const body: NSApiRequest.IForwardBackwardActionGeneral = {

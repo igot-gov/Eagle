@@ -107,7 +107,7 @@ export class ContentSelfCurationComponent implements OnInit, OnDestroy, AfterVie
         if (element.artifactUrl && element.mimeType.indexOf('application/pdf') >= 0) {
           // response.push()
           this.curationService.fetchresult(element.identifier).subscribe(data => {
-            console.log(data)
+            // console.log(data)
           })
         }
       })

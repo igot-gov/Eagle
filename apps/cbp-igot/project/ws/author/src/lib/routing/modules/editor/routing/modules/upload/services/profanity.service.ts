@@ -20,9 +20,9 @@ export class ProfanityService {
     // tslint:disable-next-line:no-console
     console.log(url)
     const requestData = {
+      fileName,
       pdfDownloadUrl: url,
       contentId: content,
-      fileName
     }
     // const userId = this.configSvc.userProfile && this.configSvc.userProfile.userId
     return this.apiService.post<any>(
